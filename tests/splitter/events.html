@@ -5,6 +5,7 @@
         <script src="../jquery-loader.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
+        <script src="../jquery.mockjax.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
@@ -23,31 +24,39 @@
         <ol id="qunit-tests"></ol>
         <script>
 
+            var url = "foo";
+            var notFoundUrl = "bar";
+
             module("Splitter / Events", {
+                setup: function() {
+                    $.mockjaxSettings.responseTime = 0;
+                    $.mockjaxSettings.contentType = "text/html";
+                    $.mockjax({ url: url, responseText: "foobar" });
+                    $.mockjax({ url: notFoundUrl, status: 404 });
+                },
                 teardown: function() {
                     $('.k-splitter').remove();
+                    $.mockjaxClear();
                 }
             });
 
-            test("initialization triggers resize", function() {
-                expect(1);
+            function createSplitter(options) {
+                return $(getSplitterHtml())
+                            .appendTo(document.body)
+                            .kendoSplitter(options);
+            }
 
-                $(getSplitterHtml())
-                    .appendTo(document.body)
-                    .kendoSplitter({
-                        resize: function() {
-                            ok(true);
-                        }
-                    });
+            test("initialization triggers resize", 1, function() {
+                createSplitter({
+                    resize: function() {
+                        ok(true);
+                    }
+                });
             });
 
             test("window resizing triggers resize", function() {
-                var triggered = false,
-                    splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ {}, {}, {} ]
-                        });
+                var triggered;
+                var splitter = createSplitter();
 
                 splitter.data("kendoSplitter").bind("resize", function() {
                     triggered = true;
@@ -59,12 +68,8 @@
             });
 
             test("layoutChange is triggered after resize", function() {
-                var triggered = false,
-                    splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({
-                            panes: [ {}, {}, {} ]
-                        });
+                var triggered;
+                var splitter = createSplitter();
 
                 splitter.data("kendoSplitter").bind("layoutChange", function() {
                     triggered = true;
@@ -73,6 +78,32 @@
                 splitter.data("kendoSplitter").trigger("resize");
 
                 ok(triggered);
+            });
+
+            asyncTest("successful AJAX requests trigger contentLoad event", 1, function() {
+                var timeout = setTimeout(start, 1000);
+                var splitter = createSplitter({
+                        contentLoad: function(e) {
+                            clearTimeout(timeout);
+                            start();
+                            equal(e.pane, splitter.find(".k-pane:first")[0]);
+                        }
+                    });
+
+                splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", url);
+            });
+
+            asyncTest("unsuccessful AJAX requests trigger error event", 1, function() {
+                var timeout = setTimeout(start, 1000);
+                var splitter = createSplitter({
+                        error: function(e) {
+                            clearTimeout(timeout);
+                            start();
+                            equal(e.xhr.status, 404);
+                        }
+                    });
+
+                splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", notFoundUrl);
             });
 
         </script>

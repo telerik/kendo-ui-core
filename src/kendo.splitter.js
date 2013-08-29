@@ -19,6 +19,7 @@ kendo_module({
         EXPAND = "expand",
         COLLAPSE = "collapse",
         CONTENTLOAD = "contentLoad",
+        ERROR = "error",
         RESIZE = "resize",
         LAYOUTCHANGE = "layoutChange",
         HORIZONTAL = "horizontal",
@@ -97,13 +98,10 @@ kendo_module({
         },
         events: [
             EXPAND,
-
             COLLAPSE,
-
             CONTENTLOAD,
-
+            ERROR,
             RESIZE,
-
             LAYOUTCHANGE
         ],
 
@@ -272,6 +270,12 @@ kendo_module({
                             pane.html(data);
 
                             that.trigger(CONTENTLOAD, { pane: pane[0] });
+                        },
+                        error: function (xhr, status) {
+                            that.trigger(ERROR, {
+                                status: status,
+                                xhr: xhr
+                            });
                         }
                     });
                 } else {

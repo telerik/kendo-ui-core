@@ -31,7 +31,6 @@
                         url: url,
                         responseText: "foobar"
                     });
-
                 },
                 teardown: function() {
                     $.mockjaxClear();
@@ -112,24 +111,6 @@
                     equal(splitter.find(".k-pane-loading.k-loading").length, 1);
                     ok(splitter.find(".k-pane-loading.k-loading").parent().is(".k-pane:first"));
                 }, 500);
-            });
-
-            asyncTest("ajaxRequest triggers contentLoad event", 2, function() {
-                var triggered = false,
-                    splitter = $(getSplitterHtml())
-                        .appendTo(document.body)
-                        .kendoSplitter({ contentLoad: function(e) {
-                            triggered = e;
-                    }});
-                $(document).on("ajaxComplete", function(e, request, settings) {
-                    if (settings.url === url) {
-                        start();
-                        ok(triggered);
-                        equal(triggered.pane, splitter.find(".k-pane:first")[0]);
-                    }
-                });
-
-                splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", url);
             });
 
             test("ajaxRequest sends data to server", function() {
