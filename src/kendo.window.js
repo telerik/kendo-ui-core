@@ -928,17 +928,17 @@ kendo_module({
                 type: "GET",
                 dataType: "html",
                 cache: false,
-                error: proxy(function (xhr, status) {
+                error: function (xhr, status) {
                     that.trigger(ERROR, {
                         status: status,
                         xhr: xhr
                     });
-                }, that),
+                },
                 complete: function () {
                     clearTimeout(loadingIconTimeout);
                     refreshIcon.removeClass(LOADING);
                 },
-                success: proxy(function (data) {
+                success: function (data) {
                     if (contentTemplate) {
                         data = template(contentTemplate)(data || {});
                     }
@@ -947,7 +947,7 @@ kendo_module({
                     that.element.prop("scrollTop", 0);
 
                     that.trigger(REFRESH);
-                }, that)
+                }
             }, options));
         },
 
