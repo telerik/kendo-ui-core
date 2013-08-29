@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Map sandbox</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.canvas.js"></script>
+        <script src="../../src/kendo.dataviz.map.js"></script>
+        <style>
+            #map {
+                width: 600px;
+                height: 400px;
+            }
+
+            #tile-layer {
+                position: relative;
+            }
+
+            .tile {
+                position: absolute;
+                width: 256px;
+                height: 256px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map">
+            <div id="tile-layer">
+            </div>
+        </div>
+        <script id="tile-template" type="text/x-kendo-template">
+            <div class="tile"
+                 style="left: #= left #px; top: #= top #px; background: url('#= img #');"></div>
+        </script>
+        <script>
+            var tileTemplate = kendo.template($("#tile-template").html());
+            var imgTemplate = kendo.template("tiles/#= zoom #/#= x #/#= y #.png");
+            var tileSize = 256;
+
+            function loadTiles(element, zoom) {
+                element.empty();
+
+                var size = Math.pow(2, zoom);
+                for (var x = 0; x < size; x++) {
+                    for (var y = 0; y < size; y++) {
+                        var img = imgTemplate({ zoom: zoom, x: x, y: y });
+
+                        $(tileTemplate({
+                            img: img,
+                            left: x * tileSize,
+                            top: y * tileSize
+                        }).trim())
+                        .appendTo(element);
+                    }
+                }
+            }
+
+            loadTiles($("#tile-layer"), 3);
+
+            $("#map").kendoMobileScroller({
+            });
+
+            var scroller = $("#map").data("kendoMobileScroller");
+            //scroller.makeVirtual();
+        </script>
+    </body>
+</html>
+
