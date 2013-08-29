@@ -63,6 +63,19 @@
                 ], TOLERANCE);
             });
 
+            test("Second segment position", function() {
+                arrayClose(mapPoints(chart.segments[1].points), [
+                    [93, 200], [706, 200], [613, 400], [186, 400]
+                ], TOLERANCE);
+            });
+
+            test("Third segment position", function() {
+                arrayClose(mapPoints(chart.segments[2].points), [
+                    [186,400], [613, 400], [520, 600], [280, 600]
+                ], TOLERANCE);
+            });
+
+
             test("Creates segments for data points", function() {
                 equal(chart.segments.length, chart.options.series[0].data.length);
             });

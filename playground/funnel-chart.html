@@ -16,19 +16,37 @@
     </head>
     <body>
         <div id="chart"></div>
+        <div id="chart2" style="width:300px;height:300px;"></div>
         <script>
             $("#chart").kendoChart({
                 series: [{
                     type: "funnel",
                     data: [{
                         value: 50,
-                        category: "Trials"
+                        category: "trials"
                     }, {
                         value: 30,
-                        category: "Enquiries"
+                        category: "enquiries"
                     }, {
                         value: 10,
-                        category: "Purchases"
+                        category: "purchases"
+                    }]
+                }]
+            });
+            
+            $("#chart2").kendoChart({
+                series: [{
+                    type: "funnel",
+                    dependOn:"height",
+                    data: [{
+                        value: 50,
+                        category: "trials"
+                    }, {
+                        value: 30,
+                        category: "enquiries"
+                    }, {
+                        value: 10,
+                        category: "purchases"
                     }]
                 }]
             });

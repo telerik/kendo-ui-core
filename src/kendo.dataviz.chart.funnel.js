@@ -48,6 +48,7 @@ kendo_module({
                 firstSeries = series[0],
                 funnelChart = new FunnelChart(plotArea, {
                     series: series,
+                    dependOn:firstSeries.dependOn,
                     legend: plotArea.options.legend,
                     neckSize: firstSeries.neckSize
                 });
@@ -75,7 +76,8 @@ kendo_module({
 
         options: {
             neckSize: 0.3,
-            width: 300
+            width: 300,
+            dependOn:"height"
         },
 
         render: function() {
@@ -156,27 +158,54 @@ kendo_module({
         },
 
         reflow: function(box) {
-            var chart = this,            
+            var chart = this,
                 segments = chart.segments,
                 count = segments.length,
                 i,
-                segmentHeight = box.height() / count,
+                dependOn = chart.options.dependOn,
                 width = box.width(),
-                offset = 0,
-                neckSize = chart.options.neckSize,
+                neckSize = chart.options.neckSize*width;
+
+            if(dependOn=="none"){
+                var offset = 0,
                 //TODO support pixels and string as neckSize
-                narrowSize = (width-neckSize*width)/(count*2),
-                narrowOffset = 0; 
-                
-            for (i = 0; i < count; i++) {                
-                points = segments[i].points = [];
-                points.push(new Point2D(box.x1 + narrowOffset, box.y1 + offset));
-                points.push(new Point2D(box.x1+width - narrowOffset, box.y1 + offset));
-                points.push(new Point2D(box.x1+width - narrowOffset - narrowSize, box.y1 + offset + segmentHeight));
-                points.push(new Point2D(box.x1+ narrowOffset + narrowSize,box.y1 + offset + segmentHeight));
-                
-                narrowOffset += narrowSize;
-                offset += segmentHeight;
+                narrowSize = (width-neckSize)/(count*2),
+                segmentHeight = box.height() / count,
+                narrowOffset = 0;
+
+                for (i = 0; i < count; i++) {
+                    points = segments[i].points = [];
+                    points.push(new Point2D(box.x1 + narrowOffset, box.y1 + offset));
+                    points.push(new Point2D(box.x1+width - narrowOffset, box.y1 + offset));
+                    points.push(new Point2D(box.x1+width - narrowOffset - narrowSize, box.y1 + offset + segmentHeight));
+                    points.push(new Point2D(box.x1+ narrowOffset + narrowSize,box.y1 + offset + segmentHeight));
+
+                    narrowOffset += narrowSize;
+                    offset += segmentHeight;
+                }
+            }
+
+            else if(dependOn=="height"){
+                var finalNarrow = (width - neckSize)/2,
+                totalHeight = box.height(),
+                height,
+                offset,
+                previousHeight = 0,
+                previousOffset = 0;
+
+                for (i = 0; i < count; i++) {
+                    points = segments[i].points = [],
+                    percentage = segments[i].percentage,
+                    offset = finalNarrow * percentage,
+                    height = totalHeight * percentage; 
+
+                    points.push(new Point2D(box.x1 + previousOffset, box.y1 + previousHeight));
+                    points.push(new Point2D(box.x1+width - previousOffset, box.y1 + previousHeight));
+                    points.push(new Point2D(box.x1+width - previousOffset - offset, box.y1 + height + previousHeight));
+                    points.push(new Point2D(box.x1+ previousOffset + offset,box.y1 + height + previousHeight));
+                    previousOffset += offset;
+                    previousHeight += height;
+                }
             }
         }
     });
