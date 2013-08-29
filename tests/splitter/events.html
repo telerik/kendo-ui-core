@@ -93,13 +93,14 @@
                 splitter.data("kendoSplitter").ajaxRequest(".k-pane:first", url);
             });
 
-            asyncTest("unsuccessful AJAX requests trigger error event", 1, function() {
+            asyncTest("unsuccessful AJAX requests trigger error event", 2, function() {
                 var timeout = setTimeout(start, 1000);
                 var splitter = createSplitter({
                         error: function(e) {
                             clearTimeout(timeout);
                             start();
                             equal(e.xhr.status, 404);
+                            equal(e.pane, splitter.find(".k-pane:first")[0]);
                         }
                     });
 

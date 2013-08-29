@@ -273,6 +273,7 @@ kendo_module({
                         },
                         error: function (xhr, status) {
                             that.trigger(ERROR, {
+                                pane: pane[0],
                                 status: status,
                                 xhr: xhr
                             });
@@ -286,6 +287,7 @@ kendo_module({
                 }
             }
         },
+
         _triggerAction: function(type, pane) {
             if (!this.trigger(type, { pane: pane[0] })) {
                 this[type](pane[0]);
