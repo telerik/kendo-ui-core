@@ -16,22 +16,13 @@ node is expanded.
     }
 
     /**
-    * A whitespace-delimited string of animation effects that are utilized when a TreeView node
-is expanded. Options include "expandVertical" and "fadeIn".
+    * A whitespace-delimited string of animation effects that are used when expanding nodes.
+The supported effects are "expandVertical" and "fadeIn".
     * @param string $value
     * @return \Kendo\UI\TreeViewAnimationExpand
     */
     public function effects($value) {
         return $this->setProperty('effects', $value);
-    }
-
-    /**
-    * 
-    * @param boolean $value
-    * @return \Kendo\UI\TreeViewAnimationExpand
-    */
-    public function show($value) {
-        return $this->setProperty('show', $value);
     }
 
 //<< Properties

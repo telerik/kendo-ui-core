@@ -257,6 +257,20 @@ and is about to render it.
         return $this->setProperty('remove', $value);
     }
 
+    /**
+    * Sets the save event of the ListView.
+    * Fired when a data item is saved.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\ListView
+    */
+    public function save($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('save', $value);
+    }
+
 
 //<< Properties
 }

@@ -56,7 +56,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The id of the default Application Layout.
+        /// The id of the default Application layout.
         /// </summary>
         /// <param name="value">The value that configures the layout.</param>
         public MobileApplicationBuilder Layout(string value)

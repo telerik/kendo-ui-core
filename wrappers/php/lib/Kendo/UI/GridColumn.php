@@ -58,6 +58,7 @@ The supported aggregates are "average", "count", "max", "min" and "sum".
 
     /**
     * The field to which the column is bound. The value of this field is displayed by the column during data binding.
+The field name should be a valid Javascript identifier and should contain no spaces, no special characters, and the first character should be a letter.
     * @param string $value
     * @return \Kendo\UI\GridColumn
     */

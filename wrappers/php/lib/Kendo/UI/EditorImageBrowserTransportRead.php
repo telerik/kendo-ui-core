@@ -6,7 +6,7 @@ class EditorImageBrowserTransportRead extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The content-type HTTP header sent to the server. Default is "application/x-www-form-urlencoded". Use "application/json" if the content is JSON.
+    * The content-type HTTP header sent to the server. Use "application/json" if the content is JSON.
 Refer to the jQuery.ajax documentation for further info.
     * @param string $value
     * @return \Kendo\UI\EditorImageBrowserTransportRead
@@ -46,7 +46,7 @@ Refer to the jQuery.ajax documentation for further info.
     }
 
     /**
-    * The remote url to call when creating a new record.
+    * The remote url to call when fetching list of items.
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\UI\EditorImageBrowserTransportRead
     */

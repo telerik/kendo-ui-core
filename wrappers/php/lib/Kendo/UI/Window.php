@@ -56,8 +56,7 @@ Note that this does not constrain the window dragging within the given element.
     }
 
     /**
-    * Enables (true) or disables (false) the ability for users to move/drag a
-Window.
+    * Enables (true) or disables (false) the ability for users to move/drag the widget.
     * @param boolean $value
     * @return \Kendo\UI\Window
     */
@@ -138,8 +137,7 @@ Window.
     }
 
     /**
-    * Enables (true) or disables (false) the ability for users to resize a
-Window.
+    * Enables (true) or disables (false) the ability for users to resize a Window.
     * @param boolean $value
     * @return \Kendo\UI\Window
     */
@@ -299,7 +297,7 @@ has been clicked on a window with static content.
 
     /**
     * Sets the resize event of the Window.
-    * Triggered when a Window has been resized by a user.
+    * Triggered when a window has been resized by a user.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Window
     */

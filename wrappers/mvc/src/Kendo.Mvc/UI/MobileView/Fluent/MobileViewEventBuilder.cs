@@ -27,6 +27,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Fires before the mobile View becomes hidden.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the beforeHide event.</param>
+        public MobileViewEventBuilder BeforeHide(string handler)
+        {
+            Handler("before-hide", handler);
+
+            return this;
+        }
+        
+        /// <summary>
         /// Fires before the mobile View becomes visible. The event can be prevented by calling the preventDefault method of the event parameter, in case a redirection should happen.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the beforeShow event.</param>

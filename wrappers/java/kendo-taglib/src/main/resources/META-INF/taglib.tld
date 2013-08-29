@@ -18736,6 +18736,11 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Triggered when the AJAX request that fetches a pane content has failed.</description>
+            <name>error</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Triggered when a pane of a Splitter is expanded.</description>
             <name>expand</name>
             <rtexprvalue>true</rtexprvalue>
@@ -18829,6 +18834,12 @@ and is about to render it.</description>
         <description>Triggered when the content for a pane has finished loading.</description>
         <name>splitter-contentLoad</name>
         <tag-class>com.kendoui.taglib.splitter.ContentLoadFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Triggered when the AJAX request that fetches a pane content has failed.</description>
+        <name>splitter-error</name>
+        <tag-class>com.kendoui.taglib.splitter.ErrorFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

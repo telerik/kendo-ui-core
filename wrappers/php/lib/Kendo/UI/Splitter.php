@@ -24,7 +24,7 @@ class Splitter extends \Kendo\UI\Widget {
 //>> Properties
 
     /**
-    * Specifies the orientation of the Splitter.
+    * Specifies the orientation of the widget. Supported values are "horizontal" and "vertical".
     * @param string $value
     * @return \Kendo\UI\Splitter
     */
@@ -67,6 +67,20 @@ class Splitter extends \Kendo\UI\Widget {
         }
 
         return $this->setProperty('contentLoad', $value);
+    }
+
+    /**
+    * Sets the error event of the Splitter.
+    * Triggered when the AJAX request that fetches a pane content has failed.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Splitter
+    */
+    public function error($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('error', $value);
     }
 
     /**

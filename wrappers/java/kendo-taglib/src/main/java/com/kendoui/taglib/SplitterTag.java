@@ -81,6 +81,10 @@ public class SplitterTag extends WidgetTag /* interfaces *//* interfaces */ {
         setEvent("contentLoad", value.getBody());
     }
 
+    public void setError(ErrorFunctionTag value) {
+        setEvent("error", value.getBody());
+    }
+
     public void setExpand(ExpandFunctionTag value) {
         setEvent("expand", value.getBody());
     }
@@ -123,6 +127,18 @@ public class SplitterTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setContentLoad(String value) {
         setProperty("contentLoad", new Function(value));
+    }
+
+    public String getError() {
+        Function property = ((Function)getProperty("error"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setError(String value) {
+        setProperty("error", new Function(value));
     }
 
     public String getExpand() {

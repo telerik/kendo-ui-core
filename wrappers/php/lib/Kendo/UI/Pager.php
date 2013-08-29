@@ -37,7 +37,7 @@ class Pager extends \Kendo\UI\Widget {
 
     /**
     * Sets the selectTemplate option of the Pager.
-    * The template for selectbox with predefined page sizes.
+    * The template for selected page number link.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\Pager
     */
@@ -49,7 +49,7 @@ class Pager extends \Kendo\UI\Widget {
 
     /**
     * Sets the selectTemplate option of the Pager.
-    * The template for selectbox with predefined page sizes.
+    * The template for selected page number link.
     * @param string $value The template content.
     * @return \Kendo\UI\Pager
     */
@@ -134,7 +134,7 @@ class Pager extends \Kendo\UI\Widget {
     }
 
     /**
-    * Defines texts shown within the pager.
+    * Defines texts shown within the pager. Use this option to customize or localize the pager messages.
     * @param \Kendo\UI\PagerMessages|array $value
     * @return \Kendo\UI\Pager
     */

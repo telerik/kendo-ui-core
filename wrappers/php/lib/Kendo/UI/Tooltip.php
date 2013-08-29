@@ -171,7 +171,7 @@ will disable all animations in the widget.
 
     /**
     * Sets the requestStart event of the Tooltip.
-    * Triggered before an AJAX request started.
+    * Triggered before an AJAX request started. Note that this event is triggered only when an AJAX request, instead of an iframe, is used.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Tooltip
     */

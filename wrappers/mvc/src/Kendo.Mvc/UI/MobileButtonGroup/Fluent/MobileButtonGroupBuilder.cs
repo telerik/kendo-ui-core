@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// Defines the initially selected Button.
+        /// Defines the initially selected Button (zero based index).
         /// </summary>
         /// <param name="value">The value that configures the index.</param>
         public MobileButtonGroupBuilder Index(int value)

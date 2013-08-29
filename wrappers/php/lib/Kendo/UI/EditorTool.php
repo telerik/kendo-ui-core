@@ -6,7 +6,7 @@ class EditorTool extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The mandatory name of the tool.
+    * When specifying a tool as an object, a tool name is required.
     * @param string $value
     * @return \Kendo\UI\EditorTool
     */

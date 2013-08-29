@@ -42,7 +42,7 @@ class EditorImageBrowser extends \Kendo\SerializableObject {
     }
 
     /**
-    * Defines texts shown within the pager.
+    * Defines texts shown within the image browser.
     * @param \Kendo\UI\EditorImageBrowserMessages|array $value
     * @return \Kendo\UI\EditorImageBrowser
     */

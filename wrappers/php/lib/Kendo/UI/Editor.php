@@ -21,7 +21,7 @@ class Editor extends \Kendo\UI\Widget {
 //>> Properties
 
     /**
-    * Indicates whether the Editor should submit encoded HTML tags.
+    * Indicates whether the Editor should submit encoded HTML tags. By default, the submitted value is encoded.
     * @param boolean $value
     * @return \Kendo\UI\Editor
     */
@@ -123,7 +123,7 @@ class Editor extends \Kendo\UI\Widget {
 
     /**
     * Sets the paste event of the Editor.
-    * Fires before when content is pasted in the Editor.
+    * Fires before the content is pasted in the Editor.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Editor
     */

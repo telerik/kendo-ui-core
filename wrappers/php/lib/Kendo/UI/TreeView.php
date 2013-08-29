@@ -29,7 +29,7 @@ class TreeView extends \Kendo\UI\Widget {
     /**
     * A collection of visual animations used when items are expanded or collapsed through user interaction.
 Setting this option to false will disable all animations.
-    * @param \Kendo\UI\TreeViewAnimation|array $value
+    * @param boolean|\Kendo\UI\TreeViewAnimation|array $value
     * @return \Kendo\UI\TreeView
     */
     public function animation($value) {
@@ -47,7 +47,7 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * If true or an object, renders checkboxes within each treeview item.
+    * If true or an object, renders checkboxes beside each node.
     * @param boolean|\Kendo\UI\TreeViewCheckboxes|array $value
     * @return \Kendo\UI\TreeView
     */
@@ -56,8 +56,7 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * Sets the field of the data item that provides
-the image URL of the treeview nodes.
+    * Sets the field of the data item that provides the image URL of the treeview nodes.
     * @param string $value
     * @return \Kendo\UI\TreeView
     */
@@ -75,8 +74,8 @@ the image URL of the treeview nodes.
     }
 
     /**
-    * Sets the field of the data item that provides
-the sprite CSS class of the treeview nodes.
+    * Sets the field of the data item that provides the sprite CSS class of the nodes.
+If an array, each level uses the field that is at the same index in the array, or the last item in the array.
     * @param string $value
     * @return \Kendo\UI\TreeView
     */
@@ -85,7 +84,7 @@ the sprite CSS class of the treeview nodes.
     }
 
     /**
-    * Sets the field of the data item that provides the text content of the treeview nodes.
+    * Sets the field of the data item that provides the text content of the nodes.
 If an array, each level uses the field that is at the same index in the array, or the last item in the array.
     * @param string|array $value
     * @return \Kendo\UI\TreeView
@@ -95,8 +94,7 @@ If an array, each level uses the field that is at the same index in the array, o
     }
 
     /**
-    * Sets the field of the data item that provides
-the link URL of the treeview nodes.
+    * Sets the field of the data item that provides the link URL of the nodes.
     * @param string $value
     * @return \Kendo\UI\TreeView
     */
@@ -105,8 +103,7 @@ the link URL of the treeview nodes.
     }
 
     /**
-    * Disables (false) or enables (true) drag-and-drop on the nodes of a
-TreeView.
+    * Disables (false) or enables (true) drag-and-drop of the nodes.
     * @param boolean $value
     * @return \Kendo\UI\TreeView
     */
@@ -115,10 +112,9 @@ TreeView.
     }
 
     /**
-    * Indicates whether the child datasources should be fetched
-lazily, when parent groups get expanded. Setting this to false causes all child dataSources to
-be loaded at initialization time. Note: when initializing a TreeView from array (rather than from a
-HierarchicalDataSource instance), the default value of this option is false.
+    * Indicates whether the child datasources should be fetched lazily when parent groups get expanded.
+Setting this to false causes all child dataSources to be loaded at initialization time.
+Note: when initializing the widget from an array (rather than from a HierarchicalDataSource instance), this option defaults to false, rather than true.
     * @param boolean $value
     * @return \Kendo\UI\TreeView
     */
@@ -128,7 +124,7 @@ HierarchicalDataSource instance), the default value of this option is false.
 
     /**
     * Sets the template option of the TreeView.
-    * Template for rendering of the nodes of the treeview.
+    * Template for rendering each node.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\TreeView
     */
@@ -140,7 +136,7 @@ HierarchicalDataSource instance), the default value of this option is false.
 
     /**
     * Sets the template option of the TreeView.
-    * Template for rendering of the nodes of the treeview.
+    * Template for rendering each node.
     * @param string $value The template content.
     * @return \Kendo\UI\TreeView
     */
