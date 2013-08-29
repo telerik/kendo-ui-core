@@ -76,7 +76,7 @@ var FormattingTool = DelayedExecutionTool.extend({
                         attr: { className: item.className || "" }
                     }];
 
-                if (dom.inlineElements.indexOf(tags[0]) >= 0) {
+                if ($.inArray(tags[0], dom.inlineElements) >= 0) {
                     formatter = new Editor.GreedyInlineFormatter(format);
                 } else {
                     formatter = new Editor.GreedyBlockFormatter(format);
