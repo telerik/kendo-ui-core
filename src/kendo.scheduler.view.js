@@ -1005,7 +1005,7 @@ kendo_module({
         },
 
         _scrollbarOffset: function(value, multiday) {
-            if (!this._isRtl || (multiday && !this._isVerticallyGrouped())) {
+            if (!this._isRtl || (multiday && !this._isVerticallyGrouped()) || !kendo.support.browser.webkit) {
                 return value;
             }
 
