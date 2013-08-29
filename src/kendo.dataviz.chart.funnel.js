@@ -77,7 +77,7 @@ kendo_module({
         options: {
             neckSize: 0.3,
             width: 300,
-            dependOn:"height"
+            dependOn:"none"
         },
 
         render: function() {
