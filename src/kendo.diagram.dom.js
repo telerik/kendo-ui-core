@@ -293,7 +293,7 @@ kendo_module({
             if (value.isEmpty && !value.isEmpty()) {
                 return Intersect.rects(value, bounds, angle ? 360 - angle : 0);
             }
-            rotatedPoint = value.rotate(bounds.center(), 360 - angle);
+            rotatedPoint = value.clone().rotate(bounds.center(), 360 - angle); // cloning is important because rotate modifies the point inline.
             if (bounds.contains(rotatedPoint)) {
                 return this;
             }

@@ -439,7 +439,7 @@ kendo_module({
             this.editor.bind("finishEdit", $.proxy(this._finishEdit, this));
             this.toolService.diagram.bind("zoom", $.proxy(this._positionEditor, this));
         },
-        doubleClick: function (pos) {
+        doubleClick: function (p) {
             var editor = this.editor;
             var shape = this.toolService.hoveredItem;
 
@@ -886,11 +886,11 @@ kendo_module({
             }
         },
         _hitTest: function (p) {
-            p = this.diagram.transformPoint(p);
+            var tp = this.diagram.transformPoint(p);
             var i, hit, handleBounds, handlesCount = this.map.length, handle;
             if (this.options.rotatable) {
                 var rb = new Rect(this._bounds.center().x, this._bounds.y + this.options.rotation.y, 0, 0).inflate(8);
-                if (rb.contains(p)) {
+                if (rb.contains(tp)) {
                     return new Point(-1, -2);
                 }
             }
@@ -900,7 +900,7 @@ kendo_module({
                     hit = new Point(handle.x, handle.y);
                     handleBounds = this._getHandleBounds(hit); //local coordinates
                     handleBounds.offset(this._bounds.x, this._bounds.y);
-                    if (handleBounds.contains(p)) {
+                    if (handleBounds.contains(tp)) {
                         return hit;
                     }
                 }
@@ -1064,8 +1064,8 @@ kendo_module({
             this.visual.redraw({ center: new Point(relative.x, relative.y) });
         },
         _hitTest: function (p) {
-            p = this._c.shape.diagram.transformPoint(p);
-            return this._visualBounds.contains(p);
+            var tp = this._c.shape.diagram.transformPoint(p);
+            return this._visualBounds.contains(tp);
         }
     });
 
