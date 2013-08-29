@@ -1033,6 +1033,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete event.
+        /// </summary>
+        public static string Scheduler_DeleteWindowTitle {
+            get {
+                return ResourceManager.GetString("Scheduler_DeleteWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Scheduler_Destroy {

@@ -21,6 +21,8 @@
 
         private const string DefaultAllDay = "all day";
 
+        private const string DefaultDeleteWindowTitle = "Delete event";
+
         public SchedulerMessages()
         {
             Today = Messages.Scheduler_Today;
@@ -38,6 +40,8 @@
             Time = Messages.Scheduler_Time;
 
             AllDay = Messages.Scheduler_AllDay;
+
+            DeleteWindowTitle = Messages.Scheduler_DeleteWindowTitle;
 
             ViewMessages = new SchedulerViewMessages();
 
@@ -63,6 +67,8 @@
         public string Time { get; set; }
 
         public string AllDay { get; set; }
+
+        public string DeleteWindowTitle { get; set; }
 
         public SchedulerViewMessages ViewMessages { get; set; }
 
@@ -112,6 +118,11 @@
             if (AllDay != DefaultAllDay)
             {
                 json["allDay"] = AllDay;
+            }
+
+            if (DeleteWindowTitle != DefaultDeleteWindowTitle)
+            {
+                json["deleteWindowTitle"] = DeleteWindowTitle;
             }
 
             //TODO: CHECK IF THERE IS DATA BEFORE ASSIGN:

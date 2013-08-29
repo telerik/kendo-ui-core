@@ -630,4 +630,7 @@
   <data name="Editor_DeleteRow" xml:space="preserve">
     <value>Delete row</value>
   </data>
+  <data name="Scheduler_DeleteWindowTitle" xml:space="preserve">
+    <value>Delete event</value>
+  </data>
 </root>
