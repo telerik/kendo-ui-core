@@ -507,4 +507,10 @@
   <data name="Scheduler_DeleteWindowTitle" xml:space="preserve">
     <value>Delete event</value>
   </data>
+  <data name="Scheduler_ShowFullDay" xml:space="preserve">
+    <value>Show full day</value>
+  </data>
+  <data name="Scheduler_ShowWorkDay" xml:space="preserve">
+    <value>Show business hours</value>
+  </data>
 </root>

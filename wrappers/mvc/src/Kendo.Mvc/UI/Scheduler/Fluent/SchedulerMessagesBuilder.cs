@@ -83,6 +83,20 @@
             return this;
         }
 
+        public SchedulerMessagesBuilder ShowFullDay(string message)
+        {
+            messages.ShowFullDay = message;
+
+            return this;
+        }
+
+        public SchedulerMessagesBuilder ShowWorkDay(string message)
+        {
+            messages.ShowWorkDay = message;
+
+            return this;
+        }
+
         /// <summary>
         /// Sets the View messages of the scheduler.
         /// </summary>

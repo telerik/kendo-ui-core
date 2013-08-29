@@ -23,6 +23,10 @@
 
         private const string DefaultDeleteWindowTitle = "Delete event";
 
+        private const string DefaultShowFullDay = "Show full day";
+
+        private const string DefaultShowWorkDay = "Show business hours";
+
         public SchedulerMessages()
         {
             Today = Messages.Scheduler_Today;
@@ -42,6 +46,10 @@
             AllDay = Messages.Scheduler_AllDay;
 
             DeleteWindowTitle = Messages.Scheduler_DeleteWindowTitle;
+
+            ShowFullDay = Messages.Scheduler_ShowFullDay;
+
+            ShowWorkDay = Messages.Scheduler_ShowWorkDay;
 
             ViewMessages = new SchedulerViewMessages();
 
@@ -69,6 +77,10 @@
         public string AllDay { get; set; }
 
         public string DeleteWindowTitle { get; set; }
+
+        public string ShowFullDay { get; set; }
+
+        public string ShowWorkDay { get; set; }
 
         public SchedulerViewMessages ViewMessages { get; set; }
 
@@ -123,6 +135,16 @@
             if (DeleteWindowTitle != DefaultDeleteWindowTitle)
             {
                 json["deleteWindowTitle"] = DeleteWindowTitle;
+            }
+
+            if (ShowFullDay != DefaultShowFullDay)
+            {
+                json["showFullDay"] = ShowFullDay;
+            }
+
+            if (ShowWorkDay != DefaultShowWorkDay)
+            {
+                json["showWorkDay"] = ShowWorkDay;
             }
 
             //TODO: CHECK IF THERE IS DATA BEFORE ASSIGN:

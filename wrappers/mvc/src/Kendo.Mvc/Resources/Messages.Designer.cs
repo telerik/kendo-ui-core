@@ -1510,6 +1510,24 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show full day.
+        /// </summary>
+        public static string Scheduler_ShowFullDay {
+            get {
+                return ResourceManager.GetString("Scheduler_ShowFullDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show business hours.
+        /// </summary>
+        public static string Scheduler_ShowWorkDay {
+            get {
+                return ResourceManager.GetString("Scheduler_ShowWorkDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Time.
         /// </summary>
         public static string Scheduler_Time {

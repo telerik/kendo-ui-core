@@ -642,4 +642,10 @@
   <data name="Scheduler_DeleteWindowTitle" xml:space="preserve">
     <value>Termin löschen</value>
   </data>
+  <data name="Scheduler_ShowFullDay" xml:space="preserve">
+    <value>Zeigen ganztags</value>
+  </data>
+  <data name="Scheduler_ShowWorkDay" xml:space="preserve">
+    <value>Zeigen Geschäftszeiten</value>
+  </data>
 </root>

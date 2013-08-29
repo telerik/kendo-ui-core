@@ -645,4 +645,10 @@
   <data name="Scheduler_DeleteWindowTitle" xml:space="preserve">
     <value>Изтрии събитие</value>
   </data>
+  <data name="Scheduler_ShowFullDay" xml:space="preserve">
+    <value>Покажи цял ден</value>
+  </data>
+  <data name="Scheduler_ShowWorkDay" xml:space="preserve">
+    <value>Покажи работни часове</value>
+  </data>
 </root>
