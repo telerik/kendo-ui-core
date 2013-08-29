@@ -260,6 +260,9 @@ kendo_module({
                     this.adorner.options.angle = angle;
                     this.adorner.refresh();
                 }
+                if (this.diagram && this.diagram._connectorsAdorner) {
+                    this.diagram._connectorsAdorner.refresh();
+                }
                 this.refreshConnections();
             }
 
@@ -315,8 +318,8 @@ kendo_module({
 
     Shape.createShapeVisual = function (options) {
         var shapeOptions = deepExtend({}, options, { x: 0, y: 0 }); // Shape visual should not have position in its parent group.
-        if (isString(options.data)) {
-            switch (options.data.toLocaleLowerCase()) {
+        if (isString(shapeOptions.data)) {
+            switch (shapeOptions.data.toLocaleLowerCase()) {
                 case "rectangle":
                     return new Rectangle(shapeOptions);
                 case "circle":
@@ -326,10 +329,10 @@ kendo_module({
             }
         }
         else {// custom template
-            if (!isFunction(options.data)) {
+            if (!isFunction(shapeOptions.data)) {
                 throw "The custom template should be a function returning a visual";
             }
-            return this.options.data();
+            return shapeOptions.data();
         }
     };
 

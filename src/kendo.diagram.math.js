@@ -4783,10 +4783,11 @@ Math.epsilon = 0.000001;
 //TODO: Move them to another object. Maybe some kind of Utils.
 Math.findRadian = function(start, end){
     if (start == end) return 0;
-    var sngXComp = end.x - start.x;
-    var sngYComp = start.y - end.y;
-    if (sngYComp >= 0) return sngXComp < 0 ? Math.atan(sngXComp / sngYComp) + (2 * Math.PI) : Math.atan(sngXComp / sngYComp);
-    return Math.atan(sngXComp / sngYComp) + Math.PI;
+    var sngXComp = end.x - start.x,
+        sngYComp = start.y - end.y,
+        atan =Math.atan(sngXComp / sngYComp);
+    if (sngYComp >= 0) return sngXComp < 0 ? atan + (2 * Math.PI) : atan;
+    return atan + Math.PI;
 };
 Math.findAngle = function (center, end) {
     return Math.findRadian(center, end) * 180 / Math.PI;

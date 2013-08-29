@@ -886,11 +886,15 @@ kendo_module({
             }
         },
         _hitTest: function (p) {
-            var tp = this.diagram.transformPoint(p);
-            var i, hit, handleBounds, handlesCount = this.map.length, handle;
+            var tp = this.diagram.transformPoint(p), thumbBounds,
+                i, hit, handleBounds, handlesCount = this.map.length, handle;
+            if(this.options.angle){
+                //tp.rotate(new Point(this._bounds.width / 2, this._bounds.height / 2), this.options.angle);
+                tp = tp.clone().rotate(this._bounds.center(), this.options.angle);
+            }
             if (this.options.rotatable) {
-                var rb = new Rect(this._bounds.center().x, this._bounds.y + this.options.rotation.y, 0, 0).inflate(8);
-                if (rb.contains(tp)) {
+                thumbBounds = new Rect(this._bounds.center().x, this._bounds.y + this.options.rotation.y, 0, 0).inflate(8);
+                if (thumbBounds.contains(tp)) {
                     return new Point(-1, -2);
                 }
             }
@@ -978,10 +982,16 @@ kendo_module({
             return unit;
         },
         move: function (handle, p) {
-            var dtl = new Point(), dbr = new Point(), bounds = this.shape.bounds();
+            var dtl = new Point(), dbr = new Point(), bounds = this.shape.bounds(), p1 = p;
             if (handle.y === -2 && handle.x === -1) {
-                this.shape.rotate(Math.findAngle(this._bounds.center(), p));
+                var angle = Math.findAngle(this._bounds.center(), p);
+                this.shape.rotate(angle);
+                this.options.angle = angle;
             } else {
+                if(this.options.angle){
+                    //tp.rotate(new Point(this._bounds.width / 2, this._bounds.height / 2), this.options.angle);
+                    p1 = p.clone().rotate(this._bounds.center(), this.options.angle);
+                }
                 if (handle.x === -1 || (handle.x === 0 && handle.y === 0)) {
                     dtl.x = p.x - this._cp.x;
                 }
@@ -1000,6 +1010,7 @@ kendo_module({
                 if (br.x - tl.x > 0 && br.y - tl.y > 0 && bounds.width >= this.shape.options.minWidth && bounds.height >= this.shape.options.minHeight) {
                     this._cp = p;
                     this.shape.bounds(bounds);
+                    this.shape.rotate(this.options.angle); // TODO: check this out. Need to rotate the shape with respect to the new bounds.
                     this.refresh();
                 }
             }
