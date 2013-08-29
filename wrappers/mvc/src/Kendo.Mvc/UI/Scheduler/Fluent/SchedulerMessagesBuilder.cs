@@ -76,6 +76,13 @@
             return this;
         }
 
+        public SchedulerMessagesBuilder DeleteWindowTitle(string message)
+        {
+            messages.DeleteWindowTitle = message;
+
+            return this;
+        }
+
         /// <summary>
         /// Sets the View messages of the scheduler.
         /// </summary>
