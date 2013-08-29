@@ -834,7 +834,12 @@ kendo_module({
                     selection.end = dataItem.endDate ? dataItem.endDate() : dataItem.end;
                 }
 
-                selection.isAllDay = dataItem.isAllDay;
+                if ("isDaySlot" in dataItem) {
+                    selection.isAllDay = dataItem.isDaySlot;
+                } else {
+                    selection.isAllDay = dataItem.isAllDay;
+                }
+
                 selection.index = dataItem.index;
                 if (this._ctrlKey) {
                     selection.events = selection.events.concat(events || []);

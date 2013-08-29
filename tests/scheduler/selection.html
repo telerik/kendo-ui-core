@@ -94,9 +94,9 @@
             });
 
             test("scheduler sets selection range based on clicked cell", function() {
-                var td = container.find(".k-scheduler-content td").eq(5),
-                slot = scheduler.view().selectionByElement(td),
-                selection;
+                var td = container.find(".k-scheduler-header td").eq(5),
+                    slot = scheduler.view().selectionByElement(td),
+                    selection;
 
                 td.trigger({
                     type: "mousedown",
@@ -107,7 +107,7 @@
 
                 deepEqual(selection.start, slot.startDate());
                 deepEqual(selection.end, slot.endDate());
-                equal(selection.isAllDay, slot.isAllDay);
+                equal(selection.isAllDay, slot.isDaySlot);
                 equal(selection.groupIndex, slot.groupIndex);
             });
 
