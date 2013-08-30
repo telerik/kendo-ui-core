@@ -108,12 +108,22 @@ kendo_module({
                 domElement = element[0];
 
             that.capture = false;
-            $.each(kendo.eventMap.down.split(" "), function() {
-                domElement.addEventListener(this, proxy(that._press, that), true);
-            });
-            $.each(kendo.eventMap.up.split(" "), function() {
-                domElement.addEventListener(this, proxy(that._release, that), true);
-            });
+
+            if (domElement.addEventListener) {
+                $.each(kendo.eventMap.down.split(" "), function() {
+                    domElement.addEventListener(this, proxy(that._press, that), true);
+                });
+                $.each(kendo.eventMap.up.split(" "), function() {
+                    domElement.addEventListener(this, proxy(that._release, that), true);
+                });
+            } else {
+                $.each(kendo.eventMap.down.split(" "), function() {
+                    domElement.attachEvent(this, proxy(that._press, that));
+                });
+                $.each(kendo.eventMap.up.split(" "), function() {
+                    domElement.attachEvent(this, proxy(that._release, that));
+                });
+            }
 
             Observable.fn.init.call(that);
 
@@ -437,7 +447,12 @@ kendo_module({
                 newCoordinates = translate(that.x, that.y, that.scale);
 
             if (newCoordinates != that.coordinates) {
-                that.element[0].style[TRANSFORM_STYLE] = newCoordinates;
+                if (kendo.support.browser.msie && kendo.support.browser.version < 10) {
+                    that.element[0].style["left"] = that.x + "px";
+                    that.element[0].style["top"] = that.y + "px";
+                } else {
+                    that.element[0].style[TRANSFORM_STYLE] = newCoordinates;
+                }
                 that._saveCoordinates(newCoordinates);
                 that.trigger(CHANGE);
             }

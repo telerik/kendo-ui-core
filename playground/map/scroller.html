@@ -15,7 +15,7 @@
         <script src="../../src/kendo.dataviz.canvas.js"></script>
         <script src="../../src/kendo.dataviz.map.js"></script>
         <style>
-            #map {
+            #view {
                 width: 600px;
                 height: 400px;
             }
@@ -26,19 +26,30 @@
 
             .tile {
                 position: absolute;
-                width: 256px;
-                height: 256px;
+                user-select: none;
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+            }
+
+            .km-scroll-wrapper {
+                position: relative;
+            }
+
+            .km-scroll-container {
+                position: absolute;
             }
         </style>
     </head>
     <body>
-        <div id="map">
+        <div id="view">
             <div id="tile-layer">
             </div>
         </div>
         <script id="tile-template" type="text/x-kendo-template">
-            <div class="tile"
-                 style="left: #= left #px; top: #= top #px; background: url('#= img #');"></div>
+            <img class="tile" src="#= img #"
+                 unselectable="on"
+                 style="left: #= left #px; top: #= top #px;"></img>
         </script>
         <script>
             var tileTemplate = kendo.template($("#tile-template").html());
@@ -53,11 +64,12 @@
                     for (var y = 0; y < size; y++) {
                         var img = imgTemplate({ zoom: zoom, x: x, y: y });
 
-                        $(tileTemplate({
+                        $($.trim(tileTemplate({
                             img: img,
+                            tileSize: tileSize,
                             left: x * tileSize,
                             top: y * tileSize
-                        }).trim())
+                        })))
                         .appendTo(element);
                     }
                 }
@@ -65,11 +77,19 @@
 
             loadTiles($("#tile-layer"), 3);
 
-            $("#map").kendoMobileScroller({
+            $("#view").kendoMobileScroller({
+                scroll: function(e) {
+                },
+
+                scrollEnd: function(e) {
+                }
             });
 
-            var scroller = $("#map").data("kendoMobileScroller");
-            //scroller.makeVirtual();
+            var scroller = $("#view").data("kendoMobileScroller");
+            scroller.dimensions.y.makeVirtual();
+            scroller.dimensions.x.makeVirtual();
+            scroller.dimensions.x.virtualSize(0, 100000);
+            scroller.dimensions.y.virtualSize(0, 100000);
         </script>
     </body>
 </html>
