@@ -475,10 +475,6 @@ kendo_module({
             var editor = this.editor;
             var native = $(editor.native);
             var bounds = this.toolService.editShape.bounds();
-            var dElement = diagram.element;
-            var isRelativeOrigin = /^(?:relative|absolute)$/.test(dElement.style.position);
-            var diagramOffset = $(diagram.element).offset();
-            var diagramPos = isRelativeOrigin ? new Point(0, 0) : new Point(diagramOffset.left, diagramOffset.top);
 
             var cssDim = function (prop) {
                 return parseInt(native.css(prop));
@@ -489,7 +485,10 @@ kendo_module({
             var formattingOffset = new Point(10, bounds.height / 2 - editorHeight / 2).minus(nativeOffset).times(diagram.zoom());
 
             editor.size((bounds.width - 20) * diagram.zoom(), editorHeight * diagram.zoom());
-            editor.position(diagram.pan().plus(bounds.topLeft().times(diagram.zoom())).plus(diagramPos).plus(formattingOffset));
+
+            var tp = diagram.transformPoint(bounds.topLeft());
+
+            editor.position(tp.plus(formattingOffset));
             native.css({ fontSize: (15 * diagram.zoom()) | 0 });
         },
         _finishEdit: function () {

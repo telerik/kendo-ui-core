@@ -18,15 +18,24 @@
             height: 100%;
         }
 
+        .menu-text {
+            margin-right: 10px;
+        }
+
         input.diagramCommandBtn {
             border: 1px gray solid;
             background-color: gray;
             color: white;
             cursor: pointer;
+            margin: 5px;
         }
 
         #toolBoxDiv {
             float: left;
+        }
+
+        k-slider {
+            margin-left: 10px;
         }
 
         .shape {
@@ -93,7 +102,8 @@
         <input type="button" class="diagramCommandBtn" id="deleteButton" title="Delete (DEL)" value="Delete"/>
         <input type="button" class="diagramCommandBtn" id="selectAllButton" title="Select All (CTRL+A)"
                value="SelectAll"/>
-        rotate selection:<input id="rotateShape"/>
+        <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
+        <span class="menu-text">rotate selection:</span><input id="rotateShape"/>
     </div>
     <div id="splitter">
         <div id="toolBoxDiv">
@@ -214,10 +224,8 @@
         diagram.connect(bottomCor, topCor);
         var con2 = diagram.connect(bottomCor, topCor2);
         diagram.connect(bottomCor, bottomCor2);
-        diagram.connect(topCor, bottomCor2);
         diagram.connect(bottomCor, bottomCor3);
-        diagram.connect(new Point(100, 200), new Point(400, 400));
-        diagram.connect(new Point(400, 100), new Point(100, 400));
+        diagram.connect(new Point(200, 600), new Point(400, 800), {content: "Floating connection" });
         con2.content("Connection Label");
 
         // Org Chart also...
@@ -284,9 +292,15 @@
         $("#selectAllButton").click(function (e) {
             diagram.select(true);
         });
+        $("#layoutButton").click(function (e) {
+            diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                    {
+                        TreeLayoutType: kendo.diagram.TreeLayoutType.TreeDown
+                    });
+        });
         $("#rotateShape").kendoSlider({
             min: 0,
-            max: 359,
+            max: 360,
             change: shapeRotate,
             slide: shapeRotate
         });

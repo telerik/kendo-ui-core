@@ -135,25 +135,26 @@ kendo_module({
         init: function (options) {
             var that = this, connector, i;
             DiagramElement.fn.init.call(that, options);
-            this.isSelected = false;
-            this.connectors = [];
-            this.type = that.options;
-            this.shapeVisual = Shape.createShapeVisual(that.options);
-            this.visual = new Group({
+            that.isSelected = false;
+            that.connectors = [];
+            that.type = that.options;
+            that.shapeVisual = Shape.createShapeVisual(that.options);
+            that.visual = new Group({
                 id: that.options.id,
                 title: that.options.id ? that.options.id : "Shape"
             });
-            this.visual.append(this.shapeVisual);
-            this.bounds(new Rect(that.options.x, that.options.y, Math.floor(that.options.width), Math.floor(that.options.height)));
+            that.visual.append(this.shapeVisual);
+            that.bounds(new Rect(that.options.x, that.options.y, Math.floor(that.options.width), Math.floor(that.options.height)));
             var length = this.options.connectors.length;
             for (i = 0; i < length; i++) {
                 connector = new Connector(this, this.options.connectors[i]);
-                this.connectors.push(connector);
+                that.connectors.push(connector);
             }
+            that.content(that.options.content);
             // TODO: Swa added for phase 2; included here already because the GraphAdapter takes it into account
-            this.parentContainer = null;
-            this.isContainer = false;
-            this.isCollapsed = false;
+            that.parentContainer = null;
+            that.isContainer = false;
+            that.isCollapsed = false;
         },
         options: {
             type: "Shape",
@@ -348,6 +349,7 @@ kendo_module({
             this._targetPoint = new Point();
             that.sourcePoint(from);
             that.targetPoint(to);
+            that.content(that.options.content);
             that.refresh();
         },
         options: {
