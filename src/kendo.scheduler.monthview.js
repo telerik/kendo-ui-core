@@ -117,9 +117,8 @@ kendo_module({
         _continuousSlot: function(selection, ranges, reverse) {
             var index = selection.backward ? 0 : ranges.length - 1;
             var group = this.groups[selection.groupIndex];
-            var method = reverse ? "previousDaySlot" : "nextDaySlot";
 
-            return group[method](ranges[index].start);
+            return group.continuousSlot(ranges[index].start, reverse);
         },
 
         _changeGroupContinuously: function(selection, continuousSlot, multiple, reverse) {

@@ -383,33 +383,57 @@ kendo_module({
             return null;
         },
 
-        upSlot: function(slot, keep) { //TODO: refactor as keep is used in multiple ways
+        _getCollections: function(isDay) {
+            return isDay ? this._daySlotCollections : this._timeSlotCollections;
+        },
+
+        continuousSlot: function(slot, reverse) {
+            var pad = reverse ? -1 : 1;
+            var collections = this._getCollections(slot.isDaySlot);
+            var collection = collections[slot.collectionIndex + pad];
+
+            return collection ? collection[reverse ? "last" : "first"]() : undefined;
+        },
+
+        firstSlot: function() {
+            var collections = this._getCollections(this.daySlotCollectionCount());
+
+            return collections[0].first();
+        },
+
+        lastSlot: function() {
+            var collections = this._getCollections(this.daySlotCollectionCount());
+
+            return collections[collections.length - 1].last();
+        },
+
+        upSlot: function(slot, keepCollection) {
             var that = this;
             var moveToDaySlot = function(isDaySlot, collectionIndex, index) {
                 var isFirstCell = index === 0;
 
-                if (!keep && !isDaySlot && isFirstCell && that.daySlotCollectionCount()) {
+                if (!keepCollection && !isDaySlot && isFirstCell && that.daySlotCollectionCount()) {
                     return that._daySlotCollections[0].at(collectionIndex);
                 }
             };
 
             if (!this.timeSlotCollectionCount()) {
-                keep = true;
+                keepCollection = true;
             }
 
             return this._verticalSlot(slot, -1, moveToDaySlot);
         },
 
-        downSlot: function(slot, keep) {
+        downSlot: function(slot, keepCollection) {
             var that = this;
             var moveToTimeSlot = function(isDaySlot, collectionIndex, index) {
-                if (!keep && isDaySlot && that.timeSlotCollectionCount()) {
+                if (!keepCollection && isDaySlot && that.timeSlotCollectionCount()) {
                     return that._timeSlotCollections[index].at(0);
                 }
             };
 
             if (!this.timeSlotCollectionCount()) {
-                keep = true;
+                keepCollection = true;
             }
 
             return this._verticalSlot(slot, 1, moveToTimeSlot);
@@ -460,38 +484,6 @@ kendo_module({
             var collection = collections[collectionIndex];
 
             return collection ? collection.at(index) : undefined;
-        },
-
-        _getCollections: function(isDay) {
-            return isDay ? this._daySlotCollections : this._timeSlotCollections;
-        },
-
-        //TODO: previousContinuesSlot
-        previousDaySlot: function(slot) {
-            var collections = this._getCollections(true);
-            var collection = collections[slot.collectionIndex - 1];
-
-            return collection ? collection.last() : undefined;
-        },
-
-        //TODO: nextContinuesSlot
-        nextDaySlot: function(slot) {
-            var collections = this._getCollections(true);
-            var collection = collections[slot.collectionIndex + 1];
-
-            return collection ? collection.first() : undefined;
-        },
-
-        firstSlot: function() {
-            var collections = this._getCollections(this.daySlotCollectionCount());
-
-            return collections[0].first();
-        },
-
-        lastSlot: function() {
-            var collections = this._getCollections(this.daySlotCollectionCount());
-
-            return collections[collections.length - 1].last();
         },
 
         _collection: function(index, multiday) {
@@ -877,6 +869,14 @@ kendo_module({
             return slot;
         },
 
+        _changeGroupContinuously: function() {
+            return null;
+        },
+
+        _changeViewPeriod: function() {
+            return false;
+        },
+
         _horizontalSlots: function(selection, ranges, multiple, reverse) {
             var method = reverse ? "leftSlot" : "rightSlot";
             var startSlot = ranges[0].start;
@@ -957,15 +957,7 @@ kendo_module({
             return slot;
         },
 
-        _changeViewPeriod: function() {
-            return false;
-        },
-
         _continuousSlot: function() {
-            return null;
-        },
-
-        _changeGroupContinuously: function() {
             return null;
         },
 
