@@ -11,7 +11,7 @@ MVC_WRAPPERS_SRC = FileList[MVC_SRC_ROOT + '**/*.cs']
             .exclude(MVC_SRC_ROOT + '**/Kendo*.dll')
 
 MVC_RESOURCES = FileList[MVC_SRC_ROOT + 'Kendo.Mvc/Resources/Messages.*.resx']
-            .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release*/%f')
+            .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release/%f')
             .sub(/Messages\.(.+).resx/, '\1/Kendo.Mvc.resources.dll')
 
 
@@ -207,12 +207,11 @@ if PLATFORM =~ /linux|darwin/ && !ENV['USE_MONO']
          :root => 'dist/binaries/'
 else
     [ "Release", "Release MVC3" ].each do |configuration|
-        options = '/p:Configuration=' + configuration
+        options = '/p:Configuration="' + configuration + '"'
 
         # Produce Kendo.Mvc.dll by building Kendo.Mvc.csproj
         file "wrappers/mvc/src/Kendo.Mvc/bin/#{configuration}/Kendo.Mvc.dll" => MVC_WRAPPERS_SRC do |t|
-            csproj = 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
-            msbuild csproj options
+            msbuild 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj', options
 
             MVC_RESOURCES.each do |resource|
                 # xbuild can't set the version of satellite assemblies so we build them using `al`
@@ -221,7 +220,7 @@ else
                     obj = "wrappers/mvc/src/Kendo.Mvc/obj/#{configuration}/Kendo.Mvc.Resources.Messages.#{culture}.resources";
                     key = 'wrappers/mvc/src/shared/Kendo.snk'
 
-                    sh "al /t:lib /embed:#{obj} /culture:#{culture} /out:#{resource} /template:#{t.name} /keyfile:#{key}", :verbose => VERBOSE
+                    sh "al /t:lib /embed:'#{obj}' /culture:#{culture} /out:#{resource} /template:'#{t.name}' /keyfile:#{key}", :verbose => VERBOSE
                 end
             end
         end
@@ -229,7 +228,7 @@ else
 
     # Produce Kendo.Mvc.Examples.dll by building Kendo.Mvc.Examples.csproj
     file MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll' =>
-        MVC_DEMOS_SRC.include('wrappers/mvc/src/Kendo.Mvc/bin/Release*/Kendo.Mvc.dll') do |t|
+        MVC_DEMOS_SRC.include('wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll') do |t|
         msbuild MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
     end
 
