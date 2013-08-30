@@ -11,6 +11,7 @@ kendo_module({
     var kendo = window.kendo,
         ui = kendo.ui,
         Widget = ui.Widget,
+        keys = kendo.keys,
         NS = ".kendoSchedulerView";
 
     function levels(values, key) {
@@ -382,26 +383,58 @@ kendo_module({
             return null;
         },
 
-        upSlot: function(slot, keep) {
+        _getCollections: function(isDay) {
+            return isDay ? this._daySlotCollections : this._timeSlotCollections;
+        },
+
+        continuousSlot: function(slot, reverse) {
+            var pad = reverse ? -1 : 1;
+            var collections = this._getCollections(slot.isDaySlot);
+            var collection = collections[slot.collectionIndex + pad];
+
+            return collection ? collection[reverse ? "last" : "first"]() : undefined;
+        },
+
+        firstSlot: function() {
+            var collections = this._getCollections(this.daySlotCollectionCount());
+
+            return collections[0].first();
+        },
+
+        lastSlot: function() {
+            var collections = this._getCollections(this.daySlotCollectionCount());
+
+            return collections[collections.length - 1].last();
+        },
+
+        upSlot: function(slot, keepCollection) {
             var that = this;
             var moveToDaySlot = function(isDaySlot, collectionIndex, index) {
                 var isFirstCell = index === 0;
 
-                if (!keep && !isDaySlot && isFirstCell && that.daySlotCollectionCount()) {
+                if (!keepCollection && !isDaySlot && isFirstCell && that.daySlotCollectionCount()) {
                     return that._daySlotCollections[0].at(collectionIndex);
                 }
             };
 
+            if (!this.timeSlotCollectionCount()) {
+                keepCollection = true;
+            }
+
             return this._verticalSlot(slot, -1, moveToDaySlot);
         },
 
-        downSlot: function(slot, keep) {
+        downSlot: function(slot, keepCollection) {
             var that = this;
             var moveToTimeSlot = function(isDaySlot, collectionIndex, index) {
-                if (!keep && isDaySlot && that.timeSlotCollectionCount()) {
+                if (!keepCollection && isDaySlot && that.timeSlotCollectionCount()) {
                     return that._timeSlotCollections[index].at(0);
                 }
             };
+
+            if (!this.timeSlotCollectionCount()) {
+                keepCollection = true;
+            }
 
             return this._verticalSlot(slot, 1, moveToTimeSlot);
         },
@@ -451,38 +484,6 @@ kendo_module({
             var collection = collections[collectionIndex];
 
             return collection ? collection.at(index) : undefined;
-        },
-
-        _getCollections: function(isDay) {
-            return isDay ? this._daySlotCollections : this._timeSlotCollections;
-        },
-
-        //TODO: previousContinuesSlot
-        previousDaySlot: function(slot) {
-            var collections = this._getCollections(true);
-            var collection = collections[slot.collectionIndex - 1];
-
-            return collection ? collection.last() : undefined;
-        },
-
-        //TODO: nextContinuesSlot
-        nextDaySlot: function(slot) {
-            var collections = this._getCollections(true);
-            var collection = collections[slot.collectionIndex + 1];
-
-            return collection ? collection.first() : undefined;
-        },
-
-        firstSlot: function() {
-            var collections = this._getCollections(this.daySlotCollectionCount());
-
-            return collections[0].first();
-        },
-
-        lastSlot: function() {
-            var collections = this._getCollections(this.daySlotCollectionCount());
-
-            return collections[collections.length - 1].last();
         },
 
         _collection: function(index, multiday) {
@@ -535,6 +536,10 @@ kendo_module({
                 slot: slot,
                 inRange: inRange
             };
+        },
+
+        getSlotCollection: function(index, isDay) {
+            return this[isDay ? "getDaySlotCollection" : "getTimeSlotCollection"](index);
         },
 
         getTimeSlotCollection: function(index) {
@@ -857,8 +862,176 @@ kendo_module({
             return kendo.format(this.options.selectedDateFormat, this.startDate(), this.endDate());
         },
 
-        move: function() {
+        _changeGroup: function(selection, previous) {
+            var method = previous ? "prevGroupSlot" : "nextGroupSlot";
+            var slot = this[method](selection.start, selection.groupIndex, selection.isAllDay);
+
+            if (slot) {
+                selection.groupIndex += previous ? -1 : 1;
+            }
+
+            return slot;
+        },
+
+        _changeGroupContinuously: function() {
+            return null;
+        },
+
+        _changeViewPeriod: function() {
             return false;
+        },
+
+        _horizontalSlots: function(selection, ranges, multiple, reverse) {
+            var method = reverse ? "leftSlot" : "rightSlot";
+            var startSlot = ranges[0].start;
+            var endSlot = ranges[ranges.length - 1].end;
+            var group = this.groups[selection.groupIndex];
+
+            if (!multiple) {
+                var slot = this._normalizeHorizontalSelection(selection, ranges, reverse);
+                if (slot) {
+                    startSlot = endSlot = slot;
+                }
+            }
+
+            startSlot = group[method](startSlot);
+            endSlot = group[method](endSlot);
+
+            if (!multiple && !this._isVerticallyGrouped() && (!startSlot || !endSlot)) {
+                startSlot = endSlot = this._changeGroup(selection, reverse);
+            }
+
+            var continuousSlot;
+
+            if (!startSlot || !endSlot) {
+                continuousSlot = this._continuousSlot(selection, ranges, reverse);
+                continuousSlot = this._changeGroupContinuously(selection, continuousSlot, multiple, reverse);
+
+                if (continuousSlot) {
+                    startSlot = endSlot = continuousSlot;
+                }
+            }
+
+            return {
+                startSlot: startSlot,
+                endSlot: endSlot
+            };
+        },
+
+        _verticalSlots: function(selection, ranges, multiple, reverse) {
+            var startSlot = ranges[0].start;
+            var endSlot = ranges[ranges.length - 1].end;
+            var group = this.groups[selection.groupIndex];
+
+            if (!multiple) {
+                var slot = this._normalizeVerticalSelection(selection, ranges, reverse);
+                if (slot) {
+                    startSlot = endSlot = slot;
+                }
+            }
+
+            var method = reverse ? "upSlot" : "downSlot";
+
+            startSlot = group[method](startSlot, multiple);
+            endSlot = group[method](endSlot, multiple);
+
+            if (!multiple && this._isVerticallyGrouped() && (!startSlot || !endSlot)) {
+                startSlot = endSlot = this._changeGroup(selection, reverse);
+            }
+
+            return {
+                startSlot: startSlot,
+                endSlot: endSlot
+            };
+        },
+
+        _normalizeHorizontalSelection: function() {
+            return null;
+        },
+
+        _normalizeVerticalSelection: function(selection, ranges, reverse) {
+            var slot;
+
+            if (reverse) {
+                slot = ranges[0].start;
+            } else {
+                slot = ranges[ranges.length - 1].end;
+            }
+
+            return slot;
+        },
+
+        _continuousSlot: function() {
+            return null;
+        },
+
+        constrainSelection: function(selection) {
+            if (!this.inRange(selection)) {
+                var slot = this.groups[0].firstSlot();
+
+                selection.isAllDay = slot.isDaySlot;
+                selection.start = new Date(slot.start);
+                selection.end = new Date(slot.end);
+            }
+        },
+
+        move: function(selection, key, shift) {
+            var handled = false;
+            var group = this.groups[selection.groupIndex];
+
+            if (!group.timeSlotCollectionCount()) {
+                selection.isAllDay = true;
+            }
+
+            var ranges = group.ranges(selection.start, selection.end, selection.isAllDay, false);
+            var startSlot, endSlot, reverse, slots;
+
+            if (key === keys.DOWN || key === keys.UP) {
+                handled = true;
+                reverse = key === keys.UP;
+
+                this._updateDirection(selection, ranges, shift, reverse, true);
+
+                slots = this._verticalSlots(selection, ranges, shift, reverse);
+
+                if (!slots.startSlot && !shift && this._changeViewPeriod(selection, reverse, true)) {
+                    return handled;
+                }
+
+            } else if (key === keys.LEFT || key === keys.RIGHT) {
+                handled = true;
+                reverse = key === keys.LEFT;
+
+                this._updateDirection(selection, ranges, shift, reverse, false);
+
+                slots = this._horizontalSlots(selection, ranges, shift, reverse);
+
+                if (!slots.startSlot && !shift && this._changeViewPeriod(selection, reverse, false)) {
+                    return handled;
+                }
+            }
+
+            if (handled) {
+                startSlot = slots.startSlot;
+                endSlot = slots.endSlot;
+
+                if (shift) {
+                    var backward = selection.backward;
+                    if (backward && startSlot) {
+                        selection.start = startSlot.startDate();
+                    } else if (!backward && endSlot) {
+                        selection.end = endSlot.endDate();
+                    }
+                } else if (startSlot && endSlot) {
+                    selection.isAllDay = startSlot.isDaySlot;
+                    selection.start = startSlot.startDate();
+                    selection.end = endSlot.endDate();
+                }
+
+                selection.events = [];
+            }
+
+            return handled;
         },
 
         moveToEventInGroup: function(group, slot, selectedEvents, prev) {
@@ -944,7 +1117,7 @@ kendo_module({
             var isAllDay = selection.isAllDay;
             var group = this.groups[selection.groupIndex];
 
-            if (isAllDay === undefined && !group.timeSlotCollectionCount()) {
+            if (!group.timeSlotCollectionCount()) {
                 isAllDay = true;
             }
 
