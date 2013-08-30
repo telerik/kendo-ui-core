@@ -10,21 +10,23 @@ MVC_WRAPPERS_SRC = FileList[MVC_SRC_ROOT + '**/*.cs']
             .include(MVC_SRC_ROOT + '**/*.dll')
             .exclude(MVC_SRC_ROOT + '**/Kendo*.dll')
 
-MVC_RESOURCES = FileList[MVC_SRC_ROOT + 'Kendo.Mvc/Resources/Messages.*.resx']
-            .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release/%f')
+def resources_for(configuration)
+    FileList[MVC_SRC_ROOT + 'Kendo.Mvc/Resources/Messages.*.resx']
+            .pathmap(MVC_SRC_ROOT + "Kendo.Mvc/bin/#{configuration}/%f")
             .sub(/Messages\.(.+).resx/, '\1/Kendo.Mvc.resources.dll')
+end
 
 
 # The list of assemblies produced when building the wrappers - Kendo.Mvc.dll and satellite assemblies
-MVC_DLL = FileList['Kendo.Mvc.dll']
+MVC4_DLL = FileList['Kendo.Mvc.dll']
             .include('Kendo.Mvc.xml')
             .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release/%f')
-            .include(MVC_RESOURCES)
+            .include(resources_for("Release"))
 
 MVC3_DLL = FileList['Kendo.Mvc.dll']
             .include('Kendo.Mvc.xml')
             .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release-MVC3/%f')
-            .include(MVC_RESOURCES)
+            .include(resources_for("Release-MVC3"))
 
 # Delete all Kendo*.dll files when `rake clean`
 CLEAN.include(FileList['wrappers/mvc/**/Kendo*.dll'])
@@ -218,7 +220,7 @@ else
 
             if PLATFORM =~ /linux|darwin/
                 # xbuild can't set the version of satellite assemblies so we build them using `al`
-                MVC_RESOURCES.each do |resource|
+                resources_for(configuration).each do |resource|
                     culture = resource.pathmap("%-1d")
                     obj = "wrappers/mvc/src/Kendo.Mvc/obj/#{configuration}/Kendo.Mvc.Resources.Messages.#{culture}.resources";
                     key = 'wrappers/mvc/src/shared/Kendo.snk'
