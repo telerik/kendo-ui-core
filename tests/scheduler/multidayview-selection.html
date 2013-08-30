@@ -85,109 +85,21 @@
                 }
             });
 
-            /*test("View moves selection by week length offset when navigate to future period", function() {
-                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] });
-                var selection = {
-                    start: new Date(2013, 6, 6),
-                    end: new Date(2013, 6, 6, 0, 30)
-                };
-
-                view.moveSelectionToPeriod(selection);
-
-                deepEqual(selection.start, new Date(2013, 6, 8));
-                deepEqual(selection.end, new Date(2013, 6, 8, 0, 30));
-            });
-
-            test("View moves selection by week length offset when navigate to past period", function() {
-                var view = setup({ dates: [new Date(2013, 6, 7), new Date(2013, 6, 8)] });
-                var selection = {
-                    start: new Date(2013, 6, 9),
-                    end: new Date(2013, 6, 9, 0, 30)
-                };
-
-                view.moveSelectionToPeriod(selection);
-
-                deepEqual(selection.start, new Date(2013, 6, 7));
-                deepEqual(selection.end, new Date(2013, 6, 7, 0, 30));
-            });
-
-            test("View move last selected slot when navigate to future period", function() {
+            test("constrainSelection sets selection to first slot of view", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] });
-                var selection = {
-                    start: new Date(2013, 6, 6, 23, 30),
-                    end: new Date(2013, 6, 7, 0, 0)
-                };
+                var date = new Date(2013, 3, 1);
+                var selection = createSelection({
+                    start: date,
+                    end: date
+                });
 
-                view.moveSelectionToPeriod(selection);
+                view.constrainSelection(selection);
 
-                deepEqual(selection.start, new Date(2013, 6, 7, 23, 30));
-                deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
+                var slot = view.groups[0].firstSlot();
+
+                equal(selection.start.getTime(), slot.start);
+                equal(selection.end.getTime(), slot.end);
             });
-
-            test("View move last selected slot when navigate to past period", function() {
-                var view = setup({ dates: [new Date(2013, 6, 7)] });
-                var selection = {
-                    start: new Date(2013, 6, 8, 23, 30),
-                    end: new Date(2013, 6, 9, 0, 0)
-                };
-
-                view.moveSelectionToPeriod(selection);
-
-                deepEqual(selection.start, new Date(2013, 6, 7, 23, 30));
-                deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
-            });
-
-            test("View moveSelectionToPeriod clears selected events", function() {
-                var view = setup({ dates: [new Date(2013, 6, 7)] });
-                var selection = {
-                    start: new Date(2013, 6, 8, 23, 30),
-                    end: new Date(2013, 6, 9, 0, 0),
-                    events: ["1"]
-                };
-
-                view.moveSelectionToPeriod(selection);
-
-                equal(selection.events.length, 0);
-            });
-
-            test("View moveSelectionToPeriod normalizes dates if they have correct column index", function() {
-                var view = setup({ dates: [new Date(2013, 6, 7)], startTime: new Date(2013, 6, 7, 7) });
-                var selection = {
-                    start: new Date(2013, 6, 7, 0),
-                    end: new Date(2013, 6, 7, 0)
-                };
-
-                view.moveSelectionToPeriod(selection);
-
-                deepEqual(selection.start, new Date(2013, 6, 7, 7));
-                deepEqual(selection.end, new Date(2013, 6, 7, 8));
-            });
-
-            test("View adjust start/end date based on view.startDate/view.endDate when navigate to future", function() {
-                var view = setup({ dates: [new Date(2013, 6, 7)] });
-                var selection = {
-                    start: new Date(2013, 6, 6, 23, 30),
-                    end: new Date(2013, 6, 9, 0, 0)
-                };
-
-                view.moveSelectionToPeriod(selection);
-
-                deepEqual(selection.start, new Date(2013, 6, 7, 23, 0));
-                deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
-            });
-
-            test("View adjust start/end date based on view.startDate/view.endDate when navigate to past", function() {
-                var view = setup({ dates: [new Date(2013, 6, 7)] });
-                var selection = {
-                    start: new Date(2013, 6, 6, 23, 30),
-                    end: new Date(2013, 6, 8, 0, 0)
-                };
-
-                view.moveSelectionToPeriod(selection);
-
-                deepEqual(selection.start, new Date(2013, 6, 7, 23, 0));
-                deepEqual(selection.end, new Date(2013, 6, 8, 0, 0));
-            });*/
 
             test("View selects cell", function() {
                 var view = setup({ dates: [new Date(2013, 6, 7)] }),

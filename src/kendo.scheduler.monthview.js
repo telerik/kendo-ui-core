@@ -173,19 +173,6 @@ kendo_module({
             return slot;
         },
 
-        moveSelectionToPeriod: function(selection) {
-            var date = new Date(selection.start);
-            var lastDayOfMonth = this._lastDayOfMonth;
-            var month = lastDayOfMonth.getMonth();
-
-            date.setFullYear(lastDayOfMonth.getFullYear(), month);
-            if (date.getMonth() != month) {
-                date = new Date(lastDayOfMonth);
-            }
-
-            selection.start = selection.end = date;
-        },
-
         _templates: function() {
             var options = this.options,
                 settings = extend({}, kendo.Template, options.templateSettings);

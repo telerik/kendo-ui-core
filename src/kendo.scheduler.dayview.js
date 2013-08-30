@@ -1394,17 +1394,6 @@ kendo_module({
             return rowLevel ? rowLevel.length : 0;
         },
 
-        //TODO: Persist selected slot between views
-        moveSelectionToPeriod: function(selection) {
-            if (!this.inRange(selection)) {
-                var slot = this.groups[selection.groupIndex || 0]._collection(0, false).first();
-
-                selection.isAllDay = slot.isDaySlot;
-                selection.start = slot.startDate();
-                selection.end = slot.endDate();
-            }
-        },
-
         clearSelection: function() {
             this.content.add(this.datesHeader).find(".k-state-selected").removeClass("k-state-selected");
         },

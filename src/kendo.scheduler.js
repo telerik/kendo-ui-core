@@ -1915,7 +1915,7 @@ kendo_module({
             that._viewActivateHandler = function() {
                 var view = this;
                 if (that._selection) {
-                    view.moveSelectionToPeriod(that._selection);
+                    view.constrainSelection(that._selection);
                     view.select(that._selection);
 
                     that._adjustSelectedDate();

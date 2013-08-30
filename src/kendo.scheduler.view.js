@@ -538,6 +538,10 @@ kendo_module({
             };
         },
 
+        getSlotCollection: function(index, isDay) {
+            return this[isDay ? "getDaySlotCollection" : "getTimeSlotCollection"](index);
+        },
+
         getTimeSlotCollection: function(index) {
             return this._timeSlotCollections[index];
         },
@@ -959,6 +963,16 @@ kendo_module({
 
         _continuousSlot: function() {
             return null;
+        },
+
+        constrainSelection: function(selection) {
+            if (!this.inRange(selection)) {
+                var slot = this.groups[0].firstSlot();
+
+                selection.isAllDay = slot.isDaySlot;
+                selection.start = new Date(slot.start);
+                selection.end = new Date(slot.end);
+            }
         },
 
         move: function(selection, key, shift) {
