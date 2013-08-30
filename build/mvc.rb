@@ -18,7 +18,7 @@ MVC_RESOURCES = FileList[MVC_SRC_ROOT + 'Kendo.Mvc/Resources/Messages.*.resx']
 # The list of assemblies produced when building the wrappers - Kendo.Mvc.dll and satellite assemblies
 MVC_DLL = FileList['Kendo.Mvc.dll']
             .include('Kendo.Mvc.xml')
-            .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release*/%f')
+            .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release/%f')
             .include(MVC_RESOURCES)
 
 # Delete all Kendo*.dll files when `rake clean`
@@ -34,10 +34,10 @@ MVC_RAZOR_EDITOR_TEMPLATES = FileList[MVC_DEMOS_ROOT + 'Views/Shared/EditorTempl
 MVC_ASCX_EDITOR_TEMPLATES = FileList[MVC_DEMOS_ROOT + 'Views/Shared/EditorTemplates/*.ascx']
 
 # Satellite assemblies (<culture>\Kendo.Mvc.ressources.dll) depend on Kendo.Mvc.dll
-rule '.resources.dll' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release*/Kendo.Mvc.dll'
+rule '.resources.dll' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
 
 # XML API documentation depends on Kendo.Mvc.Dll
-rule 'Kendo.Mvc.xml' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release*/Kendo.Mvc.dll'
+rule 'Kendo.Mvc.xml' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
 
 # The list of whils which Kendo.Mvc.Examples.dll depends on
 MVC_DEMOS_SRC = FileList[MVC_DEMOS_ROOT + '**/*.cs']
@@ -192,7 +192,8 @@ namespace :mvc do
 
     desc('Build ASP.NET MVC binaries')
     task :binaries => [
-        'wrappers/mvc/src/Kendo.Mvc/bin/Release*/Kendo.Mvc.dll',
+        'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll',
+        'wrappers/mvc/src/Kendo.Mvc/bin/Release MVC3/Kendo.Mvc.dll',
         MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll',
         'dist/binaries/'
     ]
