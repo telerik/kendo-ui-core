@@ -1,9 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
   <actions/>
-  <description/>
+  <description></description>
+  <logRotator class="hudson.tasks.LogRotator">
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>20</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.6">
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.7">
       <projectUrl>https://github.com/telerik/kendo-selenium/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
@@ -52,7 +59,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>./run-all.sh "http://127.0.0.1/staging/" Framework,UIWidgets,DataViz,ThemeBuilder,KendoCustom,Sushi,AeroViewr</command>
+      <command>./run-all.sh &quot;http://kendobuild/staging/&quot; Framework,UIWidgets,DataViz,ThemeBuilder,KendoCustom,Sushi,AeroViewr</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
