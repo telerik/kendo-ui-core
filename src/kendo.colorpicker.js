@@ -813,7 +813,7 @@ kendo_module({
             that._updateUI(value);
         },
         destroy: function() {
-            this.wrapper.add("*").off(NS);
+            this.wrapper.off(NS).find("*").off(NS);
             if (this._popup) {
                 this._selector.destroy();
                 this._popup.destroy();
