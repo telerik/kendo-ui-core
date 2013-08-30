@@ -695,6 +695,7 @@ kendo_module({
 
         _selectable: function() {
             var that = this,
+                wrapper = that.wrapper,
                 selectEvent = kendo.support.mobileOS ? "touchend" : "mousedown";
 
             if (!that.options.selectable) {
@@ -703,12 +704,12 @@ kendo_module({
 
             that._tabindex();
 
-            that.wrapper.on(selectEvent, ".k-scheduler-header-all-day td, .k-scheduler-content td, .k-event", function(e) {
+            wrapper.on(selectEvent, ".k-scheduler-header-all-day td, .k-scheduler-content td, .k-event", function(e) {
                 that._createSelection(e.currentTarget);
-                that.wrapper.focus();
+                wrapper.focus();
             });
 
-            that.wrapper.on("focus" + NS, function() {
+            wrapper.on("focus" + NS, function() {
                 if (!that._selection) {
                     that._createSelection($(".k-scheduler-content").find("td:first"));
                 }
@@ -716,18 +717,61 @@ kendo_module({
                 that.view().select(that._selection);
             });
 
-            that.wrapper.on("focusout" + NS, function() {
+            wrapper.on("focusout" + NS, function() {
                 that.view().clearSelection();
                 that._ctrlKey = that._shiftKey = false;
             });
 
-            that.wrapper.on("keydown" + NS, proxy(that._keydown, that));
+            wrapper.on("keydown" + NS, proxy(that._keydown, that));
 
-            that.wrapper.on("keyup" + NS, function(e) {
+            wrapper.on("keyup" + NS, function(e) {
                 that._ctrlKey = e.ctrlKey;
                 that._shiftKey = e.shiftKey;
             });
 
+            var mouseMoveHandler = $.proxy(that._mouseMove, that);
+
+            wrapper.on("mousedown" + NS, function() {
+                wrapper.on("mousemove" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td", mouseMoveHandler);
+            });
+
+            wrapper.on("mouseup" + NS, function() {
+                wrapper.off("mousemove" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td", mouseMoveHandler);
+            });
+        },
+
+        _mouseMove: function(e) {
+            var that = this;
+            clearTimeout(that._moveTimer);
+
+            that._moveTimer = setTimeout(function() {
+                var view = that.view();
+                var selection = that._selection;
+                var offset = $(e.currentTarget).offset();
+
+                if (selection) {
+                    var slot = view._slotByPosition(offset.left, offset.top);
+
+                    if (selection.groupIndex === slot.groupIndex) {
+                        var startDate = slot.startDate();
+                        var endDate = slot.endDate();
+
+                        if (startDate >= selection.end) {
+                            selection.backward = false;
+                        } else if (endDate <= selection.start) {
+                            selection.backward = true;
+                        }
+
+                        if (selection.backward) {
+                            selection.start = startDate;
+                        } else {
+                            selection.end = endDate;
+                        }
+
+                        view.select(selection);
+                    }
+                }
+            }, 5);
         },
 
         _viewByIndex: function(index) {
