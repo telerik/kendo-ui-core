@@ -473,6 +473,35 @@
                 ok(!container.find(".k-event").length);
             });
 
+            test("single day event which starts and ends at the views bounderies is shown", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        startTime: new Date(2013, 1, 26, 7, 0, 0),
+                        dates: [
+                           selectedDate
+                        ]
+                    }),
+                    events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 7, 0, 0), end: new Date(2013, 1, 27), title: "my event" })];
+
+                view.render(events);
+                equal(container.find(".k-event").length, 1);
+            });
+
+            test("single day event which starts and at the views start and ends before next day start", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        startTime: new Date(2013, 1, 26, 7, 0, 0),
+                        dates: [
+                           selectedDate
+                        ]
+                    }),
+                    events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 7, 0, 0), end: new Date(2013, 1, 27, 5), title: "my event" })];
+
+                view.render(events);
+
+                equal(container.find(".k-event").length, 1);
+            });
+
             test("set the height of the event", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({

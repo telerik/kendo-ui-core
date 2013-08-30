@@ -114,8 +114,9 @@ kendo_module({
         return msValue >= msMin && msValue <= msMax;
     }
 
-    function isInTimeRange(value, min, max) {
-        return value > min && value < max;
+    function isInTimeRange(value, min, max, overlaps) {
+        overlaps = overlaps ? value <= max : value < max;
+        return value > min && overlaps;
     }
 
     function addContinuousEvent(group, range, element, isAllDay) {
@@ -1203,9 +1204,9 @@ kendo_module({
                 setTime(slotEndTime, MS_PER_DAY - 1);
             }
 
-            if (getMilliseconds(endTime) === getMilliseconds(kendo.date.getDate(endTime)) && endTime.getTime() > startTime.getTime()) {
-                endTime = kendo.date.getDate(endTime);
-                setTime(endTime, MS_PER_DAY - 1);
+            if (kendo.date.getDate(endTime) > kendo.date.getDate(startTime)) {
+               endTime = kendo.date.getDate(endTime);
+               setTime(endTime, MS_PER_DAY - 1);
             }
 
             endTime = getMilliseconds(endTime);
@@ -1217,8 +1218,10 @@ kendo_module({
                 return true;
             }
 
-            return isInTimeRange(startTime, slotStartTime, slotEndTime) ||
-                isInTimeRange(endTime, slotStartTime, slotEndTime) ||
+            var overlaps = true;
+
+            return isInTimeRange(startTime, slotStartTime, slotEndTime, overlaps) ||
+                isInTimeRange(endTime, slotStartTime, slotEndTime, overlaps) ||
                 isInTimeRange(slotStartTime, startTime, endTime) ||
                 isInTimeRange(slotEndTime, startTime, endTime);
         },
