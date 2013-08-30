@@ -90,9 +90,7 @@ kendo_module({
 
             that._initPanes();
 
-            if (that.element.children(".k-splitbar-draggable-" + that.orientation).length) {
-                that.resizing = new PaneResizing(that);
-            }
+            that.resizing = new PaneResizing(that);
 
             that.element.triggerHandler("init" + NS);
         },
@@ -480,9 +478,10 @@ kendo_module({
         },
 
         toggle: function(pane, expand) {
-            var paneConfig;
+            var that = this,
+                paneConfig;
 
-            pane = this.element.find(pane);
+            pane = that.element.find(pane);
             paneConfig = pane.data(PANE);
 
             if (!expand && !paneConfig.collapsible) {
@@ -501,15 +500,7 @@ kendo_module({
                 pane.css("overflow", "");
             }
 
-            this.trigger(RESIZE);
-
-            if (this.resizing) {
-                this.resizing.destroy();
-            }
-
-            if (this.element.children(".k-splitbar-draggable-" + this.orientation).length) {
-                this.resizing = new PaneResizing(this);
-            }
+            that.trigger(RESIZE);
         },
 
         collapse: function(pane) {
