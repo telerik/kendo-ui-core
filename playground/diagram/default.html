@@ -107,6 +107,7 @@
                value="SelectAll"/>
         <!--<span class="menu-text">Rotate selection:</span><input id="rotateShape"/>-->
         <span class="menu-text">Layout:</span><input id="Layouts" value="1"/>
+        <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
     </div>
     <div id="splitter">
         <div id="toolBoxDiv">
@@ -297,6 +298,13 @@ $(function () {
     });
     $("#selectAllButton").click(function (e) {
         diagram.select(true);
+    });
+
+    $("#layoutButton").click(function (e) {
+        diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                {
+                    TreeLayoutType: eval($("#Layouts").val())
+                });
     });
 
     var layouts = [
