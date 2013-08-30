@@ -1009,14 +1009,6 @@ kendo_module({
                 if (!slots.startSlot && !shift && this._changeViewPeriod(selection, reverse, false)) {
                     return handled;
                 }
-
-                if (!slots.startSlot) {
-                    slots.startSlot = slots.endSlot;
-                }
-
-                if (!slots.endSlot) {
-                    slots.endSlot = slots.startSlot;
-                }
             }
 
             if (handled) {
@@ -1125,7 +1117,7 @@ kendo_module({
             var isAllDay = selection.isAllDay;
             var group = this.groups[selection.groupIndex];
 
-            if (isAllDay === undefined && !group.timeSlotCollectionCount()) {
+            if (!group.timeSlotCollectionCount()) {
                 isAllDay = true;
             }
 
