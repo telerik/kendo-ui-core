@@ -67,7 +67,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release-MVC3|AnyCPU' ">
     <OutputPath>bin\Release-MVC3\</OutputPath>
     <DefineConstants>TRACE;MVC3;</DefineConstants>
-    <DocumentationFile>bin\Release\Kendo.Mvc.xml</DocumentationFile>
+    <DocumentationFile>bin\Release-MVC3\Kendo.Mvc.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>

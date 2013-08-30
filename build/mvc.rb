@@ -216,9 +216,9 @@ else
         file dll_file => MVC_WRAPPERS_SRC do |t|
             msbuild 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj', options
 
-            MVC_RESOURCES.each do |resource|
+            if PLATFORM =~ /linux|darwin/
                 # xbuild can't set the version of satellite assemblies so we build them using `al`
-                if PLATFORM =~ /linux|darwin/
+                MVC_RESOURCES.each do |resource|
                     culture = resource.pathmap("%-1d")
                     obj = "wrappers/mvc/src/Kendo.Mvc/obj/#{configuration}/Kendo.Mvc.Resources.Messages.#{culture}.resources";
                     key = 'wrappers/mvc/src/shared/Kendo.snk'
