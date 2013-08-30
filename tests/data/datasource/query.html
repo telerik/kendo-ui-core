@@ -1720,6 +1720,22 @@
                 equal(dataSource.total(), 4);
             });
 
+            test("pushing multiple records to the observable array updates the total - total is string", function() {
+                var dataSource = new DataSource({
+                    serverPaging: true,
+                    schema: {
+                        total: function() {
+                            return "2"
+                        }
+                    }
+                });
+
+                dataSource.data().push({ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" });
+
+                equal(dataSource.view().length, 2);
+                equal(dataSource.total(), 4);
+            });
+
             test("adding multiple records to the observable array updates the total", function() {
                 var dataSource = new DataSource({
                     data: [{ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" }]

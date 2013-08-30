@@ -2575,7 +2575,7 @@ kendo_module({
             if (that.options.autoSync && (action === "add" || action === "remove" || action === "itemchange")) {
                 that.sync();
             } else {
-                var total = that._total || that.reader.total(that._pristine);
+                var total = parseInt(that._total || that.reader.total(that._pristine), 10);
                 if (action === "add") {
                     total += e.items.length;
                 } else if (action === "remove") {
@@ -2842,7 +2842,7 @@ kendo_module({
         },
 
         total: function() {
-            return this._total || 0;
+            return parseInt(this._total || 0, 10);
         },
 
         aggregate: function(val) {
