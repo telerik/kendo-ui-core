@@ -829,8 +829,8 @@ kendo_module({
             that.rect = new Rectangle(that.options.rect);
             that.visual.append(that.rect);
             if (that.options.rotatable) {
-                that.rotation = new Path(that.options.rotation);
-                that.visual.append(that.rotation);
+                that.rotationThumb = new Path(that.options.rotationThumb);
+                that.visual.append(that.rotationThumb);
             }
             that.refresh();
         },
@@ -849,7 +849,7 @@ kendo_module({
                 strokeDashArray: "2, 2",
                 background: "none"
             },
-            rotation: {
+            rotationThumb: {
                 data: "M6.50012,0C8.21795,2.56698e-009 9.78015,0.666358 10.9423,1.75469L11.0482,1.85645L12.6557,0.541992L12.697,6.41699L7,5.16667L8.69918,3.77724L8.68162,3.76281C8.08334,3.28539 7.32506,3 6.50012,3C4.56709,3 3.00006,4.567 3.00006,6.5C3.00006,8.433 4.56709,10 6.50012,10C7.82908,10 8.98505,9.25935 9.57775,8.16831L9.59433,8.13594L12.333,9.37087L12.2891,9.45914C11.2124,11.5613 9.02428,13 6.50012,13C2.9102,13 -7.45058e-008,10.0899 0,6.5C-7.45058e-008,2.91015 2.9102,2.93369e-009 6.50012,0z",
                 y: -50
             },
@@ -876,25 +876,24 @@ kendo_module({
             this.text.position(new Point(0, this._bounds.height + 20));
             this.text.content(kendo.format("x: {0}, y: {1}, w: {2}, h: {3}", Math.round(sb.x), Math.round(sb.y), Math.round(sb.width), Math.round(sb.height)));
             this.visual.position(this._bounds.topLeft());
-            if (this.options.angle) {
-                this.visual.rotate(this.options.angle, new Point(this._bounds.width / 2, this._bounds.height / 2));
+            this._rotateAngle = this.shape.rotate().angle;
+            if (this._rotateAngle) {
+                this.visual.rotate(this._rotateAngle, new Point(this._bounds.width / 2, this._bounds.height / 2));
             }
             this.rect.redraw({width: innerBounds.width, height: innerBounds.height});
-            if (this.rotation) {
-                this._rotationBounds = new Rect(sb.width / 2, sb.y + this.options.rotation.y, 10, 10);
-                this.rotation.redraw({x: sb.width / 2});
+            if (this.rotationThumb) {
+                this._rotationThumbBounds = new Rect(this._bounds.center().x, this._bounds.y + this.options.rotationThumb.y, 0, 0).inflate(10);
+                this.rotationThumb.redraw({x: this._bounds.width / 2 - 5});
             }
         },
         _hitTest: function (p) {
-            var tp = this.diagram.transformPoint(p), thumbBounds,
+            var tp = this.diagram.transformPoint(p),
                 i, hit, handleBounds, handlesCount = this.map.length, handle;
-            if(this.options.angle){
-                //tp.rotate(new Point(this._bounds.width / 2, this._bounds.height / 2), this.options.angle);
-                tp = tp.clone().rotate(this._bounds.center(), this.options.angle);
+            if (this._rotateAngle) {
+                tp = tp.clone().rotate(this._bounds.center(), this._rotateAngle);
             }
             if (this.options.rotatable) {
-                thumbBounds = new Rect(this._bounds.center().x, this._bounds.y + this.options.rotation.y, 0, 0).inflate(8);
-                if (thumbBounds.contains(tp)) {
+                if (this._rotationThumbBounds.contains(tp)) {
                     return new Point(-1, -2);
                 }
             }
@@ -909,7 +908,7 @@ kendo_module({
                     }
                 }
             }
-            if (this._bounds.contains(p)) {
+            if (this._bounds.contains(tp)) {
                 return new Point(0, 0);
             }
         },
@@ -982,15 +981,14 @@ kendo_module({
             return unit;
         },
         move: function (handle, p) {
-            var dtl = new Point(), dbr = new Point(), bounds = this.shape.bounds(), p1 = p;
+            var tp = this.diagram.transformPoint(p),
+                dtl = new Point(), dbr = new Point(), bounds = this.shape.bounds(), p1 = p;
             if (handle.y === -2 && handle.x === -1) {
-                var angle = Math.findAngle(this._bounds.center(), p);
+                var angle = Math.findAngle(this._bounds.center(), tp);
                 this.shape.rotate(angle);
-                this.options.angle = angle;
             } else {
-                if(this.options.angle){
-                    //tp.rotate(new Point(this._bounds.width / 2, this._bounds.height / 2), this.options.angle);
-                    p1 = p.clone().rotate(this._bounds.center(), this.options.angle);
+                if (this._rotateAngle) {
+                    p1 = p.clone().rotate(this._bounds.center(), this._rotateAngle);
                 }
                 if (handle.x === -1 || (handle.x === 0 && handle.y === 0)) {
                     dtl.x = p.x - this._cp.x;
@@ -1010,7 +1008,10 @@ kendo_module({
                 if (br.x - tl.x > 0 && br.y - tl.y > 0 && bounds.width >= this.shape.options.minWidth && bounds.height >= this.shape.options.minHeight) {
                     this._cp = p;
                     this.shape.bounds(bounds);
-                    this.shape.rotate(this.options.angle); // TODO: check this out. Need to rotate the shape with respect to the new bounds.
+                    var rotate = this.shape.rotate();
+                    if (rotate.angle) {
+                        this.shape.rotate(rotate.angle); // TODO: check this out. Need to rotate the shape with respect to the new bounds.
+                    }
                     this.refresh();
                 }
             }

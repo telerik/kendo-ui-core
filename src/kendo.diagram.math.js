@@ -4576,7 +4576,7 @@ kendo_module({
          */
         getTree: function (graph) {
             var root = null;
-            if (this.options.roots.length > 0) {
+            if (this.options.roots && this.options.roots.length > 0) {
                 for (var i = 0, len = graph.nodes.length; i < len; i++) {
                     var node = graph.nodes[i];
                     for (var j = 0, len = this.options.roots.length; j < len; j++) {

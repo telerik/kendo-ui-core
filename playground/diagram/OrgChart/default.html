@@ -5,7 +5,7 @@
     <title>Organization chart</title>
     <style type="text/css">
         html, body {
-            height: 800px;
+            height: 100%;
             color: #444;
             font: 10pt/1 "Hoefler Text", "Georgia", Georgia, serif, sans-serif;
         }
@@ -53,60 +53,53 @@
         #Stage {
             background: #21242c url('images/qfp-bgr.png') no-repeat -400px 0px;
             color: #000;
-            padding-top: 120px;
-            height: 850px;
+            height: 100%;
         }
 
         #TwoPaneBackground {
             background-color: white;
             width: 98%;
-            height: 600px;
+            height: 80%;
             position: absolute;
-
         }
 
         #LeftMenu {
             background: url('images/leftmenu.png') center 0px no-repeat #21242c;
-            width: 300px;
-            height: 600px;
+            width: 30%;
+            height: 100%;
             margin: 0;
-            position: absolute;
-            top: 0px;
-            left: 0px;
+            float: left;
         }
 
         #DiagramBackground {
-
             background: url("images/marketing-bg.jpg") 0 0 no-repeat;
             background-color: white;
             overflow: auto;
-            width: 850px;
-            height: 550px;
-            position: absolute;
-            top: 10px;
-            left: 310px;
+            width: 70%;
+            float: left;
         }
 
         #Logo {
             background: url("images/telerik-logo.png") 0 0 no-repeat;
-            position: absolute;
-            top: 10px;
-            left: 20px;
             width: 150px;
             height: 55px;
+            margin: 10px;
         }
 
         #Title {
             color: #FFF;
             font: 10pt/1 "Hoefler Text", "Georgia", Georgia, serif, sans-serif;
             font-size: 25pt;
-            position: absolute;
-            top: 80px;
-            left: 40px;
+            margin: 10px;
         }
 
         #Menu {
-            margin: 25px;
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        #canvas {
+            height: 100%;
         }
 
         rect {
@@ -147,11 +140,7 @@
     function init() {
         var diagramElement = $("#canvas").kendoDiagram();
         diagram = diagramElement.data("kendoDiagram");
-        diagramElement.css("width", "840");
-        diagramElement.css("height", "540");
         diagramElement.css("background-color", "none");
-
-
     }
 
     function randomOrgChart() {
@@ -187,7 +176,7 @@
             {
                 name: "Nora",
                 image: "images/TRADH.jpg"
-            },
+            }
         ];
 
         function getVisual() {
@@ -210,7 +199,7 @@
             g.append(im);
             var tb = new kendo.diagram.TextBlock({
                 text: person.name,
-                fontSize: 12,
+                fontSize: 16,
                 x: 80,
                 y: 20
             });
