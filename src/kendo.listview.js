@@ -171,10 +171,11 @@ kendo_module({
             if (e && e.action === "itemchange") {
                 if (!that.editable) {
                     data = e.items[0];
-                    idx = $.inArray(data, view);
+                    item = that.items().filter("[" + kendo.attr("uid") + "=" + data.uid + "]");
 
-                    if (idx >= 0) {
-                        that.items().eq(idx).replaceWith(template(data));
+                    if (item.length > 0) {
+                        idx = item.index();
+                        item.replaceWith(template(data));
                         item = that.items().eq(idx);
                         item.attr(kendo.attr("uid"), data.uid);
 
