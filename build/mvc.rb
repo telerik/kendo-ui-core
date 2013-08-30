@@ -21,6 +21,11 @@ MVC_DLL = FileList['Kendo.Mvc.dll']
             .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release/%f')
             .include(MVC_RESOURCES)
 
+MVC3_DLL = FileList['Kendo.Mvc.dll']
+            .include('Kendo.Mvc.xml')
+            .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release-MVC3/%f')
+            .include(MVC_RESOURCES)
+
 # Delete all Kendo*.dll files when `rake clean`
 CLEAN.include(FileList['wrappers/mvc/**/Kendo*.dll'])
 
@@ -32,12 +37,6 @@ CLEAN.include(FileList[MVC_DEMOS_ROOT + 'Content/**/kendo*.css'])
 
 MVC_RAZOR_EDITOR_TEMPLATES = FileList[MVC_DEMOS_ROOT + 'Views/Shared/EditorTemplates/*.cshtml']
 MVC_ASCX_EDITOR_TEMPLATES = FileList[MVC_DEMOS_ROOT + 'Views/Shared/EditorTemplates/*.ascx']
-
-# Satellite assemblies (<culture>\Kendo.Mvc.ressources.dll) depend on Kendo.Mvc.dll
-rule '.resources.dll' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
-
-# XML API documentation depends on Kendo.Mvc.Dll
-rule 'Kendo.Mvc.xml' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
 
 # The list of whils which Kendo.Mvc.Examples.dll depends on
 MVC_DEMOS_SRC = FileList[MVC_DEMOS_ROOT + '**/*.cs']
@@ -193,7 +192,7 @@ namespace :mvc do
     desc('Build ASP.NET MVC binaries')
     task :binaries => [
         'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll',
-        'wrappers/mvc/src/Kendo.Mvc/bin/Release MVC3/Kendo.Mvc.dll',
+        'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC3/Kendo.Mvc.dll',
         MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll',
         'dist/binaries/'
     ]
@@ -207,11 +206,14 @@ if PLATFORM =~ /linux|darwin/ && !ENV['USE_MONO']
          :from => 'dist/binaries/**/Kendo.*.dll',
          :root => 'dist/binaries/'
 else
-    [ "Release", "Release MVC3" ].each do |configuration|
+    [ "Release", "Release-MVC3" ].each do |configuration|
         options = '/p:Configuration="' + configuration + '"'
 
+        output_dir = "wrappers/mvc/src/Kendo.Mvc/bin/#{configuration}"
+        dll_file = "#{output_dir}/Kendo.Mvc.dll"
+
         # Produce Kendo.Mvc.dll by building Kendo.Mvc.csproj
-        file "wrappers/mvc/src/Kendo.Mvc/bin/#{configuration}/Kendo.Mvc.dll" => MVC_WRAPPERS_SRC do |t|
+        file dll_file => MVC_WRAPPERS_SRC do |t|
             msbuild 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj', options
 
             MVC_RESOURCES.each do |resource|
@@ -225,6 +227,12 @@ else
                 end
             end
         end
+
+        # XML API documentation
+        file "#{output_dir}/Kendo.Mvc.xml" => dll_file
+
+        # Satellite assemblies (<culture>\Kendo.Mvc.ressources.dll) depend on Kendo.Mvc.dll
+        rule "#{output_dir}/**/*.resources.dll" => dll_file
     end
 
     # Produce Kendo.Mvc.Examples.dll by building Kendo.Mvc.Examples.csproj
