@@ -51,9 +51,9 @@
     <NoWarn>1591</NoWarn>
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug MVC3|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug-MVC3|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug MVC3\</OutputPath>
+    <OutputPath>bin\Debug-MVC3\</OutputPath>
     <DefineConstants>TRACE;DEBUG;MVC3</DefineConstants>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>full</DebugType>
@@ -64,8 +64,8 @@
     <CodeAnalysisRules>-Microsoft.Design#CA1006;-Microsoft.Design#CA1004</CodeAnalysisRules>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release MVC3|AnyCPU' ">
-    <OutputPath>bin\Release MVC3\</OutputPath>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release-MVC3|AnyCPU' ">
+    <OutputPath>bin\Release-MVC3\</OutputPath>
     <DefineConstants>TRACE;MVC3;</DefineConstants>
     <DocumentationFile>bin\Release\Kendo.Mvc.xml</DocumentationFile>
     <Optimize>true</Optimize>
@@ -123,7 +123,7 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Debug MVC3|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release MVC3|AnyCPU'">
+  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-MVC3|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release-MVC3|AnyCPU'">
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <Private>True</Private>
     </Reference>

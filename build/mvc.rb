@@ -223,7 +223,7 @@ else
                     obj = "wrappers/mvc/src/Kendo.Mvc/obj/#{configuration}/Kendo.Mvc.Resources.Messages.#{culture}.resources";
                     key = 'wrappers/mvc/src/shared/Kendo.snk'
 
-                    sh "al /t:lib /embed:'#{obj}' /culture:#{culture} /out:#{resource} /template:'#{t.name}' /keyfile:#{key}", :verbose => VERBOSE
+                    sh "al /t:lib /embed:#{obj} /culture:#{culture} /out:#{resource} /template:#{t.name} /keyfile:#{key}", :verbose => VERBOSE
                 end
             end
         end
