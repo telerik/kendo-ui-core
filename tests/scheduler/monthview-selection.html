@@ -741,8 +741,8 @@
 
                 var slot = view.groups[0].firstSlot();
 
-                equal(selection.start.getTime(), slot.start);
-                equal(selection.end.getTime(), slot.end);
+                deepEqual(selection.start, slot.startDate());
+                deepEqual(selection.end, slot.endDate());
             });
 
             test("view move doesn't modify the selection if range selection is out of current view", function() {

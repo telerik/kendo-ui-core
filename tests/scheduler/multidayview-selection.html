@@ -97,8 +97,8 @@
 
                 var slot = view.groups[0].firstSlot();
 
-                equal(selection.start.getTime(), slot.start);
-                equal(selection.end.getTime(), slot.end);
+                deepEqual(selection.start, slot.startDate());
+                deepEqual(selection.end, slot.endDate());
             });
 
             test("View selects cell", function() {

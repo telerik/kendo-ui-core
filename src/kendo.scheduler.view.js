@@ -970,8 +970,8 @@ kendo_module({
                 var slot = this.groups[0].firstSlot();
 
                 selection.isAllDay = slot.isDaySlot;
-                selection.start = new Date(slot.start);
-                selection.end = new Date(slot.end);
+                selection.start = slot.startDate();
+                selection.end = slot.endDate();
             }
         },
 
