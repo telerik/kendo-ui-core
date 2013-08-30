@@ -10,7 +10,6 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        keys = kendo.keys,
         setTime = kendo.date.setTime,
         SchedulerView = ui.SchedulerView,
         extend = $.extend,
@@ -1410,111 +1409,49 @@ kendo_module({
             this.content.add(this.datesHeader).find(".k-state-selected").removeClass("k-state-selected");
         },
 
-        move: function(selection, key, shift) {
-            var start = selection.start;
-            var end = selection.end;
-            var daySlot = selection.isAllDay;
-
-            var handled = false;
-            var backward = selection.backward;
-            var groupIndex = selection.groupIndex;
-            var vertical = this._isVerticallyGrouped();
-            var group = this.groups[groupIndex];
-            var ranges = group.ranges(selection.start, selection.end, daySlot, false);
+        _updateDirection: function(selection, ranges, multiple, reverse, vertical) {
+            var isDaySlot = selection.isAllDay;
             var startSlot = ranges[0].start;
             var endSlot = ranges[ranges.length - 1].end;
-            var method, reverse;
 
-            if (key === keys.DOWN || key === keys.UP) {
-                reverse = key === keys.UP;
-                method = reverse ? "upSlot" : "downSlot";
-
-                if (shift) {
-                    if (!daySlot && startSlot.index === endSlot.index && startSlot.collectionIndex === endSlot.collectionIndex) {
-                        backward = reverse;
+            if (multiple) {
+                if (vertical) {
+                    if (!isDaySlot &&
+                        startSlot.index === endSlot.index &&
+                        startSlot.collectionIndex === endSlot.collectionIndex) {
+                            selection.backward = reverse;
                     }
-                } else if (reverse) {
-                    endSlot = startSlot;
                 } else {
-                    startSlot = endSlot;
-                }
-
-                startSlot = group[method](startSlot, shift);
-                endSlot = group[method](endSlot, shift);
-
-                if (!shift && vertical && (!startSlot || !endSlot)) {
-                    method = reverse ? "prevGroupSlot" : "nextGroupSlot";
-
-                    startSlot = endSlot = this[method](start, groupIndex, daySlot);
-
-                    if (startSlot) {
-                        groupIndex += (reverse ? -1 : 1);
+                    if ((isDaySlot && startSlot.index === endSlot.index) ||
+                        (!isDaySlot && startSlot.collectionIndex === endSlot.collectionIndex)) {
+                            selection.backward = reverse;
                     }
                 }
-
-                handled = true;
-            } else if (key === keys.LEFT || key === keys.RIGHT) {
-                reverse = key === keys.LEFT;
-                method = reverse ? "leftSlot" : "rightSlot";
-
-                if (shift && (daySlot && startSlot.index === endSlot.index) || (!daySlot && startSlot.collectionIndex === endSlot.collectionIndex)) {
-                    backward = reverse;
-                }
-
-                startSlot = group[method](startSlot);
-                endSlot = group[method](endSlot);
-
-                if (!shift && (!startSlot || !endSlot)) {
-                    if (!vertical) {
-                        method = reverse ? "prevGroupSlot" : "nextGroupSlot";
-
-                        startSlot = endSlot = this[method](start, groupIndex, daySlot);
-
-                        if (startSlot) {
-                            groupIndex += (reverse ? -1 : 1);
-                        }
-                    }
-
-                    if (!startSlot) {
-                        var date = reverse ? this.previousDate() : this.nextDate();
-
-                        selection.start = new Date(date);
-                        selection.end = new Date(date);
-
-                        var endMilliseconds = daySlot ? MS_PER_DAY : getMilliseconds(end);
-
-                        setTime(selection.start, getMilliseconds(start));
-                        setTime(selection.end, endMilliseconds);
-                        startSlot = endSlot = null;
-
-                        if (!vertical) {
-                            groupIndex = reverse ? this.groups.length - 1 : 0;
-                        }
-                    }
-                }
-
-                handled = true;
             }
+        },
 
-            if (handled) {
-                if (shift) {
-                    if (backward && startSlot) {
-                        selection.start = startSlot.startDate();
-                    } else if (!backward && endSlot) {
-                        selection.end = endSlot.endDate();
-                    }
-                } else if (startSlot && endSlot) {
-                    selection.isAllDay = startSlot.isDaySlot;
-                    selection.start = startSlot.startDate();
-                    selection.end = endSlot.endDate();
+        _changeViewPeriod: function(selection, reverse, vertical) {
+            if (!vertical) {
+                var date = reverse ? this.previousDate() : this.nextDate();
+                var start = selection.start;
+                var end = selection.end;
+
+                selection.start = new Date(date);
+                selection.end = new Date(date);
+
+                var endMilliseconds = selection.isAllDay ? MS_PER_DAY : getMilliseconds(end);
+
+                setTime(selection.start, getMilliseconds(start));
+                setTime(selection.end, endMilliseconds);
+
+                if (!this._isVerticallyGrouped()) {
+                    selection.groupIndex = reverse ? this.groups.length - 1 : 0;
                 }
 
                 selection.events = [];
-                selection.backward = backward;
-                selection.groupIndex = groupIndex;
-            }
 
-            return handled;
+                return true;
+            }
         }
     });
 
