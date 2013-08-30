@@ -765,6 +765,12 @@ kendo_module({
                         that.editEvent(selection.events[0]);
                     }
                 } else if (editable.create !== false) {
+                    if (selection.isAllDay) {
+                        selection = $.extend({}, selection, {
+                            end: kendo.date.addDays(selection.end, -1)
+                        });
+                    }
+
                     that.addEvent(selection);
                 }
             } else if (key === keys.DELETE) {

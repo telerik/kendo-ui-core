@@ -413,13 +413,19 @@
             test("enter key adds an all-day event in all-day selection", function() {
                 stub(scheduler, "addEvent");
 
-                $.extend(scheduler._selection, { isAllDay: true, start: now, end: now });
+                var start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                var end = kendo.date.addDays(start, 1);
+
+                $.extend(scheduler._selection, { isAllDay: true, start: start, end: end });
 
                 keydown(keys.ENTER);
 
                 var eventInfo = scheduler.args("addEvent")[0];
                 equal(scheduler.calls("addEvent"), 1);
                 ok(eventInfo.isAllDay);
+
+                deepEqual(eventInfo.start, start);
+                deepEqual(eventInfo.end, start);
             });
 
             test("enter key does not add event in view with editable=false", function() {
