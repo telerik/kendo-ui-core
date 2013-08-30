@@ -37,7 +37,7 @@
             }
 
             // ------------------------------------------------------------
-            module("Funnel Chart", {
+            module("dependOn none", {
                 setup: function() {
                     createChart({
                         series: [{
@@ -79,6 +79,127 @@
             test("Creates segments for data points", function() {
                 equal(chart.segments.length, chart.options.series[0].data.length);
             });
+
+            module("dependOn height", {
+                setup: function() {
+                    createChart({
+                        dependOn:"height",
+                        series: [{
+                            type: "funnel",
+                            data: [{
+                                value: 1,
+                                category: "A",
+                            }, {
+                                value: 2,
+                                category: "B"
+                            }, {
+                                value: 3,
+                                category: "C"
+                            }]
+                        }]
+                    });
+                }
+            });
+
+            test("First segment position", function() {
+                arrayClose(mapPoints(chart.segments[0].points), [
+                    [0, 0], [800, 0], [753, 100], [46, 100]
+                ], TOLERANCE);
+            });
+
+            test("Second segment position", function() {
+                arrayClose(mapPoints(chart.segments[1].points), [
+                    [46, 100], [753, 100], [660, 300], [140, 300]
+                ], TOLERANCE);
+            });
+
+            test("Third segment position", function() {
+                arrayClose(mapPoints(chart.segments[2].points), [
+                    [140,300], [660, 300], [520, 600], [280, 600]
+                ], TOLERANCE);
+            });
+
+            module("max neckSize", {
+                setup: function() {
+                    createChart({
+                        dependOn:"height",
+                        neckSize: 1,
+                        series: [{
+                            type: "funnel",
+                            data: [{
+                                value: 1,
+                                category: "A",
+                            }, {
+                                value: 2,
+                                category: "B"
+                            }, {
+                                value: 3,
+                                category: "C"
+                            }]
+                        }]
+                    });
+                }
+            });
+
+            test("First segment position", function() {
+                arrayClose(mapPoints(chart.segments[0].points), [
+                    [0, 0], [800, 0], [800, 100], [0, 100]
+                ], TOLERANCE);
+            });
+
+            test("Second segment position", function() {
+                arrayClose(mapPoints(chart.segments[1].points), [
+                    [0, 100], [800, 100], [800, 300], [0, 300]
+                ], TOLERANCE);
+            });
+
+            test("Third segment position", function() {
+                arrayClose(mapPoints(chart.segments[2].points), [
+                    [0, 300], [800, 300], [800, 600], [0, 600]
+                ], TOLERANCE);
+            });
+
+            module("min neckSize", {
+                setup: function() {
+                    createChart({
+                        dependOn:"height",
+                        neckSize: 0,
+                        series: [{
+                            type: "funnel",
+                            data: [{
+                                value: 1,
+                                category: "A",
+                            }, {
+                                value: 2,
+                                category: "B"
+                            }, {
+                                value: 3,
+                                category: "C"
+                            }]
+                        }]
+                    });
+                }
+            });
+
+            test("First segment position", function() {
+                arrayClose(mapPoints(chart.segments[0].points), [
+                    [0, 0], [800, 0], [733, 100], [66, 100]
+                ], TOLERANCE);
+            });
+
+            test("Second segment position", function() {
+                arrayClose(mapPoints(chart.segments[1].points), [
+                    [66, 100], [733, 100], [600, 300], [200, 300]
+                ], TOLERANCE);
+            });
+
+            test("Third segment position", function() {
+                arrayClose(mapPoints(chart.segments[2].points), [
+                    [200, 300], [600, 300], [400, 600], [400, 600]
+                ], TOLERANCE);
+            });
+
+            module("Series setup")
 
             test("sets point owner", function() {
                 ok(chart.segments[0].owner === chart);
