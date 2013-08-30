@@ -859,9 +859,9 @@ kendo_module({
                     l = new diagram.TreeLayout(this);
                     break;
 
-                /*  case diagram.LayoutTypes.LayeredLayout:
+                 case diagram.LayoutTypes.LayeredLayout:
                  l = new diagram.LayeredLayout(this);
-                 break;*/
+                 break;
 
                 case diagram.LayoutTypes.ForceDirectedLayout:
                     l = new diagram.SpringLayout(this);

@@ -410,6 +410,16 @@ test('all', function () {
 
 });
 
+test('first', function () {
+    var ar = [1,2,3,,11];
+    equal(ar.first(),1);
+    var objs = [{name: "A", age:33},{name:"D", age:12},{name:"B", age:34},{name: "C",age:47}, {name:"B", age: 61}];
+    var b = objs.first(function (d) {
+        return d.name=="B";
+    });
+    equal(b.age,34);
+});
+
 test("Range test", function () {
     var r = new Range(10, 20);
     ok(r.length == 11, "Should have length 11.");
@@ -682,6 +692,25 @@ test('Link basics', function () {
     ok(clone.id != l.id, "The cloned link should not have the same identifier.");
     ok(clone.source == l.source);
     ok(clone.target == l.target);
+
+    var otherTo = new Node("to2");
+    var otherLink = new Link(from, otherTo);
+    var common = l.getCommonNode(otherLink);
+    ok(common != null);
+    ok(common.id == from.id);
+
+    ok(otherLink.isBridging(from, otherTo));
+    ok(l.isBridging(from, to));
+
+    ok(l.incidentWith(from));
+    ok(!l.incidentWith(otherTo));
+    ok(otherLink.incidentWith(otherTo));
+
+    ok(l.adjacentTo(otherLink));
+
+    l.changeTarget(otherTo);
+    ok(l.target.id == otherTo.id);
+    ok(l.isBridging(from, otherTo));
 });
 
 test('Graph basics', function () {
@@ -1332,7 +1361,7 @@ test('Graph to diagram', function () {
     var d = diagramElement.data("kendoDiagram");
     d.canvas.native.setAttribute("height", "1000");
     // converting a Graph to a diagram (with internal spring layout to please the eyes)
-    GraphUtils.createDiagramFromGraph(d, g,false);
+    GraphUtils.createDiagramFromGraph(d, g, false);
     d.layout(kendo.diagram.LayoutTypes.ForceDirectedLayout,
         {
             iterations: 300,
@@ -1587,3 +1616,15 @@ testSkip('Varying shape size layout', function () {
     ok(true);
 });
 
+test('Layered layout', function () {
+    var div = GetRoot();
+    var diagramElement = $("#canvas").kendoDiagram();
+    var diagram = diagramElement.data("kendoDiagram");
+    diagram.canvas.native.setAttribute("height", "1000");
+    diagram.randomDiagram(50, 3, true);
+
+    var root = diagram.getId("0");
+    diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout);
+    diagram.zoom(0.5);
+    ok(true);
+});

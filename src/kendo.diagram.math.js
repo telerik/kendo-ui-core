@@ -1273,10 +1273,10 @@ kendo_module({
          * Returns the overlap of the current link with the given one, if any.
          */
         getCommonNode: function (link) {
-            if (this.source == link.souce || this.source == link.target) {
+            if (this.source == link.source || this.source == link.target) {
                 return this.source;
             }
-            if (this.target == link.souce || this.target == link.target) {
+            if (this.target == link.source || this.target == link.target) {
                 return this.target;
             }
             return null;
@@ -4576,7 +4576,7 @@ kendo_module({
          */
         getTree: function (graph) {
             var root = null;
-            if (this.options.roots && this.options.roots.length > 0) {
+            if (this.options.roots.length > 0) {
                 for (var i = 0, len = graph.nodes.length; i < len; i++) {
                     var node = graph.nodes[i];
                     for (var j = 0, len = this.options.roots.length; j < len; j++) {
@@ -4779,19 +4779,6 @@ Math.sign = function (number) {
     return number ? number < 0 ? -1 : 1 : 0;
 };
 Math.epsilon = 0.000001;
-
-//TODO: Move them to another object. Maybe some kind of Utils.
-Math.findRadian = function(start, end){
-    if (start == end) return 0;
-    var sngXComp = end.x - start.x,
-        sngYComp = start.y - end.y,
-        atan =Math.atan(sngXComp / sngYComp);
-    if (sngYComp >= 0) return sngXComp < 0 ? atan + (2 * Math.PI) : atan;
-    return atan + Math.PI;
-};
-Math.findAngle = function (center, end) {
-    return Math.findRadian(center, end) * 180 / Math.PI;
-};
 /*-------------------Diverse utilities----------------------------*/
 
 isDefined = function (obj) {
