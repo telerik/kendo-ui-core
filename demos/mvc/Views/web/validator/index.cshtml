@@ -1,6 +1,6 @@
 
         <div id="example" class="k-content">
-        <div id="tickets">
+        <form id="tickets">
             <h3>Book Tickets</h3>
             <ul>
                 <li>
@@ -44,7 +44,7 @@
                 <li class="status">
                 </li>
             </ul>
-        </div>
+        </form>
 
             <style scoped>
 
@@ -130,7 +130,8 @@
                     var validator = $("#tickets").kendoValidator().data("kendoValidator"),
                     status = $(".status");
 
-                    $("button").click(function() {
+                    $("form").submit(function(event) {
+                        event.preventDefault();
                         if (validator.validate()) {
                             status.text("Hooray! Your tickets has been booked!")
                                 .removeClass("invalid")
