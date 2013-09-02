@@ -1029,7 +1029,7 @@ kendo_module({
             var startIndex = slotRange.start.index;
             var endIndex = slotRange.end.index;
 
-            var allDayEvents = SchedulerView.collidingHorizontallyEvents(slotRange.events(), startIndex, endIndex);
+            var allDayEvents = SchedulerView.collidingEvents(slotRange.events(), startIndex, endIndex);
 
             var currentColumnCount = this._headerColumnCount || 0;
 

@@ -502,7 +502,7 @@ kendo_module({
             var startIndex = slotRange.start.index;
             var endIndex = slotRange.end.index;
             var eventCount = startSlot.eventCount;
-            var events = SchedulerView.collidingHorizontallyEvents(slotRange.events(), startIndex, endIndex);
+            var events = SchedulerView.collidingEvents(slotRange.events(), startIndex, endIndex);
             var rightOffset = startIndex !== endIndex ? 5 : 4;
 
             events.push({element: element, start: startIndex, end: endIndex });

@@ -1596,11 +1596,7 @@ kendo_module({
         }
     });
 
-    function collidingHorizontallyEvents(elements, start, end) {
-        return collidingEvents(elements, start, end, true);
-    }
-
-    function collidingEvents(elements, start, end, isHorizontal) {
+    function collidingEvents(elements, start, end) {
         var idx,
             index,
             startIndex,
@@ -1612,7 +1608,7 @@ kendo_module({
             startIndex = index.start;
             endIndex = index.end;
 
-            overlaps = isHorizontal ? (startIndex <= start && endIndex >= start) : (startIndex < start && endIndex > start);
+            overlaps = startIndex <= start && endIndex >= start;
 
             if (overlaps || (startIndex >= start && endIndex <= end) || (start <= startIndex && end >= startIndex)) {
                 if (startIndex < start) {
@@ -1736,7 +1732,6 @@ kendo_module({
         createRows: createRows,
         rangeIndex: rangeIndex,
         collidingEvents: collidingEvents,
-        collidingHorizontallyEvents: collidingHorizontallyEvents,
         groupEqFilter: groupEqFilter
     });
 
