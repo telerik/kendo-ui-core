@@ -553,17 +553,27 @@ kendo_module({
     var Group = Element.extend({
         init: function (options) {
             Element.fn.init.call(this, document.createElementNS(SVGNS, "g"), options);
-            this.children = [];
         },
         append: function (visual) {
             this.native.appendChild(visual.native);
             visual.canvas = this.canvas;
-            this.children.push(visual);
         },
         remove: function (visual) {
             this.native.removeChild(visual.native);
-            var index = this.children.indexOf(visual);
-            this.children.splice(index, 1);
+        },
+        bringToFront: function (visuals) {
+            var visual, i;
+            for (i = 0; i < visuals.length; i++) {
+                visual = visuals[i];
+                this.native.appendChild(visual.native);
+            }
+        },
+        sendToBack: function (visuals) {
+            var visual, i;
+            for (i = 0; i < visuals.length; i++) {
+                visual = visuals[i];
+                this.native.insertBefore(visual.native, this.native.firstChild);
+            }
         }
     });
 
@@ -674,7 +684,7 @@ kendo_module({
         insertBefore: function (visual, beforeVisual) {
             this.native.insertBefore(visual.native, beforeVisual.native);
             visual.canvas = this;
-            this.Visuals.push(visual);
+            this.visuals.push(visual);
             return this;
         },
         ensureDefsNode: function () {
@@ -720,7 +730,7 @@ kendo_module({
             this.markers = [];
         },
         clearGradients: function () {
-            if (this.gradients.length == 0) {
+            if (this.gradients.length === 0) {
                 return;
             }
             for (var i = 0; i < this.gradients.length; i++) {
@@ -757,4 +767,5 @@ kendo_module({
         TextBlockEditor: TextBlockEditor,
         Image: Image
     });
-})(window.kendo.jQuery);
+})
+    (window.kendo.jQuery);

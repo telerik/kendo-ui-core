@@ -634,7 +634,7 @@ kendo_module({
             }
 
             // shapes
-            for (i = 0; i < d.shapes.length; i++) {
+            for (i = d.shapes.length - 1; i >= 0; i--) {
                 item = d.shapes[i];
                 hit = item._hitTest(point);
                 if (hit) {
@@ -642,7 +642,7 @@ kendo_module({
                 }
             }
             // connections
-            for (i = 0; i < d.connections.length; i++) {
+            for (i = d.connections.length - 1; i >= 0; i--) {
                 item = d.connections[i];
                 if (item._hitTest(point)) {
                     return item;

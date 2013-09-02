@@ -108,6 +108,8 @@
         <!--<span class="menu-text">Rotate selection:</span><input id="rotateShape"/>-->
         <span class="menu-text">Layout:</span><input id="Layouts" value="1"/>
         <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
+        <input type="button" class="diagramCommandBtn" id="bringButton" title="Bring to Front" value="Bring to Front"/>
+        <input type="button" class="diagramCommandBtn" id="sendBackButton" title="Send to Back" value="Send to Back"/>
     </div>
     <div id="splitter">
         <div id="toolBoxDiv">
@@ -299,7 +301,12 @@ $(function () {
     $("#selectAllButton").click(function (e) {
         diagram.select(true);
     });
-
+    $("#bringButton").click(function (e) {
+        diagram.bringToFront();
+    });
+    $("#sendBackButton").click(function (e) {
+        diagram.sendToBack();
+    });
     $("#layoutButton").click(function (e) {
         diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                 {
