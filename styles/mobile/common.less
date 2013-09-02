@@ -1858,6 +1858,7 @@
     -webkit-transform: none;
 }
 
+/* Fix for the buggy position:absolute, transforms and scrolling in Chrome */
 .km-native-scrolling .km-view
 {
     position: relative;
@@ -1868,6 +1869,7 @@
     min-height: auto;
 }
 
+/* Restore position:absolute during animation */
 .km-native-scrolling [style*=pointer-events] .km-view
 {
     position: absolute;
