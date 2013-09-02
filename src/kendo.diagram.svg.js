@@ -285,7 +285,7 @@ kendo_module({
 
             if (svg.parentNode)//bounding box exists only when the node is part of the DOM tree
             {
-                return svg.getBBox();
+                return svg.getBoundingClientRect();
             }
             else {
                 return new Rect();
@@ -427,9 +427,24 @@ kendo_module({
             Visual.fn.init.call(that, document.createElementNS(SVGNS, "path"), options);
         },
         size: function () {
-            var x = this.options.width / 100 || 1,
-                y = this.options.height / 100 || 1;
-            var transform = new CompositeTransform(this.options.x, this.options.y, x, y);
+            if (!this.oWidth || !this.oHeight) {
+                try {
+                    var box = this.native.getBoundingClientRect();
+                    this.oWidth = box.width;
+                    this.oHeight = box.height;
+                }
+                catch (e) {
+                }
+            }
+            var scaleX = this.options.width / this.oWidth,
+                scaleY = this.options.height / this.oHeight,
+                x = this.options.x || 0,
+                y = this.options.y || 0;
+
+            scaleX = isNumber(scaleX) ? scaleX : 1;
+            scaleY = isNumber(scaleY) ? scaleY : 1;
+
+            var transform = new CompositeTransform(x, y, scaleX, scaleY);
             this.native.setAttribute("transform", transform.toString());
         },
         redraw: function (options) {

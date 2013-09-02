@@ -111,14 +111,18 @@ kendo_module({
                     this.contentVisual = undefined;
                 }
                 else {
-                    this.contentVisual = new TextBlock(deepExtend({
+                    var bounds = this.bounds();
+                    this.contentVisual = new TextBlock({
                         text: content.toString(),
-                        align: "center middle"
-                    }, this.bounds()));
+                        align: "center middle",
+                        x: bounds.x,
+                        y: bounds.y,
+                        width: bounds.width,
+                        height: bounds.height
+                    });
 
                     this.visual.append(this.contentVisual);
                     this.contentVisual.redraw();
-
                     this.refresh();
                 }
             }
@@ -326,7 +330,10 @@ kendo_module({
                 case "circle":
                     return new Circle(shapeOptions);
                 default:
-                    return new Path(shapeOptions);
+                    var p = new Path(shapeOptions);
+                    p.oWidth = shapeOptions.width;
+                    p.oHeight = shapeOptions.height;
+                    return p;
             }
         }
         else {// custom template
