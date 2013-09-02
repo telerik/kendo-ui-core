@@ -207,6 +207,10 @@ if PLATFORM =~ /linux|darwin/ && !ENV['USE_MONO']
     tree :to => 'wrappers/mvc',
          :from => 'dist/binaries/**/Kendo.*.dll',
          :root => 'dist/binaries/'
+
+    tree :to => 'wrappers/mvc',
+         :from => 'dist/binaries/**/Kendo.*.xml',
+         :root => 'dist/binaries/'
 else
     [ "Release", "Release-MVC3" ].each do |configuration|
         options = '/p:Configuration="' + configuration + '"'
@@ -245,6 +249,10 @@ else
 
     tree :to => 'dist/binaries/',
          :from => 'wrappers/mvc/**/Kendo.*.dll',
+         :root => 'wrappers/mvc/'
+
+    tree :to => 'dist/binaries/',
+         :from => 'wrappers/mvc/**/Kendo.*.xml',
          :root => 'wrappers/mvc/'
 end
 
