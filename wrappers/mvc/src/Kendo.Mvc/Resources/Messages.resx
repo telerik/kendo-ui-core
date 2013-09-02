@@ -651,4 +651,10 @@
   <data name="Scheduler_ShowWorkDay" xml:space="preserve">
     <value>Show business hours</value>
   </data>
+  <data name="Upload_HeaderStatusUploaded" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Upload_HeaderStatusUploading" xml:space="preserve">
+    <value>Uploading...</value>
+  </data>
 </root>

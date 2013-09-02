@@ -22,6 +22,10 @@ namespace Kendo.Mvc.UI
 
         string UploadSelectedFiles { get; set; }
 
+        string HeaderStatusUploading { get; set; }
+
+        string HeaderStatusUploaded { get; set; }
+
         IDictionary<string, object> ToJson();
     }
 }

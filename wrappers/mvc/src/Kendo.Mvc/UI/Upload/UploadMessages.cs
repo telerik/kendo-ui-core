@@ -25,6 +25,10 @@ namespace Kendo.Mvc.UI
 
         private const string DefaultUploadSelectedFiles = "Upload files";
 
+        private const string DefaultHeaderStatusUploading = "Uploading...";
+
+        private const string DefaultHeaderStatusUploaded = "Done";
+
         public UploadMessages()
         {
             Cancel = Messages.Upload_Cancel;
@@ -36,6 +40,8 @@ namespace Kendo.Mvc.UI
             StatusUploaded = Messages.Upload_StatusUploaded;
             StatusUploading = Messages.Upload_StatusUploading;
             UploadSelectedFiles = Messages.Upload_UploadSelectedFiles;
+            HeaderStatusUploading = Messages.Upload_HeaderStatusUploading;
+            HeaderStatusUploaded = Messages.Upload_HeaderStatusUploaded;
         }
 
         public string Cancel { get; set; }
@@ -56,6 +62,10 @@ namespace Kendo.Mvc.UI
 
         public string UploadSelectedFiles { get; set; }
 
+        public string HeaderStatusUploading { get; set; }
+
+        public string HeaderStatusUploaded { get; set; }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             FluentDictionary.For(json)
@@ -67,7 +77,9 @@ namespace Kendo.Mvc.UI
                 .Add("statusFailed", StatusFailed, DefaultStatusFailed)
                 .Add("statusUploaded", StatusUploaded, DefaultStatusUploaded)
                 .Add("statusUploading", StatusUploading, DefaultStatusUploading)
-                .Add("uploadSelectedFiles", UploadSelectedFiles, DefaultUploadSelectedFiles);
+                .Add("uploadSelectedFiles", UploadSelectedFiles, DefaultUploadSelectedFiles)
+                .Add("headerStatusUploading", HeaderStatusUploading, DefaultHeaderStatusUploading)
+                .Add("headerStatusUploaded", HeaderStatusUploaded, DefaultHeaderStatusUploaded);
         }
     }
 }

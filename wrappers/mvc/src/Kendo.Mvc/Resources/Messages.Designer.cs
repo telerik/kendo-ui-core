@@ -1600,6 +1600,24 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Done.
+        /// </summary>
+        public static string Upload_HeaderStatusUploaded {
+            get {
+                return ResourceManager.GetString("Upload_HeaderStatusUploaded", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Uploading....
+        /// </summary>
+        public static string Upload_HeaderStatusUploading {
+            get {
+                return ResourceManager.GetString("Upload_HeaderStatusUploading", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
         public static string Upload_Remove {

@@ -197,6 +197,48 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the "uploading" header status text accessible by screen readers
+        /// </summary>
+        /// <param name="headerStatusUploadingMessage">New "header uploading" status text accessible by screen readers.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Upload()
+        ///             .Name("Upload")
+        ///             .Messages(msgs => msgs
+        ///                 .HeaderStatusUploading("header uploading")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public UploadMessagesBuilder HeaderStatusUploading(string headerStatusUploadingMessage)
+        {
+            messages.HeaderStatusUploading = headerStatusUploadingMessage;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the "uploaded" header status text accessible by screen readers
+        /// </summary>
+        /// <param name="headerStatusUploadedMessage">New "header uploaded" status text accessible by screen readers.</param>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Upload()
+        ///             .Name("Upload")
+        ///             .Messages(msgs => msgs
+        ///                 .HeaderStatusUploaded("header uploaded")
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public UploadMessagesBuilder HeaderStatusUploaded(string headerStatusUploadedMessage)
+        {
+            messages.HeaderStatusUploaded = headerStatusUploadedMessage;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets Upload button (visible when AutoUpload is set to false) text
         /// </summary>
         /// <param name="uploadSelectedFilesMessage">New Upload button text.</param>
