@@ -1447,7 +1447,15 @@
       <Visible>false</Visible>
     </Mvc3References>
   </ItemGroup>
-  <Target Name="BeforeBuild">
+  <ItemGroup>
+    <Mvc4References Include="..\..\references\mvc4\*.dll">
+      <Visible>false</Visible>
+    </Mvc4References>
+  </ItemGroup>
+  <Target Name="BeforeBuild" Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <Copy SkipUnchangedFiles="true" SourceFiles="@(Mvc4References)" DestinationFolder="$(OutputPath)" />
+  </Target>
+  <Target Name="BeforeBuild" Condition="'$(Configuration)|$(Platform)' == 'Debug-MVC3|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release-MVC3|AnyCPU'">
     <Copy SkipUnchangedFiles="true" SourceFiles="@(Mvc3References)" DestinationFolder="$(OutputPath)" />
   </Target>
   <ItemGroup>
