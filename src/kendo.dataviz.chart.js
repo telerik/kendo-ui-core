@@ -4413,15 +4413,7 @@ kendo_module({
         }
     });
 
-    var AreaSegment = LineSegment.extend({
-        init: function(linePoints, stackPoints, currentSeries, seriesIx) {
-            var segment = this;
-
-            segment.stackPoints = stackPoints;
-
-            LineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx);
-        },
-
+    var AreaSegmentMixin = {
         points: function() {
             var segment = this,
                 chart = segment.parent,
@@ -4433,7 +4425,7 @@ kendo_module({
                 categoryAxisLineBox = categoryAxis.lineBox(),
                 end = invertAxes ? categoryAxisLineBox.x1 : categoryAxisLineBox.y1,
                 stackPoints = segment.stackPoints,
-                points = LineSegment.fn.points.call(segment, stackPoints),
+                points = segment._points(stackPoints),
                 pos = invertAxes ? X : Y,
                 firstPoint, lastPoint;
 
@@ -4460,7 +4452,7 @@ kendo_module({
                 defaults = series._defaults,
                 color = series.color,
                 lineOptions,
-                linePoints = LineSegment.fn.points.call(segment),
+                linePoints = segment._points(),
                 areaPoints = segment.points();
 
             ChartElement.fn.getViewElements.call(segment, view);
@@ -4496,7 +4488,22 @@ kendo_module({
                 })
             ];
         }
+    };
+
+    var AreaSegment = LineSegment.extend({
+        init: function(linePoints, stackPoints, currentSeries, seriesIx) {
+            var segment = this;
+
+            segment.stackPoints = stackPoints;
+
+            LineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx);
+        },
+
+        _points: function(stackPoints) {
+            return LineSegment.fn.points.call(this, stackPoints);
+        }
     });
+    deepExtend(AreaSegment.fn, AreaSegmentMixin);
 
     var AreaChart = LineChart.extend({
         createSegment: function(linePoints, currentSeries, seriesIx, prevSegment) {
@@ -4522,84 +4529,14 @@ kendo_module({
 
             segment.stackPoints = stackPoints;
 
-            LineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx);
+            StepLineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx);
         },
 
-        points: function() {
-            var segment = this,
-                chart = segment.parent,
-                plotArea = chart.plotArea,
-                invertAxes = chart.options.invertAxes,
-                valueAxis = chart.seriesValueAxis(segment.series),
-                valueAxisLineBox = valueAxis.lineBox(),
-                categoryAxis = plotArea.seriesCategoryAxis(segment.series),
-                categoryAxisLineBox = categoryAxis.lineBox(),
-                end = invertAxes ? categoryAxisLineBox.x1 : categoryAxisLineBox.y1,
-                stackPoints = segment.stackPoints,
-                points = StepLineSegment.fn.points.call(segment, stackPoints),
-                pos = invertAxes ? X : Y,
-                firstPoint, lastPoint;
-
-            end = limitValue(end, valueAxisLineBox[pos + 1], valueAxisLineBox[pos + 2]);
-            if (!segment.stackPoints && points.length > 1) {
-                firstPoint = points[0];
-                lastPoint = last(points);
-
-                if (invertAxes) {
-                    points.unshift(Point2D(end, firstPoint.y));
-                    points.push(Point2D(end, lastPoint.y));
-                } else {
-                    points.unshift(Point2D(firstPoint.x, end));
-                    points.push(Point2D(lastPoint.x, end));
-                }
-            }
-
-            return points;
-        },
-
-        getViewElements: function(view) {
-            var segment = this,
-                series = segment.series,
-                defaults = series._defaults,
-                color = series.color,
-                lineOptions,
-                linePoints = StepLineSegment.fn.points.call(segment),
-                areaPoints = segment.points();
-
-            ChartElement.fn.getViewElements.call(segment, view);
-
-            if (isFn(color) && defaults) {
-                color = defaults.color;
-            }
-
-            lineOptions = deepExtend({
-                    color: color,
-                    opacity: series.opacity
-                }, series.line
-            );
-
-            return [
-                view.createPolyline(areaPoints, false, {
-                    id: segment.options.id,
-                    fillOpacity: series.opacity,
-                    fill: color,
-                    stack: series.stack,
-                    data: { modelId: segment.options.modelId },
-                    zIndex: -1
-                }),
-                view.createPolyline(linePoints, false, {
-                    stroke: lineOptions.color,
-                    strokeWidth: lineOptions.width,
-                    strokeOpacity: lineOptions.opacity,
-                    dashType: lineOptions.dashType,
-                    data: { modelId: segment.options.modelId },
-                    strokeLineCap: "butt",
-                    zIndex: -1,
-                    align: false
-                })
-            ];
+        _points: function(stackPoints) {
+            return StepLineSegment.fn.points.call(this, stackPoints);
         }
     });
+    deepExtend(StepAreaSegment.fn, AreaSegmentMixin);
 
     var StepAreaChart = AreaChart.extend({
         createSegment: function(linePoints, currentSeries, seriesIx, prevSegment) {
