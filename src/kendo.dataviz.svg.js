@@ -394,6 +394,36 @@ kendo_module({
         }
     });
 
+    var SVGCubicCurve = SVGPath.extend({
+        init: function(points, options, areaPoints) {
+            var curve = this;
+            SVGPath.fn.init.call(curve, options);
+            curve.areaPoints = areaPoints;
+            curve.points = points;
+        },
+        renderPoints: function() {
+            var curve = this,
+                points = curve.points,
+                curvePoints = [],
+                areaPoints = curve.areaPoints;
+            for(var i = 0; i < points.length; i++){
+                if(i % 3 == 1){
+                    curvePoints.push("C");
+                }
+                curvePoints.push(points[i].x + " " + points[i].y);
+            }     
+            
+            if(areaPoints){
+                for(i = 0; i < areaPoints.length; i++){
+                    curvePoints.push("L " + areaPoints[i].x + " " + areaPoints[i].y);
+                }
+                curvePoints.push("z");
+            }
+ 
+            return "M " + curvePoints.join(" ");
+        }
+    });
+
     var SVGLine = SVGPath.extend({
         init: function(points, closed, options) {
             var line = this;

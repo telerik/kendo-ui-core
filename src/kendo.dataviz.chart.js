@@ -43,6 +43,7 @@ kendo_module({
         BoxElement = dataviz.BoxElement,
         ChartElement = dataviz.ChartElement,
         Color = dataviz.Color,
+        CurveProcessor = dataviz.CurveProcessor, 
         ElementAnimation = dataviz.ElementAnimation,
         Note = dataviz.Note,
         NumericAxis = dataviz.NumericAxis,
@@ -4778,6 +4779,47 @@ kendo_module({
         }
     });
 
+    var SplineSegment = LineSegment.extend({
+        points: function(){
+            var curveProcessor = new CurveProcessor(0),
+                points = LineSegment.fn.points.call(this);
+
+            return curveProcessor.process(points);
+        },
+        getViewElements: function(view) {
+            var segment = this,
+                options = segment.options,
+                series = segment.series,
+                defaults = series._defaults,
+                color = series.color;
+
+            ChartElement.fn.getViewElements.call(segment, view);
+
+            if (isFn(color) && defaults) {
+                color = defaults.color;
+            }
+
+            return [
+                view.createCubicCurve(segment.points(), {
+                    id: options.id,
+                    stroke: color,
+                    strokeWidth: series.width,
+                    strokeOpacity: series.opacity,
+                    fill: "",
+                    dashType: series.dashType,
+                    data: { modelId: options.modelId },
+                    zIndex: -1
+                })
+            ];
+        }
+    });
+    
+    var SplineChart = LineChart.extend({
+        createSegment: function(linePoints, currentSeries, seriesIx, prevSegment){
+            return new SplineSegment(linePoints, currentSeries, seriesIx);
+        }
+    });
+    
     var AreaSegmentMixin = {
         points: function() {
             var segment = this,
@@ -4811,7 +4853,7 @@ kendo_module({
             return points;
         },
 
-        getViewElements: function(view) {
+        getViewElements: function(view) {debugger;
             var segment = this,
                 series = segment.series,
                 defaults = series._defaults,
@@ -4895,6 +4937,94 @@ kendo_module({
         }
     });
 
+    var SplineAreaSegment = AreaSegment.extend({
+        points: function(){
+            var curveProcessor = new CurveProcessor(0),
+                points = LineSegment.fn.points.call(this);
+            return curveProcessor.process(points);
+        },
+        areaPoints: function(points){debugger;
+            var segment = this,
+                chart = segment.parent,
+                plotArea = chart.plotArea,
+                invertAxes = chart.options.invertAxes,
+                valueAxis = chart.seriesValueAxis(segment.series),
+                valueAxisLineBox = valueAxis.lineBox(),
+                categoryAxis = plotArea.seriesCategoryAxis(segment.series),
+                categoryAxisLineBox = categoryAxis.lineBox(),
+                end = invertAxes ? categoryAxisLineBox.x1 : categoryAxisLineBox.y1,
+                stackPoints = segment.stackPoints,
+                pos = invertAxes ? X : Y,
+                firstPoint = points[0],
+                lastPoint = last(points),
+                areaPoints = [];
+                
+            end = limitValue(end, valueAxisLineBox[pos + 1], valueAxisLineBox[pos + 2]);  
+            if (!segment.stackPoints && points.length > 1) {
+
+                if (invertAxes) {
+                    points.push(Point2D(end, firstPoint.y));
+                    points.unshift(Point2D(end, lastPoint.y));
+                } else {
+                    areaPoints.push(Point2D(firstPoint.x, end));
+                    areaPoints.unshift(Point2D(lastPoint.x, end));
+                }
+            }
+ 
+            return areaPoints;
+        },
+        getViewElements: function(view) {
+            var segment = this,
+                series = segment.series,
+                defaults = series._defaults,
+                color = series.color,
+                lineOptions,
+                curvePoints = segment.points(),
+                areaPoints = segment.areaPoints(curvePoints);
+
+            ChartElement.fn.getViewElements.call(segment, view);
+
+            if (isFn(color) && defaults) {
+                color = defaults.color;
+            }
+
+            lineOptions = deepExtend({
+                    color: color,
+                    opacity: series.opacity
+                }, series.line
+            );
+
+            return [
+                view.createCubicCurve(curvePoints,{
+                    stroke: lineOptions.color,
+                    strokeWidth: lineOptions.width,
+                    strokeOpacity: lineOptions.opacity,
+                    dashType: lineOptions.dashType,
+                    data: { modelId: segment.options.modelId },
+                    strokeLineCap: "round",
+                    zIndex: -1,
+                    fill: color,
+                    fillOpacity: series.opacity
+                }, areaPoints)
+            ];
+        }
+    });
+    
+    var SplineAreaChart = AreaChart.extend({
+        createSegment: function(linePoints, currentSeries, seriesIx, prevSegment) {
+            var chart = this,
+                options = chart.options,
+                stackPoints;
+
+            if (options.isStacked && seriesIx > 0 && prevSegment) {
+                stackPoints = prevSegment.linePoints.slice(0).reverse();
+            }
+
+            return new SplineAreaSegment(linePoints, stackPoints, currentSeries, seriesIx);
+        }
+    });
+    
+    
     var StepAreaSegment = StepLineSegment.extend({
         init: function(linePoints, stackPoints, currentSeries, seriesIx) {
             var segment = this;
@@ -8018,7 +8148,7 @@ kendo_module({
                 paneSeries = seriesByPane[pane.options.name || "default"] || [];
                 plotArea.addToLegend(paneSeries);
                 filteredSeries = plotArea.filterVisibleSeries(paneSeries);
-
+                
                 if (!filteredSeries) {
                     continue;
                 }
@@ -8056,7 +8186,7 @@ kendo_module({
                 plotArea.createBulletChart(
                     filterSeriesByType(filteredSeries, [BULLET, VERTICAL_BULLET]),
                     pane
-                );
+                );                          
             }
         },
 
@@ -8243,6 +8373,22 @@ kendo_module({
 
             plotArea.appendChart(areaChart, pane);
         },
+        
+        createSplineAreaChart: function(series, pane) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                firstSeries = series[0],
+                splineAreaChart = new SplineAreaChart(plotArea, {
+                    invertAxes: plotArea.invertAxes,
+                    isStacked: firstSeries.stack && series.length > 1,
+                    series: series
+                });
+
+            plotArea.appendChart(splineAreaChart, pane);
+        },        
 
         createOHLCChart: function(series, pane) {
             if (series.length === 0) {

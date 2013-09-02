@@ -3619,6 +3619,277 @@ kendo_module({
          return 0;
     }
 
+    var CurveProcessor = function(addPoints, allowedError){
+        this.allowedError = allowedError;
+    };
+
+    CurveProcessor.prototype = CurveProcessor.fn = { 
+        process: function(points){
+            var that = this,
+                length = points.length,
+                result = [],
+                dataPoints,
+                p0,p1,p2,p3,
+                xField, yField,
+                fn, derivative,
+                reverse,
+                addPoints = function(){
+                    for(var i =0; i < arguments.length;i++){
+                        result.push(arguments[i]);
+                    }
+                };
+                
+            
+            addPoints(points[0]); 
+  
+            for(var idx = 0; idx <= length - 3;idx++){
+                dataPoints = points.slice(idx, idx+3);
+                p0 = dataPoints[0];
+                p3 = dataPoints[1];
+                
+                if(derivative){
+                    p1 = that.getFirstControlPoint(derivative,xField,yField, p0, p3);
+                } 
+            
+                if(that.isLinear(dataPoints)){               
+                    xField = "x";
+                    yField = "y";    
+                }
+                else{                 
+                    xField = "y";
+                    yField = "x";       
+                }
+                
+                
+                if(that.isMonotonic(dataPoints, yField)){
+                   if(dataPoints[0].x >= dataPoints[1].x && dataPoints[1].x >= dataPoints[2].x){
+                       fn = that.getCubicPointsFunction(dataPoints, xField, yField, 1);
+                   }
+                   else{
+                        fn = that.getParabolaPointsFunction(dataPoints, xField, yField);     
+                   }
+                    
+                }
+                else {   
+                    fn = that.getCubicPointsFunction(dataPoints, xField, yField, 1);
+                }                             
+                
+                if(!derivative){
+                    derivative = that.getDerivative(fn);
+                    p1 = that.getFirstControlPoint(derivative,xField,yField, p0, p3);  
+                } 
+               
+                derivative = that.getDerivative(fn);
+                p2 = that.getSecondControlPoint(derivative,xField,yField, p0, p3);
+                addPoints(p1,p2,p3);
+            }         
+            if(!that.isMonotonic(dataPoints,yField)){
+                fn = that.getQuarticPointsFunction(dataPoints, xField, yField);
+                derivative = that.getDerivative(fn);
+            }
+            if(idx <= length){   
+                p0 = points[length -2];
+                p3 = points[length -1];
+                p1 = that.getFirstControlPoint(derivative,xField,yField, p0, p3);
+                p2 = that.getSecondControlPoint(derivative,xField,yField, p0, p3);
+                addPoints(p1,p2,p3);  
+            }
+            return result;
+        },         
+        isLinear: function(dataPoints){
+            return (dataPoints[2].x > dataPoints[1].x && dataPoints[1].x > dataPoints[0].x) ||
+                    (dataPoints[2].x < dataPoints[1].x && dataPoints[1].x < dataPoints[0].x);
+        },
+        isMonotonic: function(dataPoints,yField){
+            return (dataPoints[2][yField] > dataPoints[1][yField] && dataPoints[1][yField] > dataPoints[0][yField]) ||
+                        (dataPoints[2][yField] < dataPoints[1][yField] && dataPoints[1][yField] < dataPoints[0][yField]);
+        },    
+        getFirstControlPoint: function(fnD, xField, yField, p0,p3){            
+            var controlPoint = new Point2D(),
+                t1 = p0[xField],
+                t2 = p3[xField],
+                t = t2 - t1;
+            controlPoint[xField] = t1 + t/3;
+            controlPoint[yField] = p0[yField] + (t/3) * this.calculateFunction(fnD, t1);
+            
+            return controlPoint;        
+        },
+        getSecondControlPoint: function(fnD, xField, yField, p0,p3){
+            var controlPoint = new Point2D(),
+                t1 = p0[xField],
+                t2 = p3[xField],
+                t = t2 - t1;
+            controlPoint[xField] = t2 - t/3;
+            controlPoint[yField] = p3[yField] - (t/3) * this.calculateFunction(fnD, t2);
+
+            return controlPoint; 
+        },
+        getParabolaPointsFunction: function(points, xField, yField){
+            var that = this,
+                m = that.getReverseMatrix(that.initMatrix(points,xField)),
+                v = [],
+                fn; 
+            for(var i = 0; i < m.length; i++){
+                v.push(points[i][yField]);            
+            }
+            fn = that.multiplyMatrixByVector(m, v);
+
+            return fn;
+        },    
+        getCubicPointsFunction: function(points, xField, yField, extremumIdx){
+            var that = this,
+                m = [
+                    [1, Math.pow(points[0][xField], 1),Math.pow(points[0][xField], 2), Math.pow(points[0][xField], 3)],
+                    [1, Math.pow(points[1][xField], 1),Math.pow(points[1][xField], 2), Math.pow(points[1][xField], 3)],
+                    [1, Math.pow(points[2][xField], 1),Math.pow(points[2][xField], 2), Math.pow(points[2][xField], 3)],
+                    [0, 1, 2 * points[extremumIdx][xField], 3 * Math.pow(points[extremumIdx][xField], 2)]
+                ],
+                v = [points[0][yField], points[1][yField], points[2][yField], 0],
+                reverse = that.getReverseMatrix(m),
+                fn = that.multiplyMatrixByVector(reverse,v);
+            
+            return fn;        
+        },
+        getQuarticPointsFunction: function(points, xField, yField){
+           var that = this,
+                m = that.getReverseMatrix(that.initExtremumMatrix(points,xField)),
+                v = [],
+                fn;     
+            for(var i = 0; i < points.length; i++){
+                v.push(points[i][yField]);
+            }
+            for(;i< m.length; i++){
+                v.push(0);
+            }
+            fn = that.multiplyMatrixByVector(m, v);
+
+            return fn;
+        },
+        calculateFunction: function(fn,x){
+            var result = 0,
+                length = fn.length;
+            for(var i = 0; i < length;i++){
+                result += Math.pow(x,i) * fn[i];
+            }
+            return result;
+        },
+        getDerivative: function(fn){
+            var result = [],
+                length = fn.length;
+            for(var i = 1; i < length;i++){
+                result[i-1] = fn[i] * i;
+            }
+            return result;
+        },    
+        initMatrix: function(points,xField){
+            var m = [],
+                length = points.length;
+             
+            for(var i = 0; i < length;i++){
+               m[i] = [];           
+               for(var j = 0; j < length; j++){
+                     m[i][j] = Math.pow(points[i][xField], j); 
+               }
+            }
+            return m;
+        },
+        initExtremumMatrix: function(points,xField){
+            var m = [],
+                length = points.length;
+             
+            for(var i = 0; i < length;i++){
+               m[i] = [];           
+               for(var j = 0; j < length + 2; j++){
+                    m[i][j] = Math.pow(points[i][xField], j); 
+               }
+            }
+            for(; i < length + 2; i++){
+                m[i] = [0];
+                for(j= 1;j < length + 2; j++){
+                    m[i][j] = j * Math.pow(points[i - 2][xField], j - 1);
+                }
+            }
+            return m;
+        },    
+        multiplyMatrixByVector: function(m,v){
+            var result = [],
+                product,           
+                length = m.length;
+
+            for(var row = 0; row < length; row++){
+                product = 0;
+                for(var idx = 0; idx < length; idx++){
+                    product+= m[row][idx] * v[idx];
+                }
+                result[row] = product;
+            }
+            return result;
+        },
+        getReverseMatrix: function(m){
+            var that = this,
+                result = [],
+                length = m.length,
+                determinant = 0;
+            for(var i = 0; i< length; i++){
+                result[i] = [];
+                for(var j = 0; j < length; j++){
+                    result[i][j] = Math.pow(-1, i+j) * that.getDeterminant(initSubMatrix(m,i,j));
+                }
+            }
+            for(i = 0; i< length; i++){
+                determinant += m[0][i] * result[0][i];
+            }
+
+            result = that.transpondMultiply(result, 1/determinant);
+            return result;        
+        },
+        transpondMultiply: function(m,a){
+            var result = [],
+                length = m.length;
+            for(var i = 0; i< length; i++){
+                for(var j = 0; j < length; j++){
+                    result[j] = result[j] || [];
+                    result[j][i] = a * m[i][j];
+                }
+            }
+            return result;
+        },
+        getDeterminant: function(m){
+            var length = m.length,
+                result = 0;
+            if(length == 2){
+                return m[0][0]*m[1][1] - m[0][1]*m[1][0];
+            }
+            else{
+                for(var i =0; i< length; i++){
+                    for(var j = 0; j < length; j++){
+                        result += Math.pow(-1, i+j) * m[i][j] * 
+                            this.getDeterminant(initSubMatrix(m,i,j));
+                    }
+                }
+            }
+            return result;
+        },
+        initSubMatrix: function(m,i,j){
+            var result = [],
+                length = m.length,
+                row = -1;
+                
+            for(var k = 0; k < length; k++){
+                if(k!= i){ 
+                    row++;            
+                    result.push([]);        
+                    for(var l = 0; l < length; l++){
+                        if(l != j){                    
+                            result[row].push(m[k][l]);
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+    };
+
     // Exports ================================================================
     deepExtend(kendo.dataviz, {
         init: function(element) {
@@ -3658,6 +3929,7 @@ kendo_module({
         BoxElement: BoxElement,
         ChartElement: ChartElement,
         Color: Color,
+        CurveProcessor: CurveProcessor,
         ElementAnimation:ElementAnimation,
         ExpandAnimation: ExpandAnimation,
         ExportMixin: ExportMixin,
