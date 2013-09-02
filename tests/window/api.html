@@ -676,8 +676,8 @@
             });
 
             test("async open/close of model windows leaves overlay", function() {
-                var first = $("<div />").appendTo("body").kendoWindow({ modal: true }).data("kendoWindow");
-                var second = $("<div />").appendTo("body").kendoWindow({ modal: true, visible: false }).data("kendoWindow");
+                var first = createWindow({ modal: true });
+                var second = createWindow({ modal: true, visible: false });
 
                 first.close();
                 second.open();
@@ -686,12 +686,12 @@
             });
 
             asyncTest("opening a closing animated window leaves it in opened state", function() {
-                var dialog = $("<div />").appendTo("body").kendoWindow({
+                var dialog = createWindow({
                     animation: {
                         open: { duration: 50 },
                         close: { duration: 50 }
                     }
-                }).data("kendoWindow");
+                });
 
                 dialog.close().open();
 
@@ -732,6 +732,27 @@
 
                 ok(!dialog.resizing);
                 ok(resizingDestroy.calls("destroy"), 1);
+            });
+
+            asyncTest("overlay is not hidden when showing second modal window after closing first", function() {
+                var dialog = createWindow({
+                    animation: { close: { duration: 500 } },
+                    modal: true
+                });
+
+                var secondDialog = createWindow({
+                    animation: { open: { duration: 1000 } },
+                    modal: true,
+                    visible: false,
+                    activate: function() {
+                        start();
+
+                        ok($(".k-overlay").is(":visible"));
+                    }
+                });
+
+                dialog.close();
+                secondDialog.open();
             });
         </script>
 

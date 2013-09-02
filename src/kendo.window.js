@@ -578,6 +578,8 @@ kendo_module({
                 if (options.modal) {
                     overlay = that._overlay(false);
 
+                    overlay.kendoStop(true, true);
+
                     if (showOptions.duration && kendo.effects.Fade) {
                         var overlayFx = kendo.fx(overlay).fadeIn();
                         overlayFx.duration(showOptions.duration || 0);
