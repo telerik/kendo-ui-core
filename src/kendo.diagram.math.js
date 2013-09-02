@@ -14,6 +14,7 @@ kendo_module({
         Dictionary = kendo.diagram.Dictionary,
         HashTable = kendo.diagram.HashTable,
         Queue = kendo.diagram.Queue,
+        Set = kendo.diagram.Set,
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
         dataviz = kendo.dataviz,
@@ -662,8 +663,8 @@ kendo_module({
 
     /**
      * Represents a collection of key-value pairs that are organized based on the hash code of the key.
-     * _buckets[hashId] = {key: key, ...}
-     * Important: do not use the standard Array access method, use the get/Set methods instead.
+     * _buckets[hashId] = {key: key, value:...}
+     * Important: do not use the standard Array access method, use the get/set methods instead.
      */
     var HashTable = kendo.Class.extend({
         init: function () {
@@ -984,6 +985,73 @@ kendo_module({
                 current = current.next;
             }
             return false;
+        }
+    });
+
+
+    /**
+     * While other data structures can have multiple times the same item a Set owns only
+     * once a particular item.
+     * @type {*}
+     */
+    var Set = kendo.Observable.extend({
+        init: function (resource) {
+            var that = this;
+            kendo.Observable.fn.init.call(that);
+            that.bind('changed', function (e) {
+            });
+            this._hashTable = new HashTable();
+            this.length = 0;
+            if (isDefined(resource)) {
+                if (resource instanceof HashTable) {
+                    resource.forEach(function (d) {
+                        this.add(d);
+                    })
+                }
+                else if (resource instanceof Dictionary) {
+                    resource.forEach(function (k, v) {
+                        this.add({key: k, value: v});
+                    }, this)
+                }
+            }
+        },
+
+        contains: function (item) {
+            return this._hashTable.containsKey(item);
+        },
+
+        add: function (item) {
+            var entry = this._hashTable.get(item);
+            if (entry == null) {
+                this._hashTable.add(item);
+                this._hashTable.get(item).value = item;
+                this.length++;
+                this.trigger('changed');
+            }
+        },
+
+        remove: function (item) {
+            if (this.contains(item)) {
+                this._hashTable.remove(item);
+                this.length--;
+                this.trigger('changed');
+            }
+        },
+        /**
+         * Foreach with an iterator working on the key-value pairs.
+         * @param func
+         */
+        forEach: function (func, context) {
+            this._hashTable.forEach(function (kv) {
+                func(kv.value);
+            }, context);
+        },
+        toArray: function () {
+            var r = [];
+            this.forEach(function (d) {
+                r.push(d);
+            });
+            return r;
         }
     });
 
@@ -2368,10 +2436,17 @@ kendo_module({
         EightGraph: function () {
             return Graph.Utils.parse([ "1->2", "2->3", "3->4", "4->1", "3->5", "5->6", "6->7", "7->3"]);
         },
+
+        /**
+         * Creates a typical mindmap diagram.
+         * @returns {*}
+         * @constructor
+         */
         Mindmap: function () {
             return Graph.Utils.parse(["0->1", "0->2", "0->3", "0->4", , "0->5", "1->6", , "1->7", "7->8", "2->9", "9->10", "9->11", "3->12",
                 "12->13", "13->14", "4->15", "4->16", "15->17", "15->18", "18->19", "18->20", "14->21", "14->22", "5->23", "23->24", "23->25", "6->26"]);
         },
+
         /**
          * Three nodes connected in a cycle.
          * @returns {*}
@@ -3348,6 +3423,10 @@ kendo_module({
                 animateTransitions: false,
                 startRadialAngle: 0,
                 roots: null,
+                layerDistance: 25,
+                layeredLayoutType: kendo.diagram.LayeredLayoutType.Down,
+                siftingRounds: 1,
+                keepGroupLayout: false,
                 endRadialAngle: 2 * Math.PI,
                 // TODO: ensure to change this to false when containers are around
                 ignoreContainers: true,
@@ -3441,17 +3520,22 @@ kendo_module({
             // Size options lead to stackoverflow and need special handling
 
             this.options = this.defaultOptions;
-            if (options["totalMargin"]) {
-                this.options["totalMargin"] = options["totalMargin"];
-                delete options["totalMargin"];
+            if (isUndefined(options)) {
+                return;
             }
-            if (options["componentMargin"]) {
-                this.options["componentMargin"] = options["componentMargin"];
-                delete options["componentMargin"];
+            if (options) {
+                if (options["totalMargin"]) {
+                    this.options["totalMargin"] = options["totalMargin"];
+                    delete options["totalMargin"];
+                }
+                if (options["componentMargin"]) {
+                    this.options["componentMargin"] = options["componentMargin"];
+                    delete options["componentMargin"];
+                }
             }
             this.options = kendo.deepExtend(this.options, options || {})
         }
-    });
+    })
 
     /**
      * The classic spring-embedder (aka force-directed, Fruchterman-Rheingold, barycentric) algorithm.
@@ -4493,6 +4577,7 @@ kendo_module({
             }
         }
     });
+
     /**
      * The various tree layout algorithms.
      * @type {*}
@@ -4576,7 +4661,7 @@ kendo_module({
          */
         getTree: function (graph) {
             var root = null;
-            if (this.options.roots && this.options.roots.length > 0) {
+            if (this.options.roots.length > 0) {
                 for (var i = 0, len = graph.nodes.length; i < len; i++) {
                     var node = graph.nodes[i];
                     for (var j = 0, len = this.options.roots.length; j < len; j++) {
@@ -4644,7 +4729,11 @@ kendo_module({
          */
         TreeLayout: 0,
 
-        //LayeredLayout: 1,
+        /**
+         * The Sugiyama aka layered layout.
+         */
+        LayeredLayout: 1,
+
         /*
          * Spring-embedder aka force-directed layout.
          */
@@ -4740,6 +4829,1760 @@ kendo_module({
         Undefined: 8
     }
 
+    var LayeredLayoutType = {
+        Up: 0,
+        Down: 1,
+        Left: 2,
+        Right: 3
+    }
+
+    /**
+     * The Sugiyama aka layered layout algorithm.
+     * @type {*}
+     */
+    var LayeredLayout = LayoutBase.extend({
+        init: function (diagram) {
+            var that = this;
+            LayoutBase.fn.init.call(that);
+            if (isUndefined(diagram)) {
+                throw "Diagram is not specified.";
+            }
+            this.diagram = diagram;
+        },
+
+        layout: function (options) {
+
+            this.transferOptions(options);
+
+            var adapter = new DiagramToHyperTreeAdapter(this.diagram);
+            var graph = adapter.convert(options);
+            if (graph.isEmpty()) {
+                return;
+            }
+            // split into connected components
+            var components = graph.getConnectedComponents();
+            if (components.isEmpty()) {
+                return;
+            }
+            for (var i = 0; i < components.length; i++) {
+                var component = components[i];
+                this.layoutGraph(component, options);
+            }
+            this.gridLayoutComponents(components);
+            for (var i = 0, len = graph.nodes.length; i < len; i++) {
+                var node = graph.nodes[i];
+                var shape = node.associatedShape;
+                shape.bounds(new Rect(node.x, node.y, node.width, node.height));
+            }
+        },
+
+        /**
+         * Initializes the runtime data properties of the layout.
+         * @private
+         */
+        _initRuntimeProperties: function () {
+            for (var k = 0; k < this.graph.nodes.length; k++) {
+                var node = this.graph.nodes[k];
+                node.layer = -1;
+                node.downstreamLinkCount = 0;
+                node.upstreamLinkCount = 0;
+
+                node.isVirtual = false;
+
+                node.uBaryCenter = 0.0;
+                node.dBaryCenter = 0.0;
+
+                node.upstreamPriority = 0;
+                node.downstreamPriority = 0;
+
+                node.gridPosition = 0;
+            }
+        },
+
+        layoutGraph: function (graph, options) {
+            if (isDefined(options)) {
+                this.transferOptions(options);
+            }
+            this.graph = graph;
+            graph.setItemIndices();
+            var reversedEdges = graph.makeAcyclic();
+
+            this._initRuntimeProperties();
+
+            // initialize links
+            for (var l = 0; l < graph.links.length; l++) {
+                var link = graph.links[l];
+                link.dummificationLevel = 0;
+            }
+
+            // place all source nodes on the first layer
+            var sinks = [];
+            var current = [];
+            var layering = new Dictionary();
+
+            graph.nodes.forEach(function (node) {
+                if (node.incoming.length == 0) {
+                    sinks.push(node);
+                    layering.set(node, 0);
+                    current.push(node);
+                }
+            });
+
+            while (current.length > 0) {
+                var next = current.shift();
+
+                next.outgoing.forEach(function (link) {
+                    var dest = link.target;
+
+                    if (!layering.containsKey(dest)) {
+                        layering.set(dest, layering.get(next) + 1);
+                    }
+                    else {
+                        layering.set(dest, Math.max(layering.get(dest), layering.get(next) + 1));
+                    }
+
+                    if (!current.contains(dest)) {
+                        current.push(dest);
+                    }
+                });
+            }
+
+            var layerCount = 0;
+            layering.forEachValue(function (nodeLayer) {
+                layerCount = Math.max(layerCount, nodeLayer);
+            });
+
+            // sort the nodes by their layer in descending order
+            var sortedNodes = [];
+            sortedNodes.addRange(layering.keys());
+            sortedNodes.sort(function (o1, o2) {
+                var o1layer = layering.get(o1);
+                var o2layer = layering.get(o2);
+
+                if (o1layer < o2layer) {
+                    return 1;
+                }
+
+                if (o1layer > o2layer) {
+                    return -1;
+                }
+
+                return 0;
+            });
+
+            for (var n = 0; n < sortedNodes.length; ++n) {
+                var node = sortedNodes[n];
+                var minLayer = Number.MAX_VALUE;
+
+                if (node.outgoing.length == 0) {
+                    continue;
+                }
+
+                for (var l = 0; l < node.outgoing.length; ++l) {
+                    var link = node.outgoing[l];
+                    minLayer = Math.min(minLayer, layering.get(link.target));
+                }
+
+                if (minLayer > 1) {
+                    layering.set(node, minLayer - 1);
+                }
+            }
+
+            this.layers = [];
+            for (var i = 0; i < layerCount + 1; i++) {
+                this.layers.push([]);
+            }
+
+            layering.forEach(function (node, layer) {
+                node.layer = layer;
+                this.layers[layer].push(node);
+            }, this);
+
+            // set initial grid positions
+            for (var l = 0; l < this.layers.length; l++) {
+                var layer = this.layers[l];
+                for (var i = 0; i < layer.length; i++) {
+                    layer[i].gridPosition = i;
+                }
+            }
+
+            // add dummy nodes for all links which cross one or more layers
+            this.insertDummies();
+
+            // reduce crossings
+            this.optimizeCrossings();
+
+            // further reduce crossings through pair swap
+            this.swapPairs();
+
+            // arrange nodes
+            this.arrangeNodes();
+
+            // assign vertex positions within layers
+            this.assignCoordinates();
+
+            // reverse dummification
+            this.removeDummies();
+
+            // reverse cycle removal
+            reversedEdges.forEach(function (e) {
+                if (e.points) {
+                    e.points.reverse();
+                }
+            });
+        },
+
+        setMinDist: function (m, n, minDist) {
+            var l = m.layer;
+            var i = m.layerIndex;
+            this.minDistances[l][i] = minDist;
+        },
+
+        getMinDist: function (m, n) {
+            var dist = 0,
+                i1 = m.layerIndex,
+                i2 = n.layerIndex,
+                l = m.layer,
+                min = Math.min(i1, i2),
+                max = Math.max(i1, i2);
+            // use Sum()?            
+            for (var k = min; k < max; ++k) {
+                dist += this.minDistances[l][k];
+            }
+            return dist;
+        },
+
+        placeLeftToRight: function (leftClasses) {
+            var leftPos = new Dictionary();
+            for (var c = 0; c < this.layers.length; ++c) {
+                var classNodes = leftClasses[c];
+                if (classNodes == null) {
+                    continue;
+                }
+
+                for (var n = 0; n < classNodes.length; n++) {
+                    var node = classNodes[n];
+                    if (!leftPos.containsKey(node)) {
+                        this.placeLeft(node, leftPos, c);
+                    }
+                }
+
+                // adjust class
+                var d = Number.POSITIVE_INFINITY;
+                for (var n = 0; n < classNodes.length; n++) {
+                    var node = classNodes[n];
+                    var rightSibling = this.rightSibling(node);
+                    if (rightSibling != null && this.nodeLeftClass.get(rightSibling) != c) {
+                        d = Math.min(d, leftPos.get(rightSibling) - leftPos.get(node) - this.getMinDist(node, rightSibling));
+                    }
+                }
+                if (d == Number.POSITIVE_INFINITY) {
+                    var D = [];
+                    for (var n = 0; n < classNodes.length; n++) {
+                        var node = classNodes[n];
+                        var neighbors = [];
+                        neighbors.addRange(this.upNodes.get(node));
+                        neighbors.addRange(this.downNodes.get(node));
+
+                        for (var e = 0; e < neighbors.length; e++) {
+                            var neighbor = neighbors[e];
+                            if (this.nodeLeftClass.get(neighbor) < c) {
+                                D.push(leftPos.get(neighbor) - leftPos.get(node));
+                            }
+                        }
+                    }
+                    D.sort();
+                    if (D.length == 0) {
+                        d = 0;
+                    }
+                    else if (D.length % 2 == 1) {
+                        d = D[this.intDiv(D.length, 2)];
+                    }
+                    else {
+                        d = (D[this.intDiv(D.length, 2) - 1] + D[this.intDiv(D.length, 2)]) / 2;
+                    }
+                }
+                for (var n = 0; n < classNodes.length; n++) {
+                    var node = classNodes[n];
+                    leftPos.set(node, leftPos.get(node) + d);
+                }
+            }
+            return leftPos;
+        },
+
+        placeRightToLeft: function (rightClasses) {
+            var rightPos = new Dictionary();
+            for (var c = 0; c < this.layers.length; ++c) {
+                var classNodes = rightClasses[c];
+                if (classNodes == null) {
+                    continue;
+                }
+
+                for (var n = 0; n < classNodes.length; n++) {
+                    var node = classNodes[n];
+                    if (!rightPos.containsKey(node)) {
+                        this.placeRight(node, rightPos, c);
+                    }
+                }
+
+                // adjust class
+                var d = Number.NEGATIVE_INFINITY;
+                for (var n = 0; n < classNodes.length; n++) {
+                    var node = classNodes[n];
+                    var leftSibling = this.leftSibling(node);
+                    if (leftSibling != null && this.nodeRightClass.get(leftSibling) != c) {
+                        d = Math.max(d, rightPos.get(leftSibling) - rightPos.get(node) + this.getMinDist(leftSibling, node));
+                    }
+                }
+                if (d == Number.NEGATIVE_INFINITY) {
+                    var D = [];
+                    for (var n = 0; n < classNodes.length; n++) {
+                        var node = classNodes[n];
+                        var neighbors = [];
+                        neighbors.addRange(this.upNodes.get(node));
+                        neighbors.addRange(this.downNodes.get(node));
+
+                        for (var e = 0; e < neighbors.length; e++) {
+                            var neighbor = neighbors[e];
+                            if (this.nodeRightClass.get(neighbor) < c) {
+                                D.push(rightPos.get(node) - rightPos.get(neighbor));
+                            }
+                        }
+                    }
+                    D.sort();
+                    if (D.length == 0) {
+                        d = 0;
+                    }
+                    else if (D.length % 2 == 1) {
+                        d = D[this.intDiv(D.length, 2)];
+                    }
+                    else {
+                        d = (D[this.intDiv(D.length, 2) - 1] + D[this.intDiv(D.length, 2)]) / 2;
+                    }
+                }
+                for (var n = 0; n < classNodes.length; n++) {
+                    var node = classNodes[n];
+                    rightPos.set(node, rightPos.get(node) + d);
+                }
+            }
+            return rightPos;
+        },
+
+        _getLeftWing: function () {
+            var leftWing = { value: null };
+            var result = this.computeClasses(leftWing, 1);
+            this.nodeLeftClass = leftWing.value;
+            return result;
+        },
+
+        _getRightWing: function () {
+            var rightWing = { value: null };
+            var result = this.computeClasses(rightWing, -1);
+            this.nodeRightClass = rightWing.value;
+            return result;
+        },
+
+        computeClasses: function (wingPair, d) {
+            var currentWing = 0,
+                wing = wingPair.value = new Dictionary();
+
+            for (var l = 0; l < this.layers.length; ++l) {
+                currentWing = l;
+
+                var layer = this.layers[l];
+                for (var n = d == 1 ? 0 : layer.length - 1; 0 <= n && n < layer.length; n += d) {
+                    var node = layer[n];
+                    if (!wing.containsKey(node)) {
+                        wing.set(node, currentWing);
+                        if (node.isVirtual) {
+                            this._nodesInLink(node).forEach(function (vnode) {
+                                wing.set(vnode, currentWing);
+                            });
+                        }
+                    }
+                    else {
+                        currentWing = wing.get(node);
+                    }
+                }
+            }
+
+            var wings = [];
+            for (var i = 0; i < this.layers.length; i++) {
+                wings.push(null);
+            }
+            wing.forEach(function (node, classIndex) {
+                if (wings[classIndex] === null) {
+                    wings[classIndex] = [];
+                }
+                wings[classIndex].push(node);
+            });
+
+            return wings;
+        },
+
+        assignCoordinates: function () {
+            // sort the layers by their grid position
+            for (var l = 0; l < this.layers.length; ++l) {
+                var layer = this.layers[l];
+                layer.sort(this._gridPositionComparer);
+            }
+
+            this.minDistances = [];
+            for (var l = 0; l < this.layers.length; ++l) {
+                var layer = this.layers[l];
+                this.minDistances[l] = [];
+                for (var n = 0; n < layer.length; ++n) {
+                    var node = layer[n];
+                    node.layerIndex = n;
+                    this.minDistances[l][n] = this.nodeDistance;
+                    if (n < layer.length - 1) {
+                        if (this.direction % 2 == 0)	// vertical
+                        {
+                            this.minDistances[l][n] += (node.width + layer[n + 1].width) / 2;
+                        }
+                        else {
+                            this.minDistances[l][n] += (node.height + layer[n + 1].height) / 2;
+                        }
+                    }
+                }
+            }
+
+            this.downNodes = new Dictionary();
+            this.upNodes = new Dictionary();
+            this.graph.nodes.forEach(function (node) {
+                this.downNodes.set(node, []);
+                this.upNodes.set(node, []);
+            }, this);
+            this.graph.links.forEach(function (link) {
+                var origin = link.source;
+                var dest = link.target;
+                var down = null, up = null;
+                if (origin.layer > dest.layer) {
+                    down = link.source;
+                    up = link.target;
+                }
+                else {
+                    up = link.source;
+                    down = link.target;
+                }
+                this.downNodes.get(up).push(down);
+                this.upNodes.get(down).push(up);
+            }, this);
+            this.downNodes.forEachValue(function (list) {
+                list.sort(this._gridPositionComparer);
+            });
+            this.upNodes.forEachValue(function (list) {
+                list.sort(this._gridPositionComparer);
+            });
+
+            for (var l = 0; l < this.layers.length - 1; ++l) {
+                var layer = this.layers[l];
+                for (var w = 0; w < layer.length - 1; w++) {
+                    var currentNode = layer[w];
+                    if (!currentNode.isVirtual) {
+                        continue;
+                    }
+
+                    var currDown = this.downNodes.get(currentNode)[0];
+                    if (!currDown.isVirtual) {
+                        continue;
+                    }
+
+                    for (var n = w + 1; n < layer.length; ++n) {
+                        var node = layer[n];
+                        if (!node.isVirtual) {
+                            continue;
+                        }
+
+                        var downNode = this.downNodes.get(node)[0];
+                        if (!downNode.isVirtual) {
+                            continue;
+                        }
+
+                        if (currDown.gridPosition > downNode.gridPosition) {
+                            var pos = currDown.gridPosition;
+                            currDown.gridPosition = downNode.gridPosition;
+                            downNode.gridPosition = pos;
+                            var i1 = currDown.layerIndex;
+                            var i2 = downNode.layerIndex;
+                            this.layers[l + 1][i1] = downNode;
+                            this.layers[l + 1][i2] = currDown;
+                            currDown.layerIndex = i2;
+                            downNode.layerIndex = i1;
+                        }
+                    }
+                }
+            }
+
+
+            var leftClasses = this._getLeftWing();
+            var rightClasses = this._getRightWing();
+
+
+            var leftPos = this.placeLeftToRight(leftClasses);
+            var rightPos = this.placeRightToLeft(rightClasses);
+            var x = new Dictionary();
+            this.graph.nodes.forEach(function (node) {
+                x.set(node, (leftPos.get(node) + rightPos.get(node)) / 2);
+            });
+
+
+            var order = new Dictionary();
+            var placed = new Dictionary;
+            for (var l = 0; l < this.layers.length; ++l) {
+                var layer = this.layers[l];
+                var sequenceStart = -1, sequenceEnd = -1;
+                for (var n = 0; n < layer.length; ++n) {
+                    var node = layer[n];
+                    order.set(node, 0);
+                    placed.set(node, false);
+                    if (node.isVirtual) {
+                        if (sequenceStart == -1) {
+                            sequenceStart = n;
+                        }
+                        else if (sequenceStart == n - 1) {
+                            sequenceStart = n;
+                        }
+                        else {
+                            sequenceEnd = n;
+                            order.set(layer[sequenceStart], 0);
+                            if (x.get(node) - x.get(layer[sequenceStart]) == this.getMinDist(layer[sequenceStart], node)) {
+                                placed.set(layer[sequenceStart], true);
+                            }
+                            else {
+                                placed.set(layer[sequenceStart], false);
+                            }
+                            sequenceStart = n;
+                        }
+                    }
+                }
+            }
+            var directions = [1, -1];
+            directions.forEach(function (d) {
+                var start = d == 1 ? 0 : this.layers.length - 1;
+                var end = d == 1 ? this.layers.length - 1 : 0;
+                for (var l = start; 0 <= l && l < this.layers.length; l += d) {
+                    var layer = this.layers[l];
+                    var virtualStartIndex = this._firstVirtualNode(layer);
+                    var virtualStart = null;
+                    var sequence = null;
+                    if (virtualStartIndex != -1) {
+                        virtualStart = layer[virtualStartIndex];
+                        sequence = [];
+                        for (var i = 0; i < virtualStartIndex; i++) {
+                            sequence.push(layer[i]);
+                        }
+                    }
+                    else {
+                        virtualStart = null;
+                        sequence = layer;
+                    }
+                    if (sequence.length > 0) {
+                        this._sequencer(x, null, virtualStart, d, sequence);
+                        for (var i = 0; i < sequence.length - 1; ++i) {
+                            this.setMinDist(sequence[i], sequence[i + 1], x.get(sequence[i + 1]) - x.get(sequence[i]));
+                        }
+                        if (virtualStart != null) {
+                            this.setMinDist(sequence[sequence.length - 1], virtualStart, x.get(virtualStart) - x.get(sequence[sequence.length - 1]));
+                        }
+                    }
+
+                    while (virtualStart != null) {
+                        var virtualEnd = this.nextVirtualNode(layer, virtualStart);
+                        if (virtualEnd == null) {
+                            virtualStartIndex = virtualStart.layerIndex;
+                            sequence = [];
+                            for (var i = virtualStartIndex + 1; i < layer.length; i++) {
+                                sequence.push(layer[i]);
+                            }
+                            if (sequence.length > 0) {
+                                this._sequencer(x, virtualStart, null, d, sequence);
+                                for (var i = 0; i < sequence.length - 1; ++i) {
+                                    this.setMinDist(sequence[i], sequence[i + 1], x.get(sequence[i + 1]) - x.get(sequence[i]));
+                                }
+                                this.setMinDist(virtualStart, sequence[0], x.get(sequence[0]) - x.get(virtualStart));
+                            }
+                        }
+                        else if (order.get(virtualStart) == d) {
+                            virtualStartIndex = virtualStart.layerIndex;
+                            var virtualEndIndex = virtualEnd.layerIndex;
+                            sequence = [];
+                            for (var i = virtualStartIndex + 1; i < virtualEndIndex; i++) {
+                                sequence.push(layer[i]);
+                            }
+                            if (sequence.length > 0) {
+                                this._sequencer(x, virtualStart, virtualEnd, d, sequence);
+                            }
+                            placed.set(virtualStart, true);
+                        }
+                        virtualStart = virtualEnd;
+                    }
+                    this.adjustDirections(l, d, order, placed);
+                }
+            }, this);
+
+            var depth = this.margins;
+
+            for (var i = (this.direction < 2 ? 0 : this.layers.length - 1);
+                 this.direction < 2 ? i < this.layers.length : i >= 0;
+                 i += (this.direction < 2 ? 1 : -1)) {
+                var layer = this.layers[i];
+
+                // calculate layer height
+                var height = Number.MIN_VALUE;
+                for (var n = 0; n < layer.length; ++n) {
+                    var node = layer[n];
+                    if (this.direction % 2 == 0)	// vertical
+                    {
+                        height = Math.max(height, node.height);
+                    }
+                    else {
+                        height = Math.max(height, node.width);
+                    }
+                }
+
+                for (var n = 0; n < layer.length; ++n) {
+                    var node = layer[n];
+                    var gridPosition = node.gridPosition;
+                    if (this.direction % 2 == 0)	// vertical
+                    {
+                        node.x = x.get(node);
+                        node.y = depth + height / 2;
+                    }
+                    else {
+                        node.x = depth + height / 2;
+                        node.y = x.get(node);
+                    }
+                }
+
+                depth += this.layerDistance + height;
+            }
+        },
+
+        adjustDirections: function (l, d, order, placed) {
+            if (l + d < 0 || l + d >= this.layers.length) {
+                return;
+            }
+
+            var prevBridge = null, prevBridgeTarget = null;
+            var layer = this.layers[l + d];
+            for (var n = 0; n < layer.length; ++n) {
+                var nextBridge = layer[n];
+                if (nextBridge.isVirtual) {
+                    var nextBridgeTarget = this.getNeighborOnLayer(nextBridge, l);
+                    if (nextBridgeTarget.isVirtual) {
+                        if (prevBridge != null) {
+                            var p = placed.get(prevBridgeTarget);
+                            var clayer = this.layers[l];
+                            var i1 = prevBridgeTarget.layerIndex;
+                            var i2 = nextBridgeTarget.layerIndex;
+                            for (var i = i1 + 1; i < i2; ++i) {
+                                if (clayer[i].isVirtual) {
+                                    p = p && placed.get(clayer[i]);
+                                }
+                            }
+                            if (p) {
+                                order.set(prevBridge, d);
+                                var j1 = prevBridge.layerIndex;
+                                var j2 = nextBridge.layerIndex;
+                                for (var j = j1 + 1; j < j2; ++j) {
+                                    if (layer[j].isVirtual) {
+                                        order.set(layer[j], d);
+                                    }
+                                }
+                            }
+                        }
+                        prevBridge = nextBridge;
+                        prevBridgeTarget = nextBridgeTarget;
+                    }
+                }
+            }
+        },
+
+        getNeighborOnLayer: function (node, l) {
+            var neighbor = this.upNodes.get(node)[0];
+            if (neighbor.layer == l) {
+                return neighbor;
+            }
+            neighbor = this.downNodes.get(node)[0];
+            if (neighbor.layer == l) {
+                return neighbor;
+            }
+            return null;
+        },
+
+        _sequencer: function (x, virtualStart, virtualEnd, dir, sequence) {
+            if (sequence.length == 1) {
+                this._sequenceSingle(x, virtualStart, virtualEnd, dir, sequence[0]);
+            }
+
+            if (sequence.length > 1) {
+                var r = sequence.length, t = this.intDiv(r, 2);
+                this._sequencer(x, virtualStart, virtualEnd, dir, sequence.slice(0, t));
+                this._sequencer(x, virtualStart, virtualEnd, dir, sequence.slice(t));
+                this.combineSequences(x, virtualStart, virtualEnd, dir, sequence);
+            }
+        },
+
+        _sequenceSingle: function (x, virtualStart, virtualEnd, dir, node) {
+            var neighbors = dir == -1 ? this.downNodes.get(node) : this.upNodes.get(node);
+
+            var n = neighbors.length;
+            if (n != 0) {
+                if (n % 2 == 1) {
+                    x.set(node, x.get(neighbors[this.intDiv(n, 2)]));
+                }
+                else {
+                    x.set(node, (x.get(neighbors[this.intDiv(n, 2) - 1]) + x.get(neighbors[this.intDiv(n, 2)])) / 2);
+                }
+
+                if (virtualStart != null) {
+                    x.set(node, Math.max(x.get(node), x.get(virtualStart) + this.getMinDist(virtualStart, node)));
+                }
+                if (virtualEnd != null) {
+                    x.set(node, Math.min(x.get(node), x.get(virtualEnd) - this.getMinDist(node, virtualEnd)));
+                }
+            }
+        },
+
+        combineSequences: function (x, virtualStart, virtualEnd, dir, sequence) {
+            var r = sequence.length, t = this.intDiv(r, 2);
+
+            // collect left changes
+            var leftHeap = [];
+            for (var i = 0; i < t; ++i) {
+                var c = 0;
+                var neighbors = dir == -1 ? this.downNodes.get(sequence[i]) : this.upNodes.get(sequence[i]);
+                for (var n = 0; n < neighbors.length; ++n) {
+                    var neighbor = neighbors[n];
+                    if (x.get(neighbor) >= x.get(sequence[i])) {
+                        c++;
+                    }
+                    else {
+                        c--;
+                        leftHeap.push({ k: x.get(neighbor) + this.getMinDist(sequence[i], sequence[t - 1]), v: 2 });
+                    }
+                }
+                leftHeap.push({ k: x.get(sequence[i]) + this.getMinDist(sequence[i], sequence[t - 1]), v: c });
+            }
+            if (virtualStart != null) {
+                leftHeap.push({ k: x.get(virtualStart) + this.getMinDist(virtualStart, sequence[t - 1]), v: Number.MAX_VALUE });
+            }
+            leftHeap.sort(this._positionDescendingComparer);
+
+            // collect right changes
+            var rightHeap = [];
+            for (var i = t; i < r; ++i) {
+                var c = 0;
+                var neighbors = dir == -1 ? this.downNodes.get(sequence[i]) : this.upNodes.get(sequence[i]);
+                for (var n = 0; n < neighbors.length; ++n) {
+                    var neighbor = neighbors[n];
+                    if (x.get(neighbor) <= x.get(sequence[i])) {
+                        c++;
+                    }
+                    else {
+                        c--;
+                        rightHeap.push({ k: x.get(neighbor) - this.getMinDist(sequence[i], sequence[t]), v: 2 });
+                    }
+                }
+                rightHeap.push({ k: x.get(sequence[i]) - this.getMinDist(sequence[i], sequence[t]), v: c });
+            }
+            if (virtualEnd != null) {
+                rightHeap.push({ k: x.get(virtualEnd) - this.getMinDist(virtualEnd, sequence[t]), v: Number.MAX_VALUE });
+            }
+            rightHeap.sort(this._positionAscendingComparer);
+
+            var leftRes = 0, rightRes = 0;
+            var m = this.getMinDist(sequence[t - 1], sequence[t]);
+            while (x.get(sequence[t]) - x.get(sequence[t - 1]) < m) {
+                if (leftRes < rightRes) {
+                    if (leftHeap.length == 0) {
+                        x.set(sequence[t - 1], x.get(sequence[t]) - m);
+                        break;
+                    }
+                    else {
+                        var pair = leftHeap.shift();
+                        leftRes = leftRes + pair.v;
+                        x.set(sequence[t - 1], pair.k);
+                        x.set(sequence[t - 1], Math.max(x.get(sequence[t - 1]), x.get(sequence[t]) - m));
+                    }
+                }
+                else {
+                    if (rightHeap.length == 0) {
+                        x.set(sequence[t], x.get(sequence[t - 1]) + m);
+                        break;
+                    }
+                    else {
+                        var pair = rightHeap.shift();
+                        rightRes = rightRes + pair.v;
+                        x.set(sequence[t], pair.k);
+                        x.set(sequence[t], Math.min(x.get(sequence[t]), x.get(sequence[t - 1]) + m));
+                    }
+                }
+            }
+            for (var i = t - 2; i >= 0; i--) {
+                x.set(sequence[i], Math.min(x.get(sequence[i]), x.get(sequence[t - 1]) - this.getMinDist(sequence[i], sequence[t - 1])));
+            }
+            for (var i = t + 1; i < r; i++) {
+                x.set(sequence[i], Math.max(x.get(sequence[i]), x.get(sequence[t]) + this.getMinDist(sequence[i], sequence[t])));
+            }
+        },
+
+        placeLeft: function (node, leftPos, leftClass) {
+            var pos = Number.NEGATIVE_INFINITY;
+            this._getComposite(node).forEach(function (v) {
+                var leftSibling = this.leftSibling(v);
+                if (leftSibling != null && this.nodeLeftClass.get(leftSibling) == this.nodeLeftClass.get(v)) {
+                    if (!leftPos.containsKey(leftSibling)) {
+                        this.placeLeft(leftSibling, leftPos, leftClass);
+                    }
+                    pos = Math.max(pos, leftPos.get(leftSibling) + this.getMinDist(leftSibling, v));
+                }
+            }, this);
+            if (pos == Number.NEGATIVE_INFINITY) {
+                pos = 0;
+            }
+            this._getComposite(node).forEach(function (v) {
+                leftPos.set(v, pos);
+            });
+        },
+
+        placeRight: function (node, rightPos, rightClass) {
+            var pos = Number.POSITIVE_INFINITY;
+            this._getComposite(node).forEach(function (v) {
+                var rightSibling = this.rightSibling(v);
+                if (rightSibling != null && this.nodeRightClass.get(rightSibling) == this.nodeRightClass.get(v)) {
+                    if (!rightPos.containsKey(rightSibling)) {
+                        this.placeRight(rightSibling, rightPos, rightClass);
+                    }
+                    pos = Math.min(pos, rightPos.get(rightSibling) - this.getMinDist(v, rightSibling));
+                }
+            }, this);
+            if (pos == Number.POSITIVE_INFINITY) {
+                pos = 0;
+            }
+            this._getComposite(node).forEach(function (v) {
+                rightPos.set(v, pos);
+            });
+        },
+
+        leftSibling: function (node) {
+            var layer = this.layers[node.layer],
+                layerIndex = node.layerIndex;
+            return layerIndex == 0 ? null : layer[layerIndex - 1];
+        },
+
+        rightSibling: function (node) {
+            var layer = this.layers[node.layer];
+            var layerIndex = node.layerIndex;
+            return layerIndex == layer.length - 1 ? null : layer[layerIndex + 1];
+
+        },
+
+        _getComposite: function (node) {
+            return node.isVirtual ? this._nodesInLink(node) : [node];
+        },
+
+        arrangeNodes: function () {
+            // Initialize node's base priority
+            for (var l = 0; l < this.layers.length; l++) {
+                var layer = this.layers[l];
+
+                for (var ni = 0; ni < layer.length; ni++) {
+                    var node = layer[ni];
+                    node.upstreamPriority = node.upstreamLinkCount;
+                    node.downstreamPriority = node.downstreamLinkCount;
+                }
+            }
+
+            // Layout is invoked after MinimizeCrossings
+            // so we may assume node's barycenters are initially correct
+
+            var maxLayoutIterations = 2;
+            for (var it = 0; it < maxLayoutIterations; it++) {
+                for (var i = this.layers.length - 1; i >= 1; i--) {
+                    this.layoutLayer(false, i);
+                }
+
+                for (var i = 0; i < this.layers.length - 1; i++) {
+                    this.layoutLayer(true, i);
+                }
+            }
+
+            // Offset the whole structure so that there are no gridPositions < 0
+            var gridPos = Number.MAX_VALUE;
+            for (var l = 0; l < this.layers.length; l++) {
+                var layer = this.layers[l];
+
+                for (var ni = 0; ni < layer.length; ni++) {
+                    var node = layer[ni];
+                    gridPos = Math.min(gridPos, node.gridPosition);
+                }
+            }
+
+            if (gridPos < 0) {
+                for (var l = 0; l < this.layers.length; l++) {
+                    var layer = this.layers[l];
+
+                    for (var ni = 0; ni < layer.length; ni++) {
+                        var node = layer[ni];
+                        node.gridPosition = node.gridPosition - gridPos;
+                    }
+                }
+            }
+        },
+
+        /// <summary>
+        /// Layout of a single layer.
+        /// </summary>
+        /// <param name="layerIndex">The layer to organize.</param>
+        /// <param name="movingDownwards">If set to <c>true</c> we move down in the layer stack.</param>
+        /// <seealso cref="OptimizeCrossings()"/>
+        layoutLayer: function (down, layer) {
+            var iconsidered;
+            var considered;
+
+            if (down) {
+                considered = this.layers[iconsidered = layer + 1];
+            }
+            else {
+                considered = this.layers[iconsidered = layer - 1];
+            }
+
+            // list containing the nodes in the considered layer sorted by priority
+            var sorted = [];
+            for (var n = 0; n < considered.length; n++) {
+                sorted.push(considered[n]);
+            }
+            sorted.sort(function (n1, n2) {
+                var n1Priority = (n1.upstreamPriority + n1.downstreamPriority) / 2;
+                var n2Priority = (n2.upstreamPriority + n2.downstreamPriority) / 2;
+
+                if (Math.abs(n1Priority - n2Priority) < 0.0001) {
+                    return 0;
+                }
+                if (n1Priority < n2Priority) {
+                    return 1;
+                }
+                return -1;
+            });
+
+            // each node strives for its barycenter; high priority nodes start first
+            sorted.forEach(function (node) {
+                var nodeGridPos = node.gridPosition;
+                var nodeBaryCenter = this.calcBaryCenter(node);
+                var nodePriority = (node.upstreamPriority + node.downstreamPriority) / 2;
+
+                if (Math.abs(nodeGridPos - nodeBaryCenter) < 0.0001) {
+                    // This node is exactly at its barycenter -> perfect
+                    return;
+                }
+
+                if (Math.abs(nodeGridPos - nodeBaryCenter) < 0.25 + 0.0001) {
+                    // This node is close enough to the barycenter -> should work
+                    return;
+                }
+
+                if (nodeGridPos < nodeBaryCenter) {
+                    // Try to move the node to the right in an
+                    // attempt to reach its barycenter
+                    while (nodeGridPos < nodeBaryCenter) {
+                        if (!this.moveRight(node, considered, nodePriority)) {
+                            break;
+                        }
+
+                        nodeGridPos = node.gridPosition;
+                    }
+                }
+                else {
+                    // Try to move the node to the left in an
+                    // attempt to reach its barycenter
+                    while (nodeGridPos > nodeBaryCenter) {
+                        if (!this.moveLeft(node, considered, nodePriority)) {
+                            break;
+                        }
+
+                        nodeGridPos = node.gridPosition;
+                    }
+                }
+            }, this);
+
+            // after the layer has been rearranged we need to recalculate the barycenters
+            // of the nodes in the surrounding layers
+            if (iconsidered > 0) {
+                this.calcDownData(iconsidered - 1);
+            }
+            if (iconsidered < this.layers.length - 1) {
+                this.calcUpData(iconsidered + 1);
+            }
+        },
+
+        /// <summary>
+        /// Moves the node to the right and returns <c>true</c> if this was possible.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <param name="layer">The layer.</param>
+        /// <returns>Returns <c>true</c> if the shift was possible, otherwise <c>false</c>.</returns>
+        moveRight: function (node, layer, priority) {
+            var index = layer.indexOf(node);
+            if (index == layer.length - 1) {
+                // this is the last node in the layer, so we can move to the right without troubles
+                node.gridPosition = node.gridPosition + 0.5;
+                return true;
+            }
+
+            var rightNode = layer[index + 1];
+            var rightNodePriority = (rightNode.upstreamPriority + rightNode.downstreamPriority) / 2;
+
+            // check if there is space between the right and the current node
+            if (rightNode.gridPosition > node.gridPosition + 1) {
+                node.gridPosition = node.gridPosition + 0.5;
+                return true;
+            }
+
+            // we have reached a node with higher priority; no movement is allowed
+            if (rightNodePriority > priority ||
+                Math.abs(rightNodePriority - priority) < 0.0001) {
+                return false;
+            }
+
+            // the right node has lower priority - try to move it
+            if (this.moveRight(rightNode, layer, priority)) {
+                node.gridPosition = node.gridPosition + 0.5;
+                return true;
+            }
+
+            return false;
+        },
+
+        /// <summary>
+        /// Moves the node to the left and returns <c>true</c> if this was possible.
+        /// </summary>
+        /// <param name="node">The node.</param>
+        /// <param name="layer">The layer.</param>
+        /// <returns>Returns <c>true</c> if the shift was possible, otherwise <c>false</c>.</returns>
+        moveLeft: function (node, layer, priority) {
+            var index = layer.indexOf(node);
+            if (index == 0) {
+                // this is the last node in the layer, so we can move to the left without troubles
+                node.gridPosition = node.gridPosition - 0.5;
+                return true;
+            }
+
+            var leftNode = layer[index - 1];
+            var leftNodePriority = (leftNode.upstreamPriority + leftNode.downstreamPriority) / 2;
+
+            // check if there is space between the left and the current node
+            if (leftNode.gridPosition < node.gridPosition - 1) {
+                node.gridPosition = node.gridPosition - 0.5;
+                return true;
+            }
+
+            // we have reached a node with higher priority; no movement is allowed
+            if (leftNodePriority > priority ||
+                Math.abs(leftNodePriority - priority) < 0.0001) {
+                return false;
+            }
+
+            // The left node has lower priority - try to move it
+            if (this.moveLeft(leftNode, layer, priority)) {
+                node.gridPosition = node.gridPosition - 0.5;
+                return true;
+            }
+
+            return false;
+        },
+
+        mapVirtualNode: function (node, link) {
+            this.nodeToLinkMap.set(node, link);
+            if (!this.linkToNodeMap.contains(link)) {
+                this.linkToNodeMap.set(link, []);
+            }
+            this.linkToNodeMap.get(link).push(node);
+        },
+
+        _nodesInLink: function (node) {
+            return this.linkToNodeMap.get(this.nodeToLinkMap.get(node));
+        },
+
+        /// <summary>
+        /// Inserts dummy nodes to break long links.
+        /// </summary>
+        insertDummies: function () {
+            this.linkToNodeMap = new Dictionary();
+            this.nodeToLinkMap = new Dictionary();
+
+            var links = this.graph.links.slice(0);
+            for (var l = 0; l < links.length; l++) {
+                var link = links[l];
+                var o = link.source;
+                var d = link.target;
+
+                var oLayer = o.layer;
+                var dLayer = d.layer;
+                var oPos = o.gridPosition;
+                var dPos = d.gridPosition;
+
+                var step = (dPos - oPos) / Math.abs(dLayer - oLayer);
+
+                var p = o;
+                if (oLayer - dLayer > 1) {
+                    for (var i = oLayer - 1; i > dLayer; i--) {
+                        var newNode = new Node();
+                        newNode.x = o.x;
+                        newNode.y = o.y;
+                        newNode.width = o.width / 100;
+                        newNode.height = o.height / 100;
+
+                        var layer = this.layers[i];
+                        var pos = (i - dLayer) * step + oPos;
+                        if (pos > layer.length) {
+                            pos = layer.length;
+                        }
+
+                        // check if origin and dest are both last
+                        if (oPos >= this.layers[oLayer].length - 1 &&
+                            dPos >= this.layers[dLayer].length - 1) {
+                            pos = layer.length;
+                        }
+
+                        // check if origin and destination are both first
+                        else if (oPos == 0 && dPos == 0) {
+                            pos = 0;
+                        }
+
+                        newNode.layer = i;
+                        newNode.uBaryCenter = 0.0;
+                        newNode.dBaryCenter = 0.0;
+                        newNode.upstreamLinkCount = 0;
+                        newNode.downstreamLinkCount = 0;
+                        newNode.gridPosition = pos;
+                        newNode.isVirtual = true;
+
+                        layer.insert(newNode, pos);
+
+                        // translate rightwards nodes' positions
+                        for (var r = pos + 1; r < layer.length; r++) {
+                            var node = layer[r];
+                            node.gridPosition = node.gridPosition + 1;
+                        }
+
+                        var newLink = new Link(p, newNode);
+                        newLink.dummificationLevel = 0;
+                        p = newNode;
+
+                        // add the new node and the new link to the graph
+                        this.graph.nodes.push(newNode);
+                        this.graph.addLink(newLink);
+
+                        newNode.index = this.graph.nodes.length - 1;
+                        this.mapVirtualNode(newNode, link);
+                    }
+
+                    // set the origin of the real arrow to the last dummy
+                    link.changeSource(p);
+                    link.dummificationLevel = oLayer - dLayer - 1;
+                }
+
+                if (oLayer - dLayer < -1) {
+                    for (var i = oLayer + 1; i < dLayer; i++) {
+                        var newNode = new Node();
+                        newNode.x = o.x;
+                        newNode.y = o.y;
+                        newNode.width = o.width / 100;
+                        newNode.height = o.height / 100;
+
+                        var layer = this.layers[i];
+                        var pos = (i - oLayer) * step + oPos;
+                        if (pos > layer.length) {
+                            pos = layer.length;
+                        }
+
+                        // check if origin and dest are both last
+                        if (oPos >= this.layers[oLayer].length - 1 &&
+                            dPos >= this.layers[dLayer].length - 1) {
+                            pos = layer.length;
+                        }
+
+                        // check if origin and destination are both first
+                        else if (oPos == 0 && dPos == 0) {
+                            pos = 0;
+                        }
+
+                        newNode.layer = i;
+                        newNode.uBaryCenter = 0.0;
+                        newNode.dBaryCenter = 0.0;
+                        newNode.upstreamLinkCount = 0;
+                        newNode.downstreamLinkCount = 0;
+                        newNode.gridPosition = pos;
+                        newNode.isVirtual = true;
+
+                        pos = pos & pos; // truncates to int
+                        layer.insert(newNode, pos);
+
+                        // translate rightwards nodes' positions
+                        for (var r = pos + 1; r < layer.length; r++) {
+                            var node = layer[r];
+                            node.gridPosition = node.gridPosition + 1;
+                        }
+
+                        var newLink = new Link(p, newNode);
+                        newLink.dummificationLevel = 0;
+                        p = newNode;
+
+                        // add the new node and the new link to the graph
+                        this.graph.nodes.push(newNode);
+                        this.graph.addLink(newLink);
+
+                        newNode.index = this.graph.nodes.length - 1;
+                        this.mapVirtualNode(newNode, link);
+                    }
+
+                    // Set the origin of the real arrow to the last dummy
+                    link.changeSource(p);
+                    link.dummificationLevel = dLayer - oLayer - 1;
+                }
+            }
+        },
+
+        /// <summary>
+        /// Removes the dummy nodes inserted earlier to break long links.
+        /// </summary>
+        /// <remarks>The virtual nodes are effectively turned into intermediate connection points.</remarks>
+        removeDummies: function () {
+            var dedum = true;
+            while (dedum) {
+                dedum = false;
+
+                for (var l = 0; l < this.graph.links.length; l++) {
+                    var link = this.graph.links[l];
+                    if (link.dummificationLevel == 0) {
+                        continue;
+                    }
+
+                    var points = [];
+
+                    // add points in reverse order
+                    points.prepend({ x: link.target.x, y: link.target.y });
+                    points.prepend({ x: link.source.x, y: link.source.y });
+
+                    // removeDummies the link
+                    var temp = link;
+                    var dummificationLevel = link.dummificationLevel;
+                    for (var d = 0; d < dummificationLevel; d++) {
+                        var node = temp.source;
+                        var prevLink = node.incoming[0];
+
+                        points.prepend({ x: prevLink.source.x, y: prevLink.source.y });
+
+                        temp = prevLink;
+                    }
+
+                    // restore the original link origin
+                    link.changeSource(temp.source);
+
+                    // reset dummification flag
+                    link.dummificationLevel = 0;
+
+                    // set link points
+                    link.points = points;
+
+                    // we are not going to delete the dummy elements;
+                    // they won't be needed anymore anyway.
+
+                    dedum = true;
+                    break;
+                }
+            }
+        },
+
+        /// <summary>
+        /// Optimizes/reduces the crossings between the layers by turning the crossing problem into a (combinatorial) number ordering problem.
+        /// </summary>
+        optimizeCrossings: function () {
+            var moves = -1;
+            var maxIterations = 3;
+            var iter = 0;
+
+            while (moves != 0) {
+                if (iter++ > maxIterations) {
+                    break;
+                }
+
+                moves = 0;
+
+                for (var i = this.layers.length - 1; i >= 1; i--) {
+                    moves += this.optimizeLayerCrossings(false, i);
+                }
+
+                for (var i = 0; i < this.layers.length - 1; i++) {
+                    moves += this.optimizeLayerCrossings(true, i);
+                }
+            }
+        },
+
+        calcUpData: function (layer) {
+            if (layer == 0) {
+                return;
+            }
+
+            var considered = this.layers[layer];
+            var upLayer = new Set();
+            var temp = this.layers[layer - 1];
+            for (var i = 0; i < temp.length; i++) {
+                upLayer.add(temp[i]);
+            }
+
+            for (var i = 0; i < considered.length; i++) {
+                var node = considered[i];
+
+                // calculate barycenter
+                var sum = 0;
+                var total = 0;
+
+                for (var l = 0; l < node.incoming.length; l++) {
+                    var link = node.incoming[l];
+                    if (upLayer.contains(link.source)) {
+                        total++;
+                        sum += link.source.gridPosition;
+                    }
+                }
+
+                for (var l = 0; l < node.outgoing.length; l++) {
+                    var link = node.outgoing[l];
+                    if (upLayer.contains(link.target)) {
+                        total++;
+                        sum += link.target.gridPosition;
+                    }
+                }
+
+                if (total > 0) {
+                    node.uBaryCenter = sum / total;
+                    node.upstreamLinkCount = total;
+                }
+                else {
+                    node.uBaryCenter = i;
+                    node.upstreamLinkCount = 0;
+                }
+            }
+        },
+
+        calcDownData: function (layer) {
+            if (layer == this.layers.length - 1) {
+                return;
+            }
+
+            var considered = this.layers[layer];
+            var downLayer = new Set();
+            var temp = this.layers[layer + 1];
+            for (var i = 0; i < temp.length; i++) {
+                downLayer.add(temp[i]);
+            }
+
+            for (var i = 0; i < considered.length; i++) {
+                var node = considered[i];
+
+                // calculate barycenter
+                var sum = 0;
+                var total = 0;
+
+                for (var l = 0; l < node.incoming.length; l++) {
+                    var link = node.incoming[l];
+                    if (downLayer.contains(link.source)) {
+                        total++;
+                        sum += link.source.gridPosition;
+                    }
+                }
+
+                for (var l = 0; l < node.outgoing.length; l++) {
+                    var link = node.outgoing[l];
+                    if (downLayer.contains(link.target)) {
+                        total++;
+                        sum += link.target.gridPosition;
+                    }
+                }
+
+                if (total > 0) {
+                    node.dBaryCenter = sum / total;
+                    node.downstreamLinkCount = total;
+                }
+                else {
+                    node.dBaryCenter = i;
+                    node.downstreamLinkCount = 0;
+                }
+            }
+        },
+
+        /// <summary>
+        /// Optimizes the crossings.
+        /// </summary>
+        /// <remarks>The big trick here is the usage of weights or values attached to connected nodes which turn a problem of crossing links
+        /// to an a problem of ordering numbers.</remarks>
+        /// <param name="layerIndex">The layer index.</param>
+        /// <param name="movingDownwards">If set to <c>true</c> we move down in the layer stack.</param>
+        /// <returns>The number of nodes having moved, i.e. the number of crossings reduced.</returns>
+        optimizeLayerCrossings: function (down, layer) {
+            var iconsidered;
+            var considered;
+
+            if (down) {
+                considered = this.layers[iconsidered = layer + 1];
+            }
+            else {
+                considered = this.layers[iconsidered = layer - 1];
+            }
+
+            // remember what it was
+            var presorted = considered.slice(0);
+
+            // calculate barycenters for all nodes in the considered layer
+            if (down) {
+                this.calcUpData(iconsidered);
+            }
+            else {
+                this.calcDownData(iconsidered);
+            }
+
+            // sort nodes within this layer according to the barycenters
+            Array.prototype.sort.call(this, considered, function (n1, n2) {
+                var n1BaryCenter = this.calcBaryCenter(n1);
+                var n2BaryCenter = this.calcBaryCenter(n2);
+
+                if (Math.abs(n1BaryCenter - n2BaryCenter) < 0.0001) {
+                    // in case of coinciding barycenters compare by the count of in/out links
+                    if (n1.degree() == n2.degree()) {
+                        return this.compareByIndex(n1, n2);
+                    }
+                    else if (n1.degree() < n2.degree()) {
+                        return 1;
+                    }
+                    return -1;
+                }
+
+                var compareValue = (n2BaryCenter - n1BaryCenter) * 1000;
+                if (compareValue > 0) {
+                    return -1;
+                }
+                else if (compareValue < 0) {
+                    return 1;
+                }
+                return this.compareByIndex(n1, n2);
+            });
+
+            // count relocations
+            var moves = 0;
+            for (var i = 0; i < considered.length; i++) {
+                if (considered[i] != presorted[i]) {
+                    moves++;
+                }
+            }
+
+            if (moves > 0) {
+                // now that the boxes have been arranged, update their grid positions
+                var inode = 0;
+                for (var i = 0; i < considered.length; i++) {
+                    var node = considered[i];
+                    node.gridPosition = inode++;
+                }
+            }
+
+            return moves;
+        },
+
+        /// <summary>
+        /// Swaps a pair of nodes in a layer.
+        /// </summary>
+        /// <param name="layerIndex">Index of the layer.</param>
+        /// <param name="n">The Nth node in the layer.</param>
+        swapPairs: function () {
+            var maxIterations = this.options.siftingRounds;
+            var iter = 0;
+
+            while (true) {
+                if (iter++ > maxIterations) {
+                    break;
+                }
+
+                var downwards = (iter % 4 <= 1);
+                var secondPass = (iter % 4 == 1);
+
+                for (var l = (downwards ? 0 : this.layers.length - 1);
+                     downwards ? l <= this.layers.length - 1 : l >= 0; l += (downwards ? 1 : -1)) {
+                    var layer = this.layers[l];
+                    var hasSwapped = false;
+
+                    // there is no need to recalculate crossings if they were calculated
+                    // on the previous step and nothing has changed
+                    var calcCrossings = true;
+                    var memCrossings = 0;
+
+                    for (var n = 0; n < layer.length - 1; n++) {
+                        // count crossings
+                        var up = 0;
+                        var down = 0;
+                        var crossBefore = 0;
+
+                        if (calcCrossings) {
+                            if (l != 0) {
+                                up = this.countLinksCrossingBetweenTwoLayers(l - 1, l);
+                            }
+                            if (l != this.layers.length - 1) {
+                                down = this.countLinksCrossingBetweenTwoLayers(l, l + 1);
+                            }
+                            if (downwards) {
+                                up *= 2;
+                            }
+                            else {
+                                down *= 2;
+                            }
+
+                            crossBefore = up + down;
+                        }
+                        else {
+                            crossBefore = memCrossings;
+                        }
+
+                        if (crossBefore == 0) {
+                            continue;
+                        }
+
+                        // Swap nodes
+                        var node1 = layer[n];
+                        var node2 = layer[n + 1];
+
+                        var node1GridPos = node1.gridPosition;
+                        var node2GridPos = node2.gridPosition;
+                        layer[n] = node2;
+                        layer[n + 1] = node1;
+                        node1.gridPosition = node2GridPos;
+                        node2.gridPosition = node1GridPos;
+
+                        // count crossings again and if worse than before, restore swapping
+                        up = 0;
+                        if (l != 0) {
+                            up = this.countLinksCrossingBetweenTwoLayers(l - 1, l);
+                        }
+                        down = 0;
+                        if (l != this.layers.length - 1) {
+                            down = this.countLinksCrossingBetweenTwoLayers(l, l + 1);
+                        }
+                        if (downwards) {
+                            up *= 2;
+                        }
+                        else {
+                            down *= 2;
+                        }
+                        var crossAfter = up + down;
+
+                        var revert = false;
+                        if (secondPass) {
+                            revert = crossAfter >= crossBefore;
+                        }
+                        else {
+                            revert = crossAfter > crossBefore;
+                        }
+
+                        if (revert) {
+                            node1 = layer[n];
+                            node2 = layer[n + 1];
+
+                            node1GridPos = node1.gridPosition;
+                            node2GridPos = node2.gridPosition;
+                            layer[n] = node2;
+                            layer[n + 1] = node1;
+                            node1.gridPosition = node2GridPos;
+                            node2.gridPosition = node1GridPos;
+
+                            // nothing has changed, remember the crossings so that
+                            // they are not calculated again on the next step
+                            memCrossings = crossBefore;
+                            calcCrossings = false;
+                        }
+                        else {
+                            hasSwapped = true;
+                            calcCrossings = true;
+                        }
+                    }
+
+                    if (hasSwapped) {
+                        if (l != this.layers.length - 1) {
+                            this.calcUpData(l + 1);
+                        }
+                        if (l != 0) {
+                            this.calcDownData(l - 1);
+                        }
+                    }
+                }
+            }
+        },
+
+        /// <summary>
+        /// Counts the number of links crossing between two layers.
+        /// </summary>
+        /// <param name="layerIndex1">The layer index.</param>
+        /// <param name="layerIndex2">Another layer index.</param>
+        /// <returns></returns>
+        countLinksCrossingBetweenTwoLayers: function (ulayer, dlayer) {
+            var crossings = 0;
+
+            var upperLayer = new Set();
+            var temp1 = this.layers[ulayer];
+            for (var i = 0; i < temp1.length; i++) {
+                upperLayer.add(temp1[i]);
+            }
+
+            var lowerLayer = new Set();
+            var temp2 = this.layers[dlayer];
+            for (var i = 0; i < temp2.length; i++) {
+                lowerLayer.add(temp2[i]);
+            }
+
+            // collect the links located between the layers
+            var dlinks = new Set();
+            var links = [];
+            var temp = [];
+
+            upperLayer.forEach(function (node) {
+                //throw "";
+                temp.addRange(node.incoming);
+                temp.addRange(node.outgoing);
+            });
+
+            for (var ti = 0; ti < temp.length; ti++) {
+                var link = temp[ti];
+
+                if (upperLayer.contains(link.source) &&
+                    lowerLayer.contains(link.target)) {
+                    dlinks.add(link);
+                    links.push(link);
+                }
+                else if (lowerLayer.contains(link.source) &&
+                    upperLayer.contains(link.target)) {
+                    links.push(link);
+                }
+            }
+
+            for (var l1 = 0; l1 < links.length; l1++) {
+                var link1 = links[l1];
+                for (var l2 = 0; l2 < links.length; l2++) {
+                    if (l1 == l2) {
+                        continue;
+                    }
+
+                    var link2 = links[l2];
+
+                    var n11, n12;
+                    var n21, n22;
+
+                    if (dlinks.contains(link1)) {
+                        n11 = link1.source;
+                        n12 = link1.target;
+                    }
+                    else {
+                        n11 = link1.target;
+                        n12 = link1.source;
+                    }
+
+                    if (dlinks.contains(link2)) {
+                        n21 = link2.source;
+                        n22 = link2.target;
+                    }
+                    else {
+                        n21 = link2.target;
+                        n22 = link2.source;
+                    }
+
+                    var n11gp = n11.gridPosition;
+                    var n12gp = n12.gridPosition;
+                    var n21gp = n21.gridPosition;
+                    var n22gp = n22.gridPosition;
+
+                    if ((n11gp - n21gp) * (n12gp - n22gp) < 0) {
+                        crossings++;
+                    }
+                }
+            }
+
+            return crossings / 2;
+        },
+
+        calcBaryCenter: function (node) {
+            var upstreamLinkCount = node.upstreamLinkCount;
+            var downstreamLinkCount = node.downstreamLinkCount;
+            var uBaryCenter = node.uBaryCenter;
+            var dBaryCenter = node.dBaryCenter;
+
+            if (upstreamLinkCount > 0 && downstreamLinkCount > 0) {
+                return (uBaryCenter + dBaryCenter) / 2;
+            }
+            if (upstreamLinkCount > 0) {
+                return uBaryCenter;
+            }
+            if (downstreamLinkCount > 0) {
+                return dBaryCenter;
+            }
+
+            return 0;
+        },
+
+        _gridPositionComparer: function (x, y) {
+            if (x.gridPosition < y.gridPosition) {
+                return -1;
+            }
+            if (x.gridPosition > y.gridPosition) {
+                return 1;
+            }
+            return 0;
+        },
+
+        _positionAscendingComparer: function (x, y) {
+            return x.k < y.k ? -1 : x.k > y.k ? 1 : 0;
+        },
+
+        _positionDescendingComparer: function (x, y) {
+            return x.k < y.k ? 1 : x.k > y.k ? -1 : 0;
+        },
+
+        _firstVirtualNode: function (layer) {
+            for (var c = 0; c < layer.length; c++) {
+                if (layer[c].isVirtual) {
+                    return c;
+                }
+            }
+            return -1;
+        },
+
+        compareByIndex: function (o1, o2) {
+            var i1 = o1.index;
+            var i2 = o2.index;
+
+            if (i1 < i2) {
+                return 1;
+            }
+
+            if (i1 > i2) {
+                return -1;
+            }
+
+            return 0;
+        },
+
+        intDiv: function (numerator, denominator) {
+            return (numerator - numerator % denominator) / denominator;
+        },
+
+        nextVirtualNode: function (layer, node) {
+            var nodeIndex = node.layerIndex;
+            for (var i = nodeIndex + 1; i < layer.length; ++i) {
+                if (layer[i].isVirtual) {
+                    return layer[i];
+                }
+            }
+            return null;
+        }
+
+    });
+
     kendo.deepExtend(diagram, {
         init: function (element) {
             kendo.init(element, kendo.diagram.ui);
@@ -4758,6 +6601,7 @@ kendo_module({
         Dictionary: Dictionary,
         HashTable: HashTable,
         Queue: Queue,
+        Set: Set,
         Node: Node,
         Link: Link,
         Graph: Graph,
@@ -4768,6 +6612,8 @@ kendo_module({
         LayoutTypes: LayoutTypes,
         TreeLayoutType: TreeLayoutType,
         TreeDirection: TreeDirection,
+        LayeredLayout: LayeredLayout,
+        LayeredLayoutType: LayeredLayoutType,
         LayoutBase: LayoutBase
     });
 })
@@ -4779,19 +6625,6 @@ Math.sign = function (number) {
     return number ? number < 0 ? -1 : 1 : 0;
 };
 Math.epsilon = 0.000001;
-
-//TODO: Move them to another object. Maybe some kind of Utils.
-Math.findRadian = function(start, end){
-    if (start == end) return 0;
-    var sngXComp = end.x - start.x,
-        sngYComp = start.y - end.y,
-        atan =Math.atan(sngXComp / sngYComp);
-    if (sngYComp >= 0) return sngXComp < 0 ? atan + (2 * Math.PI) : atan;
-    return atan + Math.PI;
-};
-Math.findAngle = function (center, end) {
-    return Math.findRadian(center, end) * 180 / Math.PI;
-};
 /*-------------------Diverse utilities----------------------------*/
 
 isDefined = function (obj) {
@@ -4813,7 +6646,7 @@ isObject = function (obj) {
  * Returns whether the object has a property with the given name.
  */
 has = function (obj, key) {
-    return hasOwnProperty.call(obj, key);
+    return Object.hasOwnProperty.call(obj, key);
 };
 
 /**
@@ -4887,7 +6720,7 @@ initArray = function createIdArray(size, value) {
  */
 randomInteger = function (lower, upper) {
     return parseInt(Math.floor(Math.random() * upper) + lower);
-}
+};
 
 /*-------------------Array Extensions ----------------------------*/
 
@@ -5004,9 +6837,11 @@ if (!Array.prototype.reduce) {
         return acc;
     }
 }
+
 if (!Array.prototype.fold) {
     Array.prototype.fold = Array.prototype.reduce;
 }
+
 if (!Array.prototype.foldl) {
     Array.prototype.foldl = Array.prototype.reduce;
 } // aka fold left
@@ -5047,8 +6882,25 @@ if (!Array.prototype.find) {
         return result;
     };
 }
+
 if (!Array.prototype.first) {
-    Array.prototype.first = Array.prototype.find;
+    Array.prototype.first = function (constraint, context) {
+        if (this.length == 0) {
+            return null;
+        }
+        if (isUndefined(constraint)) {
+            return this[0];
+        }
+        else {
+            for (var i = 0; i < this.length; i++) {
+                var item = this[i];
+                if (constraint.call(context, item, i, this)) {
+                    return item;
+                }
+            }
+            return null;
+        }
+    }
 }
 
 if (!Array.prototype.insert) {
@@ -5216,6 +7068,15 @@ if (!Array.prototype.bisort) {
         for (var i = 0; i < all.length; i++) {
             a.push(all[i].x);
             b.push(all[i].y);
+        }
+    }
+}
+
+if (!Array.prototype.addRange) {
+
+    Array.prototype.addRange = function (range) {
+        for (var i = 0; i < range.length; i++) {
+            this.push(range[i]);
         }
     }
 }

@@ -12,6 +12,7 @@ var parse = kendo.diagram.Graph.Utils.parse;
 var linearize = kendo.diagram.Graph.Utils.linearize;
 var Adapter = kendo.diagram.GraphAdapter;
 var Point = kendo.diagram.Point;
+var Set = kendo.diagram.Set;
 /*-------------Testing Utils----------------------------------*/
 
 QUnit.testSkip = function () {
@@ -411,13 +412,19 @@ test('all', function () {
 });
 
 test('first', function () {
-    var ar = [1,2,3,,11];
-    equal(ar.first(),1);
-    var objs = [{name: "A", age:33},{name:"D", age:12},{name:"B", age:34},{name: "C",age:47}, {name:"B", age: 61}];
+    var ar = [1, 2, 3, , 11];
+    equal(ar.first(), 1);
+    var objs = [
+        {name: "A", age: 33},
+        {name: "D", age: 12},
+        {name: "B", age: 34},
+        {name: "C", age: 47},
+        {name: "B", age: 61}
+    ];
     var b = objs.first(function (d) {
-        return d.name=="B";
+        return d.name == "B";
     });
-    equal(b.age,34);
+    equal(b.age, 34);
 });
 
 test("Range test", function () {
@@ -566,6 +573,28 @@ test('Basics', function () {
     }
     var shouldbe = new Range(1, 5);
     ok(rev.sameAs(shouldbe), "The same really.");
+});
+
+QUnit.module("Set tests");
+test('Add unique', function () {
+    var set = new Set();
+    set.add("John");
+    set.add("Mary");
+    set.add("John");
+    equal(set.length, 2);
+
+    var dic = new Dictionary();
+    dic.add("a", 6);
+    dic.add("b", 74);
+    dic.add("c", 61);
+    dic.add("c", 70);    // should not be added
+    set = new Set(dic);
+    equal(set.length, 3);
+    var sum =0;
+    set.forEach(function (d) {
+        sum+= d.value;
+    });
+    equal (sum, 150);
 });
 
 /*-----------Graph structure tests------------------------------------*/
@@ -1353,7 +1382,7 @@ test('Graph adapter', function () {
 
 QUnit.module("Layout algorithms");
 
-test('Graph to diagram', function () {
+testSkip('Graph to diagram', function () {
     var g = Predefined.Grid(5, 5);
     //var g = Predefined.Forest(3,2,2);
     var div = GetRoot();
@@ -1621,7 +1650,7 @@ test('Layered layout', function () {
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
     diagram.canvas.native.setAttribute("height", "1000");
-    diagram.randomDiagram(50, 3, true);
+    diagram.randomDiagram(5, 3, true);
 
     var root = diagram.getId("0");
     diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout);
