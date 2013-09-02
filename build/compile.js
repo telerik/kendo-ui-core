@@ -213,7 +213,9 @@ files.forEach(function (file){
     if (!ARGV["nomangle"]) {
         ast.figure_out_scope();
         ast.compute_char_frequency();
-        ast.mangle_names();
+        ast.mangle_names({
+            except: [ "define" ]
+        });
     }
 
     var source_map = u2.SourceMap({
