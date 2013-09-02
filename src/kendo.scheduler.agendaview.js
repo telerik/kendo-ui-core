@@ -10,8 +10,7 @@ kendo_module({
 (function($){
     var kendo = window.kendo,
         ui = kendo.ui,
-        NS = ".kendoAgendaView",
-        extend = $.extend;
+        NS = ".kendoAgendaView";
 
     ui.AgendaView = ui.SchedulerView.extend({
         init: function(element, options) {
@@ -20,7 +19,7 @@ kendo_module({
             options = this.options;
 
             if (options.editable) {
-                options.editable = extend(
+                options.editable = $.extend(
                     { "delete": true },
                     options.editable,
                     { create: false, update: false }
@@ -119,7 +118,7 @@ kendo_module({
                     eventDurationInDays += 1;
                 }
 
-                var task = extend({}, event);
+                var task = event.clone();
                 task.startDate = kendo.date.getDate(start);
                 tasks.push(task);
 
@@ -128,7 +127,7 @@ kendo_module({
                     task.head = true;
                     for (var day = 1; day < eventDurationInDays; day++) {
                         start = task.end;
-                        task = extend({}, event);
+                        task = event.clone();
                         task.start = start;
                         task.startDate = kendo.date.getDate(start);
                         task.end = kendo.date.nextDay(start);
@@ -200,9 +199,9 @@ kendo_module({
                     tableRow.push(kendo.format(
                         '<td class="k-scheduler-timecolumn"><div>{0}{1}{2}</div></td><td>{3}</td>',
                         task.tail || task.middle ? '<span class="k-icon k-i-arrow-w"></span>' : "",
-                        this._timeTemplate(extend({}, task, { start: task.startTime || task.start, end: task.endTime || task.end })),
+                        this._timeTemplate(task.clone({ start: task.startTime || task.start, end: task.endTime || task.end })),
                         task.head || task.middle ? '<span class="k-icon k-i-arrow-e"></span>' : "",
-                        this._eventTemplate(extend({ showDelete: showDelete }, task))
+                        this._eventTemplate(task.clone({ showDelete: showDelete }))
                     ));
 
                     tableRows.push("<tr" + (today ? ' class="k-today">' : ">") + tableRow.join("") + "</tr>");

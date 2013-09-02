@@ -252,7 +252,7 @@ kendo_module({
                 var range = ranges[rangeIndex];
                 var startSlot = range.start;
 
-                var hint = this._createEventElement($.extend({}, event, { start: start, startTime: start, end: end, endTime: end }), !multiday);
+                var hint = this._createEventElement(event.clone({ start: start, startTime: start, end: end, endTime: end }), !multiday);
 
                 hint.addClass("k-event-drag-hint");
 
@@ -1297,7 +1297,7 @@ kendo_module({
                                     }
                                 }
 
-                                var occurrence = extend({}, event, { start: start, end: end });
+                                var occurrence = event.clone({ start: start, end: end });
 
                                 if (this._isInTimeSlot(occurrence)) {
                                     var head = range.head;

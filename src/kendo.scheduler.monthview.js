@@ -635,7 +635,7 @@ kendo_module({
 
                 var endSlot = range.endSlot();
 
-                var hint = this._createEventElement($.extend({}, event, { head: range.head, tail: range.tail }));
+                var hint = this._createEventElement(event.clone({ head: range.head, tail: range.tail }));
 
                 hint.css({
                     left: startSlot.offsetLeft + 2,
@@ -755,7 +755,7 @@ kendo_module({
                             }
                         }
 
-                        var occurrence = extend({}, event, { start: start, end: end, head: range.head, tail: range.tail });
+                        var occurrence = event.clone({ start: start, end: end, head: range.head, tail: range.tail });
 
                         this._positionEvent(range, this._createEventElement(occurrence), group);
                     }
