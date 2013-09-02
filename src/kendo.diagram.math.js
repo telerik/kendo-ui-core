@@ -3347,7 +3347,7 @@ kendo_module({
                         this.ignoredConnections.add(conn);
                         continue;
                     }
-                    var newEdge = new Link(sourceNode, sinkNode);
+                    var newEdge = new Link(sourceNode, sinkNode, conn.id, conn);
 
                     this.edgeMap.add(newEdge, [conn]);
                     this.edges.add(newEdge);
@@ -3424,7 +3424,7 @@ kendo_module({
                 startRadialAngle: 0,
                 roots: null,
                 layerDistance: 25,
-                layeredLayoutType: kendo.diagram.LayeredLayoutType.Down,
+                layeredLayoutType: kendo.diagram.LayeredLayoutType.Right,
                 siftingRounds: 1,
                 keepGroupLayout: false,
                 endRadialAngle: 2 * Math.PI,
@@ -3474,8 +3474,10 @@ kendo_module({
 
                 for (var j = 0; j < component.nodes.length; j++) {
                     var node = component.nodes[j];
-                    var shape = node.associatedShape;
-                    shape.bounds(new Rect(node.x, node.y, node.width, node.height));
+                    if (node.associatedShape) {// not virtual
+                        var shape = node.associatedShape;
+                        shape.bounds(new Rect(node.x, node.y, node.width, node.height));
+                    }
                 }
 
                 var boundingRect = component.bounds;
@@ -3510,6 +3512,20 @@ kendo_module({
                 nodeBounds.x += deltax;
                 nodeBounds.y += deltay;
                 node.bounds(nodeBounds);
+            }
+            for (var i = 0; i < component.links.length; i++) {
+                var link = component.links[i];
+                if (link.points != null) {
+                    var newpoints = [];
+                    var points = link.points;
+                    for (var j = 0; j < points.length; j++) {
+                        var p = points[j];
+                        p.x += deltax;
+                        p.y += deltay;
+                        newpoints.push(p);
+                    }
+                    link.points = newpoints;
+                }
             }
             this.currentHorizontalOffset += bounds.width + this.options.totalMargin.width;
             return new Point(deltax, deltay);
@@ -4874,6 +4890,18 @@ kendo_module({
                 var shape = node.associatedShape;
                 shape.bounds(new Rect(node.x, node.y, node.width, node.height));
             }
+            for (var i = 0; i < graph.links.length; i++) {
+                var link = graph.links[i];
+                var p = []
+                if (link.points != null) {
+                    p.addRange(link.points);
+                }
+                var sb = link.source.associatedShape.bounds();
+                p.prepend(new diagram.Point(sb.x, sb.y));
+                var eb = link.target.associatedShape.bounds();
+                p.append(new diagram.Point(eb.x, eb.y));
+                link.associatedConnection.points(p);
+            }
         },
 
         /**
@@ -5234,7 +5262,7 @@ kendo_module({
                 for (var n = 0; n < layer.length; ++n) {
                     var node = layer[n];
                     node.layerIndex = n;
-                    this.minDistances[l][n] = this.nodeDistance;
+                    this.minDistances[l][n] = this.options.nodeDistance;
                     if (n < layer.length - 1) {
                         if (this.direction % 2 == 0)	// vertical
                         {
@@ -5421,7 +5449,7 @@ kendo_module({
                 }
             }, this);
 
-            var depth = this.margins;
+            var depth = this.options.margins;
 
             for (var i = (this.direction < 2 ? 0 : this.layers.length - 1);
                  this.direction < 2 ? i < this.layers.length : i >= 0;
@@ -5455,7 +5483,7 @@ kendo_module({
                     }
                 }
 
-                depth += this.layerDistance + height;
+                depth += this.options.layerDistance + height;
             }
         },
 
@@ -5895,7 +5923,7 @@ kendo_module({
 
         mapVirtualNode: function (node, link) {
             this.nodeToLinkMap.set(node, link);
-            if (!this.linkToNodeMap.contains(link)) {
+            if (!this.linkToNodeMap.containsKey(link)) {
                 this.linkToNodeMap.set(link, []);
             }
             this.linkToNodeMap.get(link).push(node);

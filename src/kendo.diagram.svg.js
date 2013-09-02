@@ -520,17 +520,42 @@ kendo_module({
 
     var Polyline = VisualBase.extend({
         init: function (options) {
-            var that = this, pointsString = "", i;
+            var that = this, i;
             VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "polyline"), options);
+            if (isDefined(options) && options.points != null) {
+                this.points(that.options.points);
+            }
 
-            for (i = 0; i < that.options.points.length; i++) {
-                pointsString += " " + that.options.points[i].x + "," + that.options.points[i].y;
+            this.background("none");
+
+        },
+        refresh: function () {
+            if(this._points==null || this._points.length==0)return;
+            var pointsString = "";
+            for (i = 0; i < this._points.length; i++) {
+                // todo: toArray and fromArray to allow Point and Tuple
+                pointsString += " " + this._points[i].x + "," + this._points[i].y;
             }
             this.native.setAttribute("points", pointsString.trim());
+            this.native.setAttribute("stroke", "Orange");
+            this.native.setAttribute("stroke-width", "5");
+
+        },
+        points: function (value) {
+            if (isUndefined(value)) {
+                return this._points;
+            }
+            else {
+                this._points = value;
+                this.refresh();
+            }
+        },
+        redraw: function () {
+            this.refresh();
         },
         options: {
             stroke: "gray",
-            strokeThickness: 1,
+            strokeThickness: 5,
             backgrounds: "none",
             points: []
         }

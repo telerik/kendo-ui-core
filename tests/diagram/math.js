@@ -1650,10 +1650,10 @@ test('Layered layout', function () {
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
     diagram.canvas.native.setAttribute("height", "1000");
-    diagram.randomDiagram(5, 3, true);
+    diagram.randomDiagram(100, 2, false, true);
 
     var root = diagram.getId("0");
-    diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout);
+    diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,{layerDistance: 500, nodeDistance: 100});
     diagram.zoom(0.5);
     ok(true);
 });
