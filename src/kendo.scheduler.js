@@ -940,6 +940,7 @@ kendo_module({
             date: TODAY,
             editable: true,
             autoBind: true,
+            snap: true,
             timezone: "",
             messages: {
                 today: "Today",

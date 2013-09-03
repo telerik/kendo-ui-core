@@ -610,6 +610,43 @@ kendo_module({
             }
 
             return result;
+        },
+
+        innerRect: function(start, end, snap) {
+            var top;
+            var bottom;
+            var startSlot = this.start;
+            var endSlot = this.end;
+
+            if (snap) {
+                top = startSlot.offsetTop;
+                bottom = endSlot.offsetTop + endSlot.clientHeight;
+            } else {
+                var startOffset = kendo.date.toUtcTime(start) - startSlot.start;
+
+                if (startOffset < 0) {
+                    startOffset = 0;
+                }
+
+                var startSlotDuration = startSlot.end - startSlot.start;
+
+                top = startSlot.offsetTop + startSlot.clientHeight * startOffset / startSlotDuration;
+
+                var endOffset = endSlot.end - kendo.date.toUtcTime(end);
+
+                if (endOffset < 0) {
+                    endOffset = 0;
+                }
+
+                var endSlotDuration = endSlot.end - endSlot.start;
+
+                bottom = endSlot.offsetTop + endSlot.clientHeight - endSlot.clientHeight * endOffset / endSlotDuration;
+            }
+
+            return {
+                top: top,
+                bottom: bottom
+            };
         }
     });
 

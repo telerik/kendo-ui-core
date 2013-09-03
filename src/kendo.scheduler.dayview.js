@@ -1154,12 +1154,14 @@ kendo_module({
         },
 
         _positionEvent: function(event, element, slotRange) {
-            var bottomOffset = 4;
+            var rect = slotRange.innerRect(event.start, event.end, false);
 
-            element.css({
-                height: slotRange.innerHeight() - bottomOffset,
-                top: slotRange.start.offsetTop
-            });
+            var height = rect.bottom - rect.top - 2; /* two times border width */
+
+            element.css( {
+                top: rect.top,
+                height: height
+            } );
 
             this._arrangeColumns(element, slotRange);
        },

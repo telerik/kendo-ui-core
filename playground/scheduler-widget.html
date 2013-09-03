@@ -55,69 +55,23 @@
             <div id="scheduler"></div>
     <script>
        $("#scheduler").kendoScheduler({
+            snap: false,
             views: ["day"],
-            date: new Date(2013, 2, 31),
-            resources: [
-                {
-                    field: "ownerId",
-                    name: "Owner",
-                    dataSource: [
-                        { text: "Alex", value: 1, color: "red" },
-                        { text: "Bob", value: 2, color: "green" },
-                        { text: "Charlie", value: 3, color: "blue" }
-                    ],
-                    title: "Owner"
-                }/*,{
-                    field: "ownerId",
-                    dataSource: [
-                        { text: "Alex", value: 1, color: "red" },
-                        { text: "Bob", value: 2, color: "green" },
-                        { text: "Charlie", value: 3, color: "blue" }
-                    ],
-                    title: "Owner"
-                }*/
-            ],
-            timezone: "Europe/Sofia",
+            date: new Date("2013/6/10"),
             dataSource: {
-                batch: true,
-                transport: {
-                    read: {
-                        url: "http://demos.kendoui.com/service/tasks",
-                        dataType: "jsonp"
-                    },
-                    update: {
-                        url: "http://demos.kendoui.com/service/tasks/update",
-                        dataType: "jsonp"
-                    },
-                    create: {
-                        url: "http://demos.kendoui.com/service/tasks/create",
-                        dataType: "jsonp"
-                    },
-                    destroy: {
-                        url: "http://demos.kendoui.com/service/tasks/destroy",
-                        dataType: "jsonp"
-                    },
-                    parameterMap: function(options, operation) {
-                        if (operation !== "read" && options.models) {
-                            return {models: kendo.stringify(options.models)};
-                        }
+                data: [
+                /*
+                    {
+                        id: 1,
+                        start: new Date("2013/6/10 10:10"),
+                        end: new Date("2013/6/10 10:20"),
+                        title: "foo"
                     }
-                },
+                */
+                ],
                 schema: {
                     model: {
-                        id: "TaskID",
-                        fields: {
-                            TaskID: { type: "number" },
-                            title: { field: "Title", defaultValue: "No title", validation: { required: true } },
-                            start: { type: "date", field: "Start" },
-                            end: { type: "date", field: "End" },
-                            description: { field: "Description" },
-                            recurrence: { field: "Recurrence" },
-                            exception: { field: "RecurrenceException" },
-                            recurrenceId: { field: "RecurrenceID" },
-                            ownerId: { field: "OwnerID", defaultValue: 1 },
-                            isAllDay: { type: "boolean", field: "IsAllDay" }
-                        }
+                        id: "id"
                     }
                 }
             }

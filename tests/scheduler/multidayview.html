@@ -512,37 +512,6 @@
 
             });
 
-            test("set the height of the event when end time is near the end of the slot", function() {
-                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-                    view = setup({
-                        startTime: new Date("2013/2/26 8:00 AM"),
-                        dates: [
-                           selectedDate
-                        ]
-                    }),
-
-                    events = [new SchedulerEvent({uid:"uid", start: new Date("2013/2/26 10:00 AM"), end: new Date("2013/2/26 12:40 PM"), title: "my event" })];
-
-                view.render(events);
-
-                equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 3));
-            });
-
-
-            test("the height of the event with equal start and end is single row", function() {
-                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-                    view = setup({
-                        dates: [
-                           selectedDate
-                        ]
-                    }),
-                    events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "my event" })];
-
-                view.render(events);
-
-                equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 1));
-            });
-
             test("multiple day events are added to all day slot", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
@@ -1899,7 +1868,22 @@
                 equal(events.filter("[aria-selected=false]").length, events.length);
             });
 
+            test("event which starts at 15 minutes is positioned in the middle of the slot", function() {
+                var view = setup({
+                    majorTick: 60,
+                    startTime: new Date("2013/6/6 10:00"),
+                    dates: [new Date("2013/6/6")]
+                });
 
+                var events = [new SchedulerEvent({ start: new Date("2013/6/6 10:15"), end: new Date("2013/6/6 10:30"), title: "" }) ];
+
+                view.render(events);
+
+                var event = view.element.find(".k-event");
+                var slot = view.element.find(".k-scheduler-content td:first");
+
+                equalWithRound(event[0].offsetTop, slot[0].offsetTop + slot[0].offsetHeight / 2);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
