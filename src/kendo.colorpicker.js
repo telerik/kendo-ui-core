@@ -53,10 +53,15 @@ kendo_module({
             value: null,
             _standalone: true
         },
-        events: [ "change", "select", "cancel" ],
+        events: [
+            "change",
+            "select",
+            "cancel"
+        ],
         color: function(value) {
             if (value !== undefined) {
-                this._updateUI(this._value = parse(value));
+                this._value = parse(value);
+                this._updateUI(this._value);
             }
 
             return this._value;
