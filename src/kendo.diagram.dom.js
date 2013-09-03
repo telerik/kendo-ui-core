@@ -262,7 +262,6 @@ kendo_module({
                 this.visual.rotate(angle, center);
 
                 if (this.adorner) {
-                    this.adorner.options.angle = angle;
                     this.adorner.refresh();
                 }
                 if (this.diagram && this.diagram._connectorsAdorner) {
@@ -450,11 +449,11 @@ kendo_module({
         },
         _hitTest: function (value) {
             var p = new Point(value.x, value.y), from = this.sourcePoint(), to = this.targetPoint();
-            if (value.isEmpty && !value.isEmpty()) {
-                return value.contains(from) && value.contains(to);
+            if (value.isEmpty && !value.isEmpty() && value.contains(from) && value.contains(to)) {
+                return this;
             }
             if (p.isOnLine(from, to)) {
-                return true;
+                return this;
             }
         },
         _hover: function (value) {

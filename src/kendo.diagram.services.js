@@ -310,11 +310,13 @@ kendo_module({
         },
         move: function (p) {
             var that = this;
-            that._selectedItems.each(function (item) {
-                item.adorner.move(that.handle, p);
-            });
+            if (this.handle) {
+                that._selectedItems.each(function (item) {
+                    item.adorner.move(that.handle, p);
+                });
+            }
         },
-        end: function (p, meta) {
+        end: function () {
             var diagram = this.toolService.diagram, unit;
             diagram.undoRedoService.begin();
             this._selectedItems.each(function (item) {
@@ -337,7 +339,7 @@ kendo_module({
         tryActivate: function () {
             return this.toolService.hoveredItem === undefined;
         },
-        start: function (p, meta) {
+        start: function (p) {
             var diagram = this.toolService.diagram;
             diagram.select(false);
             diagram.selector.start(p);
@@ -357,7 +359,7 @@ kendo_module({
             }
             diagram.selector.end();
         },
-        getCursor: function (p) {
+        getCursor: function () {
             return Cursors.arrow;
         }
     });
@@ -439,7 +441,7 @@ kendo_module({
             this.editor.bind("finishEdit", $.proxy(this._finishEdit, this));
             this.toolService.diagram.bind("zoom", $.proxy(this._positionEditor, this));
         },
-        doubleClick: function (p) {
+        doubleClick: function () {
             var editor = this.editor;
             var shape = this.toolService.hoveredItem;
 
@@ -471,13 +473,13 @@ kendo_module({
                 return;
             }
 
-            var diagram = this.toolService.diagram;
-            var editor = this.editor;
-            var native = $(editor.native);
-            var bounds = this.toolService.editShape.bounds();
+            var diagram = this.toolService.diagram,
+                editor = this.editor,
+                nativeEditor = $(editor.native),
+                bounds = this.toolService.editShape.bounds();
 
             var cssDim = function (prop) {
-                return parseInt(native.css(prop));
+                return parseInt(nativeEditor.css(prop), 10);
             };
 
             var editorHeight = 20;
@@ -489,7 +491,7 @@ kendo_module({
             var tp = diagram.transformPoint(bounds.topLeft());
 
             editor.position(tp.plus(formattingOffset));
-            native.css({ fontSize: (15 * diagram.zoom()) | 0 });
+            nativeEditor.css({ fontSize: (15 * diagram.zoom()) | 0 });
         },
         _finishEdit: function () {
             this.toolService._finishEditShape();
@@ -514,11 +516,11 @@ kendo_module({
         },
         move: function (p, meta) {
             meta = deepExtend({}, meta);
-            var updatedHovered = true;
+            var updateHovered = true;
             if (this.activeTool) {
-                updatedHovered = this.activeTool.move(p, meta);
+                updateHovered = this.activeTool.move(p, meta);
             }
-            if (updatedHovered) {
+            if (updateHovered) {
                 this._updateHoveredItem(p);
             }
             this._updateCursor(p);
@@ -609,7 +611,7 @@ kendo_module({
             }
         },
         _hitTest: function (point) {
-            var i, item, hit, d = this.diagram;
+            var hit, d = this.diagram;
 
             // connectors
             if (d._connectorsAdorner) {
@@ -622,30 +624,19 @@ kendo_module({
                     return hit;
                 }
             }
-
             if (!this.activeTool || this.activeTool.type !== "ConnectionTool") {
-                for (var j = 0; j < d._selectedItems.length; j++) {
-                    item = d._selectedItems[j];
-                    hit = item._hitTest(point);
-                    if (hit) {
-                        return item;
-                    }
-                }
+                hit = this._hitTestItems(d._selectedItems, point);
             }
-
-            // shapes
-            for (i = d.shapes.length - 1; i >= 0; i--) {
-                item = d.shapes[i];
+            // Shapes | Connectors
+            return hit || this._hitTestItems(d.shapes, point) || this._hitTestItems(d.connections, point);
+        },
+        _hitTestItems: function (array, point) {
+            var i, item, hit;
+            for (i = array.length - 1; i >= 0; i--) {
+                item = array[i];
                 hit = item._hitTest(point);
                 if (hit) {
                     return hit;
-                }
-            }
-            // connections
-            for (i = d.connections.length - 1; i >= 0; i--) {
-                item = d.connections[i];
-                if (item._hitTest(point)) {
-                    return item;
                 }
             }
         },
@@ -850,7 +841,8 @@ kendo_module({
             },
             rotationThumb: {
                 data: "M6.50012,0C8.21795,2.56698e-009 9.78015,0.666358 10.9423,1.75469L11.0482,1.85645L12.6557,0.541992L12.697,6.41699L7,5.16667L8.69918,3.77724L8.68162,3.76281C8.08334,3.28539 7.32506,3 6.50012,3C4.56709,3 3.00006,4.567 3.00006,6.5C3.00006,8.433 4.56709,10 6.50012,10C7.82908,10 8.98505,9.25935 9.57775,8.16831L9.59433,8.13594L12.333,9.37087L12.2891,9.45914C11.2124,11.5613 9.02428,13 6.50012,13C2.9102,13 -7.45058e-008,10.0899 0,6.5C-7.45058e-008,2.91015 2.9102,2.93369e-009 6.50012,0z",
-                y: -50
+                y: -50,
+                thumbWidth: 10
             },
             offset: 6
         },
@@ -860,29 +852,6 @@ kendo_module({
             }
             else {
                 return this._bounds;
-            }
-        },
-        refresh: function () {
-            var sb = this.shape.bounds(),
-                innerBounds = this.shape.visualBounds().clone(),
-                that = this, b;
-            this.bounds(innerBounds.inflate(this.options.offset, this.options.offset));
-            this.visual.position(this._bounds.topLeft());
-            $.each(this.map, function () {
-                b = that._getHandleBounds(new Point(this.x, this.y));
-                this.visual.position(b.topLeft());
-            });
-            this.text.position(new Point(0, this._bounds.height + 20));
-            this.text.content(kendo.format("x: {0}, y: {1}, w: {2}, h: {3}", Math.round(sb.x), Math.round(sb.y), Math.round(sb.width), Math.round(sb.height)));
-            this.visual.position(this._bounds.topLeft());
-            this._rotateAngle = this.shape.rotate().angle;
-            if (this._rotateAngle) {
-                this.visual.rotate(this._rotateAngle, new Point(this._bounds.width / 2, this._bounds.height / 2));
-            }
-            this.rect.redraw({width: innerBounds.width, height: innerBounds.height});
-            if (this.rotationThumb) {
-                this._rotationThumbBounds = new Rect(this._bounds.center().x, this._bounds.y + this.options.rotationThumb.y, 0, 0).inflate(10);
-                this.rotationThumb.redraw({x: this._bounds.width / 2 - 5});
             }
         },
         _hitTest: function (p) {
@@ -969,6 +938,51 @@ kendo_module({
             this._cp = p;
             this.isManipulating = true;
         },
+        move: function (handle, p) {
+            var tp = this.diagram.transformPoint(p), delta = p.minus(this._cp), dragging,
+                dtl = new Point(), dbr = new Point(), bounds = this.shape.bounds(), tl, br;
+            if (handle.y === -2 && handle.x === -1) {
+                var angle = Math.findAngle(this._bounds.center(), tp);
+                this.shape.rotate(angle);
+            } else {
+                var rotate = this.shape.rotate();
+                if (handle.x === 0 && handle.y === 0) {
+                    dbr = dtl = delta; // dragging
+                    dragging = true;
+                }
+                else {
+                    if (handle.x === -1) {
+                        dtl.x = delta.x;
+                    }
+                    else if (handle.x === 1) {
+                        dbr.x = delta.x;
+                    }
+
+                    if (handle.y === -1) {
+                        dtl.y = delta.y;
+                    }
+                    else if (handle.y === 1) {
+                        dbr.y = delta.y;
+                    }
+                }
+                tl = bounds.topLeft().plus(dtl);
+                br = bounds.bottomRight().plus(dbr);
+                bounds = Rect.fn.fromPoints(tl, br);
+                if (br.x - tl.x > 0 && br.y - tl.y > 0 && bounds.width >= this.shape.options.minWidth && bounds.height >= this.shape.options.minHeight) {
+                    this._cp = p;
+                    if (rotate.angle && !dragging) {
+                        var center = bounds.center();
+                        center.rotate(this.shape._bounds.center(), 360 - rotate.angle);
+                        bounds = new Rect(center.x - bounds.width / 2, center.y - bounds.height / 2, bounds.width, bounds.height);
+                    }
+                    this.shape.bounds(bounds);
+                    if (rotate.angle && !dragging) {
+                        this.shape.rotate(rotate.angle);
+                    }
+                    this.refresh();
+                }
+            }
+        },
         stop: function () {
             var r1 = this.initialState,
                 r2 = this.shape.bounds(),
@@ -979,40 +993,27 @@ kendo_module({
             this.isManipulating = false;
             return unit;
         },
-        move: function (handle, p) {
-            var tp = this.diagram.transformPoint(p),
-                dtl = new Point(), dbr = new Point(), bounds = this.shape.bounds(), p1 = p;
-            if (handle.y === -2 && handle.x === -1) {
-                var angle = Math.findAngle(this._bounds.center(), tp);
-                this.shape.rotate(angle);
-            } else {
-                if (this._rotateAngle) {
-                    p1 = p.clone().rotate(this._bounds.center(), this._rotateAngle);
-                }
-                if (handle.x === -1 || (handle.x === 0 && handle.y === 0)) {
-                    dtl.x = p.x - this._cp.x;
-                }
-                if (handle.x === 1 || (handle.x === 0 && handle.y === 0)) {
-                    dbr.x = p.x - this._cp.x;
-                }
-                if (handle.y === -1 || (handle.x === 0 && handle.y === 0)) {
-                    dtl.y = p.y - this._cp.y;
-                }
-                if (handle.y === 1 || (handle.x === 0 && handle.y === 0)) {
-                    dbr.y = p.y - this._cp.y;
-                }
-                var tl = bounds.topLeft().plus(dtl);
-                var br = bounds.bottomRight().plus(dbr);
-                bounds = Rect.fn.fromPoints(tl, br);
-                if (br.x - tl.x > 0 && br.y - tl.y > 0 && bounds.width >= this.shape.options.minWidth && bounds.height >= this.shape.options.minHeight) {
-                    this._cp = p;
-                    this.shape.bounds(bounds);
-                    var rotate = this.shape.rotate();
-                    if (rotate.angle) {
-                        this.shape.rotate(rotate.angle); // TODO: check this out. Need to rotate the shape with respect to the new bounds.
-                    }
-                    this.refresh();
-                }
+        refresh: function () {
+            var sb = this.shape.bounds(),
+                innerBounds = this.shape.visualBounds().clone(),
+                that = this, b;
+            this.bounds(innerBounds.inflate(this.options.offset, this.options.offset));
+            this.visual.position(this._bounds.topLeft());
+            $.each(this.map, function () {
+                b = that._getHandleBounds(new Point(this.x, this.y));
+                this.visual.position(b.topLeft());
+            });
+            this.text.position(new Point(0, this._bounds.height + 20));
+            this.text.content(kendo.format("x: {0}, y: {1}, w: {2}, h: {3}", Math.round(sb.x), Math.round(sb.y), Math.round(sb.width), Math.round(sb.height)));
+            this.visual.position(this._bounds.topLeft());
+            this._rotateAngle = this.shape.rotate().angle;
+            if (this._rotateAngle) {
+                this.visual.rotate(this._rotateAngle, new Point(this._bounds.width / 2, this._bounds.height / 2));
+            }
+            this.rect.redraw({width: innerBounds.width, height: innerBounds.height});
+            if (this.rotationThumb) {
+                this._rotationThumbBounds = new Rect(this._bounds.center().x, this._bounds.y + this.options.rotationThumb.y, 0, 0).inflate(this.options.rotationThumb.thumbWidth);
+                this.rotationThumb.redraw({x: this._bounds.width / 2 - this.options.rotationThumb.thumbWidth / 2});
             }
         }
     });
