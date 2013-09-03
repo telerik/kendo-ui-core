@@ -51,35 +51,35 @@ public class ColumnMenuMessagesTag extends  BaseTag  /* interfaces *//* interfac
         return "grid-columnMenu-messages";
     }
 
-    public String getColumns() {
-        return (String)getProperty("columns");
+    public java.lang.String getColumns() {
+        return (java.lang.String)getProperty("columns");
     }
 
-    public void setColumns(String value) {
+    public void setColumns(java.lang.String value) {
         setProperty("columns", value);
     }
 
-    public String getFilter() {
-        return (String)getProperty("filter");
+    public java.lang.String getFilter() {
+        return (java.lang.String)getProperty("filter");
     }
 
-    public void setFilter(String value) {
+    public void setFilter(java.lang.String value) {
         setProperty("filter", value);
     }
 
-    public String getSortAscending() {
-        return (String)getProperty("sortAscending");
+    public java.lang.String getSortAscending() {
+        return (java.lang.String)getProperty("sortAscending");
     }
 
-    public void setSortAscending(String value) {
+    public void setSortAscending(java.lang.String value) {
         setProperty("sortAscending", value);
     }
 
-    public String getSortDescending() {
-        return (String)getProperty("sortDescending");
+    public java.lang.String getSortDescending() {
+        return (java.lang.String)getProperty("sortDescending");
     }
 
-    public void setSortDescending(String value) {
+    public void setSortDescending(java.lang.String value) {
         setProperty("sortDescending", value);
     }
 

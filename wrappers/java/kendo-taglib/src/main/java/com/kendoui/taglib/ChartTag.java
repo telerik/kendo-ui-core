@@ -180,35 +180,35 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("dataSource", dataSource);
     }
 
-    public String getRenderAs() {
-        return (String)getProperty("renderAs");
+    public java.lang.String getRenderAs() {
+        return (java.lang.String)getProperty("renderAs");
     }
 
-    public void setRenderAs(String value) {
+    public void setRenderAs(java.lang.String value) {
         setProperty("renderAs", value);
     }
 
-    public Object getSeriesColors() {
-        return (Object)getProperty("seriesColors");
+    public java.lang.Object getSeriesColors() {
+        return (java.lang.Object)getProperty("seriesColors");
     }
 
-    public void setSeriesColors(Object value) {
+    public void setSeriesColors(java.lang.Object value) {
         setProperty("seriesColors", value);
     }
 
-    public String getTheme() {
-        return (String)getProperty("theme");
+    public java.lang.String getTheme() {
+        return (java.lang.String)getProperty("theme");
     }
 
-    public void setTheme(String value) {
+    public void setTheme(java.lang.String value) {
         setProperty("theme", value);
     }
 
-    public String getTitle() {
-        return (String)getProperty("title");
+    public java.lang.String getTitle() {
+        return (java.lang.String)getProperty("title");
     }
 
-    public void setTitle(String value) {
+    public void setTitle(java.lang.String value) {
         setProperty("title", value);
     }
 

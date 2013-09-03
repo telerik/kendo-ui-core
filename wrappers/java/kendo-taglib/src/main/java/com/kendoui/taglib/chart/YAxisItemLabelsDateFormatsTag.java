@@ -51,43 +51,43 @@ public class YAxisItemLabelsDateFormatsTag extends  BaseTag  /* interfaces */ /*
         return "chart-yAxisItem-labels-dateFormats";
     }
 
-    public String getDays() {
-        return (String)getProperty("days");
+    public java.lang.String getDays() {
+        return (java.lang.String)getProperty("days");
     }
 
-    public void setDays(String value) {
+    public void setDays(java.lang.String value) {
         setProperty("days", value);
     }
 
-    public String getHours() {
-        return (String)getProperty("hours");
+    public java.lang.String getHours() {
+        return (java.lang.String)getProperty("hours");
     }
 
-    public void setHours(String value) {
+    public void setHours(java.lang.String value) {
         setProperty("hours", value);
     }
 
-    public String getMonths() {
-        return (String)getProperty("months");
+    public java.lang.String getMonths() {
+        return (java.lang.String)getProperty("months");
     }
 
-    public void setMonths(String value) {
+    public void setMonths(java.lang.String value) {
         setProperty("months", value);
     }
 
-    public String getWeeks() {
-        return (String)getProperty("weeks");
+    public java.lang.String getWeeks() {
+        return (java.lang.String)getProperty("weeks");
     }
 
-    public void setWeeks(String value) {
+    public void setWeeks(java.lang.String value) {
         setProperty("weeks", value);
     }
 
-    public String getYears() {
-        return (String)getProperty("years");
+    public java.lang.String getYears() {
+        return (java.lang.String)getProperty("years");
     }
 
-    public void setYears(String value) {
+    public void setYears(java.lang.String value) {
         setProperty("years", value);
     }
 

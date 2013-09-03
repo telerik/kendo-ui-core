@@ -54,11 +54,11 @@ public class GaugeAreaTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("border", value);
     }
 
-    public Object getBackground() {
-        return (Object)getProperty("background");
+    public java.lang.Object getBackground() {
+        return (java.lang.Object)getProperty("background");
     }
 
-    public void setBackground(Object value) {
+    public void setBackground(java.lang.Object value) {
         setProperty("background", value);
     }
 
@@ -70,11 +70,11 @@ public class GaugeAreaTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("height", value);
     }
 
-    public Object getMargin() {
-        return (Object)getProperty("margin");
+    public java.lang.Object getMargin() {
+        return (java.lang.Object)getProperty("margin");
     }
 
-    public void setMargin(Object value) {
+    public void setMargin(java.lang.Object value) {
         setProperty("margin", value);
     }
 

@@ -63,35 +63,35 @@ public class YAxisItemCrosshairTooltipTag extends  BaseTag  /* interfaces */ /* 
         setEvent("template", value.getBody());
     }
 
-    public String getBackground() {
-        return (String)getProperty("background");
+    public java.lang.String getBackground() {
+        return (java.lang.String)getProperty("background");
     }
 
-    public void setBackground(String value) {
+    public void setBackground(java.lang.String value) {
         setProperty("background", value);
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setColor(String value) {
+    public void setColor(java.lang.String value) {
         setProperty("color", value);
     }
 
-    public String getFont() {
-        return (String)getProperty("font");
+    public java.lang.String getFont() {
+        return (java.lang.String)getProperty("font");
     }
 
-    public void setFont(String value) {
+    public void setFont(java.lang.String value) {
         setProperty("font", value);
     }
 
-    public String getFormat() {
-        return (String)getProperty("format");
+    public java.lang.String getFormat() {
+        return (java.lang.String)getProperty("format");
     }
 
-    public void setFormat(String value) {
+    public void setFormat(java.lang.String value) {
         setProperty("format", value);
     }
 
@@ -103,11 +103,11 @@ public class YAxisItemCrosshairTooltipTag extends  BaseTag  /* interfaces */ /* 
         setProperty("padding", value);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
     }
 
-    public void setTemplate(String value) {
+    public void setTemplate(java.lang.String value) {
         setProperty("template", value);
     }
 

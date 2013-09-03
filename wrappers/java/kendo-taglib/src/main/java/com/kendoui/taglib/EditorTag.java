@@ -85,11 +85,11 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
         setEvent("select", value.getBody());
     }
 
-    public Object getContent() {
-        return (Object)getProperty("content");
+    public java.lang.Object getContent() {
+        return (java.lang.Object)getProperty("content");
     }
 
-    public void setContent(Object value) {
+    public void setContent(java.lang.Object value) {
         setProperty("content", value);
     }
 
@@ -101,19 +101,19 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("encoded", value);
     }
 
-    public Object getMessages() {
-        return (Object)getProperty("messages");
+    public java.lang.Object getMessages() {
+        return (java.lang.Object)getProperty("messages");
     }
 
-    public void setMessages(Object value) {
+    public void setMessages(java.lang.Object value) {
         setProperty("messages", value);
     }
 
-    public Object getStylesheets() {
-        return (Object)getProperty("stylesheets");
+    public java.lang.Object getStylesheets() {
+        return (java.lang.Object)getProperty("stylesheets");
     }
 
-    public void setStylesheets(Object value) {
+    public void setStylesheets(java.lang.Object value) {
         setProperty("stylesheets", value);
     }
 

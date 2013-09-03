@@ -97,11 +97,11 @@ public class SplitterTag extends WidgetTag /* interfaces *//* interfaces */ {
         setEvent("resize", value.getBody());
     }
 
-    public String getOrientation() {
-        return (String)getProperty("orientation");
+    public java.lang.String getOrientation() {
+        return (java.lang.String)getProperty("orientation");
     }
 
-    public void setOrientation(String value) {
+    public void setOrientation(java.lang.String value) {
         setProperty("orientation", value);
     }
 

@@ -50,19 +50,19 @@ public class MonthTag extends BaseTag /* interfaces *//* interfaces */ {
         return "dateTimePicker-month";
     }
 
-    public String getContent() {
-        return (String)getProperty("content");
+    public java.lang.String getContent() {
+        return (java.lang.String)getProperty("content");
     }
 
-    public void setContent(String value) {
+    public void setContent(java.lang.String value) {
         setProperty("content", value);
     }
 
-    public String getEmpty() {
-        return (String)getProperty("empty");
+    public java.lang.String getEmpty() {
+        return (java.lang.String)getProperty("empty");
     }
 
-    public void setEmpty(String value) {
+    public void setEmpty(java.lang.String value) {
         setProperty("empty", value);
     }
 

@@ -51,11 +51,11 @@ public class ResourceTag extends  BaseTag implements DataBoundWidget /* interfac
         return "scheduler-resource";
     }
 
-    public String getDataColorField() {
-        return (String)getProperty("dataColorField");
+    public java.lang.String getDataColorField() {
+        return (java.lang.String)getProperty("dataColorField");
     }
 
-    public void setDataColorField(String value) {
+    public void setDataColorField(java.lang.String value) {
         setProperty("dataColorField", value);
     }
 
@@ -63,27 +63,27 @@ public class ResourceTag extends  BaseTag implements DataBoundWidget /* interfac
         setProperty("dataSource", dataSource);
     }
 
-    public String getDataTextField() {
-        return (String)getProperty("dataTextField");
+    public java.lang.String getDataTextField() {
+        return (java.lang.String)getProperty("dataTextField");
     }
 
-    public void setDataTextField(String value) {
+    public void setDataTextField(java.lang.String value) {
         setProperty("dataTextField", value);
     }
 
-    public String getDataValueField() {
-        return (String)getProperty("dataValueField");
+    public java.lang.String getDataValueField() {
+        return (java.lang.String)getProperty("dataValueField");
     }
 
-    public void setDataValueField(String value) {
+    public void setDataValueField(java.lang.String value) {
         setProperty("dataValueField", value);
     }
 
-    public String getField() {
-        return (String)getProperty("field");
+    public java.lang.String getField() {
+        return (java.lang.String)getProperty("field");
     }
 
-    public void setField(String value) {
+    public void setField(java.lang.String value) {
         setProperty("field", value);
     }
 
@@ -95,19 +95,19 @@ public class ResourceTag extends  BaseTag implements DataBoundWidget /* interfac
         setProperty("multiple", value);
     }
 
-    public String getName() {
-        return (String)getProperty("name");
+    public java.lang.String getName() {
+        return (java.lang.String)getProperty("name");
     }
 
-    public void setName(String value) {
+    public void setName(java.lang.String value) {
         setProperty("name", value);
     }
 
-    public String getTitle() {
-        return (String)getProperty("title");
+    public java.lang.String getTitle() {
+        return (java.lang.String)getProperty("title");
     }
 
-    public void setTitle(String value) {
+    public void setTitle(java.lang.String value) {
         setProperty("title", value);
     }
 

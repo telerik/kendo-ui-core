@@ -50,75 +50,75 @@ public class LocalizationTag extends BaseTag /* interfaces *//* interfaces */ {
         return "upload-localization";
     }
 
-    public String getCancel() {
-        return (String)getProperty("cancel");
+    public java.lang.String getCancel() {
+        return (java.lang.String)getProperty("cancel");
     }
 
-    public void setCancel(String value) {
+    public void setCancel(java.lang.String value) {
         setProperty("cancel", value);
     }
 
-    public String getDropFilesHere() {
-        return (String)getProperty("dropFilesHere");
+    public java.lang.String getDropFilesHere() {
+        return (java.lang.String)getProperty("dropFilesHere");
     }
 
-    public void setDropFilesHere(String value) {
+    public void setDropFilesHere(java.lang.String value) {
         setProperty("dropFilesHere", value);
     }
 
-    public String getRemove() {
-        return (String)getProperty("remove");
+    public java.lang.String getRemove() {
+        return (java.lang.String)getProperty("remove");
     }
 
-    public void setRemove(String value) {
+    public void setRemove(java.lang.String value) {
         setProperty("remove", value);
     }
 
-    public String getRetry() {
-        return (String)getProperty("retry");
+    public java.lang.String getRetry() {
+        return (java.lang.String)getProperty("retry");
     }
 
-    public void setRetry(String value) {
+    public void setRetry(java.lang.String value) {
         setProperty("retry", value);
     }
 
-    public String getSelect() {
-        return (String)getProperty("select");
+    public java.lang.String getSelect() {
+        return (java.lang.String)getProperty("select");
     }
 
-    public void setSelect(String value) {
+    public void setSelect(java.lang.String value) {
         setProperty("select", value);
     }
 
-    public String getStatusFailed() {
-        return (String)getProperty("statusFailed");
+    public java.lang.String getStatusFailed() {
+        return (java.lang.String)getProperty("statusFailed");
     }
 
-    public void setStatusFailed(String value) {
+    public void setStatusFailed(java.lang.String value) {
         setProperty("statusFailed", value);
     }
 
-    public String getStatusUploaded() {
-        return (String)getProperty("statusUploaded");
+    public java.lang.String getStatusUploaded() {
+        return (java.lang.String)getProperty("statusUploaded");
     }
 
-    public void setStatusUploaded(String value) {
+    public void setStatusUploaded(java.lang.String value) {
         setProperty("statusUploaded", value);
     }
 
-    public String getStatusUploading() {
-        return (String)getProperty("statusUploading");
+    public java.lang.String getStatusUploading() {
+        return (java.lang.String)getProperty("statusUploading");
     }
 
-    public void setStatusUploading(String value) {
+    public void setStatusUploading(java.lang.String value) {
         setProperty("statusUploading", value);
     }
 
-    public String getUploadSelectedFiles() {
-        return (String)getProperty("uploadSelectedFiles");
+    public java.lang.String getUploadSelectedFiles() {
+        return (java.lang.String)getProperty("uploadSelectedFiles");
     }
 
-    public void setUploadSelectedFiles(String value) {
+    public void setUploadSelectedFiles(java.lang.String value) {
         setProperty("uploadSelectedFiles", value);
     }
 

@@ -94,11 +94,11 @@ public class PageableTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("pageSize", value);
     }
 
-    public Object getPageSizes() {
-        return (Object)getProperty("pageSizes");
+    public java.lang.Object getPageSizes() {
+        return (java.lang.Object)getProperty("pageSizes");
     }
 
-    public void setPageSizes(Object value) {
+    public void setPageSizes(java.lang.Object value) {
         setProperty("pageSizes", value);
     }
 

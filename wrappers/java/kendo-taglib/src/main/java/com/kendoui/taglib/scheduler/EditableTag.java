@@ -57,11 +57,11 @@ public class EditableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setEvent("template", value.getBody());
     }
 
-    public Object getConfirmation() {
-        return (Object)getProperty("confirmation");
+    public java.lang.Object getConfirmation() {
+        return (java.lang.Object)getProperty("confirmation");
     }
 
-    public void setConfirmation(Object value) {
+    public void setConfirmation(java.lang.Object value) {
         setProperty("confirmation", value);
     }
 
@@ -89,11 +89,11 @@ public class EditableTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("resize", value);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
     }
 
-    public void setTemplate(String value) {
+    public void setTemplate(java.lang.String value) {
         setProperty("template", value);
     }
 

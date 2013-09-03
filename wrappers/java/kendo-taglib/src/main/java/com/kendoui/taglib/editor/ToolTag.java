@@ -77,27 +77,27 @@ public class ToolTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("exec", new Function(value));
     }
 
-    public String getName() {
-        return (String)getProperty("name");
+    public java.lang.String getName() {
+        return (java.lang.String)getProperty("name");
     }
 
-    public void setName(String value) {
+    public void setName(java.lang.String value) {
         setProperty("name", value);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
     }
 
-    public void setTemplate(String value) {
+    public void setTemplate(java.lang.String value) {
         setProperty("template", value);
     }
 
-    public String getTooltip() {
-        return (String)getProperty("tooltip");
+    public java.lang.String getTooltip() {
+        return (java.lang.String)getProperty("tooltip");
     }
 
-    public void setTooltip(String value) {
+    public void setTooltip(java.lang.String value) {
         setProperty("tooltip", value);
     }
 

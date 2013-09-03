@@ -51,83 +51,83 @@ public class ImageBrowserMessagesTag extends  BaseTag  /* interfaces */ /* inter
         return "editor-imageBrowser-messages";
     }
 
-    public String getDeleteFile() {
-        return (String)getProperty("deleteFile");
+    public java.lang.String getDeleteFile() {
+        return (java.lang.String)getProperty("deleteFile");
     }
 
-    public void setDeleteFile(String value) {
+    public void setDeleteFile(java.lang.String value) {
         setProperty("deleteFile", value);
     }
 
-    public String getDirectoryNotFound() {
-        return (String)getProperty("directoryNotFound");
+    public java.lang.String getDirectoryNotFound() {
+        return (java.lang.String)getProperty("directoryNotFound");
     }
 
-    public void setDirectoryNotFound(String value) {
+    public void setDirectoryNotFound(java.lang.String value) {
         setProperty("directoryNotFound", value);
     }
 
-    public String getEmptyFolder() {
-        return (String)getProperty("emptyFolder");
+    public java.lang.String getEmptyFolder() {
+        return (java.lang.String)getProperty("emptyFolder");
     }
 
-    public void setEmptyFolder(String value) {
+    public void setEmptyFolder(java.lang.String value) {
         setProperty("emptyFolder", value);
     }
 
-    public String getInvalidFileType() {
-        return (String)getProperty("invalidFileType");
+    public java.lang.String getInvalidFileType() {
+        return (java.lang.String)getProperty("invalidFileType");
     }
 
-    public void setInvalidFileType(String value) {
+    public void setInvalidFileType(java.lang.String value) {
         setProperty("invalidFileType", value);
     }
 
-    public String getOrderBy() {
-        return (String)getProperty("orderBy");
+    public java.lang.String getOrderBy() {
+        return (java.lang.String)getProperty("orderBy");
     }
 
-    public void setOrderBy(String value) {
+    public void setOrderBy(java.lang.String value) {
         setProperty("orderBy", value);
     }
 
-    public String getOrderByName() {
-        return (String)getProperty("orderByName");
+    public java.lang.String getOrderByName() {
+        return (java.lang.String)getProperty("orderByName");
     }
 
-    public void setOrderByName(String value) {
+    public void setOrderByName(java.lang.String value) {
         setProperty("orderByName", value);
     }
 
-    public String getOrderBySize() {
-        return (String)getProperty("orderBySize");
+    public java.lang.String getOrderBySize() {
+        return (java.lang.String)getProperty("orderBySize");
     }
 
-    public void setOrderBySize(String value) {
+    public void setOrderBySize(java.lang.String value) {
         setProperty("orderBySize", value);
     }
 
-    public String getOverwriteFile() {
-        return (String)getProperty("overwriteFile");
+    public java.lang.String getOverwriteFile() {
+        return (java.lang.String)getProperty("overwriteFile");
     }
 
-    public void setOverwriteFile(String value) {
+    public void setOverwriteFile(java.lang.String value) {
         setProperty("overwriteFile", value);
     }
 
-    public String getSearch() {
-        return (String)getProperty("search");
+    public java.lang.String getSearch() {
+        return (java.lang.String)getProperty("search");
     }
 
-    public void setSearch(String value) {
+    public void setSearch(java.lang.String value) {
         setProperty("search", value);
     }
 
-    public String getUploadFile() {
-        return (String)getProperty("uploadFile");
+    public java.lang.String getUploadFile() {
+        return (java.lang.String)getProperty("uploadFile");
     }
 
-    public void setUploadFile(String value) {
+    public void setUploadFile(java.lang.String value) {
         setProperty("uploadFile", value);
     }
 

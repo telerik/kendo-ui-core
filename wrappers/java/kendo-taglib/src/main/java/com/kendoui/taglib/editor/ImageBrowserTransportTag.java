@@ -71,51 +71,51 @@ public class ImageBrowserTransportTag extends  BaseTag  /* interfaces */ /* inte
         setEvent("imageUrl", value.getBody());
     }
 
-    public String getCreate() {
-        return (String)getProperty("create");
+    public java.lang.String getCreate() {
+        return (java.lang.String)getProperty("create");
     }
 
-    public void setCreate(String value) {
+    public void setCreate(java.lang.String value) {
         setProperty("create", value);
     }
 
-    public String getDestroy() {
-        return (String)getProperty("destroy");
+    public java.lang.String getDestroy() {
+        return (java.lang.String)getProperty("destroy");
     }
 
-    public void setDestroy(String value) {
+    public void setDestroy(java.lang.String value) {
         setProperty("destroy", value);
     }
 
-    public String getImageUrl() {
-        return (String)getProperty("imageUrl");
+    public java.lang.String getImageUrl() {
+        return (java.lang.String)getProperty("imageUrl");
     }
 
-    public void setImageUrl(String value) {
+    public void setImageUrl(java.lang.String value) {
         setProperty("imageUrl", value);
     }
 
-    public String getRead() {
-        return (String)getProperty("read");
+    public java.lang.String getRead() {
+        return (java.lang.String)getProperty("read");
     }
 
-    public void setRead(String value) {
+    public void setRead(java.lang.String value) {
         setProperty("read", value);
     }
 
-    public String getThumbnailUrl() {
-        return (String)getProperty("thumbnailUrl");
+    public java.lang.String getThumbnailUrl() {
+        return (java.lang.String)getProperty("thumbnailUrl");
     }
 
-    public void setThumbnailUrl(String value) {
+    public void setThumbnailUrl(java.lang.String value) {
         setProperty("thumbnailUrl", value);
     }
 
-    public String getUploadUrl() {
-        return (String)getProperty("uploadUrl");
+    public java.lang.String getUploadUrl() {
+        return (java.lang.String)getProperty("uploadUrl");
     }
 
-    public void setUploadUrl(String value) {
+    public void setUploadUrl(java.lang.String value) {
         setProperty("uploadUrl", value);
     }
 

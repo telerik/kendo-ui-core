@@ -78,11 +78,11 @@ public class NavigatorTag extends  BaseTag  /* interfaces */implements DataBound
         setProperty("dataSource", dataSource);
     }
 
-    public String getDateField() {
-        return (String)getProperty("dateField");
+    public java.lang.String getDateField() {
+        return (java.lang.String)getProperty("dateField");
     }
 
-    public void setDateField(String value) {
+    public void setDateField(java.lang.String value) {
         setProperty("dateField", value);
     }
 

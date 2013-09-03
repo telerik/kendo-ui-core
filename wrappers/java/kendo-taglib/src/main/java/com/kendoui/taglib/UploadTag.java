@@ -102,11 +102,11 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("enabled", value);
     }
 
-    public Object getFiles() {
-        return (Object)getProperty("files");
+    public java.lang.Object getFiles() {
+        return (java.lang.Object)getProperty("files");
     }
 
-    public void setFiles(Object value) {
+    public void setFiles(java.lang.Object value) {
         setProperty("files", value);
     }
 
@@ -126,11 +126,11 @@ public class UploadTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("showFileList", value);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
     }
 
-    public void setTemplate(String value) {
+    public void setTemplate(java.lang.String value) {
         setProperty("template", value);
     }
 

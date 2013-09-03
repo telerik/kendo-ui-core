@@ -140,19 +140,19 @@ public class SparklineTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("autoBind", value);
     }
 
-    public Object getAxisDefaults() {
-        return (Object)getProperty("axisDefaults");
+    public java.lang.Object getAxisDefaults() {
+        return (java.lang.Object)getProperty("axisDefaults");
     }
 
-    public void setAxisDefaults(Object value) {
+    public void setAxisDefaults(java.lang.Object value) {
         setProperty("axisDefaults", value);
     }
 
-    public Object getData() {
-        return (Object)getProperty("data");
+    public java.lang.Object getData() {
+        return (java.lang.Object)getProperty("data");
     }
 
-    public void setData(Object value) {
+    public void setData(java.lang.Object value) {
         setProperty("data", value);
     }
 
@@ -168,27 +168,27 @@ public class SparklineTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("pointWidth", value);
     }
 
-    public String getRenderAs() {
-        return (String)getProperty("renderAs");
+    public java.lang.String getRenderAs() {
+        return (java.lang.String)getProperty("renderAs");
     }
 
-    public void setRenderAs(String value) {
+    public void setRenderAs(java.lang.String value) {
         setProperty("renderAs", value);
     }
 
-    public Object getSeriesColors() {
-        return (Object)getProperty("seriesColors");
+    public java.lang.Object getSeriesColors() {
+        return (java.lang.Object)getProperty("seriesColors");
     }
 
-    public void setSeriesColors(Object value) {
+    public void setSeriesColors(java.lang.Object value) {
         setProperty("seriesColors", value);
     }
 
-    public String getTheme() {
-        return (String)getProperty("theme");
+    public java.lang.String getTheme() {
+        return (java.lang.String)getProperty("theme");
     }
 
-    public void setTheme(String value) {
+    public void setTheme(java.lang.String value) {
         setProperty("theme", value);
     }
 
@@ -200,11 +200,11 @@ public class SparklineTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("transitions", value);
     }
 
-    public String getType() {
-        return (String)getProperty("type");
+    public java.lang.String getType() {
+        return (java.lang.String)getProperty("type");
     }
 
-    public void setType(String value) {
+    public void setType(java.lang.String value) {
         setProperty("type", value);
     }
 

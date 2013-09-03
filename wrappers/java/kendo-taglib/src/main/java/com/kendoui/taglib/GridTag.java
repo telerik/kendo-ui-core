@@ -172,11 +172,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setEvent("saveChanges", value.getBody());
     }
 
-    public String getAltRowTemplate() {
-        return (String)getProperty("altRowTemplate");
+    public java.lang.String getAltRowTemplate() {
+        return (java.lang.String)getProperty("altRowTemplate");
     }
 
-    public void setAltRowTemplate(String value) {
+    public void setAltRowTemplate(java.lang.String value) {
         setProperty("altRowTemplate", value);
     }
 
@@ -208,11 +208,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("dataSource", dataSource);
     }
 
-    public String getDetailTemplate() {
-        return (String)getProperty("detailTemplate");
+    public java.lang.String getDetailTemplate() {
+        return (java.lang.String)getProperty("detailTemplate");
     }
 
-    public void setDetailTemplate(String value) {
+    public void setDetailTemplate(java.lang.String value) {
         setProperty("detailTemplate", value);
     }
 
@@ -240,11 +240,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("groupable", value);
     }
 
-    public Object getHeight() {
-        return (Object)getProperty("height");
+    public java.lang.Object getHeight() {
+        return (java.lang.Object)getProperty("height");
     }
 
-    public void setHeight(Object value) {
+    public void setHeight(java.lang.Object value) {
         setProperty("height", value);
     }
 
@@ -280,11 +280,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("resizable", value);
     }
 
-    public String getRowTemplate() {
-        return (String)getProperty("rowTemplate");
+    public java.lang.String getRowTemplate() {
+        return (java.lang.String)getProperty("rowTemplate");
     }
 
-    public void setRowTemplate(String value) {
+    public void setRowTemplate(java.lang.String value) {
         setProperty("rowTemplate", value);
     }
 
@@ -296,11 +296,11 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("scrollable", value);
     }
 
-    public Object getSelectable() {
-        return (Object)getProperty("selectable");
+    public java.lang.Object getSelectable() {
+        return (java.lang.Object)getProperty("selectable");
     }
 
-    public void setSelectable(Object value) {
+    public void setSelectable(java.lang.Object value) {
         setProperty("selectable", value);
     }
 

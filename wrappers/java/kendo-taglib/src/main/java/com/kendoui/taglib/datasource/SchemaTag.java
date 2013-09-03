@@ -76,43 +76,43 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
         setEvent("total", value.getBody());
     }
 
-    public String getAggregates() {
-        return (String)getProperty("aggregates");
+    public java.lang.String getAggregates() {
+        return (java.lang.String)getProperty("aggregates");
     }
 
-    public void setAggregates(String value) {
+    public void setAggregates(java.lang.String value) {
         setProperty("aggregates", value);
     }
 
-    public String getData() {
-        return (String)getProperty("data");
+    public java.lang.String getData() {
+        return (java.lang.String)getProperty("data");
     }
 
-    public void setData(String value) {
+    public void setData(java.lang.String value) {
         setProperty("data", value);
     }
 
-    public String getErrors() {
-        return (String)getProperty("errors");
+    public java.lang.String getErrors() {
+        return (java.lang.String)getProperty("errors");
     }
 
-    public void setErrors(String value) {
+    public void setErrors(java.lang.String value) {
         setProperty("errors", value);
     }
 
-    public String getGroups() {
-        return (String)getProperty("groups");
+    public java.lang.String getGroups() {
+        return (java.lang.String)getProperty("groups");
     }
 
-    public void setGroups(String value) {
+    public void setGroups(java.lang.String value) {
         setProperty("groups", value);
     }
 
-    public Object getModel() {
-        return (Object)getProperty("model");
+    public java.lang.Object getModel() {
+        return (java.lang.Object)getProperty("model");
     }
 
-    public void setModel(Object value) {
+    public void setModel(java.lang.Object value) {
         setProperty("model", value);
     }
 
@@ -128,19 +128,19 @@ public class SchemaTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("parse", new Function(value));
     }
 
-    public String getTotal() {
-        return (String)getProperty("total");
+    public java.lang.String getTotal() {
+        return (java.lang.String)getProperty("total");
     }
 
-    public void setTotal(String value) {
+    public void setTotal(java.lang.String value) {
         setProperty("total", value);
     }
 
-    public String getType() {
-        return (String)getProperty("type");
+    public java.lang.String getType() {
+        return (java.lang.String)getProperty("type");
     }
 
-    public void setType(String value) {
+    public void setType(java.lang.String value) {
         setProperty("type", value);
     }
 

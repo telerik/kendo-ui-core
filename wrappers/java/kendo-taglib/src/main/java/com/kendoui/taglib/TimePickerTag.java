@@ -70,27 +70,27 @@ public class TimePickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         setEvent("open", value.getBody());
     }
 
-    public String getCulture() {
-        return (String)getProperty("culture");
+    public java.lang.String getCulture() {
+        return (java.lang.String)getProperty("culture");
     }
 
-    public void setCulture(String value) {
+    public void setCulture(java.lang.String value) {
         setProperty("culture", value);
     }
 
-    public Object getDates() {
-        return (Object)getProperty("dates");
+    public java.lang.Object getDates() {
+        return (java.lang.Object)getProperty("dates");
     }
 
-    public void setDates(Object value) {
+    public void setDates(java.lang.Object value) {
         setProperty("dates", value);
     }
 
-    public String getFormat() {
-        return (String)getProperty("format");
+    public java.lang.String getFormat() {
+        return (java.lang.String)getProperty("format");
     }
 
-    public void setFormat(String value) {
+    public void setFormat(java.lang.String value) {
         setProperty("format", value);
     }
 
@@ -118,11 +118,11 @@ public class TimePickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("min", value);
     }
 
-    public Object getParseFormats() {
-        return (Object)getProperty("parseFormats");
+    public java.lang.Object getParseFormats() {
+        return (java.lang.Object)getProperty("parseFormats");
     }
 
-    public void setParseFormats(Object value) {
+    public void setParseFormats(java.lang.Object value) {
         setProperty("parseFormats", value);
     }
 

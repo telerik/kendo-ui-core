@@ -51,27 +51,27 @@ public class ValueAxisItemMajorGridLinesTag extends  BaseTag  /* interfaces *//*
         return "chart-valueAxisItem-majorGridLines";
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setColor(String value) {
+    public void setColor(java.lang.String value) {
         setProperty("color", value);
     }
 
-    public String getDashType() {
-        return (String)getProperty("dashType");
+    public java.lang.String getDashType() {
+        return (java.lang.String)getProperty("dashType");
     }
 
-    public void setDashType(String value) {
+    public void setDashType(java.lang.String value) {
         setProperty("dashType", value);
     }
 
-    public String getType() {
-        return (String)getProperty("type");
+    public java.lang.String getType() {
+        return (java.lang.String)getProperty("type");
     }
 
-    public void setType(String value) {
+    public void setType(java.lang.String value) {
         setProperty("type", value);
     }
 

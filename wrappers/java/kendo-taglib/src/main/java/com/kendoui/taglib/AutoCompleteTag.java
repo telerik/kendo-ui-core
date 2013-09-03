@@ -82,11 +82,11 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements DataBo
         setProperty("dataSource", dataSource);
     }
 
-    public String getDataTextField() {
-        return (String)getProperty("dataTextField");
+    public java.lang.String getDataTextField() {
+        return (java.lang.String)getProperty("dataTextField");
     }
 
-    public void setDataTextField(String value) {
+    public void setDataTextField(java.lang.String value) {
         setProperty("dataTextField", value);
     }
 
@@ -106,11 +106,11 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements DataBo
         setProperty("enable", value);
     }
 
-    public String getFilter() {
-        return (String)getProperty("filter");
+    public java.lang.String getFilter() {
+        return (java.lang.String)getProperty("filter");
     }
 
-    public void setFilter(String value) {
+    public void setFilter(java.lang.String value) {
         setProperty("filter", value);
     }
 
@@ -146,19 +146,19 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements DataBo
         setProperty("minLength", value);
     }
 
-    public String getPlaceholder() {
-        return (String)getProperty("placeholder");
+    public java.lang.String getPlaceholder() {
+        return (java.lang.String)getProperty("placeholder");
     }
 
-    public void setPlaceholder(String value) {
+    public void setPlaceholder(java.lang.String value) {
         setProperty("placeholder", value);
     }
 
-    public String getSeparator() {
-        return (String)getProperty("separator");
+    public java.lang.String getSeparator() {
+        return (java.lang.String)getProperty("separator");
     }
 
-    public void setSeparator(String value) {
+    public void setSeparator(java.lang.String value) {
         setProperty("separator", value);
     }
 
@@ -170,11 +170,11 @@ public class AutoCompleteTag extends WidgetTag /* interfaces */implements DataBo
         setProperty("suggest", value);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
     }
 
-    public void setTemplate(String value) {
+    public void setTemplate(java.lang.String value) {
         setProperty("template", value);
     }
 

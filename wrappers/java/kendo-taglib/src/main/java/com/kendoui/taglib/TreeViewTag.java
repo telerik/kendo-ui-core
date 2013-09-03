@@ -141,11 +141,11 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
         setProperty("checkboxes", value);
     }
 
-    public String getDataImageUrlField() {
-        return (String)getProperty("dataImageUrlField");
+    public java.lang.String getDataImageUrlField() {
+        return (java.lang.String)getProperty("dataImageUrlField");
     }
 
-    public void setDataImageUrlField(String value) {
+    public void setDataImageUrlField(java.lang.String value) {
         setProperty("dataImageUrlField", value);
     }
 
@@ -153,27 +153,27 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
         setProperty("dataSource", dataSource);
     }
 
-    public String getDataSpriteCssClassField() {
-        return (String)getProperty("dataSpriteCssClassField");
+    public java.lang.String getDataSpriteCssClassField() {
+        return (java.lang.String)getProperty("dataSpriteCssClassField");
     }
 
-    public void setDataSpriteCssClassField(String value) {
+    public void setDataSpriteCssClassField(java.lang.String value) {
         setProperty("dataSpriteCssClassField", value);
     }
 
-    public Object getDataTextField() {
-        return (Object)getProperty("dataTextField");
+    public java.lang.Object getDataTextField() {
+        return (java.lang.Object)getProperty("dataTextField");
     }
 
-    public void setDataTextField(Object value) {
+    public void setDataTextField(java.lang.Object value) {
         setProperty("dataTextField", value);
     }
 
-    public String getDataUrlField() {
-        return (String)getProperty("dataUrlField");
+    public java.lang.String getDataUrlField() {
+        return (java.lang.String)getProperty("dataUrlField");
     }
 
-    public void setDataUrlField(String value) {
+    public void setDataUrlField(java.lang.String value) {
         setProperty("dataUrlField", value);
     }
 
@@ -193,11 +193,11 @@ public class TreeViewTag extends WidgetWithItemsTag /* interfaces */implements D
         setProperty("loadOnDemand", value);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
     }
 
-    public void setTemplate(String value) {
+    public void setTemplate(java.lang.String value) {
         setProperty("template", value);
     }
 

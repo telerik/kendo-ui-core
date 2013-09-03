@@ -66,11 +66,11 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         setProperty("enabled", value);
     }
 
-    public String getImageUrl() {
-        return (String)getProperty("imageUrl");
+    public java.lang.String getImageUrl() {
+        return (java.lang.String)getProperty("imageUrl");
     }
 
-    public void setImageUrl(String value) {
+    public void setImageUrl(java.lang.String value) {
         setProperty("imageUrl", value);
     }
 
@@ -82,27 +82,27 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         setProperty("selected", value);
     }
 
-    public String getSpriteCssClass() {
-        return (String)getProperty("spriteCssClass");
+    public java.lang.String getSpriteCssClass() {
+        return (java.lang.String)getProperty("spriteCssClass");
     }
 
-    public void setSpriteCssClass(String value) {
+    public void setSpriteCssClass(java.lang.String value) {
         setProperty("spriteCssClass", value);
     }
 
-    public String getText() {
-        return (String)getProperty("text");
+    public java.lang.String getText() {
+        return (java.lang.String)getProperty("text");
     }
 
-    public void setText(String value) {
+    public void setText(java.lang.String value) {
         setProperty("text", value);
     }
 
-    public String getUrl() {
-        return (String)getProperty("url");
+    public java.lang.String getUrl() {
+        return (java.lang.String)getProperty("url");
     }
 
-    public void setUrl(String value) {
+    public void setUrl(java.lang.String value) {
         setProperty("url", value);
     }
 

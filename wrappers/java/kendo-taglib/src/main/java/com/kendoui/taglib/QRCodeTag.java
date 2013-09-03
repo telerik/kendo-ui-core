@@ -49,59 +49,59 @@ public class QRCodeTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("border", value);
     }
 
-    public String getBackground() {
-        return (String)getProperty("background");
+    public java.lang.String getBackground() {
+        return (java.lang.String)getProperty("background");
     }
 
-    public void setBackground(String value) {
+    public void setBackground(java.lang.String value) {
         setProperty("background", value);
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setColor(String value) {
+    public void setColor(java.lang.String value) {
         setProperty("color", value);
     }
 
-    public String getEncoding() {
-        return (String)getProperty("encoding");
+    public java.lang.String getEncoding() {
+        return (java.lang.String)getProperty("encoding");
     }
 
-    public void setEncoding(String value) {
+    public void setEncoding(java.lang.String value) {
         setProperty("encoding", value);
     }
 
-    public String getErrorCorrection() {
-        return (String)getProperty("errorCorrection");
+    public java.lang.String getErrorCorrection() {
+        return (java.lang.String)getProperty("errorCorrection");
     }
 
-    public void setErrorCorrection(String value) {
+    public void setErrorCorrection(java.lang.String value) {
         setProperty("errorCorrection", value);
     }
 
-    public String getRenderAs() {
-        return (String)getProperty("renderAs");
+    public java.lang.String getRenderAs() {
+        return (java.lang.String)getProperty("renderAs");
     }
 
-    public void setRenderAs(String value) {
+    public void setRenderAs(java.lang.String value) {
         setProperty("renderAs", value);
     }
 
-    public Object getSize() {
-        return (Object)getProperty("size");
+    public java.lang.Object getSize() {
+        return (java.lang.Object)getProperty("size");
     }
 
-    public void setSize(Object value) {
+    public void setSize(java.lang.Object value) {
         setProperty("size", value);
     }
 
-    public Object getValue() {
-        return (Object)getProperty("value");
+    public java.lang.Object getValue() {
+        return (java.lang.Object)getProperty("value");
     }
 
-    public void setValue(Object value) {
+    public void setValue(java.lang.Object value) {
         setProperty("value", value);
     }
 

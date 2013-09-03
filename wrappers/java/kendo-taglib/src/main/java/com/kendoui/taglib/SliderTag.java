@@ -65,19 +65,19 @@ public class SliderTag extends WidgetTag /* interfaces *//* interfaces */ {
         setEvent("slide", value.getBody());
     }
 
-    public String getDecreaseButtonTitle() {
-        return (String)getProperty("decreaseButtonTitle");
+    public java.lang.String getDecreaseButtonTitle() {
+        return (java.lang.String)getProperty("decreaseButtonTitle");
     }
 
-    public void setDecreaseButtonTitle(String value) {
+    public void setDecreaseButtonTitle(java.lang.String value) {
         setProperty("decreaseButtonTitle", value);
     }
 
-    public String getIncreaseButtonTitle() {
-        return (String)getProperty("increaseButtonTitle");
+    public java.lang.String getIncreaseButtonTitle() {
+        return (java.lang.String)getProperty("increaseButtonTitle");
     }
 
-    public void setIncreaseButtonTitle(String value) {
+    public void setIncreaseButtonTitle(java.lang.String value) {
         setProperty("increaseButtonTitle", value);
     }
 
@@ -105,11 +105,11 @@ public class SliderTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("min", value);
     }
 
-    public String getOrientation() {
-        return (String)getProperty("orientation");
+    public java.lang.String getOrientation() {
+        return (java.lang.String)getProperty("orientation");
     }
 
-    public void setOrientation(String value) {
+    public void setOrientation(java.lang.String value) {
         setProperty("orientation", value);
     }
 
@@ -129,11 +129,11 @@ public class SliderTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("smallStep", value);
     }
 
-    public String getTickPlacement() {
-        return (String)getProperty("tickPlacement");
+    public java.lang.String getTickPlacement() {
+        return (java.lang.String)getProperty("tickPlacement");
     }
 
-    public void setTickPlacement(String value) {
+    public void setTickPlacement(java.lang.String value) {
         setProperty("tickPlacement", value);
     }
 

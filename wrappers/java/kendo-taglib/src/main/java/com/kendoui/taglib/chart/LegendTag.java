@@ -69,11 +69,11 @@ public class LegendTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("margin", value);
     }
 
-    public String getBackground() {
-        return (String)getProperty("background");
+    public java.lang.String getBackground() {
+        return (java.lang.String)getProperty("background");
     }
 
-    public void setBackground(String value) {
+    public void setBackground(java.lang.String value) {
         setProperty("background", value);
     }
 
@@ -101,11 +101,11 @@ public class LegendTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("offsetY", value);
     }
 
-    public String getPosition() {
-        return (String)getProperty("position");
+    public java.lang.String getPosition() {
+        return (java.lang.String)getProperty("position");
     }
 
-    public void setPosition(String value) {
+    public void setPosition(java.lang.String value) {
         setProperty("position", value);
     }
 

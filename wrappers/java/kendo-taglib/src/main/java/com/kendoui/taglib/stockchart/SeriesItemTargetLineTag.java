@@ -55,11 +55,11 @@ public class SeriesItemTargetLineTag extends  BaseTag  /* interfaces */ /* inter
         setEvent("width", value.getBody());
     }
 
-    public Object getWidth() {
-        return (Object)getProperty("width");
+    public java.lang.Object getWidth() {
+        return (java.lang.Object)getProperty("width");
     }
 
-    public void setWidth(Object value) {
+    public void setWidth(java.lang.Object value) {
         setProperty("width", value);
     }
 

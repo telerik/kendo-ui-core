@@ -94,27 +94,27 @@ public class PaneTag extends  BaseTag implements DynamicAttributes /* interfaces
         setProperty("collapsible", value);
     }
 
-    public String getContentUrl() {
-        return (String)getProperty("contentUrl");
+    public java.lang.String getContentUrl() {
+        return (java.lang.String)getProperty("contentUrl");
     }
 
-    public void setContentUrl(String value) {
+    public void setContentUrl(java.lang.String value) {
         setProperty("contentUrl", value);
     }
 
-    public String getMax() {
-        return (String)getProperty("max");
+    public java.lang.String getMax() {
+        return (java.lang.String)getProperty("max");
     }
 
-    public void setMax(String value) {
+    public void setMax(java.lang.String value) {
         setProperty("max", value);
     }
 
-    public String getMin() {
-        return (String)getProperty("min");
+    public java.lang.String getMin() {
+        return (java.lang.String)getProperty("min");
     }
 
-    public void setMin(String value) {
+    public void setMin(java.lang.String value) {
         setProperty("min", value);
     }
 
@@ -134,11 +134,11 @@ public class PaneTag extends  BaseTag implements DynamicAttributes /* interfaces
         setProperty("scrollable", value);
     }
 
-    public String getSize() {
-        return (String)getProperty("size");
+    public java.lang.String getSize() {
+        return (java.lang.String)getProperty("size");
     }
 
-    public void setSize(String value) {
+    public void setSize(java.lang.String value) {
         setProperty("size", value);
     }
 

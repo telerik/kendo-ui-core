@@ -85,11 +85,11 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         return "panelBar-item";
     }
 
-    public String getContentUrl() {
-        return (String)getProperty("contentUrl");
+    public java.lang.String getContentUrl() {
+        return (java.lang.String)getProperty("contentUrl");
     }
 
-    public void setContentUrl(String value) {
+    public void setContentUrl(java.lang.String value) {
         setProperty("contentUrl", value);
     }
 
@@ -109,11 +109,11 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         setProperty("expanded", value);
     }
 
-    public String getImageUrl() {
-        return (String)getProperty("imageUrl");
+    public java.lang.String getImageUrl() {
+        return (java.lang.String)getProperty("imageUrl");
     }
 
-    public void setImageUrl(String value) {
+    public void setImageUrl(java.lang.String value) {
         setProperty("imageUrl", value);
     }
 
@@ -125,19 +125,19 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         setProperty("selected", value);
     }
 
-    public String getSpriteCssClass() {
-        return (String)getProperty("spriteCssClass");
+    public java.lang.String getSpriteCssClass() {
+        return (java.lang.String)getProperty("spriteCssClass");
     }
 
-    public void setSpriteCssClass(String value) {
+    public void setSpriteCssClass(java.lang.String value) {
         setProperty("spriteCssClass", value);
     }
 
-    public String getText() {
-        return (String)getProperty("text");
+    public java.lang.String getText() {
+        return (java.lang.String)getProperty("text");
     }
 
-    public void setText(String value) {
+    public void setText(java.lang.String value) {
         setProperty("text", value);
     }
 

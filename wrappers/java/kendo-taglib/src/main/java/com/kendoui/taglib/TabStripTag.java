@@ -91,51 +91,51 @@ public class TabStripTag extends WidgetWithItemsTag /* interfaces */implements I
         setProperty("collapsible", value);
     }
 
-    public String getDataContentField() {
-        return (String)getProperty("dataContentField");
+    public java.lang.String getDataContentField() {
+        return (java.lang.String)getProperty("dataContentField");
     }
 
-    public void setDataContentField(String value) {
+    public void setDataContentField(java.lang.String value) {
         setProperty("dataContentField", value);
     }
 
-    public String getDataContentUrlField() {
-        return (String)getProperty("dataContentUrlField");
+    public java.lang.String getDataContentUrlField() {
+        return (java.lang.String)getProperty("dataContentUrlField");
     }
 
-    public void setDataContentUrlField(String value) {
+    public void setDataContentUrlField(java.lang.String value) {
         setProperty("dataContentUrlField", value);
     }
 
-    public String getDataImageUrlField() {
-        return (String)getProperty("dataImageUrlField");
+    public java.lang.String getDataImageUrlField() {
+        return (java.lang.String)getProperty("dataImageUrlField");
     }
 
-    public void setDataImageUrlField(String value) {
+    public void setDataImageUrlField(java.lang.String value) {
         setProperty("dataImageUrlField", value);
     }
 
-    public String getDataSpriteCssClass() {
-        return (String)getProperty("dataSpriteCssClass");
+    public java.lang.String getDataSpriteCssClass() {
+        return (java.lang.String)getProperty("dataSpriteCssClass");
     }
 
-    public void setDataSpriteCssClass(String value) {
+    public void setDataSpriteCssClass(java.lang.String value) {
         setProperty("dataSpriteCssClass", value);
     }
 
-    public String getDataTextField() {
-        return (String)getProperty("dataTextField");
+    public java.lang.String getDataTextField() {
+        return (java.lang.String)getProperty("dataTextField");
     }
 
-    public void setDataTextField(String value) {
+    public void setDataTextField(java.lang.String value) {
         setProperty("dataTextField", value);
     }
 
-    public String getDataUrlField() {
-        return (String)getProperty("dataUrlField");
+    public java.lang.String getDataUrlField() {
+        return (java.lang.String)getProperty("dataUrlField");
     }
 
-    public void setDataUrlField(String value) {
+    public void setDataUrlField(java.lang.String value) {
         setProperty("dataUrlField", value);
     }
 

@@ -60,43 +60,43 @@ public class CalendarTag extends WidgetTag /* interfaces *//* interfaces */ {
         setEvent("navigate", value.getBody());
     }
 
-    public String getCulture() {
-        return (String)getProperty("culture");
+    public java.lang.String getCulture() {
+        return (java.lang.String)getProperty("culture");
     }
 
-    public void setCulture(String value) {
+    public void setCulture(java.lang.String value) {
         setProperty("culture", value);
     }
 
-    public Object getDates() {
-        return (Object)getProperty("dates");
+    public java.lang.Object getDates() {
+        return (java.lang.Object)getProperty("dates");
     }
 
-    public void setDates(Object value) {
+    public void setDates(java.lang.Object value) {
         setProperty("dates", value);
     }
 
-    public String getDepth() {
-        return (String)getProperty("depth");
+    public java.lang.String getDepth() {
+        return (java.lang.String)getProperty("depth");
     }
 
-    public void setDepth(String value) {
+    public void setDepth(java.lang.String value) {
         setProperty("depth", value);
     }
 
-    public String getFooter() {
-        return (String)getProperty("footer");
+    public java.lang.String getFooter() {
+        return (java.lang.String)getProperty("footer");
     }
 
-    public void setFooter(String value) {
+    public void setFooter(java.lang.String value) {
         setProperty("footer", value);
     }
 
-    public String getFormat() {
-        return (String)getProperty("format");
+    public java.lang.String getFormat() {
+        return (java.lang.String)getProperty("format");
     }
 
-    public void setFormat(String value) {
+    public void setFormat(java.lang.String value) {
         setProperty("format", value);
     }
 
@@ -116,11 +116,11 @@ public class CalendarTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("min", value);
     }
 
-    public String getStart() {
-        return (String)getProperty("start");
+    public java.lang.String getStart() {
+        return (java.lang.String)getProperty("start");
     }
 
-    public void setStart(String value) {
+    public void setStart(java.lang.String value) {
         setProperty("start", value);
     }
 

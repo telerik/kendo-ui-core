@@ -127,11 +127,11 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setEvent("save", value.getBody());
     }
 
-    public String getAllDayEventTemplate() {
-        return (String)getProperty("allDayEventTemplate");
+    public java.lang.String getAllDayEventTemplate() {
+        return (java.lang.String)getProperty("allDayEventTemplate");
     }
 
-    public void setAllDayEventTemplate(String value) {
+    public void setAllDayEventTemplate(java.lang.String value) {
         setProperty("allDayEventTemplate", value);
     }
 
@@ -155,11 +155,11 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("date", value);
     }
 
-    public String getDateHeaderTemplate() {
-        return (String)getProperty("dateHeaderTemplate");
+    public java.lang.String getDateHeaderTemplate() {
+        return (java.lang.String)getProperty("dateHeaderTemplate");
     }
 
-    public void setDateHeaderTemplate(String value) {
+    public void setDateHeaderTemplate(java.lang.String value) {
         setProperty("dateHeaderTemplate", value);
     }
 
@@ -179,19 +179,19 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("endTime", value);
     }
 
-    public String getEventTemplate() {
-        return (String)getProperty("eventTemplate");
+    public java.lang.String getEventTemplate() {
+        return (java.lang.String)getProperty("eventTemplate");
     }
 
-    public void setEventTemplate(String value) {
+    public void setEventTemplate(java.lang.String value) {
         setProperty("eventTemplate", value);
     }
 
-    public Object getHeight() {
-        return (Object)getProperty("height");
+    public java.lang.Object getHeight() {
+        return (java.lang.Object)getProperty("height");
     }
 
-    public void setHeight(Object value) {
+    public void setHeight(java.lang.Object value) {
         setProperty("height", value);
     }
 
@@ -203,11 +203,11 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("majorTick", value);
     }
 
-    public String getMajorTimeHeaderTemplate() {
-        return (String)getProperty("majorTimeHeaderTemplate");
+    public java.lang.String getMajorTimeHeaderTemplate() {
+        return (java.lang.String)getProperty("majorTimeHeaderTemplate");
     }
 
-    public void setMajorTimeHeaderTemplate(String value) {
+    public void setMajorTimeHeaderTemplate(java.lang.String value) {
         setProperty("majorTimeHeaderTemplate", value);
     }
 
@@ -219,11 +219,11 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("minorTickCount", value);
     }
 
-    public String getMinorTimeHeaderTemplate() {
-        return (String)getProperty("minorTimeHeaderTemplate");
+    public java.lang.String getMinorTimeHeaderTemplate() {
+        return (java.lang.String)getProperty("minorTimeHeaderTemplate");
     }
 
-    public void setMinorTimeHeaderTemplate(String value) {
+    public void setMinorTimeHeaderTemplate(java.lang.String value) {
         setProperty("minorTimeHeaderTemplate", value);
     }
 
@@ -243,19 +243,19 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("startTime", value);
     }
 
-    public String getTimezone() {
-        return (String)getProperty("timezone");
+    public java.lang.String getTimezone() {
+        return (java.lang.String)getProperty("timezone");
     }
 
-    public void setTimezone(String value) {
+    public void setTimezone(java.lang.String value) {
         setProperty("timezone", value);
     }
 
-    public Object getWidth() {
-        return (Object)getProperty("width");
+    public java.lang.Object getWidth() {
+        return (java.lang.Object)getProperty("width");
     }
 
-    public void setWidth(Object value) {
+    public void setWidth(java.lang.Object value) {
         setProperty("width", value);
     }
 

@@ -2,11 +2,11 @@ module CodeGen::Java
 
     TYPES = {
         'Number' => 'float',
-        'String' => 'String',
+        'String' => 'java.lang.String',
         'Boolean' => 'boolean',
-        'Object' => 'Object',
-        'Array' => 'Object',
-        'Function' => 'String',
+        'Object' => 'java.lang.Object',
+        'Array' => 'java.lang.Object',
+        'Function' => 'java.lang.String',
         'Date' => 'java.util.Date'
     }
 

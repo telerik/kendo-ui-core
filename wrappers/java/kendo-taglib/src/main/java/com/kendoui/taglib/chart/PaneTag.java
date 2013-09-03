@@ -65,11 +65,11 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("title", value);
     }
 
-    public String getBackground() {
-        return (String)getProperty("background");
+    public java.lang.String getBackground() {
+        return (java.lang.String)getProperty("background");
     }
 
-    public void setBackground(String value) {
+    public void setBackground(java.lang.String value) {
         setProperty("background", value);
     }
 
@@ -89,11 +89,11 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("margin", value);
     }
 
-    public String getName() {
-        return (String)getProperty("name");
+    public java.lang.String getName() {
+        return (java.lang.String)getProperty("name");
     }
 
-    public void setName(String value) {
+    public void setName(java.lang.String value) {
         setProperty("name", value);
     }
 
@@ -105,11 +105,11 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("padding", value);
     }
 
-    public String getTitle() {
-        return (String)getProperty("title");
+    public java.lang.String getTitle() {
+        return (java.lang.String)getProperty("title");
     }
 
-    public void setTitle(String value) {
+    public void setTitle(java.lang.String value) {
         setProperty("title", value);
     }
 

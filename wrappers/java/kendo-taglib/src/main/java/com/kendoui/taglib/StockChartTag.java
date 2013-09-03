@@ -167,35 +167,35 @@ public class StockChartTag extends WidgetTag /* interfaces */implements DataBoun
         setProperty("dataSource", dataSource);
     }
 
-    public String getDateField() {
-        return (String)getProperty("dateField");
+    public java.lang.String getDateField() {
+        return (java.lang.String)getProperty("dateField");
     }
 
-    public void setDateField(String value) {
+    public void setDateField(java.lang.String value) {
         setProperty("dateField", value);
     }
 
-    public String getRenderAs() {
-        return (String)getProperty("renderAs");
+    public java.lang.String getRenderAs() {
+        return (java.lang.String)getProperty("renderAs");
     }
 
-    public void setRenderAs(String value) {
+    public void setRenderAs(java.lang.String value) {
         setProperty("renderAs", value);
     }
 
-    public Object getSeriesColors() {
-        return (Object)getProperty("seriesColors");
+    public java.lang.Object getSeriesColors() {
+        return (java.lang.Object)getProperty("seriesColors");
     }
 
-    public void setSeriesColors(Object value) {
+    public void setSeriesColors(java.lang.Object value) {
         setProperty("seriesColors", value);
     }
 
-    public String getTheme() {
-        return (String)getProperty("theme");
+    public java.lang.String getTheme() {
+        return (java.lang.String)getProperty("theme");
     }
 
-    public void setTheme(String value) {
+    public void setTheme(java.lang.String value) {
         setProperty("theme", value);
     }
 

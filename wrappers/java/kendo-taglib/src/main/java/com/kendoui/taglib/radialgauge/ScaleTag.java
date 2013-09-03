@@ -116,11 +116,11 @@ public class ScaleTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("rangeDistance", value);
     }
 
-    public String getRangePlaceholderColor() {
-        return (String)getProperty("rangePlaceholderColor");
+    public java.lang.String getRangePlaceholderColor() {
+        return (java.lang.String)getProperty("rangePlaceholderColor");
     }
 
-    public void setRangePlaceholderColor(String value) {
+    public void setRangePlaceholderColor(java.lang.String value) {
         setProperty("rangePlaceholderColor", value);
     }
 

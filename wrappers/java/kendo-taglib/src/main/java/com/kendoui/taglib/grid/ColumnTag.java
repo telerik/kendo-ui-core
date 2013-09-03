@@ -81,27 +81,27 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setEvent("template", value.getBody());
     }
 
-    public Object getAggregates() {
-        return (Object)getProperty("aggregates");
+    public java.lang.Object getAggregates() {
+        return (java.lang.Object)getProperty("aggregates");
     }
 
-    public void setAggregates(Object value) {
+    public void setAggregates(java.lang.Object value) {
         setProperty("aggregates", value);
     }
 
-    public Object getAttributes() {
-        return (Object)getProperty("attributes");
+    public java.lang.Object getAttributes() {
+        return (java.lang.Object)getProperty("attributes");
     }
 
-    public void setAttributes(Object value) {
+    public void setAttributes(java.lang.Object value) {
         setProperty("attributes", value);
     }
 
-    public String getCommand() {
-        return (String)getProperty("command");
+    public java.lang.String getCommand() {
+        return (java.lang.String)getProperty("command");
     }
 
-    public void setCommand(String value) {
+    public void setCommand(java.lang.String value) {
         setProperty("command", value);
     }
 
@@ -125,11 +125,11 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("encoded", value);
     }
 
-    public String getField() {
-        return (String)getProperty("field");
+    public java.lang.String getField() {
+        return (java.lang.String)getProperty("field");
     }
 
-    public void setField(String value) {
+    public void setField(java.lang.String value) {
         setProperty("field", value);
     }
 
@@ -141,51 +141,51 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("filterable", value);
     }
 
-    public String getFooterTemplate() {
-        return (String)getProperty("footerTemplate");
+    public java.lang.String getFooterTemplate() {
+        return (java.lang.String)getProperty("footerTemplate");
     }
 
-    public void setFooterTemplate(String value) {
+    public void setFooterTemplate(java.lang.String value) {
         setProperty("footerTemplate", value);
     }
 
-    public String getFormat() {
-        return (String)getProperty("format");
+    public java.lang.String getFormat() {
+        return (java.lang.String)getProperty("format");
     }
 
-    public void setFormat(String value) {
+    public void setFormat(java.lang.String value) {
         setProperty("format", value);
     }
 
-    public String getGroupFooterTemplate() {
-        return (String)getProperty("groupFooterTemplate");
+    public java.lang.String getGroupFooterTemplate() {
+        return (java.lang.String)getProperty("groupFooterTemplate");
     }
 
-    public void setGroupFooterTemplate(String value) {
+    public void setGroupFooterTemplate(java.lang.String value) {
         setProperty("groupFooterTemplate", value);
     }
 
-    public String getGroupHeaderTemplate() {
-        return (String)getProperty("groupHeaderTemplate");
+    public java.lang.String getGroupHeaderTemplate() {
+        return (java.lang.String)getProperty("groupHeaderTemplate");
     }
 
-    public void setGroupHeaderTemplate(String value) {
+    public void setGroupHeaderTemplate(java.lang.String value) {
         setProperty("groupHeaderTemplate", value);
     }
 
-    public Object getHeaderAttributes() {
-        return (Object)getProperty("headerAttributes");
+    public java.lang.Object getHeaderAttributes() {
+        return (java.lang.Object)getProperty("headerAttributes");
     }
 
-    public void setHeaderAttributes(Object value) {
+    public void setHeaderAttributes(java.lang.Object value) {
         setProperty("headerAttributes", value);
     }
 
-    public String getHeaderTemplate() {
-        return (String)getProperty("headerTemplate");
+    public java.lang.String getHeaderTemplate() {
+        return (java.lang.String)getProperty("headerTemplate");
     }
 
-    public void setHeaderTemplate(String value) {
+    public void setHeaderTemplate(java.lang.String value) {
         setProperty("headerTemplate", value);
     }
 
@@ -213,27 +213,27 @@ public class ColumnTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("sortable", value);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
     }
 
-    public void setTemplate(String value) {
+    public void setTemplate(java.lang.String value) {
         setProperty("template", value);
     }
 
-    public String getTitle() {
-        return (String)getProperty("title");
+    public java.lang.String getTitle() {
+        return (java.lang.String)getProperty("title");
     }
 
-    public void setTitle(String value) {
+    public void setTitle(java.lang.String value) {
         setProperty("title", value);
     }
 
-    public Object getWidth() {
-        return (Object)getProperty("width");
+    public java.lang.Object getWidth() {
+        return (java.lang.Object)getProperty("width");
     }
 
-    public void setWidth(Object value) {
+    public void setWidth(java.lang.Object value) {
         setProperty("width", value);
     }
 

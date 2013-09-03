@@ -67,19 +67,19 @@ public class SeriesItemBorderTag extends  BaseTag  /* interfaces */ /* interface
         setEvent("width", value.getBody());
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setColor(String value) {
+    public void setColor(java.lang.String value) {
         setProperty("color", value);
     }
 
-    public String getDashType() {
-        return (String)getProperty("dashType");
+    public java.lang.String getDashType() {
+        return (java.lang.String)getProperty("dashType");
     }
 
-    public void setDashType(String value) {
+    public void setDashType(java.lang.String value) {
         setProperty("dashType", value);
     }
 

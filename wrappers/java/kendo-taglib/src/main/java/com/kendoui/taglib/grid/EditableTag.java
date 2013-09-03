@@ -54,19 +54,19 @@ public class EditableTag extends BaseTag /* interfaces *//* interfaces */ {
         setEvent("template", value.getBody());
     }
 
-    public Object getConfirmation() {
-        return (Object)getProperty("confirmation");
+    public java.lang.Object getConfirmation() {
+        return (java.lang.Object)getProperty("confirmation");
     }
 
-    public void setConfirmation(Object value) {
+    public void setConfirmation(java.lang.Object value) {
         setProperty("confirmation", value);
     }
 
-    public String getCreateAt() {
-        return (String)getProperty("createAt");
+    public java.lang.String getCreateAt() {
+        return (java.lang.String)getProperty("createAt");
     }
 
-    public void setCreateAt(String value) {
+    public void setCreateAt(java.lang.String value) {
         setProperty("createAt", value);
     }
 
@@ -78,19 +78,19 @@ public class EditableTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("destroy", value);
     }
 
-    public String getMode() {
-        return (String)getProperty("mode");
+    public java.lang.String getMode() {
+        return (java.lang.String)getProperty("mode");
     }
 
-    public void setMode(String value) {
+    public void setMode(java.lang.String value) {
         setProperty("mode", value);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
     }
 
-    public void setTemplate(String value) {
+    public void setTemplate(java.lang.String value) {
         setProperty("template", value);
     }
 

@@ -67,43 +67,43 @@ public class TransportReadTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("cache", value);
     }
 
-    public String getContentType() {
-        return (String)getProperty("contentType");
+    public java.lang.String getContentType() {
+        return (java.lang.String)getProperty("contentType");
     }
 
-    public void setContentType(String value) {
+    public void setContentType(java.lang.String value) {
         setProperty("contentType", value);
     }
 
-    public Object getData() {
-        return (Object)getProperty("data");
+    public java.lang.Object getData() {
+        return (java.lang.Object)getProperty("data");
     }
 
-    public void setData(Object value) {
+    public void setData(java.lang.Object value) {
         setProperty("data", value);
     }
 
-    public String getDataType() {
-        return (String)getProperty("dataType");
+    public java.lang.String getDataType() {
+        return (java.lang.String)getProperty("dataType");
     }
 
-    public void setDataType(String value) {
+    public void setDataType(java.lang.String value) {
         setProperty("dataType", value);
     }
 
-    public String getType() {
-        return (String)getProperty("type");
+    public java.lang.String getType() {
+        return (java.lang.String)getProperty("type");
     }
 
-    public void setType(String value) {
+    public void setType(java.lang.String value) {
         setProperty("type", value);
     }
 
-    public String getUrl() {
-        return (String)getProperty("url");
+    public java.lang.String getUrl() {
+        return (java.lang.String)getProperty("url");
     }
 
-    public void setUrl(String value) {
+    public void setUrl(java.lang.String value) {
         setProperty("url", value);
     }
 

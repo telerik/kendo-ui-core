@@ -126,11 +126,11 @@ public class TooltipTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("callout", value);
     }
 
-    public String getFilter() {
-        return (String)getProperty("filter");
+    public java.lang.String getFilter() {
+        return (java.lang.String)getProperty("filter");
     }
 
-    public void setFilter(String value) {
+    public void setFilter(java.lang.String value) {
         setProperty("filter", value);
     }
 
@@ -150,11 +150,11 @@ public class TooltipTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("iframe", value);
     }
 
-    public String getPosition() {
-        return (String)getProperty("position");
+    public java.lang.String getPosition() {
+        return (java.lang.String)getProperty("position");
     }
 
-    public void setPosition(String value) {
+    public void setPosition(java.lang.String value) {
         setProperty("position", value);
     }
 
@@ -166,11 +166,11 @@ public class TooltipTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("showAfter", value);
     }
 
-    public String getShowOn() {
-        return (String)getProperty("showOn");
+    public java.lang.String getShowOn() {
+        return (java.lang.String)getProperty("showOn");
     }
 
-    public void setShowOn(String value) {
+    public void setShowOn(java.lang.String value) {
         setProperty("showOn", value);
     }
 

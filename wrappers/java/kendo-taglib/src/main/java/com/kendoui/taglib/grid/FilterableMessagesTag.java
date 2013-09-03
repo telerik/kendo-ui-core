@@ -51,67 +51,67 @@ public class FilterableMessagesTag extends  BaseTag  /* interfaces *//* interfac
         return "grid-filterable-messages";
     }
 
-    public String getAnd() {
-        return (String)getProperty("and");
+    public java.lang.String getAnd() {
+        return (java.lang.String)getProperty("and");
     }
 
-    public void setAnd(String value) {
+    public void setAnd(java.lang.String value) {
         setProperty("and", value);
     }
 
-    public String getClear() {
-        return (String)getProperty("clear");
+    public java.lang.String getClear() {
+        return (java.lang.String)getProperty("clear");
     }
 
-    public void setClear(String value) {
+    public void setClear(java.lang.String value) {
         setProperty("clear", value);
     }
 
-    public String getFilter() {
-        return (String)getProperty("filter");
+    public java.lang.String getFilter() {
+        return (java.lang.String)getProperty("filter");
     }
 
-    public void setFilter(String value) {
+    public void setFilter(java.lang.String value) {
         setProperty("filter", value);
     }
 
-    public String getInfo() {
-        return (String)getProperty("info");
+    public java.lang.String getInfo() {
+        return (java.lang.String)getProperty("info");
     }
 
-    public void setInfo(String value) {
+    public void setInfo(java.lang.String value) {
         setProperty("info", value);
     }
 
-    public String getIsFalse() {
-        return (String)getProperty("isFalse");
+    public java.lang.String getIsFalse() {
+        return (java.lang.String)getProperty("isFalse");
     }
 
-    public void setIsFalse(String value) {
+    public void setIsFalse(java.lang.String value) {
         setProperty("isFalse", value);
     }
 
-    public String getIsTrue() {
-        return (String)getProperty("isTrue");
+    public java.lang.String getIsTrue() {
+        return (java.lang.String)getProperty("isTrue");
     }
 
-    public void setIsTrue(String value) {
+    public void setIsTrue(java.lang.String value) {
         setProperty("isTrue", value);
     }
 
-    public String getOr() {
-        return (String)getProperty("or");
+    public java.lang.String getOr() {
+        return (java.lang.String)getProperty("or");
     }
 
-    public void setOr(String value) {
+    public void setOr(java.lang.String value) {
         setProperty("or", value);
     }
 
-    public String getSelectValue() {
-        return (String)getProperty("selectValue");
+    public java.lang.String getSelectValue() {
+        return (java.lang.String)getProperty("selectValue");
     }
 
-    public void setSelectValue(String value) {
+    public void setSelectValue(java.lang.String value) {
         setProperty("selectValue", value);
     }
 

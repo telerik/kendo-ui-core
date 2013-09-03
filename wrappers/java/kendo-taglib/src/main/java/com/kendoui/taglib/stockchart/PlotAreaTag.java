@@ -57,19 +57,19 @@ public class PlotAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("border", value);
     }
 
-    public String getBackground() {
-        return (String)getProperty("background");
+    public java.lang.String getBackground() {
+        return (java.lang.String)getProperty("background");
     }
 
-    public void setBackground(String value) {
+    public void setBackground(java.lang.String value) {
         setProperty("background", value);
     }
 
-    public Object getMargin() {
-        return (Object)getProperty("margin");
+    public java.lang.Object getMargin() {
+        return (java.lang.Object)getProperty("margin");
     }
 
-    public void setMargin(Object value) {
+    public void setMargin(java.lang.Object value) {
         setProperty("margin", value);
     }
 

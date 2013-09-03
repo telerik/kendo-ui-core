@@ -51,51 +51,51 @@ public class FilterableOperatorsStringTag extends  BaseTag  /* interfaces */ /* 
         return "grid-filterable-operators-string";
     }
 
-    public String getContains() {
-        return (String)getProperty("contains");
+    public java.lang.String getContains() {
+        return (java.lang.String)getProperty("contains");
     }
 
-    public void setContains(String value) {
+    public void setContains(java.lang.String value) {
         setProperty("contains", value);
     }
 
-    public String getDoesnotcontain() {
-        return (String)getProperty("doesnotcontain");
+    public java.lang.String getDoesnotcontain() {
+        return (java.lang.String)getProperty("doesnotcontain");
     }
 
-    public void setDoesnotcontain(String value) {
+    public void setDoesnotcontain(java.lang.String value) {
         setProperty("doesnotcontain", value);
     }
 
-    public String getEndswith() {
-        return (String)getProperty("endswith");
+    public java.lang.String getEndswith() {
+        return (java.lang.String)getProperty("endswith");
     }
 
-    public void setEndswith(String value) {
+    public void setEndswith(java.lang.String value) {
         setProperty("endswith", value);
     }
 
-    public String getEq() {
-        return (String)getProperty("eq");
+    public java.lang.String getEq() {
+        return (java.lang.String)getProperty("eq");
     }
 
-    public void setEq(String value) {
+    public void setEq(java.lang.String value) {
         setProperty("eq", value);
     }
 
-    public String getNeq() {
-        return (String)getProperty("neq");
+    public java.lang.String getNeq() {
+        return (java.lang.String)getProperty("neq");
     }
 
-    public void setNeq(String value) {
+    public void setNeq(java.lang.String value) {
         setProperty("neq", value);
     }
 
-    public String getStartswith() {
-        return (String)getProperty("startswith");
+    public java.lang.String getStartswith() {
+        return (java.lang.String)getProperty("startswith");
     }
 
-    public void setStartswith(String value) {
+    public void setStartswith(java.lang.String value) {
         setProperty("startswith", value);
     }
 

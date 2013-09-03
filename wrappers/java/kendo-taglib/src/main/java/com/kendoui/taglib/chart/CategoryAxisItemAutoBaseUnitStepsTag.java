@@ -51,59 +51,59 @@ public class CategoryAxisItemAutoBaseUnitStepsTag extends  BaseTag  /* interface
         return "chart-categoryAxisItem-autoBaseUnitSteps";
     }
 
-    public Object getDays() {
-        return (Object)getProperty("days");
+    public java.lang.Object getDays() {
+        return (java.lang.Object)getProperty("days");
     }
 
-    public void setDays(Object value) {
+    public void setDays(java.lang.Object value) {
         setProperty("days", value);
     }
 
-    public Object getHours() {
-        return (Object)getProperty("hours");
+    public java.lang.Object getHours() {
+        return (java.lang.Object)getProperty("hours");
     }
 
-    public void setHours(Object value) {
+    public void setHours(java.lang.Object value) {
         setProperty("hours", value);
     }
 
-    public Object getMinutes() {
-        return (Object)getProperty("minutes");
+    public java.lang.Object getMinutes() {
+        return (java.lang.Object)getProperty("minutes");
     }
 
-    public void setMinutes(Object value) {
+    public void setMinutes(java.lang.Object value) {
         setProperty("minutes", value);
     }
 
-    public Object getMonths() {
-        return (Object)getProperty("months");
+    public java.lang.Object getMonths() {
+        return (java.lang.Object)getProperty("months");
     }
 
-    public void setMonths(Object value) {
+    public void setMonths(java.lang.Object value) {
         setProperty("months", value);
     }
 
-    public Object getSeconds() {
-        return (Object)getProperty("seconds");
+    public java.lang.Object getSeconds() {
+        return (java.lang.Object)getProperty("seconds");
     }
 
-    public void setSeconds(Object value) {
+    public void setSeconds(java.lang.Object value) {
         setProperty("seconds", value);
     }
 
-    public Object getWeeks() {
-        return (Object)getProperty("weeks");
+    public java.lang.Object getWeeks() {
+        return (java.lang.Object)getProperty("weeks");
     }
 
-    public void setWeeks(Object value) {
+    public void setWeeks(java.lang.Object value) {
         setProperty("weeks", value);
     }
 
-    public Object getYears() {
-        return (Object)getProperty("years");
+    public java.lang.Object getYears() {
+        return (java.lang.Object)getProperty("years");
     }
 
-    public void setYears(Object value) {
+    public void setYears(java.lang.Object value) {
         setProperty("years", value);
     }
 

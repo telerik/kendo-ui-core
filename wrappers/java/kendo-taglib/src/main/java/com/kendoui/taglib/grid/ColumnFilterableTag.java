@@ -55,11 +55,11 @@ public class ColumnFilterableTag extends  BaseTag  /* interfaces */ /* interface
         setEvent("ui", value.getBody());
     }
 
-    public String getUi() {
-        return (String)getProperty("ui");
+    public java.lang.String getUi() {
+        return (java.lang.String)getProperty("ui");
     }
 
-    public void setUi(String value) {
+    public void setUi(java.lang.String value) {
         setProperty("ui", value);
     }
 

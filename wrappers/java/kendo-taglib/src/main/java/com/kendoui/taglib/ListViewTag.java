@@ -149,11 +149,11 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setEvent("save", value.getBody());
     }
 
-    public String getAltTemplate() {
-        return (String)getProperty("altTemplate");
+    public java.lang.String getAltTemplate() {
+        return (java.lang.String)getProperty("altTemplate");
     }
 
-    public void setAltTemplate(String value) {
+    public void setAltTemplate(java.lang.String value) {
         setProperty("altTemplate", value);
     }
 
@@ -169,11 +169,11 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("dataSource", dataSource);
     }
 
-    public String getEditTemplate() {
-        return (String)getProperty("editTemplate");
+    public java.lang.String getEditTemplate() {
+        return (java.lang.String)getProperty("editTemplate");
     }
 
-    public void setEditTemplate(String value) {
+    public void setEditTemplate(java.lang.String value) {
         setProperty("editTemplate", value);
     }
 
@@ -193,27 +193,27 @@ public class ListViewTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("pageable", value);
     }
 
-    public Object getSelectable() {
-        return (Object)getProperty("selectable");
+    public java.lang.Object getSelectable() {
+        return (java.lang.Object)getProperty("selectable");
     }
 
-    public void setSelectable(Object value) {
+    public void setSelectable(java.lang.Object value) {
         setProperty("selectable", value);
     }
 
-    public String getTagName() {
-        return (String)getProperty("tagName");
+    public java.lang.String getTagName() {
+        return (java.lang.String)getProperty("tagName");
     }
 
-    public void setTagName(String value) {
+    public void setTagName(java.lang.String value) {
         setProperty("tagName", value);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
     }
 
-    public void setTemplate(String value) {
+    public void setTemplate(java.lang.String value) {
         setProperty("template", value);
     }
 

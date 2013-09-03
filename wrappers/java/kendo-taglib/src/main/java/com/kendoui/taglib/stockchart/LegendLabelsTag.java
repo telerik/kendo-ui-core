@@ -51,27 +51,27 @@ public class LegendLabelsTag extends  BaseTag  /* interfaces *//* interfaces */ 
         return "stockChart-legend-labels";
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setColor(String value) {
+    public void setColor(java.lang.String value) {
         setProperty("color", value);
     }
 
-    public String getFont() {
-        return (String)getProperty("font");
+    public java.lang.String getFont() {
+        return (java.lang.String)getProperty("font");
     }
 
-    public void setFont(String value) {
+    public void setFont(java.lang.String value) {
         setProperty("font", value);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
     }
 
-    public void setTemplate(String value) {
+    public void setTemplate(java.lang.String value) {
         setProperty("template", value);
     }
 

@@ -58,19 +58,19 @@ public class TooltipTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("enabled", value);
     }
 
-    public String getFormat() {
-        return (String)getProperty("format");
+    public java.lang.String getFormat() {
+        return (java.lang.String)getProperty("format");
     }
 
-    public void setFormat(String value) {
+    public void setFormat(java.lang.String value) {
         setProperty("format", value);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
     }
 
-    public void setTemplate(String value) {
+    public void setTemplate(java.lang.String value) {
         setProperty("template", value);
     }
 

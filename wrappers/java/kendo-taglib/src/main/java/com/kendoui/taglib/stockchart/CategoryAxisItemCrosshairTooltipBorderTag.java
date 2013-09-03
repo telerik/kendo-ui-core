@@ -51,11 +51,11 @@ public class CategoryAxisItemCrosshairTooltipBorderTag extends  BaseTag  /* inte
         return "stockChart-categoryAxisItem-crosshair-tooltip-border";
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setColor(String value) {
+    public void setColor(java.lang.String value) {
         setProperty("color", value);
     }
 

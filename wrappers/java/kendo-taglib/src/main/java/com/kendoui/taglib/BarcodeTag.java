@@ -57,11 +57,11 @@ public class BarcodeTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("text", value);
     }
 
-    public String getBackground() {
-        return (String)getProperty("background");
+    public java.lang.String getBackground() {
+        return (java.lang.String)getProperty("background");
     }
 
-    public void setBackground(String value) {
+    public void setBackground(java.lang.String value) {
         setProperty("background", value);
     }
 
@@ -73,11 +73,11 @@ public class BarcodeTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("checksum", value);
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setColor(String value) {
+    public void setColor(java.lang.String value) {
         setProperty("color", value);
     }
 
@@ -89,27 +89,27 @@ public class BarcodeTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("height", value);
     }
 
-    public String getRenderAs() {
-        return (String)getProperty("renderAs");
+    public java.lang.String getRenderAs() {
+        return (java.lang.String)getProperty("renderAs");
     }
 
-    public void setRenderAs(String value) {
+    public void setRenderAs(java.lang.String value) {
         setProperty("renderAs", value);
     }
 
-    public String getType() {
-        return (String)getProperty("type");
+    public java.lang.String getType() {
+        return (java.lang.String)getProperty("type");
     }
 
-    public void setType(String value) {
+    public void setType(java.lang.String value) {
         setProperty("type", value);
     }
 
-    public String getValue() {
-        return (String)getProperty("value");
+    public java.lang.String getValue() {
+        return (java.lang.String)getProperty("value");
     }
 
-    public void setValue(String value) {
+    public void setValue(java.lang.String value) {
         setProperty("value", value);
     }
 

@@ -90,11 +90,11 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("autoBind", value);
     }
 
-    public String getCascadeFrom() {
-        return (String)getProperty("cascadeFrom");
+    public java.lang.String getCascadeFrom() {
+        return (java.lang.String)getProperty("cascadeFrom");
     }
 
-    public void setCascadeFrom(String value) {
+    public void setCascadeFrom(java.lang.String value) {
         setProperty("cascadeFrom", value);
     }
 
@@ -102,19 +102,19 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("dataSource", dataSource);
     }
 
-    public String getDataTextField() {
-        return (String)getProperty("dataTextField");
+    public java.lang.String getDataTextField() {
+        return (java.lang.String)getProperty("dataTextField");
     }
 
-    public void setDataTextField(String value) {
+    public void setDataTextField(java.lang.String value) {
         setProperty("dataTextField", value);
     }
 
-    public String getDataValueField() {
-        return (String)getProperty("dataValueField");
+    public java.lang.String getDataValueField() {
+        return (java.lang.String)getProperty("dataValueField");
     }
 
-    public void setDataValueField(String value) {
+    public void setDataValueField(java.lang.String value) {
         setProperty("dataValueField", value);
     }
 
@@ -134,11 +134,11 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("enable", value);
     }
 
-    public String getFilter() {
-        return (String)getProperty("filter");
+    public java.lang.String getFilter() {
+        return (java.lang.String)getProperty("filter");
     }
 
-    public void setFilter(String value) {
+    public void setFilter(java.lang.String value) {
         setProperty("filter", value);
     }
 
@@ -158,11 +158,11 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("highlightFirst", value);
     }
 
-    public String getIgnoreCase() {
-        return (String)getProperty("ignoreCase");
+    public java.lang.String getIgnoreCase() {
+        return (java.lang.String)getProperty("ignoreCase");
     }
 
-    public void setIgnoreCase(String value) {
+    public void setIgnoreCase(java.lang.String value) {
         setProperty("ignoreCase", value);
     }
 
@@ -182,11 +182,11 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("minLength", value);
     }
 
-    public String getPlaceholder() {
-        return (String)getProperty("placeholder");
+    public java.lang.String getPlaceholder() {
+        return (java.lang.String)getProperty("placeholder");
     }
 
-    public void setPlaceholder(String value) {
+    public void setPlaceholder(java.lang.String value) {
         setProperty("placeholder", value);
     }
 
@@ -198,27 +198,27 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("suggest", value);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
     }
 
-    public void setTemplate(String value) {
+    public void setTemplate(java.lang.String value) {
         setProperty("template", value);
     }
 
-    public String getText() {
-        return (String)getProperty("text");
+    public java.lang.String getText() {
+        return (java.lang.String)getProperty("text");
     }
 
-    public void setText(String value) {
+    public void setText(java.lang.String value) {
         setProperty("text", value);
     }
 
-    public String getValue() {
-        return (String)getProperty("value");
+    public java.lang.String getValue() {
+        return (java.lang.String)getProperty("value");
     }
 
-    public void setValue(String value) {
+    public void setValue(java.lang.String value) {
         setProperty("value", value);
     }
 

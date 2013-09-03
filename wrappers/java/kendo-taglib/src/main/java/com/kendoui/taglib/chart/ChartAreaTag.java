@@ -61,11 +61,11 @@ public class ChartAreaTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("margin", value);
     }
 
-    public String getBackground() {
-        return (String)getProperty("background");
+    public java.lang.String getBackground() {
+        return (java.lang.String)getProperty("background");
     }
 
-    public void setBackground(String value) {
+    public void setBackground(java.lang.String value) {
         setProperty("background", value);
     }
 

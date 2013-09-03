@@ -61,19 +61,19 @@ public class XAxisItemNotesDataItemTag extends  BaseTag  /* interfaces */ /* int
         setProperty("line", value);
     }
 
-    public String getPosition() {
-        return (String)getProperty("position");
+    public java.lang.String getPosition() {
+        return (java.lang.String)getProperty("position");
     }
 
-    public void setPosition(String value) {
+    public void setPosition(java.lang.String value) {
         setProperty("position", value);
     }
 
-    public Object getValue() {
-        return (Object)getProperty("value");
+    public java.lang.Object getValue() {
+        return (java.lang.Object)getProperty("value");
     }
 
-    public void setValue(Object value) {
+    public void setValue(java.lang.Object value) {
         setProperty("value", value);
     }
 

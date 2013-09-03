@@ -99,11 +99,11 @@ public class PanelBarTag extends WidgetWithItemsTag /* interfaces */implements I
         setProperty("animation", value);
     }
 
-    public String getExpandMode() {
-        return (String)getProperty("expandMode");
+    public java.lang.String getExpandMode() {
+        return (java.lang.String)getProperty("expandMode");
     }
 
-    public void setExpandMode(String value) {
+    public void setExpandMode(java.lang.String value) {
         setProperty("expandMode", value);
     }
 

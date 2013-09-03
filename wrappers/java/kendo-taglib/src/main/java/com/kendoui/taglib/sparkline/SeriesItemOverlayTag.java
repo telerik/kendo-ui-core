@@ -51,11 +51,11 @@ public class SeriesItemOverlayTag extends  BaseTag  /* interfaces */ /* interfac
         return "sparkline-seriesItem-overlay";
     }
 
-    public String getGradient() {
-        return (String)getProperty("gradient");
+    public java.lang.String getGradient() {
+        return (java.lang.String)getProperty("gradient");
     }
 
-    public void setGradient(String value) {
+    public void setGradient(java.lang.String value) {
         setProperty("gradient", value);
     }
 

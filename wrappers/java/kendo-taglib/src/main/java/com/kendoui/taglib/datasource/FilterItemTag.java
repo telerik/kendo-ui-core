@@ -62,35 +62,35 @@ public class FilterItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         return "dataSource-filterItem";
     }
 
-    public String getField() {
-        return (String)getProperty("field");
+    public java.lang.String getField() {
+        return (java.lang.String)getProperty("field");
     }
 
-    public void setField(String value) {
+    public void setField(java.lang.String value) {
         setProperty("field", value);
     }
 
-    public String getLogic() {
-        return (String)getProperty("logic");
+    public java.lang.String getLogic() {
+        return (java.lang.String)getProperty("logic");
     }
 
-    public void setLogic(String value) {
+    public void setLogic(java.lang.String value) {
         setProperty("logic", value);
     }
 
-    public String getOperator() {
-        return (String)getProperty("operator");
+    public java.lang.String getOperator() {
+        return (java.lang.String)getProperty("operator");
     }
 
-    public void setOperator(String value) {
+    public void setOperator(java.lang.String value) {
         setProperty("operator", value);
     }
 
-    public Object getValue() {
-        return (Object)getProperty("value");
+    public java.lang.Object getValue() {
+        return (java.lang.Object)getProperty("value");
     }
 
-    public void setValue(Object value) {
+    public void setValue(java.lang.Object value) {
         setProperty("value", value);
     }
 

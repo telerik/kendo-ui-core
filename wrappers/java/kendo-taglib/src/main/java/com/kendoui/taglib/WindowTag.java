@@ -102,27 +102,27 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
         setEvent("resize", value.getBody());
     }
 
-    public Object getActions() {
-        return (Object)getProperty("actions");
+    public java.lang.Object getActions() {
+        return (java.lang.Object)getProperty("actions");
     }
 
-    public void setActions(Object value) {
+    public void setActions(java.lang.Object value) {
         setProperty("actions", value);
     }
 
-    public Object getAppendTo() {
-        return (Object)getProperty("appendTo");
+    public java.lang.Object getAppendTo() {
+        return (java.lang.Object)getProperty("appendTo");
     }
 
-    public void setAppendTo(Object value) {
+    public void setAppendTo(java.lang.Object value) {
         setProperty("appendTo", value);
     }
 
-    public Object getContent() {
-        return (Object)getProperty("content");
+    public java.lang.Object getContent() {
+        return (java.lang.Object)getProperty("content");
     }
 
-    public void setContent(Object value) {
+    public void setContent(java.lang.Object value) {
         setProperty("content", value);
     }
 
@@ -134,11 +134,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("draggable", value);
     }
 
-    public Object getHeight() {
-        return (Object)getProperty("height");
+    public java.lang.Object getHeight() {
+        return (java.lang.Object)getProperty("height");
     }
 
-    public void setHeight(Object value) {
+    public void setHeight(java.lang.Object value) {
         setProperty("height", value);
     }
 
@@ -206,11 +206,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("resizable", value);
     }
 
-    public Object getTitle() {
-        return (Object)getProperty("title");
+    public java.lang.Object getTitle() {
+        return (java.lang.Object)getProperty("title");
     }
 
-    public void setTitle(Object value) {
+    public void setTitle(java.lang.Object value) {
         setProperty("title", value);
     }
 
@@ -222,11 +222,11 @@ public class WindowTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("visible", value);
     }
 
-    public Object getWidth() {
-        return (Object)getProperty("width");
+    public java.lang.Object getWidth() {
+        return (java.lang.Object)getProperty("width");
     }
 
-    public void setWidth(Object value) {
+    public void setWidth(java.lang.Object value) {
         setProperty("width", value);
     }
 

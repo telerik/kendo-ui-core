@@ -63,27 +63,27 @@ public class ImageBrowserSchemaModelFieldsTag extends  BaseTag  /* interfaces */
         setProperty("type", value);
     }
 
-    public String getName() {
-        return (String)getProperty("name");
+    public java.lang.String getName() {
+        return (java.lang.String)getProperty("name");
     }
 
-    public void setName(String value) {
+    public void setName(java.lang.String value) {
         setProperty("name", value);
     }
 
-    public String getSize() {
-        return (String)getProperty("size");
+    public java.lang.String getSize() {
+        return (java.lang.String)getProperty("size");
     }
 
-    public void setSize(String value) {
+    public void setSize(java.lang.String value) {
         setProperty("size", value);
     }
 
-    public String getType() {
-        return (String)getProperty("type");
+    public java.lang.String getType() {
+        return (java.lang.String)getProperty("type");
     }
 
-    public void setType(String value) {
+    public void setType(java.lang.String value) {
         setProperty("type", value);
     }
 

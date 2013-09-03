@@ -74,51 +74,51 @@ public class DateTimePickerTag extends WidgetTag /* interfaces *//* interfaces *
         setEvent("open", value.getBody());
     }
 
-    public String getARIATemplate() {
-        return (String)getProperty("ARIATemplate");
+    public java.lang.String getARIATemplate() {
+        return (java.lang.String)getProperty("ARIATemplate");
     }
 
-    public void setARIATemplate(String value) {
+    public void setARIATemplate(java.lang.String value) {
         setProperty("ARIATemplate", value);
     }
 
-    public String getCulture() {
-        return (String)getProperty("culture");
+    public java.lang.String getCulture() {
+        return (java.lang.String)getProperty("culture");
     }
 
-    public void setCulture(String value) {
+    public void setCulture(java.lang.String value) {
         setProperty("culture", value);
     }
 
-    public Object getDates() {
-        return (Object)getProperty("dates");
+    public java.lang.Object getDates() {
+        return (java.lang.Object)getProperty("dates");
     }
 
-    public void setDates(Object value) {
+    public void setDates(java.lang.Object value) {
         setProperty("dates", value);
     }
 
-    public String getDepth() {
-        return (String)getProperty("depth");
+    public java.lang.String getDepth() {
+        return (java.lang.String)getProperty("depth");
     }
 
-    public void setDepth(String value) {
+    public void setDepth(java.lang.String value) {
         setProperty("depth", value);
     }
 
-    public String getFooter() {
-        return (String)getProperty("footer");
+    public java.lang.String getFooter() {
+        return (java.lang.String)getProperty("footer");
     }
 
-    public void setFooter(String value) {
+    public void setFooter(java.lang.String value) {
         setProperty("footer", value);
     }
 
-    public String getFormat() {
-        return (String)getProperty("format");
+    public java.lang.String getFormat() {
+        return (java.lang.String)getProperty("format");
     }
 
-    public void setFormat(String value) {
+    public void setFormat(java.lang.String value) {
         setProperty("format", value);
     }
 
@@ -146,27 +146,27 @@ public class DateTimePickerTag extends WidgetTag /* interfaces *//* interfaces *
         setProperty("min", value);
     }
 
-    public Object getParseFormats() {
-        return (Object)getProperty("parseFormats");
+    public java.lang.Object getParseFormats() {
+        return (java.lang.Object)getProperty("parseFormats");
     }
 
-    public void setParseFormats(Object value) {
+    public void setParseFormats(java.lang.Object value) {
         setProperty("parseFormats", value);
     }
 
-    public String getStart() {
-        return (String)getProperty("start");
+    public java.lang.String getStart() {
+        return (java.lang.String)getProperty("start");
     }
 
-    public void setStart(String value) {
+    public void setStart(java.lang.String value) {
         setProperty("start", value);
     }
 
-    public String getTimeFormat() {
-        return (String)getProperty("timeFormat");
+    public java.lang.String getTimeFormat() {
+        return (java.lang.String)getProperty("timeFormat");
     }
 
-    public void setTimeFormat(String value) {
+    public void setTimeFormat(java.lang.String value) {
         setProperty("timeFormat", value);
     }
 

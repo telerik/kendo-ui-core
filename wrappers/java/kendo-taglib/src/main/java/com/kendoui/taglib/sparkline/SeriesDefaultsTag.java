@@ -65,27 +65,27 @@ public class SeriesDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
         setProperty("tooltip", value);
     }
 
-    public Object getArea() {
-        return (Object)getProperty("area");
+    public java.lang.Object getArea() {
+        return (java.lang.Object)getProperty("area");
     }
 
-    public void setArea(Object value) {
+    public void setArea(java.lang.Object value) {
         setProperty("area", value);
     }
 
-    public Object getBar() {
-        return (Object)getProperty("bar");
+    public java.lang.Object getBar() {
+        return (java.lang.Object)getProperty("bar");
     }
 
-    public void setBar(Object value) {
+    public void setBar(java.lang.Object value) {
         setProperty("bar", value);
     }
 
-    public Object getColumn() {
-        return (Object)getProperty("column");
+    public java.lang.Object getColumn() {
+        return (java.lang.Object)getProperty("column");
     }
 
-    public void setColumn(Object value) {
+    public void setColumn(java.lang.Object value) {
         setProperty("column", value);
     }
 
@@ -97,27 +97,27 @@ public class SeriesDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
         setProperty("gap", value);
     }
 
-    public Object getLine() {
-        return (Object)getProperty("line");
+    public java.lang.Object getLine() {
+        return (java.lang.Object)getProperty("line");
     }
 
-    public void setLine(Object value) {
+    public void setLine(java.lang.Object value) {
         setProperty("line", value);
     }
 
-    public Object getOverlay() {
-        return (Object)getProperty("overlay");
+    public java.lang.Object getOverlay() {
+        return (java.lang.Object)getProperty("overlay");
     }
 
-    public void setOverlay(Object value) {
+    public void setOverlay(java.lang.Object value) {
         setProperty("overlay", value);
     }
 
-    public Object getPie() {
-        return (Object)getProperty("pie");
+    public java.lang.Object getPie() {
+        return (java.lang.Object)getProperty("pie");
     }
 
-    public void setPie(Object value) {
+    public void setPie(java.lang.Object value) {
         setProperty("pie", value);
     }
 

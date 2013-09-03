@@ -59,11 +59,11 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
         setEvent("spin", value.getBody());
     }
 
-    public String getCulture() {
-        return (String)getProperty("culture");
+    public java.lang.String getCulture() {
+        return (java.lang.String)getProperty("culture");
     }
 
-    public void setCulture(String value) {
+    public void setCulture(java.lang.String value) {
         setProperty("culture", value);
     }
 
@@ -75,19 +75,19 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
         setProperty("decimals", value);
     }
 
-    public String getDownArrowText() {
-        return (String)getProperty("downArrowText");
+    public java.lang.String getDownArrowText() {
+        return (java.lang.String)getProperty("downArrowText");
     }
 
-    public void setDownArrowText(String value) {
+    public void setDownArrowText(java.lang.String value) {
         setProperty("downArrowText", value);
     }
 
-    public String getFormat() {
-        return (String)getProperty("format");
+    public java.lang.String getFormat() {
+        return (java.lang.String)getProperty("format");
     }
 
-    public void setFormat(String value) {
+    public void setFormat(java.lang.String value) {
         setProperty("format", value);
     }
 
@@ -107,11 +107,11 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
         setProperty("min", value);
     }
 
-    public String getPlaceholder() {
-        return (String)getProperty("placeholder");
+    public java.lang.String getPlaceholder() {
+        return (java.lang.String)getProperty("placeholder");
     }
 
-    public void setPlaceholder(String value) {
+    public void setPlaceholder(java.lang.String value) {
         setProperty("placeholder", value);
     }
 
@@ -131,11 +131,11 @@ public class NumericTextBoxTag extends WidgetTag /* interfaces *//* interfaces *
         setProperty("step", value);
     }
 
-    public String getUpArrowText() {
-        return (String)getProperty("upArrowText");
+    public java.lang.String getUpArrowText() {
+        return (java.lang.String)getProperty("upArrowText");
     }
 
-    public void setUpArrowText(String value) {
+    public void setUpArrowText(java.lang.String value) {
         setProperty("upArrowText", value);
     }
 

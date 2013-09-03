@@ -55,11 +55,11 @@ public class ColumnCommandItemTag extends  BaseTag  /* interfaces */ /* interfac
         setEvent("click", value.getBody());
     }
 
-    public String getClassName() {
-        return (String)getProperty("className");
+    public java.lang.String getClassName() {
+        return (java.lang.String)getProperty("className");
     }
 
-    public void setClassName(String value) {
+    public void setClassName(java.lang.String value) {
         setProperty("className", value);
     }
 
@@ -75,19 +75,19 @@ public class ColumnCommandItemTag extends  BaseTag  /* interfaces */ /* interfac
         setProperty("click", new Function(value));
     }
 
-    public String getName() {
-        return (String)getProperty("name");
+    public java.lang.String getName() {
+        return (java.lang.String)getProperty("name");
     }
 
-    public void setName(String value) {
+    public void setName(java.lang.String value) {
         setProperty("name", value);
     }
 
-    public String getText() {
-        return (String)getProperty("text");
+    public java.lang.String getText() {
+        return (java.lang.String)getProperty("text");
     }
 
-    public void setText(String value) {
+    public void setText(java.lang.String value) {
         setProperty("text", value);
     }
 

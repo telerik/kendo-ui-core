@@ -121,11 +121,11 @@ public class RangeSliderTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("min", value);
     }
 
-    public String getOrientation() {
-        return (String)getProperty("orientation");
+    public java.lang.String getOrientation() {
+        return (java.lang.String)getProperty("orientation");
     }
 
-    public void setOrientation(String value) {
+    public void setOrientation(java.lang.String value) {
         setProperty("orientation", value);
     }
 
@@ -153,11 +153,11 @@ public class RangeSliderTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("smallStep", value);
     }
 
-    public String getTickPlacement() {
-        return (String)getProperty("tickPlacement");
+    public java.lang.String getTickPlacement() {
+        return (java.lang.String)getProperty("tickPlacement");
     }
 
-    public void setTickPlacement(String value) {
+    public void setTickPlacement(java.lang.String value) {
         setProperty("tickPlacement", value);
     }
 

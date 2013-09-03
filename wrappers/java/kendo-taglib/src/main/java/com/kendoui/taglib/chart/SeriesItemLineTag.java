@@ -51,11 +51,11 @@ public class SeriesItemLineTag extends  BaseTag  /* interfaces *//* interfaces *
         return "chart-seriesItem-line";
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setColor(String value) {
+    public void setColor(java.lang.String value) {
         setProperty("color", value);
     }
 
@@ -67,11 +67,11 @@ public class SeriesItemLineTag extends  BaseTag  /* interfaces *//* interfaces *
         setProperty("opacity", value);
     }
 
-    public String getWidth() {
-        return (String)getProperty("width");
+    public java.lang.String getWidth() {
+        return (java.lang.String)getProperty("width");
     }
 
-    public void setWidth(String value) {
+    public void setWidth(java.lang.String value) {
         setProperty("width", value);
     }
 

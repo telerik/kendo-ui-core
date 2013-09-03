@@ -76,11 +76,11 @@ public class SeriesItemMarkersTag extends  BaseTag  /* interfaces */ /* interfac
         setEvent("rotation", value.getBody());
     }
 
-    public String getBackground() {
-        return (String)getProperty("background");
+    public java.lang.String getBackground() {
+        return (java.lang.String)getProperty("background");
     }
 
-    public void setBackground(String value) {
+    public void setBackground(java.lang.String value) {
         setProperty("background", value);
     }
 
@@ -112,11 +112,11 @@ public class SeriesItemMarkersTag extends  BaseTag  /* interfaces */ /* interfac
         setProperty("size", value);
     }
 
-    public String getType() {
-        return (String)getProperty("type");
+    public java.lang.String getType() {
+        return (java.lang.String)getProperty("type");
     }
 
-    public void setType(String value) {
+    public void setType(java.lang.String value) {
         setProperty("type", value);
     }
 

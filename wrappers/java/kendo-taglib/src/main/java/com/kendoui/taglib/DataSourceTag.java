@@ -124,11 +124,11 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("batch", value);
     }
 
-    public Object getData() {
-        return (Object)getProperty("data");
+    public java.lang.Object getData() {
+        return (java.lang.Object)getProperty("data");
     }
 
-    public void setData(Object value) {
+    public void setData(java.lang.Object value) {
         setProperty("data", value);
     }
 
@@ -188,11 +188,11 @@ public class DataSourceTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("serverSorting", value);
     }
 
-    public String getType() {
-        return (String)getProperty("type");
+    public java.lang.String getType() {
+        return (java.lang.String)getProperty("type");
     }
 
-    public void setType(String value) {
+    public void setType(java.lang.String value) {
         setProperty("type", value);
     }
 

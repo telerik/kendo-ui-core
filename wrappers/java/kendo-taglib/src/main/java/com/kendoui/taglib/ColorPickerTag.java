@@ -90,11 +90,11 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("columns", value);
     }
 
-    public Object getMessages() {
-        return (Object)getProperty("messages");
+    public java.lang.Object getMessages() {
+        return (java.lang.Object)getProperty("messages");
     }
 
-    public void setMessages(Object value) {
+    public void setMessages(java.lang.Object value) {
         setProperty("messages", value);
     }
 
@@ -106,11 +106,11 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("opacity", value);
     }
 
-    public Object getPalette() {
-        return (Object)getProperty("palette");
+    public java.lang.Object getPalette() {
+        return (java.lang.Object)getProperty("palette");
     }
 
-    public void setPalette(Object value) {
+    public void setPalette(java.lang.Object value) {
         setProperty("palette", value);
     }
 
@@ -130,19 +130,19 @@ public class ColorPickerTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("tileSize", value);
     }
 
-    public String getToolIcon() {
-        return (String)getProperty("toolIcon");
+    public java.lang.String getToolIcon() {
+        return (java.lang.String)getProperty("toolIcon");
     }
 
-    public void setToolIcon(String value) {
+    public void setToolIcon(java.lang.String value) {
         setProperty("toolIcon", value);
     }
 
-    public String getValue() {
-        return (String)getProperty("value");
+    public java.lang.String getValue() {
+        return (java.lang.String)getProperty("value");
     }
 
-    public void setValue(String value) {
+    public void setValue(java.lang.String value) {
         setProperty("value", value);
     }
 

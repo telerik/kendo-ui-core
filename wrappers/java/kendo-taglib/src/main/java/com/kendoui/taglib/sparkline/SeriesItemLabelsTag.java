@@ -83,27 +83,27 @@ public class SeriesItemLabelsTag extends  BaseTag  /* interfaces */ /* interface
         setEvent("visible", value.getBody());
     }
 
-    public String getAlign() {
-        return (String)getProperty("align");
+    public java.lang.String getAlign() {
+        return (java.lang.String)getProperty("align");
     }
 
-    public void setAlign(String value) {
+    public void setAlign(java.lang.String value) {
         setProperty("align", value);
     }
 
-    public String getBackground() {
-        return (String)getProperty("background");
+    public java.lang.String getBackground() {
+        return (java.lang.String)getProperty("background");
     }
 
-    public void setBackground(String value) {
+    public void setBackground(java.lang.String value) {
         setProperty("background", value);
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setColor(String value) {
+    public void setColor(java.lang.String value) {
         setProperty("color", value);
     }
 
@@ -115,51 +115,51 @@ public class SeriesItemLabelsTag extends  BaseTag  /* interfaces */ /* interface
         setProperty("distance", value);
     }
 
-    public String getFont() {
-        return (String)getProperty("font");
+    public java.lang.String getFont() {
+        return (java.lang.String)getProperty("font");
     }
 
-    public void setFont(String value) {
+    public void setFont(java.lang.String value) {
         setProperty("font", value);
     }
 
-    public String getFormat() {
-        return (String)getProperty("format");
+    public java.lang.String getFormat() {
+        return (java.lang.String)getProperty("format");
     }
 
-    public void setFormat(String value) {
+    public void setFormat(java.lang.String value) {
         setProperty("format", value);
     }
 
-    public Object getMargin() {
-        return (Object)getProperty("margin");
+    public java.lang.Object getMargin() {
+        return (java.lang.Object)getProperty("margin");
     }
 
-    public void setMargin(Object value) {
+    public void setMargin(java.lang.Object value) {
         setProperty("margin", value);
     }
 
-    public Object getPadding() {
-        return (Object)getProperty("padding");
+    public java.lang.Object getPadding() {
+        return (java.lang.Object)getProperty("padding");
     }
 
-    public void setPadding(Object value) {
+    public void setPadding(java.lang.Object value) {
         setProperty("padding", value);
     }
 
-    public String getPosition() {
-        return (String)getProperty("position");
+    public java.lang.String getPosition() {
+        return (java.lang.String)getProperty("position");
     }
 
-    public void setPosition(String value) {
+    public void setPosition(java.lang.String value) {
         setProperty("position", value);
     }
 
-    public String getTemplate() {
-        return (String)getProperty("template");
+    public java.lang.String getTemplate() {
+        return (java.lang.String)getProperty("template");
     }
 
-    public void setTemplate(String value) {
+    public void setTemplate(java.lang.String value) {
         setProperty("template", value);
     }
 

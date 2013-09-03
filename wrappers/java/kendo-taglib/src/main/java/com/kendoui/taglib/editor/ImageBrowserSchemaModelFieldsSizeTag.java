@@ -56,11 +56,11 @@ public class ImageBrowserSchemaModelFieldsSizeTag extends  BaseTag  /* interface
         setEvent("parse", value.getBody());
     }
 
-    public String getField() {
-        return (String)getProperty("field");
+    public java.lang.String getField() {
+        return (java.lang.String)getProperty("field");
     }
 
-    public void setField(String value) {
+    public void setField(java.lang.String value) {
         setProperty("field", value);
     }
 

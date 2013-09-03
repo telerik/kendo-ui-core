@@ -55,35 +55,35 @@ public class CategoryAxisItemSelectTag extends  BaseTag  /* interfaces */ /* int
         setProperty("mousewheel", value);
     }
 
-    public Object getFrom() {
-        return (Object)getProperty("from");
+    public java.lang.Object getFrom() {
+        return (java.lang.Object)getProperty("from");
     }
 
-    public void setFrom(Object value) {
+    public void setFrom(java.lang.Object value) {
         setProperty("from", value);
     }
 
-    public Object getMax() {
-        return (Object)getProperty("max");
+    public java.lang.Object getMax() {
+        return (java.lang.Object)getProperty("max");
     }
 
-    public void setMax(Object value) {
+    public void setMax(java.lang.Object value) {
         setProperty("max", value);
     }
 
-    public Object getMin() {
-        return (Object)getProperty("min");
+    public java.lang.Object getMin() {
+        return (java.lang.Object)getProperty("min");
     }
 
-    public void setMin(Object value) {
+    public void setMin(java.lang.Object value) {
         setProperty("min", value);
     }
 
-    public Object getTo() {
-        return (Object)getProperty("to");
+    public java.lang.Object getTo() {
+        return (java.lang.Object)getProperty("to");
     }
 
-    public void setTo(Object value) {
+    public void setTo(java.lang.Object value) {
         setProperty("to", value);
     }
 

@@ -51,83 +51,83 @@ public class PageableMessagesTag extends  BaseTag  /* interfaces *//* interfaces
         return "grid-pageable-messages";
     }
 
-    public String getDisplay() {
-        return (String)getProperty("display");
+    public java.lang.String getDisplay() {
+        return (java.lang.String)getProperty("display");
     }
 
-    public void setDisplay(String value) {
+    public void setDisplay(java.lang.String value) {
         setProperty("display", value);
     }
 
-    public String getEmpty() {
-        return (String)getProperty("empty");
+    public java.lang.String getEmpty() {
+        return (java.lang.String)getProperty("empty");
     }
 
-    public void setEmpty(String value) {
+    public void setEmpty(java.lang.String value) {
         setProperty("empty", value);
     }
 
-    public String getFirst() {
-        return (String)getProperty("first");
+    public java.lang.String getFirst() {
+        return (java.lang.String)getProperty("first");
     }
 
-    public void setFirst(String value) {
+    public void setFirst(java.lang.String value) {
         setProperty("first", value);
     }
 
-    public String getItemsPerPage() {
-        return (String)getProperty("itemsPerPage");
+    public java.lang.String getItemsPerPage() {
+        return (java.lang.String)getProperty("itemsPerPage");
     }
 
-    public void setItemsPerPage(String value) {
+    public void setItemsPerPage(java.lang.String value) {
         setProperty("itemsPerPage", value);
     }
 
-    public String getLast() {
-        return (String)getProperty("last");
+    public java.lang.String getLast() {
+        return (java.lang.String)getProperty("last");
     }
 
-    public void setLast(String value) {
+    public void setLast(java.lang.String value) {
         setProperty("last", value);
     }
 
-    public String getNext() {
-        return (String)getProperty("next");
+    public java.lang.String getNext() {
+        return (java.lang.String)getProperty("next");
     }
 
-    public void setNext(String value) {
+    public void setNext(java.lang.String value) {
         setProperty("next", value);
     }
 
-    public String getOf() {
-        return (String)getProperty("of");
+    public java.lang.String getOf() {
+        return (java.lang.String)getProperty("of");
     }
 
-    public void setOf(String value) {
+    public void setOf(java.lang.String value) {
         setProperty("of", value);
     }
 
-    public String getPage() {
-        return (String)getProperty("page");
+    public java.lang.String getPage() {
+        return (java.lang.String)getProperty("page");
     }
 
-    public void setPage(String value) {
+    public void setPage(java.lang.String value) {
         setProperty("page", value);
     }
 
-    public String getPrevious() {
-        return (String)getProperty("previous");
+    public java.lang.String getPrevious() {
+        return (java.lang.String)getProperty("previous");
     }
 
-    public void setPrevious(String value) {
+    public void setPrevious(java.lang.String value) {
         setProperty("previous", value);
     }
 
-    public String getRefresh() {
-        return (String)getProperty("refresh");
+    public java.lang.String getRefresh() {
+        return (java.lang.String)getProperty("refresh");
     }
 
-    public void setRefresh(String value) {
+    public void setRefresh(java.lang.String value) {
         setProperty("refresh", value);
     }
 

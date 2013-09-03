@@ -65,19 +65,19 @@ public class ImageBrowserTag extends  BaseTag  /* interfaces */ /* interfaces */
         setProperty("transport", value);
     }
 
-    public String getFileTypes() {
-        return (String)getProperty("fileTypes");
+    public java.lang.String getFileTypes() {
+        return (java.lang.String)getProperty("fileTypes");
     }
 
-    public void setFileTypes(String value) {
+    public void setFileTypes(java.lang.String value) {
         setProperty("fileTypes", value);
     }
 
-    public String getPath() {
-        return (String)getProperty("path");
+    public java.lang.String getPath() {
+        return (java.lang.String)getProperty("path");
     }
 
-    public void setPath(String value) {
+    public void setPath(java.lang.String value) {
         setProperty("path", value);
     }
 

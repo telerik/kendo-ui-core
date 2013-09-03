@@ -51,19 +51,19 @@ public class FilterableOperatorsEnumsTag extends  BaseTag  /* interfaces */ /* i
         return "grid-filterable-operators-enums";
     }
 
-    public String getEq() {
-        return (String)getProperty("eq");
+    public java.lang.String getEq() {
+        return (java.lang.String)getProperty("eq");
     }
 
-    public void setEq(String value) {
+    public void setEq(java.lang.String value) {
         setProperty("eq", value);
     }
 
-    public String getNeq() {
-        return (String)getProperty("neq");
+    public java.lang.String getNeq() {
+        return (java.lang.String)getProperty("neq");
     }
 
-    public void setNeq(String value) {
+    public void setNeq(java.lang.String value) {
         setProperty("neq", value);
     }
 

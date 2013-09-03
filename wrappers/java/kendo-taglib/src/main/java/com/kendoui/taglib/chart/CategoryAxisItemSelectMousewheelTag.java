@@ -59,11 +59,11 @@ public class CategoryAxisItemSelectMousewheelTag extends  BaseTag  /* interfaces
         setProperty("reverse", value);
     }
 
-    public String getZoom() {
-        return (String)getProperty("zoom");
+    public java.lang.String getZoom() {
+        return (java.lang.String)getProperty("zoom");
     }
 
-    public void setZoom(String value) {
+    public void setZoom(java.lang.String value) {
         setProperty("zoom", value);
     }
 

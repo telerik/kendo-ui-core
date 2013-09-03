@@ -51,11 +51,11 @@ public class GroupableMessagesTag extends  BaseTag  /* interfaces *//* interface
         return "grid-groupable-messages";
     }
 
-    public String getEmpty() {
-        return (String)getProperty("empty");
+    public java.lang.String getEmpty() {
+        return (java.lang.String)getProperty("empty");
     }
 
-    public void setEmpty(String value) {
+    public void setEmpty(java.lang.String value) {
         setProperty("empty", value);
     }
 

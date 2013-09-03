@@ -55,11 +55,11 @@ public class ImageBrowserSchemaModelTag extends  BaseTag  /* interfaces */ /* in
         setProperty("fields", value);
     }
 
-    public String getId() {
-        return (String)getProperty("id");
+    public java.lang.String getId() {
+        return (java.lang.String)getProperty("id");
     }
 
-    public void setId(String value) {
+    public void setId(java.lang.String value) {
         setProperty("id", value);
     }
 

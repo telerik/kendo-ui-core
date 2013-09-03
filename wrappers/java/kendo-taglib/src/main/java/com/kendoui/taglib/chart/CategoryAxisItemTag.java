@@ -99,51 +99,51 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("title", value);
     }
 
-    public Object getAxisCrossingValue() {
-        return (Object)getProperty("axisCrossingValue");
+    public java.lang.Object getAxisCrossingValue() {
+        return (java.lang.Object)getProperty("axisCrossingValue");
     }
 
-    public void setAxisCrossingValue(Object value) {
+    public void setAxisCrossingValue(java.lang.Object value) {
         setProperty("axisCrossingValue", value);
     }
 
-    public String getBaseUnit() {
-        return (String)getProperty("baseUnit");
+    public java.lang.String getBaseUnit() {
+        return (java.lang.String)getProperty("baseUnit");
     }
 
-    public void setBaseUnit(String value) {
+    public void setBaseUnit(java.lang.String value) {
         setProperty("baseUnit", value);
     }
 
-    public Object getBaseUnitStep() {
-        return (Object)getProperty("baseUnitStep");
+    public java.lang.Object getBaseUnitStep() {
+        return (java.lang.Object)getProperty("baseUnitStep");
     }
 
-    public void setBaseUnitStep(Object value) {
+    public void setBaseUnitStep(java.lang.Object value) {
         setProperty("baseUnitStep", value);
     }
 
-    public Object getCategories() {
-        return (Object)getProperty("categories");
+    public java.lang.Object getCategories() {
+        return (java.lang.Object)getProperty("categories");
     }
 
-    public void setCategories(Object value) {
+    public void setCategories(java.lang.Object value) {
         setProperty("categories", value);
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setColor(String value) {
+    public void setColor(java.lang.String value) {
         setProperty("color", value);
     }
 
-    public String getField() {
-        return (String)getProperty("field");
+    public java.lang.String getField() {
+        return (java.lang.String)getProperty("field");
     }
 
-    public void setField(String value) {
+    public void setField(java.lang.String value) {
         setProperty("field", value);
     }
 
@@ -155,11 +155,11 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("justified", value);
     }
 
-    public Object getMax() {
-        return (Object)getProperty("max");
+    public java.lang.Object getMax() {
+        return (java.lang.Object)getProperty("max");
     }
 
-    public void setMax(Object value) {
+    public void setMax(java.lang.Object value) {
         setProperty("max", value);
     }
 
@@ -171,27 +171,27 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("maxDateGroups", value);
     }
 
-    public Object getMin() {
-        return (Object)getProperty("min");
+    public java.lang.Object getMin() {
+        return (java.lang.Object)getProperty("min");
     }
 
-    public void setMin(Object value) {
+    public void setMin(java.lang.Object value) {
         setProperty("min", value);
     }
 
-    public String getName() {
-        return (String)getProperty("name");
+    public java.lang.String getName() {
+        return (java.lang.String)getProperty("name");
     }
 
-    public void setName(String value) {
+    public void setName(java.lang.String value) {
         setProperty("name", value);
     }
 
-    public String getPane() {
-        return (String)getProperty("pane");
+    public java.lang.String getPane() {
+        return (java.lang.String)getProperty("pane");
     }
 
-    public void setPane(String value) {
+    public void setPane(java.lang.String value) {
         setProperty("pane", value);
     }
 
@@ -219,11 +219,11 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("startAngle", value);
     }
 
-    public String getType() {
-        return (String)getProperty("type");
+    public java.lang.String getType() {
+        return (java.lang.String)getProperty("type");
     }
 
-    public void setType(String value) {
+    public void setType(java.lang.String value) {
         setProperty("type", value);
     }
 

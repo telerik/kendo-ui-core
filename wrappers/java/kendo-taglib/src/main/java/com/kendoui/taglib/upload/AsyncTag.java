@@ -66,43 +66,43 @@ public class AsyncTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("batch", value);
     }
 
-    public String getRemoveField() {
-        return (String)getProperty("removeField");
+    public java.lang.String getRemoveField() {
+        return (java.lang.String)getProperty("removeField");
     }
 
-    public void setRemoveField(String value) {
+    public void setRemoveField(java.lang.String value) {
         setProperty("removeField", value);
     }
 
-    public String getRemoveUrl() {
-        return (String)getProperty("removeUrl");
+    public java.lang.String getRemoveUrl() {
+        return (java.lang.String)getProperty("removeUrl");
     }
 
-    public void setRemoveUrl(String value) {
+    public void setRemoveUrl(java.lang.String value) {
         setProperty("removeUrl", value);
     }
 
-    public String getRemoveVerb() {
-        return (String)getProperty("removeVerb");
+    public java.lang.String getRemoveVerb() {
+        return (java.lang.String)getProperty("removeVerb");
     }
 
-    public void setRemoveVerb(String value) {
+    public void setRemoveVerb(java.lang.String value) {
         setProperty("removeVerb", value);
     }
 
-    public String getSaveField() {
-        return (String)getProperty("saveField");
+    public java.lang.String getSaveField() {
+        return (java.lang.String)getProperty("saveField");
     }
 
-    public void setSaveField(String value) {
+    public void setSaveField(java.lang.String value) {
         setProperty("saveField", value);
     }
 
-    public String getSaveUrl() {
-        return (String)getProperty("saveUrl");
+    public java.lang.String getSaveUrl() {
+        return (java.lang.String)getProperty("saveUrl");
     }
 
-    public void setSaveUrl(String value) {
+    public void setSaveUrl(java.lang.String value) {
         setProperty("saveUrl", value);
     }
 

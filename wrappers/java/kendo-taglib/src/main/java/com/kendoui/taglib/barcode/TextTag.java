@@ -57,19 +57,19 @@ public class TextTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("margin", value);
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setColor(String value) {
+    public void setColor(java.lang.String value) {
         setProperty("color", value);
     }
 
-    public String getFont() {
-        return (String)getProperty("font");
+    public java.lang.String getFont() {
+        return (java.lang.String)getProperty("font");
     }
 
-    public void setFont(String value) {
+    public void setFont(java.lang.String value) {
         setProperty("font", value);
     }
 

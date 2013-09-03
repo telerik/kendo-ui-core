@@ -49,27 +49,27 @@ public class ToolItemTag extends  BaseItemTag  /* interfaces */ /* interfaces */
         return "editor-tool-item";
     }
 
-    public String getContext() {
-        return (String)getProperty("context");
+    public java.lang.String getContext() {
+        return (java.lang.String)getProperty("context");
     }
 
-    public void setContext(String value) {
+    public void setContext(java.lang.String value) {
         setProperty("context", value);
     }
 
-    public String getText() {
-        return (String)getProperty("text");
+    public java.lang.String getText() {
+        return (java.lang.String)getProperty("text");
     }
 
-    public void setText(String value) {
+    public void setText(java.lang.String value) {
         setProperty("text", value);
     }
 
-    public String getValue() {
-        return (String)getProperty("value");
+    public java.lang.String getValue() {
+        return (java.lang.String)getProperty("value");
     }
 
-    public void setValue(String value) {
+    public void setValue(java.lang.String value) {
         setProperty("value", value);
     }
 

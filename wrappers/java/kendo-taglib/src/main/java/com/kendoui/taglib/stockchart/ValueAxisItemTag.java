@@ -91,19 +91,19 @@ public class ValueAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("title", value);
     }
 
-    public Object getAxisCrossingValue() {
-        return (Object)getProperty("axisCrossingValue");
+    public java.lang.Object getAxisCrossingValue() {
+        return (java.lang.Object)getProperty("axisCrossingValue");
     }
 
-    public void setAxisCrossingValue(Object value) {
+    public void setAxisCrossingValue(java.lang.Object value) {
         setProperty("axisCrossingValue", value);
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setColor(String value) {
+    public void setColor(java.lang.String value) {
         setProperty("color", value);
     }
 
@@ -139,11 +139,11 @@ public class ValueAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("minorUnit", value);
     }
 
-    public Object getName() {
-        return (Object)getProperty("name");
+    public java.lang.Object getName() {
+        return (java.lang.Object)getProperty("name");
     }
 
-    public void setName(Object value) {
+    public void setName(java.lang.Object value) {
         setProperty("name", value);
     }
 
@@ -155,11 +155,11 @@ public class ValueAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */
         setProperty("narrowRange", value);
     }
 
-    public String getPane() {
-        return (String)getProperty("pane");
+    public java.lang.String getPane() {
+        return (java.lang.String)getProperty("pane");
     }
 
-    public void setPane(String value) {
+    public void setPane(java.lang.String value) {
         setProperty("pane", value);
     }
 

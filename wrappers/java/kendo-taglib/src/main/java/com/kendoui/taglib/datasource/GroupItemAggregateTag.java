@@ -49,19 +49,19 @@ public class GroupItemAggregateTag extends  BaseTag  /* interfaces */ /* interfa
         return "dataSource-groupItem-aggregate";
     }
 
-    public String getAggregate() {
-        return (String)getProperty("aggregate");
+    public java.lang.String getAggregate() {
+        return (java.lang.String)getProperty("aggregate");
     }
 
-    public void setAggregate(String value) {
+    public void setAggregate(java.lang.String value) {
         setProperty("aggregate", value);
     }
 
-    public String getField() {
-        return (String)getProperty("field");
+    public java.lang.String getField() {
+        return (java.lang.String)getProperty("field");
     }
 
-    public void setField(String value) {
+    public void setField(java.lang.String value) {
         setProperty("field", value);
     }
 

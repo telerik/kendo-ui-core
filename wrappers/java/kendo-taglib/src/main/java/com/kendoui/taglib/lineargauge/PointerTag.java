@@ -58,19 +58,19 @@ public class PointerTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("track", value);
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setColor(String value) {
+    public void setColor(java.lang.String value) {
         setProperty("color", value);
     }
 
-    public Object getMargin() {
-        return (Object)getProperty("margin");
+    public java.lang.Object getMargin() {
+        return (java.lang.Object)getProperty("margin");
     }
 
-    public void setMargin(Object value) {
+    public void setMargin(java.lang.Object value) {
         setProperty("margin", value);
     }
 
@@ -82,11 +82,11 @@ public class PointerTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("opacity", value);
     }
 
-    public String getShape() {
-        return (String)getProperty("shape");
+    public java.lang.String getShape() {
+        return (java.lang.String)getProperty("shape");
     }
 
-    public void setShape(String value) {
+    public void setShape(java.lang.String value) {
         setProperty("shape", value);
     }
 

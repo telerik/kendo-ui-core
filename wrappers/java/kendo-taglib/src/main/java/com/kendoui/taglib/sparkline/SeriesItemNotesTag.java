@@ -63,11 +63,11 @@ public class SeriesItemNotesTag extends  BaseTag  /* interfaces */ /* interfaces
         setProperty("line", value);
     }
 
-    public String getPosition() {
-        return (String)getProperty("position");
+    public java.lang.String getPosition() {
+        return (java.lang.String)getProperty("position");
     }
 
-    public void setPosition(String value) {
+    public void setPosition(java.lang.String value) {
         setProperty("position", value);
     }
 

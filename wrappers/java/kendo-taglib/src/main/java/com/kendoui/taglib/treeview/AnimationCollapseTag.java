@@ -59,11 +59,11 @@ public class AnimationCollapseTag extends  BaseTag  /* interfaces *//* interface
         setProperty("duration", value);
     }
 
-    public String getEffects() {
-        return (String)getProperty("effects");
+    public java.lang.String getEffects() {
+        return (java.lang.String)getProperty("effects");
     }
 
-    public void setEffects(String value) {
+    public void setEffects(java.lang.String value) {
         setProperty("effects", value);
     }
 

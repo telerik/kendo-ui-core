@@ -85,11 +85,11 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setEvent("minorTimeHeaderTemplate", value.getBody());
     }
 
-    public String getAllDayEventTemplate() {
-        return (String)getProperty("allDayEventTemplate");
+    public java.lang.String getAllDayEventTemplate() {
+        return (java.lang.String)getProperty("allDayEventTemplate");
     }
 
-    public void setAllDayEventTemplate(String value) {
+    public void setAllDayEventTemplate(java.lang.String value) {
         setProperty("allDayEventTemplate", value);
     }
 
@@ -101,19 +101,19 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("allDaySlot", value);
     }
 
-    public String getDateHeaderTemplate() {
-        return (String)getProperty("dateHeaderTemplate");
+    public java.lang.String getDateHeaderTemplate() {
+        return (java.lang.String)getProperty("dateHeaderTemplate");
     }
 
-    public void setDateHeaderTemplate(String value) {
+    public void setDateHeaderTemplate(java.lang.String value) {
         setProperty("dateHeaderTemplate", value);
     }
 
-    public String getDayTemplate() {
-        return (String)getProperty("dayTemplate");
+    public java.lang.String getDayTemplate() {
+        return (java.lang.String)getProperty("dayTemplate");
     }
 
-    public void setDayTemplate(String value) {
+    public void setDayTemplate(java.lang.String value) {
         setProperty("dayTemplate", value);
     }
 
@@ -141,19 +141,19 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("eventHeight", value);
     }
 
-    public String getEventTemplate() {
-        return (String)getProperty("eventTemplate");
+    public java.lang.String getEventTemplate() {
+        return (java.lang.String)getProperty("eventTemplate");
     }
 
-    public void setEventTemplate(String value) {
+    public void setEventTemplate(java.lang.String value) {
         setProperty("eventTemplate", value);
     }
 
-    public String getEventTimeTemplate() {
-        return (String)getProperty("eventTimeTemplate");
+    public java.lang.String getEventTimeTemplate() {
+        return (java.lang.String)getProperty("eventTimeTemplate");
     }
 
-    public void setEventTimeTemplate(String value) {
+    public void setEventTimeTemplate(java.lang.String value) {
         setProperty("eventTimeTemplate", value);
     }
 
@@ -165,11 +165,11 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("majorTick", value);
     }
 
-    public String getMajorTimeHeaderTemplate() {
-        return (String)getProperty("majorTimeHeaderTemplate");
+    public java.lang.String getMajorTimeHeaderTemplate() {
+        return (java.lang.String)getProperty("majorTimeHeaderTemplate");
     }
 
-    public void setMajorTimeHeaderTemplate(String value) {
+    public void setMajorTimeHeaderTemplate(java.lang.String value) {
         setProperty("majorTimeHeaderTemplate", value);
     }
 
@@ -181,11 +181,11 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("minorTickCount", value);
     }
 
-    public String getMinorTimeHeaderTemplate() {
-        return (String)getProperty("minorTimeHeaderTemplate");
+    public java.lang.String getMinorTimeHeaderTemplate() {
+        return (java.lang.String)getProperty("minorTimeHeaderTemplate");
     }
 
-    public void setMinorTimeHeaderTemplate(String value) {
+    public void setMinorTimeHeaderTemplate(java.lang.String value) {
         setProperty("minorTimeHeaderTemplate", value);
     }
 
@@ -197,11 +197,11 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("selected", value);
     }
 
-    public String getSelectedDateFormat() {
-        return (String)getProperty("selectedDateFormat");
+    public java.lang.String getSelectedDateFormat() {
+        return (java.lang.String)getProperty("selectedDateFormat");
     }
 
-    public void setSelectedDateFormat(String value) {
+    public void setSelectedDateFormat(java.lang.String value) {
         setProperty("selectedDateFormat", value);
     }
 
@@ -213,19 +213,19 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("startTime", value);
     }
 
-    public String getTitle() {
-        return (String)getProperty("title");
+    public java.lang.String getTitle() {
+        return (java.lang.String)getProperty("title");
     }
 
-    public void setTitle(String value) {
+    public void setTitle(java.lang.String value) {
         setProperty("title", value);
     }
 
-    public String getType() {
-        return (String)getProperty("type");
+    public java.lang.String getType() {
+        return (java.lang.String)getProperty("type");
     }
 
-    public void setType(String value) {
+    public void setType(java.lang.String value) {
         setProperty("type", value);
     }
 

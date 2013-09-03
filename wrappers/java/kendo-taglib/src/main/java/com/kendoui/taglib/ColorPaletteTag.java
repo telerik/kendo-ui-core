@@ -62,11 +62,11 @@ public class ColorPaletteTag extends WidgetTag /* interfaces *//* interfaces */ 
         setProperty("columns", value);
     }
 
-    public Object getPalette() {
-        return (Object)getProperty("palette");
+    public java.lang.Object getPalette() {
+        return (java.lang.Object)getProperty("palette");
     }
 
-    public void setPalette(Object value) {
+    public void setPalette(java.lang.Object value) {
         setProperty("palette", value);
     }
 
@@ -78,11 +78,11 @@ public class ColorPaletteTag extends WidgetTag /* interfaces *//* interfaces */ 
         setProperty("tileSize", value);
     }
 
-    public String getValue() {
-        return (String)getProperty("value");
+    public java.lang.String getValue() {
+        return (java.lang.String)getProperty("value");
     }
 
-    public void setValue(String value) {
+    public void setValue(java.lang.String value) {
         setProperty("value", value);
     }
 

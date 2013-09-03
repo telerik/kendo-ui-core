@@ -95,11 +95,11 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Items
         setProperty("closeOnClick", value);
     }
 
-    public String getDirection() {
-        return (String)getProperty("direction");
+    public java.lang.String getDirection() {
+        return (java.lang.String)getProperty("direction");
     }
 
-    public void setDirection(String value) {
+    public void setDirection(java.lang.String value) {
         setProperty("direction", value);
     }
 
@@ -119,19 +119,19 @@ public class MenuTag extends WidgetWithItemsTag /* interfaces */implements Items
         setProperty("openOnClick", value);
     }
 
-    public String getOrientation() {
-        return (String)getProperty("orientation");
+    public java.lang.String getOrientation() {
+        return (java.lang.String)getProperty("orientation");
     }
 
-    public void setOrientation(String value) {
+    public void setOrientation(java.lang.String value) {
         setProperty("orientation", value);
     }
 
-    public String getPopupCollision() {
-        return (String)getProperty("popupCollision");
+    public java.lang.String getPopupCollision() {
+        return (java.lang.String)getProperty("popupCollision");
     }
 
-    public void setPopupCollision(String value) {
+    public void setPopupCollision(java.lang.String value) {
         setProperty("popupCollision", value);
     }
 

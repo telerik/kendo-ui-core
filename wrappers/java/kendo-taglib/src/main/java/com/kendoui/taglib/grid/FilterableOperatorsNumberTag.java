@@ -51,51 +51,51 @@ public class FilterableOperatorsNumberTag extends  BaseTag  /* interfaces */ /* 
         return "grid-filterable-operators-number";
     }
 
-    public String getEq() {
-        return (String)getProperty("eq");
+    public java.lang.String getEq() {
+        return (java.lang.String)getProperty("eq");
     }
 
-    public void setEq(String value) {
+    public void setEq(java.lang.String value) {
         setProperty("eq", value);
     }
 
-    public String getGt() {
-        return (String)getProperty("gt");
+    public java.lang.String getGt() {
+        return (java.lang.String)getProperty("gt");
     }
 
-    public void setGt(String value) {
+    public void setGt(java.lang.String value) {
         setProperty("gt", value);
     }
 
-    public String getGte() {
-        return (String)getProperty("gte");
+    public java.lang.String getGte() {
+        return (java.lang.String)getProperty("gte");
     }
 
-    public void setGte(String value) {
+    public void setGte(java.lang.String value) {
         setProperty("gte", value);
     }
 
-    public String getLt() {
-        return (String)getProperty("lt");
+    public java.lang.String getLt() {
+        return (java.lang.String)getProperty("lt");
     }
 
-    public void setLt(String value) {
+    public void setLt(java.lang.String value) {
         setProperty("lt", value);
     }
 
-    public String getLte() {
-        return (String)getProperty("lte");
+    public java.lang.String getLte() {
+        return (java.lang.String)getProperty("lte");
     }
 
-    public void setLte(String value) {
+    public void setLte(java.lang.String value) {
         setProperty("lte", value);
     }
 
-    public String getNeq() {
-        return (String)getProperty("neq");
+    public java.lang.String getNeq() {
+        return (java.lang.String)getProperty("neq");
     }
 
-    public void setNeq(String value) {
+    public void setNeq(java.lang.String value) {
         setProperty("neq", value);
     }
 

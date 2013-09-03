@@ -58,11 +58,11 @@ public class FlatColorPickerTag extends WidgetTag /* interfaces *//* interfaces 
         setProperty("buttons", value);
     }
 
-    public Object getMessages() {
-        return (Object)getProperty("messages");
+    public java.lang.Object getMessages() {
+        return (java.lang.Object)getProperty("messages");
     }
 
-    public void setMessages(Object value) {
+    public void setMessages(java.lang.Object value) {
         setProperty("messages", value);
     }
 
@@ -82,11 +82,11 @@ public class FlatColorPickerTag extends WidgetTag /* interfaces *//* interfaces 
         setProperty("preview", value);
     }
 
-    public String getValue() {
-        return (String)getProperty("value");
+    public java.lang.String getValue() {
+        return (java.lang.String)getProperty("value");
     }
 
-    public void setValue(String value) {
+    public void setValue(java.lang.String value) {
         setProperty("value", value);
     }
 

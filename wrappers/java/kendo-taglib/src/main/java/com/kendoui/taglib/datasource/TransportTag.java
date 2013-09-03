@@ -71,19 +71,19 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
         setEvent("parameterMap", value.getBody());
     }
 
-    public String getCreate() {
-        return (String)getProperty("create");
+    public java.lang.String getCreate() {
+        return (java.lang.String)getProperty("create");
     }
 
-    public void setCreate(String value) {
+    public void setCreate(java.lang.String value) {
         setProperty("create", value);
     }
 
-    public String getDestroy() {
-        return (String)getProperty("destroy");
+    public java.lang.String getDestroy() {
+        return (java.lang.String)getProperty("destroy");
     }
 
-    public void setDestroy(String value) {
+    public void setDestroy(java.lang.String value) {
         setProperty("destroy", value);
     }
 
@@ -99,19 +99,19 @@ public class TransportTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("parameterMap", new Function(value));
     }
 
-    public String getRead() {
-        return (String)getProperty("read");
+    public java.lang.String getRead() {
+        return (java.lang.String)getProperty("read");
     }
 
-    public void setRead(String value) {
+    public void setRead(java.lang.String value) {
         setProperty("read", value);
     }
 
-    public String getUpdate() {
-        return (String)getProperty("update");
+    public java.lang.String getUpdate() {
+        return (java.lang.String)getProperty("update");
     }
 
-    public void setUpdate(String value) {
+    public void setUpdate(java.lang.String value) {
         setProperty("update", value);
     }
 

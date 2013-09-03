@@ -92,11 +92,11 @@ public class PagerTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("input", value);
     }
 
-    public String getLinkTemplate() {
-        return (String)getProperty("linkTemplate");
+    public java.lang.String getLinkTemplate() {
+        return (java.lang.String)getProperty("linkTemplate");
     }
 
-    public void setLinkTemplate(String value) {
+    public void setLinkTemplate(java.lang.String value) {
         setProperty("linkTemplate", value);
     }
 
@@ -108,11 +108,11 @@ public class PagerTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("numeric", value);
     }
 
-    public Object getPageSizes() {
-        return (Object)getProperty("pageSizes");
+    public java.lang.Object getPageSizes() {
+        return (java.lang.Object)getProperty("pageSizes");
     }
 
-    public void setPageSizes(Object value) {
+    public void setPageSizes(java.lang.Object value) {
         setProperty("pageSizes", value);
     }
 
@@ -132,11 +132,11 @@ public class PagerTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setProperty("refresh", value);
     }
 
-    public String getSelectTemplate() {
-        return (String)getProperty("selectTemplate");
+    public java.lang.String getSelectTemplate() {
+        return (java.lang.String)getProperty("selectTemplate");
     }
 
-    public void setSelectTemplate(String value) {
+    public void setSelectTemplate(java.lang.String value) {
         setProperty("selectTemplate", value);
     }
 

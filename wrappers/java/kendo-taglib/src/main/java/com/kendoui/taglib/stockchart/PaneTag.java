@@ -57,11 +57,11 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("title", value);
     }
 
-    public String getBackground() {
-        return (String)getProperty("background");
+    public java.lang.String getBackground() {
+        return (java.lang.String)getProperty("background");
     }
 
-    public void setBackground(String value) {
+    public void setBackground(java.lang.String value) {
         setProperty("background", value);
     }
 
@@ -73,35 +73,35 @@ public class PaneTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("height", value);
     }
 
-    public Object getMargin() {
-        return (Object)getProperty("margin");
+    public java.lang.Object getMargin() {
+        return (java.lang.Object)getProperty("margin");
     }
 
-    public void setMargin(Object value) {
+    public void setMargin(java.lang.Object value) {
         setProperty("margin", value);
     }
 
-    public String getName() {
-        return (String)getProperty("name");
+    public java.lang.String getName() {
+        return (java.lang.String)getProperty("name");
     }
 
-    public void setName(String value) {
+    public void setName(java.lang.String value) {
         setProperty("name", value);
     }
 
-    public Object getPadding() {
-        return (Object)getProperty("padding");
+    public java.lang.Object getPadding() {
+        return (java.lang.Object)getProperty("padding");
     }
 
-    public void setPadding(Object value) {
+    public void setPadding(java.lang.Object value) {
         setProperty("padding", value);
     }
 
-    public String getTitle() {
-        return (String)getProperty("title");
+    public java.lang.String getTitle() {
+        return (java.lang.String)getProperty("title");
     }
 
-    public void setTitle(String value) {
+    public void setTitle(java.lang.String value) {
         setProperty("title", value);
     }
 

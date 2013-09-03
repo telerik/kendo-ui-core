@@ -93,99 +93,99 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setEvent("downColor", value.getBody());
     }
 
-    public String getAggregate() {
-        return (String)getProperty("aggregate");
+    public java.lang.String getAggregate() {
+        return (java.lang.String)getProperty("aggregate");
     }
 
-    public void setAggregate(String value) {
+    public void setAggregate(java.lang.String value) {
         setProperty("aggregate", value);
     }
 
-    public String getAxis() {
-        return (String)getProperty("axis");
+    public java.lang.String getAxis() {
+        return (java.lang.String)getProperty("axis");
     }
 
-    public void setAxis(String value) {
+    public void setAxis(java.lang.String value) {
         setProperty("axis", value);
     }
 
-    public String getCategoryField() {
-        return (String)getProperty("categoryField");
+    public java.lang.String getCategoryField() {
+        return (java.lang.String)getProperty("categoryField");
     }
 
-    public void setCategoryField(String value) {
+    public void setCategoryField(java.lang.String value) {
         setProperty("categoryField", value);
     }
 
-    public String getCloseField() {
-        return (String)getProperty("closeField");
+    public java.lang.String getCloseField() {
+        return (java.lang.String)getProperty("closeField");
     }
 
-    public void setCloseField(String value) {
+    public void setCloseField(java.lang.String value) {
         setProperty("closeField", value);
     }
 
-    public String getColor() {
-        return (String)getProperty("color");
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
     }
 
-    public void setColor(String value) {
+    public void setColor(java.lang.String value) {
         setProperty("color", value);
     }
 
-    public String getColorField() {
-        return (String)getProperty("colorField");
+    public java.lang.String getColorField() {
+        return (java.lang.String)getProperty("colorField");
     }
 
-    public void setColorField(String value) {
+    public void setColorField(java.lang.String value) {
         setProperty("colorField", value);
     }
 
-    public String getCurrentField() {
-        return (String)getProperty("currentField");
+    public java.lang.String getCurrentField() {
+        return (java.lang.String)getProperty("currentField");
     }
 
-    public void setCurrentField(String value) {
+    public void setCurrentField(java.lang.String value) {
         setProperty("currentField", value);
     }
 
-    public String getDashType() {
-        return (String)getProperty("dashType");
+    public java.lang.String getDashType() {
+        return (java.lang.String)getProperty("dashType");
     }
 
-    public void setDashType(String value) {
+    public void setDashType(java.lang.String value) {
         setProperty("dashType", value);
     }
 
-    public Object getData() {
-        return (Object)getProperty("data");
+    public java.lang.Object getData() {
+        return (java.lang.Object)getProperty("data");
     }
 
-    public void setData(Object value) {
+    public void setData(java.lang.Object value) {
         setProperty("data", value);
     }
 
-    public String getDownColor() {
-        return (String)getProperty("downColor");
+    public java.lang.String getDownColor() {
+        return (java.lang.String)getProperty("downColor");
     }
 
-    public void setDownColor(String value) {
+    public void setDownColor(java.lang.String value) {
         setProperty("downColor", value);
     }
 
-    public String getDownColorField() {
-        return (String)getProperty("downColorField");
+    public java.lang.String getDownColorField() {
+        return (java.lang.String)getProperty("downColorField");
     }
 
-    public void setDownColorField(String value) {
+    public void setDownColorField(java.lang.String value) {
         setProperty("downColorField", value);
     }
 
-    public String getField() {
-        return (String)getProperty("field");
+    public java.lang.String getField() {
+        return (java.lang.String)getProperty("field");
     }
 
-    public void setField(String value) {
+    public void setField(java.lang.String value) {
         setProperty("field", value);
     }
 
@@ -197,51 +197,51 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("gap", value);
     }
 
-    public String getHighField() {
-        return (String)getProperty("highField");
+    public java.lang.String getHighField() {
+        return (java.lang.String)getProperty("highField");
     }
 
-    public void setHighField(String value) {
+    public void setHighField(java.lang.String value) {
         setProperty("highField", value);
     }
 
-    public String getLine() {
-        return (String)getProperty("line");
+    public java.lang.String getLine() {
+        return (java.lang.String)getProperty("line");
     }
 
-    public void setLine(String value) {
+    public void setLine(java.lang.String value) {
         setProperty("line", value);
     }
 
-    public String getLowField() {
-        return (String)getProperty("lowField");
+    public java.lang.String getLowField() {
+        return (java.lang.String)getProperty("lowField");
     }
 
-    public void setLowField(String value) {
+    public void setLowField(java.lang.String value) {
         setProperty("lowField", value);
     }
 
-    public String getMissingValues() {
-        return (String)getProperty("missingValues");
+    public java.lang.String getMissingValues() {
+        return (java.lang.String)getProperty("missingValues");
     }
 
-    public void setMissingValues(String value) {
+    public void setMissingValues(java.lang.String value) {
         setProperty("missingValues", value);
     }
 
-    public String getName() {
-        return (String)getProperty("name");
+    public java.lang.String getName() {
+        return (java.lang.String)getProperty("name");
     }
 
-    public void setName(String value) {
+    public void setName(java.lang.String value) {
         setProperty("name", value);
     }
 
-    public String getNegativeColor() {
-        return (String)getProperty("negativeColor");
+    public java.lang.String getNegativeColor() {
+        return (java.lang.String)getProperty("negativeColor");
     }
 
-    public void setNegativeColor(String value) {
+    public void setNegativeColor(java.lang.String value) {
         setProperty("negativeColor", value);
     }
 
@@ -253,11 +253,11 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("opacity", value);
     }
 
-    public String getOpenField() {
-        return (String)getProperty("openField");
+    public java.lang.String getOpenField() {
+        return (java.lang.String)getProperty("openField");
     }
 
-    public void setOpenField(String value) {
+    public void setOpenField(java.lang.String value) {
         setProperty("openField", value);
     }
 
@@ -269,27 +269,27 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("spacing", value);
     }
 
-    public Object getStack() {
-        return (Object)getProperty("stack");
+    public java.lang.Object getStack() {
+        return (java.lang.Object)getProperty("stack");
     }
 
-    public void setStack(Object value) {
+    public void setStack(java.lang.Object value) {
         setProperty("stack", value);
     }
 
-    public String getTargetField() {
-        return (String)getProperty("targetField");
+    public java.lang.String getTargetField() {
+        return (java.lang.String)getProperty("targetField");
     }
 
-    public void setTargetField(String value) {
+    public void setTargetField(java.lang.String value) {
         setProperty("targetField", value);
     }
 
-    public String getType() {
-        return (String)getProperty("type");
+    public java.lang.String getType() {
+        return (java.lang.String)getProperty("type");
     }
 
-    public void setType(String value) {
+    public void setType(java.lang.String value) {
         setProperty("type", value);
     }
 
