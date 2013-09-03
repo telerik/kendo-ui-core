@@ -278,9 +278,15 @@ kendo_module({
                 focusout = function() {
                     if (!that._blured) {
                         that._triggerCascade();
-                        that._blur();
-                        dropDownWrapper.removeClass(FOCUSED);
 
+                        var isIFrame = window.self !== window.top;
+                        if (kendo.support.mobileOS.ios && isIFrame) {
+                            that._change();
+                        } else {
+                            that._blur();
+                        }
+
+                        dropDownWrapper.removeClass(FOCUSED);
                         that._blured = true;
                         element.blur();
                     }
