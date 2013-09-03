@@ -127,6 +127,7 @@
 <script src="../../../src/kendo.diagram.services.js" type="text/javascript"></script>
 <script src="../../../src/kendo.diagram.extensions.js" type="text/javascript"></script>
 <script src="../../../src/kendo.diagram.dom.js" type="text/javascript"></script>
+<script src="../../../src/kendo.diagram.layout.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 var diagram, animId, useRandomSizes = false;
@@ -301,8 +302,20 @@ function layout() {
             )
             break;
         case  "QLayeredHorizontal":
+            diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
+                    {
+                        layerDistance: 50,
+                        nodeDistance: 50,
+                        layeredLayoutType: kendo.diagram.LayeredLayoutType.Right
+                    });
             break;
         case  "QLayeredVertical":
+            diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
+                    {
+                        layerDistance: 50,
+                        nodeDistance: 50,
+                        layeredLayoutType: kendo.diagram.LayeredLayoutType.Down
+                    });
             break;
         case  "QForce":
             diagram.layout(kendo.diagram.LayoutTypes.ForceDirectedLayout,
@@ -348,7 +361,7 @@ function create() {
 
 function randomChoice() {
     var graphs = ["QSingleRandomTree", "QSingleBalancedTree", "QBalancedForest", "QRandomForest", "QRandomConnectedGraph", "QRandomNonConnectedGraph"];
-    var layouts = ["QTreeDown", "QTreeUp", "QTreeLeft", "QTreeRight", "QMindmapHorizontal", "QMindmapVertical", "QRadial", "QForce", "QTipOver"]; //, "QLayeredHorizontal", "QLayeredVertical"
+    var layouts = ["QTreeDown", "QTreeUp", "QTreeLeft", "QTreeRight", "QMindmapHorizontal", "QMindmapVertical", "QRadial", "QForce", "QTipOver", "QLayeredHorizontal", "QLayeredVertical"];
     var pickedGraph = graphs[parseInt(Math.floor(Math.random() * graphs.length))];
     var pickedLayout = layouts[parseInt(Math.floor(Math.random() * layouts.length))];
     $("#" + pickedGraph).prop('checked', true);

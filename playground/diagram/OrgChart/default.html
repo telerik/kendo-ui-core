@@ -121,6 +121,7 @@
 <script src="../../../src/kendo.diagram.services.js" type="text/javascript"></script>
 <script src="../../../src/kendo.diagram.extensions.js" type="text/javascript"></script>
 <script src="../../../src/kendo.diagram.dom.js" type="text/javascript"></script>
+<script src="../../../src/kendo.diagram.layout.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 
@@ -242,9 +243,9 @@
             diagram.connect(sourceShape, targetShape);
 
         }
-        diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+        diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
                 {
-                    TreeLayoutType: kendo.diagram.TreeLayoutType.TreeDown
+                    TreeLayoutType: kendo.diagram.LayeredLayoutType.Down
                 }
         )
 
