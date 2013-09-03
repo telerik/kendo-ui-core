@@ -51,6 +51,17 @@
                 ok(!validator.validate());
             });
 
+            test("validate triggers validate event", 1,  function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input, {
+                        validate: function(e) {
+                            ok(!e.valid);
+                        }
+                    });
+
+                validator.validate();
+            });
+
             test("validate returns true for non empty input with attribute required", function() {
                 var input = $('<input type="text" required />'),
                     validator = setup(input);

@@ -104,6 +104,8 @@ kendo_module({
             that._attachEvents();
         },
 
+        events: [ "validate" ],
+
         options: {
             name: "Validator",
             errorTemplate: '<span class="k-widget k-tooltip k-tooltip-validation">' +
@@ -228,26 +230,32 @@ kendo_module({
         },
 
         validate: function() {
-            var that = this,
-                inputs,
-                idx,
-                invalid = false,
-                length;
+            var inputs;
+            var idx;
+            var result = false;
+            var length;
 
-            that._errors = {};
+            this._errors = {};
 
-            if (!that.element.is(INPUTSELECTOR)) {
-                inputs = that.element.find(INPUTSELECTOR);
+            if (!this.element.is(INPUTSELECTOR)) {
+                var invalid = false;
+
+                inputs = this.element.find(INPUTSELECTOR);
 
                 for (idx = 0, length = inputs.length; idx < length; idx++) {
-                    if (!that.validateInput(inputs.eq(idx))) {
+                    if (!this.validateInput(inputs.eq(idx))) {
                         invalid = true;
                     }
                 }
 
-                return !invalid;
+                result = !invalid;
+            } else {
+                result = this.validateInput(this.element);
             }
-            return that.validateInput(that.element);
+
+            this.trigger("validate", { valid: result });
+
+            return result;
         },
 
         validateInput: function(input) {
