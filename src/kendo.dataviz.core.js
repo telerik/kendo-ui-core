@@ -3293,7 +3293,7 @@ kendo_module({
 
         if (!measureBox || !measureBox.parentNode) {
             measureBox = measureText.measureBox =
-                $("<div style='position: absolute; top: -4000px; left: -4000px;" +
+                $("<div style='position: absolute; top: -4000px;" +
                               "line-height: normal; visibility: hidden;' />")
                 .appendTo(doc.body)[0];
         }
