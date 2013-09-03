@@ -6,7 +6,7 @@
     using System.Text;
     using Kendo.Mvc.UI;
 
-    public class SchedulerEventDouble : ISchedulerEvent
+    public class SchedulerEvent : ISchedulerEvent
     {
         public int Id { get; set; }
 
@@ -28,16 +28,30 @@
             set;
         }
 
-        public System.DateTime Start
+        private DateTime start;
+        public DateTime Start
         {
-            get;
-            set;
+            get
+            {
+                return start;
+            }
+            set
+            {
+                start = value.ToUniversalTime();
+            }
         }
 
-        public System.DateTime End
+        private DateTime end;
+        public DateTime End
         {
-            get;
-            set;
+            get
+            {
+                return end;
+            }
+            set
+            {
+                end = value.ToUniversalTime();
+            }
         }
 
         public string Recurrence
