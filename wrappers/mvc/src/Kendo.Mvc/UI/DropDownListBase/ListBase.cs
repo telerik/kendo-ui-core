@@ -58,6 +58,12 @@
             get;
             set;
         }
+
+        public bool? ValuePrimitive
+        {
+            get;
+            set;
+        }
        
         public IUrlGenerator UrlGenerator
         {
@@ -103,6 +109,11 @@
             if (Height != null)
             {
                 options["height"] = Height;
+            }
+
+            if (ValuePrimitive != null)
+            {
+                options["valuePrimitive"] = ValuePrimitive;
             }
 
             return options;

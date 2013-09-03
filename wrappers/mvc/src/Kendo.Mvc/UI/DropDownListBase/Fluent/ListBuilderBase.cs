@@ -195,5 +195,12 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this as TDropDownBuilder;
         }
+
+        public TDropDownBuilder ValuePrimitive(bool valuePrimitive)
+        {
+            Component.ValuePrimitive = valuePrimitive;
+
+            return this as TDropDownBuilder;
+        }
     }
 }
