@@ -590,11 +590,11 @@ test('Add unique', function () {
     dic.add("c", 70);    // should not be added
     set = new Set(dic);
     equal(set.length, 3);
-    var sum =0;
+    var sum = 0;
     set.forEach(function (d) {
-        sum+= d.value;
+        sum += d.value;
     });
-    equal (sum, 150);
+    equal(sum, 150);
 });
 
 /*-----------Graph structure tests------------------------------------*/
@@ -1646,14 +1646,27 @@ testSkip('Varying shape size layout', function () {
 });
 
 test('Layered layout', function () {
+      var div = GetRoot();
+     var diagramElement = $("#canvas").kendoDiagram();
+     var diagram = diagramElement.data("kendoDiagram");
+     diagram.canvas.native.setAttribute("height", "1000");
+     diagram.randomDiagram(50, 15, false, true);
+
+
+  /*  var g = Predefined.Forest(3,3,3);
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
     diagram.canvas.native.setAttribute("height", "1000");
-    diagram.randomDiagram(100, 2, false, true);
+    GraphUtils.createDiagramFromGraph(diagram, g, false);*/
 
     var root = diagram.getId("0");
-    diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,{layerDistance: 500, nodeDistance: 100});
+    diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
+        {
+            layerDistance: 250,
+            nodeDistance: 50,
+            layeredLayoutType: kendo.diagram.LayeredLayoutType.Right
+        });
     diagram.zoom(0.5);
     ok(true);
 });

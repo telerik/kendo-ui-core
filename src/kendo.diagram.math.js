@@ -2694,14 +2694,14 @@ kendo_module({
                 var opt = {};
 
                 if (node.id == "0") {
-                    kendo.deepExtend(opt,
+                   /* kendo.deepExtend(opt,
                         {
                             background: "Orange",
                             data: 'circle',
                             width: 100,
                             height: 100,
                             center: new Point(50, 50)
-                        });
+                        });*/
                 }
                 else if (randomSize) {
                     kendo.deepExtend(opt, {
@@ -5247,7 +5247,17 @@ kendo_module({
 
             return wings;
         },
+        _isVerticalLayout: function () {
+            return this.options.layeredLayoutType == kendo.diagram.LayeredLayoutType.Up || this.options.layeredLayoutType == kendo.diagram.LayeredLayoutType.Down;
+        },
 
+        _isHorizontalLayout: function () {
+            return this.options.layeredLayoutType == kendo.diagram.LayeredLayoutType.Right || this.options.layeredLayoutType == kendo.diagram.LayeredLayoutType.Left;
+        },
+        _isIncreasingLayout: function () {
+            // meaning that the visiting of the layers goes in the natural order of increasing layer index
+            return this.options.layeredLayoutType == kendo.diagram.LayeredLayoutType.Right || this.options.layeredLayoutType == kendo.diagram.LayeredLayoutType.Down;
+        },
         assignCoordinates: function () {
             // sort the layers by their grid position
             for (var l = 0; l < this.layers.length; ++l) {
@@ -5264,8 +5274,7 @@ kendo_module({
                     node.layerIndex = n;
                     this.minDistances[l][n] = this.options.nodeDistance;
                     if (n < layer.length - 1) {
-                        if (this.direction % 2 == 0)	// vertical
-                        {
+                        if (this._isVerticalLayout()) {
                             this.minDistances[l][n] += (node.width + layer[n + 1].width) / 2;
                         }
                         else {
@@ -5450,18 +5459,25 @@ kendo_module({
             }, this);
 
             var depth = this.options.margins;
+            var fromLayerIndex = this._isIncreasingLayout() ? 0 : this.layers.length - 1;
+            var reachedFinalLayerIndex = function (k, ctx) {
+                if (ctx._isIncreasingLayout()) {
+                    return k < ctx.layers.length;
+                }
 
-            for (var i = (this.direction < 2 ? 0 : this.layers.length - 1);
-                 this.direction < 2 ? i < this.layers.length : i >= 0;
-                 i += (this.direction < 2 ? 1 : -1)) {
+                else {
+                    return k >= 0;
+                }
+            }
+            var layerIncrement = this._isIncreasingLayout() ? +1 : -1;
+            for (var i = fromLayerIndex; reachedFinalLayerIndex(i, this); i += layerIncrement) {
                 var layer = this.layers[i];
 
                 // calculate layer height
                 var height = Number.MIN_VALUE;
                 for (var n = 0; n < layer.length; ++n) {
                     var node = layer[n];
-                    if (this.direction % 2 == 0)	// vertical
-                    {
+                    if (this._isVerticalLayout()) {
                         height = Math.max(height, node.height);
                     }
                     else {
@@ -5472,8 +5488,7 @@ kendo_module({
                 for (var n = 0; n < layer.length; ++n) {
                     var node = layer[n];
                     var gridPosition = node.gridPosition;
-                    if (this.direction % 2 == 0)	// vertical
-                    {
+                    if (this._isVerticalLayout()) {
                         node.x = x.get(node);
                         node.y = depth + height / 2;
                     }
