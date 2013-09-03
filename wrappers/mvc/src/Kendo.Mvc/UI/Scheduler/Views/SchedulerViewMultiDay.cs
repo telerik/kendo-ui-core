@@ -8,6 +8,8 @@
         protected SchedulerViewMultiDay(SchedulerViewType type) : base(type)
         {
             AllDaySlot = true;
+            WorkDayCommand = true;
+            Footer = true;
         }
 
         public string AllDayEventTemplate
@@ -89,6 +91,30 @@
             set;
         }
 
+        public DateTime? WorkDayStart
+        {
+            get;
+            set;
+        }
+
+        public DateTime? WorkDayEnd
+        {
+            get;
+            set;
+        }
+
+        public bool WorkDayCommand 
+        {
+            get;
+            set;
+        }
+
+        public bool Footer
+        {
+            get;
+            set;
+        }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             base.Serialize(json);
@@ -153,6 +179,26 @@
             if (EndTime != null)
             {
                 json["endTime"] = EndTime;
+            }
+
+            if (WorkDayStart != null)
+            {
+                json["workDayStart"] = WorkDayStart;
+            }
+  
+            if (WorkDayEnd != null)
+            {
+                json["workDayEnd"] = WorkDayEnd;
+            }
+
+            if (!WorkDayCommand)
+            {
+                json["workDayCommand"] = WorkDayCommand;
+            }
+      
+            if (!Footer)
+            {
+                json["footer"] = Footer;
             }
         }
     }

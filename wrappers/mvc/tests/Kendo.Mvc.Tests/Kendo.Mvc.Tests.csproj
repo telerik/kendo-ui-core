@@ -125,7 +125,9 @@
     <Compile Include="UI\Chart\Serialization\ChartPolarLineSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartPolarScatterSeriesSerializerTests.cs" />
     <Compile Include="UI\DatePicker\DatePickerClientEventsBuilderTests.cs" />
-    <Compile Include="UI\Scheduler\SchedulerEventDouble.cs" />
+    <Compile Include="UI\Scheduler\SchedulerBuilderTests.cs" />
+    <Compile Include="UI\Scheduler\SchedulerEvent.cs" />
+    <Compile Include="UI\Scheduler\SchedulerTestHelper.cs" />
     <Compile Include="UI\Sparkline\SparklineSeriesDefaultsBuilderTests.cs" />
     <Compile Include="UI\Sparkline\SparklineBuilderTests.cs" />
     <Compile Include="UI\Sparkline\SparklineHtmlBuilderTests.cs" />

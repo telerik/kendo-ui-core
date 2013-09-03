@@ -277,5 +277,79 @@
 
             return this;
         }
+
+        /// <summary>
+        /// The start time of the business hours. The scheduler will display events after the workDayStart if "WorkDayCommand" button is clicked.
+        /// </summary>
+        /// <param name="workDayStart">The WorkDayStart</param>
+        public ISchedulerViewBuilder WorkDayStart(DateTime workDayStart)
+        {
+            view.WorkDayStart = workDayStart;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The start time of the business hours. The scheduler will display events after the workDayStart if "WorkDayCommand" button is clicked.
+        /// </summary>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
+        /// <param name="seconds">The seconds</param>
+        public ISchedulerViewBuilder WorkDayStart(int hours, int minutes, int seconds)
+        {
+            var today = DateTime.Today;
+
+            view.WorkDayStart = new DateTime(today.Year, today.Month, today.Day, hours, minutes, seconds);
+
+            return this;
+        }
+
+        /// <summary>
+        /// The end time of the business hours. The scheduler will display events before the workDayEnd if "WorkDayCommand" button is clicked.
+        /// </summary>
+        /// <param name="workDayEnd">The WorkDayEnd</param>
+        public ISchedulerViewBuilder WorkDayEnd(DateTime workDayEnd)
+        {
+            view.WorkDayEnd = workDayEnd;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The end time of the business hours. The scheduler will display events before the workDayEnd if "WorkDayCommand" button is clicked.
+        /// </summary>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
+        /// <param name="seconds">The seconds</param>
+        public ISchedulerViewBuilder WorkDayEnd(int hours, int minutes, int seconds)
+        {
+            var today = DateTime.Today;
+
+            view.WorkDayEnd = new DateTime(today.Year, today.Month, today.Day, hours, minutes, seconds);
+
+            return this;
+        }
+
+        /// <summary>
+        /// If set to false the scheduler will not display the "WorkDayCommand" button. Default value is true.
+        /// </summary>
+        /// <param name="showWorkDayCommand">The showWorkDayCommand</param>
+        public ISchedulerViewBuilder WorkDayCommand(bool showWorkDayCommand)
+        {
+            view.WorkDayCommand = showWorkDayCommand;
+
+            return this;
+        }
+
+        /// <summary>
+        /// If set to false the scheduler will not display the "footer" area. Default value is true.
+        /// </summary>
+        /// <param name="footer">The footer</param>
+        public ISchedulerViewBuilder Footer(bool showFooter)
+        {
+            view.Footer = showFooter;
+
+            return this;
+        }
     }
 }
