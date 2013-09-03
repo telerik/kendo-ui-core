@@ -675,7 +675,9 @@ kendo_module({
         },
 
         viewInit: function() {
-            this._content.scrollTo(this._content.page, true);
+            if(this.options.autoBind) {
+                this._content.scrollTo(this._content.page, true);
+            }
         },
 
         viewShow: function() {
