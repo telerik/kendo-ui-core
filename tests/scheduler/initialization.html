@@ -575,14 +575,19 @@
                 scheduler.toolbar.find(".k-nav-prev").click();
             });
 
-            test("navigate event is raised when the today date button is clicked", 3, function() {
-                var selectedDate = new Date("1/2/2013"),
-                    scheduler = new Scheduler(container, {
+            test("navigate event is raised when the today date button is clicked", 5, function() {
+                var selectedDate = new Date("1/2/2013");
+                var now = new Date();
+                var scheduler = new Scheduler(container, {
                         date: selectedDate,
                         navigate: function(e) {
                             equal(e.action, "today");
-                            deepEqual(e.date, new Date());
                             equal(e.view, "day");
+
+                            // compare day only, time may vary
+                            equal(e.date.getFullYear(), now.getFullYear());
+                            equal(e.date.getMonth(), now.getMonth());
+                            equal(e.date.getDate(), now.getDate());
                         }
                     });
 
