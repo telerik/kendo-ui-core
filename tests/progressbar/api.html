@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Progressbar tests</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.progressbar.js"></script>
+        <script src="helper.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Progressbar API tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var pb;
+
+            function createProgressbar(options){
+                createPbHtml();
+
+                $("#progressbar").kendoProgressBar(options);
+                return $("#progressbar").data("kendoProgressBar");
+            }
+
+            function moduleSetup() { 
+                pb = createProgressbar();
+            }
+
+            function moduleTeardown() { 
+                removePbHtml();
+            }
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("value", {
+                setup: function() {
+                    moduleSetup();
+                },
+                teardown: function(){
+                    moduleTeardown();
+                }
+            });
+
+            test("value method returns the actual value", function () {
+                ok(0);
+            });
+
+            test("value method sets indeterminate state correctly", function () {
+                ok(0);
+            });
+
+            test("value method sets value correctly when a value between min and max is passed", function () {
+                ok(0);
+            });
+
+            test("value method does not set the value when it is out of range", function () {
+                ok(0);
+            });
+        </script>
+    </body>
+</html>

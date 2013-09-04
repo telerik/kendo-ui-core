@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Progressbar tests</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.progressbar.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Progressbar tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var ProgressBar = kendo.ui.ProgressBar,
+                container;
+
+            function moduleSetup() { 
+                container = document.createElement("div");
+                document.body.appendChild(container);
+            }
+
+            function moduleTeardown() { 
+                $(container).remove();
+            }
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Initialization", {
+                setup: function() {
+                    moduleSetup();
+                },
+                teardown: function(){
+                    moduleTeardown();
+                }
+            });
+
+            test("kendoProgressBar attaches a progressbar object to target", function() {
+                var pb = $("div").kendoProgressBar();
+
+                ok(pb.data("kendoProgressBar") instanceof ProgressBar);
+            });
+
+            test("The element of the progressbar is set to the target from which it was initialized", function() {
+                var pb = new ProgressBar(container);
+
+                equal(pb.element[0], container);
+            });
+
+            test("wrapper field is initialized", function() {
+               var pb = new ProgressBar(container);
+
+               equal(pb.wrapper[0], container);
+            });
+
+
+        </script>
+    </body>
+</html>
