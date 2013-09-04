@@ -39,10 +39,10 @@
     })
     .DataSource(d => d
         .Model(m => m.Id(f => f.TaskID))
-        .Read("Read", "Scheduler")
-        .Create("Create", "Scheduler")
-        .Destroy("Destroy", "Scheduler")
-        .Update("Update", "Scheduler")
+        .Read(read => read.Action("Read", "Scheduler").Data("sendCulture"))
+        .Create(create => create.Action("Create", "Scheduler").Data("sendCulture"))
+        .Destroy(destroy => destroy.Action("Destroy", "Scheduler").Data("sendCulture"))
+        .Update(update => update.Action("Update", "Scheduler").Data("sendCulture"))
     )
 )
 

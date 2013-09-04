@@ -9,13 +9,13 @@
 
     public partial class SchedulerController
     {
-        protected override void Execute(System.Web.Routing.RequestContext requestContext)
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             if (!string.IsNullOrEmpty(requestContext.HttpContext.Request["culture"]))
             {
                 Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture = new CultureInfo(requestContext.HttpContext.Request["culture"]);
             }
-            base.Execute(requestContext);
+            base.Initialize(requestContext);
         }
 
         public ActionResult Globalization()
