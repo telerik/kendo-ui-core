@@ -73,7 +73,7 @@ def mvn(name, options)
 end
 
 def uglifyjs(from, to)
-    cmd = "node #{UGLIFYJS} #{from} -o #{to} -bc"
+    cmd = "node #{UGLIFYJS} #{from} -o #{to} -cm"
     cmd = cmd + " warnings=false" unless VERBOSE
     sh cmd, :verbose => VERBOSE
 end
