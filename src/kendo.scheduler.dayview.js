@@ -17,6 +17,15 @@ kendo_module({
         getDate = kendo.date.getDate,
         MS_PER_MINUTE = kendo.date.MS_PER_MINUTE,
         MS_PER_DAY = kendo.date.MS_PER_DAY,
+        WEEK_DAYS = {
+            0: "SU",
+            1: "MO",
+            2: "TU",
+            3: "WE",
+            4: "TH",
+            5: "FR",
+            6: "SA"
+        },
         getMilliseconds = kendo.date.getMilliseconds,
         NS = ".kendoMultiDayView";
 
@@ -518,6 +527,7 @@ kendo_module({
             editable: true,
             workDayStart: new Date(1980, 1, 1, 8, 0, 0),
             workDayEnd: new Date(1980, 1, 1, 17, 0, 0),
+            workWeekDays: ["MO","TU","WE","TH","FR"],
             footer: {
                 command: "workDay"
             },
@@ -803,15 +813,28 @@ kendo_module({
             html += '<tbody>';
 
             var appendRow = function(date, majorTick) {
-                var content = "",
-                    idx,
-                    length;
+                var content = "";
+                var idx;
+                var length;
+                var classes = "";
 
                 content = '<tr' + (majorTick ? ' class="k-middle-row"' : "") + '>';
 
                 for (var groupIdx = 0; groupIdx < groupsCount; groupIdx++) {
                     for (idx = 0, length = columnCount; idx < length; idx++) {
-                        content += "<td" + (kendo.date.isToday(dates[idx]) ? ' class="k-today"' : "") + ">";
+                        classes = "";
+
+                        if (kendo.date.isToday(dates[idx])) {
+                            classes += "k-today";
+                        }
+
+                        if (kendo.date.getMilliseconds(date) < kendo.date.getMilliseconds(that.options.workDayStart) ||
+                            kendo.date.getMilliseconds(date) >= kendo.date.getMilliseconds(that.options.workDayEnd) ||
+                            !that._isWorkDay(dates[idx])) {
+                            classes += " k-nonwork-hour";
+                        }
+
+                        content += "<td" + (classes !== "" ? ' class="' + classes + '"' : "") + ">";
                         content += "&nbsp;</td>";
                     }
                 }
@@ -830,6 +853,17 @@ kendo_module({
             html += '</tbody>';
 
             this.content.find("table").append(html);
+        },
+
+        _isWorkDay: function(date) {
+            var workDays = this.options.workWeekDays;
+
+            for (var idx = 0, length = workDays.length; idx < length; idx++) {
+                if (workDays[idx] === WEEK_DAYS[date.getDay()]) {
+                    return true;
+                }
+            }
+            return false;
         },
 
         _render: function(dates) {

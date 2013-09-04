@@ -1768,6 +1768,38 @@
                 view.footer.find(".k-scheduler-fullday").click();
             });
 
+            test("non working day is highlighted", function() {
+                var view = setup({
+                    dates: [new Date("2013/6/6")],
+                    workWeekDays: ["Thu"]
+                });
+
+                equal(view.content.find("td.k-nonwork-hour").length, 15);
+            });
+
+            test("working day is not highlighted", function() {
+                var view = setup({
+                    dates: [new Date("2013/6/6")],
+                    workWeekDays: ["Mo"],
+                    workDay: true
+                });
+
+                ok(!view.content.find("td.k-nonwork-hour").length);
+            });
+
+            test("non working hours are highlighted", function() {
+                var view = setup({
+                    workDayStart: new Date("2013/6/6 10:00"),
+                    startTime: new Date("2013/6/6 9:00"),
+                    endTime: new Date("2013/6/6 12:00"),
+                    workDayEnd: new Date("2013/6/6 11:00"),
+                });
+
+                ok(view.content.find("td").first().hasClass("k-nonwork-hour"));
+                ok(!view.content.find("td").eq(1).hasClass("k-nonwork-hour"));
+                ok(view.content.find("td").last().hasClass("k-nonwork-hour"));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
