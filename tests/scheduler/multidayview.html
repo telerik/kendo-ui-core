@@ -240,15 +240,25 @@
 
             test("render workday button in the footer", function() {
                 var view = setup({
-                    workDayCommand: true
+                    footer: {
+                        command: "workDay"
+                    }
                 });
+
+                ok(view.footer.find(".k-scheduler-fullday").length);
+            });
+
+            test("render workday button in the footer by default", function() {
+                var view = setup();
 
                 ok(view.footer.find(".k-scheduler-fullday").length);
             });
 
             test("workday button is not rendered", function() {
                 var view = setup({
-                    workDayCommand: false
+                   footer: {
+                        command: ""
+                    }
                 });
 
                 ok(!view.footer.find(".k-scheduler-fullday").length);

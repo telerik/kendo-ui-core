@@ -518,8 +518,9 @@ kendo_module({
             editable: true,
             workDayStart: new Date(1980, 1, 1, 8, 0, 0),
             workDayEnd: new Date(1980, 1, 1, 17, 0, 0),
-            workDayCommand: true,
-            footer: true,
+            footer: {
+                command: "workDay"
+            },
             messages: {
                 allDay: "all day",
                 showFullDay: "Show full day",
@@ -689,21 +690,29 @@ kendo_module({
         _footer: function() {
             var options = this.options;
 
-            if (options.footer) {
+            if (options.footer !== false) {
                 var html = '<div class="k-header k-scheduler-footer">';
-                if (options.workDayCommand) {
+
+                var command = options.footer.command;
+
+                if (command && command === "workDay") {
                     html += '<ul class="k-reset k-header k-toolbar">';
+
                     html += '<li class="k-state-default k-scheduler-fullday"><a href="#" class="k-link"><span class="k-icon k-i-clock"></span>';
                     html += options.workDay ? options.messages.showFullDay : options.messages.showWorkDay + '</a></li>';
+
                     html += '</ul>';
+
                 } else {
                     html += "&nbsp;";
                 }
+
                 html += "</div>";
 
                 this.footer = $(html).appendTo(this.element);
 
                 var that = this;
+
                 this.footer.on("click" + NS, ".k-scheduler-fullday", function(e) {
                     e.preventDefault();
                     that.trigger("navigate", { view: that.name || options.name, date: that.startDate(), isWorkDay: !options.workDay });
