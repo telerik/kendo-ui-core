@@ -178,10 +178,10 @@ kendo_module({
             that._groups();
         },
 
-        _updateResizeHint: function(event, startSlot, endSlot) {
+        _updateResizeHint: function(event, groupIndex, startTime, endTime) {
             var multiday = event.isMultiDay();
 
-            var group = this.groups[endSlot.groupIndex];
+            var group = this.groups[groupIndex];
 
             var ranges = group.ranges(startSlot.start, event.isAllDay ? endSlot.start : endSlot.end, multiday, event.isAllDay);
 
@@ -225,9 +225,9 @@ kendo_module({
 
             this._resizeHint.find(".k-label-top,.k-label-bottom").text("");
 
-            this._resizeHint.first().addClass("k-first").find(".k-label-top").text(kendo.toString(startSlot.startDate(), format));
+            this._resizeHint.first().addClass("k-first").find(".k-label-top").text(kendo.toString(kendo.timezone.toLocalDate(startTime), format));
 
-            this._resizeHint.last().addClass("k-last").find(".k-label-bottom").text(kendo.toString(endSlot.endDate(), format));
+            this._resizeHint.last().addClass("k-last").find(".k-label-bottom").text(kendo.toString(kendo.timezone.toLocalDate(endTime), format));
         },
 
         _updateMoveHint: function(event, initialSlot, currentSlot) {

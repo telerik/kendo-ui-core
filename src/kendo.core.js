@@ -3199,6 +3199,10 @@ function pad(number, digits, end) {
            return this.convert(date, timezone, date.getTimezoneOffset());
         }
 
+        function toLocalDate(time) {
+            return this.apply(new Date(time), "Etc/UTC");
+        }
+
         return {
            zones: {},
            rules: {},
@@ -3206,7 +3210,8 @@ function pad(number, digits, end) {
            convert: convert,
            apply: apply,
            remove: remove,
-           abbr: abbr
+           abbr: abbr,
+           toLocalDate: toLocalDate
         };
     })();
 
@@ -3266,7 +3271,7 @@ function pad(number, digits, end) {
         }
 
         function toUtcTime(date) {
-            return  Date.UTC(date.getFullYear(), date.getMonth(),
+            return Date.UTC(date.getFullYear(), date.getMonth(),
                         date.getDate(), date.getHours(), date.getMinutes(),
                         date.getSeconds(), date.getMilliseconds());
         }

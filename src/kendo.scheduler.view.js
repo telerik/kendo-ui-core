@@ -792,15 +792,11 @@ kendo_module({
         },
 
         startDate: function() {
-            var date = new Date(this.start);
-
-            return kendo.timezone.apply(date, "Etc/UTC");
+            return kendo.timezone.toLocalDate(this.start);
         },
 
         endDate: function() {
-            var date = new Date(this.end);
-
-            return kendo.timezone.apply(date, "Etc/UTC");
+            return kendo.timezone.toLocalDate(this.end);
         },
 
         startInRange: function(date) {

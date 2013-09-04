@@ -1245,9 +1245,7 @@ kendo_module({
                             end: endSlot.endDate(),
                             resources: view._resourceBySlot(slot)
                         })) {
-
-                            view._updateResizeHint(event, startSlot, endSlot);
-
+                            view._updateResizeHint(event, startSlot.groupIndex, startSlot.start, endSlot.end);
                         } else {
                             startSlot = originalStartSlot;
                             endSlot = originalEndSlot;
