@@ -464,7 +464,11 @@ kendo_module({
                 e.preventDefault();
             }
 
-            if (that._last === character && word.length === 1 && index > -1) {
+            if (that._last === character && word.length <= 1 && index > -1) {
+                if (!word) {
+                    word = character;
+                }
+
                 if (that._selectNext(word, index + 1)) {
                     return;
                 }
@@ -492,7 +496,7 @@ kendo_module({
             clearTimeout(that._typing);
 
             that._typing = setTimeout(function() {
-                that._last = that._word = "";
+                that._word = "";
             }, that.options.delay);
 
             if (!that.ul[0].firstChild) {

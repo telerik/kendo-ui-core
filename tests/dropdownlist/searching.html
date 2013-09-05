@@ -208,6 +208,23 @@
                 equal(dropdownlist.selectedIndex, 1);
             });
 
+            asyncTest("search supports space", 1, function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: ["Bill 1", "Bill 2", "Label"],
+                    ignoreCase: true,
+                    index: 1,
+                    delay: 0
+                });
+
+                input.press("b");
+
+                setTimeout(function() {
+                    start();
+                    input.press("b");
+                    equal(dropdownlist.selectedIndex, 0);
+                }, 100);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
