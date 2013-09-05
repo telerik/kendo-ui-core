@@ -1139,9 +1139,10 @@ kendo_module({
         },
 
         _resizable: function() {
-            var startSlot;
-            var endSlot;
+            var startDate;
+            var endDate;
             var event;
+            var slot;
             var that = this;
 
             function direction(handle) {
@@ -1171,29 +1172,15 @@ kendo_module({
 
                     event = that.occurrenceByUid(uid);
 
+                    slot = that.view()._slotByPosition(e.x.location, e.y.location);
+
                     if (that.trigger("resizeStart", { event: event })) {
                         e.preventDefault();
                     }
 
-                    var view = that.view();
+                    startDate = event.start;
 
-                    var events = this.element.find(kendo.format(".k-event[{0}={1}]", kendo.attr("uid"), uid));
-
-                    eventElement = events.first();
-
-                    var offset = eventElement.offset();
-
-                    startSlot = view._slotByPosition(offset.left, offset.top);
-
-                    eventElement = events.last();
-
-                    offset = eventElement.offset();
-
-                    offset.left += eventElement[0].clientWidth;
-
-                    offset.top += eventElement[0].clientHeight;
-
-                    endSlot = view._slotByPosition(offset.left, offset.top);
+                    endDate = event.end;
                 },
                 drag: function(e) {
                     var dragHandle = $(e.currentTarget);
@@ -1202,54 +1189,55 @@ kendo_module({
 
                     var view = that.view();
 
-                    var slot = view._slotByPosition(e.x.location, e.y.location);
+                    var currentSlot = view._slotByPosition(e.x.location, e.y.location);
 
-                    if (!slot) {
+                    if (!currentSlot || slot.groupIndex != currentSlot.groupIndex) {
                         return;
                     }
 
-                    var update = false;
-                    var originalStartSlot = startSlot;
-                    var originalEndSlot = endSlot;
+                    slot = currentSlot;
+
+                    var originalStart = startDate;
+
+                    var originalEnd = endDate;
 
                     if (dir == "south") {
-                        if (!slot.isDaySlot && startSlot.groupIndex == slot.groupIndex && slot.end - kendo.date.toUtcTime(event.start) >= view._timeSlotInterval()) {
-                            endSlot = slot;
-                            update = true;
+                        if (!slot.isDaySlot && slot.end - kendo.date.toUtcTime(event.start) >= view._timeSlotInterval()) {
+                            if (event.isAllDay) {
+                                endDate = slot.startOffset(e.x.location, e.y.location, that.options.snap);
+                            } else {
+                                endDate = slot.endOffset(e.x.location, e.y.location, that.options.snap);
+                            }
                         }
                     } else if (dir == "north") {
-                        if (!slot.isDaySlot && endSlot.groupIndex == slot.groupIndex && kendo.date.toUtcTime(event.end) - slot.start >= view._timeSlotInterval()) {
-                            startSlot = slot;
-                            update = true;
+                        if (!slot.isDaySlot && kendo.date.toUtcTime(event.end) - slot.start >= view._timeSlotInterval()) {
+                            startDate = slot.startOffset(e.x.location, e.y.location, that.options.snap);
                         }
                     } else if (dir == "east") {
-                        if (slot.isDaySlot && startSlot.groupIndex == slot.groupIndex &&
-                            kendo.date.toUtcTime(kendo.date.getDate(slot.endDate())) >= kendo.date.toUtcTime(kendo.date.getDate(event.start))) {
-                            endSlot = slot;
-                            update = true;
+                        if (slot.isDaySlot && kendo.date.toUtcTime(kendo.date.getDate(slot.endDate())) >= kendo.date.toUtcTime(kendo.date.getDate(event.start))) {
+                            if (event.isAllDay) {
+                                endDate = slot.startOffset(e.x.location, e.y.location, that.options.snap);
+                            } else {
+                                endDate = slot.endOffset(e.x.location, e.y.location, that.options.snap);
+                            }
                         }
                     } else if (dir == "west") {
-                        if (slot.isDaySlot && endSlot.groupIndex == slot.groupIndex &&
-                            kendo.date.toUtcTime(kendo.date.getDate(event.end)) >= kendo.date.toUtcTime(kendo.date.getDate(slot.startDate()))) {
-                            startSlot = slot;
-                            update = true;
+                        if (slot.isDaySlot && kendo.date.toUtcTime(kendo.date.getDate(event.end)) >= kendo.date.toUtcTime(kendo.date.getDate(slot.startDate()))) {
+                            startDate = slot.startOffset(e.x.location, e.y.location, that.options.snap);
                         }
                     }
 
-                    if (update) {
-
-                        if (!that.trigger("resize", {
-                            event: event,
-                            slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() },
-                            start: startSlot.startDate(),
-                            end: endSlot.endDate(),
-                            resources: view._resourceBySlot(slot)
-                        })) {
-                            view._updateResizeHint(event, startSlot.groupIndex, startSlot.start, endSlot.end);
-                        } else {
-                            startSlot = originalStartSlot;
-                            endSlot = originalEndSlot;
-                        }
+                    if (!that.trigger("resize", {
+                        event: event,
+                        slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() },
+                        start: startDate,
+                        end: endDate,
+                        resources: view._resourceBySlot(slot)
+                    })) {
+                        view._updateResizeHint(event, slot.groupIndex, startDate, endDate);
+                    } else {
+                        startDate = originalStart;
+                        endDate = originalEnd;
                     }
                 },
                 dragend: function(e) {
@@ -1261,27 +1249,23 @@ kendo_module({
                     that.view()._removeResizeHint();
 
                     if (dir == "south") {
-                        end = endSlot.endDate();
+                        end = endDate;
                     } else if (dir == "north") {
-                        start = startSlot.startDate();
+                        start = startDate;
                     } else if (dir == "east") {
-                        if (event.isAllDay) {
-                            end = kendo.date.getDate(endSlot.startDate());
-                        } else {
-                            end = kendo.date.getDate(endSlot.endDate());
-                        }
+                        end = kendo.date.getDate(endDate);
                     } else if (dir == "west") {
-                        start = new Date(startSlot.start);
+                        start = new Date(startDate);
                         start.setHours(0);
                         start.setMinutes(0);
                     }
 
                     var prevented = that.trigger("resizeEnd", {
                         event: event,
-                        slot: { element: endSlot.element, start: endSlot.startDate(), end: endSlot.endDate() },
+                        slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() },
                         start: start,
                         end: end,
-                        resources: that.view()._resourceBySlot(endSlot)
+                        resources: that.view()._resourceBySlot(slot)
                     });
 
                     if (!prevented && end.getTime() >= start.getTime()) {

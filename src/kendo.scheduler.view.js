@@ -821,6 +821,14 @@ kendo_module({
 
         endInRange: function(date) {
             return this.start < date && date <= this.end;
+        },
+
+        startOffset: function() {
+           return this.startDate();
+        },
+
+        endOffset: function() {
+            return this.endDate();
         }
     });
 
@@ -843,6 +851,38 @@ kendo_module({
 
         endInRange: function(date) {
             return this.start < date && date <= this.end;
+        },
+
+        startOffset: function(x, y, snap) {
+            if (snap) {
+                return this.startDate();
+            }
+
+            var offset = $(this.element).offset();
+
+            var difference = y - offset.top;
+
+            var duration = this.end - this.start;
+
+            var time = Math.floor(duration * ( difference / this.offsetHeight));
+
+            return kendo.timezone.toLocalDate(this.start + time);
+        },
+
+        endOffset: function(x, y, snap) {
+            if (snap) {
+                return this.endDate();
+            }
+
+            var offset = $(this.element).offset();
+
+            var difference = y - offset.top;
+
+            var duration = this.end - this.start;
+
+            var time = Math.floor(duration * ( difference / this.offsetHeight));
+
+            return kendo.timezone.toLocalDate(this.start + time);
         }
     });
 
