@@ -70,6 +70,7 @@ kendo_module({
         inArray = dataviz.inArray,
         interpolateValue = dataviz.interpolateValue,
         last = dataviz.last,
+        limitValue = dataviz.limitValue,
         round = dataviz.round,
         renderTemplate = dataviz.renderTemplate,
         uniqueId = dataviz.uniqueId,
@@ -10821,10 +10822,6 @@ kendo_module({
         return array.length === 1 ? array[0] : array;
     }
 
-    function limitValue(value, min, max) {
-        return math.max(math.min(value, max), min);
-    }
-
     function axisGroupBox(axes) {
         var length = axes.length,
             box, i, axisBox;
@@ -11289,7 +11286,6 @@ kendo_module({
         isNumber: isNumber,
         floorDate: floorDate,
         filterSeriesByType: filterSeriesByType,
-        limitValue: limitValue,
         lteDateIndex: lteDateIndex,
         evalOptions: evalOptions,
         singleItemOrArray: singleItemOrArray,

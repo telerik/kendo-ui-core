@@ -3884,6 +3884,9 @@ kendo_module({
             return result;
         }
     };
+    function limitValue(value, min, max) {
+        return math.max(math.min(value, max), min);
+    }
 
     // Exports ================================================================
     deepExtend(kendo.dataviz, {
@@ -3965,6 +3968,7 @@ kendo_module({
         inArray: inArray,
         interpolateValue: interpolateValue,
         last: last,
+        limitValue: limitValue,
         measureText: measureText,
         rotatePoint: rotatePoint,
         round: round,
