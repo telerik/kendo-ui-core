@@ -716,7 +716,7 @@ kendo_module({
 
             function complete(animatedElement) {
                 destination[0].style.cssText = "";
-                element[0].style.cssText = ""; // Removing the whole style attribute breaks Android.
+                element.each(function() { this.style.cssText = ""; });
                 if (!support.mobileOS.android) {
                     commonParent.css(OVERFLOW, originalOverflow);
                 }
