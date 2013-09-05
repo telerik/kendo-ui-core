@@ -493,7 +493,7 @@ kendo_module({
             views = that._hideViews(container);
             that.rootView = views.first();
 
-            if (!that.rootView[0]) {
+            if (!that.rootView[0] && options.rootNeeded) {
                 throw new Error('Your kendo mobile application element does not contain any direct child elements with data-role="view" attribute set. Make sure that you instantiate the mobile application using the correct container.');
             }
 

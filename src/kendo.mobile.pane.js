@@ -61,6 +61,7 @@ kendo_module({
             that.viewEngine = new ViewEngine({
                 container: element,
                 transition: that.options.transition,
+                rootNeeded: !that.options.initial,
                 serverNavigation: that.options.serverNavigation,
                 layout: that.options.layout,
                 loader: that.loader
