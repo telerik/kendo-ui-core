@@ -709,6 +709,16 @@ kendo_module({
                 wrapper.focus();
             });
 
+            var mouseMoveHandler = $.proxy(that._mouseMove, that);
+
+            wrapper.on("mousedown" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td", function() {
+                wrapper.on("mousemove" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td", mouseMoveHandler);
+            });
+
+            wrapper.on("mouseup" + NS, function() {
+                wrapper.off("mousemove" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td", mouseMoveHandler);
+            });
+
             wrapper.on("focus" + NS, function() {
                 if (!that._selection) {
                     that._createSelection($(".k-scheduler-content").find("td:first"));
@@ -728,16 +738,6 @@ kendo_module({
                 that._ctrlKey = e.ctrlKey;
                 that._shiftKey = e.shiftKey;
             });
-
-            var mouseMoveHandler = $.proxy(that._mouseMove, that);
-
-            wrapper.on("mousedown" + NS, function() {
-                wrapper.on("mousemove" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td", mouseMoveHandler);
-            });
-
-            wrapper.on("mouseup" + NS, function() {
-                wrapper.off("mousemove" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td", mouseMoveHandler);
-            });
         },
 
         _mouseMove: function(e) {
@@ -747,9 +747,9 @@ kendo_module({
             that._moveTimer = setTimeout(function() {
                 var view = that.view();
                 var selection = that._selection;
-                var offset = $(e.currentTarget).offset();
 
                 if (selection) {
+                    var offset = $(e.currentTarget).offset();
                     var slot = view._slotByPosition(offset.left, offset.top);
 
                     if (selection.groupIndex === slot.groupIndex) {
