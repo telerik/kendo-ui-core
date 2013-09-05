@@ -179,8 +179,6 @@ kendo_module({
         },
 
         _updateResizeHint: function(event, startSlot, endSlot) {
-            console.log(startSlot, endSlot);
-
             var multiday = event.isMultiDay();
 
             var group = this.groups[endSlot.groupIndex];
