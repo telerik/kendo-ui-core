@@ -193,17 +193,19 @@ kendo_module({
 
                 var width = start.offsetWidth;
                 var height = start.clientHeight;
+                var top = start.offsetTop;
 
                 if (multiday) {
                     width = range.innerWidth();
                 } else {
                     var rect = range.outerRect(startTime, endTime, this.options.snap);
+                    top = rect.top;
                     height = rect.bottom - rect.top;
                 }
 
                 var hint = SchedulerView.fn._createResizeHint.call(this,
                     this._scrollbarOffset(start.offsetLeft, multiday),
-                    start.offsetTop,
+                    top,
                     width,
                     height
                 );
@@ -226,9 +228,9 @@ kendo_module({
 
             this._resizeHint.find(".k-label-top,.k-label-bottom").text("");
 
-            this._resizeHint.first().addClass("k-first").find(".k-label-top").text(kendo.toString(startTime, format));
+            this._resizeHint.first().addClass("k-first").find(".k-label-top").text(kendo.toString(kendo.timezone.toLocalDate(startTime), format));
 
-            this._resizeHint.last().addClass("k-last").find(".k-label-bottom").text(kendo.toString(endTime, format));
+            this._resizeHint.last().addClass("k-last").find(".k-label-bottom").text(kendo.toString(kendo.timezone.toLocalDate(endTime), format));
         },
 
         _updateMoveHint: function(event, initialSlot, currentSlot) {

@@ -824,11 +824,11 @@ kendo_module({
         },
 
         startOffset: function() {
-           return this.startDate();
+           return this.start;
         },
 
         endOffset: function() {
-            return this.endDate();
+            return this.end;
         }
     });
 
@@ -855,7 +855,7 @@ kendo_module({
 
         startOffset: function(x, y, snap) {
             if (snap) {
-                return this.startDate();
+                return this.start;
             }
 
             var offset = $(this.element).offset();
@@ -866,12 +866,12 @@ kendo_module({
 
             var time = Math.floor(duration * ( difference / this.offsetHeight));
 
-            return kendo.timezone.toLocalDate(this.start + time);
+            return this.start + time;
         },
 
         endOffset: function(x, y, snap) {
             if (snap) {
-                return this.endDate();
+                return this.end;
             }
 
             var offset = $(this.element).offset();
@@ -882,7 +882,7 @@ kendo_module({
 
             var time = Math.floor(duration * ( difference / this.offsetHeight));
 
-            return kendo.timezone.toLocalDate(this.start + time);
+            return this.start + time;
         }
     });
 

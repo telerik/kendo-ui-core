@@ -1178,9 +1178,9 @@ kendo_module({
                         e.preventDefault();
                     }
 
-                    startDate = event.start;
+                    startDate = kendo.date.toUtcTime(event.start);
 
-                    endDate = event.end;
+                    endDate = kendo.date.toUtcTime(event.end);
                 },
                 drag: function(e) {
                     var dragHandle = $(e.currentTarget);
@@ -1230,8 +1230,8 @@ kendo_module({
                     if (!that.trigger("resize", {
                         event: event,
                         slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() },
-                        start: startDate,
-                        end: endDate,
+                        start: kendo.timezone.toLocalDate(startDate),
+                        end: kendo.timezone.toLocalDate(endDate),
                         resources: view._resourceBySlot(slot)
                     })) {
                         view._updateResizeHint(event, slot.groupIndex, startDate, endDate);
@@ -1249,13 +1249,13 @@ kendo_module({
                     that.view()._removeResizeHint();
 
                     if (dir == "south") {
-                        end = endDate;
+                        end = kendo.timezone.toLocalDate(endDate);
                     } else if (dir == "north") {
-                        start = startDate;
+                        start = kendo.timezone.toLocalDate(startDate);
                     } else if (dir == "east") {
-                        end = kendo.date.getDate(endDate);
+                        end = kendo.date.getDate(kendo.timezone.toLocalDate(endDate));
                     } else if (dir == "west") {
-                        start = new Date(startDate);
+                        start = new Date(kendo.timezone.toLocalDate(startDate));
                         start.setHours(0);
                         start.setMinutes(0);
                     }
