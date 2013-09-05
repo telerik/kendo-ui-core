@@ -71,9 +71,9 @@ namespace Kendo.Mvc.UI.Tests.Sparkline
         [Fact]
         public void ClientEvents_should_set_events()
         {
-            Action<ChartEventBuilder> clientEventsAction = eventBuilder => eventBuilder.DataBinding("dataBinding");
+            Action<ChartEventBuilder> clientEventsAction = eventBuilder => eventBuilder.DataBound("dataBound");
             builder.Events(clientEventsAction);
-            ((ClientHandlerDescriptor)sparkline.Events["dataBinding"]).HandlerName.ShouldEqual("dataBinding");
+            ((ClientHandlerDescriptor)sparkline.Events["dataBound"]).HandlerName.ShouldEqual("dataBound");
         }
 
         [Fact]
