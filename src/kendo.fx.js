@@ -1457,7 +1457,7 @@ kendo_module({
             that.initial = movable[that.axis];
             that.delta = options.location - that.initial;
 
-            that.duration = options.duration || 300;
+            that.duration = typeof options.duration == "number" ? options.duration : 300;
 
             that.tick = that._easeProxy(options.ease);
 
