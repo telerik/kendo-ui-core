@@ -6,8 +6,9 @@
 @ios7-list-background: #fcfcfc;
 @ios7-button-background: rgba(0,0,0,0);
 @ios7-border-width: 1px;
-@ios7-border-color: #007aff;
 @ios7-border-radius: 3px;
+@ios7-border-color: #007aff;
+@ios7-second-border-color: #adadad;
 @ios7-secondary-border-radius: 5px;
 @ios7-inline-border-radius: @ios7-border-radius - 1px;
 @ios7-active-color: #fff;
@@ -54,17 +55,20 @@
 
 /* NavBar */
 
-.km-ios7 .km-navbar
+.km-ios7 .km-navbar,
+.km-ios7 .km-tabstrip
 {
-    border: @ios7-border-width solid @ios7-border-color;
+    border: @ios7-border-width solid @ios7-second-border-color;
 }
 
-.km-ios7 .km-header .km-navbar
+.km-ios7 .km-header .km-navbar,
+.km-ios7 .km-header .km-tabstrip
 {
     border-width: 0 0 @ios7-border-width;
 }
 
-.km-ios7 .km-footer .km-navbar
+.km-ios7 .km-footer .km-navbar,
+.km-ios7 .km-footer .km-tabstrip
 {
     border-width: @ios7-border-width 0 0;
 }
@@ -85,6 +89,11 @@
     background: @ios7-button-background;
     border: 1px solid @ios7-border-color;
     .border-radius(@ios7-border-radius);
+}
+
+.km-ios7 .km-navbar .km-button
+{
+    border: 0;
 }
 
 .km-ios7 .km-tabstrip .km-button
