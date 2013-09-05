@@ -21,6 +21,21 @@
         KENDO_BLACK_CSS_LOCATION = KENDO_LOCATION + "styles/kendo.black.min.css",
         KENDO_ALL_LOCATION = KENDO_LOCATION + "js/kendo.all.min.js";
 
+    (function(opt){
+        if (opt) {
+            if (opt.JQUERY_LOCATION) {
+                // /**/ is to prevent the build script from modifying this one
+                JQUERY_LOCATION /**/ = opt.JQUERY_LOCATION;
+            }
+            opt = opt.KENDO;
+            if (opt) {
+                KENDO_COMMON_CSS_LOCATION = opt.css_common;
+                KENDO_BLACK_CSS_LOCATION = opt.css_black;
+                KENDO_ALL_LOCATION = opt.js;
+            }
+        }
+    }(window.KENDO_THEMEBUILDER_OPTIONS));
+
     function ThemeBuilderInterface() {
         var that = this,
             bootStyles = that.bootStyles;
