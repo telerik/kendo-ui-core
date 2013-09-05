@@ -51,7 +51,7 @@ kendo_module({
                 '#}#' +
                 '</div>',
         EVENT_TEMPLATE = kendo.template('<div title="#=title.replace(/"/g,"&\\#34;")#">' +
-                    '<dl><dd>#:title#</dd></dl>' +
+                    '<div class="k-event-template">#:title#</div>' +
                 '</div>');
 
     var MORE_BUTTON_TEMPLATE = kendo.template(

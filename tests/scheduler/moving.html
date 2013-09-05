@@ -69,7 +69,7 @@
                 dragstart(scheduler, handle, handle.offset());
                 drag(scheduler, handle, slots.eq(1).offset());
 
-                equal($(".k-event-drag-hint dt").text(), "10:30 AM - 11:30 AM");
+                equal($(".k-event-drag-hint .k-event-time").text(), "10:30 AM - 11:30 AM");
             });
 
             test("hint shows updated start and end time when moving event in week view", function() {
@@ -92,7 +92,7 @@
                 dragstart(scheduler, handle, handle.offset());
                 drag(scheduler, handle, slots.eq(2).offset());
 
-                equal($(".k-event-drag-hint dt").text(), "11:00 AM - 12:00 PM");
+                equal($(".k-event-drag-hint .k-event-time").text(), "11:00 AM - 12:00 PM");
             });
 
             test("hint shows north icon when start time is before the start of the view", function() {

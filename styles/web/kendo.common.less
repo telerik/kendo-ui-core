@@ -2921,7 +2921,7 @@ span.k-numerictextbox
                 border-width: 2px;
                 padding: 1px;
             }
-        }
+        }		
     }
 
     .k-hue-slider {
@@ -4104,25 +4104,21 @@ div.k-more-events
     white-space: nowrap;
 }
 
-.k-event dl,
-.k-event dt,
-.k-event dd
+.k-event-template
 {
-    margin:0;
-    padding:0;
+    padding:.34em 1.4em .34em .6em;
 }
 
-.k-event dl
+.k-event-time
 {
-    padding:.34em 1.8em .34em .6em;
+    display: none;
+    padding-bottom: 0;
+    font-size: .9em;
 }
 
-.k-event dt
+.k-event-drag-hint .k-event-time
 {
-    font-size:.9em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: block;
 }
 
 .k-event-actions,
@@ -4302,7 +4298,7 @@ div.k-scheduler-marquee:before
 div.k-scheduler-marquee:after
 {
     bottom: 0;
-    right: 0;
+    right: 0;    
     border-top-color: transparent;
     border-left-color: transparent;
 }

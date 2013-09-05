@@ -277,7 +277,7 @@
                 view.render(events);
 
                 equal(view.content.find("div.k-event").length, 1);
-                equal(view.content.find(".k-event dd").text(), "my event");
+                equal(view.content.find(".k-event .k-event-template").last().text(), "my event");
             });
 
             test("uid is rendered", function() {
@@ -312,8 +312,8 @@
                 view.render(events);
 
                 equal(view.content.find("div.k-event").length, 2);
-                equal(view.content.find(".k-event:first dd").text(), "event1");
-                equal(view.content.find(".k-event:last dd").text(), "event2");
+                equal(view.content.find(".k-event:first .k-event-template").last().text(), "event1");
+                equal(view.content.find(".k-event:last .k-event-template").last().text(), "event2");
             });
 
             test("cross-midnight events are split", function() {
@@ -359,22 +359,7 @@
                 view.render(events);
 
                 equal(view.content.find("div.k-event").length, 1);
-                equal(view.content.find(".k-event dd").text(), "my event");
-            });
-
-            test("format event date", function() {
-                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-                    view = setup({
-                        dates: [
-                           selectedDate
-                        ]
-                    });
-
-                var events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" })];
-
-                view.render(events);
-
-                equal(view.content.find("div.k-event dt").text(), "10:00 AM - 11:00 AM");
+                equal(view.content.find(".k-event .k-event-template").last().text(), "my event");
             });
 
             test("custom event template", function() {
@@ -571,7 +556,7 @@
                 view.render(events);
 
                 equal(view.datesHeader.find("div.k-event").length, 1);
-                equal(view.datesHeader.find(".k-event dd").text(), "my event");
+                equal(view.datesHeader.find(".k-event .k-event-template").last().text(), "my event");
 
             });
 
@@ -588,7 +573,7 @@
                 view.render(events);
 
                 equal(view.datesHeader.find("div.k-event").length, 1);
-                equal(view.datesHeader.find(".k-event dd").text(), "all day event");
+                equal(view.datesHeader.find(".k-event .k-event-template").last().text(), "all day event");
 
             });
 
@@ -1078,9 +1063,9 @@
                 view.render(events);
 
                 var eventElements = view.content.find("div.k-event");
-                equal(eventElements.eq(0).find("dd").text(), "second event");
-                equal(eventElements.eq(1).find("dd").text(), "first event");
-                equal(eventElements.eq(2).find("dd").text(), "same as first");
+                equal(eventElements.eq(0).find(".k-event-template").last().text(), "second event");
+                equal(eventElements.eq(1).find(".k-event-template").last().text(), "first event");
+                equal(eventElements.eq(2).find(".k-event-template").last().text(), "same as first");
             });
 
             test("position multiple overlapping all day events in a single slot", function() {

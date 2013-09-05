@@ -30,13 +30,11 @@ kendo_module({
         NS = ".kendoMultiDayView";
 
     var DAY_VIEW_EVENT_TEMPLATE = kendo.template('<div title="(#=kendo.format("{0:t} - {1:t}", start, end)#): #=title.replace(/"/g,"&\\#34;")#">' +
-                    '<dl>' +
-                        '<dt>#:kendo.format("{0:t} - {1:t}", start, end)#</dt>' +
-                        '<dd>${title}</dd>' +
-                    '</dl>' +
+                    '<div class="k-event-template k-event-time">#:kendo.format("{0:t} - {1:t}", start, end)#</div>' +
+                    '<div class="k-event-template">${title}</div>' +
                 '</div>'),
         DAY_VIEW_ALL_DAY_EVENT_TEMPLATE = kendo.template('<div title="(#=kendo.format("{0:t}", start)#): #=title.replace(/"/g,"&\\#34;")#">' +
-                    '<dl><dd>${title}</dd></dl>' +
+                    '<div class="k-event-template">${title}</div>' +
                 '</div>'),
         DATA_HEADER_TEMPLATE = kendo.template("<span class='k-link k-nav-day'>#=kendo.toString(date, 'ddd M/dd')#</span>"),
         ALLDAY_EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
@@ -711,7 +709,7 @@ kendo_module({
                     html += '<ul class="k-reset k-header k-toolbar">';
 
                     html += '<li class="k-state-default k-scheduler-fullday"><a href="#" class="k-link"><span class="k-icon k-i-clock"></span>';
-                    html += options.workDay ? options.messages.showFullDay : options.messages.showWorkDay + '</a></li>';
+                    html += (options.workDay ? options.messages.showFullDay : options.messages.showWorkDay) + '</a></li>';
 
                     html += '</ul>';
 
