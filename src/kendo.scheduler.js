@@ -749,10 +749,9 @@ kendo_module({
                 var selection = that._selection;
 
                 if (selection) {
-                    var offset = $(e.currentTarget).offset();
-                    var slot = view._slotByPosition(offset.left, offset.top);
+                    var slot = view.selectionByElement($(e.currentTarget));
 
-                    if (selection.groupIndex === slot.groupIndex) {
+                    if (slot && selection.groupIndex === slot.groupIndex) {
                         var startDate = slot.startDate();
                         var endDate = slot.endDate();
 
