@@ -362,8 +362,7 @@
     background: linear-gradient(to bottom, #10c4b2, #000);
 }
 
-.splash:before,
-.splash:after
+.splash:before
 {
     display: block;
     content: "\a0";
@@ -374,14 +373,6 @@
     height: 100%;
     background: transparent url(images/logo.png) no-repeat 50% 50%;
     background-size: auto 25%;
-}
-
-.splash:after
-{
-    height: 20%;
-    top: auto;
-    bottom: 0;
-    background-image: url(images/kendo.png);
 }
 
 .km-drawer-button:before, .km-drawer-button:after  { content: "\E077"; }
