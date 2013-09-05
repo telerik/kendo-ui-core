@@ -4429,7 +4429,7 @@ kendo_module({
                 categoryAxisLineBox = categoryAxis.lineBox(),
                 end = invertAxes ? categoryAxisLineBox.x1 : categoryAxisLineBox.y1,
                 stackPoints = segment.stackPoints,
-                points = segment._points(stackPoints),
+                points = segment._linePoints(stackPoints),
                 pos = invertAxes ? X : Y,
                 firstPoint, lastPoint;
 
@@ -4456,7 +4456,7 @@ kendo_module({
                 defaults = series._defaults,
                 color = series.color,
                 lineOptions,
-                linePoints = segment._points(),
+                linePoints = segment._linePoints(),
                 areaPoints = segment.points();
 
             ChartElement.fn.getViewElements.call(segment, view);
@@ -4503,9 +4503,7 @@ kendo_module({
             LineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx);
         },
 
-        _points: function(stackPoints) {
-            return LineSegment.fn.points.call(this, stackPoints);
-        }
+        _linePoints: LineSegment.fn.points
     });
     deepExtend(AreaSegment.fn, AreaSegmentMixin);
 
@@ -4536,9 +4534,7 @@ kendo_module({
             StepLineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx);
         },
 
-        _points: function(stackPoints) {
-            return StepLineSegment.fn.points.call(this, stackPoints);
-        }
+        _linePoints: StepLineSegment.fn.points
     });
     deepExtend(StepAreaSegment.fn, AreaSegmentMixin);
 
