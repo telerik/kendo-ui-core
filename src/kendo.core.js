@@ -2753,7 +2753,7 @@ function pad(number, digits, end) {
     kendo.onResize = function(callback) {
         var handler = callback;
         if (support.mobileOS.android) {
-            handler = function() { setTimeout(callback, 200); };
+            handler = function() { setTimeout(callback, 600); };
         }
 
         $(window).on(support.resize, handler);
