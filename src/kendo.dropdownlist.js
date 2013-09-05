@@ -205,8 +205,6 @@ kendo_module({
             that.trigger("dataBound");
         },
 
-
-
         search: function(word) {
             if (word) {
                 var that = this,
@@ -410,29 +408,40 @@ kendo_module({
             } else if (key === keys.END) {
                 e.preventDefault();
                 that._select(ul.lastChild);
-            } else if (key === keys.SPACEBAR) {
-                e.preventDefault();
             }
         },
 
-        _selectNext: function(character, index) {
-            var that = this,
-                ignoreCase = that.options.ignoreCase,
+        _selectNext: function(word, index) {
+            var that = this, text,
+                startIndex = index,
                 data = that._data(),
                 length = data.length,
-                text;
-
-            for (; index < length; index++) {
-                text = that._text(data[index]);
-                if (text) {
+                ignoreCase = that.options.ignoreCase,
+                action = function(text, index) {
                     text = text + "";
                     if (ignoreCase) {
                         text = text.toLowerCase();
                     }
 
-                    if (text.indexOf(character) === 0) {
+                    if (text.indexOf(word) === 0) {
                         that._select(index);
                         that._triggerEvents();
+                        return true;
+                    }
+                };
+
+            for (; index < length; index++) {
+                text = that._text(data[index]);
+                if (text && action(text, index)) {
+                    return true;
+                }
+            }
+
+            if (startIndex > 0) {
+                index = 0;
+                for (; index <= startIndex; index++) {
+                    text = that._text(data[index]);
+                    if (text && action(text, index)) {
                         return true;
                     }
                 }
@@ -442,28 +451,28 @@ kendo_module({
         },
 
         _keypress: function(e) {
-            var that = this;
+            var that = this,
+                character = String.fromCharCode(e.charCode || e.keyCode),
+                index = that.selectedIndex,
+                word = that._word;
 
-            setTimeout(function() {
-                var character = String.fromCharCode(e.keyCode || e.charCode),
-                    index = that.selectedIndex;
+            if (that.options.ignoreCase) {
+                character = character.toLowerCase();
+            }
 
-                if (that.options.ignoreCase) {
-                    character = character.toLowerCase();
+            if (character === " ") {
+                e.preventDefault();
+            }
+
+            if (that._last === character && word.length === 1 && index > -1) {
+                if (that._selectNext(word, index + 1)) {
+                    return;
                 }
+            }
 
-                if (character === that._last && index > -1) {
-                    that._word = character;
-                    if (that._selectNext(character, index + 1)) {
-                        return;
-                    }
-                } else {
-                    that._word += character;
-                }
-
-                that._last = character;
-                that._search();
-            });
+            that._word = word + character;
+            that._last = character;
+            that._search();
         },
 
         _popup: function() {
@@ -477,24 +486,25 @@ kendo_module({
         _search: function() {
             var that = this,
                 dataSource = that.dataSource,
+                index = that.selectedIndex,
                 word = that._word;
 
             clearTimeout(that._typing);
 
             that._typing = setTimeout(function() {
-                that._word = "";
+                that._last = that._word = "";
             }, that.options.delay);
 
             if (!that.ul[0].firstChild) {
                 dataSource.one(CHANGE, function () {
                     if (dataSource.data()[0]) {
-                        that.search(word);
+                        that._selectNext(word, index);
                     }
                 }).fetch();
                 return;
             }
 
-            that.search(word);
+            that._selectNext(word, index);
             that._triggerEvents();
         },
 

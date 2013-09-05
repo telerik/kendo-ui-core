@@ -24,6 +24,10 @@
                 input;
 
             $.fn.press = function(key) {
+                if (typeof key === "string") {
+                    key = key.charCodeAt(0);
+                }
+
                 return this.trigger({ type: "keypress", keyCode: key } );
             }
 
@@ -72,7 +76,7 @@
                 ok(dropdownlist.ul.children().eq(1).hasClass("k-state-selected"));
             });
 
-            test("search should raise error if word is null", function() {
+            test("search should not raise error if word is null", function() {
                 var dropdownlist = new DropDownList(input, {
                     dataTextField: "text",
                     dataValueField: "value",
@@ -82,19 +86,6 @@
                 dropdownlist.search();
 
                 ok(true);
-            });
-
-            test("typing should trigger search", function() {
-                var dropdownlist = new DropDownList(input, {
-                    dataSource: data
-                });
-
-                dropdownlist._search = function() {
-                    ok(true);
-                    start();
-                }
-                input.val("f").press("f".charCodeAt(0));
-                stop(1);
             });
 
             test("search method supports a case sensitive search", function() {
@@ -108,76 +99,113 @@
                 equal(dropdownlist.selectedIndex, 1);
             });
 
-            asyncTest("_search method select next item if starts with same character", 1, function() {
+            test("select next item if starts with same character", 1, function() {
                 var dropdownlist = new DropDownList(input, {
                     dataSource: ["text1", "text2", "text3"]
                 });
 
-                dropdownlist._keypress({
-                    keyCode: 116 //"t"
-                });
+                input.press("t");
+                input.press("t");
 
-                dropdownlist._keypress({
-                    keyCode: 116 //"t"
-                });
-
-                setTimeout(function() {
-                    equal(dropdownlist.selectedIndex, 1);
-                    start();
-                });
+                equal(dropdownlist.selectedIndex, 1);
             });
 
-            asyncTest("_search method loops matched items", 1, function() {
+            test("keep selection if typed text is same as current data item", 1, function() {
                 var dropdownlist = new DropDownList(input, {
-                    dataSource: ["text1", "text2"]
+                    dataSource: ["500.122", "500.123"]
                 });
 
-                dropdownlist._last = "t";
-                dropdownlist._keypress({
-                    keyCode: 116 //"t"
-                });
+                input.press("5");
+                input.press("0");
+                input.press("0");
 
-                dropdownlist._keypress({
-                    keyCode: 116 //"t"
-                });
-
-                setTimeout(function() {
-                    equal(dropdownlist.selectedIndex, 0);
-                    start();
-                });
+                equal(dropdownlist.selectedIndex, 0);
             });
 
-            asyncTest("_search method trigger change", 1, function() {
+            test("keep selection if typed text differs", 1, function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: ["500.122", "500.123"]
+                });
+
+                input.press("5");
+                input.press("0");
+                input.press("0");
+                input.press("0");
+
+                equal(dropdownlist.selectedIndex, 0);
+            });
+
+            test("loop items on search trigger change event", 1, function() {
                 var dropdownlist = new DropDownList(input, {
                     dataSource: ["text1", "text2", "text3"],
                     change: function() {
                         ok(true);
-                        start();
                     }
                 });
 
-                dropdownlist._last = "t";
-                dropdownlist._keypress({
-                    keyCode: 116 //"t"
-                });
+                input.press("t");
+                input.press("t");
             });
 
-            asyncTest("_search method honor ignoreCase option", 1, function() {
+            test("looping through items honors ignoreCase option", 1, function() {
                 var dropdownlist = new DropDownList(input, {
                     dataSource: ["text1", "Text2", "Text3"],
                     ignoreCase: true
                 });
 
                 dropdownlist.select(1);
-                dropdownlist._last = "t";
-                dropdownlist._keypress({
-                    keyCode: 116 //"t"
+
+                input.press("t");
+                input.press("t");
+
+                equal(dropdownlist.selectedIndex, 2);
+            });
+
+            test("prevent default behavior of SPACEBAR", 1, function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: ["text1", "Text2", "Text3"],
+                    ignoreCase: true
                 });
 
-                setTimeout(function() {
-                    equal(dropdownlist.selectedIndex, 2);
-                    start();
+                dropdownlist.select(1);
+
+                input.trigger({
+                    type: "keypress",
+                    charCode: " ".charCodeAt(0),
+                    preventDefault: function() {
+                        ok(true);
+                    }
                 });
+            });
+
+            test("typing same letter does not move to next item", 1, function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: ["Bill 1", "Bill 2", "Label"],
+                    ignoreCase: true
+                });
+
+                input.press("b");
+                input.press("i");
+                input.press("l");
+                input.press("l");
+
+                equal(dropdownlist.selectedIndex, 0);
+            });
+
+            test("search supports space", 1, function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: ["Bill 1", "Bill 2", "Label"],
+                    ignoreCase: true
+                });
+
+                input.press("b");
+                input.press("i");
+                input.press("l");
+                input.press("l");
+                input.press(" ");
+                input.press("2");
+
+                equal(dropdownlist.selectedIndex, 1);
             });
 
         </script>

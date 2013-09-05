@@ -458,10 +458,14 @@
                     }
                 });
 
-                input.data("kendoDropDownList")._last = "t";
                 input.data("kendoDropDownList").wrapper.trigger({
                     type: "keypress",
-                    keyCode: 116 //"t"
+                    charCode: "t".charCodeAt(0)
+                });
+
+                input.data("kendoDropDownList").wrapper.trigger({
+                    type: "keypress",
+                    charCode: "t".charCodeAt(0)
                 });
             });
 

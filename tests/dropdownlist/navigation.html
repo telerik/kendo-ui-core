@@ -338,22 +338,6 @@
                 });
             });
 
-            test("SpaceBar calls prevent default", 1, function() {
-                var dropdownlist = new DropDownList(input, {
-                    dataSource: data
-                });
-
-                dropdownlist.open();
-
-                dropdownlist.wrapper.trigger({
-                    type: "keydown",
-                    keyCode: kendo.keys.SPACEBAR,
-                    preventDefault: function() {
-                        ok(true);
-                    }
-                });
-            });
-
             test("add focused class on focus when widget is in readonly state", 1, function() {
                 var dropdownlist = new DropDownList(input, {
                     dataSource: data
