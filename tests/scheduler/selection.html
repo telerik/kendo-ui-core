@@ -78,6 +78,17 @@
                 container.trigger(e);
             }
 
+            function press(cell) {
+                scheduler._createSelection(cell[0]);
+                scheduler.view().select(scheduler._selection);
+            }
+
+            function move(cell) {
+                scheduler._mouseMove({
+                    currentTarget: cell[0]
+                });
+            }
+
             test("scheduler wrapper is focusable", function() {
                 equal(container.attr("tabindex"), 0);
             });
@@ -87,7 +98,7 @@
 
                 td.trigger({
                     type: "mousedown",
-                    curentTarget: td
+                    currentTarget: td
                 });
 
                 ok(td.hasClass("k-state-selected"));
@@ -100,7 +111,7 @@
 
                 td.trigger({
                     type: "mousedown",
-                    curentTarget: td
+                    currentTarget: td
                 });
 
                 selection = scheduler._selection;
@@ -119,7 +130,7 @@
 
                 event.trigger({
                     type: "mousedown",
-                    curentTarget: event
+                    currentTarget: event
                 });
 
                 selection = scheduler._selection;
@@ -135,7 +146,7 @@
 
                 td.trigger({
                     type: "mousedown",
-                    curentTarget: td
+                    currentTarget: td
                 });
 
                 equal(container[0], document.activeElement);
@@ -146,7 +157,7 @@
 
                 td.trigger({
                     type: "mousedown",
-                    curentTarget: td
+                    currentTarget: td
                 });
 
                 container.focusout();
@@ -165,7 +176,7 @@
 
                 td.trigger({
                     type: "mousedown",
-                    curentTarget: td
+                    currentTarget: td
                 });
 
                 container.focusout();
@@ -184,7 +195,7 @@
 
                 td.trigger({
                     type: "mousedown",
-                    curentTarget: td
+                    currentTarget: td
                 });
 
                 deepEqual(scheduler.date(), new Date(2013, 6, 7));
@@ -199,7 +210,7 @@
 
                 td.trigger({
                     type: "mousedown",
-                    curentTarget: td
+                    currentTarget: td
                 });
 
                 scheduler.view("day");
@@ -217,13 +228,55 @@
 
                 td.trigger({
                     type: "mousedown",
-                    curentTarget: td
+                    currentTarget: td
                 });
 
                 scheduler.view("day");
 
                 ok(container.find(".k-scheduler-content td").eq(0).hasClass("k-state-selected"));
                 deepEqual(scheduler.date(), new Date(2013, 6, 7));
+            });
+
+            asyncTest("scheduler selects multiple cells a column on move", function() {
+                var rows = container.find(".k-scheduler-content tr");
+                var startCell = rows.find("td:first");
+                var endCell = rows.eq(4).find("td:first");
+
+                press(startCell);
+                move(endCell);
+
+                setTimeout(function() {
+                    start();
+                    equal(container.find(".k-scheduler-content .k-state-selected").length, 5);
+                }, 100);
+            });
+
+            asyncTest("scheduler selects multiple cells in several columns on move", function() {
+                var rows = container.find(".k-scheduler-content tr");
+                var startCell = rows.find("td:first");
+                var endCell = rows.eq(4).find("td").eq(2);
+
+                press(startCell);
+                move(endCell);
+
+                setTimeout(function() {
+                    start();
+                    equal(container.find(".k-scheduler-content .k-state-selected").length, 101);
+                }, 100);
+            });
+
+            asyncTest("scheduler selects multiple cells in backward move", function() {
+                var rows = container.find(".k-scheduler-content tr");
+                var startCell = rows.eq(4).find("td:first");
+                var endCell = rows.find("td:first");
+
+                press(startCell);
+                move(endCell);
+
+                setTimeout(function() {
+                    start();
+                    equal(container.find(".k-scheduler-content .k-state-selected").length, 5);
+                }, 100);
             });
 
             test("scheduler calls view.move method with specific direction", function() {
