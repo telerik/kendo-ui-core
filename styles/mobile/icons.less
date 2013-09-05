@@ -2,8 +2,14 @@
 
 @font-face {
     font-family: "Kendo UI";
-    src: url("images/KendoUI.woff") format("woff"),
-         url("images/KendoUI.ttf") format("truetype");
+    src: url("images/kendoui.woff") format("woff"),
+         url("images/kendoui.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Kendo UI iOS7";
+    src: url("images/kendoui7.woff") format("woff"),
+         url("images/kendoui7.ttf") format("truetype");
 }
 
 body:before
@@ -50,6 +56,22 @@ body:before
     vertical-align: middle;
     background-size: auto;
     font: 1em/1em "Kendo UI";
+}
+
+.km-ios7 .km-icon:after,
+.km-ios7 .km-icon:before,
+.km-ios7 .km-contactadd:after,
+.km-ios7 .km-contactadd:before,
+.km-ios7 .km-rowdelete:after,
+.km-ios7 .km-rowdelete:before,
+.km-ios7 .km-rowinsert:after,
+.km-ios7 .km-rowinsert:before,
+.km-ios7 .km-detaildisclose:after,
+.km-ios7 .km-detaildisclose:before,
+.km-ios7 .km-loading:after,
+.km-ios7 .km-filter-wrap:before
+{
+    font: 1em/1em "Kendo UI iOS7";
 }
 
 // Icon Shadow
@@ -368,6 +390,244 @@ body:before
 {
     content: "\e0f2";
 }
+
+
+.km-ios7 .km-contactadd:after,
+.km-ios7 .km-contactadd:before,
+.km-ios7 .km-rowinsert:after,
+.km-ios7 .km-rowinsert:before
+{
+    content: "\E039";
+}
+
+.km-ios7 .km-rowdelete:after,
+.km-ios7 .km-rowdelete:before
+{
+    content: "\E03a";
+}
+
+.km-ios7 .km-detaildisclose:after,
+.km-ios7 .km-detaildisclose:before
+{
+    content: "\E0E2";
+}
+
+.km-ios7 .km-action:after,
+.km-ios7 .km-action:before
+{
+    content: "\e0ca";
+}
+
+.km-ios7 .km-add:after,
+.km-ios7 .km-add:before
+{
+    content: "\e0cb";
+}
+
+.km-ios7 .km-battery:after,
+.km-ios7 .km-battery:before
+{
+    content: "\e0ce";
+}
+
+.km-ios7 .km-bookmarks:after,
+.km-ios7 .km-bookmarks:before
+{
+    content: "\e0cf";
+}
+
+.km-ios7 .km-camera:after,
+.km-ios7 .km-camera:before
+{
+    content: "\e0d0";
+}
+
+.km-ios7 .km-cart:after,
+.km-ios7 .km-cart:before
+{
+    content: "\e0d1";
+}
+
+.km-ios7 .km-edit:after,
+.km-ios7 .km-compose:after,
+.km-ios7 .km-edit:before,
+.km-ios7 .km-compose:before
+{
+    content: "\e0d5";
+}
+
+.km-ios7 .km-contacts:after,
+.km-ios7 .km-contacts:before
+{
+    content: "\e0e4";
+}
+
+.km-ios7 .km-trash:after,
+.km-ios7 .km-delete:after,
+.km-ios7 .km-trash:before,
+.km-ios7 .km-delete:before
+{
+    content: "\e0ec";
+}
+
+.km-ios7 .km-details:after,
+.km-ios7 .km-details:before
+{
+    content: "\e0e2";
+}
+
+.km-ios7 .km-download:after,
+.km-ios7 .km-downloads:after,
+.km-ios7 .km-download:before,
+.km-ios7 .km-downloads:before
+{
+    content: "\e0d4";
+}
+
+.km-ios7 .km-fastforward:after,
+.km-ios7 .km-fastforward:before
+{
+    content: "\e0d9";
+}
+
+.km-ios7 .km-toprated:after,
+.km-ios7 .km-favorites:after,
+.km-ios7 .km-toprated:before,
+.km-ios7 .km-favorites:before
+{
+    content: "\e0d7";
+}
+
+.km-ios7 .km-featured:after,
+.km-ios7 .km-featured:before
+{
+    content: "\e0d8";
+}
+
+.km-ios7 .km-globe:after,
+.km-ios7 .km-globe:before
+{
+    content: "\e0dc";
+}
+
+.km-ios7 .km-history:after,
+.km-ios7 .km-history:before
+{
+    content: "\e0e7";
+}
+
+.km-ios7 .km-home:after,
+.km-ios7 .km-home:before
+{
+    content: "\e0dd";
+}
+
+.km-ios7 .km-info:after,
+.km-ios7 .km-about:after,
+.km-ios7 .km-info:before,
+.km-ios7 .km-about:before
+{
+    content: "\e0de";
+}
+
+.km-ios7 .km-more:after,
+.km-ios7 .km-more:before
+{
+    content: "\e0e0";
+}
+
+.km-ios7 .km-mostrecent:after,
+.km-ios7 .km-mostrecent:before
+{
+    content: "\e0cc";
+}
+
+.km-ios7 .km-mostviewed:after,
+.km-ios7 .km-mostviewed:before
+{
+    content: "\e0d6";
+}
+
+.km-ios7 .km-organize:after,
+.km-ios7 .km-organize:before
+{
+    content: "\e0eb";
+}
+
+.km-ios7 .km-pause:after,
+.km-ios7 .km-pause:before
+{
+    content: "\e0e3";
+}
+
+.km-ios7 .km-play:after,
+.km-ios7 .km-play:before
+{
+    content: "\e0e5";
+}
+
+.km-ios7 .km-recents:after,
+.km-ios7 .km-recents:before
+{
+    content: "\e0d2";
+}
+
+.km-ios7 .km-refresh:after,
+.km-ios7 .km-refresh:before
+{
+    content: "\e0e6";
+}
+
+.km-ios7 .km-reply:after,
+.km-ios7 .km-reply:before
+{
+    content: "\e0ed";
+}
+
+.km-ios7 .km-rewind:after,
+.km-ios7 .km-rewind:before
+{
+    content: "\e0e8";
+}
+
+.km-ios7 .km-search:after,
+.km-ios7 .km-search:before
+{
+    content: "\e0e9";
+}
+
+.km-ios7 .km-settings:after,
+.km-ios7 .km-settings:before
+{
+    content: "\e0da";
+}
+
+.km-ios7 .km-share:after,
+.km-ios7 .km-share:before
+{
+    content: "\e0df";
+}
+
+.km-ios7 .km-sounds:after,
+.km-ios7 .km-volume:after,
+.km-ios7 .km-sounds:before,
+.km-ios7 .km-volume:before
+{
+    content: "\e0ef";
+}
+
+.km-ios7 .km-stop:after,
+.km-ios7 .km-stop:before
+{
+    content: "\e0ea";
+}
+
+.km-ios7 .km-wifi:after,
+.km-ios7 .km-wifi:before
+{
+    content: "\e0f0";
+}
+
 
 .km-wp .km-scroller-pull .km-icon:after
 {

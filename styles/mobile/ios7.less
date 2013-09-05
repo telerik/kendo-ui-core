@@ -34,9 +34,9 @@
     -webkit-transform: none;
 }
 
-.km-ios7 .km-navbar
+.km-ios7 .km-navbar,
+.km-ios7 .km-tabstrip
 {
-    color: @ios7-main-color;
     background: @ios7-light-background;
 }
 
@@ -58,19 +58,8 @@
 .km-ios7 .km-navbar,
 .km-ios7 .km-tabstrip
 {
-    border: @ios7-border-width solid @ios7-second-border-color;
-}
-
-.km-ios7 .km-header .km-navbar,
-.km-ios7 .km-header .km-tabstrip
-{
-    border-width: 0 0 @ios7-border-width;
-}
-
-.km-ios7 .km-footer .km-navbar,
-.km-ios7 .km-footer .km-tabstrip
-{
-    border-width: @ios7-border-width 0 0;
+    border: @ios7-border-width solid transparent;
+    box-shadow: 0 0 1px @ios7-dark-background;
 }
 
 .km-ios7 .km-toolbar,
@@ -83,6 +72,17 @@
 
 /* Button */
 
+.km-ios7 .km-button,
+.km-ios7 .km-view-title
+{
+    font-size: 1.2em;
+}
+
+.km-ios7 .km-view-title
+{
+    line-height: 2.5em;
+}
+
 .km-ios7 .km-button
 {
     padding: .5em .8em;
@@ -94,8 +94,11 @@
 .km-ios7 .km-navbar .km-button
 {
     border: 0;
+    margin-top: .26rem;
+    margin-bottom: .26rem;
 }
 
+.km-ios7 .km-footer,
 .km-ios7 .km-tabstrip .km-button
 {
     background: none;
@@ -1036,10 +1039,16 @@
 
 /* Active States */
 
+.km-ios7 .km-tabstrip .km-button
+{
+    color: inherit;
+}
+
 .km-ios7 .km-button,
 .km-ios7 .km-switch-handle,
 .km-ios7 .k-slider-selection,
-.km-ios7 .km-switch-background
+.km-ios7 .km-switch-background,
+.km-ios7 .km-tabstrip .km-state-active
 {
     color: @ios7-active-background;
 }
@@ -1050,16 +1059,13 @@
 .km-ios7 .km-state-active,
 .km-ios7 .km-switch-label-on,
 .km-ios7 .km-switch-label-off,
-.km-ios7 .km-tabstrip .km-button,
 .km-ios7 .km-popup .k-item,
 .km-ios7 .km-actionsheet > li > a,
-.km-ios7 .km-tabstrip .km-state-active,
 .km-ios7 .k-slider .k-draghandle,
 .km-ios7 .k-slider .k-draghandle:hover,
 .km-ios7 .km-scroller-pull .km-icon,
 .km-ios7 .km-popup.km-pane .km-navbar,
 .km-ios7 .km-popup.km-pane .km-toolbar,
-.km-ios7 .km-popup.km-pane .km-tabstrip,
 .km-ios7 .km-popup .k-state-hover,
 .km-ios7 .km-popup .k-state-focused,
 .km-ios7 .km-popup .k-state-selected,
@@ -1088,7 +1094,6 @@
 .km-ios7 .km-pages .km-current-page,
 .km-ios7 .k-slider .k-draghandle,
 .km-ios7 .k-slider .k-draghandle:hover,
-.km-ios7 .km-tabstrip .km-state-active,
 .km-ios7 .km-scroller-refresh.km-load-more,
 .km-ios7 .km-popup .k-state-hover,
 .km-ios7 .km-popup .k-state-focused,
@@ -1112,4 +1117,11 @@
 .km-ios7 .km-rowdelete
 {
     background: @ios7-second-active-background;
+}
+
+.km-ios7 .km-navbar .km-button.km-state-active
+{
+    background: none;
+    color: @ios7-main-color;
+    opacity: .4;
 }
