@@ -617,14 +617,12 @@ kendo_module({
             this._resizeHint.last().addClass("k-last").find(".k-label-bottom").text(kendo.toString(kendo.timezone.toLocalDate(endTime), "M/dd"));
         },
 
-       _updateMoveHint: function(event, initialSlot, currentSlot) {
-            var distance = currentSlot.start - initialSlot.start;
-
+       _updateMoveHint: function(event, groupIndex, distance) {
             var start = kendo.date.toUtcTime(event.start) + distance;
 
             var end = start + event.duration();
 
-            var group = this.groups[currentSlot.groupIndex];
+            var group = this.groups[groupIndex];
 
             var ranges = group.ranges(start, end, true, event.isAllDay);
 

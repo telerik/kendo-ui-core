@@ -1058,6 +1058,8 @@ kendo_module({
         _movable: function() {
             var startSlot;
             var endSlot;
+            var startTime;
+            var endTime;
             var event;
             var that = this;
 
@@ -1071,6 +1073,8 @@ kendo_module({
                     event = that.occurrenceByUid(eventElement.attr(kendo.attr("uid")));
 
                     startSlot = view._slotByPosition(e.x.location, e.y.location);
+
+                    startTime = startSlot.startOffset(e.x.location, e.y.location, that.options.snap);
 
                     endSlot = startSlot;
 
@@ -1087,9 +1091,12 @@ kendo_module({
                         return;
                     }
 
-                    view._updateMoveHint(event, startSlot, slot);
+                    endTime = slot.startOffset(e.x.location, e.y.location, that.options.snap);
 
-                    var distance = slot.start - startSlot.start;
+                    var distance = endTime - startTime;
+
+                    view._updateMoveHint(event, slot.groupIndex, distance);
+
                     var range = moveEventRange(event, distance);
 
                     if (!that.trigger("move", {
@@ -1103,13 +1110,13 @@ kendo_module({
                         endSlot = slot;
 
                     } else {
-                        view._updateMoveHint(event, startSlot, endSlot);
+                        view._updateMoveHint(event, slot.groupIndex, distance);
                     }
                 },
                 dragend: function() {
                     that.view()._removeMoveHint();
 
-                    var distance = endSlot.start - startSlot.start;
+                    var distance = endTime - startTime;
                     var range = moveEventRange(event, distance);
 
                     var start = range.start;
@@ -1139,8 +1146,8 @@ kendo_module({
         },
 
         _resizable: function() {
-            var startDate;
-            var endDate;
+            var startTime;
+            var endTime;
             var event;
             var slot;
             var that = this;
@@ -1178,9 +1185,9 @@ kendo_module({
                         e.preventDefault();
                     }
 
-                    startDate = kendo.date.toUtcTime(event.start);
+                    startTime = kendo.date.toUtcTime(event.start);
 
-                    endDate = kendo.date.toUtcTime(event.end);
+                    endTime = kendo.date.toUtcTime(event.end);
                 },
                 drag: function(e) {
                     var dragHandle = $(e.currentTarget);
@@ -1197,47 +1204,47 @@ kendo_module({
 
                     slot = currentSlot;
 
-                    var originalStart = startDate;
+                    var originalStart = startTime;
 
-                    var originalEnd = endDate;
+                    var originalEnd = endTime;
 
                     if (dir == "south") {
                         if (!slot.isDaySlot && slot.end - kendo.date.toUtcTime(event.start) >= view._timeSlotInterval()) {
                             if (event.isAllDay) {
-                                endDate = slot.startOffset(e.x.location, e.y.location, that.options.snap);
+                                endTime = slot.startOffset(e.x.location, e.y.location, that.options.snap);
                             } else {
-                                endDate = slot.endOffset(e.x.location, e.y.location, that.options.snap);
+                                endTime = slot.endOffset(e.x.location, e.y.location, that.options.snap);
                             }
                         }
                     } else if (dir == "north") {
                         if (!slot.isDaySlot && kendo.date.toUtcTime(event.end) - slot.start >= view._timeSlotInterval()) {
-                            startDate = slot.startOffset(e.x.location, e.y.location, that.options.snap);
+                            startTime = slot.startOffset(e.x.location, e.y.location, that.options.snap);
                         }
                     } else if (dir == "east") {
                         if (slot.isDaySlot && kendo.date.toUtcTime(kendo.date.getDate(slot.endDate())) >= kendo.date.toUtcTime(kendo.date.getDate(event.start))) {
                             if (event.isAllDay) {
-                                endDate = slot.startOffset(e.x.location, e.y.location, that.options.snap);
+                                endTime = slot.startOffset(e.x.location, e.y.location, that.options.snap);
                             } else {
-                                endDate = slot.endOffset(e.x.location, e.y.location, that.options.snap);
+                                endTime = slot.endOffset(e.x.location, e.y.location, that.options.snap);
                             }
                         }
                     } else if (dir == "west") {
                         if (slot.isDaySlot && kendo.date.toUtcTime(kendo.date.getDate(event.end)) >= kendo.date.toUtcTime(kendo.date.getDate(slot.startDate()))) {
-                            startDate = slot.startOffset(e.x.location, e.y.location, that.options.snap);
+                            startTime = slot.startOffset(e.x.location, e.y.location, that.options.snap);
                         }
                     }
 
                     if (!that.trigger("resize", {
                         event: event,
                         slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() },
-                        start: kendo.timezone.toLocalDate(startDate),
-                        end: kendo.timezone.toLocalDate(endDate),
+                        start: kendo.timezone.toLocalDate(startTime),
+                        end: kendo.timezone.toLocalDate(endTime),
                         resources: view._resourceBySlot(slot)
                     })) {
-                        view._updateResizeHint(event, slot.groupIndex, startDate, endDate);
+                        view._updateResizeHint(event, slot.groupIndex, startTime, endTime);
                     } else {
-                        startDate = originalStart;
-                        endDate = originalEnd;
+                        startTime = originalStart;
+                        endTime = originalEnd;
                     }
                 },
                 dragend: function(e) {
@@ -1249,13 +1256,13 @@ kendo_module({
                     that.view()._removeResizeHint();
 
                     if (dir == "south") {
-                        end = kendo.timezone.toLocalDate(endDate);
+                        end = kendo.timezone.toLocalDate(endTime);
                     } else if (dir == "north") {
-                        start = kendo.timezone.toLocalDate(startDate);
+                        start = kendo.timezone.toLocalDate(startTime);
                     } else if (dir == "east") {
-                        end = kendo.date.getDate(kendo.timezone.toLocalDate(endDate));
+                        end = kendo.date.getDate(kendo.timezone.toLocalDate(endTime));
                     } else if (dir == "west") {
-                        start = new Date(kendo.timezone.toLocalDate(startDate));
+                        start = new Date(kendo.timezone.toLocalDate(startTime));
                         start.setHours(0);
                         start.setMinutes(0);
                     }

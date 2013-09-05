@@ -233,12 +233,10 @@ kendo_module({
             this._resizeHint.last().addClass("k-last").find(".k-label-bottom").text(kendo.toString(kendo.timezone.toLocalDate(endTime), format));
         },
 
-        _updateMoveHint: function(event, initialSlot, currentSlot) {
+        _updateMoveHint: function(event, groupIndex, distance) {
             var multiday = event.isMultiDay();
 
-            var group = this.groups[currentSlot.groupIndex];
-
-            var distance = currentSlot.start - initialSlot.start;
+            var group = this.groups[groupIndex];
 
             var start = kendo.date.toUtcTime(event.start) + distance;
 
@@ -246,9 +244,9 @@ kendo_module({
 
             var ranges = group.ranges(start, end, multiday, event.isAllDay);
 
-            start = kendo.timezone.apply(new Date(start), "Etc/UTC");
+            start = kendo.timezone.toLocalDate(start);
 
-            end = kendo.timezone.apply(new Date(end), "Etc/UTC");
+            end = kendo.timezone.toLocalDate(end);
 
             this._removeMoveHint();
 
@@ -278,7 +276,9 @@ kendo_module({
                 if (multiday) {
                     css.width = range.innerWidth() - 4;
                 } else {
-                    css.height = range.innerHeight() - 3;
+                    var rect = range.outerRect(start, end, this.options.snap);
+                    css.top = rect.top;
+                    css.height = rect.bottom - rect.top;
                     css.width = startSlot.clientWidth * 0.9 - 4;
                 }
 
