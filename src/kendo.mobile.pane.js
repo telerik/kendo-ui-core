@@ -114,7 +114,7 @@ kendo_module({
             layout: "",
             collapsible: false,
             initial: null,
-            loading: "<h1>Loading...</h1>",
+            loading: "<h1>Loading...</h1>"
         },
 
         events: [
