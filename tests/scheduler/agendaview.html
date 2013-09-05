@@ -118,7 +118,22 @@
                 equal(table.find("tr:has(td)").length, 1);
             });
 
-            test("agenda groups events having the same date", function() {
+            test("agenda renders a table rows for long event which starts before and ends outside of the timeframe", function() {
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/04 00:00"),
+                        end: new Date("2013/12/06 01:00"),
+                        title: "event title"
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+                equal(table.find("tr:has(td)").length, 7);
+            });
+
+           test("agenda groups events having the same date", function() {
                 var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
                 agenda.render([

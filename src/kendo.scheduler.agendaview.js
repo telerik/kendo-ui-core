@@ -120,7 +120,10 @@ kendo_module({
 
                 var task = event.clone();
                 task.startDate = kendo.date.getDate(start);
-                tasks.push(task);
+
+                if (task.startDate >= this.startDate()) {
+                    tasks.push(task);
+                }
 
                 if (eventDurationInDays > 1) {
                     task.end = kendo.date.nextDay(start);
@@ -139,7 +142,7 @@ kendo_module({
                             task.middle = true;
                         }
 
-                        if (task.end.getTime() <= this.endDate().getTime()) {
+                        if (task.end <= this.endDate() && task.start >= this.startDate()) {
                             tasks.push(task);
                         }
                     }
