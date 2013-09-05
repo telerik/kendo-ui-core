@@ -352,6 +352,46 @@
                 equal(div.find(".k-marquee").offset().left, slots.eq(1).offset().left);
             });
 
+            test("the resize hint of all day events ends ind the event slot", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["week"],
+                    dataSource: [
+                        { start: new Date("2013/6/3"), end: new Date("2013/6/3"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-w").last();
+
+                var slots = div.find(".k-scheduler-header-all-day td");
+
+                dragstart(scheduler, handle);
+
+                drag(scheduler, handle, slots.eq(0).offset());
+
+                equalWithRound(div.find(".k-marquee").outerWidth(), 2 * slots.eq(0).outerWidth());
+            });
+
+            test("the resize hint of all day events ends ind the event slot in month view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    views: ["month"],
+                    dataSource: [
+                        { start: new Date("2013/5/27"), end: new Date("2013/5/27"), isAllDay: true, title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-w").last();
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragstart(scheduler, handle);
+
+                drag(scheduler, handle, slots.eq(0).offset());
+
+                equalWithRound(div.find(".k-marquee").outerWidth(), 2 * slots.eq(0).outerWidth());
+            });
+
             test("the south/north resize hint is as wide as the slot that contains the event", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),

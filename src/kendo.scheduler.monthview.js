@@ -602,7 +602,7 @@ kendo_module({
 
             var group = this.groups[endSlot.groupIndex];
 
-            var ranges = group.ranges(startSlot.startDate(), endSlot.endDate(), true, event.isAllDay);
+            var ranges = group.ranges(startSlot.startDate(), event.isAllDay ? endSlot.startDate() : endSlot.endDate(), true, event.isAllDay);
 
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
                 this._createResizeHint(ranges[rangeIndex]);

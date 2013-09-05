@@ -181,11 +181,13 @@ kendo_module({
         },
 
         _updateResizeHint: function(event, startSlot, endSlot) {
+            console.log(startSlot, endSlot);
+
             var multiday = event.isMultiDay();
 
             var group = this.groups[endSlot.groupIndex];
 
-            var ranges = group.ranges(startSlot.start, endSlot.end, multiday, event.isAllDay);
+            var ranges = group.ranges(startSlot.start, event.isAllDay ? endSlot.start : endSlot.end, multiday, event.isAllDay);
 
             this._removeResizeHint();
 
