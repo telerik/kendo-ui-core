@@ -33,7 +33,6 @@ kendo_module({
             that.element.children(kendo.roleSelector("pane")).each(function() {
                 pane = kendo.initWidget(this, {}, ui.roles);
                 that.panes.push(pane);
-                pane.navigateToInitial();
             });
 
             that.expandedPaneShim = $(EXPANED_PANE_SHIM).appendTo(that.element);
@@ -89,7 +88,11 @@ kendo_module({
             if (!that.inited) {
                 that.inited = true;
                 $.each(that.panes, function() {
-                    this.navigate("");
+                    if (this.options.initial) {
+                        this.navigateToInitial();
+                    } else {
+                        this.navigate("");
+                    }
                 });
                 that.trigger("init", {view: that});
             }
