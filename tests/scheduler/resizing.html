@@ -1958,6 +1958,62 @@
                 deepEqual(event.end, new Date("2013/6/3 12:00 AM"));
             });
 
+            test("south resize hint height doesn't snap when snap is disabled", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    snap: false,
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-s");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragstart(scheduler, handle);
+
+                var offset = slots.eq(1).offset();
+
+                offset.top += slots.eq(1).outerHeight() / 2;
+
+                drag(scheduler, handle, offset);
+
+                equalWithRound(div.find(".k-marquee").outerHeight(), 1.5 * slots.eq(1).outerHeight());
+            });
+
+            test("south resize changes the end of the event when snap is disabled", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    snap: false,
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-resize-s");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragstart(scheduler, handle);
+
+                var offset = slots.eq(1).offset();
+
+                offset.top += slots.eq(1).outerHeight() / 2;
+
+                drag(scheduler, handle, offset);
+
+                dragend(scheduler, handle, offset);
+
+                var event = scheduler.dataSource.at(0);
+
+                equal(event.end.getHours(), 10);
+
+                equal(event.end.getMinutes(), 45);
+            });
+
             function dragcancel(scheduler) {
                 var draggable = scheduler._resizeDraggable;
                 draggable.trigger("dragcancel");
