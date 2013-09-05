@@ -612,17 +612,29 @@ kendo_module({
             return result;
         },
 
-        innerRect: function(start, end, snap) {
+        outerRect: function(start, end, snap) {
+            return this._rect("offset", start, end, snap);
+        },
+
+        _rect: function(property, start, end, snap) {
             var top;
             var bottom;
             var startSlot = this.start;
             var endSlot = this.end;
 
+            if (typeof start != "number") {
+                start = kendo.date.toUtcTime(start);
+            }
+
+            if (typeof end != "number") {
+                end = kendo.date.toUtcTime(end);
+            }
+
             if (snap) {
                 top = startSlot.offsetTop;
-                bottom = endSlot.offsetTop + endSlot.clientHeight;
+                bottom = endSlot.offsetTop + endSlot[property + "Height"];
             } else {
-                var startOffset = kendo.date.toUtcTime(start) - startSlot.start;
+                var startOffset = start - startSlot.start;
 
                 if (startOffset < 0) {
                     startOffset = 0;
@@ -630,9 +642,9 @@ kendo_module({
 
                 var startSlotDuration = startSlot.end - startSlot.start;
 
-                top = startSlot.offsetTop + startSlot.clientHeight * startOffset / startSlotDuration;
+                top = startSlot.offsetTop + startSlot[property + "Height"] * startOffset / startSlotDuration;
 
-                var endOffset = endSlot.end - kendo.date.toUtcTime(end);
+                var endOffset = endSlot.end - end;
 
                 if (endOffset < 0) {
                     endOffset = 0;
@@ -640,13 +652,17 @@ kendo_module({
 
                 var endSlotDuration = endSlot.end - endSlot.start;
 
-                bottom = endSlot.offsetTop + endSlot.clientHeight - endSlot.clientHeight * endOffset / endSlotDuration;
+                bottom = endSlot.offsetTop + endSlot[property + "Height"] - endSlot[property + "Height"] * endOffset / endSlotDuration;
             }
 
             return {
                 top: top,
                 bottom: bottom
             };
+        },
+
+        innerRect: function(start, end, snap) {
+            return this._rect("client", start, end, snap);
         }
     });
 

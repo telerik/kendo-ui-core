@@ -197,7 +197,8 @@ kendo_module({
                 if (multiday) {
                     width = range.innerWidth();
                 } else {
-                    height = range.innerHeight();
+                    var rect = range.outerRect(startTime, endTime);
+                    height = rect.bottom - rect.top;
                 }
 
                 var hint = SchedulerView.fn._createResizeHint.call(this,
