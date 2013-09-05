@@ -62,51 +62,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Defines the inline handler of the DataBinding client-side event
-        /// </summary>
-        /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .Events(events => events.DataBinding(
-        ///                @&lt;text&gt;
-        ///                function(e) {
-        ///                    //event handling code
-        ///                }
-        ///                &lt;/text&gt;
-        ///           ))
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ChartEventBuilder DataBinding(Func<object, object> inlineCodeBlock)
-        {
-            Handler("dataBinding", inlineCodeBlock);
-
-            return this;
-        }
-
-        /// <summary>
-        ///  Defines the name of the JavaScript function that will handle the the DataBinding client-side event.
-        /// </summary>
-        /// <param name="onDataBindingHandlerName">The name of the JavaScript function that will handle the event.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;%= Html.Kendo().Chart()
-        ///            .Name("Chart")
-        ///            .Events(events => events.DataBinding("onDataBinding"))
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public ChartEventBuilder DataBinding(string onDataBindingHandlerName)
-        {
-            Handler("dataBinding", onDataBindingHandlerName);
-
-            return this;
-        }
-
-        /// <summary>
         /// Defines the inline handler of the SeriesClick client-side event
         /// </summary>
         /// <param name="inlineCodeBlock">The handler code wrapped in a text tag (Razor syntax).</param>
