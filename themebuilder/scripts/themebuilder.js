@@ -9,6 +9,7 @@
         colorPicker = "ktb-colorpicker",
         numeric = "ktb-numeric",
         ObservableObject = kendo.data.ObservableObject,
+        options = window.parent.KENDO_THEMEBUILDER_OPTIONS || {},
         propertyEditors = {
             "color": colorPicker,
             "background-color": colorPicker,
@@ -478,7 +479,7 @@
 
                 this.source("json", function(theme) {
 					var dataviz = w.kendo.dataviz;
-					
+
 					if (dataviz && dataviz.ui && dataviz.ui.registerTheme) {
 						dataviz.ui.registerTheme("newTheme", theme);
 					}
@@ -633,6 +634,7 @@
                     });
 
                 $(".ktb-action-source").on(CLICK, proxy(this.showSource, this));
+                $(".ktb-action-save").on(CLICK, proxy(this.saveSource, this));
                 $(".ktb-action-show-import").on(CLICK, proxy(this.showImport, this));
                 $(".ktb-action-show[data-suite]").on(CLICK, proxy(this.showSuite, this));
                 $(".ktb-action-back").on(CLICK, proxy(this.hideOverlay, this));
@@ -665,6 +667,36 @@
                 theme.source(format, function(source) {
                     $("#download-overlay").slideDown()
                         .find("textarea").val(source);
+                });
+            },
+            saveSource: function(e) {
+                e.preventDefault();
+
+                var format = $(e.target).data("format"),
+                    web = format != "string",
+                    theme = this.themes[web ? 0 : 1];
+
+                theme.source(format, function(source){
+                    var filename = $("#save-overlay input[name=filename]");
+                    filename.val(
+                        format == "css" ? "kendo/css/kendo.custom.css"
+                            : format == "less" ? "kendo/css/kendo.custom.less"
+                            : format == "string" ? "kendo/kendo.dataviz-theme.js"
+                            : ""
+                    );
+                    $("#save-overlay").slideDown()
+                        .find("textarea").val(source).end()
+                        .find(".feedback").html("").end()
+                        .find(".ktb-action-dosave").off(CLICK).on(CLICK, function(){
+                            options.saveButton.handler(format, source, filename.val(), function(error, isNew){
+                                var feedback = $("#save-overlay .feedback");
+                                if (error) {
+                                    feedback.html("<b>ERROR: " + error + "</b>");
+                                } else {
+                                    feedback.html("<b>Theme was saved " + (isNew ? "(new file)" : "(overwritten)") + "</b>");
+                                }
+                            });
+                        });
                 });
             },
             showImport: function(e) {
@@ -800,6 +832,16 @@
                     }) +
 
                     view({
+                        id: "save-overlay",
+                        overlay: true,
+                        toolbar: button({ action: "back", text: "Back" }),
+                        content: ("<p>Save the custom theme in your project.  Enter the file name.  It will be overwritten if it exists!</p>" +
+                                  "<input style='width: 100%' name='filename' /><br />" +
+                                  button({ action: "dosave", text: "Save!" }) + " <span class='feedback'></span><br />" +
+                                  "<textarea readonly style='height: 70%; margin-top: 10px'></textarea>")
+                    }) +
+
+                    view({
                         id: "import-overlay",
                         overlay: true,
                         toolbar: button({ action: "back", text: "Back" }) + button({ action: "import", text: "Import" }),
@@ -809,8 +851,8 @@
                     view({
                         data: { suite: "web" },
                         toolbar: button({ action: "back-to-suites", text: "Back" }) +
-                                 button({ action: "source", data: { format: "css" }, text: "Get CSS..." }) +
-                                 button({ action: "source", data: { format: "less" }, text: "Get LESS..." }) +
+                                 button({ action: options.saveButton ? "save" : "source", data: { format: "css" }, text: "Get CSS..." }) +
+                                 button({ action: options.saveButton ? "save" : "source", data: { format: "less" }, text: "Get LESS..." }) +
                                  button({ action: "show-import", text: "Import..." }),
                         content: "<ul class='stylable-elements'>" +
                                     map(webConstantsHierarchy || {}, function(section, title) {
@@ -828,7 +870,7 @@
                     view({
                         data: { suite: "dataviz" },
                         toolbar: button({ action: "back-to-suites", text: "Back" }) +
-                                 button({ action: "source", data: { format: "string" }, text: "Get JSON..." }) +
+                                 button({ action: options.saveButton ? "save" : "source", data: { format: "string" }, text: "Get JSON..." }) +
                                  button({ action: "show-import", text: "Import..." }),
                         content: "<ul class='stylable-elements'>" +
                                     map(datavizConstantsHierarchy || {}, function(section, title) {
