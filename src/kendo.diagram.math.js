@@ -665,10 +665,10 @@ kendo_module({
      * Represents a collection of key-value pairs that are organized based on the hash code of the key.
      * _buckets[hashId] = {key: key, value:...}
      * Important: do not use the standard Array access method, use the get/set methods instead.
+     * See http://en.wikipedia.org/wiki/Hash_table
      */
     var HashTable = kendo.Class.extend({
         init: function () {
-
             this._buckets = [];
             this.length = 0;
         },
@@ -694,6 +694,7 @@ kendo_module({
             }
             return null;
         },
+
         /**
          * Set the key-value pair.
          * @param key The key of the entry.
@@ -702,6 +703,7 @@ kendo_module({
         set: function (key, value) {
             this.add(key, value);
         },
+
         /**
          * Determines whether the HashTable contains a specific key.
          */
@@ -723,21 +725,6 @@ kendo_module({
         },
 
         /**
-         * Returns the hashes of the buckets.
-         * @returns {Array}
-         * @private
-         */
-        _hashes: function () {
-            var hashes = [];
-            for (var hash in this._buckets) {
-                if (this._buckets.hasOwnProperty(hash)) {
-                    hashes.push(hash);
-                }
-            }
-            return hashes;
-        },
-
-        /**
          * Foreach with an iterator working on the key-value pairs.
          * @param func
          */
@@ -751,10 +738,42 @@ kendo_module({
                 }
                 func(bucket);
             }
-
         },
 
-        _bucketExists: function (key) {
+        /**
+         * Returns a (shallow) clone of the current HashTable.
+         * @returns {HashTable}
+         */
+        clone: function(){
+            var ht = new HashTable();
+            var hashes = this._hashes();
+            for (var i = 0, len = hashes.length; i < len; i++) {
+                var hash = hashes[i];
+                var bucket = this._buckets[hash];
+                if (isUndefined(bucket)) {
+                    continue;
+                }
+                ht.add(bucket.key,bucket.value);
+            }
+            return ht;
+        },
+
+        /**
+         * Returns the hashes of the buckets.
+         * @returns {Array}
+         * @private
+         */
+        _hashes: function() {
+            var hashes = [];
+            for (var hash in this._buckets) {
+                if (this._buckets.hasOwnProperty(hash)) {
+                    hashes.push(hash);
+                }
+            }
+            return hashes;
+        },
+
+        _bucketExists: function(key) {
             var hashId = this._hash(key);
             return isDefined(this._buckets[hashId]);
         },
@@ -764,7 +783,7 @@ kendo_module({
          * be created and returned.
          * A createGetBucket is a literal object of the form {key: key, ...}.
          */
-        _createGetBucket: function (key) {
+        _createGetBucket: function(key) {
             var hashId = this._hash(key);
             var bucket = this._buckets[hashId];
             if (isUndefined(bucket)) {
@@ -778,7 +797,7 @@ kendo_module({
         /**
          * Hashing of the given key.
          */
-        _hash: function (key) {
+        _hash: function(key) {
             if (isNumber(key)) {
                 return key & key;
             }
@@ -1023,13 +1042,32 @@ kendo_module({
         add: function (item) {
             var entry = this._hashTable.get(item);
             if (entry == null) {
-                this._hashTable.add(item);
-                this._hashTable.get(item).value = item;
+                this._hashTable.add(item, item);
                 this.length++;
                 this.trigger('changed');
             }
         },
 
+        get: function (item) {
+            if(this.contains(item))
+            return this._hashTable.get(item).value;
+            else
+            return null;
+        },
+
+        /**
+         * Returns the hash of the item.
+         * @param item
+         * @returns {*}
+         */
+        hash : function (item) {
+             return this._hashTable._hash(item);
+        }   ,
+
+        /**
+         * Removes the given item from the set. No exception is thrown if the item is not in the Set.
+         * @param item
+         */
         remove: function (item) {
             if (this.contains(item)) {
                 this._hashTable.remove(item);

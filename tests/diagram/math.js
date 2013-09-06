@@ -477,6 +477,24 @@ test('Basics', function () {
     ht.forEach(acc);
     ok(vals.length == 10, "Accumulation of ids.");
 
+    ht = new HashTable();
+    for (var i = 0; i < 10; i++) {
+        ht.add("k"+i, "v"+i);
+    }
+    equal(ht.length,10);
+    ht.remove("m");
+    equal(ht.length, 10);
+    ht.remove("k5");
+    equal(ht.length, 9);
+    ht.set("k5", "Telerik");
+    var telerik = ht.get("k5");
+    equal(telerik.value,"Telerik");
+    var clone = ht.clone();
+    equal(clone.length,10);
+    var found = clone.get("k3");
+    ok(found!=null && found.value=="v3");
+    ok(clone.get("nope")==null);
+    ok(clone.get("k5").value=="Telerik");
 });
 
 /*-----------Dictionary tests------------------------------------*/
@@ -595,6 +613,9 @@ test('Add unique', function () {
         sum += d.value;
     });
     equal(sum, 150);
+    set.add("whatever");
+    equal(set.get("whatever"), "whatever");
+    ok(set.hash({brand:"Ford", age: 13})!=null);
 });
 
 /*-----------Graph structure tests------------------------------------*/

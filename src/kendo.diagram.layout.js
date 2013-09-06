@@ -7,7 +7,6 @@ kendo_module({
 (function ($, undefined) {
     var kendo = window.kendo,
         diagram = kendo.diagram,
-
         Graph = kendo.diagram.Graph,
         Node = kendo.diagram.Node,
         Link = kendo.diagram.Link,
@@ -20,6 +19,172 @@ kendo_module({
         Queue = kendo.diagram.Queue,
         Set = kendo.diagram.Set,
         Point = dataviz.Point2D;
+
+    /**
+     * Base class for layout algorithms.
+     * @type {*}
+     */
+    var LayoutBase = kendo.Class.extend({
+        defaultOptions: null,
+        init: function () {
+            this.defaultOptions = {
+                /**
+                 * Force-directed option: whether the motion of the nodes should be limited by the boundaries of the diagram surface.
+                 */
+                limitToView: false,
+                /**
+                 * Force-directed option: the amount of friction applied to the motion of the nodes.
+                 */
+                friction: 0.9,
+
+                requiresSimpleGraph: true,
+                nodeDistance: 50,
+                iterations: 300,
+                treeLayoutType: kendo.diagram.TreeLayoutType.TreeDown,
+                horizontalSeparation: 90,
+                verticalSeparation: 50,
+                underneathVerticalTopOffset: 15,
+                underneathHorizontalOffset: 15,
+                underneathVerticalSeparation: 15,
+                radialSeparation: 150,
+                radialFirstLevelSeparation: 200,
+                componentsGridWidth: 5000, // TODO: default should be 800
+                totalMargin: new Size(50, 50),
+                componentMargin: new Size(20, 20),
+                keepComponentsInOneRadialLayout: false,
+                animateTransitions: false,
+                startRadialAngle: 0,
+                roots: null,
+                layerDistance: 25,
+                layeredLayoutType: kendo.diagram.LayeredLayoutType.Right,
+                siftingRounds: 2,
+                keepGroupLayout: false,
+                endRadialAngle: 2 * Math.PI,
+                // TODO: ensure to change this to false when containers are around
+                ignoreContainers: true,
+                layoutContainerChildren: false,
+                ignoreInvisible: true
+            };
+        },
+
+        /**
+         * Organizes the components in a grid.
+         * @param components
+         */
+        gridLayoutComponents: function (components) {
+            if (components == null) {
+                throw "No components supplied.";
+            }
+
+            // calculate and cache the bounds of the components
+            components.forEach(function (c) {
+                c.calcBounds();
+            })
+
+            // order by decreasing width
+            components.sort(function (a, b) {
+                return b.bounds.width - a.bounds.width;
+            })
+
+            var maxWidth = this.options.componentsGridWidth,
+                offsetX = this.options.componentMargin.width,
+                offsetY = this.options.componentMargin.height,
+                height = 0,
+                startX = this.options.totalMargin.width,
+                startY = this.options.totalMargin.height,
+                x = startX,
+                y = startY;
+            while (components.length > 0) {
+                if (x >= maxWidth) {
+                    // start a new row
+                    x = startX;
+                    y += height + offsetY;
+                    // reset the row height
+                    height = 0;
+                }
+                var component = components.pop();
+                this.moveToOffset(component, new Point(x, y));
+
+                for (var j = 0; j < component.nodes.length; j++) {
+                    var node = component.nodes[j];
+                    if (node.associatedShape) {// not virtual
+                        var shape = node.associatedShape;
+                        shape.bounds(new Rect(node.x, node.y, node.width, node.height));
+                    }
+                }
+
+                var boundingRect = component.bounds;
+                var currentHeight = boundingRect.height;
+                if (currentHeight <= 0 || isNaN(currentHeight)) {
+                    currentHeight = 0;
+                }
+                var currentWidth = boundingRect.width;
+                if (currentWidth <= 0 || isNaN(currentWidth)) {
+                    currentWidth = 0;
+                }
+
+                if (currentHeight >= height) {
+                    height = currentHeight;
+                }
+                x += currentWidth + offsetX;
+            }
+
+        },
+
+        moveToOffset: function (component, p) {
+            var bounds = component.bounds;
+            var deltax = p.x - bounds.x;
+            var deltay = p.y - bounds.y;
+
+            for (var i = 0, len = component.nodes.length; i < len; i++) {
+                var node = component.nodes[i];
+                var nodeBounds = node.bounds();
+                if (nodeBounds == Rect.Empty) {
+                    nodeBounds = new Rect(0, 0, 0, 0);
+                }
+                nodeBounds.x += deltax;
+                nodeBounds.y += deltay;
+                node.bounds(nodeBounds);
+            }
+            for (var i = 0; i < component.links.length; i++) {
+                var link = component.links[i];
+                if (link.points != null) {
+                    var newpoints = [];
+                    var points = link.points;
+                    for (var j = 0; j < points.length; j++) {
+                        var p = points[j];
+                        p.x += deltax;
+                        p.y += deltay;
+                        newpoints.push(p);
+                    }
+                    link.points = newpoints;
+                }
+            }
+            this.currentHorizontalOffset += bounds.width + this.options.totalMargin.width;
+            return new Point(deltax, deltay);
+        },
+
+        transferOptions: function (options) {
+
+            // Size options lead to stackoverflow and need special handling
+
+            this.options = this.defaultOptions;
+            if (isUndefined(options)) {
+                return;
+            }
+            if (options) {
+                if (options["totalMargin"]) {
+                    this.options["totalMargin"] = options["totalMargin"];
+                    delete options["totalMargin"];
+                }
+                if (options["componentMargin"]) {
+                    this.options["componentMargin"] = options["componentMargin"];
+                    delete options["componentMargin"];
+                }
+            }
+            this.options = kendo.deepExtend(this.options, options || {})
+        }
+    })
 
     /**
      * The data bucket a hypertree holds in its nodes.     *
@@ -507,165 +672,6 @@ kendo_module({
         }
 
 
-    })
-
-    var LayoutBase = kendo.Class.extend({
-        defaultOptions: null,
-        init: function () {
-            this.defaultOptions = {
-                /**
-                 * Whether the motion of the nodes should be limited by the boundaries of the diagram surface.
-                 */
-                limitToView: false,
-                friction: 0.9,
-                margins: 10,
-                requiresSimpleGraph: true,
-                nodeDistance: 50,
-                iterations: 300,
-                keepGroupLayout: false,
-                treeLayoutType: kendo.diagram.TreeLayoutType.TreeDown,
-                horizontalSeparation: 90,
-                verticalSeparation: 50,
-                underneathVerticalTopOffset: 15,
-                underneathHorizontalOffset: 15,
-                underneathVerticalSeparation: 15,
-                radialSeparation: 150,
-                radialFirstLevelSeparation: 200,
-                componentsGridWidth: 5000, // TODO: default should be 800
-                totalMargin: new Size(50, 50),
-                componentMargin: new Size(20, 20),
-                keepComponentsInOneRadialLayout: false,
-                animateTransitions: false,
-                startRadialAngle: 0,
-                roots: null,
-                layerDistance: 25,
-                layeredLayoutType: kendo.diagram.LayeredLayoutType.Right,
-                siftingRounds: 2,
-                keepGroupLayout: false,
-                endRadialAngle: 2 * Math.PI,
-                // TODO: ensure to change this to false when containers are around
-                ignoreContainers: true,
-                layoutContainerChildren: false,
-                ignoreInvisible: true
-            };
-        },
-        /**
-         * Organizes the components in a grid.
-         * @param components
-         */
-        gridLayoutComponents: function (components) {
-            if (components == null) {
-                throw "No components supplied.";
-            }
-
-            // calculate and cache the bounds of the components
-            components.forEach(function (c) {
-                c.calcBounds();
-            })
-
-            // order by decreasing width
-            components.sort(function (a, b) {
-                return b.bounds.width - a.bounds.width;
-            })
-
-            var maxWidth = this.options.componentsGridWidth,
-                offsetX = this.options.componentMargin.width,
-                offsetY = this.options.componentMargin.height,
-                height = 0,
-                startX = this.options.totalMargin.width,
-                startY = this.options.totalMargin.height,
-                x = startX,
-                y = startY;
-            while (components.length > 0) {
-                if (x >= maxWidth) {
-                    // start a new row
-                    x = startX;
-                    y += height + offsetY;
-                    // reset the row height
-                    height = 0;
-                }
-                var component = components.pop();
-                this.moveToOffset(component, new Point(x, y));
-
-                for (var j = 0; j < component.nodes.length; j++) {
-                    var node = component.nodes[j];
-                    if (node.associatedShape) {// not virtual
-                        var shape = node.associatedShape;
-                        shape.bounds(new Rect(node.x, node.y, node.width, node.height));
-                    }
-                }
-
-                var boundingRect = component.bounds;
-                var currentHeight = boundingRect.height;
-                if (currentHeight <= 0 || isNaN(currentHeight)) {
-                    currentHeight = 0;
-                }
-                var currentWidth = boundingRect.width;
-                if (currentWidth <= 0 || isNaN(currentWidth)) {
-                    currentWidth = 0;
-                }
-
-                if (currentHeight >= height) {
-                    height = currentHeight;
-                }
-                x += currentWidth + offsetX;
-            }
-
-        },
-
-        moveToOffset: function (component, p) {
-            var bounds = component.bounds;
-            var deltax = p.x - bounds.x;
-            var deltay = p.y - bounds.y;
-
-            for (var i = 0, len = component.nodes.length; i < len; i++) {
-                var node = component.nodes[i];
-                var nodeBounds = node.bounds();
-                if (nodeBounds == Rect.Empty) {
-                    nodeBounds = new Rect(0, 0, 0, 0);
-                }
-                nodeBounds.x += deltax;
-                nodeBounds.y += deltay;
-                node.bounds(nodeBounds);
-            }
-            for (var i = 0; i < component.links.length; i++) {
-                var link = component.links[i];
-                if (link.points != null) {
-                    var newpoints = [];
-                    var points = link.points;
-                    for (var j = 0; j < points.length; j++) {
-                        var p = points[j];
-                        p.x += deltax;
-                        p.y += deltay;
-                        newpoints.push(p);
-                    }
-                    link.points = newpoints;
-                }
-            }
-            this.currentHorizontalOffset += bounds.width + this.options.totalMargin.width;
-            return new Point(deltax, deltay);
-        },
-
-        transferOptions: function (options) {
-
-            // Size options lead to stackoverflow and need special handling
-
-            this.options = this.defaultOptions;
-            if (isUndefined(options)) {
-                return;
-            }
-            if (options) {
-                if (options["totalMargin"]) {
-                    this.options["totalMargin"] = options["totalMargin"];
-                    delete options["totalMargin"];
-                }
-                if (options["componentMargin"]) {
-                    this.options["componentMargin"] = options["componentMargin"];
-                    delete options["componentMargin"];
-                }
-            }
-            this.options = kendo.deepExtend(this.options, options || {})
-        }
     })
 
     /**
@@ -2015,7 +2021,8 @@ kendo_module({
                 p.prepend(new diagram.Point(sb.x, sb.y));
                 var eb = link.target.associatedShape.bounds();
                 p.append(new diagram.Point(eb.x, eb.y));
-                link.associatedConnection.points(p);
+                // todo: when multipoint connections are ready this needs to be plugged in again
+                //link.associatedConnection.points(p);
             }
         },
 
@@ -2041,76 +2048,54 @@ kendo_module({
                 node.gridPosition = 0;
             }
         },
-
-        layoutGraph: function (graph, options) {
-            if (isDefined(options)) {
-                this.transferOptions(options);
-            }
-            this.graph = graph;
-            graph.setItemIndices();
-            var reversedEdges = graph.makeAcyclic();
-
-            this._initRuntimeProperties();
-
-            // initialize links
+        _prepare: function (graph, options) {
             for (var l = 0; l < graph.links.length; l++) {
-                var link = graph.links[l];
-                link.dummificationLevel = 0;
+                // of many dummies have been inserted to make things work
+                graph.links[l].depthOfDumminess = 0;
             }
 
-            // place all source nodes on the first layer
-            var sinks = [];
+
             var current = [];
-            var layering = new Dictionary();
+
+            // defines a mapping of a node to the layer index
+            var layerMap = new Dictionary();
 
             graph.nodes.forEach(function (node) {
                 if (node.incoming.length == 0) {
-                    sinks.push(node);
-                    layering.set(node, 0);
+                    layerMap.set(node, 0);
                     current.push(node);
                 }
             });
 
             while (current.length > 0) {
                 var next = current.shift();
-
                 next.outgoing.forEach(function (link) {
-                    var dest = link.target;
+                    var target = link.target;
 
-                    if (!layering.containsKey(dest)) {
-                        layering.set(dest, layering.get(next) + 1);
-                    }
-                    else {
-                        layering.set(dest, Math.max(layering.get(dest), layering.get(next) + 1));
+                    if (layerMap.containsKey(target)) {
+                        layerMap.set(target, Math.max(layerMap.get(next) + 1, layerMap.get(target)));
+                    } else {
+                        layerMap.set(target, layerMap.get(next) + 1);
                     }
 
-                    if (!current.contains(dest)) {
-                        current.push(dest);
+                    if (!current.contains(target)) {
+                        current.push(target);
                     }
                 });
             }
 
+            // the node count in the map defines how many layers w'll need
             var layerCount = 0;
-            layering.forEachValue(function (nodeLayer) {
-                layerCount = Math.max(layerCount, nodeLayer);
+            layerMap.forEachValue(function (nodecount) {
+                layerCount = Math.max(layerCount, nodecount);
             });
 
-            // sort the nodes by their layer in descending order
             var sortedNodes = [];
-            sortedNodes.addRange(layering.keys());
+            sortedNodes.addRange(layerMap.keys());
             sortedNodes.sort(function (o1, o2) {
-                var o1layer = layering.get(o1);
-                var o2layer = layering.get(o2);
-
-                if (o1layer < o2layer) {
-                    return 1;
-                }
-
-                if (o1layer > o2layer) {
-                    return -1;
-                }
-
-                return 0;
+                var o1layer = layerMap.get(o1);
+                var o2layer = layerMap.get(o2);
+                return Math.sign(o2layer - o1layer);
             });
 
             for (var n = 0; n < sortedNodes.length; ++n) {
@@ -2123,11 +2108,11 @@ kendo_module({
 
                 for (var l = 0; l < node.outgoing.length; ++l) {
                     var link = node.outgoing[l];
-                    minLayer = Math.min(minLayer, layering.get(link.target));
+                    minLayer = Math.min(minLayer, layerMap.get(link.target));
                 }
 
                 if (minLayer > 1) {
-                    layering.set(node, minLayer - 1);
+                    layerMap.set(node, minLayer - 1);
                 }
             }
 
@@ -2136,7 +2121,7 @@ kendo_module({
                 this.layers.push([]);
             }
 
-            layering.forEach(function (node, layer) {
+            layerMap.forEach(function (node, layer) {
                 node.layer = layer;
                 this.layers[layer].push(node);
             }, this);
@@ -2148,26 +2133,44 @@ kendo_module({
                     layer[i].gridPosition = i;
                 }
             }
+        },
 
-            // add dummy nodes for all links which cross one or more layers
-            this.insertDummies();
+        /**
+         * Performs the layout of a single component.
+         */
+        layoutGraph: function (graph, options) {
+            if (isUndefined(graph)) {
+                throw "No graph given or graph analysis of the diagram failed.";
+            }
+            if (isDefined(options)) {
+                this.transferOptions(options);
+            }
+            this.graph = graph;
 
-            // reduce crossings
-            this.optimizeCrossings();
+            // sets unique indices on the nodes
+            graph.setItemIndices();
 
-            // further reduce crossings through pair swap
-            this.swapPairs();
+            // ensures no cycles present for this layout
+            var reversedEdges = graph.makeAcyclic();
 
-            // arrange nodes
+            // define the runtime props being used by the layout algorithm
+            this._initRuntimeProperties();
+
+            this._prepare(graph, options);
+                        
+            this._dummify();
+            
+            this._optimizeCrossings();
+            
+            this._swapPairs();
+            
             this.arrangeNodes();
-
-            // assign vertex positions within layers
-            this.assignCoordinates();
-
-            // reverse dummification
-            this.removeDummies();
-
-            // reverse cycle removal
+            
+            this._moveThingsAround();
+            
+            this._dedummify();
+            
+            // rereverse the links which were switched earlier 
             reversedEdges.forEach(function (e) {
                 if (e.points) {
                     e.points.reverse();
@@ -2373,7 +2376,7 @@ kendo_module({
             // meaning that the visiting of the layers goes in the natural order of increasing layer index
             return this.options.layeredLayoutType == kendo.diagram.LayeredLayoutType.Right || this.options.layeredLayoutType == kendo.diagram.LayeredLayoutType.Down;
         },
-        assignCoordinates: function () {
+        _moveThingsAround: function () {
             // sort the layers by their grid position
             for (var l = 0; l < this.layers.length; ++l) {
                 var layer = this.layers[l];
@@ -2573,7 +2576,7 @@ kendo_module({
                 }
             }, this);
 
-            var depth = this.options.margins;
+
             var fromLayerIndex = this._isIncreasingLayout() ? 0 : this.layers.length - 1;
             var reachedFinalLayerIndex = function (k, ctx) {
                 if (ctx._isIncreasingLayout()) {
@@ -2584,36 +2587,44 @@ kendo_module({
                     return k >= 0;
                 }
             }
-            var layerIncrement = this._isIncreasingLayout() ? +1 : -1;
-            for (var i = fromLayerIndex; reachedFinalLayerIndex(i, this); i += layerIncrement) {
-                var layer = this.layers[i];
+            var layerIncrement = this._isIncreasingLayout() ? +1 : -1,
+                offset = 0;
 
-                // calculate layer height
+            /**
+             * Calcs the max height of the given layer.
+             */
+            function maximumHeight(layer, ctx) {
                 var height = Number.MIN_VALUE;
                 for (var n = 0; n < layer.length; ++n) {
                     var node = layer[n];
-                    if (this._isVerticalLayout()) {
+                    if (ctx._isVerticalLayout()) {
                         height = Math.max(height, node.height);
                     }
                     else {
                         height = Math.max(height, node.width);
                     }
                 }
+                return height;
+            }
+
+            for (var i = fromLayerIndex; reachedFinalLayerIndex(i, this); i += layerIncrement) {
+                var layer = this.layers[i];
+                var height = maximumHeight(layer, this);
 
                 for (var n = 0; n < layer.length; ++n) {
                     var node = layer[n];
                     var gridPosition = node.gridPosition;
                     if (this._isVerticalLayout()) {
                         node.x = x.get(node);
-                        node.y = depth + height / 2;
+                        node.y = offset + height / 2;
                     }
                     else {
-                        node.x = depth + height / 2;
+                        node.x = offset + height / 2;
                         node.y = x.get(node);
                     }
                 }
 
-                depth += this.options.layerDistance + height;
+                offset += this.options.layerDistance + height;
             }
         },
 
@@ -3066,7 +3077,7 @@ kendo_module({
         /// <summary>
         /// Inserts dummy nodes to break long links.
         /// </summary>
-        insertDummies: function () {
+        _dummify: function () {
             this.linkToNodeMap = new Dictionary();
             this.nodeToLinkMap = new Dictionary();
 
@@ -3126,7 +3137,7 @@ kendo_module({
                         }
 
                         var newLink = new Link(p, newNode);
-                        newLink.dummificationLevel = 0;
+                        newLink.depthOfDumminess = 0;
                         p = newNode;
 
                         // add the new node and the new link to the graph
@@ -3139,7 +3150,7 @@ kendo_module({
 
                     // set the origin of the real arrow to the last dummy
                     link.changeSource(p);
-                    link.dummificationLevel = oLayer - dLayer - 1;
+                    link.depthOfDumminess = oLayer - dLayer - 1;
                 }
 
                 if (oLayer - dLayer < -1) {
@@ -3185,7 +3196,7 @@ kendo_module({
                         }
 
                         var newLink = new Link(p, newNode);
-                        newLink.dummificationLevel = 0;
+                        newLink.depthOfDumminess = 0;
                         p = newNode;
 
                         // add the new node and the new link to the graph
@@ -3198,7 +3209,7 @@ kendo_module({
 
                     // Set the origin of the real arrow to the last dummy
                     link.changeSource(p);
-                    link.dummificationLevel = dLayer - oLayer - 1;
+                    link.depthOfDumminess = dLayer - oLayer - 1;
                 }
             }
         },
@@ -3207,14 +3218,14 @@ kendo_module({
         /// Removes the dummy nodes inserted earlier to break long links.
         /// </summary>
         /// <remarks>The virtual nodes are effectively turned into intermediate connection points.</remarks>
-        removeDummies: function () {
+        _dedummify: function () {
             var dedum = true;
             while (dedum) {
                 dedum = false;
 
                 for (var l = 0; l < this.graph.links.length; l++) {
                     var link = this.graph.links[l];
-                    if (link.dummificationLevel == 0) {
+                    if (link.depthOfDumminess == 0) {
                         continue;
                     }
 
@@ -3224,10 +3235,10 @@ kendo_module({
                     points.prepend({ x: link.target.x, y: link.target.y });
                     points.prepend({ x: link.source.x, y: link.source.y });
 
-                    // removeDummies the link
+                    // _dedummify the link
                     var temp = link;
-                    var dummificationLevel = link.dummificationLevel;
-                    for (var d = 0; d < dummificationLevel; d++) {
+                    var depthOfDumminess = link.depthOfDumminess;
+                    for (var d = 0; d < depthOfDumminess; d++) {
                         var node = temp.source;
                         var prevLink = node.incoming[0];
 
@@ -3240,7 +3251,7 @@ kendo_module({
                     link.changeSource(temp.source);
 
                     // reset dummification flag
-                    link.dummificationLevel = 0;
+                    link.depthOfDumminess = 0;
 
                     // set link points
                     link.points = points;
@@ -3257,7 +3268,7 @@ kendo_module({
         /// <summary>
         /// Optimizes/reduces the crossings between the layers by turning the crossing problem into a (combinatorial) number ordering problem.
         /// </summary>
-        optimizeCrossings: function () {
+        _optimizeCrossings: function () {
             var moves = -1;
             var maxIterations = 3;
             var iter = 0;
@@ -3452,7 +3463,7 @@ kendo_module({
         /// </summary>
         /// <param name="layerIndex">Index of the layer.</param>
         /// <param name="n">The Nth node in the layer.</param>
-        swapPairs: function () {
+        _swapPairs: function () {
             var maxIterations = this.options.siftingRounds;
             var iter = 0;
 
