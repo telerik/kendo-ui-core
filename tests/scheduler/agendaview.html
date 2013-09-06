@@ -570,6 +570,44 @@
 
                 ok(editable.delete === false);
             });
+
+            test("agenda renders rows with ARIA role", function() {
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+
+                var event = new Event({
+                    start: new Date("2013/06/06 00:00"),
+                    end: new Date("2013/06/06 01:00"),
+                    title: "",
+                    recurrenceRule: "FREQ=DAILY"
+                });
+
+                agenda.render([ event ]);
+
+                var table = agenda.content.find(".k-scheduler-table");
+
+                var rows = table.find("tr");
+
+                equal(rows.filter("[role=row]").length, rows.length);
+            });
+
+            test("agenda renders cells with ARIA attribute", function() {
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+
+                var event = new Event({
+                    start: new Date("2013/06/06 00:00"),
+                    end: new Date("2013/06/06 01:00"),
+                    title: "",
+                    recurrenceRule: "FREQ=DAILY"
+                });
+
+                agenda.render([ event ]);
+
+                var table = agenda.content.find(".k-scheduler-table");
+
+                var rows = table.find("tr");
+
+                equal(rows.filter("[aria-selected=false]").length, rows.length);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
