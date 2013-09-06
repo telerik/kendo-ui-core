@@ -27,7 +27,9 @@ kendo_module({
             }
 
             this.title = options.title;
-            this.name = options.name;
+
+            this.name = "agenda";
+
             this._eventTemplate = kendo.template(options.eventTemplate);
             this._dateTemplate = kendo.template(options.eventDateTemplate);
             this._groupTemplate = kendo.template(options.eventGroupTemplate);

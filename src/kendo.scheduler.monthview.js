@@ -64,7 +64,9 @@ kendo_module({
 
             SchedulerView.fn.init.call(that, element, options);
 
-            that.title = that.name = that.options.title;
+            that.title = that.options.title;
+
+            that.name = "month";
 
             that._templates();
 
