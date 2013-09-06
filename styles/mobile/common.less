@@ -1075,13 +1075,18 @@
 
 .km-root .k-slider
 {
-    width: 50%;
-    height: .6em;
     line-height: .6em;
     position: relative;
     display: inline-block;
     vertical-align: middle;
     text-align: center;
+}
+
+.km-root .k-slider-horizontal
+{
+    width: 50%;
+    height: .6em;
+    line-height: .6em;
 }
 
 .km-list .k-slider
@@ -1095,13 +1100,17 @@
 .km-root .k-slider-track
 {
     left: 1em !important;
-    width: auto !important;
     right: 1em;
     height: 100%;
     display: block;
     position: absolute;
     border: .5em solid transparent;
     border-width: .5em 0;
+}
+
+.km-root .k-slider-horizontal .k-slider-track
+{
+    width: auto !important;
 }
 
 .km-root .km-pane .k-slider-track
@@ -1117,7 +1126,7 @@
     .box-shadow(inset 0 0 1px rgba(0,0,0,.3));
 }
 
-.km-root .k-slider-selection
+.km-root .k-slider-horizontal .k-slider-selection
 {
     top: 0;
     height: 100%;
@@ -1131,13 +1140,18 @@
 .km-root .k-slider .k-draghandle
 {
     text-indent: -3333px;
-    top: -.4em;
     left: 0;
     width: 1.2em;
     height: 1.2em;
     display: block;
     position: absolute;
 }
+
+.km-root .k-slider-hortizontal .k-draghandle
+{
+    top: -.4em;
+}
+
 
 .km-root .k-slider-tooltip
 {

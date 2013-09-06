@@ -749,23 +749,39 @@
 
 /* Slider */
 
-.km-wp .k-slider
+.km-wp .k-slider-horizontal
 {
     height: .5em;
     margin: -.65em .35em 0 0;
     width: ~"calc(50% - .7em)";
 }
 
+.km-wp .k-slider-vertical
+{
+    width: .5em;
+}
+
 .km-wp .k-slider .k-draghandle,
 .km-wp .k-slider .k-draghandle:hover
 {
-    top: -.25em;
-    height: 200%;
-    width: .6em;
     border: 0;
     .border-radius(0);
     background: @main-text-dark;
     z-index: 1;
+}
+
+.km-wp .k-slider-horizontal .k-draghandle
+{
+    top: -.25em;
+    height: 200%;
+    width: .6em;
+}
+
+.km-wp .k-slider-vertical .k-draghandle
+{
+    left: -.25em;
+    width: 200%;
+    height: .6em;
 }
 
 .km-wp-light .k-slider .k-draghandle,
@@ -781,6 +797,13 @@
     left: 0 !important;
     right: 0;
     .border-radius(0);
+}
+
+.km-wp .k-slider-vertical .k-slider-track,
+.km-wp .k-slider-vertical .k-slider-selection
+{
+    top: auto;
+    bottom: 0;
 }
 
 .km-wp .k-slider .k-tick,

@@ -778,20 +778,34 @@
 
 /* Slider */
 
-.km-meego .k-slider
+.km-meego .k-slider-horizontal
 {
     height: .4em;
+}
+
+.km-meego .k-slider-vertical
+{
+    width: .4em;
 }
 
 .km-meego .k-slider .k-draghandle,
 .km-meego .k-slider .k-draghandle:hover
 {
-    top: -.4em;
     border: 0;
     background-color: #eee;
     .border-radius(2em);
     .linear-gradient-image(top, rgba(255,255,255,.6), rgba(255,255,255,0));
     .box-shadow(~"inset 0 0 0 1px #ddd, 0 1px 1px rgba(0,0,0,.3)");
+}
+
+.km-meego .k-slider-horizontal .k-draghandle
+{
+    top: -.4em;
+}
+
+.km-meego .k-slider-vertical .k-draghandle
+{
+    left: -.3em;
 }
 
 .km-meego .k-slider-selection
@@ -802,13 +816,17 @@
 
 .km-meego .k-slider-track
 {
-    margin-top: .2em;
     border-width: 1px;
     .linear-gradient-image(top, rgba(0,0,0,.3), rgba(0,0,0,0) 30%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4),
                            top, rgb(219,219,219), rgb(255,255,255));
 }
 
-.km-meego .k-slider-selection
+.km-meego .k-slider-horizontal .k-slider-track
+{
+    margin-top: .2em;
+}
+
+.km-meego .k-slider-horizontal .k-slider-selection
 {
     margin-left: 0;
 }
