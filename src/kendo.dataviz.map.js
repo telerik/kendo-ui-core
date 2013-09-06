@@ -51,30 +51,31 @@ kendo_module({
 
     };
 
-    var WGS84 = {
-        A: 6378137,
-        B: 6356752.314245179,
-        E: 0.08181919084262157
-    };
+    var WGS84Datum = {
+        a: 6378137,                 // Semi-major radius
+        b: 6356752.314245179,       // Semi-minor radius
+        f: 0.0033528106647474805,   // Flattening
+        e: 0.08181919084262149      // Eccentricity
+    }
 
     var Mercator = {
         MAX_LONG: 180,
         MAX_LAT: 85.0840590501,
 
-        DATUM: WGS84,
+        DATUM: WGS84Datum,
 
         project: function(geo) {
             var proj = this,
                 d = proj.DATUM,
                 lat = limit(geo.lat, -proj.MAX_LAT, proj.MAX_LAT),
                 long = limit(geo.long, -proj.MAX_LONG, proj.MAX_LONG),
-                x = long * DEG_TO_RAD * d.A,
+                x = long * DEG_TO_RAD * d.a,
                 y = lat * DEG_TO_RAD,
-                con = d.E * math.sin(y);
+                con = d.e * math.sin(y);
 
-            con = math.pow((1 - con) / (1 + con), d.E / 2);
+            con = math.pow((1 - con) / (1 + con), d.e / 2);
             var ts = math.tan((PI / 2 - y) / 2) / con;
-            y = -d.A * math.log(ts);
+            y = -d.a * math.log(ts);
 
             return new Point(x, y);
         }
