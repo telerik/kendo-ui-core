@@ -29,6 +29,8 @@ kendo_module({
         defaultOptions: null,
         init: function () {
             this.defaultOptions = {
+                roots: null,
+                //-------------------------------------------------------------------
                 /**
                  * Force-directed option: whether the motion of the nodes should be limited by the boundaries of the diagram surface.
                  */
@@ -37,34 +39,96 @@ kendo_module({
                  * Force-directed option: the amount of friction applied to the motion of the nodes.
                  */
                 friction: 0.9,
-
-                requiresSimpleGraph: true,
+                /**
+                 * Force-directed option: the optimal distance between nodes (minimum energy).
+                 */
                 nodeDistance: 50,
+                /**
+                 * Force-directed option: the number of time things are being calculated.
+                 */
                 iterations: 300,
+                //-------------------------------------------------------------------
+                /**
+                 * Tree option: the subtype of the tree layout algorithm.
+                 */
                 treeLayoutType: kendo.diagram.TreeLayoutType.TreeDown,
+                /**
+                 * Tree option: the separation in one direction (depends on the subtype what direction this is).
+                 */
                 horizontalSeparation: 90,
+                /**
+                 * Tree option: the separation in the complementary direction (depends on the subtype what direction this is).
+                 */
                 verticalSeparation: 50,
+
+                //-------------------------------------------------------------------
+                /**
+                 * Tip-over tree option: children-to-parent vertical distance.
+                 */
                 underneathVerticalTopOffset: 15,
+                /**
+                 * Tip-over tree option: children-to-parent horizontal distance.
+                 */
                 underneathHorizontalOffset: 15,
+                /**
+                 * Tip-over tree option: leaf-to-next-branch vertical distance.
+                 */
                 underneathVerticalSeparation: 15,
-                radialSeparation: 150,
-                radialFirstLevelSeparation: 200,
-                componentsGridWidth: 5000, // TODO: default should be 800
+                //-------------------------------------------------------------------
+                /**
+                 * General Grid option: the width of the grid in which components are arranged. Beyond this width a
+                 * component will be on the next row.
+                 */
+                componentsGridWidth: 1500,
+                /**
+                 * General Grid option: the margin around the total grid.
+                 */
                 totalMargin: new Size(50, 50),
+                /**
+                 * General Grid option: the padding within a cell of the grid where a single component resides.
+                 */
                 componentMargin: new Size(20, 20),
-                keepComponentsInOneRadialLayout: false,
-                animateTransitions: false,
-                startRadialAngle: 0,
-                roots: null,
-                layerDistance: 25,
+
+                //-------------------------------------------------------------------
+                /**
+                 * Layered option: the separation height/width between the layers.
+                 */
+                layerSeparation: 50,
+                /**
+                 * Layered option: the direction of the layered layout.
+                 */
                 layeredLayoutType: kendo.diagram.LayeredLayoutType.Right,
-                siftingRounds: 2,
-                keepGroupLayout: false,
+                /**
+                 * Layered option: how many rounds of shifting and fine-tuning.
+                 */
+                layeredIterations: 2,
+                /**
+                 * Tree-radial option: the angle at which the layout starts.
+                 */
+                startRadialAngle: 0,
+                /**
+                 * Tree-radial option: the angle at which the layout starts.
+                 */
                 endRadialAngle: 2 * Math.PI,
+                /**
+                 * Tree-radial option: the separation between levels.
+                 */
+                radialSeparation: 150,
+                /**
+                 * Tree-radial option: the separation between the root and the first level.
+                 */
+                radialFirstLevelSeparation: 200,
+                /**
+                 * Tree-radial option: whether a virtual roots bing the components in one radial layout.
+                 */
+                keepComponentsInOneRadialLayout: false,
+                //-------------------------------------------------------------------
+
                 // TODO: ensure to change this to false when containers are around
                 ignoreContainers: true,
                 layoutContainerChildren: false,
-                ignoreInvisible: true
+                ignoreInvisible: true     ,
+                animateTransitions: false
             };
         },
 
@@ -2614,7 +2678,6 @@ kendo_module({
 
                 for (var n = 0; n < layer.length; ++n) {
                     var node = layer[n];
-                    var gridPosition = node.gridPosition;
                     if (this._isVerticalLayout()) {
                         node.x = x.get(node);
                         node.y = offset + height / 2;
@@ -2625,7 +2688,7 @@ kendo_module({
                     }
                 }
 
-                offset += this.options.layerDistance + height;
+                offset += this.options.layerSeparation + height;
             }
         },
 
@@ -3465,7 +3528,7 @@ kendo_module({
         /// <param name="layerIndex">Index of the layer.</param>
         /// <param name="n">The Nth node in the layer.</param>
         _swapPairs: function () {
-            var maxIterations = this.options.siftingRounds;
+            var maxIterations = this.options.layeredIterations;
             var iter = 0;
 
             while (true) {

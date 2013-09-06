@@ -286,6 +286,8 @@ function layout() {
                         TreeLayoutType: kendo.diagram.TreeLayoutType.RadialTree,
                         radialFirstLevelSeparation: 250,
                         radialSeparation: 50,
+                        startRadialAngle: Math.PI / 3,
+                        endRadialAngle: 2*Math.PI/3,
                         roots: [knownRoot]
                     }
             )
@@ -305,7 +307,7 @@ function layout() {
         case  "QLayeredHorizontal":
             diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
                     {
-                        layerDistance: 30,
+                        layerSeparation: 50,
                         nodeDistance: 50,
                         layeredLayoutType: kendo.diagram.LayeredLayoutType.Right
                     });
@@ -313,7 +315,7 @@ function layout() {
         case  "QLayeredVertical":
             diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
                     {
-                        layerDistance: 50,
+                        layerSeparation: 50,
                         nodeDistance: 50,
                         layeredLayoutType: kendo.diagram.LayeredLayoutType.Down
                     });
