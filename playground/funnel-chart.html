@@ -13,42 +13,51 @@
         <script src="../src/kendo.dataviz.vml.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
         <script src="../src/kendo.dataviz.canvas.js"></script>
+        <style>
+            div {
+                width: 200px;
+                height: 300px;
+                float: left;
+            }
+        </style>
     </head>
     <body>
-        <div id="chart"></div>
-        <div id="chart2" style="width:300px;height:300px;"></div>
+        <div id="funnel-equal"></div>
+        <div id="funnel-height"></div>
+        <div id="funnel-area"></div>
         <script>
-            $("#chart").kendoChart({
+            var seriesData = [{
+                value: 60,
+                category: "trials"
+            }, {
+                value: 30,
+                category: "enquiries"
+            }, {
+                value: 10,
+                category: "purchases"
+            }];
+
+            $("#funnel-equal").kendoChart({
                 series: [{
                     type: "funnel",
-                    data: [{
-                        value: 50,
-                        category: "trials"
-                    }, {
-                        value: 30,
-                        category: "enquiries"
-                    }, {
-                        value: 10,
-                        category: "purchases"
-                    }]
+                    data: seriesData
                 }]
             });
-            
-            $("#chart2").kendoChart({
+
+            $("#funnel-height").kendoChart({
                 series: [{
                     type: "funnel",
                     dependOn:"height",
                     neckSize:0.6,
-                    data: [{
-                        value: 110,
-                        category: "trials"
-                    }, {
-                        value: 30,
-                        category: "enquiries"
-                    }, {
-                        value: 10,
-                        category: "purchases"
-                    }]
+                    data: seriesData
+                }]
+            });
+
+            $("#funnel-area").kendoChart({
+                series: [{
+                    type: "funnel",
+                    dependOn:"area",
+                    data: seriesData
                 }]
             });
         </script>

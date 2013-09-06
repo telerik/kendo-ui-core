@@ -164,28 +164,10 @@ kendo_module({
                 i,
                 dependOn = chart.options.dependOn,
                 width = box.width(),
-                neckSize = chart.options.neckSize*width;
+                neckSize = chart.options.neckSize * width;
 
-            if(dependOn=="none"){
-                var offset = 0,
-                //TODO support pixels and string as neckSize
-                narrowSize = (width-neckSize)/(count*2),
-                segmentHeight = box.height() / count,
-                narrowOffset = 0;
-
-                for (i = 0; i < count; i++) {
-                    points = segments[i].points = [];
-                    points.push(new Point2D(box.x1 + narrowOffset, box.y1 + offset));
-                    points.push(new Point2D(box.x1+width - narrowOffset, box.y1 + offset));
-                    points.push(new Point2D(box.x1+width - narrowOffset - narrowSize, box.y1 + offset + segmentHeight));
-                    points.push(new Point2D(box.x1+ narrowOffset + narrowSize,box.y1 + offset + segmentHeight));
-
-                    narrowOffset += narrowSize;
-                    offset += segmentHeight;
-                }
-            }
-
-            else if(dependOn=="height"){
+            if (dependOn === "area") {
+            } else if (dependOn === "height") {
                 var finalNarrow = (width - neckSize)/2,
                 totalHeight = box.height(),
                 height,
@@ -205,6 +187,23 @@ kendo_module({
                     points.push(new Point2D(box.x1+ previousOffset + offset,box.y1 + height + previousHeight));
                     previousOffset += offset;
                     previousHeight += height;
+                }
+            } else {
+                var offset = 0,
+                //TODO support pixels and string as neckSize
+                narrowSize = (width-neckSize)/(count*2),
+                segmentHeight = box.height() / count,
+                narrowOffset = 0;
+
+                for (i = 0; i < count; i++) {
+                    points = segments[i].points = [];
+                    points.push(new Point2D(box.x1 + narrowOffset, box.y1 + offset));
+                    points.push(new Point2D(box.x1+width - narrowOffset, box.y1 + offset));
+                    points.push(new Point2D(box.x1+width - narrowOffset - narrowSize, box.y1 + offset + segmentHeight));
+                    points.push(new Point2D(box.x1+ narrowOffset + narrowSize,box.y1 + offset + segmentHeight));
+
+                    narrowOffset += narrowSize;
+                    offset += segmentHeight;
                 }
             }
         }
