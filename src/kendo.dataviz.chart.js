@@ -2999,10 +2999,9 @@ kendo_module({
 
         addValue: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
-                value = data.valueFields.value,
-                point,
                 categoryPoints = chart.categoryPoints[categoryIx],
-                seriesPoints = chart.seriesPoints[seriesIx];
+                seriesPoints = chart.seriesPoints[seriesIx],
+                point;
 
             if (!categoryPoints) {
                 chart.categoryPoints[categoryIx] = categoryPoints = [];
@@ -3012,7 +3011,7 @@ kendo_module({
                 chart.seriesPoints[seriesIx] = seriesPoints = [];
             }
 
-            chart.updateRange(value, categoryIx, series);
+            chart.updateRange(data.valueFields, categoryIx, series);
 
             point = chart.createPoint(data, category, categoryIx, series, seriesIx);
             if (point) {
@@ -3038,9 +3037,10 @@ kendo_module({
             }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
         },
 
-        updateRange: function(value, categoryIx, series) {
+        updateRange: function(data, categoryIx, series) {
             var chart = this,
                 axisName = series.axis,
+                value = data.value,
                 axisRange = chart.valueAxisRanges[axisName];
 
             if (isFinite(value) && value !== null) {
@@ -3311,8 +3311,9 @@ kendo_module({
             return stackWrap;
         },
 
-        updateRange: function(value, categoryIx, series) {
+        updateRange: function(data, categoryIx, series) {
             var chart = this,
+                value = data.value,
                 isStacked = chart.options.isStacked,
                 totals;
 
@@ -3487,36 +3488,6 @@ kendo_module({
             }
         },
 
-        addValue: function(data, category, categoryIx, series, seriesIx) {
-            var chart = this,
-                categoryPoints = chart.categoryPoints[categoryIx],
-                seriesPoints = chart.seriesPoints[seriesIx],
-                point;
-
-            if (!categoryPoints) {
-                chart.categoryPoints[categoryIx] = categoryPoints = [];
-            }
-
-            if (!seriesPoints) {
-                chart.seriesPoints[seriesIx] = seriesPoints = [];
-            }
-
-            chart.updateRange(data.valueFields, categoryIx, series);
-
-            point = chart.createPoint(data, category, categoryIx, series);
-            if (point) {
-                point.category = category;
-                point.series = series;
-                point.seriesIx = seriesIx;
-                point.owner = chart;
-                point.dataItem = series.data[categoryIx];
-            }
-
-            chart.points.push(point);
-            seriesPoints.push(point);
-            categoryPoints.push(point);
-        },
-
         reflowCategories: function(categorySlots) {
             var chart = this,
                 children = chart.children,
@@ -3633,18 +3604,20 @@ kendo_module({
             var bullet = this,
                 options = bullet.options;
 
-            bullet.target = new Target({
-                id: bullet.options.id,
-                type: options.target.shape,
-                background: options.target.color || options.color,
-                opacity: options.opacity,
-                zIndex: options.zIndex,
-                border: options.target.border,
-                vAlign: TOP,
-                align: RIGHT
-            });
+            if (defined(bullet.value.target)) {
+                bullet.target = new Target({
+                    id: bullet.options.id,
+                    type: options.target.shape,
+                    background: options.target.color || options.color,
+                    opacity: options.opacity,
+                    zIndex: options.zIndex,
+                    border: options.target.border,
+                    vAlign: TOP,
+                    align: RIGHT
+                });
 
-            bullet.append(bullet.target);
+                bullet.append(bullet.target);
+            }
 
             bullet.createNote();
         },
@@ -3689,9 +3662,11 @@ kendo_module({
                     targetSlotX.x2, targetSlotY.y2
                 );
 
-            target.options.height = invertAxes ? targetSlot.height() : options.target.line.width;
-            target.options.width = invertAxes ? options.target.line.width : targetSlot.width();
-            target.reflow(targetSlot);
+            if (target) {
+                target.options.height = invertAxes ? targetSlot.height() : options.target.line.width;
+                target.options.width = invertAxes ? options.target.line.width : targetSlot.width();
+                target.reflow(targetSlot);
+            }
 
             if (bullet.note) {
                 bullet.note.reflow(box);
@@ -3743,8 +3718,7 @@ kendo_module({
                 box = bar.box,
                 vertical = options.vertical,
                 aboveAxis = options.aboveAxis,
-                x,
-                y;
+                x, y;
 
             if (vertical) {
                 x = box.x2 + TOOLTIP_OFFSET;
@@ -4302,9 +4276,10 @@ kendo_module({
             return point;
         },
 
-        updateRange: function(value, categoryIx) {
+        updateRange: function(data, categoryIx) {
             var chart = this,
                 isStacked = chart.options.isStacked,
+                value = data.value,
                 stackAxisRange = chart._stackAxisRange,
                 totals = chart._categoryTotals,
                 totalsLimits;
@@ -9562,6 +9537,10 @@ kendo_module({
         delete seriesDefaults.ohlc;
         delete seriesDefaults.bullet;
         delete seriesDefaults.verticalBullet;
+        delete seriesDefaults.polarArea;
+        delete seriesDefaults.polarLine;
+        delete seriesDefaults.radarArea;
+        delete seriesDefaults.radarLine;
     }
 
     function applySeriesColors(options) {

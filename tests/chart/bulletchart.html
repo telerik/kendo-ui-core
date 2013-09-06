@@ -164,6 +164,17 @@
 
                     ok(!chart._plotArea.categoryAxis.options.justified);
                 });
+
+                test("with no data should not render target", function() {
+                    createBulletChart({
+                        series: [{
+                            type: "bullet",
+                            data: []
+                        }]
+                    });
+
+                    ok(typeof chart._plotArea.charts[0].points[0].target === "undefined");
+                });
             })();
 
         </script>
