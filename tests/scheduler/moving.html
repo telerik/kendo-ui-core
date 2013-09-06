@@ -1429,9 +1429,14 @@
 
                 drag(scheduler, handle, offset);
 
-                var hint = div.find(".k-event-drag-hint");
+                dragend(scheduler, handle, offset);
 
-                equalWithRound(hint.offset().top, slots.eq(0).offset().top + slots.eq(0).outerHeight() / 2);
+                var event = scheduler.dataSource.at(0);
+
+                equal(event.start.getHours(), 10);
+                equal(event.start.getMinutes(), 15);
+                equal(event.end.getHours(), 10);
+                equal(event.end.getMinutes(), 45);
             });
 
             function dragcancel(scheduler) {
