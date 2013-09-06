@@ -280,6 +280,27 @@
                 equal(view.content.find(".k-event .k-event-template").last().text(), "my event");
             });
 
+            test("events which don't overlap are not positioned next to each other", function() {
+                var selectedDate = new Date("2013/6/6"),
+                    view = setup({
+                        startTime: new Date("2013/6/6 10:00"),
+                        dates: [
+                           selectedDate
+                        ]
+                    });
+
+                    var events = [
+                        new SchedulerEvent({ uid:"uid", start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:45"), title: "" }),
+                        new SchedulerEvent({ uid:"uid", start: new Date("2013/6/6 10:45"), end: new Date("2013/6/6 11:30"), title: "" })
+                    ];
+
+                view.render(events);
+
+                var events = view.content.find(".k-event");
+
+                ok(events.first().outerWidth() + events.last().outerWidth() > view.content.find("td").outerWidth());
+            });
+
             test("uid is rendered", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
