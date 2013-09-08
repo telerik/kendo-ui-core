@@ -1,14 +1,15 @@
-@ios7-main-color: #007aff;
+@ios7-main-color: #000;
 @ios7-second-color: #bababa;
 @ios7-background: #fff;
 @ios7-light-background: rgba(244,244,244,.95);
+@ios7-list-select-background: #d9d9d9;
+@ios7-list-title-background: #efeff4;
 @ios7-dark-background: #363940;
-@ios7-list-background: #fcfcfc;
 @ios7-button-background: rgba(0,0,0,0);
 @ios7-border-width: 1px;
 @ios7-border-radius: 3px;
 @ios7-border-color: #007aff;
-@ios7-second-border-color: #adadad;
+@ios7-second-border-color: #ccc;
 @ios7-secondary-border-radius: 5px;
 @ios7-inline-border-radius: @ios7-border-radius - 1px;
 @ios7-active-color: #fff;
@@ -43,6 +44,7 @@
 .km-ios7,
 .km-ios7 .km-content
 {
+    color: #000;
     background: @ios7-background;
 }
 
@@ -59,7 +61,7 @@
 .km-ios7 .km-tabstrip
 {
     border: @ios7-border-width solid transparent;
-    box-shadow: 0 0 1px @ios7-dark-background;
+    .box-shadow(0 0 1px @ios7-dark-background);
 }
 
 .km-ios7 .km-toolbar,
@@ -72,7 +74,12 @@
 
 /* Button */
 
-.km-ios7 .km-button,
+.km-ios7 .km-button
+{
+    font-size: .9em;
+}
+
+.km-ios7 .km-navbar .km-button,
 .km-ios7 .km-view-title
 {
     font-size: 1.2em;
@@ -80,6 +87,7 @@
 
 .km-ios7 .km-view-title
 {
+    font-weight: bold;
     line-height: 2.5em;
 }
 
@@ -91,7 +99,8 @@
     .border-radius(@ios7-border-radius);
 }
 
-.km-ios7 .km-navbar .km-button
+.km-ios7 .km-leftitem .km-button,
+.km-ios7 .km-rightitem .km-button
 {
     border: 0;
     margin-top: .26rem;
@@ -126,7 +135,7 @@
     min-width: 1.4em;
     height: 1.4em;
     line-height: 1.4em;
-    color: @ios7-main-color;
+    color: @ios7-active-background;
     border: 1px solid @ios7-border-color;
     background-color: @ios7-background;
 }
@@ -151,13 +160,12 @@
     .box-shadow(inset 0 0 0 1000px @ios7-button-background);
 }
 
-.km-ios7 .km-detail .km-icon:before
-{
-    display: none;
-}
-
-
 /* ButtonGroup */
+
+.km-ios7 .km-buttongroup
+{
+    font-size: 1em;
+}
 
 .km-ios7 .km-buttongroup > *:not(:first-child):not(:last-child)
 {
@@ -182,6 +190,11 @@
 .km-ios7 .km-buttongroup > *.km-state-active + *
 {
     border-left-width: 0;
+}
+
+.km-ios7 .km-view-title .km-buttongroup
+{
+    font-weight: normal;
 }
 
 /* Switch */
@@ -293,93 +306,60 @@
 
 /* ListView */
 
+.km-ios7 .km-listinset,
+.km-ios7 .km-listgroupinset
+{
+    margin: 0;
+}
+
 .km-ios7 .km-list > li
 {
-    background: @ios7-list-background;
-    border: @ios7-border-width solid @ios7-border-color;
-    border-width: 0 0 @ios7-border-width 0;
-    .box-shadow(inset 0 @ios7-border-width 0 @ios7-light-shadow);
+    padding-left: 1em;
+    border: 0;
+    background: transparent;
+    .border-radius(0);
+    border-top: 1px solid transparent;
+    border-image: -webkit-linear-gradient(left, transparent 1em, @ios7-second-border-color 1em, @ios7-second-border-color 100%) 1 round;
 }
 
-.km-ios7 .km-listinset > li:first-child,
-.km-ios7 .km-listgroupinset .km-list > li:first-child
+.km-ios7 .km-list > li:last-child
 {
-    border: @ios7-border-width solid @ios7-border-color;
-    border-width: @ios7-border-width;
-    border-color: @ios7-border-color;
-    .border-radius(@ios7-border-radius @ios7-border-radius 0 0);
-}
-
-.km-ios7 .km-listinset > li,
-.km-ios7 .km-listgroupinset .km-list > li
-{
-    border-width: 0 @ios7-border-width @ios7-border-width @ios7-border-width;
-}
-
-.km-ios7 .km-listinset > li:last-child,
-.km-ios7 .km-listgroupinset .km-list > li:last-child
-{
-    border: @ios7-border-width solid @ios7-border-color;
-    border-width: 0 @ios7-border-width @ios7-border-width @ios7-border-width;
-    .border-radius(0 0 @ios7-border-radius @ios7-border-radius);
-}
-
-.km-ios7 .km-listinset > li:first-child:last-child,
-.km-ios7 .km-listgroupinset .km-list > li:first-child:last-child
-{
-    border-width: @ios7-border-width;
-    .border-radius(@ios7-border-radius);
+    .box-shadow(inset 0 -1px 0 @ios7-second-border-color);
 }
 
 .km-ios7 .km-listview-link:after
 {
-    color: lighten(@ios7-main-color, 30);
+    color: lighten(@ios7-dark-background, 40);
     width: .66rem;
     height: .64rem;
     border-width: 0;
     box-shadow: inset -.2rem .2rem 0;
 }
 
-.km-ios7 .km-listinset li:first-child > .km-listview-link,
-.km-ios7 .km-listgroupinset li:first-child > .km-listview-link,
-.km-ios7 .km-listinset li:first-child > .km-listview-label,
-.km-ios7 .km-listgroupinset li:first-child > .km-listview-label
+.km-ios7 .km-list li > .km-listview-link,
+.km-ios7 .km-list li > .km-listview-label
 {
-    .border-radius(@ios7-inline-border-radius @ios7-inline-border-radius 0 0);
-}
-
-.km-ios7 .km-listinset li:last-child > .km-listview-link,
-.km-ios7 .km-listgroupinset li:last-child > .km-listview-link,
-.km-ios7 .km-listinset li:last-child > .km-listview-label,
-.km-ios7 .km-listgroupinset li:last-child > .km-listview-label
-{
-    .border-radius(0 0 @ios7-inline-border-radius @ios7-inline-border-radius);
-}
-
-.km-ios7 .km-listinset li:first-child:last-child > .km-listview-link,
-.km-ios7 .km-listgroupinset li:first-child:last-child > .km-listview-link,
-.km-ios7 .km-listinset li:first-child:last-child > .km-listview-label,
-.km-ios7 .km-listgroupinset li:first-child:last-child > .km-listview-label
-{
-    .border-radius(@ios7-inline-border-radius);
+    margin-left: -1em;
+    padding-left: 1em;
+    .border-radius(0);
 }
 
 .km-ios7 .km-group-title
 {
-    background: @ios7-background;
-    border: @ios7-border-width solid @ios7-border-color;
-    border-width: @ios7-border-width 0;
+    text-indent: 1em;
+    margin-top: 0;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: darken(@ios7-second-border-color, 30);
+    border-bottom: 1px solid @ios7-second-border-color;
+    background: @ios7-list-title-background;
 }
 
-.km-ios7 .km-scroll-header .km-group-title
-{
-    border-width: 0 0 @ios7-border-width;
-}
-
+.km-ios7 .km-listgroup .km-group-title,
 .km-ios7 .km-listgroupinset .km-group-title
 {
-    border: 0;
-    background: none;
+    line-height: 2em;
+    border-top: 2em solid @ios7-list-title-background;
 }
 
 .km-listview .km-switch
@@ -750,7 +730,7 @@
     width: .6em;
     height: .2em;
     margin: 0 0 0;
-    background: #000;
+    background: @ios7-main-color;
     border-radius: 1em;
     vertical-align: middle;
     -webkit-transform-origin: 160% 50%;
@@ -968,7 +948,7 @@
 {
     .appearance(none);
     font-size: 1.1rem;
-    color: @ios7-main-color;
+    color: @ios7-active-background;
     min-width: 6em;
     border: 0;
     padding: .4em;
@@ -983,7 +963,7 @@
 
 .km-ios7 .km-list .k-dropdown-wrap .k-input
 {
-    color: @ios7-main-color;
+    color: @ios7-active-background;
 }
 
 .km-ios7 .km-list .k-dropdown
@@ -1070,10 +1050,7 @@
 .km-ios7 .km-popup .k-state-focused,
 .km-ios7 .km-popup .k-state-selected,
 .km-ios7 .km-actionsheet > li > a:active,
-.km-ios7 .km-actionsheet > li > a:hover,
-.km-ios7 li.km-state-active .km-listview-link,
-.km-ios7 li.km-state-active .km-listview-label,
-.km-ios7 .km-state-active .km-listview-link:after
+.km-ios7 .km-actionsheet > li > a:hover
 {
     color: @ios7-active-color;
 }
@@ -1100,8 +1077,6 @@
 .km-ios7 .km-popup .k-state-selected,
 .km-ios7 .km-actionsheet > li > a:active,
 .km-ios7 .km-actionsheet > li > a:hover,
-.km-ios7 li.km-state-active .km-listview-link,
-.km-ios7 li.km-state-active .km-listview-label,
 .km-ios7 .km-listview-label input[type=radio]:checked,
 .km-ios7 .km-listview-label input[type=checkbox]:checked
 {
@@ -1119,9 +1094,17 @@
     background: @ios7-second-active-background;
 }
 
-.km-ios7 .km-navbar .km-button.km-state-active
+.km-ios7 .km-leftitem .km-button.km-state-active,
+.km-ios7 .km-rightitem .km-button.km-state-active
 {
     background: none;
-    color: @ios7-main-color;
+    color: @ios7-active-background;
     opacity: .4;
+}
+
+.km-ios7 li.km-state-active .km-listview-link,
+.km-ios7 li.km-state-active .km-listview-label
+{
+    color: @ios7-main-color;
+    background: @ios7-list-select-background;
 }
