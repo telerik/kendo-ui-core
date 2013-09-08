@@ -44,7 +44,7 @@
 .km-ios7,
 .km-ios7 .km-content
 {
-    color: #000;
+    color: @ios7-main-color;
     background: @ios7-background;
 }
 
@@ -346,6 +346,7 @@
 
 .km-ios7 .km-group-title
 {
+    position: -webkit-sticky;
     text-indent: 1em;
     margin-top: 0;
     font-weight: normal;
@@ -678,7 +679,7 @@
 
 /* Loader */
 
-.km-ios7 .km-loader
+.km-ios7.km-pane > .km-loader
 {
     background: rgba(0,0,0,.2);
     width: 100%;
@@ -743,7 +744,7 @@
 .km-ios7 .km-loader .km-loading-left,
 .km-ios7 .km-loader .km-loading-right
 {
-    margin: -.3em 0 0;
+    margin: .2em 0 0;
 }
 
 .km-ios7 .km-loading:before,
@@ -1055,7 +1056,6 @@
     color: @ios7-active-color;
 }
 
-.km-ios7 .km-loader > *:not(h1),
 .km-ios7 .km-filter-wrap > input,
 .km-ios7 .km-switch-handle.km-state-active,
 .km-root .km-ios7 .km-scroller-refresh span:not(.km-template),

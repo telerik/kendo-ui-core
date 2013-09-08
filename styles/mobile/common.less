@@ -1850,7 +1850,8 @@
 }
 
 .km-native-scrolling,
-.km-native-scrolling .km-view
+.km-native-scrolling .km-view,
+.km-native-scrolling .km-splitview .km-pane
 {
     min-height: 100%;
     height: auto;
@@ -1870,6 +1871,7 @@
 }
 
 /* Restore position:absolute during animation */
+.km-native-scrolling .km-splitview,
 .km-native-scrolling [style*=pointer-events] .km-view
 {
     position: absolute;
@@ -1899,6 +1901,12 @@
     bottom: auto;
 }
 
+.km-native-scrolling .km-splitview .km-header,
+.km-native-scrolling .km-splitview .km-footer
+{
+    position: absolute;
+}
+
 .km-native-scrolling .km-modalview .km-header,
 .km-native-scrolling .km-modalview .km-footer
 {
@@ -1924,7 +1932,7 @@
     top: 0;
 }
 
-.km-native-scrolling .km-loader
+.km-native-scrolling > .km-pane > .km-loader
 {
     position: fixed;
     top: 50%;
