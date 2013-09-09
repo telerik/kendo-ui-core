@@ -1032,12 +1032,14 @@ test("Add/Remove/Clear Marker", function () {
     var canvas = new diagram.Canvas(root);
     AddCircle(canvas, new diagram.Point(100, 120));
     var marker = new diagram.Marker({
+        path:{
+            data: "m"
+        },
         id: "ArrowHead",
         width: 44,
         height: 21,
         viewBox: new diagram.Rect(10, 20, 33, 55),
-        orientantion: "auto",
-        data: "m"
+        orientation: "auto"
     });
     canvas.addMarker(marker);
     var found = document.getElementById("ArrowHead");

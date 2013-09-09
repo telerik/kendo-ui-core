@@ -30,7 +30,7 @@ kendo_module({
             return Matrix.scaling(this.x, this.y);
         },
         toString: function () {
-            return "scale(" + this.x + "," + this.y + ")";
+            return kendo.format("scale({0},{1})", this.x, this.y);
         }
     });
 
@@ -46,7 +46,7 @@ kendo_module({
             return Matrix.translation(this.x, this.y);
         },
         toString: function () {
-            return "translate(" + this.x + "," + this.y + ")";
+            return kendo.format("translate({0},{1})", this.x, this.y);
         },
         plus: function (delta) {
             this.x += delta.x;
@@ -75,9 +75,9 @@ kendo_module({
         },
         toString: function () {
             if (this.x && this.y) {
-                return "rotate(" + this.angle + "," + this.x + "," + this.y + ")";
+                return kendo.format("rotate({0},{1},{2})", this.angle, this.x, this.y);
             } else {
-                return "rotate(" + this.angle + ")";
+                return kendo.format("rotate({0})", this.angle);
             }
         },
         toMatrix: function () {
@@ -454,14 +454,14 @@ kendo_module({
         }
     });
 
-    var Marker = VisualBase.extend({
+    var Marker = Element.extend({
         init: function (options) {
             var that = this, childElement;
-            VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "marker"), options);
+            Element.fn.init.call(that, document.createElementNS(SVGNS, "marker"), options);
             var o = that.options;
 
-            if (o.data) {
-                childElement = new Path({ data: o.data, width: o.width, height: o.height, background: "black" });
+            if (o.path) {
+                childElement = new Path(o.path);
             }
             else if (o.circle) {
                 childElement = new Circle(o.circle);
@@ -471,11 +471,11 @@ kendo_module({
             }
         },
         redraw: function (options) {
-            VisualBase.fn.redraw.call(this, options);
+            Element.fn.redraw.call(this, options);
             var that = this, o = that.options;
             if (o.ref) {
                 that.native.refX.baseVal.value = o.ref.x;
-                that.native.refY.baseVal.value = o.ref.x;
+                that.native.refY.baseVal.value = o.ref.y;
             }
             if (o.width) {
                 that.native.markerWidth.baseVal.value = o.width;
@@ -483,9 +483,8 @@ kendo_module({
             if (o.height) {
                 that.native.markerHeight.baseVal.value = o.height;
             }
-            this.setAtr("orient", "orientantion");
+            this.setAtr("orient", "orientation");
             if (o.viewBox) {
-                that.native.setAttribute("viewBox", "0 0 0 0");
                 that.native.viewBox.baseVal.height = o.height;
                 that.native.viewBox.baseVal.width = o.viewBox.width;
                 that.native.viewBox.baseVal.x = o.viewBox.x;
@@ -690,22 +689,23 @@ kendo_module({
             this.focus();
 
             this.addMarker(new Marker({
-                data: "m0,50l100,40l-30,-40l30,-40z",
-                strokeThickness: 10,
-                width: 10,
-                height: 10,
+                path: {
+                    data: "M 0 0 L 20 10 L 0 20 z",
+                    background: "Black"
+                },
                 id: "Arrow",
-                ref: new Point(50, 50),
                 orientation: "auto"
             }));
             this.addMarker(new Marker({
-                data: "m100,50l-100,40l30,-40l-30,-40z",
-                strokeThickness: 10,
+                path: {
+                    data: "M 0 0 L 10 5 L 0 10 L 3 5 z",
+                    background: "Black"
+                },
+                id: "ArrowEnd",
+                orientation: "auto",
                 width: 10,
                 height: 10,
-                id: "ArrowEnd",
-                ref: new Point(50, 50),
-                orientation: "auto"
+                ref: new Point(10, 5)
             }));
             this.addMarker(new Marker({
                 circle: {

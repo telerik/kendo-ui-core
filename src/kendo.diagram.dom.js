@@ -364,7 +364,7 @@ kendo_module({
             hoveredStroke: "#70CAFF",
             strokeThickness: 1,
             startCap: "FilledCircle",
-            endCap: "FilledCircle"
+            endCap: "ArrowEnd"
         },
         sourcePoint: function (source) {
             if (source === null) { // detach
