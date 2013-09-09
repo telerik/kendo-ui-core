@@ -515,6 +515,11 @@ kendo_module({
             if (this.options.endCap) {
                 this.native.setAttribute("marker-end", "url(#" + this.options.endCap + ")");
             }
+
+            // SVG markers are not refreshed after the line has changed. This fixes the problem.
+            if (this.native.parentNode && navigator.appVersion.indexOf("MSIE 10") != -1) {
+                this.native.parentNode.insertBefore(this.native, this.native);
+            }
         }
     });
 
