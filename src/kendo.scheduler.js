@@ -717,7 +717,7 @@ kendo_module({
                 wrapper.on("mousemove" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td", mouseMoveHandler);
             });
 
-            wrapper.on("mouseup" + NS, function() {
+            wrapper.on("mouseup" + NS + " mouseleave" + NS, function() {
                 wrapper.off("mousemove" + NS, ".k-scheduler-header-all-day td, .k-scheduler-content td", mouseMoveHandler);
             });
 
