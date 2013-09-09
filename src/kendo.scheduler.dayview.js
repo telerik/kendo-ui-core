@@ -1446,7 +1446,12 @@ kendo_module({
         },
 
         clearSelection: function() {
-            this.content.add(this.datesHeader).find(".k-state-selected").removeClass("k-state-selected");
+
+            this.content.add(this.datesHeader)
+                .find(".k-state-selected")
+                .removeAttr("id")
+                .attr("aria-selected", false)
+                .removeClass("k-state-selected");
         },
 
         _updateDirection: function(selection, ranges, multiple, reverse, vertical) {

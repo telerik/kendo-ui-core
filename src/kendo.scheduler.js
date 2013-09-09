@@ -691,6 +691,8 @@ kendo_module({
             }
 
             that._selectable();
+
+            that._ariaId = kendo.guid();
         },
 
         _selectable: function() {
@@ -724,7 +726,7 @@ kendo_module({
                     that._createSelection($(".k-scheduler-content").find("td:first"));
                 }
 
-                that.view().select(that._selection);
+                that._select();
             });
 
             wrapper.on("focusout" + NS, function() {
@@ -738,6 +740,39 @@ kendo_module({
                 that._ctrlKey = e.ctrlKey;
                 that._shiftKey = e.shiftKey;
             });
+        },
+
+        _select: function() {
+            var view = this.view();
+            var wrapper = this.wrapper;
+            var current = view.current();
+            var selection = this._selection;
+
+            if (current) {
+                current.removeAttribute("id");
+                current.removeAttribute("aria-label");
+                wrapper.removeAttr("aria-activedescendant");
+            }
+
+            view.select(selection);
+
+            current = view.current();
+
+            if (current) {
+                var labelFormat;
+                var data = selection;
+
+                if (selection.events[0]) {
+                    data = this.occurrenceByUid(selection.events[selection.events.length - 1]) || selection;
+                    labelFormat = kendo.format(this.options.messages.ariaEventLabel, data.title, data.start, data.start);
+                } else {
+                    labelFormat = kendo.format(this.options.messages.ariaSlotLabel, data.start, data.end);
+                }
+
+                current.setAttribute("id", this._ariaId);
+                current.setAttribute("aria-label", labelFormat);
+                wrapper.attr("aria-activedescendant", this._ariaId);
+            }
         },
 
         _mouseMove: function(e) {
@@ -767,7 +802,7 @@ kendo_module({
                             selection.end = endDate;
                         }
 
-                        view.select(selection);
+                        that._select();
                     }
                 }
             }, 5);
@@ -798,7 +833,8 @@ kendo_module({
 
             if (key === keys.TAB) {
                 if (view.moveToEvent(selection, shiftKey)) {
-                    view.select(selection);
+                    that._select();
+
                     e.preventDefault();
                 }
             } else if (editable && key === keys.ENTER) {
@@ -823,7 +859,7 @@ kendo_module({
                 that.view(that._viewByIndex(key - 49));
             } else if (view.move(selection, key, shiftKey)) {
                 if (view.inRange(selection)) {
-                    view.select(selection);
+                    that._select();
                 } else {
                     that.date(selection.start);
                 }
@@ -847,6 +883,7 @@ kendo_module({
             item = $(item);
             selection = this._selection;
             uid = item.attr(kendo.attr("uid"));
+
             slot = this.view().selectionByElement(item);
 
             if (slot) {
@@ -910,6 +947,8 @@ kendo_module({
                 cancel: "Cancel",
                 destroy: "Delete",
                 deleteWindowTitle: "Delete event",
+                ariaSlotLabel: "Selected from {0:t} to {1:t}",
+                ariaEventLabel: "{0} on {1:D} at {2:t}",
                 views: {
                     day: "Day",
                     week: "Week",
@@ -1965,7 +2004,7 @@ kendo_module({
                 var view = this;
                 if (that._selection) {
                     view.constrainSelection(that._selection);
-                    view.select(that._selection);
+                    that._select();
 
                     that._adjustSelectedDate();
                 }
@@ -2204,8 +2243,10 @@ kendo_module({
             var that = this,
                 height = that.options.height;
 
-            that.wrapper = that.element;
-            that.wrapper.addClass("k-widget k-scheduler k-floatwrap");
+            that.wrapper = that.element
+                               .addClass("k-widget k-scheduler k-floatwrap")
+                               .attr("role", "grid")
+                               .attr("aria-multiselectable", true);
 
             if (height) {
                 that.wrapper.css("height", height);

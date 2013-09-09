@@ -564,6 +564,30 @@
 
                 equal(scheduler.calls("removeEvent"), 1);
             });
+
+            module("ARIA support", {
+                setup: function() {
+                    now = new Date();
+                    container = $("<div />");
+                    $(document.body).append(container);
+                    scheduler = new Scheduler(container, {
+                        selectable: true,
+                        views: [
+                            "day",
+                            { type: "week", selected: true }
+                        ],
+                        dataSource: [
+                            { start: now, end: new Date(now + (60 * 60 * 1000)), title: "Test" }
+                        ]
+                    });
+
+                    container.focus();
+                },
+
+                teardown: function() {
+                   container.closest(".k-scheduler").kendoScheduler("destroy").remove();
+                }
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
