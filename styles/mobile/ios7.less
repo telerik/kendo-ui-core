@@ -493,45 +493,10 @@
 
 /* Checkboxes and Radios */
 
-.km-ios7 .km-listview-label input[type=checkbox]
-{
-    margin-top: -.7em;
-}
-
-.km-ios7 .km-listview-label input[type=radio],
-.km-ios7 .km-listview-label input[type=checkbox]
-{
-    border: 1px solid @ios7-border-color;
-    width: 1.4em;
-    height: 1.4em;
-    .border-radius(@ios7-border-radius);
-    background: @ios7-background;
-}
-
-.km-ios7 .km-listview-label input[type=radio]
-{
-    width: 1.2em;
-    height: 1.2em;
-    .border-radius(1em);
-}
-
-.km-ios7 .km-listview-label input[type=checkbox]:after
-{
-    content: "\a0";
-    display: block;
-    margin: 10% auto 15% 6%;
-    width: 90%;
-    height: 76%;
-}
-
-.km-ios7 .km-listview-label input[type=checkbox]:checked:after
+.km-ios7 .km-listview-label input[type=radio]:checked,
+.km-ios7 .km-listview-label input[type=checkbox]:checked
 {
     -webkit-mask-box-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAsBJREFUeNrsmzFIAzEUhlMLgtCpUBBcC05CwUnoKgidBEHo5FpwFQqCUBBcnQpOTgWh4CQIroLgdOAkFJw6CU6dCkK9SCyK9fr+5CV39+qDN/bC+5I/l/9dWphMJmqRY0kteghaAcU4I10SIUdxVj5rFwTggFi8zvZ08oUAKMU5JBb/EueyNAAdYPabP+QvAMCa0TSl+Ptf+58AAD1g9rekAajF+U4svjfzDZhzAPfE4sdGKqIA7AJL/+zPM1BOAejX2IBY/NC8JkUBOAJmv5V4Cs4hgHKcb8TiI3NEFgWgC8z+zlwflDMAVeC1d0MygjkDcEMsXkNalwZgG1j6XXIrICcAEK//ZjZKUQBaqNeXBADx+oMvry8JwBkw+3vIg6cAbDOQ1x/beH0pABCvX5MGYAsovmczQNYBUL3+aJbXzzuAJjD7p7aDZBUAi9fPM4A2MPsHLgNlEUBZ0VvciV4fPQhdAS5rMyNev+462HcAmvwrceAn5LgJxAan17c5Cu8B9Dspev2xaYywA9DRT0kKDQD+OdegswCkIYWieRar13dxg6GlgHj9Q07NJdnhPqBHFymUgBb3gHvzTQJQCSQFxOs3uHfdeQ0R31Ko+vT6XB0hRAqoH6d6/Xcbr88FoAJoFJFCHVhdl76OndSeoA8pPPr2+txNUU4pIF7/2GfTAQGASCFKkMIK0OJ28vo+2uIcUkC8ftN3z83mu4CLFJDrbFGIlrMNABcpXIT0+r4A6NgHCjkxv0Gus/VVoHD5NIZK4S601/cNAJWC03W2LAJApRDc64cAoOOaEUBLBQ4OAIgUkvLZtcWdFgAuKTRUCsF5QcJFCrcqpeAEsGopBW9ePzQAWyl0VYrh444QIoWRWTmiACBSaKuUw9ctMUrDY6j8fF/MBACKFJoqA+ETQJIUHlRGQtde+P/3+ILHhwADAA2kPASxM5juAAAAAElFTkSuQmCC');
-}
-
-.km-ios7 .km-state-active input[type=checkbox]:checked:after
-{
-    background-color: #eee;
 }
 
 /* Shim */
