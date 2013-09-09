@@ -1380,6 +1380,65 @@
                 equal(div.find(".k-event-drag-hint").length, 0);
             });
 
+            test("hint is not snapped when snap is disabled", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    snap: false,
+                    startTime: new Date("2013/6/6 10:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                var offset = slots.eq(0).offset();
+
+                offset.top += slots.eq(0).outerHeight() / 2;
+
+                drag(scheduler, handle, offset);
+
+                var hint = div.find(".k-event-drag-hint");
+
+                equalWithRound(hint.offset().top, slots.eq(0).offset().top + slots.eq(0).outerHeight() / 2);
+            });
+
+            test("event can be freely moved when snap is disabled", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    snap: false,
+                    startTime: new Date("2013/6/6 10:00"),
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:30"), title: "" }
+                    ]
+                });
+
+                var handle = div.find(".k-event");
+
+                var slots = div.find(".k-scheduler-content td");
+
+                dragstart(scheduler, handle, handle.offset());
+
+                var offset = slots.eq(0).offset();
+
+                offset.top += slots.eq(0).outerHeight() / 2;
+
+                drag(scheduler, handle, offset);
+
+                dragend(scheduler, handle, offset);
+
+                var event = scheduler.dataSource.at(0);
+
+                equal(event.start.getHours(), 10);
+                equal(event.start.getMinutes(), 15);
+                equal(event.end.getHours(), 10);
+                equal(event.end.getMinutes(), 45);
+            });
+
             function dragcancel(scheduler) {
                 var draggable = scheduler._moveDraggable;
                 draggable.trigger("dragcancel");

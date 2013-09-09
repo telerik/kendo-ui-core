@@ -610,6 +610,59 @@ kendo_module({
             }
 
             return result;
+        },
+
+        outerRect: function(start, end, snap) {
+            return this._rect("offset", start, end, snap);
+        },
+
+        _rect: function(property, start, end, snap) {
+            var top;
+            var bottom;
+            var startSlot = this.start;
+            var endSlot = this.end;
+
+            if (typeof start != "number") {
+                start = kendo.date.toUtcTime(start);
+            }
+
+            if (typeof end != "number") {
+                end = kendo.date.toUtcTime(end);
+            }
+
+            if (snap) {
+                top = startSlot.offsetTop;
+                bottom = endSlot.offsetTop + endSlot[property + "Height"];
+            } else {
+                var startOffset = start - startSlot.start;
+
+                if (startOffset < 0) {
+                    startOffset = 0;
+                }
+
+                var startSlotDuration = startSlot.end - startSlot.start;
+
+                top = startSlot.offsetTop + startSlot[property + "Height"] * startOffset / startSlotDuration;
+
+                var endOffset = endSlot.end - end;
+
+                if (endOffset < 0) {
+                    endOffset = 0;
+                }
+
+                var endSlotDuration = endSlot.end - endSlot.start;
+
+                bottom = endSlot.offsetTop + endSlot[property + "Height"] - endSlot[property + "Height"] * endOffset / endSlotDuration;
+            }
+
+            return {
+                top: top,
+                bottom: bottom
+            };
+        },
+
+        innerRect: function(start, end, snap) {
+            return this._rect("client", start, end, snap);
         }
     });
 
@@ -656,7 +709,7 @@ kendo_module({
                 var event = this._events[eventIndex];
 
                 event.element.css({
-                    top: this._slots[event.start].offsetTop
+                    top: this._slots[event.slotIndex].offsetTop
                 });
             }
         },
@@ -755,15 +808,11 @@ kendo_module({
         },
 
         startDate: function() {
-            var date = new Date(this.start);
-
-            return kendo.timezone.apply(date, "Etc/UTC");
+            return kendo.timezone.toLocalDate(this.start);
         },
 
         endDate: function() {
-            var date = new Date(this.end);
-
-            return kendo.timezone.apply(date, "Etc/UTC");
+            return kendo.timezone.toLocalDate(this.end);
         },
 
         startInRange: function(date) {
@@ -772,6 +821,14 @@ kendo_module({
 
         endInRange: function(date) {
             return this.start < date && date <= this.end;
+        },
+
+        startOffset: function() {
+           return this.start;
+        },
+
+        endOffset: function() {
+            return this.end;
         }
     });
 
@@ -794,6 +851,38 @@ kendo_module({
 
         endInRange: function(date) {
             return this.start < date && date <= this.end;
+        },
+
+        startOffset: function(x, y, snap) {
+            if (snap) {
+                return this.start;
+            }
+
+            var offset = $(this.element).offset();
+
+            var difference = y - offset.top;
+
+            var duration = this.end - this.start;
+
+            var time = Math.floor(duration * ( difference / this.offsetHeight));
+
+            return this.start + time;
+        },
+
+        endOffset: function(x, y, snap) {
+            if (snap) {
+                return this.end;
+            }
+
+            var offset = $(this.element).offset();
+
+            var difference = y - offset.top;
+
+            var duration = this.end - this.start;
+
+            var time = Math.floor(duration * ( difference / this.offsetHeight));
+
+            return this.start + time;
         }
     });
 

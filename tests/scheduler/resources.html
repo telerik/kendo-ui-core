@@ -919,9 +919,11 @@
                 });
 
                 var view = scheduler.view();
-                var event = view.groups[0].getTimeSlotCollection(0).events()[0];
-                equal(event.start, 20);
-                equal(event.end, 27);
+                var event = div.find(".k-event");
+                var slots = div.find(".k-scheduler-content td");
+
+                equalWithRound(event.offset().top, slots.eq(21).offset().top);
+                equalWithRound(event.offset().top + event.outerHeight(), slots.eq(28).offset().top + slots.eq(28).outerHeight());
             });
 
             test("multiple copies of the event are position in the correct group in day view when multiple resources matched", function() {
@@ -1079,8 +1081,12 @@
                 var slotEvents = view.groups[1].getTimeSlotCollection(0).events();
 
                 equal(slotEvents.length, 1);
-                equal(slotEvents[0].start, 2);
-                equal(slotEvents[0].end, 3);
+
+                var slots = div.find(".k-scheduler-content td");
+                var event = div.find(".k-event");
+
+                equalWithRound(event.offset().top, slots.eq(14).offset().top);
+                equalWithRound(event.offset().top + event.outerHeight(), slots.eq(15).offset().top + slots.eq(15).outerHeight());
             });
 
             test("double clicking the first all day slot triggers add event in day view with vertical orientation", 1, function() {
@@ -1799,9 +1805,10 @@
                 cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
             });
 
-            test("event in the last slot is position correctly when grouped vertically", function() {
+            test("event in the last slot is correctly positioned when grouped vertically", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 11:00 PM"),
                     group: {
                         resources: ["ResourceName", "ResourceName2"],
                         orientation: "vertical"
@@ -1829,10 +1836,11 @@
                     views: ["day"]
                 });
 
-                var view = scheduler.view();
+                var slots = div.find(".k-scheduler-content td");
+                var event = div.find(".k-event");
 
-                equal(view.groups[1].getTimeSlotCollection(0).events()[0].start, 47);
-                equal(view.groups[1].getTimeSlotCollection(0).events()[0].end, 47);
+                equalWithRound(event.offset().top, slots.eq(5).offset().top);
+                equalWithRound(event.offset().top + event.outerHeight(), slots.eq(5).offset().top + slots.eq(5).outerHeight());
             });
 
             test("headers are rendered for groups in month view", function() {

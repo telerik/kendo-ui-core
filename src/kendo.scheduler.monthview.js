@@ -599,12 +599,12 @@ kendo_module({
             this._resizeHint = this._resizeHint.add(hint);
        },
 
-        _updateResizeHint: function(event, startSlot, endSlot) {
+        _updateResizeHint: function(event, groupIndex, startTime, endTime) {
             this._removeResizeHint();
 
-            var group = this.groups[endSlot.groupIndex];
+            var group = this.groups[groupIndex];
 
-            var ranges = group.ranges(startSlot.startDate(), event.isAllDay ? endSlot.startDate() : endSlot.endDate(), true, event.isAllDay);
+            var ranges = group.ranges(startTime, endTime, true, event.isAllDay);
 
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
                 this._createResizeHint(ranges[rangeIndex]);
@@ -612,19 +612,17 @@ kendo_module({
 
             this._resizeHint.find(".k-label-top,.k-label-bottom").text("");
 
-            this._resizeHint.first().addClass("k-first").find(".k-label-top").text(kendo.toString(startSlot.startDate(), "M/dd"));
+            this._resizeHint.first().addClass("k-first").find(".k-label-top").text(kendo.toString(kendo.timezone.toLocalDate(startTime), "M/dd"));
 
-            this._resizeHint.last().addClass("k-last").find(".k-label-bottom").text(kendo.toString(endSlot.startDate(), "M/dd"));
+            this._resizeHint.last().addClass("k-last").find(".k-label-bottom").text(kendo.toString(kendo.timezone.toLocalDate(endTime), "M/dd"));
         },
 
-       _updateMoveHint: function(event, initialSlot, currentSlot) {
-            var distance = currentSlot.start - initialSlot.start;
-
+       _updateMoveHint: function(event, groupIndex, distance) {
             var start = kendo.date.toUtcTime(event.start) + distance;
 
             var end = start + event.duration();
 
-            var group = this.groups[currentSlot.groupIndex];
+            var group = this.groups[groupIndex];
 
             var ranges = group.ranges(start, end, true, event.isAllDay);
 
