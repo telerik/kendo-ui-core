@@ -1156,7 +1156,18 @@ kendo_module({
         },
 
         _positionEvent: function(event, element, slotRange) {
-            var rect = slotRange.innerRect(event.start, event.end, false);
+            var start = event.start;
+            var end = event.end;
+
+            if (event.startTime) {
+                start =  kendo.date.getMilliseconds(event.startTime) + kendo.date.toUtcTime(kendo.date.getDate(event.start));
+            }
+
+            if (event.endTime) {
+                end = kendo.date.getMilliseconds(event.endTime) + kendo.date.toUtcTime(kendo.date.getDate(event.end));
+            }
+
+            var rect = slotRange.innerRect(start, end, false);
 
             var height = rect.bottom - rect.top - 2; /* two times border width */
 
@@ -1356,7 +1367,7 @@ kendo_module({
                                     }
                                 }
 
-                                var occurrence = event.clone({ start: start, end: end });
+                                var occurrence = event.clone({ start: start, end: end, startTime: event.startTime, endTime: event.endTime });
 
                                 if (this._isInTimeSlot(occurrence)) {
                                     var head = range.head;

@@ -43,7 +43,7 @@
             var SchedulerEvent = kendo.data.SchedulerEvent;
 
             function equalWithRound(value, expected) {
-                QUnit.close(value, expected, 2);
+                QUnit.close(value, expected, 3);
             }
 
             function testSkip() {
@@ -272,6 +272,7 @@
 
 
             equalWithRound(event.offset().top, slots.eq(2).offset().top);
+            equalWithRound(event.offset().top + event.outerHeight(), slots.eq(2).offset().top + slots.eq(2).outerHeight());
         });
 
         function resizeStart(scheduler, target) {
