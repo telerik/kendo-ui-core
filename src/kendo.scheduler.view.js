@@ -709,7 +709,7 @@ kendo_module({
                 var event = this._events[eventIndex];
 
                 event.element.css({
-                    top: this._slots[event.start].offsetTop
+                    top: this._slots[event.slotIndex].offsetTop
                 });
             }
         },

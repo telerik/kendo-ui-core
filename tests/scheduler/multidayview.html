@@ -1593,10 +1593,13 @@
                     id: "2"
                 })]);
 
-                equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 10);
-                equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 23);
+                var slots = view.content.find("td");
 
-                ok(view.content.find(".k-event").length);
+                var event = view.content.find(".k-event");
+
+                equal(event.offset().top, slots.eq(10).offset().top);
+
+                equalWithRound(event.offset().top + event.outerHeight(), slots.last().offset().top + slots.last().outerHeight());
             });
 
             test("same day event which starts and end at the startTime is rendered as one cell duration", function() {
@@ -1638,10 +1641,13 @@
                     id: "2"
                 })]);
 
-                ok(view.content.find(".k-event").length);
+                var slots = view.content.find("td");
 
-                equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-                equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 16);
+                var event = view.content.find(".k-event");
+
+
+                equalWithRound(event.offset().top, slots.first().offset().top);
+                equalWithRound(event.offset().top + event.outerHeight(), slots.last().offset().top + slots.last().outerHeight());
             });
 
             test("two day all day event is rendered correctly", function() {

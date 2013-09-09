@@ -183,7 +183,7 @@ kendo_module({
 
             var group = this.groups[groupIndex];
 
-            var ranges = group.ranges(startSlot.start, event.isAllDay ? endSlot.start : endSlot.end, multiday, event.isAllDay);
+            var ranges = group.ranges(startTime, event.isAllDay && !this._isRtl ? startTime : endTime, multiday, event.isAllDay);
 
             this._removeResizeHint();
 
@@ -1101,9 +1101,9 @@ kendo_module({
                     width: slotWidth - rightOffset
                 });
 
-            slotRange.addEvent({ start: startIndex, end: endIndex, element: element });
+            slotRange.addEvent({ slotIndex: startIndex, start: startIndex, end: endIndex, element: element });
 
-            allDayEvents.push({ start: startIndex, end: endIndex, element: element });
+            allDayEvents.push({ slotIndex: startIndex, start: startIndex, end: endIndex, element: element });
 
             var rows = SchedulerView.createRows(allDayEvents);
 
@@ -1125,14 +1125,13 @@ kendo_module({
             }
         },
 
-        _arrangeColumns: function(element, slotRange) {
-            var startIndex = slotRange.start.index;
-            var endIndex = slotRange.end.index;
+        _arrangeColumns: function(element, top, height, slotRange) {
+            var startSlot = slotRange.start;
 
-            element = { element: element, start: startIndex, end: endIndex };
+            element = { element: element, slotIndex: startSlot.index, start: top, end: top + height };
 
             var columns,
-                slotWidth = slotRange.start.clientWidth,
+                slotWidth = startSlot.clientWidth,
                 eventRightOffset = slotWidth * 0.10,
                 columnEvents,
                 eventElements =  slotRange.events(),
@@ -1151,7 +1150,7 @@ kendo_module({
 
                 for (var j = 0, eventLength = columnEvents.length; j < eventLength; j++) {
                     columnEvents[j].element[0].style.width = columnWidth - 4 + "px";
-                    columnEvents[j].element[0].style.left = (this._isRtl ? this._scrollbarOffset(eventRightOffset) : 0) + slotRange.start.offsetLeft + idx * columnWidth + 2 + "px";
+                    columnEvents[j].element[0].style.left = (this._isRtl ? this._scrollbarOffset(eventRightOffset) : 0) + startSlot.offsetLeft + idx * columnWidth + 2 + "px";
                 }
             }
         },
@@ -1161,12 +1160,16 @@ kendo_module({
 
             var height = rect.bottom - rect.top - 2; /* two times border width */
 
+            if (height < 0) {
+                height = 0;
+            }
+
             element.css( {
                 top: rect.top,
                 height: height
             } );
 
-            this._arrangeColumns(element, slotRange);
+            this._arrangeColumns(element, rect.top, element[0].clientHeight, slotRange);
        },
 
        _eventTmpl: function(template, wrapper) {
@@ -1360,11 +1363,11 @@ kendo_module({
 
                                     element = this._createEventElement(event, !isMultiDayEvent, head, range.tail);
 
+                                    element.appendTo(container);
+
                                     this._positionEvent(occurrence, element, range);
 
                                     addContinuousEvent(group, range, element, false);
-
-                                    element.appendTo(container);
                                 }
                             }
                         }
