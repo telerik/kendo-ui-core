@@ -326,13 +326,21 @@
 
 /* Slider */
 
+.km-ios7 .k-slider
+{
+    margin-top: -.15em;
+    height: .2em;
+}
+
 .km-ios7 .k-slider .k-draghandle,
 .km-ios7 .k-slider .k-draghandle:hover
 {
-    top: -.6em;
+    top: -.8em;
     border: 0;
+    width: 1.6em;
+    height: 1.6em;
     .border-radius(5em);
-    .box-shadow(0 0 0 3px currentcolor);
+    box-shadow: 0 5px 5px @ios7-list-select-background, inset 0 0 0 1px @ios7-second-border-color;
 }
 
 .km-ios7 .k-slider-track
@@ -359,8 +367,8 @@
     border: 0;
     background: transparent;
     .border-radius(0);
-    border-top: 1px solid transparent;
-    border-image: -webkit-linear-gradient(left, transparent 1em, @ios7-second-border-color 1em, @ios7-second-border-color 100%) 1 round;
+    border-top: 1px solid @ios7-second-border-color;
+    border-image: -webkit-linear-gradient(left, transparent 1em, @ios7-second-border-color 1em, @ios7-second-border-color 100%) 1 stretch;
 }
 
 .km-ios7 .km-list > li:last-child
@@ -747,7 +755,8 @@
 
 /* Loader */
 
-.km-ios7.km-pane > .km-loader
+.km-ios7.km-pane > .km-loader,
+.km-ios7 .km-pane > .km-loader
 {
     background: rgba(0,0,0,.2);
     width: 100%;
@@ -1017,7 +1026,6 @@
 {
     .appearance(none);
     font-size: 1.1rem;
-    color: @ios7-active-background;
     min-width: 6em;
     border: 0;
     padding: .4em;
@@ -1028,11 +1036,6 @@
 .km-ios7 .km-list .k-dropdown-wrap
 {
 	padding: .2em;
-}
-
-.km-ios7 .km-list .k-dropdown-wrap .k-input
-{
-    color: @ios7-active-background;
 }
 
 .km-ios7 .km-list .k-dropdown
@@ -1119,6 +1122,8 @@
 }
 
 .km-ios7 .km-filter-wrap > input,
+.km-ios7 .k-slider .k-draghandle,
+.km-ios7 .k-slider .k-draghandle:hover,
 .km-ios7 .km-switch-handle.km-state-active,
 .km-root .km-ios7 .km-scroller-refresh span:not(.km-template),
 .km-ios7 .km-listview-label input[type=checkbox]:checked:after
@@ -1128,8 +1133,6 @@
 
 .km-ios7 .k-slider-selection,
 .km-ios7 .km-pages .km-current-page,
-.km-ios7 .k-slider .k-draghandle,
-.km-ios7 .k-slider .k-draghandle:hover,
 .km-ios7 .km-scroller-refresh.km-load-more,
 .km-ios7 .km-popup .k-state-hover,
 .km-ios7 .km-popup .k-state-focused,
