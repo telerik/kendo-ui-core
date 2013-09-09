@@ -2104,7 +2104,7 @@ kendo_module({
                         if (!current.hasClass("k-edit-cell") && focusable[0] && current.hasClass("k-state-focused")) {
                             focusable.focus();
                             handled = true;
-                        } else if (that.options.editable && !$(e.target).is(":button,.k-button")) {
+                        } else if (that.options.editable && !$(e.target).is(":button,.k-button,textarea")) {
                             var container = $(e.target).closest("[role=gridcell]");
                             if (!container[0]) {
                                 container = current;
