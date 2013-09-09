@@ -47,6 +47,13 @@
                 equal(widget.element[0], dom[0]);
             });
 
+            test("mobile widget has widget class", function() {
+                var dom = $("<div />");
+                var widget = new MobileWidget(dom);
+
+                ok(widget.element.hasClass("km-widget"));
+            });
+
             test("instantiates mobile widgets by data attribute and container dom", 1, function() {
                 var dom = $("<div><div data-role='my'></div></div>");
 

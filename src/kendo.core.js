@@ -2687,6 +2687,7 @@ function pad(number, digits, end) {
             Widget.fn.init.call(this, element, options);
             this.element.autoApplyNS();
             this.wrapper = this.element;
+            this.element.addClass("km-widget");
         },
 
         destroy: function() {
