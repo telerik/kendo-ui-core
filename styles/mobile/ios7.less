@@ -39,34 +39,41 @@
 .km-ios7 .km-navbar,
 .km-ios7 .km-tabstrip
 {
-    background: @ios7-light-background;
+    background-color: @ios7-light-background;
 }
 
 .km-ios7,
 .km-ios7 .km-content
 {
     color: @ios7-main-color;
-    background: @ios7-background;
+    background-color: @ios7-background;
 }
 
 .km-ios7,
 .km-ios7 *
 {
     .box-sizing(border-box);
-    .background-clip(border-box);
+    .background-clip(content-box);
 }
 
 /* NavBar */
 
 .km-ios7 .km-navbar,
-.km-ios7 .km-tabstrip
+.km-ios7 .km-toolbar
 {
-    border: @ios7-border-width solid transparent;
-    .box-shadow(0 0 1px @ios7-dark-background);
+    border: @ios7-border-width solid @ios7-second-border-color;
+    border-width: 0 0 1px;
 }
 
-.km-ios7 .km-toolbar,
+.km-ios7 .km-footer .km-navbar,
+.km-ios7 .km-footer .km-toolbar,
+.km-ios7 .km-tabstrip
+{
+    border-width: 1px 0 0;
+}
+
 .km-ios7 .km-navbar,
+.km-ios7 .km-toolbar,
 .km-ios7 .km-tabstrip,
 .km-ios7 .km-tabstrip .km-button
 {
@@ -665,18 +672,38 @@
 .km-ios7 .km-popup.km-pane,
 .km-tablet .km-ios7 .km-actionsheet-wrapper
 {
-    background-color: @ios7-dark-background;
+    background-color: @ios7-actionsheet-background;
 }
 
 .km-ios7 .km-popup.km-pane
 {
+    overflow: visible;
     border: 5px solid transparent;
+    box-sizing: border-box;
+    .border-radius(@ios7-secondary-border-radius);
+    .box-shadow(0 0 0 1px @ios7-second-border-color);
 }
 
-.km-ios7 .km-popup.km-pane,
-.km-ios7 .km-actionsheet-wrapper.km-popup
+.km-ios7 .km-popup.km-pane > .km-view
 {
+    height: 100%;
     .border-radius(@ios7-border-radius);
+}
+
+.km-ios7 .km-popup.km-pane:before
+{
+    position: absolute;
+    display: block;
+    content: "\a0";
+    top: -1px;
+    left: -1px;
+    width: ~"calc(100% + 2px)";
+    width: ~"-webkit-calc(100% + 2px)";
+    height: ~"calc(100% + 2px)";
+    height: ~"-webkit-calc(100% + 2px)";
+    box-sizing: border-box;
+    .border-radius(@ios7-secondary-border-radius);
+    border: 1px solid @ios7-second-border-color;
 }
 
 .km-ios7 .km-actionsheet-wrapper.km-popup
@@ -684,20 +711,19 @@
     padding: 2px 0;
 }
 
-.km-ios7 .km-popup.km-pane .km-navbar,
-.km-ios7 .km-popup.km-pane .km-toolbar,
-.km-ios7 .km-popup.km-pane .km-tabstrip
+.km-ios7 .km-popup.km-pane > .km-view > :first-child,
+.km-ios7 .km-popup.km-pane > .km-view > :first-child > *
 {
-    background: none;
+    border-top-left-radius: @ios7-border-radius;
+    border-top-right-radius: @ios7-border-radius;
+    -webkit-margin-collapse: separate;
 }
 
-.km-ios7 .km-popup.km-pane .km-header
+.km-ios7 .km-popup.km-pane > .km-view > :last-child,
+.km-ios7 .km-popup.km-pane > .km-view > :last-child > *
 {
-    padding: 0 5px;
-    margin: -5px -5px 2px;
-    .border-radius(@ios7-border-radius @ios7-border-radius 0 0);
-    -webkit-border-top-left-radius: @ios7-border-radius;
-    -webkit-border-top-right-radius: @ios7-border-radius;
+    border-bottom-left-radius: @ios7-border-radius;
+    border-bottom-right-radius: @ios7-border-radius;
     -webkit-margin-collapse: separate;
 }
 
@@ -711,13 +737,13 @@
 
 .km-ios7 .km-popup-arrow:after
 {
-    border-color: @ios7-dark-background transparent;
+    border-color: @ios7-actionsheet-background transparent;
 }
 
 .km-ios7 .km-left .km-popup-arrow:after,
 .km-ios7 .km-right .km-popup-arrow:after
 {
-    border-color: transparent @ios7-dark-background;
+    border-color: transparent @ios7-actionsheet-background;
 }
 
 .km-ios7 .km-down .km-popup-arrow:before
@@ -725,22 +751,25 @@
     margin-top: -1px;
 }
 
-.km-ios7 .km-down .km-popup-arrow:after
+.km-ios7 .km-up .km-popup-arrow:before
 {
-    border-color: @ios7-dark-background transparent;
+    margin-top: 1px;
 }
 
-.km-ios7 .km-up .km-popup-arrow:after
+.km-ios7 .km-up .km-popup-arrow:after,
+.km-ios7 .km-up .km-popup-arrow:before
 {
     border-width: 15px 15px 0 15px;
 }
 
-.km-ios7 .km-left .km-popup-arrow:after
+.km-ios7 .km-left .km-popup-arrow:after,
+.km-ios7 .km-left .km-popup-arrow:before
 {
     border-width: 15px 0 15px 15px;
 }
 
-.km-ios7 .km-right .km-popup-arrow:after
+.km-ios7 .km-right .km-popup-arrow:after,
+.km-ios7 .km-right .km-popup-arrow:before
 {
     border-width: 15px 15px 15px 0;
 }
@@ -1110,8 +1139,6 @@
 .km-ios7 .k-slider .k-draghandle,
 .km-ios7 .k-slider .k-draghandle:hover,
 .km-ios7 .km-scroller-pull .km-icon,
-.km-ios7 .km-popup.km-pane .km-navbar,
-.km-ios7 .km-popup.km-pane .km-toolbar,
 .km-ios7 .km-popup .k-state-hover,
 .km-ios7 .km-popup .k-state-focused,
 .km-ios7 .km-popup .k-state-selected
@@ -1163,6 +1190,8 @@
 }
 
 .km-ios7 .km-tabstrip .km-state-active,
+.km-ios7 li.km-state-active .km-listview-link,
+.km-ios7 li.km-state-active .km-listview-label,
 .km-ios7 .km-leftitem .km-button.km-state-active,
 .km-ios7 .km-rightitem .km-button.km-state-active
 {
