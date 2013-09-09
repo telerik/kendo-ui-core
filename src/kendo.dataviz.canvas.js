@@ -244,6 +244,23 @@ kendo_module({
         buildGradient: $.noop
     });
 
+    var CanvasCubicCurve = CanvasPath.extend({
+      init: function(points, options) {
+        var curve = this;
+        CanvasPath.fn.init.call(curve, options);
+
+        curve.points = points;
+      },
+      renderPoints: function(ctx){
+         var curve = this,
+            points = curve.points;
+            ctx.moveTo(points[0].x, points[0].y);           
+            for(var i = 1; i < points.length; i+=3){
+                ctx.bezierCurveTo(points[i].x,points[i].y,points[i+1].x,points[i+1].y, points[i+2].x,points[i+2].y);  
+            }           
+       }
+    });
+
     var CanvasLine = CanvasPath.extend({
         init: function(points, closed, options) {
             var line = this;

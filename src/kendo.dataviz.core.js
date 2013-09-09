@@ -3619,110 +3619,194 @@ kendo_module({
          return 0;
     }
 
-    var CurveProcessor = function(addPoints, allowedError){
-        this.allowedError = allowedError;
+    var CurveProcessor = function(allowedError){
+        this.allowedError = defined(allowedError) ? math.abs(allowedError): 0;
     };
 
     CurveProcessor.prototype = CurveProcessor.fn = { 
         process: function(points){
             var that = this,
-                length = points.length,
+                length = points.length,             
+                currentPoints,
+                xField, yField,                
                 result = [],
-                dataPoints,
-                p0,p1,p2,p3,
-                xField, yField,
-                fn, derivative,
-                reverse,
-                addPoints = function(){
-                    for(var i =0; i < arguments.length;i++){
-                        result.push(arguments[i]);
-                    }
+                addPoint = function(point){
+                    result.push(point);
                 };
-                
+            if(points.length < 3){
+                return points;
+            }        
+            addPoint(points[0]); 
+            currentPoints = points.slice(0,3);
+            if(that.isLinearByField(currentPoints, "x")){
+                xField = "x";
+                yField = "y";
+            }
+            else{
+                xField = "y";
+                yField = "x"; 
+            }
+       
+            p1 = that.getInitialControlPoint(currentPoints, xField, yField);
+            addPoint(p1);
             
-            addPoints(points[0]); 
-  
-            for(var idx = 0; idx <= length - 3;idx++){
-                dataPoints = points.slice(idx, idx+3);
-                p0 = dataPoints[0];
-                p3 = dataPoints[1];
-                
-                if(derivative){
-                    p1 = that.getFirstControlPoint(derivative,xField,yField, p0, p3);
-                } 
-            
-                if(that.isLinear(dataPoints)){               
+            for(var idx = 0; idx <= length - 3; idx++) {
+                currentPoints = points.slice(idx, idx + 3);
+                if(that.isLinearByField(currentPoints, "x")){
                     xField = "x";
-                    yField = "y";    
+                    yField = "y";
                 }
-                else{                 
+                else{
                     xField = "y";
-                    yField = "x";       
+                    yField = "x"; 
                 }
-                
-                
-                if(that.isMonotonic(dataPoints, yField)){
-                   if(dataPoints[0].x >= dataPoints[1].x && dataPoints[1].x >= dataPoints[2].x){
-                       fn = that.getCubicPointsFunction(dataPoints, xField, yField, 1);
-                   }
-                   else{
-                        fn = that.getParabolaPointsFunction(dataPoints, xField, yField);     
-                   }
-                    
-                }
-                else {   
-                    fn = that.getCubicPointsFunction(dataPoints, xField, yField, 1);
-                }                             
-                
-                if(!derivative){
-                    derivative = that.getDerivative(fn);
-                    p1 = that.getFirstControlPoint(derivative,xField,yField, p0, p3);  
-                } 
-               
-                derivative = that.getDerivative(fn);
-                p2 = that.getSecondControlPoint(derivative,xField,yField, p0, p3);
-                addPoints(p1,p2,p3);
-            }         
-            if(!that.isMonotonic(dataPoints,yField)){
-                fn = that.getQuarticPointsFunction(dataPoints, xField, yField);
-                derivative = that.getDerivative(fn);
+                controlPoints = that.getMiddleControlPoints(currentPoints, xField, yField);
+                addPoint(controlPoints[0]);
+                addPoint(currentPoints[1]);    
+                addPoint(controlPoints[1]);              
             }
-            if(idx <= length){   
-                p0 = points[length -2];
-                p3 = points[length -1];
-                p1 = that.getFirstControlPoint(derivative,xField,yField, p0, p3);
-                p2 = that.getSecondControlPoint(derivative,xField,yField, p0, p3);
-                addPoints(p1,p2,p3);  
-            }
+                
+          
+            addPoint(that.getSecondControlPoint(0, points[length -2], points[length -1], xField, yField));
+            addPoint(points[length -1]);  
             return result;
-        },         
-        isLinear: function(dataPoints){
-            return (dataPoints[2].x > dataPoints[1].x && dataPoints[1].x > dataPoints[0].x) ||
-                    (dataPoints[2].x < dataPoints[1].x && dataPoints[1].x < dataPoints[0].x);
         },
-        isMonotonic: function(dataPoints,yField){
-            return (dataPoints[2][yField] > dataPoints[1][yField] && dataPoints[1][yField] > dataPoints[0][yField]) ||
-                        (dataPoints[2][yField] < dataPoints[1][yField] && dataPoints[1][yField] < dataPoints[0][yField]);
-        },    
-        getFirstControlPoint: function(fnD, xField, yField, p0,p3){            
+        getSymetricToPoint: function(idx, points, fn, xField, yField){
+            var y = points[idx][yField],
+                x1 = ((-fn[1] + Math.sqrt(fn[1]*fn[1] - 4*fn[2] * (fn[0] - points[idx][yField]))) / (2*fn[2])),
+                x2 = (-fn[1] - Math.sqrt(fn[1]*fn[1] - 4*fn[2] * (fn[0] - points[idx][yField]))) / (2*fn[2]),
+                x = x1.toFixed(1) == points[idx][xField].toFixed(1) ? x2 : x1;
+                point = new Point2D(x, y);
+                
+            return point;
+        },
+        getInitialControlPoint: function(currentPoints, xField, yField){
+            var that = this,                    
+                controlPoint,
+                p0 = currentPoints[0],
+                p1 = currentPoints[1],
+                p2 = currentPoints[2];
+            if(that.isMonotonic(currentPoints,yField)){
+                var fn = that.getParabolaPointsFunction(currentPoints,xField, yField),
+                    fnd = that.getDerivative(fn),
+                    extremum = {};
+                extremum[xField] = -fnd[0] / fnd[1];
+                if(that.isLinearByField([p1, p2,extremum], xField) || that.isLinearByField([extremum,p0, p1], xField) || 
+                    that.isLinearByField([p1, extremum, p2], xField)){   
+                    controlPoint = that.getFirstControlPoint(that.calculateFunction(fnd, p0[xField]), p0, p1, xField, yField);                                 
+                }
+                else {      
+                    controlPoint = that.getFirstControlPoint(0, p0, p1, xField, yField);
+                }
+            }
+            else{
+                 var tangent = that.getTangent(currentPoints, xField, yField);                 
+                 if(!that.isLinearByField(currentPoints, xField) && that.hasExtremumByField(currentPoints, yField)){ 
+                    controlPoint = that.getFirstControlPoint(tangent, p0, p1,yField,xField);
+                 }
+                 else{
+                     controlPoint = that.getFirstControlPoint(tangent, p0, p1, xField, yField);
+                 }
+            }
+            return controlPoint;
+        },
+        getMiddleControlPoints: function(currentPoints, xField, yField){
+            var that = this,                    
+                controlPoint2,
+                nextControlPoint,
+                p0 = currentPoints[0],
+                p1 = currentPoints[1],
+                p2 = currentPoints[2],
+                allowedError = that.allowedError;
+               
+            if(that.isMonotonic(currentPoints,yField)){
+                fn = that.getParabolaPointsFunction(currentPoints,xField, yField);
+                var fnd = that.getDerivative(fn);                
+                controlPoint2 = that.getSecondControlPoint(that.calculateFunction(fnd, p1[xField]), p0, p1, xField, yField);
+                extremum = {};
+                extremum[xField] = -fnd[0] / fnd[1];
+                if(that.isLinearByField([p1, p2,extremum], xField) || that.isLinearByField([extremum, p0, p1], xField)){   
+                    nextControlPoint = that.getFirstControlPoint(that.calculateFunction(fnd, p1[xField]), p1, p2,xField,yField);                                 
+                }
+                else if(that.isLinearByField([p1, extremum, p2], xField)){                          
+                    nextControlPoint = that.getSymetricToPoint(2,currentPoints, fn, xField, yField);
+                }
+                else{                                                          
+                    controlPoint2 = that.getSymetricToPoint(0,currentPoints, fn, xField, yField);
+                    nextControlPoint = that.getFirstControlPoint(that.calculateFunction(fnd, p1[xField]), p1,p2,xField,yField);
+                }
+            }
+            else{           
+                 if(that.isLinearByField(currentPoints, xField)){                                       
+                    controlPoint2 = that.getSecondControlPoint(0, p0,p1,xField,yField);
+                    nextControlPoint = that.getFirstControlPoint(0, p1, p2,xField,yField);
+                 }
+                 else{
+                    if(that.hasExtremumByField(currentPoints, yField)){                        
+                        controlPoint2 = that.getSecondControlPoint(allowedError, p0, p1,yField,xField);
+                        nextControlPoint = that.getFirstControlPoint(allowedError, p1, p2,xField,yField);
+                    }
+                    else{                        
+                        controlPoint2 = that.getSecondControlPoint(allowedError, p0, p1,xField,yField);
+                        nextControlPoint = that.getFirstControlPoint(allowedError, p1, p2,yField,xField);
+                    }
+                 }
+            }
+            return [controlPoint2, nextControlPoint];
+        },  
+        isLinearByField: function(points, field){
+            var isAscending = true,
+                isDescending = true,
+                length = points.length,
+                i;
+                
+            for(i = 0; i < length - 1; i++){
+                isAscending = isAscending && points[i][field] < points[i+1][field];
+                isDescending = isDescending && points[i][field] > points[i+1][field];
+            }
+            return isAscending || isDescending;
+        },        
+        hasExtremumByField: function(points, field){
+            return (points[0][field] < points[1][field] && points[2][field] < points[1][field]) || 
+                        (points[1][field] < points[0][field] && points[1] < points[2][field]);
+        },      
+        getTangent: function(points, xField, yField){
+            var tangent,
+                x = points[1][xField] - points[0][xField],
+                y = points[1][yField] - points[0][yField];
+            if(math.abs(x/y) <= math.abs(y/x)){
+               tangent = x/y;
+            }
+            else{
+               tangent = y/x;
+            }
+                                       
+            return tangent;
+        },        
+        isMonotonic: function(points,yField){
+            return (points[2][yField] > points[1][yField] && points[1][yField] > points[0][yField]) ||
+                        (points[2][yField] < points[1][yField] && points[1][yField] < points[0][yField]);
+        },  
+        getFirstControlPoint: function(tangent, p0,p3, xField, yField){
             var controlPoint = new Point2D(),
                 t1 = p0[xField],
                 t2 = p3[xField],
-                t = t2 - t1;
-            controlPoint[xField] = t1 + t/3;
-            controlPoint[yField] = p0[yField] + (t/3) * this.calculateFunction(fnD, t1);
-            
-            return controlPoint;        
+                t = t2 - t1,
+                weigth = 0.3;
+               
+            controlPoint[xField] = t1 + (t || (p3[yField] > p0[yField] ? -1 : 1)) * weigth;
+            controlPoint[yField] = p0[yField] + t * weigth * tangent;
+            return controlPoint;
         },
-        getSecondControlPoint: function(fnD, xField, yField, p0,p3){
+        getSecondControlPoint: function(tangent, p0,p3, xField, yField){
             var controlPoint = new Point2D(),
                 t1 = p0[xField],
                 t2 = p3[xField],
-                t = t2 - t1;
-            controlPoint[xField] = t2 - t/3;
-            controlPoint[yField] = p3[yField] - (t/3) * this.calculateFunction(fnD, t2);
-
-            return controlPoint; 
+                t = t2 - t1,
+                weigth = 0.3;
+            controlPoint[xField] = t2 - t * weigth;
+            controlPoint[yField] = p3[yField] - t * weigth * tangent;
+            return controlPoint;
         },
         getParabolaPointsFunction: function(points, xField, yField){
             var that = this,
@@ -3735,36 +3819,7 @@ kendo_module({
             fn = that.multiplyMatrixByVector(m, v);
 
             return fn;
-        },    
-        getCubicPointsFunction: function(points, xField, yField, extremumIdx){
-            var that = this,
-                m = [
-                    [1, Math.pow(points[0][xField], 1),Math.pow(points[0][xField], 2), Math.pow(points[0][xField], 3)],
-                    [1, Math.pow(points[1][xField], 1),Math.pow(points[1][xField], 2), Math.pow(points[1][xField], 3)],
-                    [1, Math.pow(points[2][xField], 1),Math.pow(points[2][xField], 2), Math.pow(points[2][xField], 3)],
-                    [0, 1, 2 * points[extremumIdx][xField], 3 * Math.pow(points[extremumIdx][xField], 2)]
-                ],
-                v = [points[0][yField], points[1][yField], points[2][yField], 0],
-                reverse = that.getReverseMatrix(m),
-                fn = that.multiplyMatrixByVector(reverse,v);
-            
-            return fn;        
-        },
-        getQuarticPointsFunction: function(points, xField, yField){
-           var that = this,
-                m = that.getReverseMatrix(that.initExtremumMatrix(points,xField)),
-                v = [],
-                fn;     
-            for(var i = 0; i < points.length; i++){
-                v.push(points[i][yField]);
-            }
-            for(;i< m.length; i++){
-                v.push(0);
-            }
-            fn = that.multiplyMatrixByVector(m, v);
-
-            return fn;
-        },
+        },      
         calculateFunction: function(fn,x){
             var result = 0,
                 length = fn.length;
@@ -3790,24 +3845,6 @@ kendo_module({
                for(var j = 0; j < length; j++){
                      m[i][j] = Math.pow(points[i][xField], j); 
                }
-            }
-            return m;
-        },
-        initExtremumMatrix: function(points,xField){
-            var m = [],
-                length = points.length;
-             
-            for(var i = 0; i < length;i++){
-               m[i] = [];           
-               for(var j = 0; j < length + 2; j++){
-                    m[i][j] = Math.pow(points[i][xField], j); 
-               }
-            }
-            for(; i < length + 2; i++){
-                m[i] = [0];
-                for(j= 1;j < length + 2; j++){
-                    m[i][j] = j * Math.pow(points[i - 2][xField], j - 1);
-                }
             }
             return m;
         },    
@@ -3864,25 +3901,7 @@ kendo_module({
                 for(var i =0; i< length; i++){
                     for(var j = 0; j < length; j++){
                         result += Math.pow(-1, i+j) * m[i][j] * 
-                            this.getDeterminant(initSubMatrix(m,i,j));
-                    }
-                }
-            }
-            return result;
-        },
-        initSubMatrix: function(m,i,j){
-            var result = [],
-                length = m.length,
-                row = -1;
-                
-            for(var k = 0; k < length; k++){
-                if(k!= i){ 
-                    row++;            
-                    result.push([]);        
-                    for(var l = 0; l < length; l++){
-                        if(l != j){                    
-                            result[row].push(m[k][l]);
-                        }
+                            this.getDeterminant(this.initSubMatrix(m,i,j));
                     }
                 }
             }
