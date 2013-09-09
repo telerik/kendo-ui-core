@@ -74,7 +74,7 @@ kendo_module({
 
             if (that._pushState) {
                 history.pushState({}, document.title, that._makePushStateUrl(to));
-                that.current = to;
+                that.current = that._currentLocation();
             } else {
                 location.hash = that.current = to;
             }

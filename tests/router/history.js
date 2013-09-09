@@ -259,3 +259,19 @@ asyncTest("stays in sync after back is called", 2, function() {
         equal(kendoHistory.locations[0], "");
     }, 300);
 });
+
+asyncTest("handles back in push state", 1, function() {
+    startWithPushState();
+    kendoHistory.navigate("/foo");
+    kendoHistory.navigate("/bar");
+    kendoHistory.navigate("/baz");
+    _history.back();
+
+    setTimeout(function() {
+        _history.back();
+        setTimeout(function() {
+            start();
+            equal(kendoHistory.locations.length, 2);
+        }, 200);
+    }, 200);
+});
