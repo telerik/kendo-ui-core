@@ -604,7 +604,7 @@ kendo_module({
 
             var group = this.groups[groupIndex];
 
-            var ranges = group.ranges(startTime, event.isAllDay ? startTime : endTime, true, event.isAllDay);
+            var ranges = group.ranges(startTime, endTime, true, event.isAllDay);
 
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
                 this._createResizeHint(ranges[rangeIndex]);

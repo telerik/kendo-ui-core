@@ -183,7 +183,7 @@ kendo_module({
 
             var group = this.groups[groupIndex];
 
-            var ranges = group.ranges(startTime, event.isAllDay && !this._isRtl ? startTime : endTime, multiday, event.isAllDay);
+            var ranges = group.ranges(startTime, endTime, multiday, event.isAllDay);
 
             this._removeResizeHint();
 

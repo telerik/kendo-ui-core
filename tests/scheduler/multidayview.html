@@ -44,7 +44,7 @@
             }
 
             function equalWithRound(value, expected) {
-                QUnit.close(value, expected, 1);
+                QUnit.close(value, expected, 2);
             }
 
             function applyDefaultLeftOffset(value) {
@@ -1613,7 +1613,6 @@
                 })]);
 
                 equal(view.groups[0].getTimeSlotCollection(0).events()[0].start, 0);
-                equal(view.groups[0].getTimeSlotCollection(0).events()[0].end, 0);
 
                 ok(view.content.find(".k-event").length);
             });
