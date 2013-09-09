@@ -132,7 +132,10 @@
             return input.val() === "" || kendo.parseFloat(input.val()) !== null;
         },
         regex: function (input, params) {
-            return patternMatcher(input.val(), params.pattern);
+            if (input.val() !== "") {
+                return patternMatcher(input.val(), params.pattern);
+            }
+            return true;
         },
         range: function(input, params) {
             if (input.val() !== "") {
@@ -156,8 +159,11 @@
             return input.val() === "" || kendo.parseDate(input.val()) !== null;
         },
         length: function(input, params) {
-            var len = $.trim(input.val()).length;
-            return (!params.min || len >= (params.min || 0)) && (!params.max || len <= (params.max || 0));
+            if (input.val() !== "") {
+                var len = $.trim(input.val()).length;
+                return (!params.min || len >= (params.min || 0)) && (!params.max || len <= (params.max || 0));
+            }
+            return true;
         }
     };
 

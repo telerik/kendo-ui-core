@@ -269,6 +269,13 @@
 
                 ok(validator.validate());
             });
+            
+            test("validate returns true for empty input with attribute data-val-regex", function() {
+                var input = $('<input type="text" value="" data-val-regex="message" data-val-regex-pattern="\\d"/>'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });             
 
             test("validate returns true if input with type=text value is number", function() {
                 var input = $('<input type="text" value="6" data-val-number="message" />'),
@@ -346,6 +353,13 @@
 
                 ok(validator.validate());
             });
+            
+            test("validate returns true if input with data-val-length attribute does not have value", function() {
+                var input = $('<input type="text" value="" data-val-length="message" data-val-length-min="3" />'),
+                    validator = setup(input);
+
+                ok(validator.validate());
+            });            
 
             module("kendo.ui.validation.mvc metadata validation", {
                 setup: function() {
