@@ -1033,7 +1033,12 @@
                     "text": "Restrictions",
                     "url": "scheduler/restriction.html",
                     "title": "Restricting events resizing and moving",
-                    "meta": "This demo shows how to use restrict the events in Kendo UI Scheduler"
+                    "meta": "This demo shows how to restrict the events in Kendo UI Scheduler"
+                }, {
+                    "text": "Event move & resize",
+                    "url": "scheduler/move-resize.html",
+                    "title": "Moving and resizing events",
+                    "meta": "This demo shows the move and resize feature of Kendo UI Scheduler"
                 }, {
                     "text": "Selection",
                     "url": "scheduler/selection.html",
