@@ -31,7 +31,7 @@
         }
 
         h2 {
-            font-weight: 50;
+            font-weight: bold;
             font-size: 1.2em;
             letter-spacing: -0.05em;
             position: relative;
@@ -186,7 +186,11 @@
 
         function getVisual() {
             var person = people[parseInt(Math.floor(Math.random()*people.length))];
-            var g = new kendo.diagram.Group();
+            var g = new kendo.diagram.Group({
+                autoSize: true,
+                width: 200,
+                height: 80
+            });
             var r = new kendo.diagram.Rectangle({
                 width: 200,
                 height: 80,

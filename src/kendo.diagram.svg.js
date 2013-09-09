@@ -531,7 +531,7 @@ kendo_module({
 
         },
         refresh: function () {
-            if (this._points === null || this._points.length === 0){
+            if (this._points === null || this._points.length === 0) {
                 return;
             }
             var pointsString = "", i;
@@ -582,6 +582,9 @@ kendo_module({
         init: function (options) {
             Element.fn.init.call(this, document.createElementNS(SVGNS, "g"), options);
         },
+        options: {
+            autoSize: false
+        },
         append: function (visual) {
             this.native.appendChild(visual.native);
             visual.canvas = this.canvas;
@@ -601,6 +604,33 @@ kendo_module({
             for (i = 0; i < visuals.length; i++) {
                 visual = visuals[i];
                 this.native.insertBefore(visual.native, this.native.firstChild);
+            }
+        },
+        size: function () {
+            if (!this.oWidth || !this.oHeight) {
+                try {
+                    var box = this.native.getBoundingClientRect();
+                    this.oWidth = box.width;
+                    this.oHeight = box.height;
+                }
+                catch (e) {
+                }
+            }
+            var scaleX = this.options.width / this.oWidth,
+                scaleY = this.options.height / this.oHeight,
+                x = this.options.x || 0,
+                y = this.options.y || 0;
+
+            scaleX = Utils.isNumber(scaleX) ? scaleX : 1;
+            scaleY = Utils.isNumber(scaleY) ? scaleY : 1;
+
+            var transform = new CompositeTransform(x, y, scaleX, scaleY);
+            this.native.setAttribute("transform", transform.toString());
+        },
+        redraw: function (options) {
+            Element.fn.redraw.call(this, options);
+            if (this.options.autoSize) {
+                this.size();
             }
         }
     });
