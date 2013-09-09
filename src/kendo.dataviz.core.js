@@ -98,8 +98,8 @@ kendo_module({
             return new Point2D(x, y);
         }
 
-        point.x = round(x || 0, COORD_PRECISION);
-        point.y = round(y || 0, COORD_PRECISION);
+        point.x = x || 0;
+        point.y = y || 0;
     };
 
     Point2D.fn = Point2D.prototype = {
