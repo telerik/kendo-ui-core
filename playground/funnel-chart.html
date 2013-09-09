@@ -23,8 +23,9 @@
     </head>
     <body>
         <div id="funnel-equal"></div>
+        <div id="funnel-equal-spacing"></div>
         <div id="funnel-height"></div>
-        <div id="funnel-area"></div>
+        <div id="funnel-height-spacing"></div>
         <script>
             var seriesData = [{
                 value: 60,
@@ -44,6 +45,14 @@
                 }]
             });
 
+            $("#funnel-equal-spacing").kendoChart({
+                series: [{
+                    type: "funnel",
+                    data: seriesData,
+                    segmentSpacing: 25
+                }]
+            });
+
             $("#funnel-height").kendoChart({
                 series: [{
                     type: "funnel",
@@ -52,14 +61,16 @@
                     data: seriesData
                 }]
             });
-
-            $("#funnel-area").kendoChart({
+            $("#funnel-height-spacing").kendoChart({
                 series: [{
                     type: "funnel",
-                    dependOn:"area",
-                    data: seriesData
+                    dependOn:"height",
+                    neckSize:0.6,
+                    data: seriesData,
+                    segmentSpacing:10
                 }]
             });
+
         </script>
     </body>
 </html>

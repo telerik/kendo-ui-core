@@ -50,7 +50,8 @@ kendo_module({
                     series: series,
                     dependOn:firstSeries.dependOn,
                     legend: plotArea.options.legend,
-                    neckSize: firstSeries.neckSize
+                    neckSize: firstSeries.neckSize,
+                    segmentSpacing:firstSeries.segmentSpacing
                 });
 
             plotArea.appendChart(funnelChart);
@@ -77,7 +78,8 @@ kendo_module({
         options: {
             neckSize: 0.3,
             width: 300,
-            dependOn:"none"
+            dependOn:"none",
+            segmentSpacing:0
         },
 
         render: function() {
@@ -159,17 +161,19 @@ kendo_module({
 
         reflow: function(box) {
             var chart = this,
+                options = chart.options,
                 segments = chart.segments,
                 count = segments.length,
                 i,
-                dependOn = chart.options.dependOn,
+                segmentSpacing = options.segmentSpacing,
+                dependOn = options.dependOn,
                 width = box.width(),
-                neckSize = chart.options.neckSize * width;
+                neckSize = options.neckSize*width;
 
-            if (dependOn === "area") {
-            } else if (dependOn === "height") {
+
+            if(dependOn=="height"){
                 var finalNarrow = (width - neckSize)/2,
-                totalHeight = box.height(),
+                totalHeight = box.height() - segmentSpacing * (count-1),
                 height,
                 offset,
                 previousHeight = 0,
@@ -180,19 +184,19 @@ kendo_module({
                     percentage = segments[i].percentage,
                     offset = finalNarrow * percentage,
                     height = totalHeight * percentage; 
-
                     points.push(new Point2D(box.x1 + previousOffset, box.y1 + previousHeight));
                     points.push(new Point2D(box.x1+width - previousOffset, box.y1 + previousHeight));
                     points.push(new Point2D(box.x1+width - previousOffset - offset, box.y1 + height + previousHeight));
                     points.push(new Point2D(box.x1+ previousOffset + offset,box.y1 + height + previousHeight));
                     previousOffset += offset;
-                    previousHeight += height;
+                    previousHeight += height + segmentSpacing;
                 }
-            } else {
+            }
+            else {
                 var offset = 0,
                 //TODO support pixels and string as neckSize
-                narrowSize = (width-neckSize)/(count*2),
-                segmentHeight = box.height() / count,
+                narrowSize = (width - neckSize) / (count * 2) ,
+                segmentHeight = (box.height()-(segmentSpacing *(count-1))) / count,
                 narrowOffset = 0;
 
                 for (i = 0; i < count; i++) {
@@ -203,9 +207,10 @@ kendo_module({
                     points.push(new Point2D(box.x1+ narrowOffset + narrowSize,box.y1 + offset + segmentHeight));
 
                     narrowOffset += narrowSize;
-                    offset += segmentHeight;
+                    offset += segmentHeight + segmentSpacing;
                 }
             }
+
         }
     });
 

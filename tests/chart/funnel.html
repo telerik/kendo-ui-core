@@ -216,6 +216,90 @@
             test("sets point dataItem", function() {
                 equal(typeof chart.segments[0].dataItem, "object");
             });
+
+            module("dependOn height with spacing", {
+                setup: function() {
+                    createChart({
+                        dependOn:"height",
+                        segmentSpacing:30,
+                        neckSize: 0,
+                        series: [{
+                            type: "funnel",
+                            data: [{
+                                value: 1,
+                                category: "A",
+                            }, {
+                                value: 2,
+                                category: "B"
+                            }, {
+                                value: 7,
+                                category: "C"
+                            }]
+                        }]
+                    });
+                }
+            });
+
+            test("First segment position", function() {
+                arrayClose(mapPoints(chart.segments[0].points), [
+                    [0, 0], [800, 0], [760, 54], [40, 54]
+                ], TOLERANCE);
+            });
+
+            test("Second segment position", function() {
+                arrayClose(mapPoints(chart.segments[1].points), [
+                    [40, 84], [760, 84], [680, 192], [120, 192]
+                ], TOLERANCE);
+            });
+
+            test("Third segment position", function() {
+                arrayClose(mapPoints(chart.segments[2].points), [
+                    [120, 222], [680, 222], [400, 600], [400, 600]
+                ], TOLERANCE);
+            });
+
+            module("dependOn none with spacing", {
+                setup: function() {
+                    createChart({
+                        dependOn:"height",
+                        segmentSpacing:33,
+                        neckSize: 0,
+                        series: [{
+                            type: "funnel",
+                            segmentSpacing:33,
+                            data: [{
+                                value: 1,
+                                category: "A",
+                            }, {
+                                value: 2,
+                                category: "B"
+                            }, {
+                                value: 7,
+                                category: "C"
+                            }]
+                        }]
+                    });
+                }
+            });
+
+            test("First segment position", function() {
+                arrayClose(mapPoints(chart.segments[0].points), [
+                    [0, 0], [800, 0], [760, 53], [40, 53]
+                ], TOLERANCE);
+            });
+
+            test("Second segment position", function() {
+                arrayClose(mapPoints(chart.segments[1].points), [
+                    [40, 86], [760, 86], [680, 193], [120, 193]
+                ], TOLERANCE);
+            });
+
+            test("Third segment position", function() {
+                arrayClose(mapPoints(chart.segments[2].points), [
+                    [120, 226], [680, 226], [400, 600], [400, 600]
+                ], TOLERANCE);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
