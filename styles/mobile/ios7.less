@@ -1,6 +1,7 @@
 @ios7-main-color: #000;
 @ios7-second-color: #bababa;
 @ios7-background: #fff;
+@ios7-actionsheet-background: #F7F7F8;
 @ios7-light-background: rgba(244,244,244,.95);
 @ios7-list-select-background: #d9d9d9;
 @ios7-list-title-background: #efeff4;
@@ -20,7 +21,7 @@
 
 .km-ios7
 {
-    font: normal 1em "HelveticaNeue Light", "Roboto Light", "Slate Light", "Segoe WP", NokiaPureTextLight, sans-serif;
+    font: normal 1em "HelveticaNeue Ultra Light", "Roboto Light", "Slate Light", "Segoe WP", NokiaPureTextLight, sans-serif;
 }
 
 /* override transform options for performance */
@@ -105,6 +106,8 @@
     border: 0;
     margin-top: .26rem;
     margin-bottom: .26rem;
+    padding-left: .2em;
+    padding-right: .2em;
 }
 
 .km-ios7 .km-footer,
@@ -116,6 +119,18 @@
 .km-ios7 .km-state-active[style*=background]
 {
     .box-shadow(inset 0 0 0 1000px rgba(0,0,0,.2));
+}
+
+.km-ios7 .km-back:before
+{
+    content: "\a0";
+    display: inline-block;
+    color: @ios7-active-background;
+    width: .8em;
+    height: .8em;
+    border-width: 0;
+    box-shadow: inset .25rem -.25rem 0;
+    .transform(rotate(45deg));
 }
 
 /* Badges and Details */
@@ -494,13 +509,18 @@
 
 /* Shim */
 
-.km-ios7 .km-shim,
-.km-phone .km-ios7 .km-actionsheet-wrapper
+.km-ios7 .km-shim
 {
     background: rgba(0,0,0,.4);
 }
 
 /* PopUp + ActionSheet */
+
+.km-ios7 .km-actionsheet
+{
+    background: transparent;
+    padding: 0 .5em;
+}
 
 .km-ios7 .km-popup .k-popup
 {
@@ -509,7 +529,7 @@
 
 .km-ios7 .km-actionsheet > li > a
 {
-    font-size: 1.4em;
+    font-size: 1.3em;
     font-weight: normal;
     text-align: center;
 }
@@ -517,18 +537,14 @@
 .km-ios7 .km-popup .k-item,
 .km-ios7 .km-actionsheet > li > a
 {
+    font-weight: normal;
     text-decoration: none;
-    background: @ios7-dark-background;
-    padding: .5em 0 .5em .6em;
+    background: @ios7-actionsheet-background;
+    padding: .3em 0;
     border: 0;
     .border-radius(0);
-    border-bottom: 1px solid @ios7-light-shadow;
+    border-bottom: 1px solid @ios7-second-border-color;
     .box-sizing(border-box);
-}
-
-.km-ios7 li.km-actionsheet-cancel > a
-{
-    color: @ios7-second-color;
 }
 
 .km-ios7 .km-popup
@@ -556,10 +572,9 @@
 .km-ios7 .km-actionsheet-wrapper,
 .km-ios7 .km-popup .k-list-container
 {
-    background: @ios7-overlay-background;
+    background: transparent;
     bottom: 0;
     border: 0;
-    border-top: 1px solid @ios7-light-shadow;
     .border-radius(0);
     .box-sizing(border-box);
 }
@@ -572,6 +587,12 @@
 .km-ios7 .km-actionsheet > li:last-child > a
 {
     border: 0;
+
+}
+
+.km-ios7 .km-actionsheet > .km-actionsheet-cancel > a
+{
+    font-weight: bold;
 }
 
 .km-ios7 .km-shim .k-animation-container
@@ -585,6 +606,33 @@
 .km-ios7 .km-popup li.km-actionsheet-title
 {
     display: none;
+}
+
+.km-ios7 .km-popup .k-item:first-child,
+.km-ios7 .km-actionsheet > li:nth-child(2) > a
+{
+    border-top-left-radius: @ios7-border-radius;
+    border-top-right-radius: @ios7-border-radius;
+}
+
+.km-ios7 .km-popup .k-item:last-child,
+.km-ios7 .km-actionsheet > li:nth-last-child(2) > a
+{
+    border-bottom-left-radius: @ios7-border-radius;
+    border-bottom-right-radius: @ios7-border-radius;
+}
+
+.km-ios7 .km-actionsheet > .km-actionsheet-cancel > a
+{
+    border-radius: @ios7-border-radius;
+}
+
+.km-ios7 .km-popup .k-item:last-child,
+.km-ios7 .km-popup .k-item:first-child,
+.km-ios7 .km-actionsheet > li:first-child,
+.km-ios7 .km-actionsheet > .km-actionsheet-cancel
+{
+    margin: .5em 0;
 }
 
 /* PopOver */
@@ -1029,6 +1077,7 @@
 .km-ios7 .km-switch-handle,
 .km-ios7 .k-slider-selection,
 .km-ios7 .km-switch-background,
+.km-ios7 .km-actionsheet > li > a,
 .km-ios7 .km-tabstrip .km-state-active
 {
     color: @ios7-active-background;
@@ -1041,7 +1090,6 @@
 .km-ios7 .km-switch-label-on,
 .km-ios7 .km-switch-label-off,
 .km-ios7 .km-popup .k-item,
-.km-ios7 .km-actionsheet > li > a,
 .km-ios7 .k-slider .k-draghandle,
 .km-ios7 .k-slider .k-draghandle:hover,
 .km-ios7 .km-scroller-pull .km-icon,
@@ -1049,9 +1097,7 @@
 .km-ios7 .km-popup.km-pane .km-toolbar,
 .km-ios7 .km-popup .k-state-hover,
 .km-ios7 .km-popup .k-state-focused,
-.km-ios7 .km-popup .k-state-selected,
-.km-ios7 .km-actionsheet > li > a:active,
-.km-ios7 .km-actionsheet > li > a:hover
+.km-ios7 .km-popup .k-state-selected
 {
     color: @ios7-active-color;
 }
@@ -1075,8 +1121,6 @@
 .km-ios7 .km-popup .k-state-hover,
 .km-ios7 .km-popup .k-state-focused,
 .km-ios7 .km-popup .k-state-selected,
-.km-ios7 .km-actionsheet > li > a:active,
-.km-ios7 .km-actionsheet > li > a:hover,
 .km-ios7 .km-listview-label input[type=radio]:checked,
 .km-ios7 .km-listview-label input[type=checkbox]:checked
 {
@@ -1102,9 +1146,17 @@
     opacity: .4;
 }
 
+.km-ios7 .km-actionsheet > li > a:active,
+.km-ios7 .km-actionsheet > li > a:hover,
+.km-ios7 li.km-state-active .km-listview-link,
+.km-ios7 li.km-state-active .km-listview-label
+{
+    background: @ios7-list-select-background;
+}
+
 .km-ios7 li.km-state-active .km-listview-link,
 .km-ios7 li.km-state-active .km-listview-label
 {
     color: @ios7-main-color;
-    background: @ios7-list-select-background;
 }
+
