@@ -32,12 +32,6 @@ kendo_module({
         buttonRoles = "button backbutton detailbutton listview-link",
         linkRoles = "tab";
 
-    function appLinkClick(e) {
-        if(attrValue($(e.currentTarget), "rel") != EXTERNAL) {
-            e.preventDefault();
-        }
-    }
-
     var Pane = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -164,7 +158,15 @@ kendo_module({
             this.element.handler(this)
                 .on("down", roleSelector(linkRoles), "_mouseup")
                 .on("up", roleSelector(buttonRoles), "_mouseup")
-                .on("click", roleSelector(linkRoles + " " + buttonRoles), appLinkClick);
+                .on("click", roleSelector(linkRoles + " " + buttonRoles), "_appLinkClick");
+        },
+
+        _appLinkClick: function (e) {
+            var remote = e.currentTarget.href[0] !== "#" && this.options.serverNavigation;
+
+            if(!remote && attrValue($(e.currentTarget), "rel") != EXTERNAL) {
+                e.preventDefault();
+            }
         },
 
         _mouseup: function(e) {
@@ -177,9 +179,10 @@ kendo_module({
                 transition = attrValue(link, "transition"),
                 rel = attrValue(link, "rel") || "",
                 target = attrValue(link, "target"),
-                href = link.attr(HREF);
+                href = link.attr(HREF),
+                remote = href[0] !== "#" && this.options.serverNavigation;
 
-            if (rel === EXTERNAL || (typeof href === "undefined") || href === DUMMY_HREF) {
+            if (remote || rel === EXTERNAL || (typeof href === "undefined") || href === DUMMY_HREF) {
                 return;
             }
 
