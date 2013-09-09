@@ -49,6 +49,17 @@
     background-color: @ios7-background;
 }
 
+.km-ios7 > .km-view,
+.km-ios7 .km-splitview
+{
+    overflow: hidden;
+}
+
+.km-ios7 .km-content
+{
+    overflow: visible !important;
+}
+
 .km-ios7,
 .km-ios7 *
 {
@@ -59,7 +70,8 @@
 /* NavBar */
 
 .km-ios7 .km-navbar,
-.km-ios7 .km-toolbar
+.km-ios7 .km-toolbar,
+.km-ios7 .km-tabstrip
 {
     border: @ios7-border-width solid @ios7-second-border-color;
     border-width: 0 0 1px;
