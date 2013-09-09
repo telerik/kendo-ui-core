@@ -261,7 +261,7 @@
 
                 view.render([ event, secondEvent ]);
                 view.select(selection);
-                view.moveSelectionToPeriod(selection);
+                view.constrainSelection(selection);
 
                 deepEqual(selection.start, new Date(2013, 1, 2));
                 deepEqual(selection.end, new Date(2013, 1, 2));
