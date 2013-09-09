@@ -645,10 +645,13 @@ kendo_module({
             }
         },
         redraw: function (options) {
+            if (options && Utils.isNumber(options.width) && Utils.isNumber(options.height)) {
+                options.center = new Point(options.width / 2, options.height / 2);
+            }
             VisualBase.fn.redraw.call(this, options);
             var n = this.native,
                 o = this.options,
-                rx = this.options.rx || o.width / 2, ry = this.options.rx || o.height / 2;
+                rx = o.rx || o.width / 2, ry = o.rx || o.height / 2;
 
             n.rx.baseVal.value = rx;
             n.ry.baseVal.value = ry;
@@ -659,6 +662,9 @@ kendo_module({
             } else if (Utils.isDefined(o.x) && Utils.isDefined(o.y)) {
                 n.cx.baseVal.value = o.x + rx;
                 n.cy.baseVal.value = o.y + ry;
+            } else {
+                n.cx.baseVal.value = rx;
+                n.cy.baseVal.value = ry;
             }
         }
     });

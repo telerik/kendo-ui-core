@@ -2670,7 +2670,6 @@ kendo_module({
                 width: 20,
                 height: 20,
                 id: id,
-                center: new Point(10, 10),
                 radius: 10,
                 background: "#778899",
                 data: "circle"
