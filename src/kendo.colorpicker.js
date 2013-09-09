@@ -305,17 +305,23 @@ kendo_module({
 
             element
                 .find("input.k-color-value").on(KEYDOWN_NS, function(ev){
+                    var input = this;
                     if (ev.keyCode == KEYS.ENTER) {
                         try {
-                            var color = parse(this.value);
+                            var color = parse(input.value);
                             var val = that.color();
                             that._select(color, color.equals(val));
                         } catch(ex) {
-                            $(this).addClass("k-state-error");
+                            $(input).addClass("k-state-error");
                         }
+                    } else if (that.options.autoupdate) {
+                        setTimeout(function(){
+                            var color = parse(input.value, true);
+                            if (color) {
+                                that._updateUI(color, true);
+                            }
+                        }, 10);
                     }
-                // }).on("focus", function(){
-                //     this.select();
                 }).end()
 
                 .on(CLICK_NS, ".k-controls button.apply", function(){
@@ -345,12 +351,13 @@ kendo_module({
             ColorSelector.fn.destroy.call(this);
         },
         options: {
-            name: "FlatColorPicker",
-            opacity: false,
-            buttons: false,
-            input: true,
-            preview: true,
-            messages: APPLY_CANCEL
+            name       : "FlatColorPicker",
+            opacity    : false,
+            buttons    : false,
+            input      : true,
+            preview    : true,
+            autoupdate : true,
+            messages   : APPLY_CANCEL
         },
         _applyIEFilter: function() {
             var track = this.element.find(".k-hue-slider .k-slider-track")[0],
@@ -524,7 +531,7 @@ kendo_module({
             var color = this._getHSV(null, s, v, null);
             this._updateUI(color);
         },
-        _updateUI: function(color) {
+        _updateUI: function(color, dontChangeInput) {
             var that = this,
                 rect = that._hsvRect;
 
@@ -535,7 +542,9 @@ kendo_module({
             this._colorAsText.removeClass("k-state-error");
 
             that._selectedColor.css(BACKGROUNDCOLOR, color.toDisplay());
-            that._colorAsText.val(that._opacitySlider ? color.toCssRgba() : color.toCss());
+            if (!dontChangeInput) {
+                that._colorAsText.val(that._opacitySlider ? color.toCssRgba() : color.toCss());
+            }
             that._triggerSelect(color);
 
             color = color.toHSV();
