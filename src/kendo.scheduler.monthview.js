@@ -19,7 +19,7 @@ kendo_module({
         NUMBER_OF_ROWS = 6,
         NUMBER_OF_COLUMNS = 7,
         DAY_TEMPLATE = kendo.template('<span class="k-link k-nav-day">#:kendo.toString(date, "dd")#</span>'),
-        EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
+        EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" class="k-event" data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
                 'style="background-color:#=resources[0].color #"' +
                 '#}#' +
@@ -678,8 +678,11 @@ kendo_module({
                     var group = this.groups[groupIndex];
                     var collection = group.addDaySlotCollection(kendo.date.addDays(this.startDate(), cellCount), kendo.date.addDays(this.startDate(), cellCount + columnCount));
 
-                    var cells = tableRows[rowIndex].children;
+                    var tableRow = tableRows[rowIndex];
+                    var cells = tableRow.children;
                     var cellMultiplier = 0;
+
+                    tableRow.setAttribute("role", "row");
 
                     if (!this._isVerticallyGrouped()) {
                         cellMultiplier = groupIndex;
@@ -697,6 +700,9 @@ kendo_module({
                         cellCount ++;
 
                         var eventCount = Math.floor((clientHeight - firstChildHeight) / (this.options.eventHeight + 3));
+
+                        cell.setAttribute("role", "gridcell");
+                        cell.setAttribute("aria-selected", false);
 
                         collection.addDaySlot(cell, start, start + kendo.date.MS_PER_DAY, eventCount);
                     }

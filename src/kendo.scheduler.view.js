@@ -1105,6 +1105,15 @@ kendo_module({
             return !!event;
         },
 
+        current: function(candidate) {
+            if (candidate !== undefined) {
+                this._current = candidate;
+                this._scrollTo(candidate, this.content[0]);
+            } else {
+                return this._current;
+            }
+        },
+
         select: function(selection) {
             this.clearSelection();
 
@@ -1131,6 +1140,7 @@ kendo_module({
 
                 for (var slotIndex = range.start.index; slotIndex <= range.end.index; slotIndex++) {
                     element = collection.at(slotIndex).element;
+                    element.setAttribute("aria-selected", true);
                     addSelectedState(element);
                 }
             }
@@ -1139,7 +1149,7 @@ kendo_module({
                 element = ranges[0].start.element;
             }
 
-            this._scrollTo(element, this.content[0]);
+            this.current(element);
         },
 
         _selectEvents: function(selection) {
@@ -1160,8 +1170,8 @@ kendo_module({
             }
 
             if (result[0]) {
-                result.addClass("k-state-selected");
-                this._scrollTo(result.last()[0], this.content[0]);
+                result.addClass("k-state-selected").attr("aria-selected", true);
+                this.current(result.last()[0]);
                 found = true;
             }
 
@@ -1520,7 +1530,11 @@ kendo_module({
         },
 
         clearSelection: function() {
-            this.content.find(".k-state-selected").removeClass("k-state-selected");
+            this.content
+                .find(".k-state-selected")
+                .removeAttr("id")
+                .attr("aria-selected", false)
+                .removeClass("k-state-selected");
         },
 
         destroy: function() {

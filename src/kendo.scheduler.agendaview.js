@@ -209,7 +209,7 @@ kendo_module({
                         this._eventTemplate(task.clone({ showDelete: showDelete }))
                     ));
 
-                    tableRows.push("<tr" + (today ? ' class="k-today">' : ">") + tableRow.join("") + "</tr>");
+                    tableRows.push('<tr role="row" aria-selected="false"' + (today ? ' class="k-today">' : ">") + tableRow.join("") + "</tr>");
                 }
             }
 

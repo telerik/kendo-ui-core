@@ -1785,6 +1785,121 @@
                 ok(view.content.find("td").last().hasClass("k-nonwork-hour"));
             });
 
+            module("Multi Day View ARIA rendering", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                    container = $(container).addClass("k-scheduler").css({
+                        width: 1000,
+                        height: 800
+                    });
+                },
+                teardown: function() {
+                    $(container).remove();
+                }
+            });
+
+            test("View renders allday tr elements with 'row' role", function() {
+                var view = setup({
+                    dates: [new Date("2013/6/6")],
+                    endTime: new Date("2013/6/6 20:00")
+                });
+
+                var rows = view.element.find(".k-scheduler-header-all-day tr");
+
+                equal(rows.filter("[role=row]").length, rows.length);
+            });
+
+
+            test("View renders time tr elements with 'row' role", function() {
+                var view = setup({
+                    dates: [new Date("2013/6/6")],
+                    endTime: new Date("2013/6/6 20:00")
+                });
+
+                var rows = view.content.find("tr");
+
+                equal(rows.filter("[role=row]").length, rows.length);
+            });
+
+            test("View renders allday td elements with 'gridcell' role", function() {
+                var view = setup({
+                    dates: [new Date("2013/6/6")],
+                    endTime: new Date("2013/6/6 20:00")
+                });
+
+                var cells = view.element.find(".k-scheduler-header-all-day td");
+
+                equal(cells.filter("[role=gridcell]").length, cells.length);
+            });
+
+            test("View renders allday td elements with 'aria-selected' attribute", function() {
+                var view = setup({
+                    dates: [new Date("2013/6/6")],
+                    endTime: new Date("2013/6/6 20:00")
+                });
+
+                var cells = view.element.find(".k-scheduler-header-all-day td");
+
+                equal(cells.filter("[aria-selected=false]").length, cells.length);
+            });
+
+            test("View renders time td elements with 'gridcell' role", function() {
+                var view = setup({
+                    dates: [new Date("2013/6/6")],
+                    endTime: new Date("2013/6/6 20:00")
+                });
+
+                var cells = view.content.find("td");
+
+                equal(cells.filter("[role=gridcell]").length, cells.length);
+            });
+
+            test("View renders time td elements with 'aria-selected' attribute", function() {
+                var view = setup({
+                    dates: [new Date("2013/6/6")],
+                    endTime: new Date("2013/6/6 20:00")
+                });
+
+                var cells = view.content.find("td");
+
+                equal(cells.filter("[aria-selected=false]").length, cells.length);
+            });
+
+            test("View renders an all day event with role and aria-selected attribute", function() {
+                var view = setup({ dates: [ new Date(2013, 1, 2), new Date(2013, 1, 3) ] });
+
+                view.render([new SchedulerEvent({
+                    uid: "foo", title: "",
+                    start: new Date(2013, 1, 2, 0, 0, 0),
+                    end: new Date(2013, 1, 3, 0, 0, 0),
+                    isAllDay: true,
+                    id: "2"
+                })]);
+
+                var events = view.element.find(".k-event");
+
+                equal(events.filter("[role=gridcell]").length, events.length);
+                equal(events.filter("[aria-selected=false]").length, events.length);
+            });
+
+            test("View renders an event with role and aria-selected attribute", function() {
+                var view = setup({ dates: [ new Date(2013, 1, 2), new Date(2013, 1, 3) ] });
+
+                view.render([new SchedulerEvent({
+                    uid: "foo", title: "",
+                    start: new Date(2013, 1, 2, 0, 0, 0),
+                    end: new Date(2013, 1, 2, 1, 0, 0),
+                    id: "2"
+                })]);
+
+                var events = view.content.find(".k-event");
+
+                equal(events.filter("[role=gridcell]").length, events.length);
+                equal(events.filter("[aria-selected=false]").length, events.length);
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

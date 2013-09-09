@@ -465,7 +465,64 @@
                 ok(view.element.find("div.k-event>div").attr("title").indexOf('["my event"]') > -1);
             });
 
+            module("Month View ARIA rendering", {
+                setup: function() {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                    container = $(container).addClass("k-scheduler");
+                },
+                teardown: function() {
+                    $(container).remove();
+                }
+            });
 
+            test("View renders tr elements with a role 'row'", function() {
+                var view = setup();
+
+                var rows = view.content.find("tr");
+
+                equal(rows.filter("[role=row]").length, rows.length);
+            });
+
+            test("View renders td elements with a role 'gridcell'", function() {
+                var view = setup();
+
+                var cells = view.content.find("td");
+
+                equal(cells.filter("[role=gridcell]").length, cells.length);
+            });
+
+            test("View renders td elements with an attribute 'aria-selected'", function() {
+                var view = setup();
+
+                var cells = view.content.find("td");
+
+                equal(cells.filter("[aria-selected=false]").length, cells.length);
+            });
+
+            test("View renders events with a role 'gridcell'", function() {
+                var view = setup();
+
+                view.render([
+                    new kendo.data.SchedulerEvent({ start: new Date("2013/1/28 12:00 AM"), end: new Date("2013/1/29 12:00 AM"),  isAllDay: true, title: '["my event"]' })
+                ]);
+
+                var events = view.element.find(".k-event");
+
+                equal(events.filter("[role=gridcell]").length, events.length);
+            });
+
+            test("View renders events with an attribute 'aria-selected'", function() {
+                var view = setup();
+
+                view.render([
+                    new kendo.data.SchedulerEvent({ start: new Date("2013/1/28 12:00 AM"), end: new Date("2013/1/29 12:00 AM"),  isAllDay: true, title: '["my event"]' })
+                ]);
+
+                var events = view.element.find(".k-event");
+
+                equal(events.filter("[aria-selected=false]").length, events.length);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

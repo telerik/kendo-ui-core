@@ -37,7 +37,7 @@ kendo_module({
                     '<div class="k-event-template">${title}</div>' +
                 '</div>'),
         DATA_HEADER_TEMPLATE = kendo.template("<span class='k-link k-nav-day'>#=kendo.toString(date, 'ddd M/dd')#</span>"),
-        ALLDAY_EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
+        ALLDAY_EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" class="k-event" data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
                     'style="background-color:#=resources[0].color #"' +
                 '#}#' +
@@ -68,7 +68,7 @@ kendo_module({
                 '<span class="k-resize-handle k-resize-e"></span>' +
                 '#}#' +
                 '</div>',
-        EVENT_WRAPPER_STRING = '<div class="k-event" data-#=ns#uid="#=uid#"' +
+        EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" class="k-event" data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
                 'style="background-color:#=resources[0].color #"' +
                 '#}#' +
@@ -384,6 +384,8 @@ kendo_module({
 
             var tableRows = this.content.find("tr:not(.k-scheduler-header-all-day)");
 
+            tableRows.attr("role", "row");
+
             var rowCount = tableRows.length;
 
             if (this._isVerticallyGrouped()) {
@@ -428,6 +430,9 @@ kendo_module({
 
                         var end = start + interval;
 
+                        cell.setAttribute("role", "gridcell");
+                        cell.setAttribute("aria-selected", false);
+
                         collection.addTimeSlot(cell, start, end);
                     }
 
@@ -445,6 +450,8 @@ kendo_module({
             } else {
                 tableRows = this.element.find(".k-scheduler-header-all-day tr");
             }
+
+            tableRows.attr("role", "row");
 
             for (var groupIndex = 0; groupIndex < groupCount; groupIndex++) {
                 var rowMultiplier = 0;
@@ -478,6 +485,9 @@ kendo_module({
                     var currentTime = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
 
                     cellCount ++;
+
+                    cell.setAttribute("role", "gridcell");
+                    cell.setAttribute("aria-selected", false);
 
                     collection.addDaySlot(cell, currentTime, currentTime + kendo.date.MS_PER_DAY);
                 }
@@ -832,7 +842,7 @@ kendo_module({
                             classes += " k-nonwork-hour";
                         }
 
-                        content += "<td" + (classes !== "" ? ' class="' + classes + '"' : "") + ">";
+                        content += '<td' + (classes !== "" ? ' class="' + classes + '"' : "") + ">";
                         content += "&nbsp;</td>";
                     }
                 }
@@ -1436,7 +1446,12 @@ kendo_module({
         },
 
         clearSelection: function() {
-            this.content.add(this.datesHeader).find(".k-state-selected").removeClass("k-state-selected");
+
+            this.content.add(this.datesHeader)
+                .find(".k-state-selected")
+                .removeAttr("id")
+                .attr("aria-selected", false)
+                .removeClass("k-state-selected");
         },
 
         _updateDirection: function(selection, ranges, multiple, reverse, vertical) {

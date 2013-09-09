@@ -390,6 +390,7 @@ var tests = [
     "scheduler/ruleparser.html",
     "scheduler/rulestring.html",
     "scheduler/selection.html",
+    "scheduler/aria.html",
     "searchbox/searchbox.html",
     "searchbox/lint.html",
     "selectable/selectable.html",

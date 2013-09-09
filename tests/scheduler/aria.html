@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scheduler ARIA</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.scheduler.view.js"></script>
+        <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.recurrence.js"></script>
+        <script src="../../src/kendo.scheduler.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+        <link href="../../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../../styles/web/kendo.default.min.css" rel="stylesheet" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Scheduler navigation</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Scheduler = kendo.ui.Scheduler,
+                keys = kendo.keys,
+                scheduler,
+                container,
+                now;
+
+            module("ARIA", {
+                setup: function() {
+                    now = new Date();
+                    container = $("<div />");
+                    $(document.body).append(container);
+                    scheduler = new Scheduler(container, {
+                        selectable: true,
+                        views: [
+                            "day",
+                            { type: "week", selected: true }
+                        ],
+                        dataSource: [
+                            { start: now, end: new Date(now + (60 * 60 * 1000)), title: "Test" }
+                            ],
+                        messages: {
+                            ariaSlotLabel: "Selected slot",
+                            ariaEventLabel: "Selected event",
+                        }
+                    });
+
+                    container.focus();
+                },
+
+                teardown: function() {
+                   container.closest(".k-scheduler").kendoScheduler("destroy").remove();
+                }
+            });
+
+            function createSampleEvent() {
+                return scheduler.dataSource.add({
+                    title: "Foo",
+                    start: new Date(now.setHours(10)),
+                    end: new Date(now.setHours(11))
+                });
+            }
+
+            test("scheduler persists last selected cell", function() {
+                var td = container.find(".k-scheduler-content td:first");
+
+                td.trigger({
+                    type: "mousedown",
+                    currentTarget: td
+                });
+
+                var cell = scheduler.view().current();
+                equal(cell, td[0]);
+            });
+
+            test("scheduler persists last selected event", function() {
+                createSampleEvent();
+                var event = container.find(".k-event").eq(0);
+
+                event.trigger({
+                    type: "mousedown",
+                    currentTarget: event
+                });
+
+                var div = scheduler.view().current();
+                equal(div, event[0]);
+            });
+
+            test("scheduler sets id to the cell", function() {
+                var td = container.find(".k-scheduler-content td:first");
+
+                td.trigger({
+                    type: "mousedown",
+                    currentTarget: td
+                });
+
+                ok(td.attr("id"));
+            });
+
+            test("scheduler adds aria-label to the selected cell", function() {
+                var td = container.find(".k-scheduler-content td:first");
+
+                td.trigger({
+                    type: "mousedown",
+                    currentTarget: td
+                });
+
+                equal(td.attr("aria-label"), "Selected slot");
+            });
+
+            test("scheduler adds aria-label to the selected event", function() {
+                createSampleEvent();
+                var event = container.find(".k-event").eq(0);
+
+                event.trigger({
+                    type: "mousedown",
+                    currentTarget: event
+                });
+
+                equal(event.attr("aria-label"), "Selected event");
+            });
+
+            test("scheduler adds aria-selected to the selected slot", function() {
+                var td = container.find(".k-scheduler-content td:first");
+
+                td.trigger({
+                    type: "mousedown",
+                    currentTarget: td
+                });
+
+                ok(td.attr("aria-selected"));
+            });
+
+            test("scheduler adds aria-selected to the selected event", function() {
+                createSampleEvent();
+                var event = container.find(".k-event").eq(0);
+
+                event.trigger({
+                    type: "mousedown",
+                    currentTarget: event
+                });
+
+                ok(event.attr("aria-selected"));
+            });
+
+            test("scheduler sets aria-activedescendant to the wrapper", function() {
+                var td = container.find(".k-scheduler-content td:first");
+
+                td.trigger({
+                    type: "mousedown",
+                    currentTarget: td
+                });
+
+                ok(container.attr("aria-activedescendant"));
+            });
+
+            test("scheduler removes id from current cell", function() {
+                var td = container.find(".k-scheduler-content td:first");
+                var td2 = container.find(".k-scheduler-content td").eq(1);
+
+                td.trigger({
+                    type: "mousedown",
+                    currentTarget: td
+                });
+
+                td2.trigger({
+                    type: "mousedown",
+                    currentTarget: td2
+                });
+
+                ok(!td.attr("id"));
+                ok(td2.attr("id"));
+            });
+
+            test("scheduler removes aria-label from current cell", function() {
+                var td = container.find(".k-scheduler-content td:first");
+                var td2 = container.find(".k-scheduler-content td").eq(1);
+
+                td.trigger({
+                    type: "mousedown",
+                    currentTarget: td
+                });
+
+                td2.trigger({
+                    type: "mousedown",
+                    currentTarget: td2
+                });
+
+                ok(!td.attr("aria-label"));
+                equal(td2.attr("aria-label"), "Selected slot");
+            });
+
+            test("scheduler sets aria-selected to false on selection of other cell", function() {
+                var td = container.find(".k-scheduler-content td:first");
+                var td2 = container.find(".k-scheduler-content td").eq(1);
+
+                td.trigger({
+                    type: "mousedown",
+                    currentTarget: td
+                });
+
+                td2.trigger({
+                    type: "mousedown",
+                    currentTarget: td2
+                });
+
+                equal(td.attr("aria-selected"), "false");
+                equal(td2.attr("aria-selected"), "true");
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
