@@ -357,7 +357,7 @@ kendo_module({
             return false;
         },
 
-        moveSelectionToPeriod: function(selection) {
+        constrainSelection: function(selection) {
             var event = this._eventsList[0];
             if (event) {
                 selection.start = event.start;
