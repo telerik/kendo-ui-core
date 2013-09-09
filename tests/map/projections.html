@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chart helpers</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.map.js"></script>
+        <script>
+            var TOLERANCE = Math.pow(10, -6);
+
+            var dataviz = kendo.dataviz,
+                Point = dataviz.Point2D,
+
+                spatial = dataviz.spatial,
+                projections = spatial.projections,
+                GeoPoint = spatial.GeoPoint;
+
+            function projectionEqual(projection, geoPoint, point) {
+                var p = projection.project(geoPoint);
+                close(p.x, point.x, TOLERANCE, "X");
+                close(p.y, point.y, TOLERANCE, "Y");
+            }
+
+            function reverseEqual(projection, point) {
+                var r = projection.reverse(point);
+                var p = projection.project(r);
+                close(p.x, point.x, TOLERANCE, "X");
+                close(p.y, point.y, TOLERANCE, "Y");
+            }
+
+            // ------------------------------------------------------------
+            var mercator;
+            module("Projections / Mercator", {
+                setup: function() {
+                    mercator = new projections.Mercator();
+                }
+            });
+
+            test("projects center", function() {
+                projectionEqual(mercator, new GeoPoint(0, 0), new Point(0, 0));
+            });
+
+            test("projects NE corner", function() {
+                projectionEqual(mercator,
+                    new GeoPoint(90, 180),
+                    new Point(20037508.342789244, 20037508.34277572)
+               );
+            });
+
+            test("projects SW corner", function() {
+                projectionEqual(mercator,
+                    new GeoPoint(-90, -180),
+                    new Point(-20037508.342789244, -20037508.34277569)
+                );
+            });
+
+            test("projects point #1", function() {
+                projectionEqual(mercator,
+                    new GeoPoint(42.7175, 24.916667),
+                    new Point(2773710.6827055635, 5240075.619800051)
+                );
+            });
+
+            test("projects point #2", function() {
+                projectionEqual(mercator,
+                    new GeoPoint(51.9371170300465, 80.11230468750001),
+                    new Point(8918060.964088084, 6755099.410885696)
+                );
+            });
+
+            test("reverse projects center", function() {
+                reverseEqual(mercator, new Point(0, 0));
+            });
+
+            test("reverse projects point #1", function() {
+                reverseEqual(mercator,
+                    new Point(2773710.6827055635, 5240075.619800051)
+                );
+            });
+
+            test("reverse projects point #2", function() {
+                reverseEqual(mercator,
+                    new Point(8918060.964088084, 6755099.410885696)
+                );
+            });
+
+            // ------------------------------------------------------------
+            module("Projections / Spherical Mercator");
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
