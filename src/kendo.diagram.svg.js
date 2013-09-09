@@ -681,6 +681,7 @@ kendo_module({
             this.gradients = [];
             this.visuals = [];
             this.defsNode = document.createElementNS(SVGNS, "defs");
+            this.native.appendChild(this.defsNode);
             this.element = element;
             $(this.native).css({
                 width: this.options.width,
@@ -756,19 +757,7 @@ kendo_module({
             this.visuals.push(visual);
             return this;
         },
-        ensureDefsNode: function () {
-            if (this.defsPresent) {
-                return;
-            }
-            if (this.native.childNodes.length > 0) {
-                this.native.insertBefore(this.defsNode, this.native.childNodes[0]);
-            } else {
-                this.native.appendChild(this.defsNode);
-            }
-            this.defsPresent = true;
-        },
         addMarker: function (marker) {
-            this.ensureDefsNode();
             this.defsNode.appendChild(marker.native);
             this.markers.push(marker);
         },
@@ -785,7 +774,6 @@ kendo_module({
             }
         },
         addGradient: function (gradient) {
-            this.ensureDefsNode();
             this.defsNode.appendChild(gradient.native);
             this.gradients.push(gradient);
         },
@@ -808,8 +796,6 @@ kendo_module({
             this.gradients = [];
         },
         clear: function () {
-            this.clearMarkers();
-            this.clearGradients();
             while (this.visuals.length) {
                 this.remove(this.visuals[0]);
             }
@@ -826,7 +812,6 @@ kendo_module({
         Circle: Circle,
         Group: Group,
         Rectangle: Rectangle,
-        Marker: Marker,
         Canvas: Canvas,
         Path: Path,
         Line: Line,

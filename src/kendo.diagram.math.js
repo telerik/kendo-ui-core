@@ -2923,7 +2923,7 @@ kendo_module({
                         break;
                     }
                     var newNode = g.addNode(i.toString());
-                    g.addLink(newNode, poolNode);
+                    g.addLink(poolNode, newNode);
                 }
                 if (!isTree && nodeCount > 1) {
                     var randomAdditions = Utils.randomInteger(1, nodeCount);
