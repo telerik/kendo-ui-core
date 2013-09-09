@@ -34,6 +34,7 @@ kendo_module({
         ResizingAdorner = diagram.ResizingAdorner,
         ConnectorsAdorner = diagram.ConnectorsAdorner,
         Cursors = diagram.Cursors,
+        Utils = diagram.Utils,
         Observable = kendo.Observable;
 
     // Constants ==============================================================
@@ -82,7 +83,7 @@ kendo_module({
             return Cursors.select;
         },
         visible: function (value) {
-            if (isUndefined(value)) {
+            if (Utils.isUndefined(value)) {
                 return this.visual.visible();
             }
             else {
@@ -322,7 +323,7 @@ kendo_module({
 
     Shape.createShapeVisual = function (options) {
         var shapeOptions = deepExtend({}, options, { x: 0, y: 0 }); // Shape visual should not have position in its parent group.
-        if (isString(shapeOptions.data)) {
+        if (Utils.isString(shapeOptions.data)) {
             switch (shapeOptions.data.toLocaleLowerCase()) {
                 case "rectangle":
                     return new Rectangle(shapeOptions);
@@ -336,7 +337,7 @@ kendo_module({
             }
         }
         else {// custom template
-            if (!isFunction(shapeOptions.data)) {
+            if (!Utils.isFunction(shapeOptions.data)) {
                 throw "The custom template should be a function returning a visual";
             }
             return shapeOptions.data();
@@ -657,7 +658,7 @@ kendo_module({
             },
             addShape: function (point, options) {
                 var shape;
-                if (isUndefined(point)) {
+                if (Utils.isUndefined(point)) {
                     point = new Point(0, 0);
                 }
                 if (point instanceof Shape) {
@@ -745,7 +746,7 @@ kendo_module({
                 if (!items) {
                     args = this._selectedItems;
                 }
-                else if (!isArray(items)) {
+                else if (!Utils.isArray(items)) {
                     args = [items];
                 }
                 for (i = 0; i < args.length; i++) {
@@ -905,7 +906,7 @@ kendo_module({
                 this.isLayouting = true;
                 // TODO: raise layout event?
 
-                if (isUndefined(layoutType)) {
+                if (Utils.isUndefined(layoutType)) {
                     layoutType = diagram.LayoutTypes.TreeLayout;
                 }
                 var l;

@@ -7,18 +7,19 @@ kendo_module({
 (function ($, undefined) {
     var kendo = window.kendo,
         diagram = kendo.diagram,
-        Graph = kendo.diagram.Graph,
-        Node = kendo.diagram.Node,
-        Link = kendo.diagram.Link,
+        Graph = diagram.Graph,
+        Node = diagram.Node,
+        Link = diagram.Link,
         deepExtend = kendo.deepExtend,
         dataviz = kendo.dataviz,
-        Size = kendo.diagram.Size,
-        Rect = kendo.diagram.Rect,
-        Dictionary = kendo.diagram.Dictionary,
-        HashTable = kendo.diagram.HashTable,
-        Queue = kendo.diagram.Queue,
-        Set = kendo.diagram.Set,
-        Point = dataviz.Point2D;
+        Size = diagram.Size,
+        Rect = diagram.Rect,
+        Dictionary = diagram.Dictionary,
+        HashTable = diagram.HashTable,
+        Queue = diagram.Queue,
+        Set = diagram.Set,
+        Utils = diagram.Utils,
+        Point = diagram.Point;
 
     /**
      * Base class for layout algorithms.
@@ -169,7 +170,7 @@ kendo_module({
             // Size options lead to stackoverflow and need special handling
 
             this.options = this.defaultOptions;
-            if (isUndefined(options)) {
+            if (Utils.isUndefined(options)) {
                 return;
             }
             if (options) {
@@ -296,7 +297,7 @@ kendo_module({
          */
         convert: function (options) {
 
-            if (isUndefined(this.diagram)) {
+            if (Utils.isUndefined(this.diagram)) {
                 throw "No diagram to convert.";
             }
 
@@ -686,7 +687,7 @@ kendo_module({
         init: function (diagram) {
             var that = this;
             LayoutBase.fn.init.call(that);
-            if (isUndefined(diagram)) {
+            if (Utils.isUndefined(diagram)) {
                 throw "Diagram is not specified.";
             }
             this.diagram = diagram;
@@ -720,7 +721,7 @@ kendo_module({
 
         layoutGraph: function (graph, options) {
 
-            if (isDefined(options)) {
+            if (Utils.isDefined(options)) {
                 this.transferOptions(options);
             }
             this.graph = graph;
@@ -1053,7 +1054,7 @@ kendo_module({
         },
 
         tipOverTree: function (down, startFromLevel) {
-            if (isUndefined(startFromLevel)) {
+            if (Utils.isUndefined(startFromLevel)) {
                 startFromLevel = 0;
             }
             this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Down, false);
@@ -1216,7 +1217,7 @@ kendo_module({
          * @param startFromLevel
          */
         setChildrenLayout: function (node, layout, includeStart, startFromLevel) {
-            if (isUndefined(startFromLevel)) {
+            if (Utils.isUndefined(startFromLevel)) {
                 startFromLevel = 0;
             }
             var rootLayout = node.childrenLayout;
@@ -1635,7 +1636,7 @@ kendo_module({
             }
 
             var type = this.options.TreeLayoutType;
-            if (isUndefined(type)) {
+            if (Utils.isUndefined(type)) {
                 type = kendo.diagram.TreeLayoutType.TreeDown;
             }
             var single, male, female, leftcount;
@@ -1723,7 +1724,7 @@ kendo_module({
         init: function (diagram) {
             var that = this;
             LayoutBase.fn.init.call(that);
-            if (isUndefined(diagram)) {
+            if (Utils.isUndefined(diagram)) {
                 throw "No diagram specified.";
             }
             this.diagram = diagram;
@@ -1798,7 +1799,7 @@ kendo_module({
          */
         getTree: function (graph) {
             var root = null;
-            if (this.options.roots.length > 0) {
+            if (this.options.roots && this.options.roots.length > 0) {
                 for (var i = 0, len = graph.nodes.length; i < len; i++) {
                     var node = graph.nodes[i];
                     for (var j = 0, len = this.options.roots.length; j < len; j++) {
@@ -1824,7 +1825,7 @@ kendo_module({
         getTreeForRoot: function (graph, root) {
 
             var tree = graph.getSpanningTree(root);
-            if (isUndefined(tree) || tree.isEmpty()) {
+            if (Utils.isUndefined(tree) || tree.isEmpty()) {
                 return null;
             }
             return {
@@ -1981,7 +1982,7 @@ kendo_module({
         init: function (diagram) {
             var that = this;
             LayoutBase.fn.init.call(that);
-            if (isUndefined(diagram)) {
+            if (Utils.isUndefined(diagram)) {
                 throw "Diagram is not specified.";
             }
             this.diagram = diagram;
@@ -2139,10 +2140,10 @@ kendo_module({
          * Performs the layout of a single component.
          */
         layoutGraph: function (graph, options) {
-            if (isUndefined(graph)) {
+            if (Utils.isUndefined(graph)) {
                 throw "No graph given or graph analysis of the diagram failed.";
             }
-            if (isDefined(options)) {
+            if (Utils.isDefined(options)) {
                 this.transferOptions(options);
             }
             this.graph = graph;
@@ -2157,19 +2158,19 @@ kendo_module({
             this._initRuntimeProperties();
 
             this._prepare(graph, options);
-                        
+
             this._dummify();
-            
+
             this._optimizeCrossings();
-            
+
             this._swapPairs();
-            
+
             this.arrangeNodes();
-            
+
             this._moveThingsAround();
-            
+
             this._dedummify();
-            
+
             // rereverse the links which were switched earlier 
             reversedEdges.forEach(function (e) {
                 if (e.points) {
@@ -3767,5 +3768,4 @@ kendo_module({
         LayeredLayoutType: LayeredLayoutType,
         LayoutBase: LayoutBase
     })
-})
-    (window.kendo.jQuery)
+})(window.kendo.jQuery)

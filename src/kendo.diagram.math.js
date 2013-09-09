@@ -2,24 +2,21 @@ kendo_module({
     id: "diagram.math",
     name: "Math",
     category: "diagram",
-    depends: ["dataviz.core"]
+    depends: ["dataviz.core, diagram.utils"]
 });
 
 (function ($, undefined) {
+    // Imports ================================================================
     var kendo = window.kendo,
-        diagram = kendo.diagram = {},
-        Graph = kendo.diagram.Graph,
-        Node = kendo.diagram.Node,
-        Link = kendo.diagram.Link,
-        Dictionary = kendo.diagram.Dictionary,
-        HashTable = kendo.diagram.HashTable,
-        Queue = kendo.diagram.Queue,
-        Set = kendo.diagram.Set,
+        diagram = kendo.diagram,
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
         dataviz = kendo.dataviz,
-        HITTESTAREA = 3,
-        Point = dataviz.Point2D,
+        Utils = diagram.Utils,
+        Point = dataviz.Point2D;
+
+    // Constants ==============================================================
+    var HITTESTAREA = 3,
         EPSILON = 1e-06;
 
     deepExtend(Point.fn, {
@@ -36,7 +33,7 @@ kendo_module({
             return new Point(this.x * s, this.y * s);
         },
         normalize: function () {
-            if (this.length() == 0) {
+            if (this.length() === 0) {
                 return new Point();
             }
             return this.times(1 / this.length());
@@ -326,7 +323,7 @@ kendo_module({
             return content;
         },
         _singleAlign: function (content, alignment) {
-            if (isFunction(this[alignment])) {
+            if (Utils.isFunction(this[alignment])) {
                 return this[alignment](content);
             }
             else {
@@ -363,7 +360,7 @@ kendo_module({
             return container.width - content.width;
         },
         _top: function (container, content) {
-            return container.y
+            return container.y;
         },
         _middle: function (container, content) {
             return ((container.height - content.height) / 2) | 0;
@@ -640,14 +637,14 @@ kendo_module({
         }
         while (!r || r > 1);
         return mean + deviation * x * Math.sqrt(-2 * Math.log(r) / r);
-    };
+    }
 
     /**
      * Returns a random identifier which can be used as an ID of objects, eventually augmented with a prefix.
      * @returns {string}
      */
     function randomId(length) {
-        if (isUndefined(length)) {
+        if (Utils.isUndefined(length)) {
             length = 10;
         }
         // old version return Math.floor((1 + Math.random()) * 0x1000000).toString(16).substring(1);
@@ -679,7 +676,7 @@ kendo_module({
         add: function (key, value) {
 
             var obj = this._createGetBucket(key);
-            if (isDefined(value)) {
+            if (Utils.isDefined(value)) {
                 obj.value = value;
             }
             return obj;
@@ -733,7 +730,7 @@ kendo_module({
             for (var i = 0, len = hashes.length; i < len; i++) {
                 var hash = hashes[i];
                 var bucket = this._buckets[hash];
-                if (isUndefined(bucket)) {
+                if (Utils.isUndefined(bucket)) {
                     continue;
                 }
                 func(bucket);
@@ -750,7 +747,7 @@ kendo_module({
             for (var i = 0, len = hashes.length; i < len; i++) {
                 var hash = hashes[i];
                 var bucket = this._buckets[hash];
-                if (isUndefined(bucket)) {
+                if (Utils.isUndefined(bucket)) {
                     continue;
                 }
                 ht.add(bucket.key,bucket.value);
@@ -775,7 +772,7 @@ kendo_module({
 
         _bucketExists: function(key) {
             var hashId = this._hash(key);
-            return isDefined(this._buckets[hashId]);
+            return Utils.isDefined(this._buckets[hashId]);
         },
 
         /**
@@ -786,7 +783,7 @@ kendo_module({
         _createGetBucket: function(key) {
             var hashId = this._hash(key);
             var bucket = this._buckets[hashId];
-            if (isUndefined(bucket)) {
+            if (Utils.isUndefined(bucket)) {
                 bucket = { key: key };
                 this._buckets[hashId] = bucket;
                 this.length++;
@@ -798,13 +795,13 @@ kendo_module({
          * Hashing of the given key.
          */
         _hash: function(key) {
-            if (isNumber(key)) {
+            if (Utils.isNumber(key)) {
                 return key & key;
             }
-            if (isString(key)) {
+            if (Utils.isString(key)) {
                 return this._hashString(key);
             }
-            if (isObject(key)) {
+            if (Utils.isObject(key)) {
                 return this._objectHashId(key);
             }
             throw "Unsupported key type.";
@@ -832,7 +829,7 @@ kendo_module({
          */
         _objectHashId: function (key) {
             var id = key._hashId;
-            if (isUndefined(id)) {
+            if (Utils.isUndefined(id)) {
                 id = randomId();
                 key._hashId = id;
             }
@@ -858,7 +855,7 @@ kendo_module({
             });
             this._hashTable = new HashTable();
             this.length = 0;
-            if (isDefined(dictionary)) {
+            if (Utils.isDefined(dictionary)) {
                 dictionary.forEach(function (k, v) {
                     this.add(k, v);
                 }, this);
@@ -1021,7 +1018,7 @@ kendo_module({
             });
             this._hashTable = new HashTable();
             this.length = 0;
-            if (isDefined(resource)) {
+            if (Utils.isDefined(resource)) {
                 if (resource instanceof HashTable) {
                     resource.forEach(function (d) {
                         this.add(d);
@@ -1125,13 +1122,13 @@ kendo_module({
              */
             this.weight = 1;
 
-            if (isDefined(id)) {
+            if (Utils.isDefined(id)) {
                 this.id = id;
             }
             else {
                 this.id = randomId();
             }
-            if (isDefined(shape)) {
+            if (Utils.isDefined(shape)) {
                 this.associatedShape = shape;
                 // transfer the shape's bounds to the runtime props
                 var b = shape.bounds();
@@ -1169,7 +1166,7 @@ kendo_module({
          * This should be considered as runtime data, the property is not hotlinked to a SVG item.
          */
         bounds: function (r) {
-            if (!isDefined(r)) {
+            if (!Utils.isDefined(r)) {
                 return new diagram.Rect(this.x, this.y, this.width, this.height);
             }
 
@@ -1228,13 +1225,13 @@ kendo_module({
          */
         clone: function () {
             var copy = new Node();
-            if (isDefined(this.weight)) {
+            if (Utils.isDefined(this.weight)) {
                 copy.weight = this.weight;
             }
-            if (isDefined(this.balance)) {
+            if (Utils.isDefined(this.balance)) {
                 copy.balance = this.balance;
             }
-            if (isDefined(this.owner)) {
+            if (Utils.isDefined(this.owner)) {
                 copy.owner = this.owner;
             }
             copy.associatedShape = this.associatedShape;
@@ -1323,20 +1320,20 @@ kendo_module({
     var Link = kendo.Class.extend({
 
         init: function (source, target, id, connection) {
-            if (isUndefined(source)) {
+            if (Utils.isUndefined(source)) {
                 throw "The source of the new link is not set.";
             }
-            if (isUndefined(target)) {
+            if (Utils.isUndefined(target)) {
                 throw "The target of the new link is not set.";
             }
             var sourceFound, targetFound;
-            if (isString(source)) {
+            if (Utils.isString(source)) {
                 sourceFound = new Node(source);
             }
             else {
                 sourceFound = source;
             }
-            if (isString(target)) {
+            if (Utils.isString(target)) {
                 targetFound = new Node(target);
             }
             else {
@@ -1349,13 +1346,13 @@ kendo_module({
             this.target.links.add(this);
             this.source.outgoing.add(this);
             this.target.incoming.add(this);
-            if (isDefined(id)) {
+            if (Utils.isDefined(id)) {
                 this.id = id;
             }
             else {
                 this.id = randomId();
             }
-            if (isDefined(connection)) {
+            if (Utils.isDefined(connection)) {
                 this.associatedConnection = connection;
             }
             else {
@@ -1534,8 +1531,8 @@ kendo_module({
              * @private
              */
             this._root = null;
-            if (isDefined(idOrDiagram)) {
-                if (isString(idOrDiagram)) {
+            if (Utils.isDefined(idOrDiagram)) {
+                if (Utils.isString(idOrDiagram)) {
                     this.id = idOrDiagram;
                 }
                 else {
@@ -1562,7 +1559,7 @@ kendo_module({
          * @param forceRebuild If set to true the relational info will be rebuild even if already present.
          */
         cacheRelationships: function (forceRebuild) {
-            if (isUndefined(forceRebuild)) {
+            if (Utils.isUndefined(forceRebuild)) {
                 forceRebuild = false;
             }
             if (this._hasCachedRelationships && !forceRebuild) {
@@ -1588,12 +1585,12 @@ kendo_module({
             if (startNode == null) {
                 throw "Start node not specified.";
             }
-            if (isUndefined(offset)) {
+            if (Utils.isUndefined(offset)) {
                 offset = 0;
             }
             // if not done before, cache the parents and children
             this.cacheRelationships();
-            if (isUndefined(visited)) {
+            if (Utils.isUndefined(visited)) {
                 visited = new Dictionary();
                 this.nodes.forEach(function (n) {
                     visited.add(n, false);
@@ -1618,7 +1615,7 @@ kendo_module({
          * @returns {*}
          */
         root: function (value) {
-            if (isUndefined(value)) {
+            if (Utils.isUndefined(value)) {
                 if (this._root == null) {
                     // TODO: better to use the longest path for the most probable root?
                     return this.nodes.first(function (n) {
@@ -1643,7 +1640,7 @@ kendo_module({
         getConnectedComponents: function () {
             this.componentIndex = 0;
             this.setItemIndices();
-            var componentId = initArray(this.nodes.length, -1);
+            var componentId = Utils.initArray(this.nodes.length, -1);
 
             for (var v = 0; v < this.nodes.length; v++) {
                 if (componentId[v] == -1) {
@@ -1790,10 +1787,10 @@ kendo_module({
          * @returns {*}
          */
         takeRandomNode: function (excludedNodes, incidenceLessThan) {
-            if (isUndefined(excludedNodes)) {
+            if (Utils.isUndefined(excludedNodes)) {
                 excludedNodes = [];
             }
-            if (isUndefined(incidenceLessThan)) {
+            if (Utils.isUndefined(incidenceLessThan)) {
                 incidenceLessThan = 4;
             }
             if (this.nodes.length == 0) {
@@ -1808,7 +1805,7 @@ kendo_module({
             if (pool.isEmpty()) {
                 return null;
             }
-            return pool[randomInteger(0, pool.length)];
+            return pool[Utils.randomInteger(0, pool.length)];
         },
 
         /**
@@ -1854,12 +1851,12 @@ kendo_module({
          */
         addLink: function (sourceOrLink, target, owner) {
 
-            if (isUndefined(sourceOrLink)) {
+            if (Utils.isUndefined(sourceOrLink)) {
                 throw "The source of the link is not defined.";
             }
-            if (isUndefined(target)) {
+            if (Utils.isUndefined(target)) {
                 // can only be undefined if the first one is a Link
-                if (isDefined(sourceOrLink.type) && sourceOrLink.type == "Link") {
+                if (Utils.isDefined(sourceOrLink.type) && sourceOrLink.type == "Link") {
                     this.addExistingLink(sourceOrLink);
                     return;
                 }
@@ -1869,17 +1866,17 @@ kendo_module({
             }
 
             var foundSource = this.getNode(sourceOrLink);
-            if (isUndefined(foundSource)) {
+            if (Utils.isUndefined(foundSource)) {
                 foundSource = this.addNode(sourceOrLink);
             }
             var foundTarget = this.getNode(target);
-            if (isUndefined(foundTarget)) {
+            if (Utils.isUndefined(foundTarget)) {
                 foundTarget = this.addNode(target);
             }
 
             var newLink = new Link(foundSource, foundTarget);
 
-            if (isDefined(owner)) {
+            if (Utils.isDefined(owner)) {
                 newLink.owner = owner;
             }
 
@@ -1949,10 +1946,10 @@ kendo_module({
          * @returns {*}
          */
         hasLink: function (linkOrId) {
-            if (isString(linkOrId)) {
+            if (Utils.isString(linkOrId)) {
                 return this.links.any(function (link) {
                     return link.id == linkOrId;
-                })
+                });
             }
             if (linkOrId.type == "Link") {
                 return this.links.contains(linkOrId);
@@ -1963,10 +1960,10 @@ kendo_module({
          * Gets the node with the specified Id or null if not part of this graph.
          */
         getNode: function (nodeOrId) {
-            if (isUndefined(nodeOrId)) {
+            if (Utils.isUndefined(nodeOrId)) {
                 throw "No identifier or Node specified.";
             }
-            if (isString(nodeOrId)) {
+            if (Utils.isString(nodeOrId)) {
                 return this.nodes.find(function (n) {
                     return n.id == nodeOrId;
                 });
@@ -1985,12 +1982,12 @@ kendo_module({
          * Returns whether the given node or node Id is part of this graph.
          */
         hasNode: function (nodeOrId) {
-            if (isString(nodeOrId)) {
+            if (Utils.isString(nodeOrId)) {
                 return this.nodes.any(function (n) {
                     return n.id == nodeOrId;
                 });
             }
-            if (isObject(nodeOrId)) {
+            if (Utils.isObject(nodeOrId)) {
                 return this.nodes.any(function (n) {
                     return n == nodeOrId;
                 });
@@ -2004,11 +2001,11 @@ kendo_module({
          */
         removeNode: function (nodeOrId) {
             var n = nodeOrId;
-            if (isString(nodeOrId)) {
+            if (Utils.isString(nodeOrId)) {
                 n = this.getNode(nodeOrId);
             }
 
-            if (isDefined(n)) {
+            if (Utils.isDefined(n)) {
                 var links = n.links;
                 n.links = [];
                 for (var i = 0, len = links.length; i < len; i++) {
@@ -2056,11 +2053,11 @@ kendo_module({
 
             var newNode = null;
 
-            if (!isDefined(nodeOrId)) {
+            if (!Utils.isDefined(nodeOrId)) {
                 throw "No Node or identifier for a new Node is given."
             }
 
-            if (isString(nodeOrId)) {
+            if (Utils.isString(nodeOrId)) {
                 if (this.hasNode(nodeOrId)) {
                     return this.getNode(nodeOrId);
                 }
@@ -2074,11 +2071,11 @@ kendo_module({
                 newNode = nodeOrId;
             }
 
-            if (isDefined(layoutRect)) {
+            if (Utils.isDefined(layoutRect)) {
                 newNode.bounds(layoutRect);
             }
 
-            if (isDefined(owner)) {
+            if (Utils.isDefined(owner)) {
                 newNode.owner = owner;
             }
             this.nodes.add(newNode);
@@ -2120,7 +2117,7 @@ kendo_module({
          */
         clone: function (saveMapping) {
             var copy = new Graph();
-            var save = isDefined(saveMapping) && saveMapping == true;
+            var save = Utils.isDefined(saveMapping) && saveMapping == true;
             if (save) {
                 copy.nodeMap = new Dictionary();
                 copy.linkMap = new Dictionary();
@@ -2164,10 +2161,10 @@ kendo_module({
          * @param action
          */
         depthFirstTraversal: function (startNode, action) {
-            if (isUndefined(startNode)) {
+            if (Utils.isUndefined(startNode)) {
                 throw "You need to supply a starting node.";
             }
-            if (isUndefined(action)) {
+            if (Utils.isUndefined(action)) {
                 throw "You need to supply an action."
             }
             if (!this.hasNode(startNode)) {
@@ -2199,10 +2196,10 @@ kendo_module({
          */
         breadthFirstTraversal: function (startNode, action) {
 
-            if (isUndefined(startNode)) {
+            if (Utils.isUndefined(startNode)) {
                 throw "You need to supply a starting node.";
             }
-            if (isUndefined(action)) {
+            if (Utils.isUndefined(action)) {
                 throw "You need to supply an action."
             }
 
@@ -2281,7 +2278,7 @@ kendo_module({
          * @returns {Array} The array of cycles found.
          */
         findCycles: function (excludeSingleItems) {
-            if (isUndefined(excludeSingleItems)) {
+            if (Utils.isUndefined(excludeSingleItems)) {
                 excludeSingleItems = true;
             }
             var indices = new Dictionary();
@@ -2501,7 +2498,7 @@ kendo_module({
          * @constructor
          */
         BinaryTree: function (levels) {
-            if (isUndefined(levels)) {
+            if (Utils.isUndefined(levels)) {
                 levels = 5;
             }
             return Graph.Utils.createBalancedTree(levels, 2);
@@ -2514,7 +2511,7 @@ kendo_module({
          * @constructor
          */
         Linear: function (length) {
-            if (isUndefined(length)) {
+            if (Utils.isUndefined(length)) {
                 length = 10;
             }
             return Graph.Utils.createBalancedTree(length, 1);
@@ -2609,7 +2606,7 @@ kendo_module({
             var previousLink, graph = new diagram.Graph(), parts = graphString.slice();
             for (var i = 0, len = parts.length; i < len; i++) {
                 var part = parts[i];
-                if (isString(part)) // link spec
+                if (Utils.isString(part)) // link spec
                 {
                     if (part.indexOf("->") < 0) {
                         throw "The link should be specified as 'a->b'.";
@@ -2621,7 +2618,7 @@ kendo_module({
                     previousLink = new Link(p[0], p[1]);
                     graph.addLink(previousLink);
                 }
-                if (isObject(part)) {
+                if (Utils.isObject(part)) {
                     if (previousLink == null) {
                         throw "Specification found before Link definition.";
                     }
@@ -2636,10 +2633,10 @@ kendo_module({
          * See also the Graph.Utils.parse method for the inverse operation.
          */
         linearize: function (graph, addIds) {
-            if (isUndefined(graph)) {
+            if (Utils.isUndefined(graph)) {
                 throw "Expected an instance of a Graph object in slot one.";
             }
-            if (isUndefined(addIds)) {
+            if (Utils.isUndefined(addIds)) {
                 addIds = false;
             }
             var lin = [];
@@ -2663,10 +2660,10 @@ kendo_module({
          * @private
          */
         _addShape: function (kendoDiagram, p, id, shapeOptions) {
-            if (isUndefined(p)) {
+            if (Utils.isUndefined(p)) {
                 p = new diagram.Point(0, 0);
             }
-            if (isUndefined(id)) {
+            if (Utils.isUndefined(id)) {
                 id = randomId();
             }
             shapeOptions = kendo.deepExtend({
@@ -2702,16 +2699,16 @@ kendo_module({
          */
         createDiagramFromGraph: function (diagram, graph, doLayout, randomSize) {
 
-            if (isUndefined(diagram)) {
+            if (Utils.isUndefined(diagram)) {
                 throw "The diagram surface is undefined.";
             }
-            if (isUndefined(graph)) {
+            if (Utils.isUndefined(graph)) {
                 throw "No graph specification defined."
             }
-            if (isUndefined(doLayout)) {
+            if (Utils.isUndefined(doLayout)) {
                 doLayout = true;
             }
-            if (isUndefined(randomSize)) {
+            if (Utils.isUndefined(randomSize)) {
                 randomSize = false;
             }
 
@@ -2721,12 +2718,12 @@ kendo_module({
             for (var i = 0, len = graph.nodes.length; i < len; i++) {
                 var node = graph.nodes[i];
                 var p = node.position;
-                if (isUndefined(p)) {
-                    if (isDefined(node.x) && isDefined(node.y)) {
+                if (Utils.isUndefined(p)) {
+                    if (Utils.isDefined(node.x) && Utils.isDefined(node.y)) {
                         p = new Point(node.x, node.y);
                     }
                     else {
-                        p = new Point(randomInteger(10, width - 20), randomInteger(10, height - 20));
+                        p = new Point(Utils.randomInteger(10, width - 20), Utils.randomInteger(10, height - 20));
                     }
                 }
                 var opt = {};
@@ -2754,7 +2751,7 @@ kendo_module({
                 //shape.content(node.id);
 
                 var bounds = shape.bounds();
-                if (isDefined(bounds)) {
+                if (Utils.isDefined(bounds)) {
                     node.x = bounds.x;
                     node.y = bounds.y;
                     node.width = bounds.width;
@@ -2765,11 +2762,11 @@ kendo_module({
             for (var i = 0, len = graph.links.length; i < len; i++) {
                 var link = graph.links[i];
                 var sourceShape = map[link.source.id];
-                if (isUndefined(sourceShape)) {
+                if (Utils.isUndefined(sourceShape)) {
                     continue;
                 }
                 var targetShape = map[link.target.id];
-                if (isUndefined(targetShape)) {
+                if (Utils.isUndefined(targetShape)) {
                     continue;
                 }
                 this._addConnection(diagram, sourceShape, targetShape, {id: link.id});
@@ -2805,10 +2802,10 @@ kendo_module({
          * @returns {diagram.Graph}
          */
         createBalancedTree: function (levels, siblingsCount) {
-            if (isUndefined(levels)) {
+            if (Utils.isUndefined(levels)) {
                 levels = 3;
             }
-            if (isUndefined(siblingsCount)) {
+            if (Utils.isUndefined(siblingsCount)) {
                 siblingsCount = 3;
             }
 
@@ -2846,13 +2843,13 @@ kendo_module({
          * @param treeCount The number of trees the forest should have.
          */
         createBalancedForest: function (levels, siblingsCount, treeCount) {
-            if (isUndefined(levels)) {
+            if (Utils.isUndefined(levels)) {
                 levels = 3;
             }
-            if (isUndefined(siblingsCount)) {
+            if (Utils.isUndefined(siblingsCount)) {
                 siblingsCount = 3;
             }
-            if (isUndefined(treeCount)) {
+            if (Utils.isUndefined(treeCount)) {
                 treeCount = 5;
             }
             var g = new diagram.Graph(), counter = -1, lastAdded = [], news;
@@ -2898,13 +2895,13 @@ kendo_module({
              export [g]
              */
 
-            if (isUndefined(nodeCount)) {
+            if (Utils.isUndefined(nodeCount)) {
                 nodeCount = 40;
             }
-            if (isUndefined(maxIncidence)) {
+            if (Utils.isUndefined(maxIncidence)) {
                 maxIncidence = 4;
             }
-            if (isUndefined(isTree)) {
+            if (Utils.isUndefined(isTree)) {
                 isTree = false;
             }
 
@@ -2930,7 +2927,7 @@ kendo_module({
                     g.addLink(newNode, poolNode);
                 }
                 if (!isTree && nodeCount > 1) {
-                    var randomAdditions = randomInteger(1, nodeCount);
+                    var randomAdditions = Utils.randomInteger(1, nodeCount);
                     for (var i = 0; i < randomAdditions; i++) {
                         var n1 = g.takeRandomNode([], maxIncidence);
                         var n2 = g.takeRandomNode([], maxIncidence);
@@ -2943,8 +2940,6 @@ kendo_module({
             }
         }
     }
-
-
 
     kendo.deepExtend(diagram, {
         init: function (element) {
@@ -2968,469 +2963,5 @@ kendo_module({
         Node: Node,
         Link: Link,
         Graph: Graph
-
     });
-})
-    (window.kendo.jQuery);
-
-/*-------------------Diverse math functions----------------------------*/
-
-Math.sign = function (number) {
-    return number ? number < 0 ? -1 : 1 : 0;
-};
-Math.epsilon = 0.000001;
-/*-------------------Diverse utilities----------------------------*/
-
-isDefined = function (obj) {
-    return !(typeof obj === 'undefined');
-};
-
-isUndefined = function (obj) {
-    return (typeof obj === 'undefined') || obj == null;
-};
-
-/**
- * Returns whether the given object is an object or a value.
- */
-isObject = function (obj) {
-    return obj === Object(obj);
-};
-
-/**
- * Returns whether the object has a property with the given name.
- */
-has = function (obj, key) {
-    return Object.hasOwnProperty.call(obj, key);
-};
-
-/**
- * Returns whether the given object is a function.
- */
-isFunction = function (obj) {
-    return typeof obj === 'function';
-};
-
-/**
- * Returns whether the given object is a string.
- */
-isString = function (obj) {
-    return Object.prototype.toString.call(obj) == '[object String]';
-};
-
-isType = function (obj, type) {
-    return Object.prototype.toString.call(obj) == '[object ' + type + ']';
-}
-/**
- * Returns whether the given object is a number.
- */
-isNumber = function (obj) {
-    return !isNaN(parseFloat(obj)) && isFinite(obj);
-};
-
-/**
- * Return whether the given object (array or dictionary).
- */
-isEmpty = function (obj) {
-    if (obj == null) {
-        return true;
-    }
-    if (isArray(obj) || isString(obj)) {
-        return obj.length === 0;
-    }
-    for (var key in obj) {
-        if (has(obj, key)) {
-            return false;
-        }
-    }
-    return true;
-};
-
-/**
- * Returns whether the object is an array.
- */
-isArray = function (obj) {
-    return Object.prototype.toString.call(obj) == '[object Array]';
-};
-
-/**
- * Returns an array of the specified size and with each entry set to the given value.
- * @param size
- * @param value
- * @returns {Array}
- */
-initArray = function createIdArray(size, value) {
-    var array = [];
-    for (var i = 0; i < size; ++i) {
-        array[i] = value;
-    }
-    return array;
-}
-
-/**
- * Returns an integer within the given bounds.
- * @param lower The inclusive lower bound.
- * @param upper The exclusive upper bound.
- * @returns {number}
- */
-randomInteger = function (lower, upper) {
-    return parseInt(Math.floor(Math.random() * upper) + lower);
-};
-
-/*-------------------Array Extensions ----------------------------*/
-
-if (!Array.prototype.any) {
-    Array.prototype.any = function (predicate, thisRef) {
-        for (var i = 0; i < this.length; ++i) {
-            if (predicate.call(thisRef, this[i])) {
-                return this[i];
-            }
-        }
-        return null;
-    }
-}
-
-if (!Array.prototype.remove) {
-    Array.prototype.remove = function () {
-        var what, a = arguments, L = a.length, ax;
-        while (L && this.length) {
-            what = a[--L];
-            while ((ax = this.indexOf(what)) !== -1) {
-                this.splice(ax, 1);
-            }
-        }
-        return this;
-    }
-}
-
-if (!Array.prototype.flatten) {
-    Array.prototype.flatten = function () {
-        return Array.prototype.concat.apply([], this);
-    };
-}
-
-if (!Array.prototype.distinct) {
-    Array.prototype.distinct = function () {
-        var a = this;
-        var r = [];
-        for (var i = 0; i < a.length; i++) {
-            if (r.indexOf(a[i]) < 0) {
-                r.push(a[i]);
-            }
-        }
-        return r;
-    };
-}
-
-if (!Array.prototype.contains) {
-    Array.prototype.contains = function (obj) {
-        var i = this.length;
-        while (i--) {
-            if (this[i] == obj) {
-                return true;
-            }
-        }
-        return false;
-    };
-}
-
-if (!Array.prototype.indexOf) {
-    Array.prototype.indexOf = function (element) {
-        for (var i = 0; i < this.length; ++i) {
-            if (this[i] === element) {
-                return i;
-            }
-        }
-        return -1;
-    }
-}
-
-if (!Array.prototype.forEach) {
-    Array.prototype.forEach = function (predicate, thisRef) {
-        var result = [];
-        for (var i = 0; i < this.length; ++i) {
-            if (predicate.call(thisRef, this[i])) {
-                result.push(this[i]);
-            }
-        }
-        return result;
-    }
-}
-
-if (!Array.prototype.each) {
-    Array.prototype.each = Array.prototype.forEach;
-}
-
-if (!Array.prototype.map) {
-    /**
-     Maps the given functional to each element of the array. See also the 'apply' method which accepts in addition some parameters.
-     */
-    Array.prototype.map = function (iterator, context) {
-        var results = [];
-        this.forEach(function (value, index, list) {
-            results.push(iterator.call(context, value, index, list));
-        });
-        return results;
-    };
-}
-
-if (!Array.prototype.reduce) {
-    Array.prototype.reduce = function (iterator, acc, context) {
-        var initial = arguments.length > 1;
-        this.forEach(function (value, index, list) {
-            if (!initial) {
-                acc = value;
-                initial = true;
-            }
-            else {
-                acc = iterator.call(context, acc, value, index, list);
-            }
-        });
-        if (!initial) {
-            throw 'Reduce of empty array with no initial value';
-        }
-        return acc;
-    }
-}
-
-if (!Array.prototype.fold) {
-    Array.prototype.fold = Array.prototype.reduce;
-}
-
-if (!Array.prototype.foldl) {
-    Array.prototype.foldl = Array.prototype.reduce;
-} // aka fold left
-
-if (!Array.prototype.sameAs) {
-    Array.prototype.sameAs = function (array) {
-        if (!array) {
-            return false;
-        }
-        if (this.length != array.length) {
-            return false;
-        }
-        for (var i = 0; i < this.length; i++) {
-            if (this[i] instanceof Array && array[i] instanceof Array) {
-                if (!this[i].compare(array[i])) {
-                    return false;
-                }
-            }
-            else if (this[i] != array[i]) {
-                // Warning - two different object instances will never be equal: {x:20} != {x:20}
-                return false;
-            }
-        }
-        return true;
-    }
-}
-
-if (!Array.prototype.find) {
-    Array.prototype.find = function (iterator, context) {
-        var result;
-        this.any(function (value, index, list) {
-            if (iterator.call(context, value, index, list)) {
-                result = value;
-                return true;
-            }
-            return false;
-        });
-        return result;
-    };
-}
-
-if (!Array.prototype.first) {
-    Array.prototype.first = function (constraint, context) {
-        if (this.length == 0) {
-            return null;
-        }
-        if (isUndefined(constraint)) {
-            return this[0];
-        }
-        else {
-            for (var i = 0; i < this.length; i++) {
-                var item = this[i];
-                if (constraint.call(context, item, i, this)) {
-                    return item;
-                }
-            }
-            return null;
-        }
-    }
-}
-
-if (!Array.prototype.insert) {
-
-    /**
-     * Inserts the given element at the specified position and returns the result.
-     */
-    Array.prototype.insert = function (element, position) {
-        this.splice(position, 0, element);
-        return this;
-    };
-}
-
-if (!Array.prototype.prepend) {
-    /**
-     * Inserts the given item at begin of array.
-     */
-    Array.prototype.prepend = function () {
-        this.unshift.apply(this, arguments); // tricky way to prepend any number of arguments. by Niko :)
-        // this.splice(0, 0, x);
-        return this;
-    };
-}
-
-if (!Array.prototype.append) {
-    Array.prototype.append = function (x) {
-        this.splice(this.length, 0, x);
-        return this;
-    };
-}
-
-if (!Array.prototype.apply) {
-    Array.prototype.apply = function (method) {
-        var args = Array.prototype.slice.call(arguments, 1).prepend(0);  // dummy holder at first position to replace in apply below
-        var isFunc = isFunction(method);
-        return this.map(function (value) {
-            args.splice(0, 1, value);
-            return (isFunc ? method : value[method]).apply(method, args);
-        });
-    }
-}
-
-if (!Array.prototype.filter) {
-    Array.prototype.filter = function (iterator, context) {
-        var results = [];
-        this.forEach(function (value, index, list) {
-            if (iterator.call(context, value, index, list)) {
-                results.push(value);
-            }
-        });
-        return results;
-    };
-}
-
-if (!Array.prototype.select) {
-    Array.prototype.select = Array.prototype.filter;
-}
-
-if (!Array.prototype.where) {
-    Array.prototype.where = function (constraint, first) {
-        if (isUndefined(constraint)) {
-            return first ? void 0 : [];
-        }
-        return first ? this.first(constraint) : this.filter(constraint);
-    };
-}
-
-if (!Array.prototype.add) {
-    Array.prototype.add = Array.prototype.push;
-}
-
-if (!Array.prototype.isEmpty) {
-    Array.prototype.isEmpty = function () {
-        return this.length == 0;
-    }
-}
-
-if (!Array.prototype.all) {
-    Array.prototype.all = function (iterator, context) {
-        var result = true;
-        this.forEach(function (value, index, list) {
-            if (!(result = result && iterator.call(context, value, index, list))) {
-                return {};
-            }
-        });
-        return !!result;
-    }
-}
-
-if (!Array.prototype.every) {
-    Array.prototype.every = Array.prototype.all;
-}
-
-if (!Array.prototype.shuffle) {
-    /**
-     * Shuffles the elements of this array in a random order.
-     */
-    Array.prototype.shuffle = function () {
-        this.sort(function () {
-            return 0.5 - Math.random();
-        })
-    }
-}
-
-if (!Array.prototype.clear) {
-
-    //why not just setting the variable to []? It causes problems if used as byref argument; it will be another object than the one passed.
-    Array.prototype.clear = function () {
-        while (this.length > 0) {
-            this.pop();
-        }
-    }
-}
-
-if (!Array.prototype.bisort) {
-
-    /**
-     * Sort the arrays on the basis of the first one (considered as keys and the other array as values).
-     * @param a
-     * @param b
-     * @param sortfunc (optiona) sorting function for the values in the first array
-     */
-    Array.prototype.bisort = function (a, b, sortfunc) {
-        if (isUndefined(a)) {
-            throw "First array is not specified.";
-        }
-        if (isUndefined(b)) {
-            throw "Second array is not specified.";
-        }
-        if (a.length != b.length) {
-            throw "The two arrays should have equal length";
-        }
-
-        var all = [];
-
-        var sort_by = function (field, reverse, primer) {
-
-            var key = function (x) {
-                return primer ? primer(x[field]) : x[field]
-            };
-
-            return function (a, b) {
-                var A = key(a), B = key(b);
-                return ((A < B) ? -1 : (A > B) ? +1 : 0) * [-1, 1][+!!reverse];
-            }
-        }
-
-        for (var i = 0; i < a.length; i++) {
-            all.push({ 'x': a[i], 'y': b[i] });
-        }
-        if (isUndefined(sortfunc)) {
-            all.sort(function (m, n) {
-                return m.x - n.x;
-            });
-        }
-        else {
-            all.sort(function (m, n) {
-                return sortfunc(m.x, n.x);
-            });
-        }
-
-        a.clear(); // do not set to [], the ref will be gone
-        b.clear();
-
-        for (var i = 0; i < all.length; i++) {
-            a.push(all[i].x);
-            b.push(all[i].y);
-        }
-    }
-}
-
-if (!Array.prototype.addRange) {
-
-    Array.prototype.addRange = function (range) {
-        for (var i = 0; i < range.length; i++) {
-            this.push(range[i]);
-        }
-    }
-}
+})(window.kendo.jQuery);

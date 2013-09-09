@@ -18,6 +18,7 @@ kendo_module({
         Rect = diagram.Rect,
         RectAlign = diagram.RectAlign,
         Matrix = diagram.Matrix,
+        Utils = diagram.Utils,
         MatrixVector = diagram.MatrixVector;
 
     var Scale = Class.extend({
@@ -134,7 +135,7 @@ kendo_module({
             element.redraw();
         },
         visible: function (value) {
-            if (isUndefined(value)) {
+            if (Utils.isUndefined(value)) {
                 return this._visible;
             }
             else {
@@ -180,7 +181,7 @@ kendo_module({
 
             return this._rotate || new Rotation(0);
         },
-        _hover: function (value) {
+        _hover: function () {
         }
     });
 
@@ -369,7 +370,7 @@ kendo_module({
             $(this.native).focus();
         },
         content: function (text) {
-            if (!isUndefined(text)) {
+            if (!Utils.isUndefined(text)) {
                 this.native.value = this.options.text = text;
             }
 
@@ -441,8 +442,8 @@ kendo_module({
                 x = this.options.x || 0,
                 y = this.options.y || 0;
 
-            scaleX = isNumber(scaleX) ? scaleX : 1;
-            scaleY = isNumber(scaleY) ? scaleY : 1;
+            scaleX = Utils.isNumber(scaleX) ? scaleX : 1;
+            scaleY = Utils.isNumber(scaleY) ? scaleY : 1;
 
             var transform = new CompositeTransform(x, y, scaleX, scaleY);
             this.native.setAttribute("transform", transform.toString());
@@ -495,9 +496,9 @@ kendo_module({
 
     var Line = VisualBase.extend({
         init: function (options) {
-            this.options.from || new Point();
-            this.options.to || new Point();
             VisualBase.fn.init.call(this, document.createElementNS(SVGNS, "line"), options);
+            this.options.from = this.options.from || new Point();
+            this.options.to = this.options.to || new Point();
         },
         redraw: function (options) {
             VisualBase.fn.redraw.call(this, options);
@@ -520,9 +521,9 @@ kendo_module({
 
     var Polyline = VisualBase.extend({
         init: function (options) {
-            var that = this, i;
+            var that = this;
             VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "polyline"), options);
-            if (isDefined(options) && options.points != null) {
+            if (Utils.isDefined(options) && options.points !== null) {
                 this.points(that.options.points);
             }
 
@@ -530,8 +531,10 @@ kendo_module({
 
         },
         refresh: function () {
-            if(this._points==null || this._points.length==0)return;
-            var pointsString = "";
+            if (this._points === null || this._points.length === 0){
+                return;
+            }
+            var pointsString = "", i;
             for (i = 0; i < this._points.length; i++) {
                 // todo: toArray and fromArray to allow Point and Tuple
                 pointsString += " " + this._points[i].x + "," + this._points[i].y;
@@ -542,7 +545,7 @@ kendo_module({
 
         },
         points: function (value) {
-            if (isUndefined(value)) {
+            if (Utils.isUndefined(value)) {
                 return this._points;
             }
             else {
@@ -623,7 +626,7 @@ kendo_module({
             if (o.center) {
                 n.cx.baseVal.value = o.center.x;
                 n.cy.baseVal.value = o.center.y;
-            } else if (isDefined(o.x) && isDefined(o.y)) {
+            } else if (Utils.isDefined(o.x) && Utils.isDefined(o.y)) {
                 n.cx.baseVal.value = o.x + rx;
                 n.cy.baseVal.value = o.y + ry;
             }
@@ -746,7 +749,7 @@ kendo_module({
             this.gradients.push(gradient);
         },
         clearMarkers: function () {
-            if (this.markers.length == 0) {
+            if (this.markers.length === 0) {
                 return;
             }
             for (var i = 0; i < this.markers.length; i++) {

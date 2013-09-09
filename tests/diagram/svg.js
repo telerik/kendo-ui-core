@@ -1,6 +1,6 @@
 ﻿///<reference path="qunit-1.12.0.js" />
 
-var diagram = kendo.diagram;
+var diagram = window.kendo.diagram;
 
 QUnit.module("Transformations");
 test("scale toString", function() {

@@ -13,6 +13,7 @@ var linearize = kendo.diagram.Graph.Utils.linearize;
 var Adapter = kendo.diagram.GraphAdapter;
 var Point = kendo.diagram.Point;
 var Set = kendo.diagram.Set;
+var Utils = diagram.Utils;
 /*-------------Testing Utils----------------------------------*/
 
 QUnit.testSkip = function () {
@@ -334,34 +335,34 @@ test('Apply', function () {
 });
 
 test('isObject', function () {
-    ok(isObject({"stuff": 14}), "Should be considered as an object.")
-    ok(!isObject(3.1415), "Should not be considered as an object.")
+    ok(Utils.isObject({"stuff": 14}), "Should be considered as an object.")
+    ok(!Utils.isObject(3.1415), "Should not be considered as an object.")
 });
 
 test('isFunction', function () {
     var g = function (s) {
         return s;
     };
-    ok(isFunction(g), "Obviously a function.");
-    ok(!isFunction({}, "Not a function hey."));
-    ok(!isFunction(25.26259), "Neither this one.");
+    ok(Utils.isFunction(g), "Obviously a function.");
+    ok(!Utils.isFunction({}, "Not a function hey."));
+    ok(!Utils.isFunction(25.26259), "Neither this one.");
 });
 
 test('isEmpty', function () {
-    ok(isEmpty([]), "Is an empty array.");
-    ok(!isEmpty([3, 4]), "Not empty of course.");
-    ok(!isEmpty({"a": 1}), "Non empty literal.");
+    ok(Utils.isEmpty([]), "Is an empty array.");
+    ok(!Utils.isEmpty([3, 4]), "Not empty of course.");
+    ok(!Utils.isEmpty({"a": 1}), "Non empty literal.");
 });
 
 test('has', function () {
     var obj = {"a": 1, "b": 2};
-    ok(has(obj, "a"), "Has prop 'a'.")
-    ok(!has(obj, "k"), "Has no prop 'k'.")
+    ok(Utils.has(obj, "a"), "Has prop 'a'.")
+    ok(!Utils.has(obj, "k"), "Has no prop 'k'.")
 });
 
 test('isString', function () {
-    ok(isString("Something"), "Is a string, cool.");
-    ok(!isString({}), "Nope.");
+    ok(Utils.isString("Something"), "Is a string, cool.");
+    ok(!Utils.isString({}), "Nope.");
 });
 
 test('NaN', function () {
@@ -392,7 +393,7 @@ test('where', function () {
     var item = stuff.where(function (x) {
         return x.name == "Ian";
     }, true);
-    ok(isObject(item) && !isArray(item) && item["age"] == 12, "Should be one item.");
+    ok(Utils.isObject(item) && !Utils.isArray(item) && item["age"] == 12, "Should be one item.");
 });
 
 test('all', function () {
@@ -456,7 +457,7 @@ test('Basics', function () {
     var ht = new HashTable();
     ht.add(1);
     ok(ht.containsKey(1));
-    ok(isObject(ht.get(1)));
+    ok(Utils.isObject(ht.get(1)));
     ht.get(1).value = "Geri";
     ht.get(1).prop = 147;
     ok(ht.get(1).value == "Geri");
@@ -513,8 +514,8 @@ test('Basics', function () {
     ok(counter == 4, "Event is raised four times.");
     ok(dic.containsKey(3));
     var swa = dic.get(7);
-    ok(isDefined(swa));
-    ok(isObject(swa));
+    ok(Utils.isDefined(swa));
+    ok(Utils.isObject(swa));
     ok(swa.shoe == 44);
     dic.remove(3);
     ok(counter == 5, "Event is raised five times.");
@@ -522,10 +523,10 @@ test('Basics', function () {
     ok(dic.keys().length == 3);
     var r = [];
     dic.forEachValue(function (v) {
-        if (isString(v)) {
+        if (Utils.isString(v)) {
             r.push(v);
         }
-        if (isObject(v)) {
+        if (Utils.isObject(v)) {
             r.push(v.name);
         }
     });
@@ -774,7 +775,7 @@ test('Graph basics', function () {
 
     var l12 = g.addLink(n1, "n2");
     var n2 = g.getNode("n2");
-    ok(isDefined(n2), "The link target should be added automatically.");
+    ok(Utils.isDefined(n2), "The link target should be added automatically.");
     ok(g.links.contains(l12), "The link should be in the links.");
     ok(l12.source.id == "n1" && l12.target.id == "n2", "Check of the identifiers.");
     ok(g.isHealthy(), "The graph is healthy.");
@@ -944,7 +945,7 @@ test('Assign levels', function () {
     ok(root != null, "There should be a root.");
     ok(root.id == "0");
     ok(root.level == 0);
-    ok(isDefined(root.children) && root.children.length == 2);
+    ok(Utils.isDefined(root.children) && root.children.length == 2);
     ok(root.children[0].level == 1 && root.children[1].level == 1);
     ok(root.children[0].children[0].level == 2); // and so on
 

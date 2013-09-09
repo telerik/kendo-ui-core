@@ -7,7 +7,8 @@
     var diagram = kendo.diagram,
         Point = diagram.Point,
         Rect = diagram.Rect,
-        Intersect = diagram.Intersect;
+        Intersect = diagram.Intersect,
+        isUndefined = diagram.Utils.isUndefined;
 
     module("line intersection");
 

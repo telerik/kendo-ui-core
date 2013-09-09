@@ -1,5 +1,6 @@
 ﻿(function ($, global, undefined) {
-    var deepExtend = kendo.deepExtend;
+    var deepExtend = window.kendo.deepExtend,
+        Utils = window.kendo.diagram.Utils;
 
     function buildRoughlyEqualMessage(actual, expected) {
         return "{expected: " + expected + ", actual: " + actual + "}";
@@ -34,13 +35,13 @@
     }
 
     function randomPoint() {
-        return { x: randomInteger(0, 500), y: randomInteger(0, 500) };
+        return { x: Utils.randomInteger(0, 500), y: Utils.randomInteger(0, 500) };
     }
 
     function randomDiagram(diagram) {
-        var n = randomInteger(10, 20);
+        var n = Utils.randomInteger(10, 20);
         for (var i = 0; i < n; i++) {
-            diagram.addShape(randomPoint(), { data: "Rectangle" })
+            diagram.addShape(randomPoint(), { data: "Rectangle" });
         }
     }
 
