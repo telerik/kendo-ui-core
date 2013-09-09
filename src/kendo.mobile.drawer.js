@@ -52,7 +52,7 @@ kendo_module({
 
             var userEvents = this.userEvents = new kendo.UserEvents(this.pane.element, {
                 filter: roleSelector("view"),
-                allowSelection: true,
+                allowSelection: true
             });
 
             if (SWIPE_TO_OPEN) {

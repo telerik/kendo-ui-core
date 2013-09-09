@@ -298,7 +298,7 @@ kendo_module({
                 HEAD.prepend(viewportMeta);
             }
 
-            HEAD.prepend(systemMeta(this.options));
+            HEAD.prepend(systemMeta(options));
 
             if (icon) {
                 if (typeof icon === "string") {
