@@ -1223,7 +1223,7 @@ kendo_module({
                 },
                 daily: {
                     repeatEvery: "Repeat every: ",
-                    days: " days(s)"
+                    days: " day(s)"
                 },
                 weekly: {
                     weeks: " week(s)",
