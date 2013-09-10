@@ -12,8 +12,8 @@
     </div>
 
     <ul data-role="listview" data-style="inset">
-        <li><label for="username">Username:</label> <input type="text" id="username" /></li>
-        <li><label for="password">Password:</label> <input type="password" id="password" /></li>
+        <li><label for="username">Username: <input type="text" id="username" /></label></li>
+        <li><label for="password">Password: <input type="password" id="password" /></label></li>
     </ul>
     <a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button">Login</a>
     <a data-click="closeModalViewLogin" id="modalview-reg-button" type="button" data-role="button">Register</a>
@@ -51,6 +51,10 @@
         background: url(../../content/shared/images/patterns/pattern1.png) repeat 0 0;
     }
 
+    #modalview-login label {
+        display: inline-block;
+        width: 100%;
+    }
     .km-ios #modalview-camera .km-button,
     .km-ios #modalview-login .km-button,
     .km-ios #modalview-camera .km-navbar,

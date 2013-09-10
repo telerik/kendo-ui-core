@@ -5,8 +5,8 @@
 
 <div data-role="view" data-title="Login/Sign-up" id="view-transitions-login" data-transition="overlay:up">
     <ul data-role="listview" data-style="inset">
-        <li><label for="username">Username:</label> <input type="text" id="username" /></li>
-        <li><label for="password">Password:</label> <input type="password" id="password" /></li>
+        <li><label for="username">Username: <input type="text" id="username" /></label></li>
+        <li><label for="password">Password: <input type="password" id="password" /></label></li>
     </ul>
             <a href="#view-transitions-welcome" data-transition="overlay:down reverse" data-role="button" class="transitions-button">Login</a><br />
             <a href="#view-transitions" data-transition="overlay:up reverse" data-role="button" class="transitions-cancel">Cancel</a>
@@ -45,6 +45,10 @@
         margin: 30px auto;
     }
     
+    #view-transitions-login label {
+        display: inline-block;
+	width: 100%;
+    }
     #view-transitions .km-content,
     #view-transitions-login .km-content,
     #view-transitions-welcome .km-content {
