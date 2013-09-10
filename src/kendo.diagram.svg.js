@@ -6,12 +6,11 @@ kendo_module({
 });
 
 (function ($, undefined) {
+    // Imports ================================================================
     var kendo = window.kendo,
         Observable = kendo.Observable,
         diagram = kendo.diagram,
         Class = kendo.Class,
-        SVGNS = "http://www.w3.org/2000/svg",
-        SVGXLINK = "http://www.w3.org/1999/xlink",
         deepExtend = kendo.deepExtend,
         dataviz = kendo.dataviz,
         Point = diagram.Point,
@@ -20,6 +19,18 @@ kendo_module({
         Matrix = diagram.Matrix,
         Utils = diagram.Utils,
         MatrixVector = diagram.MatrixVector;
+
+    // Constants ==============================================================
+    var SVGNS = "http://www.w3.org/2000/svg",
+        SVGXLINK = "http://www.w3.org/1999/xlink",
+        Markers = {
+            none: "none",
+            arrowStart: "ArrowStart",
+            filledCircle: "FilledCircle",
+            arrowEnd: "ArrowEnd"
+        };
+
+    diagram.Markers = Markers;
 
     var Scale = Class.extend({
         init: function (x, y) {
@@ -509,11 +520,17 @@ kendo_module({
                 this.native.setAttribute("x2", this.options.to.x.toString());
                 this.native.setAttribute("y2", this.options.to.y.toString());
             }
-            if (this.options.startCap) {
+            if (this.options.startCap && this.options.startCap !== Markers.none) {
                 this.native.setAttribute("marker-start", "url(#" + this.options.startCap + ")");
             }
-            if (this.options.endCap) {
+            else {
+                this.native.removeAttribute("marker-start");
+            }
+            if (this.options.endCap && this.options.endCap !== Markers.none) {
                 this.native.setAttribute("marker-end", "url(#" + this.options.endCap + ")");
+            }
+            else {
+                this.native.removeAttribute("marker-end");
             }
 
             // SVG markers are not refreshed after the line has changed. This fixes the problem.
@@ -696,22 +713,25 @@ kendo_module({
 
             this.addMarker(new Marker({
                 path: {
-                    data: "M 0 0 L 20 10 L 0 20 z",
-                    background: "Black"
-                },
-                id: "Arrow",
-                orientation: "auto"
-            }));
-            this.addMarker(new Marker({
-                path: {
                     data: "M 0 0 L 10 5 L 0 10 L 3 5 z",
                     background: "Black"
                 },
-                id: "ArrowEnd",
+                id: Markers.arrowEnd,
                 orientation: "auto",
                 width: 10,
                 height: 10,
                 ref: new Point(10, 5)
+            }));
+            this.addMarker(new Marker({
+                path: {
+                    data: "M 0 5 L 10 0 L 7 5 L 10 10 z",
+                    background: "Black"
+                },
+                id: Markers.arrowStart,
+                orientation: "auto",
+                width: 10,
+                height: 10,
+                ref: new Point(0, 5)
             }));
             this.addMarker(new Marker({
                 circle: {
@@ -723,7 +743,7 @@ kendo_module({
                 },
                 width: 10,
                 height: 10,
-                id: "FilledCircle",
+                id: Markers.filledCircle,
                 ref: new Point(5, 5),
                 orientation: "auto"
             }));

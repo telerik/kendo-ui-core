@@ -112,6 +112,8 @@
         <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
         <input type="button" class="diagramCommandBtn" id="bringButton" title="Bring to Front" value="Bring to Front"/>
         <input type="button" class="diagramCommandBtn" id="sendBackButton" title="Send to Back" value="Send to Back"/>
+        <span class="menu-text">Start-cap:</span><input id="StartCap" value="1"/>
+        <span class="menu-text">End-cap:</span><input id="EndCap" value="1"/>
     </div>
     <div id="splitter">
         <div id="toolBoxDiv">
@@ -229,11 +231,9 @@ $(function () {
     var topCor2 = shape3.getConnector("Auto");
     var bottomCor = shape1.getConnector("Auto");
     var bottomCor2 = shape4.getConnector("Auto");
-    var bottomCor3 = shape4.getConnector("Auto");
     diagram.connect(bottomCor, topCor);
     var con2 = diagram.connect(bottomCor, topCor2);
     diagram.connect(bottomCor, bottomCor2);
-    diagram.connect(bottomCor, bottomCor3);
     diagram.connect(new Point(200, 600), new Point(400, 800), {content: "Floating connection" });
     con2.content("Connection Label");
 
@@ -338,6 +338,42 @@ $(function () {
                     });
         }
     });
+
+    var caps = [
+        {value: kendo.diagram.Markers.none},
+        {value: kendo.diagram.Markers.arrowStart},
+        {value: kendo.diagram.Markers.filledCircle},
+        {value: kendo.diagram.Markers.arrowEnd}
+    ];
+
+    $("#StartCap").kendoDropDownList({
+        dataTextField: "value",
+        dataValueField: "value",
+        dataSource: caps,
+        select: function (e) {
+            var that = this;
+            $.each(diagram.select(), function () {
+                if (this.line) {
+                    this.line.redraw({startCap: that.dataItem(e.item.index()).value});
+                }
+            });
+        }
+    });
+
+    $("#EndCap").kendoDropDownList({
+        dataTextField: "value",
+        dataValueField: "value",
+        dataSource: caps,
+        select: function (e) {
+            var that = this;
+            $.each(diagram.select(), function () {
+                if (this.line) {
+                    this.line.redraw({endCap: that.dataItem(e.item.index()).value});
+                }
+            });
+        }
+    });
+
     diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
             {
                 TreeLayoutType: eval($("#Layouts").val())
