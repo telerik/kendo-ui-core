@@ -533,6 +533,8 @@ kendo_module({
         },
 
         showView: function(url, transition) {
+            url = url.replace(new RegExp("^" + this.remoteViewURLPrefix), "");
+
             if (url === this.url) {
                 this.trigger(SAME_VIEW_REQUESTED);
                 return;
