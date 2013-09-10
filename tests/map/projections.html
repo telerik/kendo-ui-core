@@ -36,6 +36,33 @@
             }
 
             // ------------------------------------------------------------
+
+            // [[LAT, LONG], [X, Y]]
+            // Reference values obtained by cs2cs (latitude clipped to MAX_LAT)
+            // cs2cs -v -f "%.11f" -r +init=epsg:4326 +to +init=epsg:3395
+            var mercatorIdentities = [
+                    // Center
+                    [[0, 0], [0, 0]],
+
+                    // NE corner
+                    [[90, 180],
+                     [20037508.34278924763, 20037508.34277573600]],
+
+                    // SW corner
+                    [[-90, -180],
+                     [-20037508.34278924763, -20037508.34277572483]],
+
+                    // Test points
+                    [[42.7175, 24.916667],
+                     [2773710.68270556396, 5240075.61980005074]],
+
+                    [[51.9371170300465, 80.11230468750001],
+                     [8918060.96408808604, 6755099.41088569630]],
+
+                    [[52.4827802220782, -5.625],
+                     [-626172.1357121640, 6853979.3008168675]]
+                ];
+
             var mercator;
             module("Projections / Mercator", {
                 setup: function() {
@@ -43,52 +70,24 @@
                 }
             });
 
-            test("projects center", function() {
-                projectionEqual(mercator, new GeoPoint(0, 0), new Point(0, 0));
+            test("project", function() {
+                $.each(mercatorIdentities, function() {
+                    var geo = this[0];
+                    var point = this[1];
+
+                    projectionEqual(mercator,
+                        new GeoPoint(geo[0], geo[1]),
+                        new Point(point[0], point[1]));
+                });
             });
 
-            test("projects NE corner", function() {
-                projectionEqual(mercator,
-                    new GeoPoint(90, 180),
-                    new Point(20037508.342789244, 20037508.34277572)
-               );
-            });
+            test("reverse", function() {
+                $.each(mercatorIdentities, function() {
+                    var point = this[1];
 
-            test("projects SW corner", function() {
-                projectionEqual(mercator,
-                    new GeoPoint(-90, -180),
-                    new Point(-20037508.342789244, -20037508.34277569)
-                );
-            });
-
-            test("projects point #1", function() {
-                projectionEqual(mercator,
-                    new GeoPoint(42.7175, 24.916667),
-                    new Point(2773710.6827055635, 5240075.619800051)
-                );
-            });
-
-            test("projects point #2", function() {
-                projectionEqual(mercator,
-                    new GeoPoint(51.9371170300465, 80.11230468750001),
-                    new Point(8918060.964088084, 6755099.410885696)
-                );
-            });
-
-            test("reverse projects center", function() {
-                reverseEqual(mercator, new Point(0, 0));
-            });
-
-            test("reverse projects point #1", function() {
-                reverseEqual(mercator,
-                    new Point(2773710.6827055635, 5240075.619800051)
-                );
-            });
-
-            test("reverse projects point #2", function() {
-                reverseEqual(mercator,
-                    new Point(8918060.964088084, 6755099.410885696)
-                );
+                    reverseEqual(mercator,
+                        new Point(point[0], point[1]));
+                });
             });
 
             // ------------------------------------------------------------

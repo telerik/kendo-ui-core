@@ -72,7 +72,7 @@ kendo_module({
         MAX_LONG: 180,
         MAX_LAT: 85.0840590501,
         REVERSE_ITERATIONS: 15,
-        REVERSE_CONVERGENCE: 1e-10,
+        REVERSE_CONVERGENCE: 1e-12,
 
         options: {
             datum: WGS84Datum
