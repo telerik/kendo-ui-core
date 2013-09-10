@@ -222,6 +222,19 @@
                equal(data[0].value, "Foo");
            });
 
+           test("combobox does not select first item if initialized from empty select", function() {
+               var select = $("<select></select>"),
+                   combobox = new ComboBox(select, {
+                       dataSource: [{text: "Foo", value: "Foo"}],
+                       dataTextField: "text",
+                       dataValueField: "value"
+                   }),
+                   data;
+
+                ok(!combobox.value());
+                ok(!combobox.text());
+           });
+
            test("combobox initializes an UL for its items", function() {
                  var combobox = new ComboBox(input, []);
 

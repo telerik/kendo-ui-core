@@ -239,7 +239,7 @@ kendo_module({
                 state = that._state,
                 data = that._data(),
                 length = data.length,
-                value, open, custom;
+                hasChild, value, open, custom;
 
             that.trigger("dataBinding");
 
@@ -251,6 +251,8 @@ kendo_module({
             }
 
             if (that._isSelect) {
+                hasChild = that.element[0].firstChild;
+
                 if (state === STATE_REBIND) {
                     that._state = "";
                     value = that.value();
@@ -262,6 +264,8 @@ kendo_module({
 
                 if (custom && custom[0].selected) {
                     that._custom(custom.val());
+                } else if (!that._bound && !hasChild) {
+                    that._custom("");
                 }
             }
 
