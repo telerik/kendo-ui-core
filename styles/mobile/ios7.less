@@ -50,7 +50,7 @@
     background-color: @ios7-background;
 }
 
-.km-ios7 > .km-view:not([data-use-native-scrolling]),
+.km-ios7 .km-view:not([data-use-native-scrolling]),
 .km-ios7 .km-splitview
 {
     overflow: hidden;
@@ -477,6 +477,11 @@
 
 /* Filter box */
 
+.km-ios7 .km-virtual-list
+{
+    position: absolute;
+}
+
 .km-ios7 .km-filter-form
 {
     color: @ios7-list-title-background;
@@ -488,7 +493,6 @@
     color: inherit;
     .border-radius(@ios7-secondary-border-radius);
     background: currentcolor;
-    border: 1px solid transparent;
 }
 
 .km-ios7 .km-filter-wrap > input
@@ -673,6 +677,11 @@
 .km-tablet .km-ios7 .km-actionsheet-wrapper
 {
     background-color: @ios7-actionsheet-background;
+}
+
+.km-ios7 .km-popup.km-pane
+{
+    overflow: visible;
 }
 
 .km-ios7 .km-popup.km-pane
@@ -1091,26 +1100,6 @@
     color: #333;
 }
 
-.km-ios7 .km-content .km-list .km-state-active input[type=password],
-.km-ios7 .km-content .km-list .km-state-active input[type=search],
-.km-ios7 .km-content .km-list .km-state-active input[type=number],
-.km-ios7 .km-content .km-list .km-state-active input[type=tel],
-.km-ios7 .km-content .km-list .km-state-active input[type=url],
-.km-ios7 .km-content .km-list .km-state-active input[type=email],
-.km-ios7 .km-content .km-list .km-state-active input[type=month],
-.km-ios7 .km-content .km-list .km-state-active input[type=color],
-.km-ios7 .km-content .km-list .km-state-active input[type=week],
-.km-ios7 .km-content .km-list .km-state-active input[type=date],
-.km-ios7 .km-content .km-list .km-state-active input[type=time],
-.km-ios7 .km-content .km-list .km-state-active input[type=datetime],
-.km-ios7 .km-content .km-list .km-state-active input[type=datetime-local],
-.km-ios7 .km-content .km-list .km-state-active input[type=text]:not(.k-input),
-.km-ios7 .km-content .km-list .km-state-active select:not([multiple]),
-.km-ios7 .km-content .km-list .km-state-active textarea
-{
-    color: #fff;
-}
-
 /* Active States */
 
 .km-ios7 .km-tabstrip .km-button
@@ -1130,24 +1119,20 @@
 
 .km-ios7 .km-badge,
 .km-ios7 .k-slider .k-draghandle,
-.km-ios7 .km-switch-handle.km-state-active,
 .km-ios7 .k-slider .k-draghandle:hover,
-.km-ios7 .km-scroller-pull .km-icon
+.km-ios7 .km-switch-handle.km-state-active
 {
     color: @ios7-active-color;
 }
 
 .km-ios7 .k-slider .k-draghandle,
-.km-ios7 .k-slider .k-draghandle:hover,
-.km-root .km-ios7 .km-scroller-refresh span:not(.km-template),
-.km-ios7 .km-listview-label input[type=checkbox]:checked:after
+.km-ios7 .k-slider .k-draghandle:hover
 {
     background: @ios7-active-color;
 }
 
 .km-ios7 .k-slider-selection,
 .km-ios7 .km-pages .km-current-page,
-.km-ios7 .km-scroller-refresh.km-load-more,
 .km-ios7 .km-listview-label input[type=radio]:checked,
 .km-ios7 .km-listview-label input[type=checkbox]:checked
 {
