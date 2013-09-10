@@ -50,12 +50,15 @@ kendo_module({
 
                     if (path.indexOf(url, path.length - url.length) !== -1) {
                         this._setActiveItem($(tab));
-                        return;
+                        return true;
                     }
                 }
             } else {
                 this._setActiveItem(tabs.eq(url));
+                return true;
             }
+
+            return false;
         },
 
         switchByFullUrl: function(url) {
@@ -150,7 +153,10 @@ kendo_module({
         },
 
         refresh: function(e) {
-            this.switchTo(e.view.id);
+            var url = e.view.element.attr(kendo.attr("url"));
+            if (!this.switchTo(e.view.id) && url) {
+                this.switchTo(url);
+            }
         },
 
         destroy: function() {
