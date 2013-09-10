@@ -100,9 +100,20 @@
         }
 
         /// <summary>
+        /// If set to false the resizing of the events will be disabled. Resizing is enabled by default.
+        /// </summary>
+        /// <param name="enable">The resize option</param>
+        public SchedulerEditableSettingsBuilder<T> Resize(bool enable)
+        {
+            container.Resize = enable;
+
+            return this;
+        }
+
+        /// <summary>
         /// If set to true the scheduler will display a confirmation dialog when the user clicks the "destroy" button. Confirmation dialog is enabled by default.
         /// </summary>
-        /// <param name="enable">The confirmation.</param>
+        /// <param name="enable">The confirmation</param>
         public SchedulerEditableSettingsBuilder<T> Confirmation(bool enable)
         {
             container.DisplayDeleteConfirmation = enable;

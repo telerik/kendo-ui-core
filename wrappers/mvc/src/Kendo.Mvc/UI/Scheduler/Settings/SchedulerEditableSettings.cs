@@ -20,7 +20,10 @@
             DisplayDeleteConfirmation = true;
 
             Confirmation = Messages.Scheduler_Confirmation;
+
             DefaultDataItem = CreateDefaultItem;
+
+            Resize = true;
         }
 
         public string Template { get; set; }
@@ -28,6 +31,8 @@
         public string TemplateId { get; set; }
 
         public string Confirmation { get; set; }
+
+        public bool Resize { get; set; }
 
         public bool DisplayDeleteConfirmation { get; set; }
 
@@ -68,6 +73,11 @@
             else if (!string.IsNullOrEmpty(Confirmation) && Confirmation != DefaultConfirmation)
             {
                 json["confirmation"] = Confirmation;
+            }
+
+            if (!Resize)
+            {
+                json["resize"] = false;
             }
         }
 
