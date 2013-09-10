@@ -286,7 +286,7 @@ kendo_module({
                         var slot = that._slotByPosition(offset.left, offset.top);
                         var resourceInfo = that._resourceBySlot(slot);
 
-                        that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.start, end: slot.end }, resourceInfo ) });
+                        that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.startDate(), end: slot.endDate() }, resourceInfo ) });
                         e.preventDefault();
                     }
                 });
