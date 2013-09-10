@@ -205,7 +205,7 @@ kendo_module({
                 wrapper = element.wrap('<span class="km-switch"/>').parent();
             }
 
-            that.wrapper = wrapper;
+            that.wrapper = wrapper.addClass("km-widget");
         },
 
         _drag: function() {

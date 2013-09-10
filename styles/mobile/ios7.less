@@ -44,7 +44,7 @@
 }
 
 .km-ios7,
-.km-ios7 .km-content
+.km-ios7 .km-widget.km-scroll-wrapper
 {
     color: @ios7-main-color;
     background-color: @ios7-background;
@@ -108,6 +108,7 @@
 
 .km-ios7 .km-view-title
 {
+    color: @ios7-main-color;
     font-weight: bold;
     line-height: 2.5em;
 }
@@ -116,7 +117,7 @@
 {
     padding: .5em .8em;
     background: @ios7-button-background;
-    border: 1px solid @ios7-border-color;
+    border: 1px solid currentcolor;
     .border-radius(@ios7-border-radius);
 }
 
@@ -145,7 +146,7 @@
 {
     content: "\a0";
     display: inline-block;
-    color: @ios7-active-background;
+    color: currentcolor;
     width: .8em;
     height: .8em;
     border-width: 0;
@@ -198,12 +199,12 @@
     .box-shadow(inset 0 0 0 1000px @ios7-button-background);
 }
 
-.km-ios7 .km-rowinsert
+.km-ios7 .km-detail.km-rowinsert
 {
     color: green;
 }
 
-.km-ios7 .km-rowdelete
+.km-ios7 .km-detail.km-rowdelete
 {
     color: red;
 }
@@ -368,6 +369,7 @@
 
 .km-ios7 .km-list > li
 {
+    color: @ios7-main-color;
     font-size: 1.1em;
     padding-left: 1em;
     border: 0;
@@ -1113,19 +1115,12 @@
 
 /* Active States */
 
-.km-ios7 .km-tabstrip .km-button
+.km-ios7 .km-tabstrip .km-button,
+.km-ios7 .km-popup .k-item,
+.km-ios7 .k-slider-selection,
+.km-ios7 .km-actionsheet > li > a
 {
     color: inherit;
-}
-
-.km-ios7 .km-pages,
-.km-ios7 .km-button,
-.km-ios7 .k-slider-selection,
-.km-ios7 .km-popup .k-item,
-.km-ios7 .km-actionsheet > li > a,
-.km-ios7 .km-tabstrip .km-state-active
-{
-    color: @ios7-active-background;
 }
 
 .km-ios7 .km-badge,
@@ -1142,30 +1137,20 @@
     background: @ios7-active-color;
 }
 
-.km-ios7 .k-slider-selection,
-.km-ios7 .km-pages .km-current-page,
-.km-ios7 .km-listview-label input[type=radio]:checked,
-.km-ios7 .km-listview-label input[type=checkbox]:checked
-{
-    background: @ios7-active-background;
-}
-
 .km-ios7 .km-state-active
 {
     -webkit-text-fill-color: @ios7-active-color;
 }
 
-.km-ios7 .km-state-active
+.km-ios7 .km-state-active,
+.km-ios7 .km-widget:checked,
+.km-ios7 .k-slider-selection,
+.km-ios7 .km-pages .km-current-page
 {
     background: currentcolor;
 }
 
-.km-ios7 .km-filter-wrap > input:focus
-{
-    border-color: @ios7-active-background;
-}
-
-.km-ios7 .km-switch
+.km-ios7 span.km-switch
 {
     color: @ios7-switch-color;
 }
@@ -1188,7 +1173,6 @@
 .km-ios7 .km-rightitem .km-button.km-state-active
 {
     background: none;
-    color: @ios7-active-background;
     opacity: .4;
 }
 
@@ -1203,9 +1187,17 @@
     background: @ios7-list-select-background;
 }
 
+.km-ios7 .km-tabstrip .km-button:not(.km-state-active),
 .km-ios7 li.km-state-active .km-listview-link,
 .km-ios7 li.km-state-active .km-listview-label
 {
     color: @ios7-main-color;
+}
+
+.km-ios7 .k-list,
+.km-ios7 .k-slider,
+.km-ios7 .km-widget
+{
+    color: @ios7-active-background;
 }
 

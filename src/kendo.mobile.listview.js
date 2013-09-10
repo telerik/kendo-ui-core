@@ -78,6 +78,8 @@ kendo_module({
         }
 
         label.addClass("km-listview-label");
+
+        label.children("[type=checkbox],[type=radio]").addClass("km-widget");
     }
 
     function putAt(element, top) {
