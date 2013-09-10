@@ -6,7 +6,7 @@ class DatePickerMonth extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Template to be used for rendering the cells in the calendar "month" view, which are in range.
+    * The template to be used for rendering the cells in "month" view, which are between the min/max range.
     * @param string $value
     * @return \Kendo\UI\DatePickerMonth
     */
@@ -15,8 +15,7 @@ class DatePickerMonth extends \Kendo\SerializableObject {
     }
 
     /**
-    * The template used for rendering the cells in the calendar "month" view, which are not in the range between
-the minimum and maximum values.
+    * The template to be used for rendering the cells in the "month" view, which are not in the min/max range.
     * @param string $value
     * @return \Kendo\UI\DatePickerMonth
     */

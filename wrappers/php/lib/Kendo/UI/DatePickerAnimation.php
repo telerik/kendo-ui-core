@@ -6,7 +6,7 @@ class DatePickerAnimation extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The animation(s) used for hiding of the pop-up.
+    * The animation played when the calendar popup is closed.
     * @param \Kendo\UI\DatePickerAnimationClose|array $value
     * @return \Kendo\UI\DatePickerAnimation
     */
@@ -15,7 +15,7 @@ class DatePickerAnimation extends \Kendo\SerializableObject {
     }
 
     /**
-    * The animation(s) used for displaying of the pop-up.
+    * The animation played when the calendar popup is opened.
     * @param \Kendo\UI\DatePickerAnimationOpen|array $value
     * @return \Kendo\UI\DatePickerAnimation
     */

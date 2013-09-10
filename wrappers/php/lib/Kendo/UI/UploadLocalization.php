@@ -24,6 +24,24 @@ class UploadLocalization extends \Kendo\SerializableObject {
     }
 
     /**
+    * Sets the header status message for uploaded files.
+    * @param string $value
+    * @return \Kendo\UI\UploadLocalization
+    */
+    public function headerStatusUploaded($value) {
+        return $this->setProperty('headerStatusUploaded', $value);
+    }
+
+    /**
+    * Sets the header status message for files that are being uploaded.
+    * @param string $value
+    * @return \Kendo\UI\UploadLocalization
+    */
+    public function headerStatusUploading($value) {
+        return $this->setProperty('headerStatusUploading', $value);
+    }
+
+    /**
     * Sets the text of the remove button text.
     * @param string $value
     * @return \Kendo\UI\UploadLocalization

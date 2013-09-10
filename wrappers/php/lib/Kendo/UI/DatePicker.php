@@ -13,8 +13,7 @@ class DatePicker extends \Kendo\UI\Widget {
 //>> Properties
 
     /**
-    * The animation(s) used for opening and/or closing the pop-up. Setting this value to false
-will disable the animation(s).
+    * Configures the opening and closing animations of the calendar popup. Setting the animation option to false will disable the opening and closing animations. As a result the calendar popup will open and close instantly.
     * @param \Kendo\UI\DatePickerAnimation|array $value
     * @return \Kendo\UI\DatePicker
     */
@@ -73,8 +72,8 @@ settings are available for the depth value:
     }
 
     /**
-    * Template to be used for rendering the footer of the calendar.
-    * @param string $value
+    * The template which renders the footer of the calendar. If false, the footer will not be rendered.
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\UI\DatePicker
     */
     public function footer($value) {
@@ -118,7 +117,8 @@ settings are available for the depth value:
     }
 
     /**
-    * Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the format will be used. Note that value of the format option is always used.
+    * Specifies a lis of date formats used to parse the value set with value() method or by direct user input. If not set the value of the format will be used.
+ Note that format option is always used parsing process.
     * @param array $value
     * @return \Kendo\UI\DatePicker
     */

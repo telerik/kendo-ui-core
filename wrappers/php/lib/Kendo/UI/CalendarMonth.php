@@ -6,7 +6,8 @@ class CalendarMonth extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Template to be used for rendering the cells in the "month" view, which are in range.
+    * The template to be used for rendering the cells in "month" view, which are between the min/max range.
+ By default, the widget renders the value of the corresponding day.
     * @param string $value
     * @return \Kendo\UI\CalendarMonth
     */
@@ -15,7 +16,8 @@ class CalendarMonth extends \Kendo\SerializableObject {
     }
 
     /**
-    * Template to be used for rendering the cells in the "month" view, which are not in the min/max range.
+    * The template to be used for rendering the cells in the "month" view, which are not in the min/max range.
+ By default, the widget renders an empty string.
     * @param string $value
     * @return \Kendo\UI\CalendarMonth
     */

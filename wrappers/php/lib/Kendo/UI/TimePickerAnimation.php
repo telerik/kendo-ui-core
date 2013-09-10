@@ -6,7 +6,7 @@ class TimePickerAnimation extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Animation to be used for closing of the popup.
+    * The animation played when the popup is closed.
     * @param \Kendo\UI\TimePickerAnimationClose|array $value
     * @return \Kendo\UI\TimePickerAnimation
     */
@@ -15,7 +15,7 @@ class TimePickerAnimation extends \Kendo\SerializableObject {
     }
 
     /**
-    * Animation to be used for opening of the popup.
+    * The animation played when the calendar popup is opened.
     * @param \Kendo\UI\TimePickerAnimationOpen|array $value
     * @return \Kendo\UI\TimePickerAnimation
     */

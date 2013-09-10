@@ -13,7 +13,7 @@ class MultiSelect extends \Kendo\UI\Widget {
 //>> Properties
 
     /**
-    * Animations to be used for opening/closing the popup. Setting to false will turn off the animation.
+    * Configures the opening and closing animations of the suggestion popup. Setting the animation option to false will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.
     * @param \Kendo\UI\MultiSelectAnimation|array $value
     * @return \Kendo\UI\MultiSelect
     */
@@ -22,7 +22,7 @@ class MultiSelect extends \Kendo\UI\Widget {
     }
 
     /**
-    * Controls whether to bind the widget to the DataSource on initialization.
+    * Controls whether to bind the widget to the data source on initialization.
     * @param boolean $value
     * @return \Kendo\UI\MultiSelect
     */
@@ -40,7 +40,7 @@ class MultiSelect extends \Kendo\UI\Widget {
     }
 
     /**
-    * Sets the field of the data item that provides the text content of the list items.
+    * The field of the data item that provides the text content of the list items. The widget will filter the data source based on this field.
     * @param string $value
     * @return \Kendo\UI\MultiSelect
     */
@@ -49,7 +49,7 @@ class MultiSelect extends \Kendo\UI\Widget {
     }
 
     /**
-    * Sets the field of the data item that provides the value content of the list items.
+    * The field of the data item that provides the value of the widget.
     * @param string $value
     * @return \Kendo\UI\MultiSelect
     */
@@ -58,7 +58,7 @@ class MultiSelect extends \Kendo\UI\Widget {
     }
 
     /**
-    * Specifies the delay in ms after which the multiselect will start filtering dataSource.
+    * Specifies the delay in milliseconds after which the multiselect will start filtering dataSource.
     * @param float $value
     * @return \Kendo\UI\MultiSelect
     */
@@ -67,7 +67,7 @@ class MultiSelect extends \Kendo\UI\Widget {
     }
 
     /**
-    * Controls whether the multiselect should be initially enabled.
+    * If set to false the widget will be disabled and will not allow user input. The widget is enabled by default and allows user input.
     * @param boolean $value
     * @return \Kendo\UI\MultiSelect
     */
@@ -76,7 +76,8 @@ class MultiSelect extends \Kendo\UI\Widget {
     }
 
     /**
-    * Defines the type of filtration.
+    * The filtering method used to determine the suggestions for the current value. Filtration is turned of by default.
+The supported filter values are startswith, endswith and contains.
     * @param string $value
     * @return \Kendo\UI\MultiSelect
     */
@@ -85,7 +86,7 @@ class MultiSelect extends \Kendo\UI\Widget {
     }
 
     /**
-    * Define the height of the drop-down list in pixels.
+    * The height of the suggestion popup in pixels. The default value is 200 pixels.
     * @param float $value
     * @return \Kendo\UI\MultiSelect
     */
@@ -94,7 +95,7 @@ class MultiSelect extends \Kendo\UI\Widget {
     }
 
     /**
-    * Controls whether the first item will be automatically highlighted.
+    * If set to true the first suggestion will be automatically highlighted.
     * @param boolean $value
     * @return \Kendo\UI\MultiSelect
     */
@@ -103,7 +104,7 @@ class MultiSelect extends \Kendo\UI\Widget {
     }
 
     /**
-    * Defines whether the filtration should be case sensitive.
+    * If set to false case-sensitive search will be performed to find suggestions. The widget performs case-insensitive searching by default.
     * @param string $value
     * @return \Kendo\UI\MultiSelect
     */
@@ -112,7 +113,7 @@ class MultiSelect extends \Kendo\UI\Widget {
     }
 
     /**
-    * Specifies the minimum characters that should be typed before the multiselect activates
+    * The minimum number of characters the user must type before a search is performed. Set to higher value than 1 if the search could match a lot of items.
     * @param float $value
     * @return \Kendo\UI\MultiSelect
     */
@@ -130,7 +131,7 @@ class MultiSelect extends \Kendo\UI\Widget {
     }
 
     /**
-    * A string that appears in the textbox when the multiselect has no value.
+    * The hint displayed by the widget when it is empty. Not set by default.
     * @param string $value
     * @return \Kendo\UI\MultiSelect
     */
@@ -140,7 +141,7 @@ class MultiSelect extends \Kendo\UI\Widget {
 
     /**
     * Sets the itemTemplate option of the MultiSelect.
-    * Template to be used for rendering the items in the list.
+    * The template used to render the items in the popup list.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\MultiSelect
     */
@@ -152,7 +153,7 @@ class MultiSelect extends \Kendo\UI\Widget {
 
     /**
     * Sets the itemTemplate option of the MultiSelect.
-    * Template to be used for rendering the items in the list.
+    * The template used to render the items in the popup list.
     * @param string $value The template content.
     * @return \Kendo\UI\MultiSelect
     */
@@ -162,7 +163,7 @@ class MultiSelect extends \Kendo\UI\Widget {
 
     /**
     * Sets the tagTemplate option of the MultiSelect.
-    * Template to be used for rendering the tags of the selected items.
+    * The template used to render the tags.
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\MultiSelect
     */
@@ -174,7 +175,7 @@ class MultiSelect extends \Kendo\UI\Widget {
 
     /**
     * Sets the tagTemplate option of the MultiSelect.
-    * Template to be used for rendering the tags of the selected items.
+    * The template used to render the tags.
     * @param string $value The template content.
     * @return \Kendo\UI\MultiSelect
     */
@@ -193,7 +194,7 @@ class MultiSelect extends \Kendo\UI\Widget {
 
     /**
     * Sets the change event of the MultiSelect.
-    * Fires when the value has been changed.
+    * Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\MultiSelect
     */
@@ -207,7 +208,7 @@ class MultiSelect extends \Kendo\UI\Widget {
 
     /**
     * Sets the close event of the MultiSelect.
-    * Fires when the drop-down list is closed
+    * Fired when the popup of the widget is closed.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\MultiSelect
     */
@@ -221,7 +222,7 @@ class MultiSelect extends \Kendo\UI\Widget {
 
     /**
     * Sets the dataBound event of the MultiSelect.
-    * Fires when the multiselect has received data from the data source.
+    * Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\MultiSelect
     */
@@ -235,7 +236,7 @@ class MultiSelect extends \Kendo\UI\Widget {
 
     /**
     * Sets the open event of the MultiSelect.
-    * Fires when the drop-down list is opened
+    * Fired when the popup of the widget is opened by the user.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\MultiSelect
     */
@@ -249,7 +250,7 @@ class MultiSelect extends \Kendo\UI\Widget {
 
     /**
     * Sets the select event of the MultiSelect.
-    * Triggered when a Li element is selected.
+    * Fired when an item from the popup is selected by the user.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\MultiSelect
     */

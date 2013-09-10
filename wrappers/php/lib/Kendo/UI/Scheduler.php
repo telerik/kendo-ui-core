@@ -169,6 +169,15 @@ class Scheduler extends \Kendo\UI\Widget {
     }
 
     /**
+    * The configuration of the scheduler messages. Use this option to customize or localize the scheduler messages.
+    * @param \Kendo\UI\SchedulerMessages|array $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function messages($value) {
+        return $this->setProperty('messages', $value);
+    }
+
+    /**
     * The number of time slots to display per major tick.
     * @param float $value
     * @return \Kendo\UI\Scheduler

@@ -13,7 +13,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
 //>> Properties
 
     /**
-    * Specifies the culture info used by the NumericTextBox widget.
+    * Specifies the culture info used by the widget.
     * @param string $value
     * @return \Kendo\UI\NumericTextBox
     */
@@ -67,7 +67,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     }
 
     /**
-    * Specifies the text displayed when the input is empty.
+    * The hint displayed by the widget when it is empty. Not set by default.
     * @param string $value
     * @return \Kendo\UI\NumericTextBox
     */
@@ -76,7 +76,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     }
 
     /**
-    * Specifies whether the up/down spin buttons should be rendered
+    * Specifies whether the up and down spin buttons should be rendered
     * @param boolean $value
     * @return \Kendo\UI\NumericTextBox
     */
@@ -85,7 +85,7 @@ class NumericTextBox extends \Kendo\UI\Widget {
     }
 
     /**
-    * Specifies the increment/decrement step.
+    * Specifies the value used to increment or decrement widget value.
     * @param float $value
     * @return \Kendo\UI\NumericTextBox
     */

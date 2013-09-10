@@ -13,7 +13,7 @@ class TimePicker extends \Kendo\UI\Widget {
 //>> Properties
 
     /**
-    * Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
+    * Configures the opening and closing animations of the popup. Setting the animation option to false will disable the opening and closing animations. As a result the popup will open and close instantly.
     * @param \Kendo\UI\TimePickerAnimation|array $value
     * @return \Kendo\UI\TimePicker
     */
@@ -31,7 +31,7 @@ class TimePicker extends \Kendo\UI\Widget {
     }
 
     /**
-    * Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.
+    * Specifies a list of dates, which are shown in the time drop-down list. If not set, the TimePicker will auto-generate the available times.
     * @param array $value
     * @return \Kendo\UI\TimePicker
     */
@@ -95,7 +95,7 @@ class TimePicker extends \Kendo\UI\Widget {
 
     /**
     * Sets the change event of the TimePicker.
-    * Triggered when the underlying value of a TimePicker is changed.
+    * Fires when the selected date is changed
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\TimePicker
     */

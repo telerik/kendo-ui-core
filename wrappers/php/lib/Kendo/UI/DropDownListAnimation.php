@@ -6,7 +6,7 @@ class DropDownListAnimation extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Animation to be used for closing of the popup.
+    * 
     * @param \Kendo\UI\DropDownListAnimationClose|array $value
     * @return \Kendo\UI\DropDownListAnimation
     */
@@ -15,7 +15,7 @@ class DropDownListAnimation extends \Kendo\SerializableObject {
     }
 
     /**
-    * Animation to be used for opening of the popup.
+    * The animation played when the suggestion popup is opened.
     * @param \Kendo\UI\DropDownListAnimationOpen|array $value
     * @return \Kendo\UI\DropDownListAnimation
     */

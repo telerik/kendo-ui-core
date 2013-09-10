@@ -13,8 +13,7 @@ class DateTimePicker extends \Kendo\UI\Widget {
 //>> Properties
 
     /**
-    * The animation(s) used for opening and/or closing the pop-ups. Setting this value to false
-will disable the animation(s).
+    * Configures the opening and closing animations of the popups. Setting the animation option to false will disable the opening and closing animations. As a result the popup will open and close instantly.
     * @param \Kendo\UI\DateTimePickerAnimation|array $value
     * @return \Kendo\UI\DateTimePicker
     */
@@ -73,7 +72,7 @@ settings are available for the depth value:
     }
 
     /**
-    * Template to be used for rendering the footer of the calendar.
+    * The template which renders the footer of the calendar. If false, the footer will not be rendered.
     * @param string $value
     * @return \Kendo\UI\DateTimePicker
     */
@@ -137,7 +136,7 @@ settings are available for the depth value:
 
     /**
     * Specifies the start view of the calendar.
-The following settings are available for the start value:
+ The following settings are available for the start value:
     * @param string $value
     * @return \Kendo\UI\DateTimePicker
     */

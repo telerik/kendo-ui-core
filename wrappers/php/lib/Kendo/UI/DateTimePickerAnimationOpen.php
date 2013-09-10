@@ -6,7 +6,7 @@ class DateTimePickerAnimationOpen extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Effect to be used for opening of the popup.
+    * The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.Complete list of available animations
     * @param string $value
     * @return \Kendo\UI\DateTimePickerAnimationOpen
     */
@@ -15,7 +15,7 @@ class DateTimePickerAnimationOpen extends \Kendo\SerializableObject {
     }
 
     /**
-    * Difines the animation duration.
+    * The duration of the open animation in milliseconds.
     * @param float $value
     * @return \Kendo\UI\DateTimePickerAnimationOpen
     */

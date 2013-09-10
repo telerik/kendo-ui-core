@@ -27,7 +27,8 @@ class Calendar extends \Kendo\UI\Widget {
     }
 
     /**
-    * Specifies the navigation depth.
+    * Specifies the navigation depth. The following
+settings are available for the depth value:
     * @param string $value
     * @return \Kendo\UI\Calendar
     */
@@ -36,8 +37,8 @@ class Calendar extends \Kendo\UI\Widget {
     }
 
     /**
-    * Template to be used for rendering the footer. If false, the footer will not be rendered.
-    * @param string $value
+    * The template which renders the footer. If false, the footer will not be rendered.
+    * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\UI\Calendar
     */
     public function footer($value) {
@@ -72,7 +73,7 @@ class Calendar extends \Kendo\UI\Widget {
     }
 
     /**
-    * Templates for the cells rendered in the "month" view.
+    * Templates for the cells rendered in "month" view.
     * @param \Kendo\UI\CalendarMonth|array $value
     * @return \Kendo\UI\Calendar
     */
@@ -82,6 +83,7 @@ class Calendar extends \Kendo\UI\Widget {
 
     /**
     * Specifies the start view.
+The following settings are available for the start value:
     * @param string $value
     * @return \Kendo\UI\Calendar
     */
@@ -100,7 +102,7 @@ class Calendar extends \Kendo\UI\Widget {
 
     /**
     * Sets the change event of the Calendar.
-    * Fires when the selected date is changed
+    * Fires when the selected date is changed.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Calendar
     */
@@ -114,7 +116,7 @@ class Calendar extends \Kendo\UI\Widget {
 
     /**
     * Sets the navigate event of the Calendar.
-    * Fires when navigate
+    * Fires when calendar navigates.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Calendar
     */

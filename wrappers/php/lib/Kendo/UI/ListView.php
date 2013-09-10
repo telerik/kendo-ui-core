@@ -53,7 +53,8 @@ class ListView extends \Kendo\UI\Widget {
 //>> Properties
 
     /**
-    * Indicates whether the list view will call read on the DataSource initially.
+    * If set to false the widget will not bind to the data source during initialization. In this case data binding will occur when the change event of the
+data source is fired. By default the widget will bind to the data source specified in the configuration.
     * @param boolean $value
     * @return \Kendo\UI\ListView
     */
@@ -174,7 +175,7 @@ class ListView extends \Kendo\UI\Widget {
 
     /**
     * Sets the cancel event of the ListView.
-    * Raised when the user clicks the "cancel" button.
+    * Fired when the user clicks the "cancel" button.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\ListView
     */
@@ -188,7 +189,7 @@ class ListView extends \Kendo\UI\Widget {
 
     /**
     * Sets the change event of the ListView.
-    * Fires when the list view selection has changed.
+    * Fires when the list view selection has changed.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\ListView
     */
@@ -202,8 +203,7 @@ class ListView extends \Kendo\UI\Widget {
 
     /**
     * Sets the dataBound event of the ListView.
-    * Fires when the list view has received data from the data source.
-and is about to render it.
+    * Fires when the list view has received data from the data source and it is already rendered.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\ListView
     */
@@ -217,7 +217,7 @@ and is about to render it.
 
     /**
     * Sets the dataBinding event of the ListView.
-    * Fires when the grid is about to be rendered.
+    * Fires when the list view is about to be rendered.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\ListView
     */
@@ -231,7 +231,7 @@ and is about to render it.
 
     /**
     * Sets the edit event of the ListView.
-    * Fires when the list view enters edit mode.
+    * Fires when the list view enters edit mode.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\ListView
     */
@@ -245,7 +245,7 @@ and is about to render it.
 
     /**
     * Sets the remove event of the ListView.
-    * Fires before the list view item is removed.
+    * Fires before the list view item is removed. If it is not prevented will call DataSource sync method.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\ListView
     */

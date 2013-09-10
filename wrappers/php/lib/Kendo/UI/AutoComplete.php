@@ -153,6 +153,15 @@ all data items which begin with the current widget value are displayed in the su
     }
 
     /**
+    * Spcifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item text field. If set to false, the View-Model field will be updated with the selected item.
+    * @param boolean $value
+    * @return \Kendo\UI\AutoComplete
+    */
+    public function valuePrimitive($value) {
+        return $this->setProperty('valuePrimitive', $value);
+    }
+
+    /**
     * Sets the change event of the AutoComplete.
     * Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.

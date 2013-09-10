@@ -70,6 +70,16 @@ body of the chart.
     }
 
     /**
+    * The configuration of the minor grid lines. These are the lines that are an extension of the minor ticks through the
+body of the chart.
+    * @param \Kendo\Dataviz\UI\ChartYAxisItemMinorGridLines|array $value
+    * @return \Kendo\Dataviz\UI\ChartYAxisItem
+    */
+    public function minorGridLines($value) {
+        return $this->setProperty('minorGridLines', $value);
+    }
+
+    /**
     * The configuration of the scatter chart y axis major ticks.
     * @param \Kendo\Dataviz\UI\ChartYAxisItemMajorTicks|array $value
     * @return \Kendo\Dataviz\UI\ChartYAxisItem
@@ -80,6 +90,7 @@ body of the chart.
 
     /**
     * The interval between major divisions.
+If this is a date axis the value represents the number of xAxis.baseUnits between major divisions.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartYAxisItem
     */

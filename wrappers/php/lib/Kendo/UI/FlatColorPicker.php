@@ -19,7 +19,7 @@ selection of transparency.
     }
 
     /**
-    * Specifies whether we should display the Apply / Cancel buttons.
+    * Specifies whether the widget should display the Apply / Cancel buttons.
     * @param boolean $value
     * @return \Kendo\UI\FlatColorPicker
     */
@@ -44,6 +44,17 @@ current color and the input field.
     */
     public function preview($value) {
         return $this->setProperty('preview', $value);
+    }
+
+    /**
+    * Specifies whether the UI should be updated while the user is typing in
+the input field, whenever a valid color can be parsed.  If you pass
+false for this, the widget will update only when ENTER is pressed.
+    * @param boolean $value
+    * @return \Kendo\UI\FlatColorPicker
+    */
+    public function autoupdate($value) {
+        return $this->setProperty('autoupdate', $value);
     }
 
     /**

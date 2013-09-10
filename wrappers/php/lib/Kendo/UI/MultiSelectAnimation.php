@@ -6,7 +6,7 @@ class MultiSelectAnimation extends \kendo\SerializableObject {
 //>> Properties
 
     /**
-    * Animation to be used for closing of the popup.
+    * 
     * @param \Kendo\UI\MultiSelectAnimationClose|array $value
     * @return \Kendo\UI\MultiSelectAnimation
     */
@@ -15,7 +15,7 @@ class MultiSelectAnimation extends \kendo\SerializableObject {
     }
 
     /**
-    * Animation to be used for opening of the popup.
+    * The animation played when the suggestion popup is opened.
     * @param \Kendo\UI\MultiSelectAnimationOpen|array $value
     * @return \Kendo\UI\MultiSelectAnimation
     */
