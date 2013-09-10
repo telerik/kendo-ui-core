@@ -4781,6 +4781,7 @@ kendo_module({
 
     var SplineSegment = LineSegment.extend({
         points: function(){
+            //move curveProcessor initialization to init and get the allowedError from teh parameters
             var curveProcessor = new CurveProcessor(0.01),
                 points = LineSegment.fn.points.call(this);
 
@@ -4964,6 +4965,7 @@ kendo_module({
                 previousPoints.unshift(previousPoints[0]);
                 points = points.concat(previousPoints);
                 points.push(last(previousPoints));
+                points.push(points[0]);
                 points.push(points[0]);
             }
             else{

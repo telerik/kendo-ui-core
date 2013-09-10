@@ -3718,7 +3718,7 @@ kendo_module({
                 p1 = currentPoints[1],
                 p2 = currentPoints[2],
                 allowedError = that.allowedError;
-               
+            //distinguish the case when the extremum is between the points but is still acceptable
             if(that.isMonotonic(currentPoints,yField)){
                 fn = that.getParabolaPointsFunction(currentPoints,xField, yField);
                 var fnd = that.getDerivative(fn);                
@@ -3736,12 +3736,13 @@ kendo_module({
                     nextControlPoint = that.getFirstControlPoint(that.calculateFunction(fnd, p1[xField]), p1,p2,xField,yField);
                 }
             }
-            else{           
+            else{ 
+                //check if the curve can be made smooth when x1 == x2
                  if(that.isLinearByField(currentPoints, xField)){                                       
                     controlPoint2 = that.getSecondControlPoint(0, p0,p1,xField,yField);
                     nextControlPoint = that.getFirstControlPoint(0, p1, p2,xField,yField);
                  }
-                 else{
+                 else{                    
                     if(that.hasExtremumByField(currentPoints, yField)){                        
                         controlPoint2 = that.getSecondControlPoint(allowedError, p0, p1,yField,xField);
                         nextControlPoint = that.getFirstControlPoint(allowedError, p1, p2,xField,yField);
