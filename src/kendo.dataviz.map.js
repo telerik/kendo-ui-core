@@ -9,9 +9,14 @@ kendo_module({
 (function ($, undefined) {
     // Imports ================================================================
     var math = Math,
-        PI = math.PI,
+        atan = math.atan,
+        exp = math.exp,
+        pow = math.pow,
+        sin = math.sin,
+        log = math.log,
+        tan = math.tan,
 
-        kend = window.kendo,
+        kendo = window.kendo,
         Class = kendo.Class,
         Widget = kendo.ui.Widget,
 
@@ -21,10 +26,10 @@ kendo_module({
         limit = dataviz.limitValue;
 
     // Constants ==============================================================
-    var DEG_TO_RAD = math.PI / 180,
-        PI = math.PI,
+    var PI = math.PI,
         PI_DIV_2 = PI / 2,
-        PI_DIV_4 = PI / 4;
+        PI_DIV_4 = PI / 4,
+        DEG_TO_RAD = PI / 180;
 
     // Map ====================================================================
     var Map = Widget.extend({
@@ -46,7 +51,7 @@ kendo_module({
         b: 6356752.314245179,       // Semi-minor radius
         f: 0.0033528106647474805,   // Flattening
         e: 0.08181919084262149      // Eccentricity
-    }
+    };
 
     // Used by EPSG:3857
     var SphericalMercator = {
@@ -57,8 +62,8 @@ kendo_module({
             var proj = this,
                 lat = limit(ll.lat, -proj.MAX_LAT, proj.MAX_LAT),
                 lng = limit(ll.lng, -proj.MAX_LONG, proj.MAX_LONG),
-                x = lng * DEG_TO_RAD,
-                y = math.log(math.tan(PI_DIV_4 + (ll.lat * DEG_TO_RAD) / 2));
+                x = rad(lng),
+                y = log(tan(PI_DIV_4 + rad(ll.lat) / 2));
 
             return new Point(x, y);
         }
@@ -67,6 +72,7 @@ kendo_module({
     // Used by EPSG:3395
     var Mercator = Class.extend({
         init: function(options) {
+            this.options = deepExtend({}, this.options, options);
         },
 
         MAX_LONG: 180,
@@ -75,57 +81,65 @@ kendo_module({
         REVERSE_CONVERGENCE: 1e-12,
 
         options: {
+            centralMeridian: 0,
             datum: WGS84Datum
         },
 
-        // See:
-        // http://en.wikipedia.org/wiki/Mercator_projection#Generalization_to_the_ellipsoid
-        project: function(ll) {
+        project: function(geo) {
             var proj = this,
-                datum = proj.options.datum,
-                lat = limit(ll.lat, -proj.MAX_LAT, proj.MAX_LAT),
-                lng = limit(ll.lng, -proj.MAX_LONG, proj.MAX_LONG),
-                x = lng * DEG_TO_RAD * datum.a,
-                y = lat * DEG_TO_RAD,
-                con = datum.e * math.sin(y);
+                options = proj.options,
+                datum = options.datum,
+                ecc = datum.e,
+                r = datum.a,
+                lon0 = options.centralMeridian,
+                lat = limit(geo.lat, -proj.MAX_LAT, proj.MAX_LAT),
+                lng = limit(geo.lng, -proj.MAX_LONG, proj.MAX_LONG),
+                x = rad(lng - lon0) * r,
+                y = rad(lat),
+                ts = tan(PI_DIV_4 + y / 2),
+                esin = ecc * sin(y),
+                con = pow((1 - esin) / (1 + esin), ecc / 2);
 
-            con = math.pow((1 - con) / (1 + con), datum.e / 2);
-            var ts = math.tan((PI / 2 - y) / 2) / con;
-            y = -datum.a * math.log(ts);
+            // See:
+            // http://en.wikipedia.org/wiki/Mercator_projection#Generalization_to_the_ellipsoid
+            y = r * log(ts * con);
 
             return new Point(x, y);
         },
 
         reverse: function(point) {
-            var datum = this.options.datum,
+            var proj = this,
+                options = proj.options,
+                datum = options.datum,
                 ecc = datum.e,
                 ecch = ecc / 2,
-                lng = point.x / (DEG_TO_RAD * datum.a),
-                ts = math.exp(-point.y / datum.a),
-                phi = PI_DIV_2 - 2 * math.atan(ts),
+                lon0 = options.centralMeridian,
+                lng = point.x / (DEG_TO_RAD * datum.a) + lon0,
+                ts = exp(-point.y / datum.a),
+                phi = PI_DIV_2 - 2 * atan(ts),
                 i,
-                limit = Mercator.fn.REVERSE_ITERATIONS,
+                limit = proj.REVERSE_ITERATIONS,
                 dphi;
 
             for (i = 0; i <= limit; i++) {
-                var con = ecc * math.sin(phi);
-                dphi = PI_DIV_2 - 2 * math.atan(ts * math.pow((1 - con) / (1 + con), ecch)) - phi;
+                var con = ecc * sin(phi);
+                dphi = PI_DIV_2 - 2 * atan(ts * pow((1 - con) / (1 + con), ecch)) - phi;
                 phi += dphi;
 
-                if (math.abs(dphi) <= Mercator.fn.REVERSE_CONVERGENCE) {
+                if (math.abs(dphi) <= proj.REVERSE_CONVERGENCE) {
                     break;
                 }
             }
 
-            return new GeoPoint(phi / DEG_TO_RAD, lng);
+            return new GeoPoint(deg(phi), lng);
         }
     });
 
-    function radians(degrees) {
+    function rad(degrees) {
         return degrees * DEG_TO_RAD;
     }
 
-    function degrees(radians) {
+    function deg(radians) {
         return radians / DEG_TO_RAD;
     }
 

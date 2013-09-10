@@ -81,6 +81,17 @@
                 });
             });
 
+            test("project with central meridian", function() {
+                mercator = new projections.Mercator({
+                    centralMeridian: 24
+                });
+
+                projectionEqual(mercator,
+                    new GeoPoint(42.7175, 24.916667),
+                    new Point(102042.90366699788, 5240075.61980005074)
+                );
+            });
+
             test("reverse", function() {
                 $.each(mercatorIdentities, function() {
                     var point = this[1];
@@ -88,6 +99,16 @@
                     reverseEqual(mercator,
                         new Point(point[0], point[1]));
                 });
+            });
+
+            test("reverse with central meridian", function() {
+                mercator = new projections.Mercator({
+                    centralMeridian: 24
+                });
+
+                reverseEqual(mercator,
+                    new Point(102042.90366699788, 5240075.61980005074)
+                );
             });
 
             // ------------------------------------------------------------
