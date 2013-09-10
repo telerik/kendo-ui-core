@@ -425,6 +425,7 @@ kendo_module({
 
         value: function(value) {
             var that = this,
+                options = that.options,
                 idx;
 
             if (value !== undefined) {
@@ -446,8 +447,10 @@ kendo_module({
                     that.current(NULL);
                     that._custom(value);
 
-                    that.text(value);
-                    that._placeholder();
+                    if (options.value !== value || options.text !== that.input.val()) {
+                        that.text(value);
+                        that._placeholder();
+                    }
                 }
 
                 that._old = that._accessor();

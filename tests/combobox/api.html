@@ -538,6 +538,21 @@
                 });
             });
 
+            test("ComboBox does not change text if custom value is equal to options.value", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: ["Item1", "Item2"],
+                    filter: "contains",
+                    autoBind: false,
+                    value: "value",
+                    text: "text"
+                });
+
+                combobox.value("value");
+
+                equal(combobox.value(), "value");
+                equal(combobox.text(), "text");
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
