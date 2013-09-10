@@ -27,7 +27,7 @@ kendo_module({
             path = pathPrefix + "/" + path;
         }
 
-        return location.protocol + '//' + (location.host + "/" + path).replace(/\/\//g, '/');
+        return location.protocol + '//' + (location.host + "/" + path).replace(/\/\/+/g, '/');
     }
 
     var History = kendo.Observable.extend({
