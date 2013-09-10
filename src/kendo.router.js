@@ -17,10 +17,14 @@ kendo_module({
         document = window.document;
 
     function absoluteURL(path, pathPrefix) {
+        if (!pathPrefix) {
+            return path;
+        }
+
         var regEx = new RegExp("^" + pathPrefix, "i");
 
         if (!regEx.test(path)) {
-            path = pathPrefix + path;
+            path = pathPrefix + "/" + path;
         }
 
         return location.protocol + '//' + (location.host + "/" + path).replace(/\/\//g, '/');
