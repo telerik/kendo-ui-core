@@ -41,7 +41,14 @@ kendo_module({
             that._userEvents = new kendo.UserEvents(that.element, {
                 press: function(e) { that._activate(e); },
                 tap: function(e) { that._release(e); },
-                release: function(e) { highlightButton(that, e, false); }
+                release: function(e) { highlightButton(that, e, false); },
+                // Prevent the navigation when scrolled in this case
+                // in THEORY this should not break anything in the other mode, too - but let's not take any chances
+                end: function(e) {
+                    if (kendo.mobile.application.options.useNativeScrolling) {
+                        e.preventDefault();
+                    }
+                }
             });
 
             if (ANDROID3UP) {

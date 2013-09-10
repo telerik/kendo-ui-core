@@ -55,13 +55,13 @@ kendo_module({
         },
 
         refresh: function() {
-            var that = this, width, handleWidth;
+            var that = this;
 
-            width = that.wrapper.width();
-            handleWidth = that.handle.outerWidth(true);
+            that.width = that.wrapper.width();
+            that.handleWidth = that.handle.outerWidth(true);
 
-            that.constrain = width - handleWidth;
-            that.snapPoint = width / 2 - handleWidth / 2;
+            that.constrain = that.width - that.handleWidth;
+            that.snapPoint = that.width / 2 - that.handleWidth / 2;
 
             if (isNaN(that.origin)) {
                 that.origin = parseInt(that.background.css(MARGINLEFT), 10);
@@ -112,7 +112,7 @@ kendo_module({
         _move: function(e) {
             var that = this;
             e.preventDefault();
-            that._position(limitValue(that.position + e.x.delta, 0, that.constrain));
+            that._position(limitValue(that.position + e.x.delta, 0, that.width - that.handle.outerWidth(true)));
         },
 
         _position: function(position) {
@@ -205,7 +205,7 @@ kendo_module({
                 wrapper = element.wrap('<span class="km-switch"/>').parent();
             }
 
-            that.wrapper = wrapper;
+            that.wrapper = wrapper.addClass("km-widget");
         },
 
         _drag: function() {

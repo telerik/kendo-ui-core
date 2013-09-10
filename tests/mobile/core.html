@@ -34,7 +34,7 @@
 
             module("mobile core");
 
-            test("MobileWidget is Obserbable", function() {
+            test("MobileWidget is Observable", function() {
                 var widget = new MobileWidget();
 
                 ok(widget instanceof kendo.Observable);
@@ -45,6 +45,13 @@
                 var widget = new MobileWidget(dom);
 
                 equal(widget.element[0], dom[0]);
+            });
+
+            test("mobile widget has widget class", function() {
+                var dom = $("<div />");
+                var widget = new MobileWidget(dom);
+
+                ok(widget.element.hasClass("km-widget"));
             });
 
             test("instantiates mobile widgets by data attribute and container dom", 1, function() {

@@ -19,6 +19,7 @@ kendo_module({
         HORIZONTAL = "km-horizontal",
 
         MOBILE_PLATFORMS = {
+            ios7: { ios: true, appMode: false, browser: "default", device: "iphone", flatVersion: "700", majorVersion: "7", minorVersion: "0.0", name: "ios", tablet: false },
             ios: { ios: true, appMode: false, browser: "default", device: "iphone", flatVersion: "612", majorVersion: "6", minorVersion: "1.2", name: "ios", tablet: false },
             android: { android: true, appMode: false, browser: "default", device: "android", flatVersion: "233", majorVersion: "2", minorVersion: "3.3", name: "android", tablet: false },
             blackberry: { blackberry: true, appMode: false, browser: "default", device: "blackberry", flatVersion: "710", majorVersion: "7", minorVersion: "1.0", name: "blackberry", tablet: false },
@@ -36,7 +37,9 @@ kendo_module({
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (OS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
-        HIDEBAR = (OS.device == "iphone" || OS.device == "ipod"),
+        HIDEBAR = (OS.device == "iphone" || OS.device == "ipod") && OS.majorVersion < 7,
+        SUPPORT_SWIPE_TO_GO_BACK = (OS.device == "iphone" || OS.device == "ipod") && OS.majorVersion >= 7,
+        HISTORY_TRANSITION = SUPPORT_SWIPE_TO_GO_BACK ? "none" : null,
         BARCOMPENSATION = OS.browser == "mobilesafari" ? 60 : 0,
         WINDOW = $(window),
         HEAD = $("head"),
@@ -55,7 +58,11 @@ kendo_module({
         if (os.skin) {
             classes.push("km-" + os.skin);
         } else {
-            classes.push("km-" + os.name);
+            if (os.name == "ios" && os.majorVersion > 6) {
+                classes.push("km-ios7");
+            } else {
+                classes.push("km-" + os.name);
+            }
             classes.push("km-" + os.name + os.majorVersion);
             classes.push("km-" + os.majorVersion);
             classes.push("km-m" + (os.minorVersion ? os.minorVersion[0] : 0));
@@ -82,6 +89,11 @@ kendo_module({
         return isOrientationHorizontal(element) ? HORIZONTAL : VERTICAL;
     }
 
+    function setMinimumHeight(pane) {
+        pane.parent().addBack()
+               .css("min-height", window.innerHeight);
+    }
+
     function applyViewportHeight() {
         $("meta[name=viewport]").remove();
         HEAD.append(viewportTemplate({
@@ -102,6 +114,7 @@ kendo_module({
 
             that.options = $.extend({
                 hideAddressBar: true,
+                useNativeScrolling: false,
                 transition: "",
                 updateDocumentTitle: true
             }, options);
@@ -226,7 +239,7 @@ kendo_module({
                     },
 
                     routeMissing: function(e) {
-                        that.pane.navigate(e.url);
+                        that.pane.navigate(e.url, HISTORY_TRANSITION);
                     }
                 });
 
@@ -245,6 +258,9 @@ kendo_module({
 
             element.parent().addClass("km-root km-" + (that.os.tablet ? "tablet" : "phone"));
             element.addClass(that.osCssClass + " " + getOrientationClass(element));
+            if (this.options.useNativeScrolling) {
+                element.parent().addClass("km-native-scrolling");
+            }
 
             if (support.wpDevicePixelRatio) {
                 element.parent().css("font-size", support.wpDevicePixelRatio + "em");
@@ -253,9 +269,10 @@ kendo_module({
             if (BERRYPHONEGAP) {
                 applyViewportHeight();
             }
-
-            if (ENABLE_CLIP) {
-                size = (window.outerWidth > window.outerHeight ? window.outerWidth : window.outerHeight) + 100;
+            if (that.options.useNativeScrolling) {
+                element.parent().addClass("km-native-scrolling");
+            } else if (ENABLE_CLIP) {
+                size = (window.outerWidth > window.outerHeight ? window.outerWidth : window.outerHeight) + 200;
                 $(clipTemplate({ width: size, height: size })).appendTo(HEAD);
             }
 
@@ -264,6 +281,10 @@ kendo_module({
                     .removeClass("km-horizontal km-vertical")
                     .addClass(getOrientationClass(element));
 
+                if (that.options.useNativeScrolling) {
+                    setMinimumHeight(element);
+                }
+
                 if (BERRYPHONEGAP) {
                     applyViewportHeight();
                 }
@@ -271,13 +292,14 @@ kendo_module({
         },
 
         _attachMeta: function() {
-            var icon = this.options.icon, size;
+            var options = this.options,
+                icon = options.icon, size;
 
             if (!BERRYPHONEGAP) {
                 HEAD.prepend(viewportMeta);
             }
 
-            HEAD.prepend(systemMeta(this.options));
+            HEAD.prepend(systemMeta(options));
 
             if (icon) {
                 if (typeof icon === "string") {
@@ -288,13 +310,17 @@ kendo_module({
                     HEAD.prepend(iconMeta({ icon: icon[size], size: size }));
                 }
             }
+
+            if (options.useNativeScrolling) {
+                setMinimumHeight(this.element);
+            }
         },
 
         _attachHideBarHandlers: function() {
             var that = this,
                 hideBar = proxy(that, "_hideBar");
 
-            if (support.mobileOS.appMode || !that.options.hideAddressBar || !HIDEBAR) {
+            if (support.mobileOS.appMode || !that.options.hideAddressBar || !HIDEBAR || that.options.useNativeScrolling) {
                 return;
             }
 

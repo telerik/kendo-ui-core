@@ -78,6 +78,8 @@ kendo_module({
         }
 
         label.addClass("km-listview-label");
+
+        label.children("[type=checkbox],[type=radio]").addClass("km-widget");
     }
 
     function putAt(element, top) {
@@ -134,7 +136,7 @@ kendo_module({
                 }
                 offset = headerPair.offset;
                 header = headerPair.header;
-            } while (offset > scrollTop);
+            } while (offset + 1 > scrollTop);
 
             if (this.currentHeader != i) {
                 scroller.fixedContainer.html(header.clone());
@@ -827,6 +829,13 @@ kendo_module({
                 allowSelection: true,
                 tap: function(e) {
                     listView._click(e);
+                },
+                // prevent the navigation when scrolled in this case
+                // in THEORY this should not break anything in the other mode, too - but let's not take any chances
+                end: function(e) {
+                    if (kendo.mobile.application.options.useNativeScrolling) {
+                        e.preventDefault();
+                    }
                 }
             });
 
