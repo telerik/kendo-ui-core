@@ -192,6 +192,7 @@ kendo_module({
                 }
             }
             else if(dependOn==="relation"){
+                //TODO make the data sorted 
                 var lastUpperSide = width,
                     previousHeight = 0,
                     previousOffset = 0;

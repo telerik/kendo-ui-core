@@ -41,7 +41,6 @@
                 setup: function() {
                     createChart({
                         series: [{
-                            type: "funnel",
                             data: [{
                                 value: 1,
                                 category: "A",
@@ -85,7 +84,6 @@
                     createChart({
                         dependOn:"height",
                         series: [{
-                            type: "funnel",
                             data: [{
                                 value: 1,
                                 category: "A",
@@ -125,7 +123,6 @@
                         dependOn:"height",
                         neckSize: 1,
                         series: [{
-                            type: "funnel",
                             data: [{
                                 value: 1,
                                 category: "A",
@@ -165,7 +162,6 @@
                         dependOn:"height",
                         neckSize: 0,
                         series: [{
-                            type: "funnel",
                             data: [{
                                 value: 1,
                                 category: "A",
@@ -199,7 +195,25 @@
                 ], TOLERANCE);
             });
 
-            module("Series setup")
+            module("Series setup", {
+                setup: function() {
+                    createChart({
+                        series: [{
+                            type: "funnel",
+                            data: [{
+                                value: 1,
+                                category: "A",
+                            }, {
+                                value: 2,
+                                category: "B"
+                            }, {
+                                value: 3,
+                                category: "C"
+                            }]
+                        }]
+                    });
+                }
+            })
 
             test("sets point owner", function() {
                 ok(chart.segments[0].owner === chart);
@@ -224,7 +238,6 @@
                         segmentSpacing:30,
                         neckSize: 0,
                         series: [{
-                            type: "funnel",
                             data: [{
                                 value: 1,
                                 category: "A",
@@ -265,7 +278,6 @@
                         segmentSpacing:33,
                         neckSize: 0,
                         series: [{
-                            type: "funnel",
                             segmentSpacing:33,
                             data: [{
                                 value: 1,
@@ -297,6 +309,83 @@
             test("Third segment position", function() {
                 arrayClose(mapPoints(chart.segments[2].points), [
                     [120, 226], [680, 226], [400, 600], [400, 600]
+                ], TOLERANCE);
+            });
+
+            module("depend ot relation", {
+                setup: function() {
+                    createChart({
+                        dependOn:"relation",
+                        series: [{
+                            data: [{
+                                value: 7,
+                                category: "A",
+                            }, {
+                                value: 2,
+                                category: "B"
+                            }, {
+                                value: 7,
+                                category: "C"
+                            }]
+                        }]
+                    });
+                }
+            });
+
+            test("First segment position", function() {
+                arrayClose(mapPoints(chart.segments[0].points), [
+                    [0, 0], [800, 0], [514, 262], [285, 262]
+                ], TOLERANCE);
+            });
+
+            test("Second segment position", function() {
+                arrayClose(mapPoints(chart.segments[1].points), [
+                    [285, 262], [514, 262], [800, 337], [0, 337]
+                ], TOLERANCE);
+            });
+
+            test("Third segment position", function() {
+                arrayClose(mapPoints(chart.segments[2].points), [
+                    [0, 337], [800, 337], [800, 600], [0, 600]
+                ], TOLERANCE);
+            });
+
+            module("depend ot relation with spacing", {
+                setup: function() {
+                    createChart({
+                        segmentSpacing : 22,
+                        dependOn:"relation",
+                        series: [{
+                            data: [{
+                                value: 7,
+                                category: "A",
+                            }, {
+                                value: 2,
+                                category: "B"
+                            }, {
+                                value: 7,
+                                category: "C"
+                            }]
+                        }]
+                    });
+                }
+            });
+
+            test("First segment position", function() {
+                arrayClose(mapPoints(chart.segments[0].points), [
+                    [0, 0], [800, 0], [514, 243], [285, 243]
+                ], TOLERANCE);
+            });
+
+            test("Second segment position", function() {
+                arrayClose(mapPoints(chart.segments[1].points), [
+                    [285, 265], [514, 265], [800, 334], [0, 334]
+                ], TOLERANCE);
+            });
+
+            test("Third segment position", function() {
+                arrayClose(mapPoints(chart.segments[2].points), [
+                    [0, 356], [800, 356], [800, 600], [0, 600]
                 ], TOLERANCE);
             });
 
