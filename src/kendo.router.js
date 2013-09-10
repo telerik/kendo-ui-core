@@ -129,11 +129,14 @@ kendo_module({
         _checkUrl: function() {
             var that = this,
                 current = that._currentLocation().replace(hashStrip, ''),
-                back = current === that.locations[that.locations.length - 2];
+                back = current === that.locations[that.locations.length - 2],
+                prev = that.current;
 
             if (that.current === current || that.current === decodeURIComponent(current)) {
                 return;
             }
+
+            that.current = current;
 
             if (that.trigger("change", { url: current })) {
                 if (back) {
@@ -141,10 +144,9 @@ kendo_module({
                 } else {
                     history.back();
                 }
+                that.current = prev;
                 return;
             }
-
-            that.current = current;
 
             if (back) {
                 that.locations.pop();
