@@ -3303,6 +3303,36 @@
                 equal(div.find(".k-event").length, 1);
             });
 
+            test("events are repositioned in vertically grouped view when all day events are present", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    startTime: new Date("2013/6/6 10:00"),
+                    endTime: new Date("2013/6/6 11:00"),
+                    group: {
+                        resources: [ "ResourceName" ],
+                        orientation: "vertical"
+                    },
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { id: 1, start: new Date("2013/6/2 10:15"), end: new Date("2013/6/2 10:30"), title: "", foo: 1 },
+                        { id: 2, start: new Date("2013/6/3"), end: new Date("2013/6/3"), isAllDay: true, title: "", foo: 1 }
+                    ],
+                    views: ["week"]
+                });
+
+                var slots = div.find(".k-scheduler-content td:nth-child(1)");
+                var event = div.find(".k-event");
+
+                equalWithRound(event.offset().top, slots.eq(1).offset().top + slots.eq(1).outerHeight() / 2);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
