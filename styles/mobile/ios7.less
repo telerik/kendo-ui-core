@@ -16,6 +16,7 @@
 @ios7-active-color: #fff;
 @ios7-active-background: #007aff;
 @ios7-second-active-background: #fd472b;
+@ios7-switch-color: #4CDA64;
 @ios7-light-shadow: rgba(255,255,255,.2);
 @ios7-overlay-background: rgba(0,0,0,.4);
 
@@ -254,10 +255,9 @@
 
 .km-ios7 .km-switch
 {
-    width: 4.6rem;
-    height: 1.9rem;
-    line-height: 1.76rem;
-    overflow: hidden;
+    width: 3.6rem;
+    height: 2.2rem;
+    overflow: visible;
 }
 
 .km-ios7 .km-switch-wrapper
@@ -270,70 +270,63 @@
 .km-ios7 .k-slider-selection
 {
     background: 4.25em 0 no-repeat currentcolor;
-    .linear-gradient-image(top, @ios7-second-color, @ios7-second-color);
+    .linear-gradient-image(top, @ios7-active-color, @ios7-active-color);
     margin-left: -3.4rem;
 }
 
 .km-ios7 .km-switch-container
 {
-    padding: 1px 0 1px 1px;
+    overflow: visible;
     border-width: 0;
+    padding: 0 0 0 1px;
 }
 
 .km-ios7 .km-switch-handle
 {
     background: @ios7-background;
-    width: 1.6em;
-    margin: 0 4px 0 0;
-    border: 1px solid rgba(0,0,0,.1);
-    -webkit-box-shadow: 0 1px 0 1px currentcolor, 0 -1px 0 1px currentcolor;
-    box-shadow:0 1px 0 1px currentcolor, 0 -1px 0 1px currentcolor;
+    width: 2.2em;
+    .transition(width .2s linear);
+    margin: 0 3px 0 0;
+    -webkit-box-shadow: 0 3px 8px @ios7-overlay-background, 0 0 0 1px currentcolor;
+    box-shadow: 0 3px 8px @ios7-overlay-background, 0 0 0 1px currentcolor;
+}
+
+.km-ios7 .km-switch-handle.km-state-active
+{
+    width: 2.6em;
 }
 
 .km-ios7 .km-switch-off .km-switch-handle
 {
-    -webkit-box-shadow: 0 1px 0 1px @ios7-second-color, 0 -1px 0 1px @ios7-second-color;
-    box-shadow: 0 1px 0 1px @ios7-second-color, 0 -1px 0 1px @ios7-second-color;
-}
-
-.km-ios7 .km-switch-label-off
-{
-    left: 1.5em;
-}
-
-.km-ios7 .km-switch-label-on
-{
-    left: -2.8em;
+    -webkit-box-shadow: 0 3px 8px @ios7-overlay-background, 0 0 0 1px @ios7-active-color;
+    box-shadow: 0 3px 8px @ios7-overlay-background, 0 0 0 1px @ios7-active-color;
 }
 
 .km-ios7 .km-switch-label-on,
 .km-ios7 .km-switch-label-off
 {
-    text-shadow: none;
-    width: 185%;
-    font-size: 1em;
-    line-height: 1.5em;
-    vertical-align: middle;
+    display: none;
 }
 
+.km-ios7 .km-switch-handle,
 .km-ios7 .km-switch-wrapper,
 .km-ios7 .km-switch-container,
 .km-ios7 .km-switch-background
 {
-    .border-radius(@ios7-border-radius + 1px);
-}
-
-.km-ios7 .km-switch-handle
-{
-    .border-radius(@ios7-border-radius);
+    .border-radius(3em);
 }
 
 .km-ios7 .km-switch-container,
 .km-ios7 .km-switch-wrapper
 {
     .box-sizing(border-box);
-    border: 1px solid #f0f0f0;
+    border: 1px solid @ios7-list-title-background;
     background-clip: content-box;
+}
+
+.km-ios7 .km-switch-on .km-switch-container
+{
+    border-color: currentcolor;
 }
 
 /* Slider */
@@ -375,6 +368,7 @@
 
 .km-ios7 .km-list > li
 {
+    font-size: 1.1em;
     padding-left: 1em;
     border: 0;
     background: transparent;
@@ -425,9 +419,9 @@
     border-top: 2em solid @ios7-list-title-background;
 }
 
-.km-listview .km-switch
+.km-ios7 .km-listview .km-switch
 {
-    margin-top: -.9rem;
+    margin-top: -1.1rem;
 }
 
 /* TabStrip */
@@ -1110,9 +1104,7 @@
 
 .km-ios7 .km-pages,
 .km-ios7 .km-button,
-.km-ios7 .km-switch-handle,
 .km-ios7 .k-slider-selection,
-.km-ios7 .km-switch-background,
 .km-ios7 .km-popup .k-item,
 .km-ios7 .km-actionsheet > li > a,
 .km-ios7 .km-tabstrip .km-state-active
@@ -1121,9 +1113,8 @@
 }
 
 .km-ios7 .km-badge,
-.km-ios7 .km-switch-label-on,
-.km-ios7 .km-switch-label-off,
 .km-ios7 .k-slider .k-draghandle,
+.km-ios7 .km-switch-handle.km-state-active,
 .km-ios7 .k-slider .k-draghandle:hover,
 .km-ios7 .km-scroller-pull .km-icon
 {
@@ -1133,7 +1124,6 @@
 .km-ios7 .km-filter-wrap > input,
 .km-ios7 .k-slider .k-draghandle,
 .km-ios7 .k-slider .k-draghandle:hover,
-.km-ios7 .km-switch-handle.km-state-active,
 .km-root .km-ios7 .km-scroller-refresh span:not(.km-template),
 .km-ios7 .km-listview-label input[type=checkbox]:checked:after
 {
@@ -1162,6 +1152,11 @@
 .km-ios7 .km-filter-wrap > input:focus
 {
     border-color: @ios7-active-background;
+}
+
+.km-ios7 .km-switch
+{
+    color: @ios7-switch-color;
 }
 
 .km-ios7 .km-badge
