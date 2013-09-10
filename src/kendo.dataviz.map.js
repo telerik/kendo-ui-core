@@ -33,9 +33,6 @@ kendo_module({
 
     // Map ====================================================================
     var Map = Widget.extend({
-        init: function(element, options) {
-        },
-
         options: {
             name: "Map"
         }
