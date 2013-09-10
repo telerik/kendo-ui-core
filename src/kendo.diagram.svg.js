@@ -815,6 +815,7 @@ kendo_module({
         Canvas: Canvas,
         Path: Path,
         Line: Line,
+        Marker: Marker,
         Polyline: Polyline,
         CompositeTransform: CompositeTransform,
         TextBlock: TextBlock,
