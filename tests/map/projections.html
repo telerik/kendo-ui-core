@@ -20,15 +20,15 @@
 
                 spatial = dataviz.spatial,
                 projections = spatial.projections,
-                GeoPoint = spatial.GeoPoint;
+                Location = spatial.Location;
 
-            function projectionEqual(projection, geoPoint, point) {
+            function project(projection, geoPoint, point) {
                 var p = projection.project(geoPoint);
                 close(p.x, point.x, TOLERANCE, "X");
                 close(p.y, point.y, TOLERANCE, "Y");
             }
 
-            function reverseEqual(projection, point) {
+            function reverse(projection, point) {
                 var r = projection.reverse(point);
                 var p = projection.project(r);
                 close(p.x, point.x, TOLERANCE, "X");
@@ -75,8 +75,8 @@
                     var geo = this[0];
                     var point = this[1];
 
-                    projectionEqual(mercator,
-                        new GeoPoint(geo[0], geo[1]),
+                    project(mercator,
+                        new Location(geo[0], geo[1]),
                         new Point(point[0], point[1]));
                 });
             });
@@ -86,8 +86,8 @@
                     centralMeridian: 24
                 });
 
-                projectionEqual(mercator,
-                    new GeoPoint(42.7175, 24.916667),
+                project(mercator,
+                    new Location(42.7175, 24.916667),
                     new Point(102042.90366699788, 5240075.61980005074)
                 );
             });
@@ -96,7 +96,7 @@
                 $.each(mercatorIdentities, function() {
                     var point = this[1];
 
-                    reverseEqual(mercator,
+                    reverse(mercator,
                         new Point(point[0], point[1]));
                 });
             });
@@ -106,7 +106,7 @@
                     centralMeridian: 24
                 });
 
-                reverseEqual(mercator,
+                reverse(mercator,
                     new Point(102042.90366699788, 5240075.61980005074)
                 );
             });

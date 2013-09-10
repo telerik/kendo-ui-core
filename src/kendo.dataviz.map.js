@@ -41,7 +41,7 @@ kendo_module({
         }
     });
 
-    var GeoPoint = function(lat, lng) {
+    var Location = function(lat, lng) {
         this.lat = lat;
         this.lng = lng;
     };
@@ -55,13 +55,13 @@ kendo_module({
 
     // Used by EPSG:3857
     var SphericalMercator = {
-        MAX_LONG: 180,
+        MAX_LNG: 180,
         MAX_LAT: 85.0511287798,
 
         project: function(ll) {
             var proj = this,
                 lat = limit(ll.lat, -proj.MAX_LAT, proj.MAX_LAT),
-                lng = limit(ll.lng, -proj.MAX_LONG, proj.MAX_LONG),
+                lng = limit(ll.lng, -proj.MAX_LNG, proj.MAX_LNG),
                 x = rad(lng),
                 y = log(tan(PI_DIV_4 + rad(ll.lat) / 2));
 
@@ -75,7 +75,7 @@ kendo_module({
             this.options = deepExtend({}, this.options, options);
         },
 
-        MAX_LONG: 180,
+        MAX_LNG: 180,
         MAX_LAT: 85.0840590501,
         REVERSE_ITERATIONS: 15,
         REVERSE_CONVERGENCE: 1e-12,
@@ -89,20 +89,20 @@ kendo_module({
             var proj = this,
                 options = proj.options,
                 datum = options.datum,
-                ecc = datum.e,
                 r = datum.a,
-                lon0 = options.centralMeridian,
+                ecc = datum.e,
+                lng0 = options.centralMeridian,
                 lat = limit(geo.lat, -proj.MAX_LAT, proj.MAX_LAT),
-                lng = limit(geo.lng, -proj.MAX_LONG, proj.MAX_LONG),
-                x = rad(lng - lon0) * r,
+                lng = limit(geo.lng, -proj.MAX_LNG, proj.MAX_LNG),
+                x = rad(lng - lng0) * r,
                 y = rad(lat),
                 ts = tan(PI_DIV_4 + y / 2),
-                esin = ecc * sin(y),
-                con = pow((1 - esin) / (1 + esin), ecc / 2);
+                con = ecc * sin(y),
+                p = pow((1 - con) / (1 + con), ecc / 2);
 
             // See:
             // http://en.wikipedia.org/wiki/Mercator_projection#Generalization_to_the_ellipsoid
-            y = r * log(ts * con);
+            y = r * log(ts * p);
 
             return new Point(x, y);
         },
@@ -111,19 +111,20 @@ kendo_module({
             var proj = this,
                 options = proj.options,
                 datum = options.datum,
+                r = datum.a,
                 ecc = datum.e,
                 ecch = ecc / 2,
-                lon0 = options.centralMeridian,
-                lng = point.x / (DEG_TO_RAD * datum.a) + lon0,
-                ts = exp(-point.y / datum.a),
+                lng0 = options.centralMeridian,
+                lng = point.x / (DEG_TO_RAD * r) + lng0,
+                ts = exp(-point.y / r),
                 phi = PI_DIV_2 - 2 * atan(ts),
-                i,
-                limit = proj.REVERSE_ITERATIONS,
-                dphi;
+                i;
 
-            for (i = 0; i <= limit; i++) {
-                var con = ecc * sin(phi);
-                dphi = PI_DIV_2 - 2 * atan(ts * pow((1 - con) / (1 + con), ecch)) - phi;
+            for (i = 0; i <= proj.REVERSE_ITERATIONS; i++) {
+                var con = ecc * sin(phi),
+                    p = pow((1 - con) / (1 + con), ecch),
+                    dphi = PI_DIV_2 - 2 * atan(ts * p) - phi;
+
                 phi += dphi;
 
                 if (math.abs(dphi) <= proj.REVERSE_CONVERGENCE) {
@@ -131,7 +132,7 @@ kendo_module({
                 }
             }
 
-            return new GeoPoint(deg(phi), lng);
+            return new Location(deg(phi), lng);
         }
     });
 
@@ -155,7 +156,7 @@ kendo_module({
                 WGS84Datum: WGS84Datum
             },
 
-            GeoPoint: GeoPoint
+            Location: Location
         }
     });
 
