@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Chart helpers</title>
-        <script src="../jquery-loader.js"></script>
-        <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
-        <script src="../kendo-test-helpers.js"></script>
-        <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
-    </head>
-    <body>
-        <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.dataviz.core.js"></script>
-        <script src="../../src/kendo.dataviz.map.js"></script>
-        <script>
-            var TOLERANCE = Math.pow(10, -6);
+<head>
+    <title>Chart helpers</title>
+    <script src="../jquery-loader.js"></script>
+    <script src="../qunit/qunit/qunit.js"></script>
+    <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+    <script src="../kendo-test-helpers.js"></script>
+    <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+</head>
+<body>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/kendo.dataviz.map.js"></script>
+    <script>
+        var TOLERANCE = Math.pow(10, -6);
 
-            var dataviz = kendo.dataviz,
-                Point = dataviz.Point2D,
+        var dataviz = kendo.dataviz,
+            Point = dataviz.Point2D,
 
-                spatial = dataviz.spatial,
-                projections = spatial.projections,
-                Location = spatial.Location;
+            spatial = dataviz.spatial,
+            projections = spatial.projections,
+            Location = spatial.Location;
 
-            function project(projection, geoPoint, point) {
-                var p = projection.project(geoPoint);
-                close(p.x, point.x, TOLERANCE, "X");
-                close(p.y, point.y, TOLERANCE, "Y");
-            }
+        function project(proj, geoPoint, point) {
+            var p = proj.project(geoPoint);
+            close(p.x, point.x, TOLERANCE, "X");
+            close(p.y, point.y, TOLERANCE, "Y");
+        }
 
-            function reverse(projection, point) {
-                var r = projection.reverse(point);
-                var p = projection.project(r);
-                close(p.x, point.x, TOLERANCE, "X");
-                close(p.y, point.y, TOLERANCE, "Y");
-            }
+        function inverse(proj, point) {
+            var r = proj.inverse(point);
+            var p = proj.project(r);
+            close(p.x, point.x, TOLERANCE, "X");
+            close(p.y, point.y, TOLERANCE, "Y");
+        }
 
-            // ------------------------------------------------------------
+        (function() {
 
             // [[LAT, LONG], [X, Y]]
             // Reference values obtained by cs2cs (latitude clipped to MAX_LAT)
@@ -64,6 +64,8 @@
                 ];
 
             var mercator;
+
+            // ------------------------------------------------------------
             module("Projections / Mercator", {
                 setup: function() {
                     mercator = new projections.Mercator();
@@ -92,37 +94,95 @@
                 );
             });
 
-            test("reverse", function() {
+            test("inverse", function() {
                 $.each(mercatorIdentities, function() {
                     var point = this[1];
 
-                    reverse(mercator,
+                    inverse(mercator,
                         new Point(point[0], point[1]));
                 });
             });
 
-            test("reverse with central meridian", function() {
+            test("inverse with central meridian", function() {
                 mercator = new projections.Mercator({
                     centralMeridian: 24
                 });
 
-                reverse(mercator,
+                inverse(mercator,
                     new Point(102042.90366699788, 5240075.61980005074)
                 );
             });
 
+        })();
+
+        (function() {
+
+            // [[LAT, LONG], [X, Y]]
+            // Reference values obtained by cs2cs (latitude clipped to MAX_LAT)
+            // cs2cs -v -f "%.11f" -r +init=epsg:4326 +to +init=epsg:3857
+            var mercatorIdentities = [
+                    // Center
+                    [[0, 0], [0, 0]],
+
+                    // NE corner
+                    [[90, 180],
+                     [20037508.34278924763, 20037508.34278073907]],
+
+                    // SW corner
+                    [[-90, -180],
+                     [-20037508.34278924763, -20037508.34278075024]],
+
+                    // Test points
+                    [[42.7175, 24.916667],
+                     [2773710.68270556396, 5269070.84282853827]],
+
+                    [[51.9371170300465, 80.11230468750001],
+                     [8918060.96408808976, 6788763.38325125352]],
+
+                    [[52.4827802220782, -5.625],
+                     [-626172.13571216457, 6887893.49283379968]]
+                ];
+
+            var mercator;
+
             // ------------------------------------------------------------
-            module("Projections / Spherical Mercator");
+            module("Projections / Spherical Mercator", {
+                setup: function() {
+                    mercator = new projections.SphericalMercator();
+                }
+            });
 
-        </script>
+            test("project", function() {
+                $.each(mercatorIdentities, function() {
+                    var geo = this[0];
+                    var point = this[1];
 
-        <h1 id="qunit-header">kendo.chart</h1>
-        <h2 id="qunit-banner"></h2>
-        <div id="qunit-testrunner-toolbar"></div>
-        <h2 id="qunit-userAgent"></h2>
-        <ol id="qunit-tests"></ol>
-        <div id="qunit-fixture">test markup, will be hidden</div>
-        <ul id="log"></ul>
+                    project(mercator,
+                        new Location(geo[0], geo[1]),
+                        new Point(point[0], point[1]));
+                });
+            });
 
-    </body>
+            test("inverse", function() {
+                $.each(mercatorIdentities, function() {
+                    var point = this[1];
+
+                    inverse(mercator,
+                        new Point(point[0], point[1]));
+                });
+            });
+
+        })();
+
+    </script>
+
+    <h1 id="qunit-header">kendo.chart</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+
+</body>
 </html>

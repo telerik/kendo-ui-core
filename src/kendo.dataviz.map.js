@@ -54,20 +54,45 @@ kendo_module({
     };
 
     // Used by EPSG:3857
-    var SphericalMercator = {
+    var SphericalMercator = Class.extend({
+        init: function(options) {
+            this.options = deepExtend({}, this.options, options);
+        },
+
         MAX_LNG: 180,
         MAX_LAT: 85.0511287798,
 
+        options: {
+            centralMeridian: 0,
+            datum: WGS84Datum
+        },
+
         project: function(ll) {
             var proj = this,
+                datum = proj.options.datum,
+                r = datum.a,
                 lat = limit(ll.lat, -proj.MAX_LAT, proj.MAX_LAT),
                 lng = limit(ll.lng, -proj.MAX_LNG, proj.MAX_LNG),
-                x = rad(lng),
-                y = log(tan(PI_DIV_4 + rad(ll.lat) / 2));
+                x = r * rad(lng),
+                y = rad(lat),
+                ts = tan(PI_DIV_4 + y / 2);
+
+            y = r * log(ts);
 
             return new Point(x, y);
+        },
+
+        inverse: function(point) {
+            var proj = this,
+                options = proj.options,
+                datum = options.datum,
+                r = datum.a,
+                lng = point.x / (DEG_TO_RAD * r),
+                lat = deg(PI_DIV_2 - (2 * atan(exp(-point.y / r))));
+
+            return new Location(lat, lng);
         }
-    };
+    });
 
     // Used by EPSG:3395
     var Mercator = Class.extend({
@@ -77,8 +102,8 @@ kendo_module({
 
         MAX_LNG: 180,
         MAX_LAT: 85.0840590501,
-        REVERSE_ITERATIONS: 15,
-        REVERSE_CONVERGENCE: 1e-12,
+        INVERSE_ITERATIONS: 15,
+        INVERSE_CONVERGENCE: 1e-12,
 
         options: {
             centralMeridian: 0,
@@ -107,7 +132,7 @@ kendo_module({
             return new Point(x, y);
         },
 
-        reverse: function(point) {
+        inverse: function(point) {
             var proj = this,
                 options = proj.options,
                 datum = options.datum,
@@ -120,14 +145,14 @@ kendo_module({
                 phi = PI_DIV_2 - 2 * atan(ts),
                 i;
 
-            for (i = 0; i <= proj.REVERSE_ITERATIONS; i++) {
+            for (i = 0; i <= proj.INVERSE_ITERATIONS; i++) {
                 var con = ecc * sin(phi),
                     p = pow((1 - con) / (1 + con), ecch),
                     dphi = PI_DIV_2 - 2 * atan(ts * p) - phi;
 
                 phi += dphi;
 
-                if (math.abs(dphi) <= proj.REVERSE_CONVERGENCE) {
+                if (math.abs(dphi) <= proj.INVERSE_CONVERGENCE) {
                     break;
                 }
             }
