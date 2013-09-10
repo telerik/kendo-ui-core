@@ -2902,7 +2902,6 @@ kendo_module({
         RectAlign: RectAlign,
         Matrix: Matrix,
         MatrixVector: MatrixVector,
-        Range: Range,
         normalVariable: normalVariable,
         randomId: randomId,
         Dictionary: Dictionary,
