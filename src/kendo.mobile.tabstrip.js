@@ -43,15 +43,26 @@ kendo_module({
                 idx = 0,
                 length = tabs.length;
 
-            for (; idx < length; idx ++) {
-                tab = tabs[idx];
-                path = tab.href.replace(/(\#.+)(\?.+)$/, "$1"); // remove the fragment query string - http://www.foo.com?foo#bar**?baz=qux**
+            if(isNaN(url)) {
+                for (; idx < length; idx ++) {
+                    tab = tabs[idx];
+                    path = tab.href.replace(/(\#.+)(\?.+)$/, "$1"); // remove the fragment query string - http://www.foo.com?foo#bar**?baz=qux**
 
-                if (path.indexOf(url, path.length - url.length) !== -1) {
-                    this._setActiveItem($(tab));
-                    return;
+                    if (path.indexOf(url, path.length - url.length) !== -1) {
+                        this._setActiveItem($(tab));
+                        return;
+                    }
                 }
+            } else {
+                this._setActiveItem(tabs.eq(url));
             }
+        },
+
+        switchByFullUrl: function(url) {
+            var tab;
+
+            tab = this.element.find("a[href$='" + url + "']");
+            this._setActiveItem(tab);
         },
 
         clear: function() {

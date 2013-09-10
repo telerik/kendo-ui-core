@@ -40,7 +40,7 @@
                             <a href="foo" id="foo">foo</a> \
                             <a href="#bar" id="bar" data-icon="genius">bar</a> \
                             <a href="baz" id="baz"><img  />bar</a> \
-                            <a href="#qux?foo=bar" id="qux">qux</a> \
+                            <a href="#qux?foo=bar" id="qux">qux query str</a> \
                         </nav>');
                     tabstrip = new Tabstrip(dom);
                 },
@@ -125,8 +125,34 @@
                 ok(dom.find("#bar").is(".km-state-active"), "button is active");
             });
 
+            test("switches to the button with the given full url", function() {
+                tabstrip.switchByFullUrl("qux?foo=bar");
+                ok(dom.find("#qux").is(".km-state-active"), "button is active");
+                ok(!dom.find("#foo").is(".km-state-active"), "previous button is not active");
+            });
+
+            test("switches to the button with the anchor url (query string params)", function() {
+                var dom = $('<nav><a href="#foo">foo</a><a href="#foo?bar=baz">foo</a><a href="#foo?bar=qux">foo</a><a href="foo.html?bar=qux">foo</a></nav>');
+                tabstrip = new Tabstrip(dom, {selectedIndex: 0});
+
+                tabstrip.switchByFullUrl("#foo?bar=baz");
+                ok(tabstrip.element.find("a").eq(1).is(".km-state-active"), "button is active");
+                ok(!tabstrip.element.find("a").eq(0).is(".km-state-active"), "previous button is not active");
+
+                tabstrip.switchByFullUrl("foo.html?bar=qux");
+                ok(tabstrip.element.find("a").eq(3).is(".km-state-active"), "button is active");
+
+                tabstrip.switchByFullUrl("#foo");
+                ok(tabstrip.element.find("a").eq(0).is(".km-state-active"), "method works without query string parameters");
+            });
+
             test("switches to the button with the same url path", function() {
                 tabstrip.switchTo("#qux");
+                ok(dom.find("#qux").is(".km-state-active"), "button is active");
+            });
+
+            test("switches to the button by zero based index", function() {
+                tabstrip.switchTo(3);
                 ok(dom.find("#qux").is(".km-state-active"), "button is active");
             });
 
