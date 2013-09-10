@@ -38,6 +38,7 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
+            options = that.options;
             element = that.element;
 
             element.addClass("km-pane");
@@ -54,10 +55,11 @@ kendo_module({
 
             that.viewEngine = new ViewEngine({
                 container: element,
-                transition: that.options.transition,
-                rootNeeded: !that.options.initial,
-                serverNavigation: that.options.serverNavigation,
-                layout: that.options.layout,
+                transition: options.transition,
+                rootNeeded: !options.initial,
+                serverNavigation: options.serverNavigation,
+                remoteViewURLPrefix: options.root || "",
+                layout: options.layout,
                 loader: that.loader
             });
 
