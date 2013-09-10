@@ -479,31 +479,47 @@
 
 .km-ios7 .km-filter-form
 {
-    color: @ios7-border-color;
-    border-color: currentcolor;
-    background-color: currentcolor;
+    color: @ios7-list-title-background;
     .linear-gradient-image(top, rgba(255,255,255,.6), rgba(255,255,255,.3));
 }
 
 .km-ios7 .km-filter-wrap
 {
     color: inherit;
-    .border-radius(2em);
-    .box-shadow(inset 0 1px 3px @ios7-border-color);
-    .box-shadow(inset 0 1px 3px currentcolor);
-    border-color: currentcolor;
-    background: transparent;
+    .border-radius(@ios7-secondary-border-radius);
+    background: currentcolor;
+    border: 1px solid transparent;
 }
 
-.km-ios7 .km-listview-wrapper .km-filter-wrap
+.km-ios7 .km-filter-wrap > input
 {
-    background: #fff;
+    padding: 0 1.8em;
+    color: transparent;
+    background: transparent;
+    text-shadow: 0 0 0 @ios7-overlay-background;
 }
+
+.km-ios7 .km-filter-wrap > input::-webkit-input-placeholder { text-align: center; }
+.km-ios7 .km-filter-wrap > input::-moz-placeholder { text-align: center; }
+.km-ios7 .km-filter-wrap > input::-ms-input-placeholder { text-align: center; }
+
+.km-ios7 .km-filter-wrap > input:focus::-webkit-input-placeholder { text-align: left; }
+.km-ios7 .km-filter-wrap > input:focus::-moz-placeholder { text-align: left; }
+.km-ios7 .km-filter-wrap > input:focus::-ms-input-placeholder { text-align: left; }
 
 .km-ios7 .km-filter-wrap:before,
 .km-ios7 .km-filter-reset .km-clear
 {
-	color: #adadad;
+    color: @ios7-overlay-background;
+    position: absolute;
+    top: 50%;
+    margin-top: -.55em;
+}
+
+.km-ios7 .km-filter-wrap:before
+{
+    font-size: 1em;
+    content: "\e21e";
 }
 
 .km-ios7 .km-filter-wrap .km-clear:after
@@ -1121,7 +1137,6 @@
     color: @ios7-active-color;
 }
 
-.km-ios7 .km-filter-wrap > input,
 .km-ios7 .k-slider .k-draghandle,
 .km-ios7 .k-slider .k-draghandle:hover,
 .km-root .km-ios7 .km-scroller-refresh span:not(.km-template),
