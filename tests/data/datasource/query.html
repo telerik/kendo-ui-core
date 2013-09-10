@@ -443,6 +443,33 @@
                     });
             });
 
+            test("filter with no descriptors persist filters property", 1, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        ok(options.filter.filters);
+
+                        return options;
+                    }
+                });
+
+                var dataSource = new kendo.data.DataSource({
+                    transport: transport,
+                    serverFiltering: true,
+                    schema: {
+                        model: {
+                            fields: { }
+                        }
+                    }
+                });
+
+                $.mockjax({
+                    url: "foo",
+                });
+
+                dataSource.filter({ logic: "and", filters: [] });
+            });
+
             test("sort datasource state is not modified after original field is restored", 1, function() {
                 var transport = new RemoteTransport({
                     read: "foo"

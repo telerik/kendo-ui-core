@@ -1943,7 +1943,7 @@ kendo_module({
             }
         }
 
-        if (descriptor.filters && descriptor.filters.length) {
+        if (descriptor.filters) {
             target.filters = [];
             for (idx = 0, length = descriptor.filters.length; idx < length; idx++) {
                 target.filters[idx] = convertFilterDescriptorsField(descriptor.filters[idx], model);
