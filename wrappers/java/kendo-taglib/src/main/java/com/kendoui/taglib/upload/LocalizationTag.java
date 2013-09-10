@@ -66,6 +66,22 @@ public class LocalizationTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("dropFilesHere", value);
     }
 
+    public java.lang.String getHeaderStatusUploaded() {
+        return (java.lang.String)getProperty("headerStatusUploaded");
+    }
+
+    public void setHeaderStatusUploaded(java.lang.String value) {
+        setProperty("headerStatusUploaded", value);
+    }
+
+    public java.lang.String getHeaderStatusUploading() {
+        return (java.lang.String)getProperty("headerStatusUploading");
+    }
+
+    public void setHeaderStatusUploading(java.lang.String value) {
+        setProperty("headerStatusUploading", value);
+    }
+
     public java.lang.String getRemove() {
         return (java.lang.String)getProperty("remove");
     }

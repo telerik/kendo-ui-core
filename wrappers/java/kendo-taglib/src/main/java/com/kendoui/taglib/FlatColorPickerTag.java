@@ -50,6 +50,14 @@ public class FlatColorPickerTag extends WidgetTag /* interfaces *//* interfaces 
         setEvent("change", value.getBody());
     }
 
+    public boolean getAutoupdate() {
+        return (boolean)getProperty("autoupdate");
+    }
+
+    public void setAutoupdate(boolean value) {
+        setProperty("autoupdate", value);
+    }
+
     public boolean getButtons() {
         return (boolean)getProperty("buttons");
     }

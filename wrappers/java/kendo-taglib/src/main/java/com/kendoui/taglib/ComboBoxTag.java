@@ -222,6 +222,14 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("value", value);
     }
 
+    public boolean getValuePrimitive() {
+        return (boolean)getProperty("valuePrimitive");
+    }
+
+    public void setValuePrimitive(boolean value) {
+        setProperty("valuePrimitive", value);
+    }
+
     public String getCascade() {
         Function property = ((Function)getProperty("cascade"));
         if (property != null) {

@@ -105,6 +105,12 @@ all data items which begin with the current widget value are displayed in the su
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Spcifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item text field. If set to false, the View-Model field will be updated with the selected item.</description>
+            <name>valuePrimitive</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
@@ -435,13 +441,14 @@ If it is not supported by the browser, the Barcode will switch to the first avai
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>Specifies the navigation depth.</description>
+            <description>Specifies the navigation depth. The following
+settings are available for the depth value:</description>
             <name>depth</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Template to be used for rendering the footer. If false, the footer will not be rendered.</description>
+            <description>The template which renders the footer. If false, the footer will not be rendered.</description>
             <name>footer</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -465,7 +472,8 @@ If it is not supported by the browser, the Barcode will switch to the first avai
             <type>java.util.Date</type>
         </attribute>
         <attribute>
-            <description>Specifies the start view.</description>
+            <description>Specifies the start view.
+The following settings are available for the start value:</description>
             <name>start</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -477,12 +485,12 @@ If it is not supported by the browser, the Barcode will switch to the first avai
             <type>java.util.Date</type>
         </attribute>
         <attribute>
-            <description>Fires when the selected date is changed</description>
+            <description>Fires when the selected date is changed.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when navigate</description>
+            <description>Fires when calendar navigates.</description>
             <name>navigate</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -490,19 +498,21 @@ If it is not supported by the browser, the Barcode will switch to the first avai
     </tag>
 
     <tag>
-        <description>Templates for the cells rendered in the "month" view.</description>
+        <description>Templates for the cells rendered in "month" view.</description>
         <name>calendar-month</name>
         <tag-class>com.kendoui.taglib.calendar.MonthTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Template to be used for rendering the cells in the "month" view, which are in range.</description>
+            <description>The template to be used for rendering the cells in "month" view, which are between the min/max range.
+ By default, the widget renders the value of the corresponding day.</description>
             <name>content</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Template to be used for rendering the cells in the "month" view, which are not in the min/max range.</description>
+            <description>The template to be used for rendering the cells in the "month" view, which are not in the min/max range.
+ By default, the widget renders an empty string.</description>
             <name>empty</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -513,13 +523,13 @@ If it is not supported by the browser, the Barcode will switch to the first avai
 
 
     <tag>
-        <description>Fires when the selected date is changed</description>
+        <description>Fires when the selected date is changed.</description>
         <name>calendar-change</name>
         <tag-class>com.kendoui.taglib.calendar.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when navigate</description>
+        <description>Fires when calendar navigates.</description>
         <name>calendar-navigate</name>
         <tag-class>com.kendoui.taglib.calendar.NavigateFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -5642,7 +5652,8 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The interval between major divisions.</description>
+            <description>The interval between major divisions.
+If this is a date axis the value represents the number of xAxis.baseUnits between major divisions.</description>
             <name>majorUnit</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -6191,6 +6202,41 @@ body of the chart.</description>
         </attribute>
         <attribute>
             <description>The width of the major ticks in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the minor grid lines. These are the lines that are an extension of the minor ticks through the
+body of the chart.</description>
+        <name>chart-xAxisItem-minorGridLines</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemMinorGridLinesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the minor grid lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the minor grid lines.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the minor grid lines. By default the minor grid lines are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the category axis minor grid lines in pixels.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -6841,7 +6887,8 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The interval between major divisions.</description>
+            <description>The interval between major divisions.
+If this is a date axis the value represents the number of xAxis.baseUnits between major divisions.</description>
             <name>majorUnit</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -7384,6 +7431,41 @@ body of the chart.</description>
         </attribute>
         <attribute>
             <description>The width of the major ticks in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the minor grid lines. These are the lines that are an extension of the minor ticks through the
+body of the chart.</description>
+        <name>chart-yAxisItem-minorGridLines</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemMinorGridLinesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the minor grid lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the minor grid lines.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the minor grid lines. By default the minor grid lines are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the category axis minor grid lines in pixels.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -8111,18 +8193,14 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The number of columns to display.  When you pass "websafe" this will
-automatically default to 18.</description>
+            <description>The number of columns to display.  When you use the "websafe" palette, this will automatically default to 18.</description>
             <name>columns</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Specifies the color palette to display.  It can be a string with
-comma-separated colors in hex representation, an array of Color
-objects or of strings that parseColor understands.  As a shortcut,
-you can pass "basic" to get the simple palette (this is the default)
-or "websafe" to get the Web-safe palette.</description>
+            <description>Specifies the color palette to display.
+It can be a string with comma-separated colors in hex representation, an array of kendo.Color object objects or of strings that parseColor understands.  As a shortcut, you can pass "basic" to get the simple palette (this is the default) or "websafe" to get the Web-safe palette.</description>
             <name>palette</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -8189,18 +8267,15 @@ or "websafe" to get the Web-safe palette.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Applicable only for the HSV selector (that is, when pallete is
-null).  This specifies whether the "Apply" / "Cancel" buttons are to
-be displayed in the drop-down HSV picker.</description>
+            <description>Specifies whether the widget should display the Apply / Cancel buttons.Applicable only for the HSV selector, when a pallete is not specified.</description>
             <name>buttons</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The number of columns to show in the simple color dropdown.  For the
-"basic" and "websafe" palettes this is automatically initialized; if
-you pass a custom palette then you can set this to some value that
-makes sense for your colors.</description>
+            <description>The number of columns to show in the color dropdown when a pallete is specified.
+This is automatically initialized for the "basic" and "websafe" palettes.
+If you use a custom palette then you can set this to some value that makes sense for your colors.</description>
             <name>columns</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -8212,25 +8287,22 @@ makes sense for your colors.</description>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>Only for the HSV selector.  If true, the widget will display the
-opacity slider.  Note that currently in HTML5 the &lt;input
-type="color"&gt; does not support opacity.</description>
+            <description>Only for the HSV selector.  If true, the widget will display the opacity slider.
+Note that currently in HTML5 the &lt;input type="color"&gt; does not support opacity.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
             <description>When a non-null palette argument is supplied, the drop-down will be
-a simple color picker.  The following are supported:If palette is missing or null, the widget will display the HSV
+a simple color picker that lists the colors. The following are supported:If palette is missing or null, the widget will display the HSV
 selector.</description>
             <name>palette</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>Only for the HSV selector.  Displays the color preview element, along
-with an input field where the end user can paste a color in a
-CSS-supported notation.</description>
+            <description>Only applicable for the HSV selector.Displays the color preview element, along with an input field where the end user can paste a color in a CSS-supported notation.</description>
             <name>preview</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -8249,10 +8321,8 @@ specified, the HTML for the element will look like this:</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The initially selected color.  This can be a string supported by
-parseColor or a Color object.  Note that when initializing the
-widget from an &lt;input&gt; element, the initial color will be decided by the
-field instead.</description>
+            <description>The initially selected color.
+Note that when initializing the widget from an &lt;input&gt; element, the initial color will be decided by the field instead.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -8352,140 +8422,149 @@ original value.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Controls whether to bind the widget to the DataSource on initialization.</description>
+            <description>Controls whether to bind the widget to the data source on initialization.</description>
             <name>autoBind</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Use it to set the Id of the parent DropDownList.</description>
+            <description>Use it to set the Id of the parent ComboBox widget.
+Help topic showing how cascading functionality works</description>
             <name>cascadeFrom</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>A local JavaScript object or instance of DataSource or the data that the ComboBox will be bound to.</description>
+            <description>The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
+instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.DataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the text content of the list items.</description>
+            <description>The field of the data item that provides the text content of the list items. The widget will filter the data source based on this field.</description>
             <name>dataTextField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the value content of the list items.</description>
+            <description>The field of the data item that provides the value of the widget.</description>
             <name>dataValueField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the delay in ms after which the ComboBox will start filtering dataSource.</description>
+            <description>The delay in milliseconds between a keystroke and when the widget displays the popup.</description>
             <name>delay</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Controls whether the ComboBox should be initially enabled.</description>
+            <description>If set to false the widget will be disabled and will not allow user input. The widget is enabled by default and allows user input.</description>
             <name>enable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Defines the type of filtration. If "none" the ComboBox will not filter the items.</description>
+            <description>The filtering method used to determine the suggestions for the current value. Filtration is turned of by default.
+The supported filter values are startswith, endswith and contains.</description>
             <name>filter</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Define the height of the drop-down list in pixels.</description>
+            <description>The height of the suggestion popup in pixels. The default value is 200 pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Controls whether the first item will be automatically highlighted.</description>
+            <description>If set to true the first suggestion will be automatically highlighted.</description>
             <name>highlightFirst</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Defines whether the filtration should be case sensitive.</description>
+            <description>If set to false case-sensitive search will be performed to find suggestions. The widget performs case-insensitive searching by default.</description>
             <name>ignoreCase</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Defines the initial selected item.</description>
+            <description>The index of the initially selected item. The index is 0 based.</description>
             <name>index</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Specifies the minimum characters that should be typed before the ComboBox activates</description>
+            <description>The minimum number of characters the user must type before a search is performed. Set to higher value than 1 if the search could match a lot of items.</description>
             <name>minLength</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>A string that appears in the textbox when the combobox has no value.</description>
+            <description>The hint displayed by the widget when it is empty. Not set by default.</description>
             <name>placeholder</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Controls whether the ComboBox should automatically auto-type the rest of text.</description>
+            <description>If set to true the widget will automatically use the first suggestion as its value.</description>
             <name>suggest</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Template to be used for rendering the items in the list.</description>
+            <description>The template used to render the items. By default the widget displays only the text of the data item (configured via dataTextField).</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Define the text of the widget, when the autoBind is set to false.</description>
+            <description>The text of the widget used when the autoBind is set to false.</description>
             <name>text</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Define the value of the widget</description>
+            <description>The value of the widget.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Fires when the value has been changed.</description>
+            <description>Specifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item value field. If set to false, the View-Model field will be updated with the selected item.</description>
+            <name>valuePrimitive</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the drop-down list is closed</description>
+            <description>Fired when the popup of the widget is closed.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>close</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the ComboBox has received data from the data source.</description>
+            <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>dataBound</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the drop-down list is opened</description>
+            <description>Fired when the popup of the widget is opened by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Triggered when a Li element is selected.</description>
+            <description>Fired when an item from the popup is selected by the user.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Triggered when value of the widget is changed via API or user interaction.</description>
+            <description>Fired when the value of the widget is changed via API or user interaction.</description>
             <name>cascade</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -8493,7 +8572,7 @@ original value.</description>
     </tag>
 
     <tag>
-        <description>Animations to be used for opening/closing the popup. Setting to false will turn off the animation.</description>
+        <description>Configures the opening and closing animations of the suggestion popup. Setting the animation option to false will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.</description>
         <name>comboBox-animation</name>
         <tag-class>com.kendoui.taglib.combobox.AnimationTag</tag-class>
         <body-content>JSP</body-content>
@@ -8502,19 +8581,19 @@ original value.</description>
     </tag>
 
     <tag>
-        <description>Animation to be used for closing of the popup.</description>
+        <description></description>
         <name>comboBox-animation-close</name>
         <tag-class>com.kendoui.taglib.combobox.AnimationCloseTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>The duration of the close animation in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for closing of the popup.</description>
+            <description>The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.Complete list of available animations</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -8524,19 +8603,19 @@ original value.</description>
 
 
     <tag>
-        <description>Animation to be used for opening of the popup.</description>
+        <description>The animation played when the suggestion popup is opened.</description>
         <name>comboBox-animation-open</name>
         <tag-class>com.kendoui.taglib.combobox.AnimationOpenTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>The duration of the open animation in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for opening of the popup.</description>
+            <description>The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.Complete list of available animations</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -8548,37 +8627,37 @@ original value.</description>
 
 
     <tag>
-        <description>Fires when the value has been changed.</description>
+        <description>Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>comboBox-change</name>
         <tag-class>com.kendoui.taglib.combobox.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the drop-down list is closed</description>
+        <description>Fired when the popup of the widget is closed.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>comboBox-close</name>
         <tag-class>com.kendoui.taglib.combobox.CloseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the ComboBox has received data from the data source.</description>
+        <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>comboBox-dataBound</name>
         <tag-class>com.kendoui.taglib.combobox.DataBoundFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the drop-down list is opened</description>
+        <description>Fired when the popup of the widget is opened by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>comboBox-open</name>
         <tag-class>com.kendoui.taglib.combobox.OpenFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Triggered when a Li element is selected.</description>
+        <description>Fired when an item from the popup is selected by the user.</description>
         <name>comboBox-select</name>
         <tag-class>com.kendoui.taglib.combobox.SelectFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Triggered when value of the widget is changed via API or user interaction.</description>
+        <description>Fired when the value of the widget is changed via API or user interaction.</description>
         <name>comboBox-cascade</name>
         <tag-class>com.kendoui.taglib.combobox.CascadeFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -9302,7 +9381,7 @@ settings are available for the depth value:</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Template to be used for rendering the footer of the calendar.</description>
+            <description>The template which renders the footer of the calendar. If false, the footer will not be rendered.</description>
             <name>footer</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -9326,7 +9405,8 @@ settings are available for the depth value:</description>
             <type>java.util.Date</type>
         </attribute>
         <attribute>
-            <description>Specifies the formats, which are used to parse the value set with value() method or by direct input. If not set the value of the format will be used. Note that value of the format option is always used.</description>
+            <description>Specifies a lis of date formats used to parse the value set with value() method or by direct user input. If not set the value of the format will be used.
+ Note that format option is always used parsing process.</description>
             <name>parseFormats</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -9363,8 +9443,7 @@ The following settings are available for the start value:</description>
     </tag>
 
     <tag>
-        <description>The animation(s) used for opening and/or closing the pop-up. Setting this value to false
-will disable the animation(s).</description>
+        <description>Configures the opening and closing animations of the calendar popup. Setting the animation option to false will disable the opening and closing animations. As a result the calendar popup will open and close instantly.</description>
         <name>datePicker-animation</name>
         <tag-class>com.kendoui.taglib.datepicker.AnimationTag</tag-class>
         <body-content>JSP</body-content>
@@ -9373,19 +9452,19 @@ will disable the animation(s).</description>
     </tag>
 
     <tag>
-        <description>The animation(s) used for hiding of the pop-up.</description>
+        <description>The animation played when the calendar popup is closed.</description>
         <name>datePicker-animation-close</name>
         <tag-class>com.kendoui.taglib.datepicker.AnimationCloseTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>The duration of the close animation in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for closing of the popup.</description>
+            <description>The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.Complete list of available animations</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -9395,19 +9474,19 @@ will disable the animation(s).</description>
 
 
     <tag>
-        <description>The animation(s) used for displaying of the pop-up.</description>
+        <description>The animation played when the calendar popup is opened.</description>
         <name>datePicker-animation-open</name>
         <tag-class>com.kendoui.taglib.datepicker.AnimationOpenTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>The duration of the open animation in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for opening of the popup.</description>
+            <description>The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.Complete list of available animations</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -9425,14 +9504,13 @@ will disable the animation(s).</description>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Template to be used for rendering the cells in the calendar "month" view, which are in range.</description>
+            <description>The template to be used for rendering the cells in "month" view, which are between the min/max range.</description>
             <name>content</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The template used for rendering the cells in the calendar "month" view, which are not in the range between
-the minimum and maximum values.</description>
+            <description>The template to be used for rendering the cells in the "month" view, which are not in the min/max range.</description>
             <name>empty</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -9498,7 +9576,7 @@ settings are available for the depth value:</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Template to be used for rendering the footer of the calendar.</description>
+            <description>The template which renders the footer of the calendar. If false, the footer will not be rendered.</description>
             <name>footer</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -9535,7 +9613,7 @@ settings are available for the depth value:</description>
         </attribute>
         <attribute>
             <description>Specifies the start view of the calendar.
-The following settings are available for the start value:</description>
+ The following settings are available for the start value:</description>
             <name>start</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -9571,8 +9649,7 @@ The following settings are available for the start value:</description>
     </tag>
 
     <tag>
-        <description>The animation(s) used for opening and/or closing the pop-ups. Setting this value to false
-will disable the animation(s).</description>
+        <description>Configures the opening and closing animations of the popups. Setting the animation option to false will disable the opening and closing animations. As a result the popup will open and close instantly.</description>
         <name>dateTimePicker-animation</name>
         <tag-class>com.kendoui.taglib.datetimepicker.AnimationTag</tag-class>
         <body-content>JSP</body-content>
@@ -9581,19 +9658,19 @@ will disable the animation(s).</description>
     </tag>
 
     <tag>
-        <description>The animation(s) used for hiding of the pop-up.</description>
+        <description>The animation played when a popup is closed.</description>
         <name>dateTimePicker-animation-close</name>
         <tag-class>com.kendoui.taglib.datetimepicker.AnimationCloseTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>The duration of the close animation in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for closing of the popup.</description>
+            <description>The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.Complete list of available animations</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -9603,19 +9680,19 @@ will disable the animation(s).</description>
 
 
     <tag>
-        <description>The animation(s) used for displaying of the pop-up.</description>
+        <description>The animation played when the popup is opened.</description>
         <name>dateTimePicker-animation-open</name>
         <tag-class>com.kendoui.taglib.datetimepicker.AnimationOpenTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>The duration of the open animation in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for opening of the popup.</description>
+            <description>The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.Complete list of available animations</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -9681,117 +9758,125 @@ the minimum and maximum values.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Controls whether to bind the widget on initialization.</description>
+            <description>Controls whether to bind the widget to the data source on initialization.</description>
             <name>autoBind</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Use it to set the Id of the parent DropDownList.</description>
+            <description>Use it to set the Id of the parent dropdownlist widget.
+Help topic showing how cascading functionality works</description>
             <name>cascadeFrom</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Instance of DataSource or the data that the DropDownList will be bound to.</description>
+            <description>The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
+instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.DataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the text content of the list items.</description>
+            <description>The field of the data item that provides the text content of the list items. The widget will filter the data source based on this field.</description>
             <name>dataTextField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the value content of the list items.</description>
+            <description>The field of the data item that provides the value of the widget.</description>
             <name>dataValueField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the delay in ms before the search text typed by the end user is cleared.</description>
+            <description>Specifies the delay in milliseconds before the search-text typed by the end user is cleared.</description>
             <name>delay</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Controls whether the DropDownList should be initially enabled.</description>
+            <description>If set to false the widget will be disabled and will not allow user input. The widget is enabled by default and allows user input.</description>
             <name>enable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Define the height of the drop-down list in pixels.</description>
+            <description>The height of the suggestion popup in pixels. The default value is 200 pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Controls whether the search should be case sensitive.</description>
+            <description>If set to false case-sensitive search will be performed to find suggestions. The widget performs case-insensitive searching by default.</description>
             <name>ignoreCase</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Defines the initial selected item.</description>
+            <description>The index of the initially selected item. The index is 0 based.</description>
             <name>index</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Define the text of the default empty item. If the value is an object, then the widget will use it directly.
- Note that object should have atleast the dataValueField and dataTextField properties. Otherwise, widget will show undefined.</description>
+            <description>Define the text of the default empty item. If the value is an object, then the widget will use it a valid data item.
+ Note that the optionLabel will not be available if the widget is empty.</description>
             <name>optionLabel</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>Template to be used for rendering the items in the list.</description>
+            <description>The template used to render the items. By default the widget displays only the text of the data item (configured via dataTextField).</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Define the text of the widget, when the autoBind is set to false.</description>
+            <description>The text of the widget used when the autoBind is set to false.</description>
             <name>text</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Define the value of the widget</description>
+            <description>The value of the widget.</description>
             <name>value</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Fires when the value has been changed.</description>
+            <description>Spcifies the value binding behavior for the widget when the initial model value is null. If set to true, the View-Model field will be updated with the selected item value field. If set to false, the View-Model field will be updated with the selected item.</description>
+            <name>valuePrimitive</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the drop-down list is closed</description>
+            <description>Fired when the popup of the widget is closed.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>close</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the drop-down list has received data from the data source.</description>
+            <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>dataBound</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the drop-down list is opened</description>
+            <description>Fired when the popup of the widget is opened by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Triggered when a Li element is selected.</description>
+            <description>Fired when an item from the popup is selected by the user.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Triggered when value of the widget is changed via API or user interaction.</description>
+            <description>Fired when the value of the widget is changed via API or user interactionTriggered.</description>
             <name>cascade</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -9799,7 +9884,7 @@ the minimum and maximum values.</description>
     </tag>
 
     <tag>
-        <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
+        <description>Configures the opening and closing animations of the suggestion popup. Setting the animation option to false will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.</description>
         <name>dropDownList-animation</name>
         <tag-class>com.kendoui.taglib.dropdownlist.AnimationTag</tag-class>
         <body-content>JSP</body-content>
@@ -9808,19 +9893,19 @@ the minimum and maximum values.</description>
     </tag>
 
     <tag>
-        <description>Animation to be used for closing of the popup.</description>
+        <description></description>
         <name>dropDownList-animation-close</name>
         <tag-class>com.kendoui.taglib.dropdownlist.AnimationCloseTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>The duration of the close animation in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for closing of the popup.</description>
+            <description>The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.Complete list of available animations</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -9830,19 +9915,19 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>Animation to be used for opening of the popup.</description>
+        <description>The animation played when the suggestion popup is opened.</description>
         <name>dropDownList-animation-open</name>
         <tag-class>com.kendoui.taglib.dropdownlist.AnimationOpenTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>The duration of the open animation in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for opening of the popup.</description>
+            <description>The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.Complete list of available animations</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -9854,37 +9939,37 @@ the minimum and maximum values.</description>
 
 
     <tag>
-        <description>Fires when the value has been changed.</description>
+        <description>Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>dropDownList-change</name>
         <tag-class>com.kendoui.taglib.dropdownlist.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the drop-down list is closed</description>
+        <description>Fired when the popup of the widget is closed.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>dropDownList-close</name>
         <tag-class>com.kendoui.taglib.dropdownlist.CloseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the drop-down list has received data from the data source.</description>
+        <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>dropDownList-dataBound</name>
         <tag-class>com.kendoui.taglib.dropdownlist.DataBoundFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the drop-down list is opened</description>
+        <description>Fired when the popup of the widget is opened by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>dropDownList-open</name>
         <tag-class>com.kendoui.taglib.dropdownlist.OpenFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Triggered when a Li element is selected.</description>
+        <description>Fired when an item from the popup is selected by the user.</description>
         <name>dropDownList-select</name>
         <tag-class>com.kendoui.taglib.dropdownlist.SelectFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Triggered when value of the widget is changed via API or user interaction.</description>
+        <description>Fired when the value of the widget is changed via API or user interactionTriggered.</description>
         <name>dropDownList-cascade</name>
         <tag-class>com.kendoui.taglib.dropdownlist.CascadeFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -10554,7 +10639,15 @@ Custom tools and tools that require configuration are defined as objects.The ava
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies whether we should display the Apply / Cancel buttons.</description>
+            <description>Specifies whether the UI should be updated while the user is typing in
+the input field, whenever a valid color can be parsed.  If you pass
+false for this, the widget will update only when ENTER is pressed.</description>
+            <name>autoupdate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies whether the widget should display the Apply / Cancel buttons.</description>
             <name>buttons</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -12323,13 +12416,15 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Indicates whether the list view will call read on the DataSource initially.</description>
+            <description>If set to false the widget will not bind to the data source during initialization. In this case data binding will occur when the change event of the
+data source is fired. By default the widget will bind to the data source specified in the configuration.</description>
             <name>autoBind</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Instance of DataSource or Object with DataSource configuration.</description>
+            <description>The data source of the widget which is used render table rows. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
+instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.DataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -12371,33 +12466,32 @@ Any valid CSS color string will work here, including hex and rgb.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Raised when the user clicks the "cancel" button.</description>
+            <description>Fired when the user clicks the "cancel" button.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>cancel</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the list view selection has changed.</description>
+            <description>Fires when the list view selection has changed.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the list view has received data from the data source.
-and is about to render it.</description>
+            <description>Fires when the list view has received data from the data source and it is already rendered.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>dataBound</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the grid is about to be rendered.</description>
+            <description>Fires when the list view is about to be rendered.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>dataBinding</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the list view enters edit mode.</description>
+            <description>Fires when the list view enters edit mode.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>edit</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires before the list view item is removed.</description>
+            <description>Fires before the list view item is removed. If it is not prevented will call DataSource sync method.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>remove</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -12539,38 +12633,37 @@ and is about to render it.</description>
 
 
     <tag>
-        <description>Raised when the user clicks the "cancel" button.</description>
+        <description>Fired when the user clicks the "cancel" button.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>listView-cancel</name>
         <tag-class>com.kendoui.taglib.listview.CancelFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the list view selection has changed.</description>
+        <description>Fires when the list view selection has changed.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>listView-change</name>
         <tag-class>com.kendoui.taglib.listview.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the list view has received data from the data source.
-and is about to render it.</description>
+        <description>Fires when the list view has received data from the data source and it is already rendered.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>listView-dataBound</name>
         <tag-class>com.kendoui.taglib.listview.DataBoundFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the grid is about to be rendered.</description>
+        <description>Fires when the list view is about to be rendered.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>listView-dataBinding</name>
         <tag-class>com.kendoui.taglib.listview.DataBindingFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the list view enters edit mode.</description>
+        <description>Fires when the list view enters edit mode.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>listView-edit</name>
         <tag-class>com.kendoui.taglib.listview.EditFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires before the list view item is removed.</description>
+        <description>Fires before the list view item is removed. If it is not prevented will call DataSource sync method.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>listView-remove</name>
         <tag-class>com.kendoui.taglib.listview.RemoveFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -12813,67 +12906,69 @@ by setting the close animation.  Each animation also has a direction which can b
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Controls whether to bind the widget to the DataSource on initialization.</description>
+            <description>Controls whether to bind the widget to the data source on initialization.</description>
             <name>autoBind</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>A local JavaScript object or instance of DataSource or the data that the multiselect will be bound to.</description>
+            <description>The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
+instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.DataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.</description>
             <name>dataSource</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the text content of the list items.</description>
+            <description>The field of the data item that provides the text content of the list items. The widget will filter the data source based on this field.</description>
             <name>dataTextField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Sets the field of the data item that provides the value content of the list items.</description>
+            <description>The field of the data item that provides the value of the widget.</description>
             <name>dataValueField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the delay in ms after which the multiselect will start filtering dataSource.</description>
+            <description>Specifies the delay in milliseconds after which the multiselect will start filtering dataSource.</description>
             <name>delay</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Controls whether the multiselect should be initially enabled.</description>
+            <description>If set to false the widget will be disabled and will not allow user input. The widget is enabled by default and allows user input.</description>
             <name>enable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Defines the type of filtration.</description>
+            <description>The filtering method used to determine the suggestions for the current value. Filtration is turned of by default.
+The supported filter values are startswith, endswith and contains.</description>
             <name>filter</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Define the height of the drop-down list in pixels.</description>
+            <description>The height of the suggestion popup in pixels. The default value is 200 pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Controls whether the first item will be automatically highlighted.</description>
+            <description>If set to true the first suggestion will be automatically highlighted.</description>
             <name>highlightFirst</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Defines whether the filtration should be case sensitive.</description>
+            <description>If set to false case-sensitive search will be performed to find suggestions. The widget performs case-insensitive searching by default.</description>
             <name>ignoreCase</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Template to be used for rendering the items in the list.</description>
+            <description>The template used to render the items in the popup list.</description>
             <name>itemTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -12885,19 +12980,19 @@ by setting the close animation.  Each animation also has a direction which can b
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Specifies the minimum characters that should be typed before the multiselect activates</description>
+            <description>The minimum number of characters the user must type before a search is performed. Set to higher value than 1 if the search could match a lot of items.</description>
             <name>minLength</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>A string that appears in the textbox when the multiselect has no value.</description>
+            <description>The hint displayed by the widget when it is empty. Not set by default.</description>
             <name>placeholder</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Template to be used for rendering the tags of the selected items.</description>
+            <description>The template used to render the tags.</description>
             <name>tagTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -12909,27 +13004,27 @@ by setting the close animation.  Each animation also has a direction which can b
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>Fires when the value has been changed.</description>
+            <description>Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the drop-down list is closed</description>
+            <description>Fired when the popup of the widget is closed.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>close</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the multiselect has received data from the data source.</description>
+            <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>dataBound</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the drop-down list is opened</description>
+            <description>Fired when the popup of the widget is opened by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>open</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Triggered when a Li element is selected.</description>
+            <description>Fired when an item from the popup is selected by the user.</description>
             <name>select</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -12937,7 +13032,7 @@ by setting the close animation.  Each animation also has a direction which can b
     </tag>
 
     <tag>
-        <description>Animations to be used for opening/closing the popup. Setting to false will turn off the animation.</description>
+        <description>Configures the opening and closing animations of the suggestion popup. Setting the animation option to false will disable the opening and closing animations. As a result the suggestion popup will open and close instantly.</description>
         <name>multiSelect-animation</name>
         <tag-class>com.kendoui.taglib.multiselect.AnimationTag</tag-class>
         <body-content>JSP</body-content>
@@ -12946,19 +13041,19 @@ by setting the close animation.  Each animation also has a direction which can b
     </tag>
 
     <tag>
-        <description>Animation to be used for closing of the popup.</description>
+        <description></description>
         <name>multiSelect-animation-close</name>
         <tag-class>com.kendoui.taglib.multiselect.AnimationCloseTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>The duration of the close animation in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for closing of the popup.</description>
+            <description>The effect(s) to use when playing the close animation. Multiple effects should be separated with a space.Complete list of available animations</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -12968,19 +13063,19 @@ by setting the close animation.  Each animation also has a direction which can b
 
 
     <tag>
-        <description>Animation to be used for opening of the popup.</description>
+        <description>The animation played when the suggestion popup is opened.</description>
         <name>multiSelect-animation-open</name>
         <tag-class>com.kendoui.taglib.multiselect.AnimationOpenTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>The duration of the open animation in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for opening of the popup.</description>
+            <description>The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.Complete list of available animations</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -12992,31 +13087,31 @@ by setting the close animation.  Each animation also has a direction which can b
 
 
     <tag>
-        <description>Fires when the value has been changed.</description>
+        <description>Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>multiSelect-change</name>
         <tag-class>com.kendoui.taglib.multiselect.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the drop-down list is closed</description>
+        <description>Fired when the popup of the widget is closed.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>multiSelect-close</name>
         <tag-class>com.kendoui.taglib.multiselect.CloseFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the multiselect has received data from the data source.</description>
+        <description>Fired when the widget is bound to data from its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>multiSelect-dataBound</name>
         <tag-class>com.kendoui.taglib.multiselect.DataBoundFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the drop-down list is opened</description>
+        <description>Fired when the popup of the widget is opened by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>multiSelect-open</name>
         <tag-class>com.kendoui.taglib.multiselect.OpenFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Triggered when a Li element is selected.</description>
+        <description>Fired when an item from the popup is selected by the user.</description>
         <name>multiSelect-select</name>
         <tag-class>com.kendoui.taglib.multiselect.SelectFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -13034,7 +13129,7 @@ by setting the close animation.  Each animation also has a direction which can b
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies the culture info used by the NumericTextBox widget.</description>
+            <description>Specifies the culture info used by the widget.</description>
             <name>culture</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -13070,19 +13165,19 @@ by setting the close animation.  Each animation also has a direction which can b
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Specifies the text displayed when the input is empty.</description>
+            <description>The hint displayed by the widget when it is empty. Not set by default.</description>
             <name>placeholder</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies whether the up/down spin buttons should be rendered</description>
+            <description>Specifies whether the up and down spin buttons should be rendered</description>
             <name>spinners</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Specifies the increment/decrement step.</description>
+            <description>Specifies the value used to increment or decrement widget value.</description>
             <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -14405,6 +14500,511 @@ which field to update. The other option is to use MVVM bindings in order to bind
         </attribute>
 
     </tag>
+
+
+
+    <tag>
+        <description>The configuration of the scheduler messages. Use this option to customize or localize the scheduler messages.</description>
+        <name>scheduler-messages</name>
+        <tag-class>com.kendoui.taglib.scheduler.MessagesTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The text similar to "all day" displayed in day/week views.</description>
+            <name>allDay</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Cancel" displayed in scheduler.</description>
+            <name>cancel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Date" displayed in scheduler.</description>
+            <name>date</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Delete event" displayed as title of the scheduler delete event window.</description>
+            <name>deleteWindowTitle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Delete" displayed in scheduler.</description>
+            <name>destroy</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Event" displayed in scheduler.</description>
+            <name>event</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Save" displayed in scheduler.</description>
+            <name>save</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Show full day" used in scheduler "showFullDay" button.</description>
+            <name>showFullDay</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Show business hours" used in scheduler "showWorkDay" button.</description>
+            <name>showWorkDay</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Time" displayed in scheduler.</description>
+            <name>time</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Today" displayed in scheduler.</description>
+            <name>today</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The configuration of the scheduler editor messages. Use this option to customize or localize the scheduler editor messages.</description>
+        <name>scheduler-messages-editor</name>
+        <tag-class>com.kendoui.taglib.scheduler.MessagesEditorTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text similar to "All day event" displayed in the scheduler event editor.</description>
+            <name>allDayEvent</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Description" displayed in the scheduler event editor.</description>
+            <name>description</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Event" displayed as title of the scheduler event editor.</description>
+            <name>editorTitle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "End" displayed in the scheduler event editor.</description>
+            <name>end</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "End timezone" displayed in the scheduler event editor.</description>
+            <name>endTimezone</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Repeat" displayed in the scheduler event editor.</description>
+            <name>repeat</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Use separate start and end time zones" displayed in the scheduler event editor.</description>
+            <name>separateTimezones</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Start" displayed in the scheduler event editor.</description>
+            <name>start</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Start timezone" displayed in the scheduler event editor.</description>
+            <name>startTimezone</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Timezone" displayed in the scheduler event editor.</description>
+            <name>timezone</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Time zone" displayed as text of timezone editor button in the scheduler event editor.</description>
+            <name>timezoneEditorButton</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Timezones" displayed as title of timezone editor in the scheduler event editor.</description>
+            <name>timezoneEditorTitle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Title of the event" displayed in the scheduler event editor.</description>
+            <name>title</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the scheduler recurrence editor messages. Use this option to customize or localize the scheduler recurrence editor messages.</description>
+        <name>scheduler-messages-recurrenceEditor</name>
+        <tag-class>com.kendoui.taglib.scheduler.MessagesRecurrenceEditorTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The configuration of the scheduler recurrence editor daily messages. Use this option to customize or localize the scheduler recurrence editor daily messages.</description>
+        <name>scheduler-messages-recurrenceEditor-daily</name>
+        <tag-class>com.kendoui.taglib.scheduler.MessagesRecurrenceEditorDailyTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text similar to " day(s)" displayed in the scheduler recurrence editor.</description>
+            <name>days</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Repeat every: " displayed in the scheduler recurrence editor.</description>
+            <name>repeatEvery</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the scheduler recurrence editor end messages. Use this option to customize or localize the scheduler recurrence editor end messages.</description>
+        <name>scheduler-messages-recurrenceEditor-end</name>
+        <tag-class>com.kendoui.taglib.scheduler.MessagesRecurrenceEditorEndTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text similar to "After " displayed in the scheduler recurrence editor.</description>
+            <name>endCountAfter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to " occurrence(s)" displayed in the scheduler recurrence editor.</description>
+            <name>endCountOccurrence</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "End:" displayed in the scheduler recurrence editor.</description>
+            <name>endLabel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Never" displayed in the scheduler recurrence editor.</description>
+            <name>endNever</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "On " displayed in the scheduler recurrence editor.</description>
+            <name>endUntilOn</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the scheduler recurrence editor frequencies messages. Use this option to customize or localize the scheduler recurrence editor frequencies messages.</description>
+        <name>scheduler-messages-recurrenceEditor-frequencies</name>
+        <tag-class>com.kendoui.taglib.scheduler.MessagesRecurrenceEditorFrequenciesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text similar to "Daily" displayed in the scheduler recurrence editor.</description>
+            <name>daily</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Monthly" displayed in the scheduler recurrence editor.</description>
+            <name>monthly</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Never" displayed in the scheduler recurrence editor.</description>
+            <name>never</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Weekly" displayed in the scheduler recurrence editor.</description>
+            <name>weekly</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Yearly" displayed in the scheduler recurrence editor.</description>
+            <name>yearly</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the scheduler recurrence editor monthly messages. Use this option to customize or localize the scheduler recurrence editor monthly messages.</description>
+        <name>scheduler-messages-recurrenceEditor-monthly</name>
+        <tag-class>com.kendoui.taglib.scheduler.MessagesRecurrenceEditorMonthlyTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text similar to "Day " displayed in the scheduler recurrence editor.</description>
+            <name>day</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to " month(s)" displayed in the scheduler recurrence editor.</description>
+            <name>months</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Repeat every: " displayed in the scheduler recurrence editor.</description>
+            <name>repeatEvery</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Repeat on: " displayed in the scheduler recurrence editor.</description>
+            <name>repeatOn</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the scheduler recurrence editor offsetPositions messages. Use this option to customize or localize the scheduler recurrence editor offsetPositions messages.</description>
+        <name>scheduler-messages-recurrenceEditor-offsetPositions</name>
+        <tag-class>com.kendoui.taglib.scheduler.MessagesRecurrenceEditorOffsetPositionsTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text similar to "first" displayed in the scheduler recurrence editor.</description>
+            <name>first</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "fourth" displayed in the scheduler recurrence editor.</description>
+            <name>fourth</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "last" displayed in the scheduler recurrence editor.</description>
+            <name>last</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "second" displayed in the scheduler recurrence editor.</description>
+            <name>second</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "third" displayed in the scheduler recurrence editor.</description>
+            <name>third</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the scheduler recurrence editor weekly messages. Use this option to customize or localize the scheduler recurrence editor weekly messages.</description>
+        <name>scheduler-messages-recurrenceEditor-weekly</name>
+        <tag-class>com.kendoui.taglib.scheduler.MessagesRecurrenceEditorWeeklyTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text similar to "Repeat every: " displayed in the scheduler recurrence editor.</description>
+            <name>repeatEvery</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Repeat on: " displayed in the scheduler recurrence editor.</description>
+            <name>repeatOn</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to " week(s)" displayed in the scheduler recurrence editor.</description>
+            <name>weeks</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the scheduler recurrence editor yearly messages. Use this option to customize or localize the scheduler recurrence editor yearly messages.</description>
+        <name>scheduler-messages-recurrenceEditor-yearly</name>
+        <tag-class>com.kendoui.taglib.scheduler.MessagesRecurrenceEditorYearlyTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text similar to " of " displayed in the scheduler recurrence editor.</description>
+            <name>of</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Repeat every: " displayed in the scheduler recurrence editor.</description>
+            <name>repeatEvery</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Repeat on: " displayed in the scheduler recurrence editor.</description>
+            <name>repeatOn</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to " year(s)" displayed in the scheduler recurrence editor.</description>
+            <name>years</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The configuration of the scheduler recurrence messages. Use this option to customize or localize the scheduler recurrence messages.</description>
+        <name>scheduler-messages-recurrenceMessages</name>
+        <tag-class>com.kendoui.taglib.scheduler.MessagesRecurrenceMessagesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text similar to "Do you want to delete only this event occurrence or the whole series?" displayed in the scheduler event editor.</description>
+            <name>deleteRecurring</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Delete current occurrence" displayed in the scheduler event editor.</description>
+            <name>deleteWindowOccurrence</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Delete the series" displayed in the scheduler event editor.</description>
+            <name>deleteWindowSeries</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Delete Recurring Item" displayed in the scheduler event editor.</description>
+            <name>deleteWindowTitle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Do you want to edit only this event occurrence or the whole series?" displayed in the scheduler event editor.</description>
+            <name>editRecurring</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Edit current occurrence" displayed in the scheduler event editor.</description>
+            <name>editWindowOccurrence</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Edit the series" displayed in the scheduler event editor.</description>
+            <name>editWindowSeries</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Edit Recurring Item" displayed in the scheduler event editor.</description>
+            <name>editWindowTitle</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the scheduler views messages. Use this option to customize or localize the scheduler views messages.</description>
+        <name>scheduler-messages-views</name>
+        <tag-class>com.kendoui.taglib.scheduler.MessagesViewsTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text similar to "Agenda" displayed as scheduler "agenda" view title.</description>
+            <name>agenda</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Day" displayed as scheduler "day" view title.</description>
+            <name>day</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Month" displayed as scheduler "month" view title.</description>
+            <name>month</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "Week" displayed as scheduler "week" view title.</description>
+            <name>week</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
 
 
 
@@ -23871,7 +24471,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Specifies a list of dates, which are shown in the time drop-down list. If not set, the DateTimePicker will auto-generate the available times.</description>
+            <description>Specifies a list of dates, which are shown in the time drop-down list. If not set, the TimePicker will auto-generate the available times.</description>
             <name>dates</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -23913,7 +24513,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <type>java.util.Date</type>
         </attribute>
         <attribute>
-            <description>Triggered when the underlying value of a TimePicker is changed.</description>
+            <description>Fires when the selected date is changed</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -23931,7 +24531,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
     </tag>
 
     <tag>
-        <description>Animations to be used for opening/closing the popup. Setting to false will turn of the animation.</description>
+        <description>Configures the opening and closing animations of the popup. Setting the animation option to false will disable the opening and closing animations. As a result the popup will open and close instantly.</description>
         <name>timePicker-animation</name>
         <tag-class>com.kendoui.taglib.timepicker.AnimationTag</tag-class>
         <body-content>JSP</body-content>
@@ -23940,19 +24540,19 @@ is closed. By default not specified - uses the opening animation with reverse.</
     </tag>
 
     <tag>
-        <description>Animation to be used for closing of the popup.</description>
+        <description>The animation played when the popup is closed.</description>
         <name>timePicker-animation-close</name>
         <tag-class>com.kendoui.taglib.timepicker.AnimationCloseTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>The duration of the close animation in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for closing of the popup.</description>
+            <description>The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.Complete list of available animations</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -23962,19 +24562,19 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
 
     <tag>
-        <description>Animation to be used for opening of the popup.</description>
+        <description>The animation played when the calendar popup is opened.</description>
         <name>timePicker-animation-open</name>
         <tag-class>com.kendoui.taglib.timepicker.AnimationOpenTag</tag-class>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>The duration of the open animation in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
         <attribute>
-            <description>Effect to be used for opening of the popup.</description>
+            <description>The effect(s) to use when playing the open animation. Multiple effects should be separated with a space.Complete list of available animations</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -23986,7 +24586,7 @@ is closed. By default not specified - uses the opening animation with reverse.</
 
 
     <tag>
-        <description>Triggered when the underlying value of a TimePicker is changed.</description>
+        <description>Fires when the selected date is changed</description>
         <name>timePicker-change</name>
         <tag-class>com.kendoui.taglib.timepicker.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -24722,6 +25322,18 @@ containing one or more fields with the same name as the original input name.</de
         <attribute>
             <description>Sets the drop zone hint.</description>
             <name>dropFilesHere</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the header status message for uploaded files.</description>
+            <name>headerStatusUploaded</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Sets the header status message for files that are being uploaded.</description>
+            <name>headerStatusUploading</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>

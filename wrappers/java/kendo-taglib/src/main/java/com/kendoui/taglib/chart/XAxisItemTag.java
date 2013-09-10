@@ -69,6 +69,10 @@ public class XAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("majorTicks", value);
     }
 
+    public void setMinorGridLines(com.kendoui.taglib.chart.XAxisItemMinorGridLinesTag value) {
+        setProperty("minorGridLines", value);
+    }
+
     public void setNotes(com.kendoui.taglib.chart.XAxisItemNotesTag value) {
         setProperty("notes", value);
     }
