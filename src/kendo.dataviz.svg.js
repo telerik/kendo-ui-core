@@ -410,10 +410,10 @@ kendo_module({
                 if(i % 3 == 1){
                     curvePoints.push("C");
                 }
-                curvePoints.push(points[i].x + " " + points[i].y);
+                curvePoints.push(round(points[i].x, COORD_PRECISION) + " " + round(points[i].y, COORD_PRECISION));
             }     
             
-            if(areaPoints){
+            if(areaPoints && areaPoints.length){
                 for(i = 0; i < areaPoints.length; i++){
                     curvePoints.push("L " + areaPoints[i].x + " " + areaPoints[i].y);
                 }

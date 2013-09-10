@@ -4938,33 +4938,61 @@ kendo_module({
     });
 
     var SplineAreaSegment = AreaSegment.extend({
+        init: function(linePoints, prevSegment, currentSeries, seriesIx){
+            var segment = this;
+
+            segment.prevSegment = prevSegment;
+
+            LineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx)
+        },
         points: function(){
-            var curveProcessor = new CurveProcessor(0),
-                points = LineSegment.fn.points.call(this);
-            return curveProcessor.process(points);
+            var segment = this,
+                chart = segment.parent,
+                prevSegment = segment.prevSegment,
+                curveProcessor = new CurveProcessor(0),
+                linePoints = LineSegment.fn.points.call(this),
+                curvePoints = curveProcessor.process(linePoints),
+                previousPoints,
+                points;                
+                
+            segment.curvePoints = curvePoints;
+            
+            if(chart.options.isStacked && prevSegment){
+                points = curvePoints.slice(0);            
+                points.push(last(curvePoints));                
+                previousPoints = prevSegment.curvePoints.slice(0).reverse();
+                previousPoints.unshift(previousPoints[0]);
+                points = points.concat(previousPoints);
+                points.push(last(previousPoints));
+                points.push(points[0]);
+            }
+            else{
+                points = segment.curvePoints;
+            }
+            return points;
         },
         areaPoints: function(points){
             var segment = this,
                 chart = segment.parent,
+                prevSegment = segment.prevSegment,
                 plotArea = chart.plotArea,
                 invertAxes = chart.options.invertAxes,
                 valueAxis = chart.seriesValueAxis(segment.series),
                 valueAxisLineBox = valueAxis.lineBox(),
                 categoryAxis = plotArea.seriesCategoryAxis(segment.series),
                 categoryAxisLineBox = categoryAxis.lineBox(),
-                end = invertAxes ? categoryAxisLineBox.x1 : categoryAxisLineBox.y1,
-                stackPoints = segment.stackPoints,
+                end = invertAxes ? categoryAxisLineBox.x1 : categoryAxisLineBox.y1,                
                 pos = invertAxes ? X : Y,
                 firstPoint = points[0],
                 lastPoint = last(points),
                 areaPoints = [];
-                
+     
             end = limitValue(end, valueAxisLineBox[pos + 1], valueAxisLineBox[pos + 2]);  
-            if (!segment.stackPoints && points.length > 1) {
+            if (!(chart.options.isStacked && prevSegment) && points.length > 1) {
 
                 if (invertAxes) {
-                    points.push(Point2D(end, firstPoint.y));
-                    points.unshift(Point2D(end, lastPoint.y));
+                    areaPoints.push(Point2D(end, firstPoint.y));
+                    areaPoints.unshift(Point2D(end, lastPoint.y));
                 } else {
                     areaPoints.push(Point2D(firstPoint.x, end));
                     areaPoints.unshift(Point2D(lastPoint.x, end));
@@ -4974,14 +5002,14 @@ kendo_module({
             return areaPoints;
         },
         getViewElements: function(view) {
-            var segment = this,
-                series = segment.series,
+            var segment = this,                
+                series = segment.series,             
                 defaults = series._defaults,
                 color = series.color,
                 lineOptions,
                 curvePoints = segment.points(),
                 areaPoints = segment.areaPoints(curvePoints);
-
+           
             ChartElement.fn.getViewElements.call(segment, view);
 
             if (isFn(color) && defaults) {
@@ -4993,11 +5021,11 @@ kendo_module({
                     opacity: series.opacity
                 }, series.line
             );
-
+           
             return [
                 view.createCubicCurve(curvePoints,{
                     stroke: lineOptions.color,
-                    strokeWidth: lineOptions.width,
+                    strokeWidth: lineOptions.width || 0,
                     strokeOpacity: lineOptions.opacity,
                     dashType: lineOptions.dashType,
                     data: { modelId: segment.options.modelId },
@@ -5012,15 +5040,7 @@ kendo_module({
     
     var SplineAreaChart = AreaChart.extend({
         createSegment: function(linePoints, currentSeries, seriesIx, prevSegment) {
-            var chart = this,
-                options = chart.options,
-                stackPoints;
-
-            if (options.isStacked && seriesIx > 0 && prevSegment) {
-                stackPoints = prevSegment.linePoints.slice(0).reverse();
-            }
-
-            return new SplineAreaSegment(linePoints, stackPoints, currentSeries, seriesIx);
+            return new SplineAreaSegment(linePoints, prevSegment, currentSeries, seriesIx);
         }
     });      
     
