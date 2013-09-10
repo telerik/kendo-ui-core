@@ -607,7 +607,7 @@ kendo_module({
 
             that.trigger(LOAD_START);
 
-            that._xhr = $.get(that.remoteViewURLPrefix + url, function(html) {
+            that._xhr = $.get(kendo.absoluteURL(url, that.remoteViewURLPrefix), function(html) {
                             that.trigger(LOAD_COMPLETE);
                             callback(that._createRemoteView(url, html));
                         }, 'html')

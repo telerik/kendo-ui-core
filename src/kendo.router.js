@@ -16,6 +16,16 @@ kendo_module({
         hashStrip = /^#*/,
         document = window.document;
 
+    function absoluteURL(path, pathPrefix) {
+        var regEx = new RegExp("^" + pathPrefix, "i");
+
+        if (!regEx.test(path)) {
+            path = pathPrefix + path;
+        }
+
+        return location.protocol + '//' + (location.host + "/" + path).replace(/\/\//g, '/');
+    }
+
     var History = kendo.Observable.extend({
         start: function(options) {
             var that = this;
@@ -150,14 +160,7 @@ kendo_module({
         },
 
         _makePushStateUrl: function(address) {
-            var that = this;
-            var regEx = new RegExp("^" + that.root, "i");
-
-            if (!regEx.test(address)) {
-                address = (that.root + address).replace(/\/\//g, '/');
-            }
-
-            return location.protocol + '//' + location.host + address;
+            return absoluteURL(address, this.root);
         },
 
         _currentLocation: function() {
@@ -177,6 +180,7 @@ kendo_module({
         }
     });
 
+    kendo.absoluteURL = absoluteURL;
     kendo.history = new History();
 })(window.kendo.jQuery);
 
