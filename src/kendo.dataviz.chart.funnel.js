@@ -168,12 +168,11 @@ kendo_module({
                 segmentSpacing = options.segmentSpacing,
                 dependOn = options.dependOn,
                 width = box.width(),
+                totalHeight = box.height() - segmentSpacing * (count-1),
                 neckSize = options.neckSize*width;
-
 
             if(dependOn=="height"){
                 var finalNarrow = (width - neckSize)/2,
-                totalHeight = box.height() - segmentSpacing * (count-1),
                 height,
                 offset,
                 previousHeight = 0,
@@ -183,13 +182,35 @@ kendo_module({
                     points = segments[i].points = [],
                     percentage = segments[i].percentage,
                     offset = finalNarrow * percentage,
-                    height = totalHeight * percentage; 
+                    height = totalHeight * percentage;
                     points.push(new Point2D(box.x1 + previousOffset, box.y1 + previousHeight));
                     points.push(new Point2D(box.x1+width - previousOffset, box.y1 + previousHeight));
                     points.push(new Point2D(box.x1+width - previousOffset - offset, box.y1 + height + previousHeight));
                     points.push(new Point2D(box.x1+ previousOffset + offset,box.y1 + height + previousHeight));
                     previousOffset += offset;
                     previousHeight += height + segmentSpacing;
+                }
+            }
+            else if(dependOn==="relation"){
+                var lastUpperSide = width,
+                    previousHeight = 0,
+                    previousOffset = 0;
+
+                for (i = 0; i < count; i++) {
+                    points = segments[i].points = [],
+                    percentage = segments[i].percentage,
+                    nextSegment = segments[i+1],
+                    nextPercentage = (nextSegment ? nextSegment.percentage : percentage),
+                    height = totalHeight * percentage,
+                    offset = (width - lastUpperSide* (nextPercentage / percentage))/2;
+
+                    points.push(new Point2D(box.x1 + previousOffset, box.y1 + previousHeight));
+                    points.push(new Point2D(box.x1+width - previousOffset, box.y1 + previousHeight));
+                    points.push(new Point2D(box.x1+width - offset, box.y1 + height + previousHeight));
+                    points.push(new Point2D(box.x1+ offset,box.y1 + height + previousHeight));
+                    previousOffset = offset;
+                    previousHeight += height + segmentSpacing;
+                    lastUpperSide *= nextPercentage/percentage;
                 }
             }
             else {
@@ -210,7 +231,6 @@ kendo_module({
                     offset += segmentHeight + segmentSpacing;
                 }
             }
-
         }
     });
 

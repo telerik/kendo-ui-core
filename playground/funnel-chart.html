@@ -26,6 +26,8 @@
         <div id="funnel-equal-spacing"></div>
         <div id="funnel-height"></div>
         <div id="funnel-height-spacing"></div>
+        <div id="funnel-relation"></div>
+        <div id="funnel-relation-spacing"></div>
         <script>
             var seriesData = [{
                 value: 60,
@@ -71,6 +73,36 @@
                 }]
             });
 
+            var relationData = [{
+                            value: 100,
+                            category: "trials"
+                        }, {
+                            value: 100,
+                            category: "enquiries"
+                        }, {
+                            value: 10,
+                            category: "purchases"
+                        }, {
+                            value: 5,
+                            category: "foo"
+                        }];
+
+            $("#funnel-relation").kendoChart({
+                series: [{
+                    type: "funnel",
+                    dependOn:"relation",
+                    data: relationData,
+                }]
+            });
+
+            $("#funnel-relation-spacing").kendoChart({
+                series: [{
+                    type: "funnel",
+                    dependOn:"relation",
+                    data: relationData,
+                    segmentSpacing : 20
+                }]
+            });
         </script>
     </body>
 </html>
