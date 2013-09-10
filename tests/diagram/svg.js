@@ -2,6 +2,156 @@
 
 var diagram = window.kendo.diagram;
 
+/*-----------Marker tests------------------------------------*/
+QUnit.module("Marker tests");
+
+test("Add/Remove/Clear Marker", function () {
+    var root = GetRoot();
+    var canvas = new diagram.Canvas(root);
+    AddCircle(canvas, new diagram.Point(100, 120));
+    var marker = new diagram.Marker({
+        path:{
+            data: "m"
+        },
+        id: "ArrowHead",
+        width: 44,
+        height: 21,
+        viewBox: new diagram.Rect(10, 20, 33, 55),
+        orientation: "auto"
+    });
+    canvas.addMarker(marker);
+    var found = document.getElementById("ArrowHead");
+    ok(found != null, "Marker element should be there.");
+    ok(found.attributes["viewBox"] != null, "The viewBox should be there");
+    ok(found.attributes["orient"] != null && found.attributes["orient"].value == "auto", "The orientation should be there");
+    equal(marker.native.firstChild.tagName.toLowerCase(), "path", "path should be there");
+
+    var line = new diagram.Line({
+        id: "Line1",
+        endCap: marker.native.id
+    });
+    canvas.append(line);
+    found = document.getElementById("Line1");
+    ok(found.attributes["marker-end"] != null);
+    equal(found.attributes["marker-end"].value.replace(/"/g, ""), "url(#ArrowHead)", "The end marker should be present.");
+    var returnedMarkerId = line.native.getAttribute("marker-end");
+    ok(returnedMarkerId.indexOf("ArrowHead") > -1, "Not the correct Id.");
+    canvas.clearMarkers();
+    var defs = document.getElementsByTagName("defs");
+    ok(defs != null && defs.length == 1, "Defs tag should still be there.");
+    ok(defs[0].childNodes.length == 0, "All markers should be gone now.");
+    canvas.clear();
+});
+
+/*-----------Rectangle tests------------------------------------*/
+QUnit.module("Rectangle tests");
+
+test("Add Rectangle", function () {
+    var root = GetRoot();
+    var canvas = new diagram.Canvas(root);
+    var rec = new diagram.Rectangle({
+        id: "MyRectangle",
+        width: 150,
+        height: 88
+    });
+    rec.position(new diagram.Point(100, 121));
+    rec.background("Red");
+    canvas.append(rec);
+
+    var found = document.getElementById("MyRectangle");
+    ok(found != null, "A SVG rectangle with name 'MyRectangle' should be in the HTML tree.");
+    ok(found.attributes["width"].value == 150, "The width should be 150.");
+    ok(found.attributes["height"].value == 88, "The height should be 287.");
+    ok(found.attributes["fill"].value == "#ff0000");
+});
+
+/*-----------Circle tests------------------------------------*/
+QUnit.module("Circle tests");
+
+test("Add Circle", function () {
+    var root = GetRoot();
+    var canvas = new diagram.Canvas(root);
+    var circ = new diagram.Circle({
+        id: "MyCirc",
+        x: 200, y: 121,
+        width: 150,
+        height: 150,
+        background: "#345656"
+    });
+    canvas.append(circ);
+    var found = document.getElementById("MyCirc");
+    ok(found != null, "A SVG circle with name 'MyCirc' should be in the HTML tree.");
+    equal(parseInt(found.attributes["rx"].value), 75, "The radius should be 75.");
+    equal(parseInt(found.attributes["cx"].value), 275, "The center X value should be 200+75.");
+    ok(found.attributes["fill"].value == "#345656");
+});
+
+/*-----------Text tests------------------------------------*/
+QUnit.module("Text tests");
+
+test("Add Text", function () {
+    var root = GetRoot();
+    var canvas = new diagram.Canvas(root);
+    var text = new diagram.TextBlock({
+        id: "MyText",
+        x: 100, y: 121,
+        text: "<<|Telerik|>>"
+    });
+
+    canvas.append(text);
+    var found = document.getElementById("MyText");
+    ok(found != null, "A SVG text with name 'MyText' should be in the HTML tree.");
+    ok(found.textContent == "<<|Telerik|>>", "The text should be '<< | Telerik | >>'.");
+    equalTranslate(found, new diagram.Point(100, 121), "text block should be positioned");
+
+    text.content("changed");
+    equal(found.textContent, "changed", "Text has changed.");
+});
+
+/*-----------Group tests------------------------------------*/
+QUnit.module("Group tests");
+
+test("Add group", function () {
+    var root = GetRoot();
+    var canvas = new diagram.Canvas(root);
+    var g = new diagram.Group({
+        id: "G1",
+        x: 100,
+        y: 100
+    });
+    canvas.append(g);
+    var found = document.getElementById("G1");
+    ok(found != null, "A SVG group with name 'G1' should be in the HTML tree.");
+    var rec = new diagram.Rectangle({
+        id: "MyRectangle",
+        width: 50,
+        height: 50,
+        background: "red"
+    });
+    g.append(rec);
+});
+
+/*-----------Canvas tests------------------------------------*/
+QUnit.module("Canvas tests");
+
+test("Add Canvas", function () {
+    var root = GetRoot();
+    var canvas = new diagram.Canvas(root);
+    var found = document.getElementById('SVGRoot');
+    ok(found != null, "The Canvas should add an <SVG/> element with name 'SVGRoot'.");
+    root = GetRoot();
+
+    canvas = new diagram.Canvas(root, {
+        width: 865,
+        height: 287,
+        background: "#121217"
+    });
+    found = document.getElementById('SVGRoot');
+    ok(parseFloat(found.style.width) == 865, "The width should be 865.");
+    ok(parseFloat(found.style.height) == 287, "The height should be 287.");
+    ok(found.style.backgroundColor == "rgb(18, 18, 23)");
+});
+
 QUnit.module("Transformations");
 test("scale toString", function() {
 	var scale = new diagram.Scale(2, 2);

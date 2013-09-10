@@ -167,6 +167,7 @@ var tests = [
     "diagram/math.html",
     "diagram/services.html",
     "diagram/svg.html",
+	"diagram/utils.html",
     "diagram/lint.html",
     "download-builder/script-resolver.html",
     "download-builder/kendo-config.html",

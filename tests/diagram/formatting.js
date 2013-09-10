@@ -1,9 +1,4 @@
-﻿///<reference path="qunit-1.12.0.js" />
-///<reference path="../refs/kendo.core.js" />
-///<reference path="../refs/kendo.dataviz.core.js" />
-///<reference path="../js/diagram.math.js" />
-
-(function($, undefined) {
+﻿(function($, undefined) {
     var container,
         content,
         aligner,

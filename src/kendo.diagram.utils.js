@@ -108,6 +108,56 @@ kendo_module({
         }
     });
 
+    /**
+     * The Range defines an array of equally separated numbers.
+     * @param start The start-value of the Range.
+     * @param stop The end-value of the Range.
+     * @param step The separation between the values (default:1).
+     * @returns {Array}
+     */
+    function Range(start, stop, step) {
+        if (typeof start == 'undefined' || typeof stop == 'undefined') {
+            return [];
+        }
+        if (step && Math.sign(stop - start) != Math.sign(step)) {
+            throw "The sign of the increment should allow to reach the stop-value.";
+        }
+        step = step || 1;
+        start = start || 0;
+        stop = stop || start;
+        if ((stop - start) / step === Infinity) {
+            throw "Infinite range defined.";
+        }
+        var range = [], i = -1, j;
+
+        function rangeIntegerScale(x) {
+            var k = 1;
+            while (x * k % 1) {
+                k *= 10;
+            }
+            return k;
+        }
+
+        var k = rangeIntegerScale(Math.abs(step));
+        start *= k;
+        stop *= k;
+        step *= k;
+        if (start > stop && step > 0) {
+            step = -step;
+        }
+        if (step < 0) {
+            while ((j = start + step * ++i) >= stop) {
+                range.push(j / k);
+            }
+        }
+        else {
+            while ((j = start + step * ++i) <= stop) {
+                range.push(j / k);
+            }
+        }
+        return range;
+    }
+
     /*-------------------Diverse math functions----------------------------*/
 
     Math.sign = function (number) {
@@ -493,6 +543,7 @@ kendo_module({
             kendo.init(element, kendo.diagram.ui);
         },
 
-        Utils: Utils
+        Utils: Utils,
+        Range: Range
     });
 })(window.kendo.jQuery);

@@ -3,6 +3,73 @@
 (function ($, undefined) {
     var diagram = kendo.diagram, kdiagram, tollerance = 0.0001, Point = diagram.Point;
 
+    /*-----------Diagram tests------------------------------------*/
+    QUnit.module("Diagram tests");
+
+    test("Basic tests", function () {
+        GetRoot();
+        $("#canvas").kendoDiagram();
+        var found = document.getElementById('SVGRoot');
+        ok(found != null, "The Diagram should add an <SVG/> element with name 'SVGRoot'.");
+    });
+
+    test("Adding shape tests", function () {
+        var div = GetRoot();
+        var diagramElement = $("#canvas").kendoDiagram();
+        var kendoDiagram = diagramElement.data("kendoDiagram");
+        kendoDiagram.addShape(new diagram.Point(100, 120), {
+            id: "TestShape",
+            data: "rectangle",
+            width: 200, height: 100,
+            background: "#778899"
+        });
+        var found = document.getElementById("TestShape");
+        ok(found != null, "A SVG shape with name 'TestShape' should be in the HTML tree.");
+        ok(kendoDiagram.shapes.length == 1, "Items count should be incremented.");
+        var item = kendoDiagram.shapes[0];
+        ok(item.connectors.length == 5, "Item should have 5 connectors.");
+        ok(item.options.id == "TestShape", "The Id should be passed across the hierarchy.");
+
+        item.visible(false);
+        ok(found.attributes["visibility"].value == "hidden", "The visibility should be 'collapsed' now.");
+        item.visible(true);
+        ok(found.attributes["visibility"].value == "visible", "The visibility should be 'visible' now.");
+        item.IsSelected = true;
+        kendoDiagram.addShape(new diagram.Point(350, 120), {
+            id: "TestShape",
+            data: "rectangle",
+            width: 200,
+            height: 100,
+            background: "#778899"
+        });
+        //kendoDiagram.shapes[1].select(true);
+    });
+
+    test("Adding connections", function () {
+        var div = GetRoot();
+        var diagramElement = $("#canvas").kendoDiagram();
+        var kendoDiagram = diagramElement.data("kendoDiagram");
+        var shape1 = AddShape(kendoDiagram, new diagram.Point(100, 120),
+            kendo.deepExtend(Shapes.SequentialData, {
+                width: 80, height: 80, title: "sequential data"
+            }));
+        shape1.Title = "Sequential Data.";
+        var shape2 = AddShape(kendoDiagram, new diagram.Point(100, 400));
+        var shape3 = AddShape(kendoDiagram, new diagram.Point(370, 400), Shapes.Wave);
+        var topCor = shape2.getConnector("Top");
+        var topCor2 = shape3.getConnector("Top");
+        var bottomCor = shape1.getConnector("Bottom");
+        var con = AddConnection(kendoDiagram, bottomCor, topCor, {
+            startCap: "ArrowEnd",
+            endCap: "FilledCircle"
+        });
+        var con2 = AddConnection(kendoDiagram, bottomCor, topCor2);
+        con2.content("Connection Label");
+        equal(kendoDiagram.connections.length, 2, "diagram should have 2 connections");
+        //ok(topCor.connections.length == 1, "Shape2#Top should have one connection.");
+        //ok(bottomCor.connections.length == 2, "Shape1#Bottom should have two connections.");
+    });
+
     QUnit.module("event handling", {
         setup: function () {
             $("#canvas").kendoDiagram();

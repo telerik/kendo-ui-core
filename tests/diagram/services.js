@@ -96,5 +96,31 @@
         }
     });
 
+    /*-----------Undoredo tests------------------------------------*/
+    QUnit.module("UndoRedo tests");
+
+    test("UndoRedoService basic", function () {
+        var ur = new diagram.UndoRedoService();
+        var unit = new Task("Counting unit.");
+        ur.begin();
+        ur.addCompositeItem(unit);
+        ur.commit();
+        ok(unit.Count == 1, "Unit was executed");
+        ur.undo();
+        ok(ur.count() > 0, "The units are still there.");
+        QUnit.equal(unit.Count, 0, "Unit undo was executed");
+        ur.redo();
+        ok(unit.Count == 1, "Unit was executed");
+        QUnit.throws(function () {
+            ur.Redo();
+        }, "Supposed to raise an exception since we are passed the length of the stack.");
+        ur.undo();
+        ok(unit.Count == 0, "Unit was executed");
+        ur = new diagram.UndoRedoService();
+        unit = new Task("Counting unit.");
+        ur.add(unit);
+        ok(unit.Count == 1, "Unit was executed");
+    });
+
 })(kendo.jQuery);
 
