@@ -298,15 +298,17 @@ kendo_module({
         _hitTest: function (value) {
             var bounds = this.bounds(), rotatedPoint,
                 angle = this.rotate().angle;
-            if (value.isEmpty && !value.isEmpty()) {
+            if (value.isEmpty && !value.isEmpty()) { // rect selection
                 return Intersect.rects(value, bounds, angle ? 360 - angle : 0);
             }
-            rotatedPoint = value.clone().rotate(bounds.center(), 360 - angle); // cloning is important because rotate modifies the point inline.
-            if (bounds.contains(rotatedPoint)) {
-                return this;
-            }
-            if (this.adorner && this.adorner._hitTest(value)) {
-                return this;
+            else { // point
+                rotatedPoint = value.clone().rotate(bounds.center(), 360 - angle); // cloning is important because rotate modifies the point inline.
+                if (bounds.contains(rotatedPoint)) {
+                    return this;
+                }
+                if (this.adorner && this.adorner._hitTest(value)) {
+                    return this;
+                }
             }
         },
         getConnector: function (name) {

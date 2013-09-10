@@ -1,7 +1,7 @@
 ﻿///<reference path="qunit-1.12.0.js" />
 
 (function ($, undefined) {
-    var kendo = window.kendo, diagram = kendo.diagram, d;
+    var kendo = window.kendo, diagram = kendo.diagram, d, Point = diagram.Point;
 
     module("Selection tests", {
         setup: function () {
@@ -81,6 +81,31 @@
         d.toolService.move(s1c);
 
         ok(d._connectorsAdorner, "The adorner is visible");
+        //equal(d.toolService._hoveredConnector, s1.getConnector("Auto"), "Auto (center) connector is hovered");
+    });
+
+    test("ConnectionTool - create connection", function () {
+        d.clear();
+        d.addShape(new Point(0, 0));
+        var s1 = d.shapes[0];
+        var s1c = s1.bounds().center();
+        d.toolService.start(s1c);
+        d.toolService.move(s1c);
+        d.toolService.end(s1c);
+
+        d.toolService.start(s1c);
+        d.toolService.move(s1c);
+        var target = new Point(300, 300);
+        d.toolService.move(target);
+
+        ok(d.toolService.newConnection, "New Connection is present");
+        equal(target, d.toolService.newConnection.targetPoint(), "New Connection target is ok");
+
+        var c = d.toolService.newConnection;
+        d.toolService.end(target);
+        ok(!d.toolService.newConnection, "New Connection is empty");
+
+        equal(target, c.targetPoint(), "Connection target is ok");
         //equal(d.toolService._hoveredConnector, s1.getConnector("Auto"), "Auto (center) connector is hovered");
     });
 

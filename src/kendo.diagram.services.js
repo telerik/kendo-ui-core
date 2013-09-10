@@ -722,11 +722,12 @@ kendo_module({
         },
         stop: function (p) {
             var ts = this.diagram.toolService, item = ts.hoveredItem, target;
-            if (item && !item.line) {
-                target = item;
-            } else if (ts._hoveredConnector) {
+            if (ts._hoveredConnector) {
                 target = ts._hoveredConnector._c;
-            } else {
+            } else if (item && !item.line) {
+                target = item;
+            }
+            else {
                 target = p;
             }
             if (this.handle !== undefined) {
