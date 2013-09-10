@@ -136,7 +136,7 @@ kendo_module({
                 }
                 offset = headerPair.offset;
                 header = headerPair.header;
-            } while (offset > scrollTop);
+            } while (offset + 1 > scrollTop);
 
             if (this.currentHeader != i) {
                 scroller.fixedContainer.html(header.clone());
