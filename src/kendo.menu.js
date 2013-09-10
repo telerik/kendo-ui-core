@@ -760,6 +760,10 @@ kendo_module({
                 return;
             }
 
+            if (isLink && e.enterKey) {
+                link[0].click();
+            }
+
             if ((!element.parent().hasClass(MENU) || !options.openOnClick) && !kendo.support.touch) {
                 return;
             }
@@ -839,7 +843,7 @@ kendo_module({
             } else if (key == keys.ENTER || key == keys.SPACEBAR) {
                 target = hoverItem.children(".k-link");
                 if (target.length > 0) {
-                    that._click({ target: target[0], preventDefault: function () {} });
+                    that._click({ target: target[0], preventDefault: function () {}, enterKey: true });
                     that._moveHover(hoverItem, that._findRootParent(hoverItem));
                 }
             } else if (key == keys.TAB) {
