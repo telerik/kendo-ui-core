@@ -27,6 +27,8 @@ kendo_module({
         NS = ".kendoMobileListView",
         STYLED = "styled",
         DATA_BOUND = "dataBound",
+        DATA_BINDING = "dataBinding",
+        ITEM_CHANGE = "itemChange",
         CLICK = "click",
         CHANGE = "change",
         PROGRESS = "progress",
@@ -685,7 +687,7 @@ kendo_module({
                 return;
             }
 
-            listView.trigger("dataBinding");
+            listView.trigger(DATA_BINDING);
 
             if (action === "add" && !groupedMode) {
                 listView.append(dataItems);
@@ -878,7 +880,9 @@ kendo_module({
 
         events: [
             CLICK,
-            DATA_BOUND
+            DATA_BINDING,
+            DATA_BOUND,
+            ITEM_CHANGE
         ],
 
         options: {
@@ -1013,7 +1017,7 @@ kendo_module({
                 replaceItem = function(items) {
                     var newItem = $(items[0]);
                     $(item).replaceWith(newItem);
-                    listView.trigger("itemChange", { item: newItem, data: dataItem, ns: ui });
+                    listView.trigger(ITEM_CHANGE, { item: newItem, data: dataItem, ns: ui });
                 };
 
             return this._renderItems([dataItem], replaceItem)[0];
@@ -1024,7 +1028,7 @@ kendo_module({
             return this._renderItems(dataItems, function(items) {
                 listView.element[method](items);
                 for (var idx = 0; idx < items.length; idx ++) {
-                    listView.trigger("itemChange", { item: [items[idx]], data: dataItems[idx], ns: ui });
+                    listView.trigger(ITEM_CHANGE, { item: [items[idx]], data: dataItems[idx], ns: ui });
                 }
             });
         },
