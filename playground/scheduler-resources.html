@@ -43,6 +43,27 @@
 	            overflow-y:scroll;
             }
 
+            .k-scheduler-mobile .k-toolbar .k-nav-prev,
+            .k-scheduler-mobile .k-toolbar .k-nav-next
+            {
+                border-style: none;
+                background: #f3f3f4;
+            }
+
+            .k-scheduler-mobile .k-scheduler-navigation.k-secondary {
+                text-align: center;
+                width: 100%;
+            }
+
+            .k-scheduler-mobile .k-toolbar .k-nav-next
+            {
+                float: right;
+            }
+
+            .k-scheduler-mobile .k-toolbar .k-nav-prev
+            {
+                float: left;
+            }
         </style>
     </head>
     <body>
@@ -57,10 +78,10 @@
             views: ["day", "week", "month", "agenda"],
             date: new Date(2013, 5, 26),
             selectable: true,
-            group: {
-                resources: [/*"date"*/, "roomId", "atendees"],
-                orientation: "horizontal"//"vertical"
-            },
+         //   group: {
+          //      resources: [/*"date"*/, "roomId", "atendees"],
+           //     orientation: "horizontal"//"vertical"
+            //},
             resources: [
                 {
                     field: "roomId",

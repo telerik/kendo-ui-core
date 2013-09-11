@@ -69,6 +69,23 @@ kendo_module({
                 '#}#'  +
             '</ul>' +
             '</div>'),
+        MOBILETOOLBARTEMPLATE = kendo.template('<div class="k-floatwrap k-header k-scheduler-toolbar k-secondary">' +
+            '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
+               '<li class="k-state-default k-nav-today"><a role="button" href="\\#" class="k-link">${messages.today}</a></li>' +
+            '</ul>' +
+            '<ul class="k-reset k-header k-toolbar k-scheduler-views">' +
+                '#for(var view in views){#' +
+                    '<li class="k-state-default k-view-#=view#" data-#=ns#name="#=view#"><a role="button" href="\\#" class="k-link">${views[view].title}</a></li>' +
+                '#}#'  +
+            '</ul>' +
+            '</div>'+
+            '<div class="k-floatwrap k-header k-scheduler-toolbar k-secondary">' +
+                '<ul class="k-reset k-header k-toolbar k-scheduler-navigation k-secondary">' +
+                   '<li class="k-state-default k-nav-prev"><a role="button" href="\\#" class="k-link"><span class="k-icon k-i-arrow-w"></span></a></li>' +
+                   '<li class="k-state-default k-nav-current"><span data-#=ns#bind="text: formattedDate"></span></li>' +
+                   '<li class="k-state-default k-nav-next"><a role="button" href="\\#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a></li>' +
+                '</ul>' +
+            '</div>');
         DATERANGEEDITOR = function(container, options) {
             var attr = { name: options.field };
 
@@ -661,6 +678,8 @@ kendo_module({
             }
 
             that.resources = [];
+
+            that._isMobilePhoneView = kendo.support.mobileOS && !kendo.support.mobileOS.tablet;
 
             that._initModel();
 
@@ -2263,16 +2282,19 @@ kendo_module({
         },
 
         _wrapper: function() {
-            var that = this,
-                height = that.options.height;
+            var height = this.options.height;
 
-            that.wrapper = that.element
+            this.wrapper = this.element
                                .addClass("k-widget k-scheduler k-floatwrap")
                                .attr("role", "grid")
                                .attr("aria-multiselectable", true);
 
+            if (this._isMobilePhoneView) {
+               this.wrapper.addClass("k-scheduler-mobile");
+            }
+
             if (height) {
-                that.wrapper.css("height", height);
+                this.wrapper.css("height", height);
             }
         },
 
@@ -2286,7 +2308,8 @@ kendo_module({
         _toolbar: function() {
             var that = this;
             var options = that.options;
-            var toolbar = $(TOOLBARTEMPLATE({
+            var template = this._isMobilePhoneView ? MOBILETOOLBARTEMPLATE : TOOLBARTEMPLATE;
+            var toolbar = $(template({
                     messages: options.messages,
                     ns: kendo.ns,
                     views: that.views

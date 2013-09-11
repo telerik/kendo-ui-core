@@ -391,6 +391,7 @@ var tests = [
     "scheduler/editing-destroy.html",
     "scheduler/editing.html",
     "scheduler/initialization.html",
+    "scheduler/initializationmobile.html",
     "scheduler/lint.html",
     "scheduler/messages.html",
     "scheduler/monthview-selection.html",
