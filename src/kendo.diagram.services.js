@@ -907,6 +907,12 @@ kendo_module({
         _getCursor: function (point) {
             var hit = this._hitTest(point);
             if (hit && (hit.x >= -1) && (hit.x <= 1) && (hit.y >= -1) && (hit.y <= 1) && this.options.resizable) {
+                var angle = this.shape.rotate().angle;
+                if (angle) {
+                    angle = 360 - angle;
+                    hit.rotate(new Point(0, 0), angle);
+                    hit = new Point(Math.round(hit.x), Math.round(hit.y));
+                }
                 if (hit.x == -1 && hit.y == -1) {
                     return "nw-resize";
                 }
@@ -941,24 +947,26 @@ kendo_module({
         },
         move: function (handle, p) {
             var tp = this.diagram.transformPoint(p), delta = p.minus(this._cp), dragging,
-                dtl = new Point(), dbr = new Point(), bounds = this.shape.bounds(), tl, br;
+                dtl = new Point(), dbr = new Point(), bounds = this.shape.bounds(), tl, br,
+                angle = this.shape.rotate().angle, center;
             if (handle.y === -2 && handle.x === -1) {
-                var angle = Math.findAngle(this._bounds.center(), tp);
+                angle = Math.findAngle(this._bounds.center(), tp);
                 this.shape.rotate(angle);
             } else {
-                var rotate = this.shape.rotate();
                 if (handle.x === 0 && handle.y === 0) {
                     dbr = dtl = delta; // dragging
                     dragging = true;
                 }
                 else {
+                    if (angle) { // adjust the delta so that resizers resize in the correct direction after rotation.
+                        delta.rotate(new Point(0, 0), angle);
+                    }
                     if (handle.x === -1) {
                         dtl.x = delta.x;
                     }
                     else if (handle.x === 1) {
                         dbr.x = delta.x;
                     }
-
                     if (handle.y === -1) {
                         dtl.y = delta.y;
                     }
@@ -971,14 +979,14 @@ kendo_module({
                 bounds = Rect.fn.fromPoints(tl, br);
                 if (br.x - tl.x > 0 && br.y - tl.y > 0 && bounds.width >= this.shape.options.minWidth && bounds.height >= this.shape.options.minHeight) {
                     this._cp = p;
-                    if (rotate.angle && !dragging) {
-                        var center = bounds.center();
-                        center.rotate(this.shape._bounds.center(), 360 - rotate.angle);
+                    if (angle && !dragging) {
+                        center = bounds.center();
+                        center.rotate(this.shape._bounds.center(), 360 - angle);
                         bounds = new Rect(center.x - bounds.width / 2, center.y - bounds.height / 2, bounds.width, bounds.height);
                     }
                     this.shape.bounds(bounds);
-                    if (rotate.angle && !dragging) {
-                        this.shape.rotate(rotate.angle);
+                    if (angle && !dragging) {
+                        this.shape.rotate(angle);
                     }
                     this.refresh();
                 }
