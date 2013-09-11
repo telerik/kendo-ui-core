@@ -498,6 +498,7 @@ kendo_module({
         init: function(options) {
             var that = this,
                 views,
+                errorMessage,
                 container;
 
             Observable.fn.init.call(that);
@@ -511,7 +512,12 @@ kendo_module({
             that.rootView.attr(attr("url"), that.remoteViewURLPrefix);
 
             if (!that.rootView[0] && options.rootNeeded) {
-                throw new Error('Your kendo mobile application element does not contain any direct child elements with data-role="view" attribute set. Make sure that you instantiate the mobile application using the correct container.');
+                if (container[0] == kendo.mobile.application.element[0]) {
+                    errorMessage = 'Your kendo mobile application element does not contain any direct child elements with data-role="view" attribute set. Make sure that you instantiate the mobile application using the correct container.';
+                } else {
+                    errorMessage = 'Your pane element does not contain any direct child elements with data-role="view" attribute set.';
+                }
+                throw new Error(errorMessage);
             }
 
             that._view = null;
