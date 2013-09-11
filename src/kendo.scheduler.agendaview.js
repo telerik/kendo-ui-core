@@ -259,7 +259,7 @@ kendo_module({
             for (var dataIndex = 0; dataIndex < data.length; dataIndex++) {
                 var value = resourceValue(resource, data[dataIndex]);
 
-                var tmp = new kendo.data.Query(events).filter({ field: resource.field, operator: ui.SchedulerView.groupEqFilter, value: value }).toArray();
+                var tmp = new kendo.data.Query(events).filter({ field: resource.field, operator: ui.SchedulerView.groupEqFilter(value) }).toArray();
 
                 if (tmp.length) {
                     var tasks = this._tasks(tmp);
