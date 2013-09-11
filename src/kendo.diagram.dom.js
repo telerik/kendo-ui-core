@@ -145,7 +145,7 @@ kendo_module({
             that.type = that.options;
             that.shapeVisual = Shape.createShapeVisual(that.options);
             that.visual = new Group({
-                id: that.options.id,
+                id: that.options.id || kendo.diagram.randomId(),
                 title: that.options.id ? that.options.id : "Shape"
             });
             that.visual.append(this.shapeVisual);
@@ -577,385 +577,389 @@ kendo_module({
     }
 
     var Diagram = Widget.extend({
-            init: function (element, options) {
-                var that = this;
-                Widget.fn.init.call(that, element, options);
-                that.element = element; // the hosting element
-                that.canvas = new Canvas(that.element); // the root SVG Canvas
-                that._initialize();
-                $(element).on("mousemove" + NS, proxy(that._mouseMove, that))
-                    .on("mouseup" + NS, proxy(that._mouseUp, that))
-                    .on("dblclick" + NS, proxy(that._doubleClick, that))
-                    .on("mousedown" + NS, proxy(that._mouseDown, that))
-                    .mousewheel(proxy(that._wheel, that), { ns: NS })
-                    .on("keydown" + NS, proxy(that._keydown, that));
-                that.selector = new Selector(that);
-            },
-            options: {
-                name: "Diagram",
-                zoomRate: 1.1
-            },
-            events: ["zoom", "pan"],
-            zoom: function (zoom, staticPoint) {
-                if (zoom) {
-                    var currentZoom = this._zoom;
-                    zoom = this._zoom = this.getValidZoom(zoom);
+        init: function (element, options) {
+            var that = this;
+            Widget.fn.init.call(that, element, options);
+            that.element = element; // the hosting element
+            that.canvas = new Canvas(that.element); // the root SVG Canvas
+            that._initialize();
+            $(element).on("mousemove" + NS, proxy(that._mouseMove, that))
+                .on("mouseup" + NS, proxy(that._mouseUp, that))
+                .on("dblclick" + NS, proxy(that._doubleClick, that))
+                .on("mousedown" + NS, proxy(that._mouseDown, that))
+                .mousewheel(proxy(that._wheel, that), { ns: NS })
+                .on("keydown" + NS, proxy(that._keydown, that));
+            that.selector = new Selector(that);
+        },
+        options: {
+            name: "Diagram",
+            zoomRate: 1.1
+        },
+        events: ["zoom", "pan"],
+        zoom: function (zoom, staticPoint) {
+            if (zoom) {
+                var currentZoom = this._zoom;
+                zoom = this._zoom = this.getValidZoom(zoom);
 
-                    if (staticPoint !== undefined) {
-                        var zoomRatio = zoom / currentZoom;
+                if (staticPoint !== undefined) {
+                    var zoomRatio = zoom / currentZoom;
 
-                        var diagramStaticPoint = staticPoint.minus(this._pan);
-                        var zoomedStaticPoint = diagramStaticPoint.times(zoomRatio);
-                        this._pan = staticPoint.minus(zoomedStaticPoint);
-                    }
-
-                    this.transformMainLayer();
-                    this.trigger("zoom");
-                }
-                return this._zoom;
-            },
-            getValidZoom: function (zoom) {
-                return Math.min(Math.max(zoom, 0.55), 2.0); //around 0.5 something exponential happens...!?
-            },
-            pan: function (pan) {
-                if (pan instanceof Point && !pan.equals(this._pan)) {
-                    this._pan = pan;
-                    this.transformMainLayer();
-                    this.trigger("pan");
+                    var diagramStaticPoint = staticPoint.minus(this._pan);
+                    var zoomedStaticPoint = diagramStaticPoint.times(zoomRatio);
+                    this._pan = staticPoint.minus(zoomedStaticPoint);
                 }
 
-                return this._pan;
-            },
-            transformMainLayer: function () {
-                var pan = this._pan,
-                    zoom = this._zoom;
+                this.transformMainLayer();
+                this.trigger("zoom");
+            }
+            return this._zoom;
+        },
+        getValidZoom: function (zoom) {
+            return Math.min(Math.max(zoom, 0.55), 2.0); //around 0.5 something exponential happens...!?
+        },
+        pan: function (pan) {
+            if (pan instanceof Point && !pan.equals(this._pan)) {
+                this._pan = pan;
+                this.transformMainLayer();
+                this.trigger("pan");
+            }
 
-                var transform = new CompositeTransform(pan.x, pan.y, zoom, zoom);
-                transform.render(this.mainLayer.native);
-                this._matrix = transform.toMatrix();
-            },
-            transformPoint: function (p) { // transforms point from main canvas coordinates to non-transformed (origin).
-                var result = p;
-                if (this._matrix) {
-                    result = this._matrix.apply(p);
+            return this._pan;
+        },
+        transformMainLayer: function () {
+            var pan = this._pan,
+                zoom = this._zoom;
+
+            var transform = new CompositeTransform(pan.x, pan.y, zoom, zoom);
+            transform.render(this.mainLayer.native);
+            this._matrix = transform.toMatrix();
+        },
+        transformPoint: function (p) { // transforms point from main canvas coordinates to non-transformed (origin).
+            var result = p;
+            if (this._matrix) {
+                result = this._matrix.apply(p);
+            }
+            return result;
+        },
+        focus: function () {
+            this.canvas.focus();
+        },
+        clear: function () {
+            this.canvas.clear();
+            this._initialize();
+        },
+        connect: function (source, target, options) {
+            var connection = new Connection(source, target, options);
+            return this.addConnection(connection);
+        },
+        addConnection: function (connection) {
+            connection.diagram = this;
+            this.mainLayer.append(connection.visual);
+            this.connections.push(connection);
+            return connection;
+        },
+        addShape: function (point, options) {
+            var shape;
+            if (Utils.isUndefined(point)) {
+                point = new Point(0, 0);
+            }
+            if (point instanceof Shape) {
+                shape = point;
+            }
+            else {
+                options = deepExtend({}, options, { x: point.x, y: point.y });
+                shape = new Shape(options);
+            }
+            this.shapes.push(shape);
+            shape.diagram = this;
+            this.mainLayer.append(shape.visual);
+            return shape;
+        },
+        undo: function () {
+            this.undoRedoService.undo();
+        },
+        redo: function () {
+            this.undoRedoService.redo();
+        },
+        remove: function (items, undoable) {
+            if (undoable) {
+                this.undoRedoService.begin();
+            }
+            if (items instanceof Array) {
+                items = items.slice(0);
+                for (var i = 0; i < items.length; i++) {
+                    this._removeItem(items[i], undoable);
                 }
-                return result;
-            },
-            focus: function () {
-                this.canvas.focus();
-            },
-            clear: function () {
-                this.canvas.clear();
-                this._initialize();
-            },
-            connect: function (source, target, options) {
-                var connection = new Connection(source, target, options);
-                return this.addConnection(connection);
-            },
-            addConnection: function (connection) {
-                connection.diagram = this;
-                this.mainLayer.append(connection.visual);
-                this.connections.push(connection);
-                return connection;
-            },
-            addShape: function (point, options) {
-                var shape;
-                if (Utils.isUndefined(point)) {
-                    point = new Point(0, 0);
-                }
-                if (point instanceof Shape) {
-                    shape = point;
-                }
-                else {
-                    options = deepExtend({}, options, { x: point.x, y: point.y });
-                    shape = new Shape(options);
-                }
-                this.shapes.push(shape);
-                shape.diagram = this;
-                this.mainLayer.append(shape.visual);
-                return shape;
-            },
-            undo: function () {
-                this.undoRedoService.undo();
-            },
-            redo: function () {
-                this.undoRedoService.redo();
-            },
-            remove: function (items, undoable) {
-                if (undoable) {
-                    this.undoRedoService.begin();
-                }
-                if (items instanceof Array) {
-                    items = items.slice(0);
-                    for (var i = 0; i < items.length; i++) {
-                        this._removeItem(items[i], undoable);
+            }
+            else if (items instanceof Shape || items instanceof Connection) {
+                this._removeItem(items, undoable);
+            }
+            if (undoable) {
+                this.undoRedoService.commit();
+            }
+        },
+        select: function (value, options) {
+            var i, item, items, rect;
+            if (value !== undefined) {
+                options = deepExtend({ rect: null }, options);
+                rect = options.rect;
+                items = this.shapes.concat(this.connections);
+                for (i = 0; i < items.length; i++) {
+                    item = items[i];
+                    if (!rect || item._hitTest(rect)) {
+                        item.select(value);
                     }
                 }
-                else if (items instanceof Shape || items instanceof Connection) {
-                    this._removeItem(items, undoable);
-                }
-                if (undoable) {
-                    this.undoRedoService.commit();
-                }
-            },
-            select: function (value, options) {
-                var i, item, items, rect;
-                if (value !== undefined) {
-                    options = deepExtend({ rect: null }, options);
-                    rect = options.rect;
-                    items = this.shapes.concat(this.connections);
-                    for (i = 0; i < items.length; i++) {
-                        item = items[i];
-                        if (!rect || item._hitTest(rect)) {
-                            item.select(value);
-                        }
-                    }
-                }
-                else {
-                    return this._selectedItems; // returns all selected items.
-                }
-            },
-            bringToFront: function (items) {
-                var result = this._getDiagramItems(items);
-                this.mainLayer.bringToFront(result.visuals);
-                this._fixOrdering(result, true);
-            },
-            sendToBack: function (items) {
-                var result = this._getDiagramItems(items);
-                this.mainLayer.sendToBack(result.visuals);
-                this._fixOrdering(result, false);
-            },
-            _fixOrdering: function (result, toFront) {
-                var shapePos = toFront ? this.shapes.length - 1 : 0,
-                    conPos = toFront ? this.connections.length - 1 : 0,
-                    i, item;
-                for (i = 0; i < result.shapes.length; i++) {
-                    item = result.shapes[i];
-                    this.shapes.remove(item);
-                    this.shapes.insert(item, shapePos);
-                }
-                for (i = 0; i < result.cons.length; i++) {
-                    item = result.cons[i];
-                    this.connections.remove(item);
-                    this.connections.insert(item, conPos);
-                }
-            },
-            _getDiagramItems: function (items) {
-                var i, result = {}, args = items;
-                result.visuals = [];
-                result.shapes = [];
-                result.cons = [];
-                if (!items) {
-                    args = this._selectedItems;
-                }
-                else if (!Utils.isArray(items)) {
-                    args = [items];
-                }
-                for (i = 0; i < args.length; i++) {
-                    var item = args[i];
-                    if (item instanceof Shape) {
-                        result.shapes.push(item);
-                        result.visuals.push(item.visual);
-                    }
-                    else if (item instanceof Connection) {
-                        result.cons.push(item);
-                        result.visuals.push(item.visual);
-                    }
-                }
-                return result;
-            },
-            _removeItem: function (item, undoable) {
-                item.select(false);
+            }
+            else {
+                return this._selectedItems; // returns all selected items.
+            }
+        },
+        bringToFront: function (items) {
+            var result = this._getDiagramItems(items);
+            this.mainLayer.bringToFront(result.visuals);
+            this._fixOrdering(result, true);
+        },
+        sendToBack: function (items) {
+            var result = this._getDiagramItems(items);
+            this.mainLayer.sendToBack(result.visuals);
+            this._fixOrdering(result, false);
+        },
+        _fixOrdering: function (result, toFront) {
+            var shapePos = toFront ? this.shapes.length - 1 : 0,
+                conPos = toFront ? this.connections.length - 1 : 0,
+                i, item;
+            for (i = 0; i < result.shapes.length; i++) {
+                item = result.shapes[i];
+                this.shapes.remove(item);
+                this.shapes.insert(item, shapePos);
+            }
+            for (i = 0; i < result.cons.length; i++) {
+                item = result.cons[i];
+                this.connections.remove(item);
+                this.connections.insert(item, conPos);
+            }
+        },
+        _getDiagramItems: function (items) {
+            var i, result = {}, args = items;
+            result.visuals = [];
+            result.shapes = [];
+            result.cons = [];
+            if (!items) {
+                args = this._selectedItems;
+            }
+            else if (!Utils.isArray(items)) {
+                args = [items];
+            }
+            for (i = 0; i < args.length; i++) {
+                var item = args[i];
                 if (item instanceof Shape) {
-                    if (undoable) {
-                        this.undoRedoService.addCompositeItem(new DeleteShapeUnit(item));
-                    }
-                    else {
-                        this.shapes.remove(item);
-                    }
+                    result.shapes.push(item);
+                    result.visuals.push(item.visual);
                 }
                 else if (item instanceof Connection) {
-                    if (item.sourceConnector) {
-                        item.sourceConnector.connections.remove(item);
-                    }
-                    if (item.targetConnector) {
-                        item.targetConnector.connections.remove(item);
-                    }
-                    if (undoable) {
-                        this.undoRedoService.addCompositeItem(new DeleteConnectionUnit(item));
-                    }
-                    else {
-                        this.connections.remove(item);
-                    }
+                    result.cons.push(item);
+                    result.visuals.push(item.visual);
                 }
-                if (!undoable) {
-                    this.mainLayer.remove(item.visual);
-                }
-            },
-            documentToCanvasPoint: function (dPoint) {
-                var containerOffset = $(this.element).offset();
-                return new Point(dPoint.x - containerOffset.left, dPoint.y - containerOffset.top);
-            },
-            _mouseDown: function (e) {
-                var p = this._calculatePosition(e);
-                if (e.button === 0 && this.toolService.start(p, this._meta(e))) {
-                    e.preventDefault();
-                }
-            },
-            _mouseUp: function (e) {
-                var p = this._calculatePosition(e);
-                if (e.button === 0 && this.toolService.end(p, this._meta(e))) {
-                    e.preventDefault();
-                }
-            },
-            _mouseMove: function (e) {
-                var p = this._calculatePosition(e);
-                if (e.button === 0 && this.toolService.move(p, this._meta(e))) {
-                    e.preventDefault();
-                }
-            },
-            _doubleClick: function (e) {
-                var p = this._calculatePosition(e);
-                if (e.button === 0 && this.toolService.doubleClick(p, this._meta(e))) {
-                    e.preventDefault();
-                }
-            },
-            _keydown: function (e) {
-                if (this.toolService.keyDown(e.keyCode, this._meta(e))) {
-                    e.preventDefault();
-                }
-            },
-            _wheel: function (e) {
-                var pointEvent = (e.pageX === undefined ? e.originalEvent : e),
-                    p = this.documentToCanvasPoint(new Point(pointEvent.pageX, pointEvent.pageY)),
-                    meta = deepExtend(this._meta(e), { delta: e.data.delta });
-
-                if (this.toolService.wheel(p, meta)) {
-                    e.preventDefault();
-                }
-            },
-            _meta: function (e) {
-                return { ctrlKey: e.ctrlKey, metaKey: e.metaKey, altKey: e.altKey };
-            },
-            _calculatePosition: function (e) {
-                var pan = this.pan();
-                var localPosition = $(this.element).offset();
-                var p = new Point(e.pageX - localPosition.left - pan.x, e.pageY - localPosition.top - pan.y);
-                return this._normalizePointZoom(p);
-            },
-            _normalizePointZoom: function (point) {
-                return point.times(1 / this.zoom());
-            },
-            _initialize: function () {
-                this._zoom = 1.0;
-                this._pan = new Point();
-                this.shapes = [];
-                this._selectedItems = [];
-                this.connections = [];
-                this._adorners = [];
-                this.mainLayer = new Group({
-                    id: "main-layer"
-                });
-                this.canvas.append(this.mainLayer);
-                this.adornerLayer = new Group({
-                    id: "adorner-layer"
-                });
-                this.canvas.append(this.adornerLayer);
-                this.undoRedoService = new UndoRedoService();
-                this.toolService = new ToolService(this);
-
-                /**
-                 * The unique identifier of this Diagram
-                 * @type {string}
-                 */
-                this.id = kendo.diagram.randomId();
-            },
-            _adorn: function (adorner, isActive) {
-                if (isActive !== undefined) {
-                    if (isActive) {
-                        this._adorners.push(adorner);
-                        this.adornerLayer.append(adorner.visual);
-                    }
-                    else {
-                        this._adorners.remove(adorner);
-                        this.adornerLayer.remove(adorner.visual);
-                    }
-                }
-            },
-            _showConnectors: function (shape, value) {
-                if (value) {
-                    this._connectorsAdorner = new ConnectorsAdorner(shape);
-                }
-                this._adorn(this._connectorsAdorner, value);
-            },
-            refresh: function () {
-                var i;
-                for (i = 0; i < this.shapes.length; i++) {
-                    this.shapes[i].refresh();
-                }
-                for (i = 0; i < this.connections.length; i++) {
-                    this.connections[i].refresh();
-                }
-            },
-
-            /**
-             * Performs a diagram layout of the given type.
-             * @param layoutType The layout algorithm to be applied (TreeLayout, LayeredLayout, SpringLayout).
-             * @param options Layout-specific options.
-             */
-            layout: function (layoutType, options) {
-
-                this.isLayouting = true;
-                // TODO: raise layout event?
-
-                if (Utils.isUndefined(layoutType)) {
-                    layoutType = diagram.LayoutTypes.TreeLayout;
-                }
-                var l;
-                switch (layoutType) {
-                    case diagram.LayoutTypes.TreeLayout:
-                        l = new diagram.TreeLayout(this);
-                        break;
-
-                    case diagram.LayoutTypes.LayeredLayout:
-                        l = new diagram.LayeredLayout(this);
-                        break;
-
-                    case diagram.LayoutTypes.ForceDirectedLayout:
-                        l = new diagram.SpringLayout(this);
-                        break;
-                    default:
-                        throw "Layout algorithm '" + layoutType + "' is not supported.";
-                }
-                l.layout(options);
-
-                this.isLayouting = false;
-            },
-
-            /**
-             * Generates a random diagram.
-             * @param shapeCount The number of shapes the random diagram should contain.
-             * @param maxIncidence The maximum degree the shapes can have.
-             * @param isTree Whether the generated diagram should be a tree
-             * @param layoutType The optional layout type to apply after the diagram is generated.
-             */
-            randomDiagram: function (shapeCount, maxIncidence, isTree, randomSize) {
-                var g = kendo.diagram.Graph.Utils.createRandomConnectedGraph(shapeCount, maxIncidence, isTree);
-                kendo.diagram.Graph.Utils.createDiagramFromGraph(this, g, false, randomSize);
-            },
-
-            /**
-             * Gets a shape on the basis of its identifier.
-             * @param id (string) the identifier of a shape.
-             * @returns {Shape}
-             */
-            getId: function (id) {
-                return this.shapes.first(function (s) {
-                    return s.shapeVisual.native.id == id;
-                });
             }
-        })
-        ;
+            return result;
+        },
+        _removeItem: function (item, undoable) {
+            item.select(false);
+            if (item instanceof Shape) {
+                if (undoable) {
+                    this.undoRedoService.addCompositeItem(new DeleteShapeUnit(item));
+                }
+                else {
+                    this.shapes.remove(item);
+                }
+            }
+            else if (item instanceof Connection) {
+                if (item.sourceConnector) {
+                    item.sourceConnector.connections.remove(item);
+                }
+                if (item.targetConnector) {
+                    item.targetConnector.connections.remove(item);
+                }
+                if (undoable) {
+                    this.undoRedoService.addCompositeItem(new DeleteConnectionUnit(item));
+                }
+                else {
+                    this.connections.remove(item);
+                }
+            }
+            if (!undoable) {
+                this.mainLayer.remove(item.visual);
+            }
+        },
+        documentToCanvasPoint: function (dPoint) {
+            var containerOffset = $(this.element).offset();
+            return new Point(dPoint.x - containerOffset.left, dPoint.y - containerOffset.top);
+        },
+        _mouseDown: function (e) {
+            var p = this._calculatePosition(e);
+            if (e.button === 0 && this.toolService.start(p, this._meta(e))) {
+                e.preventDefault();
+            }
+        },
+        _mouseUp: function (e) {
+            var p = this._calculatePosition(e);
+            if (e.button === 0 && this.toolService.end(p, this._meta(e))) {
+                e.preventDefault();
+            }
+        },
+        _mouseMove: function (e) {
+            var p = this._calculatePosition(e);
+            if (e.button === 0 && this.toolService.move(p, this._meta(e))) {
+                e.preventDefault();
+            }
+        },
+        _doubleClick: function (e) {
+            var p = this._calculatePosition(e);
+            if (e.button === 0 && this.toolService.doubleClick(p, this._meta(e))) {
+                e.preventDefault();
+            }
+        },
+        _keydown: function (e) {
+            if (this.toolService.keyDown(e.keyCode, this._meta(e))) {
+                e.preventDefault();
+            }
+        },
+        _wheel: function (e) {
+            var pointEvent = (e.pageX === undefined ? e.originalEvent : e),
+                p = this.documentToCanvasPoint(new Point(pointEvent.pageX, pointEvent.pageY)),
+                meta = deepExtend(this._meta(e), { delta: e.data.delta });
+
+            if (this.toolService.wheel(p, meta)) {
+                e.preventDefault();
+            }
+        },
+        _meta: function (e) {
+            return { ctrlKey: e.ctrlKey, metaKey: e.metaKey, altKey: e.altKey };
+        },
+        _calculatePosition: function (e) {
+            var pan = this.pan();
+            var localPosition = $(this.element).offset();
+            var p = new Point(e.pageX - localPosition.left - pan.x, e.pageY - localPosition.top - pan.y);
+            return this._normalizePointZoom(p);
+        },
+        _normalizePointZoom: function (point) {
+            return point.times(1 / this.zoom());
+        },
+        _initialize: function () {
+            this._zoom = 1.0;
+            this._pan = new Point();
+            this.shapes = [];
+            this._selectedItems = [];
+            this.connections = [];
+            this._adorners = [];
+            this.mainLayer = new Group({
+                id: "main-layer"
+            });
+            this.canvas.append(this.mainLayer);
+            this.adornerLayer = new Group({
+                id: "adorner-layer"
+            });
+            this.canvas.append(this.adornerLayer);
+            this.undoRedoService = new UndoRedoService();
+            this.toolService = new ToolService(this);
+
+            /**
+             * The unique identifier of this Diagram
+             * @type {string}
+             */
+            this.id = kendo.diagram.randomId();
+        },
+        _adorn: function (adorner, isActive) {
+            if (isActive !== undefined) {
+                if (isActive) {
+                    this._adorners.push(adorner);
+                    this.adornerLayer.append(adorner.visual);
+                }
+                else {
+                    this._adorners.remove(adorner);
+                    this.adornerLayer.remove(adorner.visual);
+                }
+            }
+        },
+        _showConnectors: function (shape, value) {
+            if (value) {
+                this._connectorsAdorner = new ConnectorsAdorner(shape);
+            }
+            this._adorn(this._connectorsAdorner, value);
+        },
+        refresh: function () {
+            var i;
+            for (i = 0; i < this.shapes.length; i++) {
+                this.shapes[i].refresh();
+            }
+            for (i = 0; i < this.connections.length; i++) {
+                this.connections[i].refresh();
+            }
+        },
+
+        /**
+         * Performs a diagram layout of the given type.
+         * @param layoutType The layout algorithm to be applied (TreeLayout, LayeredLayout, SpringLayout).
+         * @param options Layout-specific options.
+         */
+        layout: function (layoutType, options) {
+
+            this.isLayouting = true;
+            // TODO: raise layout event?
+
+            if (Utils.isUndefined(layoutType)) {
+                layoutType = diagram.LayoutTypes.TreeLayout;
+            }
+            var l;
+            switch (layoutType) {
+                case diagram.LayoutTypes.TreeLayout:
+                    l = new diagram.TreeLayout(this);
+                    break;
+
+                case diagram.LayoutTypes.LayeredLayout:
+                    l = new diagram.LayeredLayout(this);
+                    break;
+
+                case diagram.LayoutTypes.ForceDirectedLayout:
+                    l = new diagram.SpringLayout(this);
+                    break;
+                default:
+                    throw "Layout algorithm '" + layoutType + "' is not supported.";
+            }
+            var initialState = new kendo.diagram.LayoutState(this);
+            var finalState = l.layout(options);
+            if(finalState){
+                var unit = new kendo.diagram.LayoutUndoUnit(initialState, finalState);
+                this.undoRedoService.add(unit);
+            }
+            this.isLayouting = false;
+        },
+
+        /**
+         * Generates a random diagram.
+         * @param shapeCount The number of shapes the random diagram should contain.
+         * @param maxIncidence The maximum degree the shapes can have.
+         * @param isTree Whether the generated diagram should be a tree
+         * @param layoutType The optional layout type to apply after the diagram is generated.
+         */
+        randomDiagram: function (shapeCount, maxIncidence, isTree, randomSize) {
+            var g = kendo.diagram.Graph.Utils.createRandomConnectedGraph(shapeCount, maxIncidence, isTree);
+            kendo.diagram.Graph.Utils.createDiagramFromGraph(this, g, false, randomSize);
+        },
+
+        /**
+         * Gets a shape on the basis of its identifier.
+         * @param id (string) the identifier of a shape.
+         * @returns {Shape}
+         */
+        getId: function (id) {
+            return this.shapes.first(function (s) {
+                return s.visual.native.id == id;
+            });
+        }
+    })
+
 
     ui.plugin(Diagram);
 

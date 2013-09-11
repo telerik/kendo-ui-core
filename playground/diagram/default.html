@@ -317,27 +317,102 @@ $(function () {
     });
 
     var layouts = [
-        {value: "kendo.diagram.TreeLayoutType.TreeDown", text: "TreeDown"},
-        {value: "kendo.diagram.TreeLayoutType.TreeUp", text: "TreeUp"},
-        {value: "kendo.diagram.TreeLayoutType.TreeLeft", text: "TreeLeft"},
-        {value: "kendo.diagram.TreeLayoutType.TreeRight", text: "TreeRight"},
-        {value: "kendo.diagram.TreeLayoutType.RadialTree", text: "RadialTree"},
-        {value: "kendo.diagram.TreeLayoutType.TipOverTree", text: "TipOverTree"},
-        {value: "kendo.diagram.TreeLayoutType.MindmapVertical", text: "MindmapVertical"},
-        {value: "kendo.diagram.TreeLayoutType.MindmapHorizontal", text: "MindmapHorizontal"}
+        {value: "TreeDown", text: "Tree Down"},
+        {value: "TreeUp", text: "Tree Up"},
+        {value: "TreeLeft", text: "Tree Left"},
+        {value: "TreeRight", text: "Tree Right"},
+        {value: "RadialTree", text: "Radial Tree"},
+        {value: "TipOverTree", text: "Tip-Over Tree"},
+        {value: "LayeredHorizontal", text: "Layered Horizontal"},
+        {value: "LayeredVertical", text: "Layered Vertical"},
+        {value: "ForceDirected", text: "Force directed"},
+        {value: "MindmapVertical", text: "Mindmap Vertical"},
+        {value: "MindmapHorizontal", text: "Mindmap Horizontal"}
     ];
+    var onLayoutChanged = function (e) {
+        switch ($("#Layouts").data("kendoDropDownList").value()) {
+            case "TreeDown":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeDown
+                        });
+                break;
+            case "TreeUp":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeUp
+                        });
+                break;
+            case "TreeLeft":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeLeft
+                        });
+                break;
+            case "TreeRight":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeRight
+                        });
+                break;
+            case "RadialTree":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.RadialTree
+                        });
+                break;
+            case "TipOverTree":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TipOverTree
+                        });
+                break;
+            case "LayeredHorizontal":
+                diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
+                        {
+                            layeredLayoutType: kendo.diagram.LayeredLayoutType.Right
+                        });
+                break;
+            case "LayeredVertical":
+                diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
+                        {
+                            layeredLayoutType: kendo.diagram.LayeredLayoutType.Down
+                        });
+                break;
+            case "ForceDirected":
+                diagram.layout(kendo.diagram.LayoutTypes.ForceDirectedLayout,
+                        {
+
+                        });
+                break;
+            case "MindmapVertical":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapVertical
+                        });
+                break;
+            case "MindmapHorizontal":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal
+                        });
+                break;
+        }
+
+    };
 
     var drop = $("#Layouts").kendoDropDownList({
         dataTextField: "text",
         dataValueField: "value",
-        dataSource: layouts,
-        change: function () {
-            diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
-                    {
-                        TreeLayoutType: eval($("#Layouts").val())
-                    });
-        }
+        dataSource: layouts
     });
+    drop.bind("change", onLayoutChanged);
+
+    $("#Layouts").data("kendoDropDownList").select(function (dataItem) {
+        return dataItem.value === "TreeRight";
+    });
+    onLayoutChanged();
+
 
     var caps = [
         {value: kendo.diagram.Markers.none},

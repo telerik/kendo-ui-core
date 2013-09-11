@@ -14,7 +14,8 @@ kendo_module({
         TextBlock = diagram.TextBlock,
         Rect = diagram.Rect,
         Rectangle = diagram.Rectangle,
-        Point = diagram.Point,
+        Utils = diagram.Utils,
+        Point = diagram.Point;
         Circle = diagram.Circle,
         Path = diagram.Path,
         deepExtend = kendo.deepExtend;
@@ -41,6 +42,58 @@ kendo_module({
             item.select(false);
         }
     }
+
+    var LayoutUndoUnit = Class.extend({
+        init: function (initialState, finalState, animate) {
+            if (Utils.isUndefined(animate)) {
+                this.animate = true;
+            }
+            else {
+                this.animate = animate;
+            }
+            this._initialState = initialState;
+            this._finalState = finalState;
+            this.title = "Diagram layout";
+        },
+        undo: function () {
+            this.setState(this._initialState);
+        },
+        redo: function () {
+            this.setState(this._finalState);
+        },
+        setState: function (state) {
+            var diagram = state.diagram;
+            if (this.animate) {
+                var ticker = new kendo.diagram.Ticker();
+                ticker.addAdapter(new kendo.diagram.PositionAdapter(state));
+                ticker.play();
+            }
+            else {
+                state.nodeMap.forEach(function (id, bounds) {
+                    var shape = diagram.getId(id);
+                    if (shape) {
+                        shape.position(bounds.topLeft());
+                    }
+                });
+            }
+            // todo: when multipoint connections are ready this needs to be plugged in again
+            /*
+             * for (var i = 0; i < graph.links.length; i++) {
+             var link = graph.links[i];
+             var p = []
+             if (link.points != null) {
+             p.addRange(link.points);
+             }
+             var sb = link.source.associatedShape.bounds();
+             p.prepend(new diagram.Point(sb.x, sb.y));
+             var eb = link.target.associatedShape.bounds();
+             p.append(new diagram.Point(eb.x, eb.y));
+
+             //link.associatedConnection.points(p);
+             }
+             * */
+        }
+    });
 
     var CompositeUnit = Class.extend({
         init: function (unit) {
@@ -210,8 +263,8 @@ kendo_module({
         addCompositeItem: function (undoUnit) {
             this.composite.add(undoUnit);
         },
-        add: function (undoUnit) {
-            this._restart(new CompositeUnit(undoUnit));
+        add: function (undoUnit, execute) {
+            this._restart(new CompositeUnit(undoUnit), execute);
         },
         count: function () {
             return this.stack.length;
@@ -228,11 +281,16 @@ kendo_module({
                 this.index++;
             }
         },
-        _restart: function (composite) {
+        _restart: function (composite, execute) {
             // throw away anything beyond this point if this is a new branch
             this.stack.splice(this.index, this.stack.length - this.index);
             this.stack.push(composite);
-            this.redo();
+            if (!execute || (execute && execute == true)) {
+                this.redo();
+            }
+            else {
+                this.index++;
+            }
         }
     });
 
@@ -1104,6 +1162,7 @@ kendo_module({
         ResizingAdorner: ResizingAdorner,
         Selector: Selector,
         ToolService: ToolService,
-        ConnectorsAdorner: ConnectorsAdorner
+        ConnectorsAdorner: ConnectorsAdorner,
+        LayoutUndoUnit: LayoutUndoUnit
     });
 })(window.kendo.jQuery);

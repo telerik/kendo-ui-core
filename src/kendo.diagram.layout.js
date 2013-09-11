@@ -127,13 +127,14 @@ kendo_module({
                 // TODO: ensure to change this to false when containers are around
                 ignoreContainers: true,
                 layoutContainerChildren: false,
-                ignoreInvisible: true     ,
+                ignoreInvisible: true,
                 animateTransitions: false
             };
         },
 
         /**
          * Organizes the components in a grid.
+         * Returns the final set of nodes (not the Graph).
          * @param components
          */
         gridLayoutComponents: function (components) {
@@ -158,7 +159,8 @@ kendo_module({
                 startX = this.options.totalMargin.width,
                 startY = this.options.totalMargin.height,
                 x = startX,
-                y = startY;
+                y = startY,
+                resultNodeSet = [];
             while (components.length > 0) {
                 if (x >= maxWidth) {
                     // start a new row
@@ -169,15 +171,9 @@ kendo_module({
                 }
                 var component = components.pop();
                 this.moveToOffset(component, new Point(x, y));
-
-                for (var j = 0; j < component.nodes.length; j++) {
-                    var node = component.nodes[j];
-                    if (node.associatedShape) {// not virtual
-                        var shape = node.associatedShape;
-                        shape.bounds(new Rect(node.x, node.y, node.width, node.height));
-                    }
+                for (var i = 0; i < component.nodes.length; i++) {
+                    resultNodeSet.push(component.nodes[i]); // to be returned in the end
                 }
-
                 var boundingRect = component.bounds;
                 var currentHeight = boundingRect.height;
                 if (currentHeight <= 0 || isNaN(currentHeight)) {
@@ -194,6 +190,7 @@ kendo_module({
                 x += currentWidth + offsetX;
             }
 
+            return resultNodeSet;
         },
 
         moveToOffset: function (component, p) {
@@ -775,12 +772,9 @@ kendo_module({
                 var component = components[i];
                 this.layoutGraph(component, options);
             }
-            this.gridLayoutComponents(components);
-            for (var i = 0, len = graph.nodes.length; i < len; i++) {
-                var node = graph.nodes[i];
-                var shape = node.associatedShape;
-                shape.bounds(new Rect(node.x, node.y, node.width, node.height));
-            }
+            var finalNodeSet = this.gridLayoutComponents(components);
+
+            return new kendo.diagram.LayoutState(this.diagram, finalNodeSet)
         },
 
         layoutGraph: function (graph, options) {
@@ -1809,13 +1803,12 @@ kendo_module({
              * @type {*}
              */
             this.graph = adapter.convert();
-            var initialState = this.graph.clone(); // enabling animations
-            this.layoutComponents();
-            var finalState = this.graph.clone();
 
-            //var layoutUnit = new diagram.LayoutUnit(initialState, finalState);
+            var finalNodeSet = this.layoutComponents();
 
-            // run the unit in the undo service and get some rest
+            // note that the graph contains the original data and
+            // the components are another instance of nodes referring to the same set of shapes
+            return new kendo.diagram.LayoutState(this.diagram, finalNodeSet);
         },
 
         layoutComponents: function () {
@@ -1843,15 +1836,10 @@ kendo_module({
                 var tree = treeGraph.tree;
                 layout.layout(tree, root);
 
-                for (var j = 0; j < tree.nodes.length; j++) {
-                    var node = tree.nodes[j];
-                    var shape = node.associatedShape;
-                    shape.bounds(new Rect(node.x, node.y, node.width, node.height));
-                }
                 trees.push(tree);
             }
 
-            this.gridLayoutComponents(trees);
+            return this.gridLayoutComponents(trees);
 
         },
 
@@ -2070,25 +2058,9 @@ kendo_module({
                 var component = components[i];
                 this.layoutGraph(component, options);
             }
-            this.gridLayoutComponents(components);
-            for (var i = 0, len = graph.nodes.length; i < len; i++) {
-                var node = graph.nodes[i];
-                var shape = node.associatedShape;
-                shape.bounds(new Rect(node.x, node.y, node.width, node.height));
-            }
-            for (var i = 0; i < graph.links.length; i++) {
-                var link = graph.links[i];
-                var p = []
-                if (link.points != null) {
-                    p.addRange(link.points);
-                }
-                var sb = link.source.associatedShape.bounds();
-                p.prepend(new diagram.Point(sb.x, sb.y));
-                var eb = link.target.associatedShape.bounds();
-                p.append(new diagram.Point(eb.x, eb.y));
-                // todo: when multipoint connections are ready this needs to be plugged in again
-                //link.associatedConnection.points(p);
-            }
+            var finalNodeSet = this.gridLayoutComponents(components);
+            return new kendo.diagram.LayoutState(this.diagram, finalNodeSet);
+
         },
 
         /**
@@ -3816,6 +3788,211 @@ kendo_module({
 
     });
 
+    /**
+     * Captures the state of a diagram; node positions, link points and so on.
+     * @type {*}
+     */
+    var LayoutState = kendo.Class.extend({
+        init: function (diagram, graphOrNodes) {
+            if (Utils.isUndefined(diagram)) {
+                throw "No diagram given";
+            }
+            this.diagram = diagram;
+            this.nodeMap = new Dictionary();
+            this.capture(graphOrNodes ? graphOrNodes : diagram);
+        },
+
+        /**
+         * Will capture either
+         * - the state of the shapes in the diagram
+         * - the bounds of the nodes contained in the Graph
+         * - the bounds of the nodes in the Array<Node>
+         * @param diagramOrGraphOrNodes
+         */
+        capture: function (diagramOrGraphOrNodes) {
+
+            // todo: to be extended when multipoint connections are inline
+            if (diagramOrGraphOrNodes instanceof kendo.diagram.Graph) {
+                var graph = diagramOrGraphOrNodes;
+                for (var i = 0, len = graph.nodes.length; i < len; i++) {
+                    var node = graph.nodes[i];
+                    var shape = node.associatedShape;
+                    //shape.bounds(new Rect(node.x, node.y, node.width, node.height));
+                    this.nodeMap.set(shape.visual.native.id, new Rect(node.x, node.y, node.width, node.height));
+                }
+            }
+            else if (diagramOrGraphOrNodes instanceof Array) {
+                var nodes = diagramOrGraphOrNodes;
+                for (var i = 0, len = nodes.length; i < len; i++) {
+                    var node = nodes[i];
+                    var shape = node.associatedShape;
+                    //shape.bounds(new Rect(node.x, node.y, node.width, node.height));
+                    this.nodeMap.set(shape.visual.native.id, new Rect(node.x, node.y, node.width, node.height));
+                }
+            }
+            else {
+                var shapes = this.diagram.shapes;
+                for (var i = 0; i < shapes.length; i++) {
+                    var shape = shapes[i];
+                    this.nodeMap.set(shape.visual.native.id, shape.bounds());
+                }
+            }
+        }
+    });
+
+    var Easing = {
+
+        easeInOut: function (pos) {
+            return ((-Math.cos(pos * Math.PI) / 2) + 0.5);
+        }
+    }
+    var PositionAdapter = kendo.Class.extend({
+
+        init: function (layoutState) {
+            this.layoutState = layoutState;
+            this.diagram = layoutState.diagram;
+        },
+        initState: function () {
+            this.froms = [];
+            this.tos = [];
+            this.subjects = [];
+
+            this.layoutState.nodeMap.forEach(
+                function (id, bounds) {
+                    var shape = this.diagram.getId(id);
+                    if (shape) {
+                        this.subjects.push(shape);
+                        this.froms.push(shape.bounds().topLeft())
+                        this.tos.push(bounds.topLeft());
+                    }
+                }
+                , this);
+        },
+        update: function (tick) {
+            if (this.subjects.length <= 0) {
+                return;
+            }
+            for (var i = 0; i < this.subjects.length; i++) {
+                //todo: define a Lerp function instead
+                this.subjects[i].position(
+                    new Point(this.froms[i].x + (this.tos[i].x - this.froms[i].x) * tick, this.froms[i].y + (this.tos[i].y - this.froms[i].y) * tick)
+                );
+            }
+        }
+
+    });
+    /**
+     * An animation ticker driving an adapter which sets a particular
+     * property in function of the tick.
+     * @type {*}
+     */
+    var Ticker = kendo.Class.extend({
+        init: function () {
+            this.adapters = [];
+            this.target = 0;
+            this.tick = 0;
+            this.interval = 20;
+            this.duration = 800;
+            this.lastTime = null;
+            this.handlers = [];
+            var _this = this;
+            this.transition = Easing.easeInOut;
+            this.timerDelegate = function () {
+                _this.onTimerEvent();
+            };
+        },
+        addAdapter: function (a) {
+            this.adapters.push(a);
+        },
+        onComplete: function (handler) {
+            this.handlers.push(handler);
+        },
+        removeHandler: function (handler) {
+            this.handlers = this.handlers.filter(function (h) {
+                return h !== handler;
+            });
+        },
+        trigger: function () {
+            var _this = this;
+            if (this.handlers) {
+                this.handlers.forEach(function (h) {
+                    return h.call(_this.caller != null ? _this.caller : _this);
+                });
+            }
+        },
+        onStep: function () {
+        },
+        seekTo: function (to) {
+            this.seekFromTo(this.tick, to);
+        },
+        seekFromTo: function (from, to) {
+            this.target = Math.max(0, Math.min(1, to));
+            this.tick = Math.max(0, Math.min(1, from));
+            this.lastTime = new Date().getTime();
+            if (!this.intervalId) {
+                this.intervalId = window.setInterval(this.timerDelegate, this.interval);
+            }
+        },
+        stop: function () {
+            if (this.intervalId) {
+                window.clearInterval(this.intervalId);
+                this.intervalId = null;
+
+                //this.trigger.call(this);
+                this.trigger();
+                // this.next();
+            }
+        },
+        play: function (origin) {
+            if (this.adapters.length == 0) {
+                return;
+            }
+            if (origin != null) {
+                this.caller = origin;
+            }
+            this.initState();
+            this.seekFromTo(0, 1);
+        },
+        reverse: function () {
+            this.seekFromTo(1, 0);
+        },
+        initState: function () {
+            if (this.adapters.length == 0) {
+                return;
+            }
+            for (var i = 0; i < this.adapters.length; i++) {
+                this.adapters[i].initState();
+            }
+        },
+        propagate: function () {
+            var value = this.transition(this.tick);
+
+            for (var i = 0; i < this.adapters.length; i++) {
+                this.adapters[i].update(value);
+            }
+        },
+        onTimerEvent: function () {
+            var now = new Date().getTime();
+            var timePassed = now - this.lastTime;
+            this.lastTime = now;
+            var movement = (timePassed / this.duration) * (this.tick < this.target ? 1 : -1);
+            if (Math.abs(movement) >= Math.abs(this.tick - this.target)) {
+                this.tick = this.target;
+            } else {
+                this.tick += movement;
+            }
+
+            try {
+                this.propagate();
+            } finally {
+                this.onStep.call(this);
+                if (this.target == this.tick) {
+                    this.stop();
+                }
+            }
+        }
+    });
+
     deepExtend(diagram, {
         init: function (element) {
             kendo.init(element, kendo.diagram.ui);
@@ -3829,6 +4006,10 @@ kendo_module({
         TreeDirection: TreeDirection,
         LayeredLayout: LayeredLayout,
         LayeredLayoutType: LayeredLayoutType,
-        LayoutBase: LayoutBase
+        LayoutBase: LayoutBase,
+        LayoutState: LayoutState,
+        Ticker: Ticker,
+        PositionAdapter: PositionAdapter
     })
-})(window.kendo.jQuery)
+})
+    (window.kendo.jQuery)
