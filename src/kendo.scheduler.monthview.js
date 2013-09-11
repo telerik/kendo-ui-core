@@ -40,7 +40,7 @@ kendo_module({
                 '{0}' +
                 '<span class="k-event-actions">' +
                     '#if (showDelete) {#' +
-                                            '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
+                        '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
                     '#}#' +
                     '# if(data.head || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-e"></span>' +
@@ -231,7 +231,7 @@ kendo_module({
         },
 
         _editable: function() {
-            if (this.options.editable) {
+            if (this.options.editable && !this._isMobilePhoneView) {
                 if (kendo.support.mobileOS) {
                     this._touchEditable();
                 } else {
@@ -477,8 +477,8 @@ kendo_module({
             var options = this.options;
             var editable = options.editable;
 
-            event.showDelete = editable && editable.destroy !== false;
-            event.resizable = editable && editable.resize !== false;
+            event.showDelete = editable && editable.destroy !== false && !this._isMobilePhoneView;
+            event.resizable = editable && editable.resize !== false && !this._isMobilePhoneView;
             event.ns = kendo.ns;
             event.resources = this.eventResources(event);
             event.inverseColor = event.resources && event.resources[0] ? this._shouldInverseResourceColor(event.resources[0]) : false;
@@ -509,6 +509,54 @@ kendo_module({
 
         _slotIndex: function(date) {
             return this._slotIndices[getDate(date).getTime()];
+        },
+
+        _positionMobileEvent: function(slotRange, element, group) {
+            var startSlot = slotRange.start;
+
+            if (slotRange.start.offsetLeft > slotRange.end.offsetLeft) {
+               startSlot = slotRange.end;
+            }
+
+            var startIndex = slotRange.start.index;
+            var endIndex = startIndex;
+
+            var eventCount = 3;
+            var events = SchedulerView.collidingEvents(slotRange.events(), startIndex, endIndex);
+            var rightOffset = startIndex !== endIndex ? 5 : 4;
+
+            events.push({element: element, start: startIndex, end: endIndex });
+
+            var rows = SchedulerView.createRows(events);
+
+            var slot = slotRange.collection.at(startIndex);
+
+            var container = slot.container;
+
+            if (!container) {
+                 container = $(kendo.format('<div class="k-events-container" style="top:{0};left:{1};width:{2}"/>',
+                    startSlot.offsetTop + startSlot.firstChildHeight - 8 + "px",
+                    startSlot.offsetLeft + "px",
+                    startSlot.offsetWidth + "px"
+                ));
+
+                slot.container = container;
+
+                this.content[0].appendChild(container[0]);
+            }
+
+            if (rows.length <= eventCount) {
+                slotRange.addEvent({element: element, start: startIndex, end: endIndex, groupIndex: startSlot.groupIndex });
+
+                group._continuousEvents.push({
+                    element: element,
+                    uid: element.attr(kendo.attr("uid")),
+                    start: slotRange.start,
+                    end: slotRange.end
+                });
+
+                container[0].appendChild(element[0]);
+            }
         },
 
         _positionEvent: function(slotRange, element, group) {
@@ -727,7 +775,7 @@ kendo_module({
        },
 
         render: function(events) {
-            this.content.children(".k-event,.k-more-events").remove();
+            this.content.children(".k-event,.k-more-events,.k-events-container").remove();
 
             this._groups();
 
@@ -781,7 +829,11 @@ kendo_module({
 
                         var occurrence = event.clone({ start: start, end: end, head: range.head, tail: range.tail });
 
-                        this._positionEvent(range, this._createEventElement(occurrence), group);
+                        if (this._isMobilePhoneView) {
+                            this._positionMobileEvent(range, this._createEventElement(occurrence), group);
+                        } else {
+                            this._positionEvent(range, this._createEventElement(occurrence), group);
+                        }
                     }
                 }
             }
@@ -898,7 +950,7 @@ kendo_module({
 
             SchedulerView.fn.destroy.call(this);
 
-            if (kendo.support.mobileOS) {
+            if (kendo.support.mobileOS && !this._isMobilePhoneView) {
                 this._closeUserEvents.destroy();
 
                 if (this.options.editable.create !== false) {

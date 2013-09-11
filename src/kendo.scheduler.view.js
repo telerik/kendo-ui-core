@@ -903,6 +903,7 @@ kendo_module({
             this.eventCount = eventCount;
             this.isDaySlot = true;
             this.firstChildHeight = this.element.firstChild.offsetHeight + 3;
+            this.firstChildTop = this.element.firstChild.offsetTop;
         },
 
         refresh: function() {
@@ -943,6 +944,7 @@ kendo_module({
 
             this._scrollbar = scrollbar();
             this._isRtl = kendo.support.isRtl(element);
+            this._isMobilePhoneView = kendo.support.mobileOS && !kendo.support.mobileOS.tablet;
             this._resizeHint = $();
             this._moveHint = $();
             this._cellId = kendo.guid();

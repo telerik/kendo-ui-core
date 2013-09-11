@@ -15,6 +15,7 @@
         <script src="../../src/kendo.window.js"></script>
         <script src="../../src/kendo.scheduler.view.js"></script>
         <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.monthview.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -44,8 +45,12 @@
                 }
             });
 
+            function setup(options) {
+                return new Scheduler(container, options);
+            }
+
             test("css class is added to the wrapper", function() {
-                var scheduler = new Scheduler(container);
+                var scheduler = setup();
 
                 ok(scheduler.wrapper.hasClass("k-scheduler-mobile"));
             });
@@ -53,19 +58,19 @@
             test("mobile css class is not added to the wrapper if device is tablet", function() {
                 kendo.support.mobileOS = {tablet:"tablet"};
 
-                var scheduler = new Scheduler(container);
+                var scheduler = setup();
 
                 ok(!scheduler.wrapper.hasClass("k-scheduler-mobile"));
             });
 
             test("additional toolbar item is rendered", function() {
-                var scheduler = new Scheduler(container);
+                var scheduler = setup();
 
                 equal(scheduler.wrapper.find(".k-scheduler-navigation").length, 2);
             });
 
             test("next prev buttons are rendered in the second toolbar item", function() {
-                var scheduler = new Scheduler(container);
+                var scheduler = setup();
 
                 ok(!scheduler.wrapper.find(".k-scheduler-navigation:first:has(.k-nav-next)").length);
                 ok(scheduler.wrapper.find(".k-scheduler-navigation:last:has(.k-nav-next)").length);
@@ -75,7 +80,7 @@
             });
 
             test("clicking on the current time does not open calendar", function() {
-                var scheduler = new Scheduler(container);
+                var scheduler = setup();
 
                 scheduler.toolbar.find(".k-nav-current").click();
 
@@ -85,12 +90,30 @@
             test("clicking on the current time opens a calendar when viewed on a tablet", function() {
                 kendo.support.mobileOS = {tablet:"tablet"};
 
-                var scheduler = new Scheduler(container);
+                var scheduler = setup();
 
                 scheduler.toolbar.find(".k-nav-current").click();
 
                 ok(scheduler.calendar);
                 equal(getDate(scheduler.calendar.value()).getTime(), scheduler.date().getTime());
+            });
+
+            test("delete button is not shown in the month view", function() {
+                var scheduler = setup({
+                    views: ["month"],
+                    dataSource: [ { start: new Date(), end: new Date(), isAllDay: true, title:"" }]
+                });
+
+                ok(!scheduler.element.find(".k-event").first().has(".k-event-delete").length);
+            });
+
+            test("resize handles are not shown in the month view", function() {
+                var scheduler = setup({
+                    views: ["month"],
+                    dataSource: [ { start: new Date(), end: new Date(), isAllDay: true, title:"" }]
+                });
+
+                ok(!scheduler.element.find(".k-event").first().has(".k-resize-handle").length);
             });
 
         </script>
