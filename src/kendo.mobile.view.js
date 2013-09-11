@@ -580,7 +580,7 @@ kendo_module({
             var element,
                 urlPath = url.split("?")[0];
 
-            if (!url || url === "/") {
+            if (!urlPath || urlPath === "/") {
                 return this.rootView;
             }
 
