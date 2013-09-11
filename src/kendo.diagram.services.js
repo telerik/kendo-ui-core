@@ -566,7 +566,6 @@ kendo_module({
             meta = deepExtend({}, meta);
             this._updateHoveredItem(p);
             this._finishEditShape();
-            this.diagram.focus();
             this._activateTool(meta);
             this.activeTool.start(p, meta);
             this._updateCursor(p);
@@ -594,7 +593,6 @@ kendo_module({
             return true;
         },
         doubleClick: function (p, meta) {
-            this.diagram.focus();
             this._activateTool(deepExtend(meta, { doubleClick: true }));
             this.activeTool.doubleClick(p, meta);
             this._updateCursor(p);

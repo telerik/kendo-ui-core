@@ -602,6 +602,8 @@ kendo_module({
     var Group = Element.extend({
         init: function (options) {
             Element.fn.init.call(this, document.createElementNS(SVGNS, "g"), options);
+            this.width = this.options.width;
+            this.height = this.options.height;
         },
         options: {
             autoSize: false
@@ -628,17 +630,17 @@ kendo_module({
             }
         },
         size: function () {
-            if (!this.oWidth || !this.oHeight) {
+            if (!this.width || !this.height) {
                 try {
                     var box = this.native.getBoundingClientRect();
-                    this.oWidth = box.width;
-                    this.oHeight = box.height;
+                    this.width = box.width;
+                    this.height = box.height;
                 }
                 catch (e) {
                 }
             }
-            var scaleX = this.options.width / this.oWidth,
-                scaleY = this.options.height / this.oHeight,
+            var scaleX = this.options.width / this.width,
+                scaleY = this.options.height / this.height,
                 x = this.options.x || 0,
                 y = this.options.y || 0;
 
@@ -709,7 +711,6 @@ kendo_module({
             this.native.setAttribute('xmlns', SVGNS);
             this.native.setAttribute('xmlns:xlink', SVGXLINK);
             this.element.setAttribute("tabindex", "0"); //ensure tabindex so the the canvas receives key events
-            this.focus();
 
             this.addMarker(new Marker({
                 path: {

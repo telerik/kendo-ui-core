@@ -342,7 +342,7 @@ kendo_module({
             if (!Utils.isFunction(shapeOptions.data)) {
                 throw "The custom template should be a function returning a visual";
             }
-            return shapeOptions.data();
+            return shapeOptions.data(shapeOptions.context);
         }
     };
 

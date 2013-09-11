@@ -10,272 +10,215 @@
             font: 10pt/1 "Hoefler Text", "Georgia", Georgia, serif, sans-serif;
         }
 
-        h1 a:visited {
-            text-decoration: none;
-            color: #404040;
-            font-weight: 600;
-        }
-
-        h1 {
-            font-weight: 400;
-            font-size: 1.6em;
-            line-height: 0.9em;
-            padding: 0px 0 0;
-            margin: 1em 0em .25em 0em;
-        }
-
-        h1 a {
-            font-weight: 100;
-            letter-spacing: -0.05em;
-            position: relative;
-        }
-
-        h2 {
-            font-weight: bold;
-            font-size: 1.2em;
-            letter-spacing: -0.05em;
-            position: relative;
-            color: #888;
-            margin: 0;
-        }
-
-        h2 a {
-            text-decoration: none;
-            color: #404040;
-            font-weight: 600;
-        }
-
-        h2 a:hover {
-            color: #C71585;
-            font-weight: 600;
-        }
-
         #Stage {
             background: #21242c url('images/qfp-bgr.png') no-repeat -400px 0px;
             color: #000;
             height: 100%;
         }
 
-        #TwoPaneBackground {
-            background-color: white;
-            width: 98%;
-            height: 80%;
-            position: absolute;
-        }
-
-        #LeftMenu {
-            background: url('images/leftmenu.png') center 0px no-repeat #21242c;
-            width: 30%;
-            height: 100%;
-            margin: 0;
-            float: left;
-        }
-
-        #DiagramBackground {
-            background: url("images/marketing-bg.jpg") 0 0 no-repeat;
-            background-color: white;
-            overflow: auto;
-            width: 70%;
-            height: 100%;
-            float: left;
-        }
-
         #Logo {
-            background: url("images/telerik-logo.png") 0 0 no-repeat;
-            width: 150px;
-            height: 55px;
-            margin: 10px;
+            margin: 0px 10px;
         }
 
         #Title {
             color: #FFF;
-            font: 10pt/1 "Hoefler Text", "Georgia", Georgia, serif, sans-serif;
             font-size: 25pt;
-            margin: 10px;
         }
 
-        #Menu {
-            text-align: center;
-            margin-top: 25px;
-        }
-
-        #canvas {
+        #splitter {
             height: 100%;
         }
 
-        rect {
-            stroke: #8ba0bc;
-            border-radius: 5px;
+        #canvas {
+            background: url("images/marketing-bg.jpg") 0 0 no-repeat;
+            background-color: white;
+            height: 100%;
         }
+
     </style>
+    <link href="../../../styles/web/kendo.default.css" rel="stylesheet"/>
+    <link href="../../../styles/web/kendo.common.css" rel="stylesheet"/>
+
+    <script src="../../../src/jquery.js"></script>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.data.js"></script>
+    <script src="../../../src/kendo.data.xml.js"></script>
+    <script src="../../../src/kendo.popup.js"></script>
+    <script src="../../../src/kendo.list.js"></script>
+    <script src="../../../src/kendo.dropdownlist.js"></script>
+    <script src="../../../src/kendo.dataviz.core.js"></script>
+    <script src="../../../src/kendo.userevents.js"></script>
+    <script src="../../../src/kendo.draganddrop.js"></script>
+    <script src="../../../src/kendo.slider.js"></script>
+    <script src="../../../src/kendo.resizable.js"></script>
+    <script src="../../../src/kendo.splitter.js"></script>
+    <script src="../../../src/kendo.listview.js"></script>
+    <script src="../../../src/kendo.treeview.js"></script>
+
+    <script src="../../../src/kendo.diagram.utils.js"></script>
+    <script src="../../../src/kendo.diagram.math.js"></script>
+    <script src="../../../src/kendo.diagram.layout.js"></script>
+    <script src="../../../src/kendo.diagram.svg.js"></script>
+    <script src="../../../src/kendo.diagram.services.js"></script>
+    <script src="../../../src/kendo.diagram.extensions.js"></script>
+    <script src="../../../src/kendo.diagram.dom.js"></script>
 </head>
 <body>
 
-<script src="http://cdn.kendostatic.com/2013.2.716/js/jquery.min.js"></script>
-
-<script src="../../../src/kendo.core.js"></script>
-<script src="../../../src/kendo.dataviz.core.js"></script>
-
-<script src="../../../src/kendo.diagram.utils.js" type="text/javascript"></script>
-<script src="../../../src/kendo.diagram.math.js" type="text/javascript"></script>
-<script src="../../../src/kendo.diagram.svg.js" type="text/javascript"></script>
-<script src="../../../src/kendo.diagram.services.js" type="text/javascript"></script>
-<script src="../../../src/kendo.diagram.extensions.js" type="text/javascript"></script>
-<script src="../../../src/kendo.diagram.dom.js" type="text/javascript"></script>
-<script src="../../../src/kendo.diagram.layout.js" type="text/javascript"></script>
-
 <script type="text/javascript">
 
-    var diagram, animId, useRandomSizes = false,
-        Predefined = kendo.diagram.Graph.Predefined,
-        GraphUtils = kendo.diagram.Graph.Utils,
-        isDefined = kendo.diagram.Utils.isDefined,
-        isUndefined = kendo.diagram.Utils.isUndefined;
+    var diagram;
 
-    function clearDiagram() {
-        diagram.clear();
-    }
-    function changeLayout() {
-        randomOrgChart();
-    }
     function defineActions() {
-        $("#ChangeLayoutButton").bind("click", changeLayout);
+        $("#layoutButton").bind("click", layout);
+    }
+
+    function layout() {
+        diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                {
+                    TreeLayoutType: eval($("#Layouts").val())
+                });
     }
 
     function init() {
         var diagramElement = $("#canvas").kendoDiagram();
         diagram = diagramElement.data("kendoDiagram");
         diagramElement.css("background-color", "none");
-    }
 
-    function randomOrgChart() {
-        clearDiagram();
-        var graph = kendo.diagram.Graph.Utils.createRandomConnectedGraph(10, 3, true);
-
-        var map = [];
-        var people = [
-            {
-                name: "Kate",
-                image: "images/LONEP.jpg"
-            },
-            {
-                name: "Peter",
-                image: "images/SAVEA.jpg"
-            },
-            {
-                name: "Arnold",
-                image: "images/LACOR.jpg"
-            },
-            {
-                name: "Mike",
-                image: "images/VAFFE.jpg"
-            },
-            {
-                name: "David",
-                image: "images/CENTC.jpg"
-            },
-            {
-                name: "Tim",
-                image: "images/GREAL.jpg"
-            },
-            {
-                name: "Nora",
-                image: "images/TRADH.jpg"
-            }
+        var layouts = [
+            {value: "kendo.diagram.TreeLayoutType.TreeDown", text: "TreeDown"},
+            {value: "kendo.diagram.TreeLayoutType.TreeUp", text: "TreeUp"},
+            {value: "kendo.diagram.TreeLayoutType.TreeLeft", text: "TreeLeft"},
+            {value: "kendo.diagram.TreeLayoutType.TreeRight", text: "TreeRight"},
+            {value: "kendo.diagram.TreeLayoutType.RadialTree", text: "RadialTree"},
+            {value: "kendo.diagram.TreeLayoutType.TipOverTree", text: "TipOverTree"},
+            {value: "kendo.diagram.TreeLayoutType.MindmapVertical", text: "MindmapVertical"},
+            {value: "kendo.diagram.TreeLayoutType.MindmapHorizontal", text: "MindmapHorizontal"}
         ];
 
-        function getVisual() {
-            var person = people[parseInt(Math.floor(Math.random()*people.length))];
+        $("#Layouts").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: layouts,
+            change: function () {
+                layout();
+            }
+        });
+
+        $("#splitter").kendoSplitter({
+            panes: [
+                { collapsible: false },
+                { collapsible: false, size: "25%" }
+            ]
+        });
+    }
+
+    function loadOrgChart() {
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: "org.json",
+                dataType: "json"
+            },
+            schema: {
+                model: {
+                    children: "children"
+                }
+            }
+        });
+
+        dataSource.fetch(function () {
+            var org = this.data();
+            layer(null, org);
+            layout();
+        });
+
+        function layer(parent, children) {
+            for (var i = 0; i < children.length; i++) {
+                var node = children[i];
+                var opt = {
+                    data: getVisual,
+                    context: node,
+                    width: 150,
+                    height: 60
+                };
+                var shape = new kendo.diagram.Shape(opt);
+                diagram.addShape(shape);
+                if (node.children) {
+                    layer(shape, node.children);
+                }
+                if (parent) {
+                    diagram.connect(parent, shape);
+                }
+            }
+        }
+
+        function getVisual(data) {
             var g = new kendo.diagram.Group({
-                autoSize: true,
-                width: 200,
-                height: 80
+                autoSize: true
             });
             var r = new kendo.diagram.Rectangle({
-                width: 200,
-                height: 80,
-                background: "#bdcbde",
-                cornerRadius: 6
+                width: 150,
+                height: 60,
+                background: "#bdcbde"
             });
             g.append(r);
             var im = new kendo.diagram.Image({
-                source: person.image,
-                height: "50",
-                width: "50",
+                source: data.image,
+                height: 40,
+                width: 40,
                 x: 10,
                 y: 10
             });
             g.append(im);
-            var tb = new kendo.diagram.TextBlock({
-                text: person.name,
+            var fn = new kendo.diagram.TextBlock({
+                text: data.name,
                 fontSize: 16,
-                x: 80,
+                x: 50,
                 y: 20
             });
-            g.append(tb);
+            var ln = new kendo.diagram.TextBlock({
+                text: data.lastName,
+                fontSize: 16,
+                x: 50,
+                y: 40
+            });
+            g.append(fn);
+            g.append(ln);
             return g;
         }
 
-        for (var i = 0, len = graph.nodes.length; i < len; i++) {
-            var node = graph.nodes[i];
-
-            var opt = {
-                data: getVisual,
-                width: 200,
-                height: 80
-            };
-            var shape = new kendo.diagram.Shape(opt);
-            diagram.addShape(shape);
-
-            var bounds = shape.bounds();
-            if (isDefined(bounds)) {
-                node.x = bounds.x;
-                node.y = bounds.y;
-                node.width = bounds.width;
-                node.height = bounds.height;
-            }
-            map[node.id] = shape;
-        }
-        for (var i = 0, len = graph.links.length; i < len; i++) {
-            var link = graph.links[i];
-            var sourceShape = map[link.source.id];
-            if (isUndefined(sourceShape)) {
-                continue;
-            }
-            var targetShape = map[link.target.id];
-            if (isUndefined(targetShape)) {
-                continue;
-            }
-            diagram.connect(sourceShape, targetShape);
-
-        }
-        diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
-                {
-                    TreeLayoutType: kendo.diagram.LayeredLayoutType.Down
+        $("#treeview").kendoTreeView({
+            dataSource: dataSource,
+            template: "#= item.name # #= item.lastName #",
+            loadOnDemand: false,
+            select: function(e){
+                diagram.select(false);
+                var data = $('#treeview').data('kendoTreeView').dataItem(e.node);
+                for(var i = 0; i< diagram.shapes.length; i++){
+                    var sh = diagram.shapes[i];
+                    if(sh.options.context.name == data.name){ // lame
+                        sh.select(true);
+                    }
                 }
-        )
-
-        diagram.zoom(0.7);
+            }
+        });
     }
-    $(document).ready(function () {
+    $(function () {
         init();
         defineActions();
-        randomOrgChart();
-        $("#ChangeLayoutButton").focus();
+        loadOrgChart();
     })
 </script>
 <div id="Stage">
-    <div id="Logo"></div>
-    <div id="Title">Kendo diagrams</div>
-    <div id="TwoPaneBackground">
-        <div id="LeftMenu">
-            <div id="Menu">
-                <input type="BUTTON" value="Change" id="ChangeLayoutButton"/>
-            </div>
-        </div>
-        <div id="DiagramBackground">
-            <div id="canvas"></div>
-        </div>
+    <div id="toolbarDiv">
+        <img id="Logo" src="images/telerik-logo.png"/>
+        <span id="Title">Kendo diagrams</span>
+        <input id="Layouts" value="1"/>
+        <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
+    </div>
+    <div id="splitter">
+        <div id="canvas"></div>
+        <div id="treeview"></div>
     </div>
 </div>
 </body>

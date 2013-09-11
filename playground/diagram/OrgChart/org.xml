@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <element>
+        <address>London, 120 Hanover Sq.</address>
+        <branch>TopManagement</branch>
+        <children>
+            <element>
+                <address>London, 120 Hanover Sq.</address>
+                <branch>QA</branch>
+                <children>
+                    <address>London, 120 Hanover Sq.</address>
+                    <branch>QA</branch>
+                    <children>
+                        <element>
+                            <address>London, 120 Hanover Sq.</address>
+                            <branch>QA</branch>
+                            <children>
+                                <address>London, 120 Hanover Sq.</address>
+                                <branch>QA</branch>
+                                <email>bsmith@contoso.com</email>
+                                <image>images/LONEP.jpg</image>
+                                <lastName>Smith</lastName>
+                                <name>Brenda</name>
+                                <phone>(205) 555 - 9885</phone>
+                                <position>Senior QA</position>
+                            </children>
+                            <email>atuckings@contoso.com</email>
+                            <hasChildren>true</hasChildren>
+                            <image>images/LONEP.jpg</image>
+                            <lastName>Tuckings</lastName>
+                            <name>Alexander</name>
+                            <phone>(205) 555 - 9886</phone>
+                            <position>Team Lead Team1</position>
+                        </element>
+                        <element>
+                            <address>London, 120 Hanover Sq.</address>
+                            <branch>QA</branch>
+                            <email>mbird@contoso.com</email>
+                            <image>images/LONEP.jpg</image>
+                            <lastName>Bird</lastName>
+                            <name>Mary</name>
+                            <phone>(205) 555 - 9885</phone>
+                            <position>Team Lead Team2</position>
+                        </element>
+                    </children>
+                    <email>adodsworth@contoso.com</email>
+                    <hasChildren>true</hasChildren>
+                    <image>images/LONEP.jpg</image>
+                    <lastName>Dodsworth</lastName>
+                    <name>Anne</name>
+                    <phone>(205) 555 - 9887</phone>
+                    <position>VP QA</position>
+                </children>
+                <email>jboather@contoso.com</email>
+                <image>images/LONEP.jpg</image>
+                <lastName>Boather</lastName>
+                <name>Jeremy</name>
+                <phone>(205) 555 - 9888</phone>
+                <position>President QA</position>
+            </element>
+            <element>
+                <address>London, 120 Hanover Sq.</address>
+                <branch>Development</branch>
+                <children>
+                    <element>
+                        <address>London, 120 Hanover Sq.</address>
+                        <branch>Development</branch>
+                        <children>
+                            <element>
+                                <address>London, 120 Hanover Sq.</address>
+                                <branch>Development</branch>
+                                <children>
+                                    <address>London, 120 Hanover Sq.</address>
+                                    <branch>Development</branch>
+                                    <email>jroland@contoso.com</email>
+                                    <image>images/LONEP.jpg</image>
+                                    <lastName>Roland</lastName>
+                                    <name>Jason</name>
+                                    <phone>(205) 555 - 9872</phone>
+                                    <position>Senior Dev</position>
+                                </children>
+                                <email>lcallahan@contoso.com</email>
+                                <image>images/LONEP.jpg</image>
+                                <lastName>Callahan</lastName>
+                                <name>Laura</name>
+                                <phone>(205) 555 - 9892</phone>
+                                <position>Team Lead Team1</position>
+                            </element>
+                            <element>
+                                <address>London, 120 Hanover Sq.</address>
+                                <branch>Development</branch>
+                                <children>
+                                    <element>
+                                        <address>London, 120 Hanover Sq.</address>
+                                        <branch>Development</branch>
+                                        <email>elincoln@contoso.com</email>
+                                        <image>images/LONEP.jpg</image>
+                                        <lastName>Lincoln</lastName>
+                                        <name>Elizabeth</name>
+                                        <phone>(205) 555 - 9862</phone>
+                                        <position>Senior Dev</position>
+                                    </element>
+                                    <element>
+                                        <address>London, 120 Hanover Sq.</address>
+                                        <branch>Development</branch>
+                                        <email>mpeacock@contoso.com</email>
+                                        <image>images/LONEP.jpg</image>
+                                        <lastName>Peacock</lastName>
+                                        <name>Margaret</name>
+                                        <phone>(205) 555 - 9852</phone>
+                                        <position>Senior Dev</position>
+                                    </element>
+                                </children>
+                                <email>edanstin@contoso.com</email>
+                                <image>images/LONEP.jpg</image>
+                                <lastName>Danstin</lastName>
+                                <name>Eric</name>
+                                <phone>(205) 555 - 9882</phone>
+                                <position>Team Lead Team2</position>
+                            </element>
+                        </children>
+                        <email>rking@contoso.com</email>
+                        <image>images/LONEP.jpg</image>
+                        <lastName>King</lastName>
+                        <name>Robert</name>
+                        <phone>(205) 555 - 9896</phone>
+                        <position>VP Dev Dept.</position>
+                    </element>
+                </children>
+                <email>sbuchanan@contoso.com</email>
+                <image>images/LONEP.jpg</image>
+                <lastName>Buchanan</lastName>
+                <name>Steven</name>
+                <phone>(205) 555 - 9897</phone>
+                <position>President Dev Dept.</position>
+            </element>
+        </children>
+        <email>afuller@contoso.com</email>
+        <image>images/LONEP.jpg</image>
+        <lastName>Fuller</lastName>
+        <name>Andrew</name>
+        <phone>(205) 555 - 9898</phone>
+        <position>CEO</position>
+    </element>
+    <element>
+        <address>Berlin, Obere Str. 57</address>
+        <branch>TopManagement</branch>
+        <children>
+            <element>
+                <address>Berlin, Obere Str. 57</address>
+                <branch>Sales</branch>
+                <children>
+                    <element>
+                        <address>Berlin, Obere Str. 57</address>
+                        <branch>Sales</branch>
+                        <children>
+                            <element>
+                                <address>Berlin, Obere Str. 57</address>
+                                <branch>Sales</branch>
+                                <email>jlevering@contoso.com</email>
+                                <image>images/LONEP.jpg</image>
+                                <lastName>Levering</lastName>
+                                <name>Janet</name>
+                                <phone>(345) 678 - 6666</phone>
+                                <position>Team Lead Team1</position>
+                            </element>
+                            <element>
+                                <address>Berlin, Obere Str. 57</address>
+                                <branch>Sales</branch>
+                                <email>thardy@contoso.com</email>
+                                <image>images/LONEP.jpg</image>
+                                <lastName>Hardy</lastName>
+                                <name>Thomas</name>
+                                <phone>(345) 678 - 5555</phone>
+                                <position>Team Lead Team2</position>
+                            </element>
+                        </children>
+                        <email>msuyama@contoso.com</email>
+                        <image>images/LONEP.jpg</image>
+                        <lastName>Suyama</lastName>
+                        <name>Michael</name>
+                        <phone>(345) 678 - 7777</phone>
+                        <position>VP Sales</position>
+                    </element>
+                </children>
+                <email>ndavolio@contoso.com</email>
+                <image>images/LONEP.jpg</image>
+                <lastName>Davolio</lastName>
+                <name>Nancy</name>
+                <phone>(345) 678 - 8888</phone>
+                <position>President Sales</position>
+            </element>
+        </children>
+        <email>msommer@contoso.com</email>
+        <image>images/LONEP.jpg</image>
+        <lastName>Sommer</lastName>
+        <name>Martin</name>
+        <phone>(345) 678 - 9999</phone>
+        <position>CEO</position>
+    </element>
+</root>
