@@ -27,6 +27,8 @@ var tests = [
     "barcode/lint.html",
     "breadcrumbs/breadcrumbs.html",
     "breadcrumbs/lint.html",
+    "button/initialization.html",
+    "button/events.html",
     "calendar/initialization.html",
     "calendar/rendering.html",
     "calendar/api.html",

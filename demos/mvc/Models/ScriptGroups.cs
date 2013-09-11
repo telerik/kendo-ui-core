@@ -31,6 +31,7 @@ namespace Kendo.Models
             "kendo.tooltip.js",
             "kendo.list.js",
             "kendo.autocomplete.js",
+            "kendo.button.js",
             "kendo.calendar.js",
             "kendo.colorpicker.js",
             "kendo.dataviz.core.js",

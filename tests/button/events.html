@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Button Initialization</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.button.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Button Initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var button,
+                buttonContainer;
+
+            function getButton() {
+                button = $("<button type='button'>foo</button>").appendTo(document.body);
+                return button;
+            }
+
+            function getTemplateButton() {
+                button = $("<button type='button'><span>foo</span><em>bar</em></button>").appendTo(document.body);
+                return button;
+            }
+
+            function getButtonContainer() {
+                buttonContainer = $("<div class='buttonContainer'><button type='button' id='fooButton'>foo</button><button type='button'>bar</button></div>").appendTo(document.body);
+                return buttonContainer;
+            }
+
+            module("initialization", {
+                teardown: function() {
+                    if (button && button.data("kendoButton")) {
+                        button.data("kendoButton").destroy();
+                        button.remove();
+                        button = null;
+                    }
+                    if (buttonContainer && buttonContainer.length) {
+                        kendo.destroy(buttonContainer);
+                        buttonContainer.remove();
+                        buttonContainer = null;
+                    }
+                }
+            });
+
+            test("click event is fired for a single button instance", function() {
+                var fired = false,
+                    eventTarget = [];
+
+                function clickHandler(e) {
+                    fired = true;
+                    eventTarget = e.target || eventTarget;
+                }
+
+                getButton().kendoButton({
+                    click: clickHandler
+                });
+
+                button.click();
+
+                ok(fired);
+                equal(eventTarget[0], button[0]);
+            });
+
+            test("click event is fired for a single template button instance", function() {
+                var fired = false,
+                    eventTarget = [];
+
+                function clickHandler(e) {
+                    fired = true;
+                    eventTarget = e.target || eventTarget;
+                }
+
+                getTemplateButton().kendoButton({
+                    click: clickHandler
+                });
+
+                button.find("em").click();
+
+                ok(fired);
+                equal(eventTarget[0], button[0]);
+            });
+
+            test("click event is fired for a nested button element", function() {
+                var fired = false,
+                    eventTarget = [],
+                    buttonElement;
+
+                function clickHandler(e) {
+                    fired = true;
+                    eventTarget = e.target || eventTarget;
+                }
+
+                getButtonContainer().kendoButton({
+                    filter: "button",
+                    click: clickHandler
+                });
+
+                buttonElement = $("#fooButton").click();
+
+                ok(fired);
+                equal(eventTarget[0], buttonElement[0]);
+            });
+
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

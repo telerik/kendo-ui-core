@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Button Initialization</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.button.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Button Initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var button,
+                buttonContainer;
+
+            function getButton() {
+                button = $("<button type='button'>foo</button>").appendTo(document.body);
+                return button;
+            }
+
+            function getButtonContainer() {
+                buttonContainer = $("<div class='buttonContainer'><button type='button'>foo</button><button type='button'>bar</button></div>").appendTo(document.body);
+                return buttonContainer;
+            }
+
+            module("initialization", {
+                teardown: function() {
+                    if (button && button.data("kendoButton")) {
+                        button.data("kendoButton").destroy();
+                        button.remove();
+                        button = null;
+                    }
+                    if (buttonContainer && buttonContainer.length) {
+                        kendo.destroy(buttonContainer);
+                        buttonContainer.remove();
+                        buttonContainer = null;
+                    }
+                }
+            });
+
+            test("initialization adds a k-button class to element", function() {
+                getButton().kendoButton();
+
+                ok(button.data("kendoButton").element.hasClass("k-button"));
+            });
+
+            test("initialization adds a k-button class to buttons when filter option is used", function() {
+                getButtonContainer().kendoButton({
+                    filter: "button"
+                });
+
+                equal(buttonContainer.find(".k-button").length, 2);
+            });
+
+            test("spriteCssClass prepends a span element with corresponding class(es) to element", function() {
+                getButton().kendoButton({
+                    spriteCssClass: "foo bar"
+                });
+
+                var icon = button.data("kendoButton").element.children("span.k-sprite");
+
+                equal(icon.length, 1);
+                ok(icon.hasClass("foo"));
+                ok(icon.hasClass("bar"));
+            });
+
+            test("spriteCssClass prepends a span element with corresponding class(es) to buttons when filter option is used", function() {
+                getButtonContainer().kendoButton({
+                    filter: "button",
+                    spriteCssClass: "foo bar"
+                });
+
+                var icons = buttonContainer.find("button > span.k-sprite");
+
+                equal(icons.length, 2);
+                ok(icons.eq(0).hasClass("foo"));
+                ok(icons.eq(1).hasClass("bar"));
+            });
+
+            test("imageUrl prepends an img element with corresponding src to element", function() {
+                getButton().kendoButton({
+                    imageUrl: "foo"
+                });
+
+                var image = button.data("kendoButton").element.children("img.k-image");
+
+                equal(image.length, 1);
+                equal(image.attr("src"), "foo");
+            });
+
+            test("imageUrl prepends an img element with corresponding src to buttons when filter option is used", function() {
+                getButtonContainer().kendoButton({
+                    filter: "button",
+                    imageUrl: "foo"
+                });
+
+                var images = buttonContainer.find("button > img.k-image");
+
+                equal(images.length, 2);
+                equal(images.eq(0).attr("src"), "foo");
+                equal(images.eq(1).attr("src"), "foo");
+            });
+
+            test("default button does not have a k-state-disabled class", function() {
+                getButton().kendoButton();
+
+                ok(!button.data("kendoButton").element.hasClass("k-state-disabled"));
+            });
+
+            test("enabled:false adds a k-state-disabled class to element", function() {
+                getButton().kendoButton({
+                    enabled: false
+                });
+
+                ok(button.data("kendoButton").element.hasClass("k-state-disabled"));
+            });
+
+            test("enabled:false adds a k-state-disabled class to buttons when filter option is used", function() {
+                getButtonContainer().kendoButton({
+                    filter: "button",
+                    enabled: false
+                });
+
+                equal(buttonContainer.find(".k-button.k-state-disabled").length, 2);
+            });
+
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
