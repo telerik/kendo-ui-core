@@ -630,7 +630,7 @@ kendo_module({
             idx = 0;
 
         if (currentDay < weekStart) {
-            currentDay += weekStart;
+            currentDay += 7;
         }
 
         for (;idx < length; idx++) {
@@ -639,7 +639,7 @@ kendo_module({
             day = weekDay.day;
 
             if (day < weekStart) {
-                day += weekStart;
+                day += 7;
             }
 
             weekNumber = weekInMonth(date, weekStart);

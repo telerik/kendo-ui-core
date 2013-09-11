@@ -10,6 +10,7 @@
         <script src="../../src/kendo.timezones.js"></script>
         <script src="../../src/kendo.scheduler.recurrence.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
+        <script src="../../src/cultures/kendo.culture.nb-NO.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
@@ -1053,6 +1054,24 @@
 
                 equal(events[3].start.getTime(), +new Date(2000, 10, 20, 16, 30));
                 equal(events[3].end.getTime(), +new Date(2000, 10, 20, 17, 0));
+            });
+
+            test("WEEKLY freq with WKST=1 returns empty array if BYDAY is not satisfied ", function() {
+                kendo.culture("nb-NO");
+
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 05, 16, 8, 30),
+                    end: new Date(2013, 05, 16, 9, 0),
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;WKST=1"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(2013, 05, 16), new Date(2013, 05, 16, 23, 59, 59));
+
+                equal(events.length, 0);
+
+                kendo.culture("en-US");
             });
 
             test("WEEKLY occurrences method honours INTERVAL", function() {
