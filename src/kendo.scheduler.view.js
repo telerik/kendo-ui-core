@@ -1474,8 +1474,8 @@ kendo_module({
                 headerHeight = 0,
                 paddingDirection = this._isRtl ? "left" : "right";
 
-            if (toolbar.length) {
-                height -= toolbar.outerHeight();
+            for (var idx = 0; idx < toolbar.length; idx++) {
+                height -= toolbar.eq(idx).outerHeight();
             }
 
             if (that.datesHeader) {

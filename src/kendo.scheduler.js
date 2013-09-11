@@ -80,7 +80,7 @@ kendo_module({
             '</ul>' +
             '</div>'+
             '<div class="k-floatwrap k-header k-scheduler-toolbar k-secondary">' +
-                '<ul class="k-reset k-header k-toolbar k-scheduler-navigation k-secondary">' +
+                '<ul class="k-reset k-header k-toolbar k-scheduler-navigation">' +
                    '<li class="k-state-default k-nav-prev"><a role="button" href="\\#" class="k-link"><span class="k-icon k-i-arrow-w"></span></a></li>' +
                    '<li class="k-state-default k-nav-current"><span data-#=ns#bind="text: formattedDate"></span></li>' +
                    '<li class="k-state-default k-nav-next"><a role="button" href="\\#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a></li>' +
@@ -2336,7 +2336,7 @@ kendo_module({
                 } else if (li.hasClass("k-nav-prev")) {
                     action = "previous";
                     date = that.view().previousDate();
-                } else if (li.hasClass("k-nav-current")) {
+                } else if (li.hasClass("k-nav-current") && !that._isMobilePhoneView) {
                     that._showCalendar();
                     return; // TODO: Not good - refactor
                 }

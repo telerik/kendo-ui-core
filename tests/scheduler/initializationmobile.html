@@ -58,6 +58,41 @@
                 ok(!scheduler.wrapper.hasClass("k-scheduler-mobile"));
             });
 
+            test("additional toolbar item is rendered", function() {
+                var scheduler = new Scheduler(container);
+
+                equal(scheduler.wrapper.find(".k-scheduler-navigation").length, 2);
+            });
+
+            test("next prev buttons are rendered in the second toolbar item", function() {
+                var scheduler = new Scheduler(container);
+
+                ok(!scheduler.wrapper.find(".k-scheduler-navigation:first:has(.k-nav-next)").length);
+                ok(scheduler.wrapper.find(".k-scheduler-navigation:last:has(.k-nav-next)").length);
+
+                ok(!scheduler.wrapper.find(".k-scheduler-navigation:first:has(.k-nav-prev)").length);
+                ok(scheduler.wrapper.find(".k-scheduler-navigation:last:has(.k-nav-prev)").length);
+            });
+
+            test("clicking on the current time does not open calendar", function() {
+                var scheduler = new Scheduler(container);
+
+                scheduler.toolbar.find(".k-nav-current").click();
+
+                ok(!scheduler.calendar);
+            });
+
+            test("clicking on the current time opens a calendar when viewed on a tablet", function() {
+                kendo.support.mobileOS = {tablet:"tablet"};
+
+                var scheduler = new Scheduler(container);
+
+                scheduler.toolbar.find(".k-nav-current").click();
+
+                ok(scheduler.calendar);
+                equal(getDate(scheduler.calendar.value()).getTime(), scheduler.date().getTime());
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
