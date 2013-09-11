@@ -184,5 +184,19 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Configures the navigator category axis
+        /// </summary>
+        /// <param name="configurator">The configurator</param>
+        public ChartNavigatorBuilder<T> CategoryAxis(Action<ChartCategoryAxisBuilder<T>> configurator)
+        {
+            var categoryAxis = new ChartCategoryAxis<T>(navigator.Chart);
+
+            configurator(new ChartCategoryAxisBuilder<T>(navigator.Chart, categoryAxis));
+            navigator.CategoryAxis = categoryAxis;
+
+            return this;
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartNavigator{T}" /> class.
         /// </summary>
-        public ChartNavigator(ViewContext viewContext, IUrlGenerator urlGenerator)
+        public ChartNavigator(Chart<T> chart, ViewContext viewContext, IUrlGenerator urlGenerator)
         {
             Series = new List<IChartSeries>();
             Select = new ChartDateSelection();
@@ -20,6 +20,17 @@ namespace Kendo.Mvc.UI
             DataSource.Schema.Total = "";
             DataSource.Schema.Errors = "";
             DataSource.ModelType(typeof(T));
+
+            Chart = chart;
+        }
+
+        /// <summary>
+        /// The parent widget
+        /// </summary>
+        public Chart<T> Chart
+        {
+            get;
+            private set;
         }
 
         /// <summary>
@@ -104,6 +115,15 @@ namespace Kendo.Mvc.UI
         /// The date field.
         /// </value>
         public string DateField
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Configuration for the navigator category axes
+        /// </summary>
+        public IChartCategoryAxis CategoryAxis
         {
             get;
             set;

@@ -13,7 +13,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             var urlGeneratorMock = new Mock<IUrlGenerator>();
             var viewContext = TestHelper.CreateViewContext();
-            navigator = new ChartNavigator<OHLCData>(viewContext, urlGeneratorMock.Object);
+            navigator = new ChartNavigator<OHLCData>(null, viewContext, urlGeneratorMock.Object);
             serializer = new ChartNavigatorSerializer<OHLCData>(navigator);
         }
 
@@ -100,6 +100,20 @@ namespace Kendo.Mvc.UI.Tests
         public void Should_not_serialize_Visible_if_not_set()
         {
             serializer.Serialize().ContainsKey("visible").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_serialize_CategoryAxis()
+        {
+            navigator.CategoryAxis = new ChartCategoryAxis<OHLCData>(null);
+            navigator.CategoryAxis.Categories = new string[] { "Foo" };
+            serializer.Serialize().Keys.ShouldContain("categoryAxis");
+        }
+
+        [Fact]
+        public void Should_not_serialize_CategoryAxis_if_not_set()
+        {
+            serializer.Serialize().ContainsKey("categoryAxis").ShouldBeFalse();
         }
     }
 }

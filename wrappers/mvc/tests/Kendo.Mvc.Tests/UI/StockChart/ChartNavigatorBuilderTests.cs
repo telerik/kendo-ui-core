@@ -4,17 +4,20 @@ namespace Kendo.Mvc.UI.Tests
     using Xunit;
     using System;
     using Kendo.Mvc.UI.Fluent;
+    using Kendo.Mvc.UI.Tests.StockChart;
 
     public class ChartNavigatorBuilderTests
     {
         private readonly ChartNavigator<OHLCData> navigator;
         private readonly ChartNavigatorBuilder<OHLCData> builder;
+        private readonly StockChart<OHLCData> chart;
 
         public ChartNavigatorBuilderTests()
         {
             var urlGeneratorMock = new Mock<IUrlGenerator>();
             var viewContext = TestHelper.CreateViewContext();
-            navigator = new ChartNavigator<OHLCData>(viewContext, urlGeneratorMock.Object);
+            chart = StockChartTestHelper.CreateStockChart<OHLCData>();
+            navigator = new ChartNavigator<OHLCData>(chart, viewContext, urlGeneratorMock.Object);
             builder = new ChartNavigatorBuilder<OHLCData>(navigator);
         }
 
@@ -87,6 +90,25 @@ namespace Kendo.Mvc.UI.Tests
         public void Visible_should_return_builder()
         {
             builder.Visible(false).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void CategoryAxis_should_return_builder()
+        {
+            builder.CategoryAxis(axis => { }).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void CategoryAxis_should_accept_category_expression()
+        {
+            builder.CategoryAxis(axis => { axis.Date().Categories(m => m.Date); });
+        }
+
+        [Fact]
+        public void CategoryAxis_should_bind_categories()
+        {
+            chart.Data = new OHLCData[] { new OHLCData { Date = new DateTime(2000, 1, 1) } };
+            builder.CategoryAxis(axis => { axis.Date().Categories(m => m.Date); });
         }
     }
 }
