@@ -127,6 +127,11 @@
             get;
         }
 
+        bool Snap
+        {
+            get;
+        }
+
         IList<SchedulerResource<TModel>> Resources
         {
             get;

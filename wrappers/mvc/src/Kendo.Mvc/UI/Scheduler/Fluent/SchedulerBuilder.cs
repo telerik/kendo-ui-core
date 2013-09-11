@@ -448,6 +448,33 @@
         }
 
         /// <summary>
+        /// If set to false the events would not snap events to the nearest slot during dragging (resizing or moving). Set it to false to allow free moving and resizing of events.
+        /// </summary>
+        /// <param name="isSnapable">The isSnapable</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .Snap(false)
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///             .Create(&quot;Create&quot;, &quot;Scheduler&quot;)
+        ///             .Destroy(&quot;Destroy&quot;, &quot;Scheduler&quot;)
+        ///             .Update(&quot;Update&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> Snap(bool isSnapable)
+        {
+            Component.Snap = isSnapable;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the editing configuration of the scheduler.
         /// </summary>
         /// <param name="configurator">The lambda which configures the editing</param>

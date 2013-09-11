@@ -35,6 +35,8 @@
 
             AllDaySlot = true;
 
+            Snap = true;
+
             Messages = new SchedulerMessages();
             Group = new SchedulerGroupSettings();
             Editable = new SchedulerEditableSettings<TModel>();
@@ -168,6 +170,12 @@
 
         //default valiue == 0?
         public int? Width
+        {
+            get;
+            set;
+        }
+
+        public bool Snap
         {
             get;
             set;
@@ -333,6 +341,11 @@
             if (Width != null)
             {
                 options["width"] = Width;
+            }
+
+            if (!Snap)
+            {
+                options["snap"] = Snap;
             }
 
             if (Resources.Count > 0)
