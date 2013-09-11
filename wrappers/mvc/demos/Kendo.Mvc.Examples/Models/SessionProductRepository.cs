@@ -14,7 +14,7 @@
             if (result == null)
             {
                 HttpContext.Current.Session["Products"] = result =
-                    (from product in new NorthwindDataContext().Products
+                    (from product in new SampleEntities().Products
                      select new ProductViewModel
                      {
                          ProductID = product.ProductID,

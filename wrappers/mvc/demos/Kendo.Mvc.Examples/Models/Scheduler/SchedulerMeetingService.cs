@@ -8,15 +8,15 @@
 
     public class SchedulerMeetingService : ISchedulerEventService<MeetingViewModel>
     {
-        private SchedulerEntities db;
+        private SampleEntities db;
 
-        public SchedulerMeetingService(SchedulerEntities context)
+        public SchedulerMeetingService(SampleEntities context)
         {
             db = context;
         }
 
         public SchedulerMeetingService()
-            : this(new SchedulerEntities())
+            : this(new SampleEntities())
         {
         }
 
@@ -59,7 +59,7 @@
                     });
                 }
 
-                db.Meetings.AddObject(entity);
+                db.Meetings.Add(entity);
                 db.SaveChanges();
 
                 meeting.MeetingID = entity.MeetingID;
@@ -96,7 +96,7 @@
                     entity.MeetingAtendees.Add(atendee);
                 }
 
-                db.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
+                db.Entry(entity).State = EntityState.Modified;
                 db.SaveChanges();
             }
         }
@@ -128,10 +128,10 @@
 
             foreach (var recurrenceException in recurrenceExceptions)
             {
-                db.Meetings.DeleteObject(recurrenceException);
+                db.Meetings.Remove(recurrenceException);
             }
 
-            db.Meetings.DeleteObject(entity);
+            db.Meetings.Remove(entity);
             db.SaveChanges();
         }
 

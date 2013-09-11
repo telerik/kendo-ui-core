@@ -8,12 +8,7 @@ namespace Kendo.Mvc.Examples.Models
 {
     public static class Config
     {
-        private static readonly string NavigationData;
-
-        static Config()
-        {
-            NavigationData = ConfigurationManager.AppSettings["NavigationData"];
-        }
+        private static readonly string NavigationData = "~/App_Data/{suite}.nav.json";
 
         public static string SuiteNavigationData(string suite)
         {

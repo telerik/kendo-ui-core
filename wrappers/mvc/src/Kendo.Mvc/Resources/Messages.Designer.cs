@@ -1607,7 +1607,7 @@ namespace Kendo.Mvc.Resources {
                 return ResourceManager.GetString("Upload_HeaderStatusUploaded", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Uploading....
         /// </summary>
@@ -1616,7 +1616,7 @@ namespace Kendo.Mvc.Resources {
                 return ResourceManager.GetString("Upload_HeaderStatusUploading", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>

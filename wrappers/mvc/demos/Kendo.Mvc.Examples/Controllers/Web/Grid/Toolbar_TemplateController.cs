@@ -24,7 +24,7 @@ namespace Kendo.Mvc.Examples.Controllers
         public ActionResult ToolbarTemplate_Categories()
         {
      
-            var dataContext = new NorthwindDataContext();
+            var dataContext = new SampleEntities();
             var categories = dataContext.Categories
                         .Select(c => new ClientCategoryViewModel {
                             CategoryID = c.CategoryID,

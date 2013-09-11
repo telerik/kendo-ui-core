@@ -9,15 +9,15 @@
     public class SchedulerTaskService : ISchedulerEventService<TaskViewModel>
     {
 
-        private SchedulerEntities db;
+        private SampleEntities db;
 
-        public SchedulerTaskService(SchedulerEntities context)
+        public SchedulerTaskService(SampleEntities context)
         {
             db = context;
         }
 
         public SchedulerTaskService()
-            : this(new SchedulerEntities())
+            : this(new SampleEntities())
         {
         }
 
@@ -46,7 +46,7 @@
             {
                 var entity = task.ToEntity();
 
-                db.Tasks.AddObject(entity);
+                db.Tasks.Add(entity);
                 db.SaveChanges();
 
                 task.TaskID = entity.TaskID;
@@ -59,7 +59,7 @@
             {
                 var entity = task.ToEntity();
                 db.Tasks.Attach(entity);
-                db.ObjectStateManager.ChangeObjectState(entity, EntityState.Modified);
+                db.Entry(entity).State = EntityState.Modified;
                 db.SaveChanges();
             }
         }
@@ -73,10 +73,10 @@
 
             foreach (var recurrenceException in recurrenceExceptions)
             {
-                db.Tasks.DeleteObject(recurrenceException);
+                db.Tasks.Remove(recurrenceException);
             }
 
-            db.Tasks.DeleteObject(entity);
+            db.Tasks.Remove(entity);
             db.SaveChanges();
         }
 

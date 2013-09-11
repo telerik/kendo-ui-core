@@ -21,7 +21,7 @@ namespace Kendo.Mvc.Examples.Controllers
                 request.PageSize = 10;
             }
 
-            IQueryable<Order> orders = new NorthwindDataContext().Orders;
+            IQueryable<Order> orders = new SampleEntities().Orders;
 
             orders = orders.ApplyFiltering(request.Filters);
 

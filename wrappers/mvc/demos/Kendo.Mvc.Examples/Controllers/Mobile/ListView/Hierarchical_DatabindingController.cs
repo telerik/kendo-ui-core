@@ -18,7 +18,7 @@ namespace Kendo.Mvc.Examples.Controllers.Mobile
 
         public JsonResult Employees(int? EmployeeId)
         {
-            var dataContext = new NorthwindDataContext();
+            var dataContext = new SampleEntities();
 
             var employees = from e in dataContext.Employees
                             where (EmployeeId.HasValue ? e.ReportsTo == EmployeeId : e.ReportsTo == null)
@@ -26,7 +26,7 @@ namespace Kendo.Mvc.Examples.Controllers.Mobile
                             {
                                 EmployeeId = e.EmployeeID,
                                 FullName = e.FirstName + " " + e.LastName,
-                                HasEmployees = e.Employees.Any()
+                                HasEmployees = e.Employees1.Any()
                             };
 
             return Json(employees, JsonRequestBehavior.AllowGet);

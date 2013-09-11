@@ -28,12 +28,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         private static IEnumerable<OrderViewModel> GetOrders()
         {
-            var northwind = new NorthwindDataContext();
-
-            var loadOptions = new DataLoadOptions();
-
-            loadOptions.LoadWith<Order>(o => o.Customer);
-            northwind.LoadOptions = loadOptions;
+            var northwind = new SampleEntities();
 
             return northwind.Orders.Select(order => new OrderViewModel
             {
@@ -53,7 +48,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         private static IEnumerable<ProductViewModel> GetProducts()
         {
-            var northwind = new NorthwindDataContext();
+            var northwind = new SampleEntities();
 
             return northwind.Products.Select(product => new ProductViewModel
             {
@@ -69,7 +64,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         private static IEnumerable<EmployeeViewModel> GetEmployees()
         {
-            var northwind = new NorthwindDataContext();
+            var northwind = new SampleEntities();
 
             return northwind.Employees.Select(employee => new EmployeeViewModel
             {

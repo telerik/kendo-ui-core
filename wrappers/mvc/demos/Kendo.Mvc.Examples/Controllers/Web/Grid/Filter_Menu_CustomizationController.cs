@@ -21,13 +21,13 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult FilterMenuCustomization_Cities()
         {
-            var db = new NorthwindDataContext();
+            var db = new SampleEntities();
             return Json(db.Employees.Select(e => e.City).Distinct(), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult FilterMenuCustomization_Titles()
         {
-            var db = new NorthwindDataContext();
+            var db = new SampleEntities();
             return Json(db.Employees.Select(e => e.Title).Distinct(), JsonRequestBehavior.AllowGet);
         } 
     }

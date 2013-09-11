@@ -18,7 +18,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult Categories([DataSourceRequest] DataSourceRequest request)
         {
-            var dataContext = new NorthwindDataContext();
+            var dataContext = new SampleEntities();
             var categories = dataContext.Categories
                         .Select(c => new ClientCategoryViewModel
                         {
@@ -33,7 +33,7 @@ namespace Kendo.Mvc.Examples.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Products([DataSourceRequest] DataSourceRequest request)
         {
-            var dataContext = new NorthwindDataContext();
+            var dataContext = new SampleEntities();
             var products = dataContext.Products
                         .Select(p => new ClientProductViewModel
                         {
@@ -51,7 +51,7 @@ namespace Kendo.Mvc.Examples.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Order_Details([DataSourceRequest] DataSourceRequest request)
         {
-            var dataContext = new NorthwindDataContext();
+            var dataContext = new SampleEntities();
             var details = dataContext.Order_Details
                 .Select(d => new 
                         {

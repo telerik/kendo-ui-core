@@ -23,7 +23,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         private static IEnumerable<ProductViewModel> GetProducts()
         {
-            var northwind = new NorthwindDataContext();
+            var northwind = new SampleEntities();
 
             return northwind.Products.Select(product => new ProductViewModel
             {

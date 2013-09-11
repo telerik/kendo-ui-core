@@ -71,7 +71,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         private void PopulateCategories()
         {
-            var dataContext = new NorthwindDataContext();
+            var dataContext = new SampleEntities();
             var categories = dataContext.Categories
                         .Select(c => new ClientCategoryViewModel {
                             CategoryID = c.CategoryID,
@@ -84,7 +84,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         private void PopulateEmployees()
         {
-            ViewData["employees"] = new NorthwindDataContext().Employees
+            ViewData["employees"] = new SampleEntities().Employees
                         .Select(e => new ClientEmployeeViewModel
                         {
                             EmployeeID = e.EmployeeID,

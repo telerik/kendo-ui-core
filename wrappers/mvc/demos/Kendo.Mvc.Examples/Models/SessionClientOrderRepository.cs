@@ -13,7 +13,7 @@ namespace Kendo.Mvc.Examples.Models
 
             if (result == null)
             {
-                HttpContext.Current.Session["orders"] = result = new NorthwindDataContext().Orders
+                HttpContext.Current.Session["orders"] = result = new SampleEntities().Orders
                     .Select(o => new ClientOrderViewModel
                     {
                         OrderID = o.OrderID,

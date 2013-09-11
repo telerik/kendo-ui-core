@@ -71,7 +71,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         private ClientCategoryViewModel GetCategory(int categoryID)
         {
-            var dataContext = new NorthwindDataContext();
+            var dataContext = new SampleEntities();
             var category = dataContext.Categories
                         .Where(c=> c.CategoryID == categoryID)
                         .Select(c => new ClientCategoryViewModel

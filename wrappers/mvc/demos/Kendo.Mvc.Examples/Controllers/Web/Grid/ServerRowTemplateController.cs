@@ -8,7 +8,7 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult ServerRowTemplate()
         {
-            return View(new NorthwindDataContext().Customers);
+            return View(new SampleEntities().Customers);
         }
     }
 }
