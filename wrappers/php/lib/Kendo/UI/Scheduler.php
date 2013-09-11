@@ -227,6 +227,15 @@ class Scheduler extends \Kendo\UI\Widget {
     }
 
     /**
+    * If set to true the scheduler will snap events to the nearest slot during dragging (resizing or moving). Set it to false to allow free moving and resizing of events.
+    * @param boolean $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function snap($value) {
+        return $this->setProperty('snap', $value);
+    }
+
+    /**
     * The start time of the week and day views. The scheduler will display events starting after the startTime.
     * @param date $value
     * @return \Kendo\UI\Scheduler

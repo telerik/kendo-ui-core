@@ -239,6 +239,14 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("selectable", value);
     }
 
+    public boolean getSnap() {
+        return (boolean)getProperty("snap");
+    }
+
+    public void setSnap(boolean value) {
+        setProperty("snap", value);
+    }
+
     public java.util.Date getStartTime() {
         return (java.util.Date)getProperty("startTime");
     }

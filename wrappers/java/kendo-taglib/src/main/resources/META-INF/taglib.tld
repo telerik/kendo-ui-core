@@ -14333,6 +14333,12 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>If set to true the scheduler will snap events to the nearest slot during dragging (resizing or moving). Set it to false to allow free moving and resizing of events.</description>
+            <name>snap</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>The start time of the week and day views. The scheduler will display events starting after the startTime.</description>
             <name>startTime</name>
             <rtexprvalue>true</rtexprvalue>
