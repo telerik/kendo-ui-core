@@ -3826,8 +3826,9 @@ kendo_module({
                 for (var i = 0, len = nodes.length; i < len; i++) {
                     var node = nodes[i];
                     var shape = node.associatedShape;
-                    //shape.bounds(new Rect(node.x, node.y, node.width, node.height));
-                    this.nodeMap.set(shape.visual.native.id, new Rect(node.x, node.y, node.width, node.height));
+                    if (shape) {
+                        this.nodeMap.set(shape.visual.native.id, new Rect(node.x, node.y, node.width, node.height));
+                    }
                 }
             }
             else {

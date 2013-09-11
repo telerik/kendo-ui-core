@@ -310,10 +310,7 @@ $(function () {
         diagram.sendToBack();
     });
     $("#layoutButton").click(function (e) {
-        diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
-                {
-                    TreeLayoutType: eval($("#Layouts").val())
-                });
+        onLayoutChanged();
     });
 
     var layouts = [
@@ -449,10 +446,6 @@ $(function () {
         }
     });
 
-    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
-            {
-                TreeLayoutType: eval($("#Layouts").val())
-            });
     $("#rotateShape").kendoSlider({
         min: 0,
         max: 360,
