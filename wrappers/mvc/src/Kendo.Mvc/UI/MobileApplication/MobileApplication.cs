@@ -109,7 +109,7 @@ namespace Kendo.Mvc.UI
                 var routeData = ViewContext.RequestContext.RouteData.Values;
                 var root = url.Action(string.Empty, routeData);                
                 
-                options.Add("root",  Regex.Replace(root, "/$", string.Empty));                        
+                options.Add("root",  Regex.Replace(root, "/$", "/"));                        
             }
 
             writer.Write(String.Format("jQuery(function(){{ new kendo.mobile.Application(jQuery({0}), {1}); }});", container, Initializer.Serialize(options)));

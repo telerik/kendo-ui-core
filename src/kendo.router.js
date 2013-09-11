@@ -100,8 +100,13 @@ kendo_module({
             var that = this,
                 pushStateUrl,
                 atRoot = that.root == location.pathname,
+                atRootWithoutSlash = that.root == location.pathname + "/",
                 pushStateUrlNeedsTransform = that._pushStateRequested && !support.pushState && !atRoot,
                 hashUrlNeedsTransform = that._pushState && atRoot && location.hash;
+
+            if (atRootWithoutSlash && that._pushState) {
+                history.replaceState({}, document.title, that.root);
+            }
 
             if (pushStateUrlNeedsTransform) {
                 location.replace(that.root + '#' + that._stripRoot(location.pathname));
