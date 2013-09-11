@@ -21079,6 +21079,1334 @@ It is used as a default field for the navigator axis.The data item field value m
     </tag>
 
     <tag>
+        <description>The category axis configuration options.</description>
+        <name>stockChart-navigator-categoryAxis</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The category axis configuration options.</description>
+        <name>stockChart-navigator-categoryAxisItem</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemTag</tag-class>
+
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>Category index at which the first value axis crosses this axis (when set as an object).Category indices at which the value axes cross the category axis (when set as an array).</description>
+            <name>axisCrossingValue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The base time interval for the date axis. The default base unit is determined automatically from the minimum difference
+between subsequent categories.The supported values are:Setting baseUnit to "fit" will set such base unit and categoryAxis.baseUnitStep
+that the total number of categories does not exceed categoryAxis.maxDateGroups.Series data is aggregated for the specified base unit using the series.aggregate function.</description>
+            <name>baseUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The step (interval) between categories in base units. Setting it to "auto" will set the step to such value
+that the total number of categories does not exceed categoryAxis.maxDateGroups.This option is ignored if categoryAxis.baseUnit is set to "fit".</description>
+            <name>baseUnitStep</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The category names. The chart will create a category for every item of the array.</description>
+            <name>categories</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The color to apply to all axis elements. Accepts a valid CSS color string, including hex and rgb. Can be overridden by categoryAxis.labels.color and
+categoryAxis.line.color.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the category name. Requires the dataSource option to be set.</description>
+            <name>field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will position categories and series points on major ticks. This removes the empty space before and after the series.The default value is false except for "area", "verticalArea", "stepArea" and "verticalStepArea".</description>
+            <name>justified</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The last date displayed on the category date axis. By default, the minimum date is the same as the last category.
+This is often used in combination with the categoryAxis.min and categoryAxis.roundToBaseUnit options to
+set up a fixed date range.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The maximum number of groups (categories) to display when
+categoryAxis.baseUnit is set to "fit" or
+categoryAxis.baseUnitStep is set to "auto".</description>
+            <name>maxDateGroups</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The first date displayed on the category date axis. By default, the minimum date is the same as the first category.
+This is often used in combination with the categoryAxis.min and categoryAxis.roundToBaseUnit options to
+set up a fixed date range.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the category axis direction will be reversed. By default categories are listed from left to right and from bottom to top.</description>
+            <name>reverse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will round the first and last date to the nearest base unit.The roundToBaseUnit option will be ignored if series.type is set to "bar", "column", "ohlc" or "candlestick".</description>
+            <name>roundToBaseUnit</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the category axis. By default the category axis is visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The week start day when categoryAxis.baseUnit is set to "weeks".The supported values are:</description>
+            <name>weekStartDay</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>The discrete navigator.categoryAxis.baseUnitStep values when
+either navigator.categoryAxis.baseUnit is set to "fit" or
+navigator.categoryAxis.baseUnitStep is set to "auto".</description>
+        <name>stockChart-navigator-categoryAxisItem-autoBaseUnitSteps</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemAutoBaseUnitStepsTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The days unit steps.</description>
+            <name>days</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The hours unit steps.</description>
+            <name>hours</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The minutes unit steps.</description>
+            <name>minutes</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The months unit steps.</description>
+            <name>months</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The seconds unit steps.</description>
+            <name>seconds</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The weeks unit steps.</description>
+            <name>weeks</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The years unit steps.</description>
+            <name>years</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The crosshair configuration options.</description>
+        <name>stockChart-navigator-categoryAxisItem-crosshair</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemCrosshairTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The color of the crosshair. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The opacity of the crosshair. By default the crosshair is opaque.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the category axis crosshair. By default the category axis crosshair is not visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the crosshair in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The crosshar tooltip options.</description>
+        <name>stockChart-navigator-categoryAxisItem-crosshair-tooltip</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemCrosshairTooltipTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the tooltip. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the tooltip. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The tooltip font.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The format used to display the tooltip. Uses kendo.format. Contains one placeholder ("{0}") which represents the category value.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The padding of the crosshair tooltip. A numeric value will set all paddings.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the tooltip.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the category axis crosshair tooltip. By default the category axis crosshair tooltip is not visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border options.</description>
+        <name>stockChart-navigator-categoryAxisItem-crosshair-tooltip-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemCrosshairTooltipBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The padding of the crosshair tooltip. A numeric value will set all paddings.</description>
+        <name>stockChart-navigator-categoryAxisItem-crosshair-tooltip-padding</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemCrosshairTooltipPaddingTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The bottom padding of the crosshair tooltip.</description>
+            <name>bottom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The left padding of the crosshair tooltip.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The right padding of the crosshair tooltip.</description>
+            <name>right</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The top padding of the crosshair tooltip.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The template which renders the tooltip.The fields which can be used in the template are:</description>
+        <name>stockChart-navigator-categoryAxisItem-crosshair-tooltip-template</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemCrosshairTooltipTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The axis labels configuration.</description>
+        <name>stockChart-navigator-categoryAxisItem-labels</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemLabelsTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the labels. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the labels. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The culture to use when formatting date values. See the globalization overview for more information.</description>
+            <name>culture</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the labels.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The format used to display the labels. Uses kendo.format. Contains one placeholder ("{0}") which represents the category value.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The margin of the labels. A numeric value will set all margins.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will mirror the axis labels and ticks. If the labels are normally on the left side of the axis, mirroring the axis will render them to the right.</description>
+            <name>mirror</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The padding of the labels. A numeric value will set all paddings.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the labels. By default the labels are not rotated.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The number of labels to skip. By default no labels are skipped.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The label rendering step - render every n-th label. By default every label is rendered.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the category axis labels. By default the category axis labels are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the labels.</description>
+        <name>stockChart-navigator-categoryAxisItem-labels-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemLabelsBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The format used to display the labels when the categories are dates. Uses kendo.format. Contains one placeholder ("{0}") which represents the category value.</description>
+        <name>stockChart-navigator-categoryAxisItem-labels-dateFormats</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemLabelsDateFormatsTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The format used when categoryAxis.baseUnit is set to "days".</description>
+            <name>days</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The format used when categoryAxis.baseUnit is set to "hours".</description>
+            <name>hours</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The format used when categoryAxis.baseUnit is set to "months".</description>
+            <name>months</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The format used when categoryAxis.baseUnit is set to "weeks".</description>
+            <name>weeks</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The format used when categoryAxis.baseUnit is set to "years".</description>
+            <name>years</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The margin of the labels. A numeric value will set all margins.</description>
+        <name>stockChart-navigator-categoryAxisItem-labels-margin</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemLabelsMarginTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The bottom margin of the labels.</description>
+            <name>bottom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The left margin of the labels.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The right margin of the labels.</description>
+            <name>right</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The top margin of the labels.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The padding of the labels. A numeric value will set all paddings.</description>
+        <name>stockChart-navigator-categoryAxisItem-labels-padding</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemLabelsPaddingTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The bottom padding of the labels.</description>
+            <name>bottom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The left padding of the labels.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The right padding of the labels.</description>
+            <name>right</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The top padding of the labels.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>stockChart-navigator-categoryAxisItem-labels-template</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemLabelsTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The configuration of the axis lines. Also affects the major and minor ticks, but not the grid lines.</description>
+        <name>stockChart-navigator-categoryAxisItem-line</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the line.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the category axis lines. By default the category axis lines are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the line in pixels. Also affects the major and minor ticks, but not the grid lines.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the major grid lines. These are the lines that are an extension of the major ticks through the
+body of the chart.</description>
+        <name>stockChart-navigator-categoryAxisItem-majorGridLines</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemMajorGridLinesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the major grid lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the major grid lines.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the major grid lines. By default the major grid lines are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the category axis major grid lines in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the category axis major ticks.</description>
+        <name>stockChart-navigator-categoryAxisItem-majorTicks</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemMajorTicksTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the category axis major ticks lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The length of the tick line in pixels.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the category axis major ticks. By default the category axis major ticks are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the major ticks in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the minor grid lines. These are the lines that are an extension of the minor ticks through the
+body of the chart.</description>
+        <name>stockChart-navigator-categoryAxisItem-minorGridLines</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemMinorGridLinesTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the minor grid lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the minor grid lines.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the minor grid lines. By default the minor grid lines are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the category axis minor grid lines in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the category axis minor ticks.</description>
+        <name>stockChart-navigator-categoryAxisItem-minorTicks</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemMinorTicksTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the category axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The length of the tick line in pixels.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the category axis minor ticks. By default the category axis minor ticks are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the minor ticks in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The category axis notes configuration.</description>
+        <name>stockChart-navigator-categoryAxisItem-notes</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The position of the category axis note.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The items of the notes.</description>
+        <name>stockChart-navigator-categoryAxisItem-notes-data</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesDataTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The items of the notes.</description>
+        <name>stockChart-navigator-categoryAxisItem-notes-dataItem</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesDataItemTag</tag-class>
+
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The position of the category axis note.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The value of the note.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>The icon of the note.</description>
+        <name>stockChart-navigator-categoryAxisItem-notes-dataItem-icon</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesDataItemIconTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the note icon.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The size of the icon.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The icon shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The icon visibility.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the icon.</description>
+        <name>stockChart-navigator-categoryAxisItem-notes-dataItem-icon-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesDataItemIconBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The border color of the icon.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The border width of the icon.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The label of the note.</description>
+        <name>stockChart-navigator-categoryAxisItem-notes-dataItem-label</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesDataItemLabelTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the note label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the note label.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The format used to display the note label. Uses kendo.format. Contains one placeholder ("{0}") which represents the category value.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The position of the category axis note label.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the label. By default the label are not rotated.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The label note text.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the category notes label. By default the category notes label are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the label.</description>
+        <name>stockChart-navigator-categoryAxisItem-notes-dataItem-label-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesDataItemLabelBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>stockChart-navigator-categoryAxisItem-notes-dataItem-label-template</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesDataItemLabelTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The line of the note.</description>
+        <name>stockChart-navigator-categoryAxisItem-notes-dataItem-line</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesDataItemLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color of the note.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The line length of the note.</description>
+            <name>length</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The line width of the note.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The icon of the notes.</description>
+        <name>stockChart-navigator-categoryAxisItem-notes-icon</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesIconTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the notes icon.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The size of the icon.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The icon shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The icon visibility.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the icon.</description>
+        <name>stockChart-navigator-categoryAxisItem-notes-icon-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesIconBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The border color of the icon.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The border width of the icon.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The label of the notes.</description>
+        <name>stockChart-navigator-categoryAxisItem-notes-label</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesLabelTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the label. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the label.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The format used to display the notes label. Uses kendo.format. Contains one placeholder ("{0}") which represents the category value.</description>
+            <name>format</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The position of the labels.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the label. By default the label are not rotated.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The template which renders the labels.The fields which can be used in the template are:</description>
+            <name>template</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the category notes label. By default the category notes label are visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the label.</description>
+        <name>stockChart-navigator-categoryAxisItem-notes-label-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesLabelBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The template which renders the labels.The fields which can be used in the template are:</description>
+        <name>stockChart-navigator-categoryAxisItem-notes-label-template</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesLabelTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The line of the notes.</description>
+        <name>stockChart-navigator-categoryAxisItem-notes-line</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemNotesLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The line color of the notes.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The line length of the notes.</description>
+            <name>length</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The line width of the notes.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The plot bands of the category axis.</description>
+        <name>stockChart-navigator-categoryAxisItem-plotBands</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemPlotBandsTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The plot bands of the category axis.</description>
+        <name>stockChart-navigator-categoryAxisItem-plotBand</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemPlotBandTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The color of the plot band.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The start position of the plot band in axis units.</description>
+            <name>from</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The opacity of the plot band.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The end position of the plot band in axis units.</description>
+            <name>to</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <description>The title configuration of the category axis.</description>
+        <name>stockChart-navigator-categoryAxisItem-title</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemTitleTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the title. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the title. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the title.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The margin of the title. A numeric value will set all margins.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The padding of the title. A numeric value will set all paddings.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The position of the title.The supported values are:</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the title. By default the title is not rotated.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The text of the title.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the category axis title. By default the category axis title is visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the title.</description>
+        <name>stockChart-navigator-categoryAxisItem-title-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemTitleBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The margin of the title. A numeric value will set all margins.</description>
+        <name>stockChart-navigator-categoryAxisItem-title-margin</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemTitleMarginTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The bottom margin of the title.</description>
+            <name>bottom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The left margin of the title.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The right margin of the title.</description>
+            <name>right</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The top margin of the title.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The padding of the title. A numeric value will set all paddings.</description>
+        <name>stockChart-navigator-categoryAxisItem-title-padding</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorCategoryAxisItemTitlePaddingTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The bottom padding of the title.</description>
+            <name>bottom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The left padding of the title.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The right padding of the title.</description>
+            <name>right</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The top padding of the title.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
         <description>Default options for the navigator hint.</description>
         <name>stockChart-navigator-hint</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorHintTag</tag-class>

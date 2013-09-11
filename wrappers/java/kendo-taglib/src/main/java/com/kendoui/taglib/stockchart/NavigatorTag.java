@@ -52,6 +52,12 @@ public class NavigatorTag extends  BaseTag  /* interfaces */implements DataBound
         return "stockChart-navigator";
     }
 
+    public void setCategoryAxis(NavigatorCategoryAxisTag value) {
+
+        setProperty("categoryAxis", value.categoryAxis());
+
+    }
+
     public void setHint(com.kendoui.taglib.stockchart.NavigatorHintTag value) {
         setProperty("hint", value);
     }
