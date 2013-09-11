@@ -1026,6 +1026,8 @@
     <Compile Include="UI\QRCode\QRBorder.cs" />
     <Compile Include="UI\QRCode\QRCode.cs" />
     <Compile Include="UI\RequestSettings.cs" />
+    <Compile Include="UI\DataSource\Fluent\AjaxSchedulerDataSourceBuilder.cs" />
+    <Compile Include="UI\DataSource\Fluent\DataSourceSchedulerFilterDescriptorFactory.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerGroupBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerEditorMessagesBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerMessagesBuilder.cs" />

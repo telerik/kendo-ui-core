@@ -675,10 +675,9 @@
         /// </code>
         /// </example>
         /// 
-        public SchedulerBuilder<TModel> DataSource(Action<AjaxDataSourceBuilder<TModel>> configurator)
+        public SchedulerBuilder<TModel> DataSource(Action<AjaxSchedulerDataSourceBuilder<TModel>> configurator)
         {
-
-            configurator(new AjaxDataSourceBuilder<TModel>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
+            configurator(new AjaxSchedulerDataSourceBuilder<TModel>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
 
             return this;
         }

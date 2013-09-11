@@ -120,7 +120,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Configures the initial grouping.
         /// </summary>
-        public TDataSourceBuilder Group(Action<DataSourceGroupDescriptorFactory<TModel>> configurator)
+        public virtual TDataSourceBuilder Group(Action<DataSourceGroupDescriptorFactory<TModel>> configurator)
         {
 
             configurator(new DataSourceGroupDescriptorFactory<TModel>(dataSource.Groups));
@@ -131,7 +131,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Configures the initial aggregates.
         /// </summary>
-        public TDataSourceBuilder Aggregates(Action<DataSourceAggregateDescriptorFactory<TModel>> aggregates)
+        public virtual TDataSourceBuilder Aggregates(Action<DataSourceAggregateDescriptorFactory<TModel>> aggregates)
         {
 
             aggregates(new DataSourceAggregateDescriptorFactory<TModel>(dataSource.Aggregates));
