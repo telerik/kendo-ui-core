@@ -63,6 +63,28 @@
         deepEqual(i.visualBounds().inflate(i.adorner.options.offset, i.adorner.options.offset), i.adorner.bounds(), "Adoner has correct bounds");
     });
 
+    test("Resizing adorner - correct cursor", function () {
+        var last = d.shapes[d.shapes.length - 1];
+
+        last.select(true);
+        var delta = new Point(last.adorner.options.offset + 4, last.adorner.options.offset + 4);
+        var testP = last.bounds().bottomRight().plus(delta);
+
+        equal(last.adorner._getCursor(testP), "se-resize", "Cursor is correct.");
+    });
+
+    test("Resizing adorner - correct cursor after rotation - 50", function () {
+        var last = d.shapes[d.shapes.length - 1];
+
+        last.select(true);
+        last.rotate(50);
+        var delta = new Point(last.adorner.options.offset + 4, last.adorner.options.offset + 4);
+        var testP = last.bounds().bottomRight().plus(delta);
+        testP.rotate(last.bounds().center(), 360 - 50);
+
+        equal(last.adorner._getCursor(testP), "s-resize", "Cursor is correct.");
+    });
+
     module("Tooling tests. Ensure the tools are activated correctly.", {
         setup: function () {
             $("#canvas").kendoDiagram();
