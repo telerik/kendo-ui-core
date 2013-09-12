@@ -85,7 +85,7 @@ kendo_module({
                    '<li class="k-state-default k-nav-current"><span data-#=ns#bind="text: formattedDate"></span></li>' +
                    '<li class="k-state-default k-nav-next"><a role="button" href="\\#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a></li>' +
                 '</ul>' +
-            '</div>');
+            '</div>'),
         DATERANGEEDITOR = function(container, options) {
             var attr = { name: options.field };
 
