@@ -37,8 +37,10 @@
 
             module("initialization", {
                 teardown: function() {
-                    if (button && button.data("kendoButton")) {
-                        button.data("kendoButton").destroy();
+                    if (button) {
+                        if (button.data("kendoButton")) {
+                            button.data("kendoButton").destroy();
+                        }
                         button.remove();
                         button = null;
                     }

@@ -7,9 +7,11 @@
 
 /* Buttons */
 
-.k-rtl .k-button-icontext .k-icon
+.k-rtl .k-button-icontext .k-icon,
+.k-rtl .k-button-icontext .k-image
 {
-    margin: 0 -3px 0 3px;
+    margin-right: -.2rem;
+    margin-left: .2rem;
 }
 
 /* TextBoxes, Pickers, Combos */
