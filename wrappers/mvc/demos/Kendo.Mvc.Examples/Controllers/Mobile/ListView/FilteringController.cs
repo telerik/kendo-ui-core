@@ -18,7 +18,7 @@ namespace Kendo.Mvc.Examples.Controllers.Mobile
 
         public ActionResult Filtering_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(SessionProductRepository.All().ToDataSourceResult(request));
+            return Json(productService.Read().ToDataSourceResult(request));
         }     
     }
 }

@@ -571,6 +571,7 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductService.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\Region.cs">
       <DependentUpon>Sample.tt</DependentUpon>
@@ -598,7 +599,6 @@
     <Compile Include="Models\ScreenResolutionRemoteDataViewModel.cs" />
     <Compile Include="Models\SessionClientOrderRepository.cs" />
     <Compile Include="Models\SessionClientProductRepository.cs" />
-    <Compile Include="Models\SessionProductRepository.cs" />
     <Compile Include="Models\SessionUploadInitialFilesRepository.cs" />
     <Compile Include="Models\Shipper.cs">
       <DependentUpon>Sample.tt</DependentUpon>

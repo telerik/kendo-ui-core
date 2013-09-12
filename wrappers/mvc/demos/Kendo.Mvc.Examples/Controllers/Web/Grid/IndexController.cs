@@ -11,14 +11,28 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class GridController : Controller
     {
+        private ProductService productService;
+
+        public GridController()
+        {
+            productService = new ProductService(new SampleEntities());
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            productService.Dispose();
+
+            base.Dispose(disposing);
+        }
+
         public ActionResult Index()
         {
-            return View(GetProducts());
+            return View(productService.Read());
         }
 
         public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(GetProducts().ToDataSourceResult(request));
+            return Json(productService.Read().ToDataSourceResult(request));
         }
 
         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
@@ -43,22 +57,6 @@ namespace Kendo.Mvc.Examples.Controllers
                 ShipCity = order.ShipCity,               
                 EmployeeID = order.EmployeeID,
                 CustomerID = order.CustomerID
-            });
-        }
-
-        private static IEnumerable<ProductViewModel> GetProducts()
-        {
-            var northwind = new SampleEntities();
-
-            return northwind.Products.Select(product => new ProductViewModel
-            {
-                ProductID = product.ProductID,
-                ProductName = product.ProductName,
-                UnitPrice = product.UnitPrice ?? 0,
-                UnitsInStock = product.UnitsInStock ?? 0,
-                UnitsOnOrder = product.UnitsOnOrder ?? 0,
-                Discontinued = product.Discontinued,
-                LastSupply = DateTime.Today
             });
         }
 

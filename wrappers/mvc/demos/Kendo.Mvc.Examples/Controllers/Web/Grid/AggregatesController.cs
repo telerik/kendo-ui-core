@@ -13,7 +13,9 @@ namespace Kendo.Mvc.Examples.Controllers
         
         public ActionResult Aggregates_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(GetProducts().ToDataSourceResult(request));
+            var products = productService.Read();
+
+            return Json(products.ToDataSourceResult(request));
         }
     }
 }

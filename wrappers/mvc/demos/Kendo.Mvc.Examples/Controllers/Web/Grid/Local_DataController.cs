@@ -6,7 +6,9 @@ namespace Kendo.Mvc.Examples.Controllers
     {        
         public ActionResult Local_Data()
         {
-            return View(GetProducts());
+            var model = productService.Read();
+
+            return View(model);
         }        
     }
 }

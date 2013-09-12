@@ -16,7 +16,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult Editing_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(SessionProductRepository.All().ToDataSourceResult(request));
+            return Json(productService.Read().ToDataSourceResult(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -28,7 +28,7 @@ namespace Kendo.Mvc.Examples.Controllers
             {
                 foreach (var product in products)
                 {
-                    SessionProductRepository.Insert(product);
+                    productService.Create(product);
                     results.Add(product);
                 }
             }
@@ -43,16 +43,7 @@ namespace Kendo.Mvc.Examples.Controllers
             {
                 foreach (var product in products)
                 {
-                    var target = SessionProductRepository.One(p => p.ProductID == product.ProductID);
-                    if (target != null)
-                    {
-                        target.ProductName = product.ProductName;
-                        target.UnitPrice = product.UnitPrice;
-                        target.UnitsInStock = product.UnitsInStock;
-                        target.LastSupply = product.LastSupply;
-                        target.Discontinued = product.Discontinued;
-                        SessionProductRepository.Update(target);
-                    }
+                    productService.Update(product);
                 }
             }
 
@@ -66,7 +57,7 @@ namespace Kendo.Mvc.Examples.Controllers
             {
                 foreach (var product in products)
                 {
-                    SessionProductRepository.Delete(product);
+                    productService.Destroy(product);
                 }
             }
 

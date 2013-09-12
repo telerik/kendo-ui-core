@@ -8,7 +8,8 @@ namespace Kendo.Mvc.Examples.Controllers
     {   
         public ActionResult HeaderTemplate(int[] selectedProducts)
         {
-            var products = GetProducts();
+            var products = productService.Read();
+
             selectedProducts = selectedProducts ?? new int[0];
 
             return View(new HeaderTemplateViewModel
