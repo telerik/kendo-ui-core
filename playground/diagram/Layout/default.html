@@ -134,7 +134,7 @@
 var diagram, animId, useRandomSizes = false;
 var Predefined = kendo.diagram.Graph.Predefined;
 var GraphUtils = kendo.diagram.Graph.Utils;
-
+var animateTransitions = false;
 function ClearDiagram() {
     diagram.clear();
 }
@@ -144,7 +144,7 @@ function init() {
     diagram = diagramElement.data("kendoDiagram");
     diagramElement.css("width", "1200");
     diagramElement.css("height", "800");
-    $("#QAnimate").focus();
+    $("#QRandomize").focus();
 }
 
 function SingleRandomTree() {
@@ -190,21 +190,25 @@ function randomSize() {
     useRandomSizes = $("#QRandomSize").prop("checked");
 }
 function switchMode() {
-    var isChecked = $("#QAnimate").prop("checked");
+    var isChecked = $("#QRandomize").prop("checked");
     if (!isChecked) {
         $("#QCreate").prop("disabled", false);
         stopAnimation();
+        $("#QTreeDown").prop('checked', true);
+        animateTransitions = true;
     }
     else {
         $("#QCreate").prop("disabled", true);
+        animateTransitions = false;
         startAnimation();
+
     }
 
 }
 
 function defineActions() {
     $("#QCreate").bind("click", create);
-    $("#QAnimate").bind("click", switchMode);
+    $("#QRandomize").bind("click", switchMode);
     $("#QRandomSize").bind("click", randomSize);
 }
 
@@ -216,6 +220,11 @@ function layout() {
     // if a forest there are multiple roots but we for a random graph it'd be difficult to guess
     // the most appropriate root
     var knownRoot = diagram.getId("0");
+    // because the loop produces in the generation above sometimes five times the same set of id's =>should be unique for the layout.
+    diagram.shapes.forEach(function (s) {
+        s.id = kendo.diagram.randomId();
+        s.visual.native.id= s.id;
+    })
     switch (selected) {
         case "QTreeDown":
             diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
@@ -226,7 +235,8 @@ function layout() {
                         componentsGridWidth: 5000,
                         totalMargin: new kendo.diagram.Size(50, 50),
                         componentMargin: new kendo.diagram.Size(20, 20),
-                        roots: [knownRoot]
+                        roots: [knownRoot],
+                        animate: animateTransitions
                     }
             )
             break;
@@ -236,7 +246,8 @@ function layout() {
                         TreeLayoutType: kendo.diagram.TreeLayoutType.TreeUp,
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
-                        roots: [knownRoot]
+                        roots: [knownRoot],
+                        animate: animateTransitions
                     }
             )
             break;
@@ -246,7 +257,8 @@ function layout() {
                         TreeLayoutType: kendo.diagram.TreeLayoutType.TreeLeft,
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
-                        roots: [knownRoot]
+                        roots: [knownRoot],
+                        animate: animateTransitions
                     }
             )
             break;
@@ -256,7 +268,8 @@ function layout() {
                         TreeLayoutType: kendo.diagram.TreeLayoutType.TreeRight,
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
-                        roots: [knownRoot]
+                        roots: [knownRoot],
+                        animate: animateTransitions
                     }
             )
             break;
@@ -266,7 +279,8 @@ function layout() {
                         TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal,
                         horizontalSeparation: 60,
                         verticalSeparation: 10,
-                        roots: [knownRoot]
+                        roots: [knownRoot],
+                        animate: animateTransitions
                     }
             )
             break;
@@ -276,7 +290,8 @@ function layout() {
                         TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapVertical,
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
-                        roots: [knownRoot]
+                        roots: [knownRoot],
+                        animate: animateTransitions
                     }
             )
             break;
@@ -288,7 +303,8 @@ function layout() {
                         radialSeparation: 50,
                         startRadialAngle: Math.PI / 3,
                         endRadialAngle: 2*Math.PI/3,
-                        roots: [knownRoot]
+                        roots: [knownRoot],
+                        animate: animateTransitions
                     }
             )
             break;
@@ -300,7 +316,8 @@ function layout() {
                         underneathVerticalTopOffset: 20,
                         underneathHorizontalOffset: 50,
                         underneathVerticalSeparation: 20,
-                        roots: [knownRoot]
+                        roots: [knownRoot],
+                        animate: animateTransitions
                     }
             )
             break;
@@ -309,7 +326,8 @@ function layout() {
                     {
                         layerSeparation: 50,
                         nodeDistance: 50,
-                        layeredLayoutType: kendo.diagram.LayeredLayoutType.Right
+                        layeredLayoutType: kendo.diagram.LayeredLayoutType.Right,
+                        animate: animateTransitions
                     });
             break;
         case  "QLayeredVertical":
@@ -317,7 +335,8 @@ function layout() {
                     {
                         layerSeparation: 50,
                         nodeDistance: 50,
-                        layeredLayoutType: kendo.diagram.LayeredLayoutType.Down
+                        layeredLayoutType: kendo.diagram.LayeredLayoutType.Down,
+                        animate: animateTransitions
                     });
             break;
         case  "QForce":
@@ -326,7 +345,8 @@ function layout() {
                         totalMargin: new kendo.diagram.Size(50, 50),
                         componentMargin: new kendo.diagram.Size(120, 20),
                         nodeDistance: 50,
-                        roots: [knownRoot]
+                        roots: [knownRoot],
+                        animate: animateTransitions
                     }
             )
             break;
@@ -417,7 +437,7 @@ $(document).ready(function () {
         <input type="radio" name="LayoutGroup" id="QForce">Standard</input>
     </div>
     <input type="button" value="Create" id="QCreate" disabled/>
-    <input type="checkbox" id="QAnimate" checked>Animate</input>
+    <input type="checkbox" id="QRandomize" checked>Randomize all</input>
     <input type="checkbox" id="QRandomSize">Random sizes</input>
     <div id="canvas"></div>
 </div>

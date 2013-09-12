@@ -970,7 +970,7 @@ kendo_module({
             var initialState = new kendo.diagram.LayoutState(this);
             var finalState = l.layout(options);
             if (finalState) {
-                var unit = new kendo.diagram.LayoutUndoUnit(initialState, finalState);
+                var unit = new kendo.diagram.LayoutUndoUnit(initialState, finalState, options ? options.animate : null);
                 this.undoRedoService.add(unit);
             }
             this.isLayouting = false;

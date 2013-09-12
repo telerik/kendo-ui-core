@@ -1576,9 +1576,11 @@ kendo_module({
             if (Utils.isUndefined(value)) {
                 if (this._root == null) {
                     // TODO: better to use the longest path for the most probable root?
-                    return this.nodes.first(function (n) {
+                    var found= this.nodes.first(function (n) {
                         return n.incoming.length == 0;
-                    })
+                    });
+                    if(found) return found;
+                    return this.nodes.first();
                 }
                 else {
                     return this._root;

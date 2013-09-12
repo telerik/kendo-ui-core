@@ -106,22 +106,22 @@ test('Basics', function () {
 
     ht = new HashTable();
     for (var i = 0; i < 10; i++) {
-        ht.add("k"+i, "v"+i);
+        ht.add("k" + i, "v" + i);
     }
-    equal(ht.length,10);
+    equal(ht.length, 10);
     ht.remove("m");
     equal(ht.length, 10);
     ht.remove("k5");
     equal(ht.length, 9);
     ht.set("k5", "Telerik");
     var telerik = ht.get("k5");
-    equal(telerik.value,"Telerik");
+    equal(telerik.value, "Telerik");
     var clone = ht.clone();
-    equal(clone.length,10);
+    equal(clone.length, 10);
     var found = clone.get("k3");
-    ok(found!=null && found.value=="v3");
-    ok(clone.get("nope")==null);
-    ok(clone.get("k5").value=="Telerik");
+    ok(found != null && found.value == "v3");
+    ok(clone.get("nope") == null);
+    ok(clone.get("k5").value == "Telerik");
 });
 
 /*-----------Dictionary tests------------------------------------*/
@@ -242,7 +242,7 @@ test('Add unique', function () {
     equal(sum, 150);
     set.add("whatever");
     equal(set.get("whatever"), "whatever");
-    ok(set.hash({brand:"Ford", age: 13})!=null);
+    ok(set.hash({brand: "Ford", age: 13}) != null);
 });
 
 /*-----------Graph structure tests------------------------------------*/
@@ -744,18 +744,21 @@ test('Graph adapter', function () {
     var components = adapter.finalGraph.getConnectedComponents();
     ok(components.length == 3, "Forest conversion should return three trees.")
 
+});
+
+test('Loops and multi-links', function () {
     var loopGraph = parse(["1->1", "1->2"]);
     div = GetRoot();
-    diagramElement = $("#canvas").kendoDiagram();
-    diagram = diagramElement.data("kendoDiagram");
+    var diagramElement = $("#canvas").kendoDiagram();
+    var diagram = diagramElement.data("kendoDiagram");
     GraphUtils.createDiagramFromGraph(diagram, loopGraph, false);
 
-    adapter = new Adapter(diagram);
+    var adapter = new Adapter(diagram);
     var g = adapter.convert();
     ok(g.nodes.length == 2);
     ok(g.links.length == 1);
 
-    multiEdgeGraph = parse(["1->2", "1->2", "1->2"]);
+    var multiEdgeGraph = parse(["1->2", "1->2", "1->2"]);
     ok(multiEdgeGraph.nodes.length == 2);
     ok(multiEdgeGraph.links.length == 3);
     div = GetRoot();
@@ -768,23 +771,87 @@ test('Graph adapter', function () {
     ok(g.nodes.length == 2);
     ok(g.links.length == 1);
     ok(adapter.ignoredConnections.length == 2, "Should have ignored two identical connections.");
-
-    // floating and loose ends
-    div = GetRoot();
-    diagramElement = $("#canvas").kendoDiagram();
-    diagram = diagramElement.data("kendoDiagram");
+});
+test('Floating connections analysis', function () {
+    var div = GetRoot();
+    var diagramElement = $("#canvas").kendoDiagram();
+    var diagram = diagramElement.data("kendoDiagram");
     // cannot use parse to create loose connections, too bad
     var a = AddShape(diagram);
     var b = AddShape(diagram);
     AddConnection(diagram, a, b);
     var looseCon = new kendo.diagram.Connection(a, new Point(120, 255));
     diagram.addConnection(looseCon);
-    adapter = new Adapter(diagram);
-    g = adapter.convert();
+    var adapter = new Adapter(diagram);
+    var g = adapter.convert();
     ok(g.nodes.length == 2);
     ok(g.links.length == 1);
     ok(adapter.ignoredConnections.length == 1, "Should have ignored a floating connection.");
+});
+test('Ensure id transfer across the analysis', function () {
+    var div = GetRoot();
+    var diagramElement = $("#canvas").kendoDiagram();
+    var diagram = diagramElement.data("kendoDiagram");
+    var a = AddShape(diagram);
+    a.id = "a";
+    var b = AddShape(diagram);
+    b.id = "b";
+    AddConnection(diagram, a, b);
+    var c = AddShape(diagram);
+    c.id = "c";
+    var d = AddShape(diagram);
+    d.id = "d";
+    AddConnection(diagram, c, d);
 
+    var adapter = new Adapter(diagram);
+    var g = adapter.convert();
+    ok(g.nodes.length == 4);
+    ok(g.links.length == 2);
+    var components = g.getConnectedComponents();
+    equal(components.length, 2);
+    var ids = [];
+    for (var i = 0; i < components.length; i++) {
+        var component = components[i];
+        for (var j = 0; j < component.nodes.length; j++) {
+            var node = component.nodes[j];
+            ids.push(node.id);
+        }
+    }
+    equal(ids.length, 4);
+    ids.sort();
+    ok(["a", "b", "c", "d"].sameAs(ids));
+});
+
+test('Ensure random id transfer across the analysis', function () {
+    var div = GetRoot();
+    var diagramElement = $("#canvas").kendoDiagram();
+    var diagram = diagramElement.data("kendoDiagram");
+    var a = AddShape(diagram);
+    var b = AddShape(diagram);
+    AddConnection(diagram, a, b);
+    var c = AddShape(diagram);
+    var d = AddShape(diagram);
+    AddConnection(diagram, c, d);
+
+    var adapter = new Adapter(diagram);
+    var g = adapter.convert();
+    ok(g.nodes.length == 4);
+    ok(g.links.length == 2);
+    var components = g.getConnectedComponents();
+    equal(components.length, 2);
+    var idsbefore = [a.id, b.id, c.id, d.id];
+    var idsafter = [];
+    for (var i = 0; i < components.length; i++) {
+        var component = components[i];
+        for (var j = 0; j < component.nodes.length; j++) {
+            var node = component.nodes[j];
+            idsafter.push(node.id);
+        }
+    }
+    equal(idsafter.length, 4);
+    idsbefore.sort();
+    idsafter.sort();
+    ok(idsbefore.sameAs(idsafter));
 });
 
 QUnit.module("Layout algorithms");
@@ -1052,20 +1119,20 @@ testSkip('Varying shape size layout', function () {
     ok(true);
 });
 
-test('Layered layout', function () {
-      var div = GetRoot();
-     var diagramElement = $("#canvas").kendoDiagram();
-     var diagram = diagramElement.data("kendoDiagram");
-     diagram.canvas.native.setAttribute("height", "1000");
-     diagram.randomDiagram(50, 15, false, true);
-
-
-  /*  var g = Predefined.Forest(3,3,3);
+testSkip('Layered layout', function () {
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
     diagram.canvas.native.setAttribute("height", "1000");
-    GraphUtils.createDiagramFromGraph(diagram, g, false);*/
+    diagram.randomDiagram(50, 15, false, true);
+
+
+    /*  var g = Predefined.Forest(3,3,3);
+     var div = GetRoot();
+     var diagramElement = $("#canvas").kendoDiagram();
+     var diagram = diagramElement.data("kendoDiagram");
+     diagram.canvas.native.setAttribute("height", "1000");
+     GraphUtils.createDiagramFromGraph(diagram, g, false);*/
 
     var root = diagram.getId("0");
     diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,

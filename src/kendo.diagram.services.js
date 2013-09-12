@@ -46,7 +46,7 @@ kendo_module({
     var LayoutUndoUnit = Class.extend({
         init: function (initialState, finalState, animate) {
             if (Utils.isUndefined(animate)) {
-                this.animate = true;
+                this.animate = false;
             }
             else {
                 this.animate = animate;

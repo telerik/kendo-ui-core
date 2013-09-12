@@ -30,6 +30,7 @@ kendo_module({
         init: function () {
             this.defaultOptions = {
                 roots: null,
+                animate: false,
                 //-------------------------------------------------------------------
                 /**
                  * Force-directed option: whether the motion of the nodes should be limited by the boundaries of the diagram surface.
@@ -773,7 +774,7 @@ kendo_module({
                 this.layoutGraph(component, options);
             }
             var finalNodeSet = this.gridLayoutComponents(components);
-
+            console.log(finalNodeSet.length);
             return new kendo.diagram.LayoutState(this.diagram, finalNodeSet)
         },
 
@@ -3866,6 +3867,8 @@ kendo_module({
                         this.froms.push(shape.bounds().topLeft())
                         this.tos.push(bounds.topLeft());
                     }
+                    else
+                        console.log(id + " not found");
                 }
                 , this);
         },
