@@ -694,6 +694,20 @@
                     deepEqual(path.stroke.options.strokeWidth, 2);
                 });
 
+                test("sets stroke width to 0.1 as a substitute for crispEdges", function() {
+                    var options = { crispEdges: true };
+
+                    createPath(options);
+                    deepEqual(path.stroke.options.strokeWidth, 0.1);
+                });
+
+                test("does not override stroke width if set in combination with crispEdges", function() {
+                    var options = { strokeWidth: 2, crispEdges: true };
+
+                    createPath(options);
+                    deepEqual(path.stroke.options.strokeWidth, 2);
+                });
+
                 test("sets stroke dash type", function() {
                     var options = { dashType: "dot" };
 

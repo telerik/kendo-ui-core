@@ -285,18 +285,6 @@ kendo_module({
             return new SVGText(text.content, deepExtend({}, text.options));
         },
 
-        // TODO: Extract in ViewElement
-        renderCursor: function() {
-            var options = this.options,
-                result = "";
-
-            if (defined(options.cursor.style)) {
-                result += "cursor: " + options.cursor.style + ";";
-            }
-
-            return result;
-        },
-
         renderRotation: function() {
             var text = this,
                 options = text.options,
@@ -329,6 +317,7 @@ kendo_module({
                     "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
                     "#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #" +
                     "#= d.renderDashType() # " +
+                    "#= d.renderShapeOptions() # " +
                     "stroke-linecap='#= d.renderLinecap() #' " +
                     "stroke-linejoin='round' " +
                     "fill-opacity='#= d.options.fillOpacity #' " +
@@ -366,17 +355,6 @@ kendo_module({
             // Overriden by inheritors
         },
 
-        renderCursor: function() {
-            var options = this.options,
-                result = "";
-
-            if (defined(options.cursor.style)) {
-                result += "cursor: " + options.cursor.style + ";";
-            }
-
-            return result;
-        },
-
         renderDashType: function () {
             var path = this,
                 options = path.options;
@@ -404,6 +382,10 @@ kendo_module({
 
         renderDisplay: function() {
             return this.options.visible ? "block" : "none";
+        },
+
+        renderShapeOptions: function() {
+            return this.options.crispEdges ? "shape-rendering='crispEdges'" : "";
         },
 
         destroy: function() {

@@ -1053,8 +1053,9 @@ kendo_module({
                                 round(quietZoneSize + column * baseUnit), round(y + baseUnit));
 
                             view.children.push(view.createRect(box, {
+                                crispEdges: true,
                                 fill: that.options.color,
-                                stroke: that.options.color, strokeWidth: 0.2,
+                                stroke: that.options.color, strokeWidth: 0,
                                 strokeLineJoin: "miter", align: false
                             }));
                         }

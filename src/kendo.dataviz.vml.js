@@ -381,6 +381,10 @@ kendo_module({
                 );
             }
 
+            if (path.options.crispEdges) {
+                path.options.strokeWidth = path.options.strokeWidth || 0.1;
+            }
+
             path.stroke = new VMLStroke(path.options);
             path.fill = new VMLFill(path.options);
         },

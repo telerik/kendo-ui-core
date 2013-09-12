@@ -2333,6 +2333,17 @@ kendo_module({
             }
 
             return output;
+        },
+
+        renderCursor: function() {
+            var options = this.options,
+                result = "";
+
+            if (defined(options.cursor) && options.cursor.style) {
+                result += "cursor: " + options.cursor.style + ";";
+            }
+
+            return result;
         }
     });
 

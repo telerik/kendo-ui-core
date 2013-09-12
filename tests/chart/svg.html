@@ -524,7 +524,7 @@
 
                 test("sets cursor style", function() {
                     text.options.cursor.style = "pointer";
-                    ok(text.render().indexOf("cursor: " + text.options.cursor.style) > -1);
+                    ok(text.render().indexOf("cursor: pointer;") > -1);
                 });
 
                 test("sets rotation transform for 45 degrees", function() {
@@ -717,6 +717,11 @@
                 test("renders data attributes", function() {
                     path.options.data = { testId: 1 };
                     ok(path.render().indexOf("data-test-id='1'") > -1);
+                });
+
+                test("renders shape-rendering attribute", function() {
+                    path.options = { crispEdges: true };
+                    ok(path.render().indexOf("shape-rendering='crispEdges'") > -1);
                 });
 
                 test("clone returns different instance", function() {
