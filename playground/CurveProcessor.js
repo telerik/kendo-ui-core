@@ -369,12 +369,10 @@ CurveProcessor.prototype = CurveProcessor.fn = {
             }
           
             if(previousCoefficients){
-            debugger;
                 controlPoins = that.getControlPoints(fn, xField, yField, points[points.length -2], points[points.length -1], undefined, previousCoefficients);
                 controlPoins[1] =  that.getControlPoints(fn, xField, yField, points[points.length -2], points[points.length -1], [0,0])[1];
             }
-            else{
-             debugger;
+            else{             
                 controlPoins = that.getControlPoints(fn, xField, yField, points[points.length -2], points[points.length -1], tangents);
             }
             addPoint.apply(null,controlPoins);

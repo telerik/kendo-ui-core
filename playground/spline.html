@@ -10,14 +10,22 @@
         <script src="../src/kendo.userevents.js"></script>
         <script src="../src/kendo.dataviz.core.js"></script>
         <script src="../src/kendo.dataviz.chart.js"></script>
+         <script src="../src/kendo.dataviz.chart.polar.js"></script>
         <script src="../src/kendo.dataviz.vml.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
         <script src="../src/kendo.dataviz.canvas.js"></script>
         <script src="../src/kendo.dataviz.themes.js"></script>
         <script src="CurveProcessor.js"></script>
     </head>
-    <body>
-     <div id="splineArea"></div>
+    <body>    
+    <div id="test"></div>
+    <div id="polar2"></div>
+    <div id="polar3"></div>
+    <div id="polar"></div>
+     <div id="polarArea"></div>
+     <div id="radar"></div>
+       <div id="radarArea"></div>
+    <div id="splineArea"></div>
       <div id="verticalSplineArea"></div>
      <div id="stackedArea"></div>
       <div id="verticalStackedArea"></div>    
@@ -29,11 +37,254 @@
      <div id="stackedSpline"></div>
         <div id="notesSpline"></div>
        <div id="splineGroupedData"></div>
-    <div id="verticalSpline"></div>
-    <script>                             
-          $("#scatter").kendoChart({
+    <div id="verticalSpline"></div> 
+    <script>    
+    $("#test").kendoChart({
+        seriesDefaults: {
+            type: "scatterLine",
+            smooth: true,
+            markers: {
+                visible: true
+            }
+        },
+        series: [{
+            data: [[1,1],[1.2,3],[1.5,6], [1.52,7],[6,4]]
+        }]
+    });
+    
+      var sunPos = [
+            {"time":"08:00","altitude":4.9,"azimuth":92.7},
+            {"time":"09:00","altitude":17.6,"azimuth":100.6},
+            {"time":"10:00","altitude":30.1,"azimuth":109.7},
+            {"time":"11:00","altitude":41.8,"azimuth":121.3},
+            {"time":"12:00","altitude":51.8,"azimuth":137.7},
+            {"time":"13:00","altitude":58.5,"azimuth":161.5},
+            {"time":"14:00","altitude":59.4,"azimuth":190.7},
+            {"time":"15:00","altitude":54.1,"azimuth":216.6},
+            {"time":"16:00","altitude":44.8,"azimuth":234.8},
+            {"time":"17:00","altitude":33.5,"azimuth":247.6},
+            {"time":"18:00","altitude":21.2,"azimuth":257.2},
+            {"time":"19:00","altitude":8.4,"azimuth":265.3},
+        ];
+    $("#polar3").kendoChart({
+            title: {
+                text: "Antenna Gain (dB)"
+            },
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "../demos/mvc/content/dataviz/js/antenna-gain.json",
+                        dataType: "json"
+                    }
+                }
+            },
+            series: [{
+                markers: {
+                    visible: true,
+                    size: 4
+                },
+                smooth: true,
+                type: "polarLine",
+                xField: "azimuth",
+                yField: "gain"
+            }],
+            xAxis: {
+                majorUnit: 30
+            }
+        });
+  $("#polar2").kendoChart({
+            title: {
+                text: "Sun position at equinox"
+            },
+            dataSource: {
+                data: sunPos
+            },
+            series: [{
+                smooth: true,
+                 markers: {
+                    visible: true,
+                    size: 4
+                },
+                type: "polarLine",
+                xField: "azimuth",
+                yField: "altitude",
+                labels: {
+                    template: "#= dataItem.time.substring(0,2) #h",
+                    position: "below",
+                    visible: true
+                }
+            }],
+            xAxis: {
+                startAngle: -90,
+                majorUnit: 30
+            },
+            yAxis: {
+                labels: {
+                    visible: false
+                }
+            }
+        });
+  $("#polar").kendoChart({
+            title: {
+                text: "Polar plot"
+            },
+            seriesDefaults: {
+                type: "polarLine",
+                smooth: true,
+                markers: {
+                    visible: false,
+                    size: 4
+                }
+            },
+            tooltip: {
+                visible: true
+            },
+            series: [{
+                data: [
+                    [0, 0], [15, 2], [30, 4],
+                    [45, 6], [60, 8], [75, 10],
+                    [90, 12], [105, 14], [120, 16],
+                    [135, 18], [150, 20], [165, 22],
+                    [180, 24], [195, 26], [210, 28],
+                    [225, 30], [240, 32], [255, 34],
+                    [270, 36], [285, 38], [300, 40],
+                    [315, 42], [330, 44], [345, 46],
+                    [360, 48], [15, 50], [30, 52],
+                    [45, 54], [60, 56], [75, 58], [90, 60]
+                ]
+            },{
+                data: [
+                    [0, 0], [15, 1], [30, 2],
+                    [45, 3], [60, 4], [75, 5],
+                    [90, 6], [105, 7], [120, 8],
+                    [135, 9], [150, 10], [165, 11],
+                    [180, 12], [195, 13], [210, 14],
+                    [225, 15], [240, 16], [255, 17],
+                    [270, 18], [285, 19], [300, 20],
+                    [315, 21], [330, 22], [345, 23],
+                    [360, 24], [15, 25], [30, 26],
+                    [45, 27], [60, 28], [75, 29], [90, 30]
+                ]
+            },{
+                data: [
+                    [0, 0], [15, 3], [30, 6],
+                    [45, 9], [60, 12], [75, 15],
+                    [90, 18], [105, 21], [120, 24],
+                    [135, 27], [150, 30], [165, 33],
+                    [180, 36], [195, 39], [210, 42],
+                    [225, 45], [240, 48], [255, 51],
+                    [270, 54], [285, 57], [300, 60],
+                    [315, 63], [330, 66], [345, 69],
+                    [360, 72], [15, 75], [30, 78],
+                    [45, 81], [60, 84], [75, 87], [90, 90]
+                ]
+            }]
+        });
+      $("#polarArea").kendoChart({
+            title: {
+                text: "Polar area"
+            },
+            legend: {
+                position: "bottom"
+            },
+            series: [{
+                type: "polarArea",
+                smooth: true,
+                markers: {
+                    visible: true
+                },
+                data: [
+                    [10, 10], [30, 20], [50, 30],
+                    [70, 20], [90, 10], [90, 0],
+                    [230, 10], [235, 20], [240, 30],
+                    [245, 20], [250, 10]
+                ]
+            }]
+        });
+      $("#radar").kendoChart({
+                title: {
+                    text: "Market Value of Major Banks"
+                },
+                legend: {
+                    position: "bottom"
+                },
                 seriesDefaults: {
-                    type: "scatterSpline"
+                    type: "radarLine",
+                    smooth: true,
+                    markers: {
+                        visible: false
+                    }
+                },
+                series: [{
+                    name: "Market value as of 2007",
+                    data: [116, 165, 215, 75, 100, 49, 80, 116, 108, 90, 67, 76, 91, 255, 120]
+                },{
+                    name: "Market value as of 2009",
+                    data: [64, 85, 97, 27, 16, 26, 35, 32, 26, 17, 10, 7, 19, 5]
+                }],
+                categoryAxis: {
+                    categories: ["Santander", "JP Morgan", "HSBC", "Credit Suisse",
+                        "Goldman Sachs", "Morgan Stanley", "Societe Generale", "UBS",
+                        "BNP Paribas", "Unicredit", "Credit Agricole", "Deutsche Bank",
+                        "Barclays", "Citigroup", "RBS"]
+                },
+                valueAxis: {
+                    labels: {
+                        format: "${0}"
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    format: "${0} bln"
+                }
+            });
+         $("#radarArea").kendoChart({
+                title: {
+                    text: "Employment candidate review"
+                },
+                legend: {
+                    position: "bottom"
+                },
+                seriesDefaults: {
+                    type: "radarArea",
+                    smooth: true,
+                    stack: true,
+                    markers: {
+                        visible: false
+                    }                    
+                },
+                series: [{
+                    name: "Andrew Dodsworth",
+                    data: [10, 3, 3, 10, 2, 10]
+                }, {
+                    name: "Margaret Peacock",
+                    data: [9, 7, 7, 9, 6, 7]
+                }, {
+                    name: "Nancy Callahan",
+                    data: [4, 10, 10, 5, 5, 4]
+                }],
+                categoryAxis: {
+                    categories: [
+                        "Experience", "Communication", "Friendliness",
+                        "Subject knowledge", "Presentation", "Education"
+                    ],
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                valueAxis: {
+                    labels: {
+                        format: "{0}%"
+                    },
+                    line: {
+                        visible: false
+                    }
+                }
+            });
+         $("#scatter").kendoChart({
+                seriesDefaults: {
+                    type: "scatterLine",
+                    smooth: true
                 },
                 series: [{
                     data: [[1,2],[10,3],[9,1],[11,2],[10,0], [12,2]]
@@ -45,7 +296,8 @@
             });
             $("#scatterBall").kendoChart({
                 seriesDefaults: {
-                    type: "scatterSpline"
+                    type: "scatterLine",
+                    smooth: true
                 },
                 series: [{
                     name: "lqvo mudo",
@@ -92,12 +344,13 @@
             });    
             $("#spline").kendoChart({
                 seriesDefaults: {
-                    type: "spline"
+                    type: "line",
+                    smooth: true
                 },
                 series: [
                 {
                     color:"#2f7ed8",             
-                    name: "test",
+                    name: "test",//incorrect display between 10.4 and 10.9 
                     data: [4.3, 5.1, 4.3, 5.2, 5.4, 4.7, 3.5, 4.1, 5.6, 7.4, 6.9, 7.1,
                     7.9, 7.9, 7.5, 6.7, 7.7, 7.7, 7.4, 7.0, 7.1, 5.8, 5.9, 7.4,
                     8.2, 8.5, 9.4, 8.1, 10.9, 10.4, 10.9, 12.4, 12.1, 9.5, 7.5,
@@ -118,12 +371,13 @@
             });  
             $("#basicSpline").kendoChart({
                 seriesDefaults: {
-                    type: "spline"
+                    type: "line",
+                    smooth: true
                 },
                 series: [
                 {
                     name: "India",
-                    data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855]                    
+                    data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855] //incorrect display between 8.238 and 9.552                   
                 }
                 ,
                 {
@@ -165,9 +419,10 @@
                     visible: false
                 },
                 seriesDefaults: {
-                    type: "spline",
+                    type: "line",
                     missingValues: "gap",
-                    stack: true
+                    stack: true,
+                    smooth: true
                 },
                 series: [{
                     name: "Gold Medals",
@@ -257,7 +512,8 @@
                     position: "bottom"
                 },
                 seriesDefaults: {
-                    type: "spline"
+                    type: "line",
+                    smooth: true
                 },
                 series: [{
                     field: "win",
@@ -295,7 +551,8 @@
                     dataSource: stocksDataSource,
                     theme: "default",
                     series: [{
-                        type: "spline",
+                        type: "line",
+                        smooth: true,
                         field: "close",
                         name: "#= group.value # (close)",
                         markers: {
@@ -323,7 +580,8 @@
             
            $("#verticalSpline").kendoChart({
                 seriesDefaults: {
-                    type: "verticalSpline",
+                    type: "verticalLine",
+                    smooth: true,
                     markers: {
                         visible: true
                     }
@@ -367,7 +625,8 @@
                     position: "bottom"
                 },
                 seriesDefaults: {
-                    type: "splineArea",
+                    type: "area",
+                    smooth: true,
                     markers:{visible: false},
                     opacity: 0.4
                 },
@@ -410,7 +669,8 @@
                     position: "bottom"
                 },
                 seriesDefaults: {
-                    type: "verticalSplineArea",
+                    type: "verticalArea",
+                    smooth: true,
                     markers:{visible: false},
                     opacity: 0.4
                 },
@@ -454,7 +714,8 @@
                     position: "bottom"
                 },
                 seriesDefaults: {
-                    type: "splineArea",                    
+                    type: "area",      
+                    smooth: true,                    
                     stack: true,
                     opacity: 0.4,
                     markers: {
@@ -516,8 +777,9 @@
                     position: "bottom"
                 },
                 seriesDefaults: {
-                    type: "verticalSplineArea",                    
+                    type: "verticalArea",                    
                     stack: true,
+                    smooth: true,
                     opacity: 0.4,
                     markers: {
                         visible: false,

@@ -3618,59 +3618,86 @@ kendo_module({
 
          return 0;
     }
-
-    var CurveProcessor = function(allowedError){
+    //check the performance with parametrization of fourth degree with extremum at the end points
+    var CurveProcessor = function(allowedError, closed){
         this.allowedError = defined(allowedError) ? math.abs(allowedError): 0;
+        this.closed = closed;
     };
 
     CurveProcessor.prototype = CurveProcessor.fn = { 
         process: function(points){
             var that = this,
-                length = points.length,             
+                closed = that.closed,
+                length = points.length,                             
+                result = [],                
+                xField, yField,               
                 currentPoints,
-                xField, yField,                
-                result = [],
+                lastControlPoint, 
+                orientation,                
                 addPoint = function(point){
                     result.push(point);
                 };
-            if(points.length < 3){
+            if(length < 3){
                 return points;
             }        
-            addPoint(points[0]); 
-            currentPoints = points.slice(0,3);
-            if(that.isLinearByField(currentPoints, "x")){
-                xField = "x";
-                yField = "y";
-            }
-            else{
-                xField = "y";
-                yField = "x"; 
-            }
        
-            p1 = that.getInitialControlPoint(currentPoints, xField, yField);
-            addPoint(p1);
+            addPoint(points[0]);
             
+            currentPoints = closed ? [points[length - 1], points[0], points[1]] : points.slice(0,3);
+            orientation = that.getOrientation(currentPoints);
+            if(closed){
+                controlPoints = that.getMiddleControlPoints(currentPoints, orientation);
+                p1 = controlPoints[1];
+                lastControlPoint = controlPoints[0];
+            }
+            else{           
+                p1 = that.getInitialControlPoint(currentPoints, orientation);
+            }
+            
+            addPoint(p1);
+           
             for(var idx = 0; idx <= length - 3; idx++) {
+               
                 currentPoints = points.slice(idx, idx + 3);
-                if(that.isLinearByField(currentPoints, "x")){
-                    xField = "x";
-                    yField = "y";
-                }
-                else{
-                    xField = "y";
-                    yField = "x"; 
-                }
-                controlPoints = that.getMiddleControlPoints(currentPoints, xField, yField);
+                 
+                orientation = that.getOrientation(currentPoints);
+                controlPoints = that.getMiddleControlPoints(currentPoints, orientation);
                 addPoint(controlPoints[0]);
                 addPoint(currentPoints[1]);    
                 addPoint(controlPoints[1]);              
             }
                 
-          
-            addPoint(that.getSecondControlPoint(0, points[length -2], points[length -1], xField, yField));
-            addPoint(points[length -1]);  
+            if(closed){
+                currentPoints = [points[length - 2], points[length -1], points[0]];
+                orientation = that.getOrientation(currentPoints);
+                controlPoints = that.getMiddleControlPoints(currentPoints, orientation);
+                addPoint(controlPoints[0]);
+                addPoint(points[length -1]);
+                addPoint(controlPoints[1]);
+                addPoint(lastControlPoint);
+                addPoint(points[0]);
+            }
+            else{
+                addPoint(that.getSecondControlPoint(0, points[length -2], points[length -1], orientation.xField, orientation.yField));
+                addPoint(points[length -1]); 
+            }
+ 
             return result;
         },
+        
+        getOrientation: function(points){
+            var orientation = {};
+            if(this.isLinearByField(points, "x")){
+                orientation.xField = "x";
+                orientation.yField = "y";
+            }
+            else{
+                orientation.xField = "y";
+                orientation.yField = "x"; 
+            }
+            return orientation;
+        },
+        
         getSymetricToPoint: function(idx, points, fn, xField, yField){
             var y = points[idx][yField],
                 x1 = ((-fn[1] + Math.sqrt(fn[1]*fn[1] - 4*fn[2] * (fn[0] - points[idx][yField]))) / (2*fn[2])),
@@ -3680,12 +3707,15 @@ kendo_module({
                 
             return point;
         },
-        getInitialControlPoint: function(currentPoints, xField, yField){
+        
+        getInitialControlPoint: function(currentPoints, orientation){
             var that = this,                    
-                controlPoint,
                 p0 = currentPoints[0],
                 p1 = currentPoints[1],
-                p2 = currentPoints[2];
+                p2 = currentPoints[2],
+                xField = orientation.xField,
+                yField = orientation.yField,
+                controlPoint;
             if(that.isMonotonic(currentPoints,yField)){
                 var fn = that.getParabolaPointsFunction(currentPoints,xField, yField),
                     fnd = that.getDerivative(fn),
@@ -3710,13 +3740,17 @@ kendo_module({
             }
             return controlPoint;
         },
-        getMiddleControlPoints: function(currentPoints, xField, yField){
+
+        getMiddleControlPoints: function(currentPoints, orientation){
             var that = this,                    
                 controlPoint2,
                 nextControlPoint,
+                extremum,
                 p0 = currentPoints[0],
                 p1 = currentPoints[1],
                 p2 = currentPoints[2],
+                xField = orientation.xField,
+                yField = orientation.yField,
                 allowedError = that.allowedError;
             //distinguish the case when the extremum is between the points but is still acceptable
             if(that.isMonotonic(currentPoints,yField)){
@@ -3775,6 +3809,9 @@ kendo_module({
             var tangent,
                 x = points[1][xField] - points[0][xField],
                 y = points[1][yField] - points[0][yField];
+            if(x == 0 && y == 0){
+                return 0;
+            }
             if(math.abs(x/y) <= math.abs(y/x)){
                tangent = x/y;
             }
@@ -3795,7 +3832,7 @@ kendo_module({
                 t = t2 - t1,
                 weigth = 0.3;
                
-            controlPoint[xField] = t1 + (t || (p3[yField] > p0[yField] ? -1 : 1)) * weigth;
+            controlPoint[xField] = t1 + t * weigth;
             controlPoint[yField] = p0[yField] + t * weigth * tangent;
             return controlPoint;
         },

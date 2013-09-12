@@ -4782,7 +4782,8 @@ kendo_module({
     var SplineSegment = LineSegment.extend({
         points: function(){
             //move curveProcessor initialization to init and get the allowedError from teh parameters
-            var curveProcessor = new CurveProcessor(0.01),
+            var segment = this,
+                curveProcessor = new CurveProcessor(0.01, segment.options.closed),
                 points = LineSegment.fn.points.call(this);
 
             return curveProcessor.process(points);
@@ -4813,13 +4814,7 @@ kendo_module({
                 })
             ];
         }
-    });
-    
-    var SplineChart = LineChart.extend({
-        createSegment: function(linePoints, currentSeries, seriesIx, prevSegment){
-            return new SplineSegment(linePoints, currentSeries, seriesIx);
-        }
-    });
+    });    
     
     var AreaSegmentMixin = {
         points: function() {
@@ -4915,7 +4910,8 @@ kendo_module({
         createSegment: function(linePoints, currentSeries, seriesIx, prevSegment) {
             var chart = this,
                 options = chart.options,
-                stackPoints, pointType;
+                stackPoints, pointType,
+                style = (currentSeries.line || {}).style;
 
             if (options.isStacked && seriesIx > 0 && prevSegment) {
                 stackPoints = prevSegment.linePoints;
@@ -4923,7 +4919,11 @@ kendo_module({
                     stackPoints = stackPoints.slice(0).reverse();
                 }
             }
-
+            
+            if(style === SMOOTH){
+                return new SplineAreaSegment(linePoints, prevSegment, isStacked, currentSeries, seriesIx);
+            }
+            
             if ((currentSeries.line || {}).style === STEP) {
                 pointType = StepAreaSegment;
             } else {
@@ -4939,26 +4939,26 @@ kendo_module({
     });
 
     var SplineAreaSegment = AreaSegment.extend({
-        init: function(linePoints, prevSegment, currentSeries, seriesIx){
+        init: function(linePoints, prevSegment, isStacked, currentSeries, seriesIx){
             var segment = this;
-
+            
             segment.prevSegment = prevSegment;
-
+            segment.isStacked = isStacked;
             LineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx)
         },
         points: function(){
             var segment = this,
                 chart = segment.parent,
                 prevSegment = segment.prevSegment,
-                curveProcessor = new CurveProcessor(0),
+                curveProcessor = new CurveProcessor(0, segment.options.closed),
                 linePoints = LineSegment.fn.points.call(this),
                 curvePoints = curveProcessor.process(linePoints),
                 previousPoints,
                 points;                
-                
+        
             segment.curvePoints = curvePoints;
             
-            if(chart.options.isStacked && prevSegment){
+            if(segment.isStacked && prevSegment){
                 points = curvePoints.slice(0);            
                 points.push(last(curvePoints));                
                 previousPoints = prevSegment.curvePoints.slice(0).reverse();
@@ -5039,12 +5039,7 @@ kendo_module({
             ];
         }
     });
-    
-    var SplineAreaChart = AreaChart.extend({
-        createSegment: function(linePoints, currentSeries, seriesIx, prevSegment) {
-            return new SplineAreaSegment(linePoints, prevSegment, currentSeries, seriesIx);
-        }
-    });      
+       
     
     var StepAreaSegment = StepLineSegment.extend({
         init: function(linePoints, stackPoints, currentSeries, seriesIx) {
@@ -5357,13 +5352,6 @@ kendo_module({
         }
     });
     deepExtend(ScatterLineChart.fn, LineChartMixin);
-
-    
-    var ScatterSplineChart = ScatterLineChart.extend({
-        createSegment: function(linePoints, currentSeries, seriesIx, prevSegment){            
-            return new SplineSegment(linePoints, currentSeries, seriesIx);
-        }
-    });
     
     var BubbleChart = ScatterChart.extend({
         options: {
@@ -8400,23 +8388,7 @@ kendo_module({
                 });
 
             plotArea.appendChart(areaChart, pane);
-        },
-        
-        createSplineAreaChart: function(series, pane) {
-            if (series.length === 0) {
-                return;
-            }
-
-            var plotArea = this,
-                firstSeries = series[0],
-                splineAreaChart = new SplineAreaChart(plotArea, {
-                    invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack && series.length > 1,
-                    series: series
-                });
-
-            plotArea.appendChart(splineAreaChart, pane);
-        },        
+        },            
 
         createOHLCChart: function(series, pane) {
             if (series.length === 0) {
@@ -8751,12 +8723,6 @@ kendo_module({
                     filterSeriesByType(filteredSeries, BUBBLE),
                     pane
                 );
-                  
-                plotArea.createScatterSplineChart(
-                    filterSeriesByType(filteredSeries, SCATTER_SPLINE),
-                    pane
-                );
-                
             }
 
             plotArea.createAxes(panes);
@@ -8833,17 +8799,6 @@ kendo_module({
             }
         },
       
-        createScatterSplineChart: function(series, pane) {
-            var plotArea = this;
-
-            if (series.length > 0) {
-                plotArea.appendChart(
-                    new ScatterSplineChart(plotArea, { series: series }),
-                    pane
-                );
-            }
-        },
-        
         createBubbleChart: function(series, pane) {
             var plotArea = this;
 
@@ -11145,7 +11100,7 @@ kendo_module({
     ]);
 
     PlotAreaFactory.current.register(XYPlotArea, [
-        SCATTER, SCATTER_LINE, BUBBLE, SCATTER_SPLINE
+        SCATTER, SCATTER_LINE, BUBBLE
     ]);
 
     PlotAreaFactory.current.register(PiePlotArea, [PIE]);
@@ -11162,7 +11117,7 @@ kendo_module({
     );
 
     SeriesBinder.current.register(
-        [SCATTER, SCATTER_LINE, BUBBLE, SCATTER_SPLINE],
+        [SCATTER, SCATTER_LINE, BUBBLE],
         [X, Y], [COLOR, NOTE_TEXT, X_ERROR_LOW_FIELD, X_ERROR_HIGH_FIELD, Y_ERROR_LOW_FIELD, Y_ERROR_HIGH_FIELD]
     );
 
@@ -11255,6 +11210,8 @@ kendo_module({
         SeriesAggregator: SeriesAggregator,
         SeriesBinder: SeriesBinder,
         ShapeElement: ShapeElement,
+        SplineSegment: SplineSegment,
+        SplineAreaSegment: SplineAreaSegment,
         StackLayout: StackLayout,
         Tooltip: Tooltip,
         OHLCChart: OHLCChart,

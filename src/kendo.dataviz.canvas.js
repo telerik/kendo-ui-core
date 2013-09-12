@@ -115,6 +115,10 @@ kendo_module({
             return new CanvasLine(box.points(), true, this.setDefaults(style));
         },
 
+        createCubicCurve: function(points, options, areaPoints){
+             return new CanvasCubicCurve(points, options, areaPoints);
+        },
+        
         createLine: function(x1, y1, x2, y2, options) {
             return new CanvasLine([new Point2D(x1, y1), new Point2D(x2, y2)],
                 false, this.setDefaults(options));
@@ -245,19 +249,31 @@ kendo_module({
     });
 
     var CanvasCubicCurve = CanvasPath.extend({
-      init: function(points, options) {
+      init: function(points, options, areaPoints) {
         var curve = this;
         CanvasPath.fn.init.call(curve, options);
-
+        
         curve.points = points;
+        curve.areaPoints = areaPoints;
       },
       renderPoints: function(ctx){
          var curve = this,
+            i,
+            areaPoints = curve.areaPoints,
             points = curve.points;
             ctx.moveTo(points[0].x, points[0].y);           
-            for(var i = 1; i < points.length; i+=3){
-                ctx.bezierCurveTo(points[i].x,points[i].y,points[i+1].x,points[i+1].y, points[i+2].x,points[i+2].y);  
-            }           
+            for(i = 1; i < points.length; i+=3){
+                ctx.bezierCurveTo(round(points[i].x, COORD_PRECISION), round(points[i].y,COORD_PRECISION),
+                    round(points[i+1].x, COORD_PRECISION), round(points[i+1].y, COORD_PRECISION), round(points[i+2].x, COORD_PRECISION),
+                    round(points[i+2].y, COORD_PRECISION));  
+            }  
+
+            if(areaPoints && areaPoints.length){
+                for(i = 0; i < areaPoints.length; i++){
+                    ctx.lineTo(round(areaPoints[i].x, COORD_PRECISION), round(areaPoints[i].y, COORD_PRECISION));
+                }
+                ctx.closePath();
+            }
        }
     });
 
