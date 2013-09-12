@@ -1071,10 +1071,25 @@ kendo_module({
         return instance;
     }
 
+    function serializeDateRule(dateRule, zone) {
+        var value = dateRule.value;
+        var tzid = dateRule.tzid || "";
+
+        value = timezone.convert(value, tzid || zone || value.getTimezoneOffset(), "Etc/UTC");
+
+        if (tzid) {
+            tzid = ";TZID=" + tzid;
+        }
+
+        return tzid + ":" + kendo.toString(value, "yyyyMMddTHHmmssZ") + " ";
+    }
+
     function serialize(rule, zone) {
         var weekStart = rule.weekStart,
             ruleString = "FREQ=" + rule.freq.toUpperCase(),
-            until = rule.until;
+            until = rule.until,
+            start = rule.start || "",
+            end = rule.end || "";
 
         if (rule.interval > 1) {
             ruleString += ";INTERVAL=" + rule.interval;
@@ -1127,6 +1142,18 @@ kendo_module({
 
         if (weekStart !== undefined) {
             ruleString += ";WKST=" + WEEK_DAYS[weekStart];
+        }
+
+        if (start) {
+            start = "DTSTART" + serializeDateRule(start, zone);
+        }
+
+        if (end) {
+            end = "DTEND" + serializeDateRule(end, zone);
+        }
+
+        if (start || end) {
+            ruleString = start + end + "RRULE:" + ruleString;
         }
 
         return ruleString;
