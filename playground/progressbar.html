@@ -239,21 +239,77 @@
 </style>
 </head>
     <body>
+        <div id="anim" style="width: 50px; height: 20px; border: 2px solid blue;">asdf</div>
+        </br></br></br>
         <div id="progressbar"></div>
+        <button class='k-button setValue'>Set value</button>
+        </br></br></br>
+        <div id="progressbar-chunk"></div>
         </br></br></br>
         <div id="progressbar-rev"></div>
         </br></br></br>
         <div id="progressbar-vert"></div>
+        <div id="progressbar-chunk-vert"></div>
+        </br></br></br>
         <script>
 
-            $("#progressbar").kendoProgressBar({});
+            $("#anim").animate({
+                width: "200px"
+            },{
+                duration: 1000,
+                progress: function(e) {
+                    //console.log($(this).width());
+                }
+            });
+
+            $(".setValue").click(function(){
+                $("#progressbar").data("kendoProgressBar").value(20);
+
+                $("#progressbar-rev").data("kendoProgressBar").value(20);
+            });
+
+            $("#progressbar").kendoProgressBar({
+                // min: 5,
+                // max: 50,
+                // value: 27,
+                showStatus: true,
+                start: function(e) {
+                    console.log("Start event. Value: " + e.value);
+                },
+                change: function(e) {
+                    console.log("Change event. Value: " + e.value);
+                },
+                complete: function(e) {
+                    console.log("Complete event. Value: " + e.value);
+                },
+                animation: false
+            });
+
+            $("#progressbar-chunk").kendoProgressBar({
+                type: "chunk",
+                chunkCount: 10,
+                min: 0,
+                max: 10,
+                value: 2
+            });
 
             $("#progressbar-rev").kendoProgressBar({
-                reverse: true
+                reverse: true,
+                showStatus: false,
+                value: 20,
+                animation: {
+                    duration: 400
+                }
             });
 
             $("#progressbar-vert").kendoProgressBar({
                 orientation: "vertical"
+            });
+
+            $("#progressbar-chunk-vert").kendoProgressBar({
+                orientation: "vertical",
+                type: "chunk",
+                chunkCount: 17
             });
         </script>
     </body>

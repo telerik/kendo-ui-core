@@ -127,7 +127,7 @@ WEB_JS = FileList[
     "src/kendo.scheduler.agendaview.js",
     "src/kendo.scheduler.monthview.js",
     "src/kendo.scheduler.recurrence.js",
-    "src/kendo.scheduler.js",
+    "src/kendo.scheduler.js"
 ]
 
 WEB_SRC_JS = FileList[WEB_JS].include('src/cultures/*.js', 'src/kendo.timezones.js', 'src/kendo.web.js').exclude('**/*.min.js')

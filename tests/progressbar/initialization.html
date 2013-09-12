@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Progressbar tests</title>
+        <title>ProgressBar tests</title>
         <script src="../jquery-loader.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
-        <h1 id="qunit-header">Progressbar tests</h1>
+        <h1 id="qunit-header">ProgressBar tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -54,13 +54,204 @@
                 equal(pb.element[0], container);
             });
 
-            test("wrapper field is initialized", function() {
+            test("Wrapper field is initialized", function() {
                var pb = new ProgressBar(container);
 
                equal(pb.wrapper[0], container);
             });
 
+            test("Css classes are added to the wrapper", function() {
+                var pb = new ProgressBar(container);
 
+                ok(pb.wrapper.hasClass("k-widget"));
+                ok(pb.wrapper.hasClass("k-progressbar"));
+            });
+
+            test("Correct css classes for horizontal progressbar are added to the wrapper", function() {
+                var pb = new ProgressBar(container, {
+                    orientation: "horizontal"
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-horizontal"));
+            });
+
+            test("Correct css classes for vertical progressbar are added to the wrapper", function() {
+                var pb = new ProgressBar(container, {
+                    orientation: "vertical"
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-vertical"));
+            });
+
+            test("Correct css classes for horizontal reverse progressbar are added to the wrapper", function() {
+                var pb = new ProgressBar(container, {
+                    reverse: true
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-horizontal"));
+                ok(pb.wrapper.hasClass("k-progressbar-reverse"));
+            });
+
+            test("Correct css classes for vertical reverse progressbar are added to the wrapper", function() {
+                var pb = new ProgressBar(container, {
+                    reverse: true,
+                    orientation: "vertical"
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-vertical"));
+                ok(pb.wrapper.hasClass("k-progressbar-reverse"));
+            });
+
+
+            //-----------------------------------------------------------------------
+            //-----------------------------------------------------------------------
+            module("Initialization / Regular ProgressBar", {
+                setup: function() {
+                    moduleSetup();
+                },
+                teardown: function(){
+                    moduleTeardown();
+                }
+            });
+
+            test("ProgressBar wrapper is empty when value is equal to min and showStatus is false", function() {
+                var pb = new ProgressBar(container, {
+                    min: 10,
+                    value: 10,
+                    showStatus: false
+                });
+
+                ok(pb.wrapper.is(":empty"));
+            });
+
+            test("ProgressBar contains empty div for progress wrapper when value is not equal to min and showStatus is false", function() {
+                var pb = new ProgressBar(container, {
+                    min: 10,
+                    value: 20,
+                    showStatus: false
+                });
+
+                var progressWrapper = pb.wrapper.find(".k-state-selected");
+                
+                equal(progressWrapper.length, 1);
+                ok(progressWrapper.is(":empty"));
+            });
+
+            test("Size of progress wrapper div reflects value when value is not equal to min and showStatus is false", function() {
+                var pb = new ProgressBar(container, {
+                    min: 5,
+                    max: 1000,
+                    value: 200,
+                    showStatus: false
+                });
+
+                var progressWrapperExpectedSize = pb._calculatePercentage().toFixed(10);
+                var actualProgressWrapperSize = parseFloat(pb.wrapper.find(".k-state-selected")[0].style.width).toFixed(10);
+
+                equal(actualProgressWrapperSize, progressWrapperExpectedSize);
+            });
+
+            test("ProgressBar wrapper contains progress status holder when value is equal to min and showStatus is true", function() {
+                var pb = new ProgressBar(container, {
+                    showStatus: true
+                });
+
+                var progressStatusHolder = pb.wrapper.children("span.k-progress-status-wrap");
+
+                equal(progressStatusHolder.length, 1);
+            });
+
+            test("ProgressBar wrapper contains progress status holder and progress wrapper when value is not equal to min and showStatus is true", function() {
+                var pb = new ProgressBar(container, {
+                    min: 10,
+                    max: 200,
+                    value: 50,
+                    showStatus: true
+                });
+
+                var progressStatusHolder = pb.wrapper.children("span.k-progress-status-wrap");
+                var progressWrapper = pb.wrapper.find(".k-state-selected");
+                var progressWrapperStatusHolder = $("span.k-progress-status-wrap", progressWrapper);
+
+                equal(progressStatusHolder.length, 1);
+                equal(progressWrapper.length, 1);
+                equal(progressWrapperStatusHolder.length, 1);
+            });
+            //-----------------------------------------------------------------------
+            //-----------------------------------------------------------------------
+            module("Initialization / Chunk ProgressBar", {
+                setup: function() {
+                    moduleSetup();
+                },
+                teardown: function(){
+                    moduleTeardown();
+                }
+            });
+
+            test("Chunk ProgressBar contains a single ul element to hold the chunks", function() {
+                var pb = new ProgressBar(container, {
+                    type: "chunk"
+                });
+
+                equal(pb.wrapper.find("ul.k-reset").length, 1);
+            });
+
+            test("Chunk ProgressBar contains a li element for each chunk", function() {
+                var pb = new ProgressBar(container, {
+                    type: "chunk"
+                });
+
+                equal(pb.wrapper.find("li.k-item").length, pb.options.chunkCount);
+            });
+
+            test("Correct css class is added to each upcoming chunk", function() {
+                var pb = new ProgressBar(container, {
+                    type: "chunk"
+                });
+
+                ok(pb.wrapper.find("li.k-item").hasClass("k-state-default"));
+            });
+
+            test("Correct css class is added to the first chunk", function() {
+                var pb = new ProgressBar(container, {
+                    type: "chunk"
+                });
+
+                ok(pb.wrapper.find("li.k-item:first").hasClass("k-first"));
+            });
+
+            test("Correct css class is added to the last chunk", function() {
+                var pb = new ProgressBar(container, {
+                    type: "chunk"
+                });
+
+                ok(pb.wrapper.find("li.k-item:last").hasClass("k-last"));
+            });
+
+            test("Correct css class is added to the completed chunks", function() {
+                var pb = new ProgressBar(container, {
+                    type: "chunk",
+                    value: 45
+                });
+
+                var completedChunks = pb.wrapper.find("li.k-item:lt(2)");
+
+                equal(pb.wrapper.find("li.k-item.k-state-selected").length, completedChunks.length);
+            });
+
+            test("Chunk size is calculated correctly according to chunk count", function() {
+                var pb = new ProgressBar(container, {
+                    type: "chunk",
+                    chunkCount: 17
+                });
+
+                var chunkCount = pb.options.chunkCount;
+                var chunkWrapperSize = pb.wrapper.find("ul.k-reset")[0].offsetWidth;
+                var expectedChunkSize = ((chunkWrapperSize - (chunkCount - 1)) / chunkCount).toFixed(10);
+                var actualChunkSize = parseFloat(pb.wrapper.find("li.k-item:first")[0].style.width).toFixed(10);
+
+                equal(actualChunkSize, expectedChunkSize);
+            });
         </script>
     </body>
 </html>
