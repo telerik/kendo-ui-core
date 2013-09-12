@@ -1,7 +1,16 @@
 ﻿var diagram = kendo.diagram, kdiagram, tollerance = 0.0001, Point = diagram.Point, QUnit = window.QUnit, test = QUnit.test, ok = QUnit.ok;
 
 /*-----------Diagram tests------------------------------------*/
-QUnit.module("Diagram tests");
+QUnit.module("Diagram tests", {
+    setup: function () {
+        $("#canvas").kendoDiagram();
+
+        kdiagram = $("#canvas").getKendoDiagram();
+    },
+    teardown: function () {
+        kdiagram.clear();
+    }
+});
 
 test("Basic tests", function () {
     GetRoot();
@@ -65,6 +74,39 @@ test("Adding connections", function () {
     equal(kendoDiagram.connections.length, 2, "diagram should have 2 connections");
     //ok(topCor.connections.length == 1, "Shape2#Top should have one connection.");
     //ok(bottomCor.connections.length == 2, "Shape1#Bottom should have two connections.");
+});
+
+test("Bring into view - rect", function () {
+    var rect = new diagram.Rect(0, 0, 400, 400),
+        viewport = kdiagram.viewport();
+    kdiagram.bringIntoView(rect);
+    var deltaPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
+    deepEqual(kdiagram.pan(), deltaPan);
+});
+
+test("Bring into view - shape", function () {
+    var s = kdiagram.addShape(new Point());
+    var rect = s.bounds(),
+        viewport = kdiagram.viewport();
+
+    kdiagram.bringIntoView(s, {center: false});
+    deepEqual(kdiagram.pan(), new Point(), "Shape is in view. No need to bring anything.");
+
+    kdiagram.bringIntoView(s, {center: true});
+    var deltaPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
+    deepEqual(kdiagram.pan(), deltaPan);
+
+});
+
+test("Bring into view - namy shapes", function () {
+    var s = kdiagram.addShape(new Point());
+    var s1 = kdiagram.addShape(new Point(500, 500));
+    var rect = s.bounds().union(s1.bounds()),
+        viewport = kdiagram.viewport();
+
+    kdiagram.bringIntoView([s, s1], {center: true});
+    var deltaPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
+    deepEqual(kdiagram.pan(), deltaPan);
 });
 
 QUnit.module("event handling", {

@@ -750,7 +750,14 @@ kendo_module({
                 rect = node.bounds();
             }
             else if (Utils.isArray(node)) {
-                //TODO: union rects
+                var di = this._getDiagramItems(node);
+                if (di.shapes.length > 0) {
+                    rect = di.shapes[0].bounds();
+                    for (var i = 1; i < di.shapes.length; i++) {
+                        var item = di.shapes[i];
+                        rect = rect.union(item.bounds());
+                    }
+                }
             }
             else if (node instanceof Rect) {
                 rect = node;
