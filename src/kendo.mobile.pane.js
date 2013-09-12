@@ -182,7 +182,7 @@ kendo_module({
                 rel = attrValue(link, "rel") || "",
                 target = attrValue(link, "target"),
                 href = link.attr(HREF),
-                remote = href[0] !== "#" && this.options.serverNavigation;
+                remote = href && href[0] !== "#" && this.options.serverNavigation;
 
             if (remote || rel === EXTERNAL || (typeof href === "undefined") || href === DUMMY_HREF) {
                 return;
