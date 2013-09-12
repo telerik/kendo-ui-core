@@ -44,6 +44,15 @@ It is used as a default field for the navigator axis.The data item field value m
     }
 
     /**
+    * The navigator pane configuration.
+    * @param \Kendo\Dataviz\UI\StockChartNavigatorPane|array $value
+    * @return \Kendo\Dataviz\UI\StockChartNavigator
+    */
+    public function pane($value) {
+        return $this->setProperty('pane', $value);
+    }
+
+    /**
     * The visibility of the navigator.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\StockChartNavigator

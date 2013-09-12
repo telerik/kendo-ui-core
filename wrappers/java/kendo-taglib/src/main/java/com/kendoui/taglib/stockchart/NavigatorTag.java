@@ -62,6 +62,10 @@ public class NavigatorTag extends  BaseTag  /* interfaces */implements DataBound
         setProperty("hint", value);
     }
 
+    public void setPane(com.kendoui.taglib.stockchart.NavigatorPaneTag value) {
+        setProperty("pane", value);
+    }
+
     public void setSelect(com.kendoui.taglib.stockchart.NavigatorSelectTag value) {
         setProperty("select", value);
     }

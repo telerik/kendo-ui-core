@@ -22443,6 +22443,262 @@ Template variables:</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>The navigator pane configuration.</description>
+        <name>stockChart-navigator-pane</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorPaneTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the pane. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The navigator pane height in pixels.</description>
+            <name>height</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The margin of the pane. A numeric value will set all margins.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The unique name of the navigator pane.</description>
+            <name>name</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The padding of the pane. A numeric value will set all paddings.</description>
+            <name>padding</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The title configuration of the navigator pane.</description>
+            <name>title</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the navigator pane.</description>
+        <name>stockChart-navigator-pane-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorPaneBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The margin of the pane. A numeric value will set all margins.</description>
+        <name>stockChart-navigator-pane-margin</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorPaneMarginTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The bottom margin of the navigator pane.</description>
+            <name>bottom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The left margin of the navigator pane.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The right margin of the navigator pane.</description>
+            <name>right</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The top margin of the navigator pane.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The padding of the pane. A numeric value will set all paddings.</description>
+        <name>stockChart-navigator-pane-padding</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorPanePaddingTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The bottom padding of the navigator pane.</description>
+            <name>bottom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The left padding of the navigator pane.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The right padding of the navigator pane.</description>
+            <name>right</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The top padding of the navigator pane.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The title configuration of the navigator pane.</description>
+        <name>stockChart-navigator-pane-title</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorPaneTitleTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the title. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text color of the title. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The font style of the title.</description>
+            <name>font</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The margin of the title. A numeric value will set all margins.</description>
+            <name>margin</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The position of the title.The supported values are:</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text of the title.</description>
+            <name>text</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the pane title. By default the pane title is visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the title.</description>
+        <name>stockChart-navigator-pane-title-border</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorPaneTitleBorderTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The dash type of the border.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The margin of the title. A numeric value will set all margins.</description>
+        <name>stockChart-navigator-pane-title-margin</name>
+        <tag-class>com.kendoui.taglib.stockchart.NavigatorPaneTitleMarginTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The bottom margin of the title.</description>
+            <name>bottom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The left margin of the title.</description>
+            <name>left</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The right margin of the title.</description>
+            <name>right</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The top margin of the title.</description>
+            <name>top</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
         <description>Specifies the initially selected range.The full range of values is shown if no range is specified.</description>
         <name>stockChart-navigator-select</name>
         <tag-class>com.kendoui.taglib.stockchart.NavigatorSelectTag</tag-class>
