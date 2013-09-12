@@ -198,5 +198,17 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Configures the a navigator pane.
+        /// </summary>
+        public ChartNavigatorBuilder<T> Pane(Action<ChartPaneBuilder> configurator)
+        {
+            var pane = new ChartPane();
+            navigator.Pane = pane;
+
+            configurator(new ChartPaneBuilder(pane));
+            return this;
+        }
     }
 }

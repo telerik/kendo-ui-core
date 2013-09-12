@@ -129,6 +129,15 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Configuration for the navigator pane
+        /// </summary>
+        public ChartPane Pane
+        {
+            get;
+            set;
+        }
+
         public IChartSerializer CreateSerializer()
         {
             return new ChartNavigatorSerializer<T>(this);

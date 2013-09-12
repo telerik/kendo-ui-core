@@ -64,6 +64,12 @@ namespace Kendo.Mvc.UI
                 result.Add("categoryAxis", categoryAxis.CreateSerializer().Serialize());
             }
 
+            var pane = navigator.Pane;
+            if (pane != null)
+            {
+                result.Add("pane", pane.CreateSerializer().Serialize());
+            }
+
             return result;
         }
     }

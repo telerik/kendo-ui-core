@@ -110,5 +110,18 @@ namespace Kendo.Mvc.UI.Tests
             chart.Data = new OHLCData[] { new OHLCData { Date = new DateTime(2000, 1, 1) } };
             builder.CategoryAxis(axis => { axis.Date().Categories(m => m.Date); });
         }
+
+        [Fact]
+        public void Pane_should_accept_category_expression()
+        {
+            builder.Pane(pane => { pane.Height(100); });
+        }
+
+        [Fact]
+        public void Pane_should_bind_categories()
+        {
+            chart.Data = new OHLCData[] { new OHLCData { Date = new DateTime(2000, 1, 1) } };
+            builder.Pane(pane => { pane.Height(100); });
+        }
     }
 }

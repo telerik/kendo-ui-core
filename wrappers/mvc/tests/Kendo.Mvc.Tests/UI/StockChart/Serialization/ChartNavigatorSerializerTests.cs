@@ -115,5 +115,18 @@ namespace Kendo.Mvc.UI.Tests
         {
             serializer.Serialize().ContainsKey("categoryAxis").ShouldBeFalse();
         }
+
+        [Fact]
+        public void Should_serialize_Pane()
+        {
+            navigator.Pane = new ChartPane();
+            serializer.Serialize().Keys.ShouldContain("pane");
+        }
+
+        [Fact]
+        public void Should_not_serialize_Pane_if_not_set()
+        {
+            serializer.Serialize().ContainsKey("pane").ShouldBeFalse();
+        }
     }
 }
