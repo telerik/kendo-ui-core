@@ -755,6 +755,10 @@ kendo_module({
             background: "none",
             id: "SVGRoot"
         },
+        bounds: function () {
+            var box = this.native.getBoundingClientRect();
+            return new Rect(0, 0, box.width, box.height);
+        },
         focus: function () {
             this.element.focus();
         },

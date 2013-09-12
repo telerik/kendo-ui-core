@@ -15,7 +15,7 @@ kendo_module({
         Rect = diagram.Rect,
         Rectangle = diagram.Rectangle,
         Utils = diagram.Utils,
-        Point = diagram.Point;
+        Point = diagram.Point,
         Circle = diagram.Circle,
         Path = diagram.Path,
         deepExtend = kendo.deepExtend;
@@ -285,7 +285,7 @@ kendo_module({
             // throw away anything beyond this point if this is a new branch
             this.stack.splice(this.index, this.stack.length - this.index);
             this.stack.push(composite);
-            if (!execute || (execute && execute == true)) {
+            if (!execute || (execute && execute === true)) {
                 this.redo();
             }
             else {
@@ -1032,7 +1032,7 @@ kendo_module({
                 }
                 tl = bounds.topLeft().plus(dtl);
                 br = bounds.bottomRight().plus(dbr);
-                bounds = Rect.fn.fromPoints(tl, br);
+                bounds = Rect.fromPoints(tl, br);
                 if (br.x - tl.x > 0 && br.y - tl.y > 0 && bounds.width >= this.shape.options.minWidth && bounds.height >= this.shape.options.minHeight) {
                     this._cp = p;
                     if (angle && !dragging) {
@@ -1115,8 +1115,8 @@ kendo_module({
             this.refresh();
         },
         refresh: function () {
-            var visualBounds = Rect.fn.fromPoints(this.diagram.transformPoint(this._sp), this.diagram.transformPoint(this._ep));
-            this.bounds(Rect.fn.fromPoints(this._sp, this._ep));
+            var visualBounds = Rect.fromPoints(this.diagram.transformPoint(this._sp), this.diagram.transformPoint(this._ep));
+            this.bounds(Rect.fromPoints(this._sp, this._ep));
             this.visual.position(visualBounds.topLeft());
             this.visual.redraw({ height: visualBounds.height + 1, width: visualBounds.width + 1 });
         }

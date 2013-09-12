@@ -141,8 +141,14 @@ kendo_module({
             return this;
         },
         offset: function (dx, dy) {
-            this.x += dx;
-            this.y += dy;
+            var x = dx, y = dy;
+            if (dx instanceof Point) {
+                x = dx.x;
+                y = dx.y;
+            }
+            this.x += x;
+            this.y += y;
+            return this;
         },
         union: function (r) {
             var x1 = Math.min(this.x, r.x);
@@ -181,17 +187,8 @@ kendo_module({
         clone: function () {
             return new Rect(this.x, this.y, this.width, this.height);
         },
-        empty: function () {
-            return new Rect(0, 0, 0, 0);
-        },
         isEmpty: function () {
             return !this.width && !this.height;
-        },
-        fromPoints: function (p, q) {
-            if (isNaN(p.x) || isNaN(p.y) || isNaN(q.x) || isNaN(q.y)) {
-                throw "Some values are NaN.";
-            }
-            return new Rect(Math.min(p.x, q.x), Math.min(p.y, q.y), Math.abs(p.x - q.x), Math.abs(p.y - q.y));
         },
         equals: function (rect) {
             return this.x == rect.x && this.y === rect.y && this.width === rect.width && this.height === rect.height;
@@ -216,6 +213,17 @@ kendo_module({
         }
 
         return rect;
+    };
+
+    Rect.empty = function () {
+        return new Rect(0, 0, 0, 0);
+    };
+
+    Rect.fromPoints = function (p, q) {
+        if (isNaN(p.x) || isNaN(p.y) || isNaN(q.x) || isNaN(q.y)) {
+            throw "Some values are NaN.";
+        }
+        return new Rect(Math.min(p.x, q.x), Math.min(p.y, q.y), Math.abs(p.x - q.x), Math.abs(p.y - q.y));
     };
 
     function isNearZero(num) {
@@ -691,7 +699,7 @@ kendo_module({
          * Returns a (shallow) clone of the current HashTable.
          * @returns {HashTable}
          */
-        clone: function(){
+        clone: function () {
             var ht = new HashTable();
             var hashes = this._hashes();
             for (var i = 0, len = hashes.length; i < len; i++) {
@@ -700,7 +708,7 @@ kendo_module({
                 if (Utils.isUndefined(bucket)) {
                     continue;
                 }
-                ht.add(bucket.key,bucket.value);
+                ht.add(bucket.key, bucket.value);
             }
             return ht;
         },
@@ -710,7 +718,7 @@ kendo_module({
          * @returns {Array}
          * @private
          */
-        _hashes: function() {
+        _hashes: function () {
             var hashes = [];
             for (var hash in this._buckets) {
                 if (this._buckets.hasOwnProperty(hash)) {
@@ -720,7 +728,7 @@ kendo_module({
             return hashes;
         },
 
-        _bucketExists: function(key) {
+        _bucketExists: function (key) {
             var hashId = this._hash(key);
             return Utils.isDefined(this._buckets[hashId]);
         },
@@ -730,7 +738,7 @@ kendo_module({
          * be created and returned.
          * A createGetBucket is a literal object of the form {key: key, ...}.
          */
-        _createGetBucket: function(key) {
+        _createGetBucket: function (key) {
             var hashId = this._hash(key);
             var bucket = this._buckets[hashId];
             if (Utils.isUndefined(bucket)) {
@@ -744,7 +752,7 @@ kendo_module({
         /**
          * Hashing of the given key.
          */
-        _hash: function(key) {
+        _hash: function (key) {
             if (Utils.isNumber(key)) {
                 return key & key;
             }
@@ -996,10 +1004,10 @@ kendo_module({
         },
 
         get: function (item) {
-            if(this.contains(item))
-            return this._hashTable.get(item).value;
+            if (this.contains(item))
+                return this._hashTable.get(item).value;
             else
-            return null;
+                return null;
         },
 
         /**
@@ -1007,9 +1015,9 @@ kendo_module({
          * @param item
          * @returns {*}
          */
-        hash : function (item) {
-             return this._hashTable._hash(item);
-        }   ,
+        hash: function (item) {
+            return this._hashTable._hash(item);
+        },
 
         /**
          * Removes the given item from the set. No exception is thrown if the item is not in the Set.
@@ -2678,14 +2686,14 @@ kendo_module({
                 var opt = {};
 
                 if (node.id == "0") {
-                   /* kendo.deepExtend(opt,
-                        {
-                            background: "Orange",
-                            data: 'circle',
-                            width: 100,
-                            height: 100,
-                            center: new Point(50, 50)
-                        });*/
+                    /* kendo.deepExtend(opt,
+                     {
+                     background: "Orange",
+                     data: 'circle',
+                     width: 100,
+                     height: 100,
+                     center: new Point(50, 50)
+                     });*/
                 }
                 else if (randomSize) {
                     kendo.deepExtend(opt, {

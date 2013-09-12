@@ -35,13 +35,28 @@ kendo_module({
         ConnectorsAdorner = diagram.ConnectorsAdorner,
         Cursors = diagram.Cursors,
         Utils = diagram.Utils,
-        Observable = kendo.Observable;
+        Observable = kendo.Observable,
+        Ticker = diagram.Ticker;
 
     // Constants ==============================================================
     var NS = ".kendoDiagram",
         BOUNDSCHANGE = "boundsChange",
         Auto = "Auto",
         MAXINT = 9007199254740992;
+
+    var PanAdapter = kendo.Class.extend({
+        init: function (panState) {
+            this.pan = panState.pan;
+            this.diagram = panState.diagram;
+        },
+        initState: function () {
+            this.from = this.diagram.pan();
+            this.to = this.pan;
+        },
+        update: function (tick) {
+            this.diagram.pan(new Point(this.from.x + (this.to.x - this.from.x) * tick, this.from.y + (this.to.y - this.from.y) * tick));
+        }
+    });
 
     var Connector = Class.extend({
         init: function (shape, options) {
@@ -237,7 +252,7 @@ kendo_module({
             var bounds = this.bounds(),
                 tl = bounds.topLeft(),
                 br = bounds.bottomRight();
-            return Rect.fn.fromPoints(this.diagram.transformPoint(tl), this.diagram.transformPoint(br));
+            return Rect.fromPoints(this.diagram.transformPoint(tl), this.diagram.transformPoint(br));
         },
         select: function (value) {
             if (this.isSelected != value) {
@@ -466,7 +481,7 @@ kendo_module({
             resolveConnectors(this);
             var globalSourcePoint = this.sourcePoint(), globalSinkPoint = this.targetPoint(),
                 boundsTopLeft, localSourcePoint, localSinkPoint, middle;
-            this.bounds(Rect.fn.fromPoints(globalSourcePoint, globalSinkPoint));
+            this.bounds(Rect.fromPoints(globalSourcePoint, globalSinkPoint));
             boundsTopLeft = this._bounds.topLeft();
             localSourcePoint = globalSourcePoint.minus(boundsTopLeft);
             localSinkPoint = globalSinkPoint.minus(boundsTopLeft);
@@ -626,6 +641,9 @@ kendo_module({
 
             return this._pan;
         },
+        viewport: function () {
+            return this.canvas.bounds().offset(-this.pan().x, -this.pan().y);
+        },
         transformMainLayer: function () {
             var pan = this._pan,
                 zoom = this._zoom;
@@ -724,6 +742,29 @@ kendo_module({
             var result = this._getDiagramItems(items);
             this.mainLayer.sendToBack(result.visuals);
             this._fixOrdering(result, false);
+        },
+        bringIntoView: function (node, options) { // jQuery|Item|Array|Rect
+            var rect, viewport = this.viewport();
+            options = deepExtend({animate: false, center: false}, options);
+            if (node instanceof DiagramElement) {
+                rect = node.bounds();
+            }
+            else if (Utils.isArray(node)) {
+                //TODO: union rects
+            }
+            else if (node instanceof Rect) {
+                rect = node;
+            }
+            if (options.center || !viewport.contains(rect.center())) { // center means to always center the node.
+                var deltaPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
+                if (options.animate) {
+                    var t = new Ticker();
+                    t.addAdapter(new PanAdapter({pan: deltaPan, diagram: this}));
+                    t.play();
+                } else {
+                    this.pan(deltaPan);
+                }
+            }
         },
         _fixOrdering: function (result, toFront) {
             var shapePos = toFront ? this.shapes.length - 1 : 0,
@@ -904,7 +945,6 @@ kendo_module({
          * @param options Layout-specific options.
          */
         layout: function (layoutType, options) {
-
             this.isLayouting = true;
             // TODO: raise layout event?
 
@@ -929,7 +969,7 @@ kendo_module({
             }
             var initialState = new kendo.diagram.LayoutState(this);
             var finalState = l.layout(options);
-            if(finalState){
+            if (finalState) {
                 var unit = new kendo.diagram.LayoutUndoUnit(initialState, finalState);
                 this.undoRedoService.add(unit);
             }
@@ -958,8 +998,7 @@ kendo_module({
                 return s.visual.native.id == id;
             });
         }
-    })
-
+    });
 
     ui.plugin(Diagram);
 
@@ -968,5 +1007,4 @@ kendo_module({
         Connection: Connection,
         Connector: Connector
     });
-})
-    (window.kendo.jQuery);
+})(window.kendo.jQuery);

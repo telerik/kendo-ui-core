@@ -8,7 +8,7 @@
         "position": "CEO",
         "branch": "TopManagement",
         "address": "London, 120 Hanover Sq.",
-        "children": [
+        "items": [
             {
                 "name": "Jeremy",
                 "image": "images/LONEP.jpg",
@@ -18,50 +18,52 @@
                 "position": "President QA",
                 "branch": "QA",
                 "address": "London, 120 Hanover Sq.",
-                "children": {
-                    "name": "Anne",
-                    "lastName": "Dodsworth",
-                    "image": "images/LONEP.jpg",
-                    "email": "adodsworth@contoso.com",
-                    "phone": "(205) 555 - 9887",
-                    "position": "VP QA",
-                    "branch": "QA",
-                    "address": "London, 120 Hanover Sq.",
-                    "hasChildren": true,
-                    "children": [
-                        {
-                            "name": "Alexander",
-                            "lastName": "Tuckings",
-                            "image": "images/LONEP.jpg",
-                            "email": "atuckings@contoso.com",
-                            "phone": "(205) 555 - 9886",
-                            "position": "Team Lead Team1",
-                            "branch": "QA",
-                            "address": "London, 120 Hanover Sq.",
-                            "hasChildren": true,
-                            "children": {
-                                "name": "Brenda",
-                                "lastName": "Smith",
+                "items": [
+                    {
+                        "name": "Anne",
+                        "lastName": "Dodsworth",
+                        "image": "images/LONEP.jpg",
+                        "email": "adodsworth@contoso.com",
+                        "phone": "(205) 555 - 9887",
+                        "position": "VP QA",
+                        "branch": "QA",
+                        "address": "London, 120 Hanover Sq.",
+                        "hasChildren": true,
+                        "items": [
+                            {
+                                "name": "Alexander",
+                                "lastName": "Tuckings",
                                 "image": "images/LONEP.jpg",
-                                "email": "bsmith@contoso.com",
+                                "email": "atuckings@contoso.com",
+                                "phone": "(205) 555 - 9886",
+                                "position": "Team Lead Team1",
+                                "branch": "QA",
+                                "address": "London, 120 Hanover Sq.",
+                                "hasChildren": true,
+                                "items": [{
+                                    "name": "Brenda",
+                                    "lastName": "Smith",
+                                    "image": "images/LONEP.jpg",
+                                    "email": "bsmith@contoso.com",
+                                    "phone": "(205) 555 - 9885",
+                                    "position": "Senior QA",
+                                    "branch": "QA",
+                                    "address": "London, 120 Hanover Sq."
+                                }]
+                            },
+                            {
+                                "name": "Mary",
+                                "lastName": "Bird",
+                                "image": "images/LONEP.jpg",
+                                "email": "mbird@contoso.com",
                                 "phone": "(205) 555 - 9885",
-                                "position": "Senior QA",
+                                "position": "Team Lead Team2",
                                 "branch": "QA",
                                 "address": "London, 120 Hanover Sq."
                             }
-                        },
-                        {
-                            "name": "Mary",
-                            "lastName": "Bird",
-                            "image": "images/LONEP.jpg",
-                            "email": "mbird@contoso.com",
-                            "phone": "(205) 555 - 9885",
-                            "position": "Team Lead Team2",
-                            "branch": "QA",
-                            "address": "London, 120 Hanover Sq."
-                        }
-                    ]
-                }
+                        ]
+                    }
+                ]
             },
             {
                 "name": "Steven",
@@ -72,7 +74,7 @@
                 "position": "President Dev Dept.",
                 "branch": "Development",
                 "address": "London, 120 Hanover Sq.",
-                "children": [
+                "items": [
                     {
                         "name": "Robert",
                         "lastName": "King",
@@ -82,7 +84,7 @@
                         "position": "VP Dev Dept.",
                         "branch": "Development",
                         "address": "London, 120 Hanover Sq.",
-                        "children": [
+                        "items": [
                             {
                                 "name": "Laura",
                                 "lastName": "Callahan",
@@ -92,16 +94,18 @@
                                 "position": "Team Lead Team1",
                                 "branch": "Development",
                                 "address": "London, 120 Hanover Sq.",
-                                "children": {
-                                    "name": "Jason",
-                                    "lastName": "Roland",
-                                    "image": "images/LONEP.jpg",
-                                    "email": "jroland@contoso.com",
-                                    "phone": "(205) 555 - 9872",
-                                    "position": "Senior Dev",
-                                    "branch": "Development",
-                                    "address": "London, 120 Hanover Sq."
-                                }
+                                "items": [
+                                    {
+                                        "name": "Jason",
+                                        "lastName": "Roland",
+                                        "image": "images/LONEP.jpg",
+                                        "email": "jroland@contoso.com",
+                                        "phone": "(205) 555 - 9872",
+                                        "position": "Senior Dev",
+                                        "branch": "Development",
+                                        "address": "London, 120 Hanover Sq."
+                                    }
+                                ]
                             },
                             {
                                 "name": "Eric",
@@ -112,7 +116,7 @@
                                 "position": "Team Lead Team2",
                                 "branch": "Development",
                                 "address": "London, 120 Hanover Sq.",
-                                "children": [
+                                "items": [
                                     {
                                         "name": "Elizabeth",
                                         "lastName": "Lincoln",
@@ -150,7 +154,7 @@
         "position": "CEO",
         "branch": "TopManagement",
         "address": "Berlin, Obere Str. 57",
-        "children": [
+        "items": [
             {
                 "name": "Nancy",
                 "lastName": "Davolio",
@@ -160,7 +164,7 @@
                 "position": "President Sales",
                 "branch": "Sales",
                 "address": "Berlin, Obere Str. 57",
-                "children": [
+                "items": [
                     {
                         "name": "Michael",
                         "lastName": "Suyama",
@@ -170,7 +174,7 @@
                         "position": "VP Sales",
                         "branch": "Sales",
                         "address": "Berlin, Obere Str. 57",
-                        "children": [
+                        "items": [
                             {
                                 "name": "Janet",
                                 "lastName": "Levering",

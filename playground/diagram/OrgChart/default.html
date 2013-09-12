@@ -20,9 +20,14 @@
             margin: 0px 10px;
         }
 
+        .k-dropdown{
+            margin: 5px;
+        }
+
         #Title {
             color: #FFF;
             font-size: 25pt;
+            margin: 5px;
         }
 
         #splitter {
@@ -54,6 +59,9 @@
     <script src="../../../src/kendo.splitter.js"></script>
     <script src="../../../src/kendo.listview.js"></script>
     <script src="../../../src/kendo.treeview.js"></script>
+    <script src="../../../src/kendo.popup.js"></script>
+    <script src="../../../src/kendo.list.js"></script>
+    <script src="../../../src/kendo.comboBox.js"></script>
 
     <script src="../../../src/kendo.diagram.utils.js"></script>
     <script src="../../../src/kendo.diagram.math.js"></script>
@@ -67,7 +75,7 @@
 
 <script type="text/javascript">
 
-    var diagram;
+    var diagram, flatEmployees = [];
 
     function defineActions() {
         $("#layoutButton").bind("click", layout);
@@ -121,7 +129,7 @@
             },
             schema: {
                 model: {
-                    children: "children"
+                    children: "items"
                 }
             }
         });
@@ -130,6 +138,21 @@
             var org = this.data();
             layer(null, org);
             layout();
+            $("#employees").kendoComboBox({
+                dataSource: {
+                    data: flatEmployees
+                },
+                placeholder: "Find employee...",
+                separator: ", ",
+                dataTextField: "name",
+                template: "#= name # #= lastName #",
+                select: function (e) {
+                    var data = this.dataItem(e.item.index()),
+                            tree = $("#treeview").data("kendoTreeView"),
+                            item = tree.findByText(data.name);
+                    tree.select(item[0]);
+                }
+            });
         });
 
         function layer(parent, children) {
@@ -143,8 +166,11 @@
                 };
                 var shape = new kendo.diagram.Shape(opt);
                 diagram.addShape(shape);
+                flatEmployees.push(node);
+                node._initChildren();
                 if (node.children) {
-                    layer(shape, node.children);
+                    node.children.fetch();
+                    layer(shape, node.children.view());
                 }
                 if (parent) {
                     diagram.connect(parent, shape);
@@ -189,17 +215,22 @@
 
         $("#treeview").kendoTreeView({
             dataSource: dataSource,
+            //checkboxes: true,
+            dataTextField: "name",
             template: "#= item.name # #= item.lastName #",
-            loadOnDemand: false,
-            select: function(e){
+            select: function (e) {
                 diagram.select(false);
-                var data = $('#treeview').data('kendoTreeView').dataItem(e.node);
-                for(var i = 0; i< diagram.shapes.length; i++){
+                var data = this.dataItem(e.node);
+                for (var i = 0; i < diagram.shapes.length; i++) {
                     var sh = diagram.shapes[i];
-                    if(sh.options.context.name == data.name){ // lame
+                    if (sh.options.context.name == data.name) { // lame
                         sh.select(true);
+                        diagram.bringIntoView(sh, {animate: true, center: true});
                     }
                 }
+            },
+            dataBound: function () {
+                this.expand(".k-item");
             }
         });
     }
@@ -211,14 +242,18 @@
 </script>
 <div id="Stage">
     <div id="toolbarDiv">
-        <img id="Logo" src="images/telerik-logo.png"/>
-        <span id="Title">Kendo diagrams</span>
+        <!--<img id="Logo" src="images/telerik-logo.png"/>-->
+        <span id="Title">Organization chart...</span>
         <input id="Layouts" value="1"/>
         <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
     </div>
     <div id="splitter">
         <div id="canvas"></div>
-        <div id="treeview"></div>
+        <div>
+            <!--<input id="employees"/>-->
+            <div style="color: steelblue; margin: 5px;">Select to highlight...</div>
+            <div id="treeview"></div>
+        </div>
     </div>
 </div>
 </body>
