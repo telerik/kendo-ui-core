@@ -1799,7 +1799,7 @@ kendo_module({
            },
            cursorOffset: {
                left: 10,
-               top: kendo.support.touch || kendo.support.pointers ? -40 / kendo.support.zoomLevel() : 10
+               top: kendo.support.touch || kendo.support.msPointers || kendo.support.pointers ? -40 / kendo.support.zoomLevel() : 10
            },
            dragstart: proxy(that.dragstart, that),
            dragcancel: proxy(that.dragcancel, that),

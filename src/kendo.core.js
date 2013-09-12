@@ -1732,7 +1732,8 @@ function pad(number, digits, end) {
         }
 
         support.touch = "ontouchstart" in window;
-        support.pointers = navigator.msPointerEnabled;
+        support.msPointers = navigator.msPointerEnabled;
+        support.pointers = navigator.pointerEnabled;
 
         var transitions = support.transitions = false,
             transforms = support.transforms = false,
@@ -1858,7 +1859,7 @@ function pad(number, digits, end) {
         var mobileOS = support.mobileOS = support.detectOS(navigator.userAgent);
 
         support.wpDevicePixelRatio = mobileOS.wp ? screen.width / 320 : 0;
-        support.kineticScrollNeeded = mobileOS && (support.touch || support.pointers);
+        support.kineticScrollNeeded = mobileOS && (support.touch || support.msPointers || support.pointers);
 
         support.hasNativeScrolling = false;
 
@@ -1985,6 +1986,7 @@ function pad(number, digits, end) {
             }
         }
 
+        // TODO: Switch to browser detection here
         if (kendo.support.pointers && !positioned) { // IE10 touch zoom is living in a separate viewport.
             result.top -= (window.pageYOffset - document.documentElement.scrollTop);
             result.left -= (window.pageXOffset - document.documentElement.scrollLeft);
@@ -2201,6 +2203,13 @@ function pad(number, digits, end) {
             support.resize = "orientationchange";
         }
     } else if (support.pointers) {
+        support.mousemove = "pointermove";
+        support.mousedown = "pointerdown";
+        support.mouseup = "pointerup";
+        support.mousecancel = "pointercancel";
+        support.click = "pointerup";
+        support.resize = "orientationchange resize";
+    } else if (support.msPointers) {
         support.mousemove = "MSPointerMove";
         support.mousedown = "MSPointerDown";
         support.mouseup = "MSPointerUp";
@@ -2871,16 +2880,23 @@ function pad(number, digits, end) {
             up: "touchend touchcancel",
             cancel: "touchcancel"
         };
-    }
-
-    if (support.pointers) {
+    } else if (support.pointers) {
+        eventMap = {
+            down: "pointerdown",
+            move: "pointermove",
+            up: "pointerup",
+            cancel: "pointercancel pointerleave"
+        };
+    } else if (support.msPointers) {
         eventMap = {
             down: "MSPointerDown",
             move: "MSPointerMove",
             up: "MSPointerUp",
             cancel: "MSPointerCancel MSPointerLeave"
         };
+    }
 
+    if (support.msPointers && !("onmspointerenter" in window)) { // IE10
         // Create MSPointerEnter/MSPointerLeave events using mouseover/out and event-time checks
         $.each({
             MSPointerEnter: "MSPointerOver",

@@ -80,7 +80,7 @@ kendo_module({
                 });
             }
         }
-        else if (support.pointers) {
+        else if (support.pointers || support.msPointers) {
             touches.push({
                 location: originalEvent,
                 event: e,
@@ -314,7 +314,7 @@ kendo_module({
 
             element.on(kendo.applyEventMap("down", ns), filter, "_start");
 
-            if (support.pointers) {
+            if (support.pointers || support.msPointers) {
                 element.css("-ms-touch-action", "pinch-zoom double-tap-zoom");
             }
 
