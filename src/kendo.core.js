@@ -1771,23 +1771,10 @@ function pad(number, digits, end) {
         try {
             support.screenWidth = window.outerWidth || window.screen ? window.screen.availWidth : window.innerWidth;
             support.screenHeight = window.outerHeight || window.screen ? window.screen.availHeight : window.innerHeight;
-
-            support.zoomLevel = function() {
-                try {
-                return support.touch ? (document.documentElement.clientWidth / window.innerWidth) :
-                       support.pointers ? ((top || window).outerWidth / (top || window).innerWidth) : 1;
-                } catch(e) {
-                    return 1;
-                }
-            };
         } catch(e) {
             //window.outerWidth throws error when in IE showModalDialog.
             support.screenWidth = window.screen.availWidth;
             support.screenHeight = window.screen.availHeight;
-
-            support.zoomLevel = function() {
-                return 1;
-            };
         }
 
         support.detectOS = function (ua) {
@@ -1898,6 +1885,21 @@ function pad(number, digits, end) {
 
         support.browser = support.detectBrowser(navigator.userAgent);
 
+        try {
+            support.zoomLevel = function() {
+                try {
+                return support.touch ? (document.documentElement.clientWidth / window.innerWidth) :
+                       support.browser.msie && support.browser.version >= 10 ? ((top || window).outerWidth / (top || window).innerWidth) : 1;
+                } catch(e) {
+                    return 1;
+                }
+            };
+        } catch(e) {
+            support.zoomLevel = function() {
+                return 1;
+            };
+        }
+
         support.cssBorderSpacing = typeof document.documentElement.style.borderSpacing != "undefined" && !(support.browser.msie && support.browser.version < 8);
 
         (function(browser) {
@@ -1987,7 +1989,7 @@ function pad(number, digits, end) {
         }
 
         // TODO: Switch to browser detection here
-        if (kendo.support.pointers && !positioned) { // IE10 touch zoom is living in a separate viewport.
+        if ((kendo.support.pointers || kendo.support.msPointers) && !positioned) { // IE10 touch zoom is living in a separate viewport.
             result.top -= (window.pageYOffset - document.documentElement.scrollTop);
             result.left -= (window.pageXOffset - document.documentElement.scrollLeft);
         }
