@@ -23,6 +23,7 @@ kendo_module({
         CategoricalChart = dataviz.CategoricalChart,
         CategoricalPlotArea = dataviz.CategoricalPlotArea,
         ChartElement = dataviz.ChartElement,
+        CurveProcessor = dataviz.CurveProcessor,
         DonutSegment = dataviz.DonutSegment,
         LineChart = dataviz.LineChart,
         LineSegment = dataviz.LineSegment,
@@ -897,6 +898,22 @@ kendo_module({
                 polarAxis = plotArea.polarAxis,
                 center = polarAxis.box.center();
             return [center];
+        },
+        points: function(){
+            var segment = this,
+                chart = segment.parent,
+                plotArea = chart.plotArea,
+                polarAxis = plotArea.polarAxis,
+                center = polarAxis.box.center(),
+                curvePoints,
+                curveProcessor = new CurveProcessor(0.1, false);               
+                linePoints = LineSegment.fn.points.call(this);
+                linePoints.push(center);
+                
+            curvePoints = curveProcessor.process(linePoints);                
+            curvePoints.splice(curvePoints.length - 3, curvePoints.length - 1);
+                    
+            return curvePoints;
         }
     });
 

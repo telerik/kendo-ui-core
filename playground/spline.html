@@ -18,7 +18,6 @@
         <script src="CurveProcessor.js"></script>
     </head>
     <body>    
-    <div id="test"></div>
     <div id="polar2"></div>
     <div id="polar3"></div>
     <div id="polar"></div>
@@ -39,18 +38,6 @@
        <div id="splineGroupedData"></div>
     <div id="verticalSpline"></div> 
     <script>    
-    $("#test").kendoChart({
-        seriesDefaults: {
-            type: "scatterLine",
-            smooth: true,
-            markers: {
-                visible: true
-            }
-        },
-        series: [{
-            data: [[1,1],[1.2,3],[1.5,6], [1.52,7],[6,4]]
-        }]
-    });
     
       var sunPos = [
             {"time":"08:00","altitude":4.9,"azimuth":92.7},
@@ -80,11 +67,11 @@
             },
             series: [{
                 markers: {
-                    visible: true,
+                    visible: false,
                     size: 4
                 },
                 smooth: true,
-                type: "polarLine",
+                type: "polarArea",
                 xField: "azimuth",
                 yField: "gain"
             }],
@@ -102,7 +89,7 @@
             series: [{
                 smooth: true,
                  markers: {
-                    visible: true,
+                    visible: false,
                     size: 4
                 },
                 type: "polarLine",
@@ -191,7 +178,8 @@
                 type: "polarArea",
                 smooth: true,
                 markers: {
-                    visible: true
+                    visible: true,
+                    size: 4
                 },
                 data: [
                     [10, 10], [30, 20], [50, 30],
@@ -583,7 +571,7 @@
                     type: "verticalLine",
                     smooth: true,
                     markers: {
-                        visible: true
+                        visible: false
                     }
                 },
                 series: [
