@@ -23,7 +23,14 @@ namespace Kendo.Mvc.Examples.Models
                  ProductName = product.ProductName,
                  UnitPrice = product.UnitPrice.HasValue ? product.UnitPrice.Value : default(decimal),
                  UnitsInStock = product.UnitsInStock.HasValue ? product.UnitsInStock.Value : default(short),
+                 QuantityPerUnit = product.QuantityPerUnit,
                  Discontinued = product.Discontinued,
+                 CategoryID = product.CategoryID,
+                 Category = new CategoryViewModel()
+                 {
+                     CategoryID = product.Category.CategoryID,
+                     CategoryName = product.Category.CategoryName
+                 },
                  LastSupply = DateTime.Today
             });
         }
@@ -36,6 +43,12 @@ namespace Kendo.Mvc.Examples.Models
             entity.UnitPrice = product.UnitPrice;
             entity.UnitsInStock = (short)product.UnitsInStock;
             entity.Discontinued = product.Discontinued;
+            entity.CategoryID = product.CategoryID;
+
+            if (product.Category != null)
+            {
+                entity.CategoryID = product.Category.CategoryID;
+            }
 
             entities.Products.Add(entity);
             entities.SaveChanges();
@@ -52,6 +65,12 @@ namespace Kendo.Mvc.Examples.Models
             entity.UnitPrice = product.UnitPrice;
             entity.UnitsInStock = (short)product.UnitsInStock;
             entity.Discontinued = product.Discontinued;
+            entity.CategoryID = product.CategoryID;
+
+            if (product.Category != null)
+            {
+                entity.CategoryID = product.Category.CategoryID;
+            }
 
             entities.Products.Attach(entity);
             entities.Entry(entity).State = EntityState.Modified;

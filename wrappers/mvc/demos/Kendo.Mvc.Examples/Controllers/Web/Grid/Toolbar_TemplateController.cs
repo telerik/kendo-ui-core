@@ -18,7 +18,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult ToolbarTemplate_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(SessionClientProductRepository.All().ToDataSourceResult(request));
+            return Json(productService.Read().ToDataSourceResult(request));
         }
 
         public ActionResult ToolbarTemplate_Categories()
@@ -26,7 +26,7 @@ namespace Kendo.Mvc.Examples.Controllers
      
             var dataContext = new SampleEntities();
             var categories = dataContext.Categories
-                        .Select(c => new ClientCategoryViewModel {
+                        .Select(c => new CategoryViewModel {
                             CategoryID = c.CategoryID,
                             CategoryName = c.CategoryName
                         })

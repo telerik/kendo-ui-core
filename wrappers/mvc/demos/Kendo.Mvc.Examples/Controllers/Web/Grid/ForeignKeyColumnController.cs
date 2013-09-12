@@ -17,19 +17,18 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult ForeignKeyColumn_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(SessionClientProductRepository.All().ToDataSourceResult(request));
+            return Json(productService.Read().ToDataSourceResult(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult ForeignKeyColumn_Update([DataSourceRequest] DataSourceRequest request, 
-            [Bind(Prefix = "models")]IEnumerable<ClientProductViewModel> products)
+            [Bind(Prefix = "models")]IEnumerable<ProductViewModel> products)
         {
             if (products != null && ModelState.IsValid)
             {
                 foreach (var product in products)
                 {
-                    product.Category = GetCategory(product.CategoryID);
-                    SessionClientProductRepository.Update(product);                    
+                    productService.Update(product);                    
                 }
             }
 
@@ -38,15 +37,14 @@ namespace Kendo.Mvc.Examples.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult ForeignKeyColumn_Create([DataSourceRequest] DataSourceRequest request, 
-            [Bind(Prefix = "models")]IEnumerable<ClientProductViewModel> products)
+            [Bind(Prefix = "models")]IEnumerable<ProductViewModel> products)
         {
-            var results = new List<ClientProductViewModel>();
+            var results = new List<ProductViewModel>();
             if (products != null && ModelState.IsValid)
             {
                 foreach (var product in products)
                 {
-                    product.Category = GetCategory(product.CategoryID);
-                    SessionClientProductRepository.Insert(product);
+                    productService.Create(product);
                     results.Add(product);
                 }
             }
@@ -56,30 +54,14 @@ namespace Kendo.Mvc.Examples.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult ForeignKeyColumn_Destroy([DataSourceRequest] DataSourceRequest request,
-            [Bind(Prefix = "models")]IEnumerable<ClientProductViewModel> products)
+            [Bind(Prefix = "models")]IEnumerable<ProductViewModel> products)
         {
-            if (products.Any())
+            foreach (var product in products)
             {
-                foreach (var product in products)
-                {
-                    SessionClientProductRepository.Delete(product);
-                }
+                productService.Destroy(product);
             }
 
             return Json(products.ToDataSourceResult(request, ModelState));
-        }
-
-        private ClientCategoryViewModel GetCategory(int categoryID)
-        {
-            var dataContext = new SampleEntities();
-            var category = dataContext.Categories
-                        .Where(c=> c.CategoryID == categoryID)
-                        .Select(c => new ClientCategoryViewModel
-                        {
-                            CategoryID = c.CategoryID,
-                            CategoryName = c.CategoryName
-                        }).FirstOrDefault();
-            return category;
         }
     }
 }

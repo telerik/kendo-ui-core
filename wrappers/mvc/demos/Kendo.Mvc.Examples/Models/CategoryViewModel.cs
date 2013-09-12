@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Kendo.Mvc.Examples.Models
 {
-    public class ClientCategoryViewModel
+    public class CategoryViewModel
     {
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }

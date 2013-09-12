@@ -12,23 +12,24 @@ namespace Kendo.Mvc.Examples.Controllers
         public ActionResult Editing_Custom()
         {            
             PopulateCategories();
+
             return View();
         }
 
         public ActionResult EditingCustom_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(SessionClientProductRepository.All().ToDataSourceResult(request));
+            return Json(productService.Read().ToDataSourceResult(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult EditingCustom_Update([DataSourceRequest] DataSourceRequest request, 
-            [Bind(Prefix = "models")]IEnumerable<ClientProductViewModel> products)
+            [Bind(Prefix = "models")]IEnumerable<ProductViewModel> products)
         {
             if (products != null && ModelState.IsValid)
             {
                 foreach (var product in products)
                 {
-                    SessionClientProductRepository.Update(product);
+                    productService.Update(product);
                 }
             }
 
@@ -37,15 +38,16 @@ namespace Kendo.Mvc.Examples.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult EditingCustom_Create([DataSourceRequest] DataSourceRequest request, 
-            [Bind(Prefix = "models")]IEnumerable<ClientProductViewModel> products)
+            [Bind(Prefix = "models")]IEnumerable<ProductViewModel> products)
         {
-            var results = new List<ClientProductViewModel>();
+            var results = new List<ProductViewModel>();
 
             if (products != null && ModelState.IsValid)
             {
                 foreach (var product in products)
                 {
-                    SessionClientProductRepository.Insert(product);
+                    productService.Create(product);
+
                     results.Add(product);
                 }
             }
@@ -55,14 +57,11 @@ namespace Kendo.Mvc.Examples.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult EditingCustom_Destroy([DataSourceRequest] DataSourceRequest request,
-            [Bind(Prefix = "models")]IEnumerable<ClientProductViewModel> products)
+            [Bind(Prefix = "models")]IEnumerable<ProductViewModel> products)
         {
-            if (products.Any())
+            foreach (var product in products)
             {
-                foreach (var product in products)
-                {
-                    SessionClientProductRepository.Delete(product);
-                }
+                productService.Destroy(product);
             }
 
             return Json(products.ToDataSourceResult(request, ModelState));
@@ -73,11 +72,12 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             var dataContext = new SampleEntities();
             var categories = dataContext.Categories
-                        .Select(c => new ClientCategoryViewModel {
+                        .Select(c => new CategoryViewModel {
                             CategoryID = c.CategoryID,
                             CategoryName = c.CategoryName
                         })
                         .OrderBy(e => e.CategoryName);
+
             ViewData["categories"] = categories;
             ViewData["defaultCategory"] = categories.First();            
         }
