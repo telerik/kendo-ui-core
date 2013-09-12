@@ -11,7 +11,6 @@ kendo_module({
         ui = kendo.ui,
         activeElement = kendo._activeElement,
         touch = (kendo.support.touch && kendo.support.mobileOS),
-        mobile = touch || kendo.support.msPointers || kendo.support.pointers,
         MOUSEDOWN = "mousedown",
         CLICK = "click",
         extend = $.extend,
@@ -40,6 +39,7 @@ kendo_module({
         msPointers = kendo.support.msPointers,
         MOUSEENTER = pointers ? "pointerover" : (msPointers ? "MSPointerOver" : "mouseenter"),
         MOUSELEAVE = pointers ? "pointerout" : (msPointers ? "MSPointerOut" : "mouseleave"),
+        mobile = touch || msPointers || pointers,
         KENDOPOPUP = "kendoPopup",
         DEFAULTSTATE = "k-state-default",
         HOVERSTATE = "k-state-hover",
@@ -717,8 +717,7 @@ kendo_module({
                 return;
             }
 
-            // TODO: check pointerType in IE 11
-            if (!that.options.openOnClick && !touch && !((kendo.support.pointers || && e.originalEvent.pointerType == 2) && !contains(e.currentTarget, e.relatedTarget) && hasChildren) {
+            if (!that.options.openOnClick && !touch && !((pointers || msPointers) && e.originalEvent.pointerType == e.originalEvent.MSPOINTER_TYPE_TOUCH) && !contains(e.currentTarget, e.relatedTarget) && hasChildren) {
                 that.close(element);
             }
         },
