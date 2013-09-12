@@ -19,6 +19,7 @@
 
         <script>
             var detect = kendo.support.detectOS,
+                detectBrowser = kendo.support.detectBrowser,
                 dpr = kendo.support.devicePixelRatio,
                 sw = kendo.support.screenWidth,
                 sh = kendo.support.screenHeight,
@@ -32,6 +33,13 @@
                     kendo.support.screenHeight = sh;
                     kendo.support.devicePixelRatio = dpr;
                }
+            });
+
+            test("detect IE11 as IE", function() {
+                var result = detectBrowser("Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko");
+
+                ok(result.msie);
+                ok(result.version == 11);
             });
 
             test("detects Kindle Fire and as a tablet", function() {

@@ -1868,13 +1868,13 @@ function pad(number, digits, end) {
 
         support.mouseAndTouchPresent = support.touch && !(support.mobileOS.ios || support.mobileOS.android);
 
-        function detectBrowser(ua) {
+        support.detectBrowser = function(ua) {
             var browser = false, match = [],
                 browserRxs = {
                     webkit: /(chrome)[ \/]([\w.]+)/i,
                     safari: /(webkit)[ \/]([\w.]+)/i,
                     opera: /(opera)(?:.*version|)[ \/]([\w.]+)/i,
-                    msie: /(msie) ([\w.]+)/i,
+                    msie: /(msie|trident)(?:.*? rv:([\w.]+)| ([\w.]+))/i,
                     mozilla: /(mozilla)(?:.*? rv:([\w.]+)|)/i
                 };
 
@@ -1893,9 +1893,9 @@ function pad(number, digits, end) {
             }
 
             return browser;
-        }
+        };
 
-        support.browser = detectBrowser(navigator.userAgent);
+        support.browser = support.detectBrowser(navigator.userAgent);
 
         support.cssBorderSpacing = typeof document.documentElement.style.borderSpacing != "undefined" && !(support.browser.msie && support.browser.version < 8);
 

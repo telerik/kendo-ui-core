@@ -246,7 +246,7 @@
             var newLink,
                 exampleElement = $("#example");
 
-            if (kendo.support.browser.msie) {
+            if (kendo.support.browser.msie && kendo.support.browser.version < 11) {
                 newLink = $(doc.createStyleSheet(url));
             } else {
                 newLink = link.eq(0).clone().attr("href", url);
