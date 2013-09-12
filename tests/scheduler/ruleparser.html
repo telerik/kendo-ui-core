@@ -22,9 +22,73 @@
             var parse = kendo.recurrence.rule.parse;
 
             test("Remove RRULE if present", function() {
-                var rrule = parse("RRULE:FREQ=DaILY");
+                var rrule = parse("RRULE:FREQ=DaILY ");
 
                 equal(rrule.freq, "daily");
+            });
+
+            test("Parse DTSTART property (line breaks separator)", function() {
+                var rrule = parse("DTSTART:19730429T070000Z\nRRULE:FREQ=DAILY", "Etc/UTC");
+
+                deepEqual(rrule.start.value, new Date(1973, 3, 29, 7));
+            });
+
+            test("Parse DTSTART property (space separator)", function() {
+                var rrule = parse("DTSTART:19730429T070000Z RRULE:FREQ=DAILY", "Etc/UTC");
+
+                deepEqual(rrule.start.value, new Date(1973, 3, 29, 7));
+            });
+
+            test("Parse DTSTART property with VALUE", function() {
+                var rrule = parse("DTSTART;VALUE=DATE:19730429T070000Z\nRRULE:FREQ=DAILY", "Etc/UTC");
+
+                deepEqual(rrule.start.value, new Date(1973, 3, 29, 7));
+            });
+
+            test("Parse DTSTART property with TZID", function() {
+                var rrule = parse("DTSTART;TZID=Etc/UTC:19730429T070000Z\nRRULE:FREQ=DAILY");
+
+                deepEqual(rrule.start.value, new Date(1973, 3, 29, 7));
+                equal(rrule.start.tzid, "Etc/UTC");
+            });
+
+            test("Parse DTSTART property with TZID and VALUE", function() {
+                var rrule = parse("DTSTART;TZID=Etc/UTC;VALUE=DATE:19730429T070000Z\nRRULE:FREQ=DAILY");
+
+                deepEqual(rrule.start.value, new Date(1973, 3, 29, 7));
+                equal(rrule.start.tzid, "Etc/UTC");
+            });
+
+            test("Parse DTEND property (line breaks separator)", function() {
+                var rrule = parse("DTEND:19730429T070000Z\nRRULE:FREQ=DAILY", "Etc/UTC");
+
+                deepEqual(rrule.end.value, new Date(1973, 3, 29, 7));
+            });
+
+            test("Parse DTEND property (space separator)", function() {
+                var rrule = parse("DTEND:19730429T070000Z RRULE:FREQ=DAILY", "Etc/UTC");
+
+                deepEqual(rrule.end.value, new Date(1973, 3, 29, 7));
+            });
+
+            test("Parse DTEND property with VALUE", function() {
+                var rrule = parse("DTEND;VALUE=DATE:19730429T070000Z\nRRULE:FREQ=DAILY", "Etc/UTC");
+
+                deepEqual(rrule.end.value, new Date(1973, 3, 29, 7));
+            });
+
+            test("Parse DTEND property with TZID", function() {
+                var rrule = parse("DTEND;TZID=Etc/UTC:19730429T070000Z\nRRULE:FREQ=DAILY");
+
+                deepEqual(rrule.end.value, new Date(1973, 3, 29, 7));
+                equal(rrule.end.tzid, "Etc/UTC");
+            });
+
+            test("Parse DTEND property with TZID and VALUE", function() {
+                var rrule = parse("DTEND;TZID=Etc/UTC;VALUE=DATE:19730429T070000Z\nRRULE:FREQ=DAILY");
+
+                deepEqual(rrule.end.value, new Date(1973, 3, 29, 7));
+                equal(rrule.end.tzid, "Etc/UTC");
             });
 
             test("Parse FREQ property", function() {
@@ -355,7 +419,7 @@
             });
 
             test("Parse WKST property", function() {
-                var rrule = parse("FREQ=YEARLY;WKST= WE");
+                var rrule = parse("FREQ=YEARLY;WKST=WE");
 
                 equal(rrule.weekStart, 3);
             });
