@@ -141,8 +141,6 @@ kendo_module({
             position: "bottom",
             showOn: "mouseenter",
             autoHide: true,
-            width: null,
-            height: null,
             animation: {
                 open: {
                     effects: "fade:in",
