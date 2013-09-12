@@ -218,14 +218,14 @@
             });
 
             test("Omits options.initial if location.hash", function() {
-                location.hash = "#../../test1";
+                location.hash = "#../../page2";
 
-                setup('<div data-role="view" id="test1">Page 1</div><div data-url="../../test1" data-role="view" id="page2">Page 2</div>', {
-                    initial: "test1"
+                setup('<div data-role="view" id="page1">Page 1</div><div data-url="../../page2" data-role="view" id="page2">Page 2</div>', {
+                    initial: "page1"
                 });
 
-                equal(location.hash, "#../../test1");
-                equal(application.view().id, "../../test1");
+                equal(location.hash, "#../../page2");
+                equal(application.view().id, "../../page2");
                 equal(application.view().content.find(".km-scroll-container").html(), "Page 2");
             });
 

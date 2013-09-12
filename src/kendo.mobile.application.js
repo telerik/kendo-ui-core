@@ -230,7 +230,10 @@ kendo_module({
                     pushState: that.options.pushState,
                     root: that.options.root,
                     init: function(e) {
-                        var url = e.url;
+                        var url = e.url,
+                            attrUrl = that.options.pushState ? url : "/";
+
+                        that.pane.viewEngine.rootView.attr(kendo.attr("url"), attrUrl);
 
                         if (url === "/" && initial) {
                             router.navigate(initial, true);

@@ -509,7 +509,6 @@ kendo_module({
 
             views = that._hideViews(container);
             that.rootView = views.first();
-            that.rootView.attr(attr("url"), that.remoteViewURLPrefix);
 
             if (!that.rootView[0] && options.rootNeeded) {
                 if (container[0] == kendo.mobile.application.element[0]) {
@@ -541,6 +540,9 @@ kendo_module({
 
         showView: function(url, transition) {
             url = url.replace(new RegExp("^" + this.remoteViewURLPrefix), "");
+            if (url === "" && this.remoteViewURLPrefix) {
+                url = "/";
+            }
 
             if (url === this.url) {
                 this.trigger(SAME_VIEW_REQUESTED);
@@ -580,7 +582,7 @@ kendo_module({
             var element,
                 urlPath = url.split("?")[0];
 
-            if (!urlPath || urlPath === "/") {
+            if (!urlPath) {
                 return this.rootView;
             }
 
