@@ -1,3 +1,4 @@
+
 kendo_module({
     id: "scheduler.dayview",
     name: "Scheduler Day View",
@@ -37,9 +38,13 @@ kendo_module({
                     '<div class="k-event-template">${title}</div>' +
                 '</div>'),
         DATA_HEADER_TEMPLATE = kendo.template("<span class='k-link k-nav-day'>#=kendo.toString(date, 'ddd M/dd')#</span>"),
-        ALLDAY_EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" class="k-event" data-#=ns#uid="#=uid#"' +
+        ALLDAY_EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" ' +
+                'data-#=ns#uid="#=uid# "' +
                 '#if (resources[0]) { #' +
                     'style="background-color:#=resources[0].color #"' +
+                    'class="k-event #=resources[0].inverseColor ? "k-event-inverse" : ""#" ' +
+                '#} else {#' +
+                    'class="k-event"' +
                 '#}#' +
                 '>' +
                 '<span class="k-event-actions">' +
@@ -68,9 +73,13 @@ kendo_module({
                 '<span class="k-resize-handle k-resize-e"></span>' +
                 '#}#' +
                 '</div>',
-        EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" class="k-event" data-#=ns#uid="#=uid#"' +
+        EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" ' +
+                'data-#=ns#uid="#=uid#" ' +
                 '#if (resources[0]) { #' +
-                'style="background-color:#=resources[0].color #"' +
+                    'style="background-color:#=resources[0].color #"' +
+                    'class="k-event #=resources[0].inverseColor ? "k-event-inverse" : ""#"' +
+                '#} else {#' +
+                    'class="k-event"' +
                 '#}#' +
                 '>' +
                  '<span class="k-event-actions">' +
