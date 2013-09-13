@@ -512,6 +512,10 @@ kendo_module({
 
                 element.toggleClass("k-readonly", show)
                        .val(placeholder);
+
+                if (!placeholder && element[0] === document.activeElement) {
+                    List.selectText(element[0], 0, 0);
+                }
             }
         },
 

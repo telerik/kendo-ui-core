@@ -664,6 +664,10 @@ kendo_module({
             input.toggleClass("k-readonly", show)
                  .val(show ? that.options.placeholder : "");
 
+            if (input[0] === document.activeElement) {
+                List.selectText(input[0], 0, 0);
+            }
+
             that._scale();
         },
 

@@ -668,6 +668,10 @@ kendo_module({
                 }
 
                 input.val(placeholder);
+
+                if (!placeholder && input[0] === document.activeElement) {
+                    List.selectText(input[0], 0, 0);
+                }
             }
         },
 
