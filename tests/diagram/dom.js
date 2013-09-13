@@ -152,7 +152,8 @@ test("Bring into view - align center bottom", function () {
 
     var newPan = viewport.bottom().minus(rect.bottom()).plus(kdiagram.pan());
     kdiagram.bringIntoView([s], {align: "center bottom"});
-    deepEqual(kdiagram.pan(), newPan);
+    equal(kdiagram.pan().x, Math.floor(newPan.x));
+    equal(kdiagram.pan().y, Math.floor(newPan.y));
 });
 
 QUnit.module("event handling", {

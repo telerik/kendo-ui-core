@@ -35,7 +35,6 @@
         }
 
         #canvas {
-            background: url("images/marketing-bg.jpg") 0 0 no-repeat;
             background-color: white;
             height: 100%;
         }
@@ -62,6 +61,7 @@
     <script src="../../../src/kendo.popup.js"></script>
     <script src="../../../src/kendo.list.js"></script>
     <script src="../../../src/kendo.comboBox.js"></script>
+    <script src="../../../src/kendo.tooltip.js"></script>
 
     <script src="../../../src/kendo.diagram.utils.js"></script>
     <script src="../../../src/kendo.diagram.math.js"></script>
@@ -117,7 +117,7 @@
         $("#splitter").kendoSplitter({
             panes: [
                 { collapsible: false },
-                { collapsible: false, size: "25%" }
+                { collapsible: false, size: "15%" }
             ]
         });
     }
@@ -154,6 +154,14 @@
                     tree.select(item[0]);
                 }
             });
+
+            var tooltip = $(".shape").kendoTooltip({
+                width: 120,
+                position: "top",
+                content: function(e){
+                    return e.target.text();
+                }
+            }).data("kendoTooltip");
         });
 
         function layer(parent, children) {
@@ -234,6 +242,8 @@
                 this.expand(".k-item");
             }
         });
+
+        //tooltip.show($("#canvas"));
     }
     $(function () {
         init();

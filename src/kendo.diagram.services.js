@@ -1006,7 +1006,7 @@ kendo_module({
                 dtl = new Point(), dbr = new Point(), bounds = this.shape.bounds(), tl, br,
                 angle = this.shape.rotate().angle, center;
             if (handle.y === -2 && handle.x === -1) {
-                angle = Math.findAngle(this._bounds.center(), tp);
+                angle = Math.findAngle(this.diagram.getBoundingBox(this.diagram.select()).center(), tp);
                 this.shape.rotate(angle);
             } else {
                 if (handle.x === 0 && handle.y === 0) {

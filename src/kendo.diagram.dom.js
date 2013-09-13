@@ -42,7 +42,8 @@ kendo_module({
     var NS = ".kendoDiagram",
         BOUNDSCHANGE = "boundsChange",
         Auto = "Auto",
-        MAXINT = 9007199254740992;
+        MAXINT = 9007199254740992,
+        AUTOCONNECTORTRESHOLD = 0.8;
 
     var PanAdapter = kendo.Class.extend({
         init: function (panState) {
@@ -161,7 +162,8 @@ kendo_module({
             that.shapeVisual = Shape.createShapeVisual(that.options);
             that.visual = new Group({
                 id: that.options.id || kendo.diagram.randomId(),
-                title: that.options.id ? that.options.id : "Shape"
+                title: that.options.id ? that.options.id : "Shape",
+                class: that.options.class
             });
             that.visual.append(this.shapeVisual);
             that.bounds(new Rect(that.options.x, that.options.y, Math.floor(that.options.width), Math.floor(that.options.height)));
@@ -178,6 +180,7 @@ kendo_module({
         },
         options: {
             type: "Shape",
+            class: "shape",
             data: "rectangle",
             stroke: "Black",
             strokeWidth: 1,
@@ -554,7 +557,7 @@ kendo_module({
                         var currentSourcePoint = sourceConnector.position(),
                             currentTargetConnector = closestConnector(currentSourcePoint, autoTargetShape);
                         var dist = currentTargetConnector.position().distanceTo(currentSourcePoint);
-                        if (dist < minDist) {
+                        if (dist < AUTOCONNECTORTRESHOLD * minDist) {
                             minDist = dist;
                             connection._resolvedSourceConnector = sourceConnector;
                             connection._resolvedTargetConnector = currentTargetConnector;
@@ -750,20 +753,13 @@ kendo_module({
                 rect = node.visualBounds();
             }
             else if (Utils.isArray(node)) {
-                var di = this._getDiagramItems(node);
-                if (di.shapes.length > 0) {
-                    rect = di.shapes[0].visualBounds();
-                    for (var i = 1; i < di.shapes.length; i++) {
-                        var item = di.shapes[i];
-                        rect = rect.union(item.visualBounds());
-                    }
-                }
+                rect = this.getBoundingBox(node);
             }
             else if (node instanceof Rect) {
                 rect = node.clone();
             }
             if (options.align !== "none" || !viewport.contains(rect.center())) {
-                if(options.align == "none"){
+                if (options.align == "none") {
                     options.align = "center middle";
                 }
                 old = rect.clone();
@@ -779,6 +775,17 @@ kendo_module({
                     this.pan(newPan);
                 }
             }
+        },
+        getBoundingBox: function (items) {
+            var rect, di = this._getDiagramItems(items);
+            if (di.shapes.length > 0) {
+                rect = di.shapes[0].visualBounds();
+                for (var i = 1; i < di.shapes.length; i++) {
+                    var item = di.shapes[i];
+                    rect = rect.union(item.visualBounds());
+                }
+            }
+            return rect;
         },
         _fixOrdering: function (result, toFront) {
             var shapePos = toFront ? this.shapes.length - 1 : 0,

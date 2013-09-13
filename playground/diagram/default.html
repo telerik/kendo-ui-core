@@ -331,25 +331,29 @@ $(function () {
             case "TreeDown":
                 diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeDown
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeDown,
+                            animate: true
                         });
                 break;
             case "TreeUp":
                 diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeUp
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeUp,
+                            animate: true
                         });
                 break;
             case "TreeLeft":
                 diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeLeft
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeLeft,
+                            animate: true
                         });
                 break;
             case "TreeRight":
                 diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeRight
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeRight,
+                            animate: true
                         });
                 break;
             case "RadialTree":
@@ -361,37 +365,42 @@ $(function () {
             case "TipOverTree":
                 diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.TipOverTree
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TipOverTree,
+                            animate: true
                         });
                 break;
             case "LayeredHorizontal":
                 diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
                         {
-                            layeredLayoutType: kendo.diagram.LayeredLayoutType.Right
+                            layeredLayoutType: kendo.diagram.LayeredLayoutType.Right,
+                            animate: true
                         });
                 break;
             case "LayeredVertical":
                 diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
                         {
-                            layeredLayoutType: kendo.diagram.LayeredLayoutType.Down
+                            layeredLayoutType: kendo.diagram.LayeredLayoutType.Down,
+                            animate: true
                         });
                 break;
             case "ForceDirected":
                 diagram.layout(kendo.diagram.LayoutTypes.ForceDirectedLayout,
                         {
-
+                            animate: true
                         });
                 break;
             case "MindmapVertical":
                 diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapVertical
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapVertical,
+                            animate: true
                         });
                 break;
             case "MindmapHorizontal":
                 diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal,
+                            animate: true
                         });
                 break;
         }
