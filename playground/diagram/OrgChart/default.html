@@ -84,7 +84,8 @@
     function layout() {
         diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                 {
-                    TreeLayoutType: eval($("#Layouts").val())
+                    TreeLayoutType: eval($("#Layouts").val()),
+                    animate: true
                 });
     }
 
@@ -225,7 +226,7 @@
                     var sh = diagram.shapes[i];
                     if (sh.options.context.name == data.name) { // lame
                         sh.select(true);
-                        diagram.bringIntoView(sh, {animate: true, center: true});
+                        diagram.bringIntoView(sh, {animate: true, align: "center middle"});
                     }
                 }
             },

@@ -642,7 +642,7 @@ kendo_module({
             return this._pan;
         },
         viewport: function () {
-            return this.canvas.bounds().offset(-this.pan().x, -this.pan().y);
+            return this.canvas.bounds();
         },
         transformMainLayer: function () {
             var pan = this._pan,
@@ -744,32 +744,39 @@ kendo_module({
             this._fixOrdering(result, false);
         },
         bringIntoView: function (node, options) { // jQuery|Item|Array|Rect
-            var rect, viewport = this.viewport();
-            options = deepExtend({animate: false, center: false}, options);
+            var rect, viewport = this.viewport(), align, old, newPan, deltaPan;
+            options = deepExtend({animate: false, align: "center middle"}, options);
             if (node instanceof DiagramElement) {
-                rect = node.bounds();
+                rect = node.visualBounds();
             }
             else if (Utils.isArray(node)) {
                 var di = this._getDiagramItems(node);
                 if (di.shapes.length > 0) {
-                    rect = di.shapes[0].bounds();
+                    rect = di.shapes[0].visualBounds();
                     for (var i = 1; i < di.shapes.length; i++) {
                         var item = di.shapes[i];
-                        rect = rect.union(item.bounds());
+                        rect = rect.union(item.visualBounds());
                     }
                 }
             }
             else if (node instanceof Rect) {
-                rect = node;
+                rect = node.clone();
             }
-            if (options.center || !viewport.contains(rect.center())) { // center means to always center the node.
-                var deltaPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
+            if (options.align !== "none" || !viewport.contains(rect.center())) {
+                if(options.align == "none"){
+                    options.align = "center middle";
+                }
+                old = rect.clone();
+                align = new kendo.diagram.RectAlign(viewport);
+                align.align(rect, options.align);
+                deltaPan = old.topLeft().minus(rect.topLeft());
+                newPan = this.pan().minus(deltaPan);
                 if (options.animate) {
                     var t = new Ticker();
-                    t.addAdapter(new PanAdapter({pan: deltaPan, diagram: this}));
+                    t.addAdapter(new PanAdapter({pan: newPan, diagram: this}));
                     t.play();
                 } else {
-                    this.pan(deltaPan);
+                    this.pan(newPan);
                 }
             }
         },
