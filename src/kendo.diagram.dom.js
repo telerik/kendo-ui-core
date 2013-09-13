@@ -42,8 +42,7 @@ kendo_module({
     var NS = ".kendoDiagram",
         BOUNDSCHANGE = "boundsChange",
         Auto = "Auto",
-        MAXINT = 9007199254740992,
-        AUTOCONNECTORTRESHOLD = 0.8;
+        MAXINT = 9007199254740992;
 
     var PanAdapter = kendo.Class.extend({
         init: function (panState) {
@@ -272,13 +271,14 @@ kendo_module({
             }
         },
         rotate: function (angle, center) {
+            var rotate = this.visual.rotate();
             if (angle !== undefined) {
                 if (center === undefined) {
                     var b = this.bounds();
                     return this.rotate(angle, new Point(b.width / 2, b.height / 2));
                 }
 
-                this.visual.rotate(angle, center);
+                rotate = this.visual.rotate(angle, center);
 
                 if (this.adorner) {
                     this.adorner.refresh();
@@ -289,7 +289,7 @@ kendo_module({
                 this.refreshConnections();
             }
 
-            return this.visual.rotate();
+            return rotate;
         },
         connections: function () {
             var cons = [], i, j, con;
@@ -303,10 +303,6 @@ kendo_module({
         _hover: function (value) {
             this.shapeVisual._hover(value);
             this.diagram._showConnectors(this, value);
-        },
-        refresh: function () {
-            var r = this.rotate();
-            this.rotate(r.angle, new Point(r.x, r.y));
         },
         refreshConnections: function () {
             $.each(this.connections(), function () {
@@ -557,7 +553,7 @@ kendo_module({
                         var currentSourcePoint = sourceConnector.position(),
                             currentTargetConnector = closestConnector(currentSourcePoint, autoTargetShape);
                         var dist = currentTargetConnector.position().distanceTo(currentSourcePoint);
-                        if (dist < AUTOCONNECTORTRESHOLD * minDist) {
+                        if (dist < minDist) {
                             minDist = dist;
                             connection._resolvedSourceConnector = sourceConnector;
                             connection._resolvedTargetConnector = currentTargetConnector;

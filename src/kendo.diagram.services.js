@@ -569,6 +569,7 @@ kendo_module({
             this._activateTool(meta);
             this.activeTool.start(p, meta);
             this._updateCursor(p);
+            this.diagram.focus();
             return true;
         },
         move: function (p, meta) {
@@ -600,12 +601,12 @@ kendo_module({
         keyDown: function (key, meta) {
             var diagram = this.diagram;
             meta = deepExtend({ ctrlKey: false, metaKey: false, altKey: false }, meta);
-            if ((meta.ctrlKey || meta.metaKey) && !meta.altKey) {	// ctrl or option
-                if (key === 65) {	// A: select all
+            if ((meta.ctrlKey || meta.metaKey) && !meta.altKey) {// ctrl or option
+                if (key === 65) {// A: select all
                     diagram.select(true);
                     return true;
                 }
-                else if (key === 90) { // Z: undo
+                else if (key === 90) {// Z: undo
                     diagram.undo();
                     return true;
                 }
@@ -618,7 +619,7 @@ kendo_module({
                 diagram.remove(diagram.select(), true);
                 return true;
             }
-            else if (key === 27) {	// ESC: stop any action
+            else if (key === 27) {// ESC: stop any action
                 if (this.newConnection) {
                     diagram.remove(this.newConnection);
                     this.newConnection = undefined;

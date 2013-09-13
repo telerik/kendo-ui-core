@@ -177,20 +177,21 @@ kendo_module({
                 this.options.x = this._pos.x;
                 this.options.y = this._pos.y;
             }
-            var t = new CompositeTransform(this.options.x, this.options.y);
-            t.render(this.native);
+            this._renderTransform();
             return this._pos;
         },
         rotate: function (angle, center) {
             if (angle !== undefined) {
                 this._rotate = new Rotation(angle, center.x, center.y);
-
-                var t = new CompositeTransform(this.options.x, this.options.y);
-                t.rotate = this._rotate;
-                t.render(this.native);
+                this._renderTransform();
             }
 
             return this._rotate || new Rotation(0);
+        },
+        _renderTransform: function () {
+            var t = new CompositeTransform(this.options.x, this.options.y);
+            t.rotate = this._rotate;
+            t.render(this.native);
         },
         _hover: function () {
         }
