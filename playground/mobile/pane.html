@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Scroller</title>
+        <link href="../../styles/web/kendo.common.css" rel="stylesheet" />
+        <link href="../../styles/web/kendo.default.less" rel="stylesheet/less" />
+        <link href="../../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" />
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <style>
+            .km-pane-wrapper {
+                height: 500px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div id="scheduler">
+            <a href="#">Edit me</a>
+        </div>
+
+        <script id="edit-form" type="text/x-kendo-template">
+           <form>
+               <dl>
+                   <dt>Foo</dt> <dd><input /></dd>
+                   <dt>Foo</dt> <dd><input /></dd>
+                   <dt>Foo</dt> <dd><input /></dd>
+               </dl>
+
+               <button>Save</button> | <button class="back">Back</button>
+           </form>
+        </script>
+
+        <script>
+            var Pane = kendo.mobile.ui.Pane;
+
+            $(function() {
+                var pane = Pane.wrap($("#scheduler"));
+
+                var view = pane.append($("#edit-form").html());
+
+                console.log(view);
+
+                view.element.find(".back").click(function() {
+                    pane.navigate("#:back");
+                    return false;
+                });
+
+                $("a").click(function() {
+                    pane.navigate(view);
+                    return false;
+                });
+            });
+        </script>
+    </body>
+</html>

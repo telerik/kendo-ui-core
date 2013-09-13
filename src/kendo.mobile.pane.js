@@ -14,6 +14,7 @@ kendo_module({
         ui = mobile.ui,
         Widget = ui.Widget,
         ViewEngine = mobile.ViewEngine,
+        View = ui.View,
         Loader = mobile.ui.Loader,
 
         EXTERNAL = "external",
@@ -94,16 +95,6 @@ kendo_module({
             }
         },
 
-        _setPortraitWidth: function() {
-            var width,
-                portraitWidth = this.options.portraitWidth;
-
-            if (portraitWidth) {
-                width = kendo.mobile.application.element.is(".km-vertical") ? portraitWidth : "auto";
-                this.element.css("width", width);
-            }
-        },
-
         options: {
             name: "Pane",
             portraitWidth: "",
@@ -120,6 +111,10 @@ kendo_module({
             SAME_VIEW_REQUESTED
         ],
 
+        append: function(html) {
+            return this.viewEngine.append(html);
+        },
+
         destroy: function() {
             Widget.fn.destroy.call(this);
 
@@ -129,6 +124,10 @@ kendo_module({
         navigate: function(url, transition) {
             var that = this,
                 history = that.history;
+
+            if (url instanceof View) {
+                url = url.id;
+            }
 
             if (url === BACK) {
                 if (history.length === 1) {
@@ -158,6 +157,16 @@ kendo_module({
 
         view: function() {
             return this.viewEngine.view();
+        },
+
+        _setPortraitWidth: function() {
+            var width,
+                portraitWidth = this.options.portraitWidth;
+
+            if (portraitWidth) {
+                width = kendo.mobile.application.element.is(".km-vertical") ? portraitWidth : "auto";
+                this.element.css("width", width);
+            }
         },
 
         _setupAppLinks: function() {
@@ -218,5 +227,13 @@ kendo_module({
         }
     });
 
+    Pane.wrap = function(element) {
+        var paneContainer = element.wrap('<div class="km-pane-wrapper"><div><div data-role="view"></div></div></div>').parent().parent(),
+            pane = new Pane(paneContainer);
+
+        pane.navigate("");
+
+        return pane;
+    }
     ui.plugin(Pane);
 })(window.kendo.jQuery);

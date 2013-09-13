@@ -270,9 +270,15 @@ kendo_module({
         },
 
         _id: function() {
-            var element = this.element;
+            var element = this.element,
+                idAttrValue = element.attr("id") || "";
 
-            this.id = attrValue(element, "url") || "#" + element.attr("id");
+            this.id = attrValue(element, "url") || "#" + idAttrValue;
+
+            if (this.id == "#") {
+                this.id = kendo.guid();
+                element.attr("id", this.id);
+            }
         },
 
         _layout: function() {
@@ -594,6 +600,48 @@ kendo_module({
             }
         },
 
+        append: function(html, url) {
+            var that = this,
+                sandbox = that.sandbox,
+                urlPath = (url || "").split("?")[0],
+                container = that.container,
+                views,
+                modalViews,
+                view;
+
+            if (BODY_REGEX.test(html)) {
+                html = RegExp.$1;
+            }
+
+            sandbox[0].innerHTML = html;
+
+            container.append(sandbox.children("script, style"));
+
+            views = that._hideViews(sandbox);
+            view = views.first();
+
+            // Generic HTML content found as remote view - no remote view markers
+            if (!view.length) {
+                views = view = sandbox.wrapInner("<div data-role=view />").children(); // one element
+            }
+
+            if (urlPath) {
+                view.hide().attr(attr("url"), urlPath);
+            }
+
+            that._setupLayouts(sandbox);
+
+            modalViews = sandbox.children(roleSelector("modalview drawer"));
+
+            container.append(sandbox.children(roleSelector("layout modalview drawer")).add(views));
+
+            // Initialize the modalviews after they have been appended to the final container
+            initWidgets(modalViews);
+
+            return that._createView(view);
+        },
+
+
         _findViewElement: function(url) {
             var element,
                 urlPath = url.split("?")[0];
@@ -652,53 +700,14 @@ kendo_module({
 
             that._xhr = $.get(kendo.absoluteURL(url, that.remoteViewURLPrefix), function(html) {
                             that.trigger(LOAD_COMPLETE);
-                            callback(that._createRemoteView(url, html));
+                            callback(that.append(html, url));
                         }, 'html')
                         .fail(function(request) {
                             that.trigger(LOAD_COMPLETE);
                             if (request.status === 0 && request.responseText) {
-                                callback(that._createRemoteView(url, request.responseText));
+                                callback(that.append(request.responseText, url));
                             }
                         });
-        },
-
-        _createRemoteView: function(url, html) {
-            var that = this,
-                sandbox = that.sandbox,
-                urlPath = url.split("?")[0],
-                container = that.container,
-                views,
-                modalViews,
-                view;
-
-            if (BODY_REGEX.test(html)) {
-                html = RegExp.$1;
-            }
-
-            sandbox[0].innerHTML = html;
-
-            container.append(sandbox.children("script, style"));
-
-            views = that._hideViews(sandbox);
-            view = views.first();
-
-            // Generic HTML content found as remote view - no remote view markers
-            if (!view.length) {
-                views = view = sandbox.wrapInner("<div data-role=view />").children(); // one element
-            }
-
-            view.hide().attr(attr("url"), urlPath);
-
-            that._setupLayouts(sandbox);
-
-            modalViews = sandbox.children(roleSelector("modalview drawer"));
-
-            container.append(sandbox.children(roleSelector("layout modalview drawer")).add(views));
-
-            // Initialize the modalviews after they have been appended to the final container
-            initWidgets(modalViews);
-
-            return that._createView(view);
         },
 
         _show: function(view, transition, params) {
