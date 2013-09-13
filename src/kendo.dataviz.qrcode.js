@@ -3,7 +3,7 @@ kendo_module({
     name: "QRCode",
     category: "dataviz",
     description: "QRCode widget.",
-    depends: ["dataviz.core", "dataviz.svg"]
+    depends: ["dataviz.core", "dataviz.svg", "dataviz.canvas"]
 });
 
 

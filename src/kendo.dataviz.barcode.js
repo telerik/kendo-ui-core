@@ -3,7 +3,7 @@ kendo_module({
     name: "Barcode",
     category: "dataviz",
     description: "Barcode widget",
-    depends: ["dataviz.core", "dataviz.svg"]
+    depends: ["dataviz.core", "dataviz.svg", "dataviz.canvas"]
 });
 
 (function ($, undefined) {
