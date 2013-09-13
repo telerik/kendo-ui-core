@@ -21,10 +21,7 @@ kendo_module({
         KPROGRESSWRAPPER = "k-state-selected",
         KCOMPLETEDCHUNK = "k-state-selected",
         KUPCOMINGCHUNK = "k-state-default",
-        // KCHUNKWRAPPER = "k-reset",
-        // KCHUNK = "k-item",
-        // KCHUNKFIRST = "k-first",
-        // KCHUNKLAST = "k-last",
+        KSTATEDISABLED = "k-state-disabled",
         PROGRESSTYPE = {
             VALUE: "value",
             PERCENT: "percent",
@@ -55,11 +52,11 @@ kendo_module({
 
             that._wrapper();
 
-            that._progressAnimation(options.animation);
+            options.value = that._validateValue(options.value);
+
+            that._progressAnimation();
 
             that._updateProgress();
-
-            //validate initial value between min and max?
 
             that._isStarted = that._isFinished = false;
         },
@@ -123,9 +120,9 @@ kendo_module({
             } else if (typeof value !== BOOLEAN) {
                 rounded = math.round(value);
 
-                if (!isNaN(rounded) && that._isValueValid(rounded)) {
+                if (!isNaN(rounded) && rounded != options.value) {
                     //set numeric value
-                    options.value = rounded;
+                    options.value = that._validateValue(rounded);
 
                     that._change();
                     that._updateProgress();
@@ -136,14 +133,17 @@ kendo_module({
             }
         },
 
-        _isValueValid: function(value) {
+        _validateValue: function(value) {
             var that = this,
                 options = that.options;
 
-            if (options.min <= value && value <= options.max && value != options.value) {
-                return true;
+            if (value <= options.min) {
+                return options.min;
+            } else if (value >= options.max) {
+                return options.max;
             }
-            return false;
+
+            return value;
         },
 
         _change: function() {
@@ -207,8 +207,12 @@ kendo_module({
             progressWrapper.animate(animationCssOptions, that._isStarted ? animation : { duration: 0 });
         },
 
-        enable: function() {
+        enable: function(enable) {
+            var that = this,
+                options = that.options;
 
+            options.enable = typeof(enable) === "undefined" ? true : enable;
+            that.wrapper.toggleClass(KSTATEDISABLED, !options.enable);
         },
 
         destroy: function() {
@@ -275,9 +279,10 @@ kendo_module({
             return (math.abs(value - min) / (max - min)) * 100;
         },
 
-        _progressAnimation: function(animation) {
+        _progressAnimation: function() {
             var that = this,
-                options = that.options;
+                options = that.options,
+                animation = options.animation;
 
             if (animation === false) {
                 options.animation = { duration: 0 };

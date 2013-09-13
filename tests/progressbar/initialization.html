@@ -102,6 +102,25 @@
                 ok(pb.wrapper.hasClass("k-progressbar-reverse"));
             });
 
+            test("Initial value is normalized correctly when it is less than min", function() {
+                var pb = new ProgressBar(container, {
+                    min: 10,
+                    max: 100,
+                    value: 0
+                });
+
+                equal(pb.options.value, pb.options.min);
+            });
+
+            test("Initial value is normalized correctly when it is more than max", function() {
+                var pb = new ProgressBar(container, {
+                    min: 10,
+                    max: 100,
+                    value: 1000
+                });
+
+                equal(pb.options.value, pb.options.max);
+            });
 
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------

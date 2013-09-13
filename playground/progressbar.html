@@ -282,12 +282,14 @@
                 complete: function(e) {
                     console.log("Complete event. Value: " + e.value);
                 },
-                animation: false
+                animation: {
+                    duration: 300
+                }
             });
 
             $("#progressbar-chunk").kendoProgressBar({
                 type: "chunk",
-                chunkCount: 10,
+                chunkCount: 2,
                 min: 0,
                 max: 10,
                 value: 2

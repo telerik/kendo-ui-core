@@ -30,7 +30,7 @@
             }
 
             function moduleSetup() { 
-                pb = createProgressbar();
+                //pb = createProgressbar();
             }
 
             function moduleTeardown() { 
@@ -88,7 +88,7 @@
                 equal(pb.value(), 40);
             });
 
-            test("value method does not set the value when it is bigger than max", function () {
+            test("value method sets value equal to max value when it is bigger than max", function () {
                 pb = createProgressbar({
                     value: 50,
                     min: 20,
@@ -97,10 +97,10 @@
 
                 pb.value(100);
 
-                equal(pb.value(), 50);
+                equal(pb.value(), pb.options.max);
             });
 
-            test("value method does not set the value when it is smaller than min", function () {
+            test("value method sets value equal to min value when it is smaller than min", function () {
                 pb = createProgressbar({
                     value: 50,
                     min: 20,
@@ -109,7 +109,7 @@
 
                 pb.value(10);
 
-                equal(pb.value(), 50);
+                equal(pb.value(), pb.options.min);
             });
 
             test("value method sets the value when it is equal to min", function () {
@@ -134,6 +134,50 @@
                 pb.value(60);
 
                 equal(pb.value(), 60);
+            });
+
+            test("enable method renders k-state-disabled class when false is passed", function () {
+                pb = createProgressbar();
+
+                pb.enable(false);
+
+                ok(pb.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable method removes k-state-disabled class when no parameter is passed", function () {
+                pb = createProgressbar();
+
+                pb.enable(false);
+                pb.enable();
+
+                ok(!pb.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable method removes k-state-disabled class when true is passed", function () {
+                pb = createProgressbar();
+
+                pb.enable(false);
+                pb.enable(true);
+
+                ok(!pb.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable method does not adds k-state-disabled class if not needed", function () {
+                pb = createProgressbar();
+
+                pb.enable();
+                pb.enable(true);
+
+                ok(!pb.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable method does not removes k-state-disabled class if not needed", function () {
+                pb = createProgressbar();
+
+                pb.enable(false);
+                pb.enable(false);
+
+                ok(pb.wrapper.hasClass("k-state-disabled"));
             });
         </script>
     </body>
