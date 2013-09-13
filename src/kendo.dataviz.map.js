@@ -50,47 +50,6 @@ kendo_module({
         e: 0.08181919084262149      // Eccentricity
     };
 
-    // Used by EPSG:3857
-    var SphericalMercator = Class.extend({
-        init: function(options) {
-            this.options = deepExtend({}, this.options, options);
-        },
-
-        MAX_LNG: 180,
-        MAX_LAT: 85.0511287798,
-
-        options: {
-            centralMeridian: 0,
-            datum: WGS84Datum
-        },
-
-        project: function(ll) {
-            var proj = this,
-                datum = proj.options.datum,
-                r = datum.a,
-                lat = limit(ll.lat, -proj.MAX_LAT, proj.MAX_LAT),
-                lng = limit(ll.lng, -proj.MAX_LNG, proj.MAX_LNG),
-                x = r * rad(lng),
-                y = rad(lat),
-                ts = tan(PI_DIV_4 + y / 2);
-
-            y = r * log(ts);
-
-            return new Point(x, y);
-        },
-
-        inverse: function(point) {
-            var proj = this,
-                options = proj.options,
-                datum = options.datum,
-                r = datum.a,
-                lng = point.x / (DEG_TO_RAD * r),
-                lat = deg(PI_DIV_2 - (2 * atan(exp(-point.y / r))));
-
-            return new Location(lat, lng);
-        }
-    });
-
     // Used by EPSG:3395
     var Mercator = Class.extend({
         init: function(options) {
@@ -112,11 +71,19 @@ kendo_module({
                 options = proj.options,
                 datum = options.datum,
                 r = datum.a,
-                ecc = datum.e,
                 lng0 = options.centralMeridian,
                 lat = limit(geo.lat, -proj.MAX_LAT, proj.MAX_LAT),
                 lng = limit(geo.lng, -proj.MAX_LNG, proj.MAX_LNG),
                 x = rad(lng - lng0) * r,
+                y = proj._projectLat(lat);
+
+            return new Point(x, y);
+        },
+
+        _projectLat: function(lat) {
+            var datum = this.options.datum,
+                ecc = datum.e,
+                r = datum.a,
                 y = rad(lat),
                 ts = tan(PI_DIV_4 + y / 2),
                 con = ecc * sin(y),
@@ -124,9 +91,7 @@ kendo_module({
 
             // See:
             // http://en.wikipedia.org/wiki/Mercator_projection#Generalization_to_the_ellipsoid
-            y = r * log(ts * p);
-
-            return new Point(x, y);
+            return r * log(ts * p);
         },
 
         inverse: function(point) {
@@ -134,11 +99,20 @@ kendo_module({
                 options = proj.options,
                 datum = options.datum,
                 r = datum.a,
-                ecc = datum.e,
-                ecch = ecc / 2,
                 lng0 = options.centralMeridian,
                 lng = point.x / (DEG_TO_RAD * r) + lng0,
-                ts = exp(-point.y / r),
+                lat = proj._inverseY(point.y);
+
+            return new Location(lat, lng);
+        },
+
+        _inverseY: function(y) {
+            var proj = this,
+                datum = proj.options.datum,
+                r = datum.a,
+                ecc = datum.e,
+                ecch = ecc / 2,
+                ts = exp(-y / r),
                 phi = PI_DIV_2 - 2 * atan(ts),
                 i;
 
@@ -154,7 +128,27 @@ kendo_module({
                 }
             }
 
-            return new Location(deg(phi), lng);
+            return deg(phi);
+        }
+    });
+
+    // Used by EPSG:3857
+    var SphericalMercator = Mercator.extend({
+        MAX_LAT: 85.0511287798,
+
+        _projectLat: function(lat) {
+            var r = this.options.datum.a,
+                y = rad(lat),
+                ts = tan(PI_DIV_4 + y / 2);
+
+            return r * log(ts);
+        },
+
+        _inverseY: function(y) {
+            var r = this.options.datum.a,
+                ts = exp(-y / r);
+
+            return deg(PI_DIV_2 - (2 * atan(ts)));
         }
     });
 
