@@ -39,6 +39,7 @@ kendo_module({
 
             that.popup = new Popup(that.element, {
                 anchor: shim,
+                modal: true,
                 appendTo: shim,
                 origin: align,
                 position: position,

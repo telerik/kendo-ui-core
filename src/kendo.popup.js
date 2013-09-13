@@ -161,6 +161,7 @@ kendo_module({
             collision: "flip fit",
             viewport: window,
             copyAnchorStyles: true,
+            modal: false,
             animation: {
                 open: {
                     effects: "slideIn:down",
@@ -186,8 +187,10 @@ kendo_module({
                 $(options.toggleTarget).off(NS);
             }
 
-            DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy);
-            WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);
+            if (!options.modal) {
+                DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy);
+                WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);
+            }
 
             if (options.appendTo[0] === document.body) {
                 parent = element.parent(".k-animation-container");
@@ -220,13 +223,15 @@ kendo_module({
                     return;
                 }
 
-                DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy)
+                if (!options.modal) {
+                    DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy)
                                 .bind(MOUSEDOWN, that._mousedownProxy);
 
-                // this binding hangs iOS in editor
-                if (!(support.mobileOS.ios || support.mobileOS.android)) {
-                    WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy)
-                          .bind(RESIZE_SCROLL, that._resizeProxy);
+                    // this binding hangs iOS in editor
+                    if (!(support.mobileOS.ios || support.mobileOS.android)) {
+                        WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy)
+                              .bind(RESIZE_SCROLL, that._resizeProxy);
+                    }
                 }
 
                 that.wrapper = wrapper = kendo.wrap(element)
