@@ -788,13 +788,9 @@ kendo_module({
             length = exceptions.length;
 
             for (; idx < length; idx++) {
-                date = kendo.parseDate(exceptions[idx], DATE_FORMATS);
+                date = parseUTCDate(exceptions[idx], zone);
 
                 if (date) {
-                    if (zone) {
-                        date = timezone.convert(date, date.getTimezoneOffset(), zone);
-                    }
-
                     dates.push(date);
                 }
             }
@@ -818,13 +814,11 @@ kendo_module({
     }
 
     function expand(event, start, end, zone) {
-        var eventStart = event.start,
-            eventStartMS = eventStart.getTime(),
-            eventStartTime = getMilliseconds(eventStart),
-            rule = parseRule(event.recurrenceRule),
+        var rule = parseRule(event.recurrenceRule),
             startTime, endTime, endDate,
             hours, minutes, seconds,
             durationMS, startPeriod,
+            ruleStart, ruleEnd,
             exceptionDates,
             count, freq,
             current = 1,
@@ -833,6 +827,20 @@ kendo_module({
         if (!rule) {
             return [event];
         }
+
+        ruleStart = rule.start;
+        ruleEnd = rule.end;
+
+        if (ruleStart || ruleEnd) {
+            event = event.clone({
+                start: ruleStart ? new Date(ruleStart.value) : undefined,
+                end: ruleEnd ? new Date(ruleEnd.value) : undefined
+            });
+        }
+
+        var eventStart = event.start;
+        var eventStartMS = eventStart.getTime();
+        var eventStartTime = getMilliseconds(eventStart);
 
         exceptionDates = parseExceptions(event.recurrenceException, zone);
         startPeriod = start = new Date(start);
@@ -915,15 +923,53 @@ kendo_module({
         return events;
     }
 
+    function parseUTCDate(value, zone) {
+        value = kendo.parseDate(value, DATE_FORMATS); //Parse UTC to local time
 
+        if (value && zone) {
+            value = timezone.convert(value, value.getTimezoneOffset(), zone);
+        }
 
-    function parseRule(rule, zone) {
+        return value;
+    }
+
+    function parseDateRule(dateRule, zone) {
+        var pairs = dateRule.split(";");
+        var pair;
+        var property;
+        var value;
+        var tzid;
+
+        for (var idx = 0, length = pairs.length; idx < length; idx++) {
+            pair = pairs[idx].split(":");
+            property = pair[0];
+            value = pair[1];
+
+            if (property.indexOf("TZID") !== -1) {
+                tzid = property.substring(property.indexOf("TZID")).split("=")[1];
+            }
+
+            if (value) {
+                value = parseUTCDate(value, tzid || zone);
+            }
+        }
+
+        if (value) {
+            return {
+                value: value,
+                tzid: tzid
+            };
+        }
+    }
+
+    function parseRule(recur, zone) {
         var instance = {},
             idx = 0, length,
             splits, value,
-            property, until,
+            property,
             weekStart,
             weekDays,
+            rule, part, parts,
             predicate = function(a, b) {
                 var day1 = a.day,
                     day2 = b.day;
@@ -939,18 +985,33 @@ kendo_module({
                 return day1 - day2;
             };
 
-        if (!rule) {
+        if (!recur) {
             return null;
         }
 
-        if (rule.substring(0, 6) === "RRULE:") {
-            rule = rule.substring(6);
+        parts = recur.split("\n");
+
+        if (!parts[1] && (recur.indexOf("DTSTART") !== -1 || recur.indexOf("DTEND") !== -1)) {
+            parts = recur.split(" ");
+        }
+
+        for (idx = 0, length = parts.length; idx < length; idx++) {
+            part = parts[idx];
+
+            if (part.indexOf("DTSTART") !== -1) {
+                instance.start = parseDateRule(part, zone);
+            } else if (part.indexOf("DTEND") !== -1) {
+                instance.end = parseDateRule(part, zone);
+            } else if (part.indexOf("RRULE") !== -1) {
+                rule = part.substring(6);
+            } else {
+                rule = part;
+            }
         }
 
         rule = rule.split(";");
-        length = rule.length;
 
-        for (; idx < length; idx++) {
+        for (idx = 0, length = rule.length; idx < length; idx++) {
             property = rule[idx];
             splits = property.split("=");
             value = $.trim(splits[1]).split(",");
@@ -960,11 +1021,7 @@ kendo_module({
                     instance.freq = value[0].toLowerCase();
                     break;
                 case "UNTIL":
-                    until = kendo.parseDate(value[0], DATE_FORMATS); //Parse UTC to local time
-                    if (until && zone) {
-                        until = timezone.convert(until, until.getTimezoneOffset(), zone);
-                    }
-                    instance.until = until;
+                    instance.until = parseUTCDate(value[0], zone);
                     break;
                 case "COUNT":
                     instance.count = parseInt(value[0], 10);
@@ -1026,10 +1083,25 @@ kendo_module({
         return instance;
     }
 
+    function serializeDateRule(dateRule, zone) {
+        var value = dateRule.value;
+        var tzid = dateRule.tzid || "";
+
+        value = timezone.convert(value, tzid || zone || value.getTimezoneOffset(), "Etc/UTC");
+
+        if (tzid) {
+            tzid = ";TZID=" + tzid;
+        }
+
+        return tzid + ":" + kendo.toString(value, "yyyyMMddTHHmmssZ") + " ";
+    }
+
     function serialize(rule, zone) {
         var weekStart = rule.weekStart,
             ruleString = "FREQ=" + rule.freq.toUpperCase(),
-            until = rule.until;
+            until = rule.until,
+            start = rule.start || "",
+            end = rule.end || "";
 
         if (rule.interval > 1) {
             ruleString += ";INTERVAL=" + rule.interval;
@@ -1082,6 +1154,18 @@ kendo_module({
 
         if (weekStart !== undefined) {
             ruleString += ";WKST=" + WEEK_DAYS[weekStart];
+        }
+
+        if (start) {
+            start = "DTSTART" + serializeDateRule(start, zone);
+        }
+
+        if (end) {
+            end = "DTEND" + serializeDateRule(end, zone);
+        }
+
+        if (start || end) {
+            ruleString = start + end + "RRULE:" + ruleString;
         }
 
         return ruleString;

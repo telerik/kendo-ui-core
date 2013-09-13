@@ -3354,7 +3354,7 @@ function pad(number, digits, end) {
             var staticDate = new Date(1980, 1, 1, 0, 0, 0);
 
             if (date) {
-                setTime(staticDate, getMilliseconds(date));
+                staticDate.setHours(date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
             }
 
             return staticDate;
