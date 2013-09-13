@@ -954,6 +954,50 @@
                 equal(events[0].endTime.getHours(), 10);
             });
 
+            test("DAILY method honours DTSTART", function() {
+                var date = new Date(2013, 2, 31, 8, 0);
+
+                date = kendo.timezone.convert(date, date.getTimezoneOffset(), "Etc/UTC");
+
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 2, 31, 0, 0),
+                    end: new Date(2013, 2, 31, 10, 0),
+                    recurrenceRule: "DTSTART:" + kendo.toString(date, "yyyyMMddTHHmmssZ") + " RRULE:FREQ=DAILY"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(2013, 2, 29), new Date(2013, 3, 1, 17));
+
+                equal(events[0].start.getHours(), 8);
+                equal(events[0].startTime.getHours(), 8);
+
+                equal(events[0].end.getHours(), 10);
+                equal(events[0].endTime.getHours(), 10);
+            });
+
+            test("DAILY method honours DTEND", function() {
+                var date = new Date(2013, 2, 31, 8, 0);
+
+                date = kendo.timezone.convert(date, date.getTimezoneOffset(), "Etc/UTC");
+
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 2, 31, 0, 0),
+                    end: new Date(2013, 2, 31, 10, 0),
+                    recurrenceRule: "DTEND:" + kendo.toString(date, "yyyyMMddTHHmmssZ") + " RRULE:FREQ=DAILY"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(2013, 2, 29), new Date(2013, 3, 1, 17));
+
+                equal(events[0].start.getHours(), 0);
+                equal(events[0].startTime.getHours(), 0);
+
+                equal(events[0].end.getHours(), 8);
+                equal(events[0].endTime.getHours(), 8);
+            });
+
             /*
             //Uncomment when timezone is Brasilia (-06:00).
             test("DAILY method honours DST in Brasilia", function() {

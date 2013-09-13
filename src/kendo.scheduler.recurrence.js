@@ -814,13 +814,11 @@ kendo_module({
     }
 
     function expand(event, start, end, zone) {
-        var eventStart = event.start,
-            eventStartMS = eventStart.getTime(),
-            eventStartTime = getMilliseconds(eventStart),
-            rule = parseRule(event.recurrenceRule),
+        var rule = parseRule(event.recurrenceRule),
             startTime, endTime, endDate,
             hours, minutes, seconds,
             durationMS, startPeriod,
+            ruleStart, ruleEnd,
             exceptionDates,
             count, freq,
             current = 1,
@@ -829,6 +827,20 @@ kendo_module({
         if (!rule) {
             return [event];
         }
+
+        ruleStart = rule.start;
+        ruleEnd = rule.end;
+
+        if (ruleStart || ruleEnd) {
+            event = event.clone({
+                start: ruleStart ? new Date(ruleStart.value) : undefined,
+                end: ruleEnd ? new Date(ruleEnd.value) : undefined
+            });
+        }
+
+        var eventStart = event.start;
+        var eventStartMS = eventStart.getTime();
+        var eventStartTime = getMilliseconds(eventStart);
 
         exceptionDates = parseExceptions(event.recurrenceException, zone);
         startPeriod = start = new Date(start);
