@@ -114,6 +114,11 @@ kendo_module({
             }
         },
 
+        destroy: function() {
+            ui.View.fn.destroy.call(this);
+            this.userEvents.destroy();
+        },
+
         _activate: function() {
             var views = this.options.views,
                 visibleOnCurrentView = !views[0] || views.indexOf(this.pane.view().id.replace('#', '')) > -1;
