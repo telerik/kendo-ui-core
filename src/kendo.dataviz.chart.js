@@ -5010,33 +5010,43 @@ kendo_module({
                 color = series.color,
                 lineOptions,
                 curvePoints = segment.points(),
-                areaPoints = segment.areaPoints(curvePoints);
+                areaPoints = segment.areaPoints(curvePoints),
+                viewElements = [];
            
             ChartElement.fn.getViewElements.call(segment, view);
 
             if (isFn(color) && defaults) {
                 color = defaults.color;
             }
-
+         
             lineOptions = deepExtend({
                     color: color,
                     opacity: series.opacity
                 }, series.line
             );
-           
-            return [
-                view.createCubicCurve(curvePoints,{
+
+           viewElements.push(view.createCubicCurve(curvePoints,{                  
+                    id: segment.options.id,
+                    fillOpacity: series.opacity,
+                    fill: color,
+                    stack: series.stack,
+                    data: { modelId: segment.options.modelId },
+                    zIndex: -1
+                }, areaPoints));
+                
+            if(lineOptions.width > 0){            
+                viewElements.push(view.createCubicCurve(segment.curvePoints,{                  
                     stroke: lineOptions.color,
-                    strokeWidth: lineOptions.width || 0,
+                    strokeWidth: lineOptions.width,
                     strokeOpacity: lineOptions.opacity,
                     dashType: lineOptions.dashType,
                     data: { modelId: segment.options.modelId },
-                    strokeLineCap: "round",
-                    zIndex: -1,
-                    fill: color,
-                    fillOpacity: series.opacity
-                }, areaPoints)
-            ];
+                    strokeLineCap: "butt",
+                    zIndex: -1
+                }));
+            }
+
+            return viewElements;
         }
     });
        

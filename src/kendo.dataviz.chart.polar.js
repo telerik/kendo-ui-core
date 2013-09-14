@@ -909,10 +909,10 @@ kendo_module({
                 curveProcessor = new CurveProcessor(0.1, false);               
                 linePoints = LineSegment.fn.points.call(this);
                 linePoints.push(center);
-                
+               
             curvePoints = curveProcessor.process(linePoints);                
             curvePoints.splice(curvePoints.length - 3, curvePoints.length - 1);
-                    
+            segment.curvePoints = curvePoints;     
             return curvePoints;
         }
     });
