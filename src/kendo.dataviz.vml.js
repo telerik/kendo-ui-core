@@ -157,6 +157,12 @@ kendo_module({
             );
         },
 
+        createMultiLine: function(elements, options){
+            return this.decorate(
+                new VMLMultiLine(elements, false, this.setDefaults(options))
+            );
+        },
+
         createPolyline: function(points, closed, options) {
             return this.decorate(
                 new VMLLine(points, closed, this.setDefaults(options))
@@ -381,10 +387,6 @@ kendo_module({
                 );
             }
 
-            if (path.options.crispEdges) {
-                path.options.strokeWidth = path.options.strokeWidth || 0.1;
-            }
-
             path.stroke = new VMLStroke(path.options);
             path.fill = new VMLFill(path.options);
         },
@@ -469,10 +471,13 @@ kendo_module({
             line.points = points;
             line.closed = closed;
         },
-
-        renderPoints: function() {
+        renderPoints: function(){
             var line = this,
-                points = line.points,
+                points = line.points;
+            return line._renderPoints(points);
+        },
+        _renderPoints: function(points) {
+            var line = this,
                 i,
                 count = points.length,
                 rotate = function(point) {
@@ -511,6 +516,21 @@ kendo_module({
         _print: function(point) {
             var scale = this.options.align === false ?  100 : 1;
             return math.round(point.x * scale) + "," + math.round(point.y * scale);
+        }
+    });
+
+    var VMLMultiLine = VMLLine.extend({
+        renderPoints: function(){
+            var multiLine = this,
+                elements = multiLine.points,
+                result = [],
+                idx;
+
+            for(idx = 0; idx < elements.length; idx++){
+                result.push(multiLine._renderPoints(elements[idx]));
+            }
+
+            return result.join(" ");
         }
     });
 
@@ -986,6 +1006,7 @@ kendo_module({
         VMLFill: VMLFill,
         VMLGroup: VMLGroup,
         VMLLine: VMLLine,
+        VMLMultiLine: VMLMultiLine,
         VMLLinearGradient: VMLLinearGradient,
         VMLOverlayDecorator: VMLOverlayDecorator,
         VMLPath: VMLPath,

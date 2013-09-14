@@ -1034,7 +1034,8 @@ kendo_module({
                     y,
                     x1,
                     box,
-                    column;
+                    column,
+                    elements = [];
 
                 for(var row = 0; row < matrix.length; row++){
                     y = quietZoneSize + row * baseUnit;
@@ -1051,16 +1052,17 @@ kendo_module({
                             box = new Box2D(
                                 round(quietZoneSize + x1 * baseUnit), round(y),
                                 round(quietZoneSize + column * baseUnit), round(y + baseUnit));
-
-                            view.children.push(view.createRect(box, {
-                                crispEdges: true,
-                                fill: that.options.color,
-                                stroke: that.options.color, strokeWidth: 0,
-                                strokeLineJoin: "miter", align: false
-                            }));
+                            elements.push(box.points());
                         }
                     }
                 }
+
+                view.children.push(view.createMultiLine(elements, {
+                        crispEdges: true,
+                        fill: that.options.color,
+                        stroke: that.options.color, strokeWidth: 0,
+                        align: false
+                    }));
             },
 
             _renderBackground: function (view, size, border) {

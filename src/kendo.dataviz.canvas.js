@@ -120,6 +120,12 @@ kendo_module({
                 false, this.setDefaults(options));
         },
 
+        createMultiLine: function(elements, options){
+            return this.decorate(
+                new CanvasMultiLine(elements, false, this.setDefaults(options))
+            );
+        },
+
         createPolyline: function(points, closed, options) {
             return new CanvasLine(points, closed, this.setDefaults(options));
         },
@@ -250,10 +256,13 @@ kendo_module({
         options: {
             rotation: [0, 0, 0]
         },
-
-        renderPoints: function(ctx) {
+        renderPoints: function(ctx){
             var line = this,
-                points = line.points,
+                points = line.points;
+            line._renderPoints(ctx, points);
+        },
+        _renderPoints: function(ctx, points) {
+            var line = this,
                 i,
                 p,
                 options = line.options,
@@ -327,6 +336,18 @@ kendo_module({
             context.translate(cx, cy);
             context.rotate(rotation[0] * DEG_TO_RAD);
             context.translate(-cx, -cy);
+        }
+    });
+
+    var CanvasMultiLine = CanvasLine.extend({
+        renderPoints: function(ctx){
+            var multiLine = this,
+                elements = multiLine.points,
+                idx;
+
+            for(idx = 0; idx < elements.length; idx++){
+                multiLine._renderPoints(ctx, elements[idx]);
+            }
         }
     });
 
@@ -535,6 +556,7 @@ kendo_module({
         CanvasCircle: CanvasCircle,
         CanvasGroup: CanvasGroup,
         CanvasLine: CanvasLine,
+        CanvasMultiLine: CanvasMultiLine,
         CanvasPath: CanvasPath,
         CanvasRing: CanvasRing,
         CanvasText: CanvasText,

@@ -174,6 +174,12 @@ kendo_module({
             );
         },
 
+        createMultiLine: function(elements, options){
+            return this.decorate(
+                new SVGMultiLine(elements, false, this.setDefaults(options))
+            );
+        },
+
         createPolyline: function(points, closed, options) {
             return this.decorate(
                 new SVGLine(points, closed, this.setDefaults(options))
@@ -401,10 +407,13 @@ kendo_module({
             line.points = points;
             line.closed = closed;
         },
-
-        renderPoints: function() {
+        renderPoints: function(){
             var line = this,
-                points = line.points,
+                points = line.points;
+            return line._renderPoints(points);
+        },
+        _renderPoints: function(points) {
+            var line = this,
                 rotation = line.options.rotation,
                 rCenter = new Point2D(rotation[1], rotation[2]),
                 rAmount = -rotation[0],
@@ -440,6 +449,21 @@ kendo_module({
                 align = shouldAlign ? alignToPixel : round;
 
             return align(point.x, COORD_PRECISION) + " " + align(point.y, COORD_PRECISION);
+        }
+    });
+
+    var SVGMultiLine = SVGLine.extend({
+        renderPoints: function(){
+            var multiLine = this,
+                elements = multiLine.points,
+                result = [],
+                idx;
+
+            for(idx = 0; idx < elements.length; idx++){
+                result.push(multiLine._renderPoints(elements[idx]));
+            }
+
+            return result.join(" ");
         }
     });
 
@@ -999,6 +1023,7 @@ kendo_module({
         SVGGradientDecorator: SVGGradientDecorator,
         SVGGroup: SVGGroup,
         SVGLine: SVGLine,
+        SVGMultiLine: SVGMultiLine,
         SVGLinearGradient: SVGLinearGradient,
         SVGOverlayDecorator: SVGOverlayDecorator,
         SVGPath: SVGPath,

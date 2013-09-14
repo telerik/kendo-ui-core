@@ -7,7 +7,8 @@
         <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>		
 		<script src="../src/kendo.dataviz.core.js" type="text/javascript" charset="utf-8"></script>		
-		<script src="../src/kendo.dataviz.svg.js" type="text/javascript" charset="utf-8"></script>		
+		<script src="../src/kendo.dataviz.svg.js" type="text/javascript" charset="utf-8"></script>	
+        <script src="../src/kendo.dataviz.canvas.js" type="text/javascript" charset="utf-8"></script>	        
         <script src="../src/kendo.dataviz.vml.js" type="text/javascript" charset="utf-8"></script>	
 		<script src="../src/kendo.dataviz.qrcode.js" type="text/javascript" charset="utf-8"></script>	
         <style type="text/css">
@@ -23,10 +24,10 @@
 <div id="qrCode"></div>      
 <script>             
 $("#qrCode").kendoQRCode({
-    value: "Ай готово. Aко остане време и еси-то ще направя.",
     value: new Array(500).join("A"),
     erroCorrection: "L",
-    size: 400,
+    size: 65,
+    renderAs: "svg"
     //encoding: "utf-8"
 });
 </script>
