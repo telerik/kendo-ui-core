@@ -438,16 +438,16 @@ kendo_module({
             }
 
             if (plain || $.isArray(item)) { // is JSON
-                items = $.map(plain ? [ item ] : item, function (value, idx) {
+                items = $($.map(plain ? [ item ] : item, function (value, idx) {
                             if (typeof value === "string") {
-                                return $(value);
+                                return $(value).get();
                             } else {
                                 return $(Menu.renderItem({
                                     group: groupData,
                                     item: extend(value, { index: idx })
-                                }));
+                                })).get();
                             }
-                        });
+                        }));
             } else {
                 items = $(item);
                 groups = items.find("> ul")
