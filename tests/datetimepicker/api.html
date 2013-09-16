@@ -683,6 +683,21 @@
                 equal(datetimepicker.value(), null);
                 equal(input.val(), "");
             });
+
+            test("setOptions method sets correct timeView min/max values", function() {
+                var date = new Date(2013, 10, 10, 1, 30);
+                var min = new Date(2013, 10, 9, 23, 30);
+
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.value(date);
+
+                datetimepicker.setOptions({
+                    min: min
+                });
+
+                deepEqual(datetimepicker.timeView.options.min, new Date(1900, 0, 1));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

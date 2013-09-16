@@ -117,13 +117,28 @@ kendo_module({
     ],
         setOptions: function(options) {
             var that = this,
-            dateViewOptions = that.dateView.options,
-            timeViewOptions = that.timeView.options;
+                dateViewOptions = that.dateView.options,
+                timeViewOptions = that.timeView.options,
+                min, max, currentValue;
 
             Widget.fn.setOptions.call(that, options);
             normalize(that.options);
 
+
             options = that.options;
+
+            min = options.min;
+            max = options.max;
+            currentValue = options.value || that._value || that.dateView._current;
+
+            if (min && !isEqualDatePart(min, currentValue)) {
+                min = new DATE(MIN);
+            }
+
+            if (max && !isEqualDatePart(max, currentValue)) {
+                max = new DATE(MAX);
+            }
+
             extend(dateViewOptions, options, {
                 change: dateViewOptions.change,
                 close: dateViewOptions.close,
@@ -135,7 +150,9 @@ kendo_module({
                 active: timeViewOptions.active,
                 change: timeViewOptions.change,
                 close: timeViewOptions.close,
-                open: timeViewOptions.open
+                open: timeViewOptions.open,
+                min: min,
+                max: max
             });
 
             that.timeView.ul[0].innerHTML = "";
