@@ -690,8 +690,8 @@ kendo_module({
         _option: function(option, value) {
             var that = this,
                 options = that.options,
-                selectedValue = +that._value,
-                bigger;
+                currentValue = that._value || that._current,
+                isBigger;
 
             if (value === undefined) {
                 return options[option];
@@ -705,18 +705,19 @@ kendo_module({
 
             options[option] = new DATE(+value);
 
-            if (selectedValue) {
-                if (option === MIN) {
-                    bigger = +value > selectedValue;
-                } else {
-                    bigger = selectedValue > +value;
-                }
+            if (option === MIN) {
+                isBigger = value > currentValue;
+            } else {
+                isBigger = currentValue > value;
             }
 
-            that._changeView = isEqualMonth(that._current, value) || !!(options.month.content || options.month.empty);
-
-            if (bigger) {
+            if (isBigger || isEqualMonth(currentValue, value)) {
                 that._value = null;
+                that._changeView = true;
+            }
+
+            if (!that._changeView) {
+                that._changeView = !!(options.month.content || options.month.empty);
             }
 
             that.navigate(that._value);
