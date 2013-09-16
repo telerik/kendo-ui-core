@@ -2673,17 +2673,31 @@ kendo_module({
                         cell = $(this);
                         if (columns[index].filterable !== false && !columns[index].command && (columns[index].field || cell.attr("data-" + kendo.ns + "field"))) {
                             filterMenu = cell.data("kendoFilterMenu");
+
                             if (filterMenu) {
                                 filterMenu.destroy();
                             }
-                            cell.kendoFilterMenu(extend(true, {}, filterable, columns[index].filterable, {
-                                dataSource: that.dataSource,
-                                values: columns[index].values,
-                                closeCallback: closeCallback,
-                                init: function(e) {
-                                    that.trigger(FILTERMENUINIT, { field: e.field, container: e.container });
+
+                            var columnFilterable = columns[index].filterable;
+
+                            var options = extend({},
+                                filterable,
+                                columnFilterable,
+                                {
+                                    dataSource: that.dataSource,
+                                    values: columns[index].values,
+                                    closeCallback: closeCallback,
+                                    init: function(e) {
+                                        that.trigger(FILTERMENUINIT, { field: e.field, container: e.container });
+                                    }
                                 }
-                            }));
+                            );
+
+                            if (columnFilterable && columnFilterable.messages) {
+                                options.messages = extend(true, {}, filterable.messages, columnFilterable.messages);
+                            }
+
+                            cell.kendoFilterMenu(options);
                         }
                     });
             }
