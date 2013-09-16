@@ -86,6 +86,17 @@
                 ok(!multiselect.popup.visible());
             });
 
+            test("MultiSelect do not focus on delete", function() {
+                populateSelect();
+                select.val("0");
+
+                var multiselect = new MultiSelect(select);
+
+                multiselect.tagList.find(".k-delete").mousedown();
+
+                notEqual(multiselect.input[0], document.activeElement);
+            });
+
             test("MultiSelect selects item on click", function() {
                 populateSelect();
                 var multiselect = new MultiSelect(select);

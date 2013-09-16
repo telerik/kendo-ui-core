@@ -217,14 +217,18 @@ kendo_module({
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover)
                     .on("mousedown" + ns, function(e) {
+                        var deleteButton = e.target.className.indexOf("k-delete") !== -1;
+
                         e.preventDefault();
 
-                        if (that.input[0] !== activeElement()) {
-                            that.input.focus();
-                        }
+                        if (!deleteButton) {
+                            if (that.input[0] !== activeElement()) {
+                                that.input.focus();
+                            }
 
-                        if (e.target.className.indexOf("k-delete") == -1 && that.options.minLength === 0) {
-                            that.open();
+                            if (that.options.minLength === 0) {
+                                that.open();
+                            }
                         }
                     });
 
