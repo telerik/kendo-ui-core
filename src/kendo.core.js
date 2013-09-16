@@ -1878,20 +1878,14 @@ function pad(number, digits, end) {
 
         support.browser = support.detectBrowser(navigator.userAgent);
 
-        try {
-            support.zoomLevel = function() {
-                try {
+        support.zoomLevel = function() {
+            try {
                 return support.touch ? (document.documentElement.clientWidth / window.innerWidth) :
                        support.browser.msie && support.browser.version >= 10 ? ((top || window).outerWidth / (top || window).innerWidth) : 1;
-                } catch(e) {
-                    return 1;
-                }
-            };
-        } catch(e) {
-            support.zoomLevel = function() {
+            } catch(e) {
                 return 1;
-            };
-        }
+            }
+        };
 
         support.cssBorderSpacing = typeof document.documentElement.style.borderSpacing != "undefined" && !(support.browser.msie && support.browser.version < 8);
 
