@@ -164,6 +164,21 @@
                 equal(parseF(value), -0.123432);
             });
 
+            test("parse exponential number (capital case)", function() {
+                equal(parseF("1e-7"), 0.0000001);
+                equal(parseF("1E-7"), 0.0000001);
+            });
+
+            test("parse localized exponential number", function() {
+                kendo.culture("bg-BG");
+
+                var value = "1,23432e+5";
+
+                equal(parseF(value), 123432);
+
+                kendo.culture("en-US");
+            });
+
             test("parseInt should return int number", function() {
 
                 var value = "1,232.12";
@@ -180,11 +195,6 @@
                 equal(kendo.parseFloat(formatted), value);
 
                 kendo.culture("en-US");
-            });
-
-            test("parse exponential number", function() {
-                equal(kendo.parseFloat("1e-7"), 0.0000001);
-                equal(kendo.parseFloat("1E-7"), 0.0000001);
             });
 
             test("parse en-ZA currency number", function() {

@@ -1469,7 +1469,7 @@ function pad(number, digits, end) {
 
         //handle exponential number
         if (exponentRegExp.test(value)) {
-            value = parseFloat(value);
+            value = parseFloat(value.replace(number["."], "."));
             if (isNaN(value)) {
                 value = null;
             }
