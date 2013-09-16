@@ -343,10 +343,16 @@ kendo_module({
                 options = that.options,
                 ignoreCase = options.ignoreCase,
                 filter = options.filter,
-                field = options.dataTextField;
+                field = options.dataTextField,
+                inputValue = that.input.val();
+
+            if (options.placeholder === inputValue) {
+                inputValue = "";
+            }
 
             clearTimeout(that._typing);
-            word = typeof word === "string" ? word : that.input.val();
+
+            word = typeof word === "string" ? word : inputValue;
 
             if (word.length >= options.minLength) {
                 that._state = FILTER;

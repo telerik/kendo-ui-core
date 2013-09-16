@@ -368,6 +368,24 @@
                 ok(!multiselect.wrapper.hasClass("k-state-disabled"));
             });
 
+            test("MultiSelect does not pass placeholder on search", 1, function() {
+                var multiselect = new MultiSelect(select, {
+                    autoBind: false,
+                    placeholder: "Select...",
+                    dataSource: {
+                        serverFiltering: true,
+                        transport: {
+                            read: "",
+                            parameterMap: function(options) {
+                                equal(options.filter.filters[0].value, "");
+                            }
+                        }
+                    }
+                });
+
+                multiselect.search();
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
