@@ -547,6 +547,179 @@
                 ok(grid.thead.find("th").data("kendoFilterMenu"));
             });
 
+            test("grid filterable options propagate to the filter menu", function() {
+                var grid = new Grid($("<div>"), {
+                    filterable: {
+                        operators: {
+                            string: {
+                                eq: "foo"
+                            }
+                        }
+                    },
+                    dataSource: [
+                        { foo: "foo" }
+                    ]
+                });
+
+                equal(grid.thead.find("th").data("kendoFilterMenu").operators.string.eq, "foo");
+            });
+
+            test("column filterable options override the grid filterable options", function() {
+                var grid = new Grid($("<div>"), {
+                    filterable: {
+                        operators: {
+                            string: {
+                                eq: "foo"
+                            }
+                        }
+                    },
+                    dataSource: [
+                        { foo: "foo" }
+                    ],
+                    columns: [
+                        {
+                            field: "foo",
+                            filterable: {
+                                operators: {
+                                    string: {
+                                        eq: "bar"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                });
+
+                equal(grid.thead.find("th").data("kendoFilterMenu").operators.string.eq, "bar");
+            });
+
+            test("column filterable options override the default filterable options", function() {
+                var grid = new Grid($("<div>"), {
+                    dataSource: [
+                        { foo: "foo" }
+                    ],
+                    filterable: true,
+                    columns: [
+                        {
+                            field: "foo",
+                            filterable: {
+                                operators: {
+                                    string: {
+                                        eq: "bar"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                });
+
+                equal(grid.thead.find("th").data("kendoFilterMenu").operators.string.eq, "bar");
+            });
+
+            test("column filterable operators are the only ones used by the filter menu", function() {
+                var grid = new Grid($("<div>"), {
+                    dataSource: [
+                        { foo: "foo" }
+                    ],
+                    filterable: true,
+                    columns: [
+                        {
+                            field: "foo",
+                            filterable: {
+                                operators: {
+                                    string: {
+                                        eq: "bar"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                });
+
+                equal(grid.thead.find("th").data("kendoFilterMenu").operators.string.neq, undefined);
+            });
+
+            test("column filterable operators are the only ones used by the filter menu when the grid filterable is set", function() {
+                var grid = new Grid($("<div>"), {
+                    dataSource: [
+                        { foo: "foo" }
+                    ],
+                    filterable: {
+                        operators: {
+                            string: {
+                                eq: "foo",
+                                neq: "bar"
+                            }
+                        }
+                    },
+                    columns: [
+                        {
+                            field: "foo",
+                            filterable: {
+                                operators: {
+                                    string: {
+                                        eq: "bar"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                });
+
+                equal(grid.thead.find("th").data("kendoFilterMenu").operators.string.neq, undefined);
+            });
+
+            test("column filterable messages override the grid filterable messages", function() {
+                var grid = new Grid($("<div>"), {
+                    dataSource: [
+                        { foo: "foo" }
+                    ],
+                    filterable: {
+                        messages: {
+                            and: "foo"
+                        }
+                    },
+                    columns: [
+                        {
+                            field: "foo",
+                            filterable: {
+                                messages: {
+                                    and: "bar"
+                                }
+                            }
+                        }
+                    ]
+                });
+
+                equal(grid.thead.find("th").data("kendoFilterMenu").options.messages.and, "bar");
+            });
+
+            test("column filterable messages are merged with the grid filterable messages", function() {
+                var grid = new Grid($("<div>"), {
+                    dataSource: [
+                        { foo: "foo" }
+                    ],
+                    filterable: {
+                        messages: {
+                            and: "foo",
+                            or: "foo"
+                        }
+                    },
+                    columns: [
+                        {
+                            field: "foo",
+                            filterable: {
+                                messages: {
+                                    and: "bar"
+                                }
+                            }
+                        }
+                    ]
+                });
+
+                equal(grid.thead.find("th").data("kendoFilterMenu").options.messages.or, "foo");
+            });
+
             test("column without field is not filterable", function() {
                 var grid = new Grid(table, {
                     filterable: true,
@@ -819,8 +992,8 @@
                 ok(button.hasClass("k-grid-foo"));
                 ok(button.hasClass("bar"));
             });
-			
-			test("destroy command always adds default class when className is defined", function() {
+
+            test("destroy command always adds default class when className is defined", function() {
                 var grid = new Grid($("<table/>"), {
                     dataSource: [{ foo: 1, bar: "bar"}],
                     columns: [ { command: { className: "bar", name: "destroy" } }]
