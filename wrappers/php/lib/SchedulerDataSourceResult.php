@@ -32,7 +32,7 @@ class SchedulerDataSourceResult extends DataSourceResult {
             if ($status[1] > 0) {
                 $errors[] = $status[2];
             } else {
-                $error = $this->removeAssocitations($joinTable, $models, $key);
+                $error = $this->removeAssocitations($joinTable, $model, $key);
                 if ($error) {
                    $errors[] = $error;
                 }
