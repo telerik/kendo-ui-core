@@ -21,7 +21,7 @@ kendo_module({
         DAY_TEMPLATE = kendo.template('<span class="k-link k-nav-day">#:kendo.toString(date, "dd")#</span>'),
         EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
-                    'style="background-color:#=resources[0].color #"' +
+                    'style="background-color:#=resources[0].color #; border-color: #=resources[0].color#"' +
                     'class="k-event #=resources[0].inverseColor ? "k-event-inverse" : ""#"' +
                 '#} else {#' +
                     'class="k-event"' +
