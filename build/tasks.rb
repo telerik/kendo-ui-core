@@ -113,15 +113,14 @@ def file_copy(options)
     file to => prerequisites do |t|
         ensure_path to
 
-        if license
+        if license && subject_to_license?(to)
             $stderr.puts "cp #{from} #{to}" if VERBOSE
 
             File.open(to, "w") do |file|
                 contents = File.read(from)
-                if license && subject_to_license?(to)
-                    file.write(File.read(license))
-                    contents.sub!("$KENDO_VERSION", VERSION)
-                end
+
+                file.write(File.read(license))
+                contents.sub!("$KENDO_VERSION", VERSION)
 
                 file.write(contents)
             end
