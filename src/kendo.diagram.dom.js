@@ -176,6 +176,8 @@ kendo_module({
             that.parentContainer = null;
             that.isContainer = false;
             that.isCollapsed = false;
+            that.id = that.visual.native.id;
+
         },
         options: {
             type: "Shape",
