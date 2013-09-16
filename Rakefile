@@ -71,9 +71,9 @@ ROOT_MAP = {
     'wrappers/aspnetmvc/EditorTemplates/razor' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Views/Shared/EditorTemplates/',
     'wrappers/aspnetmvc/Binaries/Mvc3' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC3/',
     'wrappers/aspnetmvc/Binaries/Mvc4' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
-    'wrappers/aspnetmvc/Examples' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/',
-    'wrappers/aspnetmvc/Examples/Content/shared' => 'demos/mvc/content/shared',
-    'wrappers/aspnetmvc/Examples/bin' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
+    'wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/',
+    'wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Content/shared' => 'demos/mvc/content/shared',
+    'wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/bin' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
     'wrappers/jsp/kendo-taglib' => 'wrappers/java/kendo-taglib/target/',
     'src/kendo-taglib' => 'wrappers/java/kendo-taglib/',
     'src/php' => 'wrappers/php/',
@@ -84,9 +84,9 @@ ROOT_MAP = {
 MVC_CONTENT = {
     'wrappers/aspnetmvc/Binaries/Mvc3' => MVC3_DLL,
     'wrappers/aspnetmvc/Binaries/Mvc4' => MVC4_DLL,
-    'wrappers/aspnetmvc/Examples/bin' => MVC4_DLL,
-    'wrappers/aspnetmvc/Examples' => MVC_DEMOS,
-    'wrappers/aspnetmvc/Examples/Content/shared' => FileList['demos/mvc/content/shared/*'],
+    'wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/bin' => MVC4_DLL,
+    'wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples' => MVC_DEMOS,
+    'wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Content/shared' => FileList['demos/mvc/content/shared/*'],
     'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
     'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
     'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*'].include(LEGACY_MIN_CSS)
@@ -258,7 +258,7 @@ bundle :name => 'aspnetmvc.trial',
        .merge(MVC_CONTENT),
        :prerequisites => [
            'mvc:assets',
-           'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj'
+           'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj'
        ]
 
 bundle :name => 'aspnetmvc.hotfix.trial',
@@ -324,7 +324,7 @@ bundle :name => 'aspnetmvc.commercial',
            'mvc:assets',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.snk',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj',
-           'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj',
+           'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/CommonAssemblyInfo.cs'
        ]
 

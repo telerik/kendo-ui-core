@@ -304,17 +304,17 @@ def patch_examples_csproj t
 end
 
 # Copy Kendo.Mvc.Examples.csproj (needed for the next task)
-file_copy :to => 'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj',
+file_copy :to => 'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj',
           :from => MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
 
-file_copy :to => 'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj',
+file_copy :to => 'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj',
           :from => MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
 
 # Patch Visual Studio Project - fix paths etc.
-file  'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj' do |t|
+file  'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj' do |t|
     patch_examples_csproj t
 end
 
-file  'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj' do |t|
+file  'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj' do |t|
     patch_examples_csproj t
 end
