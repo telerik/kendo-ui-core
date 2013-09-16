@@ -781,13 +781,6 @@ function pad(number, digits, end) {
             number = -number;
         }
 
-        /*if (format.indexOf("'") > -1 || format.indexOf("\"") > -1) {
-            format = format.replace(literalRegExp, function(match) {
-                literals.push(match.substring(1, match.length - 1));
-                return PLACEHOLDER;
-            });
-        }*/
-
         if (format.indexOf("'") > -1 || format.indexOf("\"") > -1 || format.indexOf("\\") > -1) {
             format = format.replace(literalRegExp, function (match) {
                 var quoteChar = match.charAt(0).replace("\\", ""),
