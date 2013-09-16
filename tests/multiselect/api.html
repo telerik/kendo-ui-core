@@ -386,6 +386,15 @@
                 multiselect.search();
             });
 
+            test("MultiSelect does not request data if set empty array as value", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select, { autoBind: false });
+
+                multiselect.value([]);
+
+                equal(multiselect.ul.children().length, 0);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

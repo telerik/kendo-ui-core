@@ -426,6 +426,11 @@ kendo_module({
 
         _fetchItems: function(value) {
             var that = this;
+            var isEmptyArray = $.isArray(value) && value.length === 0;
+
+            if (isEmptyArray || !value) {
+                return;
+            }
 
             if (!that._fetch && !that.ul[0].firstChild) {
                 that.dataSource.one(CHANGE, function() {
