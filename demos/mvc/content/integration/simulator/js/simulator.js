@@ -61,13 +61,13 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
                 deviceLink = head.find("link[href*='devices/']"),
                 url = "../../content/integration/simulator/devices/" + devicename + "/styles.css", newLink, matches;
 
-            if (!kendo.support.browser.msie) {
+            if (kendo.support.browser.msie && kendo.support.browser.version < 11) {
+                newLink = document.createStyleSheet(url);
+            } else {
                 newLink = deviceLink
                     .eq(0)
                     .clone()
                     .attr("href", url);
-            } else {
-                newLink = document.createStyleSheet(url);
             }
 
             head.append(newLink);
