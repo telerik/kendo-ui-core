@@ -19,6 +19,8 @@ namespace Kendo.Mvc.UI
             
             FluentDictionary.For(result)
                 .Add("width", line.Width, () => line.Width.HasValue)
+                .Add("skip", line.Skip, () => line.Skip.HasValue)
+                .Add("step", line.Step, () => line.Step.HasValue)
                 .Add("opacity", line.Opacity, () => line.Opacity.HasValue)
                 .Add("color", line.Color, () => line.Color.HasValue())
                 .Add("dashType", line.DashType.ToString().ToLowerInvariant(), () => line.DashType.HasValue)

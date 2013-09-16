@@ -137,10 +137,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TAxisBuilder MajorGridLines(Action<ChartLineBuilder> configurator)
+        public TAxisBuilder MajorGridLines(Action<ChartMajorGridLinesBuilder> configurator)
         {
-
-            configurator(new ChartLineBuilder(Axis.MajorGridLines));
+            configurator(new ChartMajorGridLinesBuilder(Axis.MajorGridLines));
 
             return this as TAxisBuilder;
         }
@@ -187,9 +186,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public TAxisBuilder MinorGridLines(Action<ChartLineBuilder> configurator)
+        public TAxisBuilder MinorGridLines(Action<ChartMinorGridLinesBuilder> configurator)
         {
-            configurator(new ChartLineBuilder(Axis.MinorGridLines));
+            configurator(new ChartMinorGridLinesBuilder(Axis.MinorGridLines));
 
             return this as TAxisBuilder;
         }

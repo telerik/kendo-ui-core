@@ -16,6 +16,19 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartLineBase" /> class.
         /// </summary>
+        public ChartLineBase(int width, string color, ChartDashType dashType, int skip, int step, bool visible)
+        {
+            Width = width;
+            Color = color;
+            Visible = visible;
+            DashType = dashType;
+            Skip = skip;
+            Step = step;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChartLineBase" /> class.
+        /// </summary>
         public ChartLineBase()
         {
         }
@@ -60,6 +73,24 @@ namespace Kendo.Mvc.UI
         /// Gets or sets the line dash type.
         /// </summary>
         public ChartDashType? DashType
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the line skip.
+        /// </summary>
+        public int? Skip
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the line step.
+        /// </summary>
+        public int? Step
         {
             get;
             set;

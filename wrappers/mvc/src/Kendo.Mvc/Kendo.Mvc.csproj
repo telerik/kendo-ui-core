@@ -323,6 +323,10 @@
     <Compile Include="UI\Chart\Fluent\ChartAxisNotesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartStepAreaSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartStepLineSeriesBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartMajorGridLinesBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartMinorGridLinesBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartMinorTicksBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartMajorTicksBuilder.cs" />
     <Compile Include="UI\Chart\ISeriesContainer.cs" />
     <Compile Include="UI\Chart\Enums\ChartAxisTickType.cs" />
     <Compile Include="UI\Chart\Enums\ChartBarGradient.cs" />
