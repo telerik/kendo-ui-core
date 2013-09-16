@@ -2425,6 +2425,35 @@ function pad(number, digits, end) {
             that.bind(that.events, options);
         },
 
+        resize: function() {
+            var size = this.getSize(),
+                currentSize = this._size;
+
+            if (!currentSize || size.width !== currentSize.width || size.height !== currentSize.height) {
+                this.setSize(size);
+                this._size = size;
+            }
+        },
+
+        size: function(size) {
+            if (!size) {
+                return this.getSize();
+            } else {
+                this.setSize(size);
+            }
+        },
+
+        resizableContainer: $.noop,
+
+        getSize: function() {
+            var container = this.resizableContainer();
+            if (container) {
+                return { width: container.width(), height: container.height() };
+            }
+        },
+
+        setSize: $.noop,
+
         destroy: function() {
             var that = this;
 

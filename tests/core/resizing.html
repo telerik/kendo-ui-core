@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.Widget Tests</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.Widget Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <style>
+            #qunit-fixture {
+                position: static;
+                top: 0;
+                left: 0;
+                width: 500px;
+                height: 400px;
+            }
+        </style>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var Widget = kendo.ui.Widget;
+
+            var ResizableWidget = Widget.extend({
+                init: function(element, options) {
+                    element.css({ width: "100%", height: "100%" });
+                    Widget.fn.init.call(this, element, options);
+                },
+
+                resizableContainer: function() {
+                    return this.element;
+                }
+            });
+
+            var widget, div;
+
+            module("resizable widget", {
+                setup: function() {
+                    div = $("<div />").appendTo($("#qunit-fixture"));
+                    widget = new ResizableWidget(div);
+                },
+
+                teardown: function() {
+                    $("#qunit-fixture").empty();
+                }
+            });
+
+            test("by default, size will return null", 1, function() {
+                widget.resizableContainer = $.noop;
+                var size = widget.size();
+                equal(size, null);
+            });
+
+            test("size reads the resizable container dimensions", 2, function() {
+                var size = widget.size();
+                equal(size.width, 500);
+                equal(size.height, 400);
+            });
+
+            test("calling resize will execute setSize with getSize result", 2, function() {
+                widget.setSize = function(size) {
+                    equal(size.width, 500);
+                    equal(size.height, 400);
+                }
+
+                widget.resize();
+            });
+
+            test("resize caches the size value and ignores subsequent calls", 1, function() {
+                widget.setSize = function(size) {
+                    ok(true);
+                }
+
+                widget.resize();
+                widget.resize();
+            });
+
+            test("changing dimensions invalidates the caching", 2, function() {
+                widget.setSize = function(size) {
+                    ok(true);
+                }
+
+                widget.resize();
+                div.css({ width: "90%", height: "90%" });
+                widget.resize();
+            });
+       </script>
+    </body>
+</html>
