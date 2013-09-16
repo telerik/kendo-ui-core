@@ -232,7 +232,7 @@
                 theSwitch.refresh();
                 theSwitch.wrapper.detach();
 
-                ok(theSwitch.origin);
+                ok(typeof theSwitch.origin == "number");
             });
 
             test("Destroying removes event handling", function() {
