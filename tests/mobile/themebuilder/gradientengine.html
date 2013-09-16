@@ -38,9 +38,10 @@
             });
 
             test("get method returns browser specific gradient", 1, function () {
-                var gradient = new Gradient("-webkit-linear-gradient(left, #0b47a2 5%)");
+                var gradient = new Gradient("-webkit-linear-gradient(left, #0b47a2 5%)"),
+                    matches = gradient.get().match(/-\w*?-/);
 
-                ok(gradient.get().match(/-\w*?-/)[0] == kendo.support.transforms.css);
+                ok(matches ? matches[0] == kendo.support.transforms.css : kendo.support.transforms.css === "");
             });
 
             test("get method returns WebKit style gradient in WebKit browsers", 1, function () {
