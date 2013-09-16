@@ -1,0 +1,28 @@
+
+        <div id="example" class="k-content">
+
+            <div class="k-rtl">
+                <button type="button" id="textButton">Text button</button>
+                <a id="iconTextButton">Icon and text</a>
+                <em id="iconButton"><span class="k-sprite">Edit</span></em>
+                <span id="disabledButton">Disabled button</span>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#textButton").kendoButton();
+
+                    $("#iconTextButton").kendoButton({
+                        spriteCssClass: "k-icon k-i-ungroup"
+                    });
+
+                    $("#iconButton").kendoButton({
+                        spriteCssClass: "k-icon k-i-refresh"
+                    });
+
+                    $("#disabledButton").kendoButton({
+                        enable: false
+                    });
+                });
+            </script>
+        </div>

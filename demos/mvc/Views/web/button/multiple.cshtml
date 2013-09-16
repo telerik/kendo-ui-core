@@ -1,0 +1,39 @@
+
+        <div id="example" class="k-content">
+
+            <h2>Standard Initialization</h2>
+            <p>
+                <button type="button" class="editButton">Edit Button 1</button>
+                <button type="button" class="deleteButton">Delete Button 1</button>
+            </p>
+            <p>
+                <button type="button" class="editButton">Edit Button 2</button>
+                <button type="button" class="deleteButton">Delete Button 2</button>
+            </p>
+
+            <h2>Initialization with kendo.init</h2>
+            <div id="buttonContainer">
+                <p>
+                    <button type="button" data-role="button" data-sprite-css-class="k-icon k-edit">Edit Button 1</button>
+                    <button type="button" data-role="button" data-sprite-css-class="k-icon k-delete">Delete Button 1</button>
+                </p>
+                <p>
+                    <button type="button" data-role="button" data-sprite-css-class="k-icon k-edit" data-enable="false">Disabled via data attribute</button>
+                    <button type="button" data-role="button" data-sprite-css-class="k-icon k-delete" disabled="disabled">Disabled via HTML attribute</button>
+                </p>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $(".editButton").kendoButton({
+                        spriteCssClass: "k-icon k-edit"
+                    });
+
+                    $(".deleteButton").kendoButton({
+                        spriteCssClass: "k-icon k-delete"
+                    });
+
+                    kendo.init("#buttonContainer");
+                });
+            </script>
+        </div>

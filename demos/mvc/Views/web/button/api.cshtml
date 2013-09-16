@@ -1,0 +1,31 @@
+
+        <div id="example" class="k-content">
+
+            <div class="configuration" style="width: 200px;">
+                <span class="configHead">Button API Functions</span>
+                <ul class="options">
+                    <li>
+                        <button class="k-button" id="enableButton">Enable</button> or <button class="k-button" id="disableButton">Disable</button>
+                    </li>
+                </ul>
+            </div>
+
+            <button id="iconTextButton">Kendo UI Button</button>
+
+            <script>
+                $(document).ready(function() {
+                    var buttonObject = $("#iconTextButton").kendoButton({
+                        spriteCssClass: "k-icon k-i-ungroup"
+                    }).data("kendoButton");
+
+
+                    $("#enableButton").click(function(){
+                        buttonObject.enable(true);
+                    });
+
+                    $("#disableButton").click(function(){
+                        buttonObject.enable(false);
+                    });
+                });
+            </script>
+        </div>

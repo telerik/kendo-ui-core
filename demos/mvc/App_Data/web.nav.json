@@ -70,6 +70,56 @@
             ]
         },
         {
+            "text": "Button",
+            "name": "button",
+            "documentation": "web/button",
+            "spriteCssClass": "buttonIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "button/index.html",
+                    "title": "Demo and source code for Kendo UI Button widget",
+                    "meta": "How jQuery-based Button widget works, view demo source code of Kendo UI Button."
+                },
+                {
+                    "text": "Multiple buttons",
+                    "url": "button/multiple.html",
+                    "title": "Using Multiple Kendo UI Button widgets",
+                    "meta": "Using multiple buttons via a single Button widget instance."
+                },
+                {
+                    "text": "Images",
+                    "url": "button/images.html",
+                    "title": "Using Kendo UI Buttons with images and icons",
+                    "meta": "Using buttons with images and icons."
+                },
+                {
+                    "text": "Events",
+                    "url": "button/events.html",
+                    "title": "Kendo UI Button events",
+                    "meta": "How jQuery-based Button widget works, view demo source code of Kendo UI Button."
+                },
+                {
+                    "text": "API",
+                    "url": "button/api.html",
+                    "title": "Kendo UI Button API",
+                    "meta": "How jQuery-based Button widget works, view demo source code of Kendo UI Button."
+                },
+                {
+                    "text": "RTL support",
+                    "url": "button/rtl.html",
+                    "title": "Kendo UI Button RTL Support",
+                    "meta": "How jQuery-based Button widget works, view demo source code of Kendo UI Button."
+                },
+                {
+                    "text": "Keyboard navigation",
+                    "url": "button/navigation.html",
+                    "title": "Kendo UI Button Keyboard Navigation",
+                    "meta": "How jQuery-based Button widget works, view demo source code of Kendo UI Button."
+                }
+            ]
+        },
+        {
             "text": "Calendar",
             "name": "calendar",
             "documentation": "web/calendar",

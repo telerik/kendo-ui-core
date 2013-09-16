@@ -1,0 +1,39 @@
+
+        <div id="example" class="k-content">
+
+            <p>
+                <button type="button" id="text-button">Text Button</button>
+                <span id="refresh-button">Refresh Button</span>
+                <a id="disabledButton">Disabled Button</a>
+            </p>
+
+            <p>(The disabled button will not fire click events)</p>
+
+            <div class="demo-section">                
+                <h3 class="title">Console log</h3>
+                <div class="console"></div>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+
+                    function onClick(e) {
+                        kendoConsole.log("event :: click (" + e.event.target.id + ")" );
+                    }
+
+                    $("#text-button").kendoButton({
+                        click: onClick
+                    });
+
+                    $("#refresh-button").kendoButton({
+                        spriteCssClass: "k-icon k-i-refresh",
+                        click: onClick
+                    });
+
+                    $("#disabledButton").kendoButton({
+                        enable: false,
+                        click: onClick
+                    });
+                });
+            </script>
+        </div>

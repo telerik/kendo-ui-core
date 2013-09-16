@@ -1,0 +1,28 @@
+
+        <div id="example" class="k-content">
+
+            <button type="button" id="iconButton">Sprite icon</button>
+
+            <button type="button" id="imageButton">Image icon</button>
+
+            <script>
+                $(document).ready(function() {
+                    $("#iconButton").kendoButton({
+                        spriteCssClass: "k-icon k-i-ungroup"
+                    });
+
+                    $("#imageButton").kendoButton({
+                        imageUrl: "../../content/shared/icons/sports/snowboarding.png"
+                    });
+                });
+            </script>
+
+            <style scoped>
+
+            .k-button .k-image
+            {
+                height: 16px;
+            }
+            
+            </style>
+        </div>
