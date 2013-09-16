@@ -3089,7 +3089,7 @@ kendo_module({
                     that._queueRequest(options, function() {
                         if (!that.trigger(REQUESTSTART, { type: "read" })) {
                             that.transport.read({
-                                data: options,
+                                data: that._params(options),
                                 success: that._prefetchSuccessHandler(skip, size, callback)
                             });
                         } else {

@@ -72,6 +72,35 @@
                 return dataSource;
             }
 
+            test("prefetch projects request parameters", 2, function() {
+                var data = [{ id: 1, text: "foo" }, { id: 2, text: "bar" }];
+                var dataSource = new DataSource({
+                    schema: {
+                        model: {
+                            fields: {
+                                Text: { from: "text" }
+                            }
+                        }
+                    },
+                    serverSorting: true,
+                    sort: {
+                        field: "Text",
+                        dir: "asc"
+                    },
+                    transport: {
+                        read: function(options) {
+                            options.success(data);
+
+                            var sort = options.data.sort[0];
+                            equal(sort.field, "text");
+                            equal(sort.dir, "asc");
+                        }
+                    }
+                });
+
+                dataSource.prefetch(0, 1);
+            });
+
             test("inrange returns true if available", function() {
                 var dataSource = setup();
 
