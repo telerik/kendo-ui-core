@@ -1073,19 +1073,29 @@ kendo_module({
             },
             majorTicks: {
                 align: OUTSIDE,
-                size: 4
+                size: 4,
+                skip: 0,
+                step: 1
             },
             minorTicks: {
                 align: OUTSIDE,
-                size: 3
+                size: 3,
+                skip: 0,
+                step: 1
             },
             axisCrossingValue: 0,
             majorTickType: OUTSIDE,
             minorTickType: NONE,
+            majorGridLines: {
+                skip: 0,
+                step: 1
+            },
             minorGridLines: {
                 visible: false,
                 width: 1,
-                color: BLACK
+                color: BLACK,
+                skip: 0,
+                step: 1
             },
             // TODO: Move to line or labels options
             margin: 5,
@@ -1233,49 +1243,46 @@ kendo_module({
                 options = axis.options,
                 lineBox = axis.lineBox(),
                 mirror = options.labels.mirror,
+                majorUnit = options.majorTicks.visible ? options.majorUnit : 0,
                 tickX, tickY, pos,
-                lineOptions;
+                start, end;
 
-            function render(tickPositions, unit, tick, visible, skipUnit) {
-                var skip = skipUnit / unit, i,
-                    count = tickPositions.length;
+            function render(tickPositions, tickOptions) {
+                var i, count = tickPositions.length;
 
-                if (visible) {
-                    for (i = 0; i < count; i++) {
-                        if (i % skip === 0) {
+                if (tickOptions.visible) {
+                    for (i = tickOptions.skip; i < count; i += tickOptions.step) {
+                        if (i % tickOptions.skipUnit === 0) {
                             continue;
                         }
 
-                        tickX = mirror ? lineBox.x2 : lineBox.x2 - tick.size;
-                        tickY = mirror ? lineBox.y1 - tick.size : lineBox.y1;
+                        tickX = mirror ? lineBox.x2 : lineBox.x2 - tickOptions.size;
+                        tickY = mirror ? lineBox.y1 - tickOptions.size : lineBox.y1;
                         pos = tickPositions[i];
-                        lineOptions = {
-                                strokeWidth: tick.width,
-                                stroke: tick.color,
-                                align: options._alignLines
-                            };
 
                         if (options.vertical) {
-                            ticks.push(view.createLine(
-                                tickX, pos, tickX + tick.size, pos, lineOptions));
+                            start = Point2D(tickX, pos);
+                            end = Point2D(tickX + tickOptions.size, pos);
                         } else {
-                            ticks.push(view.createLine(
-                                pos, tickY, pos, tickY + tick.size, lineOptions));
+                            start = Point2D(pos, tickY);
+                            end = Point2D(pos, tickY + tickOptions.size);
                         }
+
+                        ticks.push(view.createLine(
+                            start.x, start.y,
+                            end.x, end.y, {
+                                strokeWidth: tickOptions.width,
+                                stroke: tickOptions.color,
+                                align: options._alignLines
+                            }));
                     }
                 }
             }
 
-            render(
-                axis.getMajorTickPositions(), options.majorUnit,
-                options.majorTicks, options.majorTicks.visible
-            );
-
-            render(
-                axis.getMinorTickPositions(), options.minorUnit,
-                options.minorTicks, options.minorTicks.visible,
-                options.majorTicks.visible ? options.majorUnit : 0
-            );
+            render(axis.getMajorTickPositions(), options.majorTicks);
+            render(axis.getMinorTickPositions(), deepExtend({}, {
+                    skipUnit: majorUnit / options.minorUnit
+                }, options.minorTicks));
 
             return ticks;
         },
@@ -1366,66 +1373,61 @@ kendo_module({
 
         renderGridLines: function(view, altAxis) {
             var axis = this,
-                modelId = axis.plotArea.options.modelId,
+                items = [],
                 options = axis.options,
+                modelId = axis.plotArea.options.modelId,
+                axisLineVisible = altAxis.options.line.visible,
+                majorGridLines = options.majorGridLines,
+                majorUnit = majorGridLines.visible ? options.majorUnit : 0,
                 vertical = options.vertical,
                 lineBox = altAxis.lineBox(),
                 lineStart = lineBox[vertical ? "x1" : "y1"],
-                lineEnd = lineBox[vertical ? "x2" : "y2" ],
-                majorTicks = axis.getMajorTickPositions(),
-                gridLines = [],
-                gridLine = function (pos, options) {
-                    return {
-                        pos: pos,
-                        options: options
-                    };
-                };
+                lineEnd = lineBox[vertical ? "x2" : "y2"],
+                linePos = lineBox[vertical ? "y1" : "x1"],
+                pos, majorTicks = [], start, end;
 
-            if (options.majorGridLines.visible) {
-                gridLines = map(majorTicks, function(pos) {
-                                return gridLine(pos, options.majorGridLines);
-                            });
-            }
+            function render(tickPositions, gridLine) {
+                var count = tickPositions.length,
+                    i;
 
-            if (options.minorGridLines.visible) {
-                gridLines = gridLines.concat(
-                    map(axis.getMinorTickPositions(), function(pos) {
-                        if (options.majorGridLines.visible) {
-                            if (!inArray(pos, majorTicks)) {
-                                return gridLine(pos, options.minorGridLines);
+                if (gridLine.visible) {
+                    for (i = gridLine.skip; i < count; i += gridLine.step) {
+                        pos = round(tickPositions[i]);
+                        if (!inArray(pos, majorTicks)) {
+                            if (i % gridLine.skipUnit !== 0 && (!axisLineVisible || linePos !== pos)) {
+                                if (options.vertical) {
+                                    start = Point2D(lineStart, pos);
+                                    end = Point2D(lineEnd, pos);
+                                } else {
+                                    start = Point2D(pos, lineStart);
+                                    end = Point2D(pos, lineEnd);
+                                }
+
+                                if (start && end) {
+                                    items.push(view.createLine(
+                                        start.x, start.y,
+                                        end.x, end.y, {
+                                            data: { modelId: modelId },
+                                            strokeWidth: gridLine.width,
+                                            stroke: gridLine.color,
+                                            dashType: gridLine.dashType,
+                                            zIndex: -1
+                                        }));
+
+                                    majorTicks.push(pos);
+                                }
                             }
-                        } else {
-                            return gridLine(pos, options.minorGridLines);
                         }
                     }
-                ));
+                }
             }
 
-            return map(gridLines, function(line) {
-                var gridLineOptions = {
-                        data: { modelId: modelId },
-                        strokeWidth: line.options.width,
-                        stroke: line.options.color,
-                        dashType: line.options.dashType,
-                        zIndex: -1
-                    },
-                    linePos = round(line.pos),
-                    altAxisBox = altAxis.lineBox();
+            render(axis.getMajorTickPositions(), options.majorGridLines);
+            render(axis.getMinorTickPositions(), deepExtend({}, {
+                    skipUnit: majorUnit / options.minorUnit
+                }, options.minorGridLines));
 
-                if (vertical) {
-                    if (!altAxis.options.line.visible || altAxisBox.y1 !== linePos) {
-                        return view.createLine(
-                            lineStart, linePos, lineEnd, linePos,
-                            gridLineOptions);
-                    }
-                } else {
-                    if (!altAxis.options.line.visible || altAxisBox.x1 !== linePos) {
-                        return view.createLine(
-                            linePos, lineStart, linePos, lineEnd,
-                            gridLineOptions);
-                    }
-                }
-            });
+            return items;
         },
 
         reflow: function(box) {
