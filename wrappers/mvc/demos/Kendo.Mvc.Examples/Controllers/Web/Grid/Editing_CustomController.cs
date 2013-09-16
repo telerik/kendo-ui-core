@@ -85,7 +85,7 @@ namespace Kendo.Mvc.Examples.Controllers
         private void PopulateEmployees()
         {
             ViewData["employees"] = new SampleEntities().Employees
-                        .Select(e => new ClientEmployeeViewModel
+                        .Select(e => new EmployeeViewModel
                         {
                             EmployeeID = e.EmployeeID,
                             EmployeeName = e.FirstName + " " + e.LastName

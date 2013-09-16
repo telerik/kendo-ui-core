@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Kendo.Mvc.Examples.Models
 {
-    public class ClientTreeViewItemModel
+    public class TreeViewItemViewModel
 
     {
         public string id { get; set; }
@@ -14,11 +14,11 @@ namespace Kendo.Mvc.Examples.Models
         public string imageUrl { get; set; }
         public bool expanded { get; set; }
         public bool hasChildren { get; set; }
-        public IEnumerable<ClientTreeViewItemModel> items { get; set; }
+        public IEnumerable<TreeViewItemViewModel> items { get; set; }
 
-        public ClientTreeViewItemModel Clone()
+        public TreeViewItemViewModel Clone()
         {
-            ClientTreeViewItemModel clone = new ClientTreeViewItemModel
+            TreeViewItemViewModel clone = new TreeViewItemViewModel
                 {
                     id = this.id,
                     imageUrl = this.imageUrl,

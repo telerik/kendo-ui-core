@@ -15,7 +15,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult Read_TemplateData(string id)
         {
-            IEnumerable<ClientTreeViewItemModel> result;
+            IEnumerable<TreeViewItemViewModel> result;
             if (string.IsNullOrEmpty(id))
             {
                 result = TreeViewRepository.GetProjectData().Select(o => o.Clone());                

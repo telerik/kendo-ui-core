@@ -525,9 +525,7 @@
     <Compile Include="Models\Chart\SunPositionItem.cs" />
     <Compile Include="Models\Chart\WindDataItem.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
-    <Compile Include="Models\ClientEmployeeViewModel.cs" />
-    <Compile Include="Models\ClientOrderViewModel.cs" />
-    <Compile Include="Models\ClientTreeViewItemModel.cs" />
+    <Compile Include="Models\TreeViewItemModel.cs" />
     <Compile Include="Models\CompensationStats.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\CrimeData.cs" />
@@ -596,7 +594,6 @@
     <Compile Include="Models\Scheduler\SchedulerTaskService.cs" />
     <Compile Include="Models\Scheduler\TaskViewModel.cs" />
     <Compile Include="Models\ScreenResolutionRemoteDataViewModel.cs" />
-    <Compile Include="Models\SessionClientOrderRepository.cs" />
     <Compile Include="Models\SessionUploadInitialFilesRepository.cs" />
     <Compile Include="Models\Shipper.cs">
       <DependentUpon>Sample.tt</DependentUpon>
