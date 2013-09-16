@@ -559,6 +559,19 @@
                  equal(cal.calls("navigate"), 1);
             });
 
+            test("Navigates widget when set min value bigger than selected date", function() {
+                 var value = new Date(2000, 10, 10),
+                     cal = new Calendar(div, {value: value});
+
+                 value.setDate(15); //should re-render in order to hide dates before 5th
+
+                 stub(cal, { navigate: cal.navigate });
+
+                 cal.min(value);
+
+                 equal(cal.calls("navigate"), 1);
+            });
+
             test("Should clear _value if less then min", function() {
                  var value = new Date(2000, 10, 10),
                      cal = new Calendar(div, {value: value});

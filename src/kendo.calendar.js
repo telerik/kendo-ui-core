@@ -261,9 +261,9 @@ kendo_module({
 
             if (!value) {
                 value = currentValue;
-            } else {
-                that._current = value = new DATE(+restrictValue(value, min, max));
             }
+
+            that._current = value = new DATE(+restrictValue(value, min, max));
 
             if (view === undefined) {
                 view = that._index;
@@ -713,12 +713,13 @@ kendo_module({
                 }
             }
 
+            that._changeView = isEqualMonth(that._current, value) || !!(options.month.content || options.month.empty);
+
             if (bigger) {
-                that.value(null);
-            } else {
-                that._changeView = isEqualDatePart(that._current, value) || !!(options.month.content || options.month.empty);
-                that.navigate();
+                that._value = null;
             }
+
+            that.navigate(that._value);
 
             that._toggle();
         },
@@ -1271,6 +1272,15 @@ kendo_module({
             return value1.getFullYear() === value2.getFullYear() &&
                    value1.getMonth() === value2.getMonth() &&
                    value1.getDate() === value2.getDate();
+        }
+
+        return false;
+    }
+
+    function isEqualMonth(value1, value2) {
+        if (value1) {
+            return value1.getFullYear() === value2.getFullYear() &&
+                   value1.getMonth() === value2.getMonth();
         }
 
         return false;
