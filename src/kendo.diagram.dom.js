@@ -2,7 +2,7 @@ kendo_module({
     id: "diagram",
     name: "Diagram",
     category: "diagram",
-    depends: ["diagram.svg, diagram.services"]
+    depends: ["diagram.svg", "diagram.services", "data", "draganddrop"]
 });
 
 (function ($, undefined) {
@@ -14,6 +14,7 @@ kendo_module({
         Class = kendo.Class,
         proxy = $.proxy,
         deepExtend = kendo.deepExtend,
+        HierarchicalDataSource = kendo.data.HierarchicalDataSource,
         Canvas = diagram.Canvas,
         Group = diagram.Group,
         Rectangle = diagram.Rectangle,
@@ -41,7 +42,15 @@ kendo_module({
     // Constants ==============================================================
     var NS = ".kendoDiagram",
         BOUNDSCHANGE = "boundsChange",
+        CHANGE = "change",
+        ERROR = "error",
         Auto = "Auto",
+        bindings = {
+            text: "dataTextField",
+            url: "dataUrlField",
+            spriteCssClass: "dataSpriteCssClassField",
+            imageUrl: "dataImageUrlField"
+        },
         MAXINT = 9007199254740992;
 
     var PanAdapter = kendo.Class.extend({
@@ -596,10 +605,10 @@ kendo_module({
         init: function (element, options) {
             var that = this;
             Widget.fn.init.call(that, element, options);
-            that.element = element; // the hosting element
-            that.canvas = new Canvas(that.element); // the root SVG Canvas
+            that.element = $(element); // the hosting element
+            that.canvas = new Canvas(element); // the root SVG Canvas
             that._initialize();
-            $(element).on("mousemove" + NS, proxy(that._mouseMove, that))
+            that.element.on("mousemove" + NS, proxy(that._mouseMove, that))
                 .on("mouseup" + NS, proxy(that._mouseUp, that))
                 .on("dblclick" + NS, proxy(that._doubleClick, that))
                 .on("mousedown" + NS, proxy(that._mouseDown, that))
@@ -609,7 +618,14 @@ kendo_module({
         },
         options: {
             name: "Diagram",
-            zoomRate: 1.1
+            zoomRate: 1.1,
+            dataSource: {},
+            dragAndDrop: false,
+            template: "",
+            dataTextField: null,
+            autoBind: true,
+            visualTemplate: function () {
+            }
         },
         events: ["zoom", "pan"],
         zoom: function (zoom, staticPoint) {
@@ -853,8 +869,15 @@ kendo_module({
             }
         },
         documentToCanvasPoint: function (dPoint) {
-            var containerOffset = $(this.element).offset();
+            var containerOffset = this.element.offset();
             return new Point(dPoint.x - containerOffset.left, dPoint.y - containerOffset.top);
+        },
+        setDataSource: function (dataSource) {
+            this.options.dataSource = dataSource;
+
+            this._dataSource();
+
+            this.dataSource.fetch();
         },
         _mouseDown: function (e) {
             var p = this._calculatePosition(e);
@@ -899,7 +922,7 @@ kendo_module({
         },
         _calculatePosition: function (e) {
             var pan = this.pan();
-            var localPosition = $(this.element).offset();
+            var localPosition = this.element.offset();
             var p = new Point(e.pageX - localPosition.left - pan.x, e.pageY - localPosition.top - pan.y);
             return this._normalizePointZoom(p);
         },
@@ -916,6 +939,7 @@ kendo_module({
             this.mainLayer = new Group({
                 id: "main-layer"
             });
+            this.dataMap = [];
             this.canvas.append(this.mainLayer);
             this.adornerLayer = new Group({
                 id: "adorner-layer"
@@ -929,6 +953,81 @@ kendo_module({
              * @type {string}
              */
             this.id = kendo.diagram.randomId();
+
+            this._accessors();
+            this._dataSource();
+            if (this.options.autoBind) {
+                this.dataSource.fetch();
+            }
+        },
+        _dataSource: function (silentRead) {
+            var that = this,
+                options = that.options,
+                dataSource = options.dataSource;
+
+            function recursiveRead(data) {
+                for (var i = 0; i < data.length; i++) {
+                    data[i]._initChildren();
+
+                    data[i].children.fetch();
+
+                    recursiveRead(data[i].children.view());
+                }
+            }
+
+            dataSource = Utils.isArray(dataSource) ? { data: dataSource } : dataSource;
+
+            if (that.dataSource) {
+                that.dataSource.unbind(CHANGE, proxy(that.refreshSource, that));
+                that.dataSource.unbind(ERROR, proxy(that._error, that));
+            }
+
+            if (!dataSource.fields) {
+                dataSource.fields = [
+                    { field: "text" },
+                    { field: "url" },
+                    { field: "spriteCssClass" },
+                    { field: "imageUrl" }
+                ];
+            }
+
+            that.dataSource = dataSource = HierarchicalDataSource.create(dataSource);
+
+            if (silentRead) {
+                dataSource.fetch();
+                recursiveRead(dataSource.view());
+            }
+
+            dataSource.bind(CHANGE, proxy(that.refreshSource, that));
+            dataSource.bind(ERROR, proxy(that._error, that));
+        },
+        _error: function () {
+            // TODO: Do something?
+        },
+        _accessors: function () {
+            var that = this,
+                options = that.options,
+                i, field, textField,
+                element = that.element;
+
+            for (i in bindings) {
+                field = options[bindings[i]];
+                textField = element.attr(kendo.attr(i + "-field"));
+
+                if (!field && textField) {
+                    field = textField;
+                }
+
+                if (!field) {
+                    field = i;
+                }
+
+                if (!Utils.isArray(field)) {
+                    field = [field];
+                }
+
+                options[bindings[i]] = field;
+            }
         },
         _adorn: function (adorner, isActive) {
             if (isActive !== undefined) {
@@ -957,7 +1056,79 @@ kendo_module({
                 this.connections[i].refresh();
             }
         },
+        findByUid: function (uid) {
+            return this.element.find(".k-shape[" + kendo.attr("uid") + "=" + uid + "]");
+        },
+        refreshSource: function (e) {
+            var that = this,
+                parentNode = null,
+                node = e.node,
+                action = e.action,
+                items = e.items,
+                options = that.options,
+                i;
 
+            if (node) {
+                parentNode = node.uid; //that.findByUid(node.uid);
+            }
+
+            function addShape(node) {
+                var shape = that.dataMap.first(function (item) {
+                    return item.uid == node.uid;
+                });
+                if (shape) {
+                    return shape.shape;
+                }
+
+                var opt = {
+                    data: options.visualTemplate,
+                    context: node,
+                    width: 150,
+                    height: 60
+                };
+                shape = new kendo.diagram.Shape(opt);
+                that.addShape(shape);
+                that.dataMap.push({uid: node.uid, shape: shape});
+                return shape;
+            }
+
+            function append(parent, children) {
+                var filter = function (item) {
+                    return item.uid == parent;
+                };
+                for (var i = 0; i < children.length; i++) {
+                    var node = children[i],
+                        shape = addShape(node),
+                        parentShape = that.dataMap.first(filter);
+                    if (parentShape) {
+                        that.connect(parentShape.shape, shape);
+                    }
+                }
+            }
+
+            if (action == "add") {
+                append(parentNode, items);
+            } else if (action == "remove") {
+                //Remove
+            } else if (action == "itemchange") {
+                if (node) {
+                    if (!items.length) {
+                        //Update
+                    } else {
+                        append(parentNode, items);
+                    }
+                } else {
+                    for (i = 0; i < items.length; i++) {
+                        addShape(items[i]); // roots
+                    }
+                }
+            }
+            if (!e.field) { // field means any field in the data source has changed - like selected, expanded...
+                for (i = 0; i < items.length; i++) {
+                    items[i].load();
+                }
+            }
+        },
         /**
          * Performs a diagram layout of the given type.
          * @param layoutType The layout algorithm to be applied (TreeLayout, LayeredLayout, SpringLayout).

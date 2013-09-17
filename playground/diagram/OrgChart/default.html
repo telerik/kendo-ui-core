@@ -20,7 +20,7 @@
             margin: 0px 10px;
         }
 
-        .k-dropdown{
+        .k-dropdown {
             margin: 5px;
         }
 
@@ -74,119 +74,7 @@
 <body>
 
 <script type="text/javascript">
-
-    var diagram, flatEmployees = [];
-
-    function defineActions() {
-        $("#layoutButton").bind("click", layout);
-    }
-
-    function layout() {
-        diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
-                {
-                    TreeLayoutType: eval($("#Layouts").val()),
-                    animate: true
-                });
-    }
-
-    function init() {
-        var diagramElement = $("#canvas").kendoDiagram();
-        diagram = diagramElement.data("kendoDiagram");
-        diagramElement.css("background-color", "none");
-
-        var layouts = [
-            {value: "kendo.diagram.TreeLayoutType.TreeDown", text: "TreeDown"},
-            {value: "kendo.diagram.TreeLayoutType.TreeUp", text: "TreeUp"},
-            {value: "kendo.diagram.TreeLayoutType.TreeLeft", text: "TreeLeft"},
-            {value: "kendo.diagram.TreeLayoutType.TreeRight", text: "TreeRight"},
-            {value: "kendo.diagram.TreeLayoutType.RadialTree", text: "RadialTree"},
-            {value: "kendo.diagram.TreeLayoutType.TipOverTree", text: "TipOverTree"},
-            {value: "kendo.diagram.TreeLayoutType.MindmapVertical", text: "MindmapVertical"},
-            {value: "kendo.diagram.TreeLayoutType.MindmapHorizontal", text: "MindmapHorizontal"}
-        ];
-
-        $("#Layouts").kendoDropDownList({
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: layouts,
-            change: function () {
-                layout();
-            }
-        });
-
-        $("#splitter").kendoSplitter({
-            panes: [
-                { collapsible: false },
-                { collapsible: false, size: "15%" }
-            ]
-        });
-    }
-
-    function loadOrgChart() {
-        var dataSource = new kendo.data.HierarchicalDataSource({
-            transport: {
-                read: "org.json",
-                dataType: "json"
-            },
-            schema: {
-                model: {
-                    children: "items"
-                }
-            }
-        });
-
-        dataSource.fetch(function () {
-            var org = this.data();
-            layer(null, org);
-            layout();
-            $("#employees").kendoComboBox({
-                dataSource: {
-                    data: flatEmployees
-                },
-                placeholder: "Find employee...",
-                separator: ", ",
-                dataTextField: "name",
-                template: "#= name # #= lastName #",
-                select: function (e) {
-                    var data = this.dataItem(e.item.index()),
-                            tree = $("#treeview").data("kendoTreeView"),
-                            item = tree.findByText(data.name);
-                    tree.select(item[0]);
-                }
-            });
-
-            var tooltip = $(".shape").kendoTooltip({
-                width: 120,
-                position: "top",
-                content: function(e){
-                    return e.target.text();
-                }
-            }).data("kendoTooltip");
-        });
-
-        function layer(parent, children) {
-            for (var i = 0; i < children.length; i++) {
-                var node = children[i];
-                var opt = {
-                    data: getVisual,
-                    context: node,
-                    width: 150,
-                    height: 60
-                };
-                var shape = new kendo.diagram.Shape(opt);
-                diagram.addShape(shape);
-                flatEmployees.push(node);
-                node._initChildren();
-                if (node.children) {
-                    node.children.fetch();
-                    layer(shape, node.children.view());
-                }
-                if (parent) {
-                    diagram.connect(parent, shape);
-                }
-            }
-        }
-
+    $(function () {
         function getVisual(data) {
             var g = new kendo.diagram.Group({
                 autoSize: true
@@ -222,6 +110,63 @@
             return g;
         }
 
+        $("#layoutButton").bind("click", layout);
+
+        function layout() {
+            diagram.select(false);
+            diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                    {
+                        TreeLayoutType: eval($("#Layouts").val()),
+                        animate: true
+                    });
+        }
+
+        var layouts = [
+            {value: "kendo.diagram.TreeLayoutType.TreeDown", text: "TreeDown"},
+            {value: "kendo.diagram.TreeLayoutType.TreeUp", text: "TreeUp"},
+            {value: "kendo.diagram.TreeLayoutType.TreeLeft", text: "TreeLeft"},
+            {value: "kendo.diagram.TreeLayoutType.TreeRight", text: "TreeRight"},
+            {value: "kendo.diagram.TreeLayoutType.RadialTree", text: "RadialTree"},
+            {value: "kendo.diagram.TreeLayoutType.TipOverTree", text: "TipOverTree"},
+            {value: "kendo.diagram.TreeLayoutType.MindmapVertical", text: "MindmapVertical"},
+            {value: "kendo.diagram.TreeLayoutType.MindmapHorizontal", text: "MindmapHorizontal"}
+        ];
+
+        $("#Layouts").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: layouts,
+            change: function () {
+                layout();
+            }
+        });
+
+        $("#splitter").kendoSplitter({
+            panes: [
+                { collapsible: false },
+                { collapsible: false, size: "15%" }
+            ]
+        });
+
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: "org.json",
+                dataType: "json"
+            },
+            schema: {
+                model: {
+                    children: "items"
+                }
+            }
+        });
+
+        var diagram = $("#canvas").kendoDiagram({
+                    dataSource: dataSource,
+                    autoBind: false,
+                    visualTemplate: getVisual
+                }
+        ).data("kendoDiagram");
+
         $("#treeview").kendoTreeView({
             dataSource: dataSource,
             //checkboxes: true,
@@ -240,20 +185,13 @@
             },
             dataBound: function () {
                 this.expand(".k-item");
+                layout();
             }
         });
-
-        //tooltip.show($("#canvas"));
-    }
-    $(function () {
-        init();
-        defineActions();
-        loadOrgChart();
     })
 </script>
 <div id="Stage">
     <div id="toolbarDiv">
-        <!--<img id="Logo" src="images/telerik-logo.png"/>-->
         <span id="Title">Organization chart...</span>
         <input id="Layouts" value="1"/>
         <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
@@ -261,7 +199,6 @@
     <div id="splitter">
         <div id="canvas"></div>
         <div>
-            <!--<input id="employees"/>-->
             <div style="color: steelblue; margin: 5px;">Select to highlight...</div>
             <div id="treeview"></div>
         </div>
