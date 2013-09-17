@@ -157,7 +157,7 @@ bundle :name => 'complete.trial',
            %w(mobile framework) => 'mobile'
        },
        :type_script => { %w(web mobile dataviz framework) => 'all' },
-       :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :changelog => %w(web mobile dataviz framework),
        :demos => %w(web dataviz mobile),
        :contents => {
             'js' => COMPLETE_MIN_JS + JQUERY_MAP,
