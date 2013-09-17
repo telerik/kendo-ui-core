@@ -41,6 +41,24 @@ class ChartCategoryAxisItemMajorTicks extends \Kendo\SerializableObject {
         return $this->setProperty('width', $value);
     }
 
+    /**
+    * The step of the category axis major ticks.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemMajorTicks
+    */
+    public function step($value) {
+        return $this->setProperty('step', $value);
+    }
+
+    /**
+    * The skip of the category axis major ticks.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemMajorTicks
+    */
+    public function skip($value) {
+        return $this->setProperty('skip', $value);
+    }
+
 //<< Properties
 }
 

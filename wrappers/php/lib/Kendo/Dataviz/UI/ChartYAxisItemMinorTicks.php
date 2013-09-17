@@ -2,13 +2,13 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartCategoryAxisItemMinorTicks extends \Kendo\SerializableObject {
+class ChartYAxisItemMinorTicks extends \kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The color of the category axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.
+    * The color of the y axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
-    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemMinorTicks
+    * @return \Kendo\Dataviz\UI\ChartYAxisItemMinorTicks
     */
     public function color($value) {
         return $this->setProperty('color', $value);
@@ -17,16 +17,16 @@ class ChartCategoryAxisItemMinorTicks extends \Kendo\SerializableObject {
     /**
     * The length of the tick line in pixels.
     * @param float $value
-    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemMinorTicks
+    * @return \Kendo\Dataviz\UI\ChartYAxisItemMinorTicks
     */
     public function size($value) {
         return $this->setProperty('size', $value);
     }
 
     /**
-    * If set to true the chart will display the category axis minor ticks. By default the category axis minor ticks are visible.
+    * If set to true the chart will display the y axis minor ticks. By default the y axis minor ticks are not visible.
     * @param boolean $value
-    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemMinorTicks
+    * @return \Kendo\Dataviz\UI\ChartYAxisItemMinorTicks
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);
@@ -35,25 +35,25 @@ class ChartCategoryAxisItemMinorTicks extends \Kendo\SerializableObject {
     /**
     * The width of the minor ticks in pixels.
     * @param float $value
-    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemMinorTicks
+    * @return \Kendo\Dataviz\UI\ChartYAxisItemMinorTicks
     */
     public function width($value) {
         return $this->setProperty('width', $value);
     }
 
     /**
-    * The step of the category axis minor ticks.
+    * The step of the y axis minor ticks.
     * @param float $value
-    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemMinorTicks
+    * @return \Kendo\Dataviz\UI\ChartYAxisItemMinorTicks
     */
     public function step($value) {
         return $this->setProperty('step', $value);
     }
 
     /**
-    * The skip of the category axis minor ticks.
+    * The skip of the y axis minor ticks.
     * @param float $value
-    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemMinorTicks
+    * @return \Kendo\Dataviz\UI\ChartYAxisItemMinorTicks
     */
     public function skip($value) {
         return $this->setProperty('skip', $value);

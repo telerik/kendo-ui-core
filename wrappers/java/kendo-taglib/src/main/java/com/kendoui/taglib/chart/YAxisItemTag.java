@@ -73,6 +73,10 @@ public class YAxisItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("minorGridLines", value);
     }
 
+    public void setMinorTicks(com.kendoui.taglib.chart.YAxisItemMinorTicksTag value) {
+        setProperty("minorTicks", value);
+    }
+
     public void setNotes(com.kendoui.taglib.chart.YAxisItemNotesTag value) {
         setProperty("notes", value);
     }

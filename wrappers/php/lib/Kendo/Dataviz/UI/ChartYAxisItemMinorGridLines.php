@@ -41,6 +41,24 @@ class ChartYAxisItemMinorGridLines extends \kendo\SerializableObject {
         return $this->setProperty('width', $value);
     }
 
+    /**
+    * The step of the y axis minor grid lines.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartYAxisItemMinorGridLines
+    */
+    public function step($value) {
+        return $this->setProperty('step', $value);
+    }
+
+    /**
+    * The skip of the y axis minor grid lines.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartYAxisItemMinorGridLines
+    */
+    public function skip($value) {
+        return $this->setProperty('skip', $value);
+    }
+
 //<< Properties
 }
 

@@ -67,6 +67,22 @@ public class NavigatorCategoryAxisItemMinorTicksTag extends  BaseTag  /* interfa
         setProperty("size", value);
     }
 
+    public float getSkip() {
+        return (float)getProperty("skip");
+    }
+
+    public void setSkip(float value) {
+        setProperty("skip", value);
+    }
+
+    public float getStep() {
+        return (float)getProperty("step");
+    }
+
+    public void setStep(float value) {
+        setProperty("step", value);
+    }
+
     public boolean getVisible() {
         return (boolean)getProperty("visible");
     }

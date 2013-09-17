@@ -15,12 +15,48 @@ class SparklineValueAxisItemMinorTicks extends \kendo\SerializableObject {
     }
 
     /**
+    * The color of the value axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\SparklineValueAxisItemMinorTicks
+    */
+    public function color($value) {
+        return $this->setProperty('color', $value);
+    }
+
+    /**
+    * The width of the minor ticks in pixels.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\SparklineValueAxisItemMinorTicks
+    */
+    public function width($value) {
+        return $this->setProperty('width', $value);
+    }
+
+    /**
     * The visibility of the minor ticks.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\SparklineValueAxisItemMinorTicks
     */
     public function visible($value) {
         return $this->setProperty('visible', $value);
+    }
+
+    /**
+    * The step of the value axis minor ticks.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\SparklineValueAxisItemMinorTicks
+    */
+    public function step($value) {
+        return $this->setProperty('step', $value);
+    }
+
+    /**
+    * The skip of the value axis minor ticks.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\SparklineValueAxisItemMinorTicks
+    */
+    public function skip($value) {
+        return $this->setProperty('skip', $value);
     }
 
 //<< Properties

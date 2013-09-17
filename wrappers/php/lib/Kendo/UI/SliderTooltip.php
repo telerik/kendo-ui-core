@@ -28,7 +28,7 @@ tick labels.
 
     /**
     * Sets the template option of the SliderTooltip.
-    * Template of the tooltip.
+    * Template of the tooltip. The following variables are passed by the Slider and are ready to be used inside the template:
     * @param string $value The id of the element which represents the kendo template.
     * @return \Kendo\UI\SliderTooltip
     */
@@ -40,7 +40,7 @@ tick labels.
 
     /**
     * Sets the template option of the SliderTooltip.
-    * Template of the tooltip.
+    * Template of the tooltip. The following variables are passed by the Slider and are ready to be used inside the template:
     * @param string $value The template content.
     * @return \Kendo\UI\SliderTooltip
     */

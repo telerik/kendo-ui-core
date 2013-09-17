@@ -41,6 +41,24 @@ class ChartCategoryAxisItemMajorGridLines extends \Kendo\SerializableObject {
         return $this->setProperty('width', $value);
     }
 
+    /**
+    * The step of the category axis major grid lines.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemMajorGridLines
+    */
+    public function step($value) {
+        return $this->setProperty('step', $value);
+    }
+
+    /**
+    * The skip of the category axis major grid lines.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemMajorGridLines
+    */
+    public function skip($value) {
+        return $this->setProperty('skip', $value);
+    }
+
 //<< Properties
 }
 

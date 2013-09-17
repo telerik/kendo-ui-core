@@ -41,6 +41,24 @@ class StockChartNavigatorCategoryAxisItemMajorTicks extends \kendo\SerializableO
         return $this->setProperty('width', $value);
     }
 
+    /**
+    * The step of the category axis major ticks.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\StockChartNavigatorCategoryAxisItemMajorTicks
+    */
+    public function step($value) {
+        return $this->setProperty('step', $value);
+    }
+
+    /**
+    * The skip of the category axis major ticks.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\StockChartNavigatorCategoryAxisItemMajorTicks
+    */
+    public function skip($value) {
+        return $this->setProperty('skip', $value);
+    }
+
 //<< Properties
 }
 

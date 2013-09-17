@@ -51,6 +51,14 @@ public class CategoryAxisItemMajorTicksTag extends  BaseTag  /* interfaces */ /*
         return "sparkline-categoryAxisItem-majorTicks";
     }
 
+    public java.lang.String getColor() {
+        return (java.lang.String)getProperty("color");
+    }
+
+    public void setColor(java.lang.String value) {
+        setProperty("color", value);
+    }
+
     public float getSize() {
         return (float)getProperty("size");
     }
@@ -59,12 +67,36 @@ public class CategoryAxisItemMajorTicksTag extends  BaseTag  /* interfaces */ /*
         setProperty("size", value);
     }
 
+    public float getSkip() {
+        return (float)getProperty("skip");
+    }
+
+    public void setSkip(float value) {
+        setProperty("skip", value);
+    }
+
+    public float getStep() {
+        return (float)getProperty("step");
+    }
+
+    public void setStep(float value) {
+        setProperty("step", value);
+    }
+
     public boolean getVisible() {
         return (boolean)getProperty("visible");
     }
 
     public void setVisible(boolean value) {
         setProperty("visible", value);
+    }
+
+    public float getWidth() {
+        return (float)getProperty("width");
+    }
+
+    public void setWidth(float value) {
+        setProperty("width", value);
     }
 
 //<< Attributes

@@ -1,5 +1,5 @@
 
-package com.kendoui.taglib.stockchart;
+package com.kendoui.taglib.chart;
 
 
 import com.kendoui.taglib.BaseTag;
@@ -12,17 +12,17 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class NavigatorCategoryAxisItemMinorGridLinesTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class YAxisItemMinorTicksTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        NavigatorCategoryAxisItemTag parent = (NavigatorCategoryAxisItemTag)findParentWithClass(NavigatorCategoryAxisItemTag.class);
+        YAxisItemTag parent = (YAxisItemTag)findParentWithClass(YAxisItemTag.class);
 
 
-        parent.setMinorGridLines(this);
+        parent.setMinorTicks(this);
 
 //<< doEndTag
 
@@ -48,7 +48,7 @@ public class NavigatorCategoryAxisItemMinorGridLinesTag extends  BaseTag  /* int
 //>> Attributes
 
     public static String tagName() {
-        return "stockChart-navigator-categoryAxisItem-minorGridLines";
+        return "chart-yAxisItem-minorTicks";
     }
 
     public java.lang.String getColor() {
@@ -59,12 +59,12 @@ public class NavigatorCategoryAxisItemMinorGridLinesTag extends  BaseTag  /* int
         setProperty("color", value);
     }
 
-    public java.lang.String getDashType() {
-        return (java.lang.String)getProperty("dashType");
+    public float getSize() {
+        return (float)getProperty("size");
     }
 
-    public void setDashType(java.lang.String value) {
-        setProperty("dashType", value);
+    public void setSize(float value) {
+        setProperty("size", value);
     }
 
     public float getSkip() {

@@ -41,6 +41,24 @@ class StockChartNavigatorCategoryAxisItemMajorGridLines extends \kendo\Serializa
         return $this->setProperty('width', $value);
     }
 
+    /**
+    * The step of the category axis major grid lines.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\StockChartNavigatorCategoryAxisItemMajorGridLines
+    */
+    public function step($value) {
+        return $this->setProperty('step', $value);
+    }
+
+    /**
+    * The skip of the category axis major grid lines.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\StockChartNavigatorCategoryAxisItemMajorGridLines
+    */
+    public function skip($value) {
+        return $this->setProperty('skip', $value);
+    }
+
 //<< Properties
 }
 

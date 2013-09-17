@@ -42,6 +42,24 @@ class ChartYAxisItemMajorGridLines extends \Kendo\SerializableObject {
         return $this->setProperty('width', $value);
     }
 
+    /**
+    * The step of the y axis major grid lines.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartYAxisItemMajorGridLines
+    */
+    public function step($value) {
+        return $this->setProperty('step', $value);
+    }
+
+    /**
+    * The skip of the y axis major grid lines.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartYAxisItemMajorGridLines
+    */
+    public function skip($value) {
+        return $this->setProperty('skip', $value);
+    }
+
 //<< Properties
 }
 

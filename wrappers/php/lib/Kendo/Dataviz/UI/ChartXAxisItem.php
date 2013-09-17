@@ -80,6 +80,15 @@ body of the chart.
     }
 
     /**
+    * The configuration of the x axis minor ticks.
+    * @param \Kendo\Dataviz\UI\ChartXAxisItemMinorTicks|array $value
+    * @return \Kendo\Dataviz\UI\ChartXAxisItem
+    */
+    public function minorTicks($value) {
+        return $this->setProperty('minorTicks', $value);
+    }
+
+    /**
     * The configuration of the scatter chart x axis major ticks.
     * @param \Kendo\Dataviz\UI\ChartXAxisItemMajorTicks|array $value
     * @return \Kendo\Dataviz\UI\ChartXAxisItem

@@ -1300,6 +1300,18 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the category axis major grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis major grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>If set to true the chart will display the major grid lines. By default the major grid lines are visible.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1330,6 +1342,18 @@ body of the chart.</description>
         <attribute>
             <description>The length of the tick line in pixels.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the category axis major ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis major ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -1369,6 +1393,18 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the category axis minor grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis minor grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>If set to true the chart will display the minor grid lines. By default the minor grid lines are visible.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -1399,6 +1435,18 @@ body of the chart.</description>
         <attribute>
             <description>The length of the tick line in pixels.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the category axis minor ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis minor ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -4886,6 +4934,18 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the value axis major grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the value axis major grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The type of grid lines to draw for radar charts:The default type is "line" except for "radarColumn" charts.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4926,6 +4986,18 @@ body of the chart.</description>
             <type>float</type>
         </attribute>
         <attribute>
+            <description>The skip of the value axis major ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the value axis major ticks.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>If set to true the chart will display the value axis major ticks. By default the value axis major ticks are visible.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -4953,6 +5025,18 @@ body of the chart.</description>
             <name>dashType</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the value axis minor grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the value axis minor grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
         <attribute>
             <description>The type of grid lines to draw for radar charts:The default type is "line" except for "radarColumn" charts.</description>
@@ -4991,6 +5075,18 @@ body of the chart.</description>
         <attribute>
             <description>The length of the tick line in pixels.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the value axis minor ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the value axis minor ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -6160,6 +6256,18 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the x axis major grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the x axis major grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>If set to true the chart will display the x major grid liness. By default the x major grid liness are visible.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -6191,6 +6299,18 @@ body of the chart.</description>
         <attribute>
             <description>The length of the tick line in pixels.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the x axis major ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the x axis major ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -6230,6 +6350,18 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the x axis minor grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the x axis minor grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>If set to true the chart will display the minor grid lines. By default the minor grid lines are visible.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -6237,6 +6369,52 @@ body of the chart.</description>
         </attribute>
         <attribute>
             <description>The width of the category axis minor grid lines in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the x axis minor ticks.</description>
+        <name>chart-xAxisItem-minorTicks</name>
+        <tag-class>com.kendoui.taglib.chart.XAxisItemMinorTicksTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the x axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The length of the tick line in pixels.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the x axis minor ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the x axis minor ticks.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the x axis minor ticks. By default the x axis minor ticks are not visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the minor ticks in pixels.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -7389,6 +7567,18 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the y axis major grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the y axis major grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>If set to true the chart will display the x major grid liness. By default the x major grid liness are visible.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -7420,6 +7610,18 @@ body of the chart.</description>
         <attribute>
             <description>The length of the tick line in pixels.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the y axis major ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the y axis major ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -7459,6 +7661,18 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the y axis minor grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the y axis minor grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>If set to true the chart will display the minor grid lines. By default the minor grid lines are visible.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -7466,6 +7680,52 @@ body of the chart.</description>
         </attribute>
         <attribute>
             <description>The width of the category axis minor grid lines in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The configuration of the y axis minor ticks.</description>
+        <name>chart-yAxisItem-minorTicks</name>
+        <tag-class>com.kendoui.taglib.chart.YAxisItemMinorTicksTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The color of the y axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The length of the tick line in pixels.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the y axis minor ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the y axis minor ticks.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the y axis minor ticks. By default the y axis minor ticks are not visible.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the minor ticks in pixels.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -15498,7 +15758,7 @@ tick labels.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>Template of the tooltip.</description>
+            <description>Template of the tooltip. The following variables are passed by the Slider and are ready to be used inside the template:</description>
             <name>template</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -16099,6 +16359,18 @@ These are the lines that are an extension of the major ticks through the body of
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the category axis major grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis major grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The visibility of the lines.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -16121,9 +16393,27 @@ These are the lines that are an extension of the major ticks through the body of
         <body-content>empty</body-content>
 
         <attribute>
+            <description>The color of the category axis major ticks lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick
 on the chart.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the category axis major ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis major ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -16132,6 +16422,12 @@ on the chart.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the major ticks in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -16159,6 +16455,18 @@ grid lines is not set to true.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the category axis minor grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis minor grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The visibility of the lines.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -16182,9 +16490,27 @@ grid lines is not set to true.</description>
         <body-content>empty</body-content>
 
         <attribute>
+            <description>The color of the category axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick
 on the chart.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the category axis minor ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis minor ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -16193,6 +16519,12 @@ on the chart.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the minor ticks in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -18610,6 +18942,18 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the value axis major grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the value axis major grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The visibility of the lines.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -18632,8 +18976,26 @@ body of the chart.</description>
         <body-content>empty</body-content>
 
         <attribute>
+            <description>The color of the value axis major ticks lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the value axis major ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the value axis major ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -18642,6 +19004,12 @@ body of the chart.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the major ticks in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -18666,6 +19034,18 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the value axis minor grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the value axis minor grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The visibility of the lines.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -18688,8 +19068,26 @@ body of the chart.</description>
         <body-content>empty</body-content>
 
         <attribute>
+            <description>The color of the value axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the value axis minor ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the value axis minor ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -18698,6 +19096,12 @@ body of the chart.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the minor ticks in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -20099,6 +20503,18 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the category axis major grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis major grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The visibility of the lines.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -20121,9 +20537,27 @@ body of the chart.</description>
         <body-content>empty</body-content>
 
         <attribute>
+            <description>The color of the category axis major ticks lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick
 on the chart.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the category axis major ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis major ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -20132,6 +20566,12 @@ on the chart.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the major ticks in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -20159,6 +20599,18 @@ grid lines is not set to true.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the category axis minor grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis minor grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The visibility of the lines.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -20182,9 +20634,27 @@ grid lines is not set to true.</description>
         <body-content>empty</body-content>
 
         <attribute>
+            <description>The color of the category axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick
 on the chart.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the category axis minor ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis minor ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -20193,6 +20663,12 @@ on the chart.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the minor ticks in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -21679,6 +22155,18 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the category axis major grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis major grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>If set to true the chart will display the major grid lines. By default the major grid lines are visible.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -21709,6 +22197,18 @@ body of the chart.</description>
         <attribute>
             <description>The length of the tick line in pixels.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the category axis major ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis major ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -21748,6 +22248,18 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the category axis minor grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis minor grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>If set to true the chart will display the minor grid lines. By default the minor grid lines are visible.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -21778,6 +22290,18 @@ body of the chart.</description>
         <attribute>
             <description>The length of the tick line in pixels.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the category axis minor ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the category axis minor ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -25086,6 +25610,18 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the value axis major grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the value axis major grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The visibility of the lines.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -25108,8 +25644,26 @@ body of the chart.</description>
         <body-content>empty</body-content>
 
         <attribute>
+            <description>The color of the value axis major ticks lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the value axis major ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the value axis major ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -25118,6 +25672,12 @@ body of the chart.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the major ticks in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
@@ -25142,6 +25702,18 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The skip of the value axis minor grid lines.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the value axis minor grid lines.</description>
+            <name>step</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
             <description>The visibility of the lines.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
@@ -25164,8 +25736,26 @@ body of the chart.</description>
         <body-content>empty</body-content>
 
         <attribute>
+            <description>The color of the value axis minor ticks lines. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick on the chart.</description>
             <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The skip of the value axis minor ticks.</description>
+            <name>skip</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The step of the value axis minor ticks.</description>
+            <name>step</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
         </attribute>
@@ -25174,6 +25764,12 @@ body of the chart.</description>
             <name>visible</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The width of the minor ticks in pixels.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
 
     </tag>
