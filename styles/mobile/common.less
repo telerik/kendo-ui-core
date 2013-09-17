@@ -1208,6 +1208,13 @@
 
 /* Navbar */
 
+// pad the NavBar when black-translucent to fix its size and support iOS7
+.km-on-ios.km-black-translucent-status-bar.km-app .km-header .km-navbar
+{
+    padding-top: 1.4em;
+    background-clip: border-box;
+}
+
 .km-leftitem,
 .km-rightitem
 {
@@ -1236,22 +1243,30 @@
 .km-leftitem,
 .km-rightitem
 {
-  height: 100%;
+    height: 100%;
 }
+
+.km-on-ios.km-black-translucent-status-bar.km-app .km-leftitem,
+.km-on-ios.km-black-translucent-status-bar.km-app .km-rightitem
+{
+    height: auto;
+}
+
 .km-leftitem > *,
 .km-rightitem > *
 {
-  display: inline-block;
-  vertical-align: middle;
+    display: inline-block;
+    vertical-align: middle;
 }
+
 .km-leftitem:before,
 .km-rightitem:before
 {
-  content: "\a0";
-  display: inline-block;
-  height: 100%;
-  width: 0;
-  vertical-align: middle;
+    content: "\a0";
+    display: inline-block;
+    height: 100%;
+    width: 0;
+    vertical-align: middle;
 }
 
 /* Dialog */

@@ -29,7 +29,7 @@ kendo_module({
 
         viewportTemplate = kendo.template('<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no#=data.height#" name="viewport" />', {usedWithBlock: false}),
         systemMeta = kendo.template('<meta name="apple-mobile-web-app-capable" content="#= data.webAppCapable === false ? \'no\' : \'yes\' #" /> ' +
-                     '<meta name="apple-mobile-web-app-status-bar-style" content="black" /> ' +
+                     '<meta name="apple-mobile-web-app-status-bar-style" content="#=data.statusBarStyle#" /> ' +
                      '<meta name="msapplication-tap-highlight" content="no" /> ', {usedWithBlock: false}),
         clipTemplate = kendo.template('<style>.km-view { clip: rect(0 #= data.width #px #= data.height #px 0); }</style>', {usedWithBlock: false}),
         ENABLE_CLIP = OS.android || OS.blackberry || OS.meego,
@@ -48,7 +48,7 @@ kendo_module({
         INIT = "init",
         proxy = $.proxy;
 
-    function osCssClass(os) {
+    function osCssClass(os, options) {
         var classes = [];
 
         if (OS) {
@@ -72,6 +72,10 @@ kendo_module({
             classes.push("km-app");
         } else {
             classes.push("km-web");
+        }
+
+        if (options && options.statusBarStyle) {
+            classes.push("km-" + options.statusBarStyle + "-status-bar");
         }
 
         return classes.join(" ");
@@ -115,6 +119,7 @@ kendo_module({
             that.options = $.extend({
                 hideAddressBar: true,
                 useNativeScrolling: false,
+                statusBarStyle: "black",
                 transition: "",
                 updateDocumentTitle: true
             }, options);
@@ -207,7 +212,7 @@ kendo_module({
 
             that.os = os;
 
-            that.osCssClass = osCssClass(that.os);
+            that.osCssClass = osCssClass(that.os, that.options);
 
             if (!os.skin && os.name == "wp") {
                 that.element.parent().css("overflow", "hidden");
