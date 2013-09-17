@@ -28,6 +28,8 @@ MVC3_DLL = FileList['Kendo.Mvc.dll']
             .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release-MVC3/%f')
             .include(resources_for("Release-MVC3"))
 
+rule 'Kendo.Mvc.xml' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
+
 # Delete all Kendo*.dll files when `rake clean`
 CLEAN.include(FileList['wrappers/mvc/**/Kendo*.dll'])
 
