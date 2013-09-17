@@ -31,26 +31,26 @@ kendo_module({
         PI_DIV_4 = PI / 4,
         DEG_TO_RAD = PI / 180;
 
-    // Map ====================================================================
+    // Map widget =============================================================
     var Map = Widget.extend({
         options: {
             name: "Map"
         }
     });
 
+    // Implementation =========================================================
     var Location = function(lat, lng) {
         this.lat = lat;
         this.lng = lng;
     };
 
-    var WGS84Datum = {
+    var WGS84 = {
         a: 6378137,                 // Semi-major radius
         b: 6356752.314245179,       // Semi-minor radius
         f: 0.0033528106647474805,   // Flattening
         e: 0.08181919084262149      // Eccentricity
     };
 
-    // Used by EPSG:3395
     var Mercator = Class.extend({
         init: function(options) {
             this.options = deepExtend({}, this.options, options);
@@ -63,17 +63,17 @@ kendo_module({
 
         options: {
             centralMeridian: 0,
-            datum: WGS84Datum
+            datum: WGS84
         },
 
-        project: function(geo) {
+        forward: function(loc) {
             var proj = this,
                 options = proj.options,
                 datum = options.datum,
                 r = datum.a,
                 lng0 = options.centralMeridian,
-                lat = limit(geo.lat, -proj.MAX_LAT, proj.MAX_LAT),
-                lng = limit(geo.lng, -proj.MAX_LNG, proj.MAX_LNG),
+                lat = limit(loc.lat, -proj.MAX_LAT, proj.MAX_LAT),
+                lng = limit(loc.lng, -proj.MAX_LNG, proj.MAX_LNG),
                 x = rad(lng - lng0) * r,
                 y = proj._projectLat(lat);
 
@@ -132,7 +132,6 @@ kendo_module({
         }
     });
 
-    // Used by EPSG:3857
     var SphericalMercator = Mercator.extend({
         MAX_LAT: 85.0511287798,
 
@@ -152,6 +151,65 @@ kendo_module({
         }
     });
 
+    var Equirectangular = Class.extend({
+        forward: function(loc) {
+            return new Point(loc.lng, loc.lat);
+        },
+
+        inverse: function(point) {
+            return new Location(point.y, point.x);
+        }
+    });
+
+    // WGS 84 / Pseudo-Mercator
+    // Used by Google Maps, Bing, OSM, etc.
+    // Spherical projection of ellipsoidal coordinates.
+    var EPSG3857 = Class.extend({
+        init: function() {
+            this._proj = new SphericalMercator();
+        },
+
+        // Location <-> Point (map units, e.g. meters)
+        toPoint: function(loc) {
+            return this._proj.forward(loc);
+        },
+
+        toLocation: function(point) {
+            return this._proj.inverse(point);
+        }
+    });
+
+    // WGS 84 / World Mercator
+    var EPSG3395 = Class.extend({
+        init: function() {
+            this._proj = new Mercator();
+        },
+
+        toPoint: function(loc) {
+            return this._proj.forward(loc);
+        },
+
+        toLocation: function(point) {
+            return this._proj.inverse(point);
+        }
+    });
+
+    // WGS 84
+    var EPSG4326 = Class.extend({
+        init: function() {
+            this._proj = new Equirectangular();
+        },
+
+        toPoint: function(loc) {
+            return this._proj.forward(loc);
+        },
+
+        toLocation: function(point) {
+            return this._proj.inverse(point);
+        }
+    });
+
+    // Helper methods =========================================================
     function rad(degrees) {
         return degrees * DEG_TO_RAD;
     }
@@ -164,12 +222,19 @@ kendo_module({
     dataviz.ui.plugin(Map);
 
     deepExtend(dataviz, {
-        spatial: {
+        map: {
+            crs: {
+                EPSG3395: EPSG3395,
+                EPSG3857: EPSG3857,
+                EPSG4326: EPSG4326
+            },
+            datums: {
+                WGS84: WGS84
+            },
             projections: {
+                Equirectangular: Equirectangular,
                 Mercator: Mercator,
-                SphericalMercator: SphericalMercator,
-
-                WGS84Datum: WGS84Datum
+                SphericalMercator: SphericalMercator
             },
 
             Location: Location

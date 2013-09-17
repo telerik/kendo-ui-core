@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chart helpers</title>
+    <title>Map projections</title>
     <script src="../jquery-loader.js"></script>
     <script src="../qunit/qunit/qunit.js"></script>
     <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
@@ -18,19 +18,19 @@
         var dataviz = kendo.dataviz,
             Point = dataviz.Point2D,
 
-            spatial = dataviz.spatial,
-            projections = spatial.projections,
-            Location = spatial.Location;
+            map = dataviz.map,
+            projections = map.projections,
+            Location = map.Location;
 
-        function project(proj, geoPoint, point) {
-            var p = proj.project(geoPoint);
+        function forward(proj, geoPoint, point) {
+            var p = proj.forward(geoPoint);
             close(p.x, point.x, TOLERANCE, "X");
             close(p.y, point.y, TOLERANCE, "Y");
         }
 
         function inverse(proj, point) {
             var r = proj.inverse(point);
-            var p = proj.project(r);
+            var p = proj.forward(r);
             close(p.x, point.x, TOLERANCE, "X");
             close(p.y, point.y, TOLERANCE, "Y");
         }
@@ -72,23 +72,23 @@
                 }
             });
 
-            test("project", function() {
+            test("forward", function() {
                 $.each(mercatorIdentities, function() {
                     var geo = this[0];
                     var point = this[1];
 
-                    project(mercator,
+                    forward(mercator,
                         new Location(geo[0], geo[1]),
                         new Point(point[0], point[1]));
                 });
             });
 
-            test("project with central meridian", function() {
+            test("forward with central meridian", function() {
                 mercator = new projections.Mercator({
                     centralMeridian: 24
                 });
 
-                project(mercator,
+                forward(mercator,
                     new Location(42.7175, 24.916667),
                     new Point(102042.90366699788, 5240075.61980005074)
                 );
@@ -152,12 +152,12 @@
                 }
             });
 
-            test("project", function() {
+            test("forward", function() {
                 $.each(mercatorIdentities, function() {
                     var geo = this[0];
                     var point = this[1];
 
-                    project(mercator,
+                    forward(mercator,
                         new Location(geo[0], geo[1]),
                         new Point(point[0], point[1]));
                 });
@@ -170,6 +170,32 @@
                     inverse(mercator,
                         new Point(point[0], point[1]));
                 });
+            });
+
+        })();
+
+        (function() {
+            var proj;
+
+            // ------------------------------------------------------------
+            module("Projections / Equirectangular", {
+                setup: function() {
+                    proj = new projections.Equirectangular;
+                }
+            });
+
+            test("forward", function() {
+                forward(proj,
+                    new Location(90, 180),
+                    new Point(180, 90)
+                );
+            });
+
+            test("inverse", function() {
+                inverse(proj,
+                    new Point(180, 90),
+                    new Location(90, 180)
+                );
             });
 
         })();
