@@ -14,6 +14,7 @@ kendo_module({
         Popup = ui.Popup,
         Widget = ui.Widget,
         OPEN = "open",
+        CLOSE = "close",
         BUTTONS = "li>a",
         CONTEXT_DATA = "actionsheetContext",
         WRAP = '<div class="km-actionsheet-wrapper" />',
@@ -45,7 +46,8 @@ kendo_module({
         },
 
         events: [
-            OPEN
+            OPEN,
+            CLOSE
         ],
 
         options: {
@@ -95,6 +97,7 @@ kendo_module({
 
             e.preventDefault();
             this.close();
+            this.trigger(CLOSE);
         },
 
         _resize: function() {

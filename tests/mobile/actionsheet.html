@@ -134,6 +134,30 @@
                 root.find("#foo").trigger($.Event(kendo.support.mouseup));
             });
 
+            asyncTest("raises close event when widget is closed by the cancel button", 1, function() {
+                var cancel = element.find("a:contains('Cancel')");
+
+                actionSheet.bind("close", function() {
+                    start();
+                    ok(true, "Should raise the close event");
+                });
+
+                actionSheet.open();
+                cancel.trigger($.Event(kendo.support.mouseup));
+            });
+
+            asyncTest("raises close event when widget is closed on click", 1, function() {
+                window.foo = function() { };
+
+                actionSheet.bind("close", function() {
+                    start();
+                    ok(true, "Should raise the close event");
+                });
+
+                actionSheet.open();
+                root.find("#foo").trigger($.Event(kendo.support.mouseup));
+            });
+
             module("integration", {
                 setup: function() {
                     kendo.mobile.ui.Shim.fn.options.duration = 0;
@@ -150,6 +174,7 @@
                 ok(root.find("#foo").data("kendoMobileActionSheet"));
                 ok(root.find("#bar").data("kendoMobileActionSheet"));
             });
+
         </script>
     </body>
 </html>
