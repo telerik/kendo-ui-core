@@ -42,7 +42,7 @@ kendo_module({
                 'data-#=ns#uid="#=uid# "' +
                 '#if (resources[0]) { #' +
                     'style="background-color:#=resources[0].color#; border-color: #=resources[0].color#"' +
-                    'class="k-event #=resources[0].inverseColor ? "k-event-inverse" : ""#" ' +
+                    'class="k-event #=inverseColor ? "k-event-inverse" : ""#" ' +
                 '#} else {#' +
                     'class="k-event"' +
                 '#}#' +
@@ -77,7 +77,7 @@ kendo_module({
                 'data-#=ns#uid="#=uid#" ' +
                 '#if (resources[0]) { #' +
                     'style="background-color:#=resources[0].color #; border-color: #=resources[0].color#"' +
-                    'class="k-event #=resources[0].inverseColor ? "k-event-inverse" : ""#"' +
+                    'class="k-event #=inverseColor ? "k-event-inverse" : ""#"' +
                 '#} else {#' +
                     'class="k-event"' +
                 '#}#' +
@@ -1256,6 +1256,8 @@ kendo_module({
                 head = true;
             }
 
+            var resources = this.eventResources(event);
+
             return $(template(extend({}, {
                 ns: kendo.ns,
                 resizable: resizable,
@@ -1264,7 +1266,8 @@ kendo_module({
                 head: head,
                 tail: tail,
                 singleDay: this._dates.length == 1,
-                resources: this.eventResources(event)
+                resources: resources,
+                inverseColor: resources && resources[0] ? this._shouldInverseResourceColor(resources[0]) : false
             }, event, {
                 start: event.startTime || event.start,
                 end: event.endTime || event.end

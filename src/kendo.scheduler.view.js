@@ -1367,6 +1367,14 @@ kendo_module({
                 container.scrollTop = result;
         },
 
+        _shouldInverseResourceColor: function(resource) {
+            var resourceColorIsDark = new Color(resource.color).isDark();
+            var currentColor = this.element.css("color");
+            var currentColorIsDark = new Color(currentColor).isDark();
+
+            return (resourceColorIsDark == currentColorIsDark);
+        },
+
         eventResources: function(event) {
             var resources = [],
                 options = this.options;
@@ -1407,28 +1415,19 @@ kendo_module({
                     }
 
                     if (eventResource != null) {
-                       var resourceColor = kendo.getter(resource.dataColorField)(eventResource);
-                       var currentColor = this.element.css("color");
+                        var resourceColor = kendo.getter(resource.dataColorField)(eventResource);
 
-                       var resourceColorIsDark = new Color(resourceColor).isDark();
-                       var currentColorIsDark = new Color(currentColor).isDark();
-
-                       resources.push({
-                          field: resource.field,
-                          title: resource.title,
-                          name: resource.name,
-                          text: kendo.getter(resource.dataTextField)(eventResource),
-                          value: value,
-                          color: resourceColor,
-                          inverseColor:  resourceColorIsDark == currentColorIsDark
-                       });
+                        resources.push({
+                            text: kendo.getter(resource.dataTextField)(eventResource),
+                            value: value,
+                            color: resourceColor,
+                        });
                     }
                 }
-
             }
-
             return resources;
         },
+
         createLayout: function(layout) {
             var allDayIndex = -1;
 
@@ -1812,7 +1811,7 @@ kendo_module({
 
     Color.prototype = {
         resolveColor: function(value) {
-            value = value || BLACK;
+            value = value || "#000";
 
             if (value.charAt(0) == "#") {
                 value = value.substr(1, 6);

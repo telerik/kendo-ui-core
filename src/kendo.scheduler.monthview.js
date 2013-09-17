@@ -22,7 +22,7 @@ kendo_module({
         EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
                     'style="background-color:#=resources[0].color #; border-color: #=resources[0].color#"' +
-                    'class="k-event #=resources[0].inverseColor ? "k-event-inverse" : ""#"' +
+                    'class="k-event #=inverseColor ? "k-event-inverse" : ""#"' +
                 '#} else {#' +
                     'class="k-event"' +
                 '#}#' +
@@ -478,6 +478,7 @@ kendo_module({
             event.resizable = editable && editable.resize !== false;
             event.ns = kendo.ns;
             event.resources = this.eventResources(event);
+            event.inverseColor = event.resources && event.resources[0] ? this._shouldInverseResourceColor(event.resources[0]) : false;
 
             return $(this.eventTemplate(event));
         },
