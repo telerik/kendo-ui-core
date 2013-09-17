@@ -2443,14 +2443,7 @@ function pad(number, digits, end) {
             }
         },
 
-        resizableContainer: $.noop,
-
-        getSize: function() {
-            var container = this.resizableContainer();
-            if (container) {
-                return { width: container.width(), height: container.height() };
-            }
-        },
+        getSize: $.noop,
 
         setSize: $.noop,
 
@@ -2463,6 +2456,16 @@ function pad(number, digits, end) {
             that.unbind();
         }
     });
+
+    kendo.dimensions = function(element, dimensions) {
+        var domElement = element[0];
+
+        if (dimensions) {
+            element.css(dimensions);
+        }
+
+        return { width: domElement.offsetWidth, height: domElement.offsetHeight };
+    }
 
     kendo.notify = noop;
 
