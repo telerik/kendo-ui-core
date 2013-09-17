@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="db683a1a9da24938aa445abea7d80740" Name="Diagram1">
+        <EntityTypeShape EntityType="SampleModel.Category" Width="1.5" PointX="3" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.CustomerDemographic" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.Customer" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.Employee" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.Intraday" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.MeetingAtendee" Width="1.5" PointX="8" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.Meeting" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.Order_Detail" Width="1.5" PointX="7.5" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.Order" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.Product" Width="1.5" PointX="5.25" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.Region" Width="1.5" PointX="9.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.Shipper" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.Supplier" Width="1.5" PointX="3" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.Task" Width="1.5" PointX="7.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.Territory" Width="1.5" PointX="12" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.Weather" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="SampleModel.FK_Products_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="SampleModel.FK_Orders_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="SampleModel.FK_Employees_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="SampleModel.FK_Orders_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="SampleModel.FK_MeetingAtendee_Meeting" ManuallyRouted="false" />
+        <AssociationConnector Association="SampleModel.FK_Meetings_Meetings" ManuallyRouted="false" />
+        <AssociationConnector Association="SampleModel.FK_Order_Details_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="SampleModel.FK_Order_Details_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="SampleModel.FK_Orders_Shippers" ManuallyRouted="false" />
+        <AssociationConnector Association="SampleModel.FK_Products_Suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="SampleModel.FK_Territories_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="SampleModel.FK_Tasks_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="SampleModel.CustomerCustomerDemo" ManuallyRouted="false" />
+        <AssociationConnector Association="SampleModel.EmployeeTerritories" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

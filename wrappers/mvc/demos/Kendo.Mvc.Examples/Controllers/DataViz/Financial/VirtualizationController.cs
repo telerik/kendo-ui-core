@@ -28,7 +28,7 @@ namespace Kendo.Mvc.Examples.Controllers
             var baseUnit = DEFAULT_UNIT;
             IEnumerable<StockDataPoint> result;
 
-            using (var db = new StockDataDataContext())
+            using (var db = new SampleEntities())
             {
                 if (request.Filters.Count > 0)
                 {
@@ -41,7 +41,7 @@ namespace Kendo.Mvc.Examples.Controllers
                 }
 
                 var groupedData =
-                    from s in db.Intraday
+                    from s in db.Intradays
                     where s.Date >= dateFrom && s.Date <= dateTo
                     group s by new
                     {

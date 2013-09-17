@@ -11,6 +11,20 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class ListViewController : Controller
     {
+        private ProductService productService;
+
+        public ListViewController()
+        {
+            productService = new ProductService(new SampleEntities());
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            productService.Dispose();
+
+            base.Dispose(disposing);
+        }
+
         public ActionResult Index()
         {
             return View(GetProducts());
@@ -23,7 +37,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         private static IEnumerable<ProductViewModel> GetProducts()
         {
-            var northwind = new NorthwindDataContext();
+            var northwind = new SampleEntities();
 
             return northwind.Products.Select(product => new ProductViewModel
             {

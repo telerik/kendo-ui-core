@@ -61,6 +61,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &quot;{0}&quot; array cannot be empty..
+        /// </summary>
+        internal static string ArrayCannotBeEmpty {
+            get {
+                return ResourceManager.GetString("ArrayCannotBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must use InCell edit mode for batch updates..
         /// </summary>
         internal static string BatchUpdatesRequireInCellMode {

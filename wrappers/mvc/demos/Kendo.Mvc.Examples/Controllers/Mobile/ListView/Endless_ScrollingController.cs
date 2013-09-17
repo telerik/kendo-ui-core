@@ -19,7 +19,7 @@ namespace Kendo.Mvc.Examples.Controllers.Mobile
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Scroll_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(SessionProductRepository.All().OrderByDescending(product => product.ProductID).ToDataSourceResult(request));
+            return Json(productService.Read().OrderByDescending(product => product.ProductID).ToDataSourceResult(request));
         }
     }
 }

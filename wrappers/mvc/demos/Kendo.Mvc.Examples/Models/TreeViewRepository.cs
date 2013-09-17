@@ -8,42 +8,42 @@ namespace Kendo.Mvc.Examples.Models
 {
     public static class TreeViewRepository
     {
-        private static List<ClientTreeViewItemModel> projectData;
+        private static List<TreeViewItemViewModel> projectData;
 
         static TreeViewRepository()
         {            
-            projectData = new List<ClientTreeViewItemModel>();
-            projectData.Add(new ClientTreeViewItemModel
+            projectData = new List<TreeViewItemViewModel>();
+            projectData.Add(new TreeViewItemViewModel
                 {
                     id = "1",
                     text = "My Documents",
                     expanded = true,
                     hasChildren = true,
                     spriteCssClass = "rootfolder",
-                    items = new List<ClientTreeViewItemModel>
+                    items = new List<TreeViewItemViewModel>
                        {
-                           new ClientTreeViewItemModel
+                           new TreeViewItemViewModel
                            {
                                 id = "2",
                                 text = "Kendo UI Project",
                                 expanded  = true,
                                 spriteCssClass = "folder",
                                 hasChildren = true,
-                                items = new List<ClientTreeViewItemModel>
+                                items = new List<TreeViewItemViewModel>
                                 {
-                                    new ClientTreeViewItemModel
+                                    new TreeViewItemViewModel
                                     {
                                             id = "3",
                                             text ="about.html",
                                             spriteCssClass = "html"                                               
                                     },
-                                    new ClientTreeViewItemModel
+                                    new TreeViewItemViewModel
                                     {
                                             id = "4",
                                             text ="index.html",
                                             spriteCssClass = "html"                                               
                                     },
-                                    new ClientTreeViewItemModel
+                                    new TreeViewItemViewModel
                                     {
                                             id = "5",
                                             text ="logo.png",
@@ -51,22 +51,22 @@ namespace Kendo.Mvc.Examples.Models
                                     }
                                 }
                            },
-                           new ClientTreeViewItemModel
+                           new TreeViewItemViewModel
                            {
                                 id = "6",
                                 text = "New Web Site",
                                 expanded  = true,
                                 spriteCssClass = "folder",
                                 hasChildren = true,
-                                items = new List<ClientTreeViewItemModel>
+                                items = new List<TreeViewItemViewModel>
                                 {
-                                    new ClientTreeViewItemModel
+                                    new TreeViewItemViewModel
                                     {
                                             id = "7",
                                             text ="mockup.jpg",
                                             spriteCssClass = "image"                                               
                                     },
-                                    new ClientTreeViewItemModel
+                                    new TreeViewItemViewModel
                                     {
                                             id = "8",
                                             text ="Research.pdf",
@@ -74,28 +74,28 @@ namespace Kendo.Mvc.Examples.Models
                                     }
                                 }
                            },
-                           new ClientTreeViewItemModel
+                           new TreeViewItemViewModel
                            {
                                 id = "9",
                                 text = "Reports",
                                 expanded  = true,
                                 spriteCssClass = "folder",
                                 hasChildren = true,
-                                items = new List<ClientTreeViewItemModel>
+                                items = new List<TreeViewItemViewModel>
                                 {
-                                    new ClientTreeViewItemModel
+                                    new TreeViewItemViewModel
                                     {
                                             id = "10",
                                             text ="February.pdf",
                                             spriteCssClass = "pdf"                                               
                                     },
-                                    new ClientTreeViewItemModel
+                                    new TreeViewItemViewModel
                                     {
                                             id = "11",
                                             text ="March.pdf",
                                             spriteCssClass = "pdf"                                               
                                     },
-                                        new ClientTreeViewItemModel
+                                        new TreeViewItemViewModel
                                     {
                                             id = "12",
                                             text ="April.pdf",
@@ -108,21 +108,21 @@ namespace Kendo.Mvc.Examples.Models
 
         }
 
-        public static List<ClientTreeViewItemModel> GetProjectData()
+        public static List<TreeViewItemViewModel> GetProjectData()
         {
             return projectData;
         }
 
-        public static IEnumerable<ClientTreeViewItemModel> GetChildren(string id)
+        public static IEnumerable<TreeViewItemViewModel> GetChildren(string id)
         {            
-            Queue<ClientTreeViewItemModel> items = new Queue<ClientTreeViewItemModel>(projectData);
+            Queue<TreeViewItemViewModel> items = new Queue<TreeViewItemViewModel>(projectData);
            
             while (items.Count > 0)
             {
                 var current = items.Dequeue();
                 if (current.id == id)
                 {
-                    return current.items.Select(o => new ClientTreeViewItemModel
+                    return current.items.Select(o => new TreeViewItemViewModel
                         {
                             id = o.id,
                             text = o.text,
@@ -142,7 +142,7 @@ namespace Kendo.Mvc.Examples.Models
                 }
             }
 
-            return new List<ClientTreeViewItemModel>();
+            return new List<TreeViewItemViewModel>();
         }
     }           
 }

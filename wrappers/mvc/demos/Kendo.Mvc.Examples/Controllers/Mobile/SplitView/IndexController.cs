@@ -10,7 +10,21 @@ using Kendo.Mvc.Examples.Models;
 namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class SplitViewController : Controller
-    {       
+    {
+        private ProductService productService;
+
+        public SplitViewController()
+        {
+            productService = new ProductService(new SampleEntities());
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            productService.Dispose();
+
+            base.Dispose(disposing);
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -18,9 +32,9 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult Categories([DataSourceRequest] DataSourceRequest request)
         {
-            var dataContext = new NorthwindDataContext();
+            var dataContext = new SampleEntities();
             var categories = dataContext.Categories
-                        .Select(c => new ClientCategoryViewModel
+                        .Select(c => new CategoryViewModel
                         {
                             CategoryID = c.CategoryID,
                             CategoryName = c.CategoryName
@@ -33,16 +47,7 @@ namespace Kendo.Mvc.Examples.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Products([DataSourceRequest] DataSourceRequest request)
         {
-            var dataContext = new NorthwindDataContext();
-            var products = dataContext.Products
-                        .Select(p => new ClientProductViewModel
-                        {
-                            ProductID = p.ProductID,
-                            ProductName = p.ProductName,
-                            UnitPrice = p.UnitPrice ?? 0,
-                            QuantityPerUnit = p.QuantityPerUnit,
-                            CategoryID = p.CategoryID.Value
-                        })
+            var products = productService.Read()
                         .OrderBy(p => p.ProductName);
 
             return Json(products.ToDataSourceResult(request));
@@ -51,7 +56,7 @@ namespace Kendo.Mvc.Examples.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Order_Details([DataSourceRequest] DataSourceRequest request)
         {
-            var dataContext = new NorthwindDataContext();
+            var dataContext = new SampleEntities();
             var details = dataContext.Order_Details
                 .Select(d => new 
                         {

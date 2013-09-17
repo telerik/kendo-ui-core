@@ -8,7 +8,7 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult ModelBinding()
         {
-            NorthwindDataContext northwind = new NorthwindDataContext();
+            SampleEntities northwind = new SampleEntities();
             return View(northwind.Categories);
         }
     }

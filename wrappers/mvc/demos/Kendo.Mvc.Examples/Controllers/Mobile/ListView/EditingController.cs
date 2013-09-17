@@ -18,14 +18,14 @@ namespace Kendo.Mvc.Examples.Controllers.Mobile
 
         public ActionResult EditDetails(int productID)
         {
-            var target = SessionProductRepository.One(p => p.ProductID == productID);
+            var target = productService.Read().FirstOrDefault(p => p.ProductID == productID);
 
             return View(target);
         }
     
         public ActionResult Editing_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(SessionProductRepository.All().ToDataSourceResult(request));
+            return Json(productService.Read().ToDataSourceResult(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -33,7 +33,7 @@ namespace Kendo.Mvc.Examples.Controllers.Mobile
         {
             if (product != null)
             {
-                SessionProductRepository.Delete(product);
+                productService.Destroy(product);
             }
 
             return Json(ModelState.ToDataSourceResult());
@@ -44,16 +44,7 @@ namespace Kendo.Mvc.Examples.Controllers.Mobile
         {
             if (product != null && ModelState.IsValid)
             {
-                var target = SessionProductRepository.One(p => p.ProductID == product.ProductID);
-                if (target != null)
-                {
-                    target.ProductName = product.ProductName;
-                    target.UnitPrice = product.UnitPrice;
-                    target.UnitsInStock = product.UnitsInStock;
-                    target.LastSupply = product.LastSupply;
-                    target.Discontinued = product.Discontinued;
-                    SessionProductRepository.Update(target);
-                }
+                productService.Update(product);
             }
             
             return RedirectToAction("Editing");

@@ -16,7 +16,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult EditingPopup_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(SessionProductRepository.All().ToDataSourceResult(request));
+            return Json(productService.Read().ToDataSourceResult(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -24,7 +24,7 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             if (product != null && ModelState.IsValid)
             {
-                SessionProductRepository.Insert(product);
+                productService.Create(product);
             }
 
             return Json(new[] { product }.ToDataSourceResult(request, ModelState));
@@ -35,16 +35,7 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             if (product != null && ModelState.IsValid)
             {
-                var target = SessionProductRepository.One(p => p.ProductID == product.ProductID);
-                if (target != null)
-                {
-                    target.ProductName = product.ProductName;
-                    target.UnitPrice = product.UnitPrice;
-                    target.UnitsInStock = product.UnitsInStock;
-                    target.LastSupply = product.LastSupply;
-                    target.Discontinued = product.Discontinued;
-                    SessionProductRepository.Update(target);
-                }
+                productService.Update(product);
             }
 
             return Json(new[] {product}.ToDataSourceResult(request,ModelState));
@@ -55,7 +46,7 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             if (product != null)
             {
-                SessionProductRepository.Delete(product);
+                productService.Destroy(product);
             }
 
             return Json(new[] { product }.ToDataSourceResult(request, ModelState));

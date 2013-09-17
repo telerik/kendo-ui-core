@@ -13,14 +13,14 @@
 
         public JsonResult GetCascadeCategories()
         {
-            var northwind = new NorthwindDataContext();
+            var northwind = new SampleEntities();
 
             return Json(northwind.Categories.Select(c => new { CategoryId = c.CategoryID, CategoryName = c.CategoryName }), JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetCascadeProducts(string categories, string productFilter)
         {
-            var northwind = new NorthwindDataContext();
+            var northwind = new SampleEntities();
             var products = northwind.Products.AsQueryable();
 
             if (!string.IsNullOrEmpty(categories))
@@ -38,7 +38,7 @@
 
         public JsonResult GetCascadeOrders(string products, string orderFilter)
         {
-            var northwind = new NorthwindDataContext();
+            var northwind = new SampleEntities();
             var orders = northwind.Order_Details.AsQueryable();
 
             if (!string.IsNullOrEmpty(products))

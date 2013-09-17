@@ -7,7 +7,7 @@ namespace Kendo.Mvc.Examples.Controllers
     {       
         public ActionResult ServerHierarchy()
         {
-            return View(new NorthwindDataContext().Employees);
+            return View(new SampleEntities().Employees);
         }
     }
 }

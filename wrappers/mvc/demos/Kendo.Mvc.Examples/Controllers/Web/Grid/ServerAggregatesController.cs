@@ -7,7 +7,7 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult ServerAggregates()
         {
-            return View(new NorthwindDataContext().Products);
+            return View(new SampleEntities().Products);
         }       
     }
 }

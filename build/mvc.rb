@@ -296,25 +296,64 @@ def patch_examples_csproj t
     csproj.sub!(/\s*<ProjectReference((.|\r|\n)*?)\/ProjectReference>/, '')
 
     # add reference to Kendo dll
-    csproj.sub!(/(\s*)(<Reference.*?\/>)/i, '\1\2\1<Reference Include="Kendo.Mvc" />');
+    csproj.sub!(/(\s*)(<Reference.*?\/>)/i, '\1\2\1<Reference Include="Kendo.Mvc" />')
 
-    File.open(t.name, 'w') do |file|
-        file.write csproj
-    end
+    # fix the path to the nuget packages
+    csproj.gsub!('..\\..\\packages', '..\\packages')
+
+    File.write(t.name, csproj)
 end
 
+def patch_solution t
+    sln = File.read(t.name)
+
+    #Remove the Kendo.Mvc project
+    sln.sub!(/\s*Project.*?=\s*"Kendo\.Mvc"((.|\r|\n)*?)EndProject/, '')
+
+    #Remove the Kendo.Mvc.Tests project
+    sln.sub!(/\s*Project.*?=\s*"Kendo\.Mvc\.Tests"((.|\r|\n)*?)EndProject/, '')
+
+    #Fix the path to Kendo.Mvc.Examples
+    sln.sub!('demos\\', '')
+
+    #Remove the MVC3 build configurations
+    sln.gsub!(/.*?MVC3.*?$/, '')
+
+    #Remove empty lines
+    sln.gsub!(/^$\n/, '')
+
+    File.write(t.name, sln)
+end
+
+# Copy Kendo.Mvc.sln as Kendo.Mvc.Examples.sln
+file_copy :to => 'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.sln',
+          :from => 'wrappers/mvc/Kendo.Mvc.sln'
+
+file_copy :to => 'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.sln',
+          :from => 'wrappers/mvc/Kendo.Mvc.sln'
+
 # Copy Kendo.Mvc.Examples.csproj (needed for the next task)
-file_copy :to => 'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj',
+file_copy :to => 'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj',
           :from => MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
 
-file_copy :to => 'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj',
+file_copy :to => 'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj',
           :from => MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
+
+# Path the solution - leave only the examples project
+
+file  'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.sln' do |t|
+    patch_solution t
+end
+
+file  'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.sln' do |t|
+    patch_solution t
+end
 
 # Patch Visual Studio Project - fix paths etc.
-file  'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj' do |t|
+file  'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj' do |t|
     patch_examples_csproj t
 end
 
-file  'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.csproj' do |t|
+file  'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj' do |t|
     patch_examples_csproj t
 end

@@ -7,7 +7,7 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult Navigation()
         {
-            return View(SessionProductRepository.All());
+            return View(productService.Read());
         }
     }
 }

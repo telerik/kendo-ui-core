@@ -18,9 +18,9 @@ namespace Kendo.Mvc.Examples.Controllers
         {
             IEnumerable<Weather> result;
 
-            using (var db = new WeatherDataContext())
+            using (var db = new SampleEntities())
             {
-                var q = from w in db.Weather
+                var q = from w in db.Weathers
                         where w.Station == station && w.Date.Year == year && w.Date.Month == month
                         select w;
 

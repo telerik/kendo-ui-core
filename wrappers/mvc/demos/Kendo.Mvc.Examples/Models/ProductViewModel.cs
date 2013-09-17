@@ -61,5 +61,16 @@ namespace Kendo.Mvc.Examples.Models
             get; 
             set; 
         }
+
+        [UIHint("ClientCategory")]
+        public CategoryViewModel Category 
+        { 
+            get; 
+            set; 
+        }
+
+        public int? CategoryID { get; set; }
+
+        public string QuantityPerUnit { get; set; }
     }
 }

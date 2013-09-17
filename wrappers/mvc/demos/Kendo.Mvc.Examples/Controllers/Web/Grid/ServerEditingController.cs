@@ -9,7 +9,7 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult ServerEditing()
         {
-            return View(SessionProductRepository.All());
+            return View(productService.Read());
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -18,7 +18,7 @@ namespace Kendo.Mvc.Examples.Controllers
             if (ModelState.IsValid)
             {
                 //The model is valid - insert the product and redisplay the grid.
-                SessionProductRepository.Insert(product);
+                productService.Create(product);
 
                 //GridRouteValues() is an extension method which returns the 
                 //route values defining the grid state - current page, sort expression, filter etc.
@@ -28,7 +28,7 @@ namespace Kendo.Mvc.Examples.Controllers
             }
 
             //The model is invalid - render the current view to show any validation errors
-            return View("ServerEditing", SessionProductRepository.All());
+            return View("ServerEditing", productService.Read());
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -37,7 +37,7 @@ namespace Kendo.Mvc.Examples.Controllers
             if (ModelState.IsValid)
             {
                 //The model is valid - update the product and redisplay the grid.
-                SessionProductRepository.Update(product);
+                productService.Update(product);
 
                 //GridRouteValues() is an extension method which returns the 
                 //route values defining the grid state - current page, sort expression, filter etc.
@@ -47,30 +47,16 @@ namespace Kendo.Mvc.Examples.Controllers
             }
 
             //The model is invalid - render the current view to show any validation errors
-            return View("ServerEditing", SessionProductRepository.All());
+            return View("ServerEditing", productService.Read());
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Destroy(int productID)
+        public ActionResult Destroy(ProductViewModel product)
         {
-            //Find a product with ProductID equal to the id action parameter
-            ProductViewModel product = SessionProductRepository.One(p => p.ProductID == productID);
-
             RouteValueDictionary routeValues;
 
-            if (product == null)
-            {
-                //A product with the specified id does not exist - redisplay the grid
-
-                //GridRouteValues() is an extension method which returns the 
-                //route values defining the grid state - current page, sort expression, filter etc.
-                routeValues = this.GridRouteValues();
-
-                return RedirectToAction("ServerEditing", routeValues);
-            }
-
             //Delete the record
-            SessionProductRepository.Delete(product);
+            productService.Destroy(product);
 
             routeValues = this.GridRouteValues();
 

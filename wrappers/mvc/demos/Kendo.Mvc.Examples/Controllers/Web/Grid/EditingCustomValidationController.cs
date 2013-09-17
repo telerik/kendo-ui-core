@@ -15,7 +15,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult EditingCustomValidation_Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(SessionProductRepository.All()
+            return Json(productService.Read()
                 .Select(p => new CustomValidationProductViewModel {
                     ProductID = p.ProductID,
                     ProductName = p.ProductName,
@@ -28,14 +28,13 @@ namespace Kendo.Mvc.Examples.Controllers
         public ActionResult EditingCustomValidation_Update([DataSourceRequest] DataSourceRequest request, CustomValidationProductViewModel product)
         {
             if (product != null && ModelState.IsValid)
-            {                
-                var target = SessionProductRepository.One(p => p.ProductID == product.ProductID);
-                if (target != null)
+            {
+                productService.Update(new ProductViewModel
                 {
-                    target.ProductName = product.ProductName;
-                    target.UnitPrice = product.UnitPrice;
-                    SessionProductRepository.Update(target);
-                }             
+                    ProductID = product.ProductID,
+                    ProductName = product.ProductName,
+                    UnitPrice = product.UnitPrice
+                });
             }            
 
             return Json(new[]{product}.ToDataSourceResult(request,ModelState));

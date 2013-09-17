@@ -23,11 +23,10 @@ namespace Kendo.Mvc.Examples.Controllers
         public ActionResult CustomAjaxBinding_Read([DataSourceRequest] DataSourceRequest request)
         {
             var loadOptions = new DataLoadOptions();
+
             loadOptions.LoadWith<Order>(o => o.Customer);
-            var dataContext = new NorthwindDataContext
-            {
-                LoadOptions = loadOptions
-            };
+
+            var dataContext = new SampleEntities();
             
             IQueryable<Order> orders = dataContext.Orders;            
 

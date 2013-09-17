@@ -14,7 +14,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public JsonResult GetProducts(string text)
         {
-            var northwind = new NorthwindDataContext();
+            var northwind = new SampleEntities();
 
 
             var products = northwind.Products.Select(product => new ProductViewModel
@@ -37,7 +37,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public JsonResult GetCustomers()
         {
-            return Json(new NorthwindDataContext().Customers, JsonRequestBehavior.AllowGet);
+            return Json(new SampleEntities().Customers, JsonRequestBehavior.AllowGet);
         }
     }
 }

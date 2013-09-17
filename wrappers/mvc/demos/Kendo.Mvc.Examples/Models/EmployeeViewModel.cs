@@ -19,6 +19,12 @@
             set;
         }
 
+        public string EmployeeName
+        {
+            get;
+            set;
+        }
+
         [Required]
         public string LastName
         {

@@ -13,14 +13,14 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public JsonResult Users(int? id)
         {
-            var dataContext = new NorthwindDataContext();
+            var dataContext = new SampleEntities();
 
             var employees = from e in dataContext.Employees
                             where (id.HasValue ? e.ReportsTo == id : e.ReportsTo == null)
                             select new {
                                 id = e.EmployeeID,
                                 Name = e.FirstName + " " + e.LastName,
-                                hasChildren = e.Employees.Any(),
+                                hasChildren = e.Employees1.Any(),
                                 Username = e.FirstName.ToLower() + e.EmployeeID
                             };
 
