@@ -498,6 +498,8 @@
             test("all fields are wrapped", function() {
                 var scheduler = setup();
 
+                scheduler.dataSource.view()[0].isAllDay = false;
+
                 scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
@@ -523,7 +525,7 @@
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
                 var elements = container.children("div").not(".k-edit-buttons").not(".k-recur-view");
 
-                equal(elements.length, 13);
+                equal(elements.length, 10);
                 ok(elements.eq(0).hasClass("k-edit-label"));
                 equal(elements.eq(0).find("label").attr("for"), "title");
                 equal(elements.eq(1).text(), "my event");
@@ -1016,6 +1018,8 @@
                 var scheduler = setup(),
                     uid = scheduler.dataSource.data()[0].uid;
 
+                scheduler.dataSource.view()[0].isAllDay = false;
+
                 scheduler.editEvent(uid);
                 var anchor = scheduler._editContainer.find(".k-edit-field > a");
 
@@ -1023,9 +1027,24 @@
                 equal(anchor.text(), "Time zone");
             });
 
+            test("Do not render Timezone field if isAllDay", function() {
+                var scheduler = setup(),
+                    event = scheduler.dataSource.data()[0],
+                    uid = event.uid;
+
+                event.isAllDay = true;
+
+                scheduler.editEvent(uid);
+                var anchor = scheduler._editContainer.find(".k-edit-field > a");
+
+                ok(!anchor[0]);
+            });
+
             test("Render start and end timezone editors", function() {
                 var scheduler = setup(),
                     uid = scheduler.dataSource.data()[0].uid;
+
+                scheduler.dataSource.view()[0].isAllDay = false;
 
                 scheduler.editEvent(uid);
                 var editors = scheduler._editContainer.find("[data-role=timezoneeditor]");
@@ -1038,6 +1057,8 @@
             test("Click Timezone anchor creates timezone popup", function() {
                 var scheduler = setup(),
                     uid = scheduler.dataSource.data()[0].uid;
+
+                scheduler.dataSource.view()[0].isAllDay = false;
 
                 scheduler.editEvent(uid);
                 var editors = scheduler._editContainer.find(".k-edit-field > a").click();
@@ -1052,6 +1073,8 @@
                     model = scheduler.dataSource.data()[0],
                     uid = model.uid;
 
+                scheduler.dataSource.view()[0].isAllDay = false;
+
                 scheduler.editEvent(uid);
                 var editors = scheduler._editContainer.find(".k-edit-field > a").click();
 
@@ -1062,6 +1085,8 @@
                 var scheduler = setup(),
                     model = scheduler.dataSource.data()[0],
                     uid = model.uid;
+
+                scheduler.dataSource.view()[0].isAllDay = false;
 
                 model.set("endTimezone", "America/Toronto");
 
@@ -1076,6 +1101,8 @@
                     model = scheduler.dataSource.data()[0],
                     uid = model.uid;
 
+                scheduler.dataSource.view()[0].isAllDay = false;
+
                 model.set("startTimezone", "America/Toronto");
 
                 scheduler.editEvent(uid);
@@ -1089,6 +1116,8 @@
                     model = scheduler.dataSource.data()[0],
                     uid = model.uid;
 
+                scheduler.dataSource.view()[0].isAllDay = false;
+
                 scheduler.editEvent(uid);
                 scheduler._editContainer.find(".k-edit-field > a").click();
                 scheduler._timezonePopup.find(".k-scheduler-savetimezone").click();
@@ -1100,6 +1129,8 @@
                 var scheduler = setup(),
                     model = scheduler.dataSource.data()[0],
                     uid = model.uid;
+
+                scheduler.dataSource.view()[0].isAllDay = false;
 
                 scheduler.editEvent(uid);
                 scheduler._editContainer.find(".k-edit-field > a").click();
@@ -1119,6 +1150,8 @@
                     model = scheduler.dataSource.data()[0],
                     uid = model.uid;
 
+                scheduler.dataSource.view()[0].isAllDay = false;
+
                 scheduler.editEvent(uid);
                 scheduler._editContainer.find(".k-edit-field > a").click();
 
@@ -1134,6 +1167,8 @@
                 var scheduler = setup(),
                     model = scheduler.dataSource.data()[0],
                     uid = model.uid;
+
+                scheduler.dataSource.view()[0].isAllDay = false;
 
                 scheduler.editEvent(uid);
                 scheduler._editContainer.find(".k-edit-field > a").click();
@@ -1158,6 +1193,8 @@
                 var scheduler = setup(),
                     model = scheduler.dataSource.data()[0],
                     uid = model.uid;
+
+                scheduler.dataSource.view()[0].isAllDay = false;
 
                 scheduler.editEvent(uid);
                 scheduler._editContainer.find(".k-edit-field > a").click();
@@ -1185,6 +1222,8 @@
                     end = new Date(2013, 10, 10, 11),
                     zone = "America/New_York";
 
+                scheduler.dataSource.view()[0].isAllDay = false;
+
                 scheduler.addEvent({ start: start, end: end, startTimezone: zone });
 
                 var model = scheduler.dataSource.data()[1];
@@ -1198,11 +1237,10 @@
                     end = new Date(2013, 10, 10, 11),
                     zone = "America/New_York";
 
-
                 var scheduler = setup({
                     dataSource: {
                         data: [
-                            { start: new Date(), end: new Date(), isAllDay: true, title: "my event" },
+                            { start: new Date(), end: new Date(), isAllDay: false, title: "my event" },
                             {
                                 start: new Date(start),
                                 end: new Date(end),
@@ -1232,7 +1270,7 @@
                 var scheduler = setup({
                     dataSource: {
                         data: [
-                            { start: new Date(), end: new Date(), isAllDay: true, title: "my event" },
+                            { start: new Date(), end: new Date(), isAllDay: false, title: "my event" },
                             {
                                 start: new Date(start),
                                 end: new Date(end),
@@ -1263,7 +1301,7 @@
                 var scheduler = setup({
                     dataSource: {
                         data: [
-                            { start: new Date(), end: new Date(), isAllDay: true, title: "my event" },
+                            { start: new Date(), end: new Date(), isAllDay: false, title: "my event" },
                             {
                                 start: new Date(start),
                                 end: new Date(end),

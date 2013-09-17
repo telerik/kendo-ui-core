@@ -1725,7 +1725,7 @@ kendo_module({
                 }
                 html += (kendo.template(template, settings))(model);
             } else {
-                if (kendo.timezone.windows_zones) {
+                if (kendo.timezone.windows_zones && !model.isAllDay) {
                     fields.push({ field: "timezone", title: messages.editor.timezone, editor: TIMEZONEPOPUP, click: click, messages: messages.editor });
                     fields.push({ field: "startTimezone", title: messages.editor.startTimezone, editor: TIMEZONEEDITOR });
                     fields.push({ field: "endTimezone", title: messages.editor.endTimezone, editor: TIMEZONEEDITOR });
