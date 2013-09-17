@@ -1004,6 +1004,7 @@ declare module kendo.ui {
     }
 }
 
+% if suite =~ /mobile|all/
 declare module kendo.mobile {
     function init(selector: string): void;
     function init(element: JQuery): void;
@@ -1060,13 +1061,14 @@ declare module kendo.mobile.ui {
         y?: number;
     }
 }
-
+% end
+% if suite =~ /all|datviz/
 declare module kendo.dataviz.ui {
     function registerTheme(name: string, options: any);
 
     function plugin(widget: new (element: Element, options: Object) => kendo.ui.Widget);
 }
-
+% end
 % namespaces.keys.each do |key|
 declare module <%= key %> {
 %   namespaces[key].each do |component|

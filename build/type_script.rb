@@ -356,7 +356,7 @@ module CodeGen::TypeScript
 
 end
 
-def get_type_script(sources)
+def get_type_script(name, sources)
 
     sources = sources.find_all { |source| !CodeGen::TypeScript::EXCLUDE.include?(source) && source.end_with?('.md') }
 
@@ -370,6 +370,8 @@ def get_type_script(sources)
 
     namespaces = components.group_by { |component| component.namespace }
 
+    suite = name.match(/kendo\.([^.]*)\.d\.ts/).captures.first
+
     TYPE_SCRIPT.result(binding)
 end
 
@@ -381,9 +383,7 @@ class TypeScriptTask < Rake::FileTask
 
         $stderr.puts("Creating #{name}") if VERBOSE
 
-        File.open(name, "w") do |file|
-            file.write get_type_script(prerequisites)
-        end
+        File.write(name, get_type_script(name, prerequisites))
     end
 end
 
@@ -392,10 +392,21 @@ def type_script(*args, &block)
 end
 
 namespace :type_script do
-    TYPE_SCRIPT_SOURCES = FileList["docs/api/web/*.md"]
-        .include('docs/api/framework/*.md')
-        .include('docs/api/dataviz/*.md')
-        .include('docs/api/mobile/*.md')
+    SUITES = {
+        'all' => FileList["docs/api/web/*.md"]
+                .include('docs/api/framework/*.md')
+                .include('docs/api/dataviz/*.md')
+                .include('docs/api/mobile/*.md'),
+
+        'web' => FileList["docs/api/web/*.md"]
+                .include('docs/api/framework/*.md'),
+
+        'dataviz' => FileList["docs/api/dataviz/*.md"]
+                 .include('docs/api/framework/*.md'),
+
+        'mobile' => FileList["docs/api/mobile/*.md"]
+                .include('docs/api/framework/*.md')
+    }
 
     %w(master production).each do |branch|
         namespace branch do
@@ -403,13 +414,14 @@ namespace :type_script do
             task :test do
                 sh "cd docs && git fetch && git reset --hard origin/#{branch}"
 
-                path = "dist/kendo-#{branch}.d.ts"
+                SUITES.each do |suite, dependencies|
+                    path = "dist/kendo.#{suite}.d.ts"
 
-                File.open(path, "w") do |f|
-                    f.write get_type_script(TYPE_SCRIPT_SOURCES)
+                    File.write(path, get_type_script(path, dependencies))
+
+                    sh "node_modules/typescript/bin/tsc #{path}"
                 end
 
-                sh "node_modules/typescript/bin/tsc #{path}"
             end
         end
     end
