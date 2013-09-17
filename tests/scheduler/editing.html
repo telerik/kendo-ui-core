@@ -1047,6 +1047,17 @@
                 ok(!scheduler._timezonePopup.find(".k-edit-field:last").is(":visible"));
             });
 
+            test("Render popup editor with disabled checkbox", function() {
+                var scheduler = setup(),
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
+
+                scheduler.editEvent(uid);
+                var editors = scheduler._editContainer.find(".k-edit-field > a").click();
+
+                ok(scheduler._timezonePopup.find("input[type=checkbox]").prop("disabled"))
+            });
+
             test("Show second TimezoneEditor if model.endTimezone is defined", function() {
                 var scheduler = setup(),
                     model = scheduler.dataSource.data()[0],
@@ -1103,6 +1114,46 @@
                 ok(!model.startTimezone);
             });
 
+            test("Select start timezone enables checkbox", function() {
+                var scheduler = setup(),
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
+
+                scheduler.editEvent(uid);
+                scheduler._editContainer.find(".k-edit-field > a").click();
+
+                var editor = scheduler._timezonePopup.find("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor"),
+                    checkbox = scheduler._timezonePopup.find("input[type=checkbox]");
+
+                editor.value("America/Toronto");
+
+                ok(!checkbox.prop("disabled"));
+            });
+
+            test("Clear start timezone disables checkbox and clears end timezone", function() {
+                var scheduler = setup(),
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
+
+                scheduler.editEvent(uid);
+                scheduler._editContainer.find(".k-edit-field > a").click();
+
+                var end = scheduler._timezonePopup.find("[data-role=timezoneeditor]:last").data("kendoTimezoneEditor");
+                var start = scheduler._timezonePopup.find("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+                var checkbox = scheduler._timezonePopup.find("input[type=checkbox]");
+
+                start.value("America/Toronto");
+
+                checkbox.click();
+                end.value("America/Toronto");
+
+                start.value("");
+
+                ok(checkbox.prop("disabled"));
+                ok(!model.endTimezone);
+                ok(!end.wrapper.parent(".k-edit-field").is(":visible"));
+            });
+
             test("Click checkbox toggles endTimezone editor widget", function() {
                 var scheduler = setup(),
                     model = scheduler.dataSource.data()[0],
@@ -1111,8 +1162,11 @@
                 scheduler.editEvent(uid);
                 scheduler._editContainer.find(".k-edit-field > a").click();
 
+                var start = scheduler._timezonePopup.find("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
                 var editor = scheduler._timezonePopup.find("[data-role=timezoneeditor]:last").data("kendoTimezoneEditor");
                     checkbox = scheduler._timezonePopup.find("input[type=checkbox]");
+
+                start.value("America/Toronto");
 
                 checkbox.click();
                 editor.value("America/Toronto");
