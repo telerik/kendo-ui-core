@@ -3,7 +3,13 @@ kendo_module({
     name: "AutoComplete",
     category: "web",
     description: "The AutoComplete widget provides suggestions depending on the typed text.It also allows multiple value entries.",
-    depends: [ "list" ]
+    depends: [ "list" ],
+    features: [ {
+        id: "mobile-scroller",
+        name: "Mobile scroller",
+        description: "Support for kinetic scrolling in mobile device",
+        depends: [ "mobile.scroller" ]
+    } ]
 });
 
 (function ($, undefined) {

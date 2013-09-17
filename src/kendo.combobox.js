@@ -3,7 +3,13 @@ kendo_module({
     name: "ComboBox",
     category: "web",
     description: "The ComboBox widget allows the selection from pre-defined values or entering a new value.",
-    depends: [ "list" ]
+    depends: [ "list" ],
+    features: [ {
+        id: "mobile-scroller",
+        name: "Mobile scroller",
+        description: "Support for kinetic scrolling in mobile device",
+        depends: [ "mobile.scroller" ]
+    } ]
 });
 
 (function($, undefined) {

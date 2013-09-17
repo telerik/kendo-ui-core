@@ -3,7 +3,13 @@ kendo_module({
     name: "MultiSelect",
     category: "web",
     description: "The MultiSelect widget allows the selection from pre-defined values.",
-    depends: [ "list" ]
+    depends: [ "list" ],
+    features: [ {
+        id: "mobile-scroller",
+        name: "Mobile scroller",
+        description: "Support for kinetic scrolling in mobile device",
+        depends: [ "mobile.scroller" ]
+    } ]
 });
 
 (function($, undefined) {
