@@ -21,6 +21,10 @@ kendo_module({
             return path;
         }
 
+        if (path + "/" === pathPrefix) {
+            path = pathPrefix;
+        }
+
         var regEx = new RegExp("^" + pathPrefix, "i");
 
         if (!regEx.test(path)) {
