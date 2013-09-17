@@ -594,7 +594,7 @@
 
                 scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
-                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]");
+                var dropdownlist = scheduler._editor.container.find("select[data-role=dropdownlist]");
 
                 equal(dropdownlist.attr("data-bind"), "value:foo");
                 equal(dropdownlist.children().eq(0).text(), "None");
@@ -625,7 +625,7 @@
 
                 scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
-                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+                var multiselect = scheduler._editor.container.find("select[data-role=multiselect]").data("kendoMultiSelect");
 
                 equal($(multiselect.items()[0]).text(), "Foo 1");
                 equal($(multiselect.items()[1]).text(), "Foo 2");
@@ -653,7 +653,7 @@
 
                 scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
-                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]").data("kendoDropDownList");
+                var dropdownlist = scheduler._editor.container.find("select[data-role=dropdownlist]").data("kendoDropDownList");
 
                 var marks = dropdownlist.list.find(".k-scheduler-mark");
                 equal(marks.eq(1)[0].style.backgroundColor, "red");
@@ -683,7 +683,7 @@
 
                 scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
-                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+                var multiselect = scheduler._editor.container.find("select[data-role=multiselect]").data("kendoMultiSelect");
 
                 var marks = multiselect.list.find(".k-scheduler-mark");
                 equal(marks.eq(0)[0].style.backgroundColor, "red");
@@ -712,7 +712,7 @@
 
                 scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
-                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]").data("kendoDropDownList");
+                var dropdownlist = scheduler._editor.container.find("select[data-role=dropdownlist]").data("kendoDropDownList");
 
                 dropdownlist.value(2);
                 dropdownlist.trigger("change");
@@ -743,7 +743,7 @@
 
                 scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
-                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+                var multiselect = scheduler._editor.container.find("select[data-role=multiselect]").data("kendoMultiSelect");
 
                 multiselect.value(2);
                 multiselect.trigger("change");
@@ -774,7 +774,7 @@
 
                 scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
-                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]").data("kendoDropDownList");
+                var dropdownlist = scheduler._editor.container.find("select[data-role=dropdownlist]").data("kendoDropDownList");
 
                 equal(dropdownlist.value(), 2);
             });
@@ -803,7 +803,7 @@
 
                 scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
-                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+                var multiselect = scheduler._editor.container.find("select[data-role=multiselect]").data("kendoMultiSelect");
 
                 equal(multiselect.value(), 2);
             });
@@ -832,7 +832,7 @@
 
                 scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
-                var multiselect = scheduler._editContainer.find("select[data-role=multiselect]").data("kendoMultiSelect");
+                var multiselect = scheduler._editor.container.find("select[data-role=multiselect]").data("kendoMultiSelect");
 
                 multiselect.value([2, 1]);
                 multiselect.trigger("change");
@@ -864,7 +864,7 @@
 
                 scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
-                var dropdownlist = scheduler._editContainer.find("select[data-role=dropdownlist]").data("kendoDropDownList");
+                var dropdownlist = scheduler._editor.container.find("select[data-role=dropdownlist]").data("kendoDropDownList");
 
                 dropdownlist.value("");
                 dropdownlist.trigger("change");
