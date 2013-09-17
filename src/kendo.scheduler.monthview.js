@@ -22,7 +22,7 @@ kendo_module({
         EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
                     'style="background-color:#=resources[0].color #; border-color: #=resources[0].color#"' +
-                    'class="k-event #=inverseColor ? "k-event-inverse" : ""#"' +
+                    'class="k-event#=inverseColor ? " k-event-inverse" : ""#"' +
                 '#} else {#' +
                     'class="k-event"' +
                 '#}#' +

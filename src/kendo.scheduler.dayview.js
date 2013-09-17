@@ -39,10 +39,10 @@ kendo_module({
                 '</div>'),
         DATA_HEADER_TEMPLATE = kendo.template("<span class='k-link k-nav-day'>#=kendo.toString(date, 'ddd M/dd')#</span>"),
         ALLDAY_EVENT_WRAPPER_STRING = '<div role="gridcell" aria-selected="false" ' +
-                'data-#=ns#uid="#=uid# "' +
+                'data-#=ns#uid="#=uid#"' +
                 '#if (resources[0]) { #' +
                     'style="background-color:#=resources[0].color#; border-color: #=resources[0].color#"' +
-                    'class="k-event #=inverseColor ? "k-event-inverse" : ""#" ' +
+                    'class="k-event#=inverseColor ? " k-event-inverse" : ""#" ' +
                 '#} else {#' +
                     'class="k-event"' +
                 '#}#' +
@@ -77,7 +77,7 @@ kendo_module({
                 'data-#=ns#uid="#=uid#" ' +
                 '#if (resources[0]) { #' +
                     'style="background-color:#=resources[0].color #; border-color: #=resources[0].color#"' +
-                    'class="k-event #=inverseColor ? "k-event-inverse" : ""#"' +
+                    'class="k-event#=inverseColor ? " k-event-inverse" : ""#"' +
                 '#} else {#' +
                     'class="k-event"' +
                 '#}#' +

@@ -1420,7 +1420,7 @@ kendo_module({
                         resources.push({
                             text: kendo.getter(resource.dataTextField)(eventResource),
                             value: value,
-                            color: resourceColor,
+                            color: resourceColor
                         });
                     }
                 }
