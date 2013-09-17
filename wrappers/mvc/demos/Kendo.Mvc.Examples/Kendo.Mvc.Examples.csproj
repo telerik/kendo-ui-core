@@ -413,13 +413,8 @@
     <Compile Include="Controllers\Web\Scheduler\ApiController.cs" />
     <Compile Include="Controllers\Web\Scheduler\RestrictionController.cs" />
     <Compile Include="Controllers\Web\Scheduler\Move_ResizeController.cs" />
-    <Compile Include="Controllers\Web\Scheduler\RtlController.cs" />
-    <Compile Include="Controllers\Web\Scheduler\SelectionController.cs" />
     <Compile Include="Controllers\Web\Scheduler\GlobalizationController.cs" />
-    <Compile Include="Controllers\Web\Scheduler\Resources_Grouping_VerticalController.cs" />
-    <Compile Include="Controllers\Web\Scheduler\Resources_Grouping_HorizontalController.cs" />
     <Compile Include="Controllers\Web\Scheduler\EventsController.cs" />
-    <Compile Include="Controllers\Web\Scheduler\GlobalizationController.cs" />
     <Compile Include="Controllers\Web\Scheduler\IndexController.cs" />
     <Compile Include="Controllers\Web\Scheduler\ResourcesController.cs" />
     <Compile Include="Controllers\Web\Scheduler\Resources_Grouping_HorizontalController.cs" />
