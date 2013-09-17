@@ -296,7 +296,10 @@ def patch_examples_csproj t
     csproj.sub!(/\s*<ProjectReference((.|\r|\n)*?)\/ProjectReference>/, '')
 
     # add reference to Kendo dll
-    csproj.sub!(/(\s*)(<Reference.*?\/>)/i, '\1\2\1<Reference Include="Kendo.Mvc" />');
+    csproj.sub!(/(\s*)(<Reference.*?\/>)/i, '\1\2\1<Reference Include="Kendo.Mvc" />')
+
+    # fix the path to the nuget packages
+    csproj.gsub!('..\\..\\packages', '..\\packages')
 
     File.open(t.name, 'w') do |file|
         file.write csproj
