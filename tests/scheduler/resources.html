@@ -240,6 +240,59 @@
                 equalBackgroundColor(events.eq(1), "red");
             });
 
+            test("k-event-inverse class is correctly added to the event when the resource color match scheduler text color in day view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "black" },
+                                { text: "", value: 2, color: "white" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:33"), title: "", foo: 2 },
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:33"), title: "", foo: 1 }
+                    ],
+                    views: [ "day" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equal($(events.eq(1)).hasClass("k-event-inverse"), true);
+                equal($(events.eq(0)).hasClass("k-event-inverse"), false);
+            });
+
+            test("k-event-inverse class is correctly added to the event and aware of current widget text color in day view", function() {
+                div.css("color", "white");
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "black" },
+                                { text: "", value: 2, color: "white" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:33"), title: "", foo: 2 },
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:33"), title: "", foo: 1 }
+                    ],
+                    views: [ "day" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equal($(events.eq(1)).hasClass("k-event-inverse"), false);
+                equal($(events.eq(0)).hasClass("k-event-inverse"), true);
+
+                div.css("color", "");
+            });
+
             test("resource color is applied as the background of the event in week view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
@@ -288,6 +341,59 @@
                 equalBackgroundColor(events.eq(0), "");
             });
 
+            test("k-event-inverse class is correctly added to the event when the resource color match scheduler text color in week view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "black" },
+                                { text: "", value: 2, color: "white" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:33"), title: "", foo: 2 },
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:33"), title: "", foo: 1 }
+                    ],
+                    views: [ "week" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equal($(events.eq(1)).hasClass("k-event-inverse"), true);
+                equal($(events.eq(0)).hasClass("k-event-inverse"), false);
+            });
+
+            test("k-event-inverse class is correctly added to the event and aware of current widget text color in week view", function() {
+                div.css("color", "white");
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "black" },
+                                { text: "", value: 2, color: "white" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:33"), title: "", foo: 2 },
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:33"), title: "", foo: 1 }
+                    ],
+                    views: [ "week" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equal($(events.eq(1)).hasClass("k-event-inverse"), false);
+                equal($(events.eq(0)).hasClass("k-event-inverse"), true);
+
+                div.css("color", "");
+            });
+
             test("resource color is applied as the background of the event in month view", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),
@@ -334,6 +440,59 @@
                 var events = scheduler.element.find(".k-event");
 
                 equalBackgroundColor(events.eq(0), "");
+            });
+
+            test("k-event-inverse class is correctly added to the event when the resource color match scheduler text color in month view", function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "black" },
+                                { text: "", value: 2, color: "white" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:33"), title: "", foo: 2 },
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:33"), title: "", foo: 1 }
+                    ],
+                    views: [ "month" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equal($(events.eq(1)).hasClass("k-event-inverse"), true);
+                equal($(events.eq(0)).hasClass("k-event-inverse"), false);
+            });
+
+            test("k-event-inverse class is correctly added to the event and aware of current widget text color in month view", function() {
+                div.css("color", "white");
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    resources: [
+                        {
+                            field: "foo",
+                            dataSource: [
+                                { text: "", value: 1, color: "black" },
+                                { text: "", value: 2, color: "white" }
+                            ]
+                        }
+                    ],
+                    dataSource: [
+                        { start: new Date("2013/6/6 10:30"), end: new Date("2013/6/6 11:33"), title: "", foo: 2 },
+                        { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/6 11:33"), title: "", foo: 1 }
+                    ],
+                    views: [ "month" ]
+                });
+
+                var events = scheduler.element.find(".k-event");
+
+                equal($(events.eq(1)).hasClass("k-event-inverse"), false);
+                equal($(events.eq(0)).hasClass("k-event-inverse"), true);
+
+                div.css("color", "");
             });
 
             test("resource color is applied as the background of the event in agenda view", function() {
