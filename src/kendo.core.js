@@ -2431,6 +2431,7 @@ function pad(number, digits, end) {
 
             if (!currentSize || size.width !== currentSize.width || size.height !== currentSize.height) {
                 this.setSize(size);
+                this.trigger("resize", size);
                 this._size = size;
             }
         },
