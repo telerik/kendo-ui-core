@@ -2815,35 +2815,26 @@ span.k-numerictextbox
 .k-colorpalette
 {
     position: relative;
-    width: 120px;
     line-height: 0;
     border-width: 0;
+    display: inline-block;
 
     .k-palette {
-        display: inline-block;
-        vertical-align: top;
+        border-collapse: collapse;
+        position: relative;
+        width: 100%;
+        height: 100%;
     }
 
     .k-item {
-        display: block;
-        float: left;
-        width: 12px;
-        height: 12px;
+        width: 14px;
+        height: 14px;
         overflow: hidden;
-        font-size: 0;
-        padding: 1px;
-        z-index: 0;
-        position: relative;     // what do you know, the drop-shadow
-                                // is not properly visible without
-                                // this.  both chrome and FF exhibit
-                                // this bug, I suppose it's "essential
-                                // complexity"
         &.k-state-selected {
             z-index: 100;
             background: transparent;
-            .box-shadow(0 1px 4px #000);
-            border: 1px solid #fff;
-            padding: 0;
+            box-shadow: 0 1px 4px #000, inset 0 0 3px #fff;
+            position: relative;
         }
     }
 }

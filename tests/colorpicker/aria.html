@@ -24,9 +24,9 @@
         });
 
         test("Simple color selector renders aria-label for each color", function(){
-            cp.element.find("li.k-item").each(function(){
+            cp.element.find(".k-item").each(function(){
                 var label = $(this).attr("aria-label");
-                ok(label, "aria-label defined on LI elements"); // label defined
+                ok(label, "aria-label defined on cells"); // label defined
                 var bg = $(this);
                 var color = kendo.parseColor(label);
                 bg = kendo.parseColor(bg.css("background-color"));
@@ -35,13 +35,13 @@
         });
 
         test("Simple color selector maintains aria-selected attribute consistent with selection", function(){
-            var items = cp.element.find("li.k-item");
+            var items = cp.element.find(".k-item");
             for (var i = 0; i < 5; ++i) {
                 var index = Math.floor(items.length * Math.random());
-                var li = $(items[index]);
-                li.click();
-                var a = cp.element.find("li[aria-selected]");
-                ok(a.length == 1 && a[0] === li[0]);
+                var cell = $(items[index]);
+                cell.click();
+                var a = cp.element.find("[aria-selected]");
+                ok(a.length == 1 && a[0] === cell[0]);
             }
         });
     //]]></script>

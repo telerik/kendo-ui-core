@@ -169,10 +169,11 @@ kendo_module({
 
             element.addClass("k-widget k-colorpalette")
                 .append($(that._template({
-                    colors: colors,
-                    tileSize: options.tileSize,
-                    value: that._value,
-                    id: options.ariaId
+                    colors   : colors,
+                    columns  : options.columns,
+                    tileSize : options.tileSize,
+                    value    : that._value,
+                    id       : options.ariaId
                 })))
                 .on(CLICK_NS, ".k-item", function(ev){
                     that._select($(ev.currentTarget).css(BACKGROUNDCOLOR));
@@ -190,11 +191,7 @@ kendo_module({
                 } else {
                     throw new Error("Unsupported value for the 'tileSize' argument");
                 }
-                element.find(".k-item").css({ width: width - 2, height: height - 2 });
-            }
-
-            if (options.columns) {
-                element.css("width", options.columns * (width || 14));
+                element.find(".k-item").css({ width: width, height: height });
             }
         },
         focus: function(){
@@ -272,12 +269,12 @@ kendo_module({
             $(el).addClass(ITEMSELECTEDCLASS).attr("aria-selected", true);
         },
         _template: kendo.template(
-            '<ul class="k-palette k-reset">'+
-            '# for (var i = 0; i < colors.length; i++) { #' +
-                '<li unselectable="on" style="background-color:#= colors[i].toCss() #" #=(id && i === 0) ? "id=\\""+id+"\\" aria-selected=\\"true\\"" : "" # class="k-item #= colors[i].equals(value) ? "' + ITEMSELECTEDCLASS + '" : "" #" aria-label="#= colors[i].toCss() #">' +
-                '</li>' +
-            '# } #' +
-            '</ul>'
+            '<table class="k-palette k-reset"><tr>' +
+              '# for (var i = 0; i < colors.length; ++i) { #' +
+                '# if (i && i % columns == 0) { # </tr><tr> # } #' +
+                '<td unselectable="on" style="background-color:#= colors[i].toCss() #" #=(id && i === 0) ? "id=\\""+id+"\\" aria-selected=\\"true\\"" : "" # class="k-item #= colors[i].equals(value) ? "' + ITEMSELECTEDCLASS + '" : "" #" aria-label="#= colors[i].toCss() #"></td>' +
+              '# } #' +
+            '</tr></table>'
         )
     });
 

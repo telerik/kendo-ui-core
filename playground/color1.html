@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kendo UI JsBin</title>
+    <link rel="stylesheet/less" href="../styles/web/kendo.common.less" />
+    <link rel="stylesheet/less" href="../styles/web/kendo.default.less" />
+
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+    <script src="../src/jquery.js"></script>
+    <script src="../src/module.js"></script>
+    <script src="../src/kendo.colorpicker.js"></script>
+</head>
+<body>
+    <div id="example">
+
+    <div class="demo-section">
+        <div id="background">
+            <div class="column">
+                <h3 class="title">Select Wall Paint</h3>
+                <div id="palette" style="width: 100%"></div>
+            </div>
+
+            <div class="column">
+                <h3 class="title">Choose Custom Color</h3>
+                <input id="picker" />
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function preview(e) {
+            $("#background").css("background-color", e.value);
+        }
+
+        $("#palette").kendoColorPalette({
+            columns: 4,
+            tileSize: {
+                width: 20,
+                height: 30
+            },
+            palette: [
+                "#f0d0c9", "#e2a293", "#d4735e", "#65281a",
+                "#eddfda", "#dcc0b6", "#cba092", "#7b4b3a",
+                "#fcecd5", "#f9d9ab", "#f6c781", "#c87d0e",
+                "#e1dca5", "#d0c974", "#a29a36", "#514d1b",
+                "#c6d9f0", "#8db3e2", "#548dd4", "#17365d"
+            ],
+            change: preview
+        });
+
+        $("#picker").kendoColorPicker({
+            value: "#ffffff",
+            buttons: false,
+            select: preview
+        });
+    </script>
+
+    <style scoped>
+
+        .demo-section {
+            width:100%;
+            height: 100%;
+        }
+
+        #background {
+            background-image: url(../../content/web/colorpicker/interior-bg.png);
+            background-color: transparent;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .column {
+            margin-top: 384px;
+            float: left;
+            width: 50%;
+            text-align: center;
+        }
+
+        .column .title {
+            color: #a3a3a3;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: normal;
+            padding: 41px 0 20px;
+        }
+
+        #palette {
+            vertical-align: top;
+            display: inline-block;
+        }
+
+        .k-colorpicker {
+            vertical-align: top;
+            margin: 20px 0;
+        }
+    </style>
+</div>
+
+</body>
+</html>
