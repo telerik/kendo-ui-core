@@ -73,44 +73,65 @@
 </head>
 <body>
 
+<script type="text/x-kendo-tmpl" id="template">
+    #= item.name # #= item.lastName #
+</script>
+
 <script type="text/javascript">
+    function getVisual(data) {
+        var g = new kendo.diagram.Group({
+            autoSize: true
+        });
+        var r = new kendo.diagram.Rectangle({
+            width: 150,
+            height: 60,
+            background: "#bdcbde"
+        });
+        g.append(r);
+        var im = new kendo.diagram.Image({
+            source: data.image,
+            height: 40,
+            width: 40,
+            x: 10,
+            y: 10
+        });
+        g.append(im);
+        var fn = new kendo.diagram.TextBlock({
+            text: data.name,
+            fontSize: 16,
+            x: 50,
+            y: 20
+        });
+        var ln = new kendo.diagram.TextBlock({
+            text: data.lastName,
+            fontSize: 16,
+            x: 50,
+            y: 40
+        });
+        g.append(fn);
+        g.append(ln);
+        return g;
+    }
+
     $(function () {
-        function getVisual(data) {
-            var g = new kendo.diagram.Group({
-                autoSize: true
-            });
-            var r = new kendo.diagram.Rectangle({
-                width: 150,
-                height: 60,
-                background: "#bdcbde"
-            });
-            g.append(r);
-            var im = new kendo.diagram.Image({
-                source: data.image,
-                height: 40,
-                width: 40,
-                x: 10,
-                y: 10
-            });
-            g.append(im);
-            var fn = new kendo.diagram.TextBlock({
-                text: data.name,
-                fontSize: 16,
-                x: 50,
-                y: 20
-            });
-            var ln = new kendo.diagram.TextBlock({
-                text: data.lastName,
-                fontSize: 16,
-                x: 50,
-                y: 40
-            });
-            g.append(fn);
-            g.append(ln);
-            return g;
+        var diagram;
+
+        function createDiagram(template) {
+            var options = {
+                dataSource: dataSource,
+                autoBind: false
+            }
+            if (kendo.diagram.Utils.isFunction(window[template])) {
+                options.visualTemplate = window[template];
+            }
+            else {
+                options.template = template;
+            }
+            return $("#canvas").kendoDiagram(options).data("kendoDiagram");
         }
 
         $("#layoutButton").bind("click", layout);
+        $("#retemplateButton").bind("click", retemplate);
 
         function layout() {
             diagram.select(false);
@@ -119,6 +140,15 @@
                         TreeLayoutType: eval($("#Layouts").val()),
                         animate: true
                     });
+        }
+
+        function retemplate() {
+            if (diagram) {
+                diagram.destroy();
+            }
+            diagram = createDiagram($("#templates").val());
+            dataSource.fetch();
+            diagram.layout();
         }
 
         var layouts = [
@@ -141,6 +171,20 @@
             }
         });
 
+        var templates = [
+            {value: "#= item.name # #= item.lastName #", text: "Simple"},
+            {value: "getVisual", text: "Extended"}
+        ];
+
+        $("#templates").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: templates,
+            change: function () {
+                retemplate();
+            }
+        });
+
         $("#splitter").kendoSplitter({
             panes: [
                 { collapsible: false },
@@ -160,12 +204,7 @@
             }
         });
 
-        var diagram = $("#canvas").kendoDiagram({
-                    dataSource: dataSource,
-                    autoBind: false,
-                    visualTemplate: getVisual
-                }
-        ).data("kendoDiagram");
+        diagram = createDiagram($("#templates").val());
 
         $("#treeview").kendoTreeView({
             dataSource: dataSource,
@@ -185,9 +224,13 @@
             },
             dataBound: function () {
                 this.expand(".k-item");
-                layout();
-            }
+            },
+            autoBind: true
         });
+
+        setTimeout(function () {
+            layout();
+        }, 400);
     })
 </script>
 <div id="Stage">
@@ -195,6 +238,8 @@
         <span id="Title">Organization chart...</span>
         <input id="Layouts" value="1"/>
         <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
+        <input id="templates" value="1"/>
+        <input type="button" class="diagramCommandBtn" id="retemplateButton" title="Re-template" value="Re-template"/>
     </div>
     <div id="splitter">
         <div id="canvas"></div>

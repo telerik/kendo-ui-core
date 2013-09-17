@@ -1,5 +1,5 @@
 kendo_module({
-    id: "diagram",
+    id: "diagram.services",
     name: "Diagram Services",
     category: "diagram",
     depends: ["diagram.svg"]

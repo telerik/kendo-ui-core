@@ -90,10 +90,12 @@ kendo_module({
     });
 
     var DiagramElement = Observable.extend({
-        init: function (options) {
+        init: function (options, model) {
             var that = this;
             Observable.fn.init.call(that);
             that.options = deepExtend({}, that.options, options);
+            that.model = model;
+            that._template();
         },
         options: {
             background: "Green",
@@ -157,14 +159,21 @@ kendo_module({
         _hitTest: function (point) {
             var bounds = this.bounds();
             return bounds.contains(point);
+        },
+        _template: function () {
+            var that = this;
+            if (that.options.template && that.model) {
+                that.options.content = kendo.template(that.options.template, {paramName: "item"})(that.model);
+            }
         }
     });
 
     var Shape = DiagramElement.extend({
-        init: function (options) {
+        init: function (options, model) {
             var that = this, connector, i;
-            DiagramElement.fn.init.call(that, options);
+            DiagramElement.fn.init.call(that, options, model);
             that.isSelected = false;
+            that.model = model;
             that.connectors = [];
             that.type = that.options;
             that.shapeVisual = Shape.createShapeVisual(that.options);
@@ -349,8 +358,9 @@ kendo_module({
     });
 
     Shape.createShapeVisual = function (options) {
-        var shapeOptions = deepExtend({}, options, { x: 0, y: 0 }); // Shape visual should not have position in its parent group.
-        if (Utils.isString(shapeOptions.data)) {
+        var shapeOptions = deepExtend({}, options, { x: 0, y: 0 }),
+            visualTemplate = shapeOptions.data; // Shape visual should not have position in its parent group.
+        if (Utils.isString(visualTemplate)) {
             switch (shapeOptions.data.toLocaleLowerCase()) {
                 case "rectangle":
                     return new Rectangle(shapeOptions);
@@ -363,19 +373,17 @@ kendo_module({
                     return p;
             }
         }
-        else {// custom template
-            if (!Utils.isFunction(shapeOptions.data)) {
-                throw "The custom template should be a function returning a visual";
-            }
-            return shapeOptions.data(shapeOptions.context);
+        else if (Utils.isFunction(visualTemplate)) {// custom template
+            return visualTemplate(shapeOptions.context);
         }
+        return new Rectangle(shapeOptions);
     };
 
     var Connection = DiagramElement.extend({
-        init: function (from, to, options) {
+        init: function (from, to, options, model) {
             var that = this,
                 g = new Group();//the group contains the line and the label
-            DiagramElement.fn.init.call(that, options);
+            DiagramElement.fn.init.call(that, options, model);
             that.line = new Line(that.options);
             g.append(that.line);
             that.visual = g;
@@ -605,7 +613,10 @@ kendo_module({
         init: function (element, options) {
             var that = this;
             Widget.fn.init.call(that, element, options);
-            that.element = $(element); // the hosting element
+
+            element = that.element; // the hosting element
+
+            this.element.addClass("k-widget k-diagram").attr("role", "diagram");
             that.canvas = new Canvas(element); // the root SVG Canvas
             that._initialize();
             that.element.on("mousemove" + NS, proxy(that._mouseMove, that))
@@ -624,10 +635,24 @@ kendo_module({
             template: "",
             dataTextField: null,
             autoBind: true,
-            visualTemplate: function () {
-            }
+            visualTemplate: null
         },
         events: ["zoom", "pan"],
+        destroy: function () {
+            var that = this;
+            Widget.fn.destroy.call(that);
+
+            if (that.dataSource) {
+                that._unbindDataSource();
+            }
+
+            that.element.off(NS);
+            // TODO: Destroy all the shapes, connections and the tons of other stuff!
+            that.canvas.remove(that.mainLayer);
+            that.canvas.remove(that.adornerLayer);
+            that.canvas.element.removeChild(that.canvas.native);
+            that.canvas = undefined;
+        },
         zoom: function (zoom, staticPoint) {
             if (zoom) {
                 var currentZoom = this._zoom;
@@ -953,34 +978,18 @@ kendo_module({
              * @type {string}
              */
             this.id = kendo.diagram.randomId();
-
             this._accessors();
             this._dataSource();
             if (this.options.autoBind) {
                 this.dataSource.fetch();
             }
         },
-        _dataSource: function (silentRead) {
+        _dataSource: function () {
             var that = this,
                 options = that.options,
                 dataSource = options.dataSource;
 
-            function recursiveRead(data) {
-                for (var i = 0; i < data.length; i++) {
-                    data[i]._initChildren();
-
-                    data[i].children.fetch();
-
-                    recursiveRead(data[i].children.view());
-                }
-            }
-
             dataSource = Utils.isArray(dataSource) ? { data: dataSource } : dataSource;
-
-            if (that.dataSource) {
-                that.dataSource.unbind(CHANGE, proxy(that.refreshSource, that));
-                that.dataSource.unbind(ERROR, proxy(that._error, that));
-            }
 
             if (!dataSource.fields) {
                 dataSource.fields = [
@@ -990,16 +999,22 @@ kendo_module({
                     { field: "imageUrl" }
                 ];
             }
-
-            that.dataSource = dataSource = HierarchicalDataSource.create(dataSource);
-
-            if (silentRead) {
-                dataSource.fetch();
-                recursiveRead(dataSource.view());
+            if (that.dataSource && that._refreshHandler) {
+                that._unbindDataSource();
+            } else {
+                that._refreshHandler = proxy(that.refreshSource, that);
+                that._errorHandler = proxy(that._error, that);
             }
 
-            dataSource.bind(CHANGE, proxy(that.refreshSource, that));
-            dataSource.bind(ERROR, proxy(that._error, that));
+            that.dataSource = HierarchicalDataSource.create(dataSource)
+                .bind(CHANGE, that._refreshHandler)
+                .bind(ERROR, that._errorHandler);
+        },
+        _unbindDataSource: function () {
+            var that = this;
+
+            that.dataSource.unbind(CHANGE, that._refreshHandler)
+                .unbind(ERROR, that._errorHandler);
         },
         _error: function () {
             // TODO: Do something?
@@ -1061,16 +1076,11 @@ kendo_module({
         },
         refreshSource: function (e) {
             var that = this,
-                parentNode = null,
                 node = e.node,
                 action = e.action,
                 items = e.items,
                 options = that.options,
                 i;
-
-            if (node) {
-                parentNode = node.uid; //that.findByUid(node.uid);
-            }
 
             function addShape(node) {
                 var shape = that.dataMap.first(function (item) {
@@ -1082,32 +1092,30 @@ kendo_module({
 
                 var opt = {
                     data: options.visualTemplate,
+                    template: options.template,
                     context: node,
                     width: 150,
                     height: 60
                 };
-                shape = new kendo.diagram.Shape(opt);
+                shape = new kendo.diagram.Shape(opt, node);
                 that.addShape(shape);
                 that.dataMap.push({uid: node.uid, shape: shape});
                 return shape;
             }
 
             function append(parent, children) {
-                var filter = function (item) {
-                    return item.uid == parent;
-                };
                 for (var i = 0; i < children.length; i++) {
                     var node = children[i],
                         shape = addShape(node),
-                        parentShape = that.dataMap.first(filter);
+                        parentShape = addShape(parent);
                     if (parentShape) {
-                        that.connect(parentShape.shape, shape);
+                        that.connect(parentShape, shape);
                     }
                 }
             }
 
             if (action == "add") {
-                append(parentNode, items);
+                append(node, items);
             } else if (action == "remove") {
                 //Remove
             } else if (action == "itemchange") {
@@ -1115,7 +1123,7 @@ kendo_module({
                     if (!items.length) {
                         //Update
                     } else {
-                        append(parentNode, items);
+                        append(node, items);
                     }
                 } else {
                     for (i = 0; i < items.length; i++) {

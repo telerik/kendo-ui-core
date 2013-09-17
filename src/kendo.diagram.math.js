@@ -2,7 +2,7 @@ kendo_module({
     id: "diagram.math",
     name: "Math",
     category: "diagram",
-    depends: ["dataviz.core, diagram.utils"]
+    depends: ["dataviz.core", "diagram.utils"]
 });
 
 (function ($, undefined) {

@@ -702,7 +702,7 @@ kendo_module({
             this.visuals = [];
             this.defsNode = document.createElementNS(SVGNS, "defs");
             this.native.appendChild(this.defsNode);
-            this.element = element;
+            this.element = element.context;
             $(this.native).css({
                 width: this.options.width,
                 height: this.options.height
