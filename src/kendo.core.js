@@ -2392,6 +2392,10 @@ function pad(number, digits, end) {
             prefix: ""
         },
 
+        _hasBindingTarget: function() {
+            return !!this.element[0].kendoBindingTarget;
+        },
+
         _tabindex: function(target) {
             target = target || this.wrapper;
 

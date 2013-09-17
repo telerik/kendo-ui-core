@@ -259,7 +259,7 @@
                 dom.find("div strong").click();
 
                 equal(observable.calls("rootHandler"), 1);
-                equal($.trim(dom.find("div span").html()), "bar");
+                equal($.trim(dom.find("div span").html()), "foo");
                 equal($.trim(dom.find("div strong").html()), "bar");
             });
 

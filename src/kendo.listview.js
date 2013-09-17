@@ -168,8 +168,10 @@ kendo_module({
                 altTemplate = that.altTemplate,
                 active = activeElement();
 
-            if (e && e.action === "itemchange") {
-                if (!that.editable) {
+            e = e || {};
+
+            if (e.action === "itemchange") {
+                if (!that._hasBindingTarget() && !that.editable) {
                     data = e.items[0];
                     item = that.items().filter("[" + kendo.attr("uid") + "=" + data.uid + "]");
 
@@ -188,8 +190,6 @@ kendo_module({
 
                 return;
             }
-
-            e = e || {};
 
             if (that.trigger(DATABINDING, { action: e.action || "rebind", items: e.items, index: e.index })) {
                 return;
