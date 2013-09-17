@@ -582,7 +582,7 @@ kendo_module({
         destroy: {
             text: "Delete",
             imageClass: "k-delete",
-            className: "k-grid-delete",
+            className: "k-scheduler-delete",
             iconClass: "k-icon"
         }
     };
