@@ -14,6 +14,7 @@ kendo_module({
         deepExtend = kendo.deepExtend,
         extend = $.extend,
         isFn = kendo.isFunction,
+        template = kendo.template,
 
         dataviz = kendo.dataviz,
         ChartElement = dataviz.ChartElement,
@@ -25,6 +26,8 @@ kendo_module({
         Text = dataviz.Text,
         TextBox = dataviz.TextBox,
         append = dataviz.append,
+        autoFormat = dataviz.autoFormat,
+        evalOptions = dataviz.evalOptions,
         uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
@@ -71,6 +74,7 @@ kendo_module({
 
             chart.plotArea = plotArea;
             chart.segments = [];
+            chart.labels = [];
             chart.legendItems = [];
             chart.render();
         },
@@ -79,7 +83,12 @@ kendo_module({
             neckSize: 0.3,
             width: 300,
             dependOn:"none",
-            segmentSpacing:0
+            segmentSpacing:0,
+            labels: {
+                visible: true,
+                align: "center",
+                position: "center" // top, bottom
+            }
         },
 
         render: function() {
@@ -103,7 +112,7 @@ kendo_module({
                     series.color = fields.color || colors[i % colorsCount];
                 }
 
-                chart.createSegment(value, deepExtend({
+                fields = deepExtend({
                     index: i,
                     owner: chart,
                     series: series,
@@ -112,8 +121,22 @@ kendo_module({
                     percentage: value / total,
                     visibleInLegend: fields.visibleInLegend,
                     visible: fields.visible
-                }, fields));
+                }, fields);
+
+                chart.createSegment(value, fields);
+                chart.createLabel(value, fields);
             }
+        },
+
+        evalSegmentOptions: function(options, value, fields) {
+            var series = fields.series;
+
+            evalOptions(options, {
+                value: value,
+                series: series,
+                dataItem: fields.dataItem,
+                index: fields.index
+            }, { defaults: series._defaults, excluded: ["data"] });
         },
 
         createSegment: function(value, fields) {
@@ -125,14 +148,45 @@ kendo_module({
 
             if (fields.visible !== false) {
                 var segmentOptions = deepExtend({}, fields.series);
-
-                //chart.evalSegmentOptions(segmentOptions, value, fields);
+                chart.evalSegmentOptions(segmentOptions, value, fields);
 
                 segment = new FunnelSegment(value, segmentOptions);
                 extend(segment, fields);
 
                 chart.append(segment);
                 chart.segments.push(segment);
+            }
+        },
+
+        createLabel: function(value, fields) {
+            var chart = this,
+                series = fields.series,
+                dataItem = fields.dataItem,
+                labels = deepExtend({}, chart.options.labels, series.labels),
+                text = value,
+                textBox;
+
+            if (labels.visible && value) {
+                if (labels.template) {
+                    labelTemplate = template(labels.template);
+                    text = labelTemplate({
+                        dataItem: dataItem,
+                        value: value,
+                        series: series
+                    });
+                } else if (labels.format) {
+                    text = autoFormat(labels.format, text);
+                }
+
+                chart.evalSegmentOptions(labels, value, fields);
+
+                textBox = new TextBox(text, deepExtend(
+                    { vAlign: labels.position },
+                    labels
+                ));
+
+                chart.append(textBox);
+                chart.labels.push(textBox);
             }
         },
 
@@ -159,7 +213,32 @@ kendo_module({
             return sum;
         },
 
-        reflow: function(box) {
+        labelPadding: function() {
+            var labels = this.labels,
+                label,
+                align,
+                width,
+                padding = { left: 0, right: 0 },
+                i;
+
+            for (i = 0; i < labels.length; i++) {
+                label = labels[i];
+                align = label.options.align;
+                if (align !== "center") {
+                    width = labels[i].box.width();
+
+                    if(align === "left") {
+                        padding.left = Math.max(padding.left, width);
+                    } else {
+                        padding.right = Math.max(padding.right, width);
+                    }
+                }
+            }
+
+            return padding;
+        },
+
+        reflow: function(chartBox) {
             var chart = this,
                 options = chart.options,
                 segments = chart.segments,
@@ -167,6 +246,7 @@ kendo_module({
                 i,
                 segmentSpacing = options.segmentSpacing,
                 dependOn = options.dependOn,
+                box = chartBox.clone().unpad(chart.labelPadding()),
                 width = box.width(),
                 totalHeight = box.height() - segmentSpacing * (count-1),
                 neckSize = options.neckSize*width;
@@ -232,6 +312,14 @@ kendo_module({
                     offset += segmentHeight + segmentSpacing;
                 }
             }
+
+            for (i = 0; i < count; i++) {
+                points = segments[i].points;
+                if (chart.labels[i]) {
+                    var labelBox = new Box2D(chartBox.x1, points[0].y, chartBox.x2, points[2].y);
+                    chart.labels[i].reflow(labelBox);
+                }
+           }
         }
     });
 
@@ -251,13 +339,6 @@ kendo_module({
             border: {
                 width: 1
             }
-        },
-
-        reflow: function(targetBox) {
-            var segment = this,
-                options = segment.options;
-
-            segment.box = targetBox;
         },
 
         getViewElements: function(view) {

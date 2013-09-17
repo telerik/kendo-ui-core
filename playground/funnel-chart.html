@@ -14,7 +14,7 @@
         <script src="../src/kendo.dataviz.svg.js"></script>
         <script src="../src/kendo.dataviz.canvas.js"></script>
         <style>
-            div {
+            .k-chart {
                 width: 200px;
                 height: 300px;
                 float: left;
@@ -60,7 +60,12 @@
                     type: "funnel",
                     dependOn:"height",
                     neckSize:0.6,
-                    data: seriesData
+                    data: seriesData,
+                    labels: {
+                        align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
+                        margin: 5,
+                        template: "KUR"
+                    }
                 }]
             });
             $("#funnel-height-spacing").kendoChart({
@@ -69,7 +74,10 @@
                     dependOn:"height",
                     neckSize:0.6,
                     data: seriesData,
-                    segmentSpacing:10
+                    segmentSpacing:10,
+                    labels: {
+                        align: "left"
+                    }
                 }]
             });
 
