@@ -2618,14 +2618,30 @@ function pad(number, digits, end) {
 
     kendo.destroy = function(element) {
         $(element).find("[data-" + kendo.ns + "role]").andSelf().each(function(){
-            var element = $(this),
-                widget = kendo.widgetInstance(element, kendo.ui) ||
-                         kendo.widgetInstance(element, kendo.mobile.ui) ||
-                         kendo.widgetInstance(element, kendo.dataviz.ui);
+            var widget = kendo.widgetInstance($(this));
 
             if (widget) {
                 widget.destroy();
             }
+        });
+    };
+
+    kendo.resize = function(element) {
+        $(element).each(function() {
+            var child = $(this), widget;
+
+            if (!child.is(":visible")) {
+                return;
+            }
+
+            if (child.is("[data-" + kendo.ns + "role]")) {
+                widget = kendo.widgetInstance(child);
+                if (widget) {
+                    widget.resize();
+                }
+            }
+
+            kendo.resize(child.children());
         });
     };
 
@@ -2779,6 +2795,10 @@ function pad(number, digits, end) {
     };
 
     kendo.widgetInstance = function(element, suite) {
+        if (!suite) {
+            suite = $.extend({}, kendo.mobile.ui, kendo.dataviz.ui, kendo.ui);
+        }
+
         var widget = suite.roles[element.data(kendo.ns + "role")];
 
         if (widget) {

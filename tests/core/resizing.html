@@ -35,10 +35,16 @@
                     Widget.fn.init.call(this, element, options);
                 },
 
+                options: {
+                    name: "ResizableWidget"
+                },
+
                 getSize: function() {
                     return kendo.dimensions(this.element);
                 }
             });
+
+            kendo.ui.plugin(ResizableWidget);
 
             var widget, div;
 
@@ -117,6 +123,24 @@
                 widget.resize();
                 div.css({ width: "90%", height: "90%" });
                 widget.resize();
+            });
+
+            test("kendo.resize resizes the given widget", 1, function() {
+                widget.bind("resize", function() {
+                    ok(true);
+                });
+
+                kendo.resize($("#qunit-fixture"));
+            });
+
+            test("kendo.resize skips hidden widgets", 0, function() {
+                widget.bind("resize", function() {
+                    ok(false);
+                });
+
+                div.wrap("<div style='display: none' />");
+
+                kendo.resize($("#qunit-fixture"));
             });
        </script>
     </body>
