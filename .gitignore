@@ -9,6 +9,7 @@
 obj/
 bin/
 !**/References/*.dll
+!wrappers/mvc/packages/**/*.dll
 .DS_Store
 .JustCode
 .bundle/
