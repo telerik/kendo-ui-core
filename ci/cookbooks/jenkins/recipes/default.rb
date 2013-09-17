@@ -23,14 +23,7 @@ end
 bash "install_jenkins_plugins" do
     code %Q{
         sleep 10
-        java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' install-plugin git github chucknorris campfire android-emulator postbuildscript;
+        java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' install-plugin git github chucknorris android-emulator postbuildscript;
         java -jar /tmp/jenkins-cli.jar -s '#{JENKINS_URL}' restart;
     }
-end
-
-cookbook_file "/var/lib/jenkins/hudson.plugins.campfire.CampfireNotifier.xml" do
-    source "hudson.plugins.campfire.CampfireNotifier.xml"
-    owner "jenkins"
-    group "nogroup"
-    mode "0600"
 end

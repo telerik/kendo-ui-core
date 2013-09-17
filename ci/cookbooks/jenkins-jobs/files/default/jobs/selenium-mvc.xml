@@ -64,21 +64,6 @@
       <keepLongStdio>false</keepLongStdio>
       <testDataPublishers/>
     </hudson.tasks.junit.JUnitResultArchiver>
-    <hudson.plugins.campfire.CampfireNotifier plugin="campfire@2.6">
-      <campfire>
-        <subdomain>kendoui</subdomain>
-        <token>9a0d90b779802e8cb4112897897ed94e36a3f72c</token>
-        <ssl>true</ssl>
-      </campfire>
-      <room>
-        <campfire reference="../../campfire"/>
-        <name>Dev Daily</name>
-        <id>488924</id>
-      </room>
-      <hudsonUrl>http://mvc-kendobuild/build/</hudsonUrl>
-      <smartNotify>false</smartNotify>
-      <sound>false</sound>
-    </hudson.plugins.campfire.CampfireNotifier>
   </publishers>
   <buildWrappers/>
 </project>
