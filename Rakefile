@@ -260,7 +260,8 @@ bundle :name => 'aspnetmvc.trial',
        .merge(MVC_CONTENT),
        :prerequisites => [
            'mvc:assets',
-           'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj'
+           'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj',
+           'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.sln'
        ]
 
 bundle :name => 'aspnetmvc.hotfix.trial',
@@ -327,6 +328,7 @@ bundle :name => 'aspnetmvc.commercial',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.snk',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj',
            'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj',
+           'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.sln',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/CommonAssemblyInfo.cs'
        ]
 
