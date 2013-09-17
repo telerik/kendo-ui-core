@@ -11,6 +11,16 @@ function getButton(contents) {
     return button;
 }
 
+function getSpanButton(contents) {
+    if (typeof contents == "undefined") {
+        contents = "text";
+    }
+                
+    button = $("<span>" + contents + "</span>").appendTo(document.body);
+
+    return button;
+}
+
 function getButtonContainer(contents) {
     if (typeof contents == "undefined") {
         contents = "text";

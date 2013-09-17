@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Button Keyboard Navigation</title>
+        <script src="../jquery-loader.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.button.js"></script>
+        <script src="helper.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Button Keyboard Navigation</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+
+            var keys = window.kendo.keys;
+
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keydown", keyCode: key, preventDefault: $.noop });
+            };
+
+            module("navigation", {
+                teardown: function() {
+                    if (button) {
+                        if (button.data("kendoButton")) {
+                            button.data("kendoButton").destroy();
+                        }
+                        button.remove();
+                        button = null;
+                    }
+                }
+            });
+
+            test("focusing adds a focused class", function() {
+                var buttonObject = getButton().kendoButton();
+
+                button.focus();
+
+                ok(button.hasClass("k-state-focused"));
+            });
+
+            test("blurring removes a focused class", function() {
+                var buttonObject = getButton().addClass("k-state-focused").kendoButton();
+
+                button.blur();
+
+                ok(!button.hasClass("k-state-focused"));
+            });
+
+            test("Enter key triggers click event for non-button elements", function() {
+                var fired = false;
+
+                function clickHandler(e) {
+                    fired = true;
+                }
+
+                getSpanButton().kendoButton({
+                    click: clickHandler
+                });
+
+                button.press(keys.ENTER);
+
+                ok(fired);
+            });
+
+            test("Spacebar triggers click event for non-button elements", function() {
+                var fired = false;
+
+                function clickHandler(e) {
+                    fired = true;
+                }
+
+                getSpanButton().kendoButton({
+                    click: clickHandler
+                });
+
+                button.press(keys.SPACEBAR);
+
+                ok(fired);
+            });
+
+      </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

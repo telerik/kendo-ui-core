@@ -16,10 +16,10 @@
         KBUTTONICON = "k-button-icon",
         KBUTTONICONTEXT = "k-button-icontext",
         NS = ".kendoButton",
-        //DEFAULTSTATE = "k-state-default",
         DISABLED = "disabled",
         DISABLEDSTATE = "k-state-disabled",
-        FOCUSEDSTATE = "k-state-focused";
+        FOCUSEDSTATE = "k-state-focused",
+        SELECTEDSTATE = "k-state-selected";
 
     var Button = Widget.extend({
         init: function(element, options) {
@@ -30,7 +30,7 @@
             element = that.wrapper = that.element;
             options = that.options;
 
-            element.addClass(KBUTTON);
+            element.addClass(KBUTTON).attr("role", "button");
 
             options.enable = options.enable && !element.attr(DISABLED);
             that.enable(options.enable);
@@ -81,19 +81,22 @@
         },
 
         _keydown: function(e) {
-            if (!this._isNativeButton()) {
+            var that = this;
+            if (!that._isNativeButton()) {
                 if (e.keyCode == keys.ENTER || e.keyCode == keys.SPACEBAR) {
                     if (e.keyCode == keys.SPACEBAR) {
                         e.preventDefault();
-                        this.element.addClass("k-state-selected");
+                        if (that.options.enable) {
+                            that.element.addClass(SELECTEDSTATE);
+                        }
                     }
-                    this._click(e);
+                    that._click(e);
                 }
             }
         },
 
         _keyup: function() {
-            this.element.removeClass("k-state-selected");
+            this.element.removeClass(SELECTEDSTATE);
         },
 
         _graphics: function() {
@@ -143,7 +146,7 @@
             }
             enable = !!enable;
             that.options.enable = enable;
-            element.toggleClass(DISABLEDSTATE, !enable);
+            element.toggleClass(DISABLEDSTATE, !enable).attr("aria-disabled", !enable);
             if (enable) {
                 element.removeAttr(DISABLED);
             } else {
