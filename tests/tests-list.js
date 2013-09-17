@@ -373,6 +373,7 @@ var tests = [
     "scheduler/editing.html",
     "scheduler/initialization.html",
     "scheduler/lint.html",
+    "scheduler/messages.html",
     "scheduler/monthview-selection.html",
     "scheduler/monthview.html",
     "scheduler/moving.html",
