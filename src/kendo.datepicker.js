@@ -347,7 +347,8 @@ kendo_module({
                 that.readonly(element.is("[readonly]"));
             }
 
-            that.value(options.value || that.element.val());
+            that._old = that._update(options.value || that.element.val());
+            that._oldText = element.val();
 
             kendo.notify(that);
         },

@@ -284,6 +284,13 @@
                 equal(input.attr("readonly"), undefined);
             });
 
+            test("TimePicker does not remove input text on initialization if not valid value", function() {
+                var timepicker = input.val("test").kendoTimePicker().data("kendoTimePicker");
+
+                equal(timepicker.value(), null);
+                equal(input.val(), "test");
+            });
+
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

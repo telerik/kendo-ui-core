@@ -305,6 +305,12 @@
                 equal(input.attr("readonly"), undefined);
             });
 
+            test("DateTimePicker does not remove input text on initialization if not valid value", function() {
+                var datetimepicker = input.val("test").kendoDateTimePicker().data("kendoDateTimePicker");
+
+                equal(datetimepicker.value(), null);
+                equal(input.val(), "test");
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
