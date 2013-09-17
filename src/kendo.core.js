@@ -2796,7 +2796,7 @@ function pad(number, digits, end) {
 
     kendo.widgetInstance = function(element, suite) {
         if (!suite) {
-            suite = $.extend({}, kendo.mobile.ui, kendo.dataviz.ui, kendo.ui);
+            suite = { roles: $.extend({}, kendo.mobile.ui.roles, kendo.dataviz.ui.roles, kendo.ui.roles) };
         }
 
         var widget = suite.roles[element.data(kendo.ns + "role")];

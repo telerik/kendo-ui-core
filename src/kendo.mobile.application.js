@@ -304,6 +304,8 @@ kendo_module({
                 if (BERRYPHONEGAP) {
                     applyViewportHeight();
                 }
+
+                kendo.resize(element);
             });
         },
 

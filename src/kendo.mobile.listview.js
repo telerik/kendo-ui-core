@@ -107,7 +107,7 @@ kendo_module({
                 headerFixer._cacheHeaders();
             };
 
-            kendo.onResize(cacheHeaders);
+            listView.bind("resize", cacheHeaders);
 
             listView.bind(STYLED, cacheHeaders);
             listView.bind(DATA_BOUND, cacheHeaders);
@@ -545,7 +545,6 @@ kendo_module({
         destroy: function() {
             this.list.unbind();
             this.buffer.unbind();
-            kendo.unbindResize(this._resizeHandler);
         },
 
         setDataSource: function(dataSource) {
@@ -601,24 +600,10 @@ kendo_module({
                     footer.disable();
                 });
 
-                this._resizeHandler = kendo.onResize(function() {
+                listView.bind("resize", function() {
                     scroller.reset();
-
-                    if (listView.element.is(":visible")) {
-                        buffer.range(0);
-                        list.refresh();
-                    } else {
-                        list._needsRefresh = true;
-                    }
-                });
-
-                listView.view().bind("show", function() {
-                    if (list._needsRefresh) {
-                        setTimeout(function() {
-                            list.refresh();
-                        });
-                        list._needsRefresh = false;
-                    }
+                    buffer.range(0);
+                    list.refresh();
                 });
 
                 buffer.bind("expand", function() {
@@ -910,8 +895,8 @@ kendo_module({
             this._itemBinder.refresh();
         },
 
-        setOptions: function(options) {
-            Widget.fn.setOptions.call(this, options);
+        getSize: function() {
+            return kendo.dimensions(this.element);
         },
 
         setDataSource: function(dataSource) {

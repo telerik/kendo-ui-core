@@ -114,8 +114,9 @@ kendo_module({
                 that.layout.attach(that);
             }
 
-            that.trigger(SHOW, {view: that});
             that._padIfNativeScrolling();
+            that.trigger(SHOW, {view: that});
+            kendo.resize(that.element);
         },
 
         hideStart: function() {
