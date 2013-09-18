@@ -553,7 +553,7 @@ kendo_module({
             var xa = al[0];
             var xb = bl[0];
             var i = 0;
-            while (xa == xb) {
+            while (xa === xb) {
                 found = al[i];
                 i++;
                 if (i >= al.length || i >= bl.length) {
@@ -562,8 +562,8 @@ kendo_module({
                 xa = al[i];
                 xb = bl[i];
             }
-            if (found == null) {
-                return this.hyperTree.root.data
+            if (!found) {
+                return this.hyperTree.root.data;
             }
             else {
                 return this.hyperTree.nodes.where(function (n) {

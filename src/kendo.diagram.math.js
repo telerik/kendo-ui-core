@@ -57,10 +57,11 @@ kendo_module({
             }
             var a = Math.atan2(Math.abs(this.y), Math.abs(this.x));
             var halfpi = Math.PI / 2;
-            if (this.x == 0) {
+            var len = this.length();
+            if (this.x === 0) {
                 // note that the angle goes down and not the usual mathematical convention
-                var len = this.length();
-                if (this.y == 0) {
+
+                if (this.y === 0) {
                     return new Polar(0, 0);
                 }
                 if (this.y > 0) {
@@ -71,7 +72,7 @@ kendo_module({
                 }
             }
             else if (this.x > 0) {
-                if (this.y == 0) {
+                if (this.y === 0) {
                     return new Polar(len, 0);
                 }
                 if (this.y > 0) {
@@ -82,7 +83,7 @@ kendo_module({
                 }
             }
             else {
-                if (this.y == 0) {
+                if (this.y === 0) {
                     return new Polar(len, 2 * halfpi);
                 }
                 if (this.y > 0) {
@@ -191,7 +192,7 @@ kendo_module({
             return !this.width && !this.height;
         },
         equals: function (rect) {
-            return this.x == rect.x && this.y === rect.y && this.width === rect.width && this.height === rect.height;
+            return this.x === rect.x && this.y === rect.y && this.width === rect.width && this.height === rect.height;
         },
         toString: function () {
             return this.x + " " + this.y + " " + this.width + " " + this.height;
@@ -271,9 +272,8 @@ kendo_module({
                 tr = rect2.topRight(),
                 bl = rect2.bottomLeft(),
                 br = rect2.bottomRight();
-
+            var center = rect2.center();
             if (angle) {
-                var center = rect2.center();
                 tl = tl.rotate(center, angle);
                 tr = tr.rotate(center, angle);
                 bl = bl.rotate(center, angle);
@@ -362,7 +362,7 @@ kendo_module({
             return container.x;
         },
         _center: function (container, content) {
-            return ((container.width - content.width) / 2) | 0;
+            return ((container.width - content.width) / 2) || 0;
         },
         _right: function (container, content) {
             return container.width - content.width;
@@ -371,7 +371,7 @@ kendo_module({
             return container.y;
         },
         _middle: function (container, content) {
-            return ((container.height - content.height) / 2) | 0;
+            return ((container.height - content.height) / 2) || 0;
         },
         _bottom: function (container, content) {
             return container.height - content.height;
@@ -466,7 +466,7 @@ kendo_module({
             return m;
         },
         fromList: function (v) {
-            if (v.length != 6) {
+            if (v.length !== 6) {
                 throw "The given list should consist of six elements.";
             }
             var m = new Matrix();
@@ -516,28 +516,28 @@ kendo_module({
             if (v) {
                 v = v.trim();
                 // of the form "matrix(...)"
-                if (v.slice(0, 6).toLowerCase() == "matrix") {
+                if (v.slice(0, 6).toLowerCase() === "matrix") {
                     nums = v.slice(7, v.length - 1).trim();
                     parts = nums.split(",");
-                    if (parts.length == 6) {
+                    if (parts.length === 6) {
                         return Matrix.fromList(parts.map(function (p) {
                             return parseFloat(p);
                         }));
                     }
                     parts = nums.split(" ");
-                    if (parts.length == 6) {
+                    if (parts.length === 6) {
                         return Matrix.fromList(parts.map(function (p) {
                             return parseFloat(p);
                         }));
                     }
                 }
                 // of the form "(...)"
-                if (v.slice(0, 1) == "(" && v.slice(v.length - 1) == ")") {
+                if (v.slice(0, 1) === "(" && v.slice(v.length - 1) === ")") {
                     v = v.substr(1, v.length - 1);
                 }
                 if (v.indexOf(",") > 0) {
                     parts = v.split(",");
-                    if (parts.length == 6) {
+                    if (parts.length === 6) {
                         return Matrix.fromList(parts.map(function (p) {
                             return parseFloat(p);
                         }));
@@ -545,7 +545,7 @@ kendo_module({
                 }
                 if (v.indexOf(" ") > 0) {
                     parts = v.split(" ");
-                    if (parts.length == 6) {
+                    if (parts.length === 6) {
                         return Matrix.fromList(parts.map(function (p) {
                             return parseFloat(p);
                         }));
@@ -754,7 +754,7 @@ kendo_module({
          */
         _hash: function (key) {
             if (Utils.isNumber(key)) {
-                return key & key;
+                return key;
             }
             if (Utils.isString(key)) {
                 return this._hashString(key);
@@ -771,13 +771,12 @@ kendo_module({
         _hashString: function (s) {
             // see for example http://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript-jquery
             var result = 0;
-            if (s.length == 0) {
+            if (s.length === 0) {
                 return result;
             }
             for (var i = 0; i < s.length; i++) {
                 var ch = s.charCodeAt(i);
-                result = ((result << 5) - result) + ch;
-                result = result & result;
+                result = ((result * 32) - result) + ch;
             }
             return result;
         },
@@ -826,7 +825,7 @@ kendo_module({
          */
         add: function (key, value) {
             var entry = this._hashTable.get(key);
-            if (entry == null) {
+            if (!entry) {
                 entry = this._hashTable.add(key);
                 this.length++;
                 this.trigger('changed');
@@ -848,7 +847,7 @@ kendo_module({
          */
         get: function (key) {
             var entry = this._hashTable.get(key);
-            if (entry != null) {
+            if (entry) {
                 return entry.value;
             }
             throw new Error("Cannot find key " + key);
@@ -867,8 +866,8 @@ kendo_module({
         remove: function (key) {
             if (this.containsKey(key)) {
                 this.trigger("changed");
-                return this._hashTable.remove(key);
                 this.length--;
+                return this._hashTable.remove(key);
             }
         },
 
@@ -926,7 +925,7 @@ kendo_module({
          */
         enqueue: function (value) {
             var entry = { value: value, next: null };
-            if (this._head == null) {
+            if (!this._head) {
                 this._head = entry;
                 this._tail = this._head;
             }
@@ -952,8 +951,8 @@ kendo_module({
 
         contains: function (item) {
             var current = this._head;
-            while (current != null) {
-                if (current.value == item) {
+            while (current) {
+                if (current.value === item) {
                     return true;
                 }
                 current = current.next;
@@ -980,12 +979,12 @@ kendo_module({
                 if (resource instanceof HashTable) {
                     resource.forEach(function (d) {
                         this.add(d);
-                    })
+                    });
                 }
                 else if (resource instanceof Dictionary) {
                     resource.forEach(function (k, v) {
                         this.add({key: k, value: v});
-                    }, this)
+                    }, this);
                 }
             }
         },
@@ -996,7 +995,7 @@ kendo_module({
 
         add: function (item) {
             var entry = this._hashTable.get(item);
-            if (entry == null) {
+            if (!entry) {
                 this._hashTable.add(item, item);
                 this.length++;
                 this.trigger('changed');
@@ -1004,10 +1003,12 @@ kendo_module({
         },
 
         get: function (item) {
-            if (this.contains(item))
+            if (this.contains(item)) {
                 return this._hashTable.get(item).value;
-            else
+            }
+            else {
                 return null;
+            }
         },
 
         /**
@@ -1150,7 +1151,7 @@ kendo_module({
          * @returns {Array}
          */
         getChildren: function () {
-            if (this.outgoing.length == 0) {
+            if (this.outgoing.length === 0) {
                 return [];
             }
             var children = [];
@@ -1166,7 +1167,7 @@ kendo_module({
          * @returns {Array}
          */
         getParents: function () {
-            if (this.incoming.length == 0) {
+            if (this.incoming.length === 0) {
                 return [];
             }
             var parents = [];
@@ -1212,13 +1213,13 @@ kendo_module({
          * @param link
          */
         removeLink: function (link) {
-            if (link.source == this) {
+            if (link.source === this) {
                 this.links.remove(link);
                 this.outgoing.remove(link);
                 link.source = null;
             }
 
-            if (link.target == this) {
+            if (link.target === this) {
                 this.links.remove(link);
                 this.incoming.remove(link);
                 link.target = null;
@@ -1230,7 +1231,7 @@ kendo_module({
          */
         hasLinkTo: function (node) {
             return this.outgoing.any(function (link) {
-                return link.target == node;
+                return link.target === node;
             });
         },
 
@@ -1324,20 +1325,20 @@ kendo_module({
          * Returns the complementary node of the given one, if any.
          */
         getComplement: function (node) {
-            if (this.source != node && this.target != node) {
+            if (this.source !== node && this.target !== node) {
                 throw "The given node is not incident with this link.";
             }
-            return this.source == node ? this.target : this.source;
+            return this.source === node ? this.target : this.source;
         },
 
         /**
          * Returns the overlap of the current link with the given one, if any.
          */
         getCommonNode: function (link) {
-            if (this.source == link.source || this.source == link.target) {
+            if (this.source === link.source || this.source === link.target) {
                 return this.source;
             }
-            if (this.target == link.source || this.target == link.target) {
+            if (this.target === link.source || this.target === link.target) {
                 return this.target;
             }
             return null;
@@ -1347,7 +1348,7 @@ kendo_module({
          * Returns whether the current link is bridging the given nodes.
          */
         isBridging: function (v1, v2) {
-            return this.source == v1 && this.target == v2 || this.source == v2 && this.target == v1;
+            return this.source === v1 && this.target === v2 || this.source === v2 && this.target === v1;
         },
 
         /**
@@ -1361,7 +1362,7 @@ kendo_module({
          * Returns whether the given node is either the source or the target of the current link.
          */
         incidentWith: function (node) {
-            return this.source == node || this.target == node;
+            return this.source === node || this.target === node;
         },
 
         /**
@@ -1403,10 +1404,10 @@ kendo_module({
          * Changes both the source and the target nodes of this link.
          */
         changesNodes: function (v, w) {
-            if (this.source == v) {
+            if (this.source === v) {
                 this.changeSource(w);
             }
-            else if (this.target == v) {
+            else if (this.target === v) {
                 this.changeTarget(w);
             }
         },
@@ -1432,10 +1433,10 @@ kendo_module({
          * Ensures that the given target defines the endpoint of this link.
          */
         directTo: function (target) {
-            if (this.source != target && this.target != target) {
+            if (this.source !== target && this.target !== target) {
                 throw "The given node is not incident with this link.";
             }
-            if (this.target != target) {
+            if (this.target !== target) {
                 this.reverse();
             }
         },
@@ -1540,7 +1541,7 @@ kendo_module({
          * @param offset The offset or starting counter of the level info.
          */
         assignLevels: function (startNode, offset, visited) {
-            if (startNode == null) {
+            if (!startNode) {
                 throw "Start node not specified.";
             }
             if (Utils.isUndefined(offset)) {
@@ -1559,7 +1560,7 @@ kendo_module({
             var children = startNode.children;
             for (var i = 0, len = children.length; i < len; i++) {
                 var child = children[i];
-                if (child == null || visited.get(child)) {
+                if (!child || visited.get(child)) {
                     continue;
                 }
                 this.assignLevels(child, offset + 1, visited);
@@ -1574,12 +1575,14 @@ kendo_module({
          */
         root: function (value) {
             if (Utils.isUndefined(value)) {
-                if (this._root == null) {
+                if (!this._root) {
                     // TODO: better to use the longest path for the most probable root?
-                    var found= this.nodes.first(function (n) {
-                        return n.incoming.length == 0;
+                    var found = this.nodes.first(function (n) {
+                        return n.incoming.length === 0;
                     });
-                    if(found) return found;
+                    if (found) {
+                        return found;
+                    }
                     return this.nodes.first();
                 }
                 else {
@@ -1603,17 +1606,17 @@ kendo_module({
             var componentId = Utils.initArray(this.nodes.length, -1);
 
             for (var v = 0; v < this.nodes.length; v++) {
-                if (componentId[v] == -1) {
+                if (componentId[v] === -1) {
                     this._collectConnectedNodes(componentId, v);
                     this.componentIndex++;
                 }
             }
 
-            var components = [];
-            for (var i = 0; i < this.componentIndex; ++i) {
+            var components = [], i;
+            for (i = 0; i < this.componentIndex; ++i) {
                 components[i] = new Graph();
             }
-            for (var i = 0; i < componentId.length; ++i) {
+            for (i = 0; i < componentId.length; ++i) {
                 var graph = components[componentId[i]];
                 graph.addNodeAndOutgoings(this.nodes[i]);
             }
@@ -1631,7 +1634,7 @@ kendo_module({
                 function (link) {
                     var next = link.getComplement(node);
                     var nextId = next.index;
-                    if (setIds[nextId] == -1) {
+                    if (setIds[nextId] === -1) {
                         this._collectConnectedNodes(setIds, nextId);
                     }
                 }, this);
@@ -1649,7 +1652,7 @@ kendo_module({
             var b = null;
             for (var i = 0, len = this.nodes.length; i < len; i++) {
                 var node = this.nodes[i];
-                if (b == null) {
+                if (!b) {
                     b = node.bounds();
                 }
                 else {
@@ -1753,14 +1756,14 @@ kendo_module({
             if (Utils.isUndefined(incidenceLessThan)) {
                 incidenceLessThan = 4;
             }
-            if (this.nodes.length == 0) {
+            if (this.nodes.length === 0) {
                 return null;
             }
-            if (this.nodes.length == 1) {
+            if (this.nodes.length === 1) {
                 return excludedNodes.contains(this.nodes[0]) ? null : this.nodes[0];
             }
             var pool = this.nodes.where(function (node) {
-                return !excludedNodes.contains(node) && node.degree() <= incidenceLessThan
+                return !excludedNodes.contains(node) && node.degree() <= incidenceLessThan;
             });
             if (pool.isEmpty()) {
                 return null;
@@ -1781,7 +1784,7 @@ kendo_module({
         isHealthy: function () {
             return this.links.all(function (link) {
                 return this.nodes.contains(link.source) && this.nodes.contains(link.target);
-            }, this)
+            }, this);
         },
 
         /**
@@ -1816,7 +1819,7 @@ kendo_module({
             }
             if (Utils.isUndefined(target)) {
                 // can only be undefined if the first one is a Link
-                if (Utils.isDefined(sourceOrLink.type) && sourceOrLink.type == "Link") {
+                if (Utils.isDefined(sourceOrLink.type) && sourceOrLink.type === "Link") {
                     this.addExistingLink(sourceOrLink);
                     return;
                 }
@@ -1908,10 +1911,10 @@ kendo_module({
         hasLink: function (linkOrId) {
             if (Utils.isString(linkOrId)) {
                 return this.links.any(function (link) {
-                    return link.id == linkOrId;
+                    return link.id === linkOrId;
                 });
             }
-            if (linkOrId.type == "Link") {
+            if (linkOrId.type === "Link") {
                 return this.links.contains(linkOrId);
             }
             throw "The given object is neither an identifier nor a Link.";
@@ -1944,12 +1947,12 @@ kendo_module({
         hasNode: function (nodeOrId) {
             if (Utils.isString(nodeOrId)) {
                 return this.nodes.any(function (n) {
-                    return n.id == nodeOrId;
+                    return n.id === nodeOrId;
                 });
             }
             if (Utils.isObject(nodeOrId)) {
                 return this.nodes.any(function (n) {
-                    return n == nodeOrId;
+                    return n === nodeOrId;
                 });
             }
             throw "The identifier should be a Node or the Id (string) of a node.";
@@ -1985,7 +1988,7 @@ kendo_module({
         areConnected: function (n1, n2) {
             return this.links.any(function (link) {
                 return link.source == n1 && link.target == n2 || link.source == n2 && link.target == n1;
-            })
+            });
         },
 
         /**
@@ -2014,7 +2017,7 @@ kendo_module({
             var newNode = null;
 
             if (!Utils.isDefined(nodeOrId)) {
-                throw "No Node or identifier for a new Node is given."
+                throw "No Node or identifier for a new Node is given.";
             }
 
             if (Utils.isString(nodeOrId)) {
@@ -2062,12 +2065,12 @@ kendo_module({
          * Sets the 'index' property on the links and nodes of this graph.
          */
         setItemIndices: function () {
-
-            for (var i = 0; i < this.nodes.length; ++i) {
+            var i;
+            for (i = 0; i < this.nodes.length; ++i) {
                 this.nodes[i].index = i;
             }
 
-            for (var i = 0; i < this.links.length; ++i) {
+            for (i = 0; i < this.links.length; ++i) {
                 this.links[i].index = i;
             }
         },
@@ -2077,7 +2080,7 @@ kendo_module({
          */
         clone: function (saveMapping) {
             var copy = new Graph();
-            var save = Utils.isDefined(saveMapping) && saveMapping == true;
+            var save = Utils.isDefined(saveMapping) && saveMapping === true;
             if (save) {
                 copy.nodeMap = new Dictionary();
                 copy.linkMap = new Dictionary();
@@ -2125,7 +2128,7 @@ kendo_module({
                 throw "You need to supply a starting node.";
             }
             if (Utils.isUndefined(action)) {
-                throw "You need to supply an action."
+                throw "You need to supply an action."       ;
             }
             if (!this.hasNode(startNode)) {
                 throw "The given start-node is not part of this graph";
@@ -2160,7 +2163,7 @@ kendo_module({
                 throw "You need to supply a starting node.";
             }
             if (Utils.isUndefined(action)) {
-                throw "You need to supply an action."
+                throw "You need to supply an action.";
             }
 
             if (!this.hasNode(startNode)) {
@@ -2205,9 +2208,9 @@ kendo_module({
 
             stack.push(node);
 
-            var children = node.getChildren();
+            var children = node.getChildren(), next;
             for (var i = 0, len = children.length; i < len; i++) {
-                var next = children[i];
+                  next = children[i];
                 if (!indices.containsKey(next)) {
                     this._stronglyConnectedComponents(excludeSingleItems, next, indices, lowLinks, connected, stack, index);
                     lowLinks.add(node, Math.min(lowLinks.get(node), lowLinks.get(next)));
@@ -2217,13 +2220,13 @@ kendo_module({
                 }
             }
             // If v is a root node, pop the stack and generate a strong component
-            if (lowLinks.get(node) == indices.get(node)) {
-                var next, component = [];
+            if (lowLinks.get(node) === indices.get(node)) {
+                var  component = [];
                 do {
                     next = stack.pop();
                     component.add(next);
                 }
-                while (next != node)
+                while (next !== node)
 
                 if (!excludeSingleItems || (component.length > 1)) {
                     connected.add(component)
@@ -2323,7 +2326,7 @@ kendo_module({
                 else {
                     return node.outgoing.length - node.incoming.length;
                 }
-            }
+            };
 
             /**
              * Collects the nodes with the same intensity.
@@ -2380,10 +2383,10 @@ kendo_module({
                 }
 
                 if (copy.nodes.length > 0) {
-                    for (var i = N - 3; i > 2 - N; i--) {
-                        if (intensityCatalog.containsKey(i) &&
-                            intensityCatalog.get(i).length > 0) {
-                            var maxdiff = intensityCatalog.get(i);
+                    for (var k = N - 3; k > 2 - N; k--) {
+                        if (intensityCatalog.containsKey(k) &&
+                            intensityCatalog.get(k).length > 0) {
+                            var maxdiff = intensityCatalog.get(k);
                             var v = maxdiff.pop();
                             v.links.forEach(function (e) {
                                 var u = e.getComplement(v);
@@ -2404,8 +2407,8 @@ kendo_module({
             sourceStack = sourceStack.concat(targetStack);
 
             var vertexOrder = new Dictionary();
-            for (var i = 0; i < this.nodes.length; i++) {
-                vertexOrder.set(copy.nodeMap.get(sourceStack[i]), i);
+            for (var kk = 0; kk < this.nodes.length; kk++) {
+                vertexOrder.set(copy.nodeMap.get(sourceStack[kk]), kk);
             }
 
             var reversedEdges = [];
