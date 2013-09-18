@@ -120,7 +120,7 @@
 {
     display: inline-block;
     margin: 0;
-    padding: 0.167em 0.583em 0.167em;
+    padding: 2px 7px 2px;
     font-family: inherit;
     line-height: 1.66em;
     text-align: center;
@@ -713,7 +713,7 @@ div.k-window-content
     display: inline-block;
     width: 16px;
     height: 16px;
-    padding: 2px;
+    padding: 0.16666em;
     text-decoration: none;
     vertical-align: middle;
     filter: alpha(opacity=70);
@@ -724,7 +724,7 @@ div.k-window-content
 {
     border-style: solid;
     border-width: 1px;
-    padding: 1px;
+    padding: 0.08333em;
     filter: alpha(opacity=100);
     opacity: 1;
 }
@@ -1453,8 +1453,8 @@ div.k-grid-header .k-header
 .k-pager-wrap>.k-link
 {
     float:left;
-    margin:0 0.08333em;
-    padding: 0 0.25em;
+    margin:0 1px;
+    padding: 0 3px;
     height: 1.8333em;/*IE7*/
     line-height: 1.8333em;/*IE7*/
     .border-radius(1.0833em);
@@ -1470,7 +1470,7 @@ div.k-grid-header .k-header
 .k-pager-wrap>.k-link .k-icon
 {
     vertical-align:top;
-    margin-top:1.0833em;
+    margin-top:3px;
 }
 
 .k-pager-numbers .k-link
@@ -2458,6 +2458,8 @@ body .k-datetimepicker .k-select
 {
     position: absolute;
     top: 0.25em;
+	line-height: 1.8333em;
+	height: 1.8333em;
 }
 .k-widget.k-calendar .k-nav-prev { left: 1%; }
 .k-widget.k-calendar .k-nav-next { right: 1%; }
@@ -2491,9 +2493,8 @@ body .k-datetimepicker .k-select
 
 .k-calendar .k-header .k-icon
 {
-    vertical-align: top;
-    margin:3px 3px 4px;
-	//margin: 0.25em 0.25em 0.3333em;
+    vertical-align: middle;
+    margin:0 3px;
 }
 
 .k-calendar th
@@ -2624,7 +2625,7 @@ div.k-treeview
 .k-treeview .k-in
 {
     display: inline-block;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 .k-treeview .k-request-retry
@@ -2651,13 +2652,13 @@ div.k-treeview
 .k-treeview .k-sprite,
 .k-treeview .k-image
 {
-    margin-right: 0.25em;
+    margin-right: 3px;
 }
 
 .k-treeview .k-in
 {
-    margin: 0.08333em 0 0.08333em 0.16666em;
-    padding: 0.16666em 0.3333em 0.16666em 0.25em;
+    margin: 1px 0 1px 2px;
+    padding: 2px 4px 2px 3px;
     line-height: 1.3333em;
     text-decoration: none;
 }
@@ -2673,7 +2674,7 @@ div.k-treeview
 {
     border-style: solid;
     border-width: 1px;
-    padding: 0.08333em 0.25em 0.08333em 0.16666em;
+    padding: 1px 3px 1px 2px;
 }
 
 .k-treeview .k-drop-hint
