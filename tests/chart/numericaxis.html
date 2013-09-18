@@ -86,6 +86,10 @@
                 }
            });
 
+           test("Major unit calculation for positive values with big precision should fallback to the default value", function() {
+                equal(dataviz.autoMajorUnit(10.1234567, 10.1234568), 2);
+           });
+
            test("Major unit calculation for negative values", function() {
                 for (var i = 0; i < referenceUnits.length; i++) {
                     var d = referenceUnits[i],

@@ -3356,7 +3356,7 @@ kendo_module({
             "overflow: hidden;' />")[0];
 
     function autoMajorUnit(min, max) {
-        var diff = max - min;
+        var diff = round(max - min, DEFAULT_PRECISION - 1);
 
         if (diff === 0) {
             if (max === 0) {
