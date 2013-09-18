@@ -411,7 +411,7 @@ kendo_module({
                 if (!skip) {
                     if (isEqualDatePart(date, min)) {
                         timeViewOptions.min = min;
-                        timeViewOptions.max = MAX;
+                        timeViewOptions.max = lastTimeOption(options.interval);
                         rebind = true;
                     }
 
@@ -666,6 +666,12 @@ kendo_module({
             this.element.attr("aria-label", this._ariaTemplate({ current: date }));
         }
     });
+
+    function lastTimeOption(interval) {
+        var date = new Date(2100, 0, 1);
+        date.setMinutes(-interval);
+        return date;
+    }
 
     function preventDefault(e) {
         e.preventDefault();

@@ -601,8 +601,8 @@
 
             test("value method should rebind timeView if select min after max was selected", function() {
                 var datetimepicker = new kendo.ui.DateTimePicker(input, {
-                    max: new Date(2010, 10, 10, 20, 0, 0),
-                    min: new Date(2000, 10, 10, 10, 0, 0)
+                    min: new Date(2000, 10, 10, 10, 0, 0),
+                    max: new Date(2010, 10, 10, 20, 0, 0)
                 });
 
                 //set value
@@ -619,7 +619,7 @@
                 ul = datetimepicker.timeView.ul;
 
                 equal(ul.children(":first").html(), "10:00 AM");
-                equal(ul.children(":last").html(), "12:00 AM");
+                equal(ul.children(":last").html(), "11:30 PM");
             });
 
             test("value method persist min and max range in timeview", function() {

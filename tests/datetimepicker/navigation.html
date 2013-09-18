@@ -315,7 +315,7 @@
             test("DateTimePicker updates TimeView when select min date", function() {
                 var date = new Date(2000, 11, 1, 16, 0, 0);
                 var datetimepicker = new DateTimePicker(input, {
-                    min: new Date(2000, 11, 1, 10, 0, 0),
+                    min: new Date(2000, 11, 1, 0, 0, 0),
                     value: new Date(2000, 11, 2)
                 });
 
@@ -325,8 +325,22 @@
 
                 var liElements = datetimepicker.timeView.ul.children();
 
-                equal(liElements.eq(0).text(), "10:00 AM");
-                equal(liElements.eq(liElements.length - 1).text(), "12:00 AM");
+                equal(liElements.eq(0).text(), "12:00 AM");
+                equal(liElements.eq(liElements.length - 1).text(), "11:30 PM");
+            });
+
+            test("DateTimePicker sets TimeView max date to 59 to midnight", function() {
+                var datetimepicker = new DateTimePicker(input, {
+                    min: new Date("09/16/2013 09:00 PM"),
+                    max: new Date("09/17/2013 04:59 AM"),
+                    value: new Date("09/16/2013")
+                });
+
+                var min = datetimepicker.timeView.options.min;
+                var max = datetimepicker.timeView.options.max;
+
+                deepEqual(min, new Date(2013, 8, 16, 21, 0));
+                deepEqual(max, new Date(2099, 11, 31, 23, 30));
             });
 
             test("DateTimePicker shows all hours in TimeView when date is not min", function() {
