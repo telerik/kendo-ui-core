@@ -988,7 +988,6 @@
             "name": "scheduler",
             "documentation": "web/scheduler",
             "spriteCssClass": "schedulerIcon",
-            "beta": true,
             "items": [
                 {
                     "text": "Basic usage",
