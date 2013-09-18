@@ -104,6 +104,7 @@ kendo_module({
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_PRECISION = dataviz.DEFAULT_PRECISION,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
+        DEFAULT_ERROR_BAR_WIDTH = 10,
         DONUT = "donut",
         DONUT_SECTOR_ANIM_DELAY = 50,
         DRAG = "drag",
@@ -2905,9 +2906,9 @@ kendo_module({
                 bar.note.reflow(targetBox);
             }
 
-            if(bar.errorBarChildren){
-                for(var i = 0; i < bar.errorBarChildren.length;i++){
-                    bar.errorBarChildren[i].reflow(targetBox);
+            if(bar.errorBars){
+                for(var i = 0; i < bar.errorBars.length;i++){
+                    bar.errorBars[i].reflow(targetBox);
                 }
             }
         },
@@ -3016,24 +3017,23 @@ kendo_module({
         that.high = high;
     };
 
-
     var ErrorRangeCalculator = function(errorValue, series, field){
         var that = this,
             data = series.data,
             val;
         that.errorValue = errorValue;
         if((val = that.standardDeviationRegex.exec(errorValue))){
-            that.createValueGetter(series, field);
+            that.valueGetter = that.createValueGetter(series, field);
             var average = that.getAverage(data),
                 deviation = that.getStandardDeviation(data, average, false),
-                multiple = defined(val[1]) ? parseFloat(val[1]) : 1,
+                multiple = val[1] ? parseFloat(val[1]) : 1,
                 errorRange = new ErrorRange(average - deviation * multiple, average + deviation * multiple);
             that.globalRange = function(){
                 return errorRange;
             };
         }
         else if(errorValue.indexOf && errorValue.indexOf(STD_ERR) >= 0){
-            that.createValueGetter(series, field);
+            that.valueGetter = that.createValueGetter(series, field);
             var standardError = that.getStandardError(data);
             that.globalRange = function(value){
                 return new ErrorRange(value - standardError, value + standardError);
@@ -3042,33 +3042,38 @@ kendo_module({
     };
 
     ErrorRangeCalculator.prototype = ErrorRangeCalculator.fn = {
-        percentRegex: /percents\((\d+)\)/,
+        percentRegex: /percent(?:\w*)\((\d+)\)/,
         standardDeviationRegex: new RegExp(STD_DEV + "(?:\\(((?:0|[1-9][0-9]*)(?:\.[0-9]+)?)\\))?"),
         createValueGetter: function(series, field){
             var that = this,
                 data = series.data,
                 binder = SeriesBinder.current,
                 valueFields = binder.valueFields(series),
-                item = data[0] || {};
-            
+                item = defined(data[0]) ? data[0] : {},
+                idx,
+                srcValueFields,
+                valueGetter;
+           
             if(isArray(item)){
-                var idx = field ? indexOf(field, valueFields): 0;
-                that.valueGetter = getter("[" + idx + "]");
+                idx = field ? indexOf(field, valueFields): 0;
+                valueGetter = getter("[" + idx + "]");
             }
             else if(isNumber(item)){
-                that.valueGetter = getter();
+                valueGetter = getter();
             }
             else if(typeof item === OBJECT){
-                var srcValueFields = binder.sourceFields(series, valueFields);
-                that.valueGetter = getter(srcValueFields[indexOf(field, valueFields)]);
+                srcValueFields = binder.sourceFields(series, valueFields);
+                valueGetter = getter(srcValueFields[indexOf(field, valueFields)]);
             }
+            
+            return valueGetter;
         },
         getErrorRange: function(pointValue, item, data){
             var that = this,
                 errorValue = that.errorValue,
                 low,
                 high,
-                val;
+                value;
 
 
             if(!defined(errorValue)){
@@ -3083,19 +3088,19 @@ kendo_module({
                 low = pointValue - errorValue[0];
                 high = pointValue + errorValue[1];
             }
-            else if(isNumber(val = parseFloat(errorValue))){
-                low = pointValue - val;
-                high = pointValue + val;
+            else if(isNumber(value = parseFloat(errorValue))){
+                low = pointValue - value;
+                high = pointValue + value;
             }
             else if(typeof errorValue === "function"){
                 var customResult = errorValue(pointValue, item, data);
                 low = customResult[0];
                 high = customResult[1];
             }
-            else if((val = that.percentRegex.exec(errorValue))){
-                var percentValue = pointValue * (parseFloat(val[1]) / 100);
-                low = pointValue - percentValue;
-                high = pointValue + percentValue;
+            else if((value = that.percentRegex.exec(errorValue))){
+                var percentValue = pointValue * (parseFloat(value[1]) / 100);
+                low = pointValue - math.abs(percentValue);
+                high = pointValue + math.abs(percentValue);
             }
             else {
                 throw new Error("Invalid ErrorBar value: " + errorValue);
@@ -3103,17 +3108,16 @@ kendo_module({
             return new ErrorRange(low, high);
         },
         getStandardError: function(data){
-            return this.getStandardDeviation(data, this.getAverage(data), true) / Math.sqrt(data.length);
+            return this.getStandardDeviation(data, this.getAverage(data), true) / math.sqrt(data.length);
         },
         getStandardDeviation: function(data, average, isSample){
-            var that = this,
-                squareDifferenceSum = 0,
+            var squareDifferenceSum = 0,
                 total = isSample ? data.length - 1 : data.length;
-
+        
             for(var i = 0; i < data.length; i++){
-                squareDifferenceSum += Math.pow(average - that.valueGetter(data[i]), 2);
+                squareDifferenceSum += math.pow(this.valueGetter(data[i]) - average, 2);
             }
-            return Math.sqrt(squareDifferenceSum / total);
+            return math.sqrt(squareDifferenceSum / total);
         },
         getAverage: function(data){
             var sum = 0;
@@ -3159,82 +3163,48 @@ kendo_module({
             var chart = this,
                 value = point.value,
                 series = point.series,
-                isVertical = !chart.options.invertAxes,
+                isVertical = !chart.options.invertAxes,                
                 plotValue,
-                errorBar;
-
+                errorBar;                
+            
             point.low =  low;
             point.high = high;
-
-            if(chart.options.isStacked){
+            if(chart.options.isStacked){  
                 if(series.type == BAR || series.type == COLUMN){
-                    var totals = chart.groupTotals(series.stack),
-                        cluster = chart.children[categoryIx],
-                        stackWrap = chart.getStackWrap(series, cluster),
-                        positiveStack = stackWrap.children[0],
-                        negativeStack = stackWrap.children[1],
-                        idx,
-                        sum = 0;
-
+                    chart.errorTotals = chart.errorTotals || {positive: [], negative: []};
+                    var totals = chart.groupTotals(series.stack);                                        
                     if(value > 0){
-                        for(idx = 0;idx < positiveStack.children.length; idx++){
-                            sum += positiveStack.children[idx].value;
-                        }
+                        plotValue = totals.positive[categoryIx];                       
                     }
                     else{
-                        for(idx = 0;idx < negativeStack.children.length; idx++){
-                            sum += negativeStack.children[idx].value;
-                        }
+                        plotValue = totals.negative[categoryIx];                        
+                    } 
+                    high = high + plotValue - value; 
+                    low = low + plotValue - value;
+                    
+                    if(low < 0){
+                        chart.errorTotals.negative[categoryIx] =  math.min(chart.errorTotals.negative[categoryIx] || 0, low);                        
                     }
-
-                    plotValue = sum;
-
-                    if(high < 0){
-                        incrementSlot(totals.negative, categoryIx, plotValue + low);
-                    }
-                    else if(low < 0){
-                        incrementSlot(totals.positive,categoryIx, high);
-                        incrementSlot(totals.negative,categoryIx, plotValue + low);
-                    }
-                    else{
-                        incrementSlot(totals.positive,categoryIx, high);
-                    }
+                    if(high > 0){
+                        chart.errorTotals.positive[categoryIx] =  math.max(chart.errorTotals.positive[categoryIx] || 0, high);                        
+                    }                     
                 }
-                else if(series.type == LINE){
-                    plotValue = point.plotValue;
-                    chart.minErrorValues = chart.minErrorValues || [];
-                    chart.maxErrorValues = chart.maxErrorValues || [];
-
-                    incrementSlot(chart.minErrorValues, categoryIx, low);
-                    incrementSlot(chart.maxErrorValues, categoryIx, high);
-
-                    var stackAxisRange = chart._stackAxisRange,
-                        totalsMin = stackAxisRange.min,
-                        totalsMax = stackAxisRange.max,
-                        length = math.max(chart.minErrorValues.length, chart.maxErrorValues.length);
-
-                    for(var i = 0; i < length; i++){
-                        if(chart.minErrorValues[i] != null){
-                            totalsMin = math.min(chart.minErrorValues[i], totalsMin);
-                        }
-                        if(chart.maxErrorValues[i] != null){
-                            totalsMax = math.max(chart.maxErrorValues[i], totalsMax);
-                        }
-                    }
-                    stackAxisRange.min = totalsMin;
-                    stackAxisRange.max = totalsMax;
-                }
+                else {  
+                    var stackAxisRange = chart._stackAxisRange;
+                    plotValue = point.plotValue;                   
+                    high = high + plotValue - value; 
+                    low = low + plotValue - value;
+                    stackAxisRange.min = math.min(stackAxisRange.min, low);
+                    stackAxisRange.max = math.max(stackAxisRange.max, high);
+                }       
             }
             else{
-                plotValue = value;
                 chart.updateRange(low, categoryIx, series);
                 chart.updateRange(high, categoryIx, series);
             }
-            low = low + plotValue - value;
-            high = high + plotValue - value;
 
             errorBar = new ErrorBar(low, high, isVertical, chart.plotArea, series.errorBars);
-            point.errorBarChildren = [errorBar];
+            point.errorBars = [errorBar];
             point.append(errorBar);
         },
 
@@ -3268,21 +3238,14 @@ kendo_module({
                         data.fields[ERROR_HIGH_FIELD], point, categoryIx);
                 }
                 else if(series.errorBars){
-                    chart.seriesErrorRanges = chart.seriesErrorRanges || [];
+                    chart.seriesErrorRanges = chart.seriesErrorRanges || [];                    
                     chart.seriesErrorRanges[seriesIx] = chart.seriesErrorRanges[seriesIx] ||
                         new ErrorRangeCalculator(series.errorBars.value, series, VALUE);
                     var errorRange = chart.seriesErrorRanges[seriesIx].getErrorRange(
                         value, point.dataItem, series.data);
                     chart.addPointErrorBar(errorRange.low, errorRange.high, point, categoryIx);
                 }
-                else{
-                    chart.updateRange(value, categoryIx, series);
-                }
             }
-            else{
-                chart.updateRange(value, categoryIx, series);
-            }
-
 
             chart.points.push(point);
             seriesPoints.push(point);
@@ -3601,12 +3564,16 @@ kendo_module({
 
         computeAxisRanges: function() {
             var chart = this,
-                isStacked = chart.options.isStacked,
+                isStacked = chart.options.isStacked,                
                 axisName, categoryTotals;
 
             if (isStacked) {
                 axisName = chart.options.series[0].axis;
-                categoryTotals = chart.categoryTotals();
+                categoryTotals = chart.categoryTotals();                
+                if(chart.errorTotals){                    
+                    categoryTotals.negative = categoryTotals.negative.concat(chart.errorTotals.negative);
+                    categoryTotals.positive = categoryTotals.positive.concat(chart.errorTotals.positive);
+                }
                 chart.valueAxisRanges[axisName] = {
                     min: sparseArrayMin(categoryTotals.negative.concat(0)),
                     max: sparseArrayMax(categoryTotals.positive.concat(0))
@@ -4053,10 +4020,10 @@ kendo_module({
             var that = this;
             that.box = targetBox;
             that.valueAxis = that.getAxis();
-        },
-        createHorizontalErrorBar: function(view,valueBox, centerBox, lineOptions, endCaps){
-            var capStart = centerBox.y - 10,//determine caps size based on box or expose it as option
-                capEnd = centerBox.y + 10,
+        },            
+        createHorizontalErrorBar: function(view, valueBox, centerBox, lineOptions, endCaps, capsWidth){            
+            var capStart = centerBox.y - capsWidth,
+                capEnd = centerBox.y + capsWidth,
                 elements = [];
             elements.push(view.createLine(valueBox.x1, centerBox.y, valueBox.x2, centerBox.y, lineOptions));
             if(endCaps){
@@ -4065,9 +4032,9 @@ kendo_module({
             }
             return elements;
         },
-        createVerticalErrorBar: function(view,valueBox, centerBox, lineOptions, endCaps){
-           var capStart = centerBox.x - 10,
-               capEnd = centerBox.x + 10,
+        createVerticalErrorBar: function(view, valueBox, centerBox, lineOptions, endCaps, capsWidth){
+           var capStart = centerBox.x - capsWidth,
+               capEnd = centerBox.x + capsWidth,
                elements = [];
 
             elements.push(view.createLine(centerBox.x, valueBox.y1, centerBox.x, valueBox.y2, lineOptions));
@@ -4077,16 +4044,35 @@ kendo_module({
             }
             return elements;
         },
+        
+        getCapsWidth: function(box, isVertical){
+            var capsWidth = DEFAULT_ERROR_BAR_WIDTH,
+                width,
+                height;
+               
+            if(isVertical){
+                width = math.floor(box.width() / 2);
+                capsWidth = math.min(width, capsWidth) || capsWidth;
+            }
+            else{
+                height = math.floor(box.height() / 2);
+                capsWidth = math.min(height, capsWidth) || capsWidth;
+            }
+            
+            return capsWidth;
+        },
         getViewElements: function(view){
             var errorBar = this,
                 axis = errorBar.valueAxis,
                 low = errorBar.low,
                 high = errorBar.high,
+                box = errorBar.box,
                 valueBox = axis.getSlot(low, high),
-                centerBox = errorBar.box.center(),
+                centerBox = box.center(),
                 isVertical = errorBar.isVertical,
                 options = errorBar.options,
                 line = options.line,
+                capsWidth = errorBar.getCapsWidth(box, isVertical),
                 lineOptions = {
                     stroke: line.color,
                     strokeWidth: line.width,
@@ -4096,11 +4082,11 @@ kendo_module({
                 },
                 elements;
 
-            if(isVertical){
-               elements = errorBar.createVerticalErrorBar(view, valueBox, centerBox, lineOptions, options.endCaps);
+            if(isVertical){               
+               elements = errorBar.createVerticalErrorBar(view, valueBox, centerBox, lineOptions, options.endCaps, capsWidth);
             }
-            else{
-               elements = errorBar.createHorizontalErrorBar(view, valueBox, centerBox, lineOptions, options.endCaps);
+            else{               
+               elements = errorBar.createHorizontalErrorBar(view, valueBox, centerBox, lineOptions, options.endCaps, capsWidth);
             }
 
             return elements;
@@ -4118,7 +4104,6 @@ kendo_module({
             }
         }
     });
-
 
     var LinePoint = ChartElement.extend({
         init: function(value, options) {
@@ -4298,9 +4283,9 @@ kendo_module({
             point.marker.reflow(childBox);
             point.reflowLabel(childBox);
 
-            if(point.errorBarChildren){
-                for(var i = 0; i < point.errorBarChildren.length; i++){
-                     point.errorBarChildren[i].reflow(childBox);
+            if(point.errorBars){
+                for(var i = 0; i < point.errorBars.length; i++){
+                     point.errorBars[i].reflow(childBox);
                 }
             }
 
@@ -4684,7 +4669,16 @@ kendo_module({
 
             if (isStacked) {
                 axisName = chart.options.series[0].axis;
-                chart.valueAxisRanges[axisName] = chart._stackAxisRange;
+                if(chart.errorTotals){
+                    chart._stackAxisRange = {
+                            min: sparseArrayMin(chart.errorTotals.negative.concat(0)),
+                            max: sparseArrayMax(chart.errorTotals.positive.concat(0))
+                        };
+                    console.log(chart.errorTotals.negative);
+                    console.log(chart.errorTotals.positive);
+                }
+                
+                chart.valueAxisRanges[axisName] = chart._stackAxisRange;                
             }
         },
 
@@ -5049,8 +5043,7 @@ kendo_module({
             return viewElements;
         }
     });
-       
-    
+          
     var StepAreaSegment = StepLineSegment.extend({
         init: function(linePoints, stackPoints, currentSeries, seriesIx) {
             var segment = this;
@@ -5099,15 +5092,49 @@ kendo_module({
             chart.traverseDataPoints(proxy(chart.addValue, chart));
         },
 
+        addErrorBar: function(point, fields, seriesIx){        
+            var chart = this,
+                errorRange,
+                series = fields.series,
+                errorBars = series.errorBars;
+
+            if(isNumber(fields[X_ERROR_LOW_FIELD]) && isNumber(fields[X_ERROR_HIGH_FIELD])){
+                chart.addPointErrorBar(fields[X_ERROR_LOW_FIELD],
+                    fields[X_ERROR_HIGH_FIELD], point, X, series,errorBars);
+            }
+
+            if(isNumber(fields[Y_ERROR_LOW_FIELD]) && isNumber(fields[Y_ERROR_HIGH_FIELD])){
+                chart.addPointErrorBar(fields[Y_ERROR_LOW_FIELD],
+                    fields[Y_ERROR_HIGH_FIELD], point, Y, series,errorBars);
+            }
+
+            if(errorBars && defined(errorBars.xValue)){
+                chart.xSeriesErrorRanges = chart.xSeriesErrorRanges || [];
+                chart.xSeriesErrorRanges[seriesIx] = chart.xSeriesErrorRanges[seriesIx] ||
+                    new ErrorRangeCalculator(errorBars.xValue, series, X);
+
+                errorRange = chart.xSeriesErrorRanges[seriesIx].getErrorRange(x, value, series.data);
+                chart.addPointErrorBar(errorRange.low, errorRange.high, point, X, series, errorBars);
+            }
+            if(errorBars && defined(errorBars.yValue)){
+                chart.ySeriesErrorRanges = chart.ySeriesErrorRanges || [];
+                chart.ySeriesErrorRanges[seriesIx] = chart.ySeriesErrorRanges[seriesIx] ||
+                    new ErrorRangeCalculator(errorBars.yValue, series, Y);
+
+                errorRange = chart.ySeriesErrorRanges[seriesIx].getErrorRange(y, value, series.data);
+                chart.addPointErrorBar(errorRange.low, errorRange.high, point, Y, series, errorBars);
+            }
+        },
+        
         addPointErrorBar: function(low, high, point, field, series, options){
             var chart = this,
                 errorBar,
                 isVertical = field === Y,
                 item = {};
 
-            point.errorBarChildren = point.errorBarChildren || [];
+            point.errorBars = point.errorBars || [];
             errorBar = new ErrorBar(low, high, isVertical, chart.plotArea, options);
-            point.errorBarChildren.push(errorBar);
+            point.errorBars.push(errorBar);
             point.append(errorBar);
             item[field] = low;
             chart.updateRange(item, series);
@@ -5129,14 +5156,14 @@ kendo_module({
                 point = chart.createPoint(value, fields);
                 if (point) {
                     extend(point, fields);
-                    //date axis error bars ???
+                    //chart.addErrorBar(point, fields, seriesIx);  
                     var errorRange,
                         series = fields.series,
                         errorBars = series.errorBars;
 
                     if(isNumber(fields[X_ERROR_LOW_FIELD]) && isNumber(fields[X_ERROR_HIGH_FIELD])){
                         chart.addPointErrorBar(fields[X_ERROR_LOW_FIELD],
-                            fields[X_ERROR_HIGH_FIELD], point, X, series,errorBars);
+                            fields[X_ERROR_HIGH_FIELD], point, X, series, errorBars);
                     }
 
                     if(isNumber(fields[Y_ERROR_LOW_FIELD]) && isNumber(fields[Y_ERROR_HIGH_FIELD])){
@@ -5159,7 +5186,7 @@ kendo_module({
 
                         errorRange = chart.ySeriesErrorRanges[seriesIx].getErrorRange(y, value, series.data);
                         chart.addPointErrorBar(errorRange.low, errorRange.high, point, Y, series, errorBars);
-                    }
+                    }                    
                 }
             }
 
@@ -11200,6 +11227,8 @@ kendo_module({
         DonutChart: DonutChart,
         DonutPlotArea: DonutPlotArea,
         DonutSegment: DonutSegment,
+        ErrorRange: ErrorRange,
+        ErrorRangeCalculator: ErrorRangeCalculator,
         Highlight: Highlight,
         SharedTooltip: SharedTooltip,
         Legend: Legend,
