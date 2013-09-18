@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring <see cref="ChartMajorTicksBuilder"/>.
     /// </summary>
-    public class ChartMajorTicksBuilder : ChartLineBuilderBase
+    public class ChartMajorTicksBuilder : ChartLineBuilder
     {
         private readonly ChartLine line;
 

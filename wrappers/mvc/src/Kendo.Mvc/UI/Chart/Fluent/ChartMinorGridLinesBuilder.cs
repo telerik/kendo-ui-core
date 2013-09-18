@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <summary>
     /// Defines the fluent interface for configuring <see cref="ChartMinorGridLinesBuilder"/>.
     /// </summary>
-    public class ChartMinorGridLinesBuilder : ChartLineBuilderBase
+    public class ChartMinorGridLinesBuilder : ChartLineBuilder
     {
         private readonly ChartLine line;
 
