@@ -690,15 +690,27 @@ kendo_module({
             return this;
         },
 
+        _actionable: function(element) {
+            return $(element).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon,:input,a");
+        },
+
+        _shouldFocus: function(target) {
+            var active = activeElement(),
+                element = this.element;
+
+            return this.options.autoFocus &&
+                    !$(active).is(element) &&
+                    !this._actionable(target) &&
+                    (!element.find(active).length || !element.find(target).length);
+        },
+
         toFront: function (e) {
             var that = this,
                 wrapper = that.wrapper,
                 currentWindow = wrapper[0],
                 zIndex = +wrapper.css(ZINDEX),
                 originalZIndex = zIndex,
-                active = activeElement(),
-                winElement = that.element,
-                target = e && e.target ? e.target : null;
+                target = (e && e.target) || null;
 
             $(KWINDOW).each(function(i, element) {
                 var windowObject = $(element),
@@ -721,18 +733,17 @@ kendo_module({
             }
             that.element.find("> .k-overlay").remove();
 
-            if (that.options.autoFocus && !$(active).is(winElement) &&
-                !$(target).is(TITLEBAR_BUTTONS + "," + TITLEBAR_BUTTONS + " .k-icon,:input,a") &&
-                (!winElement.find(active).length || !winElement.find(target).length)) {
-                winElement.focus();
+            if (that._shouldFocus(target)) {
+                that.element.focus();
 
                 var scrollTop = $(window).scrollTop(),
-                    windowTop = parseInt(that.wrapper.position().top, 10);
-                if (windowTop > 0 && windowTop - scrollTop < 0) {
+                    windowTop = parseInt(wrapper.position().top, 10);
+
+                if (windowTop > 0 && windowTop < scrollTop) {
                     if (scrollTop > 0) {
                         $(window).scrollTop(windowTop);
                     } else {
-                        that.wrapper.css("top", scrollTop);
+                        wrapper.css("top", scrollTop);
                     }
                 }
             }
