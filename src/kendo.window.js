@@ -433,7 +433,7 @@ kendo_module({
         },
 
         _overlay: function (visible) {
-            var overlay = this.appendTo.children(".k-overlay"),
+            var overlay = this.appendTo.children(KOVERLAY),
                 wrapper = this.wrapper;
 
             if (!overlay.length) {
@@ -656,7 +656,7 @@ kendo_module({
 
                     // Remove overlay set by toFront
                     if (element != wrapper && contentElement.find("> ." + KCONTENTFRAME).length > 0) {
-                        contentElement.children(".k-overlay").remove();
+                        contentElement.children(KOVERLAY).remove();
                     }
                 });
 
