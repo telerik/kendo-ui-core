@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Progressbar tests</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.progressbar.js"></script>
+        <script src="helper.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Progressbar API tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+        <script>
+            var pb;
+
+            function createProgressbar(options){
+                createPbHtml();
+
+                $("#progressbar").kendoProgressBar(options);
+                return $("#progressbar").data("kendoProgressBar");
+            }
+
+            function moduleSetup() { 
+                //pb = createProgressbar();
+            }
+
+            function moduleTeardown() { 
+                removePbHtml();
+            }
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Rendering", {
+                setup: function() {
+                    moduleSetup();
+                },
+                teardown: function(){
+                    moduleTeardown();
+                }
+            });
+
+            asyncTest("k-complete is added when the progress width is more than 98%", function() {
+                var progressCompleted = false;
+
+                pb = createProgressbar({
+                    animation: {
+                        duration: 50
+                    },
+                    complete: function(e){
+                        progressCompleted = true;
+                    }
+                });
+
+                pb.value(99);
+
+                setTimeout(function(){
+                    equal(pb.wrapper.find(".k-complete").length, 1);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("k-complete is not added when the progress width is less than or equal to 98%", function() {
+                var progressCompleted = false;
+
+                pb = createProgressbar({
+                    animation: {
+                        duration: 50
+                    },
+                    complete: function(e){
+                        progressCompleted = true;
+                    }
+                });
+
+                pb.value(98);
+
+                setTimeout(function(){
+                    equal(pb.wrapper.find(".k-complete").length, 0);
+                    start();
+                }, 100);
+            });
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Events / Value progressbar", {
+                setup: function() {
+                    moduleSetup();
+                },
+                teardown: function(){
+                    moduleTeardown();
+                }
+            });
+
+
+        </script>
+    </body>
+</html>

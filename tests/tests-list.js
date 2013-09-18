@@ -370,6 +370,7 @@ var tests = [
     "popup/lint.html",
     "progressbar/initialization.html",
     "progressbar/lint.html",
+    "progressbar/progress.html",
     "progressbar/api.html",
     "qrcode/api.html",
     "qrcode/encoding.html",

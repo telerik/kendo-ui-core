@@ -122,6 +122,22 @@
                 equal(pb.options.value, pb.options.max);
             });
 
+            asyncTest("Start event is not fired on initialization when value is more than min", function() {
+                var startFired = false,
+                    pb = new ProgressBar(container, {
+                    min: 10,
+                    max: 100,
+                    value: 30,
+                    start: function(){
+                        startFired = true;
+                    }
+                });
+
+                setTimeout(function() {
+                    ok(!startFired);
+                    start();
+                }, 100);
+            });
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------
             module("Initialization / Regular ProgressBar", {
@@ -196,6 +212,8 @@
                 equal(progressWrapper.length, 1);
                 equal(progressWrapperStatusHolder.length, 1);
             });
+
+            // test("Status holder text is set correctly when ");
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------
             module("Initialization / Chunk ProgressBar", {

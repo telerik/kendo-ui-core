@@ -136,6 +136,145 @@
                 equal(pb.value(), 60);
             });
 
+            asyncTest("Start event is fired when value is changed for the first time (type='value')", function() {
+                var startFired = false;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "value",
+                    start: function(){
+                        startFired = true;
+                    }
+                });
+
+                pb.value(30);
+
+                setTimeout(function(){
+                    ok(startFired);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Start event is not fired when value has already been changed once (type='value')", function() {
+                var startFiredCounter = 0;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "value",
+                    start: function(){
+                        startFiredCounter++;
+                    }
+                });
+
+                pb.value(30);
+                pb.value(50);
+
+                setTimeout(function(){
+                    equal(startFiredCounter, 1);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Start event is fired when value is changed for the first time (type='percent')", function() {
+                var startFired = false;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "percent",
+                    start: function(){
+                        startFired = true;
+                    }
+                });
+
+                pb.value(30);
+
+                setTimeout(function(){
+                    ok(startFired);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Start event is not fired when value has already been changed once (type='percent')", function() {
+                var startFiredCounter = 0;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "percent",
+                    start: function(){
+                        startFiredCounter++;
+                    }
+                });
+
+                pb.value(30);
+                pb.value(50);
+
+                setTimeout(function(){
+                    equal(startFiredCounter, 1);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Start event is fired when value is changed for the first time (type='chunk')", function() {
+                var startFired = false;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "chunk",
+                    start: function(){
+                        startFired = true;
+                    }
+                });
+
+                pb.value(30);
+
+                setTimeout(function(){
+                    ok(startFired);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Start event is not fired when value has already been changed once (type='chunk')", function() {
+                var startFiredCounter = 0;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "chunk",
+                    start: function(){
+                        startFiredCounter++;
+                    }
+                });
+
+                pb.value(30);
+                pb.value(50);
+
+                setTimeout(function(){
+                    equal(startFiredCounter, 1);
+                    start();
+                }, 100);
+            });
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("enable", {
+                setup: function() {
+                    moduleSetup();
+                },
+                teardown: function(){
+                    moduleTeardown();
+                }
+            });
+
             test("enable method renders k-state-disabled class when false is passed", function () {
                 pb = createProgressbar();
 
