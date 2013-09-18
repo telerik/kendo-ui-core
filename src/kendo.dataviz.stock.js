@@ -805,7 +805,7 @@ kendo_module({
             }
 
             tooltip
-                .text(text)
+                .html(text)
                 .css({
                     left: bbox.center().x - tooltip.outerWidth() / 2,
                     top: bbox.y1
