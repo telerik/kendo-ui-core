@@ -3842,14 +3842,7 @@ kendo_module({
         }
     });
 
-    var Easing = {
-
-        easeInOut: function (pos) {
-            return ((-Math.cos(pos * Math.PI) / 2) + 0.5);
-        }
-    }
     var PositionAdapter = kendo.Class.extend({
-
         init: function (layoutState) {
             this.layoutState = layoutState;
             this.diagram = layoutState.diagram;
@@ -3883,118 +3876,6 @@ kendo_module({
                 );
             }
         }
-
-    });
-    /**
-     * An animation ticker driving an adapter which sets a particular
-     * property in function of the tick.
-     * @type {*}
-     */
-    var Ticker = kendo.Class.extend({
-        init: function () {
-            this.adapters = [];
-            this.target = 0;
-            this.tick = 0;
-            this.interval = 20;
-            this.duration = 800;
-            this.lastTime = null;
-            this.handlers = [];
-            var _this = this;
-            this.transition = Easing.easeInOut;
-            this.timerDelegate = function () {
-                _this.onTimerEvent();
-            };
-        },
-        addAdapter: function (a) {
-            this.adapters.push(a);
-        },
-        onComplete: function (handler) {
-            this.handlers.push(handler);
-        },
-        removeHandler: function (handler) {
-            this.handlers = this.handlers.filter(function (h) {
-                return h !== handler;
-            });
-        },
-        trigger: function () {
-            var _this = this;
-            if (this.handlers) {
-                this.handlers.forEach(function (h) {
-                    return h.call(_this.caller != null ? _this.caller : _this);
-                });
-            }
-        },
-        onStep: function () {
-        },
-        seekTo: function (to) {
-            this.seekFromTo(this.tick, to);
-        },
-        seekFromTo: function (from, to) {
-            this.target = Math.max(0, Math.min(1, to));
-            this.tick = Math.max(0, Math.min(1, from));
-            this.lastTime = new Date().getTime();
-            if (!this.intervalId) {
-                this.intervalId = window.setInterval(this.timerDelegate, this.interval);
-            }
-        },
-        stop: function () {
-            if (this.intervalId) {
-                window.clearInterval(this.intervalId);
-                this.intervalId = null;
-
-                //this.trigger.call(this);
-                this.trigger();
-                // this.next();
-            }
-        },
-        play: function (origin) {
-            if (this.adapters.length == 0) {
-                return;
-            }
-            if (origin != null) {
-                this.caller = origin;
-            }
-            this.initState();
-            this.seekFromTo(0, 1);
-        },
-        reverse: function () {
-            this.seekFromTo(1, 0);
-        },
-        initState: function () {
-            if (this.adapters.length == 0) {
-                return;
-            }
-            for (var i = 0; i < this.adapters.length; i++) {
-                this.adapters[i].initState();
-            }
-        },
-        propagate: function () {
-            var value = this.transition(this.tick);
-
-            for (var i = 0; i < this.adapters.length; i++) {
-                this.adapters[i].update(value);
-            }
-        },
-        onTimerEvent: function () {
-            var now = new Date().getTime();
-            var timePassed = now - this.lastTime;
-            this.lastTime = now;
-            var movement = (timePassed / this.duration) * (this.tick < this.target ? 1 : -1);
-            if (Math.abs(movement) >= Math.abs(this.tick - this.target)) {
-                this.tick = this.target;
-            } else {
-                this.tick += movement;
-            }
-
-            try {
-                this.propagate();
-            } finally {
-                this.onStep.call(this);
-                if (this.target == this.tick) {
-                    this.stop();
-                }
-            }
-        }
     });
 
     deepExtend(diagram, {
@@ -4012,8 +3893,6 @@ kendo_module({
         LayeredLayoutType: LayeredLayoutType,
         LayoutBase: LayoutBase,
         LayoutState: LayoutState,
-        Ticker: Ticker,
         PositionAdapter: PositionAdapter
     })
-})
-    (window.kendo.jQuery)
+})(window.kendo.jQuery)

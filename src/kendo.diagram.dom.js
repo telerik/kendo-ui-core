@@ -261,7 +261,7 @@ kendo_module({
                 this.visual.position(point);
 
                 this.shapeVisual.redraw({ width: value.width, height: value.height });
-                this.refresh();
+                //this.refresh(); // it does nothing?
                 this.refreshConnections();
                 this.trigger(BOUNDSCHANGE, this._bounds);
             }
@@ -571,7 +571,7 @@ kendo_module({
                     if (sourceConnector.options.name !== Auto) {
                         var currentSourcePoint = sourceConnector.position(),
                             currentTargetConnector = closestConnector(currentSourcePoint, autoTargetShape);
-                        var dist = currentTargetConnector.position().distanceTo(currentSourcePoint);
+                        var dist = Math.round(currentTargetConnector.position().distanceTo(currentSourcePoint)); // rounding prevents some not needed connectors switching.
                         if (dist < minDist) {
                             minDist = dist;
                             connection._resolvedSourceConnector = sourceConnector;
@@ -1064,9 +1064,9 @@ kendo_module({
         },
         refresh: function () {
             var i;
-            for (i = 0; i < this.shapes.length; i++) {
-                this.shapes[i].refresh();
-            }
+//            for (i = 0; i < this.shapes.length; i++) { // does nothing.
+//                this.shapes[i].refresh();
+//            }
             for (i = 0; i < this.connections.length; i++) {
                 this.connections[i].refresh();
             }
