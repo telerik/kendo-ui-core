@@ -440,25 +440,26 @@ kendo_module({
         start: function (p, meta) {
             var diagram = this.toolService.diagram, connector = this.toolService._hoveredConnector, unit;
             unit = new AddConnectionUnit(diagram.connect(connector._c, p));
-            this.toolService.newConnection = unit.connection;
-            selectSingle(this.toolService.newConnection, meta);
+            this.toolService._connectionManipulation(unit.connection, connector._c.shape, true);
+            this.toolService._removeHover();
+            selectSingle(this.toolService.activeConnection, meta);
             diagram.undoRedoService.begin();
             diagram.undoRedoService.add(unit);
             diagram.undoRedoService.commit();
         },
         move: function (p) {
-            this.toolService.newConnection.targetPoint(p);
+            this.toolService.activeConnection.targetPoint(p);
             return true;
         },
         end: function () {
-            var nc = this.toolService.newConnection, hi = this.toolService.hoveredItem, connector = this.toolService._hoveredConnector;
+            var nc = this.toolService.activeConnection, hi = this.toolService.hoveredItem, connector = this.toolService._hoveredConnector;
             if (connector && connector._c != nc.sourceConnector) {
                 nc.targetPoint(connector._c);
             }
             else if (hi) {
                 nc.targetPoint(hi);
             }
-            this.toolService.newConnection = undefined;
+            this.toolService._connectionManipulation();
         },
         getCursor: function () {
             return Cursors.arrow;
@@ -631,10 +632,7 @@ kendo_module({
                 return true;
             }
             else if (key === 27) {// ESC: stop any action
-                if (this.newConnection) {
-                    diagram.remove(this.newConnection);
-                    this.newConnection = undefined;
-                }
+                this._discardNewConnection();
                 diagram.select(false);
                 diagram.refresh();
                 return true;
@@ -654,6 +652,12 @@ kendo_module({
             diagram.zoom(z, p);
             return true;
         },
+        _discardNewConnection: function () {
+            if (this.newConnection) {
+                this.diagram.remove(this.newConnection);
+                this.newConnection = undefined;
+            }
+        },
         _activateTool: function (meta) {
             for (var i = 0; i < this.tools.length; i++) {
                 var tool = this.tools[i];
@@ -666,9 +670,18 @@ kendo_module({
         _updateCursor: function (p) {
             this.diagram.canvas.native.style.cursor = this.activeTool ? this.activeTool.getCursor(p) : (this.hoveredItem ? this.hoveredItem._getCursor(p) : Cursors.arrow);
         },
+        _connectionManipulation: function (connection, disabledShape, isNew) {
+            this.activeConnection = connection;
+            this.disabledShape = disabledShape;
+            if(isNew){
+                this.newConnection = this.activeConnection;
+            } else{
+                this.newConnection = undefined;
+            }
+        },
         _updateHoveredItem: function (p) {
             var hit = this._hitTest(p);
-            if (hit != this.hoveredItem) {
+            if (hit != this.hoveredItem && (!this.disabledShape || hit != this.disabledShape)) {
                 if (this.hoveredItem) {
                     this.hoveredItem._hover(false);
                 }
@@ -676,6 +689,12 @@ kendo_module({
                 if (this.hoveredItem) {
                     this.hoveredItem._hover(true);
                 }
+            }
+        },
+        _removeHover: function () {
+            if (this.hoveredItem) {
+                this.hoveredItem._hover(false);
+                this.hoveredItem = undefined;
             }
         },
         _hitTest: function (point) {
@@ -741,9 +760,11 @@ kendo_module({
 
     var ConnectionEditAdorner = AdornerBase.extend({
         init: function (connection, options) {
-            var that = this;
+            var that = this, diagram;
             that.connection = connection;
-            AdornerBase.fn.init.call(that, that.connection.diagram, options);
+            diagram = that.connection.diagram;
+            that._ts = diagram.toolService;
+            AdornerBase.fn.init.call(that, diagram, options);
             var sp = that.connection.sourcePoint();
             var tp = that.connection.targetPoint();
             that.spVisual = new Circle(deepExtend(that.options.handles, { center: sp }));
@@ -766,6 +787,18 @@ kendo_module({
             this.startPoint = p;
             this._initialSource = this.connection.source();
             this._initialTarget = this.connection.target();
+            switch (this.handle) {
+                case -1:
+                    if (this.connection.targetConnector) {
+                        this._ts._connectionManipulation(this.connection, this.connection.targetConnector.shape);
+                    }
+                    break;
+                case 1:
+                    if (this.connection.sourceConnector) {
+                        this._ts._connectionManipulation(this.connection, this.connection.sourceConnector.shape);
+                    }
+                    break;
+            }
         },
         move: function (handle, p) {
             switch (handle) {
@@ -810,6 +843,7 @@ kendo_module({
             }
 
             this.handle = undefined;
+            this._ts._connectionManipulation();
             return new ConnectionEditUndoUnit(this.connection, this._initialSource, this._initialTarget);
         },
         _hitTest: function (p) {
