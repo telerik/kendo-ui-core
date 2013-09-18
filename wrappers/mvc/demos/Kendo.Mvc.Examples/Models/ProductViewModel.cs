@@ -21,7 +21,6 @@ namespace Kendo.Mvc.Examples.Models
             set;
         }
 
-        [Required]
         [DisplayName("Unit price")]
         [DataType(DataType.Currency)]
         [Range(0, int.MaxValue)]
@@ -31,7 +30,6 @@ namespace Kendo.Mvc.Examples.Models
             set;
         }
 
-        [Required]
         [DisplayName("Units in stock")]
         [DataType("Integer")]
         [Range(0, int.MaxValue)]

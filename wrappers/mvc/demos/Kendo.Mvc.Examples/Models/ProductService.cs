@@ -45,6 +45,11 @@ namespace Kendo.Mvc.Examples.Models
             entity.Discontinued = product.Discontinued;
             entity.CategoryID = product.CategoryID;
 
+            if (entity.CategoryID == null)
+            {
+                entity.CategoryID = 1;
+            }
+
             if (product.Category != null)
             {
                 entity.CategoryID = product.Category.CategoryID;

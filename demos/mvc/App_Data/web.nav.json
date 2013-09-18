@@ -509,6 +509,11 @@
                     "packages": ["mvc"]
                 },
                 {
+                    "text": "Web API binding",
+                    "url": "grid/webapi.html",
+                    "packages": ["mvc"]
+                },
+                {
                     "text": "Server binding",
                     "url": "grid/serverbinding.html",
                     "packages": ["mvc"]
