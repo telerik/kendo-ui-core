@@ -3801,6 +3801,11 @@ kendo_module({
             },
             notes: {
                 label: {}
+            },
+            highlight: {
+                markers: {
+                    border: {}
+                }
             }
         },
 
@@ -3956,16 +3961,22 @@ kendo_module({
 
         highlightOverlay: function(view, options) {
             var element = this,
-                marker = element.marker;
+                highlight = element.options.highlight,
+                markers = highlight.markers,
+                marker = element.marker,
+                defaultColor = marker.options.border.color;
 
-            options = deepExtend({ data: { modelId: element.options.modelId } }, options);
+            options = deepExtend({ data: { modelId: element.options.modelId } }, options, {
+                fill: markers.color || defaultColor,
+                stroke: markers.border.color,
+                strokeWidth: markers.border.width,
+                strokeOpacity: markers.border.opacity || 0,
+                fillOpacity: markers.opacity || 1,
+                visible: markers.visible,
+                id: null
+            });
 
-            return marker.getViewElements(view, deepExtend(options, {
-                id: null,
-                fill: marker.options.border.color,
-                fillOpacity: 1,
-                strokeOpacity: 0
-            }))[0];
+            return marker.getViewElements(view, options)[0];
         },
 
         tooltipAnchor: function(tooltipWidth, tooltipHeight) {

@@ -1838,8 +1838,10 @@ kendo_module({
             // Make sure that this element will be added in the model map.
             ChartElement.fn.getViewElements.call(this, view);
 
-            if (!options.visible || !marker.hasBox()) {
-                return [];
+            if ((renderOptions || {}).visible !== true) {
+                if (!options.visible || !marker.hasBox())  {
+                    return [];
+                }
             }
 
             elementOptions = deepExtend(marker.elementStyle(), renderOptions);
