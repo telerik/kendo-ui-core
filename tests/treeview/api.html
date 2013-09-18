@@ -985,6 +985,18 @@
                 ok(treeview.find(":checkbox:first").prop("indeterminate"));
             });
 
+            test("destroy demoves datasource handlers", function() {
+                var dataSource = new kendo.data.HierarchicalDataSource();
+
+                createTreeView({ dataSource: dataSource });
+
+                treeviewObject.destroy();
+
+                var changeEvents = dataSource._events.change;
+
+                ok(!changeEvents || !changeEvents.length);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

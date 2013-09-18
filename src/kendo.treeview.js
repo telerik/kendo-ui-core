@@ -484,6 +484,23 @@ kendo_module({
             this.dataSource.fetch();
         },
 
+        _bindDataSource: function() {
+            this._refreshHandler = proxy(this.refresh, this);
+            this._errorHandler = proxy(this._error, this);
+
+            this.dataSource.bind(CHANGE, this._refreshHandler);
+            this.dataSource.bind(ERROR, this._errorHandler);
+        },
+
+        _unbindDataSource: function() {
+            var dataSource = this.dataSource;
+
+            if (dataSource) {
+                dataSource.unbind(CHANGE, this._refreshHandler);
+                dataSource.unbind(ERROR, this._errorHandler);
+            }
+        },
+
         _dataSource: function(silentRead) {
             var that = this,
                 options = that.options,
@@ -501,10 +518,7 @@ kendo_module({
 
             dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
 
-            if (that.dataSource) {
-                that.dataSource.unbind(CHANGE, proxy(that.refresh, that));
-                that.dataSource.unbind(ERROR, proxy(that._error, that));
-            }
+            that._unbindDataSource();
 
             if (!dataSource.fields) {
                 dataSource.fields = [
@@ -523,8 +537,7 @@ kendo_module({
                 recursiveRead(dataSource.view());
             }
 
-            dataSource.bind(CHANGE, proxy(that.refresh, that));
-            dataSource.bind(ERROR, proxy(that._error, that));
+            that._bindDataSource();
         },
 
         events: [
@@ -1519,6 +1532,8 @@ kendo_module({
             Widget.fn.destroy.call(that);
 
             that.element.off(NS);
+
+            that._unbindDataSource();
 
             if (that.dragging) {
                 that.dragging.destroy();
