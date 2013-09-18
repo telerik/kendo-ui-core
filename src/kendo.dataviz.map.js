@@ -44,6 +44,10 @@ kendo_module({
         this.lng = lng;
     };
 
+    Location.fromArray = function(ll) {
+        return new Location(ll[1], ll[0]);
+    }
+
     var WGS84 = {
         a: 6378137,                 // Semi-major radius
         b: 6356752.314245179,       // Semi-minor radius
@@ -170,8 +174,14 @@ kendo_module({
         },
 
         // Location <-> Point (map units, e.g. meters)
-        toPoint: function(loc) {
-            return this._proj.forward(loc);
+        toPoint: function(loc, zoomLevel) {
+            var p = this._proj.forward(loc);
+            var r = this._proj.options.datum.a;
+
+            p.x = (1 + p.x / (PI * r)) / 2;
+            p.y = (1 - p.y / (PI * r)) / 2;
+
+            return p;
         },
 
         toLocation: function(point) {

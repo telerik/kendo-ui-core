@@ -19,8 +19,68 @@
     <body>
         <div id="map"></div>
         <script>
+            var Location = kendo.dataviz.map.Location;
+            var proj = new kendo.dataviz.map.projections.SphericalMercator();
+            var crs = new kendo.dataviz.map.crs.EPSG3857();
+
+            var TILE_SIZE = 256;
+            var zoomLevel = 1;
+            var scale = 256 * Math.pow(2, zoomLevel);
+            var a = 0.5 / Math.PI, b = 0.5, c = -0.5 / Math.PI, d = 0.5;
+
+            var view = new kendo.dataviz.SVGView({ width: scale, height: scale });
+
+            function drawPolygon(coords) {
+                for (var i = 0; i < coords.length; i++) {
+                    var ring = coords[i];
+                    var ringPoints = [];
+
+                    for (var j = 0; j < ring.length; j++) {
+                        var point = ring[j];
+                        var l = Location.fromArray(point);
+                        var p = crs.toPoint(l, zoomLevel);
+
+                        p.multiply(scale);
+
+                        ringPoints.push(p);
+                    }
+
+                    var poly = view.createPolyline(ringPoints, true, {
+                        stroke: "#006ec8",
+                        strokeWidth: 1,
+                        strokeOpacity: 0.5,
+                        fill: "#006ec8",
+                        fillOpacity: 0.2,
+                        align: false
+                    });
+                    view.children.push(poly);
+                }
+            }
+
+            function draw(geometry, props) {
+                var coords = geometry.coordinates;
+                if (geometry.type === "Polygon") {
+                    drawPolygon(coords);
+                } else if (geometry.type === "MultiPolygon") {
+                    for (var i = 0; i < coords.length; i++) {
+                        drawPolygon(coords[i]);
+                    }
+                }
+            }
+
             $.getJSON("countries.geo.json", function(data) {
-                console.log(data);
+                if (data.type == "FeatureCollection") {
+                    var items = data.features;
+
+                    for (var i = 0; i < items.length; i++) {
+                        var feature = items[i];
+                        if (feature.geometry) {
+                            draw(feature.geometry, feature.properties);
+                        }
+                    }
+
+                    view.renderTo($("#map")[0]);
+                }
             });
 
             $("#map").kendoMap({

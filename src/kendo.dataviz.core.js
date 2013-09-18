@@ -136,6 +136,15 @@ kendo_module({
             return point;
         },
 
+        multiply: function(a) {
+            var point = this;
+
+            point.x *= a;
+            point.y *= a;
+
+            return point;
+        },
+
         distanceTo: function(point) {
             var dx = this.x - point.x,
                 dy = this.y - point.y;
