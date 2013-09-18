@@ -182,7 +182,10 @@ kendo_module({
             this.diagram.remove(this.shape);
         }
     });
-
+    /**
+     * Holds the undoredo state when performing a rotation, translation or scaling.
+     * @type {*}
+     */
     var TransformUnit = Class.extend({
         init: function (shape, undoRectangle, redoRectangle) {
             this.shape = shape;
@@ -346,6 +349,10 @@ kendo_module({
         }
     });
 
+    /**
+     * The tool handling the transformations via the adorner.
+     * @type {*}
+     */
     var PointerTool = Class.extend({
         init: function (toolService) {
             this.toolService = toolService;
@@ -556,6 +563,10 @@ kendo_module({
         }
     });
 
+    /**
+     * The service managing the tools.
+     * @type {*}
+     */
     var ToolService = Class.extend({
         init: function (diagram) {
             this.diagram = diagram;

@@ -536,7 +536,7 @@ kendo_module({
             sourcePoint = source;
         }
         else if (source instanceof Connector) {
-            if (source.options.name == Auto) {
+            if (source.options.name === Auto) {
                 autoSourceShape = source.shape;
             }
             else {
@@ -549,7 +549,7 @@ kendo_module({
             targetPoint = target;
         }
         else if (target instanceof Connector) {
-            if (target.options.name == Auto) {
+            if (target.options.name === Auto) {
                 autoTargetShape = target.shape;
             }
             else {
@@ -584,13 +584,13 @@ kendo_module({
     }
 
     function closestConnector(point, shape) {
-        var mindist = MAXINT, resCtr, ctrs = shape.connectors;
+        var minimumDistance = MAXINT, resCtr, ctrs = shape.connectors;
         for (var i = 0; i < ctrs.length; i++) {
             var ctr = ctrs[i];
-            if (ctr.options.name != Auto) {
+            if (ctr.options.name !== Auto) {
                 var dist = point.distanceTo(ctr.position());
-                if (dist < mindist) {
-                    mindist = dist;
+                if (dist < minimumDistance) {
+                    minimumDistance = dist;
                     resCtr = ctr;
                 }
             }
@@ -798,7 +798,7 @@ kendo_module({
                 rect = node.clone();
             }
             if (options.align !== "none" || !viewport.contains(rect.center())) {
-                if (options.align == "none") {
+                if (options.align === "none") {
                     options.align = "center middle";
                 }
                 old = rect.clone();
@@ -1026,22 +1026,25 @@ kendo_module({
                 element = that.element;
 
             for (i in bindings) {
-                field = options[bindings[i]];
-                textField = element.attr(kendo.attr(i + "-field"));
+                if(bindings.hasOwnProperty(i))
+                {
+                    field = options[bindings[i]];
+                    textField = element.attr(kendo.attr(i + "-field"));
 
-                if (!field && textField) {
-                    field = textField;
+                    if (!field && textField) {
+                        field = textField;
+                    }
+
+                    if (!field) {
+                        field = i;
+                    }
+
+                    if (!Utils.isArray(field)) {
+                        field = [field];
+                    }
+
+                    options[bindings[i]] = field;
                 }
-
-                if (!field) {
-                    field = i;
-                }
-
-                if (!Utils.isArray(field)) {
-                    field = [field];
-                }
-
-                options[bindings[i]] = field;
             }
         },
         _adorn: function (adorner, isActive) {
@@ -1084,7 +1087,7 @@ kendo_module({
 
             function addShape(node) {
                 var shape = that.dataMap.first(function (item) {
-                    return item.uid == node.uid;
+                    return item.uid === node.uid;
                 });
                 if (shape) {
                     return shape.shape;
@@ -1114,11 +1117,11 @@ kendo_module({
                 }
             }
 
-            if (action == "add") {
+            if (action === "add") {
                 append(node, items);
-            } else if (action == "remove") {
+            } else if (action === "remove") {
                 //Remove
-            } else if (action == "itemchange") {
+            } else if (action === "itemchange") {
                 if (node) {
                     if (!items.length) {
                         //Update
@@ -1193,7 +1196,7 @@ kendo_module({
          */
         getId: function (id) {
             return this.shapes.first(function (s) {
-                return s.visual.native.id == id;
+                return s.visual.native.id === id;
             });
         }
     });
