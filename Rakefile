@@ -544,7 +544,7 @@ namespace :build do
         clean_task = "#{ARCHIVE_ROOT}/#{destination}"
 
         task clean_task do
-            sh "find #{ARCHIVE_ROOT}/#{destination}/* -mtime +2 -exec rm {} \\;"
+            sh "find #{ARCHIVE_ROOT}/#{destination}/* -maxdepth 0 -type f -mtime +2 -exec rm {} \\;"
         end
 
         zip_bundles.push(clean_task)
