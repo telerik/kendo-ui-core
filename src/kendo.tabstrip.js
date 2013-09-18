@@ -190,6 +190,11 @@ kendo_module({
 
             that.wrapper
                 .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
+                .on("click" + NS, NAVIGATABLEITEMS, function() {
+                    if (that.wrapper[0] !== document.activeElement) {
+                        that.wrapper.focus();
+                    }
+                })
                 .on("keydown" + NS, $.proxy(that._keydown, that))
                 .on("focus" + NS, $.proxy(that._active, that))
                 .on("blur" + NS, function() { that._current(null); });

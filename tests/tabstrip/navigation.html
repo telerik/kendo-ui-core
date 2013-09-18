@@ -248,6 +248,30 @@
 
             tabStripHtml.remove();
         });
+
+        test("TabStrip focuses wrapper on item click", function() {
+            var tabStripHtml = $('<div><ul></ul></div>').appendTo(document.body);
+            var ts = tabStripHtml.kendoTabStrip().data("kendoTabStrip");
+
+            ts.append({
+                encoded: false,
+                content: '<p>Dummy text for tab 1</p>',
+                text: 'Tab 1'
+            });
+
+            ts.append({
+                encoded: false,
+                content: '<p>Dummy text for tab 2</p>',
+                text: 'Tab 2'
+            });
+
+            tabStripHtml.find(".k-item:first").click();
+
+            equal(ts.wrapper[0], document.activeElement);
+
+            ts.destroy();
+            tabStripHtml.remove();
+        });
     </script>
 
     <h1 id="qunit-header">kendo.ui.TabStrip Tests</h1>
