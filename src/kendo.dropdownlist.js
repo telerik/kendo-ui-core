@@ -203,8 +203,13 @@ kendo_module({
             that._hideBusy();
             that._makeUnselectable();
 
-            if (!that._fetch && length /*do set value when no data*/) {
-                that._selectItem();
+            if (!that._fetch) {
+                if (length) {
+                    that._selectItem();
+                } else if (that.text() !== optionLabel) {
+                    that.element.val("");
+                    that.text("");
+                }
             }
 
             that._bound = true;

@@ -852,6 +852,19 @@
 
                 equal(select[0].selectedIndex, 0);
             });
+
+            test("kendoDropDownList clears selected value and text when bind to empty array", function() {
+                var ddl = input.kendoDropDownList({
+                    autoBind: false,
+                    value: "1",
+                    text: "Test1"
+                }).data("kendoDropDownList");
+
+                ddl.dataSource.data([]);
+
+                ok(!ddl.value());
+                ok(!ddl.text());
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
