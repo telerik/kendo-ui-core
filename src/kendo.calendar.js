@@ -597,7 +597,7 @@ kendo_module({
 
             //Safari cannot create correctly date from "1/1/2090"
             value = new DATE(value[0], value[1], value[2]);
-            adjustDST(value);
+            adjustDST(value, 0);
 
             that._view.setDate(currentValue, value);
 
@@ -849,7 +849,7 @@ kendo_module({
                 }
 
                 today = new DATE(today.getFullYear(), today.getMonth(), today.getDate());
-                adjustDST(today);
+                adjustDST(today, 0);
                 today = +today;
 
                 return view({
