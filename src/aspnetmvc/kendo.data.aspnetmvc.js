@@ -96,8 +96,8 @@ kendo_module({
 
             if ($.isPlainObject(value)) {
                 flatten(result, value, key);
-            }
-            else {
+                delete item[member];
+            } else {
                 result[key] = value;
             }
         }
