@@ -319,6 +319,12 @@ kendo_module({
                     url = options.url;
 
                     if (url.indexOf("?") >= 0) {
+                        query = query.replace(/(.*?=.*?)&/g, function(match){
+                            if(url.indexOf(match.substr(0, match.indexOf("="))) >= 0){
+                               return "";
+                            }
+                            return match;
+                        });
                         url += "&" + query;
                     } else {
                         url += "?" + query;
