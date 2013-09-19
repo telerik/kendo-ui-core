@@ -373,7 +373,7 @@ namespace :demos do
         'dist/demos/staging-mvc'
     ] do
         sh 'cp -a dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/* dist/demos/staging-mvc'
-        sh 'cp -a wrappers/mvc/references/mvc4/* dist/demos/staging-mvc/bin'
+        sh 'cp -a dist/binaries/demos/Kendo.Mvc.Examples/bin/* dist/demos/staging-mvc/bin'
     end
 
     task :production_site => [:release,
