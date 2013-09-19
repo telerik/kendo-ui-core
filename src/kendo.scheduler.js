@@ -312,9 +312,13 @@ kendo_module({
                 this.set(field, eventInfo[field]);
             }
 
-            //TODO: Update only if there is startTime option
-            this.set("startTime", toInvariantDate(this.start));
-            this.set("endTime", toInvariantDate(this.end));
+            if (this.startTime) {
+                this.set("startTime", toInvariantDate(this.start));
+            }
+
+            if (this.endTime) {
+                this.set("endTime", toInvariantDate(this.end));
+            }
         },
 
         isMultiDay: function() {
