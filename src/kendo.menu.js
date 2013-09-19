@@ -766,7 +766,7 @@ kendo_module({
                 link[0].click();
             }
 
-            if ((!element.parent().hasClass(MENU) || !options.openOnClick) && !kendo.support.touch) {
+            if ((!element.parent().hasClass(MENU) || (!options.openOnClick && !formNode)) && !kendo.support.touch) {
                 return;
             }
 

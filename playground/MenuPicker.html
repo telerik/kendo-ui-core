@@ -29,6 +29,12 @@
             <li>Forward</li>
             <li>Export
                 <ul>
+                    <li>
+                      <select name="" id="select">
+                        <option value="1">Test Value 1</option>
+                        <option value="2">Test Value 2</option>
+                      </select>
+                    </li>
                     <li>Acrobat (PDF) file</li>
                     <li>CSV (comma delimitted)</li>
                     <li>Excel</li>
@@ -51,7 +57,7 @@
     </div>
     <script>
         $(function () {
-            $('#menuBar').kendoMenu();
+            $('#menuBar').kendoMenu({ closeOnClick: false });
             $('#calendarHere').kendoDatePicker();
         });
     </script>
