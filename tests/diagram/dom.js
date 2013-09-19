@@ -80,7 +80,7 @@ test("Bring into view - rect", function () {
     var rect = new diagram.Rect(0, 0, 400, 400),
         viewport = kdiagram.viewport();
     kdiagram.bringIntoView(rect);
-    var newPan = new Point(Math.floor(viewport.width / 2), Math.floor(viewport.height / 2)).minus(rect.center());
+    var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
     deepEqual(kdiagram.pan(), newPan);
 });
 
@@ -93,7 +93,7 @@ test("Bring into view - shape", function () {
     deepEqual(kdiagram.pan(), new Point(), "Shape is in view. No need to bring anything.");
 
     kdiagram.bringIntoView(s);
-    var newPan = new Point(Math.floor(viewport.width / 2), Math.floor(viewport.height / 2)).minus(rect.center());
+    var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
     deepEqual(kdiagram.pan(), newPan);
 
 });
@@ -105,7 +105,7 @@ test("Bring into view - many shapes", function () {
         viewport = kdiagram.viewport();
 
     kdiagram.bringIntoView([s, s1], {center: true});
-    var newPan = new Point(Math.floor(viewport.width / 2), Math.floor(viewport.height / 2)).minus(rect.center());
+    var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
     deepEqual(kdiagram.pan(), newPan);
 });
 
@@ -117,7 +117,7 @@ test("Bring into view - after zoom", function () {
         viewport = kdiagram.viewport();
 
     kdiagram.bringIntoView([s, s1]);
-    var newPan = new Point(Math.floor(viewport.width / 2), Math.floor(viewport.height / 2)).minus(rect.center());
+    var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
     deepEqual(kdiagram.pan(), newPan);
 });
 
@@ -129,7 +129,7 @@ test("Bring into view - after zoom and pan", function () {
     var rect = s.visualBounds().union(s1.visualBounds()),
         viewport = kdiagram.viewport();
 
-    var newPan = new Point(Math.floor(viewport.width / 2), Math.floor(viewport.height / 2)).minus(rect.center()).plus(kdiagram.pan());
+    var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center()).plus(kdiagram.pan());
     kdiagram.bringIntoView([s, s1]);
     deepEqual(kdiagram.pan(), newPan);
 });
@@ -152,8 +152,8 @@ test("Bring into view - align center bottom", function () {
 
     var newPan = viewport.bottom().minus(rect.bottom()).plus(kdiagram.pan());
     kdiagram.bringIntoView([s], {align: "center bottom"});
-    equal(kdiagram.pan().x, Math.floor(newPan.x));
-    equal(kdiagram.pan().y, Math.floor(newPan.y));
+    equal(kdiagram.pan().x, newPan.x);
+    equal(kdiagram.pan().y, newPan.y);
 });
 
 QUnit.module("event handling", {
