@@ -207,7 +207,7 @@ if PLATFORM =~ /linux|darwin/ && !ENV['USE_MONO']
     # copy pre-built binaries
 
     tree :to => 'wrappers/mvc',
-         :from => 'dist/binaries/**/Kendo.*.dll',
+         :from => 'dist/binaries/**/*.dll',
          :root => 'dist/binaries/'
 
     tree :to => 'wrappers/mvc',
