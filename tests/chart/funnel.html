@@ -389,6 +389,51 @@
                 ], TOLERANCE);
             });
 
+            module("using template", {
+                setup: function() {
+                    createChart({
+                        segmentSpacing : 22,
+                        dependOn:"relation",
+                        labels: {
+                            align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
+                            margin: 5,
+                            template: "My Template #=value#"
+                        },
+                        series: [{
+                            data: [{
+                                value: 7,
+                                category: "A",
+                            }, {
+                                value: 2,
+                                category: "B"
+                            }, {
+                                value: 7,
+                                category: "C"
+                            }]
+                        }]
+                    });
+                }
+            });
+
+            test("First segment position", function() {
+                arrayClose(mapPoints(chart.segments[0].points), [
+                    [89, 0], [711, 0], [488, 243], [311, 243]
+                ], TOLERANCE);
+            });
+
+            test("Second segment position", function() {
+                arrayClose(mapPoints(chart.segments[1].points), [
+                    [311, 265], [488, 265], [711, 334], [89, 334]
+                ], TOLERANCE);
+            });
+
+            test("Third segment position", function() {
+                arrayClose(mapPoints(chart.segments[2].points), [
+                    [89, 356], [711, 356], [711, 600], [89, 600]
+                ], TOLERANCE);
+            });
+
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
