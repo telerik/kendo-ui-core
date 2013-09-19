@@ -396,6 +396,7 @@
                         dependOn:"relation",
                         labels: {
                             align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
+                            color:'red',
                             margin: 5,
                             template: "My Template #=value#"
                         },
@@ -427,6 +428,10 @@
                 var padding = chart.labels[0].options.padding;
                 ok(padding !== null && padding !== undefined);
                 ok($.isEmptyObject(padding));
+            });
+
+            test("sets color for the labels", function() {
+                ok(chart.labels[0].options.color === 'red')
             });
 
             test("First segment position", function() {
