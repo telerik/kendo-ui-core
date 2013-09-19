@@ -301,6 +301,8 @@ kendo_module({
         },
 
         toggle: function(toggle) {
+            toggle = toggle !== undefined ? toggle : !this.popup.visible();
+
             this[toggle ? OPEN : CLOSE]();
         },
 

@@ -395,6 +395,15 @@
                 equal(multiselect.ul.children().length, 0);
             });
 
+            test("MultiSelect toggles popup element", function() {
+                popuplateSelect();
+                var multiselect = new MultiSelect(select);
+
+                multiselect.toggle();
+
+                ok(multiselect.popup.visible());
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
