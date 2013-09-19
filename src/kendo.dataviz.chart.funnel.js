@@ -71,7 +71,6 @@ kendo_module({
             var chart = this;
 
             ChartElement.fn.init.call(chart, options);
-
             chart.plotArea = plotArea;
             chart.segments = [];
             chart.labels = [];

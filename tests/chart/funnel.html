@@ -415,6 +415,20 @@
                 }
             });
 
+            test("sets template options for the labels", function() {
+                ok(chart.labels[0].options.template === "My Template #=value#");
+            });
+
+            test("sets margin options for the labels", function() {
+                ok(chart.labels[0].options.margin === 5);
+            });
+
+            test("sets default options for the labels", function() {
+                var padding = chart.labels[0].options.padding;
+                ok(padding !== null && padding !== undefined);
+                ok($.isEmptyObject(padding));
+            });
+
             test("First segment position", function() {
                 arrayClose(mapPoints(chart.segments[0].points), [
                     [89, 0], [711, 0], [488, 243], [311, 243]
