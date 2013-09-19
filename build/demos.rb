@@ -372,7 +372,7 @@ namespace :demos do
         'bundles:aspnetmvc.commercial',
         'dist/demos/staging-mvc'
     ] do
-        sh 'cp -a dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/* dist/demos/staging-mvc'
+        sh 'cp -a dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/* dist/demos/staging-mvc'
         sh 'cp -a wrappers/mvc/references/mvc4/* dist/demos/staging-mvc/bin'
     end
 
