@@ -6,6 +6,7 @@
         <link href="../styles/web/kendo.default.less" rel="stylesheet/less" type="text/css"/>
         <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
         <script src="../src/jquery.min.js"></script>
+        <script src="../tests/jquery.mockjax.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.fx.js"></script>
         <script src="../src/kendo.data.js"></script>
@@ -35,12 +36,24 @@
             </div>
         </div>
         <script>
+            $.mockjax({
+                url: "AjaxView1.html",
+                responseText: 'Text 1',
+                responseTime: 1000
+            });
+
+            $.mockjax({
+                url: "AjaxView2.html",
+                responseText: 'Text 2',
+                responseTime: 1000
+            });
+
             $(document).ready(function() {
                 $("#tabstrip1").kendoTabStrip({
                     contentUrls: [
                         'AjaxView1.html',
-                        'detailtemplate.html',
-                        'detailtemplate2.html',
+                        'AjaxView2.html',
+                        'AjaxView1.html',
                         'AjaxView2.html',
                         'AjaxView1.html'
                     ]

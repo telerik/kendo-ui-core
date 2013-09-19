@@ -836,9 +836,9 @@ kendo_module({
             // handle content elements
             var contentAnimators = that.contentAnimators;
 
-            if (item.data("in-request")) {
+            if (that.inRequest) {
                 that.xhr.abort();
-                item.removeAttr("data-in-request");
+                that.inRequest = false;
             }
 
             if (contentAnimators.length === 0) {
@@ -970,7 +970,7 @@ kendo_module({
                 }, 100);
 
             url = url || link.data(CONTENTURL) || link.attr(HREF);
-            element.attr("data-in-request", true);
+            that.inRequest = true;
 
             that.xhr = $.ajax({
                 type: "GET",
@@ -986,7 +986,7 @@ kendo_module({
                 },
 
                 complete: function () {
-                    element.removeAttr("data-in-request");
+                    that.inRequest = false;
 
                     clearTimeout(loadingIconTimeout);
                     if (statusIcon !== null) {
