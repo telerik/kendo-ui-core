@@ -250,7 +250,7 @@ else
     end
 
     tree :to => 'dist/binaries/',
-         :from => 'wrappers/mvc/**/Kendo.*.dll',
+         :from => 'wrappers/mvc/**/*.dll',
          :root => 'wrappers/mvc/'
 
     tree :to => 'dist/binaries/',
