@@ -1677,8 +1677,7 @@ kendo_module({
                             item.y2 + that.contentBox.y1
                         ),
                         {
-                            fill: that.options.color,
-                            crispEdges: true
+                            fill: that.options.color
                         }
                     ));
                 }

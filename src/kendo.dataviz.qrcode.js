@@ -1058,7 +1058,6 @@ kendo_module({
                 }
 
                 view.children.push(view.createMultiLine(elements, {
-                        crispEdges: true,
                         fill: that.options.color,
                         stroke: that.options.color, strokeWidth: 0,
                         align: false

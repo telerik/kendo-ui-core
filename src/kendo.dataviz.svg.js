@@ -323,7 +323,6 @@ kendo_module({
                     "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
                     "#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #" +
                     "#= d.renderDashType() # " +
-                    "#= d.renderShapeOptions() # " +
                     "stroke-linecap='#= d.renderLinecap() #' " +
                     "stroke-linejoin='round' " +
                     "fill-opacity='#= d.options.fillOpacity #' " +
@@ -388,10 +387,6 @@ kendo_module({
 
         renderDisplay: function() {
             return this.options.visible ? "block" : "none";
-        },
-
-        renderShapeOptions: function() {
-            return this.options.crispEdges ? "shape-rendering='crispEdges'" : "";
         },
 
         destroy: function() {
