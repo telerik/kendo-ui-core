@@ -717,8 +717,10 @@ kendo_module({
                 return;
             }
 
-            if (!that.options.openOnClick && !touch && !((pointers || msPointers) && e.originalEvent.pointerType == e.originalEvent.MSPOINTER_TYPE_TOUCH) && !contains(e.currentTarget, e.relatedTarget) && hasChildren) {
-                that.close(element);
+            if (!that.options.openOnClick && !touch && !((pointers || msPointers) &&
+                e.originalEvent.pointerType == e.originalEvent.MSPOINTER_TYPE_TOUCH) &&
+                !contains(e.currentTarget, e.relatedTarget || e.target) && hasChildren) {
+                    that.close(element);
             }
         },
 
@@ -766,7 +768,7 @@ kendo_module({
                 link[0].click();
             }
 
-            if ((!element.parent().hasClass(MENU) || (!options.openOnClick && !formNode)) && !kendo.support.touch) {
+            if ((!element.parent().hasClass(MENU) || !options.openOnClick) && !kendo.support.touch) {
                 return;
             }
 
