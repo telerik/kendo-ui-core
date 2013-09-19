@@ -18,6 +18,9 @@
          (function() {
                 var kendo = window.kendo,                       
                     dataviz = kendo.dataviz,
+                    Box = dataviz.Box2D,
+                    DEFAULT_CAPS_WIDTH = 10,
+                    ErrorBar = dataviz.ErrorBar,
                     ErrorRangeCalculator = dataviz.ErrorRangeCalculator,   
                     ErrorRange = dataviz.ErrorRange,                   
                     SCATTER = "scatter", SCATTER_LINE = "scatterLine", BUBBLE = "bubble", 
@@ -450,6 +453,18 @@
                     
                      ok(addedScatterPointErrorBars(points, seriesData, xGetter, yGetter));
                 }); 
+                
+                test("error bars are not added to scatter date axis points", function() {
+                    var scatterChart = new dataviz.ScatterChart({}, {series: [{ type: "scatter", data: [{date: new Date(), y: 1}, {date: new Date(), y : 2}], xField: "date", yField: "y",errorBars: {xValue: 10}}]}), 
+                        seriesData = dataCustomFieldsSeries.data,
+                        points = scatterChart.points,
+                        addedErrorBars = false;
+                     for(var idx = 0; idx < points.length; idx++){
+                        addedErrorBars = addedErrorBars || points[idx].errorBars != undefined;
+                     }
+                    
+                     ok(!addedErrorBars);
+                }); 
 
                 test("scatter axis ranges are updated when using objects with custom fields names", function() {
                     var scatterChart =  new dataviz.ScatterChart({}, {series: [dataCustomFieldsSeries]}), 
@@ -533,6 +548,7 @@
                         idx = 0,                        
                         errorBars,
                         length,
+                        currentIdx,
                         plotValue;
                     for(; seriesIdx < seriesData.length; seriesIdx++){
                          length = seriesData[seriesIdx].length;
@@ -859,8 +875,92 @@
                     methodMocker.restore(ErrorRangeCalculator.fn, "getStandardError");  
                 }); 
                 
-                //scater errorbar not created for date series
+
+                module("error bar", {
+                }); 
                 
+                
+                var defaultOptions = {
+                        endCaps: true,
+                        line: {
+                            color: "red",
+                            width: 1
+                        }
+                    },
+                    CategoricalPlotAreaMock = function(isVertical){
+                    this.getSlot =  function(a, b){
+                        var box;
+                        if(isVertical){
+                           box = new Box(1, a, 1, b);
+                        }
+                        else{
+                            box = new Box(a, 1, b, 1);
+                        }
+                       return box;
+                    }
+                };                
+                
+                test("value axis is found for categorical chart", function() {
+                    var plotArea = new dataviz.CategoricalPlotArea([],{}),
+                        errorbar = new ErrorBar(1,1, true, plotArea, {});
+                    ok(errorbar.getAxis() == plotArea.valueAxis);                                      
+                });
+                
+                test("xAxis is found for horizontal error bar", function() {
+                    var plotArea = new dataviz.XYPlotArea([],{}),
+                        errorbar = new ErrorBar(1,1, false, plotArea, {});
+                    ok(errorbar.getAxis() == plotArea.axisX);                                      
+                });                
+
+                test("yAxis is found for vertical error bar", function() {
+                    var plotArea = new dataviz.XYPlotArea([],{}),
+                        errorbar = new ErrorBar(1,1, true, plotArea, {});
+                    ok(errorbar.getAxis() == plotArea.axisY);                                      
+                });
+
+                test("the caps width is calculated from the box width when it is smaller than the default width for a vertical error bar", function(){
+                    var box = new Box(1,1, 8, 1),
+                        expectedCapsWidth = Math.floor(box.width() / 2),
+                        calculatedCapsWidth = ErrorBar.fn.getCapsWidth(box, true);
+                    equal(calculatedCapsWidth, expectedCapsWidth);
+                });
+                
+                test("the default caps width is used when it is smaller than the box width for a vertical error bar", function(){
+                    var box = new Box(1,1, 23, 1),
+                        expectedCapsWidth = DEFAULT_CAPS_WIDTH,
+                        calculatedCapsWidth = ErrorBar.fn.getCapsWidth(box, true);
+                    equal(calculatedCapsWidth, expectedCapsWidth);
+                });
+                
+
+                test("the caps width is calculated from the box height when it is smaller than the default width for a horizontal error bar", function(){
+                    var box = new Box(1,1, 1, 8),
+                        expectedCapsWidth = Math.floor(box.height() / 2),
+                        calculatedCapsWidth = ErrorBar.fn.getCapsWidth(box, false);
+                    equal(calculatedCapsWidth, expectedCapsWidth);
+                });                
+                
+                test("the default caps width is used when it is smaller than the box height for a horizontal error bar", function(){
+                    var box = new Box(1,1, 1, 23),
+                        expectedCapsWidth = DEFAULT_CAPS_WIDTH,
+                        calculatedCapsWidth = ErrorBar.fn.getCapsWidth(box, false);
+                    equal(calculatedCapsWidth, expectedCapsWidth);
+                });  
+
+                // test("lines are correctly added for a horizontal error bar", function(){
+                    // var plotArea = new CategoricalPlotAreaMock(false),
+                        // targetBox = new Box(1,4,1, 8),
+                        // errorBar = new ErrorBar(1,2, false, plotArea, defaultOptions),
+                        // view = new ViewStub(),
+                        // expectedElements = [],
+                        // elements;
+                        
+                        // errorBar.reflow(targetBox);
+                        // elements = errorBar.getViewElements(view);
+                        
+                        // ok(true);
+                    
+                // });
             })();
 
         </script>

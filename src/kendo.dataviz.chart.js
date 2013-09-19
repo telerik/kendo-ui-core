@@ -5153,33 +5153,37 @@ kendo_module({
                     //chart.addErrorBar(point, fields, seriesIx);  
                     var errorRange,
                         series = fields.series,
-                        errorBars = series.errorBars;
+                        errorBars = series.errorBars;                    
+                    if(isNumber(point.value[X])){                    
+                        if(isNumber(fields[X_ERROR_LOW_FIELD]) && isNumber(fields[X_ERROR_HIGH_FIELD])){
+                            chart.addPointErrorBar(fields[X_ERROR_LOW_FIELD],
+                                fields[X_ERROR_HIGH_FIELD], point, X, series, errorBars);
+                        }
+                        
+                        if(errorBars && defined(errorBars.xValue)){
+                            chart.xSeriesErrorRanges = chart.xSeriesErrorRanges || [];
+                            chart.xSeriesErrorRanges[seriesIx] = chart.xSeriesErrorRanges[seriesIx] ||
+                                new ErrorRangeCalculator(errorBars.xValue, series, X);
 
-                    if(isNumber(fields[X_ERROR_LOW_FIELD]) && isNumber(fields[X_ERROR_HIGH_FIELD])){
-                        chart.addPointErrorBar(fields[X_ERROR_LOW_FIELD],
-                            fields[X_ERROR_HIGH_FIELD], point, X, series, errorBars);
-                    }
+                            errorRange = chart.xSeriesErrorRanges[seriesIx].getErrorRange(x, value, series.data);
+                            chart.addPointErrorBar(errorRange.low, errorRange.high, point, X, series, errorBars);
+                        }
+                    }                   
+                    
+                    if(isNumber(point.value[Y])){      
+                        if(isNumber(fields[Y_ERROR_LOW_FIELD]) && isNumber(fields[Y_ERROR_HIGH_FIELD])){
+                            chart.addPointErrorBar(fields[Y_ERROR_LOW_FIELD],
+                                fields[Y_ERROR_HIGH_FIELD], point, Y, series,errorBars);
+                        }
+                        
+                        if(errorBars && defined(errorBars.yValue)){
+                            chart.ySeriesErrorRanges = chart.ySeriesErrorRanges || [];
+                            chart.ySeriesErrorRanges[seriesIx] = chart.ySeriesErrorRanges[seriesIx] ||
+                                new ErrorRangeCalculator(errorBars.yValue, series, Y);
 
-                    if(isNumber(fields[Y_ERROR_LOW_FIELD]) && isNumber(fields[Y_ERROR_HIGH_FIELD])){
-                        chart.addPointErrorBar(fields[Y_ERROR_LOW_FIELD],
-                            fields[Y_ERROR_HIGH_FIELD], point, Y, series,errorBars);
-                    }
-
-                    if(errorBars && defined(errorBars.xValue)){
-                        chart.xSeriesErrorRanges = chart.xSeriesErrorRanges || [];
-                        chart.xSeriesErrorRanges[seriesIx] = chart.xSeriesErrorRanges[seriesIx] ||
-                            new ErrorRangeCalculator(errorBars.xValue, series, X);
-
-                        errorRange = chart.xSeriesErrorRanges[seriesIx].getErrorRange(x, value, series.data);
-                        chart.addPointErrorBar(errorRange.low, errorRange.high, point, X, series, errorBars);
-                    }
-                    if(errorBars && defined(errorBars.yValue)){
-                        chart.ySeriesErrorRanges = chart.ySeriesErrorRanges || [];
-                        chart.ySeriesErrorRanges[seriesIx] = chart.ySeriesErrorRanges[seriesIx] ||
-                            new ErrorRangeCalculator(errorBars.yValue, series, Y);
-
-                        errorRange = chart.ySeriesErrorRanges[seriesIx].getErrorRange(y, value, series.data);
-                        chart.addPointErrorBar(errorRange.low, errorRange.high, point, Y, series, errorBars);
+                            errorRange = chart.ySeriesErrorRanges[seriesIx].getErrorRange(y, value, series.data);
+                            chart.addPointErrorBar(errorRange.low, errorRange.high, point, Y, series, errorBars);
+                        }                        
                     }                    
                 }
             }
@@ -11221,6 +11225,7 @@ kendo_module({
         DonutChart: DonutChart,
         DonutPlotArea: DonutPlotArea,
         DonutSegment: DonutSegment,
+        ErrorBar: ErrorBar,
         ErrorRange: ErrorRange,
         ErrorRangeCalculator: ErrorRangeCalculator,
         Highlight: Highlight,
