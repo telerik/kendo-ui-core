@@ -82,6 +82,7 @@ kendo_module({
         BLACK = "#000",
         BOTH = "both",
         BOTTOM = "bottom",
+        BOX_PLOT = "boxPlot",
         BUBBLE = "bubble",
         BULLET = "bullet",
         CANDLESTICK = "candlestick",
@@ -197,7 +198,7 @@ kendo_module({
             SECONDS, MINUTES, HOURS, DAYS, WEEKS, MONTHS, YEARS
         ],
         EQUALLY_SPACED_SERIES = [
-            BAR, COLUMN, OHLC, CANDLESTICK, BULLET
+            BAR, COLUMN, OHLC, CANDLESTICK, BOX_PLOT, BULLET
         ];
 
     var DateLabelFormats = {
@@ -716,7 +717,7 @@ kendo_module({
                     originalEvent: e
                 });
 
-                if(prevented) {
+                if (prevented) {
                     chart._userEvents.cancel();
                 } else {
                     chart._suppressHover = true;
@@ -4365,6 +4366,7 @@ kendo_module({
                 });
 
             group.children = elements;
+
             return [group];
         }
     });
@@ -5207,9 +5209,8 @@ kendo_module({
                 valueParts = this.splitValue(value),
                 hasValue = areNumbers(valueParts),
                 categoryPoints = chart.categoryPoints[categoryIx],
-                point,
-                cluster,
-                dataItem = series.data[categoryIx];
+                dataItem = series.data[categoryIx],
+                point, cluster;
 
             if (!categoryPoints) {
                 chart.categoryPoints[categoryIx] = categoryPoints = [];
@@ -5402,7 +5403,7 @@ kendo_module({
                 value = data.valueFields,
                 children = chart.children,
                 pointColor = data.fields.color || series.color,
-                valueParts = this.splitValue(value),
+                valueParts = chart.splitValue(value),
                 hasValue = areNumbers(valueParts),
                 categoryPoints = chart.categoryPoints[categoryIx],
                 dataItem = series.data[categoryIx],
@@ -5451,20 +5452,58 @@ kendo_module({
         },
 
         splitValue: function(value) {
-            return [ value.min, value.lower, value.middle, value.upper, value.max ];
+            return [
+                value.min, value.q25, value.median,
+                value.q75, value.max
+            ];
+        },
+
+        updateRange: function(value, categoryIx, series) {
+            var chart = this,
+                axisName = series.axis,
+                axisRange = chart.valueAxisRanges[axisName],
+                parts = chart.splitValue(value).concat(
+                    chart.filterOutliers(value.outliers));
+
+            if (defined(value.mean)) {
+                parts = parts.concat(value.mean);
+            }
+
+            axisRange = chart.valueAxisRanges[axisName] =
+                axisRange || { min: MAX_VALUE, max: MIN_VALUE };
+
+            axisRange = chart.valueAxisRanges[axisName] = {
+                min: math.min.apply(math, parts.concat([axisRange.min])),
+                max: math.max.apply(math, parts.concat([axisRange.max]))
+            };
         },
 
         formatPointValue: function(point, format) {
             var value = point.value;
 
             return autoFormat(format,
-                value.min, value.lower, value.middle,
-                value.upper, value.max, point.category
+                value.min, value.q25, value.median,
+                value.q75, value.max, point.category, value.mean
             );
+        },
+
+        filterOutliers: function(items) {
+            var length = (items || []).length,
+                result = [],
+                i, item;
+
+            for (i = 0; i < length; i++) {
+                item = items[i];
+                if (defined(item)) {
+                    appendIfNotNull(result, items);
+                }
+            }
+
+            return result;
         }
     });
 
-    var Boxplot = ChartElement.extend({
+    var BoxPlot = Candlestick.extend({
         init: function(value, options) {
             var point = this;
 
@@ -5488,11 +5527,13 @@ kendo_module({
             },
             tooltip: {
                 format: "<table style='text-align: left;'>" +
-                        "<th colspan='2'>{4:d}</th>" +
-                        "<tr><td>Open:</td><td>{0:C}</td></tr>" +
-                        "<tr><td>High:</td><td>{1:C}</td></tr>" +
-                        "<tr><td>Low:</td><td>{2:C}</td></tr>" +
-                        "<tr><td>Close:</td><td>{3:C}</td></tr>" +
+                        "<th colspan='2'>{6:d}</th>" +
+                        "<tr><td>Min:</td><td>{0:C}</td></tr>" +
+                        "<tr><td>Q25:</td><td>{1:C}</td></tr>" +
+                        "<tr><td>Median:</td><td>{2:C}</td></tr>" +
+                        "<tr><td>Mean:</td><td>{3:C}</td></tr>" +
+                        "<tr><td>Q75:</td><td>{4:C}</td></tr>" +
+                        "<tr><td>Max:</td><td>{5:C}</td></tr>" +
                         "</table>"
             },
             highlight: {
@@ -5518,96 +5559,43 @@ kendo_module({
                 chart = point.owner,
                 value = point.value,
                 valueAxis = chart.seriesValueAxis(options),
-                points = [], mid, ocSlot, lhSlot;
+                points = [], mid, whiskerSlot, barSlot, medianSlot, meanSlot;
 
-            ocSlot = valueAxis.getSlot(value.open, value.close);
-            lhSlot = valueAxis.getSlot(value.low, value.high);
+            boxSlot = valueAxis.getSlot(value.q25, value.q75);
+            point.boxSlot = boxSlot;
 
-            ocSlot.x1 = lhSlot.x1 = box.x1;
-            ocSlot.x2 = lhSlot.x2 = box.x2;
+            whiskerSlot = valueAxis.getSlot(value.min, value.max);
+            medianSlot = valueAxis.getSlot(value.median);
 
-            point.realBody = ocSlot;
+            boxSlot.x1 = whiskerSlot.x1 = box.x1;
+            boxSlot.x2 = whiskerSlot.x2 = box.x2;
 
-            mid = lhSlot.center().x;
-            points.push([ Point2D(mid, lhSlot.y1), Point2D(mid, ocSlot.y1) ]);
-            points.push([ Point2D(mid, ocSlot.y2), Point2D(mid, lhSlot.y2) ]);
+            if (value.mean) {
+                meanSlot = valueAxis.getSlot(value.mean);
+                point.meanPoints = [ Point2D(box.x1, meanSlot.y1), Point2D(box.x2, meanSlot.y1) ];
+            }
 
-            point.lowHighLinePoints = points;
+            mid = whiskerSlot.center().x;
+            points.push([ Point2D(mid, whiskerSlot.y1), Point2D(mid, boxSlot.y1) ]);
+            points.push([ Point2D(mid, boxSlot.y2), Point2D(mid, whiskerSlot.y2) ]);
 
-            point.box = lhSlot.clone().wrap(ocSlot);
+            point.whiskerPoints = points;
+
+            point.medianPoints = [ Point2D(box.x1, medianSlot.y1), Point2D(box.x2, medianSlot.y1) ];
+
+            point.box = whiskerSlot.clone().wrap(boxSlot);
 
             point.reflowNote();
         },
 
-        reflowNote: function() {
-            var point = this;
-
-            if (point.note) {
-                point.note.reflow(point.box);
-            }
-        },
-
-        createNote: function() {
-            var point = this,
-                options = point.options.notes,
-                text = options.label.text,
-                noteTemplate;
-
-            if (options.visible && defined(text) && text !== null) {
-                if (options.label.template) {
-                    noteTemplate = template(options.label.template);
-                    text = noteTemplate({
-                        dataItem: point.dataItem,
-                        category: point.category,
-                        value: point.value,
-                        series: point.series
-                    });
-                } else if (options.label.format) {
-                    text = autoFormat(options.label.format, text);
-                }
-
-                point.note = new Note(deepExtend({}, options, { label: { text: text }}));
-                point.append(point.note);
-            }
-        },
-
         getViewElements: function(view) {
             var point = this,
-                options = point.options,
-                elements = [],
-                border = options.border.width > 0 ? {
-                    stroke: point.getBorderColor(),
-                    strokeWidth: options.border.width,
-                    dashType: options.border.dashType,
-                    strokeOpacity: valueOrDefault(options.border.opacity, options.opacity)
-                } : {},
-                rectStyle = deepExtend({
-                    fill: options.color,
-                    fillOpacity: options.opacity
-                }, border),
-                lineStyle = {
-                    strokeOpacity: valueOrDefault(options.line.opacity, options.opacity),
-                    strokeWidth: options.line.width,
-                    stroke: options.line.color || options.color,
-                    dashType: options.line.dashType,
-                    strokeLineCap: "butt"
-                },
                 group = view.createGroup({
                     animation: {
                         type: CLIP
                     }
-                });
-
-            if (options.overlay) {
-                rectStyle.overlay = deepExtend({
-                    rotation: 0
-                }, options.overlay);
-            }
-
-            elements.push(view.createRect(point.realBody, rectStyle));
-            elements.push(view.createPolyline(point.lowHighLinePoints[0], false, lineStyle));
-            elements.push(view.createPolyline(point.lowHighLinePoints[1], false, lineStyle));
-            elements.push(point.createOverlayRect(view, options));
+                }),
+                elements = point.render(view, point.options);
 
             append(elements,
                 ChartElement.fn.getViewElements.call(point, view)
@@ -5618,69 +5606,79 @@ kendo_module({
             return [group];
         },
 
-        getBorderColor: function() {
+        render: function(view, options) {
             var point = this,
-                options = point.options,
-                border = options.border,
-                borderColor = border.color;
+                data = { data: { modelId: point.options.modelId } },
+                elements = [],
+                border = options.border.width > 0 ? {
+                    stroke: point.getBorderColor(),
+                    strokeWidth: options.border.width,
+                    dashType: options.border.dashType,
+                    strokeOpacity: valueOrDefault(options.border.opacity, options.opacity)
+                } : {},
+                rectStyle = deepExtend({
+                    fill: options.color,
+                    fillOpacity: options.opacity,
+                    data: data
+                }, border),
+                lineStyle = {
+                    strokeOpacity: valueOrDefault(options.line.opacity, options.opacity),
+                    strokeWidth: options.line.width,
+                    stroke: options.line.color || options.color,
+                    dashType: options.line.dashType,
+                    strokeLineCap: "butt",
+                    data: data
+                },
+                meanLineStyle = {
+                    strokeOpacity: valueOrDefault(options.mean.opacity, options.opacity),
+                    strokeWidth: options.mean.width,
+                    stroke: options.mean.color || options.color,
+                    dashType: options.mean.dashType,
+                    strokeLineCap: "butt",
+                    data: data
+                },
+                medianLineStyle = {
+                    strokeOpacity: valueOrDefault(options.median.opacity, options.opacity),
+                    strokeWidth: options.median.width,
+                    stroke: options.median.color || options.color,
+                    dashType: options.median.dashType,
+                    strokeLineCap: "butt",
+                    data: data
+                };
 
-            if (!defined(borderColor)) {
-                borderColor =
-                    new Color(options.color).brightness(border._brightness).toHex();
+            if (options.overlay) {
+                rectStyle.overlay = deepExtend({
+                    rotation: 0
+                }, options.overlay);
             }
 
-            return borderColor;
-        },
+            elements.push(view.createRect(point.boxSlot, rectStyle));
+            elements.push(view.createPolyline(point.whiskerPoints[0], false, lineStyle));
+            elements.push(view.createPolyline(point.whiskerPoints[1], false, lineStyle));
+            elements.push(view.createPolyline(point.medianPoints, false, medianLineStyle));
+            if (point.meanPoints) {
+                elements.push(view.createPolyline(point.meanPoints, false, meanLineStyle));
+            }
+            elements.push(point.createOverlayRect(view, options));
 
-        createOverlayRect: function(view, options) {
-            return view.createRect(this.box, {
-                data: { modelId: options.modelId },
-                fill: "#fff",
-                fillOpacity: 0
-            });
+            return elements;
         },
 
         highlightOverlay: function(view, options) {
             var point = this,
-                pointOptions = point.options,
-                highlight = pointOptions.highlight,
-                border = highlight.border,
-                borderColor = point.getBorderColor(),
-                line = highlight.line,
-                data = { data: { modelId: pointOptions.modelId } },
-                rectStyle = deepExtend({}, data, options, {
-                    stroke: borderColor,
-                    strokeOpacity: border.opacity,
-                    strokeWidth: border.width
-                }),
-                lineStyle = deepExtend({}, data, {
-                    stroke: line.color || borderColor,
-                    strokeWidth: line.width,
-                    strokeOpacity: line.opacity,
-                    strokeLineCap: "butt"
-                }),
                 group = view.createGroup();
 
-            group.children.push(view.createRect(point.realBody, rectStyle));
-            group.children.push(view.createPolyline(point.lowHighLinePoints[0], false, lineStyle));
-            group.children.push(view.createPolyline(point.lowHighLinePoints[1], false, lineStyle));
+            group.children = point.render(view, deepExtend({},
+                point.options.highlight, {
+                border: {
+                    color: point.getBorderColor()
+                }
+            }));
 
             return group;
-        },
-
-        tooltipAnchor: function() {
-            var point = this,
-                box = point.box;
-
-            return new Point2D(box.x2 + TOOLTIP_OFFSET, box.y1 + TOOLTIP_OFFSET);
-        },
-
-        formatValue: function(format) {
-            var point = this;
-            return point.owner.formatPointValue(point, format);
         }
     });
-    deepExtend(Candlestick.fn, PointEventsMixin);
+    deepExtend(BoxPlot.fn, PointEventsMixin);
 
     // TODO: Rename to Segment?
     var PieSegment = ChartElement.extend({
@@ -7549,6 +7547,11 @@ kendo_module({
                     pane
                 );
 
+                plotArea.createBoxPlotChart(
+                    filterSeriesByType(filteredSeries, BOX_PLOT),
+                    pane
+                );
+
                 plotArea.createOHLCChart(
                     filterSeriesByType(filteredSeries, OHLC),
                     pane
@@ -7770,6 +7773,23 @@ kendo_module({
             var plotArea = this,
                 firstSeries = series[0],
                 chart = new CandlestickChart(plotArea, {
+                    invertAxes: plotArea.invertAxes,
+                    gap: firstSeries.gap,
+                    series: series,
+                    spacing: firstSeries.spacing
+                });
+
+            plotArea.appendChart(chart, pane);
+        },
+
+        createBoxPlotChart: function(series, pane) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                firstSeries = series[0],
+                chart = new BoxPlotChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
                     gap: firstSeries.gap,
                     series: series,
@@ -9821,6 +9841,7 @@ kendo_module({
         delete seriesDefaults.bubble;
         delete seriesDefaults.candlestick;
         delete seriesDefaults.ohlc;
+        delete seriesDefaults.boxPlot;
         delete seriesDefaults.bullet;
         delete seriesDefaults.verticalBullet;
         delete seriesDefaults.polarArea;
@@ -10431,7 +10452,7 @@ kendo_module({
 
     PlotAreaFactory.current.register(CategoricalPlotArea, [
         BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA,
-        CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET
+        CANDLESTICK, OHLC, BULLET, VERTICAL_BULLET, BOX_PLOT
     ]);
 
     PlotAreaFactory.current.register(XYPlotArea, [
@@ -10469,6 +10490,17 @@ kendo_module({
         [CANDLESTICK, OHLC],
         { open: "max", high: "max", low: "min", close: "max",
           color: "first", downColor: "first", noteText: "first" }
+    );
+
+    SeriesBinder.current.register(
+        [BOX_PLOT],
+        ["min", "q25", "median", "q75", "max", "mean"], [CATEGORY, COLOR, NOTE_TEXT]
+    );
+
+    DefaultAggregates.current.register(
+        [BOX_PLOT],
+        { min: "max", q25: "max", median: "max", q75: "max", max: "max", mean: "max",
+          color: "first", noteText: "first" }
     );
 
     SeriesBinder.current.register(

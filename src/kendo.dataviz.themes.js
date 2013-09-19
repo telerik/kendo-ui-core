@@ -183,6 +183,42 @@ kendo_module({
                         color: "#ff0000"
                     }
                 },
+                boxPlot: {
+                    whiskers: {
+                        width: 1,
+                        color: BLACK
+                    },
+                    mean: {
+                        width: 1,
+                        color: BLACK
+                    },
+                    median: {
+                        width: 1,
+                        color: BLACK
+                    },
+                    border: {
+                        width: 1,
+                        _brightness: 0.8
+                    },
+                    gap: 1,
+                    spacing: 0.3,
+                    downColor: WHITE,
+                    highlight: {
+                        whiskers: {
+                            width: 2
+                        },
+                        mean: {
+                            width: 2
+                        },
+                        median: {
+                            width: 2
+                        },
+                        border: {
+                            width: 2,
+                            opacity: 1
+                        }
+                    }
+                },
                 notes: {
                     icon: {
                         size: 7,
