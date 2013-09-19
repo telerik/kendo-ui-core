@@ -719,11 +719,6 @@
                     ok(path.render().indexOf("data-test-id='1'") > -1);
                 });
 
-                test("renders shape-rendering attribute", function() {
-                    path.options = { crispEdges: true };
-                    ok(path.render().indexOf("shape-rendering='crispEdges'") > -1);
-                });
-
                 test("clone returns different instance", function() {
                     notEqual(path.clone(), path);
                 });
