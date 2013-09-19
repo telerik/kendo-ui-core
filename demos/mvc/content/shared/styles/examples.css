@@ -55,7 +55,7 @@ h3>a,
 html
 {
     overflow-y:scroll;
-    font: 75% Arial,Helvetica,sans-serif;
+    font: 50% Arial,Helvetica,sans-serif;
 }
 
 #header, .suite-demos-nav, .demos-nav,

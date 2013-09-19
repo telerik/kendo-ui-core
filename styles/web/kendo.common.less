@@ -713,7 +713,7 @@ div.k-window-content
     display: inline-block;
     width: 16px;
     height: 16px;
-    padding: 0.16666em;
+    padding: 2px;
     text-decoration: none;
     vertical-align: middle;
     filter: alpha(opacity=70);
@@ -724,7 +724,7 @@ div.k-window-content
 {
     border-style: solid;
     border-width: 1px;
-    padding: 0.08333em;
+    padding:1px;
     filter: alpha(opacity=100);
     opacity: 1;
 }
@@ -1419,7 +1419,7 @@ div.k-grid-header .k-header
 
 .k-pager-numbers
 {
-    margin:0 0.167em;
+    margin:0 0.16666em;
 }
 
 .k-pager-numbers .k-state-selected
@@ -1453,12 +1453,14 @@ div.k-grid-header .k-header
 .k-pager-wrap>.k-link
 {
     float:left;
-    margin:0 1px;
-    padding: 0 3px;
+    margin:0 0.08333em;
+    //padding: 0 0.25em 0 0.25em;
     height: 1.8333em;/*IE7*/
     line-height: 1.8333em;/*IE7*/
+	width: 1.8333em;
     .border-radius(1.0833em);
     cursor:pointer;
+	text-align: center;
 }
 
 .k-pager-wrap>a.k-state-disabled:hover
@@ -1469,8 +1471,9 @@ div.k-grid-header .k-header
 
 .k-pager-wrap>.k-link .k-icon
 {
-    vertical-align:top;
-    margin-top:3px;
+    //vertical-align:top;
+    //margin-top:3px;
+	
 }
 
 .k-pager-numbers .k-link
@@ -1483,14 +1486,14 @@ div.k-grid-header .k-header
 {
     padding: 0 0.5833em;
     border-style:solid;
-    border-width:1px;
+    border-width:0.08333em;
     line-height:1.8333em;
 }
 
 .k-pager-wrap>.k-link
 {
     border-style:solid;
-    border-width:1px;
+    border-width:0.08333em;
 }
 
 .k-pager-wrap .k-pager-refresh
@@ -1504,7 +1507,7 @@ div.k-grid-header .k-header
 .k-pager-numbers .k-state-selected
 {
     border-style:solid;
-    border-width:1px;
+    border-width:0.08333em;
     line-height:1.8333em;
     padding:0 0.5833em;
     .border-radius(1.0833em);
@@ -2657,8 +2660,8 @@ div.k-treeview
 
 .k-treeview .k-in
 {
-    margin: 1px 0 1px 2px;
-    padding: 2px 4px 2px 3px;
+    margin: 0.08333em 0 0.08333em 0.16666em;
+    padding: 0.16666em 0.3333em 0.16666em 0.25em;
     line-height: 1.3333em;
     text-decoration: none;
 }
@@ -2673,8 +2676,8 @@ div.k-treeview
 .k-treeview .k-in.k-state-focused
 {
     border-style: solid;
-    border-width: 1px;
-    padding: 1px 3px 1px 2px;
+    border-width: 0.08333em;
+    padding: 0.08333em 0.25em 0.08333em 0.16666em;
 }
 
 .k-treeview .k-drop-hint
