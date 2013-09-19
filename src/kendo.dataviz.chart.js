@@ -3484,12 +3484,6 @@ kendo_module({
                     stackPoint = lastValue(chart.categoryPoints[categoryIx]),
                     plotValue = 0;
 
-                if (stackPoint) {
-                    plotValue = stackPoint.testPlotValue;
-                }
-
-                point.testPlotValue = value + plotValue;
-
                 if (stackWrap.children.length === 0) {
                     positiveStack = new stackType({
                         vertical: !options.invertAxes

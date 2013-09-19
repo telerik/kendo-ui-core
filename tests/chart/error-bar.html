@@ -32,13 +32,30 @@
                         valueGetter: valueGetter
                     }, ErrorRangeCalculator.fn);
                   
-
+                  
+                function MethodMocker(){                    
+                    this._original = {};
+                }
+                
+                MethodMocker.prototype = {
+                    mock: function(fn, fnName, callback){
+                        var that = this;
+                        that._original[fnName] = fn[fnName];
+                        fn[fnName] = function(){                            
+                            callback.apply(this, arguments);
+                            return that._original[fnName].apply(this, arguments);
+                        };
+                    },
+                    restore: function(fn,fnName){
+                        fn[fnName] = this._original[fnName];
+                    }
+                };
+                var methodMocker = new MethodMocker();
                 // ------------------------------------------------------------
                 
                 module("ErrorRangeCalculator / value getter / XY chart ", {
                 });
-                
-                    
+                                    
                 test("correct value getter is created for array xField when using XY chart", function() {
                     var value = 1,
                         item = [value, 2],
@@ -186,7 +203,7 @@
                     calculatedAverageWithZeros = mockErrorRangeCalculator.getAverage(testDataWidthZeros);
                     equal(calculatedAverage, expectedAverage, "average value");
                     equal(calculatedAverageWithZeros, expectedAverageWithZeros, "average value with zeros");                  
-                });                 
+                }); 
                 
                 test("correct sample standard deviation is calculated", function() {
                     var calculatedSampleSD,
@@ -288,7 +305,22 @@
                         errorRangeCalculator = new ErrorRangeCalculator(customRange, testSeries, "value");
                    
                     ok(correctErrorRanges(errorRangeCalculator, testDataWidthZeros, expectedRanges));                 
-                });                 
+                }); 
+
+                test("standard deviation is calculated only once", function() {
+                    var calls = 0,
+                        errorRangeCalculator;
+                        methodMocker.mock(ErrorRangeCalculator.fn, "getStandardDeviation", function(){                            
+                            calls++;
+                        });
+                        
+                    errorRangeCalculator = new ErrorRangeCalculator("stddev", testSeries, "value");
+                    for(var idx = 0; idx < testSeries.data.length; idx++){                        
+                        errorRangeCalculator.getErrorRange(testSeries.data[idx].value, testSeries.data[idx], testSeries.data);
+                    }
+                    equal(calls, 1); 
+                    methodMocker.restore(ErrorRangeCalculator.fn, "getStandardDeviation");                                        
+                });                
                
                 test("correct error ranges with basic standard deviation", function() {
                     var expectedSD = 4.049691346263317,
@@ -307,7 +339,22 @@
                    
                     ok(correctErrorRanges(errorRangeCalculator, testDataWidthZeros, expectedRanges));                 
                 }); 
-                                
+
+                test("standard error is calculated only once", function() {
+                    var calls = 0,
+                        errorRangeCalculator;
+                        methodMocker.mock(ErrorRangeCalculator.fn, "getStandardError", function(){                            
+                            calls++;
+                        });
+                        
+                    errorRangeCalculator = new ErrorRangeCalculator("stderr", testSeries, "value");
+                    for(var idx = 0; idx < testSeries.data.length; idx++){                        
+                        errorRangeCalculator.getErrorRange(testSeries.data[idx].value, testSeries.data[idx], testSeries.data);
+                    }
+                    equal(calls, 1); 
+                    methodMocker.restore(ErrorRangeCalculator.fn, "getStandardError");                                        
+                }); 
+                
                 test("correct error ranges with standard error", function() {
                     var expectedSE = 2.024845673131659,                        
                         expectedRanges = [new ErrorRange(1 - expectedSE, 1 + expectedSE), new ErrorRange(10 - expectedSE, 10 + expectedSE),
@@ -428,8 +475,7 @@
                     categoricalArrayData = [1,2,3],
                     categoricalNegativeArrayData = [-1, -2 , -3],
                     categoricalMixedArrayData = [-1,-3, 1],
-                    errorBars = {value: errorValue};
-                   
+                    errorBars = {value: errorValue};                  
 
                 function createCategoricalSeries(seriesData, type){
                     var idx,
@@ -480,7 +526,64 @@
                         }
                     }
                     return true;
-                }  
+                } 
+
+                function addedStackedLinePointErrorBar(points, seriesData){
+                    var seriesIdx = 0,
+                        idx = 0,                        
+                        errorBars,
+                        length,
+                        plotValue;
+                    for(; seriesIdx < seriesData.length; seriesIdx++){
+                         length = seriesData[seriesIdx].length;
+                         currentIdx = idx;
+                         for(;idx < length + currentIdx; idx++){
+                            plotValue = points[idx].plotValue;
+                            if(!(errorBars = points[idx].errorBars) || !errorBars[0] || 
+                                errorBars[0].low != (plotValue - errorValue) || errorBars[0].high != (plotValue + errorValue) ||                            
+                                errorBars[0].isVertical !== true){
+                                return false;
+                            }
+                        }                                               
+                    }
+                    
+                    return true;
+                }
+
+                function addedStackedBarPointErrorBar(points, seriesData){
+                    var seriesIdx = 0,                          
+                        idx = 0,        
+                        categoryIdx,
+                        errorBars,
+                        seriesCount = seriesData.length,
+                        positiveTotals = [],
+                        negativeTotals = [],
+                        value,
+                        plotValue;
+                    for(; seriesIdx < seriesCount; seriesIdx++){
+                         currentIdx = idx;
+                         for(;idx < seriesCount + currentIdx; idx++){
+                            value = points[idx].value;
+                            categoryIdx = Math.floor(idx / seriesCount);
+                            if(value > 0){
+                               positiveTotals[categoryIdx] = (positiveTotals[categoryIdx] || 0) + value;
+                               plotValue =  positiveTotals[categoryIdx];
+                            }
+                            else{
+                               negativeTotals[categoryIdx] = (negativeTotals[categoryIdx] || 0) + value;
+                               plotValue =  negativeTotals[categoryIdx];
+                            }
+                            
+                            if(!(errorBars = points[idx].errorBars) || !errorBars[0] || 
+                                errorBars[0].low != (plotValue - errorValue) || errorBars[0].high != (plotValue + errorValue) ||                            
+                                errorBars[0].isVertical !== false){
+                                return false;
+                            }
+                        }                                               
+                    }
+                    
+                    return true;
+                }                   
                 
                 test("horizontal error bars are correctly added to categorical points for array data", function() {
                     var chart = createCategoricalChart([categoricalArrayData], BAR),
@@ -489,7 +592,23 @@
         
                     ok(addedCategoricalPointErrorBar(points, categoricalArrayData, getter, false));
                 }); 
+                
+                test("horizontal error bars are correctly added to categorical points for objects with default fields data", function() {
+                    var chart = createCategoricalChart([testDataWidthZeros], BAR),
+                        points = chart.points,
+                        getter = valueGetter;                        
+        
+                    ok(addedCategoricalPointErrorBar(points, testDataWidthZeros, getter, false));
+                });                    
 
+                test("horizontal error bars are correctly added to categorical points for objects with custom fields data", function() {
+                    var chart = createCategoricalChart([{foo: 1},{foo: 10}, {foo: 0}, {foo: -1}, {foo: 0}], BAR),
+                        points = chart.points,
+                        getter = function(d){return d.foo};                        
+        
+                    ok(addedCategoricalPointErrorBar(points, testDataWidthZeros, getter, false));
+                });                 
+                                    
                 test("vertical error bars are correctly added to categorical points for array data", function() {
                     var chart = createCategoricalChart([categoricalArrayData], COLUMN),                
                         points = chart.points,
@@ -497,7 +616,23 @@
                     
                     ok(addedCategoricalPointErrorBar(points, categoricalArrayData, getter, true));
                 });                  
-                
+               
+                test("vertical error bars are correctly added to categorical points for objects with default fields data", function() {
+                    var chart = createCategoricalChart([testDataWidthZeros], COLUMN),
+                        points = chart.points,
+                        getter = valueGetter;                        
+        
+                    ok(addedCategoricalPointErrorBar(points, testDataWidthZeros, getter, true));
+                }); 
+ 
+                test("vertical error bars are correctly added to categorical points for objects with custom fields data", function() {
+                    var chart = createCategoricalChart([{foo: 1},{foo: 10}, {foo: 0}, {foo: -1}, {foo: 0}], COLUMN),
+                        points = chart.points,
+                        getter = function(d){return d.foo};                        
+        
+                    ok(addedCategoricalPointErrorBar(points, testDataWidthZeros, getter, true));
+                }); 
+ 
                 test("value ranges are correctly updated for array data", function() {
                     var chart = createCategoricalChart([categoricalArrayData], BAR),                       
                         valueRanges = chart.valueAxisRanges.axisName;          
@@ -521,6 +656,15 @@
                         expectedStackedMaxRange =  3;
                     equal(valueRanges.min, expectedStackedMinRange, "Min range is correctly updated");
                     equal(valueRanges.max, expectedStackedMaxRange, "Max range is correctly updated")
+                });      
+
+                test("value ranges are correctly updated for mixed stacked line data", function() {
+                    var chart = createCategoricalChart([categoricalNegativeArrayData,categoricalMixedArrayData], LINE, true),
+                        valueRanges = chart.valueAxisRanges.axisName,
+                        expectedStackedMinRange = -8,
+                        expectedStackedMaxRange =  2;
+                    equal(valueRanges.min, expectedStackedMinRange, "Min range is correctly updated");
+                    equal(valueRanges.max, expectedStackedMaxRange, "Max range is correctly updated")
                 });                 
 
                 test("value ranges are correctly updated for stacked column data", function() {
@@ -542,6 +686,180 @@
                     equal(valueRanges.min, expectedStackedMinRange, "Min range is correctly updated");
                     equal(valueRanges.max, expectedStackedMaxRange, "Max range is correctly updated")
                 });                  
+                
+                test("value ranges are correctly updated for mixed stacked column data", function() {
+                    var chart = createCategoricalChart([categoricalNegativeArrayData,categoricalMixedArrayData], COLUMN, true),
+                        valueRanges = chart.valueAxisRanges.axisName,
+                        expectedStackedMinRange = -8,
+                        expectedStackedMaxRange =  4;
+                    equal(valueRanges.min, expectedStackedMinRange, "Min range is correctly updated");
+                    equal(valueRanges.max, expectedStackedMaxRange, "Max range is correctly updated")
+                });                  
+            
+                test("errorBars are correctly calculated for stacked positive line data", function() {
+                    var chart = createCategoricalChart([categoricalArrayData,categoricalArrayData], LINE, true),
+                        points = chart.points;                                          
+                    
+                    ok(addedStackedLinePointErrorBar(points, [categoricalArrayData,categoricalArrayData]));
+                });
+
+                test("errorBars are correctly calculated for stacked negative positive line data", function() {
+                    var chart = createCategoricalChart([categoricalNegativeArrayData,categoricalArrayData], LINE, true),
+                        points = chart.points;                                          
+                    
+                    ok(addedStackedLinePointErrorBar(points, [categoricalNegativeArrayData,categoricalArrayData]));
+                });  
+
+                test("errorBars are correctly calculated for stacked mixed line data", function() {
+                    var chart = createCategoricalChart([categoricalNegativeArrayData,categoricalMixedArrayData], LINE, true),
+                        points = chart.points;                                          
+                    
+                    ok(addedStackedLinePointErrorBar(points, [categoricalNegativeArrayData,categoricalMixedArrayData]));
+                }); 
+
+                test("errorBars are correctly calculated for stacked positive bar data", function() {
+                    var chart = createCategoricalChart([categoricalArrayData,categoricalArrayData], BAR, true),
+                        points = chart.points;                                          
+                    
+                    ok(addedStackedBarPointErrorBar(points, [categoricalArrayData,categoricalArrayData]));
+                });   
+
+                test("errorBars are correctly calculated for stacked negative positive bar data", function() {
+                    var chart = createCategoricalChart([categoricalNegativeArrayData,categoricalArrayData], BAR, true),
+                        points = chart.points;                                          
+                    
+                    ok(addedStackedBarPointErrorBar(points, [categoricalNegativeArrayData, categoricalArrayData]));
+                });
+                
+                test("errorBars are correctly calculated for stacked mixed bar data", function() {
+                    var chart = createCategoricalChart([categoricalNegativeArrayData, categoricalMixedArrayData], BAR, true),
+                        points = chart.points;                                          
+                    
+                    ok(addedStackedBarPointErrorBar(points, [categoricalNegativeArrayData, categoricalMixedArrayData]));
+                });                                            
+                
+                test("ErrorRangeCalculator is created only for series with errorbars", function() {
+                    var chart = new dataviz.LineChart(categoricalPlotArea, {series: [{type: LINE, errorBars: {value: errorValue}, data: categoricalArrayData},
+                        {type: LINE, data: categoricalArrayData}]}),
+                    points = chart.points,
+                    length = points.length,
+                    isCreatedForFirstSeries = true,
+                    isNotCreatedForSecondSeries = true;
+              
+                    for(var idx = 0; idx < length; idx++){
+                        if(idx % 2 === 0){
+                            isCreatedForFirstSeries = isCreatedForFirstSeries && points[idx].errorBars !== undefined;
+                        }
+                        else{   
+                            isNotCreatedForSecondSeries = isNotCreatedForSecondSeries && points[idx].errorBars === undefined;
+                        }                                                
+                    }
+                    
+                    ok(isCreatedForFirstSeries, "created for series with errorbar");
+                    ok(isNotCreatedForSecondSeries, "not created for series without errorbar");
+                });
+                
+                test("ErrorRangeCalculator is created only for series with errorbars reverse", function() {
+                    var chart = new dataviz.LineChart(categoricalPlotArea, {series: [{type: LINE, data: categoricalArrayData},
+                        {type: LINE, data: categoricalArrayData, errorBars: {value: errorValue}}]}),
+                    points = chart.points,
+                    length = points.length,
+                    isCreatedForFirstSeries = true,
+                    isNotCreatedForSecondSeries = true;
+              
+                    for(var idx = 0; idx < length; idx++){
+                        if(idx % 2 === 1){
+                            isCreatedForFirstSeries = isCreatedForFirstSeries && points[idx].errorBars !== undefined;
+                        }
+                        else{   
+                            isNotCreatedForSecondSeries = isNotCreatedForSecondSeries && points[idx].errorBars === undefined;
+                        }                                                
+                    }
+                    
+                    ok(isCreatedForFirstSeries, "created for series with errorbar");
+                    ok(isNotCreatedForSecondSeries, "not created for series without errorbar");
+                });
+
+                test("standard deviation is not calculated for series without sd set", function() {
+                    var calls = 0,
+                        chart;
+                    methodMocker.mock(ErrorRangeCalculator.fn, "getStandardDeviation", function(){                            
+                        calls++;
+                    });
+                    chart = new dataviz.LineChart(categoricalPlotArea, {series: [{type: LINE, data: categoricalArrayData},
+                        {type: LINE, data: categoricalArrayData}]});
+
+                    
+                    equal(calls, 0); 
+                    methodMocker.restore(ErrorRangeCalculator.fn, "getStandardDeviation");  
+                });                
+                
+                test("standard deviation is calculated once for each series", function() {
+                    var calls = 0,
+                        chart;
+                    methodMocker.mock(ErrorRangeCalculator.fn, "getStandardDeviation", function(){                            
+                        calls++;
+                    });
+                    chart = new dataviz.LineChart(categoricalPlotArea, {series: [{type: LINE, data: categoricalArrayData},
+                        {type: LINE, data: categoricalArrayData, errorBars: {value: "stddev"}}]});
+                    
+                    equal(calls, 1); 
+                    methodMocker.restore(ErrorRangeCalculator.fn, "getStandardDeviation");  
+                }); 
+
+                test("standard deviation is calculated once for each series when multuple series with sd are used", function() {
+                    var calls = 0,
+                        chart;
+                    methodMocker.mock(ErrorRangeCalculator.fn, "getStandardDeviation", function(){                            
+                        calls++;
+                    });
+                    chart = new dataviz.LineChart(categoricalPlotArea, {series: [{type: LINE, data: categoricalArrayData, errorBars: {value: "stddev"}},
+                        {type: LINE, data: categoricalArrayData, errorBars: {value: "stddev"}}]});
+                    
+                    equal(calls, 2); 
+                    methodMocker.restore(ErrorRangeCalculator.fn, "getStandardDeviation");  
+                });                
+
+                test("standard error is not calculated for series without se set", function() {
+                    var calls = 0,
+                        chart;
+                    methodMocker.mock(ErrorRangeCalculator.fn, "getStandardError", function(){                           
+                        calls++;
+                    });
+                    chart = new dataviz.LineChart(categoricalPlotArea, {series: [{type: LINE, data: categoricalArrayData},
+                        {type: LINE, data: categoricalArrayData}]});
+                    
+                    equal(calls, 0); 
+                    methodMocker.restore(ErrorRangeCalculator.fn, "getStandardError");  
+                });                 
+                
+                test("standard error is calculated once for each series", function() {
+                    var calls = 0,
+                        chart;
+                    methodMocker.mock(ErrorRangeCalculator.fn, "getStandardError", function(){                           
+                        calls++;
+                    });
+                    chart = new dataviz.LineChart(categoricalPlotArea, {series: [{type: LINE, data: categoricalArrayData},
+                        {type: LINE, data: categoricalArrayData, errorBars: {value: "stderr"}}]});
+                    
+                    equal(calls, 1); 
+                    methodMocker.restore(ErrorRangeCalculator.fn, "getStandardError");  
+                });                 
+
+                test("standard error is calculated once for each series when multuple series with se are used", function() {
+                    var calls = 0,
+                        chart;
+                    methodMocker.mock(ErrorRangeCalculator.fn, "getStandardError", function(){                           
+                        calls++;
+                    });
+                    chart = new dataviz.LineChart(categoricalPlotArea, {series: [{type: LINE, data: categoricalArrayData, errorBars: {value: "stderr"}},
+                        {type: LINE, data: categoricalArrayData, errorBars: {value: "stderr"}}]});
+                    
+                    equal(calls, 2); 
+                    methodMocker.restore(ErrorRangeCalculator.fn, "getStandardError");  
+                }); 
+                
+                //scater errorbar not created for date series
                 
             })();
 
