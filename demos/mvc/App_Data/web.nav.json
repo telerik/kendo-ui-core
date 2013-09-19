@@ -1014,7 +1014,11 @@
                     "url": "scheduler/resources-grouping-vertical.html",
                     "title": "Vertical resources grouping in Kendo UI Scheduler",
                     "meta": "This demo shows how to group resources vertically in scheduler widget."
-                },{
+                }, {
+                    "text": "Web API binding",
+                    "url": "scheduler/webapi.html",
+                    "packages": ["mvc"]
+                }, {
                     "text": "Templates",
                     "url": "scheduler/templates.html",
                     "title": "Templates in Kendo UI Scheduler",
