@@ -11,4 +11,9 @@ if platform?('windows')
         options '/quiet /norestart'
         action :install
     end
+
+    windows_package 'Microsoft SQL Server 2012 Express LocalDB' do
+        source 'http://download.microsoft.com/download/8/D/D/8DD7BDBA-CEF7-4D8E-8C16-D9F69527F909/ENU/x64/SqlLocalDB.MSI'
+        action :install
+    end
 end
