@@ -369,6 +369,19 @@
 
                 equal(model.dirty, true);
             });
+
+            test("accept does not wrap field with underscore", function() {
+                var model = new kendo.data.Model({
+                    _foo: {},
+                    bar: "bar"
+                });
+
+                model.accept({ _foo: { foo: "foo1" }, bar: "bar1" });
+
+                ok(!(model._foo instanceof kendo.data.ObservableObject));
+                equal(model._foo.foo, "foo1");
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

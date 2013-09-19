@@ -648,7 +648,13 @@ kendo_module({
                 field;
 
             for (field in data) {
-                that._set(field, that.wrap(data[field], field, parent));
+                var value = data[field];
+
+                if (field.charAt(0) != "_") {
+                    value = that.wrap(data[field], field, parent);
+                }
+
+                that._set(field, value);
             }
 
             if (that.idField) {
