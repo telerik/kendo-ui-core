@@ -14,7 +14,7 @@
         }
 
         #canvas {
-            height: 100%;
+            height: 90%;
         }
 
         .menu-text {
@@ -71,6 +71,10 @@
 
         #toolbarDiv {
         }
+
+        #zoomPanel {
+            float: left;
+        }
     </style>
 
     <link href="../../styles/web/kendo.common.css" rel="stylesheet"/>
@@ -106,7 +110,6 @@
         <input type="button" class="diagramCommandBtn" id="deleteButton" title="Delete (DEL)" value="Delete"/>
         <input type="button" class="diagramCommandBtn" id="selectAllButton" title="Select All (CTRL+A)"
                value="SelectAll"/>
-        <!--<span class="menu-text">Rotate selection:</span><input id="rotateShape"/>-->
         <span class="menu-text">Layout:</span><input id="Layouts" value="1"/>
         <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
         <input type="button" class="diagramCommandBtn" id="bringButton" title="Bring to Front" value="Bring to Front"/>
@@ -121,6 +124,9 @@
         </div>
         <div id="canvasDiv">
             <!--<h2>Diagram</h2>-->
+            <div id="zoomPanel">
+                <input id="slider"/>
+            </div>
             <div id="canvas"></div>
         </div>
     </div>
@@ -217,7 +223,7 @@ var shapesSource = [
                     }
                 }
             ],
-        content: "Custom ctrs"
+            content: "Custom ctrs"
         }
     },
     {
@@ -245,7 +251,11 @@ for (var i = 0; i < shapesSource.length; i++) {
 }
 
 $(function () {
-    $("#canvas").kendoDiagram();
+    $("#canvas").kendoDiagram({
+        zoom: function (e) {
+            slider.value(this._zoom);
+        }
+    });
     var diagram = $("#canvas").data("kendoDiagram"),
             kendo = window.kendo,
             Point = kendo.diagram.Point;
@@ -343,6 +353,21 @@ $(function () {
     $("#layoutButton").click(function (e) {
         onLayoutChanged();
     });
+
+    function onZoom(e) {
+        diagram.zoom(e.value);
+    }
+
+    var slider = $("#slider").kendoSlider({
+        min: 0.55,
+        value: 1,
+        max: 2,
+        smallStep: .1,
+        largeStep: .2,
+        tickPlacement: "none",
+        change: onZoom,
+        slide: onZoom
+    }).data("kendoSlider");
 
     var layouts = [
         {value: "TreeDown", text: "Tree Down"},
@@ -450,7 +475,6 @@ $(function () {
     });
     onLayoutChanged();
 
-
     var caps = [
         {value: kendo.diagram.Markers.none},
         {value: kendo.diagram.Markers.arrowStart},
@@ -485,33 +509,6 @@ $(function () {
             });
         }
     });
-
-    $("#rotateShape").kendoSlider({
-        min: 0,
-        max: 360,
-        change: shapeRotate,
-        slide: shapeRotate
-    });
 });
-
-function shapeRotate(e) {
-    var diagram = $("#canvas").data("kendoDiagram");
-    $.each(diagram.select(), function () {
-        if (this.rotate) {
-            this.rotate(e.value | 0);
-        }
-    });
-}
-
-function explicitRotate(e) {
-    var shapeBounds = shape2.bounds();
-    var pos = shapeBounds.topLeft();
-    var center = shapeBounds.center().minus(pos);
-    var angle = e.target.value | 0;
-
-    var transform = new kendo.diagram.CompositeTransform(pos.x, pos.y, undefined, undefined, angle, center);
-    transform.render(shape2.visual.native);
-    shape2.refresh();
-}
 </script>
 </html>
