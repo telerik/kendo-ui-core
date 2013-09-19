@@ -135,16 +135,6 @@
     </div>
 </script>
 
-<!--TODO: Evaluate the template options. It does nothing for now.-->
-<script type="text/x-kendo-tmpl" id="shape-template">
-    <div>
-        <p>This is templated shape:</p>
-
-        <h3>#:name#</h3>
-    </div>
-</script>
-<!--<path d="#=data#" fill="#=background#"/>-->
-<!--#$("#=data").innerHtml(v); #-->
 <script>
 var shapesSource = [
     {
@@ -167,14 +157,67 @@ var shapesSource = [
         options: {
             name: "Triangle",
             data: "m0,100 L100,100 L50,0z",
-            background: "steelblue"
+            background: "steelblue",
+            connectors: [
+                {
+                    name: "Top",
+                    position: function (shape) {
+                        return shape.transformPoint(shape.bounds().top());
+                    }
+                },
+                {
+                    name: "Right",
+                    position: function (shape) {
+                        return shape.transformPoint(shape.bounds().bottomRight());
+                    }
+                },
+                {
+                    name: "Left",
+                    position: function (shape) {
+                        return shape.transformPoint(shape.bounds().bottomLeft());
+                    }
+                },
+                {
+                    name: "Auto"
+                }
+            ]
         }
     },
     {
         options: {
-            name: "Sequential Data",
+            name: "SequentialData",
             data: "m50.21875,97.4375l0,0c-26.35457,0 -47.71875,-21.25185 -47.71875,-47.46875l0,0c0,-26.21678 21.36418,-47.46875 47.71875,-47.46875l0,0c12.65584,0 24.79359,5.00155 33.74218,13.90339c8.94862,8.90154 13.97657,20.97617 13.97657,33.56536l0,0c0,12.58895 -5.02795,24.66367 -13.97657,33.56542l13.97657,0l0,13.90333l-47.71875,0z",
-            background: "steelblue"
+            background: "steelblue",
+            connectors: [
+                {
+                    name: "Top",
+                    description: "Top Connector"
+                },
+                {
+                    name: "Right",
+                    description: "Right Connector"
+                },
+                {
+                    name: "Bottom",
+                    description: "Bottom Connector"
+                },
+                {
+                    name: "BottomRight",
+                    description: "Bottom Connector"
+                },
+                {
+                    name: "Left",
+                    Description: "Left Connector"
+                },
+                {
+                    name: "Auto",
+                    Description: "Auto Connector",
+                    position: function (shape) {
+                        return shape.getPosition("center");
+                    }
+                }
+            ],
+        content: "Custom ctrs"
         }
     },
     {
@@ -194,23 +237,12 @@ var shapesSource = [
 ];
 
 var Shapes = {
-    Rectangle: {
-        data: "Rectangle",
-        template: kendo.template($("#shape-template").html())
-    },
-    Triangle: {
-        data: "m0,100 L100,100 L50,0z"
-    },
-    SequentialData: {
-        data: "m50.21875,97.4375l0,0c-26.35457,0 -47.71875,-21.25185 -47.71875,-47.46875l0,0c0,-26.21678 21.36418,-47.46875 47.71875,-47.46875l0,0c12.65584,0 24.79359,5.00155 33.74218,13.90339c8.94862,8.90154 13.97657,20.97617 13.97657,33.56536l0,0c0,12.58895 -5.02795,24.66367 -13.97657,33.56542l13.97657,0l0,13.90333l-47.71875,0z"
-    },
-    Data: {
-        data: "m2.5,97.70305l19.07013,-95.20305l76.27361,0l-19.0702,95.20305l-76.27354,0z"
-    },
-    Wave: {
-        data: "m2.5,15.5967c31.68356,-45.3672 63.37309,45.3642 95.05661,0l0,81.65914c-31.68353,45.36404 -63.37305,-45.36732 -95.05661,0l0,-81.65914z"
-    }
 };
+
+for (var i = 0; i < shapesSource.length; i++) {
+    shape = shapesSource[i].options;
+    Shapes[shape.name] = shape;
+}
 
 $(function () {
     $("#canvas").kendoDiagram();
@@ -225,7 +257,7 @@ $(function () {
     shape2.content("content");
 
     var shape3 = diagram.addShape(new Point(370, 400), Shapes.Rectangle);
-    var shape4 = diagram.addShape(new Point(400, 200), Shapes.Triangle);
+    var shape4 = diagram.addShape(new Point(400, 200), kendo.deepExtend({content: "Custom connectors"}, Shapes.Triangle));
     var topCor = shape2.getConnector("Auto");
     var topCor2 = shape3.getConnector("Auto");
     var bottomCor = shape1.getConnector("Auto");

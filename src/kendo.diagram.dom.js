@@ -53,6 +53,32 @@ kendo_module({
         },
         MAXINT = 9007199254740992;
 
+    diagram.DefaultConnectors = [
+        {
+            name: "Top",
+            description: "Top Connector"
+        },
+        {
+            name: "Right",
+            description: "Right Connector"
+        },
+        {
+            name: "Bottom",
+            description: "Bottom Connector"
+        },
+        {
+            name: "Left",
+            Description: "Left Connector"
+        },
+        {
+            name: Auto,
+            Description: "Auto Connector",
+            position: function (shape) {
+                return shape.getPosition("center");
+            }
+        }
+    ];
+
     var PanAdapter = kendo.Class.extend({
         init: function (panState) {
             this.pan = panState.pan;
@@ -84,7 +110,7 @@ kendo_module({
                 return this.options.position(this.shape);
             }
             else {
-                return getShapeConnectorPos(this.shape, this.options.name.toLowerCase());
+                return this.shape.getPosition(this.options.name);
             }
         }
     });
@@ -215,36 +241,7 @@ kendo_module({
             rotatable: true,
             background: "steelblue",
             hoveredBackground: "#70CAFF",
-            connectors: [
-                {
-                    name: "Top",
-                    type: "Data [in]",
-                    description: "Top Connector"
-                },
-                {
-                    name: "Right",
-                    type: "Data [in]",
-                    description: "Right Connector"
-                },
-                {
-                    name: "Bottom",
-                    type: "Data [out] [array]",
-                    description: "Bottom Connector"
-                },
-                {
-                    name: "Left",
-                    type: "Data [in]",
-                    Description: "Left Connector"
-                },
-                {
-                    name: Auto,
-                    type: Auto,
-                    Description: "Auto Connector",
-                    position: function (shape) {
-                        return getShapeConnectorPos(shape, "center");
-                    }
-                }
-            ]
+            connectors: diagram.DefaultConnectors
         },
         events: [BOUNDSCHANGE],
         bounds: function (value) {
@@ -345,15 +342,38 @@ kendo_module({
                 }
             }
         },
-        getConnector: function (name) {
+        getConnector: function (name, point) {
             var i, ctr;
             name = name.toLocaleLowerCase();
             for (i = 0; i < this.connectors.length; i++) {
                 ctr = this.connectors[i];
-                if (ctr.options.name.toLocaleLowerCase() === name) {
+                if (ctr.options.name.toLocaleLowerCase() == name) {
                     return ctr;
                 }
             }
+            if (point !== undefined) {
+                return closestConnector(point, this);
+            }
+            return this.connectors[0];
+        },
+        getPosition: function (side) {
+            var b = this.bounds(),
+                fnName = side[0].toLowerCase() + side.slice(1);
+            if (Utils.isFunction(b[fnName])) {
+                return this.transformPoint(b[fnName]());
+            }
+            return b.center();
+        },
+        transformPoint: function (absolutePoint) {
+            var rotate = this.rotate(),
+                bounds = this.bounds(),
+                tl = bounds.topLeft(),
+                result = absolutePoint;
+
+            if (rotate.angle) {
+                result.rotate(rotate.center().plus(tl), 360 - rotate.angle);
+            }
+            return result;
         }
     });
 
@@ -421,7 +441,7 @@ kendo_module({
                 this.refresh();
             }
             else if (source instanceof Shape) {
-                this.sourceConnector = source.getConnector(Auto);
+                this.sourceConnector = source.getConnector(Auto, this.targetPoint());
                 this.sourceConnector.connections.push(this);
                 this.refresh();
             }
@@ -447,7 +467,7 @@ kendo_module({
                 this.refresh();
             }
             else if (target instanceof Shape) {
-                this.targetConnector = target.getConnector(Auto);
+                this.targetConnector = target.getConnector(Auto, this.sourcePoint());
                 this.targetConnector.connections.push(this);
                 this.refresh();
             }
@@ -596,17 +616,6 @@ kendo_module({
             }
         }
         return resCtr;
-    }
-
-    function getShapeConnectorPos(shape, side) {
-        var rotate = shape.rotate();
-        var bounds = shape.bounds();
-        var point = bounds[side.toLowerCase()]();
-        if (rotate.angle) {
-            point = point.rotate(rotate.center().plus(bounds.topLeft()), 360 - rotate.angle);
-        }
-
-        return point;
     }
 
     var Diagram = Widget.extend({
@@ -1026,8 +1035,7 @@ kendo_module({
                 element = that.element;
 
             for (i in bindings) {
-                if(bindings.hasOwnProperty(i))
-                {
+                if (bindings.hasOwnProperty(i)) {
                     field = options[bindings[i]];
                     textField = element.attr(kendo.attr(i + "-field"));
 

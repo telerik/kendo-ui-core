@@ -925,6 +925,9 @@ kendo_module({
                 that.rotationThumb = new Path(that.options.rotationThumb);
                 that.visual.append(that.rotationThumb);
             }
+            that.shape.bind("boundsChange", function () {
+                that.refresh();
+            });
             that.refresh();
         },
         options: {
@@ -1090,7 +1093,6 @@ kendo_module({
                     if (angle && !dragging) {
                         this.shape.rotate(angle);
                     }
-                    this.refresh();
                 }
             }
         },
