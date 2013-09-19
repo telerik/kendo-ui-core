@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KendoUI Test Page</title>
+    <script type="text/javascript" src="../src/jquery.js"></script>
+    <script type="text/javascript" src="../src/kendo.core.js"></script>
+    <script type="text/javascript" src="../src/kendo.fx.js"></script>
+    <script type="text/javascript" src="../src/kendo.popup.js"></script>
+    <script type="text/javascript" src="../src/kendo.menu.js"></script>
+    <script type="text/javascript" src="../src/kendo.data.js"></script>
+    <script type="text/javascript" src="../src/kendo.list.js"></script>
+    <script type="text/javascript" src="../src/kendo.autocomplete.js"></script>
+    <script type="text/javascript" src="../src/kendo.dropdownlist.js"></script>
+    <script type="text/javascript" src="../src/kendo.combobox.js"></script>
+    <script type="text/javascript" src="../src/kendo.calendar.js"></script>
+    <script type="text/javascript" src="../src/kendo.timepicker.js"></script>
+    <script type="text/javascript" src="../src/kendo.datepicker.js"></script>
+    <script type="text/javascript" src="../src/kendo.datetimepicker.js"></script>
+    <script type="text/javascript" src="../src/kendo.numerictextbox.js"></script>
+    <link type="text/css" href="../styles/web/kendo.common.less" rel="stylesheet/less"/>
+    <link type="text/css" href="../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+    <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
+
+</head>
+<body>
+    <div>
+        <ul id="menuBar">
+            <li>Back</li>
+            <li>Forward</li>
+            <li>Export
+                <ul>
+                    <li>Acrobat (PDF) file</li>
+                    <li>CSV (comma delimitted)</li>
+                    <li>Excel</li>
+                    <li>Rich Text Format</li>
+                    <li>TIFF file</li>
+                    <li>Web Archive</li>
+                </ul>
+            </li>
+            <li>Refresh</li>
+            <li>Parameters
+                <ul>
+                    <li>
+                        <div id="divMenuParms" style="height:200px;width:200px;">
+                            <input id="calendarHere"/>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script>
+        $(function () {
+            $('#menuBar').kendoMenu();
+            $('#calendarHere').kendoDatePicker();
+        });
+    </script>
+</body>
+</html>

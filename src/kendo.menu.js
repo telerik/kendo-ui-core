@@ -600,7 +600,7 @@ kendo_module({
                 clearTimeout(li.data(TIMER));
 
                 li.data(TIMER, setTimeout(function () {
-                    var popup = li.find(".k-group:not(.k-list-container):first:visible").data(KENDOPOPUP);
+                    var popup = li.find(".k-group:not(.k-list-container):not(.k-calendar-container):first:visible").data(KENDOPOPUP);
 
                     if (popup) {
                         popup.close();
