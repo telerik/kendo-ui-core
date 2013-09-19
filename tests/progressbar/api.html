@@ -157,7 +157,7 @@
                 }, 100);
             });
 
-            asyncTest("Start event is not fired when value has already been changed once (type='value')", function() {
+            asyncTest("Start event is fired only once (type='value')", function() {
                 var startFiredCounter = 0;
 
                 pb = createProgressbar({
@@ -200,7 +200,7 @@
                 }, 100);
             });
 
-            asyncTest("Start event is not fired when value has already been changed once (type='percent')", function() {
+            asyncTest("Start event is fired only once (type='percent')", function() {
                 var startFiredCounter = 0;
 
                 pb = createProgressbar({
@@ -232,7 +232,8 @@
                     type: "chunk",
                     start: function(){
                         startFired = true;
-                    }
+                    },
+                    animation: false
                 });
 
                 pb.value(30);
@@ -243,7 +244,7 @@
                 }, 100);
             });
 
-            asyncTest("Start event is not fired when value has already been changed once (type='chunk')", function() {
+            asyncTest("Start event is fired only once (type='chunk')", function() {
                 var startFiredCounter = 0;
 
                 pb = createProgressbar({
@@ -253,7 +254,8 @@
                     type: "chunk",
                     start: function(){
                         startFiredCounter++;
-                    }
+                    },
+                    animation: false
                 });
 
                 pb.value(30);
@@ -264,13 +266,280 @@
                     start();
                 }, 100);
             });
+
+            asyncTest("Complete event is not fired before max is reached (type='value')", function(){
+                var completeFired = false;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "value",
+                    complete: function(){
+                        completeFired = true;
+                    },
+                    animation: false
+                });
+
+                pb.value(30);
+                pb.value(50);
+                pb.value(59);
+
+                setTimeout(function(){
+                    ok(!completeFired);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Complete event is fired when max is reached (type='value')", function(){
+                var completeFired = false;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "value",
+                    complete: function(){
+                        completeFired = true;
+                    },
+                    animation: false
+                });
+
+                pb.value(50);
+                pb.value(59);
+                pb.value(60);
+
+                setTimeout(function(){
+                    ok(completeFired);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Complete event is fired only once (type='value')", function(){
+                var completeFiredCounter = 0;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "value",
+                    complete: function(){
+                        completeFiredCounter++;
+                    },
+                    animation: false
+                });
+
+                pb.value(60);
+                pb.value(60);
+                pb.value(65);
+
+                setTimeout(function(){
+                    equal(completeFiredCounter, 1);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Complete event is not fired before max is reached (type='percent')", function(){
+                var completeFired = false;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "percent",
+                    complete: function(){
+                        completeFired = true;
+                    },
+                    animation: false
+                });
+
+                pb.value(30);
+                pb.value(50);
+                pb.value(59);
+
+                setTimeout(function(){
+                    ok(!completeFired);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Complete event is fired when max is reached (type='percent')", function(){
+                var completeFired = false;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "percent",
+                    complete: function(){
+                        completeFired = true;
+                    },
+                    animation: false
+                });
+
+                pb.value(50);
+                pb.value(59);
+                pb.value(60);
+
+                setTimeout(function(){
+                    ok(completeFired);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Complete event is fired only once (type='percent')", function(){
+                var completeFiredCounter = 0;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "percent",
+                    complete: function(){
+                        completeFiredCounter++;
+                    },
+                    animation: false
+                });
+
+                pb.value(60);
+                pb.value(60);
+                pb.value(65);
+
+                setTimeout(function(){
+                    equal(completeFiredCounter, 1);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Complete event is not fired before max is reached (type='chunk')", function(){
+                var completeFired = false;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "chunk",
+                    complete: function(){
+                        completeFired = true;
+                    },
+                    animation: false
+                });
+
+                pb.value(30);
+                pb.value(50);
+                pb.value(59);
+
+                setTimeout(function(){
+                    ok(!completeFired);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Complete event is fired when max is reached (type='chunk')", function(){
+                var completeFired = false;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "chunk",
+                    complete: function(){
+                        completeFired = true;
+                    },
+                    animation: false
+                });
+
+                pb.value(50);
+                pb.value(59);
+                pb.value(60);
+
+                setTimeout(function(){
+                    ok(completeFired);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Complete event is fired only once (type='chunk')", function(){
+                var completeFiredCounter = 0;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "chunk",
+                    complete: function() {
+                        completeFiredCounter++;
+                    },
+                    animation: false
+                });
+
+                pb.value(60);
+                pb.value(60);
+                pb.value(65);
+
+                setTimeout(function() {
+                    equal(completeFiredCounter, 1);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("k-progressbar-indeterminate class is set correctly when passed value is false", function(){
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    animation: false
+                });
+
+                pb.value(false);
+
+                setTimeout(function() {
+                    ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
+                    start();
+                }, 100);
+            });
+
+            asyncTest("k-progressbar-indeterminate class is removed when previous value was false", function(){
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    animation: false
+                });
+
+                pb.value(false);
+                pb.value(40);
+
+                setTimeout(function() {
+                    ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
+                    start();
+                }, 100);
+            });
+
+            asyncTest("k-progressbar-indeterminate class is removed when initial value was false", function(){
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: false,
+                    animation: false
+                });
+
+                pb.value(40);
+
+                setTimeout(function() {
+                    ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
+                    start();
+                }, 100);
+            });
+
+
             // -----------------------------------------------------------------------------------
             // -----------------------------------------------------------------------------------
             module("enable", {
                 setup: function() {
                     moduleSetup();
                 },
-                teardown: function(){
+                teardown: function() {
                     moduleTeardown();
                 }
             });
@@ -315,6 +584,21 @@
 
                 pb.enable(false);
                 pb.enable(false);
+
+                ok(pb.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("enable does not disable progressbar", function(){
+                pb = createProgressbar();
+                pb.enable();
+
+                ok(!pb.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("initially disabled state is applied", function() {
+                pb = createProgressbar({
+                    enable: false
+                });
 
                 ok(pb.wrapper.hasClass("k-state-disabled"));
             });

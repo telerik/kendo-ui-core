@@ -244,19 +244,27 @@
         </br></br></br>
         <div id="progressbar-chunk"></div>
 
-       <!--  <button class='k-button setValue'>Set value</button>
+       <button class='k-button setValue'>Set value</button>
         </br></br></br>
-
-        <div id="progressbar-rev"></div>
+        <!--<div id="progressbar-rev"></div>
         </br></br></br>
         <div id="progressbar-vert"></div>
         <div id="progressbar-chunk-vert"></div>
         </br></br></br> -->
         <script>
             $(".setValue").click(function(){
-                $("#progressbar").data("kendoProgressBar").value(48);
+                var pb = $("#progressbar").data("kendoProgressBar");
 
-                $("#progressbar-rev").data("kendoProgressBar").value(20);
+                var interval = setInterval(function(){
+                    if (pb.value() < 100) {
+                        pb.value(pb.value() + 10);
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 5);
+
+
+                //$("#progressbar-rev").data("kendoProgressBar").value(20);
             });
 
             $("#progressbar").kendoProgressBar({
@@ -266,11 +274,9 @@
                 showStatus: true,
                 type: "percentage",
                 start: function(e) {
-                   // debugger;
                     console.log("Start event. Value: " + e.value);
                 },
                 change: function(e) {
-                    //debugger;
                     console.log("Change event. Value: " + e.value);
                 },
                 complete: function(e) {
@@ -278,13 +284,13 @@
                 },
                 //animation: false
                 animation: {
-                    duration: 1000
+                    duration: 100
                 }
             });
 
             $("#progressbar-chunk").kendoProgressBar({
                 type: "chunk",
-                chunkCount: 10,
+                chunkCount: 2,
                 min: 0,
                 max: 10,
                 value: 0,

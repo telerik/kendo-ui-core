@@ -18,6 +18,7 @@ kendo_module({
         DEFAULTCHUNKCOUNT = 5,
         KPROGRESSBAR = "k-progressbar",
         KPROGRESSBARREVERSE = "k-progressbar-reverse",
+        KPROGRESSBARINDETERMINATE = "k-progressbar-indeterminate",
         KPROGRESSBARCOMPLETE = "k-complete",
         KPROGRESSWRAPPER = "k-state-selected",
         KPROGRESSSTATUS = "k-progress-status",
@@ -100,15 +101,22 @@ kendo_module({
 
             container.addClass(KPROGRESSBAR + "-" + ((orientation === HORIZONTAL) ? HORIZONTAL : VERTICAL));
 
+            if(options.enable === false) {
+                container.addClass(KSTATEDISABLED);
+            }
+
             if (options.reverse) {
                 container.addClass(KPROGRESSBARREVERSE);
+            }
+
+            if (options.value === false) {
+                container.addClass(KPROGRESSBARINDETERMINATE);
             }
 
             if (options.type === PROGRESSTYPE.CHUNK) {
                 that._addChunkProgressWrapper();
             } else {
                 if (options.showStatus){
-                    //TODO change initial status
                     progressStatus = that.wrapper.prepend(templates.progressStatus)
                                                  .find("." + KPROGRESSSTATUS);
 
@@ -136,13 +144,13 @@ kendo_module({
                 rounded = math.round(value);
 
                 if (!isNaN(rounded) && rounded != options.value) {
-                    //set numeric value
+                    that.wrapper.removeClass(KPROGRESSBARINDETERMINATE);
                     options.value = that._validateValue(rounded);
 
                     that._change();
                 }
             } else if (!value) {
-                //set indeterminate state
+                that.wrapper.addClass(KPROGRESSBARINDETERMINATE);
                 options.value = value;
             }
         },
@@ -151,10 +159,12 @@ kendo_module({
             var that = this,
                 options = that.options;
 
-            if (value <= options.min) {
-                return options.min;
-            } else if (value >= options.max) {
-                return options.max;
+            if (value !== false) {
+                if (value <= options.min) {
+                    return options.min;
+                } else if (value >= options.max) {
+                    return options.max;
+                }
             }
 
             return value;
@@ -270,7 +280,7 @@ kendo_module({
                 that.trigger(CHANGE, { value: currentValue });
             }
 
-            if (options.value === options.max) {
+            if (currentValue === options.max && that._isFinished === false) {
                 that.trigger(COMPLETE, { value: options.max });
                 that._isFinished = true;
             }
@@ -297,6 +307,10 @@ kendo_module({
                 chunkSize = proxy(that._calculateChunkSize, that),
                 html = "",
                 chunks;
+
+            if (options.chunkCount <= 1) {
+                options.chunkCount = DEFAULTCHUNKCOUNT;
+            }
 
             html += "<ul class='k-reset'>";
             for (var i = options.chunkCount - 1; i >= 0; i--) {

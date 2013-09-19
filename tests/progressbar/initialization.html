@@ -180,8 +180,8 @@
                     showStatus: false
                 });
 
-                var progressWrapperExpectedSize = pb._calculatePercentage().toFixed(10);
-                var actualProgressWrapperSize = parseFloat(pb.wrapper.find(".k-state-selected")[0].style.width).toFixed(10);
+                var progressWrapperExpectedSize = pb._calculatePercentage().toFixed(2);
+                var actualProgressWrapperSize = parseFloat(pb.wrapper.find(".k-state-selected")[0].style.width).toFixed(2);
 
                 equal(actualProgressWrapperSize, progressWrapperExpectedSize);
             });
@@ -284,10 +284,71 @@
 
                 var chunkCount = pb.options.chunkCount;
                 var chunkWrapperSize = pb.wrapper.find("ul.k-reset")[0].offsetWidth;
-                var expectedChunkSize = ((chunkWrapperSize - (chunkCount - 1)) / chunkCount).toFixed(10);
-                var actualChunkSize = parseFloat(pb.wrapper.find("li.k-item:first")[0].style.width).toFixed(10);
+                var expectedChunkSize = ((chunkWrapperSize - (chunkCount - 1)) / chunkCount).toFixed(2);
+                var actualChunkSize = parseFloat(pb.wrapper.find("li.k-item:first")[0].style.width).toFixed(2);
 
                 equal(actualChunkSize, expectedChunkSize);
+            });
+
+            test("Chunk count is reset to default if negative chunk count is passed", function() {
+                var pb = new ProgressBar(container, {
+                    type: "chunk",
+                    chunkCount: -5
+                });
+
+                var chunkCount = pb.options.chunkCount;
+                equal(chunkCount, 5);
+            });
+
+            test("Chunk count is reset to default if chunk count is less than two", function() {
+                var pb = new ProgressBar(container, {
+                    type: "chunk",
+                    chunkCount: 1
+                });
+
+                var chunkCount = pb.options.chunkCount;
+                equal(chunkCount, 5);
+            });
+
+            test("Animation duration is equal to default animation duration when not specified", function() {
+                var pb = new ProgressBar(container, { }),
+                    defaultAnimationDuration = 2000;
+
+                equal(pb._animation.duration, defaultAnimationDuration);
+            });
+
+            test("Animation is correctly set to false", function() {
+                var pb = new ProgressBar(container, {
+                    animation: false
+                });
+
+                ok(!pb.options.animation);
+            });
+
+            test("Animation duration is overriden when specified by user", function() {
+                var pb = new ProgressBar(container, {
+                    animation: {
+                        duration: 789
+                    }
+                });
+
+                equal(pb.options.animation.duration, 789);
+            });
+
+            test("k-progressbar-indeterminate class is set correctly when initial value is false", function() {
+                var pb = new ProgressBar(container, {
+                    value: false
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
+            });
+
+            test("k-progressbar-indeterminate class is not set when initial value is not false", function() {
+                var pb = new ProgressBar(container, {
+                    value: 20
+                });
+
+                ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
             });
         </script>
     </body>
