@@ -82,13 +82,12 @@
                 ok(img.hasClass("km-image"), "Should set css class to img");
             });
 
-            asyncTest("raises click event when clicked", 1, function() {
+            test("raises click event when clicked", 1, function() {
                 var dom = $("<button>foo</button>");
 
                 var button = new Button(dom);
 
                 button.bind("click", function() {
-                    start();
                     ok(true, "Should raise the click event");
                 });
 
