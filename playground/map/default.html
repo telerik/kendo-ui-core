@@ -19,6 +19,7 @@
     <body>
         <div id="map"></div>
         <script>
+            var Point = kendo.dataviz.Point2D;
             var Location = kendo.dataviz.map.Location;
             var proj = new kendo.dataviz.map.projections.SphericalMercator();
             var crs = new kendo.dataviz.map.crs.EPSG3857();
@@ -38,9 +39,7 @@
                     for (var j = 0; j < ring.length; j++) {
                         var point = ring[j];
                         var l = Location.fromArray(point);
-                        var p = crs.toPoint(l, zoomLevel);
-
-                        p.multiply(scale);
+                        var p = crs.toPoint(l, scale);
 
                         ringPoints.push(p);
                     }
