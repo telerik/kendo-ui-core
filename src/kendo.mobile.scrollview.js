@@ -639,7 +639,6 @@ kendo_module({
 
             that.bind("resize", function() {
                 that.pane.refresh();
-                console.log("resize");
             });
 
             that.page = options.page;
