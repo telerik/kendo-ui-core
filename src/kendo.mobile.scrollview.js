@@ -637,6 +637,11 @@ kendo_module({
                 change: proxy(this, REFRESH)
             });
 
+            that.bind("resize", function() {
+                that.pane.refresh();
+                console.log("resize");
+            });
+
             that.page = options.page;
 
             that._content = options.dataSource ? new VirtualScrollViewContent(that.inner, that.pane, options) : new ScrollViewContent(that.inner, that.pane);
@@ -671,6 +676,10 @@ kendo_module({
         destroy: function() {
             Widget.fn.destroy.call(this);
             kendo.destroy(this.element);
+        },
+
+        getSize: function() {
+            return kendo.dimensions(this.element);
         },
 
         viewInit: function() {

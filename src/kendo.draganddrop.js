@@ -239,8 +239,6 @@ kendo_module({
             that.forcedMinScale = options.minScale;
 
             that.bind(CHANGE, options);
-
-            kendo.onResize(refresh);
         },
 
         rescale: function(newScale) {
