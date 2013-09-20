@@ -121,7 +121,8 @@ kendo_module({
 
         _activate: function() {
             var views = this.options.views,
-                visibleOnCurrentView = !views[0] || views.indexOf(this.pane.view().id.replace('#', '')) > -1;
+                view = this.pane.view(),
+                visibleOnCurrentView = !views[0] || this._viewsInclude(view.id.replace('#', '')) || this._viewsInclude(view.element.attr("id"));
 
             if (this.trigger(BEFORE_SHOW, { view: this }) || !visibleOnCurrentView) {
                 return false;
@@ -131,6 +132,10 @@ kendo_module({
 
             this.trigger(SHOW, { view: this });
             return true;
+        },
+
+        _viewsInclude: function(id) {
+            return this.options.views.indexOf(id) > -1;
         },
 
         _show: function() {
