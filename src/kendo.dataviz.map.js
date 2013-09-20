@@ -25,6 +25,70 @@ kendo_module({
         deepExtend = kendo.deepExtend,
         limit = dataviz.limitValue;
 
+    // CURRENTLY IN DIAGRAM MATH
+    var Matrix = Class.extend({
+        init: function (a, b, c, d, e, f) {
+            this.a = a || 0;
+            this.b = b || 0;
+            this.c = c || 0;
+            this.d = d || 0;
+            this.e = e || 0;
+            this.f = f || 0;
+        },
+        times: function (m) {
+            return new Matrix(
+                this.a * m.a + this.c * m.b,
+                this.b * m.a + this.d * m.b,
+                this.a * m.c + this.c * m.d,
+                this.b * m.c + this.d * m.d,
+                this.a * m.e + this.c * m.f + this.e,
+                this.b * m.e + this.d * m.f + this.f
+            );
+        },
+        apply: function (p) {
+            return new Point(this.a * p.x + this.c * p.y + this.e, this.b * p.x + this.d * p.y + this.f);
+        }
+    });
+
+    deepExtend(Matrix, {
+        translate: function (x, y) {
+            var m = new Matrix();
+            m.a = 1;
+            m.b = 0;
+            m.c = 0;
+            m.d = 1;
+            m.e = x;
+            m.f = y;
+            return m;
+        },
+        unit: function () {
+            return new Matrix(1, 0, 0, 1, 0, 0);
+        },
+        rotate: function (angle, x, y) {
+            var m = new Matrix();
+            m.a = math.cos(rad(angle));
+            m.b = math.sin(rad(angle));
+            m.c = -m.b;
+            m.d = m.a;
+            m.e = (x - x * m.a + y * m.b) || 0;
+            m.f = (y - y * m.a - x * m.b) || 0;
+            return m;
+        },
+        scale: function (scaleX, scaleY) {
+            var m = new Matrix();
+            m.a = scaleX;
+            m.b = 0;
+            m.c = 0;
+            m.d = scaleY;
+            m.e = 0;
+            m.f = 0;
+            return m;
+        }
+    });
+
+    kendo.dataviz.Matrix = Matrix;
+
+
     // Constants ==============================================================
     var PI = math.PI,
         PI_DIV_2 = PI / 2,
@@ -46,7 +110,11 @@ kendo_module({
 
     Location.fromArray = function(ll) {
         return new Location(ll[1], ll[0]);
-    }
+    };
+
+    Location.fromLatLng = function(ll) {
+        return new Location(ll[0], ll[1]);
+    };
 
     var WGS84 = {
         a: 6378137,                 // Semi-major radius
@@ -55,6 +123,7 @@ kendo_module({
         e: 0.08181919084262149      // Eccentricity
     };
 
+    // WGS 84 / World Mercator
     var Mercator = Class.extend({
         init: function(options) {
             this.options = deepExtend({}, this.options, options);
@@ -136,6 +205,9 @@ kendo_module({
         }
     });
 
+    // WGS 84 / Pseudo-Mercator
+    // Used by Google Maps, Bing, OSM, etc.
+    // Spherical projection of ellipsoidal coordinates.
     var SphericalMercator = Mercator.extend({
         MAX_LAT: 85.0511287798,
 
@@ -165,31 +237,34 @@ kendo_module({
         }
     });
 
-    // WGS 84 / Pseudo-Mercator
-    // Used by Google Maps, Bing, OSM, etc.
-    // Spherical projection of ellipsoidal coordinates.
     var EPSG3857 = Class.extend({
         init: function() {
-            this._proj = new SphericalMercator();
+            var crs = this,
+                proj = crs._proj = new SphericalMercator();
+
+            var c = 2 * PI * proj.options.datum.a;
+
+            // Scale circumference to 1, mirror Y and shift origin to top left
+            this.ctm = Matrix.translate(0.5, 0.5).times(Matrix.scale(1/c, -1/c));
+
+            // Inverse transform
+            this.rctm = Matrix.scale(c, -c).times(Matrix.translate(-0.5, -0.5));
         },
 
         // Location <-> Point (map units, e.g. meters)
-        toPoint: function(loc, zoomLevel) {
+        toPoint: function(loc) {
             var p = this._proj.forward(loc);
-            var r = this._proj.options.datum.a;
 
-            p.x = (1 + p.x / (PI * r)) / 2;
-            p.y = (1 - p.y / (PI * r)) / 2;
-
-            return p;
+            return this.ctm.apply(p);
         },
 
         toLocation: function(point) {
+            point = this.rctm.apply(point);
+
             return this._proj.inverse(point);
         }
     });
 
-    // WGS 84 / World Mercator
     var EPSG3395 = Class.extend({
         init: function() {
             this._proj = new Mercator();
