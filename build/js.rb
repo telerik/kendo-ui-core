@@ -91,6 +91,7 @@ WEB_JS = FileList[
     "src/kendo.resizable.js",
     "src/kendo.sortable.js",
     "src/kendo.selectable.js",
+    "src/kendo.button.js",
     "src/kendo.pager.js",
     "src/kendo.popup.js",
     "src/kendo.tooltip.js",

@@ -825,6 +825,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a <see cref="Button"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Button()
+        ///             .Name("Button1");
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual ButtonBuilder Button()
+        {
+            return new ButtonBuilder(new Button(ViewContext, Initializer));
+        }
+
+        /// <summary>
         /// Creates a <see cref="Kendo.Mvc.UI.Chart{T}"/>
         /// </summary>
         /// <example>
@@ -1963,8 +1978,6 @@ namespace Kendo.Mvc.UI.Fluent
                         Convert.ToDouble(value)
                     ));
         }
-
-
 
         private string GetName(LambdaExpression expression)
         {

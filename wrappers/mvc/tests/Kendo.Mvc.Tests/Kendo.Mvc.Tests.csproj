@@ -112,6 +112,10 @@
     <Compile Include="Infrastructure\Implementation\DependencyInjectionContainerTests.cs" />
     <Compile Include="Infrastructure\Implementation\NoCacheTests.cs" />
     <Compile Include="Infrastructure\Implementation\JavaScriptInitializerTests.cs" />
+    <Compile Include="UI\Button\ButtonBuilderTests.cs" />
+    <Compile Include="UI\Button\ButtonHtmlBuilderTests.cs" />
+    <Compile Include="UI\Button\ButtonRenderingTests.cs" />
+    <Compile Include="UI\Button\ButtonTestHelper.cs" />
     <Compile Include="UI\Chart\ChartSelectionMousewheelBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAxisSelectionBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartSeriesFactoryTests.cs" />

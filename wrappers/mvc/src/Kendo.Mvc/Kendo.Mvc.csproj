@@ -260,6 +260,11 @@
     <Compile Include="UI\Barcode\Fluent\BarcodeTextBuilder.cs" />
     <Compile Include="UI\Barcode\Html\BarcodeHtmlBuilder.cs" />
     <Compile Include="UI\Barcode\Serialization\BarcodeElementBorderSerializer.cs" />
+    <Compile Include="UI\Button\Button.cs" />
+    <Compile Include="UI\Button\Fluent\ButtonBuilder.cs" />
+    <Compile Include="UI\Button\Fluent\ButtonEventBuilder.cs" />
+    <Compile Include="UI\Button\Html\ButtonHtmlBuilder.cs" />
+    <Compile Include="UI\Button\Html\IButtonHtmlBuilder.cs" />
     <Compile Include="UI\Calendar\CalendarSelectionSettings.cs" />
     <Compile Include="UI\Calendar\Fluent\CalendarEventBuilder.cs" />
     <Compile Include="UI\Calendar\Fluent\CalendarSelectionSettingsBuilder.cs" />
