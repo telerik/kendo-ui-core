@@ -8,9 +8,14 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
-        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.mobile.loader.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.mobile.view.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.mobile.pane.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.mobile.scroller.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.validator.js"></script>
         <script src="../../src/kendo.editable.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.list.js"></script>
@@ -38,8 +43,6 @@
                 SchedulerEvent = kendo.data.SchedulerEvent,
                 container;
 
-            QUnit.config.reorder = false;
-
             function getDate(date) {
                 return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
             }
@@ -48,11 +51,25 @@
                 setup: function() {
                     container = $("<div>");
                     container.appendTo(document.body);
-                    kendo.support.mobileOS = {};
+
+                    kendo.support.mobileOS = {
+                        "device": "ipad",
+                        "tablet": "tablet",
+                        "browser": "mobilesafari",
+                        "name": "ios",
+                        "ios": true,
+                        "majorVersion": "5",
+                        "minorVersion": "0",
+                        "flatVersion": "500",
+                        "appMode": false
+                    };
                 },
                 teardown: function() {
-                    container.kendoScheduler("destroy").empty().remove();
-                    kendo.support.mobileOS = null;
+                    kendo.destroy(document.body);
+
+                    container.closest("[data-role=pane]").remove();
+
+                    kendo.support.mobileOS = false;
                 }
             });
 
@@ -65,6 +82,82 @@
                     }, options)
                 );
             }
+
+            test("edit form is wrapped within a view",1, function() {
+                var scheduler = setup();
+
+                scheduler.editEvent(scheduler.dataSource.at(0));
+
+                ok(scheduler._editor.container.closest(kendo.roleSelector("view")).length);
+            });
+
+            test("editor is close on cancel",1, function() {
+                var scheduler = setup();
+
+                var close = stub(scheduler._editor, "close");
+
+                scheduler.editEvent(scheduler.dataSource.at(0));
+                scheduler.cancelEvent();
+
+                equal(close.calls("close"), 1);
+            });
+
+            test("edit view is removed", 1, function() {
+                var scheduler = setup();
+
+                scheduler.editEvent(scheduler.dataSource.at(0));
+                scheduler.cancelEvent();
+
+                equal(scheduler._editor.pane.element.find(kendo.roleSelector("view")).length, 1);
+            });
+
+            test("editing event triggers the edit event", 1, function() {
+                var scheduler = setup({
+                    edit: function() {
+                        ok(true);
+                    }
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0));
+            });
+
+            test("preventing the edit form opening calls cancel event",  function() {
+                var scheduler = setup({
+                    edit: function(e) {
+                        e.preventDefault();
+                    }
+                });
+
+                var cancel = stub(scheduler, "cancelEvent");
+
+                scheduler.editEvent(scheduler.dataSource.at(0));
+
+                equal(cancel.calls("cancelEvent"), 2);
+            });
+
+            test("clicking cancel button calls cancelEvent", function() {
+                var scheduler = setup();
+
+                var cancel = stub(scheduler, "cancelEvent");
+
+                scheduler.editEvent(scheduler.dataSource.at(0));
+
+                scheduler._editor.container.find(".k-scheduler-cancel").click();
+
+                equal(cancel.calls("cancelEvent"), 2);
+            });
+
+            test("clicking save button calls saveEvent", function() {
+                var scheduler = setup();
+
+                var save = stub(scheduler, "saveEvent");
+
+                scheduler.editEvent(scheduler.dataSource.at(0));
+
+                scheduler._editor.container.find(".k-scheduler-update").click();
+
+                equal(save.calls("saveEvent"), 1);
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

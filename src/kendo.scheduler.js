@@ -667,13 +667,86 @@ kendo_module({
         };
     }
 
-    var MobileEditor = kendo.Observable.extend({
+    var editors = {
+        mobile: {
+            dateRange: DATERANGEEDITOR,
+            timezonePopUp: TIMEZONEPOPUP,
+            timezone: TIMEZONEEDITOR,
+            recurrence: RECURRENCEEDITOR,
+            description: '<textarea name="description" class="k-textbox"/>'
+        },
+        desktop: {
+            dateRange: DATERANGEEDITOR,
+            timezonePopUp: TIMEZONEPOPUP,
+            timezone: TIMEZONEEDITOR,
+            recurrence: RECURRENCEEDITOR,
+            description: '<textarea name="description" class="k-textbox"/>'
+        }
+    };
+
+    var Editor = kendo.Observable.extend({
         init: function(element, options) {
 
             kendo.Observable.fn.init.call(this);
 
             this.element = element;
             this.options = options;
+        },
+
+        fields: function(editors, model) {
+            var messages = this.options.messages;
+
+            var that = this;
+
+            var click = function(e) {
+                e.preventDefault();
+                that._createTimezonePopup(model, this);
+            };
+
+            var fields = [
+                { field: "title", title: messages.editor.title /*, format: field.format, editor: field.editor, values: field.values*/ },
+                { field: "start", title: messages.editor.start, editor: editors.dateRange },
+                { field: "end", title: messages.editor.end, editor: editors.dateRange },
+                { field: "isAllDay", title: messages.editor.allDayEvent }
+            ];
+
+            var timezone = this.options.timezone;
+
+            if (kendo.timezone.windows_zones && !model.isAllDay) {
+                fields.push({ field: "timezone", title: messages.editor.timezone, editor: editors.timezonePopUp, click: click, messages: messages.editor });
+                fields.push({ field: "startTimezone", title: messages.editor.startTimezone, editor: editors.timezone });
+                fields.push({ field: "endTimezone", title: messages.editor.endTimezone, editor: editors.timezone });
+            }
+
+            if (!model.recurrenceId) {
+                fields.push({ field: "recurrenceRule", title: messages.editor.repeat, editor: editors.recurrence, timezone: timezone, messages: messages.recurrenceEditor });
+            }
+
+            if ("description" in model) {
+                fields.push({ field: "description", title: messages.editor.description, editor: editors.description });
+            }
+
+            for (var resourceIndex = 0; resourceIndex < this.options.resources.length; resourceIndex++) {
+                var resource = this.options.resources[resourceIndex];
+                fields.push({
+                    field: resource.field,
+                    title: resource.title,
+                    editor: resource.multiple? multiSelectResourceEditor(resource) : dropDownResourceEditor(resource)
+                });
+            }
+
+            return fields;
+        },
+
+        end: function() {
+            return this.editable.end();
+        }
+    });
+
+    var MobileEditor = Editor.extend({
+        init: function() {
+
+            Editor.fn.init.apply(this, arguments);
 
             this.pane = kendo.mobile.ui.Pane.wrap(this.element);
             this.view = this.pane.view();
@@ -685,183 +758,144 @@ kendo_module({
             this.pane.destroy();
         },
 
+        _createTimezonePopup: function() {
+        },
+
         editEvent: function(model) {
             var pane = this.pane;
+            var html = "";
+
+            var messages = this.options.messages;
+            var updateText = messages.save;
+            //var editText = messages.edit;
+            var cancelText = messages.cancel;
+            var titleText = messages.editor.editorTitle;
+
+            html += '<div data-role="view" id="edit" ' + kendo.attr("uid") + '="' + model.uid + '">' +
+                '<div data-role="header"><a href="#" class="k-scheduler-cancel">' + cancelText + '</a>' + titleText + '<a href="#" class="k-scheduler-update">' + updateText + '</a></div>';
+
+            var fields = this.fields(editors.mobile, model);
 
             var that = this;
-            var editable = that.options.editable;
-            var html = '';//'<div ' + kendo.attr("uid") + '="' + model.uid + '" class="k-popup-edit-form k-scheduler-edit-form">';
-            var template = editable.template;
-            var messages = that.options.messages;
-            //var updateText = messages.save;
-            //var cancelText = messages.cancel;
-
-            var timezone = that.options.timezone;
-
-            var click = function(e) {
-                e.preventDefault();
-                that._createTimezonePopup(model, this);
-            };
-
-            var fields = [
-                { field: "title", title: messages.editor.title /*, format: field.format, editor: field.editor, values: field.values*/ },
-                { field: "start", title: messages.editor.start, editor: DATERANGEEDITOR },
-                { field: "end", title: messages.editor.end, editor: DATERANGEEDITOR },
-                { field: "isAllDay", title: messages.editor.allDayEvent }
-            ];
-
-            //var attr;
-            //var options = isPlainObject(editable) ? editable.window : {};
             var settings = extend({}, kendo.Template, that.options.templateSettings);
             var paramName = settings.paramName;
             var editableFields = [];
+            //var timezone = that.options.timezone;
 
-//            html +='<div data-role="view" id="details">' +
- //               '<div data-role="header"><a data-role="backbutton" href="#:back" data-align="left">Back</a> Layout Header <a href="#edit" data-role="button" data-align="right">Edit</a></div><div>foo</div>' +
-  //          '</div>';
-
-            html += '<div data-role="view" id="edit" ' + kendo.attr("uid") + '="' + model.uid + '">' +
-                '<div data-role="header"><a data-role="backbutton" href="#:back" data-align="left">Back</a>Layout Header 2 <a href="#" class="k-scheduler-update">Save</a></div>';
-
-            html += '<div class="k-edit-form-container">';
-
-            if (template) {
+            /*if (template) {
                 if (typeof template === STRING) {
                     template = window.unescape(template);
                 }
                 html += (kendo.template(template, settings))(model);
-            } else {
-                if (kendo.timezone.windows_zones) {
-                    fields.push({ field: "timezone", title: messages.editor.timezone, editor: TIMEZONEPOPUP, click: click, messages: messages.editor });
-                    fields.push({ field: "startTimezone", title: messages.editor.startTimezone, editor: TIMEZONEEDITOR });
-                    fields.push({ field: "endTimezone", title: messages.editor.endTimezone, editor: TIMEZONEEDITOR });
+            } else {*/
+            for (var idx = 0, length = fields.length; idx < length; idx++) {
+                var field = fields[idx];
+
+                if (field.field === "startTimezone") {
+                    html += '<div class="k-popup-edit-form k-scheduler-edit-form k-scheduler-timezones" style="display:none">';
+                    html += '<div class="k-edit-form-container">';
+                    html += '<div class="k-edit-label"></div>';
+                    html += '<div class="k-edit-field"><label><input class="k-timezone-toggle" type="checkbox" />' + messages.editor.separateTimezones +'</label></div>';
                 }
 
-                if (!model.recurrenceId) {
-                    fields.push({ field: "recurrenceRule", title: messages.editor.repeat, editor: RECURRENCEEDITOR, timezone: timezone, messages: messages.recurrenceEditor });
-                }
+                html += '<div class="k-edit-label"><label for="' + field.field + '">' + (field.title || field.field || "") + '</label></div>';
 
-                if ("description" in model) {
-                    fields.push({ field: "description", title: messages.editor.description, editor: '<textarea name="description" class="k-textbox"/>' });
-                }
+                if ((!model.editable || model.editable(field.field))) {
+                    editableFields.push(field);
+                    html += '<div ' + kendo.attr("container-for") + '="' + field.field + '" class="k-edit-field"></div>';
+                } else {
+                    var tmpl = "#:";
 
-                for (var resourceIndex = 0; resourceIndex < that.options.resources.length; resourceIndex++) {
-                    var resource = that.options.resources[resourceIndex];
-                    fields.push({
-                       field: resource.field,
-                       title: resource.title,
-                       editor: resource.multiple? multiSelectResourceEditor(resource) : dropDownResourceEditor(resource)
-                    });
-                }
-
-                for (var idx = 0, length = fields.length; idx < length; idx++) {
-                    var field = fields[idx];
-
-                    if (field.field === "startTimezone") {
-                        html += '<div class="k-popup-edit-form k-scheduler-edit-form k-scheduler-timezones" style="display:none">';
-                        html += '<div class="k-edit-form-container">';
-                        html += '<div class="k-edit-label"></div>';
-                        html += '<div class="k-edit-field"><label><input class="k-timezone-toggle" type="checkbox" />' + messages.editor.separateTimezones +'</label></div>';
-                    }
-
-                    html += '<div class="k-edit-label"><label for="' + field.field + '">' + (field.title || field.field || "") + '</label></div>';
-
-                    if ((!model.editable || model.editable(field.field))) {
-                        editableFields.push(field);
-                        html += '<div ' + kendo.attr("container-for") + '="' + field.field + '" class="k-edit-field"></div>';
+                    if (field.field) {
+                        field = kendo.expr(field.field, paramName);
+                        tmpl += field + "==null?'':" + field;
                     } else {
-                        var tmpl = "#:";
-
-                        if (field.field) {
-                            field = kendo.expr(field.field, paramName);
-                            tmpl += field + "==null?'':" + field;
-                        } else {
-                            tmpl += "''";
-                        }
-
-                        tmpl += "#";
-
-                        tmpl = kendo.template(tmpl, settings);
-
-                        html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
+                        tmpl += "''";
                     }
 
-                    if (field.field === "endTimezone") {
-                        html += '<div class="k-edit-buttons k-state-default">';
-                        //html += createButton({ name: "savetimezone", text: messages.save }) + createButton({ name: "canceltimezone", text: messages.cancel });
-                        html += '</div></div></div>';
-                    }
+                    tmpl += "#";
+
+                    tmpl = kendo.template(tmpl, settings);
+
+                    html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
+                }
+
+                if (field.field === "endTimezone") {
+                    html += '<div class="k-edit-buttons k-state-default">';
+                    //            html += createButton({ name: "savetimezone", text: messages.save }) + createButton({ name: "canceltimezone", text: messages.cancel });
+                    html += '</div></div></div>';
                 }
             }
+            //}
 
-            html += '<div class="k-edit-buttons k-state-default">';
-            //html += createButton({ name: "update", text: updateText, attr: attr }) + createButton({ name: "canceledit", text: cancelText, attr: attr });
-            html += '</div></div></div>';
+            html += "</div>";
 
             var view = pane.append(html);
 
             var container = this.container = view.element;
 
             that.editable = container.kendoEditable({
-                        fields: editableFields,
-                        model: model,
-                        clearContainer: false,
-                        validateOnBlur: true
-                    }).data("kendoEditable");
+                    fields: editableFields,
+                    model: model,
+                    clearContainer: false,
+                    validateOnBlur: true
+                }).data("kendoEditable");
 
-            if (!that.trigger(EDIT, { container: container, model: model })) {
 
-                pane.navigate(view, "slide");
+            if (!this.trigger("edit", { container: container, model: model })) {
 
-                container.on(CLICK + NS, "a.k-scheduler-cancel", function(e) {
+
+                container.on(CLICK + NS, "a.k-scheduler-edit, a.k-scheduler-cancel, a.k-scheduler-update", function(e) {
                     e.preventDefault();
                     e.stopPropagation();
 
-                    if (that.trigger(CANCEL, { container: container, model: model })) {
-                        return;
+                    var button = $(this);
+
+                    if (button.hasClass("k-scheduler-edit")) {
+                        pane.navigate("#edit");
+                    } else {
+                        var name = button.hasClass("k-scheduler-cancel") ? "cancel" : "save";
+                        that.trigger(name, { container: container, model: model });
                     }
                 });
 
-                container.on(CLICK + NS, "a.k-scheduler-update", function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
+                pane.navigate(view);
 
-                    that.trigger("save", { container: container, model: model });
-                });
             } else {
-                that.trigger(CANCEL, { container: container, model: model });
+                this.trigger("cancel", { container: container, model: model });
             }
-
         },
 
         editRecurring: function() {
         },
-
-        end: function() {
-            return this.editable.end();
+        _views: function() {
+            return this.pane.element
+                    .find(kendo.roleSelector("view"))
+                    .not(this.view.element);
         },
 
         close: function() {
-            if (this.editable) {
-                var views = this.pane.element.find(kendo.roleSelector("view"))
-                    .not(this.view.element);
+            if (this.container) {
+                this.pane.navigate(""/*, "slide"*/);
 
-                this.pane.navigate("", "slide");
+                var views = this._views();
+                var view;
+
+                for (var idx = 0, length = views.length; idx < length; idx++) {
+                    view = views.eq(idx).data("kendoMobileView");
+                    if (view) {
+                       view.purge();
+                    }
+                }
+
+                views.remove();
+
                 this.container = null;
-                views.kendoMobileView("purge");
             }
         }
     });
 
-    var PopupEditor = kendo.Observable.extend({
-        init: function(element, options) {
-
-            kendo.Observable.fn.init.call(this);
-
-            this.element = element;
-            this.options = options;
-        },
-
+    var PopupEditor = Editor.extend({
         destroy: function() {
             this.close();
             this.unbind();
@@ -872,10 +906,6 @@ kendo_module({
         },
 
         editRecurring: function() {
-        },
-
-        end: function() {
-            return this.editable.end();
         },
 
         close: function() {
@@ -917,19 +947,9 @@ kendo_module({
             var cancelText = messages.cancel;
 
             var createButton = that.options.createButton;
-            var timezone = that.options.timezone;
+            //var timezone = that.options.timezone;
 
-            var click = function(e) {
-                e.preventDefault();
-                that._createTimezonePopup(model, this);
-            };
-
-            var fields = [
-                { field: "title", title: messages.editor.title /*, format: field.format, editor: field.editor, values: field.values*/ },
-                { field: "start", title: messages.editor.start, editor: DATERANGEEDITOR },
-                { field: "end", title: messages.editor.end, editor: DATERANGEEDITOR },
-                { field: "isAllDay", title: messages.editor.allDayEvent }
-            ];
+            var fields = this.fields(editors.desktop, model);
 
             var attr;
             var options = isPlainObject(editable) ? editable.window : {};
@@ -943,28 +963,6 @@ kendo_module({
                 }
                 html += (kendo.template(template, settings))(model);
             } else {
-                if (kendo.timezone.windows_zones && !model.isAllDay) {
-                    fields.push({ field: "timezone", title: messages.editor.timezone, editor: TIMEZONEPOPUP, click: click, messages: messages.editor });
-                    fields.push({ field: "startTimezone", title: messages.editor.startTimezone, editor: TIMEZONEEDITOR });
-                    fields.push({ field: "endTimezone", title: messages.editor.endTimezone, editor: TIMEZONEEDITOR });
-                }
-
-                if (!model.recurrenceId) {
-                    fields.push({ field: "recurrenceRule", title: messages.editor.repeat, editor: RECURRENCEEDITOR, timezone: timezone, messages: messages.recurrenceEditor });
-                }
-
-                if ("description" in model) {
-                    fields.push({ field: "description", title: messages.editor.description, editor: '<textarea name="description" class="k-textbox"/>' });
-                }
-
-                for (var resourceIndex = 0; resourceIndex < that.options.resources.length; resourceIndex++) {
-                    var resource = that.options.resources[resourceIndex];
-                    fields.push({
-                       field: resource.field,
-                       title: resource.title,
-                       editor: resource.multiple? multiSelectResourceEditor(resource) : dropDownResourceEditor(resource)
-                    });
-                }
 
                 for (var idx = 0, length = fields.length; idx < length; idx++) {
                     var field = fields[idx];
@@ -1042,9 +1040,7 @@ kendo_module({
                     e.preventDefault();
                     e.stopPropagation();
 
-                    if (that.trigger(CANCEL, { container: container, model: model })) {
-                        return;
-                    }
+                    that.trigger(CANCEL, { container: container, model: model });
                 });
 
                 container.on(CLICK + NS, "a.k-scheduler-update", function(e) {
@@ -1433,6 +1429,7 @@ kendo_module({
             messages: {
                 today: "Today",
                 save: "Save",
+                edit: "Edit",
                 cancel: "Cancel",
                 destroy: "Delete",
                 deleteWindowTitle: "Delete event",
@@ -2112,7 +2109,6 @@ kendo_module({
                     e.preventDefault();
                     return;
                 }
-
                 that.cancelEvent();
 
                 that.focus();

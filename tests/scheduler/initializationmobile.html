@@ -8,10 +8,15 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
-        <script src="../../src/kendo.popup.js"></script>
-        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.loader.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.mobile.view.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.mobile.pane.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.mobile.scroller.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.window.js"></script>
         <script src="../../src/kendo.scheduler.view.js"></script>
         <script src="../../src/kendo.scheduler.dayview.js"></script>
@@ -35,12 +40,15 @@
 
             module("Initialization", {
                 setup: function() {
+                    kendo.ui.Popup.fn.options.animation = false;
+
                     container = document.createElement("div");
                     document.body.appendChild(container);
                     kendo.support.mobileOS = {};
                 },
                 teardown: function() {
-                    $(container).closest(".k-scheduler").kendoScheduler("destroy").remove();
+                    $(container).closest(".k-scheduler").kendoScheduler("destroy").remove()
+                        .closest("[data-role=pane]").remove();
                     kendo.support.mobileOS = null;
                 }
             });
@@ -63,6 +71,14 @@
                 ok(!scheduler.wrapper.hasClass("k-scheduler-mobile"));
             });
 
+            test("is wrapped in a mobile view", function() {
+                kendo.support.mobileOS = {tablet:"tablet"};
+
+                var scheduler = setup();
+
+                ok(scheduler.wrapper.closest("[data-role=view]").length);
+            });
+
             test("additional toolbar item is rendered", function() {
                 var scheduler = setup();
 
@@ -83,7 +99,6 @@
                 var scheduler = setup();
 
                 scheduler.toolbar.find(".k-nav-current").click();
-
                 ok(!scheduler.calendar);
             });
 
