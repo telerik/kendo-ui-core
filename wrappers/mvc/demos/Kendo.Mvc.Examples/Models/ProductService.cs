@@ -25,6 +25,7 @@ namespace Kendo.Mvc.Examples.Models
                  UnitsInStock = product.UnitsInStock.HasValue ? product.UnitsInStock.Value : default(short),
                  QuantityPerUnit = product.QuantityPerUnit,
                  Discontinued = product.Discontinued,
+                 UnitsOnOrder = product.UnitsOnOrder.HasValue ? (int)product.UnitsOnOrder.Value : default(int),
                  CategoryID = product.CategoryID,
                  Category = new CategoryViewModel()
                  {
