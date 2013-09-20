@@ -21,73 +21,10 @@ kendo_module({
         Widget = kendo.ui.Widget,
 
         dataviz = kendo.dataviz,
+        Matrix = dataviz.Matrix,
         Point = dataviz.Point2D,
         deepExtend = kendo.deepExtend,
         limit = dataviz.limitValue;
-
-    // CURRENTLY IN DIAGRAM MATH
-    var Matrix = Class.extend({
-        init: function (a, b, c, d, e, f) {
-            this.a = a || 0;
-            this.b = b || 0;
-            this.c = c || 0;
-            this.d = d || 0;
-            this.e = e || 0;
-            this.f = f || 0;
-        },
-        times: function (m) {
-            return new Matrix(
-                this.a * m.a + this.c * m.b,
-                this.b * m.a + this.d * m.b,
-                this.a * m.c + this.c * m.d,
-                this.b * m.c + this.d * m.d,
-                this.a * m.e + this.c * m.f + this.e,
-                this.b * m.e + this.d * m.f + this.f
-            );
-        },
-        apply: function (p) {
-            return new Point(this.a * p.x + this.c * p.y + this.e, this.b * p.x + this.d * p.y + this.f);
-        }
-    });
-
-    deepExtend(Matrix, {
-        translate: function (x, y) {
-            var m = new Matrix();
-            m.a = 1;
-            m.b = 0;
-            m.c = 0;
-            m.d = 1;
-            m.e = x;
-            m.f = y;
-            return m;
-        },
-        unit: function () {
-            return new Matrix(1, 0, 0, 1, 0, 0);
-        },
-        rotate: function (angle, x, y) {
-            var m = new Matrix();
-            m.a = math.cos(rad(angle));
-            m.b = math.sin(rad(angle));
-            m.c = -m.b;
-            m.d = m.a;
-            m.e = (x - x * m.a + y * m.b) || 0;
-            m.f = (y - y * m.a - x * m.b) || 0;
-            return m;
-        },
-        scale: function (scaleX, scaleY) {
-            var m = new Matrix();
-            m.a = scaleX;
-            m.b = 0;
-            m.c = 0;
-            m.d = scaleY;
-            m.e = 0;
-            m.f = 0;
-            return m;
-        }
-    });
-
-    kendo.dataviz.Matrix = Matrix;
-
 
     // Constants ==============================================================
     var PI = math.PI,
@@ -237,6 +174,7 @@ kendo_module({
         }
     });
 
+    // TODO: Better (less cryptic name) for this class(es)
     var EPSG3857 = Class.extend({
         init: function() {
             var crs = this,
@@ -245,21 +183,26 @@ kendo_module({
             var c = 2 * PI * proj.options.datum.a;
 
             // Scale circumference to 1, mirror Y and shift origin to top left
-            this.ctm = Matrix.translate(0.5, 0.5).times(Matrix.scale(1/c, -1/c));
+            this._tm = Matrix.translate(0.5, 0.5).times(Matrix.scale(1/c, -1/c));
 
-            // Inverse transform
-            this.rctm = Matrix.scale(c, -c).times(Matrix.translate(-0.5, -0.5));
+            // Inverse transform matrix
+            this._itm = Matrix.scale(c, -c).times(Matrix.translate(-0.5, -0.5));
         },
 
-        // Location <-> Point (map units, e.g. meters)
-        toPoint: function(loc) {
-            var p = this._proj.forward(loc);
+        // Location <-> Point (screen coordinates for a given scale)
+        toPoint: function(loc, scale) {
+            var point = this._proj.forward(loc);
 
-            return this.ctm.apply(p);
+            return point
+                .transform(this._tm)
+                .multiply(scale || 1);
         },
 
-        toLocation: function(point) {
-            point = this.rctm.apply(point);
+        toLocation: function(point, scale) {
+            point = point
+                .clone()
+                .transform(this._itm)
+                .multiply(1 / (scale || 1));
 
             return this._proj.inverse(point);
         }
