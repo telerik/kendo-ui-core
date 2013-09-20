@@ -237,6 +237,8 @@ kendo_module({
         }
     });
 
+    // Layers =================================================================
+
     // Helper methods =========================================================
     function rad(degrees) {
         return degrees * DEG_TO_RAD;
