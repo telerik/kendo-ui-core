@@ -11,7 +11,7 @@ kendo_module({
         escapeQuoteRegExp = /'/ig,
         extend = $.extend;
 
-    function parameterMap(options, operation, encode) {
+    function parameterMap(options, operation, encode, stringifyDates) {
        var result = {};
 
        if (options.sort) {
@@ -69,10 +69,10 @@ kendo_module({
                    models = options.models;
 
                for (var i = 0; i < models.length; i++) {
-                   serializeItem(result, models[i], prefix + "[" + i + "].");
+                   serializeItem(result, models[i], prefix + "[" + i + "].", stringifyDates);
                }
            } else if (options) {
-               serializeItem(result, options, "");
+               serializeItem(result, options, "", stringifyDates);
            }
 
            delete options.models;
@@ -84,11 +84,11 @@ kendo_module({
        return extend(result, options);
     }
 
-    function serializeItem(result, item, prefix) {
+    function serializeItem(result, item, prefix, stringifyDates) {
         var value,
             key;
 
-        item = convert(item);
+        item = convert(item, stringifyDates);
 
         for (var member in item) {
             key = prefix + member;
@@ -103,12 +103,16 @@ kendo_module({
         }
     }
 
-    function convert(values) {
+    function convert(values, stringifyDates) {
         for (var key in values) {
             var value = values[key];
 
             if (value instanceof Date) {
-                values[key] = kendo.format("{0:G}", value);
+                if(stringifyDates) {
+                    values[key] = kendo.stringify(value).replace(/"/g, "");
+                } else {
+                    values[key] = kendo.format("{0:G}", value);
+                }
             }
 
             if (typeof value === "number") {
@@ -243,7 +247,16 @@ kendo_module({
         transports: {
             "aspnetmvc-ajax": kendo.data.RemoteTransport.extend({
                 init: function(options) {
-                    kendo.data.RemoteTransport.fn.init.call(this, $.extend(true, {}, this.options, options));
+                    var that = this;
+                    var stringifyDates = options.stringifyDates;
+
+                    kendo.data.RemoteTransport.fn.init.call(this,
+                        extend(true, {}, this.options, options, {
+                            parameterMap: function(options, operation) {
+                                return parameterMap.call(that, options, operation, false, stringifyDates);
+                            }
+                        })
+                    );
                 },
                 read: function(options) {
                     var data = this.options.data,

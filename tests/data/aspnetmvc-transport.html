@@ -6,6 +6,7 @@
     <script src="../jquery.mockjax.js"></script>
     <script src="../../src/kendo.core.js"></script>
     <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.scheduler.js"></script>
     <script src="../../src/aspnetmvc/kendo.data.aspnetmvc.js"></script>
 
     <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
@@ -28,6 +29,19 @@
                     $.mockjaxClear();
                 }
             });
+
+            function decodeURLParameters(value) {
+                var params = {},
+                pieces = value.split('&'),
+                pair, i, l;
+
+                for (i = 0, l = pieces.length; i < l; i++) {
+                    pair = pieces[i].split('=', 2);
+                    params[decodeURIComponent(pair[0])] = (pair.length == 2 ?
+                        decodeURIComponent(pair[1].replace(/\+/g, ' ')) : true);
+                }
+                return params;
+            }
 
             test("server transport encodes ampersand", function() {
                 var transport = new kendo.data.transports["aspnetmvc-server"]({ prefix: "" });
@@ -102,6 +116,47 @@
                        deepEqual(e.Data, data);
                     }
                 });
+            });
+
+            test("date fields are correctly serialized based on stringifyDates parameter", function() {
+                   var schedulerTransport = new kendo.data.transports["aspnetmvc-ajax"]({data: {stringifyDates: true}});
+                   var transport = new Transport({});
+                   var currentDate = new Date();
+
+                   var schedulerResult = schedulerTransport.parameterMap({dateField: currentDate}, "update", true, true);
+                   var otherResult = transport.parameterMap({dateField: currentDate}, "update", true);
+
+                   equal(schedulerResult.dateField, currentDate.toJSON());
+                   equal(otherResult.dateField, kendo.format("{0:G}", currentDate))
+            });
+
+           test("stringifyDates parameter is correctly set in the transport and dates are correctly serialized", function() {
+                    var requestData,
+                    currentDate = new Date();
+
+                    var dataSource = new kendo.data.SchedulerDataSource({
+                        type: "aspnetmvc-ajax",
+                        transport: {
+                            stringifyDates: true,
+                            read: {
+                                url: "read"
+                            },
+                            update: {
+                                url: "update",
+                                beforeSend: function(jqXHR, settings ) {
+                                    requestData = decodeURLParameters(settings.data);
+                                    return false;
+                                }
+                            }
+                        }
+                    });
+
+                    dataSource.read();
+                    dataSource.add({id: 1, Start: currentDate});
+                    dataSource.at(0).set("dirty", true);
+
+                    dataSource.sync();
+                    equal(requestData.Start, currentDate.toJSON());
             });
 
             test("data is loaded from the url if both data and url are set on the second request", 2, function() {

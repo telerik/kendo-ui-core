@@ -370,6 +370,8 @@
                 options["group"] = group;
             }
 
+            DataSource.Transport.StringifyDates = true;
+
             Dictionary<string, object> dataSource = (Dictionary<string, object>)DataSource.ToJson();
 
             //TODO: update logic

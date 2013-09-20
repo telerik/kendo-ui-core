@@ -15,6 +15,7 @@ namespace Kendo.Mvc.UI
         }
 
         public string Prefix { get; set; }
+        public bool StringifyDates { get; set; }
         
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -46,6 +47,11 @@ namespace Kendo.Mvc.UI
             if (destroy.Keys.Any())
             {
                 json["destroy"] = destroy;
+            }
+
+            if (StringifyDates)
+            {
+                json["stringifyDates"] = true;
             }
         }
 
