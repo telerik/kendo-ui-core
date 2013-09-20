@@ -55,6 +55,35 @@ namespace Kendo.Models
                             Name = Path.GetFileName(controller),
                             Url = "~/src/aspnetmvc/controllers/" + suite + "/" + Path.GetFileName(directory) + "/" + Path.GetFileName(controller)
                         };
+
+                        var source = File.ReadAllText(controller);
+
+                        if (source.Contains("productService"))
+                        {
+                            yield return new ExampleFile
+                            {
+                                Name = "ProductService.cs",
+                                Url = "~/src/aspnetmvc/models/ProductService.cs"
+                            };
+                        }
+
+                        if (source.Contains("taskService"))
+                        {
+                            yield return new ExampleFile
+                            {
+                                Name = "SchedulerTaskService.cs",
+                                Url = "~/src/aspnetmvc/models/Scheduler/SchedulerTaskService.cs"
+                            };
+                        }
+
+                        if (source.Contains("meetingService"))
+                        {
+                            yield return new ExampleFile
+                            {
+                                Name = "SchedulerMeetingService.cs",
+                                Url = "~/src/aspnetmvc/models/Scheduler/SchedulerMeetingService.cs"
+                            };
+                        }
                     }
                 }
             }
