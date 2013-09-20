@@ -19,13 +19,46 @@
         <script src="../src/kendo.list.js"></script>
         <script src="../src/kendo.dropdownlist.js"></script>
         <script src="../src/kendo.window.js"></script>
+        <script src="../src/kendo.menu.js"></script>
         <script src="../src/kendo.pager.js"></script>
+        <script src="../src/kendo.editable.js"></script>
         <script src="../src/kendo.grid.js"></script>
         <script src="../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
         <div class="container">
             <h1>Hello, bootstrap!</h1>
+
+            <ul id="menu">
+                <li> Products
+                    <ul>
+                        <li> Furniture
+                            <ul> <!-- moving the UL to the next line will cause an IE7 problem -->
+                                <li>Tables & Chairs</li>
+                                <li>Sofas</li>
+                                <li>Occasional Furniture</li>
+                                <li>Childerns Furniture</li>
+                                <li>Beds</li>
+                            </ul>
+
+
+                        </li>
+                        <li> Decor
+                            <ul> <!-- moving the UL to the next line will cause an IE7 problem -->
+                                <li>Bed Linen</li>
+                                <li>Throws</li>
+                                <li>Curtains & Blinds</li>
+                                <li>Rugs</li>
+                                <li>Carpets</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li> Blog </li>
+                <li> Company </li>
+                <li> Events </li>
+                <li disabled="disabled"> News </li>
+            </ul>
 
             <div id="grid"></div>
 
@@ -84,8 +117,12 @@
                     { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "100px" },
                     { field: "UnitsInStock", title:"Units In Stock", width: "100px" },
                     { field: "Discontinued", width: "100px" },
-                    { command: ["edit", "destroy"], title: "&nbsp;", width: "172px" }]
+                    { command: ["edit", "destroy"], title: "&nbsp;", width: "172px" }
+                ],
+                editable: true
             });
+
+            $("#menu").kendoMenu();
         </script>
     </body>
 </html>
