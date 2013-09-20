@@ -3159,6 +3159,24 @@ kendo_module({
             var chart = this;
             chart.traverseDataPoints(proxy(chart.addValue, chart));
         },
+        
+        addErrorBar: function(value, point, data, series, categoryIx, seriesIx){
+            var chart = this;
+            if(isNumber(data.fields[ERROR_LOW_FIELD]) &&
+                isNumber(data.fields[ERROR_HIGH_FIELD])){
+                chart.addPointErrorBar(data.fields[ERROR_LOW_FIELD],
+                    data.fields[ERROR_HIGH_FIELD], point, categoryIx);
+            }
+            else if(series.errorBars){
+                chart.seriesErrorRanges = chart.seriesErrorRanges || [];                    
+                chart.seriesErrorRanges[seriesIx] = chart.seriesErrorRanges[seriesIx] ||
+                    new ErrorRangeCalculator(series.errorBars.value, series, VALUE);
+                var errorRange = chart.seriesErrorRanges[seriesIx].getErrorRange(
+                    value, point.dataItem, series.data);
+                chart.addPointErrorBar(errorRange.low, errorRange.high, point, categoryIx);
+            }                
+        },
+        
         addPointErrorBar: function(low, high, point, categoryIx){
             var chart = this,
                 value = point.value,
@@ -3230,21 +3248,8 @@ kendo_module({
                 point.series = series;
                 point.seriesIx = seriesIx;
                 point.owner = chart;
-                point.dataItem = series.data[categoryIx];
-                
-                if(isNumber(data.fields[ERROR_LOW_FIELD]) &&
-                    isNumber(data.fields[ERROR_HIGH_FIELD])){
-                    chart.addPointErrorBar(data.fields[ERROR_LOW_FIELD],
-                        data.fields[ERROR_HIGH_FIELD], point, categoryIx);
-                }
-                else if(series.errorBars){
-                    chart.seriesErrorRanges = chart.seriesErrorRanges || [];                    
-                    chart.seriesErrorRanges[seriesIx] = chart.seriesErrorRanges[seriesIx] ||
-                        new ErrorRangeCalculator(series.errorBars.value, series, VALUE);
-                    var errorRange = chart.seriesErrorRanges[seriesIx].getErrorRange(
-                        value, point.dataItem, series.data);
-                    chart.addPointErrorBar(errorRange.low, errorRange.high, point, categoryIx);
-                }
+                point.dataItem = series.data[categoryIx]; 
+                chart.addErrorBar(value, point, data, series, categoryIx, seriesIx);
             }
 
             chart.points.push(point);
@@ -5086,37 +5091,41 @@ kendo_module({
             chart.traverseDataPoints(proxy(chart.addValue, chart));
         },
 
-        addErrorBar: function(point, fields, seriesIx){        
-            var chart = this,
-                errorRange,
+        addErrorBar: function(point, x, y, value, fields, seriesIx){        
+            var errorRange,
+                chart = this,
                 series = fields.series,
-                errorBars = series.errorBars;
+                errorBars = series.errorBars;                    
+            if(isNumber(point.value[X])){                    
+                if(isNumber(fields[X_ERROR_LOW_FIELD]) && isNumber(fields[X_ERROR_HIGH_FIELD])){
+                    chart.addPointErrorBar(fields[X_ERROR_LOW_FIELD],
+                        fields[X_ERROR_HIGH_FIELD], point, X, series, errorBars);
+                }
+                
+                if(errorBars && defined(errorBars.xValue)){
+                    chart.xSeriesErrorRanges = chart.xSeriesErrorRanges || [];
+                    chart.xSeriesErrorRanges[seriesIx] = chart.xSeriesErrorRanges[seriesIx] ||
+                        new ErrorRangeCalculator(errorBars.xValue, series, X);
 
-            if(isNumber(fields[X_ERROR_LOW_FIELD]) && isNumber(fields[X_ERROR_HIGH_FIELD])){
-                chart.addPointErrorBar(fields[X_ERROR_LOW_FIELD],
-                    fields[X_ERROR_HIGH_FIELD], point, X, series,errorBars);
-            }
+                    errorRange = chart.xSeriesErrorRanges[seriesIx].getErrorRange(x, value, series.data);
+                    chart.addPointErrorBar(errorRange.low, errorRange.high, point, X, series, errorBars);
+                }
+            }                   
+            
+            if(isNumber(point.value[Y])){      
+                if(isNumber(fields[Y_ERROR_LOW_FIELD]) && isNumber(fields[Y_ERROR_HIGH_FIELD])){
+                    chart.addPointErrorBar(fields[Y_ERROR_LOW_FIELD],
+                        fields[Y_ERROR_HIGH_FIELD], point, Y, series,errorBars);
+                }
+                
+                if(errorBars && defined(errorBars.yValue)){
+                    chart.ySeriesErrorRanges = chart.ySeriesErrorRanges || [];
+                    chart.ySeriesErrorRanges[seriesIx] = chart.ySeriesErrorRanges[seriesIx] ||
+                        new ErrorRangeCalculator(errorBars.yValue, series, Y);
 
-            if(isNumber(fields[Y_ERROR_LOW_FIELD]) && isNumber(fields[Y_ERROR_HIGH_FIELD])){
-                chart.addPointErrorBar(fields[Y_ERROR_LOW_FIELD],
-                    fields[Y_ERROR_HIGH_FIELD], point, Y, series,errorBars);
-            }
-
-            if(errorBars && defined(errorBars.xValue)){
-                chart.xSeriesErrorRanges = chart.xSeriesErrorRanges || [];
-                chart.xSeriesErrorRanges[seriesIx] = chart.xSeriesErrorRanges[seriesIx] ||
-                    new ErrorRangeCalculator(errorBars.xValue, series, X);
-
-                errorRange = chart.xSeriesErrorRanges[seriesIx].getErrorRange(x, value, series.data);
-                chart.addPointErrorBar(errorRange.low, errorRange.high, point, X, series, errorBars);
-            }
-            if(errorBars && defined(errorBars.yValue)){
-                chart.ySeriesErrorRanges = chart.ySeriesErrorRanges || [];
-                chart.ySeriesErrorRanges[seriesIx] = chart.ySeriesErrorRanges[seriesIx] ||
-                    new ErrorRangeCalculator(errorBars.yValue, series, Y);
-
-                errorRange = chart.ySeriesErrorRanges[seriesIx].getErrorRange(y, value, series.data);
-                chart.addPointErrorBar(errorRange.low, errorRange.high, point, Y, series, errorBars);
+                    errorRange = chart.ySeriesErrorRanges[seriesIx].getErrorRange(y, value, series.data);
+                    chart.addPointErrorBar(errorRange.low, errorRange.high, point, Y, series, errorBars);
+                }                        
             }
         },
         
@@ -5125,7 +5134,8 @@ kendo_module({
                 errorBar,
                 isVertical = field === Y,
                 item = {};
-
+            point[field + "Low"] = low;
+            point[field + "High"] = high;
             point.errorBars = point.errorBars || [];
             errorBar = new ErrorBar(low, high, isVertical, chart.plotArea, options);
             point.errorBars.push(errorBar);
@@ -5150,41 +5160,7 @@ kendo_module({
                 point = chart.createPoint(value, fields);
                 if (point) {
                     extend(point, fields);
-                    //chart.addErrorBar(point, fields, seriesIx);  
-                    var errorRange,
-                        series = fields.series,
-                        errorBars = series.errorBars;                    
-                    if(isNumber(point.value[X])){                    
-                        if(isNumber(fields[X_ERROR_LOW_FIELD]) && isNumber(fields[X_ERROR_HIGH_FIELD])){
-                            chart.addPointErrorBar(fields[X_ERROR_LOW_FIELD],
-                                fields[X_ERROR_HIGH_FIELD], point, X, series, errorBars);
-                        }
-                        
-                        if(errorBars && defined(errorBars.xValue)){
-                            chart.xSeriesErrorRanges = chart.xSeriesErrorRanges || [];
-                            chart.xSeriesErrorRanges[seriesIx] = chart.xSeriesErrorRanges[seriesIx] ||
-                                new ErrorRangeCalculator(errorBars.xValue, series, X);
-
-                            errorRange = chart.xSeriesErrorRanges[seriesIx].getErrorRange(x, value, series.data);
-                            chart.addPointErrorBar(errorRange.low, errorRange.high, point, X, series, errorBars);
-                        }
-                    }                   
-                    
-                    if(isNumber(point.value[Y])){      
-                        if(isNumber(fields[Y_ERROR_LOW_FIELD]) && isNumber(fields[Y_ERROR_HIGH_FIELD])){
-                            chart.addPointErrorBar(fields[Y_ERROR_LOW_FIELD],
-                                fields[Y_ERROR_HIGH_FIELD], point, Y, series,errorBars);
-                        }
-                        
-                        if(errorBars && defined(errorBars.yValue)){
-                            chart.ySeriesErrorRanges = chart.ySeriesErrorRanges || [];
-                            chart.ySeriesErrorRanges[seriesIx] = chart.ySeriesErrorRanges[seriesIx] ||
-                                new ErrorRangeCalculator(errorBars.yValue, series, Y);
-
-                            errorRange = chart.ySeriesErrorRanges[seriesIx].getErrorRange(y, value, series.data);
-                            chart.addPointErrorBar(errorRange.low, errorRange.high, point, Y, series, errorBars);
-                        }                        
-                    }                    
+                    chart.addErrorBar(point, x, y, value, fields, seriesIx);                                       
                 }
             }
 
@@ -9164,7 +9140,7 @@ kendo_module({
     var BaseTooltip = Class.extend({
         init: function(chartElement, options) {
             var tooltip = this;
-
+            
             tooltip.options = deepExtend({}, tooltip.options, options);
 
             tooltip.chartElement = chartElement;
@@ -9297,12 +9273,16 @@ kendo_module({
                     dataItem: point.dataItem,
                     percentage: point.percentage,
                     low: point.low,
-                    high: point.high
+                    high: point.high,
+                    xLow: point.xLow,
+                    xHigh: point.xHigh,
+                    yLow: point.yLow,
+                    yHigh: point.yHigh
                 });
             } else if (options.format) {
                 content = point.formatValue(options.format);
             }
-
+            
             return content;
         },
 

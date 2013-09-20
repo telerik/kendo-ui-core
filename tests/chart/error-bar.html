@@ -41,16 +41,20 @@
                 }
                 
                 MethodMocker.prototype = {
-                    mock: function(fn, fnName, callback){
+                    mock: function(fn, fnName, callback, replace){
                         var that = this;
                         that._original[fnName] = fn[fnName];
-                        fn[fnName] = function(){                            
+                        fn[fnName] = function(){ 
+                            if(replace){
+                                return  callback.apply(this, arguments);
+                            }
                             callback.apply(this, arguments);
                             return that._original[fnName].apply(this, arguments);
                         };
                     },
                     restore: function(fn,fnName){
                         fn[fnName] = this._original[fnName];
+                        delete this._original[fnName];
                     }
                 };
                 var methodMocker = new MethodMocker();
@@ -887,18 +891,37 @@
                             width: 1
                         }
                     },
-                    CategoricalPlotAreaMock = function(isVertical){
-                    this.getSlot =  function(a, b){
-                        var box;
-                        if(isVertical){
-                           box = new Box(1, a, 1, b);
+                expectedOptions = {
+                    stroke: "red",
+                    strokeWidth: 1,
+                    zIndex: 1,
+                    align: false
+                },
+                equalFields = function(a, b){
+                    var areEqual = true;
+                    if($.isArray(a)){
+                        if(!$.isArray(b) || a.length != b.length){
+                            return false;
                         }
-                        else{
-                            box = new Box(a, 1, b, 1);
+                        for(var idx = 0; idx < a.length; idx++){
+                            areEqual = areEqual && equalFields(a[idx], b[idx]);
                         }
-                       return box;
+                        return areEqual;
                     }
-                };                
+                    if(typeof a === "object"){
+                        for(var field in a){
+                            areEqual = areEqual && equalFields(a[field], b[field]);
+                        }
+                        return areEqual;
+                    }
+                    
+                    return a === b;
+                },
+                getSlot =  function(a, b){                    
+                   return new Box(a, a, b, b);
+                },
+                categoricalPlotAreaMock = new dataviz.CategoricalPlotArea([],{});
+                categoricalPlotAreaMock.valueAxis.getSlot = getSlot;
                 
                 test("value axis is found for categorical chart", function() {
                     var plotArea = new dataviz.CategoricalPlotArea([],{}),
@@ -932,7 +955,6 @@
                     equal(calculatedCapsWidth, expectedCapsWidth);
                 });
                 
-
                 test("the caps width is calculated from the box height when it is smaller than the default width for a horizontal error bar", function(){
                     var box = new Box(1,1, 1, 8),
                         expectedCapsWidth = Math.floor(box.height() / 2),
@@ -947,20 +969,55 @@
                     equal(calculatedCapsWidth, expectedCapsWidth);
                 });  
 
-                // test("lines are correctly added for a horizontal error bar", function(){
-                    // var plotArea = new CategoricalPlotAreaMock(false),
-                        // targetBox = new Box(1,4,1, 8),
-                        // errorBar = new ErrorBar(1,2, false, plotArea, defaultOptions),
-                        // view = new ViewStub(),
-                        // expectedElements = [],
-                        // elements;
-                        
-                        // errorBar.reflow(targetBox);
-                        // elements = errorBar.getViewElements(view);
-                        
-                        // ok(true);
-                    
-                // });
+                test("lines are correctly created for a horizontal error bar", function(){                    
+                    var targetBox = new Box(5,5,9, 9),                        
+                        errorBar = new ErrorBar(1,2, false, categoricalPlotAreaMock, defaultOptions),
+                        view = new ViewStub(),
+                        expectedElements = [{x1: 1, x2: 2, y1: 7, y2: 7, options: expectedOptions}, {x1: 1, x2: 1, y1: 5, y2: 9, options: expectedOptions},
+                            {x1: 2, x2: 2, y1: 5, y2: 9, options: expectedOptions}],
+                        elements;
+                    errorBar.reflow(targetBox);
+                    elements = errorBar.getViewElements(view);
+                  
+                    ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);                    
+                });
+                
+                test("lines are correctly created for a vertical error bar", function(){                    
+                    var targetBox = new Box(5,5,9, 9),                        
+                        errorBar = new ErrorBar(1,2, true, categoricalPlotAreaMock, defaultOptions),
+                        view = new ViewStub(),
+                        expectedElements = [{x1: 7, x2: 7, y1: 1, y2: 2, options: expectedOptions}, {x1: 5, x2: 9, y1: 1, y2: 1, options: expectedOptions},
+                            {x1: 5, x2: 9, y1: 2, y2: 2, options: expectedOptions}],
+                        elements;
+                    errorBar.reflow(targetBox);
+                    elements = errorBar.getViewElements(view);
+                  
+                    ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);                    
+                }); 
+
+                test("caps lines are not created for a horizontal error bar when the endCaps option is false", function(){                    
+                    var targetBox = new Box(5,5,9, 9),                        
+                        errorBar = new ErrorBar(1,2, false, categoricalPlotAreaMock, $.extend({}, defaultOptions, {endCaps: false})),
+                        view = new ViewStub(),
+                        expectedElements = [{x1: 1, x2: 2, y1: 7, y2: 7, options: expectedOptions}],
+                        elements;
+                    errorBar.reflow(targetBox);
+                    elements = errorBar.getViewElements(view);
+                  
+                    ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);                    
+                }); 
+
+                test("caps lines are not created for a vertical error bar when the endCaps option is false", function(){                    
+                    var targetBox = new Box(5,5,9, 9),                        
+                        errorBar = new ErrorBar(1,2, true, categoricalPlotAreaMock, $.extend({}, defaultOptions, {endCaps: false})),
+                        view = new ViewStub(),
+                        expectedElements = [{x1: 7, x2: 7, y1: 1, y2: 2, options: expectedOptions}],
+                        elements;
+                    errorBar.reflow(targetBox);
+                    elements = errorBar.getViewElements(view);
+                  
+                    ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);                    
+                });                 
             })();
 
         </script>
