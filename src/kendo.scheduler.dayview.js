@@ -315,6 +315,8 @@ kendo_module({
 
            if (this._isVerticallyGrouped()) {
                offset = this.content.offset();
+               y += this.content[0].scrollTop;
+               x += this.content[0].scrollLeft;
            } else {
                offset = this.element.find(".k-scheduler-header-wrap:has(.k-scheduler-header-all-day)").find(">div").offset();
            }
@@ -349,8 +351,11 @@ kendo_module({
 
            x -= offset.left;
            y -= offset.top;
-           y += this.content[0].scrollTop;
-           x += this.content[0].scrollLeft;
+
+           if (!this._isVerticallyGrouped()) {
+               y += this.content[0].scrollTop;
+               x += this.content[0].scrollLeft;
+           }
 
            x = Math.ceil(x);
            y = Math.ceil(y);
