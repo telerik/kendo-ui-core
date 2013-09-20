@@ -119,7 +119,7 @@
             });
 
             test("date fields are correctly serialized based on stringifyDates parameter", function() {
-                   var schedulerTransport = new kendo.data.transports["aspnetmvc-ajax"]({data: {stringifyDates: true}});
+                   var schedulerTransport = new kendo.data.transports["aspnetmvc-ajax"]({stringifyDates: true});
                    var transport = new Transport({});
                    var currentDate = new Date();
 
