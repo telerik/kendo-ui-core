@@ -18,14 +18,14 @@
             return Json(northwind.Categories.Select(c => new { CategoryId = c.CategoryID, CategoryName = c.CategoryName }), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetCascadeProducts(string categories, string productFilter)
+        public JsonResult GetCascadeProducts(int? categories, string productFilter)
         {
             var northwind = new SampleEntities();
             var products = northwind.Products.AsQueryable();
 
-            if (!string.IsNullOrEmpty(categories))
+            if (categories != null)
             {
-                products = products.Where(p => p.CategoryID.ToString() == categories);
+                products = products.Where(p => p.CategoryID == categories);
             }
 
             if (!string.IsNullOrEmpty(productFilter))
@@ -36,14 +36,14 @@
             return Json(products.Select(p => new { ProductID = p.ProductID, ProductName = p.ProductName }), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetCascadeOrders(string products, string orderFilter)
+        public JsonResult GetCascadeOrders(int? products, string orderFilter)
         {
             var northwind = new SampleEntities();
             var orders = northwind.Order_Details.AsQueryable();
 
-            if (!string.IsNullOrEmpty(products))
+            if (products != null)
             {
-                orders = orders.Where(o => o.ProductID.ToString() == products);
+                orders = orders.Where(o => o.ProductID == products);
             }
 
             if (!string.IsNullOrEmpty(orderFilter))

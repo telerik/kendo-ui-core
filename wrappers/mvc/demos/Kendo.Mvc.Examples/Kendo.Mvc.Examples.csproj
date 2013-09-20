@@ -534,6 +534,7 @@
     <Compile Include="Models\Chart\SunPositionItem.cs" />
     <Compile Include="Models\Chart\WindDataItem.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\TreeViewItemModel.cs" />
     <Compile Include="Models\CompensationStats.cs" />
     <Compile Include="Models\Config.cs" />
