@@ -13,6 +13,7 @@ namespace Kendo.Mvc.UI
         public Button(ViewContext viewContext, IJavaScriptInitializer initializer)
             : base(viewContext, initializer)
         {
+            Enable = true;
             Template = new HtmlTemplate();
         }
 
