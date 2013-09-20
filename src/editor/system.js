@@ -556,6 +556,10 @@ var Clipboard = Class.extend({
             fragment = this.htmlToFragment(fragmentsHtml.join('<br />'));
         }
 
+        $(fragment.childNodes)
+            .filter("table").addClass("k-table").end()
+            .find("table").addClass("k-table");
+
         range.insertNode(fragment);
 
         parent = this.splittableParent(block, caret);

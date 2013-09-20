@@ -151,6 +151,18 @@
                 equal(inline.value(), 'f<p>bar</p>oo');
             });
 
+            test("paste of table adds k-table class", function() {
+                pasteIn(editor, 'fo||o', '<table><tr><td>foo</td></tr></table>');
+
+                ok($("table", editor.body).hasClass("k-table"));
+            });
+
+            test("paste of nested table adds k-table class", function() {
+                pasteIn(editor, 'fo||o', '<div><table><tr><td>foo</td></tr></table></div>');
+
+                ok($("table", editor.body).hasClass("k-table"));
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
