@@ -526,11 +526,11 @@ kendo_module({
             return meta.doubleClick && this.toolService.hoveredItem;
         },
         _showEditor: function () {
-            var diagram = this.toolService.diagram;
-            var editor = this.editor;
+            var diagram = this.toolService.diagram,
+                editor = this.editor;
 
             editor.visible(true);
-            diagram.element.appendChild(editor.native);
+            diagram.element.context.appendChild(editor.native);
 
             this._positionEditor();
         },
@@ -563,6 +563,10 @@ kendo_module({
             this.toolService._finishEditShape();
         }
     });
+
+    function testKey(key, str) {
+        return str.charCodeAt(0) == key || str.toUpperCase().charCodeAt(0) == key;
+    }
 
     /**
      * The service managing the tools.
@@ -614,17 +618,26 @@ kendo_module({
             var diagram = this.diagram;
             meta = deepExtend({ ctrlKey: false, metaKey: false, altKey: false }, meta);
             if ((meta.ctrlKey || meta.metaKey) && !meta.altKey) {// ctrl or option
-                if (key === 65) {// A: select all
+                if (testKey(key, "a")) {// A: select all
                     diagram.select(true);
                     return true;
                 }
-                else if (key === 90) {// Z: undo
+                else if (testKey(key, "z")) {// Z: undo
                     diagram.undo();
                     return true;
                 }
-                else if (key === 90 || key === 89) {// y: redo
+                else if (testKey(key, "y")) {// y: redo
                     diagram.redo();
                     return true;
+                }
+                else if (testKey(key, "c")) {
+                    diagram._copy();
+                }
+                else if (testKey(key, "x")) {
+                    diagram._cut();
+                }
+                else if (testKey(key, "v")) {
+                    diagram._paste();
                 }
             }
             else if (key === 46 || key === 8) {// del: deletion
@@ -668,14 +681,14 @@ kendo_module({
             }
         },
         _updateCursor: function (p) {
-            this.diagram.canvas.native.style.cursor = this.activeTool ? this.activeTool.getCursor(p) : (this.hoveredItem ? this.hoveredItem._getCursor(p) : Cursors.arrow);
+            $(this.diagram.canvas.native).css({cursor: this.activeTool ? this.activeTool.getCursor(p) : (this.hoveredItem ? this.hoveredItem._getCursor(p) : Cursors.arrow)});
         },
         _connectionManipulation: function (connection, disabledShape, isNew) {
             this.activeConnection = connection;
             this.disabledShape = disabledShape;
-            if(isNew){
+            if (isNew) {
                 this.newConnection = this.activeConnection;
-            } else{
+            } else {
                 this.newConnection = undefined;
             }
         },

@@ -155,6 +155,9 @@ kendo_module({
         toString: function () {
             return this.options.id;
         },
+        serialize: function () {
+            return this.options;
+        },
         content: function (content) {
             if (content !== undefined) {
                 if (!content) {
@@ -266,6 +269,13 @@ kendo_module({
         },
         position: function (point) {
             this.bounds(new Rect(point.x, point.y, this._bounds.width, this._bounds.height));
+        },
+        copy: function () {
+            var options = this.serialize(),
+                copyShape = new Shape(options);
+            // TODO: Copy the model too?
+
+            return copyShape;
         },
         visualBounds: function () {
             var bounds = this.bounds(),
@@ -625,7 +635,7 @@ kendo_module({
 
             element = that.element; // the hosting element
 
-            this.element.addClass("k-widget k-diagram").attr("role", "diagram");
+            that.element.addClass("k-widget k-diagram").attr("role", "diagram");
             that.canvas = new Canvas(element); // the root SVG Canvas
             that._initialize();
             that.element.on("mousemove" + NS, proxy(that._mouseMove, that))
@@ -635,6 +645,8 @@ kendo_module({
                 .mousewheel(proxy(that._wheel, that), { ns: NS })
                 .on("keydown" + NS, proxy(that._keydown, that));
             that.selector = new Selector(that);
+            // TODO: We may consider using real Clipboard, but is very hacky to do so.
+            that._clipboard = [];
         },
         options: {
             name: "Diagram",
@@ -644,7 +656,13 @@ kendo_module({
             template: "",
             dataTextField: null,
             autoBind: true,
-            visualTemplate: null
+            visualTemplate: null,
+            tooltip: { enabled: true, format: "{0}" },
+            copy: {
+                enabled: true,
+                offsetX: 20,
+                offsetY: 20
+            }
         },
         events: ["zoom", "pan"],
         destroy: function () {
@@ -902,8 +920,11 @@ kendo_module({
                 this.mainLayer.remove(item.visual);
             }
         },
-        documentToCanvasPoint: function (dPoint) {
-            var containerOffset = this.element.offset();
+        _documentToCanvasPoint: function (e) {
+            var pointEvent = (e.pageX === undefined ? e.originalEvent : e),
+                dPoint = new Point(pointEvent.pageX, pointEvent.pageY),
+                containerOffset = this.element.offset();
+
             return new Point(dPoint.x - containerOffset.left, dPoint.y - containerOffset.top);
         },
         setDataSource: function (dataSource) {
@@ -917,6 +938,51 @@ kendo_module({
             var p = this._calculatePosition(e);
             if (e.button === 0 && this.toolService.start(p, this._meta(e))) {
                 e.preventDefault();
+            }
+        },
+        _copy: function () {
+            if (this.options.copy.enabled) {
+                this._clipboard.clear();
+                this._copyOffset = 1;
+                for (var i = 0; i < this._selectedItems.length; i++) {
+                    var item = this._selectedItems[i];
+                    this._clipboard.push(item);
+                }
+            }
+        },
+        _cut: function () {
+            if (this.options.copy.enabled) {
+                this._clipboard.clear();
+                this._copyOffset = 0;
+                for (var i = 0; i < this._selectedItems.length; i++) {
+                    var item = this._selectedItems[i];
+                    this._clipboard.push(item);
+                }
+                this.remove(this._clipboard);
+            }
+        },
+        _paste: function () {
+            var offsetX, offsetY, item, copied;
+            if (this._clipboard.length > 0) {
+                offsetX = this._copyOffset * this.options.copy.offsetX;
+                offsetY = this._copyOffset * this.options.copy.offsetY;
+                this.select(false);
+                for (var i = 0; i < this._clipboard.length; i++) {
+                    item = this._clipboard[i];
+                    copied = item.copy();
+                    this._addItem(copied);
+                    copied.position(new Point(item.options.x + offsetX, item.options.y + offsetY));
+                    copied.select(true);
+                }
+                this._copyOffset += 1;
+            }
+        },
+        _addItem: function (item) {
+            if (item instanceof Shape) {
+                this.addShape(item);
+            }
+            else if (item instanceof Connection) {
+                this.addConnection(item);
             }
         },
         _mouseUp: function (e) {
@@ -943,8 +1009,7 @@ kendo_module({
             }
         },
         _wheel: function (e) {
-            var pointEvent = (e.pageX === undefined ? e.originalEvent : e),
-                p = this.documentToCanvasPoint(new Point(pointEvent.pageX, pointEvent.pageY)),
+            var p = this._calculatePosition(e),
                 meta = deepExtend(this._meta(e), { delta: e.data.delta });
 
             if (this.toolService.wheel(p, meta)) {
@@ -955,10 +1020,8 @@ kendo_module({
             return { ctrlKey: e.ctrlKey, metaKey: e.metaKey, altKey: e.altKey };
         },
         _calculatePosition: function (e) {
-            var pan = this.pan();
-            var localPosition = this.element.offset();
-            var p = new Point(e.pageX - localPosition.left - pan.x, e.pageY - localPosition.top - pan.y);
-            return this._normalizePointZoom(p);
+            var offset = this._documentToCanvasPoint(e);
+            return this._normalizePointZoom(offset.minus(this.pan()));
         },
         _normalizePointZoom: function (point) {
             return point.times(1 / this.zoom());
@@ -1056,7 +1119,7 @@ kendo_module({
             }
         },
         _adorn: function (adorner, isActive) {
-            if (isActive !== undefined) {
+            if (isActive !== undefined && adorner) {
                 if (isActive) {
                     this._adorners.push(adorner);
                     this.adornerLayer.append(adorner.visual);
@@ -1216,4 +1279,5 @@ kendo_module({
         Connection: Connection,
         Connector: Connector
     });
-})(window.kendo.jQuery);
+})
+    (window.kendo.jQuery);
