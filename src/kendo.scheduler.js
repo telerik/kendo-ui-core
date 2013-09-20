@@ -699,6 +699,11 @@ kendo_module({
             that._ariaId = kendo.guid();
         },
 
+        getSize: function() {
+            console.log("resize");
+            return kendo.dimensions(this.wrapper);
+        },
+
         _selectable: function() {
             var that = this,
                 wrapper = that.wrapper,
