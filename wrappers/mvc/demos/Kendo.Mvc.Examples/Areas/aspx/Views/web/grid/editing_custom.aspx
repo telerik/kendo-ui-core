@@ -30,7 +30,7 @@
                 model.Id(p => p.ProductID);
                 model.Field(p => p.ProductID).Editable(false);
                 model.Field(p => p.Category).DefaultValue(
-                    ViewData["defaultCategory"] as Kendo.Mvc.Examples.Models.ClientCategoryViewModel);
+                    ViewData["defaultCategory"] as Kendo.Mvc.Examples.Models.CategoryViewModel);
             })
             .PageSize(20)
             .Read(read => read.Action("EditingCustom_Read", "Grid"))

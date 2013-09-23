@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Kendo.Mvc.Examples.Models.ClientCategoryViewModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Kendo.Mvc.Examples.Models.CategoryViewModel>" %>
 
 <%= Html.Kendo().DropDownListFor(m => m)
         .DataValueField("CategoryID")
