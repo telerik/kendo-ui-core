@@ -209,7 +209,7 @@ kendo_module({
             that.visual = new Group({
                 id: that.options.id || kendo.diagram.randomId(),
                 title: that.options.id ? that.options.id : "Shape",
-                class: that.options.class
+                ccsClass: that.options.ccsClass
             });
             that.visual.append(this.shapeVisual);
             that.bounds(new Rect(that.options.x, that.options.y, Math.floor(that.options.width), Math.floor(that.options.height)));
@@ -228,7 +228,7 @@ kendo_module({
         },
         options: {
             type: "Shape",
-            class: "shape",
+            ccsClass: "shape",
             data: "rectangle",
             stroke: "Black",
             strokeWidth: 1,
@@ -1085,8 +1085,7 @@ kendo_module({
         _unbindDataSource: function () {
             var that = this;
 
-            that.dataSource.unbind(CHANGE, that._refreshHandler)
-                .unbind(ERROR, that._errorHandler);
+            that.dataSource.unbind(CHANGE, that._refreshHandler).unbind(ERROR, that._errorHandler);
         },
         _error: function () {
             // TODO: Do something?
