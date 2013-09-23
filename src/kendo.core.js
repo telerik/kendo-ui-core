@@ -2429,15 +2429,15 @@ function pad(number, digits, end) {
             var size = this.getSize(),
                 currentSize = this._size;
 
-            if (!size) {
-                return;
-            }
-
             if (!currentSize || size.width !== currentSize.width || size.height !== currentSize.height) {
                 this._resize(size);
                 this.trigger("resize", size);
                 this._size = size;
             }
+        },
+
+        getSize: function() {
+            return kendo.dimensions(this.element);
         },
 
         size: function(size) {
@@ -2447,8 +2447,6 @@ function pad(number, digits, end) {
                 this.setSize(size);
             }
         },
-
-        getSize: $.noop,
 
         setSize: $.noop,
 

@@ -895,10 +895,6 @@ kendo_module({
             this._itemBinder.refresh();
         },
 
-        getSize: function() {
-            return kendo.dimensions(this.element);
-        },
-
         setDataSource: function(dataSource) {
             // the listView should have a ready datasource for MVVM to function properly. But an empty datasource should not empty the element
             var emptyDataSource = !dataSource;

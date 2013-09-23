@@ -283,11 +283,6 @@ kendo_module({
                     tapCapture: tapCapture
                 });
 
-            that.bind(RESIZE, function() {
-                dimensions.refresh();
-                that.reset();
-            });
-
             movable.bind(CHANGE, function() {
                 that.scrollTop = - movable.y;
                 that.scrollLeft = - movable.x;
@@ -321,10 +316,6 @@ kendo_module({
             if (that.options.pullToRefresh) {
                 that._initPullToRefresh();
             }
-        },
-
-        getSize: function() {
-            return kendo.dimensions(this.element);
         },
 
         makeVirtual: function() {
@@ -365,6 +356,11 @@ kendo_module({
             SCROLL,
             RESIZE
         ],
+
+        _resize: function() {
+            this.dimensions.refresh();
+            this.reset();
+        },
 
         setOptions: function(options) {
             var that = this;

@@ -677,10 +677,6 @@ kendo_module({
             kendo.destroy(this.element);
         },
 
-        getSize: function() {
-            return kendo.dimensions(this.element);
-        },
-
         viewInit: function() {
             if(this.options.autoBind) {
                 this._content.scrollTo(this._content.page, true);
