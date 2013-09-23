@@ -736,27 +736,47 @@ kendo_module({
             var connection = new Connection(source, target, options);
             return this.addConnection(connection);
         },
-        addConnection: function (connection) {
-            connection.diagram = this;
-            this.mainLayer.append(connection.visual);
-            this.connections.push(connection);
+        addConnection: function (connection, undoable) {
+            console.log("source", connection.sourceConnector);
+            console.log("target", connection.targetConnector);
+            if (undoable === undefined) {
+                undoable = true;
+            }
+            if (undoable) {
+                var unit = new kendo.diagram.AddConnectionUnit(connection, this);
+                this.undoRedoService.add(unit);
+            }
+            else {
+                connection.diagram = this;
+                this.mainLayer.append(connection.visual);
+                this.connections.push(connection);
+            }
+
             return connection;
         },
         addShape: function (point, options) {
             var shape;
+            options = deepExtend({undoable: true}, options);
+
             if (Utils.isUndefined(point)) {
                 point = new Point(0, 0);
             }
             if (point instanceof Shape) {
                 shape = point;
             }
-            else {
-                options = deepExtend({}, options, { x: point.x, y: point.y });
+            else { // consider it a point
+                options = deepExtend(options, { x: point.x, y: point.y });
                 shape = new Shape(options);
             }
-            this.shapes.push(shape);
-            shape.diagram = this;
-            this.mainLayer.append(shape.visual);
+            if (options.undoable) {
+                var unit = new kendo.diagram.AddShapeUnit(shape, this);
+                this.undoRedoService.add(unit);
+            }
+            else {
+                this.shapes.push(shape);
+                shape.diagram = this;
+                this.mainLayer.append(shape.visual);
+            }
             return shape;
         },
         undo: function () {
@@ -926,7 +946,9 @@ kendo_module({
 
             this._dataSource();
 
-            this.dataSource.fetch();
+            if (this.options.autoBind) {
+                this.dataSource.fetch();
+            }
         },
         _mouseDown: function (e) {
             var p = this._calculatePosition(e);

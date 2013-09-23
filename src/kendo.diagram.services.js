@@ -204,16 +204,16 @@ kendo_module({
     });
 
     var AddConnectionUnit = Class.extend({
-        init: function (connection) {
+        init: function (connection, diagram) {
             this.connection = connection;
-            this.diagram = connection.diagram;
+            this.diagram = diagram;
             this.title = "New connection";
         },
         undo: function () {
-            this.diagram.remove(this.connection);
+            this.diagram.remove(this.connection, false);
         },
         redo: function () {
-            this.diagram.addConnection(this.connection);
+            this.diagram.addConnection(this.connection, false);
         }
     });
 
@@ -221,13 +221,13 @@ kendo_module({
         init: function (shape, diagram) {
             this.shape = shape;
             this.diagram = diagram;
-            this.title = "insert";
+            this.title = "New shape";
         },
         undo: function () {
-            this.diagram.remove(this.shape);
+            this.diagram.remove(this.shape, false);
         },
         redo: function () {
-            this.diagram.addShape(this.shape);
+            this.diagram.addShape(this.shape, {undoable: false});
         }
     });
 
@@ -438,14 +438,11 @@ kendo_module({
             return this.toolService._hoveredConnector && !meta.ctrlKey; // connector it seems
         },
         start: function (p, meta) {
-            var diagram = this.toolService.diagram, connector = this.toolService._hoveredConnector, unit;
-            unit = new AddConnectionUnit(diagram.connect(connector._c, p));
-            this.toolService._connectionManipulation(unit.connection, connector._c.shape, true);
+            var diagram = this.toolService.diagram, connector = this.toolService._hoveredConnector,
+                connection = diagram.connect(connector._c, p);
+            this.toolService._connectionManipulation(connection, connector._c.shape, true);
             this.toolService._removeHover();
             selectSingle(this.toolService.activeConnection, meta);
-            diagram.undoRedoService.begin();
-            diagram.undoRedoService.add(unit);
-            diagram.undoRedoService.commit();
         },
         move: function (p) {
             this.toolService.activeConnection.targetPoint(p);
