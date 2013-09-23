@@ -642,7 +642,7 @@ div.k-window
     position: absolute;
     width: 100%;
     height: 1.1em;
-    line-height: 1.1em;
+   // line-height: 1.1em;
     border-bottom-style: solid;
     border-bottom-width: 1px;
     margin-top: -@window-titlebar-size;
@@ -1414,12 +1414,12 @@ div.k-grid-header .k-header
 {
     display: inline-block;
     vertical-align: top;
-    margin-right: 0.08333em;
+    margin-right: 1px;
 }
 
 .k-pager-numbers
 {
-    margin:0 0.16666em;
+    margin:0 2px;
 }
 
 .k-pager-numbers .k-state-selected
@@ -1472,28 +1472,25 @@ div.k-grid-header .k-header
 .k-pager-wrap>.k-link .k-icon
 {
     //vertical-align:top;
-    //margin-top:3px;
+    //margin-top:0.25em;
 	
 }
 
 .k-pager-numbers .k-link
 {
-    padding: 0 0.6666em;
-    .border-radius(1.0833em);
-}
-
-.k-pager-numbers .k-link:hover
-{
+	//width: 1.8333em;
+	//padding: 0 0.25em 0 0.25em;
     padding: 0 0.5833em;
-    border-style:solid;
-    border-width:0.08333em;
     line-height:1.8333em;
+    border-style:solid;
+    border-width:1px;
+    .border-radius(1.0833em);
 }
 
 .k-pager-wrap>.k-link
 {
     border-style:solid;
-    border-width:0.08333em;
+    border-width:1px;
 }
 
 .k-pager-wrap .k-pager-refresh
@@ -1507,7 +1504,7 @@ div.k-grid-header .k-header
 .k-pager-numbers .k-state-selected
 {
     border-style:solid;
-    border-width:0.08333em;
+    border-width:1px;
     line-height:1.8333em;
     padding:0 0.5833em;
     .border-radius(1.0833em);
@@ -2628,7 +2625,7 @@ div.k-treeview
 .k-treeview .k-in
 {
     display: inline-block;
-    vertical-align: middle;
+   // vertical-align: top;
 }
 
 .k-treeview .k-request-retry
@@ -2664,6 +2661,8 @@ div.k-treeview
     padding: 0.16666em 0.3333em 0.16666em 0.25em;
     line-height: 1.3333em;
     text-decoration: none;
+	border-style: solid;
+    border-width: 0.08333em;
 }
 
 .k-treeview span.k-in
@@ -2677,7 +2676,8 @@ div.k-treeview
 {
     border-style: solid;
     border-width: 0.08333em;
-    padding: 0.08333em 0.25em 0.08333em 0.16666em;
+    padding: 0.16666em 0.3333em 0.16666em 0.25em;
+	line-height: 1.3333em;
 }
 
 .k-treeview .k-drop-hint
