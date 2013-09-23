@@ -958,6 +958,14 @@ kendo_module({
                 }
             },
 
+            getSize: function() {
+                return kendo.dimensions(this.element);
+            },
+
+            _resize: function() {
+                this.redraw();
+            },
+
             _redraw: function(view) {
                 var that = this,
                     value = that._value,
