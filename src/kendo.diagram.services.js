@@ -1189,6 +1189,7 @@ kendo_module({
             this._c = connector;
             this.visual = new Circle(this.options);
             this.refresh();
+            this.visual.setAtr("class", "cssClass");
         },
         _hover: function (value) {
             this.visual.background(value ? this.options.hoveredBackground : this.options.background);

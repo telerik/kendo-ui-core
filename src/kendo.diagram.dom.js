@@ -103,7 +103,8 @@ kendo_module({
             width: 8,
             height: 8,
             background: "Yellow",
-            hoveredBackground: "#70CAFF"
+            hoveredBackground: "#70CAFF",
+            cssClass: "connector"
         },
         position: function () {
             if (this.options.position) {
@@ -120,7 +121,13 @@ kendo_module({
             var that = this;
             Observable.fn.init.call(that);
             that.options = deepExtend({}, that.options, options);
+            that.isSelected = false;
             that.model = model;
+            that.visual = new Group({
+                id: that.options.id || kendo.diagram.randomId(),
+                cssClass: that.options.cssClass
+            });
+            that.options.cssClass = undefined; // Clean the class so that is not propagated toward inner elements.
             that._template();
         },
         options: {
@@ -201,16 +208,9 @@ kendo_module({
         init: function (options, model) {
             var that = this, connector, i;
             DiagramElement.fn.init.call(that, options, model);
-            that.isSelected = false;
-            that.model = model;
             that.connectors = [];
-            that.type = that.options;
+            that.type = that.options.type;
             that.shapeVisual = Shape.createShapeVisual(that.options);
-            that.visual = new Group({
-                id: that.options.id || kendo.diagram.randomId(),
-                title: that.options.id ? that.options.id : "Shape",
-                ccsClass: that.options.ccsClass
-            });
             that.visual.append(this.shapeVisual);
             that.bounds(new Rect(that.options.x, that.options.y, Math.floor(that.options.width), Math.floor(that.options.height)));
             var length = this.options.connectors.length;
@@ -218,17 +218,16 @@ kendo_module({
                 connector = new Connector(this, this.options.connectors[i]);
                 that.connectors.push(connector);
             }
-            that.content(that.options.content);
             // TODO: Swa added for phase 2; included here already because the GraphAdapter takes it into account
             that.parentContainer = null;
             that.isContainer = false;
             that.isCollapsed = false;
             that.id = that.visual.native.id;
-
+            that.content(that.options.content);
         },
         options: {
             type: "Shape",
-            ccsClass: "shape",
+            cssClass: "k-shape",
             data: "rectangle",
             stroke: "Black",
             strokeWidth: 1,
@@ -411,25 +410,23 @@ kendo_module({
 
     var Connection = DiagramElement.extend({
         init: function (from, to, options, model) {
-            var that = this,
-                g = new Group();//the group contains the line and the label
+            var that = this;
             DiagramElement.fn.init.call(that, options, model);
             that.line = new Line(that.options);
-            g.append(that.line);
-            that.visual = g;
-            this._sourcePoint = new Point();
-            this._targetPoint = new Point();
+            that.visual.append(that.line);
+            that._sourcePoint = that._targetPoint = new Point();
             that.sourcePoint(from);
             that.targetPoint(to);
-            that.content(that.options.content);
             that.refresh();
+            that.content(that.options.content);
         },
         options: {
             stroke: "gray",
             hoveredStroke: "#70CAFF",
             strokeThickness: 1,
             startCap: "FilledCircle",
-            endCap: "ArrowEnd"
+            endCap: "ArrowEnd",
+            cssClass: "k-connection"
         },
         sourcePoint: function (source) {
             if (source === null) { // detach
@@ -1170,7 +1167,7 @@ kendo_module({
                     width: 150,
                     height: 60
                 };
-                shape = new kendo.diagram.Shape(opt, node);
+                shape = new Shape(opt, node);
                 that.addShape(shape);
                 that.dataMap.push({uid: node.uid, shape: shape});
                 return shape;

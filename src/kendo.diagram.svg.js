@@ -164,7 +164,7 @@ kendo_module({
                 this.options = deepExtend({}, this.options, options);
             }
             this.setAtr("id", "id");
-            this.setAtr("class", "ccsClass");
+            this.setAtr("class", "cssClass");
         },
         position: function (x, y) {
             if (y !== undefined) {
