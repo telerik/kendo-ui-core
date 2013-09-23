@@ -309,15 +309,14 @@ kendo_module({
             this._align(alignment);
         },
         _align: function () {
+            var o = this.options,
+                containerRect = new Rect(o.x, o.y, o.width, o.height),
+                aligner = new RectAlign(containerRect),
+                contentBounds = aligner.align(this.textBox(), o.align);
+
             if (!this.options.align) {
                 return;
             }
-
-            var o = this.options;
-            var containerRect = new Rect(o.x, o.y, o.width, o.height);
-
-            var aligner = new RectAlign(containerRect);
-            var contentBounds = aligner.align(this.textBox(), o.align);
             contentBounds.y += contentBounds.height;
             this.position(contentBounds.topLeft());
         }
@@ -351,10 +350,7 @@ kendo_module({
                 this.options.y = this._pos.y;
             }
 
-            var style = this.native.style;
-            style.left = this._pos.x + "px";
-            style.top = this._pos.y + "px";
-
+            $(this.native).css({left: this._pos.x + "px", top: this._pos.y + "px"});
             return this._pos;
         },
         size: function (w, h) {
@@ -370,10 +366,7 @@ kendo_module({
 
             if (isSet) {
                 deepExtend(this.options, this._size);
-
-                var style = this.native.style;
-                style.width = this._size.width + "px";
-                style.height = this._size.height + "px";
+                $(this.native).css({width: this._size.width + "px", height: this._size.height + "px"});
             }
 
             return this._size;
@@ -393,22 +386,21 @@ kendo_module({
             this.content(this.options.text);
         },
         _createEditor: function () {
-            var that = this;
-
-            var input = $("<input type='text' class='textEditable' />")
-                .css({ position: "absolute", zIndex: 100, fontSize: "16px" })
-                .on("mousedown mouseup click dblclick", function (e) {
-                    e.stopPropagation();
-                })
-                .on("keydown", function (e) {
-                    e.stopPropagation();
-                })
-                .on("keypress", function (e) {
-                    if (e.keyCode == kendo.keys.ENTER) {
-                        that.trigger("finishEdit", e);
-                    }
-                    e.stopPropagation();
-                });
+            var that = this,
+                input = $("<input type='text' class='textEditable' />")
+                    .css({ position: "absolute", zIndex: 100, fontSize: "16px" })
+                    .on("mousedown mouseup click dblclick", function (e) {
+                        e.stopPropagation();
+                    })
+                    .on("keydown", function (e) {
+                        e.stopPropagation();
+                    })
+                    .on("keypress", function (e) {
+                        if (e.keyCode == kendo.keys.ENTER) {
+                            that.trigger("finishEdit", e);
+                        }
+                        e.stopPropagation();
+                    });
             return input[0];
         }
     });
@@ -675,7 +667,7 @@ kendo_module({
             VisualBase.fn.redraw.call(this, options);
             var n = this.native,
                 o = this.options,
-                rx = o.rx || o.width / 2, ry = o.rx || o.height / 2;
+                rx = o.width / 2 || o.rx, ry = o.height / 2 || o.rx;
 
             n.rx.baseVal.value = rx;
             n.ry.baseVal.value = ry;
@@ -717,43 +709,7 @@ kendo_module({
             this.native.setAttribute('xmlns', SVGNS);
             this.native.setAttribute('xmlns:xlink', SVGXLINK);
             this.element.setAttribute("tabindex", "0"); //ensure tabindex so the the canvas receives key events
-
-            this.addMarker(new Marker({
-                path: {
-                    data: "M 0 0 L 10 5 L 0 10 L 3 5 z",
-                    background: "Black"
-                },
-                id: Markers.arrowEnd,
-                orientation: "auto",
-                width: 10,
-                height: 10,
-                ref: new Point(10, 5)
-            }));
-            this.addMarker(new Marker({
-                path: {
-                    data: "M 0 5 L 10 0 L 7 5 L 10 10 z",
-                    background: "Black"
-                },
-                id: Markers.arrowStart,
-                orientation: "auto",
-                width: 10,
-                height: 10,
-                ref: new Point(0, 5)
-            }));
-            this.addMarker(new Marker({
-                circle: {
-                    width: 6,
-                    height: 6,
-                    center: new Point(5, 5),
-                    strokeThickness: 1,
-                    background: "black"
-                },
-                width: 10,
-                height: 10,
-                id: Markers.filledCircle,
-                ref: new Point(5, 5),
-                orientation: "auto"
-            }));
+            this._markers();
         },
         options: {
             width: "100%",
@@ -809,27 +765,57 @@ kendo_module({
             this.gradients.push(gradient);
         },
         clearMarkers: function () {
+            var i;
             if (this.markers.length === 0) {
                 return;
             }
-            for (var i = 0; i < this.markers.length; i++) {
+            for (i = 0; i < this.markers.length; i++) {
                 this.defsNode.removeChild(this.markers[i].native);
             }
             this.markers = [];
-        },
-        clearGradients: function () {
-            if (this.gradients.length === 0) {
-                return;
-            }
-            for (var i = 0; i < this.gradients.length; i++) {
-                this.defsNode.removeChild(this.gradients[i].native);
-            }
-            this.gradients = [];
         },
         clear: function () {
             while (this.visuals.length) {
                 this.remove(this.visuals[0]);
             }
+        },
+        _markers: function () {
+            this.addMarker(new Marker({
+                path: {
+                    data: "M 0 0 L 10 5 L 0 10 L 3 5 z",
+                    background: "Black"
+                },
+                id: Markers.arrowEnd,
+                orientation: "auto",
+                width: 10,
+                height: 10,
+                ref: new Point(10, 5)
+            }));
+            this.addMarker(new Marker({
+                path: {
+                    data: "M 0 5 L 10 0 L 7 5 L 10 10 z",
+                    background: "Black"
+                },
+                id: Markers.arrowStart,
+                orientation: "auto",
+                width: 10,
+                height: 10,
+                ref: new Point(0, 5)
+            }));
+            this.addMarker(new Marker({
+                circle: {
+                    width: 6,
+                    height: 6,
+                    center: new Point(5, 5),
+                    strokeThickness: 1,
+                    background: "black"
+                },
+                width: 10,
+                height: 10,
+                id: Markers.filledCircle,
+                ref: new Point(5, 5),
+                orientation: "auto"
+            }));
         }
     });
 
