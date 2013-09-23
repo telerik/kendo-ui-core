@@ -577,6 +577,17 @@ kendo_module({
             kendo.destroy(that.wrapper);
         },
 
+        state: function(toolName) {
+            var tool = Editor.defaultTools[toolName];
+            var finder = tool && tool.options.finder;
+
+            if (finder) {
+                return finder.isFormatted(kendo.ui.editor.RangeUtils.textNodes(this.getRange()));
+            }
+
+            return false;
+        },
+
         value: function (html) {
             var body = this.body,
                 editorNS = kendo.ui.editor,

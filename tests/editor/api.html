@@ -36,6 +36,14 @@
                 ]
             });
 
+            var editor;
+
+            module("API", {
+                setup: function() {
+                    editor = getEditor();
+                }
+            });
+
             test("value returns unencoded value if encoded is false", function() {
                 var editorEncodeFalse = getEditor("#EditorEncodeFalse");
                 editorEncodeFalse.value("<p>foo</p>");
@@ -55,7 +63,6 @@
             });
 
             test("value method does not remove selection if provided value is the same as the current text", function() {
-                var editor = getEditor();
                 editor.value("<p>foo</p>");
 
                 var range = editor.createRange();
@@ -97,6 +104,34 @@
                 equal(range.startOffset, 4);
                 equal(range.endContainer, text);
                 equal(range.endOffset, 7);
+            });
+
+            function selectRangeInValue(editor, value) {
+                editor.selectRange(createRangeFromText(editor, value))
+            }
+
+            test("state returns true when tool is toggled", function() {
+                selectRangeInValue(editor, "<em>f|o|o</em");
+
+                ok(editor.state("italic"));
+            });
+
+            test("state returns false when tool is not toggled", function() {
+                selectRangeInValue(editor, "<em>f|o|o</em");
+
+                ok(!editor.state("bold"));
+            });
+
+            test("state returns false when tool does not provide a finder", function() {
+                selectRangeInValue(editor, "<em>f|o|o</em");
+
+                ok(!editor.state("insertImage"));
+            });
+
+            test("state returns false for unknown tools", function() {
+                selectRangeInValue(editor, "<em>f|o|o</em");
+
+                ok(!editor.state("foo"));
             });
 
         </script>
