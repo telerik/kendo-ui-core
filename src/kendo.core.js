@@ -2425,11 +2425,11 @@ function pad(number, digits, end) {
             that.bind(that.events, options);
         },
 
-        resize: function() {
+        resize: function(force) {
             var size = this.getSize(),
                 currentSize = this._size;
 
-            if (!currentSize || size.width !== currentSize.width || size.height !== currentSize.height) {
+            if (force || !currentSize || size.width !== currentSize.width || size.height !== currentSize.height) {
                 this._resize(size);
                 this.trigger("resize", size);
                 this._size = size;
@@ -2449,6 +2449,7 @@ function pad(number, digits, end) {
         },
 
         setSize: $.noop,
+        _resize: $.noop,
 
         destroy: function() {
             var that = this;
