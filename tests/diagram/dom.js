@@ -8,21 +8,17 @@ QUnit.module("Diagram tests", {
         kdiagram = $("#canvas").getKendoDiagram();
     },
     teardown: function () {
-        kdiagram.clear();
+        kdiagram.destroy();
     }
 });
 
 test("Basic tests", function () {
-    GetRoot();
-    $("#canvas").kendoDiagram();
     var found = document.getElementById('SVGRoot');
     ok(found != null, "The Diagram should add an <SVG/> element with name 'SVGRoot'.");
 });
 
 test("Adding shape tests", function () {
-    var div = GetRoot();
-    var diagramElement = $("#canvas").kendoDiagram();
-    var kendoDiagram = diagramElement.data("kendoDiagram");
+    var kendoDiagram = kdiagram;
     kendoDiagram.addShape(new diagram.Point(100, 120), {
         id: "TestShape",
         data: "rectangle",
@@ -52,9 +48,7 @@ test("Adding shape tests", function () {
 });
 
 test("Adding connections", function () {
-    var div = GetRoot();
-    var diagramElement = $("#canvas").kendoDiagram();
-    var kendoDiagram = diagramElement.data("kendoDiagram");
+    var kendoDiagram = kdiagram;
     var shape1 = AddShape(kendoDiagram, new diagram.Point(100, 120),
         kendo.deepExtend(Shapes.SequentialData, {
             width: 80, height: 80, title: "sequential data"
@@ -438,3 +432,87 @@ test("Connection detach", function () {
     equal(c1.sourceConnector.options.name, "Auto");
 });
 
+QUnit.module("Serialization - Cut/Copy/Paste", {
+    setup: function () {
+        $("#canvas").kendoDiagram();
+
+        d = $("#canvas").getKendoDiagram();
+        randomDiagram(d);
+    },
+    teardown: function () {
+        d.clear();
+    }
+});
+
+test("Copy Selected", function () {
+    var s1 = d.shapes[0];
+
+    s1.select(true);
+    equal(d._clipboard.length, 0);
+    d._copy();
+    equal(d._clipboard.length, 1);
+});
+
+test("Copy and Paste", function () {
+    var shapesCount = d.shapes.length;
+    var s1 = d.shapes[0];
+
+    s1.select(true);
+    equal(d._clipboard.length, 0);
+    d._copy();
+    equal(d._clipboard.length, 1);
+    d._paste();
+    equal(shapesCount + 1, d.shapes.length);
+});
+
+test("Cut and Paste", function () {
+    var shapesCount = d.shapes.length;
+    var s1 = d.shapes[0];
+
+    s1.select(true);
+    equal(d._clipboard.length, 0);
+    d._cut();
+    equal(d._clipboard.length, 1);
+    equal(shapesCount - 1, d.shapes.length);
+    d._paste();
+    equal(shapesCount, d.shapes.length);
+});
+
+test("Cut and Paste - positions", function () {
+    var shapesCount = d.shapes.length;
+    var s1 = d.shapes[0];
+    var pos = s1.position().clone();
+
+    s1.select(true);
+    d._cut();
+    d._paste();
+    var copied = d.shapes[d.shapes.length - 1];
+    deepEqual(copied.position(), pos);
+});
+
+
+test("Copy and Paste - positions", function () {
+    var shapesCount = d.shapes.length;
+    var s1 = d.shapes[0];
+    var pos = s1.position().clone();
+
+    s1.select(true);
+    d._copy();
+    d._paste();
+    var copied = d.shapes[d.shapes.length - 1];
+    pos = pos.plus(new Point(d.options.copy.offsetX, d.options.copy.offsetY));
+    deepEqual(copied.position(), pos);
+
+    d._paste();
+    copied = d.shapes[d.shapes.length - 1];
+    pos = pos.plus(new Point(d.options.copy.offsetX, d.options.copy.offsetY));
+    deepEqual(copied.position(), pos);
+});
+
+test("Copy - copying the options", function () {
+    var shapesCount = d.shapes.length;
+    var s1 = d.shapes[0];
+    var copy = s1.copy();
+
+    deepEqual(copy.options, s1.options);
+});

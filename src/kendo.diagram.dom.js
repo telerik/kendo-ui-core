@@ -267,7 +267,12 @@ kendo_module({
             return this._bounds;
         },
         position: function (point) {
-            this.bounds(new Rect(point.x, point.y, this._bounds.width, this._bounds.height));
+            if (point) {
+                this.bounds(new Rect(point.x, point.y, this._bounds.width, this._bounds.height));
+            }
+            else {
+                return this._bounds.topLeft();
+            }
         },
         copy: function () {
             var options = this.serialize(),
@@ -873,7 +878,7 @@ kendo_module({
         _drop: function () {
             var that = this,
                 options = that.options;
-            if (options.allowDrop) {
+            if (options.allowDrop && kendo.DropTarget) {
                 this.element.kendoDropTarget({
                     drop: function (e) {
                         var item = e.draggable.hint.data("data"),
