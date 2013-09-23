@@ -1102,7 +1102,11 @@ kendo_module({
             visible: true,
             reverse: false,
             justified: true,
-            notes: {},
+            notes: {
+                label: {
+                    text: ""
+                }
+            },
 
             _alignLines: true
         },
@@ -1200,12 +1204,11 @@ kendo_module({
 
             for (i = 0; i < items.length; i++) {
                 item = deepExtend({}, notes, items[i]);
-                item.value = axis.parseNoteValue(item.value);
-                text = item.label.text || item.value;
+                text = item.label.text;
                 if (item.label.template) {
                     noteTemplate = template(item.label.template);
                     text = noteTemplate({
-                        value: text
+                        value: axis.parseNoteValue(item.value)
                     });
                 } else if (item.label.format) {
                     text = autoFormat(item.label.format, text);
@@ -1647,7 +1650,7 @@ kendo_module({
 
             if (options.visible) {
                 if (defined(label) && label.visible) {
-                    note.label = new TextBox(label.text || options.value, deepExtend({}, label, dataModelId));
+                    note.label = new TextBox(label.text, deepExtend({}, label, dataModelId));
                     note.append(note.label);
 
                     if (label.position === INSIDE) {
