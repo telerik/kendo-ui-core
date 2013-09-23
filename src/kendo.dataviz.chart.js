@@ -555,7 +555,7 @@ kendo_module({
             element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
             element.on(TOUCH_START_NS, proxy(chart._tap, chart));
             element.on(MOUSELEAVE_NS, proxy(chart._mouseleave, chart));
-            if (chart._plotArea.crosshairs.length || (chart._tooltip && chart._sharedTooltip())) {
+            if (chart._shouldAttachMouseMove()) {
                 element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
             }
 
@@ -1188,12 +1188,19 @@ kendo_module({
             highlight.show(items);
         },
 
+        _shouldAttachMouseMove: function() {
+            var chart = this;
+
+            return chart._plotArea.crosshairs.length || (chart._tooltip && chart._sharedTooltip());
+        },
+
         setOptions: function(options) {
             var chart = this;
 
             chart._originalOptions = deepExtend(chart._originalOptions, options);
             chart.options = deepExtend({}, chart._originalOptions);
             chart._sourceSeries = null;
+            $(document).off(MOUSEMOVE_NS);
 
             Widget.fn.setOptions.call(chart, options);
 
@@ -1203,6 +1210,9 @@ kendo_module({
                 chart.setDataSource(
                     DataSource.create(options.dataSource)
                 );
+            }
+            if (chart._shouldAttachMouseMove()) {
+                chart.element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
             }
 
             if (chart.options.dataSource) {
