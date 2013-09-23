@@ -436,7 +436,7 @@ kendo_module({
         sourcePoint: function (source) {
             if (source === null) { // detach
                 if (this.sourceConnector) {
-                    this._sourcePoint = this.sourceConnector.position();
+                    this._sourcePoint = this._resolvedSourceConnector.position();
                     this._clearSourceConnector();
                 }
             }
@@ -462,7 +462,7 @@ kendo_module({
         targetPoint: function (target) {
             if (target === null) { // detach
                 if (this.targetConnector) {
-                    this._targetPoint = this.targetConnector.position();
+                    this._targetPoint = this._resolvedTargetConnector.position();
                     this._clearTargetConnector();
                 }
             }
@@ -937,7 +937,7 @@ kendo_module({
                     this.undoRedoService.addCompositeItem(new DeleteShapeUnit(item));
                 }
                 else {
-                    this.shapes.remove(item);
+                    this._removeShape(item);
                 }
             }
             else if (item instanceof Connection) {
@@ -956,6 +956,30 @@ kendo_module({
             }
             if (!undoable) {
                 this.mainLayer.remove(item.visual);
+            }
+        },
+        _removeShape: function (shape) {
+            var i, connection, connector,
+                sources = [], targets = [];
+            this.shapes.remove(shape);
+            this.toolService._removeHover();
+
+            for (i = 0; i < shape.connectors.length; i++) {
+                connector = shape.connectors[i];
+                for (var j = 0; j < connector.connections.length; j++) {
+                    connection = connector.connections[j];
+                    if (connection.sourceConnector == connector) {
+                        sources.push(connection);
+                    } else if (connection.targetConnector == connector) {
+                        targets.push(connection);
+                    }
+                }
+            }
+            for (i = 0; i < sources.length; i++) {
+                sources[i].sourcePoint(null);
+            }
+            for (i = 0; i < targets.length; i++) {
+                targets[i].targetPoint(null);
             }
         },
         documentToCanvasPoint: function (dPoint) {
