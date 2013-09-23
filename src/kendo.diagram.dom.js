@@ -878,7 +878,7 @@ kendo_module({
         _drop: function () {
             var that = this,
                 options = that.options;
-            if (options.allowDrop && kendo.DropTarget) {
+            if (options.allowDrop && kendo.ui.DropTarget) {
                 this.element.kendoDropTarget({
                     drop: function (e) {
                         var item = e.draggable.hint.data("data"),
