@@ -1420,17 +1420,20 @@ div.k-imagebrowser-dropzone em
     color: @hover-text-color;
 }
 
-.k-tabstrip-items .k-state-default
+.k-tabstrip-items .k-state-default,
+.k-ie7 .k-tabstrip-items .k-state-default .k-loading
 {
     border-color: @tabstrip-items-border;
 }
 
-.k-tabstrip-items .k-state-hover
+.k-tabstrip-items .k-state-hover,
+.k-ie7 .k-tabstrip-items .k-state-hover .k-loading
 {
     border-color: @hover-border-color;
 }
 
-.k-tabstrip-items .k-state-active
+.k-tabstrip-items .k-state-active,
+.k-ie7 .k-tabstrip-items .k-state-active .k-loading
 {
     background-color: @active-background-color;
     .composite-background(@active-gradient);

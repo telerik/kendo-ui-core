@@ -864,6 +864,24 @@ div.k-window-content
     vertical-align: top;
 }
 
+/* TabStrip Loading Progress */
+.k-tabstrip-items .k-loading
+{
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-top: 1px solid transparent;
+    border-color: inherit;
+    .transition("width 200ms linear");
+}
+
+.k-tabstrip-items .k-loading.k-complete
+{
+    width: 100%;
+}
+
 .k-tabstrip > .k-content,
 .k-panelbar .k-tabstrip > .k-content
 {

@@ -45,29 +45,16 @@
 </head>
 <body>
 
-<div class="k-widget k-tabstrip k-header" id="TabStrip1" style="visibility: visible; position: absolute;">
-    <ul class="k-reset k-tabstrip-items">
-        <li class="k-item k-state-default k-state-active"><a class="k-link" href="#TabStrip1-1"><img alt="image"
-                                                                                                    class="k-image"
-                                                                                                    src="../../playground/Icons/Suites/mvc.png">ASP.NET
-            MVC</a></li>
-        <li class="k-item k-state-disabled"><a class="k-link" href="#TabStrip1-2"><img alt="image" class="k-image"
-                                                                                     src="../../playground/Icons/Suites/sl.png">Silverlight</a>
-        </li>
-        <li class="k-item k-state-default"><a class="k-link" href="#TabStrip1-3"><img alt="image" class="k-image"
-                                                                                     src="../../playground/Icons/Suites/ajax.png">ASP.NET
-            AJAX</a></li>
-        <li class="k-item k-state-default"><a class="k-link" href="#TabStrip1-4"><img alt="image" class="k-image"
-                                                                                     src="../../playground/Icons/Suites/orm.png">OpenAccess
-            ORM</a></li>
-        <li class="k-item k-state-default"><a class="k-link" href="#TabStrip1-5"><img alt="image" class="k-image"
-                                                                                     src="../../playground/Icons/Suites/rep.png">Reporting</a>
-        </li>
-        <li class="k-item k-state-default"><a class="k-link" href="#TabStrip1-6"><img alt="image" class="k-image"
-                                                                                     src="../../playground/Icons/Suites/sitefinity.png">Sitefinity
-            ASP.NET CMS</a></li>
+<div id="TabStrip1" style="visibility: visible; position: absolute;">
+    <ul>
+        <li class="k-state-active"><img alt="image" src="../../playground/Icons/Suites/mvc.png">ASP.NET MVC</li>
+        <li class="k-state-disabled"><img alt="image" src="../../playground/Icons/Suites/sl.png">Silverlight</li>
+        <li><img alt="image" src="../../playground/Icons/Suites/ajax.png">ASP.NET AJAX</li>
+        <li><img alt="image" src="../../playground/Icons/Suites/orm.png">OpenAccess ORM</li>
+        <li><img alt="image" src="../../playground/Icons/Suites/rep.png">Reporting</li>
+        <li><img alt="image" src="../../playground/Icons/Suites/sitefinity.png">Sitefinity ASP.NET CMS</li>
     </ul>
-    <div class="k-content k-state-active" id="TabStrip1-1" style="display: block;">
+    <div>
         <ul>
             <li>Pure ASP.NET MVC components</li>
             <li>Completely Open Source</li>
@@ -78,11 +65,11 @@
             <li>Cross-browser support</li>
         </ul>
     </div>
-    <div class="k-content" id="TabStrip1-2"></div>
-    <div class="k-content" id="TabStrip1-3"></div>
-    <div class="k-content" id="TabStrip1-4"></div>
-    <div class="k-content" id="TabStrip1-5"></div>
-    <div class="k-content" id="TabStrip1-6"></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
 </div>
 
     <script type="text/javascript">
@@ -147,10 +134,24 @@
 //        });
 //
         test('ajax content url should be attached to item', function() {
-            var tabStrip = $(getTabStrip().element),
-                item = getRootItem(4);
+            var item = getRootItem(4);
 
             equal(item.find('> .k-link').data('contentUrl'), 'AjaxView1.html');
+        });
+
+        asyncTest('loading ajax content should trigger adding the loading element to the tab', function() {
+            var tabStrip = getTabStrip(),
+                item = getRootItem(3);
+
+            tabStrip.bind("select", function () {
+                tabStrip.unbind("select");
+                setTimeout(function () {
+                    start();
+                    ok(item.find('.k-loading').width() - item.width() <= 1);
+                }, 250);
+            });
+
+            item.click();
         });
 
         asyncTest("ajax content with error fires error handler and writes the error message to the console", 2, function () {

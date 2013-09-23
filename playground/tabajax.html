@@ -32,20 +32,31 @@
                     <li>
                         Fifth Ajax Tab
                     </li>
+                    <li>
+                        Sixth Tab
+                    </li>
                 </ul>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div>Test</div>
             </div>
         </div>
         <script>
             $.mockjax({
                 url: "AjaxView1.html",
                 responseText: 'Text 1',
-                responseTime: 1000
+                mockProgress: true,
+                responseTime: 1500
             });
 
             $.mockjax({
                 url: "AjaxView2.html",
                 responseText: 'Text 2',
-                responseTime: 1000
+                mockProgress: true,
+                responseTime: 750
             });
 
             $(document).ready(function() {
