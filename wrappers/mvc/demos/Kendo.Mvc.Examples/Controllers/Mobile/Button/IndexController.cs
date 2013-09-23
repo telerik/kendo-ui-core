@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Kendo.Mvc.Examples.Controllers
+namespace Kendo.Mvc.Examples.Controllers.Mobile
 {
     public partial class ButtonController : Controller
     {       

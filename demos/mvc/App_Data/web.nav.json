@@ -82,6 +82,7 @@
                     "meta": "How jQuery-based Button widget works, view demo source code of Kendo UI Button."
                 },
                 {
+                    "packages": [ "online" ],
                     "text": "Multiple buttons",
                     "url": "button/multiple.html",
                     "title": "Using Multiple Kendo UI Button widgets",

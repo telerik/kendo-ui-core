@@ -286,6 +286,12 @@
     <Compile Include="Controllers\Web\AutoComplete\RtlController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\ServerFilteringController.cs" />
     <Compile Include="Controllers\Web\AutoComplete\TemplateController.cs" />
+    <Compile Include="Controllers\Web\Button\ApiController.cs" />
+    <Compile Include="Controllers\Web\Button\ImagesController.cs" />
+    <Compile Include="Controllers\Web\Button\EventsController.cs" />
+    <Compile Include="Controllers\Web\Button\IndexController.cs" />
+    <Compile Include="Controllers\Web\Button\NavigationController.cs" />
+    <Compile Include="Controllers\Web\Button\RtlController.cs" />
     <Compile Include="Controllers\Web\Calendar\ApiController.cs" />
     <Compile Include="Controllers\Web\Calendar\EventsController.cs" />
     <Compile Include="Controllers\Web\Calendar\GlobalizationController.cs" />
@@ -2752,6 +2758,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\web\scheduler\webapi.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\button\index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\button\images.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
