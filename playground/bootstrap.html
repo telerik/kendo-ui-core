@@ -10,7 +10,6 @@
         <script src="//code.jquery.com/jquery.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script src="../src/kendo.core.js"></script>
-        <script src="../src/kendo.fx.js"></script>
         <script src="../src/kendo.userevents.js"></script>
         <script src="../src/kendo.draganddrop.js"></script>
         <script src="../src/kendo.popup.js"></script>
@@ -18,6 +17,8 @@
         <script src="../src/kendo.binder.js"></script>
         <script src="../src/kendo.list.js"></script>
         <script src="../src/kendo.dropdownlist.js"></script>
+        <script src="../src/kendo.validator.js"></script>
+        <script src="../src/kendo.numerictextbox.js"></script>
         <script src="../src/kendo.window.js"></script>
         <script src="../src/kendo.menu.js"></script>
         <script src="../src/kendo.pager.js"></script>
@@ -29,12 +30,13 @@
         <div class="container">
             <h1>Hello, bootstrap!</h1>
 
+            <h3>Menu</h3>
             <ul id="menu">
                 <li> Products
                     <ul>
                         <li> Furniture
-                            <ul> <!-- moving the UL to the next line will cause an IE7 problem -->
-                                <li>Tables & Chairs</li>
+                            <ul>
+                                <li>Tables &amp; Chairs</li>
                                 <li>Sofas</li>
                                 <li>Occasional Furniture</li>
                                 <li>Childerns Furniture</li>
@@ -44,10 +46,10 @@
 
                         </li>
                         <li> Decor
-                            <ul> <!-- moving the UL to the next line will cause an IE7 problem -->
+                            <ul>
                                 <li>Bed Linen</li>
                                 <li>Throws</li>
-                                <li>Curtains & Blinds</li>
+                                <li>Curtains &amp; Blinds</li>
                                 <li>Rugs</li>
                                 <li>Carpets</li>
                             </ul>
@@ -60,8 +62,10 @@
                 <li disabled="disabled"> News </li>
             </ul>
 
+            <h3>Grid</h3>
             <div id="grid"></div>
 
+            <br />
             <button class="btn btn-lg btn-primary" type="submit">Bootstrap button</button>
         </div>
 
@@ -119,10 +123,15 @@
                     { field: "Discontinued", width: "100px" },
                     { command: ["edit", "destroy"], title: "&nbsp;", width: "172px" }
                 ],
-                editable: true
+                editable: true,
+                edit: function(e) {
+                    if (!e.model.isNew()) {
+                        $(".k-edit-cell .k-input").addClass("form-control");
+                    }
+                }
             });
 
-            $("#menu").kendoMenu();
+            $("#menu").kendoMenu({ openOnClick: true });
         </script>
     </body>
 </html>
