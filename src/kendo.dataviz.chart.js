@@ -2645,6 +2645,12 @@ kendo_module({
             }
 
             return { min: from, max: to };
+        },
+
+        shouldRenderNote: function(value) {
+            var range = this.range();
+
+            return dateComparer(value, range.min) >= 0 && dateComparer(value, range.max) <= 0;
         }
     });
 
