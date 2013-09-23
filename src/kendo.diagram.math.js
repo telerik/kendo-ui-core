@@ -101,7 +101,7 @@ kendo_module({
                 from = temp;
             }
             var r1 = new Rect(from.x, from.y).inflate(HITTESTAREA, HITTESTAREA),
-                r2 = new Rect(to.x, to.y).inflate(HITTESTAREA, HITTESTAREA);
+                r2 = new Rect(to.x, to.y).inflate(HITTESTAREA, HITTESTAREA), o1,u1;
             if (r1.union(r2).contains(this)) {
                 if (from.x === to.x || from.y === to.y) {
                     return true;
@@ -358,7 +358,7 @@ kendo_module({
             return this._vAlign(content, this._bottom);
         },
 
-        _left: function (container, content) {
+        _left: function (container) {
             return container.x;
         },
         _center: function (container, content) {
@@ -367,7 +367,7 @@ kendo_module({
         _right: function (container, content) {
             return container.width - content.width;
         },
-        _top: function (container, content) {
+        _top: function (container) {
             return container.y;
         },
         _middle: function (container, content) {
@@ -808,8 +808,6 @@ kendo_module({
         init: function (dictionary) {
             var that = this;
             kendo.Observable.fn.init.call(that);
-            that.bind('changed', function (e) {
-            });
             this._hashTable = new HashTable();
             this.length = 0;
             if (Utils.isDefined(dictionary)) {
@@ -971,8 +969,6 @@ kendo_module({
         init: function (resource) {
             var that = this;
             kendo.Observable.fn.init.call(that);
-            that.bind('changed', function (e) {
-            });
             this._hashTable = new HashTable();
             this.length = 0;
             if (Utils.isDefined(resource)) {
@@ -1689,10 +1685,11 @@ kendo_module({
             var levelCount = 1;
             while (remaining.length > 0) {
                 var next = remaining.pop();
-                next.links.forEach(function (link) {
+                for (var ni = 0; ni < next.links.length; ni++) {
+                    var link = next.links[ni];
                     var cn = link.getComplement(next);
                     if (visited.contains(cn)) {
-                        return;
+                        continue;
                     }
 
                     cn.level = next.level + 1;
@@ -1725,8 +1722,8 @@ kendo_module({
                     }
                     var newLink = new Link(source, target);
                     tree.addLink(newLink);
+                }
 
-                });
             }
 
             var treeLevels = [];
@@ -2128,7 +2125,7 @@ kendo_module({
                 throw "You need to supply a starting node.";
             }
             if (Utils.isUndefined(action)) {
-                throw "You need to supply an action."       ;
+                throw "You need to supply an action.";
             }
             if (!this.hasNode(startNode)) {
                 throw "The given start-node is not part of this graph";
@@ -2210,7 +2207,7 @@ kendo_module({
 
             var children = node.getChildren(), next;
             for (var i = 0, len = children.length; i < len; i++) {
-                  next = children[i];
+                next = children[i];
                 if (!indices.containsKey(next)) {
                     this._stronglyConnectedComponents(excludeSingleItems, next, indices, lowLinks, connected, stack, index);
                     lowLinks.add(node, Math.min(lowLinks.get(node), lowLinks.get(next)));
@@ -2221,15 +2218,14 @@ kendo_module({
             }
             // If v is a root node, pop the stack and generate a strong component
             if (lowLinks.get(node) === indices.get(node)) {
-                var  component = [];
+                var component = [];
                 do {
                     next = stack.pop();
                     component.add(next);
                 }
-                while (next !== node)
-
+                while (next !== node);
                 if (!excludeSingleItems || (component.length > 1)) {
-                    connected.add(component)
+                    connected.add(component);
                 }
             }
         },
@@ -2317,10 +2313,10 @@ kendo_module({
              * @returns {number}
              */
             var flowIntensity = function (node) {
-                if (node.outgoing.length == 0) {
+                if (node.outgoing.length === 0) {
                     return (2 - N);
                 }
-                else if (node.incoming.length == 0) {
+                else if (node.incoming.length === 0) {
                     return (N - 2);
                 }
                 else {
@@ -2339,7 +2335,7 @@ kendo_module({
                     intensityCatalog.set(intensity, []);
                 }
                 intensityCatalog.get(intensity).push(node);
-            }
+            };
 
             copy.nodes.forEach(function (v) {
                 catalogEqualIntensity(v, intensityCatalog);
@@ -2349,17 +2345,19 @@ kendo_module({
             var targetStack = [];
 
             while (copy.nodes.length > 0) {
+                var source, target, intensity;
                 if (intensityCatalog.containsKey(2 - N)) {
                     var targets = intensityCatalog.get(2 - N); // nodes without outgoings
                     while (targets.length > 0) {
-                        var target = targets.pop();
-                        target.links.forEach(function (link) {
-                            var source = link.getComplement(target);
-                            var intensity = flowIntensity(source, N);
+                        target = targets.pop();
+                        for (var li = 0; li < target.links.length; li++) {
+                            var targetLink = target.links[li];
+                            source = targetLink.getComplement(target);
+                            intensity = flowIntensity(source, N);
                             intensityCatalog.get(intensity).remove(source);
-                            source.removeLink(link);
+                            source.removeLink(targetLink);
                             catalogEqualIntensity(source, intensityCatalog);
-                        });
+                        }
                         copy.nodes.remove(target);
                         targetStack.unshift(target);
                     }
@@ -2369,14 +2367,15 @@ kendo_module({
                 if (intensityCatalog.containsKey(N - 2)) {
                     var sources = intensityCatalog.get(N - 2); // nodes without incomings
                     while (sources.length > 0) {
-                        var source = sources.pop();
-                        source.links.forEach(function (link) {
-                            var target = link.getComplement(source);
-                            var intensity = flowIntensity(target, N);
+                        source = sources.pop();
+                        for (var si = 0; si < source.links.length; si++) {
+                            var sourceLink = source.links[si];
+                            target = sourceLink.getComplement(source);
+                            intensity = flowIntensity(target, N);
                             intensityCatalog.get(intensity).remove(target);
-                            target.removeLink(link);
+                            target.removeLink(sourceLink);
                             catalogEqualIntensity(target, intensityCatalog);
-                        });
+                        }
                         sourceStack.push(source);
                         copy.nodes.remove(source);
                     }
@@ -2388,14 +2387,14 @@ kendo_module({
                             intensityCatalog.get(k).length > 0) {
                             var maxdiff = intensityCatalog.get(k);
                             var v = maxdiff.pop();
-                            v.links.forEach(function (e) {
-                                var u = e.getComplement(v);
-                                var intensity = flowIntensity(u, N);
+                            for (var ri = 0; ri < v.links.length; ri++) {
+                                var ril = v.links[ri];
+                                var u = ril.getComplement(v);
+                                intensity = flowIntensity(u, N);
                                 intensityCatalog.get(intensity).remove(u);
-                                u.removeLink(e);
+                                u.removeLink(ril);
                                 catalogEqualIntensity(u, intensityCatalog);
-                            });
-
+                            }
                             sourceStack.push(v);
                             copy.nodes.remove(v);
                             break;
@@ -2441,7 +2440,7 @@ kendo_module({
          * @constructor
          */
         Mindmap: function () {
-            return Graph.Utils.parse(["0->1", "0->2", "0->3", "0->4", , "0->5", "1->6", , "1->7", "7->8", "2->9", "9->10", "9->11", "3->12",
+            return Graph.Utils.parse(["0->1", "0->2", "0->3", "0->4", "0->5", "1->6", "1->7", "7->8", "2->9", "9->10", "9->11", "3->12",
                 "12->13", "13->14", "4->15", "4->16", "15->17", "15->18", "18->19", "18->20", "14->21", "14->22", "5->23", "23->24", "23->25", "6->26"]);
         },
 
@@ -2540,12 +2539,12 @@ kendo_module({
                     // using x-y coordinates to name the nodes
                     var node = new Node(i.toString() + "." + j.toString());
                     g.addNode(node);
-                    if (previous != null) {
+                    if (previous) {
                         g.addLink(previous, node);
                     }
                     if (i > 0) {
                         var left = g.getNode((i - 1).toString() + "." + j.toString());
-                        g.addLink(left, node)
+                        g.addLink(left, node);
                     }
                     previous = node;
                 }
@@ -2553,7 +2552,7 @@ kendo_module({
             return g;
         }
 
-    }
+    };
 
     /**
      * Graph generation and other utilities.
@@ -2582,7 +2581,7 @@ kendo_module({
                     graph.addLink(previousLink);
                 }
                 if (Utils.isObject(part)) {
-                    if (previousLink == null) {
+                    if (!previousLink) {
                         throw "Specification found before Link definition.";
                     }
                     kendo.deepExtend(previousLink, part);
@@ -2650,10 +2649,9 @@ kendo_module({
          * @private
          */
         _addConnection: function (diagram, from, to, options) {
-            var f = from.getConnector("Top");
-            var t = to.getConnector("Top");
             return diagram.connect(from, to, options);
         },
+
         /**
          * Creates a diagram from the given Graph.
          * @param diagram The Kendo diagram where the diagram will be created.
@@ -2665,7 +2663,7 @@ kendo_module({
                 throw "The diagram surface is undefined.";
             }
             if (Utils.isUndefined(graph)) {
-                throw "No graph specification defined."
+                throw "No graph specification defined.";
             }
             if (Utils.isUndefined(doLayout)) {
                 doLayout = true;
@@ -2676,9 +2674,9 @@ kendo_module({
 
             var width = diagram.element.clientWidth || 200;
             var height = diagram.element.clientHeight || 200;
-            var map = [];
+            var map = [], node, shape;
             for (var i = 0, len = graph.nodes.length; i < len; i++) {
-                var node = graph.nodes[i];
+                node = graph.nodes[i];
                 var p = node.position;
                 if (Utils.isUndefined(p)) {
                     if (Utils.isDefined(node.x) && Utils.isDefined(node.y)) {
@@ -2690,7 +2688,7 @@ kendo_module({
                 }
                 var opt = {};
 
-                if (node.id == "0") {
+                if (node.id === "0") {
                     /* kendo.deepExtend(opt,
                      {
                      background: "Orange",
@@ -2706,10 +2704,10 @@ kendo_module({
                         height: Math.random() * 80 + 50,
                         data: 'rectangle',
                         background: "#778899"
-                    })
+                    });
                 }
 
-                var shape = this._addShape(diagram, p, node.id, opt);
+                shape = this._addShape(diagram, p, node.id, opt);
                 //shape.content(node.id);
 
                 var bounds = shape.bounds();
@@ -2721,8 +2719,8 @@ kendo_module({
                 }
                 map[node.id] = shape;
             }
-            for (var i = 0, len = graph.links.length; i < len; i++) {
-                var link = graph.links[i];
+            for (var gli = 0; gli < graph.links.length; gli++) {
+                var link = graph.links[gli];
                 var sourceShape = map[link.source.id];
                 if (Utils.isUndefined(sourceShape)) {
                     continue;
@@ -2735,23 +2733,14 @@ kendo_module({
 
             }
             if (doLayout) {
-                var l = new SpringLayout(diagram);
+                var l = new kendo.diagram.SpringLayout(diagram);
                 l.layoutGraph(graph, {limitToView: false});
-                for (var i = 0, len = graph.nodes.length; i < len; i++) {
-                    var node = graph.nodes[i];
-                    var shape = map[node.id];
+                for (var shi = 0; shi < graph.nodes.length; shi++) {
+                    node = graph.nodes[shi];
+                    shape = map[node.id];
                     shape.bounds(new Rect(node.x, node.y, node.width, node.height));
                 }
             }
-        },
-
-        /**
-         * Creates a diagram the given short (linear) form.
-         * @param diagram
-         * @param shortForm
-         */
-        createDiagramFromShort: function (diagram, shortForm) {
-
         },
 
         /**
@@ -2874,14 +2863,14 @@ kendo_module({
 
             var root = new Node((++counter).toString());
             g.addNode(root);
-            if (nodeCount == 1) {
+            if (nodeCount === 1) {
                 return g;
             }
             if (nodeCount > 1) {
                 // random tree
                 for (var i = 1; i < nodeCount; i++) {
                     var poolNode = g.takeRandomNode([], maxIncidence);
-                    if (poolNode == null) {
+                    if (!poolNode) {
                         //failed to find one so the graph will have less nodes than specified
                         break;
                     }
@@ -2890,10 +2879,10 @@ kendo_module({
                 }
                 if (!isTree && nodeCount > 1) {
                     var randomAdditions = Utils.randomInteger(1, nodeCount);
-                    for (var i = 0; i < randomAdditions; i++) {
+                    for (var ri = 0; ri < randomAdditions; ri++) {
                         var n1 = g.takeRandomNode([], maxIncidence);
                         var n2 = g.takeRandomNode([], maxIncidence);
-                        if (n1 != null && n2 != null && !g.areConnected(n1, n2)) {
+                        if (n1 && n2 && !g.areConnected(n1, n2)) {
                             g.addLink(n1, n2);
                         }
                     }
@@ -2901,7 +2890,7 @@ kendo_module({
                 return g;
             }
         }
-    }
+    };
 
     kendo.deepExtend(diagram, {
         init: function (element) {

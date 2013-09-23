@@ -11,13 +11,11 @@ kendo_module({
         Node = diagram.Node,
         Link = diagram.Link,
         deepExtend = kendo.deepExtend,
-        dataviz = kendo.dataviz,
         Size = diagram.Size,
         Rect = diagram.Rect,
         Dictionary = diagram.Dictionary,
-        HashTable = diagram.HashTable,
-        Queue = diagram.Queue,
         Set = diagram.Set,
+        HyperTree = diagram.Graph,
         Utils = diagram.Utils,
         Point = diagram.Point;
 
@@ -139,19 +137,19 @@ kendo_module({
          * @param components
          */
         gridLayoutComponents: function (components) {
-            if (components == null) {
+            if (!components) {
                 throw "No components supplied.";
             }
 
             // calculate and cache the bounds of the components
             components.forEach(function (c) {
                 c.calcBounds();
-            })
+            });
 
             // order by decreasing width
             components.sort(function (a, b) {
                 return b.bounds.width - a.bounds.width;
-            })
+            });
 
             var maxWidth = this.options.componentsGridWidth,
                 offsetX = this.options.componentMargin.width,
@@ -195,30 +193,31 @@ kendo_module({
         },
 
         moveToOffset: function (component, p) {
-            var bounds = component.bounds;
-            var deltax = p.x - bounds.x;
-            var deltay = p.y - bounds.y;
+            var i, j,
+                bounds = component.bounds,
+                deltax = p.x - bounds.x,
+                deltay = p.y - bounds.y;
 
-            for (var i = 0, len = component.nodes.length; i < len; i++) {
+            for (i = 0; i < component.nodes.length; i++) {
                 var node = component.nodes[i];
                 var nodeBounds = node.bounds();
-                if (nodeBounds == Rect.Empty) {
+                if (nodeBounds.width === 0 && nodeBounds.height === 0 && nodeBounds.x === 0 && nodeBounds.y === 0) {
                     nodeBounds = new Rect(0, 0, 0, 0);
                 }
                 nodeBounds.x += deltax;
                 nodeBounds.y += deltay;
                 node.bounds(nodeBounds);
             }
-            for (var i = 0; i < component.links.length; i++) {
+            for (i = 0; i < component.links.length; i++) {
                 var link = component.links[i];
-                if (link.points != null) {
+                if (link.points) {
                     var newpoints = [];
                     var points = link.points;
-                    for (var j = 0; j < points.length; j++) {
-                        var p = points[j];
-                        p.x += deltax;
-                        p.y += deltay;
-                        newpoints.push(p);
+                    for (j = 0; j < points.length; j++) {
+                        var pt = points[j];
+                        pt.x += deltax;
+                        pt.y += deltay;
+                        newpoints.push(pt);
                     }
                     link.points = newpoints;
                 }
@@ -236,32 +235,32 @@ kendo_module({
                 return;
             }
             if (options) {
-                if (options["totalMargin"]) {
-                    this.options["totalMargin"] = options["totalMargin"];
-                    delete options["totalMargin"];
+                if (options.totalMargin) {
+                    this.options.totalMargin = options.totalMargin;
+                    delete options.totalMargin;
                 }
-                if (options["componentMargin"]) {
-                    this.options["componentMargin"] = options["componentMargin"];
-                    delete options["componentMargin"];
+                if (options.componentMargin) {
+                    this.options.componentMargin = options.componentMargin;
+                    delete options.componentMargin;
                 }
             }
-            this.options = kendo.deepExtend(this.options, options || {})
+            this.options = kendo.deepExtend(this.options, options || {});
         }
-    })
+    });
 
     /**
      * The data bucket a hypertree holds in its nodes.     *
      * @type {*}
      */
-    var ContainerGraph = kendo.Class.extend({
-        init: function (diagram) {
-            this.diagram = diagram;
-            this.graph = new Graph(diagram);
-            this.container = null;
-            this.containerNode = null;
-        }
+    /* var ContainerGraph = kendo.Class.extend({
+     init: function (diagram) {
+     this.diagram = diagram;
+     this.graph = new Graph(diagram);
+     this.container = null;
+     this.containerNode = null;
+     }
 
-    });
+     });*/
 
     /**
      * Adapter between the diagram control and the graph representation. It converts shape and connections to nodes and edges taking into the containers and their collapsef state,
@@ -385,10 +384,10 @@ kendo_module({
             this.finalGraph = new Graph();
             this.finalNodes.forEach(function (n) {
                 this.finalGraph.addNode(n);
-            }, this)
+            }, this);
             this.finalLinks.forEach(function (l) {
                 this.finalGraph.addExistingLink(l);
-            }, this)
+            }, this);
             return this.finalGraph;
         },
 
@@ -425,8 +424,8 @@ kendo_module({
          */
         getEdge: function (a, b) {
             return a.links.first(function (link) {
-                return link.getComplement(a) == b;
-            })
+                return link.getComplement(a) === b;
+            });
         },
 
         /**
@@ -455,11 +454,11 @@ kendo_module({
         listToRoot: function (containerGraph) {
             var list = [];
             var s = containerGraph.container;
-            if (s == null) {
+            if (!s) {
                 return list;
             }
             list.add(s);
-            while (s.parentContainer != null) {
+            while (s.parentContainer) {
                 s = s.parentContainer;
                 list.add(s);
             }
@@ -472,7 +471,7 @@ kendo_module({
             if (shape.isContainer && !this._isIgnorableItem(shape)) {
                 return shape;
             }
-            return shape.parentContainer == null ? null : this.firstNonIgnorableContainer(shape.parentContainer);
+            return !shape.parentContainer ? null : this.firstNonIgnorableContainer(shape.parentContainer);
         },
         isContainerConnection: function (a, b) {
             if (a.isContainer && this.isDescendantOf(a, b)) {
@@ -492,7 +491,7 @@ kendo_module({
             if (!scope.isContainer) {
                 throw "Expecting a container.";
             }
-            if (scope == a) {
+            if (scope === a) {
                 return false;
             }
             if (scope.children.contains(a)) {
@@ -506,7 +505,7 @@ kendo_module({
                 }
             }
 
-            return containers.length > 0
+            return containers.length > 0;
         },
         isIgnorableItem: function (shape) {
             if (this.options.ignoreInvisible) {
@@ -530,18 +529,18 @@ kendo_module({
          * @param shape
          */
         isShapeMapped: function (shape) {
-            shape.isCollapsed && !this._isVisible(shape) && !this._isTop(shape);
+            return shape.isCollapsed && !this._isVisible(shape) && !this._isTop(shape);
         },
 
         leastCommonAncestor: function (a, b) {
-            if (a == null) {
+            if (!a) {
                 throw "Parameter should not be null.";
             }
-            if (b == null) {
+            if (!b) {
                 throw "Parameter should not be null.";
             }
 
-            if (this.hyperTree == null) {
+            if (!this.hyperTree) {
                 throw "No hypertree available.";
             }
             var al = this.listToRoot(a);
@@ -567,7 +566,7 @@ kendo_module({
             }
             else {
                 return this.hyperTree.nodes.where(function (n) {
-                    n.data.container == found;
+                    return  n.data.container === found;
                 });
             }
         },
@@ -578,7 +577,7 @@ kendo_module({
          * @private
          */
         _isTop: function (item) {
-            return item.parentContainer == null;
+            return !item.parentContainer;
         },
 
         /**
@@ -593,7 +592,7 @@ kendo_module({
             if (!shape.visible()) {
                 return false;
             }
-            return shape.parentContainer == null ? shape.visible() : this._isVisible(shape.parentContainer);
+            return !shape.parentContainer ? shape.visible() : this._isVisible(shape.parentContainer);
         },
 
         _isCollapsed: function (shape) {
@@ -601,7 +600,7 @@ kendo_module({
             if (shape.isContainer && shape.isCollapsed) {
                 return true;
             }
-            return shape.parentContainer != null && this._isCollapsed(shape.parentContainer);
+            return shape.parentContainer && this._isCollapsed(shape.parentContainer);
         },
 
         /**
@@ -637,7 +636,7 @@ kendo_module({
          * @private
          */
         _renormalizeConnections: function () {
-            if (this.diagram.connections.length == 0) {
+            if (this.diagram.connections.length === 0) {
                 return;
             }
             for (var i = 0, len = this.diagram.connections.length; i < len; i++) {
@@ -648,11 +647,11 @@ kendo_module({
                     continue;
                 }
 
-                var source = conn.sourceConnector == null ? null : conn.sourceConnector.shape;
-                var sink = conn.targetConnector == null ? null : conn.targetConnector.shape;
+                var source = !conn.sourceConnector ? null : conn.sourceConnector.shape;
+                var sink = !conn.targetConnector ? null : conn.targetConnector.shape;
 
                 // no layout for floating connections
-                if (source == null || sink == null) {
+                if (!source || !sink) {
                     this.ignoredConnections.add(conn);
                     continue;
                 }
@@ -676,12 +675,12 @@ kendo_module({
 
                 var sourceNode = this.mapShape(source);
                 var sinkNode = this.mapShape(sink);
-                if ((sourceNode == sinkNode) || this.areConnectedAlready(sourceNode, sinkNode)) {
+                if ((sourceNode === sinkNode) || this.areConnectedAlready(sourceNode, sinkNode)) {
                     this.ignoredConnections.add(conn);
                     continue;
                 }
 
-                if (sourceNode == null || sinkNode == null) {
+                if (!sourceNode || !sinkNode) {
                     throw "A shape was not mapped to a node.";
                 }
                 if (this.options.ignoreContainers) {
@@ -703,9 +702,9 @@ kendo_module({
 
         areConnectedAlready: function (n, m) {
             return this.edges.any(function (l) {
-                return l.source == n && l.target == m || l.source == m && l.target == n;
-            })
-        },
+                return l.source === n && l.target === m || l.source === m && l.target === n;
+            });
+        }
 
         /**
          * Depth-first traversal of the given container.
@@ -714,28 +713,28 @@ kendo_module({
          * @param includeStart
          * @private
          */
-        _visitContainer: function (container, action, includeStart) {
+        /* _visitContainer: function (container, action, includeStart) {
 
-            /*if (container == null) throw new ArgumentNullException("container");
-             if (action == null) throw new ArgumentNullException("action");
-             if (includeStart) action(container);
-             if (container.children.isEmpty()) return;
-             foreach(
-             var item
-             in
-             container.children.OfType < IShape > ()
-             )
-             {
-             var childContainer = item
-             as
-             IContainerShape;
-             if (childContainer != null) this.VisitContainer(childContainer, action);
-             else action(item);
-             }*/
-        }
+         *//*if (container == null) throw new ArgumentNullException("container");
+         if (action == null) throw new ArgumentNullException("action");
+         if (includeStart) action(container);
+         if (container.children.isEmpty()) return;
+         foreach(
+         var item
+         in
+         container.children.OfType < IShape > ()
+         )
+         {
+         var childContainer = item
+         as
+         IContainerShape;
+         if (childContainer != null) this.VisitContainer(childContainer, action);
+         else action(item);
+         }*//*
+         }*/
 
 
-    })
+    });
 
     /**
      * The classic spring-embedder (aka force-directed, Fruchterman-Rheingold, barycentric) algorithm.
@@ -774,8 +773,7 @@ kendo_module({
                 this.layoutGraph(component, options);
             }
             var finalNodeSet = this.gridLayoutComponents(components);
-            console.log(finalNodeSet.length);
-            return new kendo.diagram.LayoutState(this.diagram, finalNodeSet)
+            return new kendo.diagram.LayoutState(this.diagram, finalNodeSet);
         },
 
         layoutGraph: function (graph, options) {
@@ -806,20 +804,21 @@ kendo_module({
          * Single iteration of the simulation.
          */
         tick: function () {
+            var i;
             // collect the repulsive forces on each node
-            for (var i = 0; i < this.graph.nodes.length; i++) {
+            for (i = 0; i < this.graph.nodes.length; i++) {
                 this._repulsion(this.graph.nodes[i]);
             }
 
             // collect the attractive forces on each node
-            for (var i = 0; i < this.graph.links.length; i++) {
+            for (i = 0; i < this.graph.links.length; i++) {
                 this._attraction(this.graph.links[i]);
             }
             // update the positions
-            for (var i = 0, len = this.graph.nodes.length; i < len; i++) {
+            for (i = 0; i < this.graph.nodes.length; i++) {
                 var node = this.graph.nodes[i];
                 var offset = Math.sqrt(node.dx * node.dx + node.dy * node.dy);
-                if (offset == 0) {
+                if (offset === 0) {
                     return;
                 }
                 node.x += Math.min(offset, this.temperature) * node.dx / offset;
@@ -888,10 +887,10 @@ kendo_module({
             n.dx = 0;
             n.dy = 0;
             this.graph.nodes.forEach(function (m) {
-                if (m == n) {
+                if (m === n) {
                     return;
                 }
-                while (n.x == m.x && n.y == m.y) {
+                while (n.x === m.x && n.y === m.y) {
                     this._shake(m);
                 }
                 var vx = n.x - m.x;
@@ -905,11 +904,11 @@ kendo_module({
         _attraction: function (link) {
             var t = link.target;
             var s = link.source;
-            if (s == t) {
+            if (s === t) {
                 // loops induce endless shakes
                 return;
             }
-            while (s.x == t.x && s.y == t.y) {
+            while (s.x === t.x && s.y === t.y) {
                 this._shake(t);
             }
 
@@ -934,7 +933,7 @@ kendo_module({
         _expectedBounds: function () {
 
             var size, N = this.graph.nodes.length, /*golden ration optimal?*/ ratio = 1.5, multiplier = 4;
-            if (N == 0) {
+            if (N === 0) {
                 return size;
             }
             size = this.graph.nodes.fold(function (s, node) {
@@ -952,7 +951,7 @@ kendo_module({
             return { width: width * multiplier, height: height * multiplier };
         }
 
-    })
+    });
 
     var TreeLayoutProcessor = kendo.Class.extend({
 
@@ -962,7 +961,7 @@ kendo_module({
         },
         layout: function (treeGraph, root) {
             this.graph = treeGraph;
-            if (this.graph.nodes == null || this.graph.nodes.length == 0) {
+            if (!this.graph.nodes || this.graph.nodes.length === 0) {
                 return;
             }
 
@@ -998,9 +997,9 @@ kendo_module({
         layoutLeft: function (left) {
             this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Left, false);
             this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
-            var h = 0, w = 0, y;
-            for (var i = 0, len = left.length; i < len; i++) {
-                var node = left[i];
+            var h = 0, w = 0, y, i, node;
+            for (i = 0; i < left.length; i++) {
+                node = left[i];
                 node.TreeDirection = kendo.diagram.TreeDirection.Left;
                 var s = this.measure(node, Size.Empty);
                 w = Math.max(w, s.Width);
@@ -1010,8 +1009,8 @@ kendo_module({
             h -= this.options.verticalSeparation;
             var x = this.center.x - this.options.horizontalSeparation;
             y = this.center.y + ((this.center.height - h) / 2);
-            for (var i = 0, len = left.length; i < len; i++) {
-                var node = left[i];
+            for (i = 0; i < left.length; i++) {
+                node = left[i];
                 var p = new Point(x - node.Size.width, y);
 
                 this.arrange(node, p);
@@ -1022,9 +1021,9 @@ kendo_module({
         layoutRight: function (right) {
             this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Right, false);
             this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
-            var h = 0, w = 0, y;
-            for (var i = 0, len = right.length; i < len; i++) {
-                var node = right[i];
+            var h = 0, w = 0, y, i, node;
+            for (i = 0; i < right.length; i++) {
+                node = right[i];
                 node.TreeDirection = kendo.diagram.TreeDirection.Right;
                 var s = this.measure(node, Size.Empty);
                 w = Math.max(w, s.Width);
@@ -1034,8 +1033,8 @@ kendo_module({
             h -= this.options.verticalSeparation;
             var x = this.center.x + this.options.horizontalSeparation + this.center.width;
             y = this.center.y + ((this.center.height - h) / 2);
-            for (var i = 0, len = right.length; i < len; i++) {
-                var node = right[i];
+            for (i = 0; i < right.length; i++) {
+                node = right[i];
                 var p = new Point(x, y);
                 this.arrange(node, p);
                 y += node.Size.height + this.options.verticalSeparation;
@@ -1045,9 +1044,9 @@ kendo_module({
         layoutUp: function (up) {
             this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Up, false);
             this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
-            var w = 0, y;
-            for (var i = 0; i < up.length; i++) {
-                var node = up[i];
+            var w = 0, y, node, i;
+            for (i = 0; i < up.length; i++) {
+                node = up[i];
                 node.TreeDirection = kendo.diagram.TreeDirection.Up;
                 var s = this.measure(node, Size.Empty);
                 w += s.width + this.options.horizontalSeparation;
@@ -1057,8 +1056,8 @@ kendo_module({
             var x = this.center.x + (this.center.width / 2) - (w / 2);
 
             // y = this.center.y -verticalSeparation -this.center.height/2 - h;
-            for (var i = 0; i < up.length; i++) {
-                var node = up[i];
+            for (i = 0; i < up.length; i++) {
+                node = up[i];
                 y = this.center.y - this.options.verticalSeparation - node.Size.height;
                 var p = new Point(x, y);
                 this.arrange(node, p);
@@ -1067,11 +1066,12 @@ kendo_module({
         },
 
         layoutDown: function (down) {
+            var node, i;
             this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Down, false);
             this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
             var w = 0, y;
-            for (var i = 0; i < down.length; i++) {
-                var node = down[i];
+            for (i = 0; i < down.length; i++) {
+                node = down[i];
                 node.treeDirection = kendo.diagram.TreeDirection.Down;
                 var s = this.measure(node, Size.Empty);
                 w += s.width + this.options.horizontalSeparation;
@@ -1080,8 +1080,8 @@ kendo_module({
             w -= this.options.horizontalSeparation;
             var x = this.center.x + (this.center.width / 2) - (w / 2);
             y = this.center.y + this.options.verticalSeparation + this.center.height;
-            for (var i = 0; i < down.length; i++) {
-                var node = down[i];
+            for (i = 0; i < down.length; i++) {
+                node = down[i];
                 var p = new Point(x, y);
                 this.arrange(node, p);
                 x += node.Size.width + this.options.horizontalSeparation;
@@ -1116,12 +1116,13 @@ kendo_module({
             if (Utils.isUndefined(startFromLevel)) {
                 startFromLevel = 0;
             }
+
             this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Down, false);
             this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
             this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Underneath, false, startFromLevel);
-            var w = 0, y;
-            for (var i = 0; i < down.length; i++) {
-                var node = down[i];
+            var w = 0, y, node, i;
+            for (i = 0; i < down.length; i++) {
+                node = down[i];
 
                 // if (node.IsSpecial) continue;
                 node.TreeDirection = kendo.diagram.TreeDirection.Down;
@@ -1137,8 +1138,8 @@ kendo_module({
 
             var x = this.center.x + (this.center.width / 2) - (w / 2);
             y = this.center.y + this.options.verticalSeparation + this.center.height;
-            for (var i = 0; i < down.length; i++) {
-                var node = down[i];
+            for (i = 0; i < down.length; i++) {
+                node = down[i];
                 // if (node.IsSpecial) continue;
                 var p = new Point(x, y);
                 this.arrange(node, p);
@@ -1159,7 +1160,7 @@ kendo_module({
                 this.maxDepth = d;
             }
 
-            var aw = 0, w = 1000, h = 1000, diameter = d == 0 ? 0 : Math.sqrt((w * w) + (h * h)) / d;
+            var aw = 0, w = 1000, h = 1000, diameter = d === 0 ? 0 : Math.sqrt((w * w) + (h * h)) / d;
 
             if (n.children.length > 0) {
                 // eventually with n.IsExpanded
@@ -1177,28 +1178,28 @@ kendo_module({
             return aw;
         },
         sortChildren: function (n) {
-            var basevalue = 0;
+            var basevalue = 0, i;
 
             // update basevalue angle for node ordering
             if (n.parents.length > 1) {
-                throw "Node is not part of a tree."
+                throw "Node is not part of a tree.";
             }
             var p = n.parents[0];
-            if (p != null) {
+            if (p) {
                 var pl = new Point(p.x, p.y);
                 var nl = new Point(n.x, n.y);
                 basevalue = this.normalizeAngle(Math.atan2(pl.y - nl.y, pl.x - nl.x));
             }
 
             var count = n.children.length;
-            if (count == 0) {
+            if (count === 0) {
                 return null;
             }
 
             var angle = [];
             var idx = [];
 
-            for (var i = 0; i < count; ++i) {
+            for (i = 0; i < count; ++i) {
                 var c = n.children[i];
                 var l = new Point(c.x, c.y);
                 idx[i] = i;
@@ -1208,7 +1209,7 @@ kendo_module({
             Array.prototype.bisort(angle, idx);
             var col = []; // list of nodes
             var children = n.children;
-            for (var i = 0; i < count; ++i) {
+            for (i = 0; i < count; ++i) {
                 col.add(children[idx[i]]);
             }
 
@@ -1291,7 +1292,7 @@ kendo_module({
                             s.childrenLayout = layout;
                         }
                     }
-                )
+                );
             }
             else {
                 this.graph.depthFirstTraversal(node, function (s) {
@@ -1314,15 +1315,18 @@ kendo_module({
         measure: function (node, givenSize) {
             var w = 0, h = 0, s;
             var result = new Size(0, 0);
+            if (!node) {
+                throw "";
+            }
             var b = node.associatedShape.bounds();
             var shapeWidth = b.width;
             var shapeHeight = b.height;
-            if (node.parents.length != 1) {
+            if (node.parents.length !== 1) {
                 throw "Node not in a spanning tree.";
             }
 
             var parent = node.parents[0];
-            if (node.treeDirection == kendo.diagram.TreeDirection.Undefined) {
+            if (node.treeDirection === kendo.diagram.TreeDirection.Undefined) {
                 node.treeDirection = parent.treeDirection;
             }
 
@@ -1331,7 +1335,7 @@ kendo_module({
                     Math.abs(shapeWidth) < Math.epsilon ? 50 : shapeWidth,
                     Math.abs(shapeHeight) < Math.epsilon ? 25 : shapeHeight);
             }
-            else if (node.children.length == 1) {
+            else if (node.children.length === 1) {
                 switch (node.treeDirection) {
                     case kendo.diagram.TreeDirection.Radial:
                         s = this.measure(node.children[0], givenSize); // child size
@@ -1351,7 +1355,7 @@ kendo_module({
                             case kendo.diagram.ChildrenLayout.Underneath:
                                 s = this.measure(node.children[0], givenSize);
                                 w = shapeWidth + s.width + this.options.underneathHorizontalOffset;
-                                h = shapeHeight + +this.options.underneathVerticalTopOffset + s.height;
+                                h = shapeHeight + this.options.underneathVerticalTopOffset + s.height;
                                 break;
 
                             case kendo.diagram.ChildrenLayout.Default:
@@ -1397,6 +1401,7 @@ kendo_module({
                 result = new Size(w, h);
             }
             else {
+                var i, childNode;
                 switch (node.treeDirection) {
                     case kendo.diagram.TreeDirection.Left:
                     case kendo.diagram.TreeDirection.Right:
@@ -1410,9 +1415,9 @@ kendo_module({
 
                             case kendo.diagram.ChildrenLayout.Underneath:
                                 w = shapeWidth;
-                                h = shapeHeight + +this.options.underneathVerticalTopOffset;
-                                for (var i = 0, len = node.children.length; i < len; i++) {
-                                    var childNode = node.children[i];
+                                h = shapeHeight + this.options.underneathVerticalTopOffset;
+                                for (i = 0; i < node.children.length; i++) {
+                                    childNode = node.children[i];
                                     s = this.measure(childNode, givenSize);
                                     w = Math.max(w, s.width + this.options.underneathHorizontalOffset);
                                     h += s.height + this.options.underneathVerticalSeparation;
@@ -1424,8 +1429,8 @@ kendo_module({
                             case kendo.diagram.ChildrenLayout.Default:
                                 w = shapeWidth;
                                 h = 0;
-                                for (var i = 0, len = node.children.length; i < len; i++) {
-                                    var childNode = node.children[i];
+                                for (i = 0; i < node.children.length; i++) {
+                                    childNode = node.children[i];
                                     s = this.measure(childNode, givenSize);
                                     w = Math.max(w, shapeWidth + this.options.horizontalSeparation + s.width);
                                     h += s.height + this.options.verticalSeparation;
@@ -1451,9 +1456,9 @@ kendo_module({
 
                             case kendo.diagram.ChildrenLayout.Underneath:
                                 w = shapeWidth;
-                                h = shapeHeight + +this.options.underneathVerticalTopOffset;
-                                for (var i = 0, len = node.children.length; i < len; i++) {
-                                    var childNode = node.children[i];
+                                h = shapeHeight + this.options.underneathVerticalTopOffset;
+                                for (i = 0; i < node.children.length; i++) {
+                                    childNode = node.children[i];
                                     s = this.measure(childNode, givenSize);
                                     w = Math.max(w, s.width + this.options.underneathHorizontalOffset);
                                     h += s.height + this.options.underneathVerticalSeparation;
@@ -1465,8 +1470,8 @@ kendo_module({
                             case kendo.diagram.ChildrenLayout.Default:
                                 w = 0;
                                 h = 0;
-                                for (var i = 0, len = node.children.length; i < len; i++) {
-                                    var childNode = node.children[i];
+                                for (i = 0; i < node.children.length; i++) {
+                                    childNode = node.children[i];
                                     s = this.measure(childNode, givenSize);
                                     w += s.width + this.options.horizontalSeparation;
                                     h = Math.max(h, s.height + this.options.verticalSeparation + shapeHeight);
@@ -1492,7 +1497,7 @@ kendo_module({
             return result;
         },
         arrange: function (n, p) {
-            var b = n.associatedShape.bounds();
+            var i, pp, child, node, childrenwidth, b = n.associatedShape.bounds();
             var shapeWidth = b.width;
             var shapeHeight = b.height;
             if (n.children.isEmpty()) {
@@ -1518,10 +1523,10 @@ kendo_module({
                                 n.y = selfLocation.y;
                                 n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
                                 y = p.y + shapeHeight + this.options.underneathVerticalTopOffset;
-                                for (var i = 0, len = node.children.length; i < len; i++) {
-                                    var node = node.children[i];
+                                for (i = 0; i < node.children.length; i++) {
+                                    node = node.children[i];
                                     x = selfLocation.x - node.associatedShape.width - this.options.underneathHorizontalOffset;
-                                    var pp = new Point(x, y);
+                                    pp = new Point(x, y);
                                     this.arrange(node, pp);
                                     y += node.Size.height + this.options.underneathVerticalSeparation;
                                 }
@@ -1534,16 +1539,16 @@ kendo_module({
                                 n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
                                 x = selfLocation.x - this.options.horizontalSeparation; // alignment of children
                                 y = p.y;
-                                for (var i = 0, len = n.children.length; i < len; i++) {
-                                    var node = n.children[i];
-                                    var pp = new Point(x - node.Size.width, y);
+                                for (i = 0; i < n.children.length; i++) {
+                                    node = n.children[i];
+                                    pp = new Point(x - node.Size.width, y);
                                     this.arrange(node, pp);
                                     y += node.Size.height + this.options.verticalSeparation;
                                 }
                                 break;
 
                             default:
-                                throw new ArgumentOutOfRangeException("n");
+                                throw   "Unsupported TreeDirection";
                         }
 
                         break;
@@ -1564,9 +1569,9 @@ kendo_module({
 
                                 // alignment of children left-underneath the parent
                                 y = p.y + shapeHeight + this.options.underneathVerticalTopOffset;
-                                for (var i = 0, len = n.children.length; i < len; i++) {
-                                    var node = n.children[i];
-                                    var pp = new Point(x, y);
+                                for (i = 0; i < n.children.length; i++) {
+                                    node = n.children[i];
+                                    pp = new Point(x, y);
                                     this.arrange(node, pp);
                                     y += node.Size.height + this.options.underneathVerticalSeparation;
                                 }
@@ -1580,16 +1585,16 @@ kendo_module({
                                 n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
                                 x = p.x + shapeWidth + this.options.horizontalSeparation; // alignment of children
                                 y = p.y;
-                                for (var i = 0, len = n.children.length; i < len; i++) {
-                                    var node = n.children[i];
-                                    var pp = new Point(x, y);
+                                for (i = 0; i < n.children.length; i++) {
+                                    node = n.children[i];
+                                    pp = new Point(x, y);
                                     this.arrange(node, pp);
                                     y += node.Size.height + this.options.verticalSeparation;
                                 }
                                 break;
 
                             default:
-                                throw new ArgumentOutOfRangeException("n");
+                                throw   "Unsupported TreeDirection";
                         }
 
                         break;
@@ -1599,10 +1604,10 @@ kendo_module({
                         n.y = selfLocation.y;
                         n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
                         if (Math.abs(selfLocation.x - p.x) < Math.epsilon) {
-                            var childrenwidth = 0;
+                            childrenwidth = 0;
                             // means there is an aberration due to the oversized Element with respect to the children
-                            for (var i = 0, len = n.children.length; i < len; i++) {
-                                var child = n.children[i];
+                            for (i = 0; i < n.children.length; i++) {
+                                child = n.children[i];
                                 childrenwidth += child.Size.width + this.options.horizontalSeparation;
                             }
                             childrenwidth -= this.options.horizontalSeparation;
@@ -1612,10 +1617,10 @@ kendo_module({
                             x = p.x;
                         }
 
-                        for (var i = 0, len = n.children.length; i < len; i++) {
-                            var node = n.children[i];
+                        for (i = 0; i < n.children.length; i++) {
+                            node = n.children[i];
                             y = selfLocation.y - this.options.verticalSeparation - node.Size.height;
-                            var pp = new Point(x, y);
+                            pp = new Point(x, y);
                             this.arrange(node, pp);
                             x += node.Size.width + this.options.horizontalSeparation;
                         }
@@ -1635,9 +1640,9 @@ kendo_module({
                                 n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
                                 x = p.x + this.options.underneathHorizontalOffset; // alignment of children left-underneath the parent
                                 y = p.y + shapeHeight + this.options.underneathVerticalTopOffset;
-                                for (var i = 0, len = n.children.length; i < len; i++) {
-                                    var node = n.children[i];
-                                    var pp = new Point(x, y);
+                                for (i = 0; i < n.children.length; i++) {
+                                    node = n.children[i];
+                                    pp = new Point(x, y);
                                     this.arrange(node, pp);
                                     y += node.Size.height + this.options.underneathVerticalSeparation;
                                 }
@@ -1649,10 +1654,10 @@ kendo_module({
                                 n.y = selfLocation.y;
                                 n.BoundingRectangle = new Rect(n.x, n.y, n.width, n.height);
                                 if (Math.abs(selfLocation.x - p.x) < Math.epsilon) {
-                                    var childrenwidth = 0;
+                                    childrenwidth = 0;
                                     // means there is an aberration due to the oversized Element with respect to the children
-                                    for (var i = 0, len = n.children.length; i < len; i++) {
-                                        var child = n.children[i];
+                                    for (i = 0; i < n.children.length; i++) {
+                                        child = n.children[i];
                                         childrenwidth += child.Size.width + this.options.horizontalSeparation;
                                     }
 
@@ -1663,17 +1668,17 @@ kendo_module({
                                     x = p.x;
                                 }
 
-                                for (var i = 0, len = n.children.length; i < len; i++) {
-                                    var node = n.children[i];
+                                for (i = 0; i < n.children.length; i++) {
+                                    node = n.children[i];
                                     y = selfLocation.y + this.options.verticalSeparation + shapeHeight;
-                                    var pp = new Point(x, y);
+                                    pp = new Point(x, y);
                                     this.arrange(node, pp);
                                     x += node.Size.width + this.options.horizontalSeparation;
                                 }
                                 break;
 
                             default:
-                                throw new ArgumentOutOfRangeException("n");
+                                throw   "Unsupported TreeDirection";
                         }
                         break;
 
@@ -1681,12 +1686,12 @@ kendo_module({
                         break;
 
                     default:
-                        throw new ArgumentOutOfRangeException("n");
+                        throw   "Unsupported TreeDirection";
                 }
             }
         },
         layoutSwitch: function () {
-            if (this.center == null) {
+            if (!this.center) {
                 return;
             }
 
@@ -1708,7 +1713,7 @@ kendo_module({
                 case kendo.diagram.TreeLayoutType.MindmapHorizontal:
                     single = this.center.children;
 
-                    if (this.center.children.length == 1) {
+                    if (this.center.children.length === 1) {
                         this.layoutRight(single);
                     }
                     else {
@@ -1729,17 +1734,17 @@ kendo_module({
                 case kendo.diagram.TreeLayoutType.MindmapVertical:
                     single = this.center.children;
 
-                    if (this.center.children.length == 1) {
+                    if (this.center.children.length === 1) {
                         this.layoutDown(single);
                     }
                     else {
                         // odd number will give one more at the right
                         leftcount = children.length / 2;
                         male = this.center.children.where(function (n) {
-                            return children.indexOf(n) < leftcount
+                            return children.indexOf(n) < leftcount;
                         });
                         female = this.center.children.where(function (n) {
-                            return children.indexOf(n) >= leftcount
+                            return children.indexOf(n) >= leftcount;
                         });
                         this.layoutUp(male);
                         this.layoutDown(female);
@@ -1830,7 +1835,7 @@ kendo_module({
                 var component = components[i];
 
                 var treeGraph = this.getTree(component);
-                if (treeGraph == null) {
+                if (!treeGraph) {
                     throw "Failed to find a spanning tree for the component.";
                 }
                 var root = treeGraph.root;
@@ -1855,20 +1860,20 @@ kendo_module({
             if (this.options.roots && this.options.roots.length > 0) {
                 for (var i = 0, len = graph.nodes.length; i < len; i++) {
                     var node = graph.nodes[i];
-                    for (var j = 0, len = this.options.roots.length; j < len; j++) {
+                    for (var j = 0; j < this.options.roots.length; j++) {
                         var givenRootShape = this.options.roots[j];
-                        if (givenRootShape == node.associatedShape) {
+                        if (givenRootShape === node.associatedShape) {
                             root = node;
                             break;
                         }
                     }
                 }
             }
-            if (root == null) {
+            if (!root) {
                 // finds the most probable root on the basis of the longest path in the component
                 root = graph.root();
                 // should not happen really
-                if (root == null) {
+                if (!root) {
                     throw "Unable to find a root for the tree.";
                 }
             }
@@ -1910,7 +1915,7 @@ kendo_module({
          * Default layout.
          */
         Default: 3
-    }
+    };
 
     var LayoutTypes = {
 
@@ -1933,7 +1938,7 @@ kendo_module({
          * Unspecified layout.
          */
         None: 3
-    }
+    };
 
     var TreeDirection = {
         /*
@@ -1970,7 +1975,7 @@ kendo_module({
          * Undefine layout.
          */
         Undefined: 6
-    }
+    };
 
     var TreeLayoutType = {
 
@@ -2018,14 +2023,14 @@ kendo_module({
          * Unspecified layout. This is not an algorithm but just a tag for the host application to tell that the user has not specified any layout yet.
          */
         Undefined: 8
-    }
+    };
 
     var LayeredLayoutType = {
         Up: 0,
         Down: 1,
         Left: 2,
         Right: 3
-    }
+    };
 
     /**
      * The Sugiyama aka layered layout algorithm.
@@ -2086,20 +2091,18 @@ kendo_module({
                 node.gridPosition = 0;
             }
         },
-        _prepare: function (graph, options) {
-            for (var l = 0; l < graph.links.length; l++) {
+        _prepare: function (graph) {
+            var current = [], i, l, link;
+            for (l = 0; l < graph.links.length; l++) {
                 // of many dummies have been inserted to make things work
                 graph.links[l].depthOfDumminess = 0;
             }
-
-
-            var current = [];
 
             // defines a mapping of a node to the layer index
             var layerMap = new Dictionary();
 
             graph.nodes.forEach(function (node) {
-                if (node.incoming.length == 0) {
+                if (node.incoming.length === 0) {
                     layerMap.set(node, 0);
                     current.push(node);
                 }
@@ -2107,7 +2110,8 @@ kendo_module({
 
             while (current.length > 0) {
                 var next = current.shift();
-                next.outgoing.forEach(function (link) {
+                for (i = 0; i < next.outgoing.length; i++) {
+                    link = next.outgoing[i];
                     var target = link.target;
 
                     if (layerMap.containsKey(target)) {
@@ -2119,7 +2123,7 @@ kendo_module({
                     if (!current.contains(target)) {
                         current.push(target);
                     }
-                });
+                }
             }
 
             // the node count in the map defines how many layers w'll need
@@ -2140,12 +2144,12 @@ kendo_module({
                 var node = sortedNodes[n];
                 var minLayer = Number.MAX_VALUE;
 
-                if (node.outgoing.length == 0) {
+                if (node.outgoing.length === 0) {
                     continue;
                 }
 
-                for (var l = 0; l < node.outgoing.length; ++l) {
-                    var link = node.outgoing[l];
+                for (l = 0; l < node.outgoing.length; ++l) {
+                    link = node.outgoing[l];
                     minLayer = Math.min(minLayer, layerMap.get(link.target));
                 }
 
@@ -2155,7 +2159,7 @@ kendo_module({
             }
 
             this.layers = [];
-            for (var i = 0; i < layerCount + 1; i++) {
+            for (i = 0; i < layerCount + 1; i++) {
                 this.layers.push([]);
             }
 
@@ -2165,9 +2169,9 @@ kendo_module({
             }, this);
 
             // set initial grid positions
-            for (var l = 0; l < this.layers.length; l++) {
+            for (l = 0; l < this.layers.length; l++) {
                 var layer = this.layers[l];
-                for (var i = 0; i < layer.length; i++) {
+                for (i = 0; i < layer.length; i++) {
                     layer[i].gridPosition = i;
                 }
             }
@@ -2208,11 +2212,9 @@ kendo_module({
 
             this._dedummify();
 
-            // rereverse the links which were switched earlier 
+            // re-reverse the links which were switched earlier
             reversedEdges.forEach(function (e) {
-                if (e.points) {
-                    e.points.reverse();
-                }
+                if(e.points) {e.points.reverse();}
             });
         },
 
@@ -2237,15 +2239,15 @@ kendo_module({
         },
 
         placeLeftToRight: function (leftClasses) {
-            var leftPos = new Dictionary();
+            var leftPos = new Dictionary(), n, node;
             for (var c = 0; c < this.layers.length; ++c) {
                 var classNodes = leftClasses[c];
-                if (classNodes == null) {
+                if (!classNodes) {
                     continue;
                 }
 
-                for (var n = 0; n < classNodes.length; n++) {
-                    var node = classNodes[n];
+                for (n = 0; n < classNodes.length; n++) {
+                    node = classNodes[n];
                     if (!leftPos.containsKey(node)) {
                         this.placeLeft(node, leftPos, c);
                     }
@@ -2253,17 +2255,17 @@ kendo_module({
 
                 // adjust class
                 var d = Number.POSITIVE_INFINITY;
-                for (var n = 0; n < classNodes.length; n++) {
-                    var node = classNodes[n];
+                for (n = 0; n < classNodes.length; n++) {
+                    node = classNodes[n];
                     var rightSibling = this.rightSibling(node);
-                    if (rightSibling != null && this.nodeLeftClass.get(rightSibling) != c) {
+                    if (rightSibling && this.nodeLeftClass.get(rightSibling) !== c) {
                         d = Math.min(d, leftPos.get(rightSibling) - leftPos.get(node) - this.getMinDist(node, rightSibling));
                     }
                 }
-                if (d == Number.POSITIVE_INFINITY) {
+                if (d === Number.POSITIVE_INFINITY) {
                     var D = [];
-                    for (var n = 0; n < classNodes.length; n++) {
-                        var node = classNodes[n];
+                    for (n = 0; n < classNodes.length; n++) {
+                        node = classNodes[n];
                         var neighbors = [];
                         neighbors.addRange(this.upNodes.get(node));
                         neighbors.addRange(this.downNodes.get(node));
@@ -2276,18 +2278,18 @@ kendo_module({
                         }
                     }
                     D.sort();
-                    if (D.length == 0) {
+                    if (D.length === 0) {
                         d = 0;
                     }
-                    else if (D.length % 2 == 1) {
+                    else if (D.length % 2 === 1) {
                         d = D[this.intDiv(D.length, 2)];
                     }
                     else {
                         d = (D[this.intDiv(D.length, 2) - 1] + D[this.intDiv(D.length, 2)]) / 2;
                     }
                 }
-                for (var n = 0; n < classNodes.length; n++) {
-                    var node = classNodes[n];
+                for (n = 0; n < classNodes.length; n++) {
+                    node = classNodes[n];
                     leftPos.set(node, leftPos.get(node) + d);
                 }
             }
@@ -2295,15 +2297,15 @@ kendo_module({
         },
 
         placeRightToLeft: function (rightClasses) {
-            var rightPos = new Dictionary();
+            var rightPos = new Dictionary(), n, node;
             for (var c = 0; c < this.layers.length; ++c) {
                 var classNodes = rightClasses[c];
-                if (classNodes == null) {
+                if (!classNodes) {
                     continue;
                 }
 
-                for (var n = 0; n < classNodes.length; n++) {
-                    var node = classNodes[n];
+                for (n = 0; n < classNodes.length; n++) {
+                    node = classNodes[n];
                     if (!rightPos.containsKey(node)) {
                         this.placeRight(node, rightPos, c);
                     }
@@ -2311,17 +2313,17 @@ kendo_module({
 
                 // adjust class
                 var d = Number.NEGATIVE_INFINITY;
-                for (var n = 0; n < classNodes.length; n++) {
-                    var node = classNodes[n];
+                for (n = 0; n < classNodes.length; n++) {
+                    node = classNodes[n];
                     var leftSibling = this.leftSibling(node);
-                    if (leftSibling != null && this.nodeRightClass.get(leftSibling) != c) {
+                    if (leftSibling && this.nodeRightClass.get(leftSibling) !== c) {
                         d = Math.max(d, rightPos.get(leftSibling) - rightPos.get(node) + this.getMinDist(leftSibling, node));
                     }
                 }
-                if (d == Number.NEGATIVE_INFINITY) {
+                if (d === Number.NEGATIVE_INFINITY) {
                     var D = [];
-                    for (var n = 0; n < classNodes.length; n++) {
-                        var node = classNodes[n];
+                    for (n = 0; n < classNodes.length; n++) {
+                        node = classNodes[n];
                         var neighbors = [];
                         neighbors.addRange(this.upNodes.get(node));
                         neighbors.addRange(this.downNodes.get(node));
@@ -2334,18 +2336,18 @@ kendo_module({
                         }
                     }
                     D.sort();
-                    if (D.length == 0) {
+                    if (D.length === 0) {
                         d = 0;
                     }
-                    else if (D.length % 2 == 1) {
+                    else if (D.length % 2 === 1) {
                         d = D[this.intDiv(D.length, 2)];
                     }
                     else {
                         d = (D[this.intDiv(D.length, 2) - 1] + D[this.intDiv(D.length, 2)]) / 2;
                     }
                 }
-                for (var n = 0; n < classNodes.length; n++) {
-                    var node = classNodes[n];
+                for (n = 0; n < classNodes.length; n++) {
+                    node = classNodes[n];
                     rightPos.set(node, rightPos.get(node) + d);
                 }
             }
@@ -2374,14 +2376,16 @@ kendo_module({
                 currentWing = l;
 
                 var layer = this.layers[l];
-                for (var n = d == 1 ? 0 : layer.length - 1; 0 <= n && n < layer.length; n += d) {
+                for (var n = d === 1 ? 0 : layer.length - 1; 0 <= n && n < layer.length; n += d) {
                     var node = layer[n];
                     if (!wing.containsKey(node)) {
                         wing.set(node, currentWing);
                         if (node.isVirtual) {
-                            this._nodesInLink(node).forEach(function (vnode) {
+                            var ndsinl = this._nodesInLink(node);
+                            for (var kk = 0; kk < ndsinl.length; kk++) {
+                                var vnode = ndsinl[kk];
                                 wing.set(vnode, currentWing);
-                            });
+                            }
                         }
                     }
                     else {
@@ -2404,29 +2408,30 @@ kendo_module({
             return wings;
         },
         _isVerticalLayout: function () {
-            return this.options.layeredLayoutType == kendo.diagram.LayeredLayoutType.Up || this.options.layeredLayoutType == kendo.diagram.LayeredLayoutType.Down;
+            return this.options.layeredLayoutType === kendo.diagram.LayeredLayoutType.Up || this.options.layeredLayoutType === kendo.diagram.LayeredLayoutType.Down;
         },
 
         _isHorizontalLayout: function () {
-            return this.options.layeredLayoutType == kendo.diagram.LayeredLayoutType.Right || this.options.layeredLayoutType == kendo.diagram.LayeredLayoutType.Left;
+            return this.options.layeredLayoutType === kendo.diagram.LayeredLayoutType.Right || this.options.layeredLayoutType === kendo.diagram.LayeredLayoutType.Left;
         },
         _isIncreasingLayout: function () {
             // meaning that the visiting of the layers goes in the natural order of increasing layer index
-            return this.options.layeredLayoutType == kendo.diagram.LayeredLayoutType.Right || this.options.layeredLayoutType == kendo.diagram.LayeredLayoutType.Down;
+            return this.options.layeredLayoutType === kendo.diagram.LayeredLayoutType.Right || this.options.layeredLayoutType === kendo.diagram.LayeredLayoutType.Down;
         },
         _moveThingsAround: function () {
+            var i, l, node, layer, n, w;
             // sort the layers by their grid position
-            for (var l = 0; l < this.layers.length; ++l) {
-                var layer = this.layers[l];
+            for (l = 0; l < this.layers.length; ++l) {
+                layer = this.layers[l];
                 layer.sort(this._gridPositionComparer);
             }
 
             this.minDistances = [];
-            for (var l = 0; l < this.layers.length; ++l) {
-                var layer = this.layers[l];
+            for (l = 0; l < this.layers.length; ++l) {
+                layer = this.layers[l];
                 this.minDistances[l] = [];
-                for (var n = 0; n < layer.length; ++n) {
-                    var node = layer[n];
+                for (n = 0; n < layer.length; ++n) {
+                    node = layer[n];
                     node.layerIndex = n;
                     this.minDistances[l][n] = this.options.nodeDistance;
                     if (n < layer.length - 1) {
@@ -2468,9 +2473,9 @@ kendo_module({
                 list.sort(this._gridPositionComparer);
             });
 
-            for (var l = 0; l < this.layers.length - 1; ++l) {
-                var layer = this.layers[l];
-                for (var w = 0; w < layer.length - 1; w++) {
+            for (l = 0; l < this.layers.length - 1; ++l) {
+                layer = this.layers[l];
+                for (w = 0; w < layer.length - 1; w++) {
                     var currentNode = layer[w];
                     if (!currentNode.isVirtual) {
                         continue;
@@ -2481,8 +2486,8 @@ kendo_module({
                         continue;
                     }
 
-                    for (var n = w + 1; n < layer.length; ++n) {
-                        var node = layer[n];
+                    for (n = w + 1; n < layer.length; ++n) {
+                        node = layer[n];
                         if (!node.isVirtual) {
                             continue;
                         }
@@ -2521,25 +2526,25 @@ kendo_module({
 
 
             var order = new Dictionary();
-            var placed = new Dictionary;
-            for (var l = 0; l < this.layers.length; ++l) {
-                var layer = this.layers[l];
+            var placed = new Dictionary();
+            for (l = 0; l < this.layers.length; ++l) {
+                layer = this.layers[l];
                 var sequenceStart = -1, sequenceEnd = -1;
-                for (var n = 0; n < layer.length; ++n) {
-                    var node = layer[n];
+                for (n = 0; n < layer.length; ++n) {
+                    node = layer[n];
                     order.set(node, 0);
                     placed.set(node, false);
                     if (node.isVirtual) {
-                        if (sequenceStart == -1) {
+                        if (sequenceStart === -1) {
                             sequenceStart = n;
                         }
-                        else if (sequenceStart == n - 1) {
+                        else if (sequenceStart === n - 1) {
                             sequenceStart = n;
                         }
                         else {
                             sequenceEnd = n;
                             order.set(layer[sequenceStart], 0);
-                            if (x.get(node) - x.get(layer[sequenceStart]) == this.getMinDist(layer[sequenceStart], node)) {
+                            if (x.get(node) - x.get(layer[sequenceStart]) === this.getMinDist(layer[sequenceStart], node)) {
                                 placed.set(layer[sequenceStart], true);
                             }
                             else {
@@ -2552,17 +2557,16 @@ kendo_module({
             }
             var directions = [1, -1];
             directions.forEach(function (d) {
-                var start = d == 1 ? 0 : this.layers.length - 1;
-                var end = d == 1 ? this.layers.length - 1 : 0;
+                var start = d === 1 ? 0 : this.layers.length - 1;
                 for (var l = start; 0 <= l && l < this.layers.length; l += d) {
                     var layer = this.layers[l];
                     var virtualStartIndex = this._firstVirtualNode(layer);
                     var virtualStart = null;
                     var sequence = null;
-                    if (virtualStartIndex != -1) {
+                    if (virtualStartIndex !== -1) {
                         virtualStart = layer[virtualStartIndex];
                         sequence = [];
-                        for (var i = 0; i < virtualStartIndex; i++) {
+                        for (i = 0; i < virtualStartIndex; i++) {
                             sequence.push(layer[i]);
                         }
                     }
@@ -2572,35 +2576,35 @@ kendo_module({
                     }
                     if (sequence.length > 0) {
                         this._sequencer(x, null, virtualStart, d, sequence);
-                        for (var i = 0; i < sequence.length - 1; ++i) {
+                        for (i = 0; i < sequence.length - 1; ++i) {
                             this.setMinDist(sequence[i], sequence[i + 1], x.get(sequence[i + 1]) - x.get(sequence[i]));
                         }
-                        if (virtualStart != null) {
+                        if (virtualStart) {
                             this.setMinDist(sequence[sequence.length - 1], virtualStart, x.get(virtualStart) - x.get(sequence[sequence.length - 1]));
                         }
                     }
 
-                    while (virtualStart != null) {
+                    while (virtualStart) {
                         var virtualEnd = this.nextVirtualNode(layer, virtualStart);
-                        if (virtualEnd == null) {
+                        if (!virtualEnd) {
                             virtualStartIndex = virtualStart.layerIndex;
                             sequence = [];
-                            for (var i = virtualStartIndex + 1; i < layer.length; i++) {
+                            for (i = virtualStartIndex + 1; i < layer.length; i++) {
                                 sequence.push(layer[i]);
                             }
                             if (sequence.length > 0) {
                                 this._sequencer(x, virtualStart, null, d, sequence);
-                                for (var i = 0; i < sequence.length - 1; ++i) {
+                                for (i = 0; i < sequence.length - 1; ++i) {
                                     this.setMinDist(sequence[i], sequence[i + 1], x.get(sequence[i + 1]) - x.get(sequence[i]));
                                 }
                                 this.setMinDist(virtualStart, sequence[0], x.get(sequence[0]) - x.get(virtualStart));
                             }
                         }
-                        else if (order.get(virtualStart) == d) {
+                        else if (order.get(virtualStart) === d) {
                             virtualStartIndex = virtualStart.layerIndex;
                             var virtualEndIndex = virtualEnd.layerIndex;
                             sequence = [];
-                            for (var i = virtualStartIndex + 1; i < virtualEndIndex; i++) {
+                            for (i = virtualStartIndex + 1; i < virtualEndIndex; i++) {
                                 sequence.push(layer[i]);
                             }
                             if (sequence.length > 0) {
@@ -2620,13 +2624,11 @@ kendo_module({
                 if (ctx._isIncreasingLayout()) {
                     return k < ctx.layers.length;
                 }
-
                 else {
                     return k >= 0;
                 }
-            }
-            var layerIncrement = this._isIncreasingLayout() ? +1 : -1,
-                offset = 0;
+            };
+            var layerIncrement = this._isIncreasingLayout() ? +1 : -1, offset = 0;
 
             /**
              * Calcs the max height of the given layer.
@@ -2645,12 +2647,12 @@ kendo_module({
                 return height;
             }
 
-            for (var i = fromLayerIndex; reachedFinalLayerIndex(i, this); i += layerIncrement) {
-                var layer = this.layers[i];
+            for (i = fromLayerIndex; reachedFinalLayerIndex(i, this); i += layerIncrement) {
+                layer = this.layers[i];
                 var height = maximumHeight(layer, this);
 
-                for (var n = 0; n < layer.length; ++n) {
-                    var node = layer[n];
+                for (n = 0; n < layer.length; ++n) {
+                    node = layer[n];
                     if (this._isVerticalLayout()) {
                         node.x = x.get(node);
                         node.y = offset + height / 2;
@@ -2677,7 +2679,7 @@ kendo_module({
                 if (nextBridge.isVirtual) {
                     var nextBridgeTarget = this.getNeighborOnLayer(nextBridge, l);
                     if (nextBridgeTarget.isVirtual) {
-                        if (prevBridge != null) {
+                        if (prevBridge) {
                             var p = placed.get(prevBridgeTarget);
                             var clayer = this.layers[l];
                             var i1 = prevBridgeTarget.layerIndex;
@@ -2707,18 +2709,18 @@ kendo_module({
 
         getNeighborOnLayer: function (node, l) {
             var neighbor = this.upNodes.get(node)[0];
-            if (neighbor.layer == l) {
+            if (neighbor.layer === l) {
                 return neighbor;
             }
             neighbor = this.downNodes.get(node)[0];
-            if (neighbor.layer == l) {
+            if (neighbor.layer === l) {
                 return neighbor;
             }
             return null;
         },
 
         _sequencer: function (x, virtualStart, virtualEnd, dir, sequence) {
-            if (sequence.length == 1) {
+            if (sequence.length === 1) {
                 this._sequenceSingle(x, virtualStart, virtualEnd, dir, sequence[0]);
             }
 
@@ -2731,21 +2733,21 @@ kendo_module({
         },
 
         _sequenceSingle: function (x, virtualStart, virtualEnd, dir, node) {
-            var neighbors = dir == -1 ? this.downNodes.get(node) : this.upNodes.get(node);
+            var neighbors = dir === -1 ? this.downNodes.get(node) : this.upNodes.get(node);
 
             var n = neighbors.length;
-            if (n != 0) {
-                if (n % 2 == 1) {
+            if (n !== 0) {
+                if (n % 2 === 1) {
                     x.set(node, x.get(neighbors[this.intDiv(n, 2)]));
                 }
                 else {
                     x.set(node, (x.get(neighbors[this.intDiv(n, 2) - 1]) + x.get(neighbors[this.intDiv(n, 2)])) / 2);
                 }
 
-                if (virtualStart != null) {
+                if (virtualStart) {
                     x.set(node, Math.max(x.get(node), x.get(virtualStart) + this.getMinDist(virtualStart, node)));
                 }
-                if (virtualEnd != null) {
+                if (virtualEnd) {
                     x.set(node, Math.min(x.get(node), x.get(virtualEnd) - this.getMinDist(node, virtualEnd)));
                 }
             }
@@ -2755,12 +2757,12 @@ kendo_module({
             var r = sequence.length, t = this.intDiv(r, 2);
 
             // collect left changes
-            var leftHeap = [];
-            for (var i = 0; i < t; ++i) {
-                var c = 0;
-                var neighbors = dir == -1 ? this.downNodes.get(sequence[i]) : this.upNodes.get(sequence[i]);
-                for (var n = 0; n < neighbors.length; ++n) {
-                    var neighbor = neighbors[n];
+            var leftHeap = [], i, c, n, neighbors, neighbor, pair;
+            for (i = 0; i < t; ++i) {
+                c = 0;
+                neighbors = dir === -1 ? this.downNodes.get(sequence[i]) : this.upNodes.get(sequence[i]);
+                for (n = 0; n < neighbors.length; ++n) {
+                    neighbor = neighbors[n];
                     if (x.get(neighbor) >= x.get(sequence[i])) {
                         c++;
                     }
@@ -2771,18 +2773,18 @@ kendo_module({
                 }
                 leftHeap.push({ k: x.get(sequence[i]) + this.getMinDist(sequence[i], sequence[t - 1]), v: c });
             }
-            if (virtualStart != null) {
+            if (virtualStart) {
                 leftHeap.push({ k: x.get(virtualStart) + this.getMinDist(virtualStart, sequence[t - 1]), v: Number.MAX_VALUE });
             }
             leftHeap.sort(this._positionDescendingComparer);
 
             // collect right changes
             var rightHeap = [];
-            for (var i = t; i < r; ++i) {
-                var c = 0;
-                var neighbors = dir == -1 ? this.downNodes.get(sequence[i]) : this.upNodes.get(sequence[i]);
-                for (var n = 0; n < neighbors.length; ++n) {
-                    var neighbor = neighbors[n];
+            for (i = t; i < r; ++i) {
+                c = 0;
+                neighbors = dir === -1 ? this.downNodes.get(sequence[i]) : this.upNodes.get(sequence[i]);
+                for (n = 0; n < neighbors.length; ++n) {
+                    neighbor = neighbors[n];
                     if (x.get(neighbor) <= x.get(sequence[i])) {
                         c++;
                     }
@@ -2793,7 +2795,7 @@ kendo_module({
                 }
                 rightHeap.push({ k: x.get(sequence[i]) - this.getMinDist(sequence[i], sequence[t]), v: c });
             }
-            if (virtualEnd != null) {
+            if (virtualEnd) {
                 rightHeap.push({ k: x.get(virtualEnd) - this.getMinDist(virtualEnd, sequence[t]), v: Number.MAX_VALUE });
             }
             rightHeap.sort(this._positionAscendingComparer);
@@ -2802,34 +2804,34 @@ kendo_module({
             var m = this.getMinDist(sequence[t - 1], sequence[t]);
             while (x.get(sequence[t]) - x.get(sequence[t - 1]) < m) {
                 if (leftRes < rightRes) {
-                    if (leftHeap.length == 0) {
+                    if (leftHeap.length === 0) {
                         x.set(sequence[t - 1], x.get(sequence[t]) - m);
                         break;
                     }
                     else {
-                        var pair = leftHeap.shift();
+                        pair = leftHeap.shift();
                         leftRes = leftRes + pair.v;
                         x.set(sequence[t - 1], pair.k);
                         x.set(sequence[t - 1], Math.max(x.get(sequence[t - 1]), x.get(sequence[t]) - m));
                     }
                 }
                 else {
-                    if (rightHeap.length == 0) {
+                    if (rightHeap.length === 0) {
                         x.set(sequence[t], x.get(sequence[t - 1]) + m);
                         break;
                     }
                     else {
-                        var pair = rightHeap.shift();
+                        pair = rightHeap.shift();
                         rightRes = rightRes + pair.v;
                         x.set(sequence[t], pair.k);
                         x.set(sequence[t], Math.min(x.get(sequence[t]), x.get(sequence[t - 1]) + m));
                     }
                 }
             }
-            for (var i = t - 2; i >= 0; i--) {
+            for (i = t - 2; i >= 0; i--) {
                 x.set(sequence[i], Math.min(x.get(sequence[i]), x.get(sequence[t - 1]) - this.getMinDist(sequence[i], sequence[t - 1])));
             }
-            for (var i = t + 1; i < r; i++) {
+            for (i = t + 1; i < r; i++) {
                 x.set(sequence[i], Math.max(x.get(sequence[i]), x.get(sequence[t]) + this.getMinDist(sequence[i], sequence[t])));
             }
         },
@@ -2838,14 +2840,14 @@ kendo_module({
             var pos = Number.NEGATIVE_INFINITY;
             this._getComposite(node).forEach(function (v) {
                 var leftSibling = this.leftSibling(v);
-                if (leftSibling != null && this.nodeLeftClass.get(leftSibling) == this.nodeLeftClass.get(v)) {
+                if (leftSibling && this.nodeLeftClass.get(leftSibling) === this.nodeLeftClass.get(v)) {
                     if (!leftPos.containsKey(leftSibling)) {
                         this.placeLeft(leftSibling, leftPos, leftClass);
                     }
                     pos = Math.max(pos, leftPos.get(leftSibling) + this.getMinDist(leftSibling, v));
                 }
             }, this);
-            if (pos == Number.NEGATIVE_INFINITY) {
+            if (pos === Number.NEGATIVE_INFINITY) {
                 pos = 0;
             }
             this._getComposite(node).forEach(function (v) {
@@ -2857,14 +2859,14 @@ kendo_module({
             var pos = Number.POSITIVE_INFINITY;
             this._getComposite(node).forEach(function (v) {
                 var rightSibling = this.rightSibling(v);
-                if (rightSibling != null && this.nodeRightClass.get(rightSibling) == this.nodeRightClass.get(v)) {
+                if (rightSibling && this.nodeRightClass.get(rightSibling) === this.nodeRightClass.get(v)) {
                     if (!rightPos.containsKey(rightSibling)) {
                         this.placeRight(rightSibling, rightPos, rightClass);
                     }
                     pos = Math.min(pos, rightPos.get(rightSibling) - this.getMinDist(v, rightSibling));
                 }
             }, this);
-            if (pos == Number.POSITIVE_INFINITY) {
+            if (pos === Number.POSITIVE_INFINITY) {
                 pos = 0;
             }
             this._getComposite(node).forEach(function (v) {
@@ -2875,13 +2877,13 @@ kendo_module({
         leftSibling: function (node) {
             var layer = this.layers[node.layer],
                 layerIndex = node.layerIndex;
-            return layerIndex == 0 ? null : layer[layerIndex - 1];
+            return layerIndex === 0 ? null : layer[layerIndex - 1];
         },
 
         rightSibling: function (node) {
             var layer = this.layers[node.layer];
             var layerIndex = node.layerIndex;
-            return layerIndex == layer.length - 1 ? null : layer[layerIndex + 1];
+            return layerIndex === layer.length - 1 ? null : layer[layerIndex + 1];
 
         },
 
@@ -2890,12 +2892,13 @@ kendo_module({
         },
 
         arrangeNodes: function () {
+            var i, l, ni, layer, node;
             // Initialize node's base priority
-            for (var l = 0; l < this.layers.length; l++) {
-                var layer = this.layers[l];
+            for (l = 0; l < this.layers.length; l++) {
+                layer = this.layers[l];
 
-                for (var ni = 0; ni < layer.length; ni++) {
-                    var node = layer[ni];
+                for (ni = 0; ni < layer.length; ni++) {
+                    node = layer[ni];
                     node.upstreamPriority = node.upstreamLinkCount;
                     node.downstreamPriority = node.downstreamLinkCount;
                 }
@@ -2906,32 +2909,32 @@ kendo_module({
 
             var maxLayoutIterations = 2;
             for (var it = 0; it < maxLayoutIterations; it++) {
-                for (var i = this.layers.length - 1; i >= 1; i--) {
+                for (i = this.layers.length - 1; i >= 1; i--) {
                     this.layoutLayer(false, i);
                 }
 
-                for (var i = 0; i < this.layers.length - 1; i++) {
+                for (i = 0; i < this.layers.length - 1; i++) {
                     this.layoutLayer(true, i);
                 }
             }
 
             // Offset the whole structure so that there are no gridPositions < 0
             var gridPos = Number.MAX_VALUE;
-            for (var l = 0; l < this.layers.length; l++) {
-                var layer = this.layers[l];
+            for (l = 0; l < this.layers.length; l++) {
+                layer = this.layers[l];
 
-                for (var ni = 0; ni < layer.length; ni++) {
-                    var node = layer[ni];
+                for (ni = 0; ni < layer.length; ni++) {
+                    node = layer[ni];
                     gridPos = Math.min(gridPos, node.gridPosition);
                 }
             }
 
             if (gridPos < 0) {
-                for (var l = 0; l < this.layers.length; l++) {
-                    var layer = this.layers[l];
+                for (l = 0; l < this.layers.length; l++) {
+                    layer = this.layers[l];
 
-                    for (var ni = 0; ni < layer.length; ni++) {
-                        var node = layer[ni];
+                    for (ni = 0; ni < layer.length; ni++) {
+                        node = layer[ni];
                         node.gridPosition = node.gridPosition - gridPos;
                     }
                 }
@@ -3031,7 +3034,7 @@ kendo_module({
         /// <returns>Returns <c>true</c> if the shift was possible, otherwise <c>false</c>.</returns>
         moveRight: function (node, layer, priority) {
             var index = layer.indexOf(node);
-            if (index == layer.length - 1) {
+            if (index === layer.length - 1) {
                 // this is the last node in the layer, so we can move to the right without troubles
                 node.gridPosition = node.gridPosition + 0.5;
                 return true;
@@ -3069,7 +3072,7 @@ kendo_module({
         /// <returns>Returns <c>true</c> if the shift was possible, otherwise <c>false</c>.</returns>
         moveLeft: function (node, layer, priority) {
             var index = layer.indexOf(node);
-            if (index == 0) {
+            if (index === 0) {
                 // this is the last node in the layer, so we can move to the left without troubles
                 node.gridPosition = node.gridPosition - 0.5;
                 return true;
@@ -3118,8 +3121,8 @@ kendo_module({
             this.linkToNodeMap = new Dictionary();
             this.nodeToLinkMap = new Dictionary();
 
-            var links = this.graph.links.slice(0);
-            for (var l = 0; l < links.length; l++) {
+            var layer, pos, newNode, node, r, newLink, i, l, links = this.graph.links.slice(0);
+            for (l = 0; l < links.length; l++) {
                 var link = links[l];
                 var o = link.source;
                 var d = link.target;
@@ -3133,15 +3136,15 @@ kendo_module({
 
                 var p = o;
                 if (oLayer - dLayer > 1) {
-                    for (var i = oLayer - 1; i > dLayer; i--) {
-                        var newNode = new Node();
+                    for (i = oLayer - 1; i > dLayer; i--) {
+                        newNode = new Node();
                         newNode.x = o.x;
                         newNode.y = o.y;
                         newNode.width = o.width / 100;
                         newNode.height = o.height / 100;
 
-                        var layer = this.layers[i];
-                        var pos = (i - dLayer) * step + oPos;
+                        layer = this.layers[i];
+                        pos = (i - dLayer) * step + oPos;
                         if (pos > layer.length) {
                             pos = layer.length;
                         }
@@ -3153,7 +3156,7 @@ kendo_module({
                         }
 
                         // check if origin and destination are both first
-                        else if (oPos == 0 && dPos == 0) {
+                        else if (oPos === 0 && dPos === 0) {
                             pos = 0;
                         }
 
@@ -3168,12 +3171,12 @@ kendo_module({
                         layer.insert(newNode, pos);
 
                         // translate rightwards nodes' positions
-                        for (var r = pos + 1; r < layer.length; r++) {
-                            var node = layer[r];
+                        for (r = pos + 1; r < layer.length; r++) {
+                            node = layer[r];
                             node.gridPosition = node.gridPosition + 1;
                         }
 
-                        var newLink = new Link(p, newNode);
+                        newLink = new Link(p, newNode);
                         newLink.depthOfDumminess = 0;
                         p = newNode;
 
@@ -3191,15 +3194,15 @@ kendo_module({
                 }
 
                 if (oLayer - dLayer < -1) {
-                    for (var i = oLayer + 1; i < dLayer; i++) {
-                        var newNode = new Node();
+                    for (i = oLayer + 1; i < dLayer; i++) {
+                        newNode = new Node();
                         newNode.x = o.x;
                         newNode.y = o.y;
                         newNode.width = o.width / 100;
                         newNode.height = o.height / 100;
 
-                        var layer = this.layers[i];
-                        var pos = (i - oLayer) * step + oPos;
+                        layer = this.layers[i];
+                        pos = (i - oLayer) * step + oPos;
                         if (pos > layer.length) {
                             pos = layer.length;
                         }
@@ -3211,7 +3214,7 @@ kendo_module({
                         }
 
                         // check if origin and destination are both first
-                        else if (oPos == 0 && dPos == 0) {
+                        else if (oPos === 0 && dPos === 0) {
                             pos = 0;
                         }
 
@@ -3223,16 +3226,16 @@ kendo_module({
                         newNode.gridPosition = pos;
                         newNode.isVirtual = true;
 
-                        pos = pos & pos; // truncates to int
+                        pos &= pos; // truncates to int
                         layer.insert(newNode, pos);
 
                         // translate rightwards nodes' positions
-                        for (var r = pos + 1; r < layer.length; r++) {
-                            var node = layer[r];
+                        for (r = pos + 1; r < layer.length; r++) {
+                            node = layer[r];
                             node.gridPosition = node.gridPosition + 1;
                         }
 
-                        var newLink = new Link(p, newNode);
+                        newLink = new Link(p, newNode);
                         newLink.depthOfDumminess = 0;
                         p = newNode;
 
@@ -3262,7 +3265,7 @@ kendo_module({
 
                 for (var l = 0; l < this.graph.links.length; l++) {
                     var link = this.graph.links[l];
-                    if (link.depthOfDumminess == 0) {
+                    if (link.depthOfDumminess === 0) {
                         continue;
                     }
 
@@ -3306,56 +3309,56 @@ kendo_module({
         /// Optimizes/reduces the crossings between the layers by turning the crossing problem into a (combinatorial) number ordering problem.
         /// </summary>
         _optimizeCrossings: function () {
-            var moves = -1;
+            var moves = -1, i;
             var maxIterations = 3;
             var iter = 0;
 
-            while (moves != 0) {
+            while (moves !== 0) {
                 if (iter++ > maxIterations) {
                     break;
                 }
 
                 moves = 0;
 
-                for (var i = this.layers.length - 1; i >= 1; i--) {
+                for (i = this.layers.length - 1; i >= 1; i--) {
                     moves += this.optimizeLayerCrossings(false, i);
                 }
 
-                for (var i = 0; i < this.layers.length - 1; i++) {
+                for (i = 0; i < this.layers.length - 1; i++) {
                     moves += this.optimizeLayerCrossings(true, i);
                 }
             }
         },
 
         calcUpData: function (layer) {
-            if (layer == 0) {
+            if (layer === 0) {
                 return;
             }
 
-            var considered = this.layers[layer];
+            var considered = this.layers[layer], i, l, link;
             var upLayer = new Set();
             var temp = this.layers[layer - 1];
-            for (var i = 0; i < temp.length; i++) {
+            for (i = 0; i < temp.length; i++) {
                 upLayer.add(temp[i]);
             }
 
-            for (var i = 0; i < considered.length; i++) {
+            for (i = 0; i < considered.length; i++) {
                 var node = considered[i];
 
                 // calculate barycenter
                 var sum = 0;
                 var total = 0;
 
-                for (var l = 0; l < node.incoming.length; l++) {
-                    var link = node.incoming[l];
+                for (l = 0; l < node.incoming.length; l++) {
+                    link = node.incoming[l];
                     if (upLayer.contains(link.source)) {
                         total++;
                         sum += link.source.gridPosition;
                     }
                 }
 
-                for (var l = 0; l < node.outgoing.length; l++) {
-                    var link = node.outgoing[l];
+                for (l = 0; l < node.outgoing.length; l++) {
+                    link = node.outgoing[l];
                     if (upLayer.contains(link.target)) {
                         total++;
                         sum += link.target.gridPosition;
@@ -3374,34 +3377,34 @@ kendo_module({
         },
 
         calcDownData: function (layer) {
-            if (layer == this.layers.length - 1) {
+            if (layer === this.layers.length - 1) {
                 return;
             }
 
-            var considered = this.layers[layer];
+            var considered = this.layers[layer], i , l, link;
             var downLayer = new Set();
             var temp = this.layers[layer + 1];
-            for (var i = 0; i < temp.length; i++) {
+            for (i = 0; i < temp.length; i++) {
                 downLayer.add(temp[i]);
             }
 
-            for (var i = 0; i < considered.length; i++) {
+            for (i = 0; i < considered.length; i++) {
                 var node = considered[i];
 
                 // calculate barycenter
                 var sum = 0;
                 var total = 0;
 
-                for (var l = 0; l < node.incoming.length; l++) {
-                    var link = node.incoming[l];
+                for (l = 0; l < node.incoming.length; l++) {
+                    link = node.incoming[l];
                     if (downLayer.contains(link.source)) {
                         total++;
                         sum += link.source.gridPosition;
                     }
                 }
 
-                for (var l = 0; l < node.outgoing.length; l++) {
-                    var link = node.outgoing[l];
+                for (l = 0; l < node.outgoing.length; l++) {
+                    link = node.outgoing[l];
                     if (downLayer.contains(link.target)) {
                         total++;
                         sum += link.target.gridPosition;
@@ -3451,12 +3454,12 @@ kendo_module({
 
             // sort nodes within this layer according to the barycenters
             Array.prototype.sort.call(this, considered, function (n1, n2) {
-                var n1BaryCenter = this.calcBaryCenter(n1);
-                var n2BaryCenter = this.calcBaryCenter(n2);
+                var n1BaryCenter = this.calcBaryCenter(n1),
+                    n2BaryCenter = this.calcBaryCenter(n2);
 
                 if (Math.abs(n1BaryCenter - n2BaryCenter) < 0.0001) {
                     // in case of coinciding barycenters compare by the count of in/out links
-                    if (n1.degree() == n2.degree()) {
+                    if (n1.degree() === n2.degree()) {
                         return this.compareByIndex(n1, n2);
                     }
                     else if (n1.degree() < n2.degree()) {
@@ -3476,9 +3479,9 @@ kendo_module({
             });
 
             // count relocations
-            var moves = 0;
-            for (var i = 0; i < considered.length; i++) {
-                if (considered[i] != presorted[i]) {
+            var i, moves = 0;
+            for (i = 0; i < considered.length; i++) {
+                if (considered[i] !== presorted[i]) {
                     moves++;
                 }
             }
@@ -3486,7 +3489,7 @@ kendo_module({
             if (moves > 0) {
                 // now that the boxes have been arranged, update their grid positions
                 var inode = 0;
-                for (var i = 0; i < considered.length; i++) {
+                for (i = 0; i < considered.length; i++) {
                     var node = considered[i];
                     node.gridPosition = inode++;
                 }
@@ -3510,7 +3513,7 @@ kendo_module({
                 }
 
                 var downwards = (iter % 4 <= 1);
-                var secondPass = (iter % 4 == 1);
+                var secondPass = (iter % 4 === 1);
 
                 for (var l = (downwards ? 0 : this.layers.length - 1);
                      downwards ? l <= this.layers.length - 1 : l >= 0; l += (downwards ? 1 : -1)) {
@@ -3529,10 +3532,10 @@ kendo_module({
                         var crossBefore = 0;
 
                         if (calcCrossings) {
-                            if (l != 0) {
+                            if (l !== 0) {
                                 up = this.countLinksCrossingBetweenTwoLayers(l - 1, l);
                             }
-                            if (l != this.layers.length - 1) {
+                            if (l !== this.layers.length - 1) {
                                 down = this.countLinksCrossingBetweenTwoLayers(l, l + 1);
                             }
                             if (downwards) {
@@ -3548,7 +3551,7 @@ kendo_module({
                             crossBefore = memCrossings;
                         }
 
-                        if (crossBefore == 0) {
+                        if (crossBefore === 0) {
                             continue;
                         }
 
@@ -3565,11 +3568,11 @@ kendo_module({
 
                         // count crossings again and if worse than before, restore swapping
                         up = 0;
-                        if (l != 0) {
+                        if (l !== 0) {
                             up = this.countLinksCrossingBetweenTwoLayers(l - 1, l);
                         }
                         down = 0;
-                        if (l != this.layers.length - 1) {
+                        if (l !== this.layers.length - 1) {
                             down = this.countLinksCrossingBetweenTwoLayers(l, l + 1);
                         }
                         if (downwards) {
@@ -3611,10 +3614,10 @@ kendo_module({
                     }
 
                     if (hasSwapped) {
-                        if (l != this.layers.length - 1) {
+                        if (l !== this.layers.length - 1) {
                             this.calcUpData(l + 1);
                         }
-                        if (l != 0) {
+                        if (l !== 0) {
                             this.calcDownData(l - 1);
                         }
                     }
@@ -3629,17 +3632,17 @@ kendo_module({
         /// <param name="layerIndex2">Another layer index.</param>
         /// <returns></returns>
         countLinksCrossingBetweenTwoLayers: function (ulayer, dlayer) {
-            var crossings = 0;
+            var i, crossings = 0;
 
             var upperLayer = new Set();
             var temp1 = this.layers[ulayer];
-            for (var i = 0; i < temp1.length; i++) {
+            for (i = 0; i < temp1.length; i++) {
                 upperLayer.add(temp1[i]);
             }
 
             var lowerLayer = new Set();
             var temp2 = this.layers[dlayer];
-            for (var i = 0; i < temp2.length; i++) {
+            for (i = 0; i < temp2.length; i++) {
                 lowerLayer.add(temp2[i]);
             }
 
@@ -3671,7 +3674,7 @@ kendo_module({
             for (var l1 = 0; l1 < links.length; l1++) {
                 var link1 = links[l1];
                 for (var l2 = 0; l2 < links.length; l2++) {
-                    if (l1 == l2) {
+                    if (l1 === l2) {
                         continue;
                     }
 
@@ -3811,22 +3814,22 @@ kendo_module({
          * @param diagramOrGraphOrNodes
          */
         capture: function (diagramOrGraphOrNodes) {
-
+            var node, nodes, shape, i;
             // todo: to be extended when multipoint connections are inline
             if (diagramOrGraphOrNodes instanceof kendo.diagram.Graph) {
-                var graph = diagramOrGraphOrNodes;
-                for (var i = 0, len = graph.nodes.length; i < len; i++) {
-                    var node = graph.nodes[i];
-                    var shape = node.associatedShape;
+
+                for (i = 0; i < diagramOrGraphOrNodes.nodes.length; i++) {
+                    node = diagramOrGraphOrNodes.nodes[i];
+                    shape = node.associatedShape;
                     //shape.bounds(new Rect(node.x, node.y, node.width, node.height));
                     this.nodeMap.set(shape.visual.native.id, new Rect(node.x, node.y, node.width, node.height));
                 }
             }
             else if (diagramOrGraphOrNodes instanceof Array) {
-                var nodes = diagramOrGraphOrNodes;
-                for (var i = 0, len = nodes.length; i < len; i++) {
-                    var node = nodes[i];
-                    var shape = node.associatedShape;
+                nodes = diagramOrGraphOrNodes;
+                for (i = 0; i < nodes.length; i++) {
+                    node = nodes[i];
+                    shape = node.associatedShape;
                     if (shape) {
                         this.nodeMap.set(shape.visual.native.id, new Rect(node.x, node.y, node.width, node.height));
                     }
@@ -3834,8 +3837,8 @@ kendo_module({
             }
             else {
                 var shapes = this.diagram.shapes;
-                for (var i = 0; i < shapes.length; i++) {
-                    var shape = shapes[i];
+                for (i = 0; i < shapes.length; i++) {
+                    shape = shapes[i];
                     this.nodeMap.set(shape.visual.native.id, shape.bounds());
                 }
             }
@@ -3851,19 +3854,16 @@ kendo_module({
             this.froms = [];
             this.tos = [];
             this.subjects = [];
-
-            this.layoutState.nodeMap.forEach(
-                function (id, bounds) {
-                    var shape = this.diagram.getId(id);
-                    if (shape) {
-                        this.subjects.push(shape);
-                        this.froms.push(shape.bounds().topLeft())
-                        this.tos.push(bounds.topLeft());
-                    }
-                    else
-                        console.log(id + " not found");
+            function pusher(id, bounds) {
+                var shape = this.diagram.getId(id);
+                if (shape) {
+                    this.subjects.push(shape);
+                    this.froms.push(shape.bounds().topLeft());
+                    this.tos.push(bounds.topLeft());
                 }
-                , this);
+            }
+
+            this.layoutState.nodeMap.forEach(pusher, this);
         },
         update: function (tick) {
             if (this.subjects.length <= 0) {
@@ -3894,5 +3894,5 @@ kendo_module({
         LayoutBase: LayoutBase,
         LayoutState: LayoutState,
         PositionAdapter: PositionAdapter
-    })
-})(window.kendo.jQuery)
+    });
+})(window.kendo.jQuery);
