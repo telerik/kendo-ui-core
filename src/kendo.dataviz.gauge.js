@@ -1262,6 +1262,19 @@ kendo_module({
             }
         },
 
+        getSize: function() {
+            return this._getSize();
+        },
+
+        _resize: function() {
+            var t = this.options.transitions;
+            this.options.transitions = false;
+
+            this.redraw();
+
+            this.options.transitions = t;
+        },
+
         _createModel: function() {
             var gauge = this,
                 options = gauge.options,
