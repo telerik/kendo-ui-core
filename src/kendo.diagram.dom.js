@@ -644,6 +644,7 @@ kendo_module({
             that.selector = new Selector(that);
             // TODO: We may consider using real Clipboard, but is very hacky to do so.
             that._clipboard = [];
+            that._drop();
         },
         options: {
             name: "Diagram",
@@ -659,7 +660,8 @@ kendo_module({
                 enabled: true,
                 offsetX: 20,
                 offsetY: 20
-            }
+            },
+            allowDrop: true
         },
         events: ["zoom", "pan"],
         destroy: function () {
@@ -867,6 +869,22 @@ kendo_module({
                 }
             }
             return rect;
+        },
+        _drop: function () {
+            var that = this,
+                options = that.options;
+            if (options.allowDrop) {
+                this.element.kendoDropTarget({
+                    drop: function (e) {
+                        var item = e.draggable.hint.data("data"),
+                            pos = e.draggable.hintOffset,
+                            dp = that.documentToCanvasPoint(new Point(pos.left, pos.top)),
+                            normal = that._normalizePointZoom(dp.minus(that.pan()));
+
+                        that.addShape(normal, item);
+                    }
+                });
+            }
         },
         _fixOrdering: function (result, toFront) {
             var shapePos = toFront ? this.shapes.length - 1 : 0,

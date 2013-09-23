@@ -294,17 +294,6 @@ $(function () {
     diagram.connect(s3, s5);
     diagram.connect(s3, s6);
 
-    $("#canvas").kendoDropTarget({
-        drop: function (e) {
-            var item = e.draggable.hint.data("data"),
-                    pos = e.draggable.hintOffset,
-                    dp = diagram.documentToCanvasPoint(new Point(pos.left, pos.top)),
-                    normal = diagram._normalizePointZoom(dp.minus(diagram.pan()));
-
-            diagram.addShape(normal, item);
-        }
-    });
-
     var list = $("#toolBox").kendoListView({
         dataSource: {
             data: shapesSource
@@ -463,12 +452,12 @@ $(function () {
 
     };
 
-    var drop = $("#Layouts").kendoDropDownList({
+    var dropDown = $("#Layouts").kendoDropDownList({
         dataTextField: "text",
         dataValueField: "value",
         dataSource: layouts
     });
-    drop.bind("change", onLayoutChanged);
+    dropDown.bind("change", onLayoutChanged);
 
     $("#Layouts").data("kendoDropDownList").select(function (dataItem) {
         return dataItem.value === "TreeRight";
