@@ -737,8 +737,6 @@ kendo_module({
             return this.addConnection(connection);
         },
         addConnection: function (connection, undoable) {
-            console.log("source", connection.sourceConnector);
-            console.log("target", connection.targetConnector);
             if (undoable === undefined) {
                 undoable = true;
             }
