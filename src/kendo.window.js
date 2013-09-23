@@ -277,6 +277,10 @@ kendo_module({
             }
         },
 
+        _resize: function() {
+            kendo.resize(this.element.children());
+        },
+
         _resizable: function() {
             var resizable = this.options.resizable;
             var wrapper = this.wrapper;
@@ -423,7 +427,7 @@ kendo_module({
                         height: constrain(newHeight, options.minHeight, options.maxHeight)
                     });
 
-                    that.trigger(RESIZE);
+                    that.resize();
                 }
             }
 
@@ -793,7 +797,7 @@ kendo_module({
 
             options.isMaximized = options.isMinimized = false;
 
-            that.trigger(RESIZE);
+            that.resize();
 
             return that;
         },
@@ -879,7 +883,7 @@ kendo_module({
                     height: wnd.height() - parseInt(wrapper.css("padding-top"), 10)
                 });
 
-            that.trigger(RESIZE);
+            that.resize();
         },
 
         refresh: function (options) {
@@ -1154,7 +1158,7 @@ kendo_module({
                 });
             }
 
-            wnd.trigger(RESIZE);
+            wnd.resize();
         },
         dragend: function (e) {
             var that = this,
