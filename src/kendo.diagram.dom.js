@@ -920,11 +920,8 @@ kendo_module({
                 this.mainLayer.remove(item.visual);
             }
         },
-        _documentToCanvasPoint: function (e) {
-            var pointEvent = (e.pageX === undefined ? e.originalEvent : e),
-                dPoint = new Point(pointEvent.pageX, pointEvent.pageY),
-                containerOffset = this.element.offset();
-
+        documentToCanvasPoint: function (dPoint) {
+            var containerOffset = this.element.offset();
             return new Point(dPoint.x - containerOffset.left, dPoint.y - containerOffset.top);
         },
         setDataSource: function (dataSource) {
@@ -1020,7 +1017,10 @@ kendo_module({
             return { ctrlKey: e.ctrlKey, metaKey: e.metaKey, altKey: e.altKey };
         },
         _calculatePosition: function (e) {
-            var offset = this._documentToCanvasPoint(e);
+            var pointEvent = (e.pageX === undefined ? e.originalEvent : e),
+                dPoint = new Point(pointEvent.pageX, pointEvent.pageY),
+                offset = this.documentToCanvasPoint(dPoint);
+
             return this._normalizePointZoom(offset.minus(this.pan()));
         },
         _normalizePointZoom: function (point) {
