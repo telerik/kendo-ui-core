@@ -19,7 +19,7 @@ service "tomcat7" do
     action :enable
 end
 
-cookbook_file "/var/lib/tomcat7/conf/tomcat-users.xml" do
+cookbook_file "/etc/tomcat7/conf/tomcat-users.xml" do
     source "tomcat-users.xml"
     owner "root"
     group "nogroup"
