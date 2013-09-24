@@ -146,6 +146,12 @@
                 equal(editor.state("foreColor"), "#f00");
             });
 
+            test("state returns font name", function() {
+                selectRangeInValue(editor, "<span style='font-family: Arial'>f|o|o</span>");
+
+                equal(editor.state("fontName"), "Arial");
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
