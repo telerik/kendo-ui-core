@@ -386,6 +386,7 @@ var ColorTool = Tool.extend({
         Tool.fn.init.call(this, options);
 
         this.format = [{ tags: ["span"] }];
+        this.finder = new GreedyInlineFormatFinder(this.format, options.cssAttr);
     },
 
     options: {

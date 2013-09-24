@@ -579,19 +579,20 @@ kendo_module({
 
         state: function(toolName) {
             var tool = Editor.defaultTools[toolName];
-            var finder = tool && tool.options.finder;
+            var finder = tool && (tool.options.finder || tool.finder);
+            var RangeUtils = kendo.ui.editor.RangeUtils;
+            var range, textNodes;
 
             if (finder) {
-                var range = this.getRange();
-                var RangeUtils = kendo.ui.editor.RangeUtils;
+                range = this.getRange();
 
                 if (RangeUtils.isExpandable(range)) {
                     range = RangeUtils.expand(range);
                 }
 
-                var textNodes = RangeUtils.textNodes(range);
+                textNodes = RangeUtils.textNodes(range);
 
-                return finder.isFormatted(textNodes);
+                return finder.getFormat ? finder.getFormat(textNodes) : finder.isFormatted(textNodes);
             }
 
             return false;

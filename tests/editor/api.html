@@ -140,6 +140,12 @@
                 ok(editor.state("italic"));
             });
 
+            test("state returns format for tools that support it", function() {
+                selectRangeInValue(editor, "<span style='color: #f00'>f|o|o</span>");
+
+                equal(editor.state("foreColor"), "#f00");
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
