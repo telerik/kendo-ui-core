@@ -378,7 +378,19 @@ kendo_module({
 
         change: function() {
             this._initChange = this.eventName != CHANGE;
-            this.bindings[VALUE].set(this.element.value);
+
+            var value = this.element.value;
+
+            var type = this.element.type;
+
+            if (type == "date") {
+                value = kendo.parseDate(value, "yyyy-MM-dd");
+            } else if (type == "datetime-local") {
+                value = kendo.parseDate(value, "yyyy-MM-ddTHH:mm:ss");
+            }
+
+            this.bindings[VALUE].set(value);
+
             this._initChange = false;
         },
 
@@ -388,6 +400,14 @@ kendo_module({
 
                 if (value == null) {
                     value = "";
+                }
+
+                var type = this.element.type;
+
+                if (type == "date") {
+                    value = kendo.toString(value, "yyyy-MM-dd");
+                } else if (type == "datetime-local") {
+                    value = kendo.toString(value, "yyyy-MM-ddTHH:mm:ss");
                 }
 
                 this.element.value = value;

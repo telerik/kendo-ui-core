@@ -1333,6 +1333,34 @@
                 kendo.bind(dom);
                 ok(true);
             });
+
+            var date = $('<input type="date">');
+
+            if (date[0].type == "date") {
+                test("input type date value binding", function() {
+                    var dom = $('<input type="date" data-bind="value: date">');
+
+                    kendo.bind(dom, {
+                        date: new Date("2013/6/3")
+                    });
+
+                    equal(dom.val(), "2013-06-03");
+                });
+            }
+
+            var datetime = $('<input type="datetime-local">');
+
+            if (datetime[0].type == "datetime-local") {
+                test("input type datetime value binding", function() {
+                    var dom = $('<input type="datetime-local" data-bind="value: date">');
+
+                    kendo.bind(dom, {
+                        date: new Date("2013/6/3 20:30:52")
+                    });
+
+                    equal(dom.val(), "2013-06-03T20:30:52");
+                });
+            }
         </script>
 
         <script id="mobile-widget-template" type="text/x-kendo-template">

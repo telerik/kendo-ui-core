@@ -1032,6 +1032,46 @@
                 equal(dom.text(), "bar");
             });
 
+            var date = $('<input type="date">');
+
+            if (date[0].type == "date") {
+                test("changing the value of input type date updates the view model with a valid JavaScript Date", function() {
+                    var observable = kendo.observable({
+                        date: new Date("2013/5/4")
+                    });
+
+                    var dom = $('<input type="date" data-bind="value: date">');
+
+                    kendo.bind(dom, observable);
+
+                    dom.val("2013-06-05").trigger("change");
+
+                    equal(observable.date.getMonth(), 5);
+                    equal(observable.date.getDate(), 5);
+                });
+            }
+
+            var datetime = $('<input type="datetime-local">');
+
+            if (datetime[0].type == "datetime-local") {
+                test("changing the value of input type datetime-local updates the view model with a valid JavaScript Date", function() {
+                    var observable = kendo.observable({
+                        date: new Date("2013/5/4")
+                    });
+
+                    var dom = $('<input type="datetime-local" data-bind="value: date">');
+
+                    kendo.bind(dom, observable);
+
+                    dom.val("2013-06-05T23:13:40").trigger("change");
+
+                    equal(observable.date.getMonth(), 5);
+                    equal(observable.date.getDate(), 5);
+                    equal(observable.date.getHours(), 23);
+                    equal(observable.date.getMinutes(), 13);
+                    equal(observable.date.getSeconds(), 40);
+                });
+            }
         </script>
 
         <script id="array-template" type="text/x-kendo-template">
