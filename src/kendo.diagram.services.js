@@ -246,54 +246,110 @@ kendo_module({
         }
     });
 
+    /**
+     * Undo-redo service.
+     */
     var UndoRedoService = Class.extend({
         init: function () {
             this.stack = [];
             this.index = 0;
+            this.capacity = 100;
         },
+
+        /**
+         * Starts the collection of units. Add those with
+         * the addCompositeItem method and call commit. Or cancel to forget about it.
+         */
         begin: function () {
             this.composite = new CompositeUnit();
         },
+
+        /**
+         * Cancels the collection process of unit started with 'begin'.
+         */
         cancel: function () {
             this.composite = undefined;
         },
+
+        /**
+         * Commits a batch of units.
+         */
         commit: function () {
             if (this.composite.units.length > 0) {
                 this._restart(this.composite);
             }
             this.composite = undefined;
         },
+
+        /**
+         * Adds a unit as part of the begin-commit batch.
+         * @param undoUnit
+         */
         addCompositeItem: function (undoUnit) {
             this.composite.add(undoUnit);
         },
+
+        /**
+         * Standard addition of a unit. See also the batch version; begin-addCompositeUnit-commit methods.
+         * @param undoUnit The unit to be added.
+         * @param execute If false, the unit will be added but not executed.
+         */
         add: function (undoUnit, execute) {
-            this._restart(new CompositeUnit(undoUnit), execute);
+            this._restart(undoUnit, execute);
         },
+
+        /**
+         * Returns the number of undoable unit in the stack.
+         * @returns {Number}
+         */
         count: function () {
             return this.stack.length;
         },
+
+        /**
+         * Rollback of the unit on top of the stack.
+         */
         undo: function () {
             if (this.index !== 0) {
                 this.index--;
                 this.stack[this.index].undo();
             }
         },
+
+        /**
+         * Redo of the last undone action.
+         */
         redo: function () {
             if (this.stack.length > 0 && this.index < this.stack.length) {
                 this.stack[this.index].redo();
                 this.index++;
             }
         },
+
         _restart: function (composite, execute) {
             // throw away anything beyond this point if this is a new branch
             this.stack.splice(this.index, this.stack.length - this.index);
             this.stack.push(composite);
-            if (!execute || (execute && execute === true)) {
+            if (Utils.isUndefined(execute) || (execute && (execute === true))) {
                 this.redo();
             }
             else {
                 this.index++;
             }
+            // check the capacity
+            if(this.stack.length>this.capacity)
+            {
+                this.stack.splice(0, this.stack.length -  this.capacity);
+                this.index = this.capacity; //points to the end of the stack
+            }
+        },
+
+        /**
+         * Clears the stack.
+         */
+        clear: function () {
+            this.stack = [];
+            this.index = 0;
         }
     });
 
@@ -691,7 +747,7 @@ kendo_module({
         },
         _updateHoveredItem: function (p) {
             var hit = this._hitTest(p);
-            if (hit != this.hoveredItem && (!this.disabledShape || hit != this.disabledShape)) {
+            if (hit !== this.hoveredItem && (!this.disabledShape || hit !== this.disabledShape)) {
                 if (this.hoveredItem) {
                     this.hoveredItem._hover(false);
                 }

@@ -152,21 +152,33 @@
         ur.begin();
         ur.addCompositeItem(unit);
         ur.commit();
-        ok(unit.Count == 1, "Unit was executed");
+        ok(unit.Count === 1, "Unit was executed");
         ur.undo();
         ok(ur.count() > 0, "The units are still there.");
         QUnit.equal(unit.Count, 0, "Unit undo was executed");
         ur.redo();
-        ok(unit.Count == 1, "Unit was executed");
+        ok(unit.Count === 1, "Unit was executed");
         QUnit.throws(function () {
             ur.Redo();
         }, "Supposed to raise an exception since we are passed the length of the stack.");
         ur.undo();
-        ok(unit.Count == 0, "Unit was executed");
+        ok(unit.Count === 0, "Unit was executed");
         ur = new diagram.UndoRedoService();
         unit = new Task("Counting unit.");
         ur.add(unit);
-        ok(unit.Count == 1, "Unit was executed");
+        ok(unit.Count === 1, "Unit was executed");
+        unit = new Task("Counting unit.");
+        ur.add(unit, false); // do not execute
+        equal(unit.Count, 0);
+
+        // ensure capacity works
+        ur.clear();
+        for (var i = 0; i < 155; i++) {
+            ur.add(new Task(i.toString()), false);
+        }
+        // the undoredo stack should truncate at the bottom
+        equal(ur.count(), 100);
+        equal(ur.stack[0].Title, "55");
     });
 
 })(kendo.jQuery);

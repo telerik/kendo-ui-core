@@ -680,7 +680,7 @@ kendo_module({
                     continue;
                 }
 
-                if (!sourceNode || !sinkNode) {
+                if (sourceNode===null || sinkNode===null) {
                     throw "A shape was not mapped to a node.";
                 }
                 if (this.options.ignoreContainers) {
