@@ -1,7 +1,7 @@
 package com.kendoui.taglib;
 
 import com.kendoui.taglib.html.Button;
-import com.kendoui.taglib.html.Element;
+import com.kendoui.taglib.html.GenericElement;
 import com.kendoui.taglib.json.Function;
 
 import javax.servlet.jsp.JspException;
@@ -22,7 +22,7 @@ public class ButtonTag extends WidgetTag /* interfaces *//* interfaces */ {
         if (tag.isEmpty()) {
             wrapper = new Button();
         } else {
-            wrapper = new Element(tag);
+            wrapper = new GenericElement(tag);
         }
                
         return wrapper;
