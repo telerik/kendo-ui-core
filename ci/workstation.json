@@ -6,10 +6,7 @@
     "recipe[nodejs]",
     "recipe[java]",
     "recipe[mono]",
-    "recipe[x11]",
-    "recipe[firefox]",
-    "recipe[google-chrome]",
-    "recipe[mono-fcgi]",
-    "recipe[nginx]",
+    "recipe[mono-fcgi::workstation]",
+    "recipe[nginx::workstation]",
     "recipe[php]"
 ]}
