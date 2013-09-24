@@ -45,7 +45,19 @@ kendo_module({
         this.lng = lng;
     };
 
-    Location.fromArray = function(ll) {
+    Location.prototype = {
+        FORMAT: "{0:N6},{1:N6}",
+
+        toString: function() {
+            return kendo.format(this.FORMAT, this.lng, this.lat);
+        },
+
+        equals: function(loc) {
+            return loc && loc.lat === this.lat && loc.lng === this.lng;
+        }
+    };
+
+    Location.fromLngLat = function(ll) {
         return new Location(ll[1], ll[0]);
     };
 
@@ -238,6 +250,11 @@ kendo_module({
     });
 
     // Layers =================================================================
+    var GeoJSONLayer = Class.extend({
+        init: function() {
+
+        }
+    });
 
     // Helper methods =========================================================
     function rad(degrees) {

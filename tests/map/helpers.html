@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Helpers</title>
+    <script src="../jquery-loader.js"></script>
+    <script src="../qunit/qunit/qunit.js"></script>
+    <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+    <script src="../kendo-test-helpers.js"></script>
+    <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+</head>
+<body>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/kendo.dataviz.map.js"></script>
+    <script>
+        var TOLERANCE = 1e-6;
+
+        var dataviz = kendo.dataviz,
+            Point = dataviz.Point2D,
+
+            map = dataviz.map,
+            Location = map.Location;
+
+        (function() {
+            var loc;
+
+            // ------------------------------------------------------------
+            module("Location", {
+                setup: function() {
+                    loc = new Location(51.9371170300465, 80.11230468750001);
+                }
+            });
+
+            test("toString format is lng, lat", function() {
+                equal(loc.toString(), "80.112305,51.937117");
+            });
+
+            test("equals fails with different latitude", function() {
+                ok(!new Location(10, 20).equals(new Location(11, 20)));
+            });
+
+            test("equals fails with different longitude", function() {
+                ok(!new Location(10, 20).equals(new Location(10, 21)));
+            });
+
+            test("equals succeeds", function() {
+                ok(new Location(10, 20).equals(new Location(10, 20)));
+            });
+
+            test("init from lat, lng array", function() {
+                ok(Location.fromLatLng([10, 20]).equals(new Location(10, 20)));
+            });
+
+            test("init from lng, lat array", function() {
+                ok(Location.fromLngLat([10, 20]).equals(new Location(20, 10)));
+            });
+
+        })();
+
+    </script>
+
+    <h1 id="qunit-header">kendo.chart</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+
+</body>
+</html>

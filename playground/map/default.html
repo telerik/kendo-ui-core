@@ -84,7 +84,7 @@
 
                     for (var j = 0; j < ring.length; j++) {
                         var point = ring[j];
-                        var l = Location.fromArray(point);
+                        var l = Location.fromLngLat(point);
                         var p = crs.toPoint(l, scale);
 
                         ringPoints.push(p);
