@@ -30,6 +30,16 @@
         <div class="container">
             <h1>Hello, bootstrap!</h1>
 
+            <script>
+                $(document).ready(function() {
+                    // add bootstrap classes where appropriate to ensure consistency
+
+                    $("[data-role=grid]").kendoGrid("bind", "edit", function(e) {
+                        $(".k-edit-cell .k-input").addClass("form-control");
+                    });
+                });
+            </script>
+
             <h3>Menu</h3>
             <ul id="menu">
                 <li> Products
@@ -123,12 +133,7 @@
                     { field: "Discontinued", width: "100px" },
                     { command: ["edit", "destroy"], title: "&nbsp;", width: "172px" }
                 ],
-                editable: true,
-                edit: function(e) {
-                    if (!e.model.isNew()) {
-                        $(".k-edit-cell .k-input").addClass("form-control");
-                    }
-                }
+                editable: true
             });
 
             $("#menu").kendoMenu({ openOnClick: true });
