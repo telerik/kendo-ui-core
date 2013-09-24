@@ -51,7 +51,10 @@ kendo_module({
             spriteCssClass: "dataSpriteCssClassField",
             imageUrl: "dataImageUrlField"
         },
-        MAXINT = 9007199254740992;
+        MAXINT = 9007199254740992,
+        SELECT = "select",
+        PAN = "pan",
+        ZOOM = "zoom";
 
     diagram.DefaultConnectors = [
         {
@@ -163,6 +166,7 @@ kendo_module({
             return this.options.id;
         },
         serialize: function () {
+            // the options json object describes the shape perfectly. So this object can serve as shape serialization.
             return this.options;
         },
         content: function (content) {
@@ -299,6 +303,7 @@ kendo_module({
                     this.diagram._adorn(this.adorner, false);
                     this.adorner = undefined;
                 }
+                this.diagram.trigger(SELECT, {item: this});
             }
         },
         rotate: function (angle, center) {
@@ -506,6 +511,8 @@ kendo_module({
                     }
                 }
                 this.refresh();
+                this.diagram.trigger(SELECT, {item: this});
+                // TODO: Move this to base type.
             }
         },
         bounds: function (value) {
@@ -544,6 +551,10 @@ kendo_module({
             if (this.adorner) {
                 this.adorner.refresh();
             }
+        },
+        redraw: function (options) {
+            this.options = deepExtend({}, this.options, options);
+            this.line.redraw(options);
         },
         _clearSourceConnector: function () {
             this.sourceConnector.connections.remove(this);
@@ -668,7 +679,7 @@ kendo_module({
             },
             allowDrop: true
         },
-        events: ["zoom", "pan"],
+        events: [ZOOM, PAN, SELECT],
         destroy: function () {
             var that = this;
             Widget.fn.destroy.call(that);
@@ -698,7 +709,7 @@ kendo_module({
                 }
 
                 this.transformMainLayer();
-                this.trigger("zoom");
+                this.trigger(ZOOM);
             }
             return this._zoom;
         },
@@ -709,7 +720,7 @@ kendo_module({
             if (pan instanceof Point && !pan.equals(this._pan)) {
                 this._pan = pan;
                 this.transformMainLayer();
-                this.trigger("pan");
+                this.trigger(PAN);
             }
 
             return this._pan;

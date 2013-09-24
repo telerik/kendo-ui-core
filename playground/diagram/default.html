@@ -254,6 +254,27 @@ $(function () {
     $("#canvas").kendoDiagram({
         zoom: function (e) {
             slider.value(this._zoom);
+        },
+        select: function (e) {
+            var item = e.item, scIndex = 0 , ecIndex = 0;
+            console.log(item);
+            if (item instanceof kendo.diagram.Connection) {
+                for (var i = 0; i < caps.length; i++) {
+                    var cap = caps[i];
+                    if (cap.value == item.options.startCap) {
+                        scIndex = i;
+                    }
+                    if (cap.value == item.options.endCap) {
+                        ecIndex = i;
+                    }
+                }
+
+                var sc = $("#StartCap").data("kendoDropDownList");
+                var ec = $("#EndCap").data("kendoDropDownList");
+
+                sc.select(scIndex);
+                ec.select(ecIndex);
+            }
         }
     });
     var diagram = $("#canvas").data("kendoDiagram"),
@@ -478,8 +499,8 @@ $(function () {
         select: function (e) {
             var that = this;
             $.each(diagram.select(), function () {
-                if (this.line) {
-                    this.line.redraw({startCap: that.dataItem(e.item.index()).value});
+                if (this instanceof kendo.diagram.Connection) {
+                    this.redraw({startCap: that.dataItem(e.item.index()).value});
                 }
             });
         }
@@ -492,8 +513,8 @@ $(function () {
         select: function (e) {
             var that = this;
             $.each(diagram.select(), function () {
-                if (this.line) {
-                    this.line.redraw({endCap: that.dataItem(e.item.index()).value});
+                if (this instanceof kendo.diagram.Connection) {
+                    this.redraw({endCap: that.dataItem(e.item.index()).value});
                 }
             });
         }
