@@ -118,11 +118,20 @@ kendo_module({
         }
     });
 
+    /**
+     * Unit for content editing.
+     */
     var ContentChangedUndoUnit = Class.extend({
-        init: function (element, content) {
+        /**
+         * Instantiates the unit.
+         * @param element The element being edited.
+         * @param newcontent The new content.
+         * @param oldcontent The old content.
+         */
+        init: function (element, oldcontent, newcontent) {
             this.item = element;
-            this._undoContent = element.content;
-            this._redoContent = content;
+            this._undoContent =oldcontent;
+            this._redoContent = newcontent;
             this.title = "Content Editing";
         },
         undo: function () {
@@ -640,7 +649,7 @@ kendo_module({
             var tp = diagram.transformPoint(bounds.topLeft());
 
             editor.position(tp.plus(formattingOffset));
-            nativeEditor.css({ fontSize: (15 * diagram.zoom()) | 0 });
+            nativeEditor.css({ fontSize: (15 * diagram.zoom()) || 0 });
         },
         _finishEdit: function () {
             this.toolService._finishEditShape();
@@ -828,9 +837,11 @@ kendo_module({
                 return;
             }
 
-            this.editShape.content(this.editable.content());
+            var unit = new ContentChangedUndoUnit(this.editShape, this.editable.originalContent, this.editable.content());
+            this.diagram.undoRedoService.add(unit);
             this.editable.visible(false);
             this.editable = this.editShape = undefined;
+
         }
     });
 

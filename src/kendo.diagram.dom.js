@@ -179,16 +179,21 @@ kendo_module({
                 }
                 else {
                     var bounds = this.bounds();
-                    this.contentVisual = new TextBlock({
-                        text: content.toString(),
-                        align: "center middle",
-                        x: bounds.x,
-                        y: bounds.y,
-                        width: bounds.width,
-                        height: bounds.height
-                    });
+                    if (this.contentVisual && this.contentVisual instanceof TextBlock) {
+                        this.contentVisual.options.text = content.toString();
+                    }
+                    else {
+                        this.contentVisual = new TextBlock({
+                            text: content.toString(),
+                            align: "center middle",
+                            x: bounds.x,
+                            y: bounds.y,
+                            width: bounds.width,
+                            height: bounds.height
+                        });
 
-                    this.visual.append(this.contentVisual);
+                        this.visual.append(this.contentVisual);
+                    }
                     this.contentVisual.redraw();
                     this.refresh();
                 }
@@ -227,7 +232,9 @@ kendo_module({
             that.isContainer = false;
             that.isCollapsed = false;
             that.id = that.visual.native.id;
-            that.content(that.options.content);
+            if (Utils.isDefined(that.options.content)) {
+                that.content(that.options.content);
+            }
         },
         options: {
             type: "Shape",
