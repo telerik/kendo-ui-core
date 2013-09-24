@@ -485,9 +485,7 @@ kendo_module({
 
                     if (msValue === msMin || msValue === msMax) {
                         current = new DATE(+that._value);
-                        current.setFullYear(value.getFullYear());
-                        current.setMonth(value.getMonth());
-                        current.setDate(value.getDate());
+                        current.setFullYear(value.getFullYear(), value.getMonth(), value.getDate());
 
                         if (isInRange(current, msMin, msMax)) {
                             value = current;
