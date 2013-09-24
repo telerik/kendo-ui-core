@@ -266,7 +266,7 @@ kendo_module({
                 this.shapeVisual.redraw({ width: value.width, height: value.height });
                 //this.refresh(); // it does nothing?
                 this.refreshConnections();
-                this.trigger(BOUNDSCHANGE, this._bounds);
+                this.trigger(BOUNDSCHANGE, this._bounds.clone()); // the trigger modifies the arguments internally.
             }
             return this._bounds;
         },
@@ -438,61 +438,71 @@ kendo_module({
             endCap: "ArrowEnd",
             cssClass: "k-connection"
         },
-        sourcePoint: function (source) {
-            if (source !== undefined) {
-                this.from = source;
+        sourcePoint: function (source, undoable) {
+            if (undoable && this.diagram) {
+                this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, source));
             }
-            if (source === null) { // detach
-                if (this.sourceConnector) {
-                    this._sourcePoint = this._resolvedSourceConnector.position();
-                    this._clearSourceConnector();
+            else {
+                if (source !== undefined) {
+                    this.from = source;
                 }
-            }
-            else if (source instanceof Connector) {
-                this.sourceConnector = source;
-                this.sourceConnector.connections.push(this);
-                this.refresh();
-            }
-            else if (source instanceof Point) {
-                this._sourcePoint = source;
-                if (this.sourceConnector) {
-                    this._clearSourceConnector();
+                if (source === null) { // detach
+                    if (this.sourceConnector) {
+                        this._sourcePoint = this._resolvedSourceConnector.position();
+                        this._clearSourceConnector();
+                    }
                 }
-                this.refresh();
-            }
-            else if (source instanceof Shape) {
-                this.sourceConnector = source.getConnector(Auto, this.targetPoint());
-                this.sourceConnector.connections.push(this);
-                this.refresh();
+                else if (source instanceof Connector) {
+                    this.sourceConnector = source;
+                    this.sourceConnector.connections.push(this);
+                    this.refresh();
+                }
+                else if (source instanceof Point) {
+                    this._sourcePoint = source;
+                    if (this.sourceConnector) {
+                        this._clearSourceConnector();
+                    }
+                    this.refresh();
+                }
+                else if (source instanceof Shape) {
+                    this.sourceConnector = source.getConnector(Auto, this.targetPoint());
+                    this.sourceConnector.connections.push(this);
+                    this.refresh();
+                }
             }
             return this._resolvedSourceConnector ? this._resolvedSourceConnector.position() : this._sourcePoint;
         },
-        targetPoint: function (target) {
-            if (target !== undefined) {
-                this.to = target;
+        targetPoint: function (target, undoable) {
+            if (undoable && this.diagram) {
+                this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, target));
             }
-            if (target === null) { // detach
-                if (this.targetConnector) {
-                    this._targetPoint = this._resolvedTargetConnector.position();
-                    this._clearTargetConnector();
+            else {
+                if (target !== undefined) {
+                    this.to = target;
                 }
-            }
-            else if (target instanceof Connector) {
-                this.targetConnector = target;
-                this.targetConnector.connections.push(this);
-                this.refresh();
-            }
-            else if (target instanceof Point) {
-                this._targetPoint = target;
-                if (this.targetConnector) {
-                    this._clearTargetConnector();
+                if (target === null) { // detach
+                    if (this.targetConnector) {
+                        this._targetPoint = this._resolvedTargetConnector.position();
+                        this._clearTargetConnector();
+                    }
                 }
-                this.refresh();
-            }
-            else if (target instanceof Shape) {
-                this.targetConnector = target.getConnector(Auto, this.sourcePoint());
-                this.targetConnector.connections.push(this);
-                this.refresh();
+                else if (target instanceof Connector) {
+                    this.targetConnector = target;
+                    this.targetConnector.connections.push(this);
+                    this.refresh();
+                }
+                else if (target instanceof Point) {
+                    this._targetPoint = target;
+                    if (this.targetConnector) {
+                        this._clearTargetConnector();
+                    }
+                    this.refresh();
+                }
+                else if (target instanceof Shape) {
+                    this.targetConnector = target.getConnector(Auto, this.sourcePoint());
+                    this.targetConnector.connections.push(this);
+                    this.refresh();
+                }
             }
             return this._resolvedTargetConnector ? this._resolvedTargetConnector.position() : this._targetPoint;
         },
@@ -565,6 +575,7 @@ kendo_module({
         copy: function () {
             var options = this.serialize(),
                 copy = new Connection(this.from, this.to, options);
+            copy.diagram = this.diagram;
             // TODO: Copy the model too?
 
             return copy;
@@ -957,37 +968,26 @@ kendo_module({
         _removeItem: function (item, undoable) {
             item.select(false);
             if (item instanceof Shape) {
-                if (undoable) {
-                    this.undoRedoService.addCompositeItem(new DeleteShapeUnit(item));
-                }
-                else {
-                    this._removeShape(item);
-                }
+                this._removeShape(item, undoable);
             }
             else if (item instanceof Connection) {
-                if (item.sourceConnector) {
-                    item.sourceConnector.connections.remove(item);
-                }
-                if (item.targetConnector) {
-                    item.targetConnector.connections.remove(item);
-                }
-                if (undoable) {
-                    this.undoRedoService.addCompositeItem(new DeleteConnectionUnit(item));
-                }
-                else {
-                    this.connections.remove(item);
-                }
+                this._removeConnection(item, undoable);
             }
             if (!undoable) {
                 this.mainLayer.remove(item.visual);
             }
         },
-        _removeShape: function (shape) {
+        _removeShape: function (shape, undoable) {
             var i, connection, connector,
                 sources = [], targets = [];
-            this.shapes.remove(shape);
             this.toolService._removeHover();
 
+            if (undoable) {
+                this.undoRedoService.addCompositeItem(new DeleteShapeUnit(shape));
+            }
+            else {
+                this.shapes.remove(shape);
+            }
             for (i = 0; i < shape.connectors.length; i++) {
                 connector = shape.connectors[i];
                 for (var j = 0; j < connector.connections.length; j++) {
@@ -999,11 +999,26 @@ kendo_module({
                     }
                 }
             }
+
             for (i = 0; i < sources.length; i++) {
-                sources[i].sourcePoint(null);
+                sources[i].sourcePoint(null, undoable);
             }
             for (i = 0; i < targets.length; i++) {
-                targets[i].targetPoint(null);
+                targets[i].targetPoint(null, undoable);
+            }
+        },
+        _removeConnection: function (connection, undoable) {
+            if (connection.sourceConnector) {
+                connection.sourceConnector.connections.remove(connection);
+            }
+            if (connection.targetConnector) {
+                connection.targetConnector.connections.remove(connection);
+            }
+            if (undoable) {
+                this.undoRedoService.addCompositeItem(new DeleteConnectionUnit(connection));
+            }
+            else {
+                this.connections.remove(connection);
             }
         },
         documentToCanvasPoint: function (dPoint) {

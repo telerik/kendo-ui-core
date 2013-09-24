@@ -133,22 +133,49 @@ kendo_module({
         }
     });
 
-    var ConnectionEditUndoUnit = Class.extend({
-        init: function (item, pevSource, pervTarget) {
+    var ConnectionEditUnit = Class.extend({
+        init: function (item, redoSource, redoTarget) {
             this.item = item;
-            this._undoSource = pevSource;
-            this._undoTarget = pervTarget;
+            this._redoSource = redoSource;
+            this._redoTarget = redoTarget;
+            this._undoSource = item.source();
+            this._undoTarget = item.target();
+            this.title = "Connection Editing";
+        },
+        undo: function () {
+            if (this._undoSource !== undefined) {
+                this.item.sourcePoint(this._undoSource, false);
+            }
+            if (this._undoTarget !== undefined) {
+                this.item.targetPoint(this._undoTarget, false);
+            }
+        },
+        redo: function () {
+            if (this._redoSource !== undefined) {
+                this.item.sourcePoint(this._redoSource, false);
+            }
+            if (this._redoTarget !== undefined) {
+                this.item.targetPoint(this._redoTarget, false);
+            }
+        }
+    });
+
+    var ConnectionEditUndoUnit = Class.extend({
+        init: function (item, undoSource, undoTarget) {
+            this.item = item;
+            this._undoSource = undoSource;
+            this._undoTarget = undoTarget;
             this._redoSource = item.source();
             this._redoTarget = item.target();
             this.title = "Connection Editing";
         },
         undo: function () {
-            this.item.sourcePoint(this._undoSource);
-            this.item.targetPoint(this._undoTarget);
+            this.item.sourcePoint(this._undoSource, false);
+            this.item.targetPoint(this._undoTarget, false);
         },
         redo: function () {
-            this.item.sourcePoint(this._redoSource);
-            this.item.targetPoint(this._redoTarget);
+            this.item.sourcePoint(this._redoSource, false);
+            this.item.targetPoint(this._redoTarget, false);
         }
     });
 
@@ -286,7 +313,11 @@ kendo_module({
          * @param undoUnit
          */
         addCompositeItem: function (undoUnit) {
-            this.composite.add(undoUnit);
+            if (this.composite) {
+                this.composite.add(undoUnit);
+            } else {
+                this.add(undoUnit);
+            }
         },
 
         /**
@@ -337,9 +368,8 @@ kendo_module({
                 this.index++;
             }
             // check the capacity
-            if(this.stack.length>this.capacity)
-            {
-                this.stack.splice(0, this.stack.length -  this.capacity);
+            if (this.stack.length > this.capacity) {
+                this.stack.splice(0, this.stack.length - this.capacity);
                 this.index = this.capacity; //points to the end of the stack
             }
         },
@@ -353,7 +383,7 @@ kendo_module({
         }
     });
 
-    // Tools =========================================
+// Tools =========================================
 
     var EmptyTool = Class.extend({
         init: function (toolService) {
@@ -747,7 +777,7 @@ kendo_module({
         },
         _updateHoveredItem: function (p) {
             var hit = this._hitTest(p);
-            if (hit !== this.hoveredItem && (!this.disabledShape || hit !== this.disabledShape)) {
+            if (hit != this.hoveredItem && (!this.disabledShape || hit != this.disabledShape)) {
                 if (this.hoveredItem) {
                     this.hoveredItem._hover(false);
                 }
@@ -804,7 +834,7 @@ kendo_module({
         }
     });
 
-    // Adorners =========================================
+// Adorners =========================================
 
     var AdornerBase = Class.extend({
         init: function (diagram, options) {
@@ -1276,6 +1306,7 @@ kendo_module({
         Selector: Selector,
         ToolService: ToolService,
         ConnectorsAdorner: ConnectorsAdorner,
-        LayoutUndoUnit: LayoutUndoUnit
+        LayoutUndoUnit: LayoutUndoUnit,
+        ConnectionEditUnit: ConnectionEditUnit
     });
 })(window.kendo.jQuery);
