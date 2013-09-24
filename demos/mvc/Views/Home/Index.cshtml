@@ -26,49 +26,38 @@
             <li><a href="http://docs.kendoui.com">Documentation</a></li>
             <li><a href="#expand">Support <span>&#9660;</span></a>
                 <ol class="submenu-box support-menu">
-	                <li><a href="http://www.kendoui.com/forums.aspx">Premium Forums</a></li>
-	                <li><a href="http://stackoverflow.com/questions/tagged/kendo-ui">StackOverflow Forums</a></li>
+                    <li><a href="http://www.kendoui.com/forums.aspx">Premium Forums</a></li>
+                    <li><a href="http://stackoverflow.com/questions/tagged/kendo-ui">StackOverflow Forums</a></li>
                 </ol>
             </li>
             <li><a href="#expand">Resources <span>&#9660;</span></a>
                 <div class="submenu-box">
-	                <h4>Featured Resource</h4>
-	                <h3><a href="http://www.kendoui.com/dojo.aspx">Kendo UI Dojo</a></h3>
-	                <hr />
-	                <ol id="resources-first">
-		                <li><a href="http://www.kendoui.com/blogs.aspx">Blogs</a></li>
-		                <li><a href="http://www.kendoui.com/code-library.aspx">Code Library</a></li>
-		                <li><a href="http://demos.kendoui.com/">Demos</a></li>
-		                <li><a href="http://docs.kendoui.com/">Documentation</a></li>
-		                <li><a href="http://www.kendoui.com/faq/faq.aspx">FAQ</a></li>
-				<li><a target="_blank" href="http://www.telerik.com/automated-testing-tools/campaigns/testing-kendoui-apps.aspx">Testing</a></li>
-	                </ol>
-	                <ol>
-		                <li><a href="http://www.kendoui.com/forums.aspx">Premium Forums</a></li>
-		                <li><a href="http://www.kendoui.com/roadmap.aspx">Roadmap</a></li>
-		                <li><a target="_blank" href="http://kendo.uservoice.com/forums/127393-kendo-ui-feedback">User Voice</a></li>
-		                <li><a href="http://www.kendoui.com/videos.aspx">Videos</a></li>
-		                <li><a href="http://www.kendoui.com/webinars.aspx">Webinars</a></li>
-				<li><a href="http://www.kendoui.com/get-help.aspx">More Resources</a></li>
-	                </ol>
+                    <h4>Featured Resource</h4>
+                    <h3><a href="http://www.kendoui.com/dojo.aspx">Kendo UI Dojo</a></h3>
+                    <hr />
+                    <ol id="resources-first">
+                        <li><a href="http://www.kendoui.com/blogs.aspx">Blogs</a></li>
+                        <li><a href="http://www.kendoui.com/code-library.aspx">Code Library</a></li>
+                        <li><a href="http://demos.kendoui.com/">Demos</a></li>
+                        <li><a href="http://docs.kendoui.com/">Documentation</a></li>
+                        <li><a href="http://www.kendoui.com/faq/faq.aspx">FAQ</a></li>
+                <li><a target="_blank" href="http://www.telerik.com/automated-testing-tools/campaigns/testing-kendoui-apps.aspx">Testing</a></li>
+                    </ol>
+                    <ol>
+                        <li><a href="http://www.kendoui.com/forums.aspx">Premium Forums</a></li>
+                        <li><a href="http://www.kendoui.com/roadmap.aspx">Roadmap</a></li>
+                        <li><a target="_blank" href="http://kendo.uservoice.com/forums/127393-kendo-ui-feedback">User Voice</a></li>
+                        <li><a href="http://www.kendoui.com/videos.aspx">Videos</a></li>
+                        <li><a href="http://www.kendoui.com/webinars.aspx">Webinars</a></li>
+                <li><a href="http://www.kendoui.com/get-help.aspx">More Resources</a></li>
+                    </ol>
                 </div>
             </li>
             <li><a href="http://www.kendoui.com/contact.aspx">Contact Us</a></li>
         </ul>
 
-        <ul class="kendo-nav">
-            <li><a href="#expand">Products <span>&#9660;</span></a>
-                <ol class="submenu-box">
-                    <li><a href="http://www.kendoui.com/web">Kendo UI Web</a></li>
-                    <li><a href="http://www.kendoui.com/mobile">Kendo UI Mobile</a></li>
-                    <li><a href="http://www.kendoui.com/dataviz">Kendo UI DataViz</a></li>
-                    <li><a href="http://www.kendoui.com/server-wrappers.aspx">Server Side Wrappers</a></li>
-                </ol>
-            </li>
-            <li class="active"><a href="http://demos.kendoui.com/">Demos</a></li>
-            <li><a href="http://www.kendoui.com/get-kendo-ui/purchase.aspx" onclick="_gaq.push(['_trackPageview', '/top-nav/purchase']);">Purchase</a></li>
-            <li><a href="http://www.kendoui.com/get-kendo-ui" class="get-kendoui" onclick="_gaq.push(['_trackPageview','/download-button']);">Download</a></li>
-        </ul>
+        @Html.Partial("Products")
+
     </div>
 </div>
 
@@ -149,7 +138,7 @@
         <a href="http://demos.telerik.com/teampulse-demo/xview" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/teampulse.jpg")" alt="Telerik's Project Management Software - TeamPulse" /></a>
         <h3><a href="http://demos.telerik.com/teampulse-demo/xview">Telerik's project management software - TeamPulse</a></h3>
         <p>TeamPulse is an end-to-end Agile project management solution based on Agile best practices. It allows you to capture ideas, manage feedback, requirements and bugs, plan releases and track progress in real time.</p>
-	<p>For its upcoming version TeamPulse uses the 20+ KendoUI widgets for its new blazing fast and customizable UI. The team leverages KendoUI's powerful MVVM framework. It reads the data through the DataSources and extensively uses the Templates to decouple the UI from the business logic.</p>
+    <p>For its upcoming version TeamPulse uses the 20+ KendoUI widgets for its new blazing fast and customizable UI. The team leverages KendoUI's powerful MVVM framework. It reads the data through the DataSources and extensively uses the Templates to decouple the UI from the business logic.</p>
         <a href="http://demos.telerik.com/teampulse-demo/xview" class="launchButton">Launch!</a>
     </div>
 
@@ -166,8 +155,8 @@
             <li>iOS 4.0+<span class="mobileOS iOS"></span></li>
             <li>BlackBerry OS 7.0+<span class="mobileOS blackberry"></span></li>
         </ul>
-	
-	<p><em>Kendo UI DataViz is not supported on Android 2.x.</em></p>
+
+    <p><em>Kendo UI DataViz is not supported on Android 2.x.</em></p>
 
         <p><em><a href="mobile/">Kendo UI Mobile</a> currently supports iOS 4.0+, Android 2.2+, Windows Phone 8+ and BlackBerry touchscreen devices (7.0+).</em></p>
     </div>
