@@ -582,7 +582,16 @@ kendo_module({
             var finder = tool && tool.options.finder;
 
             if (finder) {
-                return finder.isFormatted(kendo.ui.editor.RangeUtils.textNodes(this.getRange()));
+                var range = this.getRange();
+                var RangeUtils = kendo.ui.editor.RangeUtils;
+
+                if (RangeUtils.isExpandable(range)) {
+                    range = RangeUtils.expand(range);
+                }
+
+                var textNodes = RangeUtils.textNodes(range);
+
+                return finder.isFormatted(textNodes);
             }
 
             return false;

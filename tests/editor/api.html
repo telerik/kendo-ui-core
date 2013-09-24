@@ -134,6 +134,12 @@
                 ok(!editor.state("foo"));
             });
 
+            test("state returns true when range is collapsed", function() {
+                selectRangeInValue(editor, "<em>fo||o</em");
+
+                ok(editor.state("italic"));
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
