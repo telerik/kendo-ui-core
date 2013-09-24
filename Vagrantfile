@@ -51,7 +51,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # Use VBoxManage to customize the VM. For example to change memory:
     vb.customize ["modifyvm", :id, "--memory", "4096"]
-    vb.customize ["modifyvm", :id, "--cpus", "3"]
+    vb.customize ["modifyvm", :id, "--cpus", "2"]
   end
   #
   # View the documentation for the provider you're using for more
@@ -86,8 +86,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "ci/cookbooks"
-    chef.roles_path = "ci/roles"
+    chef.roles_path = "ci"
     chef.add_role "workstation"
+    chef.add_recipe "vagrant"
+
+    user = ENV['USER']
+
+    if File.exists?(File.join(chef.roles_path, user + '.json'))
+        chef.add_role user
+    end
   end
 
   # Enable provisioning with chef server, specifying the chef server URL,
