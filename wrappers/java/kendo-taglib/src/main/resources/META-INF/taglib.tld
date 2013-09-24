@@ -417,6 +417,52 @@ If it is not supported by the browser, the Barcode will switch to the first avai
 
 
     <tag>
+        <description>Button</description>
+        <name>button</name>
+        <tag-class>com.kendoui.taglib.ButtonTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Indicates whether the Button should be enabled or disabled. By default, it is enabled, unless a disabled="disabled" attribute is detected.</description>
+            <name>enable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Defines a URL, which will be used for an img element inside the Button. The URL can be relative or absolute. In case it is relative, it will be evaluated with relation to the web page URL.The img element can be added automatically by the widget, or an existing element can be used, if it has a k-image CSS class applied.</description>
+            <name>imageUrl</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines a CSS class (or multiple classes separated by spaces), which will be used for a span element inside the Button with a background image.
+In case you want to use an icon from the Kendo UI theme sprite background image, you need to define two classes - k-icon and the respective icon CSS class.The span element can be added automatically by the widget, or an existing element can be used, if it has a k-sprite CSS class applied.</description>
+            <name>spriteCssClass</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Fires when the Button is clicked with the mouse, touched on a touch device, or ENTER (or SPACE) is pressed while the Button is focused.</description>
+            <name>click</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+
+    <tag>
+        <description>Fires when the Button is clicked with the mouse, touched on a touch device, or ENTER (or SPACE) is pressed while the Button is focused.</description>
+        <name>button-click</name>
+        <tag-class>com.kendoui.taglib.button.ClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>Calendar</description>
         <name>calendar</name>
         <tag-class>com.kendoui.taglib.CalendarTag</tag-class>
