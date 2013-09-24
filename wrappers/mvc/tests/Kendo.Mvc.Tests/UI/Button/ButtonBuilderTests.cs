@@ -92,5 +92,21 @@ namespace Kendo.Mvc.UI.Tests
         {
             builder.SpriteCssClass("foo").ShouldBeSameAs(builder);
         }
+
+        [Fact]
+        public void Tag_sets_Tag_property()
+        {
+            const string tag = "foo";
+
+            builder.Tag(tag);
+
+            component.Tag.ShouldEqual(tag);
+        }
+
+        [Fact]
+        public void Tag_returns_builder()
+        {
+            builder.Tag("foo").ShouldBeSameAs(builder);
+        }
     }
 }

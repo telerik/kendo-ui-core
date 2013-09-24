@@ -14,6 +14,7 @@ namespace Kendo.Mvc.UI
             : base(viewContext, initializer)
         {
             Enable = true;
+            Tag = "button";
             Template = new HtmlTemplate();
         }
 
@@ -27,6 +28,8 @@ namespace Kendo.Mvc.UI
         public string ImageUrl { get; set; }
 
         public string SpriteCssClass { get; set; }
+
+        public string Tag { get; set; }
         
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {

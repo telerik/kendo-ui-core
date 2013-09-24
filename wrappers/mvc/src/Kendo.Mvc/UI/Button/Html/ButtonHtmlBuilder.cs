@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI.Html
             FluentDictionary.For(defaultOptions)
                 .Add("id", Button.Name);
 
-            var el = new HtmlElement("button")
+            var el = new HtmlElement(Button.Tag)
                    .Attributes(defaultOptions)
                    .Attributes(Button.HtmlAttributes);
 

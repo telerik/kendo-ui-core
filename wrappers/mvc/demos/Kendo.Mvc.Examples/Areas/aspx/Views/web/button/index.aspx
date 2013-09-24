@@ -9,10 +9,12 @@
 
 <%= Html.Kendo().Button()
     .Name("textButton")
+    .Tag("span")
     .Content("Text button") %>
 
 <%= Html.Kendo().Button()
     .Name("iconTextButton")
+    .HtmlAttributes(new { type = "button" })
     .SpriteCssClass("k-icon k-i-ungroup")
     .Content("Icon and text") %>
 

@@ -780,6 +780,12 @@
     <Content Include="Areas\aspx\Views\web\autocomplete\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\serverfiltering.aspx" />
     <Content Include="Areas\aspx\Views\web\autocomplete\template.aspx" />
+    <Content Include="Areas\aspx\Views\web\button\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\button\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\button\images.aspx" />
+    <Content Include="Areas\aspx\Views\web\button\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\button\navigation.aspx" />
+    <Content Include="Areas\aspx\Views\web\button\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\calendar\api.aspx" />
     <Content Include="Areas\aspx\Views\web\calendar\events.aspx" />
     <Content Include="Areas\aspx\Views\web\calendar\globalization.aspx" />
@@ -2764,6 +2770,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\web\button\images.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\button\api.cshtml" />
+    <Content Include="Areas\razor\Views\web\button\events.cshtml" />
+    <Content Include="Areas\razor\Views\web\button\navigation.cshtml" />
+    <Content Include="Areas\razor\Views\web\button\rtl.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

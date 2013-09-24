@@ -107,5 +107,22 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>Sets the Button tag. A button tag is used by default.</summary>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Button()
+        ///            .Name("Button")
+        ///            .Tag("span")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ButtonBuilder Tag(string tag)
+        {
+            Component.Tag = tag;
+
+            return this;
+        }
+
     }
 }
