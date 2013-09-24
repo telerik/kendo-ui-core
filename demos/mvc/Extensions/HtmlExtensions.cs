@@ -19,7 +19,7 @@ namespace Kendo.Extensions
                 string.Format("<a id=\"{0}\" class=\"{1}\" href=\"{2}\">{3}</a>",
                     suite,
                     (cssClass + selectedClass).Trim(),
-                    Url.Content("~/" + suite),
+                    Url.Content("~/" + suite + "/overview/index.html"),
                     title
                 )
             );
