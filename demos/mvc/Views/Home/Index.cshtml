@@ -26,49 +26,36 @@
             <li><a href="http://docs.kendoui.com">Documentation</a></li>
             <li><a href="#expand">Support <span>&#9660;</span></a>
                 <ol class="submenu-box support-menu">
-	                <li><a href="http://www.kendoui.com/forums.aspx">Premium Forums</a></li>
-	                <li><a href="http://stackoverflow.com/questions/tagged/kendo-ui">StackOverflow Forums</a></li>
+                    <li><a href="http://www.kendoui.com/forums.aspx">Premium Forums</a></li>
+                    <li><a href="http://stackoverflow.com/questions/tagged/kendo-ui">StackOverflow Forums</a></li>
                 </ol>
             </li>
             <li><a href="#expand">Resources <span>&#9660;</span></a>
                 <div class="submenu-box">
-	                <h4>Featured Resource</h4>
-	                <h3><a href="http://www.kendoui.com/dojo.aspx">Kendo UI Dojo</a></h3>
-	                <hr />
-	                <ol id="resources-first">
-		                <li><a href="http://www.kendoui.com/blogs.aspx">Blogs</a></li>
-		                <li><a href="http://www.kendoui.com/code-library.aspx">Code Library</a></li>
-		                <li><a href="http://demos.kendoui.com/">Demos</a></li>
-		                <li><a href="http://docs.kendoui.com/">Documentation</a></li>
-		                <li><a href="http://www.kendoui.com/faq/faq.aspx">FAQ</a></li>
-				<li><a target="_blank" href="http://www.telerik.com/automated-testing-tools/campaigns/testing-kendoui-apps.aspx">Testing</a></li>
-	                </ol>
-	                <ol>
-		                <li><a href="http://www.kendoui.com/forums.aspx">Premium Forums</a></li>
-		                <li><a href="http://www.kendoui.com/roadmap.aspx">Roadmap</a></li>
-		                <li><a target="_blank" href="http://kendo.uservoice.com/forums/127393-kendo-ui-feedback">User Voice</a></li>
-		                <li><a href="http://www.kendoui.com/videos.aspx">Videos</a></li>
-		                <li><a href="http://www.kendoui.com/webinars.aspx">Webinars</a></li>
-				<li><a href="http://www.kendoui.com/get-help.aspx">More Resources</a></li>
-	                </ol>
+                    <h4>Featured Resource</h4>
+                    <h3><a href="http://www.kendoui.com/dojo.aspx">Kendo UI Dojo</a></h3>
+                    <hr />
+                    <ol id="resources-first">
+                        <li><a href="http://www.kendoui.com/blogs.aspx">Blogs</a></li>
+                        <li><a href="http://www.kendoui.com/code-library.aspx">Code Library</a></li>
+                        <li><a href="http://demos.kendoui.com/">Demos</a></li>
+                        <li><a href="http://docs.kendoui.com/">Documentation</a></li>
+                        <li><a href="http://www.kendoui.com/faq/faq.aspx">FAQ</a></li>
+                <li><a target="_blank" href="http://www.telerik.com/automated-testing-tools/campaigns/testing-kendoui-apps.aspx">Testing</a></li>
+                    </ol>
+                    <ol>
+                        <li><a href="http://www.kendoui.com/forums.aspx">Premium Forums</a></li>
+                        <li><a href="http://www.kendoui.com/roadmap.aspx">Roadmap</a></li>
+                        <li><a target="_blank" href="http://kendo.uservoice.com/forums/127393-kendo-ui-feedback">User Voice</a></li>
+                        <li><a href="http://www.kendoui.com/videos.aspx">Videos</a></li>
+                        <li><a href="http://www.kendoui.com/webinars.aspx">Webinars</a></li>
+                <li><a href="http://www.kendoui.com/get-help.aspx">More Resources</a></li>
+                    </ol>
                 </div>
             </li>
             <li><a href="http://www.kendoui.com/contact.aspx">Contact Us</a></li>
         </ul>
-
-        <ul class="kendo-nav">
-            <li><a href="#expand">Products <span>&#9660;</span></a>
-                <ol class="submenu-box">
-                    <li><a href="http://www.kendoui.com/web">Kendo UI Web</a></li>
-                    <li><a href="http://www.kendoui.com/mobile">Kendo UI Mobile</a></li>
-                    <li><a href="http://www.kendoui.com/dataviz">Kendo UI DataViz</a></li>
-                    <li><a href="http://www.kendoui.com/server-wrappers.aspx">Server Side Wrappers</a></li>
-                </ol>
-            </li>
-            <li class="active"><a href="http://demos.kendoui.com/">Demos</a></li>
-            <li><a href="http://www.kendoui.com/get-kendo-ui/purchase.aspx" onclick="_gaq.push(['_trackPageview', '/top-nav/purchase']);">Purchase</a></li>
-            <li><a href="http://www.kendoui.com/get-kendo-ui" class="get-kendoui" onclick="_gaq.push(['_trackPageview','/download-button']);">Download</a></li>
-        </ul>
+        @Html.Partial("Products")
     </div>
 </div>
 
@@ -79,29 +66,29 @@
 <div class="suite-demos-nav">
     <ul class="centerWrap floatWrap">
         <li class="active"><a href="#">Overview</a></li>
-        <li><a href="web/">Web Demos</a></li>
-        <li><a href="mobile/">Mobile Demos</a></li>
-        <li><a href="dataviz/">DataViz Demos</a></li>
-        <li><a href="themebuilder/">Theme Builders</a></li>
+        <li><a href="web/overview/index.html">Web Demos</a></li>
+        <li><a href="mobile/overview/index.html">Mobile Demos</a></li>
+        <li><a href="dataviz/overview/index.html">DataViz Demos</a></li>
+        <li><a href="themebuilder/web.html">Theme Builders</a></li>
     </ul>
 </div>
 
 <div class="demos-nav">
     <div class="centerWrap floatWrap">
         <div class="box centerAlign">
-            <a href="web/" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-web.png")" alt="Web Demos" /></a>
-            <h2><a href="web/">Web demos</a></h2>
-            <p>23 slick UI widgets plus demos of MVVM, Validation, Globalization, Templates, etc. <a href="web/" class="launchButton">Launch Demos</a></p>
+            <a href="web/overview/index.html" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-web.png")" alt="Web Demos" /></a>
+            <h2><a href="web/overview/index.html">Web demos</a></h2>
+            <p>23 slick UI widgets plus demos of MVVM, Validation, Globalization, Templates, etc. <a href="web/overview/index.html" class="launchButton">Launch Demos</a></p>
         </div>
         <div class="box centerAlign">
-            <a href="mobile/" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-mobile.png")" alt="Mobile Demos" /></a>
-            <h2><a href="mobile/">Mobile demos</a></h2>
-            <p>See what you can do on phones & tablets. Make sure to check the mobile simulator. <a href="mobile/" class="launchButton">Launch Demos</a></p>
+            <a href="mobile/overview/index.html" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-mobile.png")" alt="Mobile Demos" /></a>
+            <h2><a href="mobile/overview/index.html">Mobile demos</a></h2>
+            <p>See what you can do on phones &amp; tablets. Make sure to check the mobile simulator. <a href="mobile/overview/index.html" class="launchButton">Launch Demos</a></p>
         </div>
         <div class="box centerAlign">
-            <a href="dataviz/" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-dataviz.png")" alt="DataViz Demos" /></a>
-            <h2><a href="dataviz/">DataViz demos</a></h2>
-            <p>You won't believe this is just HTML5. <br />Rich, interactive, touch-enabled charts. <a href="dataviz/" class="launchButton">Launch Demos</a></p>
+            <a href="dataviz/overview/index.html" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-dataviz.png")" alt="DataViz Demos" /></a>
+            <h2><a href="dataviz/overview/index.html">DataViz demos</a></h2>
+            <p>You won't believe this is just HTML5. <br />Rich, interactive, touch-enabled charts. <a href="dataviz/overview/index.html" class="launchButton">Launch Demos</a></p>
         </div>
     </div>
 </div>
@@ -120,20 +107,20 @@
         </div>
 
         <div class="box narrowbox">
-            <a href="themebuilder/" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/themebuilder.png")" alt="ThemeBuilder for Kendo UI Web" /></a>
-            <h3 class="centerAlign"><a href="themebuilder/">ThemeBuilder for Kendo UI Web</a></h3>
+            <a href="themebuilder/web.html" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/themebuilder.png")" alt="ThemeBuilder for Kendo UI Web" /></a>
+            <h3 class="centerAlign"><a href="themebuilder/web.html">ThemeBuilder for Kendo UI Web</a></h3>
             <p>The ThemeBuilder is a powerful visual tool for quickly customizing the look-and-feel of Kendo UI widgets.</p>
             <p>Using a simple point-and-click configuration wizard, anyone can transform Kendo UI CSS to precisely match their site stylesheet.</p>
-            <a href="themebuilder/" class="launchButton">Launch!</a>
+            <a href="themebuilder/web.html" class="launchButton">Launch!</a>
         </div>
 
         <div class="box narrowbox">
-            <a href="mobilethemebuilder/" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/themebuilder-mobile.png")" alt="ThemeBuilder for Kendo UI Mobile" /></a>
-            <h3 class="centerAlign"><a href="mobilethemebuilder/">ThemeBuilder for Kendo UI Mobile</a></h3>
+            <a href="mobilethemebuilder/index.html" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/themebuilder-mobile.png")" alt="ThemeBuilder for Kendo UI Mobile" /></a>
+            <h3 class="centerAlign"><a href="mobilethemebuilder/index.html">ThemeBuilder for Kendo UI Mobile</a></h3>
             <p>Quickly modify the styles of Kendo UI Mobile widgets as they exist in your apps with an easy to use standalone tool.
             The simple and intuitive point-and-click configuration wizard makes it a breeze to transform Kendo UI Mobile themes, providing you with the CSS output
             for use in your app.</p>
-            <a href="mobilethemebuilder/" class="launchButton">Launch!</a>
+            <a href="mobilethemebuilder/index.html" class="launchButton">Launch!</a>
         </div>
 
         <div class="box narrowbox">
@@ -149,7 +136,7 @@
         <a href="http://demos.telerik.com/teampulse-demo/xview" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/teampulse.jpg")" alt="Telerik's Project Management Software - TeamPulse" /></a>
         <h3><a href="http://demos.telerik.com/teampulse-demo/xview">Telerik's project management software - TeamPulse</a></h3>
         <p>TeamPulse is an end-to-end Agile project management solution based on Agile best practices. It allows you to capture ideas, manage feedback, requirements and bugs, plan releases and track progress in real time.</p>
-	<p>For its upcoming version TeamPulse uses the 20+ KendoUI widgets for its new blazing fast and customizable UI. The team leverages KendoUI's powerful MVVM framework. It reads the data through the DataSources and extensively uses the Templates to decouple the UI from the business logic.</p>
+    <p>For its upcoming version TeamPulse uses the 20+ KendoUI widgets for its new blazing fast and customizable UI. The team leverages KendoUI's powerful MVVM framework. It reads the data through the DataSources and extensively uses the Templates to decouple the UI from the business logic.</p>
         <a href="http://demos.telerik.com/teampulse-demo/xview" class="launchButton">Launch!</a>
     </div>
 
@@ -166,10 +153,10 @@
             <li>iOS 4.0+<span class="mobileOS iOS"></span></li>
             <li>BlackBerry OS 7.0+<span class="mobileOS blackberry"></span></li>
         </ul>
-	
-	<p><em>Kendo UI DataViz is not supported on Android 2.x.</em></p>
 
-        <p><em><a href="mobile/">Kendo UI Mobile</a> currently supports iOS 4.0+, Android 2.2+, Windows Phone 8+ and BlackBerry touchscreen devices (7.0+).</em></p>
+        <p><em>Kendo UI DataViz is not supported on Android 2.x.</em></p>
+
+        <p><em>Kendo UI Mobile currently supports iOS 4.0+, Android 2.2+, Windows Phone 8+ and BlackBerry touchscreen devices (7.0+).</em></p>
     </div>
 
     <div class="column13">
