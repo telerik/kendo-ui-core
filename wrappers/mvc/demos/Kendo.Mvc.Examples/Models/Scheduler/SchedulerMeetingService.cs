@@ -94,6 +94,7 @@
                 foreach (var atendee in atendees)
                 {
                     entity.MeetingAtendees.Add(atendee);
+                    db.Entry(atendee).State = EntityState.Modified;
                 }
 
                 db.Entry(entity).State = EntityState.Modified;
