@@ -187,10 +187,10 @@ kendo_module({
             this.title = "Delete connection";
         },
         undo: function () {
-            this.diagram.addConnection(this.connection);
+            this.diagram.addConnection(this.connection, false);
         },
         redo: function () {
-            this.diagram.remove(this.connection);
+            this.diagram.remove(this.connection, false);
         }
     });
 
@@ -201,12 +201,12 @@ kendo_module({
             this.title = "Deletion";
         },
         undo: function () {
-            this.diagram.addShape(this.shape);
+            this.diagram.addShape(this.shape, {undoable: false});
             this.shape.select(false);
         },
         redo: function () {
             this.shape.select(false);
-            this.diagram.remove(this.shape);
+            this.diagram.remove(this.shape, false);
         }
     });
     /**
@@ -341,7 +341,7 @@ kendo_module({
          * Rollback of the unit on top of the stack.
          */
         undo: function () {
-            if (this.index !== 0) {
+            if (this.index > 0) {
                 this.index--;
                 this.stack[this.index].undo();
             }
