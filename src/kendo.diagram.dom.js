@@ -775,7 +775,9 @@ kendo_module({
             return result;
         },
         focus: function () {
+            var x = window.scrollX, y = window.scrollY;
             this.canvas.focus();
+            window.scrollTo(x, y); // prevent the annoying scroll to top of the canvas (div).
         },
         clear: function () {
             this.canvas.clear();
