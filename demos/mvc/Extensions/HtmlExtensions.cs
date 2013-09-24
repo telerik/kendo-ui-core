@@ -14,12 +14,17 @@ namespace Kendo.Extensions
             var Url = new UrlHelper(html.ViewContext.RequestContext);
             var viewBag = html.ViewContext.Controller.ViewBag;
             var selectedClass = viewBag.Suite == suite ? " selected" : "";
+            var href = "~/" + suite;
+
+            if (suite != "mobile") {
+                href = "~/" + suite + "/overview/index.html";
+            }
 
             return html.Raw(
                 string.Format("<a id=\"{0}\" class=\"{1}\" href=\"{2}\">{3}</a>",
                     suite,
                     (cssClass + selectedClass).Trim(),
-                    Url.Content("~/" + suite + "/overview/index.html"),
+                    Url.Content(href),
                     title
                 )
             );
