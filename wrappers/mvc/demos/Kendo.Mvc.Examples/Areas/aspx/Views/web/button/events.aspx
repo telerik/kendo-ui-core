@@ -33,10 +33,6 @@
     function onClick(e) {
         kendoConsole.log("event :: click (" + $(e.event.target).closest(".k-button").attr("id") + ")");
     }
-
-    function navigate() {
-        kendoConsole.log("Navigate");
-    }
 </script>
 
 </asp:Content>
