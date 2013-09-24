@@ -925,12 +925,15 @@ kendo_module({
             if (options.allowDrop && kendo.ui.DropTarget) {
                 this.element.kendoDropTarget({
                     drop: function (e) {
-                        var item = e.draggable.hint.data("data"),
-                            pos = e.draggable.hintOffset,
-                            dp = that.documentToCanvasPoint(new Point(pos.left, pos.top)),
+                        var item, pos, dp, normal;
+                        if (e.draggable && e.draggable.hint) {
+                            item = e.draggable.hint.data("data");
+                            pos = e.draggable.hintOffset;
+                            dp = that.documentToCanvasPoint(new Point(pos.left, pos.top));
                             normal = that._normalizePointZoom(dp.minus(that.pan()));
 
-                        that.addShape(normal, item);
+                            that.addShape(normal, item);
+                        }
                     }
                 });
             }
