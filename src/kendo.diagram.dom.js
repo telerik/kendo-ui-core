@@ -439,6 +439,9 @@ kendo_module({
             cssClass: "k-connection"
         },
         sourcePoint: function (source) {
+            if (source !== undefined) {
+                this.from = source;
+            }
             if (source === null) { // detach
                 if (this.sourceConnector) {
                     this._sourcePoint = this._resolvedSourceConnector.position();
@@ -465,6 +468,9 @@ kendo_module({
             return this._resolvedSourceConnector ? this._resolvedSourceConnector.position() : this._sourcePoint;
         },
         targetPoint: function (target) {
+            if (target !== undefined) {
+                this.to = target;
+            }
             if (target === null) { // detach
                 if (this.targetConnector) {
                     this._targetPoint = this._resolvedTargetConnector.position();
@@ -555,6 +561,13 @@ kendo_module({
         redraw: function (options) {
             this.options = deepExtend({}, this.options, options);
             this.line.redraw(options);
+        },
+        copy: function () {
+            var options = this.serialize(),
+                copy = new Connection(this.from, this.to, options);
+            // TODO: Copy the model too?
+
+            return copy;
         },
         _clearSourceConnector: function () {
             this.sourceConnector.connections.remove(this);
