@@ -516,37 +516,3 @@ test("Copy - copying the options", function () {
 
     deepEqual(copy.options, s1.options);
 });
-
-test("Copy connection", function () {
-    var c1 = d.connect(d.shapes[0], d.shapes[1]);
-
-    var copy = c1.copy();
-
-    deepEqual(copy.options, c1.options);
-    deepEqual(copy.from, c1.from);
-    deepEqual(copy.to, c1.to);
-});
-
-test("Copy/Paste connection", function () {
-    var c1 = d.connect(d.shapes[0], d.shapes[1]);
-    var cons = d.connections.length;
-
-    c1.select(true);
-    equal(d._clipboard.length, 0);
-    d._copy();
-    equal(d._clipboard.length, 1);
-    d._paste();
-    equal(cons + 1, d.connections.length);
-});
-
-test("Cut/Paste connection", function () {
-    var c1 = d.connect(d.shapes[0], d.shapes[1]);
-    var cons = d.connections.length;
-
-    c1.select(true);
-    equal(d._clipboard.length, 0);
-    d._cut();
-    equal(d._clipboard.length, 1);
-    d._paste();
-    equal(cons, d.connections.length);
-});
