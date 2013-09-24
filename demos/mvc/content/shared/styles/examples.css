@@ -2005,6 +2005,11 @@ pre.prettyprint
     background: linear-gradient(top, #eeeeee 0%,#eaeaea 50%,#e3e3e3 100%); /* W3C */
 }
 
+#codeStrip .k-item .k-loading
+{
+    display: none;
+}
+
 #codeStrip a.documentation-link {
     display: block;
     float: right;
