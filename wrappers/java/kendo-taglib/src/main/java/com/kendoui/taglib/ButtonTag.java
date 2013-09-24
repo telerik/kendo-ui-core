@@ -1,5 +1,7 @@
 package com.kendoui.taglib;
 
+import com.kendoui.taglib.button.ClickFunctionTag;
+
 import com.kendoui.taglib.html.Button;
 import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.GenericElement;
