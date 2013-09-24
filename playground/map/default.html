@@ -16,11 +16,11 @@
         <script src="../../src/kendo.dataviz.map.js"></script>
         <script src="proj4.js"></script>
         <style>
-            .layer {
+            .k-layer {
                 position: absolute;
             }
 
-            .tile {
+            .k-tile {
                 position: absolute;
                 user-select: none;
                 -moz-user-select: none;
@@ -30,15 +30,10 @@
         </style>
     </head>
     <body>
+        <div id="map"></div>
         <div id="view">
-            <div id="tile-layer" class="layer"></div>
             <div id="vector-layer" class="layer"> </div>
         </div>
-        <script id="tile-template" type="text/x-kendo-template">
-            <img class="tile" src="#= img #"
-                 unselectable="on"
-                 style="left: #= left #px; top: #= top #px;"></img>
-        </script>
         <script>
             var Point = kendo.dataviz.Point2D;
             var Location = kendo.dataviz.map.Location;
@@ -48,31 +43,6 @@
             var TILE_SIZE = 256;
             var zoomLevel = 2;
             var scale = 256 * Math.pow(2, zoomLevel);
-
-            // TILE
-            var tileTemplate = kendo.template($("#tile-template").html());
-            var imgTemplate = kendo.template("tiles/#= zoom #/#= x #/#= y #.png");
-
-            function loadTiles(element, zoom) {
-                element.empty();
-
-                var size = Math.pow(2, zoom);
-                for (var x = 0; x < size; x++) {
-                    for (var y = 0; y < size; y++) {
-                        var img = imgTemplate({ zoom: zoom, x: x, y: y });
-
-                        $($.trim(tileTemplate({
-                            img: img,
-                            tileSize: TILE_SIZE,
-                            left: x * TILE_SIZE,
-                            top: y * TILE_SIZE
-                        })))
-                        .appendTo(element);
-                    }
-                }
-            }
-
-            loadTiles($("#tile-layer"), zoomLevel);
 
             // VECTOR
             var view = new kendo.dataviz.SVGView({ width: scale, height: scale });
@@ -134,11 +104,11 @@
             $("#map").kendoMap({
                 view: {
                     center: [51.505, -0.09],
-                    zoom: 12
+                    zoom: 2
                 },
                 layers: [{
                     type: "tile",
-                    url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+                    url: "tiles/#= zoom #/#= x #/#= y #.png",
                     copyright: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
                 }],
                 markers: [{

@@ -16,9 +16,13 @@ kendo_module({
         log = math.log,
         tan = math.tan,
 
+        proxy = $.proxy,
+
         kendo = window.kendo,
         Class = kendo.Class,
+        ObservableArray = kendo.data.ObservableArray,
         Widget = kendo.ui.Widget,
+        template = kendo.template,
 
         dataviz = kendo.dataviz,
         Matrix = dataviz.Matrix,
@@ -34,8 +38,40 @@ kendo_module({
 
     // Map widget =============================================================
     var Map = Widget.extend({
+        init: function(element, options) {
+            var map = this;
+
+            Widget.fn.init.call(map, element);
+            map.scrollWrap = map.element.append($("<div class='k-map-scroll'></div>"));
+            map.layers = new ObservableArray([]);
+
+            map._initOptions(options);
+            map._renderLayers();
+        },
+
         options: {
-            name: "Map"
+            name: "Map",
+            layers: []
+        },
+
+        events:[
+            "reset" // TODO: Redraw?
+        ],
+
+        _renderLayers: function() {
+            var defs = this.options.layers,
+                layers = this.layers = [],
+                scrollWrap = this.scrollWrap;
+
+            scrollWrap.empty();
+
+            for (var i = 0; i < defs.length; i++) {
+                // TODO: Either pass layer type directly or create from a factory based on type id
+                var l = new TileLayer(this, defs[i]);
+                layers.push();
+            }
+
+            this.trigger("reset");
         }
     });
 
@@ -75,7 +111,7 @@ kendo_module({
     // WGS 84 / World Mercator
     var Mercator = Class.extend({
         init: function(options) {
-            this.options = deepExtend({}, this.options, options);
+            this._initOptions(options);
         },
 
         MAX_LNG: 180,
@@ -250,10 +286,68 @@ kendo_module({
     });
 
     // Layers =================================================================
-    var GeoJSONLayer = Class.extend({
+    var TILE_TEMPLATE = template(
+        '<img class="k-tile" unselectable="on" src="#= url #" ' +
+        'style="left: #= left #px; top: #= top #px;"></img>');
+
+    var TileLayer = Class.extend({
+        init: function(map, options) {
+            var layer = this;
+
+            layer.map = map;
+
+            this._initOptions(options);
+            this.element = $("<div class='k-layer'></div>").appendTo(
+                map.scrollWrap // TODO: API for allocating a scrollable element?
+            );
+
+            map.bind("reset", proxy(layer.reset, layer));
+        },
+
+        options: {
+            url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+            tileSize: 256,
+            zoom: 0
+        },
+
+        destroy: function() {
+            this.element.empty();
+        },
+
+        reset: function(e) {
+            this.options.zoom = e.sender.options.view.zoom;
+            this._render();
+        },
+
+        _render: function() {
+            var options = this.options,
+                tileSize = options.tileSize,
+                zoom = options.zoom,
+                size = pow(2, zoom),
+                urlTemplate = template(options.url),
+                output = "";
+
+            for (var x = 0; x < size; x++) {
+                for (var y = 0; y < size; y++) {
+                    output += TILE_TEMPLATE({
+                        url: urlTemplate({
+                            zoom: zoom, x: x, y: y
+                        }),
+                        tileSize: tileSize,
+                        left: x * tileSize,
+                        top: y * tileSize
+                    });
+                }
+            }
+
+            this.element[0].innerHTML = output;
+        }
+    });
+
+    var VectorLayer = Class.extend({
         init: function() {
 
-        }
+        },
     });
 
     // Helper methods =========================================================
@@ -277,6 +371,10 @@ kendo_module({
             },
             datums: {
                 WGS84: WGS84
+            },
+            layers: {
+                TileLayer: TileLayer,
+                VectorLayer: VectorLayer
             },
             projections: {
                 Equirectangular: Equirectangular,
