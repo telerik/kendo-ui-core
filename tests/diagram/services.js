@@ -144,7 +144,17 @@
     });
 
     /*-----------Undoredo tests------------------------------------*/
-    QUnit.module("UndoRedo tests");
+    QUnit.module("UndoRedo tests", {
+        setup: function () {
+            $("#canvas").kendoDiagram();
+
+            d = $("#canvas").getKendoDiagram();
+            randomDiagram(d);
+        },
+        teardown: function () {
+            d.clear();
+        }
+    });
 
     test("UndoRedoService basic", function () {
         var ur = new diagram.UndoRedoService();
@@ -152,33 +162,60 @@
         ur.begin();
         ur.addCompositeItem(unit);
         ur.commit();
-        ok(unit.Count === 1, "Unit was executed");
+        ok(unit.Count == 1, "Unit was executed");
         ur.undo();
         ok(ur.count() > 0, "The units are still there.");
         QUnit.equal(unit.Count, 0, "Unit undo was executed");
         ur.redo();
-        ok(unit.Count === 1, "Unit was executed");
+        ok(unit.Count == 1, "Unit was executed");
         QUnit.throws(function () {
             ur.Redo();
         }, "Supposed to raise an exception since we are passed the length of the stack.");
         ur.undo();
-        ok(unit.Count === 0, "Unit was executed");
+        ok(unit.Count == 0, "Unit was executed");
         ur = new diagram.UndoRedoService();
         unit = new Task("Counting unit.");
         ur.add(unit);
-        ok(unit.Count === 1, "Unit was executed");
-        unit = new Task("Counting unit.");
-        ur.add(unit, false); // do not execute
-        equal(unit.Count, 0);
+        ok(unit.Count == 1, "Unit was executed");
+    });
 
-        // ensure capacity works
-        ur.clear();
-        for (var i = 0; i < 155; i++) {
-            ur.add(new Task(i.toString()), false);
-        }
-        // the undoredo stack should truncate at the bottom
-        equal(ur.count(), 100);
-        equal(ur.stack[0].Title, "55");
+    test("Delete shape, undo, connection attached", function () {
+        var s1 = d.shapes[0];
+        var s2 = d.shapes[1];
+
+        var c1 = d.connect(s1, s2);
+
+        ok(c1.sourceConnector !== undefined, "Source attached");
+        ok(c1.sourceConnector.options.name == "Auto", "Attached to Auto");
+
+        d.remove(s1, true);
+
+        d.undo();
+
+        ok(c1.sourceConnector !== undefined, "Source attached after undo");
+        ok(c1.sourceConnector.options.name == "Auto", "Attached to Auto");
+    });
+
+    test("Delete Connection, undo, connection attached", function () {
+        var s1 = d.shapes[0];
+        var s2 = d.shapes[1];
+
+        var c1 = d.connect(s1, s2);
+
+        ok(c1.sourceConnector !== undefined, "Source attached");
+        ok(c1.sourceConnector.options.name == "Auto", "Attached to Auto");
+
+        d.remove(c1, true);
+
+        d.undo();
+
+        var lastC = d.connections[d.connections.length - 1];
+
+        ok(lastC.sourceConnector !== undefined, "Source attached after undo");
+        ok(lastC.sourceConnector.options.name == "Auto", "Attached to Auto");
+
+        ok(lastC.targetConnector !== undefined, "Target attached after undo");
+        ok(lastC.targetConnector.options.name == "Auto", "Attached to Auto");
     });
 
 })(kendo.jQuery);
