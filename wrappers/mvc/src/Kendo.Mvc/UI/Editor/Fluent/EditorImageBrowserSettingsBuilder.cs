@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using System.Web.Routing;
+using System;
 
 namespace Kendo.Mvc.UI.Fluent
 {
@@ -40,6 +41,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public EditorImageBrowserSettingsBuilder Read(Action<EditorImageBrowserOperationBuilder> configurator)
+        {
+            configurator(new EditorImageBrowserOperationBuilder(settings.Read, viewContext, urlGenerator));
+
+            return this;
+        }
+
         private void SetUrl(INavigatable operation)
         {
             operation.Url = operation.GenerateUrl(viewContext, urlGenerator);
@@ -68,6 +76,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public EditorImageBrowserSettingsBuilder Thumbnail(Action<EditorImageBrowserOperationBuilder> configurator)
+        {
+            configurator(new EditorImageBrowserOperationBuilder(settings.Thumbnail, viewContext, urlGenerator));
+
+            return this;
+        }
+
         public EditorImageBrowserSettingsBuilder Image(string actionName, string controllerName)
         {
             return Image(actionName, controllerName, (object)null);
@@ -75,7 +90,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public EditorImageBrowserSettingsBuilder Image(string url)
         {
-            settings.Image.Url = urlGenerator.Generate(viewContext.RequestContext, url); ;
+            settings.Image.Url = urlGenerator.Generate(viewContext.RequestContext, url);
             return this;
         }
 
@@ -90,6 +105,13 @@ namespace Kendo.Mvc.UI.Fluent
         {
             settings.Image.Action(actionName, controllerName, routeValues);
             SetUrl(settings.Image);
+            return this;
+        }
+
+        public EditorImageBrowserSettingsBuilder Image(Action<EditorImageBrowserOperationBuilder> configurator)
+        {
+            configurator(new EditorImageBrowserOperationBuilder(settings.Image, viewContext, urlGenerator));
+
             return this;
         }
 
@@ -114,6 +136,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public EditorImageBrowserSettingsBuilder Upload(Action<EditorImageBrowserOperationBuilder> configurator)
+        {
+            configurator(new EditorImageBrowserOperationBuilder(settings.Upload, viewContext, urlGenerator));
+
+            return this;
+        }
+
         public EditorImageBrowserSettingsBuilder Destroy(string actionName, string controllerName)
         {
             return Destroy(actionName, controllerName, (object)null);
@@ -133,6 +162,13 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        public EditorImageBrowserSettingsBuilder Destroy(Action<EditorImageBrowserOperationBuilder> configurator)
+        {
+            configurator(new EditorImageBrowserOperationBuilder(settings.Destroy, viewContext, urlGenerator));
+
+            return this;
+        }
+
         public EditorImageBrowserSettingsBuilder Create(string actionName, string controllerName)
         {
             return Create(actionName, controllerName, (object)null);
@@ -149,6 +185,13 @@ namespace Kendo.Mvc.UI.Fluent
         {
             settings.Create.Action(actionName, controllerName, routeValues);
             SetUrl(settings.Create);
+            return this;
+        }
+
+        public EditorImageBrowserSettingsBuilder Create(Action<EditorImageBrowserOperationBuilder> configurator)
+        {
+            configurator(new EditorImageBrowserOperationBuilder(settings.Create, viewContext, urlGenerator));
+
             return this;
         }
 

@@ -578,6 +578,7 @@
     <Compile Include="UI\Editor\EditorImageBrowserOperation.cs" />
     <Compile Include="UI\Editor\EditorMessages.cs" />
     <Compile Include="UI\Editor\Fluent\EditorImageBrowserMessagesBuilder.cs" />
+    <Compile Include="UI\Editor\Fluent\EditorImageBrowserOperationBuilder.cs" />
     <Compile Include="UI\Editor\Fluent\EditorImageBrowserSettingsBuilder.cs" />
     <Compile Include="UI\Editor\Fluent\EditorStyleSheetBuilder.cs" />
     <Compile Include="UI\Editor\Fluent\EditorMessagesBuilder.cs" />
