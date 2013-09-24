@@ -228,7 +228,7 @@ kendo_module({
     });
 
     Pane.wrap = function(element) {
-        var paneContainer = element.wrap('<div class="km-pane-wrapper"><div><div data-role="view"></div></div></div>').parent().parent(),
+        var paneContainer = element.wrap('<div class="km-pane-wrapper km-root"><div><div data-role="view"></div></div></div>').parent().parent(),
             pane = new Pane(paneContainer);
 
         pane.navigate("");

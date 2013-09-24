@@ -3,18 +3,23 @@
     <head>
         <title>Scheduler</title>
         <link href="../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../styles/mobile/kendo.common.min.css" rel="stylesheet" />
         <link href="../styles/web/kendo.silver.min.css" rel="stylesheet" />
 
         <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.timezones.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.mobile.loader.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.mobile.view.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.mobile.pane.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.mobile.scroller.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.mobile.shim.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.mobile.popover.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.mobile.actionsheet.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
@@ -22,7 +27,6 @@
         <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.multiselect.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.tooltip.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
@@ -44,6 +48,14 @@
             html
             {
                 overflow-y:scroll;
+            }
+
+            .km-popup-overlay {
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
             }
 
             .k-scheduler-mobile .k-toolbar .k-nav-prev,

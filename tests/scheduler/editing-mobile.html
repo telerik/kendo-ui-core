@@ -159,6 +159,17 @@
                 equal(save.calls("saveEvent"), 1);
             });
 
+            test("edit template is initialized if set", function() {
+                var scheduler = setup({
+                    editable: {
+                        template: "my custom edit form"
+                    }
+                });
+
+                scheduler.editEvent(scheduler.dataSource.at(0));
+
+                equal(scheduler._editor.container.find(kendo.roleSelector("content")).text(), "my custom edit form");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
