@@ -4,6 +4,7 @@ require 'rake/testtask'
 require 'bundler/setup'
 require 'tempfile'
 require 'erb'
+require 'winrm'
 require 'json'
 
 VERBOSE = verbose == true
@@ -607,7 +608,12 @@ namespace :build do
             # sh "curl -s -m 300 --netrc \"http://localhost:8081/manager/text/reload?path=/staging-java\""
             sh "rsync -avc --del dist/demos/staging-php/ #{WEB_ROOT}/staging-php/"
 
+
+            endpoint = "http://kendoiis.telerik.com:5985/wsman"
+            winrm = WinRM::WinRMWebService.new(endpoint, :plaintext, :user => "telerik.com\\TeamFoundationUser", :pass => "voyant69", :disable_sspi => true)
+            winrm.cmd('iisreset /stop')
             sh "rsync -avc --del dist/demos/staging-mvc/ /mnt/kendo-iis/staging-mvc/"
+            winrm.cmd('iisreset /start')
         end
 
         desc 'Package and publish bundles to the Stable directory'
