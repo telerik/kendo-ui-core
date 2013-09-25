@@ -750,6 +750,7 @@ kendo_module({
 
             this.pane = kendo.mobile.ui.Pane.wrap(this.element);
             this.view = this.pane.view();
+            this._actionSheetButtonTemplate = kendo.template('<li class="k-button #=className#"><a #=attr# href="\\#">#:text#</a></li>');
         },
 
         destroy: function() {
@@ -761,13 +762,38 @@ kendo_module({
         _createTimezonePopup: function() {
         },
 
-        showDialog: function(options) {
+        _createActionSheetButton: function(options) {
+            options.template = this._actionSheetButtonTemplate;
+            return  this.options.createButton(options);
+        },
 
-            var html = "<ul><li>foo</li><li>bar</li></ul>";
+        showDialog: function(options) {
+            var html = "<ul>";
 
             var target = this.element.find(".k-event[" + kendo.attr("uid") + "='" + options.model.uid + "']");
-            var actionSheet = $(html).appendTo(this.pane.view().element)
-                .kendoMobileActionSheet().data("kendoMobileActionSheet");
+
+            for (var buttonIndex = 0; buttonIndex < options.buttons.length; buttonIndex++) {
+                html+= this._createActionSheetButton(options.buttons[buttonIndex]);
+            }
+
+            html += "</ul>";
+
+            var actionSheet = $(html)
+                .appendTo(this.pane.view().element)
+                .kendoMobileActionSheet({
+                    cancel: this.options.messages.cancel,
+                    close: function() {
+                        this.destroy();
+                    },
+                    command: function(e) {
+                        var buttonIndex = actionSheet.element.find(".k-button a").index($(e.currentTarget));
+                        if (buttonIndex > -1) {
+                            actionSheet.close();
+                            options.buttons[buttonIndex].click();
+                        }
+                    }
+                })
+                .data("kendoMobileActionSheet");
 
             actionSheet.open(target);
 
@@ -915,8 +941,6 @@ kendo_module({
             }
         },
 
-        editRecurring: function() {
-        },
         _views: function() {
             return this.pane.element
                     .find(kendo.roleSelector("view"))
@@ -952,9 +976,6 @@ kendo_module({
 
         editEvent: function(model) {
             this._createPopupEditor(model);
-        },
-
-        editRecurring: function() {
         },
 
         close: function() {
@@ -1945,7 +1966,7 @@ kendo_module({
             this.wrapper.focus();
         },
 
-        _confirmation: function(callback) {
+        _confirmation: function(callback, model) {
             var editable = this.options.editable;
 
             if (editable === true || editable.confirmation !== false) {
@@ -1954,6 +1975,7 @@ kendo_module({
                 var text = typeof editable.confirmation === STRING ? editable.confirmation : DELETECONFIRM;
 
                 this.showDialog({
+                    model: model,
                     text: text,
                     title: messages.deleteWindowTitle,
                     buttons: [
@@ -2150,7 +2172,8 @@ kendo_module({
             if (kendo.support.mobileOS && kendo.mobile.ui.Pane) {
                 editor = that._editor = new MobileEditor(this.wrapper, extend({}, this.options, {
                     timezone: that.dataSource.reader.timezone,
-                    resources: that.resources
+                    resources: that.resources,
+                    createButton: proxy(this._createButton, this)
                 }));
             } else {
                 editor = that._editor = new PopupEditor(this.wrapper, extend({}, this.options, {
@@ -2206,7 +2229,7 @@ kendo_module({
                     if (!cancel) {
                         that._removeEvent(model);
                     }
-                });
+                }, model);
             }
         },
 
@@ -2253,17 +2276,19 @@ kendo_module({
         _deleteRecurringDialog: function(model) {
             var that = this;
 
+            var currentModel = model;
+
             var deleteOcurrence = function() {
-                var occurrence = model.recurrenceId ? model : model.toOccurrence();
+                var occurrence = currentModel.recurrenceId ? currentModel : currentModel.toOccurrence();
                 that._removeEvent(occurrence);
             };
 
             var deleteSeries = function() {
-                if (model.recurrenceId) {
-                    model = that.dataSource.get(model.recurrenceId);
+                if (currentModel.recurrenceId) {
+                    currentModel = that.dataSource.get(currentModel.recurrenceId);
                 }
 
-                that._removeEvent(model);
+                that._removeEvent(currentModel);
             };
 
             var recurrenceMessages = that.options.messages.recurrenceMessages;
