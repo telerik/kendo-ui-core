@@ -426,13 +426,19 @@ kendo_module({
     binders.source = Binder.extend({
         init: function(element, bindings, options) {
             Binder.fn.init.call(this, element, bindings, options);
+
+            var source = this.bindings.source.get();
+
+            if (source instanceof kendo.data.DataSource && options.autoBind !== false) {
+                source.fetch();
+            }
         },
 
         refresh: function(e) {
             var that = this,
                 source = that.bindings.source.get();
 
-            if (source instanceof ObservableArray) {
+            if (source instanceof ObservableArray || source instanceof kendo.data.DataSource) {
                 e = e || {};
 
                 if (e.action == "add") {
@@ -533,6 +539,10 @@ kendo_module({
                 element = this.container(),
                 template = this.template(),
                 parent;
+
+            if (source instanceof kendo.data.DataSource) {
+                source = source.view();
+            }
 
             if (!(source instanceof ObservableArray) && toString.call(source) !== "[object Array]") {
                 if (source.parent) {
@@ -1349,7 +1359,7 @@ kendo_module({
             bind = parseBindings(bind.replace(whiteSpaceRegExp, ""));
 
             if (!target) {
-                options = kendo.parseOptions(element, {textField: "", valueField: "", template: "", valueUpdate: CHANGE, valuePrimitive: false});
+                options = kendo.parseOptions(element, {textField: "", valueField: "", template: "", valueUpdate: CHANGE, valuePrimitive: false, autoBind: true});
                 options.roles = roles;
                 target = new BindingTarget(element, options);
             }

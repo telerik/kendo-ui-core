@@ -224,6 +224,37 @@
                 equal(dom.find("option").val(), "1");
             });
 
+            test("select binding to data source", function() {
+                var dom = $('<select data-template="select-template" data-bind="source:foo"/>');
+
+                kendo.bind(dom, {
+                    foo: new kendo.data.DataSource( {
+                        data: [ {
+                            id: 1,
+                            name: "foo"
+                        }]
+                    } )
+                });
+
+                equal(dom.find("option").text(), "foo");
+                equal(dom.find("option").val(), "1");
+            });
+
+            test("data source data isn't fetched if the auto-bind attribute is set to false", function() {
+                var dom = $('<select data-template="select-template" data-auto-bind="false" data-bind="source:foo"/>');
+
+                kendo.bind(dom, {
+                    foo: new kendo.data.DataSource( {
+                        data: [ {
+                            id: 1,
+                            name: "foo"
+                        }]
+                    } )
+                });
+
+                equal(dom.find("option").length, 0);
+            });
+
             test("pushing items to array creates new option elements without destroying the existing ones", function() {
                 var dom = $('<select data-bind="source:foo"/>');
 
@@ -240,6 +271,28 @@
                 equal(dom.find("option").length, viewModel.foo.length);
                 equal(dom.find("option").eq(2).text(), "3");
                 equal(dom.find("option").eq(3).text(), "4");
+                equal(dom.find("option")[0], option);
+            });
+
+            test("adding items to the data source creates new option elements without destroying the existing ones", function() {
+                var dom = $('<select data-template="select-template" data-bind="source:foo"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: new kendo.data.DataSource( {
+                        data: [
+                            { id: 1, name: "foo" }
+                        ]
+                    } )
+                });
+
+                kendo.bind(dom, viewModel);
+
+                var option = dom.find("option")[0];
+
+                viewModel.foo.add({ id: 2, name: "bar" });
+
+                equal(dom.find("option").length, viewModel.foo.data().length);
+                equal(dom.find("option").eq(1).text(), "bar");
                 equal(dom.find("option")[0], option);
             });
 
@@ -288,6 +341,32 @@
                 equal(dom.find("option")[1], lastOption);
             });
 
+            test("removing items from data source removes option elements without destroing the existing ones", function() {
+                var dom = $('<select data-template="select-template" data-bind="source:foo"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: new kendo.data.DataSource( {
+                        data: [
+                            { id: 1, name: "1" },
+                            { id: 2, name: "2" },
+                            { id: 3, name: "3" },
+                            { id: 4, name: "4" }
+                        ]
+                    } )
+                });
+
+                kendo.bind(dom, viewModel);
+
+                var firstOption = dom.find("option")[0];
+                var lastOption = dom.find("option")[3];
+
+                viewModel.foo.remove(viewModel.foo.at(1));
+
+                equal(dom.find("option").length, viewModel.foo.data().length);
+                equal(dom.find("option")[0], firstOption);
+                equal(dom.find("option")[2], lastOption);
+            });
+
             test("bind array to table appends table rows to the table body", function() {
                 var dom = $('<table data-bind="source:foo"><thead><tr><th></th></tr></thead></table>');
 
@@ -310,7 +389,7 @@
                 equal(dom.find("thead > tr").length, 1);
             });
 
-            test("bind array to unordered list creats list item elements", function() {
+            test("bind array to unordered list creates list item elements", function() {
                 var dom = $('<ul data-bind="source:foo"/>');
 
                 var viewModel = kendo.observable( {
@@ -321,7 +400,7 @@
                 equal(dom.find("li").length, viewModel.foo.length);
             });
 
-            test("bind array to ordered list creats list item elements", function() {
+            test("bind array to ordered list creates list item elements", function() {
                 var dom = $('<ol data-bind="source:foo"/>');
 
                 var viewModel = kendo.observable( {
