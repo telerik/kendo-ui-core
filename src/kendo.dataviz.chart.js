@@ -3020,13 +3020,13 @@ kendo_module({
     var ErrorRangeCalculator = function(errorValue, series, field){
         var that = this,
             data = series.data,
-            val;
+            match;
         that.errorValue = errorValue;
-        if((val = that.standardDeviationRegex.exec(errorValue))){
+        if((match = that.standardDeviationRegex.exec(errorValue))){
             that.valueGetter = that.createValueGetter(series, field);
             var average = that.getAverage(data),
                 deviation = that.getStandardDeviation(data, average, false),
-                multiple = val[1] ? parseFloat(val[1]) : 1,
+                multiple = match[1] ? parseFloat(match[1]) : 1,
                 errorRange = new ErrorRange(average - deviation * multiple, average + deviation * multiple);
             that.globalRange = function(){
                 return errorRange;
@@ -4003,6 +4003,7 @@ kendo_module({
 
             ChartElement.fn.init.call(errorBar, options);
         },
+        
         getAxis: function(){
             var that = this,
                 plotArea = that.plotArea,
@@ -4015,63 +4016,59 @@ kendo_module({
             }
             return axis;
         },
-        reflow: function(targetBox){
-            var that = this;
-            that.box = targetBox;
-            that.valueAxis = that.getAxis();
-        },            
-        createHorizontalErrorBar: function(view, valueBox, centerBox, lineOptions, endCaps, capsWidth){            
-            var capStart = centerBox.y - capsWidth,
-                capEnd = centerBox.y + capsWidth,
-                elements = [];
-            elements.push(view.createLine(valueBox.x1, centerBox.y, valueBox.x2, centerBox.y, lineOptions));
-            if(endCaps){
-                elements.push(view.createLine(valueBox.x1, capStart, valueBox.x1, capEnd, lineOptions));
-                elements.push(view.createLine(valueBox.x2, capStart, valueBox.x2, capEnd, lineOptions));
-            }
-            return elements;
-        },
-        createVerticalErrorBar: function(view, valueBox, centerBox, lineOptions, endCaps, capsWidth){
-           var capStart = centerBox.x - capsWidth,
-               capEnd = centerBox.x + capsWidth,
-               elements = [];
-
-            elements.push(view.createLine(centerBox.x, valueBox.y1, centerBox.x, valueBox.y2, lineOptions));
-            if(endCaps){
-                elements.push(view.createLine(capStart, valueBox.y1, capEnd, valueBox.y1, lineOptions));
-                elements.push(view.createLine(capStart, valueBox.y2, capEnd, valueBox.y2, lineOptions));
-            }
-            return elements;
-        },
         
-        getCapsWidth: function(box, isVertical){
-            var capsWidth = DEFAULT_ERROR_BAR_WIDTH,
-                width,
-                height;
-               
+        reflow: function(targetBox){
+            var linePoints,
+                errorBar = this,                            
+                endCaps = errorBar.options.endCaps,
+                isVertical = errorBar.isVertical,
+                axis = errorBar.getAxis(),
+                valueBox = axis.getSlot(errorBar.low, errorBar.high),
+                centerBox = targetBox.center(),              
+                capsWidth = errorBar.getCapsWidth(targetBox, isVertical),
+                capValue = isVertical ? centerBox.x: centerBox.y,
+                capStart = capValue - capsWidth,
+                capEnd = capValue + capsWidth;
+                 
             if(isVertical){
-                width = math.floor(box.width() / 2);
-                capsWidth = math.min(width, capsWidth) || capsWidth;
+                linePoints = [
+                    Point2D(centerBox.x, valueBox.y1),
+                    Point2D(centerBox.x, valueBox.y2)
+                ];
+                if(endCaps){
+                    linePoints.push(Point2D(capStart, valueBox.y1),
+                        Point2D(capEnd, valueBox.y1),
+                        Point2D(capStart, valueBox.y2),
+                        Point2D(capEnd, valueBox.y2));
+                }
             }
             else{
-                height = math.floor(box.height() / 2);
-                capsWidth = math.min(height, capsWidth) || capsWidth;
-            }
+                linePoints = [
+                    Point2D(valueBox.x1, centerBox.y),
+                    Point2D(valueBox.x2, centerBox.y)
+                ];
+                if(endCaps){
+                    linePoints.push(Point2D(valueBox.x1, capStart),
+                        Point2D(valueBox.x1, capEnd),
+                        Point2D(valueBox.x2, capStart),
+                        Point2D(valueBox.x2, capEnd));
+                }                
+            }  
+
+            errorBar.linePoints = linePoints;
+        },            
+        
+        getCapsWidth: function(box, isVertical){
+            var boxSize = isVertical ? box.width() : box.height(),
+                capsWidth = math.min(math.floor(boxSize / 2), DEFAULT_ERROR_BAR_WIDTH) || DEFAULT_ERROR_BAR_WIDTH;
             
             return capsWidth;
         },
+        
         getViewElements: function(view){
             var errorBar = this,
-                axis = errorBar.valueAxis,
-                low = errorBar.low,
-                high = errorBar.high,
-                box = errorBar.box,
-                valueBox = axis.getSlot(low, high),
-                centerBox = box.center(),
-                isVertical = errorBar.isVertical,
                 options = errorBar.options,
                 line = options.line,
-                capsWidth = errorBar.getCapsWidth(box, isVertical),
                 lineOptions = {
                     stroke: line.color,
                     strokeWidth: line.width,
@@ -4079,17 +4076,18 @@ kendo_module({
                     align: false,
                     dashType: line.dashType
                 },
-                elements;
+                linePoints = errorBar.linePoints,
+                elements = [],
+                idx;
 
-            if(isVertical){               
-               elements = errorBar.createVerticalErrorBar(view, valueBox, centerBox, lineOptions, options.endCaps, capsWidth);
-            }
-            else{               
-               elements = errorBar.createHorizontalErrorBar(view, valueBox, centerBox, lineOptions, options.endCaps, capsWidth);
+            for(idx = 0; idx < linePoints.length; idx+=2){
+                elements.push(view.createLine(linePoints[idx].x, linePoints[idx].y, 
+                    linePoints[idx + 1].x, linePoints[idx + 1].y, lineOptions));
             }
 
             return elements;
         },
+        
         options: {
             animation: {
                 type: FADEIN,
@@ -4668,14 +4666,6 @@ kendo_module({
 
             if (isStacked) {
                 axisName = chart.options.series[0].axis;
-                if(chart.errorTotals){
-                    chart._stackAxisRange = {
-                            min: sparseArrayMin(chart.errorTotals.negative.concat(0)),
-                            max: sparseArrayMax(chart.errorTotals.positive.concat(0))
-                        };
-                    console.log(chart.errorTotals.negative);
-                    console.log(chart.errorTotals.positive);
-                }
                 
                 chart.valueAxisRanges[axisName] = chart._stackAxisRange;                
             }

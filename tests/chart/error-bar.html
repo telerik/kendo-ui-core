@@ -404,6 +404,24 @@
                     return true;
                 }
 
+                function addedScatterPointValues(points, expectedValues, field){
+                    var addedValues = true;
+                    for(var idx = 0;idx < points.length; idx++){
+                        addedValues = addedValues && points[idx][field + "Low"] === expectedValues[idx][field + "Low"] &&
+                            points[idx][field + "High"] === expectedValues[idx][field + "High"];
+                    }
+                    return addedValues;
+                }
+                
+                test("low and high values are added to scatter points", function() {
+                    var scatterChart = new dataviz.ScatterChart({}, {series: [dataArraySeries]}),
+                        points = scatterChart.points,
+                        expectedValues = [{xLow: -2, xHigh: 4, yLow: -1, yHigh: 3},{xLow: -1, xHigh: 5, yLow: 0, yHigh: 4}];
+                    
+                    ok(addedScatterPointValues(points, expectedValues, "x"));
+                    ok(addedScatterPointValues(points, expectedValues, "y"));
+                });                      
+                
                 test("error bars are correctly added to scatter points for array data", function() {
                     var scatterChart = new dataviz.ScatterChart({}, {series: [dataArraySeries]}),
                         seriesData = dataArraySeries.data,
@@ -604,7 +622,48 @@
                     
                     return true;
                 }                   
+ 
+                function addedCategoricalPointValues(points, values){
+                    var addedValues = true;
+                    for(var idx = 0; idx < points.length; idx++){
+                        addedValues = addedValues && points[idx].low === values[idx].low && 
+                            points[idx].high === values[idx].high;
+                    }
+                    return addedValues;
+                }
+ 
+                test("low and high value are added to bar points", function(){
+                    var chart = createCategoricalChart([categoricalArrayData], BAR),
+                        points = chart.points,
+                        expectedValues = [{low: -2, high: 4},{low: -1, high: 5},{low: 0, high: 6}];
+                    
+                    ok(addedCategoricalPointValues(points, expectedValues));
+                });
                 
+                test("low and high value are added to stacked bar points", function(){
+                    var chart = createCategoricalChart([categoricalArrayData,categoricalArrayData], BAR, true),
+                        points = chart.points,
+                        expectedValues = [{low: -2, high: 4},{low: -2, high: 4},{low: -1, high: 5},{low: -1, high: 5},{low: 0, high: 6},{low: 0, high: 6}];
+                    
+                    ok(addedCategoricalPointValues(points, expectedValues));
+                });                
+                
+                test("low and high value are added to line points", function(){
+                    var chart = createCategoricalChart([categoricalArrayData], LINE),
+                        points = chart.points,
+                        expectedValues = [{low: -2, high: 4},{low: -1, high: 5},{low: 0, high: 6}];
+                    
+                    ok(addedCategoricalPointValues(points, expectedValues));
+                }); 
+
+                test("low and high value are added to stacked line points", function(){
+                    var chart = createCategoricalChart([categoricalArrayData,categoricalArrayData], LINE, true),
+                        points = chart.points,
+                        expectedValues = [{low: -2, high: 4},{low: -2, high: 4},{low: -1, high: 5},{low: -1, high: 5},{low: 0, high: 6},{low: 0, high: 6}];
+                    
+                    ok(addedCategoricalPointValues(points, expectedValues));
+                });                  
+ 
                 test("horizontal error bars are correctly added to categorical points for array data", function() {
                     var chart = createCategoricalChart([categoricalArrayData], BAR),
                         points = chart.points,
