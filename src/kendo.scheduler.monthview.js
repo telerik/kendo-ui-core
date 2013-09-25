@@ -273,14 +273,6 @@ kendo_module({
         _touchEditable: function() {
             var that = this;
 
-            that._closeUserEvents = new kendo.UserEvents(that.element, {
-               filter: ".k-scheduler-monthview .k-event a:has(.k-si-close)",
-               tap: function(e) {
-                    that.trigger("remove", { uid: $(e.target).closest(".k-event").attr(kendo.attr("uid")) });
-                    e.preventDefault();
-               }
-            });
-
             if (that.options.editable.create !== false) {
                 that._addUserEvents = new kendo.UserEvents(that.element, {
                     filter: ".k-scheduler-monthview .k-scheduler-content td",
@@ -300,7 +292,7 @@ kendo_module({
 
             if (that.options.editable.update !== false) {
                 that._editUserEvents = new kendo.UserEvents(that.element, {
-                    filter:  ".k-scheduler-monthview .k-event.k-state-selected",
+                    filter:  ".k-scheduler-monthview .k-event",
                     tap: function(e) {
                         if ($(e.event.target).closest("a:has(.k-si-close)").length === 0) {
                             that.trigger("edit", { uid: $(e.target).closest(".k-event").attr(kendo.attr("uid")) });
@@ -950,8 +942,6 @@ kendo_module({
             SchedulerView.fn.destroy.call(this);
 
             if (kendo.support.mobileOS && !this._isMobilePhoneView) {
-                this._closeUserEvents.destroy();
-
                 if (this.options.editable.create !== false) {
                     this._addUserEvents.destroy();
                 }
