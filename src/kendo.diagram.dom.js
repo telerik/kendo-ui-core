@@ -217,14 +217,15 @@ kendo_module({
         init: function (options, model) {
             var that = this, connector, i;
             DiagramElement.fn.init.call(that, options, model);
+            options = that.options;
             that.connectors = [];
-            that.type = that.options.type;
+            that.type = options.type;
             that.shapeVisual = Shape.createShapeVisual(that.options);
             that.visual.append(this.shapeVisual);
-            that.bounds(new Rect(that.options.x, that.options.y, Math.floor(that.options.width), Math.floor(that.options.height)));
-            var length = this.options.connectors.length;
+            that.bounds(new Rect(options.x, options.y, Math.floor(options.width), Math.floor(options.height)));
+            var length = options.connectors.length;
             for (i = 0; i < length; i++) {
-                connector = new Connector(this, this.options.connectors[i]);
+                connector = new Connector(that, options.connectors[i]);
                 that.connectors.push(connector);
             }
             // TODO: Swa added for phase 2; included here already because the GraphAdapter takes it into account
@@ -232,8 +233,8 @@ kendo_module({
             that.isContainer = false;
             that.isCollapsed = false;
             that.id = that.visual.native.id;
-            if (Utils.isDefined(that.options.content)) {
-                that.content(that.options.content);
+            if (Utils.isDefined(options.content)) {
+                that.content(options.content);
             }
         },
         options: {
@@ -414,8 +415,8 @@ kendo_module({
                     return new Circle(shapeOptions);
                 default:
                     var p = new Path(shapeOptions);
-                    p.oWidth = shapeOptions.width;
-                    p.oHeight = shapeOptions.height;
+                    //p.oWidth = shapeOptions.width;
+                    //p.oHeight = shapeOptions.height;
                     return p;
             }
         }

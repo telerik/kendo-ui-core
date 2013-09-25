@@ -432,17 +432,18 @@ kendo_module({
             Visual.fn.init.call(that, document.createElementNS(SVGNS, "path"), options);
         },
         size: function () {
-            if (!this.oWidth || !this.oHeight) {
-                try {
-                    var box = this.native.getBoundingClientRect();
-                    this.oWidth = box.width;
-                    this.oHeight = box.height;
-                }
-                catch (e) {
-                }
+            var originWidth, originHeight;
+            try {
+                var box = this.native.getBBox();
+                originWidth = box.width;
+                originHeight = box.height;
             }
-            var scaleX = this.options.width / this.oWidth,
-                scaleY = this.options.height / this.oHeight,
+            catch (e) {
+                originWidth = this.options.width;
+                originHeight = this.options.height;
+            }
+            var scaleX = this.options.width / originWidth,
+                scaleY = this.options.height / originHeight,
                 x = this.options.x || 0,
                 y = this.options.y || 0;
 
