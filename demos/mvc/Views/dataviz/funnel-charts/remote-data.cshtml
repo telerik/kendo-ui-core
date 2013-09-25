@@ -1,0 +1,46 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../../content/dataviz/js/screen_resolution.json",
+                            dataType: "json"
+                        }
+                    },
+                    sort: {
+                        field: "share",
+                        dir: "desc"
+                    }
+                },
+                legend: {
+                    position: "top"
+                },
+                title: {
+                    text: "1024x768 screen resolution trends"
+                },
+                seriesDefaults: {
+                    type: "funnel",
+                    dependOn:"relation"
+                },
+                series: [{
+                    field: "share",
+                    categoryField: "resolution",
+                    visibleInLegendField: "visibleInLegend",
+                    padding: 10
+                }],
+                tooltip: {
+                    visible: true,
+                    template: "#= dataItem.resolution #: #= value #% (#= dataItem.year #)"
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

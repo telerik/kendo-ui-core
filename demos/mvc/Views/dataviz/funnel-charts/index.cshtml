@@ -2,6 +2,28 @@
     <div class="chart-wrapper">
         <div id="chart" style="background: center no-repeat url('../../content/shared/styles/world-map.png');"></div>
     </div>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Funnel configuration</span>
+            <ul class="options">
+                <li>
+                    <label>Neck Size ratio
+                        <input id="neckSlider" value="0.3" />
+                    </label>
+                </li>
+                <li>
+                    <div class="dependOn">
+                    Segment arrangement based on:
+                        <ul>
+                         <li><label><input type="radio" name="dependOn" value="default" checked /> Equal size </label></li>
+                         <li><label><input type="radio" name="dependOn" value="relation" />Value Relation </label></li>
+                         <li><label><input type="radio" name="dependOn" value="height" /> Height </label></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
     <script>
         function createChart() {
             $("#chart").kendoChart({
@@ -11,9 +33,6 @@
                 },
                 legend: {
                     visible: false
-                },
-                chartArea: {
-                    background: ""
                 },
                 seriesDefaults: {
                     labels: {
@@ -58,7 +77,32 @@
             });
         }
 
-        $(document).ready(createChart);
+        function refresh() {
+            var chart = $("#chart").data("kendoChart"),
+                slider = $('#neckSlider').data("kendoSlider"),
+                funnelSeries = chart.options.series[0];
+                
+            chart.options.transitions = false;
+            funnelSeries.neckSize = slider.value();
+            funnelSeries.dependOn = $('.dependOn :checked').val();
+
+           
+            slider.enable(funnelSeries.dependOn != "relation");
+            chart.refresh();
+        }
+
+        $(document).ready(function () {
+            createChart();
+            $("#neckSlider").kendoSlider({
+                change: refresh,
+                min: 0,
+                max: 1,
+                smallStep: 0.01,
+                largeStep: 0.1
+            });
+
+            $('.dependOn').on('click', ':radio', refresh);
+        });
         $(document).bind("kendo:skinChange", createChart);
     </script>
 </div>

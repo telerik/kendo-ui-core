@@ -810,6 +810,9 @@
     <Content Include="Views\dataviz\step-line-charts\remote-data.cshtml" />
     <Content Include="Views\dataviz\step-line-charts\stacked-line.cshtml" />
     <Content Include="Views\dataviz\funnel-charts\index.cshtml" />
+    <Content Include="Views\dataviz\funnel-charts\remote-data.cshtml" />
+    <Content Include="Views\dataviz\funnel-charts\funnel-labels.cshtml" />
+    <Content Include="Views\dataviz\funnel-charts\local-data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
