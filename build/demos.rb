@@ -112,7 +112,7 @@ end
 
 def demos(options)
 
-    path = options[:path] + "/examples"
+    path = options[:path]
 
     mkdir_p path, :verbose => false
 

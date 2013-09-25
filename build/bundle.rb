@@ -106,8 +106,8 @@ def bundle(options)
 
     if demo_suites
         demo_files = demos( {
-            :path => path,
-            :suites => demo_suites
+            :path => "#{path}/#{demo_suites.values[0]}",
+            :suites => demo_suites.keys[0]
         })
 
         prerequisites = prerequisites + demo_files
