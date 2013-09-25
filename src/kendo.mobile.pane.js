@@ -234,6 +234,6 @@ kendo_module({
         pane.navigate("");
 
         return pane;
-    }
+    };
     ui.plugin(Pane);
 })(window.kendo.jQuery);
