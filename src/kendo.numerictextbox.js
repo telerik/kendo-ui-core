@@ -35,12 +35,9 @@ kendo_module({
         STATEDISABLED = "k-state-disabled",
         ARIA_DISABLED = "aria-disabled",
         ARIA_READONLY = "aria-readonly",
+        INTEGER_REGEXP = /^(-)?(\d*)$/,
         NULL = null,
-        proxy = $.proxy,
-        decimals = {
-            190 : ".",
-            188 : ","
-        };
+        proxy = $.proxy;
 
     var NumericTextBox = Widget.extend({
          init: function(element, options) {
@@ -138,7 +135,7 @@ kendo_module({
 
             that._upArrowEventHandler.unbind("press");
             that._downArrowEventHandler.unbind("press");
-            element.off("keydown" + ns).off("paste" + ns);
+            element.off("keydown" + ns).off("keypress" + ns).off("paste" + ns);
 
             if (!readonly && !disable) {
                 wrapper
@@ -165,6 +162,7 @@ kendo_module({
 
                 that.element
                     .on("keydown" + ns, proxy(that._keydown, that))
+                    .on("keypress" + ns, proxy(that._keypress, that))
                     .on("paste" + ns, proxy(that._paste, that));
 
             } else {
@@ -426,10 +424,54 @@ kendo_module({
             } else if (key == keys.ENTER) {
                 that._change(that.element.val());
             }
+        },
 
-            if (that._prevent(key, e.shiftKey) && !e.ctrlKey) {
+        _keypress: function(e) {
+            if (e.which === 0 || e.keyCode === keys.BACKSPACE) {
+                return;
+            }
+
+            var element = this.element;
+            var character = String.fromCharCode(e.which);
+            var selection = caret(element[0]);
+            var selectionStart = selection[0];
+            var selectionEnd = selection[1];
+            var min = this.options.min;
+
+            var value = element.val();
+
+            value = value.substring(0, selectionStart) + character + value.substring(selectionEnd);
+
+            if ((min !== null && min >= 0 && value.charAt(0) === "-") || !this._numericRegex().test(value)) {
                 e.preventDefault();
             }
+        },
+
+        _numericRegex: function() {
+            var that = this;
+            var options = that.options;
+            var numberFormat = that._format(options.format);
+            var separator = numberFormat[POINT];
+            var precision = options.decimals;
+
+            if (separator === POINT) {
+                separator = "\\" + separator;
+            }
+
+            if (precision === NULL) {
+                precision = numberFormat.decimals;
+            }
+
+            if (precision === 0) {
+                return INTEGER_REGEXP;
+            }
+
+            if (that._separator !== separator) {
+                that._separator = separator;
+                that._floatRegExp = new RegExp("^(-)?(((\\d+(" + separator + "\\d*)?)|(" + separator + "\\d*)))?$");
+            }
+
+            return that._floatRegExp;
         },
 
         _paste: function(e) {
@@ -442,66 +484,6 @@ kendo_module({
                     that._update(value);
                 }
             });
-        },
-
-        _prevent: function(key, shiftKey) {
-            var that = this,
-                element = that.element[0],
-                value = element.value,
-                options = that.options,
-                min = options.min,
-                numberFormat = that._format(options.format),
-                separator = numberFormat[POINT],
-                precision = options.decimals,
-                selection = caret(element),
-                selectionStart = selection[0],
-                selectionEnd = selection[1],
-                textSelected = selectionStart === 0 && selectionEnd === value.length,
-                prevent = true,
-                number;
-
-            if (precision === NULL) {
-                precision = numberFormat.decimals;
-            }
-
-            if ((key > 16 && key < 21) ||
-                (key > 32 && key < 37) ||
-                (key > 47 && key < 58) ||
-                (key > 95 && key < 106) ||
-                 key == keys.INSERT ||
-                 key == keys.DELETE ||
-                 key == keys.LEFT ||
-                 key == keys.RIGHT ||
-                 key == keys.TAB ||
-                 key == keys.BACKSPACE ||
-                 key == keys.ENTER)
-            {
-                prevent = false;
-                if (shiftKey) {
-                    number = parseInt(String.fromCharCode(key), 10);
-                    if (!isNaN(number)) {
-                        number = number + "";
-                        value = value.substring(0, selectionStart) + number + value.substring(selectionEnd);
-                        if (element.maxLength === -1 || element.maxLength >= value.length) {
-                            element.value = value;
-                            caret(element, selectionStart + number.length);
-                        }
-
-                        prevent = true;
-                    }
-                }
-            } else if ((decimals[key] === separator || key == 110) && precision > 0 && (value.indexOf(separator) == -1 || textSelected)) {
-                if (key == 110) {
-                    element.value = value.substring(0, selectionStart) + separator + value.substring(selectionEnd);
-                    caret(element, selectionStart + separator.length);
-                } else if (!shiftKey) {
-                    prevent = false;
-                }
-            } else if ((min === NULL || min < 0) && value.indexOf("-") == -1 && (key == 189 || key == 109 || key == 173) && selectionStart === 0) { //sign
-                prevent = false;
-            }
-
-            return prevent;
         },
 
         _option: function(option, value) {

@@ -25,13 +25,17 @@
 
             QUnit.config.reorder = false;
 
-            $.fn.pressKey = function(key, eventName) {
-                key = key || kendo.keys.DOWN;
-                eventName = eventName || "keydown";
+            $.fn.pressKey = function(key, eventName, options) {
+                if (typeof key === "string") {
+                    key = key.charCodeAt(0);
+                }
 
-                $(this).trigger({ type: eventName, keyCode: key });
+                if ($.isPlainObject(eventName)) {
+                    options = eventName;
+                    eventName = "keypress";
+                }
 
-                return $(this);
+                return this.trigger($.extend({ type: eventName, keyCode: key, which: key }, options) );
             }
 
             QUnit.config.testTimeout = 1000;
@@ -49,7 +53,7 @@
                 var textbox = new NumericTextBox(input);
 
                 stub(textbox, "_step");
-                input.pressKey();
+                input.pressKey(kendo.keys.DOWN, "keydown");
 
                 equal(textbox.calls("_step"), 1);
                 equal(textbox.args("_step")[0], -1);
@@ -59,182 +63,142 @@
                 var textbox = new NumericTextBox(input);
 
                 stub(textbox, "_step");
-                input.pressKey(kendo.keys.UP);
+                input.pressKey(kendo.keys.UP, "keydown");
 
                 equal(textbox.calls("_step"), 1);
                 equal(textbox.args("_step")[0], 1);
             });
 
-            test("typing digit is allowed", function() {
+            test("typing digit is allowed", 0, function() {
                 var textbox = new NumericTextBox(input);
 
-                ok(!textbox._prevent(48 /* 0 */));
+                input.pressKey("4", {
+                    preventDefault: function() {
+                        ok(false);
+                    }
+                });
             });
 
-            test("typing letter is not allowed", function() {
+            test("typing letter is not allowed", 1, function() {
                 var textbox = new NumericTextBox(input);
 
-                ok(textbox._prevent(65 /*a*/));
+                input.pressKey("a", {
+                    preventDefault: function() {
+                        ok(true);
+                    }
+                });
             });
 
-            test("'-' is allowed", function() {
+            test("'-' is allowed", 0, function() {
                 var textbox = new NumericTextBox(input);
 
-                ok(!textbox._prevent(189 /* - */));
-                ok(!textbox._prevent(109 /* - numpad */));
+                input.pressKey("-", {
+                    preventDefault: function() {
+                        ok(false);
+                    }
+                });
             });
 
-            test("Spacebar is not allowed", function() {
+            test("Do not allow '-' if min is bigger than 0", 1, function() {
+                var textbox = new NumericTextBox(input, {
+                    min: 0
+                });
+
+                input.pressKey("-", {
+                    preventDefault: function() {
+                        ok(true);
+                    }
+                });
+            });
+
+            test("Spacebar is not allowed", 1, function() {
                 var textbox = new NumericTextBox(input);
 
-                ok(textbox._prevent(keys.SPACEBAR));
+                input.pressKey(" ", {
+                    preventDefault: function() {
+                        ok(true);
+                    }
+                });
             });
 
-            test("Home/End should be allowed", function() {
+            test("Non-visual keys are allowed", 0, function() {
                 var textbox = new NumericTextBox(input);
 
-                ok(!textbox._prevent(keys.HOME));
-                ok(!textbox._prevent(keys.END));
+                input.val(1).pressKey(0, {
+                    preventDefault: function() {
+                        ok(false);
+                    }
+                });
             });
 
-            test("INSERT and DELETE should be allowed", function() {
+            test("Backspace in Firefox is allowed", 0, function() {
                 var textbox = new NumericTextBox(input);
 
-                ok(!textbox._prevent(45));
-                ok(!textbox._prevent(46));
+                input.pressKey(kendo.keys.BACKSPACE, {
+                    preventDefault: function() {
+                        ok(false);
+                    }
+                });
             });
 
-            test("PAGEUP/PAGEDOWN should be allowed", function() {
+            test("Allow decimal separator '.'", 0, function() {
                 var textbox = new NumericTextBox(input);
 
-                ok(!textbox._prevent(keys.PAGEUP));
-                ok(!textbox._prevent(keys.PAGEDOWN));
+                input.pressKey(".", {
+                    preventDefault: function() {
+                        ok(false);
+                    }
+                });
             });
 
-            test("LEFT/RIGHT arrow should be allowed", function() {
+            test("Do not allow decimal separator ','", 1, function() {
                 var textbox = new NumericTextBox(input);
 
-                ok(!textbox._prevent(keys.LEFT));
-                ok(!textbox._prevent(keys.RIGHT));
+                input.pressKey(",", {
+                    preventDefault: function() {
+                        ok(true);
+                    }
+                });
             });
 
-            test("UP/DOWN arrow should not be allowed", function() {
-                var textbox = new NumericTextBox(input);
-
-                ok(textbox._prevent(keys.UP));
-                ok(textbox._prevent(keys.DOWN));
-            });
-
-            test("BACKSPACE should be allowed", function() {
-                var textbox = new NumericTextBox(input);
-
-                ok(!textbox._prevent(keys.BACKSPACE));
-            });
-
-            test("ENTER should be allowed", function() {
-                var textbox = new NumericTextBox(input);
-
-                ok(!textbox._prevent(keys.ENTER));
-            });
-
-            test("TAB should be allowed", function() {
-                var textbox = new NumericTextBox(input);
-
-                ok(!textbox._prevent(keys.TAB));
-            });
-
-            test("Allow decimal separator '.' and do not allow ','", function() {
-                var textbox = new NumericTextBox(input);
-
-                ok(textbox._prevent("188")); /* "," separator */
-                ok(!textbox._prevent("190")); /* "." separator */
-            });
-
-            test("Allow decimal separator ',' and do not allow '.' if diff culture", function() {
+            test("Allow decimal separator ',' in bg-BG culture", 0, function() {
                 var textbox = new NumericTextBox(input);
 
                 kendo.culture("bg-BG");
 
-                ok(!textbox._prevent("188")); /* "," separator */
-                ok(textbox._prevent("190")); /* "." separator */
+                input.pressKey(",", {
+                    preventDefault: function() {
+                        ok(false);
+                    }
+                });
 
                 kendo.culture("en-US");
             });
 
-            test("Prevent decimal separator if decimals: 0", function() {
-                var textbox = new NumericTextBox(input, {
-                    decimals: 0
-                });
-
-                ok(textbox._prevent("190")); /* "." separator */
-            });
-
-            test("110 key (numpad decimal point) should set '.'", function() {
+            test("Do not allow decimal separator '.' in bg-BG culture", 1, function() {
                 var textbox = new NumericTextBox(input);
-
-                textbox.focus();
-                input.pressKey(110);
-
-                equal(input.val(), ".");
-            });
-
-            test("110 key (numpad decimal point) should set ',' if BG culture", function() {
-                var textbox = new NumericTextBox(input);
-                textbox.focus();
 
                 kendo.culture("bg-BG");
 
-                input.pressKey(110);
-
-                equal(input.val(), ",");
+                input.pressKey(".", {
+                    preventDefault: function() {
+                        ok(true);
+                    }
+                });
 
                 kendo.culture("en-US");
             });
 
-            test("110 key (numpad decimal point) should not modify if decimals:0", function() {
+            test("Prevent decimal separator if decimals: 0", 1, function() {
                 var textbox = new NumericTextBox(input, {
                     decimals: 0
                 });
 
-                textbox.focus();
-                input.pressKey(110);
-
-                equal(input.val(), "");
-            });
-
-            test("NumericTextBox prevents Shift + key but updates input's value'", function() {
-                var textbox = new NumericTextBox(input),
-                    shiftKey = true;
-
-                textbox.focus();
-                ok(textbox._prevent(48 /* 0 */, shiftKey));
-                equal(input.val(), "0");
-            });
-
-            test("NumericTextBox prevents Shift and not number key", function() {
-                var textbox = new NumericTextBox(input),
-                    shiftKey = true;
-
-                textbox.focus();
-                ok(textbox._prevent(192 /* ` */, shiftKey));
-                equal(input.val(), "");
-            });
-
-            test("NumericTextBox prevents '>' symbol", function() {
-                var textbox = new NumericTextBox(input),
-                    shiftKey = true;
-
-                textbox.focus();
-                ok(textbox._prevent(190 /* > */, shiftKey));
-            });
-
-            test("NumericTextBox prevents if value is longer then maxLength", function() {
-                var textbox = new NumericTextBox(input.attr("maxLength", 2).val("10")),
-                    shiftKey = true;
-
-                textbox.focus();
-                ok(textbox._prevent(48 /* 0 */, shiftKey));
-                equal(input.val(), "10");
+                input.pressKey(".", {
+                    preventDefault: function() {
+                        ok(true);
+                    }
+                });
             });
 
             asyncTest("Avoid exception when group separator is empty string", function() {
