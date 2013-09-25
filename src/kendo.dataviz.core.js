@@ -3968,6 +3968,22 @@ kendo_module({
         return math.max(math.min(value, max), min);
     }
 
+    function mwDelta(e) {
+        var origEvent = e.originalEvent,
+            delta = 0;
+
+        if (origEvent.wheelDelta) {
+            delta = -origEvent.wheelDelta / 120;
+            delta = delta > 0 ? math.ceil(delta) : math.floor(delta);
+        }
+
+        if (origEvent.detail) {
+            delta = round(origEvent.detail / 3);
+        }
+
+        return delta;
+    }
+
     // Exports ================================================================
     deepExtend(kendo.dataviz, {
         init: function(element) {
@@ -4051,6 +4067,7 @@ kendo_module({
         last: last,
         limitValue: limitValue,
         measureText: measureText,
+        mwDelta: mwDelta,
         rotatePoint: rotatePoint,
         round: round,
         ceil: ceil,

@@ -71,6 +71,7 @@ kendo_module({
         interpolateValue = dataviz.interpolateValue,
         last = dataviz.last,
         limitValue = dataviz.limitValue,
+        mwDelta = dataviz.mwDelta,
         round = dataviz.round,
         renderTemplate = dataviz.renderTemplate,
         uniqueId = dataviz.uniqueId,
@@ -10948,22 +10949,6 @@ kendo_module({
         }
 
         return ranges;
-    }
-
-    function mwDelta(e) {
-        var origEvent = e.originalEvent,
-            delta = 0;
-
-        if (origEvent.wheelDelta) {
-            delta = -origEvent.wheelDelta / 120;
-            delta = delta > 0 ? math.ceil(delta) : math.floor(delta);
-        }
-
-        if (origEvent.detail) {
-            delta = round(origEvent.detail / 3);
-        }
-
-        return delta;
     }
 
     function evalOptions(options, context, state) {
