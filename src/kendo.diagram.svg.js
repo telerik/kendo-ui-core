@@ -488,12 +488,7 @@ kendo_module({
                 that.native.markerHeight.baseVal.value = o.height;
             }
             this.setAtr("orient", "orientation");
-            if (o.viewBox) {
-                that.native.viewBox.baseVal.height = o.height;
-                that.native.viewBox.baseVal.width = o.viewBox.width;
-                that.native.viewBox.baseVal.x = o.viewBox.x;
-                that.native.viewBox.baseVal.y = o.viewBox.y;
-            }
+            this.setAtr("viewBox", "viewBox");
         }
     });
 
@@ -654,11 +649,11 @@ kendo_module({
     var Circle = VisualBase.extend({
         init: function (options) {
             var that = this;
-            VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "ellipse"), options);
-            if (that.options.radius) {
-                that.options.width = that.options.radius * 2;
-                that.options.height = that.options.radius * 2;
+            if (options && options.radius) {
+                options.width = options.radius * 2;
+                options.height = options.radius * 2;
             }
+            VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "ellipse"), options);
         },
         redraw: function (options) {
             if (options && Utils.isNumber(options.width) && Utils.isNumber(options.height)) {
@@ -669,8 +664,10 @@ kendo_module({
                 o = this.options,
                 rx = o.width / 2 || o.rx, ry = o.height / 2 || o.rx;
 
-            n.rx.baseVal.value = rx;
-            n.ry.baseVal.value = ry;
+            if (rx && ry) {
+                n.rx.baseVal.value = rx;
+                n.ry.baseVal.value = ry;
+            }
 
             if (o.center) {
                 n.cx.baseVal.value = o.center.x;
