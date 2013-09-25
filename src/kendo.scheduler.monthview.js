@@ -217,8 +217,6 @@ kendo_module({
 
             this.createLayout(this._layout());
 
-            this.table.addClass("k-scheduler-monthview");
-
             this._content();
 
             this.refreshLayout();

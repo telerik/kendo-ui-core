@@ -1452,7 +1452,7 @@ kendo_module({
 
             var rowLevels = this.rowLevels = levels(layout, "rows");
 
-            this.table = $('<table ' + cellspacing() + ' class="k-scheduler-layout">');
+            this.table = $('<table ' + cellspacing() + ' class="k-scheduler-layout k-scheduler-' + this.name + 'view">');
 
             var rowCount = rowLevels[rowLevels.length - 1].length;
 
