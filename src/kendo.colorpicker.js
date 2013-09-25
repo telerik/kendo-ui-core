@@ -847,6 +847,10 @@ kendo_module({
 
             icon.off(NS).on("mousedown" + NS, preventDefault);
 
+            wrapper.addClass("k-state-disabled")
+                .removeAttr("tabIndex")
+                .add("*", wrapper).off(NS);
+
             if (enable) {
                 wrapper.removeClass("k-state-disabled")
                     .attr("tabIndex", 0)
@@ -859,10 +863,6 @@ kendo_module({
                     .on(CLICK_NS, that.options.toolIcon ? ".k-tool-icon" : ".k-selected-color", function(){
                         that.trigger("activate");
                     });
-            } else {
-                wrapper.addClass("k-state-disabled")
-                    .removeAttr("tabIndex")
-                    .add("*", wrapper).off(NS);
             }
         },
 
