@@ -15,6 +15,7 @@ kendo_module({
         Widget = ui.Widget,
         OPEN = "open",
         CLOSE = "close",
+        COMMAND = "command",
         BUTTONS = "li>a",
         CONTEXT_DATA = "actionsheetContext",
         WRAP = '<div class="km-actionsheet-wrapper" />',
@@ -47,7 +48,8 @@ kendo_module({
 
         events: [
             OPEN,
-            CLOSE
+            CLOSE,
+            COMMAND
         ],
 
         options: {
@@ -86,7 +88,8 @@ kendo_module({
                 return;
             }
 
-            var action = $(e.currentTarget).data("action");
+            var currentTarget = $(e.currentTarget);
+            var action = currentTarget.data("action");
 
             if (action) {
                 kendo.getter(action)(window)({
@@ -94,6 +97,8 @@ kendo_module({
                     context: this.context
                 });
             }
+
+            this.trigger(COMMAND, { target: this.target, context: this.context, currentTarget: currentTarget });
 
             e.preventDefault();
             this.close();
