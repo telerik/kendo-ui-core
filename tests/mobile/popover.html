@@ -102,6 +102,11 @@
                 visible("#foo");
             });
 
+            test("destroy removes the overlay", 1, function(){
+                popOver.destroy();
+                ok(!popOver.popup.overlay.parent().length);
+            });
+
             test("when in ModalView, its popup is used as parent", 1, function(){
                 root.empty();
 

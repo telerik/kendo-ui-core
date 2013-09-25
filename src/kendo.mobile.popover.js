@@ -140,6 +140,7 @@ kendo_module({
         destroy: function() {
             Widget.fn.destroy.call(this);
             this.popup.destroy();
+            this.overlay.remove();
         },
 
         _activate: function() {
