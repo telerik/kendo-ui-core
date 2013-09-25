@@ -24,6 +24,7 @@
         <script src="../src/kendo.pager.js"></script>
         <script src="../src/kendo.editable.js"></script>
         <script src="../src/kendo.grid.js"></script>
+        <script src="../src/kendo.tooltip.js"></script>
         <script src="../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
@@ -74,6 +75,12 @@
 
             <h3>Grid</h3>
             <div id="grid"></div>
+
+            <h3>ToolTip</h3>
+            <div id="tooltips">
+                <button title="Click me!" class="k-button">Kendo button + tooltip</button>
+                <button title="Click me!" class="btn">Bootstrap button + tooltip</button>
+            </div>
 
             <br />
             <button class="btn btn-lg btn-primary" type="submit">Bootstrap button</button>
@@ -137,6 +144,10 @@
             });
 
             $("#menu").kendoMenu({ openOnClick: true });
+
+            $("#tooltips")
+                .find(".k-button").kendoTooltip().end()
+                .find(".btn").tooltip();
         </script>
     </body>
 </html>
