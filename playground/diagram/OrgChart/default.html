@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Organization chart</title>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            color: #444;
+            font: 10pt/1 "Hoefler Text", "Georgia", Georgia, serif, sans-serif;
+        }
+
+        #Stage {
+            background: #21242c url('images/qfp-bgr.png') no-repeat -400px 0px;
+            color: #000;
+            height: 100%;
+        }
+
+        #Logo {
+            margin: 0px 10px;
+        }
+
+        .k-dropdown {
+            margin: 5px;
+        }
+
+        #Title {
+            color: #FFF;
+            font-size: 25pt;
+            margin: 5px;
+        }
+
+        #splitter {
+            height: 100%;
+        }
+
+        #canvas {
+            background-color: white;
+            height: 100%;
+        }
+
+    </style>
+    <link href="../../../styles/web/kendo.default.css" rel="stylesheet"/>
+    <link href="../../../styles/web/kendo.common.css" rel="stylesheet"/>
+
+    <script src="../../../src/jquery.js"></script>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.data.js"></script>
+    <script src="../../../src/kendo.data.xml.js"></script>
+    <script src="../../../src/kendo.popup.js"></script>
+    <script src="../../../src/kendo.list.js"></script>
+    <script src="../../../src/kendo.dropdownlist.js"></script>
+    <script src="../../../src/kendo.dataviz.core.js"></script>
+    <script src="../../../src/kendo.userevents.js"></script>
+    <script src="../../../src/kendo.draganddrop.js"></script>
+    <script src="../../../src/kendo.slider.js"></script>
+    <script src="../../../src/kendo.resizable.js"></script>
+    <script src="../../../src/kendo.splitter.js"></script>
+    <script src="../../../src/kendo.listview.js"></script>
+    <script src="../../../src/kendo.treeview.js"></script>
+    <script src="../../../src/kendo.popup.js"></script>
+    <script src="../../../src/kendo.list.js"></script>
+    <script src="../../../src/kendo.comboBox.js"></script>
+    <script src="../../../src/kendo.tooltip.js"></script>
+
+    <script src="../../../src/kendo.diagram.utils.js"></script>
+    <script src="../../../src/kendo.diagram.math.js"></script>
+    <script src="../../../src/kendo.diagram.layout.js"></script>
+    <script src="../../../src/kendo.diagram.svg.js"></script>
+    <script src="../../../src/kendo.diagram.services.js"></script>
+    <script src="../../../src/kendo.diagram.extensions.js"></script>
+    <script src="../../../src/kendo.diagram.dom.js"></script>
+</head>
+<body>
+
+<script type="text/x-kendo-tmpl" id="template">
+    #= item.name # #= item.lastName #
+</script>
+
+<script type="text/javascript">
+    function getVisual(data) {
+        var g = new kendo.diagram.Group({
+            autoSize: true
+        });
+        var r = new kendo.diagram.Rectangle({
+            width: 150,
+            height: 60,
+            background: "#bdcbde"
+        });
+        g.append(r);
+        var im = new kendo.diagram.Image({
+            source: data.image,
+            height: 40,
+            width: 40,
+            x: 10,
+            y: 10
+        });
+        g.append(im);
+        var fn = new kendo.diagram.TextBlock({
+            text: data.name,
+            fontSize: 16,
+            x: 50,
+            y: 20
+        });
+        var ln = new kendo.diagram.TextBlock({
+            text: data.lastName,
+            fontSize: 16,
+            x: 50,
+            y: 40
+        });
+        g.append(fn);
+        g.append(ln);
+        return g;
+    }
+
+    $(function () {
+        var diagram;
+
+        function createDiagram(template) {
+            var options = {
+                dataSource: dataSource,
+                autoBind: false
+            }
+            if (kendo.diagram.Utils.isFunction(window[template])) {
+                options.visualTemplate = window[template];
+            }
+            else {
+                options.template = template;
+            }
+            return $("#canvas").kendoDiagram(options).data("kendoDiagram");
+        }
+
+        $("#layoutButton").bind("click", layout);
+        $("#retemplateButton").bind("click", retemplate);
+
+        function layout() {
+            diagram.select(false);
+            diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                    {
+                        TreeLayoutType: eval($("#Layouts").val()),
+                        animate: true
+                    });
+        }
+
+        function retemplate() {
+            if (diagram) {
+                diagram.destroy();
+            }
+            diagram = createDiagram($("#templates").val());
+            dataSource.fetch();
+            diagram.layout();
+        }
+
+        var layouts = [
+            {value: "kendo.diagram.TreeLayoutType.TreeDown", text: "TreeDown"},
+            {value: "kendo.diagram.TreeLayoutType.TreeUp", text: "TreeUp"},
+            {value: "kendo.diagram.TreeLayoutType.TreeLeft", text: "TreeLeft"},
+            {value: "kendo.diagram.TreeLayoutType.TreeRight", text: "TreeRight"},
+            {value: "kendo.diagram.TreeLayoutType.RadialTree", text: "RadialTree"},
+            {value: "kendo.diagram.TreeLayoutType.TipOverTree", text: "TipOverTree"},
+            {value: "kendo.diagram.TreeLayoutType.MindmapVertical", text: "MindmapVertical"},
+            {value: "kendo.diagram.TreeLayoutType.MindmapHorizontal", text: "MindmapHorizontal"}
+        ];
+
+        $("#Layouts").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: layouts,
+            change: function () {
+                layout();
+            }
+        });
+
+        var templates = [
+            {value: "getVisual", text: "Extended"},
+            {value: "#= item.name # #= item.lastName #", text: "Simple"}
+        ];
+
+        $("#templates").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: templates,
+            change: function () {
+                retemplate();
+            }
+        });
+
+        $("#splitter").kendoSplitter({
+            panes: [
+                { collapsible: false },
+                { collapsible: false, size: "15%" }
+            ]
+        });
+
+        var dataSource = new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: "org.json",
+                dataType: "json"
+            },
+            schema: {
+                model: {
+                    children: "items"
+                }
+            }
+        });
+
+        diagram = createDiagram($("#templates").val());
+
+        $("#treeview").kendoTreeView({
+            dataSource: dataSource,
+            //checkboxes: true,
+            dataTextField: "name",
+            template: "#= item.name # #= item.lastName #",
+            select: function (e) {
+                diagram.select(false);
+                var data = this.dataItem(e.node);
+                for (var i = 0; i < diagram.shapes.length; i++) {
+                    var sh = diagram.shapes[i];
+                    if (sh.options.context.name == data.name) { // lame
+                        sh.select(true);
+                        diagram.bringIntoView(sh, {animate: true, align: "center middle"});
+                    }
+                }
+            },
+            dataBound: function () {
+                this.expand(".k-item");
+            },
+            autoBind: true
+        });
+
+        setTimeout(function () {
+            layout();
+        }, 400);
+    })
+</script>
+<div id="Stage">
+    <div id="toolbarDiv">
+        <span id="Title">Organization chart...</span>
+        <input id="Layouts" value="1"/>
+        <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
+        <input id="templates" value="1"/>
+        <input type="button" class="diagramCommandBtn" id="retemplateButton" title="Re-template" value="Re-template"/>
+    </div>
+    <div id="splitter">
+        <div id="canvas"></div>
+        <div>
+            <div style="color: steelblue; margin: 5px;">Select to highlight...</div>
+            <div id="treeview"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

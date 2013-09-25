@@ -1,0 +1,523 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>JS Diagram </title>
+    <style type="text/css">
+        html, body, #mainDiv {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #canvasDiv {
+
+        }
+
+        #canvas {
+            height: 95%;
+        }
+
+        .menu-text {
+            margin-right: 10px;
+        }
+
+        input.diagramCommandBtn {
+            border: 1px gray solid;
+            background-color: gray;
+            color: white;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        #toolBoxDiv {
+            float: left;
+        }
+
+        k-slider {
+            margin-left: 10px;
+        }
+
+        .shape {
+            float: left;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .shape:hover {
+            background-color: rgba(0, 0, 0, 0.25);
+        }
+
+        .shape svg {
+            width: 100px;
+            height: 100px;
+        }
+
+        .shape h3 {
+            padding: 5px;
+            font-size: .9em;
+            overflow: hidden;
+            font-weight: normal;
+            max-width: 100px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 10px;
+        }
+
+        #splitter {
+            height: 90%;
+        }
+
+        #toolbarDiv {
+        }
+
+        #zoomPanel {
+            display: inline-block;
+        }
+    </style>
+
+    <link href="../../styles/web/kendo.common.css" rel="stylesheet"/>
+    <link href="../../styles/web/kendo.default.css" rel="stylesheet"/>
+
+    <script src="../../src/jquery.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.popup.js"></script>
+    <script src="../../src/kendo.list.js"></script>
+    <script src="../../src/kendo.dropdownlist.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/kendo.userevents.js"></script>
+    <script src="../../src/kendo.draganddrop.js"></script>
+    <script src="../../src/kendo.slider.js"></script>
+    <script src="../../src/kendo.resizable.js"></script>
+    <script src="../../src/kendo.splitter.js"></script>
+    <script src="../../src/kendo.listview.js"></script>
+
+    <script src="../../src/kendo.diagram.utils.js"></script>
+    <script src="../../src/kendo.diagram.math.js"></script>
+    <script src="../../src/kendo.diagram.layout.js"></script>
+    <script src="../../src/kendo.diagram.svg.js"></script>
+    <script src="../../src/kendo.diagram.services.js"></script>
+    <script src="../../src/kendo.diagram.extensions.js"></script>
+    <script src="../../src/kendo.diagram.dom.js"></script>
+</head>
+<body>
+<div id="mainDiv">
+    <div id="toolbarDiv">
+        <input type="button" class="diagramCommandBtn" id="undoButton" title="Undo (CTRL+Z)" value="Undo"/>
+        <input type="button" class="diagramCommandBtn" id="redoButton" title="Redo (CTRL+Y)" value="Redo"/>
+        <input type="button" class="diagramCommandBtn" id="deleteButton" title="Delete (DEL)" value="Delete"/>
+        <input type="button" class="diagramCommandBtn" id="selectAllButton" title="Select All (CTRL+A)"
+               value="SelectAll"/>
+        <span class="menu-text">Layout:</span><input id="Layouts" value="1"/>
+        <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
+        <input type="button" class="diagramCommandBtn" id="bringButton" title="Bring to Front" value="Bring to Front"/>
+        <input type="button" class="diagramCommandBtn" id="sendBackButton" title="Send to Back" value="Send to Back"/>
+        <span class="menu-text">Start-cap:</span><input id="StartCap" value="1"/>
+        <span class="menu-text">End-cap:</span><input id="EndCap" value="1"/>
+    </div>
+    <div id="splitter">
+        <div id="toolBoxDiv">
+            <!--<h2>Shapes</h2>-->
+            <div id="toolBox"></div>
+        </div>
+        <div id="canvasDiv">
+            <!--<h2>Diagram</h2>-->
+            <div id="zoomPanel">
+                <input id="slider"/>
+            </div>
+            <div id="canvas"></div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/x-kendo-tmpl" id="template">
+    <div class="shape">
+        <svg>
+            #= new XMLSerializer().serializeToString(kendo.diagram.Shape.createShapeVisual(options).native) #
+        </svg>
+        <h3>#:options.name#</h3>
+    </div>
+</script>
+
+<script>
+var shapesSource = [
+    {
+        options: {
+            name: "Rectangle",
+            data: "m0,0 L0,100 L100,100 L100,0z",
+            background: "steelblue"
+        }
+    },
+    {
+        options: {
+            name: "Circle",
+            data: "Circle",
+            rx: 50,
+            ry: 50,
+            background: "steelblue"
+        }
+    },
+    {
+        options: {
+            name: "Triangle",
+            data: "m0,100 L100,100 L50,0z",
+            background: "steelblue",
+            connectors: [
+                {
+                    name: "Top",
+                    position: function (shape) {
+                        return shape.transformPoint(shape.bounds().top());
+                    }
+                },
+                {
+                    name: "Right",
+                    position: function (shape) {
+                        return shape.transformPoint(shape.bounds().bottomRight());
+                    }
+                },
+                {
+                    name: "Left",
+                    position: function (shape) {
+                        return shape.transformPoint(shape.bounds().bottomLeft());
+                    }
+                },
+                {
+                    name: "Auto"
+                }
+            ]
+        }
+    },
+    {
+        options: {
+            name: "SequentialData",
+            data: "m50.21875,97.4375l0,0c-26.35457,0 -47.71875,-21.25185 -47.71875,-47.46875l0,0c0,-26.21678 21.36418,-47.46875 47.71875,-47.46875l0,0c12.65584,0 24.79359,5.00155 33.74218,13.90339c8.94862,8.90154 13.97657,20.97617 13.97657,33.56536l0,0c0,12.58895 -5.02795,24.66367 -13.97657,33.56542l13.97657,0l0,13.90333l-47.71875,0z",
+            background: "steelblue",
+            connectors: [
+                {
+                    name: "Top",
+                    description: "Top Connector"
+                },
+                {
+                    name: "Right",
+                    description: "Right Connector"
+                },
+                {
+                    name: "Bottom",
+                    description: "Bottom Connector"
+                },
+                {
+                    name: "BottomRight",
+                    description: "Bottom Connector"
+                },
+                {
+                    name: "Left",
+                    Description: "Left Connector"
+                },
+                {
+                    name: "Auto",
+                    Description: "Auto Connector",
+                    position: function (shape) {
+                        return shape.getPosition("center");
+                    }
+                }
+            ],
+            content: "Custom ctrs"
+        }
+    },
+    {
+        options: {
+            name: "Data",
+            data: "m2.5,97.70305l19.07013,-95.20305l76.27361,0l-19.0702,95.20305l-76.27354,0z",
+            background: "steelblue"
+        }
+    },
+    {
+        options: {
+            name: "Wave",
+            data: "m2.5,15.5967c31.68356,-45.3672 63.37309,45.3642 95.05661,0l0,81.65914c-31.68353,45.36404 -63.37305,-45.36732 -95.05661,0l0,-81.65914z",
+            background: "steelblue"
+        }
+    }
+];
+
+var Shapes = {
+};
+
+for (var i = 0; i < shapesSource.length; i++) {
+    shape = shapesSource[i].options;
+    Shapes[shape.name] = shape;
+}
+
+$(function () {
+    $("#canvas").kendoDiagram({
+        zoom: function (e) {
+            slider.value(this._zoom);
+        },
+        select: function (e) {
+            var item = e.item, scIndex = 0 , ecIndex = 0;
+            if (item instanceof kendo.diagram.Connection) {
+                for (var i = 0; i < caps.length; i++) {
+                    var cap = caps[i];
+                    if (cap.value == item.options.startCap) {
+                        scIndex = i;
+                    }
+                    if (cap.value == item.options.endCap) {
+                        ecIndex = i;
+                    }
+                }
+
+                var sc = $("#StartCap").data("kendoDropDownList");
+                var ec = $("#EndCap").data("kendoDropDownList");
+
+                sc.select(scIndex);
+                ec.select(ecIndex);
+            }
+        }
+    });
+    var diagram = $("#canvas").data("kendoDiagram"),
+            kendo = window.kendo,
+            Point = kendo.diagram.Point;
+
+    var seq = Shapes.SequentialData;
+    seq.text = "Sequential Data.";
+    var shape1 = diagram.addShape(new Point(100, 100), seq);
+    shape2 = diagram.addShape(new Point(100, 400), Shapes.Wave);
+    shape2.content("content");
+
+    var shape3 = diagram.addShape(new Point(370, 400), Shapes.Rectangle);
+    var shape4 = diagram.addShape(new Point(400, 200), kendo.deepExtend({content: "Custom connectors"}, Shapes.Triangle));
+    var topCor = shape2.getConnector("Auto");
+    var topCor2 = shape3.getConnector("Auto");
+    var bottomCor = shape1.getConnector("Auto");
+    var bottomCor2 = shape4.getConnector("Auto");
+    diagram.connect(bottomCor, topCor);
+    var con2 = diagram.connect(bottomCor, topCor2);
+    diagram.connect(bottomCor, bottomCor2);
+    diagram.connect(new Point(200, 600), new Point(400, 800), {content: "Floating connection" });
+    con2.content("Connection Label");
+
+    // Org Chart also...
+    var s1 = diagram.addShape(new Point(800, 0), Shapes.Rectangle);
+
+    var s2 = diagram.addShape(new Point(600, 200), Shapes.Rectangle);
+    var s3 = diagram.addShape(new Point(1000, 200), Shapes.Rectangle);
+
+    var s4 = diagram.addShape(new Point(600, 400), Shapes.Rectangle);
+    var s5 = diagram.addShape(new Point(1000, 400), Shapes.Rectangle);
+    var s6 = diagram.addShape(new Point(800, 400), Shapes.Rectangle);
+
+    diagram.connect(s1, s2);
+    diagram.connect(s1, s3);
+    diagram.connect(s2, s4);
+    diagram.connect(s3, s5);
+    diagram.connect(s3, s6);
+
+    var list = $("#toolBox").kendoListView({
+        dataSource: {
+            data: shapesSource
+        },
+        template: kendo.template($("#template").html())
+        //selectable: "single"
+    });
+
+    list.kendoDraggable({
+        filter: "div[role=option]",
+        hint: function (row) {
+            var svg = row.children("svg"),
+                    list = $("#toolBox").data("kendoListView"),
+                    item = list.dataSource.getByUid(row.data().uid);
+            svg = svg.clone();
+            svg.data("data", item.options);
+            return svg;
+        }
+    });
+
+    $("#splitter").kendoSplitter({
+        panes: [
+            { collapsible: false },
+            { collapsible: false, size: "75%" }
+        ]
+    });
+
+    $("#undoButton").click(function (e) {
+        diagram.undo();
+    });
+    $("#redoButton").click(function (e) {
+        diagram.redo();
+    });
+    $("#deleteButton").click(function (e) {
+        diagram.remove(diagram.select(), true);
+    });
+    $("#selectAllButton").click(function (e) {
+        diagram.select(true);
+    });
+    $("#bringButton").click(function (e) {
+        diagram.bringToFront();
+    });
+    $("#sendBackButton").click(function (e) {
+        diagram.sendToBack();
+    });
+    $("#layoutButton").click(function (e) {
+        onLayoutChanged();
+    });
+
+    function onZoom(e) {
+        diagram.zoom(e.value);
+    }
+
+    var slider = $("#slider").kendoSlider({
+        min: 0.55,
+        value: 1,
+        max: 2,
+        smallStep: .1,
+        largeStep: .2,
+        tickPlacement: "none",
+        change: onZoom,
+        slide: onZoom
+    }).data("kendoSlider");
+
+    var layouts = [
+        {value: "TreeDown", text: "Tree Down"},
+        {value: "TreeUp", text: "Tree Up"},
+        {value: "TreeLeft", text: "Tree Left"},
+        {value: "TreeRight", text: "Tree Right"},
+        {value: "RadialTree", text: "Radial Tree"},
+        {value: "TipOverTree", text: "Tip-Over Tree"},
+        {value: "LayeredHorizontal", text: "Layered Horizontal"},
+        {value: "LayeredVertical", text: "Layered Vertical"},
+        {value: "ForceDirected", text: "Force directed"},
+        {value: "MindmapVertical", text: "Mindmap Vertical"},
+        {value: "MindmapHorizontal", text: "Mindmap Horizontal"}
+    ];
+    var onLayoutChanged = function (e) {
+        switch ($("#Layouts").data("kendoDropDownList").value()) {
+            case "TreeDown":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeDown,
+                            animate: true
+                        });
+                break;
+            case "TreeUp":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeUp,
+                            animate: true
+                        });
+                break;
+            case "TreeLeft":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeLeft,
+                            animate: true
+                        });
+                break;
+            case "TreeRight":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeRight,
+                            animate: true
+                        });
+                break;
+            case "RadialTree":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.RadialTree
+                        });
+                break;
+            case "TipOverTree":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.TipOverTree,
+                            animate: true
+                        });
+                break;
+            case "LayeredHorizontal":
+                diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
+                        {
+                            layeredLayoutType: kendo.diagram.LayeredLayoutType.Right,
+                            animate: true
+                        });
+                break;
+            case "LayeredVertical":
+                diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
+                        {
+                            layeredLayoutType: kendo.diagram.LayeredLayoutType.Down,
+                            animate: true
+                        });
+                break;
+            case "ForceDirected":
+                diagram.layout(kendo.diagram.LayoutTypes.ForceDirectedLayout,
+                        {
+                            animate: true
+                        });
+                break;
+            case "MindmapVertical":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapVertical,
+                            animate: true
+                        });
+                break;
+            case "MindmapHorizontal":
+                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                        {
+                            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal,
+                            animate: true
+                        });
+                break;
+        }
+
+    };
+
+    var dropDown = $("#Layouts").kendoDropDownList({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: layouts
+    });
+    dropDown.bind("change", onLayoutChanged);
+
+    $("#Layouts").data("kendoDropDownList").select(function (dataItem) {
+        return dataItem.value === "TreeRight";
+    });
+    onLayoutChanged();
+
+    var caps = [
+        {value: kendo.diagram.Markers.none},
+        {value: kendo.diagram.Markers.arrowStart},
+        {value: kendo.diagram.Markers.filledCircle},
+        {value: kendo.diagram.Markers.arrowEnd}
+    ];
+
+    $("#StartCap").kendoDropDownList({
+        dataTextField: "value",
+        dataValueField: "value",
+        dataSource: caps,
+        select: function (e) {
+            var that = this;
+            $.each(diagram.select(), function () {
+                if (this instanceof kendo.diagram.Connection) {
+                    this.redraw({startCap: that.dataItem(e.item.index()).value});
+                }
+            });
+        }
+    });
+
+    $("#EndCap").kendoDropDownList({
+        dataTextField: "value",
+        dataValueField: "value",
+        dataSource: caps,
+        select: function (e) {
+            var that = this;
+            $.each(diagram.select(), function () {
+                if (this instanceof kendo.diagram.Connection) {
+                    this.redraw({endCap: that.dataItem(e.item.index()).value});
+                }
+            });
+        }
+    });
+});
+</script>
+</html>
