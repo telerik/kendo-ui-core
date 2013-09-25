@@ -78,9 +78,11 @@ kendo_module({
             that.events = new kendo.UserEvents(element, {
                 filter: options.filter,
                 surface: options.surface,
+                minHold: options.minHold,
                 multiTouch: options.multiTouch,
                 allowSelection: true,
-                press: proxy(that, "_touchstart"),
+                press: eventProxy("touchstart"),
+                hold: eventProxy("hold"),
                 tap: proxy(that, "_tap"),
                 gesturestart: gestureEventProxy("gesturestart"),
                 gesturechange: gestureEventProxy("gesturechange"),
@@ -126,31 +128,14 @@ kendo_module({
             doubleTapTimeout: 800
         },
 
-        _cancelHold: function() {
-            clearTimeout(this.holdTimeout);
-        },
-
         _triggerTouch: function(type, e) {
             this.trigger(type, { touch: e.touch, event: e.event });
-        },
-
-        _touchstart: function(e) {
-            var that = this;
-
-            that._triggerTouch("touchstart", e);
-
-            that._cancelHold();
-            that.holdTimeout = setTimeout(function() {
-                that._triggerTouch("hold", e);
-            }, that.options.minHold);
         },
 
         _tap: function(e) {
             var that = this,
                 lastTap = that.lastTap,
                 touch = e.touch;
-
-            that._cancelHold();
 
             if (lastTap &&
                 (touch.endTime - lastTap.endTime < that.options.doubleTapTimeout) &&
@@ -166,12 +151,10 @@ kendo_module({
         },
 
         _dragstart: function(e) {
-            this._cancelHold();
             this._triggerTouch("dragstart", e);
         },
 
         _swipestart: function(e) {
-            this._cancelHold();
             if (abs(e.x.velocity) * 2 >= abs(e.y.velocity)) {
                 e.sender.capture();
             }
@@ -183,8 +166,6 @@ kendo_module({
                 touch = e.touch,
                 duration = e.event.timeStamp - touch.startTime,
                 direction = touch.x.initialDelta > 0 ? "right" : "left";
-
-            that._cancelHold();
 
             if (
                 abs(touch.x.initialDelta) >= options.minXDelta &&
