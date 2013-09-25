@@ -1055,16 +1055,8 @@ var RangeUtils = {
     expand: function (range) {
         var result = range.cloneRange();
 
-        var startContainer = result.startContainer;
-        var endContainer = result.endContainer;
-
-        if (startContainer == endContainer && isDataNode(startContainer)) {
-            result.selectNode(startContainer);
-            return result;
-        }
-
-        startContainer = startContainer.childNodes[result.startOffset === 0 ? 0 : result.startOffset - 1];
-        endContainer = endContainer.childNodes[result.endOffset];
+        var startContainer = result.startContainer.childNodes[result.startOffset === 0 ? 0 : result.startOffset - 1];
+        var endContainer = result.endContainer.childNodes[result.endOffset];
 
         if (!isDataNode(startContainer) || !isDataNode(endContainer)) {
             return result;

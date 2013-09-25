@@ -152,6 +152,18 @@
                 equal(editor.state("fontName"), "Arial");
             });
 
+            test("state returns true when in non-expandable range", function() {
+                selectRangeInValue(editor, "<em>foo||:</em>");
+
+                ok(editor.state("italic"));
+            });
+
+            test("state returns true in unordered lists", function() {
+                selectRangeInValue(editor, "<ul><li>||</li></ul>");
+
+                ok(editor.state("insertUnorderedList"));
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

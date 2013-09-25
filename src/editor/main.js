@@ -586,11 +586,11 @@ kendo_module({
             if (finder) {
                 range = this.getRange();
 
-                if (RangeUtils.isExpandable(range)) {
-                    range = RangeUtils.expand(range);
-                }
-
                 textNodes = RangeUtils.textNodes(range);
+
+                if (!textNodes.length && range.collapsed) {
+                    textNodes = [range.startContainer];
+                }
 
                 return finder.getFormat ? finder.getFormat(textNodes) : finder.isFormatted(textNodes);
             }
