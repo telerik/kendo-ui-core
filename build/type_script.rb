@@ -120,6 +120,7 @@ module CodeGen::TypeScript
 
             result
         end
+
     end
 
     class Event < CodeGen::Event
@@ -140,8 +141,27 @@ module CodeGen::TypeScript
         end
     end
 
+    FIELD_OVERRIDES = {
+        'Grid' => {
+            'columns' => 'Array<GridColumn>'
+        }
+    }
+
     class Field < CodeGen::Field
-        include Declaration
+        def type_script_type
+            raise "#{name} doesn't have a type specified" unless @type
+
+            if FIELD_OVERRIDES.has_key?(@owner.name)
+                overrides = FIELD_OVERRIDES[@owner.name]
+
+                if overrides.has_key?(@name)
+                    return overrides[name]
+                end
+            end
+
+            CodeGen::TypeScript.type(@type)
+        end
+
         def type_script_declaration
 
             "#{name}: #{type_script_type};"
