@@ -165,13 +165,14 @@ kendo_module({
         _showOn: function(e) {
             var that = this;
 
+            var currentTarget = $(e.currentTarget);
             if (that.options.showOn && that.options.showOn.match(/click|focus/)) {
-                that._show($(e.currentTarget));
+                that._show(currentTarget);
             } else {
                 clearTimeout(that.timeout);
 
                 that.timeout = setTimeout(function() {
-                    that._show($(e.currentTarget));
+                    that._show(currentTarget);
                 }, that.options.showAfter);
             }
         },
