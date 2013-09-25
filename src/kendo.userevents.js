@@ -16,10 +16,12 @@ kendo_module({
         extend = $.extend,
         OS = support.mobileOS,
         invalidZeroEvents = OS && OS.android,
+        DEFAULT_MIN_HOLD = 800,
         DEFAULT_THRESHOLD = support.browser.ie ? 5 : 0, // WP8 and W8 are very sensitive and always report move.
 
         // UserEvents events
         PRESS = "press",
+        HOLD = "hold",
         SELECT = "select",
         START = "start",
         MOVE = "move",
@@ -158,8 +160,11 @@ kendo_module({
                 _finished: false
             });
 
-            that.notifyInit = function() {
+            that.press = function() {
                 that._trigger(PRESS, touchInfo);
+                that._holdTimeout = setTimeout(function() {
+                    that._trigger(HOLD, touchInfo);
+                }, userEvents.minHold);
             };
         },
 
@@ -202,6 +207,7 @@ kendo_module({
                 that._trigger(TAP, touchInfo);
             }
 
+            clearTimeout(that._holdTimeout);
             that._trigger(RELEASE, touchInfo);
 
             that.dispose();
@@ -230,6 +236,8 @@ kendo_module({
         },
 
         _start: function(touchInfo) {
+            clearTimeout(this._holdTimeout);
+
             this.startTime = now();
             this._moved = true;
             this._trigger(START, touchInfo);
@@ -292,6 +300,7 @@ kendo_module({
             options = options || {};
             filter = that.filter = options.filter;
             that.threshold = options.threshold || DEFAULT_THRESHOLD;
+            that.minHold = options.minHold || DEFAULT_MIN_HOLD;
             that.touches = [];
             that._maxTouches = options.multiTouch ? 2 : 1;
             that.allowSelection = options.allowSelection;
@@ -335,6 +344,7 @@ kendo_module({
 
             that.bind([
             PRESS,
+            HOLD,
             TAP,
             START,
             MOVE,
@@ -493,7 +503,7 @@ kendo_module({
 
                 touch = new Touch(that, target, touch);
                 that.touches.push(touch);
-                touch.notifyInit();
+                touch.press();
 
                 if (that._isMultiTouch()) {
                     that.notify("gesturestart", {});

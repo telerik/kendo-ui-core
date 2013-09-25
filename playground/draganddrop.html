@@ -3,6 +3,7 @@
     <head>
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
         <script src="../src/kendo.draganddrop.js"></script>
     </head>
     <body>
@@ -10,10 +11,12 @@
     <div id="droptarget"><div class="test1">Start dragging.</div><div class="test2">Start dragging.</div></div>
 
     <script>
+        function draggableOnHold(e) {
+            $("#droptarget").html("<div class='test1'>(Drop here)</div><div class='test2'>(Drop here)</div>");
+        }
+
         function draggableOnDragStart(e) {
             $("#draggable").addClass("hollow");
-
-            $("#droptarget").html("<div class='test1'>(Drop here)</div><div class='test2'>(Drop here)</div>");
         }
 
         function droptargetOnDragEnter(e) {
@@ -45,7 +48,9 @@
                 hint: function() {
                     return $("#draggable").clone();
                 },
+                hold: draggableOnHold,
                 dragstart: draggableOnDragStart,
+                holdToDrag: true,
                 dragend: draggableOnDragEnd
             });
 

@@ -182,6 +182,52 @@ test("raises start if distance is more than threshold option", 1, function(){
     move(14, 24);
 });
 
+asyncTest("triggers hold after a while", 1, function(){
+    userEvents.bind("hold", function(e) {
+        ok(true);
+    });
+
+    press(10, 20);
+
+    setTimeout(function() {
+        start();
+        release(10, 20);
+    }, 1000);
+});
+
+asyncTest("does not trigger hold if released before that", 0, function(){
+    userEvents.bind("hold", function(e) {
+        ok(false);
+    });
+
+    press(10, 20);
+
+    setTimeout(function() {
+        release(10, 20);
+    }, 500);
+
+    setTimeout(function() {
+        start();
+    }, 1000);
+});
+
+asyncTest("does not trigger hold if moved before that", 0, function(){
+    userEvents.bind("hold", function(e) {
+        ok(false);
+    });
+
+    press(10, 20);
+
+    setTimeout(function() {
+        move(15, 25);
+    }, 500);
+
+    setTimeout(function() {
+        start();
+        release(15, 25);
+    }, 1000);
+});
+
 module("nested elements", {
     setup: function() {
         element = $('<div id="parent"><div class="foo" /><div id="child"><div class="foo" /></div></div>');
