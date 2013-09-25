@@ -447,10 +447,10 @@ kendo_module({
                     }
                 }
             },
-            setup: function(rule, date) {
+            setup: function(rule, eventStartDate) {
                 if (!rule.weekDays) {
                     rule.weekDays = [{
-                        day: date.getDay(),
+                        day: eventStartDate.getDay(),
                         offset: 0
                     }];
                 }
@@ -492,7 +492,7 @@ kendo_module({
                     BaseFrequency.fn.normalize(options);
                 }
             },
-            setup: function(rule, date, eventStartDate) {
+            setup: function(rule, eventStartDate, date) {
                 if (!rule.monthDays && !rule.weekDays) {
                     date.setDate(eventStartDate.getDate());
                 }
@@ -528,7 +528,7 @@ kendo_module({
                     }
                 }
             },
-            setup: function() {} //TODO: check if I need to call Monthly normalize method here too ???
+            setup: function() {}
         }),
         frequencies = {
             "hourly" : new HourlyFrequency(),
@@ -880,7 +880,7 @@ kendo_module({
         rule._startTime = startTime = kendo.date.toInvariantTime(start);
 
         if (freq.setup) {
-            freq.setup(rule, start, eventStart);
+            freq.setup(rule, eventStart, start);
         }
 
         freq.limit(start, end, rule);
