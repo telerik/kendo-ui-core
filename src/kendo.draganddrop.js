@@ -29,6 +29,7 @@ kendo_module({
 
         // Draggable events
         DRAGSTART = "dragstart",
+        HOLD = "hold",
         DRAG = "drag",
         DRAGEND = "dragend",
         DRAGCANCEL = "dragcancel",
@@ -570,12 +571,15 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
+            that._activated = false;
+
             that.userEvents = new UserEvents(that.element, {
                 global: true,
                 stopPropagation: true,
                 filter: that.options.filter,
                 threshold: that.options.distance,
                 start: proxy(that._start, that),
+                hold: proxy(that._hold, that),
                 move: proxy(that._drag, that),
                 end: proxy(that._end, that),
                 cancel: proxy(that._cancel, that)
@@ -591,6 +595,7 @@ kendo_module({
         },
 
         events: [
+            HOLD,
             DRAGSTART,
             DRAG,
             DRAGEND,
@@ -604,6 +609,7 @@ kendo_module({
             cursorOffset: null,
             axis: null,
             container: null,
+            holdToDrag: false,
             dropped: false
         },
 
@@ -643,6 +649,11 @@ kendo_module({
                 container = options.container,
                 hint = options.hint;
 
+            if (options.holdToDrag && !that._activated) {
+                that.userEvents.cancel();
+                return;
+            }
+
             that.currentTarget = e.target;
             that.currentTargetOffset = getOffset(that.currentTarget);
 
@@ -679,6 +690,16 @@ kendo_module({
             }
 
             $(document).on(KEYUP, that.captureEscape);
+        },
+
+        _hold: function(e) {
+            this.currentTarget = e.target;
+
+            if (this._trigger(HOLD, e)) {
+                this.userEvents.cancel();
+            } else {
+                this._activated = true;
+            }
         },
 
         _drag: function(e) {
@@ -730,6 +751,8 @@ kendo_module({
 
         _cancel: function() {
             var that = this;
+
+            that._activated = false;
 
             if (that.hint && !that.dropped) {
                 setTimeout(function() {
