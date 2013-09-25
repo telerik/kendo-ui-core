@@ -1072,6 +1072,24 @@
                     equal(observable.date.getSeconds(), 40);
                 });
             }
+
+            var number = $('<input type="number">');
+
+            if (number[0].type == "number") {
+                test("changing the value of input type number updates the view model with a valid Number", function() {
+                    var dom = $('<input type="number" data-bind="value: number">');
+
+                    var observable = kendo.observable({
+                        number: 0
+                    });
+
+                    kendo.bind(dom, observable);
+
+                    dom.val("3.14").trigger("change");
+
+                    strictEqual(observable.number, 3.14);
+                });
+            }
         </script>
 
         <script id="array-template" type="text/x-kendo-template">

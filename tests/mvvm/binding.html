@@ -1361,6 +1361,20 @@
                     equal(dom.val(), "2013-06-03T20:30:52");
                 });
             }
+
+            var number = $('<input type="number">');
+
+            if (number[0].type == "number") {
+                test("input type number value binding", function() {
+                    var dom = $('<input type="number" data-bind="value: number">');
+
+                    kendo.bind(dom, {
+                        number: 3.14
+                    });
+
+                    equal(dom.val(), "3.14");
+                });
+            }
         </script>
 
         <script id="mobile-widget-template" type="text/x-kendo-template">
