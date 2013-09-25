@@ -2621,8 +2621,6 @@ kendo_module({
         scaleRange: function(delta) {
             var axis = this,
                 options = axis.options,
-                baseUnit = options.baseUnit,
-                weekStartDay = options.weekStartDay,
                 rounds = math.abs(delta),
                 from = options.min,
                 to = options.max,
@@ -2639,9 +2637,6 @@ kendo_module({
                     from = addTicks(from, -step);
                     to = addTicks(to, step);
                 }
-
-                from = addDuration(from, 0, baseUnit, weekStartDay);
-                to = addDuration(to, 1, baseUnit, weekStartDay);
             }
 
             return { min: from, max: to };

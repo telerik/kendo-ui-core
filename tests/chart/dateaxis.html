@@ -1458,13 +1458,13 @@
                     deepEqual(range, dateAxis.range());
                 });
 
-                test("scaleRange with negative delta shrinks range", function() {
+                test("scaleRange with negative delta exoands range", function() {
                     var range = dateAxis.scaleRange(-2);
                     deepEqual(range.min, new Date("2012/01/25 22:04:48"));
                     deepEqual(range.max, new Date("2012/02/15 01:55:12"));
                 });
 
-                test("scaleRange with positive delta expands range", function() {
+                test("scaleRange with positive delta shrinks range", function() {
                     var range = dateAxis.scaleRange(2);
                     deepEqual(range.min, new Date("2012/01/31 12:28:48"));
                     deepEqual(range.max, new Date("2012/02/09 11:31:12"));
@@ -1600,16 +1600,16 @@
                     deepEqual(range.max, new Date("2012/02/12"));
                 });
 
-                test("scaleRange with negative delta shrinks range", function() {
+                test("scaleRange with negative delta expands range", function() {
                     var range = dateAxis.scaleRange(-2);
-                    deepEqual(range.min, new Date("2012/01/15"));
-                    deepEqual(range.max, new Date("2012/02/26"));
+                    deepEqual(range.min, new Date("2012/01/25 22:04:48"));
+                    deepEqual(range.max, new Date("2012/02/15 01:55:12"));
                 });
 
-                test("scaleRange with positive delta expands range", function() {
+                test("scaleRange with positive delta shrinks range", function() {
                     var range = dateAxis.scaleRange(2);
-                    deepEqual(range.min, new Date("2012/01/29"));
-                    deepEqual(range.max, new Date("2012/02/12"));
+                    deepEqual(range.min, new Date("2012/01/31 12:28:48"));
+                    deepEqual(range.max, new Date("2012/02/9 11:31:12"));
                 });
 
                 // ------------------------------------------------------------
