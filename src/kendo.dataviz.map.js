@@ -27,7 +27,9 @@ kendo_module({
         dataviz = kendo.dataviz,
         Matrix = dataviz.Matrix,
         Point = dataviz.Point2D,
+        ViewFactory = dataviz.ViewFactory.current,
         deepExtend = kendo.deepExtend,
+        defined = dataviz.defined,
         limit = dataviz.limitValue;
 
     // Constants ==============================================================
@@ -42,21 +44,60 @@ kendo_module({
             var map = this;
 
             Widget.fn.init.call(map, element);
-            map.scrollWrap = map.element.append($("<div class='k-map-scroll'></div>"));
-            map.layers = new ObservableArray([]);
 
             map._initOptions(options);
+            map.scrollWrap = $("<div></div>").appendTo(map.element);
+
+            map.layers = new ObservableArray([]);
             map._renderLayers();
+
+            var scroller = map.scroller = new kendo.mobile.ui.Scroller(map.scrollWrap);
+            scroller.bind("scroll", proxy(map._scroll, map));
+            map._resetScroller();
+
+            map.crs = new EPSG3857();
         },
 
         options: {
             name: "Map",
-            layers: []
+            layers: [],
+            minScale: 256
         },
 
         events:[
             "reset" // TODO: Redraw?
         ],
+
+        zoom: function(level) {
+            if (defined(level)) {
+                this.options.view.zoom = level;
+
+                this._resetScroller();
+                this.trigger("reset");
+            } else {
+                return this.options.view.zoom;
+            }
+        },
+
+        scale: function() {
+            return this.options.minScale * pow(2, this.options.view.zoom);
+        },
+
+        layerPoint: function(location) {
+            return this.crs.toPoint(location, this.scale());
+        },
+
+        _scroll: function(e) {
+            this.trigger("drag");
+        },
+
+        _resetScroller: function() {
+            var scroller = this.scroller;
+            scroller.dimensions.y.makeVirtual();
+            scroller.dimensions.x.makeVirtual();
+            scroller.dimensions.x.virtualSize(0, this.scale());
+            scroller.dimensions.y.virtualSize(0, this.scale());
+        },
 
         _renderLayers: function() {
             var defs = this.options.layers,
@@ -67,7 +108,17 @@ kendo_module({
 
             for (var i = 0; i < defs.length; i++) {
                 // TODO: Either pass layer type directly or create from a factory based on type id
-                var l = new TileLayer(this, defs[i]);
+                var l;
+                var scale = this.scale();
+                var options = deepExtend({}, defs[i], {
+                    width: scale,
+                    height: scale
+                });
+                if (options.type === "tile") {
+                    l = new TileLayer(this, options);
+                } else {
+                    l = new VectorLayer(this, options);
+                }
                 layers.push();
             }
 
@@ -345,9 +396,98 @@ kendo_module({
     });
 
     var VectorLayer = Class.extend({
-        init: function() {
+        init: function(map, options) {
+            var layer = this;
 
+            layer.map = map;
+            layer.view = ViewFactory.create(
+                options, options.renderAs
+            );
+
+            this._initOptions(options);
+            this.element = $("<div class='k-layer'></div>").appendTo(
+                map.scrollWrap // TODO: API for allocating a scrollable element?
+            );
+
+            layer.movable = new kendo.ui.Movable(layer.element);
+
+            map.bind("reset", proxy(layer.reset, layer));
+            map.bind("drag", proxy(layer._drag, layer));
+
+            if (layer.options.url) {
+                $.getJSON(layer.options.url, proxy(layer.load, layer));
+            }
         },
+
+        polygon: function(coords, style) {
+            for (var i = 0; i < coords.length; i++) {
+                var ring = coords[i];
+                var ringPoints = [];
+
+                for (var j = 0; j < ring.length; j++) {
+                    var point = ring[j];
+                    var l = Location.fromLngLat(point);
+                    var p = this.map.layerPoint(l);
+
+                    ringPoints.push(p);
+                }
+
+                var poly = this.view.createPolyline(ringPoints, true, {
+                    stroke: "#ff0000",
+                    strokeWidth: 1,
+                    strokeOpacity: 0.5,
+                    fill: "#006ec8",
+                    fillOpacity: 0.2,
+                    align: false
+                });
+
+                this.view.children.push(poly);
+            }
+        },
+
+        reset: function(e) {
+            if (this._data) {
+                this.view.children = [];
+                this.load(this._data);
+            }
+        },
+
+        _render: function() {
+            this.view.renderTo(this.element[0]);
+        },
+
+        load: function(data) {
+            this._data = data;
+
+            if (data.type == "FeatureCollection") {
+                var items = data.features;
+
+                for (var i = 0; i < items.length; i++) {
+                    var feature = items[i];
+                    if (feature.geometry) {
+                        this._draw(feature.geometry, feature.properties);
+                    }
+                }
+
+                this._render();
+            }
+        },
+
+        _draw: function(geometry, props) {
+            var coords = geometry.coordinates;
+            if (geometry.type === "Polygon") {
+                this.polygon(coords);
+            } else if (geometry.type === "MultiPolygon") {
+                for (var i = 0; i < coords.length; i++) {
+                    this.polygon(coords[i]);
+                }
+            }
+        },
+
+        _drag: function(e) {
+            var scroller = this.map.scroller;
+            this.movable.moveTo({x: -scroller.scrollLeft, y: -scroller.scrollTop});
+        }
     });
 
     // Helper methods =========================================================

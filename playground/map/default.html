@@ -27,79 +27,16 @@
                 -webkit-user-select: none;
                 -ms-user-select: none;
             }
+
+            #map .km-scroll-wrapper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+            }
         </style>
     </head>
     <body>
-        <div id="map"></div>
-        <div id="view">
-            <div id="vector-layer" class="layer"> </div>
-        </div>
-        <script>
-            var Point = kendo.dataviz.Point2D;
-            var Location = kendo.dataviz.map.Location;
-            var proj = new kendo.dataviz.map.projections.SphericalMercator();
-            var crs = new kendo.dataviz.map.crs.EPSG3857();
-
-            var TILE_SIZE = 256;
-            var zoomLevel = 2;
-            var scale = 256 * Math.pow(2, zoomLevel);
-
-            // VECTOR
-            var view = new kendo.dataviz.SVGView({ width: scale, height: scale });
-
-            function drawPolygon(coords) {
-                for (var i = 0; i < coords.length; i++) {
-                    var ring = coords[i];
-                    var ringPoints = [];
-
-                    for (var j = 0; j < ring.length; j++) {
-                        var point = ring[j];
-                        var l = Location.fromLngLat(point);
-                        var p = crs.toPoint(l, scale);
-
-                        ringPoints.push(p);
-                    }
-
-                    var poly = view.createPolyline(ringPoints, true, {
-                        stroke: "#ff0000",
-                        strokeWidth: 1,
-                        strokeOpacity: 0.5,
-                        fill: "#006ec8",
-                        fillOpacity: 0.2,
-                        align: false
-                    });
-                    view.children.push(poly);
-                }
-            }
-
-            function draw(geometry, props) {
-                var coords = geometry.coordinates;
-                if (geometry.type === "Polygon") {
-                    drawPolygon(coords);
-                } else if (geometry.type === "MultiPolygon") {
-                    for (var i = 0; i < coords.length; i++) {
-                        drawPolygon(coords[i]);
-                    }
-                }
-            }
-
-            $.getJSON("countries.geo.json", function(data) {
-                if (data.type == "FeatureCollection") {
-                    var items = data.features;
-
-                    for (var i = 0; i < items.length; i++) {
-                        var feature = items[i];
-                        if (feature.geometry) {
-                            draw(feature.geometry, feature.properties);
-                        }
-                    }
-
-                    view.renderTo($("#vector-layer")[0]);
-                }
-            });
-
-        </script>
-
+        <div id="map" style="width: 1024px; height: 1024px;"></div>
         <script>
             $("#map").kendoMap({
                 view: {
@@ -110,6 +47,10 @@
                     type: "tile",
                     url: "tiles/#= zoom #/#= x #/#= y #.png",
                     copyright: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+                }, {
+                    type: "json",
+                    url: "countries.geo.json",
+                    copyright: "&copy; FooBar"
                 }],
                 markers: [{
                     position: [51.5, -0.09],
@@ -117,8 +58,17 @@
                     open: true // ?
                 }]
             });
+
+            var map = $("#map").data("kendoMap");
+
+            $(document).on("mousewheel", function(e) {
+                var delta = kendo.dataviz.mwDelta(e);
+                e.preventDefault();
+
+                delta = delta > 0 ? -1 : 1;
+                map.zoom(map.zoom() + delta);
+            });
         </script>
-        <div id="map"></div>
     </body>
 </html>
 
