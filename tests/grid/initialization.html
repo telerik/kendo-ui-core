@@ -365,6 +365,29 @@
                     - grid.wrapper.find(".k-grid-pager").outerHeight());
             });
 
+            test("expander div is added if no records", function() {
+                var grid = new Grid($(table).wrap('<div style="width:200px"></div>'), { scrollable: true, dataSource: [], columns: [{field:"foo", width:300}]}),
+                    expander = grid.table.parent().children('.k-grid-content-expander');
+
+                equal(expander.length, 1);
+                equal(expander.width(), grid.thead.width());
+            });
+
+            test("expander div is removed if records exist", function() {
+                var grid = new Grid($(table).wrap('<div style="width:200px"></div>'), { scrollable: true, dataSource: [], columns: [{field:"foo", width:300}]}),
+                    dataSource = new kendo.data.DataSource({
+                        data: [
+                            { foo: "bar" }
+                        ]
+                    });
+
+                grid.setDataSource(dataSource);
+
+                var expander = grid.table.parent().children('.k-grid-content-expander');
+
+                equal(expander.length, 0);
+            });
+
             test("grid height is applied to the wrapper element", function() {
                 var grid = new Grid(table, { height: 100, dataSource: [{foo:"bar"}] });
 

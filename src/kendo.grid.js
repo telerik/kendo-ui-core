@@ -2351,6 +2351,33 @@ kendo_module({
             }
         },
 
+        _setContentWidth: function() {
+            var that = this,
+                hiddenDivClass = 'k-grid-content-expander',
+                hiddenDiv = '<div class="' + hiddenDivClass + '"></div>',
+                resizable = that.resizable,
+                expander;
+
+            if (that.options.scrollable) {
+                expander = that.table.parent().children('.' + hiddenDivClass);
+                that._setContentWidthHandler = proxy(that._setContentWidth, that);
+                if (!that.dataSource.view().length) {
+                    if (!expander[0]) {
+                        expander = $(hiddenDiv).appendTo(that.table.parent());
+                        if (resizable) {
+                            resizable.bind("resize", that._setContentWidthHandler);
+                        }
+                    }
+                    expander.width(that.thead.width());
+                } else if (expander[0]) {
+                    expander.remove();
+                    if (resizable) {
+                        resizable.unbind("resize", that._setContentWidthHandler);
+                    }
+                }
+            }
+        },
+
         _setContentHeight: function() {
             var that = this,
                 options = that.options,
@@ -3664,6 +3691,8 @@ kendo_module({
             that._footer();
 
             that._setContentHeight();
+
+            that._setContentWidth();
 
             if (currentIndex >= 0) {
                 that._removeCurrent();
