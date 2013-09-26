@@ -235,6 +235,69 @@
 
                 ok(dom.data("kendoMobileButton").wrapper.css("display") != "none", "display is not 'none'");
             });
+
+            test("disabled button has km-state-disabled class", 1, function() {
+                var dom = $("<button/>");
+
+                var button = new Button(dom);
+                button.enable(false);
+
+                ok(button.element.hasClass("km-state-disabled"), "has km-state-disabled class");
+            });
+
+            test("widget understands disabled attribute", 1, function() {
+                var dom = $('<button data-role="button" disabled></button>');
+
+                kendo.mobile.init(dom);
+                var button = dom.data("kendoMobileButton");
+
+                ok(button.element.hasClass("km-state-disabled"), "has km-state-disabled class");
+            });
+
+            test("enable methods enables and disables the widget", 2, function() {
+                var dom = $("<button/>");
+
+                var button = new Button(dom);
+                button.enable(false);
+
+                ok(button.element.hasClass("km-state-disabled"), "has km-state-disabled class");
+
+                button.enable(true);
+                ok(!button.element.hasClass("km-state-disabled"), "does not have km-state-disabled class");
+            });
+
+            test("does not active css class on 'down' for disabled button", 1, function() {
+                var dom = $("<button>foo</button>");
+
+                var button = new Button(dom);
+                button.enable(false);
+
+                dom.trigger(MOUSEDOWN);
+
+                ok(!dom.hasClass("km-state-active"), "Should not set the active class");
+            });
+
+            test("click event of disabled button is not rised", 0, function() {
+                var dom = $("<button>foo</button>");
+
+                var button = new Button(dom);
+
+                button.bind("click", function() {
+                    ok(false, "Should not raise the click event");
+                });
+
+                button.enable(false);
+                click(dom);
+            });
+
+            test("disabled button has disabled attribute", 1, function() {
+                var dom = $("<button>foo</button>");
+
+                var button = new Button(dom);
+                button.enable(false);
+
+                ok(button.element.is(":disabled"), "has disabled attribute");
+            });
         </script>
     </body>
 </html>

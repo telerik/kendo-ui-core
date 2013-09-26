@@ -14,7 +14,9 @@ kendo_module({
         support = kendo.support,
         os = support.mobileOS,
         ANDROID3UP = os.android && os.flatVersion >= 300,
-        CLICK = "click";
+        CLICK = "click",
+        DISABLED = "disabled",
+        DISABLEDSTATE = "km-state-disabled";
 
     function highlightButton(widget, event, highlight) {
         $(event.target).closest(".km-button,.km-detail").toggleClass("km-state-active", highlight);
@@ -37,6 +39,9 @@ kendo_module({
 
             that._wrap();
             that._style();
+
+            that.options.enable = that.options.enable && !that.element.attr(DISABLED);
+            that.enable(that.options.enable);
 
             that._userEvents = new kendo.UserEvents(that.element, {
                 press: function(e) { that._activate(e); },
@@ -69,7 +74,8 @@ kendo_module({
             name: "Button",
             icon: "",
             style: "",
-            badge: ""
+            badge: "",
+            enable: true
         },
 
         badge: function (value) {
@@ -89,6 +95,24 @@ kendo_module({
             return badge.html();
         },
 
+        enable: function(enable) {
+            var element = this.element;
+
+            if(typeof enable == "undefined") {
+                enable = true;
+            }
+
+            this.options.enable = enable;
+
+            if(enable) {
+                element.removeAttr(DISABLED);
+            } else {
+                element.attr(DISABLED, DISABLED);
+            }
+
+            element.toggleClass(DISABLEDSTATE, !enable);
+        },
+
         _timeoutDeactivate: function(e) {
             if (!this.deactivateTimeoutID) {
                 this.deactivateTimeoutID = setTimeout(highlightButton, 500, this, e, false);
@@ -99,10 +123,12 @@ kendo_module({
             var activeElement = document.activeElement,
                 nodeName = activeElement ? activeElement.nodeName : "";
 
-            highlightButton(this, e, true);
+            if(this.options.enable) {
+                highlightButton(this, e, true);
 
-            if (nodeName == "INPUT" || nodeName == "TEXTAREA") {
-                activeElement.blur(); // Hide device keyboard
+                if (nodeName == "INPUT" || nodeName == "TEXTAREA") {
+                    activeElement.blur(); // Hide device keyboard
+                }
             }
         },
 
@@ -110,6 +136,10 @@ kendo_module({
             var that = this;
 
             if (e.which > 1) {
+                return;
+            }
+
+            if(!that.options.enable) {
                 return;
             }
 
