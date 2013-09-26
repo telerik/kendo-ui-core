@@ -77,7 +77,7 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TBuilder;
         }
 
-        internal TBuilder ModelMetadata(ModelMetadata modelMetadata)
+        public TBuilder ModelMetadata(ModelMetadata modelMetadata)
         {
             Component.ModelMetadata = modelMetadata;
 
