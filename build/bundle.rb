@@ -105,9 +105,11 @@ def bundle(options)
     end
 
     if demo_suites
+
         demo_files = demos( {
-            :path => path,
-            :suites => demo_suites
+            :path => "#{path}/#{demo_suites[:dir]}",
+            :suites => demo_suites[:suites],
+            :template_dir => demo_suites[:template_dir]
         })
 
         prerequisites = prerequisites + demo_files

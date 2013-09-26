@@ -133,7 +133,10 @@ bundle :name => 'complete.commercial',
        },
        :type_script => { %w(web mobile dataviz framework) => 'all' },
        :changelog => %w(web mobile dataviz framework),
-       :demos => %w(web dataviz mobile),
+       :demos => {
+           :suites => %w(web dataviz mobile),
+           :dir => 'examples'
+       },
        :product => 'Kendo UI Complete',
        :upload_as_internal_build => true,
        :contents => {
@@ -161,7 +164,10 @@ bundle :name => 'complete.trial',
        },
        :type_script => { %w(web mobile dataviz framework) => 'all' },
        :changelog => %w(web mobile dataviz framework),
-       :demos => %w(web dataviz mobile),
+       :demos => {
+           :suites => %w(web dataviz mobile),
+           :dir => 'examples'
+       },
        :contents => {
             'js' => COMPLETE_MIN_JS + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -175,7 +181,10 @@ bundle :name => 'web.commercial',
        :intellisense => { %w(web framework) => 'web' },
        :type_script => { %w(web framework) => 'web' },
        :changelog => %w(web framework),
-       :demos => %w(web),
+       :demos => {
+           :suites => %w(web),
+           :dir => 'examples'
+       },
        :product => 'Kendo UI Web',
        :upload_as_internal_build => true,
        :contents => {
@@ -191,7 +200,10 @@ bundle :name => 'web.open-source',
        :intellisense => { %w(web framework) => 'web' },
        :type_script => { %w(web framework) => 'web' },
        :changelog => %w(web framework),
-       :demos => %w(web),
+       :demos => {
+           :suites => %w(web),
+           :dir => 'examples'
+       },
        :contents => {
             'js' => WEB_MIN_JS + WEB_MIN_JS_MAP + JQUERY_MAP,
             'styles' => WEB_MIN_CSS,
@@ -206,7 +218,10 @@ bundle :name => 'mobile.commercial',
        :intellisense => { %w(mobile framework) => 'mobile' },
        :type_script => { %w(mobile framework) => 'mobile' },
        :changelog => %w(mobile framework),
-       :demos => %w(mobile),
+       :demos => {
+           :suites => %w(mobile),
+           :dir => 'examples'
+       },
        :product => 'Kendo UI Mobile',
        :upload_as_internal_build => true,
        :eula => 'mobile',
@@ -225,7 +240,10 @@ bundle :name => 'dataviz.commercial',
        :type_script => { %w(dataviz framework) => 'dataviz' },
        :changelog => %w(dataviz framework),
        :eula => 'dataviz',
-       :demos => %w(dataviz),
+       :demos => {
+           :suites => %w(dataviz),
+           :dir => 'examples'
+       },
        :product => 'Kendo UI DataViz',
        :upload_as_internal_build => true,
        :contents => {
@@ -254,6 +272,11 @@ bundle :name => 'aspnetmvc.trial',
        },
        :type_script => { %w(web mobile dataviz framework) => 'all' },
        :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :demos => {
+           :suites => %w(web dataviz mobile),
+           :dir => 'wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/html',
+           :template_dir => 'mvc'
+       },
        :contents => {
             'js' => TRIAL_MIN_JS + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
@@ -312,6 +335,11 @@ bundle :name => 'aspnetmvc.commercial',
        },
        :type_script => { %w(web mobile dataviz framework) => "all" },
        :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :demos => {
+           :suites => %w(web dataviz mobile),
+           :dir => 'wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/html',
+           :template_dir => 'mvc'
+       },
        :product => 'Kendo UI Complete for ASP.NET MVC',
        :upload_as_internal_build => true,
        :contents => {
