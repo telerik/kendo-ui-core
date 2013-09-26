@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <script src="../../../scripts/jquery.min.js"></script>
+    <script src="../../../scripts/kendo.mobile.min.js"></script>
+    <script src="../../content/shared/js/console.js"></script>
+    <link href="../../../content/mobile/kendo.common.min.css" rel="stylesheet" />
+    <link href="../../../content/mobile/kendo.mobile.all.min.css" rel="stylesheet" />
+    <style>
+        [href*=index], #back-button
+        {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <%= body %>
+
+    <script>
+        window.kendoMobileApplication = new kendo.mobile.Application(document.body);
+    </script>
+</body>
+</html>

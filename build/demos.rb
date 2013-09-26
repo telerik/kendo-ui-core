@@ -114,6 +114,8 @@ def demos(options)
 
     path = options[:path]
 
+    template_dir = (options[:template_dir] || '.')
+
     mkdir_p path, :verbose => false
 
     suites = options[:suites]
@@ -150,7 +152,7 @@ def demos(options)
 
         end
 
-        template = ERB.new(File.read("build/templates/#{suite}-example.html.erb"))
+        template = ERB.new(File.read("build/templates/#{template_dir}/#{suite}-example.html.erb"))
 
         # Create offline demos by processing the corresponding .cshtml files
         rule /#{path}\/#{suite}\/.+\.html/ => lambda { |t| find_demo_src(t, path) } do |t|
