@@ -3,37 +3,74 @@
 <head>
     <title>Kendo UI for ASP.NET MVC - Offline Examples</title>
     <link href="@Url.Content("~/Content/shared/suite.css")" rel="stylesheet">
+    <style>
+        #page > h2 {
+            padding: 2em 0 0;
+        }
+        .box h2 a:hover {
+            text-decoration: none;
+        }
+        .box h2 span {
+            display: block;
+            font-size: .7em;
+        }
+        #page > ul > li.box {
+            clear: none;
+            display: inline-block;
+            float: none;
+            min-width: 290px;
+            max-width: 300px;
+        }
+        hr {
+            height: 1px;
+            line-height: 1px;
+            background: #DFDFDF;
+            border: 0;
+        }
+        #page .suite .imgPlate,
+        #page .suite .box {
+            border-width: 0;
+            box-shadow: none;
+        }
+        #page .suite {
+            text-align: center;
+        }
+        #page .suite .box h2 {
+            margin-top: 1em;
+        }
+    </style>
 </head>
 <body>
     <div id="page">
         <h2>Kendo UI for ASP.NET MVC Demos</h2>
-        <ul id="suites">
+        <ul class="suite">
              <li class="box">
                 <a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite", suite = "web" }))" class="imgPlate"><img src="@Url.Content("~/Content/shared/demos-web.png")" /></a>
-                <h2><a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite", suite = "web" }))">Web examples</a></h2>
+                <h2><a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite", suite = "web" }))">Kendo UI Web <span>ASP.NET MVC demos</span></a></h2>
              </li>
              <li class="box">
                 <a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite", suite = "mobile" }))" class="imgPlate"><img src="@Url.Content("~/Content/shared/demos-mobile.png")" /></a>
-                <h2><a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite", suite = "mobile" }))">Mobile examples</a></h2>
+                <h2><a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite", suite = "mobile" }))">Kendo UI Mobile <span>ASP.NET MVC demos</span></a></h2>
              </li>
              <li class="box">
                 <a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite", suite = "dataviz" }))" class="imgPlate"><img src="@Url.Content("~/Content/shared/demos-dataviz.png")" /></a>
-                <h2><a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite", suite = "dataviz" }))">DataViz examples</a></h2>
+                <h2><a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite", suite = "dataviz" }))">Kendo UI DataViz <span>ASP.NET MVC demos</span></a></h2>
              </li>
         </ul>
+        <hr />
         <h2>Kendo UI Complete HTML/JS demos</h2>
-        <ul id="suites">
+        <ul class="suite">
              <li class="box">
-                <a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite", suite = "web" }))" class="imgPlate"><img src="@Url.Content("~/Content/shared/demos-web.png")" /></a>
-                <h2><a href="html/web/index.html">Web examples</a></h2>
+                <a href="html/web/index.html", new { controller = "Suite", suite = "web" }))" class="imgPlate"><img src="@Url.Content("~/Content/shared/demos-web.png")" /></a>
+                <h2><a href="html/web/index.html">Kendo UI Web <span>HTML/JS demos</span></a></h2>
              </li>
              <li class="box">
-                <a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite", suite = "mobile" }))" class="imgPlate"><img src="@Url.Content("~/Content/shared/demos-mobile.png")" /></a>
-                <h2><a href="html/mobile/index.html">Mobile examples</a></h2>
+                <a href="html/mobile/index.html", new { controller = "Suite", suite = "mobile" }))" class="imgPlate"><img src="@Url.Content("~/Content/shared/demos-mobile.png")" /></a>
+                <h2><a href="html/mobile/index.html">Kendo UI Mobile <span>HTML/JS demos</span></a></h2>
              </li>
              <li class="box">
-                <a href="@(Url.RouteUrl("RazorDefault", new { controller = "Suite", suite = "dataviz" }))" class="imgPlate"><img src="@Url.Content("~/Content/shared/demos-dataviz.png")" /></a>
-                <h2><a href="html/dataviz/index.html">DataViz examples</a></h2>
+                <a href="html/dataviz/index.html", new { controller = "Suite", suite = "dataviz" }))" class="imgPlate"><img src="@Url.Content("~/Content/shared/demos-dataviz.png")" /></a>
+                <h2><a href="html/dataviz/index.html">Kendo UI DataViz <span>HTML/JS demos</span></a></h2>
              </li>
         </ul>
     </div>
