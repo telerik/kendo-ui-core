@@ -469,8 +469,10 @@ kendo_module({
             var options = this.options;
             var editable = options.editable;
 
-            event.showDelete = editable && editable.destroy !== false && !this._isMobilePhoneView;
-            event.resizable = editable && editable.resize !== false && !this._isMobilePhoneView;
+            var isMobile = kendo.support.mobileOS;
+
+            event.showDelete = editable && editable.destroy !== false && !isMobile;
+            event.resizable = editable && editable.resize !== false && !isMobile;
             event.ns = kendo.ns;
             event.resources = this.eventResources(event);
             event.inverseColor = event.resources && event.resources[0] ? this._shouldInverseResourceColor(event.resources[0]) : false;

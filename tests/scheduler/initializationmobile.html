@@ -131,6 +131,24 @@
                 ok(!scheduler.element.find(".k-event").first().has(".k-resize-handle").length);
             });
 
+            test("delete button is not shown in the day view", function() {
+                var scheduler = setup({
+                    views: ["day"],
+                    dataSource: [ { start: new Date(), end: new Date(), isAllDay: true, title:"" }]
+                });
+
+                ok(!scheduler.element.find(".k-event").first().has(".k-event-delete").length);
+            });
+
+            test("resize handles are not shown in the day view", function() {
+                var scheduler = setup({
+                    views: ["day"],
+                    dataSource: [ { start: new Date(), end: new Date(), isAllDay: true, title:"" }]
+                });
+
+                ok(!scheduler.element.find(".k-event").first().has(".k-resize-handle").length);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

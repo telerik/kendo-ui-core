@@ -1244,8 +1244,9 @@ kendo_module({
             var template = isOneDayEvent ? this.eventTemplate : this.allDayEventTemplate;
             var options = this.options;
             var editable = options.editable;
-            var showDelete = editable && editable.destroy !== false;
-            var resizable = editable && editable.resize !== false;
+            var isMobile = kendo.support.mobileOS;
+            var showDelete = editable && editable.destroy !== false && !isMobile;
+            var resizable = editable && editable.resize !== false && !isMobile;
             var startDate = getDate(this.startDate());
             var endDate = getDate(this.endDate());
             var startTime = getMilliseconds(this.startTime());
