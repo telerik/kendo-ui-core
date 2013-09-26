@@ -68,7 +68,7 @@ kendo_module({
             that._reset();
             that._template();
 
-            element[0].type = "text";
+            element[0].setAttribute("type", "text");
             element.addClass("k-input")
                    .attr({
                        "role": "textbox",

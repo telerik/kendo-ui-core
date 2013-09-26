@@ -400,7 +400,7 @@ kendo_module({
                 text = $('<input type="text"/>').insertBefore(element).addClass(CLASSNAME);
             }
 
-            element.type = "text";
+            element.setAttribute("type", "text");
             text[0].tabIndex = element.tabIndex;
             text[0].style.cssText = element.style.cssText;
             text.prop("placeholder", that.options.placeholder);

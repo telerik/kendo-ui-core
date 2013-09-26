@@ -349,6 +349,7 @@
                         datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
                     equal(datepicker.element[0].type, "text");
+                    equal(datepicker.element.attr("type"), "text");
                 });
             }
 

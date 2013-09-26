@@ -327,7 +327,7 @@ kendo_module({
 
             that._icon();
 
-            element[0].type = "text";
+            element[0].setAttribute("type", "text");
             element
                 .addClass("k-input")
                 .attr({
