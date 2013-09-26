@@ -244,6 +244,62 @@
                 ok(!theSwitch.element[0].checked);
             });
 
+            test("Disabled switch has km-state-disabled class and disabled attribute", 2, function() {
+                var theSwitch = new Switch(dom);
+
+                theSwitch.enable(false);
+
+                ok(theSwitch.wrapper.hasClass("km-state-disabled"), "has km-state-disabled class");
+                ok(theSwitch.element.is(":disabled"), "has km-state-disabled class");
+            });
+
+            test("Widget understands disabled attribute", 1, function() {
+                var dom = $('<input data-role="switch" type="checkbox" disabled>');
+
+                kendo.mobile.init(dom);
+                var theSwitch = dom.data("kendoMobileSwitch");
+
+                ok(theSwitch.wrapper.hasClass("km-state-disabled"), "has km-state-disabled class");
+            });
+
+            test("Enable method enables and disables the widget", 4, function() {
+                var theSwitch = new Switch(dom);
+
+                theSwitch.enable(false);
+                ok(theSwitch.wrapper.hasClass("km-state-disabled"), "has km-state-disabled class");
+                ok(theSwitch.element.is(":disabled"), "has km-state-disabled class");
+
+                theSwitch.enable(true);
+                ok(!theSwitch.wrapper.hasClass("km-state-disabled"), "does not have km-state-disabled class");
+                ok(!theSwitch.element.is(":disabled"), "has km-state-disabled class");
+            });
+
+            test("Change event of disabled switch is not rised", 0, function() {
+                var theSwitch = new Switch(dom);
+
+                theSwitch.bind("change", function() {
+                    ok(false, "Should not raise the change event");
+                });
+
+                theSwitch.enable(false);
+                theSwitch.handle.trigger(mouseDownEvent);
+                theSwitch.handle.trigger(MOUSEUP);
+            });
+
+            test("Disabled switch does not change its state when pressed", 2, function() {
+                var theSwitch = new Switch(dom);
+
+                theSwitch.check(true);
+                theSwitch.enable(false);
+
+                ok(theSwitch.check(), "switch is checked");
+
+                theSwitch.handle.trigger(mouseDownEvent);
+                theSwitch.handle.trigger(MOUSEUP);
+
+                ok(theSwitch.check(), "switch is not checked");
+            })
+
         </script>
     </body>
 </html>

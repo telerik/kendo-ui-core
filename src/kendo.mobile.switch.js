@@ -16,6 +16,8 @@ kendo_module({
         SWITCHOFF = "km-switch-off",
         MARGINLEFT = "margin-left",
         ACTIVE_STATE = "km-state-active",
+        DISABLED_STATE = "km-state-disabled",
+        DISABLED = "disabled",
         TRANSFORMSTYLE = support.transitions.css + "transform",
         proxy = $.proxy;
 
@@ -50,6 +52,10 @@ kendo_module({
             }
 
             that.check(checked);
+
+            that.options.enable = that.options.enable && !that.element.attr(DISABLED);
+            that.enable(that.options.enable);
+
             that.refresh();
             kendo.notify(that, kendo.mobile.ui);
         },
@@ -80,7 +86,8 @@ kendo_module({
             name: "Switch",
             onLabel: "on",
             offLabel: "off",
-            checked: null
+            checked: null,
+            enable: true
         },
 
         check: function(check) {
@@ -109,6 +116,25 @@ kendo_module({
             that.check(!that.element[0].checked);
         },
 
+        enable: function(enable) {
+            var element = this.element,
+                wrapper = this.wrapper;
+
+            if(typeof enable == "undefined") {
+                enable = true;
+            }
+
+            this.options.enable = enable;
+
+            if(enable) {
+                element.removeAttr(DISABLED);
+            } else {
+                element.attr(DISABLED, DISABLED);
+            }
+
+            wrapper.toggleClass(DISABLED_STATE, !enable);
+        },
+
         _move: function(e) {
             var that = this;
             e.preventDefault();
@@ -127,8 +153,12 @@ kendo_module({
         },
 
         _start: function() {
-            this.userEvents.capture();
-            this.handle.addClass(ACTIVE_STATE);
+            if(!this.options.enable) {
+                this.userEvents.cancel();
+            } else {
+                this.userEvents.capture();
+                this.handle.addClass(ACTIVE_STATE);
+            }
         },
 
         _stop: function() {
@@ -213,7 +243,9 @@ kendo_module({
 
             that.userEvents = new kendo.UserEvents(that.wrapper, {
                 tap: function() {
-                    that._toggle(!that.element[0].checked);
+                    if(that.options.enable) {
+                        that._toggle(!that.element[0].checked);
+                    }
                 },
                 start: proxy(that._start, that),
                 move: proxy(that._move, that),
