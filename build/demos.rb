@@ -4,7 +4,6 @@ require 'erb'
 DEMOS_CSHTML = FileList['demos/mvc/Views/*/**/*.cshtml']
 DEMOS_CS = FileList['demos/mvc/**/*.cs']
 
-SUITE_INDEX_TEMPLATE = ERB.new(File.read('build/templates/suite-index.html.erb'))
 BUNDLE_INDEX_TEMPLATE = ERB.new(File.read('build/templates/bundle-index.html.erb'))
 
 OFFLINE_DEMO_TEMPLATE_OPTIONS = {
@@ -144,15 +143,18 @@ def demos(options)
         files = files + offline_demos(navigation, suite_path).include("#{suite_path}/index.html");
 
         # Build the index.html page of the suite
-        file "#{suite_path}/index.html" => 'build/templates/suite-index.html.erb' do |t|
+        file "#{suite_path}/index.html" => "build/templates/#{template_dir}/suite-index.html.erb" do |t|
+
+            template = ERB.new(File.read("build/templates/#{template_dir}/suite-index.html.erb"))
 
             File.open(t.name, 'w') do |file|
-                file.write SUITE_INDEX_TEMPLATE.result(binding) # 'binding' is the current scope
+                file.write template.result(binding) # 'binding' is the current scope
             end
 
         end
 
         template = ERB.new(File.read("build/templates/#{template_dir}/#{suite}-example.html.erb"))
+
 
         # Create offline demos by processing the corresponding .cshtml files
         rule /#{path}\/#{suite}\/.+\.html/ => lambda { |t| find_demo_src(t, path) } do |t|
