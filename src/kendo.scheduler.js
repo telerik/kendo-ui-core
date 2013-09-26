@@ -772,6 +772,10 @@ kendo_module({
 
             var target = this.element.find(".k-event[" + kendo.attr("uid") + "='" + options.model.uid + "']");
 
+            if (this.container) {
+                target = this.container.find(".k-scheduler-delete");
+            }
+
             for (var buttonIndex = 0; buttonIndex < options.buttons.length; buttonIndex++) {
                 html+= this._createActionSheetButton(options.buttons[buttonIndex]);
             }
@@ -796,45 +800,6 @@ kendo_module({
                 .data("kendoMobileActionSheet");
 
             actionSheet.open(target);
-
-            /*var html = kendo.format("<div class='k-popup-edit-form'><div class='k-edit-form-container'><p class='k-popup-message'>{0}</p>", options.text);
-
-            html += '<div class="k-edit-buttons k-state-default">';
-
-            var createButton = this.options.createButton;
-
-            for (var buttonIndex = 0; buttonIndex < options.buttons.length; buttonIndex++) {
-                html+= createButton(options.buttons[buttonIndex]);
-            }
-
-            html += '</div></div></div>';
-
-            var popup = $(html).appendTo(this.element)
-                               .eq(0)
-                               .on("click", ".k-button", function(e) {
-                                    e.preventDefault();
-
-                                    popup.close();
-
-                                    var buttonIndex = $(e.currentTarget).index();
-
-                                    options.buttons[buttonIndex].click();
-                               })
-                               .kendoWindow({
-                                   modal: true,
-                                   resizable: false,
-                                   draggable: false,
-                                   title: options.title,
-                                   visible: false,
-                                   close: function() {
-                                       this.destroy();
-                                       scheduler.focus();
-                                   }
-                               })
-                               .getKendoWindow();
-
-            popup.center().open();
-*/
         },
 
         editEvent: function(model) {
@@ -843,12 +808,13 @@ kendo_module({
 
             var messages = this.options.messages;
             var updateText = messages.save;
+            var removeText = messages.destroy;
             var cancelText = messages.cancel;
             var titleText = messages.editor.editorTitle;
 
-            html += '<div data-role="view" id="edit" ' + kendo.attr("uid") + '="' + model.uid + '">' +
-                '<div data-role="header"><a href="#" class="k-scheduler-cancel">' + cancelText + '</a>' +
-                titleText + '<a href="#" class="k-scheduler-update">' + updateText + '</a></div>';
+            html += '<div data-role="view" class="k-popup-edit-form" id="edit" ' + kendo.attr("uid") + '="' + model.uid + '">' +
+                '<div data-role="header"><a href="#" class="k-button k-scheduler-cancel">' + cancelText + '</a>' +
+                titleText + '<a href="#" class="k-button k-scheduler-update">' + updateText + '</a></div>';
 
             var fields = this.fields(editors.mobile, model);
 
@@ -904,6 +870,10 @@ kendo_module({
                 }
             }
 
+            if (!model.isNew()) {
+                html += '<div class="k-edit-buttons"><a href="#" class="k-scheduler-delete k-button">' + removeText + '</a></div>';
+            }
+
             html += "</div>";
 
             var view = pane.append(html);
@@ -920,17 +890,25 @@ kendo_module({
 
             if (!this.trigger("edit", { container: container, model: model })) {
 
-                container.on(CLICK + NS, "a.k-scheduler-edit, a.k-scheduler-cancel, a.k-scheduler-update", function(e) {
+                container.on(CLICK + NS, "a.k-scheduler-edit, a.k-scheduler-cancel, a.k-scheduler-update, a.k-scheduler-delete", function(e) {
                     e.preventDefault();
                     e.stopPropagation();
 
                     var button = $(this);
 
-                    if (button.hasClass("k-scheduler-edit")) {
-                        pane.navigate("#edit");
-                    } else {
-                        var name = button.hasClass("k-scheduler-cancel") ? "cancel" : "save";
+                    if (!button.hasClass("k-scheduler-edit")) {
+
+                        var name = "cancel";
+
+                        if (button.hasClass("k-scheduler-update")) {
+                            name = "save";
+                        } else if (button.hasClass("k-scheduler-delete")) {
+                            name = "remove";
+                        }
+
                         that.trigger(name, { container: container, model: model });
+                    } else {
+                        pane.navigate("#edit");
                     }
                 });
 
@@ -1973,15 +1951,19 @@ kendo_module({
                 var messages = this.options.messages;
 
                 var text = typeof editable.confirmation === STRING ? editable.confirmation : DELETECONFIRM;
+                var buttons = [
+                    { name: "destroy", text: messages.destroy, click: function() { callback(); } }
+                ];
+
+                if (!(kendo.support.mobileOS && kendo.mobile.ui.Pane)) {
+                    buttons.push({ name: "canceledit", text: messages.cancel, click: function() { callback(true); } });
+                }
 
                 this.showDialog({
                     model: model,
                     text: text,
                     title: messages.deleteWindowTitle,
-                    buttons: [
-                        { name: "destroy", text: messages.destroy, click: function() { callback(); } },
-                        { name: "canceledit", text: messages.cancel, click: function() { callback(true); } }
-                    ]
+                    buttons: buttons
                 });
             } else {
                 callback();
@@ -2201,6 +2183,10 @@ kendo_module({
 
             editor.bind("save", function() {
                 that.saveEvent();
+            });
+
+            editor.bind("remove", function(e) {
+                that.removeEvent(e.model);
             });
         },
 

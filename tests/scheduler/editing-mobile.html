@@ -168,8 +168,44 @@
 
                 scheduler.editEvent(scheduler.dataSource.at(0));
 
-                equal(scheduler._editor.container.find(kendo.roleSelector("content")).text(), "my custom edit form");
+                equal(scheduler._editor.container.find(kendo.roleSelector("content")).text(), "my custom edit formDelete");
             });
+
+            test("delete button is not shown for new events", function() {
+                var scheduler = setup();
+
+                var remove = stub(scheduler, "removeEvent");
+
+                var model = scheduler.dataSource.add({});
+
+                scheduler.editEvent(model);
+
+                ok(!scheduler._editor.container.find(".k-scheduler-delete").length);
+            });
+
+            test("clicking the delete button within the edit form calls removeEvent", function() {
+                var scheduler = setup();
+
+                var remove = stub(scheduler, "removeEvent");
+
+                scheduler.editEvent(scheduler.dataSource.at(0));
+
+                scheduler._editor.container.find(".k-scheduler-delete").click();
+
+                equal(remove.calls("removeEvent"), 1);
+            });
+
+            test("delete dialog does not show additional cancel button", function() {
+                var scheduler = setup();
+
+                var showDialog = stub(scheduler._editor, "showDialog");
+
+                scheduler.editEvent(scheduler.dataSource.at(0));
+
+                scheduler._editor.container.find(".k-scheduler-delete").click();
+                equal(showDialog.args("showDialog")[0].buttons.length, 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
