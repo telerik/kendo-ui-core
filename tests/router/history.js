@@ -179,6 +179,40 @@ asyncTest("Allows prevention of back if preventDefault called", 1, function() {
     }, 300);
 });
 
+asyncTest("Triggers back", 2, function() {
+    startWithHash();
+
+    kendoHistory.navigate("/new-location");
+
+    kendoHistory.bind("back", function(e) {
+        equal(e.url, "/new-location");
+        equal(e.to, "");
+    });
+
+    _history.back();
+
+    setTimeout(function() {
+        start();
+    }, 300);
+});
+
+asyncTest("Allows prevention of back if preventDefault in back event called", 1, function() {
+    startWithHash();
+
+    kendoHistory.navigate("/new-location");
+
+    kendoHistory.bind("back", function(e) {
+        e.preventDefault();
+    });
+
+    _history.back();
+
+    setTimeout(function() {
+        start();
+        url(initial + "#/new-location");
+    }, 300);
+});
+
 asyncTest("Allows prevention of hash change by clicked link if preventDefault called", 1, function() {
     startWithHash();
 

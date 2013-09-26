@@ -31,30 +31,37 @@
 
     </head>
     <body>
-        <div data-role="view" data-init="wireActionSheet">
+        <div data-role="view">
+            <a href="#foo" data-role="button">Foo</a>
+        </div>
+        <div data-role="view" data-init="wireActionSheet" id="foo">
             <a data-role="button" id="button">Reply</a>
 
-            <ul data-role="actionsheet" id="foo">
+            <ul data-role="actionsheet" id="bar">
                 <li>Foo</li>
                 <li>Bar</li>
             </ul>
-            <div data-role="footer">
-                <ul data-role="tabstrip">
-                    <li><a data-rel="actionsheet" href="#foo">Open Foo</a></li>
-                </ul>
-            </div>
         </div>
+
         <script>
             $(function() {
-                new kendo.mobile.Application();
+                var app = new kendo.mobile.Application(document.body, {
+                    init: function() {
+                        app.router.bind("back", function(e) {
+                            $("#bar").data("kendoMobileActionSheet").close();
+                            e.preventDefault();
+                        });
+                    }
+                });
             });
 
             function wireActionSheet() {
                 $("#button").data("kendoMobileButton").bind("click", function(e) {
-                    $("#foo").data("kendoMobileActionSheet").open($("#button"));
+                    $("#bar").data("kendoMobileActionSheet").open($("#button"));
                     e.preventDefault();
                 });
             }
+
         </script>
     </body>
 </html>
