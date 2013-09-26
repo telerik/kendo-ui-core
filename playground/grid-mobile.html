@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Mobile Grid</title>
+        <link href="../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../styles/web/kendo.silver.min.css" rel="stylesheet" />
+
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="http://rusev/work/web.js"></script>
+    </head>
+    <body>
+        <div id="grid"></div>
+
+        <script>
+            kendo.support.mobileOS = true;
+
+            $("#grid").kendoGrid({
+                dataSource: {
+                    data: [
+                    {
+                        foo: "foo",
+                        bar: "bar"
+                    },
+                    {
+                        foo: "baz",
+                        bar: "bax"
+                    }
+                    ],
+                    pageSize: 2
+                },
+                pageable: true,
+                filterable: true
+            });
+        </script>
+    </body>
+</html>

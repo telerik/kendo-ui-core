@@ -250,6 +250,7 @@ var tests = [
     "editor/unlinkcommand.html",
     "editor/viewhtmlcommand.html",
     "filtermenu/filtermenu.html",
+    "filtermenu/mobile.html",
     "filtermenu/lint.html",
     "fx/animation.html",
     "fx/new.html",

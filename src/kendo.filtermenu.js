@@ -135,6 +135,8 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
+            that._isMobile = kendo.support.mobileOS;
+
             operators = that.operators = options.operators || {};
 
             element = that.element;
@@ -226,22 +228,30 @@ kendo_module({
                     type: type,
                     role: role,
                     values: convertItems(options.values)
-                }))
+                }));
+
+            if (!that._isMobile) {
+                if (!options.appendToElement) {
+                    that.popup = that.form[POPUP]({
+                        anchor: that.link,
+                        open: proxy(that._open, that),
+                        activate: proxy(that._activate, that),
+                        close: that.options.closeCallback
+                    }).data(POPUP);
+                } else {
+                    that.element.append(that.form);
+                    that.popup = that.element.closest(".k-popup").data(POPUP);
+                }
+            } else {
+                that.pane = that.link.closest(kendo.roleSelector("pane")).data("kendoMobilePane");
+                that.view = that.pane.append(that.form.wrap("<div />").parent().html());
+                that.form = that.view.element.find("form");
+            }
+
+            that.form
                 .on("keydown" + NS, proxy(that._keydown, that))
                 .on("submit" + NS, proxy(that._submit, that))
                 .on("reset" + NS, proxy(that._reset, that));
-
-            if (!options.appendToElement) {
-                that.popup = that.form[POPUP]({
-                    anchor: that.link,
-                    open: proxy(that._open, that),
-                    activate: proxy(that._activate, that),
-                    close: that.options.closeCallback
-                }).data(POPUP);
-            } else {
-                that.element.append(that.form);
-                that.popup = that.element.closest(".k-popup").data(POPUP);
-            }
 
             if (setUI) {
                 that.form.find(".k-textbox")
@@ -299,7 +309,17 @@ kendo_module({
                 kendo.unbind(that.form);
                 kendo.destroy(that.form);
                 that.form.unbind(NS);
-                that.popup.destroy();
+                if (that.popup) {
+                    that.popup.destroy();
+                }
+            }
+
+            if (that.view) {
+                that.view.purge();
+            }
+
+            if (that.pane) {
+                that.pane.destroy();
             }
 
             that.link.unbind(NS);
@@ -416,29 +436,40 @@ kendo_module({
         },
 
         _submit: function(e) {
-            var that = this;
-
             e.preventDefault();
 
-            that.filter(that.filterModel.toJSON());
+            this.filter(this.filterModel.toJSON());
 
-            that.popup.close();
+            this._closeForm();
         },
 
         _reset: function() {
             this.clear();
-            this.popup.close();
+
+            this._closeForm();
+        },
+
+        _closeForm: function() {
+            if (this._isMobile) {
+                this.pane.navigate("");
+            } else {
+                this.popup.close();
+            }
         },
 
         _click: function(e) {
             e.preventDefault();
             e.stopPropagation();
 
-            if (!this.popup) {
+            if (!this.popup && !this.pane) {
                 this._init();
             }
 
-            this.popup.toggle();
+            if (this._isMobile) {
+                this.pane.navigate(this.view);
+            } else {
+                this.popup.toggle();
+            }
         },
 
         _open: function() {
