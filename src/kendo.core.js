@@ -2800,7 +2800,7 @@ function pad(number, digits, end) {
     }
 
     $.extend($.expr[ ":" ], {
-        focusable: function(element) {
+        kendoFocusable: function(element) {
             var idx = $.attr(element, "tabindex");
             return focusable(element, !isNaN(idx) && idx > -1);
         }

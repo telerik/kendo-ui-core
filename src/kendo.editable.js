@@ -280,7 +280,7 @@ kendo_module({
                 errorTemplate: that.options.errorTemplate || undefined,
                 rules: rules }).data("kendoValidator");
 
-            var focusable = container.find(":focusable:first").focus();
+            var focusable = container.find(":kendoFocusable:first").focus();
             if (oldIE) {
                 focusable.focus();
             }

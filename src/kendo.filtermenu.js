@@ -453,7 +453,7 @@ kendo_module({
         },
 
         _activate: function() {
-            this.form.find(":focusable:first").focus();
+            this.form.find(":kendoFocusable:first").focus();
         },
 
         _keydown: function(e) {

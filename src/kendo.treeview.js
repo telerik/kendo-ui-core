@@ -246,7 +246,7 @@ kendo_module({
                 .on("click" + NS, ".k-checkbox :checkbox", proxy(that._checkboxClick, that))
                 .on("click" + NS, ".k-request-retry", proxy(that._retryRequest, that))
                 .on("click" + NS, function(e) {
-                    if (!$(e.target).is(":focusable")) {
+                    if (!$(e.target).is(":kendoFocusable")) {
                         that.focus();
                     }
                 });

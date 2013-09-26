@@ -2100,7 +2100,7 @@ kendo_module({
                         current.parent().find(".k-icon:first").click();
                         handled = true;
                     } else {
-                        var focusable = current.find(":focusable:first");
+                        var focusable = current.find(":kendoFocusable:first");
                         if (!current.hasClass("k-edit-cell") && focusable[0] && current.hasClass("k-state-focused")) {
                             focusable.focus();
                             handled = true;
@@ -2220,7 +2220,7 @@ kendo_module({
                     } else {
                         that.current(editContainer.children().filter(DATA_CELL).first());
                     }
-                    focusable = editContainer.find(":focusable:first")[0];
+                    focusable = editContainer.find(":kendoFocusable:first")[0];
                     if (focusable) {
                         focusable.focus();
                     }

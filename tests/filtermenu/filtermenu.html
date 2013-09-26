@@ -669,7 +669,7 @@
 
                 filterMenu.link.click();
 
-                equal(document.activeElement, filterMenu.form.find(":focusable")[0]);
+                equal(document.activeElement, filterMenu.form.find(":kendoFocusable")[0]);
             });
 
             test("pressing esc closes the menu", function() {
