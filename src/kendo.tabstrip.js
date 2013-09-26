@@ -714,12 +714,16 @@ kendo_module({
 
             that.tabGroup.find(".k-item").each(function(idx) {
                 var currentContent = contentElements.eq(idx),
+                    id = "";
+
+                if (tabStripID) {
                     id = tabStripID + "-" + (idx+1);
+                }
 
                 this.setAttribute("aria-controls", id);
 
                 if (!currentContent.length && contentUrls[idx]) {
-                    $("<div id='"+ id +"' class='" + CONTENT + "'/>").appendTo(that.wrapper);
+                    $("<div class='" + CONTENT + "'/>").appendTo(that.wrapper).attr("id", id);
                 } else {
                     currentContent.attr("id", id);
 
