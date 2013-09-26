@@ -709,16 +709,12 @@ kendo_module({
         _updateContentElements: function() {
             var that = this,
                 contentUrls = that.options.contentUrls || [],
-                tabStripID = that.element.attr("id"),
+                tabStripID = that.element.attr("id") || kendo.guid(),
                 contentElements = that.wrapper.children("div");
 
             that.tabGroup.find(".k-item").each(function(idx) {
                 var currentContent = contentElements.eq(idx),
-                    id = "";
-
-                if (tabStripID) {
                     id = tabStripID + "-" + (idx+1);
-                }
 
                 this.setAttribute("aria-controls", id);
 
