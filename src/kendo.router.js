@@ -40,8 +40,6 @@ kendo_module({
         start: function(options) {
             options = options || {};
 
-            console.log(options);
-
             this.bind([CHANGE, BACK], options);
 
             if (this._started) {
