@@ -69,7 +69,9 @@ var shapesSource = [
                     }
                 }
             ],
-            content: "Custom ctrs"
+            content: "Custom ctrs",
+            width: 200,
+            height: 200
         }
     },
     {

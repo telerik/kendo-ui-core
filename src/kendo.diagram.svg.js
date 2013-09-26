@@ -28,7 +28,9 @@ kendo_module({
             arrowStart: "ArrowStart",
             filledCircle: "FilledCircle",
             arrowEnd: "ArrowEnd"
-        };
+        },
+        DEFAULTWIDTH = 100,
+        DEFAULTHEIGHT = 100;
 
     diagram.Markers = Markers;
 
@@ -140,6 +142,8 @@ kendo_module({
     var Element = Class.extend({
         init: function (native, options) {
             var element = this;
+            this._originWidth = DEFAULTWIDTH;
+            this._originHeight = DEFAULTHEIGHT;
             this._visible = true;
             element.native = native;
             element.options = deepExtend({}, element.options, options);
@@ -194,6 +198,23 @@ kendo_module({
             t.render(this.native);
         },
         _hover: function () {
+        },
+        _measure: function () {
+            var size, box, n = this.native;
+            if (!this._measured) {
+                try {
+                    box = n.getBBox();
+                    if (box.width && box.height) {
+                        this._originWidth = this.options.width = box.width;
+                        this._originHeight = this.options.height = box.height;
+                        size = {width: box.width, height: box.height};
+                        this._measured = true;
+                        return size;
+                    }
+                }
+                catch (e) {
+                }
+            }
         }
     });
 
@@ -432,18 +453,9 @@ kendo_module({
             Visual.fn.init.call(that, document.createElementNS(SVGNS, "path"), options);
         },
         size: function () {
-            var originWidth, originHeight;
-            try {
-                var box = this.native.getBBox();
-                originWidth = box.width;
-                originHeight = box.height;
-            }
-            catch (e) {
-                originWidth = this.options.width;
-                originHeight = this.options.height;
-            }
-            var scaleX = this.options.width / originWidth,
-                scaleY = this.options.height / originHeight,
+            this._measure();
+            var scaleX = this.options.width / this._originWidth,
+                scaleY = this.options.height / this._originHeight,
                 x = this.options.x || 0,
                 y = this.options.y || 0;
 
@@ -619,17 +631,8 @@ kendo_module({
             }
         },
         size: function () {
-            if (!this.width || !this.height) {
-                try {
-                    var box = this.native.getBoundingClientRect();
-                    this.width = box.width;
-                    this.height = box.height;
-                }
-                catch (e) {
-                }
-            }
-            var scaleX = this.options.width / this.width,
-                scaleY = this.options.height / this.height,
+            var scaleX = this.options.width / this._originWidth,
+                scaleY = this.options.height / this._originHeight,
                 x = this.options.x || 0,
                 y = this.options.y || 0;
 

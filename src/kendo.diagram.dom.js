@@ -54,7 +54,9 @@ kendo_module({
         MAXINT = 9007199254740992,
         SELECT = "select",
         PAN = "pan",
-        ZOOM = "zoom";
+        ZOOM = "zoom",
+        DEFAULTWIDTH = 100,
+        DEFAULTHEIGHT = 100;
 
     diagram.DefaultConnectors = [
         {
@@ -249,8 +251,8 @@ kendo_module({
             y: 0,
             minWidth: 20,
             minHeight: 20,
-            width: 100,
-            height: 100,
+            width: DEFAULTWIDTH,
+            height: DEFAULTHEIGHT,
             resizable: true,
             rotatable: true,
             background: "steelblue",
@@ -259,22 +261,28 @@ kendo_module({
         },
         events: [BOUNDSCHANGE],
         bounds: function (value) {
+            var point, size;
             if (value) {
                 this._bounds = value;
-                var point = value.topLeft();
+                point = value.topLeft();
                 if (this.contentVisual) {
                     this.contentVisual.redraw(this.bounds());
                 }
                 this.options.x = point.x;
                 this.options.y = point.y;
-                this.options.width = this.shapeVisual.options.width = value.width;
-                this.options.height = this.shapeVisual.options.height = value.height;
+                this.options.width = value.width;
+                this.options.height = value.height;
                 this.visual.position(point);
 
                 this.shapeVisual.redraw({ width: value.width, height: value.height });
-                //this.refresh(); // it does nothing?
                 this.refreshConnections();
                 this.trigger(BOUNDSCHANGE, this._bounds.clone()); // the trigger modifies the arguments internally.
+            }
+            if (this.options.width === DEFAULTWIDTH && this.options.height === DEFAULTHEIGHT) { // no dimensions, assuming autosize for paths, groups...
+                size = this.shapeVisual._measure();
+                if (size) {
+                    return this.bounds(new Rect(this.options.x, this.options.y, size.width, size.height));
+                }
             }
             return this._bounds;
         },
@@ -415,8 +423,6 @@ kendo_module({
                     return new Circle(shapeOptions);
                 default:
                     var p = new Path(shapeOptions);
-                    //p.oWidth = shapeOptions.width;
-                    //p.oHeight = shapeOptions.height;
                     return p;
             }
         }
@@ -1282,9 +1288,7 @@ kendo_module({
                 var opt = {
                     data: options.visualTemplate,
                     template: options.template,
-                    context: node,
-                    width: 150,
-                    height: 60
+                    context: node
                 };
                 shape = new Shape(opt, node);
                 that.addShape(shape);
