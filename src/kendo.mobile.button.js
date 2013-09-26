@@ -140,6 +140,7 @@ kendo_module({
             }
 
             if(!that.options.enable) {
+                e.preventDefault();
                 return;
             }
 
