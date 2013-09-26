@@ -174,7 +174,7 @@
 
             test("Size of progress wrapper div reflects value when value is not equal to min and showStatus is false", function() {
                 var pb = new ProgressBar(container, {
-                    min: 5,
+                    min: 0,
                     max: 1000,
                     value: 200,
                     showStatus: false
@@ -196,7 +196,7 @@
                 equal(progressStatusHolder.length, 1);
             });
 
-            test("ProgressBar wrapper contains progress status holder and progress wrapper when value is not equal to min and showStatus is true", function() {
+            test("ProgressBar wrapper contains progress status holder and progress wrapper when value is not equal to min and showStatus is true", 3, function() {
                 var pb = new ProgressBar(container, {
                     min: 10,
                     max: 200,
@@ -213,7 +213,18 @@
                 equal(progressWrapperStatusHolder.length, 1);
             });
 
-            // test("Status holder text is set correctly when ");
+            test("Status holder text is set correctly when value is not equal to min and showStatus is true", function() {
+                var pb = new ProgressBar(container, {
+                    min: 10,
+                    max: 200,
+                    value: 50,
+                    showStatus: true
+                });
+
+                equal(pb.wrapper.children("span.k-progress-status-wrap").text(), pb.options.value);
+            });
+
+
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------
             module("Initialization / Chunk ProgressBar", {
@@ -276,19 +287,38 @@
                 equal(pb.wrapper.find("li.k-item.k-state-selected").length, completedChunks.length);
             });
 
-            test("Chunk size is calculated correctly according to chunk count", function() {
+            // test("Chunk size is calculated correctly according to chunk count", function() {
+            //     var pb = new ProgressBar(container, {
+            //         type: "chunk",
+            //         chunkCount: 17
+            //     });
+
+            //     var chunkCount = pb.options.chunkCount;
+            //     var chunkWrapperSize = pb.wrapper.find("ul.k-reset").width();
+            //     var expectedChunkSize = ((chunkWrapperSize - (chunkCount - 1)) / chunkCount).toFixed(2);
+            //     var actualChunkSize = parseFloat(pb.wrapper.find("li.k-item:first")[0].style.width).toFixed(2);
+
+            //     equal(actualChunkSize, expectedChunkSize);
+            // });
+
+            test("Total chunk size is calculated correctly", function() {
                 var pb = new ProgressBar(container, {
                     type: "chunk",
-                    chunkCount: 17
+                    chunkCount: 15
                 });
 
+                var totalChunkSize = 0;
                 var chunkCount = pb.options.chunkCount;
-                var chunkWrapperSize = pb.wrapper.find("ul.k-reset")[0].offsetWidth;
-                var expectedChunkSize = ((chunkWrapperSize - (chunkCount - 1)) / chunkCount).toFixed(2);
-                var actualChunkSize = parseFloat(pb.wrapper.find("li.k-item:first")[0].style.width).toFixed(2);
+                var chunkWrapperSize = pb.wrapper.find("ul.k-reset").width();
+                var expectedTotalChunkSize = chunkWrapperSize - chunkCount + 1;
+                var chunks = pb.wrapper.find("li.k-item");
+                for (var i = chunks.length - 1; i >= 0; i--) {
+                    totalChunkSize += parseFloat(chunks[i].style.width, 10);
+                };
 
-                equal(actualChunkSize, expectedChunkSize);
+                equal(totalChunkSize.toFixed(2), expectedTotalChunkSize.toFixed(2));
             });
+
 
             test("Chunk count is reset to default if negative chunk count is passed", function() {
                 var pb = new ProgressBar(container, {
@@ -335,20 +365,136 @@
                 equal(pb.options.animation.duration, 789);
             });
 
-            test("k-progressbar-indeterminate class is set correctly when initial value is false", function() {
+            test("k-progressbar-indeterminate class is set correctly when initial value is false (type='value')", function() {
                 var pb = new ProgressBar(container, {
-                    value: false
+                    value: false,
+                    type: "value"
                 });
 
                 ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
             });
 
-            test("k-progressbar-indeterminate class is not set when initial value is not false", function() {
+            test("k-progressbar-indeterminate class is set correctly when initial value is false (type='percentage')", function() {
                 var pb = new ProgressBar(container, {
-                    value: 20
+                    value: false,
+                    type: "percentage"
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
+            });
+
+            test("k-progressbar-indeterminate class is set correctly when initial value is false (type='chunk')", function() {
+                var pb = new ProgressBar(container, {
+                    value: false,
+                    type: "chunk"
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
+            });
+
+            test("k-progressbar-indeterminate class is not set when initial value is not false (type='value')", function() {
+                var pb = new ProgressBar(container, {
+                    value: 20,
+                    type: "value"
                 });
 
                 ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
+            });
+
+            test("k-progressbar-indeterminate class is not set when initial value is not false (type='percentage')", function() {
+                var pb = new ProgressBar(container, {
+                    value: 20,
+                    type: "percentage"
+                });
+
+                ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
+            });
+
+            test("k-progressbar-indeterminate class is not set when initial value is not false (type='chunk')", function() {
+                var pb = new ProgressBar(container, {
+                    value: 20,
+                    type: "chunk"
+                });
+
+                ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
+            });
+
+            test("k-state-disabled class is added when ProgressBar is disabled initially", function() {
+                var pb = new ProgressBar(container, {
+                    enable: false
+                });
+
+                ok(pb.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("Initial value is set correctly to false", function() {
+                var pb = new ProgressBar(container, {
+                    value: false
+                });
+
+                equal(pb.value(), false);
+            });
+
+            test("Initial value false correctly sets status holder text to min (type='value')", function() {
+                var pb = new ProgressBar(container, {
+                    value: false,
+                    type: "value"
+                });
+
+                equal(pb.wrapper.children(".k-progress-status-wrap").text(), pb.options.min);
+            });
+
+            test("Initial value false correctly sets status holder text to min (type='percentage')", function() {
+                var pb = new ProgressBar(container, {
+                    value: false,
+                    type: "percentage"
+                });
+
+                equal(pb.wrapper.children(".k-progress-status-wrap").text(), pb.options.min + "%");
+            });
+
+            test("Progress wrapper is not added when initial value is false", function() {
+                var pb = new ProgressBar(container, {
+                    value: false
+                });
+
+                equal(pb.wrapper.find(".k-state-selected").length, 0);
+            });
+
+            test("ProgressBar is correctly disabled and initial value is set to false (type='value')", 3, function() {
+                var pb = new ProgressBar(container, {
+                    value: false,
+                    enable: false,
+                    type: "value"
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
+                ok(pb.wrapper.hasClass("k-state-disabled"));
+                equal(pb.options.value, false);
+            });
+
+            test("ProgressBar is correctly disabled and initial value is set to false (type='percentage')", 3, function() {
+                var pb = new ProgressBar(container, {
+                    value: false,
+                    enable: false,
+                    type: "percentage"
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
+                ok(pb.wrapper.hasClass("k-state-disabled"));
+                equal(pb.options.value, false);
+            });
+
+            test("ProgressBar is correctly disabled and initial value is set to false (type='chunk')", 3, function() {
+                var pb = new ProgressBar(container, {
+                    value: false,
+                    enable: false,
+                    type: "chunk"
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
+                ok(pb.wrapper.hasClass("k-state-disabled"));
+                equal(pb.options.value, false);
             });
         </script>
     </body>

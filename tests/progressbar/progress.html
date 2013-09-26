@@ -67,6 +67,27 @@
                 }, 100);
             });
 
+            asyncTest("k-complete is removed when the progress width becomes less than 98%", function() {
+                var progressCompleted = false;
+
+                pb = createProgressbar({
+                    animation: {
+                        duration: 50
+                    },
+                    complete: function(e){
+                        progressCompleted = true;
+                    }
+                });
+
+                pb.value(99);
+                pb.value(90);
+
+                setTimeout(function(){
+                    equal(pb.wrapper.find(".k-complete").length, 0);
+                    start();
+                }, 100);
+            });
+
             asyncTest("k-complete is not added when the progress width is less than or equal to 98%", function() {
                 var progressCompleted = false;
 
@@ -87,6 +108,150 @@
                 }, 100);
             });
 
+            asyncTest("Complete event has correct value parameter (type='value')", function() {
+                var value;
+
+                pb = createProgressbar({
+                    min: -50,
+                    max: 165,
+                    value: -50,
+                    animation: {
+                        duration: 50
+                    },
+                    type: "value",
+                    complete: function(e){
+                        value = e.value;
+                    }
+                });
+
+                pb.value(165);
+
+                setTimeout(function() {
+                    equal(value, pb.options.max);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Complete event has correct value parameter (type='percentage')", function() {
+                var value;
+
+                pb = createProgressbar({
+                    min: -50,
+                    max: 165,
+                    value: -50,
+                    animation: {
+                        duration: 50
+                    },
+                    type: "percentage",
+                    complete: function(e){
+                        value = e.value;
+                    }
+                });
+
+                pb.value(165);
+
+                setTimeout(function() {
+                    equal(value, pb.options.max);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Complete event has correct value parameter (type='chunk')", function() {
+                var value;
+
+                pb = createProgressbar({
+                    min: -50,
+                    max: 165,
+                    value: -50,
+                    animation: {
+                        duration: 50
+                    },
+                    type: "chunk",
+                    complete: function(e){
+                        value = e.value;
+                    }
+                });
+
+                pb.value(165);
+
+                setTimeout(function() {
+                    equal(value, pb.options.max);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Context is correctly set in complete event (type='value')", function() {
+                var context;
+
+                pb = createProgressbar({
+                    min: -50,
+                    max: 165,
+                    value: -50,
+                    animation: {
+                        duration: 50
+                    },
+                    type: "value",
+                    complete: function(e){
+                        context = this;
+                    }
+                });
+
+                pb.value(165);
+
+                setTimeout(function() {
+                    equal(context, pb);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Context is correctly set in complete event (type='percentage')", function() {
+                var context;
+
+                pb = createProgressbar({
+                    min: -50,
+                    max: 130,
+                    value: -50,
+                    animation: {
+                        duration: 50
+                    },
+                    type: "percentage",
+                    complete: function(e){
+                        context = this;
+                    }
+                });
+
+                pb.value(130);
+
+                setTimeout(function() {
+                    equal(context, pb);
+                    start();
+                }, 80);
+            });
+
+            asyncTest("Context is correctly set in complete event (type='chunk')", function() {
+                var context;
+
+                pb = createProgressbar({
+                    min: -50,
+                    max: 130,
+                    value: -50,
+                    animation: {
+                        duration: 50
+                    },
+                    type: "chunk",
+                    complete: function(e){
+                        context = this;
+                    }
+                });
+
+                pb.value(130);
+
+                setTimeout(function() {
+                    equal(context, pb);
+                    start();
+                }, 80);
+            });
+
             //TODO TEST CHANGE EVENT
 
             //TODO TEST progress width, status update, chunk progress
@@ -102,7 +267,211 @@
                 }
             });
 
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Rendering / Chunk progressbar", {
+                setup: function() {
+                    moduleSetup();
+                },
+                teardown: function(){
+                    moduleTeardown();
+                }
+            });
 
+            test("k-progressbar-reverse class is added to progressbar (type='chunk')", function() {
+                pb = createProgressbar({
+                    type: "chunk",
+                    reverse: true
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-reverse"));
+            });
+
+            test("Correct chunks are updated when progressbar is orientation:horizontal and reverse: false", function() {
+                pb = createProgressbar({
+                    type: "chunk",
+                    orientation: "horizontal",
+                    reverse: false,
+                    min: 0,
+                    max: 5,
+                    value: 0,
+                    chunkCount: 5
+                });
+
+                pb.value(2);
+
+                equal(pb.wrapper.find("li:lt(2)").filter(".k-state-selected").length, 2);
+            });
+
+            test("Correct chunks are updated when progressbar is orientation:horizontal and reverse: true", function() {
+                pb = createProgressbar({
+                    type: "chunk",
+                    orientation: "horizontal",
+                    reverse: true,
+                    min: 0,
+                    max: 5,
+                    value: 0,
+                    chunkCount: 5
+                });
+
+                pb.value(2);
+
+                equal(pb.wrapper.find("li:gt(2)").filter(".k-state-selected").length, 2);
+            });
+
+            test("Correct chunks are updated when progressbar is orientation:vertical and reverse: false", function() {
+                pb = createProgressbar({
+                    type: "chunk",
+                    orientation: "vertical",
+                    reverse: false,
+                    min: 0,
+                    max: 5,
+                    value: 0,
+                    chunkCount: 5
+                });
+
+                pb.value(2);
+
+                equal(pb.wrapper.find("li:gt(2)").filter(".k-state-selected").length, 2);
+            });
+
+            test("Correct chunks are updated when progressbar is orientation:vertical and reverse: true", function() {
+                pb = createProgressbar({
+                    type: "chunk",
+                    orientation: "vertical",
+                    reverse: true,
+                    min: 0,
+                    max: 5,
+                    value: 0,
+                    chunkCount: 5
+                });
+
+                pb.value(2);
+
+                equal(pb.wrapper.find("li:lt(2)").filter(".k-state-selected").length, 2);
+            });
+
+            test("Correct chunks are updated when progressbar is orientation:horizontal and reverse: false and value was decreased", 2, function() {
+                pb = createProgressbar({
+                    type: "chunk",
+                    orientation: "horizontal",
+                    reverse: false,
+                    min: 0,
+                    max: 5,
+                    value: 0,
+                    chunkCount: 5
+                });
+
+                pb.value(4);
+                pb.value(2);
+
+                equal(pb.wrapper.find("li:lt(2)").filter(".k-state-selected").length, 2);
+                equal(pb.wrapper.find(".k-state-default").length, 3);
+            });
+
+            test("Correct chunks are updated when progressbar is orientation:horizontal and reverse: true and value was decreased", 2, function() {
+                pb = createProgressbar({
+                    type: "chunk",
+                    orientation: "horizontal",
+                    reverse: true,
+                    min: 0,
+                    max: 5,
+                    value: 0,
+                    chunkCount: 5
+                });
+
+                pb.value(4);
+                pb.value(2);
+
+                equal(pb.wrapper.find("li:gt(2)").filter(".k-state-selected").length, 2);
+                equal(pb.wrapper.find(".k-state-default").length, 3);
+            });
+
+            test("Correct chunks are updated when progressbar is orientation:vertical and reverse: false and value was decreased", 2, function() {
+                pb = createProgressbar({
+                    type: "chunk",
+                    orientation: "vertical",
+                    reverse: false,
+                    min: 0,
+                    max: 5,
+                    value: 0,
+                    chunkCount: 5
+                });
+
+                pb.value(4);
+                pb.value(2);
+
+                equal(pb.wrapper.find("li:gt(2)").filter(".k-state-selected").length, 2);
+                equal(pb.wrapper.find(".k-state-default").length, 3);
+            });
+
+            test("Correct chunks are updated when progressbar is orientation:vertical and reverse: true and value was decreased", 2, function() {
+                pb = createProgressbar({
+                    type: "chunk",
+                    orientation: "vertical",
+                    reverse: true,
+                    min: 0,
+                    max: 5,
+                    value: 0,
+                    chunkCount: 5
+                });
+
+                pb.value(4);
+                pb.value(2);
+
+                equal(pb.wrapper.find("li:lt(2)").filter(".k-state-selected").length, 2);
+                equal(pb.wrapper.find(".k-state-default").length, 3);
+            });
+
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("Rendering / Value progressbar", {
+                setup: function() {
+                    moduleSetup();
+                },
+                teardown: function(){
+                    moduleTeardown();
+                }
+            });
+
+            asyncTest("Progress status wrapper is removed when value is set to min", function() {
+                pb = createProgressbar({
+                    min: -50,
+                    max: 130,
+                    value: 100,
+                    animation: {
+                        duration: 50
+                    },
+                    type: "value"
+                });
+
+                pb.value(-50);
+
+                setTimeout(function() {
+                    equal(pb.wrapper.find(".k-state-selected").length, 0);
+                    start();
+                }, 80);
+            });
+
+            asyncTest("Progress status wrapper is appended when initial value is set to min and then changed", function() {
+                pb = createProgressbar({
+                    min: -50,
+                    max: 130,
+                    value: -50,
+                    animation: {
+                        duration: 50
+                    },
+                    type: "value"
+                });
+
+                pb.value(-20);
+
+                setTimeout(function() {
+                    equal(pb.wrapper.find(".k-state-selected").length, 1);
+                    start();
+                }, 80);
+            });
         </script>
     </body>
 </html>

@@ -330,7 +330,7 @@
                 });
 
                 pb.value(60);
-                pb.value(60);
+                pb.value(50);
                 pb.value(65);
 
                 setTimeout(function(){
@@ -402,7 +402,7 @@
                 });
 
                 pb.value(60);
-                pb.value(60);
+                pb.value(50);
                 pb.value(65);
 
                 setTimeout(function(){
@@ -474,7 +474,7 @@
                 });
 
                 pb.value(60);
-                pb.value(60);
+                pb.value(50);
                 pb.value(65);
 
                 setTimeout(function() {
@@ -570,7 +570,7 @@
                 ok(!pb.wrapper.hasClass("k-state-disabled"));
             });
 
-            test("enable method does not adds k-state-disabled class if not needed", function () {
+            test("enable method does not add k-state-disabled class if not needed", function () {
                 pb = createProgressbar();
 
                 pb.enable();
@@ -599,6 +599,76 @@
                 pb = createProgressbar({
                     enable: false
                 });
+
+                ok(pb.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("ProgressBar does not change value when disabled", function(){
+                pb = createProgressbar({
+                    animation: false
+                });
+                pb.value(30);
+                pb.enable(false);
+                pb.value(40);
+
+                equal(pb.value(), 30);
+            });
+
+            test("ProgressBar does not change value when initially disabled", function(){
+                pb = createProgressbar({
+                    animation: false,
+                    enable: false
+                });
+                pb.value(30);
+
+                equal(pb.value(), 0);
+            });
+
+            test("ProgressBar does change value when enabled after initially disabled", function(){
+                pb = createProgressbar({
+                    animation: false,
+                    enable: false
+                });
+                pb.enable();
+                pb.value(30);
+
+                equal(pb.value(), 30);
+            });
+
+            test("ProgressBar does change value when reenabled", function(){
+                pb = createProgressbar({
+                    animation: false
+                });
+
+                pb.enable(false);
+                pb.value(30);
+                pb.enable();
+                pb.value(40);
+
+                equal(pb.value(), 40);
+            });
+
+            test("ProgressBar does not set indeterminate state when disabled", 2, function(){
+                pb = createProgressbar({
+                    animation: false,
+                    value: 30
+                });
+
+                pb.enable(false);
+                pb.value(false);
+
+                equal(pb.value(), 30);
+                ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
+            });
+
+            test("ProgressBar is disabled correctly when in indeterminate state", function(){
+                pb = createProgressbar({
+                    animation: false,
+                    value: 30
+                });
+
+                pb.value(false);
+                pb.enable(false);
 
                 ok(pb.wrapper.hasClass("k-state-disabled"));
             });

@@ -12,6 +12,8 @@ kendo_module({
         Widget = ui.Widget,
         HORIZONTAL = "horizontal",
         VERTICAL = "vertical",
+        FORWARD = "forward",
+        BACKWARD = "backward",
         DEFAULTMIN = 0,
         DEFAULTMAX = 100,
         DEFAULTVALUE = 0,
@@ -53,15 +55,19 @@ kendo_module({
 
             that._progressProperty = (options.orientation === HORIZONTAL) ? "width" : "height";
 
+            that._isStarted = that._isFinished = false;
+
+            that._progressDirection = FORWARD;
+
             options.value = that._validateValue(options.value);
 
             that._wrapper();
 
             that._progressAnimation();
 
-            that._updateProgress();
-
-            that._isStarted = that._isFinished = false;
+            if ((options.value !== options.min) && (options.value !== false)) {
+               that._updateProgress();
+            }
         },
 
         setOptions: function(options) {
@@ -84,18 +90,19 @@ kendo_module({
             max: DEFAULTMAX,
             value: DEFAULTVALUE,
             enable: true,
-            type: PROGRESSTYPE.VALUE, // or percent
+            type: PROGRESSTYPE.VALUE,
             chunkCount: DEFAULTCHUNKCOUNT,
             showStatus: true,
-            animation: {}
+            animation: { }
         },
 
         _wrapper: function() {
-            var that = this,
-                container = that.wrapper = that.element,
-                options = that.options,
-                orientation = options.orientation,
-                progressStatus;
+            var that = this;
+            var container = that.wrapper = that.element;
+            var options = that.options;
+            var orientation = options.orientation;
+            var progressStatus;
+            var initialStatusValue;
 
             container.addClass("k-widget " + KPROGRESSBAR);
 
@@ -120,10 +127,12 @@ kendo_module({
                     progressStatus = that.wrapper.prepend(templates.progressStatus)
                                                  .find("." + KPROGRESSSTATUS);
 
+                    initialStatusValue = (options.value !== false) ? options.value : options.min;
+
                     if (options.type === PROGRESSTYPE.VALUE) {
-                        progressStatus.text(options.value);
+                        progressStatus.text(initialStatusValue);
                     } else {
-                        progressStatus.text(that._calculatePercentage(options.value) + "%");
+                        progressStatus.text(that._calculatePercentage(initialStatusValue) + "%");
                     }
                 }
             }
@@ -134,30 +143,32 @@ kendo_module({
         },
 
         _value: function(value){
-            var that = this,
-                options = that.options,
-                rounded;
+            var that = this;
+            var options = that.options;
+            var rounded;
 
             if (value === undefined) {
                 return options.value;
-            } else if (typeof value !== BOOLEAN) {
-                rounded = math.round(value);
+            } else if (!that.wrapper.hasClass(KSTATEDISABLED)) {
+                if (typeof value !== BOOLEAN) {
+                    rounded = math.round(value);
+                    if (!isNaN(rounded) && rounded !== options.value) {
+                        that.wrapper.removeClass(KPROGRESSBARINDETERMINATE);
 
-                if (!isNaN(rounded) && rounded != options.value) {
-                    that.wrapper.removeClass(KPROGRESSBARINDETERMINATE);
-                    options.value = that._validateValue(rounded);
+                        options.value = that._validateValue(rounded);
 
-                    that._change();
+                        that._change();
+                    }
+                } else if (!value) {
+                    that.wrapper.addClass(KPROGRESSBARINDETERMINATE);
+                    options.value = value;
                 }
-            } else if (!value) {
-                that.wrapper.addClass(KPROGRESSBARINDETERMINATE);
-                options.value = value;
             }
         },
 
         _validateValue: function(value) {
-            var that = this,
-                options = that.options;
+            var that = this;
+            var options = that.options;
 
             if (value !== false) {
                 if (value <= options.min) {
@@ -171,8 +182,8 @@ kendo_module({
         },
 
         _change: function() {
-            var that = this,
-                options = that.options;
+            var that = this;
+            var options = that.options;
 
             if(!that._isStarted) {
                 that.trigger(START, { value: options.value });
@@ -184,39 +195,48 @@ kendo_module({
         },
 
         _updateProgress: function() {
-            var that = this,
-                options = that.options,
-                percentage = that._calculatePercentage();
+            var that = this;
+            var options = that.options;
+            var percentage = that._calculatePercentage();
 
             if (options.type === PROGRESSTYPE.CHUNK) {
                 that._updateChunks(percentage);
                 that._onProgressUpdateAlways(options.value);
             } else {
-                if (options.value != options.min) {
-                    that._updateProgressWrapper(percentage);
-                }
+                that._updateProgressWrapper(percentage);
             }
         },
 
         _updateChunks: function(percentage) {
-            var that = this,
-                options = that.options,
-                chunkCount = options.chunkCount,
-                percentagesPerChunk =  parseInt((HUNDREDPERCENT / chunkCount) * 100, 10) / 100,
-                percentageParsed = parseInt(percentage * 100, 10) / 100,
-                completedChunks = math.floor(percentageParsed / percentagesPerChunk);
+            var that = this;
+            var options = that.options;
+            var chunkCount = options.chunkCount;
+            var percentagesPerChunk =  parseInt((HUNDREDPERCENT / chunkCount) * 100, 10) / 100;
+            var percentageParsed = parseInt(percentage * 100, 10) / 100;
+            var completedChunksCount = math.floor(percentageParsed / percentagesPerChunk);
+            var completedChunks;
 
-            that.wrapper.find("li.k-item:lt(" + completedChunks + ")")
-                        .removeClass(KUPCOMINGCHUNK)
-                        .addClass(KCOMPLETEDCHUNK);
+            if((options.orientation === HORIZONTAL && !(options.reverse)) ||
+               (options.orientation === VERTICAL && options.reverse)) {
+                completedChunks = that.wrapper.find("li.k-item:lt(" + completedChunksCount + ")");
+            } else {
+                completedChunks = that.wrapper.find("li.k-item:gt(-" + (completedChunksCount + 1) + ")");
+            }
+
+            that.wrapper.find("." + KCOMPLETEDCHUNK)
+                        .removeClass(KCOMPLETEDCHUNK)
+                        .addClass(KUPCOMINGCHUNK);
+
+            completedChunks.removeClass(KUPCOMINGCHUNK)
+                           .addClass(KCOMPLETEDCHUNK);
         },
 
         _updateProgressWrapper: function(percentage) {
-            var that = this,
-                options = that.options,
-                progressWrapper = that.wrapper.find("." + KPROGRESSWRAPPER),
-                animationDuration = that._isStarted ? that._animation.duration : 0,
-                animationCssOptions = { };
+            var that = this;
+            var options = that.options;
+            var progressWrapper = that.wrapper.find("." + KPROGRESSWRAPPER);
+            var animationDuration = that._isStarted ? that._animation.duration : 0;
+            var animationCssOptions = { };
 
             if (progressWrapper.length === 0) {
                 progressWrapper = that._addRegularProgressWrapper();
@@ -225,70 +245,96 @@ kendo_module({
             animationCssOptions[that._progressProperty] = percentage + "%";
             progressWrapper.animate(animationCssOptions, {
                 duration: animationDuration,
+                start: proxy(that._onProgressAnimateStart, that),
                 progress: proxy(that._onProgressAnimate, that),
-                complete: proxy(that._onProgressAnimateComplete, that),
+                complete: proxy(that._onProgressAnimateComplete, that, options.value),
                 always: proxy(that._onProgressUpdateAlways, that, options.value)
             });
         },
 
-        _onProgressAnimate: function(e) {
-            var that = this,
-                options = that.options,
-                progressInPercent = math.round(parseFloat(e.elem.style[that._progressProperty], 10)),
-                progressStatusHolder = that.wrapper.find("." + KPROGRESSSTATUS),
-                progressValue;
+        _onProgressAnimateStart: function() {
+            var that = this;
+            var options = that.options;
 
-            //same as in _calculatePercentage. expose if needed
-            var onePercent = math.abs((options.max - options.min) / 100);
-
-            if (options.showStatus) {
-                if (options.type === PROGRESSTYPE.VALUE) {
-                    progressValue = math.floor(options.min + (progressInPercent * onePercent));
-
-                    progressStatusHolder.text(progressValue);
-                } else {
-                    progressStatusHolder.text(progressInPercent + "%");
-                }
+            if (that._oldValue !== undefined) {
+                that._progressDirection = (options.value >= that._oldValue) ? FORWARD : BACKWARD;
             }
         },
 
-        _onProgressAnimateComplete: function() {
-            var that = this,
-                options = that.options,
-                progressWrapper = that.wrapper.find("." + KPROGRESSWRAPPER),
-                progressStatusHolder = that.wrapper.find("." + KPROGRESSSTATUS),
-                progressWrapperWidth = parseFloat(progressWrapper[0].style.width);
+        _onProgressAnimate: function(e) {
+            var that = this;
+            var options = that.options;
+            var oldValue = (that._oldValue !== undefined) ? that._oldValue : options.min;
+            var progressInPercent = parseFloat(e.elem.style[that._progressProperty], 10);
+            //math.floor(parseFloat(e.elem.style[that._progressProperty], 10));
+            var progressStatusHolder = that.wrapper.find("." + KPROGRESSSTATUS);
+            var progressValue;
 
-            if (options.type !== PROGRESSTYPE.CHUNK && progressWrapperWidth > 98) {
+            if (options.showStatus) {
+                if (options.type === PROGRESSTYPE.VALUE) {
+                    progressValue = math.floor(options.min + (progressInPercent * that._onePercent));
+
+                    if (((that._progressDirection === BACKWARD && progressValue >= options.value && progressValue <= oldValue) ||
+                         (that._progressDirection === FORWARD && progressValue <= options.value && progressValue >= oldValue))) {
+
+                        progressStatusHolder.text(progressValue);
+                    }
+                } else {
+                    //move in anim start -> expectedPercentage = that._calculatePercentage();
+                    //TODO assure that it stays in the current animate range
+                    //progressInPercent = math.floor(progressInPercent);
+                    progressStatusHolder.text(parseInt(progressInPercent, 10) + "%");
+                }
+            }
+
+            if (options.type !== PROGRESSTYPE.CHUNK && progressInPercent <= 98) {
+                that.wrapper.find("." + KPROGRESSWRAPPER).removeClass(KPROGRESSBARCOMPLETE);
+            }
+        },
+
+        _onProgressAnimateComplete: function(currentValue) {
+            var that = this;
+            var options = that.options;
+            var progressWrapper = that.wrapper.find("." + KPROGRESSWRAPPER);
+            var progressStatusHolder = that.wrapper.find("." + KPROGRESSSTATUS);
+            var progressWrapperSize = parseFloat(progressWrapper[0].style[that._progressProperty]);
+
+            if (options.type !== PROGRESSTYPE.CHUNK && progressWrapperSize > 98) {
                 progressWrapper.addClass(KPROGRESSBARCOMPLETE);
             }
 
             if (options.showStatus) {
                 if (options.type === PROGRESSTYPE.VALUE) {
-                    progressStatusHolder.text(options.value);
+                    progressStatusHolder.text(currentValue);
                 } else {
-                    progressStatusHolder.text(math.floor(that._calculatePercentage(options.value)) + "%");
+                    progressStatusHolder.text(math.floor(that._calculatePercentage(currentValue)) + "%");
                 }
             }
         },
 
         _onProgressUpdateAlways: function(currentValue) {
-            var that = this,
-                options = that.options;
+            var that = this;
+            var options = that.options;
+
+            that._oldValue = currentValue;
 
             if (that._isStarted) {
                 that.trigger(CHANGE, { value: currentValue });
             }
 
-            if (currentValue === options.max && that._isFinished === false) {
+            if (currentValue === options.max && that._isFinished === false && that._isStarted) {
                 that.trigger(COMPLETE, { value: options.max });
                 that._isFinished = true;
+            }
+
+            if (currentValue === options.min) {
+                that.wrapper.find("." + KPROGRESSWRAPPER).remove();
             }
         },
 
         enable: function(enable) {
-            var that = this,
-                options = that.options;
+            var that = this;
+            var options = that.options;
 
             options.enable = typeof(enable) === "undefined" ? true : enable;
             that.wrapper.toggleClass(KSTATEDISABLED, !options.enable);
@@ -301,12 +347,12 @@ kendo_module({
         },
 
         _addChunkProgressWrapper: function () {
-            var that = this,
-                options = that.options,
-                container = that.wrapper,
-                chunkSize = proxy(that._calculateChunkSize, that),
-                html = "",
-                chunks;
+            var that = this;
+            var options = that.options;
+            var container = that.wrapper;
+            var chunkSize = proxy(that._calculateChunkSize, that);
+            var html = "";
+            var chunks;
 
             if (options.chunkCount <= 1) {
                 options.chunkCount = DEFAULTCHUNKCOUNT;
@@ -337,42 +383,44 @@ kendo_module({
         },
 
         _addProgressStatus: function() {
-            var that = this,
-                size = that.wrapper.css(that._progressProperty);
+            var that = this;
+            var size = that.wrapper.css(that._progressProperty);
 
             that.wrapper.find("." + KPROGRESSWRAPPER).append(templates.progressStatus)
                         .find(".k-progress-status-wrap").css(that._progressProperty, size);
         },
 
         _calculateChunkSize: function() {
-            var that = this,
-                container = that.wrapper,
-                chunkCount = that.options.chunkCount;
+            var that = this;
+            var chunkCount = that.options.chunkCount;
+            var chunkContainer = that.wrapper.find("ul.k-reset");
+                //chunkContainerSize = parseInt(chunkContainer.css(that._progressProperty), 10),
+                // flooredChunkSize = math.floor((chunkContainerSize - (chunkCount - 1)) / chunkCount),
+                // differenceToFill = chunkContainerSize - (flooredChunkSize * chunkCount);
+               // chunkSizes = normalizeChunkSizes(chunkCount, flooredChunkSize, differenceToFill);
 
-            return (parseInt(container.css(that._progressProperty), 10) - (chunkCount - 1)) / chunkCount;
+                // for (var i = chunkSizes.length - 1; i >= 0; i--) {
+                //     console.log(chunkSizes[i]);
+                // };
+
+            return (parseInt(chunkContainer.css(that._progressProperty), 10) - (chunkCount - 1)) / chunkCount;
         },
 
         _calculatePercentage: function() {
-            var that = this,
-                options = that.options,
-                value = options.value,
-                min = options.min,
-                max = options.max,
-                onePercent = math.abs((max - min) / 100),
-                percentValue = math.abs((value - min) / onePercent);
+            var that = this;
+            var options = that.options;
+            var value = options.value;
+            var min = options.min;
+            var max = options.max;
+            that._onePercent = math.abs((max - min) / 100);
 
-                // console.log("One percent: " + onePercent);
-                // console.log("Percentage: " + percentValue);
-
-            return percentValue;
-
-            //return (math.abs(value - min) / (max - min)) * 100;
+            return math.abs((value - min) / that._onePercent);
         },
 
         _progressAnimation: function() {
-            var that = this,
-                options = that.options,
-                animation = options.animation;
+            var that = this;
+            var options = that.options;
+            var animation = options.animation;
 
             if (animation === false) {
                 that._animation = { duration: 0 };
@@ -383,6 +431,31 @@ kendo_module({
             }
         }
     });
+
+    // //Helper functions
+    // function normalizeChunkSizes(chunkCount, flooredChunkSize, differenceToFill) {
+    //     var chunkSizes = []
+    //         len = chunkCount - 1,
+    //         step;
+
+    //     for (var i = chunkCount - 1; i >= 0; i--) {
+    //         chunkSizes[i] = flooredChunkSize;
+    //     }
+
+    //     //diff will always be < (chunkCount * 2)
+    //     if (differenceToFill > chunkCount) {
+    //         for (var i = len; i >= 0; i--) {
+    //             chunkSizes[i]++;
+    //         }
+
+    //         differenceToFill -= chunkCount;
+    //     }
+
+    //     var indexesToNormalize = [];
+
+
+    //     return chunkSizes;
+    // }
 
     kendo.ui.plugin(ProgressBar);
 })(window.kendo.jQuery);

@@ -241,36 +241,23 @@
 </head>
     <body>
         <div id="progressbar"></div>
-        </br></br></br>
+        <br><br><br>
         <div id="progressbar-chunk"></div>
 
-       <button class='k-button setValue'>Set value</button>
-        </br></br></br>
-        <!--<div id="progressbar-rev"></div>
-        </br></br></br>
+        <button class='k-button setValue'>Set value</button>
+        <br><br><br>
+        <div id="progressbar-rev"></div>
+        <br><br><br>
         <div id="progressbar-vert"></div>
         <div id="progressbar-chunk-vert"></div>
-        </br></br></br> -->
+        <br><br><br>
+
         <script>
-            $(".setValue").click(function(){
-                var pb = $("#progressbar").data("kendoProgressBar");
-
-                var interval = setInterval(function(){
-                    if (pb.value() < 100) {
-                        pb.value(pb.value() + 10);
-                    } else {
-                        clearInterval(interval);
-                    }
-                }, 5);
-
-
-                //$("#progressbar-rev").data("kendoProgressBar").value(20);
-            });
-
             $("#progressbar").kendoProgressBar({
-                min: -50,
-                max: 100,
-                value: 0,
+                min: 0,
+                max: 1000,
+                value: false,
+                enable: false,
                 showStatus: true,
                 type: "percentage",
                 start: function(e) {
@@ -284,16 +271,18 @@
                 },
                 //animation: false
                 animation: {
-                    duration: 100
+                    duration: 1000
                 }
             });
 
             $("#progressbar-chunk").kendoProgressBar({
                 type: "chunk",
-                chunkCount: 2,
+                chunkCount: 4,
                 min: 0,
-                max: 10,
-                value: 0,
+                max: 4,
+                value: false,
+                enable: false,
+                reverse: false,
                 start: function(e) {
                     console.log("Start event. Value: " + e.value);
                 },
@@ -305,34 +294,74 @@
                 }
             });
 
-            // $("#progressbar-rev").kendoProgressBar({
-            //     reverse: true,
-            //     showStatus: false,
-            //     //value: 20,
-            //     animation: {
-            //         duration: 50
-            //     },
-            //     start: function(e) {
-            //         console.log("Start event. Value: " + e.value);
-            //     },
-            //     change: function(e) {
-            //         console.log("Change event. Value: " + e.value);
-            //     },
-            //     complete: function(e) {
-            //         console.log("Complete event. Value: " + e.value);
-            //     }
-            // });
+            $("#progressbar-rev").kendoProgressBar({
+                reverse: true,
+                showStatus: false,
+                value: 20,
+                animation: {
+                    duration: 50
+                },
+                start: function(e) {
+                    console.log("Start event. Value: " + e.value);
+                },
+                change: function(e) {
+                    console.log("Change event. Value: " + e.value);
+                },
+                complete: function(e) {
+                    console.log("Complete event. Value: " + e.value);
+                }
+            });
 
-            // $("#progressbar-vert").kendoProgressBar({
-            //     orientation: "vertical",
-            //     value: 0
-            // });
+            $("#progressbar-vert").kendoProgressBar({
+                orientation: "vertical",
+                value: 0,
+                type: "value",
+                start: function(e) {
+                    console.log("Start event. Value: " + e.value);
+                },
+                change: function(e) {
+                    console.log("Change event. Value: " + e.value);
+                },
+                complete: function(e) {
+                    console.log("Complete event. Value: " + e.value);
+                }
+            });
 
-            // $("#progressbar-chunk-vert").kendoProgressBar({
-            //     orientation: "vertical",
-            //     type: "chunk",
-            //     chunkCount: 17
-            // });
+            $("#progressbar-chunk-vert").kendoProgressBar({
+                orientation: "vertical",
+                reverse: true,
+                type: "chunk",
+                chunkCount: 10,
+                start: function(e) {
+                    console.log("Start event. Value: " + e.value);
+                },
+                change: function(e) {
+                    console.log("Change event. Value: " + e.value);
+                },
+                complete: function(e) {
+                    console.log("Complete event. Value: " + e.value);
+                }
+            });
+
+            $(".setValue").click(function(){
+                var pb = $("#progressbar").data("kendoProgressBar");
+
+                var interval = setInterval(function(){
+                    if (pb.value() < 100) {
+                        pb.value(pb.value() + 10);
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 100);
+
+                //$("#progressbar-rev").data("kendoProgressBar").value(20);
+            });
+
+            var pb = $("#progressbar").data("kendoProgressBar");
+            var pbchunk = $("#progressbar-chunk").data("kendoProgressBar");
+            var pbrev = $("#progressbar-rev").data("kendoProgressBar");
+            var pbvert = $("#progressbar-vert").data("kendoProgressBar");
+            var pbchvert = $("#progressbar-chunk-vert").data("kendoProgressBar");
         </script>
     </body>
 </html>
