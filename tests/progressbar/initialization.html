@@ -138,6 +138,224 @@
                     start();
                 }, 100);
             });
+
+            test("Progress direction is initially set to forward", function() {
+                var pb = new ProgressBar(container, {});
+
+                equal(pb._progressDirection, "forward");
+            });
+
+            test("Progress property is set to width when orientation is horizontal", function() {
+                var pb = new ProgressBar(container, {
+                    orientation: "horizontal"
+                });
+
+                equal(pb._progressProperty, "width");
+            });
+
+            test("Progress property is set to height when orientation is vertical", function() {
+                var pb = new ProgressBar(container, {
+                    orientation: "vertical"
+                });
+
+                equal(pb._progressProperty, "height");
+            });
+
+
+            test("Animation duration is equal to default animation duration when not specified", function() {
+                var pb = new ProgressBar(container, { }),
+                    defaultAnimationDuration = 2000;
+
+                equal(pb._animation.duration, defaultAnimationDuration);
+            });
+
+            test("Animation is correctly set to false", function() {
+                var pb = new ProgressBar(container, {
+                    animation: false
+                });
+
+                ok(!pb.options.animation);
+            });
+
+            test("Animation duration is overriden when specified by user", function() {
+                var pb = new ProgressBar(container, {
+                    animation: {
+                        duration: 789
+                    }
+                });
+
+                equal(pb.options.animation.duration, 789);
+            });
+
+            test("k-progressbar-indeterminate class is set correctly when initial value is false (type='value')", function() {
+                var pb = new ProgressBar(container, {
+                    value: false,
+                    type: "value"
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
+            });
+
+            test("k-progressbar-indeterminate class is set correctly when initial value is false (type='percentage')", function() {
+                var pb = new ProgressBar(container, {
+                    value: false,
+                    type: "percentage"
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
+            });
+
+            test("k-progressbar-indeterminate class is set correctly when initial value is false (type='chunk')", function() {
+                var pb = new ProgressBar(container, {
+                    value: false,
+                    type: "chunk"
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
+            });
+
+            test("k-progressbar-indeterminate class is not set when initial value is not false (type='value')", function() {
+                var pb = new ProgressBar(container, {
+                    value: 20,
+                    type: "value"
+                });
+
+                ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
+            });
+
+            test("k-progressbar-indeterminate class is not set when initial value is not false (type='percentage')", function() {
+                var pb = new ProgressBar(container, {
+                    value: 20,
+                    type: "percentage"
+                });
+
+                ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
+            });
+
+            test("k-progressbar-indeterminate class is not set when initial value is not false (type='chunk')", function() {
+                var pb = new ProgressBar(container, {
+                    value: 20,
+                    type: "chunk"
+                });
+
+                ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
+            });
+
+            test("k-state-disabled class is added when ProgressBar is disabled initially", function() {
+                var pb = new ProgressBar(container, {
+                    enable: false
+                });
+
+                ok(pb.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("Initial value is set correctly to false", function() {
+                var pb = new ProgressBar(container, {
+                    value: false
+                });
+
+                equal(pb.value(), false);
+            });
+
+            test("Initial value false correctly sets status holder text to min (type='value')", function() {
+                var pb = new ProgressBar(container, {
+                    value: false,
+                    type: "value"
+                });
+
+                equal(pb.wrapper.children(".k-progress-status-wrap").text(), pb.options.min);
+            });
+
+            test("Initial value false correctly sets status holder text to min (type='percentage')", function() {
+                var pb = new ProgressBar(container, {
+                    value: false,
+                    type: "percentage"
+                });
+
+                equal(pb.wrapper.children(".k-progress-status-wrap").text(), pb.options.min + "%");
+            });
+
+            test("Progress wrapper is not added when initial value is false", function() {
+                var pb = new ProgressBar(container, {
+                    value: false
+                });
+
+                equal(pb.wrapper.find(".k-state-selected").length, 0);
+            });
+
+            test("ProgressBar is correctly disabled and initial value is set to false (type='value')", 3, function() {
+                var pb = new ProgressBar(container, {
+                    value: false,
+                    enable: false,
+                    type: "value"
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
+                ok(pb.wrapper.hasClass("k-state-disabled"));
+                equal(pb.options.value, false);
+            });
+
+            test("ProgressBar is correctly disabled and initial value is set to false (type='percentage')", 3, function() {
+                var pb = new ProgressBar(container, {
+                    value: false,
+                    enable: false,
+                    type: "percentage"
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
+                ok(pb.wrapper.hasClass("k-state-disabled"));
+                equal(pb.options.value, false);
+            });
+
+            test("ProgressBar is correctly disabled and initial value is set to false (type='chunk')", 3, function() {
+                var pb = new ProgressBar(container, {
+                    value: false,
+                    enable: false,
+                    type: "chunk"
+                });
+
+                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
+                ok(pb.wrapper.hasClass("k-state-disabled"));
+                equal(pb.options.value, false);
+            });
+
+            test("_isStarted is set to false initially when value is equal to min", function(){
+                var pb = new ProgressBar(container, {
+                    value: 0,
+                    min: 0
+                });
+
+                equal(pb._isStarted, false);
+            });
+
+            test("_isStarted is set to false initially when value is not equal to min", function(){
+                var pb = new ProgressBar(container, {
+                    value: 10,
+                    min: 0
+                });
+
+                equal(pb._isStarted, false);
+            });
+
+            test("_isFinished is set to false initially when value is not equal to max", function(){
+                var pb = new ProgressBar(container, {
+                    value: 10,
+                    max: 100
+                });
+
+                equal(pb._isFinished, false);
+            });
+
+            test("_isFinished is set to false initially when value is equal to max", function(){
+                var pb = new ProgressBar(container, {
+                    value: 100,
+                    max: 100
+                });
+
+                equal(pb._isFinished, false);
+            });
+
+
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------
             module("Initialization / Regular ProgressBar", {
@@ -338,163 +556,6 @@
 
                 var chunkCount = pb.options.chunkCount;
                 equal(chunkCount, 5);
-            });
-
-            test("Animation duration is equal to default animation duration when not specified", function() {
-                var pb = new ProgressBar(container, { }),
-                    defaultAnimationDuration = 2000;
-
-                equal(pb._animation.duration, defaultAnimationDuration);
-            });
-
-            test("Animation is correctly set to false", function() {
-                var pb = new ProgressBar(container, {
-                    animation: false
-                });
-
-                ok(!pb.options.animation);
-            });
-
-            test("Animation duration is overriden when specified by user", function() {
-                var pb = new ProgressBar(container, {
-                    animation: {
-                        duration: 789
-                    }
-                });
-
-                equal(pb.options.animation.duration, 789);
-            });
-
-            test("k-progressbar-indeterminate class is set correctly when initial value is false (type='value')", function() {
-                var pb = new ProgressBar(container, {
-                    value: false,
-                    type: "value"
-                });
-
-                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
-            });
-
-            test("k-progressbar-indeterminate class is set correctly when initial value is false (type='percentage')", function() {
-                var pb = new ProgressBar(container, {
-                    value: false,
-                    type: "percentage"
-                });
-
-                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
-            });
-
-            test("k-progressbar-indeterminate class is set correctly when initial value is false (type='chunk')", function() {
-                var pb = new ProgressBar(container, {
-                    value: false,
-                    type: "chunk"
-                });
-
-                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
-            });
-
-            test("k-progressbar-indeterminate class is not set when initial value is not false (type='value')", function() {
-                var pb = new ProgressBar(container, {
-                    value: 20,
-                    type: "value"
-                });
-
-                ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
-            });
-
-            test("k-progressbar-indeterminate class is not set when initial value is not false (type='percentage')", function() {
-                var pb = new ProgressBar(container, {
-                    value: 20,
-                    type: "percentage"
-                });
-
-                ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
-            });
-
-            test("k-progressbar-indeterminate class is not set when initial value is not false (type='chunk')", function() {
-                var pb = new ProgressBar(container, {
-                    value: 20,
-                    type: "chunk"
-                });
-
-                ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
-            });
-
-            test("k-state-disabled class is added when ProgressBar is disabled initially", function() {
-                var pb = new ProgressBar(container, {
-                    enable: false
-                });
-
-                ok(pb.wrapper.hasClass("k-state-disabled"));
-            });
-
-            test("Initial value is set correctly to false", function() {
-                var pb = new ProgressBar(container, {
-                    value: false
-                });
-
-                equal(pb.value(), false);
-            });
-
-            test("Initial value false correctly sets status holder text to min (type='value')", function() {
-                var pb = new ProgressBar(container, {
-                    value: false,
-                    type: "value"
-                });
-
-                equal(pb.wrapper.children(".k-progress-status-wrap").text(), pb.options.min);
-            });
-
-            test("Initial value false correctly sets status holder text to min (type='percentage')", function() {
-                var pb = new ProgressBar(container, {
-                    value: false,
-                    type: "percentage"
-                });
-
-                equal(pb.wrapper.children(".k-progress-status-wrap").text(), pb.options.min + "%");
-            });
-
-            test("Progress wrapper is not added when initial value is false", function() {
-                var pb = new ProgressBar(container, {
-                    value: false
-                });
-
-                equal(pb.wrapper.find(".k-state-selected").length, 0);
-            });
-
-            test("ProgressBar is correctly disabled and initial value is set to false (type='value')", 3, function() {
-                var pb = new ProgressBar(container, {
-                    value: false,
-                    enable: false,
-                    type: "value"
-                });
-
-                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
-                ok(pb.wrapper.hasClass("k-state-disabled"));
-                equal(pb.options.value, false);
-            });
-
-            test("ProgressBar is correctly disabled and initial value is set to false (type='percentage')", 3, function() {
-                var pb = new ProgressBar(container, {
-                    value: false,
-                    enable: false,
-                    type: "percentage"
-                });
-
-                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
-                ok(pb.wrapper.hasClass("k-state-disabled"));
-                equal(pb.options.value, false);
-            });
-
-            test("ProgressBar is correctly disabled and initial value is set to false (type='chunk')", 3, function() {
-                var pb = new ProgressBar(container, {
-                    value: false,
-                    enable: false,
-                    type: "chunk"
-                });
-
-                ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
-                ok(pb.wrapper.hasClass("k-state-disabled"));
-                equal(pb.options.value, false);
             });
         </script>
     </body>

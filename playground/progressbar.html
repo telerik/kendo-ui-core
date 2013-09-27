@@ -255,11 +255,12 @@
         <script>
             $("#progressbar").kendoProgressBar({
                 min: 0,
-                max: 1000000,
+                max: 100,
                 value: 0,
                 enable: true,
                 showStatus: true,
                 type: "value",
+                chunkCount: 3,
                 start: function(e) {
                     console.log("Start event. Value: " + e.value);
                 },
@@ -271,7 +272,7 @@
                 },
                 //animation: false
                 animation: {
-                    duration: 3000
+                    duration: 1000
                 }
             });
 

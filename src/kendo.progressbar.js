@@ -150,14 +150,20 @@ kendo_module({
             if (value === undefined) {
                 return options.value;
             } else if (!that.wrapper.hasClass(KSTATEDISABLED)) {
+
                 if (typeof value !== BOOLEAN) {
                     rounded = math.round(value);
-                    if (!isNaN(rounded) && rounded !== options.value) {
-                        that.wrapper.removeClass(KPROGRESSBARINDETERMINATE);
 
-                        options.value = that._validateValue(rounded);
+                    if (!isNaN(rounded)) {
+                        rounded = that._validateValue(rounded);
 
-                        that._change();
+                        if (rounded !== options.value) {
+                            that.wrapper.removeClass(KPROGRESSBARINDETERMINATE);
+
+                            options.value = rounded;
+
+                            that._change();
+                        }
                     }
                 } else if (!value) {
                     that.wrapper.addClass(KPROGRESSBARINDETERMINATE);
@@ -259,6 +265,8 @@ kendo_module({
             if (that._oldValue !== undefined) {
                 that._progressDirection = (options.value >= that._oldValue) ? FORWARD : BACKWARD;
             }
+
+            that.wrapper.find("." + KPROGRESSWRAPPER).show();
         },
 
         _onProgressAnimate: function(e) {
@@ -273,8 +281,8 @@ kendo_module({
                 if (options.type === PROGRESSTYPE.VALUE) {
                     progressValue = math.floor(options.min + (progressInPercent * that._onePercent));
 
-                    if (((that._progressDirection === BACKWARD && progressValue >= options.value && progressValue <= oldValue) ||
-                         (that._progressDirection === FORWARD && progressValue <= options.value && progressValue >= oldValue))) {
+                    if (((that._progressDirection === BACKWARD && progressValue <= oldValue) ||
+                         (that._progressDirection === FORWARD && progressValue >= oldValue))) {
 
                         progressStatusHolder.text(progressValue);
                     }
@@ -310,7 +318,11 @@ kendo_module({
                 }
             }
 
-            progressWrapper = (currentValue === options.min) ? progressWrapper.hide() : progressWrapper.show();
+            if (currentValue === options.min) {
+                progressWrapper.hide();
+            }
+
+            //progressWrapper = (currentValue === options.min) ? progressWrapper.hide() : progressWrapper.show();
         },
 
         _onProgressUpdateAlways: function(currentValue) {
