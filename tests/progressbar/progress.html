@@ -435,7 +435,7 @@
                 }
             });
 
-            asyncTest("Progress status wrapper is removed when value is set to min", function() {
+            asyncTest("Progress status wrapper is hidden when value is set to min and showStatus is true (type: 'value')", function() {
                 pb = createProgressbar({
                     min: -50,
                     max: 130,
@@ -443,18 +443,79 @@
                     animation: {
                         duration: 50
                     },
-                    type: "value"
+                    type: "value",
+                    showStatus: true
                 });
 
                 pb.value(-50);
 
                 setTimeout(function() {
-                    equal(pb.wrapper.find(".k-state-selected").length, 0);
+                    equal(pb.wrapper.find(".k-state-selected:hidden").length, 1);
                     start();
                 }, 80);
             });
 
-            asyncTest("Progress status wrapper is appended when initial value is set to min and then changed", function() {
+            asyncTest("Progress status wrapper is hidden when value is set to min and showStatus is true (type: 'percentage')", function() {
+                pb = createProgressbar({
+                    min: -50,
+                    max: 130,
+                    value: 100,
+                    animation: {
+                        duration: 50
+                    },
+                    type: "percentage",
+                    showStatus: true
+                });
+
+                pb.value(-50);
+
+                setTimeout(function() {
+                    equal(pb.wrapper.find(".k-state-selected:hidden").length, 1);
+                    start();
+                }, 80);
+            });
+
+            asyncTest("Progress status wrapper is hidden when value is set to min and showStatus is false (type: 'value')", function() {
+                pb = createProgressbar({
+                    min: -50,
+                    max: 130,
+                    value: 100,
+                    animation: {
+                        duration: 50
+                    },
+                    type: "value",
+                    showStatus: false
+                });
+
+                pb.value(-50);
+
+                setTimeout(function() {
+                    equal(pb.wrapper.find(".k-state-selected:hidden").length, 1);
+                    start();
+                }, 80);
+            });
+
+            asyncTest("Progress status wrapper is hidden when value is set to min and showStatus is false (type: 'percentage')", function() {
+                pb = createProgressbar({
+                    min: -50,
+                    max: 130,
+                    value: 100,
+                    animation: {
+                        duration: 50
+                    },
+                    type: "percentage",
+                    showStatus: false
+                });
+
+                pb.value(-50);
+
+                setTimeout(function() {
+                    equal(pb.wrapper.find(".k-state-selected:hidden").length, 1);
+                    start();
+                }, 80);
+            });
+
+            asyncTest("Progress status wrapper is appended when initial value is set to min and then changed, showStatus is true (type: 'value')", function() {
                 pb = createProgressbar({
                     min: -50,
                     max: 130,
@@ -462,15 +523,164 @@
                     animation: {
                         duration: 50
                     },
-                    type: "value"
+                    type: "value",
+                    showStatus: true
                 });
 
                 pb.value(-20);
 
                 setTimeout(function() {
-                    equal(pb.wrapper.find(".k-state-selected").length, 1);
+                    equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
                     start();
                 }, 80);
+            });
+
+            asyncTest("Progress status wrapper is appended when initial value is set to min and then changed, showStatus is true (type: 'percentage')", function() {
+                pb = createProgressbar({
+                    min: -50,
+                    max: 130,
+                    value: -50,
+                    animation: {
+                        duration: 50
+                    },
+                    type: "percentage",
+                    showStatus: true
+                });
+
+                pb.value(-20);
+
+                setTimeout(function() {
+                    equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                    start();
+                }, 80);
+            });
+
+            asyncTest("Progress status wrapper is appended when initial value is set to min and then changed, showStatus is false (type: 'value')", function() {
+                pb = createProgressbar({
+                    min: -50,
+                    max: 130,
+                    value: -50,
+                    animation: {
+                        duration: 50
+                    },
+                    type: "value",
+                    showStatus: false
+                });
+
+                pb.value(-20);
+
+                setTimeout(function() {
+                    equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                    start();
+                }, 80);
+            });
+
+            asyncTest("Progress status wrapper is appended when initial value is set to min and then changed, showStatus is false (type: 'percentage')", function() {
+                pb = createProgressbar({
+                    min: -50,
+                    max: 130,
+                    value: -50,
+                    animation: {
+                        duration: 50
+                    },
+                    type: "percentage",
+                    showStatus: false
+                });
+
+                pb.value(-20);
+
+                setTimeout(function() {
+                    equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                    start();
+                }, 80);
+            });
+
+            asyncTest("Progress status wrapper is shown again when hidden once, showStatus is true (type: 'value')", function() {
+                pb = createProgressbar({
+                    min: 0,
+                    max: 130,
+                    value: 0,
+                    animation: {
+                        duration: 10
+                    },
+                    type: "value",
+                    showStatus: true
+                });
+
+                pb.value(20);
+                pb.value(0);
+                pb.value(50);
+
+                setTimeout(function() {
+                    equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Progress status wrapper is shown again when hidden once, showStatus is true (type: 'percentage')", function() {
+                pb = createProgressbar({
+                    min: 0,
+                    max: 130,
+                    value: 0,
+                    animation: {
+                        duration: 10
+                    },
+                    type: "percentage",
+                    showStatus: true
+                });
+
+                pb.value(20);
+                pb.value(0);
+                pb.value(50);
+
+                setTimeout(function() {
+                    equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Progress status wrapper is shown again when hidden once, showStatus is false (type: 'value')", function() {
+                pb = createProgressbar({
+                    min: 0,
+                    max: 130,
+                    value: 0,
+                    animation: {
+                        duration: 10
+                    },
+                    type: "value",
+                    showStatus: false
+                });
+
+                pb.value(20);
+                pb.value(0);
+                pb.value(50);
+
+                setTimeout(function() {
+                    equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                    start();
+                }, 100);
+            });
+
+            asyncTest("Progress status wrapper is shown again when hidden once, showStatus is false (type: 'percentage')", function() {
+                pb = createProgressbar({
+                    min: 0,
+                    max: 130,
+                    value: 0,
+                    animation: {
+                        duration: 10
+                    },
+                    type: "percentage",
+                    showStatus: false
+                });
+
+                pb.value(20);
+                pb.value(0);
+                pb.value(50);
+
+                setTimeout(function() {
+                    equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
+                    start();
+                }, 100);
             });
         </script>
     </body>

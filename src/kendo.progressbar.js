@@ -266,7 +266,6 @@ kendo_module({
             var options = that.options;
             var oldValue = (that._oldValue !== undefined) ? that._oldValue : options.min;
             var progressInPercent = parseFloat(e.elem.style[that._progressProperty], 10);
-            //math.floor(parseFloat(e.elem.style[that._progressProperty], 10));
             var progressStatusHolder = that.wrapper.find("." + KPROGRESSSTATUS);
             var progressValue;
 
@@ -280,10 +279,10 @@ kendo_module({
                         progressStatusHolder.text(progressValue);
                     }
                 } else {
-                    //move in anim start -> expectedPercentage = that._calculatePercentage();
-                    //TODO assure that it stays in the current animate range
-                    //progressInPercent = math.floor(progressInPercent);
-                    progressStatusHolder.text(parseInt(progressInPercent, 10) + "%");
+                    progressInPercent = math.round(progressInPercent);
+                    if (progressInPercent < HUNDREDPERCENT) {
+                        progressStatusHolder.text(progressInPercent + "%");
+                    }
                 }
             }
 
@@ -310,6 +309,8 @@ kendo_module({
                     progressStatusHolder.text(math.floor(that._calculatePercentage(currentValue)) + "%");
                 }
             }
+
+            progressWrapper = (currentValue === options.min) ? progressWrapper.hide() : progressWrapper.show();
         },
 
         _onProgressUpdateAlways: function(currentValue) {
@@ -325,10 +326,6 @@ kendo_module({
             if (currentValue === options.max && that._isFinished === false && that._isStarted) {
                 that.trigger(COMPLETE, { value: options.max });
                 that._isFinished = true;
-            }
-
-            if (currentValue === options.min) {
-                that.wrapper.find("." + KPROGRESSWRAPPER).remove();
             }
         },
 
@@ -406,10 +403,10 @@ kendo_module({
             return (parseInt(chunkContainer.css(that._progressProperty), 10) - (chunkCount - 1)) / chunkCount;
         },
 
-        _calculatePercentage: function() {
+        _calculatePercentage: function(currentValue) {
             var that = this;
             var options = that.options;
-            var value = options.value;
+            var value = (currentValue !== undefined) ? currentValue : options.value;
             var min = options.min;
             var max = options.max;
             that._onePercent = math.abs((max - min) / 100);

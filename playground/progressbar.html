@@ -255,11 +255,11 @@
         <script>
             $("#progressbar").kendoProgressBar({
                 min: 0,
-                max: 1000,
-                value: false,
-                enable: false,
+                max: 1000000,
+                value: 0,
+                enable: true,
                 showStatus: true,
-                type: "percentage",
+                type: "value",
                 start: function(e) {
                     console.log("Start event. Value: " + e.value);
                 },
@@ -271,7 +271,7 @@
                 },
                 //animation: false
                 animation: {
-                    duration: 1000
+                    duration: 3000
                 }
             });
 
