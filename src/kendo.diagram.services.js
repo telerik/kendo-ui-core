@@ -130,7 +130,7 @@ kendo_module({
          */
         init: function (element, oldcontent, newcontent) {
             this.item = element;
-            this._undoContent =oldcontent;
+            this._undoContent = oldcontent;
             this._redoContent = newcontent;
             this.title = "Content Editing";
         },
@@ -279,6 +279,21 @@ kendo_module({
         },
         redo: function () {
             this.diagram.pan(this.final);
+        }
+    });
+
+    var RotateUnit = Class.extend({
+        init: function (shape, initialRotation, finalRotation) {
+            this.initial = initialRotation;
+            this.final = finalRotation;
+            this.shape = shape;
+            this.title = "Rotate Unit";
+        },
+        undo: function () {
+            this.shape.rotate(this.initial.angle, this.initial.center());
+        },
+        redo: function () {
+            this.shape.rotate(this.final.angle, this.final.center());
         }
     });
 
@@ -980,7 +995,7 @@ kendo_module({
                 that.connectors.push(ctr);
                 that.visual.append(ctr.visual);
             }
-            that.shape.bind("boundsChange", function () {
+            that.shape.diagram.bind("boundsChange", function () {
                 that.refresh();
             });
 
@@ -1032,7 +1047,10 @@ kendo_module({
                 that.rotationThumb = new Path(that.options.rotationThumb);
                 that.visual.append(that.rotationThumb);
             }
-            that.shape.bind("boundsChange", function () {
+            that.shape.diagram.bind("boundsChange", function () {
+                that.refresh();
+            });
+            that.shape.diagram.bind("rotate", function () {
                 that.refresh();
             });
             that.refresh();
@@ -1154,6 +1172,7 @@ kendo_module({
         },
         start: function (p) {
             this.initialState = this.shape.bounds();
+            this.initialRotate = this.shape.rotate();
             this._cp = p;
             this.isManipulating = true;
         },
@@ -1210,6 +1229,9 @@ kendo_module({
             if (!r1.equals(r2)) {
                 unit = new TransformUnit(this.shape, r1, r2);
             }
+            else if (this.initialRotate.angle != this.shape.rotate()) {
+                unit = new RotateUnit(this.shape, this.initialRotate, this.shape.rotate());
+            }
             this.isManipulating = false;
             return unit;
         },
@@ -1227,7 +1249,7 @@ kendo_module({
             this.text.content(kendo.format("x: {0}, y: {1}, w: {2}, h: {3}", Math.round(sb.x), Math.round(sb.y), Math.round(sb.width), Math.round(sb.height)));
             this.visual.position(this._bounds.topLeft());
             this._rotateAngle = this.shape.rotate().angle;
-            if (this._rotateAngle) {
+            if (Utils.isDefined(this._rotateAngle)) {
                 this.visual.rotate(this._rotateAngle, new Point(this._bounds.width / 2, this._bounds.height / 2));
             }
             this.rect.redraw({width: innerBounds.width, height: innerBounds.height});

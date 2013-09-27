@@ -53,6 +53,7 @@ kendo_module({
         },
         MAXINT = 9007199254740992,
         SELECT = "select",
+        ROTATE = "rotate",
         PAN = "pan",
         ZOOM = "zoom",
         DEFAULTWIDTH = 100,
@@ -259,11 +260,13 @@ kendo_module({
             hoveredBackground: "#70CAFF",
             connectors: diagram.DefaultConnectors
         },
-        events: [BOUNDSCHANGE],
         bounds: function (value) {
             var point, size;
             if (value) {
                 this._bounds = value;
+                if (this.contentVisual) {
+                    this.contentVisual.redraw(this._bounds);
+                }
                 point = value.topLeft();
                 this.options.x = point.x;
                 this.options.y = point.y;
@@ -273,7 +276,9 @@ kendo_module({
 
                 this.shapeVisual.redraw({ width: value.width, height: value.height });
                 this.refreshConnections();
-                this.trigger(BOUNDSCHANGE, this._bounds.clone()); // the trigger modifies the arguments internally.
+                if (this.diagram) {
+                    this.diagram.trigger(BOUNDSCHANGE, {item: this, bounds: this._bounds.clone()}); // the trigger modifies the arguments internally.
+                }
             }
             if (this.contentVisual && !this.contentVisual._measured) {
                 this.contentVisual.redraw(this._bounds);
@@ -332,13 +337,11 @@ kendo_module({
 
                 rotate = this.visual.rotate(angle, center);
 
-                if (this.adorner) {
-                    this.adorner.refresh();
-                }
                 if (this.diagram && this.diagram._connectorsAdorner) {
                     this.diagram._connectorsAdorner.refresh();
                 }
                 this.refreshConnections();
+                this.diagram.trigger(ROTATE, {item: this});
             }
 
             return rotate;
@@ -717,7 +720,7 @@ kendo_module({
             },
             allowDrop: true
         },
-        events: [ZOOM, PAN, SELECT],
+        events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE],
         destroy: function () {
             var that = this;
             Widget.fn.destroy.call(that);
