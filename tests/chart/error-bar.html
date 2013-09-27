@@ -20,9 +20,14 @@
                     dataviz = kendo.dataviz,
                     Box = dataviz.Box2D,
                     DEFAULT_CAPS_WIDTH = 10,
-                    ErrorBar = dataviz.ErrorBar,
+                    ErrorBarBase = dataviz.ErrorBarBase,
+                    CategoricalErrorBar = dataviz.CategoricalErrorBar,
+                    ScatterErrorBar = dataviz.ScatterErrorBar,
                     ErrorRangeCalculator = dataviz.ErrorRangeCalculator,   
-                    ErrorRange = dataviz.ErrorRange,                   
+                    ErrorRange = function(low, high){
+                        this.low = low;
+                        this.high = high;
+                    },                   
                     SCATTER = "scatter", SCATTER_LINE = "scatterLine", BUBBLE = "bubble", 
                     BAR = "bar", COLUMN = "column", LINE = "line", VERTICAL_LINE = "verticalLine", AREA = "area",
                     testData = [{value: 1},{value: 6}, {value: 3}, {value: -1}],
@@ -979,58 +984,60 @@
                 getSlot =  function(a, b){                    
                    return new Box(a, a, b, b);
                 },
-                categoricalPlotAreaMock = new dataviz.CategoricalPlotArea([],{});
-                categoricalPlotAreaMock.valueAxis.getSlot = getSlot;
+                categoricalPlotAreaMock = new dataviz.CategoricalPlotArea([],{}),
+                xyPlotAreaMock = new dataviz.XYPlotArea([],{});
+                categoricalPlotAreaMock.valueAxis.getSlot = xyPlotAreaMock.axisX.getSlot = 
+                    xyPlotAreaMock.axisY.getSlot = getSlot;                 
                 
                 test("value axis is found for categorical chart", function() {
                     var plotArea = new dataviz.CategoricalPlotArea([],{}),
-                        errorbar = new ErrorBar(1,1, true, plotArea, {});
+                        errorbar = new CategoricalErrorBar(1,1, true, plotArea, {});
                     ok(errorbar.getAxis() == plotArea.valueAxis);                                      
                 });
                 
                 test("xAxis is found for horizontal error bar", function() {
                     var plotArea = new dataviz.XYPlotArea([],{}),
-                        errorbar = new ErrorBar(1,1, false, plotArea, {});
+                        errorbar = new ScatterErrorBar(1,1, false, plotArea, {});
                     ok(errorbar.getAxis() == plotArea.axisX);                                      
                 });                
 
                 test("yAxis is found for vertical error bar", function() {
                     var plotArea = new dataviz.XYPlotArea([],{}),
-                        errorbar = new ErrorBar(1,1, true, plotArea, {});
+                        errorbar = new ScatterErrorBar(1,1, true, plotArea, {});
                     ok(errorbar.getAxis() == plotArea.axisY);                                      
                 });
 
                 test("the caps width is calculated from the box width when it is smaller than the default width for a vertical error bar", function(){
                     var box = new Box(1,1, 8, 1),
                         expectedCapsWidth = Math.floor(box.width() / 2),
-                        calculatedCapsWidth = ErrorBar.fn.getCapsWidth(box, true);
+                        calculatedCapsWidth = ErrorBarBase.fn.getCapsWidth(box, true);
                     equal(calculatedCapsWidth, expectedCapsWidth);
                 });
                 
                 test("the default caps width is used when it is smaller than the box width for a vertical error bar", function(){
                     var box = new Box(1,1, 23, 1),
                         expectedCapsWidth = DEFAULT_CAPS_WIDTH,
-                        calculatedCapsWidth = ErrorBar.fn.getCapsWidth(box, true);
+                        calculatedCapsWidth = ErrorBarBase.fn.getCapsWidth(box, true);
                     equal(calculatedCapsWidth, expectedCapsWidth);
                 });
                 
                 test("the caps width is calculated from the box height when it is smaller than the default width for a horizontal error bar", function(){
                     var box = new Box(1,1, 1, 8),
                         expectedCapsWidth = Math.floor(box.height() / 2),
-                        calculatedCapsWidth = ErrorBar.fn.getCapsWidth(box, false);
+                        calculatedCapsWidth = ErrorBarBase.fn.getCapsWidth(box, false);
                     equal(calculatedCapsWidth, expectedCapsWidth);
                 });                
                 
                 test("the default caps width is used when it is smaller than the box height for a horizontal error bar", function(){
                     var box = new Box(1,1, 1, 23),
                         expectedCapsWidth = DEFAULT_CAPS_WIDTH,
-                        calculatedCapsWidth = ErrorBar.fn.getCapsWidth(box, false);
+                        calculatedCapsWidth = ErrorBarBase.fn.getCapsWidth(box, false);
                     equal(calculatedCapsWidth, expectedCapsWidth);
                 });  
 
-                test("lines are correctly created for a horizontal error bar", function(){                    
+                test("lines are correctly created for a horizontal categorical error bar", function(){                    
                     var targetBox = new Box(5,5,9, 9),                        
-                        errorBar = new ErrorBar(1,2, false, categoricalPlotAreaMock, defaultOptions),
+                        errorBar = new CategoricalErrorBar(1,2, false, categoricalPlotAreaMock, defaultOptions),
                         view = new ViewStub(),
                         expectedElements = [{x1: 1, x2: 2, y1: 7, y2: 7, options: expectedOptions}, {x1: 1, x2: 1, y1: 5, y2: 9, options: expectedOptions},
                             {x1: 2, x2: 2, y1: 5, y2: 9, options: expectedOptions}],
@@ -1041,9 +1048,22 @@
                     ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);                    
                 });
                 
-                test("lines are correctly created for a vertical error bar", function(){                    
+                test("lines are correctly created for a horizontal scatter error bar", function(){                    
                     var targetBox = new Box(5,5,9, 9),                        
-                        errorBar = new ErrorBar(1,2, true, categoricalPlotAreaMock, defaultOptions),
+                        errorBar = new ScatterErrorBar(1,2, false, xyPlotAreaMock, defaultOptions),
+                        view = new ViewStub(),
+                        expectedElements = [{x1: 1, x2: 2, y1: 7, y2: 7, options: expectedOptions}, {x1: 1, x2: 1, y1: 5, y2: 9, options: expectedOptions},
+                            {x1: 2, x2: 2, y1: 5, y2: 9, options: expectedOptions}],
+                        elements;
+                    errorBar.reflow(targetBox);
+                    elements = errorBar.getViewElements(view);
+                  
+                    ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);                    
+                });                
+                
+                test("lines are correctly created for a vertical categorical error bar", function(){                    
+                    var targetBox = new Box(5,5,9, 9),                        
+                        errorBar = new CategoricalErrorBar(1,2, true, categoricalPlotAreaMock, defaultOptions),
                         view = new ViewStub(),
                         expectedElements = [{x1: 7, x2: 7, y1: 1, y2: 2, options: expectedOptions}, {x1: 5, x2: 9, y1: 1, y2: 1, options: expectedOptions},
                             {x1: 5, x2: 9, y1: 2, y2: 2, options: expectedOptions}],
@@ -1053,10 +1073,23 @@
                   
                     ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);                    
                 }); 
-
-                test("caps lines are not created for a horizontal error bar when the endCaps option is false", function(){                    
+                
+                test("lines are correctly created for a vertical scatter error bar", function(){                    
                     var targetBox = new Box(5,5,9, 9),                        
-                        errorBar = new ErrorBar(1,2, false, categoricalPlotAreaMock, $.extend({}, defaultOptions, {endCaps: false})),
+                        errorBar = new ScatterErrorBar(1,2, true, xyPlotAreaMock, defaultOptions),
+                        view = new ViewStub(),
+                        expectedElements = [{x1: 7, x2: 7, y1: 1, y2: 2, options: expectedOptions}, {x1: 5, x2: 9, y1: 1, y2: 1, options: expectedOptions},
+                            {x1: 5, x2: 9, y1: 2, y2: 2, options: expectedOptions}],
+                        elements;
+                    errorBar.reflow(targetBox);
+                    elements = errorBar.getViewElements(view);
+                  
+                    ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);                    
+                });                 
+
+                test("caps lines are not created for a horizontal categorical error bar when the endCaps option is false", function(){                    
+                    var targetBox = new Box(5,5,9, 9),                        
+                        errorBar = new CategoricalErrorBar(1,2, false, categoricalPlotAreaMock, $.extend({}, defaultOptions, {endCaps: false})),
                         view = new ViewStub(),
                         expectedElements = [{x1: 1, x2: 2, y1: 7, y2: 7, options: expectedOptions}],
                         elements;
@@ -1065,10 +1098,34 @@
                   
                     ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);                    
                 }); 
-
-                test("caps lines are not created for a vertical error bar when the endCaps option is false", function(){                    
+                
+                test("caps lines are not created for a horizontal scatter error bar when the endCaps option is false", function(){                    
                     var targetBox = new Box(5,5,9, 9),                        
-                        errorBar = new ErrorBar(1,2, true, categoricalPlotAreaMock, $.extend({}, defaultOptions, {endCaps: false})),
+                        errorBar = new ScatterErrorBar(1,2, false, xyPlotAreaMock, $.extend({}, defaultOptions, {endCaps: false})),
+                        view = new ViewStub(),
+                        expectedElements = [{x1: 1, x2: 2, y1: 7, y2: 7, options: expectedOptions}],
+                        elements;
+                    errorBar.reflow(targetBox);
+                    elements = errorBar.getViewElements(view);
+                  
+                    ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);                    
+                });                 
+
+                test("caps lines are not created for a vertical categorical error bar when the endCaps option is false", function(){                    
+                    var targetBox = new Box(5,5,9, 9),                        
+                        errorBar = new CategoricalErrorBar(1,2, true, categoricalPlotAreaMock, $.extend({}, defaultOptions, {endCaps: false})),
+                        view = new ViewStub(),
+                        expectedElements = [{x1: 7, x2: 7, y1: 1, y2: 2, options: expectedOptions}],
+                        elements;
+                    errorBar.reflow(targetBox);
+                    elements = errorBar.getViewElements(view);
+                  
+                    ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);                    
+                });  
+
+                test("caps lines are not created for a vertical scatter error bar when the endCaps option is false", function(){                    
+                    var targetBox = new Box(5,5,9, 9),                        
+                        errorBar = new ScatterErrorBar(1,2, true, xyPlotAreaMock, $.extend({}, defaultOptions, {endCaps: false})),
                         view = new ViewStub(),
                         expectedElements = [{x1: 7, x2: 7, y1: 1, y2: 2, options: expectedOptions}],
                         elements;
