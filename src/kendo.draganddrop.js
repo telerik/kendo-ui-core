@@ -613,6 +613,10 @@ kendo_module({
             dropped: false
         },
 
+        cancelHold: function() {
+            this._activated = false;
+        },
+
         _updateHint: function(e) {
             var that = this,
                 coordinates,
