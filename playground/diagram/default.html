@@ -150,6 +150,7 @@ var Shapes = {
 
 for (var i = 0; i < shapesSource.length; i++) {
     shape = shapesSource[i].options;
+    shape.background = 'steelblue';
     Shapes[shape.name] = shape;
 }
 
@@ -294,6 +295,7 @@ $(function () {
         {value: "MindmapVertical", text: "Mindmap Vertical"},
         {value: "MindmapHorizontal", text: "Mindmap Horizontal"}
     ];
+
     var onLayoutChanged = function (e) {
         switch ($("#Layouts").data("kendoDropDownList").value()) {
             case "TreeDown":
@@ -372,7 +374,6 @@ $(function () {
                         });
                 break;
         }
-
     };
 
     var dropDown = $("#Layouts").kendoDropDownList({

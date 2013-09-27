@@ -266,7 +266,7 @@ kendo_module({
                 this._bounds = value;
                 point = value.topLeft();
                 if (this.contentVisual) {
-                    this.contentVisual.redraw(this.bounds());
+                    this.contentVisual.redraw(this._bounds);
                 }
                 this.options.x = point.x;
                 this.options.y = point.y;
@@ -281,7 +281,7 @@ kendo_module({
             if (this.options.width === DEFAULTWIDTH && this.options.height === DEFAULTHEIGHT) { // no dimensions, assuming autosize for paths, groups...
                 size = this.shapeVisual._measure();
                 if (size) {
-                    return this.bounds(new Rect(this.options.x, this.options.y, size.width, size.height));
+                    this.bounds(new Rect(this.options.x, this.options.y, size.width, size.height));
                 }
             }
             return this._bounds;

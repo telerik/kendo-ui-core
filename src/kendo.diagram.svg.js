@@ -203,10 +203,10 @@ kendo_module({
             var size, box, n = this.native;
             if (!this._measured) {
                 try {
-                    box = n.getBBox();
+                    box = this._originSize = n.getBBox();
                     if (box.width && box.height) {
-                        this._originWidth = this.options.width = box.width;
-                        this._originHeight = this.options.height = box.height;
+                        this._originWidth = box.width;
+                        this._originHeight = box.height;
                         size = {width: box.width, height: box.height};
                         this._measured = true;
                         return size;
@@ -244,12 +244,13 @@ kendo_module({
             this.native.setAttribute("fill", this._bg);
         },
         redraw: function (options) {
-            Element.fn.redraw.call(this, options);
+            var that = this;
+            Element.fn.redraw.call(that, options);
 
-            this.setAtr("stroke", "stroke");
-            this.setAtr("stroke-dasharray", "strokeDashArray");
-            this.setAtr("stroke-width", "strokeWidth");
-            this.setAtr("stroke-thickness", "strokeThickness");
+            that.setAtr("stroke", "stroke");
+            that.setAtr("stroke-dasharray", "strokeDashArray");
+            that.setAtr("stroke-width", "strokeWidth");
+            that.setAtr("stroke-thickness", "strokeThickness");
         },
         _hover: function (value) {
             this.background(value ? this.options.hoveredBackground : this.options.background);
@@ -262,12 +263,13 @@ kendo_module({
             VisualBase.fn.init.call(that, native, options);
         },
         redraw: function (options) {
-            VisualBase.fn.redraw.call(this, options);
+            var that = this;
+            VisualBase.fn.redraw.call(that, options);
 
-            if (this.options.x !== undefined && this.options.y !== undefined) {
-                this.position(this.options.x, this.options.y);
+            if (that.options.x !== undefined && that.options.y !== undefined) {
+                that.position(that.options.x, that.options.y);
             }
-            this.size();
+            that.size();
         },
         size: function (value) {
             if (value !== undefined) {
@@ -284,6 +286,7 @@ kendo_module({
     var TextBlock = Visual.extend({
         init: function (options) {
             var that = this;
+            that._originSize = Rect.empty();
             Visual.fn.init.call(that, document.createElementNS(SVGNS, "text"), options);
         },
         options: {
@@ -314,26 +317,16 @@ kendo_module({
             this.setAtr("font-weight", "fontWeight");
             this.content(this.options.text);
         },
-        textBox: function () {
-            var svg = this.native;
-
-            if (svg.parentNode)//bounding box exists only when the node is part of the DOM tree
-            {
-                return svg.getBoundingClientRect();
-            }
-            else {
-                return new Rect();
-            }
-        },
         align: function (alignment) {
             this.options.align = alignment;
             this._align(alignment);
         },
         _align: function () {
+            this._measure();
             var o = this.options,
                 containerRect = new Rect(o.x, o.y, o.width, o.height),
                 aligner = new RectAlign(containerRect),
-                contentBounds = aligner.align(this.textBox(), o.align);
+                contentBounds = aligner.align(this._originSize, o.align);
 
             if (!this.options.align) {
                 return;
@@ -447,27 +440,29 @@ kendo_module({
         }
     });
 
-    var Path = Visual.extend({
+    var Path = VisualBase.extend({
         init: function (options) {
             var that = this;
-            Visual.fn.init.call(that, document.createElementNS(SVGNS, "path"), options);
+            VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "path"), options);
         },
         size: function () {
-            this._measure();
-            var scaleX = this.options.width / this._originWidth,
-                scaleY = this.options.height / this._originHeight,
-                x = this.options.x || 0,
-                y = this.options.y || 0;
+            var that = this;
+            var scaleX = that.options.width / that._originWidth,
+                scaleY = that.options.height / that._originHeight,
+                x = that.options.x || 0,
+                y = that.options.y || 0;
 
             scaleX = Utils.isNumber(scaleX) ? scaleX : 1;
             scaleY = Utils.isNumber(scaleY) ? scaleY : 1;
 
             var transform = new CompositeTransform(x, y, scaleX, scaleY);
-            this.native.setAttribute("transform", transform.toString());
+            that.native.setAttribute("transform", transform.toString());
         },
         redraw: function (options) {
-            Visual.fn.redraw.call(this, options);
-            this.setAtr("d", "data");
+            var that = this;
+            VisualBase.fn.redraw.call(that, options);
+            that.size();
+            that.setAtr("d", "data");
         }
     });
 
@@ -719,7 +714,7 @@ kendo_module({
             id: "SVGRoot"
         },
         bounds: function () {
-            var box = this.native.getBoundingClientRect();
+            var box = this.native.getBBox();
             return new Rect(0, 0, box.width, box.height);
         },
         focus: function () {

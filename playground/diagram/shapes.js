@@ -70,8 +70,8 @@ var shapesSource = [
                 }
             ],
             content: "Custom ctrs",
-            width: 200,
-            height: 200
+            width: 150,
+            height: 150
         }
     },
     {
@@ -89,7 +89,8 @@ var shapesSource = [
     {
         options: {
             name: 'Arrow1',
-            data: 'M25,0.5 L25,10.5 L111.5,10.5 L111.5,30.5 L25,30.5 L25,39.5 L0.5,20.5 z'
+            data: 'M25,0.5 L25,10.5 L111.5,10.5 L111.5,30.5 L25,30.5 L25,39.5 L0.5,20.5 z',
+            content: 'arrow 1'
         }
     },
     {
