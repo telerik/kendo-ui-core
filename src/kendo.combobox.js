@@ -387,7 +387,6 @@ kendo_module({
             text = text === null ? "" : text;
 
             var that = this,
-                textAccessor = that._text,
                 input = that.input[0],
                 ignoreCase = that.options.ignoreCase,
                 loweredText = text,
@@ -396,7 +395,7 @@ kendo_module({
             if (text !== undefined) {
                 dataItem = that.dataItem();
 
-                if (dataItem && textAccessor(dataItem) === text) {
+                if (dataItem && that._text(dataItem) === text && that._value(dataItem).toString() === that._old) {
                     that._triggerCascade();
                     return;
                 }
@@ -406,7 +405,7 @@ kendo_module({
                 }
 
                 that._select(function(data) {
-                    data = textAccessor(data);
+                    data = that._text(data);
 
                     if (ignoreCase) {
                         data = (data + "").toLowerCase();

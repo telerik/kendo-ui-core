@@ -463,6 +463,26 @@
 
                 combobox.text(combobox.text());
             });
+
+            test("ComboBox trigger change on blur after filtration", 1, function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["foo", "bar"],
+                    filter: "contains",
+                    suggest: true
+                }).data("kendoComboBox");
+
+                combobox.value("foo");
+
+                combobox.bind("change", function() {
+                    ok(true);
+                });
+
+                combobox.search("b");
+                combobox.input.val("");
+                combobox.suggest("bar");
+
+                combobox.input.blur();
+            });
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

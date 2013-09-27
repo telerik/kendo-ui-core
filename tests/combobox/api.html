@@ -280,7 +280,7 @@
                 equal(combobox.text(), "");
             });
 
-            asyncTest("text should not change selection if selected item is equal to input.value", 2, function() {
+            test("text should not change selection if selected item is equal to input.value", 2, function() {
                 var combobox = $("<input/>").kendoComboBox({
                     dataTextField: "text",
                     dataValueField: "value",
@@ -294,11 +294,8 @@
                 combobox.select(2);
                 combobox.input.focus().blur();
 
-                setTimeout(function() {
-                    start();
-                    equal(combobox.text(), "Text1");
-                    equal(combobox.value(), 3);
-                }, 200);
+                equal(combobox.text(), "Text1");
+                equal(combobox.value(), 3);
             });
 
             test("text should set empty text to the combobox", function() {
