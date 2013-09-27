@@ -292,8 +292,8 @@ kendo_module({
             var chart = this;
 
             chart.dataSource.unbind(CHANGE, chart._dataChangeHandler);
-            chart.dataSource = dataSource;
-
+            chart.dataSource = chart._originalOptions.dataSource = dataSource;
+            
             dataSource.bind(CHANGE, chart._dataChangeHandler);
 
             if (chart.options.autoBind) {

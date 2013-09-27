@@ -504,6 +504,21 @@
 
                     equal(chart.options.series[0].data.length, 1);
                 });
+                
+                test("gets the data from the dataSource when it is set with the setDataSource method and the setOptions method is used", function(){
+                    var dataSource = new kendo.data.DataSource({
+                        data: [{foo: 1}]
+                    });
+                  
+                    createChart({
+                        series: [{ field: "foo" }]
+                    });
+                    
+                    chart.setDataSource(dataSource);
+           
+                    chart.setOptions({});
+                    ok(chart.options.series[0].data.length === 1);
+                });
 
                 test("calls redraw implicitly", function() {
                     createChart();
