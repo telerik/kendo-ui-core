@@ -200,16 +200,15 @@ kendo_module({
         _hover: function () {
         },
         _measure: function () {
-            var size, box, n = this.native;
+            var box, n = this.native;
             if (!this._measured) {
                 try {
                     box = this._originSize = n.getBBox();
                     if (box.width && box.height) {
                         this._originWidth = box.width;
                         this._originHeight = box.height;
-                        size = {width: box.width, height: box.height};
                         this._measured = true;
-                        return size;
+                        return this._originSize;
                     }
                 }
                 catch (e) {
