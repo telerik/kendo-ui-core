@@ -110,10 +110,7 @@ kendo_module({
                 // TODO: Either pass layer type directly or create from a factory based on type id
                 var l;
                 var scale = this.scale();
-                var options = deepExtend({}, defs[i], {
-                    width: scale,
-                    height: scale
-                });
+                var options = defs[i];
                 if (options.type === "tile") {
                     l = new TileLayer(this, options);
                 } else {
@@ -399,6 +396,11 @@ kendo_module({
         init: function(map, options) {
             var layer = this;
 
+            options = deepExtend({}, options, {
+                width: map.element.width(),
+                height: map.element.height()
+            });
+
             layer.map = map;
             layer.view = ViewFactory.create(
                 options, options.renderAs
@@ -435,9 +437,7 @@ kendo_module({
                 var poly = this.view.createPolyline(ringPoints, true, {
                     stroke: "#ff0000",
                     strokeWidth: 1,
-                    strokeOpacity: 0.5,
-                    fill: "#006ec8",
-                    fillOpacity: 0.2,
+                    strokeOpacity: 1,
                     align: false
                 });
 
@@ -486,7 +486,18 @@ kendo_module({
 
         _drag: function(e) {
             var scroller = this.map.scroller;
-            this.movable.moveTo({x: -scroller.scrollLeft, y: -scroller.scrollTop});
+            var offset = { x: scroller.scrollLeft, y: scroller.scrollTop };
+            var element = element;
+
+            // TODO: Viewport info
+            var width = this.element.width();
+            var height = this.element.height();
+
+            this.movable.moveTo(offset);
+            var viewBox = kendo.format("{0} {1} {2} {3}",
+                                       offset.x, offset.y, width, height);
+
+            $("svg", element)[0].setAttribute("viewBox", viewBox)
         }
     });
 
