@@ -1,39 +1,33 @@
 <div id="example" class="k-content">
 
     <div class="demo-section">
-        <h2>Results for #kendoui</h2>
-        <div class="twit-reader">
-            <div id="listView"></div>
-        </div>
+        <div id="listView"></div>
+        <div id="pager" class="k-pager-wrap"></div>
     </div>
 
-    <script type="text/x-kendo-tmpl" id="template">
-        <div class="twit">
-            <a class="t-link" href="http://www.twitter.com/#:user.screen_name#" title="#:user.name#"><img width="48" height="48" src="#:user.profile_image_url#" alt="#:user.name#" /></a>
-            <p>#:text#</p>
+    <script type="text/x-kendo-template" id="template">
+        <div class="product">
+            <img src="../../content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />
+            <h3>#:ProductName#</h3>
+            <p>#:kendo.toString(UnitPrice, "c")#</p>
         </div>
     </script>
 
     <script>
-        $(document).ready(function() {
+        $(function() {
             var dataSource = new kendo.data.DataSource({
-                    transport: {
-                        read: {
-                            url: "http://demos.kendoui.com/service/Twitter/Search", // the remote service url - Twitter API v1.1
-                            contentType: "application/json; charset=utf-8",
-                            type: "GET",
-                            dataType: "jsonp",
-                            data: {
-                                q: "#kendoui"
-                            }
-                        }
-                    },
-                    schema: {
-                        data: function(data) {
-                            return data.statuses || [];
-                        }
+                transport: {
+                    read: {
+                        url: "http://demos.kendoui.com/service/Products",
+                        dataType: "jsonp"
                     }
-                });
+                },
+                pageSize: 15
+            });
+
+            $("#pager").kendoPager({
+                dataSource: dataSource
+            });
 
             $("#listView").kendoListView({
                 dataSource: dataSource,
@@ -44,67 +38,61 @@
 
     <style scoped>
         .demo-section {
-            width: 410px;
             padding: 30px;
+            width: 577px;
         }
-        .demo-section h2 {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-        .twit-reader
-        {
-            width: 410px;
-            margin: 0 auto;
-            padding: 0;
-            border: 1px solid rgba(0,0,0,0.1);
-            height: 400px;
-            overflow: auto;
-            -webkit-transform: translatez(0);
-            position:relative; /*IE7*/
-        }
-        .k-listview
-        {
-            padding: 0;
-            border: 0;
-        }
-        .twit
-        {
-            width: 370px;
-            height: 54px;
-            margin: 0;
+        #listView {
             padding: 10px;
-            border-top: 1px solid rgba(255,255,255,1);
-            border-right: 1px solid rgba(0,0,0,0.1);
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            border-left: 1px solid rgba(255,255,255,0.1);
-
-            background: -moz-linear-gradient(top,  rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.10) 100%);
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.05)), color-stop(100%,rgba(0,0,0,0.10)));
-            background: -webkit-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
-            background: -o-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
-            background: -ms-linear-gradient(top,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
-            background: linear-gradient(to bottom,  rgba(0,0,0,0.05) 0%,rgba(0,0,0,0.10) 100%);
+            margin-bottom: -1px;
+            min-width: 555px;
+            min-height: 510px;
         }
-        .twit img
-        {
-            border: 3px solid transparent;
+        .product {
             float: left;
-        }
-        .twit a:hover img
-        {
-            border: 3px solid #00acec;
-        }
-        .twit p
-        {
-            float: left;
+            position: relative;
+            width: 111px;
+            height: 170px;
             margin: 0;
-            padding: 0 0 0 10px;
-            width: 300px;
+            padding: 0;
         }
-        .twit:after
-        {
-            scontent: ".";
+        .product img {
+            width: 110px;
+            height: 110px;
+        }
+        .product h3 {
+            margin: 0;
+            padding: 3px 5px 0 0;
+            max-width: 96px;
+            overflow: hidden;
+            line-height: 1.1em;
+            font-size: .9em;
+            font-weight: normal;
+            text-transform: uppercase;
+            color: #999;
+        }
+        .product p {
+            visibility: hidden;
+        }
+        .product:hover p {
+            visibility: visible;
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            line-height: 110px;
+            vertical-align: middle;
+            text-align: center;
+            color: #fff;
+            background-color: rgba(0,0,0,0.75);
+            transition: background .2s linear, color .2s linear;
+            -moz-transition: background .2s linear, color .2s linear;
+            -webkit-transition: background .2s linear, color .2s linear;
+            -o-transition: background .2s linear, color .2s linear;
+        }
+        .k-listview:after {
+            content: ".";
             display: block;
             height: 0;
             clear: both;
