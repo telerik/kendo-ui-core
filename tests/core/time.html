@@ -184,6 +184,10 @@
                 equal(kendo.timezone.abbr(new Date(2010, 0, 1), "Europe/London"), "GMT");
             });
 
+            test("abbr returns GMT for Isle of Man territory pointing to London timezone", function () {
+                equal(kendo.timezone.abbr(new Date(2010, 0, 1), "Europe/Isle_of_Man"), "GMT");
+            });
+
             test("abbr returns BST for summer time in London", function () {
                 equal(kendo.timezone.abbr(new Date(2010, 6, 1), "Europe/London"), "BST");
             });

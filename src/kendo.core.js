@@ -3117,21 +3117,25 @@ function pad(number, digits, end) {
         }
 
         function findZone(utcTime, zones, timezone) {
-            zones = zones[timezone];
+            var zoneRules = zones[timezone];
 
-            if (!zones) {
+            if (typeof zoneRules === "string") {
+                zoneRules = zones[zoneRules];
+            }
+
+            if (!zoneRules) {
                 throw new Error('Timezone "' + timezone + '" is either incorrect, or kendo.timezones.min.js is not included.');
             }
 
-            for (var idx = zones.length - 1; idx >= 0; idx--) {
-                var until = zones[idx][3];
+            for (var idx = zoneRules.length - 1; idx >= 0; idx--) {
+                var until = zoneRules[idx][3];
 
                 if (until && utcTime > until) {
                     break;
                 }
             }
 
-            var zone = zones[idx + 1];
+            var zone = zoneRules[idx + 1];
 
             if (!zone) {
                 throw new Error('Timezone "' + timezone + '" not found on ' + utcTime + ".");
