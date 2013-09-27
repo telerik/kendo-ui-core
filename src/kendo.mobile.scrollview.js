@@ -204,7 +204,6 @@ kendo_module({
             var that = this;
 
             kendo.Observable.fn.init.call(this);
-
             that.element = element;
             that.pane = pane;
             that._getPages();
@@ -694,6 +693,7 @@ kendo_module({
 
         content: function(html) {
            this.element.children().first().html(html);
+           this._content._getPages();
            this.pane.refresh();
         },
 
