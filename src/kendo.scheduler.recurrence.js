@@ -65,7 +65,7 @@ kendo_module({
                     if (months.length) {
                         date.setMonth(months[0] - 1, 1);
                     } else {
-                        date.setFullYear(date.getFullYear() + 1, monthRules[0], 1);
+                        date.setFullYear(date.getFullYear() + 1, monthRules[0] - 1, 1);
                     }
 
                     changed = true;
@@ -819,7 +819,11 @@ kendo_module({
             hours, minutes, seconds,
             durationMS, startPeriod,
             ruleStart, ruleEnd,
+            useEventStart, freqName,
             exceptionDates,
+            eventStartTime,
+            eventStartMS,
+            eventStart,
             count, freq,
             current = 1,
             events = [];
@@ -838,24 +842,26 @@ kendo_module({
             });
         }
 
-        var eventStart = event.start;
-        var eventStartMS = eventStart.getTime();
-        var eventStartTime = getMilliseconds(eventStart);
+        eventStart = event.start;
+        eventStartMS = eventStart.getTime();
+        eventStartTime = getMilliseconds(eventStart);
 
         exceptionDates = parseExceptions(event.recurrenceException, zone);
         startPeriod = start = new Date(start);
         end = new Date(end);
 
-        freq = frequencies[rule.freq];
+        freqName = rule.freq;
+        freq = frequencies[freqName];
         count = rule.count;
 
         if (rule.until && rule.until < end) {
             end = new Date(rule.until);
         }
 
-        if (start < eventStartMS || count || rule.interval > 1) {
+        useEventStart = freqName === "yearly" || freqName === "monthly" || freqName === "weekly";
+
+        if (start < eventStartMS || count || rule.interval > 1 || useEventStart) {
             start = new Date(eventStartMS);
-            hours = start.getHours();
         } else {
             hours = start.getHours();
             minutes = start.getMinutes();

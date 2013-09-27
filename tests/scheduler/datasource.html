@@ -1138,8 +1138,8 @@
                 var data = dataSource.expand(new Date(2013, 1, 2), new Date(2013, 4, 31));
                 var view = dataSource.view();
 
-                deepEqual(data[0].start, view[0].start);
-                deepEqual(data[0].end, view[0].end);
+                deepEqual(data[0].start, new Date(2013, 2, 1, 16, 30));
+                deepEqual(data[0].end, new Date(2013, 2, 3, 17, 0));
             });
 
             test("SchedulerDataSource insert method returns undefined if model is not passed", function() {
