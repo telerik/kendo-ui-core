@@ -221,7 +221,7 @@ test("Shape bounds changed event is raised after position set", function () {
     var s = kdiagram.addShape(new Point(0, 0)),
         raised;
 
-    s.bind("boundsChange", function () {
+    kdiagram.bind("boundsChange", function () {
         raised = true;
     });
 
@@ -233,7 +233,7 @@ test("Shape bounds changed event is raised after bounds set", function () {
     var s = kdiagram.addShape(new Point(0, 0)),
         raised;
 
-    s.bind("boundsChange", function () {
+    kdiagram.bind("boundsChange", function () {
         raised = true;
     });
 
