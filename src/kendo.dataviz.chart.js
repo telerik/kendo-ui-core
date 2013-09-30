@@ -562,7 +562,6 @@ kendo_module({
             if (kendo.UserEvents) {
                 chart._userEvents = new kendo.UserEvents(element, {
                     global: true,
-                    threshold: 5,
                     filter: ":not(.k-selector)",
                     multiTouch: false,
                     start: proxy(chart._start, chart),
@@ -8951,7 +8950,6 @@ kendo_module({
                 if (kendo.UserEvents) {
                     that.userEvents = new kendo.UserEvents(that.wrapper, {
                         global: true,
-                        threshold: 5,
                         stopPropagation: true,
                         multiTouch: true,
                         start: proxy(that._start, that),
