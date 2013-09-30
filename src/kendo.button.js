@@ -24,7 +24,7 @@
     var Button = Widget.extend({
         init: function(element, options) {
             var that = this;
-                
+
             Widget.fn.init.call(that, element, options);
 
             element = that.wrapper = that.element;
@@ -141,17 +141,16 @@
         enable: function(enable) {
             var that = this,
                 element = that.element;
-            if (typeof enable == "undefined") {
+
+            if (enable === undefined) {
                 enable = true;
             }
+
             enable = !!enable;
             that.options.enable = enable;
-            element.toggleClass(DISABLEDSTATE, !enable).attr("aria-disabled", !enable);
-            if (enable) {
-                element.removeAttr(DISABLED);
-            } else {
-                element.attr(DISABLED, DISABLED);
-            }
+            element.toggleClass(DISABLEDSTATE, !enable)
+                   .attr("aria-disabled", !enable)
+                   .attr(DISABLED, !enable);
         }
     });
 
