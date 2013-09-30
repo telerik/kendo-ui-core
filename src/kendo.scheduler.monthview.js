@@ -252,9 +252,11 @@ kendo_module({
                 that.element.on("dblclick" + NS, ".k-scheduler-monthview .k-scheduler-content td", function(e) {
                     var offset = $(e.currentTarget).offset();
                     var slot = that._slotByPosition(offset.left, offset.top);
-                    var resourceInfo = that._resourceBySlot(slot);
 
-                    that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.startDate(), end: slot.startDate() }, resourceInfo ) });
+                    if (slot) {
+                        var resourceInfo = that._resourceBySlot(slot);
+                        that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.startDate(), end: slot.startDate() }, resourceInfo ) });
+                    }
 
                     e.preventDefault();
                 });
@@ -285,9 +287,12 @@ kendo_module({
                     tap: function(e) {
                         var offset = $(e.target).offset();
                         var slot = that._slotByPosition(offset.left, offset.top);
-                        var resourceInfo = that._resourceBySlot(slot);
 
-                        that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.startDate(), end: slot.endDate() }, resourceInfo ) });
+                        if (slot) {
+                            var resourceInfo = that._resourceBySlot(slot);
+                            that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.startDate(), end: slot.endDate() }, resourceInfo ) });
+                        }
+
                         e.preventDefault();
                     }
                 });

@@ -599,18 +599,19 @@ kendo_module({
                     if (!$(this).parent().hasClass("k-scheduler-header-all-day")) {
                         var slot = that._slotByPosition(e.pageX, e.pageY);
 
-                        var resourceInfo = that._resourceBySlot(slot);
-
-                        that.trigger("add", { eventInfo: extend({ start: slot.startDate(), end: slot.endDate() }, resourceInfo) });
+                        if (slot) {
+                            var resourceInfo = that._resourceBySlot(slot);
+                            that.trigger("add", { eventInfo: extend({ start: slot.startDate(), end: slot.endDate() }, resourceInfo) });
+                        }
 
                         e.preventDefault();
                     }
                 }).on("dblclick" + NS, ".k-scheduler-header-all-day td", function(e) {
                     var slot = that._slotByPosition(e.pageX, e.pageY);
-                    var resourceInfo = that._resourceBySlot(slot);
-
-                    that.trigger("add", { eventInfo: extend({}, { isAllDay: true, start: kendo.date.getDate(slot.startDate()), end: kendo.date.getDate(slot.startDate()) }, resourceInfo) });
-
+                    if (slot) {
+                        var resourceInfo = that._resourceBySlot(slot);
+                        that.trigger("add", { eventInfo: extend({}, { isAllDay: true, start: kendo.date.getDate(slot.startDate()), end: kendo.date.getDate(slot.startDate()) }, resourceInfo) });
+                    }
                     e.preventDefault();
                 });
             }
@@ -640,8 +641,12 @@ kendo_module({
                     tap: function(e) {
                         if (!$(e.target).parent().hasClass("k-scheduler-header-all-day")) {
                             var slot = that._slotByPosition(e.x.location, e.y.location);
-                            var resourceInfo = that._resourceBySlot(slot);
-                            that.trigger("add", { eventInfo: extend({ start: slot.startDate(), end: slot.endDate() }, resourceInfo) });
+
+                            if (slot) {
+                                var resourceInfo = that._resourceBySlot(slot);
+                                that.trigger("add", { eventInfo: extend({ start: slot.startDate(), end: slot.endDate() }, resourceInfo) });
+                            }
+
                             e.preventDefault();
                         }
                     }
@@ -651,9 +656,11 @@ kendo_module({
                     filter: ".k-scheduler-header-all-day td",
                     tap: function(e) {
                         var slot = that._slotByPosition(e.x.location, e.y.location);
-                        var resourceInfo = that._resourceBySlot(slot);
 
-                        that.trigger("add", { eventInfo: extend({}, { isAllDay: true, start: kendo.date.getDate(slot.startDate()), end: kendo.date.getDate(slot.endDate()) }, resourceInfo) });
+                        if (slot) {
+                            var resourceInfo = that._resourceBySlot(slot);
+                            that.trigger("add", { eventInfo: extend({}, { isAllDay: true, start: kendo.date.getDate(slot.startDate()), end: kendo.date.getDate(slot.endDate()) }, resourceInfo) });
+                        }
 
                         e.preventDefault();
                     }
