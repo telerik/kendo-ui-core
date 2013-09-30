@@ -10150,11 +10150,13 @@ kendo_module({
     function ensureTree(fieldName, target) {
         if (fieldName.indexOf(".") > -1) {
             var parts = fieldName.split("."),
-                path = "";
+                path = "",
+                val;
 
             while (parts.length > 1) {
                 path += parts.shift();
-                target[path] = target[path] || {};
+                val = kendo.getter(path)(target) || {};
+                kendo.setter(path)(target, val);
                 path += ".";
             }
         }
@@ -10283,6 +10285,7 @@ kendo_module({
         ceilDate: ceilDate,
         countNumbers: countNumbers,
         duration: duration,
+        ensureTree: ensureTree,
         indexOf: indexOf,
         isNumber: isNumber,
         floorDate: floorDate,

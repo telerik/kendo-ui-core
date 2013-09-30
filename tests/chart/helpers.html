@@ -1424,6 +1424,31 @@
                 equal(dataviz.decodeEntities(1), 1);
             });
 
+            // ------------------------------------------------------------
+            var ensureTree = dataviz.ensureTree;
+            module("ensureTree");
+
+            test("ensures shallow path", function() {
+                var obj = {};
+                ensureTree("foo.bar", obj);
+
+                deepEqual(obj, { foo: {} });
+            });
+
+            test("ensures deep path", function() {
+                var obj = {};
+                ensureTree("foo.bar.baz", obj);
+
+                deepEqual(obj, { foo: { bar: { } } });
+            });
+
+            test("preserves existing data", function() {
+                var obj = { foo: { val: 1 } };
+                ensureTree("foo.bar.baz", obj);
+
+                deepEqual(obj, { foo: { val: 1, bar: { } } });
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
