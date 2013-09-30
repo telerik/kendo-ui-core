@@ -263,6 +263,20 @@
                 equal($.trim(dom.find("div strong").html()), "bar");
             });
 
+            test("setOptions changes template", function() {
+                var dom = $('<div data-role="listview" data-template="template" data-bind="source:items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+
+                kendo.bind(dom, observable);
+
+                var listView = dom.data("kendoListView");
+                listView.setOptions({ template: "<div>template</div>" });
+                listView.refresh();
+
+                var firstItemHtml = $.trim(listView.element.children().first().html());
+                equal(firstItemHtml, "template");
+            });
         </script>
 
         <script id="template" type="text/x-kendo-template">

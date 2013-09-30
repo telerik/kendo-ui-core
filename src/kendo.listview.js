@@ -62,9 +62,7 @@ kendo_module({
 
             that._dataSource();
 
-            that.template = kendo.template(options.template || "");
-            that.altTemplate = kendo.template(options.altTemplate || options.template);
-            that.editTemplate = kendo.template(options.editTemplate || "");
+            that._templates();
 
             that._navigatable();
 
@@ -99,6 +97,20 @@ kendo_module({
             template: "",
             altTemplate: "",
             editTemplate: ""
+        },
+
+        setOptions: function(options) {
+            Widget.fn.setOptions.call(this, options);
+
+            this._templates();
+        },
+
+        _templates: function() {
+            var options = this.options;
+
+            this.template = kendo.template(options.template || "");
+            this.altTemplate = kendo.template(options.altTemplate || options.template);
+            this.editTemplate = kendo.template(options.editTemplate || "");
         },
 
         _item: function(action) {
