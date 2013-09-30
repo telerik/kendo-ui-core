@@ -37,7 +37,9 @@ kendo_module({
         Cursors = diagram.Cursors,
         Utils = diagram.Utils,
         Observable = kendo.Observable,
-        Ticker = diagram.Ticker;
+        Ticker = diagram.Ticker,
+        ToBackUnit = diagram.ToBackUnit,
+        ToFrontUnit = diagram.ToFrontUnit;
 
     // Constants ==============================================================
     var NS = ".kendoDiagram",
@@ -682,6 +684,21 @@ kendo_module({
         return resCtr;
     }
 
+    function indicesOfItems(group, visuals) {
+        var i, indices = [], visual;
+        for (i = 0; i < visuals.length; i++) {
+            visual = visuals[i];
+            for (var j = 0; j < group.children.length; j++) {
+                var other = group.children[j];
+                if (other == visual.native) {
+                    indices.push(j);
+                    break;
+                }
+            }
+        }
+        return indices;
+    }
+
     var Diagram = Widget.extend({
         init: function (element, options) {
             var that = this;
@@ -878,14 +895,33 @@ kendo_module({
                 return this._selectedItems; // returns all selected items.
             }
         },
-        bringToFront: function (items) {
-            var result = this._getDiagramItems(items);
-            this.mainLayer.bringToFront(result.visuals);
-            this._fixOrdering(result, true);
+        toFront: function (items, undoable) {
+            var result = this._getDiagramItems(items), indices;
+            if (Utils.isUndefined(undoable) || undoable) {
+                indices = indicesOfItems(this.mainLayer.native, result.visuals);
+                var unit = new ToFrontUnit(this, items, indices);
+                this.undoRedoService.add(unit);
+            }
+            else {
+                this.mainLayer.toFront(result.visuals);
+                this._fixOrdering(result, true);
+            }
         },
-        sendToBack: function (items) {
+        toBack: function (items, undoable) {
+            var result = this._getDiagramItems(items), indices;
+            if (Utils.isUndefined(undoable) || undoable) {
+                indices = indicesOfItems(this.mainLayer.native, result.visuals);
+                var unit = new ToBackUnit(this, items, indices);
+                this.undoRedoService.add(unit);
+            }
+            else {
+                this.mainLayer.toBack(result.visuals);
+                this._fixOrdering(result, false);
+            }
+        },
+        _toIndex: function (items, indices) {
             var result = this._getDiagramItems(items);
-            this.mainLayer.sendToBack(result.visuals);
+            this.mainLayer.toIndex(result.visuals, indices);
             this._fixOrdering(result, false);
         },
         bringIntoView: function (node, options) { // jQuery|Item|Array|Rect
