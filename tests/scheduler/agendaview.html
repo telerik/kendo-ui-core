@@ -23,6 +23,8 @@
 
             var Event = kendo.data.SchedulerEvent;
 
+            module("Agenda view", { });
+
             function agendaView(options) {
                 var agenda = new kendo.ui.AgendaView($("<div>"), options);
 
@@ -608,6 +610,105 @@
 
                 equal(rows.filter("[aria-selected=false]").length, rows.length);
             });
+
+            module("mobile phone agenda view", {
+                setup: function() {
+                    kendo.support.mobileOS = {
+                        "device":"iphone",
+                        "tablet":false,
+                        "browser":"mobilesafari",
+                        "name":"ios",
+                        "ios":true,
+                        "majorVersion":"4",
+                        "minorVersion":"3.2",
+                        "flatVersion":"432",
+                        "appMode":false
+                    };
+
+                },
+                teardown: function() {
+                    kendo.support.mobileOS = null;
+                }
+            });
+
+            test("date cell has colspan equal to the number of detail columns", function() {
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 01:00"),
+                        title: "event 1"
+                    }),
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 01:00"),
+                        title: "event 2"
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var dateCell = table.find("td.k-scheduler-datecolumn");
+
+                equal(dateCell.attr("colspan"), 2);
+            });
+
+            test("date cell has no rowspan set", function() {
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+
+                agenda.render([
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 01:00"),
+                        title: "event 1"
+                    }),
+                    new Event({
+                        start: new Date("2013/06/06 00:00"),
+                        end: new Date("2013/06/06 01:00"),
+                        title: "event 2"
+                    })
+                ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                var dateCell = table.find("td.k-scheduler-datecolumn");
+
+                ok(!dateCell.filter("[rowspan]").length);
+            });
+
+            test("delete icon is not rendered", 1, function() {
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+
+                var event = new Event({
+                                start: new Date("2013/06/06 00:00"),
+                                end: new Date("2013/06/06 01:00"),
+                                title: ""
+                            });
+
+                agenda.render([ event ]);
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                equal(table.find(".k-si-close").length, 0);
+            });
+
+            test("agenda renders table with headers only for time and event", function() {
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+
+                var table = agenda.element.find(".k-scheduler-table");
+
+                ok(!table.find(".k-scheduler-datecolumn").length);
+
+                var timeHeaderCell = table.find(".k-scheduler-timecolumn");
+
+                equal(timeHeaderCell.text(), "Time");
+
+                var eventHeaderCell = timeHeaderCell.next();
+
+                equal(eventHeaderCell.text(), "Event");
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

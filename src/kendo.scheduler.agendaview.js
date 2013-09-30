@@ -83,10 +83,14 @@ kendo_module({
 
         _layout: function() {
             var columns = [
-                    { text: this.options.messages.date, className: "k-scheduler-datecolumn" },
                     { text: this.options.messages.time, className: "k-scheduler-timecolumn" },
                     { text: this.options.messages.event }
                 ];
+
+            if (!this._isMobilePhoneView) {
+                columns.splice(0, 0, { text: this.options.messages.date, className: "k-scheduler-datecolumn" });
+            }
+
             var resources = this.groupedResources;
             if (resources.length) {
                 var groupHeaders = [];
@@ -157,7 +161,7 @@ kendo_module({
         _renderTaskGroups: function(tasksGroups, groups) {
             var tableRows = [];
             var editable = this.options.editable;
-            var showDelete = editable && editable.destroy !== false;
+            var showDelete = editable && editable.destroy !== false && !kendo.support.mobileOS;
 
             for (var taskGroupIndex = 0; taskGroupIndex < tasksGroups.length; taskGroupIndex++) {
                 var date = tasksGroups[taskGroupIndex].value;
@@ -171,9 +175,11 @@ kendo_module({
 
                     var tableRow = [];
 
+                    var headerCells = !this._isMobilePhoneView ? tableRow : [];
+
                     if (taskGroupIndex === 0 && taskIndex === 0 && groups.length) {
                         for (var idx = 0; idx < groups.length; idx++) {
-                            tableRow.push(kendo.format(
+                            headerCells.push(kendo.format(
                                 '<td class="k-scheduler-groupcolumn{2}" rowspan="{0}">{1}</td>',
                                 groups[idx].rowSpan,
                                 this._groupTemplate({ value: groups[idx].text }),
@@ -183,12 +189,21 @@ kendo_module({
                     }
 
                     if (taskIndex === 0) {
-                        tableRow.push(kendo.format(
-                            '<td class="k-scheduler-datecolumn{2}" rowspan="{0}">{1}</td>',
-                            tasks.length,
-                            this._dateTemplate({ date: date }),
-                            taskGroupIndex == tasksGroups.length - 1 && !groups.length ? " k-last" : ""
-                        ));
+                        if (this._isMobilePhoneView) {
+                            headerCells.push(kendo.format(
+                                '<td class="k-scheduler-datecolumn" colspan="2">{0}</td>',
+                                this._dateTemplate({ date: date })
+                            ));
+
+                            tableRows.push('<tr role="row" aria-selected="false"' + (today ? ' class="k-today">' : ">") + headerCells.join("")  + "</tr>");
+                        } else {
+                            tableRow.push(kendo.format(
+                                '<td class="k-scheduler-datecolumn{2}" rowspan="{0}">{1}</td>',
+                                tasks.length,
+                                this._dateTemplate({ date: date }),
+                                taskGroupIndex == tasksGroups.length - 1 && !groups.length ? " k-last" : ""
+                            ));
+                        }
                     }
 
                     if (task.head) {
@@ -284,6 +299,11 @@ kendo_module({
                     } else {
                         obj.items = tasks;
                         var span = rowSpan(obj.items);
+
+                        if (this._isMobilePhoneView) {
+                            span += obj.items.length;
+                        }
+
                         obj.rowSpan = span;
                         if (parent) {
                             parent.rowSpan += span;
