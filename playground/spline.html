@@ -7,6 +7,7 @@
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.data.js"></script>
+         <script src="../src/kendo.binder.js"></script>
         <script src="../src/kendo.userevents.js"></script>
         <script src="../src/kendo.dataviz.core.js"></script>
         <script src="../src/kendo.dataviz.chart.js"></script>
@@ -17,8 +18,43 @@
         <script src="../src/kendo.dataviz.themes.js"></script>
         <script src="CurveProcessor.js"></script>
     </head>
-    <body>    
-    <div id="polar2"></div>
+    <body>
+    <div id="container">
+        [{<input data-bind="value: data[0].x"/>, <input data-bind="value: data[0].y"/>},{<input data-bind="value: data[1].x"/>, <input data-bind="value: data[1].y"/>},{<input data-bind="value: data[2].x"/>, <input data-bind="value: data[2].y"/>}]
+       
+    </div>
+     <div id="scatterTester"></div>
+    <script>
+       
+        var model = kendo.data.Model.define({
+            fields: {
+                x: {type: "number"},
+                y: {type: "number"}
+            }
+        });
+         var arr = new kendo.data.ObservableArray([new model({x: 5, y: 5}),new model({x: 1, y: 1}),new model({x: 4, y: 4})]);
+        var viewModel = kendo.observable({
+            data: arr
+        });
+        kendo.bind($("#container"), viewModel);
+         $("#scatterTester").kendoChart({
+                seriesDefaults: {
+                    type: "scatterLine",
+                    smooth: true
+                },
+                dataSource: arr,
+                series: [{
+                    xField: "x",
+                    yField: "y"
+                }],               
+                tooltip: {
+                    visible: true,
+                    format: "{1}% in {0} minutes"
+                }
+            });
+    
+    </script>
+  <!--  <div id="polar2"></div>
     <div id="polar3"></div>
     <div id="polar"></div>
      <div id="polarArea"></div>
@@ -36,7 +72,7 @@
      <div id="stackedSpline"></div>
         <div id="notesSpline"></div>
        <div id="splineGroupedData"></div>
-    <div id="verticalSpline"></div> 
+    <div id="verticalSpline"></div> -->
     <script>    
     
       var sunPos = [

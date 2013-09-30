@@ -3640,7 +3640,7 @@ kendo_module({
             if(length < 3){
                 return points;
             }        
-       
+            
             addPoint(points[0]);
             
             currentPoints = closed ? [points[length - 1], points[0], points[1]] : points.slice(0,3);
@@ -3686,17 +3686,32 @@ kendo_module({
         },
         
         getOrientation: function(points){
-            var orientation = {};
-            if(this.isLinearByField(points, "x")){
+            var that = this,                
+                orientation = {},
+                fn, y3;
+            if(that.isLinearByField(points,"x")){                
                 orientation.xField = "x";
                 orientation.yField = "y";
-            }
-            else{
-                orientation.xField = "y";
-                orientation.yField = "x"; 
+            } else {
+                fn = that.lineEquation(points[0],points[1]);
+                y3 = that.calculateFunction(fn, points[2].x);
+                if((points[0].y < points[1].y && points[2].y < y3) || 
+                    (points[1].y < points[0].y && points[2].y > y3)) {
+                    orientation.xField = "x";
+                    orientation.yField = "y";
+                } else {
+                    orientation.xField = "y";
+                    orientation.yField = "x"; 
+                }
             }
             return orientation;
         },
+        
+        lineEquation: function(p1, p2){
+            var a = (p2.y - p1.y) / (p2.x - p1.x),
+                b = p1.y - a * p1.x;            
+            return [b,a];
+        },              
         
         getSymetricToPoint: function(idx, points, fn, xField, yField){
             var y = points[idx][yField],
@@ -3773,22 +3788,17 @@ kendo_module({
             else{ 
                 //check if the curve can be made smooth when x1 == x2
                  if(that.isLinearByField(currentPoints, xField)){                                       
-                    controlPoint2 = that.getSecondControlPoint(0, p0,p1,xField,yField);
-                    nextControlPoint = that.getFirstControlPoint(0, p1, p2,xField,yField);
+                    controlPoint2 = that.getSecondControlPoint(0, p0, p1, xField, yField);
+                    nextControlPoint = that.getFirstControlPoint(0, p1, p2, xField, yField);
                  }
-                 else{                    
-                    if(that.hasExtremumByField(currentPoints, yField)){                        
-                        controlPoint2 = that.getSecondControlPoint(allowedError, p0, p1,yField,xField);
-                        nextControlPoint = that.getFirstControlPoint(allowedError, p1, p2,xField,yField);
-                    }
-                    else{                        
-                        controlPoint2 = that.getSecondControlPoint(allowedError, p0, p1,xField,yField);
-                        nextControlPoint = that.getFirstControlPoint(allowedError, p1, p2,yField,xField);
-                    }
+                 else{   
+                    controlPoint2 = that.getSecondControlPoint(allowedError, p0, p1,xField,yField);
+                    nextControlPoint = that.getFirstControlPoint(allowedError, p1, p2,yField,xField);
                  }
             }
             return [controlPoint2, nextControlPoint];
-        },  
+        }, 
+        
         isLinearByField: function(points, field){
             var isAscending = true,
                 isDescending = true,
@@ -3800,11 +3810,13 @@ kendo_module({
                 isDescending = isDescending && points[i][field] > points[i+1][field];
             }
             return isAscending || isDescending;
-        },        
+        },     
+        
         hasExtremumByField: function(points, field){
             return (points[0][field] < points[1][field] && points[2][field] < points[1][field]) || 
                         (points[1][field] < points[0][field] && points[1] < points[2][field]);
         },      
+        
         getTangent: function(points, xField, yField){
             var tangent,
                 x = points[1][xField] - points[0][xField],
@@ -3820,11 +3832,13 @@ kendo_module({
             }
                                        
             return tangent;
-        },        
+        },   
+        
         isMonotonic: function(points,yField){
             return (points[2][yField] > points[1][yField] && points[1][yField] > points[0][yField]) ||
                         (points[2][yField] < points[1][yField] && points[1][yField] < points[0][yField]);
         },  
+        
         getFirstControlPoint: function(tangent, p0,p3, xField, yField){
             var controlPoint = new Point2D(),
                 t1 = p0[xField],
@@ -3836,6 +3850,7 @@ kendo_module({
             controlPoint[yField] = p0[yField] + t * weigth * tangent;
             return controlPoint;
         },
+        
         getSecondControlPoint: function(tangent, p0,p3, xField, yField){
             var controlPoint = new Point2D(),
                 t1 = p0[xField],
@@ -3846,6 +3861,7 @@ kendo_module({
             controlPoint[yField] = p3[yField] - t * weigth * tangent;
             return controlPoint;
         },
+        
         getParabolaPointsFunction: function(points, xField, yField){
             var that = this,
                 m = that.getReverseMatrix(that.initMatrix(points,xField)),
@@ -3857,7 +3873,8 @@ kendo_module({
             fn = that.multiplyMatrixByVector(m, v);
 
             return fn;
-        },      
+        },  
+        
         calculateFunction: function(fn,x){
             var result = 0,
                 length = fn.length;
@@ -3866,6 +3883,7 @@ kendo_module({
             }
             return result;
         },
+        
         getDerivative: function(fn){
             var result = [],
                 length = fn.length;
@@ -3873,7 +3891,8 @@ kendo_module({
                 result[i-1] = fn[i] * i;
             }
             return result;
-        },    
+        },
+        
         initMatrix: function(points,xField){
             var m = [],
                 length = points.length;
@@ -3885,7 +3904,8 @@ kendo_module({
                }
             }
             return m;
-        },    
+        }, 
+        
         multiplyMatrixByVector: function(m,v){
             var result = [],
                 product,           
@@ -3900,6 +3920,7 @@ kendo_module({
             }
             return result;
         },
+        
         getReverseMatrix: function(m){
             var that = this,
                 result = [],
@@ -3918,6 +3939,7 @@ kendo_module({
             result = that.transpondMultiply(result, 1/determinant);
             return result;        
         },
+        
         transpondMultiply: function(m,a){
             var result = [],
                 length = m.length;
@@ -3929,6 +3951,7 @@ kendo_module({
             }
             return result;
         },
+        
         getDeterminant: function(m){
             var length = m.length,
                 result = 0;
