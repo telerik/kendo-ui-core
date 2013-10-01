@@ -28,6 +28,18 @@
                     ],
                     pageSize: 2
                 },
+                columns: [
+                    {
+                        field: "foo",
+                        values: [
+                            { value: 1, text: "foo" },
+                            { value: 2, text: "bar" }
+                        ]
+                    },
+                    "bar",
+                    "date",
+                    "number"
+                ],
                 pageable: true,
                 filterable: true
             });
