@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Surface sandbox</title>
+    <script src="../../src/jquery.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/kendo.dataviz.vml.js"></script>
+    <script src="../../src/kendo.dataviz.svg.js"></script>
+    <script src="../../src/kendo.dataviz.canvas.js"></script>
+</head>
+<body>
+    <div id="wrap" style="width: 800px; height: 600px;"></div>
+    <script>
+    var SVG_NS = "http://www.w3.org/2000/svg";
+
+    var Class = kendo.Class,
+        Observable = kendo.Observable,
+        ObservableArray = kendo.data.ObservableArray;
+
+    var dataviz = kendo.dataviz,
+        renderSVG = dataviz.renderSVG,
+        renderTemplate = dataviz.renderTemplate,
+        Point = dataviz.Poin2D;
+
+    Path = ObservableObject.extend({
+        init: function(points, options) {
+            var path = this;
+
+            path.points = points || [];
+            path.options = options || {};
+        }
+    });
+
+    var SVGPath = Observable.extend({
+        init: function(source) {
+            this.source = source;
+        },
+
+        template: renderTemplate(
+            "<path #= d.renderId() #" +
+            "style='display: #= d.renderDisplay() #; " +
+            "#= d.renderCursor() #' " +
+            "#= d.renderDataAttributes() # " +
+            "d='#= d.renderPoints() #' " +
+            "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
+            "#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #" +
+            "#= d.renderDashType() # " +
+            "stroke-linecap='#= d.renderLinecap() #' " +
+            "stroke-linejoin='round' " +
+            "fill-opacity='#= d.options.fillOpacity #' " +
+            "stroke-opacity='#= d.options.strokeOpacity #' " +
+            "fill='#= d.renderFill() #'></path>"
+        )
+    });
+
+    var SVGFactory = Class.extend({
+        polygon: function(source) {
+            return new SVGPolygon(source);
+        }
+    });
+
+    var SVGSurface = Observable.extend({
+        init: function(wrap, options) {
+            renderSVG(wrap, this.template(this));
+        },
+
+        options: {
+            width: "100%",
+            height: "100%"
+        },
+
+        events: [
+            "click"
+        ],
+
+        template: renderTemplate(
+            "<?xml version='1.0' ?>" +
+            "<svg xmlns='" + SVG_NS + "' version='1.1' " +
+            "width='#= d.options.width #px' height='#= d.options.height #px' " +
+            "style='position: relative; display: #= d.display #;'></svg>"
+        )
+    });
+    </script>
+</body>
+</html>
+
