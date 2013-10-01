@@ -211,10 +211,15 @@ kendo_module({
 
                 if (weekDayRule.offset) {
                     while (date <= end && !isInWeek(date, weekDayRule, weekStart)) {
-                        date.setDate(date.getDate() + 7);
-                        adjustDST(date, hours);
+                        if (weekInMonth(date, weekStart) === numberOfWeeks(date, weekStart)) {
+                            date.setMonth(date.getMonth() + 1, 1);
+                            adjustDST(date, hours);
+                        } else {
+                            date.setDate(date.getDate() + 7);
+                            adjustDST(date, hours);
 
-                        setDayOfWeek(date, weekStart, -1);
+                            setDayOfWeek(date, weekStart, -1);
+                        }
                     }
                 }
 
