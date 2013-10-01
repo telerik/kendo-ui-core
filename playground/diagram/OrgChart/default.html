@@ -75,9 +75,17 @@
 
 <script type="text/x-kendo-tmpl" id="template">
     #= item.name # #= item.lastName #
+
+
+
+
+
+
 </script>
 
 <script type="text/javascript">
+    var diagram;
+
     function getVisual(data) {
         var g = new kendo.diagram.Group({
             autoSize: true
@@ -108,13 +116,38 @@
             x: 50,
             y: 40
         });
+
+        var p = new kendo.diagram.Path({
+            data: "M0,0 L5,10 L10, 0 Z",
+            x: 130,
+            y: 45,
+            stroke: "black",
+            background: "gray"
+        });
+
+        p.native.addEventListener("click", function (e) {
+            var vis = $(this).parent("g").parent("g"),
+                    shapeId = vis.attr("id"),
+                    shape = diagram.getId(shapeId),
+                    cons = shape.connections();
+            for (var i = 0; i < cons.length; i++) {
+                var target = cons[i].target();
+                cons[i].visible(false);
+                if (target.shape) {
+                    var targetShape = target.shape;
+                    targetShape.visible(false);
+                }
+            }
+
+        }, true);
+
+        g.append(p)
         g.append(fn);
         g.append(ln);
         return g;
     }
 
     $(function () {
-        var diagram;
 
         function createDiagram(template) {
             var options = {
@@ -208,7 +241,6 @@
 
         $("#treeview").kendoTreeView({
             dataSource: dataSource,
-            //checkboxes: true,
             dataTextField: "name",
             template: "#= item.name # #= item.lastName #",
             select: function (e) {
