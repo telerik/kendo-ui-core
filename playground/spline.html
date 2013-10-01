@@ -32,7 +32,7 @@
                 y: {type: "number"}
             }
         });
-         var arr = new kendo.data.ObservableArray([new model({x: 5, y: 5}),new model({x: 1, y: 1}),new model({x: 4, y: 4})]);
+         var arr = new kendo.data.ObservableArray([new model({x: 1, y: 1}),new model({x: 2, y: 3}),new model({x: 3.5, y: 4}),new model({x: 4, y: 3})]);
         var viewModel = kendo.observable({
             data: arr
         });
@@ -54,7 +54,7 @@
             });
     
     </script>
-  <!--  <div id="polar2"></div>
+  <--  <div id="polar2"></div>
     <div id="polar3"></div>
     <div id="polar"></div>
      <div id="polarArea"></div>
@@ -125,7 +125,7 @@
             series: [{
                 smooth: true,
                  markers: {
-                    visible: false,
+                    visible: true,
                     size: 4
                 },
                 type: "polarLine",
@@ -607,7 +607,7 @@
                     type: "verticalLine",
                     smooth: true,
                     markers: {
-                        visible: false
+                        visible: true
                     }
                 },
                 series: [

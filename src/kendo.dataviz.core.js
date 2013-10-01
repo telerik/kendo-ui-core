@@ -3678,7 +3678,13 @@ kendo_module({
                 addPoint(points[0]);
             }
             else{
-                addPoint(that.getSecondControlPoint(0, points[length -2], points[length -1], orientation.xField, orientation.yField));
+                var tangent = 0;
+                if(that.isLine(currentPoints[0], currentPoints[1], currentPoints[2])){
+                    orientation.xField = X;
+                    orientation.yField = Y;
+                    tangent = that.getTangent(currentPoints, X, Y);
+                }
+                addPoint(that.getSecondControlPoint(tangent, points[length -2], points[length -1], orientation.xField, orientation.yField));
                 addPoint(points[length -1]); 
             }
  
@@ -3688,26 +3694,34 @@ kendo_module({
         getOrientation: function(points){
             var that = this,                
                 orientation = {},
-                fn, y3;
-            if(that.isLinearByField(points,"x")){                
-                orientation.xField = "x";
-                orientation.yField = "y";
+                fn, y2;
+            if(that.isLinearByField(points, X)){                
+                orientation.xField = X;
+                orientation.yField = Y;
             } else {
-                fn = that.lineEquation(points[0],points[1]);
-                y3 = that.calculateFunction(fn, points[2].x);
-                if((points[0].y < points[1].y && points[2].y < y3) || 
-                    (points[1].y < points[0].y && points[2].y > y3)) {
-                    orientation.xField = "x";
-                    orientation.yField = "y";
+                fn = that.lineFunction(points[0],points[1]);
+                y2 = that.calculateFunction(fn, points[2].x);
+                if((points[0].y < points[1].y && points[2].y < y2) || 
+                    (points[1].y < points[0].y && points[2].y > y2)) {
+                    orientation.xField = X;
+                    orientation.yField = Y;
                 } else {
-                    orientation.xField = "y";
-                    orientation.yField = "x"; 
+                    orientation.xField = Y;
+                    orientation.yField = X; 
                 }
             }
             return orientation;
         },
         
-        lineEquation: function(p1, p2){
+        isLine: function(p0,p1,p2){
+            var that = this,
+                fn = that.lineFunction(p0,p1),
+                y2 = that.calculateFunction(fn, p2.x);
+            
+            return round(y2,1) === round(p2.y,1);
+        },
+        
+        lineFunction: function(p1, p2){
             var a = (p2.y - p1.y) / (p2.x - p1.x),
                 b = p1.y - a * p1.x;            
             return [b,a];
@@ -3731,7 +3745,12 @@ kendo_module({
                 xField = orientation.xField,
                 yField = orientation.yField,
                 controlPoint;
-            if(that.isMonotonic(currentPoints,yField)){
+                
+            if(!that.isMonotonic(p0,p1,p2,yField) || that.isLine(p0,p1,p2)){
+                var tangent = that.getTangent(currentPoints, X, Y);                 
+                controlPoint = that.getFirstControlPoint(tangent, p0, p1,X,Y);                
+            }
+            else{               
                 var fn = that.getParabolaPointsFunction(currentPoints,xField, yField),
                     fnd = that.getDerivative(fn),
                     extremum = {};
@@ -3744,15 +3763,6 @@ kendo_module({
                     controlPoint = that.getFirstControlPoint(0, p0, p1, xField, yField);
                 }
             }
-            else{
-                 var tangent = that.getTangent(currentPoints, xField, yField);                 
-                 if(!that.isLinearByField(currentPoints, xField) && that.hasExtremumByField(currentPoints, yField)){ 
-                    controlPoint = that.getFirstControlPoint(tangent, p0, p1,yField,xField);
-                 }
-                 else{
-                     controlPoint = that.getFirstControlPoint(tangent, p0, p1, xField, yField);
-                 }
-            }
             return controlPoint;
         },
 
@@ -3761,16 +3771,23 @@ kendo_module({
                 controlPoint2,
                 nextControlPoint,
                 extremum,
+                fn,
+                fnd,
+                tangent,
                 p0 = currentPoints[0],
                 p1 = currentPoints[1],
                 p2 = currentPoints[2],
                 xField = orientation.xField,
                 yField = orientation.yField,
                 allowedError = that.allowedError;
-            //distinguish the case when the extremum is between the points but is still acceptable
-            if(that.isMonotonic(currentPoints,yField)){
+            if(that.isLine(p0,p1,p2)){
+                tangent = that.getTangent(currentPoints, X,Y);
+                controlPoint2 = that.getSecondControlPoint(tangent, p0,p1,X,Y);
+                nextControlPoint = that.getFirstControlPoint(tangent, p1, p2, X, Y);
+            }
+            else if(that.isMonotonic(p0,p1,p2,yField)){
                 fn = that.getParabolaPointsFunction(currentPoints,xField, yField);
-                var fnd = that.getDerivative(fn);                
+                fnd = that.getDerivative(fn);                
                 controlPoint2 = that.getSecondControlPoint(that.calculateFunction(fnd, p1[xField]), p0, p1, xField, yField);
                 extremum = {};
                 extremum[xField] = -fnd[0] / fnd[1];
@@ -3785,8 +3802,7 @@ kendo_module({
                     nextControlPoint = that.getFirstControlPoint(that.calculateFunction(fnd, p1[xField]), p1,p2,xField,yField);
                 }
             }
-            else{ 
-                //check if the curve can be made smooth when x1 == x2
+            else{                
                  if(that.isLinearByField(currentPoints, xField)){                                       
                     controlPoint2 = that.getSecondControlPoint(0, p0, p1, xField, yField);
                     nextControlPoint = that.getFirstControlPoint(0, p1, p2, xField, yField);
@@ -3810,33 +3826,26 @@ kendo_module({
                 isDescending = isDescending && points[i][field] > points[i+1][field];
             }
             return isAscending || isDescending;
-        },     
-        
-        hasExtremumByField: function(points, field){
-            return (points[0][field] < points[1][field] && points[2][field] < points[1][field]) || 
-                        (points[1][field] < points[0][field] && points[1] < points[2][field]);
-        },      
+        },                
         
         getTangent: function(points, xField, yField){
             var tangent,
                 x = points[1][xField] - points[0][xField],
                 y = points[1][yField] - points[0][yField];
             if(x == 0 && y == 0){
-                return 0;
-            }
-            if(math.abs(x/y) <= math.abs(y/x)){
+                tangent = 0;
+            } else if (math.abs(x/y) <= math.abs(y/x)) {
                tangent = x/y;
-            }
-            else{
+            } else {
                tangent = y/x;
             }
                                        
             return tangent;
         },   
         
-        isMonotonic: function(points,yField){
-            return (points[2][yField] > points[1][yField] && points[1][yField] > points[0][yField]) ||
-                        (points[2][yField] < points[1][yField] && points[1][yField] < points[0][yField]);
+        isMonotonic: function(p0,p1,p2,yField){
+            return (p2[yField] > p1[yField] && p1[yField] > p0[yField]) ||
+                        (p2[yField] < p1[yField] && p1[yField] < p0[yField]);
         },  
         
         getFirstControlPoint: function(tangent, p0,p3, xField, yField){
@@ -3844,7 +3853,7 @@ kendo_module({
                 t1 = p0[xField],
                 t2 = p3[xField],
                 t = t2 - t1,
-                weigth = 0.3;
+                weigth = 0.333;
                
             controlPoint[xField] = t1 + t * weigth;
             controlPoint[yField] = p0[yField] + t * weigth * tangent;
@@ -3856,7 +3865,7 @@ kendo_module({
                 t1 = p0[xField],
                 t2 = p3[xField],
                 t = t2 - t1,
-                weigth = 0.3;
+                weigth = 0.333;
             controlPoint[xField] = t2 - t * weigth;
             controlPoint[yField] = p3[yField] - t * weigth * tangent;
             return controlPoint;
