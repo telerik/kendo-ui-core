@@ -19,22 +19,32 @@
         <script src="CurveProcessor.js"></script>
     </head>
     <body>
+    <script id="template" type="text/kendo">    
+        <span>
+            {<input data-bind="value: x"/>, <input data-bind="value: y"/>},
+        </span>
+    </script>
     <div id="container">
-        [{<input data-bind="value: data[0].x"/>, <input data-bind="value: data[0].y"/>},{<input data-bind="value: data[1].x"/>, <input data-bind="value: data[1].y"/>},{<input data-bind="value: data[2].x"/>, <input data-bind="value: data[2].y"/>}]
-       
+        [
+        <span data-bind="source: data" data-template="template">       
+        </span>
+        ]
+        <button type="button" data-bind="click: addNew">Add</button>
     </div>
      <div id="scatterTester"></div>
     <script>
-       
-        var model = kendo.data.Model.define({
-            fields: {
+       var model = kendo.data.Model.define({
+            fields:{
                 x: {type: "number"},
                 y: {type: "number"}
-            }
-        });
-         var arr = new kendo.data.ObservableArray([new model({x: 1, y: 1}),new model({x: 2, y: 3}),new model({x: 3.5, y: 4}),new model({x: 4, y: 3})]);
+            }            
+       });
+        var arr = new kendo.data.ObservableArray([new model({x: 1, y: 1}),new model({x: 2, y: 3}),new model({x: 3.5, y: 4}),new model({x: 4, y: 3})]);
         var viewModel = kendo.observable({
-            data: arr
+            data: arr,
+            addNew: function(){
+                this.data.push(new model());
+            }
         });
         kendo.bind($("#container"), viewModel);
          $("#scatterTester").kendoChart({
