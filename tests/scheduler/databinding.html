@@ -147,6 +147,17 @@
                 }));
             });
 
+            test("dataBinding event can be prevented", 0, function() {
+                var scheduler = new Scheduler(container, {
+                    dataBinding: function(e) {
+                        e.preventDefault();
+                    },
+                    dataBound: function() {
+                        ok(false);
+                    }
+                });
+            });
+
             test("AutoBind=false prevents scheduler from binding", 0, function() {
                 var scheduler = new Scheduler(container, {
                     autoBind: false,

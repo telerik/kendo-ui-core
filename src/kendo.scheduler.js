@@ -2364,9 +2364,13 @@ kendo_module({
                 return;
             }
 
-            this.trigger("dataBinding");
+            e = e || {};
 
-            if (!(e && e.action === "resize" && this.editable)) {
+            if (this.trigger("dataBinding", { action: e.action || "rebind", index: e.index, items: e.items })) {
+                return;
+            }
+
+            if (!(e.action === "resize" && this.editable)) {
                 this._destroyEditable();
             }
 
