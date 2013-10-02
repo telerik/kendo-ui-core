@@ -66,7 +66,30 @@ namespace :download_builder do
         msbuild File.join('dist', 'download-builder-staging', File.join('service', 'Download.csproj')), "'/t:Clean;Build' '/p:Configuration=Release'"
     end
 
-    zip 'dist/download-builder.zip' => download_builder_prerequisites('download-builder', BUILDER_DEPLOY_SERVICE)
+    def download_builder_zip_prerequisites
+        dist_path = 'dist/download-builder/'
+        js_path = File.join(dist_path, 'js')
+
+        tree :to => js_path,
+             :from => MIN_JS,
+             :root => "src"
+
+        css_path = File.join(dist_path, 'styles')
+
+        tree :to => css_path,
+             :from => MIN_CSS_RESOURCES,
+             :root => /styles\/.+?\//
+
+        config_file_path = File.join(dist_path,  "kendo-config.#{VERSION}.json").sub(/((\w+|\.){6})\./, '\1 ')
+
+        task config_file_path do |t|
+            sh "node #{COMPILEJS} --kendo-config > '#{config_file_path}'", :verbose => VERBOSE
+        end
+
+        [js_path, css_path, config_file_path]
+    end
+
+    zip 'dist/download-builder.zip' => download_builder_zip_prerequisites
 
     desc 'Build download builder deploy bundle'
     task :bundle => 'dist/download-builder.zip'
