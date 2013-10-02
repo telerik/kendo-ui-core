@@ -315,6 +315,12 @@
 .km-flat .km-listview-link:after
 {
     color: lighten(@flat-main-color, 30);
+    border-color: currentcolor;
+    border-width: .2rem .2rem 0 0;
+}
+
+.km-flat:not(.km-on-android) .km-listview-link:after
+{
     width: .66rem;
     height: .64rem;
     border-width: 0;
