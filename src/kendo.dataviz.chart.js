@@ -293,7 +293,7 @@ kendo_module({
 
             chart.dataSource.unbind(CHANGE, chart._dataChangeHandler);
             chart.dataSource = chart._originalOptions.dataSource = dataSource;
-            
+
             dataSource.bind(CHANGE, chart._dataChangeHandler);
 
             if (chart.options.autoBind) {
@@ -1147,17 +1147,23 @@ kendo_module({
             var chart = this,
                 plotArea = chart._plotArea,
                 currentSeries = (plotArea.srcSeries || plotArea.series)[seriesIndex],
-                point, transitionsState;
+                originalSeries = (chart._sourceSeries || [])[seriesIndex] || currentSeries,
+                currentPoint, originalPoint, transitionsState, visible, point;
 
             if (inArray(currentSeries.type, [PIE, DONUT])) {
-                point = currentSeries.data[pointIndex];
+                originalPoint = originalSeries.data[pointIndex];
+                currentPoint = currentSeries.data[pointIndex];
                 if (!defined(point.visible)) {
-                    point.visible = false;
+                    visible = false;
                 } else {
-                    point.visible = !point.visible;
+                    visible = !point.visible;
                 }
+                originalPoint.visible = visible;
+                currentPoint.visible = visible;
             } else {
-                currentSeries.visible = !currentSeries.visible;
+                visible = !originalSeries.visible;
+                originalSeries.visible = visible;
+                currentSeries.visible = visible;
             }
 
             if (chart.options.transitions) {
