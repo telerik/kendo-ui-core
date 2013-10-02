@@ -648,11 +648,15 @@ kendo_module({
             }
 
             weekNumber = weekInMonth(date, weekStart);
+            if (!allowFirstWeek(date, weekDay, weekStart)) {
+                weekNumber -= 1;
+            }
+
             offset = offset ? normalizeOffset(date, offset, weekStart) : weekNumber;
 
             if (weekNumber < offset) {
                 result.push(weekDay);
-            } else if (weekNumber === offset && allowFirstWeek(date, weekDay, weekStart)) {
+            } else if (weekNumber === offset) {
                 if (currentDay < day) {
                     result.push(weekDay);
                 } else if (currentDay === day) {

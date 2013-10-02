@@ -1306,6 +1306,20 @@
                 equal(events.length, 0);
             });
 
+            test("WEEKLY method expands when the first wednesday is in the second week", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 5, 5, 16, 30),
+                    end: new Date(2013, 5, 5, 17, 0),
+                    recurrenceRule: "FREQ=WEEKLY;BYDAY=1WE;WKST=SU"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(2013, 5, 5), new Date(2013, 5, 6));
+
+                equal(events.length, 1);
+            });
+
             test("WEEKLY occurrences expand BYHOUR", function() {
                 var schedulerEvent = new SchedulerEvent({
                     uid: "id",
