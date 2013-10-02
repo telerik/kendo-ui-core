@@ -235,6 +235,40 @@
             }, 1);
         });
 
+        asyncTest('open should apply max-height and overflow styles to group UL', function() {
+            var item = getRootItem(1).parent(),
+                ul = item.find(".k-group");
+
+            menu.open(item);
+
+            setTimeout(function () {
+                var maxHeightStyle = parseInt(ul.css("max-height"), 10),
+                    overflowStyle = ul.css("overflow"),
+                    windowHeight = parseInt($(window).height(), 10);
+
+                ok(!isNaN(maxHeightStyle));
+                equal(overflowStyle, "auto");
+                equal(maxHeightStyle, windowHeight);
+                start();
+            }, 1);
+        });
+
+        asyncTest('open should not apply max-height and overflow styles to group UL if it has children groups', function() {
+            var item = getRootItem(0).parent(),
+                ul = item.find(".k-group").css({maxHeight: 1, overflow: "auto"});
+
+            menu.open(item);
+
+            setTimeout(function () {
+                var maxHeightStyle = parseInt(ul.css("max-height"), 10),
+                    overflowStyle = ul.css("overflow");
+
+                ok(isNaN(maxHeightStyle));
+                notEqual(overflowStyle, "auto");
+                start();
+            }, 1);
+        });
+
         test('clicking should not open item if disabled', function() {
             var item = getRootItem(4).parent();
 

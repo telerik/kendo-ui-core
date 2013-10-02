@@ -526,9 +526,17 @@ kendo_module({
                 clearTimeout(li.data(TIMER));
 
                 li.data(TIMER, setTimeout(function () {
-                    var ul = li.find(".k-group:first:hidden"), popup;
+                    var ul = li.find(".k-group:first:hidden"),
+                        popup;
 
                     if (ul[0] && that.trigger(OPEN, { item: li[0] }) === false) {
+
+                        if (!ul.find(".k-group")[0] && ul.children(".k-item").length > 1) {
+                            ul.css({maxHeight: $(window).height(), overflow: "auto"});
+                        } else {
+                            ul.css({maxHeight: "", overflow: ""});
+                        }
+
                         li.data(ZINDEX, li.css(ZINDEX));
                         li.css(ZINDEX, that.nextItemZIndex ++);
 
