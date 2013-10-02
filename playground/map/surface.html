@@ -11,18 +11,25 @@
     <script src="../../src/kendo.dataviz.canvas.js"></script>
 </head>
 <body>
-    <div id="wrap" style="width: 800px; height: 600px;"></div>
+    <div id="wrap" style="width: 200px; height: 200px;"></div>
+    <input type="button" value="Stop" onclick="stop()" />
     <script>
-    var SVG_NS = "http://www.w3.org/2000/svg";
+    var SVG_NS = "http://www.w3.org/2000/svg",
+        DEG_TO_RAD = Math.PI / 180;
+
+    var doc = document,
+        math = Math,
+        proxy = $.proxy;
 
     var Class = kendo.Class,
         Observable = kendo.Observable,
-        ObservableArray = kendo.data.ObservableArray;
+        ObservableArray = kendo.data.ObservableArray,
+        ObservableObject = kendo.data.ObservableObject;
 
     var dataviz = kendo.dataviz,
+        defined = dataviz.defined,
         renderSVG = dataviz.renderSVG,
-        renderTemplate = dataviz.renderTemplate,
-        Point = dataviz.Poin2D;
+        renderTemplate = dataviz.renderTemplate;
 
     Path = ObservableObject.extend({
         init: function(points, options) {
@@ -30,40 +37,136 @@
 
             path.points = points || [];
             path.options = options || {};
+
+            ObservableObject.fn.init.call(path, this);
+        },
+
+        shape: "path"
+    });
+
+    var Point = ObservableObject.extend({
+        init: function(x, y) {
+            var point = this;
+
+            point.x = x || 0;
+            point.y = y || 0;
+
+            // Intentionally skip ObservableObject init
+            // to avoid unnecessary wrapping
+            Observable.fn.init.call(point, this);
+        },
+
+        rotate: function(center, degrees) {
+            var point = this,
+                theta = degrees * DEG_TO_RAD,
+                cosT = math.cos(theta),
+                sinT = math.sin(theta),
+                cx = center.x,
+                cy = center.y,
+                x = point.x,
+                y = point.y;
+
+            point.x = cx + (x - cx) * cosT + (y - cy) * sinT;
+            point.y = cy + (y - cy) * cosT - (x - cx) * sinT;
+
+            point.trigger("change");
+
+            return point;
         }
     });
 
-    var SVGPath = Observable.extend({
+    var PathNode = ObservableObject.extend({
         init: function(source) {
+            ObservableObject.fn.init.call(this);
+
             this.source = source;
+            this.source.points.bind("change", proxy(this._setPoints, this));
+            this.source.options.bind("change", proxy(this._setOptions, this));
+        },
+
+        render: function() {
+            return this.template(this);
         },
 
         template: renderTemplate(
             "<path #= d.renderId() #" +
-            "style='display: #= d.renderDisplay() #; " +
-            "#= d.renderCursor() #' " +
-            "#= d.renderDataAttributes() # " +
+            //"style='display: #= d.renderDisplay() #; " +
+            //"#= d.renderCursor() #' " +
+            //"#= d.renderDataAttributes() # " +
             "d='#= d.renderPoints() #' " +
-            "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
-            "#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #" +
-            "#= d.renderDashType() # " +
-            "stroke-linecap='#= d.renderLinecap() #' " +
-            "stroke-linejoin='round' " +
-            "fill-opacity='#= d.options.fillOpacity #' " +
-            "stroke-opacity='#= d.options.strokeOpacity #' " +
-            "fill='#= d.renderFill() #'></path>"
-        )
-    });
+            "#= d.renderAttr(\"stroke\", d.source.options.color) # " +
+            "#= d.renderAttr(\"stroke-width\", d.source.options.width) #" +
+            //"#= d.renderDashType() # " +
+            //"stroke-linecap='#= d.renderLinecap() #' " +
+            //"stroke-linejoin='round' " +
+            //"fill-opacity='#= d.options.fillOpacity #' " +
+            //"stroke-opacity='#= d.options.strokeOpacity #' " +
+            //"fill='#= d.renderFill() #'> " +
+            "></path>"
+        ),
 
-    var SVGFactory = Class.extend({
-        polygon: function(source) {
-            return new SVGPolygon(source);
+        renderId: function() {
+            var element = this,
+                options = element.source.options,
+                result = "";
+
+            if (options.id) {
+                result = element.renderAttr("id", options.id);
+            }
+
+            return result;
+        },
+
+        renderAttr: function (name, value) {
+            return defined(value) ? " " + name + "='" + value + "' " : "";
+        },
+
+        renderPoints: function() {
+            var path = this,
+                points = path.source.points,
+                i,
+                result = [];
+
+            for (i = 0; i < points.length; i++) {
+                result.push(points[i].x + " " + points[i].y);
+            }
+
+            return "M" + result.join(" ");
+        },
+
+        _setPoints: function(e) {
+            if (this.element) {
+                $(this.element).attr({
+                    d: this.renderPoints()
+                });
+            }
+        },
+
+        _setOptions: function(e) {
+            if (this.element) {
+                if (e.field === "fill") {
+                    $(this.element).attr({
+                        "fill": this.source.options.fill
+                    });
+                }
+                if (e.field === "stroke") {
+                    $(this.element).attr({
+                        "stroke": this.source.options.stroke
+                    });
+                }
+            }
         }
     });
 
-    var SVGSurface = Observable.extend({
+    var Surface = Observable.extend({
         init: function(wrap, options) {
+            Observable.fn.init.call(this);
+
+            this.nodes = new ObservableArray([]);
+            this.nodes.bind("change", proxy(this._nodeChange, this))
+
             renderSVG(wrap, this.template(this));
+            this.element = wrap.firstElementChild;
         },
 
         options: {
@@ -78,10 +181,76 @@
         template: renderTemplate(
             "<?xml version='1.0' ?>" +
             "<svg xmlns='" + SVG_NS + "' version='1.1' " +
-            "width='#= d.options.width #px' height='#= d.options.height #px' " +
+            "width='#= d._renderSize(d.options.width) #' height='#= d._renderSize(d.options.height) #' " +
             "style='position: relative; display: #= d.display #;'></svg>"
-        )
+        ),
+
+        load: function(model) {
+            //this.nodes.splice(0, this.nodes.length);
+
+            if (model.shape === "path") {
+                this.nodes.push(new PathNode(model));
+            }
+        },
+
+        _nodeChange: function(e) {
+            for (var i = 0; i < e.items.length; i++) {
+                var node = e.items[i];
+                if (e.action === "add") {
+                    var domNode = this._renderNode(node);
+                    this.element.appendChild(domNode);
+                    node.element = domNode;
+                } else if (e.action === "remove") {
+                    node.element.parentNode.removeChild(node.element);
+                }
+            }
+        },
+
+        _renderSize: function(size) {
+            if (typeof size !== "string") {
+                size += "px";
+            }
+
+            return size;
+        },
+
+        _renderNode: function(node) {
+            var container = doc.createElement("div"),
+                domElement;
+
+            dataviz.renderSVG(container,
+                "<?xml version='1.0' ?>" +
+                "<svg xmlns='" + SVG_NS + "' version='1.1'>" +
+                node.render() +
+                "</svg>"
+            );
+
+            domElement = container.firstElementChild.lastChild;
+
+            return domElement;
+        }
     });
+
+    var surface = new Surface($("#wrap")[0]);
+    var secs = new Path([new Point(50,50), new Point(50, 0)], { color: "red", width: 1 });
+    var hrs = new Path([new Point(50,50), new Point(50, 25)], { color: "black", width: 1 });
+    surface.load(secs);
+    surface.load(hrs);
+
+    var counter = 0;
+    var interval = setInterval(function() {
+        counter++;
+
+        //path.points.push(new Point(Math.random() * 100, Math.random() * 100));
+        secs.points[1].rotate(secs.points[0], -6);
+        hrs.points[1].rotate(hrs.points[0], -0.1);
+        //secs.set("options.stroke", counter % 2 === 0 ? "red" : "black");
+    }, 10);
+
+    function stop() {
+        clearInterval(interval)
+        surface.nodes.pop();
+    }
     </script>
 </body>
 </html>
