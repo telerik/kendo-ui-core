@@ -475,6 +475,30 @@
         }
 
         /// <summary>
+        /// If set to false the initial binding will be prevented.
+        /// </summary>
+        /// <param name="autoBind">The autoBind</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .AutoBind(false)
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> AutoBind(bool autoBind)
+        {
+            Component.AutoBind = autoBind;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the editing configuration of the scheduler.
         /// </summary>
         /// <param name="configurator">The lambda which configures the editing</param>

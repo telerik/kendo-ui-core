@@ -37,6 +37,8 @@
 
             Snap = true;
 
+            AutoBind = true;
+
             Messages = new SchedulerMessages();
             Group = new SchedulerGroupSettings();
             Editable = new SchedulerEditableSettings<TModel>();
@@ -181,6 +183,12 @@
             set;
         }
 
+        public bool AutoBind
+        {
+            get;
+            set;
+        }
+
         public SchedulerEditableSettings<TModel> Editable
         {
             get;
@@ -219,8 +227,6 @@
 
             base.WriteInitializationScript(writer);
         }
-
-        
 
         protected virtual IDictionary<string, object> SeriailzeBaseOptions()
         {
@@ -346,6 +352,11 @@
             if (!Snap)
             {
                 options["snap"] = Snap;
+            }
+
+            if (!AutoBind)
+            {
+                options["autoBind"] = AutoBind;
             }
 
             if (Resources.Count > 0)
