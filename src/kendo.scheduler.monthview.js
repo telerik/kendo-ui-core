@@ -528,7 +528,7 @@ kendo_module({
 
             if (!container) {
                  container = $(kendo.format('<div class="k-events-container" style="top:{0};left:{1};width:{2}"/>',
-                    startSlot.offsetTop + startSlot.firstChildHeight - 8 + "px",
+                    startSlot.offsetTop + startSlot.firstChildHeight + 12 + "px",
                     startSlot.offsetLeft + "px",
                     startSlot.offsetWidth + "px"
                 ));

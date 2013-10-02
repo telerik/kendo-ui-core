@@ -43,94 +43,73 @@
         <script src="../src/kendo.scheduler.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+<style>
 
-            html
-            {
-                overflow-y:scroll;
-            }
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
 
-            .km-actionsheet  {
-                text-align: center;
-            }
+html
+{
+	overflow-y:scroll;
+}
 
-            .km-actionsheet li {
-                display: list-item;
-            }
 
-            .k-popup-edit-form .k-edit-buttons {
-                clear: right;
-                margin-right: 2%;
-                margin-left: 2%;
-                padding: 0 0 .6em;
-            }
 
-            .k-popup-edit-form .k-scheduler-update {
-                float: right;
-            }
 
-            .k-popup-edit-form .k-scheduler-cancel {
-                float: left;
-            }
 
-            .k-popup-edit-form .km-header {
-                text-align: center;
-                width: 100%;
-            }
 
-            .k-popup-edit-form .k-edit-buttons .k-scheduler-delete {
-                width: 100%;
-            }
 
-            .k-scheduler-mobile .k-toolbar .k-nav-prev,
-            .k-scheduler-mobile .k-toolbar .k-nav-next
-            {
-                border-style: none;
-                background: #f3f3f4;
-            }
 
-            .k-scheduler-mobile .k-scheduler-toolbar+.k-scheduler-toolbar .k-scheduler-navigation {
-                text-align: center;
-                width: 100%;
-            }
+.km-actionsheet  {
+	text-align: center;
+}
 
-            .k-scheduler-mobile .k-toolbar .k-nav-next
-            {
-                float: right;
-            }
+.km-actionsheet li {
+	display: list-item;
+}
 
-            .k-scheduler-mobile .k-toolbar .k-nav-prev
-            {
-                float: left;
-            }
+.km-root .k-popup-edit-form > .km-header {
+	border-style: solid;
+	border-width: 1px;
+	padding: .3em .6em;
+	text-align: center;
+	width: auto;
+	line-height: 2em;
+}
 
-            .k-scheduler-mobile .k-scheduler-monthview .k-scheduler-table td {
-                text-align: center;
-                vertical-align: middle;
-            }
+.km-root .k-popup-edit-form > .km-content {
+	padding: .6em;
+}
 
-            .k-scheduler-mobile .k-scheduler-monthview .k-scheduler-table td span {
-                font-size: 3em;
-            }
+.km-root .k-popup-edit-form .k-dropdown-wrap {
+	display: block;
+}
 
-            .k-scheduler-mobile .k-scheduler-monthview .k-events-container {
-                position: absolute;
-                text-align: center;
-                height: 10px;
-            }
+.km-root .k-popup-edit-form .k-edit-buttons {
+	clear: right;
+	margin-right: 2%;
+	margin-left: 2%;
+	padding: 0 0 .6em;
+}
 
-            .k-scheduler-mobile .k-scheduler-monthview .k-event {
-                width: 5px;
-                height: 5px;
-                min-height: 0px;
-                margin: 1px;
-                display: inline-block;
-                position: static;
-            }
-        </style>
+.km-root .k-popup-edit-form .k-scheduler-update {
+	float: right;
+}
+
+.km-root .k-popup-edit-form .k-scheduler-cancel {
+	float: left;
+}
+
+.km-root .k-popup-edit-form .k-edit-buttons .k-scheduler-delete {
+	width: 100%;
+}
+
+
+
+</style>
     </head>
     <body>
         <div id="scheduler"></div>
@@ -145,7 +124,7 @@
             selectable: true,
             group: {
                 resources: [/*"date"*/, "roomId", "atendees"],
-                orientation: "horizontal"//"vertical"
+                orientation: "vertical"//"horizontal"
             },
             resources: [
                 {

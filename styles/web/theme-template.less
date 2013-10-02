@@ -1301,14 +1301,19 @@ div.k-imagebrowser-dropzone em
 .k-scheduler-toolbar > ul li:first-child,
 .k-scheduler-toolbar > ul li:first-child .k-link
 {
-    border-top-left-radius: @main-border-radius;
-    border-bottom-left-radius: @main-border-radius;
+    .border-radius(@main-border-radius 0 0 @main-border-radius);
 }
 
 .k-rtl .k-scheduler-toolbar > ul li:first-child,
 .k-rtl .k-scheduler-toolbar > ul li:first-child .k-link
 {
-    border-radius: 0 @main-border-radius @main-border-radius 0;
+    .border-radius(0 @main-border-radius @main-border-radius 0);
+}
+
+.k-scheduler-mobile .k-scheduler-toolbar > ul li.k-nav-today,
+.k-scheduler-mobile .k-scheduler-toolbar > ul li.k-nav-today .k-link
+{
+    .border-radius(@main-border-radius);
 }
 
 .k-scheduler-toolbar .k-nav-next,

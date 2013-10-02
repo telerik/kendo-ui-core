@@ -813,7 +813,7 @@ kendo_module({
             var titleText = messages.editor.editorTitle;
 
             html += '<div data-role="view" class="k-popup-edit-form" id="edit" ' + kendo.attr("uid") + '="' + model.uid + '">' +
-                '<div data-role="header"><a href="#" class="k-button k-scheduler-cancel">' + cancelText + '</a>' +
+                '<div data-role="header" class="k-header"><a href="#" class="k-button k-scheduler-cancel">' + cancelText + '</a>' +
                 titleText + '<a href="#" class="k-button k-scheduler-update">' + updateText + '</a></div>';
 
             var fields = this.fields(editors.mobile, model);
