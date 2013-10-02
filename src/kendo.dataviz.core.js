@@ -3629,85 +3629,99 @@ kendo_module({
             var that = this,
                 closed = that.closed,
                 length = points.length,                             
-                result = [],                
+                curve = [],                
                 xField, yField,
                 p0,p1,p2,
                 currentPoints,
+                controlPoints,
                 initialControlPoint,
                 lastControlPoint, 
-                orientation,                
+                orientation,    
+                tangent,                
                 addPoint = function(point){
-                    result.push(point);
-                };            
-            if(length < 3){
-                return points;
-            }        
-          
-            addPoint(points[0]);
+                    curve.push(point);
+                };       
+            if(length < 2){
+                return curve;
+            }
+
+            p0 = points[0];
+            p1 = points[1];
+            p2 = points[2];          
+            addPoint(p0);
             
-            currentPoints = closed ? [points[length - 1], points[0], points[1]] : points.slice(0,3);
-            orientation = that.getOrientation(currentPoints);
+            if(length == 2){
+                tangent = that.getTangent(p0,p1, X,Y);                
+                addPoint(that.getFirstControlPoint(tangent, p0, p1, X, Y));
+                addPoint(that.getSecondControlPoint(tangent, p0, p1, X, Y));
+                addPoint(p1);
+                return curve;
+            } 
+            
             if(closed){
-                controlPoints = that.getMiddleControlPoints(currentPoints, orientation);
+                p0 = points[length - 1];
+                p1 = points[0];
+                p2 = points[1];
+                orientation = that.getOrientation(p0,p1,p2);
+                controlPoints = that.getMiddleControlPoints(p0,p1,p2, orientation);
                 initialControlPoint = controlPoints[1];
                 lastControlPoint = controlPoints[0];
             }
-            else{           
-                initialControlPoint = that.getInitialControlPoint(currentPoints, orientation);
+            else{  
+                orientation = that.getOrientation(p0,p1,p2);
+                initialControlPoint = that.getInitialControlPoint(p0,p1,p2, orientation);
             }
             
             addPoint(initialControlPoint);
            
             for(var idx = 0; idx <= length - 3; idx++) {
-               
-                currentPoints = points.slice(idx, idx + 3);
+                p0 = points[idx];
+                p1 = points[idx + 1];
+                p2 = points[idx + 2];
                  
-                orientation = that.getOrientation(currentPoints);
-                controlPoints = that.getMiddleControlPoints(currentPoints, orientation);
+                orientation = that.getOrientation(p0,p1,p2);
+                controlPoints = that.getMiddleControlPoints(p0,p1,p2, orientation);
                 addPoint(controlPoints[0]);
-                addPoint(currentPoints[1]);    
+                addPoint(p1);    
                 addPoint(controlPoints[1]);              
             }
                 
             if(closed){
-                currentPoints = [points[length - 2], points[length -1], points[0]];
-                orientation = that.getOrientation(currentPoints);
-                controlPoints = that.getMiddleControlPoints(currentPoints, orientation);
+                p0 = points[length - 2];
+                p1 = points[length - 1];
+                p2 = points[0];
+                orientation = that.getOrientation(p0,p1,p2);
+                controlPoints = that.getMiddleControlPoints(p0,p1,p2, orientation);
                 addPoint(controlPoints[0]);
-                addPoint(points[length -1]);
+                addPoint(p1);
                 addPoint(controlPoints[1]);
                 addPoint(lastControlPoint);
-                addPoint(points[0]);
+                addPoint(p2);
             }
             else{
-                var tangent = 0;
-                if(that.isLine(currentPoints[0], currentPoints[1], currentPoints[2])){
+                tangent = 0;
+                if(that.isLine(p0, p1, p2)){
                     orientation.xField = X;
                     orientation.yField = Y;
-                    tangent = that.getTangent(currentPoints[0], currentPoints[1], X, Y);
+                    tangent = that.getTangent(p0, p1, X, Y);
                 }
-                addPoint(that.getSecondControlPoint(tangent, points[length -2], points[length -1], orientation.xField, orientation.yField));
-                addPoint(points[length -1]); 
+                addPoint(that.getSecondControlPoint(tangent, p1, p2, orientation.xField, orientation.yField));
+                addPoint(p2); 
             }
  
-            return result;
+            return curve;
         },
         
-        getOrientation: function(points){
+        getOrientation: function(p0,p1,p2){
             var that = this,                
-                orientation = {},
+                orientation = {xField: X, yField: Y},
                 fn, y2;
-            if(that.isLinearByField(points, X)){                
-                orientation.xField = X;
-                orientation.yField = Y;
-            } else {
-                fn = that.lineFunction(points[0],points[1]);
-                y2 = that.calculateFunction(fn, points[2].x);
-                if((points[0].y < points[1].y && points[2].y < y2) || 
-                    (points[1].y < points[0].y && points[2].y > y2)) {
-                    orientation.xField = X;
-                    orientation.yField = Y;
-                } else {
+            if(!that.isMonotonicByField(p0,p1,p2, X)){                
+                fn = that.lineFunction(p0,p1);
+                y2 = that.calculateFunction(fn, p2.x);
+                
+                if(!(p0.y < p1.y && p2.y < y2) && 
+                    !(p1.y < p0.y && p2.y > y2)) {
                     orientation.xField = Y;
                     orientation.yField = X; 
                 }
@@ -3729,26 +3743,23 @@ kendo_module({
             return [b,a];
         },                      
         
-        getInitialControlPoint: function(currentPoints, orientation){
+        getInitialControlPoint: function(p0,p1,p2, orientation){
             var that = this,                    
-                p0 = currentPoints[0],
-                p1 = currentPoints[1],
-                p2 = currentPoints[2],
                 xField = orientation.xField,
                 yField = orientation.yField,
                 controlPoint;
                 
-            if(!that.isMonotonic(p0,p1,p2,yField) || that.isLine(p0,p1,p2)){
+            if(!that.isMonotonicByField(p0,p1,p2,yField) || that.isLine(p0,p1,p2)){
                 var tangent = that.getTangent(p0,p1, X,Y);             
                 controlPoint = that.getFirstControlPoint(tangent, p0, p1,X,Y);                
             }
             else{               
-                var fn = that.getParabolaPointsFunction(currentPoints,xField, yField),
+                var fn = that.getParabolaPointsFunction([p0,p1,p2],xField, yField),
                     fnd = that.getDerivative(fn),
                     extremum = {};
                 extremum[xField] = -fnd[0] / fnd[1];
-                if(that.isLinearByField([p1, p2,extremum], xField) || that.isLinearByField([extremum,p0, p1], xField) || 
-                    that.isLinearByField([p1, extremum, p2], xField)){   
+                if(that.isMonotonicByField(p1, p2,extremum, xField) || that.isMonotonicByField(extremum,p0, p1, xField) || 
+                    that.isMonotonicByField(p1, extremum, p2, xField)){   
                     controlPoint = that.getFirstControlPoint(that.calculateFunction(fnd, p0[xField]), p0, p1, xField, yField);                                 
                 }
                 else {      
@@ -3758,33 +3769,30 @@ kendo_module({
             return controlPoint;
         },
 
-        getMiddleControlPoints: function(currentPoints, orientation){
-            var that = this,                    
+        getMiddleControlPoints: function(p0,p1,p2, orientation){
+            var that = this,
+                fn,
+                fnd,
+                tangent,            
                 controlPoint2,
                 nextControlPoint,
                 extremum,
-                fn,
-                fnd,
-                tangent,
-                p0 = currentPoints[0],
-                p1 = currentPoints[1],
-                p2 = currentPoints[2],
                 xField = orientation.xField,
                 yField = orientation.yField,
                 allowedError = that.allowedError;
             if(that.isLine(p0,p1,p2)){
                 tangent = that.getTangent(p0,p1, X,Y);
-                controlPoint2 = that.getSecondControlPoint(tangent, p0,p1, X, Y);
+                controlPoint2 = that.getSecondControlPoint(tangent, p0, p1, X, Y);
                 nextControlPoint = that.getFirstControlPoint(tangent, p1, p2, X, Y);
             }
-            else if(that.isMonotonic(p0,p1,p2,yField)){
-                fn = that.getParabolaPointsFunction(currentPoints,xField, yField);
-                fnd = that.getDerivative(fn);                
-                controlPoint2 = that.getSecondControlPoint(that.calculateFunction(fnd, p1[xField]), p0, p1, xField, yField);
+            else if(that.isMonotonicByField(p0,p1,p2,yField)){
+                fn = that.getParabolaPointsFunction([p0,p1,p2],xField, yField);
+                fnd = that.getDerivative(fn);                               
                 extremum = {};
                 extremum[xField] = -fnd[0] / fnd[1];
-                if(that.isLinearByField([p1, p2,extremum], xField) || that.isLinearByField([extremum, p0, p1], xField)){   
-                    nextControlPoint = that.getFirstControlPoint(that.calculateFunction(fnd, p1[xField]), p1, p2,xField,yField);                                 
+                if(that.isMonotonicByField(p1, p2,extremum, xField) || that.isMonotonicByField(extremum, p0, p1, xField)){   
+                    controlPoint2 = that.getSecondControlPoint(that.calculateFunction(fnd, p1[xField]), p0, p1, xField, yField);
+                    nextControlPoint = that.getFirstControlPoint(that.calculateFunction(fnd, p1[xField]), p1, p2, xField,yField);                                 
                 }
                 else {
                    tangent = that.getTangent(p0,p2,xField, yField);
@@ -3793,7 +3801,7 @@ kendo_module({
                 }
             }
             else{                
-                 if(that.isLinearByField(currentPoints, xField)){                                       
+                 if(that.isMonotonicByField(p0,p1,p2, xField)){                                       
                     controlPoint2 = that.getSecondControlPoint(0, p0, p1, xField, yField);
                     nextControlPoint = that.getFirstControlPoint(0, p1, p2, xField, yField);
                  }
@@ -3803,20 +3811,7 @@ kendo_module({
                  }
             }
             return [controlPoint2, nextControlPoint];
-        }, 
-        
-        isLinearByField: function(points, field){
-            var isAscending = true,
-                isDescending = true,
-                length = points.length,
-                i;
-                
-            for(i = 0; i < length - 1; i++){
-                isAscending = isAscending && points[i][field] < points[i+1][field];
-                isDescending = isDescending && points[i][field] > points[i+1][field];
-            }
-            return isAscending || isDescending;
-        },                
+        },                       
         
         getTangent: function(p0,p1, xField, yField){
             var tangent,
@@ -3831,9 +3826,9 @@ kendo_module({
             return tangent;
         },   
         
-        isMonotonic: function(p0,p1,p2,yField){
-            return (p2[yField] > p1[yField] && p1[yField] > p0[yField]) ||
-                        (p2[yField] < p1[yField] && p1[yField] < p0[yField]);
+        isMonotonicByField: function(p0,p1,p2,field){
+            return (p2[field] > p1[field] && p1[field] > p0[field]) ||
+                        (p2[field] < p1[field] && p1[field] < p0[field]);
         },  
         
         getFirstControlPoint: function(tangent, p0,p3, xField, yField){
