@@ -76,12 +76,16 @@ kendo_module({
                 that._trackDiv.before(createSliderItems(options, that._distance));
                 that._setItemsWidth(pixelWidths);
                 that._setItemsTitle();
-                that._setItemsLargeTick();
             }
 
             that._calculateSteps(pixelWidths);
 
             that._tabindex(that.wrapper.find(DRAG_HANDLE));
+
+            if (options.tickPlacement != "none" && sizeBetweenTicks >= 2 &&
+                options.largeStep > options.smallStep) {
+                that._setItemsLargeTick();
+            }
 
             that[options.enabled ? "enable" : "disable"]();
 
@@ -179,30 +183,23 @@ kendo_module({
         _setItemsLargeTick: function() {
             var that = this,
                 options = that.options,
-                i,
                 items = that.wrapper.find(TICK_SELECTOR),
-                item = {},
-                step = round(options.largeStep / options.smallStep);
+                i = 0, item, value;
 
-            if ((1000 * options.largeStep) % (1000 * options.smallStep) === 0) {
+            if ((1000 * options.largeStep) % (1000 * options.smallStep) === 0 || that._distance / options.largeStep >= 3) {
                 if (that._isHorizontal && !that._isRtl) {
-                    for (i = 0; i < items.length; i = round(i + step)) {
-                        item = $(items[i]);
+                    items = $.makeArray(items).reverse();
+                }
 
-                        item.addClass("k-tick-large")
-                            .html("<span class='k-label'>" + item.attr("title") + "</span>");
-                    }
-                } else {
-                    for (i = items.length - 1; i >= 0; i = round(i - step)) {
-                        item = $(items[i]);
-
+                for (i = 0; i < items.length; i++) {
+                    item = $(items[i]);
+                    value = that._values[i];
+                    if (value % options.smallStep === 0 && value % options.largeStep === 0) {
                         item.addClass("k-tick-large")
                             .html("<span class='k-label'>" + item.attr("title") + "</span>");
 
-                        if (!that._isRtl) {
-                            if (i !== 0 && i !== items.length - 1) {
-                                item.css("line-height", item[that._size]() + "px");
-                            }
+                        if (i !== 0 && i !== items.length - 1) {
+                            item.css("line-height", item[that._size]() + "px");
                         }
                     }
                 }
