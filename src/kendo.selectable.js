@@ -229,10 +229,12 @@ kendo_module({
         },
 
         _select: function(e) {
-            if ($(e.event.target).is("input,a,textarea,.k-multiselect-wrap")) {
+            var selector = "input,a,textarea,.k-multiselect-wrap",
+                msie = kendo.support.browser.msie;
+            if ($(e.event.target).is(selector)) {
                 this.userEvents.cancel();
                 this._downTarget = null;
-            } else {
+            } else if (!msie || (msie && !$(kendo._activeElement()).is(selector))) {
                 e.preventDefault();
             }
         },
