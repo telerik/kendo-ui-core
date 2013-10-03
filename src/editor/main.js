@@ -269,16 +269,30 @@ kendo_module({
         },
 
         _createContentElement: function(stylesheets) {
-            var editor = this,
-                iframe, wnd, doc,
-                textarea = editor.textarea,
-                rtlStyle = kendo.support.isRtl(textarea) ? "direction:rtl;" : "";
+            var editor = this;
+            var iframe, wnd, doc;
+            var textarea = editor.textarea;
+            var domain = document.domain;
+            var src = 'javascript:""';
+
+            if (domain != location.hostname) {
+                // relax same-origin policy
+                src = "javascript:document.write(" +
+                          "'<script>document.domain=\"" + domain + "\"</script>'" +
+                      ")";
+            }
 
             textarea.hide();
-            iframe = $("<iframe />", { src: 'javascript:""', frameBorder: "0" })
-                            .css("display", "")
-                            .addClass("k-content")
-                            .insertBefore(textarea)[0];
+
+            iframe = $("<iframe />", { frameBorder: "0" })[0];
+
+            $(iframe)
+                .css("display", "")
+                .addClass("k-content")
+                .insertBefore(textarea);
+
+
+            iframe.src = src;
 
             wnd = iframe.contentWindow || iframe;
             doc = wnd.document || iframe.contentDocument;
@@ -290,30 +304,30 @@ kendo_module({
 
             doc.open();
             doc.write(
-                    "<!DOCTYPE html><html><head>" +
-                    "<meta charset='utf-8' />" +
-                    "<style>" +
-                        "html,body{padding:0;margin:0;background:#fff;height:100%;min-height:100%;}" +
-                        "body{font-size:12px;font-family:Verdana,Geneva,sans-serif;padding-top:1px;margin-top:-1px;" +
-                        "word-wrap: break-word;-webkit-nbsp-mode: space;-webkit-line-break: after-white-space;" +
-                        rtlStyle +
-                        "}" +
-                        "h1{font-size:2em;margin:.67em 0}h2{font-size:1.5em}h3{font-size:1.16em}h4{font-size:1em}h5{font-size:.83em}h6{font-size:.7em}" +
-                        "p{margin:0 0 1em;padding:0 .2em}.k-marker{display:none;}.k-paste-container,.Apple-style-span{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}" +
-                        "ul,ol{padding-left:2.5em}" +
-                        "a{color:#00a}" +
-                        "code{font-size:1.23em}" +
-                        ".k-table{width:100%;border-spacing:0;margin: 0 0 1em;}" +
-                        ".k-table td{min-width:1px;padding:.2em .3em;}" +
-                        ".k-table,.k-table td{outline:0;border: 1px dotted #ccc;}" +
-                        ".k-table p{margin:0;padding:0;}" +
-                    "</style>" +
-                    "<script>(function(d,c){d[c]('header'),d[c]('article'),d[c]('nav'),d[c]('section'),d[c]('footer');})(document, 'createElement');</script>" +
-                    $.map(stylesheets, function(href){
-                        return "<link rel='stylesheet' href='" + href + "'>";
-                    }).join("") +
-                    "</head><body autocorrect='off' contenteditable='true'></body></html>"
-                );
+                "<!DOCTYPE html><html><head>" +
+                "<meta charset='utf-8' />" +
+                "<style>" +
+                    "html,body{padding:0;margin:0;background:#fff;height:100%;min-height:100%;}" +
+                    "body{font-size:12px;font-family:Verdana,Geneva,sans-serif;padding-top:1px;margin-top:-1px;" +
+                    "word-wrap: break-word;-webkit-nbsp-mode: space;-webkit-line-break: after-white-space;" +
+                    (kendo.support.isRtl(textarea) ? "direction:rtl;" : "") +
+                    "}" +
+                    "h1{font-size:2em;margin:.67em 0}h2{font-size:1.5em}h3{font-size:1.16em}h4{font-size:1em}h5{font-size:.83em}h6{font-size:.7em}" +
+                    "p{margin:0 0 1em;padding:0 .2em}.k-marker{display:none;}.k-paste-container,.Apple-style-span{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}" +
+                    "ul,ol{padding-left:2.5em}" +
+                    "a{color:#00a}" +
+                    "code{font-size:1.23em}" +
+                    ".k-table{width:100%;border-spacing:0;margin: 0 0 1em;}" +
+                    ".k-table td{min-width:1px;padding:.2em .3em;}" +
+                    ".k-table,.k-table td{outline:0;border: 1px dotted #ccc;}" +
+                    ".k-table p{margin:0;padding:0;}" +
+                "</style>" +
+                "<script>(function(d,c){d[c]('header'),d[c]('article'),d[c]('nav'),d[c]('section'),d[c]('footer');})(document, 'createElement');</script>" +
+                $.map(stylesheets, function(href){
+                    return "<link rel='stylesheet' href='" + href + "'>";
+                }).join("") +
+                "</head><body autocorrect='off' contenteditable='true'></body></html>"
+            );
 
             doc.close();
 
