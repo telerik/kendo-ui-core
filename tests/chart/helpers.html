@@ -1441,6 +1441,30 @@
                 equal(dataviz.decodeEntities(1), 1);
             });
 
+
+            // ------------------------------------------------------------
+            append = dataviz.append;
+
+            module("append");
+
+            test("appends array to array", function() {
+                var arr = [1];
+                append(arr, [2, 3]);
+
+                deepEqual(arr, [1, 2, 3]);
+            });
+
+            test("calls push method", function() {
+                function Foo() { };
+                Foo.prototype.push = function() {
+                    ok(true);
+                };
+
+                var foo = new Foo();
+
+                append(foo, []);
+            });
+
             // ------------------------------------------------------------
             var ensureTree = dataviz.ensureTree;
             module("ensureTree");

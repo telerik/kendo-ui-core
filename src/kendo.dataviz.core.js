@@ -3603,7 +3603,7 @@ kendo_module({
     }
 
     function append(first, second) {
-        [].push.apply(first, second);
+        first.push.apply(first, second);
     }
 
     function ceil(value, step) {
