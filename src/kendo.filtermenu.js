@@ -138,6 +138,30 @@ kendo_module({
                 '</div>'+
             '</form>';
 
+    var booleanMobileTemplate =
+            '<div data-#ns#role="header">'+
+                '<button class="k-button k-cancel">Cancel</button>'+
+                '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
+            '</div>'+
+            '<form class="k-filter-menu k-secondary">'+
+                '<div>' +
+                    '<div class="k-filter-help-text">#=messages.info#</div>'+
+                    '<ul>'+
+                        '<li><label>'+
+                            '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="true" name="filters[0].value"/>' +
+                            '#=messages.isTrue#' +
+                        '</label></li>' +
+                        '<li><label>'+
+                            '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="false" name="filters[0].value"/>' +
+                            '#=messages.isFalse#' +
+                        '</label></li>' +
+                    '</ul>'+
+                    '<div>' +
+                        '<button type="reset" class="k-button">#=messages.clear#</button>'+
+                    '</div>' +
+                '</div>'+
+            '</form>';
+
     function removeFiltersForField(expression, field) {
         if (expression.filters) {
             expression.filters = $.grep(expression.filters, function(filter) {
@@ -361,7 +385,7 @@ kendo_module({
             operators = operators[type] || options.operators[type];
 
             that.form = $("<div />")
-                .html(kendo.template(type === "boolean" ? booleanTemplate : defaultMobileTemplate)({
+                .html(kendo.template(type === "boolean" ? booleanMobileTemplate : defaultMobileTemplate)({
                     field: that.field,
                     format: options.format,
                     ns: kendo.ns,

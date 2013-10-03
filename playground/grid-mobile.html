@@ -12,18 +12,27 @@
         <div id="grid"></div>
 
         <script>
-            kendo.support.mobileOS = true;
+           kendo.support.mobileOS = true;
 
             $("#grid").kendoGrid({
                 dataSource: {
+                    schema: {
+                        model: {
+                            fields: {
+                                bool: { type: "boolean" }
+                            }
+                        }
+                    },
                     data: [
                     {
                         foo: "foo",
-                        bar: "bar"
+                        bar: "bar",
+                        bool: true
                     },
                     {
                         foo: "baz",
-                        bar: "bax"
+                        bar: "bax",
+                        bool: false
                     }
                     ],
                     pageSize: 2
@@ -38,7 +47,8 @@
                     },
                     "bar",
                     "date",
-                    "number"
+                    "number",
+                    "bool"
                 ],
                 pageable: true,
                 filterable: true
