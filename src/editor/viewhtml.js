@@ -3,8 +3,6 @@
 var kendo = window.kendo,
     extend = $.extend,
     Editor = kendo.ui.editor,
-    dom = Editor.Dom,
-    RangeUtils = Editor.RangeUtils,
     EditorUtils = Editor.EditorUtils,
     Command = Editor.Command,
     Tool = Editor.Tool,
@@ -22,7 +20,6 @@ var ViewHtmlCommand = Command.extend({
     exec: function() {
         var that = this,
             editor = that.editor,
-            range = editor.getRange(),
             messages = editor.options.messages,
             dialog = $(kendo.template(ViewHtmlCommand.template)(messages)).appendTo(document.body),
             content = ViewHtmlCommand.indent(editor.value()),
@@ -45,10 +42,7 @@ var ViewHtmlCommand = Command.extend({
 
             dialog.data("kendoWindow").destroy();
 
-            try {
-                // focusing a hidden textarea in IE causes unspecified error
-                dom.windowFromDocument(RangeUtils.documentFromRange(range)).focus();
-            } catch (ex) {}
+            editor.focus();
         }
 
         this.createDialog(dialog, {

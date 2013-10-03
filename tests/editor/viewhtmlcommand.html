@@ -13,14 +13,18 @@
 
         <div><textarea cols="20" rows="4" id="editor" name="EditorEncodeFalse"></textarea></div>
 
+        <div id="inline" contentEditable></div>
+
         <script>
-            var editor;
+            var editor, inline;
 
             $("#editor").kendoEditor();
+            $("#inline").kendoEditor();
 
             module("ViewHtml command tests", {
                 setup: function() {
                     editor = getEditor("#editor");
+                    inline = getEditor("#inline");
                 },
                 teardown: function() {
                     $(".k-window,.k-overlay").remove()
@@ -28,10 +32,12 @@
                 }
             });
 
-            function createViewHtmlCommand() {
-                var command = new kendo.ui.editor.ViewHtmlCommand({ range: editor.getRange() });
+            function createViewHtmlCommand(target) {
+                target = target || editor;
 
-                command.editor = editor;
+                var command = new kendo.ui.editor.ViewHtmlCommand({ range: target.getRange() });
+
+                command.editor = target;
 
                 command.exec();
             }
@@ -90,7 +96,7 @@
                 $(".k-dialog-update").click();
             });
 
-            test("cancel button does not modify the editor content", function() {
+            test("close button does not modify the editor content", function() {
                 var initialHtml = "<p>foo</p>";
 
                 editor.value(initialHtml);
@@ -99,7 +105,7 @@
 
                 $(".k-window textarea").val("<strong>bar</strong>");
 
-                $(".k-dialog-cancel").click();
+                $(".k-dialog-close").click();
 
                 equal(editor.value(), initialHtml);
             });
@@ -110,6 +116,14 @@
                 createViewHtmlCommand();
 
                 equal($('.k-window .k-window-title').text(), "bar");
+            });
+
+            test("inline editor is focused after dialog is closed", function() {
+                createViewHtmlCommand(inline);
+
+                $(".k-dialog-close").click();
+
+                equal(kendo._activeElement(), inline.element[0]);
             });
         </script>
 
