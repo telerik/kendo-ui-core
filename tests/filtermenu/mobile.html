@@ -116,6 +116,13 @@
                 equal(menu.form.closest(roleSelector("view")).length, 1);
             });
 
+            test("mobile view doesn't wrap the form if pane not found", function() {
+                pane.destroy();
+                var menu = setup();
+
+                equal(menu.form.closest(roleSelector("view")).length, 0);
+            });
+
             test("pane navigates to filter menu view", function() {
                 var menu = setup();
                 link.click();

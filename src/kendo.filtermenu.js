@@ -451,10 +451,6 @@ kendo_module({
                 that.view.purge();
             }
 
-            if (that.pane) {
-                that.pane.destroy();
-            }
-
             that.link.unbind(NS);
 
             if (that._refreshHandler) {
