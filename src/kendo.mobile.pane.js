@@ -152,6 +152,10 @@ kendo_module({
             this.loader.show();
         },
 
+        changeLoadingMessage: function(message) {
+            this.loader.changeMessage(message);
+        },
+
         view: function() {
             return this.viewEngine.view();
         },

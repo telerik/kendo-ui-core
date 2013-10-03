@@ -53,6 +53,11 @@
                 hidden(loader.element);
             });
 
+            test("changeMessage method changes the loading message", 1, function() {
+                loader.changeMessage("Changed!");
+                ok(loader.element.find("h1").text() === "Changed!");
+            });
+
             asyncTest("shows loader element", 1, function() {
                 loader.show();
                 setTimeout(function() {

@@ -174,6 +174,14 @@ kendo_module({
             }
         },
 
+        changeLoadingMessage: function(message) {
+            if (this.pane) {
+                this.pane.changeLoadingMessage(message);
+            } else {
+                throw new Error("The mobile application instance is not fully instantiated. Please consider changing the message in the application init event handler.");
+            }
+        },
+
         view: function() {
             return this.pane.view();
         },

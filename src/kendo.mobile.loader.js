@@ -53,6 +53,11 @@ kendo_module({
             that.element.hide();
         },
 
+        changeMessage: function(message) {
+            this.options.loading = message;
+            this.element.find(">h1").html(message);
+        },
+
         transition: function() {
             this.transitioning = true;
             this.container.css("pointer-events", "none");
