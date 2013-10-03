@@ -51,7 +51,7 @@ kendo_module({
                 firstSeries = series[0],
                 funnelChart = new FunnelChart(plotArea, {
                     series: series,
-                    dependOn:firstSeries.dependOn,
+                    segmentMethod:firstSeries.segmentMethod,
                     legend: plotArea.options.legend,
                     neckSize: firstSeries.neckSize,
                     segmentSpacing:firstSeries.segmentSpacing
@@ -82,7 +82,7 @@ kendo_module({
         options: {
             neckSize: 0.3,
             width: 300,
-            dependOn:"none",
+            segmentMethod:"none",
             segmentSpacing:0,
             labels: {
                 visible: true,
@@ -245,13 +245,13 @@ kendo_module({
                 count = segments.length,
                 i,
                 segmentSpacing = options.segmentSpacing,
-                dependOn = options.dependOn,
+                segmentMethod = options.segmentMethod,
                 box = chartBox.clone().unpad(chart.labelPadding()),
                 width = box.width(),
                 totalHeight = box.height() - segmentSpacing * (count-1),
                 neckSize = options.neckSize*width;
 
-            if(dependOn=="height"){
+            if(segmentMethod=="height"){
                 var finalNarrow = (width - neckSize)/2,
                 height,
                 offset,
@@ -271,7 +271,7 @@ kendo_module({
                     previousHeight += height + segmentSpacing;
                 }
             }
-            else if(dependOn==="relation"){
+            else if(segmentMethod==="relation"){
                 //TODO make the data sorted 
                 var lastUpperSide = width,
                     previousHeight = 0,

@@ -37,7 +37,7 @@
             }
 
             // ------------------------------------------------------------
-            module("dependOn none", {
+            module("segmentMethod none", {
                 setup: function() {
                     createChart({
                         series: [{
@@ -79,10 +79,10 @@
                 equal(chart.segments.length, chart.options.series[0].data.length);
             });
 
-            module("dependOn height", {
+            module("segmentMethod height", {
                 setup: function() {
                     createChart({
-                        dependOn:"height",
+                        segmentMethod:"height",
                         series: [{
                             data: [{
                                 value: 1,
@@ -120,7 +120,7 @@
             module("max neckSize", {
                 setup: function() {
                     createChart({
-                        dependOn:"height",
+                        segmentMethod:"height",
                         neckSize: 1,
                         series: [{
                             data: [{
@@ -159,7 +159,7 @@
             module("min neckSize", {
                 setup: function() {
                     createChart({
-                        dependOn:"height",
+                        segmentMethod:"height",
                         neckSize: 0,
                         series: [{
                             data: [{
@@ -231,10 +231,10 @@
                 equal(typeof chart.segments[0].dataItem, "object");
             });
 
-            module("dependOn height with spacing", {
+            module("segmentMethod height with spacing", {
                 setup: function() {
                     createChart({
-                        dependOn:"height",
+                        segmentMethod:"height",
                         segmentSpacing:30,
                         neckSize: 0,
                         series: [{
@@ -271,10 +271,10 @@
                 ], TOLERANCE);
             });
 
-            module("dependOn none with spacing", {
+            module("segmentMethod none with spacing", {
                 setup: function() {
                     createChart({
-                        dependOn:"height",
+                        segmentMethod:"height",
                         segmentSpacing:33,
                         neckSize: 0,
                         series: [{
@@ -315,7 +315,7 @@
             module("depend ot relation", {
                 setup: function() {
                     createChart({
-                        dependOn:"relation",
+                        segmentMethod:"relation",
                         series: [{
                             data: [{
                                 value: 7,
@@ -354,7 +354,7 @@
                 setup: function() {
                     createChart({
                         segmentSpacing : 22,
-                        dependOn:"relation",
+                        segmentMethod:"relation",
                         series: [{
                             data: [{
                                 value: 7,
@@ -393,7 +393,7 @@
                 setup: function() {
                     createChart({
                         segmentSpacing : 22,
-                        dependOn:"relation",
+                        segmentMethod:"relation",
                         labels: {
                             align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
                             color:'red',

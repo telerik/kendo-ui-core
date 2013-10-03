@@ -58,7 +58,7 @@
             $("#funnel-height").kendoChart({
                 series: [{
                     type: "funnel",
-                    dependOn:"height",
+                    segmentMethod:"height",
                     neckSize:0.6,
                     data: seriesData,
                     labels: {
@@ -71,7 +71,7 @@
             $("#funnel-height-spacing").kendoChart({
                 series: [{
                     type: "funnel",
-                    dependOn:"height",
+                    segmentMethod:"height",
                     neckSize:0.6,
                     data: seriesData,
                     segmentSpacing:10,
@@ -95,7 +95,7 @@
             $("#funnel-relation").kendoChart({
                 series: [{
                     type: "funnel",
-                    dependOn:"relation",
+                    segmentMethod:"relation",
                     data: relationData,
                     labels:{
                         color: 'white'
@@ -106,7 +106,7 @@
             $("#funnel-relation-spacing").kendoChart({
                 series: [{
                     type: "funnel",
-                    dependOn:"relation",
+                    segmentMethod:"relation",
                     data: relationData,
                     segmentSpacing : 20
                 }]
