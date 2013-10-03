@@ -81,5 +81,19 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        public ListViewEventBuilder Save(Func<object, object> handler)
+        {
+            Handler("save", handler);
+
+            return this;
+        }
+
+        public ListViewEventBuilder Save(string handler)
+        {
+            Handler("save", handler);
+
+            return this;
+        }
     }
 }
