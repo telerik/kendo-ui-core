@@ -19,6 +19,7 @@
 
     var doc = document,
         math = Math,
+        noop = $.noop,
         proxy = $.proxy;
 
     var Class = kendo.Class,
@@ -27,21 +28,24 @@
         ObservableObject = kendo.data.ObservableObject;
 
     var dataviz = kendo.dataviz,
+        append = dataviz.append,
         defined = dataviz.defined,
         renderSVG = dataviz.renderSVG,
         renderTemplate = dataviz.renderTemplate;
 
-    Path = ObservableObject.extend({
-        init: function(points, options) {
-            var path = this;
-
-            path.points = points || [];
-            path.options = options || {};
-
-            ObservableObject.fn.init.call(path, this);
+    // Primitives, public API
+    var Group = ObservableObject.extend({
+        init: function() {
+            this.children = [];
+            this.options = {};
+            ObservableObject.fn.init.call(this, this);
         },
 
-        shape: "path"
+        append: function() {
+            append(this.children, arguments);
+        }
+        // traverse
+        // etc.
     });
 
     var Point = ObservableObject.extend({
@@ -75,27 +79,118 @@
         }
     });
 
-    var PathNode = ObservableObject.extend({
+    Path = ObservableObject.extend({
+        init: function(points, options) {
+            var path = this;
+
+            path.points = points || [];
+            path.options = options || {};
+
+            ObservableObject.fn.init.call(path, this);
+        }
+    });
+
+    // SVG Nodes, more or less private implementation detail
+    var Node = ObservableObject.extend({
         init: function(source) {
             ObservableObject.fn.init.call(this);
 
             this.source = source;
-            this.source.points.bind("change", proxy(this._setPoints, this));
             this.source.options.bind("change", proxy(this._setOptions, this));
         },
 
         render: function() {
-            return this.template(this);
+            return this._template(this);
         },
 
-        template: renderTemplate(
+        setElement: function(element) {
+            this.element = element;
+        },
+
+        _template: noop,
+
+        _setOptions: noop
+    });
+
+    Node.load = function() {
+        var result = [];
+
+        for (var i = 0; i < arguments.length; i++) {
+            var primitive = arguments[i];
+            var children = primitive.children;
+            var node;
+
+            if (primitive instanceof Group) {
+                node = new GroupNode(primitive);
+            } else if (primitive instanceof Path) {
+                node = new PathNode(primitive);
+            }
+
+            if (node.childNodes && children && children.length > 0) {
+                append(node.childNodes, Node.load.apply(Node, children));
+            }
+
+            result.push(node);
+        }
+
+        return result;
+    }
+
+    var GroupNode = Node.extend({
+        init: function(source) {
+            this.childNodes = [];
+
+            Node.fn.init.call(this, source);
+
+            this.source.children.bind("change", proxy(this._childrenChange, this));
+        },
+
+        setElement: function(element) {
+            var nodes = this.childNodes,
+                i;
+
+            Node.fn.setElement(this, element);
+
+            for (i = 0; i < nodes.length; i++) {
+                nodes[i].setElement(element.childNodes[i]);
+            }
+        },
+
+        _template: renderTemplate(
+            "<g>#= d._renderChildren() #</g>"
+        ),
+
+        _renderChildren: function() {
+            var nodes = this.childNodes,
+                output = "",
+                i;
+
+            for (i = 0; i < nodes.length; i++) {
+                output += nodes[i].render();
+            }
+
+            return output;
+        },
+
+        _childrenChange: function(e) {
+        }
+    });
+
+    var PathNode = Node.extend({
+        init: function(source) {
+            Node.fn.init.call(this, source);
+
+            this.source.points.bind("change", proxy(this._setPoints, this));
+        },
+
+        _template: renderTemplate(
             "<path #= d.renderId() #" +
             //"style='display: #= d.renderDisplay() #; " +
             //"#= d.renderCursor() #' " +
             //"#= d.renderDataAttributes() # " +
             "d='#= d.renderPoints() #' " +
-            "#= d.renderAttr(\"stroke\", d.source.options.color) # " +
-            "#= d.renderAttr(\"stroke-width\", d.source.options.width) #" +
+            "#= d.renderAttr(\"stroke\", d.source.options.stroke.color) # " +
+            "#= d.renderAttr(\"stroke-width\", d.source.options.stroke.width) #" +
             //"#= d.renderDashType() # " +
             //"stroke-linecap='#= d.renderLinecap() #' " +
             //"stroke-linejoin='round' " +
@@ -165,7 +260,7 @@
             this.nodes = new ObservableArray([]);
             this.nodes.bind("change", proxy(this._nodeChange, this))
 
-            renderSVG(wrap, this.template(this));
+            renderSVG(wrap, this._template(this));
             this.element = wrap.firstElementChild;
         },
 
@@ -178,28 +273,29 @@
             "click"
         ],
 
-        template: renderTemplate(
+        append: function() {
+            append(this.nodes, Node.load.apply(Node, arguments));
+        },
+
+        clear: function() {
+            this.nodes.empty();
+        },
+
+        _template: renderTemplate(
             "<?xml version='1.0' ?>" +
             "<svg xmlns='" + SVG_NS + "' version='1.1' " +
             "width='#= d._renderSize(d.options.width) #' height='#= d._renderSize(d.options.height) #' " +
             "style='position: relative; display: #= d.display #;'></svg>"
         ),
 
-        load: function(model) {
-            //this.nodes.splice(0, this.nodes.length);
-
-            if (model.shape === "path") {
-                this.nodes.push(new PathNode(model));
-            }
-        },
-
         _nodeChange: function(e) {
+            console.log(e);
             for (var i = 0; i < e.items.length; i++) {
                 var node = e.items[i];
                 if (e.action === "add") {
                     var domNode = this._renderNode(node);
                     this.element.appendChild(domNode);
-                    node.element = domNode;
+                    node.setElement(domNode);
                 } else if (e.action === "remove") {
                     node.element.parentNode.removeChild(node.element);
                 }
@@ -231,25 +327,49 @@
         }
     });
 
+    var center = new Point(50,50);
+
+    var secs = new Path([center, new Point(50, 0)], {
+        stroke: {
+            color: "red",
+            width: 1
+        }
+        // zIndex
+        // etc.
+    });
+
+    var hrs = new Path([center, new Point(50, 25)], {
+        stroke: {
+            color: "black",
+            width: 1
+        }
+    });
+
+    var clock = new Group();
+    clock.append(hrs, secs);
+
+    for (var i = 0; i < 360; i += 30) {
+        var p1 = new Point(50, 10).rotate(center, i);
+        var p2 = new Point(50, 0).rotate(center, i);
+        clock.append(new Path([p1, p2], {
+            stroke: {
+                color: "black",
+                width: 0.5
+            }
+        }));
+    }
+
     var surface = new Surface($("#wrap")[0]);
-    var secs = new Path([new Point(50,50), new Point(50, 0)], { color: "red", width: 1 });
-    var hrs = new Path([new Point(50,50), new Point(50, 25)], { color: "black", width: 1 });
-    surface.load(secs);
-    surface.load(hrs);
+    surface.append(clock);
 
-    var counter = 0;
     var interval = setInterval(function() {
-        counter++;
-
-        //path.points.push(new Point(Math.random() * 100, Math.random() * 100));
-        secs.points[1].rotate(secs.points[0], -6);
-        hrs.points[1].rotate(hrs.points[0], -0.1);
-        //secs.set("options.stroke", counter % 2 === 0 ? "red" : "black");
+        secs.points[1].rotate(center, -6);
+        hrs.points[1].rotate(center, -0.1);
     }, 10);
 
     function stop() {
         clearInterval(interval)
-        surface.nodes.pop();
+        surface.clear();
     }
     </script>
 </body>
