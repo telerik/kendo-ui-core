@@ -1251,9 +1251,7 @@ kendo_module({
                 that._resizable();
             }
 
-            if (that.options.editable && that.options.editable.move !== false) {
-                that._movable();
-            }
+            that._movable();
 
             $(window).on("resize" + NS, that._resizeHandler);
 
@@ -1638,51 +1636,53 @@ kendo_module({
             var event;
             var that = this;
 
-            that._moveDraggable = new kendo.ui.Draggable(that.element, {
-                distance: 0,
-                filter: ".k-event",
-                holdToDrag: kendo.support.mobileOS,
-                hold: function(e) {
-                    var eventElement = e.currentTarget;
+            var isMobile = kendo.support.mobileOS;
+            var movable = that.options.editable && that.options.editable.move !== false;
+            var resizable = that.options.editable && that.options.editable.resize !== false;
 
-//                    that.element.find(".k-scheduler-hold").removeClass("k-scheduler-hold");
+            if (movable || (resizable && isMobile)) {
 
-                    eventElement.addClass("k-scheduler-hold");
-                },
-                dragstart: function(e) {
-                    var view = that.view();
-                    var eventElement = e.currentTarget;
+                that._moveDraggable = new kendo.ui.Draggable(that.element, {
+                    distance: 0,
+                    filter: ".k-event",
+                    holdToDrag: isMobile
+                });
 
-                    event = that.occurrenceByUid(eventElement.attr(kendo.attr("uid")));
+                if (movable) {
+                    that._moveDraggable.bind("dragstart", function(e) {
+                        var view = that.view();
+                        var eventElement = e.currentTarget;
 
-                    startSlot = view._slotByPosition(e.x.location, e.y.location);
+                        event = that.occurrenceByUid(eventElement.attr(kendo.attr("uid")));
 
-                    startTime = startSlot.startOffset(e.x.location, e.y.location, that.options.snap);
+                        startSlot = view._slotByPosition(e.x.location, e.y.location);
 
-                    endSlot = startSlot;
+                        startTime = startSlot.startOffset(e.x.location, e.y.location, that.options.snap);
 
-                    if (!startSlot || that.trigger("moveStart", { event: event })) {
-                        e.preventDefault();
-                    }
-                },
-                drag: function(e) {
-                    var view = that.view();
+                        endSlot = startSlot;
 
-                    var slot = view._slotByPosition(e.x.location, e.y.location);
+                        if (!startSlot || that.trigger("moveStart", { event: event })) {
+                            e.preventDefault();
+                        }
+                    })
+                    .bind("drag", function(e) {
+                        var view = that.view();
 
-                    if (!slot) {
-                        return;
-                    }
+                        var slot = view._slotByPosition(e.x.location, e.y.location);
 
-                    endTime = slot.startOffset(e.x.location, e.y.location, that.options.snap);
+                        if (!slot) {
+                            return;
+                        }
 
-                    var distance = endTime - startTime;
+                        endTime = slot.startOffset(e.x.location, e.y.location, that.options.snap);
 
-                    view._updateMoveHint(event, slot.groupIndex, distance);
+                        var distance = endTime - startTime;
 
-                    var range = moveEventRange(event, distance);
+                        view._updateMoveHint(event, slot.groupIndex, distance);
 
-                    if (!that.trigger("move", {
+                        var range = moveEventRange(event, distance);
+
+                        if (!that.trigger("move", {
                             event: event,
                             slot: { element: slot.element, start: slot.startDate(), end: slot.endDate() },
                             resources: view._resourceBySlot(slot),
@@ -1690,25 +1690,25 @@ kendo_module({
                             end: range.end
                         })) {
 
-                        endSlot = slot;
+                            endSlot = slot;
 
-                    } else {
-                        view._updateMoveHint(event, slot.groupIndex, distance);
-                    }
-                },
-                dragend: function(e) {
-                    that.view()._removeMoveHint();
+                        } else {
+                            view._updateMoveHint(event, slot.groupIndex, distance);
+                        }
+                    })
+                    .bind("dragend", function(e) {
+                        that.view()._removeMoveHint();
 
-                    var distance = endTime - startTime;
-                    var range = moveEventRange(event, distance);
+                        var distance = endTime - startTime;
+                        var range = moveEventRange(event, distance);
 
-                    var start = range.start;
-                    var end = range.end;
+                        var start = range.start;
+                        var end = range.end;
 
-                    var endResources = that.view()._resourceBySlot(endSlot);
-                    var startResources = that.view()._resourceBySlot(startSlot);
+                        var endResources = that.view()._resourceBySlot(endSlot);
+                        var startResources = that.view()._resourceBySlot(startSlot);
 
-                    var prevented = that.trigger("moveEnd", {
+                        var prevented = that.trigger("moveEnd", {
                             event: event,
                             slot: { element: endSlot.element, start: endSlot.startDate(), end: endSlot.endDate() },
                             start: start,
@@ -1716,21 +1716,28 @@ kendo_module({
                             resources: endResources
                         });
 
-                    if (!prevented && (event.start.getTime() != start.getTime() ||
-                        event.end.getTime() != end.getTime() ||
-                        kendo.stringify(endResources) != kendo.stringify(startResources)))  {
-                        that._updateEvent(null, event, $.extend({ start: start, end: end }, endResources));
-                    } else {
+                        if (!prevented && (event.start.getTime() != start.getTime() ||
+                        event.end.getTime() != end.getTime() || kendo.stringify(endResources) != kendo.stringify(startResources)))  {
+
+                            that._updateEvent(null, event, $.extend({ start: start, end: end }, endResources));
+                        }
+
                         e.currentTarget.removeClass("k-scheduler-hold");
                         this.cancelHold();
-                    }
-
-                },
-                dragcancel: function() {
-                    that.view()._removeMoveHint();
-                    this.cancelHold();
+                    })
+                    .bind("dragcancel", function() {
+                        that.view()._removeMoveHint();
+                        this.cancelHold();
+                    });
                 }
-            });
+
+                if (isMobile) {
+                    that._moveDraggable.bind("hold", function(e) {
+                        that.element.find(".k-scheduler-hold").removeClass("k-scheduler-hold");
+                        e.currentTarget.addClass("k-scheduler-hold");
+                    });
+                }
+            }
         },
 
         _resizable: function() {

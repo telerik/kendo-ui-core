@@ -110,9 +110,7 @@
             function setup(options) {
                 return new Scheduler(container,
                     $.extend({
-                        dataSource: {
-                            data: [ { start: new Date(), end: new Date(), isAllDay: true, title: "my event" } ]
-                        }
+                        dataSource: [ { start: new Date(), end: new Date(), isAllDay: true, title: "my event" } ]
                     }, options)
                 );
             }
@@ -265,7 +263,11 @@
             });
 
             asyncTest("tap and hold on diffrent event cancel hold of the prev event", function() {
-                var scheduler = setup();
+                var scheduler = setup({
+                        dataSource: [
+                            { start: new Date(), end: new Date(), title: "my event" },
+                            { start: new Date(), end: new Date(), title: "my second event" }  ]
+                    });
 
                 var eventElement = scheduler.element.find(".k-event").first();
 
@@ -287,6 +289,21 @@
                     }, 805);
                 }, 805);
             });
+
+            asyncTest("tap and hold on event add class to the element if move is disabled", function() {
+                var scheduler = setup({ editable: { move: false } });
+
+                var eventElement = scheduler.element.find(".k-event");
+
+                eventElement.press(10, 10);
+
+                setTimeout(function() {
+                    start();
+                    eventElement.release(10, 10);
+                    ok(eventElement.hasClass("k-scheduler-hold"));
+                }, 805);
+            });
+
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
