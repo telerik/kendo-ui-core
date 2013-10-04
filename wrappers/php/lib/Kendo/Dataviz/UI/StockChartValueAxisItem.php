@@ -15,6 +15,15 @@ class StockChartValueAxisItem extends \Kendo\SerializableObject {
     }
 
     /**
+    * The background color of the axis.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChartValueAxisItem
+    */
+    public function background($value) {
+        return $this->setProperty('background', $value);
+    }
+
+    /**
     * Color to apply to all axis elements.
 Individual color settings for line and labels take priority. Any valid CSS color string will work here, including hex and rgb.
     * @param string $value

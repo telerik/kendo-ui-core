@@ -15,6 +15,15 @@ class ChartYAxisItem extends \Kendo\SerializableObject {
     }
 
     /**
+    * The background color of the axis.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartYAxisItem
+    */
+    public function background($value) {
+        return $this->setProperty('background', $value);
+    }
+
+    /**
     * The base time interval for the axis labels. The default baseUnit is determined automatically from the value range. Available options:
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartYAxisItem

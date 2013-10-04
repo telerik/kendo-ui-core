@@ -25,7 +25,7 @@ including hex and rgb.
     }
 
     /**
-    * The text color of the labels. Any valid CSS color string will work here, inlcuding hex
+    * The text color of the labels. Any valid CSS color string will work here, including hex
 and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesDefaultsLabels

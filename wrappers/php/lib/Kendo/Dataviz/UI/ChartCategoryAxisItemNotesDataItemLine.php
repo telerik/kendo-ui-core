@@ -24,7 +24,7 @@ class ChartCategoryAxisItemNotesDataItemLine extends \kendo\SerializableObject {
     }
 
     /**
-    * The line length of the note.
+    * The length of the connecting lines in pixels.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItemNotesDataItemLine
     */

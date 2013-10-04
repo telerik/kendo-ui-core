@@ -185,6 +185,15 @@ categoryAxis.baseUnitStep is set to "auto".
     }
 
     /**
+    * The background color of the axis.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChartCategoryAxisItem
+    */
+    public function background($value) {
+        return $this->setProperty('background', $value);
+    }
+
+    /**
     * The base time interval for the date axis. The default base unit is determined automatically from the minimum difference
 between subsequent categories.The supported values are:Setting baseUnit to "fit" will set such base unit and categoryAxis.baseUnitStep
 that the total number of categories does not exceed categoryAxis.maxDateGroups.Series data is aggregated for the specified base unit using the series.aggregate function.

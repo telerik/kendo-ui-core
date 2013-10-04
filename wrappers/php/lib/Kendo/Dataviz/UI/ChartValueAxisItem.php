@@ -15,6 +15,15 @@ class ChartValueAxisItem extends \Kendo\SerializableObject {
     }
 
     /**
+    * The background color of the axis.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartValueAxisItem
+    */
+    public function background($value) {
+        return $this->setProperty('background', $value);
+    }
+
+    /**
     * The color of the value axis. Accepts a valid CSS color string, including hex and rgb.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItem
