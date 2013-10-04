@@ -505,38 +505,19 @@
                 equal(pb.wrapper.find("li.k-item.k-state-selected").length, completedChunks.length);
             });
 
-            // test("Chunk size is calculated correctly according to chunk count", function() {
-            //     var pb = new ProgressBar(container, {
-            //         type: "chunk",
-            //         chunkCount: 17
-            //     });
-
-            //     var chunkCount = pb.options.chunkCount;
-            //     var chunkWrapperSize = pb.wrapper.find("ul.k-reset").width();
-            //     var expectedChunkSize = ((chunkWrapperSize - (chunkCount - 1)) / chunkCount).toFixed(2);
-            //     var actualChunkSize = parseFloat(pb.wrapper.find("li.k-item:first")[0].style.width).toFixed(2);
-
-            //     equal(actualChunkSize, expectedChunkSize);
-            // });
-
-            test("Total chunk size is calculated correctly", function() {
+            test("Chunk size is calculated correctly according to chunk count", function() {
                 var pb = new ProgressBar(container, {
                     type: "chunk",
-                    chunkCount: 15
+                    chunkCount: 17
                 });
 
-                var totalChunkSize = 0;
                 var chunkCount = pb.options.chunkCount;
                 var chunkWrapperSize = pb.wrapper.find("ul.k-reset").width();
-                var expectedTotalChunkSize = chunkWrapperSize - chunkCount + 1;
-                var chunks = pb.wrapper.find("li.k-item");
-                for (var i = chunks.length - 1; i >= 0; i--) {
-                    totalChunkSize += parseFloat(chunks[i].style.width, 10);
-                };
+                var expectedChunkSize = parseFloat(pb.wrapper.find("ul.k-reset li.k-item:first")[0].style.width).toFixed(2);
+                var actualChunkSize = (100 / pb.options.chunkCount).toFixed(2);
 
-                equal(totalChunkSize.toFixed(2), expectedTotalChunkSize.toFixed(2));
+                equal(actualChunkSize, expectedChunkSize);
             });
-
 
             test("Chunk count is reset to default if negative chunk count is passed", function() {
                 var pb = new ProgressBar(container, {

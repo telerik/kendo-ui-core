@@ -74,6 +74,12 @@ kendo_module({
             var that = this;
             
             Widget.fn.setOptions.call(that, options);
+
+            that._progressAnimation();
+
+            that._validateValue();
+
+            that._updateProgress();
         },
 
         events: [
@@ -221,6 +227,7 @@ kendo_module({
             var percentageParsed = parseInt(percentage * 100, 10) / 100;
             var completedChunksCount = math.floor(percentageParsed / percentagesPerChunk);
             var completedChunks;
+            var chunkContainer = that.wrapper.find("ul.k-reset");
 
             if((options.orientation === HORIZONTAL && !(options.reverse)) ||
                (options.orientation === VERTICAL && options.reverse)) {
@@ -235,6 +242,8 @@ kendo_module({
 
             completedChunks.removeClass(KUPCOMINGCHUNK)
                            .addClass(KCOMPLETEDCHUNK);
+
+            chunkContainer.toggleClass(KCOMPLETEDCHUNK, options.value === options.max);
         },
 
         _updateProgressWrapper: function(percentage) {
@@ -278,6 +287,9 @@ kendo_module({
             var progressValue;
 
             if (options.showStatus) {
+                that.wrapper.find("." + KPROGRESSWRAPPER + " .k-progress-status-wrap")
+                            .css(that._progressProperty, that.wrapper.css(that._progressProperty));
+
                 if (options.type === PROGRESSTYPE.VALUE) {
                     progressValue = math.floor(options.min + (progressInPercent * that._onePercent));
 
@@ -359,9 +371,8 @@ kendo_module({
             var that = this;
             var options = that.options;
             var container = that.wrapper;
-            var chunkSize = proxy(that._calculateChunkSize, that);
+            var chunkSize = HUNDREDPERCENT / options.chunkCount;
             var html = "";
-            var chunks;
 
             if (options.chunkCount <= 1) {
                 options.chunkCount = DEFAULTCHUNKCOUNT;
@@ -373,10 +384,24 @@ kendo_module({
             }
             html += "</ul>";
 
-            chunks = container.append(html).find(".k-item").css(that._progressProperty, chunkSize);
-            chunks.first().addClass("k-first")
-                  .end()
-                  .last().addClass("k-last");
+            container.append(html).find(".k-item").css(that._progressProperty, chunkSize + "%")
+                     .first().addClass("k-first")
+                     .end()
+                     .last().addClass("k-last");
+
+            that._normalizeChunkSize();
+        },
+
+        _normalizeChunkSize: function() {
+            var that = this;
+            var options = that.options;
+            var lastChunk = that.wrapper.find(".k-item:last");
+            var currentSize = parseFloat(lastChunk[0].style[that._progressProperty]);
+            var difference = HUNDREDPERCENT - (options.chunkCount * currentSize);
+
+            if (difference > 0) {
+                lastChunk.css(that._progressProperty, (currentSize + difference) + "%");
+            }
         },
 
         _addRegularProgressWrapper: function() {
@@ -403,14 +428,6 @@ kendo_module({
             var that = this;
             var chunkCount = that.options.chunkCount;
             var chunkContainer = that.wrapper.find("ul.k-reset");
-                //chunkContainerSize = parseInt(chunkContainer.css(that._progressProperty), 10),
-                // flooredChunkSize = math.floor((chunkContainerSize - (chunkCount - 1)) / chunkCount),
-                // differenceToFill = chunkContainerSize - (flooredChunkSize * chunkCount);
-               // chunkSizes = normalizeChunkSizes(chunkCount, flooredChunkSize, differenceToFill);
-
-                // for (var i = chunkSizes.length - 1; i >= 0; i--) {
-                //     console.log(chunkSizes[i]);
-                // };
 
             return (parseInt(chunkContainer.css(that._progressProperty), 10) - (chunkCount - 1)) / chunkCount;
         },
@@ -440,31 +457,6 @@ kendo_module({
             }
         }
     });
-
-    // //Helper functions
-    // function normalizeChunkSizes(chunkCount, flooredChunkSize, differenceToFill) {
-    //     var chunkSizes = []
-    //         len = chunkCount - 1,
-    //         step;
-
-    //     for (var i = chunkCount - 1; i >= 0; i--) {
-    //         chunkSizes[i] = flooredChunkSize;
-    //     }
-
-    //     //diff will always be < (chunkCount * 2)
-    //     if (differenceToFill > chunkCount) {
-    //         for (var i = len; i >= 0; i--) {
-    //             chunkSizes[i]++;
-    //         }
-
-    //         differenceToFill -= chunkCount;
-    //     }
-
-    //     var indexesToNormalize = [];
-
-
-    //     return chunkSizes;
-    // }
 
     kendo.ui.plugin(ProgressBar);
 })(window.kendo.jQuery);

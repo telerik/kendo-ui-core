@@ -409,6 +409,54 @@
                 equal(pb.wrapper.find(".k-state-default").length, 3);
             });
 
+            test("k-state-selected class is added to the chunk list when the progress is completed for first time", function(){
+                pb = createProgressbar({
+                    type: "chunk",
+                    orientation: "horizontal",
+                    min: 0,
+                    max: 5,
+                    value: 0,
+                    chunkCount: 5,
+                });
+
+                pb.value(5);
+
+                ok(pb.wrapper.find("ul.k-reset").hasClass("k-state-selected"));
+            });
+
+            test("k-state-selected class is removed from the chunk list when the progress is completed and then reversed", function(){
+                pb = createProgressbar({
+                    type: "chunk",
+                    orientation: "horizontal",
+                    min: 0,
+                    max: 5,
+                    value: 0,
+                    chunkCount: 5,
+                });
+
+                pb.value(5);
+                pb.value(2);
+
+                ok(!pb.wrapper.find("ul.k-reset").hasClass("k-state-selected"));
+            });
+
+            test("k-state-selected class is added again to the chunk list when the progress is completed again", function(){
+                pb = createProgressbar({
+                    type: "chunk",
+                    orientation: "horizontal",
+                    min: 0,
+                    max: 5,
+                    value: 0,
+                    chunkCount: 5,
+                });
+
+                pb.value(5);
+                pb.value(2);
+                pb.value(5);
+
+                ok(pb.wrapper.find("ul.k-reset").hasClass("k-state-selected"));
+            });
+
 
             // -----------------------------------------------------------------------------------
             // -----------------------------------------------------------------------------------
