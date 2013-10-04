@@ -17,6 +17,11 @@
         <script src="../src/kendo.dataviz.canvas.js"></script>
         <script src="../src/kendo.dataviz.themes.js"></script>
         <script src="CurveProcessor.js"></script>
+        <style>
+            #container input{
+                width: 30px;
+            }
+        </style>
     </head>
     <body>
     <script id="template" type="text/kendo">    
@@ -29,7 +34,8 @@
         <span data-bind="source: data" data-template="template">       
         </span>
         ]
-        <button type="button" data-bind="click: addNew">Add</button>
+        <button type="button" data-bind="click: push">Push</button>
+        <button type="button" data-bind="click: pop">Pop</button>
     </div>
      <div id="scatterTester"></div>
     <script>
@@ -39,11 +45,15 @@
                 y: {type: "number"}
             }            
        });
-        var arr = new kendo.data.ObservableArray([new model({x: 1, y: 1}),new model({x: 2, y: 2}),new model({x: 1, y: 3}),new model({x: 4, y: 5}),new model({x: 3, y: 4})]);
+
+        var arr = new kendo.data.ObservableArray([new model({x: 1, y: 0}),new model({x: 3, y: 3}),new model({x: 1.5, y: 4}),new model({x: 5, y: 7}),new model({x: 4, y: 3})]);
         var viewModel = kendo.observable({
             data: arr,
-            addNew: function(){
+            push: function(){
                 this.data.push(new model());
+            },
+            pop: function(){
+                this.data.pop();
             }
         });
         kendo.bind($("#container"), viewModel);

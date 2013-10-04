@@ -3630,9 +3630,7 @@ kendo_module({
                 closed = that.closed,
                 length = points.length,                             
                 curve = [],                
-                xField, yField,
                 p0,p1,p2,
-                currentPoints,
                 controlPoints,
                 initialControlPoint,
                 lastControlPoint, 
@@ -3668,8 +3666,8 @@ kendo_module({
                 lastControlPoint = controlPoints[0];
             }
             else{  
-                orientation = that.getOrientation(p0,p1,p2);
-                initialControlPoint = that.getInitialControlPoint(p0,p1,p2, orientation);
+                tangent = that.getTangent(p0,p1, X,Y);             
+                initialControlPoint = that.getFirstControlPoint(tangent, p0, p1,X,Y); 
             }
             
             addPoint(initialControlPoint);
@@ -3699,13 +3697,8 @@ kendo_module({
                 addPoint(p2);
             }
             else{
-                tangent = 0;
-                if(that.isLine(p0, p1, p2)){
-                    orientation.xField = X;
-                    orientation.yField = Y;
-                    tangent = that.getTangent(p0, p1, X, Y);
-                }
-                addPoint(that.getSecondControlPoint(tangent, p1, p2, orientation.xField, orientation.yField));
+                tangent = that.getTangent(p1, p2, X, Y);
+                addPoint(that.getSecondControlPoint(tangent, p1, p2, X, Y));
                 addPoint(p2); 
             }
  
@@ -3741,33 +3734,7 @@ kendo_module({
             var a = (p2.y - p1.y) / (p2.x - p1.x),
                 b = p1.y - a * p1.x;            
             return [b,a];
-        },                      
-        
-        getInitialControlPoint: function(p0,p1,p2, orientation){
-            var that = this,                    
-                xField = orientation.xField,
-                yField = orientation.yField,
-                controlPoint;
-                
-            if(!that.isMonotonicByField(p0,p1,p2,yField) || that.isLine(p0,p1,p2)){
-                var tangent = that.getTangent(p0,p1, X,Y);             
-                controlPoint = that.getFirstControlPoint(tangent, p0, p1,X,Y);                
-            }
-            else{               
-                var fn = that.getParabolaPointsFunction([p0,p1,p2],xField, yField),
-                    fnd = that.getDerivative(fn),
-                    extremum = {};
-                extremum[xField] = -fnd[0] / fnd[1];
-                if(that.isMonotonicByField(p1, p2,extremum, xField) || that.isMonotonicByField(extremum,p0, p1, xField) || 
-                    that.isMonotonicByField(p1, extremum, p2, xField)){   
-                    controlPoint = that.getFirstControlPoint(that.calculateFunction(fnd, p0[xField]), p0, p1, xField, yField);                                 
-                }
-                else {      
-                    controlPoint = that.getFirstControlPoint(0, p0, p1, xField, yField);
-                }
-            }
-            return controlPoint;
-        },
+        },                              
 
         getMiddleControlPoints: function(p0,p1,p2, orientation){
             var that = this,
@@ -3786,24 +3753,17 @@ kendo_module({
                 nextControlPoint = that.getFirstControlPoint(tangent, p1, p2, X, Y);
             }
             else if(that.isMonotonicByField(p0,p1,p2,yField)){
-                fn = that.getParabolaPointsFunction([p0,p1,p2],xField, yField);
-                fnd = that.getDerivative(fn);                               
-                extremum = {};
-                extremum[xField] = -fnd[0] / fnd[1];
-                if(that.isMonotonicByField(p1, p2,extremum, xField) || that.isMonotonicByField(extremum, p0, p1, xField)){   
-                    controlPoint2 = that.getSecondControlPoint(that.calculateFunction(fnd, p1[xField]), p0, p1, xField, yField);
-                    nextControlPoint = that.getFirstControlPoint(that.calculateFunction(fnd, p1[xField]), p1, p2, xField,yField);                                 
-                }
-                else {
-                   tangent = that.getTangent(p0,p2,xField, yField);
-                   controlPoint2 = that.getSecondControlPoint(tangent, p0, p1, xField, yField);
-                   nextControlPoint = that.getFirstControlPoint(tangent, p1, p2,xField,yField);  
-                }
+               tangent = that.getTangent(p0,p2,xField, yField);
+               controlPoint2 = that.getSecondControlPoint(tangent, p0, p1, xField, yField);
+               nextControlPoint = that.getFirstControlPoint(tangent, p1, p2,xField,yField);  
+            
+               that.restrictControlPoint(p0,p1,controlPoint2, tangent);
+               that.restrictControlPoint(p1,p2, nextControlPoint,tangent);
             }
             else{                
                  if(that.isMonotonicByField(p0,p1,p2, xField)){                                       
-                    controlPoint2 = that.getSecondControlPoint(0, p0, p1, xField, yField);
-                    nextControlPoint = that.getFirstControlPoint(0, p1, p2, xField, yField);
+                    controlPoint2 = that.getSecondControlPoint(allowedError, p0, p1, xField, yField);
+                    nextControlPoint = that.getFirstControlPoint(allowedError, p1, p2, xField, yField);
                  }
                  else{   
                     controlPoint2 = that.getSecondControlPoint(allowedError, p0, p1,xField,yField);
@@ -3811,7 +3771,29 @@ kendo_module({
                  }
             }
             return [controlPoint2, nextControlPoint];
-        },                       
+        },  
+        
+        restrictControlPoint: function(p1,p2, cp, tangent){
+            if(p1.y < p2.y){           
+                if(p2.y < cp.y){
+                    cp.x = p1.x + (p2.y - p1.y) / tangent;
+                    cp.y = p2.y; 
+                }
+                else if(cp.y < p1.y){
+                    cp.x = p2.x - (p2.y - p1.y) / tangent;
+                    cp.y = p1.y;
+                }
+            }
+            else {
+                if(cp.y < p2.y){
+                    cp.x = p1.x - (p1.y - p2.y) / tangent;
+                    cp.y = p2.y;
+                } else if (p1.y < cp.y) {
+                    cp.x = p2.x + (p1.y - p2.y) / tangent;
+                    cp.y = p1.y;
+                }
+            }
+        },
         
         getTangent: function(p0,p1, xField, yField){
             var tangent,
@@ -3853,110 +3835,12 @@ kendo_module({
             controlPoint[yField] = p3[yField] - t * weigth * tangent;
             return controlPoint;
         },
-        
-        getParabolaPointsFunction: function(points, xField, yField){
-            var that = this,
-                m = that.getReverseMatrix(that.initMatrix(points,xField)),
-                v = [],
-                fn; 
-            for(var i = 0; i < m.length; i++){
-                v.push(points[i][yField]);            
-            }
-            fn = that.multiplyMatrixByVector(m, v);
 
-            return fn;
-        },  
-        
         calculateFunction: function(fn,x){
             var result = 0,
                 length = fn.length;
             for(var i = 0; i < length;i++){
                 result += Math.pow(x,i) * fn[i];
-            }
-            return result;
-        },
-        
-        getDerivative: function(fn){
-            var result = [],
-                length = fn.length;
-            for(var i = 1; i < length;i++){
-                result[i-1] = fn[i] * i;
-            }
-            return result;
-        },
-        
-        initMatrix: function(points,xField){
-            var m = [],
-                length = points.length;
-             
-            for(var i = 0; i < length;i++){
-               m[i] = [];           
-               for(var j = 0; j < length; j++){
-                     m[i][j] = Math.pow(points[i][xField], j); 
-               }
-            }
-            return m;
-        }, 
-        
-        multiplyMatrixByVector: function(m,v){
-            var result = [],
-                product,           
-                length = m.length;
-
-            for(var row = 0; row < length; row++){
-                product = 0;
-                for(var idx = 0; idx < length; idx++){
-                    product+= m[row][idx] * v[idx];
-                }
-                result[row] = product;
-            }
-            return result;
-        },
-        
-        getReverseMatrix: function(m){
-            var that = this,
-                result = [],
-                length = m.length,
-                determinant = 0;
-            for(var i = 0; i< length; i++){
-                result[i] = [];
-                for(var j = 0; j < length; j++){
-                    result[i][j] = Math.pow(-1, i+j) * that.getDeterminant(initSubMatrix(m,i,j));
-                }
-            }
-            for(i = 0; i< length; i++){
-                determinant += m[0][i] * result[0][i];
-            }
-
-            result = that.transpondMultiply(result, 1/determinant);
-            return result;        
-        },
-        
-        transpondMultiply: function(m,a){
-            var result = [],
-                length = m.length;
-            for(var i = 0; i< length; i++){
-                for(var j = 0; j < length; j++){
-                    result[j] = result[j] || [];
-                    result[j][i] = a * m[i][j];
-                }
-            }
-            return result;
-        },
-        
-        getDeterminant: function(m){
-            var length = m.length,
-                result = 0;
-            if(length == 2){
-                return m[0][0]*m[1][1] - m[0][1]*m[1][0];
-            }
-            else{
-                for(var i =0; i< length; i++){
-                    for(var j = 0; j < length; j++){
-                        result += Math.pow(-1, i+j) * m[i][j] * 
-                            this.getDeterminant(this.initSubMatrix(m,i,j));
-                    }
-                }
             }
             return result;
         }
