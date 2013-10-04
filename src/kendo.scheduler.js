@@ -28,6 +28,7 @@ kendo_module({
         date = kendo.date,
         MS_PER_DAY = date.MS_PER_DAY,
         getDate = date.getDate,
+        getMilliseconds = kendo.date.getMilliseconds,
         recurrence = kendo.recurrence,
         keys = kendo.keys,
         ui = kendo.ui,
@@ -124,7 +125,6 @@ kendo_module({
 
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
-        getMilliseconds = kendo.date.getMilliseconds,
         RECURRENCEEDITOR = function(container, options) {
             $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
                 .attr({
@@ -135,6 +135,20 @@ kendo_module({
                     start: options.model.start,
                     timezone: options.timezone,
                     messages: options.messages
+                });
+        },
+        MOBILERECURRENCEEDITOR = function(container, options) {
+            $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
+                .attr({
+                    name: options.field
+                })
+                .appendTo(container)
+                .kendoMobileRecurrenceEditor({
+                    start: options.model.start,
+                    timezone: options.timezone,
+                    messages: options.messages,
+                    pane: options.pane,
+                    value: options.model[options.field]
                 });
         },
         TIMEZONEPOPUP = function(container, options) {
@@ -730,7 +744,7 @@ kendo_module({
             dateRange: MOBILEDATERANGEEDITOR,
             timezonePopUp: TIMEZONEPOPUP,
             timezone: TIMEZONEEDITOR,
-            recurrence: RECURRENCEEDITOR,
+            recurrence: MOBILERECURRENCEEDITOR,
             description: '<textarea name="description" class="k-textbox"/>',
             multipleResources: multiSelectResourceEditorMobile,
             resources: dropDownResourceEditorMobile
@@ -781,7 +795,7 @@ kendo_module({
             }
 
             if (!model.recurrenceId) {
-                fields.push({ field: "recurrenceRule", title: messages.editor.repeat, editor: editors.recurrence, timezone: timezone, messages: messages.recurrenceEditor });
+                fields.push({ field: "recurrenceRule", title: messages.editor.repeat, editor: editors.recurrence, timezone: timezone, messages: messages.recurrenceEditor, pane: this.pane });
             }
 
             if ("description" in model) {
