@@ -235,6 +235,38 @@
                 equal(ring.startAngle + ring.angle, radialScale.slotAngle(100));
             });
 
+            test("render range color", function() {
+                createScale({
+                    ranges: [{
+                        from: 10,
+                        to: 100,
+                        color: "color"
+                    }]
+                });
+                radialScale.reflow(chartBox);
+                radialScale.getViewElements(view);
+                var ranges = view.log.ring,
+                    style = ranges[1].style;
+
+                equal(style.fill, "color");
+            });
+
+            test("render range opacity", function() {
+                createScale({
+                    ranges: [{
+                        from: 10,
+                        to: 100,
+                        opacity: 0.2
+                    }]
+                });
+                radialScale.reflow(chartBox);
+                radialScale.getViewElements(view);
+                var ranges = view.log.ring,
+                    style = ranges[1].style;
+
+                equal(style.fillOpacity, 0.2);
+            });
+
             module("RadialScale / Configuration");
 
             test("render scale with default min, max and majorUnit", function() {

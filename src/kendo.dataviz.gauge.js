@@ -503,8 +503,8 @@ kendo_module({
                 max = options.max,
                 i, j;
 
-            function rangeSegment(from, to, color) {
-                return { from: from, to: to, color: color };
+            function rangeSegment(from, to, color, opacity) {
+                return { from: from, to: to, color: color, opacity: opacity };
             }
 
             if (count) {
@@ -516,9 +516,9 @@ kendo_module({
                     for (j = 0; j < segmentsCount; j++) {
                         segment = segments[j];
                         if (segment.from <= range.from && range.from <= segment.to) {
-                            segments.push(rangeSegment(range.from, range.to, range.color));
+                            segments.push(rangeSegment(range.from, range.to, range.color, range.opacity));
                             if (segment.from <= range.to && range.to <= segment.to) {
-                                segments.push(rangeSegment(range.to, segment.to, defaultColor));
+                                segments.push(rangeSegment(range.to, segment.to, defaultColor, range.opacity));
                             }
                             segment.to = range.from;
                             break;
