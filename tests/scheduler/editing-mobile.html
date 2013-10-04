@@ -47,6 +47,40 @@
                 return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
             }
 
+
+            function triggerTouchEvent(element, type, info) {
+                info.target = element;
+                return element.trigger($.Event(type, { originalEvent: { changedTouches: [ info ] }}));
+            }
+
+            $.fn.press = function (x, y) {
+                return triggerTouchEvent(this, "touchstart", {
+                    pageX: x,
+                    pageY: y,
+                    id: 1
+                })
+            }
+
+            $.fn.move = function (x, y) {
+                return triggerTouchEvent(this, "touchmove", {
+                    pageX: x,
+                    pageY: y,
+                    id: 1
+                })
+            }
+
+            $.fn.release = function (x, y) {
+                return triggerTouchEvent(this, "touchend", {
+                    pageX: x,
+                    pageY: y,
+                    id: 1
+                })
+            }
+
+            $.fn.tap = function(info) {
+                return this.press(10, 10).release(10, 10);
+            }
+
             module("editing", {
                 setup: function() {
                     container = $("<div>");
@@ -204,6 +238,54 @@
 
                 scheduler._editor.container.find(".k-scheduler-delete").click();
                 equal(showDialog.args("showDialog")[0].buttons.length, 1);
+            });
+
+            test("tapping event calls editEvent in day view", function() {
+                var scheduler = setup();
+
+                var editEvent = stub(scheduler, "editEvent");
+
+                scheduler.element.find(".k-event").tap();
+
+                ok(editEvent.calls("editEvent"));
+            });
+
+            asyncTest("tap and hold on event add class to the element", function() {
+                var scheduler = setup();
+
+                var eventElement = scheduler.element.find(".k-event");
+
+                eventElement.press(10, 10);
+
+                setTimeout(function() {
+                    start();
+                    eventElement.release(10, 10);
+                    ok(eventElement.hasClass("k-scheduler-hold"));
+                }, 805);
+            });
+
+            asyncTest("tap and hold on diffrent event cancel hold of the prev event", function() {
+                var scheduler = setup();
+
+                var eventElement = scheduler.element.find(".k-event").first();
+
+                eventElement.press(10, 10);
+
+                setTimeout(function() {
+                    eventElement.release(10, 10);
+
+                    eventElement = scheduler.element.find(".k-event").last();
+
+                    eventElement.press(10, 10);
+
+                    setTimeout(function() {
+                        start();
+                        eventElement.release(10, 10);
+
+                        equal(scheduler.element.find(".k-scheduler-hold").length, 1);
+                        ok(eventElement.hasClass("k-scheduler-hold"));
+                    }, 805);
+                }, 805);
             });
 
         </script>

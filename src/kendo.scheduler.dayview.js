@@ -671,7 +671,12 @@ kendo_module({
                 that._editUserEvents = new kendo.UserEvents(that.element, {
                     filter: ".k-event",
                     tap: function(e) {
-                        that.trigger("edit", { uid: $(e.target).closest(".k-event").attr(kendo.attr("uid")) });
+                        var eventElement = $(e.target).closest(".k-event");
+
+                        if (!eventElement.hasClass("k-scheduler-hold")) {
+                            that.trigger("edit", { uid: eventElement.attr(kendo.attr("uid")) });
+                        }
+
                         e.preventDefault();
                     }
                 });
@@ -1246,7 +1251,7 @@ kendo_module({
             var editable = options.editable;
             var isMobile = kendo.support.mobileOS;
             var showDelete = editable && editable.destroy !== false && !isMobile;
-            var resizable = editable && editable.resize !== false && !isMobile;
+            var resizable = editable && editable.resize !== false;
             var startDate = getDate(this.startDate());
             var endDate = getDate(this.endDate());
             var startTime = getMilliseconds(this.startTime());

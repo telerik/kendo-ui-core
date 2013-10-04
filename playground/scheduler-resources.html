@@ -45,70 +45,64 @@
 
 <style>
 
-html, body {
-	height: 100%;
-	margin: 0;
-	padding: 0;
-}
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
 
-html
-{
-	overflow-y:scroll;
-}
+    html
+    {
+        overflow-y:scroll;
+    }
 
+    .km-actionsheet  {
+        text-align: center;
+    }
 
+    .km-actionsheet li {
+        display: list-item;
+    }
 
+    .km-root .k-popup-edit-form > .km-header {
+        border-style: solid;
+        border-width: 1px;
+        padding: .3em .6em;
+        text-align: center;
+        width: auto;
+        line-height: 2em;
+    }
 
+    .km-root .k-popup-edit-form > .km-content {
+        padding: .6em;
+    }
 
+    .km-root .k-popup-edit-form .k-dropdown-wrap {
+        display: block;
+    }
 
+    .km-root .k-popup-edit-form .k-edit-buttons {
+        clear: right;
+        margin-right: 2%;
+        margin-left: 2%;
+        padding: 0 0 .6em;
+    }
 
+    .km-root .k-popup-edit-form .k-scheduler-update {
+        float: right;
+    }
 
-.km-actionsheet  {
-	text-align: center;
-}
+    .km-root .k-popup-edit-form .k-scheduler-cancel {
+        float: left;
+    }
 
-.km-actionsheet li {
-	display: list-item;
-}
+    .km-root .k-popup-edit-form .k-edit-buttons .k-scheduler-delete {
+        width: 100%;
+    }
 
-.km-root .k-popup-edit-form > .km-header {
-	border-style: solid;
-	border-width: 1px;
-	padding: .3em .6em;
-	text-align: center;
-	width: auto;
-	line-height: 2em;
-}
-
-.km-root .k-popup-edit-form > .km-content {
-	padding: .6em;
-}
-
-.km-root .k-popup-edit-form .k-dropdown-wrap {
-	display: block;
-}
-
-.km-root .k-popup-edit-form .k-edit-buttons {
-	clear: right;
-	margin-right: 2%;
-	margin-left: 2%;
-	padding: 0 0 .6em;
-}
-
-.km-root .k-popup-edit-form .k-scheduler-update {
-	float: right;
-}
-
-.km-root .k-popup-edit-form .k-scheduler-cancel {
-	float: left;
-}
-
-.km-root .k-popup-edit-form .k-edit-buttons .k-scheduler-delete {
-	width: 100%;
-}
-
-
-
+    .k-scheduler-hold {
+        color: blue;
+    }
 </style>
     </head>
     <body>
@@ -121,9 +115,9 @@ html
             endTime: new Date(2013, 1,1, 20,0,0),
             views: ["day", "week", "month", "agenda"],
             date: new Date(2013, 5, 26),
-            selectable: true,
+           // selectable: true,
             group: {
-                resources: [/*"date"*/, "roomId", "atendees"],
+             //   resources: [/*"date"*/, "roomId", "atendees"],
                 orientation: "vertical"//"horizontal"
             },
             resources: [
@@ -146,6 +140,10 @@ html
                     title: "Atendees"
                 }
             ],
+            editable: {
+               // move: false
+            },
+//            height: 500,
             dataSource: {
                 batch: true,
                 transport: {

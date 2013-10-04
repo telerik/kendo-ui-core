@@ -1641,6 +1641,14 @@ kendo_module({
             that._moveDraggable = new kendo.ui.Draggable(that.element, {
                 distance: 0,
                 filter: ".k-event",
+                holdToDrag: kendo.support.mobileOS,
+                hold: function(e) {
+                    var eventElement = e.currentTarget;
+
+//                    that.element.find(".k-scheduler-hold").removeClass("k-scheduler-hold");
+
+                    eventElement.addClass("k-scheduler-hold");
+                },
                 dragstart: function(e) {
                     var view = that.view();
                     var eventElement = e.currentTarget;
@@ -1688,7 +1696,7 @@ kendo_module({
                         view._updateMoveHint(event, slot.groupIndex, distance);
                     }
                 },
-                dragend: function() {
+                dragend: function(e) {
                     that.view()._removeMoveHint();
 
                     var distance = endTime - startTime;
@@ -1712,10 +1720,15 @@ kendo_module({
                         event.end.getTime() != end.getTime() ||
                         kendo.stringify(endResources) != kendo.stringify(startResources)))  {
                         that._updateEvent(null, event, $.extend({ start: start, end: end }, endResources));
+                    } else {
+                        e.currentTarget.removeClass("k-scheduler-hold");
+                        this.cancelHold();
                     }
+
                 },
                 dragcancel: function() {
                     that.view()._removeMoveHint();
+                    this.cancelHold();
                 }
             });
         },
