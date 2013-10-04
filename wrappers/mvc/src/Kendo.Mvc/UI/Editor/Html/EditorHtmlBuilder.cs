@@ -19,33 +19,57 @@ namespace Kendo.Mvc.UI.Html
 
         public IHtmlNode CreateTextArea()
         {
-            var content = new HtmlElement("textarea")
-                            .Attributes(new
-                            {
-                                cols = "20",
-                                rows = "5",
-                                name = editor.Name,
-                                id = editor.Id
-                            })
-                            .Attributes(editor.HtmlAttributes)
-                            .Attributes(editor.GetUnobtrusiveValidationAttributes());
+            var element = new HtmlElement(editor.TagName).Attributes(new { name = editor.Name, id = editor.Id });
+            var inline = editor.TagName != "textarea";
+
+            if (inline)
+            {
+                element.Attribute("contentEditable", "true");
+            }
+            else
+            {
+                element.Attributes(new
+                {
+                    cols = "20",
+                    rows = "5"
+                });
+            }
+
+            element.Attributes(editor.HtmlAttributes)
+                   .Attributes(editor.GetUnobtrusiveValidationAttributes());
 
             var value = editor.GetValue<string>(editor.Value);
 
             if (!string.IsNullOrEmpty(value))
             {
-                content.Text(value);
+                if (inline)
+                {
+                    element.Html(value);
+                }
+                else
+                {
+                    element.Text(value);
+                }
             }
             else if (editor.Content != null)
             {
-                editor.Template.Apply(content);
+                editor.Template.Apply(element);
             }
             else if (editor.Template.InlineTemplate != null)
             {
-                content.Text(editor.Template.InlineTemplate(null).ToString());
+                var html = editor.Template.InlineTemplate(null).ToString();
+
+                if (inline)
+                {
+                    element.Html(html);
+                }
+                else
+                {
+                    element.Text(html);
+                }
             }
 
-            return content;
+            return element;
         }
     }
 }

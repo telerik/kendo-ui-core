@@ -459,7 +459,7 @@
                     "url": "editor/inline-editing.html",
                     "title": "Inline editing functionality of Kendo UI WYSIWYG jQuery Editor",
                     "meta": "This example shows how to use the Kendo UI Editor to edit parts of the page inline, allowing authors to see the page in its final state.",
-                    "packages": [ "online", "offline" ]
+                    "packages": [ "online", "offline", "mvc" ]
                 },
                 {
                     "text": "Custom tools",

@@ -342,6 +342,7 @@
     <Compile Include="Controllers\Web\DropDownList\TemplateController.cs" />
     <Compile Include="Controllers\Web\Editor\All_ToolsController.cs" />
     <Compile Include="Controllers\Web\Editor\ApiController.cs" />
+    <Compile Include="Controllers\Web\Editor\Inline_EditingController.cs" />
     <Compile Include="Controllers\Web\Editor\Custom_ToolsController.cs" />
     <Compile Include="Controllers\Web\Editor\EventsController.cs" />
     <Compile Include="Controllers\Web\Editor\GlobalizationController.cs" />
@@ -2779,6 +2780,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\editor\inline_editing.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\aspx\Views\web\editor\inline_editing.aspx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

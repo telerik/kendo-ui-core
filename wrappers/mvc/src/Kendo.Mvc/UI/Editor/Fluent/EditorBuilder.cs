@@ -112,6 +112,24 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Allow rendering of contentEditable elements instead of the default textarea editor.
+        /// Note: contentEditable elements are not posted to the server.
+        /// </summary>
+        /// <param name="tagName">The tag that will be rendered as contentEditable</param>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Editor()
+        ///             .Name("Editor")
+        ///             .Tag("div")
+        /// %&gt;
+        /// </code>
+        public EditorBuilder Tag(string tagName)
+        {
+            Component.TagName = tagName;
+
+            return this;
+        }
+
+        /// <summary>
         /// Encode HTML content.
         /// </summary>
         /// <code lang="CS">

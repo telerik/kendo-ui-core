@@ -33,6 +33,8 @@ namespace Kendo.Mvc.UI
                 .InsertImage()
                 .TableEditing();
 
+            TagName = "textarea";
+
             ImageBrowserSettings = new EditorImageBrowserSettings(Messages.ImageBrowserMessages);
         }
 
@@ -70,6 +72,12 @@ namespace Kendo.Mvc.UI
         {
             get;
             private set;
+        }
+
+        public string TagName
+        {
+            get;
+            set;
         }
 
         public string Value
