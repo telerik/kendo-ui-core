@@ -642,7 +642,7 @@ div.k-window
     position: absolute;
     width: 100%;
     height: 1.1em;
-   // line-height: 1.1em;
+    //line-height: 1.1em;
     border-bottom-style: solid;
     border-bottom-width: 1px;
     margin-top: -@window-titlebar-size;
@@ -1454,7 +1454,6 @@ div.k-grid-header .k-header
 {
     float:left;
     margin:0 0.08333em;
-    //padding: 0 0.25em 0 0.25em;
     height: 1.8333em;/*IE7*/
     line-height: 1.8333em;/*IE7*/
 	width: 1.8333em;
@@ -1469,17 +1468,8 @@ div.k-grid-header .k-header
     cursor:default;
 }
 
-.k-pager-wrap>.k-link .k-icon
-{
-    //vertical-align:top;
-    //margin-top:0.25em;
-	
-}
-
 .k-pager-numbers .k-link
 {
-	//width: 1.8333em;
-	//padding: 0 0.25em 0 0.25em;
     padding: 0 0.5833em;
     line-height:1.8333em;
     border-style:solid;
@@ -2457,7 +2447,7 @@ body .k-datetimepicker .k-select
 .k-widget.k-calendar .k-nav-next
 {
     position: absolute;
-    top: 0.25em;
+	top: 0.16666em;
 	line-height: 1.8333em;
 	height: 1.8333em;
 }
@@ -2488,13 +2478,19 @@ body .k-datetimepicker .k-select
     width: 75%;
     height: 1.8333em;
     line-height: 1.8333em;
-    margin: 0.25em 0 0.3333em;
+    margin: 0.16666em -0.08333em 0.3333em 0;
 }
 
 .k-calendar .k-header .k-icon
 {
     vertical-align: middle;
-    margin:0 3px;
+}
+
+.k-calendar .k-header .k-link.k-nav-prev,
+.k-calendar .k-header .k-link.k-nav-next
+{
+	height: 1.8333em;
+	width: 1.8333em;	
 }
 
 .k-calendar th
@@ -2604,7 +2600,7 @@ div.k-treeview
     display: block;
     border-width: 0;
     margin: 0;
-    padding: 0 0 0 1.3333em;
+    padding: 0 0 0 16px;
 }
 
 .k-treeview > .k-group,
@@ -2625,7 +2621,13 @@ div.k-treeview
 .k-treeview .k-in
 {
     display: inline-block;
-   // vertical-align: top;
+    vertical-align: top;
+}
+
+.k-treeview .k-icon,
+.k-treeview .k-in
+{
+	vertical-align: middle;
 }
 
 .k-treeview .k-request-retry
@@ -2639,7 +2641,7 @@ div.k-treeview
 .k-treeview .k-minus-disabled
 {
     margin-top: 0.25em;
-    margin-left: -1.3333em;
+    margin-left: -16px;
     cursor: pointer;
 }
 
@@ -2657,27 +2659,17 @@ div.k-treeview
 
 .k-treeview .k-in
 {
-    margin: 0.08333em 0 0.08333em 0.16666em;
-    padding: 0.16666em 0.3333em 0.16666em 0.25em;
+	margin: 0.08333em 0 0.08333em 0.16666em;
+	padding: 0.16666em 0.3333em 0.16666em 0.25em;
     line-height: 1.3333em;
     text-decoration: none;
-	border-style: solid;
-    border-width: 0.08333em;
+    border-style: solid;
+    border-width: 1px;    
 }
 
 .k-treeview span.k-in
 {
     cursor: default;
-}
-
-.k-treeview .k-in.k-state-hover,
-.k-treeview .k-in.k-state-selected,
-.k-treeview .k-in.k-state-focused
-{
-    border-style: solid;
-    border-width: 0.08333em;
-    padding: 0.16666em 0.3333em 0.16666em 0.25em;
-	line-height: 1.3333em;
 }
 
 .k-treeview .k-drop-hint
