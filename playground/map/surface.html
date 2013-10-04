@@ -135,6 +135,7 @@
         _setOptions: noop
     });
 
+    // TODO: Rethink method name & signature
     Node.load = function(primitives) {
         var result = [];
 
@@ -196,9 +197,11 @@
             return output;
         },
 
+        // TODO: Rename
         _childrenChange: function(e) {
             var group = this;
 
+            // TODO: Test different scenarios for synchronization
             if (e.action === "add") {
                 append(group.childNodes, Node.load(e.items));
             } else if (e.action === "remove") {
@@ -206,6 +209,7 @@
             }
         },
 
+        // TODO: Rename
         _childNodesChange: function(e) {
             for (var i = 0; i < e.items.length; i++) {
                 var node = e.items[i];
@@ -225,23 +229,6 @@
 
             this.source.points.bind("change", proxy(this._setPoints, this));
         },
-
-        _template: renderTemplate(
-            "<path #= d.renderId() #" +
-            //"style='display: #= d.renderDisplay() #; " +
-            //"#= d.renderCursor() #' " +
-            //"#= d.renderDataAttributes() # " +
-            "d='#= d.renderPoints() #' " +
-            "#= d.renderAttr(\"stroke\", d.source.options.stroke.color) # " +
-            "#= d.renderAttr(\"stroke-width\", d.source.options.stroke.width) #" +
-            //"#= d.renderDashType() # " +
-            //"stroke-linecap='#= d.renderLinecap() #' " +
-            //"stroke-linejoin='round' " +
-            //"fill-opacity='#= d.options.fillOpacity #' " +
-            //"stroke-opacity='#= d.options.strokeOpacity #' " +
-            //"fill='#= d.renderFill() #'> " +
-            "></path>"
-        ),
 
         renderId: function() {
             var element = this,
@@ -272,6 +259,23 @@
             return "M" + result.join(" ");
         },
 
+        _template: renderTemplate(
+            "<path #= d.renderId() #" +
+            //"style='display: #= d.renderDisplay() #; " +
+            //"#= d.renderCursor() #' " +
+            //"#= d.renderDataAttributes() # " +
+            "d='#= d.renderPoints() #' " +
+            "#= d.renderAttr(\"stroke\", d.source.options.stroke.color) # " +
+            "#= d.renderAttr(\"stroke-width\", d.source.options.stroke.width) #" +
+            //"#= d.renderDashType() # " +
+            //"stroke-linecap='#= d.renderLinecap() #' " +
+            //"stroke-linejoin='round' " +
+            //"fill-opacity='#= d.options.fillOpacity #' " +
+            //"stroke-opacity='#= d.options.strokeOpacity #' " +
+            //"fill='#= d.renderFill() #'> " +
+            "></path>"
+        ),
+
         _setPoints: function(e) {
             if (this.element) {
                 $(this.element).attr({
@@ -282,6 +286,7 @@
 
         _setOptions: function(e) {
             if (this.element) {
+                // TODO: Mapping
                 if (e.field === "fill.color") {
                     $(this.element).attr({
                         "fill": this.source.options.fill
@@ -350,6 +355,8 @@
             return size;
         }
     });
+
+    // Demo
 
     var center = new Point(50,50);
 
