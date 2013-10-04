@@ -144,6 +144,15 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// The axis background color
+        /// </summary>
+        public string Background
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// A value indicating if the axis labels should be rendered in reverse.
         /// </summary>
         public bool? Reverse

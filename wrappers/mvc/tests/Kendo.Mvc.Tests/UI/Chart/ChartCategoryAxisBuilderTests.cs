@@ -181,6 +181,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Background_should_set_background()
+        {
+            builder.Background("#f00");
+            axis.Background.ShouldEqual("#f00");
+        }
+
+        [Fact]
+        public void Background_should_return_builder()
+        {
+            builder.Background("#f00").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void Reverse_should_set_reverse()
         {
             builder.Reverse(true);

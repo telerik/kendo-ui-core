@@ -503,5 +503,15 @@ namespace Kendo.Mvc.UI.Fluent
             Axis.NarrowRange = narrowRange;
             return this as TAxisBuilder;
         }
+
+        /// <summary>
+        /// Sets the axis background color
+        /// </summary>
+        /// <param name="visible">The axis visibility.</param>
+        public TAxisBuilder Background(string background)
+        {
+            Axis.Background = background;
+            return this as TAxisBuilder;
+        }
     }
 }

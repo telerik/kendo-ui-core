@@ -38,5 +38,10 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
+        /// <summary>
+        /// The axis background color
+        /// </summary>
+        string Background { get; set; }
     }
 }
