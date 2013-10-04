@@ -483,6 +483,20 @@
                     );
                 });
 
+                test("creates background box", function() {
+                    numericAxis = new dataviz.NumericAxis(0, 1, { background: "red" });
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+
+                    var rect = view.log.rect[0];
+                    var box = numericAxis.box;
+
+                    close(rect.x1, box.x1, TOLERANCE);
+                    close(rect.y1, box.y1, TOLERANCE);
+                    close(rect.x2, box.x2, TOLERANCE);
+                    close(rect.y2, box.y2, TOLERANCE);
+                });
+
                 test("should not create axis line if visible is false", function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, { line: { visible: false }});
                     numericAxis.reflow(chartBox);

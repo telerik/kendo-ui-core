@@ -69,6 +69,19 @@
                     );
                 });
 
+                test("creates background box", function() {
+                    createCategoryAxis({ background: "red" });
+                    categoryAxis.getViewElements(view);
+
+                    var rect = view.log.rect[0];
+                    var box = categoryAxis.box;
+
+                    close(rect.x1, box.x1, TOLERANCE);
+                    close(rect.y1, box.y1, TOLERANCE);
+                    close(rect.x2, box.x2, TOLERANCE);
+                    close(rect.y2, box.y2, TOLERANCE);
+                });
+
                 test("should not create axis line if visible is false", function() {
                     createCategoryAxis({ line: { visible: false } });
 

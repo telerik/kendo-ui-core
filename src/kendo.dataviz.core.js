@@ -1323,6 +1323,7 @@ kendo_module({
 
             append(elements, axis.renderLine(view));
             append(elements, axis.renderPlotBands(view));
+            append(elements, axis.renderBackground(view));
 
             return elements;
         },
@@ -1341,6 +1342,24 @@ kendo_module({
             }
 
             return tickSize;
+        },
+
+        renderBackground: function(view) {
+            var axis = this,
+                options = axis.options,
+                background = options.background,
+                box = axis.box,
+                elements = [];
+
+            if (background) {
+                elements.push(
+                    view.createRect(box, {
+                        fill: background, zIndex: -1
+                    })
+                );
+            }
+
+            return elements;
         },
 
         renderPlotBands: function(view) {
