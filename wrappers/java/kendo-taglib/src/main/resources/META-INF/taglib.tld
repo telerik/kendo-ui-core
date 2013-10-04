@@ -740,6 +740,12 @@ If it is not supported by the browser, the Chart will switch to the first availa
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
+            <description>The background color of the axis.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The base time interval for the date axis. The default base unit is determined automatically from the minimum difference
 between subsequent categories.The supported values are:Setting baseUnit to "fit" will set such base unit and categoryAxis.baseUnitStep
 that the total number of categories does not exceed categoryAxis.maxDateGroups.Series data is aggregated for the specified base unit using the series.aggregate function.</description>
@@ -1724,7 +1730,7 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the note.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -1904,7 +1910,7 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the notes.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -3961,7 +3967,7 @@ By default chart series highlighting is enabled.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the notes.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -4523,6 +4529,12 @@ By default chart series highlighting is enabled.</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The background color of the axis.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The color of the value axis. Accepts a valid CSS color string, including hex and rgb.</description>
@@ -5364,7 +5376,7 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the note.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -5544,7 +5556,7 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the notes.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -5780,6 +5792,12 @@ body of the chart.</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The background color of the axis.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The base time interval for the axis labels. The default baseUnit is determined automatically from the value range. Available options:</description>
@@ -6681,7 +6699,7 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the note.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -6861,7 +6879,7 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the notes.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -7097,6 +7115,12 @@ body of the chart.</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The background color of the axis.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The base time interval for the axis labels. The default baseUnit is determined automatically from the value range. Available options:</description>
@@ -7992,7 +8016,7 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the note.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -8172,7 +8196,7 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the notes.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -20077,6 +20101,12 @@ of categories to denote the far end of the axis.</description>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
+            <description>The background color of the axis.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The base time interval for the date axis. The default base unit is determined automatically from the minimum difference
 between subsequent categories.The supported values are:Setting baseUnit to "fit" will set such base unit and categoryAxis.baseUnitStep
 that the total number of categories does not exceed categoryAxis.maxDateGroups.Series data is aggregated for the specified base unit using the series.aggregate function.</description>
@@ -20932,7 +20962,7 @@ on the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the note.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -21112,7 +21142,7 @@ on the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the notes.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -21618,6 +21648,12 @@ It is used as a default field for the navigator axis.The data item field value m
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The background color of the axis.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The base time interval for the date axis. The default base unit is determined automatically from the minimum difference
@@ -22579,7 +22615,7 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the note.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -22759,7 +22795,7 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the notes.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -24866,7 +24902,7 @@ Available for column series.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the notes.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -25291,6 +25327,12 @@ Template variables:</description>
             <name>axisCrossingValue</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The background color of the axis.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>Color to apply to all axis elements.
@@ -26033,7 +26075,7 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the note.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -26213,7 +26255,7 @@ body of the chart.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The line length of the notes.</description>
+            <description>The length of the connecting lines in pixels.</description>
             <name>length</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>

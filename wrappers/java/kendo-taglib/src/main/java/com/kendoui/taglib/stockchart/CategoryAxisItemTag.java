@@ -107,6 +107,14 @@ public class CategoryAxisItemTag extends  BaseTag  /* interfaces *//* interfaces
         setProperty("axisCrossingValue", value);
     }
 
+    public java.lang.String getBackground() {
+        return (java.lang.String)getProperty("background");
+    }
+
+    public void setBackground(java.lang.String value) {
+        setProperty("background", value);
+    }
+
     public java.lang.String getBaseUnit() {
         return (java.lang.String)getProperty("baseUnit");
     }
