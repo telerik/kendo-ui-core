@@ -2360,11 +2360,15 @@ kendo_module({
         refresh: function(e) {
             var view = this.view();
 
-            if (e && e.action === "itemchange" && (this.editable || this._preventRefresh)) { // skip rebinding if editing is in progress
+            e = e || {};
+
+            if (e.action === "itemchange" && (this.editable || this._preventRefresh)) { // skip rebinding if editing is in progress
                 return;
             }
 
-            e = e || {};
+            if (!view) {
+                return;
+            }
 
             if (this.trigger("dataBinding", { action: e.action || "rebind", index: e.index, items: e.items })) {
                 return;
