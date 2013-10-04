@@ -8,6 +8,7 @@
         Day,
         Week,
         Month,
-        Agenda
+        Agenda,
+        Custom
     }
 }

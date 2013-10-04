@@ -48,6 +48,32 @@
         }
 
         /// <summary>
+        /// Defines a custom view 
+        /// </summary>
+        /// <param name="type">The JavaScript type name</param>
+        public void CustomView(string type)
+        {
+            SchedulerCustomView view = new SchedulerCustomView(type);
+            container.Views.Add(view);
+        }
+
+        /// <summary>
+        /// Defines a custom view 
+        /// </summary>
+        /// <param name="type">The JavaScript type name</param>    
+        public ISchedulerViewBuilder CustomView(string type, Action<SchedulerViewBaseBuilder<SchedulerCustomView>> addViewAction)
+        {
+            SchedulerCustomView view = new SchedulerCustomView(type);
+
+            container.Views.Add(view);
+
+            SchedulerViewBaseBuilder<SchedulerCustomView> builder = new SchedulerViewBaseBuilder<SchedulerCustomView>(view);
+
+            addViewAction(builder);
+
+            return builder;
+        }
+        /// <summary>
         /// Defines a Scheduler week view.
         /// </summary>
         /// <returns></returns>
