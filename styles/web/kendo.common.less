@@ -642,7 +642,6 @@ div.k-window
     position: absolute;
     width: 100%;
     height: 1.1em;
-    line-height: 1.1em;
     border-bottom-style: solid;
     border-bottom-width: 1px;
     margin-top: -@window-titlebar-size;
@@ -724,7 +723,7 @@ div.k-window-content
 {
     border-style: solid;
     border-width: 1px;
-    padding: 1px;
+    padding:1px;
     filter: alpha(opacity=100);
     opacity: 1;
 }
@@ -1399,8 +1398,8 @@ div.k-grid-header .k-header
     overflow: hidden;
     border-style: solid;
     border-width: 1px;
-    line-height: 24px;
-    padding:4px 0 4px 3px;
+    line-height: 2.0em;
+    padding:0.333em 0 0.333em 0.250em;
 }
 
 .k-grid-pager
@@ -1442,7 +1441,7 @@ div.k-grid-header .k-header
 .k-pager-info
 {
     float: right;
-    padding:0 16px;
+    padding:0 1.333em;
 }
 
 .k-pager-numbers .k-link
@@ -1453,12 +1452,13 @@ div.k-grid-header .k-header
 .k-pager-wrap>.k-link
 {
     float:left;
-    margin:0 1px;
-    padding: 0 3px;
-    height: 22px;/*IE7*/
-    line-height: 22px;/*IE7*/
-    .border-radius(13px);
+    margin:0 0.08333em;
+    height: 1.8333em;/*IE7*/
+    line-height: 1.8333em;/*IE7*/
+    width: 1.8333em;
+    .border-radius(1.0833em);
     cursor:pointer;
+    text-align: center;
 }
 
 .k-pager-wrap>a.k-state-disabled:hover
@@ -1467,24 +1467,13 @@ div.k-grid-header .k-header
     cursor:default;
 }
 
-.k-pager-wrap>.k-link .k-icon
-{
-    vertical-align:top;
-    margin-top:3px;
-}
-
 .k-pager-numbers .k-link
 {
-    padding: 0 8px;
-    .border-radius(13px);
-}
-
-.k-pager-numbers .k-link:hover
-{
-    padding: 0 7px;
+    padding: 0 0.5833em;
+    line-height:1.8333em;
     border-style:solid;
     border-width:1px;
-    line-height:22px;
+    .border-radius(1.0833em);
 }
 
 .k-pager-wrap>.k-link
@@ -1496,7 +1485,7 @@ div.k-grid-header .k-header
 .k-pager-wrap .k-pager-refresh
 {
     float:right;
-    margin-right:6px;
+    margin-right:0.5em;
     border-width:0;
     .border-radius(0);
 }
@@ -1505,26 +1494,26 @@ div.k-grid-header .k-header
 {
     border-style:solid;
     border-width:1px;
-    line-height:22px;
-    padding:0 7px;
-    .border-radius(13px);
+    line-height:1.8333em;
+    padding:0 0.5833em;
+    .border-radius(1.0833em);
 }
 
 .k-pager-wrap .k-textbox
 {
-    width:40px;
+    width:3.333em;
 }
 
 .k-ie7 .k-pager-wrap .k-textbox
 {
-    height:16px;
-    margin-top:2px;
+    height:1.3333em;
+    margin-top:0.16666em;
     display:inline;
 }
 
 .k-pager-wrap .k-dropdown
 {
-    width:54px;
+    width:4.500em;
 }
 
 .k-pager-refresh
@@ -1535,7 +1524,7 @@ div.k-grid-header .k-header
 .k-pager-input,
 .k-pager-sizes
 {
-    padding:0 17px;
+    padding:0 1.4166em;
 }
 
 .k-ie7 .k-pager-sizes
@@ -2322,7 +2311,7 @@ body .k-datetimepicker .k-select
 
 .k-picker-wrap .k-icon
 {
-    margin-top: 1px;
+    margin-top: 1.0em;
 }
 
 .k-ie7 .k-picker-wrap .k-icon,
@@ -2430,7 +2419,7 @@ body .k-datetimepicker .k-select
 {
     position: relative;
     display: inline-block;
-    width: 203px;
+    width: 16.917em;
     overflow: hidden;
 }
 
@@ -2457,7 +2446,9 @@ body .k-datetimepicker .k-select
 .k-widget.k-calendar .k-nav-next
 {
     position: absolute;
-    top: 3px;
+    top: 0.16666em;
+    line-height: 1.8333em;
+    height: 1.8333em;
 }
 .k-widget.k-calendar .k-nav-prev { left: 1%; }
 .k-widget.k-calendar .k-nav-next { right: 1%; }
@@ -2467,7 +2458,7 @@ body .k-datetimepicker .k-select
     float:left;
     border-spacing: 0;
     width: 100%;
-    height: 170px;
+    height: 14.167em;
     border-width: 0;
     margin: 0;
     table-layout: fixed;
@@ -2484,15 +2475,21 @@ body .k-datetimepicker .k-select
 {
     display: inline-block;
     width: 75%;
-    height: 22px;
-    line-height: 22px;
-    margin: 3px 0 4px;
+    height: 1.8333em;
+    line-height: 1.8333em;
+    margin: 0.16666em -0.08333em 0.3333em 0;
 }
 
 .k-calendar .k-header .k-icon
 {
-    vertical-align: top;
-    margin:3px 3px 4px;
+    vertical-align: middle;
+}
+
+.k-calendar .k-header .k-link.k-nav-prev,
+.k-calendar .k-header .k-link.k-nav-next
+{
+    height: 1.8333em;
+    width: 1.8333em;
 }
 
 .k-calendar th
@@ -2506,14 +2503,14 @@ body .k-datetimepicker .k-select
 
 .k-calendar td
 {
-    padding: 1px;
+    padding: 0.08333em;
     cursor: pointer;
 }
 
 .k-calendar .k-state-focus
 {
     border-style: dotted;
-    border-width: 1px;
+    border-width: 0.08333em;
     padding: 0;
 }
 
@@ -2521,8 +2518,8 @@ body .k-datetimepicker .k-select
 {
     display: block;
     overflow: hidden;
-    min-height:22px;
-    line-height:22px;
+    min-height:1.8333em;
+    line-height:1.8333em;
     padding: 0 .45em 0 .1em;
 }
 
@@ -2626,6 +2623,12 @@ div.k-treeview
     vertical-align: top;
 }
 
+.k-treeview .k-icon,
+.k-treeview .k-in
+{
+    vertical-align: middle;
+}
+
 .k-treeview .k-request-retry
 {
     vertical-align: baseline;
@@ -2636,7 +2639,7 @@ div.k-treeview
 .k-treeview .k-plus-disabled,
 .k-treeview .k-minus-disabled
 {
-    margin-top: 3px;
+    margin-top: 0.25em;
     margin-left: -16px;
     cursor: pointer;
 }
@@ -2655,24 +2658,17 @@ div.k-treeview
 
 .k-treeview .k-in
 {
-    margin: 1px 0 1px 2px;
-    padding: 2px 4px 2px 3px;
-    line-height: 16px;
+    margin: 0.08333em 0 0.08333em 0.16666em;
+    padding: 0.16666em 0.3333em 0.16666em 0.25em;
+    line-height: 1.3333em;
     text-decoration: none;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .k-treeview span.k-in
 {
     cursor: default;
-}
-
-.k-treeview .k-in.k-state-hover,
-.k-treeview .k-in.k-state-selected,
-.k-treeview .k-in.k-state-focused
-{
-    border-style: solid;
-    border-width: 1px;
-    padding: 1px 3px 1px 2px;
 }
 
 .k-treeview .k-drop-hint
@@ -2938,7 +2934,7 @@ span.k-numerictextbox
                 border-width: 2px;
                 padding: 1px;
             }
-        }		
+        }
     }
 
     .k-hue-slider {
@@ -4316,7 +4312,7 @@ div.k-scheduler-marquee:before
 div.k-scheduler-marquee:after
 {
     bottom: 0;
-    right: 0;    
+    right: 0;
     border-top-color: transparent;
     border-left-color: transparent;
 }
@@ -4818,7 +4814,7 @@ html .k-upload-empty
 .k-upload-button
 {
     position: relative;
-    min-width: 86px;
+    min-width: 7.167em;
     overflow: hidden !important; /* important required by IE7 */
     direction: ltr;
 }
@@ -4861,7 +4857,7 @@ html .k-upload-empty
 .k-upload-files .k-button,
 .k-upload-status-total .k-icon
 {
-    margin-left: 8px;
+    margin-left: 0.667em;
 }
 
 .k-ie7 .k-upload-files .k-button{line-height: 1;} /*IE7*/
@@ -4896,11 +4892,11 @@ html .k-upload-empty
 {
     position: relative;
     display: inline-block;
-    min-width: 120px;
-    max-width: 200px;
+    min-width: 10em;
+    max-width: 16.667em;
     vertical-align: middle;
     margin-left: 1em;
-    padding-bottom: 2px;
+    padding-bottom: 0.167em;
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -4937,8 +4933,8 @@ html .k-upload-empty
 
 .k-upload-selected
 {
-    min-width: 86px;
-    margin: 3px 0 0;
+    min-width: 7.167em;
+    margin: 0.25em 0 0;
 
     -moz-box-sizing: content-box;
     -ms-box-sizing: content-box;
