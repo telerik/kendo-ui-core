@@ -1715,6 +1715,12 @@ kendo_module({
                         var view = that.view();
                         var eventElement = e.currentTarget;
 
+                        if (isMobile && !eventElement.hasClass("k-scheduler-hold")) {
+                            that.element.find(".k-scheduler-hold").removeClass("k-scheduler-hold");
+                            e.preventDefault();
+                            return;
+                        }
+
                         event = that.occurrenceByUid(eventElement.attr(kendo.attr("uid")));
 
                         startSlot = view._slotByPosition(e.x.location, e.y.location);
