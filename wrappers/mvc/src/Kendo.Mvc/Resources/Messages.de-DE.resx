@@ -127,22 +127,22 @@
     <value>Hyperlink einfügen</value>
   </data>
   <data name="Editor_DeleteFile" xml:space="preserve">
-    <value>Are you sure you want to delete "{0}"?</value>
+    <value>Sind Sie sicher, dass Sie  "{0}" löschen wollen?</value>
   </data>
   <data name="Editor_DialogButtonSeparator" xml:space="preserve">
-    <value>or</value>
+    <value>oder</value>
   </data>
   <data name="Editor_DialogCancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Abbrechen</value>
   </data>
   <data name="Editor_DialogInsert" xml:space="preserve">
-    <value>Insert</value>
+    <value>Einfügen</value>
   </data>
   <data name="Editor_DirectoryNotFound" xml:space="preserve">
-    <value>A directory with this name was not found.</value>
+    <value>Kein Verzeichnis mit diesem Namen gefunden</value>
   </data>
   <data name="Editor_EmptyFolder" xml:space="preserve">
-    <value>Empty Folder</value>
+    <value>Leeres Verzeichnis</value>
   </data>
   <data name="Editor_FontName" xml:space="preserve">
     <value>Schriftfamilie</value>
@@ -163,10 +163,10 @@
     <value>Absatzstil</value>
   </data>
   <data name="Editor_ImageAltText" xml:space="preserve">
-    <value>Alternate text</value>
+    <value>Abwechselnder Text</value>
   </data>
   <data name="Editor_ImageWebAddress" xml:space="preserve">
-    <value>Web address</value>
+    <value>Web-Adresse</value>
   </data>
   <data name="Editor_Indent" xml:space="preserve">
     <value>Einzug vergrößern</value>
@@ -184,7 +184,7 @@
     <value>Aufzählliste</value>
   </data>
   <data name="Editor_InvalidFileType" xml:space="preserve">
-    <value>The selected file "{0}" is not valid. Supported file types are {1}.</value>
+    <value>Die ausgewählte Datei  "{0}" ist ungültig. Unterstützte Dateitypen sind {1}.</value>
   </data>
   <data name="Editor_Italic" xml:space="preserve">
     <value>Kursiv</value>
@@ -202,7 +202,7 @@
     <value>Rechtsbündig</value>
   </data>
   <data name="Editor_LinkOpenInNewWindow" xml:space="preserve">
-    <value>Open link in new window</value>
+    <value>Link in einem neuen Fenster öffnen</value>
   </data>
   <data name="Editor_LinkText" xml:space="preserve">
     <value>Text</value>
@@ -211,25 +211,25 @@
     <value>ToolTip</value>
   </data>
   <data name="Editor_LinkWebAddress" xml:space="preserve">
-    <value>Web address</value>
+    <value>Web-Adresse</value>
   </data>
   <data name="Editor_OrderBy" xml:space="preserve">
-    <value>Arrange by:</value>
+    <value>Sortiert nach:</value>
   </data>
   <data name="Editor_OrderByName" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="Editor_OrderBySize" xml:space="preserve">
-    <value>Size</value>
+    <value>Größe</value>
   </data>
   <data name="Editor_Outdent" xml:space="preserve">
     <value>Einzug verkleinern</value>
   </data>
   <data name="Editor_OverwriteFile" xml:space="preserve">
-    <value>A file with name "{0}" already exists in the current directory. Do you want to overwrite it?</value>
+    <value>Eine Datei mit dem Namen "{0}" existiert bereits im aktuellen Verzeichnis. Wollen Sie diese überschreiben?</value>
   </data>
   <data name="Editor_Search" xml:space="preserve">
-    <value>Search</value>
+    <value>Suchen</value>
   </data>
   <data name="Editor_Strikethrough" xml:space="preserve">
     <value>Durchgestrichen</value>
@@ -250,7 +250,7 @@
     <value>Hyperlink entfernen</value>
   </data>
   <data name="Editor_UploadFile" xml:space="preserve">
-    <value>Upload</value>
+    <value>Hochladen</value>
   </data>
   <data name="Filter_And" xml:space="preserve">
     <value>Und</value>
@@ -409,7 +409,7 @@
     <value>Beenden</value>
   </data>
   <data name="Upload_DropFilesHere" xml:space="preserve">
-    <value>Droppen Sie Feile hier zum hochladen</value>
+    <value>Dateien hier fallen lassen zum hochladen</value>
   </data>
   <data name="Upload_Remove" xml:space="preserve">
     <value>Löschen</value>
@@ -430,7 +430,7 @@
     <value>hochladen</value>
   </data>
   <data name="Upload_UploadSelectedFiles" xml:space="preserve">
-    <value>Feile hochladen</value>
+    <value>Dateien hochladen</value>
   </data>
   <data name="Scheduler_AllDay" xml:space="preserve">
     <value>Ganzer Tag</value>
@@ -622,22 +622,22 @@
     <value>Tabelle einfügen</value>
   </data>
   <data name="Editor_AddColumnLeft" xml:space="preserve">
-    <value>Add column on the left</value>
+    <value>Spalte links einfügen</value>
   </data>
   <data name="Editor_AddColumnRight" xml:space="preserve">
-    <value>Add column on the right</value>
+    <value>Spalte rechts einfügen</value>
   </data>
   <data name="Editor_AddRowAbove" xml:space="preserve">
-    <value>Add row above</value>
+    <value>Zeile oberhalb einfügen</value>
   </data>
   <data name="Editor_AddRowBelow" xml:space="preserve">
-    <value>Add row below</value>
+    <value>Zeile unterhalb einfügen</value>
   </data>
   <data name="Editor_DeleteColumn" xml:space="preserve">
-    <value>Delete column</value>
+    <value>Spalte löschen</value>
   </data>
   <data name="Editor_DeleteRow" xml:space="preserve">
-    <value>Delete row</value>
+    <value>Zeile löschen</value>
   </data>
   <data name="Scheduler_DeleteWindowTitle" xml:space="preserve">
     <value>Termin löschen</value>
