@@ -1096,6 +1096,7 @@ kendo_module({
             var messages = that.options.messages;
             var updateText = messages.save;
             var cancelText = messages.cancel;
+            var deleteText = messages.destroy;
 
             var createButton = that.options.createButton;
             //var timezone = that.options.timezone;
@@ -1157,6 +1158,7 @@ kendo_module({
 
             html += '<div class="k-edit-buttons k-state-default">';
             html += createButton({ name: "update", text: updateText, attr: attr }) + createButton({ name: "canceledit", text: cancelText, attr: attr });
+            html += createButton({ name: "delete", text: deleteText, attr: attr });
             html += '</div></div></div>';
 
             var container = this.container = $(html)
@@ -1199,6 +1201,13 @@ kendo_module({
                     e.stopPropagation();
 
                     that.trigger("save", { container: container, model: model });
+                });
+
+                container.on(CLICK + NS, "a.k-scheduler-delete", function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    that.trigger(REMOVE, { container: container, model: model });
                 });
             } else {
                 that.trigger(CANCEL, { container: container, model: model });
