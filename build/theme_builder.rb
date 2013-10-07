@@ -4,7 +4,7 @@ tree :to => 'themebuilder/styles/textures',
      :from => FileList['styles/web/textures/**/*'],
      :root => 'styles/web/textures/'
 
-file 'themebuilder/scripts/template.js' => [ 'styles/web/template.less',
+file 'themebuilder/scripts/template.js' => [ 'styles/web/theme-template.less',
 'themebuilder/scripts/constants.js' ] do |t|
 
     less = File.read(t.prerequisites[0])

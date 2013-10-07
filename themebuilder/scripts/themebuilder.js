@@ -380,7 +380,7 @@
 
             source: function(format, callback) {
                 this._generateTheme(proxy(function(constants, css) {
-                    constants += '\n@import "template.less";';
+                    constants += '\n@import "theme-template.less";';
 
                     if (format == "less") {
                         callback(constants);
