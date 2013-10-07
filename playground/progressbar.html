@@ -269,6 +269,11 @@
     {
         border-bottom: 0;
     }
+
+    /*.k-progress-status
+    {
+        min-width: 10px;
+    }*/
 </style>
 </head>
     <body>
@@ -279,6 +284,7 @@
            <div id="pb4"></div>
            <div id="pb5"></div>
            <div id="pb6"></div>
+           <br><br><br>
            <script>
 
 
@@ -320,10 +326,11 @@
             $("#progressbar").kendoProgressBar({
                 min: 0,
                 max: 100,
-                value: 0,
+                value: 10,
                 enable: true,
                 showStatus: true,
                 type: "percentage",
+                reverse: false,
                 start: function(e) {
                     console.log("Start event. Value: " + e.value);
                 },

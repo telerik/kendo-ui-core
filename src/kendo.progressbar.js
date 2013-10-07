@@ -284,11 +284,14 @@ kendo_module({
             var oldValue = (that._oldValue !== undefined) ? that._oldValue : options.min;
             var progressInPercent = parseFloat(e.elem.style[that._progressProperty], 10);
             var progressStatusHolder = that.wrapper.find("." + KPROGRESSSTATUS);
+            var progressWrapper = that.wrapper.find("." + KPROGRESSWRAPPER);
+            var progressStatusWrapSize;
             var progressValue;
 
             if (options.showStatus) {
-                that.wrapper.find("." + KPROGRESSWRAPPER + " .k-progress-status-wrap")
-                            .css(that._progressProperty, that.wrapper.css(that._progressProperty));
+                progressStatusWrapSize = 10000 / parseFloat(progressWrapper[0].style[that._progressProperty]);
+
+                progressWrapper.find(".k-progress-status-wrap").css(that._progressProperty, progressStatusWrapSize + "%");
 
                 if (options.type === PROGRESSTYPE.VALUE) {
                     progressValue = math.floor(options.min + (progressInPercent * that._onePercent));
