@@ -886,7 +886,6 @@ kendo_module({
             this.diagram.undoRedoService.add(unit);
             this.editable.visible(false);
             this.editable = this.editShape = undefined;
-
         }
     });
 

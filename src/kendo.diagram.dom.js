@@ -208,7 +208,7 @@ kendo_module({
         },
         _hitTest: function (point) {
             var bounds = this.bounds();
-            return bounds.contains(point);
+            return this.visible() && bounds.contains(point);
         },
         _template: function () {
             var that = this;
@@ -385,18 +385,20 @@ kendo_module({
             });
         },
         _hitTest: function (value) {
-            var bounds = this.bounds(), rotatedPoint,
-                angle = this.rotate().angle;
-            if (value.isEmpty && !value.isEmpty()) { // rect selection
-                return Intersect.rects(value, bounds, angle ? 360 - angle : 0);
-            }
-            else { // point
-                rotatedPoint = value.clone().rotate(bounds.center(), 360 - angle); // cloning is important because rotate modifies the point inline.
-                if (bounds.contains(rotatedPoint)) {
-                    return this;
+            if (this.visible()) {
+                var bounds = this.bounds(), rotatedPoint,
+                    angle = this.rotate().angle;
+                if (value.isEmpty && !value.isEmpty()) { // rect selection
+                    return Intersect.rects(value, bounds, angle ? 360 - angle : 0);
                 }
-                if (this.adorner && this.adorner._hitTest(value)) {
-                    return this;
+                else { // point
+                    rotatedPoint = value.clone().rotate(bounds.center(), 360 - angle); // cloning is important because rotate modifies the point inline.
+                    if (bounds.contains(rotatedPoint)) {
+                        return this;
+                    }
+                    if (this.adorner && this.adorner._hitTest(value)) {
+                        return this;
+                    }
                 }
             }
         },
@@ -576,12 +578,14 @@ kendo_module({
             }
         },
         _hitTest: function (value) {
-            var p = new Point(value.x, value.y), from = this.sourcePoint(), to = this.targetPoint();
-            if (value.isEmpty && !value.isEmpty() && value.contains(from) && value.contains(to)) {
-                return this;
-            }
-            if (p.isOnLine(from, to)) {
-                return this;
+            if (this.visible()) {
+                var p = new Point(value.x, value.y), from = this.sourcePoint(), to = this.targetPoint();
+                if (value.isEmpty && !value.isEmpty() && value.contains(from) && value.contains(to)) {
+                    return this;
+                }
+                if (p.isOnLine(from, to)) {
+                    return this;
+                }
             }
         },
         _hover: function (value) {
