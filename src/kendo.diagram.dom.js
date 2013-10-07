@@ -477,6 +477,12 @@ kendo_module({
             endCap: "ArrowEnd",
             cssClass: "k-connection"
         },
+
+        /**
+         * Gets or sets the Point where the source of the connection resides.
+         * @param source The source of this connection. Can be a Point, Shape, Connector.
+         * @param undoable The target of this connection. Can be a Point, Shape, Connector.
+         */
         sourcePoint: function (source, undoable) {
             if (undoable && this.diagram) {
                 this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, source));
@@ -511,6 +517,12 @@ kendo_module({
             }
             return this._resolvedSourceConnector ? this._resolvedSourceConnector.position() : this._sourcePoint;
         },
+
+        /**
+         * Gets or sets the Point where the target of the connection resides.
+         * @param source The source of this connection. Can be a Point, Shape, Connector.
+         * @param undoable The target of this connection. Can be a Point, Shape, Connector.
+         */
         targetPoint: function (target, undoable) {
             if (undoable && this.diagram) {
                 this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, target));
@@ -545,9 +557,17 @@ kendo_module({
             }
             return this._resolvedTargetConnector ? this._resolvedTargetConnector.position() : this._targetPoint;
         },
+
+        /**
+         * Returns the source (start, initial, from) Connector if the start is attached to a Shape. If floating, this returns a position.
+         */
         source: function () {
             return this.sourceConnector ? this.sourceConnector : this._sourcePoint;
         },
+
+        /**
+         * Returns the target (end, final, to, sink) Connector if the end is attached to a Shape. If floating, this returns a position.
+         */
         target: function () {
             return this.targetConnector ? this.targetConnector : this._targetPoint;
         },
