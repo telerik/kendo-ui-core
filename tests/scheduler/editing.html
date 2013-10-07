@@ -242,7 +242,7 @@
                 scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
 
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
-                equal(container.text(), "fooSaveCancelDelete");
+                equal(container.text(), "fooSaveCancel");
             });
 
             test("edit event is raised when entering edit mode", 2, function() {
@@ -303,51 +303,6 @@
                 var container = scheduler._editContainer.children("div.k-edit-form-container");
                 equal(container.find("a.k-scheduler-update").text(), "myUpdate");
                 equal(container.find("a.k-scheduler-cancel").text(), "myCancel");
-            });
-
-            test("destroy button is added to the popUp editor", function() {
-                var scheduler = setup({ editable: true });
-
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
-
-                var container = scheduler._editContainer.children("div.k-edit-form-container");
-
-                equal(container.find("a.k-scheduler-delete").length, 1);
-            });
-
-           test("destroy button is added to the popUp editor if template is set", function() {
-                var scheduler = setup({ editable: { template:"<div>#=title#</div>" } });
-
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
-
-                var container = scheduler._editContainer.children("div.k-edit-form-container");
-
-                equal(container.find("a.k-scheduler-delete").length, 1);
-            });
-
-            test("destroy button in popup editor custom text", function() {
-                var scheduler = setup({
-                    messages: {
-                        destroy: "myDestroy"
-                    },
-                    editable: { template:"<div>#=title#</div>" },
-                });
-
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
-
-                var container = scheduler._editContainer.children("div.k-edit-form-container");
-                equal(container.find("a.k-scheduler-delete").text(), "myDestroy");
-            });
-
-            test("clicking destroy button in popUp editor calls delete event", function() {
-                var scheduler = setup(),
-                    saveEvent = stub(scheduler, "removeEvent");
-
-                scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
-
-                scheduler._editContainer.find("a.k-scheduler-delete").click();
-
-                ok(saveEvent.calls("removeEvent"));
             });
 
             test("clicking update buttons calls update event", function() {

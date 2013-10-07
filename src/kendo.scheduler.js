@@ -1514,7 +1514,6 @@ kendo_module({
             that._createPopupEditor(model);
 
             container = that._editContainer;
-
             container.on(CLICK + NS, "a.k-scheduler-cancel", function(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -1531,13 +1530,6 @@ kendo_module({
                 e.stopPropagation();
 
                 that.saveEvent();
-            });
-
-           container.on(CLICK + NS, "a.k-scheduler-delete", function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                that.removeEvent(container.attr(kendo.attr("uid")));
             });
         },
 
@@ -1715,7 +1707,6 @@ kendo_module({
                 messages = that.options.messages,
                 updateText = messages.save,
                 cancelText = messages.cancel,
-                deleteText = messages.destroy,
                 click = function(e) {
                     e.preventDefault();
                     that._createTimezonePopup(model, this);
@@ -1803,7 +1794,6 @@ kendo_module({
 
             html += '<div class="k-edit-buttons k-state-default">';
             html += that._createButton({ name: "update", text: updateText, attr: attr }) + that._createButton({ name: "canceledit", text: cancelText, attr: attr });
-            html += that._createButton({ name: "delete", text: deleteText, attr: attr });
             html += '</div></div></div>';
 
             var container = that._editContainer = $(html)
