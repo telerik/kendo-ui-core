@@ -80,6 +80,7 @@ var tests = [
     "chart/radarlinechart.html",
     "chart/radarnumericaxis.html",
     "chart/radarplotarea.html",
+    "chart/funnel.html",
     "chart/selection.html",
     "chart/mvvm.html",
     "chart/api.html",

@@ -322,11 +322,7 @@ kendo_module({
             }
 
             for (i = 0; i < count; i++) {
-                points = segments[i].points;
-                if (chart.labels[i]) {
-                    var labelBox = new Box2D(chartBox.x1, points[0].y, chartBox.x2, points[2].y);
-                    chart.labels[i].reflow(labelBox);
-                }
+                segments[i].reflow(chartBox);
            }
         }
     });
@@ -349,6 +345,18 @@ kendo_module({
             }
         },
 
+        reflow: function(chartBox) {
+            var segment = this,
+                points = segment.points,
+                label = segment.children[0];
+
+            segment.box = new Box2D(points[0].x, points[0].y, points[1].x, points[2].y);
+
+            if (label) {
+                label.reflow(new Box2D(chartBox.x1, points[0].y, chartBox.x2, points[2].y));
+            }
+        },
+
         getViewElements: function(view) {
             var segment = this,
                 options = segment.options,
@@ -365,6 +373,15 @@ kendo_module({
             append(elements, ChartElement.fn.getViewElements.call(segment, view));
 
             return elements;
+        },
+
+        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
+            var box = this.box;
+
+            return new Point2D(
+                box.center().x - (tooltipWidth / 2),
+                box.y1
+            );
         }
     });
     deepExtend(FunnelSegment.fn, dataviz.PointEventsMixin);
