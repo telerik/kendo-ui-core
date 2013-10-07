@@ -157,7 +157,7 @@ QUnit.module("event handling", {
         kdiagram = $("#canvas").getKendoDiagram();
     },
     teardown: function () {
-        kdiagram.clear();
+        kdiagram.destroy();
     }
 });
 
@@ -213,7 +213,7 @@ QUnit.module("Shape bounds", {
         kdiagram = $("#canvas").getKendoDiagram();
     },
     teardown: function () {
-        kdiagram.clear();
+        kdiagram.destroy();
     }
 });
 
@@ -366,7 +366,7 @@ QUnit.module("Connections and connectors", {
         kdiagram = $("#canvas").getKendoDiagram();
     },
     teardown: function () {
-        kdiagram.clear();
+        kdiagram.destroy();
     }
 });
 
@@ -440,7 +440,7 @@ QUnit.module("Serialization - Cut/Copy/Paste", {
         randomDiagram(d);
     },
     teardown: function () {
-        d.clear();
+        d.destroy();
     }
 });
 
