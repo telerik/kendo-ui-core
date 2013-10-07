@@ -284,7 +284,7 @@
                     "text": "MVVM",
                     "url": "combobox/mvvm.html",
                     "title": "MVVM support in Kendo UI ComboBox",
-                    "meta": "Value and source MVVM binding support in Kendo UI ComboBox",
+                    "meta": "Enabled, events, source, visible and value MVVM binding support in Kendo UI ComboBox",
                     "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
