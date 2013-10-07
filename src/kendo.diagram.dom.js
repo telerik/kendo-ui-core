@@ -571,6 +571,11 @@ kendo_module({
         target: function () {
             return this.targetConnector ? this.targetConnector : this._targetPoint;
         },
+
+        /**
+         * Selects or unselects this connections.
+         * @param value True to select, false to unselect.
+         */
         select: function (value) {
             if (this.isSelected !== value) {
                 this.isSelected = value;
@@ -590,6 +595,12 @@ kendo_module({
                 // TODO: Move this to base type.
             }
         },
+
+        /**
+         * Gets or sets the bounds of this connection.
+         * @param value A Rect object.
+         * @returns {Rect}
+         */
         bounds: function (value) {
             if (value) {
                 this._bounds = value;
@@ -597,6 +608,15 @@ kendo_module({
                 return this._bounds;
             }
         },
+
+
+
+        /**
+         * Returns whether the given Point or Rect hits this connection.
+         * @param value
+         * @returns {Connection}
+         * @private
+         */
         _hitTest: function (value) {
             if (this.visible()) {
                 var p = new Point(value.x, value.y), from = this.sourcePoint(), to = this.targetPoint();
@@ -611,6 +631,7 @@ kendo_module({
         _hover: function (value) {
             this.line.redraw({ stroke: value ? this.options.hoveredStroke : this.options.stroke });
         },
+
         refresh: function () {
             resolveConnectors(this);
             var globalSourcePoint = this.sourcePoint(), globalSinkPoint = this.targetPoint(),
