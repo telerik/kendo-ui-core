@@ -424,6 +424,13 @@
                     "url": "datetimepicker/navigation.html",
                     "title": "Keyboard navigation in Kendo UI DateTimePicker widget",
                     "meta": "By using the keyboard, you can easily select date and time in Kendo UI DateTimePicker, trigger an event or highlight a specific day."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "datetimepicker/mvvm.html",
+                    "title": "MVVM support in Kendo UI DateTimePicker",
+                    "meta": "Enabled, events, value and visible MVVM binding support in Kendo UI DateTimePicker",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
