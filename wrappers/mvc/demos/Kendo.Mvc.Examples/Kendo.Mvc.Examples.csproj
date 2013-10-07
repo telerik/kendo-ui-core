@@ -431,6 +431,7 @@
     <Compile Include="Controllers\Web\PanelBar\IndexController.cs" />
     <Compile Include="Controllers\Web\PanelBar\NavigationController.cs" />
     <Compile Include="Controllers\Web\PanelBar\RtlController.cs" />
+    <Compile Include="Controllers\Web\ProgressBar\IndexController.cs" />
     <Compile Include="Controllers\Web\Scheduler\WebApiController.cs" />
     <Compile Include="Controllers\Web\Scheduler\ApiController.cs" />
     <Compile Include="Controllers\Web\Scheduler\RestrictionController.cs" />
@@ -2751,6 +2752,9 @@
     <Content Include="Areas\razor\Views\web\button\events.cshtml" />
     <Content Include="Areas\razor\Views\web\button\navigation.cshtml" />
     <Content Include="Areas\razor\Views\web\button\rtl.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\progressbar\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />

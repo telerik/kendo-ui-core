@@ -1028,6 +1028,13 @@
     <Compile Include="Infrastructure\Implementation\ControllerAuthorization.cs" />
     <Compile Include="Infrastructure\Implementation\ControllerTypeCache.cs" />
     <Compile Include="Infrastructure\IAuthorizeAttributeCache.cs" />
+    <Compile Include="UI\ProgressBar\Fluent\ProgressBarAnimationBuilder.cs" />
+    <Compile Include="UI\ProgressBar\Fluent\ProgressBarBuilder.cs" />
+    <Compile Include="UI\ProgressBar\Html\ProgressBarHtmlBuilder.cs" />
+    <Compile Include="UI\ProgressBar\ProgressBar.cs" />
+    <Compile Include="UI\ProgressBar\ProgressBarAnimation.cs" />
+    <Compile Include="UI\ProgressBar\ProgressBarOrientation.cs" />
+    <Compile Include="UI\ProgressBar\ProgressBarType.cs" />
     <Compile Include="UI\QRCode\Html\QRCodeHtmlBuilder.cs" />
     <Compile Include="UI\QRCode\QREncoding.cs" />
     <Compile Include="UI\QRCode\QRErrorCorrectionLevel.cs" />

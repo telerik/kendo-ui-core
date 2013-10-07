@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "index";
+}
+
+@(Html.Kendo()
+      .ProgressBar()
+      .Name("progressBar")
+      .Min(-10)
+      .Max(50)
+      .Value(-10)
+      .Enable(true)
+      .Reverse(true)
+      .Orientation(ProgressBarOrientation.Horizontal)
+      .Type(ProgressBarType.Percent)
+      .ShowStatus(false)
+      .ChunkCount(5)
+)
