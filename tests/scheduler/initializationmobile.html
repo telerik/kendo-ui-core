@@ -131,6 +131,25 @@
                 ok(!scheduler.element.find(".k-event").first().has(".k-resize-handle").length);
             });
 
+            test("render short day of week", function() {
+                var scheduler = setup({
+                    views: ["month"],
+                    dataSource: [ { start: new Date(), end: new Date(), isAllDay: true, title:"" }]
+                });
+
+                var headerCells = scheduler.view().datesHeader.find("th");
+
+                equal(headerCells.length, 7);
+                equal(headerCells.first().text(), "Su");
+                equal(headerCells.eq(1).text(), "Mo");
+                equal(headerCells.eq(2).text(), "Tu");
+                equal(headerCells.eq(3).text(), "We");
+                equal(headerCells.eq(4).text(), "Th");
+                equal(headerCells.eq(5).text(), "Fr");
+                equal(headerCells.eq(6).text(), "Sa");
+
+            });
+
             test("delete button is not shown in the day view", function() {
                 var scheduler = setup({
                     views: ["day"],

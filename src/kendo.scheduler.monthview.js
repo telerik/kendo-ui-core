@@ -417,7 +417,8 @@ kendo_module({
 
         _layout: function() {
             var calendarInfo = this.calendarInfo();
-            var names = shiftArray(calendarInfo.days.names, calendarInfo.firstDay);
+            var weekDayNames = kendo.support.mobileOS ? calendarInfo.days.namesShort : calendarInfo.days.names;
+            var names = shiftArray(weekDayNames, calendarInfo.firstDay);
             var columns = $.map(names, function(value) { return { text: value }; });
             var resources = this.groupedResources;
             var rows;
