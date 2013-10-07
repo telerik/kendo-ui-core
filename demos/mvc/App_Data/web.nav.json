@@ -180,6 +180,13 @@
                     "url": "calendar/navigation.html",
                     "title": "Keyboard navigation demo for Kendo UI Calendar widget",
                     "meta": "You can easily navigate in Kendo UI Calendar by using the keyboard. This demo shows the functionality, just look at the notes and play with the example."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "calendar/mvvm.html",
+                    "title": "MVVM support in Kendo UI Calendar",
+                    "meta": "Events, value and visible MVVM binding support in Kendo UI Calendar",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
