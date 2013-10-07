@@ -362,6 +362,13 @@
                     "url": "datepicker/navigation.html",
                     "title": "Keyboard navigation in Kendo UI DatePicker",
                     "meta": "This example shows how the keyboard navigation functionality is supported in Kendo UI DatePicker widget."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "datepicker/mvvm.html",
+                    "title": "MVVM support in Kendo UI DatePicker",
+                    "meta": "Enabled, events, value and visible MVVM binding support in Kendo UI DatePicker",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
