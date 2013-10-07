@@ -297,6 +297,36 @@ kendo_module({
         }
     });
 
+    var ToFrontUnit = Class.extend({
+        init: function (diagram, items, initialIndices) {
+            this.diagram = diagram;
+            this.indices = initialIndices;
+            this.items = items;
+            this.title = "Rotate Unit";
+        },
+        undo: function () {
+            this.diagram._toIndex(this.items, this.indices);
+        },
+        redo: function () {
+            this.diagram.toFront(this.items, false);
+        }
+    });
+
+    var ToBackUnit = Class.extend({
+        init: function (diagram, items, initialIndices) {
+            this.diagram = diagram;
+            this.indices = initialIndices;
+            this.items = items;
+            this.title = "Rotate Unit";
+        },
+        undo: function () {
+            this.diagram._toIndex(this.items, this.indices);
+        },
+        redo: function () {
+            this.diagram.toBack(this.items, false);
+        }
+    });
+
     /**
      * Undo-redo service.
      */
@@ -856,7 +886,6 @@ kendo_module({
             this.diagram.undoRedoService.add(unit);
             this.editable.visible(false);
             this.editable = this.editShape = undefined;
-
         }
     });
 
@@ -1340,6 +1369,8 @@ kendo_module({
         ToolService: ToolService,
         ConnectorsAdorner: ConnectorsAdorner,
         LayoutUndoUnit: LayoutUndoUnit,
-        ConnectionEditUnit: ConnectionEditUnit
+        ConnectionEditUnit: ConnectionEditUnit,
+        ToFrontUnit: ToFrontUnit,
+        ToBackUnit: ToBackUnit
     });
 })(window.kendo.jQuery);

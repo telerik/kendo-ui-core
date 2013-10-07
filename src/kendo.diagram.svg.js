@@ -610,18 +610,27 @@ kendo_module({
         remove: function (visual) {
             this.native.removeChild(visual.native);
         },
-        bringToFront: function (visuals) {
-            var visual, i;
+        toFront: function (visuals) {
+            var visual, i, n = this.native;
+
             for (i = 0; i < visuals.length; i++) {
                 visual = visuals[i];
-                this.native.appendChild(visual.native);
+                n.appendChild(visual.native);
             }
         },
-        sendToBack: function (visuals) {
+        toBack: function (visuals) {
             var visual, i;
             for (i = 0; i < visuals.length; i++) {
                 visual = visuals[i];
                 this.native.insertBefore(visual.native, this.native.firstChild);
+            }
+        },
+        toIndex: function (visuals, indices) { // bring the items to the following index
+            var visual, i, index;
+            for (i = 0; i < visuals.length; i++) {
+                visual = visuals[i];
+                index = indices[i];
+                this.native.insertBefore(visual.native, this.native.children[index]);
             }
         },
         size: function () {

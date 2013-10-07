@@ -37,7 +37,9 @@ kendo_module({
         Cursors = diagram.Cursors,
         Utils = diagram.Utils,
         Observable = kendo.Observable,
-        Ticker = diagram.Ticker;
+        Ticker = diagram.Ticker,
+        ToBackUnit = diagram.ToBackUnit,
+        ToFrontUnit = diagram.ToFrontUnit;
 
     // Constants ==============================================================
     var NS = ".kendoDiagram",
@@ -206,7 +208,7 @@ kendo_module({
         },
         _hitTest: function (point) {
             var bounds = this.bounds();
-            return bounds.contains(point);
+            return this.visible() && bounds.contains(point);
         },
         _template: function () {
             var that = this;
@@ -346,14 +348,32 @@ kendo_module({
 
             return rotate;
         },
-        connections: function () {
-            var cons = [], i, j, con;
+        connections: function (type) { // in, out, undefined = both
+            var result = [], i, j, con, cons, ctr;
+
             for (i = 0; i < this.connectors.length; i++) {
-                for (j = 0, con = this.connectors[i].connections; j < con.length; j++) {
-                    cons.push(con[j]);
+                ctr = this.connectors[i];
+                cons = ctr.connections;
+                for (j = 0, cons; j < cons.length; j++) {
+                    con = cons[j];
+                    if (type == "out") {
+                        var source = con.source();
+                        if (source.shape && source.shape == this) {
+                            result.push(con);
+                        }
+                    }
+                    else if (type == "in") {
+                        var target = con.target();
+                        if (target.shape && target.shape == this) {
+                            result.push(con);
+                        }
+                    }
+                    else {
+                        result.push(con);
+                    }
                 }
             }
-            return cons;
+            return result;
         },
         _hover: function (value) {
             this.shapeVisual._hover(value);
@@ -365,18 +385,20 @@ kendo_module({
             });
         },
         _hitTest: function (value) {
-            var bounds = this.bounds(), rotatedPoint,
-                angle = this.rotate().angle;
-            if (value.isEmpty && !value.isEmpty()) { // rect selection
-                return Intersect.rects(value, bounds, angle ? 360 - angle : 0);
-            }
-            else { // point
-                rotatedPoint = value.clone().rotate(bounds.center(), 360 - angle); // cloning is important because rotate modifies the point inline.
-                if (bounds.contains(rotatedPoint)) {
-                    return this;
+            if (this.visible()) {
+                var bounds = this.bounds(), rotatedPoint,
+                    angle = this.rotate().angle;
+                if (value.isEmpty && !value.isEmpty()) { // rect selection
+                    return Intersect.rects(value, bounds, angle ? 360 - angle : 0);
                 }
-                if (this.adorner && this.adorner._hitTest(value)) {
-                    return this;
+                else { // point
+                    rotatedPoint = value.clone().rotate(bounds.center(), 360 - angle); // cloning is important because rotate modifies the point inline.
+                    if (bounds.contains(rotatedPoint)) {
+                        return this;
+                    }
+                    if (this.adorner && this.adorner._hitTest(value)) {
+                        return this;
+                    }
                 }
             }
         },
@@ -556,12 +578,14 @@ kendo_module({
             }
         },
         _hitTest: function (value) {
-            var p = new Point(value.x, value.y), from = this.sourcePoint(), to = this.targetPoint();
-            if (value.isEmpty && !value.isEmpty() && value.contains(from) && value.contains(to)) {
-                return this;
-            }
-            if (p.isOnLine(from, to)) {
-                return this;
+            if (this.visible()) {
+                var p = new Point(value.x, value.y), from = this.sourcePoint(), to = this.targetPoint();
+                if (value.isEmpty && !value.isEmpty() && value.contains(from) && value.contains(to)) {
+                    return this;
+                }
+                if (p.isOnLine(from, to)) {
+                    return this;
+                }
             }
         },
         _hover: function (value) {
@@ -682,6 +706,21 @@ kendo_module({
         return resCtr;
     }
 
+    function indicesOfItems(group, visuals) {
+        var i, indices = [], visual;
+        for (i = 0; i < visuals.length; i++) {
+            visual = visuals[i];
+            for (var j = 0; j < group.children.length; j++) {
+                var other = group.children[j];
+                if (other == visual.native) {
+                    indices.push(j);
+                    break;
+                }
+            }
+        }
+        return indices;
+    }
+
     var Diagram = Widget.extend({
         init: function (element, options) {
             var that = this;
@@ -797,6 +836,15 @@ kendo_module({
             var connection = new Connection(source, target, options);
             return this.addConnection(connection);
         },
+        connected: function (source, target) {
+            for (var i = 0; i < this.connections.length; i++) {
+                var c = this.connections[i];
+                if (c.from == source && c.to == target) {
+                    return true;
+                }
+            }
+            return false;
+        },
         addConnection: function (connection, undoable) {
             if (undoable === undefined) {
                 undoable = true;
@@ -878,14 +926,33 @@ kendo_module({
                 return this._selectedItems; // returns all selected items.
             }
         },
-        bringToFront: function (items) {
-            var result = this._getDiagramItems(items);
-            this.mainLayer.bringToFront(result.visuals);
-            this._fixOrdering(result, true);
+        toFront: function (items, undoable) {
+            var result = this._getDiagramItems(items), indices;
+            if (Utils.isUndefined(undoable) || undoable) {
+                indices = indicesOfItems(this.mainLayer.native, result.visuals);
+                var unit = new ToFrontUnit(this, items, indices);
+                this.undoRedoService.add(unit);
+            }
+            else {
+                this.mainLayer.toFront(result.visuals);
+                this._fixOrdering(result, true);
+            }
         },
-        sendToBack: function (items) {
+        toBack: function (items, undoable) {
+            var result = this._getDiagramItems(items), indices;
+            if (Utils.isUndefined(undoable) || undoable) {
+                indices = indicesOfItems(this.mainLayer.native, result.visuals);
+                var unit = new ToBackUnit(this, items, indices);
+                this.undoRedoService.add(unit);
+            }
+            else {
+                this.mainLayer.toBack(result.visuals);
+                this._fixOrdering(result, false);
+            }
+        },
+        _toIndex: function (items, indices) {
             var result = this._getDiagramItems(items);
-            this.mainLayer.sendToBack(result.visuals);
+            this.mainLayer.toIndex(result.visuals, indices);
             this._fixOrdering(result, false);
         },
         bringIntoView: function (node, options) { // jQuery|Item|Array|Rect
@@ -1304,30 +1371,31 @@ kendo_module({
                     var node = children[i],
                         shape = addShape(node),
                         parentShape = addShape(parent);
-                    if (parentShape) {
+                    if (parentShape && !that.connected(parentShape, shape)) { // check if connected to not duplicate connections.
                         that.connect(parentShape, shape);
                     }
                 }
             }
 
-            if (action === "add") {
-                append(node, items);
-            } else if (action === "remove") {
-                //Remove
-            } else if (action === "itemchange") {
-                if (node) {
-                    if (!items.length) {
-                        //Update
+            if (!e.field) { // field means any field in the data source has changed - like selected, expanded... We don't have to update in that case.
+                if (action === "add") {
+                    append(node, items);
+                } else if (action === "remove") {
+                    //Remove
+                } else if (action === "itemchange") {
+                    if (node) {
+                        if (!items.length) {
+                            //Update
+                        } else {
+                            append(node, items);
+                        }
                     } else {
-                        append(node, items);
-                    }
-                } else {
-                    for (i = 0; i < items.length; i++) {
-                        addShape(items[i]); // roots
+                        for (i = 0; i < items.length; i++) {
+                            addShape(items[i]); // roots
+                        }
                     }
                 }
-            }
-            if (!e.field) { // field means any field in the data source has changed - like selected, expanded...
+
                 for (i = 0; i < items.length; i++) {
                     items[i].load();
                 }

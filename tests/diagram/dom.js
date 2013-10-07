@@ -271,7 +271,7 @@ test("Bring to front - no arguments. Rearrange shapes", function () {
     s1.select(true);
 
     equal(kdiagram.shapes.indexOf(s1), 0);
-    kdiagram.bringToFront();
+    kdiagram.toFront();
     equal(kdiagram.shapes.indexOf(s1), 2);
 });
 
@@ -281,7 +281,7 @@ test("Bring to front - no arguments. Rearrange connections", function () {
     s1.select(true);
 
     equal(kdiagram.connections.indexOf(s1), 0);
-    kdiagram.bringToFront();
+    kdiagram.toFront();
     equal(kdiagram.connections.indexOf(s1), 1);
 });
 
@@ -291,7 +291,7 @@ test("Bring to front - with args.", function () {
     var s3 = kdiagram.addShape(new Point(60, 60));
 
     equal(kdiagram.shapes.indexOf(s1), 0);
-    kdiagram.bringToFront(s1);
+    kdiagram.toFront(s1);
     equal(kdiagram.shapes.indexOf(s1), 2);
 });
 
@@ -300,7 +300,7 @@ test("Bring to front - with args connections", function () {
     var s2 = kdiagram.connect(new Point(0, 0, new Point(100, 200)));
 
     equal(kdiagram.connections.indexOf(s1), 0);
-    kdiagram.bringToFront(s1);
+    kdiagram.toFront(s1);
     equal(kdiagram.connections.indexOf(s1), 1);
 });
 
@@ -311,7 +311,7 @@ test("Bring to front - with shapes array.", function () {
     var s3 = kdiagram.addShape(new Point(60, 60));
 
     equal(kdiagram.shapes.indexOf(s1), 0);
-    kdiagram.bringToFront([s1, s2]);
+    kdiagram.toFront([s1, s2]);
     equal(kdiagram.shapes.indexOf(s1), 1);
     equal(kdiagram.shapes.indexOf(s2), 2);
 });
@@ -324,7 +324,7 @@ test("Bring to front - with mixed array.", function () {
     var c2 = kdiagram.connect(new Point(0, 0, new Point(100, 200)));
 
     equal(kdiagram.shapes.indexOf(s1), 0);
-    kdiagram.bringToFront([s1, c1]);
+    kdiagram.toFront([s1, c1]);
     equal(kdiagram.shapes.indexOf(s1), 2);
     equal(kdiagram.connections.indexOf(c1), 1);
 });
@@ -336,7 +336,7 @@ test("Send to back - with mixed array.", function () {
     var c1 = kdiagram.connect(new Point(0, 0, new Point(100, 100)));
     var c2 = kdiagram.connect(new Point(0, 0, new Point(100, 200)));
 
-    kdiagram.sendToBack([s3, c2]);
+    kdiagram.toBack([s3, c2]);
     equal(kdiagram.shapes.indexOf(s3), 0);
     equal(kdiagram.connections.indexOf(c2), 0);
 });
@@ -350,11 +350,11 @@ test("Hit test after bring to front and send to back.", function () {
     var hit = kdiagram.toolService._hitTest(new Point(70, 70));
     equal(hit.bounds(), s3.bounds());
 
-    kdiagram.bringToFront(s1);
+    kdiagram.toFront(s1);
     hit = kdiagram.toolService._hitTest(new Point(70, 70));
     equal(hit.bounds(), s1.bounds());
 
-    kdiagram.sendToBack(s1);
+    kdiagram.toBack(s1);
     hit = kdiagram.toolService._hitTest(new Point(70, 70));
     equal(hit.bounds(), s3.bounds());
 });

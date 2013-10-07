@@ -114,8 +114,8 @@
                value="SelectAll"/>
         <span class="menu-text">Layout:</span><input id="Layouts" value="1"/>
         <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
-        <input type="button" class="diagramCommandBtn" id="bringButton" title="Bring to Front" value="Bring to Front"/>
-        <input type="button" class="diagramCommandBtn" id="sendBackButton" title="Send to Back" value="Send to Back"/>
+        <input type="button" class="diagramCommandBtn" id="toFrontButton" title="To Front" value="To Front"/>
+        <input type="button" class="diagramCommandBtn" id="toBackButton" title="To Back" value="To Back"/>
         <span class="menu-text">Start-cap:</span><input id="StartCap" value="1"/>
         <span class="menu-text">End-cap:</span><input id="EndCap" value="1"/>
     </div>
@@ -257,11 +257,11 @@ $(function () {
     $("#selectAllButton").click(function (e) {
         diagram.select(true);
     });
-    $("#bringButton").click(function (e) {
-        diagram.bringToFront();
+    $("#toFrontButton").click(function (e) {
+        diagram.toFront();
     });
-    $("#sendBackButton").click(function (e) {
-        diagram.sendToBack();
+    $("#toBackButton").click(function (e) {
+        diagram.toBack();
     });
     $("#layoutButton").click(function (e) {
         onLayoutChanged();
