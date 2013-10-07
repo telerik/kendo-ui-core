@@ -124,6 +124,13 @@
                     "url": "button/navigation.html",
                     "title": "Kendo UI Button Keyboard Navigation",
                     "meta": "How jQuery-based Button widget works, view demo source code of Kendo UI Button."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "button/mvvm.html",
+                    "title": "MVVM support in Kendo UI Button",
+                    "meta": "Enabled, events, visible MVVM binding support in Kendo UI AutoComplete",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },

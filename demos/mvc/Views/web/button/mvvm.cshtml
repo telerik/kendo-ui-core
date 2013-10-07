@@ -1,0 +1,44 @@
+<div id="example" class="k-content">
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Button</span>
+            <button data-role="button"
+                    data-sprite-css-class="k-icon k-edit"
+                    data-bind="visible: isVisible, enabled: isEnabled, events: { click: onClick }"
+                    style="width: 180px"
+            >Click me</button>
+        </div>
+        <div class="config-section" style="width: 400px">
+            <div class="configHead">Console</div>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Configuration</span>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isEnabled">Enable</label>
+            </div>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="config-section" style="width: 440px">
+            <span class="configHead">Information</span>
+            Kendo UI Button supports the
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/enabled">enabled</a>,
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a> and
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    var viewModel = kendo.observable({
+        isVisible: true,
+        isEnabled: true,
+        onClick: function() {
+            kendoConsole.log("event :: click");
+        }
+    });
+    kendo.bind($("#example"), viewModel);
+</script>
+</div>
