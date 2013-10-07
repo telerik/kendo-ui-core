@@ -576,6 +576,13 @@
                     "url": "editor/navigation.html",
                     "title": "Keyboard navigation in Kendo UI Editor",
                     "meta": "Kendo UI Editor is another widget that supports keyboard navigation. Check out the demo to learn how to implement it in your app."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "editor/mvvm.html",
+                    "title": "MVVM support in Kendo UI Editor",
+                    "meta": "Events, value and visible MVVM binding support in Kendo UI Editor",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
