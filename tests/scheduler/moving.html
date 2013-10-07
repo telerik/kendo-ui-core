@@ -679,7 +679,7 @@
                     date: new Date("2013/6/6"),
                     views: ["month"],
                     dataSource: [
-                        { start: new Date("2013/5/24 9:00 PM"), end: new Date("2013/5/26 12:00 AM"), title: "" }
+                        { start: new Date("2013/5/24 9:00 PM"), end: new Date("2013/5/27 12:00 AM"), title: "" }
                     ]
                 });
 
@@ -693,7 +693,7 @@
                 equal(scheduler.dataSource.at(0).start.getDate(), 25);
                 equal(scheduler.dataSource.at(0).end.getHours(), 0);
                 equal(scheduler.dataSource.at(0).end.getMinutes(), 0);
-                equal(scheduler.dataSource.at(0).end.getDate(), 27);
+                equal(scheduler.dataSource.at(0).end.getDate(), 28);
             });
 
             test("moving event which ends after the end of the month view by its first slot", function() {

@@ -485,7 +485,7 @@ kendo_module({
 
             return $(this.eventTemplate(event));
         },
-
+/*
         _isInDateSlot: function(event) {
             var slotStart = this.startDate(),
                 slotEnd = new Date(this.endDate().getTime() + MS_PER_DAY - 1);
@@ -494,6 +494,17 @@ kendo_module({
                 isInDateRange(event.end, slotStart, slotEnd) ||
                 isInDateRange(slotStart, event.start, event.end) ||
                 isInDateRange(slotEnd, event.start, event.end);
+        },*/
+
+        _isInDateSlot: function(event) {
+            var slotStart = this.startDate();
+            var slotEnd = new Date(this.endDate().getTime() + MS_PER_DAY - 1);
+
+            return (isInDateRange(event.start, slotStart, slotEnd) ||
+                isInDateRange(event.end, slotStart, slotEnd) ||
+                isInDateRange(slotStart, event.start, event.end) ||
+                isInDateRange(slotEnd, event.start, event.end)) &&
+                (!isInDateRange(event.end, slotStart, slotStart) || isInDateRange(event.end, event.start, event.start) || event.isAllDay );
         },
 
         _slotIndex: function(date) {
