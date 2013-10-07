@@ -66,6 +66,13 @@
                     "url": "autocomplete/navigation.html",
                     "title": "Keyboard navigation in Kendo UI AutoComplete widget",
                     "meta": "Look at this Kendo UI Web demo which illustrates how the keyboard navigation feature is supported in Kendo UI AutoComplete component."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "autocomplete/mvvm.html",
+                    "title": "MVVM support in Kendo UI AutoComplete",
+                    "meta": "Enabled, events, source, visible and value MVVM binding support in Kendo UI AutoComplete",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -272,6 +279,13 @@
                     "url": "combobox/navigation.html",
                     "title": "Keyboard nagivation in Kendo UI ComboBox | Kendo UI Web demos",
                     "meta": "Kendo UI ComboBox widget for web app development supports easy keyboard navigation. Play with the demo to explore the functionality."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "combobox/mvvm.html",
+                    "title": "MVVM support in Kendo UI ComboBox",
+                    "meta": "Value and source MVVM binding support in Kendo UI ComboBox",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
