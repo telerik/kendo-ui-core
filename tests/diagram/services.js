@@ -107,6 +107,7 @@
     });
 
     test("ConnectionTool - create connection", function () {
+        d.clear();
         d.addShape(new Point(0, 0));
         var s1 = d.shapes[0];
         var s1c = s1.bounds().center();
