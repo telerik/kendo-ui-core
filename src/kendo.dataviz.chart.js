@@ -10674,6 +10674,7 @@ kendo_module({
         PieSegment: PieSegment,
         PlotAreaBase: PlotAreaBase,
         PlotAreaFactory: PlotAreaFactory,
+        PointEventsMixin: PointEventsMixin,
         ScatterChart: ScatterChart,
         ScatterLineChart: ScatterLineChart,
         Selection: Selection,

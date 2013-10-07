@@ -123,8 +123,12 @@ kendo_module({
                     visible: fields.visible
                 }, fields);
 
-                chart.createSegment(value, fields);
-                chart.createLabel(value, fields);
+                var segment = chart.createSegment(value, fields);
+                var label = chart.createLabel(value, fields);
+
+                if (segment && label) {
+                    segment.append(label);
+                }
             }
         },
 
@@ -155,6 +159,8 @@ kendo_module({
 
                 chart.append(segment);
                 chart.segments.push(segment);
+
+                return segment;
             }
         },
 
@@ -180,13 +186,15 @@ kendo_module({
 
                 chart.evalSegmentOptions(labels, value, fields);
 
-                textBox = new TextBox(text, deepExtend(
-                    { vAlign: labels.position },
-                    labels
-                ));
+                textBox = new TextBox(text, deepExtend({
+                        vAlign: labels.position,
+                        id: uniqueId()
+                    }, labels)
+                );
 
-                chart.append(textBox);
                 chart.labels.push(textBox);
+
+                return textBox;
             }
         },
 
@@ -348,13 +356,18 @@ kendo_module({
 
             elements.push(
                 view.createPolyline(segment.points, true, {
-                    fill: options.color
+                    id: options.id,
+                    fill: options.color,
+                    data: { modelId: options.modelId }
                 })
             );
+
+            append(elements, ChartElement.fn.getViewElements.call(segment, view));
 
             return elements;
         }
     });
+    deepExtend(FunnelSegment.fn, dataviz.PointEventsMixin);
 
     // Exports ================================================================
     PlotAreaFactory.current.register(FunnelPlotArea, [FUNNEL]);
