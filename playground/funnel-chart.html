@@ -13,6 +13,7 @@
         <script src="../src/kendo.dataviz.vml.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
         <script src="../src/kendo.dataviz.canvas.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
         <style>
             .k-chart {
                 width: 200px;
@@ -44,7 +45,16 @@
                 series: [{
                     type: "funnel",
                     data: seriesData
-                }]
+                }],
+                seriesClick: function(e) {
+                    console.log("click", e);
+                },
+                seriesHover: function(e) {
+                    console.log("hover", e);
+                },
+                tooltip: {
+                    visible: true
+                }
             });
 
             $("#funnel-equal-spacing").kendoChart({
