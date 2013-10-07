@@ -28,6 +28,7 @@ kendo_module({
         append = dataviz.append,
         autoFormat = dataviz.autoFormat,
         evalOptions = dataviz.evalOptions,
+        limitValue = dataviz.limitValue,
         uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
@@ -292,6 +293,7 @@ kendo_module({
                     nextPercentage = (nextSegment ? nextSegment.percentage : percentage),
                     height = totalHeight * percentage,
                     offset = (width - lastUpperSide* (nextPercentage / percentage))/2;
+                    offset = limitValue(offset, 0, width);
 
                     points.push(new Point2D(box.x1 + previousOffset, box.y1 + previousHeight));
                     points.push(new Point2D(box.x1+width - previousOffset, box.y1 + previousHeight));
@@ -300,6 +302,7 @@ kendo_module({
                     previousOffset = offset;
                     previousHeight += height + segmentSpacing;
                     lastUpperSide *= nextPercentage/percentage;
+                    lastUpperSide = limitValue(lastUpperSide, 0, width);
                 }
             }
             else {
