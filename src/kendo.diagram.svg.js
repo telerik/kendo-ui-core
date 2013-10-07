@@ -613,11 +613,9 @@ kendo_module({
         toFront: function (visuals) {
             var visual, i, n = this.native;
 
-            if (visuals) {
-                for (i = 0; i < visuals.length; i++) {
-                    visual = visuals[i];
-                    n.appendChild(visual.native);
-                }
+            for (i = 0; i < visuals.length; i++) {
+                visual = visuals[i];
+                n.appendChild(visual.native);
             }
         },
         toBack: function (visuals) {
