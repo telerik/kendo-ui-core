@@ -312,7 +312,10 @@
 				"@drop-down-border-color":        "Border color"
             },
             "TabStrip": {
-                "@tabstrip-active-background":    "Tabstrip active content background"
+                "@tabstrip-active-background":   "Tabstrip active content background",
+				"@tabstrip-items-border":        "Tabstrip inactive tabs border",
+				"@header-background-color":      "Tabstrip inactive tabs background",
+				"@tabstrip-tabs-color":          "Tabstrip tabs color"
             },
             "Panelbar": {
                 "@panelbar-content-background":  "Background color"
