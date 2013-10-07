@@ -814,6 +814,15 @@ kendo_module({
             var connection = new Connection(source, target, options);
             return this.addConnection(connection);
         },
+        connected: function (source, target) {
+            for (var i = 0; i < this.connections.length; i++) {
+                var c = this.connections[i];
+                if (c.from == source && c.to == target) {
+                    return true;
+                }
+            }
+            return false;
+        },
         addConnection: function (connection, undoable) {
             if (undoable === undefined) {
                 undoable = true;
@@ -1340,30 +1349,31 @@ kendo_module({
                     var node = children[i],
                         shape = addShape(node),
                         parentShape = addShape(parent);
-                    if (parentShape) {
+                    if (parentShape && !that.connected(parentShape, shape)) { // check if connected to not duplicate connections.
                         that.connect(parentShape, shape);
                     }
                 }
             }
 
-            if (action === "add") {
-                append(node, items);
-            } else if (action === "remove") {
-                //Remove
-            } else if (action === "itemchange") {
-                if (node) {
-                    if (!items.length) {
-                        //Update
+            if (!e.field) { // field means any field in the data source has changed - like selected, expanded... We don't have to update in that case.
+                if (action === "add") {
+                    append(node, items);
+                } else if (action === "remove") {
+                    //Remove
+                } else if (action === "itemchange") {
+                    if (node) {
+                        if (!items.length) {
+                            //Update
+                        } else {
+                            append(node, items);
+                        }
                     } else {
-                        append(node, items);
-                    }
-                } else {
-                    for (i = 0; i < items.length; i++) {
-                        addShape(items[i]); // roots
+                        for (i = 0; i < items.length; i++) {
+                            addShape(items[i]); // roots
+                        }
                     }
                 }
-            }
-            if (!e.field) { // field means any field in the data source has changed - like selected, expanded...
+
                 for (i = 0; i < items.length; i++) {
                     items[i].load();
                 }
