@@ -659,7 +659,7 @@ kendo_module({
 
                         if (slot) {
                             var resourceInfo = that._resourceBySlot(slot);
-                            that.trigger("add", { eventInfo: extend({}, { isAllDay: true, start: kendo.date.getDate(slot.startDate()), end: kendo.date.getDate(slot.endDate()) }, resourceInfo) });
+                            that.trigger("add", { eventInfo: extend({}, { isAllDay: true, start: kendo.date.getDate(slot.startDate()), end: kendo.date.getDate(slot.startDate()) }, resourceInfo) });
                         }
 
                         e.preventDefault();
