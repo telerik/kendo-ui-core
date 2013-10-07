@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value="/web/button/")
 public class ApiController {
     
-    @RequestMapping(value = {"api"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/api"}, method = RequestMethod.GET)
     public String index() {
         return "web/button/api";
     }

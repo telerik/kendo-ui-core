@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value="/web/button/")
 public class ImagesController {
     
-    @RequestMapping(value = {"/rtl"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/images"}, method = RequestMethod.GET)
     public String index() {       
         return "web/button/images";
     }    
