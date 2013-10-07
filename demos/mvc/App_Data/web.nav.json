@@ -825,6 +825,13 @@
                     "url": "grid/navigation.html",
                     "title": "Keyboard navigation in Kendo UI Grid",
                     "meta": "Look at this Kendo UI Grid demo to learn how different keyboard combinations could be used to navigate in the component."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "grid/mvvm.html",
+                    "title": "MVVM support in Kendo UI Grid",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Grid",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
 
             ]
