@@ -231,6 +231,13 @@
                     "url": "colorpicker/api.html",
                     "title": "API for Kendo UI ColorPicker | Kendo UI Demo",
                     "meta": "This Kendo UI demo shows the API of Kendo UI drop-down color picker widget."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "colorpicker/mvvm.html",
+                    "title": "MVVM support in Kendo UI ColorPicker",
+                    "meta": "Enabled, events, value and visible MVVM binding support in Kendo UI ColorPicker",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
