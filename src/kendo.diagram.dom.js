@@ -348,14 +348,32 @@ kendo_module({
 
             return rotate;
         },
-        connections: function () {
-            var cons = [], i, j, con;
+        connections: function (type) { // in, out, undefined = both
+            var result = [], i, j, con, cons, ctr;
+
             for (i = 0; i < this.connectors.length; i++) {
-                for (j = 0, con = this.connectors[i].connections; j < con.length; j++) {
-                    cons.push(con[j]);
+                ctr = this.connectors[i];
+                cons = ctr.connections;
+                for (j = 0, cons; j < cons.length; j++) {
+                    con = cons[j];
+                    if (type == "out") {
+                        var source = con.source();
+                        if (source.shape && source.shape == this) {
+                            result.push(con);
+                        }
+                    }
+                    else if (type == "in") {
+                        var target = con.target();
+                        if (target.shape && target.shape == this) {
+                            result.push(con);
+                        }
+                    }
+                    else {
+                        result.push(con);
+                    }
                 }
             }
-            return cons;
+            return result;
         },
         _hover: function (value) {
             this.shapeVisual._hover(value);

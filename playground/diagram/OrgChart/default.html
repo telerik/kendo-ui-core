@@ -78,186 +78,208 @@
 </script>
 
 <script type="text/javascript">
-    var diagram;
+var diagram, utils = kendo.diagram.Utils;
 
-    function getVisual(data) {
-        var g = new kendo.diagram.Group({
-            autoSize: true
-        });
-        var r = new kendo.diagram.Rectangle({
-            width: 150,
-            height: 60,
-            background: "#bdcbde"
-        });
-        g.append(r);
-        var im = new kendo.diagram.Image({
-            source: data.image,
-            height: 40,
-            width: 40,
-            x: 10,
-            y: 10
-        });
-        g.append(im);
-        var fn = new kendo.diagram.TextBlock({
-            text: data.name,
-            fontSize: 16,
-            x: 50,
-            y: 20
-        });
-        var ln = new kendo.diagram.TextBlock({
-            text: data.lastName,
-            fontSize: 16,
-            x: 50,
-            y: 40
-        });
+function getVisual(data) {
+    var g = new kendo.diagram.Group({
+        autoSize: true
+    });
+    var r = new kendo.diagram.Rectangle({
+        width: 150,
+        height: 60,
+        background: "#bdcbde"
+    });
+    g.append(r);
+    var im = new kendo.diagram.Image({
+        source: data.image,
+        height: 40,
+        width: 40,
+        x: 10,
+        y: 10
+    });
+    g.append(im);
+    var fn = new kendo.diagram.TextBlock({
+        text: data.name,
+        fontSize: 16,
+        x: 50,
+        y: 20
+    });
+    var ln = new kendo.diagram.TextBlock({
+        text: data.lastName,
+        fontSize: 16,
+        x: 50,
+        y: 40
+    });
 
-        var p = new kendo.diagram.Path({
-            data: "M0,0 L5,10 L10, 0 Z",
-            x: 130,
-            y: 45,
-            stroke: "black",
-            background: "gray"
-        });
+    var p = new kendo.diagram.Path({
+        data: "M0,0 L5,10 L10, 0 Z",
+        x: 130,
+        y: 45,
+        stroke: "black",
+        background: "gray"
+    });
 
-        p.native.addEventListener("click", function (e) {
-            var vis = $(this).parent("g").parent("g"),
-                    shapeId = vis.attr("id"),
-                    shape = diagram.getId(shapeId),
-                    cons = shape.connections();
-            for (var i = 0; i < cons.length; i++) {
-                var target = cons[i].target();
-                cons[i].visible(false);
-                if (target.shape) {
-                    var targetShape = target.shape;
-                    targetShape.visible(false);
-                }
-            }
+    p.native.addEventListener("click", function (e) {
+        var vis = $(this).parent("g").parent("g"),
+                shapeId = vis.attr("id"),
+                shape = diagram.getId(shapeId);
 
-        }, true);
+        var expanded = _expanded(shape, !_expanded(shape));
+        var pathData = expanded ? "M0,0 L5,10 L10, 0 Z" : "M0,10 L5,0 L10, 10 Z"
+        p.redraw({data: pathData});
 
-        g.append(p)
-        g.append(fn);
-        g.append(ln);
-        return g;
+        toggleExpandedRec(shape, expanded);
+        e.preventDefault();
+    }, true);
+
+    g.append(p);
+    g.append(fn);
+    g.append(ln);
+    return g;
+}
+
+function _expanded(shape, value) {
+    if (utils.isUndefined(value)) {
+        var attr = shape.visual.native.getAttribute("aria-expanded")
+        var expanded = attr == "true" || utils.isUndefined(attr);
+        return expanded;
+    }
+    else {
+        shape.visual.native.setAttribute("aria-expanded", value);
+        return value;
+    }
+}
+
+function toggleExpandedRec(shape, expanded) {
+    var cons = shape.connections("out"), target;
+    expanded = _expanded(shape) && expanded;
+    for (var i = 0; i < cons.length; i++) {
+        target = cons[i].target();
+        cons[i].visible(expanded);
+        if (target.shape) {
+            toggleExpandedRec(target.shape, expanded)
+            target.shape.visible(expanded);
+        }
+    }
+}
+
+$(function () {
+    function createDiagram(template) {
+        var options = {
+            dataSource: dataSource,
+            autoBind: false
+        }
+        if (kendo.diagram.Utils.isFunction(window[template])) {
+            options.visualTemplate = window[template];
+        }
+        else {
+            options.template = template;
+        }
+        return $("#canvas").kendoDiagram(options).data("kendoDiagram");
     }
 
-    $(function () {
+    $("#layoutButton").bind("click", layout);
+    $("#retemplateButton").bind("click", retemplate);
 
-        function createDiagram(template) {
-            var options = {
-                dataSource: dataSource,
-                autoBind: false
-            }
-            if (kendo.diagram.Utils.isFunction(window[template])) {
-                options.visualTemplate = window[template];
-            }
-            else {
-                options.template = template;
-            }
-            return $("#canvas").kendoDiagram(options).data("kendoDiagram");
+    function layout() {
+        diagram.select(false);
+        diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                {
+                    TreeLayoutType: eval($("#Layouts").val()),
+                    animate: true
+                });
+    }
+
+    function retemplate() {
+        if (diagram) {
+            diagram.destroy();
         }
-
-        $("#layoutButton").bind("click", layout);
-        $("#retemplateButton").bind("click", retemplate);
-
-        function layout() {
-            diagram.select(false);
-            diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
-                    {
-                        TreeLayoutType: eval($("#Layouts").val()),
-                        animate: true
-                    });
-        }
-
-        function retemplate() {
-            if (diagram) {
-                diagram.destroy();
-            }
-            diagram = createDiagram($("#templates").val());
-            dataSource.fetch();
-            diagram.layout();
-        }
-
-        var layouts = [
-            {value: "kendo.diagram.TreeLayoutType.TreeDown", text: "TreeDown"},
-            {value: "kendo.diagram.TreeLayoutType.TreeUp", text: "TreeUp"},
-            {value: "kendo.diagram.TreeLayoutType.TreeLeft", text: "TreeLeft"},
-            {value: "kendo.diagram.TreeLayoutType.TreeRight", text: "TreeRight"},
-            {value: "kendo.diagram.TreeLayoutType.RadialTree", text: "RadialTree"},
-            {value: "kendo.diagram.TreeLayoutType.TipOverTree", text: "TipOverTree"},
-            {value: "kendo.diagram.TreeLayoutType.MindmapVertical", text: "MindmapVertical"},
-            {value: "kendo.diagram.TreeLayoutType.MindmapHorizontal", text: "MindmapHorizontal"}
-        ];
-
-        $("#Layouts").kendoDropDownList({
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: layouts,
-            change: function () {
-                layout();
-            }
-        });
-
-        var templates = [
-            {value: "getVisual", text: "Extended"},
-            {value: "#= item.name # #= item.lastName #", text: "Simple"}
-        ];
-
-        $("#templates").kendoDropDownList({
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: templates,
-            change: function () {
-                retemplate();
-            }
-        });
-
-        $("#splitter").kendoSplitter({
-            panes: [
-                { collapsible: false },
-                { collapsible: false, size: "15%" }
-            ]
-        });
-
-        var dataSource = new kendo.data.HierarchicalDataSource({
-            transport: {
-                read: "org.json",
-                dataType: "json"
-            },
-            schema: {
-                model: {
-                    children: "items"
-                }
-            }
-        });
-
         diagram = createDiagram($("#templates").val());
+        dataSource.fetch();
+        diagram.layout();
+    }
 
-        $("#treeview").kendoTreeView({
-            dataSource: dataSource,
-            dataTextField: "name",
-            template: "#= item.name # #= item.lastName #",
-            select: function (e) {
-                diagram.select(false);
-                var data = this.dataItem(e.node);
-                for (var i = 0; i < diagram.shapes.length; i++) {
-                    var sh = diagram.shapes[i];
-                    if (sh.options.context.name == data.name) { // lame
-                        sh.select(true);
-                        diagram.bringIntoView(sh, {animate: true, align: "center middle"});
-                    }
-                }
-            },
-            dataBound: function () {
-                this.expand(".k-item");
-            },
-            autoBind: true
-        });
+    var layouts = [
+        {value: "kendo.diagram.TreeLayoutType.TreeDown", text: "TreeDown"},
+        {value: "kendo.diagram.TreeLayoutType.TreeUp", text: "TreeUp"},
+        {value: "kendo.diagram.TreeLayoutType.TreeLeft", text: "TreeLeft"},
+        {value: "kendo.diagram.TreeLayoutType.TreeRight", text: "TreeRight"},
+        {value: "kendo.diagram.TreeLayoutType.RadialTree", text: "RadialTree"},
+        {value: "kendo.diagram.TreeLayoutType.TipOverTree", text: "TipOverTree"},
+        {value: "kendo.diagram.TreeLayoutType.MindmapVertical", text: "MindmapVertical"},
+        {value: "kendo.diagram.TreeLayoutType.MindmapHorizontal", text: "MindmapHorizontal"}
+    ];
 
-        setTimeout(function () {
+    $("#Layouts").kendoDropDownList({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: layouts,
+        change: function () {
             layout();
-        }, 400);
-    })
+        }
+    });
+
+    var templates = [
+        {value: "getVisual", text: "Extended"},
+        {value: "#= item.name # #= item.lastName #", text: "Simple"}
+    ];
+
+    $("#templates").kendoDropDownList({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: templates,
+        change: function () {
+            retemplate();
+        }
+    });
+
+    $("#splitter").kendoSplitter({
+        panes: [
+            { collapsible: false },
+            { collapsible: false, size: "15%" }
+        ]
+    });
+
+    var dataSource = new kendo.data.HierarchicalDataSource({
+        transport: {
+            read: "org.json",
+            dataType: "json"
+        },
+        schema: {
+            model: {
+                children: "items"
+            }
+        }
+    });
+
+    diagram = createDiagram($("#templates").val());
+
+    $("#treeview").kendoTreeView({
+        dataSource: dataSource,
+        dataTextField: "name",
+        template: "#= item.name # #= item.lastName #",
+        select: function (e) {
+            diagram.select(false);
+            var data = this.dataItem(e.node);
+            for (var i = 0; i < diagram.shapes.length; i++) {
+                var sh = diagram.shapes[i];
+                if (sh.options.context.name == data.name) { // lame
+                    sh.select(true);
+                    diagram.bringIntoView(sh, {animate: true, align: "center middle"});
+                }
+            }
+        },
+        dataBound: function () {
+            this.expand(".k-item");
+        },
+        autoBind: true
+    });
+
+    setTimeout(function () {
+        layout();
+    }, 400);
+})
+
 </script>
 <div id="Stage">
     <div id="toolbarDiv">
