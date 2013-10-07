@@ -452,6 +452,13 @@
                     "url": "dropdownlist/navigation.html",
                     "title": "Kendo UI DropdownList | Keyboard navigation demo",
                     "meta": "Kendo UI DropDownList supports keyboard navigation that lets you effortlessly navigate in the dropdown widget by using the keyboard."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "dropdownlist/mvvm.html",
+                    "title": "MVVM support in Kendo UI DropDownList",
+                    "meta": "Enabled, events, source, visible and value MVVM binding support in Kendo UI DropDownList",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
