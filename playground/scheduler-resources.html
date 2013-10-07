@@ -102,6 +102,7 @@ k-popup-edit-form .km-actionsheet li {
                         { text: "Charlie", value: 3, color: "blue" }
                     ],
                     multiple: true,
+                    //valuePrimitive: false,
                     title: "Atendees"
                 }
             ],
@@ -147,7 +148,7 @@ k-popup-edit-form .km-actionsheet li {
                             exception: { field: "RecurrenceException" },
                             recurrenceId: { field: "RecurrenceID" },
                             roomId: { field: "RoomID", nullable: true },
-                            atendees: { field: "Atendees", nullable: true },
+                            atendees: { field: "Atendees", defaultValue: [] },
                             isAllDay: { type: "boolean", field: "IsAllDay" },
                             foo: {}
                         }

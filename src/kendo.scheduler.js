@@ -86,6 +86,25 @@ kendo_module({
                    '<li class="k-state-default k-nav-next"><a role="button" href="\\#" class="k-link"><span class="k-icon k-i-arrow-e"></span></a></li>' +
                 '</ul>' +
             '</div>'),
+        MOBILEDATERANGEEDITOR = function(container, options) {
+            var attr = { name: options.field };
+
+            appendDateCompareValidator(attr, options);
+
+            $('<input type="datetime-local" required ' + kendo.attr("type") + '="date" ' + kendo.attr("bind") + '="value:' + options.field +',invisible:isAllDay" />')
+                .attr(attr).appendTo(container);
+
+            $('<input type="date" required ' + kendo.attr("type") + '="date" ' + kendo.attr("bind") + '="value:' + options.field +',visible:isAllDay" />')
+                .attr(attr).appendTo(container);
+
+            $('<span ' + kendo.attr("bind") + '="text: ' + options.field + 'Timezone"></span>').appendTo(container);
+
+            if (options.field === "end") {
+                $('<span ' + kendo.attr("bind") + '="text: startTimezone, invisible: endTimezone"></span>').appendTo(container);
+            }
+
+            $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
+        },
         DATERANGEEDITOR = function(container, options) {
             var attr = { name: options.field };
 
@@ -635,6 +654,23 @@ kendo_module({
        };
     }
 
+    function dropDownResourceEditorMobile(resource) {
+        return function(container) {
+            var options = '';
+            var view = resource.dataSource.view();
+
+            for (var idx = 0, length = view.length; idx < length; idx++) {
+                options += kendo.format('<option value="{0}">{1}</option>',
+                    kendo.getter(resource.dataValueField)(view[idx]),
+                    kendo.getter(resource.dataTextField)(view[idx])
+                );
+            }
+
+           $(kendo.format('<select data-{0}bind="value:{1}">{2}</select>', kendo.ns, resource.field, options))
+             .appendTo(container);
+       };
+    }
+
     function multiSelectResourceEditor(resource) {
         return function(container) {
            $(kendo.format('<select data-{0}bind="value:{1}">', kendo.ns, resource.field))
@@ -647,6 +683,28 @@ kendo_module({
                  itemTemplate: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField),
                  tagTemplate: kendo.format('<span class="k-scheduler-mark" style="background-color:#= data.{0}?{0}:"none" #"></span>#={1}#', resource.dataColorField, resource.dataTextField)
              });
+       };
+    }
+
+    function multiSelectResourceEditorMobile(resource) {
+        return function(container) {
+            var options = "";
+            var view = resource.dataSource.view();
+
+            for (var idx = 0, length = view.length; idx < length; idx++) {
+                options += kendo.format('<option value="{0}">{1}</option>',
+                    kendo.getter(resource.dataValueField)(view[idx]),
+                    kendo.getter(resource.dataTextField)(view[idx])
+                );
+            }
+
+            $(kendo.format('<select data-{0}bind="value:{1}" multiple="multiple" data-{0}value-primitive="{3}">{2}</select>',
+                kendo.ns,
+                resource.field,
+                options,
+                resource.valuePrimitive
+             ))
+             .appendTo(container);
        };
     }
 
@@ -669,18 +727,22 @@ kendo_module({
 
     var editors = {
         mobile: {
-            dateRange: DATERANGEEDITOR,
+            dateRange: MOBILEDATERANGEEDITOR,
             timezonePopUp: TIMEZONEPOPUP,
             timezone: TIMEZONEEDITOR,
             recurrence: RECURRENCEEDITOR,
-            description: '<textarea name="description" class="k-textbox"/>'
+            description: '<textarea name="description" class="k-textbox"/>',
+            multipleResources: multiSelectResourceEditorMobile,
+            resources: dropDownResourceEditorMobile
         },
         desktop: {
             dateRange: DATERANGEEDITOR,
             timezonePopUp: TIMEZONEPOPUP,
             timezone: TIMEZONEEDITOR,
             recurrence: RECURRENCEEDITOR,
-            description: '<textarea name="description" class="k-textbox"/>'
+            description: '<textarea name="description" class="k-textbox"/>',
+            multipleResources: multiSelectResourceEditor,
+            resources: dropDownResourceEditor
         }
     };
 
@@ -731,7 +793,7 @@ kendo_module({
                 fields.push({
                     field: resource.field,
                     title: resource.title,
-                    editor: resource.multiple? multiSelectResourceEditor(resource) : dropDownResourceEditor(resource)
+                    editor: resource.multiple? editors.multipleResources(resource) : editors.resources(resource)
                 });
             }
 
