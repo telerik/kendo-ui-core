@@ -1,4 +1,4 @@
-﻿var diagram = kendo.diagram, kdiagram, tollerance = 0.0001, Point = diagram.Point, QUnit = window.QUnit, test = QUnit.test, ok = QUnit.ok;
+﻿var diagram = kendo.diagram, kdiagram, tolerance = 0.0001, Point = diagram.Point, QUnit = window.QUnit, test = QUnit.test, ok = QUnit.ok;
 
 /*-----------Diagram tests------------------------------------*/
 QUnit.module("Diagram tests", {
@@ -260,8 +260,8 @@ test("Shape visual bounds is ok after zoom", function () {
 
     var vb = s.visualBounds();
     var b = s.bounds();
-    QUnit.close(b.width, vb.width / z, tollerance);
-    QUnit.close(b.height, vb.height / z, tollerance);
+    QUnit.close(b.width, vb.width / z, tolerance);
+    QUnit.close(b.height, vb.height / z, tolerance);
 });
 
 test("Bring to front - no arguments. Rearrange shapes", function () {
