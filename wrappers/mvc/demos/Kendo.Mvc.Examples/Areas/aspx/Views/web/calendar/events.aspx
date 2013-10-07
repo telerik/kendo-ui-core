@@ -14,7 +14,7 @@
             .Name("calendar")
             .HtmlAttributes(new { style = "width: 243px;" })
             .Events(e => e.Change("change").Navigate("navigate"))
-    %> 
+    %>
 </div>
 
 <script>
@@ -44,6 +44,7 @@
         border: 0;
         height: 342px;
         overflow: auto;
+        float: right;
     }
 </style>
 </asp:Content>

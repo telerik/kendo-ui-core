@@ -7,11 +7,15 @@
             .Name("calendar")
             .HtmlAttributes(new { style = "width: 243px;" })
             .Events(e => e.Change("change").Navigate("navigate"))
-    )    
+    )
 </div>
 <script>
     function change() {
         kendoConsole.log("Change :: " + kendo.toString(this.value(), 'd'));
+    }
+
+    function navigate() {
+        kendoConsole.log("Navigate");
     }
 </script>
 
@@ -32,5 +36,6 @@
         border: 0;
         height: 342px;
         overflow: auto;
+        float: right;
     }
 </style>
