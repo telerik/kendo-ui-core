@@ -956,6 +956,13 @@
                     "url": "menu/navigation.html",
                     "title": "Keyboard navigation in Kendo UI Menu",
                     "meta": "This example demonstrates how the keyboard navigation is a supported feature in Kendo UI Menu widget."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "menu/mvvm.html",
+                    "title": "MVVM support in Kendo UI Menu",
+                    "meta": "Events and visible MVVM binding support in Kendo UI Menu",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
