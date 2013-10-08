@@ -120,6 +120,24 @@ kendo_module({
         }
     });
 
+    /**
+     * Structure combining a Point with two additional points representing the handles or tangents attached to the first point.
+     * If the additional points are null or equal to the first point the path will be sharp.
+     * Left and right correspond to the direction of the underlying path.
+     */
+    var PathDefiner = Class.extend(
+        {
+            init: function (p, left, right) {
+                this.point = p;
+                this.left = left;
+                this.right = right;
+            }
+        }
+    );
+
+    /**
+     * Defines a rectangular region.
+     */
     var Rect = Class.extend({
         init: function (x, y, width, height) {
             this.x = x || 0;
@@ -2912,6 +2930,7 @@ kendo_module({
         Set: Set,
         Node: Node,
         Link: Link,
-        Graph: Graph
+        Graph: Graph,
+        PathDefiner : PathDefiner
     });
 })(window.kendo.jQuery);

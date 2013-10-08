@@ -468,6 +468,7 @@ kendo_module({
             that.targetPoint(to);
             that.refresh();
             that.content(that.options.content);
+            that.definers = [];
         },
         options: {
             stroke: "gray",
@@ -609,7 +610,98 @@ kendo_module({
             }
         },
 
+        /**
+         * Gets or sets the collection of *intermediate* points.
+         * The 'allPoints()' property will return all the points.
+         * The 'definers' property returns the definers of the intermediate points.
+         * The 'sourceDefiner' and 'targetDefiner' return the definers of the endpoints.
+         * @param value
+         */
+        points: function (value) {
+            if (value) {
+                if (value === null) {
+                    this.definers = [];
+                }
+                else {
+                    for (var i = 0; i < value.length; i++) {
+                        var definition = value[i];
+                        if (definition instanceof diagram.Point) {
+                            this.definers.push(new diagram.PathDefiner(definition));
+                        }
+                        else {
+                            throw "A Connection point needs to be a Point.";
+                        }
+                    }
+                }
+            } else {
+                var pts = [];
+                for (var k = 0; k < this.definers.length; k++) {
+                    pts.push(this.definers[k].point);
+                }
+                return pts;
+            }
+        },
 
+        /**
+         * Gets all the points of this connection. This is the combination of the sourcePoint, the points and the targetPoint.
+         * @returns {Array}
+         */
+        allPoints: function () {
+            var pts = [this.sourcePoint()];
+            for (var k = 0; k < this.definers.length; k++) {
+                pts.push(this.definers[k].point);
+            }
+            pts.push(this.targetPoint());
+            return pts;
+        },
+
+        /**
+         * Gets or sets the PathDefiner of the sourcePoint.
+         * The left part of this definer is always null since it defines the source tangent.
+         * @param value
+         * @returns {*}
+         */
+        sourceDefiner: function (value) {
+            if (value) {
+                if (value instanceof diagram.PathDefiner) {
+                    value.left = null;
+                    this._sourceDefiner = value;
+                    this.sourcePoint(value.point);
+                }
+                else {
+                    throw "The sourceDefiner needs to be a PathDefiner.";
+                }
+            } else {
+                if (!this._sourceDefiner) {
+                    this._sourceDefiner = new diagram.PathDefiner(this.sourcePoint(), null, null);
+                }
+                return this._sourceDefiner;
+            }
+        },
+
+        /**
+         * Gets or sets the PathDefiner of the targetPoint.
+         * The right part of this definer is always null since it defines the target tangent.
+         * @param value
+         * @returns {*}
+         */
+        targetDefiner: function (value) {
+            if (value) {
+                if (value instanceof diagram.PathDefiner) {
+                    value.left = null;
+                    this._targetDefiner = value;
+                    this.targetPoint(value.point);
+                }
+                else {
+                    throw "The sourceDefiner needs to be a PathDefiner.";
+                }
+            } else {
+                if (!this._targetDefiner) {
+                    this._targetDefiner = new diagram.PathDefiner(this.sourcePoint(), null, null);
+                }
+                return this._targetDefiner;
+            }
+        },
 
         /**
          * Returns whether the given Point or Rect hits this connection.
