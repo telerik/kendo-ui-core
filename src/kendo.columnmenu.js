@@ -19,6 +19,7 @@ kendo_module({
         DESC = "desc",
         CHANGE = "change",
         INIT = "init",
+        SELECT = "select",
         POPUP = "kendoPopup",
         FILTERMENU = "kendoFilterMenu",
         MENU = "kendoMenu",
@@ -54,29 +55,23 @@ kendo_module({
                 .on("click" + NS, proxy(that._click, that));
 
             that.wrapper = $('<div class="k-column-menu"/>');
+
+            that._isMobile = kendo.support.mobileOS;
         },
 
         _init: function() {
-            var that = this,
-                options = that.options;
+            var that = this;
 
-            that.wrapper.html(kendo.template(template)({
-                ns: kendo.ns,
-                messages: options.messages,
-                sortable: options.sortable,
-                filterable: options.filterable,
-                columns: that._ownerColumns(),
-                showColumns: options.columns
-            }));
+            if (that._isMobile) {
+                that.pane = that.link.closest(kendo.roleSelector("pane")).data("kendoMobilePane");
+                that._isMobile = !!that.pane;
+            }
 
-            that.popup = that.wrapper[POPUP]({
-                anchor: that.link,
-                open: proxy(that._open, that),
-                activate: proxy(that._activate, that),
-                close: that.options.closeCallback
-            }).data(POPUP);
-
-            that._menu();
+            if (that._isMobile) {
+                that._createMobileMenu();
+            } else {
+                that._createMenu();
+            }
 
             that._sort();
 
@@ -100,6 +95,60 @@ kendo_module({
             columns: true,
             sortable: true,
             filterable: true
+        },
+
+        _createMenu: function() {
+            var that = this,
+                options = that.options;
+
+            that.wrapper.html(kendo.template(template)({
+                ns: kendo.ns,
+                messages: options.messages,
+                sortable: options.sortable,
+                filterable: options.filterable,
+                columns: that._ownerColumns(),
+                showColumns: options.columns
+            }));
+
+            that.popup = that.wrapper[POPUP]({
+                anchor: that.link,
+                open: proxy(that._open, that),
+                activate: proxy(that._activate, that),
+                close: that.options.closeCallback
+            }).data(POPUP);
+
+            that.menu = that.wrapper.children()[MENU]({
+                orientation: "vertical",
+                closeOnClick: false
+            }).data(MENU);
+        },
+
+        _createMobileMenu: function() {
+            var that = this,
+                options = that.options;
+
+            that.wrapper.html(kendo.template(mobileTemplate)({
+                ns: kendo.ns,
+                messages: options.messages,
+                sortable: options.sortable,
+                filterable: options.filterable,
+                columns: that._ownerColumns(),
+                showColumns: options.columns
+            }));
+
+            var html = that.wrapper.wrap(
+                    '<div><div ' +
+                    kendo.attr("role") + '="view" ' +
+                    kendo.attr("init-widgets") + '="false"></div></div>')
+                    .parent().parent().html();
+
+            that.view = that.pane.append(html);
+
+            that.wrapper = that.view.element.find(".k-column-menu");
+
+            that.menu = new MobileMenu(that.wrapper.children(), {
+                pane: that.pane
+            });
         },
 
         destroy: function() {
@@ -131,24 +180,34 @@ kendo_module({
                 that.popup.destroy();
             }
 
+            if (that.view) {
+                that.view.purge();
+            }
+
             that.link.off(NS);
         },
 
         close: function() {
             this.menu.close();
-            this.popup.close();
-            this.popup.element.off("keydown" + NS);
+            if (this.popup) {
+                this.popup.close();
+                this.popup.element.off("keydown" + NS);
+            }
         },
 
         _click: function(e) {
             e.preventDefault();
             e.stopPropagation();
 
-            if (!this.popup) {
+            if (!this.popup && !this.pane) {
                 this._init();
             }
 
-            this.popup.toggle();
+            if (this._isMobile) {
+                this.pane.navigate(this.view);
+            } else {
+                this.popup.toggle();
+            }
         },
 
         _open: function() {
@@ -191,13 +250,6 @@ kendo_module({
             });
         },
 
-        _menu: function() {
-            this.menu = this.wrapper.children()[MENU]({
-                orientation: "vertical",
-                closeOnClick: false
-            }).data(MENU);
-        },
-
         _sort: function() {
             var that = this;
 
@@ -208,7 +260,7 @@ kendo_module({
 
                 that.dataSource.bind(CHANGE, that._refreshHandler);
 
-                that.menu.bind("select", function(e) {
+                that.menu.bind(SELECT, function(e) {
                     var item = $(e.item),
                         dir;
 
@@ -272,7 +324,7 @@ kendo_module({
 
                 that.owner.bind(["columnHide", "columnShow"], that._updateColumnsMenuHandler);
 
-                that.menu.bind("select", function(e) {
+                that.menu.bind(SELECT, function(e) {
                     var item = $(e.item),
                         input,
                         index,
@@ -389,6 +441,55 @@ kendo_module({
                         '</ul></li>'+
                     '#}#'+
                     '</ul>';
+
+    var mobileTemplate = '<ul>'+
+                    '#if(sortable){#'+
+                        '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite k-i-sort-asc"></span>${messages.sortAscending}</span></li>'+
+                        '<li class="k-item k-sort-desc"><span class="k-link"><span class="k-sprite k-i-sort-desc"></span>${messages.sortDescending}</span></li>'+
+                        '#if(showColumns || filterable){#'+
+                            '<li class="k-separator"></li>'+
+                        '#}#'+
+                    '#}#'+
+                    '#if(showColumns){#'+
+                        '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite k-i-columns"></span>${messages.columns}</span><ul>'+
+                        '#for (var col in columns) {#'+
+                            '<li><input type="checkbox" data-#=ns#field="#=columns[col].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[col].index#"/>#=columns[col].title#</li>'+
+                        '#}#'+
+                        '</ul></li>'+
+                        '#if(filterable){#'+
+                            '<li class="k-separator"></li>'+
+                        '#}#'+
+                    '#}#'+
+                    '#if(filterable){#'+
+                        '<li class="k-item k-filter-item"><span class="k-link"><span class="k-sprite k-filter"></span>${messages.filter}</span></li>'+
+                    '#}#'+
+                    '</ul>';
+
+    var MobileMenu = Widget.extend({
+        init: function(element, options) {
+            Widget.fn.init.call(this, element, options);
+
+            this.element.on("click" + NS, "li", "_click");
+        },
+
+        events: [ SELECT ],
+
+        _click: function(e) {
+            if (this.trigger(SELECT, { item: e.currentTarget })) {
+                e.preventDefault();
+            }
+        },
+
+        close: function() {
+            this.options.pane.navigate("");
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+
+            this.element.off(NS);
+        }
+    });
 
     ui.plugin(ColumnMenu);
 })(window.kendo.jQuery);
