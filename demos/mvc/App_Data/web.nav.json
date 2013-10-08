@@ -1565,8 +1565,9 @@
                 }, {
                     "text": "MVVM",
                     "url": "treeview/mvvm.html",
-                    "title": "MVVM binding in Kendo UI TreeView widget",
-                    "meta": "Look at this Kendo UI TreeView demo to see how to bind the widget with the Kendo UI MVVM framework."
+                    "title": "MVVM support in Kendo UI TreeView",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI TreeView",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
