@@ -1,0 +1,36 @@
+<div id="example" class="k-content">
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Tooltip</span>
+            <span class="key-button"
+                  title="Hello!"
+                  data-role="tooltip"
+                  data-auto-hide="false"
+                  data-position="right"
+                  data-bind="events: { show: onShow, hide: onHide }"
+            >Hover me!</span>
+        </div>
+        <div class="config-section" style="width: 400px">
+            <div class="configHead">Console</div>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="configuration-horizontal">
+        <div class="config-section" style="width: 440px">
+            <span class="configHead">Information</span>
+            Kendo UI Tooltip supports the
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a> binding.
+        </div>
+    </div>
+<script>
+    var viewModel = kendo.observable({
+        onShow: function() {
+            kendoConsole.log("event :: show");
+        },
+        onHide: function() {
+            kendoConsole.log("event :: hide");
+        }
+    });
+    kendo.bind($("#example"), viewModel);
+</script>
+</div>
