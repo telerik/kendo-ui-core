@@ -1211,6 +1211,12 @@
                     "url": "scheduler/rtl.html",
                     "title": "Right-to-left (RTL) support of Kendo UI Scheduler",
                     "meta": "This demo shows the Right-to-left (RTL) support of Kendo UI Scheduler."
+                }, {
+                    "text": "MVVM",
+                    "url": "scheduler/mvvm.html",
+                    "title": "MVVM support in Kendo UI Scheduler",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Scheduler",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
