@@ -308,8 +308,6 @@
     <Compile Include="UI\Chart\Enums\ChartZoomDireciton.cs" />
     <Compile Include="UI\Chart\Enums\ChartNoteLabelPosition.cs" />
     <Compile Include="UI\Chart\Enums\ChartNotePosition.cs" />
-    <Compile Include="UI\Chart\Enums\ChartStepAreaMissingValues.cs" />
-    <Compile Include="UI\Chart\Enums\ChartStepLineMissingValues.cs" />
     <Compile Include="UI\Chart\Enums\RenderingMode.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPanesFactory.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPaneBuilder.cs" />
@@ -332,8 +330,6 @@
     <Compile Include="UI\Chart\Fluent\ChartAxisNotesFactory.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisNoteItemBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisNotesBuilder.cs" />
-    <Compile Include="UI\Chart\Fluent\ChartStepAreaSeriesBuilder.cs" />
-    <Compile Include="UI\Chart\Fluent\ChartStepLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartMajorGridLinesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartMinorGridLinesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartMinorTicksBuilder.cs" />
@@ -431,8 +427,6 @@
     <Compile Include="UI\Chart\Serialization\ChartNoteLineSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisNoteItemSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisNoteSerializer.cs" />
-    <Compile Include="UI\Chart\Serialization\ChartStepAreaSeriesSerializer.cs" />
-    <Compile Include="UI\Chart\Serialization\ChartStepLineSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />
@@ -506,9 +500,6 @@
     <Compile Include="UI\Chart\Series\ChartPolarLineSeries.cs" />
     <Compile Include="UI\Chart\ChartNote.cs" />
     <Compile Include="UI\Chart\ChartNoteLabel.cs" />
-    <Compile Include="UI\Chart\Series\ChartStepAreaSeries.cs" />
-    <Compile Include="UI\Chart\Series\ChartStepLineSeries.cs" />
-    <Compile Include="UI\Chart\Series\IChartStepLineSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartBulletSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartCandlestickSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartOHLCSeries.cs" />
@@ -524,7 +515,6 @@
     <Compile Include="UI\Chart\Series\IChartBoundSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartBarSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartSeries.cs" />
-    <Compile Include="UI\Chart\Series\IChartStepAreaSeries.cs" />
     <Compile Include="UI\ColorPalette\ColorPalette.cs" />
     <Compile Include="UI\ColorPalette\ColorPaletteTileSize.cs" />
     <Compile Include="UI\ColorPalette\Fluent\ColorPaletteBuilder.cs" />

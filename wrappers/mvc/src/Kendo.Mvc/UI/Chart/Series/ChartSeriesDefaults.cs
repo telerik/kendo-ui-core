@@ -11,16 +11,12 @@ namespace Kendo.Mvc.UI
             Column = new ChartBarSeries<T, object>();
             Line = new ChartLineSeries<T, object>();
             VerticalLine = new ChartLineSeries<T, object>();
-            StepLine = new ChartStepLineSeries<T, object>();
-            VerticalStepLine = new ChartStepLineSeries<T, object>();
             Pie = new ChartPieSeries<T, object>();
             Donut = new ChartDonutSeries<T, object>();
             Scatter = new ChartScatterSeries<T, object, object>();
             ScatterLine = new ChartScatterLineSeries<T, object, object>();
             Area = new ChartAreaSeries<T, object>();
             VerticalArea = new ChartAreaSeries<T, object>();
-            StepArea = new ChartStepAreaSeries<T, object>();
-            VerticalStepArea = new ChartStepAreaSeries<T, object>();
             OHLC = new ChartOHLCSeries<T, object, string>();
             Bullet = new ChartBulletSeries<T, object, string>();
             VerticalBullet = new ChartBulletSeries<T, object, string>();
@@ -69,24 +65,6 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// The default settings for all step area series.
-        /// </summary>
-        public IChartStepAreaSeries StepArea
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// The default settings for all vertical step area series.
-        /// </summary>
-        public IChartStepAreaSeries VerticalStepArea
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
         /// The default settings for all line series.
         /// </summary>
         public IChartLineSeries Line
@@ -99,24 +77,6 @@ namespace Kendo.Mvc.UI
         /// The default settings for all vertical line series.
         /// </summary>
         public IChartLineSeries VerticalLine
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// The default settings for all step line series.
-        /// </summary>
-        public IChartStepLineSeries StepLine
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// The default settings for all vertical step line series.
-        /// </summary>
-        public IChartStepLineSeries VerticalStepLine
         {
             get;
             private set;
