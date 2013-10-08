@@ -38,16 +38,14 @@
         TRANSPARENT = "transparent",
         UNDEFINED = "undefined";
 
-    // SVG Stage =============================================================
-    var Stage = Observable.extend({
+    // TODO: Move base stage to core
+    // TODO: Rename to Stage?
+    var BaseStage = Observable.extend({
         init: function(wrap, options) {
             Observable.fn.init.call(this);
 
             this.nodes = new ObservableArray([]);
             this.nodes.bind("change", proxy(this._nodeChange, this))
-
-            renderSVG(wrap, this._template(this));
-            this.element = wrap.firstElementChild;
         },
 
         options: {
@@ -67,6 +65,26 @@
             this.nodes.empty();
         },
 
+        _nodeChange: noop,
+
+        _renderSize: function(size) {
+            if (typeof size !== "string") {
+                size += "px";
+            }
+
+            return size;
+        }
+    });
+
+    // SVG Stage =============================================================
+    var Stage = BaseStage.extend({
+        init: function(wrap, options) {
+            BaseStage.fn.init.call(this);
+
+            renderSVG(wrap, this._template(this));
+            this.element = wrap.firstElementChild;
+        },
+
         _template: renderTemplate(
             "<?xml version='1.0' ?>" +
             "<svg xmlns='" + SVG_NS + "' version='1.1' " +
@@ -83,14 +101,6 @@
                     node.detach();
                 }
             }
-        },
-
-        _renderSize: function(size) {
-            if (typeof size !== "string") {
-                size += "px";
-            }
-
-            return size;
         }
     });
 
@@ -330,6 +340,7 @@
 
     // Exports ================================================================
     deepExtend(dataviz, {
+        BaseStage: BaseStage,
         svg: {
             Stage: Stage,
             Node: Node,
