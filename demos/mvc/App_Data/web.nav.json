@@ -71,7 +71,7 @@
                     "text": "MVVM",
                     "url": "autocomplete/mvvm.html",
                     "title": "MVVM support in Kendo UI AutoComplete",
-                    "meta": "Enabled, events, source, visible and value MVVM binding support in Kendo UI AutoComplete",
+                    "meta": "Enabled, events, source, value and visible MVVM binding support in Kendo UI AutoComplete",
                     "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
@@ -305,7 +305,7 @@
                     "text": "MVVM",
                     "url": "combobox/mvvm.html",
                     "title": "MVVM support in Kendo UI ComboBox",
-                    "meta": "Enabled, events, source, visible and value MVVM binding support in Kendo UI ComboBox",
+                    "meta": "Enabled, events, source, value and visible MVVM binding support in Kendo UI ComboBox",
                     "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
@@ -492,7 +492,7 @@
                     "text": "MVVM",
                     "url": "dropdownlist/mvvm.html",
                     "title": "MVVM support in Kendo UI DropDownList",
-                    "meta": "Enabled, events, source, visible and value MVVM binding support in Kendo UI DropDownList",
+                    "meta": "Enabled, events, source, value and visible MVVM binding support in Kendo UI DropDownList",
                     "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
@@ -1024,7 +1024,7 @@
                     "text": "MVVM",
                     "url": "multiselect/mvvm.html",
                     "title": "MVVM support in Kendo UI MultiSelect",
-                    "meta": "Enabled, events, source, visible and value MVVM binding support in Kendo UI MultiSelect",
+                    "meta": "Enabled, events, source, value and visible MVVM binding support in Kendo UI MultiSelect",
                     "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
@@ -1069,6 +1069,13 @@
                     "url": "numerictextbox/navigation.html",
                     "title": "Keyboard navigation in Kendo UI NumericTextBox",
                     "meta": "The value in Kendo UI NumericTextBox can be increased or decreased by using keyboard navigation combinations. Take a look at the demo to learn how."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "numerictextbox/mvvm.html",
+                    "title": "MVVM support in Kendo UI NumericTextBox",
+                    "meta": "Enabled, events, value and visible MVVM binding support in Kendo UI NumericTextBox",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
