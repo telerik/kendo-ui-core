@@ -1253,6 +1253,13 @@
                 {
                     "text": "Keyboard navigation",
                     "url": "slider/navigation.html"
+                },
+                {
+                    "text": "MVVM",
+                    "url": "slider/mvvm.html",
+                    "title": "MVVM support in Kendo UI Slider",
+                    "meta": "Enabled, events, value and visible MVVM binding support in Kendo UI Slider",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
