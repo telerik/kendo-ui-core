@@ -1019,6 +1019,13 @@
                     "url": "multiselect/navigation.html",
                     "title": "Keyboard navigation in Kendo UI MultiSelect component | Kendo UI Web demo",
                     "meta": "This demo shows how the keyboard navigation for Kendo UI MultiSelect widget works. Learn more how to use the keyboard shortcuts for easier navigation."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "multiselect/mvvm.html",
+                    "title": "MVVM support in Kendo UI MultiSelect",
+                    "meta": "Enabled, events, source, visible and value MVVM binding support in Kendo UI MultiSelect",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
