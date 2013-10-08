@@ -1367,6 +1367,13 @@
                     "url": "tabstrip/navigation.html",
                     "title": "Keyboard navigation in Kendo UI TabStrip",
                     "meta": "This Kendo UI demo shows how end users of your app can intuitively use keyboard navigation in Kendo UI TabStrip."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "tabstrip/mvvm.html",
+                    "title": "MVVM support in Kendo UI TabStrip",
+                    "meta": "Events and visible MVVM binding support in Kendo UI TabStrip",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
