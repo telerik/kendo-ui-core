@@ -1132,6 +1132,13 @@
                     "url": "panelbar/navigation.html",
                     "title": "Demo for keyboard navigation feature in Kendo UI Collapsible Panel",
                     "meta": "Users can navigate in Kendo UI PanelBar by using the keyboard and different keyboard combinations. Play with the demo and implement the feature in your app."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "panelbar/mvvm.html",
+                    "title": "MVVM support in Kendo UI PanelBar",
+                    "meta": "Events and visible MVVM binding support in Kendo UI PanelBar",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },

@@ -1,25 +1,38 @@
 <div id="example" class="k-content">
     <div class="configuration-horizontal">
         <div class="config-section">
-            <span class="configHead">Menu</span>
+            <span class="configHead">PanelBar</span>
             <p>Select an item</p>
-            <ul data-role="menu"
+            <ul data-role="panelbar"
                 data-bind="events: { select: onSelect },
                            visible: isVisible"
                 style="width: 300px">
-                <li>
-                    Products
+                <li class="k-state-active">
+                    Metallica - Master of Puppets 1986
                     <ul>
-                        <li>
-                            Furniture
-                            <ul> <!-- moving the UL to the next line will cause an IE7 problem -->
-                                <li>Tables & Chairs</li>
-                                <li>Sofas</li>
-                                <li>Occasional Furniture</li>
-                                <li>Childerns Furniture</li>
-                                <li>Beds</li>
-                            </ul>
-                        </li>
+                        <li>Battery</li>
+                        <li>Master of Puppets</li>
+                        <li>The Thing That Should Not Be</li>
+                        <li>Welcome Home (Sanitarium)</li>
+                        <li>Disposable Heroes</li>
+                        <li>Leper Messiah</li>
+                        <li>Orion (Instrumental)</li>
+                        <li>Damage, Inc.</li>
+                    </ul>
+                </li>
+                <li>
+                    Iron Maiden - Brave New World 2000
+                    <ul>
+                        <li>The Wicker Man</li>
+                        <li>Ghost Of The Navigator</li>
+                        <li>Brave New World</li>
+                        <li>Blood Brothers</li>
+                        <li>The Mercenary</li>
+                        <li>Dream Of Mirrors</li>
+                        <li>The Fallen Angel</li>
+                        <li>The Nomad</li>
+                        <li>Out Of The Silent Planet</li>
+                        <li>The Thin Line Between Love And Hate</li>
                     </ul>
                 </li>
             </ul>
@@ -38,7 +51,7 @@
         </div>
         <div class="config-section" style="width: 440px">
             <span class="configHead">Information</span>
-            Kendo UI Menu supports the
+            Kendo UI PanelBar supports the
             <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a> and
             <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
         </div>
