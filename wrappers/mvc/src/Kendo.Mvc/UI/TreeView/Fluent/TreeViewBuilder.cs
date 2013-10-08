@@ -262,6 +262,7 @@ namespace Kendo.Mvc.UI.Fluent
                         item.Encoded = node.Encoded;
                         item.Id = node.Id;
                         item.Checked = node.Checked;
+                        item.Selected = node.Selected;
 
                         item.Url = node.Url;
                         item.ImageUrl = node.ImageUrl;

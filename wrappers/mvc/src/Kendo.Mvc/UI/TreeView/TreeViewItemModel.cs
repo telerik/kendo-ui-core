@@ -22,6 +22,8 @@ namespace Kendo.Mvc.UI
 
         public bool Encoded { get; set; }
 
+        public bool Selected { get; set; }
+
         public string Text { get; set; }
 
         public string Id { get; set; }
