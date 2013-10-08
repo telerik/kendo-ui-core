@@ -80,7 +80,8 @@ kendo_module({
             useNativeScrolling: false,
             stretch: false,
             zoom: false,
-            model: null
+            model: null,
+            initWidgets: true
         },
 
         enable: function(enable) {
@@ -261,10 +262,12 @@ kendo_module({
             initPopOvers(element);
 
             that.element.css("display", "");
-            if (model) {
-                kendo.bind(element.children(), model, ui, kendo.ui, kendo.dataviz.ui);
-            } else {
-                mobile.init(element.children());
+            if (that.options.initWidgets) {
+                if (model) {
+                    kendo.bind(element.children(), model, ui, kendo.ui, kendo.dataviz.ui);
+                } else {
+                    mobile.init(element.children());
+                }
             }
             that.element.css("display", "none");
         },
