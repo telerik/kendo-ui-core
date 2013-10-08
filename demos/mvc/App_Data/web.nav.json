@@ -1621,6 +1621,12 @@
                     "url": "upload/rtl.html",
                     "title": "RTL support in Kendo UI Upload",
                     "meta": "This Kendo UI demo illustrates how you can facilitate your RTL app users by using the RTL feature of Kendo UI Upload widget."
+                }, {
+                    "text": "MVVM",
+                    "url": "upload/mvvm.html",
+                    "title": "MVVM support in Kendo UI Upload",
+                    "meta": "Enabled, events and and visible MVVM binding support in Kendo UI Upload",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
