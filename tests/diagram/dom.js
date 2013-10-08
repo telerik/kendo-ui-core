@@ -432,6 +432,25 @@ test("Connection detach", function () {
     equal(c1.sourceConnector.options.name, "Auto");
 });
 
+test('Connection definers', function () {
+    var con = new kendo.diagram.Connection(new Point(10, 20), new Point(100, 200));
+    con.points([new Point(1, 2), new Point(3, 4), new Point(5, 6)]);
+    equal(con.points().length, 3);
+    equal(con.allPoints().length, 5);
+    ok(con.sourceDefiner().point === con.sourcePoint());
+    ok(con.targetDefiner().point === con.targetPoint());
+   
+    con.sourceDefiner(new kendo.diagram.PathDefiner(new Point(44, 55), new Point(478, 44), new Point(-55, 0)));
+    ok(con.sourceDefiner().point.x === 44 && con.sourceDefiner().point.y === 55);
+    ok(con.sourceDefiner().left===null);
+    ok(con.sourceDefiner().right.x === -55 && con.sourceDefiner().right.y === 0);
+    
+    con.targetDefiner(new kendo.diagram.PathDefiner(new Point(44, 55), new Point(478, 102), new Point(-55, 0)));
+    ok(con.targetDefiner().point.x === 44 && con.targetDefiner().point.y === 55);
+    ok(con.targetDefiner().right===null);
+    ok(con.targetDefiner().left.x === 478 && con.targetDefiner().left.y === 102);
+});
+
 QUnit.module("Serialization - Cut/Copy/Paste", {
     setup: function () {
         $("#canvas").kendoDiagram();

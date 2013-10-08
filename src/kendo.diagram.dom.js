@@ -457,6 +457,25 @@ kendo_module({
         return new Rectangle(shapeOptions);
     };
 
+    /**
+     * The types of connections.
+     */
+    var ConnectionType = {
+
+        /**
+         * A line segments between the endpoints with the points intermediate.
+         */
+        Polyline: 0,
+
+        /**
+         * A simplified rectangular style which suits the tree layouts.
+         */
+        Cascading: 1
+    };
+
+    /**
+     * The visual link between two Shapes through the intermediate of Connectors.
+     */
     var Connection = DiagramElement.extend({
         init: function (from, to, options, model) {
             var that = this;
@@ -600,6 +619,7 @@ kendo_module({
         /**
          * Gets or sets the bounds of this connection.
          * @param value A Rect object.
+         * @remark This is automatically set in the refresh().
          * @returns {Rect}
          */
         bounds: function (value) {
@@ -633,6 +653,7 @@ kendo_module({
                         }
                     }
                 }
+                this.refresh();
             } else {
                 var pts = [];
                 for (var k = 0; k < this.definers.length; k++) {
@@ -666,7 +687,7 @@ kendo_module({
                 if (value instanceof diagram.PathDefiner) {
                     value.left = null;
                     this._sourceDefiner = value;
-                    this.sourcePoint(value.point);
+                    this.sourcePoint(value.point); // refresh implicit here
                 }
                 else {
                     throw "The sourceDefiner needs to be a PathDefiner.";
@@ -688,16 +709,16 @@ kendo_module({
         targetDefiner: function (value) {
             if (value) {
                 if (value instanceof diagram.PathDefiner) {
-                    value.left = null;
+                    value.right = null;
                     this._targetDefiner = value;
-                    this.targetPoint(value.point);
+                    this.targetPoint(value.point); // refresh implicit here
                 }
                 else {
                     throw "The sourceDefiner needs to be a PathDefiner.";
                 }
             } else {
                 if (!this._targetDefiner) {
-                    this._targetDefiner = new diagram.PathDefiner(this.sourcePoint(), null, null);
+                    this._targetDefiner = new diagram.PathDefiner(this.targetPoint(), null, null);
                 }
                 return this._targetDefiner;
             }
@@ -720,6 +741,7 @@ kendo_module({
                 }
             }
         },
+
         _hover: function (value) {
             this.line.redraw({ stroke: value ? this.options.hoveredStroke : this.options.stroke });
         },
