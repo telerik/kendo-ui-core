@@ -112,6 +112,8 @@
         <input type="button" class="diagramCommandBtn" id="deleteButton" title="Delete (DEL)" value="Delete"/>
         <input type="button" class="diagramCommandBtn" id="selectAllButton" title="Select All (CTRL+A)"
                value="SelectAll"/>
+        <input type="button" class="diagramCommandBtn" id="saveButton" title="Save As (CTRL + S)" value="Save"/>
+        <input type="button" class="diagramCommandBtn" id="loadButton" title="Load (CTRL+O)" value="Load"/>
         <span class="menu-text">Layout:</span><input id="Layouts" value="1"/>
         <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
         <input type="button" class="diagramCommandBtn" id="toFrontButton" title="To Front" value="To Front"/>
@@ -141,6 +143,7 @@
         </svg>
         <h3>#:options.name#</h3>
     </div>
+
 </script>
 
 <script>
@@ -253,6 +256,26 @@ $(function () {
     });
     $("#deleteButton").click(function (e) {
         diagram.remove(diagram.select(), true);
+    });
+    $("#selectAllButton").click(function (e) {
+        diagram.select(true);
+    });
+    $("#saveButton").click(function (e) {
+        var json = JSON.stringify(diagram.save());
+        var blob = new Blob([json], {type: "application/json"});
+        var url = URL.createObjectURL(blob);
+
+        var a = document.createElement('a');
+        a.download = "diagram.json";
+        a.href = url;
+        a.textContent = "Download diagram.json";
+        $("#toolbarDiv").append(a);
+        if (!window.open(a)) {
+            document.location.href = a;
+        }
+    });
+    $("#loadButton").click(function (e) {
+        var saved = diagram.load();
     });
     $("#selectAllButton").click(function (e) {
         diagram.select(true);

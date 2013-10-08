@@ -121,6 +121,9 @@ kendo_module({
             else {
                 return this.shape.getPosition(this.options.name);
             }
+        },
+        serialize: function(){
+            return this.options.name;
         }
     });
 
@@ -629,6 +632,10 @@ kendo_module({
                 return this._bounds;
             }
         },
+        serialize: function () {
+            // the options json object describes the shape perfectly. So this object can serve as shape serialization.
+            return deepExtend({}, this.options, {model: this.model.toString(), from: this.from.toString(), to: this.to.toString()});
+        },
 
         /**
          * Gets or sets the connection type (see ConnectionType enumeration).
@@ -964,6 +971,39 @@ kendo_module({
                 this.trigger(ZOOM);
             }
             return this._zoom;
+        },
+        save: function () {
+            var json = {}, i, shape, con;
+            deepExtend(json, {options: this.options});
+            json.shapes = [];
+            json.connections = [];
+            for (i = 0; i < this.shapes.length; i++) {
+                shape = this.shapes[i];
+                json.shapes.push({options: shape.options});
+            }
+
+            for (i = 0; i < this.connections.length; i++) {
+                con = this.connections[i];
+                json.connections.push({options: con.options, from: con.from, to: con.to});
+            }
+            return json;
+        },
+        load: function (json) {
+            var i, options, con;
+            this.options = json.options;
+            this._initialize();
+            for (i = 0; i < json.shapes.length; i++) {
+                options = json.shapes[i].options;
+                options.undoable = false;
+                this.addShape(new Shape(options));
+            }
+
+            for (i = 0; i < this.connections.length; i++) {
+                con = this.connections[i];
+                options = con.options;
+                options.undoable = false;
+                this.addConnection(new Connection(con.from, con.to, options));
+            }
         },
         getValidZoom: function (zoom) {
             return Math.min(Math.max(zoom, 0.55), 2.0); //around 0.5 something exponential happens...!?
