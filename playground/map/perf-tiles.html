@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tile loading</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <style>
+            #layer {
+                position: relative;
+            }
+
+            .k-tile {
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <button onclick="loadBatch()">Batch</button>
+        <button onclick="loadAnimationFrame()">Animation Frame</button>
+        <button onclick="loadCanvas()">Canvas</button>
+        <button onclick="clear()">Clear</button>
+        <div id="layer"></div>
+        <script>
+            var template = kendo.template;
+
+            var tileSize = 256,
+                zoom = 2,
+                size = Math.pow(2, zoom),
+                urlTemplate = template("tiles/#= zoom #/#= x #/#= y #.png"),
+                tileTemplate = template(
+                    '<img class="k-tile" unselectable="on" src="#= url #" ' +
+                    'style="left: #= left #px; top: #= top #px;"></img>'),
+                layer = document.getElementById("layer");
+
+            function loadBatch() {
+                var output = "";
+
+                for (var x = 0; x < size; x++) {
+                    for (var y = 0; y < size; y++) {
+                        output += tileTemplate({
+                            url: urlTemplate({
+                                zoom: zoom, x: x, y: y
+                            }),
+                            tileSize: tileSize,
+                            left: x * tileSize,
+                            top: y * tileSize
+                        });
+                    }
+                }
+
+                layer.innerHTML = output;
+            }
+
+            function loadAnimationFrame() {
+                for (var x = 0; x < size; x++) {
+                    for (var y = 0; y < size; y++) {
+                        var html = tileTemplate({
+                            url: urlTemplate({
+                                zoom: zoom, x: x, y: y
+                            }),
+                            tileSize: tileSize,
+                            left: x * tileSize,
+                            top: y * tileSize
+                        });
+
+                        asyncLoad(html);
+                    }
+                }
+            }
+
+            function asyncLoad(html) {
+                requestFrame(function() {
+                    $(html).appendTo(layer);
+                });
+            }
+
+            function loadCanvas() {
+                var canvas = $("<canvas />").appendTo(layer)[0];
+                canvas.width = size * tileSize;
+                canvas.height = size * tileSize;
+
+                var ctx = canvas.getContext("2d");
+                for (var x = 0; x < size; x++) {
+                    for (var y = 0; y < size; y++) {
+                        drawTile({
+                            url: urlTemplate({
+                                zoom: zoom, x: x, y: y
+                            }),
+                            ctx: ctx,
+                            tileSize: tileSize,
+                            left: x * tileSize,
+                            top: y * tileSize
+                        });
+                    }
+                }
+            }
+
+            function drawTile(options) {
+                var img = new Image();
+                var ctx = options.ctx;
+                img.onload = function() {
+                    ctx.drawImage(this, options.left, options.top, options.tileSize, options.tileSize);
+                };
+                img.src = options.url;
+            }
+
+            var requestFrame =
+                window.requestAnimationFrame       ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame    ||
+                window.oRequestAnimationFrame      ||
+                window.msRequestAnimationFrame     ||
+                function(callback) {
+                    setTimeout(callback, 10);
+                };
+
+        </script>
+    </body>
+</html>
+
