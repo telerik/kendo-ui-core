@@ -1304,6 +1304,13 @@
                     "url": "splitter/navigation.html",
                     "title": "Keyboard navigation support in Kendo UI Slider",
                     "meta": "Users can easily manipulate the behaviour of Kendo UI Slider by using different keyboard keys and combinations."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "splitter/mvvm.html",
+                    "title": "MVVM support in Kendo UI Splitter",
+                    "meta": "Events and visible MVVM binding support in Kendo UI Splitter",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
