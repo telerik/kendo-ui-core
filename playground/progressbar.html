@@ -3,6 +3,7 @@
     <head>
         <title>Progressbar Playground</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link href="../styles/web/kendo.rtl.css" rel="stylesheet" type="text/css"/>
         <link href="../styles/web/kendo.common.css" rel="stylesheet" type="text/css"/>
         <link href="../styles/web/kendo.default.css" rel="stylesheet" type="text/css"/>
 
@@ -10,233 +11,290 @@
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.progressbar.js" type="text/javascript" charset="utf-8"></script>
     <style>
+
     html
-    {
-        font: 12px sans-serif;
-    }
+{
+    font: 12px sans-serif;
+}
 
-    /* common */
+/* common */
 
-    .k-progressbar
-    {
-        display: inline-block;
-        position: relative;
-        vertical-align: middle;
-    }
+.k-progressbar
+{
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
 
-    .k-progressbar
-    {
-        border-radius: 4px;
-    }
+.k-progressbar
+{
+    border-radius: 4px;
+}
 
-    .k-progressbar-horizontal
-    {
-        width: 27em;
-        height: 1.9em;
-    }
+.k-progressbar-horizontal
+{
+    width: 27em;
+    height: 1.9em;
+}
 
-    .k-progressbar-vertical
-    {
-        width: 1.9em;
-        height: 27em;
-    }
+.k-progressbar-vertical
+{
+    width: 1.9em;
+    height: 27em;
+}
 
-    .k-progressbar > .k-state-selected
-    {
-        position: absolute;
-        left: -1px;
-        border-style: solid;
-        border-width: 1px;
-        overflow: hidden;
-    }
+.k-progressbar > .k-state-selected
+{
+    position: absolute;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+}
 
-    .k-progressbar-horizontal > .k-state-selected
-    {
-        top: -1px;
-        height: 100%;
-        border-radius: 4px 0 0 4px;
-    }
+.k-progressbar-horizontal > .k-state-selected,
+.k-rtl .k-progressbar-horizontal.k-progressbar-reverse > .k-state-selected
+{
+    left: -1px;
+    right: auto;
+    top: -1px;
+    height: 100%;
+    border-radius: 4px 0 0 4px;
+}
 
-    .k-progressbar-vertical > .k-state-selected
-    {
-        bottom: -1px;
-        width: 100%;
-        border-radius: 0 0 4px 4px;
-    }
+.k-progressbar-horizontal.k-progressbar-reverse > .k-state-selected,
+.k-rtl .k-progressbar-horizontal > .k-state-selected
+{
+    left: auto;
+    right: -1px;
+    border-radius: 0 4px 4px 0;
+}
 
-    .k-progressbar-horizontal.k-progressbar-reverse > .k-state-selected
-    {
-        left: auto;
-        right: -1px;
-        border-radius: 0 4px 4px 0;
-    }
+.k-progressbar-vertical > .k-state-selected
+{
+    left: -1px;
+    bottom: -1px;
+    width: 100%;
+    border-radius: 0 0 4px 4px;
+}
 
-    .k-progressbar-vertical.k-progressbar-reverse > .k-state-selected
-    {
-        bottom: auto;
-        top: -1px;
-        border-radius: 4px 4px 0 0;
-    }
+.k-progressbar-vertical.k-progressbar-reverse > .k-state-selected
+{
+    bottom: auto;
+    top: -1px;
+    border-radius: 4px 4px 0 0;
+}
 
-    .k-progressbar > .k-state-selected.k-complete
-    {
-        border-radius: 4px;
-    }
+.k-progressbar > .k-state-selected.k-complete,
+.k-rtl .k-progressbar > .k-state-selected.k-complete
+{
+    border-radius: 4px;
+}
 
-    .k-progressbar > .k-reset
-    {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        position: absolute;
-        left: -1px;
-        top: -1px;
-        width: 100%;
-        height: 100%;
-        border-radius: 4px;
-        white-space: nowrap;
-    }
+.k-progressbar > .k-reset
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    white-space: nowrap;
+}
 
-    .k-progressbar-horizontal .k-item
-    {
-        display: inline-block;
-        height: 100%;
-        border-style: solid;
-        border-width: 1px 1px 1px 0;
-    }
+.k-rtl .k-progressbar > .k-reset
+{
+    left: auto;
+    right: -1px;
+}
 
-    .k-progressbar-horizontal .k-first
-    {
-        border-radius: 4px 0 0 4px;
-        border-left-width: 1px;
-    }
+.k-progressbar-horizontal .k-item
+{
+    display: inline-block;
+    height: 100%;
+    border-style: solid;
+}
 
-    .k-progressbar-horizontal .k-last
-    {
-        border-radius: 0 4px 4px 0;
-    }
+.k-progressbar-horizontal .k-item,
+.k-rtl .k-progressbar-horizontal.k-progressbar-reverse .k-item
+{
+    border-width: 1px 1px 1px 0;
+}
 
-    .k-progressbar-horizontal.k-progressbar-reverse .k-item
-    {
-        border-width: 1px 0 1px 1px;
-    }
+.k-progressbar-horizontal.k-progressbar-reverse .k-item,
+.k-rtl .k-progressbar-horizontal .k-item
+{
+    border-width: 1px 0 1px 1px;
+}
 
-    .k-progressbar-horizontal.k-progressbar-reverse .k-last
-    {
-        border-right-width: 1px;
-    }
+.k-progressbar-horizontal .k-first,
+.k-rtl .k-progressbar-horizontal .k-last,
+.k-rtl .k-progressbar-horizontal.k-progressbar-reverse .k-last
+{
+    border-radius: 4px 0 0 4px;
+    border-left-width: 1px;
+}
 
-    .k-progressbar-vertical .k-item
-    {
-        width: 100%;
-        border-style: solid;
-        border-width: 1px 1px 0 1px;
-    }
+.k-progressbar-horizontal .k-last,
+.k-rtl .k-progressbar-horizontal .k-first
+{
+    border-radius: 0 4px 4px 0;
+}
 
-    .k-progressbar-vertical .k-first
-    {
-        border-radius: 4px 4px 0 0;
-    }
+.k-progressbar-horizontal.k-progressbar-reverse .k-last,
+.k-rtl .k-progressbar-horizontal .k-first
+{
+    border-right-width: 1px;
+}
 
-    .k-progressbar-vertical .k-last
-    {
-        border-radius: 0 0 4px 4px;
-        border-bottom-width: 1px;
-    }
+.k-progressbar-vertical .k-item
+{
+    width: 100%;
+    border-style: solid;
+    border-width: 1px 1px 0 1px;
+}
 
-    .k-progressbar-vertical.k-progressbar-reverse .k-item
-    {
-        border-width: 0 1px 1px 1px;
-    }
+.k-progressbar-vertical .k-first
+{
+    border-radius: 4px 4px 0 0;
+}
 
-    .k-progressbar-vertical.k-progressbar-reverse .k-first
-    {
-        border-top-width: 1px;
-    }
+.k-progressbar-vertical .k-last
+{
+    border-radius: 0 0 4px 4px;
+    border-bottom-width: 1px;
+}
 
-    .k-progress-status-wrap
-    {
-        position: absolute;
-        top: -1px;
-        left: -1px;
-        border:1px solid transparent;
-        line-height: 2em;
-        width: 100%;
-        height: 100%;
-        text-align: right;
-    }
+.k-progressbar-vertical.k-progressbar-reverse .k-item
+{
+    border-width: 0 1px 1px 1px;
+}
 
-    .k-progressbar-horizontal.k-progressbar-reverse .k-progress-status-wrap
-    {
-        left: auto;
-        right: -1px;
-        text-align: left;
-    }
+.k-progressbar-vertical.k-progressbar-reverse .k-first
+{
+    border-top-width: 1px;
+}
 
-    .k-progressbar-vertical .k-progress-status-wrap
-    {
-        top: auto;
-        bottom: -1px;
-    }
+.k-progress-status-wrap
+{
+    position: absolute;
+    top: -1px;
+    border:1px solid transparent;
+    line-height: 2em;
+    width: 100%;
+    height: 100%;
+}
 
-    .k-progress-status
-    {
-        display: inline-block;
-        white-space:nowrap;
-    }
+.k-progress-status-wrap,
+.k-rtl .k-progressbar-horizontal.k-progressbar-reverse .k-progress-status-wrap
+{
+    left: -1px;
+    right: auto;
+    text-align: right;
+}
 
-    .k-progress-status
-    {
-        padding: 0 .5em;
-    }
+.k-progressbar-horizontal.k-progressbar-reverse .k-progress-status-wrap,
+.k-rtl .k-progressbar-horizontal .k-progress-status-wrap
+{
+    left: auto;
+    right: -1px;
+    text-align: left;
+}
 
-    .k-progressbar-vertical .k-progress-status
-    {
-        -webkit-transform: rotate(-90deg) translateX(-100%);    
-        -moz-transform: rotate(-90deg) translateX(-100%);
-        -ms-transform: rotate(-90deg) translateX(-100%);
-        -o-transform: rotate(-90deg) translateX(-100%);
-        transform: rotate(-90deg) translateX(-100%);
-        -webkit-transform-origin: 0 0;
-        -moz-transform-origin: 0 0;
-        -ms-transform-origin: 0 0;
-        -o-transform-origin: 0 0;
-        transform-origin: 0 0;
-    }
+.k-progressbar-vertical .k-progress-status-wrap
+{
+    top: auto;
+    bottom: -1px;
+}
 
-    .k-ie7 .k-progressbar-vertical .k-progress-status
-    {
-        writing-mode: tb-rl;
-        padding: .5em 0;
-    }
+.k-progressbar-vertical.k-progressbar-reverse .k-progress-status-wrap
+{
+    bottom: auto;
+    top: -1px;
+}
 
-    .k-ie8 .k-progressbar-vertical .k-progress-status
-    {
-        writing-mode: bt-lr;
-        padding: .5em 0;
-    }
+.k-progress-status
+{
+    display: inline-block;
+    padding: 0 .5em;
+}
 
-    .k-ie7 .k-progressbar,
-    .k-ie7 .k-progressbar-horizontal .k-item,
-    .k-ie7 .k-progress-status
-    {
-        display: inline;
-        zoom: 1;
-    }
+.k-progressbar-vertical.k-progressbar-reverse .k-progress-status
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
 
-    /* theme */
+.k-progressbar-vertical .k-progress-status
+{
+    -webkit-transform: rotate(-90deg) translateX(-100%);
+    -moz-transform: rotate(-90deg) translateX(-100%);
+    -ms-transform: rotate(-90deg) translateX(-100%);
+    -o-transform: rotate(-90deg) translateX(-100%);
+    transform: rotate(-90deg) translateX(-100%);
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    transform-origin: 0 0;
+}
 
-    .k-progressbar
-    {
-        background-color: #f0f0f0;
-    }
+.k-progressbar-vertical.k-progressbar-reverse .k-progress-status
+{
+    -webkit-transform: rotate(90deg) translateX(-100%);
+    -moz-transform: rotate(90deg) translateX(-100%);
+    -ms-transform: rotate(90deg) translateX(-100%);
+    -o-transform: rotate(90deg) translateX(-100%);
+    transform: rotate(90deg) translateX(-100%);
+    -webkit-transform-origin: 0 100%;
+    -moz-transform-origin: 0 100%;
+    -ms-transform-origin: 0 100%;
+    -o-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+}
 
-    /* custom */
+.k-ie7 .k-progressbar-vertical .k-progress-status
+{
+    writing-mode: tb-rl;
+    padding: .5em 0;
+}
 
-    .k-ie7 .k-progressbar
-    {
-        margin: .4em;
-    }
+.k-ie8 .k-progressbar-vertical .k-progress-status
+{
+    writing-mode: bt-lr;
+    padding: .5em 0;
+}
+
+.k-ie7 .k-progressbar,
+.k-ie7 .k-progressbar-horizontal .k-item,
+.k-ie7 .k-progress-status
+{
+    display: inline;
+    zoom: 1;
+}
+
+/* theme */
+
+.k-progressbar
+{
+    background-color: #f0f0f0;
+}
+
+/* custom */
+
+.k-ie7 .k-progressbar
+{
+    margin: .4em;
+}
+
+.k-rtl
+{
+    direction: rtl;
+}
+
 
 
     /* Kamen additions */
@@ -270,13 +328,22 @@
         border-bottom: 0;
     }
 
-    /*.k-progress-status
+    /* Mitko */
+    .k-progress-status
     {
         min-width: 10px;
-    }*/
+        white-space:nowrap;
+    }
+
+    /*To do indeterminate styles*/
 </style>
 </head>
     <body>
+        <div class="k-rtl">
+            <div id="rtlProgressBar"></div>
+            <div id="rtlchunkProgressBar"></div>
+        </div>
+
         <div>
            <div id="pb1"></div>
            <div id="pb2"></div>
@@ -287,8 +354,10 @@
            <br><br><br>
            <script>
 
-
             $(function(){
+                $("#rtlProgressBar").kendoProgressBar();
+                $("#rtlchunkProgressBar").kendoProgressBar({ type: "chunk", chunkCount: 4 });
+
                 var pb1 = $("#pb1").kendoProgressBar({ value: 10, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
                 var pb2 = $("#pb2").kendoProgressBar({ value: 70, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
                 var pb3 = $("#pb3").kendoProgressBar({ value: 30, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
@@ -325,11 +394,11 @@
         <script>
             $("#progressbar").kendoProgressBar({
                 min: 0,
-                max: 100,
-                value: 10,
+                max: 300,
+                value: 0,
                 enable: true,
                 showStatus: true,
-                type: "percentage",
+                type: "percent",
                 reverse: false,
                 start: function(e) {
                     console.log("Start event. Value: " + e.value);
@@ -342,15 +411,15 @@
                 },
                 //animation: false
                 "animation": {
-                    duration: 100
+                    duration: 600
                 }
             });
 
             $("#progressbar-chunk").kendoProgressBar({
                 type: "chunk",
-                chunkCount: 17,
+                chunkCount: 5,
                 min: 0,
-                max: 100,
+                max: 10,
                 value: false,
                 enable: true,
                 reverse: false,

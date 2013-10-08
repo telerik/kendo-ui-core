@@ -146,6 +146,9 @@
                     type: "value",
                     start: function(){
                         startFired = true;
+                    },
+                    animation: {
+                        duration: 10
                     }
                 });
 
@@ -154,7 +157,7 @@
                 setTimeout(function(){
                     ok(startFired);
                     start();
-                }, 100);
+                }, 40);
             });
 
             asyncTest("Start event is fired only once (type='value')", function() {
@@ -167,6 +170,9 @@
                     type: "value",
                     start: function(){
                         startFiredCounter++;
+                    },
+                    animation: {
+                        duration: 10
                     }
                 });
 
@@ -176,7 +182,7 @@
                 setTimeout(function(){
                     equal(startFiredCounter, 1);
                     start();
-                }, 100);
+                }, 50);
             });
 
             asyncTest("Start event is fired when value is changed for the first time (type='percent')", function() {
@@ -189,6 +195,9 @@
                     type: "percent",
                     start: function(){
                         startFired = true;
+                    },
+                    animation: {
+                        duration: 10
                     }
                 });
 
@@ -197,7 +206,7 @@
                 setTimeout(function(){
                     ok(startFired);
                     start();
-                }, 100);
+                }, 30);
             });
 
             asyncTest("Start event is fired only once (type='percent')", function() {
@@ -210,6 +219,9 @@
                     type: "percent",
                     start: function(){
                         startFiredCounter++;
+                    },
+                    animation: {
+                        duration: 10
                     }
                 });
 
@@ -219,7 +231,7 @@
                 setTimeout(function(){
                     equal(startFiredCounter, 1);
                     start();
-                }, 100);
+                }, 40);
             });
 
             asyncTest("Start event is fired when value is changed for the first time (type='chunk')", function() {
@@ -241,7 +253,7 @@
                 setTimeout(function(){
                     ok(startFired);
                     start();
-                }, 100);
+                }, 30);
             });
 
             asyncTest("Start event is fired only once (type='chunk')", function() {
@@ -264,7 +276,7 @@
                 setTimeout(function(){
                     equal(startFiredCounter, 1);
                     start();
-                }, 100);
+                }, 40);
             });
 
             asyncTest("Change event is fired only once per value (type='chunk')", function() {
@@ -287,7 +299,7 @@
                 setTimeout(function(){
                     equal(changeFiredCounter, 1);
                     start();
-                }, 100);
+                }, 40);
             });
 
             asyncTest("Change event is fired only once per value (type='value')", function() {
@@ -310,17 +322,17 @@
                 setTimeout(function(){
                     equal(changeFiredCounter, 1);
                     start();
-                }, 100);
+                }, 30);
             });
 
-            asyncTest("Change event is fired only once per value (type='percentage')", function() {
+            asyncTest("Change event is fired only once per value (type='percent')", function() {
                 var changeFiredCounter = 0;
 
                 pb = createProgressbar({
                     min: 20,
                     max: 60,
                     value: 20,
-                    type: "percentage",
+                    type: "percent",
                     change: function(){
                         changeFiredCounter++;
                     },
@@ -333,17 +345,17 @@
                 setTimeout(function(){
                     equal(changeFiredCounter, 1);
                     start();
-                }, 100);
+                }, 30);
             });
 
-            asyncTest("Change event is fired only once per value when trying to set value bigger than max (type='percentage')", function() {
+            asyncTest("Change event is fired only once per value when trying to set value bigger than max (type='percent')", function() {
                 var changeFiredCounter = 0;
 
                 pb = createProgressbar({
                     min: 20,
                     max: 60,
                     value: 20,
-                    type: "percentage",
+                    type: "percent",
                     change: function(){
                         changeFiredCounter++;
                     },
@@ -356,7 +368,7 @@
                 setTimeout(function(){
                     equal(changeFiredCounter, 1);
                     start();
-                }, 100);
+                }, 30);
             });
 
             asyncTest("Change event is fired only once per value when trying to set value bigger than max (type='value')", function() {
@@ -379,7 +391,7 @@
                 setTimeout(function(){
                     equal(changeFiredCounter, 1);
                     start();
-                }, 100);
+                }, 30);
             });
 
             asyncTest("Change event is fired only once per value when trying to set value bigger than max (type='chunk')", function() {
@@ -402,17 +414,17 @@
                 setTimeout(function(){
                     equal(changeFiredCounter, 1);
                     start();
-                }, 100);
+                }, 30);
             });
 
-            asyncTest("Change event is fired only once per value when trying to set value smaller than min (type='percentage')", function() {
+            asyncTest("Change event is fired only once per value when trying to set value smaller than min (type='percent')", function() {
                 var changeFiredCounter = 0;
 
                 pb = createProgressbar({
                     min: 20,
                     max: 60,
                     value: 30,
-                    type: "percentage",
+                    type: "percent",
                     change: function(){
                         changeFiredCounter++;
                     },
@@ -425,7 +437,7 @@
                 setTimeout(function(){
                     equal(changeFiredCounter, 1);
                     start();
-                }, 100);
+                }, 30);
             });
 
             asyncTest("Change event is fired only once per value when trying to set value smaller than min (type='value')", function() {
@@ -448,7 +460,7 @@
                 setTimeout(function(){
                     equal(changeFiredCounter, 1);
                     start();
-                }, 100);
+                }, 30);
             });
 
             asyncTest("Change event is fired only once per value when trying to set value smaller than min (type='chunk')", function() {
@@ -471,7 +483,7 @@
                 setTimeout(function(){
                     equal(changeFiredCounter, 1);
                     start();
-                }, 100);
+                }, 30);
             });
 
             asyncTest("Complete event is not fired before max is reached (type='value')", function(){
@@ -495,7 +507,7 @@
                 setTimeout(function(){
                     ok(!completeFired);
                     start();
-                }, 100);
+                }, 40);
             });
 
             asyncTest("Complete event is fired when max is reached (type='value')", function(){
@@ -519,7 +531,7 @@
                 setTimeout(function(){
                     ok(completeFired);
                     start();
-                }, 100);
+                }, 40);
             });
 
             asyncTest("Complete event is fired only once (type='value')", function(){
@@ -543,7 +555,7 @@
                 setTimeout(function(){
                     equal(completeFiredCounter, 1);
                     start();
-                }, 100);
+                }, 40);
             });
 
             asyncTest("Complete event is not fired before max is reached (type='percent')", function(){
@@ -567,7 +579,7 @@
                 setTimeout(function(){
                     ok(!completeFired);
                     start();
-                }, 100);
+                }, 40);
             });
 
             asyncTest("Complete event is fired when max is reached (type='percent')", function(){
@@ -591,7 +603,7 @@
                 setTimeout(function(){
                     ok(completeFired);
                     start();
-                }, 100);
+                }, 40);
             });
 
             asyncTest("Complete event is fired only once (type='percent')", function(){
@@ -615,7 +627,7 @@
                 setTimeout(function(){
                     equal(completeFiredCounter, 1);
                     start();
-                }, 100);
+                }, 40);
             });
 
             asyncTest("Complete event is not fired before max is reached (type='chunk')", function(){
@@ -639,7 +651,7 @@
                 setTimeout(function(){
                     ok(!completeFired);
                     start();
-                }, 100);
+                }, 40);
             });
 
             asyncTest("Complete event is fired when max is reached (type='chunk')", function(){
@@ -663,7 +675,7 @@
                 setTimeout(function(){
                     ok(completeFired);
                     start();
-                }, 100);
+                }, 40);
             });
 
             asyncTest("Complete event is fired only once (type='chunk')", function(){
@@ -687,7 +699,7 @@
                 setTimeout(function() {
                     equal(completeFiredCounter, 1);
                     start();
-                }, 100);
+                }, 40);
             });
 
             asyncTest("k-progressbar-indeterminate class is set correctly when passed value is false", function(){
@@ -703,7 +715,7 @@
                 setTimeout(function() {
                     ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
                     start();
-                }, 100);
+                }, 30);
             });
 
             asyncTest("k-progressbar-indeterminate class is removed when previous value was false", function(){
@@ -720,7 +732,7 @@
                 setTimeout(function() {
                     ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
                     start();
-                }, 100);
+                }, 30);
             });
 
             asyncTest("k-progressbar-indeterminate class is removed when initial value was false", function(){
@@ -736,7 +748,41 @@
                 setTimeout(function() {
                     ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
                     start();
-                }, 100);
+                }, 30);
+            });
+
+            asyncTest("One percent is calculated correctly", function(){
+                pb = createProgressbar({
+                    min: 0,
+                    max: 300,
+                    value: 0,
+                    animation: false
+                });
+
+                pb.value(40);
+
+                setTimeout(function() {
+                    equal(pb._onePercent, 3);
+
+                    start();
+                }, 30);
+            });
+
+            asyncTest("Old value is set correctly", function(){
+                pb = createProgressbar({
+                    min: 0,
+                    max: 300,
+                    value: 0,
+                    animation: false
+                });
+
+                pb.value(40);
+
+                setTimeout(function() {
+                    equal(pb._oldValue, 40);
+
+                    start();
+                }, 30);
             });
 
 
@@ -878,6 +924,106 @@
                 pb.enable(false);
 
                 ok(pb.wrapper.hasClass("k-state-disabled"));
+            });
+
+
+            // -----------------------------------------------------------------------------------
+            // -----------------------------------------------------------------------------------
+            module("setOptions", {
+                setup: function() {
+                    moduleSetup();
+                },
+                teardown: function() {
+                    moduleTeardown();
+                }
+            });
+
+            test("Animation is set to false in options", function(){
+                pb = createProgressbar({
+                    animation: {
+                        duration: 500
+                    },
+                    value: 30
+                });
+
+                pb.setOptions({animation: false});
+
+                equal(pb.options.animation, false);
+            });
+
+            test("Private animation object duration is set to 0", function() {
+                pb = createProgressbar({
+                    animation: {
+                        duration: 500
+                    },
+                    value: 30
+                });
+
+                pb.setOptions({animation: false});
+
+                var expectedAnimation = {duration: 0};
+
+                deepEqual(pb._animation, expectedAnimation);
+            });
+
+            test("Animation duration is set correctly in options", function(){
+                pb = createProgressbar({
+                    animation: false,
+                    value: 30
+                });
+
+                var newAnimation = {
+                    duration: 550
+                };
+
+                pb.setOptions({animation: newAnimation});
+
+                deepEqual(pb.options.animation, newAnimation);
+            });
+
+            test("Private animation object duration is set correctly", function(){
+                pb = createProgressbar({
+                    animation: false,
+                    value: 30
+                });
+
+                var newAnimation = {
+                    duration: 550
+                };
+
+                pb.setOptions({animation: newAnimation});
+
+                deepEqual(pb._animation, newAnimation);
+            });
+
+            test("Type is changed correctly from value to percent", 2, function() {
+                pb = createProgressbar({
+                    animation: false,
+                    value: 150,
+                    min: 0,
+                    max: 300,
+                    type: "value"
+                });
+
+                pb.setOptions({type: "percent"});
+
+                equal(pb.wrapper.find(".k-progress-status:first").text(), "50%");
+                equal(pb.wrapper.find(".k-progress-status:last").text(), "50%");
+            });
+
+            test("Type is changed correctly from percent to value", 2, function() {
+                pb = createProgressbar({
+                    animation: false,
+                    value: 150,
+                    min: 0,
+                    max: 300,
+                    type: "percent"
+                });
+
+                pb.setOptions({type: "value"});
+
+                equal(pb.wrapper.find(".k-progress-status:first").text(), "150");
+                equal(pb.wrapper.find(".k-progress-status:last").text(), "150");
             });
         </script>
     </body>

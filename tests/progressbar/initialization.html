@@ -136,7 +136,7 @@
                 setTimeout(function() {
                     ok(!startFired);
                     start();
-                }, 100);
+                }, 50);
             });
 
             test("Progress direction is initially set to forward", function() {
@@ -196,10 +196,10 @@
                 ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
             });
 
-            test("k-progressbar-indeterminate class is set correctly when initial value is false (type='percentage')", function() {
+            test("k-progressbar-indeterminate class is set correctly when initial value is false (type='percent')", function() {
                 var pb = new ProgressBar(container, {
                     value: false,
-                    type: "percentage"
+                    type: "percent"
                 });
 
                 ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
@@ -223,10 +223,10 @@
                 ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
             });
 
-            test("k-progressbar-indeterminate class is not set when initial value is not false (type='percentage')", function() {
+            test("k-progressbar-indeterminate class is not set when initial value is not false (type='percent')", function() {
                 var pb = new ProgressBar(container, {
                     value: 20,
-                    type: "percentage"
+                    type: "percent"
                 });
 
                 ok(!pb.wrapper.hasClass("k-progressbar-indeterminate"));
@@ -266,10 +266,10 @@
                 equal(pb.wrapper.children(".k-progress-status-wrap").text(), pb.options.min);
             });
 
-            test("Initial value false correctly sets status holder text to min (type='percentage')", function() {
+            test("Initial value false correctly sets status holder text to min (type='percent')", function() {
                 var pb = new ProgressBar(container, {
                     value: false,
-                    type: "percentage"
+                    type: "percent"
                 });
 
                 equal(pb.wrapper.children(".k-progress-status-wrap").text(), pb.options.min + "%");
@@ -295,11 +295,11 @@
                 equal(pb.options.value, false);
             });
 
-            test("ProgressBar is correctly disabled and initial value is set to false (type='percentage')", 3, function() {
+            test("ProgressBar is correctly disabled and initial value is set to false (type='percent')", 3, function() {
                 var pb = new ProgressBar(container, {
                     value: false,
                     enable: false,
-                    type: "percentage"
+                    type: "percent"
                 });
 
                 ok(pb.wrapper.hasClass("k-progressbar-indeterminate"));
