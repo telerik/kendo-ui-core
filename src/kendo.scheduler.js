@@ -752,7 +752,7 @@ kendo_module({
             kendo.Observable.fn.init.call(this);
 
             this.element = element;
-            this.options = options;
+            this.options = extend(true, {}, this.options, options);
         },
 
         fields: function(editors, model) {
@@ -813,6 +813,13 @@ kendo_module({
             this.pane = kendo.mobile.ui.Pane.wrap(this.element);
             this.view = this.pane.view();
             this._actionSheetButtonTemplate = kendo.template('<li class="k-button #=className#"><a #=attr# href="\\#">#:text#</a></li>');
+        },
+
+        options: {
+            animations: {
+                left: "slide",
+                right: "slide:right"
+            }
         },
 
         destroy: function() {
@@ -970,11 +977,11 @@ kendo_module({
 
                         that.trigger(name, { container: container, model: model });
                     } else {
-                        pane.navigate("#edit");
+                        pane.navigate("#edit", that.options.animations.right);
                     }
                 });
 
-                pane.navigate(view);
+                pane.navigate(view, that.options.animations.left);
 
             } else {
                 this.trigger("cancel", { container: container, model: model });
@@ -989,7 +996,7 @@ kendo_module({
 
         close: function() {
             if (this.container) {
-                this.pane.navigate(""/*, "slide"*/);
+                this.pane.navigate("", this.options.animations.right);
 
                 var views = this._views();
                 var view;

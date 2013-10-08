@@ -137,6 +137,8 @@
             test("edit view is removed", 1, function() {
                 var scheduler = setup();
 
+                scheduler._editor.options.animations = {};
+
                 scheduler.editEvent(scheduler.dataSource.at(0));
                 scheduler.cancelEvent();
 
