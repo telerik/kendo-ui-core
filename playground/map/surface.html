@@ -27,7 +27,8 @@
     var Class = kendo.Class,
         Observable = kendo.Observable,
         ObservableArray = kendo.data.ObservableArray,
-        ObservableObject = kendo.data.ObservableObject;
+        ObservableObject = kendo.data.ObservableObject,
+        getter = kendo.getter;
 
     var dataviz = kendo.dataviz,
         append = dataviz.append,
@@ -135,8 +136,8 @@
         _setOptions: noop
     });
 
-    // TODO: Rethink method name & signature
-    Node.load = function(primitives) {
+    // TODO: Do we need reference to the Surface / state for special nodes like definitions?
+    Node.map = function(primitives) {
         var result = [];
 
         for (var i = 0; i < primitives.length; i++) {
@@ -151,7 +152,7 @@
             }
 
             if (node.childNodes && children && children.length > 0) {
-                append(node.childNodes, Node.load(children));
+                append(node.childNodes, Node.map(children));
             }
 
             result.push(node);
@@ -203,7 +204,7 @@
 
             // TODO: Test different scenarios for synchronization
             if (e.action === "add") {
-                append(group.childNodes, Node.load(e.items));
+                append(group.childNodes, Node.map(e.items));
             } else if (e.action === "remove") {
                 group.childNodes.splice(e.index, e.items.length);
             }
@@ -228,6 +229,11 @@
             Node.fn.init.call(this, source);
 
             this.source.points.bind("change", proxy(this._setPoints, this));
+        },
+
+        attributeMap: {
+            "fill.color": "fill",
+            "stroke.color": "stroke"
         },
 
         renderId: function() {
@@ -285,18 +291,14 @@
         },
 
         _setOptions: function(e) {
-            if (this.element) {
-                // TODO: Mapping
-                if (e.field === "fill.color") {
-                    $(this.element).attr({
-                        "fill": this.source.options.fill
-                    });
-                }
-                if (e.field === "stroke.color") {
-                    $(this.element).attr({
-                        "stroke": this.source.options.stroke.color
-                    });
-                }
+            var element = this.element,
+                options = this.source.options,
+                name = this.attributeMap[e.field];
+
+            if (element && name) {
+                $(element).attr(
+                    name, getter(e.field)(options)
+                );
             }
         }
     });
@@ -322,7 +324,7 @@
         ],
 
         append: function() {
-            append(this.nodes, Node.load(arguments));
+            append(this.nodes, Node.map(arguments));
         },
 
         clear: function() {
