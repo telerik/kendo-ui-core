@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = new DataSourceResult('sqlite:../../sample.db');
 
-    echo json_encode($result->read('Products', array('ProductName', 'UnitPrice', 'UnitsInStock'), $request));
+    echo json_encode($result->read('Customers', array('ContactName', 'ContactTitle', 'CompanyName', 'Country'), $request));
 
     exit;
 }
@@ -31,18 +31,22 @@ $transport ->read($read)
 
 $model = new \Kendo\Data\DataSourceSchemaModel();
 
-$productNameField = new \Kendo\Data\DataSourceSchemaModelField('ProductName');
-$productNameField->type('string');
+$contactNameField = new \Kendo\Data\DataSourceSchemaModelField('ContactName');
+$contactNameField->type('string');
 
-$unitPriceField = new \Kendo\Data\DataSourceSchemaModelField('UnitPrice');
-$unitPriceField->type('number');
+$contactTitleField = new \Kendo\Data\DataSourceSchemaModelField('ContactTitle');
+$contactTitleField->type('string');
 
-$unitsInStockField = new \Kendo\Data\DataSourceSchemaModelField('UnitsInStock');
-$unitsInStockField->type('number');
+$companyNameField = new \Kendo\Data\DataSourceSchemaModelField('CompanyName');
+$companyNameField->type('string');
 
-$model->addField($productNameField)
-      ->addField($unitPriceField)
-      ->addField($unitsInStockField);
+$countryField = new \Kendo\Data\DataSourceSchemaModelField('Country');
+$countryField->type('string');
+
+$model->addField($contactNameField)
+      ->addField($contactTitleField)
+      ->addField($companyNameField)
+      ->addField($countryField);
 
 $schema = new \Kendo\Data\DataSourceSchema();
 $schema->data('data')
@@ -54,7 +58,7 @@ $schema->data('data')
 $dataSource = new \Kendo\Data\DataSource();
 
 $dataSource->transport($transport)
-           ->pageSize(20)
+           ->pageSize(10)
            ->serverPaging(true)
            ->serverSorting(true)
            ->serverGrouping(true)
@@ -62,29 +66,52 @@ $dataSource->transport($transport)
 
 $grid = new \Kendo\UI\Grid('grid');
 
-$productName = new \Kendo\UI\GridColumn();
-$productName->field('ProductName')
-            ->title('Product Name');
+$contactName = new \Kendo\UI\GridColumn();
+$contactName->field('ContactName')
+            ->title('Contact Name')
+            ->width(140);
+            
+$contactTitle = new \Kendo\UI\GridColumn();
+$contactTitle->field('ContactTitle')
+            ->title('Contact Title')
+            ->width(190);            
 
-$unitPrice = new \Kendo\UI\GridColumn();
-$unitPrice->field('UnitPrice')
-          ->format('{0:c}')
-          ->width(150)
-          ->title('Unit Price');
+$companyName = new \Kendo\UI\GridColumn();
+$companyName->field('CompanyName')
+            ->title('Company Name');
+            
+$Country = new \Kendo\UI\GridColumn();
+$Country->field('Country')
+        ->width(110);            
 
-$unitsInStock = new \Kendo\UI\GridColumn();
-$unitsInStock->field('UnitsInStock')
-          ->width(150)
-          ->title('Units In Stock');
-
-$grid->addColumn($productName, $unitPrice, $unitsInStock)
-     ->dataSource($dataSource)
-     ->height(400)
+$pageable = new Kendo\UI\GridPageable();
+$pageable->refresh(true)
+      ->pageSizes(true)
+      ->buttonCount(5);
+        
+$grid->addColumn($contactName, $contactTitle, $companyName, $Country)
+     ->dataSource($dataSource)     
      ->sortable(true)
      ->groupable(true)
-     ->pageable(true);
+     ->pageable($pageable)
+     ->attr('style', 'height:380px');
+      
+?>
 
+<div id="clientsDb">
+<?php
 echo $grid->render();
 ?>
+</div>  
+
+<style scoped>
+    #clientsDb {
+        width: 692px;
+        height: 413px;
+        margin: 30px auto;
+        padding: 51px 4px 0 4px;
+        background: url('../../content/web/grid/clientsDb.png') no-repeat 0 0;
+    }
+</style>
 
 <?php require_once '../../include/footer.php'; ?>

@@ -27,7 +27,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult Index()
         {
-            return View(productService.Read());
+            return View();
         }
 
         public ActionResult Products_Read([DataSourceRequest] DataSourceRequest request)
@@ -38,6 +38,31 @@ namespace Kendo.Mvc.Examples.Controllers
         public ActionResult Orders_Read([DataSourceRequest]DataSourceRequest request)
         {
             return Json(GetOrders().ToDataSourceResult(request));
+        }
+
+        public ActionResult Customers_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            return Json(GetCustomers().ToDataSourceResult(request));
+        }
+
+        private static IEnumerable<CustomerViewModel> GetCustomers()
+        {
+            var northwind = new SampleEntities();
+            return northwind.Customers.Select(customer => new CustomerViewModel
+            {
+                CustomerID = customer.CustomerID,
+                CompanyName = customer.CompanyName,
+                ContactName = customer.ContactName,
+                ContactTitle = customer.ContactTitle,
+                Address = customer.Address,
+                City = customer.City,
+                Region = customer.Region,
+                PostalCode = customer.PostalCode,
+                Country = customer.Country,
+                Phone = customer.Phone,
+                Fax = customer.Fax,
+                Bool = customer.Bool
+            });
         }
 
         private static IEnumerable<OrderViewModel> GetOrders()

@@ -1,21 +1,35 @@
-@model IEnumerable<Kendo.Mvc.Examples.Models.ProductViewModel>
 
-@(Html.Kendo().Grid(Model)    
-    .Name("Grid")
-    .Columns(columns =>
-    {
-        columns.Bound(p => p.ProductID).Groupable(false);
-        columns.Bound(p => p.ProductName);
-        columns.Bound(p => p.UnitPrice);
-        columns.Bound(p => p.UnitsInStock);
-    })
-    .Groupable()
-    .Pageable()
-    .Sortable()
-    .Scrollable()
-    .Filterable()
-    .DataSource(dataSource => dataSource
-        .Ajax()
-        .Read(read => read.Action("Products_Read", "Grid"))
+<div id="clientsDb">
+    @(Html.Kendo().Grid<Kendo.Mvc.Examples.Models.CustomerViewModel>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.ContactName).Width(140);
+            columns.Bound(c => c.ContactTitle).Width(190);
+            columns.Bound(c => c.CompanyName);
+            columns.Bound(c => c.Country).Width(110);
+        })
+        .HtmlAttributes(new { style = "height: 380px;" })
+        .Scrollable()
+        .Groupable()
+        .Sortable()
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("Customers_Read", "Grid"))
+        )
     )
-)
+</div>
+
+<style scoped>
+    #clientsDb {
+        width: 692px;
+        height: 413px;
+        margin: 30px auto;
+        padding: 51px 4px 0 4px;
+        background: url('@Url.Content("~/content/web/grid/clientsDb.png")') no-repeat 0 0;
+    }
+</style>
