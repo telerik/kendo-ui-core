@@ -23,7 +23,7 @@
                 Box2D = dataviz.Box2D,
                 categoriesCount = dataviz.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
-                stepLineChart,
+                lineChart,
                 root,
                 view,
                 pointCoordinates,
@@ -32,13 +32,13 @@
             function setupLineChart(plotArea, options) {
                 view = new ViewStub();
 
-                stepLineChart = new dataviz.StepLineChart(plotArea, options);
+                lineChart = new dataviz.LineChart(plotArea, options);
 
                 root = new dataviz.RootElement();
-                root.append(stepLineChart);
+                root.append(lineChart);
 
-                stepLineChart.reflow();
-                stepLineChart.getViewElements(view);
+                lineChart.reflow();
+                lineChart.getViewElements(view);
                 pointCoordinates = mapPoints(view.log.path[0].points);
             }
 
@@ -69,9 +69,9 @@
             }
 
             (function() {
-                var positiveSeries = { data: [1, 2], labels: {} },
-                    negativeSeries = { data: [-1, -2], labels: {} },
-                    sparseSeries = { data: [1, 2, undefined, 2], width: 0 },
+                var positiveSeries = { data: [1, 2], style: "step", labels: {} },
+                    negativeSeries = { data: [-1, -2], style: "step", labels: {} },
+                    sparseSeries = { data: [1, 2, undefined, 2], style: "step", width: 0 },
                     VALUE_AXIS_MAX = 2,
                     CATEGORY_AXIS_Y = 2;
 
@@ -97,25 +97,25 @@
                     }
                 });
 
-                test("Creates points for stepLineChart data points", function() {
-                    equal(stepLineChart.points.length, positiveSeries.data.length);
+                test("Creates points for lineChart data points", function() {
+                    equal(lineChart.points.length, positiveSeries.data.length);
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    deepEqual(stepLineChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
+                    deepEqual(lineChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    deepEqual(stepLineChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
+                    deepEqual(lineChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
                 });
 
                 test("Reports number of categories", function() {
                     setupLineChart(plotArea, {series: [ positiveSeries ]});
-                    equal(categoriesCount(stepLineChart.options.series), positiveSeries.data.length);
+                    equal(categoriesCount(lineChart.options.series), positiveSeries.data.length);
                 });
 
                 test("points are distributed across category axis", function() {
-                    var pointsX = $.map(stepLineChart.points, function(point) {
+                    var pointsX = $.map(lineChart.points, function(point) {
                         return point.box.x1;
                     });
 
@@ -123,7 +123,7 @@
                 });
 
                 test("points are aligned to category axis", function() {
-                    var pointsY = $.map(stepLineChart.points, function(point) {
+                    var pointsY = $.map(lineChart.points, function(point) {
                         return point.box.y2;
                     });
 
@@ -131,13 +131,13 @@
                 });
 
                 test("points have set width", function() {
-                    $.each(stepLineChart.points, function() {
+                    $.each(lineChart.points, function() {
                         equal(this.box.width(), 1);
                     });
                 });
 
                 test("points have set height according to value", function() {
-                    var pointHeights = $.map(stepLineChart.points, function(point) {
+                    var pointHeights = $.map(lineChart.points, function(point) {
                         return point.box.height();
                     });
 
@@ -145,36 +145,36 @@
                 });
 
                 test("getNearestPoint returns nearest series point", function() {
-                    var point = stepLineChart.points[1],
-                        result = stepLineChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 0);
+                    var point = lineChart.points[1],
+                        result = lineChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 0);
 
                     ok(result === point);
                 });
 
                 test("sets point owner", function() {
-                    ok(stepLineChart.points[0].owner === stepLineChart);
+                    ok(lineChart.points[0].owner === lineChart);
                 });
 
                 test("sets point series", function() {
-                    ok(stepLineChart.points[0].series === positiveSeries);
+                    ok(lineChart.points[0].series === positiveSeries);
                 });
 
                 test("sets point series index", function() {
-                    ok(stepLineChart.points[0].seriesIx === 0);
+                    ok(lineChart.points[0].seriesIx === 0);
                 });
 
                 test("sets point category", function() {
-                    equal(stepLineChart.points[0].category, "A");
+                    equal(lineChart.points[0].category, "A");
                 });
 
                 test("sets point dataItem", function() {
-                    equal(typeof stepLineChart.points[0].dataItem, "number");
+                    equal(typeof lineChart.points[0].dataItem, "number");
                 });
 
                 test("Throws error when unable to locate value axis", function() {
                     raises(function() {
                             setupLineChart(plotArea, {
-                                series: [{ axis: "b", data: [1] }]
+                                series: [{ axis: "b", data: [1], style: "step" }]
                             });
                         },
                         /Unable to locate value axis with name b/);
@@ -188,15 +188,15 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    deepEqual(stepLineChart.valueAxisRanges[undefined].min, negativeSeries.data[1]);
+                    deepEqual(lineChart.valueAxisRanges[undefined].min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    deepEqual(stepLineChart.valueAxisRanges[undefined].max, negativeSeries.data[0]);
+                    deepEqual(lineChart.valueAxisRanges[undefined].max, negativeSeries.data[0]);
                 });
 
                 test("point tops are aligned to category axis", function() {
-                    var pointsY = $.map(stepLineChart.points, function(point) {
+                    var pointsY = $.map(lineChart.points, function(point) {
                         return point.box.y1;
                     });
 
@@ -204,7 +204,7 @@
                 });
 
                 test("points have set height according to value", function() {
-                    var pointHeights = $.map(stepLineChart.points, function(point) {
+                    var pointHeights = $.map(lineChart.points, function(point) {
                         return point.box.height();
                     });
 
@@ -212,8 +212,8 @@
                 });
 
                 test("getNearestPoint returns nearest series point", function() {
-                    var point = stepLineChart.points[1],
-                        result = stepLineChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 0);
+                    var point = lineChart.points[1],
+                        result = lineChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 0);
 
                     ok(result === point);
                 });
@@ -227,12 +227,12 @@
 
                 test("Reports number of categories for two series", function() {
                     setupLineChart(plotArea, {series: [ positiveSeries, negativeSeries ]});
-                    equal(categoriesCount(stepLineChart.options.series), positiveSeries.data.length);
+                    equal(categoriesCount(lineChart.options.series), positiveSeries.data.length);
                 });
 
                 test("getNearestPoint returns nearest series point", function() {
-                    var point = stepLineChart.points[1],
-                        result = stepLineChart.getNearestPoint(point.box.x2, point.box.y2 + 100, 1);
+                    var point = lineChart.points[1],
+                        result = lineChart.getNearestPoint(point.box.x2, point.box.y2 + 100, 1);
 
                     ok(result === point);
                 });
@@ -242,9 +242,10 @@
                     setup: function() {
                         var chart = createChart({
                             series: [{
-                                type: "stepLine",
+                                type: "line",
                                 data: [1],
-                                categoryAxis: "secondary"
+                                categoryAxis: "secondary",
+                                style: "step"
                             }],
                             valueAxis: {
                                 axisCrossingValue: [10, 0]
@@ -281,20 +282,20 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    deepEqual(stepLineChart.valueAxisRanges[undefined].min, 1);
+                    deepEqual(lineChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    deepEqual(stepLineChart.valueAxisRanges[undefined].max, 3);
+                    deepEqual(lineChart.valueAxisRanges[undefined].max, 3);
                 });
 
                 test("Reports number of categories", function() {
-                    equal(categoriesCount(stepLineChart.options.series), 3);
+                    equal(categoriesCount(lineChart.options.series), 3);
                 });
 
                 test("getNearestPoint returns nearest series point", function() {
-                    var point = stepLineChart.points[3],
-                        result = stepLineChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 1);
+                    var point = lineChart.points[3],
+                        result = lineChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 1);
 
                     ok(result === point);
                 });
@@ -309,22 +310,22 @@
                 });
 
                 test("reports minimum series value for default axis", function() {
-                    equal(stepLineChart.valueAxisRanges[undefined].min, 1);
+                    equal(lineChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("reports maximum series value for default axis", function() {
-                    equal(stepLineChart.valueAxisRanges[undefined].max, 2);
+                    equal(lineChart.valueAxisRanges[undefined].max, 2);
                 });
 
                 test("ignores null values when reporting minimum series value", function() {
                     setupLineChart(plotArea, {
                         series: [{ data: [1, 2, null] }]
                     });
-                    equal(stepLineChart.valueAxisRanges[undefined].min, 1);
+                    equal(lineChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("omits missing points by default", function() {
-                    equal(stepLineChart.points[2], null);
+                    equal(lineChart.points[2], null);
                 });
 
                 test("omits missing points when interpolating", function() {
@@ -334,7 +335,7 @@
                         ]
                     });
 
-                    equal(stepLineChart.points[2], null);
+                    equal(lineChart.points[2], null);
                 });
 
                 test("missing points are assumed to be 0", function() {
@@ -344,19 +345,19 @@
                         ]
                     });
 
-                    equal(stepLineChart.points[2].value, 0);
+                    equal(lineChart.points[2].value, 0);
                 });
 
                 test("getNearestPoint returns nearest series point (left)", function() {
-                    var point = stepLineChart.points[1],
-                        result = stepLineChart.getNearestPoint(point.box.x2 + 0.1, point.box.y2, 0);
+                    var point = lineChart.points[1],
+                        result = lineChart.getNearestPoint(point.box.x2 + 0.1, point.box.y2, 0);
 
                     ok(result === point);
                 });
 
                 test("getNearestPoint returns nearest series point (right)", function() {
-                    var point = stepLineChart.points[3],
-                        result = stepLineChart.getNearestPoint(point.box.x1 - 0.1, point.box.y1, 0);
+                    var point = lineChart.points[3],
+                        result = lineChart.getNearestPoint(point.box.x1 - 0.1, point.box.y1, 0);
 
                     ok(result === point);
                 });
@@ -372,16 +373,16 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(stepLineChart.valueAxisRanges[undefined].min, 1);
+                    equal(lineChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(stepLineChart.valueAxisRanges[undefined].max, 6);
+                    equal(lineChart.valueAxisRanges[undefined].max, 6);
                 });
 
                 test("point plot values are stacked", function() {
                     deepEqual(
-                        $.map(stepLineChart.points, function(point) { return point.plotValue }),
+                        $.map(lineChart.points, function(point) { return point.plotValue }),
                         [1, 2, 3, 2, 4, 6]
                     );
                 });
@@ -397,16 +398,16 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(stepLineChart.valueAxisRanges[undefined].min, -6);
+                    equal(lineChart.valueAxisRanges[undefined].min, -6);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(stepLineChart.valueAxisRanges[undefined].max, -1);
+                    equal(lineChart.valueAxisRanges[undefined].max, -1);
                 });
 
                 test("point plot values are stacked", function() {
                     deepEqual(
-                        $.map(stepLineChart.points, function(point) { return point.plotValue }),
+                        $.map(lineChart.points, function(point) { return point.plotValue }),
                         [-1, -2, -3, -2, -4, -6]
                     );
                 });
@@ -428,15 +429,15 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(stepLineChart.valueAxisRanges[undefined].min, 1);
+                    equal(lineChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(stepLineChart.valueAxisRanges[undefined].max, 2);
+                    equal(lineChart.valueAxisRanges[undefined].max, 2);
                 });
 
                 test("points have set height according to stack value", function() {
-                    var pointHeights = $.map(stepLineChart.points, function(point) {
+                    var pointHeights = $.map(lineChart.points, function(point) {
                         return point.box.height();
                     });
 
@@ -462,11 +463,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(stepLineChart.valueAxisRanges.a.min, 0);
+                    equal(lineChart.valueAxisRanges.a.min, 0);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(stepLineChart.valueAxisRanges.a.max, 2);
+                    equal(lineChart.valueAxisRanges.a.max, 2);
                 });
 
                 // ------------------------------------------------------------
@@ -480,15 +481,15 @@
                 });
 
                 test("Reports minimum series value", function() {
-                    deepEqual(stepLineChart.valueAxisRanges[undefined].min, 1);
+                    deepEqual(lineChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum series value", function() {
-                    deepEqual(stepLineChart.valueAxisRanges[undefined].max, 4);
+                    deepEqual(lineChart.valueAxisRanges[undefined].max, 4);
                 });
 
                 test("missing points are assumed to be 0 by default", function() {
-                    equal(stepLineChart.points[4].value, 0);
+                    equal(lineChart.points[4].value, 0);
                 });
 
                 test("missing points are skipped", function() {
@@ -499,7 +500,7 @@
                         isStacked: true
                     });
 
-                    equal(stepLineChart.points[4], null);
+                    equal(lineChart.points[4], null);
                 });
 
                 test("line is drawn between existing points", function() {
@@ -537,10 +538,12 @@
                     var chart = createChart({
                         series: [{
                             stack: true,
-                            type: "stepLine",
+                            style: "step",
+                            type: "line",
                             data: [1]
                         }, {
-                            type: "stepLine",
+                            type: "line",
+                            style: "step",
                             data: [2],
                             axis: "b"
                         }],
@@ -559,9 +562,9 @@
                         }
                     });
 
-                    var stepLineCharts = chart._model._plotArea.charts;
-                    equal(stepLineCharts[0].points[0].plotValue, undefined);
-                    equal(stepLineCharts[1].points[0].plotValue, undefined);
+                    var lineCharts = chart._model._plotArea.charts;
+                    equal(lineCharts[0].points[0].plotValue, undefined);
+                    equal(lineCharts[1].points[0].plotValue, undefined);
                 });
 
                 // ------------------------------------------------------------
@@ -610,7 +613,7 @@
                 });
 
                 test("line has same model id as its segment", function() {
-                    equal(view.log.path[0].style.data.modelId, stepLineChart._segments[0].options.modelId);
+                    equal(view.log.path[0].style.data.modelId, lineChart._segments[0].options.modelId);
                 });
 
                 test("renders line chart group", function() {
@@ -650,7 +653,8 @@
                     setupLineChart(plotArea, {
                         series: [{
                             data: [ null, 1, 2 ],
-                            width: 0
+                            width: 0,
+                            style: "step"
                         }]
                     });
 
@@ -691,7 +695,7 @@
             })();
 
             (function() {
-                var stepLineChart,
+                var lineChart,
                     MARGIN = PADDING = BORDER = 5,
                     linePoint;
 
@@ -708,7 +712,7 @@
                 );
 
                 function createLineChart(options) {
-                    stepLineChart = new dataviz.StepLineChart(plotArea, {
+                    lineChart = new dataviz.LineChart(plotArea, {
                         series: [$.extend({
                             data: [0, 1],
                             color: "#f00",
@@ -736,7 +740,7 @@
                             dashType: "dot"
                         }, options)]
                     });
-                    linePoint = stepLineChart.points[0];
+                    linePoint = lineChart.points[0];
                 }
 
                 // ------------------------------------------------------------
@@ -749,7 +753,8 @@
                 test("remove series if visible is set to false", function() {
                     $("#container").kendoChart({
                         seriesDefaults: {
-                            type: "stepLine"
+                            type: "line",
+                            style: "step"
                         },
                         series: [{
                             data: [1],
@@ -1191,7 +1196,8 @@
                             },
                             series: [{
                                 name: "Value",
-                                type: "stepLine",
+                                type: "line",
+                                style: "step",
                                 field: "value"
                             }],
                             categoryAxis: {
@@ -1226,7 +1232,8 @@
                 function createLineChart(options) {
                     $("#container").kendoChart($.extend({
                         series: [{
-                            type: "stepLine",
+                            type: "line",
+                            style: "step",
                             data: [1, 2]
                         }],
                         categoryAxis: {
@@ -1237,12 +1244,12 @@
                     chart = $("#container").data("kendoChart");
 
                     var plotArea = chart._model.children[1],
-                        stepLineChart = plotArea.charts[0],
-                        point = stepLineChart.points[0];
+                        lineChart = plotArea.charts[0],
+                        point = lineChart.points[0];
 
                     marker = point.children[0];
                     label = point.children[1];
-                    segment = stepLineChart._segments[0];
+                    segment = lineChart._segments[0];
                 }
 
                 function linePointClick(callback) {
@@ -1289,7 +1296,7 @@
                 test("fires when clicking line point labels", 1, function() {
                     createLineChart({
                         seriesDefaults: {
-                            stepLine: {
+                            line: {
                                 labels: {
                                     visible: true
                                 }
@@ -1353,7 +1360,7 @@
                 test("fires when hovering line point labels", 1, function() {
                     createLineChart({
                         seriesDefaults: {
-                            stepLine: {
+                            line: {
                                 labels: {
                                     visible: true
                                 }

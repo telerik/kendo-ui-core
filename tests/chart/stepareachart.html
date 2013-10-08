@@ -22,7 +22,7 @@
                 Box2D = dataviz.Box2D,
                 categoriesCount = dataviz.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
-                stepAreaChart,
+                areaChart,
                 root,
                 view,
                 pointCoordinates,
@@ -31,13 +31,13 @@
             function setupStepAreaChart(plotArea, options) {
                 view = new ViewStub();
 
-                stepAreaChart = new dataviz.StepAreaChart(plotArea, options);
+                areaChart = new dataviz.AreaChart(plotArea, options);
 
                 root = new dataviz.RootElement();
-                root.append(stepAreaChart);
+                root.append(areaChart);
 
-                stepAreaChart.reflow();
-                stepAreaChart.getViewElements(view);
+                areaChart.reflow();
+                areaChart.getViewElements(view);
                 pointCoordinates = mapPoints(view.log.path[0].points);
             }
 
@@ -74,9 +74,9 @@
             }
 
             (function() {
-                var positiveSeries = { data: [1, 2], labels: {} },
-                    negativeSeries = { data: [-1, -2], labels: {} },
-                    sparseSeries = { data: [1, 2, undefined, 2] },
+                var positiveSeries = { data: [1, 2], labels: {}, line: { style: "step" } },
+                    negativeSeries = { data: [-1, -2], labels: {}, line: { style: "step" } },
+                    sparseSeries = { data: [1, 2, undefined, 2], line: { style: "step" } },
                     VALUE_AXIS_MAX = 2,
                     CATEGORY_AXIS_Y = 2;
 
@@ -102,25 +102,25 @@
                     }
                 });
 
-                test("Creates points for stepAreaChart data points", function() {
-                    equal(stepAreaChart.points.length, positiveSeries.data.length);
+                test("Creates points for areaChart data points", function() {
+                    equal(areaChart.points.length, positiveSeries.data.length);
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    deepEqual(stepAreaChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
+                    deepEqual(areaChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    deepEqual(stepAreaChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
+                    deepEqual(areaChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
                 });
 
                 test("Reports number of categories", function() {
                     setupStepAreaChart(plotArea, {series: [ positiveSeries ]});
-                    equal(categoriesCount(stepAreaChart.options.series), positiveSeries.data.length);
+                    equal(categoriesCount(areaChart.options.series), positiveSeries.data.length);
                 });
 
                 test("points are distributed across category axis", function() {
-                    var pointsX = $.map(stepAreaChart.points, function(point) {
+                    var pointsX = $.map(areaChart.points, function(point) {
                         return point.box.x1;
                     });
 
@@ -128,7 +128,7 @@
                 });
 
                 test("points are aligned to category axis", function() {
-                    var pointsY = $.map(stepAreaChart.points, function(point) {
+                    var pointsY = $.map(areaChart.points, function(point) {
                         return point.box.y2;
                     });
 
@@ -138,7 +138,7 @@
                 test("segments are clipped to category axis", function() {
                     setupStepAreaChart(plotArea, { series: [ positiveSeries ]});
 
-                    equal(stepAreaChart._segments[0].points()[0].y, CATEGORY_AXIS_Y);
+                    equal(areaChart._segments[0].points()[0].y, CATEGORY_AXIS_Y);
                 });
 
                 test("segments are clipped to secondary category axis", function() {
@@ -162,17 +162,17 @@
                         labels: {}
                     }]});
 
-                    equal(stepAreaChart._segments[0].points()[0].y, 0);
+                    equal(areaChart._segments[0].points()[0].y, 0);
                 });
 
                 test("points have set width", function() {
-                    $.each(stepAreaChart.points, function() {
+                    $.each(areaChart.points, function() {
                         equal(this.box.width(), 1);
                     });
                 });
 
                 test("points have set height according to value", function() {
-                    var pointHeights = $.map(stepAreaChart.points, function(point) {
+                    var pointHeights = $.map(areaChart.points, function(point) {
                         return point.box.height();
                     });
 
@@ -180,36 +180,36 @@
                 });
 
                 test("getNearestPoint returns nearest series point", function() {
-                    var point = stepAreaChart.points[1],
-                        result = stepAreaChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 0);
+                    var point = areaChart.points[1],
+                        result = areaChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 0);
 
                     ok(result === point);
                 });
 
                 test("sets point owner", function() {
-                    ok(stepAreaChart.points[0].owner === stepAreaChart);
+                    ok(areaChart.points[0].owner === areaChart);
                 });
 
                 test("sets point series", function() {
-                    ok(stepAreaChart.points[0].series === positiveSeries);
+                    ok(areaChart.points[0].series === positiveSeries);
                 });
 
                 test("sets point series index", function() {
-                    ok(stepAreaChart.points[0].seriesIx === 0);
+                    ok(areaChart.points[0].seriesIx === 0);
                 });
 
                 test("sets point category", function() {
-                    equal(stepAreaChart.points[0].category, "A");
+                    equal(areaChart.points[0].category, "A");
                 });
 
                 test("sets point dataItem", function() {
-                    equal(typeof stepAreaChart.points[0].dataItem, "number");
+                    equal(typeof areaChart.points[0].dataItem, "number");
                 });
 
                 test("Throws error when unable to locate value axis", function() {
                     raises(function() {
                             setupStepAreaChart(plotArea, {
-                                series: [{ axis: "b", data: [1] }]
+                                series: [{ axis: "b", data: [1], line: { style: "step" } }]
                             });
                         },
                         /Unable to locate value axis with name b/);
@@ -223,15 +223,15 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    deepEqual(stepAreaChart.valueAxisRanges[undefined].min, negativeSeries.data[1]);
+                    deepEqual(areaChart.valueAxisRanges[undefined].min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    deepEqual(stepAreaChart.valueAxisRanges[undefined].max, negativeSeries.data[0]);
+                    deepEqual(areaChart.valueAxisRanges[undefined].max, negativeSeries.data[0]);
                 });
 
                 test("point tops are aligned to category axis", function() {
-                    var pointsY = $.map(stepAreaChart.points, function(point) {
+                    var pointsY = $.map(areaChart.points, function(point) {
                         return point.box.y1;
                     });
 
@@ -239,7 +239,7 @@
                 });
 
                 test("points have set height according to value", function() {
-                    var pointHeights = $.map(stepAreaChart.points, function(point) {
+                    var pointHeights = $.map(areaChart.points, function(point) {
                         return point.box.height();
                     });
 
@@ -247,8 +247,8 @@
                 });
 
                 test("getNearestPoint returns nearest series point", function() {
-                    var point = stepAreaChart.points[1],
-                        result = stepAreaChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 0);
+                    var point = areaChart.points[1],
+                        result = areaChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 0);
 
                     ok(result === point);
                 });
@@ -267,29 +267,29 @@
                 });
 
                 test("Reports minimum series value for primary axis", function() {
-                    deepEqual(stepAreaChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
+                    deepEqual(areaChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
                 });
 
                 test("Reports maximum series value for primary axis", function() {
-                    deepEqual(stepAreaChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
+                    deepEqual(areaChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
                 });
 
                 test("Reports minimum series value for secondary axis", function() {
-                    deepEqual(stepAreaChart.valueAxisRanges.secondary.min, negativeSeries.data[1]);
+                    deepEqual(areaChart.valueAxisRanges.secondary.min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum series value for secondary axis", function() {
-                    deepEqual(stepAreaChart.valueAxisRanges.secondary.max, negativeSeries.data[0]);
+                    deepEqual(areaChart.valueAxisRanges.secondary.max, negativeSeries.data[0]);
                 });
 
                 test("Reports number of categories for two series", function() {
                     setupStepAreaChart(plotArea, {series: [ positiveSeries, negativeSeries ]});
-                    equal(categoriesCount(stepAreaChart.options.series), positiveSeries.data.length);
+                    equal(categoriesCount(areaChart.options.series), positiveSeries.data.length);
                 });
 
                 test("getNearestPoint returns nearest series point", function() {
-                    var point = stepAreaChart.points[1],
-                        result = stepAreaChart.getNearestPoint(point.box.x2, point.box.y2 + 100, 1);
+                    var point = areaChart.points[1],
+                        result = areaChart.getNearestPoint(point.box.x2, point.box.y2 + 100, 1);
 
                     ok(result === point);
                 });
@@ -306,20 +306,20 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    deepEqual(stepAreaChart.valueAxisRanges[undefined].min, 1);
+                    deepEqual(areaChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    deepEqual(stepAreaChart.valueAxisRanges[undefined].max, 3);
+                    deepEqual(areaChart.valueAxisRanges[undefined].max, 3);
                 });
 
                 test("Reports number of categories", function() {
-                    equal(categoriesCount(stepAreaChart.options.series), 3);
+                    equal(categoriesCount(areaChart.options.series), 3);
                 });
 
                 test("getNearestPoint returns nearest series point", function() {
-                    var point = stepAreaChart.points[3],
-                        result = stepAreaChart.getNearestPoint(point.box.x2, point.box.y2 + 10, 1);
+                    var point = areaChart.points[3],
+                        result = areaChart.getNearestPoint(point.box.x2, point.box.y2 + 10, 1);
 
                     ok(result === point);
                 });
@@ -334,15 +334,15 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    deepEqual(stepAreaChart.valueAxisRanges[undefined].min, 1);
+                    deepEqual(areaChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    deepEqual(stepAreaChart.valueAxisRanges[undefined].max, 2);
+                    deepEqual(areaChart.valueAxisRanges[undefined].max, 2);
                 });
 
                 test("missing points are assumed to be 0 by default", function() {
-                    equal(stepAreaChart.points[2].value, 0);
+                    equal(areaChart.points[2].value, 0);
                 });
 
                 test("omits missing points", function() {
@@ -352,7 +352,7 @@
                         ]
                     });
 
-                    equal(stepAreaChart.points[2], null);
+                    equal(areaChart.points[2], null);
                 });
 
                 test("omits missing points when interpolating", function() {
@@ -362,7 +362,7 @@
                         ]
                     });
 
-                    equal(stepAreaChart.points[2], null);
+                    equal(areaChart.points[2], null);
                 });
 
                 test("getNearestPoint returns nearest series point (left)", function() {
@@ -372,8 +372,8 @@
                         ]
                     });
 
-                    var point = stepAreaChart.points[1],
-                        result = stepAreaChart.getNearestPoint(point.box.x2 + 0.1, point.box.y2, 0);
+                    var point = areaChart.points[1],
+                        result = areaChart.getNearestPoint(point.box.x2 + 0.1, point.box.y2, 0);
 
                     ok(result === point);
                 });
@@ -385,8 +385,8 @@
                         ]
                     });
 
-                    var point = stepAreaChart.points[3],
-                        result = stepAreaChart.getNearestPoint(point.box.x1 - 0.1, point.box.y1, 0);
+                    var point = areaChart.points[3],
+                        result = areaChart.getNearestPoint(point.box.x1 - 0.1, point.box.y1, 0);
 
                     ok(result === point);
                 });
@@ -414,8 +414,8 @@
                     });
 
                     var plotArea = chart._model._plotArea;
-                    var stepAreaChart = plotArea.charts[0];
-                    equal(stepAreaChart._segments[0].points()[0].y,
+                    var areaChart = plotArea.charts[0];
+                    equal(areaChart._segments[0].points()[0].y,
                            plotArea.panes[0].axes[0].lineBox().y2);
                 });
 
@@ -430,16 +430,16 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(stepAreaChart.valueAxisRanges[undefined].min, 1);
+                    equal(areaChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(stepAreaChart.valueAxisRanges[undefined].max, 6);
+                    equal(areaChart.valueAxisRanges[undefined].max, 6);
                 });
 
                 test("point plot values are stacked", function() {
                     deepEqual(
-                        $.map(stepAreaChart.points, function(point) { return point.plotValue }),
+                        $.map(areaChart.points, function(point) { return point.plotValue }),
                         [1, 2, 3, 2, 4, 6]
                     );
                 });
@@ -455,16 +455,16 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(stepAreaChart.valueAxisRanges[undefined].min, -6);
+                    equal(areaChart.valueAxisRanges[undefined].min, -6);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(stepAreaChart.valueAxisRanges[undefined].max, -1);
+                    equal(areaChart.valueAxisRanges[undefined].max, -1);
                 });
 
                 test("point plot values are stacked", function() {
                     deepEqual(
-                        $.map(stepAreaChart.points, function(point) { return point.plotValue }),
+                        $.map(areaChart.points, function(point) { return point.plotValue }),
                         [-1, -2, -3, -2, -4, -6]
                     );
                 });
@@ -486,15 +486,15 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(stepAreaChart.valueAxisRanges[undefined].min, 1);
+                    equal(areaChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(stepAreaChart.valueAxisRanges[undefined].max, 2);
+                    equal(areaChart.valueAxisRanges[undefined].max, 2);
                 });
 
                 test("points have set height according to stack value", function() {
-                    var pointHeights = $.map(stepAreaChart.points, function(point) {
+                    var pointHeights = $.map(areaChart.points, function(point) {
                         return point.box.height();
                     });
 
@@ -520,17 +520,17 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(stepAreaChart.valueAxisRanges.a.min, 0);
+                    equal(areaChart.valueAxisRanges.a.min, 0);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(stepAreaChart.valueAxisRanges.a.max, 2);
+                    equal(areaChart.valueAxisRanges.a.max, 2);
                 });
 
                 // ------------------------------------------------------------
                 module("Area Chart / Stack / Missing values", {
                     setup: function() {
-                        sparseSeries.line = { width: 0 };
+                        sparseSeries.line = { width: 0, style: "step" };
                         setupStepAreaChart(plotArea, {
                             series: [ sparseSeries, sparseSeries ],
                             isStacked: true
@@ -539,15 +539,15 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    deepEqual(stepAreaChart.valueAxisRanges[undefined].min, 1);
+                    deepEqual(areaChart.valueAxisRanges[undefined].min, 1);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    deepEqual(stepAreaChart.valueAxisRanges[undefined].max, 4);
+                    deepEqual(areaChart.valueAxisRanges[undefined].max, 4);
                 });
 
                 test("missing points are assumed to be 0 by default", function() {
-                    equal(stepAreaChart.points[4].value, 0);
+                    equal(areaChart.points[4].value, 0);
                 });
 
                 test("omits missing points", function() {
@@ -558,7 +558,7 @@
                         isStacked: true
                     });
 
-                    equal(stepAreaChart.points[4], null);
+                    equal(areaChart.points[4], null);
                 });
 
                 test("line is drawn between existing points when interpolating", function() {
@@ -604,9 +604,9 @@
                         }
                     });
 
-                    var stepAreaCharts = chart._model._plotArea.charts;
-                    equal(stepAreaCharts[0].points[0].plotValue, undefined);
-                    equal(stepAreaCharts[1].points[0].plotValue, undefined);
+                    var areaCharts = chart._model._plotArea.charts;
+                    equal(areaCharts[0].points[0].plotValue, undefined);
+                    equal(areaCharts[1].points[0].plotValue, undefined);
                 });
 
                 // ------------------------------------------------------------
@@ -615,20 +615,19 @@
                 module("Area Chart / Rendering", {
                     setup: function() {
                         setupStepAreaChart(plotArea, {
-                            series: [
-                                $.extend({
-                                        line: {
-                                            width: 2,
-                                            color: "lineColor",
-                                            opacity: 0.5,
-                                            dashType: "dot"
-                                        },
-                                        color: "areaColor",
-                                        opacity: 0.1
-                                    },
-                                    positiveSeries
-                                )
-                            ]
+                            series: [{
+                                data: [1, 2],
+                                labels: {},
+                                line: {
+                                    width: 2,
+                                    color: "lineColor",
+                                    opacity: 0.5,
+                                    dashType: "dot",
+                                    style: "line"
+                                },
+                                color: "areaColor",
+                                opacity: 0.1
+                            }]
                         });
 
                         polyline = view.log.path[0];
@@ -675,7 +674,7 @@
                 });
 
                 test("area has same model id as its segment", function() {
-                    equal(polyline.style.data.modelId, stepAreaChart._segments[0].options.modelId);
+                    equal(polyline.style.data.modelId, areaChart._segments[0].options.modelId);
                 });
 
                 test("renders area chart group", function() {
@@ -693,7 +692,7 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Rendering / Missing Values", {
                     setup: function() {
-                        sparseSeries.line = { width: 0 };
+                    sparseSeries.line = { width: 0, style: "step" };
                     }
                 });
 
@@ -725,7 +724,7 @@
                         series: [{
                             missingValues: "gap",
                             data: [ null, 1, 2 ],
-                            line: { width: 0 }
+                            line: { width: 0, style: "step" }
                         }]
                     });
 
@@ -764,7 +763,7 @@
             })();
 
             (function() {
-                var stepAreaChart,
+                var areaChart,
                     MARGIN = PADDING = BORDER = 5,
                     linePoint;
 
@@ -781,7 +780,7 @@
                 );
 
                 function createAreaChart(options) {
-                    stepAreaChart = new dataviz.AreaChart(plotArea, {
+                    areaChart = new dataviz.AreaChart(plotArea, {
                         series: [$.extend({
                             data: [0, 1],
                             color: "areaColor",
@@ -807,7 +806,7 @@
                             }
                         }, options)]
                     });
-                    areaPoint = stepAreaChart.points[0];
+                    areaPoint = areaChart.points[0];
                 }
 
                 // ------------------------------------------------------------
