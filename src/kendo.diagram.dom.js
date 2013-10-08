@@ -631,6 +631,23 @@ kendo_module({
         },
 
         /**
+         * Gets or sets the connection type (see ConnectionType enumeration).
+         * @param value A ConnectionType value.
+         * @returns {ConnectionType}
+         */
+        type: function (value) {
+            if(value){
+                if(value!== this._type){
+                    this._type = value;
+                    this.refresh();
+                }
+            }
+            else{
+                return this._type;
+            }
+        },
+
+        /**
          * Gets or sets the collection of *intermediate* points.
          * The 'allPoints()' property will return all the points.
          * The 'definers' property returns the definers of the intermediate points.
