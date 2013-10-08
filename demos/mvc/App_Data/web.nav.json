@@ -1423,6 +1423,13 @@
                     "url": "timepicker/navigation.html",
                     "title": "Keyboard navigation in Kendo UI TimePicker",
                     "meta": "Users can intuitively select time in Kendo UI TimePicker by simply using the keyboard support of the widget."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "timepicker/mvvm.html",
+                    "title": "MVVM support in Kendo UI TimePicker",
+                    "meta": "Enabled, events, value and visible MVVM binding support in Kendo UI TimePicker",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
