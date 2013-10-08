@@ -46,6 +46,7 @@
             $("#funnel-equal").kendoChart({
                 series: [{
                     type: "funnel",
+                    segmentHeight:"equal",
                     data: seriesData
                 }],
                 seriesClick: function(e) {
@@ -62,6 +63,7 @@
             $("#funnel-equal-spacing").kendoChart({
                 series: [{
                     type: "funnel",
+                    segmentHeight:"equal",
                     data: seriesData,
                     segmentSpacing: 25
                 }]

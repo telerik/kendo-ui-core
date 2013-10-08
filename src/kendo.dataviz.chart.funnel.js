@@ -255,6 +255,10 @@ kendo_module({
                 segments = chart.segments,
                 count = segments.length,
                 i,
+                height,
+                offset,
+                previousHeight = 0,
+                previousOffset = 0,
                 segmentSpacing = options.segmentSpacing,
                 segmentMethod = options.segmentMethod,
                 box = chartBox.clone().unpad(chart.labelPadding()),
@@ -262,29 +266,8 @@ kendo_module({
                 totalHeight = box.height() - segmentSpacing * (count-1),
                 neckSize = options.neckSize*width;
 
-            if(segmentMethod=="height"){
-                var finalNarrow = (width - neckSize)/2,
-                height,
-                offset,
-                previousHeight = 0,
-                previousOffset = 0;
-
-                for (i = 0; i < count; i++) {
-                    points = segments[i].points = [],
-                    percentage = segments[i].percentage,
-                    offset = finalNarrow * percentage,
-                    height = totalHeight * percentage;
-                    points.push(new Point2D(box.x1 + previousOffset, box.y1 + previousHeight));
-                    points.push(new Point2D(box.x1+width - previousOffset, box.y1 + previousHeight));
-                    points.push(new Point2D(box.x1+width - previousOffset - offset, box.y1 + height + previousHeight));
-                    points.push(new Point2D(box.x1+ previousOffset + offset,box.y1 + height + previousHeight));
-                    previousOffset += offset;
-                    previousHeight += height + segmentSpacing;
-                }
-            }
-            else if(segmentMethod==="relation"){
-                var previousHeight = 0,
-                    maxSegment = firstSegment = segments[0];
+            if(segmentMethod==="relation"){
+                var maxSegment = firstSegment = segments[0];
 
                 $.each(segments,function(idx,val){
                    if(val.percentage>maxSegment.percentage){
@@ -315,21 +298,19 @@ kendo_module({
                 }
             }
             else {
-                var offset = 0,
-                //TODO support pixels and string as neckSize
-                narrowSize = (width - neckSize) / (count * 2) ,
-                segmentHeight = (box.height()-(segmentSpacing *(count-1))) / count,
-                narrowOffset = 0;
+                var finalNarrow = (width - neckSize)/2;
 
                 for (i = 0; i < count; i++) {
-                    points = segments[i].points = [];
-                    points.push(new Point2D(box.x1 + narrowOffset, box.y1 + offset));
-                    points.push(new Point2D(box.x1+width - narrowOffset, box.y1 + offset));
-                    points.push(new Point2D(box.x1+width - narrowOffset - narrowSize, box.y1 + offset + segmentHeight));
-                    points.push(new Point2D(box.x1+ narrowOffset + narrowSize,box.y1 + offset + segmentHeight));
-
-                    narrowOffset += narrowSize;
-                    offset += segmentHeight + segmentSpacing;
+                    points = segments[i].points = [],
+                    percentage = segments[i].percentage,
+                    offset = (options.segmentHeight==="proportional")? (finalNarrow * percentage): (finalNarrow / count) ,
+                    height = (options.segmentHeight==="proportional")? (totalHeight * percentage): (totalHeight / count);
+                    points.push(new Point2D(box.x1 + previousOffset, box.y1 + previousHeight));
+                    points.push(new Point2D(box.x1+width - previousOffset, box.y1 + previousHeight));
+                    points.push(new Point2D(box.x1+width - previousOffset - offset, box.y1 + height + previousHeight));
+                    points.push(new Point2D(box.x1+ previousOffset + offset,box.y1 + height + previousHeight));
+                    previousOffset += offset;
+                    previousHeight += height + segmentSpacing;
                 }
             }
 
