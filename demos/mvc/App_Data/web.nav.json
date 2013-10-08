@@ -833,7 +833,6 @@
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Grid",
                     "packages": ["!mvc", "!jsp", "!php"]
                 }
-
             ]
         },
         {
@@ -878,6 +877,13 @@
                     "url": "listview/navigation.html",
                     "title": "Keyboard navigation in Kendo UI ListView widget",
                     "meta": "In this example we will look at the supported keys and user actions in Kendo UI ListView control."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "listview/mvvm.html",
+                    "title": "MVVM support in Kendo UI ListView",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI ListView",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
