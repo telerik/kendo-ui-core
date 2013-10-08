@@ -29,6 +29,8 @@
         <div id="funnel-height-spacing"></div>
         <div id="funnel-relation"></div>
         <div id="funnel-relation-spacing"></div>
+        <div id="funnel-relation-equalHeight"></div>
+        <div id="funnel-relation-spacing-equalHeight"></div>
         <script>
             var seriesData = [{
                 value: 10,
@@ -100,6 +102,18 @@
                         }, {
                             value: 7,
                             category: "enquiries"
+                        } , {
+                            value: 27,
+                            category: "enquiries"
+                        } , {
+                            value: 72,
+                            category: "enquiries"
+                        } , {
+                            value: 7,
+                            category: "enquiries"
+                        } , {
+                            value: 50,
+                            category: "enquiries"
                         } ];
 
             $("#funnel-relation").kendoChart({
@@ -116,6 +130,28 @@
             $("#funnel-relation-spacing").kendoChart({
                 series: [{
                     type: "funnel",
+                    segmentMethod:"relation",
+                    data: relationData,
+                    segmentSpacing : 20
+                }]
+            });
+
+            $("#funnel-relation-equalHeight").kendoChart({
+                series: [{
+                    type: "funnel",
+                    segmentHeight:"equal",
+                    segmentMethod:"relation",
+                    data: relationData,
+                    labels:{
+                        color: 'white'
+                    }
+                }]
+            });
+
+            $("#funnel-relation-spacing-equalHeight").kendoChart({
+                series: [{
+                    type: "funnel",
+                    segmentHeight:"equal",
                     segmentMethod:"relation",
                     data: relationData,
                     segmentSpacing : 20

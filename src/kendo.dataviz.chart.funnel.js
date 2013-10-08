@@ -55,6 +55,7 @@ kendo_module({
                     segmentMethod:firstSeries.segmentMethod,
                     legend: plotArea.options.legend,
                     neckSize: firstSeries.neckSize,
+                    segmentHeight: firstSeries.segmentHeight,
                     segmentSpacing:firstSeries.segmentSpacing
                 });
 
@@ -84,6 +85,7 @@ kendo_module({
             neckSize: 0.3,
             width: 300,
             segmentMethod:"none",
+            segmentHeight:"proportional",
             segmentSpacing:0,
             labels: {
                 visible: true,
@@ -281,17 +283,24 @@ kendo_module({
                 }
             }
             else if(segmentMethod==="relation"){
-                //TODO make the data sorted 
-                var lastUpperSide = width,
-                    previousHeight = 0,
-                    previousOffset = 0;
+                var previousHeight = 0,
+                    maxSegment = firstSegment = segments[0];
+
+                $.each(segments,function(idx,val){
+                   if(val.percentage>maxSegment.percentage){
+                       maxSegment = val;
+                   }
+                })
+
+                var lastUpperSide = (firstSegment.percentage/maxSegment.percentage)*width,
+                    previousOffset = (width - lastUpperSide) / 2;
 
                 for (i = 0; i < count; i++) {
                     points = segments[i].points = [],
                     percentage = segments[i].percentage,
                     nextSegment = segments[i+1],
                     nextPercentage = (nextSegment ? nextSegment.percentage : percentage),
-                    height = totalHeight * percentage,
+                    height = (options.segmentHeight==="proportional")? (totalHeight * percentage): (totalHeight / count),
                     offset = (width - lastUpperSide* (nextPercentage / percentage))/2;
                     offset = limitValue(offset, 0, width);
 
@@ -326,7 +335,7 @@ kendo_module({
 
             for (i = 0; i < count; i++) {
                 segments[i].reflow(chartBox);
-           }
+            }
         }
     });
 
