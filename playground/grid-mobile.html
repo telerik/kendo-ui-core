@@ -19,7 +19,9 @@
                     schema: {
                         model: {
                             fields: {
-                                bool: { type: "boolean" }
+                                bool: { type: "boolean" },
+                                date: { type: "date" },
+                                number: { type: "number" }
                             }
                         }
                     },
@@ -27,12 +29,16 @@
                     {
                         foo: "foo",
                         bar: "bar",
-                        bool: true
+                        bool: true,
+                        number: 1,
+                        date: new Date()
                     },
                     {
-                        foo: "baz",
+                        foo: "bar",
                         bar: "bax",
-                        bool: false
+                        bool: false,
+                        number: 8,
+                        date: new Date()
                     }
                     ],
                     pageSize: 2
@@ -41,8 +47,8 @@
                     {
                         field: "foo",
                         values: [
-                            { value: 1, text: "foo" },
-                            { value: 2, text: "bar" }
+                            { value: "foo", text: "foo" },
+                            { value: "bar", text: "bar" }
                         ]
                     },
                     "bar",
@@ -51,7 +57,9 @@
                     "bool"
                 ],
                 pageable: true,
-                filterable: true
+                filterable: true,
+                sortable: true,
+                columnMenu: true
             });
         </script>
     </body>

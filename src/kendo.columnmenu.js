@@ -393,7 +393,17 @@ kendo_module({
                         field: that.field
                     },
                     options.filterable)
-                ).data(FILTERMENU);
+                    ).data(FILTERMENU);
+
+                if (that._isMobile) {
+                    that.menu.bind(SELECT, function(e) {
+                        var item = $(e.item);
+
+                        if (item.hasClass("k-filter-item")) {
+                            that.pane.navigate(that.filterMenu.view);
+                        }
+                    });
+                }
             }
         },
 
@@ -461,7 +471,11 @@ kendo_module({
                         '#}#'+
                     '#}#'+
                     '#if(filterable){#'+
-                        '<li class="k-item k-filter-item"><span class="k-link"><span class="k-sprite k-filter"></span>${messages.filter}</span></li>'+
+                        '<li class="k-item k-filter-item">'+
+                            '<span class="k-link k-filterable">'+
+                                '<span class="k-sprite k-filter"></span>'+
+                                '${messages.filter}</span>'+
+                        '</li>'+
                     '#}#'+
                     '</ul>';
 
@@ -469,7 +483,7 @@ kendo_module({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
 
-            this.element.on("click" + NS, "li", "_click");
+            this.element.on("click" + NS, "li:not(.k-separator)", "_click");
         },
 
         events: [ SELECT ],
