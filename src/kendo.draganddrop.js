@@ -229,8 +229,7 @@ kendo_module({
 
     var PaneDimensions = Observable.extend({
         init: function(options) {
-            var that = this,
-                refresh = proxy(that.refresh, that);
+            var that = this;
 
             Observable.fn.init.call(that);
 

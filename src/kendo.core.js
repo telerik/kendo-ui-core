@@ -2469,7 +2469,7 @@ function pad(number, digits, end) {
         }
 
         return { width: domElement.offsetWidth, height: domElement.offsetHeight };
-    }
+    };
 
     kendo.notify = noop;
 
