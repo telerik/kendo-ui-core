@@ -126,7 +126,14 @@
                     "title": "Pan and zoom in Bar charts | Kendo UI Bar Chart demo",
                     "meta": "Achieve pan and zoom effect in Kendo UI Bar charts. This example demonstrates how you can apply pan and zoom to your bar charts.",
                     "packages": [ "!mvc" ]
-            }],
+                }, {
+                    "text": "MVVM",
+                    "url": "bar-charts/mvvm.html",
+                    "title": "MVVM support in Kendo UI Chart",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                }
+            ],
             "name": "bar-charts"
         }, {
             "text": "Bubble Charts",
