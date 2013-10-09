@@ -434,6 +434,15 @@ kendo_module({
             this.movable.moveTo({x: x, y: y});
         },
 
+        animatedScrollTo: function(x, y) {
+            var animatedScroller = new AnimatedScroller({
+                origin: { x: this.movable.x, y: this.movable.y },
+                destination: { x: x, y: y },
+                movable: this.movable
+            });
+            animatedScroller.start();
+        },
+
         pullHandled: function() {
             var that = this;
             that.refreshHint.removeClass(REFRESHCLASS);
