@@ -647,7 +647,14 @@
                 "url": "linear-gauge/scale-options.html",
                 "title": "Scale customization example for Kendo UI Linear Gauge",
                 "meta": "This sample illustrates how you can customize Kendo UI Linear Gauge by changing the location of the gauge scale and its appearance."
-            }],
+            }, {
+                "text": "MVVM",
+                "url": "linear-gauge/mvvm.html",
+                "title": "MVVM support in Kendo UI Linear Gauge",
+                "meta": "Value and visible MVVM binding support in Kendo UI Linear Gauge",
+                "packages": ["!mvc", "!jsp", "!php"]
+            }
+            ],
             "name": "linear-gauge"
         }
     ],

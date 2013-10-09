@@ -1,9 +1,9 @@
 <div id="example" class="k-content">
     <div class="configuration-horizontal">
         <div class="config-section">
-            <span class="configHead">Radial Gauge</span>
-            <span  data-role="radialgauge"
-                   data-scale="{ min: 0, max: 100 }"
+            <span class="configHead">Linear Gauge</span>
+            <span  data-role="lineargauge"
+                   data-scale="{ min:0, max: 50}"
                    data-bind="visible: isVisible,
                               value: selectedNumber"
                    style="width: 180px"></span>
@@ -18,11 +18,11 @@
         </div>
         <div class="config-section">
             <span class="configHead">Value</span>
-            <input data-role="slider" data-min="0" data-max="100" data-small-step="10" data-large-step="20" data-bind="value: selectedNumber">
+            <input data-role="slider" data-min="0" data-max="50" data-small-step="5" data-large-step="10" data-bind="value: selectedNumber">
         </div>
         <div class="config-section" style="width: 440px">
             <span class="configHead">Information</span>
-            Kendo UI Radial Gauge supports the
+            Kendo UI Linear Gauge supports the
             <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/value">value</a> and
             <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
         </div>
