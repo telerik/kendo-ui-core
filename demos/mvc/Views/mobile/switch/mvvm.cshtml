@@ -1,0 +1,57 @@
+
+<div data-model="viewModel" data-role="view" id="button-events" data-title="Button MVVM">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Switch
+            <ul>
+                <li>
+                    Check <input data-role="switch"
+                                 data-bind="enabled: isEnabled,
+                                            visible: isVisible,
+                                            checked: isChecked,
+                                            events: { change: onChange }">
+                </li>
+                <li>
+                    <div class="console"></div>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Configuration
+            <ul>
+                <li>Check <input type="checkbox" data-role="switch" data-bind="checked: isChecked"></li>
+                <li>Enable <input type="checkbox" data-role="switch" data-bind="checked: isEnabled"></li>
+                <li>Visible <input type="checkbox" data-role="switch" data-bind="checked: isVisible"></li>
+            </ul>
+        </li>
+    </ul>
+
+    <p>
+        Kendo UI Mobile Switch supports the
+        <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/checked">checked</a>,
+        <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/enabled">enabled</a>,
+        <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a> and
+        <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+    </p>
+</div>
+
+<script>
+    var viewModel = kendo.observable({
+        isChecked: true,
+        isEnabled: true,
+        isVisible: true,
+        onChange: function(e) {
+            kendoConsole.log("event :: change (" +  (e.checked ? "checked" : "unchecked") + ")");
+        }
+    });
+</script>
+
+<style scoped>
+    .km-root .console {
+        background-color: transparent;
+        border: 0;
+        margin: 1.4em 1em;
+        overflow: hidden;
+        height: auto;
+    }
+</style>

@@ -102,11 +102,12 @@
                     "url": "buttongroup/appearance.html",
                     "title": "Kendo UI Mobile Button Group Theming",
                     "meta": "This demo shows how you can customize the appearance of Kendo UI ButtonGroup mobile widget. You have full control over the style of the buttons group."
-                }, {
+                },
+                {
                     "text": "MVVM",
                     "url": "buttongroup/mvvm.html",
                     "title": "MVVM support in Kendo UI Mobile ButtonGroup",
-                    "meta": "Enabled, events and visible MVVM binding support in Kendo UI Mobile ButtonGroup",
+                    "meta": "Events and visible MVVM binding support in Kendo UI Mobile ButtonGroup",
                     "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
@@ -330,6 +331,13 @@
                     "url": "switch/events.html",
                     "title": "Kendo UI Mobile Switch widget events examples",
                     "meta": "This demo shows all events, enabled for Kendo UI Mobile Switch component. The events correlate to the value of the switch widget."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "switch/mvvm.html",
+                    "title": "MVVM support in Kendo UI Mobile Switch",
+                    "meta": "Checked, enabled, events and visible MVVM binding support in Kendo UI Mobile Switch",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
