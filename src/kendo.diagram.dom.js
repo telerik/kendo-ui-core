@@ -453,6 +453,12 @@ kendo_module({
                 result.rotate(rotate.center().plus(tl), 360 - rotate.angle);
             }
             return result;
+        },
+        redraw: function (options) {
+            if (options) {
+                this.options = deepExtend({}, this.options, options);
+            }
+            this.shapeVisual.redraw(options);
         }
     });
 
@@ -491,7 +497,7 @@ kendo_module({
          */
         Cascading: 1
     };
-    
+
     /**
      * The visual link between two Shapes through the intermediate of Connectors.
      */

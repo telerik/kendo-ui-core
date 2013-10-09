@@ -15,6 +15,7 @@
 
         #canvas {
             height: 95%;
+            background-color: #fce8e8;
         }
 
         .menu-text {
@@ -93,6 +94,7 @@
     <script src="../../src/kendo.resizable.js"></script>
     <script src="../../src/kendo.splitter.js"></script>
     <script src="../../src/kendo.listview.js"></script>
+    <script src="../../src/kendo.colorpicker.js"></script>
 
     <script src="../../src/kendo.diagram.utils.js"></script>
     <script src="../../src/kendo.diagram.math.js"></script>
@@ -120,6 +122,8 @@
         <input type="button" class="diagramCommandBtn" id="toBackButton" title="To Back" value="To Back"/>
         <span class="menu-text">Start-cap:</span><input id="StartCap" value="1"/>
         <span class="menu-text">End-cap:</span><input id="EndCap" value="1"/>
+        <input id="backgroundPicker"/>
+        <input id="shapePicker"/>
     </div>
     <div id="splitter">
         <div id="toolBoxDiv">
@@ -143,6 +147,8 @@
         </svg>
         <h3>#:options.name#</h3>
     </div>
+
+
 </script>
 
 <script>
@@ -447,6 +453,25 @@ $(function () {
                     this.redraw({endCap: that.dataItem(e.item.index()).value});
                 }
             });
+        }
+    });
+
+    $("#backgroundPicker").kendoColorPicker({
+        value: "#fce8e8",
+        buttons: false,
+        select: function (e) {
+            $("#canvas").css("background-color", e.value);
+        }
+    });
+
+    $("#shapePicker").kendoColorPicker({
+        value: "#fce8e8",
+        buttons: false,
+        select: function (e) {
+            var items = diagram.select();
+            for (var i = 0; i < items.length; i++) {
+                items[i].redraw({background: e.value});
+            }
         }
     });
 });

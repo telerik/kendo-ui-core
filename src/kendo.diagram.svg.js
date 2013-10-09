@@ -222,9 +222,6 @@ kendo_module({
         init: function (native, options) {
             var that = this;
             Element.fn.init.call(that, native, options);
-            if (this.options.background !== undefined) {
-                this.background(this.options.background);
-            }
         },
         options: {
             stroke: "gray",
@@ -233,14 +230,10 @@ kendo_module({
             strokeDashArray: "none"
         },
         background: function (value) {
-            if (value != "none") {
-                var color = new dataviz.Color(value);
-                this._bg = color.toHex();
+            if (value !== undefined) {
+                this.options.background = value;
             }
-            else {
-                this._bg = value;
-            }
-            this.native.setAttribute("fill", this._bg);
+            this._background(this.options.background);
         },
         redraw: function (options) {
             var that = this;
@@ -250,9 +243,24 @@ kendo_module({
             that.setAtr("stroke-dasharray", "strokeDashArray");
             that.setAtr("stroke-width", "strokeWidth");
             that.setAtr("stroke-thickness", "strokeThickness");
+            that.background();
         },
         _hover: function (value) {
-            this.background(value ? this.options.hoveredBackground : this.options.background);
+            this._background(value ? this.options.hoveredBackground : this.options.background);
+        },
+        _background: function (value) {
+            this.native.setAttribute("fill", this._getColor(value));
+        },
+        _getColor: function (value) {
+            var bg;
+            if (value != "none") {
+                var color = new dataviz.Color(value);
+                bg = color.toHex();
+            }
+            else {
+                bg = value;
+            }
+            return bg;
         }
     });
 
