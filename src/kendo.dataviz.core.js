@@ -3709,14 +3709,20 @@ kendo_module({
             var that = this,                
                 orientation = {xField: X, yField: Y},
                 fn, y2;
-            if(!that.isMonotonicByField(p0,p1,p2, X)){                
-                fn = that.lineFunction(p0,p1);
-                y2 = that.calculateFunction(fn, p2.x);
-                
-                if(!(p0.y < p1.y && p2.y < y2) && 
-                    !(p1.y < p0.y && p2.y > y2)) {
+            if(!that.isMonotonicByField(p0,p1,p2, X)){
+                if((p0.x === p1.x && p1.y < p2.y) || (p1.x === p2.x && p2.y < p1.y)){
                     orientation.xField = Y;
-                    orientation.yField = X; 
+                    orientation.yField = X;  
+                }  
+                else {
+                    fn = that.lineFunction(p0,p1);
+                    y2 = that.calculateFunction(fn, p2.x);
+                    
+                    if(!(p0.y < p1.y && p2.y < y2) && 
+                        !(p1.y < p0.y && p2.y > y2)) {
+                        orientation.xField = Y;
+                        orientation.yField = X; 
+                    }
                 }
             }
             return orientation;
@@ -3727,7 +3733,7 @@ kendo_module({
                 fn = that.lineFunction(p0,p1),
                 y2 = that.calculateFunction(fn, p2.x);
             
-            return round(y2,1) === round(p2.y,1);
+            return (p0.x == p1.x && p1.x == p2.x) || round(y2,1) === round(p2.y,1);
         },
         
         lineFunction: function(p1, p2){
@@ -3761,7 +3767,7 @@ kendo_module({
                that.restrictControlPoint(p1,p2, nextControlPoint,tangent);
             }
             else{                
-                 if(that.isMonotonicByField(p0,p1,p2, xField)){                                       
+                 if(that.isMonotonicByField(p0,p1,p2, xField) || p0[xField] == p1[xField]){                                       
                     controlPoint2 = that.getSecondControlPoint(allowedError, p0, p1, xField, yField);
                     nextControlPoint = that.getFirstControlPoint(allowedError, p1, p2, xField, yField);
                  }
@@ -3814,7 +3820,7 @@ kendo_module({
         },  
         
         getFirstControlPoint: function(tangent, p0,p3, xField, yField){
-            var controlPoint = new Point2D(),
+            var controlPoint = Point2D(),
                 t1 = p0[xField],
                 t2 = p3[xField],
                 t = t2 - t1,
@@ -3826,7 +3832,7 @@ kendo_module({
         },
         
         getSecondControlPoint: function(tangent, p0,p3, xField, yField){
-            var controlPoint = new Point2D(),
+            var controlPoint = Point2D(),
                 t1 = p0[xField],
                 t2 = p3[xField],
                 t = t2 - t1,
