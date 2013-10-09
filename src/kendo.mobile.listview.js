@@ -907,6 +907,7 @@ kendo_module({
             }
 
             delete this.element.unwrap();
+            delete this.element;
             delete this.wrapper;
             delete this._userEvents;
         },
