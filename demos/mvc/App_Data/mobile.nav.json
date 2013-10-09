@@ -394,6 +394,12 @@
                     "url": "forms/checkboxes.html",
                     "title": "Checkboxes example for Kendo UI Mobile Application",
                     "meta": "This demo illustrates how checkboxes and radio buttons are enabled in Kendo UI Mobile Application."
+                },
+                {
+                    "text": "Customizing Appearance",
+                    "url": "forms/appearance.html",
+                    "title": "Kendo UI Mobile Customizing Form Appearance Demo",
+                    "meta": "This demo shows how you can style the labels and form elements in a Kendo UI Mobile application to appear on separate rows."
                 }
             ]
         },

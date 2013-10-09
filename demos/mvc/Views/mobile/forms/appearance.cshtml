@@ -1,0 +1,55 @@
+<div id="forms" data-role="view" data-title="Appearance" data-use-native-scrolling="true">
+    <form action="./index.html">
+        <ul data-role="listview" data-style="inset">
+            <li>
+                <label>Type text
+                    <input type="text" value="Text" />
+                </label>
+            </li>
+            <li>
+                <label>
+                    Type password
+                    <input type="password" value="password" />
+                </label>
+            </li>
+            <li>
+                <label>
+                    Type search
+                    <input type="search" value="search" />
+                </label>
+            </li>
+        </ul>
+    </form>
+</div>
+
+<style scoped>
+    .km-root .km-listview label
+    {
+      width: 100%;
+    }
+
+    .km-wp .km-listview label
+    {
+      color: #999;
+    }
+
+    .km-root .km-pane .km-view .km-listview input
+    {
+      position: relative;
+      width: 100%;
+      right: 0;
+      margin-top: 0;
+      top: 0;
+    }
+
+    .km-root .km-wp .km-view .km-listview input
+    {
+      margin-top: .2em;
+    }
+
+    .km-root .km-ios .km-view .km-listview input,
+    .km-root .km-ios7 .km-view .km-listview input
+    {
+      padding: .4em 0;
+    }
+</style>
