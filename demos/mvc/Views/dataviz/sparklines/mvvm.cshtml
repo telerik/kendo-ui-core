@@ -1,0 +1,61 @@
+<div id="example" class="k-content">
+    <div class="configuration-horizontal">
+        <div class="config-section" style="width: 440px">
+            <span class="configHead">Sparkline</span>
+            <p>Hover some series</p>
+            <div data-role="sparkline"
+                 data-series="[{
+                                   type: 'column',
+                                   field: 'TMax',
+                                   color: '#ff0000',
+                                   negativeColor: '#0099ff'
+                               }]"
+                 data-tooltip="{ visible: false }"
+                 data-bind="visible: isVisible,
+                            source: weather,
+                            events: { seriesHover: onSeriesHover }"
+                 style="height:30px"></div>
+        </div>
+        <div class="config-section" style="width: 200px">
+            <div class="configHead">Console</div>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Configuration</span>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="config-section" style="width: 440px">
+            <span class="configHead">Information</span>
+            Kendo UI Sparkline supports the
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/source">source</a> and
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    function createChart() {
+        var viewModel = kendo.observable({
+            isVisible: true,
+            onSeriesHover: function(e) {
+                 kendoConsole.log(kendo.format("event :: seriesHover ({0})", e.value));
+            },
+            weather: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                         url: "http://demos.kendoui.com/service/Weather/SOFIA/2012/1",
+                         dataType: "jsonp"
+                    }
+                }
+            })
+        });
+        kendo.bind($("#example"), viewModel);
+    }
+
+    $(document).ready(createChart).bind("kendo:skinChange", createChart);
+
+</script>
+</div>

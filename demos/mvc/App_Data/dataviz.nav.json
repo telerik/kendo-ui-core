@@ -471,7 +471,14 @@
                 "url": "sparklines/local-data.html",
                 "title": "Local data binding in Kendo UI Sparkline Chart | Kendo UI Sparklines",
                 "meta": "Learn how to bind local data to Kendo UI jQuery Sparkline charting component. Try it now!"
-            }],
+            }, {
+                "text": "MVVM",
+                "url": "sparklines/mvvm.html",
+                "title": "MVVM support in Kendo UI Sparkline",
+                "meta": "Events, source and visible MVVM binding support in Kendo UI Sparkline",
+                "packages": ["!mvc", "!jsp", "!php"]
+            }
+            ],
             "name": "sparklines"
         }, {
             "text": "Step Area Charts",
