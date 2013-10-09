@@ -1519,6 +1519,7 @@ kendo_module({
              var that = this;
              Widget.fn.init.call(that, element, options);
              that.element = $(element);
+             that.wrapper = that.element;
              that.element.addClass("k-barcode");
              that.view = dataviz.ViewFactory.current.create({}, that.options.renderAs);
              that.setOptions(options);

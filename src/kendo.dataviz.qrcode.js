@@ -912,6 +912,7 @@ kendo_module({
                 Widget.fn.init.call(that, element, options);
 
                 that.element = $(element);
+                that.wrapper = that.element;
                 that.element.addClass("k-qrcode");
                 that._view = dataviz.ViewFactory.current.create({}, that.options.renderAs);
                 that.setOptions(options);
