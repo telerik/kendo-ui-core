@@ -679,7 +679,7 @@
                 "text": "MVVM",
                 "url": "barcode/mvvm.html",
                 "title": "MVVM support in Kendo UI Barcode",
-                "meta": "Visible MVVM binding support in Kendo UI Barcode",
+                "meta": "Value MVVM binding support in Kendo UI Barcode",
                 "packages": ["!mvc", "!jsp", "!php"]
             }
             ],
@@ -699,7 +699,14 @@
                 "url": "qrcode/api.html",
                 "title": "Kendo UI QRCode API demo",
                 "meta": "This demo shows how Kendo UI QRCode Widget API works and what kind of functions it supports."
-            }],
+            }, {
+                "text": "MVVM",
+                "url": "qrcode/mvvm.html",
+                "title": "MVVM support in Kendo UI QR code",
+                "meta": "Value MVVM binding support in Kendo UI QR code",
+                "packages": ["!mvc", "!jsp", "!php"]
+            }
+            ],
             "name": "qrcode"
         }
     ],
