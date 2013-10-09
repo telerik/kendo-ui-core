@@ -408,9 +408,17 @@ kendo_module({
 
         _resize: function() {
             var items = this.items,
+                top = 0,
+                bottom = 0,
+                firstItem = items[0],
                 lastItem = items[items.length - 1];
 
-            this.trigger("resize", { top: items[0].top, bottom: lastItem.bottom });
+            if (firstItem) {
+                top = firstItem.top;
+                bottom = lastItem.bottom;
+            }
+
+            this.trigger("resize", { top: top, bottom: bottom });
 
             if (this.footer) {
                 this.footer.below(lastItem);
@@ -906,7 +914,7 @@ kendo_module({
                 this._itemBinder.destroy();
             }
 
-            delete this.element.unwrap();
+            this.element.unwrap();
             delete this.element;
             delete this.wrapper;
             delete this._userEvents;
