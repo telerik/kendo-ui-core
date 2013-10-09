@@ -4,7 +4,7 @@
             <li>
                 Add new item
                 <ul>
-                    <li><label>Add item: <input type="text" placeholder="item name&hellip;" id="listview-new-item" /></label></li>
+                    <li><label>Add item: <input type="text" placeholder="item name&hellip;" data-bind="value: newItemValue" /></label></li>
                 </ul>
                 <button type="submit" class="km-button" style="width: 100%; margin: 1em 0; font-weight: bold; font-size: 1.1em;"><span class="km-text">Add</span></button>
             </li>
@@ -33,10 +33,9 @@
 <script>
     var mobileListViewModel = kendo.observable({
         source: [ "foo", "bar" ],
-        isEnabled: true,
-        isVisible: true,
+        newItemValue: "",
         add: function(e) {
-            var val = $("#listview-new-item").val();
+            var val = this.get("newItemValue");
             if (val) {
                 this.source.push(val);
             }
