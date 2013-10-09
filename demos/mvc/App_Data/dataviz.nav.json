@@ -187,7 +187,14 @@
                     "url": "bullet-charts/remote-data.html",
                     "title": "Binding Kendo UI Bullet Chart to remote data",
                     "meta": "This online demo will show you how to bind a Kendo UI Bullet Chart to remote data."
-            }]
+            }, {
+                "text": "MVVM",
+                "url": "bullet-charts/mvvm.html",
+                "title": "MVVM support in Kendo UI Chart",
+                "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                "packages": ["!mvc", "!jsp", "!php"]
+            }
+            ]
         }, {
             "text": "Line Charts",
             "documentation": "dataviz/chart",
