@@ -168,6 +168,26 @@
                 ]
             });
 
+            var commonRe = /common/gi;
+
+            function kendoStylesheets() {
+                return $("head link").filter(function () {
+                    return (/kendo\./gi).test(this.href);
+                });
+            }
+
+            function commonLink() {
+                return kendoStylesheets().filter(function () {
+                    return commonRe.test(this.href);
+                });
+            }
+
+            function themeLink() {
+                return kendoStylesheets().filter(function () {
+                    return !commonRe.test(this.href);
+                });
+            }
+
             function sliderChange(e) {
                 var value = e && e.value;
 
