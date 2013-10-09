@@ -112,7 +112,7 @@
         <input type="button" class="diagramCommandBtn" id="deleteButton" title="Delete (DEL)" value="Delete"/>
         <input type="button" class="diagramCommandBtn" id="selectAllButton" title="Select All (CTRL+A)"
                value="SelectAll"/>
-        <input type="button" class="diagramCommandBtn" id="saveButton" title="Save As (CTRL + S)" value="Save"/>
+        <a type="button" id="saveButton" title="Save As (CTRL + S)" href="#">Save</a>
         <input type="file" class="diagramCommandBtn" id="loadButton" title="Load (CTRL+O)" value="Load"/>
         <span class="menu-text">Layout:</span><input id="Layouts" value="1"/>
         <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
@@ -143,7 +143,6 @@
         </svg>
         <h3>#:options.name#</h3>
     </div>
-
 </script>
 
 <script>
@@ -261,15 +260,13 @@ $(function () {
         diagram.select(true);
     });
     $("#saveButton").click(function (e) {
-        var json = JSON.stringify(diagram.save());
-        var blob = new Blob([json], {type: "application/json"});
-        var url = URL.createObjectURL(blob);
+        var save = $("#saveButton"),
+                json = JSON.stringify(diagram.save()),
+                blob = new Blob([json], {type: "application/json"}),
+                url = URL.createObjectURL(blob);
 
-        var a = document.createElement('a');
-        a.download = "diagram.json";
-        a.href = url;
-        a.textContent = "Download diagram.json";
-        $("#toolbarDiv").append(a);
+        save.attr("download", "diagram.json"); // Works only in Chrome and FF.
+        save.attr("href", url);
     });
     $("#loadButton").change(function (e) {
         var reader = new FileReader(),
@@ -277,8 +274,6 @@ $(function () {
 
         reader.onload = (function (file) {
             return function (e) {
-                // Render thumbnail.
-                console.log(e.target.result);
                 var saved = diagram.load(JSON.parse(e.target.result));
             };
         })(f);
