@@ -62,7 +62,7 @@
                     "text": "MVVM",
                     "url": "button/mvvm.html",
                     "title": "MVVM support in Kendo UI Mobile Button",
-                    "meta": "Enabled, events and visible MVVM binding support in Kendo UI Mobile Window",
+                    "meta": "Enabled, events and visible MVVM binding support in Kendo UI Mobile Button",
                     "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
@@ -102,6 +102,12 @@
                     "url": "buttongroup/appearance.html",
                     "title": "Kendo UI Mobile Button Group Theming",
                     "meta": "This demo shows how you can customize the appearance of Kendo UI ButtonGroup mobile widget. You have full control over the style of the buttons group."
+                }, {
+                    "text": "MVVM",
+                    "url": "buttongroup/mvvm.html",
+                    "title": "MVVM support in Kendo UI Mobile ButtonGroup",
+                    "meta": "Enabled, events and visible MVVM binding support in Kendo UI Mobile ButtonGroup",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
