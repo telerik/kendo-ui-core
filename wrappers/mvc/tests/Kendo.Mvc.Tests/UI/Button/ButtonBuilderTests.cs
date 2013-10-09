@@ -62,6 +62,22 @@ namespace Kendo.Mvc.UI.Tests
         }
 
         [Fact]
+        public void Icon_sets_Icon_property()
+        {
+            const string icon = "foo";
+
+            builder.Icon(icon);
+
+            component.Icon.ShouldEqual(icon);
+        }
+
+        [Fact]
+        public void Icon_returns_builder()
+        {
+            builder.Icon("foo").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
         public void ImageUrl_sets_ImageUrl_property()
         {
             const string url = "foo";

@@ -11,7 +11,8 @@
 
 @(Html.Kendo().Button()
     .Name("iconTextButton")
-    .SpriteCssClass("k-icon k-i-ungroup")
+    .HtmlAttributes( new {type = "button"} )
+    .Icon("ungroup")
     .Content("Kendo UI Button"))
 
 <script>

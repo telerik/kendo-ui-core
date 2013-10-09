@@ -8,24 +8,28 @@ require_once '../../lib/Kendo/Autoload.php';
 <?php
 
 $textButton = new \Kendo\UI\Button('textButton');
-$textButton->content('Text button');
+$textButton->attr('type', 'button')
+           ->content('Text button');
 
 echo $textButton->render();
 
 $iconTextButton = new \Kendo\UI\Button('iconTextButton');
-$iconTextButton->spriteCssClass('k-icon k-i-ungroup')
+$iconTextButton->tag('a')
+               ->icon('ungroup')
                ->content('Icon and text');
 
 echo $iconTextButton->render();
 
 $iconButton = new \Kendo\UI\Button('iconButton');
-$iconButton->spriteCssClass('k-icon k-i-refresh')
-           ->content('<span class="k-sprite">Refresh</span>');
+$iconButton->tag('em')
+           ->icon('refresh')
+           ->content('<span class="k-icon">Refresh</span>');
 
 echo $iconButton->render();
 
 $disabledButton = new \Kendo\UI\Button('disabledButton');
-$disabledButton->enable(false)
+$disabledButton->tag('span')
+               ->enable(false)
                ->content('Disabled button');
 
 echo $disabledButton->render();

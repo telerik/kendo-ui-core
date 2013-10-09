@@ -15,10 +15,13 @@
             
 </style>
 
-<kendo:button name="iconButton" spriteCssClass="k-icon k-i-refresh" content="Sprite icon">
+<kendo:button name="iconButton" type="button" spriteCssClass="k-icon k-i-refresh" content="Sprite icon">
 </kendo:button>
 
-<kendo:button name="imageButton" imageUrl="${snowboarding}" content="Image icon">
+<kendo:button name="kendoIconButton" type="button" icon="note" content="Kendo UI sprite icon">
+</kendo:button>
+
+<kendo:button name="imageButton" type="button" imageUrl="${snowboarding}" content="Image icon">
 </kendo:button>
 
 <demo:footer />

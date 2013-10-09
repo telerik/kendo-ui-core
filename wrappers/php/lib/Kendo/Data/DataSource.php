@@ -79,7 +79,7 @@ makes a HTTP request for every CRUD operation.
     }
 
     /**
-    * The configuration used to parse the remote sevice response.
+    * The configuration used to parse the remote service response.
     * @param \Kendo\Data\DataSourceSchema|array $value
     * @return \Kendo\Data\DataSource
     */

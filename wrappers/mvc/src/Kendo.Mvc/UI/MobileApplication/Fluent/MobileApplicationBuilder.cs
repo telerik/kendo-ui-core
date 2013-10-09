@@ -78,7 +78,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Which platform look to force on the application. Can be one of "ios", "android", "blackberry".
+        /// Which platform look to force on the application. Supported values are "ios", "android", "blackberry" and "wp8".
         /// </summary>
         /// <param name="value">The value that configures the platform.</param>
         public MobileApplicationBuilder Platform(string value)
@@ -89,7 +89,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// If set to true, the application will not use ajax to load remote views.
+        /// If set to true, the application will not use AJAX to load remote views.
         /// </summary>
         /// <param name="value">The value that configures the servernavigation.</param>
         public MobileApplicationBuilder ServerNavigation(bool value)
@@ -106,6 +106,17 @@ namespace Kendo.Mvc.UI.Fluent
         public MobileApplicationBuilder Skin(string value)
         {
             container.Skin = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Set the status bar style meta tag in iOS used to control the styling of the status bar in a pinned to the Home Screen app. Available as of Q2 2013 SP.
+        /// </summary>
+        /// <param name="value">The value that configures the statusbarstyle.</param>
+        public MobileApplicationBuilder StatusBarStyle(string value)
+        {
+            container.StatusBarStyle = value;
 
             return this;
         }

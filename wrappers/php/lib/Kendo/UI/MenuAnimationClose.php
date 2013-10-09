@@ -15,7 +15,7 @@ class MenuAnimationClose extends \Kendo\SerializableObject {
     }
 
     /**
-    * Difines the animation duration.
+    * Defines the animation duration.
     * @param float $value
     * @return \Kendo\UI\MenuAnimationClose
     */

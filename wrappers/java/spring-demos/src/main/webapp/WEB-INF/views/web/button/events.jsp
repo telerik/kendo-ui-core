@@ -4,13 +4,13 @@
 
 <demo:header />
 
-<kendo:button name="textButton" content="Text button" click="onClick">
+<kendo:button name="textButton" type="button" content="Text button" click="onClick">
 </kendo:button>
 
-<kendo:button name="refreshButton" spriteCssClass="k-icon k-i-refresh" content="Refresh button" click="onClick">
+<kendo:button name="refreshButton" tag="a" icon="refresh" content="Refresh button" click="onClick">
 </kendo:button>
 
-<kendo:button name="disabledButton" enable="false" content="Disabled button" click="onClick">
+<kendo:button name="disabledButton" tag="span" enable="false" content="Disabled button" click="onClick">
 </kendo:button>
 
 <p>(The disabled button will not fire click events)</p>

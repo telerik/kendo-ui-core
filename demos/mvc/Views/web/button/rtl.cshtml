@@ -4,7 +4,7 @@
             <div class="k-rtl">
                 <button type="button" id="textButton">Text button</button>
                 <a id="iconTextButton">Icon and text</a>
-                <em id="iconButton"><span class="k-sprite">Edit</span></em>
+                <em id="iconButton"><span class="k-icon">Refresh</span></em>
                 <span id="disabledButton">Disabled button</span>
             </div>
 
@@ -13,11 +13,11 @@
                     $("#textButton").kendoButton();
 
                     $("#iconTextButton").kendoButton({
-                        spriteCssClass: "k-icon k-i-ungroup"
+                        icon: "ungroup"
                     });
 
                     $("#iconButton").kendoButton({
-                        spriteCssClass: "k-icon k-i-refresh"
+                        icon: "refresh"
                     });
 
                     $("#disabledButton").kendoButton({

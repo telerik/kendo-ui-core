@@ -16,11 +16,19 @@
 
 <%= Html.Kendo().Button()
     .Name("iconButton")
+    .HtmlAttributes( new {type = "button"} )
     .SpriteCssClass("k-icon k-i-refresh")
     .Content("Sprite icon") %>
 
 <%= Html.Kendo().Button()
+    .Name("kendoIconButton")
+    .HtmlAttributes( new {type = "button"} )
+    .Icon("note")
+    .Content("Kendo UI sprite icon") %>
+
+<%= Html.Kendo().Button()
     .Name("imageButton")
+    .HtmlAttributes( new {type = "button"} )
     .ImageUrl(Url.Content("~/Content/shared/icons/sports/snowboarding.png"))
     .Content("Image icon") %>
 

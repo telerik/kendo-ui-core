@@ -8,18 +8,18 @@
 
 <p>
 
-<kendo:button name="textButton" content="Text button">
+<kendo:button name="textButton" type="button" content="Text button">
 </kendo:button>
 
-<kendo:button name="iconTextButton" spriteCssClass="k-icon k-i-ungroup" content="Icon and text">
+<kendo:button name="iconTextButton" tag="a" icon="ungroup" content="Icon and text">
 </kendo:button>
 
-<kendo:button name="iconButton" spriteCssClass="k-icon k-i-refresh" content="<span class='k-sprite'>Refresh</span>">
+<kendo:button name="iconButton" tag="em" icon="refresh" content="<span class='k-icon'>Refresh</span>">
 </kendo:button>
 
 </p><p>
 
-<kendo:button name="disabledButton" enable="false" content="Disabled button">
+<kendo:button name="disabledButton" tag="span" enable="false" content="Disabled button">
 </kendo:button>
 
 </p>

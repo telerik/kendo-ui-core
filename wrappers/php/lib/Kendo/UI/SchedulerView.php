@@ -37,6 +37,28 @@ class SchedulerView extends \kendo\SerializableObject {
     }
 
     /**
+    * Sets the allDaySlotTemplate option of the SchedulerView.
+    * The template used to render the all day slot cell.The fields which can be used in the template are:
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\SchedulerView
+    */
+    public function allDaySlotTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('allDaySlotTemplate', $value);
+    }
+
+    /**
+    * Sets the allDaySlotTemplate option of the SchedulerView.
+    * The template used to render the all day slot cell.The fields which can be used in the template are:
+    * @param string $value The template content.
+    * @return \Kendo\UI\SchedulerView
+    */
+    public function allDaySlotTemplate($value) {
+        return $this->setProperty('allDaySlotTemplate', $value);
+    }
+
+    /**
     * Sets the dateHeaderTemplate option of the SchedulerView.
     * The template used to render the date header cells.By default the scheduler renders the date using the current culture date format.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
@@ -238,6 +260,28 @@ class SchedulerView extends \kendo\SerializableObject {
     */
     public function selectedDateFormat($value) {
         return $this->setProperty('selectedDateFormat', $value);
+    }
+
+    /**
+    * Sets the slotTemplate option of the SchedulerView.
+    * The template used to render the time slot cells.The fields which can be used in the template are:
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\SchedulerView
+    */
+    public function slotTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('slotTemplate', $value);
+    }
+
+    /**
+    * Sets the slotTemplate option of the SchedulerView.
+    * The template used to render the time slot cells.The fields which can be used in the template are:
+    * @param string $value The template content.
+    * @return \Kendo\UI\SchedulerView
+    */
+    public function slotTemplate($value) {
+        return $this->setProperty('slotTemplate', $value);
     }
 
     /**

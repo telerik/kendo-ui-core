@@ -3,7 +3,7 @@
 
             <button type="button" id="textButton">Text button</button>
             <span id="iconTextButton">Icon and text</span>
-            <em id="iconButton"><span class="k-sprite">Refresh</span></em>
+            <em id="iconButton"><span class="k-icon">Refresh</span></em>
             <a id="disabledButton">Disabled button</a>
 
             <script>
@@ -18,12 +18,12 @@
                     });
 
                     $("#iconTextButton").kendoButton({
-                        spriteCssClass: "k-icon k-i-ungroup",
+                        icon: "ungroup",
                         click: onClick
                     });
 
                     $("#iconButton").kendoButton({
-                        spriteCssClass: "k-icon k-i-refresh",
+                        icon: "refresh",
                         click: onClick
                     });
 

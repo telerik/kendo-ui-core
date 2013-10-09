@@ -55,6 +55,7 @@
 
         options: {
             name: "Button",
+            icon: "",
             spriteCssClass: "",
             imageUrl: "",
             enable: true
@@ -103,14 +104,15 @@
             var that = this,
                 element = that.element,
                 options = that.options,
+                icon = options.icon,
                 spriteCssClass = options.spriteCssClass,
                 imageUrl = options.imageUrl,
                 span, img, isEmpty;
 
-            if (spriteCssClass || imageUrl) {
+            if (spriteCssClass || imageUrl || icon) {
                 isEmpty = true;
 
-                element.contents().not("span.k-sprite").not("img.k-image").each(function(idx, el){
+                element.contents().not("span.k-sprite").not("span.k-icon").not("img.k-image").each(function(idx, el){
                     if (el.nodeType == 1 || el.nodeType == 3 && el.nodeValue.trim().length > 0) {
                         isEmpty = false;
                     }
@@ -123,7 +125,13 @@
                 }
             }
 
-            if (spriteCssClass) {
+            if (icon) {
+                span = element.children("span.k-icon").first();
+                if (!span[0]) {
+                    span = $('<span class="k-icon"></span>').prependTo(element);
+                }
+                span.addClass("k-i-" + icon);
+            } else if (spriteCssClass) {
                 span = element.children("span.k-sprite").first();
                 if (!span[0]) {
                     span = $('<span class="k-sprite"></span>').prependTo(element);

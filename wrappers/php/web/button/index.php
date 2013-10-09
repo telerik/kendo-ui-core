@@ -8,20 +8,28 @@ require_once '../../lib/Kendo/Autoload.php';
 <?php
 
 $textButton = new \Kendo\UI\Button('textButton');
-$textButton->tag('span')
+$textButton->attr('type', 'button')
            ->content('Text button');
 
 echo $textButton->render();
 
 $iconTextButton = new \Kendo\UI\Button('iconTextButton');
-$iconTextButton->attr('type', 'button')
+$iconTextButton->tag('a')
                ->spriteCssClass('k-icon k-i-ungroup')
                ->content('Icon and text');
 
 echo $iconTextButton->render();
 
+$kendoIconTextButton = new \Kendo\UI\Button('kendoIconTextButton');
+$kendoIconTextButton->tag('a')
+               ->icon('plus')
+               ->content('Kendo UI Icon');
+
+echo $kendoIconTextButton->render();
+
 $iconButton = new \Kendo\UI\Button('iconButton');
-$iconButton->spriteCssClass('k-icon k-i-refresh')
+$iconButton->tag('em')
+           ->spriteCssClass('k-icon k-i-refresh')
            ->content('<span class="k-sprite">Refresh</span>');
 
 echo $iconButton->render();
@@ -33,13 +41,15 @@ echo $iconButton->render();
 <?php
 
 $disabledButton1 = new \Kendo\UI\Button('disabledButton1');
-$disabledButton1->enable(false)
+$disabledButton1->tag('span')
+                ->enable(false)
                 ->content('Disabled via configuration');
 
 echo $disabledButton1->render();
 
 $disabledButton2 = new \Kendo\UI\Button('disabledButton2');
-$disabledButton2->attr('disabled', 'disabled')
+$disabledButton2->tag('span')
+                ->attr('disabled', 'disabled')
                 ->content('Disabled via HTML attribute');
 
 echo $disabledButton2->render();

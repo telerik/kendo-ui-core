@@ -58,6 +58,7 @@
 
                 var icon = button.data("kendoButton").element.children("span.k-sprite");
 
+                equal(icon.length, 1);
                 ok(icon.hasClass("foo"));
                 ok(icon.hasClass("bar"));
             });
@@ -86,6 +87,52 @@
                 ok(button.hasClass("k-button-icontext"));
             });
 
+            test("icon prepends a span element with corresponding class(es)", function() {
+                getButton().kendoButton({
+                    icon: "foo"
+                });
+
+                var icon = button.data("kendoButton").element.children("span.k-icon");
+
+                equal(icon.length, 1);
+                ok(icon.hasClass("k-i-foo"));
+            });
+
+            test("icon adds corresponding class(es) to span.k-icon element if already exists", function() {
+                getButton('<span class="k-icon"></span>text').kendoButton({
+                    icon: "foo"
+                });
+
+                var icon = button.data("kendoButton").element.children("span.k-icon");
+
+                equal(icon.length, 1);
+                ok(icon.hasClass("k-i-foo"));
+            });
+
+            test("icon adds a k-button-icon class to empty button", function() {
+                getButton("").kendoButton({
+                    icon: "foo"
+                });
+
+                ok(button.hasClass("k-button-icon"));
+            });
+
+            test("icon adds a k-button-icon class to empty button with only an icon span inside", function() {
+                getButton('<span class="k-icon"></span>').kendoButton({
+                    icon: "foo"
+                });
+
+                ok(button.hasClass("k-button-icon"));
+            });
+
+            test("icon adds a k-button-icontext class if button has content", function() {
+                getButton().kendoButton({
+                    icon: "foo"
+                });
+
+                ok(button.hasClass("k-button-icontext"));
+            });
+
             test("imageUrl prepends an img element with src attribute", function() {
                 getButton().kendoButton({
                     imageUrl: "foo"
@@ -104,6 +151,7 @@
 
                 var image = button.data("kendoButton").element.children("img.k-image");
 
+                equal(image.length, 1);
                 equal(image.attr("src"), "foo");
             });
 

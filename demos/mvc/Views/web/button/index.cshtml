@@ -3,11 +3,12 @@
 
             <p>
                 <button type="button" id="textButton">Text button</button>
-                <a type="button" id="iconTextButton">Icon and text</a>
-                <em type="button" id="iconButton"><span class="k-sprite">Refresh</span></em>
+                <a id="iconTextButton">Icon and text</a>
+                <a id="kendoIconTextButton">Kendo UI Icon</a>
+                <em id="iconButton"><span class="k-sprite">Refresh</span></em>
             </p><p>
-                <span type="button" id="disabledButton1">Disabled via configuration</span>
-                <span type="button" id="disabledButton2" disabled>Disabled via HTML attribute</span>
+                <span id="disabledButton1">Disabled via configuration</span>
+                <span id="disabledButton2" disabled>Disabled via HTML attribute</span>
             </p>
 
             <script>
@@ -16,6 +17,10 @@
 
                     $("#iconTextButton").kendoButton({
                         spriteCssClass: "k-icon k-i-ungroup"
+                    });
+
+                    $("#kendoIconTextButton").kendoButton({
+                        icon: "plus"
                     });
 
                     $("#iconButton").kendoButton({

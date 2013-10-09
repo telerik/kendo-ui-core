@@ -15,7 +15,7 @@ class GridEditable extends \Kendo\SerializableObject {
     }
 
     /**
-    * The positon at which new data items are inserted in the grid. Must be set to either "top" or "bottom". By default new data items are inserted at the top.
+    * The position at which new data items are inserted in the grid. Must be set to either "top" or "bottom". By default new data items are inserted at the top.
     * @param string $value
     * @return \Kendo\UI\GridEditable
     */
@@ -72,6 +72,15 @@ which field to update. The other option is to use MVVM bindings in order to bind
     */
     public function update($value) {
         return $this->setProperty('update', $value);
+    }
+
+    /**
+    * Configures the Kendo UI Window instance, which is used when the Grid edit mode is "popup". The configuration is optional.For more information, please refer to the Window configuration API.
+    * @param  $value
+    * @return \Kendo\UI\GridEditable
+    */
+    public function window($value) {
+        return $this->setProperty('window', $value);
     }
 
 //<< Properties

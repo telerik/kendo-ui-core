@@ -34,7 +34,7 @@ If function is assigned, the current path and image name will be provided.
     }
 
     /**
-    * The URL responsible for serving the original image. A file name placeholder should be specifed.
+    * The URL responsible for serving the original image. A file name placeholder should be specified.
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\UI\EditorImageBrowserTransport
     */

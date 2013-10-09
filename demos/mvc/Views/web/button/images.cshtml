@@ -3,12 +3,18 @@
 
             <button type="button" id="iconButton">Sprite icon</button>
 
+            <button type="button" id="kendoIconButton">Kendo UI sprite icon</button>
+
             <button type="button" id="imageButton">Image icon</button>
 
             <script>
                 $(document).ready(function() {
                     $("#iconButton").kendoButton({
                         spriteCssClass: "k-icon k-i-ungroup"
+                    });
+
+                    $("#kendoIconButton").kendoButton({
+                        icon: "note"
                     });
 
                     $("#imageButton").kendoButton({

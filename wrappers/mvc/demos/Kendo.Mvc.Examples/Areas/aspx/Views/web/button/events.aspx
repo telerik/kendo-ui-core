@@ -8,18 +8,21 @@
 <%= Html.Kendo().Button()
     .Name("textButton")
     .Content("Text button")
+    .HtmlAttributes( new {type = "button"} )
     .Events(ev => ev.Click("onClick")) %>
 
 <%= Html.Kendo().Button()
     .Name("refreshButton")
-    .SpriteCssClass("k-icon k-i-refresh")
+    .Icon("refresh")
     .Content("Refresh Button")
+    .HtmlAttributes( new {type = "button"} )
     .Events(ev => ev.Click("onClick")) %>
 
 <%= Html.Kendo().Button()
     .Name("disabledButton")
     .Enable(false)
     .Content("Disabled button")
+    .HtmlAttributes( new {type = "button"} )
     .Events(ev => ev.Click("onClick")) %>
 
 <p>(The disabled button will not fire click events)</p>

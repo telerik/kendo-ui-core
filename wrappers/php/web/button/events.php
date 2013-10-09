@@ -3,20 +3,23 @@ require_once '../../include/header.php';
 require_once '../../lib/Kendo/Autoload.php';
 
 $textButton = new \Kendo\UI\Button('textButton');
-$textButton->content('Text button')
+$textButton->attr('type', 'button')
+           ->content('Text button')
            ->click('onClick');
 
 echo $textButton->render();
 
 $refreshButton = new \Kendo\UI\Button('refreshButton');
-$refreshButton->spriteCssClass('k-icon k-i-refresh')
+$refreshButton->tag('span')
+              ->icon('refresh')
               ->content('Refresh button')
               ->click('onClick');
 
 echo $refreshButton->render();
 
 $disabledButton = new \Kendo\UI\Button('disabledButton');
-$disabledButton->enable(false)
+$disabledButton->tag('a')
+               ->enable(false)
                ->content('Disabled button')
                ->click('onClick');
 

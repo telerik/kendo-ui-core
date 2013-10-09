@@ -19,7 +19,8 @@ require_once '../../lib/Kendo/Autoload.php';
 <?php
 
 $iconTextButton = new \Kendo\UI\Button('iconTextButton');
-$iconTextButton->spriteCssClass('k-icon k-i-ungroup')
+$iconTextButton->attr('type', 'button')
+               ->icon('ungroup')
                ->content('Kendo UI Button');
 
 echo $iconTextButton->render();

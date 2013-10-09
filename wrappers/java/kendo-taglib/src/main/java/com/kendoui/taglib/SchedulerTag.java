@@ -147,6 +147,14 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("allDaySlot", value);
     }
 
+    public boolean getAutoBind() {
+        return (boolean)getProperty("autoBind");
+    }
+
+    public void setAutoBind(boolean value) {
+        setProperty("autoBind", value);
+    }
+
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

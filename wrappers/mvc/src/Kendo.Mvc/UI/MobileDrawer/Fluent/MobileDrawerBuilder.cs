@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// The text to display in the navbar title (if present).
+        /// The text to display in the Navbar title (if present).
         /// </summary>
         /// <param name="value">The value that configures the title.</param>
         public MobileDrawerBuilder Title(string value)

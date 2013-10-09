@@ -9220,7 +9220,7 @@ makes a HTTP request for every CRUD operation.</description>
 
 
     <tag>
-        <description>The configuration used to parse the remote sevice response.</description>
+        <description>The configuration used to parse the remote service response.</description>
         <name>dataSource-schema</name>
         <tag-class>com.kendoui.taglib.datasource.SchemaTag</tag-class>
         <body-content>JSP</body-content>
@@ -10621,7 +10621,7 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The URL responsible for serving the original image. A file name placeholder should be specifed.</description>
+            <description>The URL responsible for serving the original image. A file name placeholder should be specified.</description>
             <name>imageUrl</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -10828,7 +10828,7 @@ If function is assigned, the current path and image name will be provided.</desc
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>The URL responsible for serving the original image. A file name placeholder should be specifed.</description>
+        <description>The URL responsible for serving the original image. A file name placeholder should be specified.</description>
         <name>editor-imageBrowser-transport-imageUrl</name>
         <tag-class>com.kendoui.taglib.editor.ImageBrowserTransportImageUrlFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -11560,7 +11560,7 @@ Each table row consists of table cells (&lt;td&gt;) which represent the grid col
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>The positon at which new data items are inserted in the grid. Must be set to either "top" or "bottom". By default new data items are inserted at the top.</description>
+            <description>The position at which new data items are inserted in the grid. Must be set to either "top" or "bottom". By default new data items are inserted at the top.</description>
             <name>createAt</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -11589,6 +11589,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <name>update</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Configures the Kendo UI Window instance, which is used when the Grid edit mode is "popup". The configuration is optional.For more information, please refer to the Window configuration API.</description>
+            <name>window</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
 
     </tag>
@@ -13101,7 +13107,7 @@ by setting the close animation.  Each animation also has a direction which can b
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>Defines the animation duration.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13123,7 +13129,7 @@ by setting the close animation.  Each animation also has a direction which can b
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>Defines the animation duration.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13605,7 +13611,7 @@ The supported filter values are startswith, endswith and contains.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>Displays a list with predefined page sizes. An array of values to be displayed can be provided. If pageSize option is provided for DataSource then this pageSize value will be automaticaly selected in created selectbox.</description>
+            <description>Displays a list with predefined page sizes. An array of values to be displayed can be provided. If pageSize option is provided for DataSource then this pageSize value will be automatically selected in created selectbox.</description>
             <name>pageSizes</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -13729,7 +13735,7 @@ The supported filter values are startswith, endswith and contains.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>A collection of visual animations used when PanelBar items are exapnd or collapsed through
+            <description>A collection of visual animations used when PanelBar items are expand or collapsed through
 user interactions. Setting this option to false will disable all animations.</description>
             <name>animation</name>
             <rtexprvalue>true</rtexprvalue>
@@ -13776,7 +13782,7 @@ are available:</description>
     </tag>
 
     <tag>
-        <description>A collection of visual animations used when PanelBar items are exapnd or collapsed through
+        <description>A collection of visual animations used when PanelBar items are expand or collapsed through
 user interactions. Setting this option to false will disable all animations.</description>
         <name>panelBar-animation</name>
         <tag-class>com.kendoui.taglib.panelbar.AnimationTag</tag-class>
@@ -14586,6 +14592,13 @@ the RangeSlider tick labels.</description>
         <attribute>
             <description>If set to true the scheduler will display a slot for "all day" events.</description>
             <name>allDaySlot</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>If set to false the widget will not bind to the data source during initialization. In this case data binding will occur when the change event of the
+data source is fired. By default the widget will bind to the data source specified in the configuration.</description>
+            <name>autoBind</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
         </attribute>
@@ -15448,6 +15461,12 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>The template used to render the all day slot cell.The fields which can be used in the template are:</description>
+            <name>allDaySlotTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The template used to render the date header cells.By default the scheduler renders the date using the current culture date format.The fields which can be used in the template are:</description>
             <name>dateHeaderTemplate</name>
             <rtexprvalue>true</rtexprvalue>
@@ -15526,6 +15545,12 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The template used to render the time slot cells.The fields which can be used in the template are:</description>
+            <name>slotTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The start time of the view. The scheduler will display events starting after the startTime.</description>
             <name>startTime</name>
             <rtexprvalue>true</rtexprvalue>
@@ -15597,6 +15622,12 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>The template used to render the all day slot cell.The fields which can be used in the template are:</description>
+        <name>scheduler-view-allDaySlotTemplate</name>
+        <tag-class>com.kendoui.taglib.scheduler.ViewAllDaySlotTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>The template used to render the date header cells.By default the scheduler renders the date using the current culture date format.The fields which can be used in the template are:</description>
         <name>scheduler-view-dateHeaderTemplate</name>
         <tag-class>com.kendoui.taglib.scheduler.ViewDateHeaderTemplateFunctionTag</tag-class>
@@ -15630,6 +15661,12 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
         <description>The template used to render the minor ticks.By default the scheduler renders a "&amp;nbsp;".The fields which can be used in the template are:</description>
         <name>scheduler-view-minorTimeHeaderTemplate</name>
         <tag-class>com.kendoui.taglib.scheduler.ViewMinorTimeHeaderTemplateFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The template used to render the time slot cells.The fields which can be used in the template are:</description>
+        <name>scheduler-view-slotTemplate</name>
+        <tag-class>com.kendoui.taglib.scheduler.ViewSlotTemplateFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
 
@@ -18373,7 +18410,7 @@ including hex and rgb.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The text color of the labels. Any valid CSS color string will work here, inlcuding hex
+            <description>The text color of the labels. Any valid CSS color string will work here, including hex
 and rgb.</description>
             <name>color</name>
             <rtexprvalue>true</rtexprvalue>
@@ -26988,7 +27025,7 @@ will disable all animations in the widget.</description>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>Defines the animation duration.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -27010,7 +27047,7 @@ will disable all animations in the widget.</description>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Difines the animation duration.</description>
+            <description>Defines the animation duration.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>

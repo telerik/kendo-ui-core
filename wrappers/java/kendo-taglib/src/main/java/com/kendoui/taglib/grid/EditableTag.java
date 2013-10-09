@@ -102,6 +102,14 @@ public class EditableTag extends BaseTag /* interfaces *//* interfaces */ {
         setProperty("update", value);
     }
 
+    public java.lang.Object getWindow() {
+        return (java.lang.Object)getProperty("window");
+    }
+
+    public void setWindow(java.lang.Object value) {
+        setProperty("window", value);
+    }
+
 //<< Attributes
 
 }

@@ -49,6 +49,8 @@ namespace Kendo.Mvc.UI
         
         public string Skin { get; set; }
         
+        public string StatusBarStyle { get; set; }
+        
         public string Transition { get; set; }
         
         public bool WebAppCapable { get; set; }

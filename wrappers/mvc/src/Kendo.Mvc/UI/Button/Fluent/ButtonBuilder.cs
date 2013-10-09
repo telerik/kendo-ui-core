@@ -50,7 +50,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the HTML content of the pane.
+        /// Sets the HTML content of the Button.
         /// </summary>
         /// <param name="content">The HTML content.</param>
         /// <code lang="CS">
@@ -66,7 +66,7 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        /// <summary>Sets whether slider to be rendered with increase/decrease button.</summary>
+        /// <summary>Sets whether Button should be enabled.</summary>
         public ButtonBuilder Enable(bool value)
         {
             Component.Enable = value;
@@ -74,7 +74,15 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        /// <summary>Sets the title of the slider decrease button.</summary>
+        /// <summary>Sets the icon name of the Button.</summary>
+        public ButtonBuilder Icon(string icon)
+        {
+            Component.Icon = icon;
+
+            return this;
+        }
+
+        /// <summary>Sets the image URL of the Button.</summary>
         public ButtonBuilder ImageUrl(string url)
         {
             Component.ImageUrl = url;
@@ -82,7 +90,7 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        /// <summary>Sets the title of the slider decrease button.</summary>
+        /// <summary>Sets the sprite CSS class(es) of the Button.</summary>
         public ButtonBuilder SpriteCssClass(string cssClass)
         {
             Component.SpriteCssClass = cssClass;
@@ -108,7 +116,7 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
-        /// <summary>Sets the Button tag. A button tag is used by default.</summary>
+        /// <summary>Sets the Button HTML tag. A button tag is used by default.</summary>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().Button()

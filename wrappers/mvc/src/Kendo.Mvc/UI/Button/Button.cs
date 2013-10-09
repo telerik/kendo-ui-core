@@ -25,6 +25,8 @@ namespace Kendo.Mvc.UI
 
         public bool Enable { get; set; }
 
+        public string Icon { get; set; }
+
         public string ImageUrl { get; set; }
 
         public string SpriteCssClass { get; set; }
@@ -43,6 +45,11 @@ namespace Kendo.Mvc.UI
             if (SpriteCssClass.HasValue())
             {
                 options["spriteCssClass"] = SpriteCssClass;
+            }
+
+            if (Icon.HasValue())
+            {
+                options["icon"] = Icon;
             }
 
             if (Enable == false)

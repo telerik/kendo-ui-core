@@ -15,7 +15,7 @@
 
 <br /><br />
 
-<kendo:button name="iconTextButton" spriteCssClass="k-icon k-i-ungroup" content="Kendo UI Button">
+<kendo:button name="iconTextButton" type="button" icon="ungroup" content="Kendo UI Button">
 </kendo:button>
 
 <script>

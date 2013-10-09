@@ -61,6 +61,10 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setEvent("allDayEventTemplate", value.getBody());
     }
 
+    public void setAllDaySlotTemplate(ViewAllDaySlotTemplateFunctionTag value) {
+        setEvent("allDaySlotTemplate", value.getBody());
+    }
+
     public void setDateHeaderTemplate(ViewDateHeaderTemplateFunctionTag value) {
         setEvent("dateHeaderTemplate", value.getBody());
     }
@@ -85,6 +89,10 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setEvent("minorTimeHeaderTemplate", value.getBody());
     }
 
+    public void setSlotTemplate(ViewSlotTemplateFunctionTag value) {
+        setEvent("slotTemplate", value.getBody());
+    }
+
     public java.lang.String getAllDayEventTemplate() {
         return (java.lang.String)getProperty("allDayEventTemplate");
     }
@@ -99,6 +107,14 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 
     public void setAllDaySlot(boolean value) {
         setProperty("allDaySlot", value);
+    }
+
+    public java.lang.String getAllDaySlotTemplate() {
+        return (java.lang.String)getProperty("allDaySlotTemplate");
+    }
+
+    public void setAllDaySlotTemplate(java.lang.String value) {
+        setProperty("allDaySlotTemplate", value);
     }
 
     public java.lang.String getDateHeaderTemplate() {
@@ -203,6 +219,14 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
 
     public void setSelectedDateFormat(java.lang.String value) {
         setProperty("selectedDateFormat", value);
+    }
+
+    public java.lang.String getSlotTemplate() {
+        return (java.lang.String)getProperty("slotTemplate");
+    }
+
+    public void setSlotTemplate(java.lang.String value) {
+        setProperty("slotTemplate", value);
     }
 
     public java.util.Date getStartTime() {
