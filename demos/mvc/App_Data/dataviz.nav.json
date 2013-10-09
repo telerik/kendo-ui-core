@@ -675,7 +675,14 @@
                 "url": "barcode/api.html",
                 "title": "Kendo UI Barcode API Demo",
                 "meta": "This sample demonstrates the different symbologies the Barcode support and the different options that could be set"
-            }],
+            }, {
+                "text": "MVVM",
+                "url": "barcode/mvvm.html",
+                "title": "MVVM support in Kendo UI Barcode",
+                "meta": "Visible MVVM binding support in Kendo UI Barcode",
+                "packages": ["!mvc", "!jsp", "!php"]
+            }
+            ],
             "name": "barcode"
         }, {
             "text": "QR code",
