@@ -1,0 +1,47 @@
+<div id="example" class="k-content">
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Radial Gauge</span>
+            <span  data-role="radialgauge"
+                   data-min="0"
+                   data-max="100"
+                   data-bind="visible: isVisible,
+                              value: selectedNumber"
+                   style="width: 180px">
+        </div>
+    </div>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Configuration</span>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="config-section">
+            <span class="configHead">Value</span>
+            <input data-role="slider" data-min="0" data-max="100" data-bind="value: selectedNumber">
+        </div>
+        <div class="config-section" style="width: 440px">
+            <span class="configHead">Information</span>
+            Kendo UI Radial Gauge supports the
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/value">value</a> and
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    function createGauge() {
+        var viewModel = kendo.observable({
+            selectedNumber: 10,
+            isVisible: true
+        });
+        kendo.bind($("#example"), viewModel);
+    }
+    $(document).ready(createGauge).bind("kendo:skinChange", createGauge);
+</script>
+<style scoped>
+    .config-section .k-slider {
+        display: inline-block;
+        vertical-align: middle;
+    }
+</style>
+</div>

@@ -624,7 +624,14 @@
                 "url": "radial-gauge/scale-options.html",
                 "title": "Kendo UI Radial Gauge scale customization demo",
                 "meta": "This example shows how you can easily use simple options to configure the gauge, enable/disable scale ranges and gauge labels."
-            }],
+            }, {
+                "text": "MVVM",
+                "url": "radial-gauge/mvvm.html",
+                "title": "MVVM support in Kendo UI Radial Gauge",
+                "meta": "Value and visible MVVM binding support in Kendo UI Radial Gauge",
+                "packages": ["!mvc", "!jsp", "!php"]
+            }
+            ],
             "name": "radial-gauge"
         }, {
             "text": "Linear Gauge",
