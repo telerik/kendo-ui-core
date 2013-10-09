@@ -60,6 +60,30 @@
             set;
         }
 
+        public string SlotTemplate
+        {
+            get;
+            set;
+        }
+
+        public string SlotTemplateId
+        {
+            get;
+            set;
+        }
+
+        public string AllDaySlotTemplate
+        {
+            get;
+            set;
+        }
+
+        public string AllDaySlotTemplateId
+        {
+            get;
+            set;
+        }
+
         public int? MinorTickCount
         {
             get;
@@ -170,7 +194,26 @@
             {
                 json["minorTimeHeaderTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, MinorTimeHeaderTemplateId) };
             }
-            
+
+            if (!string.IsNullOrEmpty(SlotTemplate))
+            {
+                json["slotTemplate"] = SlotTemplate;
+            }
+
+            if (!string.IsNullOrEmpty(SlotTemplateId))
+            {
+                json["slotTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, SlotTemplateId) };
+            }
+ 
+            if (!string.IsNullOrEmpty(AllDaySlotTemplate))
+            {
+                json["allDaySlotTemplate"] = AllDaySlotTemplate;
+            }
+
+            if (!string.IsNullOrEmpty(AllDaySlotTemplateId))
+            {
+                json["allDaySlotTemplate"] = new ClientHandlerDescriptor { HandlerName = String.Format("kendo.template($('{0}{1}').html())", idPrefix, AllDaySlotTemplateId) };
+            }           
             if (StartTime != null)
             {
                 json["startTime"] = StartTime;

@@ -80,6 +80,49 @@
         }
 
         /// <summary>
+        /// The template used to render the all day slot content
+        /// </summary>
+        /// <param name="slotTemplate">The slotTemplate</param>
+        public ISchedulerViewBuilder AllDaySlotTemplate(string slotTemplate)
+        {
+            view.AllDaySlotTemplate = slotTemplate;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The Id of the template used to render the all day slot content.
+        /// </summary>
+        /// <param name="slotTemplateId">The id of template</param>
+        public ISchedulerViewBuilder AllDaySlotTemplateId(string templateId)
+        {
+            view.AllDaySlotTemplateId = templateId;
+
+            return this;
+        }
+        /// <summary>
+        /// The template used to render the slot content
+        /// </summary>
+        /// <param name="slotTemplate">The slotTemplate</param>
+        public ISchedulerViewBuilder SlotTemplate(string slotTemplate)
+        {
+            view.SlotTemplate = slotTemplate;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The Id of the template used to render the slot content.
+        /// </summary>
+        /// <param name="slotTemplateId">The id of template</param>
+        public ISchedulerViewBuilder SlotTemplateId(string templateId)
+        {
+            view.SlotTemplateId = templateId;
+
+            return this;
+        }
+
+        /// <summary>
         /// The template used to render the major ticks.
         /// </summary>
         /// <param name="majorTimeHeaderTemplate">The majorTimeHeaderTemplate</param>
