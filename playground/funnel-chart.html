@@ -48,7 +48,8 @@
                 series: [{
                     type: "funnel",
                     segmentHeight:"equal",
-                    data: seriesData
+                    data: seriesData,
+                    neckSize: 3
                 }],
                 seriesClick: function(e) {
                     console.log("click", e);
@@ -66,7 +67,8 @@
                     type: "funnel",
                     segmentHeight:"equal",
                     data: seriesData,
-                    segmentSpacing: 25
+                    segmentSpacing: 25,
+                    neckSize:3
                 }]
             });
 
