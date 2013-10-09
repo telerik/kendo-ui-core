@@ -885,7 +885,7 @@ kendo_module({
                         }
 
                         content += '<td' + (classes !== "" ? ' class="' + classes + '"' : "") + ">";
-                        content += slotTemplate({ date: dates[idx] });
+                        content += slotTemplate({ date: date });
                         content += "</td>";
                     }
                 }
