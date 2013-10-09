@@ -1041,6 +1041,11 @@
     <Compile Include="UI\QRCode\Fluent\QRCodeBuilder.cs" />
     <Compile Include="UI\QRCode\QRBorder.cs" />
     <Compile Include="UI\QRCode\QRCode.cs" />
+    <Compile Include="UI\RecurrenceEditor\Fluent\RecurrenceEditorBuilder.cs" />
+    <Compile Include="UI\RecurrenceEditor\Fluent\RecurrenceEditorFrequencyBuilder.cs" />
+    <Compile Include="UI\RecurrenceEditor\Html\ReccurenceEditorHtmlBuilder.cs" />
+    <Compile Include="UI\RecurrenceEditor\ReccurenceEditor.cs" />
+    <Compile Include="UI\RecurrenceEditor\RecurrenceEditorFrequency.cs" />
     <Compile Include="UI\RequestSettings.cs" />
     <Compile Include="UI\DataSource\Fluent\AjaxSchedulerDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSchedulerFilterDescriptorFactory.cs" />
