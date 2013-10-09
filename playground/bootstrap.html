@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Kendo UI Bootstrap Integration</title>
+        <title>Responsive Kendo UI</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
         <link rel="stylesheet/less" href="../styles/web/kendo.common.less">
@@ -25,12 +25,73 @@
         <script src="../src/kendo.editable.js"></script>
         <script src="../src/kendo.grid.js"></script>
         <script src="../src/kendo.tooltip.js"></script>
+        <script src="../src/kendo.slider.js"></script>
         <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+            }
+
+            header {
+                margin: 0;
+                font-size: 20px;
+                color: #fff;
+                background-color: #272727;
+            }
+
+            header h1,
+            header label {
+                display: inline-block;
+                height: 100px;
+            }
+
+            header h1 {
+                margin: 0;
+                font-size: 20px;
+            }
+
+            header label {
+                border-left: 1px solid #636363;
+            }
+
+            header .description {
+                text-transform: uppercase;
+                color: #ccc;
+                font-size: 10px;
+            }
+
+            header .k-dropdownlist {
+                width: 80%;
+                margin: 0 10%;
+            }
+        </style>
     </head>
     <body>
-        <div class="container">
-            <h1>Hello, bootstrap!</h1>
+        <header>
+            <div class="container">
+                <h1>Responsive Kendo UI</h1>
 
+                <label>
+                    <div class="description">Dimensions</div>
+                    <select id="dimensions"></select>
+                </label>
+
+                <label>
+                    <div class="description">Theme</div>
+                    <select id="theme"></select>
+                </label>
+
+                <label>
+                    <div class="description">Font-size</div>
+                    <span id="font-size-value"></span>
+                    <input type="range" id="font-size">
+                </label>
+            </div>
+        </header>
+
+        <div class="container">
             <h3>Menu</h3>
             <ul id="menu">
                 <li> Products
@@ -77,6 +138,66 @@
         </div>
 
         <script>
+            // init page controls
+            $("#dimensions").kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                value: "kendo.common-bootstrap.css",
+                dataSource: [
+                    { text: "Default", value: "kendo.common.css" },
+                    { text: "Bootstrap", value: "kendo.common-bootstrap.css" }
+                ]
+            });
+
+            $("#theme").kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                value: "bootstrap",
+                dataSource: [
+                    { text: "Default", value: "default" },
+                    { text: "Blue Opal", value: "blueopal" },
+                    { text: "Bootstrap", value: "bootstrap" },
+                    { text: "Silver", value: "silver" },
+                    { text: "Uniform", value: "uniform" },
+                    { text: "Metro", value: "metro" },
+                    { text: "Black", value: "black" },
+                    { text: "Metro Black", value: "metroblack" },
+                    { text: "High Contrast", value: "highcontrast" },
+                    { text: "Moonlight", value: "moonlight" },
+                    { text: "Flat", value: "flat" }
+                ]
+            });
+
+            function sliderChange(e) {
+                var value = e && e.value;
+
+                if (!value) {
+                    value = $("#font-size").kendoSlider("value");
+                }
+
+                value += "px";
+
+                $("#font-size-value").text(value);
+
+                $("body").css("font-size", value);
+            }
+
+            $("#font-size").kendoSlider({
+                min: 10,
+                max: 20,
+                smallStep: 2,
+                largeStep: 10,
+                tickPlacement: "none",
+                value: 14,
+                showButtons: false,
+                tooltip: { enabled: false },
+                change: sliderChange,
+                slide: sliderChange
+            });
+
+            sliderChange();
+
+            // init sample widgets
             var crudServiceBaseUrl = "http://demos.kendoui.com/service",
                 dataSource = new kendo.data.DataSource({
                     transport: {
