@@ -273,7 +273,14 @@
                     "url": "donut-charts/local-data.html",
                     "title": "Local data binding in Kendo UI Donut Charts",
                     "meta": "This demo illustrates how Kendo UI Donut Charts widget can be bound to local data to deliver high-performance business application."
-            }],
+                }, {
+                    "text": "MVVM",
+                    "url": "donut-charts/mvvm.html",
+                    "title": "MVVM support in Kendo UI Chart",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                }
+            ],
             "name": "donut-charts"
         }, {
             "text": "Pie Charts",
