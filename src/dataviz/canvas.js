@@ -45,9 +45,13 @@
             BaseStage.fn.init.call(this);
 
             this.display = this.options.inline ? "inline" : "block";
-            this._render(wrap);
 
-            this.nodes.bind("invalidate", function() { console.log("*") });
+            this.root = new GroupNode();
+            this.root.bind("invalidate", proxy(this._invalidate, this));
+
+            this.nodes.push(this.root);
+
+            this._render(wrap);
         },
 
         options: {
@@ -60,11 +64,11 @@
         ],
 
         append: function() {
-            append(this.nodes, Node.map(arguments));
+            append(this.root.childNodes, Node.map(arguments));
         },
 
         clear: function() {
-            this.nodes.empty();
+            this.root.childNodes.empty();
         },
 
         _template: renderTemplate(
@@ -82,12 +86,28 @@
                 wrap.innerHTML = stage._template(stage);
                 canvas = wrap.firstElementChild;
             } else {
-                canvas.width = options.width;
-                canvas.height = options.height;
+                $(canvas).css({
+                    width: options.width,
+                    height: options.height
+                });
             }
+
+            canvas.width = $(canvas).width();
+            canvas.height = $(canvas).height();
 
             stage.element = canvas;
             stage.ctx = canvas.getContext("2d");
+
+            stage._invalidate();
+        },
+
+        _invalidate: function() {
+            var stage = this,
+                canvas = stage.element;
+
+            canvas.width = canvas.width;
+
+            stage.root.renderTo(stage.ctx);
         },
 
         _nodeChange: function(e) {
@@ -107,8 +127,10 @@
         init: function(source) {
             ObservableObject.fn.init.call(this, this);
 
-            this.source = source;
-            this.source.options.bind("change", proxy(this.invalidate, this));
+            if (source) {
+                this.source = source;
+                this.source.options.bind("change", proxy(this.invalidate, this));
+            }
         },
 
         renderTo: noop,
@@ -148,7 +170,9 @@
 
             Node.fn.init.call(this, source);
 
-            this.source.children.bind("change", proxy(this._childrenChange, this));
+            if (source) {
+                this.source.children.bind("change", proxy(this._childrenChange, this));
+            }
             this.childNodes.bind("change", proxy(this._childNodesChange, this));
         },
 
@@ -173,19 +197,14 @@
             } else if (e.action === "remove") {
                 group.childNodes.splice(e.index, e.items.length);
             }
+
+            this.trigger("change");
+            this.invalidate();
         },
 
         // TODO: Rename
         _childNodesChange: function(e) {
-            for (var i = 0; i < e.items.length; i++) {
-                var node = e.items[i];
-
-                if (e.action === "add" && this.element) {
-                    node.renderTo(this.element);
-                } else if (e.action === "remove") {
-                    node.invalidate();
-                }
-            }
+            this.invalidate();
         }
     });
 
@@ -281,7 +300,7 @@
                 p,
                 options = path.source.options,
                 rotation = options.rotation,
-                strokeWidth = options.strokeWidth,
+                strokeWidth = options.stroke.width,
                 shouldAlign = options.align !== false && strokeWidth && strokeWidth % 2 !== 0,
                 align = shouldAlign ? alignToPixel : round;
 
