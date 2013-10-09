@@ -197,7 +197,7 @@
 
                 editor._initView("daily");
 
-                equal(editor.untilDatePicker.min().getTime(), date.getTime());
+                equal(editor._until.min().getTime(), date.getTime());
             });
 
             test("Select until radio sets until value (Etc/UTC zone)", function() {
@@ -797,7 +797,7 @@
                 var editor = new RecurrenceEditor(div);
                 editor.value("FREQ=DAILY");
 
-                equal(editor._frequencyDropDownList.value(), "daily");
+                equal(editor._frequency.value(), "daily");
             });
 
             test("value method sets interval if valid frequency", function() {
@@ -819,7 +819,7 @@
                 editor.value("FREQ=DAILY;COUNT=10");
 
                 ok(editor.radioButtonCount.prop("checked"));
-                equal(editor.countNumericTextBox.value(), 10);
+                equal(div.find("[data-role=numerictextbox].k-recur-count").data("kendoNumericTextBox").value(), 10);
             });
 
             test("value method sets end rule to until (no timezone)", function() {
@@ -829,7 +829,7 @@
                 editor.value("FREQ=DAILY;UNTIL=20130615T000000Z");
 
                 ok(editor.radioButtonUntil.prop("checked"));
-                equal(editor.untilDatePicker.value().getTime(), until.getTime());
+                deepEqual(div.find("[data-role=datepicker].k-recur-until").data("kendoDatePicker").value(), until);
             });
 
         </script>

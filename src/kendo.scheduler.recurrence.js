@@ -12,6 +12,7 @@ kendo_module({
         Class = kendo.Class,
         ui = kendo.ui,
         Widget = ui.Widget,
+        DropDownList = ui.DropDownList,
         date = kendo.date,
         setTime = date.setTime,
         setDayOfWeek = date.setDayOfWeek,
@@ -1362,9 +1363,9 @@ kendo_module({
 
         events: ["change"],
 
-        _interval: function() {
-            var that = this,
-                rule = that._value;
+        _initInterval: function() {
+            var that = this;
+            var rule = that._value;
 
             that._container
                 .find(".k-recur-interval")
@@ -1381,18 +1382,27 @@ kendo_module({
                 });
         },
 
-        _weekDay: function() {
-            var that = this,
-                offsetMessage = that.options.messages.offsetPositions,
-                offsetInput = that._container.find(".k-recur-weekday-offset"),
-                weekDayInput = that._container.find(".k-recur-weekday"),
-                rule = that._value,
-                weekDay = rule.weekDays,
-                offsetDDL, weekDayDDL,
-                dayNames;
+        _initWeekDay: function() {
+            var that = this;
+            var offsetMessage = that.options.messages.offsetPositions;
+
+            var offsetInput = that._container.find(".k-recur-weekday-offset");
+            var weekDayInput = that._container.find(".k-recur-weekday");
+
+            var rule = that._value;
+            var weekDays = rule.weekDays;
+
+            var change = function() {
+                rule.weekDays = [{
+                    offset: Number(that._weekDayOffset.value()),
+                    day: Number(that._weekDay.value())
+                }];
+                that.trigger("change");
+            };
 
             if (weekDayInput[0]) {
-                that.weekDayOffsetDDL = offsetDDL = new kendo.ui.DropDownList(offsetInput, {
+                that._weekDayOffset = new DropDownList(offsetInput, {
+                    change: change,
                     dataTextField: "text",
                     dataValueField: "value",
                     dataSource: [
@@ -1401,49 +1411,34 @@ kendo_module({
                         { text: offsetMessage.third, value: "3" },
                         { text: offsetMessage.fourth, value: "4" },
                         { text: offsetMessage.last, value: "-1" }
-                    ],
-                    change: function() {
-                        rule.weekDays = [{
-                            offset: Number(offsetDDL.value()),
-                            day: Number(weekDayDDL.value())
-                        }];
-                        that.trigger("change");
-                    }
+                    ]
                 });
 
-                dayNames = $.map(kendo.culture().calendar.days.names, function(dayName, idx) {
-                    return {
-                        text: dayName,
-                        value: idx
-                    };
-                });
-
-                that.weekDayNameDDL = weekDayDDL = new kendo.ui.DropDownList(weekDayInput, {
+                that._weekDay = new DropDownList(weekDayInput, {
+                    change: change,
                     dataTextField: "text",
                     dataValueField: "value",
-                    dataSource: dayNames,
-                    change: function() {
-                        rule.weekDays = [{
-                            offset: Number(offsetDDL.value()),
-                            day: Number(weekDayDDL.value())
-                        }];
-                        that.trigger("change");
-                    }
+                    dataSource: $.map(kendo.culture().calendar.days.names, function(dayName, idx) {
+                        return {
+                            text: dayName,
+                            value: idx
+                        };
+                    })
                 });
 
-                if (weekDay) {
-                    weekDay = weekDay[0];
+                if (weekDays) {
+                    weekDays = weekDays[0];
 
-                    offsetDDL.value(weekDay.offset || "");
-                    weekDayDDL.value(weekDay.day);
+                    that._weekDayOffset.value(weekDays.offset || "");
+                    that._weekDay.value(weekDays.day);
                 }
             }
         },
 
-        _weekDays: function() {
-            var that = this,
-                rule = that._value,
-                weekDays = that._container.find(".k-recur-weekday-checkbox");
+        _initWeekDays: function() {
+            var that = this;
+            var rule = that._value;
+            var weekDays = that._container.find(".k-recur-weekday-checkbox");
 
             if (weekDays[0]) {
                 weekDays.on(CLICK + that._namespace, function() {
@@ -1474,13 +1469,13 @@ kendo_module({
             }
         },
 
-        _monthDay: function() {
-            var that = this,
-                rule = that._value,
-                monthDayInput = that._container.find(".k-recur-monthday");
+        _initMonthDay: function() {
+            var that = this;
+            var rule = that._value;
+            var monthDayInput = that._container.find(".k-recur-monthday");
 
             if (monthDayInput[0]) {
-                that.monthDayNumericTextBox = new kendo.ui.NumericTextBox(monthDayInput, {
+                that._initMonthDay = new kendo.ui.NumericTextBox(monthDayInput, {
                     spinners: that.options.spinners,
                     min: 1,
                     max: 31,
@@ -1490,23 +1485,19 @@ kendo_module({
                     change: function() {
                         var value = this.value();
 
-                        if (value) {
-                            value = [value];
-                        }
-
-                        rule.monthDays = value;
+                        rule.monthDays = value ? [value] : value;
                         that.trigger("change");
                     }
                 });
             }
         },
 
-        _count: function() {
+        _initCount: function() {
             var that = this,
                 input = that._container.find(".k-recur-count"),
                 rule = that._value;
 
-            that.countNumericTextBox = input.kendoNumericTextBox({
+            that._count = input.kendoNumericTextBox({
                 spinners: that.options.spinners,
                 value: rule.count || 1,
                 decimals: 0,
@@ -1519,14 +1510,14 @@ kendo_module({
             }).data("kendoNumericTextBox");
         },
 
-        _until: function() {
+        _initUntil: function() {
             var that = this,
                 input = that._container.find(".k-recur-until"),
                 start = that.options.start,
                 rule = that._value,
                 until = rule.until;
 
-            that.untilDatePicker = input.kendoDatePicker({
+            that._until = input.kendoDatePicker({
                 min: until && until < start ? until : start,
                 value: until || start,
                 change: function() {
@@ -1544,9 +1535,9 @@ kendo_module({
 
             BaseRecurrenceEditor.fn.init.call(that, element, options);
 
-            that._frequency();
+            that._initFrequency();
 
-            that._viewContainer();
+            that._initContainer();
 
             that.value(that.options.value);
         },
@@ -1575,12 +1566,12 @@ kendo_module({
         destroy: function() {
             var that = this;
 
-            that._frequencyDropDownList.destroy();
+            that._frequency.destroy();
             that._container.find("input[type=radio],input[type=checkbox]").off(CLICK + that._namespace);
 
-            kendo.destroy(this._container);
+            kendo.destroy(that._container);
 
-            Widget.fn.destroy.call(this);
+            Widget.fn.destroy.call(that);
         },
 
         value: function(value) {
@@ -1597,10 +1588,11 @@ kendo_module({
 
             that._value = parseRule(value, timezone) || {};
 
-            that._frequencyDropDownList.value(that._value.freq || "");
-            that._initView(that._frequencyDropDownList.value());
+            that._frequency.value(that._value.freq || "");
+            that._initView(that._frequency.value());
         },
 
+        //TODO: refactor
         _initView: function(frequency) {
             var that = this;
             var rule = that._value;
@@ -1623,7 +1615,7 @@ kendo_module({
 
             rule.freq = frequency;
 
-            that._interval();
+            that._initInterval();
 
             if (frequency === "weekly") {
                 if (!rule.weekDays) {
@@ -1632,30 +1624,35 @@ kendo_module({
                         offset: 0
                     }];
                 }
-                that._weekDays();
+                that._initWeekDays();
             } else if (frequency === "monthly") {
-                that._monthDay();
-                that._weekDay();
+                that._initMonthDay();
+                that._initWeekDay();
                 that._setMonthRule();
             } else if (frequency === "yearly") {
-                that._month();
-                that._monthDay();
-                that._weekDay();
+                that._initMonth();
+                that._initMonthDay();
+                that._initWeekDay();
                 that._setYearRule();
             }
 
-            that._count();
-            that._until();
+            that._initCount();
+            that._initUntil();
             that._setEndRule();
         },
 
-        _month: function() {
-            var that = this,
-                rule = that._value,
-                start = that.options.start,
-                month = rule.months || [start.getMonth() + 1],
-                monthInputs = that._container.find(".k-recur-month"),
-                monthNames, monthDDL1, monthDDL2;
+        _initMonth: function() {
+            var that = this;
+            var rule = that._value;
+            var month = rule.months || [that.options.start.getMonth() + 1];
+            var monthInputs = that._container.find(".k-recur-month");
+
+            var change = function() {
+                rule.months = [Number(this.value())];
+                that.trigger("change");
+            };
+
+            var monthNames;
 
             if (monthInputs[0]) {
                 monthNames = $.map(kendo.culture().calendar.months.names, function(monthName, idx) {
@@ -1665,30 +1662,24 @@ kendo_module({
                     };
                 });
 
-                that.monthDDL1 = monthDDL1 = new kendo.ui.DropDownList(monthInputs[0], {
+                that._month1 = new DropDownList(monthInputs[0], {
+                    change: change,
                     dataTextField: "text",
                     dataValueField: "value",
-                    dataSource: monthNames,
-                    change: function() {
-                        rule.months = [Number(this.value())];
-                        that.trigger("change");
-                    }
+                    dataSource: monthNames
                 });
 
-                that.monthDDL2 = monthDDL2 = new kendo.ui.DropDownList(monthInputs[1], {
+                that._month2 = new DropDownList(monthInputs[1], {
+                    change: change,
                     dataTextField: "text",
                     dataValueField: "value",
-                    dataSource: monthNames,
-                    change: function() {
-                        rule.months = [Number(this.value())];
-                        that.trigger("change");
-                    }
+                    dataSource: monthNames
                 });
 
                 if (month) {
                     month = month[0];
-                    monthDDL1.value(month);
-                    monthDDL2.value(month);
+                    that._month1.value(month);
+                    that._month2.value(month);
                 }
             }
 
@@ -1762,24 +1753,24 @@ kendo_module({
             if (endRule === "count") {
                 that.radioButtonCount.prop("checked", true);
 
-                that.untilDatePicker.enable(false);
-                that.countNumericTextBox.enable(true);
+                that._until.enable(false);
+                that._count.enable(true);
 
-                rule.count = that.countNumericTextBox.value();
+                rule.count = that._count.value();
                 rule.until = null;
             } else if (endRule === "until") {
                 that.radioButtonUntil.prop("checked", true);
 
-                that.untilDatePicker.enable(true);
-                that.countNumericTextBox.enable(false);
+                that._until.enable(true);
+                that._count.enable(false);
 
                 rule.count = null;
-                rule.until = that.untilDatePicker.value();
+                rule.until = that._until.value();
             } else {
                 that.radioButtonNever.prop("checked", true);
 
-                that.untilDatePicker.enable(false);
-                that.countNumericTextBox.enable(false);
+                that._until.enable(false);
+                that._count.enable(false);
 
                 rule.count = null;
                 rule.until = null;
@@ -1793,24 +1784,24 @@ kendo_module({
             if (monthRule === "monthday") {
                 that.radioButtonMonthDay.prop("checked", true);
 
-                that.monthDayNumericTextBox.enable(true);
-                that.weekDayNameDDL.enable(false);
-                that.weekDayOffsetDDL.enable(false);
+                that._initMonthDay.enable(true);
+                that._weekDay.enable(false);
+                that._weekDayOffset.enable(false);
 
                 rule.weekDays = null;
-                rule.monthDays = [that.monthDayNumericTextBox.value()];
+                rule.monthDays = [that._initMonthDay.value()];
 
             } else {
                 that.radioButtonWeekDay.prop("checked", true);
 
-                that.monthDayNumericTextBox.enable(false);
-                that.weekDayOffsetDDL.enable(true);
-                that.weekDayNameDDL.enable(true);
+                that._initMonthDay.enable(false);
+                that._weekDayOffset.enable(true);
+                that._weekDay.enable(true);
 
                 rule.monthDays = null;
                 rule.weekDays = [{
-                    offset: Number(that.weekDayOffsetDDL.value()),
-                    day: Number(that.weekDayNameDDL.value())
+                    offset: Number(that._weekDayOffset.value()),
+                    day: Number(that._weekDay.value())
                 }];
             }
         },
@@ -1820,21 +1811,21 @@ kendo_module({
                 month;
 
             if (yearRule === "monthday") {
-                that.monthDDL1.enable(true);
-                that.monthDDL2.enable(false);
+                that._month1.enable(true);
+                that._month2.enable(false);
 
-                month = that.monthDDL1.value();
+                month = that._month1.value();
             } else {
-                that.monthDDL1.enable(false);
-                that.monthDDL2.enable(true);
+                that._month1.enable(false);
+                that._month2.enable(true);
 
-                month = that.monthDDL2.value();
+                month = that._month2.value();
             }
             that._value.months = [month];
             that._toggleMonthDayRule(yearRule);
         },
 
-        _viewContainer: function() {
+        _initContainer: function() {
             var element = this.element,
                 container = $('<div class="k-recur-view" />'),
                 editContainer = element.parent(".k-edit-field");
@@ -1848,7 +1839,7 @@ kendo_module({
             this._container = container;
         },
 
-        _frequency: function() {
+        _initFrequency: function() {
             var that = this,
                 options = that.options,
                 frequencies = options.frequencies,
@@ -1869,13 +1860,13 @@ kendo_module({
             }
 
             that.element.append(ddl);
-            that._frequencyDropDownList = new kendo.ui.DropDownList(ddl, {
+            that._frequency = new DropDownList(ddl, {
                 dataTextField: "text",
                 dataValueField: "value",
                 dataSource: frequencies,
                 change: function() {
                     that._value = {};
-                    that._initView(that._frequencyDropDownList.value());
+                    that._initView(that._frequency.value());
                     that.trigger("change");
                 }
             });
@@ -2055,7 +2046,7 @@ kendo_module({
             that._endButton.text(text);
         },
 
-        _frequency: function() {
+        _initFrequency: function() {
             var that = this;
             var frequencyMessages = that.options.messages.frequencies;
 
@@ -2127,10 +2118,10 @@ kendo_module({
 
                     that._initEndView(value);
 
-                    if (that.countNumericTextBox) {
-                        rule.count = that.countNumericTextBox.value();
-                    } else if (that.untilDatePicker) {
-                        rule.until = kendo.parseDate(that.untilDatePicker.val(), "yyyy-MM-dd");
+                    if (that._count) {
+                        rule.count = that._count.value();
+                    } else if (that._until) {
+                        rule.until = kendo.parseDate(that._until.val(), "yyyy-MM-dd");
                     }
                 });
         },
@@ -2201,7 +2192,7 @@ kendo_module({
             that._container = that._view.element.find(".k-recur-view");
 
             if (viewType === "repeat") {
-                this._frequency();
+                this._initFrequency();
                 this._initRepeatView();
             } else {
                 this._repeatEndChooser();
@@ -2239,11 +2230,11 @@ kendo_module({
                  }];
             }
 
-            that._interval();
-            that._monthDay();
-            that._weekDays();
-            that._weekDay();
-            that._month();
+            that._initInterval();
+            that._initMonthDay();
+            that._initWeekDays();
+            that._initWeekDay();
+            that._initMonth();
 
             that._period();
         },
@@ -2268,11 +2259,11 @@ kendo_module({
             kendo.destroy(that._container);
             that._container.html(endPatternTemplate(data));
 
-            that._count();
-            that._until();
+            that._initCount();
+            that._initUntil();
         },
 
-        _month: function() {
+        _initMonth: function() {
             var that = this;
             var rule = that._value;
             var start = that.options.start;
@@ -2282,7 +2273,7 @@ kendo_module({
             var monthDropDownList;
 
             if (monthInput[0]) {
-                that.monthDropDownList = new kendo.ui.DropDownList(monthInput, {
+                that.monthDropDownList = new DropDownList(monthInput, {
                     dataTextField: "text",
                     dataValueField: "value",
                     dataSource: $.map(monthNames, function(monthName, idx) {
@@ -2325,9 +2316,9 @@ kendo_module({
                 });
 
                 var init = function(val) {
-                    var weekDayName = that.weekDayNameDDL.value();
-                    var weekDayOffset = that.weekDayOffsetDDL.value();
-                    var monthDay = that.monthDayNumericTextBox.value();
+                    var weekDayName = that._weekDay.value();
+                    var weekDayOffset = that._weekDayOffset.value();
+                    var monthDay = that._initMonthDay.value();
                     var month = that.monthDropDownList ? that.monthDropDownList.value() : null;
 
                     if (val === "monthday") {
@@ -2367,18 +2358,18 @@ kendo_module({
             }
         },
 
-        _until: function() {
+        _initUntil: function() {
             var that = this,
                 input = that._container.find(".k-recur-until"),
                 start = that.options.start,
                 rule = that._value,
                 until = rule.until;
 
-            that.untilDatePicker = input.attr("min", kendo.toString(until && until < start ? until : start, "yyyy-MM-dd"))
-                                        .val(kendo.toString(until || start, "yyyy-MM-dd"))
-                                        .on("change", function() {
-                                            rule.until = kendo.parseDate(this.value, "yyyy-MM-dd");
-                                        });
+            that._until = input.attr("min", kendo.toString(until && until < start ? until : start, "yyyy-MM-dd"))
+                               .val(kendo.toString(until || start, "yyyy-MM-dd"))
+                               .on("change", function() {
+                                   rule.until = kendo.parseDate(this.value, "yyyy-MM-dd");
+                               });
         },
     });
 
