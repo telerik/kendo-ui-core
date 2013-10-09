@@ -156,6 +156,41 @@ kendo_module({
         }
     });
 
+    var AnimatedScroller = Animation.extend({
+        init: function(options) {
+            var that = this;
+
+            kendo.effects.Animation.fn.init.call(this);
+
+            extend(that, options, { offset: {} });
+        },
+
+        tick: function() {
+            this._updateOrigin();
+            this.movable.moveTo(this.origin);
+        },
+
+        done: function() {
+            return Math.abs(this.offset.y) < 5;
+        },
+
+        onEnd: function() {
+            this.movable.moveTo(this.destination);
+        },
+
+        _updateOrigin: function() {
+            this.offset = {
+                x: (this.destination.x - this.origin.x) / 4,
+                y: (this.destination.y - this.origin.y) / 4
+            };
+
+            this.origin = {
+                y: this.origin.y + this.offset.y,
+                x: this.origin.x + this.offset.x
+            };
+        }
+    });
+
     var ScrollBar = Class.extend({
         init: function(options) {
             var that = this,
