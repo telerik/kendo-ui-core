@@ -443,7 +443,14 @@
                     "url": "polar-charts/local-data.html",
                     "title": "Kendo UI Polar Charts binding to local data example",
                     "meta": "This sample demonstrates that Kendo UI HTML5 chart can use existing objects as data points."
-                }],
+                }, {
+                    "text": "MVVM",
+                    "url": "polar-charts/mvvm.html",
+                    "title": "MVVM support in Kendo UI Chart",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                }
+                ],
             "name": "polar-charts"
         }, {
             "text": "Sparklines",
