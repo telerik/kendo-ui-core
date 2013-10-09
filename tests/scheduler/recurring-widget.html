@@ -173,7 +173,7 @@
                 var editor = new RecurrenceEditor(div);
                 editor._initView("daily");
 
-                editor.radioButtonCount.click();
+                editor._buttonCount.click();
 
                 equal(editor.value(), "FREQ=DAILY;COUNT=1"); //default value of INTERVAL is 1
             });
@@ -185,7 +185,7 @@
 
                 editor._initView("daily");
 
-                editor.radioButtonUntil.click();
+                editor._buttonUntil.click();
 
                 date = kendo.timezone.apply(date, 0);
                 equal(editor.value(), "FREQ=DAILY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ"));
@@ -209,7 +209,7 @@
 
                 editor._initView("daily");
 
-                editor.radioButtonUntil.click();
+                editor._buttonUntil.click();
 
                 equal(editor.value(), "FREQ=DAILY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ"));
             });
@@ -282,7 +282,7 @@
 
                 editor._initView("weekly");
 
-                editor.radioButtonCount.click();
+                editor._buttonCount.click();
 
                 equal(editor.value(), "FREQ=WEEKLY;COUNT=1;BYDAY=FR"); //default value of INTERVAL is 1
             });
@@ -293,7 +293,7 @@
 
                 editor._initView("weekly");
 
-                editor.radioButtonUntil.click();
+                editor._buttonUntil.click();
 
                 date = kendo.timezone.apply(date, 0);
                 equal(editor.value(), "FREQ=WEEKLY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ") + ";BYDAY=FR");
@@ -415,7 +415,7 @@
 
                 editor._initView("monthly");
 
-                editor.radioButtonCount.click();
+                editor._buttonCount.click();
 
                 equal(editor.value(), "FREQ=MONTHLY;COUNT=1;BYMONTHDAY=14"); //default value of INTERVAL is 1
             });
@@ -425,7 +425,7 @@
                     editor = new RecurrenceEditor(div, { start: date });
 
                 editor._initView("monthly");
-                editor.radioButtonUntil.click();
+                editor._buttonUntil.click();
 
                 date = kendo.timezone.apply(date, 0);
                 equal(editor.value(), "FREQ=MONTHLY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ") + ";BYMONTHDAY=14");
@@ -627,7 +627,7 @@
 
                 editor._initView("yearly");
 
-                editor.radioButtonCount.click();
+                editor._buttonCount.click();
 
                 equal(editor.value(), "FREQ=YEARLY;COUNT=1;BYMONTH=" + (date.getMonth() + 1) + ";BYMONTHDAY=14");
             });
@@ -637,7 +637,7 @@
                     editor = new RecurrenceEditor(div, { start: date });
 
                 editor._initView("yearly");
-                editor.radioButtonUntil.click();
+                editor._buttonUntil.click();
 
                 date = kendo.timezone.apply(date, 0);
                 equal(editor.value(), "FREQ=YEARLY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ") + ";BYMONTH=" + (date.getMonth() + 1) + ";BYMONTHDAY=14");
@@ -811,14 +811,14 @@
                 var editor = new RecurrenceEditor(div);
                 editor.value("FREQ=DAILY");
 
-                ok(editor.radioButtonNever.prop("checked"));
+                ok(editor._buttonNever.prop("checked"));
             });
 
             test("value method sets end rule to count", function() {
                 var editor = new RecurrenceEditor(div);
                 editor.value("FREQ=DAILY;COUNT=10");
 
-                ok(editor.radioButtonCount.prop("checked"));
+                ok(editor._buttonCount.prop("checked"));
                 equal(div.find("[data-role=numerictextbox].k-recur-count").data("kendoNumericTextBox").value(), 10);
             });
 
@@ -828,7 +828,7 @@
 
                 editor.value("FREQ=DAILY;UNTIL=20130615T000000Z");
 
-                ok(editor.radioButtonUntil.prop("checked"));
+                ok(editor._buttonUntil.prop("checked"));
                 deepEqual(div.find("[data-role=datepicker].k-recur-until").data("kendoDatePicker").value(), until);
             });
 

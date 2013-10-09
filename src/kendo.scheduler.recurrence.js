@@ -1475,7 +1475,7 @@ kendo_module({
             var monthDayInput = that._container.find(".k-recur-monthday");
 
             if (monthDayInput[0]) {
-                that._initMonthDay = new kendo.ui.NumericTextBox(monthDayInput, {
+                that._monthDay = new kendo.ui.NumericTextBox(monthDayInput, {
                     spinners: that.options.spinners,
                     min: 1,
                     max: 31,
@@ -1592,239 +1592,6 @@ kendo_module({
             that._initView(that._frequency.value());
         },
 
-        //TODO: refactor
-        _initView: function(frequency) {
-            var that = this;
-            var rule = that._value;
-            var options = that.options;
-
-            var data = {
-                 frequency: frequency || "never",
-                 weekDayCheckBoxes: weekDayCheckBoxes,
-                 firstWeekDay: options.firstWeekDay,
-                 messages: options.messages[frequency],
-                 end: options.messages.end
-            };
-
-            that._container.html(RECURRENCEVIEWTEMPLATE(data));
-
-            if (!frequency) {
-                that._value = {};
-                return;
-            }
-
-            rule.freq = frequency;
-
-            that._initInterval();
-
-            if (frequency === "weekly") {
-                if (!rule.weekDays) {
-                    rule.weekDays = [{
-                        day: options.start.getDay(),
-                        offset: 0
-                    }];
-                }
-                that._initWeekDays();
-            } else if (frequency === "monthly") {
-                that._initMonthDay();
-                that._initWeekDay();
-                that._setMonthRule();
-            } else if (frequency === "yearly") {
-                that._initMonth();
-                that._initMonthDay();
-                that._initWeekDay();
-                that._setYearRule();
-            }
-
-            that._initCount();
-            that._initUntil();
-            that._setEndRule();
-        },
-
-        _initMonth: function() {
-            var that = this;
-            var rule = that._value;
-            var month = rule.months || [that.options.start.getMonth() + 1];
-            var monthInputs = that._container.find(".k-recur-month");
-
-            var change = function() {
-                rule.months = [Number(this.value())];
-                that.trigger("change");
-            };
-
-            var monthNames;
-
-            if (monthInputs[0]) {
-                monthNames = $.map(kendo.culture().calendar.months.names, function(monthName, idx) {
-                    return {
-                        text: monthName,
-                        value: idx + 1
-                    };
-                });
-
-                that._month1 = new DropDownList(monthInputs[0], {
-                    change: change,
-                    dataTextField: "text",
-                    dataValueField: "value",
-                    dataSource: monthNames
-                });
-
-                that._month2 = new DropDownList(monthInputs[1], {
-                    change: change,
-                    dataTextField: "text",
-                    dataValueField: "value",
-                    dataSource: monthNames
-                });
-
-                if (month) {
-                    month = month[0];
-                    that._month1.value(month);
-                    that._month2.value(month);
-                }
-            }
-
-        },
-
-        _setEndRule: function() {
-            var that = this,
-                rule = that._value,
-                container = that._container,
-                namespace = that._namespace,
-                click = function(e) {
-                    that._toggleEndRule(e.currentTarget.value);
-                    that.trigger("change");
-                };
-
-            that.radioButtonNever = container.find(".k-recur-end-never").on(CLICK + namespace, click);
-            that.radioButtonCount = container.find(".k-recur-end-count").on(CLICK + namespace, click);
-            that.radioButtonUntil = container.find(".k-recur-end-until").on(CLICK + namespace, click);
-
-            if (rule.count) {
-                that._toggleEndRule("count");
-            } else if (rule.until) {
-                that._toggleEndRule("until");
-            } else {
-                that._toggleEndRule();
-            }
-        },
-
-        _setMonthRule: function() {
-            var that = this,
-                rule = that._value,
-                click = function(e) {
-                    that._toggleMonthDayRule(e.currentTarget.value);
-                    that.trigger("change");
-                },
-                radioButtons = that._container.find(".k-recur-month-radio").on(CLICK + that._namespace, click);
-
-            that.radioButtonMonthDay = radioButtons.eq(0);
-            that.radioButtonWeekDay = radioButtons.eq(1);
-
-            if (rule.weekDays) {
-                that._toggleMonthDayRule("weekday");
-            } else {
-                that._toggleMonthDayRule("monthday");
-            }
-        },
-
-        _setYearRule: function() {
-            var that = this,
-                rule = that._value,
-                click = function(e) {
-                    that._toggleYearRule(e.currentTarget.value);
-                    that.trigger("change");
-                },
-                radioButtons = that._container.find(".k-recur-year-radio").on(CLICK + that._namespace, click);
-
-            that.radioButtonMonthDay = radioButtons.eq(0);
-            that.radioButtonWeekDay = radioButtons.eq(1);
-
-            if (rule.weekDays) {
-                that._toggleYearRule("weekday");
-            } else {
-                that._toggleYearRule("monthday");
-            }
-        },
-
-        _toggleEndRule: function(endRule) {
-            var that = this,
-                rule = that._value;
-
-            if (endRule === "count") {
-                that.radioButtonCount.prop("checked", true);
-
-                that._until.enable(false);
-                that._count.enable(true);
-
-                rule.count = that._count.value();
-                rule.until = null;
-            } else if (endRule === "until") {
-                that.radioButtonUntil.prop("checked", true);
-
-                that._until.enable(true);
-                that._count.enable(false);
-
-                rule.count = null;
-                rule.until = that._until.value();
-            } else {
-                that.radioButtonNever.prop("checked", true);
-
-                that._until.enable(false);
-                that._count.enable(false);
-
-                rule.count = null;
-                rule.until = null;
-            }
-        },
-
-        _toggleMonthDayRule: function(monthRule) {
-            var that = this,
-                rule = that._value;
-
-            if (monthRule === "monthday") {
-                that.radioButtonMonthDay.prop("checked", true);
-
-                that._initMonthDay.enable(true);
-                that._weekDay.enable(false);
-                that._weekDayOffset.enable(false);
-
-                rule.weekDays = null;
-                rule.monthDays = [that._initMonthDay.value()];
-
-            } else {
-                that.radioButtonWeekDay.prop("checked", true);
-
-                that._initMonthDay.enable(false);
-                that._weekDayOffset.enable(true);
-                that._weekDay.enable(true);
-
-                rule.monthDays = null;
-                rule.weekDays = [{
-                    offset: Number(that._weekDayOffset.value()),
-                    day: Number(that._weekDay.value())
-                }];
-            }
-        },
-
-        _toggleYearRule: function(yearRule) {
-            var that = this,
-                month;
-
-            if (yearRule === "monthday") {
-                that._month1.enable(true);
-                that._month2.enable(false);
-
-                month = that._month1.value();
-            } else {
-                that._month1.enable(false);
-                that._month2.enable(true);
-
-                month = that._month2.value();
-            }
-            that._value.months = [month];
-            that._toggleMonthDayRule(yearRule);
-        },
-
         _initContainer: function() {
             var element = this.element,
                 container = $('<div class="k-recur-view" />'),
@@ -1870,6 +1637,221 @@ kendo_module({
                     that.trigger("change");
                 }
             });
+        },
+
+        _initView: function(frequency) {
+            var that = this;
+            var rule = that._value;
+            var options = that.options;
+
+            var data = {
+                 frequency: frequency || "never",
+                 weekDayCheckBoxes: weekDayCheckBoxes,
+                 firstWeekDay: options.firstWeekDay,
+                 messages: options.messages[frequency],
+                 end: options.messages.end
+            };
+
+            that._container.html(RECURRENCEVIEWTEMPLATE(data));
+
+            if (!frequency) {
+                that._value = {};
+                return;
+            }
+
+            rule.freq = frequency;
+
+            if (frequency === "weekly" && !rule.weekDays) {
+                rule.weekDays = [{
+                    day: options.start.getDay(),
+                    offset: 0
+                }];
+            }
+
+            that._initInterval();
+            that._initWeekDays();
+            that._initMonthDay();
+            that._initWeekDay();
+            that._initMonth();
+            that._initCount();
+            that._initUntil();
+
+            that._period();
+            that._end();
+        },
+
+        _initMonth: function() {
+            var that = this;
+            var rule = that._value;
+            var month = rule.months || [that.options.start.getMonth() + 1];
+            var monthInputs = that._container.find(".k-recur-month");
+            var options;
+
+            if (monthInputs[0]) {
+                options = {
+                    change:  function() {
+                        rule.months = [Number(this.value())];
+                        that.trigger("change");
+                    },
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: $.map(kendo.culture().calendar.months.names, function(monthName, idx) {
+                        return {
+                            text: monthName,
+                            value: idx + 1
+                        };
+                    })
+                };
+
+                that._month1 = new DropDownList(monthInputs[0], options);
+                that._month2 = new DropDownList(monthInputs[1], options);
+
+                if (month) {
+                    month = month[0];
+                    that._month1.value(month);
+                    that._month2.value(month);
+                }
+            }
+
+        },
+
+        _end: function() {
+            var that = this;
+            var rule = that._value;
+            var container = that._container;
+            var namespace = that._namespace;
+            var click = function(e) {
+                that._toggleEnd(e.currentTarget.value);
+                that.trigger("change");
+            };
+            var endRule;
+
+            that._buttonNever = container.find(".k-recur-end-never").on(CLICK + namespace, click);
+            that._buttonCount = container.find(".k-recur-end-count").on(CLICK + namespace, click);
+            that._buttonUntil = container.find(".k-recur-end-until").on(CLICK + namespace, click);
+
+            if (rule.count) {
+                endRule = "count";
+            } else if (rule.until) {
+                endRule = "until";
+            }
+
+            that._toggleEnd(endRule);
+        },
+
+        _period: function() {
+            var that = this;
+            var rule = that._value;
+            var monthly = rule.freq === "monthly";
+
+            var toggleRule = monthly ? that._toggleMonthDay : that._toggleYear;
+
+            var selector = ".k-recur-" + (monthly ? "month" : "year") + "-radio";
+            var radioButtons = that._container.find(selector);
+
+            if (!monthly && rule.freq !== "yearly") {
+                return;
+            }
+
+            radioButtons.on(CLICK + that._namespace, function(e) {
+                toggleRule.call(that, e.currentTarget.value);
+                that.trigger("change");
+            });
+
+            that._buttonMonthDay = radioButtons.eq(0);
+            that._buttonWeekDay = radioButtons.eq(1);
+
+            toggleRule.call(that, rule.weekDays ? "weekday" : "monthday");
+        },
+
+        _toggleEnd: function(endRule) {
+            var that = this;
+            var count, until;
+            var enableCount, enableUntil;
+
+            if (endRule === "count") {
+                that._buttonCount.prop("checked", true);
+
+                enableCount = true;
+                enableUntil = false;
+
+                count = that._count.value();
+                until = null;
+            } else if (endRule === "until") {
+                that._buttonUntil.prop("checked", true);
+
+                enableCount = false;
+                enableUntil = true;
+
+                count = null;
+                until = that._until.value();
+            } else {
+                that._buttonNever.prop("checked", true);
+
+                enableCount = enableUntil = false;
+                count = until = null;
+            }
+
+            that._count.enable(enableCount);
+            that._until.enable(enableUntil);
+
+            that._value.count = count;
+            that._value.until = until;
+        },
+
+        _toggleMonthDay: function(monthRule) {
+            var that = this;
+            var monthDays, weekDays;
+            var enableMonthDay = false;
+            var enableWeekDay = true;
+
+            if (monthRule === "monthday") {
+                that._buttonMonthDay.prop("checked", true);
+
+                enableMonthDay = true;
+                enableWeekDay = false;
+
+                weekDays = null;
+                monthDays = [that._monthDay.value()];
+            } else {
+                that._buttonWeekDay.prop("checked", true);
+
+                weekDays = [{
+                    offset: Number(that._weekDayOffset.value()),
+                    day: Number(that._weekDay.value())
+                }];
+
+                monthDays = null;
+            }
+
+            that._weekDay.enable(enableWeekDay);
+            that._weekDayOffset.enable(enableWeekDay);
+            that._monthDay.enable(enableMonthDay);
+
+            that._value.weekDays = weekDays;
+            that._value.monthDays = monthDays;
+        },
+
+        _toggleYear: function(yearRule) {
+            var that = this;
+            var enableMonth1 = false;
+            var enableMonth2 = true;
+            var month;
+
+            if (yearRule === "monthday") {
+                enableMonth1 = true;
+                enableMonth2 = false;
+
+                month = that._month1.value();
+            } else {
+                month = that._month2.value();
+            }
+
+            that._month1.enable(enableMonth1);
+            that._month2.enable(enableMonth2);
+
+            that._value.months = [month];
+            that._toggleMonthDay(yearRule);
         }
     });
 
@@ -2318,7 +2300,7 @@ kendo_module({
                 var init = function(val) {
                     var weekDayName = that._weekDay.value();
                     var weekDayOffset = that._weekDayOffset.value();
-                    var monthDay = that._initMonthDay.value();
+                    var monthDay = that._monthDay.value();
                     var month = that.monthDropDownList ? that.monthDropDownList.value() : null;
 
                     if (val === "monthday") {
