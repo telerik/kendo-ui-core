@@ -171,7 +171,14 @@
                     p1 = new Point(3, 4),
                     result = processor.getTangent(p0,p1, "x", "y");                
                 equal(result, -1 / 2);
-            });  
+            });
+
+            test("tangent is correctly calculated for inverted axes", function() {
+                var p0 = new Point(1, 5),
+                    p1 = new Point(3, 4),
+                    result = processor.getTangent(p0,p1, "y", "x");                
+                equal(result, -2);
+            });             
 
             test("tangent is 0 for equal by x points", function() {
                 var p0 = new Point(1, 5),
@@ -180,9 +187,56 @@
                 equal(result, 0);
             }); 
 
-            module("curveprocessor / control points", {
+            module("curveprocessor / control points / calculation", {
             }); 
-           
+
+            test("first control point is correctly calculated", function() {
+                var p0 = new Point(1, 3),
+                    p1 = new Point(2, 4),
+                    tangent = 1.5,
+                    expectedX = 1.333,
+                    expectedY = 3.5,
+                    result = processor.getFirstControlPoint(tangent, p0,p1, "x", "y");                
+                equal(result.x.toFixed(3), expectedX, "correct X");
+                equal(result.y.toFixed(3), expectedY, "correct Y");
+            });
+
+            test("first control point is correctly calculated for inverted axes", function() {
+                var p0 = new Point(3, 1),
+                    p1 = new Point(4, 2),
+                    tangent = 1.5,
+                    expectedY = 1.333,
+                    expectedX = 3.5,
+                    result = processor.getFirstControlPoint(tangent, p0,p1, "y", "x");                
+                equal(result.x.toFixed(3), expectedX, "correct X");
+                equal(result.y.toFixed(3), expectedY, "correct Y");
+            }); 
+
+            test("second control point is correctly calculated", function() {
+                var p0 = new Point(1, 3),
+                    p1 = new Point(2, 5),
+                    tangent = 1.5,
+                    expectedX = 1.667,
+                    expectedY = 4.5,
+                    result = processor.getSecondControlPoint(tangent, p0,p1, "x", "y");                
+                equal(result.x.toFixed(3), expectedX, "correct X");
+                equal(result.y.toFixed(3), expectedY, "correct Y");
+            });   
+
+            test("second control point is correctly calculated for inverted axes", function() {
+                var p0 = new Point(3, 1),
+                    p1 = new Point(5, 2),
+                    tangent = 1.5,
+                    expectedY = 1.667,
+                    expectedX = 4.5,
+                    result = processor.getSecondControlPoint(tangent, p0,p1, "y", "x");                
+                equal(result.x.toFixed(3), expectedX, "correct X");
+                equal(result.y.toFixed(3), expectedY, "correct Y");
+            }); 
+
+            module("curveprocessor / control points / restrict", {
+            }); 
+            
                        
         })();
         </script>
