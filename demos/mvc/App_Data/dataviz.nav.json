@@ -360,7 +360,14 @@
                     "title": "Pan and zoom in Kendo UI Scatter Charts",
                     "meta": "In this example we demonstrate pan and zoom effects in Kendo UI Scatter Charts. Look at the source code to learn how to filter the DataSource component.",
                     "packages": [ "!mvc" ]
-            }],
+                }, {
+                    "text": "MVVM",
+                    "url": "scatter-charts/mvvm.html",
+                    "title": "MVVM support in Kendo UI Chart",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                }
+            ],
             "name": "scatter-charts"
         }, {
             "text": "Radar Charts",
