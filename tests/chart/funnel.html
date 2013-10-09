@@ -233,6 +233,36 @@
                 equal(typeof chart.segments[0].dataItem, "object");
             });
 
+            module("Series with empty data", {
+                setup: function() {
+                    createChart({
+                        series: [{
+                            type: "funnel",
+                            data: []
+                        }]
+                    });
+                }
+            })
+
+            test("sets point dataItem", function() {
+                ok(true);
+            });
+
+            module("Series with empty data", {
+                setup: function() {
+                    createChart({
+                        series: [{
+                            type: "funnel",
+                            segmentMethod:"relation",
+                        }]
+                    });
+                }
+            })
+
+            test("sets point dataItem", function() {
+                ok(true);
+            });
+
             module("segmentMethod height with spacing", {
                 setup: function() {
                     createChart({

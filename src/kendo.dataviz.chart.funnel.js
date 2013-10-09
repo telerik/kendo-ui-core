@@ -101,8 +101,12 @@ kendo_module({
                 colorsCount = colors.length,
                 series = options.series[0],
                 pointData, fields,
-                data = series.data,
-                total = chart.pointsTotal(series),
+                data = series.data;
+
+            if(!data){
+                return;
+            }
+            var  total = chart.pointsTotal(series),
                 value,
                 i;
 
