@@ -43,6 +43,8 @@ kendo_module({
 
     // Constants ==============================================================
     var NS = ".kendoDiagram",
+        CASCADING = "Cascading",
+        POLYLINE = "Polyline",
         BOUNDSCHANGE = "boundsChange",
         CHANGE = "change",
         ERROR = "error",
@@ -483,21 +485,72 @@ kendo_module({
     };
 
     /**
-     * The types of connections.
+     * Base class for connection routers.
      */
-    var ConnectionType = {
+    var ConnectionRouterBase = kendo.Class.extend({
+        init: function (connection) {
+        },
+        route: function (connection) {
 
-        /**
-         * A line segments between the endpoints with the points intermediate.
-         */
-        Polyline: 0,
+        }
+    });
 
-        /**
-         * A simplified rectangular style which suits the tree layouts.
-         */
-        Cascading: 1
-    };
+    var CascadingRouter = ConnectionRouterBase.extend({
+        init: function (connection) {
+            var that = this;
+            ConnectionRouterBase.fn.init.call(that);
+            this.connection = connection;
+            this.route();
+        },
+        route: function () {
+            var link = this.connection;
+            var start = this.connection.sourcePoint();
+            var end = this.connection.targetPoint();
 
+            this.connection.cascadeStartHorizontal = Math.abs(start.x - end.x) > Math.abs(start.y - end.y);
+
+            var points = [start, start, end, end];
+            var count = points.length;
+            var dx = end.x - start.x;
+            var dy = end.y - start.y;
+
+            var ax, ay;
+            for (var i = 1; i < count - 1; ++i) {
+                if (link.cascadeStartHorizontal) {
+                    if (i % 2 != 0) {
+                        ax = dx / (count / 2);
+                        ay = 0;
+                    }
+                    else {
+                        ax = 0;
+                        ay = dy / ((count - 1) / 2);
+                    }
+                }
+                else {
+                    if (i % 2 != 0) {
+                        ax = 0;
+                        ay = dy / (count / 2);
+                    }
+                    else {
+                        ax = dx / ((count - 1) / 2);
+                        ay = 0;
+                    }
+                }
+                points[i] = new Point(points[i - 1].x + ax, points[i - 1].y + ay);
+            }
+
+            i--;
+
+            if ((link.cascadeStartHorizontal && (i % 2 != 0)) ||
+                (!link.cascadeStartHorizontal && !(i % 2 != 0)))
+                points[count - 2] = new Point(points[count - 1].x, points[count - 2].y);
+            else
+                points[count - 2] = new Point(points[count - 2].x, points[count - 1].y);
+
+            this.connection.points(points);
+        }
+
+    });
     /**
      * The visual link between two Shapes through the intermediate of Connectors.
      */
@@ -658,6 +711,16 @@ kendo_module({
             if (value) {
                 if (value !== this._type) {
                     this._type = value;
+                    switch (value.toLowerCase()) {
+                        case CASCADING:
+                            this._router = new CascadingRouter(this);
+                            break;
+                        case POLYLINE:
+                            this._router = null;
+                            break;
+                        default:
+                            throw "Unsupported connection type.";
+                    }
                     this.refresh();
                 }
             }
