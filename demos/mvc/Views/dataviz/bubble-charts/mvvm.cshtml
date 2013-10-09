@@ -1,0 +1,63 @@
+<div id="example" class="k-content">
+    <div class="configuration-horizontal">
+        <div class="config-section" style="width: 440px">
+            <span class="configHead">Chart</span>
+            <p>Hover some series</p>
+            <div data-role="chart"
+                 data-title="{ text: 'Crime stats' }"
+                 data-legend="{ position: 'top' }"
+                 data-series="[ {
+                                 type: 'bubble',
+                                 xField: 'murder',
+                                 yField: 'burglary',
+                                 sizeField: 'population',
+                                 categoryField: 'state'
+                             }]"
+                 data-bind="visible: isVisible,
+                            source: crimeDataSource,
+                            events: { seriesHover: onSeriesHover }"></div>
+        </div>
+        <div class="config-section" style="width: 200px">
+            <div class="configHead">Console</div>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Configuration</span>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="config-section" style="width: 440px">
+            <span class="configHead">Information</span>
+            Kendo UI Chart supports the
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/source">source</a> and
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    function createChart() {
+        var viewModel = kendo.observable({
+            isVisible: true,
+            onSeriesHover: function(e) {
+                 console.log(e);
+                 kendoConsole.log(kendo.format("event :: seriesHover ({0} : {1})", e.category, e.value.size));
+            },
+            crimeDataSource: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: "../../content/dataviz/js/crime-stats.json",
+                        dataType: "json"
+                    }
+                }
+            })
+        });
+        kendo.bind($("#example"), viewModel);
+    }
+
+    $(document).ready(createChart).bind("kendo:skinChange", createChart);
+
+</script>
+</div>
