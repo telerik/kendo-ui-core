@@ -311,6 +311,14 @@
 
                 ok(content.hasClass("km-insetcontent"));
             });
+
+            test("removes wrapper on destroy", 1, function() {
+                var dom = $("<div><ul/></div>");
+
+                var listView = new ListView(dom.find("ul"));
+                listView.destroy();
+                equal(dom.html(), '<ul class="km-widget km-listview km-list"></ul>');
+            });
         </script>
     </body>
 </html>

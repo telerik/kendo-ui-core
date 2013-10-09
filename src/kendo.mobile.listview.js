@@ -916,7 +916,7 @@ kendo_module({
                 this._itemBinder.destroy();
             }
 
-            delete this.element;
+            delete this.element.unwrap();
             delete this.wrapper;
             delete this._userEvents;
         },
