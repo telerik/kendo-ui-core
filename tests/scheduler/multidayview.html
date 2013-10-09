@@ -191,6 +191,41 @@
                 equal(view.content.find("td").length, 48);
             });
 
+            test("render day slots template", function() {
+                var view = setup({
+                    slotTemplate: "foo",
+                    dates: [
+                        new Date("1/26/2013"),
+                        new Date("1/27/2013")
+                    ]
+                });
+
+                equal(view.content.find("td").first().text(), "foo");
+                equal(view.content.find("td").last().text(), "foo");
+            });
+
+            test("render all day slots template", function() {
+                var view = setup({
+                    allDaySlotTemplate: "foo",
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+
+                equal(view.element.find(".k-scheduler-header-all-day td").text(), "foo");
+            });
+
+            test("slot date is pass in the slots template", function() {
+                var view = setup({
+                    allDaySlotTemplate: function(e) {
+                       deepEqual(e.date, new Date("1/26/2013"));
+                    },
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+            });
+
             test("apply css to day slot", function() {
                 var view = setup({
                     dates: [

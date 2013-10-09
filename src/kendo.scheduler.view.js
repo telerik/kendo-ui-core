@@ -105,9 +105,10 @@ kendo_module({
         if (allDaySlot) {
             var lastLevel = columnLevels[columnLevels.length - 1];
             var td = [];
+            var cellContent = allDaySlot.cellContent;
 
             for (columnIndex = 0; columnIndex < lastLevel.length; columnIndex++) {
-                td.push('<td class="' + (lastLevel[columnIndex].className || "")  + '">&nbsp;</th>');
+                td.push('<td class="' + (lastLevel[columnIndex].className || "")  + '">' + (cellContent ? cellContent(columnIndex) : '&nbsp;') + '</th>');
             }
 
             allDayTableRows.push(td.join(""));

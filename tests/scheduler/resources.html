@@ -1185,6 +1185,56 @@
                 equal(view.content.find(".k-scheduler-header-all-day td").length, 2); // the sum of the both header row cells
             });
 
+            test("all day slot template is rendered for each resource group when orientation is horizontal in day view", 2, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    allDaySlotTemplate: function(data) { deepEqual(data.date,new Date("2013/6/6")) },
+                    group: {
+                        resources: [ "ResourceName"],
+                        orientation: "horizontal"
+                    },
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+            });
+
+            test("all day slot template is rendered for each resource group when orientation is vertical in day view", 1, function() {
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    date: new Date("2013/6/6"),
+                    allDaySlotTemplate: function(data) { deepEqual(data.date,new Date("2013/6/6")) },
+                    group: {
+                        resources: [ "ResourceName"],
+                        orientation: "vertical"
+                    },
+                    resources: [
+                        {
+                            field: "foo",
+                            name: "ResourceName",
+                            dataSource: [
+                                { text: "Foo 1", value: 1, color: "red" },
+                                { text: "Foo 2", value: 2, color: "green" }
+                            ]
+                        }
+                    ],
+                    dataSource: [ ],
+                    views: ["day"]
+                });
+
+                var view = scheduler.view();
+            });
+
             test("all day slots are not rendered for each resource group when orientation is vertical in day view if disabled", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
                     date: new Date("2013/6/6"),

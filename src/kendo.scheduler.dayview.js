@@ -546,6 +546,8 @@ kendo_module({
             majorTick: 60,
             majorTimeHeaderTemplate: "#=kendo.toString(date, 't')#",
             minorTimeHeaderTemplate: "&nbsp;",
+            slotTemplate: "&nbsp;",
+            allDaySlotTemplate: "&nbsp;",
             eventTemplate: DAY_VIEW_EVENT_TEMPLATE,
             allDayEventTemplate: DAY_VIEW_ALL_DAY_EVENT_TEMPLATE,
             dateHeaderTemplate: DATA_HEADER_TEMPLATE,
@@ -575,6 +577,8 @@ kendo_module({
             this.majorTimeHeaderTemplate = kendo.template(options.majorTimeHeaderTemplate, settings);
             this.minorTimeHeaderTemplate = kendo.template(options.minorTimeHeaderTemplate, settings);
             this.dateHeaderTemplate = kendo.template(options.dateHeaderTemplate, settings);
+            this.slotTemplate = kendo.template(options.slotTemplate, settings);
+            this.allDaySlotTemplate = kendo.template(options.allDaySlotTemplate, settings);
         },
 
         _editable: function() {
@@ -698,8 +702,16 @@ kendo_module({
                 columns.push(column);
             }
 
+            var resources = this.groupedResources;
+
             if (options.allDaySlot) {
-                rows.push( { text: options.messages.allDay, allDay: true });
+                rows.push({
+                    text: options.messages.allDay, allDay: true,
+                    cellContent: function(idx) {
+                        idx = resources.length && that._groupOrientation() !== "vertical" ? idx % dates.length : idx;
+                        return that.allDaySlotTemplate({ date: dates[idx] });
+                    }
+                });
             }
 
             this._forTimeRange(this.startTime(), this.endTime(), function(date, majorTick, middleRow, lastSlotRow) {
@@ -713,7 +725,6 @@ kendo_module({
                 rows.push(row);
             });
 
-            var resources = this.groupedResources;
 
             if (resources.length) {
                 if (this._groupOrientation() === "vertical") {
@@ -830,12 +841,19 @@ kendo_module({
             var html = '';
             var resources = this.groupedResources;
             var allDayVerticalGroupRow = "";
+            var slotTemplate = this.slotTemplate;
 
             if (resources.length) {
                 if (that._groupOrientation() === "vertical") {
                     rowCount = this._rowCountForLevel(this.rowLevels.length - 2);
                     if (options.allDaySlot) {
-                        allDayVerticalGroupRow = '<tr class="k-scheduler-header-all-day">' + new Array(dates.length + 1).join("<td>&nbsp;</td>") + '</tr>';
+                        allDayVerticalGroupRow = '<tr class="k-scheduler-header-all-day">';
+
+                        for (var idx = 0, length = dates.length; idx < length; idx++) {
+                            allDayVerticalGroupRow += "<td>" + this.allDaySlotTemplate({ date: dates[idx] }) + "</td>";
+                        }
+
+                        allDayVerticalGroupRow += "</tr>";
                     }
                 } else {
                     groupsCount = this._columnCountForLevel(this.columnLevels.length - 2);
@@ -867,7 +885,8 @@ kendo_module({
                         }
 
                         content += '<td' + (classes !== "" ? ' class="' + classes + '"' : "") + ">";
-                        content += "&nbsp;</td>";
+                        content += slotTemplate({ date: dates[idx] });
+                        content += "</td>";
                     }
                 }
 
