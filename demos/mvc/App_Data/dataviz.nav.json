@@ -573,7 +573,14 @@
                     "url": "step-line-charts/grouped-data.html",
                     "title": "Binding to grouped data demo | Kendo UI Step Line Charts",
                     "meta": "This example illustrates how binding to grouped data feature works in Kendo UI Line Charts."
-            }],
+                }, {
+                    "text": "MVVM",
+                    "url": "step-line-charts/mvvm.html",
+                    "title": "MVVM support in Kendo UI Chart",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                }
+            ],
             "name": "step-line-charts"
         }, {
             "text": "API",
