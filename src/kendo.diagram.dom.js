@@ -122,8 +122,8 @@ kendo_module({
                 return this.shape.getPosition(this.options.name);
             }
         },
-        serialize: function(){
-            return this.options.name;
+        toString: function () {
+            return kendo.format("{0}: {1}", this.shape.toString(), this.options.name);
         }
     });
 
@@ -131,11 +131,11 @@ kendo_module({
         init: function (options, model) {
             var that = this;
             Observable.fn.init.call(that);
-            that.options = deepExtend({}, that.options, options);
+            that.options = deepExtend({id: kendo.diagram.randomId()}, that.options, options);
             that.isSelected = false;
             that.model = model;
             that.visual = new Group({
-                id: that.options.id || kendo.diagram.randomId(),
+                id: that.options.id,
                 cssClass: that.options.cssClass
             });
             that.options.cssClass = undefined; // Clean the class so that is not propagated toward inner elements.
@@ -175,7 +175,7 @@ kendo_module({
         },
         serialize: function () {
             // the options json object describes the shape perfectly. So this object can serve as shape serialization.
-            return this.options;
+            return deepExtend({}, this.options, {model: this.model.toString()});
         },
         content: function (content) {
             if (content !== undefined) {
@@ -460,25 +460,6 @@ kendo_module({
         return new Rectangle(shapeOptions);
     };
 
-    /**
-     * The types of connections.
-     */
-    var ConnectionType = {
-
-        /**
-         * A line segments between the endpoints with the points intermediate.
-         */
-        Polyline: 0,
-
-        /**
-         * A simplified rectangular style which suits the tree layouts.
-         */
-        Cascading: 1
-    };
-
-    /**
-     * The visual link between two Shapes through the intermediate of Connectors.
-     */
     var Connection = DiagramElement.extend({
         init: function (from, to, options, model) {
             var that = this;
@@ -490,7 +471,6 @@ kendo_module({
             that.targetPoint(to);
             that.refresh();
             that.content(that.options.content);
-            that.definers = [];
         },
         options: {
             stroke: "gray",
@@ -500,12 +480,6 @@ kendo_module({
             endCap: "ArrowEnd",
             cssClass: "k-connection"
         },
-
-        /**
-         * Gets or sets the Point where the source of the connection resides.
-         * @param source The source of this connection. Can be a Point, Shape, Connector.
-         * @param undoable The target of this connection. Can be a Point, Shape, Connector.
-         */
         sourcePoint: function (source, undoable) {
             if (undoable && this.diagram) {
                 this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, source));
@@ -540,12 +514,6 @@ kendo_module({
             }
             return this._resolvedSourceConnector ? this._resolvedSourceConnector.position() : this._sourcePoint;
         },
-
-        /**
-         * Gets or sets the Point where the target of the connection resides.
-         * @param source The source of this connection. Can be a Point, Shape, Connector.
-         * @param undoable The target of this connection. Can be a Point, Shape, Connector.
-         */
         targetPoint: function (target, undoable) {
             if (undoable && this.diagram) {
                 this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, target));
@@ -580,25 +548,12 @@ kendo_module({
             }
             return this._resolvedTargetConnector ? this._resolvedTargetConnector.position() : this._targetPoint;
         },
-
-        /**
-         * Returns the source (start, initial, from) Connector if the start is attached to a Shape. If floating, this returns a position.
-         */
         source: function () {
             return this.sourceConnector ? this.sourceConnector : this._sourcePoint;
         },
-
-        /**
-         * Returns the target (end, final, to, sink) Connector if the end is attached to a Shape. If floating, this returns a position.
-         */
         target: function () {
             return this.targetConnector ? this.targetConnector : this._targetPoint;
         },
-
-        /**
-         * Selects or unselects this connections.
-         * @param value True to select, false to unselect.
-         */
         select: function (value) {
             if (this.isSelected !== value) {
                 this.isSelected = value;
@@ -618,13 +573,6 @@ kendo_module({
                 // TODO: Move this to base type.
             }
         },
-
-        /**
-         * Gets or sets the bounds of this connection.
-         * @param value A Rect object.
-         * @remark This is automatically set in the refresh().
-         * @returns {Rect}
-         */
         bounds: function (value) {
             if (value) {
                 this._bounds = value;
@@ -636,124 +584,6 @@ kendo_module({
             // the options json object describes the shape perfectly. So this object can serve as shape serialization.
             return deepExtend({}, this.options, {model: this.model.toString(), from: this.from.toString(), to: this.to.toString()});
         },
-
-        /**
-         * Gets or sets the connection type (see ConnectionType enumeration).
-         * @param value A ConnectionType value.
-         * @returns {ConnectionType}
-         */
-        type: function (value) {
-            if(value){
-                if(value!== this._type){
-                    this._type = value;
-                    this.refresh();
-                }
-            }
-            else{
-                return this._type;
-            }
-        },
-
-        /**
-         * Gets or sets the collection of *intermediate* points.
-         * The 'allPoints()' property will return all the points.
-         * The 'definers' property returns the definers of the intermediate points.
-         * The 'sourceDefiner' and 'targetDefiner' return the definers of the endpoints.
-         * @param value
-         */
-        points: function (value) {
-            if (value) {
-                if (value === null) {
-                    this.definers = [];
-                }
-                else {
-                    for (var i = 0; i < value.length; i++) {
-                        var definition = value[i];
-                        if (definition instanceof diagram.Point) {
-                            this.definers.push(new diagram.PathDefiner(definition));
-                        }
-                        else {
-                            throw "A Connection point needs to be a Point.";
-                        }
-                    }
-                }
-                this.refresh();
-            } else {
-                var pts = [];
-                for (var k = 0; k < this.definers.length; k++) {
-                    pts.push(this.definers[k].point);
-                }
-                return pts;
-            }
-        },
-
-        /**
-         * Gets all the points of this connection. This is the combination of the sourcePoint, the points and the targetPoint.
-         * @returns {Array}
-         */
-        allPoints: function () {
-            var pts = [this.sourcePoint()];
-            for (var k = 0; k < this.definers.length; k++) {
-                pts.push(this.definers[k].point);
-            }
-            pts.push(this.targetPoint());
-            return pts;
-        },
-
-        /**
-         * Gets or sets the PathDefiner of the sourcePoint.
-         * The left part of this definer is always null since it defines the source tangent.
-         * @param value
-         * @returns {*}
-         */
-        sourceDefiner: function (value) {
-            if (value) {
-                if (value instanceof diagram.PathDefiner) {
-                    value.left = null;
-                    this._sourceDefiner = value;
-                    this.sourcePoint(value.point); // refresh implicit here
-                }
-                else {
-                    throw "The sourceDefiner needs to be a PathDefiner.";
-                }
-            } else {
-                if (!this._sourceDefiner) {
-                    this._sourceDefiner = new diagram.PathDefiner(this.sourcePoint(), null, null);
-                }
-                return this._sourceDefiner;
-            }
-        },
-
-        /**
-         * Gets or sets the PathDefiner of the targetPoint.
-         * The right part of this definer is always null since it defines the target tangent.
-         * @param value
-         * @returns {*}
-         */
-        targetDefiner: function (value) {
-            if (value) {
-                if (value instanceof diagram.PathDefiner) {
-                    value.right = null;
-                    this._targetDefiner = value;
-                    this.targetPoint(value.point); // refresh implicit here
-                }
-                else {
-                    throw "The sourceDefiner needs to be a PathDefiner.";
-                }
-            } else {
-                if (!this._targetDefiner) {
-                    this._targetDefiner = new diagram.PathDefiner(this.targetPoint(), null, null);
-                }
-                return this._targetDefiner;
-            }
-        },
-
-        /**
-         * Returns whether the given Point or Rect hits this connection.
-         * @param value
-         * @returns {Connection}
-         * @private
-         */
         _hitTest: function (value) {
             if (this.visible()) {
                 var p = new Point(value.x, value.y), from = this.sourcePoint(), to = this.targetPoint();
@@ -765,11 +595,9 @@ kendo_module({
                 }
             }
         },
-
         _hover: function (value) {
             this.line.redraw({ stroke: value ? this.options.hoveredStroke : this.options.stroke });
         },
-
         refresh: function () {
             resolveConnectors(this);
             var globalSourcePoint = this.sourcePoint(), globalSinkPoint = this.targetPoint(),
@@ -974,7 +802,8 @@ kendo_module({
         },
         save: function () {
             var json = {}, i, shape, con;
-            deepExtend(json, {options: this.options});
+            //deepExtend(json, {options: this.options});
+            json.options = this.options;
             json.shapes = [];
             json.connections = [];
             for (i = 0; i < this.shapes.length; i++) {
@@ -984,7 +813,7 @@ kendo_module({
 
             for (i = 0; i < this.connections.length; i++) {
                 con = this.connections[i];
-                json.connections.push({options: con.options, from: con.from, to: con.to});
+                json.connections.push({options: con.options, from: con.from.toString(), to: con.to.toString()});
             }
             return json;
         },
