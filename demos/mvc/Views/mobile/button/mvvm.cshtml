@@ -1,0 +1,53 @@
+<div data-model="viewModel" data-role="view" id="button-events" data-title="Button MVVM">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Button
+            <ul>
+                <li>
+                <span><a data-role="button"
+                       data-bind="enabled: isEnabled,
+                                  visible: isVisible,
+                                  events: { click: onClick }"
+                                  style="display: block; margin: 2em; text-align: center;">Click me</a></span>
+                </li>
+                <li>
+                    <div class="console"></div>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Configuration
+            <ul>
+                <li>Enable <input type="checkbox" data-role="switch" data-bind="checked: isEnabled"></li>
+                <li>Visible <input type="checkbox" data-role="switch" data-bind="checked: isVisible"></li>
+            </ul>
+        </li>
+    </ul>
+
+    <p>
+        Kendo UI Mobile Button supports the
+        <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/enabled">enabled</a>,
+        <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a> and
+        <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+    </p>
+</div>
+
+<script>
+    var viewModel = kendo.observable({
+        isEnabled: true,
+        isVisible: true,
+        onClick: function(e) {
+            kendoConsole.log("event :: click");
+        }
+    });
+</script>
+
+<style scoped>
+    .km-root .console {
+        background-color: transparent;
+        border: 0;
+        margin: 1.4em 1em;
+        overflow: hidden;
+        height: auto;
+    }
+</style>

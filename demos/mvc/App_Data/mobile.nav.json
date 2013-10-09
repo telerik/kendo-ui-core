@@ -58,6 +58,12 @@
                     "url": "button/appearance.html",
                     "title": "Customizing the appearance of Kendo UI mobile button",
                     "meta": "This demo shows how you can easily customize the appearance and styling of Kendo UI Mobile Button to deliver rich experience for end users of the mobile app."
+                }, {
+                    "text": "MVVM",
+                    "url": "button/mvvm.html",
+                    "title": "MVVM support in Kendo UI Mobile Button",
+                    "meta": "Enabled, events and visible MVVM binding support in Kendo UI Mobile Window",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },

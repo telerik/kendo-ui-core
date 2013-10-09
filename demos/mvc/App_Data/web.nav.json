@@ -1625,7 +1625,7 @@
                     "text": "MVVM",
                     "url": "upload/mvvm.html",
                     "title": "MVVM support in Kendo UI Upload",
-                    "meta": "Enabled, events and and visible MVVM binding support in Kendo UI Upload",
+                    "meta": "Enabled, events and visible MVVM binding support in Kendo UI Upload",
                     "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
@@ -1687,7 +1687,7 @@
                     "text": "MVVM",
                     "url": "window/mvvm.html",
                     "title": "MVVM support in Kendo UI Window",
-                    "meta": "Events and and visible MVVM binding support in Kendo UI Window",
+                    "meta": "Events and visible MVVM binding support in Kendo UI Window",
                     "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
