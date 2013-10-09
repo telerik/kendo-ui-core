@@ -254,17 +254,18 @@ kendo_module({
                 options = chart.options,
                 segments = chart.segments,
                 count = segments.length,
+                decreasingWidth = options.neckSize<=1,
                 i,
                 height,
                 offset,
-                previousHeight = 0,
-                previousOffset = 0,
-                segmentSpacing = options.segmentSpacing,
-                segmentMethod = options.segmentMethod,
                 box = chartBox.clone().unpad(chart.labelPadding()),
                 width = box.width(),
+                previousHeight = 0,
+                previousOffset = decreasingWidth ? 0 :(width-width/options.neckSize)/2,
+                segmentSpacing = options.segmentSpacing,
+                segmentMethod = options.segmentMethod,
                 totalHeight = box.height() - segmentSpacing * (count-1),
-                neckSize = options.neckSize*width;
+                neckSize = decreasingWidth ? options.neckSize*width : width;
 
             if(segmentMethod==="relation"){
                 var maxSegment = firstSegment = segments[0];
@@ -298,7 +299,8 @@ kendo_module({
                 }
             }
             else {
-                var finalNarrow = (width - neckSize)/2;
+                var topMostWidth = decreasingWidth ? width : width - previousOffset*2,
+                    finalNarrow = (topMostWidth - neckSize)/2;
 
                 for (i = 0; i < count; i++) {
                     points = segments[i].points = [],

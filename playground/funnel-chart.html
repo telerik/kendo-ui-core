@@ -26,6 +26,7 @@
         <div id="funnel-equal"></div>
         <div id="funnel-equal-spacing"></div>
         <div id="funnel-height"></div>
+        <div id="funnel-height-increasingWidth"></div>
         <div id="funnel-height-spacing"></div>
         <div id="funnel-relation"></div>
         <div id="funnel-relation-spacing"></div>
@@ -82,6 +83,21 @@
                     }
                 }]
             });
+
+            $("#funnel-height-increasingWidth").kendoChart({
+                series: [{
+                    type: "funnel",
+                    segmentMethod:"height",
+                    neckSize:3,
+                    data: seriesData,
+                    labels: {
+                        align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
+                        margin: 5,
+                        template: "My Template #=value#"
+                    }
+                }]
+            });
+
             $("#funnel-height-spacing").kendoChart({
                 series: [{
                     type: "funnel",
