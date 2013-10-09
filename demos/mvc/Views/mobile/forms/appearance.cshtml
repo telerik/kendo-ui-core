@@ -1,4 +1,4 @@
-<div id="forms" data-role="view" data-title="Appearance" data-use-native-scrolling="true">
+<div id="formappearance" data-role="view" data-title="Appearance" data-use-native-scrolling="true" class="appearance">
     <form action="./index.html">
         <ul data-role="listview" data-style="inset">
             <li>
@@ -23,17 +23,17 @@
 </div>
 
 <style scoped>
-    .km-root .km-listview label
+    .km-root .appearance .km-listview label
     {
       width: 100%;
     }
 
-    .km-wp .km-listview label
+    .km-wp .appearance .km-listview label
     {
       color: #999;
     }
 
-    .km-root .km-pane .km-view .km-listview input
+    .km-root .km-pane .km-view.appearance .km-listview input
     {
       position: relative;
       width: 100%;
@@ -42,13 +42,13 @@
       top: 0;
     }
 
-    .km-root .km-wp .km-view .km-listview input
+    .km-root .km-wp .km-view.appearance .km-listview input
     {
       margin-top: .2em;
     }
 
-    .km-root .km-ios .km-view .km-listview input,
-    .km-root .km-ios7 .km-view .km-listview input
+    .km-root .km-ios .km-view.appearance .km-listview input,
+    .km-root .km-ios7 .km-view.appearance .km-listview input
     {
       padding: .4em 0;
     }
