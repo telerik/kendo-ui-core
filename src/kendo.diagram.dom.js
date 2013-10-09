@@ -712,10 +712,10 @@ kendo_module({
                 if (value !== this._type) {
                     this._type = value;
                     switch (value.toLowerCase()) {
-                        case CASCADING:
+                        case CASCADING.toLowerCase():
                             this._router = new CascadingRouter(this);
                             break;
-                        case POLYLINE:
+                        case POLYLINE.toLowerCase():
                             this._router = null;
                             break;
                         default:
@@ -752,7 +752,6 @@ kendo_module({
                         }
                     }
                 }
-                this.refresh();
             } else {
                 var pts = [];
                 for (var k = 0; k < this.definers.length; k++) {
@@ -863,6 +862,9 @@ kendo_module({
                 this.contentVisual.position(middle);
             }
             this.visual.position(boundsTopLeft);    //global coordinates!
+            if(this._router){
+                this._router.route(); // sets the intermediate points
+            }
             this.line.redraw({ from: localSourcePoint, to: localSinkPoint });
             if (this.adorner) {
                 this.adorner.refresh();

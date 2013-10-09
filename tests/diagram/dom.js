@@ -451,6 +451,12 @@ test('Connection definers', function () {
     ok(con.targetDefiner().left.x === 478 && con.targetDefiner().left.y === 102);
 });
 
+test('Connection Cascading', function () {
+    var con = new kendo.diagram.Connection(new Point(10, 20), new Point(100, 200));
+    con.type( "Cascading");
+    con.refresh();
+    ok(con.points().length>0);
+});
 QUnit.module("Serialization - Cut/Copy/Paste", {
     setup: function () {
         $("#canvas").kendoDiagram();
