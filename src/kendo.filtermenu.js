@@ -82,38 +82,15 @@ kendo_module({
             '</div>';
 
         var defaultMobileTemplate =
-            '<div data-#ns#role="header">'+
-                '<button class="k-button k-cancel">Cancel</button>'+
-                '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
-            '</div>'+
-            '<form class="k-filter-menu k-secondary">'+
-                '<div>' +
-                    '<label>#=messages.operator#'+
-                        '<select data-#=ns#bind="value: filters[0].operator">'+
-                            '#for(var op in operators){#'+
-                                '<option value="#=op#">#=operators[op]#</option>' +
-                            '#}#'+
-                        '</select>'+
-                    '</label>'+
-                    '<label>#=messages.value#'+
-                        '#if(values){#' +
-                            '<select data-#=ns#bind="value:filters[0].value">'+
-                                '<option value="">#=messages.selectValue#</option>' +
-                                '#for(var val in values){#'+
-                                    '<option value="#=values[val].value#">#=values[val].text#</option>' +
-                                '#}#'+
-                            '</select>' +
-                        '#}else{#' +
-                            '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="#=inputType#" />'+
-                        '#}#' +
-                    '</label>'+
-                    '#if(extra){#'+
-                        '<select class="k-filter-and" data-#=ns#bind="value: logic">'+
-                            '<option value="and">#=messages.and#</option>'+
-                            '<option value="or">#=messages.or#</option>'+
-                        '</select>'+
+            '<div data-#=ns#role="view" data-#=ns#init-widgets="false">'+
+                '<div data-#=ns#role="header">'+
+                    '<button class="k-button k-cancel">Cancel</button>'+
+                    '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
+                '</div>'+
+                '<form class="k-filter-menu k-secondary">'+
+                    '<div>' +
                         '<label>#=messages.operator#'+
-                            '<select data-#=ns#bind="value: filters[1].operator">'+
+                            '<select data-#=ns#bind="value: filters[0].operator">'+
                                 '#for(var op in operators){#'+
                                     '<option value="#=op#">#=operators[op]#</option>' +
                                 '#}#'+
@@ -121,46 +98,73 @@ kendo_module({
                         '</label>'+
                         '<label>#=messages.value#'+
                             '#if(values){#' +
-                                '<select data-#=ns#bind="value:filters[1].value">'+
+                                '<select data-#=ns#bind="value:filters[0].value">'+
                                     '<option value="">#=messages.selectValue#</option>' +
                                     '#for(var val in values){#'+
                                         '<option value="#=values[val].value#">#=values[val].text#</option>' +
                                     '#}#'+
                                 '</select>' +
                             '#}else{#' +
-                                '<input data-#=ns#bind="value:filters[1].value" class="k-textbox" type="#=inputType#" />'+
+                                '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="#=inputType#" />'+
                             '#}#' +
                         '</label>'+
-                    '#}#'+
-                    '<div>'+
-                        '<button type="reset" class="k-button">#=messages.clear#</button>'+
+                        '#if(extra){#'+
+                            '<select class="k-filter-and" data-#=ns#bind="value: logic">'+
+                                '<option value="and">#=messages.and#</option>'+
+                                '<option value="or">#=messages.or#</option>'+
+                            '</select>'+
+                            '<label>#=messages.operator#'+
+                                '<select data-#=ns#bind="value: filters[1].operator">'+
+                                    '#for(var op in operators){#'+
+                                        '<option value="#=op#">#=operators[op]#</option>' +
+                                    '#}#'+
+                                '</select>'+
+                            '</label>'+
+                            '<label>#=messages.value#'+
+                                '#if(values){#' +
+                                    '<select data-#=ns#bind="value:filters[1].value">'+
+                                        '<option value="">#=messages.selectValue#</option>' +
+                                        '#for(var val in values){#'+
+                                            '<option value="#=values[val].value#">#=values[val].text#</option>' +
+                                        '#}#'+
+                                    '</select>' +
+                                '#}else{#' +
+                                    '<input data-#=ns#bind="value:filters[1].value" class="k-textbox" type="#=inputType#" />'+
+                                '#}#' +
+                            '</label>'+
+                        '#}#'+
+                        '<div>'+
+                            '<button type="reset" class="k-button">#=messages.clear#</button>'+
+                        '</div>'+
                     '</div>'+
-                '</div>'+
-            '</form>';
+                '</form>'+
+            '</div>';
 
     var booleanMobileTemplate =
-            '<div data-#ns#role="header">'+
-                '<button class="k-button k-cancel">Cancel</button>'+
-                '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
-            '</div>'+
-            '<form class="k-filter-menu k-secondary">'+
-                '<div>' +
-                    '<div class="k-filter-help-text">#=messages.info#</div>'+
-                    '<ul>'+
-                        '<li><label>'+
-                            '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="true" name="filters[0].value"/>' +
-                            '#=messages.isTrue#' +
-                        '</label></li>' +
-                        '<li><label>'+
-                            '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="false" name="filters[0].value"/>' +
-                            '#=messages.isFalse#' +
-                        '</label></li>' +
-                    '</ul>'+
-                    '<div>' +
-                        '<button type="reset" class="k-button">#=messages.clear#</button>'+
-                    '</div>' +
+            '<div data-#=ns#role="view" data-#=ns#init-widgets="false">'+
+                '<div data-#=ns#role="header">'+
+                    '<button class="k-button k-cancel">Cancel</button>'+
+                    '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
                 '</div>'+
-            '</form>';
+                '<form class="k-filter-menu k-secondary">'+
+                    '<div>' +
+                        '<div class="k-filter-help-text">#=messages.info#</div>'+
+                        '<ul>'+
+                            '<li><label>'+
+                                '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="true" name="filters[0].value"/>' +
+                                '#=messages.isTrue#' +
+                            '</label></li>' +
+                            '<li><label>'+
+                                '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="false" name="filters[0].value"/>' +
+                                '#=messages.isFalse#' +
+                            '</label></li>' +
+                        '</ul>'+
+                        '<div>' +
+                            '<button type="reset" class="k-button">#=messages.clear#</button>'+
+                        '</div>' +
+                    '</div>'+
+                '</form>'+
+            '</div>';
 
     function removeFiltersForField(expression, field) {
         if (expression.filters) {
@@ -295,7 +299,7 @@ kendo_module({
                 role;
 
             if (that._isMobile) {
-                that.pane = that.link.closest(kendo.roleSelector("pane")).data("kendoMobilePane");
+                that.pane = that.element.closest(kendo.roleSelector("pane")).data("kendoMobilePane");
                 that._isMobile = !!that.pane;
             }
 
