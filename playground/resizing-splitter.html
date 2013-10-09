@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Scheduler</title>
+        <link href="../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../styles/web/kendo.silver.min.css" rel="stylesheet" />
+
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.timezones.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.mobile.scroller.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.window.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.multiselect.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.tooltip.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.timepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datetimepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.view.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.dayview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.agendaview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.monthview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.recurrence.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.scheduler.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.resizable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.splitter.js" type="text/javascript" charset="utf-8"></script>
+        <style>
+            html, body, #vertical
+            {
+                width: 100%;
+                padding: 0;
+                margin: 0;
+                height: 100%;
+            }
+
+            #middle-pane { background-color: rgba(60, 70, 80, 0.10); }
+            #bottom-pane { background-color: rgba(60, 70, 80, 0.15); }
+            #left-pane, #center-pane, #right-pane  { background-color: rgba(60, 70, 80, 0.05); }
+
+            .pane-content {
+                padding: 0 10px;
+            }
+        </style>
+        <script>
+            window.onresize = function() {
+                kendo.resize(document.body);
+            }
+        </script>
+    </head>
+    <body>
+
+            <div id="vertical">
+                <div id="top-pane">
+                    Top pane
+                </div>
+                <div id="middle-pane">
+                    <div class="pane-content">
+                        <h3>Outer splitter / middle pane</h3>
+                        <p>Resizable only.</p>
+                    </div>
+                </div>
+                <div id="bottom-pane">
+                    <div class="pane-content">
+                        <h3>Outer splitter / bottom pane</h3>
+                        <p>Non-resizable and non-collapsible.</p>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#vertical").kendoSplitter({
+                        orientation: "vertical",
+                        panes: [
+                            { collapsible: false },
+                            { collapsible: false, size: "100px" },
+                            { collapsible: false, resizable: false, size: "100px" }
+                        ]
+                    });
+                });
+            </script>
+
+            <style scoped></style>
+    </body>
+</html>

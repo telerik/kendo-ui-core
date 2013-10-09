@@ -243,10 +243,7 @@ kendo_module({
                 dimensions = new PaneDimensions({
                     element: inner,
                     container: element,
-                    forcedEnabled: that.options.zoom,
-                    change: function() {
-                        that.trigger(RESIZE);
-                    }
+                    forcedEnabled: that.options.zoom
                 }),
 
                 avoidScrolling = this.options.avoidScrolling,
@@ -319,8 +316,6 @@ kendo_module({
             if (that.options.pullToRefresh) {
                 that._initPullToRefresh();
             }
-
-            kendo.onResize($.proxy(that.reset, that));
         },
 
         makeVirtual: function() {
@@ -361,6 +356,11 @@ kendo_module({
             SCROLL,
             RESIZE
         ],
+
+        _resize: function() {
+            this.dimensions.refresh();
+            this.reset();
+        },
 
         setOptions: function(options) {
             var that = this;

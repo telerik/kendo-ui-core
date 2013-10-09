@@ -637,6 +637,10 @@ kendo_module({
                 change: proxy(this, REFRESH)
             });
 
+            that.bind("resize", function() {
+                that.pane.refresh();
+            });
+
             that.page = options.page;
 
             that._content = options.dataSource ? new VirtualScrollViewContent(that.inner, that.pane, options) : new ScrollViewContent(that.inner, that.pane);

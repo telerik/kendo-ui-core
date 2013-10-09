@@ -372,6 +372,19 @@ kendo_module({
             chart._redraw();
         },
 
+        getSize: function() {
+            return kendo.dimensions(this.element);
+        },
+
+        _resize: function() {
+            var t = this.options.transitions;
+            this.options.transitions = false;
+
+            this._redraw();
+
+            this.options.transitions = t;
+        },
+
         redraw: function(paneName) {
             var chart = this,
                 pane,

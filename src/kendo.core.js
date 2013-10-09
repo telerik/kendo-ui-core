@@ -2425,6 +2425,32 @@ function pad(number, digits, end) {
             that.bind(that.events, options);
         },
 
+        resize: function(force) {
+            var size = this.getSize(),
+                currentSize = this._size;
+
+            if (force || !currentSize || size.width !== currentSize.width || size.height !== currentSize.height) {
+                this._resize(size);
+                this.trigger("resize", size);
+                this._size = size;
+            }
+        },
+
+        getSize: function() {
+            return kendo.dimensions(this.element);
+        },
+
+        size: function(size) {
+            if (!size) {
+                return this.getSize();
+            } else {
+                this.setSize(size);
+            }
+        },
+
+        setSize: $.noop,
+        _resize: $.noop,
+
         destroy: function() {
             var that = this;
 
@@ -2434,6 +2460,16 @@ function pad(number, digits, end) {
             that.unbind();
         }
     });
+
+    kendo.dimensions = function(element, dimensions) {
+        var domElement = element[0];
+
+        if (dimensions) {
+            element.css(dimensions);
+        }
+
+        return { width: domElement.offsetWidth, height: domElement.offsetHeight };
+    }
 
     kendo.notify = noop;
 
@@ -2585,14 +2621,30 @@ function pad(number, digits, end) {
 
     kendo.destroy = function(element) {
         $(element).find("[data-" + kendo.ns + "role]").andSelf().each(function(){
-            var element = $(this),
-                widget = kendo.widgetInstance(element, kendo.ui) ||
-                         kendo.widgetInstance(element, kendo.mobile.ui) ||
-                         kendo.widgetInstance(element, kendo.dataviz.ui);
+            var widget = kendo.widgetInstance($(this));
 
             if (widget) {
                 widget.destroy();
             }
+        });
+    };
+
+    kendo.resize = function(element) {
+        $(element).each(function() {
+            var child = $(this), widget;
+
+            if (!child.is(":visible")) {
+                return;
+            }
+
+            if (child.is("[data-" + kendo.ns + "role]")) {
+                widget = kendo.widgetInstance(child);
+                if (widget) {
+                    widget.resize();
+                }
+            }
+
+            kendo.resize(child.children());
         });
     };
 
@@ -2746,7 +2798,18 @@ function pad(number, digits, end) {
     };
 
     kendo.widgetInstance = function(element, suite) {
-        var widget = suite.roles[element.data(kendo.ns + "role")];
+        var role = element.data(kendo.ns + "role");
+
+        // HACK!!! mobile view scroller widgets are instantiated on data-role="content" elements. We need to discover them when resizing.
+        if (role === "content") {
+            role = "scroller";
+        }
+
+        if (!suite) {
+            suite = { roles: $.extend({}, kendo.mobile.ui.roles, kendo.dataviz.ui.roles, kendo.ui.roles) };
+        }
+
+        var widget = suite.roles[role];
 
         if (widget) {
             return element.data("kendo" + widget.fn.options.prefix + widget.fn.options.name);
