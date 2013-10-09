@@ -10,7 +10,6 @@ kendo_module({
 
     // Imports ================================================================
     var kendo = window.kendo,
-        Class = kendo.Class,
         deepExtend = kendo.deepExtend,
         extend = $.extend,
         isFn = kendo.isFunction,
@@ -23,7 +22,6 @@ kendo_module({
         Point2D = dataviz.Point2D,
         Box2D = dataviz.Box2D,
         SeriesBinder = dataviz.SeriesBinder,
-        Text = dataviz.Text,
         TextBox = dataviz.TextBox,
         append = dataviz.append,
         autoFormat = dataviz.autoFormat,
@@ -106,7 +104,8 @@ kendo_module({
             if(!data){
                 return;
             }
-            var  total = chart.pointsTotal(series),
+
+            var total = chart.pointsTotal(series),
                 value,
                 i;
 
@@ -152,8 +151,7 @@ kendo_module({
 
         createSegment: function(value, fields) {
             var chart = this,
-                segment,
-                options;
+                segment;
 
             //chart.createLegendItem(value, fields);
 
@@ -181,7 +179,7 @@ kendo_module({
 
             if (labels.visible && value) {
                 if (labels.template) {
-                    labelTemplate = template(labels.template);
+                    var labelTemplate = template(labels.template);
                     text = labelTemplate({
                         dataItem: dataItem,
                         value: value,
@@ -261,6 +259,9 @@ kendo_module({
                 decreasingWidth = options.neckSize<=1,
                 i,
                 height,
+                lastUpperSide,
+                points,
+                percentage,
                 offset,
                 box = chartBox.clone().unpad(chart.labelPadding()),
                 width = box.width(),
@@ -271,31 +272,39 @@ kendo_module({
                 totalHeight = box.height() - segmentSpacing * (count-1),
                 neckSize = decreasingWidth ? options.neckSize*width : width;
 
+            if(!count){
+                return;
+            }
+
             if(segmentMethod==="relation"){
-                var maxSegment = firstSegment = segments[0];
+                var firstSegment = segments[0],
+                    maxSegment = firstSegment;
 
                 $.each(segments,function(idx,val){
                    if(val.percentage>maxSegment.percentage){
                        maxSegment = val;
                    }
-                })
+                });
 
-                var lastUpperSide = (firstSegment.percentage/maxSegment.percentage)*width,
-                    previousOffset = (width - lastUpperSide) / 2;
+                lastUpperSide = (firstSegment.percentage/maxSegment.percentage)*width;
+                previousOffset = (width - lastUpperSide) / 2;
 
                 for (i = 0; i < count; i++) {
+                    percentage = segments[i].percentage;
+
+                    var nextSegment = segments[i+1],
+                        nextPercentage = (nextSegment ? nextSegment.percentage : percentage);
+
                     points = segments[i].points = [],
-                    percentage = segments[i].percentage,
-                    nextSegment = segments[i+1],
-                    nextPercentage = (nextSegment ? nextSegment.percentage : percentage),
                     height = (options.segmentHeight==="proportional")? (totalHeight * percentage): (totalHeight / count),
                     offset = (width - lastUpperSide* (nextPercentage / percentage))/2;
                     offset = limitValue(offset, 0, width);
 
-                    points.push(new Point2D(box.x1 + previousOffset, box.y1 + previousHeight));
-                    points.push(new Point2D(box.x1+width - previousOffset, box.y1 + previousHeight));
-                    points.push(new Point2D(box.x1+width - offset, box.y1 + height + previousHeight));
-                    points.push(new Point2D(box.x1+ offset,box.y1 + height + previousHeight));
+                    points.push(Point2D(box.x1 + previousOffset, box.y1 + previousHeight));
+                    points.push(Point2D(box.x1+width - previousOffset, box.y1 + previousHeight));
+                    points.push(Point2D(box.x1+width - offset, box.y1 + height + previousHeight));
+                    points.push(Point2D(box.x1+ offset,box.y1 + height + previousHeight));
+
                     previousOffset = offset;
                     previousHeight += height + segmentSpacing;
                     lastUpperSide *= nextPercentage/percentage;
@@ -309,12 +318,13 @@ kendo_module({
                 for (i = 0; i < count; i++) {
                     points = segments[i].points = [],
                     percentage = segments[i].percentage,
-                    offset = (options.segmentHeight==="proportional")? (finalNarrow * percentage): (finalNarrow / count) ,
+                    offset = (options.segmentHeight==="proportional")? (finalNarrow * percentage): (finalNarrow / count),
                     height = (options.segmentHeight==="proportional")? (totalHeight * percentage): (totalHeight / count);
-                    points.push(new Point2D(box.x1 + previousOffset, box.y1 + previousHeight));
-                    points.push(new Point2D(box.x1+width - previousOffset, box.y1 + previousHeight));
-                    points.push(new Point2D(box.x1+width - previousOffset - offset, box.y1 + height + previousHeight));
-                    points.push(new Point2D(box.x1+ previousOffset + offset,box.y1 + height + previousHeight));
+
+                    points.push(Point2D(box.x1+previousOffset, box.y1 + previousHeight));
+                    points.push(Point2D(box.x1+width - previousOffset, box.y1 + previousHeight));
+                    points.push(Point2D(box.x1+width - previousOffset - offset, box.y1 + height + previousHeight));
+                    points.push(Point2D(box.x1+previousOffset + offset,box.y1 + height + previousHeight));
                     previousOffset += offset;
                     previousHeight += height + segmentSpacing;
                 }
@@ -374,7 +384,7 @@ kendo_module({
             return elements;
         },
 
-        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
+        tooltipAnchor: function(tooltipWidth) {
             var box = this.box;
 
             return new Point2D(
