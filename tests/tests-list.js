@@ -102,6 +102,7 @@ var tests = [
     "combobox/cascadingcomboboxes.html",
     "combobox/lint.html",
     "combobox/aria.html",
+    "core/animationqueue.html",
     "core/class.html",
     "core/accessor.html",
     "core/kendo-jquery.html",

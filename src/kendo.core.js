@@ -3478,6 +3478,36 @@ function pad(number, digits, end) {
         }
     };
 
+    var animationFrame  = window.requestAnimationFrame       ||
+                          window.webkitRequestAnimationFrame ||
+                          window.mozRequestAnimationFrame    ||
+                          window.oRequestAnimationFrame      ||
+                          window.msRequestAnimationFrame     ||
+                          function(callback){ setTimeout(callback, 1000 / 60); };
+
+    kendo.animationFrame = function(callback) {
+        animationFrame.call(window, callback);
+    };
+
+    var animationQueue = [];
+
+    kendo.queueAnimation = function(callback) {
+        animationQueue[animationQueue.length] = callback;
+        if (animationQueue.length === 1) {
+            kendo.runNextAnimation();
+        }
+    };
+
+    kendo.runNextAnimation = function() {
+        var callback = animationQueue.shift();
+
+        kendo.animationFrame(function() {
+            callback();
+            if (animationFrame[0]) {
+                kendo.runNextAnimation();
+            }
+        });
+    };
 })(jQuery, eval);
 
 /*global kendo_module:true */

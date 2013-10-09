@@ -138,7 +138,7 @@ kendo_module({
                 history.pop();
                 url = history[history.length - 1];
             } else {
-                that.history.push(url);
+                history.push(url);
             }
 
             that.viewEngine.showView(url, transition);

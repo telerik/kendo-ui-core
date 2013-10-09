@@ -1405,13 +1405,6 @@ kendo_module({
         }
     });
 
-    var animationFrame  = window.requestAnimationFrame       ||
-                          window.webkitRequestAnimationFrame ||
-                          window.mozRequestAnimationFrame    ||
-                          window.oRequestAnimationFrame      ||
-                          window.msRequestAnimationFrame     ||
-                          function(callback){ setTimeout(callback, 1000 / 60); };
-
     var Animation = kendo.Class.extend({
         init: function() {
             var that = this;
@@ -1427,7 +1420,7 @@ kendo_module({
         start: function() {
             if (!this.done()) {
                 this._started = true;
-                animationFrame(this._tickProxy);
+                kendo.animationFrame(this._tickProxy);
             }
         },
 
@@ -1443,7 +1436,7 @@ kendo_module({
             that.tick();
 
             if (!that.done()) {
-                animationFrame(that._tickProxy);
+                kendo.queueAnimation(that._tickProxy);
             } else {
                 that._started = false;
                 that.onEnd();
@@ -1501,7 +1494,6 @@ kendo_module({
         }
     });
 
-    fx.animationFrame = function(callback) { animationFrame.call(window, callback); };
     fx.Animation = Animation;
     fx.Transition = Transition;
     fx.createEffect = createEffect;

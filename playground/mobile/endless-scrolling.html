@@ -9,6 +9,7 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.data.odata.js"></script>
         <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.router.js"></script>
         <script src="../../src/kendo.data.js"></script>
@@ -25,7 +26,7 @@
         <script src="../../src/kendo.mobile.listview.js"></script>
         <style>
             .km-listview li {
-                line-height: 100px;
+                line-height: 50px;
                 border-bottom: 1px solid #eee;
                 border-top: 1px solid #fff;
             }
@@ -36,57 +37,57 @@
         </style>
     </head>
     <body>
-        <div data-role="view">
-
-            <ul data-role="buttongroup">
-                <li>Foo</li>
-                <li>Bar</li>
-                <li>Baz</li>
-            </ul>
-
-            <div data-role="scroller" style="height:300px">
-                <ul data-role="listview" data-endless-scroll="true" data-source="foo" data-template="listview-template">
-                </ul>
-            </div>
+<div data-role="view" data-init="mobileListViewEndlessScrolling" data-title="Scroll down to load">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
         </div>
+    </header>
 
-        <div data-role="view" data-transition="slide" data-show="showParam" id="detail">
-            <a data-role="backbutton">Back</a>
-            <br />
-            Mambo Number <span id="content"></span>
-        </div>
+    <ul id="endless-scrolling"></ul>
+</div>
 
-        <script id="listview-template" type="text/x-kendo-template">
-            <a href="\#detail?id=#: data #">Mambo Number #: data #</a>
-        </script>
+<script type="text/x-kendo-tmpl" id="endless-scrolling-template">
+    <div class="product">
+        <h3>#:ProductName#</h3>
+        <p>#:kendo.toString(UnitPrice, "c")#</p>
+    </div>
+</script>
+
+<script>
+    var dataSource = new kendo.data.DataSource({
+        type: "odata",
+        transport: {
+            read: {
+                url: "http://demos.kendoui.com/service/Northwind.svc/Products"
+            }
+        },
+        schema: {
+            total: function () { return 77; }
+        },
+        sort: {
+            field: "ProductID",
+            dir: "desc"
+        },
+        serverPaging: true,
+        serverSorting: true,
+        pageSize: 50
+    });
+
+    function mobileListViewEndlessScrolling() {
+
+        $("#endless-scrolling").kendoMobileListView({
+            dataSource: dataSource,
+            template: $("#endless-scrolling-template").text(),
+            endlessScroll: true
+        });
+    }
+</script>
+
 
         <script>
-            function showParam(e) {
-                e.view.element.find('#content').html(e.view.params.id);
-            }
-            var foo = new kendo.data.DataSource({
-                transport: {
-                    read: function(options) {
-                        var results = [], data = options.data;
-                        for (var i = data.skip; i < data.skip + data.take; i ++) {
-                            if (i < 50) {
-                                results.push(i);
-                            }
-                        }
-
-                        setTimeout(function() {
-                            options.success(results);
-                        }, 2000);
-                    }
-                },
-                pageSize: 20,
-                serverPaging: true,
-                schema: {
-                    total: function() { return 50; }
-                }
-            });
-
-            new kendo.mobile.Application(document.body, { skin: "flat" });
+            new kendo.mobile.Application(document.body);
         </script>
     </body>
 </html>
