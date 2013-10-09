@@ -12,12 +12,20 @@
                     </label>
                 </li>
                 <li>
-                    <div class="dependOn">
-                    Segment arrangement based on:
+                    <div class="segmentMethod">
+                    Segment slope based on:
                         <ul>
-                         <li><label><input type="radio" name="dependOn" value="default" checked /> Equal size </label></li>
-                         <li><label><input type="radio" name="dependOn" value="relation" />Value Relation </label></li>
-                         <li><label><input type="radio" name="dependOn" value="height" /> Height </label></li>
+                         <li><label><input type="radio" name="segmentMethod" value="default" checked /> default (neckSize is used) </label></li>
+                         <li><label><input type="radio" name="segmentMethod" value="relation" />Value Relation </label></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <div class="segmentHeight">
+                    Segment height based on:
+                        <ul>
+                         <li><label><input type="radio" name="segmentHeight" value="proportional" checked /> Proportional  </label></li>
+                         <li><label><input type="radio" name="segmentHeight" value="equal" /> Equal Size </label></li>
                         </ul>
                     </div>
                 </li>
@@ -45,10 +53,6 @@
                 series: [{
                     type: "funnel",
                     data: [{
-                        category: "Asia",
-                        value: 53.8,
-                        color: "#9de219"
-                    },{
                         category: "Europe",
                         value: 16.1,
                         color: "#90cc38"
@@ -56,6 +60,10 @@
                         category: "Latin America",
                         value: 11.3,
                         color: "#068c35"
+                    },{
+                        category: "Asia",
+                        value: 53.8,
+                        color: "#9de219"
                     },{
                         category: "Africa",
                         value: 9.6,
@@ -84,10 +92,11 @@
                 
             chart.options.transitions = false;
             funnelSeries.neckSize = slider.value();
-            funnelSeries.dependOn = $('.dependOn :checked').val();
+            funnelSeries.segmentHeight = $('.segmentHeight :checked').val();
+            funnelSeries.segmentMethod = $('.segmentMethod :checked').val();
 
            
-            slider.enable(funnelSeries.dependOn != "relation");
+            slider.enable(funnelSeries.segmentMethod != "relation");
             chart.refresh();
         }
 
@@ -96,12 +105,12 @@
             $("#neckSlider").kendoSlider({
                 change: refresh,
                 min: 0,
-                max: 1,
+                max: 10,
                 smallStep: 0.01,
                 largeStep: 0.1
             });
 
-            $('.dependOn').on('click', ':radio', refresh);
+            $('.segmentMethod,.segmentHeight').on('click', ':radio', refresh);
         });
         $(document).bind("kendo:skinChange", createChart);
     </script>
