@@ -306,7 +306,14 @@
                     "url": "pie-charts/local-data.html",
                     "title": "Kendo UI jQuery Pie Charts binding to local data demo",
                     "meta": "This demo shows how Kendo UI Pie Charts use existing objects as data points. The example illustrates binding to local data feature of the widget."
-            }],
+                }, {
+                    "text": "MVVM",
+                    "url": "pie-charts/mvvm.html",
+                    "title": "MVVM support in Kendo UI Chart",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                }
+            ],
             "name": "pie-charts"
         }, {
             "text": "Scatter Charts",
