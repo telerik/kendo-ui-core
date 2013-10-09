@@ -404,7 +404,14 @@
                     "url": "radar-charts/grouped-data.html",
                     "title": "Kendo UI Radar Charts | Example of binding to grouped data",
                     "meta": "With this example you will learn how to bind grouping data to Kendo UI Radar Charts."
-            }],
+                }, {
+                    "text": "MVVM",
+                    "url": "radar-charts/mvvm.html",
+                    "title": "MVVM support in Kendo UI Chart",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                }
+            ],
             "name": "radar-charts"
         }, {
             "text": "Polar Charts",
