@@ -92,6 +92,10 @@ kendo_module({
             }
         },
 
+        formatPointValue:function(point,format){
+            return autoFormat(format,point.value);
+        },
+
         render: function() {
             var chart = this,
                 options = chart.options,
@@ -391,6 +395,10 @@ kendo_module({
                 box.center().x - (tooltipWidth / 2),
                 box.y1
             );
+        },
+        formatValue: function(format){
+            var point = this;
+            return point.owner.formatPointValue(point,format);
         }
     });
     deepExtend(FunnelSegment.fn, dataviz.PointEventsMixin);
