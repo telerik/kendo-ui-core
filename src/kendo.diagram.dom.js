@@ -127,6 +127,19 @@ kendo_module({
         }
     });
 
+    Connector.parse = function (diagram, str) {
+        var tempStr = str.split(":"),
+            id = tempStr[0],
+            name = tempStr[1] || Auto;
+
+        for (var i = 0; i < diagram.shapes.length; i++) {
+            var shape = diagram.shapes[i];
+            if (shape.options.id == id) {
+                return shape.getConnector(name.trim());
+            }
+        }
+    };
+
     var DiagramElement = Observable.extend({
         init: function (options, model) {
             var that = this;
@@ -728,6 +741,17 @@ kendo_module({
         return indices;
     }
 
+    function deserializeConnector(diagram, value) {
+        var point = Point.parse(value), ctr;
+        if (point) {
+            return point;
+        }
+        ctr = Connector.parse(diagram, value);
+        if (ctr) {
+            return ctr;
+        }
+    }
+
     var Diagram = Widget.extend({
         init: function (element, options) {
             var that = this;
@@ -820,6 +844,7 @@ kendo_module({
         load: function (json) {
             var i, options, con;
             this.options = json.options;
+            this.clear();
             this._initialize();
             for (i = 0; i < json.shapes.length; i++) {
                 options = json.shapes[i].options;
@@ -827,11 +852,13 @@ kendo_module({
                 this.addShape(new Shape(options));
             }
 
-            for (i = 0; i < this.connections.length; i++) {
-                con = this.connections[i];
+            for (i = 0; i < json.connections.length; i++) {
+                con = json.connections[i];
                 options = con.options;
                 options.undoable = false;
-                this.addConnection(new Connection(con.from, con.to, options));
+                var from = deserializeConnector(this, con.from);
+                var to = deserializeConnector(this, con.to);
+                this.addConnection(new Connection(from, to, options));
             }
         },
         getValidZoom: function (zoom) {

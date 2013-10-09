@@ -101,7 +101,7 @@ kendo_module({
                 from = temp;
             }
             var r1 = new Rect(from.x, from.y).inflate(HITTESTAREA, HITTESTAREA),
-                r2 = new Rect(to.x, to.y).inflate(HITTESTAREA, HITTESTAREA), o1,u1;
+                r2 = new Rect(to.x, to.y).inflate(HITTESTAREA, HITTESTAREA), o1, u1;
             if (r1.union(r2).contains(this)) {
                 if (from.x === to.x || from.y === to.y) {
                     return true;
@@ -117,6 +117,18 @@ kendo_module({
                 return (this.x > o1 && this.x < u1);
             }
             return false;
+        }
+    });
+
+    deepExtend(Point, {
+        parse: function (str) {
+            var tempStr = str.slice(1, str.length - 1),
+                xy = tempStr.split(","),
+                x = parseInt(xy[0], 10),
+                y = parseInt(xy[1], 10);
+            if (!isNaN(x) && !isNaN(y)) {
+                return new Point(x, y);
+            }
         }
     });
 
@@ -2931,6 +2943,6 @@ kendo_module({
         Node: Node,
         Link: Link,
         Graph: Graph,
-        PathDefiner : PathDefiner
+        PathDefiner: PathDefiner
     });
 })(window.kendo.jQuery);

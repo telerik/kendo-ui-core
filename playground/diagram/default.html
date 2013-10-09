@@ -113,7 +113,7 @@
         <input type="button" class="diagramCommandBtn" id="selectAllButton" title="Select All (CTRL+A)"
                value="SelectAll"/>
         <input type="button" class="diagramCommandBtn" id="saveButton" title="Save As (CTRL + S)" value="Save"/>
-        <input type="button" class="diagramCommandBtn" id="loadButton" title="Load (CTRL+O)" value="Load"/>
+        <input type="file" class="diagramCommandBtn" id="loadButton" title="Load (CTRL+O)" value="Load"/>
         <span class="menu-text">Layout:</span><input id="Layouts" value="1"/>
         <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
         <input type="button" class="diagramCommandBtn" id="toFrontButton" title="To Front" value="To Front"/>
@@ -270,12 +270,21 @@ $(function () {
         a.href = url;
         a.textContent = "Download diagram.json";
         $("#toolbarDiv").append(a);
-        if (!window.open(a)) {
-            document.location.href = a;
-        }
     });
-    $("#loadButton").click(function (e) {
-        var saved = diagram.load();
+    $("#loadButton").change(function (e) {
+        var reader = new FileReader(),
+                f = e.target.files[0];
+
+        reader.onload = (function (file) {
+            return function (e) {
+                // Render thumbnail.
+                console.log(e.target.result);
+                var saved = diagram.load(JSON.parse(e.target.result));
+            };
+        })(f);
+
+        // Read in the image file as a data URL.
+        reader.readAsBinaryString(f);
     });
     $("#selectAllButton").click(function (e) {
         diagram.select(true);
