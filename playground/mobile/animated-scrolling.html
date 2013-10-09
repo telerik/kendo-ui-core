@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KendoUI Test Page</title>
+    
+    <link href="../../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" />
+    <script src="../../demos/mvc/content/shared/js/less.js"></script>
+    <script src="../../src/jquery.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+
+    <script src="../../src/kendo.fx.js"></script>
+    <script src="../../src/kendo.userevents.js"></script>
+    <script src="../../src/kendo.draganddrop.js"></script>
+    <script src="../../src/kendo.mobile.scroller.js"></script>
+    <script src="../../src/kendo.mobile.view.js"></script>
+    <script src="../../src/kendo.mobile.loader.js"></script>
+    <script src="../../src/kendo.mobile.pane.js"></script>
+    <script src="../../src/kendo.router.js"></script>
+    <script src="../../src/kendo.mobile.application.js"></script>
+    <script src="../../src/kendo.mobile.button.js"></script>
+</head>
+<body>
+    <div id="home" data-role="view">
+        <a data-role="button" data-click="scroll">Scroll To</a>
+        <div id="div1" style="width: 100%; height: 200px; margin-top: 2em; background-color: red;"></div>
+        <div id="div2" style="width: 100%; height: 300px; margin-top: 2em; background-color: green;"></div>
+        <div id="div3" style="width: 100%; height: 250px; margin-top: 2em; background-color: blue;"></div>
+        <div id="div4" style="width: 100%; height: 350px; margin-top: 2em; background-color: yellow;"></div>
+        <div id="div5" style="width: 100%; height: 250px; margin-top: 2em; background-color: purple;"></div>
+    </div>
+
+    <script>
+        var app = new kendo.mobile.Application();
+        function scroll(e) {
+            var scroller = this.container().scroller;
+            scroller.animatedScrollTo(0, -230);
+        }
+    </script>
+</body>
+</html>
+
