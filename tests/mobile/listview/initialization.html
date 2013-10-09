@@ -317,7 +317,7 @@
 
                 var listView = new ListView(dom.find("ul"));
                 listView.destroy();
-                equal(dom.html(), '<ul data-role="listview" class="km-widget km-listview km-list"></ul>');
+                ok(dom.children().is("ul"));
             });
         </script>
     </body>
