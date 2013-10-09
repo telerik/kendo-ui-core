@@ -211,8 +211,15 @@
                     "url": "listview/filtering.html",
                     "title": "Filtering in Kendo UI Mobile ListView | Kendo UI ListView demo",
                     "meta": "Play with Kendo UI Mobile ListView demo to see the filtering capability in action. Keyword-based filtering is perfomed against the content in each list item. "
+                },
+                {
+                    "text": "MVVM",
+                    "url": "listview/mvvm.html",
+                    "title": "MVVM support in Kendo UI Mobile ListView",
+                    "meta": "Source, events and visible MVVM binding support in Kendo UI Mobile ListView",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
-            ]
+]
         },
         {
             "text": "ModalView",
