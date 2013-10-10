@@ -127,20 +127,15 @@ kendo_module({
             var that = this,
                 options = that.options;
 
-            that.wrapper.html(kendo.template(mobileTemplate)({
+            var html = kendo.template(mobileTemplate)({
                 ns: kendo.ns,
+                field: that.field,
                 messages: options.messages,
                 sortable: options.sortable,
                 filterable: options.filterable,
                 columns: that._ownerColumns(),
                 showColumns: options.columns
-            }));
-
-            var html = that.wrapper.wrap(
-                    '<div><div ' +
-                    kendo.attr("role") + '="view" ' +
-                    kendo.attr("init-widgets") + '="false"></div></div>')
-                    .parent().parent().html();
+            });
 
             that.view = that.pane.append(html);
 
@@ -148,6 +143,11 @@ kendo_module({
 
             that.menu = new MobileMenu(that.wrapper.children(), {
                 pane: that.pane
+            });
+
+            that.view.element.on("click", ".k-done", function(e) {
+                that.close();
+                e.preventDefault();
             });
         },
 
@@ -452,32 +452,35 @@ kendo_module({
                     '#}#'+
                     '</ul>';
 
-    var mobileTemplate = '<ul>'+
-                    '#if(sortable){#'+
-                        '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite k-i-sort-asc"></span>${messages.sortAscending}</span></li>'+
-                        '<li class="k-item k-sort-desc"><span class="k-link"><span class="k-sprite k-i-sort-desc"></span>${messages.sortDescending}</span></li>'+
-                        '#if(showColumns || filterable){#'+
-                            '<li class="k-separator"></li>'+
-                        '#}#'+
+    var mobileTemplate =
+            '<div data-#=ns#role="view" data-#=ns#init-widgets="false">'+
+                '<div data-#=ns#role="header">'+
+                    'Column settings'+
+                    '<button class="k-button k-done">Done</button>'+
+                '</div>'+
+                '<div class="k-column-menu"><ul><li>'+
+                    '<span class="k-link">${field}</span><ul>'+
+                '#if(sortable){#'+
+                    '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite k-i-sort-asc"></span>${messages.sortAscending}</span></li>'+
+                    '<li class="k-item k-sort-desc"><span class="k-link"><span class="k-sprite k-i-sort-desc"></span>${messages.sortDescending}</span></li>'+
+                '#}#'+
+                '#if(filterable){#'+
+                    '<li class="k-item k-filter-item">'+
+                        '<span class="k-link k-filterable">'+
+                            '<span class="k-sprite k-filter"></span>'+
+                            '${messages.filter}</span>'+
+                    '</li>'+
+                '#}#'+
+                '</ul></li>'+
+                '#if(showColumns){#'+
+                    '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite k-i-columns"></span>${messages.columns}</span><ul>'+
+                    '#for (var col in columns) {#'+
+                        '<li><input type="checkbox" data-#=ns#field="#=columns[col].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[col].index#"/>#=columns[col].title#</li>'+
                     '#}#'+
-                    '#if(showColumns){#'+
-                        '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite k-i-columns"></span>${messages.columns}</span><ul>'+
-                        '#for (var col in columns) {#'+
-                            '<li><input type="checkbox" data-#=ns#field="#=columns[col].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[col].index#"/>#=columns[col].title#</li>'+
-                        '#}#'+
-                        '</ul></li>'+
-                        '#if(filterable){#'+
-                            '<li class="k-separator"></li>'+
-                        '#}#'+
-                    '#}#'+
-                    '#if(filterable){#'+
-                        '<li class="k-item k-filter-item">'+
-                            '<span class="k-link k-filterable">'+
-                                '<span class="k-sprite k-filter"></span>'+
-                                '${messages.filter}</span>'+
-                        '</li>'+
-                    '#}#'+
-                    '</ul>';
+                    '</ul></li>'+
+                '#}#'+
+                '</ul></div>'+
+            '</div>';
 
     var MobileMenu = Widget.extend({
         init: function(element, options) {
