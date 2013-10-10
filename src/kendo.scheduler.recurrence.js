@@ -1525,13 +1525,12 @@ kendo_module({
                     that.trigger("change");
                 }
             }).data("kendoDatePicker");
-        },
+        }
     });
 
     var RecurrenceEditor = BaseRecurrenceEditor.extend({
         init: function(element, options) {
-            var that = this,
-                start;
+            var that = this;
 
             BaseRecurrenceEditor.fn.init.call(that, element, options);
 
@@ -1983,9 +1982,8 @@ kendo_module({
         events: [ "change" ],
 
         value: function(value) {
-            var that = this,
-                frequencies = that.options.messages.frequencies,
-                timezone = that.options.timezone;
+            var that = this;
+            var timezone = that.options.timezone;
 
             if (value === undefined) {
                 if (!that._value.freq) {
@@ -2015,8 +2013,6 @@ kendo_module({
 
         _initRepeatEnd: function() {
             var that = this;
-            var rule = that._value;
-            var messages = that.options.messages;
 
             var endLabelField = $('<div class="k-edit-label"><label>Ends</label></div>').insertAfter(that.element.parent(".k-edit-field"));
 
@@ -2070,7 +2066,7 @@ kendo_module({
             that._view.element
                 .find(".k-recur-pattern")
                 .append(html)
-                .on(CLICK + that._namespace, ".k-scheduler-navigation li", function(e) {
+                .on(CLICK + that._namespace, ".k-scheduler-navigation li", function() {
                     var li = $(this);
 
                     li.addClass("k-state-selected")
@@ -2107,7 +2103,7 @@ kendo_module({
             that._view.element
                 .find(".k-recur-pattern")
                 .append(html)
-                .on(CLICK + that._namespace, ".k-scheduler-navigation li", function(e) {
+                .on(CLICK + that._namespace, ".k-scheduler-navigation li", function() {
                     var li = $(this);
                     var count = null;
                     var until = null;
@@ -2246,9 +2242,9 @@ kendo_module({
             var month = rule.months || [start.getMonth() + 1];
             var monthInput = that._container.find(".k-recur-month");
             var monthNames = kendo.culture().calendar.months.names;
-            var monthDropDownList;
 
             if (monthInput[0]) {
+                //TODO: make it private
                 that.monthDropDownList = new DropDownList(monthInput, {
                     dataTextField: "text",
                     dataValueField: "value",
@@ -2320,7 +2316,7 @@ kendo_module({
 
                 repeatRuleGroupButton
                     .append(html)
-                    .on(CLICK + that._namespace, ".k-scheduler-navigation li", function(e) {
+                    .on(CLICK + that._namespace, ".k-scheduler-navigation li", function() {
                         var li = $(this).addClass("k-state-selected");
 
                         li.siblings().removeClass("k-state-selected");
