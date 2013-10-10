@@ -263,6 +263,7 @@ kendo_module({
             if (Utils.isDefined(options.content)) {
                 that.content(options.content);
             }
+            that._rotate();
         },
         options: {
             type: "Shape",
@@ -282,7 +283,12 @@ kendo_module({
             rotatable: true,
             background: "steelblue",
             hoveredBackground: "#70CAFF",
-            connectors: diagram.DefaultConnectors
+            connectors: diagram.DefaultConnectors,
+            rotation: {
+                angle: 0,
+                x: 0,
+                y: 0
+            }
         },
         bounds: function (value) {
             var point, size;
@@ -357,14 +363,18 @@ kendo_module({
                     var b = this.bounds();
                     return this.rotate(angle, new Point(b.width / 2, b.height / 2));
                 }
-
                 rotate = this.visual.rotate(angle, center);
-
+                var rotation = this.options.rotation;
+                rotation.angle = angle;
+                rotation.x = center.x;
+                rotation.y = center.y;
                 if (this.diagram && this.diagram._connectorsAdorner) {
                     this.diagram._connectorsAdorner.refresh();
                 }
                 this.refreshConnections();
-                this.diagram.trigger(ROTATE, {item: this});
+                if (this.diagram) {
+                    this.diagram.trigger(ROTATE, {item: this});
+                }
             }
 
             return rotate;
@@ -395,6 +405,12 @@ kendo_module({
                 }
             }
             return result;
+        },
+        _rotate: function () {
+            var rotation = this.options.rotation;
+            if (rotation) {
+                this.rotate(rotation.angle, new Point(rotation.x, rotation.y));
+            }
         },
         _hover: function (value) {
             this.shapeVisual._hover(value);
@@ -873,7 +889,7 @@ kendo_module({
                 var point = points[i];
                 data += " L" + pr(point);
             }
-            return data + " L" +  pr(end)
+            return data + " L" + pr(end)
         },
         _refreshPath: function () {
             if (Utils.isUndefined(this.path)) return;

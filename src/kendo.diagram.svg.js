@@ -101,6 +101,19 @@ kendo_module({
         }
     });
 
+    Rotation.create = function (rotation) {
+        return new Rotation(rotation.angle, rotation.x, rotation.y);
+    };
+
+    Rotation.parse = function (str) {
+        var values = str.slice(1, str.length - 1).split(","),
+            angle = values[0],
+            x = values[1],
+            y = values[2];
+        var rotation = new Rotation(angle, x, y);
+        return rotation;
+    };
+
     var CompositeTransform = Class.extend({
         init: function (x, y, scaleX, scaleY, angle, center) {
             this.translate = new Translation(x, y);
@@ -159,8 +172,8 @@ kendo_module({
             }
         },
         setAtr: function (atr, prop) {
-            if(Utils.isUndefined(prop) || Utils.isUndefined(this.options[prop]))return;
-            if(this.options[prop].toString().indexOf("F 1")===0)
+            if (Utils.isUndefined(prop) || Utils.isUndefined(this.options[prop]))return;
+            if (this.options[prop].toString().indexOf("F 1") === 0)
                 throw "qmlkj";
             if (this.options[prop] !== undefined) {
                 this.native.setAttribute(atr, this.options[prop]);
@@ -456,10 +469,10 @@ kendo_module({
             VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "path"), options);
         },
         data: function (value) {
-            if(value){
+            if (value) {
                 this.options.data = value;
             }
-            else{
+            else {
                 return this.options.data;
             }
         },
