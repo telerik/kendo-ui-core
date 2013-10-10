@@ -2246,7 +2246,7 @@ kendo_module({
 
             if (monthInput[0]) {
                 //TODO: make it private
-                that.monthDropDownList = new DropDownList(monthInput, {
+                that._monthDropDownList = new DropDownList(monthInput, {
                     dataTextField: "text",
                     dataValueField: "value",
                     dataSource: $.map(monthNames, function(monthName, idx) {
@@ -2261,7 +2261,7 @@ kendo_module({
                 });
 
                 if (month) {
-                    that.monthDropDownList.value(month[0]);
+                    that._monthDropDownList.value(month[0]);
                 }
             }
 
@@ -2292,7 +2292,7 @@ kendo_module({
                     var weekDayName = that._weekDay.value();
                     var weekDayOffset = that._weekDayOffset.value();
                     var monthDay = that._monthDay.value();
-                    var month = that.monthDropDownList ? that.monthDropDownList.value() : null;
+                    var month = that._monthDropDownList ? that._monthDropDownList.value() : null;
 
                     if (val === "monthday") {
                         rule.weekDays = null;
