@@ -20,10 +20,14 @@
         append = dataviz.append,
         defined = dataviz.defined,
         round = dataviz.round,
-        renderTemplate = dataviz.renderTemplate;
+        renderTemplate = dataviz.renderTemplate,
+
+        output = dataviz.output,
+        BaseNode = output.BaseNode;
 
     // Constants ==============================================================
     var BUTT = "butt",
+        CHANGE = "change",
         CLIP = dataviz.CLIP,
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DASH_ARRAYS = dataviz.DASH_ARRAYS,
@@ -38,14 +42,17 @@
         TRANSPARENT = "transparent",
         UNDEFINED = "undefined";
 
-    // TODO: Move base stage to core
-    // TODO: Rename to Stage?
-    var BaseStage = Observable.extend({
+    // SVG Stage =============================================================
+    var Stage = Observable.extend({
         init: function(wrap, options) {
-            Observable.fn.init.call(this);
+            var stage = this;
 
-            this.nodes = new ObservableArray([]);
-            this.nodes.bind("change", proxy(this._nodeChange, this))
+            Observable.fn.init.call();
+
+            stage.rootNode = new Node();
+            stage.rootNode.bind(CHANGE, proxy(stage._nodeChange, stage));
+
+            stage._appendTo(wrap);
         },
 
         options: {
@@ -58,39 +65,29 @@
         ],
 
         append: function() {
-            append(this.nodes, Node.map(arguments));
+            this.rootNode.load(arguments);
         },
 
         clear: function() {
-            this.nodes.empty();
-        },
-
-        _nodeChange: noop,
-
-        _renderSize: function(size) {
-            if (typeof size !== "string") {
-                size += "px";
-            }
-
-            return size;
-        }
-    });
-
-    // SVG Stage =============================================================
-    var Stage = BaseStage.extend({
-        init: function(wrap, options) {
-            BaseStage.fn.init.call(this);
-
-            renderSVG(wrap, this._template(this));
-            this.element = wrap.firstElementChild;
+            this.rootNode.childNodes.empty();
         },
 
         _template: renderTemplate(
             "<?xml version='1.0' ?>" +
             "<svg xmlns='" + SVG_NS + "' version='1.1' " +
-            "width='#= d._renderSize(d.options.width) #' height='#= d._renderSize(d.options.height) #' " +
+            "width='#= kendo.dataviz.util.renderSize(d.options.width) #' " +
+            "height='#= kendo.dataviz.util.renderSize(d.options.height) #' " +
             "style='position: relative; display: #= d.display #;'></svg>"
         ),
+
+        _appendTo: function(wrap) {
+            var stage = this;
+
+            renderSVG(wrap, this._template(this));
+            this.element = wrap.firstElementChild;
+
+            this.rootNode.attachTo(this.element);
+        },
 
         _nodeChange: function(e) {
             for (var i = 0; i < e.items.length; i++) {
@@ -104,19 +101,8 @@
         }
     });
 
-    // Nodes ===================================================================
-    var Node = ObservableObject.extend({
-        init: function(source) {
-            ObservableObject.fn.init.call(this, this);
-
-            this.source = source;
-            this.source.options.bind("change", proxy(this._setOptions, this));
-        },
-
-        render: function() {
-            return this._template(this);
-        },
-
+    // SVG Node ================================================================
+    var Node = BaseNode.extend({
         attachTo: function(domElement) {
             if (!this.element) {
                 var container = doc.createElement("div");
@@ -128,8 +114,9 @@
                 );
 
                 this.element = container.firstElementChild.lastChild;
-
-                domElement.appendChild(this.element);
+                if (this.element) {
+                    domElement.appendChild(this.element);
+                }
             }
         },
 
@@ -142,59 +129,37 @@
             }
         },
 
-        _template: noop,
-
-        _setOptions: noop
-    });
-
-    // TODO: Do we need reference to the Stage / state for special nodes like definitions?
-    Node.map = function(primitives) {
-        var result = [];
-
-        for (var i = 0; i < primitives.length; i++) {
-            var source = primitives[i];
-            var children = source.children;
-            var node;
-
-            if (source instanceof Group) {
-                node = new GroupNode(source);
-            } else if (source instanceof Path) {
-                node = new PathNode(source);
-            }
-
-            if (node.childNodes && children && children.length > 0) {
-                append(node.childNodes, Node.map(children));
-            }
-
-            result.push(node);
-        }
-
-        return result;
-    };
-
-    var GroupNode = Node.extend({
-        init: function(source) {
-            this.childNodes = [];
-
-            Node.fn.init.call(this, source);
-
-            this.source.children.bind("change", proxy(this._childrenChange, this));
-            this.childNodes.bind("change", proxy(this._childNodesChange, this));
-        },
-
-        attachTo: function(domElement) {
-            var nodes = this.childNodes,
+        load: function(elements) {
+            var node = this,
+                childNode,
+                srcElement,
+                children,
                 i;
 
-            Node.fn.attachTo.call(this, domElement);
+            for (i = 0; i < elements.length; i++) {
+                srcElement = elements[i];
+                children = srcElement.children;
 
-            for (i = 0; i < nodes.length; i++) {
-                nodes[i].element = this.element.childNodes[i];
+                if (srcElement instanceof Group) {
+                    childNode = new GroupNode(srcElement);
+                } else if (srcElement instanceof Path) {
+                    childNode = new PathNode(srcElement);
+                }
+
+                if (children && children.length > 0) {
+                    childNode.load(children);
+                }
+
+                node.childNodes.push(childNode);
             }
+        },
+
+        render: function() {
+            return this._template(this);
         },
 
         _template: renderTemplate(
-            "<g>#= d._renderChildren() #</g>"
+            "#= d._renderChildren() #"
         ),
 
         _renderChildren: function() {
@@ -209,19 +174,6 @@
             return output;
         },
 
-        // TODO: Rename
-        _childrenChange: function(e) {
-            var group = this;
-
-            // TODO: Test different scenarios for synchronization
-            if (e.action === "add") {
-                append(group.childNodes, Node.map(e.items));
-            } else if (e.action === "remove") {
-                group.childNodes.splice(e.index, e.items.length);
-            }
-        },
-
-        // TODO: Rename
         _childNodesChange: function(e) {
             for (var i = 0; i < e.items.length; i++) {
                 var node = e.items[i];
@@ -235,11 +187,32 @@
         }
     });
 
-    var PathNode = Node.extend({
-        init: function(source) {
-            Node.fn.init.call(this, source);
+    var GroupNode = Node.extend({
+        attachTo: function(domElement) {
+            var nodes = this.childNodes,
+                i;
 
-            this.source.points.bind("change", proxy(this._setPoints, this));
+            Node.fn.attachTo.call(this, domElement);
+
+            for (i = 0; i < nodes.length; i++) {
+                nodes[i].element = this.element.childNodes[i];
+            }
+        },
+
+        _template: renderTemplate(
+            "# if (d.childNodes.length > 0) { #" +
+                "<g>#= d._renderChildren() #</g>" +
+            "# } #"
+        )
+    });
+
+    var PathNode = Node.extend({
+        init: function(srcElement) {
+            var node = this;
+
+            Node.fn.init.call(node, srcElement);
+
+            node.srcElement.points.bind(CHANGE, proxy(node._syncPoints, node));
         },
 
         attributeMap: {
@@ -248,12 +221,12 @@
         },
 
         renderId: function() {
-            var element = this,
-                options = element.source.options,
+            var node = this,
+                options = node.srcElement.options,
                 result = "";
 
             if (options.id) {
-                result = element.renderAttr("id", options.id);
+                result = node.renderAttr("id", options.id);
             }
 
             return result;
@@ -265,7 +238,7 @@
 
         renderPoints: function() {
             var path = this,
-                points = path.source.points,
+                points = path.srcElement.points,
                 i,
                 result = [];
 
@@ -282,8 +255,8 @@
             //"#= d.renderCursor() #' " +
             //"#= d.renderDataAttributes() # " +
             "d='#= d.renderPoints() #' " +
-            "#= d.renderAttr(\"stroke\", d.source.options.stroke.color) # " +
-            "#= d.renderAttr(\"stroke-width\", d.source.options.stroke.width) #" +
+            "#= d.renderAttr(\"stroke\", d.srcElement.options.stroke.color) # " +
+            "#= d.renderAttr(\"stroke-width\", d.srcElement.options.stroke.width) #" +
             //"#= d.renderDashType() # " +
             //"stroke-linecap='#= d.renderLinecap() #' " +
             //"stroke-linejoin='round' " +
@@ -293,7 +266,7 @@
             "></path>"
         ),
 
-        _setPoints: function(e) {
+        _syncPoints: function(e) {
             if (this.element) {
                 $(this.element).attr({
                     d: this.renderPoints()
@@ -301,9 +274,9 @@
             }
         },
 
-        _setOptions: function(e) {
+        _syncOptions: function(e) {
             var element = this.element,
-                options = this.source.options,
+                options = this.srcElement.options,
                 name = this.attributeMap[e.field];
 
             if (element && name) {
@@ -314,7 +287,7 @@
         }
     });
 
-
+    // Helpers ================================================================
     var renderSVG = function(container, svg) {
         container.innerHTML = svg;
     };
@@ -340,7 +313,6 @@
 
     // Exports ================================================================
     deepExtend(dataviz, {
-        BaseStage: BaseStage,
         svg: {
             Stage: Stage,
             Node: Node,
