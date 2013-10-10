@@ -25,7 +25,7 @@ kendo_module({
         init: function(element, options) {
             var that = this,
                 os = support.mobileOS,
-                ShimClass = os.tablet ? Popup : Shim;
+                ShimClass = os && os.tablet ? Popup : Shim;
 
             Widget.fn.init.call(that, element, options);
 

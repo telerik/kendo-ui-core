@@ -18,7 +18,8 @@ kendo_module({
         init: function(element, options) {
             var that = this,
                 app = kendo.mobile.application,
-                osname = app ? app.os.name : kendo.support.mobileOS.name,
+                os = kendo.support.mobileOS,
+                osname = app ? app.os.name : (os ? os.name : "ios"),
                 ioswp = osname === "ios" || osname === "wp" || app.os.skin,
                 bb = osname === "blackberry",
                 align = options.align || (ioswp ?  "bottom center" : bb ? "center right" : "center center"),
