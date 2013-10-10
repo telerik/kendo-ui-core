@@ -14,7 +14,7 @@ kendo_module({
         roleSelector = kendo.roleSelector,
         AXIS = "x",
         ui = mobile.ui,
-        SWIPE_TO_OPEN = !(os.ios && os.majorVersion == 7),
+        SWIPE_TO_OPEN = !(os.ios && os.majorVersion == 7 && !os.appMode),
         BEFORE_SHOW = "beforeShow",
         INIT = "init",
         SHOW = "show",
@@ -55,7 +55,7 @@ kendo_module({
                 allowSelection: true
             });
 
-            if (SWIPE_TO_OPEN) {
+            if (this.options.swipeToOpen && SWIPE_TO_OPEN) {
                 userEvents.bind("start", function(e) { drawer._start(e); });
                 userEvents.bind("move", function(e) { drawer._update(e); });
                 userEvents.bind("end", function(e) { drawer._end(e); });
@@ -75,6 +75,7 @@ kendo_module({
             name: "Drawer",
             position: "left",
             views: [],
+            swipeToOpen: true,
             title: ""
         },
 
