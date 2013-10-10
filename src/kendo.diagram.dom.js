@@ -754,8 +754,10 @@ kendo_module({
                 }
             } else {
                 var pts = [];
-                for (var k = 0; k < this.definers.length; k++) {
-                    pts.push(this.definers[k].point);
+                if (Utils.isDefined(this.definers)) {
+                    for (var k = 0; k < this.definers.length; k++) {
+                        pts.push(this.definers[k].point);
+                    }
                 }
                 return pts;
             }
@@ -857,16 +859,21 @@ kendo_module({
             if (this._router) {
                 this._router.route(); // sets the intermediate points
             }
-            function pr(point){return point.x + " " + point.y;}
-            // for now let's take the heuristic approach, more complete API later
-            var from  = this.sourcePoint();
-            var end = this.targetPoint();
-            return "M"
-                    + pr(from)
-                    +" L"
-                    + pr(end)
-                ;
+            function pr(point) {
+                return point.x + " " + point.y;
+            }
 
+            // for now let's take the heuristic approach, more complete API later
+            var from = this.sourcePoint();
+            var end = this.targetPoint();
+            var data = "M" + pr(from);
+
+            var points = this.points();
+            for (var i = 0; i < points.length; i++) {
+                var point = points[i];
+                data += " L" + pr(point);
+            }
+            return data + " L" +  pr(end)
         },
         _refreshPath: function () {
             if (Utils.isUndefined(this.path)) return;
@@ -887,7 +894,7 @@ kendo_module({
                 middle = Point.fn.middleOf(localSourcePoint, localSinkPoint);
                 this.contentVisual.position(middle);
             }
-           // this.visual.position(boundsTopLeft);    //global coordinates!
+            // this.visual.position(boundsTopLeft);    //global coordinates!
             this._refreshPath();
             if (this.adorner) {
                 this.adorner.refresh();
