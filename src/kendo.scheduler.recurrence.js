@@ -1543,21 +1543,6 @@ kendo_module({
 
         options: {
             name: "RecurrenceEditor",
-            spinners: true,
-            frequencies: ["never", "daily", "weekly", "monthly", "yearly"],
-            firstWeekDay: null,
-            timezone: "",
-            start: "",
-            value: "",
-            messages: {
-                frequencies: {
-                    never: "Test",
-                    daily: "Test",
-                    weekly: "Test",
-                    monthly: "Test",
-                    yearly: "Test"
-                }
-            }
         },
 
         events: [ "change" ],
@@ -1996,7 +1981,13 @@ kendo_module({
             that._value = parseRule(value, timezone) || {};
         },
 
-        //TODO: add destroy!
+        destroy: function() {
+            this._destroyView();
+
+            kendo.destroy(this._endFields);
+
+            this._repeatButton.off(CLICK + this._namespace);
+        },
 
         _initRepeatButton: function() {
             var that = this;
@@ -2016,7 +2007,7 @@ kendo_module({
 
             var endLabelField = $('<div class="k-edit-label"><label>Ends</label></div>').insertAfter(that.element.parent(".k-edit-field"));
 
-            var endEditField = $('<div class="k-edit-field"><a href="#" class="k-button k-scheduler-recur-end">Never</a></div>')
+            var endEditField = $('<div class="k-edit-field"><a href="#" class="k-button k-scheduler-recur-end"></a></div>')
                 .on(CLICK + that._namespace, function(e) {
                     e.preventDefault();
 
@@ -2139,6 +2130,8 @@ kendo_module({
                            '<a href="#" class="k-button k-scheduler-update">' + messages.update + '</a>' +
                        '</div>';
 
+            var returnViewId = that._pane.view().id;
+
             that._view = that._pane.append(html + RECURRENCE_HEADER_TEMPLATE({ headerTitle: headerTitle }));
 
             that._view.element.on(CLICK + that._namespace, "a.k-scheduler-cancel, a.k-scheduler-update", function(e) {
@@ -2155,10 +2148,9 @@ kendo_module({
                 that._endFields.toggleClass("k-state-disabled", !frequency);
                 that._repeatButton.text(messages.frequencies[frequency || "never"]);
 
-                that._view.destroy();
-                that._view.element.remove();
+                that._destroyView();
 
-                that._pane.navigate("#edit");
+                that._pane.navigate(returnViewId);
             });
 
             that._container = that._view.element.find(".k-recur-view");
@@ -2170,6 +2162,15 @@ kendo_module({
                 that._initEndNavigation();
                 that._initEndView();
             }
+        },
+
+        _destroyView: function() {
+            if (this._view) {
+                this._view.destroy();
+                this._view.element.remove();
+            }
+
+            this._view = null;
         },
 
         _initRepeatView: function() {
