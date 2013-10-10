@@ -48,7 +48,8 @@ kendo_module({
         BOUNDSCHANGE = "boundsChange",
         CHANGE = "change",
         ERROR = "error",
-        Auto = "Auto",
+        AUTO = "Auto",
+        TOP = "Top", RIGHT = "Right", LEFT = "Left", BOTTOM = "Bottom",
         bindings = {
             text: "dataTextField",
             url: "dataUrlField",
@@ -65,23 +66,23 @@ kendo_module({
 
     diagram.DefaultConnectors = [
         {
-            name: "Top",
+            name: TOP,
             description: "Top Connector"
         },
         {
-            name: "Right",
+            name: RIGHT,
             description: "Right Connector"
         },
         {
-            name: "Bottom",
+            name: BOTTOM,
             description: "Bottom Connector"
         },
         {
-            name: "Left",
+            name: LEFT,
             Description: "Left Connector"
         },
         {
-            name: Auto,
+            name: AUTO,
             Description: "Auto Connector",
             position: function (shape) {
                 return shape.getPosition("center");
@@ -132,7 +133,7 @@ kendo_module({
     Connector.parse = function (diagram, str) {
         var tempStr = str.split(":"),
             id = tempStr[0],
-            name = tempStr[1] || Auto;
+            name = tempStr[1] || AUTO;
 
         for (var i = 0; i < diagram.shapes.length; i++) {
             var shape = diagram.shapes[i];
@@ -511,57 +512,79 @@ kendo_module({
         }
     });
 
+    var PolylineRouter = ConnectionRouterBase.extend({
+        init: function (connection) {
+            var that = this;
+            ConnectionRouterBase.fn.init.call(that);
+            this.connection = connection;
+        },
+        route: function () {
+            // just keep the points as is
+        }
+    });
+
     var CascadingRouter = ConnectionRouterBase.extend({
         init: function (connection) {
             var that = this;
             ConnectionRouterBase.fn.init.call(that);
             this.connection = connection;
-            this.route();
         },
         route: function () {
             var link = this.connection;
             var start = this.connection.sourcePoint();
             var end = this.connection.targetPoint();
 
-            this.connection.cascadeStartHorizontal = Math.abs(start.x - end.x) > Math.abs(start.y - end.y);
+            function startHorizontal(con) {
+                if (Utils.isDefined(con._resolvedTargetConnector)) {
+                    var sourceConnectorName = con._resolvedTargetConnector.options.name;
+                    if (sourceConnectorName === RIGHT || sourceConnectorName === LEFT) {
+                        return true;
+                    }
+                    if (sourceConnectorName === TOP || sourceConnectorName === BOTTOM) {
+                        return false;
+                    }
+                }
+                return Math.abs(start.x - end.x) > Math.abs(start.y - end.y);
+            }
+
+            this.connection.cascadeStartHorizontal = startHorizontal(this.connection);
 
             var points = [start, start, end, end];
-            var count = points.length;
-            var dx = end.x - start.x;
-            var dy = end.y - start.y;
+            var l = points.length;
+            var deltaX = end.x - start.x; // can be negative
+            var deltaY = end.y - start.y;
 
-            var ax, ay;
-            for (var i = 1; i < count - 1; ++i) {
+            var shiftX, shiftY;
+            for (var k = 1; k < l - 1; ++k) {
                 if (link.cascadeStartHorizontal) {
-                    if (i % 2 != 0) {
-                        ax = dx / (count / 2);
-                        ay = 0;
+                    if (k % 2 != 0) {
+                        shiftX = deltaX / (l / 2);
+                        shiftY = 0;
                     }
                     else {
-                        ax = 0;
-                        ay = dy / ((count - 1) / 2);
+                        shiftX = 0;
+                        shiftY = deltaY / ((l - 1) / 2);
                     }
                 }
                 else {
-                    if (i % 2 != 0) {
-                        ax = 0;
-                        ay = dy / (count / 2);
+                    if (k % 2 != 0) {
+                        shiftX = 0;
+                        shiftY = deltaY / (l / 2);
                     }
                     else {
-                        ax = dx / ((count - 1) / 2);
-                        ay = 0;
+                        shiftX = deltaX / ((l - 1) / 2);
+                        shiftY = 0;
                     }
                 }
-                points[i] = new Point(points[i - 1].x + ax, points[i - 1].y + ay);
+                points[k] = new Point(points[k - 1].x + shiftX, points[k - 1].y + shiftY);
             }
-
-            i--;
-
-            if ((link.cascadeStartHorizontal && (i % 2 != 0)) ||
-                (!link.cascadeStartHorizontal && !(i % 2 != 0)))
-                points[count - 2] = new Point(points[count - 1].x, points[count - 2].y);
+            // need to fix the wrong 1.5 factor of the last intermediate point
+            k--;
+            if ((link.cascadeStartHorizontal && (k % 2 != 0)) ||
+                (!link.cascadeStartHorizontal && !(k % 2 != 0)))
+                points[l - 2] = new Point(points[l - 1].x, points[l - 2].y);
             else
-                points[count - 2] = new Point(points[count - 2].x, points[count - 1].y);
+                points[l - 2] = new Point(points[l - 2].x, points[l - 1].y);
 
             this.connection.points(points);
         }
@@ -575,6 +598,7 @@ kendo_module({
             var that = this;
             DiagramElement.fn.init.call(that, options, model);
             that.path = new Path(that.options);
+            that.path.background("none");
             that.visual.append(that.path);
             that._sourcePoint = that._targetPoint = new Point();
             that.sourcePoint(from);
@@ -582,6 +606,7 @@ kendo_module({
             that.refresh();
             that.content(that.options.content);
             that.definers = [];
+            that._router = new PolylineRouter(this);
         },
         options: {
             stroke: "gray",
@@ -623,7 +648,7 @@ kendo_module({
                     this.refresh();
                 }
                 else if (source instanceof Shape) {
-                    this.sourceConnector = source.getConnector(Auto, this.targetPoint());
+                    this.sourceConnector = source.getConnector(AUTO, this.targetPoint());
                     this.sourceConnector.connections.push(this);
                     this.refresh();
                 }
@@ -662,7 +687,7 @@ kendo_module({
                     this.refresh();
                 }
                 else if (target instanceof Shape) {
-                    this.targetConnector = target.getConnector(Auto, this.sourcePoint());
+                    this.targetConnector = target.getConnector(AUTO, this.sourcePoint());
                     this.targetConnector.connections.push(this);
                     this.refresh();
                 }
@@ -732,7 +757,7 @@ kendo_module({
                             this._router = new CascadingRouter(this);
                             break;
                         case POLYLINE.toLowerCase():
-                            this._router = null;
+                            this._router = new PolylineRouter(this);
                             break;
                         default:
                             throw "Unsupported connection type.";
@@ -754,20 +779,17 @@ kendo_module({
          */
         points: function (value) {
             if (value) {
-                if (value === null) {
-                    this.definers = [];
-                }
-                else {
-                    for (var i = 0; i < value.length; i++) {
-                        var definition = value[i];
-                        if (definition instanceof diagram.Point) {
-                            this.definers.push(new diagram.PathDefiner(definition));
-                        }
-                        else {
-                            throw "A Connection point needs to be a Point.";
-                        }
+                this.definers = [];
+                for (var i = 0; i < value.length; i++) {
+                    var definition = value[i];
+                    if (definition instanceof diagram.Point) {
+                        this.definers.push(new diagram.PathDefiner(definition));
+                    }
+                    else {
+                        throw "A Connection point needs to be a Point.";
                     }
                 }
+
             } else {
                 var pts = [];
                 if (Utils.isDefined(this.definers)) {
@@ -950,7 +972,7 @@ kendo_module({
             sourcePoint = source;
         }
         else if (source instanceof Connector) {
-            if (source.options.name === Auto) {
+            if (source.options.name === AUTO) {
                 autoSourceShape = source.shape;
             }
             else {
@@ -963,7 +985,7 @@ kendo_module({
             targetPoint = target;
         }
         else if (target instanceof Connector) {
-            if (target.options.name === Auto) {
+            if (target.options.name === AUTO) {
                 autoTargetShape = target.shape;
             }
             else {
@@ -982,7 +1004,7 @@ kendo_module({
             } else if (autoTargetShape) {
                 for (var i = 0; i < autoSourceShape.connectors.length; i++) {
                     sourceConnector = autoSourceShape.connectors[i];
-                    if (sourceConnector.options.name !== Auto) {
+                    if (sourceConnector.options.name !== AUTO) {
                         var currentSourcePoint = sourceConnector.position(),
                             currentTargetConnector = closestConnector(currentSourcePoint, autoTargetShape);
                         var dist = Math.round(currentTargetConnector.position().distanceTo(currentSourcePoint)); // rounding prevents some not needed connectors switching.
@@ -1001,7 +1023,7 @@ kendo_module({
         var minimumDistance = MAXINT, resCtr, ctrs = shape.connectors;
         for (var i = 0; i < ctrs.length; i++) {
             var ctr = ctrs[i];
-            if (ctr.options.name !== Auto) {
+            if (ctr.options.name !== AUTO) {
                 var dist = point.distanceTo(ctr.position());
                 if (dist < minimumDistance) {
                     minimumDistance = dist;
@@ -1726,7 +1748,8 @@ kendo_module({
                         shape = addShape(node),
                         parentShape = addShape(parent);
                     if (parentShape && !that.connected(parentShape, shape)) { // check if connected to not duplicate connections.
-                        that.connect(parentShape, shape);
+                       var con =  that.connect(parentShape.connectors[2], shape.connectors[0]);
+                        con.type(CASCADING);
                     }
                 }
             }
