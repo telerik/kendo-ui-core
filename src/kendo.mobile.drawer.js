@@ -69,6 +69,7 @@ kendo_module({
             this.visible = false;
 
             this.element.addClass("km-drawer").addClass(this.leftPositioned ? "km-left-drawer" : "km-right-drawer");
+            this.trigger(INIT);
         },
 
         options: {
