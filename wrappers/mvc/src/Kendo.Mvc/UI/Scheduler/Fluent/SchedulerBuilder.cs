@@ -132,6 +132,98 @@
         }
 
         /// <summary>
+        /// The start time of the business day. The scheduler will display events starting after the workDayStart when the "Show Business Hours" button is pressed.
+        /// </summary>
+        /// <param name="workDayStart">The workDayStart.</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .WorkDayStart(new DateTime(2013, 6, 13, 10, 00, 00))
+        ///     .BindTo(Model)
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> WorkDayStart(DateTime workDayStart)
+        {
+            Component.WorkDayStart = workDayStart;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The start time of the business day. The scheduler will display events starting after the workDayStart when the "Show Business Hours" button is pressed.
+        /// </summary>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
+        /// <param name="seconds">The seconds</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .WorkDayStart(10, 0, 0)
+        ///     .BindTo(Model)
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> WorkDayStart(int hours, int minutes, int seconds)
+        {
+            var today = DateTime.Today;
+
+            Component.WorkDayStart = new DateTime(today.Year, today.Month, today.Day, hours, minutes, seconds);
+
+            return this;
+        }
+
+        /// <summary>
+        /// The end time of the business day. The scheduler will display events ending before the workDayEnd when the "Show Business Hours" button is pressed.
+        /// </summary>
+        /// <param name="workDayEnd">The workDayEnd.</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .WorkDayEnd(new DateTime(2013, 6, 13, 10, 00, 00))
+        ///     .BindTo(Model)
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> WorkDayEnd(DateTime workDayEnd)
+        {
+            Component.WorkDayEnd = workDayEnd;
+
+            return this;
+        }
+
+        /// <summary>
+        /// The end time of the business day. The scheduler will display events ending before the workDayEnd when the "Show Business Hours" button is pressed.
+        /// </summary>
+        /// <param name="hours">The hours</param>
+        /// <param name="minutes">The minutes</param>
+        /// <param name="seconds">The seconds</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Screening&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .WorkDayEnd(16,0,0)
+        ///     .BindTo(Model)
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> WorkDayEnd(int hours, int minutes, int seconds)
+        {
+            var today = DateTime.Today;
+
+            Component.WorkDayEnd = new DateTime(today.Year, today.Month, today.Day, hours, minutes, seconds);
+
+            return this;
+        }
+
+        /// <summary>
         /// The height of the widget.
         /// </summary>
         /// <param name="height">The height.</param>

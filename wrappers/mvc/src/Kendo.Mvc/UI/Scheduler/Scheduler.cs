@@ -74,6 +74,18 @@
             set;
         }
 
+        public DateTime? WorkDayStart
+        {
+            get;
+            set;
+        }
+
+        public DateTime? WorkDayEnd
+        {
+            get;
+            set;
+        }
+
         public int? Height
         {
             get;
@@ -247,6 +259,16 @@
             if (EndTime != null)
             {
                 options["endTime"] = EndTime;
+            }
+
+            if (WorkDayStart != null)
+            {
+                options["workDayStart"] = WorkDayStart;
+            }
+
+            if (WorkDayEnd != null)
+            {
+                options["workDayEnd"] = WorkDayEnd;
             }
 
             if (Height != null)

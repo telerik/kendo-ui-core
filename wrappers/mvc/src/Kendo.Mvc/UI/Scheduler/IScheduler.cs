@@ -42,6 +42,16 @@
             get;
         }
 
+        DateTime? WorkDayStart
+        {
+            get;
+        }
+
+        DateTime? WorkDayEnd
+        {
+            get;
+        }
+
         int? Height
         {
             get;
