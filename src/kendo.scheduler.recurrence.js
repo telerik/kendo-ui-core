@@ -933,8 +933,8 @@ kendo_module({
             freq.limit(start, end, rule);
         }
 
-        if (rule.setPositions) {
-            events = eventsByPosition(events, rule.setPositions);
+        if (rule.positions) {
+            events = eventsByPosition(events, rule.positions);
         }
 
         return events;
@@ -1069,7 +1069,7 @@ kendo_module({
                     break;
                 case "BYSETPOS":
                     //TODO: rename to positions
-                    instance.setPositions = parseArray(value, { start: 1, end: 366 });
+                    instance.positions = parseArray(value, { start: 1, end: 366 });
                     break;
                 case "BYWEEKNO":
                     instance.weeks = parseArray(value, { start: -53, end: 53 });
@@ -1165,8 +1165,8 @@ kendo_module({
             ruleString += ";BYSECOND=" + rule.seconds;
         }
 
-        if (rule.setPositions) {
-            ruleString += ";BYSETPOS=" + rule.setPositions;
+        if (rule.positions) {
+            ruleString += ";BYSETPOS=" + rule.positions;
         }
 
         if (weekStart !== undefined) {
