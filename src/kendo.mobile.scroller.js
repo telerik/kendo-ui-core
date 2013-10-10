@@ -27,6 +27,7 @@ kendo_module({
         VELOCITY_MULTIPLIER = 10,
         MAX_VELOCITY = 55,
         OUT_OF_BOUNDS_FRICTION = 0.5,
+        ANIMATED_SCROLLER_PRECISION = 5,
         RELEASECLASS = "km-scroller-release",
         REFRESHCLASS = "km-scroller-refresh",
         PULL = "pull",
@@ -171,7 +172,7 @@ kendo_module({
         },
 
         done: function() {
-            return Math.abs(this.offset.y) < 5;
+            return abs(this.offset.y) < ANIMATED_SCROLLER_PRECISION && abs(this.offset.x) < ANIMATED_SCROLLER_PRECISION;
         },
 
         onEnd: function() {
