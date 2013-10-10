@@ -1,0 +1,76 @@
+<div id="example" class="k-content">
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Grid</span>
+            <div data-role="grid"
+                 date-scrollable="true"
+                 data-editable="true"
+                 data-toolbar="['create', 'save']"
+                 data-columns="[
+                                 { 'field': 'ProductName', 'width': 270 },
+                                 { 'field': 'UnitPrice' },
+                              ]"
+                 data-bind="source: products,
+                            visible: isVisible,
+                            events: {
+                              save: onSave
+                            }"
+                 style="width: 380px; height: 200px"></div>
+        </div>
+        <div class="config-section" style="width: 200px">
+            <div class="configHead">Console</div>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Configuration</span>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="config-section" style="width: 440px">
+            <span class="configHead">Information</span>
+            Kendo UI Grid supports the
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/source">source</a> and
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    var viewModel = kendo.observable({
+        isVisible: true,
+        onSave: function(e) {
+            kendoConsole.log("event :: save(" + kendo.stringify(e.values, null, 4) + ")");
+        },
+        products: new kendo.data.DataSource({
+            schema: {
+                model: {
+                    id: "ProductID"
+                }
+            },
+            batch: true,
+            transport: {
+                read: {
+                    url: "http://demos.kendoui.com/service/products",
+                    dataType: "jsonp"
+                },
+                update: {
+                    url: "http://demos.kendoui.com/service/products/update",
+                    dataType: "jsonp"
+                },
+                create: {
+                    url: "http://demos.kendoui.com/service/products/create",
+                    dataType: "jsonp"
+                },
+                parameterMap: function(options, operation) {
+                    if (operation !== "read" && options.models) {
+                        return {models: kendo.stringify(options.models)};
+                    }
+                }
+            }
+        })
+    });
+    kendo.bind($("#example"), viewModel);
+</script>
+</div>

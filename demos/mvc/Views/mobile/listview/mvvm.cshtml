@@ -1,0 +1,61 @@
+<div data-model="mobileListViewModel" data-role="view" id="mobile-listview-events" data-title="Button MVVM">
+    <form data-bind="events: { submit: add }">
+        <ul data-role="listview" data-style="inset" data-type="group">
+            <li>
+                Add new item
+                <ul>
+                    <li><label>Add item: <input type="text" placeholder="item name&hellip;" data-bind="value: newItemValue" /></label></li>
+                </ul>
+                <button type="submit" class="km-button" style="width: 100%; margin: 1em 0; font-weight: bold; font-size: 1.1em;"><span class="km-text">Add</span></button>
+            </li>
+
+            <li>
+                Items:
+                <ul data-role="listview" data-bind="source: source, events { click: onClick }"></ul>
+            </li>
+            <li>
+                Events:
+                <ul data-role="listview">
+                    <li><div class="console"></div></li>
+                </ul>
+            </li>
+        </ul>
+
+        <p>
+            Kendo UI Mobile ListView supports the
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/source">source</a>,
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a> and
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </p>
+    </form>
+</div>
+
+<script>
+    var mobileListViewModel = kendo.observable({
+        source: [ "foo", "bar" ],
+        newItemValue: "",
+        add: function(e) {
+            var val = this.get("newItemValue");
+            if (val) {
+                this.source.push(val);
+            }
+
+            $("#listview-new-item").blur();
+            e.preventDefault();
+        },
+
+        onClick: function(e) {
+            kendoConsole.log("event :: click", e);
+        }
+    });
+</script>
+
+<style scoped>
+    .km-root .console {
+        background-color: transparent;
+        border: 0;
+        margin: 1.4em 1em;
+        overflow: hidden;
+        height: auto;
+    }
+</style>

@@ -1,0 +1,58 @@
+<div data-model="viewModel" data-role="view" id="button-events" data-title="Button MVVM">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            ButtonGroup
+            <ul>
+                <li>
+                    <ul data-role="buttongroup"
+                        data-index="3"
+                        data-bind="visible: isVisible,
+                                   events: { select: onSelect }">
+                      <li data-icon="rewind"></li>
+                      <li data-icon="play"></li>
+                      <li data-icon="pause"></li>
+                      <li data-icon="stop"></li>
+                      <li data-icon="fastforward"></li>
+                  </ul>
+                </li>
+                <li>
+                    <div class="console"></div>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Configuration
+            <ul>
+                <li>Visible <input type="checkbox" data-role="switch" data-bind="checked: isVisible"></li>
+            </ul>
+        </li>
+    </ul>
+
+    <p>
+        Kendo UI Mobile ButtonGroup supports the
+        <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a> and
+        <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+    </p>
+</div>
+
+<script>
+    var viewModel = kendo.observable({
+        isEnabled: true,
+        isVisible: true,
+        onSelect: function(e) {
+            var buttonGroup = e.sender;
+            var index = buttonGroup.current().index();
+            kendoConsole.log("event :: select (" + index + ")");
+        }
+    });
+</script>
+
+<style scoped>
+    .km-root .console {
+        background-color: transparent;
+        border: 0;
+        margin: 1.4em 1em;
+        overflow: hidden;
+        height: auto;
+    }
+</style>

@@ -1,13 +1,36 @@
 <div id="example" class="k-content">
-    <div class="demo-section files">
-        <h3><span data-bind="text: name"></span>'s files</h3>
-        <div data-role="treeview"
-            data-drag-and-drop="true"
-            data-text-field="name"
-            data-spritecssclass-field="type"
-            data-bind="source: files"></div>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">TreeView</span>
+            <div class="files"
+                 data-role="treeview"
+                 data-drag-and-drop="true"
+                 data-text-field="name"
+                 data-spritecssclass-field="type"
+                 data-bind="visible: isVisible,
+                            source: files,
+                            events: { select: onSelect }"></div>
+        </div>
+        <div class="config-section" style="width: 400px">
+            <div class="configHead">Console</div>
+            <div class="console"></div>
+        </div>
     </div>
-
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Configuration</span>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="config-section" style="width: 440px">
+            <span class="configHead">Information</span>
+            Kendo UI TreeView supports the
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/source">source</a> and
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
     <div class="demo-section current-state">
         <h4>Current view model state:</h4>
         <pre>
@@ -17,91 +40,92 @@
 }
         </pre>
     </div>
+<script>
+    var viewModel = kendo.observable({
+        isVisible: true,
+        onSelect: function(e) {
+            var treeView = e.sender;
+            var text = treeView.text(e.node);
+            kendoConsole.log("event :: select (" + text + ")");
+        },
+        files: kendo.observableHierarchy([
+            { name: "My Web Site", type: "folder", expanded: true, items: [
+                { name: "images", type: "folder", expanded: true, items: [
+                    { name: "logo.png", type: "image" },
+                    { name: "body-back.png", type: "image" },
+                    { name: "my-photo.jpg", type: "image" }
+                ] },
+                { name: "resources", type: "folder", expanded: true, items: [
+                    { name: "resources", type: "folder" },
+                    { name: "zip", type: "folder" }
+                ] },
+                { name: "about.html", type: "html" },
+                { name: "contacts.html", type: "html" },
+                { name: "index.html", type: "html" },
+                { name: "portfolio.html", type: "html" }
+            ] }
+        ]),
+        printFiles: function() {
+            // helper function that prints the relevant data from the hierarchical model
+            var items = this.get("files").toJSON();
 
-    <script>
-        $(document).ready(function() {
-            var viewModel = kendo.observable({
-                name: "John Doe",
-                files: kendo.observableHierarchy([
-                    { name: "My Web Site", type: "folder", expanded: true, items: [
-                        { name: "images", type: "folder", expanded: true, items: [
-                            { name: "logo.png", type: "image" },
-                            { name: "body-back.png", type: "image" },
-                            { name: "my-photo.jpg", type: "image" }
-                        ] },
-                        { name: "resources", type: "folder", expanded: true, items: [
-                            { name: "resources", type: "folder" },
-                            { name: "zip", type: "folder" }
-                        ] },
-                        { name: "about.html", type: "html" },
-                        { name: "contacts.html", type: "html" },
-                        { name: "index.html", type: "html" },
-                        { name: "portfolio.html", type: "html" }
-                    ] }
-                ]),
-                printFiles: function() {
-                    // helper function that prints the relevant data from the hierarchical model
-                    var items = this.get("files").toJSON();
+            function removeFields(item) {
+                delete item.index;
 
-                    function removeFields(item) {
-                        delete item.index;
-
-                        if (item.items.length == 0) {
-                            delete item.items;
-                        } else {
-                            item.items = $.map(item.items, removeFields);
-                        }
-
-                        return item;
-                    }
-
-                    $.map(items, removeFields);
-
-                    var jsonString = JSON.stringify(items, null, 2);
-
-                    return jsonString.replace(/\n/gi, "\n    ")
-                                .replace(/\n\s*("name)/gi, " $1")
-                                .replace(/\n\s*("type)/gi, " $1")
-                                .replace(/\n\s*("expanded)/gi, " $1")
-                                .replace(/\n\s*("selected)/gi, " $1")
-                                .replace(/\n\s*("items)/gi, " $1")
-                                .replace(/\s*\n\s*(})/gi, " $1")
-                                .replace(/(\s*)]\n\s*}/gi, "] }");
+                if (item.items.length == 0) {
+                    delete item.items;
+                } else {
+                    item.items = $.map(item.items, removeFields);
                 }
-            });
 
-            kendo.bind($("#example"), viewModel);
-        });
-    </script>
+                return item;
+            }
 
-    <style scoped>
-        .current-state {
-            margin: 20px 0 0;
+            $.map(items, removeFields);
+
+            var jsonString = JSON.stringify(items, null, 2);
+
+            return jsonString.replace(/\n/gi, "\n    ")
+                        .replace(/\n\s*("name)/gi, " $1")
+                        .replace(/\n\s*("type)/gi, " $1")
+                        .replace(/\n\s*("expanded)/gi, " $1")
+                        .replace(/\n\s*("selected)/gi, " $1")
+                        .replace(/\n\s*("items)/gi, " $1")
+                        .replace(/\s*\n\s*(})/gi, " $1")
+                        .replace(/(\s*)]\n\s*}/gi, "] }");
         }
+    });
+    kendo.bind($("#example"), viewModel);
+</script>
 
-        .current-state pre {
-            font-size: 12px;
-        }
+<style scoped>
+    .current-state {
+        margin: 20px 0 0;
+    }
 
-        .files h3 {
-            color: #787878;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: .4em;
-            margin-bottom: .4em;
-        }
+    .current-state pre {
+        font-size: 12px;
+    }
 
-        .files .k-treeview {
-            height: 300px;
-        }
+    .files h3 {
+        color: #787878;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: .4em;
+        margin-bottom: .4em;
+    }
 
-        .files .k-sprite {
-            background-image: url("../../content/web/treeview/coloricons-sprite.png");
-        }
+    .files .k-treeview {
+        height: 300px;
+    }
 
-        .rootfolder { background-position: 0 0; }
-        .folder { background-position: 0 -16px; }
-        .pdf { background-position: 0 -32px; }
-        .html { background-position: 0 -48px; }
-        .image { background-position: 0 -64px; }
-    </style>
+    .files .k-sprite {
+        background-image: url("../../content/web/treeview/coloricons-sprite.png");
+    }
+
+    .rootfolder { background-position: 0 0; }
+    .folder { background-position: 0 -16px; }
+    .pdf { background-position: 0 -32px; }
+    .html { background-position: 0 -48px; }
+    .image { background-position: 0 -64px; }
+</style>
 </div>

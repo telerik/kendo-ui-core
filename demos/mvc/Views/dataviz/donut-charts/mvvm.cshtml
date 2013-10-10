@@ -1,0 +1,69 @@
+<div id="example" class="k-content">
+    <div class="configuration-horizontal">
+        <div class="config-section" style="width: 440px">
+            <span class="configHead">Chart</span>
+            <p>Hover some series</p>
+            <div data-role="chart"
+                 data-title="{ text: '1024x768 screen resolution trends' }"
+                 data-legend="{ position: 'top' }"
+                 data-series-defaults="{ type: 'donut', startAngle: 270 }"
+                 data-series="[{
+                                field: 'share',
+                                categoryField: 'resolution',
+                                visibleInLegendField: 'visibleInLegend',
+                                padding: 10
+                              }]"
+                 data-bind="visible: isVisible,
+                            source: screenResolution,
+                            events: { seriesHover: onSeriesHover }"></div>
+        </div>
+        <div class="config-section" style="width: 200px">
+            <div class="configHead">Console</div>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Configuration</span>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="config-section" style="width: 440px">
+            <span class="configHead">Information</span>
+            Kendo UI Chart supports the
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/source">source</a> and
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    function createChart() {
+        var viewModel = kendo.observable({
+            isVisible: true,
+            onSeriesHover: function(e) {
+                 kendoConsole.log(kendo.format("event :: seriesHover ({0} : {1})", e.series.name, e.value));
+            },
+            screenResolution: new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: "../../content/dataviz/js/screen_resolution.json",
+                        dataType: "json"
+                    }
+                },
+                sort: {
+                    field: "order",
+                    dir: "asc"
+                },
+                group: {
+                    field: "year"
+                }
+            })
+        });
+        kendo.bind($("#example"), viewModel);
+    }
+
+    $(document).ready(createChart).bind("kendo:skinChange", createChart);
+
+</script>
+</div>

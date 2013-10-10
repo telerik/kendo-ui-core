@@ -1,0 +1,50 @@
+<div id="example" class="k-content">
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">ColorPicker</span>
+            <p>
+                Choose a color and click <strong>Apply</strong>
+            </p>
+            <input data-role="colorpicker"
+                   data-bind="visible: isVisible,
+                              enabled: isEnabled,
+                              value: selectedColor,
+                              events: { change: onChange }"
+                 style="width: 180px">
+        </div>
+        <div class="config-section" style="width: 400px">
+            <div class="configHead">Console</div>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Configuration</span>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isEnabled">Enable</label>
+            </div>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="config-section" style="width: 440px">
+            <span class="configHead">Information</span>
+            Kendo UI ColorPicker supports the
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/enabled">enabled</a>,
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a>,
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/value">value</a> and
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    var viewModel = kendo.observable({
+        selectedColor: null,
+        isVisible: true,
+        isEnabled: true,
+        onChange: function() {
+            kendoConsole.log("event :: change (" + this.get("selectedColor") + ")");
+        }
+    });
+    kendo.bind($("#example"), viewModel);
+</script>
+</div>

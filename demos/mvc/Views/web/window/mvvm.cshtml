@@ -1,0 +1,51 @@
+<div id="example" class="k-content">
+    <div class="configuration-horizontal">
+        <div class="config-section" style="width: 340px">
+            <span class="configHead">Window</span>
+            <p>Move or resize the window</p>
+            <div data-role="window"
+                 data-title="About Alvar Aalto"
+                 data-width="300"
+                 data-height="150"
+                 data-bind="visible: isVisible,
+                            enabled: isEnabled,
+                            events: { resize: onResize, dragstart: onDragStart, dragend: onDragEnd }">
+                <p>Alvar Aalto is one of the greatest names in modern architecture and design. Glassblowers at the iittala factory still meticulously handcraft the legendary vases that are variations on one theme, fluid organic shapes that let the end user decide the use.
+                Interpretations of the shape in new colors and materials add to the growing Alvar Aalto Collection that remains true to his original design.</p>
+            </div>
+        </div>
+        <div class="config-section" style="width: 300px">
+            <div class="configHead">Console</div>
+            <div class="console"></div>
+        </div>
+    </div>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Configuration</span>
+            <div>
+                <label><input type="checkbox" data-bind="checked: isVisible">Visible</label>
+            </div>
+        </div>
+        <div class="config-section" style="width: 440px">
+            <span class="configHead">Information</span>
+            Kendo UI Window supports the
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/events">events</a> and
+            <a href="http://docs.kendoui.com/getting-started/framework/mvvm/bindings/visible">visible</a> bindings.
+        </div>
+    </div>
+<script>
+    var viewModel = kendo.observable({
+        isVisible: true,
+        onResize: function(e) {
+            kendoConsole.log("event :: resize");
+        },
+        onDragEnd: function(e) {
+            kendoConsole.log("event :: dragend");
+        },
+        onDragStart: function(e) {
+            kendoConsole.log("event :: dragstart");
+        }
+    });
+    kendo.bind($("#example"), viewModel);
+</script>
+</div>

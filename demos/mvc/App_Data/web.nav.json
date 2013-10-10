@@ -66,6 +66,13 @@
                     "url": "autocomplete/navigation.html",
                     "title": "Keyboard navigation in Kendo UI AutoComplete widget",
                     "meta": "Look at this Kendo UI Web demo which illustrates how the keyboard navigation feature is supported in Kendo UI AutoComplete component."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "autocomplete/mvvm.html",
+                    "title": "MVVM support in Kendo UI AutoComplete",
+                    "meta": "Enabled, events, source, value and visible MVVM binding support in Kendo UI AutoComplete",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -117,6 +124,13 @@
                     "url": "button/navigation.html",
                     "title": "Kendo UI Button Keyboard Navigation",
                     "meta": "How jQuery-based Button widget works, view demo source code of Kendo UI Button."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "button/mvvm.html",
+                    "title": "MVVM support in Kendo UI Button",
+                    "meta": "Enabled, events, visible MVVM binding support in Kendo UI AutoComplete",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -166,6 +180,13 @@
                     "url": "calendar/navigation.html",
                     "title": "Keyboard navigation demo for Kendo UI Calendar widget",
                     "meta": "You can easily navigate in Kendo UI Calendar by using the keyboard. This demo shows the functionality, just look at the notes and play with the example."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "calendar/mvvm.html",
+                    "title": "MVVM support in Kendo UI Calendar",
+                    "meta": "Events, value and visible MVVM binding support in Kendo UI Calendar",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -210,6 +231,13 @@
                     "url": "colorpicker/api.html",
                     "title": "API for Kendo UI ColorPicker | Kendo UI Demo",
                     "meta": "This Kendo UI demo shows the API of Kendo UI drop-down color picker widget."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "colorpicker/mvvm.html",
+                    "title": "MVVM support in Kendo UI ColorPicker",
+                    "meta": "Enabled, events, value and visible MVVM binding support in Kendo UI ColorPicker",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -272,6 +300,13 @@
                     "url": "combobox/navigation.html",
                     "title": "Keyboard nagivation in Kendo UI ComboBox | Kendo UI Web demos",
                     "meta": "Kendo UI ComboBox widget for web app development supports easy keyboard navigation. Play with the demo to explore the functionality."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "combobox/mvvm.html",
+                    "title": "MVVM support in Kendo UI ComboBox",
+                    "meta": "Enabled, events, source, value and visible MVVM binding support in Kendo UI ComboBox",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -327,6 +362,13 @@
                     "url": "datepicker/navigation.html",
                     "title": "Keyboard navigation in Kendo UI DatePicker",
                     "meta": "This example shows how the keyboard navigation functionality is supported in Kendo UI DatePicker widget."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "datepicker/mvvm.html",
+                    "title": "MVVM support in Kendo UI DatePicker",
+                    "meta": "Enabled, events, value and visible MVVM binding support in Kendo UI DatePicker",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -382,6 +424,13 @@
                     "url": "datetimepicker/navigation.html",
                     "title": "Keyboard navigation in Kendo UI DateTimePicker widget",
                     "meta": "By using the keyboard, you can easily select date and time in Kendo UI DateTimePicker, trigger an event or highlight a specific day."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "datetimepicker/mvvm.html",
+                    "title": "MVVM support in Kendo UI DateTimePicker",
+                    "meta": "Enabled, events, value and visible MVVM binding support in Kendo UI DateTimePicker",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -438,6 +487,13 @@
                     "url": "dropdownlist/navigation.html",
                     "title": "Kendo UI DropdownList | Keyboard navigation demo",
                     "meta": "Kendo UI DropDownList supports keyboard navigation that lets you effortlessly navigate in the dropdown widget by using the keyboard."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "dropdownlist/mvvm.html",
+                    "title": "MVVM support in Kendo UI DropDownList",
+                    "meta": "Enabled, events, source, value and visible MVVM binding support in Kendo UI DropDownList",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -520,6 +576,13 @@
                     "url": "editor/navigation.html",
                     "title": "Keyboard navigation in Kendo UI Editor",
                     "meta": "Kendo UI Editor is another widget that supports keyboard navigation. Check out the demo to learn how to implement it in your app."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "editor/mvvm.html",
+                    "title": "MVVM support in Kendo UI Editor",
+                    "meta": "Events, value and visible MVVM binding support in Kendo UI Editor",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -762,8 +825,14 @@
                     "url": "grid/navigation.html",
                     "title": "Keyboard navigation in Kendo UI Grid",
                     "meta": "Look at this Kendo UI Grid demo to learn how different keyboard combinations could be used to navigate in the component."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "grid/mvvm.html",
+                    "title": "MVVM support in Kendo UI Grid",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Grid",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
-
             ]
         },
         {
@@ -808,6 +877,13 @@
                     "url": "listview/navigation.html",
                     "title": "Keyboard navigation in Kendo UI ListView widget",
                     "meta": "In this example we will look at the supported keys and user actions in Kendo UI ListView control."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "listview/mvvm.html",
+                    "title": "MVVM support in Kendo UI ListView",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI ListView",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -880,6 +956,13 @@
                     "url": "menu/navigation.html",
                     "title": "Keyboard navigation in Kendo UI Menu",
                     "meta": "This example demonstrates how the keyboard navigation is a supported feature in Kendo UI Menu widget."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "menu/mvvm.html",
+                    "title": "MVVM support in Kendo UI Menu",
+                    "meta": "Events and visible MVVM binding support in Kendo UI Menu",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -936,6 +1019,13 @@
                     "url": "multiselect/navigation.html",
                     "title": "Keyboard navigation in Kendo UI MultiSelect component | Kendo UI Web demo",
                     "meta": "This demo shows how the keyboard navigation for Kendo UI MultiSelect widget works. Learn more how to use the keyboard shortcuts for easier navigation."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "multiselect/mvvm.html",
+                    "title": "MVVM support in Kendo UI MultiSelect",
+                    "meta": "Enabled, events, source, value and visible MVVM binding support in Kendo UI MultiSelect",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -979,6 +1069,13 @@
                     "url": "numerictextbox/navigation.html",
                     "title": "Keyboard navigation in Kendo UI NumericTextBox",
                     "meta": "The value in Kendo UI NumericTextBox can be increased or decreased by using keyboard navigation combinations. Take a look at the demo to learn how."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "numerictextbox/mvvm.html",
+                    "title": "MVVM support in Kendo UI NumericTextBox",
+                    "meta": "Enabled, events, value and visible MVVM binding support in Kendo UI NumericTextBox",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -1035,6 +1132,13 @@
                     "url": "panelbar/navigation.html",
                     "title": "Demo for keyboard navigation feature in Kendo UI Collapsible Panel",
                     "meta": "Users can navigate in Kendo UI PanelBar by using the keyboard and different keyboard combinations. Play with the demo and implement the feature in your app."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "panelbar/mvvm.html",
+                    "title": "MVVM support in Kendo UI PanelBar",
+                    "meta": "Events and visible MVVM binding support in Kendo UI PanelBar",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -1107,6 +1211,12 @@
                     "url": "scheduler/rtl.html",
                     "title": "Right-to-left (RTL) support of Kendo UI Scheduler",
                     "meta": "This demo shows the Right-to-left (RTL) support of Kendo UI Scheduler."
+                }, {
+                    "text": "MVVM",
+                    "url": "scheduler/mvvm.html",
+                    "title": "MVVM support in Kendo UI Scheduler",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Scheduler",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -1143,6 +1253,13 @@
                 {
                     "text": "Keyboard navigation",
                     "url": "slider/navigation.html"
+                },
+                {
+                    "text": "MVVM",
+                    "url": "slider/mvvm.html",
+                    "title": "MVVM support in Kendo UI Slider",
+                    "meta": "Enabled, events, value and visible MVVM binding support in Kendo UI Slider",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -1187,6 +1304,13 @@
                     "url": "splitter/navigation.html",
                     "title": "Keyboard navigation support in Kendo UI Slider",
                     "meta": "Users can easily manipulate the behaviour of Kendo UI Slider by using different keyboard keys and combinations."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "splitter/mvvm.html",
+                    "title": "MVVM support in Kendo UI Splitter",
+                    "meta": "Events and visible MVVM binding support in Kendo UI Splitter",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -1243,6 +1367,13 @@
                     "url": "tabstrip/navigation.html",
                     "title": "Keyboard navigation in Kendo UI TabStrip",
                     "meta": "This Kendo UI demo shows how end users of your app can intuitively use keyboard navigation in Kendo UI TabStrip."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "tabstrip/mvvm.html",
+                    "title": "MVVM support in Kendo UI TabStrip",
+                    "meta": "Events and visible MVVM binding support in Kendo UI TabStrip",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -1292,6 +1423,13 @@
                     "url": "timepicker/navigation.html",
                     "title": "Keyboard navigation in Kendo UI TimePicker",
                     "meta": "Users can intuitively select time in Kendo UI TimePicker by simply using the keyboard support of the widget."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "timepicker/mvvm.html",
+                    "title": "MVVM support in Kendo UI TimePicker",
+                    "meta": "Enabled, events, value and visible MVVM binding support in Kendo UI TimePicker",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -1330,6 +1468,13 @@
                     "url": "tooltip/api.html",
                     "title": "API for Kendo UI Tooltip component | Kendo UI Web demo",
                     "meta": "This example shows how the API functions are enabled in Kendo UI Tooltip widget."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "tooltip/mvvm.html",
+                    "title": "MVVM support in Kendo UI Tooltip",
+                    "meta": "Events MVVM binding support in Kendo UI Tooltip",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -1420,8 +1565,9 @@
                 }, {
                     "text": "MVVM",
                     "url": "treeview/mvvm.html",
-                    "title": "MVVM binding in Kendo UI TreeView widget",
-                    "meta": "Look at this Kendo UI TreeView demo to see how to bind the widget with the Kendo UI MVVM framework."
+                    "title": "MVVM support in Kendo UI TreeView",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI TreeView",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -1475,6 +1621,12 @@
                     "url": "upload/rtl.html",
                     "title": "RTL support in Kendo UI Upload",
                     "meta": "This Kendo UI demo illustrates how you can facilitate your RTL app users by using the RTL feature of Kendo UI Upload widget."
+                }, {
+                    "text": "MVVM",
+                    "url": "upload/mvvm.html",
+                    "title": "MVVM support in Kendo UI Upload",
+                    "meta": "Enabled, events and visible MVVM binding support in Kendo UI Upload",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
@@ -1531,6 +1683,12 @@
                     "url": "window/navigation.html",
                     "title": "Keyboard navigation support | Kendo UI Window Demo",
                     "meta": "The sample demonstrates how the keyboard navigation feature is integrated in the powerful Kendo UI Window."
+                }, {
+                    "text": "MVVM",
+                    "url": "window/mvvm.html",
+                    "title": "MVVM support in Kendo UI Window",
+                    "meta": "Events and visible MVVM binding support in Kendo UI Window",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         }
