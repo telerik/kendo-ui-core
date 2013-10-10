@@ -47,7 +47,6 @@
                 return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
             }
 
-
             function triggerTouchEvent(element, type, info) {
                 info.target = element;
                 return element.trigger($.Event(type, { originalEvent: { changedTouches: [ info ] }}));
@@ -85,31 +84,18 @@
                 setup: function() {
                     container = $("<div>");
                     container.appendTo(document.body);
-
-                    kendo.support.mobileOS = {
-                        "device": "ipad",
-                        "tablet": "tablet",
-                        "browser": "mobilesafari",
-                        "name": "ios",
-                        "ios": true,
-                        "majorVersion": "5",
-                        "minorVersion": "0",
-                        "flatVersion": "500",
-                        "appMode": false
-                    };
                 },
                 teardown: function() {
                     kendo.destroy(document.body);
 
                     container.closest("[data-role=pane]").remove();
-
-                    kendo.support.mobileOS = false;
                 }
             });
 
             function setup(options) {
                 return new Scheduler(container,
                     $.extend({
+                        mobile: "tablet",
                         dataSource: [ { start: new Date(), end: new Date(), isAllDay: true, title: "my event" } ]
                     }, options)
                 );

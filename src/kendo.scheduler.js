@@ -1319,8 +1319,6 @@ kendo_module({
 
             that.resources = [];
 
-            that._isMobilePhoneView = kendo.support.mobileOS && !kendo.support.mobileOS.tablet;
-
             that._initModel();
 
             that._wrapper();
@@ -1356,6 +1354,16 @@ kendo_module({
             that._ariaId = kendo.guid();
 
             that._createEditor();
+        },
+
+        _isMobile: function() {
+            var options = this.options;
+            return (options.mobile === true && kendo.support.mobileOS) || options.mobile === "phone" || options.mobile === "tablet";
+        },
+
+        _isMobilePhoneView: function() {
+            var options = this.options;
+            return (options.mobile === true && kendo.support.mobileOS && !kendo.support.mobileOS.tablet) || options.mobile === "phone";
         },
 
         _selectable: function() {
@@ -1604,6 +1612,7 @@ kendo_module({
             editable: true,
             autoBind: true,
             snap: true,
+            mobile: false,
             timezone: "",
             messages: {
                 today: "Today",
@@ -1728,7 +1737,7 @@ kendo_module({
             var event;
             var that = this;
 
-            var isMobile = kendo.support.mobileOS;
+            var isMobile = that._isMobile();
             var movable = that.options.editable && that.options.editable.move !== false;
             var resizable = that.options.editable && that.options.editable.resize !== false;
 
@@ -2073,7 +2082,7 @@ kendo_module({
                     { name: "destroy", text: messages.destroy, click: function() { callback(); } }
                 ];
 
-                if (!(kendo.support.mobileOS && kendo.mobile.ui.Pane)) {
+                if (!(this._isMobile() && kendo.mobile.ui.Pane)) {
                     buttons.push({ name: "canceledit", text: messages.cancel, click: function() { callback(true); } });
                 }
 
@@ -2269,7 +2278,7 @@ kendo_module({
 
             var editor;
 
-            if (kendo.support.mobileOS && kendo.mobile.ui.Pane) {
+            if (this._isMobile() && kendo.mobile.ui.Pane) {
                 editor = that._editor = new MobileEditor(this.wrapper, extend({}, this.options, {
                     timezone: that.dataSource.reader.timezone,
                     resources: that.resources,
@@ -2732,7 +2741,7 @@ kendo_module({
                                .attr("role", "grid")
                                .attr("aria-multiselectable", true);
 
-            if (this._isMobilePhoneView) {
+            if (this._isMobilePhoneView()) {
                this.wrapper.addClass("k-scheduler-mobile");
             }
 
@@ -2751,7 +2760,7 @@ kendo_module({
         _toolbar: function() {
             var that = this;
             var options = that.options;
-            var template = this._isMobilePhoneView ? MOBILETOOLBARTEMPLATE : TOOLBARTEMPLATE;
+            var template = this._isMobilePhoneView() ? MOBILETOOLBARTEMPLATE : TOOLBARTEMPLATE;
             var toolbar = $(template({
                     messages: options.messages,
                     ns: kendo.ns,
@@ -2779,7 +2788,7 @@ kendo_module({
                 } else if (li.hasClass("k-nav-prev")) {
                     action = "previous";
                     date = that.view().previousDate();
-                } else if (li.hasClass("k-nav-current") && !that._isMobilePhoneView) {
+                } else if (li.hasClass("k-nav-current") && !that._isMobilePhoneView()) {
                     that._showCalendar();
                     return; // TODO: Not good - refactor
                 }

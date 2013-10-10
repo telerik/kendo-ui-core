@@ -44,16 +44,15 @@
 
                     container = document.createElement("div");
                     document.body.appendChild(container);
-                    kendo.support.mobileOS = {};
                 },
                 teardown: function() {
                     $(container).closest(".k-scheduler").kendoScheduler("destroy").remove()
                         .closest("[data-role=pane]").remove();
-                    kendo.support.mobileOS = null;
                 }
             });
 
             function setup(options) {
+                options = $.extend({ mobile: "phone" }, options);
                 return new Scheduler(container, options);
             }
 
@@ -64,17 +63,13 @@
             });
 
             test("mobile css class is not added to the wrapper if device is tablet", function() {
-                kendo.support.mobileOS = {tablet:"tablet"};
-
-                var scheduler = setup();
+                var scheduler = setup({ mobile: "tablet" });
 
                 ok(!scheduler.wrapper.hasClass("k-scheduler-mobile"));
             });
 
             test("is wrapped in a mobile view", function() {
-                kendo.support.mobileOS = {tablet:"tablet"};
-
-                var scheduler = setup();
+                var scheduler = setup({ mobile: "tablet" });
 
                 ok(scheduler.wrapper.closest("[data-role=view]").length);
             });
@@ -103,9 +98,7 @@
             });
 
             test("clicking on the current time opens a calendar when viewed on a tablet", function() {
-                kendo.support.mobileOS = {tablet:"tablet"};
-
-                var scheduler = setup();
+                var scheduler = setup({ mobile: "tablet" });
 
                 scheduler.toolbar.find(".k-nav-current").click();
 

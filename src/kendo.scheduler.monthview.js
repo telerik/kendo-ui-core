@@ -231,8 +231,8 @@ kendo_module({
         },
 
         _editable: function() {
-            if (this.options.editable && !this._isMobilePhoneView) {
-                if (kendo.support.mobileOS) {
+            if (this.options.editable && !this._isMobilePhoneView()) {
+                if (this._isMobile()) {
                     this._touchEditable();
                 } else {
                     this._mouseEditable();
@@ -417,7 +417,7 @@ kendo_module({
 
         _layout: function() {
             var calendarInfo = this.calendarInfo();
-            var weekDayNames = kendo.support.mobileOS ? calendarInfo.days.namesShort : calendarInfo.days.names;
+            var weekDayNames = this._isMobile() ? calendarInfo.days.namesShort : calendarInfo.days.names;
             var names = shiftArray(weekDayNames, calendarInfo.firstDay);
             var columns = $.map(names, function(value) { return { text: value }; });
             var resources = this.groupedResources;
@@ -470,7 +470,7 @@ kendo_module({
             var options = this.options;
             var editable = options.editable;
 
-            var isMobile = kendo.support.mobileOS;
+            var isMobile = this._isMobile();
 
             event.showDelete = editable && editable.destroy !== false && !isMobile;
             event.resizable = editable && editable.resize !== false && !isMobile;
@@ -480,16 +480,6 @@ kendo_module({
 
             return $(this.eventTemplate(event));
         },
-/*
-        _isInDateSlot: function(event) {
-            var slotStart = this.startDate(),
-                slotEnd = new Date(this.endDate().getTime() + MS_PER_DAY - 1);
-
-            return isInDateRange(event.start, slotStart, slotEnd) ||
-                isInDateRange(event.end, slotStart, slotEnd) ||
-                isInDateRange(slotStart, event.start, event.end) ||
-                isInDateRange(slotEnd, event.start, event.end);
-        },*/
 
         _isInDateSlot: function(event) {
             var slotStart = this.startDate();
@@ -790,6 +780,7 @@ kendo_module({
             var event;
             var idx;
             var length;
+            var isMobilePhoneView = this._isMobilePhoneView();
 
             for (idx = 0, length = events.length; idx < length; idx++) {
                 event = events[idx];
@@ -823,7 +814,7 @@ kendo_module({
 
                         var occurrence = event.clone({ start: start, end: end, head: range.head, tail: range.tail });
 
-                        if (this._isMobilePhoneView) {
+                        if (isMobilePhoneView) {
                             this._positionMobileEvent(range, this._createEventElement(occurrence), group);
                         } else {
                             this._positionEvent(range, this._createEventElement(occurrence), group);
@@ -944,7 +935,7 @@ kendo_module({
 
             SchedulerView.fn.destroy.call(this);
 
-            if (kendo.support.mobileOS && !this._isMobilePhoneView) {
+            if (this._isMobile() && !this._isMobilePhoneView()) {
                 if (this.options.editable.create !== false) {
                     this._addUserEvents.destroy();
                 }

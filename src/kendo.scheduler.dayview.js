@@ -587,7 +587,7 @@ kendo_module({
 
         _editable: function() {
             if (this.options.editable) {
-                if (kendo.support.mobileOS) {
+                if (this._isMobile()) {
                     this._touchEditable();
                 } else {
                     this._mouseEditable();
@@ -1009,7 +1009,7 @@ kendo_module({
                 that.footer.remove();
             }
 
-            if (kendo.support.mobileOS) {
+            if (this._isMobile()) {
                 if (that.options.editable.create !== false) {
                     that._addUserEvents.destroy();
                     that._allDayUserEvents.destroy();
@@ -1249,7 +1249,7 @@ kendo_module({
             var template = isOneDayEvent ? this.eventTemplate : this.allDayEventTemplate;
             var options = this.options;
             var editable = options.editable;
-            var isMobile = kendo.support.mobileOS;
+            var isMobile = this._isMobile();
             var showDelete = editable && editable.destroy !== false && !isMobile;
             var resizable = editable && editable.resize !== false;
             var startDate = getDate(this.startDate());

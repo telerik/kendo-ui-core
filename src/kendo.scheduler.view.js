@@ -944,11 +944,20 @@ kendo_module({
 
             this._scrollbar = scrollbar();
             this._isRtl = kendo.support.isRtl(element);
-            this._isMobilePhoneView = kendo.support.mobileOS && !kendo.support.mobileOS.tablet;
             this._resizeHint = $();
             this._moveHint = $();
             this._cellId = kendo.guid();
             this._resourcesForGroups();
+        },
+
+        _isMobile: function() {
+            var options = this.options;
+            return (options.mobile === true && kendo.support.mobileOS) || options.mobile === "phone" || options.mobile === "tablet";
+        },
+
+        _isMobilePhoneView: function() {
+            var options = this.options;
+            return (options.mobile === true && kendo.support.mobileOS && !kendo.support.mobileOS.tablet) || options.mobile === "phone";
         },
 
         _addResourceView: function() {

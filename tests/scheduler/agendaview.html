@@ -611,28 +611,10 @@
                 equal(rows.filter("[aria-selected=false]").length, rows.length);
             });
 
-            module("mobile phone agenda view", {
-                setup: function() {
-                    kendo.support.mobileOS = {
-                        "device":"iphone",
-                        "tablet":false,
-                        "browser":"mobilesafari",
-                        "name":"ios",
-                        "ios":true,
-                        "majorVersion":"4",
-                        "minorVersion":"3.2",
-                        "flatVersion":"432",
-                        "appMode":false
-                    };
-
-                },
-                teardown: function() {
-                    kendo.support.mobileOS = null;
-                }
-            });
+            module("mobile phone agenda view", { });
 
             test("date cell has colspan equal to the number of detail columns", function() {
-                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00"), mobile: "phone" });
 
                 agenda.render([
                     new Event({
@@ -655,7 +637,7 @@
             });
 
             test("date cell has no rowspan set", function() {
-                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00"), mobile: "phone"});
 
                 agenda.render([
                     new Event({
@@ -678,7 +660,7 @@
             });
 
             test("delete icon is not rendered", 1, function() {
-                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00"), mobile: "phone"  });
 
                 var event = new Event({
                                 start: new Date("2013/06/06 00:00"),
@@ -694,7 +676,7 @@
             });
 
             test("agenda renders table with headers only for time and event", function() {
-                var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+                var agenda = agendaView({ date: new Date("2013/06/06 00:00"), mobile: "phone" });
 
                 var table = agenda.element.find(".k-scheduler-table");
 
