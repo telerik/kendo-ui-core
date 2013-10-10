@@ -430,8 +430,13 @@ kendo_module({
         },
 
         scrollTo: function(x, y) {
-            this.dimensions.refresh();
-            this.movable.moveTo({x: x, y: y});
+            if (this._native) {
+                this.scrollElement.scrollLeft(x);
+                this.scrollElement.scrollTop(y);
+            } else {
+                this.dimensions.refresh();
+                this.movable.moveTo({x: x, y: y});
+            }
         },
 
         animatedScrollTo: function(x, y) {
