@@ -18,6 +18,7 @@
         dataviz = kendo.dataviz,
         BaseStage = dataviz.BaseStage,
         Point = dataviz.Point,
+        alignToPixel = dataviz.util.alignToPixel,
         append = dataviz.append,
         defined = dataviz.defined,
         round = dataviz.round,
@@ -334,14 +335,6 @@
     });
 
     // Helpers ================================================================
-    function toRadians(degrees) {
-        return ((degrees + 540) % 360) * DEG_TO_RAD;
-    }
-
-    function alignToPixel(coord) {
-        return math.round(coord) + 0.5;
-    }
-
     function addGradientStops(gradient, stops) {
         var i,
             length = stops.length,
