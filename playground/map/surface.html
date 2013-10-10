@@ -6,6 +6,7 @@
     <script src="../../src/kendo.core.js"></script>
     <script src="../../src/kendo.data.js"></script>
     <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/dataviz/util.js"></script>
     <script src="../../src/dataviz/primitives.js"></script>
     <script src="../../src/dataviz/svg.js"></script>
     <script src="../../src/dataviz/canvas.js"></script>
@@ -58,7 +59,8 @@
     var clock = new Group();
     clock.append(hours, minutes, seconds, ticks);
 
-    var stage = new dataviz.canvas.Stage($("#wrap")[0]);
+    var stage = new dataviz.svg.Stage($("#wrap")[0]);
+    //var stage = new dataviz.canvas.Stage($("#wrap")[0]);
     stage.append(clock);
 
     function addTicks() {
