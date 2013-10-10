@@ -3,6 +3,7 @@
     // Imports ================================================================
     var $ = jQuery,
         noop = $.noop,
+        proxy = $.proxy,
 
         kendo = window.kendo,
         ObservableObject = kendo.data.ObservableObject,

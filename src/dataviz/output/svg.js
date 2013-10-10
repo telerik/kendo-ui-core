@@ -2,21 +2,17 @@
 
     // Imports ================================================================
     var $ = jQuery,
-        noop = $.noop,
-        proxy = $.proxy;
+        proxy = $.proxy,
         doc = document,
-        math = Math,
 
         kendo = window.kendo,
-        Class = kendo.Class,
         Observable = kendo.Observable,
-        ObservableArray = kendo.data.ObservableArray,
-        ObservableObject = kendo.data.ObservableObject,
         getter = kendo.getter,
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        Point = dataviz.Point,
+        Group = dataviz.Group,
+        Path = dataviz.Path,
         append = dataviz.append,
         defined = dataviz.defined,
         round = dataviz.round,

@@ -148,6 +148,7 @@ var tests = [
     "data/odata.html",
     "data/inmemorycache.html",
     "data/datasource/model.html",
+    "dataviz/lint.html",
     "data/datasource/sync-response.html",
     "datepicker/initialization.html",
     "datepicker/api.html",

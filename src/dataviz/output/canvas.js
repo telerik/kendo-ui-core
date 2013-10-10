@@ -3,7 +3,7 @@
     // Imports ================================================================
     var $ = jQuery,
         noop = $.noop,
-        proxy = $.proxy;
+        proxy = $.proxy,
         doc = document,
         math = Math,
 
@@ -16,8 +16,8 @@
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        BaseStage = dataviz.BaseStage,
-        Point = dataviz.Point,
+        Group = dataviz.Group,
+        Path = dataviz.Path,
         alignToPixel = dataviz.util.alignToPixel,
         append = dataviz.append,
         defined = dataviz.defined,
