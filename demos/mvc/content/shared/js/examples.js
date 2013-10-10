@@ -83,6 +83,7 @@
                     updateNavLinks(item, $("#nav-pager a"));
 
                     mainWrap.replaceWith(html);
+
                     setTimeout(function () {
                         $("#exampleWrap")
                             .css("visibility", "visible")
@@ -131,6 +132,9 @@
 
                 wrapInner.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function () {
                     wrapInner.replaceWith(html);
+
+                    $("#themeWrap").show().children("a").attr("href", $(".documentation-link").attr("href"));
+
                     setTimeout(function () {
                         $("#exampleWrap")
                             .css("visibility", "visible")

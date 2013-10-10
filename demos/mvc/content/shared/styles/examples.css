@@ -59,7 +59,7 @@ html
 }
 
 #header, .suite-demos-nav, .demos-nav,
-.flowers-left, #footer, .centerWrap, .submenu-box a 
+.flowers-left, #footer, .centerWrap, .submenu-box a
 {
     font-family: "Droid Sans", DroidSansWeb, "Segoe UI", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
 }
@@ -1200,6 +1200,15 @@ p#copy
     margin-top: -35px;
     font-size: .9em;
     line-height: 26px;
+}
+
+#themeWrap .get-kendoui
+{
+    padding: 0 10px;
+    line-height: 24px;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
 }
 
 .k-theme-chooser,
@@ -2952,7 +2961,7 @@ ul.keyboard-legend li a {
     bottom:-36px;
     right:0;
     text-decoration:none;
-    
+
     background: #e05b17; /* Old browsers */
     background: -moz-linear-gradient(top, #e46217 0%, #e05b17 50%, #db5116 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e46217), color-stop(50%,#e05b17), color-stop(100%,#db5116)); /* Chrome,Safari4+ */
