@@ -532,7 +532,12 @@ kendo_module({
         route: function () {
             var link = this.connection;
             var start = this.connection.sourcePoint();
-            var end = this.connection.targetPoint();
+            var end = this.connection.targetPoint(),
+                points = [start, start, end, end],
+                deltaX = end.x - start.x, // can be negative
+                deltaY = end.y - start.y,
+                l = points.length,
+                shiftX, shiftY;
 
             function startHorizontal(con) {
                 if (Utils.isDefined(con._resolvedTargetConnector)) {
@@ -548,13 +553,7 @@ kendo_module({
             }
 
             this.connection.cascadeStartHorizontal = startHorizontal(this.connection);
-
-            var points = [start, start, end, end];
-            var l = points.length;
-            var deltaX = end.x - start.x; // can be negative
-            var deltaY = end.y - start.y;
-
-            var shiftX, shiftY;
+            // note that this is more generic than needed for only two intermediate points.
             for (var k = 1; k < l - 1; ++k) {
                 if (link.cascadeStartHorizontal) {
                     if (k % 2 != 0) {
@@ -586,10 +585,11 @@ kendo_module({
             else
                 points[l - 2] = new Point(points[l - 2].x, points[l - 1].y);
 
-            this.connection.points(points);
+            this.connection.points([points[1], points[2]]);
         }
 
     });
+
     /**
      * The visual link between two Shapes through the intermediate of Connectors.
      */
@@ -1748,7 +1748,7 @@ kendo_module({
                         shape = addShape(node),
                         parentShape = addShape(parent);
                     if (parentShape && !that.connected(parentShape, shape)) { // check if connected to not duplicate connections.
-                       var con =  that.connect(parentShape.connectors[2], shape.connectors[0]);
+                        var con = that.connect(parentShape.connectors[2], shape.connectors[0]);
                         con.type(CASCADING);
                     }
                 }
