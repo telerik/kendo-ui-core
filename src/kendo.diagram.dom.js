@@ -558,8 +558,8 @@ kendo_module({
         init: function (from, to, options, model) {
             var that = this;
             DiagramElement.fn.init.call(that, options, model);
-            that.line = new Line(that.options);
-            that.visual.append(that.line);
+            that.path = new Path(that.options);
+            that.visual.append(that.path);
             that._sourcePoint = that._targetPoint = new Point();
             that.sourcePoint(from);
             that.targetPoint(to);
@@ -847,7 +847,33 @@ kendo_module({
             }
         },
         _hover: function (value) {
-            this.line.redraw({ stroke: value ? this.options.hoveredStroke : this.options.stroke });
+            this.path.redraw({ stroke: value ? this.options.hoveredStroke : this.options.stroke });
+        },
+        /**
+         * Using the current router with the endpoints and intermediate points, this returns the Path data to be drawn.
+         * @private
+         */
+        _calcPathData: function () {
+            if (this._router) {
+                this._router.route(); // sets the intermediate points
+            }
+            function pr(point){return point.x + " " + point.y;}
+            // for now let's take the heuristic approach, more complete API later
+            var from  = this.sourcePoint();
+            var end = this.targetPoint();
+            return "M"
+                    + pr(from)
+                    +" L"
+                    + pr(end)
+                ;
+
+        },
+        _refreshPath: function () {
+            if (Utils.isUndefined(this.path)) return;
+            this._drawPath(this._calcPathData());
+        },
+        _drawPath: function (data) {
+            this.path.redraw({ data: data  });
         },
         refresh: function () {
             resolveConnectors(this);
@@ -861,18 +887,15 @@ kendo_module({
                 middle = Point.fn.middleOf(localSourcePoint, localSinkPoint);
                 this.contentVisual.position(middle);
             }
-            this.visual.position(boundsTopLeft);    //global coordinates!
-            if(this._router){
-                this._router.route(); // sets the intermediate points
-            }
-            this.line.redraw({ from: localSourcePoint, to: localSinkPoint });
+           // this.visual.position(boundsTopLeft);    //global coordinates!
+            this._refreshPath();
             if (this.adorner) {
                 this.adorner.refresh();
             }
         },
         redraw: function (options) {
             this.options = deepExtend({}, this.options, options);
-            this.line.redraw(options);
+            this.path.redraw(options);
         },
         copy: function () {
             var json = this.serialize(),

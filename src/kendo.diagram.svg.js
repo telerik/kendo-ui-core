@@ -159,6 +159,9 @@ kendo_module({
             }
         },
         setAtr: function (atr, prop) {
+            if(Utils.isUndefined(prop) || Utils.isUndefined(this.options[prop]))return;
+            if(this.options[prop].toString().indexOf("F 1")===0)
+                throw "qmlkj";
             if (this.options[prop] !== undefined) {
                 this.native.setAttribute(atr, this.options[prop]);
             }
@@ -451,6 +454,14 @@ kendo_module({
         init: function (options) {
             var that = this;
             VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "path"), options);
+        },
+        data: function (value) {
+            if(value){
+                this.options.data = value;
+            }
+            else{
+                return this.options.data;
+            }
         },
         size: function () {
             var that = this;
