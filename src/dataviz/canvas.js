@@ -41,16 +41,16 @@
         UNDEFINED = "undefined";
 
     // Canvas Stage ==========================================================
-    var Stage = BaseStage.extend({
+    var Stage = Observable.extend({
         init: function(wrap, options) {
             var stage = this;
 
-            BaseStage.fn.init.call(stage);
+            Observable.fn.init.call(stage);
 
             stage._display = stage.options.inline ? "inline" : "block";
 
-            stage.root = new Node();
-            stage.root.bind(CHANGE, proxy(stage._invalidate, stage));
+            stage._root = new Node();
+            stage._root.bind(CHANGE, proxy(stage._invalidate, stage));
 
             stage._appendTo(wrap);
         },
@@ -65,17 +65,17 @@
         ],
 
         append: function() {
-            append(this.root.childNodes, Node.map(arguments));
+            append(this._root.childNodes, Node.map(arguments));
         },
 
         clear: function() {
-            this.root.childNodes.empty();
+            this._root.childNodes.empty();
         },
 
         _template: renderTemplate(
             "<canvas style='position: relative; display: #= d._display #; " +
-            "width: #= d._renderSize(d.options.width) #; " +
-            "height: #= d._renderSize(d.options.width) #;'></canvas>"
+            "width: #= kendo.dataviz.util.renderSize(d.options.width) #; " +
+            "height: #= kendo.dataviz.util.renderSize(d.options.width) #;'></canvas>"
         ),
 
         _appendTo: function(wrap) {
@@ -108,7 +108,7 @@
 
             canvas.width = canvas.width;
 
-            stage.root.renderTo(stage.ctx);
+            stage._root.renderTo(stage.ctx);
         }
     });
 
