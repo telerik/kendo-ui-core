@@ -1,27 +1,47 @@
 <div id="example" class="k-content">
     <div class="chart-wrapper">
-        <div id="chart"></div>
+        <div id="before"></div>
+        <div id="after"></div>
     </div>
     <script>
-        var data = [{
-                "source": "Hydro",
-                "percentage": 22,
-                "explode": true
-            }, {
-                "source": "Solar",
-                "percentage": 2
-            }, {
-                "source": "Nuclear",
-                "percentage": 49
-            }, {
-                "source": "Wind",
-                "percentage": 27
+        var dataBefore = [{
+            description: "All Visitors",
+            percentage: 1000
+        }, {
+            description: "Tried the Demos",
+            percentage: 930
+        }, {
+            description: "Downloaded",
+            percentage: 800
+        }, {
+            description: "Requested a Quote",
+            percentage: 232
+        }, {
+            description: "Purchased",
+            percentage: 116
         }];
 
-        function createChart() {
-            $("#chart").kendoChart({
+        var dataAfter = [{
+            description: "All Visitors",
+            percentage: 100
+        },{
+            description: "Tried the Demos",
+            percentage: 93
+        },{
+            description: "Downloaded",
+            percentage: 87
+        },{
+            description: "Requested a Quote",
+            percentage: 60
+        },{
+            description: "Purchased",
+            percentage: 70
+        }];
+
+        function createChart(chartName, data,description) {
+            $("#"+chartName).kendoChart({
                 title: {
-                    text: "Break-up of Spain Electricity Production for 2008"
+                    text: description
                 },
                 legend: {
                     position: "bottom"
@@ -33,10 +53,15 @@
                     type: "funnel",
                     segmentMethod:"relation",
                     field: "percentage",
-                    categoryField: "source",
-                    explodeField: "explode"
+                    categoryField: "description",
+                    segmentHeight : "proportional",
+                    labels: {
+                        visible: true,
+                        background: "transparent",
+                        color: "white",
+                        template: "#= dataItem.description #: #= value#%"
+                    }
                 }],
-                seriesColors: ["#42a7ff", "#666666", "#999999", "#cccccc"],
                 tooltip: {
                     visible: true,
                     template: "${ category } - ${ value }%"
@@ -44,7 +69,20 @@
             });
         }
 
-        $(document).ready(createChart);
-        $(document).bind("kendo:skinChange", createChart);
+        function createCharts() {
+            createChart("before", dataBefore, "Sales before website optimization");
+            createChart("after", dataAfter, "Sales after website optimization");
+        }
+
+        $(document).ready(createCharts);
+        $(document).bind("kendo:skinChange", createCharts);
     </script>
+
+    <style scoped>
+        .chart-wrapper .k-chart
+        {
+            display:inline-block;
+            width:340px;
+        }
+    </style>
 </div>
