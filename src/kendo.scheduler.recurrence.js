@@ -1068,7 +1068,6 @@ kendo_module({
                     instance.weekDays = weekDays = parseWeekDayList(value);
                     break;
                 case "BYSETPOS":
-                    //TODO: rename to positions
                     instance.positions = parseArray(value, { start: 1, end: 366 });
                     break;
                 case "BYWEEKNO":
@@ -1088,7 +1087,6 @@ kendo_module({
             }
 
             if (weekStart === undefined) {
-                //TODO: According ISO starndard the default day is MO, not the one defined by the current culture
                 instance.weekStart = weekStart = kendo.culture().calendar.firstDay;
             }
 
@@ -2245,7 +2243,6 @@ kendo_module({
             var monthNames = kendo.culture().calendar.months.names;
 
             if (monthInput[0]) {
-                //TODO: make it private
                 that._monthDropDownList = new DropDownList(monthInput, {
                     dataTextField: "text",
                     dataValueField: "value",
