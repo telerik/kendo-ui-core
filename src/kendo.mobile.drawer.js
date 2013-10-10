@@ -98,9 +98,8 @@ kendo_module({
                 return;
             }
 
-            if (this.currentView.scroller) {
-                this.currentView.scroller.enable();
-            }
+            this.currentView.enable();
+
             this.visible = false;
             Drawer.current = null;
             this._moveViewTo(0);
@@ -145,9 +144,7 @@ kendo_module({
                 return;
             }
 
-            if (this.currentView.scroller) {
-                this.currentView.scroller.disable();
-            }
+            this.currentView.enable(false);
 
             this.visible = true;
             var offset = this.element.width();

@@ -16,6 +16,7 @@ kendo_module({
         Widget = ui.Widget,
         INIT = "init",
         TRANSITION_DURATION = 320,
+        UI_OVERLAY = '<div style="height: 100%; width: 100%; background: position: absolute; top: 0; left: 0; z-index: 20000; display: none" />',
         BEFORE_SHOW = "beforeShow",
         SHOW = "show",
         AFTER_SHOW = "afterShow",
@@ -80,6 +81,18 @@ kendo_module({
             stretch: false,
             zoom: false,
             model: null
+        },
+
+        enable: function(enable) {
+            if(typeof enable == "undefined") {
+                enable = true;
+            }
+
+            if(enable) {
+                this.overlay.hide();
+            } else {
+                this.overlay.show();
+            }
         },
 
         destroy: function() {
@@ -281,6 +294,8 @@ kendo_module({
                                 .addClass("km-content");
 
             that.element.prepend(that.header).append(that.footer);
+
+            that.overlay = $(UI_OVERLAY).appendTo(that.element);
 
             if (that.layout) {
                 that.layout.setup(that);
