@@ -25,6 +25,7 @@
 
     // Constants ==============================================================
     var BUTT = "butt",
+        CHANGE = "change",
         CLIP = dataviz.CLIP,
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DASH_ARRAYS = dataviz.DASH_ARRAYS,
@@ -42,16 +43,16 @@
     // Canvas Stage ==========================================================
     var Stage = BaseStage.extend({
         init: function(wrap, options) {
-            BaseStage.fn.init.call(this);
+            var stage = this;
 
-            this.display = this.options.inline ? "inline" : "block";
+            BaseStage.fn.init.call(stage);
 
-            this.root = new GroupNode();
-            this.root.bind("invalidate", proxy(this._invalidate, this));
+            stage._display = stage.options.inline ? "inline" : "block";
 
-            this.nodes.push(this.root);
+            stage.root = new Node();
+            stage.root.bind(CHANGE, proxy(stage._invalidate, stage));
 
-            this._render(wrap);
+            stage._appendTo(wrap);
         },
 
         options: {
@@ -72,12 +73,12 @@
         },
 
         _template: renderTemplate(
-            "<canvas style='position: relative; display: #= d.display #; " +
+            "<canvas style='position: relative; display: #= d._display #; " +
             "width: #= d._renderSize(d.options.width) #; " +
             "height: #= d._renderSize(d.options.width) #;'></canvas>"
         ),
 
-        _render: function(wrap) {
+        _appendTo: function(wrap) {
             var stage = this,
                 options = stage.options,
                 canvas = wrap.firstElementChild;
@@ -108,35 +109,54 @@
             canvas.width = canvas.width;
 
             stage.root.renderTo(stage.ctx);
-        },
-
-        _nodeChange: function(e) {
-            for (var i = 0; i < e.items.length; i++) {
-                var node = e.items[i];
-                if (e.action === "add") {
-                    node.renderTo(this.ctx);
-                } else if (e.action === "remove") {
-                    node.invalidate();
-                }
-            }
         }
     });
 
     // Nodes ===================================================================
     var Node = ObservableObject.extend({
-        init: function(source) {
-            ObservableObject.fn.init.call(this, this);
+        init: function(srcElement) {
+            var node = this,
+                invalidate = proxy(node.invalidate, node);
 
-            if (source) {
-                this.source = source;
-                this.source.options.bind("change", proxy(this.invalidate, this));
+            node.childNodes = [];
+            ObservableObject.fn.init.call(node, node);
+
+            node.childNodes.bind(CHANGE, invalidate);
+
+            if (srcElement) {
+                node.srcElement = srcElement;
+                srcElement.options.bind(CHANGE, invalidate);
+
+                if (srcElement.children) {
+                    srcElement.children.bind(CHANGE, proxy(node._syncChildren, node));
+                }
             }
         },
 
-        renderTo: noop,
+        renderTo: function(ctx) {
+            var childNodes = this.childNodes,
+                i;
+
+            for (i = 0; i < childNodes.length; i++) {
+                childNodes[i].renderTo(ctx);
+            }
+        },
 
         invalidate: function() {
-            this.trigger("invalidate");
+            this.trigger(CHANGE);
+        },
+
+        _syncChildren: function(e) {
+            var group = this;
+
+            // TODO: Test different scenarios for synchronization
+            if (e.action === "add") {
+                append(group.childNodes, Node.map(e.items));
+            } else if (e.action === "remove") {
+                group.childNodes.splice(e.index, e.items.length);
+            }
+
+            this.trigger(CHANGE);
         }
     });
 
@@ -148,13 +168,13 @@
             var children = source.children;
             var node;
 
-            if (source instanceof Group) {
-                node = new GroupNode(source);
-            } else if (source instanceof Path) {
+            if (source instanceof Path) {
                 node = new PathNode(source);
+            } else {
+                node = new Node(source);
             }
 
-            if (node.childNodes && children && children.length > 0) {
+            if (children && children.length > 0) {
                 append(node.childNodes, Node.map(children));
             }
 
@@ -164,60 +184,16 @@
         return result;
     };
 
-    var GroupNode = Node.extend({
-        init: function(source) {
-            this.childNodes = [];
-
-            Node.fn.init.call(this, source);
-
-            if (source) {
-                this.source.children.bind("change", proxy(this._childrenChange, this));
-            }
-            this.childNodes.bind("change", proxy(this._childNodesChange, this));
-        },
-
-        renderTo: function(ctx) {
-            var nodes = this.childNodes,
-                i;
-
-            for (i = 0; i < nodes.length; i++) {
-                nodes[i].renderTo(ctx);
-            }
-
-            Node.fn.renderTo.call(this, ctx);
-        },
-
-        // TODO: Rename
-        _childrenChange: function(e) {
-            var group = this;
-
-            // TODO: Test different scenarios for synchronization
-            if (e.action === "add") {
-                append(group.childNodes, Node.map(e.items));
-            } else if (e.action === "remove") {
-                group.childNodes.splice(e.index, e.items.length);
-            }
-
-            this.trigger("change");
-            this.invalidate();
-        },
-
-        // TODO: Rename
-        _childNodesChange: function(e) {
-            this.invalidate();
-        }
-    });
-
     var PathNode = Node.extend({
-        init: function(source) {
-            Node.fn.init.call(this, source);
+        init: function(srcElement) {
+            Node.fn.init.call(this, srcElement);
 
-            this.source.points.bind("change", proxy(this.invalidate, this));
+            this.srcElement.points.bind(CHANGE, proxy(this.invalidate, this));
         },
 
         renderTo: function(ctx) {
             var path = this,
-                options = path.source.options;
+                options = path.srcElement.options;
 
             ctx.save();
 
@@ -247,7 +223,7 @@
         },
 
         setLineDash: function(ctx) {
-            var dashType = this.source.options.dashType,
+            var dashType = this.srcElement.options.dashType,
                 dashArray;
 
             dashType = dashType ? dashType.toLowerCase() : null;
@@ -263,7 +239,7 @@
         },
 
         setLineCap: function(ctx) {
-            var options = this.source.options,
+            var options = this.srcElement.options,
                 dashType = options.dashType;
 
             ctx.lineCap = (dashType && dashType !== SOLID) ?
@@ -271,14 +247,14 @@
         },
 
         setFill: function(ctx) {
-            var options = this.source.options,
+            var options = this.srcElement.options,
                 fill = options.fill;
 
             ctx.fillStyle = fill;
         },
 
         renderOverlay: function(ctx) {
-            var options = this.source.options,
+            var options = this.srcElement.options,
                 overlay = options.overlay,
                 gradient,
                 def;
@@ -295,10 +271,10 @@
 
         renderPoints: function(ctx) {
             var path = this,
-                points = path.source.points,
+                points = path.srcElement.points,
                 i,
                 p,
-                options = path.source.options,
+                options = path.srcElement.options,
                 rotation = options.rotation,
                 strokeWidth = options.stroke.width,
                 shouldAlign = options.align !== false && strokeWidth && strokeWidth % 2 !== 0,
@@ -323,7 +299,7 @@
 
         buildGradient: function(ctx, definition) {
             var bbox = this.bbox(),
-                rotation = this.source.options.overlay.rotation,
+                rotation = this.srcElement.options.overlay.rotation,
                 x = bbox.x2,
                 y = bbox.y1,
                 gradient;
@@ -387,7 +363,6 @@
         canvas: {
             Stage: Stage,
             Node: Node,
-            GroupNode: GroupNode,
             PathNode: PathNode
         }
     });
