@@ -58,7 +58,7 @@
 
     Class.prototype._initOptions = function(options) {
         this.options = deepExtend({}, this.options, options);
-    }
+    };
 
     function isFunction(fn) {
         return typeof fn === "function";
