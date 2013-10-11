@@ -130,8 +130,8 @@ kendo_module({
         },
         rotate: function (angle, x, y) {
             var m = new Matrix();
-            m.a = math.cos(rad(angle));
-            m.b = math.sin(rad(angle));
+            m.a = math.cos(angle * DEG_TO_RAD);
+            m.b = math.sin(angle * DEG_TO_RAD);
             m.c = -m.b;
             m.d = m.a;
             m.e = (x - x * m.a + y * m.b) || 0;
@@ -463,8 +463,8 @@ kendo_module({
                 ax = math.cos(radianAngle),
                 ay = math.sin(radianAngle),
                 radius = innerRadius ? ring.ir : ring.r,
-                x = ring.c.x - (ax * radius),
-                y = ring.c.y - (ay * radius);
+                x = round(ring.c.x - (ax * radius), COORD_PRECISION),
+                y = round(ring.c.y - (ay * radius), COORD_PRECISION);
 
             return new Point2D(x, y);
         },
