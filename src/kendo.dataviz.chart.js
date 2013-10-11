@@ -8394,8 +8394,8 @@ kendo_module({
                 "# for(var i = 0; i < points.length; i++) { #" +
                 "# var point = points[i]; #" +
                 "<tr>" +
-                    "# if(point.series.name) { #<td>#= point.series.name #:</td> # } #" +
-                        "<td>#= content(point) #</td>" +
+                    "<td>#= point.series.name #:</td>" +
+                    "<td>#= content(point) #</td>" +
                 "</tr>" +
                 "# } #" +
                 "</table>",
@@ -8412,13 +8412,23 @@ kendo_module({
                 slot = axis.getSlot(index),
                 content;
 
-            content = tooltip._content(points, category);
-            tooltip.element.html(content);
-            tooltip.anchor = tooltip._slotAnchor(coords, slot);
-            tooltip._updateStyle(options, points[0].options);
-            tooltip.setStyle(options);
+            points = $.grep(points, function(p) {
+                var series = p.series,
+                    hasName = !!series.name,
+                    exclude = series.tooltip && series.tooltip.visible === false;
 
-            BaseTooltip.fn.show.call(tooltip);
+                return hasName && !exclude;
+            });
+
+            if (points.length > 0) {
+                content = tooltip._content(points, category);
+                tooltip.element.html(content);
+                tooltip.anchor = tooltip._slotAnchor(coords, slot);
+                tooltip._updateStyle(options, points[0].options);
+                tooltip.setStyle(options);
+
+                    BaseTooltip.fn.show.call(tooltip);
+            }
         },
 
         _slotAnchor: function(point, slot) {
