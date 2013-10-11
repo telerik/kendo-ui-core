@@ -45,9 +45,7 @@
 
             Observable.fn.init.call();
 
-            stage.rootNode = new Node();
-            stage.rootNode.bind(CHANGE, proxy(stage._nodeChange, stage));
-
+            stage.rootNode = new RootNode();
             stage._appendTo(wrap);
         },
 
@@ -83,17 +81,6 @@
             this.element = wrap.firstElementChild;
 
             this.rootNode.attachTo(this.element);
-        },
-
-        _nodeChange: function(e) {
-            for (var i = 0; i < e.items.length; i++) {
-                var node = e.items[i];
-                if (e.action === "add") {
-                    node.attachTo(this.element);
-                } else if (e.action === "remove") {
-                    node.detach();
-                }
-            }
         }
     });
 
@@ -171,6 +158,10 @@
         },
 
         _childNodesChange: function(e) {
+            if (e.action === "itemchange") {
+                return;
+            }
+
             for (var i = 0; i < e.items.length; i++) {
                 var node = e.items[i];
 
@@ -180,6 +171,12 @@
                     node.detach();
                 }
             }
+        }
+    });
+
+    var RootNode = Node.extend({
+        attachTo: function(domElement) {
+            this.element = domElement;
         }
     });
 
@@ -196,9 +193,7 @@
         },
 
         _template: renderTemplate(
-            "# if (d.childNodes.length > 0) { #" +
-                "<g>#= d._renderChildren() #</g>" +
-            "# } #"
+            "<g>#= d._renderChildren() #</g>"
         )
     });
 
