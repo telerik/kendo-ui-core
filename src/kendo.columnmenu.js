@@ -90,7 +90,9 @@ kendo_module({
                 sortAscending: "Sort Ascending",
                 sortDescending: "Sort Descending",
                 filter: "Filter",
-                columns: "Columns"
+                columns: "Columns",
+                done: "Done",
+                settings: "Column Settings"
             },
             columns: true,
             sortable: true,
@@ -455,8 +457,8 @@ kendo_module({
     var mobileTemplate =
             '<div data-#=ns#role="view" data-#=ns#init-widgets="false">'+
                 '<div data-#=ns#role="header">'+
-                    'Column settings'+
-                    '<button class="k-button k-done">Done</button>'+
+                    '${messages.settings}'+
+                    '<button class="k-button k-done">#=messages.done#</button>'+
                 '</div>'+
                 '<div class="k-column-menu"><ul><li>'+
                     '<span class="k-link">${field}</span><ul>'+
