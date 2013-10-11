@@ -118,16 +118,22 @@
                 });
             });
 
-            test("date fields are correctly serialized based on stringifyDates parameter", function() {
-                   var schedulerTransport = new kendo.data.transports["aspnetmvc-ajax"]({stringifyDates: true});
+            test("date fields are correctly serialized when stringifyDates is set to false", function() {
                    var transport = new Transport({});
                    var currentDate = new Date();
 
-                   var schedulerResult = schedulerTransport.parameterMap({dateField: currentDate}, "update", true, true);
                    var otherResult = transport.parameterMap({dateField: currentDate}, "update", true);
 
-                   equal(schedulerResult.dateField, currentDate.toJSON());
                    equal(otherResult.dateField, kendo.format("{0:G}", currentDate))
+            });
+
+            test("date fields are correctly serialized when stringifyDates is set to true", function() {
+                   var schedulerTransport = new kendo.data.transports["aspnetmvc-ajax"]({stringifyDates: true});
+                   var currentDate = new Date();
+
+                   var schedulerResult = schedulerTransport.parameterMap({dateField: currentDate}, "update", true, true);
+
+                   equal(schedulerResult.dateField, currentDate.toJSON());
             });
 
            test("stringifyDates parameter is correctly set in the transport and dates are correctly serialized", function() {
