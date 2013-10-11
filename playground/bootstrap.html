@@ -43,9 +43,10 @@
             }
 
             header h1,
+            header button,
             header label {
                 display: inline-block;
-                height: 100px;
+                vertical-align: middle;
             }
 
             header h1 {
@@ -53,6 +54,7 @@
                 font-size: 20px;
             }
 
+            #configure,
             header label {
                 border-left: 1px solid #636363;
             }
@@ -67,28 +69,61 @@
                 width: 80%;
                 margin: 0 10%;
             }
+
+            #configure {
+                width: 50px;
+                height: 50px;
+                text-indent: -1000em;
+                overflow: hidden;
+                border-width: 0 0 0 1px;
+                background-color: transparent;
+                float: right;
+            }
+
+            #configurator {
+                display: none;
+            }
+
+            @media screen and (max-width: 720px) {
+                header .container {
+                    padding-right: 0;
+                }
+            }
+
+            @media screen and (min-width: 720px) {
+                #configure {
+                    display: none;
+                }
+
+                #configurator {
+                    display: inline-block;
+                }
+            }
         </style>
     </head>
     <body>
         <header>
             <div class="container">
-                <h1>Responsive Kendo UI</h1>
+                <h1>Kendo UI</h1>
 
-                <label>
-                    <div class="description">Dimensions</div>
-                    <select id="dimensions"></select>
-                </label>
+                <button id="configure">Show/hide menu</button>
+                <div id="configurator">
+                    <label>
+                        <div class="description">Dimensions</div>
+                        <select id="dimensions"></select>
+                    </label>
 
-                <label>
-                    <div class="description">Theme</div>
-                    <select id="theme"></select>
-                </label>
+                    <label>
+                        <div class="description">Theme</div>
+                        <select id="theme"></select>
+                    </label>
 
-                <label>
-                    <div class="description">Font-size</div>
-                    <span id="font-size-value"></span>
-                    <input type="range" id="font-size">
-                </label>
+                    <label>
+                        <div class="description">Font-size</div>
+                        <span id="font-size-value"></span>
+                        <input type="range" id="font-size">
+                    </label>
+                </div>
             </div>
         </header>
 
