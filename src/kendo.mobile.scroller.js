@@ -163,12 +163,16 @@ kendo_module({
 
             kendo.effects.Animation.fn.init.call(this);
 
-            extend(that, options, { offset: {} });
+            extend(that, options, {
+                origin: {},
+                destination: {},
+                offset: {}
+            });
         },
 
         tick: function() {
             this._updateOrigin();
-            this.movable.moveTo(this.origin);
+            this.moveTo(this.origin);
         },
 
         done: function() {
@@ -176,7 +180,7 @@ kendo_module({
         },
 
         onEnd: function() {
-            this.movable.moveTo(this.destination);
+            this.moveTo(this.destination);
         },
 
         _updateOrigin: function() {
@@ -319,6 +323,12 @@ kendo_module({
                     tapCapture: tapCapture
                 });
 
+                animatedScroller = new AnimatedScroller({
+                    moveTo: function(coordinates) {
+                        that.scrollTo(coordinates.x, coordinates.y);
+                    }
+                });
+
             movable.bind(CHANGE, function() {
                 that.scrollTop = - movable.y;
                 that.scrollLeft = - movable.x;
@@ -333,6 +343,7 @@ kendo_module({
                 movable: movable,
                 dimensions: dimensions,
                 zoomSnapBack: zoomSnapBack,
+                animatedScroller: animatedScroller,
                 userEvents: userEvents,
                 pane: pane,
                 tapCapture: tapCapture,
@@ -441,12 +452,9 @@ kendo_module({
         },
 
         animatedScrollTo: function(x, y) {
-            var animatedScroller = new AnimatedScroller({
-                origin: { x: this.movable.x, y: this.movable.y },
-                destination: { x: x, y: y },
-                movable: this.movable
-            });
-            animatedScroller.start();
+            this.animatedScroller.origin = { x: this.movable.x, y: this.movable.y };
+            this.animatedScroller.destination = { x: x, y: y };
+            this.animatedScroller.start();
         },
 
         pullHandled: function() {
