@@ -907,21 +907,23 @@ kendo_module({
                 highlight = chart._highlight,
                 index, points;
 
-            index = categoryAxis.pointCategoryIndex(coords);
-            if (index !== chart._tooltipCategoryIx) {
-                points = plotArea.pointsByCategoryIndex(index);
+            if (plotArea.box.containsPoint(coords)) {
+                index = categoryAxis.pointCategoryIndex(coords);
+                if (index !== chart._tooltipCategoryIx) {
+                    points = plotArea.pointsByCategoryIndex(index);
 
-                if (points.length > 0) {
-                    if (tooltipOptions.visible) {
-                        tooltip.showAt(points, coords);
+                    if (points.length > 0) {
+                        if (tooltipOptions.visible) {
+                            tooltip.showAt(points, coords);
+                        }
+
+                        highlight.show(points);
+                    } else {
+                        tooltip.hide();
                     }
 
-                    highlight.show(points);
-                } else {
-                    tooltip.hide();
+                    chart._tooltipCategoryIx = index;
                 }
-
-                chart._tooltipCategoryIx = index;
             }
         },
 
