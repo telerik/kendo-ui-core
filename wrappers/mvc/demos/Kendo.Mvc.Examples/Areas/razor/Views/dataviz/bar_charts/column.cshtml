@@ -24,12 +24,19 @@
             series.Column(new double[] { 1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727 }).Name("World");
         })
         .CategoryAxis(axis => axis
-            .Categories("2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011")
+            .Name("series-axis")
             .Line(line => line.Visible(false))
-            .Labels(labels => labels.Padding(145,0,0,0))
+        )
+        .CategoryAxis(axis => axis
+            .Name("label-axis")
+            .Categories("2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011")
         )
         .ValueAxis(axis => axis
-            .Numeric().Labels(labels => labels.Format("{0}%"))
+            .Numeric()
+                .Labels(labels => labels.Format("{0}%"))
+                
+                // Move the label-axis all the way down the value axis
+                .AxisCrossingValue(0, int.MinValue)
         )
         .Tooltip(tooltip => tooltip
             .Visible(true)
