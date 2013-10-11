@@ -1204,11 +1204,12 @@ kendo_module({
 
             for (i = 0; i < items.length; i++) {
                 item = deepExtend({}, notes, items[i]);
+                item.value = axis.parseNoteValue(item.value);
                 text = item.label.text;
                 if (item.label.template) {
                     noteTemplate = template(item.label.template);
                     text = noteTemplate({
-                        value: axis.parseNoteValue(item.value)
+                        value: item.value
                     });
                 } else if (item.label.format) {
                     text = autoFormat(item.label.format, text);

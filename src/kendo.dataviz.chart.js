@@ -2099,8 +2099,10 @@ kendo_module({
             return new AxisLabel(category, index, dataItem, labelOptions);
         },
 
-        shouldRenderNote: function() {
-            return this.options.categories.length;
+        shouldRenderNote: function(value) {
+            var categories = this.options.categories;
+
+            return categories.length && (categories.length > value && value >= 0);
         }
     });
 

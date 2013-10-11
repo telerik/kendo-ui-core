@@ -1599,6 +1599,38 @@
                 });
 
             })();
+
+            (function() {
+                var categoryAxis,
+                    plot;
+
+                function createCategoryAxis(options) {
+                    categoryAxis = new dataviz.CategoryAxis(
+                        $.extend({
+                            categories: ["Foo", "Bar", "Baz"]
+                        }, options)
+                    );
+                    categoryAxis.reflow(chartBox);
+                }
+
+                // ------------------------------------------------------------
+                module("Category Axis / Notes");
+
+                test("render note if is in the range of the axis", function() {
+                    createCategoryAxis({
+                        notes: {
+                            data: [{
+                                value: 1
+                            },{
+                                value: 4
+                            }]
+                        }
+                    });
+
+                    ok(categoryAxis.notes[0].options.visible);
+                    ok(!categoryAxis.notes[1].options.visible);
+                });
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
