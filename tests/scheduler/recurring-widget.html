@@ -25,6 +25,16 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
+
+            var WEEK_DAYS = {
+                0: "SU",
+                1: "MO",
+                2: "TU",
+                3: "WE",
+                4: "TH",
+                5: "FR",
+                6: "SA"
+            };
             var RecurrenceEditor = kendo.ui.RecurrenceEditor,
                 div;
 
@@ -448,6 +458,25 @@
                 ok(ddlWeekDay[0]);
             });
 
+            test("Render weekdays options along with week names", function() {
+                var editor = new RecurrenceEditor(div),
+                    container = editor._container;
+
+                editor._initView("monthly");
+
+                var ddlWeekDay = container.find("[data-role=dropdownlist].k-recur-weekday").data("kendoDropDownList");
+
+                var data = ddlWeekDay.dataSource.data();
+
+                equal(data[0].value, "day");
+                equal(data[1].value, "weekday");
+                equal(data[2].value, "weekend");
+
+                equal(data[0].text, "day");
+                equal(data[1].text, "weekday");
+                equal(data[2].text, "weekend day");
+            });
+
             test("Initialize monthday numeric", function() {
                 var today = kendo.date.today(),
                     editor = new RecurrenceEditor(div, { start: today }),
@@ -514,6 +543,8 @@
 
                 offset.value("-1");
                 offset.trigger("change");
+                weekday.value("0");
+                weekday.trigger("change");
 
                 equal(editor.value(), "FREQ=MONTHLY;BYDAY=-1SU");
 
@@ -521,6 +552,60 @@
                 weekday.trigger("change");
 
                 equal(editor.value(), "FREQ=MONTHLY;BYDAY=-1WE");
+            });
+
+            test("Update week day rule to repeat on first weekday", function() {
+                var today = kendo.date.today(),
+                    editor = new RecurrenceEditor(div, { start: today }),
+                    container = editor._container;
+
+                editor._initView("monthly");
+                container.find(".k-recur-month-radio:last").click();
+
+                var offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset").data("kendoDropDownList")
+                    weekday = container.find("[data-role=dropdownlist].k-recur-weekday").data("kendoDropDownList");
+
+                offset.value("1");
+                weekday.value("day");
+                weekday.trigger("change");
+
+                equal(editor.value(), "FREQ=MONTHLY;BYDAY=SU,MO,TU,WE,TH,FR,SA;BYSETPOS=1");
+            });
+
+            test("Update week day rule to repeat on first work day", function() {
+                var today = kendo.date.today(),
+                    editor = new RecurrenceEditor(div, { start: today }),
+                    container = editor._container;
+
+                editor._initView("monthly");
+                container.find(".k-recur-month-radio:last").click();
+
+                var offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset").data("kendoDropDownList")
+                    weekday = container.find("[data-role=dropdownlist].k-recur-weekday").data("kendoDropDownList");
+
+                offset.value("1");
+                weekday.value("weekday");
+                weekday.trigger("change");
+
+                equal(editor.value(), "FREQ=MONTHLY;BYDAY=MO,TU,WE,TH,FR;BYSETPOS=1");
+            });
+
+            test("Update week day rule to repeat on first weekend", function() {
+                var today = kendo.date.today(),
+                    editor = new RecurrenceEditor(div, { start: today }),
+                    container = editor._container;
+
+                editor._initView("monthly");
+                container.find(".k-recur-month-radio:last").click();
+
+                var offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset").data("kendoDropDownList")
+                    weekday = container.find("[data-role=dropdownlist].k-recur-weekday").data("kendoDropDownList");
+
+                offset.value("1");
+                weekday.value("weekend");
+                weekday.trigger("change");
+
+                equal(editor.value(), "FREQ=MONTHLY;BYDAY=SU,SA;BYSETPOS=1");
             });
 
             test("On initial render enable monthday and disable weekday", function() {
@@ -554,10 +639,12 @@
                     offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset"),
                     weekday = container.find("[data-role=dropdownlist].k-recur-weekday");
 
+                var day = WEEK_DAYS[today.getDay()];
+
                 equal(numeric.prop("disabled"), true);
                 equal(offset.prop("disabled"), false);
                 equal(weekday.prop("disabled"), false);
-                equal(editor.value(), "FREQ=MONTHLY;BYDAY=1SU");
+                equal(editor.value(), "FREQ=MONTHLY;BYDAY=1" + day);
             });
 
             module("kendo.ui.RecurrenceEditor Yearly view", {
@@ -728,7 +815,7 @@
                 offset.value("-1");
                 offset.trigger("change");
 
-                equal(editor.value(), "FREQ=YEARLY;BYMONTH=" + month + ";BYDAY=-1SU");
+                equal(editor.value(), "FREQ=YEARLY;BYMONTH=" + month + ";BYDAY=-1" + WEEK_DAYS[today.getDay()]);
 
                 weekday.value("3");
                 weekday.trigger("change");
@@ -780,7 +867,7 @@
                 equal(weekday.prop("disabled"), false);
                 equal(monthLast.prop("disabled"), false);
 
-                equal(editor.value(), "FREQ=YEARLY;BYMONTH=" + (today.getMonth() + 1) + ";BYDAY=1SU");
+                equal(editor.value(), "FREQ=YEARLY;BYMONTH=" + (today.getMonth() + 1) + ";BYDAY=1" + WEEK_DAYS[today.getDay()]);
             });
 
             module("kendo.ui.RecurrenceEditor API", {

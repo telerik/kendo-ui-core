@@ -1277,6 +1277,29 @@ kendo_module({
        '# } #'
     );
 
+    var DAY_RULE = [
+        { day: 0, offset: 0 },
+        { day: 1, offset: 0 },
+        { day: 2, offset: 0 },
+        { day: 3, offset: 0 },
+        { day: 4, offset: 0 },
+        { day: 5, offset: 0 },
+        { day: 6, offset: 0 }
+    ];
+
+    var WEEKDAY_RULE = [
+        { day: 1, offset: 0 },
+        { day: 2, offset: 0 },
+        { day: 3, offset: 0 },
+        { day: 4, offset: 0 },
+        { day: 5, offset: 0 }
+    ];
+
+    var WEEKEND_RULE = [
+        { day: 0, offset: 0 },
+        { day: 6, offset: 0 }
+    ];
+
     var BaseRecurrenceEditor = Widget.extend({
         init: function(element, options) {
             var that = this,
@@ -1355,6 +1378,11 @@ kendo_module({
                     third: "third",
                     fourth: "fourth",
                     last: "last"
+                },
+                weekdays: {
+                    day: "day",
+                    weekday: "weekday",
+                    weekend: "weekend day"
                 }
             }
         },
@@ -1380,26 +1408,85 @@ kendo_module({
                 });
         },
 
-        _initWeekDay: function() {
+        _weekDayRule: function(clear) {
             var that = this;
+            var weekday = that._weekDay.value();
+            var offset = Number(that._weekDayOffset.value());
+            var weekDays = null;
+            var positions = null;
+
+            if (!clear) {
+                if (weekday === "day") {
+                    weekDays = DAY_RULE;
+                    positions = offset;
+                } else if (weekday === "weekday") {
+                    weekDays = WEEKDAY_RULE;
+                    positions = offset;
+                } else if (weekday === "weekend") {
+                    weekDays = WEEKEND_RULE;
+                    positions = offset;
+                } else {
+                    weekDays = [{
+                        offset: offset,
+                        day: Number(weekday)
+                    }];
+                }
+            }
+
+            that._value.weekDays = weekDays;
+            that._value.positions = positions;
+        },
+
+        _weekDayView: function() {
+            var that = this;
+            var weekDays = that._value.weekDays;
+            var positions = that._value.positions;
+            var weekDayOffset;
+            var weekDayValue;
+            var length;
+
+            if (weekDays) {
+                length = weekDays.length;
+
+                if (positions) {
+                    if (length === 7) {
+                        weekDayValue = "day";
+                        weekDayOffset = positions;
+                    } else if (length === 5) {
+                        weekDayValue = "weekday";
+                        weekDayOffset = positions;
+                    } else if (length === 2) {
+                        weekDayValue = "weekend";
+                        weekDayOffset = positions;
+                    }
+                }
+
+                if (!weekDayValue) {
+                    weekDays = weekDays[0];
+                    weekDayValue = weekDays.day;
+                    weekDayOffset = weekDays.offset || "";
+                }
+
+                that._weekDayOffset.value(weekDayOffset);
+                that._weekDay.value(weekDayValue);
+            }
+        },
+
+        _initWeekDay: function() {
+            var that = this, data;
+
+            var weekdayMessage = that.options.messages.weekdays;
             var offsetMessage = that.options.messages.offsetPositions;
 
-            var offsetInput = that._container.find(".k-recur-weekday-offset");
             var weekDayInput = that._container.find(".k-recur-weekday");
 
-            var rule = that._value;
-            var weekDays = rule.weekDays;
-
             var change = function() {
-                rule.weekDays = [{
-                    offset: Number(that._weekDayOffset.value()),
-                    day: Number(that._weekDay.value())
-                }];
+                that._weekDayRule();
                 that.trigger("change");
             };
 
             if (weekDayInput[0]) {
-                that._weekDayOffset = new DropDownList(offsetInput, {
+                that._weekDayOffset = new DropDownList(that._container.find(".k-recur-weekday-offset"), {
                     change: change,
                     dataTextField: "text",
                     dataValueField: "value",
@@ -1412,24 +1499,26 @@ kendo_module({
                     ]
                 });
 
+                data = [
+                    { text: weekdayMessage.day, value: "day" },
+                    { text: weekdayMessage.weekday, value: "weekday" },
+                    { text: weekdayMessage.weekend, value: "weekend" }
+                ];
+
                 that._weekDay = new DropDownList(weekDayInput, {
+                    value: that.options.start.getDay(),
                     change: change,
                     dataTextField: "text",
                     dataValueField: "value",
-                    dataSource: $.map(kendo.culture().calendar.days.names, function(dayName, idx) {
+                    dataSource: data.concat($.map(kendo.culture().calendar.days.names, function(dayName, idx) {
                         return {
                             text: dayName,
                             value: idx
                         };
-                    })
+                    }))
                 });
 
-                if (weekDays) {
-                    weekDays = weekDays[0];
-
-                    that._weekDayOffset.value(weekDays.offset || "");
-                    that._weekDay.value(weekDays.day);
-                }
+                that._weekDayView();
             }
         },
 
@@ -1783,26 +1872,21 @@ kendo_module({
 
         _toggleMonthDay: function(monthRule) {
             var that = this;
-            var monthDays, weekDays;
             var enableMonthDay = false;
             var enableWeekDay = true;
+            var clear = false;
+            var monthDays;
 
             if (monthRule === "monthday") {
                 that._buttonMonthDay.prop("checked", true);
 
+                monthDays = [that._monthDay.value()];
+
                 enableMonthDay = true;
                 enableWeekDay = false;
-
-                weekDays = null;
-                monthDays = [that._monthDay.value()];
+                clear = true;
             } else {
                 that._buttonWeekDay.prop("checked", true);
-
-                weekDays = [{
-                    offset: Number(that._weekDayOffset.value()),
-                    day: Number(that._weekDay.value())
-                }];
-
                 monthDays = null;
             }
 
@@ -1810,8 +1894,9 @@ kendo_module({
             that._weekDayOffset.enable(enableWeekDay);
             that._monthDay.enable(enableMonthDay);
 
-            that._value.weekDays = weekDays;
             that._value.monthDays = monthDays;
+
+            that._weekDayRule(clear);
         },
 
         _toggleYear: function(yearRule) {
