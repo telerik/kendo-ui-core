@@ -121,6 +121,10 @@ kendo_module({
         },
 
         _activate: function() {
+            if (this.visible) {
+                return true;
+            }
+
             var views = this.options.views,
                 view = this.pane.view(),
                 visibleOnCurrentView = !views[0] || this._viewsInclude(view.id.replace('#', '')) || this._viewsInclude(view.element.attr("id"));
