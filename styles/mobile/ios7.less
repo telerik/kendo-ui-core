@@ -6,6 +6,7 @@
 @ios7-list-select-background: #d9d9d9;
 @ios7-list-title-background: #efeff4;
 @ios7-dark-background: #363940;
+@ios7-lighter-background: lighten(@ios7-dark-background, 40);
 @ios7-button-background: rgba(0,0,0,0);
 @ios7-border-width: 1px;
 @ios7-border-radius: 3px;
@@ -145,12 +146,13 @@
 .km-ios7 .km-back:before
 {
     content: "\a0";
-    display: inline-block;
+    display: inline-block !important;
     color: currentcolor;
     width: .8em;
     height: .8em;
     border-width: 0;
-    box-shadow: inset .25rem -.25rem 0;
+    -webkit-box-shadow: inset .25rem -.25rem 0 @ios7-active-background;
+    box-shadow: inset .25rem -.25rem 0 currentcolor;
     .transform(rotate(45deg));
 }
 
@@ -393,11 +395,12 @@
 
 .km-ios7 .km-listview-link:after
 {
-    color: lighten(@ios7-dark-background, 40);
+    color: @ios7-lighter-background;
     width: .66rem;
     height: .64rem;
     border-width: 0;
-    box-shadow: inset -.2rem .2rem 0;
+    -webkit-box-shadow: inset -.2rem .2rem 0 @ios7-lighter-background;
+    box-shadow: inset -.2rem .2rem 0 currentcolor;
 }
 
 .km-ios7 .km-list li > .km-listview-link,
