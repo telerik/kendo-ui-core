@@ -27,6 +27,7 @@ kendo_module({
         VELOCITY_MULTIPLIER = 10,
         MAX_VELOCITY = 55,
         OUT_OF_BOUNDS_FRICTION = 0.5,
+        ANIMATED_SCROLLER_PRECISION = 5,
         RELEASECLASS = "km-scroller-release",
         REFRESHCLASS = "km-scroller-refresh",
         PULL = "pull",
@@ -156,6 +157,51 @@ kendo_module({
         }
     });
 
+    var AnimatedScroller = Animation.extend({
+        init: function(options) {
+            var that = this;
+
+            kendo.effects.Animation.fn.init.call(this);
+
+            extend(that, options, {
+                origin: {},
+                destination: {},
+                offset: {}
+            });
+        },
+
+        tick: function() {
+            this._updateCoordinates();
+            this.moveTo(this.origin);
+        },
+
+        done: function() {
+            return abs(this.offset.y) < ANIMATED_SCROLLER_PRECISION && abs(this.offset.x) < ANIMATED_SCROLLER_PRECISION;
+        },
+
+        onEnd: function() {
+            this.moveTo(this.destination);
+        },
+
+        setCoordinates: function(from, to) {
+            this.offset = {};
+            this.origin = from;
+            this.destination = to;
+        },
+
+        _updateCoordinates: function() {
+            this.offset = {
+                x: (this.destination.x - this.origin.x) / 4,
+                y: (this.destination.y - this.origin.y) / 4
+            };
+
+            this.origin = {
+                y: this.origin.y + this.offset.y,
+                x: this.origin.x + this.offset.x
+            };
+        }
+    });
+
     var ScrollBar = Class.extend({
         init: function(options) {
             var that = this,
@@ -281,6 +327,12 @@ kendo_module({
                     dimensions: dimensions,
                     userEvents: userEvents,
                     tapCapture: tapCapture
+                }),
+
+                animatedScroller = new AnimatedScroller({
+                    moveTo: function(coordinates) {
+                        that.scrollTo(coordinates.x, coordinates.y);
+                    }
                 });
 
             movable.bind(CHANGE, function() {
@@ -297,6 +349,7 @@ kendo_module({
                 movable: movable,
                 dimensions: dimensions,
                 zoomSnapBack: zoomSnapBack,
+                animatedScroller: animatedScroller,
                 userEvents: userEvents,
                 pane: pane,
                 tapCapture: tapCapture,
@@ -395,8 +448,21 @@ kendo_module({
         },
 
         scrollTo: function(x, y) {
-            this.dimensions.refresh();
-            this.movable.moveTo({x: x, y: y});
+            if (this._native) {
+                this.scrollElement.scrollLeft(x);
+                this.scrollElement.scrollTop(y);
+            } else {
+                this.dimensions.refresh();
+                this.movable.moveTo({x: x, y: y});
+            }
+        },
+
+        animatedScrollTo: function(x, y) {
+            var from = { x: this.movable.x, y: this.movable.y },
+                to = { x: x, y: y };
+
+            this.animatedScroller.setCoordinates(from, to);
+            this.animatedScroller.start();
         },
 
         pullHandled: function() {
