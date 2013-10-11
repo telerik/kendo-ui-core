@@ -49,7 +49,11 @@ kendo_module({
         CHANGE = "change",
         ERROR = "error",
         AUTO = "Auto",
-        TOP = "Top", RIGHT = "Right", LEFT = "Left", BOTTOM = "Bottom",
+        TOP = "Top",
+        RIGHT = "Right",
+        LEFT = "Left",
+        BOTTOM = "Bottom",
+        DEFAULTCONNECTORNAMES = [TOP, RIGHT, BOTTOM, LEFT, AUTO],
         HITTESTDISTANCE = 10,
         bindings = {
             text: "dataTextField",
@@ -590,57 +594,85 @@ kendo_module({
                 deltaX = end.x - start.x, // can be negative
                 deltaY = end.y - start.y,
                 l = points.length,
-                shiftX, shiftY;
+                shiftX,
+                shiftY,
+                sourceConnectorName = null,
+                targetConnectorName = null;
 
-            function startHorizontal(con) {
-                if (Utils.isDefined(con._resolvedTargetConnector)) {
-                    var sourceConnectorName = con._resolvedTargetConnector.options.name;
-                    if (sourceConnectorName === RIGHT || sourceConnectorName === LEFT) {
-                        return true;
-                    }
-                    if (sourceConnectorName === TOP || sourceConnectorName === BOTTOM) {
-                        return false;
-                    }
-                }
-                //fallback for custom connectors
-                return Math.abs(start.x - end.x) > Math.abs(start.y - end.y);
+            if (Utils.isDefined(link._resolvedSourceConnector)) {
+                sourceConnectorName = link._resolvedSourceConnector.options.name;
+            }
+            if (Utils.isDefined(link._resolvedTargetConnector)) {
+                targetConnectorName = link._resolvedTargetConnector.options.name;
             }
 
-            this.connection.cascadeStartHorizontal = startHorizontal(this.connection);
+            if (sourceConnectorName !== null && targetConnectorName !== null && DEFAULTCONNECTORNAMES.contains(sourceConnectorName) && DEFAULTCONNECTORNAMES.contains(targetConnectorName)) {
+                // custom routing for the default connectors
+                if (sourceConnectorName === TOP || sourceConnectorName == BOTTOM) {
+                    if (targetConnectorName == TOP || targetConnectorName == BOTTOM) {
+                        this.connection.points([new Point(start.x, start.y + deltaY / 2), new Point(end.x, start.y + deltaY / 2)]);
+                    } else {
+                        this.connection.points([new Point(start.x, start.y + deltaY)]);
+                    }
+                } else { // LEFT or RIGHT
+                    if (targetConnectorName == LEFT || targetConnectorName == RIGHT) {
+                        this.connection.points([new Point(start.x + deltaX / 2, start.y), new Point(start.x + deltaX / 2, start.y + deltaY)]);
+                    } else {
+                        this.connection.points([new Point(end.x, start.y)]);
+                    }
+                }
 
-            // note that this is more generic than needed for only two intermediate points.
-            for (var k = 1; k < l - 1; ++k) {
-                if (link.cascadeStartHorizontal) {
-                    if (k % 2 != 0) {
-                        shiftX = deltaX / (l / 2);
-                        shiftY = 0;
-                    }
-                    else {
-                        shiftX = 0;
-                        shiftY = deltaY / ((l - 1) / 2);
-                    }
-                }
-                else {
-                    if (k % 2 != 0) {
-                        shiftX = 0;
-                        shiftY = deltaY / (l / 2);
-                    }
-                    else {
-                        shiftX = deltaX / ((l - 1) / 2);
-                        shiftY = 0;
-                    }
-                }
-                points[k] = new Point(points[k - 1].x + shiftX, points[k - 1].y + shiftY);
             }
-            // need to fix the wrong 1.5 factor of the last intermediate point
-            k--;
-            if ((link.cascadeStartHorizontal && (k % 2 != 0)) ||
-                (!link.cascadeStartHorizontal && !(k % 2 != 0)))
-                points[l - 2] = new Point(points[l - 1].x, points[l - 2].y);
-            else
-                points[l - 2] = new Point(points[l - 2].x, points[l - 1].y);
+            else { // general case for custom and floating connectors
+                function startHorizontal() {
+                    if (sourceConnectorName != null) {
+                        if (sourceConnectorName === RIGHT || sourceConnectorName === LEFT) {
+                            return true;
+                        }
+                        if (sourceConnectorName === TOP || sourceConnectorName === BOTTOM) {
+                            return false;
+                        }
+                    }
+                    //fallback for custom connectors
+                    return Math.abs(start.x - end.x) > Math.abs(start.y - end.y);
+                }
 
-            this.connection.points([points[1], points[2]]);
+                this.connection.cascadeStartHorizontal = startHorizontal(this.connection);
+
+                // note that this is more generic than needed for only two intermediate points.
+                for (var k = 1; k < l - 1; ++k) {
+                    if (link.cascadeStartHorizontal) {
+                        if (k % 2 != 0) {
+                            shiftX = deltaX / (l / 2);
+                            shiftY = 0;
+                        }
+                        else {
+                            shiftX = 0;
+                            shiftY = deltaY / ((l - 1) / 2);
+                        }
+                    }
+                    else {
+                        if (k % 2 != 0) {
+                            shiftX = 0;
+                            shiftY = deltaY / (l / 2);
+                        }
+                        else {
+                            shiftX = deltaX / ((l - 1) / 2);
+                            shiftY = 0;
+                        }
+                    }
+                    points[k] = new Point(points[k - 1].x + shiftX, points[k - 1].y + shiftY);
+                }
+                // need to fix the wrong 1.5 factor of the last intermediate point
+                k--;
+                if ((link.cascadeStartHorizontal && (k % 2 != 0)) ||
+                    (!link.cascadeStartHorizontal && !(k % 2 != 0)))
+                    points[l - 2] = new Point(points[l - 1].x, points[l - 2].y);
+                else
+                    points[l - 2] = new Point(points[l - 2].x, points[l - 1].y);
+
+                this.connection.points([points[1], points[2]]);
+            }
         }
 
     });
@@ -863,7 +895,7 @@ kendo_module({
          */
         allPoints: function () {
             var pts = [this.sourcePoint()];
-            if(this.definers){
+            if (this.definers) {
                 for (var k = 0; k < this.definers.length; k++) {
                     pts.push(this.definers[k].point);
                 }
@@ -1027,8 +1059,11 @@ kendo_module({
             sourcePoint, targetPoint,
             source = connection.source(),
             target = connection.target(),
-            autoSourceShape, autoTargetShape,
-            sourceConnector;
+            autoSourceShape,
+            autoTargetShape,
+            sourceConnector,
+            preferred = [0, 2, 3, 1, 4],
+            k;
         if (source instanceof Point) {
             sourcePoint = source;
         }
@@ -1063,8 +1098,17 @@ kendo_module({
             if (targetPoint) {
                 connection._resolvedSourceConnector = closestConnector(targetPoint, autoSourceShape);
             } else if (autoTargetShape) {
+
                 for (var i = 0; i < autoSourceShape.connectors.length; i++) {
-                    sourceConnector = autoSourceShape.connectors[i];
+                    if (autoSourceShape.connectors.length == 5) // presuming this means the default connectors
+                    {
+                        // will emphasize the vertical or horizontal direction, which matters when using the cascading router and distances which are equal for multiple connectors.
+                        k = preferred[i];
+                    }
+                    else {
+                        k = i;
+                    }
+                    sourceConnector = autoSourceShape.connectors[k];
                     if (sourceConnector.options.name !== AUTO) {
                         var currentSourcePoint = sourceConnector.position(),
                             currentTargetConnector = closestConnector(currentSourcePoint, autoTargetShape);
