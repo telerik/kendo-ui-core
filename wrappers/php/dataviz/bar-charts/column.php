@@ -19,17 +19,19 @@ $world = new \Kendo\Dataviz\UI\ChartSeriesItem();
 $world->name('World')
       ->data(array(1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727));
 
-$valueAxis = new \Kendo\Dataviz\UI\ChartValueAxisItem();
+$cateogrySeriesAxis = new \Kendo\Dataviz\UI\ChartCategoryAxisItem();
+$cateogrySeriesAxis->name("series-axis")
+             ->line(array('visible' => false));
 
+$categoryLabelsAxis = new \Kendo\Dataviz\UI\ChartCategoryAxisItem();
+$categoryLabelsAxis->name("series-labels")
+             ->categories(array(2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011));
+
+$valueAxis = new \Kendo\Dataviz\UI\ChartValueAxisItem();
 $valueAxis->labels(array('format' => '{0}%'))
           ->line(array('visible' => false))
-          ->axisCrossingValue(0);
-
-$categoryAxis = new \Kendo\Dataviz\UI\ChartCategoryAxisItem();
-$categoryAxis->categories(array(2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011))
-             ->line(array('visible' => false))
-             ->labels(array('padding' => array('top' => 145 )));
-
+          // Push the series-labels axis all the way down the value axis
+          ->axisCrossingValue(array(0, -PHP_INT_MAX));
 
 $tooltip = new \Kendo\Dataviz\UI\ChartTooltip();
 $tooltip->visible(true)
@@ -41,7 +43,8 @@ $chart->title(array('text' => 'Gross domestic product growth /GDP annual %/'))
       ->legend(array('position' => 'top'))
       ->addSeriesItem($india, $russia, $germany, $world)
       ->addValueAxisItem($valueAxis)
-      ->addCategoryAxisItem($categoryAxis)
+      ->addCategoryAxisItem($cateogrySeriesAxis)
+      ->addCategoryAxisItem($categoryLabelsAxis)
       ->tooltip($tooltip)
       ->seriesDefaults(array('type' => 'column'));
 

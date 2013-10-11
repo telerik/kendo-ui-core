@@ -24,15 +24,15 @@
                 <kendo:chart-seriesItem type="column" data="<%= new double[] {1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727 } %>" name="World" />
              </kendo:chart-series>
              <kendo:chart-categoryAxis>
-                <kendo:chart-categoryAxisItem categories="<%= categories %>">
+                <kendo:chart-categoryAxisItem name="series-axis">
                 	<kendo:chart-categoryAxisItem-line visible="false"/>
-                	<kendo:chart-categoryAxisItem-labels>
-                		<kendo:chart-categoryAxisItem-labels-padding top="145"/>
-                	</kendo:chart-categoryAxisItem-labels>
+                </kendo:chart-categoryAxisItem>
+                <kendo:chart-categoryAxisItem name="label-axis" categories="<%= categories %>">
                 </kendo:chart-categoryAxisItem>
              </kendo:chart-categoryAxis>
              <kendo:chart-valueAxis>
-                <kendo:chart-valueAxisItem>
+             	<!-- Push the series-labels axis all the way down the value axis -->
+                <kendo:chart-valueAxisItem axisCrossingValue="<%= new int[] {0, Integer.MIN_VALUE } %>">
                     <kendo:chart-valueAxisItem-labels format="{0}%" />
                 </kendo:chart-valueAxisItem>
              </kendo:chart-valueAxis>
