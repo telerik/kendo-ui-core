@@ -46,8 +46,18 @@
             }];
 
             $("#funnel-equal").kendoChart({
+                legend:{
+                   position:"top"
+                },
                 series: [{
                     type: "funnel",
+                    highlight:{
+                        border:{
+                            opacity: 1,
+                            width: 5,
+                            color: "black"
+                        }
+                    },
                     segmentHeight:"equal",
                     data: seriesData,
                     neckSize: 3
@@ -123,19 +133,19 @@
                             category: "enquiries"
                         }, {
                             value: 7,
-                            category: "enquiries"
+                            category: "some other"
                         } , {
                             value: 27,
-                            category: "enquiries"
+                            category: "foo"
                         } , {
                             value: 72,
-                            category: "enquiries"
+                            category: "bar"
                         } , {
                             value: 7,
-                            category: "enquiries"
+                            category: "baz"
                         } , {
                             value: 50,
-                            category: "enquiries"
+                            category: "test"
                         } ];
 
             $("#funnel-relation").kendoChart({

@@ -54,7 +54,8 @@ kendo_module({
                     legend: plotArea.options.legend,
                     neckSize: firstSeries.neckSize,
                     segmentHeight: firstSeries.segmentHeight,
-                    segmentSpacing:firstSeries.segmentSpacing
+                    segmentSpacing:firstSeries.segmentSpacing,
+                    highlight:firstSeries.highlight
                 });
 
             plotArea.appendChart(funnelChart);
@@ -73,7 +74,7 @@ kendo_module({
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
-            chart.segments = [];
+            chart.points = [];
             chart.labels = [];
             chart.legendItems = [];
             chart.render();
@@ -93,7 +94,7 @@ kendo_module({
         },
 
         formatPointValue:function(point,format){
-            return autoFormat(format,point.value);
+            return autoFormat(format,point.value)
         },
 
         render: function() {
@@ -157,7 +158,7 @@ kendo_module({
             var chart = this,
                 segment;
 
-            //chart.createLegendItem(value, fields);
+            chart.createLegendItem(value, fields);
 
             if (fields.visible !== false) {
                 var segmentOptions = deepExtend({}, fields.series);
@@ -167,7 +168,7 @@ kendo_module({
                 extend(segment, fields);
 
                 chart.append(segment);
-                chart.segments.push(segment);
+                chart.points.push(segment);
 
                 return segment;
             }
@@ -204,6 +205,44 @@ kendo_module({
                 chart.labels.push(textBox);
 
                 return textBox;
+            }
+        },
+        createLegendItem: function(value, point) {
+            var chart = this,
+                labelsOptions = (chart.options.legend || {}).labels || {},
+                inactiveItems = (chart.options.legend || {}).inactiveItems || {},
+                text, labelTemplate, markerColor, labelColor;
+
+            if (point && point.visibleInLegend !== false) {
+                text = point.category || "";
+                if ((labelsOptions || {}).template) {
+                    labelTemplate = template(labelsOptions.template);
+                    text = labelTemplate({
+                        text: text,
+                        series: point.series,
+                        dataItem: point.dataItem,
+                        percentage: point.percentage,
+                        value: value
+                    });
+                }
+
+                if (point.visible === false) {
+                    markerColor = (inactiveItems.markers || {}).color;
+                    labelColor = (inactiveItems.labels || {}).color;
+                } else {
+                    markerColor = (point.series || {}).color;
+                    labelColor = labelsOptions.color;
+                }
+
+                if (text) {
+                    chart.legendItems.push({
+                        pointIndex: point.index,
+                        text: text,
+                        series: point.series,
+                        markerColor: markerColor,
+                        labelColor: labelColor
+                    });
+                }
             }
         },
 
@@ -258,7 +297,7 @@ kendo_module({
         reflow: function(chartBox) {
             var chart = this,
                 options = chart.options,
-                segments = chart.segments,
+                segments = chart.points,
                 count = segments.length,
                 decreasingWidth = options.neckSize<=1,
                 i,
@@ -386,6 +425,12 @@ kendo_module({
             append(elements, ChartElement.fn.getViewElements.call(segment, view));
 
             return elements;
+        },
+
+        highlightOverlay: function(view, options) {
+            var element = view.createPolyline(this.points,true,options)
+
+            return element;
         },
 
         tooltipAnchor: function(tooltipWidth) {
