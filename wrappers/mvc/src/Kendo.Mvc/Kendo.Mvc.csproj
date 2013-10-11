@@ -1074,6 +1074,7 @@
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewMultiDayBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewWeekBuilder.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEventController.cs" />
+    <Compile Include="UI\Scheduler\SchedulerMobileType.cs" />
     <Compile Include="UI\Scheduler\SchedulerViewDataContainer.cs" />
     <Compile Include="UI\Scheduler\SchedulerGroupOrientation.cs" />
     <Compile Include="UI\Scheduler\SchedulerMessages.cs" />
@@ -1110,7 +1111,7 @@
     <Compile Include="UI\Scheduler\Scheduler.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerViewDay.cs" />
     <Compile Include="UI\Scheduler\SchedulerResource.cs" />
-    <Compile Include="UI\Scheduler\SchedulerViewType.cs" />
+    <Compile Include="UI\Scheduler\SchedulerViewMode.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerViewMultiDay.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerViewWeek.cs" />
     <Compile Include="UI\SecurityTrimming.cs" />

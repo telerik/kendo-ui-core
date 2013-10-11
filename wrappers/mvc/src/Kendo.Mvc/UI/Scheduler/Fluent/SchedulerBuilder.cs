@@ -40,6 +40,27 @@
         }
 
         /// <summary>
+        /// Enables the adaptive rendering when viewed on mobile browser
+        /// </summary>
+        public SchedulerBuilder<TModel> Mobile()
+        {
+            Component.Mobile = SchedulerMobileMode.Auto;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Used to determine if adaptive rendering should be used when viewed on mobile browser
+        /// </summary>
+        /// <param name="type"></param>
+        public SchedulerBuilder<TModel> Mobile(SchedulerMobileMode type)
+        {
+            Component.Mobile = type;
+
+            return this;
+        }
+
+        /// <summary>
         /// The start time of the week and day views. The scheduler will display events starting after the startTime.
         /// </summary>
         /// <param name="startTime">The startTime.</param>

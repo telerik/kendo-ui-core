@@ -210,6 +210,12 @@
             set;
         }
 
+        public SchedulerMobileMode Mobile 
+        { 
+            get; 
+            set; 
+        }
+
         public SchedulerEditableSettings<TModel> Editable
         {
             get;
@@ -415,6 +421,18 @@
             if (group.Count > 0)
             {
                 options["group"] = group;
+            }
+
+            if (Mobile != SchedulerMobileMode.Disabled)
+            {
+                if (Mobile == SchedulerMobileMode.Auto)
+                {
+                    options["mobile"] = true;
+                }
+                else
+                {
+                    options["mobile"] = Mobile.ToString().ToLowerInvariant();
+                }
             }
 
             DataSource.Transport.StringifyDates = true;
