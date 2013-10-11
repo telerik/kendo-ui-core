@@ -133,7 +133,14 @@
                 wrapInner.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function () {
                     wrapInner.replaceWith(html);
 
-                    $("#themeWrap").show().children("a").attr("href", $(".documentation-link").attr("href"));
+                    var href = $(".documentation-link").attr("href");
+
+                    if (href) {
+                        $("#themeWrap").show().children("a").css("display", "inline-block").attr("href", href);
+                    } else {
+                        $("#themeWrap").children("a").hide();
+                    }
+
 
                     setTimeout(function () {
                         $("#exampleWrap")

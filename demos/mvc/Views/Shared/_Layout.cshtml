@@ -103,10 +103,13 @@
     </div>
 
     <div class="flowers-left"><div class="flowers-right">
-        <div class='centerWrap floatWrap@(Request.Path.IndexOf("overview") != -1 || Request.Path.IndexOf("dashboards") > -1 ? " widgetOverview" : "")@(ViewBag.suite == "mobile" ? " mobileDemos" : "")' id="mainWrap">
-            <div id="themeWrap" style="@(Request.Path.IndexOf("overview") > -1 || ViewBag.CurrentExample.Url.IndexOf("dashboard") != -1  ? "display:none" : "")">
+@{
+var ignored = Request.Path.IndexOf("overview") > -1 ||  Request.Path.IndexOf("dashboard") > -1;
+}
+        <div class='centerWrap floatWrap@(ignored ?" widgetOverview" : "")@(ViewBag.suite == "mobile" ? " mobileDemos" : "")' id="mainWrap">
+            <div id="themeWrap" style="@(ignored ? "display:none" : "")">
                 <span id="themeChooser" style="@(ViewBag.suite == "mobile" ? "display:none" : "")"></span>
-                <a href="http://docs.kendoui.com/api/@ViewBag.Documentation" class="get-kendoui" style="display:inline-block">Documentation</a>
+                <a href="http://docs.kendoui.com/api/@ViewBag.Documentation" class="get-kendoui" style="display:@(ignored || string.IsNullOrEmpty(ViewBag.Documentation) ? "none": "inline-block")">Documentation</a>
             </div>
 
             <div id="mainWrapInner" class="floatWrap clear">
