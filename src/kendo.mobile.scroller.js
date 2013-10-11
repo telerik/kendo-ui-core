@@ -171,7 +171,7 @@ kendo_module({
         },
 
         tick: function() {
-            this._updateOrigin();
+            this._updateCoordinates();
             this.moveTo(this.origin);
         },
 
@@ -183,7 +183,13 @@ kendo_module({
             this.moveTo(this.destination);
         },
 
-        _updateOrigin: function() {
+        setCoordinates: function(from, to) {
+            this.offset = {};
+            this.origin = from;
+            this.destination = to;
+        },
+
+        _updateCoordinates: function() {
             this.offset = {
                 x: (this.destination.x - this.origin.x) / 4,
                 y: (this.destination.y - this.origin.y) / 4
@@ -452,8 +458,10 @@ kendo_module({
         },
 
         animatedScrollTo: function(x, y) {
-            this.animatedScroller.origin = { x: this.movable.x, y: this.movable.y };
-            this.animatedScroller.destination = { x: x, y: y };
+            var from = { x: this.movable.x, y: this.movable.y },
+                to = { x: x, y: y };
+
+            this.animatedScroller.setCoordinates(from, to);
             this.animatedScroller.start();
         },
 
