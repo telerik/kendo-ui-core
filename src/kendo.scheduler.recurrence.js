@@ -1629,7 +1629,7 @@ kendo_module({
         },
 
         options: {
-            name: "RecurrenceEditor",
+            name: "RecurrenceEditor"
         },
 
         events: [ "change" ],
