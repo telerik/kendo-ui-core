@@ -15,6 +15,8 @@
         <script src="../../src/kendo.window.js"></script>
         <script src="../../src/kendo.scheduler.view.js"></script>
         <script src="../../src/kendo.scheduler.dayview.js"></script>
+        <script src="../../src/kendo.scheduler.agendaview.js"></script>
+        <script src="../../src/kendo.scheduler.monthview.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -619,6 +621,112 @@
                 });
 
                 scheduler.toolbar.find(".k-view-week").click();
+            });
+
+            test("slotByPosition function returns null when the _slotByPosition is not available in view", function() {
+                var div = $(container).width(500).height(1000);
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    views: ["agenda"],
+                    dataSource: []
+                });
+
+                equal(scheduler.slotByPosition(0,0), null);
+            });
+
+            test("slotByElement function returns null when the _slotByPosition is not available in view", function() {
+                var div = $(container).width(500).height(1000);
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    views: ["agenda"],
+                    date: new Date("Thu Jun 27 2013 00:00:00"),
+                    dataSource: [
+                        {
+                            title: "Foo",
+                            description: "Bar",
+                            start: new Date("Thu Jun 27 2013 01:00:00"),
+                            end: new Date("Thu Jun 27 2013 01:30:00"),
+                            isAllDay: false
+                        }
+                    ]
+                });
+
+                var firstSlot = scheduler.view().content.find("tr:first td:first");
+                equal(scheduler.slotByElement(firstSlot), null);
+            });
+
+            test("slotByPosition function returns null when there is no slot on current position", function() {
+                var div = $(container).width(500).height(1000);
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    views: ["day"],
+                    dataSource: []
+                });
+
+                equal(scheduler.slotByPosition(0,0), null);
+            });
+
+            test("slotByPosition function returns slot correctly on day view", function() {
+                var div = $(container).width(500).height(1000);
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    views: ["day"],
+                    dataSource: []
+                });
+
+                var firstSlotOffset = scheduler.view().content.find("tr:first td:first").offset();
+                var slot = scheduler.slotByPosition(firstSlotOffset.left + 1, firstSlotOffset.top + 1);
+
+                ok(slot !== null && typeof slot == "object");
+            });
+
+            test("slotByPosition function returns slot correctly on week view", function() {
+                var div = $(container).width(500).height(1000);
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    views: ["week"],
+                    dataSource: []
+                });
+
+                var firstSlotOffset = scheduler.view().content.find("tr:first td:first").offset();
+                var slot = scheduler.slotByPosition(firstSlotOffset.left + 1, firstSlotOffset.top + 1);
+
+                ok(slot !== null && typeof slot == "object");
+            });
+
+           test("slotByPosition function returns slot correctly on month view", function() {
+                var div = $(container).width(500).height(1000);
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    views: ["month"],
+                    dataSource: []
+                });
+
+                var firstSlotOffset = scheduler.view().content.find("tr:first td:first").offset();
+                var slot = scheduler.slotByPosition(firstSlotOffset.left + 1, firstSlotOffset.top + 1);
+
+                ok(slot !== null && typeof slot == "object");
+            });
+
+           test("slotByPosition function returns Date objects in startDate and endDate fields", function() {
+                var div = $(container).width(500).height(1000);
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    views: ["month"],
+                    dataSource: []
+                });
+
+                var firstSlotOffset = scheduler.view().content.find("tr:first td:first").offset();
+                var slot = scheduler.slotByPosition(firstSlotOffset.left + 1, firstSlotOffset.top + 1);
+
+                ok(slot.startDate instanceof Date);
+                ok(slot.endDate instanceof Date);
+            });
+
+            test("slotByElement function returns object when JavaScript element is passed", function() {
+                var div = $(container).width(500).height(1000);
+                var scheduler = new kendo.ui.Scheduler(div, {
+                    views: ["day"],
+                    dataSource: []
+                });
+
+                var firstSlot = scheduler.view().content.find("tr:first td:first")[0];
+                var slot = scheduler.slotByElement(firstSlot);
+
+                ok(slot !== null && typeof slot == "object");
             });
 
         </script>

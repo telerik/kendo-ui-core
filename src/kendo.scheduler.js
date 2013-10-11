@@ -2383,6 +2383,32 @@ kendo_module({
             view.render(this._data);
 
             this.trigger("dataBound");
+        },
+
+        slotByPosition: function(x, y) {
+            var view = this.view();
+
+            if(!view._slotByPosition) {
+                return null;
+            }
+
+            var slot = view._slotByPosition(x, y);
+
+            if(!slot) {
+                return null;
+            }
+
+            return {
+                startDate: slot.startDate(),
+                endDate: slot.endDate(),
+                element: slot.element,
+                isDaySlot: slot.isDaySlot
+            };
+        },
+
+        slotByElement: function(element) {
+            var offset = $(element).offset();
+            return this.slotByPosition(offset.left, offset.top);
         }
     });
 
