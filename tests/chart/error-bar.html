@@ -264,7 +264,7 @@
                         actual;                        
                     
                     for(var idx = 0; idx < length; idx++){
-                        actual = errorRangeCalculator.getErrorRange(testData[idx].value, testData[idx], testData);
+                        actual = errorRangeCalculator.getErrorRange(testData[idx].value);
                         if(actual.low !== expected[idx].low || actual.high !== expected[idx].high){
                             return false;
                         }                        
@@ -295,29 +295,7 @@
                         errorRangeCalculator = new ErrorRangeCalculator(value, testSeries, "value");
                    
                     ok(correctErrorRanges(errorRangeCalculator, testDataWidthZeros, expectedRanges));                 
-                }); 
-                
-                test("custom function is called with value, item and data as arguments", function() {
-                    var correctArguments = false,
-                        customRange = function(){
-                            correctArguments = arguments[0] === testData[0].value && 
-                                arguments[1] === testData[0] && arguments[2] === testData;
-                            return [0,0];
-                        },                        
-                        errorRangeCalculator = new ErrorRangeCalculator(customRange, testSeries, "value");
-                        errorRangeCalculator.getErrorRange(testData[0].value, testData[0], testData);
-                    ok(correctArguments);                 
-                });
-               
-                test("correct error ranges with custom function", function() {
-                    var customRange = function(value){
-                            return [value - 1, value + 2];
-                        },
-                        expectedRanges = [new ErrorRange(0,3), new ErrorRange(9,12), new ErrorRange(-1,2), new ErrorRange(-2,1), new ErrorRange(-1,2)],                         
-                        errorRangeCalculator = new ErrorRangeCalculator(customRange, testSeries, "value");
-                   
-                    ok(correctErrorRanges(errorRangeCalculator, testDataWidthZeros, expectedRanges));                 
-                }); 
+                });                                
 
                 test("standard deviation is calculated only once", function() {
                     var calls = 0,
@@ -328,7 +306,7 @@
                         
                     errorRangeCalculator = new ErrorRangeCalculator("stddev", testSeries, "value");
                     for(var idx = 0; idx < testSeries.data.length; idx++){                        
-                        errorRangeCalculator.getErrorRange(testSeries.data[idx].value, testSeries.data[idx], testSeries.data);
+                        errorRangeCalculator.getErrorRange(testSeries.data[idx].value);
                     }
                     equal(calls, 1); 
                     methodMocker.restore(ErrorRangeCalculator.fn, "getStandardDeviation");                                        
@@ -361,7 +339,7 @@
                         
                     errorRangeCalculator = new ErrorRangeCalculator("stderr", testSeries, "value");
                     for(var idx = 0; idx < testSeries.data.length; idx++){                        
-                        errorRangeCalculator.getErrorRange(testSeries.data[idx].value, testSeries.data[idx], testSeries.data);
+                        errorRangeCalculator.getErrorRange(testSeries.data[idx].value);
                     }
                     equal(calls, 1); 
                     methodMocker.restore(ErrorRangeCalculator.fn, "getStandardError");                                        
@@ -502,8 +480,24 @@
                     equal(xRanges.min, expectedXAxisMin, "xAxis min range is updated");
                     equal(yRanges.max, expectedYAxisMax, "yAxis max range is updated");
                     equal(yRanges.min, expectedYAxisMin, "yAxis min range is updated");
-                }); 
+                });             
 
+                test("correct error ranges with custom function when using scatter chart", function() {
+                    var customXRange = function(data){
+                            return [xErrorValue, xErrorValue];
+                        }, 
+                        customYRange = function(data){
+                            return [yErrorValue, yErrorValue];
+                        }, 
+                        scatterChart = new dataviz.ScatterChart({}, {series: [{ data: [[1, 1], [2, 2]], xAxis: xAxisName, yAxis: yAxisName, errorBars: { xValue: customXRange, yValue: customYRange }, labels: {}, type: "scatter" }]}),
+                        seriesData = dataArraySeries.data,
+                        points = scatterChart.points,
+                        xGetter = function(d) {return d[0]},
+                        yGetter = function(d) {return d[1]};
+                                       
+                    ok(addedScatterPointErrorBars(points, seriesData, xGetter, yGetter));               
+                });                 
+                
                 // ------------------------------------------------------------
                 
                 module("categorical chart error bar", {
@@ -715,7 +709,19 @@
                         getter = function(d){return d.foo};                        
         
                     ok(addedCategoricalPointErrorBar(points, testDataWidthZeros, getter, true));
-                }); 
+                });
+
+                test("errorBars are correctly added when using custom function and categoricalChart", function() {
+                    var customRange = function(data){
+                            return [errorValue, errorValue];
+                        }, 
+                        data = [{value: 1},{value: 2},{value: 3}],
+                        chart = new dataviz.BarChart(categoricalPlotArea, {series: [{type: BAR, data: data, errorBars: {value: customRange}}],invertAxes: true}),
+                        points = chart.points,
+                        getter = valueGetter;
+                                 
+                    ok(addedCategoricalPointErrorBar(points, data, getter, false));               
+                });                
  
                 test("value ranges are correctly updated for array data", function() {
                     var chart = createCategoricalChart([categoricalArrayData], BAR),                       
@@ -1059,7 +1065,41 @@
                     elements = errorBar.getViewElements(view);
                   
                     ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);                    
-                });                
+                });
+
+                test("color is taken from errorbar options when specified for scatter error bar", function(){             
+                    var targetBox = new Box(5,5,9, 9),                        
+                        errorBar = new ScatterErrorBar(1,2, false, xyPlotAreaMock, {
+                            endCaps: true,
+                            color: "black"
+                        }),
+                        view = new ViewStub(),
+                        options = $.extend({}, expectedOptions, {stroke: "black"}),
+                        expectedElements = [{x1: 1, x2: 2, y1: 7, y2: 7, options: options}, {x1: 1, x2: 1, y1: 5, y2: 9, options: options},
+                            {x1: 2, x2: 2, y1: 5, y2: 9, options: options}],
+                        elements;
+                    errorBar.reflow(targetBox);
+                    elements = errorBar.getViewElements(view);
+                  
+                    ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);                    
+                });
+
+                test("color is taken from errorbar options when specified for categorical error bar", function(){                    
+                    var targetBox = new Box(5,5,9, 9),                        
+                        errorBar = new CategoricalErrorBar(1,2, true, categoricalPlotAreaMock, {
+                            endCaps: true,
+                            color: "black"
+                        }),
+                        view = new ViewStub(),
+                        options = $.extend({}, expectedOptions, {stroke: "black"}),
+                        expectedElements = [{x1: 7, x2: 7, y1: 1, y2: 2, options: options}, {x1: 5, x2: 9, y1: 1, y2: 1, options: options},
+                            {x1: 5, x2: 9, y1: 2, y2: 2, options: options}],
+                        elements;
+                    errorBar.reflow(targetBox);
+                    elements = errorBar.getViewElements(view);
+                  
+                    ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);                    
+                });                 
                 
                 test("lines are correctly created for a vertical categorical error bar", function(){                    
                     var targetBox = new Box(5,5,9, 9),                        

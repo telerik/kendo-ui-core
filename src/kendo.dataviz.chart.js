@@ -3067,7 +3067,7 @@ kendo_module({
             return valueGetter;
         },
         
-        getErrorRange: function(pointValue, item, data) {
+        getErrorRange: function(pointValue) {
             var that = this,
                 errorValue = that.errorValue,
                 low,
@@ -3082,17 +3082,13 @@ kendo_module({
             if (that.globalRange) {
                 return that.globalRange(pointValue);
             }
-
+            
             if (isArray(errorValue)) {
                 low = pointValue - errorValue[0];
                 high = pointValue + errorValue[1];
             } else if (isNumber(value = parseFloat(errorValue))) {
                 low = pointValue - value;
                 high = pointValue + value;
-            } else if (typeof errorValue === "function") {
-                var customResult = errorValue(pointValue, item, data);
-                low = customResult[0];
-                high = customResult[1];
             } else if ((value = that.percentRegex.exec(errorValue))) {
                 var percentValue = pointValue * (parseFloat(value[1]) / 100);
                 low = pointValue - math.abs(percentValue);
@@ -3168,18 +3164,18 @@ kendo_module({
                 value = point.value,
                 series = point.series,
                 seriesIx = point.seriesIx,
+                errorBars = point.options.errorBars,
                 errorRange;
             
             if (isNumber(data.fields[ERROR_LOW_FIELD]) &&
                 isNumber(data.fields[ERROR_HIGH_FIELD])) {                 
                 errorRange = {low: data.fields[ERROR_LOW_FIELD], high: data.fields[ERROR_HIGH_FIELD]};              
-            } else if (series.errorBars) {
+            } else if (errorBars) {
                 chart.seriesErrorRanges = chart.seriesErrorRanges || [];                    
                 chart.seriesErrorRanges[seriesIx] = chart.seriesErrorRanges[seriesIx] ||
-                    new ErrorRangeCalculator(series.errorBars.value, series, VALUE);
+                    new ErrorRangeCalculator(errorBars.value, series, VALUE);
                     
-                errorRange = chart.seriesErrorRanges[seriesIx].getErrorRange(
-                    value, point.dataItem, series.data);
+                errorRange = chart.seriesErrorRanges[seriesIx].getErrorRange(value);
             }  
 
             if (errorRange) { 
@@ -4065,7 +4061,7 @@ kendo_module({
                 options = errorBar.options,
                 line = options.line,
                 lineOptions = {
-                    stroke: line.color,
+                    stroke: options.color || line.color,
                     strokeWidth: line.width,
                     zIndex: line.zIndex,
                     align: false,
@@ -4089,6 +4085,7 @@ kendo_module({
                 delay: INITIAL_ANIMATION_DURATION
             },
             endCaps: true,
+            color: null,
             line: {
                 color: "red",
                 width: 1,
@@ -5116,7 +5113,7 @@ kendo_module({
                 highField = field + "ErrorHigh",
                 seriesIx = fields.seriesIx,
                 series = fields.series,                
-                errorBars = series.errorBars;       
+                errorBars = point.options.errorBars;       
 
             if (isNumber(value)) {                    
                 if (isNumber(fields[lowField]) && isNumber(fields[highField])) {
@@ -5129,7 +5126,7 @@ kendo_module({
                     chart.seriesErrorRanges[field][seriesIx] = chart.seriesErrorRanges[field][seriesIx] ||
                         new ErrorRangeCalculator(errorBars[valueErrorField], series, field);
 
-                    errorRange = chart.seriesErrorRanges[field][seriesIx].getErrorRange(value, point.dataItem, series.data);
+                    errorRange = chart.seriesErrorRanges[field][seriesIx].getErrorRange(value);
                     chart.addPointErrorBar(errorRange.low, errorRange.high, point, field, series, errorBars);
                 }
             }                                  
