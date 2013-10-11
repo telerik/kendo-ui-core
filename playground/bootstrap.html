@@ -25,6 +25,7 @@
         <script src="../src/kendo.pager.js"></script>
         <script src="../src/kendo.editable.js"></script>
         <script src="../src/kendo.grid.js"></script>
+        <script src="../src/kendo.listview.js"></script>
         <script src="../src/kendo.panelbar.js"></script>
         <script src="../src/kendo.slider.js"></script>
         <script src="../demos/mvc/content/shared/js/less.js"></script>
@@ -128,7 +129,6 @@
         </header>
 
         <div class="container">
-            <h3>Menu</h3>
             <ul id="menu">
                 <li>Dashboard</li>
                 <li>Orders</li>
@@ -148,8 +148,28 @@
 
             </div>
 
-            <h3>Grid</h3>
             <div id="grid"></div>
+
+            <section>
+                <h2>Latest photo uploads</h2>
+
+                <label>
+                    Thumbnail size
+                    <input type="range" id="thumbnail-size" />
+                </label>
+            </section>
+
+            <script id="listview-template" type="x-kendo-template">
+                <figure>
+                    <img src="#= src #" />
+                    <figcaption>
+                        <h3>Photo title</h3>
+                        <p>Longer description of the photo<br /> on two or more lines</p>
+                    </figcaption>
+                </figure>
+            </script>
+
+            <div id="listview"></div>
 
             <section class="panel">
                 <h2><abbr title="Frequently Asked Questions">FAQ</abbr></h2>
@@ -310,7 +330,6 @@
             $("#grid").kendoGrid({
                 dataSource: dataSource,
                 pageable: true,
-                height: 430,
                 toolbar: ["create"],
                 columns: [
                     "ProductName",
@@ -323,6 +342,18 @@
             });
 
             $("#menu").kendoMenu({ openOnClick: true });
+
+            $("#listview").kendoListView({
+                dataSource:  [
+                    { src: "bootstrap/photo.png" },
+                    { src: "bootstrap/photo.png" },
+                    { src: "bootstrap/photo.png" },
+                    { src: "bootstrap/photo.png" },
+                    { src: "bootstrap/photo.png" },
+                    { src: "bootstrap/photo.png" }
+                ],
+                template: $("#listview-template").html()
+            });
 
             $("#panelbar").kendoPanelBar();
         </script>
