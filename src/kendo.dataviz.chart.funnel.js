@@ -94,7 +94,7 @@ kendo_module({
         },
 
         formatPointValue:function(point,format){
-            return autoFormat(format,point.value);
+            return autoFormat(format,point.value)
         },
 
         render: function() {
@@ -432,6 +432,7 @@ kendo_module({
             return elements;
         },
 
+<<<<<<< HEAD
         highlightOverlay: function(view, opt) {
             var options = this.options,
                 hlOptions = options.highlight || {};
@@ -448,6 +449,11 @@ kendo_module({
                 data: { modelId: options.modelId }
             });
             var element = view.createPolyline(this.points,true,calcOptions);
+=======
+        highlightOverlay: function(view, options) {
+            var element = view.createPolyline(this.points,true,options)
+
+>>>>>>> f8b462b... Add legend basic support
             return element;
         },
 
