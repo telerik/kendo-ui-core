@@ -25,7 +25,7 @@
         <script src="../src/kendo.pager.js"></script>
         <script src="../src/kendo.editable.js"></script>
         <script src="../src/kendo.grid.js"></script>
-        <script src="../src/kendo.tooltip.js"></script>
+        <script src="../src/kendo.panelbar.js"></script>
         <script src="../src/kendo.slider.js"></script>
         <script src="../demos/mvc/content/shared/js/less.js"></script>
 
@@ -130,47 +130,59 @@
         <div class="container">
             <h3>Menu</h3>
             <ul id="menu">
-                <li> Products
-                    <ul>
-                        <li> Furniture
-                            <ul>
-                                <li>Tables &amp; Chairs</li>
-                                <li>Sofas</li>
-                                <li>Occasional Furniture</li>
-                                <li>Childerns Furniture</li>
-                                <li>Beds</li>
-                            </ul>
-
-
-                        </li>
-                        <li> Decor
-                            <ul>
-                                <li>Bed Linen</li>
-                                <li>Throws</li>
-                                <li>Curtains &amp; Blinds</li>
-                                <li>Rugs</li>
-                                <li>Carpets</li>
-                            </ul>
-                        </li>
+                <li>Dashboard</li>
+                <li>Orders</li>
+                <li>Products
+                        <ul>
+                        <li>Tables &amp; Chairs</li>
+                        <li>Sofas</li>
+                        <li>Occasional Furniture</li>
+                        <li>Childerns Furniture</li>
+                        <li>Beds</li>
                     </ul>
                 </li>
-                <li> Blog </li>
-                <li> Company </li>
-                <li> Events </li>
-                <li disabled="disabled"> News </li>
+                <li>Customers</li>
             </ul>
+
+            <div id="profile">
+
+            </div>
 
             <h3>Grid</h3>
             <div id="grid"></div>
 
-            <h3>ToolTip</h3>
-            <div id="tooltips">
-                <button title="Click me!" class="k-button">Kendo button + tooltip</button>
-                <button title="Click me!" class="btn">Bootstrap button + tooltip</button>
-            </div>
+            <section class="panel">
+                <h2><abbr title="Frequently Asked Questions">FAQ</abbr></h2>
 
-            <br />
-            <button class="btn btn-lg btn-primary" type="submit">Bootstrap button</button>
+                <ul id="panelbar">
+                    <li class="k-state-active">
+                        What is Kendo UI?
+                        <div>
+                            <p>Kendo UI is great!</p>
+                        </div>
+                    </li>
+                    <li>
+                        Who should use Kendo UI?
+                        <div>
+                            <p>Everybody who considers themselves great!</p>
+                        </div>
+                    </li>
+                    <li>
+                        What are Kendo UI widgets?
+                        <div>
+                            <p>They are great!</p>
+                        </div>
+                    </li>
+                    <li>
+                        How do you use Kendo UI?
+                        <div>
+                            <p>How should I know!</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <footer>Copyright &copy; 2013 <a href="http://telerik.com/">Telerik Inc</a>. All rights reserved.</footer>
         </div>
 
         <script>
@@ -312,9 +324,7 @@
 
             $("#menu").kendoMenu({ openOnClick: true });
 
-            $("#tooltips")
-                .find(".k-button").kendoTooltip({ position: "top" }).end()
-                .find(".btn").tooltip();
+            $("#panelbar").kendoPanelBar();
         </script>
     </body>
 </html>
