@@ -84,7 +84,8 @@ kendo_module({
         var defaultMobileTemplate =
             '<div data-#=ns#role="view" data-#=ns#init-widgets="false">'+
                 '<div data-#=ns#role="header">'+
-                    '<button class="k-button k-cancel">Cancel</button>'+
+                    '<button class="k-button k-cancel">#=messages.cancel#</button>'+
+                    '#=field#'+
                     '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
                 '</div>'+
                 '<form class="k-filter-menu k-secondary">'+
@@ -109,10 +110,8 @@ kendo_module({
                             '#}#' +
                         '</label>'+
                         '#if(extra){#'+
-                            '<select class="k-filter-and" data-#=ns#bind="value: logic">'+
-                                '<option value="and">#=messages.and#</option>'+
-                                '<option value="or">#=messages.or#</option>'+
-                            '</select>'+
+                            '<label><input type="radio" name="logic" data-#=ns#bind="checked: logic" value="and" />#=messages.and#</label>'+
+                            '<label><input type="radio" name="logic" data-#=ns#bind="checked: logic" value="or" />#=messages.or#</label>'+
                             '<label>#=messages.operator#'+
                                 '<select data-#=ns#bind="value: filters[1].operator">'+
                                     '#for(var op in operators){#'+
@@ -143,7 +142,8 @@ kendo_module({
     var booleanMobileTemplate =
             '<div data-#=ns#role="view" data-#=ns#init-widgets="false">'+
                 '<div data-#=ns#role="header">'+
-                    '<button class="k-button k-cancel">Cancel</button>'+
+                    '<button class="k-button k-cancel">#=messages.cancel#</button>'+
+                    '#=field#'+
                     '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
                 '</div>'+
                 '<form class="k-filter-menu k-secondary">'+
@@ -673,7 +673,8 @@ kendo_module({
                 or: "Or",
                 selectValue: "-Select value-",
                 operator: "Operator",
-                value: "Value"
+                value: "Value",
+                cancel: "Cancel"
             }
         }
     });
