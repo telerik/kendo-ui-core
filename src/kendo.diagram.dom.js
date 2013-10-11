@@ -50,6 +50,7 @@ kendo_module({
         ERROR = "error",
         AUTO = "Auto",
         TOP = "Top", RIGHT = "Right", LEFT = "Left", BOTTOM = "Bottom",
+        HITTESTDISTANCE = 10,
         bindings = {
             text: "dataTextField",
             url: "dataUrlField",
@@ -526,8 +527,36 @@ kendo_module({
             ConnectionRouterBase.fn.init.call(that);
             this.connection = connection;
         },
-        getBounds: function () {
+        /**
+         * Hit testing for polyline paths.
+         */
+        hitTest: function (p) {
+            var rec = this.getBounds().inflate(10);
+            if (!rec.contains(p)) return false;
+            return kendo.diagram.Geometry.distanceToPolyline(p, this.connection.allPoints()) < HITTESTDISTANCE;
+        },
 
+        /**
+         * Bounds of a polyline.
+         * @returns {kendo.diagram.Rect}
+         */
+        getBounds: function () {
+            var points = this.connection.allPoints(),
+                s = points[0],
+                e = points[points.length - 1],
+                right = Math.max(s.x, e.x),
+                left = Math.min(s.x, e.x),
+                top = Math.min(s.y, e.y),
+                bottom = Math.max(s.y, e.y);
+
+            for (var i = 1; i < points.length - 1; ++i) {
+                right = Math.max(right, points[i].x);
+                left = Math.min(left, points[i].x);
+                top = Math.min(top, points[i].y);
+                bottom = Math.max(bottom, points[i].y);
+            }
+
+            return new Rect(left, top, right - left, bottom - top);
         }
     });
 
@@ -1774,7 +1803,7 @@ kendo_module({
                         shape = addShape(node),
                         parentShape = addShape(parent);
                     if (parentShape && !that.connected(parentShape, shape)) { // check if connected to not duplicate connections.
-                        var con = that.connect(parentShape , shape );
+                        var con = that.connect(parentShape, shape);
                         //var con = that.connect(parentShape.connectors[2], shape.connectors[0]);
                         con.type(CASCADING);
                     }

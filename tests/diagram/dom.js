@@ -451,12 +451,13 @@ test('Connection definers', function () {
     ok(con.targetDefiner().left.x === 478 && con.targetDefiner().left.y === 102);
 });
 
-test('Connection Cascading', function () {
-    var con = new kendo.diagram.Connection(new Point(10, 20), new Point(100, 200));
-    con.type( "Cascading");
-    con.refresh();
-    ok(con.points().length>0);
+test('Connection bounds', function () {
+    var con = new kendo.diagram.Connection(new Point(0, 0), new Point(500, 500));
+    con.points([new Point(25,10), new Point(101,88), new Point(250,37), new Point(100,100), new Point(301,322), new Point(660,770)]);
+    var bounds = con._router.getBounds();
+    ok(bounds.x===0 && bounds.y===0 && bounds.width===660 && bounds.height===770);
 });
+
 QUnit.module("Serialization - Cut/Copy/Paste", {
     setup: function () {
         $("#canvas").kendoDiagram();

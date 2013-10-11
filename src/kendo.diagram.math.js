@@ -644,6 +644,70 @@ kendo_module({
         return result;
     }
 
+    var Geometry = {
+
+        /**
+         * Returns the squared distance to the line defined by the two given Points.
+         * @param p An arbitrary Point.
+         * @param a An endpoint of the line or segment.
+         * @param b The complementary endpoint of the line or segment.
+         */
+        _distanceToLineSquared: function (p, a, b) {
+            function d2(pt1, pt2) {
+                return (pt1.x - pt2.x) * (pt1.x - pt2.x) + (pt1.y - pt2.y) * (pt1.y - pt2.y);
+            }
+
+            if (a === b) { // returns the distance of p to a
+                return d2(p, a);
+            }
+
+            var vx = b.x - a.x,
+                vy = b.y - a.y,
+                dot = (p.x - a.x) * vx + (p.y - a.y) * vy;
+            if (dot < 0) {
+                return d2(a, p); // sits on side of a
+            }
+
+            dot = (b.x - p.x) * vx + (b.y - p.y) * vy;
+            if (dot < 0) {
+                return d2(b, p); // sits on side of b
+            }
+            // regular case
+            return dot * dot / (vx * vx + vy * vy);
+        },
+
+        /**
+         * Returns the distance to the line defined by the two given Points.
+         * @param p An arbitrary Point.
+         * @param a An endpoint of the line or segment.
+         * @param b The complementary endpoint of the line or segment.
+         */
+        distanceToLine: function (p, a, b) {
+            return Math.sqrt(_distanceToLineSquared(p, a, b));
+        },
+
+        /**
+         * Returns the distance of the given points to the polyline defined by the points.
+         * @param p An arbitrary point.
+         * @param points The points defining the polyline.
+         * @returns {Number}
+         */
+        distanceToPolyline: function (p, points) {
+            var minimum = Number.MAX_VALUE;
+            if (Utils.isUndefined(points) || points.length === 0) return Number.MAX_VALUE;
+            for (var s = 0; s < points.length - 1; s++) {
+                var p1 = points[s];
+                var p2 = points[s + 1];
+
+                var d = _distanceToLineSquared(p, p1, p2);
+                if (d < minimum) {
+                    minimum = d;
+                }
+            }
+            return Math.sqrt(minimum);
+        }
+    };
+
     /*---------------The HashTable structure--------------------------------*/
 
     /**
@@ -2929,6 +2993,7 @@ kendo_module({
 
         Point: Point,
         Intersect: Intersect,
+        Geometry : Geometry,
         Rect: Rect,
         Size: Size,
         RectAlign: RectAlign,
