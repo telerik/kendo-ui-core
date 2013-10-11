@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drawer Proof of concept</title>
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <script src="../../src/kendo.mobile.drawer.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <style>
+            .km-drawer .km-insetcontent {
+                background: black;
+                color: white;
+            }
+        </style>
+</head>
+<body>
+<!--testNav-->
+<div data-role="view" id="pageOne" data-title="Page One">
+    <div data-role="content"> <a data-role="button" style="margin: 40px 10%; width: 80%; box-sizing: border-box" href='#pageTwo'>To page 2.</a>
+
+    </div>
+</div>
+<!-- -->
+<!--testContent-->
+<div data-role="view" id="pageTwo" data-title="Page Two">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim augue turpis, vulputate vulputate mauris tempus id. Quisque sit amet laoreet odio, sed facilisis mi. Duis eu mattis nulla, non ullamcorper sem. Nulla tristique suscipit dolor nec cursus. In tincidunt leo ut enim imperdiet, vitae mattis urna tempus. Curabitur congue metus nisl, eget iaculis lectus aliquam quis. Sed porttitor molestie dapibus.</p>
+    <p>Morbi tincidunt eu sapien sit amet tincidunt. Sed interdum orci lorem, nec lacinia augue tincidunt in. Vestibulum congue ultricies risus nec commodo. Vivamus vel euismod enim. Nunc blandit ut lacus vitae volutpat. Nulla sem mauris, egestas non tempor sit amet, vestibulum sit amet orci. Pellentesque auctor commodo risus, a dictum enim ullamcorper et. Etiam luctus arcu quis diam gravida lobortis. Sed eleifend ut mauris at consectetur. Nulla eget erat vel elit malesuada imperdiet vitae eget lorem.</p>
+    <p>Donec id pharetra est, quis vestibulum erat. Praesent sit amet viverra metus. Aliquam odio libero, gravida ut quam eget, porta interdum lorem. Nullam nec mauris id mi malesuada pharetra vel lacinia libero. Phasellus vel elit non justo porta euismod. Fusce gravida cursus ullamcorper. Donec massa orci, tincidunt eu pellentesque vitae, auctor a justo. Aliquam lobortis purus vitae quam adipiscing, vitae rutrum turpis euismod. Proin quis tortor scelerisque, lobortis neque ut, sollicitudin libero. Curabitur sed mi nec tellus convallis pharetra id id ipsum. Mauris ut porttitor nibh.</p>
+    <p>Nullam condimentum libero justo, non porttitor ligula fermentum vel. Sed luctus iaculis quam vitae fermentum. Morbi facilisis mollis orci, a facilisis lectus commodo sit amet. In laoreet suscipit metus sed tristique. Donec libero metus, ultricies in eros eu, cursus rutrum est. Etiam ullamcorper imperdiet laoreet. Phasellus ullamcorper leo felis, id imperdiet massa consequat vel. Suspendisse dignissim auctor ipsum, et aliquet purus consectetur id. Phasellus egestas, augue id gravida tincidunt, nulla velit ornare erat, vel vestibulum ligula lorem a magna. Praesent est magna, dictum at magna id, sollicitudin convallis velit. Vestibulum interdum purus et augue rutrum, in placerat est elementum. Sed accumsan lectus sit amet consequat eleifend.</p>
+</div>
+
+
+<!--Drawer-->
+<div data-role="drawer" id="drawerLeft" data-position="left">
+     <h1>Test...</h1>
+
+    <ul>
+        <li><a href="#pageOne">Page 1</a>
+        </li>
+        <li><a href="#pageTwo">Page 2</a>
+        </li>
+    </ul>
+</div>
+<!-- -->
+
+
+<!--Layout-->
+<div data-role="layout" data-id="navBarLayout">
+    <header class="navBar" data-role="header">
+        <div data-role="navbar"> <a class="drawer-link" data-role="button" data-rel="drawer" href="#drawerLeft" data-icon="+" data-align="left"></a>
+ <span data-role="view-title"></span>
+
+        </div>
+    </header>
+</div>
+<!-- -->
+<script>
+    var application;
+
+    application = new kendo.mobile.Application(document.body, {
+        initial: "pageOne",
+        transition: "none",
+        layout: "navBarLayout"
+    });
+</script>
+</body>
+</html>

@@ -16,7 +16,7 @@ kendo_module({
         Widget = ui.Widget,
         INIT = "init",
         TRANSITION_DURATION = 320,
-        UI_OVERLAY = '<div style="height: 100%; width: 100%; background: position: absolute; top: 0; left: 0; z-index: 20000; display: none" />',
+        UI_OVERLAY = '<div style="height: 100%; width: 100%; position: absolute; top: 0; left: 0; z-index: 20000; display: none" />',
         BEFORE_SHOW = "beforeShow",
         SHOW = "show",
         AFTER_SHOW = "afterShow",

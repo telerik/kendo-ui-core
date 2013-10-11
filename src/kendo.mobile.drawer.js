@@ -180,6 +180,10 @@ kendo_module({
                 currentOffset = movable && movable.x,
                 element;
 
+            if (this.currentView) {
+                this.currentView.enable();
+            }
+
             if (this.currentView === e.view) {
                 this.hide();
                 return;
