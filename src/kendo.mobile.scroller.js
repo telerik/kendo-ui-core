@@ -327,7 +327,7 @@ kendo_module({
                     dimensions: dimensions,
                     userEvents: userEvents,
                     tapCapture: tapCapture
-                });
+                }),
 
                 animatedScroller = new AnimatedScroller({
                     moveTo: function(coordinates) {
