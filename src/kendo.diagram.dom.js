@@ -508,14 +508,38 @@ kendo_module({
         init: function (connection) {
         },
         route: function (connection) {
+        },
+        hitTest: function () {
+
+        },
+        getBounds: function () {
 
         }
     });
 
-    var PolylineRouter = ConnectionRouterBase.extend({
+    /**
+     * Base class for polyline and cascading routing.
+     */
+    var LinearConnectionRouter = ConnectionRouterBase.extend({
         init: function (connection) {
             var that = this;
             ConnectionRouterBase.fn.init.call(that);
+            this.connection = connection;
+        },
+        getBounds: function () {
+
+        }
+    });
+
+    /**
+     * A simple poly-linear routing which does not alter the intermediate points.
+     * Does hold the underlying hit, bounds....logic.
+     * @type {*|Object|void|extend|Zepto.extend|b.extend}
+     */
+    var PolylineRouter = LinearConnectionRouter.extend({
+        init: function (connection) {
+            var that = this;
+            LinearConnectionRouter.fn.init.call(that);
             this.connection = connection;
         },
         route: function () {
@@ -526,7 +550,7 @@ kendo_module({
     var CascadingRouter = ConnectionRouterBase.extend({
         init: function (connection) {
             var that = this;
-            ConnectionRouterBase.fn.init.call(that);
+            LinearConnectionRouter.fn.init.call(that);
             this.connection = connection;
         },
         route: function () {
@@ -549,10 +573,12 @@ kendo_module({
                         return false;
                     }
                 }
+                //fallback for custom connectors
                 return Math.abs(start.x - end.x) > Math.abs(start.y - end.y);
             }
 
             this.connection.cascadeStartHorizontal = startHorizontal(this.connection);
+
             // note that this is more generic than needed for only two intermediate points.
             for (var k = 1; k < l - 1; ++k) {
                 if (link.cascadeStartHorizontal) {
@@ -1748,7 +1774,8 @@ kendo_module({
                         shape = addShape(node),
                         parentShape = addShape(parent);
                     if (parentShape && !that.connected(parentShape, shape)) { // check if connected to not duplicate connections.
-                        var con = that.connect(parentShape.connectors[2], shape.connectors[0]);
+                        var con = that.connect(parentShape , shape );
+                        //var con = that.connect(parentShape.connectors[2], shape.connectors[0]);
                         con.type(CASCADING);
                     }
                 }
