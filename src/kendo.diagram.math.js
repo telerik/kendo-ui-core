@@ -672,7 +672,8 @@ kendo_module({
             if (dot < 0) {
                 return d2(b, p); // sits on side of b
             }
-            // regular case
+            // regular case, use crossproduct to get the sine out
+            dot = (b.x - p.x) * vy - (b.y - p.y) * vx;
             return dot * dot / (vx * vx + vy * vy);
         },
 
@@ -683,7 +684,7 @@ kendo_module({
          * @param b The complementary endpoint of the line or segment.
          */
         distanceToLine: function (p, a, b) {
-            return Math.sqrt(_distanceToLineSquared(p, a, b));
+            return Math.sqrt(this._distanceToLineSquared(p, a, b));
         },
 
         /**
@@ -699,7 +700,7 @@ kendo_module({
                 var p1 = points[s];
                 var p2 = points[s + 1];
 
-                var d = _distanceToLineSquared(p, p1, p2);
+                var d = this._distanceToLineSquared(p, p1, p2);
                 if (d < minimum) {
                     minimum = d;
                 }

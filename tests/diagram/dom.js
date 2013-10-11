@@ -458,6 +458,23 @@ test('Connection bounds', function () {
     ok(bounds.x===0 && bounds.y===0 && bounds.width===660 && bounds.height===770);
 });
 
+test('Distance to a line segment', function () {
+    var d = kendo.diagram.Geometry.distanceToLine(new Point(0,0), new Point(0,100), new Point(100,100));
+    equal(d, 100);
+    d = kendo.diagram.Geometry.distanceToLine(new Point(57.88, 0), new Point(0, 100), new Point(100, 100));
+    equal(d,100);
+    d = kendo.diagram.Geometry.distanceToLine(new Point(100, 44.02), new Point(0, 0), new Point(0, 100));
+    equal(d,100);
+});
+
+test('Distance to polyline', function () {
+    var polyline = [new Point(0,0), new Point(100,0), new Point(100,100), new Point(0,100)];
+    var d = kendo.diagram.Geometry.distanceToPolyline(new Point(50,50), polyline);
+    equal(d, 50);
+    d = kendo.diagram.Geometry.distanceToPolyline(new Point(57,50), polyline);
+    equal(d, 43);
+});
+
 QUnit.module("Serialization - Cut/Copy/Paste", {
     setup: function () {
         $("#canvas").kendoDiagram();

@@ -510,7 +510,7 @@ kendo_module({
         },
         route: function (connection) {
         },
-        hitTest: function () {
+        hitTest: function (p) {
 
         },
         getBounds: function () {
@@ -576,7 +576,7 @@ kendo_module({
         }
     });
 
-    var CascadingRouter = ConnectionRouterBase.extend({
+    var CascadingRouter = LinearConnectionRouter.extend({
         init: function (connection) {
             var that = this;
             LinearConnectionRouter.fn.init.call(that);
@@ -652,16 +652,17 @@ kendo_module({
         init: function (from, to, options, model) {
             var that = this;
             DiagramElement.fn.init.call(that, options, model);
+            that._router = new PolylineRouter(this);
             that.path = new Path(that.options);
             that.path.background("none");
             that.visual.append(that.path);
             that._sourcePoint = that._targetPoint = new Point();
             that.sourcePoint(from);
             that.targetPoint(to);
-            that.refresh();
             that.content(that.options.content);
             that.definers = [];
-            that._router = new PolylineRouter(this);
+
+            that.refresh();
         },
         options: {
             stroke: "gray",
@@ -862,8 +863,10 @@ kendo_module({
          */
         allPoints: function () {
             var pts = [this.sourcePoint()];
-            for (var k = 0; k < this.definers.length; k++) {
-                pts.push(this.definers[k].point);
+            if(this.definers){
+                for (var k = 0; k < this.definers.length; k++) {
+                    pts.push(this.definers[k].point);
+                }
             }
             pts.push(this.targetPoint());
             return pts;
@@ -936,7 +939,7 @@ kendo_module({
                 if (value.isEmpty && !value.isEmpty() && value.contains(from) && value.contains(to)) {
                     return this;
                 }
-                if (p.isOnLine(from, to)) {
+                if (this._router.hitTest(p)) {
                     return this;
                 }
             }
@@ -971,6 +974,7 @@ kendo_module({
         _refreshPath: function () {
             if (Utils.isUndefined(this.path)) return;
             this._drawPath(this._calcPathData());
+            this.bounds(this._router.getBounds());
         },
         _drawPath: function (data) {
             this.path.redraw({ data: data  });
@@ -979,7 +983,10 @@ kendo_module({
             resolveConnectors(this);
             var globalSourcePoint = this.sourcePoint(), globalSinkPoint = this.targetPoint(),
                 boundsTopLeft, localSourcePoint, localSinkPoint, middle;
-            this.bounds(Rect.fromPoints(globalSourcePoint, globalSinkPoint));
+
+            // this.visual.position(boundsTopLeft);    //global coordinates!
+            this._refreshPath();
+
             boundsTopLeft = this._bounds.topLeft();
             localSourcePoint = globalSourcePoint.minus(boundsTopLeft);
             localSinkPoint = globalSinkPoint.minus(boundsTopLeft);
@@ -987,8 +994,7 @@ kendo_module({
                 middle = Point.fn.middleOf(localSourcePoint, localSinkPoint);
                 this.contentVisual.position(middle);
             }
-            // this.visual.position(boundsTopLeft);    //global coordinates!
-            this._refreshPath();
+
             if (this.adorner) {
                 this.adorner.refresh();
             }
