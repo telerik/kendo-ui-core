@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KendoUI Test Page</title>
+    <link href="../../styles/web/kendo.common.css" rel="stylesheet" />
+    <link href="../../styles/web/kendo.default.less" rel="stylesheet/less" />
+    <link href="../../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" />
+    <script src="../../demos/mvc/content/shared/js/less.js"></script>
+    <script src="../../src/jquery.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+
+    <script src="../../src/kendo.fx.js"></script>
+    <script src="../../src/kendo.userevents.js"></script>
+    <script src="../../src/kendo.draganddrop.js"></script>
+    <script src="../../src/kendo.mobile.scroller.js"></script>
+    <script src="../../src/kendo.mobile.view.js"></script>
+    <script src="../../src/kendo.mobile.loader.js"></script>
+    <script src="../../src/kendo.mobile.pane.js"></script>
+    <script src="../../src/kendo.router.js"></script>
+    <script src="../../src/kendo.mobile.application.js"></script>
+    <script src="../../src/kendo.mobile.button.js"></script>
+    <script src="../../src/kendo.mobile.switch.js"></script>
+    <script src="../../src/kendo.mobile.scrollview.js"></script>
+
+    <style>
+        .km-state-disabled { opacity: 0.5; }
+    </style>
+</head>
+<body>
+    <!--
+    <div data-role="view">
+        <ul id="list" data-role="listview">
+            <li>
+                <label>Disabled
+                    <input type="checkbox" data-role="switch" disabled="disabled" data-change="onChange"/>
+                </label>
+            </li>
+            <li>
+                <label>Toggled
+                    <input id="switch" type="checkbox" data-role="switch" data-change="onChange"/>
+                </label>
+            </li>
+        </ul>
+
+        <br />
+        <br />
+        <br />
+        <a data-role="button" data-click="onClick">Toggle</a>
+        <br />
+        <div id="example"></div>
+    </div>
+
+    <script>
+        var app = new kendo.mobile.Application();
+
+        function onClick() {
+            var isChecked = $("#switch").data("kendoMobileSwitch").wrapper.hasClass("km-state-disabled");
+            $("#switch").data("kendoMobileSwitch").enable(isChecked);
+        }
+
+        function check() {
+            $("#example").append("<p>click button</p>");
+        }
+
+        function onChange() {
+            $("#example").append("<p>change switch</p>");
+        }
+    </script>
+    -->
+
+    <div data-role="view">
+        <div id="scrollView" data-role="scrollview">
+            <div data-role="page">Foo</div>
+            <div data-role="page">Bar</div>
+            <div data-role="page">Baz</div>
+            <div data-role="page">Bat</div>
+        </div>
+    </div>
+
+    <script>
+        var app = new kendo.mobile.Application();
+
+        function changePages() {
+            var sw = $("#scrollView").data("kendoMobileScrollView");
+            sw.content('<div data-role="page">Item1</div><div data-role="page">Item2</div>');
+        }
+    </script>
+</body>
+</html>
+

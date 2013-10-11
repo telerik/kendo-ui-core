@@ -20,7 +20,7 @@
     <script src="../../src/kendo.mobile.button.js"></script>
 </head>
 <body>
-    <div id="home" data-role="view">
+    <div id="home" data-role="view" data-use-native-scrolling="true">
         <a data-role="button" data-click="scroll">Scroll To</a>
         <div id="div1" style="width: 100%; height: 200px; margin-top: 2em; background-color: red;"></div>
         <div id="div2" style="width: 100%; height: 300px; margin-top: 2em; background-color: green;"></div>
@@ -30,9 +30,9 @@
     </div>
 
     <script>
-        var app = new kendo.mobile.Application();
+        var app = new kendo.mobile.Application(document.body);
         function scroll(e) {
-            var scroller = this.container().scroller;
+            var scroller = app.view().scroller;
             scroller.animatedScrollTo(0, -230);
         }
     </script>
