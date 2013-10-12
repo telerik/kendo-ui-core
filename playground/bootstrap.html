@@ -4,30 +4,12 @@
         <title>Responsive Kendo UI</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="bootstrap.min.css">
-        <link rel="stylesheet/less" href="../styles/web/kendo.common.less">
+        <link rel="stylesheet/less" href="../styles/web/kendo.common.css">
         <link rel="stylesheet/less" href="../styles/web/kendo.bootstrap.less">
 
         <script src="../src/jquery.js"></script>
         <script src="bootstrap.min.js"></script>
-        <script src="../src/kendo.core.js"></script>
-        <script src="../src/kendo.userevents.js"></script>
-        <script src="../src/kendo.fx.js"></script>
-        <script src="../src/kendo.draganddrop.js"></script>
-        <script src="../src/kendo.popup.js"></script>
-        <script src="../src/kendo.data.js"></script>
-        <script src="../src/kendo.binder.js"></script>
-        <script src="../src/kendo.list.js"></script>
-        <script src="../src/kendo.dropdownlist.js"></script>
-        <script src="../src/kendo.validator.js"></script>
-        <script src="../src/kendo.numerictextbox.js"></script>
-        <script src="../src/kendo.window.js"></script>
-        <script src="../src/kendo.menu.js"></script>
-        <script src="../src/kendo.pager.js"></script>
-        <script src="../src/kendo.editable.js"></script>
-        <script src="../src/kendo.grid.js"></script>
-        <script src="../src/kendo.listview.js"></script>
-        <script src="../src/kendo.panelbar.js"></script>
-        <script src="../src/kendo.slider.js"></script>
+        <script src="../src/kendo.web.js"></script>
         <script src="../demos/mvc/content/shared/js/less.js"></script>
 
         <style>
@@ -144,9 +126,74 @@
                 <li>Customers</li>
             </ul>
 
-            <div id="profile">
+            <section id="profile">
+                <h2>Profile</h2>
+                <button class="k-button k-secondary" id="edit-profile">Edit</button>
 
-            </div>
+                <img src="" id="avatar" />
+
+                <span class="first-name">Jonathan</span>
+                <span class="last-name">Dodsworth</span>
+                <span class="position">Inside Sales Coordinator</span>
+            </section>
+
+            <ul id="tabstrip">
+                <li>Sales per day</li>
+                <li>Area charts</li>
+                <li>Bar charts</li>
+                <li>Donut charts</li>
+            </ul>
+
+            <form>
+                <h2>Profile Setup</h2>
+
+                <div>
+                    <label> Name <input value="Johnatan Dodsworth" /> </label>
+
+                    <label> Birthday <input type="date" value="10/09/1979" /> </label>
+
+                    <label>
+                        Gender
+                        <select>
+                            <option selected>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Language
+                        <select>
+                            <option selected>English</option>
+                            <option>German</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div>
+                    <label> Occupation <input placeholder="e.g. Developer" /> </label>
+
+                    <label> Skills <input id="skills" value="C++, jQuery" /> </label>
+
+                    <label> Experience <input type="number" value="4" /> years </label>
+
+                    <label> Color <input type="color" value="#ee00ff" /> </label>
+                </div>
+
+                <label>
+                    Short bio
+                    <textarea></textarea>
+                </label>
+
+                <div>
+                    Progress
+                    <div id="progress"></div>
+                </div>
+
+                <div class="buttons-wrap">
+                    <button class="k-button k-secondary">Cancel</button>
+                    <button class="k-button k-primary">Update</button>
+                </div>
+            </form>
 
             <div id="grid"></div>
 
@@ -356,6 +403,28 @@
             });
 
             $("#panelbar").kendoPanelBar();
+
+            $("#tabstrip").kendoTabStrip();
+
+            $("select").kendoDropDownList();
+
+            $("input:not([type])").addClass("k-textbox");
+
+            $("input[type=date]").kendoDatePicker();
+
+            $("input[type=number]").kendoNumericTextBox();
+
+            $("input[type=color]").kendoColorPicker();
+
+            $("textarea").kendoEditor({
+                tools: [
+                    "formatting",
+                    "bold", "italic", "underline",
+                    "strikethrough", "subscript", "superscript",
+                    "justifyLeft", "justifyCenter", "justifyRight", "justifyFull",
+                    "insertUnorderedList", "insertOrderedList", "indent", "outdent"
+                ]
+            });
         </script>
     </body>
 </html>
