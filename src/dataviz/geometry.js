@@ -104,9 +104,9 @@
             return point;
         },
 
-        distanceTo: function(point) {
-            var dx = this.x - point.x,
-                dy = this.y - point.y;
+        distanceTo: function(other) {
+            var dx = this.x - other.x,
+                dy = this.y - other.y;
 
             return math.sqrt(dx * dx + dy * dy);
         }
