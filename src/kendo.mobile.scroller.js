@@ -411,7 +411,9 @@ kendo_module({
         ],
 
         _resize: function() {
-            this.dimensions.refresh();
+            if (!this._native) {
+                this.dimensions.refresh();
+            }
             this.reset();
         },
 
