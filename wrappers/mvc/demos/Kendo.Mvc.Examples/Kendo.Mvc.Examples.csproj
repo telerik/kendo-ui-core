@@ -431,6 +431,10 @@
     <Compile Include="Controllers\Web\PanelBar\IndexController.cs" />
     <Compile Include="Controllers\Web\PanelBar\NavigationController.cs" />
     <Compile Include="Controllers\Web\PanelBar\RtlController.cs" />
+    <Compile Include="Controllers\Web\ProgressBar\ApiController.cs" />
+    <Compile Include="Controllers\Web\ProgressBar\EventsController.cs" />
+    <Compile Include="Controllers\Web\ProgressBar\IndexController.cs" />
+    <Compile Include="Controllers\Web\ProgressBar\RtlController.cs" />
     <Compile Include="Controllers\Web\Scheduler\WebApiController.cs" />
     <Compile Include="Controllers\Web\Scheduler\ApiController.cs" />
     <Compile Include="Controllers\Web\Scheduler\RestrictionController.cs" />
@@ -915,6 +919,9 @@
     <Content Include="Areas\aspx\Views\web\panelbar\index.aspx" />
     <Content Include="Areas\aspx\Views\web\panelbar\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\panelbar\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\web\progressbar\events.aspx" />
+    <Content Include="Areas\aspx\Views\web\progressbar\index.aspx" />
+    <Content Include="Areas\aspx\Views\web\progressbar\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\api.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\webapi.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\restriction.aspx" />
@@ -2753,6 +2760,9 @@
     <Content Include="Areas\razor\Views\web\button\rtl.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\razor\Views\web\progressbar\index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -2766,6 +2776,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\line_charts\step_line.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\progressbar\events.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\progressbar\rtl.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

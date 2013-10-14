@@ -28,8 +28,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///  &lt;%= Html.Kendo().Upload()
         ///             .Name("Upload")
         ///             .Events(events => events
-        ///                 .OnLoad("onLoad")
-        ///                 .OnUpload("onUpload")
+        ///                 .Upload("onUpload")
         ///             )
         /// %&gt;
         /// </code>

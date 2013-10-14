@@ -822,6 +822,21 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="ProgressBar"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().ProgressBar()
+        ///       .Name("progressBar")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual ProgressBarBuilder ProgressBar()
+        {
+            return new ProgressBarBuilder(new ProgressBar(ViewContext, Initializer));
+        }
+
+        /// <summary>
         /// Creates a <see cref="Upload"/>
         /// </summary>
         /// <example>

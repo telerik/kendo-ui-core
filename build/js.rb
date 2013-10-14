@@ -113,6 +113,7 @@ WEB_JS = FileList[
     "src/kendo.editable.js",
     "src/kendo.filtermenu.js",
     "src/kendo.panelbar.js",
+    "src/kendo.progressbar.js",
     "src/kendo.tabstrip.js",
     "src/kendo.timepicker.js",
     "src/kendo.datetimepicker.js",
