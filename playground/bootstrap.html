@@ -133,10 +133,10 @@
                 height: 25px;
                 width: 25px;
                 top: -12px;
-                -webkit-border-radius: 50%;
-                -moz-border-radius: 50%;
-                -ms-border-radius: 50%;
                 border-radius: 50%;
+
+                box-shadow: none;
+                outline: none;
 
                 border-color: #fff;
                 border-width: 2px;
@@ -151,6 +151,31 @@
             header .k-slider .k-draghandle.k-state-selected {
                 border-color: #fff;
                 background-color: #fff;
+            }
+
+            #theme-list,
+            #dimensions-list {
+                background-color: #010101;
+                border-color: #5c5c5c;
+                color: #fff;
+            }
+
+            #theme-list .k-item,
+            #dimensions-list .k-item {
+                border-radius: 0;
+            }
+
+            #theme-list .k-state-hover,
+            #theme-list .k-state-selected,
+            #theme-list .k-state-focused,
+            #dimensions-list .k-state-hover,
+            #dimensions-list .k-state-selected,
+            #dimensions-list .k-state-focused {
+                background-image: none;
+                background-color: #939393;
+                box-shadow: none;
+                color: #fff;
+                border-color: #939393;
             }
 
             #configure {
@@ -199,6 +224,13 @@
                     position: absolute;
                     width: 100%;
                     margin: 0;
+                }
+            }
+
+            @media screen and (min-width: 768px) {
+                #configurator {
+                    -webkit-transform: none !important;
+                    transform: none !important;
                 }
             }
         </style>
@@ -484,6 +516,10 @@
 
                 visible = !visible;
                 e.preventDefault();
+            });
+
+            $(window).resize(function() {
+                kendo.resize(document.body);
             });
 
             // init sample widgets
