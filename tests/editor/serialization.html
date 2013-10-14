@@ -390,6 +390,16 @@
         equal(editor.value(), '<img width="4" />');
     });
 
+    test('image maintains non-pixel style widths', function() {
+        editor.value('<img style="width:100%;" />');
+        equal(editor.value(), '<img style="width:100%;" />');
+    });
+
+    test('image maintains non-pixel style heights', function() {
+        editor.value('<img style="height:100%;" />');
+        equal(editor.value(), '<img style="height:100%;" />');
+    });
+
     test('nbsp', function() {
         editor.value('&nbsp;&nbsp;&nbsp;');
         equal(editor.value(), '&nbsp;&nbsp;&nbsp;');

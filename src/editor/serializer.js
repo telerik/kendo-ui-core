@@ -9,6 +9,7 @@ var extend = $.extend;
 var fontSizeMappings = 'xx-small,x-small,small,medium,large,x-large,xx-large'.split(',');
 var quoteRe = /"/g;
 var brRe = /<br[^>]*>/i;
+var pixelRe = /^\d+(\.\d*)?(px)?$/i;
 var emptyPRe = /<p><\/p>/i;
 var cssDeclaration = /([\w|\-]+)\s*:\s*([^;]+);?/i;
 var sizzleAttr = /^sizzle-\d+/i;
@@ -109,12 +110,12 @@ var Serializer = {
                     height = node.style.height,
                     $node = $(node);
 
-                if (width) {
+                if (width && pixelRe.test(width)) {
                     $node.attr('width', parseInt(width, 10));
                     dom.unstyle(node, { width: undefined });
                 }
 
-                if (height) {
+                if (height && pixelRe.test(height)) {
                     $node.attr('height', parseInt(height, 10));
                     dom.unstyle(node, { height: undefined });
                 }

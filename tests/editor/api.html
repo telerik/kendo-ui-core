@@ -41,6 +41,7 @@
             module("API", {
                 setup: function() {
                     editor = getEditor();
+                    inline = getEditor("#inline");
                 }
             });
 
@@ -81,8 +82,6 @@
             });
 
             test("restoreSelection restores element selection", function() {
-                var inline = getEditor("#inline");
-
                 inline.value("foo bar baz");
 
                 var text = inline.body.firstChild;
