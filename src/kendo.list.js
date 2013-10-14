@@ -130,10 +130,11 @@ kendo_module({
             var that = this,
                 value = that.options.value;
 
-            if (value) {
+            if (value !== null) {
                 that.element.val(value);
             } else {
-                value = that.element.val();
+                value = that._accessor();
+                that.options.value = value;
             }
 
             that._old = value;

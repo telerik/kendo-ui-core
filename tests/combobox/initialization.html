@@ -371,6 +371,7 @@
                var select = $("<select><option value=1>foo1</option><option value=2>foo2</option><option value=3>foo3</option></select>"),
                    combobox = new ComboBox(select, {
                        index: 0,
+                       value: "",
                        dataTextField: "text",
                        dataValueField: "value",
                        dataSource: [{text: "Foo", value: "Foo 1"}, {text: "Foo 2", value:"Foo 2"}],
@@ -675,6 +676,12 @@
 
                     ok(!combobox.wrapper.find(".k-loading").is(":visible"));
                 }, 200);
+            });
+
+            test("ComboBox sets options.value to input value on init", function() {
+                var combobox = input.val("1").kendoComboBox().data("kendoComboBox");
+
+                equal(combobox.options.value, "1");
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
