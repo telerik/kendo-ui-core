@@ -69,9 +69,9 @@ kendo_module({
             that._template();
 
             try {
-                element.setAttribute("type", "text");
+                element[0].setAttribute("type", "text");
             } catch(e) {
-                element.type = "text";
+                element[0].type = "text";
             }
 
             element.addClass("k-input")
