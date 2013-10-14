@@ -1031,28 +1031,6 @@ kendo_module({
             return (options.majorTick/options.minorTickCount) * MS_PER_MINUTE;
         },
 
-        _columnCountInGroup: function() {
-            var resources = this.groupedResources;
-
-            if (!resources.length) {
-                return 0;
-            }
-
-            return this._columnOffsetForResource(resources.length);
-        },
-
-        _rowCountInGroup: function() {
-            var resources = this.groupedResources;
-
-            if (!resources.length) {
-                return 0;
-            }
-
-            var allDaySlotOffset = this.options.allDaySlot ? this._rowCountForLevel(resources.length - 1) : 0;
-
-            return (this._rowCountForLevel(resources.length) - allDaySlotOffset) / this._rowCountForLevel(resources.length - 1);
-        },
-
         _timeSlotIndex: function(date) {
             var options = this.options;
             var eventStartTime = getMilliseconds(date);
@@ -1062,38 +1040,12 @@ kendo_module({
             return (eventStartTime - startTime) / (timeSlotInterval);
         },
 
-        _collectionIndex: function(date, multiday) {
-            if (multiday) {
-                return 0;
-            }
-
-            return this._dateSlotIndex(date, true);
-        },
-
         _slotIndex: function(date, multiday) {
             if (multiday) {
                 return this._dateSlotIndex(date);
             }
 
             return this._timeSlotIndex(date);
-        },
-
-        _dateIndex: function(date) {
-            var idx;
-            var length;
-            var slots = this._dates || [];
-            var slotStart;
-            var slotEnd;
-
-            for (idx = 0, length = slots.length; idx < length; idx++) {
-                slotStart = kendo.date.getDate(slots[idx]);
-                slotEnd = new Date(kendo.date.getDate(slots[idx]).getTime() + MS_PER_DAY -  1);
-
-                if (isInDateRange(date, slotStart, slotEnd)) {
-                    return idx;
-                }
-            }
-            return -1;
         },
 
         _dateSlotIndex: function(date, overlaps) {
