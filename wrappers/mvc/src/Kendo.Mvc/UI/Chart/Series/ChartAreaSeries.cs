@@ -85,7 +85,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The area chart line configuration.
         /// </summary>
-        public ChartLine Line
+        public ChartAreaLine Line
         {
             get;
             set;
@@ -105,6 +105,15 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// The style of the line.
+        /// </summary>
+        public ChartAreaStyle Style
+        {
+            get;
+            set;
+        }
+
         public override IChartSerializer CreateSerializer()
         {
             return new ChartAreaSeriesSerializer(this);
@@ -115,8 +124,9 @@ namespace Kendo.Mvc.UI
             Stacked = false;
             Labels = new ChartPointLabels();
             Markers = new ChartMarkers();
-            Line = new ChartLine();
+            Line = new ChartAreaLine();
             Orientation = ChartSeriesOrientation.Horizontal;
+            Style = ChartAreaStyle.Normal;
         }
     }
 

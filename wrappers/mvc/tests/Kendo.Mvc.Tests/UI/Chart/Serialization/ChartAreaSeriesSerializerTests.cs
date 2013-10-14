@@ -172,7 +172,7 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Should_serializes_line()
         {
-            series.Line = new ChartLine(1, "lineColor", ChartDashType.Dot, false);
+            series.Line = new ChartAreaLine(1, "lineColor", ChartDashType.Dot, false);
             GetJson(series).ContainsKey("line").ShouldBeTrue();
         }
 

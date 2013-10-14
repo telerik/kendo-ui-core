@@ -73,7 +73,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                    .Position(ChartBarLabelsPosition.Above)
         ///                    .Visible(true)
         ///                );
-        ///             )
+        ///            )
         /// %&gt;
         /// </code>
         /// </example>
@@ -96,7 +96,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///            .Series(series => series
         ///                .Line(s => s.Sales)
         ///                .Labels(true);
-        ///             )
+        ///            )
         /// %&gt;
         /// </code>
         /// </example>
@@ -160,7 +160,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///                .Markers(markers => markers
         ///                    .Type(ChartMarkerShape.Triangle)
         ///                );
-        ///             )
+        ///            )
         /// %&gt;
         /// </code>
         /// </example>
@@ -183,7 +183,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///            .Series(series => series
         ///                .Line(s => s.Sales)
         ///                .Markers(true);
-        ///             )
+        ///            )
         /// %&gt;
         /// </code>
         /// </example>
@@ -205,13 +205,35 @@ namespace Kendo.Mvc.UI.Fluent
         ///            .Series(series => series
         ///                .Line(s => s.Sales)
         ///                .MissingValues(ChartLineMissingValues.Interpolate);
-        ///             )
+        ///            )
         /// %&gt;
         /// </code>
         /// </example>
         public ChartLineSeriesBuilder<T> MissingValues(ChartLineMissingValues missingValues)
         {
             Series.MissingValues = missingValues;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the style for line series.
+        /// </summary>
+        /// <param name="style">The style. The default is normal.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Line(s => s.Sales)
+        ///                .Style(ChartLineStyle.Step);
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartLineSeriesBuilder<T> Style(ChartLineStyle style)
+        {
+            Series.Style = style;
 
             return this;
         }

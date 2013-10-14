@@ -44,6 +44,9 @@ namespace Kendo.Mvc.UI
             var line = series.Line.CreateSerializer().Serialize();
             if (line.Count > 0)
             {
+                FluentDictionary.For(line)
+                    .Add("style", series.Style.ToString().ToLowerInvariant(), ChartAreaStyle.Normal.ToString().ToLowerInvariant());
+
                 result.Add("line", line);
             }
 

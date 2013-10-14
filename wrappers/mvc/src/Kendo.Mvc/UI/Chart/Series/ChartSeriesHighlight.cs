@@ -8,7 +8,7 @@ namespace Kendo.Mvc.UI
         public ChartSeriesHighlight()
         {
             Border = new ChartElementBorder();
-            Line = new ChartLine();
+            Line = new ChartAreaLine();
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// Gets or sets the highlight line configuration
         /// </summary>
-        public ChartLine Line
+        public ChartAreaLine Line
         {
             get;
             set;

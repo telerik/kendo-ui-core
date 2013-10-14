@@ -49,7 +49,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The area chart line configuration.
         /// </summary>
-        ChartLine Line
+        ChartAreaLine Line
         {
             get;
             set;
@@ -59,6 +59,15 @@ namespace Kendo.Mvc.UI
         /// The orientation of the series.
         /// </summary>
         ChartSeriesOrientation Orientation
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The style of the series.
+        /// </summary>
+        ChartAreaStyle Style
         {
             get;
             set;

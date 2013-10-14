@@ -72,5 +72,14 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
+        /// <summary>
+        /// The style of the series.
+        /// </summary>
+        ChartLineStyle Style
+        {
+            get;
+            set;
+        }
     }
 }

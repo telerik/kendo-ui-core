@@ -182,9 +182,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>        
-        public ChartOHLCSeriesBuilder<T> Line(Action<ChartAreaLineBuilder> configurator)
+        public ChartOHLCSeriesBuilder<T> Line(Action<ChartLineBuilder> configurator)
         {
-            configurator(new ChartAreaLineBuilder(Series.Line));
+            configurator(new ChartLineBuilder(Series.Line));
 
             return this;
         }

@@ -20,6 +20,7 @@ namespace Kendo.Mvc.UI
 
             FluentDictionary.For(result)
                 .Add("type", series.Orientation == ChartSeriesOrientation.Horizontal ? "line" : "verticalLine")
+                .Add("style", series.Style.ToString().ToLowerInvariant(), ChartAreaStyle.Normal.ToString().ToLowerInvariant())
                 .Add("stack", series.Stacked, false)
                 .Add("aggregate", series.Aggregate.ToString().ToLowerInvariant(), () => series.Aggregate != null)
                 .Add("field", series.Member, () => { return series.Data == null && series.Member.HasValue(); })

@@ -114,6 +114,15 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// The style of the line.
+        /// </summary>
+        public ChartLineStyle Style
+        {
+            get;
+            set;
+        }
+
         public override IChartSerializer CreateSerializer()
         {
             return new ChartLineSeriesSerializer(this);
@@ -125,6 +134,7 @@ namespace Kendo.Mvc.UI
             Labels = new ChartPointLabels();
             Markers = new ChartMarkers();
             Orientation = ChartSeriesOrientation.Horizontal;
+            Style = ChartLineStyle.Normal;
         }
     }
 

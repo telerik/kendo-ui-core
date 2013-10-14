@@ -308,6 +308,8 @@
     <Compile Include="UI\Chart\Enums\ChartZoomDireciton.cs" />
     <Compile Include="UI\Chart\Enums\ChartNoteLabelPosition.cs" />
     <Compile Include="UI\Chart\Enums\ChartNotePosition.cs" />
+    <Compile Include="UI\Chart\Enums\ChartLineStyle.cs" />
+    <Compile Include="UI\Chart\Enums\ChartAreaStyle.cs" />
     <Compile Include="UI\Chart\Enums\RenderingMode.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPanesFactory.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPaneBuilder.cs" />
@@ -427,6 +429,8 @@
     <Compile Include="UI\Chart\Serialization\ChartNoteLineSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisNoteItemSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisNoteSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartAreaLineSerializer.cs" />
+    <Compile Include="UI\Chart\Series\ChartAreaLine.cs" />
     <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />
