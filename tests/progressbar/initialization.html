@@ -6,6 +6,8 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.progressbar.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -354,6 +356,48 @@
 
                 equal(pb._isFinished, false);
             });
+
+            test("ProgressBar is initialized correctly via data attribute", function() {
+                var dom = $("<div data-role='progressbar'></div>");
+                $(container).append(dom);
+
+                kendo.init($(container));
+
+                ok($(container.firstChild).data("kendoProgressBar") instanceof ProgressBar);
+            });
+
+            test("ProgressBar value is set correctly via data attribute", function() {
+                var dom = $("<div data-role='progressbar' data-value='25'></div>");
+                $(container).append(dom);
+
+                kendo.init($(container));
+
+                equal($(container.firstChild).data("kendoProgressBar").value(), 25);
+            });
+
+            test("ProgressBar type is set correctly via data attribute", function() {
+                var dom = $("<div data-role='progressbar' data-type='chunk'></div>");
+                $(container).append(dom);
+
+                kendo.init($(container));
+
+                equal($(container.firstChild).data("kendoProgressBar").options.type, "chunk");
+            });
+
+            test("ProgressBar events are raised when set via data attribute", function() {
+                var dom = $("<div data-role='progressbar' data-change='onPbChange' data-animation='false'></div>");
+                var fired = false;
+
+                $(container).append(dom);
+
+                kendo.init($(container));
+
+                dom.data("kendoProgressBar").value(10);
+            });
+
+            var onPbChange = function(e){
+                ok(true);
+            };
 
 
             //-----------------------------------------------------------------------

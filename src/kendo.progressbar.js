@@ -336,8 +336,6 @@ kendo_module({
             if (currentValue === options.min) {
                 progressWrapper.hide();
             }
-
-            //progressWrapper = (currentValue === options.min) ? progressWrapper.hide() : progressWrapper.show();
         },
 
         _onProgressUpdateAlways: function(currentValue) {

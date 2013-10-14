@@ -1025,6 +1025,54 @@
                 equal(pb.wrapper.find(".k-progress-status:first").text(), "150");
                 equal(pb.wrapper.find(".k-progress-status:last").text(), "150");
             });
+
+            test("Value is changed correctly (type='value')", 3, function(){
+                pb = createProgressbar({
+                    animation: false,
+                    value: 20,
+                    min: 0,
+                    max: 300,
+                    type: "value"
+                });
+
+                pb.setOptions({ value: 150 });
+
+                equal(pb.value(), 150);
+                equal(pb.wrapper.find(".k-progress-status:first").text(), "150");
+                equal(pb.wrapper.find(".k-progress-status:last").text(), "150");
+            });
+
+            test("Value is changed correctly (type='percent')", 3, function(){
+                pb = createProgressbar({
+                    animation: false,
+                    value: 20,
+                    min: 0,
+                    max: 300,
+                    type: "percent"
+                });
+
+                pb.setOptions({ value: 150 });
+
+                equal(pb.value(), 150);
+                equal(pb.wrapper.find(".k-progress-status:first").text(), "50%");
+                equal(pb.wrapper.find(".k-progress-status:last").text(), "50%");
+            });
+
+            test("Value is changed correctly (type='chunk')", 2, function(){
+                pb = createProgressbar({
+                    animation: false,
+                    value: 20,
+                    min: 0,
+                    max: 300,
+                    type: "chunk",
+                    chunkCount: 4
+                });
+
+                pb.setOptions({ value: 150 });
+
+                equal(pb.value(), 150);
+                equal(pb.wrapper.find(".k-state-selected").length, 2);
+            });
         </script>
     </body>
 </html>

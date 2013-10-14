@@ -547,6 +547,60 @@
             });
 
 
+            asyncTest("Start event is fired before change event", 2, function() {
+                var events = [];
+
+                pb = createProgressbar({
+                    min: -50,
+                    max: 165,
+                    value: -50,
+                    animation: {
+                        duration: 10
+                    },
+                    start: function(e){
+                        events.push("start");
+                    },
+                    change: function(e){
+                        events.push("change");
+                    }
+                });
+
+                pb.value(50);
+
+                setTimeout(function(){
+                    equal(events[0], "start");
+                    equal(events[1], "change");
+                    start();
+                }, 30);
+            });
+
+            asyncTest("Complete event is fired after change event", 2, function() {
+                var events = [];
+
+                pb = createProgressbar({
+                    min: -50,
+                    max: 165,
+                    value: -50,
+                    animation: {
+                        duration: 10
+                    },
+                    complete: function(e){
+                        events.push("complete");
+                    },
+                    change: function(e){
+                        events.push("change");
+                    }
+                });
+
+                pb.value(165);
+
+                setTimeout(function(){
+                    equal(events[0], "change");
+                    equal(events[1], "complete");
+                    start();
+                }, 30);
+            });
+
             // -----------------------------------------------------------------------------------
             // -----------------------------------------------------------------------------------
             module("Rendering / Chunk progressbar", {
