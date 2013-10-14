@@ -673,7 +673,7 @@ kendo_module({
             listView.trigger(DATA_BINDING);
 
             if (action === "add" && !groupedMode) {
-                listView.append(dataItems);
+                listView.insertAt(dataItems, e.index);
             } else if (action === "remove" && !groupedMode) {
                 listView.remove(dataItems);
             } else if (groupedMode) {
@@ -950,17 +950,34 @@ kendo_module({
             }
         },
 
+        insertAt: function(dataItems, index) {
+            var listView = this;
+            return this._renderItems(dataItems, function(items) {
+                if (index === 0) {
+                    listView.element.prepend(items);
+                }
+                else if (index === -1) {
+                    listView.element.append(items);
+                } else {
+                    listView.items().eq(index - 1).after(items);
+                }
+                for (var idx = 0; idx < items.length; idx ++) {
+                    listView.trigger(ITEM_CHANGE, { item: [items[idx]], data: dataItems[idx], ns: ui });
+                }
+            });
+        },
+
         append: function(dataItems) {
-            return this._insert(dataItems, 'append');
+            return this.insertAt(dataItems, -1);
         },
 
         prepend: function(dataItems) {
-            return this._insert(dataItems, 'prepend');
+            return this.insertAt(dataItems, 0);
         },
 
         replace: function(dataItems) {
             this.element.empty();
-            return this._insert(dataItems, 'append');
+            return this.insertAt(dataItems, 0);
         },
 
         replaceGrouped: function(groups) {
@@ -1001,16 +1018,6 @@ kendo_module({
                 };
 
             return this._renderItems([dataItem], replaceItem)[0];
-        },
-
-        _insert: function(dataItems, method) {
-            var listView = this;
-            return this._renderItems(dataItems, function(items) {
-                listView.element[method](items);
-                for (var idx = 0; idx < items.length; idx ++) {
-                    listView.trigger(ITEM_CHANGE, { item: [items[idx]], data: dataItems[idx], ns: ui });
-                }
-            });
         },
 
         _renderItems: function(dataItems, callback) {

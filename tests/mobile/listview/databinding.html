@@ -246,6 +246,45 @@
                 ok(newA.data('kendoMobileButton'));
             });
 
+            test("unshifting datasource updates the listview as expected", 2, function() {
+                var dom = $("<ul/>");
+
+                var listView = new ListView(dom, {
+                    dataSource: [1, 2]
+                });
+
+                listView.dataSource.data().unshift(3);
+
+                equal(dom.children('li').length, 3);
+                equal(dom.children().eq(0).html(), "3");
+            });
+
+            test("splicing datasource updates the listview as expected", 2, function() {
+                var dom = $("<ul/>");
+
+                var listView = new ListView(dom, {
+                    dataSource: [1, 2]
+                });
+
+                listView.dataSource.data().splice(1, 0, 3);
+
+                equal(dom.children('li').length, 3);
+                equal(dom.children().eq(1).html(), "3");
+            });
+
+            test("pushing in the datasource updates the listview as expected", 2, function() {
+                var dom = $("<ul/>");
+
+                var listView = new ListView(dom, {
+                    dataSource: [1, 2]
+                });
+
+                listView.dataSource.data().push(3);
+
+                equal(dom.children('li').length, 3);
+                equal(dom.children().eq(2).html(), "3");
+            });
+
             test("ListView does not init elements twice", function() {
                 var dom = $("<ul/>"),
                     originInit = kendo.initWidget;
