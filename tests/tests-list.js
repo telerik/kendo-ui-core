@@ -129,6 +129,7 @@ var tests = [
     "core/json.html",
     "core/template.html",
     "core/mobileos.html",
+    "core/util.html",
     "core/lint.html",
     "data/datareader.html",
     "data/xmldatareader.html",

@@ -2,8 +2,8 @@
     var kendo = window.kendo = window.kendo || { cultures: {} },
         extend = $.extend,
         each = $.each,
-        proxy = $.proxy,
         isArray = $.isArray,
+        proxy = $.proxy,
         noop = $.noop,
         math = Math,
         Template,
@@ -60,10 +60,9 @@
         this.options = deepExtend({}, this.options, options);
     };
 
-    function isFunction(fn) {
+    var isFunction = kendo.isFunction = function(fn) {
         return typeof fn === "function";
-    }
-    kendo.isFunction = isFunction;
+    };
 
     var preventDefault = function() {
         this._defaultPrevented = true;

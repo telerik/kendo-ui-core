@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chart helpers</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script>
+            // ------------------------------------------------------------
+            var isFunction = kendo.isFunction;
+
+            module("isFunction");
+
+            test("true for functions", function() {
+                ok(isFunction(function() {}));
+            });
+
+            test("false for objects", function() {
+                ok(!isFunction({}));
+            });
+
+            test("false for null", function() {
+                ok(!isFunction(null));
+            });
+
+            test("false for undefined", function() {
+                ok(!isFunction());
+            });
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html> 
