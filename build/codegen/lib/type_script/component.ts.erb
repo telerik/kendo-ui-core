@@ -16,7 +16,9 @@
 % end
 % end
 % methods.each do |method|
-        <%= method.type_script_declaration %>
+% method.type_script_declarations.each do |declaration|
+        <%= declaration %>
+% end
 % end
 % fields.each do |field|
 % if (field.name != 'dataSource' && field.name != "options")
