@@ -161,10 +161,10 @@ kendo_module({
             chart.createLegendItem(value, fields);
 
             if (fields.visible !== false) {
-                var segmentOptions = deepExtend({}, fields.series);
-                chart.evalSegmentOptions(segmentOptions, value, fields);
+                var seriesOptions = deepExtend({}, fields.series);
+                chart.evalSegmentOptions(seriesOptions,  value, fields);
 
-                segment = new FunnelSegment(value, segmentOptions);
+                segment = new FunnelSegment(value, seriesOptions, fields);
                 extend(segment, fields);
 
                 chart.append(segment);
@@ -380,13 +380,14 @@ kendo_module({
     });
 
     var FunnelSegment = ChartElement.extend({
-        init: function(value, options) {
+        init: function(value, options, segmentOptions) {
             var segment = this;
 
             ChartElement.fn.init.call(segment, options);
 
             segment.value = value;
             segment.options.id = uniqueId();
+            segment.options.index = segmentOptions.index;
             segment.enableDiscovery();
         },
 
