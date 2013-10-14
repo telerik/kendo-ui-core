@@ -67,6 +67,14 @@ public class SeriesItemLineTag extends  BaseTag  /* interfaces *//* interfaces *
         setProperty("opacity", value);
     }
 
+    public java.lang.String getStyle() {
+        return (java.lang.String)getProperty("style");
+    }
+
+    public void setStyle(java.lang.String value) {
+        setProperty("style", value);
+    }
+
     public java.lang.String getWidth() {
         return (java.lang.String)getProperty("width");
     }

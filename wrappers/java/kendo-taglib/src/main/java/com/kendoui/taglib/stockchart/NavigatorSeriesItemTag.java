@@ -245,6 +245,14 @@ public class NavigatorSeriesItemTag extends  BaseTag  /* interfaces *//* interfa
         setProperty("stack", value);
     }
 
+    public java.lang.String getStyle() {
+        return (java.lang.String)getProperty("style");
+    }
+
+    public void setStyle(java.lang.String value) {
+        setProperty("style", value);
+    }
+
     public java.lang.String getType() {
         return (java.lang.String)getProperty("type");
     }

@@ -369,6 +369,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("startAngle", value);
     }
 
+    public java.lang.String getStyle() {
+        return (java.lang.String)getProperty("style");
+    }
+
+    public void setStyle(java.lang.String value) {
+        setProperty("style", value);
+    }
+
     public java.lang.String getTargetField() {
         return (java.lang.String)getProperty("targetField");
     }

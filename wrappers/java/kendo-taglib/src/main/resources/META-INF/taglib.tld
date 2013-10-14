@@ -780,7 +780,7 @@ categoryAxis.line.color.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>If set to true the chart will position categories and series points on major ticks. This removes the empty space before and after the series.The default value is false except for "area", "verticalArea", "stepArea" and "verticalStepArea".</description>
+            <description>If set to true the chart will position categories and series points on major ticks. This removes the empty space before and after the series.The default value is false except for "area" and "verticalArea".</description>
             <name>justified</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -3129,6 +3129,12 @@ The function return value is displayed instead of the individual points.The supp
             <type>float</type>
         </attribute>
         <attribute>
+            <description>The supported values are:</description>
+            <name>style</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The data item field containing the target value.</description>
             <name>targetField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -3605,6 +3611,12 @@ By default chart series highlighting is enabled.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The supported values are:</description>
+            <name>style</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The line width in pixels.</description>
@@ -17447,6 +17459,12 @@ If not specified, the available space is split evenly between the series.Availab
             <type>float</type>
         </attribute>
         <attribute>
+            <description>The supported values are:</description>
+            <name>style</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The data field containing the target value.** Available for bullet and verticalBullet series. **** Available for pie series **</description>
             <name>targetField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -17789,6 +17807,12 @@ If not specified, the available space is split evenly between the series.Availab
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The supported values are:</description>
+            <name>style</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The line width.</description>
@@ -21727,7 +21751,7 @@ categoryAxis.line.color.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>If set to true the chart will position categories and series points on major ticks. This removes the empty space before and after the series.The default value is false except for "area", "verticalArea", "stepArea" and "verticalStepArea".</description>
+            <description>If set to true the chart will position categories and series points on major ticks. This removes the empty space before and after the series.The default value is false except for "area" and "verticalArea".</description>
             <name>justified</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -23505,6 +23529,12 @@ Available for column series.</description>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
+            <description>The supported values are:</description>
+            <name>style</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The type of the series. Available types:</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
@@ -24303,6 +24333,12 @@ Available for column series.</description>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
+            <description>The supported values are:</description>
+            <name>style</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The data field containing the target value.** Available for bullet and verticalBullet series. **</description>
             <name>targetField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -24639,6 +24675,12 @@ Available for column series.</description>
             <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The supported values are:</description>
+            <name>style</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The line width.</description>
