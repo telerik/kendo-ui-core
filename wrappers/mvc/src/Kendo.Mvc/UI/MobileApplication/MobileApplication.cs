@@ -108,8 +108,7 @@ namespace Kendo.Mvc.UI
             {
                 options.Add("pushState", PushState);
                 var url = new System.Web.Mvc.UrlHelper(ViewContext.RequestContext);
-                var routeData = ViewContext.RequestContext.RouteData.Values;
-                var root = url.Action(string.Empty, routeData);
+                var root = url.Action(string.Empty, new System.Web.Routing.RouteValueDictionary());
 
                 if (!root.Last().Equals('/'))
                 {
