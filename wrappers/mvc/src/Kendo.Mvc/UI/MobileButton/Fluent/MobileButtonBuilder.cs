@@ -25,6 +25,17 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
+        /// If set to false the widget will be disabled and will not allow the user to click it. The widget is enabled by default.
+        /// </summary>
+        /// <param name="value">The value that configures the enable.</param>
+        public MobileButtonBuilder Enable(bool value)
+        {
+            container.Enable = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The icon of the button. It can be either one of the built-in icons, or a custom one.
         /// </summary>
         /// <param name="value">The value that configures the icon.</param>

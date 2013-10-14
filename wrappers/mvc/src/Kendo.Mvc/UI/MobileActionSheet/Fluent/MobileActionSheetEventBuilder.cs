@@ -16,6 +16,17 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Handlers
         
         /// <summary>
+        /// Fires when the ActionSheet is closed.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the close event.</param>
+        public MobileActionSheetEventBuilder Close(string handler)
+        {
+            Handler("close", handler);
+
+            return this;
+        }
+        
+        /// <summary>
         /// Fires when the ActionSheet is opened.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the open event.</param>

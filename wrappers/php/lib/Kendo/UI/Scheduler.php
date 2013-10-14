@@ -130,6 +130,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * If set to false the footer of the scheduler would not be displayed.
+    * @param boolean|\Kendo\UI\SchedulerFooter|array $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function footer($value) {
+        return $this->setProperty('footer', $value);
+    }
+
+    /**
     * The configuration of the scheduler resource(s) grouping.
     * @param \Kendo\UI\SchedulerGroup|array $value
     * @return \Kendo\UI\Scheduler
@@ -281,6 +290,24 @@ That way all users would see the same dates and times no matter their configured
     */
     public function width($value) {
         return $this->setProperty('width', $value);
+    }
+
+    /**
+    * Sets the start of the work day when the  "Show business hours" button is clicked.
+    * @param date $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function workDayStart($value) {
+        return $this->setProperty('workDayStart', $value);
+    }
+
+    /**
+    * Sets the end of the work day when the  "Show business hours" button is clicked.
+    * @param date $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function workDayEnd($value) {
+        return $this->setProperty('workDayEnd', $value);
     }
 
     /**

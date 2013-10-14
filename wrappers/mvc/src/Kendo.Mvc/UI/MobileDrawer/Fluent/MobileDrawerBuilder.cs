@@ -23,6 +23,17 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
+        /// If set to false, swiping the view will not activate the drawer. In this case, the drawer will only be open by a designated button
+        /// </summary>
+        /// <param name="value">The value that configures the swipetoopen.</param>
+        public MobileDrawerBuilder SwipeToOpen(bool value)
+        {
+            container.SwipeToOpen = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The text to display in the Navbar title (if present).
         /// </summary>
         /// <param name="value">The value that configures the title.</param>

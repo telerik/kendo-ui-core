@@ -34,6 +34,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// If set to false the widget will be disabled and will not allow the user to change its checked state. The widget is enabled by default.
+        /// </summary>
+        /// <param name="value">The value that configures the enable.</param>
+        public MobileSwitchBuilder Enable(bool value)
+        {
+            container.Enable = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// The OFF label.
         /// </summary>
         /// <param name="value">The value that configures the offlabel.</param>

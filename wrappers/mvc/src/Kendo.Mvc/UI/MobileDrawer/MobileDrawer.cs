@@ -26,6 +26,8 @@ namespace Kendo.Mvc.UI
 
 //>> Fields
         
+        public bool SwipeToOpen { get; set; }
+        
         public string Title { get; set; }
         
         public MobileDrawerPosition Position { get; set; }

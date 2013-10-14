@@ -73,6 +73,14 @@ public class ButtonTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("enable", value);
     }
 
+    public java.lang.String getIcon() {
+        return (java.lang.String)getProperty("icon");
+    }
+
+    public void setIcon(java.lang.String value) {
+        setProperty("icon", value);
+    }
+
     public java.lang.String getImageUrl() {
         return (java.lang.String)getProperty("imageUrl");
     }

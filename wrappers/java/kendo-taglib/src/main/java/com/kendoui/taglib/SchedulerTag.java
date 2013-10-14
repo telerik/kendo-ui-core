@@ -55,6 +55,10 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("editable", value);
     }
 
+    public void setFooter(com.kendoui.taglib.scheduler.FooterTag value) {
+        setProperty("footer", value);
+    }
+
     public void setGroup(com.kendoui.taglib.scheduler.GroupTag value) {
         setProperty("group", value);
     }
@@ -199,6 +203,14 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("eventTemplate", value);
     }
 
+    public boolean getFooter() {
+        return (boolean)getProperty("footer");
+    }
+
+    public void setFooter(boolean value) {
+        setProperty("footer", value);
+    }
+
     public java.lang.Object getHeight() {
         return (java.lang.Object)getProperty("height");
     }
@@ -277,6 +289,22 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
 
     public void setWidth(java.lang.Object value) {
         setProperty("width", value);
+    }
+
+    public java.util.Date getWorkDayEnd() {
+        return (java.util.Date)getProperty("workDayEnd");
+    }
+
+    public void setWorkDayEnd(java.util.Date value) {
+        setProperty("workDayEnd", value);
+    }
+
+    public java.util.Date getWorkDayStart() {
+        return (java.util.Date)getProperty("workDayStart");
+    }
+
+    public void setWorkDayStart(java.util.Date value) {
+        setProperty("workDayStart", value);
     }
 
     public String getAdd() {

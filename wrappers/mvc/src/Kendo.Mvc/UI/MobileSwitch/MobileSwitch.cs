@@ -25,6 +25,8 @@ namespace Kendo.Mvc.UI
         
         public bool Checked { get; set; }
         
+        public bool Enable { get; set; }
+        
         public string OffLabel { get; set; }
         
         public string OnLabel { get; set; }

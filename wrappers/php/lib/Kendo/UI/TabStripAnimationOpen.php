@@ -24,15 +24,6 @@ class TabStripAnimationOpen extends \Kendo\SerializableObject {
         return $this->setProperty('effects', $value);
     }
 
-    /**
-    * 
-    * @param boolean $value
-    * @return \Kendo\UI\TabStripAnimationOpen
-    */
-    public function show($value) {
-        return $this->setProperty('show', $value);
-    }
-
 //<< Properties
 }
 
