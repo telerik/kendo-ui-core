@@ -39,7 +39,8 @@ kendo_module({
         Observable = kendo.Observable,
         Ticker = diagram.Ticker,
         ToBackUnit = diagram.ToBackUnit,
-        ToFrontUnit = diagram.ToFrontUnit;
+        ToFrontUnit = diagram.ToFrontUnit,
+        Dictionary = diagram.Dictionary;
 
     // Constants ==============================================================
     var NS = ".kendoDiagram",
@@ -335,12 +336,20 @@ kendo_module({
                 return this._bounds.topLeft();
             }
         },
-        copy: function () {
-            var json = this.serialize(),
-                copyShape = new Shape(json.options);
 
-            return copyShape;
+        /**
+         * Returns a clone of this shape.
+         * @returns {Shape}
+         */
+        clone: function () {
+            var json = this.serialize(),
+                clone = new Shape(json.options);
+            clone.diagram = this.diagram;
+            clone.id  = kendo.diagram.randomId();
+            clone.visual.native.id = clone.id;
+            return clone;
         },
+
         visualBounds: function () {
             var bounds = this.bounds(),
                 tl = bounds.topLeft(),
@@ -445,19 +454,28 @@ kendo_module({
                 }
             }
         },
-        getConnector: function (name, point) {
+        /**
+         * Gets a connector of this shape either by the connector's supposed name or
+         * via a Point in which case the closest connector will be returned.
+         * @param nameOrPoint The name of a Connector or a Point.
+         * @returns {Connector}
+         */
+        getConnector: function (nameOrPoint) {
             var i, ctr;
-            name = name.toLocaleLowerCase();
-            for (i = 0; i < this.connectors.length; i++) {
-                ctr = this.connectors[i];
-                if (ctr.options.name.toLocaleLowerCase() == name) {
-                    return ctr;
+            if (Utils.isString(nameOrPoint)) {
+                nameOrPoint = nameOrPoint.toLocaleLowerCase();
+                for (i = 0; i < this.connectors.length; i++) {
+                    ctr = this.connectors[i];
+                    if (ctr.options.name.toLocaleLowerCase() == nameOrPoint) {
+                        return ctr;
+                    }
                 }
             }
-            if (point !== undefined) {
-                return closestConnector(point, this);
+            else if (nameOrPoint instanceof Point) {
+                return closestConnector(nameOrPoint, this);
             }
-            return this.connectors[0];
+            else
+                return this.connectors.length ? this.connectors[0] : null;
         },
         getPosition: function (side) {
             var b = this.bounds(),
@@ -693,7 +711,7 @@ kendo_module({
             that.targetPoint(to);
             that.content(that.options.content);
             that.definers = [];
-            if(Utils.isDefined(options) && options.points){
+            if (Utils.isDefined(options) && options.points) {
                 that.points(options.points);
             }
             that.refresh();
@@ -738,7 +756,7 @@ kendo_module({
                     this.refresh();
                 }
                 else if (source instanceof Shape) {
-                    this.sourceConnector = source.getConnector(AUTO, this.targetPoint());
+                    this.sourceConnector = source.getConnector(this.targetPoint());
                     this.sourceConnector.connections.push(this);
                     this.refresh();
                 }
@@ -777,7 +795,7 @@ kendo_module({
                     this.refresh();
                 }
                 else if (target instanceof Shape) {
-                    this.targetConnector = target.getConnector(AUTO, this.sourcePoint());
+                    this.targetConnector = target.getConnector(this.sourcePoint());
                     this.targetConnector.connections.push(this);
                     this.refresh();
                 }
@@ -875,8 +893,11 @@ kendo_module({
                     if (definition instanceof diagram.Point) {
                         this.definers.push(new diagram.PathDefiner(definition));
                     }
+                    else if (definition.hasOwnProperty("x") && definition.hasOwnProperty("y")) { // e.g. Clipboard does not preserve the Point definition and tunred into an Object
+                        this.definers.push(new diagram.PathDefiner(new Point(definition.x, definition.y)));
+                    }
                     else {
-                        throw "A Connection point needs to be a Point.";
+                        throw "A Connection point needs to be a Point or an object with x and y properties.";
                     }
                 }
 
@@ -1043,12 +1064,16 @@ kendo_module({
             this.options = deepExtend({}, this.options, options);
             this.path.redraw(options);
         },
-        copy: function () {
+        /**
+         * Returns a clone of this connection.
+         * @returns {Connection}
+         */
+        clone: function () {
             var json = this.serialize(),
-                copy = new Connection(this.from, this.to, json.options);
-            copy.diagram = this.diagram;
+                clone = new Connection(this.from, this.to, json.options);
+            clone.diagram = this.diagram;
 
-            return copy;
+            return clone;
         },
         _clearSourceConnector: function () {
             this.sourceConnector.connections.remove(this);
@@ -1640,19 +1665,44 @@ kendo_module({
             }
         },
         _paste: function () {
-            var offsetX, offsetY, item, copied;
+            var offsetX, offsetY, item, copied, connector, shape;
             if (this._clipboard.length > 0) {
+                var mapping = new Dictionary();
+
                 offsetX = this._copyOffset * this.options.copy.offsetX;
                 offsetY = this._copyOffset * this.options.copy.offsetY;
                 this.select(false);
+                // first the shapes
                 for (var i = 0; i < this._clipboard.length; i++) {
                     item = this._clipboard[i];
-                    copied = item.copy();
+                    if (item instanceof Connection) continue;
+                    copied = item.clone();
+                    mapping.set(item.id, copied.id);
+                    this._addItem(copied);
+                    copied.position(new Point(item.options.x + offsetX, item.options.y + offsetY));
+                    copied.select(true);
+                }
+                // then the connections
+                for (var i = 0; i < this._clipboard.length; i++) {
+                    item = this._clipboard[i];
+                    if (item instanceof Shape) continue;
+                    copied = item.clone();
+                    if (item.source() instanceof Connector) { // if Point then it's a floating end
+                        connector = item.source();
+                        shape = this.getId(mapping.get(connector.shape.id));
+                        copied.sourcePoint(shape.getConnector(connector.options.name));
+                    }
+                    if (item.target() instanceof Connector) {
+                        connector = item.target();
+                        shape = this.getId(mapping.get(connector.shape.id));
+                        copied.targetPoint(shape.getConnector(connector.options.name));
+                    }
                     this._addItem(copied);
                     copied.position(new Point(item.options.x + offsetX, item.options.y + offsetY));
                     copied.select(true);
                 }
                 this._copyOffset += 1;
+
             }
         },
         _addItem: function (item) {
