@@ -345,7 +345,7 @@ kendo_module({
             var json = this.serialize(),
                 clone = new Shape(json.options);
             clone.diagram = this.diagram;
-            clone.id  = kendo.diagram.randomId();
+            clone.id = kendo.diagram.randomId();
             clone.visual.native.id = clone.id;
             return clone;
         },
@@ -707,8 +707,8 @@ kendo_module({
             that.path.background("none");
             that.visual.append(that.path);
             that._sourcePoint = that._targetPoint = new Point();
-            that.sourcePoint(from);
-            that.targetPoint(to);
+            that.source(from);
+            that.target(to);
             that.content(that.options.content);
             that.definers = [];
             if (Utils.isDefined(options) && options.points) {
@@ -722,98 +722,158 @@ kendo_module({
             strokeThickness: 1,
             startCap: "FilledCircle",
             endCap: "ArrowEnd",
+            points: [],
             cssClass: "k-connection"
         },
+
+        /**
+         * Gets the Point where the source of the connection resides.
+         * If the endpoint in Auto-connector the location of the resolved connector will be returned.
+         * If the endpoint is floating the location of the endpoint is returned.
+         */
+        sourcePoint: function () {
+            return this._resolvedSourceConnector ? this._resolvedSourceConnector.position() : this._sourcePoint;
+        },
+
         /**
          * Gets or sets the Point where the source of the connection resides.
          * @param source The source of this connection. Can be a Point, Shape, Connector.
-         * @param undoable The target of this connection. Can be a Point, Shape, Connector.
+         * @param undoable Whether the change or assignment should be undoable.
          */
-        sourcePoint: function (source, undoable) {
-            if (undoable && this.diagram) {
-                this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, source));
-            }
-            else {
-                if (source !== undefined) {
-                    this.from = source;
+        source: function (source, undoable) {
+            if (Utils.isDefined(source)) {
+                if (undoable && this.diagram) {
+                    this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, source));
                 }
-                if (source === null) { // detach
-                    if (this.sourceConnector) {
-                        this._sourcePoint = this._resolvedSourceConnector.position();
-                        this._clearSourceConnector();
+                else {
+                    if (source !== undefined) {
+                        this.from = source;
+                    }
+                    if (source === null) { // detach
+                        if (this.sourceConnector) {
+                            this._sourcePoint = this._resolvedSourceConnector.position();
+                            this._clearSourceConnector();
+                        }
+                    }
+                    else if (source instanceof Connector) {
+                        this.sourceConnector = source;
+                        this.sourceConnector.connections.push(this);
+                        this.refresh();
+                    }
+                    else if (source instanceof Point) {
+                        this._sourcePoint = source;
+                        if (this.sourceConnector) {
+                            this._clearSourceConnector();
+                        }
+                        this.refresh();
+                    }
+                    else if (source instanceof Shape) {
+                        this.sourceConnector = source.getConnector(AUTO);// source.getConnector(this.targetPoint());
+                        this.sourceConnector.connections.push(this);
+                        this.refresh();
                     }
                 }
-                else if (source instanceof Connector) {
-                    this.sourceConnector = source;
-                    this.sourceConnector.connections.push(this);
-                    this.refresh();
-                }
-                else if (source instanceof Point) {
-                    this._sourcePoint = source;
-                    if (this.sourceConnector) {
-                        this._clearSourceConnector();
-                    }
-                    this.refresh();
-                }
-                else if (source instanceof Shape) {
-                    this.sourceConnector = source.getConnector(this.targetPoint());
-                    this.sourceConnector.connections.push(this);
-                    this.refresh();
-                }
             }
-            return this._resolvedSourceConnector ? this._resolvedSourceConnector.position() : this._sourcePoint;
-        },
-        /**
-         * Gets or sets the Point where the target of the connection resides.
-         * @param source The source of this connection. Can be a Point, Shape, Connector.
-         * @param undoable The target of this connection. Can be a Point, Shape, Connector.
-         */
-        targetPoint: function (target, undoable) {
-            if (undoable && this.diagram) {
-                this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, target));
-            }
-            else {
-                if (target !== undefined) {
-                    this.to = target;
-                }
-                if (target === null) { // detach
-                    if (this.targetConnector) {
-                        this._targetPoint = this._resolvedTargetConnector.position();
-                        this._clearTargetConnector();
-                    }
-                }
-                else if (target instanceof Connector) {
-                    this.targetConnector = target;
-                    this.targetConnector.connections.push(this);
-                    this.refresh();
-                }
-                else if (target instanceof Point) {
-                    this._targetPoint = target;
-                    if (this.targetConnector) {
-                        this._clearTargetConnector();
-                    }
-                    this.refresh();
-                }
-                else if (target instanceof Shape) {
-                    this.targetConnector = target.getConnector(this.sourcePoint());
-                    this.targetConnector.connections.push(this);
-                    this.refresh();
-                }
-            }
-            return this._resolvedTargetConnector ? this._resolvedTargetConnector.position() : this._targetPoint;
-        },
-        /**
-         * Returns the source (start, initial, from) Connector if the start is attached to a Shape. If floating, this returns a position.
-         */
-        source: function () {
             return this.sourceConnector ? this.sourceConnector : this._sourcePoint;
         },
+
         /**
-         * Returns the target (end, final, to, sink) Connector if the end is attached to a Shape. If floating, this returns a position.
+         * Gets or sets the PathDefiner of the sourcePoint.
+         * The left part of this definer is always null since it defines the source tangent.
+         * @param value
+         * @returns {*}
          */
-        target: function () {
+        sourceDefiner: function (value) {
+            if (value) {
+                if (value instanceof diagram.PathDefiner) {
+                    value.left = null;
+                    this._sourceDefiner = value;
+                    this.source(value.point); // refresh implicit here
+                }
+                else {
+                    throw "The sourceDefiner needs to be a PathDefiner.";
+                }
+            } else {
+                if (!this._sourceDefiner) {
+                    this._sourceDefiner = new diagram.PathDefiner(this.sourcePoint(), null, null);
+                }
+                return this._sourceDefiner;
+            }
+        },
+
+        /**
+         * Gets  the Point where the target of the connection resides.
+         */
+        targetPoint: function () {
+            return this._resolvedTargetConnector ? this._resolvedTargetConnector.position() : this._targetPoint;
+        },
+
+        /**
+         * Gets or sets the Point where the target of the connection resides.
+         * @param target The target of this connection. Can be a Point, Shape, Connector.
+         * @param undoable  Whether the change or assignment should be undoable.
+         */
+        target: function (target, undoable) {
+            if (Utils.isDefined(target)) {
+                if (undoable && this.diagram) {
+                    this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, target));
+                }
+                else {
+                    if (target !== undefined) {
+                        this.to = target;
+                    }
+                    if (target === null) { // detach
+                        if (this.targetConnector) {
+                            this._targetPoint = this._resolvedTargetConnector.position();
+                            this._clearTargetConnector();
+                        }
+                    }
+                    else if (target instanceof Connector) {
+                        this.targetConnector = target;
+                        this.targetConnector.connections.push(this);
+                        this.refresh();
+                    }
+                    else if (target instanceof Point) {
+                        this._targetPoint = target;
+                        if (this.targetConnector) {
+                            this._clearTargetConnector();
+                        }
+                        this.refresh();
+                    }
+                    else if (target instanceof Shape) {
+                        this.targetConnector = target.getConnector(AUTO);// target.getConnector(this.sourcePoint());
+                        this.targetConnector.connections.push(this);
+                        this.refresh();
+                    }
+                }
+            }
             return this.targetConnector ? this.targetConnector : this._targetPoint;
         },
+
+        /**
+         * Gets or sets the PathDefiner of the targetPoint.
+         * The right part of this definer is always null since it defines the target tangent.
+         * @param value
+         * @returns {*}
+         */
+        targetDefiner: function (value) {
+            if (value) {
+                if (value instanceof diagram.PathDefiner) {
+                    value.right = null;
+                    this._targetDefiner = value;
+                    this.target(value.point); // refresh implicit here
+                }
+                else {
+                    throw "The sourceDefiner needs to be a PathDefiner.";
+                }
+            } else {
+                if (!this._targetDefiner) {
+                    this._targetDefiner = new diagram.PathDefiner(this.targetPoint(), null, null);
+                }
+                return this._targetDefiner;
+            }
+        },
+
         /**
          * Selects or unselects this connections.
          * @param value True to select, false to unselect.
@@ -837,6 +897,7 @@ kendo_module({
                 // TODO: Move this to base type.
             }
         },
+
         /**
          * Gets or sets the bounds of this connection.
          * @param value A Rect object.
@@ -927,53 +988,6 @@ kendo_module({
             return pts;
         },
 
-        /**
-         * Gets or sets the PathDefiner of the sourcePoint.
-         * The left part of this definer is always null since it defines the source tangent.
-         * @param value
-         * @returns {*}
-         */
-        sourceDefiner: function (value) {
-            if (value) {
-                if (value instanceof diagram.PathDefiner) {
-                    value.left = null;
-                    this._sourceDefiner = value;
-                    this.sourcePoint(value.point); // refresh implicit here
-                }
-                else {
-                    throw "The sourceDefiner needs to be a PathDefiner.";
-                }
-            } else {
-                if (!this._sourceDefiner) {
-                    this._sourceDefiner = new diagram.PathDefiner(this.sourcePoint(), null, null);
-                }
-                return this._sourceDefiner;
-            }
-        },
-
-        /**
-         * Gets or sets the PathDefiner of the targetPoint.
-         * The right part of this definer is always null since it defines the target tangent.
-         * @param value
-         * @returns {*}
-         */
-        targetDefiner: function (value) {
-            if (value) {
-                if (value instanceof diagram.PathDefiner) {
-                    value.right = null;
-                    this._targetDefiner = value;
-                    this.targetPoint(value.point); // refresh implicit here
-                }
-                else {
-                    throw "The sourceDefiner needs to be a PathDefiner.";
-                }
-            } else {
-                if (!this._targetDefiner) {
-                    this._targetDefiner = new diagram.PathDefiner(this.targetPoint(), null, null);
-                }
-                return this._targetDefiner;
-            }
-        },
         serialize: function () {
 
             var json = deepExtend({},
@@ -1604,10 +1618,10 @@ kendo_module({
             }
 
             for (i = 0; i < sources.length; i++) {
-                sources[i].sourcePoint(null, undoable);
+                sources[i].source(null, undoable);
             }
             for (i = 0; i < targets.length; i++) {
-                targets[i].targetPoint(null, undoable);
+                targets[i].target(null, undoable);
             }
         },
         _removeConnection: function (connection, undoable) {
@@ -1689,13 +1703,22 @@ kendo_module({
                     copied = item.clone();
                     if (item.source() instanceof Connector) { // if Point then it's a floating end
                         connector = item.source();
-                        shape = this.getId(mapping.get(connector.shape.id));
-                        copied.sourcePoint(shape.getConnector(connector.options.name));
+                        if (mapping.containsKey(connector.shape.id)) { // occurs when an attached connection is pasted with unselected shape parents
+                            shape = this.getId(mapping.get(connector.shape.id));
+                            copied.source(shape.getConnector(connector.options.name));
+                        } else {
+                            copied.source(new Point(item.sourcePoint().x + offsetX, item.sourcePoint().y + offsetY));
+                        }
                     }
                     if (item.target() instanceof Connector) {
                         connector = item.target();
-                        shape = this.getId(mapping.get(connector.shape.id));
-                        copied.targetPoint(shape.getConnector(connector.options.name));
+                        if (mapping.containsKey(connector.shape.id)) {
+                            shape = this.getId(mapping.get(connector.shape.id));
+                            copied.target(shape.getConnector(connector.options.name));
+                        }
+                        else {
+                            copied.target(new Point(item.targetPoint().x + offsetX, item.targetPoint().y + offsetY));
+                        }
                     }
                     this._addItem(copied);
                     copied.position(new Point(item.options.x + offsetX, item.options.y + offsetY));

@@ -153,18 +153,18 @@ kendo_module({
         },
         undo: function () {
             if (this._undoSource !== undefined) {
-                this.item.sourcePoint(this._undoSource, false);
+                this.item.source(this._undoSource, false);
             }
             if (this._undoTarget !== undefined) {
-                this.item.targetPoint(this._undoTarget, false);
+                this.item.target(this._undoTarget, false);
             }
         },
         redo: function () {
             if (this._redoSource !== undefined) {
-                this.item.sourcePoint(this._redoSource, false);
+                this.item.source(this._redoSource, false);
             }
             if (this._redoTarget !== undefined) {
-                this.item.targetPoint(this._redoTarget, false);
+                this.item.target(this._redoTarget, false);
             }
         }
     });
@@ -179,12 +179,12 @@ kendo_module({
             this.title = "Connection Editing";
         },
         undo: function () {
-            this.item.sourcePoint(this._undoSource, false);
-            this.item.targetPoint(this._undoTarget, false);
+            this.item.source(this._undoSource, false);
+            this.item.target(this._undoTarget, false);
         },
         redo: function () {
-            this.item.sourcePoint(this._redoSource, false);
-            this.item.targetPoint(this._redoTarget, false);
+            this.item.source(this._redoSource, false);
+            this.item.target(this._redoTarget, false);
         }
     });
 
@@ -585,16 +585,16 @@ kendo_module({
             selectSingle(this.toolService.activeConnection, meta);
         },
         move: function (p) {
-            this.toolService.activeConnection.targetPoint(p);
+            this.toolService.activeConnection.target(p);
             return true;
         },
         end: function () {
             var nc = this.toolService.activeConnection, hi = this.toolService.hoveredItem, connector = this.toolService._hoveredConnector;
             if (connector && connector._c != nc.sourceConnector) {
-                nc.targetPoint(connector._c);
+                nc.target(connector._c);
             }
             else if (hi) {
-                nc.targetPoint(hi);
+                nc.target(hi);
             }
             this.toolService._connectionManipulation();
         },
@@ -954,19 +954,19 @@ kendo_module({
         move: function (handle, p) {
             switch (handle) {
                 case -1:
-                    this.connection.sourcePoint(p);
+                    this.connection.source(p);
                     break;
                 case 1:
-                    this.connection.targetPoint(p);
+                    this.connection.target(p);
                     break;
                 default:
                     var delta = p.minus(this.startPoint);
                     this.startPoint = p;
                     if (!this.connection.sourceConnector) {
-                        this.connection.sourcePoint(this.connection.sourcePoint().plus(delta));
+                        this.connection.source(this.connection.sourcePoint().plus(delta));
                     }
                     if (!this.connection.targetConnector) {
-                        this.connection.targetPoint(this.connection.targetPoint().plus(delta));
+                        this.connection.target(this.connection.targetPoint().plus(delta));
                     }
                     break;
             }
@@ -985,10 +985,10 @@ kendo_module({
             if (this.handle !== undefined) {
                 switch (this.handle) {
                     case -1:
-                        this.connection.sourcePoint(target);
+                        this.connection.source(target);
                         break;
                     case 1:
-                        this.connection.targetPoint(target);
+                        this.connection.target(target);
                         break;
                 }
             }

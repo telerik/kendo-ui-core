@@ -393,8 +393,8 @@ test("Connection connect - resolve auto connectors border test", function () {
     var s2 = kdiagram.addShape(new Point(160, 160));
 
     var c1 = kdiagram.connect(s1, s2);
-    equal(c1._resolvedSourceConnector.options.name, "Right");
-    equal(c1._resolvedTargetConnector.options.name, "Top");
+    equal(c1._resolvedSourceConnector.options.name, "Bottom");
+    equal(c1._resolvedTargetConnector.options.name, "Left");
 });
 
 test("Connection connect - resolve auto connectors after move test", function () {
@@ -402,8 +402,8 @@ test("Connection connect - resolve auto connectors after move test", function ()
     var s2 = kdiagram.addShape(new Point(160, 160));
 
     var c1 = kdiagram.connect(s1, s2);
-    equal(c1._resolvedSourceConnector.options.name, "Right");
-    equal(c1._resolvedTargetConnector.options.name, "Top");
+    equal(c1._resolvedSourceConnector.options.name, "Bottom");
+    equal(c1._resolvedTargetConnector.options.name, "Left");
 
     s2.position(new Point(300, 100));
     c1.refresh();
@@ -555,7 +555,7 @@ test("Copy and Paste - positions", function () {
 test("Copy - copying the options", function () {
     var shapesCount = d.shapes.length;
     var s1 = d.shapes[0];
-    var copy = s1.copy();
+    var copy = s1.clone();
 
     deepEqual(copy.options, s1.options);
 });
@@ -563,7 +563,7 @@ test("Copy - copying the options", function () {
 test("Copy connection", function () {
     var c1 = d.connect(d.shapes[0], d.shapes[1]);
 
-    var copy = c1.copy();
+    var copy = c1.clone();
 
     deepEqual(copy.options, c1.options);
     deepEqual(copy.from, c1.from);
