@@ -1,4 +1,4 @@
-﻿kendo_module({
+kendo_module({
     id: "button",
     name: "Button",
     category: "web",
