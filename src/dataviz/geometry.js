@@ -17,21 +17,7 @@
         util = dataviz.util,
         rad = util.rad;
 
-    // Graphical primitives ===================================================
-    var Group = ObservableObject.extend({
-        init: function() {
-            this.children = [];
-            this.options = {};
-            ObservableObject.fn.init.call(this, this);
-        },
-
-        append: function() {
-            append(this.children, arguments);
-        }
-        // traverse
-        // etc.
-    });
-
+    // Geometrical primitives =================================================
     var Point = Observable.extend({
         init: function(x, y) {
             var point = this;
@@ -53,15 +39,12 @@
         },
 
         set: function(field, value) {
-            if (field === "x") {
-                this.x = value;
-            } else {
-                this.y = value;
-            }
+            this[field] = value;
+            this.trigger(CHANGE);
         },
 
         get: function(field) {
-            return field === "x" ? this.x : this.y;
+            return this[field];
         },
 
         rotate: function(center, degrees) {
@@ -112,6 +95,95 @@
         }
     });
 
+    var Rect = Observable.extend({
+        init: function(p0, p1) {
+            var rect = this,
+                change = function() {
+                    rect.trigger(CHANGE);
+                };
+
+            rect.p0 = p0 || new Point();
+            rect.p1 = p1 || new Point();
+
+            rect.p0.bind(CHANGE, change);
+            rect.p1.bind(CHANGE, change);
+
+            Observable.fn.init.call(rect, this);
+        },
+
+        width: function() {
+            return this.p1.x - this.p0.x;
+        },
+
+        height: function() {
+            return this.p1.y - this.p0.y;
+        }
+    });
+
+    var Circle = Observable.extend({
+        init: function(center, radius) {
+            var circle = this;
+
+            circle.center = center || new Point();
+            circle.radius = radius || 0;
+
+            circle.center.bind(CHANGE, function() {
+                circle.trigger(CHANGE);
+            });
+
+            Observable.fn.init.call(circle, this);
+        },
+
+        equals: function(other) {
+            return  other &&
+                    other.center.equals(this.center) &&
+                    other.radius === this.radius;
+        },
+
+        clone: function() {
+            var circle = this;
+
+            return new Circle(circle.center.clone(), circle.radius);
+        },
+
+        set: function(field, value) {
+            this[field] = value;
+            this.trigger(CHANGE);
+        },
+
+        get: function(field) {
+            return this[field];
+        },
+
+        pointAt: function(angle) {
+            var c = this.center,
+                r = this.radius,
+                a = rad(angle);
+
+            return new Point(
+                c.x - r * math.cos(a),
+                c.y - r * math.sin(a)
+            );
+        }
+    });
+
+    var Segment = Observable.extend({
+        init: function(anchor, controlIn, controlOut) {
+            var segment = this,
+                change = function() {
+                    segment.trigger(CHANGE);
+                };
+
+            segment.anchor = anchor || new Point();
+            segment.controlIn = controlIn || new Point();
+            segment.controlOut = controlOut || new Point();
+
+            segment.anchor.bind(CHANGE, change);
+            segment.controlIn.bind(CHANGE, change);
+            segment.controlOut.bind(CHANGE, change);
+        }
+    });
+
     var Path = ObservableObject.extend({
         init: function(points, options) {
             var path = this;
@@ -123,12 +195,29 @@
         }
     });
 
+    var Group = ObservableObject.extend({
+        init: function() {
+            this.children = [];
+            this.options = {};
+            ObservableObject.fn.init.call(this, this);
+        },
+
+        append: function() {
+            append(this.children, arguments);
+        }
+        // traverse
+        // etc.
+    });
+
 
     // Exports ================================================================
     deepExtend(dataviz, {
+        Circle: Circle,
         Group: Group,
         Path: Path,
-        Point: Point
+        Point: Point,
+        Rect: Rect,
+        Segment: Segment
     });
 
 })(window.kendo.jQuery);
