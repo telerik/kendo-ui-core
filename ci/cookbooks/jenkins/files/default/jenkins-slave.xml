@@ -39,7 +39,7 @@ THE SOFTWARE.
   <env name="JENKINS_HOME" value="C:\Jenkins" />
   <env name="HOME" value="C:\Users\TeamFoundationUser" />
   <executable>C:\Program Files (x86)\Java\jre7\bin\java.exe</executable>
-  <arguments>-jar "C:\Jenkins\slave.jar" -jnlpUrl http://kendobuild/build/computer/kendobuild-winslave1/slave-agent.jnlp</arguments>
+  <arguments>-jar "C:\Jenkins\slave.jar" -jnlpUrl http://kendobuild.telerik.com/build/computer/kendoiis/slave-agent.jnlp</arguments>
   <!--
     interactive flag causes the empty black Java window to be displayed.
     I'm still debugging this.
