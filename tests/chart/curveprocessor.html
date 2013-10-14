@@ -237,7 +237,118 @@
             module("curveprocessor / control points / restrict", {
             }); 
             
-                       
+            test("first control point is restricted for ascending by y points when its y value is bigger than the y value of the last point", function() {
+                var p0 = new Point(1, 1),
+                    p1 = new Point(1.1, 3),
+                    p2 = new Point(3, 3.1),
+                    tangent = 1.05,
+                    expectedY = 3.1,
+                    expectedX = 1.195,
+                    controlPoint = processor.getFirstControlPoint(tangent, p1, p2, "x", "y"); 
+                    
+                processor.restrictControlPoint(p1,p2, controlPoint, tangent)
+                equal(controlPoint.x.toFixed(3), expectedX, "correct X");
+                equal(controlPoint.y.toFixed(3), expectedY, "correct Y");
+            });   
+
+            test("first control point is restricted for ascending by y descending by x points when its y value is bigger than the y value of the last point", function() {
+                var p0 = new Point(3, 1),
+                    p1 = new Point(2.9, 3),
+                    p2 = new Point(1, 3.1),
+                    tangent = -1.05,
+                    expectedY = 3.1,
+                    expectedX = 2.805,
+                    controlPoint = processor.getFirstControlPoint(tangent, p1, p2, "x", "y"); 
+                    
+                processor.restrictControlPoint(p1,p2, controlPoint, tangent)
+                equal(controlPoint.x.toFixed(3), expectedX, "correct X");
+                equal(controlPoint.y.toFixed(3), expectedY, "correct Y");
+            });
+
+            test("second control point is restricted for ascending by y points when its y value is smaller than the y value of the first point", function() {
+                var p0 = new Point(1, 1),
+                    p1 = new Point(3, 1.1),
+                    p2 = new Point(3.1, 3),
+                    tangent = 0.9523809523809523,
+                    expectedY = 1,
+                    expectedX = 2.895,
+                    controlPoint = processor.getSecondControlPoint(tangent, p0, p1, "x", "y"); 
+                    
+                processor.restrictControlPoint(p0,p1, controlPoint, tangent)
+                equal(controlPoint.x.toFixed(3), expectedX, "correct X");
+                equal(controlPoint.y.toFixed(3), expectedY, "correct Y");
+            });
+            
+            test("second control point is restricted for ascending by y descending by x points when its y value is smaller than the y value of the first point", function() {
+                var p0 = new Point(3, 1),
+                    p1 = new Point(1, 1.1),
+                    p2 = new Point(0.9, 3),
+                    tangent = -0.9523809523809523,
+                    expectedY = 1,
+                    expectedX = 1.105,
+                    controlPoint = processor.getSecondControlPoint(tangent, p0, p1, "x", "y"); 
+                    
+                processor.restrictControlPoint(p0,p1, controlPoint, tangent)
+                equal(controlPoint.x.toFixed(3), expectedX, "correct X");
+                equal(controlPoint.y.toFixed(3), expectedY, "correct Y");
+            }); 
+
+            test("first control point is restricted for descending by y points when its y value is smaller than the y value of the last point", function() {
+                var p0 = new Point(1, 3),
+                    p1 = new Point(1.1, 1),
+                    p2 = new Point(3, 0.9),
+                    tangent = -1.05,
+                    expectedY = 0.9,
+                    expectedX = 1.195,
+                    controlPoint = processor.getFirstControlPoint(tangent, p1, p2, "x", "y"); 
+                    
+                processor.restrictControlPoint(p1,p2, controlPoint, tangent)
+                equal(controlPoint.x.toFixed(3), expectedX, "correct X");
+                equal(controlPoint.y.toFixed(3), expectedY, "correct Y");
+            });
+
+            test("first control point is restricted for descending by y descending by x points when its y value is smaller than the y value of the last point", function() {
+                var p0 = new Point(3, 3),
+                    p1 = new Point(2.9, 1),
+                    p2 = new Point(1, 0.9),
+                    tangent = 1.05,
+                    expectedY = 0.9,
+                    expectedX = 2.805,
+                    controlPoint = processor.getFirstControlPoint(tangent, p1, p2, "x", "y"); 
+                    
+                processor.restrictControlPoint(p1,p2, controlPoint, tangent)
+                equal(controlPoint.x.toFixed(3), expectedX, "correct X");
+                equal(controlPoint.y.toFixed(3), expectedY, "correct Y");
+            }); 
+
+            test("second control point is restricted for descending by y points when its y value is bigger than the y value of the first point", function() {
+                var p0 = new Point(1, 3),
+                    p1 = new Point(3, 2.9),
+                    p2 = new Point(3.1, 1),
+                    tangent = -0.9523809523809523,
+                    expectedY = 3,
+                    expectedX = 2.895,
+                    controlPoint = processor.getSecondControlPoint(tangent, p0, p1, "x", "y"); 
+                    
+                processor.restrictControlPoint(p0,p1, controlPoint, tangent)
+                equal(controlPoint.x.toFixed(3), expectedX, "correct X");
+                equal(controlPoint.y.toFixed(3), expectedY, "correct Y");
+            });
+
+            test("second control point is restricted for descending by y descending by xpoints when its y value is bigger than the y value of the first point", function() {
+                var p0 = new Point(3, 3),
+                    p1 = new Point(1, 2.9),
+                    p2 = new Point(0.9, 1),
+                    tangent = 0.9523809523809523,
+                    expectedY = 3,
+                    expectedX = 1.105,
+                    controlPoint = processor.getSecondControlPoint(tangent, p0, p1, "x", "y"); 
+                    
+                processor.restrictControlPoint(p0,p1, controlPoint, tangent)
+                equal(controlPoint.x.toFixed(3), expectedX, "correct X");
+                equal(controlPoint.y.toFixed(3), expectedY, "correct Y");
+            });            
+            
         })();
         </script>
 
