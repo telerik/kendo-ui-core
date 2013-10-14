@@ -693,7 +693,9 @@ kendo_module({
             that.targetPoint(to);
             that.content(that.options.content);
             that.definers = [];
-
+            if(Utils.isDefined(options) && options.points){
+                that.points(options.points);
+            }
             that.refresh();
         },
         options: {
@@ -952,11 +954,17 @@ kendo_module({
             }
         },
         serialize: function () {
-            // the options json object describes the shape perfectly. So this object can serve as shape serialization.
-            var json = deepExtend({}, {options: this.options, from: this.from.toString(), to: this.to.toString()});
+
+            var json = deepExtend({},
+                {
+                    options: this.options,
+                    from: this.from.toString(),
+                    to: this.to.toString()
+                });
             if (this.model) {
                 json.model = this.model.toString();
             }
+            json.options.points = this.points();
             return json;
         },
         /**

@@ -96,7 +96,22 @@ kendo_module({
             }
             return array;
         },
-
+        serializePoints: function (points) {
+            var res = [];
+            for (var i = 0; i < points.length; i++) {
+                var p = points[i];
+                res.push( p.x + ";" + p.y);
+            }
+            return res.join(";");
+        },
+        deserializePoints: function (s) {
+            var v = s.split(";"), x, y, points=[];
+            if (v.length % 2 !== 0) throw "Not an array of points.";
+            for (var i = 0; i < v.length; i += 2) {
+                points.push(new Point(v[i], v[i + 1]));
+            }
+            return points;
+        },
         /**
          * Returns an integer within the given bounds.
          * @param lower The inclusive lower bound.
