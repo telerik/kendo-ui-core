@@ -223,6 +223,15 @@ The function return value is displayed instead of the individual points.The supp
     }
 
     /**
+    * The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItem
+    */
+    public function style($value) {
+        return $this->setProperty('style', $value);
+    }
+
+    /**
     * Color to use for bars with negative values.** Applicable only to column series. **The plot stops before the missing point and continues after it.
     * @param string $value
     * @return \Kendo\Dataviz\UI\StockChartSeriesItem

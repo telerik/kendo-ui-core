@@ -259,6 +259,15 @@ The function return value is displayed instead of the individual points.The supp
     }
 
     /**
+    * The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function style($value) {
+        return $this->setProperty('style', $value);
+    }
+
+    /**
     * The name of the chart series which is visible in the legend.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem

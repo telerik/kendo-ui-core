@@ -196,6 +196,15 @@ The function return value is displayed instead of the individual points.The supp
     }
 
     /**
+    * The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\SparklineSeriesItem
+    */
+    public function style($value) {
+        return $this->setProperty('style', $value);
+    }
+
+    /**
     * Color to use for bars with negative values.** Applicable only to bar and column series. **
     * @param string $value
     * @return \Kendo\Dataviz\UI\SparklineSeriesItem

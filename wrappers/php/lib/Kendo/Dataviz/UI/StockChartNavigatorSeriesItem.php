@@ -205,6 +205,15 @@ The function return value is displayed instead of the individual points.The supp
     }
 
     /**
+    * The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem
+    */
+    public function style($value) {
+        return $this->setProperty('style', $value);
+    }
+
+    /**
     * The series opacity.
     * @param float $value
     * @return \Kendo\Dataviz\UI\StockChartNavigatorSeriesItem

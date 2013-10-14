@@ -32,6 +32,15 @@ class StockChartSeriesItemLine extends \Kendo\SerializableObject {
         return $this->setProperty('width', $value);
     }
 
+    /**
+    * The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\StockChartSeriesItemLine
+    */
+    public function style($value) {
+        return $this->setProperty('style', $value);
+    }
+
 //<< Properties
 }
 
