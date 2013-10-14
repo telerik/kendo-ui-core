@@ -756,7 +756,7 @@ kendo_module({
                     }
                 }
             }
-       },
+        },
 
         render: function(events) {
             this.content.children(".k-event,.k-more-events,.k-events-container").remove();
@@ -856,64 +856,6 @@ kendo_module({
                 }
             }
             return 1;
-        },
-
-        _removeOffset: function(slotIndex, groupIndex) {
-            var resources = this.groupedResources;
-            var offset = 0;
-
-            if (resources.length) {
-                if (this._isVerticallyGrouped()) {
-                    offset = NUMBER_OF_COLUMNS * NUMBER_OF_ROWS * groupIndex;
-                } else {
-                    var columnCount = this._columnOffsetForResource(resources.length);
-                    var groupCount = this._groupCount();
-                    var cellsPerRow = columnCount * groupCount;
-                    var rowIndex = Math.floor(slotIndex / cellsPerRow);
-                    offset = (columnCount * (groupCount - 1) * rowIndex);
-                    offset += columnCount * groupIndex;
-                }
-            }
-
-            return slotIndex - offset;
-        },
-
-        _applyOffset: function(slotIndex, groupIndex) {
-            var resources = this.groupedResources;
-            var offset = 0;
-            var cellsPerRow = NUMBER_OF_COLUMNS;
-            var rowCount = NUMBER_OF_ROWS;
-
-            if (resources.length) {
-                if (this._isVerticallyGrouped()) {
-                    offset = cellsPerRow * rowCount * groupIndex;
-                } else {
-                    var rowIndex = Math.floor(slotIndex / cellsPerRow);
-                    var columnCount = this._columnOffsetForResource(resources.length);
-                    offset = (columnCount * (this._groupCount() - 1) * rowIndex);
-                    offset += columnCount * groupIndex;
-                }
-            }
-
-            return slotIndex + offset;
-        },
-
-        _groupIndex: function(slotIndex) {
-            var resources = this.groupedResources;
-            if (resources.length) {
-                if (this._isVerticallyGrouped()) {
-                    return Math.floor(slotIndex / (NUMBER_OF_COLUMNS * NUMBER_OF_ROWS));
-                } else {
-                    var columnCount = this._columnOffsetForResource(resources.length);
-                    var groupCount = this._groupCount();
-                    var cellsPerRow = columnCount * groupCount;
-                    var rowIndex = Math.floor(slotIndex / cellsPerRow);
-                    var offset = (columnCount * groupCount * rowIndex);
-
-                    return Math.floor((slotIndex - offset) / columnCount);
-                }
-            }
-            return 0;
         },
 
         _columnOffsetForResource: function(index) {
