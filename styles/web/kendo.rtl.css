@@ -564,6 +564,12 @@
     margin-right: 1em;
 }
 
+.k-rtl .k-edit-buttons .k-scheduler-delete
+{
+    left: auto;
+    right: .6em;
+}
+
 /* Slider */
 
 .k-rtl .k-slider .k-button-decrease
