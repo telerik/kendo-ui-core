@@ -58,8 +58,10 @@
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"]
-                }
-            ],
+				}, {
+                    "text": "Step area",
+                    "url": "area-charts/step-area.html"
+            }],
             "name": "area-charts"
         }, {
             "text": "Bar Charts",
@@ -246,8 +248,10 @@
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"]
-                }
-            ],
+				}, {
+                    "text": "Step line",
+                    "url": "line-charts/step-line.html"
+            }],
             "name": "line-charts"
         }, {
             "text": "Donut Charts",
