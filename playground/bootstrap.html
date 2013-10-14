@@ -30,9 +30,12 @@
                 vertical-align: middle;
             }
 
-            header h1 {
+            header .container h1 {
                 margin: 0;
-                font-size: 20px;
+                font-size: 21px;
+                line-height: 65px;
+                padding-top: 20px;
+                padding-left: 0;
             }
 
             #configure,
@@ -41,6 +44,7 @@
                 border-color: #636363;
                 border-width: 0 0 0 1px;
                 margin-bottom: 0;
+                font-weight: normal;
             }
 
             header .container {
@@ -51,10 +55,22 @@
                 text-transform: uppercase;
                 color: #ccc;
                 font-size: 10px;
+                line-height: 29px;
+            }
+
+            header .k-dropdown,
+            header #font-size-value {
+                font-size: 18px;
+                line-height: 45px;
+                margin-bottom: 9px;
             }
 
             header .k-dropdown {
                 width: 100%;
+            }
+
+            header .k-dropdown-wrap {
+                background-image: none !important;
             }
 
             header .k-dropdown,
@@ -62,14 +78,24 @@
                 background-color: transparent;
                 border-color: #5c5c5c;
                 border-radius: 0;
-                background-image: none;
             }
 
             header .k-dropdown-wrap.k-state-hover,
             header .k-dropdown-wrap.k-state-active,
             header .k-dropdown-wrap.k-state-focused {
                 background-color: #030303;
-                background-image: none;
+            }
+
+            header .k-dropdown .k-input {
+                padding-top: 0;
+                padding-bottom: 0;
+                height: auto;
+                text-indent: 14px;
+            }
+
+            header .k-dropdown .k-input,
+            header .k-dropdown-wrap .k-select {
+                line-height: 45px;
             }
 
             header .k-dropdown .k-i-arrow-s {
@@ -78,6 +104,53 @@
 
             header .k-dropdown-wrap.k-state-default .k-input {
                 color: #fff;
+            }
+
+            header #font-size-value {
+                display: inline-block;
+                vertical-align: top;
+                padding: 1px 0;
+                margin-right: 7%;
+                width: 25%;
+            }
+
+            header .k-slider {
+                vertical-align: top;
+                height: 25px;
+                line-height: 25px;
+                margin-top: 11px;
+                width: 68%;
+            }
+
+            header .k-slider .k-slider-track,
+            header .k-slider .k-slider-selection {
+                height: 2px;
+                background-color: #fff;
+                margin-top: -1px;
+            }
+
+            header .k-slider .k-draghandle {
+                height: 25px;
+                width: 25px;
+                top: -12px;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                -ms-border-radius: 50%;
+                border-radius: 50%;
+
+                border-color: #fff;
+                border-width: 2px;
+                background-color: #000;
+                background-image: none !important;
+            }
+
+            header .k-slider .k-draghandle:hover {
+                background-color: #939393;
+            }
+
+            header .k-slider .k-draghandle.k-state-selected {
+                border-color: #fff;
+                background-color: #fff;
             }
 
             #configure {
@@ -91,14 +164,22 @@
                 color: #fff;
             }
 
+            #demo {
+                padding-top: 46px;
+            }
+
             @media screen and (max-width: 768px) {
                 header .container {
                     padding-right: 0;
                 }
 
+                header .container h1 {
+                    padding-top: 0;
+                    line-height: 50px;
+                }
+
                 header label {
                     border-width: 1px 0 0 0;
-                    padding: 9px 0;
                     display: block;
                 }
 
@@ -143,8 +224,7 @@
 
                         <label class="col-sm-4">
                             <div class="description">Font-size</div>
-                            <span id="font-size-value"></span>
-                            <input type="range" id="font-size">
+                            <span id="font-size-value"></span><input type="range" id="font-size">
                         </label>
                     </div>
                 </div>
