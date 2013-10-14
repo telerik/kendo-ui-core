@@ -29,7 +29,10 @@
             function createChart(options) {
                 var plotArea = {
                     options: {
-                        seriesColors: ["red", "green", "blue"]
+                        seriesColors: ["red", "green", "blue"],
+                        legend:{
+                            visible:false
+                        }
                     }
                 };
 
@@ -59,26 +62,26 @@
             });
 
             test("First segment position", function() {
-                arrayClose(mapPoints(chart.segments[0].points), [
+                arrayClose(mapPoints(chart.points[0].points), [
                     [0, 0], [800, 0], [707, 200], [93, 200]
                 ], TOLERANCE);
             });
 
             test("Second segment position", function() {
-                arrayClose(mapPoints(chart.segments[1].points), [
+                arrayClose(mapPoints(chart.points[1].points), [
                     [93, 200], [706, 200], [613, 400], [186, 400]
                 ], TOLERANCE);
             });
 
             test("Third segment position", function() {
-                arrayClose(mapPoints(chart.segments[2].points), [
+                arrayClose(mapPoints(chart.points[2].points), [
                     [186,400], [613, 400], [520, 600], [280, 600]
                 ], TOLERANCE);
             });
 
 
             test("Creates segments for data points", function() {
-                equal(chart.segments.length, chart.options.series[0].data.length);
+                equal(chart.points.length, chart.options.series[0].data.length);
             });
 
             module("segmentMethod height", {
@@ -102,19 +105,19 @@
             });
 
             test("First segment position", function() {
-                arrayClose(mapPoints(chart.segments[0].points), [
+                arrayClose(mapPoints(chart.points[0].points), [
                     [0, 0], [800, 0], [753, 100], [46, 100]
                 ], TOLERANCE);
             });
 
             test("Second segment position", function() {
-                arrayClose(mapPoints(chart.segments[1].points), [
+                arrayClose(mapPoints(chart.points[1].points), [
                     [46, 100], [753, 100], [660, 300], [140, 300]
                 ], TOLERANCE);
             });
 
             test("Third segment position", function() {
-                arrayClose(mapPoints(chart.segments[2].points), [
+                arrayClose(mapPoints(chart.points[2].points), [
                     [140,300], [660, 300], [520, 600], [280, 600]
                 ], TOLERANCE);
             });
@@ -141,19 +144,19 @@
             });
 
             test("First segment position", function() {
-                arrayClose(mapPoints(chart.segments[0].points), [
+                arrayClose(mapPoints(chart.points[0].points), [
                     [0, 0], [800, 0], [800, 100], [0, 100]
                 ], TOLERANCE);
             });
 
             test("Second segment position", function() {
-                arrayClose(mapPoints(chart.segments[1].points), [
+                arrayClose(mapPoints(chart.points[1].points), [
                     [0, 100], [800, 100], [800, 300], [0, 300]
                 ], TOLERANCE);
             });
 
             test("Third segment position", function() {
-                arrayClose(mapPoints(chart.segments[2].points), [
+                arrayClose(mapPoints(chart.points[2].points), [
                     [0, 300], [800, 300], [800, 600], [0, 600]
                 ], TOLERANCE);
             });
@@ -180,19 +183,19 @@
             });
 
             test("First segment position", function() {
-                arrayClose(mapPoints(chart.segments[0].points), [
+                arrayClose(mapPoints(chart.points[0].points), [
                     [0, 0], [800, 0], [733, 100], [66, 100]
                 ], TOLERANCE);
             });
 
             test("Second segment position", function() {
-                arrayClose(mapPoints(chart.segments[1].points), [
+                arrayClose(mapPoints(chart.points[1].points), [
                     [66, 100], [733, 100], [600, 300], [200, 300]
                 ], TOLERANCE);
             });
 
             test("Third segment position", function() {
-                arrayClose(mapPoints(chart.segments[2].points), [
+                arrayClose(mapPoints(chart.points[2].points), [
                     [200, 300], [600, 300], [400, 600], [400, 600]
                 ], TOLERANCE);
             });
@@ -218,19 +221,19 @@
             })
 
             test("sets point owner", function() {
-                ok(chart.segments[0].owner === chart);
+                ok(chart.points[0].owner === chart);
             });
 
             test("sets point series", function() {
-                equal(chart.segments[0].series.type, "funnel");
+                equal(chart.points[0].series.type, "funnel");
             });
 
             test("sets point category", function() {
-                equal(chart.segments[0].category, "A");
+                equal(chart.points[0].category, "A");
             });
 
             test("sets point dataItem", function() {
-                equal(typeof chart.segments[0].dataItem, "object");
+                equal(typeof chart.points[0].dataItem, "object");
             });
 
             module("Series with empty data", {
@@ -286,19 +289,19 @@
             });
 
             test("First segment position", function() {
-                arrayClose(mapPoints(chart.segments[0].points), [
+                arrayClose(mapPoints(chart.points[0].points), [
                     [0, 0], [800, 0], [760, 54], [40, 54]
                 ], TOLERANCE);
             });
 
             test("Second segment position", function() {
-                arrayClose(mapPoints(chart.segments[1].points), [
+                arrayClose(mapPoints(chart.points[1].points), [
                     [40, 84], [760, 84], [680, 192], [120, 192]
                 ], TOLERANCE);
             });
 
             test("Third segment position", function() {
-                arrayClose(mapPoints(chart.segments[2].points), [
+                arrayClose(mapPoints(chart.points[2].points), [
                     [120, 222], [680, 222], [400, 600], [400, 600]
                 ], TOLERANCE);
             });
@@ -327,19 +330,19 @@
             });
 
             test("First segment position", function() {
-                arrayClose(mapPoints(chart.segments[0].points), [
+                arrayClose(mapPoints(chart.points[0].points), [
                     [0, 0], [800, 0], [760, 53], [40, 53]
                 ], TOLERANCE);
             });
 
             test("Second segment position", function() {
-                arrayClose(mapPoints(chart.segments[1].points), [
+                arrayClose(mapPoints(chart.points[1].points), [
                     [40, 86], [760, 86], [680, 193], [120, 193]
                 ], TOLERANCE);
             });
 
             test("Third segment position", function() {
-                arrayClose(mapPoints(chart.segments[2].points), [
+                arrayClose(mapPoints(chart.points[2].points), [
                     [120, 226], [680, 226], [400, 600], [400, 600]
                 ], TOLERANCE);
             });
@@ -365,19 +368,19 @@
             });
 
             test("First segment position", function() {
-                arrayClose(mapPoints(chart.segments[0].points), [
+                arrayClose(mapPoints(chart.points[0].points), [
                     [0, 0], [800, 0], [514, 262], [285, 262]
                 ], TOLERANCE);
             });
 
             test("Second segment position", function() {
-                arrayClose(mapPoints(chart.segments[1].points), [
+                arrayClose(mapPoints(chart.points[1].points), [
                     [285, 262], [514, 262], [800, 337], [0, 337]
                 ], TOLERANCE);
             });
 
             test("Third segment position", function() {
-                arrayClose(mapPoints(chart.segments[2].points), [
+                arrayClose(mapPoints(chart.points[2].points), [
                     [0, 337], [800, 337], [800, 600], [0, 600]
                 ], TOLERANCE);
             });
@@ -404,19 +407,19 @@
             });
 
             test("First segment position", function() {
-                arrayClose(mapPoints(chart.segments[0].points), [
+                arrayClose(mapPoints(chart.points[0].points), [
                     [0, 0], [800, 0], [514, 243], [285, 243]
                 ], TOLERANCE);
             });
 
             test("Second segment position", function() {
-                arrayClose(mapPoints(chart.segments[1].points), [
+                arrayClose(mapPoints(chart.points[1].points), [
                     [285, 265], [514, 265], [800, 334], [0, 334]
                 ], TOLERANCE);
             });
 
             test("Third segment position", function() {
-                arrayClose(mapPoints(chart.segments[2].points), [
+                arrayClose(mapPoints(chart.points[2].points), [
                     [0, 356], [800, 356], [800, 600], [0, 600]
                 ], TOLERANCE);
             });
@@ -516,19 +519,19 @@
             });
 
             test("First segment position", function() {
-                arrayClose(mapPoints(chart.segments[0].points), [
+                arrayClose(mapPoints(chart.points[0].points), [
                     [89, 0], [711, 0], [488, 243], [311, 243]
                 ], TOLERANCE);
             });
 
             test("Second segment position", function() {
-                arrayClose(mapPoints(chart.segments[1].points), [
+                arrayClose(mapPoints(chart.points[1].points), [
                     [311, 265], [488, 265], [711, 334], [89, 334]
                 ], TOLERANCE);
             });
 
             test("Third segment position", function() {
-                arrayClose(mapPoints(chart.segments[2].points), [
+                arrayClose(mapPoints(chart.points[2].points), [
                     [89, 356], [711, 356], [711, 600], [89, 600]
                 ], TOLERANCE);
             });
@@ -548,7 +551,7 @@
                     .data("kendoChart");
 
                     plotArea = chart._plotArea;
-                    segment = plotArea.charts[0].segments[0];
+                    segment = plotArea.charts[0].points[0];
                     segmentElement = $(getElement(segment.options.id));
                 }
 
