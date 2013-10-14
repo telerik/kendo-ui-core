@@ -4,13 +4,12 @@
         <title>Responsive Kendo UI</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet/less" href="../styles/web/kendo.common.css">
-        <link rel="stylesheet/less" href="../styles/web/kendo.bootstrap.less">
+        <link rel="stylesheet" href="../styles/web/kendo.common.css">
+        <link rel="stylesheet" href="../styles/web/kendo.bootstrap.css">
 
         <script src="../src/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="../src/kendo.web.js"></script>
-        <script src="../demos/mvc/content/shared/js/less.js"></script>
 
         <style>
             html, body {
@@ -63,16 +62,18 @@
                 background-color: transparent;
                 border-color: #5c5c5c;
                 border-radius: 0;
-            }
-
-            header .k-dropdown .k-i-arrow-s {
-                background-position: -16px -32px;
+                background-image: none;
             }
 
             header .k-dropdown-wrap.k-state-hover,
             header .k-dropdown-wrap.k-state-active,
             header .k-dropdown-wrap.k-state-focused {
                 background-color: #030303;
+                background-image: none;
+            }
+
+            header .k-dropdown .k-i-arrow-s {
+                background-position: -16px -32px;
             }
 
             header .k-dropdown-wrap.k-state-default .k-input {
@@ -150,7 +151,7 @@
             </div>
         </header>
 
-        <div class="container">
+        <div id="demo" class="container">
             <ul id="menu">
                 <li>Dashboard</li>
                 <li>Orders</li>
@@ -294,34 +295,6 @@
 
         <script>
             // init page controls
-            $("#dimensions").kendoDropDownList({
-                dataTextField: "text",
-                dataValueField: "value",
-                value: "kendo.common-bootstrap.css",
-                dataSource: [
-                    { text: "Default", value: "kendo.common.css" },
-                    { text: "Bootstrap", value: "kendo.common-bootstrap.css" }
-                ]
-            });
-
-            $("#theme").kendoDropDownList({
-                dataTextField: "text",
-                dataValueField: "value",
-                value: "bootstrap",
-                dataSource: [
-                    { text: "Default", value: "default" },
-                    { text: "Blue Opal", value: "blueopal" },
-                    { text: "Bootstrap", value: "bootstrap" },
-                    { text: "Silver", value: "silver" },
-                    { text: "Uniform", value: "uniform" },
-                    { text: "Metro", value: "metro" },
-                    { text: "Black", value: "black" },
-                    { text: "Metro Black", value: "metroblack" },
-                    { text: "High Contrast", value: "highcontrast" },
-                    { text: "Moonlight", value: "moonlight" },
-                    { text: "Flat", value: "flat" }
-                ]
-            });
 
             var commonRe = /common/gi;
 
@@ -342,6 +315,53 @@
                     return !commonRe.test(this.href);
                 });
             }
+
+            function path(url) {
+                return /(.*\/)[^\/]*$/gi.exec(url)[1];
+            }
+
+            function changeStylesheet(linkCallback) {
+                return function(e) {
+                    var link = linkCallback();
+
+                    if (link.length) {
+                        var linkPath = path(link[0].getAttribute("href"));
+
+                        link[0].setAttribute("href", linkPath + this.value());
+                    }
+                };
+            }
+
+            $("#dimensions").kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                value: "kendo.common-bootstrap.css",
+                dataSource: [
+                    { text: "Default", value: "kendo.common.css" },
+                    { text: "Bootstrap", value: "kendo.common-bootstrap.css" }
+                ],
+                change: changeStylesheet(commonLink)
+            });
+
+            $("#theme").kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                value: "kendo.bootstrap.css",
+                dataSource: [
+                    { text: "Default", value: "kendo.default.css" },
+                    { text: "Blue Opal", value: "kendo.blueopal.css" },
+                    { text: "Bootstrap", value: "kendo.bootstrap.css" },
+                    { text: "Silver", value: "kendo.silver.css" },
+                    { text: "Uniform", value: "kendo.uniform.css" },
+                    { text: "Metro", value: "kendo.metro.css" },
+                    { text: "Black", value: "kendo.black.css" },
+                    { text: "Metro Black", value: "kendo.metroblack.css" },
+                    { text: "High Contrast", value: "kendo.highcontrast.css" },
+                    { text: "Moonlight", value: "kendo.moonlight.css" },
+                    { text: "Flat", value: "kendo.flat.css" }
+                ],
+                change: changeStylesheet(themeLink)
+            });
 
             function sliderChange(e) {
                 var value = e && e.value;
@@ -460,17 +480,17 @@
 
             $("#tabstrip").kendoTabStrip();
 
-            $("select").kendoDropDownList();
+            $("#demo select").kendoDropDownList();
 
-            $("input:not([type])").addClass("k-textbox");
+            $("#demo input:not([type])").addClass("k-textbox");
 
-            $("input[type=date]").kendoDatePicker();
+            $("#demo input[type=date]").kendoDatePicker();
 
-            $("input[type=number]").kendoNumericTextBox();
+            $("#demo input[type=number]").kendoNumericTextBox();
 
-            $("input[type=color]").kendoColorPicker();
+            $("#demo input[type=color]").kendoColorPicker();
 
-            $("textarea").kendoEditor({
+            $("#demo textarea").kendoEditor({
                 tools: [
                     "formatting",
                     "bold", "italic", "underline",
