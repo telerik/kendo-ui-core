@@ -22,7 +22,10 @@
         /// <param name="enable">The boolean value.</param>
         /// <example>
         /// <code lang="CS">
-        /// 
+        /// &lt;%= Html.Kendo().ProgressBar()
+        ///     .Name(&quot;progressBar&quot;)
+        ///     .Animation(false)
+        /// %&gt;
         /// </code>
         /// </example>
         public ProgressBarBuilder Animation(bool enable)
@@ -38,7 +41,10 @@
         /// <param name="animationAction">The action which configures the animation effects.</param>
         /// <example>
         /// <code lang="CS">
-        /// 
+        /// &lt;%= Html.Kendo().ProgressBar()
+        ///     .Name(&quot;progressBar&quot;)
+        ///     .Animation(a => a.Duration(200))
+        /// %&gt;
         /// </code>
         /// </example>
         public ProgressBarBuilder Animation(Action<ProgressBarAnimationBuilder> animationAction)
@@ -54,7 +60,11 @@
         /// <param name="count">The number of chunks</param>
         /// <example>
         /// <code lang="CS">
-        /// 
+        /// &lt;%= Html.Kendo().ProgressBar()
+        ///     .Name(&quot;progressBar&quot;)
+        ///     .Type(ProgressBarType.Chunk)
+        ///     .ChunkCount(10)
+        /// %&gt;
         /// </code>
         /// </example>
         public ProgressBarBuilder ChunkCount(int count)
@@ -70,7 +80,10 @@
         /// <param name="value">true if the component should be enabled, false otherwise; the default is true.</param>
         /// <example>
         /// <code lang="CS">
-        /// 
+        /// &lt;%= Html.Kendo().ProgressBar()
+        ///     .Name(&quot;progressBar&quot;)
+        ///     .Enable(false)
+        /// %&gt;
         /// </code>
         /// </example>
         public ProgressBarBuilder Enable(bool value)
@@ -81,12 +94,35 @@
         }
 
         /// <summary>
+        /// Configures the client-side events
+        /// </summary>
+        /// <param name="configurator">The client events configuration action.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().ProgressBar()
+        ///     .Name(&quot;progressBar&quot;)
+        ///     .Events(events => events
+        ///              .Change("onChange"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ProgressBarBuilder Events(Action<ProgressBarEventBuilder> configurator)
+        {
+            configurator(new ProgressBarEventBuilder(Component.Events));
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the maximum value of the ProgressBar
         /// </summary>
         /// <param name="value">Integer specifying the maximum value</param>
         /// <example>
         /// <code lang="CS">
-        /// 
+        /// &lt;%= Html.Kendo().ProgressBar()
+        ///     .Name(&quot;progressBar&quot;)
+        ///     .Max(200)
+        /// %&gt;
         /// </code>
         /// </example>
         public ProgressBarBuilder Max(int value)
@@ -102,7 +138,10 @@
         /// <param name="value">Integer specifying the minimum value</param>
         /// <example>
         /// <code lang="CS">
-        /// 
+        /// &lt;%= Html.Kendo().ProgressBar()
+        ///     .Name(&quot;progressBar&quot;)
+        ///     .Min(50)
+        /// %&gt;
         /// </code>
         /// </example>
         public ProgressBarBuilder Min(int value)
@@ -118,7 +157,10 @@
         /// <param name="orientation">ProgressBarOrientation enumeration specifying the orientation</param>
         /// <example>
         /// <code lang="CS">
-        /// 
+        /// &lt;%= Html.Kendo().ProgressBar()
+        ///     .Name(&quot;progressBar&quot;)
+        ///     .Orientation(ProgressBarOrientation.Vertical)
+        /// %&gt;
         /// </code>
         /// </example>
         public ProgressBarBuilder Orientation(ProgressBarOrientation orientation)
@@ -134,7 +176,10 @@
         /// <param name="value">The boolean value</param>
         /// <example>
         /// <code lang="CS">
-        /// 
+        /// &lt;%= Html.Kendo().ProgressBar()
+        ///     .Name(&quot;progressBar&quot;)
+        ///     .Reverse(true)
+        /// %&gt;
         /// </code>
         /// </example>
         public ProgressBarBuilder Reverse(bool value)
@@ -150,7 +195,10 @@
         /// <param name="value">The boolean value</param>
         /// <example>
         /// <code lang="CS">
-        /// 
+        /// &lt;%= Html.Kendo().ProgressBar()
+        ///     .Name(&quot;progressBar&quot;)
+        ///     .ShowStatus(false)
+        /// %&gt;
         /// </code>
         /// </example>
         public ProgressBarBuilder ShowStatus(bool value)
@@ -166,7 +214,10 @@
         /// <param name="type">ProgressBarType enumeration specifying the type</param>
         /// <example>
         /// <code lang="CS">
-        /// 
+        /// &lt;%= Html.Kendo().ProgressBar()
+        ///     .Name(&quot;progressBar&quot;)
+        ///     .Type(ProgressBarType.Percent)
+        /// %&gt;
         /// </code>
         /// </example>
         public ProgressBarBuilder Type(ProgressBarType type)
@@ -182,7 +233,12 @@
         /// <param name="value">Integer specifying the value</param>
         /// <example>
         /// <code lang="CS">
-        /// 
+        /// &lt;%= Html.Kendo().ProgressBar()
+        ///     .Name(&quot;progressBar&quot;)
+        ///     .Min(100)
+        ///     .Max(200)
+        ///     .Value(100)
+        /// %&gt;
         /// </code>
         /// </example>
         public ProgressBarBuilder Value(int value)

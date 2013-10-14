@@ -8,7 +8,7 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class ProgressBarController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Rtl()
         {
             return View();
         }

@@ -1030,6 +1030,7 @@
     <Compile Include="Infrastructure\IAuthorizeAttributeCache.cs" />
     <Compile Include="UI\ProgressBar\Fluent\ProgressBarAnimationBuilder.cs" />
     <Compile Include="UI\ProgressBar\Fluent\ProgressBarBuilder.cs" />
+    <Compile Include="UI\ProgressBar\Fluent\ProgressBarEventBuilder.cs" />
     <Compile Include="UI\ProgressBar\Html\ProgressBarHtmlBuilder.cs" />
     <Compile Include="UI\ProgressBar\ProgressBar.cs" />
     <Compile Include="UI\ProgressBar\ProgressBarAnimation.cs" />

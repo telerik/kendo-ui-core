@@ -125,7 +125,7 @@
         /// <param name="writer">The writer object.</param>
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>();
+            var options = new Dictionary<string, object>(Events);
 
             var animation = Animation.ToJson();
 

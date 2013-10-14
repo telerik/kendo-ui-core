@@ -826,7 +826,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///
+        ///  &lt;%= Html.Kendo().ProgressBar()
+        ///       .Name("progressBar")
+        /// %&gt;
         /// </code>
         /// </example>
         public virtual ProgressBarBuilder ProgressBar()
