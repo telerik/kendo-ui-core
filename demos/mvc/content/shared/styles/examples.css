@@ -2918,8 +2918,8 @@ ul.keyboard-legend li a {
 /* Font-face for FF/IE10 */
 @font-face {
     font-family: "Kendo UI Examples";
-    src: url("KendoUI.woff") format("woff"),
-         url("KendoUI.ttf") format("truetype");
+    src: url("kendoui.woff") format("woff"),
+         url("kendoui.ttf") format("truetype");
 }
 
 #device-wrapper .km-icon:after,
