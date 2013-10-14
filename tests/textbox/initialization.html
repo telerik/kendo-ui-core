@@ -91,9 +91,7 @@
             });
 
             test("Change type of the element", function() {
-                input[0].type = "number";
-
-                var textbox = new NumericTextBox(input);
+                var textbox = new NumericTextBox($('<input type="number" />'));
 
                 equal(textbox.element[0].type, "text");
             });
