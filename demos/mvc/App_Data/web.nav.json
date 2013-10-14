@@ -1143,19 +1143,6 @@
             ]
         },
         {
-            "text": "ProgressBar",
-            "name": "progressbar",
-            "spriteCssClass": "progressBarIcon",
-            "items": [
-                {
-                    "text": "Basic usage",
-                    "url": "progressbar/index.html",
-                    "title": "Basic usage of Kendo UI ProgressBar widget",
-                    "meta": "This example shows the core widget features"
-                }
-            ]
-        },
-        {
             "text": "Scheduler",
             "name": "scheduler",
             "documentation": "web/scheduler",
