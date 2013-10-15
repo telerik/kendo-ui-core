@@ -546,8 +546,8 @@ kendo_module({
         CLICK = "click";
 
     function dayInYear(date) {
-        var month = date.getMonth(),
-        days = leapYear(date) ? DAYS_IN_LEAPYEAR[month] : DAYS_IN_YEAR[month];
+        var month = date.getMonth();
+        var days = leapYear(date) ? DAYS_IN_LEAPYEAR[month] : DAYS_IN_YEAR[month];
 
         return days + date.getDate();
     }
@@ -693,22 +693,6 @@ kendo_module({
         return availableRules;
     }
 
-    function eventsByPosition(events, positions) {
-        var result = [],
-            length = positions.length,
-            idx = 0, event;
-
-        for (;idx < length; idx++) {
-            event = events[positions[idx] - 1];
-
-            if (event) {
-                result.push(event);
-            }
-        }
-
-        return result;
-    }
-
     function parseArray(list, range) {
         var idx = 0,
             length = list.length,
@@ -824,6 +808,109 @@ kendo_module({
         return false;
     }
 
+    function startPeriodByFreq(start, rule) {
+        var date = new Date(start);
+
+        switch (rule.freq) {
+            case "yearly":
+                date.setFullYear(date.getFullYear(), 0, 1);
+                break;
+
+            case "monthly":
+                date.setFullYear(date.getFullYear(), date.getMonth(), 1);
+                break;
+
+            case "weekly":
+                setDayOfWeek(date, rule.weekStart, -1);
+                break;
+
+            default:
+                break;
+        }
+
+        if (rule.hours) {
+            date.setHours(0);
+        }
+
+        if (rule.minutes) {
+            date.setMinutes(0);
+        }
+
+        if (rule.seconds) {
+            date.setSeconds(0);
+        }
+
+        return date;
+    }
+
+    function endPeriodByFreq(start, rule) {
+        var date = new Date(start);
+
+        switch (rule.freq) {
+            case "yearly":
+                date.setFullYear(date.getFullYear(), 11, 31);
+                break;
+
+            case "monthly":
+                date.setFullYear(date.getFullYear(), date.getMonth() + 1, 0);
+                break;
+
+            case "weekly":
+                setDayOfWeek(date, rule.weekStart, -1);
+                date.setDate(date.getDate() + 6);
+                break;
+
+            default:
+                break;
+        }
+
+        if (rule.hours) {
+            date.setHours(23);
+        }
+
+        if (rule.minutes) {
+            date.setMinutes(59);
+        }
+
+        if (rule.seconds) {
+            date.setSeconds(59);
+        }
+
+        return date;
+    }
+
+    function normalizeEventsByPosition(events, start, rule) {
+        var periodEvents = events.slice(rule._startIdx);
+        var periodEventsLength = periodEvents.length;
+        var positions = rule.positions;
+        var list = [];
+        var position;
+        var event;
+
+        for (var idx = 0, length = positions.length; idx < length; idx++) {
+            position = positions[idx];
+
+            if (position < 0) {
+                position = periodEventsLength + position;
+            } else {
+                position -= 1; //convert to zero based index
+            }
+
+            event = periodEvents[position];
+
+            if (event) {
+                list.push(event);
+            }
+        }
+
+        events = events.slice(0, rule._startIdx).concat(list);
+
+        rule._endPeriod = endPeriodByFreq(start, rule);
+        rule._startIdx = events.length;
+
+        return events;
+    }
+
     function expand(event, start, end, zone) {
         var rule = parseRule(event.recurrenceRule),
             startTime, endTime, endDate,
@@ -836,12 +923,16 @@ kendo_module({
             eventStartMS,
             eventStart,
             count, freq,
-            current = 1,
+            positions,
+            current,
             events = [];
 
         if (!rule) {
             return [event];
         }
+
+        positions = rule.positions;
+        current = positions ? 0 : 1;
 
         ruleStart = rule.start;
         ruleEnd = rule.end;
@@ -893,6 +984,16 @@ kendo_module({
             start.setHours(hours, minutes, seconds, eventStart.getMilliseconds());
         }
 
+        if (positions) {
+            start = startPeriodByFreq(start, rule);
+            end = endPeriodByFreq(end, rule);
+
+            rule._startPeriod = new Date(start);
+            rule._endPeriod = endPeriodByFreq(start, rule);
+
+            rule._startIdx = 0;
+        }
+
         durationMS = event.duration();
         rule._startTime = startTime = kendo.date.toInvariantTime(start);
 
@@ -924,17 +1025,29 @@ kendo_module({
                 }
             }
 
-            if (count && count === current) {
-                break;
+            if (positions) {
+                freq.next(start, rule);
+                freq.limit(start, end, rule);
+
+                if (start > rule._endPeriod) {
+                    events = normalizeEventsByPosition(events, start, rule);
+                    current = events.length;
+                }
+
+                if (count && count === current) {
+                    break;
+                }
+
+            } else {
+
+                if (count && count === current) {
+                    break;
+                }
+
+                current++;
+                freq.next(start, rule);
+                freq.limit(start, end, rule);
             }
-
-            current++;
-            freq.next(start, rule);
-            freq.limit(start, end, rule);
-        }
-
-        if (rule.positions) {
-            events = eventsByPosition(events, rule.positions);
         }
 
         return events;
@@ -1068,7 +1181,7 @@ kendo_module({
                     instance.weekDays = weekDays = parseWeekDayList(value);
                     break;
                 case "BYSETPOS":
-                    instance.positions = parseArray(value, { start: 1, end: 366 });
+                    instance.positions = parseArray(value, { start: -366, end: 366 });
                     break;
                 case "BYWEEKNO":
                     instance.weeks = parseArray(value, { start: -53, end: 53 });
@@ -1094,6 +1207,18 @@ kendo_module({
                 instance.weekDays = weekDays.sort(predicate);
             }
         }
+
+        //TODO: Test this before uncomment it
+        /*if (instance.positions) {
+            var noByRules = !instance.months || !instance.weeks ||
+                            !instance.yearDays || !instance.monthDays ||
+                            !instance.weekDays || !instance.hours ||
+                            !instance.minutes || !instance.seconds);
+
+            if (noByRules) {
+                instance.positions = null;
+            }
+        }*/
 
         return instance;
     }
