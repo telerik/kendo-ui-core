@@ -485,7 +485,7 @@ kendo_module({
 
         disable: function() {
             this.element.hide();
-            this.height = this.element.outerHeight(true);
+            this.height = 0;
         },
 
         below: function(item) {
@@ -605,12 +605,15 @@ kendo_module({
 
                 list.bind("endReached", function() {
                     footer.disable();
+                    scroller.virtualSize(0, list.totalHeight());
                 });
 
                 listView.bind("resize", function() {
-                    scroller.reset();
-                    buffer.range(0);
-                    list.refresh();
+                    if (list.items.length) {
+                        scroller.reset();
+                        buffer.range(0);
+                        list.refresh();
+                    }
                 });
 
                 buffer.bind("expand", function() {
