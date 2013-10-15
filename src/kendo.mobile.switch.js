@@ -39,7 +39,6 @@ kendo_module({
 
             that.constrain = 0;
             that.snapPoint = 0;
-            that.container().bind("show", $.proxy(this, "refresh"));
 
             element = that.element[0];
             element.type = "checkbox";
@@ -135,6 +134,9 @@ kendo_module({
             wrapper.toggleClass(DISABLED_STATE, !enable);
         },
 
+        _resize: function() {
+            this.refresh();
+        },
         _move: function(e) {
             var that = this;
             e.preventDefault();
