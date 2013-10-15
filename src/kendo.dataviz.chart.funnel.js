@@ -94,7 +94,7 @@ kendo_module({
         },
 
         formatPointValue:function(point,format){
-            return autoFormat(format,point.value)
+            return autoFormat(format,point.value);
         },
 
         render: function() {
@@ -429,8 +429,19 @@ kendo_module({
         },
 
         highlightOverlay: function(view, options) {
-            var element = view.createPolyline(this.points,true,options)
-
+            var segmentOptions = this.options.highlight || {};
+            if(segmentOptions.visible===false){
+                return;
+            }
+            var border = segmentOptions.border || {};
+            var calcOptions = extend({},options,{
+                fill:segmentOptions.color,
+                stroke: border.color,
+                strokeOpacity: border.opacity,
+                strokeWidth: border.width,
+                fillOpacity:segmentOptions.opacity
+            });
+            var element = view.createPolyline(this.points,true,calcOptions);
             return element;
         },
 
