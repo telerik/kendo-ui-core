@@ -898,14 +898,13 @@ kendo_module({
 
             event = periodEvents[position];
 
-            if (event) {
+            if (event && event.start >= start) {
                 list.push(event);
             }
         }
 
         events = events.slice(0, rule._startIdx).concat(list);
 
-        rule._endPeriod = endPeriodByFreq(start, rule);
         rule._startIdx = events.length;
 
         return events;
@@ -1004,7 +1003,7 @@ kendo_module({
         freq.limit(start, end, rule);
 
         while (start <= end) {
-            if (start >= startPeriod && !isException(exceptionDates, start, zone)) {
+            if (start >= startPeriod && !isException(exceptionDates, start, zone) || positions) {
                 endDate = new Date(start);
                 setTime(endDate, durationMS);
 
@@ -1030,7 +1029,10 @@ kendo_module({
                 freq.limit(start, end, rule);
 
                 if (start > rule._endPeriod) {
-                    events = normalizeEventsByPosition(events, start, rule);
+                    events = normalizeEventsByPosition(events, eventStart, rule);
+
+                    rule._endPeriod = endPeriodByFreq(start, rule);
+
                     current = events.length;
                 }
 

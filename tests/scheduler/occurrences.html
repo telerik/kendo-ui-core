@@ -1717,6 +1717,23 @@
                 deepEqual(events[2].start, new Date(1997, 10, 6, 9));
             });
 
+            test("MONTHLY occurrence uses event start when limit by occurrence position", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 9, 15, 9, 0),
+                    end: new Date(2013, 9, 15, 10, 0),
+                    recurrenceRule: "FREQ=MONTHLY;COUNT=2;BYDAY=SU,MO,TU,WE,TH,FR,SA;BYSETPOS=-1"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(2013, 9, 15), new Date(2013, 11, 1));
+
+                equal(events.length, 2);
+
+                deepEqual(events[0].start, new Date(2013, 9, 31, 9));
+                deepEqual(events[1].start, new Date(2013, 10, 30, 9));
+            });
+
             test("MONTHLY occurrence method supports negative bysetpos rule", function() {
                 var schedulerEvent = new SchedulerEvent({
                     uid: "id",
