@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Endless scrolling listview</title>
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.flat.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.data.odata.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.buttongroup.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <style>
+            .km-listview li {
+                line-height: 50px;
+                border-bottom: 1px solid #eee;
+                border-top: 1px solid #fff;
+            }
+
+            #detail .km-content {
+                background: #f4f4f4;
+            }
+        </style>
+    </head>
+    <body>
+<div data-role="view" data-init="mobileListViewEndlessScrolling" data-title="Scroll down to load">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        </div>
+    </header>
+
+    <ul id="endless-scrolling"></ul>
+</div>
+
+<script type="text/x-kendo-tmpl" id="endless-scrolling-template">
+    #: data #
+</script>
+
+<script>
+    var data = [];
+
+    for (var i = 0; i < 1000; i ++) {
+        data.push(i);
+    }
+
+    var dataSource = new kendo.data.DataSource({ data: data, pageSize: 100 });
+
+    function mobileListViewEndlessScrolling() {
+        $("#endless-scrolling").kendoMobileListView({
+            dataSource: dataSource,
+            template: $("#endless-scrolling-template").text(),
+            endlessScroll: true
+        });
+    }
+</script>
+
+
+        <script>
+            new kendo.mobile.Application(document.body);
+        </script>
+    </body>
+</html>

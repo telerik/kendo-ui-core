@@ -3644,31 +3644,33 @@ kendo_module({
                 return;
             }
 
-            // out of range request
-            if (index < this.dataOffset || index > this.skip + pageSize) {
-                var offset = Math.floor(index / pageSize) * pageSize;
-                this.range(offset);
-            }
+            if (this.useRanges) {
+                // out of range request
+                if (index < this.dataOffset || index > this.skip + pageSize) {
+                    var offset = Math.floor(index / pageSize) * pageSize;
+                    this.range(offset);
+                }
 
-            // prefetch
-            if (index === this.prefetchThreshold) {
-                this._prefetch();
-            }
+                // prefetch
+                if (index === this.prefetchThreshold) {
+                    this._prefetch();
+                }
 
-            // mid-range jump - prefetchThreshold and nextPageThreshold may be equal, do not change to else if
-            if (index === this.midPageThreshold) {
-                this.range(this.nextMidRange);
-            }
-            // next range jump
-            else if (index === this.nextPageThreshold) {
-                this.range(this.nextFullRange);
-            }
-            // pull-back
-            else if (index === this.pullBackThreshold) {
-                if (this.offset === this.skip) { // from full range to mid range
-                    this.range(this.previousMidRange);
-                } else { // from mid range to full range
-                    this.range(this.previousFullRange);
+                // mid-range jump - prefetchThreshold and nextPageThreshold may be equal, do not change to else if
+                if (index === this.midPageThreshold) {
+                    this.range(this.nextMidRange);
+                }
+                // next range jump
+                else if (index === this.nextPageThreshold) {
+                    this.range(this.nextFullRange);
+                }
+                // pull-back
+                else if (index === this.pullBackThreshold) {
+                    if (this.offset === this.skip) { // from full range to mid range
+                        this.range(this.previousMidRange);
+                    } else { // from mid range to full range
+                        this.range(this.previousFullRange);
+                    }
                 }
             }
 
@@ -3782,6 +3784,7 @@ kendo_module({
             this._firstItemUid = dataSource.firstItemUid();
             this.dataOffset = this.offset = dataSource.skip();
             this.pageSize = dataSource.pageSize();
+            this.useRanges = dataSource.options.serverPaging;
         },
 
         _recalculate: function() {

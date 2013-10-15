@@ -552,6 +552,8 @@ kendo_module({
                 listView = this.listView,
                 scroller = listView.scroller(),
                 pressToLoadMore = options.loadMore,
+                pageSize,
+                buffer,
                 footer;
 
             if (this.dataSource) {
@@ -560,7 +562,14 @@ kendo_module({
 
             this.dataSource = dataSource;
 
-            var buffer = new kendo.data.Buffer(dataSource, Math.floor(dataSource.pageSize() / 2), pressToLoadMore);
+
+            pageSize = dataSource.pageSize();
+
+            if (!pageSize) {
+                throw new Error("the DataSource does not have page size configured. Page Size setting is mandatory for the mobile listview virtual scrolling to work as expected.");
+            }
+
+            buffer = new kendo.data.Buffer(dataSource, Math.floor(pageSize / 2), pressToLoadMore);
 
             if (pressToLoadMore) {
                 footer = new VirtualListViewPressToLoadMore(listView, buffer);
