@@ -3768,10 +3768,11 @@ kendo_module({
             }
             else{                
                  if(that.isMonotonicByField(p0,p1,p2, xField) || p0[xField] == p1[xField]){                                       
-                    controlPoint2 = that.getSecondControlPoint(allowedError, p0, p1, xField, yField);
-                    nextControlPoint = that.getFirstControlPoint(allowedError, p1, p2, xField, yField);
+                    controlPoint2 = that.getSecondControlPoint(0, p0, p1, xField, yField);
+                    nextControlPoint = that.getFirstControlPoint(0, p1, p2, xField, yField);
                  }
-                 else{   
+                 else{  
+                    //allowed error should be reversed in some cases
                     controlPoint2 = that.getSecondControlPoint(allowedError, p0, p1,xField,yField);
                     nextControlPoint = that.getFirstControlPoint(allowedError, p1, p2,yField,xField);
                  }
