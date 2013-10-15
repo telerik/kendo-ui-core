@@ -214,18 +214,11 @@
 
         <div id="demo" class="container">
             <ul id="menu">
-                <li>Dashboard</li>
-                <li>Orders</li>
-                <li>Products
-                        <ul>
-                        <li>Tables &amp; Chairs</li>
-                        <li>Sofas</li>
-                        <li>Occasional Furniture</li>
-                        <li>Childerns Furniture</li>
-                        <li>Beds</li>
-                    </ul>
-                </li>
-                <li>Customers</li>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#orders">Orders</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#faq">FAQ</a></li>
             </ul>
 
             <section id="profile">
@@ -297,9 +290,11 @@
                 </div>
             </form>
 
-            <div id="grid"></div>
+            <div id="schedule"></div>
 
-            <section>
+            <div id="orders"></div>
+
+            <section id="gallery">
                 <h2>Latest photo uploads</h2>
 
                 <label>
@@ -320,7 +315,7 @@
 
             <div id="listview"></div>
 
-            <section class="panel">
+            <section id="faq" class="panel">
                 <h2><abbr title="Frequently Asked Questions">FAQ</abbr></h2>
 
                 <ul id="panelbar">
@@ -501,7 +496,7 @@
                     }
                 });
 
-            $("#grid").kendoGrid({
+            $("#orders").kendoGrid({
                 dataSource: dataSource,
                 pageable: true,
                 toolbar: ["create"],
