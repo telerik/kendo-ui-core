@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Responsive Kendo UI</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../styles/web/kendo.common.css">
         <link rel="stylesheet" href="../styles/web/kendo.bootstrap.css">
@@ -86,6 +86,11 @@
                 background-color: #030303;
             }
 
+            header .k-dropdown-wrap.k-state-focused,
+            header .k-slider .k-draghandle.k-state-selected {
+                box-shadow: none;
+            }
+
             header .k-dropdown .k-input {
                 padding-top: 0;
                 padding-bottom: 0;
@@ -99,6 +104,7 @@
             }
 
             header .k-dropdown .k-i-arrow-s {
+                background-image: url("http://cdn.kendostatic.com/2013.2.918/styles/Bootstrap/sprite.png");
                 background-position: -16px -32px;
             }
 
@@ -145,7 +151,7 @@
             }
 
             header .k-slider .k-draghandle:hover {
-                background-color: #939393;
+                background-color: #555;
             }
 
             header .k-slider .k-draghandle.k-state-selected {
@@ -158,6 +164,8 @@
                 background-color: #010101;
                 border-color: #5c5c5c;
                 color: #fff;
+                padding: 0;
+                border-radius: 0;
             }
 
             #theme-list .k-item,
@@ -172,10 +180,15 @@
             #dimensions-list .k-state-selected,
             #dimensions-list .k-state-focused {
                 background-image: none;
-                background-color: #939393;
+                background-color: #555;
                 box-shadow: none;
                 color: #fff;
-                border-color: #939393;
+                border-color: #555;
+            }
+
+            #theme-list .k-item,
+            #dimensions-list .k-item {
+                text-indent: 7px;
             }
 
             #configure {
@@ -193,7 +206,7 @@
                 padding-top: 46px;
             }
 
-            @media screen and (max-width: 768px) {
+            @media screen and (max-width: 767px) {
                 header .container {
                     padding-right: 0;
                 }
@@ -220,6 +233,9 @@
                 }
 
                 #configurator {
+                    -webkit-transform: translateY(-258px);
+                    -moz-transform: translateY(-258px);
+                    transform: translateY(-258px);
                     background-color: #272727;
                     position: absolute;
                     width: 100%;
@@ -300,7 +316,7 @@
             <form>
                 <h2>Profile Setup</h2>
 
-                <div>
+                <div class="form-widgets">
                     <label> Name <input value="Johnatan Dodsworth" /> </label>
 
                     <label> Birthday <input type="date" value="10/09/1979" /> </label>
@@ -322,7 +338,7 @@
                     </label>
                 </div>
 
-                <div>
+                <div class="form-widgets">
                     <label> Occupation <input placeholder="e.g. Developer" /> </label>
 
                     <label> Skills <input id="skills" value="C++, jQuery" /> </label>
@@ -505,7 +521,7 @@
             sliderChange();
 
             var slide = kendo.fx($("#configurator")).slideIn("down");
-            var visible = true;
+            var visible = false;
 
             $("#configure").on("click", function(e) {
                 if (visible) {
@@ -549,7 +565,7 @@
                         }
                     },
                     batch: true,
-                    pageSize: 20,
+                    pageSize: 10,
                     schema: {
                         model: {
                             id: "ProductID",
@@ -596,15 +612,12 @@
 
             $("#tabstrip").kendoTabStrip();
 
-            $("#demo select").kendoDropDownList();
-
-            $("#demo input:not([type])").addClass("k-textbox");
-
-            $("#demo input[type=date]").kendoDatePicker();
-
-            $("#demo input[type=number]").kendoNumericTextBox();
-
-            $("#demo input[type=color]").kendoColorPicker();
+            $("#demo .form-widgets")
+                .find("select").kendoDropDownList().end()
+                .find("input:not([type])").addClass("k-textbox").end()
+                .find("input[type=date]").kendoDatePicker().end()
+                .find("input[type=number]").kendoNumericTextBox().end()
+                .find("input[type=color]").kendoColorPicker();
 
             $("#demo textarea").kendoEditor({
                 tools: [
