@@ -13,6 +13,8 @@ $textButton->attr('type', 'button')
 
 echo $textButton->render();
 
+echo " ";
+
 $iconTextButton = new \Kendo\UI\Button('iconTextButton');
 $iconTextButton->tag('a')
                ->icon('ungroup')
@@ -20,12 +22,16 @@ $iconTextButton->tag('a')
 
 echo $iconTextButton->render();
 
+echo " ";
+
 $iconButton = new \Kendo\UI\Button('iconButton');
 $iconButton->tag('em')
            ->icon('refresh')
            ->content('<span class="k-icon">Refresh</span>');
 
 echo $iconButton->render();
+
+echo " ";
 
 $disabledButton = new \Kendo\UI\Button('disabledButton');
 $disabledButton->tag('span')

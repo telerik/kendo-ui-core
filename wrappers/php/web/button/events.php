@@ -9,6 +9,8 @@ $textButton->attr('type', 'button')
 
 echo $textButton->render();
 
+echo " ";
+
 $refreshButton = new \Kendo\UI\Button('refreshButton');
 $refreshButton->tag('span')
               ->icon('refresh')
@@ -16,6 +18,8 @@ $refreshButton->tag('span')
               ->click('onClick');
 
 echo $refreshButton->render();
+
+echo " ";
 
 $disabledButton = new \Kendo\UI\Button('disabledButton');
 $disabledButton->tag('a')

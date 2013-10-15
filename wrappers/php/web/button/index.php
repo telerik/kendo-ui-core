@@ -13,6 +13,8 @@ $textButton->attr('type', 'button')
 
 echo $textButton->render();
 
+echo " ";
+
 $iconTextButton = new \Kendo\UI\Button('iconTextButton');
 $iconTextButton->tag('a')
                ->spriteCssClass('k-icon k-i-ungroup')
@@ -20,12 +22,16 @@ $iconTextButton->tag('a')
 
 echo $iconTextButton->render();
 
+echo " ";
+
 $kendoIconTextButton = new \Kendo\UI\Button('kendoIconTextButton');
 $kendoIconTextButton->tag('a')
                ->icon('plus')
                ->content('Kendo UI Icon');
 
 echo $kendoIconTextButton->render();
+
+echo " ";
 
 $iconButton = new \Kendo\UI\Button('iconButton');
 $iconButton->tag('em')
@@ -46,6 +52,8 @@ $disabledButton1->tag('span')
                 ->content('Disabled via configuration');
 
 echo $disabledButton1->render();
+
+echo " ";
 
 $disabledButton2 = new \Kendo\UI\Button('disabledButton2');
 $disabledButton2->tag('span')

@@ -21,12 +21,16 @@ $iconButton->attr('type', 'button')
 
 echo $iconButton->render();
 
+echo " ";
+
 $kendoIconButton = new \Kendo\UI\Button('kendoIconButton');
 $kendoIconButton->attr('type', 'button')
                 ->icon('note')
                 ->content('Kendo UI sprite icon');
 
 echo $kendoIconButton->render();
+
+echo " ";
 
 $imageButton = new \Kendo\UI\Button('imageButton');
 $imageButton->attr('type', 'button')
