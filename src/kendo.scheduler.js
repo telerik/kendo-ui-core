@@ -2070,7 +2070,20 @@ kendo_module({
         },
 
         _resize: function() {
-            this.refresh({ action: "resize" });
+            var wnd = $(window);
+
+            var width = wnd.width();
+            var height = wnd.height();
+            var currentWidth = this._currentWindowWidth;
+            var currentHeight = this._currentWindowHeight;
+
+            if (height !== currentHeight || width !== currentWidth) {
+
+                this._currentWindowWidth = width;
+                this._currentWindowHeight = height;
+
+                this.refresh({ action: "resize" });
+            }
         },
 
         _adjustSelectedDate: function() {
