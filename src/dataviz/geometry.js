@@ -167,57 +167,14 @@
         }
     });
 
-    var Segment = Observable.extend({
-        init: function(anchor, controlIn, controlOut) {
-            var segment = this,
-                change = function() {
-                    segment.trigger(CHANGE);
-                };
-
-            segment.anchor = anchor || new Point();
-            segment.controlIn = controlIn || new Point();
-            segment.controlOut = controlOut || new Point();
-
-            segment.anchor.bind(CHANGE, change);
-            segment.controlIn.bind(CHANGE, change);
-            segment.controlOut.bind(CHANGE, change);
-        }
-    });
-
-    var Path = ObservableObject.extend({
-        init: function(points, options) {
-            var path = this;
-
-            path.points = points || [];
-            path.options = options || {};
-
-            ObservableObject.fn.init.call(path, this);
-        }
-    });
-
-    var Group = ObservableObject.extend({
-        init: function() {
-            this.children = [];
-            this.options = {};
-            ObservableObject.fn.init.call(this, this);
-        },
-
-        append: function() {
-            append(this.children, arguments);
-        }
-        // traverse
-        // etc.
-    });
-
 
     // Exports ================================================================
     deepExtend(dataviz, {
-        Circle: Circle,
-        Group: Group,
-        Path: Path,
-        Point: Point,
-        Rect: Rect,
-        Segment: Segment
+        geometry: {
+            Circle: Circle,
+            Point: Point,
+            Rect: Rect
+        }
     });
 
 })(window.kendo.jQuery);

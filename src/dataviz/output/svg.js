@@ -203,7 +203,9 @@
 
             Node.fn.init.call(node, srcElement);
 
-            node.srcElement.points.bind(CHANGE, proxy(node._syncPoints, node));
+            node.srcElement.points.bind(CHANGE, function(){
+                node._syncPoints();
+            });
         },
 
         attributeMap: {

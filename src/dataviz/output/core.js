@@ -3,7 +3,6 @@
     // Imports ================================================================
     var $ = jQuery,
         noop = $.noop,
-        proxy = $.proxy,
 
         kendo = window.kendo,
         ObservableObject = kendo.data.ObservableObject,
@@ -22,14 +21,14 @@
             node.childNodes = [];
             ObservableObject.fn.init.call(node, node);
 
-            node.childNodes.bind(CHANGE, proxy(node._childNodesChange, node));
+            node.childNodes.bind(CHANGE, function(e) { node._childNodesChange(e); });
 
             if (srcElement) {
                 node.srcElement = srcElement;
-                srcElement.options.bind(CHANGE, proxy(node._syncOptions, node));
+                srcElement.options.bind(CHANGE, function(e) { node._syncOptions(e); });
 
                 if (srcElement.children) {
-                    srcElement.children.bind(CHANGE, proxy(node._syncChildren, node));
+                    srcElement.children.bind(CHANGE, function(e) { node._syncChildren(e); });
                 }
             }
         },
@@ -49,8 +48,6 @@
             } else if (e.action === "remove") {
                 node.childNodes.splice(e.index, e.items.length);
             }
-
-            this.trigger(CHANGE);
         }
     });
 

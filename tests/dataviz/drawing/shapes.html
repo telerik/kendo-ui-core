@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DataViz / Drawing / Shapes</title>
+    <script src="../../jquery-loader.js"></script>
+    <script src="../../qunit/qunit/qunit.js"></script>
+    <script src="../../kendo-test-helpers.js"></script>
+    <link rel="stylesheet" href="../../qunit/qunit/qunit.css">
+</head>
+<body>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.data.js"></script>
+    <script src="../../../src/kendo.dataviz.core.js"></script>
+    <script src="../../../src/dataviz/util.js"></script>
+    <script src="../../../src/dataviz/geometry.js"></script>
+    <script src="../../../src/dataviz/output/shapes.js"></script>
+
+    <script>
+    var dataviz = kendo.dataviz,
+
+        g = dataviz.geometry,
+        Point = g.Point,
+
+        d = dataviz.drawing,
+        Group = d.Group,
+        Shape = d.Shape,
+        Text = d.Text,
+        Circle = d.Circle,
+        Path = d.Path;
+
+    // ------------------------------------------------------------
+    module("Group");
+
+    test("append adds children", function() {
+        var group = new Group();
+        var child = new Group();
+        group.append(child);
+
+        deepEqual(group.children[0], child);
+    });
+
+    test("append triggers change event", function() {
+        var group = new Group();
+        var child = new Group();
+
+        group.bind("change", function() { ok(true); });
+        group.append(child);
+    });
+
+    // ------------------------------------------------------------
+    module("Shape");
+
+    test("sets initial options", function() {
+        var shape = new Shape({ foo: true });
+
+        ok(shape.options.foo);
+    });
+
+    test("fill sets fill", function() {
+        var shape = new Shape();
+        shape.fill("red", 1);
+
+        equal(shape.options.fill.color, "red");
+        equal(shape.options.fill.opacity, 1);
+    });
+
+    test("fill opacity is 1 by default", function() {
+        var shape = new Shape();
+        shape.fill("red");
+
+        equal(shape.options.fill.opacity, 1);
+    });
+
+    test("fill triggers change", function() {
+        var shape = new Shape();
+        shape.bind("change", function() { ok(true); });
+
+        shape.fill("red");
+    });
+
+    test("fill returns shape", function() {
+        var shape = new Shape();
+        deepEqual(shape.fill("red"), shape);
+    });
+
+    test("stroke sets stroke", function() {
+        var shape = new Shape();
+        shape.stroke("red", 2, 1);
+
+        equal(shape.options.stroke.color, "red");
+        equal(shape.options.stroke.width, 2);
+        equal(shape.options.stroke.opacity, 1);
+    });
+
+    test("stroke width is 1 by default", function() {
+        var shape = new Shape();
+        shape.stroke("red");
+
+        equal(shape.options.stroke.width, 1);
+    });
+
+    test("stroke opacity is 1 by default", function() {
+        var shape = new Shape();
+        shape.stroke("red");
+
+        equal(shape.options.stroke.opacity, 1);
+    });
+
+    test("stroke triggers change", function() {
+        var shape = new Shape();
+        shape.bind("change", function() { ok(true); });
+
+        shape.stroke("red");
+    });
+
+    test("stroke returns shape", function() {
+        var shape = new Shape();
+        deepEqual(shape.stroke("red"), shape);
+    });
+
+    // ------------------------------------------------------------
+    module("Text");
+
+    test("sets initial content", function() {
+        var text = new Text("Foo");
+
+        equal(text.content, "Foo");
+    });
+
+    test("sets initial options", function() {
+        var text = new Text("Foo", { foo: true });
+
+        ok(text.options.foo);
+    });
+
+    test("setting content triggers change", function() {
+        var text = new Text("Foo", { foo: true });
+
+        ok(text.options.foo);
+    });
+
+    // ------------------------------------------------------------
+    module("Circle");
+
+    test("sets initial geometry", function() {
+        var geometry = new g.Circle(new g.Point(0, 0), 10);
+        var circle = new Circle(geometry);
+
+        deepEqual(circle.geometry, geometry);
+    });
+
+    test("sets initial options", function() {
+        var geometry = new g.Circle(new g.Point(0, 0), 10);
+        var circle = new Circle(geometry, { foo: true });
+
+        ok(circle.options.foo);
+    });
+
+    // ------------------------------------------------------------
+    module("Path");
+
+    test("sets initial geometry", function() {
+        var path = new Path();
+        path.moveTo(0, 0);
+    });
+
+    </script>
+
+    <h1 id="qunit-header"></h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+</body>
+</html>
