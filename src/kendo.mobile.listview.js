@@ -562,7 +562,6 @@ kendo_module({
 
             this.dataSource = dataSource;
 
-
             pageSize = dataSource.pageSize();
 
             if (!pageSize) {
@@ -633,6 +632,11 @@ kendo_module({
             this.list.refresh();
         },
 
+        reset: function() {
+            this.buffer.range(0);
+            this.list.refresh();
+        },
+
         _unbindDataSource: function() {
             // TODO:
         }
@@ -659,8 +663,9 @@ kendo_module({
             });
         },
 
-        destroy: function() {
-        },
+        destroy: function() { },
+
+        reset: function() { },
 
         refresh: function(e) {
             var action = e && e.action,
@@ -903,6 +908,10 @@ kendo_module({
 
         refresh: function() {
             this._itemBinder.refresh();
+        },
+
+        reset: function() {
+            this._itemBinder.reset();
         },
 
         setDataSource: function(dataSource) {
