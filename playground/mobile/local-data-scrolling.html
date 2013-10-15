@@ -37,38 +37,39 @@
         </style>
     </head>
     <body>
-<div data-role="view" data-init="mobileListViewEndlessScrolling" data-title="Scroll down to load">
-    <header data-role="header">
-        <div data-role="navbar">
-            <span data-role="view-title"></span>
-            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        <div data-role="view" data-init="mobileListViewEndlessScrolling" data-title="Scroll down to load">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+                </div>
+            </header>
+
+            <ul id="endless-scrolling"></ul>
         </div>
-    </header>
 
-    <ul id="endless-scrolling"></ul>
-</div>
+        <script type="text/x-kendo-tmpl" id="endless-scrolling-template">
+            #: data #
+        </script>
 
-<script type="text/x-kendo-tmpl" id="endless-scrolling-template">
-    #: data #
-</script>
+        <script>
+            var data = [];
 
-<script>
-    var data = [];
+            for (var i = 0; i < 1000; i ++) {
+                data.push(i.toString());
+            }
 
-    for (var i = 0; i < 1000; i ++) {
-        data.push(i);
-    }
+            var dataSource = new kendo.data.DataSource({ data: data, pageSize: 100, change: function(e) { console.log(e) } });
 
-    var dataSource = new kendo.data.DataSource({ data: data, pageSize: 100 });
-
-    function mobileListViewEndlessScrolling() {
-        $("#endless-scrolling").kendoMobileListView({
-            dataSource: dataSource,
-            template: $("#endless-scrolling-template").text(),
-            endlessScroll: true
-        });
-    }
-</script>
+            function mobileListViewEndlessScrolling() {
+                $("#endless-scrolling").kendoMobileListView({
+                    dataSource: dataSource,
+                    template: $("#endless-scrolling-template").text(),
+                    endlessScroll: true,
+                    filterable: true
+                });
+            }
+        </script>
 
 
         <script>
