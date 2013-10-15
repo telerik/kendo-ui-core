@@ -1007,9 +1007,8 @@ kendo_module({
             var items = $(kendo.render(this.groupTemplate, groups));
 
             this._enhanceItems(items.children("ul").children("li"));
-            mobile.init(items);
-
             this.element.append(items);
+            mobile.init(items);
             this._style();
         },
 
