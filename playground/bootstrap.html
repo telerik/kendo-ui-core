@@ -408,11 +408,14 @@
             </section>
 
             <script id="listview-template" type="x-kendo-template">
-                <figure>
-                    <img src="#= src #" />
-                    <figcaption>
+                <figure class="col-xs-6 col-md-4 col-lg-2">
+                    <img src="#= src #" class="img-responsive" />
+                    <figcaption class="hidden-xs">
                         <h3>Photo title</h3>
-                        <p>Longer description of the photo<br /> on two or more lines</p>
+                        <p class="hidden-sm">
+                            Longer description of the photo<br />
+                            on two or more lines
+                        </p>
                     </figcaption>
                 </figure>
             </script>
@@ -617,14 +620,22 @@
             $("#menu").kendoMenu();
 
             $("#listview").kendoListView({
-                dataSource:  [
-                    { src: "bootstrap/photo.png" },
-                    { src: "bootstrap/photo.png" },
-                    { src: "bootstrap/photo.png" },
-                    { src: "bootstrap/photo.png" },
-                    { src: "bootstrap/photo.png" },
-                    { src: "bootstrap/photo.png" }
-                ],
+                dataSource: {
+                    data: [
+                        { src: "bootstrap/photo.png" },
+                        { src: "bootstrap/photo.png" },
+                        { src: "bootstrap/photo.png" },
+                        { src: "bootstrap/photo.png" },
+                        { src: "bootstrap/photo.png" },
+                        { src: "bootstrap/photo.png" },
+                        { src: "bootstrap/photo.png" },
+                        { src: "bootstrap/photo.png" },
+                        { src: "bootstrap/photo.png" },
+                        { src: "bootstrap/photo.png" },
+                        { src: "bootstrap/photo.png" },
+                        { src: "bootstrap/photo.png" }
+                    ]
+                },
                 template: $("#listview-template").html()
             });
 
