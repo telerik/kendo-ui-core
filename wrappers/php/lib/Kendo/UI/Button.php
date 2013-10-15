@@ -14,7 +14,7 @@ class Button extends \Kendo\UI\Widget {
             $tag = 'button';
         }
 
-        $element = new \Kendo\Html\Element($tag)
+        $element = new \Kendo\Html\Element($tag);
 
         $this->addAttributes($element);
 
