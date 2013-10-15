@@ -149,7 +149,45 @@
                 padding-top: 46px;
             }
 
-            @media screen and (max-width: 767px) {
+            #menu {
+                margin-bottom: 30px;
+            }
+
+            #profile {
+                position: relative;
+            }
+
+            .ra-well-title {
+                font-size: 1.2857em;
+                line-height: 1.2857em;
+                border-bottom: 1px solid #e7e7e7;
+                margin: -5px -19px 0.8333em;
+                padding: 0 19px 0.7222em;
+            }
+
+            .ra-avatar {
+                border: 1px solid #e7e7e7;
+                border-radius: 2px;
+            }
+
+            .ra-first-name {
+                display: block;
+                margin-top: 0.8571em;
+            }
+
+            .ra-last-name {
+                display: block;
+                font-size: 1.7143em;
+                line-height: 1.3em;
+            }
+
+            .ra-position {
+                font-size: 0.8571em;
+                color: #999;
+                padding-bottom: 2em;
+            }
+
+            @media (max-width: 767px) {
                 header .container {
                     padding-right: 0;
                 }
@@ -221,26 +259,42 @@
                 <li><a href="#faq">FAQ</a></li>
             </ul>
 
-            <section id="profile">
-                <h2>Profile</h2>
-                <button class="k-button k-secondary" id="edit-profile">Edit</button>
+            <div class="row clearfix">
+                <div class="col-lg-4">
+                    <section id="profile" class="well">
+                        <h2 class="ra-well-title">Profile</h2>
 
-                <img src="" id="avatar" />
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <img src="bootstrap/avatar.jpg" class="ra-avatar" />
+                            </div>
 
-                <span class="first-name">Jonathan</span>
-                <span class="last-name">Dodsworth</span>
-                <span class="position">Inside Sales Coordinator</span>
-            </section>
+                            <div class="col-lg-6">
+                                <span class="ra-first-name">Jonathan</span>
+                                <span class="ra-last-name">Dodsworth</span>
+                                <div class="ra-position">Inside Sales Coordinator</div>
+                                <button class="btn btn-primary">Upload Photo</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
 
-            <ul id="tabstrip">
-                <li>Sales per day</li>
-                <li>Area charts</li>
-                <li>Bar charts</li>
-                <li>Donut charts</li>
-            </ul>
+                <div class="col-lg-8">
+                    <div id="tabstrip">
+                        <ul>
+                            <li class="k-state-active">Sales per day</li>
+                            <li>Area charts</li>
+                            <li>Bar charts</li>
+                        </ul>
+                        <div>
+                            <div id="sales-per-day"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <form>
-                <h2>Profile Setup</h2>
+            <section class="col-sm-12 well">
+                <h2 class="ra-well-title">Profile Setup</h2>
 
                 <div class="form-widgets">
                     <label> Name <input value="Johnatan Dodsworth" /> </label>
@@ -288,7 +342,7 @@
                     <button class="k-button k-secondary">Cancel</button>
                     <button class="k-button k-primary">Update</button>
                 </div>
-            </form>
+            </section>
 
             <div id="schedule"></div>
 
@@ -510,7 +564,7 @@
                 editable: true
             });
 
-            $("#menu").kendoMenu({ openOnClick: true });
+            $("#menu").kendoMenu();
 
             $("#listview").kendoListView({
                 dataSource:  [
