@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Endless scrolling listview</title>
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.flat.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.data.odata.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.buttongroup.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <style>
+            .km-listview li {
+                line-height: 50px;
+                border-bottom: 1px solid #eee;
+                border-top: 1px solid #fff;
+            }
+
+            #detail .km-content {
+                background: #f4f4f4;
+            }
+        </style>
+    </head>
+    <body>
+        <div data-role="view" data-init="mobileListViewEndlessScrolling" data-title="Scroll down to load">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a data-align="right" data-role="button" class="nav-button" data-click="resetScroller">Reset Scroller</a>
+                </div>
+            </header>
+
+            <ul id="endless-scrolling"></ul>
+        </div>
+
+        <script type="text/x-kendo-tmpl" id="endless-scrolling-template">
+            <div class="product">
+                <img src="http://demos.kendoui.com/content/web/foods/#=ProductID#.jpg" alt="#=ProductName# image" class="pullImage"/>
+                <h3>#:ProductName#</h3>
+                <p>#:kendo.toString(UnitPrice, "c")#</p>
+            </div>
+        </script>
+
+        <script>
+            function mobileListViewEndlessScrolling() {
+                var dataSource = new kendo.data.DataSource({
+                    type: "odata",
+                    transport: {
+                        read: {
+                            url: "http://demos.kendoui.com/service/Northwind.svc/Products"
+                        }
+                    },
+                    schema: {
+                        total: function () { return 77; }
+                    },
+                    sort: {
+                        field: "ProductID",
+                        dir: "desc"
+                    },
+                    serverPaging: true,
+                    serverSorting: true,
+                    pageSize: 50
+                });
+
+                $("#endless-scrolling").kendoMobileListView({
+                    dataSource: dataSource,
+                    template: $("#endless-scrolling-template").text(),
+                    endlessScroll: true
+                });
+            }
+        </script>
+
+        <style scoped>
+            .product h3 {
+                font-size: 1.3em;
+                line-height: 1.4em;
+                margin: 0;
+                padding: 0;
+                height: 1.3em;
+                overflow: hidden;
+            }
+            .product p {
+                font-size: 1em;
+                margin: 0;
+                padding: .3em 0 0;
+            }
+            .pullImage {
+                width: 64px;
+                height: 64px;
+                border-radius: 3px;
+                float: left;
+                margin-right: 1.3em;
+            }
+        </style>
+
+
+        <script>
+            var app = new kendo.mobile.Application(document.body);
+            function resetScroller() {
+                kendo.mobile.application.view().scroller.reset();
+                $('#endless-scrolling').data('kendoMobileListView').reset();
+
+            }
+        </script>
+    </body>
+</html>
