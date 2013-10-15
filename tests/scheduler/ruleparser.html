@@ -373,24 +373,36 @@
             });
 
             test("Parse BYSETPOS property when value is single number", function() {
-                var rrule = parse("FREQ=MONTHLY;BYSETPOS=1");
+                var rrule = parse("FREQ=MONTHLY;BYDAY=MO;BYSETPOS=1");
 
                 equal(rrule.positions.length, 1);
                 equal(rrule.positions[0], 1);
             });
 
-            test("Parse BYYEARDAY property when value is a list of numbers", function() {
-                var rrule = parse("FREQ=MONTHLY;BYSETPOS =1, 2, 4, 3");
+            test("Parse BYSETPOS property when value is a list of numbers", function() {
+                var rrule = parse("FREQ=MONTHLY;BYDAY=MO;BYSETPOS =1, 2, -4, 3");
 
                 equal(rrule.positions.length, 4);
-                equal(rrule.positions[0], 1);
-                equal(rrule.positions[1], 2);
-                equal(rrule.positions[2], 3);
-                equal(rrule.positions[3], 4);
+                equal(rrule.positions[0], -4);
+                equal(rrule.positions[1], 1);
+                equal(rrule.positions[2], 2);
+                equal(rrule.positions[3], 3);
             });
 
-            test("Parse BYYEARDAY validates if values are not correct", function() {
-                var rrule = parse("FREQ=MONTHLY;BYSETPOS=1, 367, 3, 4");
+            test("Parse BYSETPOS validates if values are not correct", function() {
+                var rrule = parse("FREQ=MONTHLY;BYDAY=MO;BYSETPOS=1, 367, 3, 4");
+
+                ok(rrule.positions === null);
+            });
+
+            test("Parse BYSETPOS validates if negative values are not correct", function() {
+                var rrule = parse("FREQ=MONTHLY;BYDAY=MO;BYSETPOS=1, -367, 3, 4");
+
+                ok(rrule.positions === null);
+            });
+
+            test("Parse BYSETPOS validates if no other BYRule is used", function() {
+                var rrule = parse("FREQ=MONTHLY;BYSETPOS=1");
 
                 ok(rrule.positions === null);
             });

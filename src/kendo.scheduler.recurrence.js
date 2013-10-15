@@ -1099,6 +1099,7 @@ kendo_module({
             property,
             weekStart,
             weekDays,
+            ruleValue = false,
             rule, part, parts,
             predicate = function(a, b) {
                 var day1 = a.day,
@@ -1161,30 +1162,38 @@ kendo_module({
                     break;
                 case "BYSECOND":
                     instance.seconds = parseArray(value, { start: 0, end: 60 });
+                    ruleValue = true;
                     break;
                 case "BYMINUTE":
                     instance.minutes = parseArray(value, { start: 0, end: 59 });
+                    ruleValue = true;
                     break;
                 case "BYHOUR":
                     instance.hours = parseArray(value, { start: 0, end: 23 });
+                    ruleValue = true;
                     break;
                 case "BYMONTHDAY":
                     instance.monthDays = parseArray(value, { start: -31, end: 31 });
+                    ruleValue = true;
                     break;
                 case "BYYEARDAY":
                     instance.yearDays = parseArray(value, { start: -366, end: 366 });
+                    ruleValue = true;
                     break;
                 case "BYMONTH":
                     instance.months = parseArray(value, { start: 1, end: 12 });
+                    ruleValue = true;
                     break;
                 case "BYDAY":
                     instance.weekDays = weekDays = parseWeekDayList(value);
-                    break;
-                case "BYSETPOS":
-                    instance.positions = parseArray(value, { start: -366, end: 366 });
+                    ruleValue = true;
                     break;
                 case "BYWEEKNO":
                     instance.weeks = parseArray(value, { start: -53, end: 53 });
+                    ruleValue = true;
+                    break;
+                case "BYSETPOS":
+                    instance.positions = parseArray(value, { start: -366, end: 366 });
                     break;
                 case "WKST":
                     instance.weekStart = weekStart = WEEK_DAYS_IDX[value[0]];
@@ -1208,17 +1217,9 @@ kendo_module({
             }
         }
 
-        //TODO: Test this before uncomment it
-        /*if (instance.positions) {
-            var noByRules = !instance.months || !instance.weeks ||
-                            !instance.yearDays || !instance.monthDays ||
-                            !instance.weekDays || !instance.hours ||
-                            !instance.minutes || !instance.seconds);
-
-            if (noByRules) {
-                instance.positions = null;
-            }
-        }*/
+        if (instance.positions && !ruleValue) {
+            instance.positions = null;
+        }
 
         return instance;
     }

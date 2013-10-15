@@ -107,9 +107,9 @@
             });
 
             test("Serialize method returns string with freq and several BYSETPOS values", function() {
-                var rule = parse("FREQ=yearly;BYSETPOS=1, 10");
+                var rule = parse("FREQ=yearly;BYDAY=TU;BYSETPOS=1, 10");
 
-                equal(serialize(rule), "FREQ=YEARLY;BYSETPOS=1,10;WKST=SU");
+                equal(serialize(rule), "FREQ=YEARLY;BYDAY=TU;BYSETPOS=1,10;WKST=SU");
             });
 
             test("Serialize method returns string with freq and WKST", function() {
