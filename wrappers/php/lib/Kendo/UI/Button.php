@@ -13,8 +13,18 @@ class Button extends \Kendo\UI\Widget {
         if (!$tag) {
             $tag = 'button';
         }
-        
-        return new \Kendo\Html\Element($tag);
+
+        $element = new \Kendo\Html\Element($tag)
+
+        $this->addAttributes($element);
+
+        $content = $this->getProperty('content');
+
+        if (gettype($content) == "string") {
+            $element->html($content);
+        }
+
+        return $element;
     }
 
 //>> Properties
