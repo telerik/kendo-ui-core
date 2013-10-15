@@ -187,6 +187,17 @@
                 padding-bottom: 2em;
             }
 
+            .form-group .k-widget,
+            .form-group .k-textbox {
+                width: 100%;
+            }
+
+            .buttons-wrap {
+                border-top: 1px solid #e7e7e7;
+                padding-top: .5em;
+                text-align: right;
+            }
+
             @media (max-width: 767px) {
                 header .container {
                     padding-right: 0;
@@ -296,51 +307,90 @@
             <section class="col-sm-12 well">
                 <h2 class="ra-well-title">Profile Setup</h2>
 
-                <div class="form-widgets">
-                    <label> Name <input value="Johnatan Dodsworth" /> </label>
+                <div class="form-horizontal form-widgets col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="name">Name</label>
+                        <div class="col-sm-8 col-md-6">
+                            <input id="name" value="Johnatan Dodsworth" />
+                        </div>
+                    </div>
 
-                    <label> Birthday <input type="date" value="10/09/1979" /> </label>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="birthday">Birthday</label>
+                        <div class="col-sm-8 col-md-6">
+                            <input type="date" value="10/09/1979" />
+                        </div>
+                    </div>
 
-                    <label>
-                        Gender
-                        <select>
-                            <option selected>Male</option>
-                            <option>Female</option>
-                        </select>
-                    </label>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="gender">Gender</label>
+                        <div class="col-sm-8 col-md-6">
+                            <select id="gender">
+                                <option selected>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+                    </div>
 
-                    <label>
-                        Language
-                        <select>
-                            <option selected>English</option>
-                            <option>German</option>
-                        </select>
-                    </label>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="language">Language</label>
+                        <div class="col-sm-8 col-md-6">
+                            <select id="language">
+                                <option selected>English</option>
+                                <option>German</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-widgets">
-                    <label> Occupation <input placeholder="e.g. Developer" /> </label>
+                <div class="form-horizontal form-widgets col-sm-6">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="occupation">Occupation</label>
+                        <div class="col-sm-8 col-md-6">
+                            <input id="occupation" placeholder="e.g. Developer" />
+                        </div>
+                    </div>
 
-                    <label> Skills <input id="skills" value="C++, jQuery" /> </label>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="skills">Skills</label>
+                        <div class="col-sm-8 col-md-6">
+                            <select id="skills" multiple>
+                                <option>C</option>
+                                <option>C++</option>
+                                <option selected>C#</option>
+                                <option>JavaScript</option>
+                                <option selected>jQuery</option>
+                                <option>Git</option>
+                                <option>Node.js</option>
+                                <option>Ruby</option>
+                                <option>Ruby on Rails</option>
+                                <option>Kendo UI</option>
+                            </select>
+                        </div>
+                    </div>
 
-                    <label> Experience <input type="number" value="4" /> years </label>
-
-                    <label> Color <input type="color" value="#ee00ff" /> </label>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4" for="experience">Experience</label>
+                        <div class="col-sm-8 col-md-6">
+                            <input id="experience" type="number" value="4" />
+                        </div>
+                    </div>
                 </div>
 
-                <label>
-                    Short bio
-                    <textarea></textarea>
-                </label>
+                <div class="clearfix"></div>
 
-                <div>
-                    Progress
-                    <div id="progress"></div>
+                <div class="form-horizontal form-widgets col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="bio">Short bio</label>
+                        <div class="col-sm-10">
+                            <textarea id="bio"></textarea>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="buttons-wrap">
-                    <button class="k-button k-secondary">Cancel</button>
-                    <button class="k-button k-primary">Update</button>
+                    <button class="btn btn-default">Cancel</button>
+                    <button class="btn btn-primary">Update</button>
                 </div>
             </section>
 
@@ -583,11 +633,13 @@
             $("#tabstrip").kendoTabStrip();
 
             $("#demo .form-widgets")
-                .find("select").kendoDropDownList().end()
+                .find("select:not([multiple])").kendoDropDownList().end()
+                .find("select[multiple]").kendoMultiSelect().end()
                 .find("input:not([type])").addClass("k-textbox").end()
                 .find("input[type=date]").kendoDatePicker().end()
-                .find("input[type=number]").kendoNumericTextBox().end()
-                .find("input[type=color]").kendoColorPicker();
+                .find("input[type=number]").kendoNumericTextBox({
+                    format: "0 years"
+                });
 
             $("#demo textarea").kendoEditor({
                 tools: [
