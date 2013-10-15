@@ -27,6 +27,8 @@ public class ButtonTag extends WidgetTag /* interfaces *//* interfaces */ {
         } else {
             wrapper = new GenericElement(tag);
         }
+
+        wrapper.html(body());
                
         return wrapper;
     }
