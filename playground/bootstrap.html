@@ -176,20 +176,10 @@
                 }
 
                 #configurator {
-                    -webkit-transform: translateY(-258px);
-                    -moz-transform: translateY(-258px);
-                    transform: translateY(-258px);
                     background-color: #272727;
                     position: absolute;
                     width: 100%;
                     margin: 0;
-                }
-            }
-
-            @media screen and (min-width: 768px) {
-                #configurator {
-                    -webkit-transform: none !important;
-                    transform: none !important;
                 }
             }
         </style>
@@ -201,7 +191,7 @@
 
                 <button id="configure" class="visible-xs"><span class="glyphicon glyphicon-align-justify"></span></button>
 
-                <div id="configurator-wrap" class="col-sm-9">
+                <div id="configurator-wrap" class="col-sm-9 hidden-xs">
                     <div id="configurator" class="row">
                         <label class="col-sm-4">
                             <div class="description">Dimensions</div>
@@ -444,6 +434,7 @@
                 dataTextField: "text",
                 dataValueField: "value",
                 value: 14,
+                height: 204,
                 dataSource: [
                     { text: "10px", value: 10 },
                     { text: "12px", value: 12 },
@@ -459,17 +450,8 @@
 
             $("#theme-list, #dimensions-list, #font-size-list").addClass("ra-list");
 
-            var slide = kendo.fx($("#configurator")).slideIn("down");
-            var visible = false;
-
             $("#configure").on("click", function(e) {
-                if (visible) {
-                    slide.reverse();
-                } else {
-                    slide.play();
-                }
-
-                visible = !visible;
+                $("#configurator-wrap").toggleClass("hidden-xs");
                 e.preventDefault();
             });
 
