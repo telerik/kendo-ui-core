@@ -3304,8 +3304,16 @@ kendo_module({
                     // reset dummification flag
                     link.depthOfDumminess = 0;
 
-                    // set link points
-                    link.points = points;
+                    // note that we only need the intermediate points, floating links have been dropped in the analysis
+                    if (points.length > 2) {
+                        // first and last are the endpoints
+                        points.splice(0, 1);
+                        points.splice(points.length - 1);
+                        link.points = points;
+                    }
+                    else {
+                        link.points = [];
+                    }
 
                     // we are not going to delete the dummy elements;
                     // they won't be needed anymore anyway.
