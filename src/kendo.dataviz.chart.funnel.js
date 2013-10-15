@@ -428,18 +428,20 @@ kendo_module({
             return elements;
         },
 
-        highlightOverlay: function(view, options) {
-            var segmentOptions = this.options.highlight || {};
-            if(segmentOptions.visible===false){
+        highlightOverlay: function(view, opt) {
+            var options = this.options,
+                hlOptions = options.highlight || {};
+            if(hlOptions.visible===false){
                 return;
             }
-            var border = segmentOptions.border || {};
-            var calcOptions = extend({},options,{
-                fill:segmentOptions.color,
+            var border = hlOptions.border || {};
+            var calcOptions = extend({},opt,{
+                fill:hlOptions.color,
                 stroke: border.color,
                 strokeOpacity: border.opacity,
                 strokeWidth: border.width,
-                fillOpacity:segmentOptions.opacity
+                fillOpacity:hlOptions.opacity,
+                data: { modelId: options.modelId }
             });
             var element = view.createPolyline(this.points,true,calcOptions);
             return element;
@@ -447,7 +449,6 @@ kendo_module({
 
         tooltipAnchor: function(tooltipWidth) {
             var box = this.box;
-
             return new Point2D(
                 box.center().x - (tooltipWidth / 2),
                 box.y1

@@ -52,6 +52,7 @@
                 series: [{
                     type: "funnel",
                     highlight:{
+                        visible:true,
                         border:{
                             opacity: 1,
                             width: 5,
@@ -83,7 +84,24 @@
                     data: seriesData,
                     segmentSpacing: 25,
                     neckSize:3
-                }]
+                }],
+                legend:{
+                    border:{
+                        width:'1px',
+                        color:"pink"
+                    },
+                    labels:{
+                        template:"#=text# - #=value#"
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    background:'green',
+                    border:{
+                        width:1,
+                        color:'red'
+                    }
+                }
             });
 
             $("#funnel-height").kendoChart({
