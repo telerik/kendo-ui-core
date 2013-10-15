@@ -1163,15 +1163,13 @@ kendo_module({
                 currentPoint, originalPoint, transitionsState, visible, point;
 
             if (inArray(currentSeries.type, [PIE, DONUT])) {
-                originalPoint = originalSeries.data[pointIndex];
-                currentPoint = currentSeries.data[pointIndex];
+                point = originalSeries.data[pointIndex];
                 if (!defined(point.visible)) {
                     visible = false;
                 } else {
                     visible = !point.visible;
                 }
-                originalPoint.visible = visible;
-                currentPoint.visible = visible;
+                point.visible = visible;
             } else {
                 visible = !originalSeries.visible;
                 originalSeries.visible = visible;
