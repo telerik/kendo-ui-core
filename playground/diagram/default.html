@@ -2,11 +2,18 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
-    <title>JS Diagram </title>
+    <title>KendoUI Diagrams </title>
+    <link rel="shortcut icon" href="http://demos.kendoui.com/favicon.ico">
+    <link href="../../styles/web/kendo.common.css" rel="stylesheet"/>
+    <link href="../../styles/web/kendo.moonlight.css" rel="stylesheet"/>
     <style type="text/css">
         html, body, #mainDiv {
             height: 100%;
             overflow: hidden;
+            width: 100%;
+            margin: 0;
+            font-family: "Segoe UI", Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica, Sans-Serif;
+            font-size: 10pt;
         }
 
         #canvasDiv {
@@ -14,24 +21,17 @@
         }
 
         #canvas {
-            height: 95%;
-            background-color: #fce8e8;
+            height: 100%;
+            background-color: #fff;
         }
 
         .menu-text {
             margin-right: 10px;
         }
 
-        input.diagramCommandBtn {
-            border: 1px gray solid;
-            background-color: gray;
-            color: white;
-            cursor: pointer;
-            margin: 5px;
-        }
-
         #toolBoxDiv {
             float: left;
+            margin: 5px;
         }
 
         k-slider {
@@ -40,7 +40,7 @@
 
         .shape {
             float: left;
-            padding: 10px;
+            margin: 3px;
             cursor: pointer;
         }
 
@@ -49,17 +49,17 @@
         }
 
         .shape svg {
-            width: 100px;
-            height: 100px;
+            width: 50px;
+            max-height: 50px;
         }
 
         .shape h3 {
-            padding: 5px;
-            font-size: .9em;
+
+            font-size: 10pt;
             overflow: hidden;
             font-weight: normal;
-            max-width: 100px;
-            text-transform: uppercase;
+            max-width: 45px;
+            font-variant: small-caps;
         }
 
         h2 {
@@ -67,19 +67,78 @@
         }
 
         #splitter {
-            height: 90%;
+            height: 89%;
         }
 
         #toolbarDiv {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background-color: #212a33;
+            color: #fff;
+            min-height: 30px;
+        }
+
+        #toolBox {
+            padding-top: 10px;
+            border-color: transparent;
         }
 
         #zoomPanel {
             display: inline-block;
+            float: right;
+            margin-right: 15px;
+            margin-top: 10px;
+        }
+
+        #footer {
+            background-color: #212a33;
+            height: 50px;
+        }
+
+        #menuWrapper {
+            position: relative;
+            top: 0;
+        }
+
+        #menu {
+            margin-left: 0px;;
+        }
+
+        #logo {
+            position: absolute;
+            top: 5px;
+            right: 0;
+            margin-right: 5px;
+            height: 80%;
+        }
+
+        #toolboxTitle {
+            color: #fff;
+            font-size: 14pt;
+            font-variant: small-caps;
+            margin-top: 7px;
+            margin-bottom: 7px;
+            margin-left: 5px;
+        }
+
+        #upload-wrap {
+            float: left;
+            height: 30px;
+            width: 200px;
+            display: none;
+        }
+
+        .group {
+            border-right: 3px solid #38546d;
+
+
+            padding-left: 10px;
+            padding-right: 10px;
+            float: left;
+
         }
     </style>
 
-    <link href="../../styles/web/kendo.common.css" rel="stylesheet"/>
-    <link href="../../styles/web/kendo.default.css" rel="stylesheet"/>
 
     <script src="../../src/jquery.js"></script>
     <script src="../../src/kendo.core.js"></script>
@@ -95,6 +154,7 @@
     <script src="../../src/kendo.splitter.js"></script>
     <script src="../../src/kendo.listview.js"></script>
     <script src="../../src/kendo.colorpicker.js"></script>
+    <script src="../../src/kendo.menu.js"></script>
 
     <script src="../../src/kendo.diagram.utils.js"></script>
     <script src="../../src/kendo.diagram.math.js"></script>
@@ -108,34 +168,129 @@
 </head>
 <body>
 <div id="mainDiv">
+    <div id="menuWrapper">
+        <ul id="menu">
+            <li>
+                File
+                <ul>
+                    <li>New</li>
+                    <li>Open</li>
+                    <li>Save</li>
+                </ul>
+            </li>
+            <li>
+                Edit
+                <ul>
+                    <li>Undo</li>
+                    <li>Redo</li>
+                    <hr/>
+                    <li>Cut</li>
+                    <li>Copy</li>
+                    <li>Paste</li>
+                    <li>Delete</li>
+                    <hr/>
+                    <li>Select All</li>
+                </ul>
+            </li>
+            <li>
+                Layout
+                <ul>
+                    <li>Tree
+                        <ul>
+                            <li>Standard
+                                <ul>
+                                    <li>Down</li>
+                                    <li>Right</li>
+                                    <li>Up</li>
+                                    <li>Left</li>
+                                </ul>
+                            </li>
+                            <li>Tip-over</li>
+                            <li>Mindmapping
+                                <ul>
+                                    <li>Horizontal</li>
+                                    <li>Vertical</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>Layered
+                        <ul>
+                            <li>Horizontal</li>
+                            <li>Vertical</li>
+                        </ul>
+                    </li>
+
+                    <li>Force directed</li>
+                </ul>
+            </li>
+            <li>Arrange
+                <ul>
+                    <li>Bring to front</li>
+                    <li>Send to back</li>
+                    <li>Align selection
+                        <ul>
+                            <li>Left</li>
+                            <li>Right</li>
+                            <li>Top</li>
+                            <li>Left</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <a href="http://www.telerik.com" title="Telerik | Kendo UI"><img id="logo" src="telerik-logo.png"/></a>
+    </div>
+
     <div id="toolbarDiv">
-        <input type="button" class="diagramCommandBtn" id="undoButton" title="Undo (CTRL+Z)" value="Undo"/>
-        <input type="button" class="diagramCommandBtn" id="redoButton" title="Redo (CTRL+Y)" value="Redo"/>
-        <input type="button" class="diagramCommandBtn" id="deleteButton" title="Delete (DEL)" value="Delete"/>
-        <input type="button" class="diagramCommandBtn" id="selectAllButton" title="Select All (CTRL+A)"
-               value="SelectAll"/>
-        <a type="button" id="saveButton" title="Save As (CTRL + S)" href="#">Save</a>
-        <input type="file" class="diagramCommandBtn" id="loadButton" title="Load (CTRL+O)" value="Load"/>
-        <span class="menu-text">Layout:</span><input id="Layouts" value="1"/>
-        <input type="button" class="diagramCommandBtn" id="layoutButton" title="Layout" value="Layout"/>
-        <input type="button" class="diagramCommandBtn" id="toFrontButton" title="To Front" value="To Front"/>
-        <input type="button" class="diagramCommandBtn" id="toBackButton" title="To Back" value="To Back"/>
-        <span class="menu-text">Start-cap:</span><input id="StartCap" value="1"/>
-        <span class="menu-text">End-cap:</span><input id="EndCap" value="1"/>
-        <input id="backgroundPicker"/>
-        <input id="shapePicker"/>
+        <div class="group">
+            <input type="button" class="k-button" id="undoButton" title="Undo (CTRL+Z)" value="Undo"/>
+            <input type="button" class="k-button" id="redoButton" title="Redo (CTRL+Y)" value="Redo"/>
+            <input type="button" class="k-button" id="deleteButton" title="Delete (DEL)" value="Delete"/>
+            <input type="button" class="k-button" id="selectAllButton" title="Select All (CTRL+A)"
+                   value="SelectAll"/>
+        </div>
+        <div class="group">
+            <a type="button" class="k-button" id="saveButton" title="Save As (CTRL + S)" href="#">Save</a>
+            <input type="button" class="k-button" value="Load" title="Load (CTRL+O)"
+                   id="loadButton" onclick="document.getElementById('upload-field').click();"/>
+
+            <div id="upload-wrap">
+                <input type="file" id="upload-field"/>
+            </div>
+        </div>
+        <div class="group">
+            <span class="menu-text">Layout:</span><input id="Layouts" value="1"/>
+            <input type="button" class="k-button" id="layoutButton" title="Layout" value="Layout"/>
+        </div>
+        <div class="group">
+            <input type="button" class="k-button" id="toFrontButton" title="To Front" value="To Front"/>
+            <input type="button" class="k-button" id="toBackButton" title="To Back" value="To Back"/>
+          </div>
+        <div class="group">
+            <span class="menu-text">Start-cap:</span><input id="StartCap" value="1"/>
+            <span class="menu-text">End-cap:</span><input id="EndCap" value="1"/>
+          </div>
+        <div class="group">
+            <span class="menu-text">Canvas:</span><input id="backgroundPicker"/>
+            <span class="menu-text">Object:</span><input id="shapePicker"/>
+        </div>
     </div>
     <div id="splitter">
         <div id="toolBoxDiv">
-            <!--<h2>Shapes</h2>-->
+            <div id="toolboxTitle">Shapes</div>
             <div id="toolBox"></div>
         </div>
         <div id="canvasDiv">
             <!--<h2>Diagram</h2>-->
-            <div id="zoomPanel">
-                <input id="slider"/>
-            </div>
+
             <div id="canvas"></div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div id="zoomPanel">
+            <input id="slider"/>
         </div>
     </div>
 </div>
@@ -143,10 +298,21 @@
 <script type="text/x-kendo-tmpl" id="template">
     <div class="shape">
         <svg>
+        <g transform="scale(0.5)" >
+        <title>#:options.name#</title>
             #= new XMLSerializer().serializeToString(kendo.diagram.Shape.createShapeVisual(options).native) #
+            </g>
         </svg>
-        <h3>#:options.name#</h3>
+
     </div>
+
+
+
+
+
+
+
+
 
 
 </script>
@@ -163,6 +329,43 @@ for (var i = 0; i < shapesSource.length; i++) {
 }
 
 $(function () {
+    function onload() {
+        var seq = Shapes.SequentialData;
+        seq.text = "Sequential Data.";
+        var shape1 = diagram.addShape(new Point(100, 100), seq);
+        shape2 = diagram.addShape(new Point(100, 400), Shapes.Wave);
+        shape2.content("content");
+
+        var shape3 = diagram.addShape(new Point(370, 400), Shapes.Rectangle);
+        var shape4 = diagram.addShape(new Point(400, 200), kendo.deepExtend({content: "Custom connectors"}, Shapes.Triangle));
+        var topCor = shape2.getConnector("Auto");
+        var topCor2 = shape3.getConnector("Auto");
+        var bottomCor = shape1.getConnector("Auto");
+        var bottomCor2 = shape4.getConnector("Auto");
+        diagram.connect(bottomCor, topCor);
+        var con2 = diagram.connect(bottomCor, topCor2);
+        diagram.connect(bottomCor, bottomCor2);
+        diagram.connect(new Point(200, 600), new Point(400, 800), {content: "Floating connection" });
+        con2.content("Connection Label");
+
+        // Org Chart also...
+        var s1 = diagram.addShape(new Point(800, 0), Shapes.Rectangle);
+
+        var s2 = diagram.addShape(new Point(600, 200), Shapes.Rectangle);
+        var s3 = diagram.addShape(new Point(1000, 200), Shapes.Rectangle);
+
+        var s4 = diagram.addShape(new Point(600, 400), Shapes.Rectangle);
+        var s5 = diagram.addShape(new Point(1000, 400), Shapes.Rectangle);
+        var s6 = diagram.addShape(new Point(800, 400), Shapes.Rectangle);
+
+        diagram.connect(s1, s2);
+        diagram.connect(s1, s3);
+        diagram.connect(s2, s4);
+        diagram.connect(s3, s5);
+        diagram.connect(s3, s6);
+        onLayoutChanged();
+    }
+
     $("#canvas").kendoDiagram({
         zoom: function (e) {
             slider.value(this._zoom);
@@ -192,39 +395,6 @@ $(function () {
             kendo = window.kendo,
             Point = kendo.diagram.Point;
 
-    var seq = Shapes.SequentialData;
-    seq.text = "Sequential Data.";
-    var shape1 = diagram.addShape(new Point(100, 100), seq);
-    shape2 = diagram.addShape(new Point(100, 400), Shapes.Wave);
-    shape2.content("content");
-
-    var shape3 = diagram.addShape(new Point(370, 400), Shapes.Rectangle);
-    var shape4 = diagram.addShape(new Point(400, 200), kendo.deepExtend({content: "Custom connectors"}, Shapes.Triangle));
-    var topCor = shape2.getConnector("Auto");
-    var topCor2 = shape3.getConnector("Auto");
-    var bottomCor = shape1.getConnector("Auto");
-    var bottomCor2 = shape4.getConnector("Auto");
-    diagram.connect(bottomCor, topCor);
-    var con2 = diagram.connect(bottomCor, topCor2);
-    diagram.connect(bottomCor, bottomCor2);
-    diagram.connect(new Point(200, 600), new Point(400, 800), {content: "Floating connection" });
-    con2.content("Connection Label");
-
-    // Org Chart also...
-    var s1 = diagram.addShape(new Point(800, 0), Shapes.Rectangle);
-
-    var s2 = diagram.addShape(new Point(600, 200), Shapes.Rectangle);
-    var s3 = diagram.addShape(new Point(1000, 200), Shapes.Rectangle);
-
-    var s4 = diagram.addShape(new Point(600, 400), Shapes.Rectangle);
-    var s5 = diagram.addShape(new Point(1000, 400), Shapes.Rectangle);
-    var s6 = diagram.addShape(new Point(800, 400), Shapes.Rectangle);
-
-    diagram.connect(s1, s2);
-    diagram.connect(s1, s3);
-    diagram.connect(s2, s4);
-    diagram.connect(s3, s5);
-    diagram.connect(s3, s6);
 
     var list = $("#toolBox").kendoListView({
         dataSource: {
@@ -249,7 +419,8 @@ $(function () {
     $("#splitter").kendoSplitter({
         panes: [
             { collapsible: false },
-            { collapsible: false, size: "75%" }
+            { collapsible: false,
+                size: "82%" }
         ]
     });
 
@@ -419,7 +590,7 @@ $(function () {
     $("#Layouts").data("kendoDropDownList").select(function (dataItem) {
         return dataItem.value === "TreeRight";
     });
-    onLayoutChanged();
+
 
     var caps = [
         {value: kendo.diagram.Markers.none},
@@ -457,15 +628,15 @@ $(function () {
     });
 
     $("#backgroundPicker").kendoColorPicker({
-        value: "#fce8e8",
+        value: "#fff",
         buttons: false,
         select: function (e) {
             $("#canvas").css("background-color", e.value);
         }
     });
-
+    $("#menu").kendoMenu();
     $("#shapePicker").kendoColorPicker({
-        value: "#fce8e8",
+        value: "#fff",
         buttons: false,
         select: function (e) {
             var items = diagram.select();
@@ -474,6 +645,7 @@ $(function () {
             }
         }
     });
+    onload();
 });
 </script>
 </html>
