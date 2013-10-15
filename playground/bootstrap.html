@@ -86,8 +86,7 @@
                 background-color: #030303;
             }
 
-            header .k-dropdown-wrap.k-state-focused,
-            header .k-slider .k-draghandle.k-state-selected {
+            header .k-dropdown-wrap.k-state-focused {
                 box-shadow: none;
             }
 
@@ -112,55 +111,7 @@
                 color: #fff;
             }
 
-            header #font-size-value {
-                display: inline-block;
-                vertical-align: top;
-                padding: 1px 0;
-                margin-right: 7%;
-                width: 25%;
-            }
-
-            header .k-slider {
-                vertical-align: top;
-                height: 25px;
-                line-height: 25px;
-                margin-top: 11px;
-                width: 68%;
-            }
-
-            header .k-slider .k-slider-track,
-            header .k-slider .k-slider-selection {
-                height: 2px;
-                background-color: #fff;
-                margin-top: -1px;
-            }
-
-            header .k-slider .k-draghandle {
-                height: 25px;
-                width: 25px;
-                top: -12px;
-                border-radius: 50%;
-
-                box-shadow: none;
-                outline: none;
-
-                border-color: #fff;
-                border-width: 2px;
-                background-color: #000;
-                background-image: none !important;
-            }
-
-            header .k-slider .k-draghandle:hover {
-                background-color: #555;
-            }
-
-            header .k-slider .k-draghandle.k-state-selected {
-                border-color: #fff;
-                background-color: #fff;
-            }
-
-            #theme-list,
-            #dimensions-list {
+            .k-popup.ra-list {
                 background-color: #010101;
                 border-color: #5c5c5c;
                 color: #fff;
@@ -168,17 +119,9 @@
                 border-radius: 0;
             }
 
-            #theme-list .k-item,
-            #dimensions-list .k-item {
-                border-radius: 0;
-            }
-
-            #theme-list .k-state-hover,
-            #theme-list .k-state-selected,
-            #theme-list .k-state-focused,
-            #dimensions-list .k-state-hover,
-            #dimensions-list .k-state-selected,
-            #dimensions-list .k-state-focused {
+            .k-popup.ra-list .k-state-hover,
+            .k-popup.ra-list .k-state-selected,
+            .k-popup.ra-list .k-state-focused {
                 background-image: none;
                 background-color: #555;
                 box-shadow: none;
@@ -186,8 +129,8 @@
                 border-color: #555;
             }
 
-            #theme-list .k-item,
-            #dimensions-list .k-item {
+            .k-popup.ra-list .k-item {
+                border-radius: 0;
                 text-indent: 7px;
             }
 
@@ -272,7 +215,7 @@
 
                         <label class="col-sm-4">
                             <div class="description">Font-size</div>
-                            <span id="font-size-value"></span><input type="range" id="font-size">
+                            <select id="font-size"></select>
                         </label>
                     </div>
                 </div>
@@ -491,34 +434,30 @@
                 change: changeStylesheet(themeLink)
             });
 
-            function sliderChange(e) {
-                var value = e && e.value;
+            function changeFontSize(e) {
+                var value = $("#font-size").kendoDropDownList("value");
 
-                if (!value) {
-                    value = $("#font-size").kendoSlider("value");
-                }
-
-                value += "px";
-
-                $("#font-size-value").text(value);
-
-                $("body").css("font-size", value);
+                $("body").css("font-size", value + "px");
             }
 
-            $("#font-size").kendoSlider({
-                min: 10,
-                max: 20,
-                smallStep: 2,
-                largeStep: 10,
-                tickPlacement: "none",
+            $("#font-size").kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
                 value: 14,
-                showButtons: false,
-                tooltip: { enabled: false },
-                change: sliderChange,
-                slide: sliderChange
+                dataSource: [
+                    { text: "10px", value: 10 },
+                    { text: "12px", value: 12 },
+                    { text: "14px", value: 14 },
+                    { text: "16px", value: 16 },
+                    { text: "18px", value: 18 },
+                    { text: "20px", value: 20 }
+                ],
+                change: changeFontSize
             });
 
-            sliderChange();
+            changeFontSize();
+
+            $("#theme-list, #dimensions-list, #font-size-list").addClass("ra-list");
 
             var slide = kendo.fx($("#configurator")).slideIn("down");
             var visible = false;
