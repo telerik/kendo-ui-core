@@ -111,7 +111,7 @@ kendo_module({
             SAME_VIEW_REQUESTED
         ],
 
-        append: function(html) {
+         append: function(html) {
             return this.viewEngine.append(html);
         },
 
@@ -228,7 +228,11 @@ kendo_module({
     });
 
     Pane.wrap = function(element) {
-        var paneContainer = element.wrap('<div class="km-pane-wrapper km-root"><div><div data-role="view"></div></div></div>').parent().parent(),
+        if (!element.is(roleSelector("view"))) {
+            element = element.wrap('<div data-' + kendo.ns + 'role="view"></div>').parent();
+        }
+
+        var paneContainer = element.wrap('<div class="km-pane-wrapper km-root"><div></div></div>').parent(),
             pane = new Pane(paneContainer);
 
         pane.navigate("");
