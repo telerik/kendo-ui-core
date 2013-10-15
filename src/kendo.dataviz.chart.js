@@ -1160,7 +1160,7 @@ kendo_module({
                 plotArea = chart._plotArea,
                 currentSeries = (plotArea.srcSeries || plotArea.series)[seriesIndex],
                 originalSeries = (chart._sourceSeries || [])[seriesIndex] || currentSeries,
-                currentPoint, originalPoint, transitionsState, visible, point;
+                transitionsState, visible, point;
 
             if (inArray(currentSeries.type, [PIE, DONUT])) {
                 point = originalSeries.data[pointIndex];
