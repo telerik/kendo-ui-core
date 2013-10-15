@@ -65,6 +65,14 @@ public class ButtonTag extends WidgetTag /* interfaces *//* interfaces */ {
         setEvent("click", value.getBody());
     }
 
+    public java.lang.Object getContent() {
+        return (java.lang.Object)getProperty("content");
+    }
+
+    public void setContent(java.lang.Object value) {
+        setProperty("content", value);
+    }
+
     public boolean getEnable() {
         return (boolean)getProperty("enable");
     }

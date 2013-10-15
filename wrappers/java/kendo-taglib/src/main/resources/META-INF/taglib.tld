@@ -429,6 +429,12 @@ If it is not supported by the browser, the Barcode will switch to the first avai
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The content of the Button</description>
+            <name>content</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
             <description>Indicates whether the Button should be enabled or disabled. By default, it is enabled, unless a disabled="disabled" attribute is detected.</description>
             <name>enable</name>
             <rtexprvalue>true</rtexprvalue>

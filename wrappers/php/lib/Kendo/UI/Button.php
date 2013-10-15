@@ -59,6 +59,15 @@ In case you want to use an icon from the Kendo UI theme sprite background image,
     }
 
     /**
+    * The content of the Button
+    * @param  $value
+    * @return \Kendo\UI\Button
+    */
+    public function content($value) {
+        return $this->setProperty('content', $value);
+    }
+
+    /**
     * Sets the click event of the Button.
     * Fires when the Button is clicked with the mouse, touched on a touch device, or ENTER (or SPACE) is pressed while the Button is focused.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
@@ -72,6 +81,29 @@ In case you want to use an icon from the Kendo UI theme sprite background image,
         return $this->setProperty('click', $value);
     }
 
+
+    /**
+    * Sets the HTML content of the Button.
+    * @param string $value
+    * @return \Kendo\UI\Button
+    */
+    public function content($value) {
+        return $this->setProperty('content', $value);
+    }
+
+    /**
+    * Starts output bufferring. Any following markup will be set as the content of the Button.
+    */
+    public function startContent() {
+        ob_start();
+    }
+
+    /**
+    * Stops output bufferring and sets the preceding markup as the content of the Button.
+    */
+    public function endContent() {
+        $this->content(ob_get_clean());
+    }
 
 //<< Properties
 
