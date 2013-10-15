@@ -20,8 +20,13 @@ require_once '../../lib/Kendo/Autoload.php';
 
 $iconTextButton = new \Kendo\UI\Button('iconTextButton');
 $iconTextButton->attr('type', 'button')
-               ->icon('ungroup')
-               ->content('Kendo UI Button');
+               ->icon('ungroup');
+
+$iconTextButton->startContent();
+?>
+  Kendo UI Button
+<?php
+$iconTextButton->endContent();
 
 echo $iconTextButton->render();
 
