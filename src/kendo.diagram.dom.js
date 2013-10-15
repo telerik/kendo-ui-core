@@ -2020,9 +2020,17 @@ kendo_module({
          * @returns {Shape}
          */
         getId: function (id) {
-            return this.shapes.first(function (s) {
+            var found;
+            found = this.shapes.first(function (s) {
                 return s.visual.native.id === id;
             });
+            if (found) {
+                return found;
+            }
+            found = this.connections.first(function (c) {
+                return c.visual.native.id === id;
+            });
+            return found;
         }
     });
 

@@ -64,8 +64,25 @@ kendo_module({
         setState: function (state) {
             var diagram = state.diagram;
             if (this.animate) {
+                state.linkMap.forEach(
+                    function (id, points) {
+                        var conn = diagram.getId(id);
+                        conn.visible(false);
+                        if (conn) {
+                            conn.points(points);
+                        }
+                    }
+                );
                 var ticker = new kendo.diagram.Ticker();
                 ticker.addAdapter(new kendo.diagram.PositionAdapter(state));
+                ticker.onComplete(function () {
+                    state.linkMap.forEach(
+                        function (id, points) {
+                            var conn = diagram.getId(id);
+                            conn.visible(true);
+                        }
+                    );
+                })
                 ticker.play();
             }
             else {
@@ -75,23 +92,32 @@ kendo_module({
                         shape.position(bounds.topLeft());
                     }
                 });
+                state.linkMap.forEach(
+                    function (id, points) {
+                        var conn = diagram.getId(id);
+                        if (conn) {
+                            conn.points(points);
+                        }
+                    }
+                );
             }
-            // todo: when multipoint connections are ready this needs to be plugged in again
-            /*
-             * for (var i = 0; i < graph.links.length; i++) {
+
+            /*for (var i = 0; i < graph.links.length; i++) {
              var link = graph.links[i];
              var p = []
              if (link.points != null) {
              p.addRange(link.points);
              }
-             var sb = link.source.associatedShape.bounds();
+             */
+            /* var sb = link.source.associatedShape.bounds();
              p.prepend(new diagram.Point(sb.x, sb.y));
              var eb = link.target.associatedShape.bounds();
-             p.append(new diagram.Point(eb.x, eb.y));
+             p.append(new diagram.Point(eb.x, eb.y));*/
+            /*
 
-             //link.associatedConnection.points(p);
-             }
-             * */
+             link.associatedConnection.points(p);
+             }*/
+
         }
     });
 
