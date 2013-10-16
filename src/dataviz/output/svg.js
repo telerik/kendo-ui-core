@@ -2,7 +2,6 @@
 
     // Imports ================================================================
     var $ = jQuery,
-        proxy = $.proxy,
         doc = document,
 
         kendo = window.kendo,
@@ -11,15 +10,17 @@
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        Group = dataviz.Group,
-        Path = dataviz.Path,
-        append = dataviz.append,
-        defined = dataviz.defined,
+        drawing = dataviz.drawing,
+        Group = drawing.Group,
+        Path = drawing.Path,
         round = dataviz.round,
         renderTemplate = dataviz.renderTemplate,
 
         output = dataviz.output,
-        BaseNode = output.BaseNode;
+        BaseNode = output.BaseNode,
+
+        util = dataviz.util,
+        renderAttr = util.renderAttr;
 
     // Constants ==============================================================
     var BUTT = "butt",
@@ -77,10 +78,9 @@
         _appendTo: function(wrap) {
             var stage = this;
 
-            renderSVG(wrap, this._template(this));
-            this.element = wrap.firstElementChild;
-
-            this.rootNode.attachTo(this.element);
+            renderSVG(wrap, stage._template(stage));
+            stage.element = wrap.firstElementChild;
+            stage.rootNode.attachTo(stage.element);
         }
     });
 
@@ -203,8 +203,8 @@
 
             Node.fn.init.call(node, srcElement);
 
-            node.srcElement.points.bind(CHANGE, function(){
-                node._syncPoints();
+            node.srcElement.segments.bind(CHANGE, function(){
+                node._syncSegments();
             });
         },
 
@@ -219,27 +219,33 @@
                 result = "";
 
             if (options.id) {
-                result = node.renderAttr("id", options.id);
+                result = renderAttr("id", options.id);
             }
 
             return result;
         },
 
-        renderAttr: function (name, value) {
-            return defined(value) ? " " + name + "='" + value + "' " : "";
-        },
-
         renderPoints: function() {
             var path = this,
-                points = path.srcElement.points,
+                segments = path.srcElement.segments,
                 i,
                 result = [];
 
-            for (i = 0; i < points.length; i++) {
-                result.push(points[i].x + " " + points[i].y);
+            for (i = 0; i < segments.length; i++) {
+                result.push(segments[i].anchor.toString());
             }
 
             return "M" + result.join(" ");
+        },
+
+        renderStroke: function() {
+            var path = this,
+                stroke = path.srcElement.options.stroke;
+
+            if (stroke) {
+                return renderAttr("stroke", stroke.color) +
+                       renderAttr("stroke-width", stroke.width);
+            }
         },
 
         _template: renderTemplate(
@@ -248,8 +254,7 @@
             //"#= d.renderCursor() #' " +
             //"#= d.renderDataAttributes() # " +
             "d='#= d.renderPoints() #' " +
-            "#= d.renderAttr(\"stroke\", d.srcElement.options.stroke.color) # " +
-            "#= d.renderAttr(\"stroke-width\", d.srcElement.options.stroke.width) #" +
+            "#= d.renderStroke() # " +
             //"#= d.renderDashType() # " +
             //"stroke-linecap='#= d.renderLinecap() #' " +
             //"stroke-linejoin='round' " +
@@ -259,7 +264,7 @@
             "></path>"
         ),
 
-        _syncPoints: function(e) {
+        _syncSegments: function(e) {
             if (this.element) {
                 $(this.element).attr({
                     d: this.renderPoints()

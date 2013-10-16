@@ -25,7 +25,10 @@
 
             if (srcElement) {
                 node.srcElement = srcElement;
-                srcElement.options.bind(CHANGE, function(e) { node._syncOptions(e); });
+
+                if (srcElement.options) {
+                    srcElement.options.bind(CHANGE, function(e) { node._syncOptions(e); });
+                }
 
                 if (srcElement.children) {
                     srcElement.children.bind(CHANGE, function(e) { node._syncChildren(e); });

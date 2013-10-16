@@ -8,12 +8,9 @@
 
         kendo = window.kendo,
         Observable = kendo.Observable,
-        ObservableObject = kendo.data.ObservableObject,
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        append = dataviz.append,
-
         util = dataviz.util,
         rad = util.rad;
 
@@ -30,6 +27,10 @@
 
         equals: function(point) {
             return point && point.x === this.x && point.y === this.y;
+        },
+
+        toString: function() {
+            return this.x + " " + this.y;
         },
 
         clone: function() {

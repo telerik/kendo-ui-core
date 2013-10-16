@@ -10,7 +10,8 @@
         dataviz = kendo.dataviz;
 
     // Constants
-    var DEG_TO_RAD = math.PI / 180;
+    var DEG_TO_RAD = math.PI / 180,
+        UNDEFINED = "undefined";
 
     // Generic utility functions ==============================================
     function defined(value) {

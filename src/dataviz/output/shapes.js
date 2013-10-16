@@ -7,8 +7,10 @@
     var math = Math,
 
         kendo = window.kendo,
+        Class = kendo.Class,
         Observable = kendo.Observable,
         ObservableObject = kendo.data.ObservableObject,
+        ObservableArray = kendo.data.ObservableArray,
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
@@ -17,14 +19,16 @@
         geometry = dataviz.geometry,
         Point = geometry.Point,
 
+        drawing = dataviz.output,
+
         util = dataviz.util,
         rad = util.rad;
 
     // Drawing primitives =====================================================
-    var Group = ObservableObject.extend({
+    var Group = Observable.extend({
         init: function() {
-            this.children = [];
-            ObservableObject.fn.init.call(this, this);
+            this.children = new ObservableArray([], Observable);
+            Observable.fn.init.call(this);
         },
 
         append: function() {
@@ -32,10 +36,10 @@
         }
     });
 
-    var Shape = ObservableObject.extend({
+    var Shape = Observable.extend({
         init: function(options) {
-            this.options = options || {};
-            ObservableObject.fn.init.call(this, this);
+            this.options = new ObservableObject(options || {});
+            Observable.fn.init.call(this);
         },
 
         fill: function(color, opacity) {
@@ -76,24 +80,37 @@
         }
     });
 
-    var Segment = ObservableObject.extend({
+    var Segment = Observable.extend({
         init: function(anchor, controlIn, controlOut) {
-            var segment = this;
+            var segment = this,
+                bubbleChange = function(e) {
+                    segment.trigger("change");
+                };
 
             segment.anchor = anchor || new Point();
             segment.controlIn = controlIn || new Point();
             segment.controlOut = controlOut || new Point();
 
-            ObservableObject.fn.init.call(segment, segment);
+            segment.anchor.bind("change", bubbleChange);
+            segment.controlIn.bind("change", bubbleChange);
+            segment.controlOut.bind("change", bubbleChange);
+
+            Observable.fn.init.call(segment);
         }
     });
 
     var Path = Shape.extend({
-        init: function(options) {
+        init: function(points, options) {
             var path = this;
-            path.segments = [];
+            path.segments = new ObservableArray([], Segment);
 
-            Shape.fn.init.call(path, this);
+            if (points) {
+                for (var i = 0; i < points.length; i++) {
+                    path.lineTo(points[i].x, points[i].y);
+                }
+            }
+
+            Shape.fn.init.call(path, options);
         },
 
         moveTo: function(x, y) {

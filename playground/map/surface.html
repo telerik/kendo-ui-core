@@ -9,6 +9,7 @@
     <script src="../../src/dataviz/util.js"></script>
     <script src="../../src/dataviz/geometry.js"></script>
     <script src="../../src/dataviz/output/core.js"></script>
+    <script src="../../src/dataviz/output/shapes.js"></script>
     <script src="../../src/dataviz/output/svg.js"></script>
     <script src="../../src/dataviz/output/canvas.js"></script>
 </head>
@@ -27,9 +28,12 @@
         proxy = $.proxy;
 
     var dataviz = kendo.dataviz,
-        Group = dataviz.Group,
-        Point = dataviz.Point,
-        Path = dataviz.Path;
+        geometry = dataviz.geometry,
+        Point = geometry.Point,
+
+        drawing = dataviz.drawing,
+        Group = drawing.Group,
+        Path = drawing.Path;
 
     var center = new Point(50,50);
 
@@ -99,9 +103,9 @@
     }
 
     var interval = setInterval(function() {
-        seconds.points[1].rotate(center, -6);
-        minutes.points[1].rotate(center, -0.1);
-        hours.points[1].rotate(center, -0.0017);
+        seconds.segments[1].anchor.rotate(center, -6);
+        minutes.segments[1].anchor.rotate(center, -0.1);
+        hours.segments[1].anchor.rotate(center, -0.0017);
     }, 10);
 
     function stop() {
