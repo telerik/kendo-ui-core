@@ -167,4 +167,45 @@
 @filter-menu-content-background: @content-background-color;
 @icon-background-color: transparent;
 
+//new var-s
+@treeview-text-color: #428bca;
+@treeview-hover-text-color: #428bca;
+@tabstrip-tabs-hover-color: #428bca;
+
+
 @import "theme-template.less";
+
+.k-widget.k-treeview
+{
+	color: @treeview-text-color;
+}
+
+.k-treeview .k-in.k-state-hover
+{
+	color: @treeview-hover-text-color;
+}
+
+.k-tabstrip-items .k-state-hover .k-link
+{
+    color: @tabstrip-tabs-hover-color;
+}
+
+.k-tabstrip-items .k-state-active .k-link
+{
+    color: @active-text-color;
+}
+
+.k-tabstrip-items .k-state-active .k-link
+{
+    color: @active-text-color;
+}
+
+.k-tabstrip-items .k-item.k-state-hover
+{
+	background: @hover-background-color;
+}
+
+.k-tabstrip-items .k-state-focused
+{
+	border-color: @focused-border-color;
+}
