@@ -564,6 +564,8 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
+            that._isMobile = kendo.support.mobileOS;
+
             isRtl = kendo.support.isRtl(element);
 
             that._element();
@@ -603,6 +605,14 @@ kendo_module({
             } else {
                 that._footer();
             }
+
+            /*
+            //TODO Remove the ininitialization from here
+            if (that._isMobile) {
+                that.pane = kendo.mobile.ui.Pane.wrap(this.wrapper);
+                that.view = that.pane.view();
+            }
+            */
 
             kendo.notify(that);
         },
@@ -2259,15 +2269,17 @@ kendo_module({
                wrapper = wrapper.wrap("<div/>").parent();
             }
 
-            that.wrapper = wrapper.addClass("k-grid k-widget k-secondary");/*
-                                  .attr(TABINDEX, math.max(table.attr(TABINDEX) || 0, 0));
-
-            table.removeAttr(TABINDEX);
-            */
+            that.wrapper = wrapper.addClass("k-grid k-widget k-secondary");
 
             if (height) {
                 that.wrapper.css(HEIGHT, height);
                 table.css(HEIGHT, "auto");
+            }
+
+            if (that._isMobile) {
+                var html = that.wrapper.wrap('<div data-' + kendo.ns + 'role="view" data-' + kendo.ns + 'init-widgets="false"></div>').parent();
+                that.pane = kendo.mobile.ui.Pane.wrap(html);
+                that.view = that.pane.view();
             }
         },
 
