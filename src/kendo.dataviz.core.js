@@ -192,10 +192,15 @@ kendo_module({
                 height = box.height(),
                 width = box.width();
 
-            box.x1 = x;
-            box.y1 = y;
-            box.x2 = box.x1 + width;
-            box.y2 = box.y1 + height;
+            if (x) {
+                box.x1 = x;
+                box.x2 = box.x1 + width;
+            }
+
+            if (y) {
+                box.y1 = y;
+                box.y2 = box.y1 + height;
+            }
 
             return box;
         },

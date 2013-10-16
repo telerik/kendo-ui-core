@@ -5495,7 +5495,7 @@ kendo_module({
             for (i = 0; i < length; i++) {
                 item = items[i];
                 if (defined(item)) {
-                    appendIfNotNull(result, items);
+                    appendIfNotNull(result, item);
                 }
             }
 
@@ -5550,6 +5550,16 @@ kendo_module({
             notes: {
                 visible: true,
                 label: {}
+            },
+            markers: {
+                visible: true,
+                background: WHITE,
+                size: LINE_MARKER_SIZE,
+                type: CIRCLE,
+                border: {
+                    width: 2
+                },
+                opacity: 1
             }
         },
 
@@ -5559,7 +5569,7 @@ kendo_module({
                 chart = point.owner,
                 value = point.value,
                 valueAxis = chart.seriesValueAxis(options),
-                points = [], mid, whiskerSlot, barSlot, medianSlot, meanSlot;
+                points = [], mid, whiskerSlot, boxSlot, medianSlot, meanSlot;
 
             boxSlot = valueAxis.getSlot(value.q25, value.q75);
             point.boxSlot = boxSlot;
@@ -5584,8 +5594,45 @@ kendo_module({
             point.medianPoints = [ Point2D(box.x1, medianSlot.y1), Point2D(box.x2, medianSlot.y1) ];
 
             point.box = whiskerSlot.clone().wrap(boxSlot);
+            point.createOutliers();
 
             point.reflowNote();
+        },
+
+        createOutliers: function() {
+            var point = this,
+                options = point.options,
+                markers = options.markers || {},
+                outliers = point.value.outliers,
+                valueAxis = point.owner.seriesValueAxis(options),
+                markerBackground = markers.background,
+                markerBorder = deepExtend({}, markers.border),
+                markerBox, element, value, i;
+
+            point.outliers = [];
+
+            if (!defined(markerBorder.color)) {
+                markerBorder.color =
+                    new Color(markerBackground).brightness(BAR_BORDER_BRIGHTNESS).toHex();
+            }
+
+            for (i = 0; i < outliers.length; i++) {
+                value = outliers[i];
+                element = new ShapeElement({
+                    id: point.options.id,
+                    type: markers.type,
+                    width: markers.size,
+                    height: markers.size,
+                    rotation: markers.rotation,
+                    background: markerBackground,
+                    border: markerBorder,
+                    opacity: markers.opacity
+                });
+                markerBox = valueAxis.getSlot(value).move(point.box.center().x);
+                point.box = point.box.wrap(markerBox);
+                element.reflow(markerBox);
+                point.outliers.push(element);
+            }
         },
 
         getViewElements: function(view) {
@@ -5660,11 +5707,16 @@ kendo_module({
                 elements.push(view.createPolyline(point.meanPoints, false, meanLineStyle));
             }
             elements.push(point.createOverlayRect(view, options));
+            if (point.outliers.length) {
+                for (var i = 0; i < point.outliers.length; i++) {
+                    elements.push(point.outliers[i].getViewElements(view, options.markers)[0]);
+                }
+            }
 
             return elements;
         },
 
-        highlightOverlay: function(view, options) {
+        highlightOverlay: function(view) {
             var point = this,
                 group = view.createGroup();
 
@@ -10494,7 +10546,7 @@ kendo_module({
 
     SeriesBinder.current.register(
         [BOX_PLOT],
-        ["min", "q25", "median", "q75", "max", "mean"], [CATEGORY, COLOR, NOTE_TEXT]
+        ["min", "q25", "median", "q75", "max", "mean", "outliers"], [CATEGORY, COLOR, NOTE_TEXT]
     );
 
     DefaultAggregates.current.register(
