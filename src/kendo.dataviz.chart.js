@@ -5975,13 +5975,13 @@ kendo_module({
                     if (labelOptions.align !== CIRCLE) {
                         boxX = sector.r + sector.c.x + labelDistance;
                     }
-                    label.reflow(new Box2D(boxX + box.width(), boxY,
+                    label.reflow(Box2D(boxX + box.width(), boxY,
                         boxX, boxY));
                 } else {
                     if (labelOptions.align !== CIRCLE) {
                         boxX = sector.c.x - sector.r - labelDistance;
                     }
-                    label.reflow(new Box2D(boxX - box.width(), boxY,
+                    label.reflow(Box2D(boxX - box.width(), boxY,
                         boxX, boxY));
                 }
 
@@ -6097,8 +6097,8 @@ kendo_module({
             reverse = (reverse) ? -1 : 1;
 
             return function(a, b) {
-                a = (a.parent.sector.middle() + 270) % 360;
-                b = (b.parent.sector.middle() + 270) % 360;
+                a = (round(a.parent.sector.middle()) + 270) % 360;
+                b = (round(b.parent.sector.middle()) + 270) % 360;
                 return (a - b) * reverse;
             };
         },
