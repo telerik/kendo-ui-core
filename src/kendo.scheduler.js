@@ -98,12 +98,6 @@ kendo_module({
             $('<input type="date" required ' + kendo.attr("type") + '="date" ' + kendo.attr("bind") + '="value:' + options.field +',visible:isAllDay" />')
                 .attr(attr).appendTo(container);
 
-            $('<span ' + kendo.attr("bind") + '="text: ' + options.field + 'Timezone"></span>').appendTo(container);
-
-            if (options.field === "end") {
-                $('<span ' + kendo.attr("bind") + '="text: startTimezone, invisible: endTimezone"></span>').appendTo(container);
-            }
-
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);
         },
         DATERANGEEDITOR = function(container, options) {
