@@ -1657,7 +1657,7 @@ kendo_module({
                 e.preventDefault();
             }
         },
-        _copy: function () {
+        copy: function () {
             if (this.options.copy.enabled) {
                 this._clipboard.clear();
                 this._copyOffset = 1;
@@ -1667,7 +1667,7 @@ kendo_module({
                 }
             }
         },
-        _cut: function () {
+        cut: function () {
             if (this.options.copy.enabled) {
                 this._clipboard.clear();
                 this._copyOffset = 0;
@@ -1678,7 +1678,7 @@ kendo_module({
                 this.remove(this._clipboard);
             }
         },
-        _paste: function () {
+        paste: function () {
             var offsetX, offsetY, item, copied, connector, shape;
             if (this._clipboard.length > 0) {
                 var mapping = new Dictionary();

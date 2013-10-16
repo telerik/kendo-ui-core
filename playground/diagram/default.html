@@ -131,7 +131,6 @@
         .group {
             border-right: 3px solid #38546d;
 
-
             padding-left: 10px;
             padding-right: 10px;
             float: left;
@@ -164,32 +163,36 @@
     <script src="../../src/kendo.diagram.extensions.js"></script>
     <script src="../../src/kendo.diagram.dom.js"></script>
 
+    <script src="jquery.hotkeys.js"></script>
+
     <script src="shapes.js"></script>
 </head>
 <body>
+<a href="#" id="savelink"></a>
+
 <div id="mainDiv">
     <div id="menuWrapper">
         <ul id="menu">
             <li>
                 File
                 <ul>
-                    <li>New</li>
-                    <li>Open</li>
-                    <li>Save</li>
+                    <li title="CTRL+N">New</li>
+                    <li title="CTRL+O">Open</li>
+                    <li title="CTRL+S"><a href="#" id="menuSave" style="color:#fff;">Save</a></li>
                 </ul>
             </li>
             <li>
                 Edit
                 <ul>
-                    <li>Undo</li>
-                    <li>Redo</li>
+                    <li title="CTRL+Z">Undo</li>
+                    <li title="CTRL+Y">Redo</li>
                     <hr/>
-                    <li>Cut</li>
-                    <li>Copy</li>
-                    <li>Paste</li>
-                    <li>Delete</li>
+                    <li title="CTRL+X">Cut</li>
+                    <li title="CTRL+C">Copy</li>
+                    <li title="CTRL+P">Paste</li>
+                    <li title="DEL">Delete</li>
                     <hr/>
-                    <li>Select All</li>
+                    <li title="CTRL+A">Select All</li>
                 </ul>
             </li>
             <li>
@@ -266,11 +269,11 @@
         <div class="group">
             <input type="button" class="k-button" id="toFrontButton" title="To Front" value="To Front"/>
             <input type="button" class="k-button" id="toBackButton" title="To Back" value="To Back"/>
-          </div>
+        </div>
         <div class="group">
             <span class="menu-text">Start-cap:</span><input id="StartCap" value="1"/>
             <span class="menu-text">End-cap:</span><input id="EndCap" value="1"/>
-          </div>
+        </div>
         <div class="group">
             <span class="menu-text">Canvas:</span><input id="backgroundPicker"/>
             <span class="menu-text">Object:</span><input id="shapePicker"/>
@@ -303,9 +306,7 @@
             #= new XMLSerializer().serializeToString(kendo.diagram.Shape.createShapeVisual(options).native) #
             </g>
         </svg>
-
     </div>
-
 
 
 
@@ -327,7 +328,6 @@ for (var i = 0; i < shapesSource.length; i++) {
     shape.background = 'steelblue';
     Shapes[shape.name] = shape;
 }
-
 $(function () {
     function onload() {
         var seq = Shapes.SequentialData;
@@ -365,6 +365,24 @@ $(function () {
         diagram.connect(s3, s6);
         onLayoutChanged();
     }
+
+
+    $(document).bind('keydown', 'Ctrl+s', function (e) {
+        saveDiagram();
+        return false;
+    });
+    $(document).bind('keydown', 'Ctrl+o', function (e) {
+        loadDiagram();
+        return false;
+    });
+    $(document).bind('keydown', 'Ctrl+n', function (e) {
+        diagram.clear();
+        return false;
+    });
+    $(document).bind('keydown', 'Ctrl+a', function (e) {
+        selectAll();
+        return false;
+    });
 
     $("#canvas").kendoDiagram({
         zoom: function (e) {
@@ -433,17 +451,36 @@ $(function () {
     $("#deleteButton").click(function (e) {
         diagram.remove(diagram.select(), true);
     });
-    $("#selectAllButton").click(function (e) {
+    function selectAll() {
         diagram.select(true);
+        $("#canvas").focus();
+    }
+
+    $("#selectAllButton").click(function (e) {
+        selectAll();
     });
-    $("#saveButton").click(function (e) {
-        var save = $("#saveButton"),
+
+    function saveDiagram() {
+        window.URL = window.URL || window.webkitURL;
+        var save = $("#savelink"),
                 json = JSON.stringify(diagram.save()),
-                blob = new Blob([json], {type: "application/json"}),
+                blob = new Blob([json], {type: "application\/json"}),
                 url = URL.createObjectURL(blob);
 
-        save.attr("download", "diagram.json"); // Works only in Chrome and FF.
-        save.attr("href", url);
+        var a = document.getElementById('savelink');
+        a.href = window.URL.createObjectURL(blob);
+        a.download = 'diagram.json';
+        a.click();
+        return false;
+    }
+
+
+    function loadDiagram() {
+        document.getElementById('upload-field').click();
+    }
+
+    $("#saveButton").click(function (e) {
+        saveDiagram();
     });
     $("#loadButton").change(function (e) {
         var reader = new FileReader(),
@@ -634,7 +671,45 @@ $(function () {
             $("#canvas").css("background-color", e.value);
         }
     });
-    $("#menu").kendoMenu();
+
+    function onMenuSelect(e) {
+        switch ($(e.item).children(".k-link").text().toLowerCase()) {
+            case "new":
+                diagram.clear();
+                break;
+            case "save":
+                saveDiagram();
+                break;
+            case "open":
+                loadDiagram();
+                break;
+            case "undo":
+                diagram.undo();
+                break;
+            case "redo":
+                diagram.redo();
+                break;
+            case "cut":
+                diagram.cut();
+                break;
+            case "copy":
+                diagram.copy();
+                break;
+            case "paste":
+                diagram.paste();
+                break;
+            case "delete":
+                diagram.remove(diagram.select(), true);
+                break;
+            case "select all":
+                selectAll();
+                break;
+        }
+    }
+
+    $("#menu").kendoMenu({
+        select: onMenuSelect
+    });
     $("#shapePicker").kendoColorPicker({
         value: "#fff",
         buttons: false,

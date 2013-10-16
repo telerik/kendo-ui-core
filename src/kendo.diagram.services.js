@@ -794,13 +794,16 @@ kendo_module({
                     return true;
                 }
                 else if (testKey(key, "c")) {
-                    diagram._copy();
+                    diagram.copy();
                 }
                 else if (testKey(key, "x")) {
-                    diagram._cut();
+                    diagram.cut();
                 }
                 else if (testKey(key, "v")) {
-                    diagram._paste();
+                    diagram.paste();
+                }
+                else if (testKey(key, "l")) {
+                    diagram.layout();
                 }
             }
             else if (key === 46 || key === 8) {// del: deletion
