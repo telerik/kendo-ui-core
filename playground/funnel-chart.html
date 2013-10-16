@@ -36,12 +36,15 @@
         <script>
             var seriesData = [{
                 value: 10,
+                myColor:"white",
                 category: "trials"
             }, {
                 value: 30,
+                myColor:"green",
                 category: "enquiries"
             }, {
                 value: 10,
+                myColor:"red",
                 category: "purchases"
             }];
 
@@ -50,7 +53,13 @@
                    position:"top"
                 },
                 series: [{
+                    border:{
+                        opacity: 1,
+                        width: 5,
+                        color: "pink"
+                    },
                     type: "funnel",
+                    colorField:"myColor",
                     highlight:{
                         visible:true,
                         border:{

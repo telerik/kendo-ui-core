@@ -413,12 +413,16 @@ kendo_module({
         getViewElements: function(view) {
             var segment = this,
                 options = segment.options,
+                border = options.border,
                 elements = [];
 
             elements.push(
                 view.createPolyline(segment.points, true, {
                     id: options.id,
                     fill: options.color,
+                    stroke: border.color,
+                    strokeOpacity: border.opacity,
+                    strokeWidth: border.width,
                     data: { modelId: options.modelId }
                 })
             );
