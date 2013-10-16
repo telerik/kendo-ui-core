@@ -1220,7 +1220,9 @@
                 }, {
                     "text": "Adaptive Rendering",
                     "url": "../mobile/adaptive/scheduler.html",
+                    "new": true,
                     "title": "Adaptive Rendering of Kendo UI Scheduler",
+                    "external": true,
                     "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]

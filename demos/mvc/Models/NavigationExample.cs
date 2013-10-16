@@ -8,5 +8,6 @@ namespace Kendo.Models
         public string Url { get; set; }
         public string Documentation { get; set; }
         public bool New { get; set; }
+        public bool External { get; set; }
     }
 }

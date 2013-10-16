@@ -8,7 +8,7 @@
             if (!example.ShouldInclude) { continue; }
 
             <li class="@(Request.Path.EndsWith(example.Url) ? "active" : "")">
-                <a @Html.Raw(example.New ? "class=\"new-example\"" : "") href="@Url.Content("~/" + ViewBag.Suite + "/" + example.Url)">@example.Text</a>
+                <a @Html.Raw(example.New ? "class=\"new-example\"" : "") @Html.Raw(example.External ? "rel=\"external\"" : "")  href="@Url.Content("~/" + ViewBag.Suite + "/" + example.Url)">@example.Text</a>
             </li>
         }
     </ul>

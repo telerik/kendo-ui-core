@@ -329,7 +329,7 @@
 
             if (supports.pushState) {
                 $(doc)
-                    .on("click", "#examples-nav li a", function (e) {
+                    .on("click", "#examples-nav li a:not([rel=external])", function (e) {
                         var element = $(this),
                             href = this.href;
 
