@@ -3170,7 +3170,7 @@ kendo_module({
             if (isNumber(data.fields[ERROR_LOW_FIELD]) &&
                 isNumber(data.fields[ERROR_HIGH_FIELD])) {                 
                 errorRange = {low: data.fields[ERROR_LOW_FIELD], high: data.fields[ERROR_HIGH_FIELD]};              
-            } else if (errorBars) {
+            } else if (errorBars && defined(errorBars.value)) {
                 chart.seriesErrorRanges = chart.seriesErrorRanges || [];                    
                 chart.seriesErrorRanges[seriesIx] = chart.seriesErrorRanges[seriesIx] ||
                     new ErrorRangeCalculator(errorBars.value, series, VALUE);
@@ -4003,7 +4003,7 @@ kendo_module({
             errorBar.high = high;
             errorBar.isVertical = isVertical;
             errorBar.plotArea = plotArea;
-
+         
             ChartElement.fn.init.call(errorBar, options);
         },
         
@@ -4085,9 +4085,7 @@ kendo_module({
                 delay: INITIAL_ANIMATION_DURATION
             },
             endCaps: true,
-            color: null,
             line: {
-                color: "red",
                 width: 1,
                 zIndex: 1
             }

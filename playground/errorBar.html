@@ -81,6 +81,7 @@
                 });
                 
                 $("#scatter").kendoChart({
+                    theme: "black",
                     title: {
                         text: "Rainfall - Wind Speed"
                     },
@@ -97,7 +98,7 @@
                         errorBars: {
                            yValue: "percents(40)",
                            line: {
-                             color: "blue",
+                             
                              width: 3
                            },
                            endCaps: false
@@ -109,7 +110,7 @@
                            yValue: "stddev",
                            xValue: "stderr",
                            line: {
-                             color: "red",
+                             
                              dashType: "dash"
                            }
                         }
@@ -120,7 +121,7 @@
                          errorBars: {
                            xValue: [1,3],
                            line: {
-                             color: "green" 
+                              
                            }
                         }
                     }],
@@ -155,6 +156,7 @@
                 });
                 
                 $("#scatterGroup").kendoChart({
+                    theme: "blueopal",
                     title: { text: "Stock Prices" },
                     dataSource: stocksDataSource,
                     series: [{
@@ -283,6 +285,7 @@
                         "performance": 147
                     } ];
                 $("#scatterBind").kendoChart({
+                    theme: "highcontrast",                
                     title: {
                         text: "Price-Performance Ratio"
                     },
@@ -325,6 +328,7 @@
                 });
                 
                 $("#bubble").kendoChart({
+                    theme: "default",                  
                 title: {
                     text: "Job Growth for 2011"
                 },
@@ -396,7 +400,7 @@
                     plotBands: [{
                         from: -5000,
                         to: 0,
-                        color: "#00f",
+                        
                         opacity: 0.05
                     }]
                 },
@@ -416,6 +420,7 @@
             });
             
             $("#bubbleGroup").kendoChart({
+                theme: "silver",    
                 dataSource: {
                     transport: {
                         read: {
@@ -497,6 +502,7 @@
             
             
              $("#area").kendoChart({
+                theme: "metro",               
                 title: {
                     text: "Gross domestic product growth /GDP annual %/"
                 },
@@ -545,6 +551,7 @@
             });
       
       $("#stackedArea").kendoChart({
+                theme: "metroblack",      
                 title: {
                     text: "Browser Usage Trends"
                 },
@@ -607,14 +614,12 @@
             });
 
        $("#line").kendoChart({
+                    theme: "moonlight",          
                       title: {
                         text: "Gross domestic product growth /GDP annual %/"
                     },
                     legend: {
                         position: "bottom"
-                    },
-                    chartArea: {
-                        background: ""
                     },
                     seriesDefaults: {
                         type: "line"
@@ -626,7 +631,7 @@
                             value: "stddev",
                             line: {
                                 width: 2,
-                                color: "blue",
+                                
                                 dashType: "dash"
                             }
                         }
@@ -663,6 +668,7 @@
                 });
                 
                 $("#verticalLine").kendoChart({
+                    theme: "uniform",                  
                       title: {
                         text: "Gross domestic product growth /GDP annual %/"
                     },
@@ -682,7 +688,7 @@
                             value: "stddev",
                             line: {
                                 width: 2,
-                                color: "blue",
+                                
                                 dashType: "dash"
                             }
                         }
@@ -719,7 +725,7 @@
                 });
                 
                 $("#stackedLine").kendoChart({
-                    theme: "default",
+                    theme: "bootstrap",                    
                     seriesDefaults: {
                         type: "line",
                         missingValues: "gap",
@@ -728,21 +734,21 @@
                     series: [{
                         name: "Gold Medals",
                         data: [40, 32, 34, 36, 45, 33, 34, null, 83, 36, 37, 44, 37, 35, 36, 46],
-                        color: "#f3ac32",
+                        
                         errorBars: {
                             value: 5
                         }
                     }, {
                         name: "Silver Medals",
                         data: [19, 25, 21, 26, 28, 31, 35, null, 60, 31, 34, 32, 24, 40, 38, 29],
-                        color: "#b8b8b8",
+                        
                         errorBars: {
                             value: [3,10]
                         }
                     }, {
                         name: "Bronze Medals",
                         data: [17, 17, 16, 28, 34, 30, 25, null, 30, 27, 37, 25, 33, 26, 36, 29],
-                        color: "#bb6e36",
+                        
                         errorBars: {
                             value: "percents(50)"
                         }
@@ -752,6 +758,7 @@
                     }
                 });
                 $("#column").kendoChart({
+                    theme: "flat",                     
                     title: {
                         text: "Gross domestic product growth /GDP annual %/"
                     },
@@ -782,7 +789,7 @@
                         data: [1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727],
                         errorBars: {
                             value: function(value, item){
-                                return [value - Math.random() * 2, value + Math.random() * 2];
+                                  return [Math.random() * 2,  Math.random() * 2];
                             }
                         },
                         tooltip: {
@@ -864,18 +871,18 @@
                     series: [{
                         name: "Gold Medals",
                         data: [40, 32, 34, 36, 45, 33, 34, 83, 36, 37, 44, 37, 35, 36, 46],
-                        color: "#f3ac32"
+                        
                     }, {
                         name: "Silver Medals",
                         data: [19, 25, 21, 26, 28, 31, 35, 60, 31, 34, 32, 24, 40, 38, 29],
-                        color: "#b8b8b8",
+                        
                         errorBars: {
                             value: 5
                         }
                     }, {
                         name: "Bronze Medals",
                         data: [17, 17, 16, 28, 34, 30, 25, 30, 27, 37, 25, 33, 26, 36, 29],
-                        color: "#bb6e36"
+                        
                     }],
                     categoryAxis: {
                         categories: [1952, 1956, 1960, 1964, 1968, 1972, 1976, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012]
@@ -932,7 +939,7 @@
                         errorBars: {
                             value: "stderr",
                             line: {
-                                color: "green"
+                                
                             }
                         } 
                     }, {
@@ -942,7 +949,7 @@
                         errorBars: {
                             value: "stddev(2)",
                             line: {
-                                color: "white"
+                                
                             }
                         } 
                     }, {
@@ -964,7 +971,7 @@
                         errorBars: {
                             value: 100000,
                             line: {
-                                color: "yellow"
+                                
                             }
                         } 
                     }, {
@@ -982,7 +989,7 @@
                         errorBars: {
                             value: 100000,
                             line: {
-                                color: "red"
+                                
                             }
                         } 
                     }, {
