@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://cdn.kendostatic.com/2013.2.716/styles/kendo.dataviz.default.min.css" rel="stylesheet" type="text/css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="http://cdn.kendostatic.com/2013.2.716/js/kendo.all.min.js"></script>
+        <script src="https://rawgithub.com/Stuk/jszip/master/jszip.js"></script>
+        <script src="https://rawgithub.com/Stuk/jszip/master/jszip-deflate.js"></script>
+        <script src="https://rawgithub.com/stephen-hardy/xlsx.js/master/xlsx.js"></script>
+    </head>
+    <body>
+        <div id="grid"></div>
+        <script>
+            function b64ToUint6 (nChr) {
+                return nChr > 64 && nChr < 91 ?
+                nChr - 65
+                : nChr > 96 && nChr < 123 ?
+                nChr - 71
+                : nChr > 47 && nChr < 58 ?
+                nChr + 4
+                : nChr === 43 ?
+                62
+                : nChr === 47 ?
+                63
+                :
+                0;
+            }
+
+            function base64DecToArr (sBase64, nBlocksSize) {
+                var
+                sB64Enc = sBase64.replace(/[^A-Za-z0-9\+\/]/g, ""), nInLen = sB64Enc.length,
+                nOutLen = nBlocksSize ? Math.ceil((nInLen * 3 + 1 >> 2) / nBlocksSize) * nBlocksSize : nInLen * 3 + 1 >> 2, taBytes = new Uint8Array(nOutLen);
+
+                for (var nMod3, nMod4, nUint24 = 0, nOutIdx = 0, nInIdx = 0; nInIdx < nInLen; nInIdx++) {
+                    nMod4 = nInIdx & 3;
+                    nUint24 |= b64ToUint6(sB64Enc.charCodeAt(nInIdx)) << 18 - 6 * nMod4;
+                    if (nMod4 === 3 || nInLen - nInIdx === 1) {
+                        for (nMod3 = 0; nMod3 < 3 && nOutIdx < nOutLen; nMod3++, nOutIdx++) {
+                            taBytes[nOutIdx] = nUint24 >>> (16 >>> nMod3 & 24) & 255;
+                        }
+                        nUint24 = 0;
+
+                    }
+                }
+
+                return taBytes;
+            }
+
+
+            function excel(a, id) {
+                var grid = $("#grid").data("kendoGrid");
+                var data = grid.dataSource.view();
+
+                var item = [];
+
+                var items = [item];
+
+                for (var columnIndex = 0; columnIndex < grid.columns.length; columnIndex++) {
+                    var column = grid.columns[columnIndex];
+
+                    item.push(column.title || column.field);
+                }
+
+                for (var idx = 0; idx < data.length; idx++) {
+                    item = [];
+
+                    items.push(item);
+
+                    for (columnIndex = 0; columnIndex < grid.columns.length; columnIndex++) {
+                        var field = grid.columns[columnIndex].field;
+
+                        var value = kendo.getter(field)(data[idx]);
+
+                        item.push(value);
+                    }
+                }
+
+                var xsl = xlsx({worksheets: [{ data: items }]});
+
+                if (typeof a.download !== "undefined") {
+                    a.download = "export.xlsx";
+                    a.href = xsl.href();
+                    } else if (window.navigator.msSaveBlob) {
+
+                    window.navigator.msSaveBlob(new Blob([base64DecToArr(xsl.base64)],
+                    { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }),'export.xlsx');
+                    } else {
+                    alert("Unsupported browser!");
+                    return false;
+                }
+            }
+
+            $("#grid").kendoGrid({
+                dataSource: {
+                    transport: {
+                        read:  {
+                            url: "http://demos.kendoui.com/service/products",
+                            dataType: "jsonp"
+                        }
+                    },
+                    pageSize: 10,
+                    schema: {
+                        model: {
+                            fields: {
+                                ProductID: { editable: false, nullable: true },
+                                ProductName: { validation: { required: true } },
+                                UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                                Discontinued: { type: "boolean" },
+                                UnitsInStock: { type: "number", validation: { min: 0, required: true } }
+                            }
+                        }
+                    }
+                },
+                toolbar: [
+                {
+                    template: "<a href='\\#' class='k-button' onclick='return excel(this,\"\\#grid\")'>Excel</a>"
+                }
+                ],
+                pageable: true,
+                columns: [
+                { field: "ProductID" },
+                { field: "ProductName" }
+                ]
+            });
+        </script>
+    </body>
+</html>
