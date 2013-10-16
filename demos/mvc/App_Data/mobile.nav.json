@@ -39,6 +39,11 @@
                     "url": "adaptive/scheduler.html",
                     "title": "Adaptive Rendering of Kendo UI Scheduler",
                     "packages": ["!mvc", "!jsp", "!php"]
+                }, {
+                    "text": "Grid",
+                    "url": "adaptive/grid.html",
+                    "title": "Adaptive Rendering of Kendo UI Grid",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },

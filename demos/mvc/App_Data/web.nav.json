@@ -832,6 +832,13 @@
                     "title": "MVVM support in Kendo UI Grid",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Grid",
                     "packages": ["!mvc", "!jsp", "!php"]
+                }, {
+                    "text": "Adaptive Rendering",
+                    "url": "../mobile/adaptive/grid.html",
+                    "new": true,
+                    "title": "Adaptive Rendering of Kendo UI Grid",
+                    "external": true,
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },
