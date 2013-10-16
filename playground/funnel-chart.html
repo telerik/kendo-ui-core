@@ -61,9 +61,9 @@
                         color:"red",
                         opacity:0.7
                     },
-                    segmentHeight:"equal",
+                    dynamicHeight:false,
                     data: seriesData,
-                    neckSize: 3
+                    neckRatio: 3
                 }],
                 seriesClick: function(e) {
                     console.log("click", e);
@@ -80,10 +80,10 @@
             $("#funnel-equal-spacing").kendoChart({
                 series: [{
                     type: "funnel",
-                    segmentHeight:"equal",
+                    dynamicHeight:false,
                     data: seriesData,
                     segmentSpacing: 25,
-                    neckSize:3
+                    neckRatio:3
                 }],
                 legend:{
                     border:{
@@ -107,8 +107,8 @@
             $("#funnel-height").kendoChart({
                 series: [{
                     type: "funnel",
-                    segmentMethod:"height",
-                    neckSize:0.6,
+                    dynamicWidth:false,
+                    neckRatio:0.6,
                     data: seriesData,
                     labels: {
                         align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
@@ -121,8 +121,8 @@
             $("#funnel-height-increasingWidth").kendoChart({
                 series: [{
                     type: "funnel",
-                    segmentMethod:"height",
-                    neckSize:3,
+                    dynamicWidth:false,
+                    neckRatio:3,
                     data: seriesData,
                     labels: {
                         align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
@@ -135,8 +135,8 @@
             $("#funnel-height-spacing").kendoChart({
                 series: [{
                     type: "funnel",
-                    segmentMethod:"height",
-                    neckSize:0.6,
+                    dynamicWidth:false,
+                    neckRatio:0.6,
                     data: seriesData,
                     segmentSpacing:10,
                     labels: {
@@ -171,7 +171,7 @@
             $("#funnel-relation").kendoChart({
                 series: [{
                     type: "funnel",
-                    segmentMethod:"relation",
+                    dynamicWidth:true,
                     data: relationData,
                     labels:{
                         color: 'white'
@@ -182,7 +182,7 @@
             $("#funnel-relation-spacing").kendoChart({
                 series: [{
                     type: "funnel",
-                    segmentMethod:"relation",
+                    dynamicWidth:true,
                     data: relationData,
                     segmentSpacing : 20
                 }]
@@ -191,8 +191,8 @@
             $("#funnel-relation-equalHeight").kendoChart({
                 series: [{
                     type: "funnel",
-                    segmentHeight:"equal",
-                    segmentMethod:"relation",
+                    dynamicHeight:false,
+                    dynamicWidth:true,
                     data: relationData,
                     labels:{
                         color: 'white'
@@ -203,8 +203,8 @@
             $("#funnel-relation-spacing-equalHeight").kendoChart({
                 series: [{
                     type: "funnel",
-                    segmentHeight:"equal",
-                    segmentMethod:"relation",
+                    dynamicHeight:false,
+                    dynamicWidth:true,
                     data: relationData,
                     segmentSpacing : 20
                 }]
@@ -213,7 +213,7 @@
             $("#funnel-unitTest").kendoChart({
                 series: [{
                     type: "funnel",
-                    segmentMethod:"relation",
+                    dynamicWidth:true,
                     data: [{
                         value: 7,
                         category: "A",

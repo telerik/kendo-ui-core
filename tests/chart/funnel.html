@@ -41,10 +41,10 @@
             }
 
             // ------------------------------------------------------------
-            module("segmentMethod none", {
+            module("dynamicWidth none", {
                 setup: function() {
                     createChart({
-                        segmentHeight:"equal",
+                        dynamicHeight:false,
                         series: [{
                             data: [{
                                 value: 1,
@@ -84,10 +84,10 @@
                 equal(chart.points.length, chart.options.series[0].data.length);
             });
 
-            module("segmentMethod height", {
+            module("dynamicWidth height", {
                 setup: function() {
                     createChart({
-                        segmentMethod:"height",
+                        dynamicWidth:false,
                         series: [{
                             data: [{
                                 value: 1,
@@ -122,11 +122,11 @@
                 ], TOLERANCE);
             });
 
-            module("max neckSize", {
+            module("max neckRatio", {
                 setup: function() {
                     createChart({
-                        segmentMethod:"height",
-                        neckSize: 1,
+                        dynamicWidth:false,
+                        neckRatio: 1,
                         series: [{
                             data: [{
                                 value: 1,
@@ -161,11 +161,11 @@
                 ], TOLERANCE);
             });
 
-            module("min neckSize", {
+            module("min neckRatio", {
                 setup: function() {
                     createChart({
-                        segmentMethod:"height",
-                        neckSize: 0,
+                        dynamicWidth:false,
+                        neckRatio: 0,
                         series: [{
                             data: [{
                                 value: 1,
@@ -256,7 +256,7 @@
                     createChart({
                         series: [{
                             type: "funnel",
-                            segmentMethod:"relation",
+                            dynamicWidth:true,
                         }]
                     });
                 }
@@ -266,12 +266,12 @@
                 ok(true);
             });
 
-            module("segmentMethod height with spacing", {
+            module("dynamicWidth height with spacing", {
                 setup: function() {
                     createChart({
-                        segmentMethod:"height",
+                        dynamicWidth:false,
                         segmentSpacing:30,
-                        neckSize: 0,
+                        neckRatio: 0,
                         series: [{
                             data: [{
                                 value: 1,
@@ -306,12 +306,12 @@
                 ], TOLERANCE);
             });
 
-            module("segmentMethod none with spacing", {
+            module("dynamicWidth none with spacing", {
                 setup: function() {
                     createChart({
-                        segmentMethod:"height",
+                        dynamicWidth:false,
                         segmentSpacing:33,
-                        neckSize: 0,
+                        neckRatio: 0,
                         series: [{
                             segmentSpacing:33,
                             data: [{
@@ -350,7 +350,7 @@
             module("depend ot relation", {
                 setup: function() {
                     createChart({
-                        segmentMethod:"relation",
+                        dynamicWidth:true,
                         series: [{
                             data: [{
                                 value: 7,
@@ -389,7 +389,7 @@
                 setup: function() {
                     createChart({
                         segmentSpacing : 22,
-                        segmentMethod:"relation",
+                        dynamicWidth:true,
                         series: [{
                             data: [{
                                 value: 7,
@@ -428,7 +428,7 @@
                 setup: function() {
                     createChart({
                         segmentSpacing : 22,
-                        segmentMethod:"relation",
+                        dynamicWidth:true,
                         labels: {
                             align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
                             color:'red',

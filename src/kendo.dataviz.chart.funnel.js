@@ -50,10 +50,10 @@ kendo_module({
                 firstSeries = series[0],
                 funnelChart = new FunnelChart(plotArea, {
                     series: series,
-                    segmentMethod:firstSeries.segmentMethod,
                     legend: plotArea.options.legend,
-                    neckSize: firstSeries.neckSize,
-                    segmentHeight: firstSeries.segmentHeight,
+                    neckRatio: firstSeries.neckRatio,
+                    dynamicHeight: firstSeries.dynamicHeight,
+                    dynamicWidth:firstSeries.dynamicWidth,
                     segmentSpacing:firstSeries.segmentSpacing,
                     highlight:firstSeries.highlight
                 });
@@ -81,10 +81,10 @@ kendo_module({
         },
 
         options: {
-            neckSize: 0.3,
+            neckRatio: 0.3,
             width: 300,
-            segmentMethod:"none",
-            segmentHeight:"proportional",
+            dynamicWidth:false,
+            dynamicHeight:true,
             segmentSpacing:0,
             labels: {
                 visible: true,
@@ -299,7 +299,7 @@ kendo_module({
                 options = chart.options,
                 segments = chart.points,
                 count = segments.length,
-                decreasingWidth = options.neckSize<=1,
+                decreasingWidth = options.neckRatio<=1,
                 i,
                 height,
                 lastUpperSide,
@@ -309,17 +309,17 @@ kendo_module({
                 box = chartBox.clone().unpad(chart.labelPadding()),
                 width = box.width(),
                 previousHeight = 0,
-                previousOffset = decreasingWidth ? 0 :(width-width/options.neckSize)/2,
+                previousOffset = decreasingWidth ? 0 :(width-width/options.neckRatio)/2,
                 segmentSpacing = options.segmentSpacing,
-                segmentMethod = options.segmentMethod,
+                dynamicWidth = options.dynamicWidth,
                 totalHeight = box.height() - segmentSpacing * (count-1),
-                neckSize = decreasingWidth ? options.neckSize*width : width;
+                neckRatio = decreasingWidth ? options.neckRatio*width : width;
 
             if(!count){
                 return;
             }
 
-            if(segmentMethod==="relation"){
+            if(dynamicWidth){
                 var firstSegment = segments[0],
                     maxSegment = firstSegment;
 
@@ -339,7 +339,7 @@ kendo_module({
                         nextPercentage = (nextSegment ? nextSegment.percentage : percentage);
 
                     points = segments[i].points = [],
-                    height = (options.segmentHeight==="proportional")? (totalHeight * percentage): (totalHeight / count),
+                    height = (options.dynamicHeight)? (totalHeight * percentage): (totalHeight / count),
                     offset = (width - lastUpperSide* (nextPercentage / percentage))/2;
                     offset = limitValue(offset, 0, width);
 
@@ -356,13 +356,13 @@ kendo_module({
             }
             else {
                 var topMostWidth = decreasingWidth ? width : width - previousOffset*2,
-                    finalNarrow = (topMostWidth - neckSize)/2;
+                    finalNarrow = (topMostWidth - neckRatio)/2;
 
                 for (i = 0; i < count; i++) {
                     points = segments[i].points = [],
                     percentage = segments[i].percentage,
-                    offset = (options.segmentHeight==="proportional")? (finalNarrow * percentage): (finalNarrow / count),
-                    height = (options.segmentHeight==="proportional")? (totalHeight * percentage): (totalHeight / count);
+                    offset = (options.dynamicHeight)? (finalNarrow * percentage): (finalNarrow / count),
+                    height = (options.dynamicHeight)? (totalHeight * percentage): (totalHeight / count);
 
                     points.push(Point2D(box.x1+previousOffset, box.y1 + previousHeight));
                     points.push(Point2D(box.x1+width - previousOffset, box.y1 + previousHeight));
