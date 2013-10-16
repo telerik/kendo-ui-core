@@ -146,18 +146,7 @@ kendo_module({
                 });
         },
         MOBILETIMEZONEPOPUP = function(container, options) {
-            var model = options.model;
-            var startTimezone = model.startTimezone;
-            var endTimezone = model.endTimezone;
-            var text = options.messages.noTimezone;
-
-            if (startTimezone) {
-                text = startTimezone;
-            }
-
-            if (endTimezone) {
-                 text += " | " + endTimezone;
-            }
+            var text = timezoneButtonText(options.model, options.messages.noTimezone);
 
             $('<a href="#" class="k-button k-timezone-button">' + text + '<a/>').click(options.click).appendTo(container);
         },
@@ -173,6 +162,20 @@ kendo_module({
                 .appendTo(container)
                 .kendoTimezoneEditor();
         };
+
+    function timezoneButtonText(model, message) {
+        message = message || "";
+
+        if (model.startTimezone) {
+            message = model.startTimezone;
+
+            if (model.endTimezone) {
+                message += " | " + model.endTimezone;
+            }
+        }
+
+        return message;
+    }
 
     function appendDateCompareValidator(attrs, options) {
         var validationRules = options.model.fields[options.field].validation;
@@ -889,19 +892,9 @@ kendo_module({
                         that._revertTimezones(model);
                     }
 
-                    var text = messages.editor.noTimezone;
-                    var startTimezone = model.startTimezone;
-                    var endTimezone = model.endTimezone;
-
-                    if (startTimezone) {
-                        text = startTimezone;
-                    }
-
-                    if (endTimezone && endTimezone !== startTimezone) {
-                        text += " | " + endTimezone;
-                    }
-
                     var editView = pane.element.find("#edit").data("kendoMobileView");
+
+                    var text = timezoneButtonText(model, messages.editor.noTimezone);
 
                     editView.contentElement().find(".k-timezone-button").text(text);
 
