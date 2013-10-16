@@ -145,6 +145,22 @@ kendo_module({
                     value: options.model[options.field]
                 });
         },
+        MOBILETIMEZONEPOPUP = function(container, options) {
+            var model = options.model;
+            var startTimezone = model.startTimezone;
+            var endTimezone = model.endTimezone;
+            var text = options.messages.noTimezone;
+
+            if (startTimezone) {
+                text = startTimezone;
+            }
+
+            if (endTimezone) {
+                 text += " | " + endTimezone;
+            }
+
+            $('<a href="#" class="k-button k-timezone-button">' + text + '<a/>').click(options.click).appendTo(container);
+        },
         TIMEZONEPOPUP = function(container, options) {
             $('<a href="#" class="k-button">' + options.messages.timezoneEditorButton + '<a/>').click(options.click).appendTo(container);
         },
@@ -736,7 +752,7 @@ kendo_module({
     var editors = {
         mobile: {
             dateRange: MOBILEDATERANGEEDITOR,
-            timezonePopUp: TIMEZONEPOPUP,
+            timezonePopUp: MOBILETIMEZONEPOPUP,
             timezone: TIMEZONEEDITOR,
             recurrence: MOBILERECURRENCEEDITOR,
             description: '<textarea name="description" class="k-textbox"/>',
@@ -783,7 +799,7 @@ kendo_module({
             var timezone = this.options.timezone;
 
             if (kendo.timezone.windows_zones && !model.isAllDay) {
-                fields.push({ field: "timezone", title: messages.editor.timezone, editor: editors.timezonePopUp, click: click, messages: messages.editor });
+                fields.push({ field: "timezone", title: messages.editor.timezone, editor: editors.timezonePopUp, click: click, messages: messages.editor, model: model });
                 fields.push({ field: "startTimezone", title: messages.editor.startTimezone, editor: editors.timezone });
                 fields.push({ field: "endTimezone", title: messages.editor.endTimezone, editor: editors.timezone });
             }
@@ -847,7 +863,7 @@ kendo_module({
             var that = this;
             var pane = that.pane;
             var messages = that.options.messages;
-            var timezoneView = that._timezoneView;
+            var timezoneView = that.timezoneView;
             var container = that.container.find(".k-scheduler-timezones");
             var checkbox = container.find(".k-timezone-toggle");
             var endTimezoneRow = container.find(".k-edit-label:last").add(container.find(".k-edit-field:last"));
@@ -861,7 +877,7 @@ kendo_module({
                            '<div data-role="header" class="k-header"><a href="#" class="k-button k-scheduler-cancel">' + messages.cancel + '</a>' +
                            messages.editor.timezoneTitle + '<a href="#" class="k-button k-scheduler-update">' + messages.save + '</a></div></div>';
 
-                this._timezoneView = timezoneView = pane.append(html);
+                this.timezoneView = timezoneView = pane.append(html);
 
                 timezoneView.contentElement().append(container.show());
 
@@ -873,7 +889,23 @@ kendo_module({
                         that._revertTimezones(model);
                     }
 
-                    pane.navigate("#edit", that.options.animations.right);
+                    var text = messages.editor.noTimezone;
+                    var startTimezone = model.startTimezone;
+                    var endTimezone = model.endTimezone;
+
+                    if (startTimezone) {
+                        text = startTimezone;
+                    }
+
+                    if (endTimezone && endTimezone !== startTimezone) {
+                        text += " | " + endTimezone;
+                    }
+
+                    var editView = pane.element.find("#edit").data("kendoMobileView");
+
+                    editView.contentElement().find(".k-timezone-button").text(text);
+
+                    pane.navigate(editView, that.options.animations.right);
                 });
 
                 checkbox.click(function() {
@@ -1705,6 +1737,7 @@ kendo_module({
                     timezoneEditorTitle: "Timezones",
                     timezoneEditorButton: "Time zone",
                     timezoneTitle: "Time zones",
+                    noTimezone: "No timezone",
                     editorTitle: "Event"
                 }
             },
