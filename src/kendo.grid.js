@@ -606,14 +606,6 @@ kendo_module({
                 that._footer();
             }
 
-            /*
-            //TODO Remove the ininitialization from here
-            if (that._isMobile) {
-                that.pane = kendo.mobile.ui.Pane.wrap(this.wrapper);
-                that.view = that.pane.view();
-            }
-            */
-
             kendo.notify(that);
         },
 
@@ -1256,13 +1248,17 @@ kendo_module({
         },
 
         removeRow: function(row) {
+            if (!this._confirmation(row)) {
+                return;
+            }
+
+            this._removeRow(row);
+        },
+
+        _removeRow: function(row) {
             var that = this,
                 model,
                 mode;
-
-            if (!that._confirmation()) {
-                return;
-            }
 
             row = $(row).hide();
             model = that._modelForContainer(row);
@@ -1584,16 +1580,48 @@ kendo_module({
             }
         },
 
-        _showMessage: function(text) {
-            return window.confirm(text);
+        _showMessage: function(text, row) {
+            var that = this;
+
+            if (!that._isMobile) {
+                return window.confirm(text);
+            }
+
+            var template = kendo.template('<ul>'+
+                '<li class="km-actionsheet-title">#:title#</li>'+
+                '<li><a href="\\#">#:destroy#</a></li>'+
+            '</ul>');
+
+            var html = $(template({
+                title: text,
+                destroy: "Delete"
+            }))
+            .appendTo(that.view.element);
+
+            var actionSheet = new kendo.mobile.ui.ActionSheet(html, {
+                cancel: "Cancel",
+                close: function() {
+                    this.destroy();
+                },
+                command: function(e) {
+                    var item = $(e.currentTarget).parent();
+                    if (!item.hasClass("km-actionsheet-cancel")) {
+                        that._removeRow(row);
+                    }
+                }
+            });
+
+            actionSheet.open(row);
+
+            return false;
         },
 
-        _confirmation: function() {
+        _confirmation: function(row) {
             var that = this,
                 editable = that.options.editable,
                 confirmation = editable === true || typeof editable === STRING ? DELETECONFIRM : editable.confirmation;
 
-            return confirmation !== false && confirmation != null ? that._showMessage(confirmation) : true;
+            return confirmation !== false && confirmation != null ? that._showMessage(confirmation, row) : true;
         },
 
         cancelChanges: function() {

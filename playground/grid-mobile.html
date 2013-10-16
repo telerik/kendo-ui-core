@@ -2,17 +2,33 @@
 <html>
     <head>
         <title>Mobile Grid</title>
+        <link href="../styles/mobile/kendo.mobile.all.min.css" rel="stylesheet" />
         <link href="../styles/web/kendo.common.min.css" rel="stylesheet" />
         <link href="../styles/web/kendo.silver.min.css" rel="stylesheet" />
 
         <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="http://rusev/work/web.js"></script>
+
+        <style>
+
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            html
+            {
+                overflow-y:scroll;
+            }
+        </style>
+
     </head>
     <body>
         <div id="grid"></div>
 
         <script>
-           kendo.support.mobileOS = true;
+            kendo.support.mobileOS = { name: "ios" };
 
             $("#grid").kendoGrid({
                 dataSource: {
@@ -54,8 +70,10 @@
                     "bar",
                     "date",
                     "number",
-                    "bool"
+                    "bool",
+                    { command: ["edit", "destroy"], title: "&nbsp;", width: "172px" }
                 ],
+                editable: true,
                 pageable: true,
                 filterable: true,
                 sortable: true,
