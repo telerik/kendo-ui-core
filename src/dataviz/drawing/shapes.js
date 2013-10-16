@@ -19,8 +19,6 @@
         geometry = dataviz.geometry,
         Point = geometry.Point,
 
-        drawing = dataviz.output,
-
         util = dataviz.util,
         rad = util.rad;
 

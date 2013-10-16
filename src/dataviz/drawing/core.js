@@ -56,7 +56,7 @@
 
     // Exports ================================================================
     deepExtend(dataviz, {
-        output: {
+        drawing: {
             BaseNode: BaseNode
         }
     });

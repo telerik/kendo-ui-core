@@ -10,14 +10,13 @@
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        drawing = dataviz.drawing,
-        Group = drawing.Group,
-        Path = drawing.Path,
         round = dataviz.round,
         renderTemplate = dataviz.renderTemplate,
 
-        output = dataviz.output,
-        BaseNode = output.BaseNode,
+        drawing = dataviz.drawing,
+        BaseNode = drawing.BaseNode,
+        Group = drawing.Group,
+        Path = drawing.Path,
 
         util = dataviz.util,
         renderAttr = util.renderAttr;
