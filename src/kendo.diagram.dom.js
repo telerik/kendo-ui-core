@@ -1067,7 +1067,7 @@ kendo_module({
             localSinkPoint = globalSinkPoint.minus(boundsTopLeft);
             if (this.contentVisual) {
                 middle = Point.fn.middleOf(localSourcePoint, localSinkPoint);
-                this.contentVisual.position(middle);
+                this.contentVisual.position(new Point(middle.x + boundsTopLeft.x, middle.y + boundsTopLeft.y));
             }
 
             if (this.adorner) {
