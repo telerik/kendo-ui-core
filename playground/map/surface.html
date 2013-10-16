@@ -64,9 +64,9 @@
     var clock = new Group();
     clock.append(hours, minutes, seconds, ticks);
 
-    var stage = new dataviz.svg.Stage($("#wrap")[0]);
-    //var stage = new dataviz.canvas.Stage($("#wrap")[0]);
-    stage.append(clock);
+    var surface = new dataviz.svg.Surface($("#wrap")[0]);
+    //var surface = new dataviz.canvas.Surface($("#wrap")[0]);
+    surface.append(clock);
 
     function addTicks() {
         for (var i = 0; i < 360; i += 30) {
@@ -110,7 +110,7 @@
 
     function stop() {
         clearInterval(interval)
-        stage.clear();
+        surface.clear();
     }
     </script>
 </body>

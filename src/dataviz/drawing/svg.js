@@ -38,15 +38,15 @@
         TRANSPARENT = "transparent",
         UNDEFINED = "undefined";
 
-    // SVG Stage =============================================================
-    var Stage = Observable.extend({
+    // SVG rendering surface =============================================================
+    var Surface = Observable.extend({
         init: function(wrap, options) {
-            var stage = this;
+            var surface = this;
 
             Observable.fn.init.call();
 
-            stage.rootNode = new RootNode();
-            stage._appendTo(wrap);
+            surface.rootNode = new RootNode();
+            surface._appendTo(wrap);
         },
 
         options: {
@@ -75,11 +75,11 @@
         ),
 
         _appendTo: function(wrap) {
-            var stage = this;
+            var surface = this;
 
-            renderSVG(wrap, stage._template(stage));
-            stage.element = wrap.firstElementChild;
-            stage.rootNode.attachTo(stage.element);
+            renderSVG(wrap, surface._template(surface));
+            surface.element = wrap.firstElementChild;
+            surface.rootNode.attachTo(surface.element);
         }
     });
 
@@ -311,7 +311,7 @@
     // Exports ================================================================
     deepExtend(dataviz, {
         svg: {
-            Stage: Stage,
+            Surface: Surface,
             Node: Node,
             GroupNode: GroupNode,
             PathNode: PathNode
