@@ -1217,6 +1217,11 @@
                     "title": "MVVM support in Kendo UI Scheduler",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Scheduler",
                     "packages": ["!mvc", "!jsp", "!php"]
+                }, {
+                    "text": "Adaptive Rendering",
+                    "url": "../mobile/adaptive/scheduler.html",
+                    "title": "Adaptive Rendering of Kendo UI Scheduler",
+                    "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
         },

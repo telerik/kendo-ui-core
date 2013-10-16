@@ -30,6 +30,19 @@
             ]
         },
         {
+            "text": "Adaptive Widgets",
+            "name": "adaptive",
+            "new": true,
+            "items": [
+                {
+                    "text": "Scheduler",
+                    "url": "adaptive/scheduler.html",
+                    "title": "Adaptive Rendering of Kendo UI Scheduler",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                }
+            ]
+        },
+        {
             "text": "Button",
             "name": "button",
             "documentation": "mobile/button",
