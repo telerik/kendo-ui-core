@@ -61,6 +61,8 @@ kendo_module({
 
             options.value = that._validateValue(options.value);
 
+            that._validateType(options.type);
+
             that._wrapper();
 
             that._progressAnimation();
@@ -100,6 +102,21 @@ kendo_module({
             chunkCount: DEFAULTCHUNKCOUNT,
             showStatus: true,
             animation: { }
+        },
+
+        _validateType: function(currentType){
+            var isValid = false;
+
+            $.each(PROGRESSTYPE, function(k, type) {
+                if (type === currentType) {
+                    isValid = true;
+                    return false;
+                }
+            });
+
+            if (!isValid) {
+                throw new Error(kendo.format("Invalid ProgressBar type '{0}'", currentType));
+            }
         },
 
         _wrapper: function() {

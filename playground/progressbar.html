@@ -9,6 +9,8 @@
 
         <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.binder.js"></script>
         <script src="../src/kendo.progressbar.js" type="text/javascript" charset="utf-8"></script>
     <style>
 
@@ -344,12 +346,35 @@
 </style>
 </head>
     <body>
-        <div id="dataattr">
-            <div id="mypb" data-role="progressbar" data-value="5" data-type="percent"></div>
+        <!-- <div id="dataattr">
+             <div data-role="progressbar"
+                 data-min="0" 
+                 data-max="200"
+                 data-bind="enabled: isEnabled,
+                            visible: isVisible,
+                            value: progressValue,
+                            events: { start: onStart,
+                                      change: onChange,
+                                      complete: onComplete}"></div>
             <script>
-                kendo.init($("#dataattr"));
+                var viewModel = kendo.observable({
+                    progressValue: 10,
+                    isEnabled: true,
+                    isVisible: true,
+                    onStart: function () {
+                        console.log("event :: start (" + this.get("progressValue") + ")");
+                    },
+                    onChange: function () {
+                        console.log("event :: change (" + this.get("progressValue") + ")");
+                    },
+                    onComplete: function () {
+                        console.log("event :: complete (" + this.get("progressValue") + ")");
+                    }
+                });
+
+                kendo.bind($("#dataattr"), viewModel);
             </script>
-        </div>
+        </div> -->
         <div class="k-rtl">
             <p>reverse: false</p>
             <div id="rtlProgressBar"></div>
@@ -369,15 +394,15 @@
            <script>
 
             $(function(){
-                $("#rtlProgressBar").kendoProgressBar({ type: "chunk", chunkCount: 4, orientation: "horizontal", reverse: false });
-                $("#rtlchunkProgressBar").kendoProgressBar({ type: "chunk", chunkCount: 4, orientation: "horizontal", reverse: true });
+                // $("#rtlProgressBar").kendoProgressBar({ type: "chunk", chunkCount: 4, orientation: "horizontal", reverse: false });
+                // $("#rtlchunkProgressBar").kendoProgressBar({ type: "chunk", chunkCount: 4, orientation: "horizontal", reverse: true });
 
-                var pb1 = $("#pb1").kendoProgressBar({ value: 10, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
-                var pb2 = $("#pb2").kendoProgressBar({ value: 70, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
-                var pb3 = $("#pb3").kendoProgressBar({ value: 30, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
-                var pb4 = $("#pb4").kendoProgressBar({ value: 90, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
-                var pb5 = $("#pb5").kendoProgressBar({ value: 20, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
-                var pb6 = $("#pb6").kendoProgressBar({ value: 50, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
+                // var pb1 = $("#pb1").kendoProgressBar({ value: 10, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
+                // var pb2 = $("#pb2").kendoProgressBar({ value: 70, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
+                // var pb3 = $("#pb3").kendoProgressBar({ value: 30, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
+                // var pb4 = $("#pb4").kendoProgressBar({ value: 90, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
+                // var pb5 = $("#pb5").kendoProgressBar({ value: 20, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
+                // var pb6 = $("#pb6").kendoProgressBar({ value: 50, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
 
                 // setInterval(function(){
                 //     pb1.value(getRandom(0, 100));
@@ -405,12 +430,12 @@
         <div id="progressbar-chunk-vert"></div>
         <br><br><br>
 
-        <script>
+         <script>
             $("#progressbar").kendoProgressBar({
                 min: 100,
                   max: 500,
                   value: 100,
-                  type: "percent",
+                  type: "chunk",
                   orientation: "vertical",
                   reverse: true,
                   complete: function(e) {

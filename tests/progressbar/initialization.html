@@ -399,6 +399,37 @@
                 ok(true);
             };
 
+            test("Error is thrown when invalid type is passed", function() {
+                throws(function() {
+                    var pb = new ProgressBar(container, {
+                        type: "invalid"
+                    });
+                });
+            });
+
+            test("Error is not thrown when type is 'value'", function() {
+                var pb = new ProgressBar(container, {
+                    type: "value"
+                });
+
+                ok(true);
+            });
+
+            test("Error is not thrown when type is 'percent'", function() {
+                var pb = new ProgressBar(container, {
+                    type: "percent"
+                });
+
+                ok(true);
+            });
+
+            test("Error is not thrown when type is 'chunk'", function() {
+                var pb = new ProgressBar(container, {
+                    type: "chunk"
+                });
+
+                ok(true);
+            });
 
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------
