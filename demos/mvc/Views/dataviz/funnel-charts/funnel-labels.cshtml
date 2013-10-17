@@ -3,53 +3,68 @@
         <div id="chart"></div>
     </div>
     <div class="configuration-horizontal">
+        <span class="configHead">Labels Configuration</span>
         <div class="config-section">
-            <span class="configHead">Labels Configuration</span>
             <ul class="options">
+                <li>Show:</li>
                 <li>
                     <label>
-                        <input id="labels" checked="checked" type="checkbox" autocomplete="off" />
-                        Show labels
+                        <input id="labels" checked="checked" type="checkbox" autocomplete="off" /> Show labels
                     </label>
                 </li>
                 <li>
                     <label>
-                        <input name="alignType" type="radio"
-                           value="center" checked="checked" autocomplete="off" />
-                        Align in the center
+                        <input id="showBorder" type="checkbox" checked="checked" /> Show border
+                    </label>
+                </li>    
+            </ul>
+        </div>
+        <div class="config-section">
+            <ul class="options">
+                <li>Align:</li>
+                <li>
+                    <label>
+                        <input name="alignType" type="radio" value="center" checked="checked" autocomplete="off" /> Center
                     </label>
                 </li>
                 <li>
                     <label>
-                        <input name="alignType" type="radio"
-                           value="left" autocomplete="off" />
-                        Align on the left
+                        <input name="alignType" type="radio" value="left" autocomplete="off" /> Left
                     </label>
                 </li>
                 <li>
                     <label>
-                        <input name="alignType" type="radio"
-                           value="right" autocomplete="off" />
-                        Align on the right
-                    </label>
-                </li>
-                <li>
-                    <label>Font size:
-                        <input id="sizeSlider" value="15" />
-                    </label>
-                </li>
-                <li>
-                    <input id="color" />
-                </li>
-                <li>
-                    <label>
-                        <input id="showBorder" type="checkbox" checked="checked" />
-                        Show border
+                        <input name="alignType" type="radio" value="right" autocomplete="off" /> Right
                     </label>
                 </li>
             </ul>
         </div>
+        <div class="config-section">
+            <ul class="options">
+                <li><label for="color">Font color:</label></li>
+                <li><input id="color" /></li>
+            </ul>
+        </div>
+        <div class="config-section">
+            <ul class="options">
+                <li><label for="sizeSlider">Font size:</label></li>
+                <li><input id="sizeSlider" value="15" /></li>
+            </ul>
+        </div>
     </div>
+    <style scoped>
+        .chart-wrapper #chart {
+            width: 400px;
+            height: 410px;
+            margin: 0 auto;
+        }
+        .configuration-horizontal .config-section {
+            min-width: 120px;
+        }
+        .options li:first-child {
+            padding-bottom: 10px;
+        }
+    </style>
     <script>
         function createChart() {
             $("#chart").kendoChart({
@@ -81,16 +96,16 @@
                     dependOn : "height",
                     data: [{
                         category: "Awareness",
-                        value: 35
+                        value: 4
                     }, {
                         category: "Interest",
-                        value: 25
+                        value: 3
                     }, {
                         category: "Desire",
-                        value: 20
+                        value: 2
                     }, {
                         category: "Action",
-                        value: 10
+                        value: 1
                     }]
                 }],
                 tooltip: {
@@ -107,7 +122,7 @@
                 min: 1,
                 max: 40
             });
-            $('#color').kendoColorPicker({ change: refresh, value: "#000" });
+            $('#color').kendoColorPicker({ change: refresh, value: "#000", buttons: false });
             $(document).bind("kendo:skinChange", createChart);
             $(".configuration-horizontal").on("change",":checkbox,:radio", refresh);
         });
@@ -144,10 +159,4 @@
             chart.refresh();
         }
     </script>
-
-    <style scoped>
-        .chart-wrapper, .chart-wrapper .k-chart {
-            height: 400px;
-        }
-    </style>
 </div>
