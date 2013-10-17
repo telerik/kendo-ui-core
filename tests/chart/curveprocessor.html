@@ -368,7 +368,7 @@
                 equal(controlPoints[1].y, cp2.y, "correct first control point Y");                
             });  
 
-            test("control points lie on the the data points line for vertical line", function() {debugger;
+            test("control points lie on the the data points line for vertical line", function() {
                 var p0 = new Point(1, 1),
                     p1 = new Point(1, 2),
                     p2 = new Point(1, 3),
@@ -386,7 +386,6 @@
                 var p0 = new Point(3, 4),
                     p1 = new Point(5, 6),
                     p2 = new Point(7, 9),
-                    tangent = 1.25,
                     cp1 = Point(4.334, 5.1675),
                     cp2 = Point(5.666, 6.8325),
                     controlPoints = processor.getMiddleControlPoints(p0, p1, p2, {xField: "x", yField: "y"}); 
@@ -401,7 +400,6 @@
                 var p0 = new Point(3, 3),
                     p1 = new Point(1, 2.9),
                     p2 = new Point(0.9, 1),
-                    tangent = 0.9523809523809523,
                     cp1 = Point(1.105, 3),
                     cp2 = Point(0.9667,  2.8682857142857143),
                     controlPoints = processor.getMiddleControlPoints(p0, p1, p2, {xField: "x", yField: "y"}); 
@@ -410,7 +408,119 @@
                 equal(round(controlPoints[0].y, COORD_PRECISION), cp1.y, "correct second control point Y");
                 equal(round(controlPoints[1].x, COORD_PRECISION), cp2.x, "correct first control point X");
                 equal(round(controlPoints[1].y, COORD_PRECISION), cp2.y, "correct first control point Y");                
-            }); 
+            });
+
+            test("control points preserve a high extremum in the middle point for ascending by x points", function() {
+                var p0 = new Point(1, 1),
+                    p1 = new Point(3, 3),
+                    p2 = new Point(4, 1),
+                    cp1 = Point(2.334, 3),
+                    cp2 = Point(3.333, 3),
+                    controlPoints = processor.getMiddleControlPoints(p0, p1, p2, {xField: "x", yField: "y"}); 
+                                   
+                equal(round(controlPoints[0].x, COORD_PRECISION), cp1.x, "correct second control point X");
+                equal(round(controlPoints[0].y, COORD_PRECISION), cp1.y, "correct second control point Y");
+                equal(round(controlPoints[1].x, COORD_PRECISION), cp2.x, "correct first control point X");
+                equal(round(controlPoints[1].y, COORD_PRECISION), cp2.y, "correct first control point Y");                
+            });
+
+            test("control points preserve a low extremum in the middle point for ascending by x points", function() {
+                var p0 = new Point(1, 3),
+                    p1 = new Point(3, 1),
+                    p2 = new Point(4, 3),
+                    cp1 = Point(2.334, 1),
+                    cp2 = Point(3.333, 1),
+                    controlPoints = processor.getMiddleControlPoints(p0, p1, p2, {xField: "x", yField: "y"}); 
+                                   
+                equal(round(controlPoints[0].x, COORD_PRECISION), cp1.x, "correct second control point X");
+                equal(round(controlPoints[0].y, COORD_PRECISION), cp1.y, "correct second control point Y");
+                equal(round(controlPoints[1].x, COORD_PRECISION), cp2.x, "correct first control point X");
+                equal(round(controlPoints[1].y, COORD_PRECISION), cp2.y, "correct first control point Y");                
+            });            
+
+            test("control points preserve a high extremum in the middle point for descending by x points", function() {
+                var p0 = new Point(4, 1),
+                    p1 = new Point(3, 3),
+                    p2 = new Point(1, 1),
+                    cp1 = Point(3.333, 3),
+                    cp2 = Point(2.334, 3),
+                    controlPoints = processor.getMiddleControlPoints(p0, p1, p2, {xField: "x", yField: "y"}); 
+                                   
+                equal(round(controlPoints[0].x, COORD_PRECISION), cp1.x, "correct second control point X");
+                equal(round(controlPoints[0].y, COORD_PRECISION), cp1.y, "correct second control point Y");
+                equal(round(controlPoints[1].x, COORD_PRECISION), cp2.x, "correct first control point X");
+                equal(round(controlPoints[1].y, COORD_PRECISION), cp2.y, "correct first control point Y");                
+            });
+
+            test("control points preserve a low extremum in the middle point for descending by x points", function() {
+                var p0 = new Point(4, 3),
+                    p1 = new Point(3, 1),
+                    p2 = new Point(1, 3),
+                    cp1 = Point(3.333, 1),
+                    cp2 = Point(2.334, 1),
+                    controlPoints = processor.getMiddleControlPoints(p0, p1, p2, {xField: "x", yField: "y"}); 
+                                   
+                equal(round(controlPoints[0].x, COORD_PRECISION), cp1.x, "correct second control point X");
+                equal(round(controlPoints[0].y, COORD_PRECISION), cp1.y, "correct second control point Y");
+                equal(round(controlPoints[1].x, COORD_PRECISION), cp2.x, "correct first control point X");
+                equal(round(controlPoints[1].y, COORD_PRECISION), cp2.y, "correct first control point Y");                
+            });             
+
+            test("control points preserve a high extremum in the middle point for descending by y points", function() {
+                var p0 = new Point(1, 4),
+                    p1 = new Point(3, 3),
+                    p2 = new Point(1, 1),
+                    cp1 = Point(3, 3.333),
+                    cp2 = Point(3, 2.334),
+                    controlPoints = processor.getMiddleControlPoints(p0, p1, p2, {xField: "y", yField: "x"}); 
+                                   
+                equal(round(controlPoints[0].x, COORD_PRECISION), cp1.x, "correct second control point X");
+                equal(round(controlPoints[0].y, COORD_PRECISION), cp1.y, "correct second control point Y");
+                equal(round(controlPoints[1].x, COORD_PRECISION), cp2.x, "correct first control point X");
+                equal(round(controlPoints[1].y, COORD_PRECISION), cp2.y, "correct first control point Y");                
+            });
+            
+            test("control points preserve a low extremum in the middle point for descending by y points", function() {
+                var p0 = new Point(3, 4),
+                    p1 = new Point(1, 3),
+                    p2 = new Point(3, 1),
+                    cp1 = Point(1, 3.333),
+                    cp2 = Point(1, 2.334),
+                    controlPoints = processor.getMiddleControlPoints(p0, p1, p2, {xField: "y", yField: "x"}); 
+                                   
+                equal(round(controlPoints[0].x, COORD_PRECISION), cp1.x, "correct second control point X");
+                equal(round(controlPoints[0].y, COORD_PRECISION), cp1.y, "correct second control point Y");
+                equal(round(controlPoints[1].x, COORD_PRECISION), cp2.x, "correct first control point X");
+                equal(round(controlPoints[1].y, COORD_PRECISION), cp2.y, "correct first control point Y");                
+            });            
+
+            test("control points preserve a high extremum in the middle point for ascending by y points", function() {
+                var p0 = new Point(1, 1),
+                    p1 = new Point(3, 3),
+                    p2 = new Point(1, 4),
+                    cp1 = Point(3, 2.334),
+                    cp2 = Point(3, 3.333),
+                    controlPoints = processor.getMiddleControlPoints(p0, p1, p2, {xField: "y", yField: "x"}); 
+                                   
+                equal(round(controlPoints[0].x, COORD_PRECISION), cp1.x, "correct second control point X");
+                equal(round(controlPoints[0].y, COORD_PRECISION), cp1.y, "correct second control point Y");
+                equal(round(controlPoints[1].x, COORD_PRECISION), cp2.x, "correct first control point X");
+                equal(round(controlPoints[1].y, COORD_PRECISION), cp2.y, "correct first control point Y");                
+            });             
+            
+            test("control points preserve a low extremum in the middle point for ascending by y points", function() {
+                var p0 = new Point(3, 1),
+                    p1 = new Point(1, 3),
+                    p2 = new Point(3, 4),
+                    cp1 = Point(1, 2.334),
+                    cp2 = Point(1, 3.333),
+                    controlPoints = processor.getMiddleControlPoints(p0, p1, p2, {xField: "y", yField: "x"}); 
+                                   
+                equal(round(controlPoints[0].x, COORD_PRECISION), cp1.x, "correct second control point X");
+                equal(round(controlPoints[0].y, COORD_PRECISION), cp1.y, "correct second control point Y");
+                equal(round(controlPoints[1].x, COORD_PRECISION), cp2.x, "correct first control point X");
+                equal(round(controlPoints[1].y, COORD_PRECISION), cp2.y, "correct first control point Y");                
+            });             
             
         })();
         </script>

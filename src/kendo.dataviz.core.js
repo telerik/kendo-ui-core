@@ -3711,14 +3711,12 @@ kendo_module({
                 fn, y2,
                 invertAxis = false;
 
-            if(!that.isMonotonicByField(p0,p1,p2, X)){
+            if(!that.isMonotonicByField(p0,p1,p2, X)){         
                 if(p0.x === p1.x){
-                    if(p1.y <= p2.y){
-                        invertAxis = true; 
-                    }                    
+                    invertAxis = true;                     
                 }
                 else if (p1.x === p2.x) {
-                    if(p2.y <= p1.y){
+                    if((p1.y < p2.y && p0.y <= p1.y) || (p2.y < p1.y && p1.y <= p0.y)){
                         invertAxis = true;  
                     }                    
                 } else {
@@ -3762,7 +3760,7 @@ kendo_module({
                 extremum,
                 xField = orientation.xField,
                 yField = orientation.yField,
-                allowedError = 0.5;
+                allowedError = that.allowedError;
             if(that.isLine(p0,p1,p2)){
                 tangent = that.getTangent(p0,p1, X,Y);
                 controlPoint2 = that.getSecondControlPoint(tangent, p0, p1, X, Y);
@@ -3777,18 +3775,19 @@ kendo_module({
                that.restrictControlPoint(p1,p2, nextControlPoint,tangent);
             }
             else{                
-                 if(that.isMonotonicByField(p0,p1,p2, xField) ){//|| p0[xField] == p1[xField]){                                       
+                 if(that.isMonotonicByField(p0,p1,p2, xField) ){                                    
                     controlPoint2 = that.getSecondControlPoint(0, p0, p1, xField, yField);
                     nextControlPoint = that.getFirstControlPoint(0, p1, p2, xField, yField);
                  }
-                 else{  
+                 else{                   
                     var sign;
-                    if (p0[yField] <= p1[yField]) {
+                    if ((p2[yField] < p0[yField] && p0[yField] <= p1[yField]) || (p0[yField] < p2[yField] && p1[yField] <= p0[yField])) {
                         sign = that.sign((p2[yField] - p0[yField]) * (p1[xField] - p0[xField])); 
                     } else {
                         sign = -that.sign((p2[xField] - p0[xField]) * (p1[yField] - p0[yField])); 
                     }
                     allowedError *= sign;
+                    
                     controlPoint2 = that.getSecondControlPoint(allowedError, p0, p1,xField,yField);
                     nextControlPoint = that.getFirstControlPoint(allowedError, p1, p2,yField,xField);
                  }
