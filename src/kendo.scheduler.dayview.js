@@ -176,6 +176,10 @@ kendo_module({
 
             SchedulerView.fn.init.call(that, element, options);
 
+            if (options.workWeekDays) {
+                that.options.workWeekDays = options.workWeekDays;
+            }
+
             that.title = that.options.title || that.options.name;
 
             that._templates();

@@ -394,5 +394,17 @@
 
             return this;
         }
+
+        /// <summary>
+        /// Defines the working days of the week
+        /// </summary>
+        /// <param name="days">An array of working week days</param>
+        public ISchedulerViewBuilder WorkWeekDays(params DayOfWeek[] days)
+        {
+            view.WorkWeekDays = days;
+
+            return this;
+        }
+
     }
 }

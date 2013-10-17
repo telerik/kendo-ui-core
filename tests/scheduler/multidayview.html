@@ -1792,6 +1792,16 @@
                 equal(view.content.find("td.k-nonwork-hour").length, 15);
             });
 
+            test("work week days option is set", function() {
+                var view = setup({
+                    dates: [new Date("2013/6/6")],
+                    workWeekDays: ["Thu"]
+                });
+
+                equal(view.options.workWeekDays.length, 1);
+                equal(view.options.workWeekDays[0], "Thu");
+            });
+
             test("working day is not highlighted", function() {
                 var view = setup({
                     dates: [new Date("2013/6/6")],

@@ -1,6 +1,7 @@
 ﻿namespace Kendo.Mvc.UI
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
 
     public abstract class SchedulerViewMultiDay : SchedulerViewBase
@@ -10,6 +11,7 @@
             AllDaySlot = true;
             WorkDayCommand = true;
             Footer = true;
+            WorkWeekDays = new List<DayOfWeek>();
         }
 
         public string AllDayEventTemplate
@@ -139,6 +141,12 @@
             set;
         }
 
+        public IEnumerable<DayOfWeek> WorkWeekDays 
+        { 
+            get; 
+            set; 
+        }        
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             base.Serialize(json);
@@ -242,6 +250,11 @@
             if (!Footer)
             {
                 json["footer"] = Footer;
+            }
+
+            if (WorkWeekDays.Count() > 0)
+            {
+                json["workWeekDays"] = WorkWeekDays.Select(d => Enum.GetName(typeof(DayOfWeek), d).Substring(0, 2).ToUpperInvariant());
             }
         }
     }
