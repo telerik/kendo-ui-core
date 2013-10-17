@@ -6,36 +6,36 @@
     <script>
         var dataBefore = [{
             description: "All Visitors",
-            percentage: 1000
+            visitors: 23945
         }, {
             description: "Tried the Demos",
-            percentage: 930
+            visitors: 19156
         }, {
             description: "Downloaded",
-            percentage: 800
+            visitors: 13984
         }, {
             description: "Requested a Quote",
-            percentage: 232
+            visitors: 3216
         }, {
             description: "Purchased",
-            percentage: 116
+            visitors: 1673
         }];
 
         var dataAfter = [{
             description: "All Visitors",
-            percentage: 100
+            visitors: 28536
         },{
             description: "Tried the Demos",
-            percentage: 93
+            visitors: 26539
         },{
             description: "Downloaded",
-            percentage: 87
+            visitors: 23088
         },{
             description: "Requested a Quote",
-            percentage: 60
+            visitors: 13853
         },{
             description: "Purchased",
-            percentage: 70
+            visitors: 9697
         }];
 
         function createChart(chartName, data,description) {
@@ -52,19 +52,19 @@
                 series: [{
                     type: "funnel",
                     segmentMethod:"relation",
-                    field: "percentage",
+                    field: "visitors",
                     categoryField: "description",
-                    segmentHeight : "proportional",
+                    segmentHeight : "equal",
                     labels: {
                         visible: true,
                         background: "transparent",
                         color: "white",
-                        template: "#= dataItem.description #: #= value#%"
+                        template: "#= value#"
                     }
                 }],
                 tooltip: {
                     visible: true,
-                    template: "${ category } - ${ value }%"
+                    template: "#= dataItem.description # #= kendo.format('{0:p}',data.percentage)#"
                 }
             });
         }
