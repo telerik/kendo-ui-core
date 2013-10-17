@@ -1786,7 +1786,7 @@
             test("non working day is highlighted", function() {
                 var view = setup({
                     dates: [new Date("2013/6/6")],
-                    workWeekDays: ["Thu"]
+                    workWeekDays: ["TH"]
                 });
 
                 equal(view.content.find("td.k-nonwork-hour").length, 15);
@@ -1795,17 +1795,17 @@
             test("work week days option is set", function() {
                 var view = setup({
                     dates: [new Date("2013/6/6")],
-                    workWeekDays: ["Thu"]
+                    workWeekDays: ["TH"]
                 });
 
                 equal(view.options.workWeekDays.length, 1);
-                equal(view.options.workWeekDays[0], "Thu");
+                equal(view.options.workWeekDays[0], "TH");
             });
 
             test("working day is not highlighted", function() {
                 var view = setup({
                     dates: [new Date("2013/6/6")],
-                    workWeekDays: ["Mo"],
+                    workWeekDays: ["TH"],
                     workDay: true
                 });
 
