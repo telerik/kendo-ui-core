@@ -1469,7 +1469,11 @@ kendo_module({
                     clearContainer: false
                 }).data("kendoEditable");
 
-            container.data("kendoWindow").center().open();
+            var winObject = container.data("kendoWindow");
+            if (!options || !options.position) {
+                winObject.center();
+            }
+            winObject.open();
 
             that.trigger(EDIT, { container: container, model: model });
         },

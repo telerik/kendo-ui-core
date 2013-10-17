@@ -172,6 +172,23 @@ namespace Kendo.Mvc.UI
                 .Add("width", PopUp.Width, 0)
                 .Add("height", PopUp.Height, 0);
 
+            if (PopUp.PositionSettings.Left != int.MinValue || PopUp.PositionSettings.Top != int.MinValue)
+            {
+                var topLeft = new Dictionary<string, int>();
+
+                if (PopUp.PositionSettings.Top != int.MinValue)
+                {
+                    topLeft.Add("top", PopUp.PositionSettings.Top);
+                }
+
+                if (PopUp.PositionSettings.Left != int.MinValue)
+                {
+                    topLeft.Add("left", PopUp.PositionSettings.Left);
+                }
+
+                result.Add("position", topLeft);
+            }
+
             return result;
         }
 
