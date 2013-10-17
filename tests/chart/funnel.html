@@ -41,7 +41,7 @@
             }
 
             // ------------------------------------------------------------
-            module("dynamicWidth none", {
+            module("dynamicSlope false", {
                 setup: function() {
                     createChart({
                         dynamicHeight:false,
@@ -84,10 +84,10 @@
                 equal(chart.points.length, chart.options.series[0].data.length);
             });
 
-            module("dynamicWidth height", {
+            module("dynamicSlope false", {
                 setup: function() {
                     createChart({
-                        dynamicWidth:false,
+                        dynamicSlope:false,
                         series: [{
                             data: [{
                                 value: 1,
@@ -125,7 +125,7 @@
             module("max neckRatio", {
                 setup: function() {
                     createChart({
-                        dynamicWidth:false,
+                        dynamicSlope:false,
                         neckRatio: 1,
                         series: [{
                             data: [{
@@ -164,7 +164,7 @@
             module("min neckRatio", {
                 setup: function() {
                     createChart({
-                        dynamicWidth:false,
+                        dynamicSlope:false,
                         neckRatio: 0,
                         series: [{
                             data: [{
@@ -256,7 +256,7 @@
                     createChart({
                         series: [{
                             type: "funnel",
-                            dynamicWidth:true,
+                            dynamicSlope:true,
                         }]
                     });
                 }
@@ -266,10 +266,10 @@
                 ok(true);
             });
 
-            module("dynamicWidth height with spacing", {
+            module("dynamicSlope false with spacing", {
                 setup: function() {
                     createChart({
-                        dynamicWidth:false,
+                        dynamicSlope:false,
                         segmentSpacing:30,
                         neckRatio: 0,
                         series: [{
@@ -306,10 +306,10 @@
                 ], TOLERANCE);
             });
 
-            module("dynamicWidth none with spacing", {
+            module("dynamicSlope false with spacing", {
                 setup: function() {
                     createChart({
-                        dynamicWidth:false,
+                        dynamicSlope:false,
                         segmentSpacing:33,
                         neckRatio: 0,
                         series: [{
@@ -347,10 +347,10 @@
                 ], TOLERANCE);
             });
 
-            module("depend ot relation", {
+            module("dynamicSlope true", {
                 setup: function() {
                     createChart({
-                        dynamicWidth:true,
+                        dynamicSlope:true,
                         series: [{
                             data: [{
                                 value: 7,
@@ -385,11 +385,11 @@
                 ], TOLERANCE);
             });
 
-            module("depend ot relation with spacing", {
+            module("dynamicSlope true with spacing", {
                 setup: function() {
                     createChart({
                         segmentSpacing : 22,
-                        dynamicWidth:true,
+                        dynamicSlope:true,
                         series: [{
                             data: [{
                                 value: 7,
@@ -428,7 +428,7 @@
                 setup: function() {
                     createChart({
                         segmentSpacing : 22,
-                        dynamicWidth:true,
+                        dynamicSlope:true,
                         labels: {
                             align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
                             color:'red',

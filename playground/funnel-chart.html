@@ -116,7 +116,7 @@
             $("#funnel-height").kendoChart({
                 series: [{
                     type: "funnel",
-                    dynamicWidth:false,
+                    dynamicSlope:false,
                     neckRatio:0.6,
                     data: seriesData,
                     labels: {
@@ -130,7 +130,7 @@
             $("#funnel-height-increasingWidth").kendoChart({
                 series: [{
                     type: "funnel",
-                    dynamicWidth:false,
+                    dynamicSlope:false,
                     neckRatio:3,
                     data: seriesData,
                     labels: {
@@ -144,7 +144,7 @@
             $("#funnel-height-spacing").kendoChart({
                 series: [{
                     type: "funnel",
-                    dynamicWidth:false,
+                    dynamicSlope:false,
                     neckRatio:0.6,
                     data: seriesData,
                     segmentSpacing:10,
@@ -180,7 +180,7 @@
             $("#funnel-relation").kendoChart({
                 series: [{
                     type: "funnel",
-                    dynamicWidth:true,
+                    dynamicSlope:true,
                     data: relationData,
                     labels:{
                         color: 'white'
@@ -191,7 +191,7 @@
             $("#funnel-relation-spacing").kendoChart({
                 series: [{
                     type: "funnel",
-                    dynamicWidth:true,
+                    dynamicSlope:true,
                     data: relationData,
                     segmentSpacing : 20
                 }]
@@ -201,7 +201,7 @@
                 series: [{
                     type: "funnel",
                     dynamicHeight:false,
-                    dynamicWidth:true,
+                    dynamicSlope:true,
                     data: relationData,
                     labels:{
                         color: 'white'
@@ -213,7 +213,7 @@
                 series: [{
                     type: "funnel",
                     dynamicHeight:false,
-                    dynamicWidth:true,
+                    dynamicSlope:true,
                     data: relationData,
                     segmentSpacing : 20
                 }]
@@ -222,7 +222,7 @@
             $("#funnel-unitTest").kendoChart({
                 series: [{
                     type: "funnel",
-                    dynamicWidth:true,
+                    dynamicSlope:true,
                     data: [{
                         value: 7,
                         category: "A",

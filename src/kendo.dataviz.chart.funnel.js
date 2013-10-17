@@ -53,7 +53,7 @@ kendo_module({
                     legend: plotArea.options.legend,
                     neckRatio: firstSeries.neckRatio,
                     dynamicHeight: firstSeries.dynamicHeight,
-                    dynamicWidth:firstSeries.dynamicWidth,
+                    dynamicSlope:firstSeries.dynamicSlope,
                     segmentSpacing:firstSeries.segmentSpacing,
                     highlight:firstSeries.highlight
                 });
@@ -83,7 +83,7 @@ kendo_module({
         options: {
             neckRatio: 0.3,
             width: 300,
-            dynamicWidth:false,
+            dynamicSlope:false,
             dynamicHeight:true,
             segmentSpacing:0,
             labels: {
@@ -311,7 +311,7 @@ kendo_module({
                 previousHeight = 0,
                 previousOffset = decreasingWidth ? 0 :(width-width/options.neckRatio)/2,
                 segmentSpacing = options.segmentSpacing,
-                dynamicWidth = options.dynamicWidth,
+                dynamicSlope = options.dynamicSlope,
                 totalHeight = box.height() - segmentSpacing * (count-1),
                 neckRatio = decreasingWidth ? options.neckRatio*width : width;
 
@@ -319,7 +319,7 @@ kendo_module({
                 return;
             }
 
-            if(dynamicWidth){
+            if(dynamicSlope){
                 var firstSegment = segments[0],
                     maxSegment = firstSegment;
 
