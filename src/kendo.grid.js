@@ -105,6 +105,8 @@ kendo_module({
         FUNCTION = "function",
         STRING = "string",
         DELETECONFIRM = "Are you sure you want to delete this record?",
+        CONFIRMDELETE = "Delete",
+        CANCELDELETE = "Cancel",
         formatRegExp = /(\}|\#)/ig,
         templateHashRegExp = /#/ig,
         whitespaceRegExp = "[\\x20\\t\\r\\n\\f]",
@@ -1580,26 +1582,22 @@ kendo_module({
             }
         },
 
-        _showMessage: function(text, row) {
+        _showMessage: function(messages, row) {
             var that = this;
 
             if (!that._isMobile) {
-                return window.confirm(text);
+                return window.confirm(messages.title);
             }
 
             var template = kendo.template('<ul>'+
                 '<li class="km-actionsheet-title">#:title#</li>'+
-                '<li><a href="\\#">#:destroy#</a></li>'+
+                '<li><a href="\\#">#:confirmDelete#</a></li>'+
             '</ul>');
 
-            var html = $(template({
-                title: text,
-                destroy: "Delete"
-            }))
-            .appendTo(that.view.element);
+            var html = $(template(messages)).appendTo(that.view.element);
 
             var actionSheet = new kendo.mobile.ui.ActionSheet(html, {
-                cancel: "Cancel",
+                cancel: messages.cancelDelete,
                 close: function() {
                     this.destroy();
                 },
@@ -1621,7 +1619,15 @@ kendo_module({
                 editable = that.options.editable,
                 confirmation = editable === true || typeof editable === STRING ? DELETECONFIRM : editable.confirmation;
 
-            return confirmation !== false && confirmation != null ? that._showMessage(confirmation, row) : true;
+            if (confirmation !== false && confirmation != null) {
+                return that._showMessage({
+                        confirmDelete: editable.confirmDelete || CONFIRMDELETE,
+                        cancelDelete: editable.cancelDelete || CANCELDELETE,
+                        title: confirmation
+                    }, row);
+            }
+
+            return true;
         },
 
         cancelChanges: function() {

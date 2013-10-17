@@ -279,6 +279,7 @@ var tests = [
     "grid/editinginline.html",
     "grid/editingpopup.html",
     "grid/deleting.html",
+    "grid/deleting-mobile.html",
     "grid/inserting.html",
     "grid/toolbar.html",
     "grid/editingnavigation.html",

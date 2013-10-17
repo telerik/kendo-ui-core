@@ -170,7 +170,7 @@
                     text;
 
                 grid._showMessage = function() {
-                   text = arguments[0];
+                   text = arguments[0].title;
                 }
 
                 grid.removeRow(table.find("tbody>tr:first"));
@@ -191,12 +191,12 @@
                 ok(!called);
             });
 
-            test("_confirmation use default is not set", function() {
+            test("_confirmation use default if not set", function() {
                 var grid = setup({ editable: true }),
                    text;
 
                 grid._showMessage = function() {
-                    text = arguments[0];
+                    text = arguments[0].title;
                 }
 
                 grid.removeRow(table.find("tbody>tr:first"));
