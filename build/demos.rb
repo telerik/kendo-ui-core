@@ -101,7 +101,7 @@ def offline_demos(navigation, path)
     navigation.each do |name, categories|
         categories.each do |category|
             category['items'].each do |item|
-                demos.push("#{path}/#{item['url']}")
+                demos.push("#{path}/#{item['url']}") unless item['external']
             end
         end
     end
