@@ -59,10 +59,11 @@
                 data.push(i.toString());
             }
 
-            var dataSource = new kendo.data.DataSource({ data: data, pageSize: 100, change: function(e) { console.log(e) } });
+            var dataSource = new kendo.data.DataSource({ data: data, change: function(e) { console.log(e) } });
 
             function mobileListViewEndlessScrolling() {
                 $("#endless-scrolling").kendoMobileListView({
+                    virtualViewSize: 100,
                     dataSource: dataSource,
                     template: $("#endless-scrolling-template").text(),
                     endlessScroll: true,

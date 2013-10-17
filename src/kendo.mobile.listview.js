@@ -562,7 +562,7 @@ kendo_module({
 
             this.dataSource = dataSource;
 
-            pageSize = dataSource.pageSize();
+            pageSize = dataSource.pageSize() || options.virtualViewSize;
 
             if (!pageSize) {
                 throw new Error("the DataSource does not have page size configured. Page Size setting is mandatory for the mobile listview virtual scrolling to work as expected.");
@@ -903,7 +903,8 @@ kendo_module({
             releaseTemplate: "Release to refresh",
             refreshTemplate: "Refreshing",
             pullOffset: 140,
-            filterable: false
+            filterable: false,
+            virtualViewSize: null
         },
 
         refresh: function() {

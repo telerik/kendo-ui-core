@@ -231,6 +231,13 @@
                     "meta": "Play with Kendo UI Mobile ListView demo to see the filtering capability in action. Keyword-based filtering is perfomed against the content in each list item. "
                 },
                 {
+                    "new": true,
+                    "text": "Local data virtualization",
+                    "url": "listview/local-virtualization.html",
+                    "title": "Local data virtualization in Kendo UI Mobile ListView | Kendo UI ListView demo",
+                    "meta": "Play with Kendo UI Mobile ListView demo to see the local data virtualization filtering capability in action. "
+                },
+                {
                     "text": "MVVM",
                     "url": "listview/mvvm.html",
                     "title": "MVVM support in Kendo UI Mobile ListView",

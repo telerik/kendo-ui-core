@@ -3637,13 +3637,16 @@ kendo_module({
         },
 
         at: function(index)  {
-            var pageSize = this.pageSize;
+            var pageSize = this.pageSize, item;
 
             if (index >= this.total()) {
                 this.trigger("endreached", {index: index });
                 return;
             }
 
+            if (!this.useRanges) {
+               return this.dataSource.view()[index];
+            }
             if (this.useRanges) {
                 // out of range request
                 if (index < this.dataOffset || index > this.skip + pageSize) {
@@ -3672,9 +3675,9 @@ kendo_module({
                         this.range(this.previousFullRange);
                     }
                 }
-            }
 
-            var item = this.dataSource.at(index - this.dataOffset);
+                item = this.dataSource.at(index - this.dataOffset);
+            }
 
             if (item === undefined) {
                 this.trigger("endreached", { index: index });
@@ -3761,9 +3764,9 @@ kendo_module({
             var dataSource = this.dataSource,
                 firstItemUid = dataSource.firstItemUid();
 
-            this.length = dataSource.lastRange().end;
+            this.length = this.useRanges ? dataSource.lastRange().end : dataSource.view().length;
 
-            if (this._firstItemUid !== firstItemUid) {
+            if (this._firstItemUid !== firstItemUid || !this.useRanges) {
                 this._syncWithDataSource();
                 this._recalculate();
                 this.trigger("reset", { offset: this.offset });
@@ -3782,7 +3785,7 @@ kendo_module({
             var dataSource = this.dataSource;
 
             this._firstItemUid = dataSource.firstItemUid();
-            this.dataOffset = this.offset = dataSource.skip();
+            this.dataOffset = this.offset = dataSource.skip() || 0;
             this.pageSize = dataSource.pageSize();
             this.useRanges = dataSource.options.serverPaging;
         },

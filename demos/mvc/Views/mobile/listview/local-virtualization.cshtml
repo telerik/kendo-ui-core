@@ -1,0 +1,71 @@
+<script src="../../content/shared/js/products.js"></script>
+
+<div data-role="view" data-init="mobileListViewLocalFiltering" data-title="Products">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        </div>
+    </header>
+
+    <ul id="local-filterable-listview"></ul>
+</div>
+
+<script type="text/x-kendo-tmpl" id="mobile-listview-filtering-template">
+    <div class="product">
+        <h3>#:ProductName#</h3>
+        <p>#:kendo.toString(UnitPrice, "c")#</p>
+    </div>
+</script>
+
+<script>
+    function mobileListViewLocalFiltering() {
+        var dataSource = new kendo.data.DataSource({
+            data: products,
+            schema: {
+                model: {
+                    fields: {
+                        ProductName: { type: "string" },
+                        UnitPrice: { type: "number" },
+                        UnitsInStock: { type: "number" },
+                        Discontinued: { type: "boolean" }
+                    }
+                }
+            }
+        });
+
+        $("#local-filterable-listview").kendoMobileListView({
+            dataSource: dataSource,
+            template: $("#mobile-listview-filtering-template").text(),
+            filterable: {
+                field: "ProductName",
+                operator: "startswith"
+            },
+            virtualViewSize: 100, // this configuration is needed to determine the items displayed, since the datasource does not (and should not) have paging set.
+            endlessScroll: true
+        });
+    }
+</script>
+
+<style scoped>
+    .product h3 {
+        font-size: 1.3em;
+        line-height: 1.4em;
+        margin: 0;
+        padding: 0;
+        height: 1.3em;
+        overflow: hidden;
+    }
+    .product p {
+        font-size: 1em;
+        margin: 0;
+        padding: .3em 0 0;
+    }
+    .pullImage {
+        width: 64px;
+        height: 64px;
+        border-radius: 3px;
+        float: left;
+        margin-right: 10px;
+    }
+</style>
