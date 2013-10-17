@@ -229,10 +229,10 @@ kendo_module({
 
     Pane.wrap = function(element) {
         if (!element.is(roleSelector("view"))) {
-            element = element.wrap('<div data-' + kendo.ns + 'role="view"></div>').parent();
+            element = element.wrap('<div data-' + kendo.ns + 'role="view" data-stretch="true"></div>').parent();
         }
 
-        var paneContainer = element.wrap('<div class="km-pane-wrapper km-root"><div></div></div>').parent(),
+        var paneContainer = element.wrap('<div class="km-pane-wrapper"><div></div></div>').parent(),
             pane = new Pane(paneContainer);
 
         pane.navigate("");

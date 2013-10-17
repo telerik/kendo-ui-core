@@ -821,10 +821,9 @@ kendo_module({
 
     var MobileEditor = Editor.extend({
         init: function() {
-
             Editor.fn.init.apply(this, arguments);
-
             this.pane = kendo.mobile.ui.Pane.wrap(this.element);
+            this.pane.element.parent().css("height", this.options.height);
             this.view = this.pane.view();
             this._actionSheetButtonTemplate = kendo.template('<li class="k-button #=className#"><a #=attr# href="\\#">#:text#</a></li>');
         },
