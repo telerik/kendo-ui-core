@@ -1,0 +1,452 @@
+﻿<div id="example" class="k-content">
+    <div class="demo-section">
+        <h2>What are your favourite recent movie?</h2>
+        <ul class="forms">
+            <li>
+                <h3>First favourite</h3>
+                <select id="favouriteMovie1">
+                    <option value="fastAndFurious">Fast and Furious 6</option>
+                    <option value="nowYouSeeMe">Now you see me</option>
+                    <option value="theHelp">The Help</option>
+                    <option value="theInternship">The internship</option>
+                    <option value="thePerks">The Perks of Being a Wallflower</option>
+                </select>
+            </li>
+            <li>
+                <h3>Second favourite</h3>
+                 <select id="favouriteMovie2">
+                    <option value="fastAndFurious">Fast and Furious 6</option>
+                    <option value="nowYouSeeMe">Now you see me</option>
+                    <option value="theHelp">The Help</option>
+                    <option value="theInternship">The internship</option>
+                    <option value="thePerks">The Perks of Being a Wallflower</option>
+                </select>
+            </li>
+            <li>
+                <h3>Third favourite</h3>
+                <select id="favouriteMovie3">
+                    <option value="fastAndFurious">Fast and Furious 6</option>
+                    <option value="nowYouSeeMe">Now you see me</option>
+                    <option value="theHelp">The Help</option>
+                    <option value="theInternship">The Internship</option>
+                    <option value="thePerks">The Perks of Being a Wallflower</option>
+                </select>
+            </li>
+            <li>
+                <button id ="voteButton" class="k-button">Vote</button>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h2>Poll results</h2>
+        <div class="pollResults">
+            <h4>Fast and Furious 6</h4>
+            <div id="fastAndFurious"></div>
+
+            <h4>Now you see me</h4>
+            <div id="nowYouSeeMe"></div>
+
+            <h4>The Help</h4>
+            <div id="theHelp"></div>
+
+            <h4>The Internship</h4>
+            <div id="theInternship"></div>
+
+            <h4>The Perks of Being a Wallflower</h4>
+            <div id="thePerks"></div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var progressbars = [];
+            $(".pollResults div").each(function () {
+                var pb = $(this).kendoProgressBar({
+                    type: "percent",
+                    animation: {
+                        duration: 600
+                    }
+                }).data("kendoProgressBar");
+                progressbars.push(pb);
+            });
+
+            $("#example select").each(function () {
+                $(this).kendoDropDownList({
+                    optionLabel: "Select a movie"
+                }).data("kendoDropDownList").select(0);
+            });
+
+            $("#voteButton").click(function () {
+                var first = $("#favouriteMovie1").val();
+                var second = $("#favouriteMovie2").val();
+                var third = $("#favouriteMovie3").val();
+
+                if (first !== "" && second !== "" && third !== "" &&
+                    first !== second && second !== third && first !== third) {
+
+                    $.each(progressbars, function (i, pb) {
+                        pb.value(0);
+                    });
+
+                    $("#" + first).data("kendoProgressBar").value(50);
+                    $("#" + second).data("kendoProgressBar").value(30);
+                    $("#" + third).data("kendoProgressBar").value(10);
+
+                    $.each(progressbars, function (i, pb) {
+                        if (pb.value() === 0) {
+                            pb.value(5);
+                        }
+                    });
+                } else {
+                    alert("Please select three different movies");
+                }
+            });
+        });
+    </script>
+
+    <style scoped>
+        #example .pollResults h4
+        {
+            margin: 15px 0 0 0;
+        }
+        
+        .forms
+        {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .forms li
+        {
+            margin-bottom: 15px;
+        }
+        
+        .demo-section h3
+        {
+            display: inline-block;
+            width: 150px;
+            text-align: right;
+            margin-right: 10px;
+        }
+        
+        #voteButton
+        {
+            width: 150px;
+            margin-left: 162px;
+        }
+    </style>
+</div>
+
+<style>
+    html
+    {
+        font: 12px sans-serif;
+    }
+    
+    /* common */
+    .k-progressbar
+    {
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+    }
+    
+    .k-progressbar
+    {
+        border-radius: 4px;
+    }
+    
+    .k-progressbar-horizontal
+    {
+        width: 27em;
+        height: 1.9em;
+    }
+    
+    .k-progressbar-vertical
+    {
+        width: 1.9em;
+        height: 27em;
+    }
+    
+    .k-progressbar > .k-state-selected
+    {
+        position: absolute;
+        border-style: solid;
+        border-width: 1px;
+        overflow: hidden;
+    }
+    
+    .k-progressbar-horizontal > .k-state-selected, .k-rtl .k-progressbar-horizontal.k-progressbar-reverse > .k-state-selected
+    {
+        left: -1px;
+        right: auto;
+        top: -1px;
+        height: 100%;
+        border-radius: 4px 0 0 4px;
+    }
+    
+    .k-progressbar-horizontal.k-progressbar-reverse > .k-state-selected, .k-rtl .k-progressbar-horizontal > .k-state-selected
+    {
+        left: auto;
+        right: -1px;
+        border-radius: 0 4px 4px 0;
+    }
+    
+    .k-progressbar-vertical > .k-state-selected
+    {
+        left: -1px;
+        bottom: -1px;
+        width: 100%;
+        border-radius: 0 0 4px 4px;
+    }
+    
+    .k-progressbar-vertical.k-progressbar-reverse > .k-state-selected
+    {
+        bottom: auto;
+        top: -1px;
+        border-radius: 4px 4px 0 0;
+    }
+    
+    .k-progressbar > .k-state-selected.k-complete, .k-rtl .k-progressbar > .k-state-selected.k-complete
+    {
+        border-radius: 4px;
+    }
+    
+    .k-progressbar > .k-reset
+    {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        left: -1px;
+        top: -1px;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+        white-space: nowrap;
+    }
+    
+    .k-rtl .k-progressbar > .k-reset
+    {
+        left: auto;
+        right: -1px;
+    }
+    
+    .k-progressbar-horizontal .k-item
+    {
+        display: inline-block;
+        height: 100%;
+        border-style: solid;
+    }
+    
+    .k-progressbar-horizontal .k-item, .k-rtl .k-progressbar-horizontal.k-progressbar-reverse .k-item
+    {
+        border-width: 1px 1px 1px 0;
+    }
+    
+    .k-progressbar-horizontal.k-progressbar-reverse .k-item, .k-rtl .k-progressbar-horizontal .k-item
+    {
+        border-width: 1px 0 1px 1px;
+    }
+    
+    .k-progressbar-horizontal .k-first, .k-rtl .k-progressbar-horizontal .k-last, .k-rtl .k-progressbar-horizontal.k-progressbar-reverse .k-last
+    {
+        border-radius: 4px 0 0 4px;
+        border-left-width: 1px;
+    }
+    
+    .k-progressbar-horizontal .k-last, .k-rtl .k-progressbar-horizontal .k-first
+    {
+        border-radius: 0 4px 4px 0;
+    }
+    
+    .k-progressbar-horizontal.k-progressbar-reverse .k-last, .k-rtl .k-progressbar-horizontal .k-first
+    {
+        border-right-width: 1px;
+    }
+    
+    .k-progressbar-vertical .k-item
+    {
+        width: 100%;
+        border-style: solid;
+        border-width: 1px 1px 0 1px;
+    }
+    
+    .k-progressbar-vertical .k-first
+    {
+        border-radius: 4px 4px 0 0;
+    }
+    
+    .k-progressbar-vertical .k-last
+    {
+        border-radius: 0 0 4px 4px;
+        border-bottom-width: 1px;
+    }
+    
+    .k-progressbar-vertical.k-progressbar-reverse .k-item
+    {
+        border-width: 0 1px 1px 1px;
+    }
+    
+    .k-progressbar-vertical.k-progressbar-reverse .k-first
+    {
+        border-top-width: 1px;
+    }
+    
+    .k-progress-status-wrap
+    {
+        position: absolute;
+        top: -1px;
+        border: 1px solid transparent;
+        line-height: 2em;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .k-progress-status-wrap, .k-rtl .k-progressbar-horizontal.k-progressbar-reverse .k-progress-status-wrap
+    {
+        left: -1px;
+        right: auto;
+        text-align: right;
+    }
+    
+    .k-progressbar-horizontal.k-progressbar-reverse .k-progress-status-wrap, .k-rtl .k-progressbar-horizontal .k-progress-status-wrap
+    {
+        left: auto;
+        right: -1px;
+        text-align: left;
+    }
+    
+    .k-progressbar-vertical .k-progress-status-wrap
+    {
+        top: auto;
+        bottom: -1px;
+    }
+    
+    .k-progressbar-vertical.k-progressbar-reverse .k-progress-status-wrap
+    {
+        bottom: auto;
+        top: -1px;
+    }
+    
+    .k-progress-status
+    {
+        display: inline-block;
+        padding: 0 .5em;
+    }
+    
+    .k-progressbar-vertical.k-progressbar-reverse .k-progress-status
+    {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    
+    .k-progressbar-vertical .k-progress-status
+    {
+        -webkit-transform: rotate(-90deg) translateX(-100%);
+        -moz-transform: rotate(-90deg) translateX(-100%);
+        -ms-transform: rotate(-90deg) translateX(-100%);
+        -o-transform: rotate(-90deg) translateX(-100%);
+        transform: rotate(-90deg) translateX(-100%);
+        -webkit-transform-origin: 0 0;
+        -moz-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+        -o-transform-origin: 0 0;
+        transform-origin: 0 0;
+    }
+    
+    .k-progressbar-vertical.k-progressbar-reverse .k-progress-status
+    {
+        -webkit-transform: rotate(90deg) translateX(-100%);
+        -moz-transform: rotate(90deg) translateX(-100%);
+        -ms-transform: rotate(90deg) translateX(-100%);
+        -o-transform: rotate(90deg) translateX(-100%);
+        transform: rotate(90deg) translateX(-100%);
+        -webkit-transform-origin: 0 100%;
+        -moz-transform-origin: 0 100%;
+        -ms-transform-origin: 0 100%;
+        -o-transform-origin: 0 100%;
+        transform-origin: 0 100%;
+    }
+    
+    .k-ie7 .k-progressbar-vertical .k-progress-status
+    {
+        writing-mode: tb-rl;
+        padding: .5em 0;
+    }
+    
+    .k-ie8 .k-progressbar-vertical .k-progress-status
+    {
+        writing-mode: bt-lr;
+        padding: .5em 0;
+    }
+    
+    .k-ie7 .k-progressbar, .k-ie7 .k-progressbar-horizontal .k-item, .k-ie7 .k-progress-status
+    {
+        display: inline;
+        zoom: 1;
+    }
+    
+    /* theme */
+    .k-progressbar
+    {
+        background-color: #f0f0f0;
+    }
+    
+    /* custom */
+    .k-ie7 .k-progressbar
+    {
+        margin: .4em;
+    }
+    
+    .k-rtl
+    {
+        direction: rtl;
+    }
+    
+    /* Kamen additions */
+    .k-progressbar-horizontal .k-item.k-first
+    {
+        margin-left: 0;
+    }
+    
+    .k-progressbar-horizontal .k-item
+    {
+        margin-left: -1px;
+    }
+    
+    .k-progressbar-horizontal .k-item.k-last
+    {
+        border-right-width: 0;
+    }
+    
+    .k-progressbar-vertical .k-item.k-first
+    {
+        margin-top: 0;
+    }
+    
+    .k-progressbar-vertical .k-item
+    {
+        margin-top: -1px;
+    }
+    
+    .k-progressbar-vertical li.k-item.k-last
+    {
+        border-bottom-width: 0;
+    }
+    
+    /* Mitko */
+    .k-progress-status
+    {
+        min-width: 10px;
+        white-space: nowrap;
+    }
+    
+    .k-rtl .k-progressbar-horizontal li.k-item.k-last
+    {
+        border-left-width: 0;
+    }
+    
+    /*To do indeterminate styles*/
+</style>

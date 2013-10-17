@@ -83,7 +83,8 @@ namespace Kendo.Models
             "kendo.scheduler.monthview.js",
             "kendo.scheduler.agendaview.js",
             "kendo.scheduler.recurrence.js",
-            "kendo.scheduler.js"
+            "kendo.scheduler.js",
+            "kendo.progressbar.js"
 #else
             jQueryPath,
             "kendo.all.min.js",

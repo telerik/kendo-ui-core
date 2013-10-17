@@ -788,6 +788,12 @@
     <Content Include="Views\dataviz\area-charts\step-area.cshtml" />
     <Content Include="Views\dataviz\line-charts\step-line.cshtml" />
     <Content Include="Views\dataviz\line-charts\mvvm.cshtml" />
+    <Content Include="Views\web\progressbar\index.cshtml" />
+    <Content Include="Views\web\progressbar\api.cshtml" />
+    <Content Include="Views\web\progressbar\events.cshtml" />
+    <Content Include="Views\web\progressbar\rtl.cshtml" />
+    <Content Include="Views\web\progressbar\mvvm.cshtml" />
+    <Content Include="Views\web\progressbar\chunk.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

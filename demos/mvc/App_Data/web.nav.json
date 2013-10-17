@@ -1150,6 +1150,62 @@
             ]
         },
         {
+             "text": "ProgressBar",
+             "name": "progressbar",
+             "spriteCssClass": "progressBarIcon",
+             "items": [
+                 {
+                     "text": "Basic usage",
+                     "url": "progressbar/index.html",
+                     "title": "Basic usage of Kendo UI ProgressBar widget",
+                     "meta": "This example shows the core widget features",
+                     "packages": ["!mvc", "!jsp", "!php"]
+                 },
+                 {
+                    "text": "Chunk ProgressBar",
+                    "url": "progressbar/chunk.html",
+                    "title": "Displaying a progress in chunks",
+                    "meta": "",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                 },
+                 {
+                    "text": "Custom Label",
+                    "url": "progressbar/customlabel.html",
+                    "title": "Displaying a custom progress label",
+                    "meta": "",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                 },
+                 {
+                    "text": "Events",
+                    "url": "progressbar/events.html",
+                    "title": "Events in Kendo UI ProgressBar widget",
+                    "meta": "",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                 },
+                 {
+                    "text": "API",
+                    "url": "progressbar/api.html",
+                    "title": "Kendo UI ProgressBar API demo",
+                    "meta": "",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                 },
+                 {
+                    "text": "RTL Support",
+                    "url": "progressbar/rtl.html",
+                    "title": "Kendo UI ProgressBar RTL Support",
+                    "meta": "",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                 },
+                 {
+                    "text": "MVVM",
+                    "url": "progressbar/mvvm.html",
+                    "title": "MVVM support for Kendo UI ProgressBar",
+                    "meta": "",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                 }
+             ]
+        },
+        {
             "text": "Scheduler",
             "name": "scheduler",
             "documentation": "web/scheduler",
