@@ -307,6 +307,14 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("workDayStart", value);
     }
 
+    public java.lang.Object getWorkWeekDays() {
+        return (java.lang.Object)getProperty("workWeekDays");
+    }
+
+    public void setWorkWeekDays(java.lang.Object value) {
+        setProperty("workWeekDays", value);
+    }
+
     public String getAdd() {
         Function property = ((Function)getProperty("add"));
         if (property != null) {

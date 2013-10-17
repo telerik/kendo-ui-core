@@ -253,6 +253,14 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("type", value);
     }
 
+    public java.lang.Object getWorkWeekDays() {
+        return (java.lang.Object)getProperty("workWeekDays");
+    }
+
+    public void setWorkWeekDays(java.lang.Object value) {
+        setProperty("workWeekDays", value);
+    }
+
 //<< Attributes
 
 }

@@ -14746,6 +14746,12 @@ That way all users would see the same dates and times no matter their configured
             <type>java.util.Date</type>
         </attribute>
         <attribute>
+            <description>List of working week days.</description>
+            <name>workWeekDays</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
             <description>Fired when the a new event is about to be added.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>add</name>
             <rtexprvalue>true</rtexprvalue>
@@ -15628,6 +15634,12 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>List of working week days.</description>
+            <name>workWeekDays</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
     </tag>
 
