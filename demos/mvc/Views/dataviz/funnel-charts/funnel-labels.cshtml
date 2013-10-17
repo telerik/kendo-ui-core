@@ -3,10 +3,9 @@
         <div id="chart"></div>
     </div>
     <div class="configuration-horizontal">
-        <span class="configHead">Labels Configuration</span>
         <div class="config-section">
+            <span class="configHead">Show</span>
             <ul class="options">
-                <li>Show:</li>
                 <li>
                     <label>
                         <input id="labels" checked="checked" type="checkbox" autocomplete="off" /> Show labels
@@ -20,8 +19,8 @@
             </ul>
         </div>
         <div class="config-section">
+            <span class="configHead">Align</span>
             <ul class="options">
-                <li>Align:</li>
                 <li>
                     <label>
                         <input name="alignType" type="radio" value="center" checked="checked" autocomplete="off" /> Center
@@ -40,14 +39,15 @@
             </ul>
         </div>
         <div class="config-section">
+            <span class="configHead">Font color</span>
             <ul class="options">
-                <li><label for="color">Font color:</label></li>
+                <li><label for="color"></label></li>
                 <li><input id="color" /></li>
             </ul>
         </div>
         <div class="config-section">
+            <span class="configHead">Font size</span>
             <ul class="options">
-                <li><label for="sizeSlider">Font size:</label></li>
                 <li><input id="sizeSlider" value="15" /></li>
             </ul>
         </div>
@@ -61,9 +61,6 @@
         .configuration-horizontal .config-section {
             min-width: 120px;
         }
-        .options li:first-child {
-            padding-bottom: 10px;
-        }
     </style>
     <script>
         function createChart() {
@@ -76,7 +73,7 @@
                 },
                 seriesDefaults: {
                     labels: {
-                        template: "#= dataItem.category # - #= value #",
+                        template: "#= dataItem.category #",
                         visible: true,      
                         font : "15px sans-serif",                  
                         align: "center",
@@ -93,7 +90,7 @@
                 },
                 series: [{
                     type: "funnel",
-                    dependOn : "height",
+                    dynamicHeight: false,
                     data: [{
                         category: "Awareness",
                         value: 4

@@ -6,27 +6,30 @@
         <div id="chart-dec"></div>
     </div>
     <div class="configuration-horizontal">
-        <span class="configHead">Funnel configuration</span>
         <div class="config-section">
+            <span class="configHead">Dynamic Slope</span>
             <ul class="options">
-                <li><label for="neckSlider">Neck Size ratio</label></li>
+                <li>
+                    <label>
+                        <input type="checkbox" id="dynamicSlope"/> True
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div class="config-section">
+            <span class="configHead">Dynamic Height</span>
+            <ul class="options">
+                <li>
+                    <label>
+                        <input type="checkbox" id="dynamicHeight"/> True
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div class="config-section">
+            <span class="configHead">Neck Size Ratio</span>
+            <ul class="options">
                 <li><input id="neckSlider" value="0.3"/></li>
-            </ul>
-        </div>
-        <div class="config-section">
-            <ul class="options">
-                <li>Segment slope based on:</li>
-                <li>
-                     <input type="checkbox" id="dynamicSlope" />
-                </li>
-            </ul>
-        </div>
-        <div class="config-section">
-            <ul class="options">
-                <li>Dynamic Height</li>
-                <li>
-                    <input type="checkbox" id="dynamicHeight"/>
-                </li>
             </ul>
         </div>
     </div>
@@ -44,9 +47,6 @@
             width: 180px;
             height: 300px;
             margin: 15px 25px;
-        }
-        .options li {
-            padding-bottom: 10px;
         }
     </style>
     <script>
