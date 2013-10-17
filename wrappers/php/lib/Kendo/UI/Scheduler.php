@@ -311,6 +311,15 @@ That way all users would see the same dates and times no matter their configured
     }
 
     /**
+    * List of working week days.
+    * @param array $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function workWeekDays($value) {
+        return $this->setProperty('workWeekDays', $value);
+    }
+
+    /**
     * Sets the cancel event of the Scheduler.
     * Fired when the user cancels editing by clicking the "cancel" button.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
