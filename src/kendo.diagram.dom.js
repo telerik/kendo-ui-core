@@ -286,15 +286,11 @@ kendo_module({
             minHeight: 20,
             width: DEFAULTWIDTH,
             height: DEFAULTHEIGHT,
-            resizable: true,
-            rotatable: true,
             background: "steelblue",
             hoveredBackground: "#70CAFF",
             connectors: diagram.DefaultConnectors,
             rotation: {
-                angle: 0,
-                x: 0,
-                y: 0
+                angle: 0
             }
         },
         bounds: function (value) {
@@ -356,33 +352,35 @@ kendo_module({
                 br = bounds.bottomRight();
             return Rect.fromPoints(this.diagram.transformPoint(tl), this.diagram.transformPoint(br));
         },
+        rotatedBounds: function () {
+            var bounds = this.bounds().rotatedBounds(this.rotate().angle),
+                tl = bounds.topLeft(),
+                br = bounds.bottomRight();
+
+            return Rect.fromPoints(this.diagram.transformPoint(tl), this.diagram.transformPoint(br));
+        },
         select: function (value) {
             if (this.isSelected != value) {
                 this.isSelected = value;
                 if (this.isSelected) {
-                    this.adorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable, angle: this.rotate().angle });
-                    this.diagram._adorn(this.adorner, true);
                     this.diagram._selectedItems.push(this);
                 } else {
                     this.diagram._selectedItems.remove(this);
-                    this.diagram._adorn(this.adorner, false);
-                    this.adorner = undefined;
                 }
-                this.diagram.trigger(SELECT, {item: this});
+                if (!this.diagram._internalSelection) {
+                    this.diagram.trigger(SELECT, {items: [this]});
+                }
             }
         },
-        rotate: function (angle, center) {
+        rotate: function (angle) { // we asume the center is always the center of the shape.
             var rotate = this.visual.rotate();
             if (angle !== undefined) {
-                if (center === undefined) {
-                    var b = this.bounds();
-                    return this.rotate(angle, new Point(b.width / 2, b.height / 2));
-                }
-                rotate = this.visual.rotate(angle, center);
-                var rotation = this.options.rotation;
-                rotation.angle = angle;
-                rotation.x = center.x;
-                rotation.y = center.y;
+                var b = this.bounds();
+                var center = new Point(b.width / 2, b.height / 2);
+                this.visual.rotate(angle, center);
+
+                this.options.rotation.angle = angle;
+
                 if (this.diagram && this.diagram._connectorsAdorner) {
                     this.diagram._connectorsAdorner.refresh();
                 }
@@ -423,8 +421,8 @@ kendo_module({
         },
         _rotate: function () {
             var rotation = this.options.rotation;
-            if (rotation) {
-                this.rotate(rotation.angle, new Point(rotation.x, rotation.y));
+            if (rotation && rotation.angle) {
+                this.rotate(rotation.angle);
             }
         },
         _hover: function (value) {
@@ -893,8 +891,9 @@ kendo_module({
                     }
                 }
                 this.refresh();
-                this.diagram.trigger(SELECT, {item: this});
-                // TODO: Move this to base type.
+                if (!this.diagram._internalSelection) {
+                    this.diagram.trigger(SELECT, {items: [this]});
+                }
             }
         },
 
@@ -1232,6 +1231,8 @@ kendo_module({
             // TODO: We may consider using real Clipboard, but is very hacky to do so.
             that._clipboard = [];
             that._drop();
+            this.resizingAdorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable});
+            this._adorn(this.resizingAdorner, true);
         },
         options: {
             name: "Diagram",
@@ -1241,6 +1242,8 @@ kendo_module({
             template: "",
             dataTextField: null,
             autoBind: true,
+            resizable: true,
+            rotatable: true,
             visualTemplate: null,
             tooltip: { enabled: true, format: "{0}" },
             copy: {
@@ -1438,17 +1441,23 @@ kendo_module({
             }
         },
         select: function (value, options) {
-            var i, item, items, rect;
+            var i, item, items, rect, selected = [];
             if (value !== undefined) {
                 options = deepExtend({ rect: null }, options);
                 rect = options.rect;
                 items = this.shapes.concat(this.connections);
+                this._internalSelection = true;
                 for (i = 0; i < items.length; i++) {
                     item = items[i];
                     if (!rect || item._hitTest(rect)) {
                         item.select(value);
+                        if (value) {
+                            selected.push(item);
+                        }
                     }
                 }
+                this.trigger(SELECT, {items: selected});
+                this._internalSelection = false;
             }
             else {
                 return this._selectedItems; // returns all selected items.
@@ -1514,12 +1523,12 @@ kendo_module({
             }
         },
         getBoundingBox: function (items) {
-            var rect, di = this._getDiagramItems(items);
+            var rect = Rect.empty(), di = this._getDiagramItems(items);
             if (di.shapes.length > 0) {
-                rect = di.shapes[0].visualBounds();
+                rect = di.shapes[0].rotatedBounds();
                 for (var i = 1; i < di.shapes.length; i++) {
                     var item = di.shapes[i];
-                    rect = rect.union(item.visualBounds());
+                    rect = rect.union(item.rotatedBounds());
                 }
             }
             return rect;

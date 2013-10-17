@@ -224,6 +224,21 @@ kendo_module({
         equals: function (rect) {
             return this.x === rect.x && this.y === rect.y && this.width === rect.width && this.height === rect.height;
         },
+        rotatedBounds: function (angle) {
+            var rect = this.clone(),
+                c = rect.center(),
+                br = rect.bottomRight().rotate(c, 360 - angle),
+                tl = rect.topLeft().rotate(c, 360 - angle),
+                tr = rect.topRight().rotate(c, 360 - angle),
+                bl = rect.bottomLeft().rotate(c, 360 - angle);
+
+            rect.x = Math.min(br.x, tl.x, tr.x, bl.x);
+            rect.y = Math.min(br.y, tl.y, tr.y, bl.y);
+            rect.width = Math.max(br.x, tl.x, tr.x, bl.x) - rect.x;
+            rect.height = Math.max(br.y, tl.y, tr.y, bl.y) - rect.y;
+
+            return rect;
+        },
         toString: function () {
             return this.x + " " + this.y + " " + this.width + " " + this.height;
         }
