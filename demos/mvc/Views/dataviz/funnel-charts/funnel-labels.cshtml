@@ -54,7 +54,7 @@
         function createChart() {
             $("#chart").kendoChart({
                 title: {
-                    text: "What is you favourite sport?"
+                    text: "The AIDA model"
                 },
                 legend: {
                    position: "top"
@@ -72,26 +72,24 @@
                             width: 1,
                             dashType :"dot",
                             color: "#000"
-                        }
+                        },
+                        format: "N0"
                     }
                 },
                 series: [{
                     type: "funnel",
                     dependOn : "height",
                     data: [{
-                        category: "Football",
+                        category: "Awareness",
                         value: 35
                     }, {
-                        category: "Basketball",
+                        category: "Interest",
                         value: 25
                     }, {
-                        category: "Volleyball",
+                        category: "Desire",
                         value: 20
                     }, {
-                        category: "Rugby",
-                        value: 10
-                    }, {
-                        category: "Tennis",
+                        category: "Action",
                         value: 10
                     }]
                 }],

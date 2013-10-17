@@ -1,43 +1,62 @@
 <div id="example" class="k-content">
     <div class="chart-wrapper">
-        <div id="chart" style="background: center no-repeat url('../../content/shared/styles/world-map.png');"></div>
+        <h2>Sales statistics</h2>
+        <div id="chart-oct"></div>
+        <div id="chart-nov"></div>
+        <div id="chart-dec"></div>
     </div>
     <div class="configuration-horizontal">
+        <span class="configHead">Funnel configuration</span>
         <div class="config-section">
-            <span class="configHead">Funnel configuration</span>
             <ul class="options">
+                <li><label for="neckSlider">Neck Size ratio</label></li>
+                <li><input id="neckSlider" value="0.3"/></li>
+            </ul>
+        </div>
+        <div class="config-section">
+            <ul class="options">
+                <li>Segment slope based on:</li>
                 <li>
-                    <label>Neck Size ratio
-                        <input id="neckSlider" value="0.3" />
-                    </label>
+                    <label><input type="radio" name="segmentMethod" value="default" checked /> default (neckRatio is used) </label><br />
+                    <label><input type="radio" name="segmentMethod" value="relation" />Value Relation </label>
                 </li>
+            </ul>
+        </div>
+        <div class="config-section">
+            <ul class="options">
+                <li>Segment height based on:</li>
                 <li>
-                    <div class="segmentMethod">
-                    Segment slope based on:
-                        <ul>
-                         <li><label><input type="radio" name="segmentMethod" value="default" checked /> default (neckSize is used) </label></li>
-                         <li><label><input type="radio" name="segmentMethod" value="relation" />Value Relation </label></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <div class="segmentHeight">
-                    Segment height based on:
-                        <ul>
-                         <li><label><input type="radio" name="segmentHeight" value="proportional" checked /> Proportional  </label></li>
-                         <li><label><input type="radio" name="segmentHeight" value="equal" /> Equal Size </label></li>
-                        </ul>
-                    </div>
+                    <label><input type="radio" name="segmentHeight" value="proportional" checked /> Proportional  </label><br />
+                    <label><input type="radio" name="segmentHeight" value="equal" /> Equal Size </label>
                 </li>
             </ul>
         </div>
     </div>
+    <style scoped>
+        .chart-wrapper {
+            height: 360px;
+        }
+        .chart-wrapper h2 {
+            padding: 20px 0 0 25px;
+        }
+        #chart-oct,
+        #chart-nov,
+        #chart-dec {
+            display: inline-block;
+            width: 180px;
+            height: 300px;
+            margin: 15px 25px;
+        }
+        .options li {
+            padding-bottom: 10px;
+        }
+    </style>
     <script>
         function createChart() {
-            $("#chart").kendoChart({
+            $("#chart-oct").kendoChart({
                 title: {
-                    position: "bottom",
-                    text: "Share of Internet Population Growth, 2007 - 2012"
+                    text: "October",
+                    position: "bottom"
                 },
                 legend: {
                     visible: false
@@ -47,40 +66,131 @@
                         visible: true,
                         background: "transparent",
                         color:"white",
-                        template: "#= dataItem.category #: #= value#%"
+                        format: "N0"
                     }
                 },
                 series: [{
                     type: "funnel",
+                    dynamicWidth: true,
                     data: [{
-                        category: "Europe",
-                        value: 16.1,
-                        color: "#90cc38"
+                        category: "Impressions ",
+                        value: 434823,
+                        color: "#0e5a7e"
                     },{
-                        category: "Latin America",
-                        value: 11.3,
-                        color: "#068c35"
+                        category: "Clicks",
+                        value: 356854,
+                        color: "#166f99"
                     },{
-                        category: "Asia",
-                        value: 53.8,
-                        color: "#9de219"
+                        category: "Unique Visitors",
+                        value: 280022,
+                        color: "#2185b4"
                     },{
-                        category: "Africa",
-                        value: 9.6,
-                        color: "#006634"
+                        category: "Downloads",
+                        value: 190374,
+                        color: "#319fd2"
                     },{
-                        category: "Middle East",
-                        value: 5.2,
-                        color: "#004d38"
-                    },{
-                        category: "North America",
-                        value: 3.6,
-                        color: "#033939"
+                        category: "Purchases",
+                        value: 120392,
+                        color: "#3eaee2"
                     }]
                 }],
                 tooltip: {
                     visible: true,
-                    format: "{0}%"
+                    template: "#= dataItem.category #"
+                }
+            });
+            
+            $("#chart-nov").kendoChart({
+                title: {
+                    text: "November",
+                    position: "bottom"
+                },
+                legend: {
+                    visible: false
+                },
+                seriesDefaults: {
+                    labels: {
+                        visible: true,
+                        background: "transparent",
+                        color:"white",
+                        format: "N0"
+                    }
+                },
+                series: [{
+                    type: "funnel",
+                    dynamicWidth: true,
+                    data: [{
+                        category: "Impressions ",
+                        value: 984528,
+                        color: "#0e5a7e"
+                    },{
+                        category: "Clicks",
+                        value: 856287,
+                        color: "#166f99"
+                    },{
+                        category: "Unique Visitors",
+                        value: 643694,
+                        color: "#2185b4"
+                    },{
+                        category: "Downloads",
+                        value: 567843,
+                        color: "#319fd2"
+                    },{
+                        category: "Purchases",
+                        value: 389137,
+                        color: "#3eaee2"
+                    }]
+                }],
+                tooltip: {
+                    visible: true,
+                    template: "#= dataItem.category #"
+                }
+            });
+            
+            $("#chart-dec").kendoChart({
+                title: {
+                    text: "December",
+                    position: "bottom"
+                },
+                legend: {
+                    visible: false
+                },
+                seriesDefaults: {
+                    labels: {
+                        visible: true,
+                        background: "transparent",
+                        color:"white",
+                        format: "N0"
+                    }
+                },
+                series: [{
+                    type: "funnel",
+                    dynamicWidth: true,
+                    data: [{
+                        category: "Impressions ",
+                        value: 1200528,
+                        color: "#0e5a7e"
+                    },{
+                        category: "Clicks",
+                        value: 989287,
+                        color: "#166f99"
+                    },{
+                        category: "Unique Visitors",
+                        value: 885694,
+                        color: "#2185b4"
+                    },{
+                        category: "Downloads",
+                        value: 788843,
+                        color: "#319fd2"
+                    },{
+                        category: "Purchases",
+                        value: 694137,
+                        color: "#3eaee2"
+                    }]
+                }],
+                tooltip: {
+                    visible: true,
+                        template: "#= dataItem.category #"
                 }
             });
         }
@@ -91,9 +201,9 @@
                 funnelSeries = chart.options.series[0];
                 
             chart.options.transitions = false;
-            funnelSeries.neckSize = slider.value();
-            funnelSeries.segmentHeight = $('.segmentHeight :checked').val();
-            funnelSeries.segmentMethod = $('.segmentMethod :checked').val();
+            funnelSeries.neckRatio = slider.value();
+            funnelSeries.dynamicHeight = $('.dynamicHeight :checked').val();
+            funnelSeries.dynamicWidth = $('.dynamicWidth :checked').val();
 
            
             slider.enable(funnelSeries.segmentMethod != "relation");
