@@ -648,7 +648,7 @@ kendo_module({
 
         _checkActiveElement: function(e) {
             var that = this,
-                hoverItem = $(this._hoverItem()[0] || (e ? e.currentTarget : {})),
+                hoverItem = $(e ? e.currentTarget : this._hoverItem()),
                 target = that._findRootParent(hoverItem)[0];
 
             if (!this._closurePrevented) {
