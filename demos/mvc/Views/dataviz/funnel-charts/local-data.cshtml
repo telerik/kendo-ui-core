@@ -51,10 +51,10 @@
                 },
                 series: [{
                     type: "funnel",
-                    segmentMethod:"relation",
+                    dynamicSlope:true,
                     field: "visitors",
                     categoryField: "description",
-                    segmentHeight : "equal",
+                    dynamicHeight : false,
                     labels: {
                         visible: true,
                         background: "transparent",
