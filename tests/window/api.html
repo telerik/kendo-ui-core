@@ -602,6 +602,18 @@
                 equal(dialog.wrapper.find(".k-i-pin:visible").length, 0);
             });
 
+            test("maximize() adds a k-window-maximized class", function() {
+                var dialog = createWindow({
+                        visible: true,
+                        actions: ["Pin"],
+                        animation: false
+                    });
+
+                dialog.maximize();
+
+                ok(dialog.wrapper.is(".k-window-maximized"));
+            });
+
             test("restore() shows the pin/unpin icon", function() {
                 var dialog = createWindow({
                         visible: true,
@@ -613,6 +625,20 @@
                 dialog.restore();
 
                 equal(dialog.wrapper.find(".k-i-pin:visible").length, 1);
+            });
+
+            test("restore() removes the k-window-maximized class", function() {
+                var dialog = createWindow({
+                        visible: true,
+                        actions: ["Pin"],
+                        animation: false
+                    });
+
+                dialog.maximize();
+                dialog.wrapper.addClass("k-window-maximized");
+                dialog.restore();
+
+                ok(!dialog.wrapper.is(".k-window-maximized"));
             });
 
             test("title() on titleless window does not fail", function() {

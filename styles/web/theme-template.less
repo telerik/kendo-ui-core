@@ -1074,10 +1074,19 @@ div.k-imagebrowser-dropzone em
     .box-shadow(0 2px 2px 0 @shadow-color);
 }
 
+/* Window */
+
 .k-window
 {
     .window-shadow(@shadow-color);
     background-color: @widget-background-color;
+}
+
+.k-window.k-window-maximized,
+.k-window-maximized .k-window-titlebar,
+.k-window-maximized .k-window-content
+{
+    .border-radius(0);
 }
 
 .k-shadow

@@ -30,6 +30,7 @@ kendo_module({
         LOADING = "k-loading",
         KHOVERSTATE = "k-state-hover",
         KFOCUSEDSTATE = "k-state-focused",
+        MAXIMIZEDSTATE = "k-window-maximized",
         // constants
         VISIBLE = ":visible",
         HIDDEN = "hidden",
@@ -785,6 +786,7 @@ kendo_module({
                     width: restoreOptions.width,
                     height: restoreOptions.height
                 })
+                .removeClass(MAXIMIZEDSTATE)
                 .find(".k-window-content,.k-resize-handle").show().end()
                 .find(".k-window-titlebar .k-i-restore").parent().remove().end().end()
                 .find(MINIMIZE_MAXIMIZE).parent().show().end().end()
@@ -816,7 +818,8 @@ kendo_module({
                     left: 0,
                     top: 0,
                     position: "fixed"
-                });
+                })
+                .addClass(MAXIMIZEDSTATE);
 
             this._documentScrollTop = $(document).scrollTop();
             $("html, body").css(OVERFLOW, HIDDEN);
