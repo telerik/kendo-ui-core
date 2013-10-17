@@ -1112,7 +1112,7 @@
                     max: 130,
                     value: 0,
                     animation: {
-                        duration: 10
+                        duration: 5
                     },
                     type: "value",
                     showStatus: true
@@ -1125,7 +1125,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
                     start();
-                }, 70);
+                }, 120);
             });
 
             asyncTest("Progress status wrapper is shown again when hidden once, showStatus is true (type: 'percent')", function() {
@@ -1134,7 +1134,7 @@
                     max: 130,
                     value: 0,
                     animation: {
-                        duration: 10
+                        duration: 5
                     },
                     type: "percent",
                     showStatus: true
@@ -1147,7 +1147,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
                     start();
-                }, 70);
+                }, 120);
             });
 
             asyncTest("Progress status wrapper is shown again when hidden once, showStatus is false (type: 'value')", function() {
@@ -1156,7 +1156,7 @@
                     max: 130,
                     value: 0,
                     animation: {
-                        duration: 10
+                        duration: 5
                     },
                     type: "value",
                     showStatus: false
@@ -1169,7 +1169,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
                     start();
-                }, 70);
+                }, 120);
             });
 
             asyncTest("Progress status wrapper is shown again when hidden once, showStatus is false (type: 'percent')", function() {
@@ -1178,7 +1178,7 @@
                     max: 130,
                     value: 0,
                     animation: {
-                        duration: 10
+                        duration: 5
                     },
                     type: "percent",
                     showStatus: false
@@ -1191,7 +1191,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
                     start();
-                }, 70);
+                }, 120);
             });
 
             asyncTest("Progress direction is 'forward' when the value is increased (type: 'value')", function() {
