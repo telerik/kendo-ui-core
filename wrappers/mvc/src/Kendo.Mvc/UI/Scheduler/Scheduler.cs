@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Web.Mvc;
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
@@ -42,6 +43,8 @@
             Messages = new SchedulerMessages();
             Group = new SchedulerGroupSettings();
             Editable = new SchedulerEditableSettings<TModel>();
+
+            WorkWeekDays = new List<DayOfWeek>();
         }
 
         public DataSource DataSource
@@ -85,6 +88,12 @@
             get;
             set;
         }
+
+        public IEnumerable<DayOfWeek> WorkWeekDays 
+        { 
+            get; 
+            set; 
+        }        
 
         public int? Height
         {
@@ -269,6 +278,11 @@
             if (WorkDayEnd != null)
             {
                 options["workDayEnd"] = WorkDayEnd;
+            }
+
+            if (WorkWeekDays.Count() > 0)
+            {
+                options["workWeekDays"] = WorkWeekDays.Select(d => Enum.GetName(typeof(DayOfWeek), d).Substring(0, 2).ToUpperInvariant());
             }
 
             if (Height != null)

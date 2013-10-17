@@ -825,5 +825,15 @@
             return this;
         }
 
+        /// <summary>
+        /// Defines the working days of the week
+        /// </summary>
+        /// <param name="days">An array of working week days</param>
+        public SchedulerBuilder<TModel> WorkWeekDays(params DayOfWeek[] days)
+        {
+            Component.WorkWeekDays = days;
+
+            return this;
+        }
     }
 }
