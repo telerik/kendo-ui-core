@@ -310,6 +310,13 @@
                     "url": "funnel-charts/local-data.html",
                     "title": "Local data binding in Kendo UI Funnel Charts",
                     "meta": "This demo illustrates how Kendo UI funnel Charts widget can be bound to local data to deliver high-performance business application."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "funnel-charts/mvvm.html",
+                    "title": "MVVM support in Kendo UI Chart",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                    "packages": ["!mvc", "!jsp", "!php"]
             }],
             "name": "funnel-charts"
         }, {
