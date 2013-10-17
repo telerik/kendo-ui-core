@@ -8,17 +8,17 @@
                     <option value="fastAndFurious">Fast and Furious 6</option>
                     <option value="nowYouSeeMe">Now you see me</option>
                     <option value="theHelp">The Help</option>
-                    <option value="theInternship">The internship</option>
+                    <option value="theInternship" selected>The Internship</option>
                     <option value="thePerks">The Perks of Being a Wallflower</option>
                 </select>
             </li>
             <li>
                 <h3>Second favourite</h3>
                  <select id="favouriteMovie2">
-                    <option value="fastAndFurious">Fast and Furious 6</option>
+                    <option value="fastAndFurious" selected>Fast and Furious 6</option>
                     <option value="nowYouSeeMe">Now you see me</option>
                     <option value="theHelp">The Help</option>
-                    <option value="theInternship">The internship</option>
+                    <option value="theInternship">The Internship</option>
                     <option value="thePerks">The Perks of Being a Wallflower</option>
                 </select>
             </li>
@@ -26,7 +26,7 @@
                 <h3>Third favourite</h3>
                 <select id="favouriteMovie3">
                     <option value="fastAndFurious">Fast and Furious 6</option>
-                    <option value="nowYouSeeMe">Now you see me</option>
+                    <option value="nowYouSeeMe" selected>Now you see me</option>
                     <option value="theHelp">The Help</option>
                     <option value="theInternship">The Internship</option>
                     <option value="thePerks">The Perks of Being a Wallflower</option>
@@ -70,10 +70,8 @@
                 progressbars.push(pb);
             });
 
-            $("#example select").each(function () {
-                $(this).kendoDropDownList({
-                    optionLabel: "Select a movie"
-                }).data("kendoDropDownList").select(0);
+            $("#example select").each(function (i) {
+                $(this).kendoDropDownList();
             });
 
             $("#voteButton").click(function () {
