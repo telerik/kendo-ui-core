@@ -317,7 +317,245 @@
                 }, 805);
             });
 
+            module("Timezone editing", {
+                setup: function() {
+                    var scriptTag = $("script:last");
 
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                },
+                teardown: function() {
+                    kendo.destroy($(container).closest(".k-scheduler"));
+                    $(".k-widget").remove();
+                }
+            });
+
+            test("Render Timezone field", function() {
+                var scheduler = setup(),
+                    event = scheduler.dataSource.data()[0],
+                    uid = event.uid;
+
+                event.isAllDay = false;
+
+                scheduler.editEvent(uid);
+                var anchor = scheduler._editor.container.find("a.k-timezone-button");
+
+                ok(anchor[0]);
+                equal(anchor.text(), scheduler.options.messages.editor.noTimezone);
+            });
+
+            /*test("Render Timezone button with startTimezone id as a text", function() {
+                var scheduler = setup(),
+                    event = scheduler.dataSource.data()[0],
+                    tzid = "America/Toronto",
+                    uid = event.uid;
+
+                event.isAllDay = false;
+                event.startTimezone = tzid;
+
+                scheduler.editEvent(uid);
+
+                var anchor = scheduler._editor.container.find("a.k-timezone-button");
+
+                equal(anchor.text(), tzid);
+            });*/
+
+            test("Do not render Timezone field if isAllDay", function() {
+                var scheduler = setup(),
+                    event = scheduler.dataSource.data()[0],
+                    uid = event.uid;
+
+                event.isAllDay = true;
+
+                scheduler.editEvent(uid);
+                var anchor = scheduler._editor.container.find("a.k-timezone-button");
+
+                ok(!anchor[0]);
+            });
+
+            test("Render start and end timezone editors", function() {
+                var scheduler = setup(),
+                    uid = scheduler.dataSource.data()[0].uid;
+
+                scheduler.dataSource.view()[0].isAllDay = false;
+
+                scheduler.editEvent(uid);
+                var editors = scheduler._editor.container.find("[data-role=timezoneeditor]");
+
+                equal(editors.length, 2);
+                equal(editors.eq(0).attr("data-bind"), "value:startTimezone");
+                equal(editors.eq(1).attr("data-bind"), "value:endTimezone");
+            });
+
+            test("Click Timezone anchor creates timezone popup", function() {
+                var scheduler = setup(),
+                    uid = scheduler.dataSource.data()[0].uid;
+
+                scheduler.dataSource.view()[0].isAllDay = false;
+
+                scheduler.editEvent(uid);
+                scheduler._editor.container.find("a.k-timezone-button").click();
+
+                var view = $(".k-scheduler-timezones");
+
+                ok(view[0]);
+            });
+
+            test("Render popup editor with disabled checkbox", function() {
+                var scheduler = setup(),
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
+
+                scheduler.dataSource.view()[0].isAllDay = false;
+                scheduler.editEvent(uid);
+
+                var anchor = scheduler._editor.container.find("a.k-timezone-button");
+                anchor.click();
+
+                var view = $(".k-scheduler-timezones");
+
+                ok(view.find("input[type=checkbox]").prop("disabled"))
+            });
+
+            test("Show second TimezoneEditor if model.endTimezone is defined", function() {
+                var scheduler = setup(),
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
+
+                model.isAllDay = false;
+                scheduler.editEvent(uid);
+
+                model.set("endTimezone", "America/Toronto");
+                var anchor = scheduler._editor.container.find("a.k-timezone-button").click();
+
+                ok($(".k-timezone-toggle").prop("checked"))
+            });
+
+            test("Select correct timezone if startTimezone is defined", function() {
+                var scheduler = setup(),
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
+
+                model.isAllDay = false;
+
+                scheduler.editEvent(uid);
+
+                model.set("startTimezone", "America/Toronto");
+
+                var anchor = $(".k-timezone-button").click();
+                var editor = $("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+
+                equal(editor.value(), "America/Toronto");
+            });
+
+            test("Click cancel reverts timezones to last selected", function() {
+                var scheduler = setup(),
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
+
+                model.isAllDay = false;
+                scheduler.editEvent(uid);
+
+                $(".k-timezone-button").click();
+
+                var editor = $("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+                editor.value("America/Toronto");
+
+                equal(model.startTimezone, "America/Toronto");
+
+                $(".k-scheduler-timezones").parents("[data-role=view]").find(".k-scheduler-cancel").click();
+
+                ok(!model.startTimezone);
+            });
+
+            test("Click save button updates text of the timezone button", function() {
+                var scheduler = setup(),
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
+
+                model.isAllDay = false;
+                scheduler.editEvent(uid);
+
+                $(".k-timezone-button").click();
+
+                var editor = $("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+                editor.value("America/Toronto");
+
+                $(".k-scheduler-timezones").parents("[data-role=view]").find(".k-scheduler-update").click();
+
+                equal($(".k-timezone-button").text(), "America/Toronto");
+            });
+
+            test("Select start timezone enables checkbox", function() {
+                var scheduler = setup(),
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
+
+                model.isAllDay = false;
+                scheduler.editEvent(uid);
+
+                $(".k-timezone-button").click();
+
+                var editor = $("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+                var checkbox = $(".k-timezone-toggle");
+
+                editor.value("America/Toronto");
+
+                ok(!checkbox.prop("disabled"));
+            });
+
+            test("Clear start timezone disables checkbox and clears end timezone", function() {
+                var scheduler = setup(),
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
+
+                model.isAllDay = false;
+                scheduler.editEvent(uid);
+
+                $(".k-timezone-button").click();
+
+                var start = $("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+                var end = $("[data-role=timezoneeditor]:last").data("kendoTimezoneEditor");
+                var checkbox = $(".k-timezone-toggle");
+
+                start.value("America/Toronto");
+
+                checkbox.click();
+                end.value("America/Toronto");
+
+                start.value("");
+
+                ok(checkbox.prop("disabled"));
+                ok(!model.endTimezone);
+                ok(!end.wrapper.parent(".k-edit-field").is(":visible"));
+            });
+
+            test("Click checkbox toggles endTimezone editor widget", function() {
+                var scheduler = setup(),
+                    model = scheduler.dataSource.data()[0],
+                    uid = model.uid;
+
+                model.isAllDay = false;
+                scheduler.editEvent(uid);
+
+                $(".k-timezone-button").click();
+
+                var start = $("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+                var end = $("[data-role=timezoneeditor]:last").data("kendoTimezoneEditor");
+                var checkbox = $(".k-timezone-toggle");
+
+                start.value("America/Toronto");
+
+                checkbox.click();
+                end.value("America/Toronto");
+
+                equal(model.endTimezone, "America/Toronto");
+
+                checkbox.click();
+
+                ok(!end.wrapper.closest(".k-edit-field").is(":visible"));
+                ok(!model.endTimezone);
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

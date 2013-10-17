@@ -148,10 +148,10 @@ kendo_module({
         MOBILETIMEZONEPOPUP = function(container, options) {
             var text = timezoneButtonText(options.model, options.messages.noTimezone);
 
-            $('<a href="#" class="k-button k-timezone-button">' + text + '<a/>').click(options.click).appendTo(container);
+            $('<a href="#" class="k-button k-timezone-button">' + text + '</a>').click(options.click).appendTo(container);
         },
         TIMEZONEPOPUP = function(container, options) {
-            $('<a href="#" class="k-button">' + options.messages.timezoneEditorButton + '<a/>').click(options.click).appendTo(container);
+            $('<a href="#" class="k-button">' + options.messages.timezoneEditorButton + '</a>').click(options.click).appendTo(container);
         },
         TIMEZONEEDITOR = function(container, options) {
             $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
@@ -876,7 +876,7 @@ kendo_module({
             that._endTimezone = model.endTimezone || "";
 
             if (!timezoneView) {
-                var html = '<div data-role="view" class="k-popup-edit-form" id="timezones">' +
+                var html = '<div data-role="view" class="k-popup-edit-form">' +
                            '<div data-role="header" class="k-header"><a href="#" class="k-button k-scheduler-cancel">' + messages.cancel + '</a>' +
                            messages.editor.timezoneTitle + '<a href="#" class="k-button k-scheduler-update">' + messages.save + '</a></div></div>';
 
@@ -884,7 +884,7 @@ kendo_module({
 
                 timezoneView.contentElement().append(container.show());
 
-                timezoneView.element.on(CLICK + NS, "a.k-scheduler-cancel, a.k-scheduler-update", function(e) {
+                timezoneView.element.on(CLICK + NS, ".k-scheduler-cancel, .k-scheduler-update", function(e) {
                     e.preventDefault();
                     e.stopPropagation();
 
@@ -983,7 +983,6 @@ kendo_module({
                 titleText + '<a href="#" class="k-button k-scheduler-update">' + updateText + '</a></div>';
 
             var fields = this.fields(editors.mobile, model);
-
             var that = this;
             var settings = extend({}, kendo.Template, that.options.templateSettings);
             var paramName = settings.paramName;
@@ -1030,8 +1029,7 @@ kendo_module({
                     }
 
                     if (field.field === "endTimezone") {
-                        html += '<div class="k-edit-buttons k-state-default">';
-                        html += '</div></div></div>';
+                        html += '</div></div>';
                     }
                 }
             }
@@ -1084,8 +1082,6 @@ kendo_module({
                 this.trigger("cancel", { container: container, model: model });
             }
         },
-
-
 
         _views: function() {
             return this.pane.element
