@@ -2,39 +2,50 @@
     <div class="chart-wrapper">
         <div id="chart"></div>
     </div>
+    <style scoped>
+        .chart-wrapper .k-chart {
+            width: 400px;
+            margin: 0 auto;
+        }
+    </style>
     <script>
         function createChart() {
             $("#chart").kendoChart({
                 dataSource: {
                     transport: {
                         read: {
-                            url: "../../content/dataviz/js/screen_resolution.json",
+                            url: "../../content/dataviz/js/spain-electricity.json",
                             dataType: "json"
                         }
                     },
                     sort: {
-                        field: "share",
+                        field: "year",
                         dir: "desc"
                     }
                 },
                 legend: {
-                    position: "top"
+                   visible: false
                 },
                 title: {
-                    text: "1024x768 screen resolution trends"
+                    text: "Spain windpower electricity production (GWh)"
                 },
                 seriesDefaults: {
                     type: "funnel",
-                    dynamicSlope:true
+                    dynamicSlope: true,
+                    dynamicHeight: false,
+                    labels: {
+                        visible: true,
+                        template: "#= dataItem.year #"
+                    }
                 },
                 series: [{
-                    field: "share",
-                    categoryField: "resolution",
+                    field: "wind",
+                    categoryField: "year",
                     segmentSpacing: 2
                 }],
                 tooltip: {
                     visible: true,
-                    template: "#= dataItem.resolution #: #= value #% (#= dataItem.year #)"
+                    template: "#= dataItem.year # - #= value # GWh"
                 }
             });
         }
