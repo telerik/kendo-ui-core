@@ -21,6 +21,11 @@
             {
                 overflow-y:scroll;
             }
+
+            .km-pane-wrapper {
+                width: 100%;
+                height: 100%
+            }
         </style>
 
     </head>
@@ -73,7 +78,11 @@
                     "bool",
                     { command: ["edit", "destroy"], title: "&nbsp;", width: "172px" }
                 ],
-                editable: true,
+                editable: {
+                    confirmation: true,
+                    cancelDelete: "No",
+                    confirmDelete: "Yes"
+                },
                 pageable: true,
                 filterable: true,
                 sortable: true,

@@ -1623,7 +1623,7 @@ kendo_module({
                 return that._showMessage({
                         confirmDelete: editable.confirmDelete || CONFIRMDELETE,
                         cancelDelete: editable.cancelDelete || CANCELDELETE,
-                        title: confirmation
+                        title: confirmation === true ? DELETECONFIRM : confirmation
                     }, row);
             }
 
