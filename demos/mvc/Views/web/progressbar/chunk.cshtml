@@ -2,8 +2,7 @@
     <div class="demo-section">
         <h2>Profile Completeness</h2>
         <div class="completenessLevel">
-            <h2>0%</h2>
-         <div id="profileCompleteness"></div>
+            <h2>0%</h2><div id="profileCompleteness"></div>
         </div>
     </div>
 
@@ -12,24 +11,24 @@
         <div>
             <ul class="forms">
                 <li>
-                    <h3>First Name</h3>
-                    <input type="text" name="firstName" value="" class="k-textbox" />
+                    <label>First Name</label>
+                    <input type="text" name="firstName" value="" class="k-textbox" style="width: 265px;" />
                 </li>
                 <li>
-                    <h3>Last Name</h3>
-                    <input type="text" name="lastName" value="" class="k-textbox" />
+                    <label>Last Name</label>
+                    <input type="text" name="lastName" value="" class="k-textbox" style="width: 265px;" />
                 </li>
                 <li>
-                    <h3>Birthday</h3>
-                    <input id="birthdayInput" type="text" name="birthday" value="" />
+                    <label>Birthday</label>
+                    <input id="birthdayInput" type="text" name="birthday" value="" style="width: 265px;" />
                 </li>
                 <li>
-                    <h3>Gender</h3>
-                    <input type="text" name="gender" value="" class="k-textbox" />
+                    <label>Gender</label>
+                    <input id="genderInput"  type="text" name="gender" value="1" style="width: 265px;" />
                 </li>
                 <li>
-                    <h3>Occupation</h3>
-                    <input type="text" name="occupation" value="" class="k-textbox" />
+                    <label>Occupation</label>
+                    <input type="text" name="occupation" value="Software Developer" class="k-textbox" style="width: 265px;" />
                 </li>
             </ul>
         </div>
@@ -42,6 +41,19 @@
                 chunkCount: 5,
                 min: 0,
                 max: 5
+            });
+            
+            var data = [
+                { text: "Male", value: "1" },
+                { text: "Female", value: "2" },
+                { text: "Other", value: "3" }
+            ];
+            
+            $("#genderInput").kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: data,
+                index: 0
             });
 
             $("#birthdayInput").kendoDatePicker();
@@ -61,34 +73,45 @@
     </script>
 
     <style scoped>
-        .demo-section h3
-        {
+        .demo-section {
+            width: 400px;
+            padding: 30px;
+        }
+        
+        .demo-section h2 {
+            font-weight: normal;
+            margin: 0 0 20px 0;
+        }
+        
+        .completenessLevel {
+            margin: 10px 0 0 0;
+        }
+        
+        .completenessLevel h2 {
             display: inline-block;
-            width: 150px;
+            vertical-align: middle;
+            width: 50px;
+            margin: 0;
+        }
+        
+        #profileCompleteness {
+            width: 340px;
+        }
+        
+        .forms {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .forms label {
+            display: inline-block;
+            width: 115px;
             text-align: right;
-            margin-right: 10px;
+            padding-right: 10px;
         }
         
-        .completenessLevel
-        {
-            margin-top: 10px;
-        }
-        
-        .completenessLevel h2
-        {
-            display:inline-block;
-            margin-right: 5px;
-        }
-        
-        .forms
-        {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .forms li
-        {
-            margin-bottom: 5px;
+        .forms li {
+            margin: 0 0 10px 0;
         }
     </style>
 </div>
