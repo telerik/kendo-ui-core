@@ -1,10 +1,9 @@
 ﻿<div id="example" class="k-content">
     <div class="demo-section">
-        <h2>What are your favourite recent movie?</h2>
+        <h2>What are your favourite recent movies?</h2>
         <ul class="forms">
             <li>
-                <h3>First favourite</h3>
-                <select id="favouriteMovie1">
+                <label>First favourite</label><select id="favouriteMovie1" style="width: 260px;">
                     <option value="fastAndFurious">Fast and Furious 6</option>
                     <option value="nowYouSeeMe">Now you see me</option>
                     <option value="theHelp">The Help</option>
@@ -13,22 +12,20 @@
                 </select>
             </li>
             <li>
-                <h3>Second favourite</h3>
-                 <select id="favouriteMovie2">
-                    <option value="fastAndFurious" selected>Fast and Furious 6</option>
-                    <option value="nowYouSeeMe">Now you see me</option>
-                    <option value="theHelp">The Help</option>
-                    <option value="theInternship">The Internship</option>
-                    <option value="thePerks">The Perks of Being a Wallflower</option>
-                </select>
+                <label>Second favourite</label><select id="favouriteMovie2" style="width: 260px;">
+                        <option value="fastAndFurious" selected>Fast and Furious 6</option>
+                        <option value="nowYouSeeMe">Now you see me</option>
+                        <option value="theHelp">The Help</option>
+                        <option value="theInternship">The Internship</option>
+                        <option value="thePerks">The Perks of Being a Wallflower</option>
+                    </select>
             </li>
             <li>
-                <h3>Third favourite</h3>
-                <select id="favouriteMovie3">
+                <label>Third favourite</label><select id="favouriteMovie3" style="width: 260px;">
                     <option value="fastAndFurious">Fast and Furious 6</option>
                     <option value="nowYouSeeMe" selected>Now you see me</option>
                     <option value="theHelp">The Help</option>
-                    <option value="theInternship">The Internship</option>
+                    <option value="theInternsrake hip">The Internship</option>
                     <option value="thePerks">The Perks of Being a Wallflower</option>
                 </select>
             </li>
@@ -37,34 +34,49 @@
             </li>
         </ul>
     </div>
-    <div>
+    <div class="demo-section">
         <h2>Poll results</h2>
-        <div class="pollResults">
-            <h4>Fast and Furious 6</h4>
-            <div id="fastAndFurious"></div>
-
-            <h4>Now you see me</h4>
-            <div id="nowYouSeeMe"></div>
-
-            <h4>The Help</h4>
-            <div id="theHelp"></div>
-
-            <h4>The Internship</h4>
-            <div id="theInternship"></div>
-
-            <h4>The Perks of Being a Wallflower</h4>
-            <div id="thePerks"></div>
-        </div>
+        <ul class="poll-results">
+            <li>
+                <span class="progress-value">0%</span>
+                <h4>Fast and Furious 6</h4>
+                <div id="fastAndFurious"></div>
+            </li>
+            <li>
+                <span class="progress-value">0%</span>
+                <h4>Now you see me</h4>
+                <div id="nowYouSeeMe"></div>
+            </li>
+            <li>
+                <span class="progress-value">0%</span>
+                <h4>The Help</h4>
+                <div id="theHelp"></div>
+            </li>
+            <li>
+                <span class="progress-value">0%</span>
+                <h4>The Internship</h4>
+                <div id="theInternship"></div>
+            </li>
+            <li>
+                <span class="progress-value">0%</span>
+                <h4>The Perks of Being a Wallflower</h4>
+                <div id="thePerks"></div>
+            </li>
+        </ul>
     </div>
 
     <script>
         $(document).ready(function () {
             var progressbars = [];
-            $(".pollResults div").each(function () {
+            $(".poll-results div").each(function () {
                 var pb = $(this).kendoProgressBar({
                     type: "percent",
                     animation: {
                         duration: 600
+                    },
+                    showStatus: false,
+                    change: function(e) {
+                        this.wrapper.prev(".progress-value").text(e.value + "%");
                     }
                 }).data("kendoProgressBar");
                 progressbars.push(pb);
@@ -102,35 +114,61 @@
         });
     </script>
 
-    <style scoped>
-        #example .pollResults h4
-        {
-            margin: 15px 0 0 0;
+    <style scoped>      
+        .demo-section {
+            width: 400px;
+            padding: 30px;
         }
         
-        .forms
-        {
-            list-style: none;
-            padding-left: 0;
+        .demo-section h2 {
+            font-weight: normal;
+            margin-bottom: 20px;
         }
         
-        .forms li
-        {
-            margin-bottom: 15px;
+        .forms {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: -10px;
         }
         
-        .demo-section h3
-        {
+        .forms label {
             display: inline-block;
-            width: 150px;
+            width: 115px;
             text-align: right;
-            margin-right: 10px;
+            padding-right: 20px;
         }
         
-        #voteButton
-        {
-            width: 150px;
-            margin-left: 162px;
+        .forms li {
+            margin-bottom: 10px;
+        }
+        
+        #voteButton {
+            width: 260px;
+            margin: 10px 0 0 135px;
+        }
+        
+        .poll-results {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .poll-results li:after {
+            content: "";
+            display: block;
+            clear: both;
+            height: 10px;
+            line-height: 0;
+        }
+        .progress-value {
+            float: left;
+            width: 110px;
+            font-size: 4em;
+            line-height: 1em;
+        }
+        #example .poll-results h4, .poll-results .k-progressbar {
+            float: right;
+            width: 280px;
+            margin: 0 0 5px 0;
         }
     </style>
 </div>
