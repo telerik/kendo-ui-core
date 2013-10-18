@@ -3,10 +3,10 @@
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="SchedulerViewMonth"/>.
     /// </summary>
-    public class SchedulerViewMonthBuilder<T> : SchedulerViewBaseBuilder<T>
-        where T : SchedulerViewMonth
+    public class SchedulerViewMonthBuilder<TView> : SchedulerViewBaseBuilder<TView, SchedulerViewMonthBuilder<TView>>
+        where TView : SchedulerViewMonth
     {
-        public SchedulerViewMonthBuilder(T resource)
+        public SchedulerViewMonthBuilder(TView resource)
             : base(resource)
         { 
         }
@@ -15,7 +15,7 @@
         /// The template used to render the day slots in month view.
         /// </summary>
         /// <param name="dayTemplate">The dayTemplate</param>
-        public ISchedulerViewBuilder DayTemplate(string dayTemplate)
+        public SchedulerViewMonthBuilder<TView> DayTemplate(string dayTemplate)
         {
             view.DayTemplate = dayTemplate;
 
@@ -26,7 +26,7 @@
         /// The Id of the template used to render the day slots in month view.
         /// </summary>
         /// <param name="dayTemplateId">The dayTemplateId</param>
-        public ISchedulerViewBuilder DayTemplateId(string dayTemplateId)
+        public SchedulerViewMonthBuilder<TView> DayTemplateId(string dayTemplateId)
         {
             view.DayTemplateId = dayTemplateId;
 
@@ -37,7 +37,7 @@
         /// The height of the scheduler event rendered in month view.
         /// </summary>
         /// <param name="eventHeight">The eventHeight</param>
-        public ISchedulerViewBuilder EventHeight(int eventHeight)
+        public SchedulerViewMonthBuilder<TView> EventHeight(int eventHeight)
         {
             view.EventHeight = eventHeight;
 

@@ -3,10 +3,10 @@
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="SchedulerViewAgenda"/>.
     /// </summary>
-    public class SchedulerViewAgendaBuilder<T> : SchedulerViewBaseBuilder<T>
-        where T : SchedulerViewAgenda
+    public class SchedulerViewAgendaBuilder<TView> : SchedulerViewBaseBuilder<TView, SchedulerViewAgendaBuilder<TView>>
+        where TView : SchedulerViewAgenda
     {
-        public SchedulerViewAgendaBuilder(T view)
+        public SchedulerViewAgendaBuilder(TView view)
             : base(view)
         { 
         }
@@ -15,7 +15,7 @@
         /// The template used by the agenda view to render the date of the scheduler events.
         /// </summary>
         /// <param name="eventDateTemplate">The eventDateTemplate</param>
-        public ISchedulerViewBuilder EventDateTemplate(string eventDateTemplate)
+        public SchedulerViewAgendaBuilder<TView> EventDateTemplate(string eventDateTemplate)
         {
             view.EventDateTemplate = eventDateTemplate;
 
@@ -26,7 +26,7 @@
         /// The Id of the template used by the agenda view to render the date of the scheduler events.
         /// </summary>
         /// <param name="eventDateTemplateId">The eventDateTemplateId</param>
-        public ISchedulerViewBuilder EventDateTemplateId(string eventDateTemplateId)
+        public SchedulerViewAgendaBuilder<TView> EventDateTemplateId(string eventDateTemplateId)
         {
             view.EventDateTemplateId = eventDateTemplateId;
 
@@ -37,7 +37,7 @@
         /// The template used by the agenda view to render the time of the scheduler events.
         /// </summary>
         /// <param name="eventTimeTemplate">The eventTimeTemplate</param>
-        public ISchedulerViewBuilder EventTimeTemplate(string eventTimeTemplate)
+        public SchedulerViewAgendaBuilder<TView> EventTimeTemplate(string eventTimeTemplate)
         {
             view.EventTimeTemplate = eventTimeTemplate;
 
@@ -48,7 +48,7 @@
         /// The Id of the template used by the agenda view to render the time of the scheduler events.
         /// </summary>
         /// <param name="eventTimeTemplateId">The eventTimeTemplateId</param>
-        public ISchedulerViewBuilder EventTimeTemplateId(string eventTimeTemplateId)
+        public SchedulerViewAgendaBuilder<TView> EventTimeTemplateId(string eventTimeTemplateId)
         {
             view.EventTimeTemplateId = eventTimeTemplateId;
 

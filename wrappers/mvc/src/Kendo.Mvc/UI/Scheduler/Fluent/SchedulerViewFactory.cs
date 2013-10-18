@@ -23,7 +23,7 @@
         /// Defines a Scheduler day view.
         /// </summary>
         /// <returns></returns>
-        public ISchedulerViewBuilder DayView(Action<SchedulerViewDayBuilder<SchedulerViewDay>> addViewAction)
+        public SchedulerViewDayBuilder<SchedulerViewDay> DayView(Action<SchedulerViewDayBuilder<SchedulerViewDay>> addViewAction)
         {
             SchedulerViewDay view = new SchedulerViewDay();
 
@@ -61,23 +61,24 @@
         /// Defines a custom view 
         /// </summary>
         /// <param name="type">The JavaScript type name</param>    
-        public ISchedulerViewBuilder CustomView(string type, Action<SchedulerViewBaseBuilder<SchedulerCustomView>> addViewAction)
+        public SchedulerCustomViewBuilder<SchedulerCustomView> CustomView(string type, Action<SchedulerCustomViewBuilder<SchedulerCustomView>> addViewAction)
         {
             SchedulerCustomView view = new SchedulerCustomView(type);
 
             container.Views.Add(view);
 
-            SchedulerViewBaseBuilder<SchedulerCustomView> builder = new SchedulerViewBaseBuilder<SchedulerCustomView>(view);
+            SchedulerCustomViewBuilder<SchedulerCustomView> builder = new SchedulerCustomViewBuilder<SchedulerCustomView>(view);
 
             addViewAction(builder);
 
             return builder;
         }
+
         /// <summary>
         /// Defines a Scheduler week view.
         /// </summary>
         /// <returns></returns>
-        public ISchedulerViewBuilder WeekView(Action<SchedulerViewWeekBuilder<SchedulerViewWeek>> addViewAction)
+        public SchedulerViewWeekBuilder<SchedulerViewWeek> WeekView(Action<SchedulerViewWeekBuilder<SchedulerViewWeek>> addViewAction)
         {
             SchedulerViewWeek view = new SchedulerViewWeek();
 
@@ -105,7 +106,7 @@
         /// Defines a Scheduler month view.
         /// </summary>
         /// <returns></returns>
-        public ISchedulerViewBuilder MonthView(Action<SchedulerViewMonthBuilder<SchedulerViewMonth>> addViewAction)
+        public SchedulerViewMonthBuilder<SchedulerViewMonth> MonthView(Action<SchedulerViewMonthBuilder<SchedulerViewMonth>> addViewAction)
         {
             SchedulerViewMonth view = new SchedulerViewMonth();
 
@@ -133,7 +134,7 @@
         /// Defines a Scheduler agenda view.
         /// </summary>
         /// <returns></returns>
-        public ISchedulerViewBuilder AgendaView(Action<SchedulerViewAgendaBuilder<SchedulerViewAgenda>> addViewAction)
+        public SchedulerViewAgendaBuilder<SchedulerViewAgenda> AgendaView(Action<SchedulerViewAgendaBuilder<SchedulerViewAgenda>> addViewAction)
         {
             SchedulerViewAgenda view = new SchedulerViewAgenda();
 

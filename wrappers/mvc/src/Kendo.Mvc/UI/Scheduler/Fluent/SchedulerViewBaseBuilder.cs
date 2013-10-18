@@ -3,19 +3,20 @@
     using System;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="SchedulerViewBaseBuilder{T}"/>.
+    /// Defines the fluent interface for configuring the <see cref="SchedulerViewBaseBuilder{TView, TViewBuilder}"/>.
     /// </summary>
-    public class SchedulerViewBaseBuilder<T> : ISchedulerViewBuilder
-        where T : class, ISchedulerView
+    public class SchedulerViewBaseBuilder<TView, TViewBuilder>
+        where TView : class, ISchedulerView
+        where TViewBuilder : SchedulerViewBaseBuilder<TView, TViewBuilder>
     {
-        protected readonly T view;
+        protected readonly TView view;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SchedulerViewBaseBuilder{T}"/> class.
+        /// Initializes a new instance of the <see cref="SchedulerViewBaseBuilder{TView, TViewBuilder}"/> class.
         /// </summary>
         /// <param name="view">The resource</param>
         /// 
-        public SchedulerViewBaseBuilder(T view)
+        public SchedulerViewBaseBuilder(TView view)
         {
             this.view = view;
         }
@@ -45,24 +46,24 @@
         /// )
         /// </code>
         /// </example>
-        public ISchedulerViewBuilder Title(string title)
+        public TViewBuilder Title(string title)
         {
             view.Title = title;
 
-            return this;
+            return (TViewBuilder)this;
         }
 
         /// <summary>
         /// Sets the editing configuration of the current scheduler view.
         /// </summary>
         /// <param name="configurator">The lambda which configures the editing</param>
-        public ISchedulerViewBuilder Editable(Action<SchedulerViewEditableSettingsBuilder> configurator)
+        public TViewBuilder Editable(Action<SchedulerViewEditableSettingsBuilder> configurator)
         {
             view.Editable = new SchedulerViewEditableSettings();
 
             configurator(new SchedulerViewEditableSettingsBuilder(view.Editable));
 
-            return this;
+            return (TViewBuilder)this;
         }
 
         /// <summary>
@@ -92,35 +93,35 @@
         /// )
         /// </code>
         /// </example>
-        public ISchedulerViewBuilder Editable(bool isEditable)
+        public TViewBuilder Editable(bool isEditable)
         {
             view.Editable = new SchedulerViewEditableSettings();
 
             view.Editable.Enabled = isEditable;
 
-            return this;
+            return (TViewBuilder)this;
         }
 
         /// <summary>
         /// The template used by the view to render the scheduler events.
         /// </summary>
         /// <param name="eventTemplate">The eventTemplate.</param>
-        public ISchedulerViewBuilder EventTemplate(string eventTemplate)
+        public TViewBuilder EventTemplate(string eventTemplate)
         {
             view.EventTemplate = eventTemplate;
 
-            return this;
+            return (TViewBuilder)this;
         }
 
         /// <summary>
         /// The Id of the template used by the view to render the scheduler events.
         /// </summary>
         /// <param name="eventTemplateId">The eventTemplateId</param>
-        public ISchedulerViewBuilder EventTemplateId(string eventTemplateId)
+        public TViewBuilder EventTemplateId(string eventTemplateId)
         {
             view.EventTemplateId = eventTemplateId;
 
-            return this;
+            return (TViewBuilder)this;
         }
 
         /// <summary>
@@ -152,11 +153,11 @@
         /// )
         /// </code>
         /// </example>
-        public ISchedulerViewBuilder SelectedDateFormat(string selectedDateFormat)
+        public TViewBuilder SelectedDateFormat(string selectedDateFormat)
         {
             view.SelectedDateFormat = selectedDateFormat;
 
-            return this;
+            return (TViewBuilder)this;
         }
 
         /// <summary>
@@ -188,22 +189,22 @@
         /// )
         /// </code>
         /// </example>
-        public ISchedulerViewBuilder Selected(bool isSelected)
+        public TViewBuilder Selected(bool isSelected)
         {
             view.Selected = isSelected;
 
-            return this;
+            return (TViewBuilder)this;
         }
 
         /// <summary>
         /// Sets the orientation of the group headers
         /// </summary>
         /// <param name="orientation">The orientation</param>        
-        public ISchedulerViewBuilder Groups(SchedulerGroupOrientation orientation)
+        public TViewBuilder Groups(SchedulerGroupOrientation orientation)
         {
             view.Group.Orientation = orientation;
 
-            return this;
+            return (TViewBuilder)this;
         }
     }
 

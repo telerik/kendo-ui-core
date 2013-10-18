@@ -1051,6 +1051,7 @@
     <Compile Include="UI\RequestSettings.cs" />
     <Compile Include="UI\DataSource\Fluent\AjaxSchedulerDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSchedulerFilterDescriptorFactory.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerCustomViewBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerGroupBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerEditorMessagesBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerMessagesBuilder.cs" />
@@ -1096,7 +1097,6 @@
     <Compile Include="UI\Scheduler\Settings\SchedulerViewEditableSettings.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerViewAgenda.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerViewMonth.cs" />
-    <Compile Include="UI\Scheduler\Views\ISchedulerViewBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerEventBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerResourceBuilder.cs" />
