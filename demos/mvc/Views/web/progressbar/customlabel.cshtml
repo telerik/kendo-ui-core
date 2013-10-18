@@ -1,22 +1,19 @@
 ﻿<div id="example" class="k-content">
     <div class="demo-section">
-        <h2>Sign up form</h2>
+        <h2>Reset Password</h2>
         <div>
             <ul class="forms">
                 <li>
-                    <h3>Username</h3>
-                    <input type="text" name="userName" value="" class="k-textbox" />
+                    <label>New Password</label>
+                    <input id="userPass" type="password" name="userPass" value="" class="k-textbox" style="width: 260px;" />
                 </li>
                 <li>
-                    <h3>Password</h3>
-                    <input id="userPass" type="password" name="userPass" value="" class="k-textbox" />
+                    <label>Password status</label>
+                    <div id="passStrength" style="width: 260px;"></div>
                 </li>
                 <li>
-                    <h3>Password strength</h3>
-                    <div id="passStrength"></div>
-                </li>
-                <li>
-                    <button id ="signupButton" class="k-button">Sign up!</button>
+                    <label></label>
+                    <button id ="submitButton" class="k-button">Done</button>
                 </li>
             </ul>
         </div>
@@ -31,16 +28,16 @@
                 change: onChange
             }).data("kendoProgressBar");
 
-            passProgress.wrapper.find(".k-progress-status").text("Weak");
+            passProgress.wrapper.find(".k-progress-status").text("Empty");
         });
 
         $("#userPass").keyup(function () {
             passProgress.value(this.value.length);
         });
 
-        $("#signupButton").click(function () {
+        $("#submitButton").click(function () {
             var strength = passProgress.wrapper.find(".k-progress-status:first").text()
-            alert("Your password is " + strength);
+            alert(strength + " password!");
         });
 
         function onChange(e) {
@@ -52,19 +49,21 @@
                 "border-image": "none"
             });
 
-            if (e.value <= 3) {
+            if (e.value < 1) {
+                progressStatus.text("Empty");
+            } else if (e.value <= 3) {
                 progressStatus.text("Weak");
 
                 progressWrapper.css({
-                    "background-color": "#E24B17",
-                    "border-color": "#E24B17"
+                    "background-color": "#EE9F05",
+                    "border-color": "#EE9F05"
                 });
             } else if (e.value <= 6) {
                 progressStatus.text("Good");
 
                 progressWrapper.css({
-                    "background-color": "#EE9F05",
-                    "border-color": "#EE9F05"
+                    "background-color": "#428bca",
+                    "border-color": "#428bca"
                 });
             } else {
                 progressStatus.text("Strong");
@@ -78,34 +77,36 @@
     </script>
 
     <style scoped>
-        .demo-section h3
-        {
+        .demo-section {
+            width: 400px;
+            padding: 30px;
+        }
+        
+        .demo-section h2 {
+            font-weight: normal;
+            margin: 0 0 20px 0;
+        }
+        
+        .forms {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: -10px;
+        }
+        
+        .forms label {
             display: inline-block;
-            width: 150px;
+            width: 115px;
             text-align: right;
-            margin-right: 10px;
+            padding-right: 20px;
         }
         
-        .forms
-        {
-            list-style: none;
-            padding-left: 0;
+        .forms li {
+            margin-bottom: 10px;
         }
         
-        .forms li
-        {
-            margin-bottom: 5px;
-        }
-        
-        #passStrength
-        {
-            width: 147px;
-        }
-        
-        #signupButton
-        {
-            width: 150px;
-            margin-left: 162px;
+        #submitButton {
+            width: 260px;
+            margin: 10px 0 0 0;
         }
     </style>
 </div>
