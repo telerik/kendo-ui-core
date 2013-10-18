@@ -1597,7 +1597,7 @@ kendo_module({
         _hover: function () {
         },
         _refreshBounds: function () {
-            var bounds = this.shapes.length == 1 ? this.shapes[0].visualBounds() : this.diagram.getBoundingBox(this.shapes, this._angle !== 0);
+            var bounds = this.shapes.length == 1 ? this.shapes[0].visualBounds() : this.diagram.getBoundingBox(this.shapes);
             if (!this._manipulating) {
                 this.bounds(bounds);
             }

@@ -1398,15 +1398,14 @@ kendo_module({
                 }
             }
         },
-        getBoundingBox: function (items, rotated) {
+        getBoundingBox: function (items) {
             var rect = Rect.empty(), di = this._getDiagramItems(items);
-            rotated = Utils.isUndefined(rotated) ? true : rotated;
-            if (di.shapes.length > 0) {
+           if (di.shapes.length > 0) {
                 var item = di.shapes[0];
-                rect = rotated === true ? item.rotatedBounds() : item.visualBounds();
+                rect = item.rotatedBounds();
                 for (var i = 1; i < di.shapes.length; i++) {
                     item = di.shapes[i];
-                    rect = rect.union(rotated === true ? item.rotatedBounds() : item.visualBounds());
+                    rect = rect.union(item.rotatedBounds());
                 }
             }
             return rect;
