@@ -79,6 +79,7 @@
         {
             "text": "Button",
             "name": "button",
+            "new": true,
             "documentation": "web/button",
             "spriteCssClass": "buttonIcon",
             "items": [
@@ -1152,6 +1153,7 @@
         {
              "text": "ProgressBar",
              "name": "progressbar",
+             "new": true,
              "spriteCssClass": "progressBarIcon",
              "items": [
                  {
