@@ -76,6 +76,23 @@
                 dialog.resize();
             });
 
+            test("resizing window updates widget options", 2, function() {
+                var initialSize = 200,
+                    resizeChange = 20,
+                    dialog = createWindow({width:initialSize, height: initialSize, position: {top: "0", left: "0"}}),
+                    userEvents = dialog.resizing._draggable.userEvents;
+
+                var handle = dialog.wrapper.find(".k-resize-se");
+                var start = handle.offset();
+
+                userEvents.press(start.left, start.top, handle[0]);
+                userEvents.move(initialSize + resizeChange, initialSize + resizeChange + parseInt(dialog.wrapper.css("padding-top"), 10), handle[0]);
+                userEvents.end(0, 0, handle[0]);
+                
+                equal(dialog.options.width, initialSize + resizeChange + "px");
+                equal(dialog.options.height, initialSize + resizeChange + "px");
+            });
+
         </script>
     </body>
 </html>

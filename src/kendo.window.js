@@ -100,7 +100,7 @@ kendo_module({
             var that = this,
                 wrapper,
                 offset = {},
-                visibility, display,
+                visibility, display, position,
                 isVisible = false,
                 content,
                 windowContent,
@@ -109,6 +109,7 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
             options = that.options;
+            position = options.position;
             element = that.element;
             content = options.content;
 
@@ -157,9 +158,17 @@ kendo_module({
                 that._dimensions();
             }
 
+            if (position.top !== undefined) {
+                position.top = position.top.toString();
+            }
+
+            if (position.left !== undefined) {
+                position.left = position.left.toString();
+            }
+
             wrapper.css({
-                top: options.position.top || offset.top || "",
-                left: options.position.left || offset.left || ""
+                top: position.top || offset.top || "",
+                left: position.left || offset.left || ""
             });
 
             if (options.pinned) {
@@ -1159,6 +1168,13 @@ kendo_module({
                     top: windowBottom - newHeight - containerOffset.top,
                     height: newHeight
                 });
+            }
+
+            if (newWidth) {
+                wnd.options.width = newWidth + "px";
+            }
+            if (newHeight) {
+                wnd.options.height = newHeight + "px";
             }
 
             wnd.resize();
