@@ -871,7 +871,7 @@ kendo_module({
             this.pane.destroy();
         },
 
-        _initTimezoneEditor: function(model, activator) {
+        _initTimezoneEditor: function(model) {
             var that = this;
             var pane = that.pane;
             var messages = that.options.messages;
@@ -879,7 +879,19 @@ kendo_module({
             var container = that.container.find(".k-scheduler-timezones");
             var checkbox = container.find(".k-timezone-toggle");
             var endTimezoneRow = container.find(".k-edit-label:last").add(container.find(".k-edit-field:last"));
-            var startTimezoneEditor = container.find("[data-role=timezoneeditor]:first").data("kendoMobileTimezoneEditor");
+            var startTimezoneChange = function(e) {
+                if (e.field === "startTimezone") {
+                    var value = model.startTimezone;
+
+                    checkbox.prop("disabled", !value);
+
+                    if (!value) {
+                        endTimezoneRow.hide();
+                        model.set("endTimezone", "");
+                        checkbox.prop("checked", false);
+                    }
+                }
+            };
 
             that._startTimezone = model.startTimezone || "";
             that._endTimezone = model.endTimezone || "";
@@ -901,6 +913,8 @@ kendo_module({
                         that._revertTimezones(model);
                     }
 
+                    model.unbind("change", startTimezoneChange);
+
                     var editView = pane.element.find("#edit").data("kendoMobileView");
 
                     var text = timezoneButtonText(model, messages.editor.noTimezone);
@@ -915,19 +929,7 @@ kendo_module({
                     model.set("endTimezone", "");
                 });
 
-                if (startTimezoneEditor) {
-                    startTimezoneEditor.bind("change", function() {
-                        var value = this.value();
-
-                        checkbox.prop("disabled", !value);
-
-                        if (!value) {
-                            endTimezoneRow.hide();
-                            model.set("endTimezone", "");
-                            checkbox.prop("checked", false);
-                        }
-                    });
-                }
+                model.bind("change", startTimezoneChange);
             }
 
             checkbox.prop("checked", model.endTimezone).prop("disabled", !model.endTimezone);
@@ -1223,8 +1225,6 @@ kendo_module({
                 for (var idx = 0, length = fields.length; idx < length; idx++) {
                     var field = fields[idx];
 
-                    console.log(field.field);
-
                     if (field.field === "startTimezone") {
                         html += '<div class="k-popup-edit-form k-scheduler-edit-form k-scheduler-timezones" style="display:none">';
                         html += '<div class="k-edit-form-container">';
@@ -1325,10 +1325,22 @@ kendo_module({
             var container = that.container.find(".k-scheduler-timezones");
             var checkbox = container.find(".k-timezone-toggle");
             var endTimezoneRow = container.find(".k-edit-label:last").add(container.find(".k-edit-field:last"));
-            var startTimezoneEditor = container.find("[data-role=mobiletimezoneeditor]:first").data("kendoMobileTimezoneEditor");
             var saveButton = container.find(".k-scheduler-savetimezone");
             var cancelButton = container.find(".k-scheduler-canceltimezone");
             var timezonePopup = that._timezonePopup;
+            var startTimezoneChange = function(e) {
+                if (e.field === "startTimezone") {
+                    var value = model.startTimezone;
+
+                    checkbox.prop("disabled", !value);
+
+                    if (!value) {
+                        endTimezoneRow.hide();
+                        model.set("endTimezone", "");
+                        checkbox.prop("checked", false);
+                    }
+                }
+            };
             var wnd;
 
             that._startTimezone = model.startTimezone;
@@ -1342,6 +1354,8 @@ kendo_module({
                     title: that.options.messages.editor.timezoneEditorTitle,
                     visible: false,
                     close: function(e) {
+                        model.unbind("change", startTimezoneChange);
+
                         if (e.userTriggered) {
                             that._revertTimezones(model);
                         }
@@ -1368,19 +1382,7 @@ kendo_module({
                     wnd.close();
                 });
 
-                if (startTimezoneEditor) {
-                    startTimezoneEditor.bind("change", function() {
-                        var value = this.value();
-
-                        checkbox.prop("disabled", !value);
-
-                        if (!value) {
-                            endTimezoneRow.hide();
-                            model.set("endTimezone", "");
-                            checkbox.prop("checked", false);
-                        }
-                    });
-                }
+                model.bind("change", startTimezoneChange);
             }
 
             checkbox.prop("checked", model.endTimezone).prop("disabled", !model.endTimezone);

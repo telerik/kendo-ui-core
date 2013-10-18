@@ -380,7 +380,7 @@
                 scheduler.dataSource.view()[0].isAllDay = false;
 
                 scheduler.editEvent(uid);
-                var editors = scheduler._editor.container.find("[data-role=timezoneeditor]");
+                var editors = scheduler._editor.container.find("[data-role=mobiletimezoneeditor]");
 
                 equal(editors.length, 2);
                 equal(editors.eq(0).attr("data-bind"), "value:startTimezone");
@@ -417,7 +417,7 @@
                 ok(view.find("input[type=checkbox]").prop("disabled"))
             });
 
-            test("Show second TimezoneEditor if model.endTimezone is defined", function() {
+            test("Show second mobiletimezoneeditor if model.endTimezone is defined", function() {
                 var scheduler = setup(),
                     model = scheduler.dataSource.data()[0],
                     uid = model.uid;
@@ -443,7 +443,7 @@
                 model.set("startTimezone", "America/Toronto");
 
                 var anchor = $(".k-timezone-button").click();
-                var editor = $("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+                var editor = $("[data-role=mobiletimezoneeditor]:first").data("kendoMobileTimezoneEditor");
 
                 equal(editor.value(), "America/Toronto");
             });
@@ -458,8 +458,9 @@
 
                 $(".k-timezone-button").click();
 
-                var editor = $("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+                var editor = $("[data-role=mobiletimezoneeditor]:first").data("kendoMobileTimezoneEditor");
                 editor.value("America/Toronto");
+                editor.trigger("change");
 
                 equal(model.startTimezone, "America/Toronto");
 
@@ -478,8 +479,9 @@
 
                 $(".k-timezone-button").click();
 
-                var editor = $("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+                var editor = $("[data-role=mobiletimezoneeditor]:first").data("kendoMobileTimezoneEditor");
                 editor.value("America/Toronto");
+                editor.trigger("change");
 
                 $(".k-scheduler-timezones").parents("[data-role=view]").find(".k-scheduler-update").click();
 
@@ -496,10 +498,11 @@
 
                 $(".k-timezone-button").click();
 
-                var editor = $("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+                var editor = $("[data-role=mobiletimezoneeditor]:first").data("kendoMobileTimezoneEditor");
                 var checkbox = $(".k-timezone-toggle");
 
                 editor.value("America/Toronto");
+                editor.trigger("change");
 
                 ok(!checkbox.prop("disabled"));
             });
@@ -514,16 +517,19 @@
 
                 $(".k-timezone-button").click();
 
-                var start = $("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
-                var end = $("[data-role=timezoneeditor]:last").data("kendoTimezoneEditor");
+                var start = $("[data-role=mobiletimezoneeditor]:first").data("kendoMobileTimezoneEditor");
+                var end = $("[data-role=mobiletimezoneeditor]:last").data("kendoMobileTimezoneEditor");
                 var checkbox = $(".k-timezone-toggle");
 
                 start.value("America/Toronto");
+                start.trigger("change");
 
                 checkbox.click();
                 end.value("America/Toronto");
+                end.trigger("change");
 
                 start.value("");
+                start.trigger("change");
 
                 ok(checkbox.prop("disabled"));
                 ok(!model.endTimezone);
@@ -540,14 +546,16 @@
 
                 $(".k-timezone-button").click();
 
-                var start = $("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
-                var end = $("[data-role=timezoneeditor]:last").data("kendoTimezoneEditor");
+                var start = $("[data-role=mobiletimezoneeditor]:first").data("kendoMobileTimezoneEditor");
+                var end = $("[data-role=mobiletimezoneeditor]:last").data("kendoMobileTimezoneEditor");
                 var checkbox = $(".k-timezone-toggle");
 
                 start.value("America/Toronto");
+                start.trigger("change");
 
                 checkbox.click();
                 end.value("America/Toronto");
+                end.trigger("change");
 
                 equal(model.endTimezone, "America/Toronto");
 
