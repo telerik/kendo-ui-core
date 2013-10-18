@@ -163,7 +163,7 @@
     <script src="../../src/kendo.diagram.extensions.js"></script>
     <script src="../../src/kendo.diagram.dom.js"></script>
 
-   <script src="jquery.hotkeys.js"></script>
+    <script src="jquery.hotkeys.js"></script>
 
     <script src="shapes.js"></script>
 </head>
@@ -256,7 +256,7 @@
         <div class="group">
             <a type="button" class="k-button" id="saveButton" title="Save As (CTRL + S)" href="#">Save</a>
             <input type="button" class="k-button" value="Load" title="Load (CTRL+O)"
-                   id="loadButton" onclick="document.getElementById('upload-field').click();"/>
+                   id="loadButton" onclick="loadDiagram();"/>
 
             <div id="upload-wrap">
                 <input type="file" id="upload-field"/>
@@ -308,14 +308,6 @@
         </svg>
     </div>
 
-
-
-
-
-
-
-
-
 </script>
 
 <script>
@@ -328,6 +320,17 @@ for (var i = 0; i < shapesSource.length; i++) {
     shape.background = 'steelblue';
     Shapes[shape.name] = shape;
 }
+
+
+function receivedText() {
+    //result = fr.result;
+    document.getElementById('editor').appendChild(document.createTextNode(fr.result))
+}
+
+function loadDiagram() {
+    document.getElementById('upload-field').click();
+}
+
 $(function () {
     function onload() {
         var seq = Shapes.SequentialData;
@@ -474,15 +477,10 @@ $(function () {
         return false;
     }
 
-
-    function loadDiagram() {
-        document.getElementById('upload-field').click();
-    }
-
     $("#saveButton").click(function (e) {
         saveDiagram();
     });
-    $("#loadButton").change(function (e) {
+    $('#upload-field').change(function (e) {
         var reader = new FileReader(),
                 f = e.target.files[0];
 
@@ -494,7 +492,8 @@ $(function () {
 
         // Read in the image file as a data URL.
         reader.readAsBinaryString(f);
-    });
+    })
+
     $("#selectAllButton").click(function (e) {
         diagram.select(true);
     });

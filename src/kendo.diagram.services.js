@@ -949,9 +949,9 @@ kendo_module({
      * Base class for connection routers.
      */
     var ConnectionRouterBase = kendo.Class.extend({
-        /*init: function (connection) {
-        },
-        route: function (connection) {
+        init: function () {
+        }
+        /*route: function (connection) {
         },
         hitTest: function (p) {
 
