@@ -725,6 +725,10 @@ kendo_module({
                         .add(that.content.find(">.k-virtual-scrollable-wrap"));
             }
 
+            if (that.pane) {
+                that.pane.destroy();
+            }
+
             element.off(NS);
 
             kendo.destroy(that.wrapper);
@@ -1172,11 +1176,15 @@ kendo_module({
                     that.editable.destroy();
                     that.editable = null;
                     that._editContainer = null;
+                    if (that.editView) {
+                        that.editView.purge();
+                        that.editView = null;
+                    }
                 }
             };
 
             if (that.editable) {
-                if (that._editMode() === "popup") {
+                if (that._editMode() === "popup" && !that._isMobile) {
                     that._editContainer.data("kendoWindow").bind("deactivate", destroy).close();
                 } else {
                     destroy();
@@ -1440,11 +1448,14 @@ kendo_module({
                 }
             }
 
-            html += '<div class="k-edit-buttons k-state-default">';
-            html += that._createButton({ name: "update", text: updateText, attr: attr }) + that._createButton({ name: "canceledit", text: cancelText, attr: attr });
-            html += '</div></div></div>';
+            var container;
 
-            var container = that._editContainer = $(html)
+            if (!that._isMobile) {
+                html += '<div class="k-edit-buttons k-state-default">';
+                html += that._createButton({ name: "update", text: updateText, attr: attr }) + that._createButton({ name: "canceledit", text: cancelText, attr: attr });
+                html += '</div></div></div>';
+
+                container = that._editContainer = $(html)
                 .appendTo(that.wrapper).eq(0)
                 .kendoWindow(extend({
                     modal: true,
@@ -1469,6 +1480,11 @@ kendo_module({
                         }
                     }
                 }, options));
+            } else {
+                html += "</div></div>";
+                that.editView = that.pane.append(html);
+                container = that._editContainer = that.editView.element.find(".k-popup-edit-form");
+            }
 
             that.editable = that._editContainer
                 .kendoEditable({
@@ -1477,11 +1493,11 @@ kendo_module({
                     clearContainer: false
                 }).data("kendoEditable");
 
-            var winObject = container.data("kendoWindow");
-            if (!options || !options.position) {
-                winObject.center();
+            if (!that._isMobile) {
+                container.data("kendoWindow").center().open();
+            } else {
+                that.pane.navigate(that.editView);
             }
-            winObject.open();
 
             that.trigger(EDIT, { container: container, model: model });
         },

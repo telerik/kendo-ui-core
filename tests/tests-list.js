@@ -276,6 +276,7 @@ var tests = [
     "grid/virtualscrolling.html",
     "grid/detailview.html",
     "grid/editing.html",
+    "grid/editing-mobile.html",
     "grid/editinginline.html",
     "grid/editingpopup.html",
     "grid/deleting.html",
