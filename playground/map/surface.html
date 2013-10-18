@@ -18,6 +18,11 @@
     <input type="button" value="Toggle ticks" onclick="toggleTicks()" />
     <input type="button" value="Toggle color" onclick="toggleColor()" />
     <input type="button" value="Stop" onclick="stop()" />
+    <select id="surfaceType" onchange="reset()">
+        <option value="svg">SVG</option>
+        <option value="canvas" selected="selected">Canvas</option>
+        <option value="vml" disabled="disabled">VML</option>
+    </select>
     <script>
     var SVG_NS = "http://www.w3.org/2000/svg",
         DEG_TO_RAD = Math.PI / 180;
@@ -64,9 +69,28 @@
     var clock = new Group();
     clock.append(hours, minutes, seconds, ticks);
 
-    var surface = new dataviz.svg.Surface($("#wrap")[0]);
-    //var surface = new dataviz.canvas.Surface($("#wrap")[0]);
-    surface.append(clock);
+    var interval;
+    var surface;
+    function reset() {
+        stop();
+
+        var surfaceType = $("#surfaceType").val();
+        surface = new dataviz[surfaceType].Surface($("#wrap")[0]);
+        surface.append(clock);
+
+        interval = setInterval(function() {
+            seconds.segments[1].anchor.rotate(center, -6);
+            minutes.segments[1].anchor.rotate(center, -0.1);
+            hours.segments[1].anchor.rotate(center, -0.0017);
+        }, 10);
+    }
+
+    function stop() {
+        if (interval) {
+            clearInterval(interval)
+            surface.clear();
+        }
+    }
 
     function addTicks() {
         for (var i = 0; i < 360; i += 30) {
@@ -82,7 +106,7 @@
     }
 
     function removeTicks() {
-        ticks.children.empty();
+        ticks.empty();
     }
 
     function toggleTicks() {
@@ -102,16 +126,8 @@
         }
     }
 
-    var interval = setInterval(function() {
-        seconds.segments[1].anchor.rotate(center, -6);
-        minutes.segments[1].anchor.rotate(center, -0.1);
-        hours.segments[1].anchor.rotate(center, -0.0017);
-    }, 10);
+    reset();
 
-    function stop() {
-        clearInterval(interval)
-        surface.clear();
-    }
     </script>
 </body>
 </html>

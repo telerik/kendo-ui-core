@@ -22,7 +22,12 @@
         append = dataviz.append,
         defined = dataviz.defined,
         round = dataviz.round,
-        renderTemplate = dataviz.renderTemplate;
+        renderTemplate = dataviz.renderTemplate,
+
+        drawing = dataviz.drawing,
+        BaseNode = drawing.BaseNode,
+        Group = drawing.Group,
+        Path = drawing.Path;
 
     // Constants ==============================================================
     var BUTT = "butt",
@@ -41,19 +46,19 @@
         TRANSPARENT = "transparent",
         UNDEFINED = "undefined";
 
-    // Canvas Stage ==========================================================
-    var Stage = Observable.extend({
+    // Canvas Surface ==========================================================
+    var Surface = Observable.extend({
         init: function(wrap, options) {
-            var stage = this;
+            var surface = this;
 
-            Observable.fn.init.call(stage);
+            Observable.fn.init.call(surface);
 
-            stage._display = stage.options.inline ? "inline" : "block";
+            surface._display = surface.options.inline ? "inline" : "block";
 
-            stage._root = new Node();
-            stage._root.bind(CHANGE, proxy(stage._invalidate, stage));
+            surface._root = new Node();
+            surface._root.observer = this;
 
-            stage._appendTo(wrap);
+            surface._appendTo(wrap);
         },
 
         options: {
@@ -66,11 +71,11 @@
         ],
 
         append: function() {
-            append(this._root.childNodes, Node.map(arguments));
+            this._root.load(arguments);
         },
 
         clear: function() {
-            this._root.childNodes.empty();
+            this._root.empty();
         },
 
         _template: renderTemplate(
@@ -80,12 +85,12 @@
         ),
 
         _appendTo: function(wrap) {
-            var stage = this,
-                options = stage.options,
+            var surface = this,
+                options = surface.options,
                 canvas = wrap.firstElementChild;
 
             if (!canvas || canvas.tagName.toLowerCase() !== "canvas") {
-                wrap.innerHTML = stage._template(stage);
+                wrap.innerHTML = surface._template(surface);
                 canvas = wrap.firstElementChild;
             } else {
                 $(canvas).css({
@@ -97,25 +102,25 @@
             canvas.width = $(canvas).width();
             canvas.height = $(canvas).height();
 
-            stage.element = canvas;
-            stage.ctx = canvas.getContext("2d");
+            surface.element = canvas;
+            surface.ctx = canvas.getContext("2d");
 
-            stage._invalidate();
+            surface.notify();
         },
 
-        _invalidate: function() {
-            var stage = this,
-                canvas = stage.element;
+        notify: function() {
+            var surface = this,
+                canvas = surface.element;
 
             canvas.width = canvas.width;
 
-            stage._root.renderTo(stage.ctx);
+            surface._root.renderTo(surface.ctx);
         }
     });
 
     // Nodes ===================================================================
-    var Node = ObservableObject.extend({
-        init: function(srcElement) {
+    var Node = BaseNode.extend({
+        __init: function(srcElement) {
             var node = this,
                 invalidate = proxy(node.invalidate, node);
 
@@ -143,55 +148,38 @@
             }
         },
 
-        invalidate: function() {
-            this.trigger(CHANGE);
+        load: function(elements) {
+            var node = this,
+                childNode,
+                srcElement,
+                children,
+                i;
+
+            for (i = 0; i < elements.length; i++) {
+                srcElement = elements[i];
+                children = srcElement.children;
+
+                if (srcElement instanceof Path) {
+                    childNode = new PathNode(srcElement);
+                } else {
+                    childNode = new Node(srcElement);
+                }
+
+                if (children && children.length > 0) {
+                    childNode.load(children);
+                }
+
+                node.childNodes.push(childNode);
+                childNode.observer = this;
+            }
         },
 
-        _syncChildren: function(e) {
-            var group = this;
-
-            // TODO: Test different scenarios for synchronization
-            if (e.action === "add") {
-                append(group.childNodes, Node.map(e.items));
-            } else if (e.action === "remove") {
-                group.childNodes.splice(e.index, e.items.length);
-            }
-
-            this.trigger(CHANGE);
+        unload: function(index, count) {
+            this.childNodes.splice(index, count);
         }
     });
 
-    Node.map = function(primitives) {
-        var result = [];
-
-        for (var i = 0; i < primitives.length; i++) {
-            var source = primitives[i];
-            var children = source.children;
-            var node;
-
-            if (source instanceof Path) {
-                node = new PathNode(source);
-            } else {
-                node = new Node(source);
-            }
-
-            if (children && children.length > 0) {
-                append(node.childNodes, Node.map(children));
-            }
-
-            result.push(node);
-        }
-
-        return result;
-    };
-
     var PathNode = Node.extend({
-        init: function(srcElement) {
-            Node.fn.init.call(this, srcElement);
-
-            this.srcElement.points.bind(CHANGE, proxy(this.invalidate, this));
-        },
-
         renderTo: function(ctx) {
             var path = this,
                 options = path.srcElement.options;
@@ -272,25 +260,25 @@
 
         renderPoints: function(ctx) {
             var path = this,
-                points = path.srcElement.points,
+                segments = path.srcElement.segments,
                 i,
-                p,
+                s,
                 options = path.srcElement.options,
                 rotation = options.rotation,
                 strokeWidth = options.stroke.width,
                 shouldAlign = options.align !== false && strokeWidth && strokeWidth % 2 !== 0,
                 align = shouldAlign ? alignToPixel : round;
 
-            if (points.length === 0 || !(options.fill || options.stroke)) {
+            if (segments.length === 0 || !(options.fill || options.stroke)) {
                 return;
             }
 
-            p = points[0];
-            ctx.moveTo(align(p.x, COORD_PRECISION), align(p.y, COORD_PRECISION));
+            s = segments[0];
+            ctx.moveTo(align(s.anchor.x, COORD_PRECISION), align(s.anchor.y, COORD_PRECISION));
 
-            for (i = 1; i < points.length; i++) {
-                p = points[i];
-                ctx.lineTo(align(p.x, COORD_PRECISION), align(p.y, COORD_PRECISION));
+            for (i = 1; i < segments.length; i++) {
+                s = segments[i];
+                ctx.lineTo(align(s.anchor.x, COORD_PRECISION), align(s.anchor.y, COORD_PRECISION));
             }
 
             if (path.closed) {
@@ -354,7 +342,7 @@
     // Exports ================================================================
     deepExtend(dataviz, {
         canvas: {
-            Stage: Stage,
+            Surface: Surface,
             Node: Node,
             PathNode: PathNode
         }

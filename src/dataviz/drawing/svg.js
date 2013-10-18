@@ -63,7 +63,7 @@
         },
 
         clear: function() {
-            this.rootNode.childNodes.empty();
+            this.rootNode.empty();
         },
 
         _template: renderTemplate(
@@ -113,6 +113,7 @@
 
         load: function(elements) {
             var node = this,
+                element = node.element,
                 childNode,
                 srcElement,
                 children,
@@ -133,7 +134,18 @@
                 }
 
                 node.childNodes.push(childNode);
+                if (element) {
+                    childNode.attachTo(element);
+                }
             }
+        },
+
+        unload: function(index, count) {
+            for (var i = index; i < count; i++) {
+                this.childNodes[i].detach();
+            }
+
+            this.childNodes.splice(index, count);
         },
 
         render: function() {
@@ -154,22 +166,6 @@
             }
 
             return output;
-        },
-
-        _childNodesChange: function(e) {
-            if (e.action === "itemchange") {
-                return;
-            }
-
-            for (var i = 0; i < e.items.length; i++) {
-                var node = e.items[i];
-
-                if (e.action === "add" && this.element) {
-                    node.attachTo(this.element);
-                } else if (e.action === "remove") {
-                    node.detach();
-                }
-            }
         }
     });
 
@@ -201,10 +197,11 @@
             var node = this;
 
             Node.fn.init.call(node, srcElement);
+        },
 
-            node.srcElement.segments.bind(CHANGE, function(){
-                node._syncSegments();
-            });
+        notify: function(e) {
+            this._syncSegments();
+            Node.fn.notify.call(this, e);
         },
 
         attributeMap: {

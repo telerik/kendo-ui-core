@@ -5,51 +5,61 @@
         noop = $.noop,
 
         kendo = window.kendo,
+        Class = kendo.Class,
         ObservableObject = kendo.data.ObservableObject,
         deepExtend = kendo.deepExtend,
 
-        dataviz = kendo.dataviz;
+        dataviz = kendo.dataviz,
+        append = dataviz.append;
 
     // Constants ==============================================================
     var CHANGE = "change";
 
     // Stage node ============================================================
-    var BaseNode = ObservableObject.extend({
+    var BaseNode = Class.extend({
         init: function(srcElement) {
             var node = this;
 
             node.childNodes = [];
-            ObservableObject.fn.init.call(node, node);
 
-            node.childNodes.bind(CHANGE, function(e) { node._childNodesChange(e); });
+            this.observer = null;
 
             if (srcElement) {
                 node.srcElement = srcElement;
+                srcElement.observer = node;
+            }
+        },
 
-                if (srcElement.options) {
-                    srcElement.options.bind(CHANGE, function(e) { node._syncOptions(e); });
-                }
+        notify: function(e) {
+            if (e.event === "childrenChange") {
+                this._syncChildren(e);
+            }
 
-                if (srcElement.children) {
-                    srcElement.children.bind(CHANGE, function(e) { node._syncChildren(e); });
-                }
+            if (e.event === "optionsChange") {
+                this._syncOptions(e);
+            }
+
+            if (this.observer) {
+                this.observer.notify(e);
             }
         },
 
         load: noop,
 
-        _childNodesChange: noop,
+        unload: noop,
+
+        empty: function() {
+            this.unload(0, this.childNodes.length);
+        },
 
         _syncOptions: noop,
 
         _syncChildren: function(e) {
-            var node = this;
-
-            // TODO: Test different scenarios for synchronization
             if (e.action === "add") {
-                node.load(e.items);
+                // TODO: Support mid-array inserts
+                this.load(e.items);
             } else if (e.action === "remove") {
-                node.childNodes.splice(e.index, e.items.length);
+                this.unload(e.index, e.items.length);
             }
         }
     });

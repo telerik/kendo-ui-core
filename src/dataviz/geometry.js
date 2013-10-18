@@ -5,9 +5,10 @@
 
     // Imports ================================================================
     var math = Math,
+        noop = $.noop,
 
         kendo = window.kendo,
-        Observable = kendo.Observable,
+        Class = kendo.Class,
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
@@ -15,14 +16,23 @@
         rad = util.rad;
 
     // Geometrical primitives =================================================
-    var Point = Observable.extend({
+    var Point = Class.extend({
         init: function(x, y) {
-            var point = this;
+            this.x = x || 0;
+            this.y = y || 0;
 
-            point.x = x || 0;
-            point.y = y || 0;
+            this.observer = null;
+        },
 
-            Observable.fn.init.call(point, this);
+        notify: notifyObserver,
+
+        set: function(field, value) {
+            this[field] = value;
+            this.notify();
+        },
+
+        get: function(field) {
+            return this[field];
         },
 
         equals: function(point) {
@@ -34,83 +44,63 @@
         },
 
         clone: function() {
-            var point = this;
-
-            return new Point(point.x, point.y);
-        },
-
-        set: function(field, value) {
-            this[field] = value;
-            this.trigger(CHANGE);
-        },
-
-        get: function(field) {
-            return this[field];
+            return new Point(this.x, this.y);
         },
 
         rotate: function(center, degrees) {
-            var point = this,
-                theta = rad(degrees),
-                cosT = math.cos(theta),
-                sinT = math.sin(theta),
-                cx = center.x,
-                cy = center.y,
-                x = point.x,
-                y = point.y;
+            var theta = rad(degrees);
+            var cosT = math.cos(theta);
+            var sinT = math.sin(theta);
+            var cx = center.x;
+            var cy = center.y;
+            var x = this.x;
+            var y = this.y;
 
-            point.x = cx + (x - cx) * cosT + (y - cy) * sinT;
-            point.y = cy + (y - cy) * cosT - (x - cx) * sinT;
+            this.x = cx + (x - cx) * cosT + (y - cy) * sinT;
+            this.y = cy + (y - cy) * cosT - (x - cx) * sinT;
 
-            point.trigger(CHANGE);
+            this.notify();
 
-            return point;
+            return this;
         },
 
         multiply: function(a) {
-            var point = this;
+            this.x *= a;
+            this.y *= a;
 
-            point.x *= a;
-            point.y *= a;
+            this.notify();
 
-            point.trigger(CHANGE);
-
-            return point;
+            return this;
         },
 
         transform: function(mx) {
-            var point = this;
+            this.x = mx.a * this.x + mx.c * this.y + mx.e;
+            this.y = mx.b * this.x + mx.d * this.y + mx.f;
 
-            point.x = mx.a * point.x + mx.c * point.y + mx.e;
-            point.y = mx.b * point.x + mx.d * point.y + mx.f;
+            this.notify();
 
-            point.trigger(CHANGE);
-
-            return point;
+            return this;
         },
 
         distanceTo: function(other) {
-            var dx = this.x - other.x,
-                dy = this.y - other.y;
+            var dx = this.x - other.x;
+            var dy = this.y - other.y;
 
             return math.sqrt(dx * dx + dy * dy);
         }
     });
 
-    var Rect = Observable.extend({
+    var Rect = Class.extend({
         init: function(p0, p1) {
-            var rect = this,
-                change = function() {
-                    rect.trigger(CHANGE);
-                };
+            this.p0 = p0 || new Point();
+            this.p1 = p1 || new Point();
 
-            rect.p0 = p0 || new Point();
-            rect.p1 = p1 || new Point();
-
-            rect.p0.bind(CHANGE, change);
-            rect.p1.bind(CHANGE, change);
-
-            Observable.fn.init.call(rect, this);
+            this.observer = null;
+            this.p0.observer = this;
+            this.p1.observer = this;
         },
+
+        notify: notifyObserver,
 
         width: function() {
             return this.p1.x - this.p0.x;
@@ -121,19 +111,16 @@
         }
     });
 
-    var Circle = Observable.extend({
+    var Circle = Class.extend({
         init: function(center, radius) {
-            var circle = this;
+            this.center = center || new Point();
+            this.radius = radius || 0;
 
-            circle.center = center || new Point();
-            circle.radius = radius || 0;
-
-            circle.center.bind(CHANGE, function() {
-                circle.trigger(CHANGE);
-            });
-
-            Observable.fn.init.call(circle, this);
+            this.observer = null;
+            this.center.observer = this;
         },
+
+        notify: notifyObserver,
 
         equals: function(other) {
             return  other &&
@@ -142,18 +129,16 @@
         },
 
         clone: function() {
-            var circle = this;
-
-            return new Circle(circle.center.clone(), circle.radius);
+            return new Circle(this.center.clone(), this.radius);
         },
 
         set: function(field, value) {
-            this[field] = value;
-            this.trigger(CHANGE);
+            this.radius = value;
+            this.notify();
         },
 
         get: function(field) {
-            return this[field];
+            return this.radius;
         },
 
         pointAt: function(angle) {
@@ -168,6 +153,11 @@
         }
     });
 
+    function notifyObserver() {
+        if (this.observer) {
+            this.observer.notify({ event: "change" });
+        }
+    }
 
     // Exports ================================================================
     deepExtend(dataviz, {

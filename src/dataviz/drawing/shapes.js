@@ -23,21 +23,47 @@
         rad = util.rad;
 
     // Drawing primitives =====================================================
-    var Group = Observable.extend({
+    var Group = Class.extend({
         init: function() {
-            this.children = new ObservableArray([], Observable);
-            Observable.fn.init.call(this);
+            var group = this;
+
+            group.observer = null;
+            group.children = [];
+        },
+
+        notify: function(e) {
+            if (this.observer) {
+                this.observer.notify(e);
+            }
         },
 
         append: function() {
             append(this.children, arguments);
+            this.notify({ event: "childrenChange", action: "add", items: arguments });
+        },
+
+        empty: function() {
+            this.notify({ event: "childrenChange", action: "remove", index: 0, items: this.children });
+            this.children = [];
         }
     });
 
-    var Shape = Observable.extend({
+    var Shape = Class.extend({
         init: function(options) {
-            this.options = new ObservableObject(options || {});
-            Observable.fn.init.call(this);
+            var shape = this;
+
+            shape.observer = null;
+            shape.options = new ObservableObject(options || {});
+            shape.options.bind(CHANGE, function(e) {
+                e.event = "optionsChange";
+                shape.notify(e);
+            });
+        },
+
+        notify: function(e) {
+            if (this.observer) {
+                this.observer.notify(e);
+            }
         },
 
         fill: function(color, opacity) {
@@ -78,30 +104,34 @@
         }
     });
 
-    var Segment = Observable.extend({
+    var Segment = Class.extend({
         init: function(anchor, controlIn, controlOut) {
-            var segment = this,
-                bubbleChange = function(e) {
-                    segment.trigger("change");
-                };
+            var segment = this;
 
             segment.anchor = anchor || new Point();
             segment.controlIn = controlIn || new Point();
             segment.controlOut = controlOut || new Point();
 
-            segment.anchor.bind("change", bubbleChange);
-            segment.controlIn.bind("change", bubbleChange);
-            segment.controlOut.bind("change", bubbleChange);
+            segment.observer = null;
+            segment.anchor.observer = this;
+            segment.controlIn.observer = this;
+            segment.controlOut.observer = this;
+        },
 
-            Observable.fn.init.call(segment);
+        notify: function(e) {
+            if (this.observer) {
+                this.observer.notify(e);
+            }
         }
     });
 
     var Path = Shape.extend({
         init: function(points, options) {
             var path = this;
-            path.segments = new ObservableArray([], Segment);
 
+            path.segments = [];
+
+            path.observer = null;
             if (points) {
                 for (var i = 0; i < points.length; i++) {
                     path.lineTo(points[i].x, points[i].y);
@@ -117,9 +147,11 @@
         },
 
         lineTo: function(x, y) {
-            this.segments.push(
-                new Segment(new Point(x, y))
-            );
+            var segment = new Segment(new Point(x, y));
+            segment.observer = this;
+
+            this.segments.push(segment);
+            this.notify();
         }
     });
 
