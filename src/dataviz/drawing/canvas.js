@@ -55,7 +55,7 @@
             surface._display = surface.options.inline ? "inline" : "block";
 
             surface._root = new Node();
-            surface._root.observer = this;
+            surface._root.parent = this;
 
             surface._appendTo(wrap);
         },
@@ -104,10 +104,10 @@
             surface.element = canvas;
             surface.ctx = canvas.getContext("2d");
 
-            surface.notify();
+            surface.change();
         },
 
-        notify: function() {
+        change: function() {
             var surface = this,
                 canvas = surface.element;
 
@@ -150,13 +150,13 @@
                 }
 
                 node.childNodes.push(childNode);
-                childNode.observer = this;
+                childNode.parent = this;
             }
         },
 
         unload: function(index, count) {
             for (var i = index; i < count; i++) {
-                this.childNodes[i].observer = null;
+                this.childNodes[i].parent = null;
             }
 
             this.childNodes.splice(index, count);

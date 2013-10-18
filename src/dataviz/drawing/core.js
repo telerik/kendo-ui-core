@@ -22,7 +22,7 @@
 
             node.childNodes = [];
 
-            this.observer = null;
+            this.parent = null;
 
             if (srcElement) {
                 node.srcElement = srcElement;
@@ -39,8 +39,12 @@
                 this._syncOptions(e);
             }
 
-            if (this.observer) {
-                this.observer.notify({ event: "change" });
+            this.change();
+        },
+
+        change: function() {
+            if (this.parent) {
+                this.parent.change();
             }
         },
 

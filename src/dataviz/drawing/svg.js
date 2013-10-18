@@ -142,7 +142,7 @@
         unload: function(index, count) {
             for (var i = index; i < count; i++) {
                 this.childNodes[i].detach();
-                this.childNodes[i].observer = null;
+                this.childNodes[i].parent = null;
             }
 
             this.childNodes.splice(index, count);
