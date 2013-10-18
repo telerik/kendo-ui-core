@@ -1551,6 +1551,7 @@ p#copy
 
 .widgetGrid .mobile-framework
 {
+    min-height: 178px;
     width:190px;
     background:rgba(221, 221, 221, .25);
 }
@@ -1559,7 +1560,7 @@ p#copy
 {
     width:500px;
     position: relative;
-    min-height: 159px;
+    min-height: 178px;
 }
 
 .widgetGrid h2
@@ -1641,7 +1642,7 @@ p#copy
 .widgetGrid .qrcodes
 {
     width:180px;
-    min-height: 78px;
+    min-height: 100px;
     background:rgba(221, 221, 221, 0.33);
     margin-left: -180px;
     margin-top: 78px;
@@ -1656,7 +1657,7 @@ p#copy
 .widgetGrid .financial
 {
     width:150px;
-    min-height: 159px;
+    min-height: 178px;
     background:rgba(221, 221, 221, 0.15);
 }
 
@@ -1670,7 +1671,7 @@ p#copy
 .wideCol.dashboards ul,
 .narrowCol.dashboards ul
 {
-    margin-top:25px;
+    margin-top:35px;
 }
 
 .dashboards li
@@ -1719,7 +1720,7 @@ p#copy
     float:left;
     width:84px;
     margin-right: 10px;
-    padding-bottom:73px;
+    padding-bottom:88px;
     text-align:center;
 }
 
