@@ -40,7 +40,7 @@ kendo_module({
         extend = $.extend,
         proxy = $.proxy,
         HUNDREDPERCENT = 100,
-        DEFAULTANIMATIONDURATION = 2000,
+        DEFAULTANIMATIONDURATION = 400,
         templates = {
             progressStatus: "<span class='k-progress-status-wrap'><span class='k-progress-status'></span></span>"
         };
@@ -124,7 +124,6 @@ kendo_module({
             var container = that.wrapper = that.element;
             var options = that.options;
             var orientation = options.orientation;
-            var progressStatus;
             var initialStatusValue;
 
             container.addClass("k-widget " + KPROGRESSBAR);
@@ -147,15 +146,15 @@ kendo_module({
                 that._addChunkProgressWrapper();
             } else {
                 if (options.showStatus){
-                    progressStatus = that.wrapper.prepend(templates.progressStatus)
+                    that.progressStatus = that.wrapper.prepend(templates.progressStatus)
                                                  .find("." + KPROGRESSSTATUS);
 
                     initialStatusValue = (options.value !== false) ? options.value : options.min;
 
                     if (options.type === PROGRESSTYPE.VALUE) {
-                        progressStatus.text(initialStatusValue);
+                        that.progressStatus.text(initialStatusValue);
                     } else {
-                        progressStatus.text(that._calculatePercentage(initialStatusValue) + "%");
+                        that.progressStatus.text(that._calculatePercentage(initialStatusValue) + "%");
                     }
                 }
             }
@@ -172,7 +171,7 @@ kendo_module({
 
             if (value === undefined) {
                 return options.value;
-            } else if (!that.wrapper.hasClass(KSTATEDISABLED)) {
+            } else {
 
                 if (typeof value !== BOOLEAN) {
                     rounded = math.round(value);
@@ -271,11 +270,11 @@ kendo_module({
             var animationCssOptions = { };
 
             if (progressWrapper.length === 0) {
-                progressWrapper = that._addRegularProgressWrapper();
+                that._addRegularProgressWrapper();
             }
 
             animationCssOptions[that._progressProperty] = percentage + "%";
-            progressWrapper.animate(animationCssOptions, {
+            that.progressWrapper.animate(animationCssOptions, {
                 duration: animationDuration,
                 start: proxy(that._onProgressAnimateStart, that),
                 progress: proxy(that._onProgressAnimate, that),
@@ -298,32 +297,13 @@ kendo_module({
         _onProgressAnimate: function(e) {
             var that = this;
             var options = that.options;
-            var oldValue = (that._oldValue !== undefined) ? that._oldValue : options.min;
             var progressInPercent = parseFloat(e.elem.style[that._progressProperty], 10);
-            var progressStatusHolder = that.wrapper.find("." + KPROGRESSSTATUS);
-            var progressWrapper = that.wrapper.find("." + KPROGRESSWRAPPER);
             var progressStatusWrapSize;
-            var progressValue;
 
             if (options.showStatus) {
-                progressStatusWrapSize = 10000 / parseFloat(progressWrapper[0].style[that._progressProperty]);
+                progressStatusWrapSize = 10000 / parseFloat(that.progressWrapper[0].style[that._progressProperty]);
 
-                progressWrapper.find(".k-progress-status-wrap").css(that._progressProperty, progressStatusWrapSize + "%");
-
-                if (options.type === PROGRESSTYPE.VALUE) {
-                    progressValue = math.floor(options.min + (progressInPercent * that._onePercent));
-
-                    if (((that._progressDirection === BACKWARD && progressValue <= oldValue) ||
-                         (that._progressDirection === FORWARD && progressValue >= oldValue))) {
-
-                        progressStatusHolder.text(progressValue);
-                    }
-                } else {
-                    progressInPercent = math.round(progressInPercent);
-                    if (progressInPercent < HUNDREDPERCENT) {
-                        progressStatusHolder.text(progressInPercent + "%");
-                    }
-                }
+                that.progressWrapper.find(".k-progress-status-wrap").css(that._progressProperty, progressStatusWrapSize + "%");
             }
 
             if (options.type !== PROGRESSTYPE.CHUNK && progressInPercent <= 98) {
@@ -334,14 +314,14 @@ kendo_module({
         _onProgressAnimateComplete: function(currentValue) {
             var that = this;
             var options = that.options;
-            var progressWrapper = that.wrapper.find("." + KPROGRESSWRAPPER);
             var progressStatusHolder = that.wrapper.find("." + KPROGRESSSTATUS);
-            var progressWrapperSize = parseFloat(progressWrapper[0].style[that._progressProperty]);
+            var progressWrapperSize = parseFloat(that.progressWrapper[0].style[that._progressProperty]);
 
             if (options.type !== PROGRESSTYPE.CHUNK && progressWrapperSize > 98) {
-                progressWrapper.addClass(KPROGRESSBARCOMPLETE);
+                that.progressWrapper.addClass(KPROGRESSBARCOMPLETE);
             }
 
+            //TODO check or move
             if (options.showStatus) {
                 if (options.type === PROGRESSTYPE.VALUE) {
                     progressStatusHolder.text(currentValue);
@@ -351,7 +331,7 @@ kendo_module({
             }
 
             if (currentValue === options.min) {
-                progressWrapper.hide();
+                that.progressWrapper.hide();
             }
         },
 
@@ -425,13 +405,13 @@ kendo_module({
         _addRegularProgressWrapper: function() {
             var that = this;
 
-            that.wrapper.append("<div class='" + KPROGRESSWRAPPER + "'></div>");
+            that.progressWrapper = $("<div class='" + KPROGRESSWRAPPER + "'></div>").appendTo(that.wrapper);
 
             if (that.options.showStatus) {
                 that._addProgressStatus();
-            }
 
-            return $("." + KPROGRESSWRAPPER, that.wrapper);
+                that.progressStatus = that.wrapper.find("." + KPROGRESSSTATUS);
+            }
         },
 
         _addProgressStatus: function() {

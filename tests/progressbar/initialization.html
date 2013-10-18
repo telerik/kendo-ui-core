@@ -166,7 +166,7 @@
 
             test("Animation duration is equal to default animation duration when not specified", function() {
                 var pb = new ProgressBar(container, { }),
-                    defaultAnimationDuration = 2000;
+                    defaultAnimationDuration = 400;
 
                 equal(pb._animation.duration, defaultAnimationDuration);
             });
@@ -430,6 +430,102 @@
 
                 ok(true);
             });
+
+            test("progressStatus field is set when showStatus is true and value is equal to min (type='value')", function() {
+                var pb = new ProgressBar(container, {
+                    type: "value"
+                });
+
+                equal(pb.progressStatus.length, 1);
+            });
+
+            test("progressStatus field is set when showStatus is true and value is equal to min (type='percent')", function() {
+                var pb = new ProgressBar(container, {
+                    type: "percent"
+                });
+
+                equal(pb.progressStatus.length, 1);
+            });
+
+            test("progressStatus field is set when showStatus is true and value is not equal to min (type='value')", function() {
+                var pb = new ProgressBar(container, {
+                    type: "value",
+                    min: 0,
+                    max: 10,
+                    value: 5
+                });
+
+                equal(pb.progressStatus.length, 2);
+            });
+
+            test("progressStatus field is set when showStatus is true and value is not equal to min (type='percent')", function() {
+                var pb = new ProgressBar(container, {
+                    type: "percent",
+                    min: 0,
+                    max: 10,
+                    value: 5
+                });
+
+                equal(pb.progressStatus.length, 2);
+            });
+
+
+            test("progressStatus field is not set when type is 'chunk'", function() {
+                var pb = new ProgressBar(container, {
+                    type: "chunk"
+                });
+
+                ok(!pb.hasOwnProperty("progressStatus"));
+            });
+
+            test("progressWrapper field is not set when type is 'chunk'", function() {
+                var pb = new ProgressBar(container, {
+                    type: "chunk"
+                });
+
+                ok(!pb.hasOwnProperty("progressWrapper"));
+            });
+
+            test("progressWrapper field is not set when value is equal to min (type='value')", function() {
+                var pb = new ProgressBar(container, {
+                    type: "value",
+                    min: 5,
+                    value: 5
+                });
+
+                ok(!pb.hasOwnProperty("progressWrapper"));
+            });
+
+            test("progressWrapper field is not set when value is equal to min (type='percent')", function() {
+                var pb = new ProgressBar(container, {
+                    type: "percent",
+                    min: 5,
+                    value: 5
+                });
+
+                ok(!pb.hasOwnProperty("progressWrapper"));
+            });
+
+            test("progressWrapper field is set when value is  not equal to min (type='value')", function() {
+                var pb = new ProgressBar(container, {
+                    type: "value",
+                    min: 5,
+                    value: 10
+                });
+
+                ok(pb.hasOwnProperty("progressWrapper"));
+            });
+
+            test("progressWrapper field is set when value is  not equal to min (type='percent')", function() {
+                var pb = new ProgressBar(container, {
+                    type: "percent",
+                    min: 5,
+                    value: 10
+                });
+
+                ok(pb.hasOwnProperty("progressWrapper"));
+            });
+
 
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------

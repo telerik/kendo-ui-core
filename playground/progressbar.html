@@ -346,79 +346,6 @@
 </style>
 </head>
     <body>
-        <!-- <div id="dataattr">
-             <div data-role="progressbar"
-                 data-min="0" 
-                 data-max="200"
-                 data-bind="enabled: isEnabled,
-                            visible: isVisible,
-                            value: progressValue,
-                            events: { start: onStart,
-                                      change: onChange,
-                                      complete: onComplete}"></div>
-            <script>
-                var viewModel = kendo.observable({
-                    progressValue: 10,
-                    isEnabled: true,
-                    isVisible: true,
-                    onStart: function () {
-                        console.log("event :: start (" + this.get("progressValue") + ")");
-                    },
-                    onChange: function () {
-                        console.log("event :: change (" + this.get("progressValue") + ")");
-                    },
-                    onComplete: function () {
-                        console.log("event :: complete (" + this.get("progressValue") + ")");
-                    }
-                });
-
-                kendo.bind($("#dataattr"), viewModel);
-            </script>
-        </div> -->
-        <div class="k-rtl">
-            <p>reverse: false</p>
-            <div id="rtlProgressBar"></div>
-
-            <p>reverse: true</p>
-            <div id="rtlchunkProgressBar"></div>
-        </div>
-
-        <div>
-           <div id="pb1"></div>
-           <div id="pb2"></div>
-           <div id="pb3"></div>
-           <div id="pb4"></div>
-           <div id="pb5"></div>
-           <div id="pb6"></div>
-           <br><br><br>
-           <script>
-
-            $(function(){
-                // $("#rtlProgressBar").kendoProgressBar({ type: "chunk", chunkCount: 4, orientation: "horizontal", reverse: false });
-                // $("#rtlchunkProgressBar").kendoProgressBar({ type: "chunk", chunkCount: 4, orientation: "horizontal", reverse: true });
-
-                // var pb1 = $("#pb1").kendoProgressBar({ value: 10, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
-                // var pb2 = $("#pb2").kendoProgressBar({ value: 70, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
-                // var pb3 = $("#pb3").kendoProgressBar({ value: 30, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
-                // var pb4 = $("#pb4").kendoProgressBar({ value: 90, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
-                // var pb5 = $("#pb5").kendoProgressBar({ value: 20, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
-                // var pb6 = $("#pb6").kendoProgressBar({ value: 50, showStatus: false, orientation: "vertical", animation: {duration: 250}}).data("kendoProgressBar");
-
-                // setInterval(function(){
-                //     pb1.value(getRandom(0, 100));
-                //     pb2.value(getRandom(0, 100));
-                //     pb3.value(getRandom(0, 100));
-                //     pb4.value(getRandom(0, 100));
-                //     pb5.value(getRandom(0, 100));
-                //     pb6.value(getRandom(0, 100));
-                // }, 20);
-            });
-
-            function getRandom(bottom, top) {
-                return Math.floor( Math.random() * ( 1 + top - bottom ) ) + bottom;
-            }
-           </script>
-        </div>
         <div id="progressbar"></div>
         <button class='k-button setValue'>Start</button>
         <br><br><br>
@@ -428,22 +355,18 @@
         <br><br><br>
         <div id="progressbar-vert"></div>
         <div id="progressbar-chunk-vert"></div>
-        <br><br><br>
-
          <script>
             $("#progressbar").kendoProgressBar({
-                min: 100,
-                  max: 500,
-                  value: 100,
-                  type: "chunk",
-                  orientation: "vertical",
+                  min: 0,
+                  max: 100,
+                  value: 0,
                   reverse: true,
                   complete: function(e) {
                     console.log("Progress completed");
                   },
                   animation: {
-                    duration: 600
-                  }
+                    duration: 400
+                  },
                 // min: 220,
                 // max: 300,
                 // value: 0,
@@ -451,10 +374,11 @@
                 // showStatus: true,
                 // type: "percent",
                 // reverse: false,
-                // start: function(e) {
-                //     console.log("Start event. Value: " + e.value);
-                // },
+                start: function(e) {
+                    console.log("Start event. Value: " + e.value);
+                }
                 // change: function(e) {
+                //     $("#asdf").text(e.value);
                 //     console.log("Change event. Value: " + e.value);
                 // },
                 // complete: function(e) {
@@ -473,7 +397,7 @@
                 max: 10,
                 value: false,
                 enable: true,
-                reverse: false,
+                animation: false,
                 start: function(e) {
                     console.log("Start event. Value: " + e.value);
                 },
@@ -506,7 +430,7 @@
             $("#progressbar-vert").kendoProgressBar({
                 orientation: "vertical",
                 value: 0,
-                type: "value",
+                type: "percent",
                 start: function(e) {
                     console.log("Start event. Value: " + e.value);
                 },
@@ -543,9 +467,7 @@
                     } else {
                         clearInterval(interval);
                     }
-                }, 100);
-
-                //$("#progressbar-rev").data("kendoProgressBar").value(20);
+                }, 400);
             });
 
             var pb = $("#progressbar").data("kendoProgressBar");
