@@ -1135,7 +1135,7 @@
                         recurrenceRule: "FREQ=MONTHLY"
                     })]);
 
-                var data = dataSource.expand(new Date(2013, 1, 2), new Date(2013, 4, 31));
+                var data = dataSource.expand(new Date(2013, 1, 4), new Date(2013, 4, 31));
                 var view = dataSource.view();
 
                 deepEqual(data[0].start, new Date(2013, 2, 1, 16, 30));

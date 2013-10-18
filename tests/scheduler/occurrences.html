@@ -1406,6 +1406,20 @@
                 equal(events[2].endTime.getHours(), 4);
             });
 
+            test("WEEKLY occurrence expands correctly when period is between event length", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date("2013/6/13 17:00"),
+                    end: new Date("2013/6/15 18:30"),
+                    recurrenceRule: "FREQ=WEEKLY"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(2013, 5, 14), new Date(2013, 5, 15));
+
+                equal(events.length, 1);
+            });
+
             module("MONTHLY Occurrences");
             test("MONTHLY method returns one event for each new month", function() {
                 var schedulerEvent = new SchedulerEvent({

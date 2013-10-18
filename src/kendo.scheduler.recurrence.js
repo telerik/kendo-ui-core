@@ -914,7 +914,7 @@ kendo_module({
         var rule = parseRule(event.recurrenceRule),
             startTime, endTime, endDate,
             hours, minutes, seconds,
-            durationMS, startPeriod,
+            durationMS, startPeriod, inPeriod,
             ruleStart, ruleEnd,
             useEventStart, freqName,
             exceptionDates,
@@ -1003,10 +1003,12 @@ kendo_module({
         freq.limit(start, end, rule);
 
         while (start <= end) {
-            if (start >= startPeriod && !isException(exceptionDates, start, zone) || positions) {
-                endDate = new Date(start);
-                setTime(endDate, durationMS);
+            endDate = new Date(start);
+            setTime(endDate, durationMS);
 
+            inPeriod = start >= startPeriod || endDate > startPeriod;
+
+            if (inPeriod && !isException(exceptionDates, start, zone) || positions) {
                 endTime = new Date(rule._startTime);
                 setTime(endTime, durationMS);
 
