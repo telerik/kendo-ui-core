@@ -371,7 +371,7 @@ kendo_module({
                 }
             }
         },
-        rotate: function (angle) { // we asume the center is always the center of the shape.
+        rotate: function (angle, center) { // we asume the center is always the center of the shape.
             var rotate = this.visual.rotate();
             if (angle !== undefined) {
                 var b = this.bounds();
@@ -1353,13 +1353,15 @@ kendo_module({
                 }
             }
         },
-        getBoundingBox: function (items) {
+        getBoundingBox: function (items, rotated) {
             var rect = Rect.empty(), di = this._getDiagramItems(items);
+            rotated = Utils.isUndefined(rotated) ? true : rotated;
             if (di.shapes.length > 0) {
-                rect = di.shapes[0].rotatedBounds();
+                var item = di.shapes[0];
+                rect = rotated === true ? item.rotatedBounds() : item.visualBounds();
                 for (var i = 1; i < di.shapes.length; i++) {
-                    var item = di.shapes[i];
-                    rect = rect.union(item.rotatedBounds());
+                    item = di.shapes[i];
+                    rect = rect.union(rotated === true ? item.rotatedBounds() : item.visualBounds());
                 }
             }
             return rect;
