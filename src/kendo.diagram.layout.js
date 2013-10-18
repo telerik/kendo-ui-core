@@ -3854,7 +3854,7 @@ kendo_module({
                 for (i = 0; i < diagramOrGraphOrNodes.links.length; i++) {
                     link = diagramOrGraphOrNodes.links[i];
                     conn = link.associatedConnection;
-                    this.linkMap.set(con.visual.native.id, link.points());
+                    this.linkMap.set(conn.visual.native.id, link.points());
                 }
             }
             else if (diagramOrGraphOrNodes instanceof Array) {

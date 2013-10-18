@@ -22,7 +22,6 @@ kendo_module({
         CompositeTransform = diagram.CompositeTransform,
         Rect = diagram.Rect,
         Path = diagram.Path,
-        Line = diagram.Line,
         DeleteShapeUnit = diagram.DeleteShapeUnit,
         DeleteConnectionUnit = diagram.DeleteConnectionUnit,
         TextBlock = diagram.TextBlock,
@@ -56,8 +55,6 @@ kendo_module({
         RIGHT = "Right",
         LEFT = "Left",
         BOTTOM = "Bottom",
-        DEFAULTCONNECTORNAMES = [TOP, RIGHT, BOTTOM, LEFT, AUTO],
-        HITTESTDISTANCE = 10,
         bindings = {
             text: "dataTextField",
             url: "dataUrlField",
@@ -474,8 +471,9 @@ kendo_module({
             else if (nameOrPoint instanceof Point) {
                 return closestConnector(nameOrPoint, this);
             }
-            else
+            else {
                 return this.connectors.length ? this.connectors[0] : null;
+            }
         },
         getPosition: function (side) {
             var b = this.bounds(),
@@ -874,10 +872,12 @@ kendo_module({
                 var point = points[i];
                 data += " L" + pr(point);
             }
-            return data + " L" + pr(end)
+            return data + " L" + pr(end);
         },
         _refreshPath: function () {
-            if (Utils.isUndefined(this.path)) return;
+            if (Utils.isUndefined(this.path)) {
+                return;
+            }
             this._drawPath(this._calcPathData());
             this.bounds(this._router.getBounds());
         },
@@ -1519,7 +1519,7 @@ kendo_module({
             }
         },
         paste: function () {
-            var offsetX, offsetY, item, copied, connector, shape;
+            var offsetX, offsetY, item, copied, connector, shape, i;
             if (this._clipboard.length > 0) {
                 var mapping = new Dictionary();
 
@@ -1527,9 +1527,11 @@ kendo_module({
                 offsetY = this._copyOffset * this.options.copy.offsetY;
                 this.select(false);
                 // first the shapes
-                for (var i = 0; i < this._clipboard.length; i++) {
+                for (i = 0; i < this._clipboard.length; i++) {
                     item = this._clipboard[i];
-                    if (item instanceof Connection) continue;
+                    if (item instanceof Connection) {
+                        continue;
+                    }
                     copied = item.clone();
                     mapping.set(item.id, copied.id);
                     this._addItem(copied);
@@ -1537,9 +1539,11 @@ kendo_module({
                     copied.select(true);
                 }
                 // then the connections
-                for (var i = 0; i < this._clipboard.length; i++) {
+                for (i = 0; i < this._clipboard.length; i++) {
                     item = this._clipboard[i];
-                    if (item instanceof Shape) continue;
+                    if (item instanceof Shape) {
+                        continue;
+                    }
                     copied = item.clone();
                     if (item.source() instanceof Connector) { // if Point then it's a floating end
                         connector = item.source();

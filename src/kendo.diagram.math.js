@@ -710,7 +710,9 @@ kendo_module({
          */
         distanceToPolyline: function (p, points) {
             var minimum = Number.MAX_VALUE;
-            if (Utils.isUndefined(points) || points.length === 0) return Number.MAX_VALUE;
+            if (Utils.isUndefined(points) || points.length === 0) {
+                return Number.MAX_VALUE;
+            }
             for (var s = 0; s < points.length - 1; s++) {
                 var p1 = points[s];
                 var p2 = points[s + 1];
@@ -3009,7 +3011,7 @@ kendo_module({
 
         Point: Point,
         Intersect: Intersect,
-        Geometry : Geometry,
+        Geometry: Geometry,
         Rect: Rect,
         Size: Size,
         RectAlign: RectAlign,

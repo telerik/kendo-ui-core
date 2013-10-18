@@ -172,9 +172,9 @@ kendo_module({
             }
         },
         setAtr: function (atr, prop) {
-            if (Utils.isUndefined(prop) || Utils.isUndefined(this.options[prop]))return;
-            if (this.options[prop].toString().indexOf("F 1") === 0)
-                throw "qmlkj";
+            if (Utils.isUndefined(prop) || Utils.isUndefined(this.options[prop])) {
+                return;
+            }
             if (this.options[prop] !== undefined) {
                 this.native.setAttribute(atr, this.options[prop]);
             }

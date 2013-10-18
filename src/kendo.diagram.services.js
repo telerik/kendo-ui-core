@@ -28,6 +28,13 @@ kendo_module({
             move: "move",
             select: "pointer"
         },
+        HITTESTDISTANCE = 10,
+        AUTO = "Auto",
+        TOP = "Top",
+        RIGHT = "Right",
+        LEFT = "Left",
+        BOTTOM = "Bottom",
+        DEFAULTCONNECTORNAMES = [TOP, RIGHT, BOTTOM, LEFT, AUTO],
         ZOOM_RATE = 1.1;
 
     diagram.Cursors = Cursors;
@@ -77,12 +84,12 @@ kendo_module({
                 ticker.addAdapter(new kendo.diagram.PositionAdapter(state));
                 ticker.onComplete(function () {
                     state.linkMap.forEach(
-                        function (id, points) {
+                        function (id) {
                             var conn = diagram.getId(id);
                             conn.visible(true);
                         }
                     );
-                })
+                });
                 ticker.play();
             }
             else {
@@ -942,7 +949,7 @@ kendo_module({
      * Base class for connection routers.
      */
     var ConnectionRouterBase = kendo.Class.extend({
-        init: function (connection) {
+        /*init: function (connection) {
         },
         route: function (connection) {
         },
@@ -951,7 +958,7 @@ kendo_module({
         },
         getBounds: function () {
 
-        }
+        }*/
     });
 
     /**
@@ -968,7 +975,9 @@ kendo_module({
          */
         hitTest: function (p) {
             var rec = this.getBounds().inflate(10);
-            if (!rec.contains(p)) return false;
+            if (!rec.contains(p)) {
+                return false;
+            }
             return kendo.diagram.Geometry.distanceToPolyline(p, this.connection.allPoints()) < HITTESTDISTANCE;
         },
 
@@ -1037,6 +1046,18 @@ kendo_module({
             if (Utils.isDefined(link._resolvedTargetConnector)) {
                 targetConnectorName = link._resolvedTargetConnector.options.name;
             }
+            function startHorizontal() {
+                if (sourceConnectorName !== null) {
+                    if (sourceConnectorName === RIGHT || sourceConnectorName === LEFT) {
+                        return true;
+                    }
+                    if (sourceConnectorName === TOP || sourceConnectorName === BOTTOM) {
+                        return false;
+                    }
+                }
+                //fallback for custom connectors
+                return Math.abs(start.x - end.x) > Math.abs(start.y - end.y);
+            }
 
             if (sourceConnectorName !== null && targetConnectorName !== null && DEFAULTCONNECTORNAMES.contains(sourceConnectorName) && DEFAULTCONNECTORNAMES.contains(targetConnectorName)) {
                 // custom routing for the default connectors
@@ -1056,25 +1077,12 @@ kendo_module({
 
             }
             else { // general case for custom and floating connectors
-                function startHorizontal() {
-                    if (sourceConnectorName != null) {
-                        if (sourceConnectorName === RIGHT || sourceConnectorName === LEFT) {
-                            return true;
-                        }
-                        if (sourceConnectorName === TOP || sourceConnectorName === BOTTOM) {
-                            return false;
-                        }
-                    }
-                    //fallback for custom connectors
-                    return Math.abs(start.x - end.x) > Math.abs(start.y - end.y);
-                }
-
                 this.connection.cascadeStartHorizontal = startHorizontal(this.connection);
 
                 // note that this is more generic than needed for only two intermediate points.
                 for (var k = 1; k < l - 1; ++k) {
                     if (link.cascadeStartHorizontal) {
-                        if (k % 2 != 0) {
+                        if (k % 2 !== 0) {
                             shiftX = deltaX / (l / 2);
                             shiftY = 0;
                         }
@@ -1084,7 +1092,7 @@ kendo_module({
                         }
                     }
                     else {
-                        if (k % 2 != 0) {
+                        if (k % 2 !== 0) {
                             shiftX = 0;
                             shiftY = deltaY / (l / 2);
                         }
@@ -1097,11 +1105,12 @@ kendo_module({
                 }
                 // need to fix the wrong 1.5 factor of the last intermediate point
                 k--;
-                if ((link.cascadeStartHorizontal && (k % 2 != 0)) ||
-                    (!link.cascadeStartHorizontal && !(k % 2 != 0)))
+                if ((link.cascadeStartHorizontal && (k % 2 !== 0)) || (!link.cascadeStartHorizontal && (k % 2 === 0))) {
                     points[l - 2] = new Point(points[l - 1].x, points[l - 2].y);
-                else
+                }
+                else {
                     points[l - 2] = new Point(points[l - 2].x, points[l - 1].y);
+                }
 
                 this.connection.points([points[1], points[2]]);
             }

@@ -10,6 +10,7 @@ kendo_module({
         diagram = kendo.diagram = {},
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
+        Point = diagram.Point,
         EPSILON = 1e-06;
 
     /*-------------------Diverse utilities----------------------------*/
@@ -100,13 +101,15 @@ kendo_module({
             var res = [];
             for (var i = 0; i < points.length; i++) {
                 var p = points[i];
-                res.push( p.x + ";" + p.y);
+                res.push(p.x + ";" + p.y);
             }
             return res.join(";");
         },
         deserializePoints: function (s) {
-            var v = s.split(";"), x, y, points=[];
-            if (v.length % 2 !== 0) throw "Not an array of points.";
+            var v = s.split(";"), points = [];
+            if (v.length % 2 !== 0) {
+                throw "Not an array of points.";
+            }
             for (var i = 0; i < v.length; i += 2) {
                 points.push(new Point(v[i], v[i + 1]));
             }
