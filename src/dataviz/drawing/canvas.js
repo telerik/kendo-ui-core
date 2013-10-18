@@ -33,7 +33,6 @@
     var BUTT = "butt",
         CHANGE = "change",
         CLIP = dataviz.CLIP,
-        COORD_PRECISION = dataviz.COORD_PRECISION,
         DASH_ARRAYS = dataviz.DASH_ARRAYS,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
@@ -120,25 +119,6 @@
 
     // Nodes ===================================================================
     var Node = BaseNode.extend({
-        __init: function(srcElement) {
-            var node = this,
-                invalidate = proxy(node.invalidate, node);
-
-            node.childNodes = [];
-            ObservableObject.fn.init.call(node, node);
-
-            node.childNodes.bind(CHANGE, invalidate);
-
-            if (srcElement) {
-                node.srcElement = srcElement;
-                srcElement.options.bind(CHANGE, invalidate);
-
-                if (srcElement.children) {
-                    srcElement.children.bind(CHANGE, proxy(node._syncChildren, node));
-                }
-            }
-        },
-
         renderTo: function(ctx) {
             var childNodes = this.childNodes,
                 i;
@@ -175,6 +155,10 @@
         },
 
         unload: function(index, count) {
+            for (var i = index; i < count; i++) {
+                this.childNodes[i].observer = null;
+            }
+
             this.childNodes.splice(index, count);
         }
     });
@@ -274,11 +258,11 @@
             }
 
             s = segments[0];
-            ctx.moveTo(align(s.anchor.x, COORD_PRECISION), align(s.anchor.y, COORD_PRECISION));
+            ctx.moveTo(s.anchor.x, s.anchor.y);
 
             for (i = 1; i < segments.length; i++) {
                 s = segments[i];
-                ctx.lineTo(align(s.anchor.x, COORD_PRECISION), align(s.anchor.y, COORD_PRECISION));
+                ctx.lineTo(s.anchor.x, s.anchor.y);
             }
 
             if (path.closed) {

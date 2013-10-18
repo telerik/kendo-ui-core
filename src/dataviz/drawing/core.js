@@ -40,7 +40,7 @@
             }
 
             if (this.observer) {
-                this.observer.notify(e);
+                this.observer.notify({ event: "change" });
             }
         },
 

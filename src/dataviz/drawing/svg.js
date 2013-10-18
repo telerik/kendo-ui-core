@@ -25,7 +25,6 @@
     var BUTT = "butt",
         CHANGE = "change",
         CLIP = dataviz.CLIP,
-        COORD_PRECISION = dataviz.COORD_PRECISION,
         DASH_ARRAYS = dataviz.DASH_ARRAYS,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
@@ -143,6 +142,7 @@
         unload: function(index, count) {
             for (var i = index; i < count; i++) {
                 this.childNodes[i].detach();
+                this.childNodes[i].observer = null;
             }
 
             this.childNodes.splice(index, count);
