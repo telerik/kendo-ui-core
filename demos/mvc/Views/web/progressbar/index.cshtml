@@ -38,27 +38,22 @@
         <h2>Poll results</h2>
         <ul class="poll-results">
             <li>
-                <span class="progress-value">0%</span>
                 <h4>Fast and Furious 6</h4>
                 <div id="fastAndFurious"></div>
             </li>
             <li>
-                <span class="progress-value">0%</span>
                 <h4>Now you see me</h4>
                 <div id="nowYouSeeMe"></div>
             </li>
             <li>
-                <span class="progress-value">0%</span>
                 <h4>The Help</h4>
                 <div id="theHelp"></div>
             </li>
             <li>
-                <span class="progress-value">0%</span>
                 <h4>The Internship</h4>
                 <div id="theInternship"></div>
             </li>
             <li>
-                <span class="progress-value">0%</span>
                 <h4>The Perks of Being a Wallflower</h4>
                 <div id="thePerks"></div>
             </li>
@@ -74,7 +69,6 @@
                     animation: {
                         duration: 600
                     },
-                    showStatus: false,
                     change: function(e) {
                         this.wrapper.prev(".progress-value").text(e.value + "%");
                     }
@@ -122,7 +116,7 @@
         
         .demo-section h2 {
             font-weight: normal;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .forms {
@@ -133,9 +127,9 @@
         
         .forms label {
             display: inline-block;
-            width: 115px;
+            width: 120px;
             text-align: right;
-            padding-right: 20px;
+            padding-right: 18px;
         }
         
         .forms li {
@@ -144,7 +138,7 @@
         
         #voteButton {
             width: 260px;
-            margin: 10px 0 0 135px;
+            margin: 10px 0 0 138px;
         }
         
         .poll-results {
@@ -156,20 +150,12 @@
             content: "";
             display: block;
             clear: both;
-            height: 10px;
+            height: 3px;
             line-height: 0;
         }
-        .progress-value {
-            float: left;
-            width: 70px;
-            font-size: 3em;
-            line-height: 1em;
-        }
         #example .poll-results h4, .poll-results .k-progressbar {
-            float: right;
-            width: 320px;
-            height: 1em;
-            margin: 0 0 8px 0;
+            margin: 0 0 5px 0;
+            width: 400px;
         }
     </style>
 </div>
