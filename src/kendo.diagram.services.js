@@ -1580,7 +1580,7 @@ kendo_module({
             var unit;
             if (this._cp != this._sp) {
                 if (this._rotated) {
-                    unit = new RotateUnit(this.shapes, this.initialRotates);
+                    //unit = new RotateUnit(this.shapes, this.initialRotates);
                 }
                 else {
                     unit = new TransformUnit(this.shapes, this.shapeStates);
@@ -1718,5 +1718,4 @@ kendo_module({
         PolylineRouter: PolylineRouter,
         CascadingRouter: CascadingRouter
     });
-})
-    (window.kendo.jQuery);
+})(window.kendo.jQuery);
