@@ -153,6 +153,15 @@ kendo_module({
         TIMEZONEPOPUP = function(container, options) {
             $('<a href="#" class="k-button">' + options.messages.timezoneEditorButton + '</a>').click(options.click).appendTo(container);
         },
+        MOBILETIMEZONEEDITOR = function(container, options) {
+            $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
+                .attr({
+                    name: options.field
+                })
+                .toggle(options.visible)
+                .appendTo(container)
+                .kendoMobileTimezoneEditor();
+        },
         TIMEZONEEDITOR = function(container, options) {
             $('<div ' + kendo.attr("bind") + '="value:' + options.field +'" />')
                 .attr({
@@ -756,7 +765,7 @@ kendo_module({
         mobile: {
             dateRange: MOBILEDATERANGEEDITOR,
             timezonePopUp: MOBILETIMEZONEPOPUP,
-            timezone: TIMEZONEEDITOR,
+            timezone: MOBILETIMEZONEEDITOR,
             recurrence: MOBILERECURRENCEEDITOR,
             description: '<textarea name="description" class="k-textbox"/>',
             multipleResources: multiSelectResourceEditorMobile,
@@ -870,7 +879,7 @@ kendo_module({
             var container = that.container.find(".k-scheduler-timezones");
             var checkbox = container.find(".k-timezone-toggle");
             var endTimezoneRow = container.find(".k-edit-label:last").add(container.find(".k-edit-field:last"));
-            var startTimezoneEditor = container.find("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+            var startTimezoneEditor = container.find("[data-role=timezoneeditor]:first").data("kendoMobileTimezoneEditor");
 
             that._startTimezone = model.startTimezone || "";
             that._endTimezone = model.endTimezone || "";
@@ -1316,7 +1325,7 @@ kendo_module({
             var container = that.container.find(".k-scheduler-timezones");
             var checkbox = container.find(".k-timezone-toggle");
             var endTimezoneRow = container.find(".k-edit-label:last").add(container.find(".k-edit-field:last"));
-            var startTimezoneEditor = container.find("[data-role=timezoneeditor]:first").data("kendoTimezoneEditor");
+            var startTimezoneEditor = container.find("[data-role=mobiletimezoneeditor]:first").data("kendoMobileTimezoneEditor");
             var saveButton = container.find(".k-scheduler-savetimezone");
             var cancelButton = container.find(".k-scheduler-canceltimezone");
             var timezonePopup = that._timezonePopup;
@@ -3096,5 +3105,143 @@ kendo_module({
     });
 
     ui.plugin(TimezoneEditor);
+
+    var ZONETITLEOPTIONTEMPLATE = kendo.template('<option value="#=other_zone#">#=name#</option>');
+    var ZONEOPTIONTEMPLATE = kendo.template('<option value="#=zone#">#=territory#</option>');
+
+    var MobileTimezoneEditor = Widget.extend({
+        init: function(element, options) {
+            var that = this,
+                zones = kendo.timezone.windows_zones;
+
+            if (!zones || !kendo.timezone.zones_titles) {
+                throw new Error('kendo.timezones.min.js is not included.');
+            }
+
+            Widget.fn.init.call(that, element, options);
+
+            that.wrapper = that.element;
+
+            that._zonesQuery = new kendo.data.Query(zones);
+            that._zoneTitlePicker();
+            that._zonePicker();
+
+            that.value(that.options.value);
+        },
+
+        options: {
+            name: "MobileTimezoneEditor",
+            optionLabel: "No timezone",
+            value: ""
+        },
+
+        events: [ "change" ],
+
+        _bindZones: function(value) {
+            var data = value ? this._filter(value) : [];
+
+            this._zone.html(this._options(data, ZONEOPTIONTEMPLATE));
+        },
+
+        _filter: function(value) {
+            return this._zonesQuery.filter({ field: "other_zone", operator: "eq", value: value }).data;
+        },
+
+        _options: function(data, template, optionLabel) {
+            var idx = 0;
+            var html = "";
+            var length = data.length;
+
+            if (optionLabel) {
+                html += template({ other_zone: "", name: this.options.optionLabel });
+            }
+
+            for (; idx < length; idx++) {
+                html += template(data[idx]);
+            }
+
+            return html;
+        },
+
+        _zoneTitlePicker: function() {
+            var that = this;
+            var options = that._options(kendo.timezone.zones_titles, ZONETITLEOPTIONTEMPLATE, that.options.optionLabel);
+
+            that._zoneTitle = $('<select>' + options + '</select>')
+                                .appendTo(that.wrapper)
+                                .change(function() {
+                                    var value = this.value;
+                                    var zone = that._zone;
+
+                                    that._bindZones(value);
+
+                                    if (value && zone[0].children.length > 1) {
+                                        zone.show();
+                                    } else {
+                                        zone.hide();
+                                    }
+
+                                    that._value = zone[0].value;
+
+                                    that.trigger("change");
+                                });
+        },
+
+        _zonePicker: function() {
+            var that = this;
+
+            that._zone = $('<select style="display:none"></select>')
+                            .appendTo(this.wrapper)
+                            .change(function() {
+                                that._value = this.value;
+
+                                that.trigger("change");
+                            });
+
+            that._bindZones(that._zoneTitle.val());
+            that._value = that._zone[0].value;
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+
+            kendo.destroy(this.wrapper);
+        },
+
+        value: function(value) {
+            var that = this;
+            var zonePicker = that._zone;
+            var other_zone = "";
+            var zone_value = "";
+            var zone;
+
+            if (value === undefined) {
+                return that._value;
+            }
+
+            zone = that._zonesQuery.filter({ field: "zone", operator: "eq", value: value }).data[0];
+
+            if (zone) {
+                zone_value = zone.zone;
+                other_zone = zone.other_zone;
+            }
+
+            that._zoneTitle.val(other_zone);
+            that._bindZones(other_zone);
+
+            zonePicker.val(zone_value);
+            zone_value = zonePicker[0].value;
+
+            if (zone_value && zonePicker[0].children.length > 1) {
+                zonePicker.show();
+            } else {
+                zonePicker.hide();
+            }
+
+            that._value = zone_value;
+        }
+    });
+
+    ui.plugin(MobileTimezoneEditor);
 
 })(window.kendo.jQuery);
