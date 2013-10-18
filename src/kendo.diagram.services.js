@@ -936,6 +936,179 @@ kendo_module({
         }
     });
 
+// Routing =========================================
+
+    /**
+     * Base class for connection routers.
+     */
+    var ConnectionRouterBase = kendo.Class.extend({
+        init: function (connection) {
+        },
+        route: function (connection) {
+        },
+        hitTest: function (p) {
+
+        },
+        getBounds: function () {
+
+        }
+    });
+
+    /**
+     * Base class for polyline and cascading routing.
+     */
+    var LinearConnectionRouter = ConnectionRouterBase.extend({
+        init: function (connection) {
+            var that = this;
+            ConnectionRouterBase.fn.init.call(that);
+            this.connection = connection;
+        },
+        /**
+         * Hit testing for polyline paths.
+         */
+        hitTest: function (p) {
+            var rec = this.getBounds().inflate(10);
+            if (!rec.contains(p)) return false;
+            return kendo.diagram.Geometry.distanceToPolyline(p, this.connection.allPoints()) < HITTESTDISTANCE;
+        },
+
+        /**
+         * Bounds of a polyline.
+         * @returns {kendo.diagram.Rect}
+         */
+        getBounds: function () {
+            var points = this.connection.allPoints(),
+                s = points[0],
+                e = points[points.length - 1],
+                right = Math.max(s.x, e.x),
+                left = Math.min(s.x, e.x),
+                top = Math.min(s.y, e.y),
+                bottom = Math.max(s.y, e.y);
+
+            for (var i = 1; i < points.length - 1; ++i) {
+                right = Math.max(right, points[i].x);
+                left = Math.min(left, points[i].x);
+                top = Math.min(top, points[i].y);
+                bottom = Math.max(bottom, points[i].y);
+            }
+
+            return new Rect(left, top, right - left, bottom - top);
+        }
+    });
+
+    /**
+     * A simple poly-linear routing which does not alter the intermediate points.
+     * Does hold the underlying hit, bounds....logic.
+     * @type {*|Object|void|extend|Zepto.extend|b.extend}
+     */
+    var PolylineRouter = LinearConnectionRouter.extend({
+        init: function (connection) {
+            var that = this;
+            LinearConnectionRouter.fn.init.call(that);
+            this.connection = connection;
+        },
+        route: function () {
+            // just keep the points as is
+        }
+    });
+
+    var CascadingRouter = LinearConnectionRouter.extend({
+        init: function (connection) {
+            var that = this;
+            LinearConnectionRouter.fn.init.call(that);
+            this.connection = connection;
+        },
+        route: function () {
+            var link = this.connection;
+            var start = this.connection.sourcePoint();
+            var end = this.connection.targetPoint(),
+                points = [start, start, end, end],
+                deltaX = end.x - start.x, // can be negative
+                deltaY = end.y - start.y,
+                l = points.length,
+                shiftX,
+                shiftY,
+                sourceConnectorName = null,
+                targetConnectorName = null;
+
+            if (Utils.isDefined(link._resolvedSourceConnector)) {
+                sourceConnectorName = link._resolvedSourceConnector.options.name;
+            }
+            if (Utils.isDefined(link._resolvedTargetConnector)) {
+                targetConnectorName = link._resolvedTargetConnector.options.name;
+            }
+
+            if (sourceConnectorName !== null && targetConnectorName !== null && DEFAULTCONNECTORNAMES.contains(sourceConnectorName) && DEFAULTCONNECTORNAMES.contains(targetConnectorName)) {
+                // custom routing for the default connectors
+                if (sourceConnectorName === TOP || sourceConnectorName == BOTTOM) {
+                    if (targetConnectorName == TOP || targetConnectorName == BOTTOM) {
+                        this.connection.points([new Point(start.x, start.y + deltaY / 2), new Point(end.x, start.y + deltaY / 2)]);
+                    } else {
+                        this.connection.points([new Point(start.x, start.y + deltaY)]);
+                    }
+                } else { // LEFT or RIGHT
+                    if (targetConnectorName == LEFT || targetConnectorName == RIGHT) {
+                        this.connection.points([new Point(start.x + deltaX / 2, start.y), new Point(start.x + deltaX / 2, start.y + deltaY)]);
+                    } else {
+                        this.connection.points([new Point(end.x, start.y)]);
+                    }
+                }
+
+            }
+            else { // general case for custom and floating connectors
+                function startHorizontal() {
+                    if (sourceConnectorName != null) {
+                        if (sourceConnectorName === RIGHT || sourceConnectorName === LEFT) {
+                            return true;
+                        }
+                        if (sourceConnectorName === TOP || sourceConnectorName === BOTTOM) {
+                            return false;
+                        }
+                    }
+                    //fallback for custom connectors
+                    return Math.abs(start.x - end.x) > Math.abs(start.y - end.y);
+                }
+
+                this.connection.cascadeStartHorizontal = startHorizontal(this.connection);
+
+                // note that this is more generic than needed for only two intermediate points.
+                for (var k = 1; k < l - 1; ++k) {
+                    if (link.cascadeStartHorizontal) {
+                        if (k % 2 != 0) {
+                            shiftX = deltaX / (l / 2);
+                            shiftY = 0;
+                        }
+                        else {
+                            shiftX = 0;
+                            shiftY = deltaY / ((l - 1) / 2);
+                        }
+                    }
+                    else {
+                        if (k % 2 != 0) {
+                            shiftX = 0;
+                            shiftY = deltaY / (l / 2);
+                        }
+                        else {
+                            shiftX = deltaX / ((l - 1) / 2);
+                            shiftY = 0;
+                        }
+                    }
+                    points[k] = new Point(points[k - 1].x + shiftX, points[k - 1].y + shiftY);
+                }
+                // need to fix the wrong 1.5 factor of the last intermediate point
+                k--;
+                if ((link.cascadeStartHorizontal && (k % 2 != 0)) ||
+                    (!link.cascadeStartHorizontal && !(k % 2 != 0)))
+                    points[l - 2] = new Point(points[l - 1].x, points[l - 2].y);
+                else
+                    points[l - 2] = new Point(points[l - 2].x, points[l - 1].y);
+
+                this.connection.points([points[1], points[2]]);
+            }
+        }
+
+    });
+
 // Adorners =========================================
 
     var AdornerBase = Class.extend({
@@ -1506,6 +1679,9 @@ kendo_module({
         LayoutUndoUnit: LayoutUndoUnit,
         ConnectionEditUnit: ConnectionEditUnit,
         ToFrontUnit: ToFrontUnit,
-        ToBackUnit: ToBackUnit
+        ToBackUnit: ToBackUnit,
+        ConnectionRouterBase: ConnectionRouterBase,
+        PolylineRouter: PolylineRouter,
+        CascadingRouter: CascadingRouter
     });
 })(window.kendo.jQuery);
