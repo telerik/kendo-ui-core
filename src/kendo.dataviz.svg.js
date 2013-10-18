@@ -166,6 +166,12 @@ kendo_module({
             );
         },
 
+        createCubicCurve: function(points, options, areaPoints){
+            return this.decorate(
+                new SVGCubicCurve(points, options, areaPoints)
+            );
+        },
+
         // TODO: Refactor to (p1, p2, options)
         createLine: function(x1, y1, x2, y2, options) {
             return this.decorate(
@@ -411,15 +417,15 @@ kendo_module({
                     curvePoints.push("C");
                 }
                 curvePoints.push(round(points[i].x, COORD_PRECISION) + " " + round(points[i].y, COORD_PRECISION));
-            }     
-            
+            }
+
             if(areaPoints && areaPoints.length){
                 for(i = 0; i < areaPoints.length; i++){
                     curvePoints.push("L " + areaPoints[i].x + " " + areaPoints[i].y);
                 }
                 curvePoints.push("z");
             }
- 
+
             return "M " + curvePoints.join(" ");
         }
     });

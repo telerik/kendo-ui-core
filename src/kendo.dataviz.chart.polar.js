@@ -56,6 +56,7 @@ kendo_module({
         RADAR_AREA = "radarArea",
         RADAR_COLUMN = "radarColumn",
         RADAR_LINE = "radarLine",
+        SMOOTH = "smooth",
         X = "x",
         Y = "y",
         ZERO = "zero",
@@ -797,13 +798,14 @@ kendo_module({
         },
 
         createSegment: function(linePoints, currentSeries, seriesIx) {
-            var segment;
-            
-            if(currentSeries.smooth){
-                segment = new SplineSegment(linePoints, currentSeries, seriesIx);               
+            var segment,
+                style = (currentSeries.line || {}).style || currentSeries.style;    
+
+            if(style == SMOOTH){
+                segment = new SplineSegment(linePoints, currentSeries, seriesIx);
             }
             else{
-                segment = new LineSegment(linePoints, currentSeries, seriesIx);                        
+                segment = new LineSegment(linePoints, currentSeries, seriesIx);
             }
             if (linePoints.length === currentSeries.data.length) {
                 segment.options.closed = true;
@@ -818,16 +820,10 @@ kendo_module({
             return LineSegment.fn.points.call(this, this.stackPoints);
         }
     });
-    
+
     var RadarSplineAreaSegment = SplineAreaSegment.extend({
         areaPoints: function() {
             return [];
-        }
-    });
-    
-    var RadarAreaSegment = AreaSegment.extend({
-        points: function() {
-            return LineSegment.fn.points.call(this, this.stackPoints);
         }
     });
 
@@ -837,11 +833,12 @@ kendo_module({
                 options = chart.options,
                 isStacked = options.isStacked,
                 stackPoints,
-                segment;
-                
-            if(currentSeries.smooth){
-                segment = new RadarSplineAreaSegment(linePoints, prevSegment, isStacked, currentSeries, seriesIx);       
-                segment.options.closed = true;                
+                segment,
+                style = (currentSeries.line || {}).style;
+            
+            if(style == SMOOTH){
+                segment = new RadarSplineAreaSegment(linePoints, prevSegment, isStacked, currentSeries, seriesIx);
+                segment.options.closed = true;
             }
             else {
                 if (isStacked && seriesIx > 0 && prevSegment) {
@@ -850,7 +847,7 @@ kendo_module({
 
                 linePoints.push(linePoints[0]);
                 segment = new RadarAreaSegment(linePoints, stackPoints, currentSeries, seriesIx);
-            }           
+            }
 
             return segment;
         },
@@ -889,7 +886,7 @@ kendo_module({
             return points;
         }
     });
-    
+
     var SplinePolarAreaSegment = SplineAreaSegment.extend({
         areaPoints: function(){
              var segment = this,
@@ -906,22 +903,23 @@ kendo_module({
                 polarAxis = plotArea.polarAxis,
                 center = polarAxis.box.center(),
                 curvePoints,
-                curveProcessor = new CurveProcessor(0.1, false);               
+                curveProcessor = new CurveProcessor(0.1, false),
                 linePoints = LineSegment.fn.points.call(this);
                 linePoints.push(center);
-               
-            curvePoints = curveProcessor.process(linePoints);                
+
+            curvePoints = curveProcessor.process(linePoints);
             curvePoints.splice(curvePoints.length - 3, curvePoints.length - 1);
-            segment.curvePoints = curvePoints;     
+            segment.curvePoints = curvePoints;
             return curvePoints;
         }
     });
 
     var PolarAreaChart = PolarLineChart.extend({
         createSegment: function(linePoints, currentSeries, seriesIx) {
-            var segment;
-            if(currentSeries.smooth){
-                segment = new SplinePolarAreaSegment(linePoints, null, false, currentSeries, seriesIx);     
+            var segment,
+                style = (currentSeries.line || {}).style;
+            if(style == SMOOTH){
+                segment = new SplinePolarAreaSegment(linePoints, null, false, currentSeries, seriesIx);
             }
             else{
                 segment = new PolarAreaSegment(linePoints, [], currentSeries, seriesIx);

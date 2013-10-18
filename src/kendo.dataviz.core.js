@@ -3618,44 +3618,44 @@ kendo_module({
 
          return 0;
     }
-    
+
     var CurveProcessor = function(allowedError, closed){
         this.allowedError = defined(allowedError) ? math.abs(allowedError): 0;
         this.closed = closed;
     };
 
-    CurveProcessor.prototype = CurveProcessor.fn = { 
+    CurveProcessor.prototype = CurveProcessor.fn = {
         process: function(points){
             var that = this,
                 closed = that.closed,
-                length = points.length,                             
-                curve = [],                
+                length = points.length,
+                curve = [],
                 p0,p1,p2,
                 controlPoints,
                 initialControlPoint,
-                lastControlPoint, 
-                orientation,    
-                tangent,                
+                lastControlPoint,
+                orientation,
+                tangent,
                 addPoint = function(point){
                     curve.push(point);
-                };       
+                };
             if(length < 2){
                 return curve;
             }
 
             p0 = points[0];
             p1 = points[1];
-            p2 = points[2];          
+            p2 = points[2];
             addPoint(p0);
-            
+
             if(length == 2){
-                tangent = that.getTangent(p0,p1, X,Y);                
+                tangent = that.getTangent(p0,p1, X,Y);
                 addPoint(that.getFirstControlPoint(tangent, p0, p1, X, Y));
                 addPoint(that.getSecondControlPoint(tangent, p0, p1, X, Y));
                 addPoint(p1);
                 return curve;
-            } 
-            
+            }
+
             if(closed){
                 p0 = points[length - 1];
                 p1 = points[0];
@@ -3665,25 +3665,25 @@ kendo_module({
                 initialControlPoint = controlPoints[1];
                 lastControlPoint = controlPoints[0];
             }
-            else{  
-                tangent = that.getTangent(p0,p1, X,Y);             
-                initialControlPoint = that.getFirstControlPoint(tangent, p0, p1,X,Y); 
+            else{
+                tangent = that.getTangent(p0,p1, X,Y);
+                initialControlPoint = that.getFirstControlPoint(tangent, p0, p1,X,Y);
             }
-            
+
             addPoint(initialControlPoint);
-           
+
             for(var idx = 0; idx <= length - 3; idx++) {
                 p0 = points[idx];
                 p1 = points[idx + 1];
                 p2 = points[idx + 2];
-                 
+
                 orientation = that.getOrientation(p0,p1,p2);
                 controlPoints = that.getMiddleControlPoints(p0,p1,p2, orientation);
                 addPoint(controlPoints[0]);
-                addPoint(p1);    
-                addPoint(controlPoints[1]);              
+                addPoint(p1);
+                addPoint(controlPoints[1]);
             }
-                
+
             if(closed){
                 p0 = points[length - 2];
                 p1 = points[length - 1];
@@ -3699,65 +3699,62 @@ kendo_module({
             else{
                 tangent = that.getTangent(p1, p2, X, Y);
                 addPoint(that.getSecondControlPoint(tangent, p1, p2, X, Y));
-                addPoint(p2); 
+                addPoint(p2);
             }
- 
+
             return curve;
         },
-        
+
         getOrientation: function(p0,p1,p2){
-            var that = this,                
+            var that = this,
                 orientation = {xField: X, yField: Y},
                 fn, y2,
                 invertAxis = false;
 
-            if(!that.isMonotonicByField(p0,p1,p2, X)){         
+            if(!that.isMonotonicByField(p0,p1,p2, X)){
                 if(p0.x === p1.x){
-                    invertAxis = true;                     
+                    invertAxis = true;
                 }
                 else if (p1.x === p2.x) {
                     if((p1.y < p2.y && p0.y <= p1.y) || (p2.y < p1.y && p1.y <= p0.y)){
-                        invertAxis = true;  
-                    }                    
+                        invertAxis = true;
+                    }
                 } else {
                     fn = that.lineFunction(p0,p1);
                     y2 = that.calculateFunction(fn, p2.x);
-                    if(!(p0.y <= p1.y && p2.y < y2) && 
+                    if(!(p0.y <= p1.y && p2.y < y2) &&
                         !(p1.y <= p0.y && p2.y > y2)) {
-                            invertAxis = true; 
+                            invertAxis = true;
                     }
                 }
             }
-            
+
             if(invertAxis){
                 orientation.xField = Y;
-                orientation.yField = X;                 
+                orientation.yField = X;
             }
             return orientation;
         },
-        
+
         isLine: function(p0,p1,p2){
             var that = this,
                 fn = that.lineFunction(p0,p1),
                 y2 = that.calculateFunction(fn, p2.x);
-            
+
             return (p0.x == p1.x && p1.x == p2.x) || round(y2,1) === round(p2.y,1);
         },
-        
+
         lineFunction: function(p1, p2){
             var a = (p2.y - p1.y) / (p2.x - p1.x),
-                b = p1.y - a * p1.x;            
+                b = p1.y - a * p1.x;
             return [b,a];
-        },                              
+        },
 
         getMiddleControlPoints: function(p0,p1,p2, orientation){
             var that = this,
-                fn,
-                fnd,
-                tangent,            
+                tangent,
                 controlPoint2,
                 nextControlPoint,
-                extremum,
                 xField = orientation.xField,
                 yField = orientation.yField,
                 allowedError = that.allowedError;
@@ -3769,41 +3766,41 @@ kendo_module({
             else if(that.isMonotonicByField(p0,p1,p2,yField)){
                tangent = that.getTangent(p0,p2,xField, yField);
                controlPoint2 = that.getSecondControlPoint(tangent, p0, p1, xField, yField);
-               nextControlPoint = that.getFirstControlPoint(tangent, p1, p2,xField,yField);  
-            
+               nextControlPoint = that.getFirstControlPoint(tangent, p1, p2,xField,yField);
+
                that.restrictControlPoint(p0,p1,controlPoint2, tangent);
                that.restrictControlPoint(p1,p2, nextControlPoint,tangent);
             }
-            else{                
-                 if(that.isMonotonicByField(p0,p1,p2, xField) ){                                    
+            else{
+                 if(that.isMonotonicByField(p0,p1,p2, xField) ){
                     controlPoint2 = that.getSecondControlPoint(0, p0, p1, xField, yField);
                     nextControlPoint = that.getFirstControlPoint(0, p1, p2, xField, yField);
                  }
-                 else{                   
+                 else{
                     var sign;
                     if ((p2[yField] < p0[yField] && p0[yField] <= p1[yField]) || (p0[yField] < p2[yField] && p1[yField] <= p0[yField])) {
-                        sign = that.sign((p2[yField] - p0[yField]) * (p1[xField] - p0[xField])); 
+                        sign = that.sign((p2[yField] - p0[yField]) * (p1[xField] - p0[xField]));
                     } else {
-                        sign = -that.sign((p2[xField] - p0[xField]) * (p1[yField] - p0[yField])); 
+                        sign = -that.sign((p2[xField] - p0[xField]) * (p1[yField] - p0[yField]));
                     }
                     allowedError *= sign;
-                    
+
                     controlPoint2 = that.getSecondControlPoint(allowedError, p0, p1,xField,yField);
                     nextControlPoint = that.getFirstControlPoint(allowedError, p1, p2,yField,xField);
                  }
             }
             return [controlPoint2, nextControlPoint];
-        },  
-        
+        },
+
         sign: function(x){
             return x <= 0 ? -1 : 1;
         },
-        
+
         restrictControlPoint: function(p1,p2, cp, tangent){
-            if(p1.y < p2.y){           
+            if(p1.y < p2.y){
                 if(p2.y < cp.y){
                     cp.x = p1.x + (p2.y - p1.y) / tangent;
-                    cp.y = p2.y; 
+                    cp.y = p2.y;
                 }
                 else if(cp.y < p1.y){
                     cp.x = p2.x - (p2.y - p1.y) / tangent;
@@ -3820,37 +3817,37 @@ kendo_module({
                 }
             }
         },
-        
+
         getTangent: function(p0,p1, xField, yField){
             var tangent,
                 x = p1[xField] - p0[xField],
                 y = p1[yField] - p0[yField];
-            if(x == 0){
+            if(x === 0){
                 tangent = 0;
             } else {
                tangent = y/x;
-            } 
-                                       
+            }
+
             return tangent;
-        },   
-        
+        },
+
         isMonotonicByField: function(p0,p1,p2,field){
             return (p2[field] > p1[field] && p1[field] > p0[field]) ||
                         (p2[field] < p1[field] && p1[field] < p0[field]);
-        },  
-        
+        },
+
         getFirstControlPoint: function(tangent, p0,p3, xField, yField){
             var controlPoint = Point2D(),
                 t1 = p0[xField],
                 t2 = p3[xField],
                 t = t2 - t1,
                 weigth = 0.333;
-               
+
             controlPoint[xField] = t1 + t * weigth;
             controlPoint[yField] = p0[yField] + t * weigth * tangent;
             return controlPoint;
         },
-        
+
         getSecondControlPoint: function(tangent, p0,p3, xField, yField){
             var controlPoint = Point2D(),
                 t1 = p0[xField],

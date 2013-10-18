@@ -147,7 +147,7 @@ kendo_module({
                 )
             );
         },
-        
+
         createCubicCurve: function(points, options, areaPoints){
             return new VMLCubicCurve(points, options, areaPoints);
         },
@@ -466,38 +466,39 @@ kendo_module({
             return result;
         }
     });
-    
+
     var VMLCubicCurve = VMLPath.extend({
         init: function(points, options, areaPoints) {
             var curve = this;
             VMLPath.fn.init.call(curve, options);
-            
+
             curve.points = points;
             curve.areaPoints = areaPoints;
         },
         renderPoints: function() {
             var curve = this,
                 i,
+                point,
                 areaPoints = curve.areaPoints,
                 points = curve.points,
-                curvePoints = [],                
+                curvePoints = [],
                 currentPoints;
-                       
+
             for(i = 1; i < points.length; i+=3){
-                currentPoints = [];  
+                currentPoints = [];
                 for(var j =0; j < 3;j++){
                     point = points[i+j];
-                    currentPoints.push(round(point.x) + "," + round(point.y));                    
+                    currentPoints.push(round(point.x) + "," + round(point.y));
                 }
-                curvePoints.push("C " + currentPoints.join(" "));    
-            }    
+                curvePoints.push("C " + currentPoints.join(" "));
+            }
             if(areaPoints && areaPoints.length){
                 for(i = 0; i < areaPoints.length; i++){
                     curvePoints.push("L " + round(areaPoints[i].x) + "," + round(areaPoints[i].y));
                 }
                 curvePoints.push("X");
-            }   
-                 
+            }
+
             return "M " + math.round(points[0].x) + "," + math.round(points[0].y) + " " + curvePoints.join(" ") + " E";
         }
     });
