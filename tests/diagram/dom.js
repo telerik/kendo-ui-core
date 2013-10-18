@@ -492,7 +492,7 @@ test("Copy Selected", function () {
 
     s1.select(true);
     equal(d._clipboard.length, 0);
-    d._copy();
+    d.copy();
     equal(d._clipboard.length, 1);
 });
 
@@ -502,9 +502,9 @@ test("Copy and Paste", function () {
 
     s1.select(true);
     equal(d._clipboard.length, 0);
-    d._copy();
+    d.copy();
     equal(d._clipboard.length, 1);
-    d._paste();
+    d.paste();
     equal(shapesCount + 1, d.shapes.length);
 });
 
@@ -514,10 +514,10 @@ test("Cut and Paste", function () {
 
     s1.select(true);
     equal(d._clipboard.length, 0);
-    d._cut();
+    d.cut();
     equal(d._clipboard.length, 1);
     equal(shapesCount - 1, d.shapes.length);
-    d._paste();
+    d.paste();
     equal(shapesCount, d.shapes.length);
 });
 
@@ -527,8 +527,8 @@ test("Cut and Paste - positions", function () {
     var pos = s1.position().clone();
 
     s1.select(true);
-    d._cut();
-    d._paste();
+    d.cut();
+    d.paste();
     var copied = d.shapes[d.shapes.length - 1];
     deepEqual(copied.position(), pos);
 });
@@ -540,13 +540,13 @@ test("Copy and Paste - positions", function () {
     var pos = s1.position().clone();
 
     s1.select(true);
-    d._copy();
-    d._paste();
+    d.copy();
+    d.paste();
     var copied = d.shapes[d.shapes.length - 1];
     pos = pos.plus(new Point(d.options.copy.offsetX, d.options.copy.offsetY));
     deepEqual(copied.position(), pos);
 
-    d._paste();
+    d.paste();
     copied = d.shapes[d.shapes.length - 1];
     pos = pos.plus(new Point(d.options.copy.offsetX, d.options.copy.offsetY));
     deepEqual(copied.position(), pos);
@@ -576,9 +576,9 @@ test("Copy/Paste connection", function () {
 
     c1.select(true);
     equal(d._clipboard.length, 0);
-    d._copy();
+    d.copy();
     equal(d._clipboard.length, 1);
-    d._paste();
+    d.paste();
     equal(cons + 1, d.connections.length);
 });
 
@@ -588,8 +588,8 @@ test("Cut/Paste connection", function () {
 
     c1.select(true);
     equal(d._clipboard.length, 0);
-    d._cut();
+    d.cut();
     equal(d._clipboard.length, 1);
-    d._paste();
+    d.paste();
     equal(cons, d.connections.length);
 });

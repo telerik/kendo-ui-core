@@ -398,6 +398,7 @@ $(function () {
     $("#canvas").kendoDiagram({
         zoom: function (e) {
             slider.value(this._zoom);
+            console.log(this._zoom);
         },
         select: function (e) {
             var item = e.item, scIndex = 0 , ecIndex = 0;
@@ -463,7 +464,7 @@ $(function () {
         diagram.remove(diagram.select(), true);
     });
     function selectAll() {
-        diagram.select(true);
+        diagram.select("All");
         $("#canvas").focus();
     }
 
@@ -503,7 +504,7 @@ $(function () {
     })
 
     $("#selectAllButton").click(function (e) {
-        diagram.select(true);
+       selectAll();
     });
     $("#toFrontButton").click(function (e) {
         diagram.toFront();

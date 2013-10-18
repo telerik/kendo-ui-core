@@ -40,13 +40,12 @@ kendo_module({
     diagram.Cursors = Cursors;
 
     function selectSingle(item, meta) {
-        if (!item.isSelected) {
-            if (!meta.ctrlKey) {
-                item.diagram.select(false);
+        if (item.isSelected) {
+            if (meta.ctrlKey) {
+                item.select(false);
             }
-            item.select(true);
-        } else if (meta.ctrlKey) {
-            item.select(false);
+        } else {
+            item.diagram.select(item, {addToSelection: meta.ctrlKey});
         }
     }
 
@@ -620,7 +619,7 @@ kendo_module({
                 diagram.select(false);
             }
             if (!rect.isEmpty()) {
-                diagram.select(true, { rect: rect });
+                diagram.select(rect);
             }
             diagram.selector.end();
         },
@@ -816,7 +815,7 @@ kendo_module({
             meta = deepExtend({ ctrlKey: false, metaKey: false, altKey: false }, meta);
             if ((meta.ctrlKey || meta.metaKey) && !meta.altKey) {// ctrl or option
                 if (testKey(key, "a")) {// A: select all
-                    diagram.select(true);
+                    diagram.select("All");
                     return true;
                 }
                 else if (testKey(key, "z")) {// Z: undo
@@ -971,13 +970,13 @@ kendo_module({
         init: function () {
         }
         /*route: function (connection) {
-        },
-        hitTest: function (p) {
+         },
+         hitTest: function (p) {
 
-        },
-        getBounds: function () {
+         },
+         getBounds: function () {
 
-        }*/
+         }*/
     });
 
     /**

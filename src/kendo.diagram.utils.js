@@ -52,6 +52,9 @@ kendo_module({
         isString: function (obj) {
             return Object.prototype.toString.call(obj) == '[object String]';
         },
+        isBoolean: function (obj) {
+            return Object.prototype.toString.call(obj) == '[object boolean]';
+        },
         isType: function (obj, type) {
             return Object.prototype.toString.call(obj) == '[object ' + type + ']';
         },

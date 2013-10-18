@@ -1272,21 +1272,61 @@ kendo_module({
                 this.undoRedoService.commit();
             }
         },
-        select: function (value, options) {
+
+
+        /**
+         * Selects items on the basis of the given input or returns the current selection if none.
+         * @param itemsOrRect DiagramElement, Array of elements, "All", false or Rect. A value 'false' will deselect everything.
+         * @param options
+         * @returns {Array}
+         */
+        select: function (itemsOrRect, options) {
             var i, item, items, rect, selected = [];
-            if (value !== undefined) {
-                options = deepExtend({ rect: null }, options);
-                rect = options.rect;
-                items = this.shapes.concat(this.connections);
-                this._internalSelection = true;
-                for (i = 0; i < items.length; i++) {
-                    item = items[i];
-                    if (!rect || item._hitTest(rect)) {
-                        item.select(value);
-                        if (value) {
+            options = deepExtend({  addToSelection: false }, options);
+            addToSelection = options.addToSelection;
+
+            if (itemsOrRect !== undefined) {
+                if (!addToSelection) {
+                    for (i = 0; i < this._selectedItems.length; i++) {
+                        this._selectedItems[i].select(false);
+                    }
+                }
+                if (Utils.isBoolean(itemsOrRect)) {
+                    return;
+                }
+                else if (itemsOrRect.toString().toLowerCase() === "all") {
+                    items = this.shapes.concat(this.connections);
+                    this._internalSelection = true;
+                    for (i = 0; i < items.length; i++) {
+                        item = items[i];
+                        item.select(true);
+                        selected.push(item);
+                    }
+                }
+                else if (itemsOrRect instanceof Rect) {
+                    rect = itemsOrRect;
+                    items = this.shapes.concat(this.connections);
+                    this._internalSelection = true;
+                    for (i = 0; i < items.length; i++) {
+                        item = items[i];
+                        if (!rect || item._hitTest(rect)) {
+                            item.select(true);
                             selected.push(item);
                         }
                     }
+                }
+                else if (itemsOrRect instanceof Array) {
+                    for (i = 0; i < itemsOrRect.length; i++) {
+                        item = items[i];
+                        if (item instanceof DiagramElement) {
+                            item.select(true);
+                            selected.push(item);
+                        }
+                    }
+                }
+                else if (itemsOrRect instanceof DiagramElement) {
+                    itemsOrRect.select(true);
+                    selected.push(itemsOrRect);
                 }
                 this.trigger(SELECT, {items: selected});
                 this._internalSelection = false;
