@@ -1,22 +1,29 @@
 ﻿<div id="example" class="k-content">
     
-    <div class="configuration">
-        <span class="configHead">ProgressBar API Functions</span>
-        <ul class="options">
-            <li>
-                <input type="text" id="newValue" value="25" class="k-textbox" />
-                <button class="k-button" id="setProgressBarValue">Set value</button>
-            </li>
-            <li>
-                <button class="k-button" id="getProgressBarValue">Get value</button>
-            </li>
-            <li>
-                <button class="k-button" id="enableProgressBar">Enable</button> or <button class="k-button" id="disableProgressBar">Disable</button>
-            </li>
-        </ul>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Toggle state</span>
+            <ul class="options">
+                <li>
+                    <button class="k-button" id="enableProgressBar">Enable</button>
+                    <button class="k-button" id="disableProgressBar">Disable</button>
+                </li>
+            </ul>
+        </div>
+        <div class="config-section">
+            <span class="configHead">Value</span>
+            <ul class="options">
+                <li>
+                    <input type="text" id="newValue" value="25" class="k-textbox" placeholder="e.g. 23"/>             
+                    <button class="k-button" id="setProgressBarValue">Set value</button>
+                    <button class="k-button" id="getProgressBarValue">Get value</button>
+                </li>
+            </ul>
+        </div>
     </div>
-
-    <div id="progressBar"></div>
+    <div class="demo-section">
+        <div id="progressBar"></div>
+    </div>
 
     <script>
         $(document).ready(function () {
@@ -48,9 +55,20 @@
     </script>
 
     <style scoped>
-        #progressBar
-        {
-            width: 27em;
+        .configuration-horizontal .k-textbox {
+            margin: 0;
+            width: 80px;
+        }
+        .demo-section {
+            width: 660px;
+            padding: 30px;
+            text-align: center;
+        }
+        .k-button {
+            min-width: 80px;
+        }
+        .configuration-horizontal .options li {
+            padding: 3px 0;
         }
     </style>
 </div>
