@@ -1495,7 +1495,11 @@ kendo_module({
             this._sp = p;
             this._cp = p;
             this._manipulating = true;
-            this._positions();
+            this.shapeStates = [];
+            for (var i = 0; i < this.shapes.length; i++) {
+                var shape = this.shapes[i];
+                this.shapeStates.push(shape.bounds());
+            }
         },
         move: function (handle, p) {
             var tp = this.diagram.transformPoint(p), delta = p.minus(this._cp), dragging,
@@ -1511,8 +1515,10 @@ kendo_module({
                     shapeCenter = new Point(shapeBounds.width / 2, shapeBounds.height / 2);
                     newPosition = shapeBounds.center().rotate(center, 360 - this._angle).minus(shapeCenter);
 
+                    shape._rotationOffset = shape._rotationOffset.plus(shape.position().minus(newPosition));
                     shape.position(newPosition);
                     shape.rotate(angle);
+
                     this._rotated = true;
                 }
             } else {
@@ -1554,7 +1560,7 @@ kendo_module({
                     this.bounds(aBounds);
                     this.refresh();
                 }
-                //this._positions();
+                this._positions();
             }
 
             this._cp = p;
@@ -1578,7 +1584,7 @@ kendo_module({
                     unit = new RotateUnit(this.shapes, this.initialRotates);
                 }
                 else {
-                    unit = new TransformUnit(this.shapes, this.initialStates);
+                    unit = new TransformUnit(this.shapes, this.shapeStates);
                 }
             }
             this._manipulating = undefined;
@@ -1587,12 +1593,15 @@ kendo_module({
         },
         _hover: function () {
         },
-        refresh: function () {
-            var bounds = this.shapes.length == 1 ? this.shapes[0].visualBounds() : this.diagram.getBoundingBox(this.shapes, this._angle === 0),
-                that = this, b;
+        _refreshBounds: function () {
+            var bounds = this.shapes.length == 1 ? this.shapes[0].visualBounds() : this.diagram.getBoundingBox(this.shapes, this._angle !== 0);
             if (!this._manipulating) {
                 this.bounds(bounds);
             }
+        },
+        refresh: function () {
+            var that = this, b, bounds;
+            that._refreshBounds();
 
             bounds = this.bounds();
             if (this.shapes.length > 0) {

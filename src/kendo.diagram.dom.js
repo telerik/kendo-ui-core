@@ -371,7 +371,7 @@ kendo_module({
                 }
             }
         },
-        rotate: function (angle, center) { // we asume the center is always the center of the shape.
+        rotate: function (angle) { // we asume the center is always the center of the shape.
             var rotate = this.visual.rotate();
             if (angle !== undefined) {
                 var b = this.bounds();
@@ -423,6 +423,7 @@ kendo_module({
             if (rotation && rotation.angle) {
                 this.rotate(rotation.angle);
             }
+            this._rotationOffset = new Point();
         },
         _hover: function (value) {
             this.shapeVisual._hover(value);

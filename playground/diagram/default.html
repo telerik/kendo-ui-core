@@ -308,6 +308,14 @@
         </svg>
     </div>
 
+
+
+
+
+
+
+
+
 </script>
 
 <script>
@@ -320,17 +328,6 @@ for (var i = 0; i < shapesSource.length; i++) {
     shape.background = 'steelblue';
     Shapes[shape.name] = shape;
 }
-
-
-function receivedText() {
-    //result = fr.result;
-    document.getElementById('editor').appendChild(document.createTextNode(fr.result))
-}
-
-function loadDiagram() {
-    document.getElementById('upload-field').click();
-}
-
 $(function () {
     function onload() {
         var seq = Shapes.SequentialData;
@@ -477,10 +474,15 @@ $(function () {
         return false;
     }
 
+
+    function loadDiagram() {
+        document.getElementById('upload-field').click();
+    }
+
     $("#saveButton").click(function (e) {
         saveDiagram();
     });
-    $('#upload-field').change(function (e) {
+    $("#loadButton").change(function (e) {
         var reader = new FileReader(),
                 f = e.target.files[0];
 
@@ -492,8 +494,7 @@ $(function () {
 
         // Read in the image file as a data URL.
         reader.readAsBinaryString(f);
-    })
-
+    });
     $("#selectAllButton").click(function (e) {
         diagram.select(true);
     });
