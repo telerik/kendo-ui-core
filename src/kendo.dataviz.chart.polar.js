@@ -799,14 +799,17 @@ kendo_module({
 
         createSegment: function(linePoints, currentSeries, seriesIx) {
             var segment,
-                style = (currentSeries.line || {}).style || currentSeries.style;    
+                pointType,
+                style = (currentSeries.line || {}).style || currentSeries.style;
 
             if(style == SMOOTH){
-                segment = new SplineSegment(linePoints, currentSeries, seriesIx);
+                pointType = SplineSegment;
+            } else {
+                pointType = LineSegment;
             }
-            else{
-                segment = new LineSegment(linePoints, currentSeries, seriesIx);
-            }
+
+            segment = new pointType(linePoints, currentSeries, seriesIx);
+
             if (linePoints.length === currentSeries.data.length) {
                 segment.options.closed = true;
             }
@@ -835,7 +838,7 @@ kendo_module({
                 stackPoints,
                 segment,
                 style = (currentSeries.line || {}).style;
-            
+
             if(style == SMOOTH){
                 segment = new RadarSplineAreaSegment(linePoints, prevSegment, isStacked, currentSeries, seriesIx);
                 segment.options.closed = true;

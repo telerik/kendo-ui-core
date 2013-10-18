@@ -37,7 +37,7 @@
         <button type="button" data-bind="click: push">Push</button>
         <button type="button" data-bind="click: pop">Pop</button>
     </div>
-    
+    <div id="scatterTester"></div>
     <script>
        var model = kendo.data.Model.define({
             fields:{
@@ -146,9 +146,7 @@
                 data: sunPos
             },
             series: [{
-                 line: {
-                    style: "smooth"
-                 },
+                 style: "smooth",
                  markers: {
                     visible: true,
                     size: 4
@@ -665,8 +663,10 @@
                 },
                 seriesDefaults: {
                     type: "area",
-                    line: {
-                         style: "smooth"
+                    area:{
+                        line: {
+                             style: "smooth"
+                        }
                     },
                     markers:{visible: false},
                     opacity: 0.4
@@ -711,9 +711,11 @@
                 },
                 seriesDefaults: {
                     type: "verticalArea",
-                    line:{
-                       style: "smooth"
-                    },
+                    verticalArea: {
+                        line:{
+                           style: "smooth"
+                        }
+                    },                    
                     markers:{visible: false},
                     opacity: 0.4
                 },
@@ -764,10 +766,12 @@
                         visible: false,
                         size: 6
                     },
-                    line: {
-                         style: "smooth",
-                        opacity: 1,
-                        width: 0
+                    area: {
+                        line: {
+                             style: "smooth",
+                            opacity: 1,
+                            width: 0
+                        }
                     }
                 },
                 series: [{
@@ -827,10 +831,12 @@
                         visible: false,
                         size: 6
                     },
-                    line: {
-                        opacity: 1,
-                        width: 0,
-                         style: "smooth"
+                    verticalArea: {                         
+                        line: {
+                            opacity: 1,
+                            width: 0,
+                             style: "smooth"
+                        }
                     }
                 },
                 series: [{

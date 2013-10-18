@@ -3164,11 +3164,13 @@ kendo_module({
                 series = point.series,
                 seriesIx = point.seriesIx,
                 errorBars = point.options.errorBars,
-                errorRange;
+                errorRange,
+                lowValue = data.fields[ERROR_LOW_FIELD],
+                highValue = data.fields[ERROR_HIGH_FIELD];
 
-            if (isNumber(data.fields[ERROR_LOW_FIELD]) &&
-                isNumber(data.fields[ERROR_HIGH_FIELD])) {
-                errorRange = {low: data.fields[ERROR_LOW_FIELD], high: data.fields[ERROR_HIGH_FIELD]};
+            if (isNumber(lowValue) &&
+                isNumber(highValue)) {
+                errorRange = {low: lowValue, high: highValue};
             } else if (errorBars && defined(errorBars.value)) {
                 chart.seriesErrorRanges = chart.seriesErrorRanges || [];
                 chart.seriesErrorRanges[seriesIx] = chart.seriesErrorRanges[seriesIx] ||
@@ -3198,8 +3200,8 @@ kendo_module({
                 low = stackedErrorRange.low;
                 high = stackedErrorRange.high;
             } else {
-                chart.updateRange(low, categoryIx, series);
-                chart.updateRange(high, categoryIx, series);
+                chart.updateRange({value: low}, categoryIx, series);
+                chart.updateRange({value: high}, categoryIx, series);
             }
 
             errorBar = new CategoricalErrorBar(low, high, isVertical, chart.plotArea, series.errorBars);
@@ -4543,18 +4545,6 @@ kendo_module({
             return assumeZero ? ZERO : missingValues || INTERPOLATE;
         },
 
-        createSegment: function(linePoints, currentSeries, seriesIx) {
-            var segment,
-                style = (currentSeries.line || {}).style || currentSeries.style;
-            if(style == SMOOTH){
-                segment = new SplineSegment(linePoints, currentSeries, seriesIx);
-            }
-            else{
-                segment = new LineSegment(linePoints, currentSeries, seriesIx);
-            }
-            return segment;
-        },
-
         getNearestPoint: function(x, y, seriesIx) {
             var chart = this,
                 invertAxes = chart.options.invertAxes,
@@ -4689,10 +4679,13 @@ kendo_module({
         },
 
         createSegment: function(linePoints, currentSeries, seriesIx) {
-            var pointType;
+            var pointType,
+                style = currentSeries.style;
 
-            if (currentSeries.style === STEP) {
+            if (style === STEP) {
                 pointType = StepLineSegment;
+            } else if (style === SMOOTH) {
+                pointType = SplineSegment;
             } else {
                 pointType = LineSegment;
             }
@@ -4827,8 +4820,8 @@ kendo_module({
                 })
             ];
         }
-    });    
-    
+    });
+
     var AreaSegmentMixin = {
         points: function() {
             var segment = this,
@@ -4932,12 +4925,12 @@ kendo_module({
                 if (style !== STEP) {
                     stackPoints = stackPoints.slice(0).reverse();
                 }
-            }            
-            
-            if(style === SMOOTH){
+            }
+
+            if (style === SMOOTH) {
                 return new SplineAreaSegment(linePoints, prevSegment, isStacked, currentSeries, seriesIx);
             }
-            
+
             if (style === STEP) {
                 pointType = StepAreaSegment;
             } else {
@@ -4953,14 +4946,15 @@ kendo_module({
     });
 
     var SplineAreaSegment = AreaSegment.extend({
-        init: function(linePoints, prevSegment, isStacked, currentSeries, seriesIx){
+        init: function(linePoints, prevSegment, isStacked, currentSeries, seriesIx) {
             var segment = this;
 
             segment.prevSegment = prevSegment;
             segment.isStacked = isStacked;
             LineSegment.fn.init.call(segment, linePoints, currentSeries, seriesIx);
         },
-        points: function(){
+
+        points: function() {
             var segment = this,
                 prevSegment = segment.prevSegment,
                 curveProcessor = new CurveProcessor(0, segment.options.closed),
@@ -4971,7 +4965,7 @@ kendo_module({
 
             segment.curvePoints = curvePoints;
 
-            if(segment.isStacked && prevSegment){
+            if (segment.isStacked && prevSegment) {
                 points = curvePoints.slice(0);
                 points.push(last(curvePoints));
                 previousPoints = prevSegment.curvePoints.slice(0).reverse();
@@ -4980,13 +4974,14 @@ kendo_module({
                 points.push(last(previousPoints));
                 points.push(points[0]);
                 points.push(points[0]);
-            }
-            else{
+            } else {
                 points = segment.curvePoints;
             }
+
             return points;
         },
-        areaPoints: function(points){
+
+        areaPoints: function(points) {
             var segment = this,
                 chart = segment.parent,
                 prevSegment = segment.prevSegment,
@@ -5047,8 +5042,8 @@ kendo_module({
                     zIndex: -1
                 }, areaPoints));
 
-            if(lineOptions.width > 0){
-                viewElements.push(view.createCubicCurve(segment.curvePoints,{
+            if (lineOptions.width > 0) {
+                viewElements.push(view.createCubicCurve(segment.curvePoints, {
                     stroke: lineOptions.color,
                     strokeWidth: lineOptions.width,
                     strokeOpacity: lineOptions.opacity,
@@ -5120,12 +5115,14 @@ kendo_module({
                 highField = field + "ErrorHigh",
                 seriesIx = fields.seriesIx,
                 series = fields.series,
-                errorBars = point.options.errorBars;
+                errorBars = point.options.errorBars,
+                lowValue = fields[lowField],
+                highValue = fields[highField];
 
             if (isNumber(value)) {
-                if (isNumber(fields[lowField]) && isNumber(fields[highField])) {
-                    chart.addPointErrorBar(fields[lowField],
-                        fields[highField], point, field, series, errorBars);
+                if (isNumber(lowValue) && isNumber(highValue)) {
+                    chart.addPointErrorBar(lowValue,
+                        highValue, point, field, series, errorBars);
                 }
 
                 if (errorBars && defined(errorBars[valueErrorField])) {
@@ -5370,7 +5367,16 @@ kendo_module({
         },
 
         createSegment: function(linePoints, currentSeries, seriesIx) {
-            return new LineSegment(linePoints, currentSeries, seriesIx);
+            var pointType,
+                style = currentSeries.style;
+
+            if (style === SMOOTH) {
+                pointType = SplineSegment;
+            } else {
+                pointType = LineSegment;
+            }
+
+            return new pointType(linePoints, currentSeries, seriesIx);
         }
     });
     deepExtend(ScatterLineChart.fn, LineChartMixin);
@@ -8224,7 +8230,7 @@ kendo_module({
                 plotArea.createBulletChart(
                     filterSeriesByType(filteredSeries, [BULLET, VERTICAL_BULLET]),
                     pane
-                );                          
+                );
             }
         },
 
@@ -8399,7 +8405,7 @@ kendo_module({
         createAreaChart: function(series, pane) {
             if (series.length === 0) {
                 return;
-            }            
+            }
 
             var plotArea = this,
                 firstSeries = series[0],
@@ -10481,7 +10487,7 @@ kendo_module({
         cleanupNestedSeriesDefaults(commonThemeDefaults);
 
         for (i = 0; i < seriesLength; i++) {
-        
+
             seriesType = series[i].type || options.seriesDefaults.type;
 
             var baseOptions = deepExtend(
