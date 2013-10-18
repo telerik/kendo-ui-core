@@ -401,8 +401,11 @@ $(function () {
             console.log(this._zoom);
         },
         select: function (e) {
-            var item = e.item, scIndex = 0 , ecIndex = 0;
-            if (item instanceof kendo.diagram.Connection) {
+            var items = e.items, scIndex = 0 , ecIndex = 0, item;
+            var sc = $("#StartCap").data("kendoDropDownList");
+            var ec = $("#EndCap").data("kendoDropDownList");
+            if(items.length===1 && items[0] instanceof kendo.diagram.Connection){
+                item =items[0];
                 for (var i = 0; i < caps.length; i++) {
                     var cap = caps[i];
                     if (cap.value == item.options.startCap) {
@@ -412,12 +415,12 @@ $(function () {
                         ecIndex = i;
                     }
                 }
-
-                var sc = $("#StartCap").data("kendoDropDownList");
-                var ec = $("#EndCap").data("kendoDropDownList");
-
                 sc.select(scIndex);
                 ec.select(ecIndex);
+            }
+            else{
+                sc.select(0);
+                ec.select(0);
             }
         }
     });
