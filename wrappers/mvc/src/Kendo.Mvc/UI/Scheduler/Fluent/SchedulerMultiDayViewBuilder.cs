@@ -3,12 +3,12 @@
     using System;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="SchedulerViewWeek"/>.
+    /// Defines the fluent interface for configuring the <see cref="SchedulerMultiDayView"/>.
     /// </summary>
-    public class SchedulerViewMultiDayBuilder<TView> : SchedulerViewBaseBuilder<TView, SchedulerViewMultiDayBuilder<TView>>
-        where TView : SchedulerViewMultiDay
+    public class SchedulerMultiDayViewBuilder<TView> : SchedulerBaseViewBuilder<TView, SchedulerMultiDayViewBuilder<TView>>
+        where TView : SchedulerMultiDayView
     {
-        public SchedulerViewMultiDayBuilder(TView resource)
+        public SchedulerMultiDayViewBuilder(TView resource)
             : base(resource)
         {
         }
@@ -17,7 +17,7 @@
         /// The template used to render the "all day" scheduler events.
         /// </summary>
         /// <param name="allDayEventTemplate">The allDayEventTemplate</param>
-        public SchedulerViewMultiDayBuilder<TView> AllDayEventTemplate(string allDayEventTemplate)
+        public SchedulerMultiDayViewBuilder<TView> AllDayEventTemplate(string allDayEventTemplate)
         {
             view.AllDayEventTemplate = allDayEventTemplate;
 
@@ -28,7 +28,7 @@
         /// The Id of the template used to render the "all day" scheduler events.
         /// </summary>
         /// <param name="allDayEventTemplateId">The allDayEventTemplateId</param>
-        public SchedulerViewMultiDayBuilder<TView> AllDayEventTemplateId(string allDayEventTemplateId)
+        public SchedulerMultiDayViewBuilder<TView> AllDayEventTemplateId(string allDayEventTemplateId)
         {
             view.AllDayEventTemplateId = allDayEventTemplateId;
 
@@ -39,7 +39,7 @@
         /// If set to true the scheduler will display a slot for "all day" events. Default value is true.
         /// </summary>
         /// <param name="allDaySlot">The allDaySlot</param>
-        public SchedulerViewMultiDayBuilder<TView> AllDaySlot(bool allDaySlot)
+        public SchedulerMultiDayViewBuilder<TView> AllDaySlot(bool allDaySlot)
         {
             view.AllDaySlot = allDaySlot;
 
@@ -50,7 +50,7 @@
         /// The template used to render the date header cells.
         /// </summary>
         /// <param name="dateHeaderTemplate">The dateHeaderTemplate</param>
-        public SchedulerViewMultiDayBuilder<TView> DateHeaderTemplate(string dateHeaderTemplate)
+        public SchedulerMultiDayViewBuilder<TView> DateHeaderTemplate(string dateHeaderTemplate)
         {
             view.DateHeaderTemplate = dateHeaderTemplate;
 
@@ -61,7 +61,7 @@
         /// The Id of the template used to render the date header cells.
         /// </summary>
         /// <param name="dateHeaderTemplateId">The dateHeaderTemplateId</param>
-        public SchedulerViewMultiDayBuilder<TView> DateHeaderTemplateId(string dateHeaderTemplateId)
+        public SchedulerMultiDayViewBuilder<TView> DateHeaderTemplateId(string dateHeaderTemplateId)
         {
             view.DateHeaderTemplateId = dateHeaderTemplateId;
 
@@ -72,7 +72,7 @@
         /// The number of minutes represented by a major tick.
         /// </summary>
         /// <param name="majorTick">The majorTick</param>
-        public SchedulerViewMultiDayBuilder<TView> MajorTick(int majorTick)
+        public SchedulerMultiDayViewBuilder<TView> MajorTick(int majorTick)
         {
             view.MajorTick = majorTick;
 
@@ -83,7 +83,7 @@
         /// The template used to render the all day slot content
         /// </summary>
         /// <param name="slotTemplate">The slotTemplate</param>
-        public SchedulerViewMultiDayBuilder<TView> AllDaySlotTemplate(string slotTemplate)
+        public SchedulerMultiDayViewBuilder<TView> AllDaySlotTemplate(string slotTemplate)
         {
             view.AllDaySlotTemplate = slotTemplate;
 
@@ -94,7 +94,7 @@
         /// The Id of the template used to render the all day slot content.
         /// </summary>
         /// <param name="slotTemplateId">The id of template</param>
-        public SchedulerViewMultiDayBuilder<TView> AllDaySlotTemplateId(string templateId)
+        public SchedulerMultiDayViewBuilder<TView> AllDaySlotTemplateId(string templateId)
         {
             view.AllDaySlotTemplateId = templateId;
 
@@ -104,7 +104,7 @@
         /// The template used to render the slot content
         /// </summary>
         /// <param name="slotTemplate">The slotTemplate</param>
-        public SchedulerViewMultiDayBuilder<TView> SlotTemplate(string slotTemplate)
+        public SchedulerMultiDayViewBuilder<TView> SlotTemplate(string slotTemplate)
         {
             view.SlotTemplate = slotTemplate;
 
@@ -115,7 +115,7 @@
         /// The Id of the template used to render the slot content.
         /// </summary>
         /// <param name="slotTemplateId">The id of template</param>
-        public SchedulerViewMultiDayBuilder<TView> SlotTemplateId(string templateId)
+        public SchedulerMultiDayViewBuilder<TView> SlotTemplateId(string templateId)
         {
             view.SlotTemplateId = templateId;
 
@@ -126,7 +126,7 @@
         /// The template used to render the major ticks.
         /// </summary>
         /// <param name="majorTimeHeaderTemplate">The majorTimeHeaderTemplate</param>
-        public SchedulerViewMultiDayBuilder<TView> MajorTimeHeaderTemplate(string majorTimeHeaderTemplate)
+        public SchedulerMultiDayViewBuilder<TView> MajorTimeHeaderTemplate(string majorTimeHeaderTemplate)
         {
             view.MajorTimeHeaderTemplate = majorTimeHeaderTemplate;
 
@@ -137,7 +137,7 @@
         /// The Id of the template used to render the major ticks.
         /// </summary>
         /// <param name="majorTimeHeaderTemplateId">The majorTimeHeaderTemplateId</param>
-        public SchedulerViewMultiDayBuilder<TView> MajorTimeHeaderTemplateId(string majorTimeHeaderTemplateId)
+        public SchedulerMultiDayViewBuilder<TView> MajorTimeHeaderTemplateId(string majorTimeHeaderTemplateId)
         {
             view.MajorTimeHeaderTemplateId = majorTimeHeaderTemplateId;
 
@@ -148,7 +148,7 @@
         /// The number of time slots to display per major tick.
         /// </summary>
         /// <param name="minorTickCount">The minorTickCount</param>
-        public SchedulerViewMultiDayBuilder<TView> MinorTickCount(int minorTickCount)
+        public SchedulerMultiDayViewBuilder<TView> MinorTickCount(int minorTickCount)
         {
             view.MinorTickCount = minorTickCount;
 
@@ -159,7 +159,7 @@
         /// The template used to render the minor ticks.
         /// </summary>
         /// <param name="minorTimeHeaderTemplate">The minorTimeHeaderTemplate</param>
-        public SchedulerViewMultiDayBuilder<TView> MinorTimeHeaderTemplate(string minorTimeHeaderTemplate)
+        public SchedulerMultiDayViewBuilder<TView> MinorTimeHeaderTemplate(string minorTimeHeaderTemplate)
         {
             view.MinorTimeHeaderTemplate = minorTimeHeaderTemplate;
 
@@ -170,7 +170,7 @@
         /// The Id of the template used to render the minor ticks.
         /// </summary>
         /// <param name="minorTimeHeaderTemplateId">The minorTimeHeaderTemplateId</param>
-        public SchedulerViewMultiDayBuilder<TView> MinorTimeHeaderTemplateId(string minorTimeHeaderTemplateId)
+        public SchedulerMultiDayViewBuilder<TView> MinorTimeHeaderTemplateId(string minorTimeHeaderTemplateId)
         {
             view.MinorTimeHeaderTemplateId = minorTimeHeaderTemplateId;
 
@@ -204,7 +204,7 @@
         /// )
         /// </code>
         /// </example>
-        public SchedulerViewMultiDayBuilder<TView> StartTime(DateTime startTime)
+        public SchedulerMultiDayViewBuilder<TView> StartTime(DateTime startTime)
         {
             view.StartTime = startTime;
 
@@ -240,7 +240,7 @@
         /// )
         /// </code>
         /// </example>
-        public SchedulerViewMultiDayBuilder<TView> StartTime(int hours, int minutes, int seconds)
+        public SchedulerMultiDayViewBuilder<TView> StartTime(int hours, int minutes, int seconds)
         {
             var today = DateTime.Today;
 
@@ -276,7 +276,7 @@
         /// )
         /// </code>
         /// </example>
-        public SchedulerViewMultiDayBuilder<TView> EndTime(DateTime endTime)
+        public SchedulerMultiDayViewBuilder<TView> EndTime(DateTime endTime)
         {
             view.EndTime = endTime;
 
@@ -312,7 +312,7 @@
         /// )
         /// </code>
         /// </example>
-        public SchedulerViewMultiDayBuilder<TView> EndTime(int hours, int minutes, int seconds)
+        public SchedulerMultiDayViewBuilder<TView> EndTime(int hours, int minutes, int seconds)
         {
             var today = DateTime.Today;
 
@@ -325,7 +325,7 @@
         /// The start time of the business hours. The scheduler will display events after the workDayStart if "WorkDayCommand" button is clicked.
         /// </summary>
         /// <param name="workDayStart">The WorkDayStart</param>
-        public SchedulerViewMultiDayBuilder<TView> WorkDayStart(DateTime workDayStart)
+        public SchedulerMultiDayViewBuilder<TView> WorkDayStart(DateTime workDayStart)
         {
             view.WorkDayStart = workDayStart;
 
@@ -338,7 +338,7 @@
         /// <param name="hours">The hours</param>
         /// <param name="minutes">The minutes</param>
         /// <param name="seconds">The seconds</param>
-        public SchedulerViewMultiDayBuilder<TView> WorkDayStart(int hours, int minutes, int seconds)
+        public SchedulerMultiDayViewBuilder<TView> WorkDayStart(int hours, int minutes, int seconds)
         {
             var today = DateTime.Today;
 
@@ -351,7 +351,7 @@
         /// The end time of the business hours. The scheduler will display events before the workDayEnd if "WorkDayCommand" button is clicked.
         /// </summary>
         /// <param name="workDayEnd">The WorkDayEnd</param>
-        public SchedulerViewMultiDayBuilder<TView> WorkDayEnd(DateTime workDayEnd)
+        public SchedulerMultiDayViewBuilder<TView> WorkDayEnd(DateTime workDayEnd)
         {
             view.WorkDayEnd = workDayEnd;
 
@@ -364,7 +364,7 @@
         /// <param name="hours">The hours</param>
         /// <param name="minutes">The minutes</param>
         /// <param name="seconds">The seconds</param>
-        public SchedulerViewMultiDayBuilder<TView> WorkDayEnd(int hours, int minutes, int seconds)
+        public SchedulerMultiDayViewBuilder<TView> WorkDayEnd(int hours, int minutes, int seconds)
         {
             var today = DateTime.Today;
 
@@ -377,7 +377,7 @@
         /// If set to false the scheduler will not display the "WorkDayCommand" button. Default value is true.
         /// </summary>
         /// <param name="showWorkDayCommand">The showWorkDayCommand</param>
-        public SchedulerViewMultiDayBuilder<TView> WorkDayCommand(bool showWorkDayCommand)
+        public SchedulerMultiDayViewBuilder<TView> WorkDayCommand(bool showWorkDayCommand)
         {
             view.WorkDayCommand = showWorkDayCommand;
 
@@ -388,7 +388,7 @@
         /// If set to false the scheduler will not display the "footer" area. Default value is true.
         /// </summary>
         /// <param name="footer">The footer</param>
-        public SchedulerViewMultiDayBuilder<TView> Footer(bool showFooter)
+        public SchedulerMultiDayViewBuilder<TView> Footer(bool showFooter)
         {
             view.Footer = showFooter;
 
@@ -399,7 +399,7 @@
         /// Defines the working days of the week
         /// </summary>
         /// <param name="days">An array of working week days</param>
-        public SchedulerViewMultiDayBuilder<TView> WorkWeekDays(params DayOfWeek[] days)
+        public SchedulerMultiDayViewBuilder<TView> WorkWeekDays(params DayOfWeek[] days)
         {
             view.WorkWeekDays = days;
 

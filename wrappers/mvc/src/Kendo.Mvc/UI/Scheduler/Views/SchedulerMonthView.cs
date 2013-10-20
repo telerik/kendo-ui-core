@@ -5,9 +5,9 @@
     using System.Linq;
     using System.Text;
 
-    public class SchedulerViewMonth : SchedulerViewBase
+    public class SchedulerMonthView : SchedulerViewBase
     {
-        public SchedulerViewMonth() : base(SchedulerViewType.Month)
+        public SchedulerMonthView() : base(SchedulerViewType.Month)
         {            
         }
 

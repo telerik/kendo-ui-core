@@ -3,20 +3,20 @@
     using System;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="SchedulerViewBaseBuilder{TView, TViewBuilder}"/>.
+    /// Defines the fluent interface for configuring the <see cref="SchedulerBaseViewBuilder{TView, TViewBuilder}"/>.
     /// </summary>
-    public class SchedulerViewBaseBuilder<TView, TViewBuilder>
+    public class SchedulerBaseViewBuilder<TView, TViewBuilder>
         where TView : class, ISchedulerView
-        where TViewBuilder : SchedulerViewBaseBuilder<TView, TViewBuilder>
+        where TViewBuilder : SchedulerBaseViewBuilder<TView, TViewBuilder>
     {
         protected readonly TView view;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SchedulerViewBaseBuilder{TView, TViewBuilder}"/> class.
+        /// Initializes a new instance of the <see cref="SchedulerBaseViewBuilder{TView, TViewBuilder}"/> class.
         /// </summary>
         /// <param name="view">The resource</param>
         /// 
-        public SchedulerViewBaseBuilder(TView view)
+        public SchedulerBaseViewBuilder(TView view)
         {
             this.view = view;
         }

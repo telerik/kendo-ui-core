@@ -4,9 +4,9 @@
     using System.Linq;
     using System.Collections.Generic;
 
-    public abstract class SchedulerViewMultiDay : SchedulerViewBase
+    public abstract class SchedulerMultiDayView : SchedulerViewBase
     {
-        protected SchedulerViewMultiDay(SchedulerViewType type) : base(type)
+        protected SchedulerMultiDayView(SchedulerViewType type) : base(type)
         {
             AllDaySlot = true;
             WorkDayCommand = true;

@@ -3,9 +3,9 @@
     using System;
     using System.Collections.Generic;
 
-    public class SchedulerViewAgenda : SchedulerViewBase
+    public class SchedulerAgendaView : SchedulerViewBase
     {
-        public SchedulerViewAgenda() : base (SchedulerViewType.Agenda)
+        public SchedulerAgendaView() : base (SchedulerViewType.Agenda)
         {            
         }
 

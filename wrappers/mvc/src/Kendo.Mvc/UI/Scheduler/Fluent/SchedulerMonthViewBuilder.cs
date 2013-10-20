@@ -1,12 +1,12 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="SchedulerViewMonth"/>.
+    /// Defines the fluent interface for configuring the <see cref="SchedulerMonthView"/>.
     /// </summary>
-    public class SchedulerViewMonthBuilder<TView> : SchedulerViewBaseBuilder<TView, SchedulerViewMonthBuilder<TView>>
-        where TView : SchedulerViewMonth
+    public class SchedulerMonthViewBuilder<TView> : SchedulerBaseViewBuilder<TView, SchedulerMonthViewBuilder<TView>>
+        where TView : SchedulerMonthView
     {
-        public SchedulerViewMonthBuilder(TView resource)
+        public SchedulerMonthViewBuilder(TView resource)
             : base(resource)
         { 
         }
@@ -15,7 +15,7 @@
         /// The template used to render the day slots in month view.
         /// </summary>
         /// <param name="dayTemplate">The dayTemplate</param>
-        public SchedulerViewMonthBuilder<TView> DayTemplate(string dayTemplate)
+        public SchedulerMonthViewBuilder<TView> DayTemplate(string dayTemplate)
         {
             view.DayTemplate = dayTemplate;
 
@@ -26,7 +26,7 @@
         /// The Id of the template used to render the day slots in month view.
         /// </summary>
         /// <param name="dayTemplateId">The dayTemplateId</param>
-        public SchedulerViewMonthBuilder<TView> DayTemplateId(string dayTemplateId)
+        public SchedulerMonthViewBuilder<TView> DayTemplateId(string dayTemplateId)
         {
             view.DayTemplateId = dayTemplateId;
 
@@ -37,7 +37,7 @@
         /// The height of the scheduler event rendered in month view.
         /// </summary>
         /// <param name="eventHeight">The eventHeight</param>
-        public SchedulerViewMonthBuilder<TView> EventHeight(int eventHeight)
+        public SchedulerMonthViewBuilder<TView> EventHeight(int eventHeight)
         {
             view.EventHeight = eventHeight;
 
