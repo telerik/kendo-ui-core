@@ -4787,9 +4787,8 @@ kendo_module({
 
     var SplineSegment = LineSegment.extend({
         points: function(){
-            //move curveProcessor initialization to init and get the allowedError from teh parameters
             var segment = this,
-                curveProcessor = new CurveProcessor(0.01, segment.options.closed),
+                curveProcessor = new CurveProcessor(segment.options.closed),
                 points = LineSegment.fn.points.call(this);
 
             return curveProcessor.process(points);
@@ -4957,7 +4956,7 @@ kendo_module({
         points: function() {
             var segment = this,
                 prevSegment = segment.prevSegment,
-                curveProcessor = new CurveProcessor(0, segment.options.closed),
+                curveProcessor = new CurveProcessor(segment.options.closed),
                 linePoints = LineSegment.fn.points.call(this),
                 curvePoints = curveProcessor.process(linePoints),
                 previousPoints,

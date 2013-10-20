@@ -906,7 +906,7 @@ kendo_module({
                 polarAxis = plotArea.polarAxis,
                 center = polarAxis.box.center(),
                 curvePoints,
-                curveProcessor = new CurveProcessor(0.1, false),
+                curveProcessor = new CurveProcessor(false),
                 linePoints = LineSegment.fn.points.call(this);
                 linePoints.push(center);
 

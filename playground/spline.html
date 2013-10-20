@@ -46,7 +46,7 @@
             }
        });
 
-        var arr = new kendo.data.ObservableArray([new model({x: 2, y: 5}),new model({x: 2, y: 4}),new model({x:4, y: 3})]);
+        var arr = new kendo.data.ObservableArray([new model({x: 1, y: 2}),new model({x: 2, y: 3}),new model({x:1, y: 2}),new model({x: 4, y: 0}),new model({x: 2, y: 2})]);
         var viewModel = kendo.observable({
             data: arr,
             push: function(){
@@ -79,7 +79,7 @@
     <div id="polar3"></div>
     <div id="polar"></div>
      <div id="polarArea"></div>
-     <div id="radar"></div>-->
+     <div id="radar"></div>
        <div id="radarArea"></div>
    <--   <div id="splineArea"></div>
      <div id="verticalSplineArea"></div>
