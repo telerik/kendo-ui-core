@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Key Value Observing (KVO)</title>
+        <script>
+            function KeyValueObject() {
+                this.values = {};
+                this.observers = {};
+            }
+
+            KeyValueObject.prototype = {
+                valueFor: function(key) {
+                    return this.values[key];
+                },
+
+                setValue: function(forKey, value) {
+                    if (this.values[forKey] != value) {
+                        this.values[forKey] = value;
+
+                        this.notifyObservers(forKey);
+                    }
+                },
+
+                addObserver: function(observer, forKeyPath) {
+                    var observers = this.observers[forKeyPath];
+
+                    if (!observers) {
+                        this.observers[forKeyPath] = observers = [];
+                    }
+
+                    observers.push(observer);
+                },
+
+                notifyObservers: function(forKeyPath) {
+                    var observers = this.observers[forKeyPath];
+
+                    if (observers) {
+                        for (var observerIndex = 0; observerIndex < observers.length; observerIndex++) {
+                            observers[observerIndex].observeValue(this, forKeyPath);
+                        }
+                    }
+                }
+            }
+
+            function ValueBinder(element, object, keyPath) {
+                this.element = element;
+
+                object.addObserver(this, keyPath);
+
+                this.observeValue(object, keyPath);
+
+                this.element.addEventListener("change", function() {
+                    object.setValue(keyPath, this.value);
+                });
+            }
+
+            ValueBinder.prototype = {
+                observeValue: function(object, keyPath) {
+                    this.element.value = object.valueFor(keyPath);
+                }
+            }
+
+            function TextBinder(element, object, keyPath) {
+                this.element = element;
+
+                object.addObserver(this, keyPath);
+
+                this.observeValue(object, keyPath);
+            }
+
+            TextBinder.prototype = {
+                observeValue: function(object, keyPath) {
+                    this.element.textContent = object.valueFor(keyPath);
+                }
+            }
+
+            function HtmlElement(element) {
+                this.element = element;
+            }
+
+            HtmlElement.prototype = {
+                bind: function(what, toObject, withKeyPath) {
+                    if (what == "value") {
+                        new ValueBinder(this.element, toObject, withKeyPath);
+                    } else if (what == "text") {
+                        new TextBinder(this.element, toObject, withKeyPath);
+                    }
+                }
+            }
+
+        </script>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.binder.js"></script>
+    </head>
+    <body>
+        <input id="input" />
+        <span id="span"></span>
+
+        <input data-bind="value: foo" />
+        <span data-bind="text: foo"></span>
+
+        <button onclick="return change()">click me</button>
+
+        <script>
+            function change() {
+                object.setValue("foo", "bar");
+                return false;
+            }
+
+            var object = new KeyValueObject();
+            object.setValue("foo", "foo");
+
+            new HtmlElement(document.getElementById("input")).bind("value", object, "foo");
+            new HtmlElement(document.getElementById("span")).bind("text", object, "foo");
+
+            var vm = kendo.observable({
+                foo: "foo"
+            });
+
+            kendo.bind(document.body, vm);
+
+            console.time("KVO");
+            for (var i = 0; i < 10000; i++) {
+                object.setValue("foo", i);
+            }
+            console.timeEnd("KVO");
+
+            console.time("Kendo MVVM");
+            for (var i = 0; i < 10000; i++) {
+                vm.set("foo", i);
+            }
+            console.timeEnd("Kendo MVVM");
+        </script>
+    </body>
+</html>
