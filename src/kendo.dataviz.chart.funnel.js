@@ -96,7 +96,7 @@ kendo_module({
         },
 
         formatPointValue:function(point,format){
-            return autoFormat(format,point.value)
+            return autoFormat(format,point.value);
         },
 
         render: function() {
@@ -199,9 +199,9 @@ kendo_module({
                 if(!labels.color){
                     var brightnessValue = new Color(series.color).percBrightness();
                     if(brightnessValue > 180){
-                        labels.color = BLACK
+                        labels.color = BLACK;
                     }else{
-                        labels.color = WHITE
+                        labels.color = WHITE;
                     }
                 }
 
