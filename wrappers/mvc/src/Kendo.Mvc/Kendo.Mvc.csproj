@@ -1064,15 +1064,15 @@
     <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorWeeklyMessagesBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorYearlyMessagesBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceMessagesBuilder.cs" />
-    <Compile Include="UI\Scheduler\Fluent\SchedulerViewAgendaBuilder.cs" />
-    <Compile Include="UI\Scheduler\Fluent\SchedulerViewDayBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerAgendaViewBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerDayViewBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerEditableSettingsBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewMessagesBuilder.cs" />
-    <Compile Include="UI\Scheduler\Fluent\SchedulerViewMonthBuilder.cs" />
-    <Compile Include="UI\Scheduler\Fluent\SchedulerViewBaseBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerMonthViewBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerBaseViewBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewEditableSettingsBuilder.cs" />
-    <Compile Include="UI\Scheduler\Fluent\SchedulerViewMultiDayBuilder.cs" />
-    <Compile Include="UI\Scheduler\Fluent\SchedulerViewWeekBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerMultiDayViewBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerWeekViewBuilder.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEventController.cs" />
     <Compile Include="UI\Scheduler\SchedulerMobileType.cs" />
     <Compile Include="UI\Scheduler\SchedulerViewDataContainer.cs" />
@@ -1094,10 +1094,10 @@
     <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceMessages.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerViewMessages.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerCustomView.cs" />
-    <Compile Include="UI\Scheduler\Views\SchedulerViewBase.cs" />
+    <Compile Include="UI\Scheduler\Views\SchedulerBaseView.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerViewEditableSettings.cs" />
-    <Compile Include="UI\Scheduler\Views\SchedulerViewAgenda.cs" />
-    <Compile Include="UI\Scheduler\Views\SchedulerViewMonth.cs" />
+    <Compile Include="UI\Scheduler\Views\SchedulerAgendaView.cs" />
+    <Compile Include="UI\Scheduler\Views\SchedulerMonthView.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerEventBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerResourceBuilder.cs" />
@@ -1109,11 +1109,11 @@
     <Compile Include="UI\Scheduler\ISchedulerEventService.cs" />
     <Compile Include="UI\Scheduler\Views\ISchedulerView.cs" />
     <Compile Include="UI\Scheduler\Scheduler.cs" />
-    <Compile Include="UI\Scheduler\Views\SchedulerViewDay.cs" />
+    <Compile Include="UI\Scheduler\Views\SchedulerDayView.cs" />
     <Compile Include="UI\Scheduler\SchedulerResource.cs" />
     <Compile Include="UI\Scheduler\SchedulerViewMode.cs" />
-    <Compile Include="UI\Scheduler\Views\SchedulerViewMultiDay.cs" />
-    <Compile Include="UI\Scheduler\Views\SchedulerViewWeek.cs" />
+    <Compile Include="UI\Scheduler\Views\SchedulerMultiDayView.cs" />
+    <Compile Include="UI\Scheduler\Views\SchedulerWeekView.cs" />
     <Compile Include="UI\SecurityTrimming.cs" />
     <Compile Include="UI\SecurityTrimmingBuilder.cs" />
     <Compile Include="UI\Slider\Fluent\SliderTooltipBuilder.cs" />
@@ -1207,6 +1207,8 @@
     <Compile Include="UI\NavigationItemContainerExtensions.cs" />
     <Compile Include="UI\TimePicker\Fluent\TimePickerBuilder.cs" />
     <Compile Include="UI\TimePicker\TimePicker.cs" />
+    <Compile Include="UI\TimezoneEditor\Html\TimezoneEditorHtmlBuilder.cs" />
+    <Compile Include="UI\TimezoneEditor\TimezoneEditor.cs" />
     <Compile Include="UI\Tooltip\Fluent\TooltipEventBuilder.cs" />
     <Compile Include="UI\Tooltip\TooltipShowOn.cs" />
     <Compile Include="UI\Tooltip\Fluent\TooltipBuilder.cs" />
@@ -1450,7 +1452,9 @@
       <Link>Scripts\kendo.validator.aspnetmvc.js</Link>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UI\TimezoneEditor\Fluent\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
