@@ -553,13 +553,14 @@
                 start.value("America/Toronto");
                 start.trigger("change");
 
-                checkbox.click();
+                checkbox.triggerHandler("click");
+
                 end.value("America/Toronto");
                 end.trigger("change");
 
                 equal(model.endTimezone, "America/Toronto");
 
-                checkbox.click();
+                checkbox.triggerHandler("click");
 
                 ok(!end.wrapper.closest(".k-edit-field").is(":visible"));
                 ok(!model.endTimezone);
