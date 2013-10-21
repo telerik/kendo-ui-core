@@ -127,11 +127,11 @@
         /// <code lang="Razor">
         /// @(Html.Kendo().RecurrenceEditor()
         ///     .Name(&quot;recurrenceEditor&quot;)
-        ///     .Frequency(new List<RecurrenceEditorFrequency>() { 
+        ///     .Frequency(new List&lt;RecurrenceEditorFrequency&gt;() {
         ///         RecurrenceEditorFrequency.Never,
         ///         RecurrenceEditorFrequency.Daily,
         ///         RecurrenceEditorFrequency.Weekly,
-        ///     })
+        ///     }))
         /// </code>
         /// </example>
         public RecurrenceEditorBuilder Frequency(IEnumerable<RecurrenceEditorFrequency> frequencies)
@@ -140,6 +140,27 @@
             {
                 Component.Frequencies.Add(frequency);
             }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the events configuration of the scheduler.
+        /// </summary>
+        /// <param name="clientEventsAction">The lambda which configures the recurrenceEditor events</param>
+        /// <example>
+        /// <code lang="ASPX">
+        ///  &lt;%= Html.Kendo().RecurrenceEditor()
+        ///             .Name(&quot;RecurrenceEditor&quot;)
+        ///             .Events(events =&gt;
+        ///                 events.Change(&quot;change&quot;)
+        ///             )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public RecurrenceEditorBuilder Events(Action<RecurrenceEditorEventBuilder> clientEventsAction)
+        {
+            clientEventsAction(new RecurrenceEditorEventBuilder(Component.Events));
 
             return this;
         }
