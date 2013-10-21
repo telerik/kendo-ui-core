@@ -794,6 +794,9 @@
     <Content Include="Views\web\progressbar\rtl.cshtml" />
     <Content Include="Views\web\progressbar\mvvm.cshtml" />
     <Content Include="Views\web\progressbar\chunk.cshtml" />
+    <Content Include="Views\dataviz\area-charts\error-bars.cshtml" />
+    <Content Include="Views\dataviz\bar-charts\error-bars.cshtml" />
+    <Content Include="Views\dataviz\line-charts\error-bars.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
@@ -824,7 +827,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>40083</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
