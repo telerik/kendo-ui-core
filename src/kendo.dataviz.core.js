@@ -37,6 +37,7 @@ kendo_module({
         COORD_PRECISION = 3,
         CLIP = "clip",
         CIRCLE = "circle",
+        CROSS = "cross",
         DEFAULT_FONT = "12px sans-serif",
         DEFAULT_HEIGHT = 400,
         DEFAULT_PRECISION = 6,
@@ -192,12 +193,12 @@ kendo_module({
                 height = box.height(),
                 width = box.width();
 
-            if (x) {
+            if (defined(x)) {
                 box.x1 = x;
                 box.x2 = box.x1 + width;
             }
 
-            if (y) {
+            if (defined(y)) {
                 box.y1 = y;
                 box.y2 = box.y1 + height;
             }
@@ -819,7 +820,7 @@ kendo_module({
                 stroke: border.width ? border.color : "",
                 strokeWidth: border.width,
                 dashType: border.dashType,
-                strokeOpacity: border.opacity,
+                strokeOpacity: valueOrDefault(border.opacity, options.opacity),
                 fill: options.background,
                 fillOpacity: options.opacity,
                 animation: options.animation,
@@ -1881,10 +1882,11 @@ kendo_module({
                 ), halfWidth, elementOptions);
             }  else if (type === TRIANGLE) {
                 points = [
-                    Point2D(box.x1, box.y1),
-                    Point2D(box.x2, box.y1)
+                    Point2D(box.x1 + halfWidth, box.y1),
+                    Point2D(box.x1, box.y2),
+                    Point2D(box.x2, box.y2)
                 ];
-            } else if (type === "cross") {
+            } else if (type === CROSS) {
                 element = view.createGroup();
                 element.children.push(view.createPolyline(
                     [Point2D(box.x1, box.y1), Point2D(box.x2, box.y2)], true, elementOptions
