@@ -1179,6 +1179,7 @@ kendo_module({
                     if (that.editView) {
                         that.editView.purge();
                         that.editView = null;
+                        that.pane.navigate("");
                     }
                 }
             };
@@ -1342,7 +1343,7 @@ kendo_module({
                     });
                 }
 
-                container = that._editContainer;
+                container = that.editView ? that.editView.element : that._editContainer;
 
                 container.on(CLICK + NS, "a.k-grid-cancel", function(e) {
                     e.preventDefault();
@@ -1482,7 +1483,14 @@ kendo_module({
                 }, options));
             } else {
                 html += "</div></div>";
-                that.editView = that.pane.append(html);
+                that.editView = that.pane.append('<div data-role="view" data-init-widgets="false">'+
+                    '<div data-role="header">'+
+                        that._createButton({ name: "update", text: updateText, attr: attr }) +
+                        'Edit'+
+                        that._createButton({ name: "canceledit", text: cancelText, attr: attr }) +
+                    '</div>'+
+                    html +
+                    '</div>');
                 container = that._editContainer = that.editView.element.find(".k-popup-edit-form");
             }
 

@@ -117,6 +117,23 @@
                 ok(wasCalled);
             });
 
+            test("click on cancel button navigates back to grid view", function() {
+                var grid = setup();
+
+                grid.editRow(grid.items().eq(0));
+                grid.editView.element.find(".k-grid-cancel").click();
+
+                ok(grid.view === grid.pane.view(), "Current view is not the one which wraps the Grid");
+            });
+
+            test("click on update button navigates back to grid view", function() {
+                var grid = setup();
+
+                grid.editRow(grid.items().eq(0));
+                grid.editView.element.find(".k-grid-update").click();
+
+                ok(grid.view === grid.pane.view(), "Current view is not the one which wraps the Grid");
+            });
         </script>
     </body>
 </html>
