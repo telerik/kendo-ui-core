@@ -94,9 +94,9 @@
         /// The Id of the template used to render the all day slot content.
         /// </summary>
         /// <param name="slotTemplateId">The id of template</param>
-        public SchedulerMultiDayViewBuilder<TView> AllDaySlotTemplateId(string templateId)
+        public SchedulerMultiDayViewBuilder<TView> AllDaySlotTemplateId(string slotTemplateId)
         {
-            view.AllDaySlotTemplateId = templateId;
+            view.AllDaySlotTemplateId = slotTemplateId;
 
             return this;
         }
@@ -115,9 +115,9 @@
         /// The Id of the template used to render the slot content.
         /// </summary>
         /// <param name="slotTemplateId">The id of template</param>
-        public SchedulerMultiDayViewBuilder<TView> SlotTemplateId(string templateId)
+        public SchedulerMultiDayViewBuilder<TView> SlotTemplateId(string slotTemplateId)
         {
-            view.SlotTemplateId = templateId;
+            view.SlotTemplateId = slotTemplateId;
 
             return this;
         }
@@ -387,7 +387,7 @@
         /// <summary>
         /// If set to false the scheduler will not display the "footer" area. Default value is true.
         /// </summary>
-        /// <param name="footer">The footer</param>
+        /// <param name="showFooter">The footer</param>
         public SchedulerMultiDayViewBuilder<TView> Footer(bool showFooter)
         {
             view.Footer = showFooter;

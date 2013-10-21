@@ -60,7 +60,8 @@
         /// <summary>
         /// Defines a custom view 
         /// </summary>
-        /// <param name="type">The JavaScript type name</param>    
+        /// <param name="type">The JavaScript type name</param>
+        /// <param name="addViewAction">The action for configuring the custom view</param>
         public SchedulerCustomViewBuilder<SchedulerCustomView> CustomView(string type, Action<SchedulerCustomViewBuilder<SchedulerCustomView>> addViewAction)
         {
             SchedulerCustomView view = new SchedulerCustomView(type);

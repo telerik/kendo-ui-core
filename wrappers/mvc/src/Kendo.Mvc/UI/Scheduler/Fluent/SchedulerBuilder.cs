@@ -668,7 +668,7 @@
         /// <summary>
         /// Sets the resources grouping configuration of the scheduler.
         /// </summary>
-        /// <param name="addResourceAction">The lambda which configures the scheduler grouping</param>
+        /// <param name="configuration">The lambda which configures the scheduler grouping</param>
         /// <example>
         /// <code lang="Razor">
         /// @(Html.Kendo().Scheduler&lt;Task&gt;()
@@ -687,11 +687,11 @@
         ///    ))
         /// </code>
         /// </example>
-        public SchedulerBuilder<TModel> Group(Action<SchedulerGroupBuilder<TModel>> configucation)
+        public SchedulerBuilder<TModel> Group(Action<SchedulerGroupBuilder<TModel>> configuration)
         {
             var factory = new SchedulerGroupBuilder<TModel>(Component);
 
-            configucation(factory);
+            configuration(factory);
 
             return this;
         }
@@ -803,7 +803,7 @@
         ///        .Model(m =&gt; m.Id(f =&gt; f.TaskID))
         ///    )&gt;
         /// </code>
-         /// <code lang="Razor">
+        /// <code lang="Razor">
         /// @model IEnumerable&lt;Task&gt;
         /// @(Html.Kendo().Scheduler&lt;Task&gt;()
         ///    .Name(&quot;Scheduler&quot;)

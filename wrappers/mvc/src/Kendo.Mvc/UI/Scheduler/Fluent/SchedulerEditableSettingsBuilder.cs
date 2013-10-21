@@ -6,7 +6,7 @@
     using System.Text;
 
     /// <summary>
-    /// Defines the fluent interface for configuring the <see cref="SchedulerEditableSettings"/>.
+    /// Defines the fluent interface for configuring the <see cref="SchedulerEditableSettings{T}"/>.
     /// </summary>
     public class SchedulerEditableSettingsBuilder<T> 
         where T : class
@@ -80,7 +80,7 @@
         /// <summary>
         /// The EditorTemplate which to be rendered as editor.
         /// </summary>
-        /// <param name="template">The name of the EditorTemplate</param>
+        /// <param name="name">The name of the EditorTemplate</param>
         public SchedulerEditableSettingsBuilder<T> TemplateName(string name)
         {
             container.TemplateName = name;
