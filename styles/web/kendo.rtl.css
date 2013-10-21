@@ -5,6 +5,15 @@
     direction: rtl;
 }
 
+/* AutoComplete */
+
+.k-rtl .k-autocomplete .k-loading,
+.k-rtl .k-multiselect .k-loading
+{
+    right: auto;
+    left: 3px;
+}
+
 /* Buttons */
 
 .k-rtl .k-button-icontext .k-icon,
