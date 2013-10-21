@@ -36,6 +36,18 @@
             set;
         }
 
+        string StartTimezone
+        {
+            get;
+            set;
+        }
+
+        string EndTimezone
+        {
+            get;
+            set;
+        }
+
         string RecurrenceRule
         {
             get;

@@ -27,5 +27,9 @@
         public string RecurrenceRule { get; set; }
 
         public string RecurrenceException { get; set; }
+
+        public string StartTimezone { get; set; }
+
+        public string EndTimezone { get; set; }
     }
 }

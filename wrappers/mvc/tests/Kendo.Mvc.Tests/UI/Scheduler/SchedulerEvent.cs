@@ -8,7 +8,11 @@
 
     public class SchedulerEvent : ISchedulerEvent
     {
-        public int Id { get; set; }
+        public int Id
+        {
+            get;
+            set;
+        }
 
         public string Title
         {
@@ -68,6 +72,18 @@
         }
 
         public string RecurrenceException
+        {
+            get;
+            set;
+        }
+
+        public string StartTimezone
+        {
+            get;
+            set;
+        }
+
+        public string EndTimezone
         {
             get;
             set;
