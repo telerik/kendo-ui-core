@@ -569,7 +569,7 @@ namespace :build do
         zip_bundles.push("#{ARCHIVE_ROOT}/Icenium/#{destination}/js")
 
         tree :to => "#{ARCHIVE_ROOT}/Icenium/#{destination}/styles",
-             :from => FileList[ICENIUM_MIN_CSS].sub!(/styles\/(mobile|dataviz)\//, 'dist/bundles/icenium/styles'),
+             :from => FileList[ICENIUM_MIN_CSS].sub!(/styles\/(mobile|dataviz)/, 'dist/bundles/icenium/styles'),
              :root => 'dist/bundles/icenium/styles'
 
         zip_bundles.push("#{ARCHIVE_ROOT}/Icenium/#{destination}/styles")
