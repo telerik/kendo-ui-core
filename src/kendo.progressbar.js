@@ -32,7 +32,6 @@ kendo_module({
         },
         CHANGE = "change",
         COMPLETE = "complete",
-        START = "start",
         BOOLEAN = "boolean",
         math = Math,
         extend = $.extend,
@@ -83,8 +82,7 @@ kendo_module({
 
         events: [
             CHANGE,
-            COMPLETE,
-            START
+            COMPLETE
         ],
 
         options: {
@@ -104,7 +102,7 @@ kendo_module({
         _fields: function() {
             var that = this;
 
-            that._isStarted = that._isFinished = false;
+            that._isStarted = false;
 
             that.progressWrapper = that.progressStatus = undefined;
         },
@@ -152,7 +150,7 @@ kendo_module({
             } else {
                 if (options.showStatus){
                     that.progressStatus = that.wrapper.prepend(templates.progressStatus)
-                                                 .find("." + KPROGRESSSTATUS);
+                                              .find("." + KPROGRESSSTATUS);
 
                     initialStatusValue = (options.value !== false) ? options.value : options.min;
 
@@ -188,7 +186,9 @@ kendo_module({
 
                             options.value = validated;
 
-                            that._change();
+                            that._isStarted = true;
+
+                            that._updateProgress();
                         }
                     }
                 } else if (!value) {
@@ -219,19 +219,6 @@ kendo_module({
             }
 
             return value;
-        },
-
-        _change: function() {
-            var that = this;
-            var options = that.options;
-
-            if(!that._isStarted) {
-                that.trigger(START, { value: options.value });
-
-                that._isStarted = true;
-            }
-
-            that._updateProgress();
         },
 
         _updateProgress: function() {
@@ -346,7 +333,7 @@ kendo_module({
                 that.trigger(CHANGE, { value: currentValue });
             }
 
-            if (currentValue === options.max && that._isFinished === false && that._isStarted) {
+            if (currentValue === options.max && that._isStarted) {
                 that.trigger(COMPLETE, { value: options.max });
                 that._isFinished = true;
             }
@@ -409,14 +396,10 @@ kendo_module({
             that.progressWrapper = $("<div class='" + KPROGRESSWRAPPER + "'></div>").appendTo(that.wrapper);
 
             if (that.options.showStatus) {
-                that._addProgressStatus();
+                that.progressWrapper.append(templates.progressStatus);
 
                 that.progressStatus = that.wrapper.find("." + KPROGRESSSTATUS);
             }
-        },
-
-        _addProgressStatus: function() {
-            this.progressWrapper.append(templates.progressStatus);
         },
 
         _calculateChunkSize: function() {

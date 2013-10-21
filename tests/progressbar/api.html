@@ -136,149 +136,6 @@
                 equal(pb.value(), 60);
             });
 
-            asyncTest("Start event is fired when value is changed for the first time (type='value')", function() {
-                var startFired = false;
-
-                pb = createProgressbar({
-                    min: 20,
-                    max: 60,
-                    value: 20,
-                    type: "value",
-                    start: function(){
-                        startFired = true;
-                    },
-                    animation: {
-                        duration: 10
-                    }
-                });
-
-                pb.value(30);
-
-                setTimeout(function(){
-                    ok(startFired);
-                    start();
-                }, 40);
-            });
-
-            asyncTest("Start event is fired only once (type='value')", function() {
-                var startFiredCounter = 0;
-
-                pb = createProgressbar({
-                    min: 20,
-                    max: 60,
-                    value: 20,
-                    type: "value",
-                    start: function(){
-                        startFiredCounter++;
-                    },
-                    animation: {
-                        duration: 10
-                    }
-                });
-
-                pb.value(30);
-                pb.value(50);
-
-                setTimeout(function(){
-                    equal(startFiredCounter, 1);
-                    start();
-                }, 50);
-            });
-
-            asyncTest("Start event is fired when value is changed for the first time (type='percent')", function() {
-                var startFired = false;
-
-                pb = createProgressbar({
-                    min: 20,
-                    max: 60,
-                    value: 20,
-                    type: "percent",
-                    start: function(){
-                        startFired = true;
-                    },
-                    animation: {
-                        duration: 10
-                    }
-                });
-
-                pb.value(30);
-
-                setTimeout(function(){
-                    ok(startFired);
-                    start();
-                }, 30);
-            });
-
-            asyncTest("Start event is fired only once (type='percent')", function() {
-                var startFiredCounter = 0;
-
-                pb = createProgressbar({
-                    min: 20,
-                    max: 60,
-                    value: 20,
-                    type: "percent",
-                    start: function(){
-                        startFiredCounter++;
-                    },
-                    animation: {
-                        duration: 10
-                    }
-                });
-
-                pb.value(30);
-                pb.value(50);
-
-                setTimeout(function(){
-                    equal(startFiredCounter, 1);
-                    start();
-                }, 40);
-            });
-
-            asyncTest("Start event is fired when value is changed for the first time (type='chunk')", function() {
-                var startFired = false;
-
-                pb = createProgressbar({
-                    min: 20,
-                    max: 60,
-                    value: 20,
-                    type: "chunk",
-                    start: function(){
-                        startFired = true;
-                    },
-                    animation: false
-                });
-
-                pb.value(30);
-
-                setTimeout(function(){
-                    ok(startFired);
-                    start();
-                }, 30);
-            });
-
-            asyncTest("Start event is fired only once (type='chunk')", function() {
-                var startFiredCounter = 0;
-
-                pb = createProgressbar({
-                    min: 20,
-                    max: 60,
-                    value: 20,
-                    type: "chunk",
-                    start: function(){
-                        startFiredCounter++;
-                    },
-                    animation: false
-                });
-
-                pb.value(30);
-                pb.value(50);
-
-                setTimeout(function(){
-                    equal(startFiredCounter, 1);
-                    start();
-                }, 40);
-            });
-
             asyncTest("Change event is fired only once per value (type='chunk')", function() {
                 var changeFiredCounter = 0;
 
@@ -534,7 +391,7 @@
                 }, 40);
             });
 
-            asyncTest("Complete event is fired only once (type='value')", function(){
+            asyncTest("Complete event is fired each time when max is reached (type='value')", function(){
                 var completeFiredCounter = 0;
 
                 pb = createProgressbar({
@@ -553,7 +410,7 @@
                 pb.value(65);
 
                 setTimeout(function(){
-                    equal(completeFiredCounter, 1);
+                    equal(completeFiredCounter, 2);
                     start();
                 }, 40);
             });
@@ -606,7 +463,7 @@
                 }, 40);
             });
 
-            asyncTest("Complete event is fired only once (type='percent')", function(){
+            asyncTest("Complete event is fired each time when max is reached (type='percent')", function(){
                 var completeFiredCounter = 0;
 
                 pb = createProgressbar({
@@ -625,7 +482,7 @@
                 pb.value(65);
 
                 setTimeout(function(){
-                    equal(completeFiredCounter, 1);
+                    equal(completeFiredCounter, 2);
                     start();
                 }, 40);
             });
@@ -678,7 +535,7 @@
                 }, 40);
             });
 
-            asyncTest("Complete event is fired only once (type='chunk')", function(){
+            asyncTest("Complete event is fired each time when max is reached (type='chunk')", function(){
                 var completeFiredCounter = 0;
 
                 pb = createProgressbar({
@@ -694,6 +551,75 @@
 
                 pb.value(60);
                 pb.value(50);
+                pb.value(65);
+
+                setTimeout(function() {
+                    equal(completeFiredCounter, 2);
+                    start();
+                }, 40);
+            });
+
+            asyncTest("Complete event is not fired max is set multiple times in a row (type='value')", function(){
+                var completeFiredCounter = 0;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "value",
+                    complete: function() {
+                        completeFiredCounter++;
+                    },
+                    animation: false
+                });
+
+                pb.value(60);
+                pb.value(65);
+
+                setTimeout(function() {
+                    equal(completeFiredCounter, 1);
+                    start();
+                }, 40);
+            });
+
+            asyncTest("Complete event is not fired max is set multiple times in a row (type='percent')", function(){
+                var completeFiredCounter = 0;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "percent",
+                    complete: function() {
+                        completeFiredCounter++;
+                    },
+                    animation: false
+                });
+
+                pb.value(60);
+                pb.value(65);
+
+                setTimeout(function() {
+                    equal(completeFiredCounter, 1);
+                    start();
+                }, 40);
+            });
+
+            asyncTest("Complete event is not fired max is set multiple times in a row (type='chunk')", function(){
+                var completeFiredCounter = 0;
+
+                pb = createProgressbar({
+                    min: 20,
+                    max: 60,
+                    value: 20,
+                    type: "chunk",
+                    complete: function() {
+                        completeFiredCounter++;
+                    },
+                    animation: false
+                });
+
+                pb.value(60);
                 pb.value(65);
 
                 setTimeout(function() {
