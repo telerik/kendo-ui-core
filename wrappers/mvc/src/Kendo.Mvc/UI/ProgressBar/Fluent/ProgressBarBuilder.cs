@@ -116,7 +116,7 @@
         /// <summary>
         /// Sets the maximum value of the ProgressBar
         /// </summary>
-        /// <param name="value">Integer specifying the maximum value</param>
+        /// <param name="value">Number specifying the maximum value</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().ProgressBar()
@@ -125,7 +125,7 @@
         /// %&gt;
         /// </code>
         /// </example>
-        public ProgressBarBuilder Max(int value)
+        public ProgressBarBuilder Max(double value)
         {
             Component.Max = value;
 
@@ -135,7 +135,7 @@
         /// <summary>
         /// Sets the minimum value of the ProgressBar
         /// </summary>
-        /// <param name="value">Integer specifying the minimum value</param>
+        /// <param name="value">Number specifying the minimum value</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().ProgressBar()
@@ -144,7 +144,7 @@
         /// %&gt;
         /// </code>
         /// </example>
-        public ProgressBarBuilder Min(int value)
+        public ProgressBarBuilder Min(double value)
         {
             Component.Min = value;
 
@@ -230,7 +230,7 @@
         /// <summary>
         /// Sets the current value of the ProgressBar
         /// </summary>
-        /// <param name="value">Integer specifying the value</param>
+        /// <param name="value">Number specifying the value</param>
         /// <example>
         /// <code lang="CS">
         /// &lt;%= Html.Kendo().ProgressBar()
@@ -241,7 +241,7 @@
         /// %&gt;
         /// </code>
         /// </example>
-        public ProgressBarBuilder Value(int value)
+        public ProgressBarBuilder Value(double value)
         {
             Component.Value = value;
 

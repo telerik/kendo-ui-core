@@ -59,7 +59,7 @@
         /// <summary>
         /// Gets or sets the maximum value of the ProgressBar
         /// </summary>
-        public int? Max
+        public double? Max
         {
             get;
             set;
@@ -68,7 +68,7 @@
         /// <summary>
         /// Gets or sets the minimum value of the ProgressBar
         /// </summary>
-        public int? Min
+        public double? Min
         {
             get;
             set;
@@ -104,7 +104,7 @@
         /// <summary>
         /// Gets or sets the current value of the ProgressBar 
         /// </summary>
-        public int? Value
+        public double? Value
         {
             get;
             set;
