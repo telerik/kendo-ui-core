@@ -1,66 +1,69 @@
-<div data-role="view">
+<div data-role="view" data-init="initScheduler" data-stretch="true">
+    <header data-role="header"></header>
     <div id="scheduler"></div>
 </div>
 <script>
-$(function() {
-    $("#scheduler").kendoScheduler({
-        date: new Date("2013/6/13"),
-        startTime: new Date("2013/6/13 07:00 AM"),
-        height: 600,
-        views: [
-            "day",
-            { type: "week", selected: true },
-            "month",
-            "agenda"
-        ],
-        timezone: "Etc/UTC",
-        dataSource: {
-            batch: true,
-            transport: {
-                read: {
-                    url: "http://demos.kendoui.com/service/meetings",
-                    dataType: "jsonp"
+
+    function initScheduler() {
+        $("#scheduler").kendoScheduler({
+            date: new Date("2013/6/13"),
+            startTime: new Date("2013/6/13 07:00 AM"),
+            height: 600,
+            views: [
+                "day",
+                { type: "week", selected: true },
+                "month",
+                "agenda"
+            ],
+            mobile: "phone",
+            timezone: "Etc/UTC",
+            dataSource: {
+                batch: true,
+                transport: {
+                    read: {
+                        url: "http://demos.kendoui.com/service/meetings",
+                        dataType: "jsonp"
+                    },
+                    update: {
+                        url: "http://demos.kendoui.com/service/meetings/update",
+                        dataType: "jsonp"
+                    },
+                    create: {
+                        url: "http://demos.kendoui.com/service/meetings/create",
+                        dataType: "jsonp"
+                    },
+                    destroy: {
+                        url: "http://demos.kendoui.com/service/meetings/destroy",
+                        dataType: "jsonp"
+                    },
+                    parameterMap: function(options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return {models: kendo.stringify(options.models)};
+                        }
+                    }
                 },
-                update: {
-                    url: "http://demos.kendoui.com/service/meetings/update",
-                    dataType: "jsonp"
-                },
-                create: {
-                    url: "http://demos.kendoui.com/service/meetings/create",
-                    dataType: "jsonp"
-                },
-                destroy: {
-                    url: "http://demos.kendoui.com/service/meetings/destroy",
-                    dataType: "jsonp"
-                },
-                parameterMap: function(options, operation) {
-                    if (operation !== "read" && options.models) {
-                        return {models: kendo.stringify(options.models)};
+                schema: {
+                    model: {
+                        id: "meetingID",
+                        fields: {
+                            meetingID: { from: "MeetingID", type: "number" },
+                            title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                            start: { type: "date", from: "Start" },
+                            end: { type: "date", from: "End" },
+                            startTimezone: { from: "StartTimezone" },
+                            endTimezone: { from: "EndTimezone" },
+                            description: { from: "Description" },
+                            recurrenceId: { from: "RecurrenceID" },
+                            recurrenceRule: { from: "RecurrenceRule" },
+                            recurrenceException: { from: "RecurrenceException" },
+                            roomId: { from: "RoomID", nullable: true },
+                            atendees: { from: "Atendees", nullable: true },
+                            isAllDay: { type: "boolean", from: "IsAllDay" }
+                        }
                     }
                 }
             },
-            schema: {
-                model: {
-                    id: "meetingID",
-                    fields: {
-                        meetingID: { from: "MeetingID", type: "number" },
-                        title: { from: "Title", defaultValue: "No title", validation: { required: true } },
-                        start: { type: "date", from: "Start" },
-                        end: { type: "date", from: "End" },
-                        startTimezone: { from: "StartTimezone" },
-                        endTimezone: { from: "EndTimezone" },
-                        description: { from: "Description" },
-                        recurrenceId: { from: "RecurrenceID" },
-                        recurrenceRule: { from: "RecurrenceRule" },
-                        recurrenceException: { from: "RecurrenceException" },
-                        roomId: { from: "RoomID", nullable: true },
-                        atendees: { from: "Atendees", nullable: true },
-                        isAllDay: { type: "boolean", from: "IsAllDay" }
-                    }
-                }
-            }
-        },
-        resources: [
+            resources: [
             {
                 field: "roomId",
                 dataSource: [
@@ -79,7 +82,7 @@ $(function() {
                 multiple: true,
                 title: "Atendees"
             }
-        ]
-    });
-});
+            ]
+        });
+    }
 </script>
