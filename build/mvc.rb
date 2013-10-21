@@ -103,9 +103,7 @@ class AssemblyInfoTask < Rake::FileTask
     def execute(args=nil)
         assemblyInfo = File.read(name)
 
-        version = "#{VERSION}.340" # ".340" means ASP.NET MVC 3 .NET 4.0
-
-        assemblyInfo.gsub!(/Version\([^\)]*\)/, "Version(\"#{version}\")")
+        assemblyInfo.gsub!(/Version\("(\d+\.){3}(\d+)"\)/,  "Version(\"#{VERSION}.\\2\")")
 
         File.open(name, 'w') do |file|
             file.write assemblyInfo

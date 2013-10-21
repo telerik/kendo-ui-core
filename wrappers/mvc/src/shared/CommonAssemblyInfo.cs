@@ -10,7 +10,15 @@ using System.Security;
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(true)]
-[assembly: AssemblyVersion("2013.3.1015.340")]
-[assembly: AssemblyFileVersion("2013.3.1015.340")]
+#if MVC3
+[assembly: AssemblyVersion("2013.3.1021.340")]
+[assembly: AssemblyFileVersion("2013.3.1021.340")]
+#elif MVC4
+[assembly: AssemblyVersion("2013.3.1021.440")]
+[assembly: AssemblyFileVersion("2013.3.1021.440")]
+#elif MVC5
+[assembly: AssemblyVersion("2013.3.1021.545")]
+[assembly: AssemblyFileVersion("2013.3.1021.545")]
+#endif
 [assembly: SecurityRules(SecurityRuleSet.Level1)]
 [assembly: AllowPartiallyTrustedCallers]
