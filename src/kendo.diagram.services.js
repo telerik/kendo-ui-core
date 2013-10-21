@@ -838,6 +838,10 @@ kendo_module({
                 else if (testKey(key, "l")) {
                     diagram.layout();
                 }
+                else if (testKey(key, "d")) {
+                    diagram.copy();
+                    diagram.paste();
+                }
             }
             else if (key === 46 || key === 8) {// del: deletion
                 diagram.remove(diagram.select(), true);

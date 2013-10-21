@@ -179,6 +179,9 @@
                     <li title="CTRL+N">New</li>
                     <li title="CTRL+O">Open</li>
                     <li title="CTRL+S"><a href="#" id="menuSave" style="color:#fff;">Save</a></li>
+                    <hr/>
+                    <li title="Sample diagram">Tea Processing</li>
+                    <li title="Sample diagram">Flowchart</li>
                 </ul>
             </li>
             <li>
@@ -343,7 +346,8 @@ function loadDiagram() {
 
 $(function () {
     function onload() {
-        var seq = Shapes.SequentialData;
+        load("/kendo/playground/diagram/Flowchart.json");
+        /*var seq = Shapes.SequentialData;
         seq.text = "Sequential Data.";
         var shape1 = diagram.addShape(new Point(100, 100), seq);
         shape2 = diagram.addShape(new Point(100, 400), Shapes.Wave);
@@ -376,7 +380,7 @@ $(function () {
         diagram.connect(s2, s4);
         diagram.connect(s3, s5);
         diagram.connect(s3, s6);
-        onLayoutChanged();
+        onLayoutChanged();*/
     }
 
 
@@ -717,9 +721,25 @@ $(function () {
             case "select all":
                 selectAll();
                 break;
+            case "tea processing":
+                load("/kendo/playground/diagram/TeaProcessing.json");
+                break;
+            case "flowchart":
+                load("/kendo/playground/diagram/Flowchart.json");
+                break;
         }
     }
 
+    function load(url) {
+        $.ajax({
+            dataType: "json",
+            url: url,
+
+            success: function (data) {
+                diagram.load(data);
+            }
+        });
+    }
     $("#menu").kendoMenu({
         select: onMenuSelect
     });
