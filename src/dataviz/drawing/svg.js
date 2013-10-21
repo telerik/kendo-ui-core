@@ -23,7 +23,6 @@
 
     // Constants ==============================================================
     var BUTT = "butt",
-        CHANGE = "change",
         CLIP = dataviz.CLIP,
         DASH_ARRAYS = dataviz.DASH_ARRAYS,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
@@ -199,9 +198,9 @@
             Node.fn.init.call(node, srcElement);
         },
 
-        notify: function(e) {
+        geometryChange: function(e) {
             this._syncSegments();
-            Node.fn.notify.call(this, e);
+            this.invalidate();
         },
 
         attributeMap: {
@@ -268,7 +267,7 @@
             }
         },
 
-        _syncOptions: function(e) {
+        optionsChange: function(e) {
             var element = this.element,
                 options = this.srcElement.options,
                 name = this.attributeMap[e.field];
@@ -278,6 +277,8 @@
                     name, getter(e.field)(options)
                 );
             }
+
+            this.invalidate();
         }
     });
 

@@ -43,9 +43,18 @@
         return size;
     }
 
+    // Mixins =================================================================
+    function geometryChange() {
+        if (this.observer) {
+            this.observer.geometryChange();
+        }
+    }
+
     // Exports ================================================================
     deepExtend(dataviz, {
         util: {
+            geometryChange: geometryChange,
+
             alignToPixel: alignToPixel,
             defined: defined,
             deg: deg,

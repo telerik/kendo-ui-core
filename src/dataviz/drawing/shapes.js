@@ -31,20 +31,27 @@
             group.children = [];
         },
 
-        notify: function(e) {
+        geometryChange: util.geometryChange,
+
+        childrenChange: function(action, items, index) {
             if (this.observer) {
-                this.observer.notify(e);
+                this.observer.childrenChange({
+                    action: action,
+                    items: items,
+                    index: index
+                });
             }
         },
 
         append: function() {
             append(this.children, arguments);
-            this.notify({ event: "childrenChange", action: "add", items: arguments });
+            this.childrenChange("add", arguments);
         },
 
         empty: function() {
-            this.notify({ event: "childrenChange", action: "remove", index: 0, items: this.children });
+            var items = this.children;
             this.children = [];
+            this.childrenChange("remove", items, 0);
         }
     });
 
@@ -55,14 +62,15 @@
             shape.observer = null;
             shape.options = new ObservableObject(options || {});
             shape.options.bind(CHANGE, function(e) {
-                e.event = "optionsChange";
-                shape.notify(e);
+                shape.optionsChange(e);
             });
         },
 
-        notify: function(e) {
+        geometryChange: util.geometryChange,
+
+        optionsChange: function(e) {
             if (this.observer) {
-                this.observer.notify(e);
+                this.observer.optionsChange(e);
             }
         },
 
@@ -118,11 +126,7 @@
             segment.controlOut.observer = this;
         },
 
-        notify: function(e) {
-            if (this.observer) {
-                this.observer.notify(e);
-            }
-        }
+        geometryChange: util.geometryChange,
     });
 
     var Path = Shape.extend({
@@ -151,7 +155,7 @@
             segment.observer = this;
 
             this.segments.push(segment);
-            this.notify();
+            this.geometryChange();
         }
     });
 

@@ -31,7 +31,6 @@
 
     // Constants ==============================================================
     var BUTT = "butt",
-        CHANGE = "change",
         CLIP = dataviz.CLIP,
         DASH_ARRAYS = dataviz.DASH_ARRAYS,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
@@ -104,10 +103,10 @@
             surface.element = canvas;
             surface.ctx = canvas.getContext("2d");
 
-            surface.change();
+            surface.invalidate();
         },
 
-        change: function() {
+        invalidate: function() {
             var surface = this,
                 canvas = surface.element;
 

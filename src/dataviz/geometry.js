@@ -1,8 +1,5 @@
 (function () {
 
-    // Constants ==============================================================
-    var CHANGE = "change";
-
     // Imports ================================================================
     var math = Math,
         noop = $.noop,
@@ -24,11 +21,11 @@
             this.observer = null;
         },
 
-        notify: notifyObserver,
+        geometryChange: util.geometryChange,
 
         set: function(field, value) {
             this[field] = value;
-            this.notify();
+            this.geometryChange();
         },
 
         get: function(field) {
@@ -59,7 +56,7 @@
             this.x = cx + (x - cx) * cosT + (y - cy) * sinT;
             this.y = cy + (y - cy) * cosT - (x - cx) * sinT;
 
-            this.notify();
+            this.geometryChange();
 
             return this;
         },
@@ -68,7 +65,7 @@
             this.x *= a;
             this.y *= a;
 
-            this.notify();
+            this.geometryChange();
 
             return this;
         },
@@ -77,7 +74,7 @@
             this.x = mx.a * this.x + mx.c * this.y + mx.e;
             this.y = mx.b * this.x + mx.d * this.y + mx.f;
 
-            this.notify();
+            this.geometryChange();
 
             return this;
         },
@@ -100,7 +97,7 @@
             this.p1.observer = this;
         },
 
-        notify: notifyObserver,
+        geometryChange: util.geometryChange,
 
         width: function() {
             return this.p1.x - this.p0.x;
@@ -120,7 +117,7 @@
             this.center.observer = this;
         },
 
-        notify: notifyObserver,
+        geometryChange: util.geometryChange,
 
         equals: function(other) {
             return  other &&
@@ -134,7 +131,7 @@
 
         set: function(field, value) {
             this.radius = value;
-            this.notify();
+            this.geometryChange();
         },
 
         get: function(field) {
@@ -152,12 +149,6 @@
             );
         }
     });
-
-    function notifyObserver() {
-        if (this.observer) {
-            this.observer.notify({ event: "change" });
-        }
-    }
 
     // Exports ================================================================
     deepExtend(dataviz, {
