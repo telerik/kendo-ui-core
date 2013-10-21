@@ -1712,6 +1712,7 @@ kendo_module({
                 views: {
                     day: "Day",
                     week: "Week",
+                    workWeek: "Work Week",
                     agenda: "Agenda",
                     month: "Month"
                 },
@@ -2995,6 +2996,9 @@ kendo_module({
         },
         week: {
             type: "kendo.ui.WeekView"
+        },
+        workWeek: {
+            type: "kendo.ui.WorkWeekView"
         },
         agenda: {
             type: "kendo.ui.AgendaView"

@@ -18,15 +18,6 @@ kendo_module({
         getDate = kendo.date.getDate,
         MS_PER_MINUTE = kendo.date.MS_PER_MINUTE,
         MS_PER_DAY = kendo.date.MS_PER_DAY,
-        WEEK_DAYS = {
-            0: "SU",
-            1: "MO",
-            2: "TU",
-            3: "WE",
-            4: "TH",
-            5: "FR",
-            6: "SA"
-        },
         getMilliseconds = kendo.date.getMilliseconds,
         NS = ".kendoMultiDayView";
 
@@ -175,10 +166,6 @@ kendo_module({
             var that = this;
 
             SchedulerView.fn.init.call(that, element, options);
-
-            if (options.workWeekDays) {
-                that.options.workWeekDays = options.workWeekDays;
-            }
 
             that.title = that.options.title || that.options.name;
 
@@ -558,7 +545,8 @@ kendo_module({
             editable: true,
             workDayStart: new Date(1980, 1, 1, 8, 0, 0),
             workDayEnd: new Date(1980, 1, 1, 17, 0, 0),
-            workWeekDays: ["MO","TU","WE","TH","FR"],
+            workWeekStart: 1,
+            workWeekEnd: 5,
             footer: {
                 command: "workDay"
             },
@@ -906,14 +894,10 @@ kendo_module({
         },
 
         _isWorkDay: function(date) {
-            var workDays = this.options.workWeekDays;
+            var options = this.options;
+            var day = date.getDay();
 
-            for (var idx = 0, length = workDays.length; idx < length; idx++) {
-                if (workDays[idx] === WEEK_DAYS[date.getDay()]) {
-                    return true;
-                }
-            }
-            return false;
+            return day >= options.workWeekStart && day <= options.workWeekEnd;
         },
 
         _render: function(dates) {
@@ -1538,6 +1522,28 @@ kendo_module({
                }
                this._render(dates);
            }
+       }),
+       WorkWeekView: MultiDayView.extend({
+           options: {
+               title: "Work Week",
+               selectedDateFormat: "{0:D} - {1:D}"
+           },
+           name: "workWeek",
+           calculateDateRange: function() {
+               var selectedDate = this.options.date,
+                   start = kendo.date.dayOfWeek(selectedDate, this.calendarInfo().firstDay, -1),
+                   idx, length,
+                   dates = [];
+
+               for (idx = 0, length = 7; idx < length; idx++) {
+                   if (this._isWorkDay(start)) {
+                       dates.push(start);
+                   }
+                   start = kendo.date.nextDay(start);
+               }
+               this._render(dates);
+           }
        })
+
     });
 })(window.kendo.jQuery);
