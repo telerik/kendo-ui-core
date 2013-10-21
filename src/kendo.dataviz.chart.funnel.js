@@ -16,6 +16,7 @@ kendo_module({
         template = kendo.template,
 
         dataviz = kendo.dataviz,
+        Color = dataviz.Color,
         ChartElement = dataviz.ChartElement,
         PlotAreaBase = dataviz.PlotAreaBase,
         PlotAreaFactory = dataviz.PlotAreaFactory,
@@ -34,6 +35,7 @@ kendo_module({
         COLOR = "color",
         FUNNEL = "funnel",
         VALUE = "value",
+        BLACK = "black",
         WHITE = "white";
 
     // Funnel chart ===========================================================
@@ -192,6 +194,15 @@ kendo_module({
                     });
                 } else if (labels.format) {
                     text = autoFormat(labels.format, text);
+                }
+
+                if(!labels.color){
+                    var brightnessValue = new Color(series.color).percBrightness();
+                    if(brightnessValue > 180){
+                        labels.color = BLACK
+                    }else{
+                        labels.color = WHITE
+                    }
                 }
 
                 chart.evalSegmentOptions(labels, value, fields);

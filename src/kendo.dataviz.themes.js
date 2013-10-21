@@ -221,6 +221,7 @@ kendo_module({
                 },
                 funnel: {
                     labels: {
+                        color:"",
                         background: ""
                     }
                 },
