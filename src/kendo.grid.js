@@ -1176,11 +1176,7 @@ kendo_module({
                     that.editable.destroy();
                     that.editable = null;
                     that._editContainer = null;
-                    if (that.editView) {
-                        that.editView.purge();
-                        that.editView = null;
-                        that.pane.navigate("");
-                    }
+                    that._destroyEditView();
                 }
             };
 
@@ -1190,6 +1186,14 @@ kendo_module({
                 } else {
                     destroy();
                 }
+            }
+        },
+
+        _destroyEditView: function() {
+            if (this.editView) {
+                this.editView.purge();
+                this.editView = null;
+                this.pane.navigate("");
             }
         },
 
@@ -1390,6 +1394,8 @@ kendo_module({
                 options = isPlainObject(editable) ? editable.window : {},
                 settings = extend({}, kendo.Template, that.options.templateSettings);
 
+            options = options || {};
+
             if (template) {
                 if (typeof template === STRING) {
                     template = window.unescape(template);
@@ -1483,13 +1489,14 @@ kendo_module({
                 }, options));
             } else {
                 html += "</div></div>";
-                that.editView = that.pane.append('<div data-role="view" data-init-widgets="false">'+
-                    '<div data-role="header">'+
-                        that._createButton({ name: "update", text: updateText, attr: attr }) +
-                        'Edit'+
-                        that._createButton({ name: "canceledit", text: cancelText, attr: attr }) +
-                    '</div>'+
-                    html +
+                that.editView = that.pane.append(
+                    '<div data-' + kendo.ns + 'role="view" data-' + kendo.ns + 'init-widgets="false">'+
+                        '<div data-' + kendo.ns + 'role="header">'+
+                            that._createButton({ name: "update", text: updateText, attr: attr }) +
+                            (options.title || "Edit") +
+                            that._createButton({ name: "canceledit", text: cancelText, attr: attr }) +
+                        '</div>'+
+                        html +
                     '</div>');
                 container = that._editContainer = that.editView.element.find(".k-popup-edit-form");
             }
@@ -1501,13 +1508,17 @@ kendo_module({
                     clearContainer: false
                 }).data("kendoEditable");
 
-            if (!that._isMobile) {
-                container.data("kendoWindow").center().open();
-            } else {
-                that.pane.navigate(that.editView);
-            }
+            that._openPopUpEditor();
 
             that.trigger(EDIT, { container: container, model: model });
+        },
+
+        _openPopUpEditor: function() {
+            if (!this._isMobile) {
+                this._editContainer.data("kendoWindow").center().open();
+            } else {
+                this.pane.navigate(this.editView);
+            }
         },
 
         _createInlineEditor: function(row, model) {
@@ -2334,10 +2345,19 @@ kendo_module({
                 table.css(HEIGHT, "auto");
             }
 
-            if (that._isMobile) {
-                var html = that.wrapper.wrap('<div data-' + kendo.ns + 'role="view" data-' + kendo.ns + 'init-widgets="false"></div>').parent();
-                that.pane = kendo.mobile.ui.Pane.wrap(html);
-                that.view = that.pane.view();
+            that._initMobile();
+        },
+
+        _initMobile: function() {
+            if (this._isMobile) {
+                var html = this.wrapper.wrap(
+                        '<div data-' + kendo.ns + 'role="view" ' +
+                        'data-' + kendo.ns + 'init-widgets="false"></div>'
+                    )
+                    .parent();
+
+                this.pane = kendo.mobile.ui.Pane.wrap(html);
+                this.view = this.pane.view();
             }
         },
 
