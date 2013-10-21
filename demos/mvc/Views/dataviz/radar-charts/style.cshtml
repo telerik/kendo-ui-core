@@ -1,0 +1,98 @@
+﻿<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <div class="configuration-horizontal">
+        <div class="config-section">
+            <span class="configHead">Style</span>
+            <ul class="options">
+                <li>
+                    <input id="style" />
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "Employment candidate review"
+                },
+                legend: {
+                    position: "bottom"
+                },
+                seriesDefaults: {
+                    type: "radarArea",
+                    stack: true,
+                    radarArea: {
+                        line: {
+                            style: "normal"
+                        }
+                    }
+                },
+                series: [{
+                    name: "Andrew Dodsworth",
+                    data: [10, 3, 3, 10, 2, 10]
+                }, {
+                    name: "Margaret Peacock",
+                    data: [9, 7, 7, 9, 6, 7]
+                }, {
+                    name: "Nancy Callahan",
+                    data: [4, 10, 10, 5, 5, 4]
+                }],
+                categoryAxis: {
+                    categories: [
+                        "Experience", "Communication", "Friendliness",
+                        "Subject knowledge", "Presentation", "Education"
+                    ],
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                valueAxis: {
+                    labels: {
+                        format: "{0}%"
+                    },
+                    line: {
+                        visible: false
+                    }
+                }
+            });
+        }
+
+        $("#style").kendoDropDownList({
+            dataSource: [{
+                text: "Normal",
+                value: "normal"
+            }, {
+                text: "Smooth",
+                value: "smooth"
+            }],
+            dataTextField: "text",
+            dataValueField: "value",
+            change: function () {
+                var chart = $("#chart").data("kendoChart");
+                chart.setOptions({
+                    seriesDefaults: {
+                        type: "radarArea",
+                        stack: true,
+                        radarArea: {
+                            line: {
+                                style: this.value()
+                            }
+                        }
+                    }
+                });
+            }
+        });
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+
+    <style scoped>
+        .chart-wrapper, .chart-wrapper .k-chart {
+            height: 300px;
+        }
+    </style>
+</div>

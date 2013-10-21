@@ -785,8 +785,8 @@
     <Content Include="Views\web\scheduler\templates.cshtml" />
     <Content Include="Views\dataviz\line-charts\notes.cshtml" />
     <Content Include="Views\dataviz\area-charts\mvvm.cshtml" />
-    <Content Include="Views\dataviz\area-charts\step-area.cshtml" />
-    <Content Include="Views\dataviz\line-charts\step-line.cshtml" />
+    <Content Include="Views\dataviz\area-charts\style.cshtml" />
+    <Content Include="Views\dataviz\line-charts\style.cshtml" />
     <Content Include="Views\dataviz\line-charts\mvvm.cshtml" />
     <Content Include="Views\web\progressbar\index.cshtml" />
     <Content Include="Views\web\progressbar\api.cshtml" />
@@ -816,6 +816,9 @@
     <Content Include="Views\dataviz\area-charts\error-bars.cshtml" />
     <Content Include="Views\dataviz\bar-charts\error-bars.cshtml" />
     <Content Include="Views\dataviz\line-charts\error-bars.cshtml" />
+    <Content Include="Views\dataviz\scatter-charts\style.cshtml" />
+    <Content Include="Views\dataviz\radar-charts\style.cshtml" />
+    <Content Include="Views\dataviz\polar-charts\style.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

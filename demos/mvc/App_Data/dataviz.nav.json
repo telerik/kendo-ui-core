@@ -67,6 +67,12 @@
                     "title": "Example of using ErrorBars for Kendo UI Area Chart",
                     "meta": "This demo shows how to use ErrorBars for Kendo UI Area Chart",
                     "new": true
+                }, {
+                    "text": "Style",
+                    "url": "area-charts/style.html",
+                    "title": "Example of using different line styles for Kendo UI Area Chart",
+                    "meta": "This demo shows how to use different line styles for Kendo UI Area Chart",
+                    "new": true
                 }
             ],
             "name": "area-charts"
@@ -262,14 +268,17 @@
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"]
 				}, {
-                    "text": "Step line",
-                    "url": "line-charts/step-line.html"
-                }, {
                     "text": "Error Bars",
                     "url": "line-charts/error-bars.html",
                     "title": "Example of using ErrorBars for Kendo UI Line Chart",
                     "meta": "This demo shows how to use ErrorBars for Kendo UI Line Chart",
                     "new": true
+                }, {
+                    "text": "Style",
+                    "url": "line-charts/style.html",
+                    "title": "Example of using different styles for Kendo UI Line Chart",
+                    "meta": "This demo shows how to use different styles for Kendo UI Line Chart",
+                    "new": true                                       
                 }
             ],
             "name": "line-charts"
@@ -423,6 +432,12 @@
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"]
+                }, {
+                    "text": "Style",
+                    "url": "scatter-charts/style.html",
+                    "title": "Example of using different styles for Kendo UI Scatter Line Chart",
+                    "meta": "This demo shows how to use different styles for Kendo UI Scatter Line Chart",
+                    "new": true                                       
                 }
             ],
             "name": "scatter-charts"
@@ -466,6 +481,12 @@
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"]
+                }, {
+                    "text": "Style",
+                    "url": "radar-charts/style.html",
+                    "title": "Example of using different styles for Kendo UI Radar Charts",
+                    "meta": "This demo shows how to use different styles for Kendo UI Radar Charts",
+                    "new": true                                       
                 }
             ],
             "name": "radar-charts"
@@ -504,8 +525,14 @@
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"]
+                }, {
+                    "text": "Style",
+                    "url": "polar-charts/style.html",
+                    "title": "Example of using different styles for Kendo UI Polar Charts",
+                    "meta": "This demo shows how to use different styles for Kendo UI Polar Charts",
+                    "new": true                                       
                 }
-                ],
+            ],
             "name": "polar-charts"
         }, {
             "text": "Sparklines",
