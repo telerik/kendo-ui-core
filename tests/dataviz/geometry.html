@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DataViz / Drawing / Geometry</title>
+    <script src="../jquery-loader.js"></script>
+    <script src="../qunit/qunit/qunit.js"></script>
+    <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+    <script src="../kendo-test-helpers.js"></script>
+    <link rel="stylesheet" href="../qunit/qunit/qunit.css">
+</head>
+<body>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/dataviz/util.js"></script>
+    <script src="../../src/dataviz/geometry.js"></script>
+
+    <script>
+    var dataviz = kendo.dataviz,
+
+        g = dataviz.geometry,
+        Point = g.Point,
+        Matrix = g.Matrix;
+
+    // ------------------------------------------------------------
+    module("Point", {
+        setup: function() {
+            point = new Point(10, 20);
+        }
+    });
+
+    test("constructor sets x", function() {
+        equal(point.x, 10);
+    });
+
+    test("constructor sets y", function() {
+        equal(point.y, 20);
+    });
+
+    test("x defaults to 0", function() {
+        equal(new Point().x, 0);
+    });
+
+    test("y defaults to 0", function() {
+        equal(new Point().y, 0);
+    });
+
+    test("sets x", function() {
+        point.set("x", 10);
+        equal(point.x, 10);
+    });
+
+    test("sets y", function() {
+        point.set("y", 10);
+        equal(point.y, 10);
+    });
+
+    test("gets x", function() {
+        equal(point.get("x"), 10);
+    });
+
+    test("sets y", function() {
+        equal(point.get("y"), 20);
+    });
+
+    test("changing x triggers geometryChange", function() {
+        point.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        point.set("x", 1);
+    });
+
+    test("changing y triggers geometryChange", function() {
+        point.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        point.set("y", 1);
+    });
+
+    test("setting x to same value does not trigger geometryChange", 0, function() {
+        point.observer = {
+            geometryChange: function() {
+                ok(false);
+            }
+        };
+
+        point.set("x", 10);
+    });
+
+    test("setting y to same value does not trigger geometryChange", 0, function() {
+        point.observer = {
+            geometryChange: function() {
+                ok(false);
+            }
+        };
+
+        point.set("y", 20);
+    });
+
+    test("clone returns new point instance", function() {
+        var clone = point.clone();
+        notEqual(clone, point);
+        ok(clone instanceof Point);
+    });
+
+    test("clone copies x and y", function() {
+        var clone = point.clone();
+        equal(clone.x, point.x);
+        equal(clone.y, point.y);
+    });
+
+    test("rotate rotates x and y around center", function() {
+        point.rotate(new Point(0, 0), 90);
+        close(point.x, 20, 1, 0.1);
+        close(point.y, -10, 1, 0.1);
+    });
+
+    test("rotate returns point", function() {
+        deepEqual(point.rotate(new Point(0, 0), 90), point);
+    });
+
+    test("rotate triggers geometryChange", function() {
+        point.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        point.rotate(new Point(0, 0), 90)
+    });
+
+    test("equals is true for same coordinates", function() {
+        ok(new Point(1, 1).equals(new Point(1, 1)));
+    });
+
+    test("equals is false for different x coordinates", function() {
+        ok(!new Point(1, 1).equals(new Point(2, 1)));
+    });
+
+    test("equals is false for different y coordinates", function() {
+        ok(!new Point(1, 1).equals(new Point(1, 2)));
+    });
+
+    test("equals is false for undefined point", function() {
+        ok(!new Point(1, 1).equals());
+    });
+
+    test("distanceTo calculates distance", function() {
+        equal(new Point(1, 1).distanceTo(new Point(2, 2)), Math.sqrt(2));
+    });
+
+    test("multiply applies to x and y", function() {
+        deepEqual(point.multiply(2), new Point(20, 40));
+    });
+
+    test("multiply returns point", function() {
+        deepEqual(point.multiply(2), point);
+    });
+
+    test("transform applies matrix", function() {
+        deepEqual(point.transform(Matrix.translate(10, 10)), new Point(20, 30));
+    });
+
+    test("transform returns point", function() {
+        deepEqual(point.transform(Matrix.unit), point);
+    });
+
+    test("toString concatenates x and y", function() {
+        equal(point.toString(), "10 20");
+    });
+    </script>
+
+    <h1 id="qunit-header"></h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+</body>
+</html>

@@ -150,6 +150,7 @@ var tests = [
     "data/inmemorycache.html",
     "data/datasource/model.html",
     "dataviz/drawing/shapes.html",
+    "dataviz/geometry.html",
     "dataviz/lint.html",
     "data/datasource/sync-response.html",
     "datepicker/initialization.html",
