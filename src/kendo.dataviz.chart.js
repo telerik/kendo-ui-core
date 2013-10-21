@@ -104,7 +104,7 @@ kendo_module({
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_PRECISION = dataviz.DEFAULT_PRECISION,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
-        DEFAULT_ERROR_BAR_WIDTH = 10,
+        DEFAULT_ERROR_BAR_WIDTH = 4,
         DONUT = "donut",
         DONUT_SECTOR_ANIM_DELAY = 50,
         DRAG = "drag",

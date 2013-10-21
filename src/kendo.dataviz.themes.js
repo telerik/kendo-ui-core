@@ -485,7 +485,7 @@ kendo_module({
                     opacity: 0.5
                 },
                 errorBars: {
-                    color: BLACK
+                    color: "#293135"
                 },                    
                 candlestick: {
                     downColor: "#c4d0d5",
@@ -743,7 +743,7 @@ kendo_module({
                     opacity: 0.5
                 },
                 errorBars: {
-                    color: BLACK
+                    color: "#232323"
                 },                  
                 candlestick: {
                     downColor: "#dedede",
@@ -850,7 +850,7 @@ kendo_module({
                     opacity: 0.5
                 },
                 errorBars: {
-                    color: "#293135"
+                    color: "#4e5968"
                 },                
                 notes: {
                     icon: {
@@ -980,7 +980,7 @@ kendo_module({
                     color: BLACK
                 },
                 errorBars: {
-                    color: BLACK
+                    color: "#777777"
                 },                
                 notes: {
                     icon: {
