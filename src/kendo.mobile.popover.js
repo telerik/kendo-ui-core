@@ -68,9 +68,10 @@ kendo_module({
         init: function(element, options) {
             var that = this,
                 containerPopup = element.closest(".km-modalview-wrapper"),
-                container = containerPopup[0] ? containerPopup : mobile.application.element,
+                mobileContainer = element.closest(".km-root").children().first(),
+                container = containerPopup[0] ? containerPopup : mobileContainer,
                 popupOptions = {
-                    viewport: mobile.application.element,
+                    viewport: mobileContainer,
                     open: function() {
                         that.overlay.show();
                     },
@@ -139,6 +140,7 @@ kendo_module({
         destroy: function() {
             Widget.fn.destroy.call(this);
             this.popup.destroy();
+            this.overlay.remove();
         },
 
         _activate: function() {

@@ -510,6 +510,13 @@ textarea.k-textbox:hover,
     background-color: @widget-text-color;
 }
 
+.km-root .k-popup-edit-form .k-scheduler-delete
+{
+    border-color: @error-border-color;
+	background-color: @error-background-color;
+    color: @error-text-color;
+}
+
 .k-scheduler-marquee:before,
 .k-scheduler-marquee:after
 {
@@ -1301,14 +1308,19 @@ div.k-imagebrowser-dropzone em
 .k-scheduler-toolbar > ul li:first-child,
 .k-scheduler-toolbar > ul li:first-child .k-link
 {
-    border-top-left-radius: @main-border-radius;
-    border-bottom-left-radius: @main-border-radius;
+    .border-radius(@main-border-radius 0 0 @main-border-radius);
 }
 
 .k-rtl .k-scheduler-toolbar > ul li:first-child,
 .k-rtl .k-scheduler-toolbar > ul li:first-child .k-link
 {
-    border-radius: 0 @main-border-radius @main-border-radius 0;
+    .border-radius(0 @main-border-radius @main-border-radius 0);
+}
+
+.k-scheduler-mobile .k-scheduler-toolbar > ul li.k-nav-today,
+.k-scheduler-mobile .k-scheduler-toolbar > ul li.k-nav-today .k-link
+{
+    .border-radius(@main-border-radius);
 }
 
 .k-scheduler-toolbar .k-nav-next,
@@ -1339,6 +1351,11 @@ div.k-imagebrowser-dropzone em
 .k-event .k-link
 {
     .border-radius(@inner-border-radius);
+}
+
+.k-scheduler-mobile .k-event
+{
+    .border-radius(@inner-border-radius - 1);
 }
 
 .k-autocomplete.k-state-default,

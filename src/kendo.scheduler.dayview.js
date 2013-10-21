@@ -587,7 +587,7 @@ kendo_module({
 
         _editable: function() {
             if (this.options.editable) {
-                if (kendo.support.mobileOS) {
+                if (this._isMobile()) {
                     this._touchEditable();
                 } else {
                     this._mouseEditable();
@@ -635,14 +635,6 @@ kendo_module({
         _touchEditable: function() {
             var that = this;
 
-            that._closeUserEvents = new kendo.UserEvents(that.element, {
-               filter: ".k-event a:has(.k-si-close)",
-               tap: function(e) {
-                    that.trigger("remove", { uid: $(e.target).closest(".k-event").attr(kendo.attr("uid")) });
-                    e.preventDefault();
-               }
-            });
-
             if (that.options.editable.create !== false) {
                 that._addUserEvents = new kendo.UserEvents(that.element, {
                     filter:  ".k-scheduler-content td",
@@ -667,7 +659,7 @@ kendo_module({
 
                         if (slot) {
                             var resourceInfo = that._resourceBySlot(slot);
-                            that.trigger("add", { eventInfo: extend({}, { isAllDay: true, start: kendo.date.getDate(slot.startDate()), end: kendo.date.getDate(slot.endDate()) }, resourceInfo) });
+                            that.trigger("add", { eventInfo: extend({}, { isAllDay: true, start: kendo.date.getDate(slot.startDate()), end: kendo.date.getDate(slot.startDate()) }, resourceInfo) });
                         }
 
                         e.preventDefault();
@@ -677,12 +669,15 @@ kendo_module({
 
             if (that.options.editable.update !== false) {
                 that._editUserEvents = new kendo.UserEvents(that.element, {
-                    filter: ".k-event.k-state-selected",
+                    filter: ".k-event",
                     tap: function(e) {
-                        if ($(e.event.target).closest("a:has(.k-si-close)").length === 0) {
-                            that.trigger("edit", { uid: $(e.target).closest(".k-event").attr(kendo.attr("uid")) });
-                            e.preventDefault();
+                        var eventElement = $(e.target).closest(".k-event");
+
+                        if (!eventElement.hasClass("k-scheduler-hold")) {
+                            that.trigger("edit", { uid: eventElement.attr(kendo.attr("uid")) });
                         }
+
+                        e.preventDefault();
                     }
                 });
             }
@@ -1014,9 +1009,7 @@ kendo_module({
                 that.footer.remove();
             }
 
-            if (kendo.support.mobileOS) {
-                that._closeUserEvents.destroy();
-
+            if (this._isMobile()) {
                 if (that.options.editable.create !== false) {
                     that._addUserEvents.destroy();
                     that._allDayUserEvents.destroy();
@@ -1038,28 +1031,6 @@ kendo_module({
             return (options.majorTick/options.minorTickCount) * MS_PER_MINUTE;
         },
 
-        _columnCountInGroup: function() {
-            var resources = this.groupedResources;
-
-            if (!resources.length) {
-                return 0;
-            }
-
-            return this._columnOffsetForResource(resources.length);
-        },
-
-        _rowCountInGroup: function() {
-            var resources = this.groupedResources;
-
-            if (!resources.length) {
-                return 0;
-            }
-
-            var allDaySlotOffset = this.options.allDaySlot ? this._rowCountForLevel(resources.length - 1) : 0;
-
-            return (this._rowCountForLevel(resources.length) - allDaySlotOffset) / this._rowCountForLevel(resources.length - 1);
-        },
-
         _timeSlotIndex: function(date) {
             var options = this.options;
             var eventStartTime = getMilliseconds(date);
@@ -1069,38 +1040,12 @@ kendo_module({
             return (eventStartTime - startTime) / (timeSlotInterval);
         },
 
-        _collectionIndex: function(date, multiday) {
-            if (multiday) {
-                return 0;
-            }
-
-            return this._dateSlotIndex(date, true);
-        },
-
         _slotIndex: function(date, multiday) {
             if (multiday) {
                 return this._dateSlotIndex(date);
             }
 
             return this._timeSlotIndex(date);
-        },
-
-        _dateIndex: function(date) {
-            var idx;
-            var length;
-            var slots = this._dates || [];
-            var slotStart;
-            var slotEnd;
-
-            for (idx = 0, length = slots.length; idx < length; idx++) {
-                slotStart = kendo.date.getDate(slots[idx]);
-                slotEnd = new Date(kendo.date.getDate(slots[idx]).getTime() + MS_PER_DAY -  1);
-
-                if (isInDateRange(date, slotStart, slotEnd)) {
-                    return idx;
-                }
-            }
-            return -1;
         },
 
         _dateSlotIndex: function(date, overlaps) {
@@ -1256,7 +1201,8 @@ kendo_module({
             var template = isOneDayEvent ? this.eventTemplate : this.allDayEventTemplate;
             var options = this.options;
             var editable = options.editable;
-            var showDelete = editable && editable.destroy !== false;
+            var isMobile = this._isMobile();
+            var showDelete = editable && editable.destroy !== false && !isMobile;
             var resizable = editable && editable.resize !== false;
             var startDate = getDate(this.startDate());
             var endDate = getDate(this.endDate());

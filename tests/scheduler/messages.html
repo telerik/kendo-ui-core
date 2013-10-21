@@ -252,7 +252,7 @@
 
                 equal(todayText, "custom");
             });
-            
+
             //scheduler editor messages
             test("editor.allDayEvent message is changed correctly", function() {
                 var scheduler = new kendo.ui.Scheduler(div, {
@@ -513,7 +513,7 @@
                         recurrenceEditor: {
                             daily: {
                                 repeatEvery: "custom",
-                                days: "custom"
+                                interval: "custom"
                             }
                         }
                     },
@@ -545,11 +545,11 @@
                     messages: {
                         recurrenceEditor: {
                             end: {
-                                endCountAfter: "custom",
-                                endCountOccurrence: "custom",
-                                endLabel: "custom",
-                                endNever: "custom",
-                                endUntilOn: "custom"
+                                after: "custom",
+                                occurrence: "custom",
+                                label: "custom",
+                                never: "custom",
+                                on: "custom"
                             }
                         }
                     },
@@ -561,15 +561,14 @@
                 dropDownList.value("daily");
                 dropDownList.trigger("change");
 
-                //endCountAfter
                 var endCountAfterText = getTextFromElement($(".k-recur-end-count").parent());
-                //endCountOccurrence
+
                 var endCountOccurrenceText = getTextFromElement($(".k-recur-count").parent());
-                //endLabel
+
                 var endLabelText = $(".k-recur-count").closest(".k-edit-field").prev().text();
-                //endNever
+
                 var endNeverText = $(".k-recur-end-never").parent().text();
-                //endUntilOn
+
                 var endUntilOnText = $(".k-recur-end-until").parent().text();
 
                 equal(endCountAfterText, "custom", "endCountAfter message is not correctly changed");

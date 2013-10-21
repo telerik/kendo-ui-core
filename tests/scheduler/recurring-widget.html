@@ -25,6 +25,16 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
+
+            var WEEK_DAYS = {
+                0: "SU",
+                1: "MO",
+                2: "TU",
+                3: "WE",
+                4: "TH",
+                5: "FR",
+                6: "SA"
+            };
             var RecurrenceEditor = kendo.ui.RecurrenceEditor,
                 div;
 
@@ -76,7 +86,7 @@
                 ddl.trigger("change");
 
                 equal(editor.value(), "");
-                equal(editor.container.html(), "");
+                equal(editor._container.html(), "");
             });
 
             test("changing frequency resets widget value", function() {
@@ -123,7 +133,7 @@
 
             test("Render interval input with default value", function() {
                 var editor = new RecurrenceEditor(div);
-                editor.setView("daily");
+                editor._initView("daily");
 
                 var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
 
@@ -133,7 +143,7 @@
 
             test("Change interval updates widget value", function() {
                 var editor = new RecurrenceEditor(div);
-                editor.setView("daily");
+                editor._initView("daily");
 
                 var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
 
@@ -145,7 +155,7 @@
 
             test("Clears value of the interval is equal to 1", function() {
                 var editor = new RecurrenceEditor(div);
-                editor.setView("daily");
+                editor._initView("daily");
 
                 var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
 
@@ -157,7 +167,7 @@
 
             test("All end inputs are disabled if never radio is checked", function() {
                 var editor = new RecurrenceEditor(div);
-                editor.setView("daily");
+                editor._initView("daily");
 
                 var radio = div.find(".k-recur-end-never,.k-recur-end-until,.k-recur-end-count").filter(":checked"),
                     until = div.find(".k-recur-until:input"),
@@ -171,9 +181,9 @@
 
             test("Select count radio sets count value", function() {
                 var editor = new RecurrenceEditor(div);
-                editor.setView("daily");
+                editor._initView("daily");
 
-                editor.radioButtonCount.click();
+                editor._buttonCount.click();
 
                 equal(editor.value(), "FREQ=DAILY;COUNT=1"); //default value of INTERVAL is 1
             });
@@ -183,9 +193,9 @@
                     date = kendo.date.today();
 
 
-                editor.setView("daily");
+                editor._initView("daily");
 
-                editor.radioButtonUntil.click();
+                editor._buttonUntil.click();
 
                 date = kendo.timezone.apply(date, 0);
                 equal(editor.value(), "FREQ=DAILY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ"));
@@ -195,9 +205,9 @@
                 var date = kendo.date.today();
                 var editor = new RecurrenceEditor(div, { start: date });
 
-                editor.setView("daily");
+                editor._initView("daily");
 
-                equal(editor.untilDatePicker.min().getTime(), date.getTime());
+                equal(editor._until.min().getTime(), date.getTime());
             });
 
             test("Select until radio sets until value (Etc/UTC zone)", function() {
@@ -207,9 +217,9 @@
                     date = kendo.date.today();
 
 
-                editor.setView("daily");
+                editor._initView("daily");
 
-                editor.radioButtonUntil.click();
+                editor._buttonUntil.click();
 
                 equal(editor.value(), "FREQ=DAILY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ"));
             });
@@ -226,7 +236,7 @@
 
             test("Render interval input with default value", function() {
                 var editor = new RecurrenceEditor(div);
-                editor.setView("weekly");
+                editor._initView("weekly");
 
                 var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
 
@@ -238,7 +248,7 @@
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
-                editor.setView("weekly");
+                editor._initView("weekly");
 
                 var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
 
@@ -252,7 +262,7 @@
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
-                editor.setView("weekly");
+                editor._initView("weekly");
 
                 var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
 
@@ -264,7 +274,7 @@
 
             test("All end inputs are disabled if never radio is checked", function() {
                 var editor = new RecurrenceEditor(div);
-                editor.setView("weekly");
+                editor._initView("weekly");
 
                 var radio = div.find(".k-recur-end-never,.k-recur-end-until,.k-recur-end-count").filter(":checked"),
                     until = div.find(".k-recur-until:input"),
@@ -280,9 +290,9 @@
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
-                editor.setView("weekly");
+                editor._initView("weekly");
 
-                editor.radioButtonCount.click();
+                editor._buttonCount.click();
 
                 equal(editor.value(), "FREQ=WEEKLY;COUNT=1;BYDAY=FR"); //default value of INTERVAL is 1
             });
@@ -291,9 +301,9 @@
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
-                editor.setView("weekly");
+                editor._initView("weekly");
 
-                editor.radioButtonUntil.click();
+                editor._buttonUntil.click();
 
                 date = kendo.timezone.apply(date, 0);
                 equal(editor.value(), "FREQ=WEEKLY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ") + ";BYDAY=FR");
@@ -303,9 +313,9 @@
                 var editor = new RecurrenceEditor(div),
                     date = kendo.date.today();
 
-                editor.setView("weekly");
+                editor._initView("weekly");
 
-                var checkboxes = editor.container.find("input[type=checkbox]");
+                var checkboxes = editor._container.find("input[type=checkbox]");
 
                 equal(checkboxes.length, 7);
             });
@@ -314,9 +324,9 @@
                 var editor = new RecurrenceEditor(div, { firstWeekDay: 6 }),
                     date = kendo.date.today();
 
-                editor.setView("weekly");
+                editor._initView("weekly");
 
-                var checkboxes = editor.container.find("input[type=checkbox]");
+                var checkboxes = editor._container.find("input[type=checkbox]");
 
                 equal(checkboxes.eq(0).val(), "6");
             });
@@ -328,9 +338,9 @@
                 }),
                 date = kendo.date.today();
 
-                editor.setView("weekly");
+                editor._initView("weekly");
 
-                var checkboxes = editor.container.find("input[type=checkbox]:checked");
+                var checkboxes = editor._container.find("input[type=checkbox]:checked");
 
                 equal(checkboxes.eq(0).val(), "2");
             });
@@ -341,9 +351,9 @@
                         start: date
                     });
 
-                editor.setView("weekly");
+                editor._initView("weekly");
 
-                var checkboxes = editor.container.find("input[type=checkbox]:checked");
+                var checkboxes = editor._container.find("input[type=checkbox]:checked");
 
                 equal(checkboxes.eq(0).val(), date.getDay());
             });
@@ -359,7 +369,7 @@
 
             test("Render interval input with default value", function() {
                 var editor = new RecurrenceEditor(div);
-                editor.setView("monthly");
+                editor._initView("monthly");
 
                 var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
 
@@ -371,7 +381,7 @@
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
-                editor.setView("monthly");
+                editor._initView("monthly");
 
                 var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
 
@@ -385,7 +395,7 @@
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
-                editor.setView("monthly");
+                editor._initView("monthly");
 
                 var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
 
@@ -397,7 +407,7 @@
 
             test("All end inputs are disabled if never radio is checked", function() {
                 var editor = new RecurrenceEditor(div);
-                editor.setView("monthly");
+                editor._initView("monthly");
 
                 var radio = div.find(".k-recur-end-never,.k-recur-end-until,.k-recur-end-count").filter(":checked"),
                     until = div.find(".k-recur-until:input"),
@@ -413,9 +423,9 @@
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
-                editor.setView("monthly");
+                editor._initView("monthly");
 
-                editor.radioButtonCount.click();
+                editor._buttonCount.click();
 
                 equal(editor.value(), "FREQ=MONTHLY;COUNT=1;BYMONTHDAY=14"); //default value of INTERVAL is 1
             });
@@ -424,8 +434,8 @@
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
-                editor.setView("monthly");
-                editor.radioButtonUntil.click();
+                editor._initView("monthly");
+                editor._buttonUntil.click();
 
                 date = kendo.timezone.apply(date, 0);
                 equal(editor.value(), "FREQ=MONTHLY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ") + ";BYMONTHDAY=14");
@@ -433,13 +443,13 @@
 
             test("Render inputs to handle bymonthday and byday options", function() {
                 var editor = new RecurrenceEditor(div),
-                    container = editor.container;
+                    container = editor._container;
 
-                editor.setView("monthly");
+                editor._initView("monthly");
 
                 var radioButton = container.find("[type=radio].k-recur-month-radio");
                 var numericMonthDay = container.find(".k-recur-monthday");
-                var ddlOffset = container.find(".k-recur-offset");
+                var ddlOffset = container.find(".k-recur-weekday-offset");
                 var ddlWeekDay = container.find(".k-recur-weekday");
 
                 equal(radioButton.length, 2);
@@ -448,12 +458,31 @@
                 ok(ddlWeekDay[0]);
             });
 
+            test("Render weekdays options along with week names", function() {
+                var editor = new RecurrenceEditor(div),
+                    container = editor._container;
+
+                editor._initView("monthly");
+
+                var ddlWeekDay = container.find("[data-role=dropdownlist].k-recur-weekday").data("kendoDropDownList");
+
+                var data = ddlWeekDay.dataSource.data();
+
+                equal(data[0].value, "day");
+                equal(data[1].value, "weekday");
+                equal(data[2].value, "weekend");
+
+                equal(data[0].text, "day");
+                equal(data[1].text, "weekday");
+                equal(data[2].text, "weekend day");
+            });
+
             test("Initialize monthday numeric", function() {
                 var today = kendo.date.today(),
                     editor = new RecurrenceEditor(div, { start: today }),
-                    container = editor.container;
+                    container = editor._container;
 
-                editor.setView("monthly");
+                editor._initView("monthly");
 
                 var numericMonthDay = container.find("[data-role=numerictextbox].k-recur-monthday"),
                     numeric = numericMonthDay.data("kendoNumericTextBox");
@@ -467,9 +496,9 @@
             test("Update monthdays rule on monthday numeric change", function() {
                 var today = kendo.date.today(),
                     editor = new RecurrenceEditor(div, { start: today }),
-                    container = editor.container;
+                    container = editor._container;
 
-                editor.setView("monthly");
+                editor._initView("monthly");
 
                 var numericMonthDay = container.find("[data-role=numerictextbox].k-recur-monthday"),
                     numeric = numericMonthDay.data("kendoNumericTextBox");
@@ -483,15 +512,15 @@
             test("Initialize week day widgets", function() {
                 var today = kendo.date.today(),
                     editor = new RecurrenceEditor(div, { start: today }),
-                    container = editor.container;
+                    container = editor._container;
 
                 editor._value.weekDays = [
                     { offset: 3, day: 6 }
                 ];
 
-                editor.setView("monthly");
+                editor._initView("monthly");
 
-                var offset = container.find("[data-role=dropdownlist].k-recur-offset").data("kendoDropDownList")
+                var offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset").data("kendoDropDownList")
                     weekday = container.find("[data-role=dropdownlist].k-recur-weekday").data("kendoDropDownList");
 
                 ok(offset);
@@ -504,16 +533,18 @@
             test("Update week day rule", function() {
                 var today = kendo.date.today(),
                     editor = new RecurrenceEditor(div, { start: today }),
-                    container = editor.container;
+                    container = editor._container;
 
-                editor.setView("monthly");
+                editor._initView("monthly");
                 container.find(".k-recur-month-radio:last").click();
 
-                var offset = container.find("[data-role=dropdownlist].k-recur-offset").data("kendoDropDownList")
+                var offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset").data("kendoDropDownList")
                     weekday = container.find("[data-role=dropdownlist].k-recur-weekday").data("kendoDropDownList");
 
                 offset.value("-1");
                 offset.trigger("change");
+                weekday.value("0");
+                weekday.trigger("change");
 
                 equal(editor.value(), "FREQ=MONTHLY;BYDAY=-1SU");
 
@@ -523,15 +554,69 @@
                 equal(editor.value(), "FREQ=MONTHLY;BYDAY=-1WE");
             });
 
+            test("Update week day rule to repeat on first weekday", function() {
+                var today = kendo.date.today(),
+                    editor = new RecurrenceEditor(div, { start: today }),
+                    container = editor._container;
+
+                editor._initView("monthly");
+                container.find(".k-recur-month-radio:last").click();
+
+                var offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset").data("kendoDropDownList")
+                    weekday = container.find("[data-role=dropdownlist].k-recur-weekday").data("kendoDropDownList");
+
+                offset.value("1");
+                weekday.value("day");
+                weekday.trigger("change");
+
+                equal(editor.value(), "FREQ=MONTHLY;BYDAY=SU,MO,TU,WE,TH,FR,SA;BYSETPOS=1");
+            });
+
+            test("Update week day rule to repeat on first work day", function() {
+                var today = kendo.date.today(),
+                    editor = new RecurrenceEditor(div, { start: today }),
+                    container = editor._container;
+
+                editor._initView("monthly");
+                container.find(".k-recur-month-radio:last").click();
+
+                var offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset").data("kendoDropDownList")
+                    weekday = container.find("[data-role=dropdownlist].k-recur-weekday").data("kendoDropDownList");
+
+                offset.value("1");
+                weekday.value("weekday");
+                weekday.trigger("change");
+
+                equal(editor.value(), "FREQ=MONTHLY;BYDAY=MO,TU,WE,TH,FR;BYSETPOS=1");
+            });
+
+            test("Update week day rule to repeat on first weekend", function() {
+                var today = kendo.date.today(),
+                    editor = new RecurrenceEditor(div, { start: today }),
+                    container = editor._container;
+
+                editor._initView("monthly");
+                container.find(".k-recur-month-radio:last").click();
+
+                var offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset").data("kendoDropDownList")
+                    weekday = container.find("[data-role=dropdownlist].k-recur-weekday").data("kendoDropDownList");
+
+                offset.value("1");
+                weekday.value("weekend");
+                weekday.trigger("change");
+
+                equal(editor.value(), "FREQ=MONTHLY;BYDAY=SU,SA;BYSETPOS=1");
+            });
+
             test("On initial render enable monthday and disable weekday", function() {
                 var today = kendo.date.today(),
                     editor = new RecurrenceEditor(div, { start: today }),
-                    container = editor.container;
+                    container = editor._container;
 
-                editor.setView("monthly");
+                editor._initView("monthly");
 
                 var numeric = container.find("[data-role=numerictextbox].k-recur-monthday"),
-                    offset = container.find("[data-role=dropdownlist].k-recur-offset"),
+                    offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset"),
                     weekday = container.find("[data-role=dropdownlist].k-recur-weekday");
 
                 equal(numeric.prop("disabled"), false);
@@ -544,20 +629,22 @@
             test("Select weekday disables monthday", function() {
                 var today = kendo.date.today(),
                     editor = new RecurrenceEditor(div, { start: today }),
-                    container = editor.container;
+                    container = editor._container;
 
-                editor.setView("monthly");
+                editor._initView("monthly");
 
                 container.find(".k-recur-month-radio:last").click();
 
                 var numeric = container.find("[data-role=numerictextbox].k-recur-monthday"),
-                    offset = container.find("[data-role=dropdownlist].k-recur-offset"),
+                    offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset"),
                     weekday = container.find("[data-role=dropdownlist].k-recur-weekday");
+
+                var day = WEEK_DAYS[today.getDay()];
 
                 equal(numeric.prop("disabled"), true);
                 equal(offset.prop("disabled"), false);
                 equal(weekday.prop("disabled"), false);
-                equal(editor.value(), "FREQ=MONTHLY;BYDAY=1SU");
+                equal(editor.value(), "FREQ=MONTHLY;BYDAY=1" + day);
             });
 
             module("kendo.ui.RecurrenceEditor Yearly view", {
@@ -571,7 +658,7 @@
 
             test("Render interval input with default value", function() {
                 var editor = new RecurrenceEditor(div);
-                editor.setView("yearly");
+                editor._initView("yearly");
 
                 var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
 
@@ -583,7 +670,7 @@
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
-                editor.setView("yearly");
+                editor._initView("yearly");
 
                 var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
 
@@ -597,7 +684,7 @@
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
-                editor.setView("yearly");
+                editor._initView("yearly");
 
                 var interval = div.find("[data-role=numerictextbox].k-recur-interval").data("kendoNumericTextBox");
 
@@ -609,7 +696,7 @@
 
             test("All end inputs are disabled if never radio is checked", function() {
                 var editor = new RecurrenceEditor(div);
-                editor.setView("yearly");
+                editor._initView("yearly");
 
                 var radio = div.find(".k-recur-end-never,.k-recur-end-until,.k-recur-end-count").filter(":checked"),
                     until = div.find(".k-recur-until:input"),
@@ -625,9 +712,9 @@
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
-                editor.setView("yearly");
+                editor._initView("yearly");
 
-                editor.radioButtonCount.click();
+                editor._buttonCount.click();
 
                 equal(editor.value(), "FREQ=YEARLY;COUNT=1;BYMONTH=" + (date.getMonth() + 1) + ";BYMONTHDAY=14");
             });
@@ -636,8 +723,8 @@
                 var date = new Date(2013, 5, 14),
                     editor = new RecurrenceEditor(div, { start: date });
 
-                editor.setView("yearly");
-                editor.radioButtonUntil.click();
+                editor._initView("yearly");
+                editor._buttonUntil.click();
 
                 date = kendo.timezone.apply(date, 0);
                 equal(editor.value(), "FREQ=YEARLY;UNTIL=" + kendo.toString(date, "yyyyMMddTHHmmssZ") + ";BYMONTH=" + (date.getMonth() + 1) + ";BYMONTHDAY=14");
@@ -645,13 +732,13 @@
 
             test("Render inputs to handle bymonthday and byday options", function() {
                 var editor = new RecurrenceEditor(div),
-                    container = editor.container;
+                    container = editor._container;
 
-                editor.setView("yearly");
+                editor._initView("yearly");
 
                 var radioButton = container.find("[type=radio].k-recur-year-radio");
                 var numericMonthDay = container.find(".k-recur-monthday");
-                var ddlOffset = container.find(".k-recur-offset");
+                var ddlOffset = container.find(".k-recur-weekday-offset");
                 var ddlWeekDay = container.find(".k-recur-weekday");
 
                 equal(radioButton.length, 2);
@@ -663,9 +750,9 @@
             test("Initialize monthday numeric", function() {
                 var today = kendo.date.today(),
                     editor = new RecurrenceEditor(div, { start: today }),
-                    container = editor.container;
+                    container = editor._container;
 
-                editor.setView("yearly");
+                editor._initView("yearly");
 
                 var numericMonthDay = container.find("[data-role=numerictextbox].k-recur-monthday"),
                     numeric = numericMonthDay.data("kendoNumericTextBox");
@@ -679,9 +766,9 @@
             test("Update monthdays rule on monthday numeric change", function() {
                 var today = kendo.date.today(),
                     editor = new RecurrenceEditor(div, { start: today }),
-                    container = editor.container;
+                    container = editor._container;
 
-                editor.setView("yearly");
+                editor._initView("yearly");
 
                 var numericMonthDay = container.find("[data-role=numerictextbox].k-recur-monthday"),
                     numeric = numericMonthDay.data("kendoNumericTextBox");
@@ -695,15 +782,15 @@
             test("Initialize week day widgets", function() {
                 var today = kendo.date.today(),
                     editor = new RecurrenceEditor(div, { start: today }),
-                    container = editor.container;
+                    container = editor._container;
 
                 editor._value.weekDays = [
                     { offset: 3, day: 6 }
                 ];
 
-                editor.setView("yearly");
+                editor._initView("yearly");
 
-                var offset = container.find("[data-role=dropdownlist].k-recur-offset").data("kendoDropDownList")
+                var offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset").data("kendoDropDownList")
                     weekday = container.find("[data-role=dropdownlist].k-recur-weekday").data("kendoDropDownList");
 
                 ok(offset);
@@ -717,18 +804,18 @@
                 var today = kendo.date.today(),
                     month = today.getMonth() + 1,
                     editor = new RecurrenceEditor(div, { start: today }),
-                    container = editor.container;
+                    container = editor._container;
 
-                editor.setView("yearly");
+                editor._initView("yearly");
                 container.find(".k-recur-year-radio:last").click();
 
-                var offset = container.find("[data-role=dropdownlist].k-recur-offset").data("kendoDropDownList")
+                var offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset").data("kendoDropDownList")
                     weekday = container.find("[data-role=dropdownlist].k-recur-weekday").data("kendoDropDownList");
 
                 offset.value("-1");
                 offset.trigger("change");
 
-                equal(editor.value(), "FREQ=YEARLY;BYMONTH=" + month + ";BYDAY=-1SU");
+                equal(editor.value(), "FREQ=YEARLY;BYMONTH=" + month + ";BYDAY=-1" + WEEK_DAYS[today.getDay()]);
 
                 weekday.value("3");
                 weekday.trigger("change");
@@ -739,12 +826,12 @@
             test("On initial render enable monthday and disable weekday", function() {
                 var today = kendo.date.today(),
                     editor = new RecurrenceEditor(div, { start: today }),
-                    container = editor.container;
+                    container = editor._container;
 
-                editor.setView("yearly");
+                editor._initView("yearly");
 
                 var numeric = container.find("[data-role=numerictextbox].k-recur-monthday"),
-                    offset = container.find("[data-role=dropdownlist].k-recur-offset"),
+                    offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset"),
                     weekday = container.find("[data-role=dropdownlist].k-recur-weekday"),
                     monthFirst = container.find("[data-role=dropdownlist].k-recur-month:first"),
                     monthLast = container.find("[data-role=dropdownlist].k-recur-month:last");
@@ -761,14 +848,14 @@
             test("Select weekday disables monthday", function() {
                 var today = kendo.date.today(),
                     editor = new RecurrenceEditor(div, { start: today }),
-                    container = editor.container;
+                    container = editor._container;
 
-                editor.setView("yearly");
+                editor._initView("yearly");
 
                 container.find(".k-recur-year-radio:last").click();
 
                 var numeric = container.find("[data-role=numerictextbox].k-recur-monthday"),
-                    offset = container.find("[data-role=dropdownlist].k-recur-offset"),
+                    offset = container.find("[data-role=dropdownlist].k-recur-weekday-offset"),
                     weekday = container.find("[data-role=dropdownlist].k-recur-weekday"),
                     monthFirst = container.find("[data-role=dropdownlist].k-recur-month:first"),
                     monthLast = container.find("[data-role=dropdownlist].k-recur-month:last");
@@ -780,7 +867,7 @@
                 equal(weekday.prop("disabled"), false);
                 equal(monthLast.prop("disabled"), false);
 
-                equal(editor.value(), "FREQ=YEARLY;BYMONTH=" + (today.getMonth() + 1) + ";BYDAY=1SU");
+                equal(editor.value(), "FREQ=YEARLY;BYMONTH=" + (today.getMonth() + 1) + ";BYDAY=1" + WEEK_DAYS[today.getDay()]);
             });
 
             module("kendo.ui.RecurrenceEditor API", {
@@ -797,7 +884,7 @@
                 var editor = new RecurrenceEditor(div);
                 editor.value("FREQ=DAILY");
 
-                equal(editor.ddlFrequency.value(), "daily");
+                equal(editor._frequency.value(), "daily");
             });
 
             test("value method sets interval if valid frequency", function() {
@@ -811,15 +898,15 @@
                 var editor = new RecurrenceEditor(div);
                 editor.value("FREQ=DAILY");
 
-                ok(editor.radioButtonNever.prop("checked"));
+                ok(editor._buttonNever.prop("checked"));
             });
 
             test("value method sets end rule to count", function() {
                 var editor = new RecurrenceEditor(div);
                 editor.value("FREQ=DAILY;COUNT=10");
 
-                ok(editor.radioButtonCount.prop("checked"));
-                equal(editor.countNumericTextBox.value(), 10);
+                ok(editor._buttonCount.prop("checked"));
+                equal(div.find("[data-role=numerictextbox].k-recur-count").data("kendoNumericTextBox").value(), 10);
             });
 
             test("value method sets end rule to until (no timezone)", function() {
@@ -828,8 +915,8 @@
 
                 editor.value("FREQ=DAILY;UNTIL=20130615T000000Z");
 
-                ok(editor.radioButtonUntil.prop("checked"));
-                equal(editor.untilDatePicker.value().getTime(), until.getTime());
+                ok(editor._buttonUntil.prop("checked"));
+                deepEqual(div.find("[data-role=datepicker].k-recur-until").data("kendoDatePicker").value(), until);
             });
 
         </script>

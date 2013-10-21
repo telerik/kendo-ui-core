@@ -1,0 +1,140 @@
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>editable</title>
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
+        <link href="../../styles/web/kendo.common.less" rel="stylesheet/less" />
+        <link href="../../styles/web/kendo.default.less" rel="stylesheet/less" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.resizable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.scrollview.js"></script>
+        <script src="../../src/kendo.mobile.splitview.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <script src="../../src/kendo.mobile.switch.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.scheduler.view.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.scheduler.dayview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.scheduler.agendaview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.scheduler.monthview.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.scheduler.recurrence.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../src/kendo.scheduler.js" type="text/javascript" charset="utf-8"></script>
+   </head>
+   <body>
+       <div data-role="view" data-init="viewInit" data-stretch="true">
+           <div id="scheduler"></div>
+       </div>
+
+       <script>
+           new kendo.mobile.Application();
+
+           function viewInit() {
+               $("#scheduler").kendoScheduler({
+                   mobile: "phone",
+                   date: new Date("2013/6/13"),
+                   startTime: new Date("2013/6/13 07:00 AM"),
+                   height: "100%",
+                   views: [
+                   "day",
+                   { type: "week", selected: true },
+                   "month",
+                   "agenda"
+                   ],
+                   timezone: "Etc/UTC",
+                   dataSource: {
+                       batch: true,
+                       transport: {
+                           read: {
+                               url: "http://demos.kendoui.com/service/meetings",
+                               dataType: "jsonp"
+                           },
+                           update: {
+                               url: "http://demos.kendoui.com/service/meetings/update",
+                               dataType: "jsonp"
+                           },
+                           create: {
+                               url: "http://demos.kendoui.com/service/meetings/create",
+                               dataType: "jsonp"
+                           },
+                           destroy: {
+                               url: "http://demos.kendoui.com/service/meetings/destroy",
+                               dataType: "jsonp"
+                           },
+                           parameterMap: function(options, operation) {
+                               if (operation !== "read" && options.models) {
+                                   return {models: kendo.stringify(options.models)};
+                               }
+                           }
+                       },
+                       schema: {
+                           model: {
+                               id: "meetingID",
+                               fields: {
+                                   meetingID: { from: "MeetingID", type: "number" },
+                                   title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                                   start: { type: "date", from: "Start" },
+                                   end: { type: "date", from: "End" },
+                                   startTimezone: { from: "StartTimezone" },
+                                   endTimezone: { from: "EndTimezone" },
+                                   description: { from: "Description" },
+                                   recurrenceId: { from: "RecurrenceID" },
+                                   recurrenceRule: { from: "RecurrenceRule" },
+                                   recurrenceException: { from: "RecurrenceException" },
+                                   roomId: { from: "RoomID", nullable: true },
+                                   atendees: { from: "Atendees", nullable: true },
+                                   isAllDay: { type: "boolean", from: "IsAllDay" }
+                               }
+                           }
+                       }
+                   },
+                   resources: [
+                   {
+                       field: "roomId",
+                       dataSource: [
+                       { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                       { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                       ],
+                       title: "Room"
+                   },
+                   {
+                       field: "atendees",
+                       dataSource: [
+                       { text: "Alex", value: 1, color: "#f8a398" },
+                       { text: "Bob", value: 2, color: "#51a0ed" },
+                       { text: "Charlie", value: 3, color: "#56ca85" }
+                       ],
+                       multiple: true,
+                       title: "Atendees"
+                   }
+                   ]
+               });
+           }
+       </script>
+
+   </body>
+</html>

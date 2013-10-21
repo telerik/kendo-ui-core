@@ -19,6 +19,7 @@ kendo_module({
         DESC = "desc",
         CHANGE = "change",
         INIT = "init",
+        SELECT = "select",
         POPUP = "kendoPopup",
         FILTERMENU = "kendoFilterMenu",
         MENU = "kendoMenu",
@@ -54,9 +55,51 @@ kendo_module({
                 .on("click" + NS, proxy(that._click, that));
 
             that.wrapper = $('<div class="k-column-menu"/>');
+
+            that._isMobile = kendo.support.mobileOS;
         },
 
         _init: function() {
+            var that = this;
+
+            if (that._isMobile) {
+                that.pane = that.link.closest(kendo.roleSelector("pane")).data("kendoMobilePane");
+                that._isMobile = !!that.pane;
+            }
+
+            if (that._isMobile) {
+                that._createMobileMenu();
+            } else {
+                that._createMenu();
+            }
+
+            that._sort();
+
+            that._columns();
+
+            that._filter();
+
+            that.trigger(INIT, { field: that.field, container: that.wrapper });
+        },
+
+        events: [ INIT ],
+
+        options: {
+            name: "ColumnMenu",
+            messages: {
+                sortAscending: "Sort Ascending",
+                sortDescending: "Sort Descending",
+                filter: "Filter",
+                columns: "Columns",
+                done: "Done",
+                settings: "Column Settings"
+            },
+            columns: true,
+            sortable: true,
+            filterable: true
+        },
+
+        _createMenu: function() {
             var that = this,
                 options = that.options;
 
@@ -76,30 +119,38 @@ kendo_module({
                 close: that.options.closeCallback
             }).data(POPUP);
 
-            that._menu();
-
-            that._sort();
-
-            that._columns();
-
-            that._filter();
-
-            that.trigger(INIT, { field: that.field, container: that.wrapper });
+            that.menu = that.wrapper.children()[MENU]({
+                orientation: "vertical",
+                closeOnClick: false
+            }).data(MENU);
         },
 
-        events: [ INIT ],
+        _createMobileMenu: function() {
+            var that = this,
+                options = that.options;
 
-        options: {
-            name: "ColumnMenu",
-            messages: {
-                sortAscending: "Sort Ascending",
-                sortDescending: "Sort Descending",
-                filter: "Filter",
-                columns: "Columns"
-            },
-            columns: true,
-            sortable: true,
-            filterable: true
+            var html = kendo.template(mobileTemplate)({
+                ns: kendo.ns,
+                field: that.field,
+                messages: options.messages,
+                sortable: options.sortable,
+                filterable: options.filterable,
+                columns: that._ownerColumns(),
+                showColumns: options.columns
+            });
+
+            that.view = that.pane.append(html);
+
+            that.wrapper = that.view.element.find(".k-column-menu");
+
+            that.menu = new MobileMenu(that.wrapper.children(), {
+                pane: that.pane
+            });
+
+            that.view.element.on("click", ".k-done", function(e) {
+                that.close();
+                e.preventDefault();
+            });
         },
 
         destroy: function() {
@@ -131,24 +182,34 @@ kendo_module({
                 that.popup.destroy();
             }
 
+            if (that.view) {
+                that.view.purge();
+            }
+
             that.link.off(NS);
         },
 
         close: function() {
             this.menu.close();
-            this.popup.close();
-            this.popup.element.off("keydown" + NS);
+            if (this.popup) {
+                this.popup.close();
+                this.popup.element.off("keydown" + NS);
+            }
         },
 
         _click: function(e) {
             e.preventDefault();
             e.stopPropagation();
 
-            if (!this.popup) {
+            if (!this.popup && !this.pane) {
                 this._init();
             }
 
-            this.popup.toggle();
+            if (this._isMobile) {
+                this.pane.navigate(this.view);
+            } else {
+                this.popup.toggle();
+            }
         },
 
         _open: function() {
@@ -191,13 +252,6 @@ kendo_module({
             });
         },
 
-        _menu: function() {
-            this.menu = this.wrapper.children()[MENU]({
-                orientation: "vertical",
-                closeOnClick: false
-            }).data(MENU);
-        },
-
         _sort: function() {
             var that = this;
 
@@ -208,7 +262,7 @@ kendo_module({
 
                 that.dataSource.bind(CHANGE, that._refreshHandler);
 
-                that.menu.bind("select", function(e) {
+                that.menu.bind(SELECT, function(e) {
                     var item = $(e.item),
                         dir;
 
@@ -272,7 +326,7 @@ kendo_module({
 
                 that.owner.bind(["columnHide", "columnShow"], that._updateColumnsMenuHandler);
 
-                that.menu.bind("select", function(e) {
+                that.menu.bind(SELECT, function(e) {
                     var item = $(e.item),
                         input,
                         index,
@@ -341,7 +395,17 @@ kendo_module({
                         field: that.field
                     },
                     options.filterable)
-                ).data(FILTERMENU);
+                    ).data(FILTERMENU);
+
+                if (that._isMobile) {
+                    that.menu.bind(SELECT, function(e) {
+                        var item = $(e.item);
+
+                        if (item.hasClass("k-filter-item")) {
+                            that.pane.navigate(that.filterMenu.view);
+                        }
+                    });
+                }
             }
         },
 
@@ -389,6 +453,62 @@ kendo_module({
                         '</ul></li>'+
                     '#}#'+
                     '</ul>';
+
+    var mobileTemplate =
+            '<div data-#=ns#role="view" data-#=ns#init-widgets="false">'+
+                '<div data-#=ns#role="header">'+
+                    '${messages.settings}'+
+                    '<button class="k-button k-done">#=messages.done#</button>'+
+                '</div>'+
+                '<div class="k-column-menu"><ul><li>'+
+                    '<span class="k-link">${field}</span><ul>'+
+                '#if(sortable){#'+
+                    '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite k-i-sort-asc"></span>${messages.sortAscending}</span></li>'+
+                    '<li class="k-item k-sort-desc"><span class="k-link"><span class="k-sprite k-i-sort-desc"></span>${messages.sortDescending}</span></li>'+
+                '#}#'+
+                '#if(filterable){#'+
+                    '<li class="k-item k-filter-item">'+
+                        '<span class="k-link k-filterable">'+
+                            '<span class="k-sprite k-filter"></span>'+
+                            '${messages.filter}</span>'+
+                    '</li>'+
+                '#}#'+
+                '</ul></li>'+
+                '#if(showColumns){#'+
+                    '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite k-i-columns"></span>${messages.columns}</span><ul>'+
+                    '#for (var col in columns) {#'+
+                        '<li><input type="checkbox" data-#=ns#field="#=columns[col].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[col].index#"/>#=columns[col].title#</li>'+
+                    '#}#'+
+                    '</ul></li>'+
+                '#}#'+
+                '</ul></div>'+
+            '</div>';
+
+    var MobileMenu = Widget.extend({
+        init: function(element, options) {
+            Widget.fn.init.call(this, element, options);
+
+            this.element.on("click" + NS, "li:not(.k-separator)", "_click");
+        },
+
+        events: [ SELECT ],
+
+        _click: function(e) {
+            if (this.trigger(SELECT, { item: e.currentTarget })) {
+                e.preventDefault();
+            }
+        },
+
+        close: function() {
+            this.options.pane.navigate("");
+        },
+
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+
+            this.element.off(NS);
+        }
+    });
 
     ui.plugin(ColumnMenu);
 })(window.kendo.jQuery);

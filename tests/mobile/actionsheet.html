@@ -102,6 +102,20 @@
                 root.find("#foo").trigger($.Event(kendo.support.mouseup));
             });
 
+            test("Clicking a button raises command event", 2, function() {
+                window.foo = function() { };
+
+                actionSheet.openFor(root.find("#source"));
+
+                actionSheet.bind("command", function(e) {
+                    equal(e.context, 1);
+                    equal(e.target[0], source[0]);
+                });
+
+                root.find("#foo").trigger($.Event(kendo.support.mouseup));
+            });
+
+
             test("Passes context in click handler", 1, function() {
                 window.foo = function(e) {
                     equal(e.context, 1);

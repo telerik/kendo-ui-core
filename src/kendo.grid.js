@@ -105,6 +105,8 @@ kendo_module({
         FUNCTION = "function",
         STRING = "string",
         DELETECONFIRM = "Are you sure you want to delete this record?",
+        CONFIRMDELETE = "Delete",
+        CANCELDELETE = "Cancel",
         formatRegExp = /(\}|\#)/ig,
         templateHashRegExp = /#/ig,
         whitespaceRegExp = "[\\x20\\t\\r\\n\\f]",
@@ -564,6 +566,8 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
+            that._isMobile = kendo.support.mobileOS;
+
             isRtl = kendo.support.isRtl(element);
 
             that._element();
@@ -719,6 +723,10 @@ kendo_module({
                 element = element
                         .add(that.content)
                         .add(that.content.find(">.k-virtual-scrollable-wrap"));
+            }
+
+            if (that.pane) {
+                that.pane.destroy();
             }
 
             element.off(NS);
@@ -1168,11 +1176,15 @@ kendo_module({
                     that.editable.destroy();
                     that.editable = null;
                     that._editContainer = null;
+                    if (that.editView) {
+                        that.editView.purge();
+                        that.editView = null;
+                    }
                 }
             };
 
             if (that.editable) {
-                if (that._editMode() === "popup") {
+                if (that._editMode() === "popup" && !that._isMobile) {
                     that._editContainer.data("kendoWindow").bind("deactivate", destroy).close();
                 } else {
                     destroy();
@@ -1246,13 +1258,17 @@ kendo_module({
         },
 
         removeRow: function(row) {
+            if (!this._confirmation(row)) {
+                return;
+            }
+
+            this._removeRow(row);
+        },
+
+        _removeRow: function(row) {
             var that = this,
                 model,
                 mode;
-
-            if (!that._confirmation()) {
-                return;
-            }
 
             row = $(row).hide();
             model = that._modelForContainer(row);
@@ -1432,11 +1448,14 @@ kendo_module({
                 }
             }
 
-            html += '<div class="k-edit-buttons k-state-default">';
-            html += that._createButton({ name: "update", text: updateText, attr: attr }) + that._createButton({ name: "canceledit", text: cancelText, attr: attr });
-            html += '</div></div></div>';
+            var container;
 
-            var container = that._editContainer = $(html)
+            if (!that._isMobile) {
+                html += '<div class="k-edit-buttons k-state-default">';
+                html += that._createButton({ name: "update", text: updateText, attr: attr }) + that._createButton({ name: "canceledit", text: cancelText, attr: attr });
+                html += '</div></div></div>';
+
+                container = that._editContainer = $(html)
                 .appendTo(that.wrapper).eq(0)
                 .kendoWindow(extend({
                     modal: true,
@@ -1461,6 +1480,11 @@ kendo_module({
                         }
                     }
                 }, options));
+            } else {
+                html += "</div></div>";
+                that.editView = that.pane.append(html);
+                container = that._editContainer = that.editView.element.find(".k-popup-edit-form");
+            }
 
             that.editable = that._editContainer
                 .kendoEditable({
@@ -1469,11 +1493,11 @@ kendo_module({
                     clearContainer: false
                 }).data("kendoEditable");
 
-            var winObject = container.data("kendoWindow");
-            if (!options || !options.position) {
-                winObject.center();
+            if (!that._isMobile) {
+                container.data("kendoWindow").center().open();
+            } else {
+                that.pane.navigate(that.editView);
             }
-            winObject.open();
 
             that.trigger(EDIT, { container: container, model: model });
         },
@@ -1574,16 +1598,52 @@ kendo_module({
             }
         },
 
-        _showMessage: function(text) {
-            return window.confirm(text);
+        _showMessage: function(messages, row) {
+            var that = this;
+
+            if (!that._isMobile) {
+                return window.confirm(messages.title);
+            }
+
+            var template = kendo.template('<ul>'+
+                '<li class="km-actionsheet-title">#:title#</li>'+
+                '<li><a href="\\#">#:confirmDelete#</a></li>'+
+            '</ul>');
+
+            var html = $(template(messages)).appendTo(that.view.element);
+
+            var actionSheet = new kendo.mobile.ui.ActionSheet(html, {
+                cancel: messages.cancelDelete,
+                close: function() {
+                    this.destroy();
+                },
+                command: function(e) {
+                    var item = $(e.currentTarget).parent();
+                    if (!item.hasClass("km-actionsheet-cancel")) {
+                        that._removeRow(row);
+                    }
+                }
+            });
+
+            actionSheet.open(row);
+
+            return false;
         },
 
-        _confirmation: function() {
+        _confirmation: function(row) {
             var that = this,
                 editable = that.options.editable,
                 confirmation = editable === true || typeof editable === STRING ? DELETECONFIRM : editable.confirmation;
 
-            return confirmation !== false && confirmation != null ? that._showMessage(confirmation) : true;
+            if (confirmation !== false && confirmation != null) {
+                return that._showMessage({
+                        confirmDelete: editable.confirmDelete || CONFIRMDELETE,
+                        cancelDelete: editable.cancelDelete || CANCELDELETE,
+                        title: confirmation === true ? DELETECONFIRM : confirmation
+                    }, row);
+            }
+
+            return true;
         },
 
         cancelChanges: function() {
@@ -2259,15 +2319,17 @@ kendo_module({
                wrapper = wrapper.wrap("<div/>").parent();
             }
 
-            that.wrapper = wrapper.addClass("k-grid k-widget k-secondary");/*
-                                  .attr(TABINDEX, math.max(table.attr(TABINDEX) || 0, 0));
-
-            table.removeAttr(TABINDEX);
-            */
+            that.wrapper = wrapper.addClass("k-grid k-widget k-secondary");
 
             if (height) {
                 that.wrapper.css(HEIGHT, height);
                 table.css(HEIGHT, "auto");
+            }
+
+            if (that._isMobile) {
+                var html = that.wrapper.wrap('<div data-' + kendo.ns + 'role="view" data-' + kendo.ns + 'init-widgets="false"></div>').parent();
+                that.pane = kendo.mobile.ui.Pane.wrap(html);
+                that.view = that.pane.view();
             }
         },
 

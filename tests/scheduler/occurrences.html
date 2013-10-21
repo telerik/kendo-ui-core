@@ -852,14 +852,14 @@
 
                 equal(events.length, 3);
 
-                equal(events[0].start.getTime(), +new Date(2013, 5, 10, 10, 30));
-                equal(events[0].end.getTime(), +new Date(2013, 5, 10, 11));
+                deepEqual(events[0].start, new Date(2013, 5, 10, 10, 30));
+                deepEqual(events[0].end, new Date(2013, 5, 10, 11));
 
-                equal(events[1].start.getTime(), +new Date(2013, 5, 10, 16, 30));
-                equal(events[1].end.getTime(), +new Date(2013, 5, 10, 17));
+                deepEqual(events[1].start, new Date(2013, 5, 10, 16, 30));
+                deepEqual(events[1].end, new Date(2013, 5, 10, 17));
 
-                equal(events[2].start.getTime(), +new Date(2013, 5, 10, 20, 30));
-                equal(events[2].end.getTime(), +new Date(2013, 5, 10, 21));
+                deepEqual(events[2].start, new Date(2013, 5, 10, 20, 30));
+                deepEqual(events[2].end, new Date(2013, 5, 10, 21));
             });
 
             test("DAILY starts from event start", function() {
@@ -1406,6 +1406,20 @@
                 equal(events[2].endTime.getHours(), 4);
             });
 
+            test("WEEKLY occurrence expands correctly when period is between event length", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date("2013/6/13 17:00"),
+                    end: new Date("2013/6/15 18:30"),
+                    recurrenceRule: "FREQ=WEEKLY"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(2013, 5, 14), new Date(2013, 5, 15));
+
+                equal(events.length, 1);
+            });
+
             module("MONTHLY Occurrences");
             test("MONTHLY method returns one event for each new month", function() {
                 var schedulerEvent = new SchedulerEvent({
@@ -1697,6 +1711,59 @@
 
                 equal(events[2].end.getHours(), 4);
                 equal(events[2].endTime.getHours(), 4);
+            });
+
+            test("MONTHLY occurrence method supports bysetpos rule", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(1997, 8, 4, 9, 0),
+                    end: new Date(1997, 8, 4, 10, 0),
+                    recurrenceRule: "RRULE:FREQ=MONTHLY;COUNT=3;BYDAY=TU,WE,TH;BYSETPOS=3"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(1997, 8, 1), new Date(1997, 11, 1));
+
+                equal(events.length, 3);
+
+                deepEqual(events[0].start, new Date(1997, 8, 4, 9));
+                deepEqual(events[1].start, new Date(1997, 9, 7, 9));
+                deepEqual(events[2].start, new Date(1997, 10, 6, 9));
+            });
+
+            test("MONTHLY occurrence uses event start when limit by occurrence position", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(2013, 9, 15, 9, 0),
+                    end: new Date(2013, 9, 15, 10, 0),
+                    recurrenceRule: "FREQ=MONTHLY;COUNT=2;BYDAY=SU,MO,TU,WE,TH,FR,SA;BYSETPOS=-1"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(2013, 9, 15), new Date(2013, 11, 1));
+
+                equal(events.length, 2);
+
+                deepEqual(events[0].start, new Date(2013, 9, 31, 9));
+                deepEqual(events[1].start, new Date(2013, 10, 30, 9));
+            });
+
+            test("MONTHLY occurrence method supports negative bysetpos rule", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date(1997, 8, 29, 9, 0),
+                    end: new Date(1997, 8, 29, 10, 0),
+                    recurrenceRule: "RRULE:FREQ=MONTHLY;COUNT=3;BYDAY=MO,TU,WE,TH,FR;BYSETPOS=-2"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(1997, 8, 1), new Date(1997, 11, 1));
+
+                equal(events.length, 3);
+
+                deepEqual(events[0].start, new Date(1997, 8, 29, 9));
+                deepEqual(events[1].start, new Date(1997, 9, 30, 9));
+                deepEqual(events[2].start, new Date(1997, 10, 27, 9));
             });
 
             module("YEARLY Occurrences");

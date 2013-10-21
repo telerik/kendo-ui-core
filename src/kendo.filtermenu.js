@@ -19,6 +19,11 @@ kendo_module({
             "number": "numerictextbox",
             "date": "datepicker"
         },
+        mobileRoles = {
+            "string": "text",
+            "number": "number",
+            "date": "date"
+        },
         isFunction = kendo.isFunction,
         Widget = ui.Widget;
 
@@ -74,6 +79,91 @@ kendo_module({
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+
                 '</div>'+
+            '</div>';
+
+        var defaultMobileTemplate =
+            '<div data-#=ns#role="view" data-#=ns#init-widgets="false">'+
+                '<div data-#=ns#role="header">'+
+                    '<button class="k-button k-cancel">#=messages.cancel#</button>'+
+                    '#=field#'+
+                    '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
+                '</div>'+
+                '<form class="k-filter-menu k-secondary">'+
+                    '<div>' +
+                        '<label>#=messages.operator#'+
+                            '<select data-#=ns#bind="value: filters[0].operator">'+
+                                '#for(var op in operators){#'+
+                                    '<option value="#=op#">#=operators[op]#</option>' +
+                                '#}#'+
+                            '</select>'+
+                        '</label>'+
+                        '<label>#=messages.value#'+
+                            '#if(values){#' +
+                                '<select data-#=ns#bind="value:filters[0].value">'+
+                                    '<option value="">#=messages.selectValue#</option>' +
+                                    '#for(var val in values){#'+
+                                        '<option value="#=values[val].value#">#=values[val].text#</option>' +
+                                    '#}#'+
+                                '</select>' +
+                            '#}else{#' +
+                                '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="#=inputType#" />'+
+                            '#}#' +
+                        '</label>'+
+                        '#if(extra){#'+
+                            '<label><input type="radio" name="logic" data-#=ns#bind="checked: logic" value="and" />#=messages.and#</label>'+
+                            '<label><input type="radio" name="logic" data-#=ns#bind="checked: logic" value="or" />#=messages.or#</label>'+
+                            '<label>#=messages.operator#'+
+                                '<select data-#=ns#bind="value: filters[1].operator">'+
+                                    '#for(var op in operators){#'+
+                                        '<option value="#=op#">#=operators[op]#</option>' +
+                                    '#}#'+
+                                '</select>'+
+                            '</label>'+
+                            '<label>#=messages.value#'+
+                                '#if(values){#' +
+                                    '<select data-#=ns#bind="value:filters[1].value">'+
+                                        '<option value="">#=messages.selectValue#</option>' +
+                                        '#for(var val in values){#'+
+                                            '<option value="#=values[val].value#">#=values[val].text#</option>' +
+                                        '#}#'+
+                                    '</select>' +
+                                '#}else{#' +
+                                    '<input data-#=ns#bind="value:filters[1].value" class="k-textbox" type="#=inputType#" />'+
+                                '#}#' +
+                            '</label>'+
+                        '#}#'+
+                        '<div>'+
+                            '<button type="reset" class="k-button">#=messages.clear#</button>'+
+                        '</div>'+
+                    '</div>'+
+                '</form>'+
+            '</div>';
+
+    var booleanMobileTemplate =
+            '<div data-#=ns#role="view" data-#=ns#init-widgets="false">'+
+                '<div data-#=ns#role="header">'+
+                    '<button class="k-button k-cancel">#=messages.cancel#</button>'+
+                    '#=field#'+
+                    '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
+                '</div>'+
+                '<form class="k-filter-menu k-secondary">'+
+                    '<div>' +
+                        '<div class="k-filter-help-text">#=messages.info#</div>'+
+                        '<ul>'+
+                            '<li><label>'+
+                                '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="true" name="filters[0].value"/>' +
+                                '#=messages.isTrue#' +
+                            '</label></li>' +
+                            '<li><label>'+
+                                '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="false" name="filters[0].value"/>' +
+                                '#=messages.isFalse#' +
+                            '</label></li>' +
+                        '</ul>'+
+                        '<div>' +
+                            '<button type="reset" class="k-button">#=messages.clear#</button>'+
+                        '</div>' +
+                    '</div>'+
+                '</form>'+
             '</div>';
 
     function removeFiltersForField(expression, field) {
@@ -152,6 +242,8 @@ kendo_module({
 
             that.link = link || $();
 
+            that._isMobile = kendo.support.mobileOS;
+
             that.dataSource = options.dataSource;
 
             that.field = options.field || element.attr(kendo.attr("field"));
@@ -202,46 +294,28 @@ kendo_module({
 
         _init: function() {
             var that = this,
-                options = that.options,
-                operators = that.operators || {},
-                ui = options.ui,
+                ui = that.options.ui,
                 setUI = isFunction(ui),
-                role,
-                type = that.type;
+                role;
 
-            operators = operators[type] || options.operators[type];
+            if (that._isMobile) {
+                that.pane = that.element.closest(kendo.roleSelector("pane")).data("kendoMobilePane");
+                that._isMobile = !!that.pane;
+            }
 
             if (!setUI) {
-                role = ui || roles[type];
+                role = ui || roles[that.type];
             }
 
-            that.form = $('<form class="k-filter-menu k-secondary"/>')
-                .html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
-                    field: that.field,
-                    format: options.format,
-                    ns: kendo.ns,
-                    messages: options.messages,
-                    extra: options.extra,
-                    operators: operators,
-                    type: type,
-                    role: role,
-                    values: convertItems(options.values)
-                }))
-                .on("keydown" + NS, proxy(that._keydown, that))
+            if (that._isMobile) {
+                that._createMobileForm(role);
+            } else {
+                that._createForm(role);
+            }
+
+            that.form
                 .on("submit" + NS, proxy(that._submit, that))
                 .on("reset" + NS, proxy(that._reset, that));
-
-            if (!options.appendToElement) {
-                that.popup = that.form[POPUP]({
-                    anchor: that.link,
-                    open: proxy(that._open, that),
-                    activate: proxy(that._activate, that),
-                    close: that.options.closeCallback
-                }).data(POPUP);
-            } else {
-                that.element.append(that.form);
-                that.popup = that.element.closest(".k-popup").data(POPUP);
-            }
 
             if (setUI) {
                 that.form.find(".k-textbox")
@@ -267,6 +341,79 @@ kendo_module({
             that.refresh();
 
             that.trigger(INIT, { field: that.field, container: that.form });
+        },
+
+        _createForm: function(role) {
+            var that = this,
+                options = that.options,
+                operators = that.operators || {},
+                type = that.type;
+
+            operators = operators[type] || options.operators[type];
+
+            that.form = $('<form class="k-filter-menu k-secondary"/>')
+                .html(kendo.template(type === "boolean" ? booleanTemplate : defaultTemplate)({
+                    field: that.field,
+                    format: options.format,
+                    ns: kendo.ns,
+                    messages: options.messages,
+                    extra: options.extra,
+                    operators: operators,
+                    type: type,
+                    role: role,
+                    values: convertItems(options.values)
+                }));
+
+            if (!options.appendToElement) {
+                that.popup = that.form[POPUP]({
+                    anchor: that.link,
+                    open: proxy(that._open, that),
+                    activate: proxy(that._activate, that),
+                    close: that.options.closeCallback
+                }).data(POPUP);
+            } else {
+                that.element.append(that.form);
+                that.popup = that.element.closest(".k-popup").data(POPUP);
+            }
+
+            that.form
+                .on("keydown" + NS, proxy(that._keydown, that));
+        },
+
+        _createMobileForm: function(role) {
+            var that = this,
+                options = that.options,
+                operators = that.operators || {},
+                type = that.type;
+
+            operators = operators[type] || options.operators[type];
+
+            that.form = $("<div />")
+                .html(kendo.template(type === "boolean" ? booleanMobileTemplate : defaultMobileTemplate)({
+                    field: that.field,
+                    format: options.format,
+                    ns: kendo.ns,
+                    messages: options.messages,
+                    extra: options.extra,
+                    operators: operators,
+                    type: type,
+                    role: role,
+                    inputType: mobileRoles[type],
+                    values: convertItems(options.values)
+                }));
+
+            that.view = that.pane.append(that.form.html());
+            that.form = that.view.element.find("form");
+
+            that.view.element
+                .on("click", ".k-submit", function(e) {
+                    that.form.submit();
+                    e.preventDefault();
+                })
+                .on("click", ".k-cancel", function(e) {
+                    that._closeForm();
+                    e.preventDefault();
+                });
         },
 
         refresh: function() {
@@ -299,7 +446,13 @@ kendo_module({
                 kendo.unbind(that.form);
                 kendo.destroy(that.form);
                 that.form.unbind(NS);
-                that.popup.destroy();
+                if (that.popup) {
+                    that.popup.destroy();
+                }
+            }
+
+            if (that.view) {
+                that.view.purge();
             }
 
             that.link.unbind(NS);
@@ -416,29 +569,40 @@ kendo_module({
         },
 
         _submit: function(e) {
-            var that = this;
-
             e.preventDefault();
 
-            that.filter(that.filterModel.toJSON());
+            this.filter(this.filterModel.toJSON());
 
-            that.popup.close();
+            this._closeForm();
         },
 
         _reset: function() {
             this.clear();
-            this.popup.close();
+
+            this._closeForm();
+        },
+
+        _closeForm: function() {
+            if (this._isMobile) {
+                this.pane.navigate("");
+            } else {
+                this.popup.close();
+            }
         },
 
         _click: function(e) {
             e.preventDefault();
             e.stopPropagation();
 
-            if (!this.popup) {
+            if (!this.popup && !this.pane) {
                 this._init();
             }
 
-            this.popup.toggle();
+            if (this._isMobile) {
+                this.pane.navigate(this.view);
+            } else {
+                this.popup.toggle();
+            }
         },
 
         _open: function() {
@@ -507,7 +671,10 @@ kendo_module({
                 clear: "Clear",
                 and: "And",
                 or: "Or",
-                selectValue: "-Select value-"
+                selectValue: "-Select value-",
+                operator: "Operator",
+                value: "Value",
+                cancel: "Cancel"
             }
         }
     });

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.FilterMenu Mobile Tests</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.timepicker.js"></script>
+        <script src="../../src/kendo.datetimepicker.js"></script>
+        <script src="../../src/kendo.userevents.js" ></script>
+        <script src="../../src/kendo.draganddrop.js" ></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.filtermenu.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.FilterMenu Mobile Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var DataSource = kendo.data.DataSource,
+                FilterMenu = kendo.ui.FilterMenu,
+                roleSelector = kendo.roleSelector,
+                link,
+                container,
+                pane;
+
+
+            QUnit.config.reorder = false;
+
+            module("kendo.ui.FilterMenu", {
+                setup: function() {
+                    kendo.support.mobileOS = true;
+
+                    container = $('<div id="container"><a data-kendo-field="foo" class="k-grid-filter"></a></div>')
+                        .appendTo(document.body);
+
+                    pane = kendo.mobile.ui.Pane.wrap(container);
+                    link = container.find(">a");
+                },
+
+                teardown: function() {
+                    kendo.support.mobileOS = false;
+
+                    pane.view().purge();
+                    kendo.destroy(document.body);
+                    container.remove();
+                }
+            });
+
+            function setup(dom, options, init) {
+                options = $.extend({}, {
+                        dataSource: {
+                            schema: {
+                                model: {
+                                    fields: {
+                                        foo: {
+                                            type: "string"
+                                        },
+                                        bar: {
+                                            type: "number"
+                                        },
+                                        baz: {
+                                            type: "date"
+                                        },
+                                        boo: {
+                                            type: "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    options);
+
+                options.dataSource = new DataSource(options.dataSource);
+
+                var menu = new FilterMenu(dom || container, options);
+
+                if (init !== false) {
+                    menu._init();
+                }
+
+                return menu;
+            }
+
+            test("find its parent pane", function() {
+                var menu = setup();
+
+                ok(menu.pane);
+            });
+
+            test("mobile view wraps the form", function() {
+                var menu = setup();
+
+                equal(menu.form.closest(roleSelector("view")).length, 1);
+            });
+
+            test("mobile view doesn't wrap the form if pane not found", function() {
+                pane.destroy();
+                var menu = setup();
+
+                equal(menu.form.closest(roleSelector("view")).length, 0);
+            });
+
+            test("pane navigates to filter menu view", function() {
+                var menu = setup();
+                link.click();
+
+                equal(pane.view(), menu.view);
+            });
+
+            test("pane navigates to default view on form submit", function() {
+                var menu = setup();
+                link.click();
+                menu.form.submit();
+
+                notEqual(pane.view(), menu.view);
+                ok(!menu.view.element.is(":visible"));
+            });
+
+            test("pane navigates to default view on form reset", function() {
+                var menu = setup();
+                link.click();
+                menu.form.trigger("reset");
+
+                notEqual(pane.view(), menu.view);
+                ok(!menu.view.element.is(":visible"));
+            });
+     </script>
+    </body>
+</html>

@@ -40,7 +40,7 @@ kendo_module({
                 '{0}' +
                 '<span class="k-event-actions">' +
                     '#if (showDelete) {#' +
-                                            '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
+                        '<a href="\\#" class="k-link k-event-delete"><span class="k-icon k-si-close"></span></a>' +
                     '#}#' +
                     '# if(data.head || data.middle) {#' +
                         '<span class="k-icon k-i-arrow-e"></span>' +
@@ -231,8 +231,8 @@ kendo_module({
         },
 
         _editable: function() {
-            if (this.options.editable) {
-                if (kendo.support.mobileOS) {
+            if (this.options.editable && !this._isMobilePhoneView()) {
+                if (this._isMobile()) {
                     this._touchEditable();
                 } else {
                     this._mouseEditable();
@@ -273,14 +273,6 @@ kendo_module({
         _touchEditable: function() {
             var that = this;
 
-            that._closeUserEvents = new kendo.UserEvents(that.element, {
-               filter: ".k-scheduler-monthview .k-event a:has(.k-si-close)",
-               tap: function(e) {
-                    that.trigger("remove", { uid: $(e.target).closest(".k-event").attr(kendo.attr("uid")) });
-                    e.preventDefault();
-               }
-            });
-
             if (that.options.editable.create !== false) {
                 that._addUserEvents = new kendo.UserEvents(that.element, {
                     filter: ".k-scheduler-monthview .k-scheduler-content td",
@@ -290,7 +282,7 @@ kendo_module({
 
                         if (slot) {
                             var resourceInfo = that._resourceBySlot(slot);
-                            that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.startDate(), end: slot.endDate() }, resourceInfo ) });
+                            that.trigger("add", { eventInfo: extend({ isAllDay: true, start: slot.startDate(), end: slot.startDate() }, resourceInfo ) });
                         }
 
                         e.preventDefault();
@@ -300,7 +292,7 @@ kendo_module({
 
             if (that.options.editable.update !== false) {
                 that._editUserEvents = new kendo.UserEvents(that.element, {
-                    filter:  ".k-scheduler-monthview .k-event.k-state-selected",
+                    filter:  ".k-scheduler-monthview .k-event",
                     tap: function(e) {
                         if ($(e.event.target).closest("a:has(.k-si-close)").length === 0) {
                             that.trigger("edit", { uid: $(e.target).closest(".k-event").attr(kendo.attr("uid")) });
@@ -425,7 +417,8 @@ kendo_module({
 
         _layout: function() {
             var calendarInfo = this.calendarInfo();
-            var names = shiftArray(calendarInfo.days.names, calendarInfo.firstDay);
+            var weekDayNames = this._isMobile() ? calendarInfo.days.namesShort : calendarInfo.days.names;
+            var names = shiftArray(weekDayNames, calendarInfo.firstDay);
             var columns = $.map(names, function(value) { return { text: value }; });
             var resources = this.groupedResources;
             var rows;
@@ -477,24 +470,16 @@ kendo_module({
             var options = this.options;
             var editable = options.editable;
 
-            event.showDelete = editable && editable.destroy !== false;
-            event.resizable = editable && editable.resize !== false;
+            var isMobile = this._isMobile();
+
+            event.showDelete = editable && editable.destroy !== false && !isMobile;
+            event.resizable = editable && editable.resize !== false && !isMobile;
             event.ns = kendo.ns;
             event.resources = this.eventResources(event);
             event.inverseColor = event.resources && event.resources[0] ? this._shouldInverseResourceColor(event.resources[0]) : false;
 
             return $(this.eventTemplate(event));
         },
-/*
-        _isInDateSlot: function(event) {
-            var slotStart = this.startDate(),
-                slotEnd = new Date(this.endDate().getTime() + MS_PER_DAY - 1);
-
-            return isInDateRange(event.start, slotStart, slotEnd) ||
-                isInDateRange(event.end, slotStart, slotEnd) ||
-                isInDateRange(slotStart, event.start, event.end) ||
-                isInDateRange(slotEnd, event.start, event.end);
-        },*/
 
         _isInDateSlot: function(event) {
             var slotStart = this.startDate();
@@ -509,6 +494,53 @@ kendo_module({
 
         _slotIndex: function(date) {
             return this._slotIndices[getDate(date).getTime()];
+        },
+
+        _positionMobileEvent: function(slotRange, element, group) {
+            var startSlot = slotRange.start;
+
+            if (slotRange.start.offsetLeft > slotRange.end.offsetLeft) {
+               startSlot = slotRange.end;
+            }
+
+            var startIndex = slotRange.start.index;
+            var endIndex = startIndex;
+
+            var eventCount = 3;
+            var events = SchedulerView.collidingEvents(slotRange.events(), startIndex, endIndex);
+
+            events.push({element: element, start: startIndex, end: endIndex });
+
+            var rows = SchedulerView.createRows(events);
+
+            var slot = slotRange.collection.at(startIndex);
+
+            var container = slot.container;
+
+            if (!container) {
+                 container = $(kendo.format('<div class="k-events-container" style="top:{0};left:{1};width:{2}"/>',
+                    startSlot.offsetTop + startSlot.firstChildHeight + 8 + "px",
+                    startSlot.offsetLeft + "px",
+                    startSlot.offsetWidth + "px"
+                ));
+
+                slot.container = container;
+
+                this.content[0].appendChild(container[0]);
+            }
+
+            if (rows.length <= eventCount) {
+                slotRange.addEvent({element: element, start: startIndex, end: endIndex, groupIndex: startSlot.groupIndex });
+
+                group._continuousEvents.push({
+                    element: element,
+                    uid: element.attr(kendo.attr("uid")),
+                    start: slotRange.start,
+                    end: slotRange.end
+                });
+
+                container[0].appendChild(element[0]);
+            }
         },
 
         _positionEvent: function(slotRange, element, group) {
@@ -724,10 +756,10 @@ kendo_module({
                     }
                 }
             }
-       },
+        },
 
         render: function(events) {
-            this.content.children(".k-event,.k-more-events").remove();
+            this.content.children(".k-event,.k-more-events,.k-events-container").remove();
 
             this._groups();
 
@@ -748,6 +780,7 @@ kendo_module({
             var event;
             var idx;
             var length;
+            var isMobilePhoneView = this._isMobilePhoneView();
 
             for (idx = 0, length = events.length; idx < length; idx++) {
                 event = events[idx];
@@ -781,7 +814,11 @@ kendo_module({
 
                         var occurrence = event.clone({ start: start, end: end, head: range.head, tail: range.tail });
 
-                        this._positionEvent(range, this._createEventElement(occurrence), group);
+                        if (isMobilePhoneView) {
+                            this._positionMobileEvent(range, this._createEventElement(occurrence), group);
+                        } else {
+                            this._positionEvent(range, this._createEventElement(occurrence), group);
+                        }
                     }
                 }
             }
@@ -821,64 +858,6 @@ kendo_module({
             return 1;
         },
 
-        _removeOffset: function(slotIndex, groupIndex) {
-            var resources = this.groupedResources;
-            var offset = 0;
-
-            if (resources.length) {
-                if (this._isVerticallyGrouped()) {
-                    offset = NUMBER_OF_COLUMNS * NUMBER_OF_ROWS * groupIndex;
-                } else {
-                    var columnCount = this._columnOffsetForResource(resources.length);
-                    var groupCount = this._groupCount();
-                    var cellsPerRow = columnCount * groupCount;
-                    var rowIndex = Math.floor(slotIndex / cellsPerRow);
-                    offset = (columnCount * (groupCount - 1) * rowIndex);
-                    offset += columnCount * groupIndex;
-                }
-            }
-
-            return slotIndex - offset;
-        },
-
-        _applyOffset: function(slotIndex, groupIndex) {
-            var resources = this.groupedResources;
-            var offset = 0;
-            var cellsPerRow = NUMBER_OF_COLUMNS;
-            var rowCount = NUMBER_OF_ROWS;
-
-            if (resources.length) {
-                if (this._isVerticallyGrouped()) {
-                    offset = cellsPerRow * rowCount * groupIndex;
-                } else {
-                    var rowIndex = Math.floor(slotIndex / cellsPerRow);
-                    var columnCount = this._columnOffsetForResource(resources.length);
-                    offset = (columnCount * (this._groupCount() - 1) * rowIndex);
-                    offset += columnCount * groupIndex;
-                }
-            }
-
-            return slotIndex + offset;
-        },
-
-        _groupIndex: function(slotIndex) {
-            var resources = this.groupedResources;
-            if (resources.length) {
-                if (this._isVerticallyGrouped()) {
-                    return Math.floor(slotIndex / (NUMBER_OF_COLUMNS * NUMBER_OF_ROWS));
-                } else {
-                    var columnCount = this._columnOffsetForResource(resources.length);
-                    var groupCount = this._groupCount();
-                    var cellsPerRow = columnCount * groupCount;
-                    var rowIndex = Math.floor(slotIndex / cellsPerRow);
-                    var offset = (columnCount * groupCount * rowIndex);
-
-                    return Math.floor((slotIndex - offset) / columnCount);
-                }
-            }
-            return 0;
-        },
-
         _columnOffsetForResource: function(index) {
             return this._columnCountForLevel(index) / this._columnCountForLevel(index - 1);
         },
@@ -898,9 +877,7 @@ kendo_module({
 
             SchedulerView.fn.destroy.call(this);
 
-            if (kendo.support.mobileOS) {
-                this._closeUserEvents.destroy();
-
+            if (this._isMobile() && !this._isMobilePhoneView()) {
                 if (this.options.editable.create !== false) {
                     this._addUserEvents.destroy();
                 }

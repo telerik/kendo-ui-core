@@ -903,6 +903,7 @@ kendo_module({
             this.eventCount = eventCount;
             this.isDaySlot = true;
             this.firstChildHeight = this.element.firstChild.offsetHeight + 3;
+            this.firstChildTop = this.element.firstChild.offsetTop;
         },
 
         refresh: function() {
@@ -947,6 +948,16 @@ kendo_module({
             this._moveHint = $();
             this._cellId = kendo.guid();
             this._resourcesForGroups();
+        },
+
+        _isMobile: function() {
+            var options = this.options;
+            return (options.mobile === true && kendo.support.mobileOS) || options.mobile === "phone" || options.mobile === "tablet";
+        },
+
+        _isMobilePhoneView: function() {
+            var options = this.options;
+            return (options.mobile === true && kendo.support.mobileOS && !kendo.support.mobileOS.tablet) || options.mobile === "phone";
         },
 
         _addResourceView: function() {
@@ -1474,8 +1485,8 @@ kendo_module({
                 headerHeight = 0,
                 paddingDirection = this._isRtl ? "left" : "right";
 
-            if (toolbar.length) {
-                height -= toolbar.outerHeight();
+            for (var idx = 0; idx < toolbar.length; idx++) {
+                height -= toolbar.eq(idx).outerHeight();
             }
 
             if (that.datesHeader) {
@@ -1579,7 +1590,7 @@ kendo_module({
 
             var touchScroller = kendo.touchScroller(this.content, {
                 avoidScrolling: function(e) {
-                    return $(e.event.target).closest(".k-event.k-state-selected").length > 0;
+                    return $(e.event.target).closest(".k-event.k-scheduler-hold").length > 0;
                 }
             });
 
