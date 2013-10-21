@@ -142,6 +142,16 @@
             get;
         }
 
+        int? WorkWeekStart
+        {
+            get;
+        }
+
+        int? WorkWeekEnd
+        {
+            get;
+        }
+
         IList<SchedulerResource<TModel>> Resources
         {
             get;

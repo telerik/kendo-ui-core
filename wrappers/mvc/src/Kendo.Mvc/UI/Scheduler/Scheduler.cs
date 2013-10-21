@@ -43,8 +43,6 @@
             Messages = new SchedulerMessages();
             Group = new SchedulerGroupSettings();
             Editable = new SchedulerEditableSettings<TModel>();
-
-            WorkWeekDays = new List<DayOfWeek>();
         }
 
         public DataSource DataSource
@@ -88,12 +86,6 @@
             get;
             set;
         }
-
-        public IEnumerable<DayOfWeek> WorkWeekDays 
-        { 
-            get; 
-            set; 
-        }        
 
         public int? Height
         {
@@ -191,7 +183,6 @@
             set;
         }
 
-        //default valiue == 0?
         public int? Width
         {
             get;
@@ -210,10 +201,22 @@
             set;
         }
 
-        public SchedulerMobileMode Mobile 
-        { 
-            get; 
-            set; 
+        public int? WorkWeekStart
+        {
+            get;
+            set;
+        }
+
+        public int? WorkWeekEnd
+        {
+            get;
+            set;
+        }
+
+        public SchedulerMobileMode Mobile
+        {
+            get;
+            set;
         }
 
         public SchedulerEditableSettings<TModel> Editable
@@ -284,11 +287,6 @@
             if (WorkDayEnd != null)
             {
                 options["workDayEnd"] = WorkDayEnd;
-            }
-
-            if (WorkWeekDays.Count() > 0)
-            {
-                options["workWeekDays"] = WorkWeekDays.Select(d => Enum.GetName(typeof(DayOfWeek), d).Substring(0, 2).ToUpperInvariant());
             }
 
             if (Height != null)
@@ -399,6 +397,16 @@
             if (!AutoBind)
             {
                 options["autoBind"] = AutoBind;
+            }
+
+            if (WorkWeekStart != null)
+            {
+                options["workWeekStart"] = WorkWeekStart;
+            }
+
+            if (WorkWeekEnd != null)
+            {
+                options["workWeekEnd"] = WorkWeekEnd;
             }
 
             if (Resources.Count > 0)

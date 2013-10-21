@@ -612,6 +612,54 @@
         }
 
         /// <summary>
+        /// Sets the start day of work week by index.
+        /// </summary>
+        /// <param name="workWeekStartDay">The workWeekStartDay</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .WorkWeekStart(2)
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> WorkWeekStart(int workWeekStartDay)
+        {
+            Component.WorkWeekStart = workWeekStartDay;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the end day of work week by index.
+        /// </summary>
+        /// <param name="workWeekEndDay">The workWeekEndDay</param>
+        /// <example>
+        /// <code lang="Razor">
+        /// @(Html.Kendo().Scheduler&lt;Kendo.Mvc.Examples.Models.Scheduler.Task&gt;()
+        ///     .Name(&quot;scheduler&quot;)
+        ///     .Date(new DateTime(2013, 6, 13))
+        ///     .WorkWeekEnd(2)
+        ///     .DataSource(d =&gt; d
+        ///         .Model(m =&gt; m.Id(f =&gt; f.TaskID))
+        ///             .Read(&quot;Read&quot;, &quot;Scheduler&quot;)
+        ///     )
+        /// )
+        /// </code>
+        /// </example>
+        public SchedulerBuilder<TModel> WorkWeekEnd(int workWeekEndDay)
+        {
+            Component.WorkWeekEnd = workWeekEndDay;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the editing configuration of the scheduler.
         /// </summary>
         /// <param name="configurator">The lambda which configures the editing</param>
@@ -842,17 +890,6 @@
         public SchedulerBuilder<TModel> DataSource(Action<AjaxSchedulerDataSourceBuilder<TModel>> configurator)
         {
             configurator(new AjaxSchedulerDataSourceBuilder<TModel>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
-
-            return this;
-        }
-
-        /// <summary>
-        /// Defines the working days of the week
-        /// </summary>
-        /// <param name="days">An array of working week days</param>
-        public SchedulerBuilder<TModel> WorkWeekDays(params DayOfWeek[] days)
-        {
-            Component.WorkWeekDays = days;
 
             return this;
         }
