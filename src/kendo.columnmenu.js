@@ -439,8 +439,8 @@ kendo_module({
                     '#}#'+
                     '#if(showColumns){#'+
                         '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite k-i-columns"></span>${messages.columns}</span><ul>'+
-                        '#for (var col in columns) {#'+
-                            '<li><input type="checkbox" data-#=ns#field="#=columns[col].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[col].index#"/>#=columns[col].title#</li>'+
+                        '#for (var idx = 0; idx < columns.length; idx++) {#'+
+                            '<li><input type="checkbox" data-#=ns#field="#=columns[idx].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[idx].index#"/>#=columns[idx].title#</li>'+
                         '#}#'+
                         '</ul></li>'+
                         '#if(filterable){#'+
@@ -476,8 +476,8 @@ kendo_module({
                 '</ul></li>'+
                 '#if(showColumns){#'+
                     '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite k-i-columns"></span>${messages.columns}</span><ul>'+
-                    '#for (var col in columns) {#'+
-                        '<li><input type="checkbox" data-#=ns#field="#=columns[col].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[col].index#"/>#=columns[col].title#</li>'+
+                    '#for (var idx = 0; idx < columns.length; idx++) {#'+
+                        '<li><input type="checkbox" data-#=ns#field="#=columns[idx].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[idx].index#"/>#=columns[idx].title#</li>'+
                     '#}#'+
                     '</ul></li>'+
                 '#}#'+
