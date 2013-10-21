@@ -19,10 +19,14 @@
     var dataviz = kendo.dataviz,
 
         g = dataviz.geometry,
+        Circle = g.Circle,
         Point = g.Point,
+        Rect = g.Rect,
         Matrix = g.Matrix;
 
     // ------------------------------------------------------------
+    var point;
+
     module("Point", {
         setup: function() {
             point = new Point(10, 20);
@@ -59,8 +63,12 @@
         equal(point.get("x"), 10);
     });
 
-    test("sets y", function() {
+    test("gets y", function() {
         equal(point.get("y"), 20);
+    });
+
+    test("returns undefined for other fields", function() {
+        equal(point.get("foo"), undefined);
     });
 
     test("changing x triggers geometryChange", function() {
@@ -81,6 +89,16 @@
         };
 
         point.set("y", 1);
+    });
+
+    test("changing any other field does not trigger geometryChange", 0, function() {
+        point.observer = {
+            geometryChange: function() {
+                ok(false);
+            }
+        };
+
+        point.set("foo", 1);
     });
 
     test("setting x to same value does not trigger geometryChange", 0, function() {
@@ -174,6 +192,158 @@
     test("toString concatenates x and y", function() {
         equal(point.toString(), "10 20");
     });
+
+    // ------------------------------------------------------------
+    var rect;
+
+    module("Rect", {
+        setup: function() {
+            rect = new Rect(
+                new Point(0, 0),
+                new Point(10, 20)
+            );
+        }
+    });
+
+    test("constructor sets p0", function() {
+        ok(rect.p0.equals(new Point(0, 0)));
+    });
+
+    test("constructor sets p1", function() {
+        ok(rect.p1.equals(new Point(10, 20)));
+    });
+
+    test("returns width", function() {
+        equal(rect.width(), 10);
+    });
+
+    test("returns height", function() {
+        equal(rect.height(), 20);
+    });
+
+    test("modifying p0 triggers geometryChange", function() {
+        rect.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        rect.p0.set("x", 1);
+    });
+
+    test("modifying p1 triggers geometryChange", function() {
+        rect.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        rect.p1.set("x", 1);
+    });
+
+    // ------------------------------------------------------------
+    var circle;
+
+    module("Circle", {
+        setup: function() {
+            circle = new Circle(new Point(0, 0), 10);
+        }
+    });
+
+    test("constructor sets center", function() {
+        ok(circle.center.equals(new Point(0, 0)));
+    });
+
+    test("constructor sets radius", function() {
+        equal(circle.radius, 10);
+    });
+
+    test("modifying center triggers geometryChange", function() {
+        circle.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        circle.center.set("x", 1);
+    });
+
+    test("sets radius", function() {
+        circle.set("radius", 1);
+        equal(circle.radius, 1);
+    });
+
+    test("gets radius", function() {
+        equal(circle.get("radius"), 10);
+    });
+
+    test("setting radius triggers geometryChange", function() {
+        circle.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        circle.set("radius", 1);
+    });
+
+    test("setting any other field does not trigger geometryChange", 0, function() {
+        circle.observer = {
+            geometryChange: function() {
+                ok(false);
+            }
+        };
+
+        circle.set("foo", 1);
+    });
+
+    test("setting radius to same value does not trigger geometryChange", 0, function() {
+        circle.observer = {
+            geometryChange: function() {
+                ok(false);
+            }
+        };
+
+        circle.set("radius", 10);
+    });
+
+    test("equals is true for same center and radius", function() {
+        ok(new Circle(new Point(0, 0), 10).equals(circle));
+    });
+
+    test("equals is false for different centers", function() {
+        ok(!new Circle(new Point(1, 1), 10).equals(circle));
+    });
+
+    test("equals is false for different radius", function() {
+        ok(!new Circle(new Point(0, 0), 1).equals(circle));
+    });
+
+    test("equals is false for undefined circle", function() {
+        ok(!new Circle(new Point(1, 1), 10).equals());
+    });
+
+    test("clone returns new instance", function() {
+        var clone = circle.clone();
+        notEqual(clone, circle);
+        ok(clone instanceof Circle);
+    });
+
+    test("clone returns new center instance", function() {
+        var clone = circle.clone();
+        notEqual(clone.center, circle.center);
+    });
+
+    test("clone copies center", function() {
+        var clone = circle.clone();
+        ok(clone.center.equals(clone.center));
+    });
+
+    test("clone copies radius", function() {
+        var clone = circle.clone();
+        equal(clone.radius, circle.radius);
+    });
+
     </script>
 
     <h1 id="qunit-header"></h1>

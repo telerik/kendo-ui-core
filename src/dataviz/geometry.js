@@ -28,7 +28,7 @@
                     this.x = value;
                     this.geometryChange();
                 }
-            } else {
+            } else if (field === "y") {
                 if (this.y !== value) {
                     this.y = value;
                     this.geometryChange();
@@ -39,7 +39,7 @@
         get: function(field) {
             if (field === "x") {
                 return this.x;
-            } else {
+            } else if (field === "y") {
                 return this.y;
             }
         },
@@ -142,8 +142,10 @@
         },
 
         set: function(field, value) {
-            this.radius = value;
-            this.geometryChange();
+            if (field === "radius" && this.radius !== value) {
+                this.radius = value;
+                this.geometryChange();
+            }
         },
 
         get: function() {

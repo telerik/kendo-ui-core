@@ -30,6 +30,10 @@
         return math.round(coord) + 0.5;
     }
 
+    function isNumber(val) {
+        return typeof val === "number" && !isNaN(val);
+    }
+
     // Template helpers =======================================================
     function renderAttr(name, value) {
         return defined(value) ? " " + name + "='" + value + "' " : "";
@@ -60,6 +64,7 @@
             alignToPixel: alignToPixel,
             defined: defined,
             deg: deg,
+            isNumber: isNumber,
             rad: rad,
             renderAttr: renderAttr,
             renderSize: renderSize
