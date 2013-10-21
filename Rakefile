@@ -73,6 +73,7 @@ ROOT_MAP = {
     'wrappers/aspnetmvc/EditorTemplates/razor' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/Views/Shared/EditorTemplates/',
     'wrappers/aspnetmvc/Binaries/Mvc3' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC3/',
     'wrappers/aspnetmvc/Binaries/Mvc4' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
+    'wrappers/aspnetmvc/Binaries/Mvc5' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC5/',
     'wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/',
     'wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Content/shared' => 'demos/mvc/content/shared',
     'wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/bin' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
@@ -84,9 +85,13 @@ ROOT_MAP = {
     'wrappers/php' => 'wrappers/php'
 }
 
-MVC_CONTENT = {
+MVC_BINARIES = {
     'wrappers/aspnetmvc/Binaries/Mvc3' => MVC3_DLL,
     'wrappers/aspnetmvc/Binaries/Mvc4' => MVC4_DLL,
+    'wrappers/aspnetmvc/Binaries/Mvc5' => MVC5_DLL
+}
+
+MVC_CONTENT = {
     'wrappers/aspnetmvc/Examples/packages' => FileList['wrappers/mvc/packages/**/*.*'],
     'wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/bin' => MVC4_DLL,
     'wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples' => MVC_DEMOS,
@@ -94,7 +99,7 @@ MVC_CONTENT = {
     'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
     'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
     'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*'].include(LEGACY_MIN_CSS)
-}
+}.merge(MVC_BINARIES)
 
 JSP_CONTENT = {
     'wrappers/jsp/kendo-taglib' => JSP_TAGLIB_JAR,
@@ -309,12 +314,10 @@ bundle :name => 'aspnetmvc.hotfix.trial',
        :contents => {
             'js' => TRIAL_MIN_JS + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
-            'wrappers/aspnetmvc/Binaries/Mvc3' => MVC3_DLL,
-            'wrappers/aspnetmvc/Binaries/Mvc4' => MVC4_DLL,
             'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
             'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
             'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
-       },
+       }.merge(MVC_BINARIES),
        :prerequisites => [
            'mvc:assets'
        ]
@@ -387,12 +390,10 @@ bundle :name => 'aspnetmvc.hotfix.commercial',
        :contents => {
             'js' => MVC_MIN_JS + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
-            'wrappers/aspnetmvc/Binaries/Mvc3' => MVC3_DLL,
-            'wrappers/aspnetmvc/Binaries/Mvc4' => MVC4_DLL,
             'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
             'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
             'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*']
-       }
+       }.merge(MVC_BINARIES)
 
 
 bundle :name => 'cdn.commercial',

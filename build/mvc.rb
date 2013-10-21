@@ -28,6 +28,11 @@ MVC3_DLL = FileList['Kendo.Mvc.dll']
             .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release-MVC3/%f')
             .include(resources_for("Release-MVC3"))
 
+MVC5_DLL = FileList['Kendo.Mvc.dll']
+            .include('Kendo.Mvc.xml')
+            .pathmap(MVC_SRC_ROOT + 'Kendo.Mvc/bin/Release-MVC5/%f')
+            .include(resources_for("Release-MVC5"))
+
 rule 'Kendo.Mvc.xml' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll'
 
 # Delete all Kendo*.dll files when `rake clean`
@@ -195,6 +200,7 @@ namespace :mvc do
     task :binaries => [
         'wrappers/mvc/src/Kendo.Mvc/bin/Release/Kendo.Mvc.dll',
         'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC3/Kendo.Mvc.dll',
+        'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC5/Kendo.Mvc.dll',
         MVC_DEMOS_ROOT + 'bin/Kendo.Mvc.Examples.dll',
         'dist/binaries/'
     ]
@@ -212,7 +218,7 @@ if PLATFORM =~ /linux|darwin/ && !ENV['USE_MONO']
          :from => 'dist/binaries/**/Kendo.*.xml',
          :root => 'dist/binaries/'
 else
-    [ "Release", "Release-MVC3" ].each do |configuration|
+    [ "Release", "Release-MVC3", "Release-MVC5" ].each do |configuration|
         options = '/p:Configuration="' + configuration + '"'
 
         output_dir = "wrappers/mvc/src/Kendo.Mvc/bin/#{configuration}"
