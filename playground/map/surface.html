@@ -42,28 +42,28 @@
 
     var center = new Point(50,50);
 
-    var seconds = new Path([center, new Point(50, 0)], {
+    var seconds = new Path({
         stroke: {
             color: "red",
             width: 1
         }
         // zIndex
         // etc.
-    });
+    }).moveTo(center).lineTo(50, 0);
 
-    var minutes = new Path([center, new Point(50, 5)], {
+    var minutes = new Path({
         stroke: {
             color: "black",
             width: 1
         }
-    });
+    }).moveTo(center).lineTo(50, 5);
 
-    var hours = new Path([center, new Point(50, 25)], {
+    var hours = new Path({
         stroke: {
             color: "black",
             width: 1
         }
-    });
+    }).moveTo(center).lineTo(50, 25);
 
     var ticks = new Group();
     var clock = new Group();
@@ -96,12 +96,12 @@
         for (var i = 0; i < 360; i += 30) {
             var p1 = new Point(50, 10).rotate(center, i);
             var p2 = new Point(50, 0).rotate(center, i);
-            ticks.append(new Path([p1, p2], {
+            ticks.append(new Path({
                 stroke: {
                     color: "black",
                     width: 0.5
                 }
-            }));
+            }).moveTo(p1).lineTo(p2));
         }
     }
 
@@ -120,7 +120,7 @@
     function toggleColor() {
         var stroke = seconds.options.stroke;
         if (stroke.color === "red") {
-            stroke.set("color", "blue");
+            seconds.options.set("stroke.color", "blue");
         } else {
             stroke.set("color", "red");
         }

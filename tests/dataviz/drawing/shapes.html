@@ -9,7 +9,6 @@
 </head>
 <body>
     <script src="../../../src/kendo.core.js"></script>
-    <script src="../../../src/kendo.data.js"></script>
     <script src="../../../src/kendo.dataviz.core.js"></script>
     <script src="../../../src/dataviz/util.js"></script>
     <script src="../../../src/dataviz/geometry.js"></script>
@@ -53,7 +52,7 @@
         group.append(child);
     });
 
-    test("emptry triggers childrenChange", function() {
+    test("empty triggers childrenChange", function() {
         var group = new Group();
         var child = new Group();
         group.append(child);
@@ -178,17 +177,24 @@
     });
 
     // ------------------------------------------------------------
-    module("Path");
+    var path;
+
+    module("Path", {
+        setup: function() {
+            path = new Path();
+        }
+    });
 
     test("moveTo adds segment", function() {
-        var path = new Path();
         path.moveTo(0, 0);
-
         equal(path.segments.length, 1);
     });
 
+    test("moveTo returns path", function() {
+        deepEqual(path.moveTo(0, 0), path);
+    });
+
     test("moveTo clears segments", function() {
-        var path = new Path();
         path.moveTo(0, 0);
         path.lineTo(10, 10);
 
@@ -197,46 +203,59 @@
     });
 
     test("lineTo adds segment", function() {
-        var path = new Path();
         path.lineTo(0, 0);
-
         equal(path.segments.length, 1);
+    });
+
+    test("lineTo returns path", function() {
+        deepEqual(path.lineTo(0, 0), path);
     });
 
     test("sets initial options", function() {
         var path = new Path({ foo: true });
-
         ok(path.options.foo);
     });
 
-    test("adding a point triggers change on segments", function() {
-        var path = new Path();
-        path.segments.bind("change", function() { ok(true); });
+    test("adding a point triggers geometryChange", function() {
+        path.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
 
         path.moveTo(0, 0);
     });
 
-    test("changing the anchor point triggers change on segments", function() {
-        var path = new Path();
+    test("changing the anchor point triggers geometryChange", function() {
         path.moveTo(0, 0);
 
-        path.segments.bind("change", function() { ok(true); });
+        path.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
         path.segments[0].anchor.set("x", 5);
     });
 
-    test("changing the control point (in) triggers change on segments", function() {
-        var path = new Path();
+    test("changing the control point (in) triggers geometryChange", function() {
         path.moveTo(0, 0);
 
-        path.segments.bind("change", function() { ok(true); });
+        path.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
         path.segments[0].controlIn.set("x", 5);
     });
 
-    test("changing the control point (out) triggers change on segments", function() {
-        var path = new Path();
+    test("changing the control point (out) triggers geometryChange", function() {
         path.moveTo(0, 0);
 
-        path.segments.bind("change", function() { ok(true); });
+        path.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
         path.segments[0].controlOut.set("x", 5);
     });
     </script>

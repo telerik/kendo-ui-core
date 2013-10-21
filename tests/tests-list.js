@@ -149,6 +149,7 @@ var tests = [
     "data/odata.html",
     "data/inmemorycache.html",
     "data/datasource/model.html",
+    "dataviz/drawing/core.html",
     "dataviz/drawing/shapes.html",
     "dataviz/geometry.html",
     "dataviz/lint.html",

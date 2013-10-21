@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DataViz / Drawing / Core</title>
+    <script src="../../jquery-loader.js"></script>
+    <script src="../../qunit/qunit/qunit.js"></script>
+    <script src="../../kendo-test-helpers.js"></script>
+    <link rel="stylesheet" href="../../qunit/qunit/qunit.css">
+</head>
+<body>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.data.js"></script>
+    <script src="../../../src/kendo.dataviz.core.js"></script>
+    <script src="../../../src/dataviz/util.js"></script>
+    <script src="../../../src/dataviz/geometry.js"></script>
+    <script src="../../../src/dataviz/drawing/core.js"></script>
+
+    <script>
+    var dataviz = kendo.dataviz,
+
+        d = dataviz.drawing,
+        OptionsStore = d.OptionsStore;
+
+    // ------------------------------------------------------------
+    var options;
+
+    module("Options Store", {
+        setup: function() {
+            options = new OptionsStore({
+                foo: {
+                    bar: { },
+                    baz: true
+                },
+                bar: true
+            });
+        }
+    });
+
+    test("wraps value fields", function() {
+        ok(options.foo instanceof OptionsStore);
+    });
+
+    test("wraps nested fields", function() {
+        ok(options.foo.bar instanceof OptionsStore);
+    });
+
+    test("set triggers optionsChange", function() {
+        options.observer = {
+            optionsChange: function(e) {
+                equal(e.field, "baz");
+            }
+        };
+
+        options.set("baz", true);
+    });
+
+    test("nested set on existing field triggers optionsChange", function() {
+        options.observer = {
+            optionsChange: function(e) {
+                equal(e.field, "foo.bar.baz");
+            }
+        };
+
+        options.set("foo.bar.baz", true);
+    });
+
+    test("nested set on new field triggers optionsChange", function() {
+        options.observer = {
+            optionsChange: function(e) {
+                equal(e.field, "baz.baz");
+            }
+        };
+
+        options.set("baz.baz", true);
+    });
+
+    test("get returns field", function() {
+        equal(options.get("foo.baz"), true);
+    });
+
+    test("get returns nested field", function() {
+        equal(options.get("foo.baz"), true);
+    });
+    </script>
+
+    <h1 id="qunit-header"></h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+</body>
+</html>

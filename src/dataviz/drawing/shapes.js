@@ -1,12 +1,7 @@
 (function () {
 
-    // Constants ==============================================================
-    var CHANGE = "change";
-
     // Imports ================================================================
-    var math = Math,
-
-        kendo = window.kendo,
+    var kendo = window.kendo,
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
 
@@ -16,9 +11,11 @@
         geometry = dataviz.geometry,
         Point = geometry.Point,
 
+        drawing = dataviz.drawing,
+        OptionsStore = drawing.OptionsStore,
+
         util = dataviz.util,
-        ensureTree = util.ensureTree,
-        rad = util.rad;
+        defined = util.defined;
 
     // Drawing primitives =====================================================
     var Group = Class.extend({
@@ -120,43 +117,43 @@
             segment.controlOut.observer = this;
         },
 
-        geometryChange: util.mixins.geometryChange,
+        geometryChange: util.mixins.geometryChange
     });
 
     var Path = Shape.extend({
-        init: function(points, options) {
+        init: function(options) {
             var path = this;
 
             path.segments = [];
-
             path.observer = null;
-            if (points) {
-                for (var i = 0; i < points.length; i++) {
-                    path.lineTo(points[i].x, points[i].y);
-                }
-            }
 
             Shape.fn.init.call(path, options);
         },
 
         moveTo: function(x, y) {
-            this.segments.empty();
+            this.segments = [];
             this.lineTo(x, y);
+
+            return this;
         },
 
         lineTo: function(x, y) {
-            var segment = new Segment(new Point(x, y));
+            var point = defined(y) ? new Point(x, y) : x,
+                segment = new Segment(point);
+
             segment.observer = this;
 
             this.segments.push(segment);
             this.geometryChange();
+
+            return this;
         }
     });
 
     var MultiPath = Shape.extend({
         init: function(options) {
             this.paths = [];
-            Shape.fn.init.call(this, this);
+            Shape.fn.init.call(this, options);
         },
 
         moveTo: function(x, y) {
@@ -171,128 +168,19 @@
         }
     });
 
-    var OptionsStore = Class.extend({
-        init: function(value) {
-            var that = this,
-                member,
-                field;
-
-            for (field in value) {
-                member = value[field];
-
-                if (field.charAt(0) != "_") {
-                    member = that.wrap(member, field);
-                }
-
-                that[field] = member;
-            }
-        },
-
-        get: function(field) {
-            var that = this, result;
-
-            if (field === "this") {
-                result = that;
-            } else {
-                result = kendo.getter(field, true)(that);
-            }
-
-            return result;
-        },
-
-        _set: function(field, value) {
-            var that = this;
-            var composite = field.indexOf(".") >= 0;
-
-            if (composite) {
-                var paths = field.split("."),
-                    path = "";
-
-                while (paths.length > 1) {
-                    path += paths.shift();
-                    var obj = kendo.getter(path, true)(that);
-                    if (obj instanceof OptionsStore) {
-                        obj.set(paths.join("."), value);
-                        return composite;
-                    }
-                    path += ".";
-                }
-            }
-
-            kendo.setter(field)(that, value);
-
-            return composite;
-        },
-
-        set: function(field, value) {
-            var that = this,
-                current = kendo.getter(field, true)(that);
-
-            if (current !== value) {
-                that._set(field, that.wrap(value, field));
-                if (that.observer) {
-                    that.observer.optionsChange({ field: field });
-                }
-            }
-        },
-
-        wrap: function(object, field) {
-            var that = this,
-                type = toString.call(object);
-
-            if (object != null && type === "[object Object]") {
-                if (!(object instanceof OptionsStore)) {
-                    object = new OptionsStore(object);
-                }
-
-                object.observer = that;
-            }
-
-            return object;
-        },
-
-        optionsChange: function(e) {
-            if (this.observer) {
-                this.observer.optionsChange(e);
-            }
-        },
-
-        _ensureTree: function(fieldName) {
-            if (fieldName.indexOf(".") > -1) {
-                var parts = fieldName.split("."),
-                    path = "",
-                    val;
-
-                while (parts.length > 1) {
-                    path += parts.shift();
-                    val = kendo.getter(path)(this);
-                    if (!val) {
-                       val = new OptionsStore();
-                       val.observer = this;
-                    }
-
-                    kendo.setter(path)(this, val);
-                    path += ".";
-                }
-            }
-        }
-    });
-
     // Sector
     // Ring
 
     // Exports ================================================================
-    deepExtend(dataviz, {
-        drawing: {
-            Group: Group,
-            Shape: Shape,
+    deepExtend(drawing, {
+        Group: Group,
+        Shape: Shape,
 
-            Circle: Circle,
-            Path: Path,
-            MultiPath: MultiPath,
-            Segment: Segment,
-            Text: Text
-        }
+        Circle: Circle,
+        Path: Path,
+        MultiPath: MultiPath,
+        Segment: Segment,
+        Text: Text
     });
 
 })(window.kendo.jQuery);
