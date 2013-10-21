@@ -531,6 +531,22 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Creates a new <see cref="TimezoneEditor"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TimezoneEditor()
+        ///             .Name(&quot;timezoneEditor&quot;)
+        ///             .Value("Etc/UTC")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual TimezoneEditorBuilder TimezoneEditor()
+        {
+            return new TimezoneEditorBuilder(new TimezoneEditor(ViewContext, Initializer, ViewData));
+        }
+
+        /// <summary>
         /// Creates a new <see cref="Scheduler{T}"/>.
         /// </summary>
         /// <example>
@@ -2016,12 +2032,28 @@ namespace Kendo.Mvc.UI.Fluent
         /// </summary>
         /// <example>
         /// <code lang="CS">
-        ///  &lt;%= Html.Kendo().RecurrenceEditor(m=>m.Property) %&gt;
+        ///  &lt;%= Html.Kendo().RecurrenceEditorFor(m=>m.Property) %&gt;
         /// </code>
         /// </example>
         public virtual RecurrenceEditorBuilder RecurrenceEditorFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
         {
             return RecurrenceEditor()
+                    .Name(GetName(expression))
+                    .ModelMetadata(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData))
+                    .Value(GetValue(expression));
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="TimezoneEditor"/>.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().TimezoneEditorFor(m=>m.Property) %&gt;
+        /// </code>
+        /// </example>
+        public virtual TimezoneEditorBuilder TimezoneEditorFor<TProperty>(Expression<Func<TModel, TProperty>> expression)
+        {
+            return TimezoneEditor()
                     .Name(GetName(expression))
                     .ModelMetadata(ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData))
                     .Value(GetValue(expression));

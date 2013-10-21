@@ -1044,6 +1044,7 @@
     <Compile Include="UI\QRCode\QRBorder.cs" />
     <Compile Include="UI\QRCode\QRCode.cs" />
     <Compile Include="UI\RecurrenceEditor\Fluent\RecurrenceEditorBuilder.cs" />
+    <Compile Include="UI\RecurrenceEditor\Fluent\RecurrenceEditorEventBuilder.cs" />
     <Compile Include="UI\RecurrenceEditor\Fluent\RecurrenceEditorFrequencyBuilder.cs" />
     <Compile Include="UI\RecurrenceEditor\Html\ReccurenceEditorHtmlBuilder.cs" />
     <Compile Include="UI\RecurrenceEditor\ReccurenceEditor.cs" />
@@ -1207,6 +1208,8 @@
     <Compile Include="UI\NavigationItemContainerExtensions.cs" />
     <Compile Include="UI\TimePicker\Fluent\TimePickerBuilder.cs" />
     <Compile Include="UI\TimePicker\TimePicker.cs" />
+    <Compile Include="UI\TimezoneEditor\Fluent\TimezoneEditorBuilder.cs" />
+    <Compile Include="UI\TimezoneEditor\Fluent\TimezoneEditorEventBuilder.cs" />
     <Compile Include="UI\TimezoneEditor\Html\TimezoneEditorHtmlBuilder.cs" />
     <Compile Include="UI\TimezoneEditor\TimezoneEditor.cs" />
     <Compile Include="UI\Tooltip\Fluent\TooltipEventBuilder.cs" />
@@ -1452,9 +1455,7 @@
       <Link>Scripts\kendo.validator.aspnetmvc.js</Link>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\TimezoneEditor\Fluent\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

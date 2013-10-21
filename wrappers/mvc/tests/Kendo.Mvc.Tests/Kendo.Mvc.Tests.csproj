@@ -130,6 +130,8 @@
     <Compile Include="UI\Chart\Serialization\ChartPolarScatterSeriesSerializerTests.cs" />
     <Compile Include="UI\ComboBox\ComboBoxSerializationTests.cs" />
     <Compile Include="UI\DatePicker\DatePickerClientEventsBuilderTests.cs" />
+    <Compile Include="UI\RecurrenceEditor\RecurrenceEditorHtmlBuilderTests.cs" />
+    <Compile Include="UI\RecurrenceEditor\RecurrenceEditorTestHelper.cs" />
     <Compile Include="UI\Scheduler\SchedulerBuilderTests.cs" />
     <Compile Include="UI\Scheduler\SchedulerEvent.cs" />
     <Compile Include="UI\Scheduler\SchedulerTestHelper.cs" />
@@ -234,6 +236,8 @@
     <Compile Include="UI\StockChart\Serialization\ChartNavigatorSerializerTests.cs" />
     <Compile Include="UI\StockChart\Serialization\ChartNavigatorHintSerializerTests.cs" />
     <Compile Include="UI\StockChart\Serialization\ChartDateSelectionSerializerTests.cs" />
+    <Compile Include="UI\TimezoneEditor\TimezoneEditorHtmlBuilderTests.cs" />
+    <Compile Include="UI\TimezoneEditor\TimezoneEditorTestHelper.cs" />
     <Compile Include="UI\ToolTip\TooltipSerializationTests.cs" />
     <Compile Include="UI\ToolTip\ToolTipTestHelper.cs" />
     <Compile Include="UI\ToolTip\TooltipWorkingConditionsTests.cs" />
