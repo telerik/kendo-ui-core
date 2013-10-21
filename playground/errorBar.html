@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+        <title>ErrorBar Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.dataviz.canvas.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
+         <link href="../styles/dataviz/kendo.dataviz.default.css" rel="stylesheet" />
+    </head>
+    <body>        
+       
+    
+        <div id="scatter"></div>
+        <hr/>
+        <div id="scatterGroup"></div>
+        <hr/>
+        <div id="scatterBind"></div>
+        <hr/>
+        <div id="bubble"></div>
+        <hr/>
+        <div id="bubbleGroup"></div>
+        <hr/>
+        <div id="area"></div>
+        <hr/>
+        <div id="stackedArea"></div>
+        <hr/>
+        <div id="line"></div>
+        <hr/>
+        <div id="verticalLine"></div>
+        <hr/>
+        <div id="stackedLine"></div>
+         <hr/>
+        <div id="column"></div>
+         <hr/>
+        <div id="bar"></div>
+         <hr/>
+        <div id="stackedBar"></div>
+         <hr/>
+        <div id="lineGroupedData"></div>
+         <hr/>
+        <div id="stackGroup"></div>
+        
+        <script>
+            $(function() {
+               var stocksDataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: function() {
+                                return "stock-data-2011.json";
+                            },
+                            dataType: "json"
+                        }
+                    },
+
+                    group: {
+                        field: "symbol"
+                    },
+                    sort: {
+                        field: "date",
+                        dir: "asc"
+                    },
+
+                    schema: {
+                        model: {
+                            fields: {
+                                date: {
+                                    type: "date"
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                $("#scatter").kendoChart({
+                    theme: "black",
+                    title: {
+                        text: "Rainfall - Wind Speed"
+                    },
+                    legend: {
+                        position: "bottom"
+                    },
+                    seriesDefaults: {
+                        type: "scatter"
+                    },
+                    series: [{
+                        name: "January 2008",
+                        data: [
+                        [16.4, 5.4], [21.7, 2], [25.4, 3]],
+                        errorBars: {
+                           yValue: "percents(40)",
+                           line: {
+                             
+                             width: 3
+                           },
+                           endCaps: false
+                        }                        
+                    },{
+                        name: "January 2009",
+                        data: [{x: 6.4, y: 13.4}, {x: 1.7,y: 11}, {x:5.4,y:8}],
+                        errorBars: {
+                           yValue: "stddev",
+                           xValue: "stderr",
+                           line: {
+                             
+                             dashType: "dash"
+                           }
+                        }
+                    },{
+                        name: "January 2010",
+                        data: [
+                        [30.7, 4], [18.6, 8], [9, 6]],
+                         errorBars: {
+                           xValue: [1,3],
+                           line: {
+                              
+                           }
+                        }
+                    }],
+                    xAxis: {
+                        title: {
+                            text: "Wind Speed [km/h]"
+                        },
+                        crosshair: {
+                            visible: true,
+                            tooltip: {
+                                visible: true,
+                                format: "n1"
+                            }
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: "Rainfall [mm]"
+                        },
+                        axisCrossingValue: -5,
+                        crosshair: {
+                            visible: true,
+                            tooltip: {
+                                visible: true,
+                                format: "n1"
+                            }
+                        }
+                    }
+                });
+                
+                $("#scatterGroup").kendoChart({
+                    theme: "blueopal",
+                    title: { text: "Stock Prices" },
+                    dataSource: stocksDataSource,
+                    series: [{
+                        type: "scatterLine",
+                        xField: "date",
+                        yField: "close",
+                        yErrorLowField: "low",
+                        yErrorHighField: "high",
+                        name: "#= group.value # (close)"
+                    }],
+                    legend: {
+                        position: "bottom"
+                    },
+                    yAxis: {
+                        labels: {
+                            format: "${0}",
+                            skip: 2,
+                            step: 2
+                        }
+                    },
+                    xAxis: {
+                        labels: {
+                            format: "MMM"
+                        }
+                    }
+                });
+                
+                
+                 var pricePerformance = [ {
+                        "family": "Pentium",
+                        "model": "D 820",
+                        "price": 105,
+                        "lowPrice": 80,
+                        "highPrice": 150,
+                        "performance": 100
+                    }, {
+                        "family": "Pentium",
+                        "model": "D 915",
+                        "price": 120,
+                        "lowPrice": 115,
+                        "highPrice": 140,                        
+                        "performance": 102
+                    }, {
+                        "family": "Pentium",
+                        "model": "D 945",
+                        "price": 160,
+                        "lowPrice": 130,
+                        "highPrice": 170,                        
+                        "performance": 118
+                    }, {
+                        "family": "Pentium",
+                        "model": "XE 965",
+                        "price": 1000,
+                        "lowPrice": 900,
+                        "highPrice": 1200,
+                        "performance": 137
+                    }, {
+                        "family": "Core 2 Duo",
+                        "model": "E6300",
+                        "price": 185,
+                        "lowPrice": 170,
+                        "highPrice": 200,                        
+                        "performance": 134
+                    }, {
+                        "family": "Core 2 Duo",
+                        "model": "E6400",
+                        "price": 210,
+                        "lowPrice": 190,
+                        "highPrice": 240,                        
+                        "performance": 143
+                    }, {
+                        "family": "Core 2 Duo",
+                        "model": "E6600",
+                        "price": 305,
+                        "lowPrice": 300,
+                        "highPrice": 310,                        
+                        "performance": 163
+                    }, {
+                        "family": "Core 2 Duo",
+                        "model": "E6700",
+                        "price": 530,
+                        "lowPrice": 500,
+                        "highPrice": 600,                        
+                        "performance": 177
+                    }, {
+                        "family": "Core 2 Extreme",
+                        "model": "X6800",
+                        "price": 1000,
+                        "lowPrice": 999,
+                        "highPrice": 1200,                        
+                        "performance": 190
+                    }, {
+                        "family": "Athlon 64",
+                        "model": "X2 3800+",
+                        "price": 148,
+                        "lowPrice": 100,
+                        "highPrice": 150,                        
+                        "performance": 115
+                    }, {
+                        "family": "Athlon 64",
+                        "model": "X2 4200+",
+                        "price": 170,
+                        "lowPrice": 170,
+                        "highPrice": 200,                        
+                        "performance": 125
+                    }, {
+                        "family": "Athlon 64",
+                        "model": "X2 4600+",
+                        "price": 205,
+                        "lowPrice": 190,
+                        "highPrice": 240,
+                        "performance": 138
+                    }, {
+                        "family": "Athlon 64",
+                        "model": "X2 5000+",
+                        "price": 290,
+                        "lowPrice": 290,
+                        "highPrice": 300,                        
+                        "performance": 143
+                    }, {
+                        "family": "Athlon 64",
+                        "model": "FX-62",
+                        "price": 800,
+                        "lowPrice": 700,
+                        "highPrice": 800,                        
+                        "performance": 147
+                    } ];
+                $("#scatterBind").kendoChart({
+                    theme: "highcontrast",                
+                    title: {
+                        text: "Price-Performance Ratio"
+                    },
+                    legend: {
+                        visible: false
+                    },
+                    dataSource: {
+                        data: pricePerformance
+                    },
+                    seriesDefaults: {
+                        type: "scatter"
+                    },
+                    series: [{
+                        xField: "price",
+                        yField: "performance",
+                        xErrorLowField: "lowPrice",
+                        xErrorHighField: "highPrice"
+                    }],
+                    xAxis: {                     
+                        labels: {
+                            format: "${0}"
+                        },
+                        title: {
+                            text: "Price"
+                        }
+                    },
+                    yAxis: {
+                        min: 80,
+                        labels: {
+                            format: "{0}%"
+                        },
+                        title: {
+                            text: "Performance Ratio"
+                        }
+                    },
+                    tooltip: {
+                        visible: true,
+                        template: "#= '<b>$' + value.x + ' / ' + dataItem.family + ' ' + dataItem.model + ': ' + value.y + '%</b>' #"
+                    }
+                });
+                
+                $("#bubble").kendoChart({
+                    theme: "default",                  
+                title: {
+                    text: "Job Growth for 2011"
+                },
+                legend: {
+                    visible: false
+                },
+                seriesDefaults: {
+                    type: "bubble"
+                },
+                series: [{
+                    errorBars: {
+                        xValue: "stderr",
+                        yValue: "stddev"
+                    },
+                    data: [{
+                        x: -2500,
+                        y: 50000,
+                        size: 500000,
+                        category: "Microsoft"
+                    }, {
+                        x: 500,
+                        y: 110000,
+                        size: 7600000,
+                        category: "Starbucks"
+                    }, {
+                        x: 7000,
+                        y: 19000,
+                        size: 700000,
+                        category: "Google"
+                    }, {
+                        x: 1400,
+                        y: 150000,
+                        size: 700000,
+                        category: "Publix Super Markets"
+                    }, {
+                        x: 2400,
+                        y: 30000,
+                        size: 300000,
+                        category: "PricewaterhouseCoopers"
+                    }, {
+                        x: 2450,
+                        y: 34000,
+                        size: 90000,
+                        category: "Cisco"
+                    }, {
+                        x: 2700,
+                        y: 34000,
+                        size: 400000,
+                        category: "Accenture"
+                    }, {
+                        x: 2900,
+                        y: 40000,
+                        size: 450000,
+                        category: "Deloitte"
+                    }, {
+                        x: 3000,
+                        y: 55000,
+                        size: 900000,
+                        category: "Whole Foods Market"
+                    }]
+                }],
+                xAxis: {
+                    labels: {
+                        format: "{0:N0}",
+                        skip: 1
+                    },
+                    axisCrossingValue: -5000,
+                    majorUnit: 2000,
+                    plotBands: [{
+                        from: -5000,
+                        to: 0,
+                        
+                        opacity: 0.05
+                    }]
+                },
+                yAxis: {
+                    labels: {
+                        format: "{0:N0}"
+                    },
+                    line: {
+                        width: 0
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{3}: {2:N0} applications",
+                    opacity: 1
+                }
+            });
+            
+            $("#bubbleGroup").kendoChart({
+                theme: "silver",    
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: function() {
+                                return "../demos/mvc/content/dataviz/js/olympics-japan.json";
+                            },
+                            dataType: "json"
+                        }
+                    },
+                    group: {
+                        field: "country"
+                    }
+                },
+                title: {
+                    text: "Olypmic Medals Won by Japan"
+                },
+                legend: {
+                    visible: false
+                },
+                chartArea: {
+                    background: ""
+                },
+                series: [{
+                    type: "bubble",
+                    minSize: 0,
+                    maxSize: 70,
+                    xField: "year",
+                    yField: "standing",
+                    errorBars: {
+                        yValue: "0.4",
+                        xValue: "stddev",
+                        line: {
+                            zIndex: 30,
+                            width: 1
+                        }
+                    },
+                    sizeField: "number",
+                    colorField: "medalColor",
+                    opacity: 0.9
+                }],
+                xAxis: {
+                    labels: {
+                        skip: 1,
+                        margin: {top: -25}
+                    },
+                    majorUnit: 4,
+                    min: 1980,
+                    max: 2015,
+                    majorGridLines: {
+                        visible: false
+                    },
+                    line: {
+                        visible: false
+                    }
+                },
+                yAxis: {
+                    labels: {
+                        step: 1,
+                        skip: 1,
+                        template: "#= value # place",
+                        margin: {right: -30},
+                        padding: {left: 20}
+                    },
+                    majorUnit: 1,
+                    min: 0,
+                    max: 3.7,
+                    majorGridLines: {
+                        visible: false
+                    },
+                    line: {
+                        visible: false
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    template: "#= value.x #: #= value.size # Medals"
+                }
+            });
+            
+            
+             $("#area").kendoChart({
+                theme: "metro",               
+                title: {
+                    text: "Gross domestic product growth /GDP annual %/"
+                },
+                legend: {
+                    position: "bottom"
+                },
+                seriesDefaults: {
+                    type: "area"
+                },
+                series: [{
+                    name: "India",
+                    data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855],
+                    errorBars:{
+                        value: 2
+                    }
+                },{
+                    name: "World",
+                    data: [1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727],
+                    errorBars:{
+                        value: "stddev"
+                    }
+                },{
+                    name: "Haiti",
+                    data: [-0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590]
+                }],
+                valueAxis: {
+                    labels: {
+                        format: "{0}%"
+                    },
+                    line: {
+                        visible: false
+                    },
+                    axisCrossingValue: -10
+                },
+                categoryAxis: {
+                    categories: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{0}%",
+                    template: "#= series.name #: #= value #"
+                }
+            });
+      
+      $("#stackedArea").kendoChart({
+                theme: "metroblack",      
+                title: {
+                    text: "Browser Usage Trends"
+                },
+                legend: {
+                    position: "bottom"
+                },
+                seriesDefaults: {
+                    type: "area",
+                    stack: true
+                },
+                series: [{
+                    name: "Chrome",
+                    data: [0, 0, 0, 0, 3.6, 9.8, 22.4, 34.6],
+                    errorBars: {
+                        value: [3,5]
+                    }
+                },{
+                    name: "Firefox",
+                    data: [0, 23.6, 29.9, 36.3, 44.4, 46.4, 43.5, 37.7]
+                },{
+                    name: "Internet Explorer",
+                    data: [76.2, 68.9, 60.6, 56.0, 46.0, 37.2, 27.5, 20.2],
+                    errorBars: {
+                        value: "stderr"
+                    }
+                },{
+                    name: "Mozilla",
+                    data: [16.5, 2.8, 2.5, 1.2, 0, 0, 0, 0]
+                },{
+                    name: "Opera",
+                    data: [1.6, 1.5, 1.5, 1.6, 2.4, 2.3, 2.2, 2.5]
+                },{
+                    name: "Safari",
+                    data: [0, 0, 0, 1.8, 2.7, 3.6, 3.8, 4.2],
+                    errorBars: {
+                        value: "stddev"
+                    }
+                }],
+                valueAxis: {
+                    labels: {
+                        format: "{0}%"
+                    },
+                    line: {
+                        visible: false
+                    },
+                    axisCrossingValue: -10,
+                    max: 100
+                },
+                categoryAxis: {
+                    categories: [2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+                    majorGridLines: {
+                        visible: false
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{0}%",
+                    template: "#= series.name #: #= value #%"
+                }
+            });
+
+       $("#line").kendoChart({
+                    theme: "moonlight",          
+                      title: {
+                        text: "Gross domestic product growth /GDP annual %/"
+                    },
+                    legend: {
+                        position: "bottom"
+                    },
+                    seriesDefaults: {
+                        type: "line"
+                    },
+                    series: [{
+                        name: "India",                        
+                        data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855],
+                        errorBars: {
+                            value: "stddev",
+                            line: {
+                                width: 2,
+                                
+                                dashType: "dash"
+                            }
+                        }
+                    },{
+                        name: "World",
+                        data: [1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727]
+                    },{
+                        name: "Russian Federation",
+                        data: [4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, -7.832, 4.3, 4.3]
+                    },{
+                        name: "Haiti",
+                        data: [-0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590]
+                    }],
+                    valueAxis: {
+                        labels: {
+                            format: "{0}%"
+                        },
+                        line: {
+                            visible: false
+                        },
+                        axisCrossingValue: -10
+                    },
+                    categoryAxis: {
+                        categories: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+                        majorGridLines: {
+                            visible: false
+                        }
+                    },
+                    tooltip: {
+                        visible: true,
+                        format: "{0}%",
+                        template: "#= series.name #: #= value #"
+                    }
+                });
+                
+                $("#verticalLine").kendoChart({
+                    theme: "uniform",                  
+                      title: {
+                        text: "Gross domestic product growth /GDP annual %/"
+                    },
+                    legend: {
+                        position: "bottom"
+                    },
+                    chartArea: {
+                        background: ""
+                    },
+                    seriesDefaults: {
+                        type: "verticalLine"
+                    },
+                    series: [{
+                        name: "India",                        
+                        data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855],
+                        errorBars: {
+                            value: "stddev",
+                            line: {
+                                width: 2,
+                                
+                                dashType: "dash"
+                            }
+                        }
+                    },{
+                        name: "World",
+                        data: [1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727]
+                    },{
+                        name: "Russian Federation",
+                        data: [4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, -7.832, 4.3, 4.3]
+                    },{
+                        name: "Haiti",
+                        data: [-0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590]
+                    }],
+                    valueAxis: {
+                        labels: {
+                            format: "{0}%"
+                        },
+                        line: {
+                            visible: false
+                        },
+                        axisCrossingValue: -10
+                    },
+                    categoryAxis: {
+                        categories: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+                        majorGridLines: {
+                            visible: false
+                        }
+                    },
+                    tooltip: {
+                        visible: true,
+                        format: "{0}%",
+                        template: "#= series.name #: #= value #"
+                    }
+                });
+                
+                $("#stackedLine").kendoChart({
+                    theme: "bootstrap",                    
+                    seriesDefaults: {
+                        type: "line",
+                        missingValues: "gap",
+                        stack: true
+                    },
+                    series: [{
+                        name: "Gold Medals",
+                        data: [40, 32, 34, 36, 45, 33, 34, null, 83, 36, 37, 44, 37, 35, 36, 46],
+                        
+                        errorBars: {
+                            value: 5
+                        }
+                    }, {
+                        name: "Silver Medals",
+                        data: [19, 25, 21, 26, 28, 31, 35, null, 60, 31, 34, 32, 24, 40, 38, 29],
+                        
+                        errorBars: {
+                            value: [3,10]
+                        }
+                    }, {
+                        name: "Bronze Medals",
+                        data: [17, 17, 16, 28, 34, 30, 25, null, 30, 27, 37, 25, 33, 26, 36, 29],
+                        
+                        errorBars: {
+                            value: "percents(50)"
+                        }
+                    }],
+                    categoryAxis: {
+                        categories: [1952, 1956, 1960, 1964, 1968, 1972, 1976, 1980, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012]                       
+                    }
+                });
+                $("#column").kendoChart({
+                    theme: "flat",                     
+                    title: {
+                        text: "Gross domestic product growth /GDP annual %/"
+                    },
+                    legend: {
+                        position: "top"
+                    },
+                    theme: "default",
+                    seriesDefaults: {
+                        type: "column"
+                    },
+                    series: [{
+                        name: "India",
+                        data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855],
+                        errorBars: {
+                            value: "stddev"
+                        }
+                    }, {
+                        name: "Russian Federation",
+                        data: [4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, -7.832, 4.3, 4.3],
+                        errorBars: {
+                            value: "stderr"
+                        }
+                    }, {
+                        name: "Germany",
+                        data: [0.010, -0.375, 1.161, 0.684, 3.7, 3.269, 1.083, -5.127, 3.690, 2.995]
+                    },{
+                        name: "World",
+                        data: [1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727],
+                        errorBars: {
+                            value: function(value, item){
+                                  return [Math.random() * 2,  Math.random() * 2];
+                            }
+                        },
+                        tooltip: {
+                            visible: true,
+                            template: "low: #:low# high: #: high#"
+                        }
+                    }],
+                    valueAxis: {
+                        labels: {
+                            format: "{0}%"
+                        },
+                        line: {
+                            visible: false
+                        },
+                        axisCrossingValue: 0
+                    },
+                    categoryAxis: {
+                        categories: [2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+                        line: {
+                            visible: false
+                        },
+                        labels: {
+                            padding: {top: 145}
+                        }
+                    },
+                    tooltip: {
+                        visible: true,
+                        format: "{0}%",
+                        template: "#= series.name #: #= value #"
+                    }
+                });
+                 $("#bar").kendoChart({
+                    theme: "default",
+                    title: {
+                        text: "Site Visitors Stats /thousands/"
+                    },
+                    legend: {
+                        visible: false
+                    },
+                    seriesDefaults: {
+                        type: "bar"
+                    },
+                    series: [{
+                        name: "Total Visits",
+                        data: [56000, 63000, 74000, 91000, 117000, 138000],
+                        errorBars: {
+                            value: 1000
+                        }
+                    }, {
+                        name: "Unique visitors",
+                        data: [52000, 34000, 23000, 48000, 67000, 83000]
+                    }],
+                    valueAxis: {
+                        max: 140000,
+                        line: {
+                            visible: false
+                        },
+                        minorGridLines: {
+                            visible: true
+                        }
+                    },
+                    categoryAxis: {
+                        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                        majorGridLines: {
+                            visible: false
+                        }
+                    },
+                    tooltip: {
+                        visible: true,
+                        template: "#= series.name #: #= value #"
+                    }
+                });
+                $("#stackedBar").kendoChart({
+                    theme: "default",
+                    seriesDefaults: {
+                        type: "column",
+                        stack: true
+                    },
+                    series: [{
+                        name: "Gold Medals",
+                        data: [40, 32, 34, 36, 45, 33, 34, 83, 36, 37, 44, 37, 35, 36, 46],
+                        
+                    }, {
+                        name: "Silver Medals",
+                        data: [19, 25, 21, 26, 28, 31, 35, 60, 31, 34, 32, 24, 40, 38, 29],
+                        
+                        errorBars: {
+                            value: 5
+                        }
+                    }, {
+                        name: "Bronze Medals",
+                        data: [17, 17, 16, 28, 34, 30, 25, 30, 27, 37, 25, 33, 26, 36, 29],
+                        
+                    }],
+                    categoryAxis: {
+                        categories: [1952, 1956, 1960, 1964, 1968, 1972, 1976, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012]
+                    }
+                });                             
+   
+                $("#lineGroupedData").kendoChart({
+                    title: { text: "Stock Prices" },
+                    dataSource: stocksDataSource,
+                    theme: "default",
+                    series: [{
+                        type: "line",
+                        field: "close",
+                        name: "#= group.value # (close)",
+                        errorLowField: "low",              
+                        errorHighField: "high",
+                        tooltip: {
+                            visible: true,
+                            template: "value: #:value# Low: #:low# High: #:high#"
+                        }
+                    }],
+                    legend: {
+                        position: "bottom"
+                    },
+                    valueAxis: {
+                        labels: {
+                            format: "${0}",
+                            skip: 2,
+                            step: 2
+                        }
+                    },
+                    categoryAxis: {
+                        field: "date",
+                        labels: {
+                            format: "MMM"
+                        }
+                    }
+                });
+                
+                $("#stackGroup").kendoChart({
+                    title: {
+                        text: "World population by age group and sex"
+                    },
+                    legend: {
+                        visible: false
+                    },
+                    seriesDefaults: {
+                        type: "column"
+                    },
+                    series: [{
+                        name: "0-19",
+                        stack: "Female",
+                        data: [854622, 925844, 984930, 1044982, 1100941, 1139797, 1172929, 1184435, 1184654],                        
+                        errorBars: {
+                            value: "stderr",
+                            line: {
+                                
+                            }
+                        } 
+                    }, {
+                        name: "20-39",
+                        stack: "Female",
+                        data: [490550, 555695, 627763, 718568, 810169, 883051, 942151, 1001395, 1058439],                        
+                        errorBars: {
+                            value: "stddev(2)",
+                            line: {
+                                
+                            }
+                        } 
+                    }, {
+                        name: "40-64",
+                        stack: "Female",
+                        data: [379788, 411217, 447201, 484739, 395533, 435485, 499861, 569114, 655066]
+                    }, {
+                        name: "65-79",
+                        stack: "Female",
+                        data: [97894, 113287, 128808, 137459, 152171, 170262, 191015, 210767, 226956]
+                    }, {
+                        name: "80+",
+                        stack: "Female",
+                        data: [16358, 18576, 24586, 30352, 36724, 42939, 46413, 54984, 66029]
+                    }, {
+                        name: "0-19",
+                        stack: "Male",
+                        data: [900268, 972205, 1031421, 1094547, 1155600, 1202766, 1244870, 1263637, 1268165],                        
+                        errorBars: {
+                            value: 100000,
+                            line: {
+                                
+                            }
+                        } 
+                    }, {
+                        name: "20-39",
+                        stack: "Male",
+                        data: [509133, 579487, 655494, 749511, 844496, 916479, 973694, 1036548, 1099507]
+                    }, {
+                        name: "40-64",
+                        stack: "Male",
+                        data: [364179, 401396, 440844, 479798, 390590, 430666, 495030, 564169, 646563]
+                    }, {
+                        name: "65-79",
+                        stack: "Male",
+                        data: [74208, 86516, 98956, 107352, 120614, 138868, 158387, 177078, 192156],                        
+                        errorBars: {
+                            value: 100000,
+                            line: {
+                                
+                            }
+                        } 
+                    }, {
+                        name: "80+",
+                        stack: "Male",
+                        data: [9187, 10752, 13007, 15983, 19442, 23020, 25868, 31462, 39223]
+                    }],
+                    theme: "default",
+                    seriesColors: ["#cd1533", "#d43851", "#dc5c71", "#e47f8f", "#eba1ad",
+                                   "#009bd7", "#26aadd", "#4db9e3", "#73c8e9", "#99d7ef"],
+                    valueAxis: {
+                        labels: {
+                            template: "#= kendo.format('{0:N0}', value / 1000) # M"
+                        },
+                        line: {
+                            visible: false
+                        }
+                    },
+                    categoryAxis: {
+                        categories: [1970, 1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010],
+                        majorGridLines: {
+                            visible: false
+                        }
+                    },
+                    tooltip: {
+                        visible: true,
+                        template: "#= series.stack #s, age #= series.name #"
+                    }
+                });
+        
+            });
+        </script>
+    </body>
+</html>
+

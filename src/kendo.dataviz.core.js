@@ -3619,6 +3619,272 @@ kendo_module({
          return 0;
     }
 
+    var CurveProcessor = function(closed){
+        this.closed = closed;
+    };
+
+    CurveProcessor.prototype = CurveProcessor.fn = {
+        WEIGHT: 0.333,
+        EXTREMUM_ALLOWED_DEVIATION: 0.01,
+
+        process: function(dataPoints) {
+            var that = this,
+                closed = that.closed,
+                points = dataPoints.slice(0),
+                length = points.length,
+                curve = [],
+                p0,p1,p2,
+                controlPoints,
+                initialControlPoint,
+                lastControlPoint,
+                tangent;
+
+            if (length > 2) {
+                that.removeDuplicates(0, points);
+                length = points.length;
+            }
+
+            if (length < 2 || (length == 2 && points[0].equals(points[1]))) {
+                return curve;
+            }
+
+            p0 = points[0]; p1 = points[1]; p2 = points[2];
+            curve.push(p0);
+
+            while (p0.equals(points[length - 1])) {
+                closed = true;
+                points.pop();
+                length--;
+            }
+
+            if (length == 2) {
+                tangent = that.tangent(p0,p1, X,Y);
+                curve.push(that.firstControlPoint(tangent, p0, p1, X, Y),
+                    that.secondControlPoint(tangent, p0, p1, X, Y),
+                    p1);
+                return curve;
+            }
+
+            if (closed) {
+                p0 = points[length - 1]; p1 = points[0]; p2 = points[1];
+                controlPoints = that.controlPoints(p0, p1, p2);
+                initialControlPoint = controlPoints[1];
+                lastControlPoint = controlPoints[0];
+            } else {
+                tangent = that.tangent(p0, p1, X,Y);
+                initialControlPoint = that.firstControlPoint(tangent, p0, p1, X, Y);
+            }
+
+            curve.push(initialControlPoint);
+
+            for (var idx = 0; idx <= length - 3; idx++) {
+                that.removeDuplicates(idx, points);
+                length = points.length;
+                if (idx + 3 <= length) {
+                    p0 = points[idx]; p1 = points[idx + 1]; p2 = points[idx + 2];
+
+                    controlPoints = that.controlPoints(p0,p1,p2);
+                    curve.push(controlPoints[0], p1, controlPoints[1]);
+                }
+            }
+
+            if (closed) {
+                p0 = points[length - 2]; p1 = points[length - 1]; p2 = points[0];
+                controlPoints = that.controlPoints(p0, p1, p2);
+                curve.push(controlPoints[0], p1, controlPoints[1], lastControlPoint, p2);
+            } else {
+                tangent = that.tangent(p1, p2, X, Y);
+                curve.push(that.secondControlPoint(tangent, p1, p2, X, Y), p2);
+            }
+
+            return curve;
+        },
+
+        removeDuplicates: function(idx, points) {
+            while (points[idx].equals(points[idx + 1]) || points[idx + 1].equals(points[idx + 2])) {
+                points.splice(idx + 1, 1);
+            }
+        },
+
+        invertAxis: function(p0,p1,p2){
+            var that = this,
+                fn, y2,
+                invertAxis = false;
+
+            if(p0.x === p1.x){
+                invertAxis = true;
+            } else if (p1.x === p2.x) {
+                if ((p1.y < p2.y && p0.y <= p1.y) || (p2.y < p1.y && p1.y <= p0.y)) {
+                    invertAxis = true;
+                }
+            } else {
+                fn = that.lineFunction(p0,p1);
+                y2 = that.calculateFunction(fn, p2.x);
+                if (!(p0.y <= p1.y && p2.y <= y2) &&
+                    !(p1.y <= p0.y && p2.y >= y2)) {
+                        invertAxis = true;
+                }
+            }
+
+            return invertAxis;
+        },
+
+        isLine: function(p0,p1,p2) {
+            var that = this,
+                fn = that.lineFunction(p0,p1),
+                y2 = that.calculateFunction(fn, p2.x);
+
+            return (p0.x == p1.x && p1.x == p2.x) || round(y2,1) === round(p2.y,1);
+        },
+
+        lineFunction: function(p1, p2) {
+            var a = (p2.y - p1.y) / (p2.x - p1.x),
+                b = p1.y - a * p1.x;
+            return [b,a];
+        },
+
+        controlPoints: function(p0,p1,p2) {
+            var that = this,
+                xField = X,
+                yField = Y,
+                restrict = false,
+                switchOrientation = false,
+                tangent,
+                monotonic,
+                firstControlPoint,
+                secondControlPoint,
+                allowedDeviation = that.EXTREMUM_ALLOWED_DEVIATION;
+
+            if (that.isLine(p0,p1,p2)) {
+                tangent = that.tangent(p0,p1, X,Y);
+            } else {
+                monotonic = {
+                    x: that.isMonotonicByField(p0,p1,p2,X),
+                    y: that.isMonotonicByField(p0,p1,p2,Y)
+                };
+
+                if (monotonic.x && monotonic.y) {
+                   tangent = that.tangent(p0,p2, X, Y);
+                   restrict = true;
+                } else {
+                    if (that.invertAxis(p0,p1,p2)) {
+                       xField = Y;
+                       yField = X;
+                    }
+
+                    if (monotonic[xField]) {
+                        tangent = 0;
+                     } else {
+                        var sign;
+                        if ((p2[yField] < p0[yField] && p0[yField] <= p1[yField]) ||
+                            (p0[yField] < p2[yField] && p1[yField] <= p0[yField])) {
+                            sign = that.sign((p2[yField] - p0[yField]) * (p1[xField] - p0[xField]));
+                        } else {
+                            sign = -that.sign((p2[xField] - p0[xField]) * (p1[yField] - p0[yField]));
+                        }
+
+                        tangent = allowedDeviation * sign;
+                        switchOrientation = true;
+                     }
+                }
+            }
+
+            secondControlPoint = that.secondControlPoint(tangent, p0, p1, xField, yField);
+
+            if (switchOrientation) {
+                var oldXField = xField;
+                xField = yField;
+                yField = oldXField;
+            }
+
+            firstControlPoint = that.firstControlPoint(tangent, p1, p2, xField, yField);
+
+            if (restrict) {
+                that.restrictControlPoint(p0, p1, secondControlPoint, tangent);
+                that.restrictControlPoint(p1, p2, firstControlPoint, tangent);
+            }
+
+            return [secondControlPoint, firstControlPoint];
+        },
+
+        sign: function(x){
+            return x <= 0 ? -1 : 1;
+        },
+
+        restrictControlPoint: function(p1,p2, cp, tangent) {
+            if (p1.y < p2.y) {
+                if (p2.y < cp.y) {
+                    cp.x = p1.x + (p2.y - p1.y) / tangent;
+                    cp.y = p2.y;
+                } else if (cp.y < p1.y) {
+                    cp.x = p2.x - (p2.y - p1.y) / tangent;
+                    cp.y = p1.y;
+                }
+            } else {
+                if (cp.y < p2.y) {
+                    cp.x = p1.x - (p1.y - p2.y) / tangent;
+                    cp.y = p2.y;
+                } else if (p1.y < cp.y) {
+                    cp.x = p2.x + (p1.y - p2.y) / tangent;
+                    cp.y = p1.y;
+                }
+            }
+        },
+
+        tangent: function(p0,p1, xField, yField) {
+            var tangent,
+                x = p1[xField] - p0[xField],
+                y = p1[yField] - p0[yField];
+            if (x === 0) {
+                tangent = 0;
+            } else {
+               tangent = y/x;
+            }
+
+            return tangent;
+        },
+
+        isMonotonicByField: function(p0,p1,p2,field) {
+            return (p2[field] > p1[field] && p1[field] > p0[field]) ||
+                        (p2[field] < p1[field] && p1[field] < p0[field]);
+        },
+
+        firstControlPoint: function(tangent, p0,p3, xField, yField) {
+            var that = this,
+                t1 = p0[xField],
+                t2 = p3[xField],
+                distance = (t2 - t1) * that.WEIGHT;
+
+            return that.point(t1 + distance, p0[yField] + distance * tangent, xField, yField);
+        },
+
+        secondControlPoint: function(tangent, p0,p3, xField, yField) {
+            var that = this,
+                t1 = p0[xField],
+                t2 = p3[xField],
+                distance = (t2 - t1) * that.WEIGHT;
+
+            return that.point(t2 - distance, p3[yField] - distance * tangent, xField, yField);
+        },
+
+        point: function (xValue, yValue, xField, yField) {
+            var controlPoint = Point2D();
+            controlPoint[xField] = round(xValue, COORD_PRECISION);
+            controlPoint[yField] = round(yValue, COORD_PRECISION);
+
+            return controlPoint;
+        },
+
+        calculateFunction: function(fn,x) {
+            var result = 0,
+                length = fn.length;
+            for (var i = 0; i < length; i++) {
+                result += Math.pow(x,i) * fn[i];
+            }
+            return result;
+        }
+    };
+
     // Exports ================================================================
     deepExtend(kendo.dataviz, {
         init: function(element) {
@@ -3658,6 +3924,7 @@ kendo_module({
         BoxElement: BoxElement,
         ChartElement: ChartElement,
         Color: Color,
+        CurveProcessor: CurveProcessor,
         ElementAnimation:ElementAnimation,
         ExpandAnimation: ExpandAnimation,
         ExportMixin: ExportMixin,

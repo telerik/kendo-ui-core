@@ -23,6 +23,7 @@ kendo_module({
         CategoricalChart = dataviz.CategoricalChart,
         CategoricalPlotArea = dataviz.CategoricalPlotArea,
         ChartElement = dataviz.ChartElement,
+        CurveProcessor = dataviz.CurveProcessor,
         DonutSegment = dataviz.DonutSegment,
         LineChart = dataviz.LineChart,
         LineSegment = dataviz.LineSegment,
@@ -34,6 +35,8 @@ kendo_module({
         ScatterChart = dataviz.ScatterChart,
         ScatterLineChart = dataviz.ScatterLineChart,
         SeriesBinder = dataviz.SeriesBinder,
+        SplineSegment = dataviz.SplineSegment,
+        SplineAreaSegment = dataviz.SplineAreaSegment,
         append = dataviz.append,
         getSpacing = dataviz.getSpacing,
         filterSeriesByType = dataviz.filterSeriesByType,
@@ -53,6 +56,7 @@ kendo_module({
         RADAR_AREA = "radarArea",
         RADAR_COLUMN = "radarColumn",
         RADAR_LINE = "radarLine",
+        SMOOTH = "smooth",
         X = "x",
         Y = "y",
         ZERO = "zero",
@@ -794,7 +798,17 @@ kendo_module({
         },
 
         createSegment: function(linePoints, currentSeries, seriesIx) {
-            var segment = new LineSegment(linePoints, currentSeries, seriesIx);
+            var segment,
+                pointType,
+                style = currentSeries.style;
+
+            if(style == SMOOTH){
+                pointType = SplineSegment;
+            } else {
+                pointType = LineSegment;
+            }
+
+            segment = new pointType(linePoints, currentSeries, seriesIx);
 
             if (linePoints.length === currentSeries.data.length) {
                 segment.options.closed = true;
@@ -810,19 +824,35 @@ kendo_module({
         }
     });
 
+    var SplineRadarAreaSegment = SplineAreaSegment.extend({
+        areaPoints: function() {
+            return [];
+        }
+    });
+
     var RadarAreaChart = RadarLineChart.extend({
         createSegment: function(linePoints, currentSeries, seriesIx, prevSegment) {
             var chart = this,
                 options = chart.options,
-                stackPoints;
+                isStacked = options.isStacked,
+                stackPoints,
+                segment,
+                style = (currentSeries.line || {}).style;
 
-            if (options.isStacked && seriesIx > 0 && prevSegment) {
-                stackPoints = prevSegment.linePoints.slice(0).reverse();
+            if(style === SMOOTH){
+                segment = new SplineRadarAreaSegment(linePoints, prevSegment, isStacked, currentSeries, seriesIx);
+                segment.options.closed = true;
+            }
+            else {
+                if (isStacked && seriesIx > 0 && prevSegment) {
+                    stackPoints = prevSegment.linePoints.slice(0).reverse();
+                }
+
+                linePoints.push(linePoints[0]);
+                segment = new RadarAreaSegment(linePoints, stackPoints, currentSeries, seriesIx);
             }
 
-            linePoints.push(linePoints[0]);
-
-            return new RadarAreaSegment(linePoints, stackPoints, currentSeries, seriesIx);
+            return segment;
         },
 
         seriesMissingValues: function(series) {
@@ -860,9 +890,44 @@ kendo_module({
         }
     });
 
+    var SplinePolarAreaSegment = SplineAreaSegment.extend({
+        areaPoints: function(){
+             var segment = this,
+                chart = segment.parent,
+                plotArea = chart.plotArea,
+                polarAxis = plotArea.polarAxis,
+                center = polarAxis.box.center();
+            return [center];
+        },
+        points: function(){
+            var segment = this,
+                chart = segment.parent,
+                plotArea = chart.plotArea,
+                polarAxis = plotArea.polarAxis,
+                center = polarAxis.box.center(),
+                curvePoints,
+                curveProcessor = new CurveProcessor(false),
+                linePoints = LineSegment.fn.points.call(this);
+                linePoints.push(center);
+
+            curvePoints = curveProcessor.process(linePoints);
+            curvePoints.splice(curvePoints.length - 3, curvePoints.length - 1);
+            segment.curvePoints = curvePoints;
+            return curvePoints;
+        }
+    });
+
     var PolarAreaChart = PolarLineChart.extend({
         createSegment: function(linePoints, currentSeries, seriesIx) {
-            return new PolarAreaSegment(linePoints, [], currentSeries, seriesIx);
+            var segment,
+                style = (currentSeries.line || {}).style;
+            if(style == SMOOTH){
+                segment = new SplinePolarAreaSegment(linePoints, null, false, currentSeries, seriesIx);
+            }
+            else{
+                segment = new PolarAreaSegment(linePoints, [], currentSeries, seriesIx);
+            }
+            return segment;
         },
 
         seriesMissingValues: function(series) {
@@ -1225,13 +1290,19 @@ kendo_module({
     );
 
     deepExtend(dataviz, {
+        PolarAreaChart: PolarAreaChart,
         PolarAxis: PolarAxis,
+        PolarLineChart: PolarLineChart,
         PolarPlotArea: PolarPlotArea,
+        RadarAreaChart: RadarAreaChart,
         RadarBarChart: RadarBarChart,
         RadarCategoryAxis: RadarCategoryAxis,
         RadarClusterLayout: RadarClusterLayout,
+        RadarLineChart: RadarLineChart,
         RadarNumericAxis: RadarNumericAxis,
         RadarPlotArea: RadarPlotArea,
+        SplinePolarAreaSegment:  SplinePolarAreaSegment,
+        SplineRadarAreaSegment: SplineRadarAreaSegment,
         RadarStackLayout: RadarStackLayout
     });
 

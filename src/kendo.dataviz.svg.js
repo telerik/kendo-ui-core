@@ -166,6 +166,12 @@ kendo_module({
             );
         },
 
+        createCubicCurve: function(points, options, areaPoints){
+            return this.decorate(
+                new SVGCubicCurve(points, options, areaPoints)
+            );
+        },
+
         // TODO: Refactor to (p1, p2, options)
         createLine: function(x1, y1, x2, y2, options) {
             return this.decorate(
@@ -391,6 +397,36 @@ kendo_module({
 
         destroy: function() {
             // Expand animation should have this method
+        }
+    });
+
+    var SVGCubicCurve = SVGPath.extend({
+        init: function(points, options, areaPoints) {
+            var curve = this;
+            SVGPath.fn.init.call(curve, options);
+            curve.areaPoints = areaPoints;
+            curve.points = points;
+        },
+        renderPoints: function() {
+            var curve = this,
+                points = curve.points,
+                curvePoints = [],
+                areaPoints = curve.areaPoints;
+            for(var i = 0; i < points.length; i++){
+                if(i % 3 == 1){
+                    curvePoints.push("C");
+                }
+                curvePoints.push(round(points[i].x, COORD_PRECISION) + " " + round(points[i].y, COORD_PRECISION));
+            }
+
+            if(areaPoints && areaPoints.length){
+                for(i = 0; i < areaPoints.length; i++){
+                    curvePoints.push("L " + areaPoints[i].x + " " + areaPoints[i].y);
+                }
+                curvePoints.push("z");
+            }
+
+            return "M " + curvePoints.join(" ");
         }
     });
 

@@ -61,7 +61,14 @@
 				}, {
                     "text": "Step area",
                     "url": "area-charts/step-area.html"
-            }],
+                }, {
+                    "text": "Error Bars",
+                    "url": "area-charts/error-bars.html",
+                    "title": "Example of using ErrorBars for Kendo UI Area Chart",
+                    "meta": "This demo shows how to use ErrorBars for Kendo UI Area Chart",
+                    "new": true
+                }
+            ],
             "name": "area-charts"
         }, {
             "text": "Bar Charts",
@@ -134,6 +141,12 @@
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"]
+                }, {
+                    "text": "Error Bars",
+                    "url": "bar-charts/error-bars.html",
+                    "title": "Example of using ErrorBars for Kendo UI Bar Chart",
+                    "meta": "This demo shows how to use ErrorBars for Kendo UI Bar Chart",
+                    "new": true
                 }
             ],
             "name": "bar-charts"
@@ -251,7 +264,14 @@
 				}, {
                     "text": "Step line",
                     "url": "line-charts/step-line.html"
-            }],
+                }, {
+                    "text": "Error Bars",
+                    "url": "line-charts/error-bars.html",
+                    "title": "Example of using ErrorBars for Kendo UI Line Chart",
+                    "meta": "This demo shows how to use ErrorBars for Kendo UI Line Chart",
+                    "new": true
+                }
+            ],
             "name": "line-charts"
         }, {
             "text": "Donut Charts",

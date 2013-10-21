@@ -18,6 +18,7 @@ function ViewStub() {
     log.circle = [];
     log.sector = [];
     log.ring = [];
+    log.cubicCurve = [];
 }
 
 ViewStub.prototype = {
@@ -84,6 +85,11 @@ ViewStub.prototype = {
         this.log.ring.push({ ring: ring, style: style });
 
         return new kendo.dataviz.ViewElement(style);
+    },
+    
+    createCubicCurve: function (points, options, areaPoints) {
+        this.log.cubicCurve.push({ points: points, options: options, areaPoints: areaPoints });
+        return new kendo.dataviz.ViewElement(options);
     }
 };
 
