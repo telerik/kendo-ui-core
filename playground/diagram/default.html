@@ -176,26 +176,26 @@
             <li>
                 File
                 <ul>
-                    <li title="CTRL+N">New</li>
-                    <li title="CTRL+O">Open</li>
-                    <li title="CTRL+S"><a href="#" id="menuSave" style="color:#fff;">Save</a></li>
+                    <li id="mnuNew" title="CTRL+N">New</li>
+                    <li id="mnuOpen" title="CTRL+O">Open</li>
+                    <li id="mnuSave" title="CTRL+S"><a href="#" id="mnuaSave" style="color:#fff;">Save</a></li>
                     <hr/>
-                    <li title="Sample diagram">Tea Processing</li>
-                    <li title="Sample diagram">Flowchart</li>
+                    <li id="mnuTea" title="Sample diagram">Tea Processing</li>
+                    <li id="mnuFlowchart" title="Sample diagram">Flowchart</li>
                 </ul>
             </li>
             <li>
                 Edit
                 <ul>
-                    <li title="CTRL+Z">Undo</li>
-                    <li title="CTRL+Y">Redo</li>
+                    <li id="mnuUndo" title="CTRL+Z">Undo</li>
+                    <li id="mnuRedo" title="CTRL+Y">Redo</li>
                     <hr/>
-                    <li title="CTRL+X">Cut</li>
-                    <li title="CTRL+C">Copy</li>
-                    <li title="CTRL+P">Paste</li>
-                    <li title="DEL">Delete</li>
+                    <li id="mnuCut" title="CTRL+X">Cut</li>
+                    <li id="mnuCopy" title="CTRL+C">Copy</li>
+                    <li id="mnuPaste" title="CTRL+P">Paste</li>
+                    <li id="mnuDelete" title="DEL">Delete</li>
                     <hr/>
-                    <li title="CTRL+A">Select All</li>
+                    <li id="mnuSelectAll" title="CTRL+A">Select All</li>
                 </ul>
             </li>
             <li>
@@ -205,41 +205,42 @@
                         <ul>
                             <li>Standard
                                 <ul>
-                                    <li>Down</li>
-                                    <li>Right</li>
-                                    <li>Up</li>
-                                    <li>Left</li>
+                                    <li id="mnuTreeDown">Down</li>
+                                    <li id="mnuTreeRight">Right</li>
+                                    <li id="mnuTreeUp">Up</li>
+                                    <li id="mnuTreeLeft">Left</li>
                                 </ul>
                             </li>
-                            <li>Tip-over</li>
+                            <li id="mnuTipOver">Tip-over</li>
+                            <li id="mnuRadial">Radial</li>
                             <li>Mindmapping
                                 <ul>
-                                    <li>Horizontal</li>
-                                    <li>Vertical</li>
+                                    <li id="mnuMindmapHorizontal">Horizontal</li>
+                                    <li id="mnuMindmapVertical">Vertical</li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
                     <li>Layered
                         <ul>
-                            <li>Horizontal</li>
-                            <li>Vertical</li>
+                            <li id="mnuLayeredHorizontal">Horizontal</li>
+                            <li id="mnuLayeredVertical">Vertical</li>
                         </ul>
                     </li>
 
-                    <li>Force directed</li>
+                    <li id="mnuForceDirected">Force directed</li>
                 </ul>
             </li>
             <li>Arrange
                 <ul>
-                    <li>Bring to front</li>
-                    <li>Send to back</li>
+                    <li id="mnuToFront">Bring to front</li>
+                    <li id="mnuToBack">Send to back</li>
                     <li>Align selection
                         <ul>
-                            <li>Left</li>
-                            <li>Right</li>
-                            <li>Top</li>
-                            <li>Left</li>
+                            <li id="mnuAlignLeft">Left</li>
+                            <li id="mnuAlignRight">Right</li>
+                            <li id="mnuAlignTop">Top</li>
+                            <li id="mnuAlignBottom">Bottom</li>
                         </ul>
                     </li>
                 </ul>
@@ -308,6 +309,9 @@
             </g>
         </svg>
     </div>
+
+
+
 
 
 
@@ -461,14 +465,14 @@ $(function () {
             else if (items.length === 1 && items[0] instanceof kendo.diagram.Shape) {
                 try {
                     var bg = items[0].options.background;
-                    if(kendo.diagram.Utils.isDefined(bg)){
+                    if (kendo.diagram.Utils.isDefined(bg)) {
                         var color = kendo.parseColor(bg);
                         sp.value(color);
                     }
 
                 } catch (ex) {
                     var byname = colourNameToHex(bg);
-                    if(byname) sp.value(byname);
+                    if (byname) sp.value(byname);
                 }
             }
             else {
@@ -603,7 +607,11 @@ $(function () {
     ];
 
     var onLayoutChanged = function (e) {
-        switch ($("#Layouts").data("kendoDropDownList").value()) {
+        layout($("#Layouts").data("kendoDropDownList").value());
+    };
+    var layout = function (name) {
+
+        switch (name) {
             case "TreeDown":
                 diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
                         {
@@ -681,7 +689,6 @@ $(function () {
                 break;
         }
     };
-
     var dropDown = $("#Layouts").kendoDropDownList({
         dataTextField: "text",
         dataValueField: "value",
@@ -738,41 +745,81 @@ $(function () {
     });
 
     function onMenuSelect(e) {
-        switch ($(e.item).children(".k-link").text().toLowerCase()) {
-            case "new":
+
+        switch (e.item.id) {
+            case "mnuNew":
                 diagram.clear();
                 break;
-            case "save":
+            case "mnuSave":
                 saveDiagram();
                 break;
-            case "open":
+            case "mnuOpen":
                 loadDiagram();
                 break;
-            case "undo":
+            case "mnuUndo":
                 diagram.undo();
                 break;
-            case "redo":
+            case "mnuRedo":
                 diagram.redo();
                 break;
-            case "cut":
+            case "mnuCut":
                 diagram.cut();
                 break;
-            case "copy":
+            case "mnuCopy":
                 diagram.copy();
                 break;
-            case "paste":
+            case "mnuPaste":
                 diagram.paste();
                 break;
-            case "delete":
+            case "mnuDelete":
                 diagram.remove(diagram.select(), true);
                 break;
-            case "select all":
+            case "mnuSelectAll":
                 selectAll();
                 break;
-            case "tea processing":
+            case "mnuTreeDown":
+                layout("TreeDown");
+                break;
+            case "mnuTreeUp":
+                layout("TreeUp");
+                break;
+            case "mnuTreeRight":
+                layout("TreeRight");
+                break;
+            case "mnuTreeLeft":
+                layout("TreeLeft");
+                break;
+            case "mnuMindmapHorizontal":
+                layout("MindmapHorizontal");
+                break;
+            case "mnuMindmapVertical":
+                layout("MindmapVertical");
+                break;
+            case "mnuLayeredHorizontal":
+                layout("LayeredHorizontal");
+                break;
+            case "mnuLayeredVertical":
+                layout("LayeredVertical");
+                break;
+            case "mnuForceDirected":
+                layout("ForceDirected");
+                break;
+            case "mnuTipOver":
+                layout("TipOverTree");
+                break;
+            case "mnuRadial":
+                layout("RadialTree");
+                break;
+            case "mnuToFront":
+                diagram.toFront();
+                break;
+            case "mnuToBack":
+                diagram.toBack();
+                break;
+            case "mnuTea":
                 load("/kendo/playground/diagram/TeaProcessing.json");
                 break;
-            case "flowchart":
+            case "mnuFlowchart":
                 load("/kendo/playground/diagram/Flowchart.json");
                 break;
         }
