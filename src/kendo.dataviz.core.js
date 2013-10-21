@@ -819,7 +819,7 @@ kendo_module({
                 stroke: border.width ? border.color : "",
                 strokeWidth: border.width,
                 dashType: border.dashType,
-                strokeOpacity: options.opacity,
+                strokeOpacity: border.opacity,
                 fill: options.background,
                 fillOpacity: options.opacity,
                 animation: options.animation,
@@ -1875,16 +1875,23 @@ kendo_module({
             elementOptions = deepExtend(marker.elementStyle(), renderOptions);
 
             if (type === CIRCLE) {
-                element = view.createCircle(new Point2D(
+                element = view.createCircle(Point2D(
                     round(box.x1 + halfWidth, COORD_PRECISION),
                     round(box.y1 + box.height() / 2, COORD_PRECISION)
                 ), halfWidth, elementOptions);
-            } else if (type === TRIANGLE) {
+            }  else if (type === TRIANGLE) {
                 points = [
-                    new Point2D(box.x1 + halfWidth, box.y1),
-                    new Point2D(box.x1, box.y2),
-                    new Point2D(box.x2, box.y2)
+                    Point2D(box.x1, box.y1),
+                    Point2D(box.x2, box.y1)
                 ];
+            } else if (type === "cross") {
+                element = view.createGroup();
+                element.children.push(view.createPolyline(
+                    [Point2D(box.x1, box.y1), Point2D(box.x2, box.y2)], true, elementOptions
+                ));
+                element.children.push(view.createPolyline(
+                    [Point2D(box.x1, box.y2), Point2D(box.x2, box.y1)], true, elementOptions
+                ));
             } else {
                 points = box.points();
             }

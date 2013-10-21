@@ -13,7 +13,6 @@ kendo_module({
         requireJS: false /* don't make dataviz.chart depend on
                           * dataviz.chart.polar to avoid circular dependency.
                           * Ticket 725435 */
-
     }]
 });
 
@@ -95,6 +94,7 @@ kendo_module({
         COLOR = "color",
         COLUMN = "column",
         COORD_PRECISION = dataviz.COORD_PRECISION,
+        CROSS = "cross",
         CSS_PREFIX = "k-",
         DATABOUND = "dataBound",
         DATE = "date",
@@ -5453,8 +5453,8 @@ kendo_module({
 
         splitValue: function(value) {
             return [
-                value.min, value.q25, value.median,
-                value.q75, value.max
+                value.lower, value.q1, value.median,
+                value.q3, value.upper
             ];
         },
 
@@ -5482,8 +5482,8 @@ kendo_module({
             var value = point.value;
 
             return autoFormat(format,
-                value.min, value.q25, value.median,
-                value.q75, value.max, point.category, value.mean
+                value.lower, value.q1, value.median,
+                value.q3, value.upper, value.mean, point.category
             );
         },
 
@@ -5522,18 +5522,22 @@ kendo_module({
             line: {
                 width: 2
             },
+            mean: {
+                width: 2,
+                dashType: "dash"
+            },
             overlay: {
                 gradient: GLASS
             },
             tooltip: {
                 format: "<table style='text-align: left;'>" +
                         "<th colspan='2'>{6:d}</th>" +
-                        "<tr><td>Min:</td><td>{0:C}</td></tr>" +
-                        "<tr><td>Q25:</td><td>{1:C}</td></tr>" +
+                        "<tr><td>Lower:</td><td>{0:C}</td></tr>" +
+                        "<tr><td>Q1:</td><td>{1:C}</td></tr>" +
                         "<tr><td>Median:</td><td>{2:C}</td></tr>" +
-                        "<tr><td>Mean:</td><td>{3:C}</td></tr>" +
-                        "<tr><td>Q75:</td><td>{4:C}</td></tr>" +
-                        "<tr><td>Max:</td><td>{5:C}</td></tr>" +
+                        "<tr><td>Mean:</td><td>{5:C}</td></tr>" +
+                        "<tr><td>Q3:</td><td>{3:C}</td></tr>" +
+                        "<tr><td>Upper:</td><td>{4:C}</td></tr>" +
                         "</table>"
             },
             highlight: {
@@ -5551,15 +5555,27 @@ kendo_module({
                 visible: true,
                 label: {}
             },
-            markers: {
+            outliers: {
                 visible: true,
+                size: LINE_MARKER_SIZE,
+                type: CROSS,
                 background: WHITE,
+                border: {
+                    width: 2,
+                    opacity: 1
+                },
+                opacity: 0
+            },
+            extremes: {
+                visible: true,
                 size: LINE_MARKER_SIZE,
                 type: CIRCLE,
+                background: WHITE,
                 border: {
-                    width: 2
+                    width: 2,
+                    opacity: 1
                 },
-                opacity: 1
+                opacity: 0
             }
         },
 
@@ -5571,10 +5587,10 @@ kendo_module({
                 valueAxis = chart.seriesValueAxis(options),
                 points = [], mid, whiskerSlot, boxSlot, medianSlot, meanSlot;
 
-            boxSlot = valueAxis.getSlot(value.q25, value.q75);
+            boxSlot = valueAxis.getSlot(value.q1, value.q3);
             point.boxSlot = boxSlot;
 
-            whiskerSlot = valueAxis.getSlot(value.min, value.max);
+            whiskerSlot = valueAxis.getSlot(value.lower, value.upper);
             medianSlot = valueAxis.getSlot(value.median);
 
             boxSlot.x1 = whiskerSlot.x1 = box.x1;
@@ -5586,8 +5602,14 @@ kendo_module({
             }
 
             mid = whiskerSlot.center().x;
-            points.push([ Point2D(mid, whiskerSlot.y1), Point2D(mid, boxSlot.y1) ]);
-            points.push([ Point2D(mid, boxSlot.y2), Point2D(mid, whiskerSlot.y2) ]);
+            points.push([
+                [ Point2D(mid - 5, whiskerSlot.y1), Point2D(mid + 5, whiskerSlot.y1) ],
+                [ Point2D(mid, whiskerSlot.y1), Point2D(mid, boxSlot.y1) ]
+            ]);
+            points.push([
+                [ Point2D(mid - 5, whiskerSlot.y2), Point2D(mid + 5, whiskerSlot.y2) ],
+                [ Point2D(mid, boxSlot.y2), Point2D(mid, whiskerSlot.y2) ]
+            ]);
 
             point.whiskerPoints = points;
 
@@ -5603,32 +5625,44 @@ kendo_module({
             var point = this,
                 options = point.options,
                 markers = options.markers || {},
-                outliers = point.value.outliers,
+                value = point.value,
+                outliers = value.outliers || [],
                 valueAxis = point.owner.seriesValueAxis(options),
-                markerBackground = markers.background,
-                markerBorder = deepExtend({}, markers.border),
-                markerBox, element, value, i;
+                outerFence = math.abs(value.q3 - value.q1) * 3,
+                markersBorder, markerBox, element, outlierValue, i;
 
             point.outliers = [];
 
-            if (!defined(markerBorder.color)) {
-                markerBorder.color =
-                    new Color(markerBackground).brightness(BAR_BORDER_BRIGHTNESS).toHex();
-            }
-
             for (i = 0; i < outliers.length; i++) {
-                value = outliers[i];
+                outlierValue = outliers[i];
+                if (outlierValue < value.q3 + outerFence && outlierValue > value.q1 - outerFence) {
+                    markers = options.outliers;
+                } else {
+                    markers = options.extremes;
+                }
+                markersBorder = deepExtend({}, markers.border);
+
+                if (!defined(markersBorder.color)) {
+                    if (defined(point.options.color)) {
+                        markersBorder.color = point.options.color;
+                    } else {
+                        markersBorder.color =
+                            new Color(markers.background).brightness(BAR_BORDER_BRIGHTNESS).toHex();
+                    }
+                }
+
                 element = new ShapeElement({
                     id: point.options.id,
                     type: markers.type,
                     width: markers.size,
                     height: markers.size,
                     rotation: markers.rotation,
-                    background: markerBackground,
-                    border: markerBorder,
+                    background: markers.background,
+                    border: markersBorder,
                     opacity: markers.opacity
                 });
-                markerBox = valueAxis.getSlot(value).move(point.box.center().x);
+
+                markerBox = valueAxis.getSlot(outlierValue).move(point.box.center().x);
                 point.box = point.box.wrap(markerBox);
                 element.reflow(markerBox);
                 point.outliers.push(element);
@@ -5650,70 +5684,92 @@ kendo_module({
 
             group.children = elements;
 
-            return [group];
+            return [ group ];
         },
 
-        render: function(view, options) {
+        render: function(view, renderOptions) {
             var point = this,
-                data = { data: { modelId: point.options.modelId } },
                 elements = [],
-                border = options.border.width > 0 ? {
-                    stroke: point.getBorderColor(),
-                    strokeWidth: options.border.width,
-                    dashType: options.border.dashType,
-                    strokeOpacity: valueOrDefault(options.border.opacity, options.opacity)
-                } : {},
-                rectStyle = deepExtend({
-                    fill: options.color,
-                    fillOpacity: options.opacity,
-                    data: data
-                }, border),
-                lineStyle = {
+                i, element;
+
+            elements.push(point.createBody(view, renderOptions));
+            elements.push(point.createWhisker(view, point.whiskerPoints[0], renderOptions));
+            elements.push(point.createWhisker(view, point.whiskerPoints[1], renderOptions));
+            elements.push(point.createMedian(view, renderOptions));
+            if (point.meanPoints) {
+                elements.push(point.createMean(view, renderOptions));
+            }
+            elements.push(point.createOverlayRect(view, renderOptions));
+            if (point.outliers.length) {
+                for (i = 0; i < point.outliers.length; i++) {
+                    element = point.outliers[i];
+                    elements.push(element.getViewElements(view, element.options)[0]);
+                }
+            }
+
+            return elements;
+        },
+
+        createWhisker: function(view, points, options) {
+            return view.createMultiLine(points, {
                     strokeOpacity: valueOrDefault(options.line.opacity, options.opacity),
                     strokeWidth: options.line.width,
                     stroke: options.line.color || options.color,
                     dashType: options.line.dashType,
                     strokeLineCap: "butt",
-                    data: data
-                },
-                meanLineStyle = {
-                    strokeOpacity: valueOrDefault(options.mean.opacity, options.opacity),
-                    strokeWidth: options.mean.width,
-                    stroke: options.mean.color || options.color,
-                    dashType: options.mean.dashType,
-                    strokeLineCap: "butt",
-                    data: data
-                },
-                medianLineStyle = {
+                    data: { data: { modelId: options.modelId } }
+                });
+        },
+
+        createMedian: function(view) {
+            var point = this,
+                options = point.options;
+
+            return view.createPolyline(point.medianPoints, false, {
                     strokeOpacity: valueOrDefault(options.median.opacity, options.opacity),
                     strokeWidth: options.median.width,
                     stroke: options.median.color || options.color,
                     dashType: options.median.dashType,
                     strokeLineCap: "butt",
-                    data: data
-                };
+                    data: { data: { modelId: options.modelId } }
+                });
+        },
+
+        createBody: function(view, options) {
+            var point = this,
+                border = options.border.width > 0 ? {
+                    stroke: options.color || point.getBorderColor(),
+                    strokeWidth: options.border.width,
+                    dashType: options.border.dashType,
+                    strokeOpacity: valueOrDefault(options.border.opacity, options.opacity)
+                } : {},
+                body = deepExtend({
+                    fill: options.color,
+                    fillOpacity: options.opacity,
+                    data: { data: { modelId: options.modelId } }
+                }, border);
 
             if (options.overlay) {
-                rectStyle.overlay = deepExtend({
+                body.overlay = deepExtend({
                     rotation: 0
                 }, options.overlay);
             }
 
-            elements.push(view.createRect(point.boxSlot, rectStyle));
-            elements.push(view.createPolyline(point.whiskerPoints[0], false, lineStyle));
-            elements.push(view.createPolyline(point.whiskerPoints[1], false, lineStyle));
-            elements.push(view.createPolyline(point.medianPoints, false, medianLineStyle));
-            if (point.meanPoints) {
-                elements.push(view.createPolyline(point.meanPoints, false, meanLineStyle));
-            }
-            elements.push(point.createOverlayRect(view, options));
-            if (point.outliers.length) {
-                for (var i = 0; i < point.outliers.length; i++) {
-                    elements.push(point.outliers[i].getViewElements(view, options.markers)[0]);
-                }
-            }
+            return view.createRect(point.boxSlot, body);
+        },
 
-            return elements;
+        createMean: function(view) {
+            var point = this,
+                options = point.options;
+
+            return view.createPolyline(point.meanPoints, false, {
+                    strokeOpacity: valueOrDefault(options.mean.opacity, options.opacity),
+                    strokeWidth: options.mean.width,
+                    stroke: options.mean.color || options.color,
+                    dashType: options.mean.dashType,
+                    strokeLineCap: "butt",
+                    data: { data: { modelId: options.modelId } }
+                });
         },
 
         highlightOverlay: function(view) {
@@ -10546,12 +10602,12 @@ kendo_module({
 
     SeriesBinder.current.register(
         [BOX_PLOT],
-        ["min", "q25", "median", "q75", "max", "mean", "outliers"], [CATEGORY, COLOR, NOTE_TEXT]
+        ["lower", "q1", "median", "q3", "upper", "mean", "outliers"], [CATEGORY, COLOR, NOTE_TEXT]
     );
 
     DefaultAggregates.current.register(
         [BOX_PLOT],
-        { min: "max", q25: "max", median: "max", q75: "max", max: "max", mean: "max",
+        { lower: "max", q1: "max", median: "max", q3: "max", upper: "max", mean: "max",
           color: "first", noteText: "first" }
     );
 
