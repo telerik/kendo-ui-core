@@ -259,19 +259,19 @@ else
 end
 
 # Copy Source.snk as Kendo.snk (the original Kendo.snk should not be distributed)
-file_copy :to => 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.snk',
+file_copy :to => 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc/Kendo.snk',
           :from => 'wrappers/mvc/src/shared/Source.snk'
 
 # Copy CommonAssemblyInfo.cs because the 'shared' folder is not distributed
-file_copy :to => 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/CommonAssemblyInfo.cs',
+file_copy :to => 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc/CommonAssemblyInfo.cs',
           :from => 'wrappers/mvc/src/shared/CommonAssemblyInfo.cs'
 
 # Copy Kendo.Mvc.csproj (needed for the next task)
-file_copy :to => 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj',
+file_copy :to => 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc/Kendo.Mvc.csproj',
           :from => 'wrappers/mvc/src/Kendo.Mvc/Kendo.Mvc.csproj'
 
 # Patch Visual Studio Project - fix paths etc.
-file 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.csproj' do |t|
+file 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc/Kendo.Mvc.csproj' do |t|
     csproj = File.read(t.name)
 
     csproj.gsub!(/\.\.\\shared\\Kendo\.snk/, 'Kendo.snk')
@@ -306,7 +306,7 @@ def patch_examples_csproj t
     File.write(t.name, csproj)
 end
 
-def patch_solution t
+def patch_examples_solution t
     sln = File.read(t.name)
 
     #Remove the Kendo.Mvc project
@@ -327,6 +327,34 @@ def patch_solution t
     File.write(t.name, sln)
 end
 
+def patch_solution t
+    sln = File.read(t.name)
+
+    #Remove the Kendo.Mvc.Examples project
+    sln.sub!(/\s*Project.*?=\s*"Kendo\.Mvc\.Examples"((.|\r|\n)*?)EndProject/, '')
+
+    #Remove the Kendo.Mvc.Tests project
+    sln.sub!(/\s*Project.*?=\s*"Kendo\.Mvc\.Tests"((.|\r|\n)*?)EndProject/, '')
+
+    #Fix the path to Kendo.Mvc.Examples
+    sln.sub!('src\\', '')
+
+    #Remove empty lines
+    sln.gsub!(/^$\n/, '')
+
+    File.write(t.name, sln)
+end
+
+# Copy Kendo.Mvc.sln in the src directory
+file_copy :to => 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.sln',
+          :from => 'wrappers/mvc/Kendo.Mvc.sln'
+
+# Path the solution - leave only the Kendo.Mvc project
+
+file 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.sln' do |t|
+    patch_solution t
+end
+
 # Copy Kendo.Mvc.sln as Kendo.Mvc.Examples.sln
 file_copy :to => 'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.sln',
           :from => 'wrappers/mvc/Kendo.Mvc.sln'
@@ -344,11 +372,11 @@ file_copy :to => 'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo
 # Path the solution - leave only the examples project
 
 file  'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.sln' do |t|
-    patch_solution t
+    patch_examples_solution t
 end
 
 file  'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.sln' do |t|
-    patch_solution t
+    patch_examples_solution t
 end
 
 # Patch Visual Studio Project - fix paths etc.
