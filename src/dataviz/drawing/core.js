@@ -6,11 +6,9 @@
 
         kendo = window.kendo,
         Class = kendo.Class,
-        ObservableObject = kendo.data.ObservableObject,
         deepExtend = kendo.deepExtend,
 
-        dataviz = kendo.dataviz,
-        append = dataviz.append;
+        dataviz = kendo.dataviz;
 
     // Stage node ============================================================
     var BaseNode = Class.extend({
@@ -41,11 +39,11 @@
             }
         },
 
-        geometryChange: function(e) {
+        geometryChange: function() {
             this.invalidate();
         },
 
-        optionsChange: function(e) {
+        optionsChange: function() {
             this.invalidate();
         },
 

@@ -8,9 +8,6 @@
 
         kendo = window.kendo,
         Class = kendo.Class,
-        Observable = kendo.Observable,
-        ObservableObject = kendo.data.ObservableObject,
-        ObservableArray = kendo.data.ObservableArray,
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
@@ -20,6 +17,7 @@
         Point = geometry.Point,
 
         util = dataviz.util,
+        ensureTree = util.ensureTree,
         rad = util.rad;
 
     // Drawing primitives =====================================================
@@ -30,8 +28,6 @@
             group.observer = null;
             group.children = [];
         },
-
-        geometryChange: util.mixins.geometryChange,
 
         childrenChange: function(action, items, index) {
             if (this.observer) {
@@ -60,10 +56,8 @@
             var shape = this;
 
             shape.observer = null;
-            shape.options = new ObservableObject(options || {});
-            shape.options.bind(CHANGE, function(e) {
-                shape.optionsChange(e);
-            });
+            shape.options = new OptionsStore(options || {});
+            shape.options.observer = this;
         },
 
         geometryChange: util.mixins.geometryChange,
@@ -174,6 +168,113 @@
 
         lineTo: function(x, y) {
             dataviz.last(this.paths).lineTo(x, y);
+        }
+    });
+
+    var OptionsStore = Class.extend({
+        init: function(value) {
+            var that = this,
+                member,
+                field;
+
+            for (field in value) {
+                member = value[field];
+
+                if (field.charAt(0) != "_") {
+                    member = that.wrap(member, field);
+                }
+
+                that[field] = member;
+            }
+        },
+
+        get: function(field) {
+            var that = this, result;
+
+            if (field === "this") {
+                result = that;
+            } else {
+                result = kendo.getter(field, true)(that);
+            }
+
+            return result;
+        },
+
+        _set: function(field, value) {
+            var that = this;
+            var composite = field.indexOf(".") >= 0;
+
+            if (composite) {
+                var paths = field.split("."),
+                    path = "";
+
+                while (paths.length > 1) {
+                    path += paths.shift();
+                    var obj = kendo.getter(path, true)(that);
+                    if (obj instanceof OptionsStore) {
+                        obj.set(paths.join("."), value);
+                        return composite;
+                    }
+                    path += ".";
+                }
+            }
+
+            kendo.setter(field)(that, value);
+
+            return composite;
+        },
+
+        set: function(field, value) {
+            var that = this,
+                current = kendo.getter(field, true)(that);
+
+            if (current !== value) {
+                that._set(field, that.wrap(value, field));
+                if (that.observer) {
+                    that.observer.optionsChange({ field: field });
+                }
+            }
+        },
+
+        wrap: function(object, field) {
+            var that = this,
+                type = toString.call(object);
+
+            if (object != null && type === "[object Object]") {
+                if (!(object instanceof OptionsStore)) {
+                    object = new OptionsStore(object);
+                }
+
+                object.observer = that;
+            }
+
+            return object;
+        },
+
+        optionsChange: function(e) {
+            if (this.observer) {
+                this.observer.optionsChange(e);
+            }
+        },
+
+        _ensureTree: function(fieldName) {
+            if (fieldName.indexOf(".") > -1) {
+                var parts = fieldName.split("."),
+                    path = "",
+                    val;
+
+                while (parts.length > 1) {
+                    path += parts.shift();
+                    val = kendo.getter(path)(this);
+                    if (!val) {
+                       val = new OptionsStore();
+                       val.observer = this;
+                    }
+
+                    kendo.setter(path)(this, val);
+                    path += ".";
+                }
+            }
         }
     });
 

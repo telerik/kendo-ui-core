@@ -40,25 +40,48 @@
         deepEqual(group.children[0], child);
     });
 
-    test("append triggers change event on children", function() {
+    test("append triggers childrenChange", function() {
         var group = new Group();
         var child = new Group();
 
-        group.children.bind("change", function() { ok(true); });
+        group.observer = {
+            childrenChange: function() {
+                ok(true);
+            }
+        }
+
         group.append(child);
     });
 
+    test("emptry triggers childrenChange", function() {
+        var group = new Group();
+        var child = new Group();
+        group.append(child);
+
+        group.observer = {
+            childrenChange: function() {
+                ok(true);
+            }
+        }
+
+        group.empty();
+    });
+
     // ------------------------------------------------------------
-    module("Shape");
+    var shape;
+
+    module("Shape", {
+        setup: function() {
+            shape = new Shape();
+        }
+    });
 
     test("sets initial options", function() {
-        var shape = new Shape({ foo: true });
-
+        shape = new Shape({ foo: true });
         ok(shape.options.foo);
     });
 
     test("fill sets fill", function() {
-        var shape = new Shape();
         shape.fill("red", 1);
 
         equal(shape.options.fill.color, "red");
@@ -66,26 +89,25 @@
     });
 
     test("fill opacity is 1 by default", function() {
-        var shape = new Shape();
         shape.fill("red");
-
         equal(shape.options.fill.opacity, 1);
     });
 
-    test("fill triggers change on options", function() {
-        var shape = new Shape();
-        shape.options.bind("change", function() { ok(true); });
+    test("fill triggers optionsChange", function() {
+        shape.observer = {
+            optionsChange: function() {
+                ok(true);
+            }
+        }
 
         shape.fill("red");
     });
 
     test("fill returns shape", function() {
-        var shape = new Shape();
         deepEqual(shape.fill("red"), shape);
     });
 
     test("stroke sets stroke", function() {
-        var shape = new Shape();
         shape.stroke("red", 2, 1);
 
         equal(shape.options.stroke.color, "red");
@@ -94,28 +116,26 @@
     });
 
     test("stroke width is 1 by default", function() {
-        var shape = new Shape();
         shape.stroke("red");
-
         equal(shape.options.stroke.width, 1);
     });
 
     test("stroke opacity is 1 by default", function() {
-        var shape = new Shape();
         shape.stroke("red");
-
         equal(shape.options.stroke.opacity, 1);
     });
 
-    test("stroke triggers change on options", function() {
-        var shape = new Shape();
-        shape.options.bind("change", function() { ok(true); });
+    test("stroke triggers optionsChange", function() {
+        shape.observer = {
+            optionsChange: function() {
+                ok(true);
+            }
+        }
 
         shape.stroke("red");
     });
 
     test("stroke returns shape", function() {
-        var shape = new Shape();
         deepEqual(shape.stroke("red"), shape);
     });
 
