@@ -13,6 +13,12 @@ kendo_module({
         requireJS: false /* don't make dataviz.chart depend on
                           * dataviz.chart.polar to avoid circular dependency.
                           * Ticket 725435 */
+    }, {
+        id: "dataviz.chart-funnel",
+        name: "Funnel chart",
+        description: "Support for Funnel chart.",
+        depends: ["dataviz.chart.funnel"],
+        requireJS: false
     }]
 });
 
@@ -109,6 +115,7 @@ kendo_module({
         DRAG_END = "dragEnd",
         DRAG_START = "dragStart",
         FADEIN = "fadeIn",
+        FUNNEL = "funnel",
         GLASS = "glass",
         HOURS = "hours",
         INITIAL_ANIMATION_DURATION = dataviz.INITIAL_ANIMATION_DURATION,
@@ -1163,7 +1170,7 @@ kendo_module({
                 originalSeries = (chart._sourceSeries || [])[seriesIndex] || currentSeries,
                 transitionsState, visible, point;
 
-            if (inArray(currentSeries.type, [PIE, DONUT])) {
+            if (inArray(currentSeries.type, [PIE, DONUT,FUNNEL])) {
                 point = originalSeries.data[pointIndex];
                 if (!defined(point.visible)) {
                     visible = false;
@@ -1194,7 +1201,7 @@ kendo_module({
                 currentSeries = (plotArea.srcSeries || plotArea.series)[seriesIndex],
                 index, items;
 
-            if (inArray(currentSeries.type, [PIE, DONUT])) {
+            if (inArray(currentSeries.type, [PIE, DONUT, FUNNEL])) {
                 index = pointIndex;
             } else {
                 index = seriesIndex;
@@ -10668,6 +10675,7 @@ kendo_module({
         PieSegment: PieSegment,
         PlotAreaBase: PlotAreaBase,
         PlotAreaFactory: PlotAreaFactory,
+        PointEventsMixin: PointEventsMixin,
         ScatterChart: ScatterChart,
         ScatterLineChart: ScatterLineChart,
         Selection: Selection,

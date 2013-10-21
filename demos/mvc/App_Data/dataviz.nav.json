@@ -287,6 +287,39 @@
             ],
             "name": "donut-charts"
         }, {
+            "text": "Funnel Charts",
+            "documentation": "dataviz/chart",
+            "spriteCssClass": "chartFunnelIcon",
+            "items": [{
+                    "text": "Basic usage",
+                    "url": "funnel-charts/index.html",
+                    "title": "Example of Kendo UI Funnel Charts",
+                    "meta": "This demo shows the core functionality of Kendo UI jQuery Funnel Charts which visualize the breakdown of data into its elements."
+                }, {
+                    "text": "Funnel labels",
+                    "url": "funnel-charts/funnel-labels.html",
+                    "title": "Configuration of Funnel labels in Kendo UI funnel charts",
+                    "meta": "This example shows how to configure the values of Kendo UI jQuery Funnel Charts, enable/disable funnel labels and specify how they are aligned to the chart."
+                }, {
+                    "text": "Binding to remote data",
+                    "url": "funnel-charts/remote-data.html",
+                    "title": "Binding to remote data demo for Kendo UI Funnel Charts",
+                    "meta": "This example shows how to bind Kendo UI Funnel Charts to remote data."
+                }, {
+                    "text": "Binding to local data",
+                    "url": "funnel-charts/local-data.html",
+                    "title": "Local data binding in Kendo UI Funnel Charts",
+                    "meta": "This demo illustrates how Kendo UI funnel Charts widget can be bound to local data to deliver high-performance business application."
+                },
+                {
+                    "text": "MVVM",
+                    "url": "funnel-charts/mvvm.html",
+                    "title": "MVVM support in Kendo UI Chart",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                    "packages": ["!mvc", "!jsp", "!php"]
+            }],
+            "name": "funnel-charts"
+        }, {
             "text": "Pie Charts",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartPieIcon",

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Funnel chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.chart.funnel.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.dataviz.canvas.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
+        <style>
+            .k-chart {
+                width: 200px;
+                height: 300px;
+                float: left;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="funnel-equal"></div>
+        <div id="funnel-equal-spacing"></div>
+        <div id="funnel-height"></div>
+        <div id="funnel-height-increasingWidth"></div>
+        <div id="funnel-height-spacing"></div>
+        <div id="funnel-relation"></div>
+        <div id="funnel-relation-spacing"></div>
+        <div id="funnel-relation-equalHeight"></div>
+        <div id="funnel-relation-spacing-equalHeight"></div>
+        <div id="funnel-unitTest"></div>
+        <script>
+            var seriesData = [{
+                value: 10,
+                myColor:"white",
+                category: "trials"
+            }, {
+                value: 30,
+                myColor:"green",
+                category: "enquiries"
+            }, {
+                value: 10,
+                myColor:"red",
+                category: "purchases"
+            }];
+
+            $("#funnel-equal").kendoChart({
+                legend:{
+                   position:"top"
+                },
+                series: [{
+                    border:{
+                        opacity: 1,
+                        width: 5,
+                        color: "pink"
+                    },
+                    type: "funnel",
+                    colorField:"myColor",
+                    highlight:{
+                        visible:true,
+                        border:{
+                            opacity: 1,
+                            width: 5,
+                            color: "black"
+                        },
+                        color:"red",
+                        opacity:0.7
+                    },
+                    dynamicHeight:false,
+                    data: seriesData,
+                    neckRatio: 3
+                }],
+                seriesClick: function(e) {
+                    console.log("click", e);
+                },
+                seriesHover: function(e) {
+                    console.log("hover", e);
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{0}%"
+                }
+            });
+
+            $("#funnel-equal-spacing").kendoChart({
+                series: [{
+                    type: "funnel",
+                    dynamicHeight:false,
+                    data: seriesData,
+                    segmentSpacing: 25,
+                    neckRatio:3,
+                    labels:{
+                       color:"yellow",
+                       background:"black"
+                    }
+                }],
+                legend:{
+                    border:{
+                        width:'1px',
+                        color:"pink"
+                    },
+                    labels:{
+                        template:"#=text# - #=value#"
+                    }
+                },
+                tooltip: {
+                    visible: true,
+                    background:'green',
+                    border:{
+                        width:1,
+                        color:'red'
+                    }
+                }
+            });
+
+            $("#funnel-height").kendoChart({
+                series: [{
+                    type: "funnel",
+                    dynamicSlope:false,
+                    neckRatio:0.6,
+                    data: seriesData,
+                    labels: {
+                        align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
+                        margin: 5,
+                        template: "My Template #=value#"
+                    }
+                }]
+            });
+
+            $("#funnel-height-increasingWidth").kendoChart({
+                series: [{
+                    type: "funnel",
+                    dynamicSlope:false,
+                    neckRatio:3,
+                    data: seriesData,
+                    labels: {
+                        align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
+                        margin: 5,
+                        template: "My Template #=value#"
+                    }
+                }]
+            });
+
+            $("#funnel-height-spacing").kendoChart({
+                series: [{
+                    type: "funnel",
+                    dynamicSlope:false,
+                    neckRatio:0.6,
+                    data: seriesData,
+                    segmentSpacing:10,
+                    labels: {
+                        align: "left"
+                    }
+                }]
+            });
+
+            var relationData = [{
+                            value: 1,
+                            category: "trials"
+                        }, {
+                            value: 5,
+                            category: "enquiries"
+                        }, {
+                            value: 7,
+                            category: "some other"
+                        } , {
+                            value: 27,
+                            category: "foo"
+                        } , {
+                            value: 72,
+                            category: "bar"
+                        } , {
+                            value: 7,
+                            category: "baz"
+                        } , {
+                            value: 50,
+                            category: "test"
+                        } ];
+
+            $("#funnel-relation").kendoChart({
+                series: [{
+                    type: "funnel",
+                    dynamicSlope:true,
+                    data: relationData,
+                    labels:{
+                        color: 'white'
+                    }
+                }]
+            });
+
+            $("#funnel-relation-spacing").kendoChart({
+                series: [{
+                    type: "funnel",
+                    dynamicSlope:true,
+                    data: relationData,
+                    segmentSpacing : 20
+                }]
+            });
+
+            $("#funnel-relation-equalHeight").kendoChart({
+                series: [{
+                    type: "funnel",
+                    dynamicHeight:false,
+                    dynamicSlope:true,
+                    data: relationData,
+                    labels:{
+                        color: 'white'
+                    }
+                }]
+            });
+
+            $("#funnel-relation-spacing-equalHeight").kendoChart({
+                series: [{
+                    type: "funnel",
+                    dynamicHeight:false,
+                    dynamicSlope:true,
+                    data: relationData,
+                    segmentSpacing : 20
+                }]
+            });
+
+            $("#funnel-unitTest").kendoChart({
+                series: [{
+                    type: "funnel",
+                    dynamicSlope:true,
+                    data: [{
+                        value: 7,
+                        category: "A",
+                    }, {
+                        value: 2,
+                        category: "B"
+                    }, {
+                        value: 7,
+                        category: "C"
+                    }],
+                    segmentSpacing : 20
+                }]
+            });
+        </script>
+    </body>
+</html>
+

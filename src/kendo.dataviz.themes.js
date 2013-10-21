@@ -219,6 +219,12 @@ kendo_module({
                         }
                     }
                 },
+                funnel: {
+                    labels: {
+                        color:"",
+                        background: ""
+                    }
+                },
                 notes: {
                     icon: {
                         size: 7,

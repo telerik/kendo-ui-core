@@ -37,6 +37,7 @@ namespace Kendo.Models
             "kendo.dataviz.core.js",
             "kendo.dataviz.chart.js",
             "kendo.dataviz.chart.polar.js",
+            "kendo.dataviz.chart.funnel.js",
             "kendo.dataviz.themes.js",
             "kendo.dataviz.svg.js",
             "kendo.dataviz.vml.js",

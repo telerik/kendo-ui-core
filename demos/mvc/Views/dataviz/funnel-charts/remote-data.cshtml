@@ -1,0 +1,56 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <style scoped>
+        .chart-wrapper .k-chart {
+            width: 400px;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../../content/dataviz/js/spain-electricity.json",
+                            dataType: "json"
+                        }
+                    },
+                    sort: {
+                        field: "year",
+                        dir: "desc"
+                    }
+                },
+                legend: {
+                   visible: false
+                },
+                title: {
+                    text: "Spain windpower electricity production (GWh)"
+                },
+                seriesDefaults: {
+                    type: "funnel",
+                    dynamicSlope: true,
+                    dynamicHeight: false,
+                    labels: {
+                        visible: true,
+                        template: "#= dataItem.year #"
+                    }
+                },
+                series: [{
+                    field: "wind",
+                    categoryField: "year",
+                    segmentSpacing: 2
+                }],
+                tooltip: {
+                    visible: true,
+                    template: "#= dataItem.year # - #= value # GWh"
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>
