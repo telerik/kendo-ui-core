@@ -789,6 +789,7 @@ kendo_module({
 
             this.element = element;
             this.options = extend(true, {}, this.options, options);
+            this.createButton = this.options.createButton;
         },
 
         fields: function(editors, model) {
@@ -840,6 +841,65 @@ kendo_module({
             return this.editable.end();
         },
 
+        _buildEditTemplate: function(model, fields, editableFields) {
+            var messages = this.options.messages;
+            var settings = extend({}, kendo.Template, this.options.templateSettings);
+            var paramName = settings.paramName;
+            var template = this.options.editable.template;
+
+            var html = "";
+
+            if (template) {
+                if (typeof template === STRING) {
+                    template = window.unescape(template);
+                }
+                html += (kendo.template(template, settings))(model);
+            } else {
+                for (var idx = 0, length = fields.length; idx < length; idx++) {
+                    var field = fields[idx];
+
+                    if (field.field === "startTimezone") {
+                        html += '<div class="k-popup-edit-form k-scheduler-edit-form k-scheduler-timezones" style="display:none">';
+                        html += '<div class="k-edit-form-container">';
+                        html += '<div class="k-edit-label"></div>';
+                        html += '<div class="k-edit-field"><label><input class="k-timezone-toggle" type="checkbox" />' + messages.editor.separateTimezones +'</label></div>';
+                    }
+
+                    html += '<div class="k-edit-label"><label for="' + field.field + '">' + (field.title || field.field || "") + '</label></div>';
+
+                    if ((!model.editable || model.editable(field.field))) {
+                        editableFields.push(field);
+                        html += '<div ' + kendo.attr("container-for") + '="' + field.field + '" class="k-edit-field"></div>';
+                    } else {
+                        var tmpl = "#:";
+
+                        if (field.field) {
+                            field = kendo.expr(field.field, paramName);
+                            tmpl += field + "==null?'':" + field;
+                        } else {
+                            tmpl += "''";
+                        }
+
+                        tmpl += "#";
+
+                        tmpl = kendo.template(tmpl, settings);
+
+                        html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
+                    }
+
+                    if (field.field === "endTimezone") {
+                        html += this._createEndTimezoneButton();
+                    }
+                }
+            }
+
+            return html;
+        },
+
+        _createEndTimezoneButton: function() {
+            return '</div></div>';
+        },
+
         _revertTimezones: function(model) {
             model.set("startTimezone", this._startTimezone);
             model.set("endTimezone", this._endTimezone);
@@ -852,6 +912,7 @@ kendo_module({
     var MobileEditor = Editor.extend({
         init: function() {
             Editor.fn.init.apply(this, arguments);
+
             this.pane = kendo.mobile.ui.Pane.wrap(this.element);
             this.pane.element.parent().css("height", this.options.height);
             this.view = this.pane.view();
@@ -941,7 +1002,7 @@ kendo_module({
 
         _createActionSheetButton: function(options) {
             options.template = this._actionSheetButtonTemplate;
-            return  this.options.createButton(options);
+            return  this.createButton(options);
         },
 
         showDialog: function(options) {
@@ -994,56 +1055,12 @@ kendo_module({
                 titleText + '<a href="#" class="k-button k-scheduler-update">' + updateText + '</a></div>';
 
             var fields = this.fields(editors.mobile, model);
+
             var that = this;
-            var settings = extend({}, kendo.Template, that.options.templateSettings);
-            var paramName = settings.paramName;
+
             var editableFields = [];
-            var template = this.options.editable.template;
-            //var timezone = that.options.timezone;
 
-            if (template) {
-                if (typeof template === STRING) {
-                    template = window.unescape(template);
-                }
-                html += (kendo.template(template, settings))(model);
-            } else {
-                for (var idx = 0, length = fields.length; idx < length; idx++) {
-                    var field = fields[idx];
-
-                    if (field.field === "startTimezone") {
-                        html += '<div class="k-popup-edit-form k-scheduler-edit-form k-scheduler-timezones" style="display:none">';
-                        html += '<div class="k-edit-form-container">';
-                        html += '<div class="k-edit-label"></div>';
-                        html += '<div class="k-edit-field"><label><input class="k-timezone-toggle" type="checkbox" />' + messages.editor.separateTimezones +'</label></div>';
-                    }
-
-                    html += '<div class="k-edit-label"><label for="' + field.field + '">' + (field.title || field.field || "") + '</label></div>';
-
-                    if ((!model.editable || model.editable(field.field))) {
-                        editableFields.push(field);
-                        html += '<div ' + kendo.attr("container-for") + '="' + field.field + '" class="k-edit-field"></div>';
-                    } else {
-                        var tmpl = "#:";
-
-                        if (field.field) {
-                            field = kendo.expr(field.field, paramName);
-                            tmpl += field + "==null?'':" + field;
-                        } else {
-                            tmpl += "''";
-                        }
-
-                        tmpl += "#";
-
-                        tmpl = kendo.template(tmpl, settings);
-
-                        html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
-                    }
-
-                    if (field.field === "endTimezone") {
-                        html += '</div></div>';
-                    }
-                }
-            }
+            html += this._buildEditTemplate(model, fields, editableFields);
 
             if (!model.isNew()) {
                 html += '<div class="k-edit-buttons"><a href="#" class="k-scheduler-delete k-button">' + removeText + '</a></div>';
@@ -1055,7 +1072,7 @@ kendo_module({
 
             var container = this.container = view.element;
 
-            that.editable = container.kendoEditable({
+            this.editable = container.kendoEditable({
                     fields: editableFields,
                     model: model,
                     clearContainer: false,
@@ -1092,6 +1109,8 @@ kendo_module({
             } else {
                 this.trigger("cancel", { container: container, model: model });
             }
+
+            return this.editable;
         },
 
         _views: function() {
@@ -1129,7 +1148,7 @@ kendo_module({
         },
 
         editEvent: function(model) {
-            this._createPopupEditor(model);
+            return this.editable = this._createPopupEditor(model);
         },
 
         close: function() {
@@ -1153,15 +1172,24 @@ kendo_module({
             }
         },
 
+        _createEndTimezoneButton: function() {
+            var messages = this.options.messages;
+            var html = "";
+
+            html += '<div class="k-edit-buttons k-state-default">';
+            html += this.createButton({ name: "savetimezone", text: messages.save }) + this.createButton({ name: "canceltimezone", text: messages.cancel });
+            html += '</div></div></div>';
+
+            return html;
+        },
+
         showDialog: function(options) {
             var html = kendo.format("<div class='k-popup-edit-form'><div class='k-edit-form-container'><p class='k-popup-message'>{0}</p>", options.text);
 
             html += '<div class="k-edit-buttons k-state-default">';
 
-            var createButton = this.options.createButton;
-
             for (var buttonIndex = 0; buttonIndex < options.buttons.length; buttonIndex++) {
-                html+= createButton(options.buttons[buttonIndex]);
+                html+= this.createButton(options.buttons[buttonIndex]);
             }
 
             html += '</div></div></div>';
@@ -1198,73 +1226,23 @@ kendo_module({
             var that = this;
             var editable = that.options.editable;
             var html = '<div ' + kendo.attr("uid") + '="' + model.uid + '" class="k-popup-edit-form k-scheduler-edit-form"><div class="k-edit-form-container">';
-            var template = editable.template;
             var messages = that.options.messages;
             var updateText = messages.save;
             var cancelText = messages.cancel;
             var deleteText = messages.destroy;
 
-            var createButton = that.options.createButton;
-            //var timezone = that.options.timezone;
-
             var fields = this.fields(editors.desktop, model);
+
+            var editableFields = [];
+
+            html += this._buildEditTemplate(model, fields, editableFields);
 
             var attr;
             var options = isPlainObject(editable) ? editable.window : {};
-            var settings = extend({}, kendo.Template, that.options.templateSettings);
-            var paramName = settings.paramName;
-            var editableFields = [];
-
-            if (template) {
-                if (typeof template === STRING) {
-                    template = window.unescape(template);
-                }
-                html += (kendo.template(template, settings))(model);
-            } else {
-
-                for (var idx = 0, length = fields.length; idx < length; idx++) {
-                    var field = fields[idx];
-
-                    if (field.field === "startTimezone") {
-                        html += '<div class="k-popup-edit-form k-scheduler-edit-form k-scheduler-timezones" style="display:none">';
-                        html += '<div class="k-edit-form-container">';
-                        html += '<div class="k-edit-label"></div>';
-                        html += '<div class="k-edit-field"><label><input class="k-timezone-toggle" type="checkbox" />' + messages.editor.separateTimezones +'</label></div>';
-                    }
-
-                    html += '<div class="k-edit-label"><label for="' + field.field + '">' + (field.title || field.field || "") + '</label></div>';
-
-                    if ((!model.editable || model.editable(field.field))) {
-                        editableFields.push(field);
-                        html += '<div ' + kendo.attr("container-for") + '="' + field.field + '" class="k-edit-field"></div>';
-                    } else {
-                        var tmpl = "#:";
-
-                        if (field.field) {
-                            field = kendo.expr(field.field, paramName);
-                            tmpl += field + "==null?'':" + field;
-                        } else {
-                            tmpl += "''";
-                        }
-
-                        tmpl += "#";
-
-                        tmpl = kendo.template(tmpl, settings);
-
-                        html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
-                    }
-
-                    if (field.field === "endTimezone") {
-                        html += '<div class="k-edit-buttons k-state-default">';
-                        html += createButton({ name: "savetimezone", text: messages.save }) + createButton({ name: "canceltimezone", text: messages.cancel });
-                        html += '</div></div></div>';
-                    }
-                }
-            }
 
             html += '<div class="k-edit-buttons k-state-default">';
-            html += createButton({ name: "update", text: updateText, attr: attr }) + createButton({ name: "canceledit", text: cancelText, attr: attr });
-            html += createButton({ name: "delete", text: deleteText, attr: attr });
+            html += this.createButton({ name: "update", text: updateText, attr: attr }) + this.createButton({ name: "canceledit", text: cancelText, attr: attr });
+            html += this.createButton({ name: "delete", text: deleteText, attr: attr });
             html += '</div></div></div>';
 
             var container = this.container = $(html)
@@ -1284,7 +1262,7 @@ kendo_module({
                     }
                 }, options));
 
-            that.editable = container.kendoEditable({
+            var editableWidget = container.kendoEditable({
                         fields: editableFields,
                         model: model,
                         clearContainer: false,
@@ -1318,6 +1296,8 @@ kendo_module({
             } else {
                 that.trigger(CANCEL, { container: container, model: model });
             }
+
+            return editableWidget;
         },
 
         _initTimezoneEditor: function(model, activator) {
@@ -2414,7 +2394,7 @@ kendo_module({
                 this._convertDates(model);
             }
 
-            editor.editEvent(model);
+            this.editable = editor.editEvent(model);
         },
 
         removeEvent: function(uid) {

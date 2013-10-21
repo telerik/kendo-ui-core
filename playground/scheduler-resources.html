@@ -157,7 +157,8 @@ k-popup-edit-form .km-actionsheet li {
                             roomId: { field: "RoomID", nullable: true },
                             atendees: { field: "Atendees", defaultValue: [] },
                             isAllDay: { type: "boolean", field: "IsAllDay" },
-                            foo: {}
+                            startTimezone: { from: "StartTimezone" },
+                            endTimezone: { from: "EndTimezone" },
                         }
                     }
                 }
