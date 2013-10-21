@@ -887,9 +887,9 @@
         /// </code>
         /// </example>
         /// 
-        public SchedulerBuilder<TModel> DataSource(Action<AjaxSchedulerDataSourceBuilder<TModel>> configurator)
+        public SchedulerBuilder<TModel> DataSource(Action<SchedulerDataSourceBuilder<TModel>> configurator)
         {
-            configurator(new AjaxSchedulerDataSourceBuilder<TModel>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
+            configurator(new SchedulerDataSourceBuilder<TModel>(Component.DataSource, this.Component.ViewContext, this.Component.UrlGenerator));
 
             return this;
         }

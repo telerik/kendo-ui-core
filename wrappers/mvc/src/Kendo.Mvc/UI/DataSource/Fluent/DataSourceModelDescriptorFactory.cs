@@ -59,7 +59,7 @@ namespace Kendo.Mvc.UI.Fluent
             model.Id = dataKey;
         }
 
-        private IGridDataKey<TModel> GetDataKeyForField(string fieldName)
+        protected IGridDataKey<TModel> GetDataKeyForField(string fieldName)
         {
             var lambdaExpression = ExpressionBuilder.Lambda<TModel>(fieldName);
             var columnType = typeof(GridDataKey<,>).MakeGenericType(new[] { typeof(TModel), lambdaExpression.Body.Type });

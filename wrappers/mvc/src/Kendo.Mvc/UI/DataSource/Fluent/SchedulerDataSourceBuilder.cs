@@ -4,10 +4,10 @@
     using System.ComponentModel;
     using System.Web.Mvc;
 
-    public class AjaxSchedulerDataSourceBuilder<TModel> : AjaxDataSourceBuilder<TModel>, IHideObjectMembers
+    public class SchedulerDataSourceBuilder<TModel> : AjaxDataSourceBuilder<TModel>, IHideObjectMembers
          where TModel : class
     {
-        public AjaxSchedulerDataSourceBuilder(DataSource dataSource, ViewContext viewContext, IUrlGenerator urlGenerator)
+        public SchedulerDataSourceBuilder(DataSource dataSource, ViewContext viewContext, IUrlGenerator urlGenerator)
             : base(dataSource, viewContext, urlGenerator)
         {
         }
@@ -20,6 +20,16 @@
             configurator(new DataSourceSchedulerFilterDescriptorFactory<TModel>(dataSource.Filters));
 
             return this;
+        }
+
+        /// <summary>
+        /// Configures Model properties
+        /// </summary>
+        public AjaxDataSourceBuilder<TModel> Model(Action<DataSourceSchedulerModelDescriptorFactory<TModel>> configurator)
+        {
+            configurator(new DataSourceSchedulerModelDescriptorFactory<TModel>((SchedulerModelDescriptor)dataSource.Schema.Model));
+
+            return (AjaxDataSourceBuilder<TModel>)this;
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]

@@ -612,6 +612,7 @@
     <Compile Include="UI\DataSource\Fluent\AjaxDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\AjaxDataSourceBuilderBase.cs" />
     <Compile Include="UI\DataSource\Fluent\ReadOnlyAjaxDataSourceBuilder.cs" />
+    <Compile Include="UI\DataSource\Fluent\DataSourceSchedulerModelDescriptorFactory.cs" />
     <Compile Include="UI\DataSource\Fluent\ServerCrudOperationBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\ServerDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceEventBuilder.cs" />
@@ -1118,7 +1119,7 @@
     <Compile Include="UI\RecurrenceEditor\ReccurenceEditor.cs" />
     <Compile Include="UI\RecurrenceEditor\RecurrenceEditorFrequency.cs" />
     <Compile Include="UI\RequestSettings.cs" />
-    <Compile Include="UI\DataSource\Fluent\AjaxSchedulerDataSourceBuilder.cs" />
+    <Compile Include="UI\DataSource\Fluent\SchedulerDataSourceBuilder.cs" />
     <Compile Include="UI\DataSource\Fluent\DataSourceSchedulerFilterDescriptorFactory.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerCustomViewBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerGroupBuilder.cs" />

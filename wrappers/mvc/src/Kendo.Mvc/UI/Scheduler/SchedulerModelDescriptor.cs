@@ -14,6 +14,8 @@
         { 
         }
 
+        public string RecurrenceId { get; set; }
+
         protected override void Serialize(IDictionary<string, object> json)
         {
             if (Id != null)
@@ -36,7 +38,12 @@
                 {
                     var updatedMember = Char.ToLowerInvariant(currentMember[0]) + currentMember.Substring(1);
                     fields[updatedMember] = field;
-                    field["field"] = currentMember;
+                    field["from"] = currentMember;
+                }
+                else if (RecurrenceId.HasValue() && currentMember == RecurrenceId)
+                {
+                    fields["recurrenceId"] = field;
+                    field["from"] = currentMember;
                 }
                 else
                 {
