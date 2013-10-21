@@ -358,43 +358,33 @@
          <script>
             $("#progressbar").kendoProgressBar({
                   min: 0,
-                  max: 100,
+                  max: 300,
                   value: 0,
-                  reverse: true,
-                  complete: function(e) {
-                    console.log("Progress completed");
-                  },
-                  animation: {
-                    duration: 400
-                  },
+                  reverse: false,
                 // min: 220,
                 // max: 300,
                 // value: 0,
                 // enable: true,
                 // showStatus: true,
-                // type: "percent",
+                   type: "value",
                 // reverse: false,
                 start: function(e) {
                     console.log("Start event. Value: " + e.value);
+                },
+                change: function(e) {
+                    $("#asdf").text(e.value);
+                    console.log("Change event. Value: " + e.value);
+                },
+                complete: function(e) {
+                    console.log("Complete event. Value: " + e.value);
                 }
-                // change: function(e) {
-                //     $("#asdf").text(e.value);
-                //     console.log("Change event. Value: " + e.value);
-                // },
-                // complete: function(e) {
-                //     console.log("Complete event. Value: " + e.value);
-                // },
-                // //animation: false
-                // "animation": {
-                //     duration: 600
-                // }
             });
 
             $("#progressbar-chunk").kendoProgressBar({
                 type: "chunk",
-                chunkCount: 4,
+                chunkCount: 5,
                 min: 0,
-                max: 10,
+                max: 0.005,
                 value: false,
                 enable: true,
                 animation: false,

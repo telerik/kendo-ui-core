@@ -141,12 +141,6 @@
                 }, 50);
             });
 
-            test("Progress direction is initially set to forward", function() {
-                var pb = new ProgressBar(container, {});
-
-                equal(pb._progressDirection, "forward");
-            });
-
             test("Progress property is set to width when orientation is horizontal", function() {
                 var pb = new ProgressBar(container, {
                     orientation: "horizontal"
@@ -470,40 +464,40 @@
             });
 
 
-            test("progressStatus field is not set when type is 'chunk'", function() {
+            test("progressStatus field is set to undefined when type is 'chunk'", function() {
                 var pb = new ProgressBar(container, {
                     type: "chunk"
                 });
 
-                ok(!pb.hasOwnProperty("progressStatus"));
+                equal(pb.progressStatus, undefined);
             });
 
-            test("progressWrapper field is not set when type is 'chunk'", function() {
+            test("progressWrapper field is set to undefined when type is 'chunk'", function() {
                 var pb = new ProgressBar(container, {
                     type: "chunk"
                 });
 
-                ok(!pb.hasOwnProperty("progressWrapper"));
+                equal(pb.progressWrapper, undefined);
             });
 
-            test("progressWrapper field is not set when value is equal to min (type='value')", function() {
+            test("progressWrapper field is set to undefined when value is equal to min (type='value')", function() {
                 var pb = new ProgressBar(container, {
                     type: "value",
                     min: 5,
                     value: 5
                 });
 
-                ok(!pb.hasOwnProperty("progressWrapper"));
+                equal(pb.progressWrapper, undefined);
             });
 
-            test("progressWrapper field is not set when value is equal to min (type='percent')", function() {
+            test("progressWrapper field is set to undefined when value is equal to min (type='percent')", function() {
                 var pb = new ProgressBar(container, {
                     type: "percent",
                     min: 5,
                     value: 5
                 });
 
-                ok(!pb.hasOwnProperty("progressWrapper"));
+                equal(pb.progressWrapper, undefined);
             });
 
             test("progressWrapper field is set when value is  not equal to min (type='value')", function() {

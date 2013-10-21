@@ -768,24 +768,6 @@
                 }, 30);
             });
 
-            asyncTest("Old value is set correctly", function(){
-                pb = createProgressbar({
-                    min: 0,
-                    max: 300,
-                    value: 0,
-                    animation: false
-                });
-
-                pb.value(40);
-
-                setTimeout(function() {
-                    equal(pb._oldValue, 40);
-
-                    start();
-                }, 30);
-            });
-
-
             // -----------------------------------------------------------------------------------
             // -----------------------------------------------------------------------------------
             module("enable", {

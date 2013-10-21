@@ -1194,84 +1194,6 @@
                 }, 120);
             });
 
-            asyncTest("Progress direction is 'forward' when the value is increased (type: 'value')", function() {
-                pb = createProgressbar({
-                    min: 0,
-                    max: 130,
-                    value: 0,
-                    animation: {
-                        duration: 10
-                    },
-                    type: "value"
-                });
-
-                pb.value(30);
-                pb.value(80);
-
-                setTimeout(function() {
-                    equal(pb._progressDirection, "forward");
-                    start();
-                }, 50);
-            });
-
-            asyncTest("Progress direction is 'forward' when the value is increased (type: 'percent')", function() {
-                pb = createProgressbar({
-                    min: 0,
-                    max: 130,
-                    value: 0,
-                    animation: {
-                        duration: 10
-                    },
-                    type: "percent"
-                });
-
-                pb.value(30);
-                pb.value(80);
-
-                setTimeout(function() {
-                    equal(pb._progressDirection, "forward");
-                    start();
-                }, 50);
-            });
-
-            asyncTest("Progress direction is 'backward' when the value is decreased (type: 'value')", function() {
-                pb = createProgressbar({
-                    min: 0,
-                    max: 130,
-                    value: 50,
-                    animation: {
-                        duration: 10
-                    },
-                    type: "value"
-                });
-
-                pb.value(30);
-
-                setTimeout(function() {
-                    equal(pb._progressDirection, "backward");
-                    start();
-                }, 30);
-            });
-
-            asyncTest("Progress direction is 'backward' when the value is decreased (type: 'percent')", function() {
-                pb = createProgressbar({
-                    min: 0,
-                    max: 130,
-                    value: 50,
-                    animation: {
-                        duration: 10
-                    },
-                    type: "percent"
-                });
-
-                pb.value(30);
-
-                setTimeout(function() {
-                    equal(pb._progressDirection, "backward");
-                    start();
-                }, 30);
-            });
-
             asyncTest("Progress wrapper width stays the same when the ProgressBar wrapper is resized and showStatus is false", function() {
                 pb = createProgressbar({
                     min: 0,
@@ -1478,7 +1400,7 @@
                         duration: 10
                     }
                 });
-
+debugger;
                 pb.value(130);
                 pb.value(50);
 

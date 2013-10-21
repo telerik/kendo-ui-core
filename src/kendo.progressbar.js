@@ -12,8 +12,6 @@ kendo_module({
         Widget = ui.Widget,
         HORIZONTAL = "horizontal",
         VERTICAL = "vertical",
-        FORWARD = "forward",
-        BACKWARD = "backward",
         DEFAULTMIN = 0,
         DEFAULTMAX = 100,
         DEFAULTVALUE = 0,
@@ -41,6 +39,7 @@ kendo_module({
         proxy = $.proxy,
         HUNDREDPERCENT = 100,
         DEFAULTANIMATIONDURATION = 400,
+        PRECISION = 3,
         templates = {
             progressStatus: "<span class='k-progress-status-wrap'><span class='k-progress-status'></span></span>"
         };
@@ -55,9 +54,7 @@ kendo_module({
 
             that._progressProperty = (options.orientation === HORIZONTAL) ? "width" : "height";
 
-            that._isStarted = that._isFinished = false;
-
-            that._progressDirection = FORWARD;
+            that._fields();
 
             options.value = that._validateValue(options.value);
 
@@ -104,7 +101,15 @@ kendo_module({
             animation: { }
         },
 
-        _validateType: function(currentType){
+        _fields: function() {
+            var that = this;
+
+            that._isStarted = that._isFinished = false;
+
+            that.progressWrapper = that.progressStatus = undefined;
+        },
+
+        _validateType: function(currentType) {
             var isValid = false;
 
             $.each(PROGRESSTYPE, function(k, type) {
@@ -167,31 +172,38 @@ kendo_module({
         _value: function(value){
             var that = this;
             var options = that.options;
-            var rounded;
+            var validated;
 
             if (value === undefined) {
                 return options.value;
             } else {
-
                 if (typeof value !== BOOLEAN) {
-                    rounded = math.round(value);
+                    value = that._roundValue(value);
 
-                    if (!isNaN(rounded)) {
-                        rounded = that._validateValue(rounded);
+                    if(!isNaN(value)) {
+                        validated = that._validateValue(value);
 
-                        if (rounded !== options.value) {
+                        if (validated !== options.value) {
                             that.wrapper.removeClass(KPROGRESSBARINDETERMINATE);
 
-                            options.value = rounded;
+                            options.value = validated;
 
                             that._change();
                         }
                     }
                 } else if (!value) {
                     that.wrapper.addClass(KPROGRESSBARINDETERMINATE);
-                    options.value = value;
+                    options.value = false;
                 }
             }
+        },
+
+        _roundValue: function(value) {
+            value = parseFloat(value);
+
+            var power = math.pow(10, PRECISION);
+
+            return math.floor(value * power) / power;
         },
 
         _validateValue: function(value) {
@@ -284,14 +296,7 @@ kendo_module({
         },
 
         _onProgressAnimateStart: function() {
-            var that = this;
-            var options = that.options;
-
-            if (that._oldValue !== undefined) {
-                that._progressDirection = (options.value >= that._oldValue) ? FORWARD : BACKWARD;
-            }
-
-            that.wrapper.find("." + KPROGRESSWRAPPER).show();
+            this.progressWrapper.show();
         },
 
         _onProgressAnimate: function(e) {
@@ -307,26 +312,24 @@ kendo_module({
             }
 
             if (options.type !== PROGRESSTYPE.CHUNK && progressInPercent <= 98) {
-                that.wrapper.find("." + KPROGRESSWRAPPER).removeClass(KPROGRESSBARCOMPLETE);
+                that.progressWrapper.removeClass(KPROGRESSBARCOMPLETE);
             }
         },
 
         _onProgressAnimateComplete: function(currentValue) {
             var that = this;
             var options = that.options;
-            var progressStatusHolder = that.wrapper.find("." + KPROGRESSSTATUS);
             var progressWrapperSize = parseFloat(that.progressWrapper[0].style[that._progressProperty]);
 
             if (options.type !== PROGRESSTYPE.CHUNK && progressWrapperSize > 98) {
                 that.progressWrapper.addClass(KPROGRESSBARCOMPLETE);
             }
 
-            //TODO check or move
             if (options.showStatus) {
                 if (options.type === PROGRESSTYPE.VALUE) {
-                    progressStatusHolder.text(currentValue);
+                    that.progressStatus.text(currentValue);
                 } else {
-                    progressStatusHolder.text(math.floor(that._calculatePercentage(currentValue)) + "%");
+                    that.progressStatus.text(math.floor(that._calculatePercentage(currentValue)) + "%");
                 }
             }
 
@@ -338,8 +341,6 @@ kendo_module({
         _onProgressUpdateAlways: function(currentValue) {
             var that = this;
             var options = that.options;
-
-            that._oldValue = currentValue;
 
             if (that._isStarted) {
                 that.trigger(CHANGE, { value: currentValue });
@@ -415,11 +416,7 @@ kendo_module({
         },
 
         _addProgressStatus: function() {
-            var that = this;
-            var size = that.wrapper.css(that._progressProperty);
-
-            that.wrapper.find("." + KPROGRESSWRAPPER).append(templates.progressStatus)
-                        .find(".k-progress-status-wrap").css(that._progressProperty, size);
+            this.progressWrapper.append(templates.progressStatus);
         },
 
         _calculateChunkSize: function() {
