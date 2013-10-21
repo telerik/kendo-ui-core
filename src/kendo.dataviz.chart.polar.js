@@ -800,7 +800,7 @@ kendo_module({
         createSegment: function(linePoints, currentSeries, seriesIx) {
             var segment,
                 pointType,
-                style = (currentSeries.line || {}).style || currentSeries.style;
+                style = currentSeries.style;
 
             if(style == SMOOTH){
                 pointType = SplineSegment;
@@ -824,7 +824,7 @@ kendo_module({
         }
     });
 
-    var RadarSplineAreaSegment = SplineAreaSegment.extend({
+    var SplineRadarAreaSegment = SplineAreaSegment.extend({
         areaPoints: function() {
             return [];
         }
@@ -839,8 +839,8 @@ kendo_module({
                 segment,
                 style = (currentSeries.line || {}).style;
 
-            if(style == SMOOTH){
-                segment = new RadarSplineAreaSegment(linePoints, prevSegment, isStacked, currentSeries, seriesIx);
+            if(style === SMOOTH){
+                segment = new SplineRadarAreaSegment(linePoints, prevSegment, isStacked, currentSeries, seriesIx);
                 segment.options.closed = true;
             }
             else {
@@ -1290,13 +1290,19 @@ kendo_module({
     );
 
     deepExtend(dataviz, {
+        PolarAreaChart: PolarAreaChart,
         PolarAxis: PolarAxis,
+        PolarLineChart: PolarLineChart,
         PolarPlotArea: PolarPlotArea,
+        RadarAreaChart: RadarAreaChart,
         RadarBarChart: RadarBarChart,
         RadarCategoryAxis: RadarCategoryAxis,
         RadarClusterLayout: RadarClusterLayout,
+        RadarLineChart: RadarLineChart,
         RadarNumericAxis: RadarNumericAxis,
         RadarPlotArea: RadarPlotArea,
+        SplinePolarAreaSegment:  SplinePolarAreaSegment,
+        SplineRadarAreaSegment: SplineRadarAreaSegment,
         RadarStackLayout: RadarStackLayout
     });
 

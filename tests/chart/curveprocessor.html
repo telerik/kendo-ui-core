@@ -59,14 +59,14 @@
             module("curveprocessor / orientation", {
             });
 
-            test("the axes are not inverted for ascending by X points", function() {
+            test("the axis are not inverted for ascending by X points", function() {
                 var p0 = new Point(1,2),
                     p1 = new Point(1.1, 3),
                     p2 = new Point(4, 3);
                 ok(!processor.invertAxis(p0,p1,p2));
             });
 
-            test("the axes are not inverted for descending by X points", function() {
+            test("the axis are not inverted for descending by X points", function() {
                 var p0 = new Point(4,2),
                     p1 = new Point(1.1, 3),
                     p2 = new Point(1, 3);
@@ -74,14 +74,14 @@
                 ok(!processor.invertAxis(p0,p1,p2));
             });
 
-            test("the axes are inverted for descending by y points when the third point is below the line determined by the first two", function() {
+            test("the axis are inverted for descending by y points when the third point is below the line determined by the first two", function() {
                 var p0 = new Point(4, 3),
                     p1 = new Point(6, 2),
                     p2 = new Point(4, 1)
                 ok(processor.invertAxis(p0,p1,p2));
             });
 
-            test("the axes are inverted for ascending by y points when the third point is above the line determined by the first two", function() {
+            test("the axis are inverted for ascending by y points when the third point is above the line determined by the first two", function() {
                 var p0 = new Point(4, 2),
                     p1 = new Point(6, 3),
                     p2 = new Point(4, 4);
@@ -89,14 +89,14 @@
                 ok(processor.invertAxis(p0,p1,p2));
             });
 
-            test("the axes are not inverted when the third point is below the line determined by the first two", function() {
+            test("the axis are not inverted when the third point is below the line determined by the first two", function() {
                 var p0 = new Point(1, 1),
                     p1 = new Point(3, 3),
                     p2 = new Point(2.5, 2);
                 ok(!processor.invertAxis(p0,p1,p2));
             });
 
-            test("the axes are not inverted when the third point is above the line determined by the first two", function() {
+            test("the axis are not inverted when the third point is above the line determined by the first two", function() {
                 var p0 = new Point(3, 3),
                     p1 = new Point(1, 1),
                     p2 = new Point(1.5, 2);
@@ -104,7 +104,7 @@
                 ok(!processor.invertAxis(p0,p1,p2));
             });
 
-            test("the axes are inverted for descending by y points when the first two points have equal x value", function() {
+            test("the axis are inverted for descending by y points when the first two points have equal x value", function() {
                 var p0 = new Point(2, 5),
                     p1 = new Point(2, 4),
                     p2 = new Point(4, 3);
@@ -113,7 +113,7 @@
             });
 
 
-            test("the axes are inverted for ascending by y points when the first two points have equal x value", function() {
+            test("the axis are inverted for ascending by y points when the first two points have equal x value", function() {
                 var p0 = new Point(2, 2),
                     p1 = new Point(2, 3),
                     p2 = new Point(4, 4);
@@ -121,7 +121,7 @@
                 ok(processor.invertAxis(p0,p1,p2));
             });
 
-            test("the axes are not inverted when the points are on the same line", function() {
+            test("the axis are not inverted when the points are on the same line", function() {
                 var p0 = new Point(1, 1),
                     p1 = new Point(3, 3),
                     p2 = new Point(4, 4);
@@ -174,7 +174,7 @@
                 equal(result, -1 / 2);
             });
 
-            test("tangent is correctly calculated for inverted axes", function() {
+            test("tangent is correctly calculated for inverted axis", function() {
                 var p0 = new Point(1, 5),
                     p1 = new Point(3, 4),
                     result = processor.tangent(p0,p1, "y", "x");
@@ -202,7 +202,7 @@
                 equal(round(controlPoint.y, COORD_PRECISION), expectedY, "correct Y");
             });
 
-            test("first control point is correctly calculated for inverted axes", function() {
+            test("first control point is correctly calculated for inverted axis", function() {
                 var p0 = new Point(3, 1),
                     p1 = new Point(4, 2),
                     tangent = 1.5,
@@ -224,7 +224,7 @@
                 equal(round(controlPoint.y, COORD_PRECISION), expectedY, "correct Y");
             });
 
-            test("second control point is correctly calculated for inverted axes", function() {
+            test("second control point is correctly calculated for inverted axis", function() {
                 var p0 = new Point(3, 1),
                     p1 = new Point(5, 2),
                     tangent = 1.5,

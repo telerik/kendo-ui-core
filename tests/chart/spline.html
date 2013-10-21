@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>spline</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+
+            (function() {
+                var dataviz = kendo.dataviz,
+                    Point = dataviz.Point2D,
+                    CurveProcessor = dataviz.CurveProcessor,
+                    processor = new CurveProcessor(false),
+                    AreaChart = dataviz.AreaChart,
+                    LineChart = dataviz.LineChart,
+                    LineSegment = dataviz.LineSegment,
+                    ScatterLineChart = dataviz.ScatterLineChart,
+                    RadarAreaChart = dataviz.RadarAreaChart,
+                    SplineRadarAreaSegment = dataviz.SplineRadarAreaSegment,
+                    RadarLineChart = dataviz.RadarLineChart,
+                    PolarAreaChart = dataviz.PolarAreaChart,
+                    PolarLineChart = dataviz.PolarLineChart,                    
+                    SplineSegment = dataviz.SplineSegment,
+                    SplineAreaSegment = dataviz.SplineAreaSegment,
+                    SplinePolarAreaChart = dataviz.SplinePolarAreaChart,
+                    SplinePolarAreaSegment = dataviz.SplinePolarAreaSegment,
+                    SMOOTH = "smooth",                    
+                    linePoints = [Point(1, 3), Point(3, 1), Point(5, 3)],
+                    areaPoints = [Point(1, 3), Point(5, 3)]
+                    curvePoints = processor.process(linePoints),
+                    seriesData = [1,3,5];
+                
+                function MethodMocker(){                    
+                    this._original = {};
+                }
+                
+                MethodMocker.prototype = {
+                    mock: function(fn, fnName, callback, replace){
+                        var that = this;
+                        that._original[fnName] = fn[fnName];
+                        fn[fnName] = function(){ 
+                            if(replace){
+                                return  callback.apply(this, arguments);
+                            }
+                            callback.apply(this, arguments);
+                            return that._original[fnName].apply(this, arguments);
+                        };
+                    },
+                    restore: function(fn,fnName){
+                        fn[fnName] = this._original[fnName];
+                        delete this._original[fnName];
+                    }
+                };
+                var methodMocker = new MethodMocker();                
+                
+                module("LineChart smooth", {
+                    setup: function() {                         
+                        methodMocker.mock(LineSegment.fn, "points", function(){
+                            return this.linePoints;
+                        }, true);
+                    },
+                    teardown: function() {
+                        methodMocker.restore(LineSegment.fn, "points");
+                    }
+                });                
+                
+                test("SplineSegment is created for a line chart when the style is set to smooth", function() {        
+                    var segment = LineChart.fn.createSegment([], {data: [], style: SMOOTH}, 0);                     
+                    ok(segment instanceof SplineSegment);
+                });
+                
+                test("control points are added for a SplineSegment", function() { 
+                    var segment = LineChart.fn.createSegment(linePoints, {data: seriesData, style: SMOOTH}, 0);                              
+                    deepEqual(segment.points(), curvePoints);
+                });
+
+                test("cubic curve is created for a SplineSegment", function() { 
+                    var view = new ViewStub(),
+                        segment = LineChart.fn.createSegment(linePoints, {data: seriesData, style: SMOOTH}, 0);
+                        
+                    segment.getViewElements(view);    
+                    deepEqual(view.log.cubicCurve[0].points, curvePoints, "curve points are passed");
+                    ok(!view.log.cubicCurve[0].areaPoints, "no area points are passed");
+                });                
+                
+                module("area chart smooth", {
+                    setup: function() {                         
+                        methodMocker.mock(LineSegment.fn, "points", function(){
+                            return this.linePoints;
+                        }, true);
+                        methodMocker.mock(SplineAreaSegment.fn, "areaPoints", function(points){
+                            return [points[0], points[points.length - 1]];
+                        }, true);
+                    },
+                    teardown: function() {
+                        methodMocker.restore(LineSegment.fn, "points");
+                        methodMocker.restore(SplineAreaSegment.fn, "areaPoints");
+                    }
+                });   
+                
+                test("SplineAreaSegment is created for an area chart when the line style is set to smooth", function() {        
+                    var segment = AreaChart.fn.createSegment([], {data: [], line: {style: SMOOTH}}, 0);                     
+                    ok(segment instanceof SplineAreaSegment);
+                });
+                
+                test("control points are added for a SplineAreaSegment", function() { 
+                    var segment = AreaChart.fn.createSegment(linePoints, {data: seriesData, line: {style: SMOOTH}}, 0);                              
+                    deepEqual(segment.points(), curvePoints);
+                });  
+
+                test("cubic curve with area points is created for a SplineAreaSegment", function() { 
+                    var view = new ViewStub(),
+                        segment = AreaChart.fn.createSegment(linePoints, {data: seriesData, line: {style: SMOOTH}}, 0);       
+                    
+                    segment.getViewElements(view);    
+                    deepEqual(view.log.cubicCurve[0].points, curvePoints, "curve points are passed");
+                    ok(view.log.cubicCurve[0].areaPoints, areaPoints, "area points are passed");
+                });                 
+                
+                module("scatter line chart smooth", {
+                });
+                
+                test("SplineSegment is created for a scatter line chart when the style is set to smooth", function() {        
+                    var segment = ScatterLineChart.fn.createSegment([], {data: [], style: SMOOTH}, 0);                     
+                    ok(segment instanceof SplineSegment);
+                });
+
+                test("SplineSegment is created for a radar line chart when the style is set to smooth", function() {        
+                    var segment = RadarLineChart.fn.createSegment([], {data: [], style: SMOOTH}, 0);                     
+                    ok(segment instanceof SplineSegment);
+                }); 
+
+                test("SplineSegment is created for a polar line chart when the style is set to smooth", function() {        
+                    var segment = PolarLineChart.fn.createSegment([], {data: [], style: SMOOTH}, 0);                     
+                    ok(segment instanceof SplineSegment);
+                });
+
+                test("SplineRadarAreaSegment is created for a radar area chart when the line style is set to smooth", function() {        
+                    var segment = RadarAreaChart.fn.createSegment([], {data: [], line: {style: SMOOTH}}, 0);                     
+                    ok(segment instanceof SplineRadarAreaSegment);
+                });                
+                
+                test("SplinePolarAreaSegment is created for a radar area chart when the line style is set to smooth", function() {        
+                    var segment = PolarAreaChart.fn.createSegment([], {data: [], line: {style: SMOOTH}}, 0);                     
+                    ok(segment instanceof SplinePolarAreaSegment);
+                });                  
+                
+            })();
+
+        </script>
+
+        <h1 id="qunit-header">spline</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container">
+        </div>
+    </body>
+</html>        
