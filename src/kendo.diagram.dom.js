@@ -209,6 +209,7 @@ kendo_module({
                         this.visual.remove(this.contentVisual);
                     }
                     this.contentVisual = undefined;
+                    this.options.content= "";
                 }
                 else {
                     var bounds = this.bounds();
@@ -227,6 +228,7 @@ kendo_module({
 
                         this.visual.append(this.contentVisual);
                     }
+                    this.options.content = content.toString();
                     this.contentVisual.redraw();
                     this.refresh();
                 }
@@ -290,7 +292,8 @@ kendo_module({
             connectors: diagram.DefaultConnectors,
             rotation: {
                 angle: 0
-            }
+            },
+            content: ""
         },
         bounds: function (value) {
             var point, size;
@@ -337,11 +340,13 @@ kendo_module({
          * @returns {Shape}
          */
         clone: function () {
-            var json = this.serialize(),
-                clone = new Shape(json.options);
+            var json = this.serialize();
+            json.options.id= kendo.diagram.randomId();
+            var clone = new Shape(json.options);
             clone.diagram = this.diagram;
-            clone.id = kendo.diagram.randomId();
-            clone.visual.native.id = clone.id;
+            /*clone.visual.native.id = clone.id;
+             clone.visual.id = clone.id;
+             clone.options.id = clone.id;*/
             return clone;
         },
 
