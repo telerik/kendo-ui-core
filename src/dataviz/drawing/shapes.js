@@ -31,7 +31,7 @@
             group.children = [];
         },
 
-        geometryChange: util.geometryChange,
+        geometryChange: util.mixins.geometryChange,
 
         childrenChange: function(action, items, index) {
             if (this.observer) {
@@ -66,7 +66,7 @@
             });
         },
 
-        geometryChange: util.geometryChange,
+        geometryChange: util.mixins.geometryChange,
 
         optionsChange: function(e) {
             if (this.observer) {
@@ -126,7 +126,7 @@
             segment.controlOut.observer = this;
         },
 
-        geometryChange: util.geometryChange,
+        geometryChange: util.mixins.geometryChange,
     });
 
     var Path = Shape.extend({

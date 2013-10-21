@@ -21,7 +21,7 @@
             this.observer = null;
         },
 
-        geometryChange: util.geometryChange,
+        geometryChange: util.mixins.geometryChange,
 
         set: function(field, value) {
             this[field] = value;
@@ -97,7 +97,7 @@
             this.p1.observer = this;
         },
 
-        geometryChange: util.geometryChange,
+        geometryChange: util.mixins.geometryChange,
 
         width: function() {
             return this.p1.x - this.p0.x;
@@ -117,7 +117,7 @@
             this.center.observer = this;
         },
 
-        geometryChange: util.geometryChange,
+        geometryChange: util.mixins.geometryChange,
 
         equals: function(other) {
             return  other &&

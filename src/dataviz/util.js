@@ -53,7 +53,9 @@
     // Exports ================================================================
     deepExtend(dataviz, {
         util: {
-            geometryChange: geometryChange,
+            mixins: {
+                geometryChange: geometryChange,
+            },
 
             alignToPixel: alignToPixel,
             defined: defined,
