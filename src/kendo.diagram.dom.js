@@ -1063,8 +1063,7 @@ kendo_module({
             // TODO: We may consider using real Clipboard, but is very hacky to do so.
             that._clipboard = [];
             that._drop();
-            this.resizingAdorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable});
-            this._adorn(this.resizingAdorner, true);
+
         },
         options: {
             name: "Diagram",
@@ -1696,6 +1695,8 @@ kendo_module({
             if (this.options.autoBind) {
                 this.dataSource.fetch();
             }
+            this.resizingAdorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable});
+            this._adorn(this.resizingAdorner, true);
         },
         _dataSource: function () {
             var that = this,
