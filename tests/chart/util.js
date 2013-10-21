@@ -984,8 +984,6 @@ function serializeFontCache() {
     cache.put("Chart Titlefont16px Arial,Helvetica,sans-serifundefined", {"width":71,"height":19,"baseline":15});
     cache.put("$2.00font12px sans-serifundefined", {"width":31,"height":15,"baseline":12});
     cache.put("$1.00font12px sans-serifundefined", {"width":31,"height":15,"baseline":12});
-    cache.put("2font12px sans-serifundefined", {"width":7,"height":15,"baseline":12});
-    cache.put("3font12px sans-serifundefined", {"width":7,"height":15,"baseline":12});
     cache.put("4font12px sans-serifundefined", {"width":7,"height":15,"baseline":12});
     cache.put("5font12px sans-serifundefined", {"width":7,"height":15,"baseline":12});
     cache.put("6font12px sans-serifundefined", {"width":7,"height":15,"baseline":12});
@@ -994,8 +992,6 @@ function serializeFontCache() {
     cache.put("140font12px sans-serifundefined", {"width":21,"height":15,"baseline":12});
     cache.put("40font12px sans-serifundefined", {"width":14,"height":15,"baseline":12});
     cache.put("Bfont12px Arial,Helvetica,sans-serifundefined", {"width":8,"height":15,"baseline":12});
-    cache.put("1font12px sans-serifundefined", {"width":7,"height":15,"baseline":12});
-    cache.put("1font11px Arial,Helvetica,sans-serifundefined", {"width":6,"height":14,"baseline":11});
     cache.put("$1.00 $10.00font12px sans-serifundefined", {"width":72,"height":15,"baseline":12});
     cache.put("$2.00 $20.00font12px sans-serifundefined", {"width":72,"height":15,"baseline":12});
     cache.put("200font12px Arial,Helvetica,sans-serif0", {"width":21,"height":15,"baseline":12});
@@ -1007,7 +1003,6 @@ function serializeFontCache() {
     cache.put("6font12px Arial,Helvetica,sans-serif0", {"width":7,"height":15,"baseline":12});
     cache.put("8font12px Arial,Helvetica,sans-serif0", {"width":7,"height":15,"baseline":12});
     cache.put("12font12px Arial,Helvetica,sans-serif0", {"width":14,"height":15,"baseline":12});
-    cache.put("Afont12px Arial,Helvetica,sans-serifundefined", {"width":7,"height":15,"baseline":12});
     cache.put("A-testfont12px Arial,Helvetica,sans-serifundefined", {"width":31,"height":15,"baseline":12});
     cache.put("5font12px Arial,Helvetica,sans-serif0", {"width":7,"height":15,"baseline":12});
     cache.put("10font12px Arial,Helvetica,sans-serif0", {"width":14,"height":15,"baseline":12});
@@ -1030,4 +1025,12 @@ function serializeFontCache() {
     cache.put("3.5font12px Arial,Helvetica,sans-serif0", {"width":17,"height":15,"baseline":12});
     cache.put("4font12px Arial,Helvetica,sans-serif0", {"width":7,"height":15,"baseline":12});
     cache.put("4.5font12px Arial,Helvetica,sans-serif0", {"width":17,"height":15,"baseline":12});
+    cache.put("3font12px sans-serifundefined", {"width":7,"height":15,"baseline":12});
+    cache.put("1font12px sans-serifundefined", {"width":7,"height":15,"baseline":12});
+    cache.put("2font12px sans-serifundefined", {"width":7,"height":15,"baseline":12});
+    cache.put("7font12px sans-serifundefined", {"width":7,"height":15,"baseline":12});
+    cache.put("My Template 2font12px sans-serifundefined", {"width":79,"height":15,"baseline":12});
+    cache.put("My Template 7font12px sans-serifundefined", {"width":79,"height":15,"baseline":12});
+    cache.put("Afont12px Arial,Helvetica,sans-serifundefined", {"width":7,"height":15,"baseline":12});
+    cache.put("1font11px Arial,Helvetica,sans-serifundefined", {"width":6,"height":14,"baseline":11});
 })();
