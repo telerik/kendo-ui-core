@@ -37,7 +37,7 @@
     // Template helpers =======================================================
     function renderAttr(name, value) {
         return defined(value) ? " " + name + "='" + value + "' " : "";
-    };
+    }
 
     function renderSize(size) {
         if (typeof size !== "string") {
@@ -58,7 +58,7 @@
     deepExtend(dataviz, {
         util: {
             mixins: {
-                geometryChange: geometryChange,
+                geometryChange: geometryChange
             },
 
             alignToPixel: alignToPixel,

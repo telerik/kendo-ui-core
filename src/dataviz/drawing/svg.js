@@ -38,13 +38,13 @@
 
     // SVG rendering surface =============================================================
     var Surface = Observable.extend({
-        init: function(wrap, options) {
-            var surface = this;
+        init: function(container, options) {
+            Observable.fn.init.call(this);
 
-            Observable.fn.init.call();
+            this.options = deepExtend({}, this.options, options);
 
-            surface.rootNode = new RootNode();
-            surface._appendTo(wrap);
+            this._root = new RootNode();
+            this._appendTo(container);
         },
 
         options: {
@@ -56,12 +56,12 @@
             "click"
         ],
 
-        append: function() {
-            this.rootNode.load(arguments);
+        draw: function(element) {
+            this._root.load([element]);
         },
 
         clear: function() {
-            this.rootNode.empty();
+            this._root.clear();
         },
 
         _template: renderTemplate(
@@ -69,46 +69,20 @@
             "<svg xmlns='" + SVG_NS + "' version='1.1' " +
             "width='#= kendo.dataviz.util.renderSize(d.options.width) #' " +
             "height='#= kendo.dataviz.util.renderSize(d.options.height) #' " +
-            "style='position: relative; display: #= d.display #;'></svg>"
+            "style='position: relative;'></svg>"
         ),
 
-        _appendTo: function(wrap) {
+        _appendTo: function(container) {
             var surface = this;
 
-            renderSVG(wrap, surface._template(surface));
-            surface.element = wrap.firstElementChild;
-            surface.rootNode.attachTo(surface.element);
+            renderSVG(container, surface._template(surface));
+            surface.element = container.firstElementChild;
+            surface._root.attachTo(surface.element);
         }
     });
 
     // SVG Node ================================================================
     var Node = BaseNode.extend({
-        attachTo: function(domElement) {
-            if (!this.element) {
-                var container = doc.createElement("div");
-                renderSVG(container,
-                    "<?xml version='1.0' ?>" +
-                    "<svg xmlns='" + SVG_NS + "' version='1.1'>" +
-                    this.render() +
-                    "</svg>"
-                );
-
-                this.element = container.firstElementChild.lastChild;
-                if (this.element) {
-                    domElement.appendChild(this.element);
-                }
-            }
-        },
-
-        detach: function() {
-            var element = this.element;
-
-            if (element) {
-                element.parentNode.removeChild(element);
-                this.element = null;
-            }
-        },
-
         load: function(elements) {
             var node = this,
                 element = node.element,
@@ -131,31 +105,40 @@
                     childNode.load(children);
                 }
 
-                node.childNodes.push(childNode);
+                node.append(childNode);
+
                 if (element) {
                     childNode.attachTo(element);
                 }
             }
         },
 
-        unload: function(index, count) {
-            for (var i = index; i < count; i++) {
-                this.childNodes[i].detach();
-                this.childNodes[i].parent = null;
+        attachTo: function(domElement) {
+            if (!this.element) {
+                var container = doc.createElement("div");
+                renderSVG(container,
+                    "<svg xmlns='" + SVG_NS + "' version='1.1'>" +
+                    this.render() +
+                    "</svg>"
+                );
+
+                var element = container.firstChild.firstChild;
+                if (element) {
+                    domElement.appendChild(element);
+                    this.element = element;
+                }
             }
-
-            this.childNodes.splice(index, count);
         },
 
-        render: function() {
-            return this._template(this);
-        },
-
-        _template: renderTemplate(
-            "#= d._renderChildren() #"
+        template: renderTemplate(
+            "#= d.renderChildren() #"
         ),
 
-        _renderChildren: function() {
+        render: function() {
+            return this.template(this);
+        },
+
+        renderChildren: function() {
             var nodes = this.childNodes,
                 output = "",
                 i;
@@ -165,6 +148,17 @@
             }
 
             return output;
+        },
+
+        clear: function() {
+            var element = this.element;
+
+            if (element) {
+                element.parentNode.removeChild(element);
+                this.element = null;
+            }
+
+            BaseNode.fn.clear.call(this);
         }
     });
 
@@ -186,8 +180,8 @@
             }
         },
 
-        _template: renderTemplate(
-            "<g>#= d._renderChildren() #</g>"
+        template: renderTemplate(
+            "<g>#= d.renderChildren() #</g>"
         )
     });
 
@@ -198,8 +192,8 @@
             Node.fn.init.call(node, srcElement);
         },
 
-        geometryChange: function(e) {
-            this._syncSegments();
+        geometryChange: function() {
+            this.syncSegments();
             this.invalidate();
         },
 
@@ -243,7 +237,7 @@
             }
         },
 
-        _template: renderTemplate(
+        template: renderTemplate(
             "<path #= d.renderId() #" +
             //"style='display: #= d.renderDisplay() #; " +
             //"#= d.renderCursor() #' " +
@@ -259,7 +253,7 @@
             "></path>"
         ),
 
-        _syncSegments: function(e) {
+        syncSegments: function() {
             if (this.element) {
                 $(this.element).attr({
                     d: this.renderPoints()
@@ -307,7 +301,7 @@
     })();
 
     // Exports ================================================================
-    deepExtend(dataviz, {
+    deepExtend(drawing, {
         svg: {
             Surface: Surface,
             Node: Node,

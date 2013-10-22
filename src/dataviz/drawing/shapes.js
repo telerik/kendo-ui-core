@@ -41,7 +41,7 @@
             this.childrenChange("add", arguments);
         },
 
-        empty: function() {
+        clear: function() {
             var items = this.children;
             this.children = [];
             this.childrenChange("remove", items, 0);

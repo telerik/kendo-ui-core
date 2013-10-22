@@ -19,8 +19,8 @@
     <input type="button" value="Toggle color" onclick="toggleColor()" />
     <input type="button" value="Stop" onclick="stop()" />
     <select id="surfaceType" onchange="reset()">
-        <option value="svg">SVG</option>
-        <option value="canvas" selected="selected">Canvas</option>
+        <option value="svg" selected="selected">SVG</option>
+        <option value="canvas">Canvas</option>
         <option value="vml" disabled="disabled">VML</option>
     </select>
     <script>
@@ -75,8 +75,8 @@
         stop();
 
         var surfaceType = $("#surfaceType").val();
-        surface = new dataviz[surfaceType].Surface($("#wrap")[0]);
-        surface.append(clock);
+        surface = new drawing[surfaceType].Surface($("#wrap")[0]);
+        surface.draw(clock);
 
         interval = setInterval(function() {
             seconds.segments[1].anchor.rotate(center, -6);
@@ -106,7 +106,7 @@
     }
 
     function removeTicks() {
-        ticks.empty();
+        ticks.clear();
     }
 
     function toggleTicks() {

@@ -52,7 +52,7 @@
         group.append(child);
     });
 
-    test("empty triggers childrenChange", function() {
+    test("clear triggers childrenChange", function() {
         var group = new Group();
         var child = new Group();
         group.append(child);
@@ -63,7 +63,7 @@
             }
         }
 
-        group.empty();
+        group.clear();
     });
 
     // ------------------------------------------------------------

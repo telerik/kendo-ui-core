@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DataViz / Drawing / SVG</title>
+    <script src="../../jquery-loader.js"></script>
+    <script src="../../qunit/qunit/qunit.js"></script>
+    <script src="../../kendo-test-helpers.js"></script>
+    <link rel="stylesheet" href="../../qunit/qunit/qunit.css">
+</head>
+<body>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.dataviz.core.js"></script>
+    <script src="../../../src/dataviz/util.js"></script>
+    <script src="../../../src/dataviz/geometry.js"></script>
+    <script src="../../../src/dataviz/drawing/core.js"></script>
+    <script src="../../../src/dataviz/drawing/shapes.js"></script>
+    <script src="../../../src/dataviz/drawing/svg.js"></script>
+
+    <script>
+    var dataviz = kendo.dataviz,
+
+        g = dataviz.geometry,
+        Point = g.Point,
+
+        d = dataviz.drawing,
+        Group = d.Group,
+        Path = d.Path,
+
+        svg = d.svg,
+        Node = svg.Node,
+        GroupNode = svg.GroupNode,
+        PathNode = svg.PathNode,
+        Surface = svg.Surface;
+
+    // ------------------------------------------------------------
+    var container,
+        surface;
+
+    module("Surface", {
+        setup: function() {
+            container = $("#container")[0];
+            surface = new Surface(container);
+        }
+    });
+
+    test("sets initial options", function() {
+        surface = new Surface(container, { foo: true });
+        ok(surface.options.foo);
+    });
+
+    test("appends svg element to container", function() {
+        equal($("#container svg").length, 1);
+    });
+
+    test("draw attaches element to root node", function() {
+        var group = new Group();
+        surface.draw(group);
+
+        deepEqual(surface._root.childNodes[0].srcElement, group);
+    });
+
+    test("clear removes element from root node", function() {
+        var group = new Group();
+        surface.draw(group);
+        surface.clear();
+
+        equal(surface._root.childNodes.length, 0);
+    });
+
+    // ------------------------------------------------------------
+    var node;
+
+    module("Node", {
+        setup: function() {
+            node = new Node();
+        }
+    });
+
+    test("load appends GroupNode", function() {
+        node.append = function(child) {
+            ok(child instanceof GroupNode);
+        };
+
+        node.load([new Group()]);
+    });
+
+    test("load appends PathNode", function() {
+        node.append = function(child) {
+            ok(child instanceof PathNode);
+        };
+
+        node.load([new Path()]);
+    });
+
+    test("load appends child nodes", function() {
+        var parentGroup = new Group()
+        var childGroup = new Group();
+        parentGroup.append(childGroup);
+
+        node.load([parentGroup]);
+
+        ok(node.childNodes[0].childNodes[0] instanceof GroupNode);
+    });
+
+    test("attachTo renders children", 2, function() {
+        var ChildNode = Node.extend({});
+
+        var child = new ChildNode();
+        node.append(child);
+
+        var grandChild = new ChildNode();
+        child.append(grandChild);
+
+        ChildNode.fn.render = function() {
+            ok(true);
+            Node.fn.render.call(this);
+        };
+
+        node.attachTo(document.createElement("div"));
+    });
+
+    // ------------------------------------------------------------
+    var groupNode;
+
+    module("GroupNode", {
+        setup: function() {
+            groupNode = new GroupNode();
+        }
+    });
+
+    test("attachTo sets element", function() {
+        var container = document.createElement("div");
+
+        groupNode.attachTo(container);
+
+        ok(groupNode.element);
+    });
+    </script>
+
+    <h1 id="qunit-header"></h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+
+    <div id="container"></div>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+</body>
+</html>

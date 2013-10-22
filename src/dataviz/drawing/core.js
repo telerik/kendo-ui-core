@@ -14,24 +14,33 @@
     // Stage node ============================================================
     var BaseNode = Class.extend({
         init: function(srcElement) {
-            var node = this;
-
-            node.childNodes = [];
-
+            this.childNodes = [];
             this.parent = null;
 
             if (srcElement) {
-                node.srcElement = srcElement;
-                srcElement.observer = node;
+                this.srcElement = srcElement;
+                srcElement.observer = this;
             }
         },
 
         load: noop,
 
-        unload: noop,
+        append: function(node) {
+            this.childNodes.push(node);
+            node.parent = this;
+        },
 
-        empty: function() {
-            this.unload(0, this.childNodes.length);
+        remove: function(index, count) {
+            for (var i = index; i < count; i++) {
+                this.childNodes[i].clear();
+            }
+            this.childNodes.splice(index, count);
+
+            this.parent = null;
+        },
+
+        clear: function() {
+            this.remove(0, this.childNodes.length);
         },
 
         invalidate: function() {
@@ -50,10 +59,9 @@
 
         childrenChange: function(e) {
             if (e.action === "add") {
-                // TODO: Support mid-array inserts
                 this.load(e.items);
             } else if (e.action === "remove") {
-                this.unload(e.index, e.items.length);
+                this.remove(e.index, e.items.length);
             }
 
             this.invalidate();
