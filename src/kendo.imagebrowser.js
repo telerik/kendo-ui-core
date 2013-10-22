@@ -1018,7 +1018,7 @@ kendo_module({
 
         _click: function(e) {
             e.preventDefault();
-            this._update(this._path($(e.target).prevAll("a:not(.k-i-arrow-n)").andSelf()));
+            this._update(this._path($(e.target).prevAll("a:not(.k-i-arrow-n)").addBack()));
         },
 
         _rootClick: function(e) {
@@ -1126,7 +1126,7 @@ kendo_module({
                     if (index == links.length - 1) {
                         a.width(width);
                     } else {
-                        a.prev().andSelf().hide();
+                        a.prev().addBack().hide();
                     }
                 }
             });

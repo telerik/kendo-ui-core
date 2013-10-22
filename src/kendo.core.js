@@ -2613,13 +2613,13 @@ function pad(number, digits, end) {
     kendo.init = function(element) {
         var roles = kendo.rolesFromNamespaces(slice.call(arguments, 1));
 
-        $(element).find("[data-" + kendo.ns + "role]").andSelf().each(function(){
+        $(element).find("[data-" + kendo.ns + "role]").addBack().each(function(){
             kendo.initWidget(this, {}, roles);
         });
     };
 
     kendo.destroy = function(element) {
-        $(element).find("[data-" + kendo.ns + "role]").andSelf().each(function(){
+        $(element).find("[data-" + kendo.ns + "role]").addBack().each(function(){
             var widget = kendo.widgetInstance($(this));
 
             if (widget) {
@@ -2856,7 +2856,7 @@ function pad(number, digits, end) {
     }
 
     function visible(element) {
-        return !$(element).parents().andSelf().filter(function() {
+        return !$(element).parents().addBack().filter(function() {
             return $.css(this,"visibility") === "hidden" || $.expr.filters.hidden(this);
         }).length;
     }
