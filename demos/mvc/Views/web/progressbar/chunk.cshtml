@@ -2,7 +2,8 @@
     <div class="demo-section">
         <h2>Profile Completeness</h2>
         <div class="completenessLevel">
-            <h2>0%</h2><div id="profileCompleteness"></div>
+            <h2>40%</h2>
+            <div id="profileCompleteness"></div>
         </div>
     </div>
 
@@ -20,11 +21,15 @@
                 </li>
                 <li>
                     <label>Birthday</label>
-                    <input id="birthdayInput" type="text" name="birthday" value="" style="width: 265px;" />
+                    <input id="birthdayInput" type="date" name="birthday" value="" style="width: 265px;" />
                 </li>
                 <li>
                     <label>Gender</label>
-                    <input id="genderInput"  type="text" name="gender" value="1" style="width: 265px;" />
+                    <select id="genderInput" name="gender" style="width: 265px;">
+                        <option value="male" selected>Male</option>
+                        <option value="female">Female</option>
+                        <option value="notsay">Rather not say</option>
+                    </select>
                 </li>
                 <li>
                     <label>Occupation</label>
@@ -36,39 +41,36 @@
 
     <script>
         $(document).ready(function () {
-            $("#profileCompleteness").kendoProgressBar({
+            var pb = $("#profileCompleteness").kendoProgressBar({
                 type: "chunk",
                 chunkCount: 5,
                 min: 0,
-                max: 5
-            });
-            
-            var data = [
-                { text: "Male", value: "1" },
-                { text: "Female", value: "2" },
-                { text: "Other", value: "3" }
-            ];
-            
-            $("#genderInput").kendoDropDownList({
-                dataTextField: "text",
-                dataValueField: "value",
-                dataSource: data,
-                index: 0
-            });
+                max: 5,
+                value: 2
+            }).data("kendoProgressBar");
+
+            $("#genderInput").kendoDropDownList();
 
             $("#birthdayInput").kendoDatePicker();
-        });
 
-        $(".forms input").change(function () {
-            var completeness = 5;
-            $(".forms input").each(function () {
-                if (this.value == "") {
-                    completeness--;
+            $("#birthdayInput").change(function (e) {
+                var currentDate = kendo.parseDate(this.value);
+                if (!currentDate) {
+                    this.value = "";
                 }
             });
 
-            $("#profileCompleteness").data("kendoProgressBar").value(completeness);
-            $(".completenessLevel h2").text((completeness * 20) + "%");
+            $(".forms input").change(function () {
+                var completeness = 5;
+                $(".forms input").each(function () {
+                    if (this.value == "") {
+                        completeness--;
+                    }
+                });
+
+                pb.value(completeness);
+                $(".completenessLevel h2").text((completeness * 20) + "%");
+            });
         });
     </script>
 

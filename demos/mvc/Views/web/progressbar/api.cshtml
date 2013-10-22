@@ -20,6 +20,14 @@
                 </li>
             </ul>
         </div>
+        <div class="config-section">
+            <span class="configHead">Indeterminate</span>
+            <ul class="options">
+                <li>
+                    <button class="k-button" id="setIndeterminate">Set indeterminate</button>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="demo-section">
         <div id="progressBar"></div>
@@ -44,6 +52,10 @@
                 alert("Current ProgressBar value is: " + pb.value());
             });
 
+            $("#setIndeterminate").click(function () {
+                pb.value(false);
+            });
+
             $("#enableProgressBar").click(function () {
                 pb.enable();
             });
@@ -55,6 +67,10 @@
     </script>
 
     <style scoped>
+        #example .config-section {
+            min-width: 160px;
+        }
+
         .configuration-horizontal .k-textbox {
             margin: 0;
             width: 80px;

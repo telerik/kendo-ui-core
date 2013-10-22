@@ -10,15 +10,36 @@
             $("#progressBar").kendoProgressBar({ 
                 type: "percent",
                 animation: {
-                    duration: 2000
-                }
+                    duration: 600
+                },
+                complete: onComplete
             });
         });
 
         $("#startProgress").click(function () {
-            var pb = $("#progressBar").data("kendoProgressBar");
-            pb.value(100);
+            if (!$(this).hasClass("k-state-disabled")) {
+                $(this).addClass("k-state-disabled");
+
+                progress();
+            }
         });
+
+        function onComplete() {
+            $("#startProgress").removeClass("k-state-disabled").text("Restart Progress");
+        }
+
+        function progress() {
+            var pb = $("#progressBar").data("kendoProgressBar");
+            pb.value(0);
+
+            var interval = setInterval(function () {
+                if (pb.value() < 100) {
+                    pb.value(pb.value() + 10);
+                } else {
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
     </script>
 
     <style scoped>

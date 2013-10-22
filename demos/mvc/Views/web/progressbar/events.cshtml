@@ -14,18 +14,10 @@
                 min: 0,
                 max: 10,
                 type: "percent",
-                animation: {
-                    duration: 400
-                },
-                start: onStart,
                 change: onChange,
                 complete: onComplete
             });
         });
-
-        function onStart(e) {
-            kendoConsole.log("Start event :: value is " + e.value);
-        }
 
         function onChange(e) {
             kendoConsole.log("Change event :: value is " + e.value);
@@ -33,10 +25,20 @@
 
         function onComplete(e) {
             kendoConsole.log("Complete event :: value is " + e.value);
+
+            $("#startProgress").text("Restart Progress").removeClass("k-state-disabled");
         }
 
         $("#startProgress").click(function () {
+            if (!$(this).hasClass("k-state-disabled")) {
+                $(this).addClass("k-state-disabled");
+                progress();
+            }
+        });
+
+        function progress() {
             var pb = $("#progressBar").data("kendoProgressBar");
+            pb.value(0);
 
             var interval = setInterval(function () {
                 if (pb.value() < 10) {
@@ -45,7 +47,7 @@
                     clearInterval(interval);
                 }
             }, 100);
-        });
+        }
     </script>
 
     <style scoped>
