@@ -374,7 +374,7 @@
             test("shows first button", function() {
                 var pager = setup({}, { previousNext: true });
 
-                equal(pager.find(".k-i-seek-w").length, 1);
+                equal(pager.find(".k-pager-first .k-i-seek-w").length, 1);
             });
 
             test("shows next button", function() {
@@ -386,13 +386,13 @@
             test("shows last button", function() {
                 var pager = setup({}, { previousNext: true });
 
-                equal(pager.find(".k-i-seek-e").length, 1);
+                equal(pager.find(".k-pager-last .k-i-seek-e").length, 1);
             });
 
             test("first button is disabled on the first page", function() {
                 var pager = setup({}, { previousNext: true });
 
-                ok(pager.find(".k-i-seek-w").parent().hasClass("k-state-disabled"));
+                ok(pager.find(".k-pager-first").hasClass("k-state-disabled"));
             });
 
             test("first button is enabled on any page but first", function() {
@@ -400,7 +400,7 @@
                 dataSource.read();
                 dataSource.page(2);
 
-                ok(!pager.find(".k-i-seek-w").parent().hasClass("k-state-disabled"));
+                ok(!pager.find(".k-pager-first").hasClass("k-state-disabled"));
             });
 
             test("prev button is disabled on the first page", function() {
@@ -456,14 +456,14 @@
 
                 dataSource.read();
                 dataSource.page(5);
-                ok(pager.find(".k-i-seek-e").parent().hasClass("k-state-disabled"));
+                ok(pager.find(".k-pager-last").hasClass("k-state-disabled"));
             });
 
             test("last button is enabled on any page but last", function() {
                 var pager = setup({}, { previousNext: true });
 
                 dataSource.read();
-                ok(!pager.find(".k-i-seek-e").parent().hasClass("k-state-disabled"));
+                ok(!pager.find(".k-pager-last").hasClass("k-state-disabled"));
             });
 
             test("prev button page data attribute is set to total pages", function() {
@@ -471,7 +471,7 @@
 
                 dataSource.read();
 
-                equal(pager.find(".k-i-seek-e").parent().data(kendo.ns + "page"), dataSource.totalPages());
+                equal(pager.find(".k-pager-last").data(kendo.ns + "page"), dataSource.totalPages());
             });
 
             test("first is enabled if the data source is read before pager init", function() {
@@ -488,7 +488,7 @@
                     autoBind: false
                 });
 
-                ok(!pager.find(".k-i-seek-w").parent().hasClass("k-state-disabled"));
+                ok(!pager.find(".k-pager-first").hasClass("k-state-disabled"));
             });
 
             test("previous is enabled if the data source is read before pager init", function() {
@@ -539,7 +539,7 @@
                     autoBind: false
                 });
 
-                ok(!pager.find(".k-i-seek-e").parent().hasClass("k-state-disabled"));
+                ok(!pager.find(".k-pager-last").hasClass("k-state-disabled"));
             });
 
             test("creates a dropdown for the page sizes", function() {

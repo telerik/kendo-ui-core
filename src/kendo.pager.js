@@ -20,7 +20,7 @@ kendo_module({
         CLICK = "click",
         KEYDOWN = "keydown",
         DISABLED = "disabled",
-        iconTemplate = kendo.template('<a href="\\#" title="#=text#" class="k-link"><span class="k-icon #= className #">#=text#</span></a>');
+        iconTemplate = kendo.template('<a href="\\#" title="#=text#" class="k-link k-pager-nav #= wrapClassName #"><span class="k-icon #= className #">#=text#</span></a>');
 
     function button(template, idx, text, numeric) {
         return template( {
@@ -31,10 +31,11 @@ kendo_module({
         });
     }
 
-    function icon(className, text) {
+    function icon(className, text, wrapClassName) {
         return iconTemplate({
             className: className.substring(1),
-            text: text
+            text: text,
+            wrapClassName: wrapClassName || ""
         });
     }
 
@@ -82,7 +83,7 @@ kendo_module({
 
             if (options.previousNext) {
                 if (!that.element.find(FIRST).length) {
-                    that.element.append(icon(FIRST, options.messages.first));
+                    that.element.append(icon(FIRST, options.messages.first, "k-pager-first"));
 
                     first(that.element, page, totalPages);
                 }
@@ -122,7 +123,7 @@ kendo_module({
                 }
 
                 if (!that.element.find(LAST).length) {
-                    that.element.append(icon(LAST, options.messages.last));
+                    that.element.append(icon(LAST, options.messages.last, "k-pager-last"));
 
                     last(that.element, page, totalPages);
                 }
@@ -151,7 +152,7 @@ kendo_module({
 
             if (options.refresh) {
                 if (!that.element.find(".k-pager-refresh").length) {
-                    that.element.append('<a href="#" class="k-pager-refresh k-link"  title="' + options.messages.refresh +
+                    that.element.append('<a href="#" class="k-pager-refresh k-link" title="' + options.messages.refresh +
                         '"><span class="k-icon k-i-refresh">' + options.messages.refresh + "</span></a>");
                 }
 
