@@ -362,7 +362,7 @@ end
 
 ['commercial', 'trial'].each do |license|
 
-    ['VS2012'].each do |vs|
+    ['VS2012', 'VS2013'].each do |vs|
 
         # Copy Kendo.Mvc.sln as Kendo.Mvc.Examples.sln
         file_copy :to => "dist/bundles/aspnetmvc.#{license}/wrappers/aspnetmvc/Examples/#{vs}/Kendo.Mvc.Examples.sln",

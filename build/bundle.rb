@@ -106,13 +106,19 @@ def bundle(options)
 
     if demo_suites
 
-        demo_files = demos( {
-            :path => "#{path}/#{demo_suites[:dir]}",
-            :suites => demo_suites[:suites],
-            :template_dir => demo_suites[:template_dir]
-        })
+        demo_dirs = demo_suites[:dir]
 
-        prerequisites = prerequisites + demo_files
+        demo_dirs = [demo_dirs] unless demo_dirs.is_a? Array
+
+        demo_files = demo_dirs.map do |dir|
+            demos( {
+                :path => "#{path}/#{dir}",
+                :suites => demo_suites[:suites],
+                :template_dir => demo_suites[:template_dir]
+            } )
+        end
+
+        prerequisites = prerequisites + demo_files.flatten
     end
 
     zip "#{path}.zip" =>  prerequisites

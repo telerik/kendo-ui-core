@@ -74,10 +74,6 @@ ROOT_MAP = {
     'wrappers/aspnetmvc/Binaries/Mvc3' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC3/',
     'wrappers/aspnetmvc/Binaries/Mvc4' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
     'wrappers/aspnetmvc/Binaries/Mvc5' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release-MVC5/',
-    'wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples' => 'wrappers/mvc/demos/Kendo.Mvc.Examples/',
-    'wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples/Content/shared' => 'demos/mvc/content/shared',
-    'wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples/bin' => 'wrappers/mvc/src/Kendo.Mvc/bin/Release/',
-    'wrappers/aspnetmvc/Examples/VS2012/packages' => 'wrappers/mvc/packages/',
     'wrappers/jsp/kendo-taglib' => 'wrappers/java/kendo-taglib/target/',
     'src/kendo-taglib' => 'wrappers/java/kendo-taglib/',
     'src/php' => 'wrappers/php/',
@@ -92,14 +88,30 @@ MVC_BINARIES = {
 }
 
 MVC_CONTENT = {
-    'wrappers/aspnetmvc/Examples/VS2012/packages' => FileList['wrappers/mvc/packages/**/*.*'],
-    'wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples/bin' => MVC4_DLL,
-    'wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples' => MVC_DEMOS,
-    'wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples/Content/shared' => FileList['demos/mvc/content/shared/*'],
     'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
     'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
     'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*'].include(LEGACY_MIN_CSS)
 }.merge(MVC_BINARIES)
+
+{
+    'VS2012' => { :bin => 'Release', :dll => MVC4_DLL },
+    'VS2013' => { :bin => 'Release-MVC5', :dll => MVC5_DLL }
+}.each do |key, value|
+
+    ROOT_MAP.merge!( {
+        "wrappers/aspnetmvc/Examples/#{key}/Kendo.Mvc.Examples" => 'wrappers/mvc/demos/Kendo.Mvc.Examples/',
+        "wrappers/aspnetmvc/Examples/#{key}/Kendo.Mvc.Examples/Content/shared" => 'demos/mvc/content/shared',
+        "wrappers/aspnetmvc/Examples/#{key}/Kendo.Mvc.Examples/bin" => "wrappers/mvc/src/Kendo.Mvc/bin/#{value[:bin]}/",
+        "wrappers/aspnetmvc/Examples/#{key}/packages" => 'wrappers/mvc/packages/'
+    } )
+
+    MVC_CONTENT.merge!( {
+        "wrappers/aspnetmvc/Examples/#{key}/packages" => FileList['wrappers/mvc/packages/**/*.*'],
+        "wrappers/aspnetmvc/Examples/#{key}/Kendo.Mvc.Examples/bin" => value[:dll],
+        "wrappers/aspnetmvc/Examples/#{key}/Kendo.Mvc.Examples" => MVC_DEMOS,
+        "wrappers/aspnetmvc/Examples/#{key}/Kendo.Mvc.Examples/Content/shared" => FileList['demos/mvc/content/shared/*'],
+    } )
+end
 
 JSP_CONTENT = {
     'wrappers/jsp/kendo-taglib' => JSP_TAGLIB_JAR,
@@ -280,7 +292,10 @@ bundle :name => 'aspnetmvc.trial',
        :changelog => %w(web mobile dataviz framework aspnetmvc),
        :demos => {
            :suites => %w(web dataviz mobile),
-           :dir => 'wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples/html',
+           :dir => [
+               'wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples/html',
+               'wrappers/aspnetmvc/Examples/VS2013/Kendo.Mvc.Examples/html'
+           ],
            :template_dir => 'mvc'
        },
        :contents => {
@@ -291,7 +306,9 @@ bundle :name => 'aspnetmvc.trial',
        :prerequisites => [
            'mvc:assets',
            'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj',
-           'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples.sln'
+           'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples.sln',
+           'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/VS2013/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj',
+           'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/VS2013/Kendo.Mvc.Examples.sln'
        ]
 
 bundle :name => 'aspnetmvc.hotfix.trial',
@@ -341,7 +358,10 @@ bundle :name => 'aspnetmvc.commercial',
        :changelog => %w(web mobile dataviz framework aspnetmvc),
        :demos => {
            :suites => %w(web dataviz mobile),
-           :dir => 'wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples/html',
+           :dir => [
+               'wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples/html',
+               'wrappers/aspnetmvc/Examples/VS2013/Kendo.Mvc.Examples/html'
+           ],
            :template_dir => 'mvc'
        },
        :product => 'Kendo UI Complete for ASP.NET MVC',
@@ -364,7 +384,9 @@ bundle :name => 'aspnetmvc.commercial',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc/CommonAssemblyInfo.cs',
            'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc/Kendo.Mvc.csproj',
            'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj',
-           'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples.sln'
+           'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples.sln',
+           'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/VS2013/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj',
+           'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/VS2013/Kendo.Mvc.Examples.sln'
        ]
 
 bundle :name => 'aspnetmvc.hotfix.commercial',
