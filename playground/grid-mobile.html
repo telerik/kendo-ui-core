@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>Mobile Grid</title>
-        <link href="../styles/mobile/kendo.mobile.all.min.css" rel="stylesheet" />
         <link href="../styles/web/kendo.common.min.css" rel="stylesheet" />
+        <link href="../styles/mobile/kendo.mobile.all.min.css" rel="stylesheet" />
         <link href="../styles/web/kendo.silver.min.css" rel="stylesheet" />
 
         <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
@@ -12,7 +12,6 @@
         <style>
 
             html, body {
-                height: 100%;
                 margin: 0;
                 padding: 0;
             }
@@ -20,11 +19,6 @@
             html
             {
                 overflow-y:scroll;
-            }
-
-            .km-pane-wrapper {
-                width: 100%;
-                height: 100%
             }
         </style>
 
@@ -41,6 +35,7 @@
                         model: {
                             id: "id",
                             fields: {
+                                bar: { validation: { required: true } },
                                 bool: { type: "boolean" },
                                 date: { type: "date" },
                                 number: { type: "number" }
@@ -67,18 +62,20 @@
                     ],
                     pageSize: 2
                 },
+                height: 500,
                 columns: [
                     {
                         field: "foo",
                         values: [
                             { value: "foo", text: "foo" },
                             { value: "bar", text: "bar" }
-                        ]
+                        ],
+                        width: 100,
                     },
-                    "bar",
-                    "date",
-                    "number",
-                    "bool",
+                    { field: "bar", width: 100 },
+                    { field: "date", width: 100 },
+                    { field: "number", width: 100 },
+                    { field: "bool", width: 100 },
                     { command: ["edit", "destroy"], title: "&nbsp;", width: "172px" }
                 ],
                 editable: {

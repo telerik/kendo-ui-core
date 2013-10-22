@@ -2358,6 +2358,10 @@ kendo_module({
 
                 this.pane = kendo.mobile.ui.Pane.wrap(html);
                 this.view = this.pane.view();
+
+                if (this.options.height) {
+                    this.pane.element.parent().css(HEIGHT, this.options.height);
+                }
             }
         },
 
