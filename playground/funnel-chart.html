@@ -107,7 +107,7 @@
                         color:"pink"
                     },
                     labels:{
-                        template:"#debugger##=text# - #=value#"
+                        template:"#=text# - #=value#"
                     }
                 },
                 tooltip: {
@@ -133,7 +133,7 @@
                         visible:true,
                         align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
                         margin: 5,
-                        template: "#debugger#My Template #=value#"
+                        template: "My Template #=value#"
                     }
                 }]
             });
