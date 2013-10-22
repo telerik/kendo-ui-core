@@ -2,7 +2,8 @@
 description "mono FCGI"
 author      "Kendo Team"
 
-start on startup
+
+start on filesystem and started networking
 stop on shutdown
 
 respawn
