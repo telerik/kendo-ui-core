@@ -11,9 +11,10 @@
     .Views(views =>
     {
         views.DayView();
-        views.WeekView(weekView => weekView.Selected(true));
+        views.WeekView();
         views.MonthView();
         views.AgendaView();
+        views.WorkWeekView(workWeekView => workWeekView.Selected(true));
     })
     .Timezone("Etc/UTC")
     .Resources(resource =>
