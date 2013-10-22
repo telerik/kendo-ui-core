@@ -67,6 +67,14 @@
         equal(surface._root.childNodes.length, 0);
     });
 
+    test("svg returns current markup", function() {
+        surface.draw(new Group());
+
+        var svg = surface.svg();
+        ok(svg.indexOf("<?xml") === 0);
+        ok(svg.indexOf("<g>") !== -1);
+    });
+
     // ------------------------------------------------------------
     var node;
 
@@ -129,12 +137,24 @@
     });
 
     test("attachTo sets element", function() {
-        var container = document.createElement("div");
-
-        groupNode.attachTo(container);
+        groupNode.attachTo(document.createElement("div"));
 
         ok(groupNode.element);
     });
+
+    test("load attaches node", function() {
+        groupNode.attachTo(document.createElement("div"));
+
+        var group = new Group();
+        groupNode.load([group]);
+
+        ok(groupNode.childNodes[0].element);
+    });
+
+    test("renders group tag", function() {
+        equal(groupNode.render(), "<g></g>");
+    });
+
     </script>
 
     <h1 id="qunit-header"></h1>

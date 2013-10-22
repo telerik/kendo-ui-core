@@ -56,6 +56,10 @@
             "click"
         ],
 
+        svg: function() {
+            return this._template(this);
+        },
+
         draw: function(element) {
             this._root.load([element]);
         },
@@ -69,15 +73,13 @@
             "<svg xmlns='" + SVG_NS + "' version='1.1' " +
             "width='#= kendo.dataviz.util.renderSize(d.options.width) #' " +
             "height='#= kendo.dataviz.util.renderSize(d.options.height) #' " +
-            "style='position: relative;'></svg>"
+            "style='position: relative;'>#= d._root.render() #</svg>"
         ),
 
         _appendTo: function(container) {
-            var surface = this;
-
-            renderSVG(container, surface._template(surface));
-            surface.element = container.firstElementChild;
-            surface._root.attachTo(surface.element);
+            renderSVG(container, this._template(this));
+            this.element = container.firstElementChild;
+            this._root.attachTo(this.element);
         }
     });
 
