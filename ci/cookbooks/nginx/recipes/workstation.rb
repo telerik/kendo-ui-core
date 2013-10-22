@@ -1,8 +1,12 @@
 
 package "nginx"
 
-cookbook_file "/etc/nginx/nginx.conf" do
-    source "workstation.conf"
+template "/etc/nginx/nginx.conf" do
+    source "workstation.conf.erb"
+    variables({
+        home_dir: ENV['HOME'],
+        kendo_dir: File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..', '..'))
+    })
 end
 
 service "nginx" do

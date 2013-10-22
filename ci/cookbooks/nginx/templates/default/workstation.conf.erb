@@ -31,7 +31,12 @@ http {
     server {
         listen   80;
         server_name localhost;
-        root  /home/georgi/work;
+        autoindex on;
+        root  <%= @home_dir %>;
+
+        location /kendo {
+            alias <%= @kendo_dir %>;
+        }
 
         location ~ \.php$ {
             include        fastcgi_params;
