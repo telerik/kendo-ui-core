@@ -2865,8 +2865,12 @@ kendo_module({
                                .attr("role", "grid")
                                .attr("aria-multiselectable", true);
 
-            if (this._isMobilePhoneView()) {
+            if (this._isMobile()) {
                this.wrapper.addClass("k-scheduler-mobile");
+            }
+
+            if (this._isMobilePhoneView()) {
+               this.wrapper.addClass("k-scheduler-phone");
             }
 
             if (height) {

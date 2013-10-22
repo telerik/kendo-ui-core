@@ -60,12 +60,19 @@
                 var scheduler = setup();
 
                 ok(scheduler.wrapper.hasClass("k-scheduler-mobile"));
+                ok(scheduler.wrapper.hasClass("k-scheduler-phone"));
             });
 
-            test("mobile css class is not added to the wrapper if device is tablet", function() {
+            test("mobile css class is added to the wrapper if device is tablet", function() {
                 var scheduler = setup({ mobile: "tablet" });
 
-                ok(!scheduler.wrapper.hasClass("k-scheduler-mobile"));
+                ok(scheduler.wrapper.hasClass("k-scheduler-mobile"));
+            });
+
+            test("mobile phone css class is not added to the wrapper if device is tablet", function() {
+                var scheduler = setup({ mobile: "tablet" });
+
+                ok(!scheduler.wrapper.hasClass("k-scheduler-phone"));
             });
 
             test("is wrapped in a mobile view", function() {
