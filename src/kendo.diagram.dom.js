@@ -376,13 +376,21 @@ kendo_module({
                 }
             }
         },
-        rotate: function (angle) { // we assume the center is always the center of the shape.
+        rotate: function (angle, center) { // we assume the center is always the center of the shape.
             var rotate = this.visual.rotate();
             if (angle !== undefined) {
-                var b = this.bounds();
-                var center = new Point(b.width / 2, b.height / 2);
-                this.visual.rotate(angle, center);
+                var b = this.bounds(),
+                    sc = new Point(b.width / 2, b.height / 2),
+                    deltaAngle,
+                    newPosition;
 
+                if (center) {
+                    deltaAngle = angle - rotate.angle;
+                    newPosition = b.center().rotate(center, 360 - deltaAngle).minus(sc);
+                    this._rotationOffset = this._rotationOffset.plus(newPosition.minus(b.topLeft()));
+                    this.position(newPosition);
+                }
+                this.visual.rotate(angle, sc);
                 this.options.rotation.angle = angle;
 
                 if (this.diagram && this.diagram._connectorsAdorner) {
