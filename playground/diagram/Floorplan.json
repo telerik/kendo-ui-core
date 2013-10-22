@@ -1,0 +1,2874 @@
+{"options": {
+    "prefix": "",
+    "name": "Floorplan",
+    "zoomRate": 1.1,
+    "dataSource": {
+        "fields": [
+            {
+                "field": "text"
+            },
+            {
+                "field": "url"
+            },
+            {
+                "field": "spriteCssClass"
+            },
+            {
+                "field": "imageUrl"
+            }
+        ]
+    },
+    "dragAndDrop": false,
+    "template": "",
+    "dataTextField": ["text"],
+    "autoBind": true,
+    "resizable": true,
+    "rotatable": true,
+    "visualTemplate": null,
+    "tooltip": {
+        "enabled": true,
+        "format": "{0}"
+    },
+    "copy": {
+        "enabled": true,
+        "offsetX": 20,
+        "offsetY": 20
+    },
+    "allowDrop": true,
+    "dataUrlField": ["url"],
+    "dataSpriteCssClassField": ["spriteCssClass"],
+    "dataImageUrlField": ["imageUrl"]
+}, "shapes": [
+    {
+        "options": {
+            "id": "iAUlmIOQjA",
+            "background": "#f6f6f6",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 68,
+            "y": 84,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 1216,
+            "height": 772,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "IVHRY37S7x",
+            "background": "#626262",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 95,
+            "y": 224,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 295,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "24KdzwuS8d",
+            "background": "#626262",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 390,
+            "y": 102,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 20,
+            "height": 270,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "RLiupAMsNK",
+            "background": "#626262",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 893,
+            "y": 103,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 20,
+            "height": 488,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "emDXSl3LDk",
+            "background": "#626262",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 390,
+            "y": 102,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 523,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "YOQ1zZnldu",
+            "background": "#626262",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 903,
+            "y": 223.953,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 345,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "3eUP1Y8gh4",
+            "background": "#626262",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1232.476,
+            "y": 223.952,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 20,
+            "height": 593,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "nYL6I4AinV",
+            "background": "#626262",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 92,
+            "y": 815,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 1160,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "5nMmDxgNHy",
+            "background": "#626262",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 896,
+            "y": 703,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 20,
+            "height": 115,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "86JL8yygR3",
+            "background": "#626262",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 391,
+            "y": 471,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 20,
+            "height": 353,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "a7txMRKu7Y",
+            "background": "#626262",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 92,
+            "y": 331,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 20,
+            "height": 502,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "PNVAClRqtH",
+            "background": "steelblue",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "M40,0.5 L35,10 L77,10 L72,0.5 L111.5,20 L72,39.5 L77,30 L35,30 L40,39.5 L0.5,20 z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 50,
+            "y": 270,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 110,
+            "height": 106,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Double Arrow 5"
+        }
+    },
+    {
+        "options": {
+            "id": "8CuLLwCCMa",
+            "background": "#3ea799",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 520,
+            "y": 190,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 72,
+            "height": 66,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "crALJSIv2U",
+            "background": "#3ea799",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 593,
+            "y": 190,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 72,
+            "height": 66,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "RpG0omgqW1",
+            "background": "#3ea799",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 667,
+            "y": 190,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 72,
+            "height": 66,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "ZwDWP8qEnz",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 523,
+            "y": 167,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 217,
+            "height": 23,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "QpUtmvcrH1",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 504,
+            "y": 180,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 30,
+            "height": 66,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "zQeDyiIWj6",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 723,
+            "y": 181,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 30,
+            "height": 66,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "6gt7FKb3SA",
+            "background": "#9d7a24",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 575,
+            "y": 283,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 113,
+            "height": 56,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "DsJP6TeVCL",
+            "background": "#3ea799",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 462.675,
+            "y": 309.586,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 71,
+            "height": 66,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 336.34429397740234
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "S4fNKgb7P4",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 450.299,
+            "y": 320.115,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 30,
+            "height": 72,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 336.34429397740234
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "N74BsfBhyu",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 452.117,
+            "y": 301.845,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 63,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 336.34429397740234
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "twYx4jzbDi",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 475.049,
+            "y": 361.671,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 64,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 336.34429397740234
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "NOoW2aHNQ8",
+            "background": "#3ea799",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 738.752,
+            "y": 315.204,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 71,
+            "height": 66,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 27.034339274756633
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "MWODEfxyME",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 739.162,
+            "y": 367.713,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 64,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 27.034339274756633
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "e5JyyGEE4x",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 763.205,
+            "y": 311.839,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 64,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 27.034339274756633
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "oJrFQ4LX8C",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 789.673,
+            "y": 324.937,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 30,
+            "height": 72,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 27.034339274756633
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "tDo3HyXRYL",
+            "background": "#6cb4f1",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "M 0,0 H 37.5 A 10,10 0 0 1 37.5,74.50 H 1 Z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 143.147,
+            "y": 540.101,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 84,
+            "height": 72,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Delay Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "eij4F63Awz",
+            "background": "steelblue",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 121,
+            "y": 529,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 24,
+            "height": 76,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "f7FYux76Gx",
+            "background": "#626262",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 104,
+            "y": 471,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 207,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "QbP5jVIxr3",
+            "background": "#6cb4f1",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 122,
+            "y": 628,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 48,
+            "height": 75,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "xCN1DgpDhV",
+            "background": "#6cb4f1",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 123,
+            "y": 718,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 246,
+            "height": 75,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "h9lQncfHUa",
+            "background": "#9d7a24",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 526.142,
+            "y": 605.999,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 237,
+            "height": 92,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "XhCDlboSO9",
+            "background": "#3ea799",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 544.142,
+            "y": 557.142,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 44,
+            "height": 41,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "sQjictYwgq",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 542.642,
+            "y": 554.237,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 46,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "XoLzKvkijA",
+            "background": "#3ea799",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 621.284,
+            "y": 558.094,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 44,
+            "height": 41,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "v5FWVl2IsE",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 620.689,
+            "y": 555.189,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 46,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "ZoDYuWv0GU",
+            "background": "#3ea799",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 700.332,
+            "y": 559.046,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 44,
+            "height": 41,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "3AHLLPMn7F",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 698.833,
+            "y": 556.141,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 46,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "8tOXpn9SUA",
+            "background": "#3ea799",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 546.999,
+            "y": 704.762,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 44,
+            "height": 41,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "1Xg8n22ju3",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 546.452,
+            "y": 728.523,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 46,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "yBd6KB3ioW",
+            "background": "#3ea799",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 624.141,
+            "y": 705.714,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 44,
+            "height": 41,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "rOtHTRcwpi",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 623.594,
+            "y": 729.475,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 46,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "52OA2b7wZm",
+            "background": "#3ea799",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 703.189,
+            "y": 706.666,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 44,
+            "height": 41,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "nKMXCSZXSb",
+            "background": "#269284",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 702.642,
+            "y": 730.427,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 46,
+            "height": 20,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "9uORgTDt40",
+            "background": "#9d7a24",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 925.478,
+            "y": 751.572,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 96,
+            "height": 56,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "wb63wuyXjB",
+            "background": "#9d7a24",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1027.383,
+            "y": 751.572,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 96,
+            "height": 56,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "3kt4rqx9td",
+            "background": "#9d7a24",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1128.335,
+            "y": 750.62,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 96,
+            "height": 56,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "MmOewm9myc",
+            "background": "#3ea799",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 997.767,
+            "y": 303.335,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 151,
+            "height": 181,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "WunRjraMcc",
+            "background": "#3ea799",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "M0,9 C0,4.0294371 4.0294371,0 9,0 L103,0 C107.97057,0 112,4.0294371 112,9 L112,66 C112,70.970566 107.97057,75 103,75 L9,75 C4.0294371,75 0,70.970566 0,66 z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1073.357,
+            "y": 248.095,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 66,
+            "height": 62,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rounded Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "WBCOfYchn7",
+            "background": "#3ea799",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "M0,9 C0,4.0294371 4.0294371,0 9,0 L103,0 C107.97057,0 112,4.0294371 112,9 L112,66 C112,70.970566 107.97057,75 103,75 L9,75 C4.0294371,75 0,70.970566 0,66 z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 997.357,
+            "y": 247.095,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 66,
+            "height": 62,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rounded Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "IO5EjjOR00",
+            "background": "#eec628",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 942,
+            "y": 254,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 43,
+            "height": 44,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "FaX5jBWfW2",
+            "background": "#eec628",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1159,
+            "y": 255,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 43,
+            "height": 44,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "tarRDizXAy",
+            "background": "#eec628",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 412,
+            "y": 124,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 43,
+            "height": 44,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "sTOrkqSj5s",
+            "background": "#eec628",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 847,
+            "y": 124,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 43,
+            "height": 44,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "eM1hISORBj",
+            "background": "#ffffff",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 199,
+            "y": 336,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 99,
+            "height": 36,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "HALLWAY",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "4T7jMnFT6A",
+            "background": "#ffffff",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 232,
+            "y": 617,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 109,
+            "height": 34,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "BATHROOM",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "uvDNHTbz5f",
+            "background": "#ffffff",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 580,
+            "y": 458,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 113,
+            "height": 30,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "LIVING ROOM",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    },
+    {
+        "options": {
+            "id": "brarLD5IUq",
+            "background": "#ffffff",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 1,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1022,
+            "y": 564,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 107,
+            "height": 42,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "BEDROOM",
+            "undoable": false,
+            "name": "Rectangle Shape"
+        }
+    }
+], "connections": []}

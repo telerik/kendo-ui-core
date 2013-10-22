@@ -182,6 +182,7 @@
                     <hr/>
                     <li id="mnuTea" title="Sample diagram">Tea Processing</li>
                     <li id="mnuFlowchart" title="Sample diagram">Flowchart</li>
+                    <li id="mnuFloorplan" title="Sample diagram">Floorplan</li>
                 </ul>
             </li>
             <li>
@@ -821,6 +822,9 @@ $(function () {
                 break;
             case "mnuFlowchart":
                 load("/kendo/playground/diagram/Flowchart.json");
+                break;
+            case "mnuFloorplan":
+                load("/kendo/playground/diagram/Floorplan.json");
                 break;
         }
     }
