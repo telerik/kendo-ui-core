@@ -1913,6 +1913,10 @@ kendo_module({
                         that.element.find(".k-scheduler-hold").removeClass("k-scheduler-hold");
                         e.currentTarget.addClass("k-scheduler-hold");
                     });
+
+                    that._moveDraggable.userEvents.bind("press", function(e) {
+                        e.preventDefault();
+                    });
                 }
             }
         },
