@@ -359,35 +359,29 @@ file 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.sln' do |t|
     patch_solution t
 end
 
-# Copy Kendo.Mvc.sln as Kendo.Mvc.Examples.sln
-file_copy :to => 'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.sln',
-          :from => 'wrappers/mvc/Kendo.Mvc.sln'
 
-file_copy :to => 'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.sln',
-          :from => 'wrappers/mvc/Kendo.Mvc.sln'
+['commercial', 'trial'].each do |license|
 
-# Copy Kendo.Mvc.Examples.csproj (needed for the next task)
-file_copy :to => 'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj',
-          :from => MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
+    ['VS2012'].each do |vs|
 
-file_copy :to => 'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj',
-          :from => MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
+        # Copy Kendo.Mvc.sln as Kendo.Mvc.Examples.sln
+        file_copy :to => "dist/bundles/aspnetmvc.#{license}/wrappers/aspnetmvc/Examples/#{vs}/Kendo.Mvc.Examples.sln",
+                  :from => 'wrappers/mvc/Kendo.Mvc.sln'
 
-# Path the solution - leave only the examples project
+        # Copy Kendo.Mvc.Examples.csproj (needed for the next task)
+        file_copy :to => "dist/bundles/aspnetmvc.#{license}/wrappers/aspnetmvc/Examples/#{vs}/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj",
+                  :from => MVC_DEMOS_ROOT + 'Kendo.Mvc.Examples.csproj'
 
-file  'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.sln' do |t|
-    patch_examples_solution t
-end
+        # Patch the solution - leave only the examples project
+        file  "dist/bundles/aspnetmvc.#{license}/wrappers/aspnetmvc/Examples/#{vs}/Kendo.Mvc.Examples.sln" do |t|
+            patch_examples_solution t
+        end
 
-file  'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples.sln' do |t|
-    patch_examples_solution t
-end
+        # Patch Visual Studio Project - fix paths etc.
+        file  "dist/bundles/aspnetmvc.#{license}/wrappers/aspnetmvc/Examples/#{vs}/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj" do |t|
+            patch_examples_csproj t
+        end
 
-# Patch Visual Studio Project - fix paths etc.
-file  'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj' do |t|
-    patch_examples_csproj t
-end
+    end
 
-file  'dist/bundles/aspnetmvc.trial/wrappers/aspnetmvc/Examples/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj' do |t|
-    patch_examples_csproj t
 end
