@@ -242,8 +242,6 @@ kendo_module({
 
             that.link = link || $();
 
-            that._isMobile = kendo.support.mobileOS;
-
             that.dataSource = options.dataSource;
 
             that.field = options.field || element.attr(kendo.attr("field"));
@@ -296,11 +294,13 @@ kendo_module({
             var that = this,
                 ui = that.options.ui,
                 setUI = isFunction(ui),
+                paneElement,
                 role;
 
-            if (that._isMobile) {
-                that.pane = that.element.closest(kendo.roleSelector("pane")).data("kendoMobilePane");
-                that._isMobile = !!that.pane;
+            paneElement = that.element.closest(kendo.roleSelector("pane"));
+            if (paneElement[0]) {
+                that.pane = paneElement.data("kendoMobilePane");
+                that._isMobile = true;
             }
 
             if (!setUI) {

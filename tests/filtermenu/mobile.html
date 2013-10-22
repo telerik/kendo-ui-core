@@ -50,8 +50,6 @@
 
             module("kendo.ui.FilterMenu", {
                 setup: function() {
-                    kendo.support.mobileOS = true;
-
                     container = $('<div id="container"><a data-kendo-field="foo" class="k-grid-filter"></a></div>')
                         .appendTo(document.body);
 
@@ -60,8 +58,6 @@
                 },
 
                 teardown: function() {
-                    kendo.support.mobileOS = false;
-
                     pane.view().purge();
                     kendo.destroy(document.body);
                     container.remove();

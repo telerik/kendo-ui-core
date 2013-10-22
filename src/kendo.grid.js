@@ -566,8 +566,6 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
-            that._isMobile = kendo.support.mobileOS;
-
             isRtl = kendo.support.isRtl(element);
 
             that._element();
@@ -2349,6 +2347,12 @@ kendo_module({
         },
 
         _initMobile: function() {
+            var options = this.options;
+
+            this._isMobile = (options.mobile === true && kendo.support.mobileOS) ||
+                                options.mobile === "phone" ||
+                                options.mobile === "tablet";
+
             if (this._isMobile) {
                 var html = this.wrapper.wrap(
                         '<div data-' + kendo.ns + 'role="view" ' +
@@ -2359,8 +2363,8 @@ kendo_module({
                 this.pane = kendo.mobile.ui.Pane.wrap(html);
                 this.view = this.pane.view();
 
-                if (this.options.height) {
-                    this.pane.element.parent().css(HEIGHT, this.options.height);
+                if (options.height) {
+                    this.pane.element.parent().css(HEIGHT, options.height);
                 }
             }
         },

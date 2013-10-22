@@ -45,6 +45,7 @@
             function setup(options) {
                 options = $.extend({}, {
                 editable: "popup",
+                mobile: "phone",
                 dataSource: new DataSource({
                         schema: {
                             model: {
@@ -71,12 +72,8 @@
                     document.body.appendChild(table);
 
                     table = $(table);
-
-                    kendo.support.mobileOS = { name: "ios" };
                 },
                 teardown: function() {
-                    kendo.support.mobileOS = false;
-
                     table.closest(".k-grid").remove();
                     kendo.destroy(document.body);
                     $(".km-pane-wrapper").remove();

@@ -55,16 +55,15 @@ kendo_module({
                 .on("click" + NS, proxy(that._click, that));
 
             that.wrapper = $('<div class="k-column-menu"/>');
-
-            that._isMobile = kendo.support.mobileOS;
         },
 
         _init: function() {
             var that = this;
 
-            if (that._isMobile) {
-                that.pane = that.link.closest(kendo.roleSelector("pane")).data("kendoMobilePane");
-                that._isMobile = !!that.pane;
+            var paneElement = that.element.closest(kendo.roleSelector("pane"));
+            if (paneElement[0]) {
+                that.pane = paneElement.data("kendoMobilePane");
+                that._isMobile = true;
             }
 
             if (that._isMobile) {

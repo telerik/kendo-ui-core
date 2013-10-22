@@ -27,8 +27,6 @@
         <div id="grid"></div>
 
         <script>
-            kendo.support.mobileOS = { name: "ios" };
-
             $("#grid").kendoGrid({
                 dataSource: {
                     schema: {
@@ -62,6 +60,7 @@
                     ],
                     pageSize: 2
                 },
+                mobile: "phone",
                 height: 500,
                 columns: [
                     {
