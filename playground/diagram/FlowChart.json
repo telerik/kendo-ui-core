@@ -1,7 +1,7 @@
 {"options": {
     "prefix": "",
-    "name": "Diagram",
-    "zoomRate": 1.1,
+    "name": "Flowchart",
+    "zoomRate": 1.0,
     "dataSource": {
         "fields": [
             {
@@ -40,7 +40,7 @@
     {
         "options": {
             "id": "bNnPPw91rr",
-            "background": "steelblue",
+            "background": "#b44646",
             "hoveredBackground": "#70CAFF",
             "cursor": "pointer",
             "type": "Shape",
@@ -49,14 +49,12 @@
             "strokeWidth": 1,
             "strokeThickness": 1,
             "strokeDashArray": "none",
-            "x": 50,
-            "y": 211.195,
+            "x": 231,
+            "y": 50,
             "minWidth": 20,
             "minHeight": 20,
-            "width": 150,
-            "height": 150,
-            "resizable": true,
-            "rotatable": true,
+            "width": 113,
+            "height": 112,
             "connectors": [
                 {
                     "name": "Top",
@@ -83,16 +81,21 @@
                     "Description": "Auto Connector"
                 }
             ],
-            "undoable": true,
-            "name": "SequentialData",
+            "rotation": {
+                "angle": 0
+            },
             "content": "Custom ctrs",
+            "resizable": true,
+            "rotatable": true,
+            "undoable": false,
+            "name": "SequentialData",
             "text": "Sequential Data."
         }
     },
     {
         "options": {
             "id": "kJgzy0UY69",
-            "background": "steelblue",
+            "background": "#7f2e2e",
             "hoveredBackground": "#70CAFF",
             "cursor": "pointer",
             "type": "Shape",
@@ -101,14 +104,12 @@
             "strokeWidth": 1,
             "strokeThickness": 1,
             "strokeDashArray": "none",
-            "x": 290,
-            "y": 50,
+            "x": 50,
+            "y": 212,
             "minWidth": 20,
             "minHeight": 20,
-            "width": 95.05661010742188,
-            "height": 172.390380859375,
-            "resizable": true,
-            "rotatable": true,
+            "width": 114,
+            "height": 83,
             "connectors": [
                 {
                     "name": "Top",
@@ -131,14 +132,20 @@
                     "Description": "Auto Connector"
                 }
             ],
-            "undoable": true,
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "resizable": true,
+            "rotatable": true,
+            "undoable": false,
             "name": "Wave"
         }
     },
     {
         "options": {
             "id": "lBPvkNBApV",
-            "background": "steelblue",
+            "background": "#7f2e2e",
             "hoveredBackground": "#70CAFF",
             "cursor": "pointer",
             "type": "Shape",
@@ -147,14 +154,12 @@
             "strokeWidth": 1,
             "strokeThickness": 1,
             "strokeDashArray": "none",
-            "x": 290,
-            "y": 272.39,
+            "x": 235,
+            "y": 212,
             "minWidth": 20,
             "minHeight": 20,
             "width": 100,
             "height": 100,
-            "resizable": true,
-            "rotatable": true,
             "connectors": [
                 {
                     "name": "Top",
@@ -177,14 +182,20 @@
                     "Description": "Auto Connector"
                 }
             ],
-            "undoable": true,
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "resizable": true,
+            "rotatable": true,
+            "undoable": false,
             "name": "Rectangle"
         }
     },
     {
         "options": {
             "id": "MixXRaxRPC",
-            "background": "steelblue",
+            "background": "#7f2e2e",
             "hoveredBackground": "#70CAFF",
             "cursor": "pointer",
             "type": "Shape",
@@ -193,14 +204,12 @@
             "strokeWidth": 1,
             "strokeThickness": 1,
             "strokeDashArray": "none",
-            "x": 290,
-            "y": 422.39,
+            "x": 425,
+            "y": 212,
             "minWidth": 20,
             "minHeight": 20,
             "width": 100,
             "height": 100,
-            "resizable": true,
-            "rotatable": true,
             "connectors": [
                 {
                     "name": "Top"
@@ -215,15 +224,20 @@
                     "name": "Auto"
                 }
             ],
-            "undoable": true,
+            "rotation": {
+                "angle": 0
+            },
             "content": "Custom connectors",
+            "resizable": true,
+            "rotatable": true,
+            "undoable": false,
             "name": "Triangle"
         }
     },
     {
         "options": {
             "id": "XXZods3HbU",
-            "background": "steelblue",
+            "background": "#f2ba4b",
             "hoveredBackground": "#70CAFF",
             "cursor": "pointer",
             "type": "Shape",
@@ -232,14 +246,12 @@
             "strokeWidth": 1,
             "strokeThickness": 1,
             "strokeDashArray": "none",
-            "x": 410,
-            "y": 200,
+            "x": 735,
+            "y": 50,
             "minWidth": 20,
             "minHeight": 20,
             "width": 100,
-            "height": 100,
-            "resizable": true,
-            "rotatable": true,
+            "height": 61,
             "connectors": [
                 {
                     "name": "Top",
@@ -262,14 +274,20 @@
                     "Description": "Auto Connector"
                 }
             ],
-            "undoable": true,
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "resizable": true,
+            "rotatable": true,
+            "undoable": false,
             "name": "Rectangle"
         }
     },
     {
         "options": {
             "id": "BeTw7k93g3",
-            "background": "steelblue",
+            "background": "#5dccff",
             "hoveredBackground": "#70CAFF",
             "cursor": "pointer",
             "type": "Shape",
@@ -278,14 +296,12 @@
             "strokeWidth": 1,
             "strokeThickness": 1,
             "strokeDashArray": "none",
-            "x": 600,
-            "y": 50,
+            "x": 545,
+            "y": 161,
             "minWidth": 20,
             "minHeight": 20,
             "width": 100,
             "height": 100,
-            "resizable": true,
-            "rotatable": true,
             "connectors": [
                 {
                     "name": "Top",
@@ -308,14 +324,20 @@
                     "Description": "Auto Connector"
                 }
             ],
-            "undoable": true,
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "resizable": true,
+            "rotatable": true,
+            "undoable": false,
             "name": "Rectangle"
         }
     },
     {
         "options": {
             "id": "Iyz6wLOMn8",
-            "background": "steelblue",
+            "background": "#8bd21a",
             "hoveredBackground": "#70CAFF",
             "cursor": "pointer",
             "type": "Shape",
@@ -324,14 +346,12 @@
             "strokeWidth": 1,
             "strokeThickness": 1,
             "strokeDashArray": "none",
-            "x": 600,
-            "y": 275,
+            "x": 830,
+            "y": 161,
             "minWidth": 20,
             "minHeight": 20,
             "width": 100,
             "height": 100,
-            "resizable": true,
-            "rotatable": true,
             "connectors": [
                 {
                     "name": "Top",
@@ -354,14 +374,20 @@
                     "Description": "Auto Connector"
                 }
             ],
-            "undoable": true,
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "resizable": true,
+            "rotatable": true,
+            "undoable": false,
             "name": "Rectangle"
         }
     },
     {
         "options": {
             "id": "KoAIN5aCTX",
-            "background": "steelblue",
+            "background": "#11a2e5",
             "hoveredBackground": "#70CAFF",
             "cursor": "pointer",
             "type": "Shape",
@@ -370,14 +396,12 @@
             "strokeWidth": 1,
             "strokeThickness": 1,
             "strokeDashArray": "none",
-            "x": 790,
-            "y": 50,
+            "x": 545,
+            "y": 311,
             "minWidth": 20,
             "minHeight": 20,
             "width": 100,
             "height": 100,
-            "resizable": true,
-            "rotatable": true,
             "connectors": [
                 {
                     "name": "Top",
@@ -400,14 +424,20 @@
                     "Description": "Auto Connector"
                 }
             ],
-            "undoable": true,
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "resizable": true,
+            "rotatable": true,
+            "undoable": false,
             "name": "Rectangle"
         }
     },
     {
         "options": {
             "id": "f4WcRqeCTt",
-            "background": "steelblue",
+            "background": "#4bb21e",
             "hoveredBackground": "#70CAFF",
             "cursor": "pointer",
             "type": "Shape",
@@ -416,14 +446,12 @@
             "strokeWidth": 1,
             "strokeThickness": 1,
             "strokeDashArray": "none",
-            "x": 790,
-            "y": 200,
+            "x": 735,
+            "y": 311,
             "minWidth": 20,
             "minHeight": 20,
             "width": 100,
             "height": 100,
-            "resizable": true,
-            "rotatable": true,
             "connectors": [
                 {
                     "name": "Top",
@@ -446,14 +474,20 @@
                     "Description": "Auto Connector"
                 }
             ],
-            "undoable": true,
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "resizable": true,
+            "rotatable": true,
+            "undoable": false,
             "name": "Rectangle"
         }
     },
     {
         "options": {
             "id": "c8Qv7IeoID",
-            "background": "steelblue",
+            "background": "#4bb21e",
             "hoveredBackground": "#70CAFF",
             "cursor": "pointer",
             "type": "Shape",
@@ -462,14 +496,12 @@
             "strokeWidth": 1,
             "strokeThickness": 1,
             "strokeDashArray": "none",
-            "x": 790,
-            "y": 350,
+            "x": 925,
+            "y": 311,
             "minWidth": 20,
             "minHeight": 20,
             "width": 100,
             "height": 100,
-            "resizable": true,
-            "rotatable": true,
             "connectors": [
                 {
                     "name": "Top",
@@ -492,8 +524,62 @@
                     "Description": "Auto Connector"
                 }
             ],
-            "undoable": true,
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "resizable": true,
+            "rotatable": true,
+            "undoable": false,
             "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "psWAPz8co9",
+            "background": "#346c14",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "M14.248657,39.417725 C14.248657,39.417725 14,29.667244 21.3302,24.000578 C28.663574,18.333912 39.328003,20.250563 39.328003,20.250563 C39.328003,20.250563 43.494385,0.5 63.741943,0.5 C82.739746,0.5 87.655762,19.750601 87.655762,19.750601 C87.655762,19.750601 100.32007,16.000544 108.31909,24.750582 C114.66797,31.695599 112.90283,40.4174 112.90283,40.4174 C112.90283,40.4174 123.16272,45.471794 120.81873,58.500729 C117.81824,75.179268 98.904663,74.25106 98.904663,74.25106 L18.581177,74.25106 C18.581177,74.25106 0.5,73.084129 0.5,57.750725 C0.5,42.417324 14.248657,39.417725 14.248657,39.417725 z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 823,
+            "y": 495,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 104,
+            "height": 92,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "",
+            "undoable": false,
+            "name": "Cloud Shape"
         }
     }
 ], "connections": [
@@ -507,10 +593,12 @@
             "hoveredStroke": "#70CAFF",
             "strokeThickness": 1,
             "startCap": "FilledCircle",
-            "endCap": "ArrowEnd"
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
         },
         "from": "bNnPPw91rr: Auto",
-        "to": "kJgzy0UY69: Auto"
+        "to": "kJgzy0UY69: Top"
     },
     {
         "options": {
@@ -522,7 +610,9 @@
             "hoveredStroke": "#70CAFF",
             "strokeThickness": 1,
             "startCap": "FilledCircle",
-            "endCap": "ArrowEnd"
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
         },
         "from": "bNnPPw91rr: Auto",
         "to": "lBPvkNBApV: Auto"
@@ -537,7 +627,9 @@
             "hoveredStroke": "#70CAFF",
             "strokeThickness": 1,
             "startCap": "FilledCircle",
-            "endCap": "ArrowEnd"
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
         },
         "from": "bNnPPw91rr: Auto",
         "to": "MixXRaxRPC: Auto"
@@ -553,10 +645,12 @@
             "strokeThickness": 1,
             "startCap": "FilledCircle",
             "endCap": "ArrowEnd",
-            "content": "Floating connection"
+            "points": [],
+            "content": "Floating connection",
+            "undoable": false
         },
-        "from": "(200,600)",
-        "to": "(400,800)"
+        "from": "(214,429)",
+        "to": "(475,525)"
     },
     {
         "options": {
@@ -568,10 +662,12 @@
             "hoveredStroke": "#70CAFF",
             "strokeThickness": 1,
             "startCap": "FilledCircle",
-            "endCap": "ArrowEnd"
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
         },
-        "from": "XXZods3HbU",
-        "to": "BeTw7k93g3"
+        "from": "XXZods3HbU: Auto",
+        "to": "BeTw7k93g3: Auto"
     },
     {
         "options": {
@@ -583,10 +679,12 @@
             "hoveredStroke": "#70CAFF",
             "strokeThickness": 1,
             "startCap": "FilledCircle",
-            "endCap": "ArrowEnd"
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
         },
-        "from": "XXZods3HbU",
-        "to": "Iyz6wLOMn8"
+        "from": "XXZods3HbU: Auto",
+        "to": "Iyz6wLOMn8: Auto"
     },
     {
         "options": {
@@ -598,10 +696,12 @@
             "hoveredStroke": "#70CAFF",
             "strokeThickness": 1,
             "startCap": "FilledCircle",
-            "endCap": "ArrowEnd"
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
         },
-        "from": "BeTw7k93g3",
-        "to": "KoAIN5aCTX"
+        "from": "BeTw7k93g3: Auto",
+        "to": "KoAIN5aCTX: Auto"
     },
     {
         "options": {
@@ -613,10 +713,12 @@
             "hoveredStroke": "#70CAFF",
             "strokeThickness": 1,
             "startCap": "FilledCircle",
-            "endCap": "ArrowEnd"
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
         },
-        "from": "Iyz6wLOMn8",
-        "to": "f4WcRqeCTt"
+        "from": "Iyz6wLOMn8: Auto",
+        "to": "f4WcRqeCTt: Auto"
     },
     {
         "options": {
@@ -628,9 +730,45 @@
             "hoveredStroke": "#70CAFF",
             "strokeThickness": 1,
             "startCap": "FilledCircle",
-            "endCap": "ArrowEnd"
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
         },
-        "from": "Iyz6wLOMn8",
-        "to": "c8Qv7IeoID"
+        "from": "Iyz6wLOMn8: Auto",
+        "to": "c8Qv7IeoID: Auto"
+    },
+    {
+        "options": {
+            "id": "jbZGfkQTwz",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "f4WcRqeCTt: Bottom",
+        "to": "psWAPz8co9: Auto"
+    },
+    {
+        "options": {
+            "id": "Q4Bik58S3J",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "c8Qv7IeoID: Auto",
+        "to": "psWAPz8co9: Auto"
     }
 ]}

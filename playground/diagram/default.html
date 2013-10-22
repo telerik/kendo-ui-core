@@ -325,6 +325,7 @@
 
 
 
+
 </script>
 
 <script>
@@ -442,7 +443,6 @@ $(function () {
     $("#canvas").kendoDiagram({
         zoom: function (e) {
             slider.value(this._zoom);
-            console.log(this._zoom);
         },
         select: function (e) {
             var items = e.items, scIndex = 0 , ecIndex = 0, item;
@@ -583,7 +583,7 @@ $(function () {
     }
 
     var slider = $("#slider").kendoSlider({
-        min: 0.55,
+        min: 0.6,
         value: 1,
         max: 2,
         smallStep: .1,
