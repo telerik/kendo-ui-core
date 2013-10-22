@@ -556,7 +556,8 @@ test("Copy - copying the options", function () {
     var shapesCount = d.shapes.length;
     var s1 = d.shapes[0];
     var copy = s1.clone();
-
+    ok(copy.id!==s1.id && copy.options.id!==s1.options.id);
+    copy.options.id = s1.options.id;
     deepEqual(copy.options, s1.options);
 });
 

@@ -1299,12 +1299,15 @@ kendo_module({
 
             if (itemsOrRect !== undefined) {
                 if (!addToSelection) {
-                    for (i = 0; i < this._selectedItems.length; i++) {
-                        this._selectedItems[i].select(false);
+                    while (this._selectedItems.length > 0) {
+                        this._selectedItems[0].select(false);
                     }
                 }
                 if (Utils.isBoolean(itemsOrRect)) {
-                    return;
+                    if (itemsOrRect === false)
+                        return;
+                    else
+                        this.select("All");
                 }
                 else if (itemsOrRect.toString().toLowerCase() === "all") {
                     items = this.shapes.concat(this.connections);

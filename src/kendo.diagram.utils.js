@@ -53,7 +53,7 @@ kendo_module({
             return Object.prototype.toString.call(obj) == '[object String]';
         },
         isBoolean: function (obj) {
-            return Object.prototype.toString.call(obj) == '[object boolean]';
+            return Object.prototype.toString.call(obj) == '[object Boolean]';
         },
         isType: function (obj, type) {
             return Object.prototype.toString.call(obj) == '[object ' + type + ']';
@@ -114,7 +114,7 @@ kendo_module({
                 throw "Not an array of points.";
             }
             for (var i = 0; i < v.length; i += 2) {
-                points.push(new Point(v[i], v[i + 1]));
+                points.push(new kendo.diagram.Point(v[i], v[i + 1]));
             }
             return points;
         },
