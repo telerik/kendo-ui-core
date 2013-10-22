@@ -333,24 +333,6 @@
                 equal(pb._isStarted, false);
             });
 
-            // test("_isFinished is set to false initially when value is not equal to max", function(){
-            //     var pb = new ProgressBar(container, {
-            //         value: 10,
-            //         max: 100
-            //     });
-
-            //     equal(pb._isFinished, false);
-            // });
-
-            // test("_isFinished is set to false initially when value is equal to max", function(){
-            //     var pb = new ProgressBar(container, {
-            //         value: 100,
-            //         max: 100
-            //     });
-
-            //     equal(pb._isFinished, false);
-            // });
-
             test("ProgressBar is initialized correctly via data attribute", function() {
                 var dom = $("<div data-role='progressbar'></div>");
                 $(container).append(dom);

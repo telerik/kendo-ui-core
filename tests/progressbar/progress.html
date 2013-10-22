@@ -64,7 +64,7 @@
                 setTimeout(function(){
                     equal(pb.wrapper.find(".k-complete").length, 1);
                     start();
-                }, 30);
+                }, 70);
             });
 
             asyncTest("k-complete is removed when the progress width becomes less than 98%", function() {
@@ -85,7 +85,7 @@
                 setTimeout(function(){
                     equal(pb.wrapper.find(".k-complete").length, 0);
                     start();
-                }, 50);
+                }, 100);
             });
 
             asyncTest("k-complete is not added when the progress width is less than or equal to 98%", function() {
