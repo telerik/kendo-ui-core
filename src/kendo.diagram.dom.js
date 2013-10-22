@@ -1198,6 +1198,15 @@ kendo_module({
             }
             return result;
         },
+        transformRect: function (r) { // transforms point from main canvas coordinates to non-transformed (origin).
+            var result = r;
+            if (this._matrix) {
+                var tl = this._matrix.apply(r.topLeft()),
+                    br = this._matrix.apply(r.bottomRight());
+                result = Rect.fromPoints(tl, br);
+            }
+            return result;
+        },
         focus: function () {
             var x = window.scrollX, y = window.scrollY;
             this.canvas.focus();

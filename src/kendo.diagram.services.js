@@ -1371,7 +1371,7 @@ kendo_module({
         bounds: function (value) {
             if (value) {
                 this._innerBounds = value.clone();
-                this._bounds = value.inflate(this.options.offset, this.options.offset);
+                this._bounds = this.diagram.transformRect(value).inflate(this.options.offset, this.options.offset);
             }
             else {
                 return this._bounds;
@@ -1506,12 +1506,12 @@ kendo_module({
             this._initialAngle = this._angle;
         },
         move: function (handle, p) {
-            var tp = this.diagram.transformPoint(p), delta = p.minus(this._cp), dragging,
+            var delta = p.minus(this._cp), dragging,
                 dtl = new Point(), dbr = new Point(), bounds,
                 center, shape, i, angle;
             if (handle.y === -2 && handle.x === -1) {
                 center = this._innerBounds.center();
-                this._angle = Math.findAngle(center, tp);
+                this._angle = Math.findAngle(center, p);
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
                     angle = (this._angle + this.initialRotates[i] - this._startAngle) % 360;
@@ -1583,13 +1583,10 @@ kendo_module({
         },
         _hover: function () {
         },
-        _refreshBounds: function () {
-            var bounds = this.shapes.length == 1 ? this.shapes[0].visualBounds() : this.diagram.getNonRotatedBoundingBox(this.shapes);
-            this.bounds(bounds);
-        },
         refresh: function () {
-            var that = this, b, bounds;
-            that._refreshBounds();
+            var that = this, b,
+                bounds = this.shapes.length == 1 ? this.shapes[0].bounds().clone() : this.diagram.getNonRotatedBoundingBox(this.shapes);
+            this.bounds(bounds);
 
             bounds = this.bounds();
             if (this.shapes.length > 0) {
