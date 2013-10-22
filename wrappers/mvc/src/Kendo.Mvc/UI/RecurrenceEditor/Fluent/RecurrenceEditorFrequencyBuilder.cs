@@ -1,7 +1,5 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
-    using System;
-
     /// <summary>
     /// Creates views for the <see cref="Scheduler{TModel}" /> class.
     /// </summary>

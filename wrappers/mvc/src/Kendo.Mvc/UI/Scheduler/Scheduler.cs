@@ -1,13 +1,11 @@
 ﻿namespace Kendo.Mvc.UI
 {
+    using Kendo.Mvc.Infrastructure;
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Web.Mvc;
-    using Kendo.Mvc.Infrastructure;
-    using Kendo.Mvc.Extensions;
     using System.Text.RegularExpressions;
+    using System.Web.Mvc;
 
     /// <summary>
     /// The server side wrapper for Kendo UI Scheduler

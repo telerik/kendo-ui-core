@@ -1,8 +1,8 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    using System.Web.Mvc;
-    using System.Collections.Generic;
     using System;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
 
     public interface IScheduler<TModel>
         where TModel : class

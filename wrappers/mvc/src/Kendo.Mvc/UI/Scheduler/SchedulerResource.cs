@@ -1,12 +1,9 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Linq.Expressions;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;
+    using System;
+    using System.Collections.Generic;
 
     public class SchedulerResource<TModel> : JsonObject, IHideObjectMembers
         where TModel : class

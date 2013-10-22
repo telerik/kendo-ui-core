@@ -1,13 +1,10 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Linq.Expressions;
-    using System.Web.Mvc;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.Resources;
+    using System;
+    using System.Linq.Expressions;
+    using System.Web.Mvc;
 
     /// <summary>
     /// Creates resources for the <see cref="Scheduler{TModel}" /> class.

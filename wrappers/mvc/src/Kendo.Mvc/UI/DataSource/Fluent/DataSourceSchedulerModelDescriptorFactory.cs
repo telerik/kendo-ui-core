@@ -1,10 +1,8 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
     using Extensions;
-    using Kendo.Mvc.Infrastructure;
+    using System;
+    using System.Linq.Expressions;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="DataSource"/> Model definition.

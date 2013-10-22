@@ -1,9 +1,5 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.UI;
-    using System.Web.Mvc;
-
     public class RecurrenceEditorHtmlBuilder
     {
         public RecurrenceEditorHtmlBuilder(RecurrenceEditor component)

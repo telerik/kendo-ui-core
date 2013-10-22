@@ -1,6 +1,5 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    using Kendo.Mvc.Extensions;
     using System.Collections.Generic;
 
     public class SchedulerGroupSettings : JsonObject

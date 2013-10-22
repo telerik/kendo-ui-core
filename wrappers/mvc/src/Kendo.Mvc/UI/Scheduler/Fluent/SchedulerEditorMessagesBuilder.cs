@@ -1,9 +1,5 @@
 ﻿namespace Kendo.Mvc.UI.Fluent
 {
-    using System;
-    using System.Collections;
-    using System.Web.Mvc;
-
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="SchedulerEditorMessages"/>.
     /// </summary>

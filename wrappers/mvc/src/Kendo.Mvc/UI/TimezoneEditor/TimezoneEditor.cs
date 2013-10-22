@@ -1,12 +1,9 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    using System;
+    using Kendo.Mvc.Infrastructure;
     using System.Collections.Generic;
     using System.IO;
     using System.Web.Mvc;
-    using Kendo.Mvc.Infrastructure;
-    using Kendo.Mvc.Extensions;
-    using System.Text.RegularExpressions;
 
     public class TimezoneEditor : WidgetBase
     {

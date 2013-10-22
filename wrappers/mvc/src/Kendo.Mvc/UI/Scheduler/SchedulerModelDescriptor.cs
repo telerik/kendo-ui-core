@@ -1,11 +1,8 @@
 ﻿namespace Kendo.Mvc.UI
 {
+    using Extensions;
     using System;
     using System.Collections.Generic;
-    using System.Data;
-    using System.Linq;
-    using System.Web.Mvc;
-    using Extensions;
 
     public class SchedulerModelDescriptor : ModelDescriptor
     {

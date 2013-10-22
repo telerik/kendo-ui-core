@@ -1,13 +1,12 @@
 ﻿namespace Kendo.Mvc.UI
 {
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.Resources;
     using System;
     using System.Collections.Generic;
     using System.Text.RegularExpressions;
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
-    using Kendo.Mvc.Extensions;
-    using Kendo.Mvc.Resources;
-    using System.Data;
 
     public class SchedulerEditableSettings<T> : SchedulerEditableSettingsBase
         where T : class

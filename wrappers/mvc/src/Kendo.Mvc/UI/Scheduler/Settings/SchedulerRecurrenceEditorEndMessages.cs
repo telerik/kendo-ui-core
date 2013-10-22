@@ -1,7 +1,7 @@
 ﻿namespace Kendo.Mvc.UI
 {
-    using System.Collections.Generic;
     using Kendo.Mvc.Resources;
+    using System.Collections.Generic;
 
     public class SchedulerRecurrenceEditorEndMessages : JsonObject
     {
