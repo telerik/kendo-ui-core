@@ -30,3 +30,5 @@ function stub(that, methods) {
 
     return that;
 }
+
+QUnit.config.hidepassed = true;
