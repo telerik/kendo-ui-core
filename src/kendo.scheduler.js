@@ -1960,6 +1960,9 @@ kendo_module({
 
                 if (isMobile) {
                     that._moveDraggable.bind("hold", function(e) {
+                        if (that.element.find(".k-scheduler-monthview").length) {
+                            e.preventDefault();
+                        }
                         that.element.find(".k-scheduler-hold").removeClass("k-scheduler-hold");
                         e.currentTarget.addClass("k-scheduler-hold");
                     });
