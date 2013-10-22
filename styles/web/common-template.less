@@ -4637,9 +4637,27 @@ div[name="recurrenceRule"] > .k-dropdown
     float: left;
 }
 
-.km-pane-wrapper .k-popup-edit-form .k-scheduler-delete
+.km-pane-wrapper .k-popup-edit-form .k-scheduler-delete,
+.km-actionsheet .k-scheduler-delete,
+.km-actionsheet .k-scheduler-delete + .km-actionsheet-cancel,
+.km-actionsheet .k-scheduler-delete > a,
+.km-actionsheet .k-scheduler-delete + .km-actionsheet-cancel > a
 {
-    width: 100%;
+    display:block;
+    text-align: center;
+}
+
+.km-actionsheet .k-scheduler-delete,
+.km-actionsheet .k-scheduler-delete + .km-actionsheet-cancel
+{
+    margin: .3em 1em;
+}
+
+.km-actionsheet .k-scheduler-delete > a,
+.km-actionsheet .k-scheduler-delete + .km-actionsheet-cancel > a
+{
+    text-decoration: none;
+    color: inherit;
 }
 
 /* Tooltip */
