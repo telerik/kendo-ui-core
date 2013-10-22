@@ -9,7 +9,6 @@ gem "rubyzip", :require => 'zip/zip'
 gem "winrm"
 
 group :development do
-    gem "debugger"
     gem 'guard'
     gem 'guard-shell'
     gem 'guard-livereload'
