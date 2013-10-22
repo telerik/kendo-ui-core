@@ -136,10 +136,20 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// The scatter chart error bars configuration.
+        /// </summary>
+        public ScatterErrorBars ErrorBars
+        {
+            get;
+            set;
+        }
+
         protected virtual void Initialize()
         {
             Labels = new ChartPointLabels();
             Markers = new ChartMarkers();
+            ErrorBars = new ScatterErrorBars();
         }
 
         public override IChartSerializer CreateSerializer()

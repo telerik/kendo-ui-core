@@ -100,5 +100,14 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets or sets the series error bars options
+        /// </summary>
+        CategoricalErrorBars ErrorBars
+        {
+            get;
+            set;
+        }
     }
 }

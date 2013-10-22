@@ -379,6 +379,15 @@
     <Compile Include="UI\Chart\Enums\ChartLineStyle.cs" />
     <Compile Include="UI\Chart\Enums\ChartAreaStyle.cs" />
     <Compile Include="UI\Chart\Enums\RenderingMode.cs" />
+    <Compile Include="UI\Chart\CategoricalErrorBars.cs" />
+    <Compile Include="UI\Chart\Serialization\CategoricalErrorBarsSerializer.cs" />
+    <Compile Include="UI\Chart\ErrorBarsBase.cs" />
+    <Compile Include="UI\Chart\Fluent\CategoricalErrorBarsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ErrorBarsBuilderBase.cs" />
+    <Compile Include="UI\Chart\Serialization\ErrorBarsSerializerBase.cs" />
+    <Compile Include="UI\Chart\ScatterErrorBars.cs" />
+    <Compile Include="UI\Chart\Fluent\ScatterErrorBarsBuilder.cs" />
+    <Compile Include="UI\Chart\Serialization\ScatterErrorBarsSerializer.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPanesFactory.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPaneBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAxisBaseUnitStepsBuilder.cs" />

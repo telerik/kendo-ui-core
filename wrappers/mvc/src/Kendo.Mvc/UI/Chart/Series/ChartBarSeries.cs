@@ -165,6 +165,15 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the series error bars options
+        /// </summary>
+        public CategoricalErrorBars ErrorBars
+        {
+            get;
+            set;
+        }
+
         public override IChartSerializer CreateSerializer()
         {
             return new ChartBarSeriesSerializer(this);
@@ -176,6 +185,7 @@ namespace Kendo.Mvc.UI
             Stacked = false;
             Labels = new ChartBarLabels();
             Border = new ChartElementBorder();
+            ErrorBars = new CategoricalErrorBars();
         }
     }
 

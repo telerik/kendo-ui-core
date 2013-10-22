@@ -44,6 +44,12 @@ namespace Kendo.Mvc.UI
                 result.Add("labels", labelsData);
             }
 
+            var errorBars = series.ErrorBars.CreateSerializer().Serialize();
+            if (errorBars.Count > 0)
+            {
+                result.Add("errorBars", errorBars);
+            }
+
             return result;
         }
 

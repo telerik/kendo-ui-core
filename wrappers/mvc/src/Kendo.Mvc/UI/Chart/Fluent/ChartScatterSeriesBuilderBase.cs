@@ -165,5 +165,12 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return base.Axis(axis);
         }
+
+        public virtual TBuilder ErrorBars(Action<ScatterErrorBarsBuilder> configurator)
+        {
+            configurator(new ScatterErrorBarsBuilder(Series.ErrorBars));
+
+            return this as TBuilder;
+        }
     }
 }

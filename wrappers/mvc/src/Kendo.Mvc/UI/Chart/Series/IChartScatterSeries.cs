@@ -75,5 +75,14 @@ namespace Kendo.Mvc.UI
             get;
             set;
         }
+
+        /// <summary>
+        /// The scatter chart error bars configuration.
+        /// </summary>
+        ScatterErrorBars ErrorBars
+        {
+            get;
+            set;
+        }
     }
 }

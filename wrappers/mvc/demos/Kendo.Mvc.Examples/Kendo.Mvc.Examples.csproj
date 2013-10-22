@@ -145,6 +145,7 @@
     <Compile Include="Controllers\DataViz\Api\EventsController.cs" />
     <Compile Include="Controllers\DataViz\Api\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Api\SelectionController.cs" />
+    <Compile Include="Controllers\DataViz\Area_Charts\Error_BarsController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Step_AreaController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Grouped_DataController.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="Controllers\DataViz\Barcode\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\ColumnController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Date_AxisController.cs" />
+    <Compile Include="Controllers\DataViz\Bar_Charts\Error_BarsController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Gap_SpacingController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Grouped_Stacked_BarController.cs" />
@@ -187,6 +189,7 @@
     <Compile Include="Controllers\DataViz\Line_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Line_Charts\Error_BarsController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Multiple_AxesController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\NotesController.cs" />
@@ -648,6 +651,7 @@
     <Content Include="Areas\aspx\Views\dataviz\api\events.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\api\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\api\selection.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\area_charts\error_bars.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\step_area.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\grouped_data.aspx" />
@@ -660,6 +664,7 @@
     <Content Include="Areas\aspx\Views\dataviz\barcode\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\column.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\date_axis.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\bar_charts\error_bars.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\gap_spacing.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\grouped_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\grouped_stacked_bar.aspx" />
@@ -687,6 +692,7 @@
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\linear_gauge\scale_options.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\date_axis.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\line_charts\error_bars.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\grouped_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\local_data.aspx" />
@@ -2782,6 +2788,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\web\progressbar\rtl.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\area_charts\error_bars.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\line_charts\error_bars.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\bar_charts\error_bars.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -114,6 +114,15 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the series error bars options
+        /// </summary>
+        public CategoricalErrorBars ErrorBars
+        {
+            get;
+            set;
+        }
+
         public override IChartSerializer CreateSerializer()
         {
             return new ChartAreaSeriesSerializer(this);
@@ -127,6 +136,7 @@ namespace Kendo.Mvc.UI
             Line = new ChartAreaLine();
             Orientation = ChartSeriesOrientation.Horizontal;
             Style = ChartAreaStyle.Normal;
+            ErrorBars = new CategoricalErrorBars();
         }
     }
 

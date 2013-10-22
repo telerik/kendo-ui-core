@@ -225,5 +225,15 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Configures the series error bars
+        /// </summary>
+        /// <param name="configurator">The configuration action.</param>
+        public ChartAreaSeriesBuilder<T> ErrorBars(Action<CategoricalErrorBarsBuilder> configurator)
+        {
+            configurator(new CategoricalErrorBarsBuilder(Series.ErrorBars));
+            return this;
+        }
     }
 }
