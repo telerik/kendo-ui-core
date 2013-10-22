@@ -325,11 +325,14 @@ kendo_module({
     });
 
     var RotateUnit = Class.extend({
-        init: function (shapes, undoRotates) {
+        init: function (adorner, shapes, undoRotates, angle) {
             this.shapes = shapes;
             this.undoRotates = undoRotates;
             this.title = "Rotation";
             this.redoRotates = [];
+            this.redoAngle = adorner._angle;
+            this.undoAngle = angle;
+            this.adorner = adorner;
             for (var i = 0; i < this.shapes.length; i++) {
                 var shape = this.shapes[i];
                 this.redoRotates.push(shape.rotate().angle);
@@ -340,12 +343,16 @@ kendo_module({
                 var shape = this.shapes[i];
                 shape.rotate(this.undoRotates[i]);
             }
+            this.adorner._angle = this.undoAngle;
+            this.adorner.refresh();
         },
         redo: function () {
             for (var i = 0; i < this.shapes.length; i++) {
                 var shape = this.shapes[i];
                 shape.rotate(this.redoRotates[i]);
             }
+            this.adorner._angle = this.redoAngle;
+            this.adorner.refresh();
         }
     });
 
@@ -1503,22 +1510,23 @@ kendo_module({
                 var shape = this.shapes[i];
                 this.shapeStates.push(shape.bounds());
             }
+            this._initialAngle = this._angle;
         },
         move: function (handle, p) {
             var tp = this.diagram.transformPoint(p), delta = p.minus(this._cp), dragging,
                 dtl = new Point(), dbr = new Point(), bounds,
-                center, shape, i, shapeBounds, angle, shapeCenter, newPosition;
+                center, shape, i, sb, angle, shapeCenter, newPosition, deltaAngle;
             if (handle.y === -2 && handle.x === -1) {
                 center = this._innerBounds.center();
                 this._angle = Math.findAngle(center, tp);
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
-                    shapeBounds = this.initialStates[i];
+                    sb = shape.bounds();
                     angle = (this._angle + this.initialRotates[i] - this._startAngle) % 360;
-                    shapeCenter = new Point(shapeBounds.width / 2, shapeBounds.height / 2);
-                    newPosition = shapeBounds.center().rotate(center, 360 - this._angle).minus(shapeCenter);
-
-                    shape._rotationOffset = shape._rotationOffset.plus(shape.position().minus(newPosition));
+                    deltaAngle = angle - shape.rotate().angle;
+                    shapeCenter = new Point(sb.width / 2, sb.height / 2);
+                    newPosition = sb.center().rotate(center, 360 - deltaAngle).minus(shapeCenter);
+                    shape._rotationOffset = shape._rotationOffset.plus(newPosition.minus(sb.topLeft()));
                     shape.position(newPosition);
                     shape.rotate(angle);
 
@@ -1546,7 +1554,6 @@ kendo_module({
                         dbr.y = delta.y;
                     }
                 }
-                var change;
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
                     bounds = shape.bounds();
@@ -1554,14 +1561,7 @@ kendo_module({
                     if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) {
                         shape.bounds(newBounds);
                         shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
-                        change = true;
                     }
-                }
-
-                if (change) {
-                    var aBounds = this._displaceBounds(this._innerBounds, dtl, dbr, dragging);
-                    this.bounds(aBounds);
-                    this.refresh();
                 }
                 this._positions();
             }
@@ -1584,7 +1584,7 @@ kendo_module({
             var unit;
             if (this._cp != this._sp) {
                 if (this._rotated) {
-                    //unit = new RotateUnit(this.shapes, this.initialRotates);
+                    unit = new RotateUnit(this, this.shapes, this.initialRotates, this._initialAngle);
                 }
                 else {
                     unit = new TransformUnit(this.shapes, this.shapeStates);
@@ -1597,10 +1597,8 @@ kendo_module({
         _hover: function () {
         },
         _refreshBounds: function () {
-            var bounds = this.shapes.length == 1 ? this.shapes[0].visualBounds() : this.diagram.getBoundingBox(this.shapes);
-            if (!this._manipulating) {
-                this.bounds(bounds);
-            }
+            var bounds = this.shapes.length == 1 ? this.shapes[0].visualBounds() : this.diagram.getNonRotatedBoundingBox(this.shapes);
+            this.bounds(bounds);
         },
         refresh: function () {
             var that = this, b, bounds;
@@ -1630,7 +1628,6 @@ kendo_module({
             }
             else {
                 this.visual.visible(false);
-                //this._angle = 0;
             }
         }
     });

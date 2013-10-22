@@ -209,7 +209,7 @@ kendo_module({
                         this.visual.remove(this.contentVisual);
                     }
                     this.contentVisual = undefined;
-                    this.options.content= "";
+                    this.options.content = "";
                 }
                 else {
                     var bounds = this.bounds();
@@ -341,7 +341,7 @@ kendo_module({
          */
         clone: function () {
             var json = this.serialize();
-            json.options.id= kendo.diagram.randomId();
+            json.options.id = kendo.diagram.randomId();
             var clone = new Shape(json.options);
             clone.diagram = this.diagram;
             /*clone.visual.native.id = clone.id;
@@ -1400,12 +1400,29 @@ kendo_module({
         },
         getBoundingBox: function (items) {
             var rect = Rect.empty(), di = this._getDiagramItems(items);
-           if (di.shapes.length > 0) {
+            if (di.shapes.length > 0) {
                 var item = di.shapes[0];
                 rect = item.rotatedBounds();
                 for (var i = 1; i < di.shapes.length; i++) {
                     item = di.shapes[i];
                     rect = rect.union(item.rotatedBounds());
+                }
+            }
+            return rect;
+        },
+        getNonRotatedBoundingBox: function (items) {
+            var rect = Rect.empty(), di = this._getDiagramItems(items), temp;
+            if (di.shapes.length > 0) {
+                var item = di.shapes[0];
+                rect = item.bounds().clone();
+                rect.x -= item._rotationOffset.x;
+                rect.y -= item._rotationOffset.y;
+                for (var i = 1; i < di.shapes.length; i++) {
+                    item = di.shapes[i];
+                    temp = item.bounds().clone();
+                    temp.x -= item._rotationOffset.x;
+                    temp.y -= item._rotationOffset.y;
+                    rect = rect.union(temp);
                 }
             }
             return rect;
