@@ -116,10 +116,10 @@
                     color: "#3eaee2"
                 }];
             
-        function createChart(chartName,data){
+        function createChart(chartName,data,text){
             $('#'+chartName).kendoChart({
                 title: {
-                    text: "November",
+                    text: text,
                     position: "bottom"
                 },
                 legend: {
@@ -131,12 +131,12 @@
                         background: "transparent",
                         color:"white",
                         format: "N0"
-                    }
+                    },
+                    dynamicSlope: false,
+                    dynamicHeight: false
                 },
                 series: [{
                     type: "funnel",
-                    dynamicSlope: false,
-                    dynamicHeight: false,
                     data: data
                 }],
                 tooltip: {
@@ -147,40 +147,44 @@
         }
 
         function refresh() {
-            var slider = slider = $('#neckSlider').data("kendoSlider");
+            var slider = $('#neckSlider').data("kendoSlider");
             var chartNames = ["chart-oct", "chart-nov", "chart-dec"];
 
             for (var idx in chartNames) {
                 var chart = $("#" + chartNames[idx]).data("kendoChart");
-                funnelSeries = chart.options.series[0];
+                
+                var options =
+                {
+                    seriesDefaults: {
+                        neckRatio: slider.value(),
+                        dynamicHeight : $('#dynamicHeight').is(':checked'),
+                        dynamicSlope : $('#dynamicSlope').is(':checked')
+                    }
+                }
 
-                chart.options.transitions = false;
-                funnelSeries.neckRatio = slider.value();
-                funnelSeries.dynamicHeight = $('#dynamicHeight').is(':checked');
-                funnelSeries.dynamicSlope = $('#dynamicSlope').is(':checked');
-
-                slider.enable(!funnelSeries.dynamicSlope);
-                chart.refresh();
+                chart.setOptions(options);
+                slider.enable(!options.seriesDefaults.dynamicSlope);
             }
         }
 
         $(document).ready(function () {
-            createChart('chart-oct',octData);
-            createChart('chart-nov',novData);
-            createChart('chart-dec',decData);
-
             $("#neckSlider").kendoSlider({
                 change: refresh,
-                value:0.3,
+                value: 0.3,
                 min: 0,
                 max: 10,
                 smallStep: 0.01,
                 largeStep: 0.1
             });
 
-            $('.configuration-horizontal').on('click', ':checkbox', refresh);
-        });
+            createChart('chart-oct', octData, "October");
+            createChart('chart-nov', novData, "November");
+            createChart('chart-dec', decData, "December");
 
-        $(document).bind("kendo:skinChange", createChart);
+
+            $('.configuration-horizontal').on('click', ':checkbox', refresh);
+            $(document).bind("kendo:skinChange", refresh);
+        });
+        
     </script>
 </div>

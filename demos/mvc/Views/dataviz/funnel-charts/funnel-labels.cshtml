@@ -39,6 +39,26 @@
             </ul>
         </div>
         <div class="config-section">
+            <span class="configHead">Position</span>
+            <ul class="options">
+                <li>
+                    <label>
+                        <input name="positionType" type="radio" value="center" checked="checked" autocomplete="off" /> Center
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input name="positionType" type="radio" value="top" autocomplete="off" /> Top
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input name="positionType" type="radio" value="bottom" autocomplete="off" /> Bottom
+                    </label>
+                </li>
+            </ul>
+        </div>
+        <div class="config-section">
             <span class="configHead">Font color</span>
             <ul class="options">
                 <li><label for="color"></label></li>
@@ -69,20 +89,22 @@
                     text: "The AIDA model"
                 },
                 legend: {
-                   position: "top"
+                    position: "top"
                 },
                 seriesDefaults: {
+                    dynamicHeight: false,
                     labels: {
                         template: "#= dataItem.category #",
-                        visible: true,      
-                        font : "15px sans-serif",                  
+                        visible: true,
+                        font: "15px sans-serif",
                         align: "center",
+                        position: "center",
                         background: "transparent",
                         color: "#000",
                         padding: 5,
                         border: {
                             width: 1,
-                            dashType :"dot",
+                            dashType: "dot",
                             color: "#000"
                         },
                         format: "N0"
@@ -90,7 +112,6 @@
                 },
                 series: [{
                     type: "funnel",
-                    dynamicHeight: false,
                     data: [{
                         category: "Awareness",
                         value: 4
@@ -120,7 +141,7 @@
                 max: 40
             });
             $('#color').kendoColorPicker({ change: refresh, value: "#000", buttons: false });
-            $(document).bind("kendo:skinChange", createChart);
+            $(document).bind("kendo:skinChange", refresh);
             $(".configuration-horizontal").on("change",":checkbox,:radio", refresh);
         });
 
@@ -133,27 +154,44 @@
                 labepOptions = funnelSeries.labels,
                 labels = $("#labels").prop("checked"),
                 alignInputs = $("input[name='alignType']"),
-                alignLabels = alignInputs.filter(":checked").val();
+                alignLabels = alignInputs.filter(":checked").val(),
+                positionInputs = $("input[name='positionType']"),
+                position = positionInputs.filter(":checked").val();
 
-            chart.options.transitions = false;
-            labepOptions.visible = labels;
-            labepOptions.align = alignLabels;
-            labepOptions.font = slider.value() + "px sans-serif";
-            labepOptions.color = colorPicker.value();
-            labepOptions.border = showBorder ? {
-                width: 1,
-                dashType: "dot",
-                color: "#000"
-            } : {
-                width:0
-            };
+            var borderOptions = showBorder ? {
+                    width: 1,
+                    dashType: "dot",
+                    color: "#000"
+                } : {
+                    width:0
+                };
+
+            var seriesOptions = {
+                dynamicHeight: false,
+                labels: {
+                    template: "#= dataItem.category #",
+                    visible: labels,
+                    font: slider.value() + "px sans-serif",
+                    align: alignLabels,
+                    position:position,
+                    background: "transparent",
+                    color: colorPicker.value(),
+                    padding: 5,
+                    border: borderOptions,
+                    format: "N0"
+                }
+            }
 
             $('#showBorder').attr("disabled", !labels);
             alignInputs.attr("disabled", !labels);
+            positionInputs.attr("disabled",!labels);
             slider.enable(labels);
             colorPicker.enable(labels);
 
-            chart.refresh();
+            chart.setOptions({
+                seriesDefaults: seriesOptions,
+                transitions : false
+            })
         }
     </script>
 </div>
