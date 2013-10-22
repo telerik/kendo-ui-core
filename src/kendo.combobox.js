@@ -379,7 +379,9 @@ kendo_module({
 
             if (value.length !== caret || !word) {
                 element.value = value;
-                List.selectText(element, caret, value.length);
+                if (element === activeElement()) {
+                    List.selectText(element, caret, value.length);
+                }
             }
         },
 
@@ -674,7 +676,7 @@ kendo_module({
 
                 input.val(placeholder);
 
-                if (!placeholder && input[0] === document.activeElement) {
+                if (!placeholder) { //} && input[0] === activeElement()) {
                     List.selectText(input[0], 0, 0);
                 }
             }
