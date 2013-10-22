@@ -310,7 +310,7 @@ def patch_examples_csproj t
     File.write(t.name, csproj)
 end
 
-def patch_examples_solution t
+def patch_examples_solution(t, vs)
     sln = File.read(t.name)
 
     #Remove the Kendo.Mvc project
@@ -328,7 +328,14 @@ def patch_examples_solution t
     #Remove empty lines
     sln.gsub!(/^$\n/, '')
 
+    if vs == 'VS2013'
+        sln = upgrade_solution(sln)
+    end
     File.write(t.name, sln)
+end
+
+def upgrade_solution (sln)
+    sln.sub('# Visual Studio 2012', "# Visual Studio 2013\nVisualStudioVersion = 12.0.21005.1\nMinimumVisualStudioVersion = 10.0.40219.1")
 end
 
 def patch_solution t
@@ -374,7 +381,7 @@ end
 
         # Patch the solution - leave only the examples project
         file  "dist/bundles/aspnetmvc.#{license}/wrappers/aspnetmvc/Examples/#{vs}/Kendo.Mvc.Examples.sln" do |t|
-            patch_examples_solution t
+            patch_examples_solution(t, vs)
         end
 
         # Patch Visual Studio Project - fix paths etc.
