@@ -28,6 +28,11 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The average of all values for the date period
         /// </summary>
-        Avg
+        Avg,
+
+        /// <summary>
+        /// The first of all values for the date period
+        /// </summary>
+        First
     }
 }

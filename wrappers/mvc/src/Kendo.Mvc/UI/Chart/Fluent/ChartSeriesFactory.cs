@@ -2344,6 +2344,133 @@ namespace Kendo.Mvc.UI.Fluent
             return new ChartScatterSeriesBuilder<TModel>(polarScatterSeries);
         }
 
+        /// <summary>
+        /// Defines bound box plot series.
+        /// </summary>
+        public virtual ChartBoxPlotSeriesBuilder<TModel> BoxPlot<TValue, TCategory>(
+            Expression<Func<TModel, TValue>> lowerExpression,
+            Expression<Func<TModel, TValue>> q1Expression,
+            Expression<Func<TModel, TValue>> medianExpression,
+            Expression<Func<TModel, TValue>> q3Expression,
+            Expression<Func<TModel, TValue>> upperExpression,
+            Expression<Func<TModel, TValue>> meanExpression = null,
+            Expression<Func<TModel, List<TValue>>> outliersExpression = null,
+            Expression<Func<TModel, string>> colorExpression = null,
+            Expression<Func<TModel, TCategory>> categoryExpression = null,
+            Expression<Func<TModel, string>> noteTextExpression = null
+            )
+        {
+            var boxPlotSeries = new ChartBoxPlotSeries<TModel, TValue, TCategory>(
+                lowerExpression, q1Expression, medianExpression, q3Expression, upperExpression, meanExpression, outliersExpression, colorExpression, categoryExpression, noteTextExpression
+            );
+
+            Container.Series.Add(boxPlotSeries);
+
+            return new ChartBoxPlotSeriesBuilder<TModel>(boxPlotSeries);
+        }
+
+        /// <summary>
+        /// Defines bound box plot series.
+        /// </summary>
+        public virtual ChartBoxPlotSeriesBuilder<TModel> BoxPlot<TValue>(
+            Expression<Func<TModel, TValue>> lowerExpression,
+            Expression<Func<TModel, TValue>> q1Expression,
+            Expression<Func<TModel, TValue>> medianExpression,
+            Expression<Func<TModel, TValue>> q3Expression,
+            Expression<Func<TModel, TValue>> upperExpression,
+            Expression<Func<TModel, TValue>> meanExpression = null,
+            Expression<Func<TModel, List<TValue>>> outliersExpression = null,
+            Expression<Func<TModel, string>> colorExpression = null,
+            Expression<Func<TModel, string>> noteTextExpression = null
+            )
+        {
+            return BoxPlot<TValue, string>(lowerExpression, q1Expression, medianExpression, q3Expression, upperExpression, meanExpression, outliersExpression, colorExpression, null, noteTextExpression);
+        }
+
+        /// <summary>
+        /// Defines bound box plot series.
+        /// </summary>
+        public virtual ChartBoxPlotSeriesBuilder<TModel> BoxPlot(
+            string lowerMemberName,
+            string q1MemberName,
+            string medianMemberName,
+            string q3MemberName,
+            string upperMemberName,
+            string meanMemberName,
+            string outliersMemberName,
+            string colorMemberName = null,
+            string categoryMemberName = null,
+            string noteTextMemberName = null)
+        {
+            return BoxPlot(
+                null, lowerMemberName, q1MemberName, medianMemberName,
+                q3MemberName, upperMemberName, meanMemberName, outliersMemberName,
+                colorMemberName, categoryMemberName, noteTextMemberName
+            );
+        }
+
+        /// <summary>
+        /// Defines bound box plot series.
+        /// </summary>
+        public virtual ChartBoxPlotSeriesBuilder<TModel> BoxPlot(
+            Type memberType,
+            string lowerMemberName,
+            string q1MemberName,
+            string medianMemberName,
+            string q3MemberName,
+            string upperMemberName,
+            string meanMemberName = null,
+            string outliersMemberName = null,
+            string colorMemberName = null,
+            string categoryMemberName = null,
+            string noteTextMemberName = null)
+        {
+            var lowerExpr = BuildMemberExpression(memberType, lowerMemberName);
+            var q1Expr = BuildMemberExpression(memberType, q1MemberName);
+            var medianExpr = BuildMemberExpression(memberType, medianMemberName);
+            var q3Expr = BuildMemberExpression(memberType, q3MemberName);
+            var upperExpr = BuildMemberExpression(memberType, upperMemberName);
+            var meanExpr = BuildMemberExpression(memberType, meanMemberName);
+            var outliersExpr = BuildMemberExpression(memberType, outliersMemberName);
+            var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(memberType, colorMemberName) : null;
+            var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(memberType, categoryMemberName) : null;
+            var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(memberType, noteTextMemberName) : null;
+
+            var seriesType = typeof(ChartBoxPlotSeries<,,>).MakeGenericType(
+                typeof(TModel), lowerExpr.Body.Type, categoryType
+            );
+
+            var series = (IChartBoxPlotSeries)BuildSeries(
+                seriesType, lowerExpr, q1Expr, medianExpr, q3Expr, upperExpr, meanExpr, outliersExpr,
+                colorExpr, categoryExpr, noteTextExpr
+            );
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = lowerMemberName.AsTitle() + ", " + q1MemberName.AsTitle() + ", " + medianMemberName.AsTitle() + ", " + q3MemberName.AsTitle() + ", " + upperMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartBoxPlotSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines box plot series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartBoxPlotSeriesBuilder<TModel> BoxPlot(IEnumerable data)
+        {
+            var boxPlotSeries = new ChartBoxPlotSeries<TModel, object, string>(data);
+
+            Container.Series.Add(boxPlotSeries);
+
+            return new ChartBoxPlotSeriesBuilder<TModel>(boxPlotSeries);
+        }
+
         private LambdaExpression BuildMemberExpression(Type memberType, string memberName)
         {
             const bool liftMemberAccess = false;

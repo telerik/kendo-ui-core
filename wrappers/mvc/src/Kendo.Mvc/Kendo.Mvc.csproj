@@ -414,6 +414,7 @@
     <Compile Include="UI\Chart\Fluent\ChartMinorGridLinesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartMinorTicksBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartMajorTicksBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartBoxPlotSeriesBuilder.cs" />
     <Compile Include="UI\Chart\ISeriesContainer.cs" />
     <Compile Include="UI\Chart\Enums\ChartAxisTickType.cs" />
     <Compile Include="UI\Chart\Enums\ChartBarGradient.cs" />
@@ -464,6 +465,7 @@
     <Compile Include="UI\Chart\Serialization\ChartAxisSerializerBase.cs" />
     <Compile Include="UI\Chart\Serialization\ChartBarSeriesOverlaySerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSelectionSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartBoxPlotSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLabelsBase.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLineSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisLabelsSerializer.cs" />
@@ -508,7 +510,9 @@
     <Compile Include="UI\Chart\Serialization\ChartAxisNoteItemSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisNoteSerializer.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAreaLineSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartBoxPlotAggregatesSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartAreaLine.cs" />
+    <Compile Include="UI\Chart\Series\ChartBoxPlotSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />
@@ -582,6 +586,8 @@
     <Compile Include="UI\Chart\Series\ChartPolarLineSeries.cs" />
     <Compile Include="UI\Chart\ChartNote.cs" />
     <Compile Include="UI\Chart\ChartNoteLabel.cs" />
+    <Compile Include="UI\Chart\Series\ChartBoxPlotAggregates.cs" />
+    <Compile Include="UI\Chart\Series\IChartBoxPlotSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartBulletSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartCandlestickSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartOHLCSeries.cs" />
