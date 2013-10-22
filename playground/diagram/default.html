@@ -826,6 +826,18 @@ $(function () {
             case "mnuFloorplan":
                 load("Floorplan.json");
                 break;
+            case "mnuAlignLeft":
+                diagram.alignShapes();
+                break;
+            case "mnuAlignRight":
+                diagram.alignShapes("Right");
+                break;
+            case "mnuAlignTop":
+                diagram.alignShapes("Top");
+                break;
+            case "mnuAlignBottom":
+                diagram.alignShapes("Bottom");
+                break;
         }
     }
 

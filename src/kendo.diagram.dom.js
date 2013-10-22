@@ -1921,7 +1921,65 @@ kendo_module({
             }
             this.isLayouting = false;
         },
-
+        alignShapes: function (direction) {
+            if (Utils.isUndefined(direction)) direction = "Left";
+            var items = this.select(),
+                val,
+                item,
+                i;
+            if (items.length === 0)return;
+            switch (direction.toLowerCase()) {
+                case "left":
+                case "top":
+                    val = Number.MAX_VALUE;
+                    break;
+                case "right":
+                case "bottom":
+                    val = Number.MIN_VALUE;
+                    break;
+            }
+            for (i = 0; i < items.length; i++) {
+                item = items[i];
+                if (item instanceof Shape) {
+                    switch (direction.toLowerCase()) {
+                        case "left":
+                            val = Math.min(val, item.options.x);
+                            break;
+                        case "top":
+                            val = Math.min(val, item.options.y);
+                            break;
+                        case "right":
+                            val = Math.max(val, item.options.x);
+                            break;
+                        case "bottom":
+                            val = Math.max(val, item.options.y);
+                            break;
+                    }
+                }
+            }
+            var undoStates = [];
+            var shapes = [];
+            for (i = 0; i < items.length; i++) {
+                item = items[i];
+                if (item instanceof Shape) {
+                    shapes.push(item);
+                    undoStates.push(item.bounds());
+                    switch (direction.toLowerCase()) {
+                        case "left":
+                        case "right":
+                            item.position(new Point(val, item.options.y));
+                            break;
+                        case "top":
+                        case "bottom":
+                            item.position(new Point(item.options.x, val));
+                            break;
+                    }
+                    //item.refresh();
+                }
+            }
+            var unit = new kendo.diagram.TransformUnit(shapes, undoStates);
+            this.undoRedoService.add(unit, false);
+        },
         /**
          * Generates a random diagram.
          * @param shapeCount The number of shapes the random diagram should contain.
