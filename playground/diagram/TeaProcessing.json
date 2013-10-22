@@ -1,1 +1,2442 @@
-{"options":{"prefix":"","name":"Diagram","zoomRate":1.1,"dataSource":{"fields":[{"field":"text"},{"field":"url"},{"field":"spriteCssClass"},{"field":"imageUrl"}]},"dragAndDrop":false,"template":"","dataTextField":["text"],"autoBind":true,"resizable":true,"rotatable":true,"visualTemplate":null,"tooltip":{"enabled":true,"format":"{0}"},"copy":{"enabled":true,"offsetX":20,"offsetY":20},"allowDrop":true,"dataUrlField":["url"],"dataSpriteCssClassField":["spriteCssClass"],"dataImageUrlField":["imageUrl"]},"shapes":[{"options":{"id":"uP0XxO0Moc","background":"#efffd4","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":772,"y":62,"minWidth":20,"minHeight":20,"width":130,"height":833,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Yellowing","undoable":false,"name":"Rectangle"}},{"options":{"id":"CQrf32KmWP","background":"#f6f6f6","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":918,"y":64,"minWidth":20,"minHeight":20,"width":130,"height":833,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Shaping","undoable":false,"name":"Rectangle"}},{"options":{"id":"JFuBGoDBpp","background":"#f6f6f6","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":632,"y":63,"minWidth":20,"minHeight":20,"width":130,"height":833,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Fixation","undoable":false,"name":"Rectangle"}},{"options":{"id":"fjh3T45kbj","background":"#f6f6f6","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":343,"y":62,"minWidth":20,"minHeight":20,"width":130,"height":833,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Bruising","undoable":false,"name":"Rectangle"}},{"options":{"id":"b1Ygmbh3B7","background":"#efffd4","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":190,"y":67,"minWidth":20,"minHeight":20,"width":139,"height":833,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Wilting","undoable":false,"name":"Rectangle"}},{"options":{"id":"Ixaz7osTh4","background":"#99b3d2","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":24,"y":160,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Fresh tea leaves","undoable":false,"name":"Rectangle"}},{"options":{"id":"Ixaz7osTc4","background":"#99b3d2","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":194,"y":245,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Sunned wilting","undoable":false,"name":"Rectangle"}},{"options":{"id":"Ixaz7csTh4","background":"#99b3d2","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":193,"y":369,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Indoor wilting","undoable":false,"name":"Rectangle"}},{"options":{"id":"b1Ygmbh3B7","background":"#efffd4","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":489,"y":65,"minWidth":20,"minHeight":20,"width":130,"height":833,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Oxidation","undoable":false,"name":"Rectangle"}},{"options":{"id":"VEx1wYQNoY","background":"#e58a00","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":345,"y":330,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Tossing in basket","undoable":false,"name":"Rectangle"}},{"options":{"id":"gwzYNwbjB0","background":"#da6565","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":347,"y":548,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Light crushing","undoable":false,"name":"Rectangle"}},{"options":{"id":"yj2mdgGOke","background":"#da6565","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":347,"y":614,"minWidth":20,"minHeight":20,"width":265,"height":53,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"CTC full oxidation","undoable":false,"name":"Rectangle"}},{"options":{"id":"G1MimKp8mC","background":"#da6565","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":918,"y":549,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Rolling","undoable":false,"name":"Rectangle"}},{"options":{"id":"KFv1D9pmLb","background":"#da6565","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":492,"y":549,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Full oxidation","undoable":false,"name":"Rectangle"}},{"options":{"id":"rhH5tuRqSZ","background":"#e58a00","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":490,"y":331,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Partial oxidation","undoable":false,"name":"Rectangle"}},{"options":{"id":"GNnTXONYf9","background":"#e58a00","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":638,"y":315,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Panning","undoable":false,"name":"Rectangle"}},{"options":{"id":"LNVLoniIL9","background":"#e58a00","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":637,"y":397,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Baking","undoable":false,"name":"Rectangle"}},{"options":{"id":"12z7EBBPnS","background":"#efffd4","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":1065,"y":61,"minWidth":20,"minHeight":20,"width":130,"height":833,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Drying","undoable":false,"name":"Rectangle"}},{"options":{"id":"AMu5NNWWb4","background":"#f6f6f6","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":1207,"y":61,"minWidth":20,"minHeight":20,"width":130,"height":833,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Curing","undoable":false,"name":"Rectangle"}},{"options":{"id":"W8N8tUQe54","background":"#da6565","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":1069,"y":610,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Drying","undoable":false,"name":"Rectangle"}},{"options":{"id":"IjSUROj4TY","background":"#da6565","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":1348,"y":608,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Black tea","undoable":false,"name":"Rectangle"}},{"options":{"id":"quIxWQjhpr","background":"#ffffff","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":26,"y":52,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Tea processing","undoable":false,"name":"Rectangle"}},{"options":{"id":"pTcN5o6LBI","background":"#e58a00","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":919,"y":320,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Rolling","undoable":false,"name":"Rectangle"}},{"options":{"id":"ePdsS1oYKQ","background":"#e58a00","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":919,"y":404,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Ball Rolling","undoable":false,"name":"Rectangle"}},{"options":{"id":"BOucX1twB7","background":"#e58a00","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":1066,"y":391,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Drying","undoable":false,"name":"Rectangle"}},{"options":{"id":"ede4mFyiFg","background":"#e58a00","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":1207,"y":513,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Firing","undoable":false,"name":"Rectangle"}},{"options":{"id":"VpK9tvIUoM","background":"#e58a00","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":1358,"y":391,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Oolong tea","undoable":false,"name":"Rectangle"}},{"options":{"id":"lmg4cPRfhG","background":"#b2b2b2","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":637,"y":241,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Baking","undoable":false,"name":"Rectangle"}},{"options":{"id":"pvEAS2bNir","background":"#b2b2b2","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":919,"y":245,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Light Rolling","undoable":false,"name":"Rectangle"}},{"options":{"id":"jr83yjiAge","background":"#b2b2b2","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":1071,"y":244,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Drying","undoable":false,"name":"Rectangle"}},{"options":{"id":"NJfbtOn8km","background":"#b2b2b2","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":1351,"y":246,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"White tea","undoable":false,"name":"Rectangle"}},{"options":{"id":"QBxGEIJAKI","background":"#93cd35","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":636,"y":92,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Panning","undoable":false,"name":"Rectangle"}},{"options":{"id":"IIdXfz8MU2","background":"#93cd35","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":636,"y":165,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Steaming","undoable":false,"name":"Rectangle"}},{"options":{"id":"vFWL5QWoJw","background":"#93cd35","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":921,"y":90,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Rolling","undoable":false,"name":"Rectangle"}},{"options":{"id":"O7CUt6BBjJ","background":"#93cd35","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":921,"y":169,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Forming","undoable":false,"name":"Rectangle"}},{"options":{"id":"qagOyP8rtc","background":"#93cd35","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":1070,"y":169,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Drying","undoable":false,"name":"Rectangle"}},{"options":{"id":"5PzKwxLsoM","background":"#93cd35","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":1347,"y":172,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Green tea","undoable":false,"name":"Rectangle"}},{"options":{"id":"CqQK7IKUoD","background":"#c6ab73","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":1209,"y":87,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Natural aging","undoable":false,"name":"Rectangle"}},{"options":{"id":"dcAayiOfEv","background":"#c6ab73","hoveredBackground":"#70CAFF","cursor":"pointer","type":"Shape","data":"m0,0 L0,100 L100,100 L100,0z","stroke":"Black","strokeWidth":0,"strokeThickness":0,"strokeDashArray":"none","x":1348,"y":86,"minWidth":20,"minHeight":20,"width":125,"height":54,"connectors":[{"name":"Top","description":"Top Connector"},{"name":"Right","description":"Right Connector"},{"name":"Bottom","description":"Bottom Connector"},{"name":"Left","Description":"Left Connector"},{"name":"Auto","Description":"Auto Connector"}],"rotation":{"angle":0},"content":"Fermented tea","undoable":false,"name":"Rectangle"}}],"connections":[{"options":{"id":"Er9YBcq09a","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"Ixaz7osTh4: Right","to":"Ixaz7csTh4: Left"},{"options":{"id":"MQciUJOjOa","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"Ixaz7osTh4: Right","to":"Ixaz7osTc4: Left"},{"options":{"id":"VRqurTacwn","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"Ixaz7osTc4: Right","to":"VEx1wYQNoY: Left"},{"options":{"id":"rV5XMCTGsW","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"KFv1D9pmLb: Right","to":"G1MimKp8mC: Left"},{"options":{"id":"pYQgRXyVyB","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"gwzYNwbjB0: Right","to":"KFv1D9pmLb: Left"},{"options":{"id":"YkqHQtNPFB","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"VEx1wYQNoY: Right","to":"rhH5tuRqSZ: Left"},{"options":{"id":"M4c3zr6Js5","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"rhH5tuRqSZ: Right","to":"GNnTXONYf9: Left"},{"options":{"id":"Uk0FBlFGS3","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"rhH5tuRqSZ: Right","to":"LNVLoniIL9: Left"},{"options":{"id":"3yjVwiofqh","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"G1MimKp8mC: Right","to":"W8N8tUQe54: Left"},{"options":{"id":"S5mSejfVTf","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"yj2mdgGOke: Right","to":"W8N8tUQe54: Left"},{"options":{"id":"sLNXQWi1cA","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"W8N8tUQe54: Right","to":"IjSUROj4TY: Left"},{"options":{"id":"HRccSaCQ1d","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"GNnTXONYf9: Right","to":"pTcN5o6LBI: Left"},{"options":{"id":"KPuoasTXce","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"LNVLoniIL9: Right","to":"pTcN5o6LBI: Left"},{"options":{"id":"LxRuEnFFxk","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"pTcN5o6LBI: Bottom","to":"ePdsS1oYKQ: Auto"},{"options":{"id":"4xAHaIalCj","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"ePdsS1oYKQ: Right","to":"BOucX1twB7: Auto"},{"options":{"id":"dCYJCvjUha","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"pTcN5o6LBI: Auto","to":"BOucX1twB7: Auto"},{"options":{"id":"UewIGsI26q","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"BOucX1twB7: Auto","to":"ede4mFyiFg: Auto"},{"options":{"id":"oexgiL8lx0","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[],"undoable":false},"from":"BOucX1twB7: Auto","to":"VpK9tvIUoM: Auto"},{"options":{"id":"rTAfI158Gq","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[]},"from":"Ixaz7osTc4: Auto","to":"lmg4cPRfhG"},{"options":{"id":"m9N0CSgK43","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[]},"from":"lmg4cPRfhG: Auto","to":"pvEAS2bNir"},{"options":{"id":"QHfiRMmGlg","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[]},"from":"pvEAS2bNir: Auto","to":"jr83yjiAge"},{"options":{"id":"ruDlYNdHgS","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[]},"from":"jr83yjiAge: Auto","to":"NJfbtOn8km"},{"options":{"id":"SriTOTpV59","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[]},"from":"ede4mFyiFg: Auto","to":"VpK9tvIUoM: Left"},{"options":{"id":"i18eRKuXkh","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[]},"from":"Ixaz7osTh4: Right","to":"IIdXfz8MU2"},{"options":{"id":"0TjitbWaGL","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[]},"from":"IIdXfz8MU2: Auto","to":"QBxGEIJAKI: Auto"},{"options":{"id":"8snJVBJw75","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[]},"from":"QBxGEIJAKI: Auto","to":"vFWL5QWoJw"},{"options":{"id":"0e6cd2CwST","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[]},"from":"vFWL5QWoJw: Auto","to":"O7CUt6BBjJ"},{"options":{"id":"kKdLU7GUkN","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[]},"from":"O7CUt6BBjJ: Auto","to":"qagOyP8rtc"},{"options":{"id":"dchdRFSeio","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[]},"from":"qagOyP8rtc: Auto","to":"5PzKwxLsoM"},{"options":{"id":"s2zsskyOHC","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[]},"from":"qagOyP8rtc: Top","to":"CqQK7IKUoD"},{"options":{"id":"nxNKtqSSDR","background":"Green","hoveredBackground":"#70CAFF","cursor":"pointer","stroke":"gray","hoveredStroke":"#70CAFF","strokeThickness":1,"startCap":"FilledCircle","endCap":"ArrowEnd","points":[]},"from":"CqQK7IKUoD: Auto","to":"dcAayiOfEv"}]}
+{"options": {
+    "prefix": "",
+    "name": "Tea Processing",
+    "zoomRate": 1.0,
+    "dataSource": {
+        "fields": [
+            {
+                "field": "text"
+            },
+            {
+                "field": "url"
+            },
+            {
+                "field": "spriteCssClass"
+            },
+            {
+                "field": "imageUrl"
+            }
+        ]
+    },
+    "dragAndDrop": false,
+    "template": "",
+    "dataTextField": ["text"],
+    "autoBind": true,
+    "resizable": true,
+    "rotatable": true,
+    "visualTemplate": null,
+    "tooltip": {
+        "enabled": true,
+        "format": "{0}"
+    },
+    "copy": {
+        "enabled": true,
+        "offsetX": 20,
+        "offsetY": 20
+    },
+    "allowDrop": true,
+    "dataUrlField": ["url"],
+    "dataSpriteCssClassField": ["spriteCssClass"],
+    "dataImageUrlField": ["imageUrl"]
+}, "shapes": [
+    {
+        "options": {
+            "id": "uP0XxO0Moc",
+            "background": "#efffd4",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 770.821,
+            "y": 59.75,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 130,
+            "height": 833,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Yellowing",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "CQrf32KmWP",
+            "background": "#f6f6f6",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 916.821,
+            "y": 59.75,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 129.9999999999999,
+            "height": 833,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Shaping",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "JFuBGoDBpp",
+            "background": "#f6f6f6",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 630.821,
+            "y": 59.75,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 130,
+            "height": 833,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Fixation",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "fjh3T45kbj",
+            "background": "#f6f6f6",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 341.821,
+            "y": 59.75,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 130,
+            "height": 833,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Bruising",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "b1Ygmbh3B7",
+            "background": "#efffd4",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 188.821,
+            "y": 59.75,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 139.00000000000003,
+            "height": 833,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Wilting",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "Ixaz7osTh4",
+            "background": "#99b3d2",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 24,
+            "y": 160,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Fresh tea leaves",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "Ixaz7osTc4",
+            "background": "#99b3d2",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 193,
+            "y": 245,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Sunned wilting",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "Ixaz7csTh4",
+            "background": "#99b3d2",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 193,
+            "y": 369,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Indoor wilting",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "b1Ygmbh3B7",
+            "background": "#efffd4",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 487.821,
+            "y": 59.75,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 130,
+            "height": 833,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Oxidation",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "VEx1wYQNoY",
+            "background": "#e58a00",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 345,
+            "y": 315,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Tossing in basket",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "gwzYNwbjB0",
+            "background": "#da6565",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 347,
+            "y": 548,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Light crushing",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "yj2mdgGOke",
+            "background": "#da6565",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 347,
+            "y": 614,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 265,
+            "height": 53,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "CTC full oxidation",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "G1MimKp8mC",
+            "background": "#da6565",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 918,
+            "y": 548,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Rolling",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "KFv1D9pmLb",
+            "background": "#da6565",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 492.001,
+            "y": 548,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 118.33500000000004,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Full oxidation",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "rhH5tuRqSZ",
+            "background": "#e58a00",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 490,
+            "y": 315,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Partial oxidation",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "GNnTXONYf9",
+            "background": "#e58a00",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 636,
+            "y": 315,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Panning",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "LNVLoniIL9",
+            "background": "#e58a00",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 636,
+            "y": 404,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Baking",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "12z7EBBPnS",
+            "background": "#efffd4",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1063.821,
+            "y": 59.75,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 130,
+            "height": 833,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Drying",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "AMu5NNWWb4",
+            "background": "#f6f6f6",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1205.821,
+            "y": 59.75,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 130,
+            "height": 833,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Curing",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "W8N8tUQe54",
+            "background": "#da6565",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1066,
+            "y": 614,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Drying",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "IjSUROj4TY",
+            "background": "#da6565",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1358,
+            "y": 614,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Black tea",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "quIxWQjhpr",
+            "background": "#ffffff",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 26,
+            "y": 52,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Tea processing",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "pTcN5o6LBI",
+            "background": "#e58a00",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 918,
+            "y": 315,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Rolling",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "ePdsS1oYKQ",
+            "background": "#e58a00",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 918,
+            "y": 404,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Ball Rolling",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "BOucX1twB7",
+            "background": "#e58a00",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1066,
+            "y": 404,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Drying",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "ede4mFyiFg",
+            "background": "#e58a00",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1207,
+            "y": 513,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Firing",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "VpK9tvIUoM",
+            "background": "#e58a00",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1358,
+            "y": 404,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Oolong tea",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "lmg4cPRfhG",
+            "background": "#b2b2b2",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 636,
+            "y": 241,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Baking",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "pvEAS2bNir",
+            "background": "#b2b2b2",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 918,
+            "y": 241,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Light Rolling",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "jr83yjiAge",
+            "background": "#b2b2b2",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1066,
+            "y": 241,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Drying",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "NJfbtOn8km",
+            "background": "#b2b2b2",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1358,
+            "y": 241,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "White tea",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "QBxGEIJAKI",
+            "background": "#93cd35",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 636,
+            "y": 86,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Panning",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "IIdXfz8MU2",
+            "background": "#93cd35",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 636,
+            "y": 165,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Steaming",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "vFWL5QWoJw",
+            "background": "#93cd35",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 918,
+            "y": 86,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Rolling",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "O7CUt6BBjJ",
+            "background": "#93cd35",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 918,
+            "y": 165,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Forming",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "qagOyP8rtc",
+            "background": "#93cd35",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1066,
+            "y": 165,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Drying",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "5PzKwxLsoM",
+            "background": "#93cd35",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1358,
+            "y": 165,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Green tea",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "CqQK7IKUoD",
+            "background": "#c6ab73",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1207,
+            "y": 86,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Natural aging",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    },
+    {
+        "options": {
+            "id": "dcAayiOfEv",
+            "background": "#c6ab73",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "type": "Shape",
+            "data": "m0,0 L0,100 L100,100 L100,0z",
+            "stroke": "Black",
+            "strokeWidth": 0,
+            "strokeThickness": 0,
+            "strokeDashArray": "none",
+            "x": 1358,
+            "y": 86,
+            "minWidth": 20,
+            "minHeight": 20,
+            "width": 125,
+            "height": 54,
+            "connectors": [
+                {
+                    "name": "Top",
+                    "description": "Top Connector"
+                },
+                {
+                    "name": "Right",
+                    "description": "Right Connector"
+                },
+                {
+                    "name": "Bottom",
+                    "description": "Bottom Connector"
+                },
+                {
+                    "name": "Left",
+                    "Description": "Left Connector"
+                },
+                {
+                    "name": "Auto",
+                    "Description": "Auto Connector"
+                }
+            ],
+            "rotation": {
+                "angle": 0
+            },
+            "content": "Fermented tea",
+            "undoable": false,
+            "name": "Rectangle"
+        }
+    }
+], "connections": [
+    {
+        "options": {
+            "id": "Er9YBcq09a",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "Ixaz7osTh4: Right",
+        "to": "Ixaz7csTh4: Left"
+    },
+    {
+        "options": {
+            "id": "MQciUJOjOa",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "Ixaz7osTh4: Right",
+        "to": "Ixaz7osTc4: Left"
+    },
+    {
+        "options": {
+            "id": "VRqurTacwn",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "Ixaz7osTc4: Right",
+        "to": "VEx1wYQNoY: Left"
+    },
+    {
+        "options": {
+            "id": "rV5XMCTGsW",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "KFv1D9pmLb: Right",
+        "to": "G1MimKp8mC: Left"
+    },
+    {
+        "options": {
+            "id": "pYQgRXyVyB",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "gwzYNwbjB0: Right",
+        "to": "KFv1D9pmLb: Left"
+    },
+    {
+        "options": {
+            "id": "YkqHQtNPFB",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "VEx1wYQNoY: Right",
+        "to": "rhH5tuRqSZ: Left"
+    },
+    {
+        "options": {
+            "id": "M4c3zr6Js5",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "rhH5tuRqSZ: Right",
+        "to": "GNnTXONYf9: Left"
+    },
+    {
+        "options": {
+            "id": "Uk0FBlFGS3",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "rhH5tuRqSZ: Right",
+        "to": "LNVLoniIL9: Left"
+    },
+    {
+        "options": {
+            "id": "3yjVwiofqh",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "G1MimKp8mC: Right",
+        "to": "W8N8tUQe54: Left"
+    },
+    {
+        "options": {
+            "id": "S5mSejfVTf",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "yj2mdgGOke: Right",
+        "to": "W8N8tUQe54: Left"
+    },
+    {
+        "options": {
+            "id": "sLNXQWi1cA",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "W8N8tUQe54: Right",
+        "to": "IjSUROj4TY: Left"
+    },
+    {
+        "options": {
+            "id": "HRccSaCQ1d",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "GNnTXONYf9: Right",
+        "to": "pTcN5o6LBI: Left"
+    },
+    {
+        "options": {
+            "id": "KPuoasTXce",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "LNVLoniIL9: Right",
+        "to": "pTcN5o6LBI: Left"
+    },
+    {
+        "options": {
+            "id": "LxRuEnFFxk",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "pTcN5o6LBI: Bottom",
+        "to": "ePdsS1oYKQ: Auto"
+    },
+    {
+        "options": {
+            "id": "4xAHaIalCj",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "ePdsS1oYKQ: Right",
+        "to": "BOucX1twB7: Auto"
+    },
+    {
+        "options": {
+            "id": "dCYJCvjUha",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "pTcN5o6LBI: Auto",
+        "to": "BOucX1twB7: Auto"
+    },
+    {
+        "options": {
+            "id": "UewIGsI26q",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "BOucX1twB7: Auto",
+        "to": "ede4mFyiFg: Auto"
+    },
+    {
+        "options": {
+            "id": "oexgiL8lx0",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "BOucX1twB7: Auto",
+        "to": "VpK9tvIUoM: Auto"
+    },
+    {
+        "options": {
+            "id": "rTAfI158Gq",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "Ixaz7osTc4: Auto",
+        "to": "lmg4cPRfhG: Auto"
+    },
+    {
+        "options": {
+            "id": "m9N0CSgK43",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "lmg4cPRfhG: Auto",
+        "to": "pvEAS2bNir: Auto"
+    },
+    {
+        "options": {
+            "id": "QHfiRMmGlg",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "pvEAS2bNir: Auto",
+        "to": "jr83yjiAge: Auto"
+    },
+    {
+        "options": {
+            "id": "ruDlYNdHgS",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "jr83yjiAge: Auto",
+        "to": "NJfbtOn8km: Auto"
+    },
+    {
+        "options": {
+            "id": "SriTOTpV59",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "ede4mFyiFg: Auto",
+        "to": "VpK9tvIUoM: Left"
+    },
+    {
+        "options": {
+            "id": "i18eRKuXkh",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "Ixaz7osTh4: Right",
+        "to": "IIdXfz8MU2: Auto"
+    },
+    {
+        "options": {
+            "id": "0TjitbWaGL",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "IIdXfz8MU2: Auto",
+        "to": "QBxGEIJAKI: Auto"
+    },
+    {
+        "options": {
+            "id": "8snJVBJw75",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "QBxGEIJAKI: Auto",
+        "to": "vFWL5QWoJw: Auto"
+    },
+    {
+        "options": {
+            "id": "0e6cd2CwST",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "vFWL5QWoJw: Auto",
+        "to": "O7CUt6BBjJ: Auto"
+    },
+    {
+        "options": {
+            "id": "kKdLU7GUkN",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "O7CUt6BBjJ: Auto",
+        "to": "qagOyP8rtc: Auto"
+    },
+    {
+        "options": {
+            "id": "dchdRFSeio",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "qagOyP8rtc: Auto",
+        "to": "5PzKwxLsoM: Auto"
+    },
+    {
+        "options": {
+            "id": "s2zsskyOHC",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "qagOyP8rtc: Top",
+        "to": "CqQK7IKUoD: Auto"
+    },
+    {
+        "options": {
+            "id": "nxNKtqSSDR",
+            "background": "Green",
+            "hoveredBackground": "#70CAFF",
+            "cursor": "pointer",
+            "stroke": "gray",
+            "hoveredStroke": "#70CAFF",
+            "strokeThickness": 1,
+            "startCap": "FilledCircle",
+            "endCap": "ArrowEnd",
+            "points": [],
+            "undoable": false
+        },
+        "from": "CqQK7IKUoD: Auto",
+        "to": "dcAayiOfEv: Auto"
+    }
+]}
