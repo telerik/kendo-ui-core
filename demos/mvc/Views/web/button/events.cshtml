@@ -1,13 +1,14 @@
 
         <div id="example" class="k-content">
 
-            <p>
+            <div class="demo-section">
+                <h3 class="title">Buttons</h3>
                 <button type="button" id="textButton">Text Button</button>
                 <span id="refreshButton">Refresh Button</span>
                 <a id="disabledButton">Disabled Button</a>
-            </p>
-
-            <p>(The disabled button will not fire click events)</p>
+            
+                <p>(The disabled button will not fire click events)</p>
+            </div>
 
             <div class="demo-section">                
                 <h3 class="title">Console log</h3>
@@ -36,4 +37,14 @@
                     });
                 });
             </script>
+            
+            <style scoped>
+                .demo-section {
+                    width: 500px;
+                    text-align: center;
+                }
+                .console {
+                    margin: 0;
+                }
+            </style>
         </div>

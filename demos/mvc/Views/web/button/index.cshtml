@@ -1,26 +1,36 @@
 
         <div id="example" class="k-content">
 
-            <p>
-                <button type="button" id="textButton">Text button</button>
-                <a id="iconTextButton">Icon and text</a>
-                <a id="kendoIconTextButton">Kendo UI Icon</a>
-                <em id="iconButton"><span class="k-sprite">Refresh</span></em>
-            </p><p>
-                <span id="disabledButton1">Disabled via configuration</span>
-                <span id="disabledButton2" disabled>Disabled via HTML attribute</span>
-            </p>
+            <div class="demo-section">
+                <h3>Basic Button</h3>
+                <p>
+                    <button type="button" id="textButton">Submit</button>
+                </p>
+                
+                <h3>Buttons with icons</h3>
+                <p>
+                    <a id="iconTextButton">Filter</a>
+                    <a id="kendoIconTextButton">Clear Filter</a>
+                    <em id="iconButton"><span class="k-sprite">Refresh</span></em>
+                </p>
+                
+                <h3>Disabled Buttons</h3>
+                <p>
+                    <span id="disabledButton1">Disabled via configuration</span>
+                    <span id="disabledButton2" disabled>Disabled via HTML attribute</span>
+                </p>
+            </div>
 
             <script>
                 $(document).ready(function() {
                     $("#textButton").kendoButton();
 
                     $("#iconTextButton").kendoButton({
-                        spriteCssClass: "k-icon k-i-ungroup"
+                        spriteCssClass: "k-icon k-i-funnel"
                     });
 
                     $("#kendoIconTextButton").kendoButton({
-                        icon: "plus"
+                        icon: "funnel-clear"
                     });
 
                     $("#iconButton").kendoButton({
@@ -34,4 +44,17 @@
                     $("#disabledButton2").kendoButton();
                 });
             </script>
+            
+            <style scoped>
+                .demo-section {
+                    width: 400px;
+                    padding: 20px 30px;
+                }
+                .demo-section h3 {
+                    padding-top: 10px;
+                }
+                #textButton {
+                    width: 150px;
+                }
+            </style>
         </div>

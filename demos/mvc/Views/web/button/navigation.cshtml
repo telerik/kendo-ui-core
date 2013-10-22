@@ -1,10 +1,18 @@
 
         <div id="example" class="k-content">
 
-            <button type="button" id="textButton">Text button</button>
-            <span id="iconTextButton">Icon and text</span>
-            <em id="iconButton"><span class="k-icon">Refresh</span></em>
-            <a id="disabledButton">Disabled button</a>
+            <div class="demo-section">                
+                <h3 class="title">Buttons</h3>
+                <button type="button" id="textButton">Text button</button>
+                <span id="iconTextButton">Icon and text</span>
+                <em id="iconButton"><span class="k-icon">Refresh</span></em>
+                <a id="disabledButton">Disabled button</a>
+            </div>
+            
+            <div class="demo-section">                
+                <h3 class="title">Console log</h3>
+                <div class="console"></div>
+            </div>
 
             <script>
                 $(document).ready(function() {
@@ -64,12 +72,13 @@
                     </span>
                 </li>
             </ul>
-
-            <br />
-
-            <div class="demo-section">                
-                <h3 class="title">Console log</h3>
-                <div class="console"></div>
-            </div>
-
+            <style scoped>
+                .demo-section {
+                    width: 400px;
+                    text-align: center;
+                }
+                .demo-section .console {
+                    height: 100px;
+                }
+            </style>
         </div>

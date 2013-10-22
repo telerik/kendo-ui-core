@@ -1,11 +1,22 @@
 
         <div id="example" class="k-content">
-
-            <div class="k-rtl">
-                <button type="button" id="textButton">Text button</button>
-                <a id="iconTextButton">Icon and text</a>
-                <em id="iconButton"><span class="k-icon">Refresh</span></em>
-                <span id="disabledButton">Disabled button</span>
+            
+            <div class="demo-section k-rtl">
+                <h3>Basic Button</h3>
+                <p>
+                    <button type="button" id="textButton">Submit</button>
+                </p>
+                
+                <h3>Buttons with icons</h3>
+                <p>
+                    <a id="iconTextButton">Filter</a>
+                    <em id="iconButton"><span class="k-sprite">Refresh</span></em>
+                </p>
+                
+                <h3>Disabled Button</h3>
+                <p>
+                    <span id="disabledButton">Disabled</span>
+                </p>
             </div>
 
             <script>
@@ -13,7 +24,7 @@
                     $("#textButton").kendoButton();
 
                     $("#iconTextButton").kendoButton({
-                        icon: "ungroup"
+                        icon: "funnel"
                     });
 
                     $("#iconButton").kendoButton({
@@ -25,4 +36,17 @@
                     });
                 });
             </script>
+            
+            <style scoped>
+                .demo-section {
+                    width: 400px;
+                    padding: 20px 30px;
+                }
+                .demo-section h3 {
+                    padding-top: 10px;
+                }
+                #textButton, #disabledButton {
+                    width: 150px;
+                }
+            </style>
         </div>

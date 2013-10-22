@@ -1,26 +1,30 @@
 
         <div id="example" class="k-content">
 
-            <h2>Standard Initialization</h2>
-            <p>
-                <button type="button" class="editButton">Edit Button 1</button>
-                <button type="button" class="closeButton">Close Button 1</button>
-            </p>
-            <p>
-                <button type="button" class="editButton">Edit Button 2</button>
-                <button type="button" class="closeButton">Close Button 2</button>
-            </p>
+            <div class="demo-section">
+                <h3>Standard Initialization</h3>
+                <p>
+                    <button type="button" class="editButton">Edit Button 1</button>
+                    <button type="button" class="closeButton">Close Button 1</button>
+                </p>
+                <p>
+                    <button type="button" class="editButton">Edit Button 2</button>
+                    <button type="button" class="closeButton">Close Button 2</button>
+                </p>
+            </div>
 
-            <h2>Initialization with kendo.init</h2>
-            <div id="buttonContainer">
-                <p>
-                    <button type="button" data-role="button" data-sprite-css-class="k-icon k-edit">Edit Button 1</button>
-                    <button type="button" data-role="button" data-icon="close">Close Button 1</button>
-                </p>
-                <p>
-                    <button type="button" data-role="button" data-sprite-css-class="k-icon k-edit" data-enable="false">Disabled via data attribute</button>
-                    <button type="button" data-role="button" data-icon="close" disabled="disabled">Disabled via HTML attribute</button>
-                </p>
+            <div class="demo-section">
+                <h3>Initialization with kendo.init</h3>
+                <div id="buttonContainer">
+                    <p>
+                        <button type="button" data-role="button" data-sprite-css-class="k-icon k-edit">Edit Button 1</button>
+                        <button type="button" data-role="button" data-icon="close">Close Button 1</button>
+                    </p>
+                    <p>
+                        <button type="button" data-role="button" data-sprite-css-class="k-icon k-edit" data-enable="false">Disabled via data attribute</button>
+                        <button type="button" data-role="button" data-icon="close" disabled="disabled">Disabled via HTML attribute</button>
+                    </p>
+                </div>
             </div>
 
             <script>
@@ -36,4 +40,11 @@
                     kendo.init("#buttonContainer");
                 });
             </script>
+            
+            <style scoped>
+                .demo-section {
+                    width: 400px;
+                    padding: 20px 30px 20px;
+                }
+            </style>
         </div>

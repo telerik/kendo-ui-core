@@ -1,20 +1,21 @@
 
         <div id="example" class="k-content">
 
-            <button type="button" id="iconButton">Sprite icon</button>
-
-            <button type="button" id="kendoIconButton">Kendo UI sprite icon</button>
-
-            <button type="button" id="imageButton">Image icon</button>
+            <div class="demo-section">
+                <h3 class="title">Kendo UI Button with icons</h3>
+                <button type="button" id="iconButton">Sprite icon</button>
+                <button type="button" id="kendoIconButton">Kendo UI sprite icon</button>
+                <button type="button" id="imageButton">Image icon</button>
+            </div>
 
             <script>
                 $(document).ready(function() {
                     $("#iconButton").kendoButton({
-                        spriteCssClass: "k-icon k-i-ungroup"
+                        spriteCssClass: "k-icon netherlandsFlag"
                     });
 
                     $("#kendoIconButton").kendoButton({
-                        icon: "note"
+                        icon: "funnel"
                     });
 
                     $("#imageButton").kendoButton({
@@ -24,11 +25,18 @@
             </script>
 
             <style scoped>
-
-            .k-button .k-image
-            {
-                height: 16px;
-            }
-            
+                .k-button .k-image {
+                    height: 16px;
+                }
+                .demo-section {
+                    width: 500px;
+                    margin-top: 50px;
+                    padding-bottom: 20px;
+                    text-align: center;
+                }
+                .netherlandsFlag {
+                    background-image: url("../../content/shared/styles/flags.png");
+                    background-position: 0 -64px;
+                }
             </style>
         </div>

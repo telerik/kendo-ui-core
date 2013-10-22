@@ -1,16 +1,20 @@
 
         <div id="example" class="k-content">
 
-            <div class="configuration" style="width: 200px;">
-                <span class="configHead">Button API Functions</span>
-                <ul class="options">
-                    <li>
-                        <button class="k-button" id="enableButton" type="button">Enable</button> or <button class="k-button" id="disableButton" type="button">Disable</button>
-                    </li>
-                </ul>
+            <div class="configuration-horizontal">
+                <div class="config-section">
+                    <span class="configHead">Button API Functions</span>
+                    <ul class="options">
+                        <li>
+                            <button class="k-button" id="enableButton" type="button">Enable</button> or <button class="k-button" id="disableButton" type="button">Disable</button>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
-            <button id="iconTextButton">Kendo UI Button</button>
+            <div class="demo-section">
+                <button id="iconTextButton">Kendo UI Button</button>
+            </div>
 
             <script>
                 $(document).ready(function() {
@@ -28,4 +32,22 @@
                     });
                 });
             </script>
+            
+            <style scoped>
+                .demo-section {
+                    width: 500px;
+                    text-align: center;
+                    padding: 30px 10px;
+                }
+                .configuration-horizontal {
+                    width: 500px;
+                }
+                .configuration-horizontal .k-textbox {
+                    margin: 0;
+                    width: 80px;
+                }
+                .configuration-horizontal .options li {
+                    padding: 3px 0;
+                }
+            </style>
         </div>
