@@ -59,9 +59,6 @@
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"]
 				}, {
-                    "text": "Step area",
-                    "url": "area-charts/step-area.html"
-                }, {
                     "text": "Error Bars",
                     "url": "area-charts/error-bars.html",
                     "title": "Example of using ErrorBars for Kendo UI Area Chart",
