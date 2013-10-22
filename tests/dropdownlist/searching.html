@@ -225,6 +225,19 @@
                 }, 100);
             });
 
+            test("navigation does not raise exception when data is set through setDataSource", function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataTextField: "text",
+                    dataValueField: "value"
+                });
+
+                dropdownlist.setDataSource(data);
+
+                input.press("b");
+
+                ok(true);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

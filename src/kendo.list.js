@@ -576,6 +576,7 @@ kendo_module({
             this.options.dataSource = dataSource;
 
             this._dataSource();
+            this._bound = false;
 
             if (this.options.autoBind) {
                 this.dataSource.fetch();
