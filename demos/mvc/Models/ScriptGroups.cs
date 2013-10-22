@@ -98,6 +98,7 @@ namespace Kendo.Models
 #if DEBUG
             "jquery.js",
             "kendo.core.js",
+            "kendo.timezones.js",
             "kendo.fx.js",
             "kendo.data.odata.js",
             "kendo.data.xml.js",
@@ -122,6 +123,8 @@ namespace Kendo.Models
             "kendo.window.js",
             "kendo.filtermenu.js",
             "kendo.pager.js",
+            "kendo.sortable.js",
+            "kendo.columnmenu.js",
             "kendo.grid.js",
             "kendo.scheduler.view.js",
             "kendo.scheduler.monthview.js",
