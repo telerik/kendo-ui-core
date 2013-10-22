@@ -1071,6 +1071,24 @@
                     equal(observable.date.getMinutes(), 13);
                     equal(observable.date.getSeconds(), 40);
                 });
+
+                test("changing the value of input type datetime-local updates the view model with a valid JavaScript Date - date time without seconds", function() {
+                    var observable = kendo.observable({
+                        date: new Date("2013/5/4")
+                    });
+
+                    var dom = $('<input type="datetime-local" data-bind="value: date">');
+
+                    kendo.bind(dom, observable);
+
+                    dom.val("2013-06-05T23:13").trigger("change");
+
+                    equal(observable.date.getMonth(), 5);
+                    equal(observable.date.getDate(), 5);
+                    equal(observable.date.getHours(), 23);
+                    equal(observable.date.getMinutes(), 13);
+                    equal(observable.date.getSeconds(), 00);
+                });
             }
 
             var number = $('<input type="number">');

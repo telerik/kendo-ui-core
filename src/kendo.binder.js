@@ -386,7 +386,7 @@ kendo_module({
             if (type == "date") {
                 value = kendo.parseDate(value, "yyyy-MM-dd");
             } else if (type == "datetime-local") {
-                value = kendo.parseDate(value, "yyyy-MM-ddTHH:mm:ss");
+                value = kendo.parseDate(value, ["yyyy-MM-ddTHH:mm:ss", "yyyy-MM-ddTHH:mm"] );
             } else if (type == "number") {
                 value = kendo.parseFloat(value);
             }
