@@ -3397,6 +3397,8 @@ kendo_module({
                             that._updateChildrenField();
                         })
                         ._query(options);
+            } else {
+                that.loaded(true);
             }
         },
 

@@ -372,6 +372,20 @@
                 equal(treeview.find(".k-item .k-item").length, 1);
             });
 
+            test("moving items in observable hierarchy sets loaded flag", function() {
+                createTreeView({
+                    dragAndDrop: true,
+                    dataSource: kendo.observableHierarchy([
+                        { id: 1, text: "foo" },
+                        { id: 2, text: "bar" }
+                    ])
+                });
+
+                moveNode(treeviewObject, "bar", "foo");
+
+                ok(treeviewObject.dataSource.get(1).loaded());
+            });
+
             module("keyboard support", {
                 teardown: cleanArtifacts
             });
