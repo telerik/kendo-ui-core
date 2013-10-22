@@ -1295,7 +1295,7 @@ kendo_module({
         select: function (itemsOrRect, options) {
             var i, item, items, rect, selected = [];
             options = deepExtend({  addToSelection: false }, options);
-            addToSelection = options.addToSelection;
+            var addToSelection = options.addToSelection;
 
             if (itemsOrRect !== undefined) {
                 if (!addToSelection) {
