@@ -198,6 +198,10 @@
                 text-align: right;
             }
 
+            #panelbar .k-content {
+                padding: 1em;
+            }
+
             @media (max-width: 767px) {
                 header .container {
                     padding-right: 0;
@@ -276,15 +280,19 @@
                         <h2 class="ra-well-title">Profile</h2>
 
                         <div class="row">
-                            <div class="col-lg-6">
-                                <img src="bootstrap/avatar.jpg" class="ra-avatar" />
+                            <div class="col-lg-6 col-sm-2">
+                                <img src="bootstrap/avatar.jpg" class="ra-avatar img-responsive" />
                             </div>
 
-                            <div class="col-lg-6">
-                                <span class="ra-first-name">Jonathan</span>
-                                <span class="ra-last-name">Dodsworth</span>
-                                <div class="ra-position">Inside Sales Coordinator</div>
-                                <button class="btn btn-primary">Upload Photo</button>
+                            <div class="col-lg-6 col-sm-2">
+                                <div class="col-lg-12 col-sm-9">
+                                    <span class="ra-first-name">Jonathan</span>
+                                    <span class="ra-last-name">Dodsworth</span>
+                                    <div class="ra-position">Inside Sales Coordinator</div>
+                                </div>
+                                <div class="col-lg-12 col-sm-3">
+                                    <button class="btn btn-primary">Upload Photo</button>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -394,9 +402,9 @@
                 </div>
             </section>
 
-            <div id="schedule"></div>
-
             <div id="orders"></div>
+
+            <div id="schedule"></div>
 
             <section id="gallery">
                 <h2>Latest photo uploads</h2>
@@ -429,25 +437,34 @@
                     <li class="k-state-active">
                         What is Kendo UI?
                         <div>
-                            <p>Kendo UI is great!</p>
+                            <p>Kendo UI is a HTML5, jQuery-based framework for building modern HTML apps. Kendo UI combines the best of emerging HTML5, CSS3, and JavaScript technologies with robust, cross-browser techniques to deliver a framework that is both powerfully rich and broadly compatible with older browsers.</p>
+                            <p>Kendo UI combines everything that a developer needs to build a rich JavaScript app, eliminating the traditional challenge of manually researching and combining all of the needed plug-ins, frameworks, and libraries needed to build apps. Kendo UI includes rich UI controls for desktop, mobile and data vizualization, a JavaScript DataSource, fast Templates, cross-device Drag and Drop API, Globalization, Validation and MVVM framework extensions, and more.</p>
+                            <p><a href="http://www.kendoui.com/download.aspx">Download Kendo UI</a> and experience the difference today</p>
                         </div>
                     </li>
                     <li>
                         Who should use Kendo UI?
                         <div>
-                            <p>Everybody who considers themselves great!</p>
+                            <p>Kendo UI is for all HTML developers. Kendo UI can be used with (or without) any server-side technology, making it the perfect front-end for every modern, browser-based HTML app. Kendo UI only requires jQuery. After that, everything that's needed is included.</p>
                         </div>
                     </li>
                     <li>
                         What are Kendo UI widgets?
                         <div>
-                            <p>They are great!</p>
+                            <p>Kendo UI widgets are part of the Kendo UI Framework. Kendo UI widgets are grouped into three collections:</p>
+                            <ul>
+                                <li>Kendo UI Web for touch-enabled desktop development</li>
+                                <li>Kendo UI DataViz for desktop and mobile data vizualizations</li>
+                                <li>Kendo UI Mobile for mobile app development, including PhoneGap deployment</li>
+                            </ul>
+                            <p>All widgets complement the tooling you need for modern HTML5 and JavaScript development.<br /> <br /> The Kendo UI Framework provides more than UI, and in the future Kendo UI will offer additional tools to modern HTML developers.</p>
                         </div>
                     </li>
                     <li>
                         How do you use Kendo UI?
                         <div>
-                            <p>How should I know!</p>
+                            <p>Kendo UI is a pure JavaScript framework, so using Kendo UI is as simple as referencing JavaScript and CSS resources on your page. Once Kendo UI is configured on your page, the rich API gives you everything you need to initialize and configure an application.</p>
+                            <p>To learn more about using and installing Kendo UI, visit the Kendo UI&nbsp;<a href="http://demos.kendoui.com/">online demos</a>.</p>
                         </div>
                     </li>
                 </ul>
@@ -557,28 +574,25 @@
                 e.preventDefault();
             });
 
-            $(window).resize(function() {
-                kendo.resize(document.body);
-            });
-
             // init sample widgets
-            var crudServiceBaseUrl = "http://demos.kendoui.com/service",
-                dataSource = new kendo.data.DataSource({
+            var serviceBaseUrl = "http://demos.kendoui.com/service";
+
+            var dataSource = new kendo.data.DataSource({
                     transport: {
                         read:  {
-                            url: crudServiceBaseUrl + "/Products",
+                            url: serviceBaseUrl + "/Products",
                             dataType: "jsonp"
                         },
                         update: {
-                            url: crudServiceBaseUrl + "/Products/Update",
+                            url: serviceBaseUrl + "/Products/Update",
                             dataType: "jsonp"
                         },
                         destroy: {
-                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            url: serviceBaseUrl + "/Products/Destroy",
                             dataType: "jsonp"
                         },
                         create: {
-                            url: crudServiceBaseUrl + "/Products/Create",
+                            url: serviceBaseUrl + "/Products/Create",
                             dataType: "jsonp"
                         },
                         parameterMap: function(options, operation) {
@@ -603,21 +617,88 @@
                     }
                 });
 
+            $("#menu").kendoMenu();
+
             $("#orders").kendoGrid({
-                dataSource: dataSource,
+                dataSource: {
+                    type: "odata",
+                    transport: {
+                        read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+                    },
+                    serverPaging: true,
+                    serverSorting: true,
+                    serverFiltering: true,
+                    pageSize: 10
+                },
+                scrollable: false,
+                sortable: true,
                 pageable: true,
-                toolbar: ["create"],
                 columns: [
-                    "ProductName",
-                    { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "100px" },
-                    { field: "UnitsInStock", title:"Units In Stock", width: "100px" },
-                    { field: "Discontinued", width: "100px" },
-                    { command: ["edit", "destroy"], title: "&nbsp;", width: "172px" }
-                ],
-                editable: true
+                    { field: "OrderID", width: "70px" },
+                    { field: "ShipCountry", title:"Ship Country", width: "200px" },
+                    { field: "ShipAddress", title:"Ship Address" }
+                ]
             });
 
-            $("#menu").kendoMenu();
+            $("#schedule").kendoScheduler({
+                date: new Date("2013/6/13"),
+                startTime: new Date("2013/6/13 07:00 AM"),
+                endTime: new Date("2013/6/13 08:00 PM"),
+                views: [
+                    { type: "day", selected: true },
+                    "week",
+                    "month",
+                    "agenda"
+                ],
+                mobile: "phone",
+                timezone: "Etc/UTC",
+                dataSource: {
+                    batch: true,
+                    transport: {
+                        read: {
+                            url: serviceBaseUrl + "/meetings",
+                            dataType: "jsonp"
+                        },
+                        update: {
+                            url: serviceBaseUrl + "/meetings/update",
+                            dataType: "jsonp"
+                        },
+                        create: {
+                            url: serviceBaseUrl + "/meetings/create",
+                            dataType: "jsonp"
+                        },
+                        destroy: {
+                            url: serviceBaseUrl + "/meetings/destroy",
+                            dataType: "jsonp"
+                        },
+                        parameterMap: function(options, operation) {
+                            if (operation !== "read" && options.models) {
+                                return {models: kendo.stringify(options.models)};
+                            }
+                        }
+                    },
+                    schema: {
+                        model: {
+                            id: "meetingID",
+                            fields: {
+                                meetingID: { from: "MeetingID", type: "number" },
+                                title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                                start: { type: "date", from: "Start" },
+                                end: { type: "date", from: "End" },
+                                startTimezone: { from: "StartTimezone" },
+                                endTimezone: { from: "EndTimezone" },
+                                description: { from: "Description" },
+                                recurrenceId: { from: "RecurrenceID" },
+                                recurrenceRule: { from: "RecurrenceRule" },
+                                recurrenceException: { from: "RecurrenceException" },
+                                roomId: { from: "RoomID", nullable: true },
+                                atendees: { from: "Atendees", nullable: true },
+                                isAllDay: { type: "boolean", from: "IsAllDay" }
+                            }
+                        }
+                    }
+                }
+            });
 
             $("#listview").kendoListView({
                 dataSource: {
