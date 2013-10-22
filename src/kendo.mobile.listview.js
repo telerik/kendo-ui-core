@@ -535,8 +535,11 @@ kendo_module({
     var VirtualListViewItemBinder = kendo.Class.extend({
         init: function(listView) {
             var binder = this;
+
+            this.chromeHeight = listView.wrapper.children().not(listView.element).outerHeight() || 0;
             this.listView = listView;
             this.options = listView.options;
+
             listView.bind("_dataSource", function(e) {
                 binder.setDataSource(e.dataSource);
             });
@@ -548,13 +551,18 @@ kendo_module({
         },
 
         setDataSource: function(dataSource) {
-            var options = this.options,
+            var binder = this,
+                options = this.options,
                 listView = this.listView,
                 scroller = listView.scroller(),
                 pressToLoadMore = options.loadMore,
                 pageSize,
                 buffer,
                 footer;
+
+            if (!scroller) {
+                throw new Error("In order for the listview virtual mode to work as expected, the listview element should be inside a touch scroller container");
+            }
 
             if (this.dataSource) {
                 this._unbindDataSource();
@@ -583,49 +591,52 @@ kendo_module({
                 height: function() { return scroller.height(); }
             });
 
-            if (scroller) {
-                scroller.makeVirtual();
+            scroller.makeVirtual();
 
-                scroller.bind("scroll", function(e) {
-                    list.update(e.scrollTop);
-                });
+            scroller.bind("scroll", function(e) {
+                list.update(e.scrollTop);
+            });
 
-                scroller.bind("scrollEnd", function(e) {
-                    list.batchUpdate(e.scrollTop);
-                });
+            scroller.bind("scrollEnd", function(e) {
+                list.batchUpdate(e.scrollTop);
+            });
 
-                list.bind("resize", function() {
-                    scroller.virtualSize(0, list.totalHeight());
-                });
+            list.bind("resize", function() {
+                binder.updateScrollerSize();
+            });
 
-                list.bind("reset", function() {
-                    footer.enable();
-                });
+            list.bind("reset", function() {
+                footer.enable();
+            });
 
-                list.bind("endReached", function() {
-                    footer.disable();
-                    scroller.virtualSize(0, list.totalHeight());
-                });
+            list.bind("endReached", function() {
+                footer.disable();
+                binder.updateScrollerSize();
+            });
 
-                listView.bind("resize", function() {
-                    if (list.items.length) {
-                        scroller.reset();
-                        buffer.range(0);
-                        list.refresh();
-                    }
-                });
+            listView.bind("resize", function() {
+                if (list.items.length) {
+                    scroller.reset();
+                    buffer.range(0);
+                    list.refresh();
+                }
+            });
 
-                buffer.bind("expand", function() {
-                    list.lastDirection = false; // expand down
-                    list.batchUpdate(scroller.scrollTop);
-                });
-            }
+            buffer.bind("expand", function() {
+                list.lastDirection = false; // expand down
+                list.batchUpdate(scroller.scrollTop);
+            });
 
             $.extend(this, {
                 buffer: buffer,
+                scroller: scroller,
                 list: list,
                 footer: footer
             });
+        },
+
+        updateScrollerSize: function() {
+            this.scroller.virtualSize(0, this.list.totalHeight() + this.chromeHeight);
         },
 
         refresh: function() {
@@ -748,6 +759,8 @@ kendo_module({
                 events += " keyup";
             }
 
+            this.element = listView.wrapper.find(".km-search-form");
+
             this.searchInput = listView.wrapper.find("input[type=search]")
                 .closest("form").on("submit" + NS, function(e) {
                     e.preventDefault();
@@ -761,7 +774,6 @@ kendo_module({
             this.clearButton = listView.wrapper.find(".km-filter-reset")
                 .on(CLICK, proxy(this, "_clearFilter"))
                 .hide();
-
         },
 
         _search: function(expr) {
@@ -857,18 +869,18 @@ kendo_module({
 
             this._style();
 
-            if (this.virtual) {
-                this._itemBinder = new VirtualListViewItemBinder(this);
-            } else {
-                this._itemBinder = new ListViewItemBinder(this);
-            }
-
             if (this.options.pullToRefresh) {
                 this._pullToRefreshHandler = new RefreshHandler(this);
             }
 
             if (this.options.filterable) {
                 this._filter = new ListViewFilter(this);
+            }
+
+            if (this.virtual) {
+                this._itemBinder = new VirtualListViewItemBinder(this);
+            } else {
+                this._itemBinder = new ListViewItemBinder(this);
             }
 
             this.setDataSource(options.dataSource);
