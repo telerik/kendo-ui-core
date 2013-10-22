@@ -1,8 +1,9 @@
-<div data-role="view">
+<div data-role="view" data-init="initGrid">
+    <div data-role="header"></div>
     <div id="grid"></div>
 </div>
 <script>
-    $(function(){
+    function initGrid() {
         var crudServiceBaseUrl = "http://demos.kendoui.com/service";
         var dataSource = new kendo.data.DataSource({
             transport: {
@@ -57,7 +58,9 @@
                 { command: ["edit", "destroy"], title: "&nbsp;", width: "160px" }
             ],
             editable: "popup",
-            filterable: true
+            filterable: true,
+            sortable: true,
+            columnMenu: true
         });
-    });
+    }
 </script>
