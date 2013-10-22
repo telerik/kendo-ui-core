@@ -90,6 +90,7 @@ kendo_module({
         MOBILEDATERANGEEDITOR = function(container, options) {
             var attr = { name: options.field };
 
+            appendTimezoneAttr(attr, options);
             appendDateCompareValidator(attr, options);
 
             $('<input type="datetime-local" required ' + kendo.attr("type") + '="date" ' + kendo.attr("bind") + '="value:' + options.field +',invisible:isAllDay" />')
@@ -103,6 +104,7 @@ kendo_module({
         DATERANGEEDITOR = function(container, options) {
             var attr = { name: options.field };
 
+            appendTimezoneAttr(attr, options);
             appendDateCompareValidator(attr, options);
 
             $('<input type="text" required ' + kendo.attr("type") + '="date"' + ' ' + kendo.attr("role") + '="datetimepicker" ' + kendo.attr("bind") + '="value:' + options.field +',invisible:isAllDay" />')
@@ -184,6 +186,14 @@ kendo_module({
         }
 
         return message;
+    }
+
+    function appendTimezoneAttr(attrs, options) {
+        var timezone = options.timezone;
+
+        if (timezone) {
+            attrs[kendo.attr("timezone")] = timezone;
+        }
     }
 
     function appendDateCompareValidator(attrs, options) {
@@ -337,15 +347,47 @@ kendo_module({
             var startInput = container.find("[name=start]:visible");
             var endInput = container.find("[name=end]:visible");
 
-            if (endInput.length && startInput.length) {
+            if (endInput[0] && startInput[0]) {
+                var start, end;
                 var startPicker = kendo.widgetInstance(startInput, kendo.ui);
                 var endPicker = kendo.widgetInstance(endInput, kendo.ui);
 
+                var editable = container.data("kendoEditable");
+                var model = editable ? editable.options.model : null;
+
                 if (startPicker && endPicker) {
-                    return startPicker.value() <= endPicker.value();
+                    start = startPicker.value();
+                    end = endPicker.value();
+                } else {
+                    start = kendo.parseDate(startInput.val());
+                    end = kendo.parseDate(endInput.val());
+                }
+
+                if (start && end) {
+                    if (model) {
+                        var timezone = startInput.attr(kendo.attr("timezone"));
+                        var startTimezone = model.startTimezone;
+                        var endTimezone = model.endTimezone;
+
+                        startTimezone = startTimezone || endTimezone;
+                        endTimezone = endTimezone || startTimezone;
+
+                        if (startTimezone) {
+                            if (timezone) {
+                                start = kendo.timezone.convert(model.start, startTimezone, timezone);
+                                end = kendo.timezone.convert(model.end, endTimezone, timezone);
+                            } else {
+                                start = kendo.timezone.remove(model.start, startTimezone);
+                                end = kendo.timezone.remove(model.end, endTimezone);
+                            }
+                        }
+                    }
+
+                    return start <= end;
                 }
             }
         }
+
         return true;
     }
 
@@ -793,9 +835,10 @@ kendo_module({
         },
 
         fields: function(editors, model) {
-            var messages = this.options.messages;
-
             var that = this;
+
+            var messages = that.options.messages;
+            var timezone = that.options.timezone;
 
             var click = function(e) {
                 e.preventDefault();
@@ -804,12 +847,10 @@ kendo_module({
 
             var fields = [
                 { field: "title", title: messages.editor.title /*, format: field.format, editor: field.editor, values: field.values*/ },
-                { field: "start", title: messages.editor.start, editor: editors.dateRange },
-                { field: "end", title: messages.editor.end, editor: editors.dateRange },
+                { field: "start", title: messages.editor.start, editor: editors.dateRange, timezone: timezone },
+                { field: "end", title: messages.editor.end, editor: editors.dateRange, timezone: timezone },
                 { field: "isAllDay", title: messages.editor.allDayEvent }
             ];
-
-            var timezone = this.options.timezone;
 
             if (kendo.timezone.windows_zones && !model.isAllDay) {
                 fields.push({ field: "timezone", title: messages.editor.timezone, editor: editors.timezonePopUp, click: click, messages: messages.editor, model: model });
@@ -1080,6 +1121,7 @@ kendo_module({
                     fields: editableFields,
                     model: model,
                     clearContainer: false,
+
                     validateOnBlur: true
                 }).data("kendoEditable");
 
