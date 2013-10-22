@@ -518,48 +518,6 @@
 
             })();
 
-            (function() {
-                function createChart(data) {
-                    $("#container").kendoChart({
-                        dataSource: {
-                            data: data
-                        },
-                        series: [{
-                            type: "scatter",
-                            xField: "x",
-                            yField: "y"
-                        }],
-                        transitions: false
-                    });
-                }
-
-                function xyData(count) {
-                    var data = [];
-
-                    for (var i = 0; i < count; i++) {
-                        data.push({ x: i, y: i });
-                    }
-
-                    return data;
-                };
-
-                // ------------------------------------------------------------
-                module("Scatter Chart / Performance", {
-                    teardown: destroyChart
-                });
-
-                test("1000 points", function() {
-                    var data = xyData(1000);
-
-                    var start = new Date();
-                    createChart(data);
-                    var elapsed = (new Date()) - start;
-
-                    ok(elapsed < 2000, "Expected rendering time < 2000 ms, actual " + elapsed + " ms");
-                });
-
-            })();
-
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
