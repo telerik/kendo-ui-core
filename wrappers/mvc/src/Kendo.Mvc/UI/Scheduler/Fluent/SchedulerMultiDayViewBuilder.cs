@@ -396,12 +396,23 @@
         }
 
         /// <summary>
-        /// Defines the working days of the week
+        /// Sets the start day of work week by index.
         /// </summary>
-        /// <param name="days">An array of working week days</param>
-        public SchedulerMultiDayViewBuilder<TView> WorkWeekDays(params DayOfWeek[] days)
+        /// <param name="workWeekStartDay">The workWeekStartDay</param>
+        public SchedulerMultiDayViewBuilder<TView> WorkWeekStart(int workWeekStartDay)
         {
-            view.WorkWeekDays = days;
+            view.WorkWeekStart = workWeekStartDay;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the end day of work week by index.
+        /// </summary>
+        /// <param name="workWeekEndDay">The workWeekEndDay</param>
+        public SchedulerMultiDayViewBuilder<TView> WorkWeekEnd(int workWeekEndDay)
+        {
+            view.WorkWeekEnd = workWeekEndDay;
 
             return this;
         }

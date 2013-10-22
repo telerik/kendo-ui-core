@@ -11,7 +11,6 @@
             AllDaySlot = true;
             WorkDayCommand = true;
             Footer = true;
-            WorkWeekDays = new List<DayOfWeek>();
         }
 
         public string AllDayEventTemplate
@@ -141,11 +140,17 @@
             set;
         }
 
-        public IEnumerable<DayOfWeek> WorkWeekDays 
-        { 
-            get; 
-            set; 
-        }        
+        public int? WorkWeekStart
+        {
+            get;
+            set;
+        }
+
+        public int? WorkWeekEnd
+        {
+            get;
+            set;
+        }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -252,9 +257,14 @@
                 json["footer"] = Footer;
             }
 
-            if (WorkWeekDays.Count() > 0)
+            if (WorkWeekStart != null)
             {
-                json["workWeekDays"] = WorkWeekDays.Select(d => Enum.GetName(typeof(DayOfWeek), d).Substring(0, 2).ToUpperInvariant());
+                json["workWeekStart"] = WorkWeekStart;
+            }
+
+            if (WorkWeekEnd != null)
+            {
+                json["workWeekEnd"] = WorkWeekEnd;
             }
         }
     }
