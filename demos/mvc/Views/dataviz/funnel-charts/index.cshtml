@@ -167,6 +167,12 @@
             }
         }
 
+        function createCharts() {
+            createChart('chart-oct', octData, "October");
+            createChart('chart-nov', novData, "November");
+            createChart('chart-dec', decData, "December");
+        }
+
         $(document).ready(function () {
             $("#neckSlider").kendoSlider({
                 change: refresh,
@@ -177,13 +183,10 @@
                 largeStep: 0.1
             });
 
-            createChart('chart-oct', octData, "October");
-            createChart('chart-nov', novData, "November");
-            createChart('chart-dec', decData, "December");
-
+            createCharts();
 
             $('.configuration-horizontal').on('click', ':checkbox', refresh);
-            $(document).bind("kendo:skinChange", refresh);
+            $(document).bind("kendo:skinChange", createCharts);
         });
         
     </script>

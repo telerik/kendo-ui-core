@@ -141,8 +141,9 @@
                 max: 40
             });
             $('#color').kendoColorPicker({ change: refresh, value: "#000", buttons: false });
-            $(document).bind("kendo:skinChange", refresh);
-            $(".configuration-horizontal").on("change",":checkbox,:radio", refresh);
+            $(".configuration-horizontal").on("change", ":checkbox,:radio", refresh);
+
+            $(document).bind("kendo:skinChange", createChart);
         });
 
         function refresh() {
