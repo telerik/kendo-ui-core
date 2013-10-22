@@ -995,7 +995,11 @@ kendo_module({
 
             checkbox.prop("checked", model.endTimezone).prop("disabled", !model.endTimezone);
 
-            endTimezoneRow.toggle(model.endTimezone);
+            if (model.endTimezone) {
+                endTimezoneRow.show();
+            } else {
+                endTimezoneRow.hide();
+            }
 
             pane.navigate(timezoneView, that.options.animations.left);
         },
