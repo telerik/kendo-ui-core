@@ -9,6 +9,7 @@
         Week,
         Month,
         Agenda,
-        Custom
+        Custom,
+        WorkWeek
     }
 }

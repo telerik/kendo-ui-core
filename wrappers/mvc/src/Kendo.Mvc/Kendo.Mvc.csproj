@@ -1159,6 +1159,7 @@
     <Compile Include="UI\Scheduler\Fluent\SchedulerViewEditableSettingsBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerMultiDayViewBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerWeekViewBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerWorkWeekViewBuilder.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEventController.cs" />
     <Compile Include="UI\Scheduler\SchedulerMobileType.cs" />
     <Compile Include="UI\Scheduler\SchedulerViewDataContainer.cs" />
@@ -1200,6 +1201,7 @@
     <Compile Include="UI\Scheduler\SchedulerViewMode.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerMultiDayView.cs" />
     <Compile Include="UI\Scheduler\Views\SchedulerWeekView.cs" />
+    <Compile Include="UI\Scheduler\Views\SchedulerWorkWeekView.cs" />
     <Compile Include="UI\SecurityTrimming.cs" />
     <Compile Include="UI\SecurityTrimmingBuilder.cs" />
     <Compile Include="UI\Slider\Fluent\SliderTooltipBuilder.cs" />

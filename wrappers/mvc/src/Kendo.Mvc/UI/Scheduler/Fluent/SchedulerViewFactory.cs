@@ -76,6 +76,34 @@
         }
 
         /// <summary>
+        /// Defines a Scheduler workWeek view.
+        /// </summary>
+        /// <returns></returns>
+        public SchedulerWorkWeekViewBuilder<SchedulerWorkWeekView> WorkWeekView(Action<SchedulerWorkWeekViewBuilder<SchedulerWorkWeekView>> addViewAction)
+        {
+            SchedulerWorkWeekView view = new SchedulerWorkWeekView();
+
+            container.Views.Add(view);
+
+            SchedulerWorkWeekViewBuilder<SchedulerWorkWeekView> builder = new SchedulerWorkWeekViewBuilder<SchedulerWorkWeekView>(view);
+
+            addViewAction(builder);
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Enables a Scheduler workWeek view.
+        /// </summary>
+        /// <returns></returns>
+        public void WorkWeekView()
+        {
+            SchedulerWorkWeekView view = new SchedulerWorkWeekView();
+
+            container.Views.Add(view);
+        }
+
+        /// <summary>
         /// Defines a Scheduler week view.
         /// </summary>
         /// <returns></returns>

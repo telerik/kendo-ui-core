@@ -67,7 +67,9 @@
             {
                 json["title"] = Title;
             }
-            json["type"] = Type;
+
+            string viewType = Type.ToString();
+            json["type"] = Char.ToLowerInvariant(viewType[0]) + viewType.Substring(1);
 
             if (Editable != null)
             {
