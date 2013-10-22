@@ -196,7 +196,7 @@ kendo_module({
                     text = autoFormat(labels.format, text);
                 }
 
-                if(!labels.color){
+                if(!labels.color&&labels.align==="center"){
                     var brightnessValue = new Color(series.color).percBrightness();
                     if(brightnessValue > 180){
                         labels.color = BLACK;

@@ -25,7 +25,7 @@
     <body>
         <div id="funnel-equal"></div>
         <div id="funnel-equal-spacing"></div>
-        <div id="funnel-height"></div>
+        <div id="funnel-height" style="width:600px"></div>
         <div id="funnel-height-increasingWidth"></div>
         <div id="funnel-height-spacing"></div>
         <div id="funnel-relation"></div>
@@ -95,6 +95,8 @@
                     neckRatio:3,
                     labels:{
                        color:"yellow",
+                       position:"bottom",
+                       align:"left",
                        background:"black"
                     }
                 }],
@@ -118,6 +120,9 @@
             });
 
             $("#funnel-height").kendoChart({
+                legend:{
+                    visible:true 
+                },
                 series: [{
                     type: "funnel",
                     dynamicSlope:false,
