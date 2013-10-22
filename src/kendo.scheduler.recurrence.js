@@ -2336,7 +2336,7 @@ kendo_module({
             var messages = options.messages;
             var headerTitle = messages[viewType === "repeat" ? "repeatTitle" : "endTitle"];
 
-            var html = '<div data-role="view" class="k-popup-edit-form" id="recurrence">' +
+            var html = '<div data-role="view" class="k-scheduler-edit-form" id="recurrence">' +
                        '<div data-role="header" class="k-header">' +
                            '<a href="#" class="k-button k-scheduler-cancel">' + messages.cancel + '</a>' +
                                messages.headerTitle +
