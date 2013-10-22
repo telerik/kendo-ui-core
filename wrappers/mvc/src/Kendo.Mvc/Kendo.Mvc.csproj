@@ -373,6 +373,7 @@
     <Compile Include="UI\Chart\ChartLineBase.cs" />
     <Compile Include="UI\Chart\ChartLegendLabels.cs" />
     <Compile Include="UI\Chart\Axes\ChartAxisNoteItem.cs" />
+    <Compile Include="UI\Chart\Enums\ChartScatterLineStyle.cs" />
     <Compile Include="UI\Chart\Enums\ChartZoomDireciton.cs" />
     <Compile Include="UI\Chart\Enums\ChartNoteLabelPosition.cs" />
     <Compile Include="UI\Chart\Enums\ChartNotePosition.cs" />

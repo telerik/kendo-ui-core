@@ -66,6 +66,15 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// The style of the series.
+        /// </summary>
+        public ChartScatterLineStyle Style
+        {
+            get;
+            set;
+        }
+
         public override IChartSerializer CreateSerializer()
         {
             return new ChartScatterLineSeriesSerializer(this);

@@ -80,5 +80,27 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Configures the style for scatterLine series.
+        /// </summary>
+        /// <param name="style">The style. The default is normal.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .ScatterLine(s => s.x, s => s.y)
+        ///                .Style(ChartLineStyle.Smooth);
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ChartScatterLineSeriesBuilder<T> Style(ChartScatterLineStyle style)
+        {
+            Series.Style = style;
+
+            return this;
+        }
     }
 }

@@ -4,9 +4,9 @@ using System.Web.Mvc;
 
 namespace Kendo.Mvc.Examples.Controllers
 {
-    public partial class Area_ChartsController : Controller
+    public partial class Scatter_ChartsController : Controller
     {
-        public ActionResult Step_Area()
+        public ActionResult Style()
         {
             return View();
         }

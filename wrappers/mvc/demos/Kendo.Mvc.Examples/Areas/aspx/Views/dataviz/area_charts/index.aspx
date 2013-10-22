@@ -20,6 +20,9 @@
         .ChartArea(chartArea => chartArea
             .Background("transparent")
         )
+        .SeriesDefaults(seriesDefaults =>
+            seriesDefaults.Area().Line(line => line.Style(ChartAreaStyle.Smooth))
+        )
         .Series(series => {
             series.Area(new double[] { 3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855 }).Name("India");
             series.Area(new double[] { 1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727 }).Name("World");

@@ -19,6 +19,7 @@ namespace Kendo.Mvc.UI
 
             FluentDictionary.For(result)
                 .Add("type", "scatterLine")
+                .Add("style", series.Style.ToString().ToLowerInvariant(), ChartScatterLineStyle.Normal.ToString().ToLowerInvariant())
                 .Add("width", series.Width, () => series.Width.HasValue)
                 .Add("dashType", series.DashType.ToString().ToLowerInvariant(), () => series.DashType.HasValue)
                 .Add("missingValues", series.MissingValues.ToString().ToLowerInvariant(),

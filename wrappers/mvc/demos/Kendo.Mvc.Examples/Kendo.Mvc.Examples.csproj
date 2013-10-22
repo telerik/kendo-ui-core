@@ -146,7 +146,7 @@
     <Compile Include="Controllers\DataViz\Api\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Api\SelectionController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Error_BarsController.cs" />
-    <Compile Include="Controllers\DataViz\Area_Charts\Step_AreaController.cs" />
+    <Compile Include="Controllers\DataViz\Area_Charts\StyleController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Date_AxisController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Area_Charts\IndexController.cs" />
@@ -195,7 +195,7 @@
     <Compile Include="Controllers\DataViz\Line_Charts\NotesController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Stacked_LineController.cs" />
-    <Compile Include="Controllers\DataViz\Line_Charts\Step_LineController.cs" />
+    <Compile Include="Controllers\DataViz\Line_Charts\StyleController.cs" />
     <Compile Include="Controllers\DataViz\Pie_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Pie_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Pie_Charts\Pie_LabelsController.cs" />
@@ -222,6 +222,7 @@
     <Compile Include="Controllers\DataViz\Scatter_Charts\Multiple_AxesController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Scatter_Charts\Scatter_LineController.cs" />
+    <Compile Include="Controllers\DataViz\Scatter_Charts\StyleController.cs" />
     <Compile Include="Controllers\DataViz\Sparklines\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Sparklines\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Sparklines\Remote_DataController.cs" />
@@ -652,7 +653,7 @@
     <Content Include="Areas\aspx\Views\dataviz\api\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\api\selection.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\error_bars.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\area_charts\step_area.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\area_charts\style.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\date_axis.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\grouped_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\area_charts\index.aspx" />
@@ -700,7 +701,7 @@
     <Content Include="Areas\aspx\Views\dataviz\line_charts\notes.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\line_charts\stacked_line.aspx" />
-    <Content Include="Areas\aspx\Views\dataviz\line_charts\step_line.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\line_charts\style.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\pie_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\pie_charts\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\pie_charts\pie_labels.aspx" />
@@ -727,6 +728,7 @@
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\multiple_axes.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\scatter_charts\scatter_line.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\scatter_charts\style.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\sparklines\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\sparklines\local_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\sparklines\remote_data.aspx" />
@@ -2778,10 +2780,10 @@
     <Content Include="Areas\aspx\Views\web\editor\inline_editing.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\area_charts\step_area.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\area_charts\style.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\line_charts\step_line.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\line_charts\style.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\web\progressbar\events.cshtml" />
@@ -2797,6 +2799,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\bar_charts\error_bars.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\scatter_charts\style.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

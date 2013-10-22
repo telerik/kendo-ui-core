@@ -13,6 +13,11 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The values will be connected with a line at right.
         /// </summary>
-        Step
+        Step,
+
+        /// <summary>
+        /// The values will be connected with a smooth line.
+        /// </summary>
+        Smooth
     }
 }
