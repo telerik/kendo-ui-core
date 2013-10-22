@@ -420,6 +420,22 @@
                     keyCode: kendo.keys.UP
                 });
             });
+
+            test("Empty comboBox does not raise exception on navigate", 1, function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: [],
+                    text: "Test",
+                    value: "1",
+                    autoBind: false
+                }).data("kendoComboBox");
+
+                combobox.input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.UP
+                });
+
+                ok(true);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

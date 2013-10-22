@@ -743,9 +743,18 @@ kendo_module({
                 } else {
                     firstChild = ul.firstChild;
                     if (!firstChild && !that._accessor() && that._state !== "filter") {
-                        that.dataSource.one(CHANGE, function() { that._move(e); });
-                        that._filterSource();
+                        if (!that._fetch) {
+                            that.dataSource.one(CHANGE, function() {
+                                that._move(e);
+                                that._fetch = false;
+                            });
+
+                            that._fetch = true;
+                            that._filterSource();
+                        }
+
                         e.preventDefault();
+
                         return true; //pressed
                     }
 
