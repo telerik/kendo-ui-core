@@ -89,8 +89,8 @@ kendo_module({
             dynamicHeight:true,
             segmentSpacing:0,
             labels: {
-                visible: true,
-                align: "center",
+                visible: false,
+                align: "center", //right, left
                 position: "center" // top, bottom
             }
         },
@@ -190,6 +190,8 @@ kendo_module({
                     text = labelTemplate({
                         dataItem: dataItem,
                         value: value,
+                        percentage : fields.percentage,
+                        category: fields.category,
                         series: series
                     });
                 } else if (labels.format) {

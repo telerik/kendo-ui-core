@@ -94,10 +94,11 @@
                     segmentSpacing: 25,
                     neckRatio:3,
                     labels:{
-                       color:"yellow",
-                       position:"bottom",
-                       align:"left",
-                       background:"black"
+                         visible:true,
+                         color:"yellow",
+                         position:"bottom",
+                         align:"left",
+                         background:"black"
                     }
                 }],
                 legend:{
@@ -106,7 +107,7 @@
                         color:"pink"
                     },
                     labels:{
-                        template:"#=text# - #=value#"
+                        template:"#debugger##=text# - #=value#"
                     }
                 },
                 tooltip: {
@@ -129,9 +130,10 @@
                     neckRatio:0.6,
                     data: seriesData,
                     labels: {
+                        visible:true,
                         align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
                         margin: 5,
-                        template: "My Template #=value#"
+                        template: "#debugger#My Template #=value#"
                     }
                 }]
             });
@@ -143,6 +145,7 @@
                     neckRatio:3,
                     data: seriesData,
                     labels: {
+                        visible:true,
                         align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
                         margin: 5,
                         template: "My Template #=value#"
@@ -192,6 +195,7 @@
                     dynamicSlope:true,
                     data: relationData,
                     labels:{
+                        visible:true,
                         color: 'white'
                     }
                 }]
@@ -213,7 +217,8 @@
                     dynamicSlope:true,
                     data: relationData,
                     labels:{
-                        color: 'white'
+                        color: 'white',
+                        visible:true
                     }
                 }]
             });
@@ -224,7 +229,10 @@
                     dynamicHeight:false,
                     dynamicSlope:true,
                     data: relationData,
-                    segmentSpacing : 20
+                    segmentSpacing : 20,
+                    labels:{
+                        visible:true
+                    }
                 }]
             });
 
