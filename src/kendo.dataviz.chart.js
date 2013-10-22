@@ -11182,7 +11182,7 @@ kendo_module({
 
     DefaultAggregates.current.register(
         [BOX_PLOT],
-        { lower: "max", q1: "max", median: "max", q3: "max", upper: "max", mean: "max",
+        { lower: "max", q1: "max", median: "max", q3: "max", upper: "max", mean: "max", outliers: "first",
           color: "first", noteText: "first" }
     );
 
