@@ -314,6 +314,7 @@
             "name": "donut-charts"
         }, {
             "text": "Funnel Charts",
+            "new" : true,
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartFunnelIcon",
             "items": [{
