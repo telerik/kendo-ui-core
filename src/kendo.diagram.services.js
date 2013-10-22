@@ -1585,7 +1585,7 @@ kendo_module({
         },
         refresh: function () {
             var that = this, b,
-                bounds = this.shapes.length == 1 ? this.shapes[0].bounds().clone() : this.diagram.getNonRotatedBoundingBox(this.shapes);
+                bounds = this.shapes.length == 1 ? this.shapes[0].bounds().clone() : this.diagram.getOriginBoundingBox(this.shapes);
             this.bounds(bounds);
 
             bounds = this.bounds();

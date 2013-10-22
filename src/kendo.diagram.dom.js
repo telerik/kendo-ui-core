@@ -1065,7 +1065,17 @@ kendo_module({
 
             that.element.addClass("k-widget k-diagram").attr("role", "diagram");
             that.canvas = new Canvas(element); // the root SVG Canvas
+            this.mainLayer = new Group({
+                id: "main-layer"
+            });
+            this.canvas.append(this.mainLayer);
+            this.adornerLayer = new Group({
+                id: "adorner-layer"
+            });
+            this.canvas.append(this.adornerLayer);
             that._initialize();
+            this.resizingAdorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable});
+            this._adorn(this.resizingAdorner, true);
             that.element.on("mousemove" + NS, proxy(that._mouseMove, that))
                 .on("mouseup" + NS, proxy(that._mouseUp, that))
                 .on("dblclick" + NS, proxy(that._doubleClick, that))
@@ -1102,14 +1112,9 @@ kendo_module({
             var that = this;
             Widget.fn.destroy.call(that);
 
-            if (that.dataSource) {
-                that._unbindDataSource();
-            }
-
+            that.clear();
             that.element.off(NS);
             // TODO: Destroy all the shapes, connections and the tons of other stuff!
-            that.canvas.remove(that.mainLayer);
-            that.canvas.remove(that.adornerLayer);
             that.canvas.element.removeChild(that.canvas.native);
             that.canvas = undefined;
         },
@@ -1213,7 +1218,12 @@ kendo_module({
             window.scrollTo(x, y); // prevent the annoying scroll to top of the canvas (div).
         },
         clear: function () {
-            this.canvas.clear();
+            var that = this;
+            if (that.dataSource) {
+                that._unbindDataSource();
+            }
+
+            that.mainLayer.clear();
             this._initialize();
         },
         connect: function (source, target, options) {
@@ -1313,10 +1323,9 @@ kendo_module({
                     }
                 }
                 if (Utils.isBoolean(itemsOrRect)) {
-                    if (itemsOrRect === false)
-                        return;
-                    else
+                    if (itemsOrRect !== false) {
                         this.select("All");
+                    }
                 }
                 else if (itemsOrRect.toString().toLowerCase() === "all") {
                     items = this.shapes.concat(this.connections);
@@ -1430,7 +1439,7 @@ kendo_module({
             }
             return rect;
         },
-        getNonRotatedBoundingBox: function (items) {
+        getOriginBoundingBox: function (items) {
             var rect = Rect.empty(), di = this._getDiagramItems(items), temp;
             if (di.shapes.length > 0) {
                 var item = di.shapes[0];
@@ -1714,15 +1723,9 @@ kendo_module({
             this._selectedItems = [];
             this.connections = [];
             this._adorners = [];
-            this.mainLayer = new Group({
-                id: "main-layer"
-            });
+
             this.dataMap = [];
-            this.canvas.append(this.mainLayer);
-            this.adornerLayer = new Group({
-                id: "adorner-layer"
-            });
-            this.canvas.append(this.adornerLayer);
+
             this.undoRedoService = new UndoRedoService();
             this.toolService = new ToolService(this);
 
@@ -1736,8 +1739,6 @@ kendo_module({
             if (this.options.autoBind) {
                 this.dataSource.fetch();
             }
-            this.resizingAdorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable});
-            this._adorn(this.resizingAdorner, true);
         },
         _dataSource: function () {
             var that = this,
@@ -1936,7 +1937,9 @@ kendo_module({
                 val,
                 item,
                 i;
-            if (items.length === 0)return;
+            if (items.length === 0) {
+                return;
+            }
             switch (direction.toLowerCase()) {
                 case "left":
                 case "top":

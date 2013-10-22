@@ -657,7 +657,17 @@ kendo_module({
             visual.canvas = this.canvas;
         },
         remove: function (visual) {
-            this.native.removeChild(visual.native);
+            if (visual.native) {
+                this.native.removeChild(visual.native);
+            }
+            else {
+                this.native.removeChild(visual);
+            }
+        },
+        clear: function () {
+            while (this.native.lastChild) {
+                this.native.removeChild(this.native.lastChild);
+            }
         },
         toFront: function (visuals) {
             var visual, i, n = this.native;
