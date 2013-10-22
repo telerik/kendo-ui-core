@@ -504,12 +504,14 @@ kendo_module({
         refresh: function() {
             var that = this;
 
-            // preserve updated value before re-initializing
-            // don't use update() to prevent the editor from encoding the content too early
-            that.textarea.val(that.value());
-            that.wrapper.find("iframe").remove();
-            that._initializeContentElement(that);
-            that.value(that.textarea.val());
+            if (that.textarea) {
+                // preserve updated value before re-initializing
+                // don't use update() to prevent the editor from encoding the content too early
+                that.textarea.val(that.value());
+                that.wrapper.find("iframe").remove();
+                that._initializeContentElement(that);
+                that.value(that.textarea.val());
+            }
         },
 
         events: [
