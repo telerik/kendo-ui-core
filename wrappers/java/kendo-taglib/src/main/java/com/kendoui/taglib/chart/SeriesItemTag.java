@@ -57,6 +57,10 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("connectors", value);
     }
 
+    public void setExtremes(com.kendoui.taglib.chart.SeriesItemExtremesTag value) {
+        setProperty("extremes", value);
+    }
+
     public void setHighlight(com.kendoui.taglib.chart.SeriesItemHighlightTag value) {
         setProperty("highlight", value);
     }
@@ -83,6 +87,10 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setNotes(com.kendoui.taglib.chart.SeriesItemNotesTag value) {
         setProperty("notes", value);
+    }
+
+    public void setOutliers(com.kendoui.taglib.chart.SeriesItemOutliersTag value) {
+        setProperty("outliers", value);
     }
 
     public void setOverlay(com.kendoui.taglib.chart.SeriesItemOverlayTag value) {

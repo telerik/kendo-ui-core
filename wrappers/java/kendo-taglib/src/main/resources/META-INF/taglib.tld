@@ -843,7 +843,7 @@ The axis will be rendered in the first (default) pane if not set.</description>
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>If set to true the chart will round the first and last date to the nearest base unit.The roundToBaseUnit option will be ignored if series.type is set to "bar", "column", "ohlc" or "candlestick".</description>
+            <description>If set to true the chart will round the first and last date to the nearest base unit.The roundToBaseUnit option will be ignored if series.type is set to "bar", "column", "boxPlot", "ohlc" or "candlestick".</description>
             <name>roundToBaseUnit</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
@@ -1596,7 +1596,8 @@ body of the chart.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -1782,7 +1783,8 @@ body of the chart.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -3292,6 +3294,124 @@ or series name (for other available series types) in the legend.</description>
 
 
     <tag>
+        <description>The chart series extremes configuration.</description>
+        <name>chart-seriesItem-extremes</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemExtremesTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the series outliers.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The border of the extremes.</description>
+            <name>border</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the extremes.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The extremes size in pixels.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The extremes shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the series extremes. By default chart series extremes are not displayed.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the extremes.</description>
+        <name>chart-seriesItem-extremes-border</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemExtremesBorderTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+        <name>chart-seriesItem-extremes-border-color</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemExtremesBorderColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+        <name>chart-seriesItem-extremes-border-width</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemExtremesBorderWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The background color of the series outliers.</description>
+        <name>chart-seriesItem-extremes-background</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemExtremesBackgroundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The extremes size in pixels.</description>
+        <name>chart-seriesItem-extremes-size</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemExtremesSizeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The extremes shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
+        <name>chart-seriesItem-extremes-type</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemExtremesTypeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>If set to true the chart will display the series extremes. By default chart series extremes are not displayed.</description>
+        <name>chart-seriesItem-extremes-visible</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemExtremesVisibleFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The rotation angle of the extremes.</description>
+        <name>chart-seriesItem-extremes-rotation</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemExtremesRotationFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>The chart series highlighting configuration options.</description>
         <name>chart-seriesItem-highlight</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemHighlightTag</tag-class>
@@ -3710,7 +3830,8 @@ By default chart series highlighting is enabled.</description>
             <description>The markers shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -3775,7 +3896,8 @@ By default chart series highlighting is enabled.</description>
         <description>The markers shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
         <name>chart-seriesItem-markers-type</name>
         <tag-class>com.kendoui.taglib.chart.SeriesItemMarkersTypeFunctionTag</tag-class>
         <body-content>JSP</body-content>
@@ -3851,7 +3973,8 @@ By default chart series highlighting is enabled.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -4009,6 +4132,124 @@ By default chart series highlighting is enabled.</description>
 
 
 
+    <tag>
+        <description>The chart series outliers configuration.</description>
+        <name>chart-seriesItem-outliers</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemOutliersTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The background color of the series outliers.</description>
+            <name>background</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The border of the outliers.</description>
+            <name>border</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The rotation angle of the outliers.</description>
+            <name>rotation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The marker size in pixels.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The outliers shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the chart will display the series outliers. By default chart series outliers are not displayed.</description>
+            <name>visible</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The border of the outliers.</description>
+        <name>chart-seriesItem-outliers-border</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemOutliersBorderTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The color of the border. Accepts a valid CSS color string, including hex and rgb.</description>
+        <name>chart-seriesItem-outliers-border-color</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemOutliersBorderColorFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The width of the border in pixels. By default the border width is set to zero which means that the border will not appear.</description>
+        <name>chart-seriesItem-outliers-border-width</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemOutliersBorderWidthFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The background color of the series outliers.</description>
+        <name>chart-seriesItem-outliers-background</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemOutliersBackgroundFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The marker size in pixels.</description>
+        <name>chart-seriesItem-outliers-size</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemOutliersSizeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The outliers shape.The supported values are:
+* "circle" - the marker shape is circle.
+* "square" - the marker shape is square.
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
+        <name>chart-seriesItem-outliers-type</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemOutliersTypeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>If set to true the chart will display the series outliers. By default chart series outliers are not displayed.</description>
+        <name>chart-seriesItem-outliers-visible</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemOutliersVisibleFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The rotation angle of the outliers.</description>
+        <name>chart-seriesItem-outliers-rotation</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemOutliersRotationFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The chart series overlay options.</description>
         <name>chart-seriesItem-overlay</name>
@@ -5254,7 +5495,8 @@ body of the chart.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -5440,7 +5682,8 @@ body of the chart.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -6577,7 +6820,8 @@ body of the chart.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -6763,7 +7007,8 @@ body of the chart.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -7894,7 +8139,8 @@ body of the chart.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -8080,7 +8326,8 @@ body of the chart.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -14746,10 +14993,16 @@ That way all users would see the same dates and times no matter their configured
             <type>java.util.Date</type>
         </attribute>
         <attribute>
-            <description>List of working week days.</description>
-            <name>workWeekDays</name>
+            <description>The end of working week (index based).</description>
+            <name>workWeekEnd</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The start of working week (index based).</description>
+            <name>workWeekStart</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
         <attribute>
             <description>Fired when the a new event is about to be added.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
@@ -15636,10 +15889,16 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>List of working week days.</description>
-            <name>workWeekDays</name>
+            <description>The end of working week (index based).</description>
+            <name>workWeekEnd</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The start of working week (index based).</description>
+            <name>workWeekStart</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
         </attribute>
     </tag>
 
@@ -20936,7 +21195,8 @@ on the chart.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -21122,7 +21382,8 @@ on the chart.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -22589,7 +22850,8 @@ body of the chart.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -22775,7 +23037,8 @@ body of the chart.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -24900,7 +25163,8 @@ Available for column series.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -26067,7 +26331,8 @@ body of the chart.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -26253,7 +26518,8 @@ body of the chart.</description>
             <description>The icon shape.The supported values are:
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
-* "triangle" - the marker shape is triangle.</description>
+* "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.</description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
