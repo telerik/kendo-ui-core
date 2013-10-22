@@ -292,7 +292,7 @@ file 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc/Kendo.Mvc.csproj
     end
 end
 
-def patch_examples_csproj t
+def patch_examples_csproj(t, vs)
     csproj = File.read(t.name)
 
     # remove AfterBuild target
@@ -307,7 +307,34 @@ def patch_examples_csproj t
     # fix the path to the nuget packages
     csproj.gsub!('..\\..\\packages', '..\\packages')
 
+    csproj = upgrade_project_to_vs2013(csproj) if vs == 'VS2013'
+
     File.write(t.name, csproj)
+end
+
+def upgrade_project_to_vs2013(csproj)
+    csproj.gsub(/System\.Web\.([^,]*), Version=2\.0\.0\.0/, "System.Web.\\1, Version=3.0.0.0")
+          .gsub(/System\.Web\.([^,]*), Version=4\.0\.0\.0/, "System.Web.\\1, Version=5.0.0.0")
+          .gsub(/System\.Net\.([^,]*), Version=4\.0\.0\.0/, "System.Web.\\1, Version=5.0.0.0")
+          .gsub('Microsoft.AspNet.Razor.2.0.30506.0\lib\net40', 'Microsoft.AspNet.Razor.3.0.0\lib\net45')
+          .gsub(/Microsoft\.AspNet\.(.*)4\.0\.30506\.0\\lib\\net40/, 'Microsoft.AspNet.\\15.0.0\lib\net45')
+          .gsub(/Microsoft\.AspNet\.(.*)2\.0\.30506\.0\\lib\\net40/, 'Microsoft.AspNet.\\13.0.0\lib\net45')
+          .gsub("{E3E379DF-F4C6-4180-9B81-6769533ABE47};", "")
+
+end
+
+def upgrade_web_config_to_mvc5(t)
+    xml = File.read(t.name)
+
+    xml = xml.gsub('oldVersion="1.0.0.0-2.0.0.0"', 'oldVersion="1.0.0.0-3.0.0.0"')
+             .gsub('oldVersion="1.0.0.0-4.0.0.0"', 'oldVersion="1.0.0.0-5.0.0.0"')
+             .gsub('newVersion="2.0.0.0"', 'newVersion="3.0.0.0"')
+             .gsub('newVersion="4.0.0.0"', 'newVersion="5.0.0.0"')
+             .sub('key="webpages:Version" value="2.0.0.0"', 'key="webpages:Version" value="3.0.0.0"')
+             .gsub(', Version=4.0.0.0', ', Version=5.0.0.0')
+             .gsub(', Version=2.0.0.0', ', Version=3.0.0.0')
+
+    File.write(t.name, xml)
 end
 
 def patch_examples_solution(t, vs)
@@ -328,13 +355,12 @@ def patch_examples_solution(t, vs)
     #Remove empty lines
     sln.gsub!(/^$\n/, '')
 
-    if vs == 'VS2013'
-        sln = upgrade_solution(sln)
-    end
+    sln = upgrade_solution_to_vs2013(sln) if vs == 'VS2013'
+
     File.write(t.name, sln)
 end
 
-def upgrade_solution (sln)
+def upgrade_solution_to_vs2013(sln)
     sln.sub('# Visual Studio 2012', "# Visual Studio 2013\nVisualStudioVersion = 12.0.21005.1\nMinimumVisualStudioVersion = 10.0.40219.1")
 end
 
@@ -366,7 +392,6 @@ file 'dist/bundles/aspnetmvc.commercial/src/Kendo.Mvc/Kendo.Mvc.sln' do |t|
     patch_solution t
 end
 
-
 ['commercial', 'trial'].each do |license|
 
     ['VS2012', 'VS2013'].each do |vs|
@@ -386,7 +411,22 @@ end
 
         # Patch Visual Studio Project - fix paths etc.
         file  "dist/bundles/aspnetmvc.#{license}/wrappers/aspnetmvc/Examples/#{vs}/Kendo.Mvc.Examples/Kendo.Mvc.Examples.csproj" do |t|
-            patch_examples_csproj t
+            patch_examples_csproj(t, vs)
+        end
+
+        if vs == 'VS2013'
+
+            ['Web.config', 'Views/Web.config', 'Areas/aspx/Views/Web.config', 'Areas/razor/Views/Web.config'].each do |config|
+
+                file_copy :to => "dist/bundles/aspnetmvc.#{license}/wrappers/aspnetmvc/Examples/#{vs}/Kendo.Mvc.Examples/#{config}",
+                          :from => "wrappers/mvc/demos/Kendo.Mvc.Examples/#{config}"
+
+                file "dist/bundles/aspnetmvc.#{license}/wrappers/aspnetmvc/Examples/#{vs}/Kendo.Mvc.Examples/#{config}" do |t|
+                    upgrade_web_config_to_mvc5(t)
+                end
+
+            end
+
         end
 
     end
