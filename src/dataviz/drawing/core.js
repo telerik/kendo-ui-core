@@ -100,7 +100,10 @@
             if (current !== value) {
                 var composite = this._set(field, this.wrap(value, field));
                 if (this.observer && !composite) {
-                    this.observer.optionsChange({ field: this.prefix + field });
+                    this.observer.optionsChange({
+                        field: this.prefix + field,
+                        value: value
+                    });
                 }
             }
         },
@@ -116,17 +119,19 @@
                 while (parts.length > 1) {
                     path += parts.shift();
                     obj = kendo.getter(path, true)(this);
-                    path += ".";
 
                     if (!obj) {
-                        obj = new OptionsStore({}, path);
+                        obj = new OptionsStore({}, path + ".");
                         obj.observer = this;
+                        this[path] = obj;
                     }
 
                     if (obj instanceof OptionsStore) {
                         obj.set(parts.join("."), value);
                         return composite;
                     }
+
+                    path += ".";
                 }
             }
 

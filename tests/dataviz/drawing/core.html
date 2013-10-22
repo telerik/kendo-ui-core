@@ -137,14 +137,25 @@
         ok(options.foo.bar instanceof OptionsStore);
     });
 
+    test("set", function() {
+        options.set("baz", true);
+        equal(options.baz, true);
+    });
+
     test("set triggers optionsChange", function() {
         options.observer = {
             optionsChange: function(e) {
                 equal(e.field, "baz");
+                equal(e.value, true);
             }
         };
 
         options.set("baz", true);
+    });
+
+    test("nested set", function() {
+        options.set("baz.baz", true);
+        equal(options.baz.baz, true);
     });
 
     test("nested set on existing field triggers optionsChange", function() {

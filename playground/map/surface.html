@@ -44,26 +44,15 @@
 
     var seconds = new Path({
         stroke: {
-            color: "red",
-            width: 1
+            color: "red"
         }
         // zIndex
         // etc.
     }).moveTo(center).lineTo(50, 0);
 
-    var minutes = new Path({
-        stroke: {
-            color: "black",
-            width: 1
-        }
-    }).moveTo(center).lineTo(50, 5);
+    var minutes = new Path().moveTo(center).lineTo(50, 5);
 
-    var hours = new Path({
-        stroke: {
-            color: "black",
-            width: 1
-        }
-    }).moveTo(center).lineTo(50, 25);
+    var hours = new Path().moveTo(center).lineTo(50, 25);
 
     var ticks = new Group();
     var clock = new Group();

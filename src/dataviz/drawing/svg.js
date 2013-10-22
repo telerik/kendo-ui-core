@@ -1,16 +1,13 @@
 (function () {
 
     // Imports ================================================================
-    var $ = jQuery,
-        doc = document,
+    var doc = document,
 
         kendo = window.kendo,
         Observable = kendo.Observable,
-        getter = kendo.getter,
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        round = dataviz.round,
         renderTemplate = dataviz.renderTemplate,
 
         drawing = dataviz.drawing,
@@ -23,13 +20,8 @@
 
     // Constants ==============================================================
     var BUTT = "butt",
-        CLIP = dataviz.CLIP,
         DASH_ARRAYS = dataviz.DASH_ARRAYS,
-        DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
-        DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
-        DEFAULT_FONT = dataviz.DEFAULT_FONT,
         NONE = "none",
-        RADIAL = "radial",
         SOLID = "solid",
         SQUARE = "square",
         SVG_NS = "http://www.w3.org/2000/svg",
@@ -56,16 +48,16 @@
             "click"
         ],
 
-        svg: function() {
-            return this._template(this);
-        },
-
         draw: function(element) {
             this._root.load([element]);
         },
 
         clear: function() {
             this._root.clear();
+        },
+
+        svg: function() {
+            return this._template(this);
         },
 
         _template: renderTemplate(
@@ -188,14 +180,18 @@
     });
 
     var PathNode = Node.extend({
-        init: function(srcElement) {
-            var node = this;
-
-            Node.fn.init.call(node, srcElement);
+        geometryChange: function() {
+            this.attr("d", this.renderSegments());
+            this.invalidate();
         },
 
-        geometryChange: function() {
-            this.syncSegments();
+        optionsChange: function(e) {
+            var name = this.attributeMap[e.field];
+
+            if (name) {
+                this.attr(name, e.value);
+            }
+
             this.invalidate();
         },
 
@@ -204,78 +200,90 @@
             "stroke.color": "stroke"
         },
 
-        renderId: function() {
-            var node = this,
-                options = node.srcElement.options,
-                result = "";
-
-            if (options.id) {
-                result = renderAttr("id", options.id);
+        attr: function(name, value) {
+            if (this.element) {
+                this.element.setAttribute(name, value);
             }
-
-            return result;
         },
 
-        renderPoints: function() {
+        renderSegments: function() {
             var path = this,
                 segments = path.srcElement.segments,
                 i,
+                result;
+
+            if (segments.length > 0) {
                 result = [];
+                for (i = 0; i < segments.length; i++) {
+                    result.push(segments[i].anchor.toString());
+                }
 
-            for (i = 0; i < segments.length; i++) {
-                result.push(segments[i].anchor.toString());
+                return "M" + result.join(" ");
             }
-
-            return "M" + result.join(" ");
         },
 
         renderStroke: function() {
-            var path = this,
-                stroke = path.srcElement.options.stroke;
+            var stroke = this.srcElement.options.stroke || { color: "black", width: 1 };
 
-            if (stroke) {
-                return renderAttr("stroke", stroke.color) +
-                       renderAttr("stroke-width", stroke.width);
+            return renderAttr("stroke", stroke.color) +
+                   renderAttr("stroke-width", stroke.width) +
+                   renderAttr("stroke-opacity", stroke.opacity) +
+                   renderAttr("stroke-dasharray", this.renderDashType(stroke)) +
+                   renderAttr("stroke-linecap", this.renderLinecap(stroke));
+        },
+
+        renderDashType: function (stroke) {
+            var width = stroke.width || 1,
+                dashType = stroke.dashType;
+
+            if (dashType && dashType != SOLID) {
+                var dashArray = DASH_ARRAYS[dashType.toLowerCase()],
+                    result = [],
+                    i;
+
+                for (i = 0; i < dashArray.length; i++) {
+                    result.push(dashArray[i] * width);
+                }
+
+                return result.join(" ");
             }
+        },
+
+        renderLinecap: function(stroke) {
+            var dashType = stroke.dashType,
+                lineCap = stroke.lineCap || SQUARE;
+
+            return (dashType && dashType != SOLID) ? BUTT : lineCap;
+        },
+
+        renderFill: function() {
+            var fill = this.srcElement.options.fill;
+
+            if (fill && fill.color !== TRANSPARENT) {
+                return renderAttr("fill", fill.color) +
+                       renderAttr("fill-opacity", fill.opacity);
+            }
+
+            return renderAttr("fill", NONE);
+        },
+
+        renderCursor: function() {
+            var cursor = this.srcElement.options.cursor;
+
+            if (cursor) {
+                return "cursor:" + cursor + ";";
+            }
+
+            return "";
         },
 
         template: renderTemplate(
-            "<path #= d.renderId() #" +
-            //"style='display: #= d.renderDisplay() #; " +
-            //"#= d.renderCursor() #' " +
-            //"#= d.renderDataAttributes() # " +
-            "d='#= d.renderPoints() #' " +
+            "<path style='#= d.renderCursor() #' " +
+            "#= kendo.dataviz.util.renderAttr('d', d.renderSegments()) # " +
             "#= d.renderStroke() # " +
-            //"#= d.renderDashType() # " +
-            //"stroke-linecap='#= d.renderLinecap() #' " +
-            //"stroke-linejoin='round' " +
-            //"fill-opacity='#= d.options.fillOpacity #' " +
-            //"stroke-opacity='#= d.options.strokeOpacity #' " +
-            //"fill='#= d.renderFill() #'> " +
-            "></path>"
-        ),
-
-        syncSegments: function() {
-            if (this.element) {
-                $(this.element).attr({
-                    d: this.renderPoints()
-                });
-            }
-        },
-
-        optionsChange: function(e) {
-            var element = this.element,
-                options = this.srcElement.options,
-                name = this.attributeMap[e.field];
-
-            if (element && name) {
-                $(element).attr(
-                    name, getter(e.field)(options)
-                );
-            }
-
-            this.invalidate();
-        }
+            "#= d.renderFill() # " +
+            "stroke-linejoin='round'></path>"
+        )
     });
 
     // Helpers ================================================================
@@ -305,10 +313,11 @@
     // Exports ================================================================
     deepExtend(drawing, {
         svg: {
-            Surface: Surface,
-            Node: Node,
             GroupNode: GroupNode,
-            PathNode: PathNode
+            Node: Node,
+            PathNode: PathNode,
+            RootNode: RootNode,
+            Surface: Surface
         }
     });
 

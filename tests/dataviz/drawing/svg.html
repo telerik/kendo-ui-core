@@ -128,6 +128,17 @@
     });
 
     // ------------------------------------------------------------
+    module("RootNode");
+
+    test("attachTo directly sets element", function() {
+        var rootNode = new svg.RootNode();
+        var container = document.createElement("div");
+        rootNode.attachTo(container);
+
+        deepEqual(rootNode.element, container);
+    });
+
+    // ------------------------------------------------------------
     var groupNode;
 
     module("GroupNode", {
@@ -155,6 +166,145 @@
         equal(groupNode.render(), "<g></g>");
     });
 
+    // ------------------------------------------------------------
+    var path,
+        pathNode,
+        container;
+
+    module("PathNode", {
+        setup: function() {
+            container = document.createElement("div");
+
+            path = new Path();
+            pathNode = new PathNode(path);
+            pathNode.attachTo(container);
+        }
+    });
+
+    test("renders straight segments", function() {
+        path.moveTo(0, 0).lineTo(10, 20);
+
+        ok(pathNode.render().indexOf("d='M0 0 10 20'") !== -1);
+    });
+
+    test("does not render segments for empty path", function() {
+        equal(pathNode.render().indexOf("d="), -1);
+    });
+
+    test("renders stroke", function() {
+        path.options.set("stroke.color", "red");
+
+        ok(pathNode.render().indexOf("stroke='red'") !== -1);
+    });
+
+    test("renders default stroke", function() {
+        ok(pathNode.render().indexOf("stroke='black'") !== -1);
+    });
+
+    test("renders stroke width", function() {
+        path.options.set("stroke.width", 2);
+
+        ok(pathNode.render().indexOf("stroke-width='2'") !== -1);
+    });
+
+    test("renders default stroke width", function() {
+        ok(pathNode.render().indexOf("stroke-width='1'") !== -1);
+    });
+
+    test("renders stroke opacity", function() {
+        path.options.set("stroke.opacity", 0.5);
+
+        ok(pathNode.render().indexOf("stroke-opacity='0.5'") !== -1);
+    });
+
+    test("does not render stroke opacity if not set", function() {
+        equal(pathNode.render().indexOf("stroke-opacity="), -1);
+    });
+
+    test("renders stroke dashType", function() {
+        path.options.set("stroke.dashType", "dot");
+
+        ok(pathNode.render().indexOf("stroke-dasharray='1.5 3.5'") !== -1);
+    });
+
+    test("does not render stroke dashType if not set", function() {
+        equal(pathNode.render().indexOf("stroke-dasharray="), -1);
+    });
+
+    test("renders stroke linecap", function() {
+        path.options.set("stroke.lineCap", "butt");
+
+        ok(pathNode.render().indexOf("stroke-linecap='butt'") !== -1);
+    });
+
+    test("renders default stroke linecap", function() {
+        ok(pathNode.render().indexOf("stroke-linecap='square'") !== -1);
+    });
+
+    test("overrides stroke linecap when dashType is set", function() {
+        path.options.set("stroke.dashType", "dot");
+        path.options.set("stroke.lineCap", "foo");
+
+        ok(pathNode.render().indexOf("stroke-linecap='butt'") !== -1);
+    });
+
+    test("renders stroke linecap when dashType is set to solid", function() {
+        path.options.set("stroke.dashType", "solid");
+        path.options.set("stroke.lineCap", "foo");
+
+        ok(pathNode.render().indexOf("stroke-linecap='foo'") !== -1);
+    });
+
+    test("renders default stroke linecap", function() {
+        path.options.set("stroke", {});
+
+        ok(pathNode.render().indexOf("stroke-linecap='square'") !== -1);
+    });
+
+    test("renders fill", function() {
+        path.options.set("fill", { color: "red", opacity: 0.5 });
+        var svg = pathNode.render();
+
+        ok(svg.indexOf("fill='red'") !== -1);
+        ok(svg.indexOf("fill-opacity='0.5'") !== -1);
+    });
+
+    test("renders empty fill if not set", function() {
+        ok(pathNode.render().indexOf("fill='none'") !== -1);
+    });
+
+    test("renders empty fill if set to transparent", function() {
+        path.options.set("fill.color", "transparent");
+        ok(pathNode.render().indexOf("fill='none'") !== -1);
+    });
+
+    test("renders cursor", function() {
+        path.options.set("cursor", "hand");
+        ok(pathNode.render().indexOf("cursor:hand;") !== -1);
+    });
+
+    test("does not render cursor if not set", function() {
+        ok(pathNode.render().indexOf("cursor") === -1);
+    });
+
+    test("geometryChange sets path", function() {
+        path.moveTo(0, 0);
+        pathNode.attr = function(name, value) {
+            equal(name, "d");
+            ok(value);
+        };
+
+        path.lineTo(10, 10);
+    });
+
+    test("optionsChange sets fill", function() {
+        pathNode.attr = function(name, value) {
+            equal(name, "fill");
+            equal(value, "red");
+        };
+
+        path.options.set("fill.color", "red");
+    });
     </script>
 
     <h1 id="qunit-header"></h1>
