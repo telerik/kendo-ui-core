@@ -1034,7 +1034,7 @@ kendo_module({
                 model.bind("change", startTimezoneChange);
             }
 
-            checkbox.prop("checked", model.endTimezone).prop("disabled", !model.endTimezone);
+            checkbox.prop("checked", model.endTimezone).prop("disabled", !model.startTimezone);
 
             if (model.endTimezone) {
                 endTimezoneRow.show();
@@ -1411,9 +1411,13 @@ kendo_module({
                 model.bind("change", startTimezoneChange);
             }
 
-            checkbox.prop("checked", model.endTimezone).prop("disabled", !model.endTimezone);
+            checkbox.prop("checked", model.endTimezone).prop("disabled", !model.startTimezone);
 
-            endTimezoneRow.toggle(model.endTimezone);
+            if (model.endTimezone) {
+                endTimezoneRow.show();
+            } else {
+                endTimezoneRow.hide();
+            }
 
             wnd = timezonePopup.data("kendoWindow");
             wnd.center().open();
