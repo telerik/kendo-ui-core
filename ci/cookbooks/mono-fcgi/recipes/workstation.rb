@@ -1,8 +1,11 @@
 
 package "mono-fastcgi-server4"
 
-cookbook_file '/etc/init/mono-fcgi.conf' do
-    source 'workstation.conf'
+template '/etc/init/mono-fcgi.conf' do
+    source 'workstation.conf.erb'
+    variables({
+        kendo_dir: File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..', '..'))
+    })
 end
 
 service 'mono-fcgi' do

@@ -6,5 +6,6 @@
     "recipe[nodejs]",
     "recipe[java]",
     "recipe[mono]",
-    "recipe[nginx::workstation]"
+    "recipe[nginx::workstation]",
+    "recipe[mono-fcgi::workstation]"
 ]}
