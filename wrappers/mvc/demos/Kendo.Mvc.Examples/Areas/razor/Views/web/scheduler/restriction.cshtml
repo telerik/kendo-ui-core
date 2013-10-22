@@ -45,7 +45,8 @@
     )
     .DataSource(dataSource => 
         dataSource.Model(m => { 
-               m.Id(f => f.MeetingID);                                                 
+               m.Id(f => f.MeetingID);
+               m.RecurrenceId(f => f.RecurrenceID);
         })
     )
     .BindTo(Model)

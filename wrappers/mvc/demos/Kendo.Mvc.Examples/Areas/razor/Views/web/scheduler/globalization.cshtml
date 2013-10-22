@@ -38,7 +38,10 @@
         views.AgendaView();
     })
     .DataSource(d => d
-        .Model(m => m.Id(f => f.TaskID))
+        .Model(m => {
+            m.Id(f => f.TaskID);
+            m.RecurrenceId(f => f.RecurrenceID);
+        })
         .Read(read => read.Action("Read", "Scheduler").Data("sendCulture"))
         .Create(create => create.Action("Create", "Scheduler").Data("sendCulture"))
         .Destroy(destroy => destroy.Action("Destroy", "Scheduler").Data("sendCulture"))

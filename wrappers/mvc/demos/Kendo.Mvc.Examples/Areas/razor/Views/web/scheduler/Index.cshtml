@@ -33,6 +33,7 @@
         .Model(m => {
             m.Id(f => f.TaskID);
             m.Field(f => f.OwnerID).DefaultValue(1);
+            m.RecurrenceId(f => f.RecurrenceID);
         })
         .Read("Read", "Scheduler")
         .Create("Create", "Scheduler")

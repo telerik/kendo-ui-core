@@ -36,7 +36,8 @@
          })
     .DataSource(d => d
             .Model(m => { 
-                m.Id(f => f.MeetingID);                                                 
+                m.Id(f => f.MeetingID);
+                m.RecurrenceId(f => f.RecurrenceID);
             })
         .Read("Meetings_Read", "Scheduler")
         .Create(create => create.Action("Meetings_Create", "Scheduler").Data("serialize"))
