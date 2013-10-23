@@ -198,7 +198,9 @@
     var RootNode = Node.extend({
         attachTo: function(domElement) {
             this.element = domElement;
-        }
+        },
+
+        clear: BaseNode.fn.clear
     });
 
     var GroupNode = Node.extend({
@@ -253,8 +255,8 @@
         renderStroke: function() {
             var stroke = this.srcElement.options.stroke || {};
 
-            return renderAttr("stroke", valueOrDefault(stroke.color, "black")) +
-                   renderAttr("stroke-width", valueOrDefault(stroke.width, 1)) +
+            return renderAttr("stroke", stroke.color) +
+                   renderAttr("stroke-width", stroke.width) +
                    renderAttr("stroke-opacity", stroke.opacity) +
                    renderAttr("stroke-dasharray", this.renderDashType(stroke)) +
                    renderAttr("stroke-linecap", this.renderLinecap(stroke));

@@ -1,13 +1,20 @@
 (function ($, undefined) {
     // Imports ================================================================
+    var PRECISION = 4;
+
+    // Imports ================================================================
     var proxy = $.proxy,
 
         kendo = window.kendo,
         Class = kendo.Class,
 
         dataviz = kendo.dataviz,
-        ViewFactory = dataviz.ViewFactory.current,
         deepExtend = kendo.deepExtend,
+
+        d = dataviz.drawing,
+
+        util = dataviz.util,
+        round = util.round,
 
         map = dataviz.map,
         Location = map.Location;
@@ -22,16 +29,13 @@
                 height: map.element.height()
             });
 
-            layer.map = map;
-            layer.view = ViewFactory.create(
-                options, options.renderAs
-            );
-
             this._initOptions(options);
             this.element = $("<div class='k-layer'></div>").appendTo(
                 map.scrollWrap // TODO: API for allocating a scrollable element?
-            );
+            ).css("width", options.width).css("height", options.height);
 
+            layer.map = map;
+            layer.surface = new d.svg.Surface(this.element[0], options); // TODO: Automatic choice
             layer.movable = new kendo.ui.Movable(layer.element);
 
             map.bind("reset", proxy(layer.reset, layer));
@@ -43,39 +47,29 @@
         },
 
         polygon: function(coords, style) {
+            style = deepExtend({
+                stroke: { width: 0.1, color: "black" },
+                _fill: { color: "red", opacity: 0.5 }
+            }, style);
+
             for (var i = 0; i < coords.length; i++) {
                 var ring = coords[i];
                 var ringPoints = [];
+
+                var path = new d.Path(style);
 
                 for (var j = 0; j < ring.length; j++) {
                     var point = ring[j];
                     var l = Location.fromLngLat(point);
                     var p = this.map.layerPoint(l);
 
-                    ringPoints.push(p);
+                    path.lineTo(round(p.x, PRECISION), round(p.y, PRECISION));
                 }
 
-                var poly = this.view.createPolyline(ringPoints, true,
-                    deepExtend({
-                        stroke: "#ff0000",
-                        strokeWidth: 1,
-                        strokeOpacity: 1,
-                        align: false
-                }, style));
-
-                this.view.children.push(poly);
+                this.surface.draw(path);
             }
-        },
 
-        reset: function() {
-            if (this._data) {
-                this.view.children = [];
-                this.load(this._data);
-            }
-        },
-
-        _render: function() {
-            this.view.renderTo(this.element[0]);
+            return path;
         },
 
         load: function(data) {
@@ -90,8 +84,6 @@
                         this._draw(feature.geometry, feature.properties);
                     }
                 }
-
-                this._render();
             }
         },
 
@@ -106,10 +98,17 @@
             }
         },
 
+        reset: function() {
+            if (this._data) {
+                this.surface.clear();
+                this.load(this._data);
+            }
+        },
+
         _drag: function() {
             var scroller = this.map.scroller;
             var offset = { x: scroller.scrollLeft, y: scroller.scrollTop };
-            var element = element;
+            var element = this.element;
 
             // TODO: Viewport info
             var width = this.element.width();

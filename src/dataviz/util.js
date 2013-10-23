@@ -18,6 +18,15 @@
         return typeof value !== UNDEFINED;
     }
 
+    function round(value, precision) {
+        var power = math.pow(10, precision || 0);
+        return math.round(value * power) / power;
+    }
+
+    function limitValue(value, min, max) {
+        return math.max(math.min(value, max), min);
+    }
+
     function rad(degrees) {
         return degrees * DEG_TO_RAD;
     }
@@ -69,6 +78,8 @@
             defined: defined,
             deg: deg,
             isNumber: isNumber,
+            limitValue: limitValue,
+            round: round,
             rad: rad,
             renderAttr: renderAttr,
             renderSize: renderSize,

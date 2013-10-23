@@ -29,13 +29,16 @@ kendo_module({
         Point = dataviz.Point2D,
         deepExtend = kendo.deepExtend,
         defined = dataviz.defined,
-        limit = dataviz.limitValue;
+
+        util = dataviz.util,
+        limit = util.limitValue;
 
     // Constants ==============================================================
     var PI = math.PI,
         PI_DIV_2 = PI / 2,
         PI_DIV_4 = PI / 4,
-        DEG_TO_RAD = PI / 180;
+        DEG_TO_RAD = PI / 180,
+        MAX_ZOOM = 18;
 
     // Map widget =============================================================
     var Map = Widget.extend({
@@ -60,7 +63,8 @@ kendo_module({
         options: {
             name: "Map",
             layers: [],
-            minScale: 256
+            minScale: 256,
+            minZoom: 2
         },
 
         events:[
@@ -69,7 +73,7 @@ kendo_module({
 
         zoom: function(level) {
             if (defined(level)) {
-                this.options.view.zoom = level;
+                this.options.view.zoom = limit(level, this.options.minZoom, MAX_ZOOM);
 
                 this._resetScroller();
                 this.trigger("reset");

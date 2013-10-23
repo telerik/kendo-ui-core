@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map sandbox</title>
+    <script src="../../src/jquery.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.fx.js"></script>
+    <script src="../../src/kendo.userevents.js"></script>
+    <script src="../../src/kendo.draganddrop.js"></script>
+    <script src="../../src/kendo.mobile.scroller.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/dataviz/util.js"></script>
+    <script src="../../src/dataviz/geometry.js"></script>
+    <script src="../../src/dataviz/drawing/core.js"></script>
+    <script src="../../src/dataviz/drawing/shapes.js"></script>
+    <script src="../../src/dataviz/drawing/svg.js"></script>
+    <script src="../../src/dataviz/drawing/canvas.js"></script>
+    <script src="../../src/kendo.dataviz.map.js"></script>
+    <script src="../../src/map/shape-layer.js"></script>
+    <style>
+        .k-layer {
+            position: absolute;
+        }
+
+        .k-tile {
+            position: absolute;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+
+        #map .km-scroll-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map" style="width: 800px; height: 600px;"></div>
+    <script>
+        $("#map").kendoMap({
+            view: {
+                center: [51.505, -0.09],
+                zoom: 2
+            },
+            layers: [{
+                type: "shape",
+                url: "countries.geo.json",
+                copyright: "&copy; FooBar"
+            }]
+        });
+
+        var map = $("#map").data("kendoMap");
+
+        $(document).on("mousewheel", function(e) {
+            var delta = kendo.dataviz.mwDelta(e);
+            e.preventDefault();
+
+            delta = delta > 0 ? -1 : 1;
+            map.zoom(map.zoom() + delta);
+        });
+    </script>
+</body>
+</html>
+
