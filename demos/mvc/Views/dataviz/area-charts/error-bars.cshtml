@@ -39,7 +39,7 @@
                 tooltip: {
                     visible: true,
                     format: "{0}%",
-                    template: "#= series.name #: #= value #"
+                    template: "#= value # (σ = #= kendo.toString(high - low, 'N2') #)"
                 }
             });
         }

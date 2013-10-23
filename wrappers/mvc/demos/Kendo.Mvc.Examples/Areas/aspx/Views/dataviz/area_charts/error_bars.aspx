@@ -24,7 +24,7 @@
             .Tooltip(tooltip => tooltip
                 .Visible(true)
                 .Format("{0}%")
-                .Template("#= series.name #: #= value #")
+                .Template("#= value # (σ = #= kendo.toString(high - low, 'N2') #)")
             )
     %>
 </div>
