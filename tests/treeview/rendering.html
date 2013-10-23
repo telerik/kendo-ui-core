@@ -90,6 +90,12 @@
                 equal(element.find(".k-group:not(.k-treeview-lines)").length, 1);
             });
 
+            test("extends link lists", function() {
+                var element = treeviewFromHtml("<ul><li><a href='#foo'>foo</a></li></ul>");
+
+                equal(element.find("a.k-in").length, 1);
+            });
+
             module("groups", moduleOptions);
 
             test("renders lines class for first level", function() {

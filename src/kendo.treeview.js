@@ -98,13 +98,27 @@ kendo_module({
         };
     }
 
+    function moveContents(node, container) {
+        var tmp;
+
+        while (node && node.nodeName.toLowerCase() != "ul") {
+            tmp = node;
+            node = node.nextSibling;
+
+            if (tmp.nodeType == 3) {
+                tmp.nodeValue = $.trim(tmp.nodeValue);
+            }
+
+            container.appendChild(tmp);
+        }
+    }
+
     function updateNodeHtml(node) {
         var wrapper = node.children("div"),
             group = node.children("ul"),
             toggleButton = wrapper.children(".k-icon"),
             checkbox = node.children(":checkbox"),
-            innerWrapper = wrapper.children(".k-in"),
-            currentNode, tmp;
+            innerWrapper = wrapper.children(".k-in");
 
         if (node.hasClass("k-treeview")) {
             return;
@@ -125,23 +139,16 @@ kendo_module({
             $("<span class='k-checkbox' />").appendTo(wrapper).append(checkbox);
         }
 
-        if (!innerWrapper.length && wrapper.length) {
-            innerWrapper = $("<span class='k-in' />").appendTo(wrapper)[0];
+        if (!innerWrapper.length) {
+            innerWrapper = node.children("a").eq(0).addClass("k-in");
 
-            // move all non-group content in the k-in container
-            currentNode = wrapper[0].nextSibling;
-            innerWrapper = wrapper.find(".k-in")[0];
-
-            while (currentNode && currentNode.nodeName.toLowerCase() != "ul") {
-                tmp = currentNode;
-                currentNode = currentNode.nextSibling;
-
-                if (tmp.nodeType == 3) {
-                    tmp.nodeValue = $.trim(tmp.nodeValue);
-                }
-
-                innerWrapper.appendChild(tmp);
+            if (!innerWrapper.length) {
+                innerWrapper = $("<span class='k-in' />");
             }
+
+            innerWrapper.appendTo(wrapper);
+
+            moveContents(wrapper[0].nextSibling, innerWrapper[0]);
         }
     }
 

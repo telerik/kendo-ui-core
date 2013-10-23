@@ -3545,6 +3545,10 @@ kendo_module({
             className,
             children;
 
+        function elements(collection, tagName) {
+            return collection.filter(tagName).add(collection.find(tagName));
+        }
+
         for (idx = 0, length = items.length; idx < length; idx++) {
             record = { _loaded: true };
             item = items.eq(idx);
@@ -3565,15 +3569,15 @@ kendo_module({
             }
 
             if (urlField) {
-                record[urlField] = children.find("a").attr("href");
+                record[urlField] = elements(children, "a").attr("href");
             }
 
             if (imageUrlField) {
-                record[imageUrlField] = children.find("img").attr("src");
+                record[imageUrlField] = elements(children, "img").attr("src");
             }
 
             if (spriteCssClassField) {
-                className = children.find(".k-sprite").prop("className");
+                className = elements(children, ".k-sprite").prop("className");
                 record[spriteCssClassField] = className && $.trim(className.replace("k-sprite", ""));
             }
 

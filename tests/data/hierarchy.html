@@ -842,6 +842,33 @@
                 equal(data[0].imageUrl, "image.png");
             });
 
+            test("infer of plain url fields", function() {
+                var list = $("<ul><li>" +
+                        "<a href='http://kendoui.com/'>" +
+                        "<span class='k-sprite spriteClass'></span>" +
+                        "foo</a>"+
+                    "</li></ul>"),
+                    dataSource = HierarchicalDataSource.create({
+                        list: list,
+                        fields: [
+                            { field: "text" },
+                            { field: "url" },
+                            { field: "spriteCssClass" },
+                            { field: "imageUrl" }
+                        ]
+                    });
+
+                dataSource.read();
+
+                var data = dataSource.data();
+
+                equal(data.length, 1);
+
+                equal(data[0].text, "foo");
+                equal(data[0].url, "http://kendoui.com/");
+                equal(data[0].spriteCssClass, "spriteClass");
+            });
+
             test("infer with custom fields", function() {
                 var list = $("<ul><li>foo</li></ul>"),
                     dataSource = HierarchicalDataSource.create({
