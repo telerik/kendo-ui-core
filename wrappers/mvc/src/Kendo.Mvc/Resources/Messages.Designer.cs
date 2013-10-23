@@ -547,6 +547,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Filter_Cancel {
+            get {
+                return ResourceManager.GetString("Filter_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         public static string Filter_Clear {
@@ -718,6 +727,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Operator.
+        /// </summary>
+        public static string Filter_Operator {
+            get {
+                return ResourceManager.GetString("Filter_Operator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Or.
         /// </summary>
         public static string Filter_Or {
@@ -790,6 +808,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        public static string Filter_Value {
+            get {
+                return ResourceManager.GetString("Filter_Value", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Grid_Cancel {
@@ -817,6 +844,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Column Settings.
+        /// </summary>
+        public static string Grid_ColumnSettings {
+            get {
+                return ResourceManager.GetString("Grid_ColumnSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete this record?.
         /// </summary>
         public static string Grid_Confirmation {
@@ -840,6 +876,15 @@ namespace Kendo.Mvc.Resources {
         public static string Grid_Destroy {
             get {
                 return ResourceManager.GetString("Grid_Destroy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done.
+        /// </summary>
+        public static string Grid_Done {
+            get {
+                return ResourceManager.GetString("Grid_Done", resourceCulture);
             }
         }
         
