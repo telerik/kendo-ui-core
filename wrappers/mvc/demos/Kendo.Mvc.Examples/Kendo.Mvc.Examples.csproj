@@ -436,6 +436,8 @@
     <Compile Include="Controllers\Web\PanelBar\NavigationController.cs" />
     <Compile Include="Controllers\Web\PanelBar\RtlController.cs" />
     <Compile Include="Controllers\Web\ProgressBar\ApiController.cs" />
+    <Compile Include="Controllers\Web\ProgressBar\ChunkController.cs" />
+    <Compile Include="Controllers\Web\ProgressBar\CustomlabelController.cs" />
     <Compile Include="Controllers\Web\ProgressBar\EventsController.cs" />
     <Compile Include="Controllers\Web\ProgressBar\IndexController.cs" />
     <Compile Include="Controllers\Web\ProgressBar\RtlController.cs" />
@@ -927,6 +929,9 @@
     <Content Include="Areas\aspx\Views\web\panelbar\index.aspx" />
     <Content Include="Areas\aspx\Views\web\panelbar\navigation.aspx" />
     <Content Include="Areas\aspx\Views\web\panelbar\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\web\progressbar\api.aspx" />
+    <Content Include="Areas\aspx\Views\web\progressbar\chunk.aspx" />
+    <Content Include="Areas\aspx\Views\web\progressbar\customlabel.aspx" />
     <Content Include="Areas\aspx\Views\web\progressbar\events.aspx" />
     <Content Include="Areas\aspx\Views\web\progressbar\index.aspx" />
     <Content Include="Areas\aspx\Views\web\progressbar\rtl.aspx" />
@@ -2802,6 +2807,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\scatter_charts\style.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\progressbar\api.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\progressbar\chunk.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\progressbar\customlabel.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

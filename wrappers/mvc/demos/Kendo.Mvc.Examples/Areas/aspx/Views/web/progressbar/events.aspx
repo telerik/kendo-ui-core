@@ -4,60 +4,69 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-<div class="configuration k-widget k-header" style="width: 300px">
-    <span class="infoHead">Information</span>
-    <p>
-        This example shows how to handle events triggered by Kendo UI ProgressBar.
-    </p>
-</div>
-<div style="width: 45%">
+<div id="example" class="k-content">
     <div class="demo-section">
+        <h3 class="title">ProgressBar</h3>
         <%= Html.Kendo().ProgressBar()
               .Name("progressBar")
               .Min(0)
               .Max(10)
               .Type(ProgressBarType.Percent)
-              .Animation(a => a.Duration(400))
-              .Events(events => events
-                .Start("onStart")
-                .Change("onChange")
-                .Complete("onComplete")
-              )
+              .Events(e => {
+                  e.Change("onChange");
+                  e.Complete("onComplete");
+              })
         %>
-    <button id="startProgress" class="k-button">Start</button>
+        <button id="startProgress" class="k-button">Start progress</button>
     </div>
-</div>
+    <div class="demo-section">
+        <h3 class="title">Console log</h3>
+        <div class="console"></div>
+    </div>
+    <script>
+        function onChange(e) {
+            kendoConsole.log("Change event :: value is " + e.value);
+        }
 
-<div class="demo-section" style="margin-top: 50px;">
-    <h3 class="title">Console log
-    </h3>
-    <div class="console"></div>
-</div>
+        function onComplete(e) {
+            kendoConsole.log("Complete event :: value is " + e.value);
 
-<script>
-    function onStart(e) {
-        kendoConsole.log("Start event :: value is " + e.value);
-    }
+            $("#startProgress").text("Restart Progress").removeClass("k-state-disabled");
+        }
 
-    function onChange(e) {
-        kendoConsole.log("Change event :: value is " + e.value);
-    }
-
-    function onComplete(e) {
-        kendoConsole.log("Complete event :: value is " + e.value);
-    }
-
-    $("#startProgress").click(function () {
-        var pb = $("#progressBar").data("kendoProgressBar");
-
-        var interval = setInterval(function () {
-            if (pb.value() < 10) {
-                pb.value(pb.value() + 1);
-            } else {
-                clearInterval(interval);
+        $("#startProgress").click(function () {
+            if (!$(this).hasClass("k-state-disabled")) {
+                $(this).addClass("k-state-disabled");
+                progress();
             }
-        }, 400);
-    });
-</script>
+        });
 
+        function progress() {
+            var pb = $("#progressBar").data("kendoProgressBar");
+            pb.value(0);
+
+            var interval = setInterval(function () {
+                if (pb.value() < 10) {
+                    pb.value(pb.value() + 1);
+                } else {
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
+    </script>
+
+    <style scoped>
+        #progressBar {
+            width: 440px;
+            margin-bottom: 10px;
+        }
+        .demo-section {
+            width: 500px;
+            text-align: center;
+        }
+        .console {
+            margin: 0;
+        }
+    </style> 
+</div>
 </asp:Content>
