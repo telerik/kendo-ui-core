@@ -920,6 +920,7 @@ kendo_module({
         },
         redraw: function (options) {
             this.options = deepExtend({}, this.options, options);
+            this.content(this.options.content);
             this.path.redraw(options);
         },
         /**
