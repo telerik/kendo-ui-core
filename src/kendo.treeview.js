@@ -148,7 +148,9 @@ kendo_module({
 
             innerWrapper.appendTo(wrapper);
 
-            moveContents(wrapper[0].nextSibling, innerWrapper[0]);
+            if (wrapper.length) {
+                moveContents(wrapper[0].nextSibling, innerWrapper[0]);
+            }
         }
     }
 
