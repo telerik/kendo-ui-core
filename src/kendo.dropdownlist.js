@@ -462,6 +462,10 @@ kendo_module({
         },
 
         _keypress: function(e) {
+            if (e.charCode === 0) {
+                return;
+            }
+
             var that = this,
                 character = String.fromCharCode(e.charCode || e.keyCode),
                 index = that.selectedIndex,
