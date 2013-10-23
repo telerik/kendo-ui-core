@@ -294,12 +294,10 @@ kendo_module({
             var that = this,
                 ui = that.options.ui,
                 setUI = isFunction(ui),
-                paneElement,
                 role;
 
-            paneElement = that.element.closest(kendo.roleSelector("pane"));
-            if (paneElement[0]) {
-                that.pane = paneElement.data("kendoMobilePane");
+            that.pane = that.element.closest(kendo.roleSelector("pane")).data("kendoMobilePane");
+            if (that.pane) {
                 that._isMobile = true;
             }
 
