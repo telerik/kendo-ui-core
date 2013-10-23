@@ -152,6 +152,13 @@
             this.geometryChange();
 
             return this;
+        },
+
+        close: function() {
+            this.options.closed = true;
+            this.geometryChange();
+
+            return this;
         }
     });
 
@@ -163,13 +170,28 @@
 
         moveTo: function(x, y) {
             var path = new Path();
-            this.paths.push(path);
+            path.observer = this;
 
+            this.paths.push(path);
             path.moveTo(x, y);
+
+            return this;
         },
 
         lineTo: function(x, y) {
-            dataviz.last(this.paths).lineTo(x, y);
+            if (this.paths.length > 0) {
+                dataviz.last(this.paths).lineTo(x, y);
+            }
+
+            return this;
+        },
+
+        close: function() {
+            if (this.paths.length > 0) {
+                dataviz.last(this.paths).close();
+            }
+
+            return this;
         }
     });
 

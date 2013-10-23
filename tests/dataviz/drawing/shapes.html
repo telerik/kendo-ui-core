@@ -27,6 +27,7 @@
         Shape = d.Shape,
         Text = d.Text,
         Circle = d.Circle,
+        MultiPath = d.MultiPath,
         Path = d.Path;
 
     // ------------------------------------------------------------
@@ -271,6 +272,102 @@
         };
 
         path.moveTo(0, 0);
+    });
+
+    test("close sets closed", function() {
+        path.close();
+        ok(path.options.closed);
+    });
+
+    test("close triggers geometryChange", function() {
+        path.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        path.close();
+    });
+
+    test("close does not trigger optionsChange", 0, function() {
+        path.observer = {
+            geometryChange: $.noop,
+            optionsChange: function() {
+                ok(false);
+            }
+        };
+
+        path.close();
+    });
+
+    test("close returns path", function() {
+        deepEqual(path.close(), path);
+    });
+
+    // ------------------------------------------------------------
+    var multiPath;
+
+    module("MultiPath", {
+        setup: function() {
+            multiPath = new MultiPath();
+        }
+    });
+
+    test("moveTo adds path", function() {
+        multiPath.moveTo(0, 0);
+        equal(multiPath.paths.length, 1);
+    });
+
+    test("moveTo adds segment to path", function() {
+        multiPath.moveTo(0, 0);
+        equal(multiPath.paths[0].segments.length, 1);
+    });
+
+    test("moveTo sets path observer", function() {
+        multiPath.moveTo(0, 0);
+        deepEqual(multiPath.paths[0].observer, multiPath);
+    });
+
+    test("moveTo adds new path", function() {
+        multiPath.moveTo(0, 0).lineTo(0, 0).moveTo(0, 0);
+        equal(multiPath.paths.length, 2);
+    });
+
+    test("moveTo returns multiPath", function() {
+        deepEqual(multiPath.moveTo(0, 0), multiPath);
+    });
+
+    test("lineTo does nothing if called first", function() {
+        multiPath.lineTo(0, 0);
+        equal(multiPath.paths.length, 0);
+    });
+
+    test("lineTo adds segment", function() {
+        multiPath.moveTo(0, 0).lineTo(0, 0);
+        equal(multiPath.paths[0].segments.length, 2);
+    });
+
+    test("lineTo adds segment to last path", function() {
+        multiPath.moveTo(0, 0).moveTo(0, 0).lineTo(0, 0);
+        equal(multiPath.paths[1].segments.length, 2);
+    });
+
+    test("lineTo returns multiPath", function() {
+        deepEqual(multiPath.moveTo(0, 0).lineTo(0, 0), multiPath);
+    });
+
+    test("close closes last path", function() {
+        multiPath.moveTo(0, 0).close();
+        ok(multiPath.paths[0].options.closed);
+    });
+
+    test("close does nothing if called first", function() {
+        multiPath.close(0, 0);
+        equal(multiPath.paths.length, 0);
+    });
+
+    test("close returns multiPath", function() {
+        deepEqual(multiPath.moveTo(0, 0).close(), multiPath);
     });
     </script>
 
