@@ -601,7 +601,7 @@ kendo_module({
             }
 
             input.addClass(element.className)
-                 .val(element.value)
+                 .val(this.options.text || element.value)
                  .css({
                     width: "100%",
                     height: element.style.height
