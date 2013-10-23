@@ -59,6 +59,15 @@ class TreeViewItem extends \Kendo\UI\NavigationalItem {
     }
 
     /**
+    * Specifies whether the item is initially checked. True by default.
+    * @param boolean $value
+    * @return \Kendo\UI\TreeViewItem
+    */
+    public function checked($value) {
+        return $this->setProperty('checked', $value);
+    }
+
+    /**
     * Specifies whether the item is initially selected
     * @param boolean $value
     * @return \Kendo\UI\TreeViewItem
