@@ -666,8 +666,14 @@
   <data name="Filter_Value" xml:space="preserve">
     <value>Value</value>
   </data>
+  <data name="Grid_CancelDelete" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="Grid_ColumnSettings" xml:space="preserve">
     <value>Column Settings</value>
+  </data>
+  <data name="Grid_ConfirmDelete" xml:space="preserve">
+    <value>Delete</value>
   </data>
   <data name="Grid_Done" xml:space="preserve">
     <value>Done</value>

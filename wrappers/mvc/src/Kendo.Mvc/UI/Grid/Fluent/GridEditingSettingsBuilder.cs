@@ -126,6 +126,46 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Change default text for confirm delete button. Note: Available only on mobile devices.
+        /// </summary>
+        /// <remarks>
+        /// Available only on mobile devices.
+        /// </remarks>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
+        ///             .Name("Orders")
+        ///             .Editable(settings => settings.ConfirmDelete("Yes"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public GridEditingSettingsBuilder<T> ConfirmDelete(string text)
+        {
+            settings.ConfirmDelete = text;            
+            return this;
+        }
+
+        /// <summary>
+        /// Change default text for cancel delete button. Note: Available only on mobile devices.
+        /// </summary>
+        /// <remarks>
+        /// Available only on mobile devices.
+        /// </remarks>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Grid&lt;Order&gt;()
+        ///             .Name("Orders")
+        ///             .Editable(settings => settings.ConfirmDelete("No"))
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public GridEditingSettingsBuilder<T> CancelDelete(string text)
+        {
+            settings.CancelDelete = text;
+            return this;
+        }
+
         //TODO: Implement edit form attributes
         ///// <summary>
         ///// Gets the HTML attributes of the form rendered during editing

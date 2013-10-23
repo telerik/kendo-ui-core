@@ -835,6 +835,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Grid_CancelDelete {
+            get {
+                return ResourceManager.GetString("Grid_CancelDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Columns.
         /// </summary>
         public static string Grid_Columns {
@@ -858,6 +867,15 @@ namespace Kendo.Mvc.Resources {
         public static string Grid_Confirmation {
             get {
                 return ResourceManager.GetString("Grid_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Grid_ConfirmDelete {
+            get {
+                return ResourceManager.GetString("Grid_ConfirmDelete", resourceCulture);
             }
         }
         
