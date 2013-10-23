@@ -242,7 +242,6 @@ kendo_module({
         options: {
             stroke: "gray",
             strokeWidth: 1,
-            strokeThickness: 1,
             strokeDashArray: "none"
         },
         background: function (value) {
@@ -258,7 +257,6 @@ kendo_module({
             that.setAtr("stroke", "stroke");
             that.setAtr("stroke-dasharray", "strokeDashArray");
             that.setAtr("stroke-width", "strokeWidth");
-            that.setAtr("stroke-thickness", "strokeThickness");
             that.background();
         },
         _hover: function (value) {
@@ -315,7 +313,6 @@ kendo_module({
         options: {
             stroke: "none",
             strokeWidth: 0,
-            strokeThickness: 0,
             strokeDashArray: "none",
             fontSize: 15,
             fontVariant: "normal",
@@ -447,7 +444,6 @@ kendo_module({
             Visual.fn.init.call(this, document.createElementNS(SVGNS, "rect"), options);
         },
         options: {
-            strokeThickness: undefined,
             strokeWidth: undefined,
             strokeDashArray: undefined,
             background: "none"
@@ -459,7 +455,6 @@ kendo_module({
             this.setAtr("stroke", "stroke");
             this.setAtr("stroke-dasharray", "strokeDashArray");
             this.setAtr("stroke-width", "strokeWidth");
-            this.setAtr("stroke-thickness", "strokeThickness");
         }
     });
 
@@ -623,7 +618,7 @@ kendo_module({
         },
         options: {
             stroke: "gray",
-            strokeThickness: 5,
+            strokeWidth: 1,
             backgrounds: "none",
             points: []
         }
@@ -870,7 +865,7 @@ kendo_module({
                     width: 6,
                     height: 6,
                     center: new Point(5, 5),
-                    strokeThickness: 1,
+                    strokeWidth: 1,
                     background: "black"
                 },
                 width: 10,

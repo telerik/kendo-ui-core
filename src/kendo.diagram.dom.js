@@ -279,7 +279,6 @@ kendo_module({
             data: "rectangle",
             stroke: "Black",
             strokeWidth: 1,
-            strokeThickness: 1,
             strokeDashArray: "none",
             x: 0,
             y: 0,
@@ -560,7 +559,6 @@ kendo_module({
         options: {
             stroke: "gray",
             hoveredStroke: "#70CAFF",
-            strokeThickness: 1,
             startCap: "FilledCircle",
             endCap: "ArrowEnd",
             points: [],

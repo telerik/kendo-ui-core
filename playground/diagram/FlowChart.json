@@ -47,7 +47,7 @@
             "data": "m50.21875,97.4375l0,0c-26.35457,0 -47.71875,-21.25185 -47.71875,-47.46875l0,0c0,-26.21678 21.36418,-47.46875 47.71875,-47.46875l0,0c12.65584,0 24.79359,5.00155 33.74218,13.90339c8.94862,8.90154 13.97657,20.97617 13.97657,33.56536l0,0c0,12.58895 -5.02795,24.66367 -13.97657,33.56542l13.97657,0l0,13.90333l-47.71875,0z",
             "stroke": "Black",
             "strokeWidth": 1,
-            "strokeThickness": 1,
+            
             "strokeDashArray": "none",
             "x": 231,
             "y": 50,
@@ -102,7 +102,7 @@
             "data": "m2.5,15.5967c31.68356,-45.3672 63.37309,45.3642 95.05661,0l0,81.65914c-31.68353,45.36404 -63.37305,-45.36732 -95.05661,0l0,-81.65914z",
             "stroke": "Black",
             "strokeWidth": 1,
-            "strokeThickness": 1,
+            
             "strokeDashArray": "none",
             "x": 50,
             "y": 212,
@@ -152,7 +152,7 @@
             "data": "m0,0 L0,100 L100,100 L100,0z",
             "stroke": "Black",
             "strokeWidth": 1,
-            "strokeThickness": 1,
+            
             "strokeDashArray": "none",
             "x": 235,
             "y": 212,
@@ -202,7 +202,7 @@
             "data": "m0,100 L100,100 L50,0z",
             "stroke": "Black",
             "strokeWidth": 1,
-            "strokeThickness": 1,
+            
             "strokeDashArray": "none",
             "x": 425,
             "y": 212,
@@ -244,7 +244,7 @@
             "data": "m0,0 L0,100 L100,100 L100,0z",
             "stroke": "Black",
             "strokeWidth": 1,
-            "strokeThickness": 1,
+            
             "strokeDashArray": "none",
             "x": 735,
             "y": 50,
@@ -294,7 +294,7 @@
             "data": "m0,0 L0,100 L100,100 L100,0z",
             "stroke": "Black",
             "strokeWidth": 1,
-            "strokeThickness": 1,
+            
             "strokeDashArray": "none",
             "x": 545,
             "y": 161,
@@ -344,7 +344,7 @@
             "data": "m0,0 L0,100 L100,100 L100,0z",
             "stroke": "Black",
             "strokeWidth": 1,
-            "strokeThickness": 1,
+            
             "strokeDashArray": "none",
             "x": 830,
             "y": 161,
@@ -394,7 +394,7 @@
             "data": "m0,0 L0,100 L100,100 L100,0z",
             "stroke": "Black",
             "strokeWidth": 1,
-            "strokeThickness": 1,
+            
             "strokeDashArray": "none",
             "x": 545,
             "y": 311,
@@ -444,7 +444,7 @@
             "data": "m0,0 L0,100 L100,100 L100,0z",
             "stroke": "Black",
             "strokeWidth": 1,
-            "strokeThickness": 1,
+            
             "strokeDashArray": "none",
             "x": 735,
             "y": 311,
@@ -494,7 +494,7 @@
             "data": "m0,0 L0,100 L100,100 L100,0z",
             "stroke": "Black",
             "strokeWidth": 1,
-            "strokeThickness": 1,
+            
             "strokeDashArray": "none",
             "x": 925,
             "y": 311,
@@ -544,7 +544,6 @@
             "data": "M14.248657,39.417725 C14.248657,39.417725 14,29.667244 21.3302,24.000578 C28.663574,18.333912 39.328003,20.250563 39.328003,20.250563 C39.328003,20.250563 43.494385,0.5 63.741943,0.5 C82.739746,0.5 87.655762,19.750601 87.655762,19.750601 C87.655762,19.750601 100.32007,16.000544 108.31909,24.750582 C114.66797,31.695599 112.90283,40.4174 112.90283,40.4174 C112.90283,40.4174 123.16272,45.471794 120.81873,58.500729 C117.81824,75.179268 98.904663,74.25106 98.904663,74.25106 L18.581177,74.25106 C18.581177,74.25106 0.5,73.084129 0.5,57.750725 C0.5,42.417324 14.248657,39.417725 14.248657,39.417725 z",
             "stroke": "Black",
             "strokeWidth": 0,
-            "strokeThickness": 0,
             "strokeDashArray": "none",
             "x": 823,
             "y": 495,
@@ -591,7 +590,7 @@
             "cursor": "pointer",
             "stroke": "gray",
             "hoveredStroke": "#70CAFF",
-            "strokeThickness": 1,
+            
             "startCap": "FilledCircle",
             "endCap": "ArrowEnd",
             "points": [],
@@ -608,7 +607,7 @@
             "cursor": "pointer",
             "stroke": "gray",
             "hoveredStroke": "#70CAFF",
-            "strokeThickness": 1,
+            
             "startCap": "FilledCircle",
             "endCap": "ArrowEnd",
             "points": [],
@@ -625,7 +624,7 @@
             "cursor": "pointer",
             "stroke": "gray",
             "hoveredStroke": "#70CAFF",
-            "strokeThickness": 1,
+            
             "startCap": "FilledCircle",
             "endCap": "ArrowEnd",
             "points": [],
@@ -642,7 +641,7 @@
             "cursor": "pointer",
             "stroke": "gray",
             "hoveredStroke": "#70CAFF",
-            "strokeThickness": 1,
+            
             "startCap": "FilledCircle",
             "endCap": "ArrowEnd",
             "points": [],
@@ -660,7 +659,7 @@
             "cursor": "pointer",
             "stroke": "gray",
             "hoveredStroke": "#70CAFF",
-            "strokeThickness": 1,
+            
             "startCap": "FilledCircle",
             "endCap": "ArrowEnd",
             "points": [],
@@ -677,7 +676,7 @@
             "cursor": "pointer",
             "stroke": "gray",
             "hoveredStroke": "#70CAFF",
-            "strokeThickness": 1,
+            
             "startCap": "FilledCircle",
             "endCap": "ArrowEnd",
             "points": [],
@@ -694,7 +693,7 @@
             "cursor": "pointer",
             "stroke": "gray",
             "hoveredStroke": "#70CAFF",
-            "strokeThickness": 1,
+            
             "startCap": "FilledCircle",
             "endCap": "ArrowEnd",
             "points": [],
@@ -711,7 +710,7 @@
             "cursor": "pointer",
             "stroke": "gray",
             "hoveredStroke": "#70CAFF",
-            "strokeThickness": 1,
+            
             "startCap": "FilledCircle",
             "endCap": "ArrowEnd",
             "points": [],
@@ -728,7 +727,7 @@
             "cursor": "pointer",
             "stroke": "gray",
             "hoveredStroke": "#70CAFF",
-            "strokeThickness": 1,
+            
             "startCap": "FilledCircle",
             "endCap": "ArrowEnd",
             "points": [],
@@ -745,7 +744,7 @@
             "cursor": "pointer",
             "stroke": "gray",
             "hoveredStroke": "#70CAFF",
-            "strokeThickness": 1,
+            
             "startCap": "FilledCircle",
             "endCap": "ArrowEnd",
             "points": [],
@@ -762,7 +761,7 @@
             "cursor": "pointer",
             "stroke": "gray",
             "hoveredStroke": "#70CAFF",
-            "strokeThickness": 1,
+            
             "startCap": "FilledCircle",
             "endCap": "ArrowEnd",
             "points": [],

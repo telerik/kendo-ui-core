@@ -1366,7 +1366,6 @@ kendo_module({
             },
             rect: {
                 stroke: "#778899",
-                strokeThickness: 1,
                 strokeWidth: 1,
                 strokeDashArray: "2, 2",
                 background: "none"
@@ -1634,7 +1633,6 @@ kendo_module({
         },
         options: {
             stroke: "#778899",
-            strokeThickness: 1,
             strokeWidth: 1,
             strokeDashArray: "2, 2",
             background: "none"
