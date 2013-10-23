@@ -121,7 +121,7 @@
 
         ChildNode.fn.render = function() {
             ok(true);
-            Node.fn.render.call(this);
+            return Node.fn.render.call(this);
         };
 
         node.attachTo(document.createElement("div"));
@@ -151,6 +151,66 @@
         groupNode.attachTo(document.createElement("div"));
 
         ok(groupNode.element);
+    });
+
+    test("attachTo sets element for child nodes", function() {
+        groupNode.append(new GroupNode());
+        groupNode.attachTo(document.createElement("div"));
+
+        ok(groupNode.childNodes[0].element);
+    });
+
+    test("attachTo sets element for grandchild nodes", function() {
+        var child = new GroupNode();
+        var grandChild = new GroupNode();
+
+        child.append(grandChild);
+        groupNode.append(child);
+
+        groupNode.attachTo(document.createElement("div"));
+
+        ok(grandChild.element);
+    });
+
+    test("attachTo sets _kendoNode expando", function() {
+        groupNode.attachTo(document.createElement("div"));
+
+        deepEqual(groupNode.element._kendoNode, groupNode);
+    });
+
+    test("attachTo sets _kendoNode expando on child elements", function() {
+        var childGroup = new GroupNode();
+        groupNode.append(childGroup);
+        groupNode.attachTo(document.createElement("div"));
+
+        deepEqual(childGroup.element._kendoNode, childGroup);
+    });
+
+    test("attachTo sets _kendoNode expando for grandchild nodes", function() {
+        var child = new GroupNode();
+        var grandChild = new GroupNode();
+
+        child.append(grandChild);
+        groupNode.append(child);
+
+        groupNode.attachTo(document.createElement("div"));
+
+        deepEqual(grandChild.element._kendoNode, grandChild);
+    });
+
+    test("clear removes element", function() {
+        groupNode.attachTo(document.createElement("div"));
+        groupNode.clear();
+
+        ok(!groupNode.element);
+    });
+
+    test("clear removes _kendoNode expando from element", function() {
+        var container = document.createElement("div");
+        groupNode.attachTo(container);
+        groupNode.clear();
+
+        ok(!container._kendoNode);
     });
 
     test("load attaches node", function() {

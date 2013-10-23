@@ -108,19 +108,35 @@
         },
 
         attachTo: function(domElement) {
-            if (!this.element) {
-                var container = doc.createElement("div");
-                renderSVG(container,
-                    "<svg xmlns='" + SVG_NS + "' version='1.1'>" +
-                    this.render() +
-                    "</svg>"
-                );
+            var container = doc.createElement("div");
+            renderSVG(container,
+                "<svg xmlns='" + SVG_NS + "' version='1.1'>" +
+                this.render() +
+                "</svg>"
+            );
 
-                var element = container.firstChild.firstChild;
-                if (element) {
-                    domElement.appendChild(element);
-                    this.element = element;
-                }
+            var element = container.firstChild.firstChild;
+            if (element) {
+                domElement.appendChild(element);
+                this.setElement(element);
+            }
+        },
+
+        setElement: function(element) {
+            var nodes = this.childNodes,
+                childElement,
+                i;
+
+            if (this.element) {
+                this.element._kendoNode = null;
+            }
+
+            this.element = element;
+            element._kendoNode = this;
+
+            for (i = 0; i < nodes.length; i++) {
+                childElement = element.childNodes[i];
+                nodes[i].setElement(childElement);
             }
         },
 
@@ -163,17 +179,6 @@
     });
 
     var GroupNode = Node.extend({
-        attachTo: function(domElement) {
-            var nodes = this.childNodes,
-                i;
-
-            Node.fn.attachTo.call(this, domElement);
-
-            for (i = 0; i < nodes.length; i++) {
-                nodes[i].element = this.element.childNodes[i];
-            }
-        },
-
         template: renderTemplate(
             "<g>#= d.renderChildren() #</g>"
         )
