@@ -2207,7 +2207,8 @@ kendo_module({
             var freq = that.options.messages.frequencies[this._value.freq || "never"];
 
             that._repeatButton = $('<a href="#" class="k-button k-scheduler-recur">' + freq + '</a>')
-                                    .on(CLICK + that._namespace, function() {
+                                    .on(CLICK + that._namespace, function(e) {
+                                        e.preventDefault();
                                         that._createView("repeat");
                                         that._pane.navigate("recurrence");
                                     });
