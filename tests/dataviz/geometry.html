@@ -193,6 +193,20 @@
         equal(point.toString(), "10 20");
     });
 
+    test("toString rounds x and y", function() {
+        point.x = 10.1;
+        point.y = 20.1;
+
+        equal(point.toString(0), "10 20");
+    });
+
+    test("toString rounds x and y to precision", function() {
+        point.x = 10.567;
+        point.y = 20.567;
+
+        equal(point.toString(1), "10.6 20.6");
+    });
+
     // ------------------------------------------------------------
     var rect;
 
