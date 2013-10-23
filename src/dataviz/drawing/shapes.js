@@ -8,8 +8,8 @@
         dataviz = kendo.dataviz,
         append = dataviz.append,
 
-        geometry = dataviz.geometry,
-        Point = geometry.Point,
+        g = dataviz.geometry,
+        Point = g.Point,
 
         drawing = dataviz.drawing,
         OptionsStore = drawing.OptionsStore,
@@ -99,7 +99,7 @@
             var circle = this;
             Shape.fn.init.call(circle, options);
 
-            circle.geometry = geometry || new geometry.Circle();
+            circle.geometry = geometry || new g.Circle();
         }
     });
 
@@ -201,7 +201,6 @@
     // Exports ================================================================
     deepExtend(drawing, {
         Group: Group,
-        Segment: Segment,
         Shape: Shape,
 
         Circle: Circle,
