@@ -39,21 +39,15 @@
             // -----------------------------------------------------------------------------------
             // -----------------------------------------------------------------------------------
             module("Rendering", {
-                setup: function() {
-                    moduleSetup();
-                },
-                teardown: function(){
-                    moduleTeardown();
-                }
+                setup: moduleSetup,
+                teardown: moduleTeardown
             });
 
             asyncTest("k-complete is added when the progress width is more than 98%", function() {
                 var progressCompleted = false;
 
                 pb = createProgressbar({
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     complete: function(e){
                         progressCompleted = true;
                     }
@@ -64,16 +58,14 @@
                 setTimeout(function(){
                     equal(pb.wrapper.find(".k-complete").length, 1);
                     start();
-                }, 70);
+                }, 30);
             });
 
             asyncTest("k-complete is removed when the progress width becomes less than 98%", function() {
                 var progressCompleted = false;
 
                 pb = createProgressbar({
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     complete: function(e){
                         progressCompleted = true;
                     }
@@ -85,16 +77,14 @@
                 setTimeout(function(){
                     equal(pb.wrapper.find(".k-complete").length, 0);
                     start();
-                }, 100);
+                }, 30);
             });
 
             asyncTest("k-complete is not added when the progress width is less than or equal to 98%", function() {
                 var progressCompleted = false;
 
                 pb = createProgressbar({
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     complete: function(e){
                         progressCompleted = true;
                     }
@@ -115,9 +105,7 @@
                     min: -50,
                     max: 165,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "value",
                     complete: function(e){
                         value = e.value;
@@ -139,9 +127,7 @@
                     min: -50,
                     max: 165,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "percent",
                     complete: function(e){
                         value = e.value;
@@ -163,9 +149,7 @@
                     min: -50,
                     max: 165,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "chunk",
                     complete: function(e){
                         value = e.value;
@@ -188,9 +172,7 @@
                     min: -50,
                     max: 165,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "value",
                     change: function(e){
                         value = e.value;
@@ -213,9 +195,7 @@
                     min: -50,
                     max: 165,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "percent",
                     change: function(e){
                         value = e.value;
@@ -238,9 +218,7 @@
                     min: -50,
                     max: 165,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "chunk",
                     change: function(e){
                         value = e.value;
@@ -262,9 +240,7 @@
                     min: -50,
                     max: 165,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "value",
                     complete: function(e){
                         context = this;
@@ -286,9 +262,7 @@
                     min: -50,
                     max: 130,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "percent",
                     complete: function(e){
                         context = this;
@@ -310,9 +284,7 @@
                     min: -50,
                     max: 130,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "chunk",
                     complete: function(e){
                         context = this;
@@ -334,9 +306,7 @@
                     min: -50,
                     max: 165,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "value",
                     change: function(e){
                         context = this;
@@ -358,9 +328,7 @@
                     min: -50,
                     max: 165,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "percent",
                     change: function(e){
                         context = this;
@@ -382,9 +350,7 @@
                     min: -50,
                     max: 165,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "chunk",
                     change: function(e){
                         context = this;
@@ -406,9 +372,7 @@
                     min: -50,
                     max: 165,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     complete: function(e){
                         events.push("complete");
                     },
@@ -429,12 +393,8 @@
             // -----------------------------------------------------------------------------------
             // -----------------------------------------------------------------------------------
             module("Rendering / Chunk progressbar", {
-                setup: function() {
-                    moduleSetup();
-                },
-                teardown: function(){
-                    moduleTeardown();
-                }
+                setup: moduleSetup,
+                teardown: moduleTeardown
             });
 
             test("k-progressbar-reverse class is added to progressbar (type='chunk')", function() {
@@ -763,12 +723,8 @@
             // -----------------------------------------------------------------------------------
             // -----------------------------------------------------------------------------------
             module("Rendering / Regular progressbar", {
-                setup: function() {
-                    moduleSetup();
-                },
-                teardown: function(){
-                    moduleTeardown();
-                }
+                setup: moduleSetup,
+                teardown: moduleTeardown
             });
 
             asyncTest("Progress status wrapper is hidden when value is set to min and showStatus is true (type: 'value')", function() {
@@ -776,9 +732,7 @@
                     min: -50,
                     max: 130,
                     value: 100,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "value",
                     showStatus: true
                 });
@@ -788,7 +742,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:hidden").length, 1);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Progress status wrapper is hidden when value is set to min and showStatus is true (type: 'percent')", function() {
@@ -796,9 +750,7 @@
                     min: -50,
                     max: 130,
                     value: 100,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "percent",
                     showStatus: true
                 });
@@ -808,7 +760,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:hidden").length, 1);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Progress status wrapper is hidden when value is set to min and showStatus is false (type: 'value')", function() {
@@ -816,9 +768,7 @@
                     min: -50,
                     max: 130,
                     value: 100,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "value",
                     showStatus: false
                 });
@@ -828,7 +778,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:hidden").length, 1);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Progress status wrapper is hidden when value is set to min and showStatus is false (type: 'percent')", function() {
@@ -836,9 +786,7 @@
                     min: -50,
                     max: 130,
                     value: 100,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "percent",
                     showStatus: false
                 });
@@ -848,7 +796,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:hidden").length, 1);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Progress status wrapper is appended when initial value is set to min and then changed, showStatus is true (type: 'value')", function() {
@@ -856,9 +804,7 @@
                     min: -50,
                     max: 130,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "value",
                     showStatus: true
                 });
@@ -868,7 +814,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Progress status wrapper is appended when initial value is set to min and then changed, showStatus is true (type: 'percent')", function() {
@@ -876,9 +822,7 @@
                     min: -50,
                     max: 130,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "percent",
                     showStatus: true
                 });
@@ -888,7 +832,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Progress status wrapper is appended when initial value is set to min and then changed, showStatus is false (type: 'value')", function() {
@@ -896,9 +840,7 @@
                     min: -50,
                     max: 130,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "value",
                     showStatus: false
                 });
@@ -908,7 +850,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Progress status wrapper is appended when initial value is set to min and then changed, showStatus is false (type: 'percent')", function() {
@@ -916,9 +858,7 @@
                     min: -50,
                     max: 130,
                     value: -50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "percent",
                     showStatus: false
                 });
@@ -928,7 +868,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Progress status wrapper is shown again when hidden once, showStatus is true (type: 'value')", function() {
@@ -936,9 +876,7 @@
                     min: 0,
                     max: 130,
                     value: 0,
-                    animation: {
-                        duration: 5
-                    },
+                    animation: false,
                     type: "value",
                     showStatus: true
                 });
@@ -950,7 +888,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
                     start();
-                }, 120);
+                }, 30);
             });
 
             asyncTest("Progress status wrapper is shown again when hidden once, showStatus is true (type: 'percent')", function() {
@@ -958,9 +896,7 @@
                     min: 0,
                     max: 130,
                     value: 0,
-                    animation: {
-                        duration: 5
-                    },
+                    animation: false,
                     type: "percent",
                     showStatus: true
                 });
@@ -972,7 +908,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
                     start();
-                }, 120);
+                }, 30);
             });
 
             asyncTest("Progress status wrapper is shown again when hidden once, showStatus is false (type: 'value')", function() {
@@ -980,9 +916,7 @@
                     min: 0,
                     max: 130,
                     value: 0,
-                    animation: {
-                        duration: 5
-                    },
+                    animation: false,
                     type: "value",
                     showStatus: false
                 });
@@ -994,7 +928,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
                     start();
-                }, 120);
+                }, 30);
             });
 
             asyncTest("Progress status wrapper is shown again when hidden once, showStatus is false (type: 'percent')", function() {
@@ -1002,9 +936,7 @@
                     min: 0,
                     max: 130,
                     value: 0,
-                    animation: {
-                        duration: 5
-                    },
+                    animation: false,
                     type: "percent",
                     showStatus: false
                 });
@@ -1016,7 +948,7 @@
                 setTimeout(function() {
                     equal(pb.wrapper.find(".k-state-selected:visible").length, 1);
                     start();
-                }, 120);
+                }, 30);
             });
 
             asyncTest("Progress wrapper width stays the same when the ProgressBar wrapper is resized and showStatus is false", function() {
@@ -1024,9 +956,7 @@
                     min: 0,
                     max: 130,
                     value: 50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "percent",
                     showStatus: false
                 });
@@ -1046,9 +976,7 @@
                     min: 0,
                     max: 130,
                     value: 50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "percent",
                     showStatus: true
                 });
@@ -1068,9 +996,7 @@
                     min: 0,
                     max: 130,
                     value: 50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "percent",
                     showStatus: true
                 });
@@ -1090,9 +1016,7 @@
                     min: 0,
                     max: 130,
                     value: 50,
-                    animation: {
-                        duration: 10
-                    },
+                    animation: false,
                     type: "value",
                     showStatus: true
                 });
@@ -1114,9 +1038,7 @@
                     value: 10,
                     type: "value",
                     showStatus: true,
-                    animation: {
-                        duration: 10
-                    }
+                    animation: false
                 });
 
                 pb.value(50);
@@ -1135,9 +1057,7 @@
                     value: 0,
                     type: "value",
                     showStatus: true,
-                    animation: {
-                        duration: 10
-                    }
+                    animation: false
                 });
 
                 pb.value(50);
@@ -1147,7 +1067,7 @@
                     ok(pb._isStarted);
 
                     start();
-                }, 50);
+                }, 30);
             });
 
             asyncTest("isStarted is set to true when the value is changed for the first time (type='percent')", function() {
@@ -1157,9 +1077,7 @@
                     value: 10,
                     type: "percent",
                     showStatus: true,
-                    animation: {
-                        duration: 10
-                    }
+                    animation: false
                 });
 
                 pb.value(50);
@@ -1168,7 +1086,7 @@
                     ok(pb._isStarted);
 
                     start();
-                }, 50);
+                }, 30);
             });
 
             asyncTest("isStarted remains true when the value has been changed and then set to the initial value (type='percent')", function() {
@@ -1178,9 +1096,7 @@
                     value: 0,
                     type: "percent",
                     showStatus: true,
-                    animation: {
-                        duration: 10
-                    }
+                    animation: false
                 });
 
                 pb.value(50);
@@ -1190,7 +1106,7 @@
                     ok(pb._isStarted);
 
                     start();
-                }, 50);
+                }, 30);
             });
         </script>
     </body>

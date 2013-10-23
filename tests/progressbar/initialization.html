@@ -36,12 +36,8 @@
             // -----------------------------------------------------------------------------------
             // -----------------------------------------------------------------------------------
             module("Initialization", {
-                setup: function() {
-                    moduleSetup();
-                },
-                teardown: function(){
-                    moduleTeardown();
-                }
+                setup: moduleSetup,
+                teardown: moduleTeardown
             });
 
             test("kendoProgressBar attaches a progressbar object to target", function() {
@@ -446,40 +442,40 @@
             });
 
 
-            test("progressStatus field is set to undefined when type is 'chunk'", function() {
+            test("progressStatus field is set to empty jQuery object when type is 'chunk'", function() {
                 var pb = new ProgressBar(container, {
                     type: "chunk"
                 });
 
-                equal(pb.progressStatus, undefined);
+                ok(pb.progressStatus instanceof jQuery);
             });
 
-            test("progressWrapper field is set to undefined when type is 'chunk'", function() {
+            test("progressWrapper field is set to empty jQuery object when type is 'chunk'", function() {
                 var pb = new ProgressBar(container, {
                     type: "chunk"
                 });
 
-                equal(pb.progressWrapper, undefined);
+                ok(pb.progressWrapper instanceof jQuery);
             });
 
-            test("progressWrapper field is set to undefined when value is equal to min (type='value')", function() {
+            test("progressWrapper field is set to empty jQuery object when value is equal to min (type='value')", function() {
                 var pb = new ProgressBar(container, {
                     type: "value",
                     min: 5,
                     value: 5
                 });
 
-                equal(pb.progressWrapper, undefined);
+                ok(pb.progressWrapper instanceof jQuery);
             });
 
-            test("progressWrapper field is set to undefined when value is equal to min (type='percent')", function() {
+            test("progressWrapper field is set to empty jQuery object when value is equal to min (type='percent')", function() {
                 var pb = new ProgressBar(container, {
                     type: "percent",
                     min: 5,
                     value: 5
                 });
 
-                equal(pb.progressWrapper, undefined);
+                ok(pb.progressWrapper instanceof jQuery);
             });
 
             test("progressWrapper field is set when value is  not equal to min (type='value')", function() {
@@ -506,12 +502,8 @@
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------
             module("Initialization / Regular ProgressBar", {
-                setup: function() {
-                    moduleSetup();
-                },
-                teardown: function(){
-                    moduleTeardown();
-                }
+                setup: moduleSetup,
+                teardown: moduleTeardown
             });
 
             test("ProgressBar wrapper is empty when value is equal to min and showStatus is false", function() {
@@ -593,12 +585,8 @@
             //-----------------------------------------------------------------------
             //-----------------------------------------------------------------------
             module("Initialization / Chunk ProgressBar", {
-                setup: function() {
-                    moduleSetup();
-                },
-                teardown: function(){
-                    moduleTeardown();
-                }
+                setup: moduleSetup,
+                teardown: moduleTeardown
             });
 
             test("Chunk ProgressBar contains a single ul element to hold the chunks", function() {

@@ -104,7 +104,7 @@ kendo_module({
 
             that._isStarted = false;
 
-            that.progressWrapper = that.progressStatus = undefined;
+            that.progressWrapper = that.progressStatus = $();
         },
 
         _validateType: function(currentType) {

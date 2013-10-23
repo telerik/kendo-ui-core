@@ -40,12 +40,8 @@
             // -----------------------------------------------------------------------------------
             // -----------------------------------------------------------------------------------
             module("value", {
-                setup: function() {
-                    moduleSetup();
-                },
-                teardown: function(){
-                    moduleTeardown();
-                }
+                setup: moduleSetup,
+                teardown: moduleTeardown
             });
 
             test("value method returns the actual initial value", function () {
@@ -156,7 +152,7 @@
                 setTimeout(function(){
                     equal(changeFiredCounter, 1);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Change event is fired only once per value (type='value')", function() {
@@ -364,7 +360,7 @@
                 setTimeout(function(){
                     ok(!completeFired);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Complete event is fired when max is reached (type='value')", function(){
@@ -388,7 +384,7 @@
                 setTimeout(function(){
                     ok(completeFired);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Complete event is fired each time when max is reached (type='value')", function(){
@@ -412,7 +408,7 @@
                 setTimeout(function(){
                     equal(completeFiredCounter, 2);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Complete event is not fired before max is reached (type='percent')", function(){
@@ -436,7 +432,7 @@
                 setTimeout(function(){
                     ok(!completeFired);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Complete event is fired when max is reached (type='percent')", function(){
@@ -460,7 +456,7 @@
                 setTimeout(function(){
                     ok(completeFired);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Complete event is fired each time when max is reached (type='percent')", function(){
@@ -484,7 +480,7 @@
                 setTimeout(function(){
                     equal(completeFiredCounter, 2);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Complete event is not fired before max is reached (type='chunk')", function(){
@@ -508,7 +504,7 @@
                 setTimeout(function(){
                     ok(!completeFired);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Complete event is fired when max is reached (type='chunk')", function(){
@@ -532,7 +528,7 @@
                 setTimeout(function(){
                     ok(completeFired);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Complete event is fired each time when max is reached (type='chunk')", function(){
@@ -556,7 +552,7 @@
                 setTimeout(function() {
                     equal(completeFiredCounter, 2);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Complete event is not fired max is set multiple times in a row (type='value')", function(){
@@ -579,7 +575,7 @@
                 setTimeout(function() {
                     equal(completeFiredCounter, 1);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Complete event is not fired max is set multiple times in a row (type='percent')", function(){
@@ -602,7 +598,7 @@
                 setTimeout(function() {
                     equal(completeFiredCounter, 1);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("Complete event is not fired max is set multiple times in a row (type='chunk')", function(){
@@ -625,7 +621,7 @@
                 setTimeout(function() {
                     equal(completeFiredCounter, 1);
                     start();
-                }, 40);
+                }, 30);
             });
 
             asyncTest("k-progressbar-indeterminate class is set correctly when passed value is false", function(){
@@ -697,12 +693,8 @@
             // -----------------------------------------------------------------------------------
             // -----------------------------------------------------------------------------------
             module("enable", {
-                setup: function() {
-                    moduleSetup();
-                },
-                teardown: function() {
-                    moduleTeardown();
-                }
+                setup: moduleSetup,
+                teardown: moduleTeardown
             });
 
             test("enable method renders k-state-disabled class when false is passed", function () {
@@ -839,12 +831,8 @@
             // -----------------------------------------------------------------------------------
             // -----------------------------------------------------------------------------------
             module("setOptions", {
-                setup: function() {
-                    moduleSetup();
-                },
-                teardown: function() {
-                    moduleTeardown();
-                }
+                setup: moduleSetup,
+                teardown: moduleTeardown
             });
 
             test("Animation is set to false in options", function(){

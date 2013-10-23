@@ -356,28 +356,12 @@
         <div id="progressbar-chunk-vert"></div>
          <script>
             $("#progressbar").kendoProgressBar({
-                  min: 0,
-                  max: 300,
-                  value: 300,
-                  reverse: false,
-                // min: 220,
-                // max: 300,
-                // value: 0,
-                // enable: true,
-                // showStatus: true,
-                   type: "value",
-                // reverse: false,
-                start: function(e) {
-                    console.log("Start event. Value: " + e.value);
-                },
                 change: function(e) {
-                    $("#asdf").text(e.value);
-                    console.log("Change event. Value: " + e.value);
-                },
-                complete: function(e) {
-                    console.log("Complete event. Value: " + e.value);
+                    this.progressStatus.text("Custom status");
                 }
             });
+
+            $("#progressbar").data("kendoProgressBar").value(10);
 
             $("#progressbar-chunk").kendoProgressBar({
                 type: "chunk",
