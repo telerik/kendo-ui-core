@@ -919,6 +919,10 @@ kendo_module({
         redraw: function (options) {
             this.options = deepExtend({}, this.options, options);
             this.content(this.options.content);
+            if (Utils.isDefined(this.options.points) && this.options.points.length > 0) {
+                this.points(this.options.points);
+                this._refreshPath();
+            }
             this.path.redraw(options);
         },
         /**
