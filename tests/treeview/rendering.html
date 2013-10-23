@@ -96,6 +96,16 @@
                 equal(element.find("a.k-in").length, 1);
             });
 
+            test("extends link lists with sprites", function() {
+                var element = treeviewFromHtml("<ul><li><span class='k-sprite foo' /><a href='#foo'>foo</a></li></ul>");
+
+                var kin = element.find("a.k-in");
+                var sprite = kin.find(".k-sprite");
+
+                equal(sprite.length, 1);
+                equal(sprite[0], kin[0].firstChild);
+            });
+
             module("groups", moduleOptions);
 
             test("renders lines class for first level", function() {

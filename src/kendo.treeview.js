@@ -109,7 +109,7 @@ kendo_module({
                 tmp.nodeValue = $.trim(tmp.nodeValue);
             }
 
-            container.appendChild(tmp);
+            container.insertBefore(tmp, container.firstChild);
         }
     }
 
