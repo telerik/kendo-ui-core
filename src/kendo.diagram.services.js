@@ -340,16 +340,18 @@ kendo_module({
             }
         },
         undo: function () {
-            for (var i = 0; i < this.shapes.length; i++) {
-                var shape = this.shapes[i];
+            var i, shape;
+            for (i = 0; i < this.shapes.length; i++) {
+                shape = this.shapes[i];
                 shape.rotate(this.undoRotates[i], this.center);
             }
             this.adorner._angle = this.undoAngle;
             this.adorner.refresh();
         },
         redo: function () {
-            for (var i = 0; i < this.shapes.length; i++) {
-                var shape = this.shapes[i];
+            var i, shape;
+            for (i = 0; i < this.shapes.length; i++) {
+                shape = this.shapes[i];
                 shape.rotate(this.redoRotates[i], this.center);
             }
             this.adorner._angle = this.redoAngle;
@@ -1469,6 +1471,7 @@ kendo_module({
                 item = items[i];
                 if (item instanceof diagram.Shape) {
                     that.shapes.push(item);
+                    item._rotationOffset = new Point();
                 }
             }
 
