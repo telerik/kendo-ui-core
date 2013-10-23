@@ -12,6 +12,7 @@
         deepExtend = kendo.deepExtend,
 
         d = dataviz.drawing,
+        Group = d.Group,
 
         util = dataviz.util,
         round = util.round,
@@ -46,63 +47,79 @@
             }
         },
 
+        load: function(data) {
+            this._data = data;
+            this.surface.clear();
+
+            var group = new Group();
+            if (data.type === "FeatureCollection") {
+                for (var i = 0; i < data.features.length; i++) {
+                    group.append(this._feature(data.features[i]));
+                }
+            }
+            this.surface.draw(group);
+        },
+
+        reset: function() {
+            if (this._data) {
+                this.load(this._data);
+            }
+        },
+
         polygon: function(coords, style) {
+            this.surface.draw(this._buildPolygon(coords, style));
+        },
+
+        _buildPolygon: function(coords, style) {
             style = deepExtend({
-                stroke: { width: 0.1, color: "black" },
-                _fill: { color: "red", opacity: 0.5 }
+                stroke: { width: 1, color: "black" },
+                fill: { color: "red", opacity: 0.5 }
             }, style);
+
+            var path = coords.length > 1 ?
+                new d.MultiPath(style) : new d.Path(style);
 
             for (var i = 0; i < coords.length; i++) {
                 var ring = coords[i];
                 var ringPoints = [];
-
-                var path = new d.Path(style);
 
                 for (var j = 0; j < ring.length; j++) {
                     var point = ring[j];
                     var l = Location.fromLngLat(point);
                     var p = this.map.layerPoint(l);
 
-                    path.lineTo(round(p.x, PRECISION), round(p.y, PRECISION));
+                    if (j === 0) {
+                        path.moveTo(p.x, p.y);
+                    } else {
+                        path.lineTo(p.x, p.y);
+                    }
                 }
-
-                this.surface.draw(path);
             }
 
             return path;
         },
 
-        load: function(data) {
-            this._data = data;
+        _feature: function(feature) {
+            var geometry = feature.geometry,
+                shape;
 
-            if (data.type == "FeatureCollection") {
-                var items = data.features;
+            switch(geometry.type) {
+                case "Polygon":
+                    shape = this._buildPolygon(geometry.coordinates);
+                    break;
 
-                for (var i = 0; i < items.length; i++) {
-                    var feature = items[i];
-                    if (feature.geometry) {
-                        this._draw(feature.geometry, feature.properties);
+                case "MultiPolygon":
+                    var coords = geometry.coordinates,
+                        i;
+
+                    shape = new Group();
+                    for (i = 0; i < coords.length; i++) {
+                        shape.append(this._buildPolygon(coords[i]));
                     }
-                }
+                    break;
             }
-        },
 
-        _draw: function(geometry) {
-            var coords = geometry.coordinates;
-            if (geometry.type === "Polygon") {
-                this.polygon(coords);
-            } else if (geometry.type === "MultiPolygon") {
-                for (var i = 0; i < coords.length; i++) {
-                    this.polygon(coords[i]);
-                }
-            }
-        },
-
-        reset: function() {
-            if (this._data) {
-                this.surface.clear();
-                this.load(this._data);
-            }
+            return shape;
         },
 
         _drag: function() {
