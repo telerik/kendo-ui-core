@@ -10,7 +10,6 @@ kendo_module({
         diagram = kendo.diagram = {},
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
-        Point = diagram.Point,
         EPSILON = 1e-06;
 
     /*-------------------Diverse utilities----------------------------*/

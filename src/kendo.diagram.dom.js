@@ -1932,7 +1932,9 @@ kendo_module({
             this.isLayouting = false;
         },
         alignShapes: function (direction) {
-            if (Utils.isUndefined(direction)) direction = "Left";
+            if (Utils.isUndefined(direction)) {
+                direction = "Left";
+            }
             var items = this.select(),
                 val,
                 item,
