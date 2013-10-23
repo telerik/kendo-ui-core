@@ -311,12 +311,21 @@ That way all users would see the same dates and times no matter their configured
     }
 
     /**
-    * List of working week days.
-    * @param array $value
+    * The start of working week (index based).
+    * @param float $value
     * @return \Kendo\UI\Scheduler
     */
-    public function workWeekDays($value) {
-        return $this->setProperty('workWeekDays', $value);
+    public function workWeekStart($value) {
+        return $this->setProperty('workWeekStart', $value);
+    }
+
+    /**
+    * The end of working week (index based).
+    * @param float $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function workWeekEnd($value) {
+        return $this->setProperty('workWeekEnd', $value);
     }
 
     /**

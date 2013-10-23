@@ -19,8 +19,8 @@ class SchedulerMessagesRecurrenceEditorMonthly extends \Kendo\SerializableObject
     * @param string $value
     * @return \Kendo\UI\SchedulerMessagesRecurrenceEditorMonthly
     */
-    public function months($value) {
-        return $this->setProperty('months', $value);
+    public function interval($value) {
+        return $this->setProperty('interval', $value);
     }
 
     /**

@@ -311,6 +311,24 @@ class SchedulerView extends \Kendo\SerializableObject {
         return $this->setProperty('type', $value);
     }
 
+    /**
+    * The start of working week (index based).
+    * @param float $value
+    * @return \Kendo\UI\SchedulerView
+    */
+    public function workWeekStart($value) {
+        return $this->setProperty('workWeekStart', $value);
+    }
+
+    /**
+    * The end of working week (index based).
+    * @param float $value
+    * @return \Kendo\UI\SchedulerView
+    */
+    public function workWeekEnd($value) {
+        return $this->setProperty('workWeekEnd', $value);
+    }
+
 //<< Properties
 }
 

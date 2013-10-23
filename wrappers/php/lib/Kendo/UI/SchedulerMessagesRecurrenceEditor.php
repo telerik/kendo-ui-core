@@ -60,6 +60,15 @@ class SchedulerMessagesRecurrenceEditor extends \Kendo\SerializableObject {
     }
 
     /**
+    * The configuration of the scheduler recurrence editor week days messages. Use these options to customize or localize the scheduler recurrence editor weekdays messages.
+    * @param \Kendo\UI\SchedulerMessagesRecurrenceEditorWeekdays|array $value
+    * @return \Kendo\UI\SchedulerMessagesRecurrenceEditor
+    */
+    public function weekdays($value) {
+        return $this->setProperty('weekdays', $value);
+    }
+
+    /**
     * The configuration of the scheduler recurrence editor yearly messages. Use this option to customize or localize the scheduler recurrence editor yearly messages.
     * @param \Kendo\UI\SchedulerMessagesRecurrenceEditorYearly|array $value
     * @return \Kendo\UI\SchedulerMessagesRecurrenceEditor

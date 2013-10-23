@@ -10,8 +10,8 @@ class SchedulerMessagesRecurrenceEditorEnd extends \Kendo\SerializableObject {
     * @param string $value
     * @return \Kendo\UI\SchedulerMessagesRecurrenceEditorEnd
     */
-    public function endCountAfter($value) {
-        return $this->setProperty('endCountAfter', $value);
+    public function after($value) {
+        return $this->setProperty('after', $value);
     }
 
     /**
@@ -19,8 +19,8 @@ class SchedulerMessagesRecurrenceEditorEnd extends \Kendo\SerializableObject {
     * @param string $value
     * @return \Kendo\UI\SchedulerMessagesRecurrenceEditorEnd
     */
-    public function endCountOccurrence($value) {
-        return $this->setProperty('endCountOccurrence', $value);
+    public function occurrence($value) {
+        return $this->setProperty('occurrence', $value);
     }
 
     /**
@@ -28,8 +28,8 @@ class SchedulerMessagesRecurrenceEditorEnd extends \Kendo\SerializableObject {
     * @param string $value
     * @return \Kendo\UI\SchedulerMessagesRecurrenceEditorEnd
     */
-    public function endLabel($value) {
-        return $this->setProperty('endLabel', $value);
+    public function label($value) {
+        return $this->setProperty('label', $value);
     }
 
     /**
@@ -37,8 +37,8 @@ class SchedulerMessagesRecurrenceEditorEnd extends \Kendo\SerializableObject {
     * @param string $value
     * @return \Kendo\UI\SchedulerMessagesRecurrenceEditorEnd
     */
-    public function endNever($value) {
-        return $this->setProperty('endNever', $value);
+    public function never($value) {
+        return $this->setProperty('never', $value);
     }
 
     /**
@@ -46,8 +46,8 @@ class SchedulerMessagesRecurrenceEditorEnd extends \Kendo\SerializableObject {
     * @param string $value
     * @return \Kendo\UI\SchedulerMessagesRecurrenceEditorEnd
     */
-    public function endUntilOn($value) {
-        return $this->setProperty('endUntilOn', $value);
+    public function on($value) {
+        return $this->setProperty('on', $value);
     }
 
 //<< Properties

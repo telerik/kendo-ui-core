@@ -37,8 +37,8 @@ class SchedulerMessagesRecurrenceEditorYearly extends \Kendo\SerializableObject 
     * @param string $value
     * @return \Kendo\UI\SchedulerMessagesRecurrenceEditorYearly
     */
-    public function years($value) {
-        return $this->setProperty('years', $value);
+    public function interval($value) {
+        return $this->setProperty('interval', $value);
     }
 
 //<< Properties

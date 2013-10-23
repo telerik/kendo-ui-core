@@ -10,8 +10,8 @@ class SchedulerMessagesRecurrenceEditorDaily extends \Kendo\SerializableObject {
     * @param string $value
     * @return \Kendo\UI\SchedulerMessagesRecurrenceEditorDaily
     */
-    public function days($value) {
-        return $this->setProperty('days', $value);
+    public function interval($value) {
+        return $this->setProperty('interval', $value);
     }
 
     /**

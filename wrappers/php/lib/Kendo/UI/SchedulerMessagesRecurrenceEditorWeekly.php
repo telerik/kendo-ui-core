@@ -10,8 +10,8 @@ class SchedulerMessagesRecurrenceEditorWeekly extends \Kendo\SerializableObject 
     * @param string $value
     * @return \Kendo\UI\SchedulerMessagesRecurrenceEditorWeekly
     */
-    public function weeks($value) {
-        return $this->setProperty('weeks', $value);
+    public function interval($value) {
+        return $this->setProperty('interval', $value);
     }
 
     /**
