@@ -1568,5 +1568,29 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return Groupable(delegate { });
         }
+
+        /// <summary>
+        /// Enables the adaptive rendering when viewed on mobile browser
+        /// </summary>
+        public GridBuilder<T> Mobile()
+        {
+            Component.Mobile = MobileMode.Auto;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Used to determine if adaptive rendering should be used when viewed on mobile browser
+        /// </summary>
+        /// <remarks>
+        /// Currently the Grid widget doesn't distinguish between phone and tablet option.
+        /// </remarks>
+        /// <param name="type"></param>
+        public GridBuilder<T> Mobile(MobileMode type)
+        {
+            Component.Mobile = type;
+
+            return this;
+        }
     }
 }

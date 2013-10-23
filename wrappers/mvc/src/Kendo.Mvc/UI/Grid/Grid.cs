@@ -167,6 +167,12 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
+        public MobileMode Mobile
+        {
+            get;
+            set;
+        }
+
         //TODO: Implement command button types
         private object Button<TButton>(T dataItem/*, GridButtonType buttonType*/, object htmlAttributes, object imageHtmlAttributes, string text)
             where TButton : GridActionCommandBase, new()
@@ -810,6 +816,18 @@ namespace Kendo.Mvc.UI
             if (Navigatable.Enabled)
             {
                 options["navigatable"] = true;
+            }
+
+            if (Mobile != MobileMode.Disabled)
+            {
+                if (Mobile == MobileMode.Auto)
+                {
+                    options["mobile"] = true;
+                }
+                else
+                {
+                    options["mobile"] = Mobile.ToString().ToLowerInvariant();
+                }
             }
 
             writer.Write(Initializer.Initialize(Selector, "Grid", options));
