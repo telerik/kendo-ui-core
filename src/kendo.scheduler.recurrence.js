@@ -2271,8 +2271,10 @@ kendo_module({
             that._view.element
                 .find(".k-recur-pattern")
                 .append(html)
-                .on(CLICK + that._namespace, ".k-scheduler-navigation li", function() {
+                .on(CLICK + that._namespace, ".k-scheduler-navigation li", function(e) {
                     var li = $(this);
+
+                    e.preventDefault();
 
                     li.addClass("k-state-selected")
                       .siblings().removeClass("k-state-selected");
@@ -2308,10 +2310,12 @@ kendo_module({
             that._view.element
                 .find(".k-recur-pattern")
                 .append(html)
-                .on(CLICK + that._namespace, ".k-scheduler-navigation li", function() {
+                .on(CLICK + that._namespace, ".k-scheduler-navigation li", function(e) {
                     var li = $(this);
                     var count = null;
                     var until = null;
+
+                    e.preventDefault();
 
                     li.addClass("k-state-selected")
                       .siblings().removeClass("k-state-selected");
@@ -2530,8 +2534,10 @@ kendo_module({
 
                 repeatRuleGroupButton
                     .append(html)
-                    .on(CLICK + that._namespace, ".k-scheduler-navigation li", function() {
+                    .on(CLICK + that._namespace, ".k-scheduler-navigation li", function(e) {
                         var li = $(this).addClass("k-state-selected");
+
+                        e.preventDefault();
 
                         li.siblings().removeClass("k-state-selected");
 
