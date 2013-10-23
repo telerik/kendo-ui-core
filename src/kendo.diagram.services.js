@@ -1345,7 +1345,15 @@ kendo_module({
             that._refreshHandler = function () {
                 that.refresh();
             };
-            that.diagram.bind("boundsChange", that._refreshHandler).bind("rotate", that._refreshHandler);
+
+            that._rotatedHandler = function () {
+                if (that.shapes.length == 1) {
+                    that._angle = that.shapes[0].rotate().angle;
+                }
+                that.refresh();
+            };
+
+            that.diagram.bind("boundsChange", that._refreshHandler).bind("rotate", that._rotatedHandler);
             that.refresh();
         },
         options: {

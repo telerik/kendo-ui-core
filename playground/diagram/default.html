@@ -595,7 +595,6 @@ $(function () {
         layout($("#Layouts").data("kendoDropDownList").value());
     };
     var layout = function (name) {
-
         switch (name) {
             case "TreeDown":
                 diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
@@ -730,7 +729,6 @@ $(function () {
     });
 
     function onMenuSelect(e) {
-
         switch (e.item.id) {
             case "mnuNew":
                 diagram.clear();
