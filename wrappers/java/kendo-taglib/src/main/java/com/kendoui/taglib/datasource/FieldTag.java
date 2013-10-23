@@ -39,7 +39,10 @@ public class FieldTag extends BaseTag {
         try {
             value = Double.parseDouble(value.toString());
         }catch(NumberFormatException e) {
-            
+            try {
+                value = Boolean.parseBoolean(value.toString());
+            }catch(Exception boolExc) {
+            }
         }
         setProperty("defaultValue", value);
     }
