@@ -18,6 +18,7 @@
     <script src="../../src/dataviz/drawing/canvas.js"></script>
     <script src="../../src/kendo.dataviz.map.js"></script>
     <script src="../../src/map/shape-layer.js"></script>
+    <script src="chroma.min.js"></script>
     <style>
         .k-layer {
             position: absolute;
@@ -41,6 +42,21 @@
 <body>
     <div id="map" style="width: 800px; height: 600px;"></div>
     <script>
+        var scale = chroma
+            .scale(["white", "green"])
+            .domain([1, 1000]);
+
+        function setColor(shape, users) {
+            if (shape.children) {
+                for (var i = 0; i < shape.children.length; i++) {
+                    setColor(shape.children[i], users);
+                }
+            } else if (shape.options) {
+                var color = scale(users).hex();
+                shape.options.set("fill.color", color);
+            }
+        }
+
         $("#map").kendoMap({
             view: {
                 center: [51.505, -0.09],
@@ -49,7 +65,13 @@
             layers: [{
                 type: "shape",
                 url: "countries.geo.json",
-                copyright: "&copy; FooBar"
+                copyright: "&copy; FooBar",
+                shapeCreated: function(e) {
+                    var users = e.feature.properties.users;
+                    if (users) {
+                        setColor(e.shape, users);
+                    }
+                }
             }]
         });
 
