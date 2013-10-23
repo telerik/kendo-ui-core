@@ -999,7 +999,7 @@ kendo_module({
             that._endTimezone = model.endTimezone || "";
 
             if (!timezoneView) {
-                var html = '<div data-role="view" class="k-popup-edit-form">' +
+                var html = '<div data-role="view" class="k-popup-edit-form k-scheduler-edit-form">' +
                            '<div data-role="header" class="k-header"><a href="#" class="k-button k-scheduler-cancel">' + messages.cancel + '</a>' +
                            messages.editor.timezoneTitle + '<a href="#" class="k-button k-scheduler-update">' + messages.save + '</a></div></div>';
 
@@ -1095,7 +1095,7 @@ kendo_module({
             var cancelText = messages.cancel;
             var titleText = messages.editor.editorTitle;
 
-            html += '<div data-role="view" class="k-scheduler-edit-form" id="edit" ' + kendo.attr("uid") + '="' + model.uid + '">' +
+            html += '<div data-role="view" class="k-popup-edit-form k-scheduler-edit-form" id="edit" ' + kendo.attr("uid") + '="' + model.uid + '">' +
                 '<div data-role="header" class="k-header"><a href="#" class="k-button k-scheduler-cancel">' + cancelText + '</a>' +
                 titleText + '<a href="#" class="k-button k-scheduler-update">' + updateText + '</a></div>';
 

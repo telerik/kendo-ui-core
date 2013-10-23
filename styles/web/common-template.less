@@ -14,6 +14,83 @@
     border-radius: @arguments;
 }
 
+.flexbox() {
+    display: ~"-moz-box";
+    display: ~"-webkit-box";
+    display: ~"-webkit-flex";
+    display: ~"-ms-flexbox";
+    display: flex;
+}
+
+.flexbox(@type) {
+    display: ~"-moz-@{type}-box";
+    display: ~"-webkit-@{type}-box";
+    display: ~"-webkit-@{type}-flex";
+    display: ~"-ms-@{type}-flexbox";
+    display: ~"@{type}-flex";
+}
+
+.box-orient(@direction) {
+    -moz-box-orient: @direction;
+    -webkit-box-orient: @direction;
+}
+
+.box-direction(@direction) {
+    -moz-box-direction: @direction;
+    -webkit-box-direction: @direction;
+}
+
+.flex-direction(@direction) {
+    -webkit-flex-direction: @direction;
+    -ms-flex-direction: @direction;
+    flex-direction: @direction;
+}
+
+.flex-wrap(@wrap) {
+    -webkit-flex-wrap: @wrap;
+    -ms-flex-wrap: @wrap;
+    flex-wrap: @wrap;
+}
+
+.flex(@amount) {
+    -moz-box-flex: @amount;
+    -webkit-box-flex: @amount;
+    -webkit-flex: @amount;
+    -ms-flex: @amount;
+    flex: @amount;
+}
+
+.flex-align(@alignment) {
+    -moz-box-align: @alignment;
+    -webkit-box-align: @alignment;
+    -ms-flex-align: @alignment;
+    flex-align: @alignment;
+}
+
+.flex-align-items(@alignment) {
+    -webkit-align-items: @alignment;
+    align-items: @alignment;
+}
+
+.flex-align-content(@alignment) {
+    -webkit-align-content: @alignment;
+    align-content: @alignment;
+}
+
+.flex-pack(@pack) {
+    -moz-box-pack: @pack;
+    -webkit-box-pack: @pack;
+    -webkit-flex-pack: @pack;
+    -ms-flex-pack: @pack;
+    flex-pack: @pack;
+}
+
+.text-size-adjust(...) {
+    -webkit-text-size-adjust: @arguments;
+    -moz-text-size-adjust: @arguments;
+    text-size-adjust: @arguments;
+}
+
 .fake{color:red;}
 
 .k-reset { margin:0;padding:0;border:0;outline:0;text-decoration:none;font-size:100%;list-style:none;}
@@ -4582,7 +4659,7 @@ div.k-scheduler-marquee:after
 .k-edit-field > ul.k-reset .k-datepicker,
 div[name="recurrenceRule"] > .k-dropdown
 {
-    width: 8em;
+    width: 9em;
 }
 
 .k-popup-message
@@ -4601,6 +4678,125 @@ div[name="recurrenceRule"] > .k-dropdown
 {
     margin: .5em 0 .7em;
 }
+
+/* common mobile css */
+
+.km-root,
+.km-pane,
+.km-pane-wrapper
+{
+    width: 100%;
+    height: 100%;
+    -ms-touch-action: none;
+    -ms-content-zooming: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    .text-size-adjust(none); // Disables zoom on Desktop too.
+}
+
+.km-pane-wrapper
+{
+    position: absolute;
+    width: 100%;
+    height: 100%
+}
+
+.km-pane,
+.km-shim
+{
+    font-family: sans-serif;
+}
+
+.km-pane
+{
+    overflow-x: hidden;
+}
+
+.km-view
+{
+    top: 0;
+    left: 0;
+    position: absolute;
+    .flexbox();
+    height: 100%;
+    width: 100%;
+    .box-orient(vertical);
+    .flex-direction(column);
+    .flex-align-items(stretch);
+    .flex-align-content(stretch);
+    vertical-align: top;
+}
+
+:-moz-any(.km-view,.km-pane)
+{
+    overflow: hidden;
+}
+
+.k-ff18 *:-moz-any(.km-view,.km-pane),
+.k-ff19 *:-moz-any(.km-view,.km-pane),
+.k-ff20 *:-moz-any(.km-view,.km-pane),
+.k-ff21 *:-moz-any(.km-view,.km-pane)
+{
+    position: relative;
+}
+
+:-moz-any(.km-view)
+{
+    display: -moz-inline-box;
+    display: flex;
+}
+
+.km-content
+{
+    min-height: 1px;
+    .flex(1);
+    .flex-align(stretch);
+    display: block;
+    width: auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.km-actionsheet > li
+{
+    list-style-type: none;
+    padding: inherit 1em;
+    .box-sizing(border-box);
+    line-height: 2em;
+}
+
+.km-actionsheet
+{
+    padding: 0;
+    margin: 0;
+}
+
+.km-shim
+{
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.6);
+    z-index:10001;
+    .box-sizing(border-box);
+}
+
+.km-shim .k-animation-container,
+.km-actionsheet-wrapper
+{
+    width: 100%;
+    .box-shadow(none);
+    border: 0;
+}
+
+.km-shim .k-animation-container
+{
+    width: auto;
+}
+
+/* /common mobile css */
 
 .km-pane-wrapper .k-grid-edit-form > .km-header,
 .km-pane-wrapper .k-grid-column-menu > .km-header,
