@@ -907,25 +907,19 @@ kendo_module({
             }
         },
         _updateHoveredItem: function (p) {
-            var adornerHandle = this.diagram.resizingAdorner._hitTest(p);
-            if (adornerHandle) {
-                this.hoveredAdorner = this.diagram.resizingAdorner; // Shape, connection or connector
-                this._removeHover();
-            }
-            else {
-                var hit = this._hitTest(p);
-                if (hit != this.hoveredItem && (!this.disabledShape || hit != this.disabledShape)) {
-                    if (this.hoveredItem) {
-                        this.hoveredItem._hover(false);
-                    }
-                    this.hoveredItem = hit; // Shape, connection or connector
-                    if (this.hoveredItem) {
-                        this.hoveredItem._hover(true);
-                    }
-                }
+            var hit = this._hitTest(p);
 
-                this.hoveredAdorner = undefined;
+            if (hit != this.hoveredItem && (!this.disabledShape || hit != this.disabledShape)) {
+                if (this.hoveredItem) {
+                    this.hoveredItem._hover(false);
+                }
+                this.hoveredItem = hit; // Shape, connection or connector
+                if (this.hoveredItem) {
+                    this.hoveredItem._hover(true);
+                }
             }
+
+            //this.hoveredAdorner = undefined;
         },
         _removeHover: function () {
             if (this.hoveredItem) {
@@ -947,6 +941,18 @@ kendo_module({
                     return hit;
                 }
             }
+
+            hit = this.diagram.resizingAdorner._hitTest(point);
+            if (hit) {
+                this.hoveredAdorner = d.resizingAdorner;
+                if (hit.x !== 0 && hit.y !== 0) { // hit testing for resizers or rotator, otherwise if (0,0) than pass through.
+                    return;
+                }
+            }
+            else {
+                this.hoveredAdorner = undefined;
+            }
+
             if (!this.activeTool || this.activeTool.type !== "ConnectionTool") {
                 hit = this._hitTestItems(d._selectedItems, point);
             }
@@ -1504,6 +1510,8 @@ kendo_module({
                 that.initialStates.push(shape.bounds());
             }
         },
+        _hover: function () {
+        },
         start: function (p) {
             this._sp = p;
             this._cp = p;
@@ -1590,8 +1598,6 @@ kendo_module({
             this._manipulating = undefined;
             this._rotated = undefined;
             return unit;
-        },
-        _hover: function () {
         },
         refresh: function () {
             var that = this, b,
