@@ -76,6 +76,38 @@
     });
 
     // ------------------------------------------------------------
+    module("Surface / Events", {
+        setup: function() {
+            container = $("#container")[0];
+            surface = new Surface(container);
+        }
+    });
+
+    test("binds initial handlers", function() {
+        surface = new Surface(container, {
+            click: function() { ok(true); }
+        });
+
+        surface.trigger("click");
+    });
+
+    test("clicking a node triggers click", function() {
+        surface.draw(new Group());
+        surface.bind("click", function() { ok(true); });
+
+        $(surface._root.childNodes[0].element).trigger("click");
+    });
+
+    test("click has reference to shape", function() {
+        var group = new Group();
+        surface.draw(group);
+        surface.bind("click", function(e) { deepEqual(e.shape, group); });
+
+        $(surface._root.childNodes[0].element)
+            .trigger("click", { toElement: surface._root.childNodes[0].element });
+    });
+
+    // ------------------------------------------------------------
     var node;
 
     module("Node", {

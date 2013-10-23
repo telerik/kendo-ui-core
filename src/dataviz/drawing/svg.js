@@ -1,4 +1,4 @@
-(function () {
+(function ($) {
 
     // Imports ================================================================
     var doc = document,
@@ -34,6 +34,7 @@
             Observable.fn.init.call(this);
 
             this.options = deepExtend({}, this.options, options);
+            this.bind(this.events, this.options);
 
             this._root = new RootNode();
             this._appendTo(container);
@@ -60,6 +61,11 @@
             return this._template(this);
         },
 
+        destroy: function() {
+            this.clear();
+            $(this.element).kendoDestroy();
+        },
+
         _template: renderTemplate(
             "<?xml version='1.0' ?>" +
             "<svg xmlns='" + SVG_NS + "' version='1.1' " +
@@ -72,6 +78,22 @@
             renderSVG(container, this._template(this));
             this.element = container.firstElementChild;
             this._root.attachTo(this.element);
+
+            $(this.element).on("click", $.proxy(this._click, this));
+        },
+
+        _click: function(e) {
+            var node = e.target._kendoNode,
+                shape = null;
+
+            if (node) {
+                shape = node.srcElement;
+            }
+
+            this.trigger("click", {
+                shape: shape,
+                originalEvent: e
+            });
         }
     });
 
