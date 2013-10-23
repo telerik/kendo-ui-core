@@ -327,6 +327,25 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Use it to set the field used to filter the data source.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Telerik().ComboBox()
+        ///             .Name("ComboBox2")
+        ///             .CascadeFrom("ComboBox1")
+        ///             .CascadeFromField("ParentID")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ComboBoxBuilder CascadeFromField(string cascadeFromField)
+        {
+            Component.CascadeFromField = cascadeFromField;
+
+            return this;
+        }
+
+        /// <summary>
         /// Define the text of the widget, when the autoBind is set to false.
         /// </summary>
         /// <example>

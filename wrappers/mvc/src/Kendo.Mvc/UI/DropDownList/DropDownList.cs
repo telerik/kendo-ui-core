@@ -24,6 +24,12 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        public string CascadeFromField
+        {
+            get;
+            set;
+        }
+
         public string DataValueField
         {
             get;
@@ -75,6 +81,11 @@ namespace Kendo.Mvc.UI
             if (!string.IsNullOrEmpty(CascadeFrom))
             {
                 options["cascadeFrom"] = CascadeFrom;
+            }
+
+            if (!string.IsNullOrEmpty(CascadeFromField))
+            {
+                options["cascadeFromField"] = CascadeFromField;
             }
 
             if (!string.IsNullOrEmpty(Text))
