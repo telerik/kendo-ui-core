@@ -823,6 +823,7 @@
     <Compile Include="UI\MobileListView\Items\MobileListViewItemBase.cs" />
     <Compile Include="UI\MobileListView\Items\MobileListViewLinkItem.cs" />
     <Compile Include="UI\MobileListView\Items\MobileListViewItem.cs" />
+    <Compile Include="UI\MobileMode.cs" />
     <Compile Include="UI\MobileNavigatableSettingsBuilder.cs" />
     <Compile Include="UI\MobileNavigatableSettings.cs" />
     <Compile Include="UI\MobilePopupDirection.cs" />
@@ -1161,7 +1162,6 @@
     <Compile Include="UI\Scheduler\Fluent\SchedulerWeekViewBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerWorkWeekViewBuilder.cs" />
     <Compile Include="UI\Scheduler\ISchedulerEventController.cs" />
-    <Compile Include="UI\Scheduler\SchedulerMobileType.cs" />
     <Compile Include="UI\Scheduler\SchedulerViewDataContainer.cs" />
     <Compile Include="UI\Scheduler\SchedulerGroupOrientation.cs" />
     <Compile Include="UI\Scheduler\SchedulerMessages.cs" />

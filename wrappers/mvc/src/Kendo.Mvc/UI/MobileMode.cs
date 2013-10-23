@@ -3,7 +3,7 @@
     /// <summary>
     /// Mode of adaptive rendering 
     /// </summary>
-    public enum SchedulerMobileMode
+    public enum MobileMode
     {
         /// <summary>
         /// Disables the mobile adaptive rendering

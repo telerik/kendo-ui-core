@@ -43,7 +43,7 @@
         /// </summary>
         public SchedulerBuilder<TModel> Mobile()
         {
-            Component.Mobile = SchedulerMobileMode.Auto;
+            Component.Mobile = MobileMode.Auto;
 
             return this;
         }
@@ -52,7 +52,7 @@
         /// Used to determine if adaptive rendering should be used when viewed on mobile browser
         /// </summary>
         /// <param name="type"></param>
-        public SchedulerBuilder<TModel> Mobile(SchedulerMobileMode type)
+        public SchedulerBuilder<TModel> Mobile(MobileMode type)
         {
             Component.Mobile = type;
 

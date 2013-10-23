@@ -211,7 +211,7 @@
             set;
         }
 
-        public SchedulerMobileMode Mobile
+        public MobileMode Mobile
         {
             get;
             set;
@@ -429,9 +429,9 @@
                 options["group"] = group;
             }
 
-            if (Mobile != SchedulerMobileMode.Disabled)
+            if (Mobile != MobileMode.Disabled)
             {
-                if (Mobile == SchedulerMobileMode.Auto)
+                if (Mobile == MobileMode.Auto)
                 {
                     options["mobile"] = true;
                 }
