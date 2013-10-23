@@ -42,6 +42,16 @@ Help topic showing how cascading functionality works
     }
 
     /**
+    * Defines the field to be used to filter the data source. If not defiend the parent's dataValueField option will be used.
+Help topic showing how cascading functionality works
+    * @param string $value
+    * @return \Kendo\UI\ComboBox
+    */
+    public function cascadeFromField($value) {
+        return $this->setProperty('cascadeFromField', $value);
+    }
+
+    /**
     * Sets the data source of the ComboBox.
     * @param array|\Kendo\Data\DataSource $value
     * @return \Kendo\UI\ComboBox
