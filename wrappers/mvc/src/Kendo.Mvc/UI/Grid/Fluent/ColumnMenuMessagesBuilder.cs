@@ -58,5 +58,27 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the text displayed for done menu button.
+        /// </summary>
+        /// <param name="message">The message</param>        
+        public ColumnMenuMessagesBuilder Done(string message)
+        {
+            messages.Done = message;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the text displayed for menu header.
+        /// </summary>
+        /// <param name="message">The message</param>        
+        public ColumnMenuMessagesBuilder ColumnSettings(string message)
+        {
+            messages.ColumnSettings = message;
+
+            return this;
+        }
     }
 }

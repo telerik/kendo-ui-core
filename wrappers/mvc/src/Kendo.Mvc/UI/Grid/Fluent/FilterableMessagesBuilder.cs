@@ -92,9 +92,46 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
 
+        /// <summary>
+        /// Sets the text for Clear button.
+        /// </summary>
+        /// <param name="message">The message</param> 
         public FilterableMessagesBuilder Clear(string message)
         {
             messages.Clear = message;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the text for Operator label.
+        /// </summary>
+        /// <param name="message">The message</param> 
+        public FilterableMessagesBuilder Operator(string message)
+        {
+            messages.Operator = message;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the text for Value label.
+        /// </summary>
+        /// <param name="message">The message</param> 
+        public FilterableMessagesBuilder Value(string message)
+        {
+            messages.Value = message;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the text for Cancel button.
+        /// </summary>
+        /// <param name="message">The message</param> 
+        public FilterableMessagesBuilder Cancel(string message)
+        {
+            messages.Cancel = message;
 
             return this;
         }
