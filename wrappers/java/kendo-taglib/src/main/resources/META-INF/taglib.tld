@@ -9038,6 +9038,13 @@ Help topic showing how cascading functionality works</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Defines the field to be used to filter the data source. If not defiend the parent's dataValueField option will be used.
+Help topic showing how cascading functionality works</description>
+            <name>cascadeFromField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
 instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.DataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.</description>
             <name>dataSource</name>
@@ -10370,6 +10377,13 @@ the minimum and maximum values.</description>
             <description>Use it to set the Id of the parent dropdownlist widget.
 Help topic showing how cascading functionality works</description>
             <name>cascadeFrom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Defines the field to be used to filter the data source. If not defiend the parent's dataValueField option will be used.
+Help topic showing how cascading functionality works</description>
+            <name>cascadeFromField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -15358,7 +15372,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
         <attribute>
             <description>The text similar to " day(s)" displayed in the scheduler recurrence editor.</description>
-            <name>days</name>
+            <name>interval</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -15380,31 +15394,31 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
         <attribute>
             <description>The text similar to "After " displayed in the scheduler recurrence editor.</description>
-            <name>endCountAfter</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>The text similar to " occurrence(s)" displayed in the scheduler recurrence editor.</description>
-            <name>endCountOccurrence</name>
+            <name>after</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The text similar to "End:" displayed in the scheduler recurrence editor.</description>
-            <name>endLabel</name>
+            <name>label</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The text similar to "Never" displayed in the scheduler recurrence editor.</description>
-            <name>endNever</name>
+            <name>never</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to " occurrence(s)" displayed in the scheduler recurrence editor.</description>
+            <name>occurrence</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The text similar to "On " displayed in the scheduler recurrence editor.</description>
-            <name>endUntilOn</name>
+            <name>on</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -15466,7 +15480,7 @@ which field to update. The other option is to use MVVM bindings in order to bind
         </attribute>
         <attribute>
             <description>The text similar to " month(s)" displayed in the scheduler recurrence editor.</description>
-            <name>months</name>
+            <name>interval</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -15527,11 +15541,45 @@ which field to update. The other option is to use MVVM bindings in order to bind
 
 
     <tag>
+        <description>The configuration of the scheduler recurrence editor week days messages. Use these options to customize or localize the scheduler recurrence editor weekdays messages.</description>
+        <name>scheduler-messages-recurrenceEditor-weekdays</name>
+        <tag-class>com.kendoui.taglib.scheduler.MessagesRecurrenceEditorWeekdaysTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The text similar to "day" displayed in the repeat by section of the monthly recurrence pattern.</description>
+            <name>day</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "weekday" displayed in the repeat by section of the monthly recurrence pattern.</description>
+            <name>weekday</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text similar to "weekend" displayed in the repeat by section of the monthly recurrence pattern.</description>
+            <name>weekend</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
         <description>The configuration of the scheduler recurrence editor weekly messages. Use this option to customize or localize the scheduler recurrence editor weekly messages.</description>
         <name>scheduler-messages-recurrenceEditor-weekly</name>
         <tag-class>com.kendoui.taglib.scheduler.MessagesRecurrenceEditorWeeklyTag</tag-class>
         <body-content>empty</body-content>
 
+        <attribute>
+            <description>The text similar to " week(s)" displayed in the scheduler recurrence editor.</description>
+            <name>interval</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
         <attribute>
             <description>The text similar to "Repeat every: " displayed in the scheduler recurrence editor.</description>
             <name>repeatEvery</name>
@@ -15541,12 +15589,6 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <attribute>
             <description>The text similar to "Repeat on: " displayed in the scheduler recurrence editor.</description>
             <name>repeatOn</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>The text similar to " week(s)" displayed in the scheduler recurrence editor.</description>
-            <name>weeks</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -15560,6 +15602,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <tag-class>com.kendoui.taglib.scheduler.MessagesRecurrenceEditorYearlyTag</tag-class>
         <body-content>empty</body-content>
 
+        <attribute>
+            <description>The text similar to " year(s)" displayed in the scheduler recurrence editor.</description>
+            <name>interval</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
         <attribute>
             <description>The text similar to " of " displayed in the scheduler recurrence editor.</description>
             <name>of</name>
@@ -15575,12 +15623,6 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <attribute>
             <description>The text similar to "Repeat on: " displayed in the scheduler recurrence editor.</description>
             <name>repeatOn</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description>The text similar to " year(s)" displayed in the scheduler recurrence editor.</description>
-            <name>years</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>

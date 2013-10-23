@@ -12,7 +12,7 @@ import com.kendoui.taglib.BaseTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class MessagesRecurrenceEditorMonthlyTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class MessagesRecurrenceEditorWeekdaysTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
@@ -22,7 +22,7 @@ public class MessagesRecurrenceEditorMonthlyTag extends  BaseTag  /* interfaces 
         MessagesRecurrenceEditorTag parent = (MessagesRecurrenceEditorTag)findParentWithClass(MessagesRecurrenceEditorTag.class);
 
 
-        parent.setMonthly(this);
+        parent.setWeekdays(this);
 
 //<< doEndTag
 
@@ -48,7 +48,7 @@ public class MessagesRecurrenceEditorMonthlyTag extends  BaseTag  /* interfaces 
 //>> Attributes
 
     public static String tagName() {
-        return "scheduler-messages-recurrenceEditor-monthly";
+        return "scheduler-messages-recurrenceEditor-weekdays";
     }
 
     public java.lang.String getDay() {
@@ -59,28 +59,20 @@ public class MessagesRecurrenceEditorMonthlyTag extends  BaseTag  /* interfaces 
         setProperty("day", value);
     }
 
-    public java.lang.String getInterval() {
-        return (java.lang.String)getProperty("interval");
+    public java.lang.String getWeekday() {
+        return (java.lang.String)getProperty("weekday");
     }
 
-    public void setInterval(java.lang.String value) {
-        setProperty("interval", value);
+    public void setWeekday(java.lang.String value) {
+        setProperty("weekday", value);
     }
 
-    public java.lang.String getRepeatEvery() {
-        return (java.lang.String)getProperty("repeatEvery");
+    public java.lang.String getWeekend() {
+        return (java.lang.String)getProperty("weekend");
     }
 
-    public void setRepeatEvery(java.lang.String value) {
-        setProperty("repeatEvery", value);
-    }
-
-    public java.lang.String getRepeatOn() {
-        return (java.lang.String)getProperty("repeatOn");
-    }
-
-    public void setRepeatOn(java.lang.String value) {
-        setProperty("repeatOn", value);
+    public void setWeekend(java.lang.String value) {
+        setProperty("weekend", value);
     }
 
 //<< Attributes

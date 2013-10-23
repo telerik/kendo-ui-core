@@ -51,44 +51,44 @@ public class MessagesRecurrenceEditorEndTag extends  BaseTag  /* interfaces */ /
         return "scheduler-messages-recurrenceEditor-end";
     }
 
-    public java.lang.String getEndCountAfter() {
-        return (java.lang.String)getProperty("endCountAfter");
+    public java.lang.String getAfter() {
+        return (java.lang.String)getProperty("after");
     }
 
-    public void setEndCountAfter(java.lang.String value) {
-        setProperty("endCountAfter", value);
+    public void setAfter(java.lang.String value) {
+        setProperty("after", value);
     }
 
-    public java.lang.String getEndCountOccurrence() {
-        return (java.lang.String)getProperty("endCountOccurrence");
+    public java.lang.String getLabel() {
+        return (java.lang.String)getProperty("label");
     }
 
-    public void setEndCountOccurrence(java.lang.String value) {
-        setProperty("endCountOccurrence", value);
+    public void setLabel(java.lang.String value) {
+        setProperty("label", value);
     }
 
-    public java.lang.String getEndLabel() {
-        return (java.lang.String)getProperty("endLabel");
+    public java.lang.String getNever() {
+        return (java.lang.String)getProperty("never");
     }
 
-    public void setEndLabel(java.lang.String value) {
-        setProperty("endLabel", value);
+    public void setNever(java.lang.String value) {
+        setProperty("never", value);
     }
 
-    public java.lang.String getEndNever() {
-        return (java.lang.String)getProperty("endNever");
+    public java.lang.String getOccurrence() {
+        return (java.lang.String)getProperty("occurrence");
     }
 
-    public void setEndNever(java.lang.String value) {
-        setProperty("endNever", value);
+    public void setOccurrence(java.lang.String value) {
+        setProperty("occurrence", value);
     }
 
-    public java.lang.String getEndUntilOn() {
-        return (java.lang.String)getProperty("endUntilOn");
+    public java.lang.String getOn() {
+        return (java.lang.String)getProperty("on");
     }
 
-    public void setEndUntilOn(java.lang.String value) {
-        setProperty("endUntilOn", value);
+    public void setOn(java.lang.String value) {
+        setProperty("on", value);
     }
 
 //<< Attributes

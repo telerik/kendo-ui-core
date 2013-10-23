@@ -98,6 +98,14 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
         setProperty("cascadeFrom", value);
     }
 
+    public java.lang.String getCascadeFromField() {
+        return (java.lang.String)getProperty("cascadeFromField");
+    }
+
+    public void setCascadeFromField(java.lang.String value) {
+        setProperty("cascadeFromField", value);
+    }
+
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

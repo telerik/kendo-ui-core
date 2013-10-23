@@ -71,6 +71,10 @@ public class MessagesRecurrenceEditorTag extends  BaseTag  /* interfaces */ /* i
         setProperty("offsetPositions", value);
     }
 
+    public void setWeekdays(com.kendoui.taglib.scheduler.MessagesRecurrenceEditorWeekdaysTag value) {
+        setProperty("weekdays", value);
+    }
+
     public void setWeekly(com.kendoui.taglib.scheduler.MessagesRecurrenceEditorWeeklyTag value) {
         setProperty("weekly", value);
     }

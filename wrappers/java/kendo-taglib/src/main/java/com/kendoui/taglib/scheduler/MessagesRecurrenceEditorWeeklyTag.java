@@ -51,6 +51,14 @@ public class MessagesRecurrenceEditorWeeklyTag extends  BaseTag  /* interfaces *
         return "scheduler-messages-recurrenceEditor-weekly";
     }
 
+    public java.lang.String getInterval() {
+        return (java.lang.String)getProperty("interval");
+    }
+
+    public void setInterval(java.lang.String value) {
+        setProperty("interval", value);
+    }
+
     public java.lang.String getRepeatEvery() {
         return (java.lang.String)getProperty("repeatEvery");
     }
@@ -65,14 +73,6 @@ public class MessagesRecurrenceEditorWeeklyTag extends  BaseTag  /* interfaces *
 
     public void setRepeatOn(java.lang.String value) {
         setProperty("repeatOn", value);
-    }
-
-    public java.lang.String getWeeks() {
-        return (java.lang.String)getProperty("weeks");
-    }
-
-    public void setWeeks(java.lang.String value) {
-        setProperty("weeks", value);
     }
 
 //<< Attributes

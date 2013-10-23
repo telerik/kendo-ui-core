@@ -51,6 +51,14 @@ public class MessagesRecurrenceEditorYearlyTag extends  BaseTag  /* interfaces *
         return "scheduler-messages-recurrenceEditor-yearly";
     }
 
+    public java.lang.String getInterval() {
+        return (java.lang.String)getProperty("interval");
+    }
+
+    public void setInterval(java.lang.String value) {
+        setProperty("interval", value);
+    }
+
     public java.lang.String getOf() {
         return (java.lang.String)getProperty("of");
     }
@@ -73,14 +81,6 @@ public class MessagesRecurrenceEditorYearlyTag extends  BaseTag  /* interfaces *
 
     public void setRepeatOn(java.lang.String value) {
         setProperty("repeatOn", value);
-    }
-
-    public java.lang.String getYears() {
-        return (java.lang.String)getProperty("years");
-    }
-
-    public void setYears(java.lang.String value) {
-        setProperty("years", value);
     }
 
 //<< Attributes

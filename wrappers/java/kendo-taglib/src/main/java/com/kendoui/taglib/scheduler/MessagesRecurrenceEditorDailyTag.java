@@ -51,12 +51,12 @@ public class MessagesRecurrenceEditorDailyTag extends  BaseTag  /* interfaces */
         return "scheduler-messages-recurrenceEditor-daily";
     }
 
-    public java.lang.String getDays() {
-        return (java.lang.String)getProperty("days");
+    public java.lang.String getInterval() {
+        return (java.lang.String)getProperty("interval");
     }
 
-    public void setDays(java.lang.String value) {
-        setProperty("days", value);
+    public void setInterval(java.lang.String value) {
+        setProperty("interval", value);
     }
 
     public java.lang.String getRepeatEvery() {
