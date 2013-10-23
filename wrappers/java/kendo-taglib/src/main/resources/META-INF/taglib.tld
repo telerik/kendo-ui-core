@@ -14234,6 +14234,114 @@ is closed. Options include "fadeOut".</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>ProgressBar</description>
+        <name>progressBar</name>
+        <tag-class>com.kendoui.taglib.ProgressBarTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the number of chunks.</description>
+            <name>chunkCount</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>If set to false the widget will be disabled. It will still allow changing the value. The widget is enabled by default.</description>
+            <name>enable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The maximum value of the ProgressBar.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The minimum value of the ProgressBar.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The orientation of the ProgressBar. Possible values are horizontal and vertical.</description>
+            <name>orientation</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies if the progress direction will be reversed.</description>
+            <name>reverse</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies if the progress status will be shown.</description>
+            <name>showStatus</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies the type of the ProgressBar. The supported types are value, percent and chunk.</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The underlying value of the ProgressBar.</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Fired when the value of the ProgressBar has changed. If the progress animation is enabled, the event will be fired after the animation has completed (does not applies to chunk ProgressBar).</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the value of the ProgressBar reaches the maximum value.</description>
+            <name>complete</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+    <tag>
+        <description>Configures the progress animation. Currently only the duration of the animation could be set.</description>
+        <name>progressBar-animation</name>
+        <tag-class>com.kendoui.taglib.progressbar.AnimationTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The duration of each progress animation in milliseconds.</description>
+            <name>duration</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>Fired when the value of the ProgressBar has changed. If the progress animation is enabled, the event will be fired after the animation has completed (does not applies to chunk ProgressBar).</description>
+        <name>progressBar-change</name>
+        <tag-class>com.kendoui.taglib.progressbar.ChangeFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the value of the ProgressBar reaches the maximum value.</description>
+        <name>progressBar-complete</name>
+        <tag-class>com.kendoui.taglib.progressbar.CompleteFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>QRCode</description>
         <name>qRCode</name>
         <tag-class>com.kendoui.taglib.QRCodeTag</tag-class>

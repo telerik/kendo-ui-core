@@ -37,6 +37,7 @@ class ChartValueAxisItemNotesIcon extends \Kendo\SerializableObject {
 * "circle" - the marker shape is circle.
 * "square" - the marker shape is square.
 * "triangle" - the marker shape is triangle.
+* "cross" - the marker shape is cross.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartValueAxisItemNotesIcon
     */

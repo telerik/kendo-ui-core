@@ -232,6 +232,24 @@ The function return value is displayed instead of the individual points.The supp
     }
 
     /**
+    * The chart series outliers configuration.
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemOutliers|array $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function outliers($value) {
+        return $this->setProperty('outliers', $value);
+    }
+
+    /**
+    * The chart series extremes configuration.
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemExtremes|array $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function extremes($value) {
+        return $this->setProperty('extremes', $value);
+    }
+
+    /**
     * The maximum size of the chart bubble series marker.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
