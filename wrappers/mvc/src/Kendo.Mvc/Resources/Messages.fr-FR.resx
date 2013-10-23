@@ -648,4 +648,25 @@
   <data name="Scheduler_ShowWorkDay" xml:space="preserve">
     <value>Show business hours</value>
   </data>
+  <data name="Filter_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Filter_Operator" xml:space="preserve">
+    <value>Opérateur</value>
+  </data>
+  <data name="Filter_Value" xml:space="preserve">
+    <value>Valeur</value>
+  </data>
+  <data name="Grid_CancelDelete" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Grid_ColumnSettings" xml:space="preserve">
+    <value>Paramètres de colonne</value>
+  </data>
+  <data name="Grid_ConfirmDelete" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="Grid_Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
 </root>

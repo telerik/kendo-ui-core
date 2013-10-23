@@ -513,4 +513,25 @@
   <data name="Scheduler_ShowWorkDay" xml:space="preserve">
     <value>Show business hours</value>
   </data>
+  <data name="Filter_Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Filter_Operator" xml:space="preserve">
+    <value>Operador</value>
+  </data>
+  <data name="Filter_Value" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+  <data name="Grid_CancelDelete" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Grid_ColumnSettings" xml:space="preserve">
+    <value>Configuración de columnas</value>
+  </data>
+  <data name="Grid_ConfirmDelete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="Grid_Done" xml:space="preserve">
+    <value>Hecho</value>
+  </data>
 </root>

@@ -615,4 +615,25 @@
   <data name="Scheduler_ShowWorkDay" xml:space="preserve">
     <value>Show business hours</value>
   </data>
+  <data name="Filter_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Filter_Operator" xml:space="preserve">
+    <value>接线员</value>
+  </data>
+  <data name="Filter_Value" xml:space="preserve">
+    <value>值</value>
+  </data>
+  <data name="Grid_CancelDelete" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Grid_ColumnSettings" xml:space="preserve">
+    <value>列设置</value>
+  </data>
+  <data name="Grid_ConfirmDelete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Grid_Done" xml:space="preserve">
+    <value>做</value>
+  </data>
 </root>

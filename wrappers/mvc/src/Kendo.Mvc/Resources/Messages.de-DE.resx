@@ -648,4 +648,25 @@
   <data name="Scheduler_ShowWorkDay" xml:space="preserve">
     <value>Zeigen Geschäftszeiten</value>
   </data>
+  <data name="Filter_Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Filter_Operator" xml:space="preserve">
+    <value>Operator</value>
+  </data>
+  <data name="Filter_Value" xml:space="preserve">
+    <value>Wert</value>
+  </data>
+  <data name="Grid_CancelDelete" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Grid_ColumnSettings" xml:space="preserve">
+    <value>Column Einstellungen</value>
+  </data>
+  <data name="Grid_ConfirmDelete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Grid_Done" xml:space="preserve">
+    <value>Geschehen</value>
+  </data>
 </root>

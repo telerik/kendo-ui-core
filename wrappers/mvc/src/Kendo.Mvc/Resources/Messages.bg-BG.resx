@@ -651,4 +651,25 @@
   <data name="Scheduler_ShowWorkDay" xml:space="preserve">
     <value>Покажи работни часове</value>
   </data>
+  <data name="Filter_Cancel" xml:space="preserve">
+    <value>Откажи</value>
+  </data>
+  <data name="Filter_Operator" xml:space="preserve">
+    <value>Оператор</value>
+  </data>
+  <data name="Filter_Value" xml:space="preserve">
+    <value>Стойност</value>
+  </data>
+  <data name="Grid_CancelDelete" xml:space="preserve">
+    <value>Откажи</value>
+  </data>
+  <data name="Grid_ColumnSettings" xml:space="preserve">
+    <value>Настройки на колоната</value>
+  </data>
+  <data name="Grid_ConfirmDelete" xml:space="preserve">
+    <value>Изтрии</value>
+  </data>
+  <data name="Grid_Done" xml:space="preserve">
+    <value>Готово</value>
+  </data>
 </root>

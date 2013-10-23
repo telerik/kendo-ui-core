@@ -639,4 +639,25 @@
   <data name="Scheduler_ShowWorkDay" xml:space="preserve">
     <value>Show business hours</value>
   </data>
+  <data name="Filter_Cancel" xml:space="preserve">
+    <value>Annuller</value>
+  </data>
+  <data name="Filter_Operator" xml:space="preserve">
+    <value>Operatør</value>
+  </data>
+  <data name="Filter_Value" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="Grid_CancelDelete" xml:space="preserve">
+    <value>Annuller</value>
+  </data>
+  <data name="Grid_ColumnSettings" xml:space="preserve">
+    <value>Kolonneindstillinger</value>
+  </data>
+  <data name="Grid_ConfirmDelete" xml:space="preserve">
+    <value>Slet</value>
+  </data>
+  <data name="Grid_Done" xml:space="preserve">
+    <value>Udført</value>
+  </data>
 </root>

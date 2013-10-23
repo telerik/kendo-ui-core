@@ -651,4 +651,25 @@
   <data name="Scheduler_ShowWorkDay" xml:space="preserve">
     <value>Show business hours</value>
   </data>
+  <data name="Filter_Cancel" xml:space="preserve">
+    <value>Anulează</value>
+  </data>
+  <data name="Filter_Operator" xml:space="preserve">
+    <value>Operator</value>
+  </data>
+  <data name="Filter_Value" xml:space="preserve">
+    <value>Valoare</value>
+  </data>
+  <data name="Grid_CancelDelete" xml:space="preserve">
+    <value>Anulează</value>
+  </data>
+  <data name="Grid_ColumnSettings" xml:space="preserve">
+    <value>Setări coloana</value>
+  </data>
+  <data name="Grid_ConfirmDelete" xml:space="preserve">
+    <value>Șterge</value>
+  </data>
+  <data name="Grid_Done" xml:space="preserve">
+    <value>Făcut</value>
+  </data>
 </root>
