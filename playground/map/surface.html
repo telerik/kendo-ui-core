@@ -50,9 +50,9 @@
         // etc.
     }).moveTo(center).lineTo(50, 0);
 
-    var minutes = new Path().moveTo(center).lineTo(50, 5);
+    var minutes = new Path({ stroke: { width: 1.2 } }).moveTo(center).lineTo(50, 5);
 
-    var hours = new Path().moveTo(center).lineTo(50, 25);
+    var hours = new Path({ stroke: { width: 2 } }).moveTo(center).lineTo(50, 25);
 
     var ticks = new Group();
     var clock = new Group();
@@ -66,6 +66,10 @@
         var surfaceType = $("#surfaceType").val();
         surface = new drawing[surfaceType].Surface($("#wrap")[0]);
         surface.draw(clock);
+
+        surface.bind("click", function(e) {
+            console.log("click", e);
+        });
 
         interval = setInterval(function() {
             seconds.segments[1].anchor.rotate(center, -6);

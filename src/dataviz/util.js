@@ -34,6 +34,10 @@
         return typeof val === "number" && !isNaN(val);
     }
 
+    function valueOrDefault(value, defaultValue) {
+        return defined(value) ? value : defaultValue;
+    }
+
     // Template helpers =======================================================
     function renderAttr(name, value) {
         return defined(value) ? " " + name + "='" + value + "' " : "";
@@ -67,7 +71,8 @@
             isNumber: isNumber,
             rad: rad,
             renderAttr: renderAttr,
-            renderSize: renderSize
+            renderSize: renderSize,
+            valueOrDefault: valueOrDefault
         }
     });
 

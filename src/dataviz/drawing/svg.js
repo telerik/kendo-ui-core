@@ -16,7 +16,8 @@
         Path = drawing.Path,
 
         util = dataviz.util,
-        renderAttr = util.renderAttr;
+        renderAttr = util.renderAttr,
+        valueOrDefault = util.valueOrDefault;
 
     // Constants ==============================================================
     var BUTT = "butt",
@@ -250,10 +251,10 @@
         },
 
         renderStroke: function() {
-            var stroke = this.srcElement.options.stroke || { color: "black", width: 1 };
+            var stroke = this.srcElement.options.stroke || {};
 
-            return renderAttr("stroke", stroke.color) +
-                   renderAttr("stroke-width", stroke.width) +
+            return renderAttr("stroke", valueOrDefault(stroke.color, "black")) +
+                   renderAttr("stroke-width", valueOrDefault(stroke.width, 1)) +
                    renderAttr("stroke-opacity", stroke.opacity) +
                    renderAttr("stroke-dasharray", this.renderDashType(stroke)) +
                    renderAttr("stroke-linecap", this.renderLinecap(stroke));

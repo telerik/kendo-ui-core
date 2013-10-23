@@ -303,6 +303,11 @@
         ok(pathNode.render().indexOf("stroke-width='1'") !== -1);
     });
 
+    test("renders default stroke width if color is set", function() {
+        path.options.set("stroke.color", "red");
+        ok(pathNode.render().indexOf("stroke-width='1'") !== -1);
+    });
+
     test("renders stroke opacity", function() {
         path.options.set("stroke.opacity", 0.5);
 
