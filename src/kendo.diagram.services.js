@@ -585,7 +585,6 @@ kendo_module({
             var that = this;
             if (this.adorner) {
                 this.adorner.move(that.handle, p);
-                return true;
             }
         },
         end: function () {
@@ -894,7 +893,7 @@ kendo_module({
             }
         },
         _updateCursor: function (p) {
-            var cursor = this.activeTool ? this.activeTool.getCursor(p) : (this.hoveredItem ? this.hoveredItem._getCursor(p) : (this.hoveredAdorner ? this.hoveredAdorner._getCursor(p) : Cursors.arrow));
+            var cursor = this.activeTool ? this.activeTool.getCursor(p) : (this.hoveredAdorner ? this.hoveredAdorner._getCursor(p) : (this.hoveredItem ? this.hoveredItem._getCursor(p) : Cursors.arrow));
 
             $(this.diagram.canvas.native).css({cursor: cursor});
         },
@@ -908,22 +907,23 @@ kendo_module({
             }
         },
         _updateHoveredItem: function (p) {
-            var hit = this._hitTest(p);
-            if (hit != this.hoveredItem && (!this.disabledShape || hit != this.disabledShape)) {
-                if (this.hoveredItem) {
-                    this.hoveredItem._hover(false);
-                }
-                this.hoveredItem = hit; // Shape, connection or connector
-                if (this.hoveredItem) {
-                    this.hoveredItem._hover(true);
-                }
-            }
-
             var adornerHandle = this.diagram.resizingAdorner._hitTest(p);
             if (adornerHandle) {
                 this.hoveredAdorner = this.diagram.resizingAdorner; // Shape, connection or connector
+                this._removeHover();
             }
             else {
+                var hit = this._hitTest(p);
+                if (hit != this.hoveredItem && (!this.disabledShape || hit != this.disabledShape)) {
+                    if (this.hoveredItem) {
+                        this.hoveredItem._hover(false);
+                    }
+                    this.hoveredItem = hit; // Shape, connection or connector
+                    if (this.hoveredItem) {
+                        this.hoveredItem._hover(true);
+                    }
+                }
+
                 this.hoveredAdorner = undefined;
             }
         },
