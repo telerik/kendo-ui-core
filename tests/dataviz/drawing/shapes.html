@@ -23,6 +23,7 @@
 
         d = dataviz.drawing,
         Group = d.Group,
+        Segment = d.Segment,
         Shape = d.Shape,
         Text = d.Text,
         Circle = d.Circle,
@@ -177,6 +178,52 @@
     });
 
     // ------------------------------------------------------------
+    var segment;
+
+    module("Segment", {
+        setup: function() {
+            segment = new Segment(
+                new Point(0, 0),
+                new Point(10, 10),
+                new Point(-10, -10)
+            );
+        }
+    });
+
+    test("parameter-less constructor creates anchor", function() {
+        ok(new Segment().anchor);
+    });
+
+    test("changing the anchor point triggers geometryChange", function() {
+        segment.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        segment.anchor.set("x", 5);
+    });
+
+    test("changing the control point (in) triggers geometryChange", function() {
+        segment.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        segment.controlIn.set("x", 5);
+    });
+
+    test("changing the control point (out) triggers geometryChange", function() {
+        segment.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        segment.controlOut.set("x", 5);
+    });
+    // ------------------------------------------------------------
     var path;
 
     module("Path", {
@@ -224,39 +271,6 @@
         };
 
         path.moveTo(0, 0);
-    });
-
-    test("changing the anchor point triggers geometryChange", function() {
-        path.moveTo(0, 0);
-
-        path.observer = {
-            geometryChange: function() {
-                ok(true);
-            }
-        };
-        path.segments[0].anchor.set("x", 5);
-    });
-
-    test("changing the control point (in) triggers geometryChange", function() {
-        path.moveTo(0, 0);
-
-        path.observer = {
-            geometryChange: function() {
-                ok(true);
-            }
-        };
-        path.segments[0].controlIn.set("x", 5);
-    });
-
-    test("changing the control point (out) triggers geometryChange", function() {
-        path.moveTo(0, 0);
-
-        path.observer = {
-            geometryChange: function() {
-                ok(true);
-            }
-        };
-        path.segments[0].controlOut.set("x", 5);
     });
     </script>
 

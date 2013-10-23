@@ -108,13 +108,18 @@
             var segment = this;
 
             segment.anchor = anchor || new Point();
-            segment.controlIn = controlIn || new Point();
-            segment.controlOut = controlOut || new Point();
-
-            segment.observer = null;
             segment.anchor.observer = this;
-            segment.controlIn.observer = this;
-            segment.controlOut.observer = this;
+            segment.observer = null;
+
+            if (controlIn) {
+                segment.controlIn = controlIn;
+                segment.controlIn.observer = this;
+            }
+
+            if (controlOut) {
+                segment.controlOut = controlOut;
+                segment.controlOut.observer = this;
+            }
         },
 
         geometryChange: util.mixins.geometryChange
@@ -174,6 +179,7 @@
     // Exports ================================================================
     deepExtend(drawing, {
         Group: Group,
+        Segment: Segment,
         Shape: Shape,
 
         Circle: Circle,
