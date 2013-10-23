@@ -393,8 +393,8 @@ test("Connection connect - resolve auto connectors border test", function () {
     var s2 = kdiagram.addShape(new Point(160, 160));
 
     var c1 = kdiagram.connect(s1, s2);
-    equal(c1._resolvedSourceConnector.options.name, "Right");
-    equal(c1._resolvedTargetConnector.options.name, "Top");
+    equal(c1._resolvedSourceConnector.options.name, "Bottom");
+    equal(c1._resolvedTargetConnector.options.name, "Left");
 });
 
 test("Connection connect - resolve auto connectors after move test", function () {
@@ -402,8 +402,8 @@ test("Connection connect - resolve auto connectors after move test", function ()
     var s2 = kdiagram.addShape(new Point(160, 160));
 
     var c1 = kdiagram.connect(s1, s2);
-    equal(c1._resolvedSourceConnector.options.name, "Right");
-    equal(c1._resolvedTargetConnector.options.name, "Top");
+    equal(c1._resolvedSourceConnector.options.name, "Bottom");
+    equal(c1._resolvedTargetConnector.options.name, "Left");
 
     s2.position(new Point(300, 100));
     c1.refresh();
@@ -432,6 +432,49 @@ test("Connection detach", function () {
     equal(c1.sourceConnector.options.name, "Auto");
 });
 
+test('Connection definers', function () {
+    var con = new kendo.diagram.Connection(new Point(10, 20), new Point(100, 200));
+    con.points([new Point(1, 2), new Point(3, 4), new Point(5, 6)]);
+    equal(con.points().length, 3);
+    equal(con.allPoints().length, 5);
+    ok(con.sourceDefiner().point === con.sourcePoint());
+    ok(con.targetDefiner().point === con.targetPoint());
+   
+    con.sourceDefiner(new kendo.diagram.PathDefiner(new Point(44, 55), new Point(478, 44), new Point(-55, 0)));
+    ok(con.sourceDefiner().point.x === 44 && con.sourceDefiner().point.y === 55);
+    ok(con.sourceDefiner().left===null);
+    ok(con.sourceDefiner().right.x === -55 && con.sourceDefiner().right.y === 0);
+    
+    con.targetDefiner(new kendo.diagram.PathDefiner(new Point(44, 55), new Point(478, 102), new Point(-55, 0)));
+    ok(con.targetDefiner().point.x === 44 && con.targetDefiner().point.y === 55);
+    ok(con.targetDefiner().right===null);
+    ok(con.targetDefiner().left.x === 478 && con.targetDefiner().left.y === 102);
+});
+
+test('Connection bounds', function () {
+    var con = new kendo.diagram.Connection(new Point(0, 0), new Point(500, 500));
+    con.points([new Point(25,10), new Point(101,88), new Point(250,37), new Point(100,100), new Point(301,322), new Point(660,770)]);
+    var bounds = con._router.getBounds();
+    ok(bounds.x===0 && bounds.y===0 && bounds.width===660 && bounds.height===770);
+});
+
+test('Distance to a line segment', function () {
+    var d = kendo.diagram.Geometry.distanceToLine(new Point(0,0), new Point(0,100), new Point(100,100));
+    equal(d, 100);
+    d = kendo.diagram.Geometry.distanceToLine(new Point(57.88, 0), new Point(0, 100), new Point(100, 100));
+    equal(d,100);
+    d = kendo.diagram.Geometry.distanceToLine(new Point(100, 44.02), new Point(0, 0), new Point(0, 100));
+    equal(d,100);
+});
+
+test('Distance to polyline', function () {
+    var polyline = [new Point(0,0), new Point(100,0), new Point(100,100), new Point(0,100)];
+    var d = kendo.diagram.Geometry.distanceToPolyline(new Point(50,50), polyline);
+    equal(d, 50);
+    d = kendo.diagram.Geometry.distanceToPolyline(new Point(57,50), polyline);
+    equal(d, 43);
+});
+
 QUnit.module("Serialization - Cut/Copy/Paste", {
     setup: function () {
         $("#canvas").kendoDiagram();
@@ -449,7 +492,7 @@ test("Copy Selected", function () {
 
     s1.select(true);
     equal(d._clipboard.length, 0);
-    d._copy();
+    d.copy();
     equal(d._clipboard.length, 1);
 });
 
@@ -459,9 +502,9 @@ test("Copy and Paste", function () {
 
     s1.select(true);
     equal(d._clipboard.length, 0);
-    d._copy();
+    d.copy();
     equal(d._clipboard.length, 1);
-    d._paste();
+    d.paste();
     equal(shapesCount + 1, d.shapes.length);
 });
 
@@ -471,10 +514,10 @@ test("Cut and Paste", function () {
 
     s1.select(true);
     equal(d._clipboard.length, 0);
-    d._cut();
+    d.cut();
     equal(d._clipboard.length, 1);
     equal(shapesCount - 1, d.shapes.length);
-    d._paste();
+    d.paste();
     equal(shapesCount, d.shapes.length);
 });
 
@@ -484,8 +527,8 @@ test("Cut and Paste - positions", function () {
     var pos = s1.position().clone();
 
     s1.select(true);
-    d._cut();
-    d._paste();
+    d.cut();
+    d.paste();
     var copied = d.shapes[d.shapes.length - 1];
     deepEqual(copied.position(), pos);
 });
@@ -497,13 +540,13 @@ test("Copy and Paste - positions", function () {
     var pos = s1.position().clone();
 
     s1.select(true);
-    d._copy();
-    d._paste();
+    d.copy();
+    d.paste();
     var copied = d.shapes[d.shapes.length - 1];
     pos = pos.plus(new Point(d.options.copy.offsetX, d.options.copy.offsetY));
     deepEqual(copied.position(), pos);
 
-    d._paste();
+    d.paste();
     copied = d.shapes[d.shapes.length - 1];
     pos = pos.plus(new Point(d.options.copy.offsetX, d.options.copy.offsetY));
     deepEqual(copied.position(), pos);
@@ -512,15 +555,16 @@ test("Copy and Paste - positions", function () {
 test("Copy - copying the options", function () {
     var shapesCount = d.shapes.length;
     var s1 = d.shapes[0];
-    var copy = s1.copy();
-
+    var copy = s1.clone();
+    ok(copy.id!==s1.id && copy.options.id!==s1.options.id);
+    copy.options.id = s1.options.id;
     deepEqual(copy.options, s1.options);
 });
 
 test("Copy connection", function () {
     var c1 = d.connect(d.shapes[0], d.shapes[1]);
 
-    var copy = c1.copy();
+    var copy = c1.clone();
 
     deepEqual(copy.options, c1.options);
     deepEqual(copy.from, c1.from);
@@ -533,9 +577,9 @@ test("Copy/Paste connection", function () {
 
     c1.select(true);
     equal(d._clipboard.length, 0);
-    d._copy();
+    d.copy();
     equal(d._clipboard.length, 1);
-    d._paste();
+    d.paste();
     equal(cons + 1, d.connections.length);
 });
 
@@ -545,8 +589,8 @@ test("Cut/Paste connection", function () {
 
     c1.select(true);
     equal(d._clipboard.length, 0);
-    d._cut();
+    d.cut();
     equal(d._clipboard.length, 1);
-    d._paste();
+    d.paste();
     equal(cons, d.connections.length);
 });

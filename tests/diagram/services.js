@@ -16,13 +16,13 @@
     });
 
     test("Select/Deselect all", function () {
-        d.select(true);
+        d.select("all");
 
         equal(d.shapes.length + d.connections.length, d.select().length);
 
-        d.select(false);
-
-        equal(0, d.select().length);
+//        d.select(false);
+//
+//        equal(0, d.select().length);
     });
 
     test("Select/Deselect any", function () {
@@ -58,31 +58,33 @@
     test("Resizing/Selection adorner", function () {
         var i = d.shapes[0];
         i.select(true);
-
-        ok(i.adorner, "Adorner is present.");
-        deepEqual(i.visualBounds().inflate(i.adorner.options.offset, i.adorner.options.offset), i.adorner.bounds(), "Adoner has correct bounds");
+        var adorner = d.resizingAdorner;
+        ok(adorner, "Adorner is present.");
+        deepEqual(i.visualBounds().inflate(adorner.options.offset, adorner.options.offset), adorner.bounds(), "Adoner has correct bounds");
     });
 
     test("Resizing adorner - correct cursor", function () {
         var last = d.shapes[d.shapes.length - 1];
 
         last.select(true);
-        var delta = new Point(last.adorner.options.offset + 4, last.adorner.options.offset + 4);
+        var adorner = d.resizingAdorner;
+        var delta = new Point(adorner.options.offset + 4, adorner.options.offset + 4);
         var testP = last.bounds().bottomRight().plus(delta);
 
-        equal(last.adorner._getCursor(testP), "se-resize", "Cursor is correct.");
+        equal(adorner._getCursor(testP), "se-resize", "Cursor is correct.");
     });
 
     test("Resizing adorner - correct cursor after rotation - 50", function () {
         var last = d.shapes[d.shapes.length - 1];
+        var adorner = d.resizingAdorner;
 
         last.select(true);
         last.rotate(50);
-        var delta = new Point(last.adorner.options.offset + 4, last.adorner.options.offset + 4);
+        var delta = new Point(adorner.options.offset + 4, adorner.options.offset + 4);
         var testP = last.bounds().bottomRight().plus(delta);
         testP.rotate(last.bounds().center(), 360 - 50);
 
-        equal(last.adorner._getCursor(testP), "s-resize", "Cursor is correct.");
+        equal(adorner._getCursor(testP), "s-resize", "Cursor is correct.");
     });
 
     module("Tooling tests. Ensure the tools are activated correctly.", {

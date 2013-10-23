@@ -28,18 +28,24 @@ kendo_module({
             move: "move",
             select: "pointer"
         },
+        HITTESTDISTANCE = 10,
+        AUTO = "Auto",
+        TOP = "Top",
+        RIGHT = "Right",
+        LEFT = "Left",
+        BOTTOM = "Bottom",
+        DEFAULTCONNECTORNAMES = [TOP, RIGHT, BOTTOM, LEFT, AUTO],
         ZOOM_RATE = 1.1;
 
     diagram.Cursors = Cursors;
 
     function selectSingle(item, meta) {
-        if (!item.isSelected) {
-            if (!meta.ctrlKey) {
-                item.diagram.select(false);
+        if (item.isSelected) {
+            if (meta.ctrlKey) {
+                item.select(false);
             }
-            item.select(true);
-        } else if (meta.ctrlKey) {
-            item.select(false);
+        } else {
+            item.diagram.select(item, {addToSelection: meta.ctrlKey});
         }
     }
 
@@ -64,8 +70,25 @@ kendo_module({
         setState: function (state) {
             var diagram = state.diagram;
             if (this.animate) {
+                state.linkMap.forEach(
+                    function (id, points) {
+                        var conn = diagram.getId(id);
+                        conn.visible(false);
+                        if (conn) {
+                            conn.points(points);
+                        }
+                    }
+                );
                 var ticker = new kendo.diagram.Ticker();
                 ticker.addAdapter(new kendo.diagram.PositionAdapter(state));
+                ticker.onComplete(function () {
+                    state.linkMap.forEach(
+                        function (id) {
+                            var conn = diagram.getId(id);
+                            conn.visible(true);
+                        }
+                    );
+                });
                 ticker.play();
             }
             else {
@@ -75,23 +98,32 @@ kendo_module({
                         shape.position(bounds.topLeft());
                     }
                 });
+                state.linkMap.forEach(
+                    function (id, points) {
+                        var conn = diagram.getId(id);
+                        if (conn) {
+                            conn.points(points);
+                        }
+                    }
+                );
             }
-            // todo: when multipoint connections are ready this needs to be plugged in again
-            /*
-             * for (var i = 0; i < graph.links.length; i++) {
+
+            /*for (var i = 0; i < graph.links.length; i++) {
              var link = graph.links[i];
              var p = []
              if (link.points != null) {
              p.addRange(link.points);
              }
-             var sb = link.source.associatedShape.bounds();
+             */
+            /* var sb = link.source.associatedShape.bounds();
              p.prepend(new diagram.Point(sb.x, sb.y));
              var eb = link.target.associatedShape.bounds();
-             p.append(new diagram.Point(eb.x, eb.y));
+             p.append(new diagram.Point(eb.x, eb.y));*/
+            /*
 
-             //link.associatedConnection.points(p);
-             }
-             * */
+             link.associatedConnection.points(p);
+             }*/
+
         }
     });
 
@@ -153,18 +185,18 @@ kendo_module({
         },
         undo: function () {
             if (this._undoSource !== undefined) {
-                this.item.sourcePoint(this._undoSource, false);
+                this.item.source(this._undoSource, false);
             }
             if (this._undoTarget !== undefined) {
-                this.item.targetPoint(this._undoTarget, false);
+                this.item.target(this._undoTarget, false);
             }
         },
         redo: function () {
             if (this._redoSource !== undefined) {
-                this.item.sourcePoint(this._redoSource, false);
+                this.item.source(this._redoSource, false);
             }
             if (this._redoTarget !== undefined) {
-                this.item.targetPoint(this._redoTarget, false);
+                this.item.target(this._redoTarget, false);
             }
         }
     });
@@ -179,12 +211,12 @@ kendo_module({
             this.title = "Connection Editing";
         },
         undo: function () {
-            this.item.sourcePoint(this._undoSource, false);
-            this.item.targetPoint(this._undoTarget, false);
+            this.item.source(this._undoSource, false);
+            this.item.target(this._undoTarget, false);
         },
         redo: function () {
-            this.item.sourcePoint(this._redoSource, false);
-            this.item.targetPoint(this._redoTarget, false);
+            this.item.source(this._redoSource, false);
+            this.item.target(this._redoTarget, false);
         }
     });
 
@@ -223,19 +255,29 @@ kendo_module({
      * @type {*}
      */
     var TransformUnit = Class.extend({
-        init: function (shape, undoRectangle, redoRectangle) {
-            this.shape = shape;
-            this.undoRectangle = undoRectangle.clone();
-            this.redoRectangle = redoRectangle.clone();
+        init: function (shapes, undoStates) {
+            this.shapes = shapes;
+            this.undoStates = undoStates;
             this.title = "Transformation";
+            this.redoStates = [];
+            for (var i = 0; i < this.shapes.length; i++) {
+                var shape = this.shapes[i];
+                this.redoStates.push(shape.bounds());
+            }
         },
         undo: function () {
-            this.shape.bounds(this.undoRectangle);
-            this.shape.refresh();
+            for (var i = 0; i < this.shapes.length; i++) {
+                var shape = this.shapes[i];
+                shape.bounds(this.undoStates[i]);
+                shape.refresh();
+            }
         },
         redo: function () {
-            this.shape.bounds(this.redoRectangle);
-            this.shape.refresh();
+            for (var i = 0; i < this.shapes.length; i++) {
+                var shape = this.shapes[i];
+                shape.bounds(this.redoStates[i]);
+                shape.refresh();
+            }
         }
     });
 
@@ -283,17 +325,37 @@ kendo_module({
     });
 
     var RotateUnit = Class.extend({
-        init: function (shape, initialRotation, finalRotation) {
-            this.initial = initialRotation;
-            this.final = finalRotation;
-            this.shape = shape;
-            this.title = "Rotate Unit";
+        init: function (adorner, shapes, undoRotates, angle) {
+            this.shapes = shapes;
+            this.undoRotates = undoRotates;
+            this.title = "Rotation";
+            this.redoRotates = [];
+            this.redoAngle = adorner._angle;
+            this.undoAngle = angle;
+            this.adorner = adorner;
+            this.center = adorner._innerBounds.center();
+            for (var i = 0; i < this.shapes.length; i++) {
+                var shape = this.shapes[i];
+                this.redoRotates.push(shape.rotate().angle);
+            }
         },
         undo: function () {
-            this.shape.rotate(this.initial.angle, this.initial.center());
+            var i, shape;
+            for (i = 0; i < this.shapes.length; i++) {
+                shape = this.shapes[i];
+                shape.rotate(this.undoRotates[i], this.center);
+            }
+            this.adorner._angle = this.undoAngle;
+            this.adorner.refresh();
         },
         redo: function () {
-            this.shape.rotate(this.final.angle, this.final.center());
+            var i, shape;
+            for (i = 0; i < this.shapes.length; i++) {
+                shape = this.shapes[i];
+                shape.rotate(this.redoRotates[i], this.center);
+            }
+            this.adorner._angle = this.redoAngle;
+            this.adorner.refresh();
         }
     });
 
@@ -504,33 +566,40 @@ kendo_module({
             var diagram = this.toolService.diagram, hoveredItem = this.toolService.hoveredItem;
             if (hoveredItem) {
                 selectSingle(hoveredItem, meta);
-                if (hoveredItem && hoveredItem.isSelected) {
-                    this._selectedItems = diagram.select();
-                    this.handle = hoveredItem.adorner._hitTest(p);
-                    this._selectedItems.each(function (item) {
-                        item.adorner.start(p);
-                    });
+                if (hoveredItem.adorner) { //connection
+                    this.adorner = hoveredItem.adorner;
+                    this.handle = this.adorner._hitTest(p);
                 }
+            }
+            if (!this.handle) {
+                this.handle = diagram.resizingAdorner._hitTest(p);
+                if (this.handle) {
+                    this.adorner = diagram.resizingAdorner;
+                }
+            }
+            if (this.adorner) {
+                this.adorner.start(p);
             }
         },
         move: function (p) {
             var that = this;
-            if (this.handle) {
-                that._selectedItems.each(function (item) {
-                    item.adorner.move(that.handle, p);
-                });
+            if (this.adorner) {
+                this.adorner.move(that.handle, p);
+                return true;
             }
         },
         end: function () {
             var diagram = this.toolService.diagram, unit;
-            diagram.undoRedoService.begin();
-            this._selectedItems.each(function (item) {
-                unit = item.adorner.stop();
+            if (this.adorner) {
+                diagram.undoRedoService.begin();
+                unit = this.adorner.stop();
                 if (unit) {
                     diagram.undoRedoService.addCompositeItem(unit);
                 }
-            });
-            diagram.undoRedoService.commit();
+                diagram.undoRedoService.commit();
+            }
+            this.adorner = undefined;
+            this.handle = undefined;
         },
         getCursor: function (p) {
             return this.toolService.hoveredItem ? this.toolService.hoveredItem._getCursor(p) : Cursors.arrow;
@@ -542,7 +611,7 @@ kendo_module({
             this.toolService = toolService;
         },
         tryActivate: function () {
-            return this.toolService.hoveredItem === undefined;
+            return this.toolService.hoveredItem === undefined && this.toolService.hoveredAdorner === undefined;
         },
         start: function (p) {
             var diagram = this.toolService.diagram;
@@ -560,7 +629,7 @@ kendo_module({
                 diagram.select(false);
             }
             if (!rect.isEmpty()) {
-                diagram.select(true, { rect: rect });
+                diagram.select(rect);
             }
             diagram.selector.end();
         },
@@ -585,16 +654,16 @@ kendo_module({
             selectSingle(this.toolService.activeConnection, meta);
         },
         move: function (p) {
-            this.toolService.activeConnection.targetPoint(p);
+            this.toolService.activeConnection.target(p);
             return true;
         },
         end: function () {
             var nc = this.toolService.activeConnection, hi = this.toolService.hoveredItem, connector = this.toolService._hoveredConnector;
             if (connector && connector._c != nc.sourceConnector) {
-                nc.targetPoint(connector._c);
+                nc.target(connector._c);
             }
             else if (hi) {
-                nc.targetPoint(hi);
+                nc.target(hi);
             }
             this.toolService._connectionManipulation();
         },
@@ -610,7 +679,7 @@ kendo_module({
         },
         tryActivate: function () {
             var item = this.toolService.hoveredItem,
-                isActive = item && item.line; // means it is connection
+                isActive = item && item.path; // means it is connection
             if (isActive) {
                 this._c = item;
             }
@@ -756,7 +825,7 @@ kendo_module({
             meta = deepExtend({ ctrlKey: false, metaKey: false, altKey: false }, meta);
             if ((meta.ctrlKey || meta.metaKey) && !meta.altKey) {// ctrl or option
                 if (testKey(key, "a")) {// A: select all
-                    diagram.select(true);
+                    diagram.select("All");
                     return true;
                 }
                 else if (testKey(key, "z")) {// Z: undo
@@ -768,13 +837,20 @@ kendo_module({
                     return true;
                 }
                 else if (testKey(key, "c")) {
-                    diagram._copy();
+                    diagram.copy();
                 }
                 else if (testKey(key, "x")) {
-                    diagram._cut();
+                    diagram.cut();
                 }
                 else if (testKey(key, "v")) {
-                    diagram._paste();
+                    diagram.paste();
+                }
+                else if (testKey(key, "l")) {
+                    diagram.layout();
+                }
+                else if (testKey(key, "d")) {
+                    diagram.copy();
+                    diagram.paste();
                 }
             }
             else if (key === 46 || key === 8) {// del: deletion
@@ -818,7 +894,9 @@ kendo_module({
             }
         },
         _updateCursor: function (p) {
-            $(this.diagram.canvas.native).css({cursor: this.activeTool ? this.activeTool.getCursor(p) : (this.hoveredItem ? this.hoveredItem._getCursor(p) : Cursors.arrow)});
+            var cursor = this.activeTool ? this.activeTool.getCursor(p) : (this.hoveredItem ? this.hoveredItem._getCursor(p) : (this.hoveredAdorner ? this.hoveredAdorner._getCursor(p) : Cursors.arrow));
+
+            $(this.diagram.canvas.native).css({cursor: cursor});
         },
         _connectionManipulation: function (connection, disabledShape, isNew) {
             this.activeConnection = connection;
@@ -839,6 +917,14 @@ kendo_module({
                 if (this.hoveredItem) {
                     this.hoveredItem._hover(true);
                 }
+            }
+
+            var adornerHandle = this.diagram.resizingAdorner._hitTest(p);
+            if (adornerHandle) {
+                this.hoveredAdorner = this.diagram.resizingAdorner; // Shape, connection or connector
+            }
+            else {
+                this.hoveredAdorner = undefined;
             }
         },
         _removeHover: function () {
@@ -887,6 +973,181 @@ kendo_module({
             this.editable.visible(false);
             this.editable = this.editShape = undefined;
         }
+    });
+
+// Routing =========================================
+
+    /**
+     * Base class for connection routers.
+     */
+    var ConnectionRouterBase = kendo.Class.extend({
+        init: function () {
+        }
+        /*route: function (connection) {
+         },
+         hitTest: function (p) {
+
+         },
+         getBounds: function () {
+
+         }*/
+    });
+
+    /**
+     * Base class for polyline and cascading routing.
+     */
+    var LinearConnectionRouter = ConnectionRouterBase.extend({
+        init: function (connection) {
+            var that = this;
+            ConnectionRouterBase.fn.init.call(that);
+            this.connection = connection;
+        },
+        /**
+         * Hit testing for polyline paths.
+         */
+        hitTest: function (p) {
+            var rec = this.getBounds().inflate(10);
+            if (!rec.contains(p)) {
+                return false;
+            }
+            return kendo.diagram.Geometry.distanceToPolyline(p, this.connection.allPoints()) < HITTESTDISTANCE;
+        },
+
+        /**
+         * Bounds of a polyline.
+         * @returns {kendo.diagram.Rect}
+         */
+        getBounds: function () {
+            var points = this.connection.allPoints(),
+                s = points[0],
+                e = points[points.length - 1],
+                right = Math.max(s.x, e.x),
+                left = Math.min(s.x, e.x),
+                top = Math.min(s.y, e.y),
+                bottom = Math.max(s.y, e.y);
+
+            for (var i = 1; i < points.length - 1; ++i) {
+                right = Math.max(right, points[i].x);
+                left = Math.min(left, points[i].x);
+                top = Math.min(top, points[i].y);
+                bottom = Math.max(bottom, points[i].y);
+            }
+
+            return new Rect(left, top, right - left, bottom - top);
+        }
+    });
+
+    /**
+     * A simple poly-linear routing which does not alter the intermediate points.
+     * Does hold the underlying hit, bounds....logic.
+     * @type {*|Object|void|extend|Zepto.extend|b.extend}
+     */
+    var PolylineRouter = LinearConnectionRouter.extend({
+        init: function (connection) {
+            var that = this;
+            LinearConnectionRouter.fn.init.call(that);
+            this.connection = connection;
+        },
+        route: function () {
+            // just keep the points as is
+        }
+    });
+
+    var CascadingRouter = LinearConnectionRouter.extend({
+        init: function (connection) {
+            var that = this;
+            LinearConnectionRouter.fn.init.call(that);
+            this.connection = connection;
+        },
+        route: function () {
+            var link = this.connection;
+            var start = this.connection.sourcePoint();
+            var end = this.connection.targetPoint(),
+                points = [start, start, end, end],
+                deltaX = end.x - start.x, // can be negative
+                deltaY = end.y - start.y,
+                l = points.length,
+                shiftX,
+                shiftY,
+                sourceConnectorName = null,
+                targetConnectorName = null;
+
+            if (Utils.isDefined(link._resolvedSourceConnector)) {
+                sourceConnectorName = link._resolvedSourceConnector.options.name;
+            }
+            if (Utils.isDefined(link._resolvedTargetConnector)) {
+                targetConnectorName = link._resolvedTargetConnector.options.name;
+            }
+            function startHorizontal() {
+                if (sourceConnectorName !== null) {
+                    if (sourceConnectorName === RIGHT || sourceConnectorName === LEFT) {
+                        return true;
+                    }
+                    if (sourceConnectorName === TOP || sourceConnectorName === BOTTOM) {
+                        return false;
+                    }
+                }
+                //fallback for custom connectors
+                return Math.abs(start.x - end.x) > Math.abs(start.y - end.y);
+            }
+
+            if (sourceConnectorName !== null && targetConnectorName !== null && DEFAULTCONNECTORNAMES.contains(sourceConnectorName) && DEFAULTCONNECTORNAMES.contains(targetConnectorName)) {
+                // custom routing for the default connectors
+                if (sourceConnectorName === TOP || sourceConnectorName == BOTTOM) {
+                    if (targetConnectorName == TOP || targetConnectorName == BOTTOM) {
+                        this.connection.points([new Point(start.x, start.y + deltaY / 2), new Point(end.x, start.y + deltaY / 2)]);
+                    } else {
+                        this.connection.points([new Point(start.x, start.y + deltaY)]);
+                    }
+                } else { // LEFT or RIGHT
+                    if (targetConnectorName == LEFT || targetConnectorName == RIGHT) {
+                        this.connection.points([new Point(start.x + deltaX / 2, start.y), new Point(start.x + deltaX / 2, start.y + deltaY)]);
+                    } else {
+                        this.connection.points([new Point(end.x, start.y)]);
+                    }
+                }
+
+            }
+            else { // general case for custom and floating connectors
+                this.connection.cascadeStartHorizontal = startHorizontal(this.connection);
+
+                // note that this is more generic than needed for only two intermediate points.
+                for (var k = 1; k < l - 1; ++k) {
+                    if (link.cascadeStartHorizontal) {
+                        if (k % 2 !== 0) {
+                            shiftX = deltaX / (l / 2);
+                            shiftY = 0;
+                        }
+                        else {
+                            shiftX = 0;
+                            shiftY = deltaY / ((l - 1) / 2);
+                        }
+                    }
+                    else {
+                        if (k % 2 !== 0) {
+                            shiftX = 0;
+                            shiftY = deltaY / (l / 2);
+                        }
+                        else {
+                            shiftX = deltaX / ((l - 1) / 2);
+                            shiftY = 0;
+                        }
+                    }
+                    points[k] = new Point(points[k - 1].x + shiftX, points[k - 1].y + shiftY);
+                }
+                // need to fix the wrong 1.5 factor of the last intermediate point
+                k--;
+                if ((link.cascadeStartHorizontal && (k % 2 !== 0)) || (!link.cascadeStartHorizontal && (k % 2 === 0))) {
+                    points[l - 2] = new Point(points[l - 1].x, points[l - 2].y);
+                }
+                else {
+                    points[l - 2] = new Point(points[l - 2].x, points[l - 1].y);
+                }
+
+                this.connection.points([points[1], points[2]]);
+            }
+        }
+
     });
 
 // Adorners =========================================
@@ -954,23 +1215,24 @@ kendo_module({
         move: function (handle, p) {
             switch (handle) {
                 case -1:
-                    this.connection.sourcePoint(p);
+                    this.connection.source(p);
                     break;
                 case 1:
-                    this.connection.targetPoint(p);
+                    this.connection.target(p);
                     break;
                 default:
                     var delta = p.minus(this.startPoint);
                     this.startPoint = p;
                     if (!this.connection.sourceConnector) {
-                        this.connection.sourcePoint(this.connection.sourcePoint().plus(delta));
+                        this.connection.source(this.connection.sourcePoint().plus(delta));
                     }
                     if (!this.connection.targetConnector) {
-                        this.connection.targetPoint(this.connection.targetPoint().plus(delta));
+                        this.connection.target(this.connection.targetPoint().plus(delta));
                     }
                     break;
             }
             this.refresh();
+            return true;
         },
         stop: function (p) {
             var ts = this.diagram.toolService, item = ts.hoveredItem, target;
@@ -985,10 +1247,10 @@ kendo_module({
             if (this.handle !== undefined) {
                 switch (this.handle) {
                     case -1:
-                        this.connection.sourcePoint(target);
+                        this.connection.source(target);
                         break;
                     case 1:
-                        this.connection.targetPoint(target);
+                        this.connection.target(target);
                         break;
                 }
             }
@@ -1051,12 +1313,12 @@ kendo_module({
     });
 
     var ResizingAdorner = AdornerBase.extend({
-        init: function (shape, options) {
+        init: function (diagram, options) {
             var that = this;
-            that.shape = shape;
-            AdornerBase.fn.init.call(that, that.shape.diagram, options);
-            that.isManipulating = false;
+            AdornerBase.fn.init.call(that, diagram, options);
+            that._manipulating = false;
             that.map = [];
+            this.shapes = [];
             if (that.options.resizable) {
                 for (var x = -1; x <= 1; x++) {
                     for (var y = -1; y <= 1; y++) {
@@ -1076,12 +1338,22 @@ kendo_module({
                 that.rotationThumb = new Path(that.options.rotationThumb);
                 that.visual.append(that.rotationThumb);
             }
-            that.shape.diagram.bind("boundsChange", function () {
-                that.refresh();
+            that.diagram.bind("select", function (e) {
+                that._initialize(e.items);
             });
-            that.shape.diagram.bind("rotate", function () {
+
+            that._refreshHandler = function () {
                 that.refresh();
-            });
+            };
+
+            that._rotatedHandler = function () {
+                if (that.shapes.length == 1) {
+                    that._angle = that.shapes[0].rotate().angle;
+                }
+                that.refresh();
+            };
+
+            that.diagram.bind("boundsChange", that._refreshHandler).bind("rotate", that._rotatedHandler);
             that.refresh();
         },
         options: {
@@ -1108,7 +1380,8 @@ kendo_module({
         },
         bounds: function (value) {
             if (value) {
-                this._bounds = value;
+                this._innerBounds = value.clone();
+                this._bounds = this.diagram.transformRect(value).inflate(this.options.offset, this.options.offset);
             }
             else {
                 return this._bounds;
@@ -1117,10 +1390,10 @@ kendo_module({
         _hitTest: function (p) {
             var tp = this.diagram.transformPoint(p),
                 i, hit, handleBounds, handlesCount = this.map.length, handle;
-            if (this._rotateAngle) {
-                tp = tp.clone().rotate(this._bounds.center(), this._rotateAngle);
+            if (this._angle) {
+                tp = tp.clone().rotate(this._bounds.center(), this._angle);
             }
-            if (this.options.rotatable) {
+            if (this.options.rotatable && this._rotationThumbBounds) {
                 if (this._rotationThumbBounds.contains(tp)) {
                     return new Point(-1, -2);
                 }
@@ -1166,7 +1439,7 @@ kendo_module({
         _getCursor: function (point) {
             var hit = this._hitTest(point);
             if (hit && (hit.x >= -1) && (hit.x <= 1) && (hit.y >= -1) && (hit.y <= 1) && this.options.resizable) {
-                var angle = this.shape.rotate().angle;
+                var angle = this._angle;
                 if (angle) {
                     angle = 360 - angle;
                     hit.rotate(new Point(0, 0), angle);
@@ -1197,94 +1470,159 @@ kendo_module({
                     return "w-resize";
                 }
             }
-            return this.isManipulating ? Cursors.move : Cursors.select;
+            return this._manipulating ? Cursors.move : Cursors.select;
+        },
+        _initialize: function (items) {
+            var that = this, i, item;
+            that.shapes = [];
+            for (i = 0; i < items.length; i++) {
+                item = items[i];
+                if (item instanceof diagram.Shape) {
+                    that.shapes.push(item);
+                    item._rotationOffset = new Point();
+                }
+            }
+
+            that._angle = that.shapes.length == 1 ? that.shapes[0].rotate().angle : 0;
+            that._startAngle = that._angle;
+            that._rotates();
+            that._positions();
+            that.refresh();
+        },
+        _rotates: function () {
+            var that = this, i, shape;
+            that.initialRotates = [];
+            for (i = 0; i < that.shapes.length; i++) {
+                shape = that.shapes[i];
+                that.initialRotates.push(shape.rotate().angle);
+            }
+        },
+        _positions: function () {
+            var that = this, i, shape;
+            that.initialStates = [];
+            for (i = 0; i < that.shapes.length; i++) {
+                shape = that.shapes[i];
+                that.initialStates.push(shape.bounds());
+            }
         },
         start: function (p) {
-            this.initialState = this.shape.bounds();
-            this.initialRotate = this.shape.rotate();
+            this._sp = p;
             this._cp = p;
-            this.isManipulating = true;
+            this._manipulating = true;
+            this.shapeStates = [];
+            for (var i = 0; i < this.shapes.length; i++) {
+                var shape = this.shapes[i];
+                this.shapeStates.push(shape.bounds());
+            }
+            this._initialAngle = this._angle;
         },
         move: function (handle, p) {
-            var tp = this.diagram.transformPoint(p), delta = p.minus(this._cp), dragging,
-                dtl = new Point(), dbr = new Point(), bounds = this.shape.bounds(), tl, br,
-                angle = this.shape.rotate().angle, center;
+            var delta = p.minus(this._cp), dragging,
+                dtl = new Point(), dbr = new Point(), bounds,
+                center, shape, i, angle;
             if (handle.y === -2 && handle.x === -1) {
-                angle = Math.findAngle(this.diagram.getBoundingBox(this.diagram.select()).center(), tp);
-                this.shape.rotate(angle);
+                center = this._innerBounds.center();
+                this._angle = Math.findAngle(center, p);
+                for (i = 0; i < this.shapes.length; i++) {
+                    shape = this.shapes[i];
+                    angle = (this._angle + this.initialRotates[i] - this._startAngle) % 360;
+                    shape.rotate(angle, center);
+                    this._rotated = true;
+                }
             } else {
                 if (handle.x === 0 && handle.y === 0) {
                     dbr = dtl = delta; // dragging
                     dragging = true;
                 }
                 else {
-                    if (angle) { // adjust the delta so that resizers resize in the correct direction after rotation.
-                        delta.rotate(new Point(0, 0), angle);
+                    if (this._angle) { // adjust the delta so that resizers resize in the correct direction after rotation.
+                        delta.rotate(new Point(0, 0), this._angle);
                     }
-                    if (handle.x === -1) {
+                    if (handle.x == -1) {
                         dtl.x = delta.x;
                     }
-                    else if (handle.x === 1) {
+                    else if (handle.x == 1) {
                         dbr.x = delta.x;
                     }
-                    if (handle.y === -1) {
+                    if (handle.y == -1) {
                         dtl.y = delta.y;
                     }
-                    else if (handle.y === 1) {
+                    else if (handle.y == 1) {
                         dbr.y = delta.y;
                     }
                 }
-                tl = bounds.topLeft().plus(dtl);
-                br = bounds.bottomRight().plus(dbr);
-                bounds = Rect.fromPoints(tl, br);
-                if (br.x - tl.x > 0 && br.y - tl.y > 0 && bounds.width >= this.shape.options.minWidth && bounds.height >= this.shape.options.minHeight) {
-                    this._cp = p;
-                    if (angle && !dragging) {
-                        center = bounds.center();
-                        center.rotate(this.shape._bounds.center(), 360 - angle);
-                        bounds = new Rect(center.x - bounds.width / 2, center.y - bounds.height / 2, bounds.width, bounds.height);
-                    }
-                    this.shape.bounds(bounds);
-                    if (angle && !dragging) {
-                        this.shape.rotate(angle);
+                for (i = 0; i < this.shapes.length; i++) {
+                    shape = this.shapes[i];
+                    bounds = shape.bounds();
+                    var newBounds = this._displaceBounds(bounds, dtl, dbr, dragging);
+                    if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) {
+                        shape.bounds(newBounds);
+                        shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
                     }
                 }
+                this._positions();
             }
+
+            this._cp = p;
+        },
+        _displaceBounds: function (bounds, dtl, dbr, dragging) {
+            var tl = bounds.topLeft().plus(dtl),
+                br = bounds.bottomRight().plus(dbr),
+                newBounds = Rect.fromPoints(tl, br),
+                newCenter;
+            if (!dragging) {
+                newCenter = newBounds.center();
+                newCenter.rotate(bounds.center(), 360 - this._angle);
+                newBounds = new Rect(newCenter.x - newBounds.width / 2, newCenter.y - newBounds.height / 2, newBounds.width, newBounds.height);
+            }
+            return newBounds;
         },
         stop: function () {
-            var r1 = this.initialState,
-                r2 = this.shape.bounds(),
-                unit;
-            if (!r1.equals(r2)) {
-                unit = new TransformUnit(this.shape, r1, r2);
+            var unit;
+            if (this._cp != this._sp) {
+                if (this._rotated) {
+                    unit = new RotateUnit(this, this.shapes, this.initialRotates, this._initialAngle);
+                }
+                else {
+                    unit = new TransformUnit(this.shapes, this.shapeStates);
+                }
             }
-            else if (this.initialRotate.angle != this.shape.rotate()) {
-                unit = new RotateUnit(this.shape, this.initialRotate, this.shape.rotate());
-            }
-            this.isManipulating = false;
+
+            this._manipulating = undefined;
+            this._rotated = undefined;
             return unit;
         },
+        _hover: function () {
+        },
         refresh: function () {
-            var sb = this.shape.bounds(),
-                innerBounds = this.shape.visualBounds().clone(),
-                that = this, b;
-            this.bounds(innerBounds.inflate(this.options.offset, this.options.offset));
-            this.visual.position(this._bounds.topLeft());
-            $.each(this.map, function () {
-                b = that._getHandleBounds(new Point(this.x, this.y));
-                this.visual.position(b.topLeft());
-            });
-            this.text.position(new Point(0, this._bounds.height + 20));
-            this.text.content(kendo.format("x: {0}, y: {1}, w: {2}, h: {3}", Math.round(sb.x), Math.round(sb.y), Math.round(sb.width), Math.round(sb.height)));
-            this.visual.position(this._bounds.topLeft());
-            this._rotateAngle = this.shape.rotate().angle;
-            if (Utils.isDefined(this._rotateAngle)) {
-                this.visual.rotate(this._rotateAngle, new Point(this._bounds.width / 2, this._bounds.height / 2));
+            var that = this, b,
+                bounds = this.shapes.length == 1 ? this.shapes[0].bounds().clone() : this.diagram.getOriginBoundingBox(this.shapes);
+            this.bounds(bounds);
+
+            bounds = this.bounds();
+            if (this.shapes.length > 0) {
+                this.visual.visible(true);
+                this.visual.position(bounds.topLeft());
+                $.each(this.map, function () {
+                    b = that._getHandleBounds(new Point(this.x, this.y));
+                    this.visual.position(b.topLeft());
+                });
+                this.text.position(new Point(0, bounds.height + 20));
+                this.text.content(kendo.format("x: {0}, y: {1}, w: {2}, h: {3} a: {4}",
+                    Math.round(bounds.x), Math.round(bounds.y), Math.round(bounds.width), Math.round(bounds.height), Math.round(this._angle)
+                ));
+                this.visual.position(bounds.topLeft());
+
+                var center = new Point(bounds.width / 2, bounds.height / 2);
+                this.visual.rotate(this._angle, center);
+                this.rect.redraw({width: bounds.width, height: bounds.height});
+                if (this.rotationThumb) {
+                    this._rotationThumbBounds = new Rect(bounds.center().x, bounds.y + this.options.rotationThumb.y, 0, 0).inflate(this.options.rotationThumb.thumbWidth);
+                    this.rotationThumb.redraw({x: bounds.width / 2 - this.options.rotationThumb.thumbWidth / 2});
+                }
             }
-            this.rect.redraw({width: innerBounds.width, height: innerBounds.height});
-            if (this.rotationThumb) {
-                this._rotationThumbBounds = new Rect(this._bounds.center().x, this._bounds.y + this.options.rotationThumb.y, 0, 0).inflate(this.options.rotationThumb.thumbWidth);
-                this.rotationThumb.redraw({x: this._bounds.width / 2 - this.options.rotationThumb.thumbWidth / 2});
+            else {
+                this.visual.visible(false);
             }
         }
     });
@@ -1371,6 +1709,9 @@ kendo_module({
         LayoutUndoUnit: LayoutUndoUnit,
         ConnectionEditUnit: ConnectionEditUnit,
         ToFrontUnit: ToFrontUnit,
-        ToBackUnit: ToBackUnit
+        ToBackUnit: ToBackUnit,
+        ConnectionRouterBase: ConnectionRouterBase,
+        PolylineRouter: PolylineRouter,
+        CascadingRouter: CascadingRouter
     });
 })(window.kendo.jQuery);

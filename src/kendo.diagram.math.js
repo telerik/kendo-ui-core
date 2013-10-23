@@ -101,7 +101,7 @@ kendo_module({
                 from = temp;
             }
             var r1 = new Rect(from.x, from.y).inflate(HITTESTAREA, HITTESTAREA),
-                r2 = new Rect(to.x, to.y).inflate(HITTESTAREA, HITTESTAREA), o1,u1;
+                r2 = new Rect(to.x, to.y).inflate(HITTESTAREA, HITTESTAREA), o1, u1;
             if (r1.union(r2).contains(this)) {
                 if (from.x === to.x || from.y === to.y) {
                     return true;
@@ -120,6 +120,36 @@ kendo_module({
         }
     });
 
+    deepExtend(Point, {
+        parse: function (str) {
+            var tempStr = str.slice(1, str.length - 1),
+                xy = tempStr.split(","),
+                x = parseInt(xy[0], 10),
+                y = parseInt(xy[1], 10);
+            if (!isNaN(x) && !isNaN(y)) {
+                return new Point(x, y);
+            }
+        }
+    });
+
+    /**
+     * Structure combining a Point with two additional points representing the handles or tangents attached to the first point.
+     * If the additional points are null or equal to the first point the path will be sharp.
+     * Left and right correspond to the direction of the underlying path.
+     */
+    var PathDefiner = Class.extend(
+        {
+            init: function (p, left, right) {
+                this.point = p;
+                this.left = left;
+                this.right = right;
+            }
+        }
+    );
+
+    /**
+     * Defines a rectangular region.
+     */
     var Rect = Class.extend({
         init: function (x, y, width, height) {
             this.x = x || 0;
@@ -193,6 +223,21 @@ kendo_module({
         },
         equals: function (rect) {
             return this.x === rect.x && this.y === rect.y && this.width === rect.width && this.height === rect.height;
+        },
+        rotatedBounds: function (angle) {
+            var rect = this.clone(),
+                c = rect.center(),
+                br = rect.bottomRight().rotate(c, 360 - angle),
+                tl = rect.topLeft().rotate(c, 360 - angle),
+                tr = rect.topRight().rotate(c, 360 - angle),
+                bl = rect.bottomLeft().rotate(c, 360 - angle);
+
+            rect.x = Math.min(br.x, tl.x, tr.x, bl.x);
+            rect.y = Math.min(br.y, tl.y, tr.y, bl.y);
+            rect.width = Math.max(br.x, tl.x, tr.x, bl.x) - rect.x;
+            rect.height = Math.max(br.y, tl.y, tr.y, bl.y) - rect.y;
+
+            return rect;
         },
         toString: function () {
             return this.x + " " + this.y + " " + this.width + " " + this.height;
@@ -613,6 +658,73 @@ kendo_module({
         }
         return result;
     }
+
+    var Geometry = {
+
+        /**
+         * Returns the squared distance to the line defined by the two given Points.
+         * @param p An arbitrary Point.
+         * @param a An endpoint of the line or segment.
+         * @param b The complementary endpoint of the line or segment.
+         */
+        _distanceToLineSquared: function (p, a, b) {
+            function d2(pt1, pt2) {
+                return (pt1.x - pt2.x) * (pt1.x - pt2.x) + (pt1.y - pt2.y) * (pt1.y - pt2.y);
+            }
+
+            if (a === b) { // returns the distance of p to a
+                return d2(p, a);
+            }
+
+            var vx = b.x - a.x,
+                vy = b.y - a.y,
+                dot = (p.x - a.x) * vx + (p.y - a.y) * vy;
+            if (dot < 0) {
+                return d2(a, p); // sits on side of a
+            }
+
+            dot = (b.x - p.x) * vx + (b.y - p.y) * vy;
+            if (dot < 0) {
+                return d2(b, p); // sits on side of b
+            }
+            // regular case, use crossproduct to get the sine out
+            dot = (b.x - p.x) * vy - (b.y - p.y) * vx;
+            return dot * dot / (vx * vx + vy * vy);
+        },
+
+        /**
+         * Returns the distance to the line defined by the two given Points.
+         * @param p An arbitrary Point.
+         * @param a An endpoint of the line or segment.
+         * @param b The complementary endpoint of the line or segment.
+         */
+        distanceToLine: function (p, a, b) {
+            return Math.sqrt(this._distanceToLineSquared(p, a, b));
+        },
+
+        /**
+         * Returns the distance of the given points to the polyline defined by the points.
+         * @param p An arbitrary point.
+         * @param points The points defining the polyline.
+         * @returns {Number}
+         */
+        distanceToPolyline: function (p, points) {
+            var minimum = Number.MAX_VALUE;
+            if (Utils.isUndefined(points) || points.length === 0) {
+                return Number.MAX_VALUE;
+            }
+            for (var s = 0; s < points.length - 1; s++) {
+                var p1 = points[s];
+                var p2 = points[s + 1];
+
+                var d = this._distanceToLineSquared(p, p1, p2);
+                if (d < minimum) {
+                    minimum = d;
+                }
+            }
+            return Math.sqrt(minimum);
+        }
+    };
 
     /*---------------The HashTable structure--------------------------------*/
 
@@ -2899,6 +3011,7 @@ kendo_module({
 
         Point: Point,
         Intersect: Intersect,
+        Geometry: Geometry,
         Rect: Rect,
         Size: Size,
         RectAlign: RectAlign,
@@ -2912,6 +3025,7 @@ kendo_module({
         Set: Set,
         Node: Node,
         Link: Link,
-        Graph: Graph
+        Graph: Graph,
+        PathDefiner: PathDefiner
     });
 })(window.kendo.jQuery);

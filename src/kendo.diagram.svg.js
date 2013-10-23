@@ -101,6 +101,19 @@ kendo_module({
         }
     });
 
+    Rotation.create = function (rotation) {
+        return new Rotation(rotation.angle, rotation.x, rotation.y);
+    };
+
+    Rotation.parse = function (str) {
+        var values = str.slice(1, str.length - 1).split(","),
+            angle = values[0],
+            x = values[1],
+            y = values[2];
+        var rotation = new Rotation(angle, x, y);
+        return rotation;
+    };
+
     var CompositeTransform = Class.extend({
         init: function (x, y, scaleX, scaleY, angle, center) {
             this.translate = new Translation(x, y);
@@ -159,6 +172,9 @@ kendo_module({
             }
         },
         setAtr: function (atr, prop) {
+            if (Utils.isUndefined(prop) || Utils.isUndefined(this.options[prop])) {
+                return;
+            }
             if (this.options[prop] !== undefined) {
                 this.native.setAttribute(atr, this.options[prop]);
             }
@@ -222,9 +238,6 @@ kendo_module({
         init: function (native, options) {
             var that = this;
             Element.fn.init.call(that, native, options);
-            if (this.options.background !== undefined) {
-                this.background(this.options.background);
-            }
         },
         options: {
             stroke: "gray",
@@ -233,14 +246,10 @@ kendo_module({
             strokeDashArray: "none"
         },
         background: function (value) {
-            if (value != "none") {
-                var color = new dataviz.Color(value);
-                this._bg = color.toHex();
+            if (value !== undefined) {
+                this.options.background = value;
             }
-            else {
-                this._bg = value;
-            }
-            this.native.setAttribute("fill", this._bg);
+            this._background(this.options.background);
         },
         redraw: function (options) {
             var that = this;
@@ -250,9 +259,24 @@ kendo_module({
             that.setAtr("stroke-dasharray", "strokeDashArray");
             that.setAtr("stroke-width", "strokeWidth");
             that.setAtr("stroke-thickness", "strokeThickness");
+            that.background();
         },
         _hover: function (value) {
-            this.background(value ? this.options.hoveredBackground : this.options.background);
+            this._background(value ? this.options.hoveredBackground : this.options.background);
+        },
+        _background: function (value) {
+            this.native.setAttribute("fill", this._getColor(value));
+        },
+        _getColor: function (value) {
+            var bg;
+            if (value != "none") {
+                var color = new dataviz.Color(value);
+                bg = color.toHex();
+            }
+            else {
+                bg = value;
+            }
+            return bg;
         }
     });
 
@@ -444,6 +468,14 @@ kendo_module({
             var that = this;
             VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "path"), options);
         },
+        data: function (value) {
+            if (value) {
+                this.options.data = value;
+            }
+            else {
+                return this.options.data;
+            }
+        },
         size: function () {
             var that = this;
             var scaleX = that.options.width / that._originWidth,
@@ -462,6 +494,23 @@ kendo_module({
             VisualBase.fn.redraw.call(that, options);
             that.size();
             that.setAtr("d", "data");
+            if (this.options.startCap && this.options.startCap !== Markers.none) {
+                this.native.setAttribute("marker-start", "url(#" + this.options.startCap + ")");
+            }
+            else {
+                this.native.removeAttribute("marker-start");
+            }
+            if (this.options.endCap && this.options.endCap !== Markers.none) {
+                this.native.setAttribute("marker-end", "url(#" + this.options.endCap + ")");
+            }
+            else {
+                this.native.removeAttribute("marker-end");
+            }
+
+            // SVG markers are not refreshed after the line has changed. This fixes the problem.
+            if (this.native.parentNode && navigator.appVersion.indexOf("MSIE 10") != -1) {
+                this.native.parentNode.insertBefore(this.native, this.native);
+            }
         }
     });
 
@@ -608,7 +657,17 @@ kendo_module({
             visual.canvas = this.canvas;
         },
         remove: function (visual) {
-            this.native.removeChild(visual.native);
+            if (visual.native) {
+                this.native.removeChild(visual.native);
+            }
+            else {
+                this.native.removeChild(visual);
+            }
+        },
+        clear: function () {
+            while (this.native.lastChild) {
+                this.native.removeChild(this.native.lastChild);
+            }
         },
         toFront: function (visuals) {
             var visual, i, n = this.native;

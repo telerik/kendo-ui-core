@@ -159,7 +159,10 @@ kendo_module({
                 startY = this.options.totalMargin.height,
                 x = startX,
                 y = startY,
+                i,
+                resultLinkSet = [],
                 resultNodeSet = [];
+
             while (components.length > 0) {
                 if (x >= maxWidth) {
                     // start a new row
@@ -170,8 +173,11 @@ kendo_module({
                 }
                 var component = components.pop();
                 this.moveToOffset(component, new Point(x, y));
-                for (var i = 0; i < component.nodes.length; i++) {
+                for (i = 0; i < component.nodes.length; i++) {
                     resultNodeSet.push(component.nodes[i]); // to be returned in the end
+                }
+                for (i = 0; i < component.links.length; i++) {
+                    resultLinkSet.push(component.links[i]);
                 }
                 var boundingRect = component.bounds;
                 var currentHeight = boundingRect.height;
@@ -189,7 +195,10 @@ kendo_module({
                 x += currentWidth + offsetX;
             }
 
-            return resultNodeSet;
+            return {
+                nodes: resultNodeSet,
+                links: resultLinkSet
+            };
         },
 
         moveToOffset: function (component, p) {
@@ -680,7 +689,7 @@ kendo_module({
                     continue;
                 }
 
-                if (sourceNode===null || sinkNode===null) {
+                if (sourceNode === null || sinkNode === null) {
                     throw "A shape was not mapped to a node.";
                 }
                 if (this.options.ignoreContainers) {
@@ -2214,7 +2223,9 @@ kendo_module({
 
             // re-reverse the links which were switched earlier
             reversedEdges.forEach(function (e) {
-                if(e.points) {e.points.reverse();}
+                if (e.points) {
+                    e.points.reverse();
+                }
             });
         },
 
@@ -3293,8 +3304,16 @@ kendo_module({
                     // reset dummification flag
                     link.depthOfDumminess = 0;
 
-                    // set link points
-                    link.points = points;
+                    // note that we only need the intermediate points, floating links have been dropped in the analysis
+                    if (points.length > 2) {
+                        // first and last are the endpoints
+                        points.splice(0, 1);
+                        points.splice(points.length - 1);
+                        link.points = points;
+                    }
+                    else {
+                        link.points = [];
+                    }
 
                     // we are not going to delete the dummy elements;
                     // they won't be needed anymore anyway.
@@ -3803,19 +3822,27 @@ kendo_module({
             }
             this.diagram = diagram;
             this.nodeMap = new Dictionary();
+            this.linkMap = new Dictionary();
             this.capture(graphOrNodes ? graphOrNodes : diagram);
         },
 
         /**
          * Will capture either
-         * - the state of the shapes in the diagram
-         * - the bounds of the nodes contained in the Graph
+         * - the state of the shapes and the intermediate points of the connections in the diagram
+         * - the bounds of the nodes contained in the Graph together with the intermediate points of the links in the Graph
          * - the bounds of the nodes in the Array<Node>
+         * - the links points and node bounds in the literal object
          * @param diagramOrGraphOrNodes
          */
         capture: function (diagramOrGraphOrNodes) {
-            var node, nodes, shape, i;
-            // todo: to be extended when multipoint connections are inline
+            var node,
+                nodes,
+                shape,
+                i,
+                conn,
+                link,
+                links;
+
             if (diagramOrGraphOrNodes instanceof kendo.diagram.Graph) {
 
                 for (i = 0; i < diagramOrGraphOrNodes.nodes.length; i++) {
@@ -3823,6 +3850,11 @@ kendo_module({
                     shape = node.associatedShape;
                     //shape.bounds(new Rect(node.x, node.y, node.width, node.height));
                     this.nodeMap.set(shape.visual.native.id, new Rect(node.x, node.y, node.width, node.height));
+                }
+                for (i = 0; i < diagramOrGraphOrNodes.links.length; i++) {
+                    link = diagramOrGraphOrNodes.links[i];
+                    conn = link.associatedConnection;
+                    this.linkMap.set(conn.visual.native.id, link.points());
                 }
             }
             else if (diagramOrGraphOrNodes instanceof Array) {
@@ -3835,11 +3867,34 @@ kendo_module({
                     }
                 }
             }
-            else {
+            else if (diagramOrGraphOrNodes.hasOwnProperty("links") && diagramOrGraphOrNodes.hasOwnProperty("nodes")) {
+                nodes = diagramOrGraphOrNodes.nodes;
+                links = diagramOrGraphOrNodes.links;
+                for (i = 0; i < nodes.length; i++) {
+                    node = nodes[i];
+                    shape = node.associatedShape;
+                    if (shape) {
+                        this.nodeMap.set(shape.visual.native.id, new Rect(node.x, node.y, node.width, node.height));
+                    }
+                }
+                for (i = 0; i < links.length; i++) {
+                    link = links[i];
+                    conn = link.associatedConnection;
+                    if (conn) {
+                        this.linkMap.set(conn.visual.native.id, link.points);
+                    }
+                }
+            }
+            else { // capture the diagram
                 var shapes = this.diagram.shapes;
+                var connections = this.diagram.connections;
                 for (i = 0; i < shapes.length; i++) {
                     shape = shapes[i];
                     this.nodeMap.set(shape.visual.native.id, shape.bounds());
+                }
+                for (i = 0; i < connections.length; i++) {
+                    conn = connections[i];
+                    this.linkMap.set(conn.visual.native.id, conn.points());
                 }
             }
         }

@@ -1,7 +1,7 @@
 var diagram = kendo.diagram,
     Range = kendo.diagram.Range,
-    Utils = kendo.diagram.Utils;
-
+    Utils = kendo.diagram.Utils,
+    Point = kendo.diagram.Point;
 
 /*-----------Utilities tests------------------------------------*/
 QUnit.module("Utilities tests");
@@ -287,4 +287,12 @@ test("Range test", function () {
         },
         'Should throw a separation error.'
     );
+});
+
+test('Serialize points', function () {
+    var points = [new Point(1, 2), new Point(3, 4), new Point(5, 6)];
+    var s = Utils.serializePoints(points);
+    var ds = Utils.deserializePoints(s);
+    equal(ds.length, 3);
+    ok(ds[0].x===1 && ds[0].y===2 && ds[1].x === 3 && ds[1].y === 4 && ds[2].x === 5 && ds[2].y === 6);
 });
