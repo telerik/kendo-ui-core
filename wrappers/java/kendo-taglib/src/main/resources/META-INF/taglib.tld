@@ -14173,6 +14173,12 @@ is closed. Options include "fadeOut".</description>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>Specifies the URL that the item links to</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
 
 
@@ -27098,6 +27104,12 @@ is closed. By default not specified - uses the opening animation with reverse.</
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
+        <attribute>
+            <description>Specifies the URL that the item links to</description>
+            <name>url</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
 
 
@@ -27716,6 +27728,12 @@ additional information along the treeview checkboxes.The fields which can be use
         <tag-class>com.kendoui.taglib.treeview.ItemTag</tag-class>
 
         <body-content>JSP</body-content>
+        <attribute>
+            <description>Specifies whether the item is initially checked. True by default.</description>
+            <name>checked</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
         <attribute>
             <description>Specifies whether the item is initially enabled. True by default.</description>
             <name>enabled</name>

@@ -88,6 +88,14 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
         return "treeView-item";
     }
 
+    public boolean getChecked() {
+        return (boolean)getProperty("checked");
+    }
+
+    public void setChecked(boolean value) {
+        setProperty("checked", value);
+    }
+
     public boolean getEnabled() {
         return (boolean)getProperty("enabled");
     }

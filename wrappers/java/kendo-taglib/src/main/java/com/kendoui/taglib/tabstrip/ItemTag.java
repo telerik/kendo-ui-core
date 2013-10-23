@@ -124,6 +124,14 @@ public class ItemTag extends  BaseTag  /* interfaces */implements Items/* interf
         setProperty("text", value);
     }
 
+    public java.lang.String getUrl() {
+        return (java.lang.String)getProperty("url");
+    }
+
+    public void setUrl(java.lang.String value) {
+        setProperty("url", value);
+    }
+
 //<< Attributes
   
 

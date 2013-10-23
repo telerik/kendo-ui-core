@@ -26,6 +26,10 @@
       :type: Boolean
       :description: Specifies whether the item is initially enabled. True by default.
 
+    - :name: items.checked
+      :type: Boolean
+      :description: Specifies whether the item is initially checked. True by default.
+
     - :name: items.selected
       :type: Boolean
       :description: Specifies whether the item is initially selected
