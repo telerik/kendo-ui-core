@@ -729,7 +729,7 @@ kendo_module({
         },
 
         endInRange: function(date) {
-            return this._start < date && date <= this._end;
+            return this._start <= date && date <= this._end;
         },
 
         slotByStartDate: function(date) {

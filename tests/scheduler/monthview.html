@@ -534,6 +534,16 @@
                 ok(!view.element.find(".k-event").length);
             });
 
+            test("event which ends on the first date of the month is rendered", function() {
+                var view = setup({ date: new Date("2013/12/1") });
+
+                view.render([
+                    new kendo.data.SchedulerEvent({ start: new Date("2013/11/23"), end: new Date("2013/11/24"), isAllDay: true, title: "event" })
+                ]);
+
+                equal(view.element.find(".k-event").length, 1);
+            });
+
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
