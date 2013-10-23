@@ -42,16 +42,16 @@ kendo_module({
                     margin: 1
                 },
                 line: {
-                    width: 4
+                    width: 2
                 },
                 vericalLine: {
-                    width: 4
+                    width: 2
                 },
                 stepLine: {
-                    width: 4
+                    width: 2
                 },
                 vericalStepLine: {
-                    width: 4
+                    width: 2
                 },
                 scatterLine: {
                     width: 1
@@ -101,7 +101,7 @@ kendo_module({
                     }
                 },
                 radarLine: {
-                    width: 4,
+                    width: 2,
                     markers: {
                         visible: false
                     }
@@ -342,7 +342,7 @@ kendo_module({
                 },
                 errorBars: {
                     color: WHITE
-                },                    
+                },
                 notes: {
                     icon: {
                         background: "#3b3b3b",
@@ -492,7 +492,7 @@ kendo_module({
                 },
                 errorBars: {
                     color: "#293135"
-                },                    
+                },
                 candlestick: {
                     downColor: "#c4d0d5",
                     line: {
@@ -597,7 +597,7 @@ kendo_module({
                 },
                 errorBars: {
                     color: "#ffffff"
-                },                  
+                },
                 notes: {
                     icon: {
                         background: "transparent",
@@ -750,7 +750,7 @@ kendo_module({
                 },
                 errorBars: {
                     color: "#232323"
-                },                  
+                },
                 candlestick: {
                     downColor: "#dedede",
                     line: {
@@ -857,7 +857,7 @@ kendo_module({
                 },
                 errorBars: {
                     color: "#4e5968"
-                },                
+                },
                 notes: {
                     icon: {
                         background: "transparent",
@@ -987,7 +987,7 @@ kendo_module({
                 },
                 errorBars: {
                     color: "#777777"
-                },                
+                },
                 notes: {
                     icon: {
                         background: "transparent",
@@ -1101,7 +1101,7 @@ kendo_module({
                 },
                 errorBars: {
                     color: "#ffffff"
-                },                  
+                },
                 notes: {
                     icon: {
                         background: "transparent",
@@ -1230,7 +1230,7 @@ kendo_module({
                 },
                 errorBars: {
                     color: "#ffffff"
-                },                    
+                },
                 notes: {
                     icon: {
                         background: "transparent",
@@ -1389,7 +1389,7 @@ kendo_module({
                 },
                 errorBars: {
                     color: "#686868"
-                },                    
+                },
                 notes: {
                     icon: {
                         background: "transparent",
@@ -1549,7 +1549,7 @@ kendo_module({
                 },
                 errorBars: {
                     color: "#343434"
-                },                   
+                },
                 notes: {
                     icon: {
                         background: "transparent",
@@ -1685,7 +1685,7 @@ kendo_module({
     });
 
     registerTheme("flat", {
-		 chart: {
+            chart: {
             title: {
                 color: "#4c5356"
             },
@@ -1708,7 +1708,7 @@ kendo_module({
                 },
                 errorBars: {
                     color: "#4c5356"
-                },                
+                },
                 notes: {
                     icon: {
                         background: "transparent",
