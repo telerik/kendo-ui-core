@@ -119,6 +119,8 @@ kendo_module({
             filter: "none",
             placeholder: "",
             suggest: false,
+            cascadeFrom: "",
+            cascadeFromField: "",
             ignoreCase: true,
             animation: {}
         },

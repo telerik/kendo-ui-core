@@ -118,6 +118,7 @@ kendo_module({
             dataValueField: "",
             optionLabel: "",
             cascadeFrom: "",
+            cascadeFromField: "",
             ignoreCase: true,
             animation: {}
         },

@@ -935,7 +935,7 @@ kendo_module({
                 }
 
                 options.autoBind = false;
-                valueField = parent.options.dataValueField;
+                valueField = options.cascadeFromField || parent.options.dataValueField;
 
                 change = function() {
                     var value = that._selectedValue || that.value();
