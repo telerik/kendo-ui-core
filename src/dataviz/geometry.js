@@ -9,7 +9,9 @@
 
         dataviz = kendo.dataviz,
         util = dataviz.util,
-        rad = util.rad;
+        defined = util.defined,
+        rad = util.rad,
+        round = util.round;
 
     // Geometrical primitives =================================================
     var Point = Class.extend({
@@ -48,8 +50,16 @@
             return point && point.x === this.x && point.y === this.y;
         },
 
-        toString: function() {
-            return this.x + " " + this.y;
+        toString: function(precision) {
+            var x = this.x,
+                y = this.y;
+
+            if (defined(precision)) {
+                x = round(x, precision);
+                y = round(y, precision);
+            }
+
+            return x + " " + y;
         },
 
         clone: function() {
