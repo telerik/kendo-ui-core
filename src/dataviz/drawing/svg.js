@@ -10,14 +10,11 @@
         dataviz = kendo.dataviz,
         renderTemplate = dataviz.renderTemplate,
 
-        drawing = dataviz.drawing,
-        BaseNode = drawing.BaseNode,
-        Group = drawing.Group,
-        Path = drawing.Path,
+        d = dataviz.drawing,
+        BaseNode = d.BaseNode,
 
         util = dataviz.util,
-        renderAttr = util.renderAttr,
-        valueOrDefault = util.valueOrDefault;
+        renderAttr = util.renderAttr;
 
     // Constants ==============================================================
     var BUTT = "butt",
@@ -112,10 +109,12 @@
                 srcElement = elements[i];
                 children = srcElement.children;
 
-                if (srcElement instanceof Group) {
+                if (srcElement instanceof d.Group) {
                     childNode = new GroupNode(srcElement);
-                } else if (srcElement instanceof Path) {
+                } else if (srcElement instanceof d.Path) {
                     childNode = new PathNode(srcElement);
+                } else if (srcElement instanceof d.MultiPath) {
+                    childNode = new MultiPathNode(srcElement);
                 }
 
                 if (children && children.length > 0) {
@@ -237,18 +236,26 @@
         },
 
         renderSegments: function() {
-            var path = this,
-                segments = path.srcElement.segments,
-                i,
-                result;
+            return this.printPath(this.srcElement);
+        },
 
+        printPath: function(path) {
+            var segments = path.segments;
             if (segments.length > 0) {
-                result = [];
+                var parts = [],
+                    output,
+                    i;
+
                 for (i = 0; i < segments.length; i++) {
-                    result.push(segments[i].anchor.toString());
+                    parts.push(segments[i].anchor.toString(1));
                 }
 
-                return "M" + result.join(" ");
+                output = "M" + parts.join(" ");
+                if (path.options.closed) {
+                    output += "Z";
+                }
+
+                return output;
             }
         },
 
@@ -316,6 +323,23 @@
         )
     });
 
+    var MultiPathNode = PathNode .extend({
+        renderSegments: function() {
+            var paths = this.srcElement.paths;
+
+            if (paths.length > 0) {
+                var result = [],
+                    i;
+
+                for (i = 0; i < paths.length; i++) {
+                    result.push(this.printPath(paths[i]));
+                }
+
+                return result.join(" ");
+            }
+        }
+    });
+
     // Helpers ================================================================
     var renderSVG = function(container, svg) {
         container.innerHTML = svg;
@@ -341,9 +365,10 @@
     })();
 
     // Exports ================================================================
-    deepExtend(drawing, {
+    deepExtend(d, {
         svg: {
             GroupNode: GroupNode,
+            MultiPathNode: MultiPathNode,
             Node: Node,
             PathNode: PathNode,
             RootNode: RootNode,

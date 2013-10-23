@@ -24,12 +24,14 @@
 
         d = dataviz.drawing,
         Group = d.Group,
+        MultiPath = d.MultiPath,
         Path = d.Path,
 
         svg = d.svg,
         Node = svg.Node,
         GroupNode = svg.GroupNode,
         PathNode = svg.PathNode,
+        MultiPathNode = svg.MultiPathNode,
         Surface = svg.Surface;
 
     // ------------------------------------------------------------
@@ -130,6 +132,14 @@
         };
 
         node.load([new Path()]);
+    });
+
+    test("load appends MultiPathNode", function() {
+        node.append = function(child) {
+            ok(child instanceof MultiPathNode);
+        };
+
+        node.load([new MultiPath()]);
     });
 
     test("load appends child nodes", function() {
@@ -279,6 +289,12 @@
         ok(pathNode.render().indexOf("d='M0 0 10 20'") !== -1);
     });
 
+    test("renders closed paths", function() {
+        path.moveTo(0, 0).lineTo(10, 20).close();
+
+        ok(pathNode.render().indexOf("d='M0 0 10 20Z'") !== -1);
+    });
+
     test("does not render segments for empty path", function() {
         equal(pathNode.render().indexOf("d="), -1);
     });
@@ -289,23 +305,10 @@
         ok(pathNode.render().indexOf("stroke='red'") !== -1);
     });
 
-    test("renders default stroke", function() {
-        ok(pathNode.render().indexOf("stroke='black'") !== -1);
-    });
-
     test("renders stroke width", function() {
         path.options.set("stroke.width", 2);
 
         ok(pathNode.render().indexOf("stroke-width='2'") !== -1);
-    });
-
-    test("renders default stroke width", function() {
-        ok(pathNode.render().indexOf("stroke-width='1'") !== -1);
-    });
-
-    test("renders default stroke width if color is set", function() {
-        path.options.set("stroke.color", "red");
-        ok(pathNode.render().indexOf("stroke-width='1'") !== -1);
     });
 
     test("renders stroke opacity", function() {
@@ -401,6 +404,25 @@
         };
 
         path.options.set("fill.color", "red");
+    });
+
+    // ------------------------------------------------------------
+    var multiPath,
+        multiPathNode;
+
+    module("MultiPathNode", {
+        setup: function() {
+            multiPath = new MultiPath();
+            multiPathNode = new MultiPathNode(multiPath);
+        }
+    });
+
+    test("renders composite paths", function() {
+        multiPath
+            .moveTo(0, 0).lineTo(10, 20)
+            .moveTo(10, 10).lineTo(10, 20);
+
+        ok(multiPathNode.render().indexOf("d='M0 0 10 20 M10 10 10 20'") !== -1);
     });
     </script>
 
