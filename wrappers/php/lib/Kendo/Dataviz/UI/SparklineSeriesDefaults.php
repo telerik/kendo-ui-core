@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class SparklineSeriesDefaults extends \kendo\SerializableObject {
+class SparklineSeriesDefaults extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

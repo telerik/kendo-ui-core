@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartCategoryAxisItemTitleMargin extends \kendo\SerializableObject {
+class ChartCategoryAxisItemTitleMargin extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

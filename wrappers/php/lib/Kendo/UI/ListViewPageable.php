@@ -2,7 +2,7 @@
 
 namespace Kendo\UI;
 
-class ListViewPageable extends \kendo\SerializableObject {
+class ListViewPageable extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

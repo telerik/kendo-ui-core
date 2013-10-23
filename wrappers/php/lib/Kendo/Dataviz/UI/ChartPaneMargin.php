@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartPaneMargin extends \kendo\SerializableObject {
+class ChartPaneMargin extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

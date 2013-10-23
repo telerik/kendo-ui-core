@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class SparklinePlotAreaBorder extends \kendo\SerializableObject {
+class SparklinePlotAreaBorder extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

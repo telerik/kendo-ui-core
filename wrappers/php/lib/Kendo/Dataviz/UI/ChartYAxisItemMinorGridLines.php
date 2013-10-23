@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartYAxisItemMinorGridLines extends \kendo\SerializableObject {
+class ChartYAxisItemMinorGridLines extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

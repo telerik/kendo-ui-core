@@ -2,7 +2,7 @@
 
 namespace Kendo\UI;
 
-class SchedulerViewGroup extends \kendo\SerializableObject {
+class SchedulerViewGroup extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

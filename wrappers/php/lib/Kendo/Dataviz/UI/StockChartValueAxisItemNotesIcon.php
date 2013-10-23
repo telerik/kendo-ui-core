@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class StockChartValueAxisItemNotesIcon extends \kendo\SerializableObject {
+class StockChartValueAxisItemNotesIcon extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

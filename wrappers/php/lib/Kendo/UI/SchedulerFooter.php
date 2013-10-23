@@ -2,7 +2,7 @@
 
 namespace Kendo\UI;
 
-class SchedulerFooter extends \kendo\SerializableObject {
+class SchedulerFooter extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

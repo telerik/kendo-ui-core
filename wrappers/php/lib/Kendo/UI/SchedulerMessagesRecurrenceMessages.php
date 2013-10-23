@@ -2,7 +2,7 @@
 
 namespace Kendo\UI;
 
-class SchedulerMessagesRecurrenceMessages extends \kendo\SerializableObject {
+class SchedulerMessagesRecurrenceMessages extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

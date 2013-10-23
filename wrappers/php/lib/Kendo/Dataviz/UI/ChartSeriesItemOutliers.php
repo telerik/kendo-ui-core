@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartSeriesItemOutliers extends \kendo\SerializableObject {
+class ChartSeriesItemOutliers extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

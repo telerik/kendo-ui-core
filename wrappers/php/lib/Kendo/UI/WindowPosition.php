@@ -2,7 +2,7 @@
 
 namespace Kendo\UI;
 
-class WindowPosition extends \kendo\SerializableObject {
+class WindowPosition extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

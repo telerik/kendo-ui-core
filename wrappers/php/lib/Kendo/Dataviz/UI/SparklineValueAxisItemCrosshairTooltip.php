@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class SparklineValueAxisItemCrosshairTooltip extends \kendo\SerializableObject {
+class SparklineValueAxisItemCrosshairTooltip extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

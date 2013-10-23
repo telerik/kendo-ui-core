@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class SparklineTooltip extends \kendo\SerializableObject {
+class SparklineTooltip extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

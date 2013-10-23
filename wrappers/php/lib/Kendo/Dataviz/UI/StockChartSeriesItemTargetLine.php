@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class StockChartSeriesItemTargetLine extends \kendo\SerializableObject {
+class StockChartSeriesItemTargetLine extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

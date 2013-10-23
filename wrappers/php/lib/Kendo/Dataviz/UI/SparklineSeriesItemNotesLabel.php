@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class SparklineSeriesItemNotesLabel extends \kendo\SerializableObject {
+class SparklineSeriesItemNotesLabel extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

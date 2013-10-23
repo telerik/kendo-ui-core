@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartCategoryAxisItemSelectMousewheel extends \kendo\SerializableObject {
+class ChartCategoryAxisItemSelectMousewheel extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

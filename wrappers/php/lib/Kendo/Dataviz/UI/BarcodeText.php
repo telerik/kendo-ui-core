@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class BarcodeText extends \kendo\SerializableObject {
+class BarcodeText extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartXAxisItemNotesLabelBorder extends \kendo\SerializableObject {
+class ChartXAxisItemNotesLabelBorder extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

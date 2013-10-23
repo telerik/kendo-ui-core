@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class StockChartCategoryAxisItemAutoBaseUnitSteps extends \kendo\SerializableObject {
+class StockChartCategoryAxisItemAutoBaseUnitSteps extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

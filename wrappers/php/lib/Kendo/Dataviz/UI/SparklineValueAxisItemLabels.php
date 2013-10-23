@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class SparklineValueAxisItemLabels extends \kendo\SerializableObject {
+class SparklineValueAxisItemLabels extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

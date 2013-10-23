@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartYAxisItemMinorTicks extends \kendo\SerializableObject {
+class ChartYAxisItemMinorTicks extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

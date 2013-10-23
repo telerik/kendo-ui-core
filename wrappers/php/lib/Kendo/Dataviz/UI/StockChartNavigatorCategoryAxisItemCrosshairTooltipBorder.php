@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class StockChartNavigatorCategoryAxisItemCrosshairTooltipBorder extends \kendo\SerializableObject {
+class StockChartNavigatorCategoryAxisItemCrosshairTooltipBorder extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

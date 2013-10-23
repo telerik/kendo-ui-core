@@ -2,7 +2,7 @@
 
 namespace Kendo\UI;
 
-class SchedulerMessagesRecurrenceEditorOffsetPositions extends \kendo\SerializableObject {
+class SchedulerMessagesRecurrenceEditorOffsetPositions extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

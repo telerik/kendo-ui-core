@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class SparklineSeriesItemHighlightBorder extends \kendo\SerializableObject {
+class SparklineSeriesItemHighlightBorder extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

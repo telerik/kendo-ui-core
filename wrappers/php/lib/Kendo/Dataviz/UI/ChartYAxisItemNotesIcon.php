@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartYAxisItemNotesIcon extends \kendo\SerializableObject {
+class ChartYAxisItemNotesIcon extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

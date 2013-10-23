@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class QRCodeBorder extends \kendo\SerializableObject {
+class QRCodeBorder extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

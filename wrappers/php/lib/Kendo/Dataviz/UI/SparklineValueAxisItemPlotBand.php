@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class SparklineValueAxisItemPlotBand extends \kendo\SerializableObject {
+class SparklineValueAxisItemPlotBand extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

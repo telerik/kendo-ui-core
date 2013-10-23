@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class BarcodePadding extends \kendo\SerializableObject {
+class BarcodePadding extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

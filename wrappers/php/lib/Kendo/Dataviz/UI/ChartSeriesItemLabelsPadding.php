@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartSeriesItemLabelsPadding extends \kendo\SerializableObject {
+class ChartSeriesItemLabelsPadding extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

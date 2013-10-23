@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartPlotAreaPadding extends \kendo\SerializableObject {
+class ChartPlotAreaPadding extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

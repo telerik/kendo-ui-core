@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartTooltipPadding extends \kendo\SerializableObject {
+class ChartTooltipPadding extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class StockChartNavigatorCategoryAxisItemLine extends \kendo\SerializableObject {
+class StockChartNavigatorCategoryAxisItemLine extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

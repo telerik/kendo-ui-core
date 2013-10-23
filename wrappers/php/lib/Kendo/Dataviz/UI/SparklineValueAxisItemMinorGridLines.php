@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class SparklineValueAxisItemMinorGridLines extends \kendo\SerializableObject {
+class SparklineValueAxisItemMinorGridLines extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

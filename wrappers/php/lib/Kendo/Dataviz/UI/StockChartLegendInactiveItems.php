@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class StockChartLegendInactiveItems extends \kendo\SerializableObject {
+class StockChartLegendInactiveItems extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class StockChartNavigatorCategoryAxisItemMinorGridLines extends \kendo\SerializableObject {
+class StockChartNavigatorCategoryAxisItemMinorGridLines extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartYAxisItemTitlePadding extends \kendo\SerializableObject {
+class ChartYAxisItemTitlePadding extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

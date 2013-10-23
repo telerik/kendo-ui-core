@@ -2,7 +2,7 @@
 
 namespace Kendo\UI;
 
-class EditorToolItem extends \kendo\SerializableObject {
+class EditorToolItem extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartSeriesItemNotes extends \kendo\SerializableObject {
+class ChartSeriesItemNotes extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

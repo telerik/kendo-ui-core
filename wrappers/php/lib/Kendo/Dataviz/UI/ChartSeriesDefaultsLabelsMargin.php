@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartSeriesDefaultsLabelsMargin extends \kendo\SerializableObject {
+class ChartSeriesDefaultsLabelsMargin extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

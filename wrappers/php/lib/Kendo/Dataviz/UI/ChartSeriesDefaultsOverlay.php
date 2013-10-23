@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartSeriesDefaultsOverlay extends \kendo\SerializableObject {
+class ChartSeriesDefaultsOverlay extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

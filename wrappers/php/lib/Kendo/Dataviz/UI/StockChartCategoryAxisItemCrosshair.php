@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class StockChartCategoryAxisItemCrosshair extends \kendo\SerializableObject {
+class StockChartCategoryAxisItemCrosshair extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

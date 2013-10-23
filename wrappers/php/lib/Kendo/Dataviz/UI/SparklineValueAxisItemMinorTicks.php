@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class SparklineValueAxisItemMinorTicks extends \kendo\SerializableObject {
+class SparklineValueAxisItemMinorTicks extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

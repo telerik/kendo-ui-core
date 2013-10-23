@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class ChartPanePadding extends \kendo\SerializableObject {
+class ChartPanePadding extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

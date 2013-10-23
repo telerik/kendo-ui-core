@@ -228,7 +228,7 @@ The axis will be rendered in the first (default) pane if not set.
     }
 
     /**
-    * If set to true the chart will round the first and last date to the nearest base unit.The roundToBaseUnit option will be ignored if series.type is set to "bar", "column", "ohlc" or "candlestick".
+    * If set to true the chart will round the first and last date to the nearest base unit.The roundToBaseUnit option will be ignored if series.type is set to "bar", "column", "boxPlot", "ohlc" or "candlestick".
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\ChartCategoryAxisItem
     */

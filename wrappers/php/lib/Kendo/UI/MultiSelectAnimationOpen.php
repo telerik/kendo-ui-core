@@ -2,7 +2,7 @@
 
 namespace Kendo\UI;
 
-class MultiSelectAnimationOpen extends \kendo\SerializableObject {
+class MultiSelectAnimationOpen extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

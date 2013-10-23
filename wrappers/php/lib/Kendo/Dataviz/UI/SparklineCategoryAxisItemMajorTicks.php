@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class SparklineCategoryAxisItemMajorTicks extends \kendo\SerializableObject {
+class SparklineCategoryAxisItemMajorTicks extends \Kendo\SerializableObject {
 //>> Properties
 
     /**

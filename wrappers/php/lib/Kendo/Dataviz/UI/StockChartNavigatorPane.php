@@ -2,7 +2,7 @@
 
 namespace Kendo\Dataviz\UI;
 
-class StockChartNavigatorPane extends \kendo\SerializableObject {
+class StockChartNavigatorPane extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
