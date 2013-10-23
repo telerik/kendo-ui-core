@@ -196,7 +196,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///           .Name("Chart")
         ///           .Series(series => series
         ///               .BoxPlot(s => s.Lower, s => s.Q1, s => s.Median, s => s.Q3, s => s.Upper)        
-        ///               .Line(line => line.Opacity(0.2)
+        ///               .Line(line => line.Opacity(0.2))
         ///           )
         ///           .Render();
         /// %&gt;
