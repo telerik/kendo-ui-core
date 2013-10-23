@@ -430,6 +430,7 @@
                         segmentSpacing : 22,
                         dynamicSlope:true,
                         labels: {
+                            visible:true,
                             align: function(context) { return context.index % 2 === 0 ? "left" : "right"; },
                             color:'red',
                             margin: 5,
@@ -545,6 +546,9 @@
                     chart = $("#container").kendoChart($.extend({
                         series: [{
                             type: "funnel",
+                            labels:{
+                                visible:true
+                            },
                             data: [{ value: 1, category: "A" }]
                         }]
                     }, options))
