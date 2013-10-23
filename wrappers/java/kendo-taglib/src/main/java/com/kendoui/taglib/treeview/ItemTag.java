@@ -13,6 +13,7 @@ import com.kendoui.taglib.html.Input;
 
 
 
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.Tag;
 
@@ -30,6 +31,17 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
 //<< doEndTag
 
         return super.doEndTag();
+    }
+    
+    @Override
+    protected void addLinkAttributes(Element<?> element) {
+        if (this.isSet("enabled") && !this.getEnabled()) {
+            element.attr("class", "k-link k-state-disabled");
+        } else if (this.isSet("selected") && this.getSelected()) {
+            element.attr("class", "k-link k-state-selected");
+        } else {
+            super.addLinkAttributes(element);
+        }
     }
     
     @Override

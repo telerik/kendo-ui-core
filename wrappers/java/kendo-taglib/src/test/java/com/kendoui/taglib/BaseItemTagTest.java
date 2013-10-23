@@ -30,6 +30,31 @@ public class BaseItemTagTest {
     }
 
     @Test
+    public void rendersAnchorIfUrlIsSet() throws IOException {
+        tag.text = "bar";
+        tag.url = "foo";
+        
+        Li element = new Li();
+
+        tag.renderContents(element);
+        
+        assertEquals("<li><a class=\"k-link\" href=\"foo\">bar</a></li>", element.outerHtml());
+    }
+    
+    @Test
+    public void rendersSpriteInsideAnchor() throws IOException {
+        tag.spriteCssClass = "foo";
+        tag.text = "bar";
+        tag.url = "foo";
+        
+        Li element = new Li();
+
+        tag.renderContents(element);
+        
+        assertEquals("<li><a class=\"k-link\" href=\"foo\"><span class=\"k-sprite foo\"></span>bar</a></li>", element.outerHtml());
+    }
+
+    @Test
     public void noSpriteCssClassDoesNotRenderSpanTag() throws IOException {
         tag.spriteCssClass = null;
         tag.text = "bar";

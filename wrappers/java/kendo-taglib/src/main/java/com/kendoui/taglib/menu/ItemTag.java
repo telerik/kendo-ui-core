@@ -9,6 +9,8 @@ import com.kendoui.taglib.BaseItemTag;
 
 
 
+import com.kendoui.taglib.html.Li;
+
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
@@ -30,7 +32,20 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
 
         return super.doEndTag();
     }
-
+    
+    @Override
+    protected void addAttributes(Li element){
+        super.addAttributes(element);
+        
+        if (isSet("selected") && getSelected()) {
+            element.attr("class", "k-state-selected");
+        }
+        
+        if (isSet("enabled") && getEnabled() == false) {
+            element.attr("class", "k-state-disabled");
+        }
+    }
+    
     @Override
     public void initialize() {
 //>> initialize

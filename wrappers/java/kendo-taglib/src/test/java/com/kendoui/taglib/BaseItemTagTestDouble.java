@@ -5,6 +5,8 @@ public class BaseItemTagTestDouble extends BaseItemTag {
     
     public String text;
     public String spriteCssClass;
+    public String url;
+    
     public boolean expanded;
     public boolean enabled;
 
@@ -29,13 +31,17 @@ public class BaseItemTagTestDouble extends BaseItemTag {
 
     @Override
     protected String getImageUrl() {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     protected boolean getEnabled() {
         return enabled;
+    }
+
+    @Override
+    protected String getUrl() {
+        return url;
     }
 
 }

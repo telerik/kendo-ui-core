@@ -4,6 +4,8 @@ package com.kendoui.taglib.tabstrip;
 import com.kendoui.taglib.tabstrip.ItemTag;
 import com.kendoui.taglib.ContentTag;
 import com.kendoui.taglib.TabStripTag;
+import com.kendoui.taglib.html.Anchor;
+import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Img;
 import com.kendoui.taglib.html.Li;
 import com.kendoui.taglib.html.Span;
@@ -59,7 +61,18 @@ public class ItemsTag extends ContentTag /* interfaces *//* interfaces */ {
         return super.doEndTag();
     }
     
-    private void renderContents(Li element, Map<String, Object> item) {
+    private void renderContents(Element<?> element, Map<String, Object> item) {
+        Element<?> container = element;
+        
+        String href = (String)item.get("url");
+        
+        if (href != null && !href.isEmpty()) {
+            element = new Anchor();
+            element.attr("href", href);
+            addLinkAttributes(element);
+            container.append(element);
+        }
+        
         String spriteCssClass = (String) item.get("spriteCssClass");
         
         if (spriteCssClass != null && spriteCssClass.trim().length() > 0) {
@@ -81,13 +94,19 @@ public class ItemsTag extends ContentTag /* interfaces *//* interfaces */ {
         element.append(new Text((String) item.get("text")));
     }
     
+    private void addLinkAttributes(Element<?> element) {
+        element.attr("class", "k-link");
+    }
+    
     private void addAttributes(Li element, Map<String, Object> item) {
         if (this.isSet("expanded") && (Boolean) item.get("expanded")) {
             element.attr("data-expanded", "true");
         }
         
-        if (this.isSet("enabled") && (Boolean) item.get("enabled") == false) {
-            element.attr("disabled", "disabled");
+        Object enabled = item.get("enabled");
+        
+        if (enabled != null && (Boolean) enabled == false) {
+            element.attr("class", "k-state-disabled");
         }
         
         Object selected = item.get("selected");

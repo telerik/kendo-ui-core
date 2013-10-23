@@ -51,12 +51,22 @@ public class ItemTag extends  BaseItemTag  /* interfaces */implements Items/* in
     }
     
     @Override
+    protected void addLinkAttributes(Element<?> element) {
+        if (this.isSet("selected") && this.getSelected()) {
+            element.attr("class", "k-link k-state-selected");
+        } else {
+            super.addLinkAttributes(element);
+        }
+    }
+    
+    @Override
     public void addAttributes(Li element) {
         if (this.isSet("expanded") && this.getExpanded()) {
             element.attr("class", "k-state-active");
         }
         super.addAttributes(element);
     }
+    
     
     @Override
     public void initialize() {

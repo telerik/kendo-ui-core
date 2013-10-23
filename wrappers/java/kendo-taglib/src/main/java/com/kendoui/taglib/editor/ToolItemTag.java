@@ -27,6 +27,11 @@ public class ToolItemTag extends  BaseItemTag  /* interfaces */ /* interfaces */
         return super.doEndTag();
     }
 
+    @Override 
+    protected String getUrl() {
+        return null;
+    }
+    
     @Override
     public void initialize() {
 //>> initialize

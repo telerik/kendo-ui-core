@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.jsp.JspException;
 
+import com.kendoui.taglib.html.Anchor;
 import com.kendoui.taglib.html.Div;
 import com.kendoui.taglib.html.Element;
 import com.kendoui.taglib.html.Img;
@@ -20,6 +21,7 @@ public abstract class BaseItemTag extends BaseTag {
     
     protected List<Map<String,Object>> items;
     
+    protected abstract String getUrl();
     protected abstract String getText();
     protected abstract String getSpriteCssClass();
     protected abstract String getImageUrl();
@@ -39,9 +41,18 @@ public abstract class BaseItemTag extends BaseTag {
     }
     
     protected void renderContents(Element<?> element) {
+        Element<?> container = element;
+        
+        if (getUrl() != null && !getUrl().isEmpty()) {
+            element = new Anchor();
+            element.attr("href", getUrl());
+            addLinkAttributes(element);
+            container.append(element);
+        }
+        
         String spriteCssClass = getSpriteCssClass();
         
-        if (spriteCssClass != null && spriteCssClass.trim().length() > 0) {
+        if (spriteCssClass != null && !spriteCssClass.isEmpty()) {
             Span sprite = new Span();
             sprite.attr("class", "k-sprite " + spriteCssClass);
             element.append(sprite);
@@ -49,7 +60,7 @@ public abstract class BaseItemTag extends BaseTag {
         
         String imageUrl = getImageUrl();
         
-        if (imageUrl != null && imageUrl.trim().length() > 0) {
+        if (imageUrl != null && imageUrl.isEmpty()) {
             Img image = new Img();
             image.attr("class", "k-image");
             image.attr("alt", "");
@@ -62,11 +73,15 @@ public abstract class BaseItemTag extends BaseTag {
         String html = body();
         
         if (!html.isEmpty()) {
-            appendContent(element, html);
+            appendContent(container, html);
         }
     }
     
-    public void addAttributes(Li element) {
+    protected void addLinkAttributes(Element<?> element) {
+        element.attr("class", "k-link");
+    }
+    
+    protected void addAttributes(Li element) {
         if (this.isSet("expanded") && this.getExpanded()) {
             element.attr("data-expanded", "true");
         }
