@@ -53,7 +53,7 @@
 
         public Meeting ToEntity()
         {
-            return new Meeting
+            var meeting = new Meeting
             {
                 MeetingID = MeetingID,
                 Title = Title,
@@ -68,6 +68,8 @@
                 RecurrenceID = RecurrenceID,
                 RoomID = RoomID
             };
+
+            return meeting;
         }
     }
 }

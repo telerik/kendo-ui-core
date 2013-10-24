@@ -1,10 +1,9 @@
 ﻿namespace Kendo.Mvc.Examples.Models.Scheduler
 {
+    using Kendo.Mvc.UI;
+    using System;
     using System.Linq;
     using System.Web.Mvc;
-    using Kendo.Mvc.UI;
-    using System.Data;
-    using System;
 
     public class SchedulerMeetingService : ISchedulerEventService<MeetingViewModel>
     {
@@ -70,34 +69,39 @@
         {
             if (ValidateModel(meeting, modelState))
             {
-                if (meeting.Atendees == null)
+                var entity = db.Meetings.Include("MeetingAtendees").FirstOrDefault(m => m.MeetingID == meeting.MeetingID);
+
+                entity.Title = meeting.Title;
+                entity.Start = meeting.Start;
+                entity.End = meeting.End;
+                entity.Description = meeting.Description;
+                entity.IsAllDay = meeting.IsAllDay;
+                entity.RoomID = meeting.RoomID;
+                entity.RecurrenceID = meeting.RecurrenceID;
+                entity.RecurrenceRule = meeting.RecurrenceRule;
+                entity.RecurrenceException = meeting.RecurrenceException;
+                entity.StartTimezone = meeting.StartTimezone;
+                entity.EndTimezone = meeting.EndTimezone;
+
+                foreach (var meetingAttendee in entity.MeetingAtendees.ToList())
                 {
-                    meeting.Atendees = new int[0];
+                    entity.MeetingAtendees.Remove(meetingAttendee);
                 }
 
-                var entity = meeting.ToEntity();
-
-                db.Meetings.Attach(entity);
-
-                var atendees = meeting.Atendees.Select(atendee => new MeetingAtendee
+                if (meeting.Atendees != null)
                 {
-                    AtendeeID = atendee
-                });
+                    foreach (var atendeeId in meeting.Atendees)
+                    {
+                        var meetingAttendee = new MeetingAtendee
+                        {
+                            MeetingID = entity.MeetingID,
+                            AtendeeID = atendeeId
+                        };
 
-                foreach (var atendee in atendees)
-                {
-                    db.MeetingAtendees.Attach(atendee);
+                        entity.MeetingAtendees.Add(meetingAttendee);
+                    }
                 }
 
-                entity.MeetingAtendees.Clear();
-
-                foreach (var atendee in atendees)
-                {
-                    entity.MeetingAtendees.Add(atendee);
-                    db.Entry(atendee).State = EntityState.Modified;
-                }
-
-                db.Entry(entity).State = EntityState.Modified;
                 db.SaveChanges();
             }
         }
@@ -115,7 +119,8 @@
 
             var atendees = meeting.Atendees.Select(atendee => new MeetingAtendee
             {
-                AtendeeID = atendee
+                AtendeeID = atendee,
+                MeetingID = entity.MeetingID
             });
 
             foreach (var atendee in atendees)

@@ -41,7 +41,7 @@
             })
         .Read("Meetings_Read", "Scheduler")
         .Create(create => create.Action("Meetings_Create", "Scheduler").Data("serialize"))
-        .Destroy("Meetings_Destroy", "Scheduler")
+        .Destroy(destroy => destroy.Action("Meetings_Destroy", "Scheduler").Data("serialize"))
         .Update(update => update.Action("Meetings_Update", "Scheduler").Data("serialize"))
     )
 )
