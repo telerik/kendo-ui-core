@@ -23,9 +23,9 @@
             return this;
         }
 
-        public SchedulerRecurrenceEditorDailyMessagesBuilder Days(string message)
+        public SchedulerRecurrenceEditorDailyMessagesBuilder Interval(string message)
         {
-            editorMessages.Days = message;
+            editorMessages.Interval = message;
 
             return this;
         }

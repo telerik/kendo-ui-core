@@ -7,18 +7,18 @@
     {
         private const string DefaultRepeatEvery = "Repeat every: ";
 
-        private const string DefaultDays = " days(s)";
+        private const string DefaultInterval = " days(s)";
 
         public SchedulerRecurrenceEditorDailyMessages()
         {
             RepeatEvery = Messages.Scheduler_Recurrence_Editor_Daily_RepeatEvery;
 
-            Days = Messages.Scheduler_Recurrence_Editor_Daily_Days;
+            Interval = Messages.Scheduler_Recurrence_Editor_Daily_Interval;
         }
 
         public string RepeatEvery { get; set; }
 
-        public string Days { get; set; }
+        public string Interval { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -27,9 +27,9 @@
                 json["repeatEvery"] = RepeatEvery;
             }
 
-            if (Days != DefaultDays)
+            if (Interval != DefaultInterval)
             {
-                json["days"] = Days;
+                json["interval"] = Interval;
             }
         }
     }

@@ -501,25 +501,25 @@
   <data name="Scheduler_Recurrence_DeleteWindowTitle" xml:space="preserve">
     <value>Delete Recurring Item</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_Daily_Days" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_Daily_Interval" xml:space="preserve">
     <value>jour(s)</value>
   </data>
   <data name="Scheduler_Recurrence_Editor_Daily_RepeatEvery" xml:space="preserve">
     <value>Répéter chaque:</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndCountAfter" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_After" xml:space="preserve">
     <value> Après</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndCountOccurrence" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_Occurrence" xml:space="preserve">
     <value>occurrence(s)</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndLabel" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_Label" xml:space="preserve">
     <value>Finir:</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndNever" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_Never" xml:space="preserve">
     <value>Jamais</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndUntilOn" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_On" xml:space="preserve">
     <value>Sur</value>
   </data>
   <data name="Scheduler_Recurrence_Editor_Frequencies_Daily" xml:space="preserve">
@@ -540,7 +540,7 @@
   <data name="Scheduler_Recurrence_Editor_Monthly_Day" xml:space="preserve">
     <value>Jour</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_Monthly_Months" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_Monthly_Interval" xml:space="preserve">
     <value>mois</value>
   </data>
   <data name="Scheduler_Recurrence_Editor_Monthly_RepeatEvery" xml:space="preserve">
@@ -570,7 +570,7 @@
   <data name="Scheduler_Recurrence_Editor_Weekly_RepeatOn" xml:space="preserve">
     <value>Répéter l'opération sur:</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_Weekly_Weeks" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_Weekly_Interval" xml:space="preserve">
     <value>semaine(s)</value>
   </data>
   <data name="Scheduler_Recurrence_Editor_Yearly_Of" xml:space="preserve">
@@ -582,7 +582,7 @@
   <data name="Scheduler_Recurrence_Editor_Yearly_RepeatOn" xml:space="preserve">
     <value>Répéter l'opération sur:</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_Yearly_Years" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_Yearly_Interval" xml:space="preserve">
     <value>année(ans)</value>
   </data>
   <data name="Scheduler_Recurrence_EditRecurring" xml:space="preserve">
@@ -677,5 +677,14 @@
   </data>
   <data name="Scheduler_Recurrence_Editor_Weekdays_Weekend" xml:space="preserve">
     <value>jour de week-end</value>
+  </data>
+  <data name="Editor_DropFilesHere" xml:space="preserve">
+    <value>drop files here to upload</value>
+  </data>
+  <data name="Upload_HeaderStatusUploaded" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Upload_HeaderStatusUploading" xml:space="preserve">
+    <value>Uploading...</value>
   </data>
 </root>

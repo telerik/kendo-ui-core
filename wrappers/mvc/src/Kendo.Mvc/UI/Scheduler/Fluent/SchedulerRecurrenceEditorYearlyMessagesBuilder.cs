@@ -30,9 +30,9 @@
             return this;
         }
 
-        public SchedulerRecurrenceEditorYearlyMessagesBuilder Years(string message)
+        public SchedulerRecurrenceEditorYearlyMessagesBuilder Interval(string message)
         {
-            editorMessages.Years = message;
+            editorMessages.Interval = message;
 
             return this;
         }

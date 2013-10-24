@@ -9,7 +9,7 @@
 
         private const string DefaultRepeatOn = "Repeat on: ";
 
-        private const string DefaultMonths = " month(s)";
+        private const string DefaultInterval = " month(s)";
 
         private const string DefaultDay = "Day ";
 
@@ -19,7 +19,7 @@
 
             RepeatOn = Messages.Scheduler_Recurrence_Editor_Monthly_RepeatOn;
 
-            Months = Messages.Scheduler_Recurrence_Editor_Monthly_Months;
+            Interval = Messages.Scheduler_Recurrence_Editor_Monthly_Interval;
 
             Day = Messages.Scheduler_Recurrence_Editor_Monthly_Day;
         }
@@ -27,8 +27,8 @@
         public string RepeatEvery { get; set; }
         
         public string RepeatOn { get; set; }
-        
-        public string Months { get; set; }
+
+        public string Interval { get; set; }
         
         public string Day { get; set; }
 
@@ -44,9 +44,9 @@
                 json["repeatOn"] = RepeatOn;
             }
 
-            if (Months != DefaultMonths)
+            if (Interval != DefaultInterval)
             {
-                json["months"] = Months;
+                json["interval"] = Interval;
             }
 
             if (Day != DefaultDay)

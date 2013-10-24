@@ -366,25 +366,25 @@
   <data name="Scheduler_Recurrence_DeleteWindowTitle" xml:space="preserve">
     <value>Delete Recurring Item</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_Daily_Days" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_Daily_Interval" xml:space="preserve">
     <value>days(s)</value>
   </data>
   <data name="Scheduler_Recurrence_Editor_Daily_RepeatEvery" xml:space="preserve">
     <value>Repeat every:</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndCountAfter" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_After" xml:space="preserve">
     <value>After</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndCountOccurrence" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_Occurrence" xml:space="preserve">
     <value>occurrence(s)</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndLabel" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_Label" xml:space="preserve">
     <value>End:</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndNever" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_Never" xml:space="preserve">
     <value>Never</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndUntilOn" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_On" xml:space="preserve">
     <value>On</value>
   </data>
   <data name="Scheduler_Recurrence_Editor_Frequencies_Daily" xml:space="preserve">
@@ -405,7 +405,7 @@
   <data name="Scheduler_Recurrence_Editor_Monthly_Day" xml:space="preserve">
     <value>Day</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_Monthly_Months" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_Monthly_Interval" xml:space="preserve">
     <value>month(s)</value>
   </data>
   <data name="Scheduler_Recurrence_Editor_Monthly_RepeatEvery" xml:space="preserve">
@@ -435,7 +435,7 @@
   <data name="Scheduler_Recurrence_Editor_Weekly_RepeatOn" xml:space="preserve">
     <value>Repeat on:</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_Weekly_Weeks" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_Weekly_Interval" xml:space="preserve">
     <value>week(s)</value>
   </data>
   <data name="Scheduler_Recurrence_Editor_Yearly_Of" xml:space="preserve">
@@ -447,7 +447,7 @@
   <data name="Scheduler_Recurrence_Editor_Yearly_RepeatOn" xml:space="preserve">
     <value>Repeat on:</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_Yearly_Years" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_Yearly_Interval" xml:space="preserve">
     <value>year(s)</value>
   </data>
   <data name="Scheduler_Recurrence_EditRecurring" xml:space="preserve">
@@ -542,5 +542,164 @@
   </data>
   <data name="Scheduler_Recurrence_Editor_Weekdays_Weekend" xml:space="preserve">
     <value>weekend day</value>
+  </data>
+  <data name="Editor_BackColor" xml:space="preserve">
+    <value>Background color</value>
+  </data>
+  <data name="Editor_Bold" xml:space="preserve">
+    <value>Bold</value>
+  </data>
+  <data name="Editor_CreateLink" xml:space="preserve">
+    <value>Insert hyperlink</value>
+  </data>
+  <data name="Editor_DeleteFile" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="Editor_DirectoryNotFound" xml:space="preserve">
+    <value>A directory with this name was not found.</value>
+  </data>
+  <data name="Editor_DropFilesHere" xml:space="preserve">
+    <value>drop files here to upload</value>
+  </data>
+  <data name="Editor_EmptyFolder" xml:space="preserve">
+    <value>Empty Folder</value>
+  </data>
+  <data name="Editor_FontName" xml:space="preserve">
+    <value>Select font family</value>
+  </data>
+  <data name="Editor_FontNameInherit" xml:space="preserve">
+    <value>(inherited font)</value>
+  </data>
+  <data name="Editor_FontSize" xml:space="preserve">
+    <value>Select font size</value>
+  </data>
+  <data name="Editor_FontSizeInherit" xml:space="preserve">
+    <value>(inherited size)</value>
+  </data>
+  <data name="Editor_ForeColor" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Editor_FormatBlock" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="Editor_Indent" xml:space="preserve">
+    <value>Indent</value>
+  </data>
+  <data name="Editor_InsertHtml" xml:space="preserve">
+    <value>Insert HTML</value>
+  </data>
+  <data name="Editor_InsertImage" xml:space="preserve">
+    <value>Insert image</value>
+  </data>
+  <data name="Editor_InsertOrderedList" xml:space="preserve">
+    <value>Insert ordered list</value>
+  </data>
+  <data name="Editor_InsertUnorderedList" xml:space="preserve">
+    <value>Insert unordered list</value>
+  </data>
+  <data name="Editor_InvalidFileType" xml:space="preserve">
+    <value>The selected file "{0}" is not valid. Supported file types are {1}.</value>
+  </data>
+  <data name="Editor_Italic" xml:space="preserve">
+    <value>Italic</value>
+  </data>
+  <data name="Editor_JustifyCenter" xml:space="preserve">
+    <value>Center text</value>
+  </data>
+  <data name="Editor_JustifyFull" xml:space="preserve">
+    <value>Justify</value>
+  </data>
+  <data name="Editor_JustifyLeft" xml:space="preserve">
+    <value>Align text left</value>
+  </data>
+  <data name="Editor_JustifyRight" xml:space="preserve">
+    <value>Align text right</value>
+  </data>
+  <data name="Editor_LinkOpenInNewWindow1" xml:space="preserve">
+    <value>Open link in new window</value>
+  </data>
+  <data name="Editor_LinkText1" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Editor_LinkToolTip1" xml:space="preserve">
+    <value>ToolTip</value>
+  </data>
+  <data name="Editor_LinkWebAddress1" xml:space="preserve">
+    <value>Web address</value>
+  </data>
+  <data name="Editor_OrderBy" xml:space="preserve">
+    <value>Arrange by:</value>
+  </data>
+  <data name="Editor_OrderByName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Editor_OrderBySize" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Editor_Outdent" xml:space="preserve">
+    <value>Outdent</value>
+  </data>
+  <data name="Editor_OverwriteFile" xml:space="preserve">
+    <value>'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?</value>
+  </data>
+  <data name="Editor_Search1" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Editor_Strikethrough" xml:space="preserve">
+    <value>Strikethrough</value>
+  </data>
+  <data name="Editor_Styles" xml:space="preserve">
+    <value>Styles</value>
+  </data>
+  <data name="Editor_Subscript" xml:space="preserve">
+    <value>Subscript</value>
+  </data>
+  <data name="Editor_Superscript" xml:space="preserve">
+    <value>Superscript</value>
+  </data>
+  <data name="Editor_Underline" xml:space="preserve">
+    <value>Underline</value>
+  </data>
+  <data name="Editor_Unlink" xml:space="preserve">
+    <value>Remove hyperlink</value>
+  </data>
+  <data name="Editor_UploadFile" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="Filter_SelectValue" xml:space="preserve">
+    <value>-Select value-</value>
+  </data>
+  <data name="Upload_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Upload_DropFilesHere" xml:space="preserve">
+    <value>drop files here to upload</value>
+  </data>
+  <data name="Upload_HeaderStatusUploaded" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Upload_HeaderStatusUploading" xml:space="preserve">
+    <value>Uploading...</value>
+  </data>
+  <data name="Upload_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Upload_Retry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="Upload_Select" xml:space="preserve">
+    <value>Select...</value>
+  </data>
+  <data name="Upload_StatusFailed" xml:space="preserve">
+    <value>failed</value>
+  </data>
+  <data name="Upload_StatusUploaded" xml:space="preserve">
+    <value>uploaded</value>
+  </data>
+  <data name="Upload_StatusUploading" xml:space="preserve">
+    <value>uploading</value>
+  </data>
+  <data name="Upload_UploadSelectedFiles" xml:space="preserve">
+    <value>Upload files</value>
   </data>
 </root>

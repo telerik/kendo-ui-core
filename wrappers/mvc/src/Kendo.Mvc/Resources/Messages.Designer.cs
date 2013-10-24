@@ -1278,9 +1278,9 @@ namespace Kendo.Mvc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to  days(s).
         /// </summary>
-        public static string Scheduler_Recurrence_Editor_Daily_Days {
+        public static string Scheduler_Recurrence_Editor_Daily_Interval {
             get {
-                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Daily_Days", resourceCulture);
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Daily_Interval", resourceCulture);
             }
         }
         
@@ -1296,45 +1296,45 @@ namespace Kendo.Mvc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to After .
         /// </summary>
-        public static string Scheduler_Recurrence_Editor_End_EndCountAfter {
+        public static string Scheduler_Recurrence_Editor_End_After {
             get {
-                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_EndCountAfter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  occurrence(s).
-        /// </summary>
-        public static string Scheduler_Recurrence_Editor_End_EndCountOccurrence {
-            get {
-                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_EndCountOccurrence", resourceCulture);
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_After", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to End:.
         /// </summary>
-        public static string Scheduler_Recurrence_Editor_End_EndLabel {
+        public static string Scheduler_Recurrence_Editor_End_Label {
             get {
-                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_EndLabel", resourceCulture);
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_Label", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Never.
         /// </summary>
-        public static string Scheduler_Recurrence_Editor_End_EndNever {
+        public static string Scheduler_Recurrence_Editor_End_Never {
             get {
-                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_EndNever", resourceCulture);
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_Never", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  occurrence(s).
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_End_Occurrence {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_Occurrence", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to On .
         /// </summary>
-        public static string Scheduler_Recurrence_Editor_End_EndUntilOn {
+        public static string Scheduler_Recurrence_Editor_End_On {
             get {
-                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_EndUntilOn", resourceCulture);
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_End_On", resourceCulture);
             }
         }
         
@@ -1395,9 +1395,9 @@ namespace Kendo.Mvc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to  month(s).
         /// </summary>
-        public static string Scheduler_Recurrence_Editor_Monthly_Months {
+        public static string Scheduler_Recurrence_Editor_Monthly_Interval {
             get {
-                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Monthly_Months", resourceCulture);
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Monthly_Interval", resourceCulture);
             }
         }
         
@@ -1492,6 +1492,15 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  week(s).
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Weekly_Interval {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Weekly_Interval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Repeat every: .
         /// </summary>
         public static string Scheduler_Recurrence_Editor_Weekly_RepeatEvery {
@@ -1510,11 +1519,11 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  week(s).
+        ///   Looks up a localized string similar to  year(s).
         /// </summary>
-        public static string Scheduler_Recurrence_Editor_Weekly_Weeks {
+        public static string Scheduler_Recurrence_Editor_Yearly_Interval {
             get {
-                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Weekly_Weeks", resourceCulture);
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Yearly_Interval", resourceCulture);
             }
         }
         
@@ -1542,15 +1551,6 @@ namespace Kendo.Mvc.Resources {
         public static string Scheduler_Recurrence_Editor_Yearly_RepeatOn {
             get {
                 return ResourceManager.GetString("Scheduler_Recurrence_Editor_Yearly_RepeatOn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  year(s).
-        /// </summary>
-        public static string Scheduler_Recurrence_Editor_Yearly_Years {
-            get {
-                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Yearly_Years", resourceCulture);
             }
         }
         

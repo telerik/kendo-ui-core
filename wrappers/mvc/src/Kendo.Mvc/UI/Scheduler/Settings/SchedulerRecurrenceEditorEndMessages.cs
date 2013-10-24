@@ -5,64 +5,64 @@
 
     public class SchedulerRecurrenceEditorEndMessages : JsonObject
     {
-        private const string DefaultEndLabel = "End:";
+        private const string DefaultLabel = "End:";
 
-        private const string DefaultEndNever = "Never";
+        private const string DefaultNever = "Never";
 
-        private const string DefaultEndCountAfter = "After ";
+        private const string DefaultAfter = "After ";
 
-        private const string DefaultEndCountOccurrence = " occurrence(s)";
+        private const string DefaultOccurrence = " occurrence(s)";
 
-        private const string DefaultEndUntilOn = "On ";
+        private const string DefaultOn = "On ";
 
         public SchedulerRecurrenceEditorEndMessages()
         {
-            EndLabel = Messages.Scheduler_Recurrence_Editor_End_EndLabel;
+            Label = Messages.Scheduler_Recurrence_Editor_End_Label;
 
-            EndNever = Messages.Scheduler_Recurrence_Editor_End_EndNever;
+            Never = Messages.Scheduler_Recurrence_Editor_End_Never;
 
-            EndCountAfter = Messages.Scheduler_Recurrence_Editor_End_EndCountAfter;
+            After = Messages.Scheduler_Recurrence_Editor_End_After;
 
-            EndCountOccurrence = Messages.Scheduler_Recurrence_Editor_End_EndCountOccurrence;
+            Occurrence = Messages.Scheduler_Recurrence_Editor_End_Occurrence;
 
-            EndUntilOn = Messages.Scheduler_Recurrence_Editor_End_EndUntilOn;
+            On = Messages.Scheduler_Recurrence_Editor_End_On;
         }
 
-        public string EndLabel { get; set; }
+        public string Label { get; set; }
 
-        public string EndNever { get; set; }
+        public string Never { get; set; }
 
-        public string EndCountAfter { get; set; }
+        public string After { get; set; }
 
-        public string EndCountOccurrence { get; set; }
+        public string Occurrence { get; set; }
 
-        public string EndUntilOn { get; set; }
+        public string On { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            if (EndLabel != DefaultEndLabel)
+            if (Label != DefaultLabel)
             {
-                json["endLabel"] = EndLabel;
+                json["label"] = Label;
             }
 
-            if (EndNever != DefaultEndNever)
+            if (Never != DefaultNever)
             {
-                json["endNever"] = EndNever;
+                json["never"] = Never;
             }
 
-            if (EndCountAfter != DefaultEndCountAfter)
+            if (After != DefaultAfter)
             {
-                json["endCountAfter"] = EndCountAfter;
+                json["after"] = After;
             }
 
-            if (EndCountOccurrence != DefaultEndCountOccurrence)
+            if (Occurrence != DefaultOccurrence)
             {
-                json["endCountOccurrence"] = EndCountOccurrence;
+                json["occurrence"] = Occurrence;
             }
 
-            if (EndUntilOn != DefaultEndUntilOn)
+            if (On != DefaultOn)
             {
-                json["endUntilOn"] = EndUntilOn;
+                json["on"] = On;
             }
         }
     }

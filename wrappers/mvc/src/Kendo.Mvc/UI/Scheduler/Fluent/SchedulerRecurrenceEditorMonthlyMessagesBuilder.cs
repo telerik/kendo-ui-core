@@ -30,9 +30,9 @@
             return this;
         }
 
-        public SchedulerRecurrenceEditorMonthlyMessagesBuilder Months(string message)
+        public SchedulerRecurrenceEditorMonthlyMessagesBuilder Interval(string message)
         {
-            editorMessages.Months = message;
+            editorMessages.Interval = message;
 
             return this;
         }

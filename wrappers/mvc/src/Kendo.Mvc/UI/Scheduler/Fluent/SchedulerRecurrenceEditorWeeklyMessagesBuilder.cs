@@ -16,9 +16,9 @@
             this.editorMessages = editorMessages;
         }
 
-        public SchedulerRecurrenceEditorWeeklyMessagesBuilder Weeks(string message)
+        public SchedulerRecurrenceEditorWeeklyMessagesBuilder Interval(string message)
         {
-            editorMessages.Weeks = message;
+            editorMessages.Interval = message;
 
             return this;
         }

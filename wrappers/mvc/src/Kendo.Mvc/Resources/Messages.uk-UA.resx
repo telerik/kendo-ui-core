@@ -441,25 +441,25 @@
   <data name="Scheduler_Recurrence_DeleteWindowTitle" xml:space="preserve">
     <value>Delete Recurring Item</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_Daily_Days" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_Daily_Interval" xml:space="preserve">
     <value>days(s)</value>
   </data>
   <data name="Scheduler_Recurrence_Editor_Daily_RepeatEvery" xml:space="preserve">
     <value>Repeat every:</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndCountAfter" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_After" xml:space="preserve">
     <value>After</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndCountOccurrence" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_Occurrence" xml:space="preserve">
     <value>occurrence(s)</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndLabel" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_Label" xml:space="preserve">
     <value>End:</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndNever" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_Never" xml:space="preserve">
     <value>Never</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_End_EndUntilOn" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_End_On" xml:space="preserve">
     <value>On</value>
   </data>
   <data name="Scheduler_Recurrence_Editor_Frequencies_Daily" xml:space="preserve">
@@ -480,7 +480,7 @@
   <data name="Scheduler_Recurrence_Editor_Monthly_Day" xml:space="preserve">
     <value>Day</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_Monthly_Months" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_Monthly_Interval" xml:space="preserve">
     <value>month(s)</value>
   </data>
   <data name="Scheduler_Recurrence_Editor_Monthly_RepeatEvery" xml:space="preserve">
@@ -510,7 +510,7 @@
   <data name="Scheduler_Recurrence_Editor_Weekly_RepeatOn" xml:space="preserve">
     <value>Repeat on:</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_Weekly_Weeks" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_Weekly_Interval" xml:space="preserve">
     <value>week(s)</value>
   </data>
   <data name="Scheduler_Recurrence_Editor_Yearly_Of" xml:space="preserve">
@@ -522,7 +522,7 @@
   <data name="Scheduler_Recurrence_Editor_Yearly_RepeatOn" xml:space="preserve">
     <value>Repeat on:</value>
   </data>
-  <data name="Scheduler_Recurrence_Editor_Yearly_Years" xml:space="preserve">
+  <data name="Scheduler_Recurrence_Editor_Yearly_Interval" xml:space="preserve">
     <value>year(s)</value>
   </data>
   <data name="Scheduler_Recurrence_EditRecurring" xml:space="preserve">
@@ -617,5 +617,86 @@
   </data>
   <data name="Scheduler_Recurrence_Editor_Weekdays_Weekend" xml:space="preserve">
     <value>weekend day</value>
+  </data>
+  <data name="Editor_BackColor" xml:space="preserve">
+    <value>Background color</value>
+  </data>
+  <data name="Editor_DeleteFile" xml:space="preserve">
+    <value>Are you sure you want to delete "{0}"?</value>
+  </data>
+  <data name="Editor_DeleteRow1" xml:space="preserve">
+    <value>Delete row</value>
+  </data>
+  <data name="Editor_DialogButtonSeparator1" xml:space="preserve">
+    <value>or</value>
+  </data>
+  <data name="Editor_DialogCancel1" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Editor_DialogInsert1" xml:space="preserve">
+    <value>Insert</value>
+  </data>
+  <data name="Editor_DirectoryNotFound" xml:space="preserve">
+    <value>A directory with this name was not found.</value>
+  </data>
+  <data name="Editor_DropFilesHere" xml:space="preserve">
+    <value>drop files here to upload</value>
+  </data>
+  <data name="Editor_EmptyFolder" xml:space="preserve">
+    <value>Empty Folder</value>
+  </data>
+  <data name="Editor_ForeColor" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Editor_InvalidFileType" xml:space="preserve">
+    <value>The selected file "{0}" is not valid. Supported file types are {1}.</value>
+  </data>
+  <data name="Editor_OrderBy" xml:space="preserve">
+    <value>Arrange by:</value>
+  </data>
+  <data name="Editor_OrderByName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Editor_OrderBySize" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Editor_OverwriteFile" xml:space="preserve">
+    <value>'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?</value>
+  </data>
+  <data name="Editor_UploadFile" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="Upload_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Upload_DropFilesHere" xml:space="preserve">
+    <value>drop files here to upload</value>
+  </data>
+  <data name="Upload_HeaderStatusUploaded" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Upload_HeaderStatusUploading" xml:space="preserve">
+    <value>Uploading...</value>
+  </data>
+  <data name="Upload_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Upload_Retry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="Upload_Select" xml:space="preserve">
+    <value>Select...</value>
+  </data>
+  <data name="Upload_StatusFailed" xml:space="preserve">
+    <value>failed</value>
+  </data>
+  <data name="Upload_StatusUploaded" xml:space="preserve">
+    <value>uploaded</value>
+  </data>
+  <data name="Upload_StatusUploading" xml:space="preserve">
+    <value>uploading</value>
+  </data>
+  <data name="Upload_UploadSelectedFiles" xml:space="preserve">
+    <value>Upload files</value>
   </data>
 </root>

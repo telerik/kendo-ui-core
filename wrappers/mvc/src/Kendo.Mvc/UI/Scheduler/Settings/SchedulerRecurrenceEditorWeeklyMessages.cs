@@ -5,7 +5,7 @@
 
     public class SchedulerRecurrenceEditorWeeklyMessages : JsonObject
     {
-        private const string DefaultWeeks = " week(s)";
+        private const string DefaultInterval = " week(s)";
 
         private const string DefaultRepeatEvery = "Repeat every: ";
 
@@ -13,14 +13,14 @@
 
         public SchedulerRecurrenceEditorWeeklyMessages()
         {
-            Weeks = Messages.Scheduler_Recurrence_Editor_Weekly_Weeks;
+            Interval = Messages.Scheduler_Recurrence_Editor_Weekly_Interval;
 
             RepeatEvery = Messages.Scheduler_Recurrence_Editor_Weekly_RepeatEvery;
 
             RepeatOn = Messages.Scheduler_Recurrence_Editor_Weekly_RepeatOn;
         }
 
-        public string Weeks { get; set; }
+        public string Interval { get; set; }
 
         public string RepeatEvery { get; set; }
 
@@ -28,9 +28,9 @@
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            if (Weeks != DefaultWeeks)
+            if (Interval != DefaultInterval)
             {
-                json["weeks"] = Weeks;
+                json["interval"] = Interval;
             }
 
             if (RepeatEvery != DefaultRepeatEvery)

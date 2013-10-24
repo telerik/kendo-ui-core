@@ -16,37 +16,37 @@
             this.editorMessages = editorMessages;
         }
 
-        public SchedulerRecurrenceEditorEndMessagesBuilder EndLabel(string message)
+        public SchedulerRecurrenceEditorEndMessagesBuilder Label(string message)
         {
-            editorMessages.EndLabel = message;
+            editorMessages.Label = message;
 
             return this;
         }
 
-        public SchedulerRecurrenceEditorEndMessagesBuilder EndNever(string message)
+        public SchedulerRecurrenceEditorEndMessagesBuilder Never(string message)
         {
-            editorMessages.EndNever = message;
+            editorMessages.Never = message;
 
             return this;
         }
 
-        public SchedulerRecurrenceEditorEndMessagesBuilder EndCountAfter(string message)
+        public SchedulerRecurrenceEditorEndMessagesBuilder After(string message)
         {
-            editorMessages.EndCountAfter = message;
+            editorMessages.After = message;
 
             return this;
         }
 
-        public SchedulerRecurrenceEditorEndMessagesBuilder EndCountOccurrence(string message)
+        public SchedulerRecurrenceEditorEndMessagesBuilder Occurrence(string message)
         {
-            editorMessages.EndCountOccurrence = message;
+            editorMessages.Occurrence = message;
 
             return this;
         }
 
-        public SchedulerRecurrenceEditorEndMessagesBuilder EndUntilOn(string message)
+        public SchedulerRecurrenceEditorEndMessagesBuilder On(string message)
         {
-            editorMessages.EndUntilOn = message;
+            editorMessages.On = message;
 
             return this;
         }

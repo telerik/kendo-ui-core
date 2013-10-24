@@ -9,7 +9,7 @@
 
         private const string DefaultRepeatOn = "Repeat on: ";
 
-        private const string DefaultYears = " year(s)";
+        private const string DefaultInterval = " year(s)";
 
         private const string DefaultOf = " of ";
 
@@ -19,7 +19,7 @@
 
             RepeatOn = Messages.Scheduler_Recurrence_Editor_Yearly_RepeatOn;
 
-            Years = Messages.Scheduler_Recurrence_Editor_Yearly_Years;
+            Interval = Messages.Scheduler_Recurrence_Editor_Yearly_Interval;
 
             Of = Messages.Scheduler_Recurrence_Editor_Yearly_Of;
         }
@@ -28,7 +28,7 @@
 
         public string RepeatOn { get; set; }
 
-        public string Years { get; set; }
+        public string Interval { get; set; }
 
         public string Of { get; set; }
 
@@ -44,9 +44,9 @@
                 json["repeatOn"] = RepeatOn;
             }
 
-            if (Years != DefaultYears)
+            if (Interval != DefaultInterval)
             {
-                json["years"] = Years;
+                json["interval"] = Interval;
             }
 
             if (Of != DefaultOf)
