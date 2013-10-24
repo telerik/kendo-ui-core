@@ -54,6 +54,22 @@ public class EditableTag extends BaseTag /* interfaces *//* interfaces */ {
         setEvent("template", value.getBody());
     }
 
+    public java.lang.String getCancelDelete() {
+        return (java.lang.String)getProperty("cancelDelete");
+    }
+
+    public void setCancelDelete(java.lang.String value) {
+        setProperty("cancelDelete", value);
+    }
+
+    public java.lang.String getConfirmDelete() {
+        return (java.lang.String)getProperty("confirmDelete");
+    }
+
+    public void setConfirmDelete(java.lang.String value) {
+        setProperty("confirmDelete", value);
+    }
+
     public java.lang.Object getConfirmation() {
         return (java.lang.Object)getProperty("confirmation");
     }

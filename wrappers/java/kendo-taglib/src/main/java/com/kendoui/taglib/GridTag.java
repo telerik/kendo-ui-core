@@ -248,6 +248,14 @@ public class GridTag extends WidgetTag /* interfaces */implements DataBoundWidge
         setProperty("height", value);
     }
 
+    public java.lang.Object getMobile() {
+        return (java.lang.Object)getProperty("mobile");
+    }
+
+    public void setMobile(java.lang.Object value) {
+        setProperty("mobile", value);
+    }
+
     public boolean getNavigatable() {
         return (boolean)getProperty("navigatable");
     }

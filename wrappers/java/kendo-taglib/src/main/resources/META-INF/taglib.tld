@@ -11386,6 +11386,13 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
+            <description>If set to true and the grid is viewed on mobile browser it will use adaptive rendering.Can be set to a string phone or tablet which will force the widget to use adaptive rendering regardless of browser type.
+The grid uses same layout for both phone and tablet.</description>
+            <name>mobile</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
             <description>If set to true the use could navigate the widget using the keyboard navigation. By default keyboard navigation is disabled.</description>
             <name>navigatable</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11562,8 +11569,20 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The text message displayed in the menu header button (available in mobile mode only).</description>
+            <name>done</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The text message displayed for the filter menu item.</description>
             <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text message displayed in the menu header (available in mobile mode only).</description>
+            <name>settings</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -11841,6 +11860,20 @@ Each table row consists of table cells (&lt;td&gt;) which represent the grid col
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>If confirmation is enabled the grid will display a confirmation dialog when the user clicks the "destroy" command button.
+If the grid is in mobile mode this text will be used for the cancel button.</description>
+            <name>cancelDelete</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If confirmation is enabled the grid will display a confirmation dialog when the user clicks the "destroy" command button.
+If the grid is in mobile mode this text will be used for the confirm button.</description>
+            <name>confirmDelete</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>If set to true the grid will display a confirmation dialog when the user clicks the "destroy" command button.Can be set to a string which will be used as the confirmation text.</description>
             <name>confirmation</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11923,6 +11956,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The text of the cancel button in the filter menu header (available in mobile mode only).</description>
+            <name>cancel</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The text of the button which clears the filter.</description>
             <name>clear</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11953,6 +11992,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The text of the operator item in filter menu (available in mobile mode only).</description>
+            <name>operator</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The text of the option which represents the "or" logical operation.</description>
             <name>or</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11961,6 +12006,12 @@ which field to update. The other option is to use MVVM bindings in order to bind
         <attribute>
             <description>The text of the dropdownlist displayed in the filter menu for columns whose values option is set.</description>
             <name>selectValue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The text of the value item in filter menu (available in mobile mode only).</description>
+            <name>value</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>

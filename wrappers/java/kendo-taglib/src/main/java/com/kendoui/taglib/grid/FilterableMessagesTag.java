@@ -59,6 +59,14 @@ public class FilterableMessagesTag extends  BaseTag  /* interfaces *//* interfac
         setProperty("and", value);
     }
 
+    public java.lang.String getCancel() {
+        return (java.lang.String)getProperty("cancel");
+    }
+
+    public void setCancel(java.lang.String value) {
+        setProperty("cancel", value);
+    }
+
     public java.lang.String getClear() {
         return (java.lang.String)getProperty("clear");
     }
@@ -99,6 +107,14 @@ public class FilterableMessagesTag extends  BaseTag  /* interfaces *//* interfac
         setProperty("isTrue", value);
     }
 
+    public java.lang.String getOperator() {
+        return (java.lang.String)getProperty("operator");
+    }
+
+    public void setOperator(java.lang.String value) {
+        setProperty("operator", value);
+    }
+
     public java.lang.String getOr() {
         return (java.lang.String)getProperty("or");
     }
@@ -113,6 +129,14 @@ public class FilterableMessagesTag extends  BaseTag  /* interfaces *//* interfac
 
     public void setSelectValue(java.lang.String value) {
         setProperty("selectValue", value);
+    }
+
+    public java.lang.String getValue() {
+        return (java.lang.String)getProperty("value");
+    }
+
+    public void setValue(java.lang.String value) {
+        setProperty("value", value);
     }
 
 //<< Attributes

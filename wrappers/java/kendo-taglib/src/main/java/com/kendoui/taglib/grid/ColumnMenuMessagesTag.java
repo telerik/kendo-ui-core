@@ -59,12 +59,28 @@ public class ColumnMenuMessagesTag extends  BaseTag  /* interfaces *//* interfac
         setProperty("columns", value);
     }
 
+    public java.lang.String getDone() {
+        return (java.lang.String)getProperty("done");
+    }
+
+    public void setDone(java.lang.String value) {
+        setProperty("done", value);
+    }
+
     public java.lang.String getFilter() {
         return (java.lang.String)getProperty("filter");
     }
 
     public void setFilter(java.lang.String value) {
         setProperty("filter", value);
+    }
+
+    public java.lang.String getSettings() {
+        return (java.lang.String)getProperty("settings");
+    }
+
+    public void setSettings(java.lang.String value) {
+        setProperty("settings", value);
     }
 
     public java.lang.String getSortAscending() {
