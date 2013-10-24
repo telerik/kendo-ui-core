@@ -194,6 +194,8 @@
             "@current-time-color":                  constant(BGCOLOR, ".k-scheduler-now-line"),
             "@event-background-color":              constant(BGCOLOR, ".k-event"),
             "@event-text-color":                    constant(COLOR, ".k-event"),
+            "@scheduler-nonwork-background-color":  constant(BGCOLOR, ".k-scheduler-table .k-nonwork-hour"),
+            "@resize-background-color":             constant(BGCOLOR, ".k-ie7 .k-event .k-resize-handle, .k-event .k-resize-handle:after"),
 
             "@calendar-border-radius":              constant("border-radius", ".k-window .k-link"),
             "@calendar-content-text-color":         constant(COLOR, ".k-calendar .k-link"),
