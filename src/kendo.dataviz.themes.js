@@ -184,6 +184,8 @@ kendo_module({
                     }
                 },
                 boxPlot: {
+                    outliersField: "",
+                    meanField: "",
                     whiskers: {
                         width: 1,
                         color: BLACK

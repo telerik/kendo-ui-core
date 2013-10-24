@@ -1155,7 +1155,7 @@ kendo_module({
                     field = field + "Field";
                 }
 
-                if (!series[field]) {
+                if (!defined(series[field])) {
                     result = false;
                     break;
                 }
@@ -5972,16 +5972,12 @@ kendo_module({
                 options = chart.options,
                 children = chart.children,
                 pointColor = data.fields.color || series.color,
-                valueParts = chart.splitValue(data.valueFields),
+                value = data.valueFields,
+                valueParts = chart.splitValue(value),
                 hasValue = areNumbers(valueParts),
                 categoryPoints = chart.categoryPoints[categoryIx],
                 dataItem = series.data[categoryIx],
                 point, cluster;
-
-            data.valueFields = deepExtend({}, data.valueFields, {
-                mean: data.fields.mean,
-                outliers: data.fields.outliers
-            });
 
             if (!categoryPoints) {
                 chart.categoryPoints[categoryIx] = categoryPoints = [];
@@ -6005,7 +6001,7 @@ kendo_module({
             }
 
             if (point) {
-                chart.updateRange(data.valueFields, categoryIx, series);
+                chart.updateRange(value, categoryIx, series);
 
                 cluster.append(point);
 
@@ -11181,7 +11177,7 @@ kendo_module({
 
     SeriesBinder.current.register(
         [BOX_PLOT],
-        ["lower", "q1", "median", "q3", "upper"], ["mean", "outliers", CATEGORY, COLOR, NOTE_TEXT]
+        ["lower", "q1", "median", "q3", "upper", "mean", "outliers"], [CATEGORY, COLOR, NOTE_TEXT]
     );
 
     DefaultAggregates.current.register(
