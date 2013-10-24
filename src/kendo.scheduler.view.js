@@ -1590,7 +1590,7 @@ kendo_module({
 
             var touchScroller = kendo.touchScroller(this.content, {
                 avoidScrolling: function(e) {
-                    return $(e.event.target).closest(".k-event.k-scheduler-hold").length > 0;
+                    return $(e.event.target).closest(".k-event.k-event-active").length > 0;
                 }
             });
 

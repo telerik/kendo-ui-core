@@ -1874,8 +1874,8 @@ kendo_module({
                         var view = that.view();
                         var eventElement = e.currentTarget;
 
-                        if (isMobile && !eventElement.hasClass("k-scheduler-hold")) {
-                            that.element.find(".k-scheduler-hold").removeClass("k-scheduler-hold");
+                        if (isMobile && !eventElement.hasClass("k-event-active")) {
+                            that.element.find(".k-event-active").removeClass("k-event-active");
                             e.preventDefault();
                             return;
                         }
@@ -1949,7 +1949,7 @@ kendo_module({
                             that._updateEvent(null, event, $.extend({ start: start, end: end }, endResources));
                         }
 
-                        e.currentTarget.removeClass("k-scheduler-hold");
+                        e.currentTarget.removeClass("k-event-active");
                         this.cancelHold();
                     })
                     .bind("dragcancel", function() {
@@ -1963,8 +1963,8 @@ kendo_module({
                         if (that.element.find(".k-scheduler-monthview").length) {
                             e.preventDefault();
                         }
-                        that.element.find(".k-scheduler-hold").removeClass("k-scheduler-hold");
-                        e.currentTarget.addClass("k-scheduler-hold");
+                        that.element.find(".k-event-active").removeClass("k-event-active");
+                        e.currentTarget.addClass("k-event-active");
                     });
 
                     that._moveDraggable.userEvents.bind("press", function(e) {

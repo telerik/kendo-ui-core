@@ -4333,14 +4333,17 @@ tr:hover > td > .k-task .k-event-delete
     bottom: 0;
 }
 
-.k-event .k-resize-handle
+.k-event .k-resize-handle,
+.k-scheduler-mobile .k-event:hover .k-resize-handle
 {
     position: absolute;
     visibility: hidden;
     z-index: 2;
 }
 
-.k-event:hover .k-resize-handle
+.k-event:hover .k-resize-handle,
+.k-event-active .k-resize-handle,
+.k-scheduler-mobile .k-event-active:hover .k-resize-handle
 {
     visibility: visible;
 }

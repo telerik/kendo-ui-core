@@ -661,7 +661,7 @@ kendo_module({
                     tap: function(e) {
                         var eventElement = $(e.target).closest(".k-event");
 
-                        if (!eventElement.hasClass("k-scheduler-hold")) {
+                        if (!eventElement.hasClass("k-event-active")) {
                             that.trigger("edit", { uid: eventElement.attr(kendo.attr("uid")) });
                         }
 
