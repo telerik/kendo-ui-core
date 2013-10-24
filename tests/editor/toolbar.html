@@ -185,7 +185,7 @@
             var editorElement = $("<div />");
             var editorNS = kendo.ui.editor;
 
-            module("Tool configuration & rendering", {
+            var mockedToolbarModule = {
                 setup: function() {
                     dom = $("<ul class='k-editor-toolbar' />").appendTo("body");
                     toolbar = new editorNS.Toolbar(dom[0]);
@@ -195,7 +195,9 @@
                     toolbar.destroy();
                     dom.remove();
                 }
-            });
+            };
+
+            module("Tool configuration & rendering", mockedToolbarModule);
 
             function mockEditorTools(array, options) {
                 return {
@@ -220,8 +222,12 @@
                 };
             }
 
+            function bindToMock(array, options) {
+                toolbar.bindTo(mockEditorTools(array, options));
+            }
+
             test("expands tool configuration for default tool", function() {
-                toolbar.bindTo(mockEditorTools([ "bold" ]));
+                bindToMock([ "bold" ]);
 
                 ok($.isPlainObject(toolbar.tools.bold));
                 equal(toolbar.tools.bold.options.name, "bold");
@@ -229,7 +235,7 @@
             });
 
             test("expands tool configuration for custom tool", function() {
-                toolbar.bindTo(mockEditorTools([ { name: "foo" } ]));
+                bindToMock([ { name: "foo" } ]);
 
                 ok($.isPlainObject(toolbar.tools.foo));
                 equal(toolbar.tools.foo.options.name, "foo");
@@ -238,7 +244,7 @@
             });
 
             test("expands native tools", function() {
-                toolbar.bindTo(mockEditorTools([]));
+                bindToMock([]);
 
                 ok(toolbar.tools.undo);
                 ok(toolbar.tools.redo);
@@ -261,10 +267,10 @@
             });
 
             test("expands configured tools", function() {
-                toolbar.bindTo(mockEditorTools([ {
+                bindToMock([ {
                     name: "formatting",
                     items: [ { text: "foo", tag: "h1" } ]
-                } ]));
+                } ]);
 
                 var formatting = dom.find("select.k-formatting");
 
@@ -276,7 +282,7 @@
             });
 
             test("toolById returns tool", function() {
-                toolbar.bindTo(mockEditorTools([ { name: "foo" }, { name: "bar" } ]));
+                bindToMock([ { name: "foo" }, { name: "bar" } ]);
 
                 var tool = toolbar.toolById("bar");
 
@@ -285,19 +291,19 @@
             });
 
             test("snippets tool is not shown if it has no items", function() {
-                toolbar.bindTo(mockEditorTools([]));
+                bindToMock([]);
 
                 equal(dom.find("li").length, 0);
             });
 
             test("unlink tool applies custom title", function() {
-                toolbar.bindTo(mockEditorTools([ "unlink" ], { messages: { unlink: "foo" } }));
+                bindToMock([ "unlink" ], { messages: { unlink: "foo" } });
 
                 equal(dom.find(".k-unlink").attr("title"), "foo");
             });
 
             test("clicking disabled links should not navigate", function() {
-                toolbar.bindTo(mockEditorTools([ "unlink" ]));
+                bindToMock([ "unlink" ]);
 
                 var isDefaultPrevented = false;
                 var navigationListener = function(e) {
@@ -314,10 +320,10 @@
             });
 
             test("first and last buttons in groups get k-group-start/end classes", function() {
-                toolbar.bindTo(mockEditorTools([
+                bindToMock([
                     "bold", "italic", "underline",
                     "insertImage", "createLink"
-                ]));
+                ]);
 
                 equal(dom.find("li.k-tool-group").length, 2);
                 equal(dom.find(".k-group-start").length, 2);
@@ -329,9 +335,9 @@
             });
 
             test("hidden buttons do not end groups", function() {
-                toolbar.bindTo(mockEditorTools([
+                bindToMock([
                     "createLink", "unlink"
-                ]));
+                ]);
 
                 dom.find(".k-unlink").addClass(".k-state-disabled");
                 toolbar._updateContext();
@@ -340,60 +346,140 @@
             });
 
             test("break tool renders row breaking element", function() {
-                toolbar.bindTo(mockEditorTools([
+                bindToMock([
                     "bold", "italic", "underline", "break",
                     "createLink", "unlink"
-                ]));
+                ]);
 
                 equal(dom.find(".k-row-break").length, 1);
             });
 
             test("custom tools are moved into new groups", function() {
-                toolbar.bindTo(mockEditorTools([
+                bindToMock([
                     "formatting",
                     { name: "custom", template: "<b class='foo' />" },
                     "fontName"
-                ]));
+                ]);
 
                 equal(dom.find(".k-tool-group").length, 3);
             });
 
             test("custom tools are moved into separate groups", function() {
-                toolbar.bindTo(mockEditorTools([
+                bindToMock([
                     { name: "custom1", template: "<b class='foo' />" },
                     { name: "custom2", template: "<b class='bar' />" }
-                ]));
+                ]);
 
                 equal(dom.find(".k-tool-group").length, 2);
             });
 
             test("custom tools exec function is bound to tool click", 2, function() {
-                toolbar.bindTo(mockEditorTools([
+                bindToMock([
                     { name: "custom1", exec: function() {
                         ok(true);
                         equal(this, editorElement[0]);
                     } }
-                ]));
+                ]);
 
                 dom.find(".k-tool-icon").trigger("click");
             });
 
             test("buttons honor tooltip configuration", function() {
-                toolbar.bindTo(mockEditorTools([
+                bindToMock([
                     { name: "custom", tooltip: "foo" }
-                ]));
+                ]);
 
                 equal(dom.find(".k-tool-icon").attr("title"), "foo");
             });
 
             test("nameless custom commands are rendered", function() {
-                toolbar.bindTo(mockEditorTools([
+                bindToMock([
                     { template: "<span class='foo' />" }
-                ]));
+                ]);
 
                 equal(dom.find(".foo").length, 1);
             });
 
+            module("Keyboard navigation", mockedToolbarModule);
+
+            function active() {
+                return $(kendo._activeElement());
+            }
+
+            $.fn.press = function (key) {
+                $(this).trigger({
+                    type: "keydown",
+                    keyCode: key
+                });
+            }
+
+            var keys = kendo.keys;
+
+            test("focuses first tool if it is a drop-down", function() {
+                bindToMock([ "formatting" ]);
+
+                toolbar.focus();
+
+                equal(dom.find(".k-dropdown-wrap.k-state-focused").length, 1);
+            });
+
+            test("focuses first tool if it is a button", function() {
+                bindToMock([ "bold" ]);
+
+                toolbar.focus();
+
+                ok(active().is(".k-bold"));
+            });
+
+            test("right arrow focuses next tool", function() {
+                bindToMock([ "bold", "italic" ]);
+
+                dom.find(".k-bold").press(keys.RIGHT);
+
+                ok(active().is(".k-italic"));
+            });
+
+            test("right arrow focuses tool in next group", function() {
+                bindToMock([ "bold", "createLink" ]);
+
+                dom.find(".k-bold").press(keys.RIGHT);
+
+                ok(active().is(".k-createLink"));
+            });
+
+            test("right arrow focuses first tool in next group", function() {
+                bindToMock([ "bold", "createLink", "unlink" ]);
+
+                dom.find(".k-bold").press(keys.RIGHT);
+
+                ok(active().is(".k-createLink"));
+            });
+
+            test("left arrow focuses previous tool", function() {
+                bindToMock([ "bold", "italic" ]);
+
+                dom.find(".k-italic").press(keys.LEFT);
+
+                ok(active().is(".k-bold"));
+            });
+
+            test("right arrow focuses tool in next group", function() {
+                bindToMock([ "bold", "createLink" ]);
+
+                dom.find(".k-createLink").press(keys.LEFT);
+
+                ok(active().is(".k-bold"));
+            });
+
+            test("right arrow skips disabled tools", function() {
+                bindToMock([ "bold", "italic", "underline" ]);
+
+                dom.find(".k-italic").addClass("k-state-disabled");
+
+                dom.find(".k-bold").press(keys.RIGHT);
+
+                ok(active().is(".k-underline"));
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

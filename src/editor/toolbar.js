@@ -8,7 +8,8 @@
     var keys = kendo.keys;
     var NS = ".kendoEditor";
 
-    var focusable = ".k-colorpicker,a.k-tool-icon:not(.k-state-disabled),.k-selectbox, .k-combobox .k-input";
+    var focusable = "a.k-tool-icon:not(.k-state-disabled)," +
+                    ".k-colorpicker,.k-selectbox,.k-dropdown,.k-combobox .k-input";
 
     var Toolbar = Widget.extend({
         init: function(element, options) {
@@ -203,11 +204,12 @@
 
         focus: function() {
             var TABINDEX = "tabIndex";
-            var element = this._editor.element;
-            var tabIndex = element.attr(TABINDEX);
+            var element = this.element;
+            var tabIndex = this._editor.element.attr(TABINDEX);
 
             // Chrome can't focus something which has already been focused
-            element.attr(TABINDEX, tabIndex || 0).focus().find("li:has(" + focusable + ")").first().focus();
+            element.attr(TABINDEX, tabIndex || 0).focus()
+                .find(focusable).first().focus();
 
             if (!tabIndex && tabIndex !== 0) {
                 element.removeAttr(TABINDEX);
@@ -420,39 +422,42 @@
                 .on("mouseleave" + NS, enabledButtons, function() { $(this).removeClass("k-state-hover"); })
                 .on("mousedown" + NS, buttons, false)
                 .on("keydown" + NS, focusable, function(e) {
-                    var closestLi = $(this).closest("li"),
-                        focusableTool = "li:has(" + focusable + ")",
-                        focusElement,
+                    var current = this;
+                    var focusElement,
                         keyCode = e.keyCode;
 
-                    if (keyCode == keys.RIGHT) {
-                        focusElement = closestLi.nextAll(focusableTool).first().find(focusable);
-                    } else if (keyCode == keys.LEFT) {
-                        focusElement = closestLi.prevAll(focusableTool).first().find(focusable);
+                    function move(direction, constrain) {
+                        var tools = that.element.find(focusable);
+                        var index = tools.index(current) + direction;
+
+                        if (constrain) {
+                            index = Math.max(0, Math.min(tools.length - 1, index));
+                        }
+
+                        return tools[index];
+                    }
+
+                    if (keyCode == keys.RIGHT || keyCode == keys.LEFT) {
+                        if (!$(current).hasClass(".k-dropdown")) {
+                            focusElement = move(keyCode == keys.RIGHT ? 1 : -1, true);
+                        }
                     } else if (keyCode == keys.ESC) {
-                        focusElement = that;
+                        focusElement = that._editor;
                     } else if (keyCode == keys.TAB && !(e.ctrlKey || e.altKey)) {
                         // skip tabbing to disabled tools, and focus the editing area when running out of tools
                         if (e.shiftKey) {
-                            focusElement = closestLi.prevAll(focusableTool).first().find(focusable);
-
-                            if (focusElement.length) {
-                                e.preventDefault();
-                            } else {
-                                return;
-                            }
+                            focusElement = move(-1);
                         } else {
-                            e.preventDefault();
+                            focusElement = move(1);
 
-                            focusElement = closestLi.nextAll(focusableTool).first().find(focusable);
-
-                            if (!focusElement.length) {
-                                focusElement = that;
+                            if (!focusElement) {
+                                focusElement = that._editor;
                             }
                         }
                     }
 
                     if (focusElement) {
+                        e.preventDefault();
                         focusElement.focus();
                     }
                 })
