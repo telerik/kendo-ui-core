@@ -332,6 +332,10 @@ kendo_module({
                         columns = that.owner.columns,
                         field;
 
+                    if (that._isMobile) {
+                        e.preventDefault();
+                    }
+
                     if (!item.parent().closest("li.k-columns-item")[0]) {
                         return;
                     }
@@ -473,7 +477,7 @@ kendo_module({
                 '#}#'+
                 '</ul></li>'+
                 '#if(showColumns){#'+
-                    '<li><span class="k-link"><span class="k-sprite k-i-columns"></span>${messages.columns}</span><ul>'+
+                    '<li class="k-columns-item"><span class="k-link">${messages.columns}</span><ul>'+
                     '#for (var idx = 0; idx < columns.length; idx++) {#'+
                         '<li class="k-item"><label class="k-label"><input type="checkbox" class="k-check" data-#=ns#field="#=columns[idx].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[idx].index#"/>#=columns[idx].title#</label></li>'+
                     '#}#'+
