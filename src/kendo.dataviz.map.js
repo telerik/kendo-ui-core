@@ -58,7 +58,6 @@ kendo_module({
             map._resetScroller();
 
             map.crs = new EPSG3857();
-            map.viewPort();
         },
 
         options: {
@@ -123,42 +122,27 @@ kendo_module({
             this.trigger("reset");
         },
 
-        viewPort: function() {
+        viewport: function() {
             var map = this,
                 options = map.options,
                 scale = map.scale(),
-                xScale = map.crs.width() / scale,
-                yScale = map.crs.height() / scale,
-                unitHalfWidth = (map.element.width() * xScale) / 2,
-                unitHalfHeight = (map.element.height() * yScale) / 2;
-var                centerPoint = map.crs._proj.forward(map.center())
+                halfWidth = map.element.width() / 2,
+                halfHeight = map.element.height() / 2,
+                crs = map.crs,
+                cp = map.crs.toPoint(map.center(), scale);
 
-            var c = map.crs.toPoint(map.center(), scale);
-            var p0 = c.clone();
-            p0.x -= map.element.width() / 2;
-            p0.y -= map.element.height() / 2;
-            var l0 = map.crs.toLocation(p0, scale);
+            var p0 = cp.clone();
+            p0.x -= halfWidth;
+            p0.y -= halfHeight;
 
-            var p1 = c.clone();
-            p1.x += map.element.width() / 2;
-            p1.y += map.element.height() / 2;
-            var l1 = map.crs.toLocation(p1, scale);
+            var p1 = cp.clone();
+            p1.x += halfWidth;
+            p1.y += halfHeight;
 
-            console.log(l0.toString(), l1.toString());
-
-            return {
-                x1: centerPoint.x - unitHalfWidth,
-                x2: centerPoint.x + unitHalfWidth,
-                y1: centerPoint.y - unitHalfHeight,
-                y2: centerPoint.y + unitHalfHeight
-            };
-        },
-
-        pixelsToTile: function(size, x, y) {
-            return {
-                x: parseInt(math.ceil(x / size) - 1),
-                x: parseInt(math.ceil(x / size) - 1)
-            };
+            return new Extent(
+                map.crs.toLocation(p0, scale),
+                map.crs.toLocation(p1, scale)
+            );
         },
 
         center: function(center) {
@@ -200,6 +184,13 @@ var                centerPoint = map.crs._proj.forward(map.center())
     Location.fromLatLng = function(ll) {
         return new Location(ll[0], ll[1]);
     };
+
+    var Extent = Class.extend({
+        init: function(nw, se) {
+            this.nw = nw;
+            this.se = se;
+        }
+    });
 
     var WGS84 = {
         a: 6378137,                 // Semi-major radius
@@ -353,14 +344,6 @@ var                centerPoint = map.crs._proj.forward(map.center())
                 .transform(this._itm);
 
             return this._proj.inverse(point);
-        },
-
-        width: function() {
-            return this.c;
-        },
-
-        height: function() {
-            return this.c;
         }
     });
 

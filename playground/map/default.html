@@ -61,6 +61,7 @@
             });
 
             var map = $("#map").data("kendoMap");
+            console.log(map.viewport());
 
             $(document).on("mousewheel", function(e) {
                 var delta = kendo.dataviz.mwDelta(e);
