@@ -49,7 +49,6 @@
                       .Name("fastAndFurious")
                       .Type(ProgressBarType.Percent)
                       .Animation(a => a.Duration(600))
-                      .Events(e => e.Change("onChange"))
                 %>
             </li>
             <li>
@@ -58,7 +57,6 @@
                       .Name("nowYouSeeMe")
                       .Type(ProgressBarType.Percent)
                       .Animation(a => a.Duration(600))
-                      .Events(e => e.Change("onChange"))
                 %>
             </li>
             <li>
@@ -67,7 +65,6 @@
                       .Name("theHelp")
                       .Type(ProgressBarType.Percent)
                       .Animation(a => a.Duration(600))
-                      .Events(e => e.Change("onChange"))
                 %>
             </li>
             <li>
@@ -76,7 +73,6 @@
                       .Name("theInternship")
                       .Type(ProgressBarType.Percent)
                       .Animation(a => a.Duration(600))
-                      .Events(e => e.Change("onChange"))
                 %>
             </li>
             <li>
@@ -85,17 +81,12 @@
                       .Name("thePerks")
                       .Type(ProgressBarType.Percent)
                       .Animation(a => a.Duration(600))
-                      .Events(e => e.Change("onChange"))
                 %>
             </li>
         </ul>
     </div>
 
     <script>
-        function onChange(e) {
-            this.wrapper.prev(".progress-value").text(e.value + "%");
-        }
-
         $(document).ready(function () {
             var progressbars = [];
             $(".poll-results div").each(function () {
