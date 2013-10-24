@@ -20,7 +20,7 @@ kendo_module({
                 app = kendo.mobile.application,
                 os = kendo.support.mobileOS,
                 osname = app ? app.os.name : (os ? os.name : "ios"),
-                ioswp = osname === "ios" || osname === "wp" || app.os.skin,
+                ioswp = osname === "ios" || osname === "wp" || app ? app.os.skin : false,
                 bb = osname === "blackberry",
                 align = options.align || (ioswp ?  "bottom center" : bb ? "center right" : "center center"),
                 position = options.position || (ioswp ? "bottom center" : bb ? "center right" : "center center"),
