@@ -79,8 +79,6 @@ kendo_module({
         NAVCELL = ":not(.k-group-cell):not(.k-hierarchy-cell):visible",
         FIRSTNAVITEM = NAVROW + ":first>" + NAVCELL + ":first",
         HEADERCELLS = "th.k-header:not(.k-group-cell,.k-hierarchy-cell)",
-        GROUPINGDRAGGABLES = HEADERCELLS + ":visible[" + kendo.attr("field") + "]",
-        GROUPINGFILTER =  HEADERCELLS + "[" + kendo.attr("field") + "]",
         NS = ".kendoGrid",
         EDIT = "edit",
         SAVE = "save",
@@ -1857,9 +1855,12 @@ kendo_module({
         _attachGroupable: function() {
             var that = this,
                 wrapper = that.wrapper,
-                groupable = that.options.groupable;
+                groupable = that.options.groupable,
+                GROUPINGDRAGGABLES = HEADERCELLS + ":visible[" + kendo.attr("field") + "]",
+                GROUPINGFILTER =  HEADERCELLS + "[" + kendo.attr("field") + "]";
 
             if (groupable) {
+
                 if(!wrapper.has("div.k-grouping-header")[0]) {
                     $("<div>&nbsp;</div>").addClass("k-grouping-header").prependTo(wrapper);
                 }
