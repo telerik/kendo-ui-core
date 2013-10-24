@@ -31,6 +31,10 @@ kendo_module({
 
             element = that.element;
 
+            if (options.cancelTemplate) {
+                cancelTemplate = kendo.template(options.cancelTemplate);
+            }
+
             element
                 .addClass("km-actionsheet")
                 .append(cancelTemplate({cancel: that.options.cancel}))
