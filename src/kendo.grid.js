@@ -1629,6 +1629,7 @@ kendo_module({
 
             var actionSheet = new kendo.mobile.ui.ActionSheet(html, {
                 cancel: messages.cancelDelete,
+                cancelTemplate: '<li class="km-actionsheet-cancel"><a class="k-button" href="\\#">#:cancel#</a></li>',
                 close: function() {
                     this.destroy();
                 },
@@ -1637,7 +1638,8 @@ kendo_module({
                     if (!item.hasClass("km-actionsheet-cancel")) {
                         that._removeRow(row);
                     }
-                }
+                },
+                popup: that._actionSheetPopupOptions
             });
 
             actionSheet.open(row);
@@ -2363,6 +2365,11 @@ kendo_module({
 
                 this.pane = kendo.mobile.ui.Pane.wrap(html);
                 this.view = this.pane.view();
+                this._actionSheetPopupOptions = $(document.documentElement).hasClass("km-root") ? {} : {
+                    align: "bottom center",
+                    position: "bottom center",
+                    effect: "slideIn:up"
+                };
 
                 if (options.height) {
                     this.pane.element.parent().css(HEIGHT, options.height);

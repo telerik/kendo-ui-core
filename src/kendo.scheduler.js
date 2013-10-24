@@ -957,7 +957,13 @@ kendo_module({
             this.pane = kendo.mobile.ui.Pane.wrap(this.element);
             this.pane.element.parent().css("height", this.options.height);
             this.view = this.pane.view();
-            this._actionSheetButtonTemplate = kendo.template('<li class="k-button #=className#"><a #=attr# href="\\#">#:text#</a></li>');
+            this._actionSheetButtonTemplate = kendo.template('<li><a #=attr# class="k-button #=className#" href="\\#">#:text#</a></li>');
+
+            this._actionSheetPopupOptions = $(document.documentElement).hasClass("km-root") ? {} : {
+                align: "bottom center",
+                position: "bottom center",
+                effect: "slideIn:up"
+            };
         },
 
         options: {
@@ -1051,7 +1057,7 @@ kendo_module({
         },
 
         showDialog: function(options) {
-            var html = "<ul>";
+            var html = "<ul><li class=\"km-actionsheet-title\">" + options.title + "</li>";
 
             var target = this.element.find(".k-event[" + kendo.attr("uid") + "='" + options.model.uid + "']");
 
@@ -1069,16 +1075,18 @@ kendo_module({
                 .appendTo(this.pane.view().element)
                 .kendoMobileActionSheet({
                     cancel: this.options.messages.cancel,
+                    cancelTemplate: '<li class="km-actionsheet-cancel"><a class="k-button" href="\\#">#:cancel#</a></li>',
                     close: function() {
                         this.destroy();
                     },
                     command: function(e) {
-                        var buttonIndex = actionSheet.element.find(".k-button a").index($(e.currentTarget));
+                        var buttonIndex = actionSheet.element.find("li:not(.km-actionsheet-cancel) > .k-button").index($(e.currentTarget));
                         if (buttonIndex > -1) {
                             actionSheet.close();
                             options.buttons[buttonIndex].click();
                         }
-                    }
+                    },
+                    popup: this._actionSheetPopupOptions
                 })
                 .data("kendoMobileActionSheet");
 

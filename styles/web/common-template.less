@@ -4903,27 +4903,37 @@ div[name="recurrenceRule"] > .k-dropdown
     float: left;
 }
 
+/* Actiosheet Styles */
+
 .km-pane-wrapper .k-scheduler-edit-form .k-scheduler-delete,
-.km-actionsheet .k-scheduler-delete,
-.km-actionsheet .k-scheduler-delete + .km-actionsheet-cancel,
-.km-actionsheet .k-scheduler-delete > a,
-.km-actionsheet .k-scheduler-delete + .km-actionsheet-cancel > a
+*:not(.km-pane) > .km-shim .km-actionsheet .k-button,
+*:not(.km-pane) > .km-shim .km-actionsheet .k-button > a,
 {
     display:block;
     text-align: center;
 }
 
-.km-actionsheet .k-scheduler-delete,
-.km-actionsheet .k-scheduler-delete + .km-actionsheet-cancel
+*:not(.km-pane) > .km-shim .km-actionsheet .k-button
 {
     margin: .3em 1em;
 }
 
-.km-actionsheet .k-scheduler-delete > a,
-.km-actionsheet .k-scheduler-delete + .km-actionsheet-cancel > a
+*:not(.km-pane) > .km-shim .km-actionsheet .k-button > a
 {
     text-decoration: none;
     color: inherit;
+}
+
+*:not(.km-pane) > .km-shim .km-actionsheet-title
+{
+    display: none;
+}
+
+*:not(.km-pane) > .km-shim > .k-animation-container
+{
+    margin: 0 !important;
+    padding: 0 !important;
+    left: 0 !important;
 }
 
 /* Adaptive Grid */
