@@ -17,6 +17,7 @@
         <script src="../../src/kendo.dropdownlist.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
         <link type="text/css" href="../../styles/web/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../../styles/web/kendo.default.css" rel="stylesheet"/>
     </head>
     <body>
         <h1 id="qunit-header">DropDownList Initialization</h1>
@@ -31,23 +32,18 @@
 
             module("kendo.ui.DropDownList initialization", {
                 setup: function() {
-                    input = $("<input />").appendTo(document.body);
+                    input = $("<input class='test'/>").appendTo(document.body);
                 },
                 teardown: function() {
                     kendo.support.touch = false;
                     kendo.support.mobileOS = false;
 
-                    var ul = $(document.body).children(":last");
-                    if(!ul[0].id) {
-                        ul.remove();
+                    var element = $(document.body).find("[data-kendo-role=dropdownlist]")
+                    if (element[0]) {
+                        element.data("kendoDropDownList").destroy();
+                        element.closest(".k-dropdown").remove();
                     }
-
-                    var parent = input.parent();
-                    if (parent.is("div")) {
-                        parent.remove();
-                        } else {
-                        input.remove();
-                    }
+                    $(".test").remove();
                 }
             });
 
@@ -325,6 +321,17 @@
 
                 equal(dropdownlist.template("foo"), '<li tabindex="-1" role="option" unselectable="on" class="k-item">FOO</li>');
                 equal(dropdownlist.options.template, "#= data.toUpperCase() #");
+            });
+
+            test("defining header template", function() {
+                var dropdownlist = new DropDownList(input, {
+                    template: "#= data.toUpperCase() #",
+                    headerTemplate: "<div>Header</div>"
+                });
+
+                var list = dropdownlist.list;
+
+                equal(list.children()[0].outerHTML, "<div>Header</div>");
             });
 
             test("should populate text and value if items", function() {

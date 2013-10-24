@@ -311,6 +311,17 @@
                equal(combobox.options.template, "#= data.toUpperCase() #");
            });
 
+            test("defining header template", function() {
+                var combobox = new ComboBox(input, {
+                    template: "#= data.toUpperCase() #",
+                    headerTemplate: "<div>Header</div>"
+                });
+
+                var list = combobox.list;
+
+                equal(list.children()[0].outerHTML, "<div>Header</div>");
+            });
+
            test("should populate text and value if items", function() {
                var combobox = new ComboBox(input, {
                    dataTextField: "text",

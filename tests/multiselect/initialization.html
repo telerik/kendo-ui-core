@@ -108,6 +108,17 @@
                 ok(multiselect.tagTemplate);
             });
 
+            test("MultiSelect renders header template", function() {
+                var multiselect = new MultiSelect(select, {
+                    template: "#= data.toUpperCase() #",
+                    headerTemplate: "<div>Header</div>"
+                });
+
+                var list = multiselect.list;
+
+                equal(list.children()[0].outerHTML, "<div>Header</div>");
+            });
+
             test("MultiSelect creates DataSource", function() {
                 var multiselect = new MultiSelect(select);
 

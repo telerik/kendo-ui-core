@@ -109,10 +109,21 @@
 
             test("changing the template", function() {
                 var autocomplete = new AutoComplete(input, {
-                    template: "#= data.toUpperCase() #"
+                    template: kendo.template("#= data.toUpperCase() #")
                 });
 
                 equal(autocomplete.template("foo"), '<li tabindex="-1" role="option" unselectable="on" class="k-item">FOO</li>');
+            });
+
+            test("defining header template", function() {
+                var autocomplete = new AutoComplete(input, {
+                    template: "#= data.toUpperCase() #",
+                    headerTemplate: "<div>Header</div>"
+                });
+
+                var list = autocomplete.list;
+
+                equal(list.children()[0].outerHTML, "<div>Header</div>");
             });
 
             test("highlight first item", function() {

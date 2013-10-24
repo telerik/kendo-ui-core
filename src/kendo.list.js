@@ -75,12 +75,14 @@ kendo_module({
                 that._optionID = id + "_option_selected";
             }
 
+            that._header();
             that._accessors();
             that._initValue();
         },
 
         options: {
-            valuePrimitive: false
+            valuePrimitive: false,
+            headerTemplate: ""
         },
 
         setOptions: function(options) {
@@ -125,6 +127,17 @@ kendo_module({
             dataSource.filter(expression);
         },
 
+        _header: function() {
+            var template = this.options.headerTemplate;
+
+            if ($.isFunction(template)) {
+                template = template();
+            }
+
+            if (template) {
+                this.list.prepend(template);
+            }
+        },
 
         _initValue: function() {
             var that = this,
