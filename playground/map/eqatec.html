@@ -60,7 +60,7 @@
         $("#map").kendoMap({
             view: {
                 center: [51.505, -0.09],
-                zoom: 2
+                zoom: 4
             },
             layers: [{
                 type: "shape",
@@ -77,7 +77,7 @@
 
         var map = $("#map").data("kendoMap");
 
-        $(document).on("mousewheel", function(e) {
+        $(document).on("DOMMouseScroll mousewheel", function(e) {
             var delta = kendo.dataviz.mwDelta(e);
             e.preventDefault();
 
