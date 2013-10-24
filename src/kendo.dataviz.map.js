@@ -58,6 +58,7 @@ kendo_module({
             map._resetScroller();
 
             map.crs = new EPSG3857();
+            map.viewPort();
         },
 
         options: {
@@ -68,7 +69,8 @@ kendo_module({
         },
 
         events:[
-            "reset" // TODO: Redraw?
+            "reset", // TODO: Redraw?
+            "move"
         ],
 
         zoom: function(level) {
@@ -119,6 +121,57 @@ kendo_module({
             }
 
             this.trigger("reset");
+        },
+
+        viewPort: function() {
+            var map = this,
+                options = map.options,
+                scale = map.scale(),
+                xScale = map.crs.width() / scale,
+                yScale = map.crs.height() / scale,
+                unitHalfWidth = (map.element.width() * xScale) / 2,
+                unitHalfHeight = (map.element.height() * yScale) / 2;
+var                centerPoint = map.crs._proj.forward(map.center())
+
+            var c = map.crs.toPoint(map.center(), scale);
+            var p0 = c.clone();
+            p0.x -= map.element.width() / 2;
+            p0.y -= map.element.height() / 2;
+            var l0 = map.crs.toLocation(p0, scale);
+
+            var p1 = c.clone();
+            p1.x += map.element.width() / 2;
+            p1.y += map.element.height() / 2;
+            var l1 = map.crs.toLocation(p1, scale);
+
+            console.log(l0.toString(), l1.toString());
+
+            return {
+                x1: centerPoint.x - unitHalfWidth,
+                x2: centerPoint.x + unitHalfWidth,
+                y1: centerPoint.y - unitHalfHeight,
+                y2: centerPoint.y + unitHalfHeight
+            };
+        },
+
+        pixelsToTile: function(size, x, y) {
+            return {
+                x: parseInt(math.ceil(x / size) - 1),
+                x: parseInt(math.ceil(x / size) - 1)
+            };
+        },
+
+        center: function(center) {
+            if (center) {
+                this._center = center;
+            } else if (!this._center) {
+                this._center = new Location(
+                    this.options.view.center[0],
+                    this.options.view.center[1]
+                );
+            }
+
+            return this._center;
         }
     });
 
@@ -275,7 +328,7 @@ kendo_module({
             var crs = this,
                 proj = crs._proj = new SphericalMercator();
 
-            var c = 2 * PI * proj.options.datum.a;
+            var c = this.c = 2 * PI * proj.options.datum.a;
 
             // Scale circumference to 1, mirror Y and shift origin to top left
             this._tm = Matrix.translate(0.5, 0.5).times(Matrix.scale(1/c, -1/c));
@@ -296,10 +349,18 @@ kendo_module({
         toLocation: function(point, scale) {
             point = point
                 .clone()
-                .transform(this._itm)
-                .multiply(1 / (scale || 1));
+                .multiply(1 / (scale || 1))
+                .transform(this._itm);
 
             return this._proj.inverse(point);
+        },
+
+        width: function() {
+            return this.c;
+        },
+
+        height: function() {
+            return this.c;
         }
     });
 

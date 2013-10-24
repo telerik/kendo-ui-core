@@ -13,7 +13,7 @@
     <script src="../../src/kendo.dataviz.core.js"></script>
     <script src="../../src/kendo.dataviz.map.js"></script>
     <script>
-        var TOLERANCE = 1e-6;
+        var TOLERANCE = 1e-3;
 
         var dataviz = kendo.dataviz,
             Point = dataviz.Point2D,
@@ -21,15 +21,17 @@
             map = dataviz.map,
             Location = map.Location;
 
-        function toPoint(crs, loc, point) {
-            var p = crs.toPoint(loc);
-            close(p.x, point.x, TOLERANCE, "X");
-            close(p.y, point.y, TOLERANCE, "Y");
+        function toPoint(crs, loc, point, scale) {
+            var scale = scale || 1;
+            var p = crs.toPoint(loc, scale);
+            close(p.x, point.x * scale, TOLERANCE, "X");
+            close(p.y, point.y * scale, TOLERANCE, "Y");
         }
 
-        function toLocation(crs, point) {
-            var l = crs.toLocation(point);
-            var p = crs.toPoint(l);
+        function toLocation(crs, point, scale) {
+            var l = crs.toLocation(point, scale);
+            var p = crs.toPoint(l, scale);
+            scale = scale || 1;
             close(p.x, point.x, TOLERANCE, "X");
             close(p.y, point.y, TOLERANCE, "Y");
         }
@@ -85,6 +87,27 @@
                     var point = this[1];
 
                     toLocation(crs, new Point(point[0], point[1]));
+                });
+            });
+
+            test("projects location to screen coordinates at scale", function() {
+                $.each(identities, function() {
+                    var point = this[1];
+
+                    toPoint(crs,
+                        Location.fromLatLng(this[0]),
+                        new Point(point[0], point[1]),
+                        1000);
+                });
+            });
+
+            test("maps screen coordinates to location scale", function() {
+                $.each(identities, function() {
+                    var point = this[1];
+
+                    toLocation(crs,
+                        new Point(point[0], point[1]),
+                        1000);
                 });
             });
 
