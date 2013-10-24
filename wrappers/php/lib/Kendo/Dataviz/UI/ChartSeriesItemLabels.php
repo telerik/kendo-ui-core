@@ -6,15 +6,6 @@ class ChartSeriesItemLabels extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The label alignment when series.type is set to "donut" or "pie".The supported values are:
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels
-    */
-    public function align($value) {
-        return $this->setProperty('align', $value);
-    }
-
-    /**
     * The background color of the labels. Accepts a valid CSS color string, including hex and rgb.
     * @param string|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemLabels

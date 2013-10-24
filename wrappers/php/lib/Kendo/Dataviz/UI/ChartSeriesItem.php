@@ -124,6 +124,43 @@ The function return value is displayed instead of the individual points.The supp
     }
 
     /**
+    * The space in pixels between the different segments of the funnel chart.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function segmentSpacing($value) {
+        return $this->setProperty('segmentSpacing', $value);
+    }
+
+    /**
+    * specifies the ratio top-base/bottom-base of the whole chart. neckRatio set to three means the top base is three times smaller than the bottom base.
+    * @param float $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function neckRatio($value) {
+        return $this->setProperty('neckRatio', $value);
+    }
+
+    /**
+    * When set to true the ratio of the bases of each segment is calculated based on the ratio of currentDataItem.value/nextDataItem.value
+The last element is always created like a rectangle since there is no following element.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function dynamicSlope($value) {
+        return $this->setProperty('dynamicSlope', $value);
+    }
+
+    /**
+    * When set to false all segments become with the same height, otherwise the height of each segment is based on its value.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function dynamicHeight($value) {
+        return $this->setProperty('dynamicHeight', $value);
+    }
+
+    /**
     * The data item field which contains a boolean value indicating whether the sector is exploded.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
