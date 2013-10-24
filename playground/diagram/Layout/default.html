@@ -228,9 +228,10 @@ function layout() {
     })
     switch (selected) {
         case "QTreeDown":
-            diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+            diagram.layout(
                     {
-                        TreeLayoutType: kendo.diagram.TreeLayoutType.TreeDown,
+                        type: "Tree",
+                        subtype:"Down",
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
                         componentsGridWidth: 5000,
@@ -242,9 +243,10 @@ function layout() {
             )
             break;
         case "QTreeUp":
-            diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+            diagram.layout(
                     {
-                        TreeLayoutType: kendo.diagram.TreeLayoutType.TreeUp,
+                        type: "Tree",
+                        subtype: "Up",
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
                         roots: [knownRoot],
@@ -253,9 +255,10 @@ function layout() {
             )
             break;
         case  "QTreeLeft":
-            diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+            diagram.layout(
                     {
-                        TreeLayoutType: kendo.diagram.TreeLayoutType.TreeLeft,
+                        type: "Tree",
+                        subtype: "Left",
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
                         roots: [knownRoot],
@@ -264,9 +267,10 @@ function layout() {
             )
             break;
         case  "QTreeRight":
-            diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+            diagram.layout(
                     {
-                        TreeLayoutType: kendo.diagram.TreeLayoutType.TreeRight,
+                        type: "Tree",
+                        subtype: "Right",
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
                         roots: [knownRoot],
@@ -275,9 +279,10 @@ function layout() {
             )
             break;
         case  "QMindmapHorizontal":
-            diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+            diagram.layout(
                     {
-                        TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal,
+                        type: "Tree",
+                        subtype: "Mindmap",
                         horizontalSeparation: 60,
                         verticalSeparation: 10,
                         roots: [knownRoot],
@@ -286,9 +291,10 @@ function layout() {
             )
             break;
         case  "QMindmapVertical":
-            diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+            diagram.layout(
                     {
-                        TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapVertical,
+                        type: "Tree",
+                        subtype: "MindmapVertical",
                         horizontalSeparation: 15,
                         verticalSeparation: 80,
                         roots: [knownRoot],
@@ -297,9 +303,10 @@ function layout() {
             )
             break;
         case  "QRadial":
-            diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+            diagram.layout(
                     {
-                        TreeLayoutType: kendo.diagram.TreeLayoutType.RadialTree,
+                        type: "Tree",
+                        subtype: "Radial",
                         radialFirstLevelSeparation: 250,
                         radialSeparation: 50,
                         startRadialAngle: Math.PI / 3,
@@ -310,9 +317,10 @@ function layout() {
             )
             break;
         case "QTipOver":
-            diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+            diagram.layout(
                     {
-                        TreeLayoutType: kendo.diagram.TreeLayoutType.TipOverTree,
+                        type: "Tree",
+                        subtype: "TipOver",
                         horizontalSeparation: 50,
                         underneathVerticalTopOffset: 20,
                         underneathHorizontalOffset: 50,
@@ -323,26 +331,31 @@ function layout() {
             )
             break;
         case  "QLayeredHorizontal":
-            diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
+            diagram.layout(
                     {
+                        type: "Layered",
+                        subtype: "Horizontal",
                         layerSeparation: 50,
                         nodeDistance: 50,
-                        layeredLayoutType: kendo.diagram.LayeredLayoutType.Right,
+                        layeredLayoutType: "Right",
                         animate: animateTransitions
                     });
             break;
         case  "QLayeredVertical":
-            diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
+            diagram.layout(
                     {
+                        type: "Layered",
+                        subtype: "Vertical",
                         layerSeparation: 50,
                         nodeDistance: 50,
-                        layeredLayoutType: kendo.diagram.LayeredLayoutType.Down,
+                        layeredLayoutType: "Down",
                         animate: animateTransitions
                     });
             break;
         case  "QForce":
-            diagram.layout(kendo.diagram.LayoutTypes.ForceDirectedLayout,
+            diagram.layout(
                     {
+                        type: "ForceDirected",
                         totalMargin: new kendo.diagram.Size(50, 50),
                         componentMargin: new kendo.diagram.Size(120, 20),
                         nodeDistance: 50,

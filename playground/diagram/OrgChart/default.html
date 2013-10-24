@@ -183,9 +183,10 @@ $(function () {
 
     function layout() {
         diagram.select(false);
-        diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+        diagram.layout(
                 {
-                    TreeLayoutType: eval($("#Layouts").val()),
+                    type:"Tree",
+                    subtype: $("#Layouts").val().toString(),
                     animate: true
                 });
     }

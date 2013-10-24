@@ -79,8 +79,9 @@ testSkip('Graph to diagram', function () {
     d.canvas.native.setAttribute("height", "1000");
     // converting a Graph to a diagram (with internal spring layout to please the eyes)
     GraphUtils.createDiagramFromGraph(d, g, false);
-    d.layout(kendo.diagram.LayoutTypes.ForceDirectedLayout,
+    d.layout(
         {
+            type:"Force",
             iterations: 300,
             nodeDistance: 50
         }
@@ -107,7 +108,7 @@ testSkip('Spring layout', function () {
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
     GraphUtils.createDiagramFromGraph(diagram, g, false);
-    diagram.layout(kendo.diagram.LayoutTypes.ForceDirectedLayout, {iterations: 400});
+    diagram.layout( {type:"Force", iterations: 400});
     ok(true);
 });
 
@@ -137,7 +138,7 @@ testSkip('Tree layout', function () {
     var diagram = diagramElement.data("kendoDiagram");
     GraphUtils.createDiagramFromGraph(diagram, g, false);
 
-    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout, {});
+    diagram.layout();
     ok(true);
 });
 
@@ -152,8 +153,8 @@ testSkip('Grid layout', function () {
         shape.id = i.toString();
         map[i] = shape;
     }
-    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout, {
-            componentMargin: new kendo.diagram.Size(0,0)
+    diagram.layout( {
+            componentMargin: new kendo.diagram.Size(0, 0)
 
         }
     );
@@ -167,7 +168,7 @@ testSkip('Forest layout', function () {
     var diagram = diagramElement.data("kendoDiagram");
     diagram.canvas.native.setAttribute("height", "1000");
     GraphUtils.createDiagramFromGraph(diagram, g, false);
-    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout, {treeLayoutType: kendo.diagram.TreeLayoutType.TreeDown});
+    diagram.layout({type: "tree", subtype: "Down"});
     ok(true);
 });
 
@@ -179,16 +180,12 @@ testSkip('Random diagram layout', function () {
 
     diagram.randomDiagram(parseInt(Math.random() * 150 + 1), 3, false);
 
-    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
-        {
-            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeRight
-        }
-    )
+    diagram.layout({type: "tree", subtype: "Right"});
     ok(true);
 });
 
 testSkip('Radial layout', function () {
-    var g = Predefined.Forest(2, 3,5);
+    var g = Predefined.Forest(2, 3, 5);
     var div = GetRoot();
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
@@ -202,12 +199,7 @@ testSkip('Radial layout', function () {
         root.shapeVisual.background("red");
         roots.push(root);
     }
-    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
-        {
-            TreeLayoutType: kendo.diagram.TreeLayoutType.RadialTree,
-            roots: roots
-        }
-    )
+    diagram.layout({type: "tree", subtype: "Radial"});
     ok(true);
 });
 
@@ -220,12 +212,7 @@ testSkip('Radial layout', function () {
     diagram.randomDiagram(20, 5, true);
     var root = diagram.getId("0");
     root.shapeVisual.background("Orange");
-    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
-        {
-            TreeLayoutType: kendo.diagram.TreeLayoutType.RadialTree,
-            roots: [root]
-        }
-    )
+    diagram.layout({type: "tree", subtype: "Radial"});
     ok(true);
 });
 
@@ -239,7 +226,7 @@ testSkip('Mindmap layout', function () {
     for (var i = 0; i < 10; i++) {
         var shape = diagram.addShape();
         shape.id = i.toString();
-        shape.visual.native.id=shape.id;
+        shape.visual.native.id = shape.id;
         map[i] = shape;
     }
     // create explicitly a radial diagram without passing through the graph structure
@@ -249,12 +236,7 @@ testSkip('Mindmap layout', function () {
 
     var root = diagram.getId("0");
     root.shapeVisual.background("Orange");
-    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
-        {
-            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal  ,
-            roots: [root]
-        }
-    )
+    diagram.layout({type: "tree", subtype: "Mindmap", roots: [root]});
     diagram.zoom(0.5);
     ok(true);
 });
@@ -269,12 +251,7 @@ testSkip('Mindmap layout', function () {
     var root = diagram.getId("0");
     root.shapeVisual.background("Orange");
 
-    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
-        {
-            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapVertical     ,
-            roots: [root]
-        }
-    )
+    diagram.layout({type: "tree", subtype: "MindmapVertical", roots: [root]});
     diagram.zoom(0.5);
     ok(true);
 });
@@ -289,12 +266,7 @@ testSkip('Mindmap layout', function () {
     var root = diagram.getId("0");
     root.shapeVisual.background("Orange");
 
-    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
-        {
-            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal   ,
-            roots: [root]
-        }
-    )
+    diagram.layout({type: "tree", subtype: "Mindmap", roots: [root]})
     diagram.zoom(0.5);
     ok(true);
 });
@@ -308,14 +280,13 @@ testSkip('Mindmap layout', function () {
     var root = diagram.getId("0");
     root.shapeVisual.background("Green");
 
-    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
-        {
-            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal,
-            verticalSeparation: 2,
-            horizontalSeparation: 150,
-            roots: [root]
-        }
-    )
+    diagram.layout({
+        type: "tree",
+        subtype: "Mindmap",
+        roots: [root],
+        verticalSeparation: 2,
+        horizontalSeparation: 150
+    });
     diagram.zoom(0.5);
     ok(true);
 });
@@ -329,16 +300,16 @@ testSkip('Tip-over tree layout', function () {
 
     var root = diagram.getId("0");
     root.shapeVisual.background("red");
-    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
-        {
-            TreeLayoutType: kendo.diagram.TreeLayoutType.TipOverTree,
+    diagram.layout({
+            type: "tree",
+            subtype: "TipOver",
             verticalSeparation: 25,
             horizontalSeparation: 10,
             underneathHorizontalOffset: 10,
             underneathVerticalTopOffset: 10,
             roots: [root]
         }
-    )
+    );
     diagram.zoom(0.5);
     ok(true);
 });
@@ -351,11 +322,11 @@ testSkip('Varying shape size layout', function () {
     diagram.canvas.native.setAttribute("height", "1000");
     GraphUtils.createDiagramFromGraph(diagram, g, false, true);
 
-    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
-        {
-            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeUp
+    diagram.layout({
+            type: "tree",
+            subtype: "Up"
         }
-    )
+    );
     diagram.zoom(0.5);
     ok(true);
 });
@@ -376,11 +347,12 @@ testSkip('Layered layout', function () {
      GraphUtils.createDiagramFromGraph(diagram, g, false);*/
 
     var root = diagram.getId("0");
-    diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
+    diagram.layout(
         {
+            type: "Tree",
             layerDistance: 250,
             nodeDistance: 50,
-            layeredLayoutType: kendo.diagram.LayeredLayoutType.Right
+            subtype: "Right"
         });
     diagram.zoom(0.5);
     ok(true);
@@ -403,8 +375,14 @@ testSkip('Layout roots', function () {
         roots.push(root);
     }
 
-    diagram.layout(kendo.diagram.LayoutTypes.TreeLayout, {
-        roots: roots
-    });
+    diagram.layout(
+        {
+            type: "Tree",
+            layerDistance: 250,
+            nodeDistance: 50,
+            subtype: "Right",
+            roots: roots
+        }
+    );
     ok(true);
 });

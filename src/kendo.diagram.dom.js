@@ -1903,28 +1903,34 @@ kendo_module({
          * @param layoutType The layout algorithm to be applied (TreeLayout, LayeredLayout, SpringLayout).
          * @param options Layout-specific options.
          */
-        layout: function (layoutType, options) {
+        layout: function (options) {
             this.isLayouting = true;
             // TODO: raise layout event?
-
-            if (Utils.isUndefined(layoutType)) {
-                layoutType = diagram.LayoutTypes.TreeLayout;
+            var type;
+            if (Utils.isUndefined(options) || Utils.isUndefined(options.type)) {
+                type = "Tree";
+            }
+            else {
+                type = options.type;
             }
             var l;
-            switch (layoutType) {
-                case diagram.LayoutTypes.TreeLayout:
+            switch (type.toLowerCase()) {
+                case "tree":
                     l = new diagram.TreeLayout(this);
                     break;
 
-                case diagram.LayoutTypes.LayeredLayout:
+                case "layered":
                     l = new diagram.LayeredLayout(this);
                     break;
 
-                case diagram.LayoutTypes.ForceDirectedLayout:
+                case "forcedirected":
+                case "force":
+                case "spring":
+                case "springembedder":
                     l = new diagram.SpringLayout(this);
                     break;
                 default:
-                    throw "Layout algorithm '" + layoutType + "' is not supported.";
+                    throw "Layout algorithm '" + type + "' is not supported.";
             }
             var initialState = new kendo.diagram.LayoutState(this);
             var finalState = l.layout(options);

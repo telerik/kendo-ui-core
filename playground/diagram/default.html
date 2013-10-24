@@ -596,77 +596,88 @@ $(function () {
     var layout = function (name) {
         switch (name) {
             case "TreeDown":
-                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                diagram.layout(
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeDown,
+                            type:"Tree",
+                            subtype: "Down",
                             animate: true
                         });
                 break;
             case "TreeUp":
-                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                diagram.layout(
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeUp,
+                            type: "Tree",
+                            subtype: "Up",
                             animate: true
                         });
                 break;
             case "TreeLeft":
-                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                diagram.layout(
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeLeft,
+                            type: "Tree",
+                            subtype: "Left",
                             animate: true
                         });
                 break;
             case "TreeRight":
-                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                diagram.layout(
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.TreeRight,
+                            type: "Tree",
+                            subtype: "Right",
                             animate: true
                         });
                 break;
             case "RadialTree":
-                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                diagram.layout(
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.RadialTree
+                            type: "Tree",
+                            subtype: "Radial"
                         });
                 break;
             case "TipOverTree":
-                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                diagram.layout(
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.TipOverTree,
+                            type: "Tree",
+                            subtype: "TipOver",
                             animate: true
                         });
                 break;
             case "LayeredHorizontal":
-                diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
+                diagram.layout(
                         {
-                            layeredLayoutType: kendo.diagram.LayeredLayoutType.Right,
+                            type: "Layered",
+                            subtype: "Horizontal",
                             animate: true
                         });
                 break;
             case "LayeredVertical":
-                diagram.layout(kendo.diagram.LayoutTypes.LayeredLayout,
+                diagram.layout(
                         {
-                            layeredLayoutType: kendo.diagram.LayeredLayoutType.Down,
+                            type: "Layered",
+                            subtype: "Vertical",
                             animate: true
                         });
                 break;
             case "ForceDirected":
-                diagram.layout(kendo.diagram.LayoutTypes.ForceDirectedLayout,
+                diagram.layout(
                         {
+                            type:"Force",
                             animate: true
                         });
                 break;
             case "MindmapVertical":
-                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                diagram.layout(
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapVertical,
+                            type: "Tree",
+                            subtype: "MindmapVertical",
                             animate: true
                         });
                 break;
             case "MindmapHorizontal":
-                diagram.layout(kendo.diagram.LayoutTypes.TreeLayout,
+                diagram.layout(
                         {
-                            TreeLayoutType: kendo.diagram.TreeLayoutType.MindmapHorizontal,
+                            type: "Tree",
+                            subtype: "MindmapHorizontal",
                             animate: true
                         });
                 break;

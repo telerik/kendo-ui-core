@@ -27,6 +27,8 @@ kendo_module({
         defaultOptions: null,
         init: function () {
             this.defaultOptions = {
+                type: "Tree",
+                subtype: "Down",
                 roots: null,
                 animate: false,
                 //-------------------------------------------------------------------
@@ -47,10 +49,6 @@ kendo_module({
                  */
                 iterations: 300,
                 //-------------------------------------------------------------------
-                /**
-                 * Tree option: the subtype of the tree layout algorithm.
-                 */
-                treeLayoutType: kendo.diagram.TreeLayoutType.TreeDown,
                 /**
                  * Tree option: the separation in one direction (depends on the subtype what direction this is).
                  */
@@ -93,10 +91,6 @@ kendo_module({
                  * Layered option: the separation height/width between the layers.
                  */
                 layerSeparation: 50,
-                /**
-                 * Layered option: the direction of the layered layout.
-                 */
-                layeredLayoutType: kendo.diagram.LayeredLayoutType.Right,
                 /**
                  * Layered option: how many rounds of shifting and fine-tuning.
                  */
@@ -1004,12 +998,12 @@ kendo_module({
         },
 
         layoutLeft: function (left) {
-            this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Left, false);
-            this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
+            this.setChildrenDirection(this.center, "Left", false);
+            this.setChildrenLayout(this.center, "Default", false);
             var h = 0, w = 0, y, i, node;
             for (i = 0; i < left.length; i++) {
                 node = left[i];
-                node.TreeDirection = kendo.diagram.TreeDirection.Left;
+                node.TreeDirection = "Left";
                 var s = this.measure(node, Size.Empty);
                 w = Math.max(w, s.Width);
                 h += s.height + this.options.verticalSeparation;
@@ -1028,12 +1022,12 @@ kendo_module({
         },
 
         layoutRight: function (right) {
-            this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Right, false);
-            this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
+            this.setChildrenDirection(this.center, "Right", false);
+            this.setChildrenLayout(this.center, "Default", false);
             var h = 0, w = 0, y, i, node;
             for (i = 0; i < right.length; i++) {
                 node = right[i];
-                node.TreeDirection = kendo.diagram.TreeDirection.Right;
+                node.TreeDirection = "Right";
                 var s = this.measure(node, Size.Empty);
                 w = Math.max(w, s.Width);
                 h += s.height + this.options.verticalSeparation;
@@ -1051,12 +1045,12 @@ kendo_module({
         },
 
         layoutUp: function (up) {
-            this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Up, false);
-            this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
+            this.setChildrenDirection(this.center, "Up", false);
+            this.setChildrenLayout(this.center, "Default", false);
             var w = 0, y, node, i;
             for (i = 0; i < up.length; i++) {
                 node = up[i];
-                node.TreeDirection = kendo.diagram.TreeDirection.Up;
+                node.TreeDirection = "Up";
                 var s = this.measure(node, Size.Empty);
                 w += s.width + this.options.horizontalSeparation;
             }
@@ -1076,12 +1070,12 @@ kendo_module({
 
         layoutDown: function (down) {
             var node, i;
-            this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Down, false);
-            this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
+            this.setChildrenDirection(this.center, "Down", false);
+            this.setChildrenLayout(this.center, "Default", false);
             var w = 0, y;
             for (i = 0; i < down.length; i++) {
                 node = down[i];
-                node.treeDirection = kendo.diagram.TreeDirection.Down;
+                node.treeDirection = "Down";
                 var s = this.measure(node, Size.Empty);
                 w += s.width + this.options.horizontalSeparation;
             }
@@ -1099,8 +1093,8 @@ kendo_module({
 
         layoutRadialTree: function () {
             // var rmax = children.Aggregate(0D, (current, node) => Math.max(node.SectorAngle, current));
-            this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Radial, false);
-            this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
+            this.setChildrenDirection(this.center, "Radial", false);
+            this.setChildrenLayout(this.center, "Default", false);
             this.previousRoot = null;
             var startAngle = this.options.startRadialAngle;
             var endAngle = this.options.endRadialAngle;
@@ -1126,15 +1120,15 @@ kendo_module({
                 startFromLevel = 0;
             }
 
-            this.setChildrenDirection(this.center, kendo.diagram.TreeDirection.Down, false);
-            this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Default, false);
-            this.setChildrenLayout(this.center, kendo.diagram.ChildrenLayout.Underneath, false, startFromLevel);
+            this.setChildrenDirection(this.center, "Down", false);
+            this.setChildrenLayout(this.center, "Default", false);
+            this.setChildrenLayout(this.center, "Underneath", false, startFromLevel);
             var w = 0, y, node, i;
             for (i = 0; i < down.length; i++) {
                 node = down[i];
 
                 // if (node.IsSpecial) continue;
-                node.TreeDirection = kendo.diagram.TreeDirection.Down;
+                node.TreeDirection = "Down";
                 var s = this.measure(node, Size.Empty);
                 w += s.width + this.options.horizontalSeparation;
             }
@@ -1335,7 +1329,7 @@ kendo_module({
             }
 
             var parent = node.parents[0];
-            if (node.treeDirection === kendo.diagram.TreeDirection.Undefined) {
+            if (node.treeDirection === "Undefined") {
                 node.treeDirection = parent.treeDirection;
             }
 
@@ -1346,28 +1340,28 @@ kendo_module({
             }
             else if (node.children.length === 1) {
                 switch (node.treeDirection) {
-                    case kendo.diagram.TreeDirection.Radial:
+                    case "Radial":
                         s = this.measure(node.children[0], givenSize); // child size
                         w = shapeWidth + (this.options.radialSeparation * Math.cos(node.AngleToParent)) + s.width;
                         h = shapeHeight + Math.abs(this.options.radialSeparation * Math.sin(node.AngleToParent)) + s.height;
                         break;
-                    case kendo.diagram.TreeDirection.Left:
-                    case kendo.diagram.TreeDirection.Right:
+                    case "Left":
+                    case "Right":
                         switch (node.childrenLayout) {
 
-                            case kendo.diagram.ChildrenLayout.TopAlignedWithParent:
+                            case "TopAlignedWithParent":
                                 break;
 
-                            case kendo.diagram.ChildrenLayout.BottomAlignedWithParent:
+                            case "BottomAlignedWithParent":
                                 break;
 
-                            case kendo.diagram.ChildrenLayout.Underneath:
+                            case "Underneath":
                                 s = this.measure(node.children[0], givenSize);
                                 w = shapeWidth + s.width + this.options.underneathHorizontalOffset;
                                 h = shapeHeight + this.options.underneathVerticalTopOffset + s.height;
                                 break;
 
-                            case kendo.diagram.ChildrenLayout.Default:
+                            case "Default":
                                 s = this.measure(node.children[0], givenSize);
                                 w = shapeWidth + this.options.horizontalSeparation + s.width;
                                 h = Math.max(shapeHeight, s.height);
@@ -1377,23 +1371,21 @@ kendo_module({
                                 throw "Unhandled TreeDirection in the Radial layout measuring.";
                         }
                         break;
-                    case kendo.diagram.TreeDirection.Up:
-                    case kendo.diagram.TreeDirection.Down:
+                    case "Up":
+                    case "Down":
                         switch (node.childrenLayout) {
 
-                            case kendo.diagram.ChildrenLayout.TopAlignedWithParent:
+                            case "TopAlignedWithParent":
+                            case "BottomAlignedWithParent":
                                 break;
 
-                            case kendo.diagram.ChildrenLayout.BottomAlignedWithParent:
-                                break;
-
-                            case kendo.diagram.ChildrenLayout.Underneath:
+                            case "Underneath":
                                 s = this.measure(node.children[0], givenSize);
                                 w = Math.max(shapeWidth, s.width + this.options.underneathHorizontalOffset);
                                 h = shapeHeight + this.options.underneathVerticalTopOffset + s.height;
                                 break;
 
-                            case kendo.diagram.ChildrenLayout.Default:
+                            case "Default":
                                 s = this.measure(node.children[0], givenSize);
                                 h = shapeHeight + this.options.verticalSeparation + s.height;
                                 w = Math.max(shapeWidth, s.width);
@@ -1412,17 +1404,15 @@ kendo_module({
             else {
                 var i, childNode;
                 switch (node.treeDirection) {
-                    case kendo.diagram.TreeDirection.Left:
-                    case kendo.diagram.TreeDirection.Right:
+                    case "Left":
+                    case "Right":
                         switch (node.childrenLayout) {
 
-                            case kendo.diagram.ChildrenLayout.TopAlignedWithParent:
+                            case "TopAlignedWithParent":
+                            case "BottomAlignedWithParent":
                                 break;
 
-                            case kendo.diagram.ChildrenLayout.BottomAlignedWithParent:
-                                break;
-
-                            case kendo.diagram.ChildrenLayout.Underneath:
+                            case "Underneath":
                                 w = shapeWidth;
                                 h = shapeHeight + this.options.underneathVerticalTopOffset;
                                 for (i = 0; i < node.children.length; i++) {
@@ -1435,7 +1425,7 @@ kendo_module({
                                 h -= this.options.underneathVerticalSeparation;
                                 break;
 
-                            case kendo.diagram.ChildrenLayout.Default:
+                            case "Default":
                                 w = shapeWidth;
                                 h = 0;
                                 for (i = 0; i < node.children.length; i++) {
@@ -1452,18 +1442,16 @@ kendo_module({
                         }
 
                         break;
-                    case kendo.diagram.TreeDirection.Up:
-                    case kendo.diagram.TreeDirection.Down:
+                    case "Up":
+                    case "Down":
 
                         switch (node.childrenLayout) {
 
-                            case kendo.diagram.ChildrenLayout.TopAlignedWithParent:
+                            case "TopAlignedWithParent":
+                            case "BottomAlignedWithParent":
                                 break;
 
-                            case kendo.diagram.ChildrenLayout.BottomAlignedWithParent:
-                                break;
-
-                            case kendo.diagram.ChildrenLayout.Underneath:
+                            case "Underneath":
                                 w = shapeWidth;
                                 h = shapeHeight + this.options.underneathVerticalTopOffset;
                                 for (i = 0; i < node.children.length; i++) {
@@ -1476,7 +1464,7 @@ kendo_module({
                                 h -= this.options.underneathVerticalSeparation;
                                 break;
 
-                            case kendo.diagram.ChildrenLayout.Default:
+                            case "Default":
                                 w = 0;
                                 h = 0;
                                 for (i = 0; i < node.children.length; i++) {
@@ -1518,15 +1506,13 @@ kendo_module({
                 var x, y;
                 var selfLocation;
                 switch (n.treeDirection) {
-                    case kendo.diagram.TreeDirection.Left:
+                    case "Left":
                         switch (n.childrenLayout) {
-                            case kendo.diagram.ChildrenLayout.TopAlignedWithParent:
+                            case "TopAlignedWithParent":
+                            case "BottomAlignedWithParent":
                                 break;
 
-                            case kendo.diagram.ChildrenLayout.BottomAlignedWithParent:
-                                break;
-
-                            case kendo.diagram.ChildrenLayout.Underneath:
+                            case "Underneath":
                                 selfLocation = p;
                                 n.x = selfLocation.x;
                                 n.y = selfLocation.y;
@@ -1541,7 +1527,7 @@ kendo_module({
                                 }
                                 break;
 
-                            case kendo.diagram.ChildrenLayout.Default:
+                            case "Default":
                                 selfLocation = new Point(p.x + n.Size.width - shapeWidth, p.y + ((n.Size.height - shapeHeight) / 2));
                                 n.x = selfLocation.x;
                                 n.y = selfLocation.y;
@@ -1561,15 +1547,13 @@ kendo_module({
                         }
 
                         break;
-                    case kendo.diagram.TreeDirection.Right:
+                    case "Right":
                         switch (n.childrenLayout) {
-                            case kendo.diagram.ChildrenLayout.TopAlignedWithParent:
+                            case "TopAlignedWithParent":
+                            case "BottomAlignedWithParent":
                                 break;
 
-                            case kendo.diagram.ChildrenLayout.BottomAlignedWithParent:
-                                break;
-
-                            case kendo.diagram.ChildrenLayout.Underneath:
+                            case "Underneath":
                                 selfLocation = p;
                                 n.x = selfLocation.x;
                                 n.y = selfLocation.y;
@@ -1587,7 +1571,7 @@ kendo_module({
 
                                 break;
 
-                            case kendo.diagram.ChildrenLayout.Default:
+                            case "Default":
                                 selfLocation = new Point(p.x, p.y + ((n.Size.height - shapeHeight) / 2));
                                 n.x = selfLocation.x;
                                 n.y = selfLocation.y;
@@ -1607,7 +1591,7 @@ kendo_module({
                         }
 
                         break;
-                    case kendo.diagram.TreeDirection.Up:
+                    case "Up":
                         selfLocation = new Point(p.x + ((n.Size.width - shapeWidth) / 2), p.y + n.Size.height - shapeHeight);
                         n.x = selfLocation.x;
                         n.y = selfLocation.y;
@@ -1635,14 +1619,13 @@ kendo_module({
                         }
                         break;
 
-                    case kendo.diagram.TreeDirection.Down:
+                    case "Down":
 
                         switch (n.childrenLayout) {
-                            case kendo.diagram.ChildrenLayout.TopAlignedWithParent:
+                            case "TopAlignedWithParent":
+                            case "BottomAlignedWithParent":
                                 break;
-                            case kendo.diagram.ChildrenLayout.BottomAlignedWithParent:
-                                break;
-                            case kendo.diagram.ChildrenLayout.Underneath:
+                            case "Underneath":
                                 selfLocation = p;
                                 n.x = selfLocation.x;
                                 n.y = selfLocation.y;
@@ -1657,7 +1640,7 @@ kendo_module({
                                 }
                                 break;
 
-                            case    kendo.diagram.ChildrenLayout.Default:
+                            case    "Default":
                                 selfLocation = new Point(p.x + ((n.Size.width - shapeWidth) / 2), p.y);
                                 n.x = selfLocation.x;
                                 n.y = selfLocation.y;
@@ -1691,7 +1674,7 @@ kendo_module({
                         }
                         break;
 
-                    case kendo.diagram.TreeDirection.None:
+                    case "None":
                         break;
 
                     default:
@@ -1708,18 +1691,20 @@ kendo_module({
                 return;
             }
 
-            var type = this.options.TreeLayoutType;
+            var type = this.options.subtype;
             if (Utils.isUndefined(type)) {
-                type = kendo.diagram.TreeLayoutType.TreeDown;
+                type = "Down";
             }
             var single, male, female, leftcount;
             var children = this.center.children;
-            switch (type) {
-                case kendo.diagram.TreeLayoutType.RadialTree:
+            switch (type.toLowerCase()) {
+                case "radial":
+                case "radialtree":
                     this.layoutRadialTree();
                     break;
 
-                case kendo.diagram.TreeLayoutType.MindmapHorizontal:
+                case "mindmaphorizontal":
+                case "mindmap":
                     single = this.center.children;
 
                     if (this.center.children.length === 1) {
@@ -1740,7 +1725,7 @@ kendo_module({
                     }
                     break;
 
-                case kendo.diagram.TreeLayoutType.MindmapVertical:
+                case "mindmapvertical":
                     single = this.center.children;
 
                     if (this.center.children.length === 1) {
@@ -1760,30 +1745,34 @@ kendo_module({
                     }
                     break;
 
-                case kendo.diagram.TreeLayoutType.TreeRight:
+                case "right":
                     this.layoutRight(this.center.children);
                     break;
 
-                case kendo.diagram.TreeLayoutType.TreeLeft:
+                case "left":
                     this.layoutLeft(this.center.children);
                     break;
 
-                case kendo.diagram.TreeLayoutType.TreeUp:
+                case "up":
+                case "bottom":
                     this.layoutUp(this.center.children);
                     break;
 
-                case kendo.diagram.TreeLayoutType.TreeDown:
+                case "down":
+                case "top":
                     this.layoutDown(this.center.children);
                     break;
 
-                case kendo.diagram.TreeLayoutType.TipOverTree:
+                case "tipover":
+                case "tipovertree":
                     if (this.options.tipOverTreeStartLevel < 0) {
                         throw  "The tip-over level should be a positive integer.";
                     }
                     this.tipOverTree(this.center.children, this.options.tipOverTreeStartLevel);
                     break;
 
-                case kendo.diagram.TreeLayoutType.Undefined:
+                case "undefined":
+                case "none":
                     break;
             }
         }
@@ -1902,144 +1891,6 @@ kendo_module({
         }
 
     });
-
-    var ChildrenLayout = {
-        /*
-         * The topmost child will be aligned with the parent.
-         */
-        TopAlignedWithParent: 0,
-
-        /*
-         *
-         */
-        BottomAlignedWithParent: 1,
-
-        /*
-         * If the children are at the <see cref="TreeDirection.Right"/> or <see cref="TreeDirection.Left"/> this will furthermore
-         * specify that they should be placed underneath the parent rather than at the distance from the right, respectively left of the parent.
-         */
-        Underneath: 2,
-
-        /*
-         * Default layout.
-         */
-        Default: 3
-    };
-
-    var LayoutTypes = {
-
-        /**
-         * The tree layout and its various variations.
-         * See also the TreeLayoutType for subtypes of this.
-         */
-        TreeLayout: 0,
-
-        /**
-         * The Sugiyama aka layered layout.
-         */
-        LayeredLayout: 1,
-
-        /*
-         * Spring-embedder aka force-directed layout.
-         */
-        ForceDirectedLayout: 2,
-        /**
-         * Unspecified layout.
-         */
-        None: 3
-    };
-
-    var TreeDirection = {
-        /*
-         * Children evolve to the left.
-         */
-        Left: 0,
-
-        /*
-         * Children evolve to the right.
-         */
-        Right: 1,
-
-        /*
-         * Children evolve upwards.
-         */
-        Up: 2,
-
-        /*
-         * Children evolve downwards.
-         */
-        Down: 3,
-
-        /*
-         * No direction specified:0, this usually means the root node and it's a mind mapping root.
-         */
-        None: 4,
-
-        /*
-         * Radial layout.
-         */
-        Radial: 5,
-
-        /*
-         * Undefine layout.
-         */
-        Undefined: 6
-    };
-
-    var TreeLayoutType = {
-
-        /*
-         * The standard mind mapping layout.
-         */
-        MindmapHorizontal: 0,
-
-        /*
-         * The standard mind mapping layout but with the two wings laid out vertically.
-         */
-        MindmapVertical: 1,
-
-        /*
-         * Standard tree layout with the children positioned at the right of the root.
-         */
-        TreeRight: 2,
-
-        /*
-         * Standard tree layout with the children positioned at the left of the root.
-         */
-        TreeLeft: 3,
-
-        /*
-         *  Standard tree layout with the children positioned on top of the root.
-         */
-        TreeUp: 4,
-
-        /*
-         * Standard tree layout with the children positioned below the root.
-         */
-        TreeDown: 5,
-
-        /*
-         * Top-down layout with the children on the second level positioned as a tree view underneath the first level.
-         */
-        TipOverTree: 6,
-
-        /*
-         * Experimental radial tree layout.
-         */
-        RadialTree: 7,
-
-        /*
-         * Unspecified layout. This is not an algorithm but just a tag for the host application to tell that the user has not specified any layout yet.
-         */
-        Undefined: 8
-    };
-
-    var LayeredLayoutType = {
-        Up: 0,
-        Down: 1,
-        Left: 2,
-        Right: 3
-    };
 
     /**
      * The Sugiyama aka layered layout algorithm.
@@ -2419,15 +2270,15 @@ kendo_module({
             return wings;
         },
         _isVerticalLayout: function () {
-            return this.options.layeredLayoutType === kendo.diagram.LayeredLayoutType.Up || this.options.layeredLayoutType === kendo.diagram.LayeredLayoutType.Down;
+            return this.options.subtype.toLowerCase() === "up" || this.options.subtype.toLowerCase() === "down" || this.options.subtype.toLowerCase() === "vertical";
         },
 
         _isHorizontalLayout: function () {
-            return this.options.layeredLayoutType === kendo.diagram.LayeredLayoutType.Right || this.options.layeredLayoutType === kendo.diagram.LayeredLayoutType.Left;
+            return this.options.subtype.toLowerCase() === "right" || this.options.subtype.toLowerCase() === "left" || this.options.subtype.toLowerCase() === "horizontal";
         },
         _isIncreasingLayout: function () {
             // meaning that the visiting of the layers goes in the natural order of increasing layer index
-            return this.options.layeredLayoutType === kendo.diagram.LayeredLayoutType.Right || this.options.layeredLayoutType === kendo.diagram.LayeredLayoutType.Down;
+            return this.options.subtype.toLowerCase() === "right" || this.options.subtype.toLowerCase() === "down";
         },
         _moveThingsAround: function () {
             var i, l, node, layer, n, w;
@@ -3940,12 +3791,7 @@ kendo_module({
         SpringLayout: SpringLayout,
         TreeLayout: TreeLayout,
         GraphAdapter: DiagramToHyperTreeAdapter,
-        ChildrenLayout: ChildrenLayout,
-        LayoutTypes: LayoutTypes,
-        TreeLayoutType: TreeLayoutType,
-        TreeDirection: TreeDirection,
         LayeredLayout: LayeredLayout,
-        LayeredLayoutType: LayeredLayoutType,
         LayoutBase: LayoutBase,
         LayoutState: LayoutState,
         PositionAdapter: PositionAdapter
