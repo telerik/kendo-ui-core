@@ -458,7 +458,7 @@ kendo_module({
                     '${messages.settings}'+
                     '<button class="k-button k-done">#=messages.done#</button>'+
                 '</div>'+
-                '<div class="k-column-menu"><ul><li>'+
+                '<div class="k-column-menu k-header"><ul><li>'+
                     '<span class="k-link">${field}</span><ul>'+
                 '#if(sortable){#'+
                     '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite k-i-sort-asc"></span>${messages.sortAscending}</span></li>'+
@@ -473,9 +473,9 @@ kendo_module({
                 '#}#'+
                 '</ul></li>'+
                 '#if(showColumns){#'+
-                    '<li class="k-item k-columns-item"><span class="k-link"><span class="k-sprite k-i-columns"></span>${messages.columns}</span><ul>'+
+                    '<li><span class="k-link"><span class="k-sprite k-i-columns"></span>${messages.columns}</span><ul>'+
                     '#for (var idx = 0; idx < columns.length; idx++) {#'+
-                        '<li><input type="checkbox" data-#=ns#field="#=columns[idx].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[idx].index#"/>#=columns[idx].title#</li>'+
+                        '<li class="k-item"><label class="k-label"><input type="checkbox" class="k-check" data-#=ns#field="#=columns[idx].field.replace(/\"/g,"&\\#34;")#" data-#=ns#index="#=columns[idx].index#"/>#=columns[idx].title#</label></li>'+
                     '#}#'+
                     '</ul></li>'+
                 '#}#'+

@@ -484,7 +484,7 @@ html body .k-button-bare.k-upload-button:hover
 .k-si-close { .sprite-hoverable(10, 5); }
 .k-multiselect .k-delete { .sprite-position(10, 5); }
 .k-multiselect .k-state-hover .k-delete { .sprite-position(11, 5); }
-.k-i-tick, .k-insert, .k-update { .sprite-hoverable(2, 2); }
+.k-i-tick, .k-insert, .k-update, .k-check:checked { .sprite-hoverable(2, 2); }
 .k-i-cancel, .k-cancel, .k-denied { .sprite-hoverable(2, 3); }
 .k-i-plus, .k-add { .sprite-hoverable(2, 4); }
 .k-i-funnel, .k-filter { .sprite-hoverable(2, 5); }
@@ -4912,8 +4912,7 @@ div[name="recurrenceRule"] > .k-dropdown
 /* Actiosheet Styles */
 
 .km-pane-wrapper .k-scheduler-edit-form .k-scheduler-delete,
-*:not(.km-pane) > .km-shim .km-actionsheet .k-button,
-*:not(.km-pane) > .km-shim .km-actionsheet .k-button > a,
+*:not(.km-pane) > .km-shim .km-actionsheet .k-button
 {
     display:block;
     text-align: center;
@@ -4921,13 +4920,8 @@ div[name="recurrenceRule"] > .k-dropdown
 
 *:not(.km-pane) > .km-shim .km-actionsheet .k-button
 {
+    font-size: 1.4em;
     margin: .3em 1em;
-}
-
-*:not(.km-pane) > .km-shim .km-actionsheet .k-button > a
-{
-    text-decoration: none;
-    color: inherit;
 }
 
 *:not(.km-pane) > .km-shim .km-actionsheet-title
@@ -4956,7 +4950,6 @@ div[name="recurrenceRule"] > .k-dropdown
     position: absolute;
     width: 100%;
     min-height: 100%;
-    padding: .6em;
     .box-sizing(border-box);
 }
 
@@ -4981,6 +4974,106 @@ div[name="recurrenceRule"] > .k-dropdown
 .km-pane-wrapper .k-grid-edit-form .k-edit-field .k-numerictextbox
 {
     width: 100%;
+}
+
+/* Column Menu in Adaptive Grid */
+
+.km-pane-wrapper .k-column-menu ul
+{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    overflow: hidden;
+}
+
+.km-pane-wrapper .km-switch
+{
+    top: 50%;
+    right: .8rem;
+    position: absolute;
+    margin-top: -1.1rem;
+}
+
+.km-pane-wrapper .k-column-menu .k-item,
+.km-pane-wrapper .k-column-menu .k-item .k-link,
+.km-pane-wrapper .k-column-menu .k-item .k-label
+{
+    display: block;
+    position: relative;
+    list-style-type: none;
+    vertical-align: middle;
+    .box-sizing(border-box);
+    padding: .5em 1em;
+}
+
+.km-pane-wrapper .k-column-menu .k-item
+{
+    font-size: 1.1em;
+    line-height: 1.6em;
+    overflow: hidden;
+}
+
+.km-pane-wrapper .k-column-menu .k-item > *
+{
+    line-height: normal;
+}
+
+.km-pane-wrapper .k-column-menu > ul > li > .k-link
+{
+    display: block;
+    padding: .2em 1em;
+    font-size: .95em;
+    position: -webkit-sticky;
+    margin: 0;
+    font-weight: normal;
+    line-height: 2em;
+    background: transparent;
+    border-top: 1em solid transparent;
+}
+
+.km-pane-wrapper .k-column-menu .k-item:first-child
+{
+    border-top: 0;
+}
+
+.km-pane-wrapper .k-column-menu .k-item:last-child
+{
+    border-bottom: 0;
+}
+
+.km-pane-wrapper .k-column-menu .k-link,
+.km-pane-wrapper .k-column-menu .k-label
+{
+    line-height: inherit;
+    text-decoration: none;
+    margin: -.5em -1em;
+}
+
+/* Column Menu Checkboxes */
+
+.k-check[type=checkbox],
+.k-check[type=radio]
+{
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.km-pane-wrapper .k-column-menu .k-check
+{
+    position: absolute;
+    top: 50%;
+    right: .7em;
+    margin-top: -.5em;
+}
+
+.km-pane-wrapper .k-column-menu .k-link .k-check,
+.km-pane-wrapper .k-column-menu .k-label .k-check
+{
+    border: 0;
+    font-size: inherit;
+    width: 1em;
+    height: .9em;
 }
 
 /* Tooltip */
