@@ -108,6 +108,16 @@ $(function() {
 });
 </script>
 <style scoped>
+
+.k-nav-current > .k-link span + span {
+    max-width: 200px;
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: top;
+}
+
 #people {
     background: url('../../content/web/scheduler/team-schedule.png') transparent no-repeat;
     height: 115px;
