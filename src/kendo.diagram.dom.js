@@ -1443,12 +1443,12 @@ kendo_module({
             var rect = Rect.empty(), di = this._getDiagramItems(items), temp;
             if (di.shapes.length > 0) {
                 var item = di.shapes[0];
-                rect = item.bounds().clone();
+                rect = item.rotatedBounds().clone();
                 rect.x -= item._rotationOffset.x;
                 rect.y -= item._rotationOffset.y;
                 for (var i = 1; i < di.shapes.length; i++) {
                     item = di.shapes[i];
-                    temp = item.bounds().clone();
+                    temp = item.rotatedBounds().clone();
                     temp.x -= item._rotationOffset.x;
                     temp.y -= item._rotationOffset.y;
                     rect = rect.union(temp);

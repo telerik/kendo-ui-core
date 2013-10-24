@@ -251,15 +251,16 @@ kendo_module({
         }
     });
     /**
-     * Holds the undoredo state when performing a rotation, translation or scaling.
+     * Holds the undoredo state when performing a rotation, translation or scaling. The adorner is optional.
      * @type {*}
      */
     var TransformUnit = Class.extend({
-        init: function (shapes, undoStates) {
+        init: function (shapes, undoStates, adorner) {
             this.shapes = shapes;
             this.undoStates = undoStates;
             this.title = "Transformation";
             this.redoStates = [];
+            this.adorner = adorner;
             for (var i = 0; i < this.shapes.length; i++) {
                 var shape = this.shapes[i];
                 this.redoStates.push(shape.bounds());
@@ -271,12 +272,18 @@ kendo_module({
                 shape.bounds(this.undoStates[i]);
                 shape.refresh();
             }
+            if (this.adorner) {
+                this.adorner.complete();
+            }
         },
         redo: function () {
             for (var i = 0; i < this.shapes.length; i++) {
                 var shape = this.shapes[i];
                 shape.bounds(this.redoStates[i]);
                 shape.refresh();
+            }
+            if (this.adorner) {
+                this.adorner.complete();
             }
         }
     });
@@ -346,7 +353,7 @@ kendo_module({
                 shape.rotate(this.undoRotates[i], this.center);
             }
             this.adorner._angle = this.undoAngle;
-            this.adorner.refresh();
+            this.adorner.complete();
         },
         redo: function () {
             var i, shape;
@@ -355,7 +362,7 @@ kendo_module({
                 shape.rotate(this.redoRotates[i], this.center);
             }
             this.adorner._angle = this.redoAngle;
-            this.adorner.refresh();
+            this.adorner.complete();
         }
     });
 
@@ -1349,6 +1356,9 @@ kendo_module({
             });
 
             that._refreshHandler = function () {
+                if (!that._internalChange) {
+                    that.refreshBounds();
+                }
                 that.refresh();
             };
 
@@ -1356,10 +1366,11 @@ kendo_module({
                 if (that.shapes.length == 1) {
                     that._angle = that.shapes[0].rotate().angle;
                 }
-                that.refresh();
+                that._refreshHandler();
             };
 
             that.diagram.bind("boundsChange", that._refreshHandler).bind("rotate", that._rotatedHandler);
+            that.refreshBounds();
             that.refresh();
         },
         options: {
@@ -1386,7 +1397,7 @@ kendo_module({
         bounds: function (value) {
             if (value) {
                 this._innerBounds = value.clone();
-                this._bounds = this.diagram.transformRect(value).inflate(this.options.offset, this.options.offset);
+                this._bounds = value.inflate(this.options.offset, this.options.offset);
             }
             else {
                 return this._bounds;
@@ -1492,6 +1503,7 @@ kendo_module({
             that._startAngle = that._angle;
             that._rotates();
             that._positions();
+            that.refreshBounds();
             that.refresh();
         },
         _rotates: function () {
@@ -1516,6 +1528,7 @@ kendo_module({
             this._sp = p;
             this._cp = p;
             this._manipulating = true;
+            this._internalChange = true;
             this.shapeStates = [];
             for (var i = 0; i < this.shapes.length; i++) {
                 var shape = this.shapes[i];
@@ -1526,15 +1539,15 @@ kendo_module({
         move: function (handle, p) {
             var delta = p.minus(this._cp), dragging,
                 dtl = new Point(), dbr = new Point(), bounds,
-                center, shape, i, angle;
+                center, shape, i, angle, newBounds, change;
             if (handle.y === -2 && handle.x === -1) {
                 center = this._innerBounds.center();
-                this._angle = Math.findAngle(center, p);
+                this._angle = Math.findAngle(center, this.diagram.transformPoint(p));
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
                     angle = (this._angle + this.initialRotates[i] - this._startAngle) % 360;
                     shape.rotate(angle, center);
-                    this._rotated = true;
+                    this._rotating = true;
                 }
             } else {
                 if (handle.x === 0 && handle.y === 0) {
@@ -1558,14 +1571,21 @@ kendo_module({
                         dbr.y = delta.y;
                     }
                 }
+
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
                     bounds = shape.bounds();
-                    var newBounds = this._displaceBounds(bounds, dtl, dbr, dragging);
+                    newBounds = this._displaceBounds(bounds, dtl, dbr, dragging);
                     if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) {
                         shape.bounds(newBounds);
                         shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
+                        change = true;
                     }
+                }
+
+                if (change) {
+                    newBounds = this._displaceBounds(this._innerBounds, dtl, dbr, dragging);
+                    this.bounds(newBounds);
                 }
                 this._positions();
             }
@@ -1587,23 +1607,28 @@ kendo_module({
         stop: function () {
             var unit;
             if (this._cp != this._sp) {
-                if (this._rotated) {
+                if (this._rotating) {
                     unit = new RotateUnit(this, this.shapes, this.initialRotates, this._initialAngle);
                 }
                 else {
-                    unit = new TransformUnit(this.shapes, this.shapeStates);
+                    unit = new TransformUnit(this.shapes, this.shapeStates, this);
                 }
             }
 
             this._manipulating = undefined;
-            this._rotated = undefined;
             return unit;
         },
-        refresh: function () {
-            var that = this, b,
-                bounds = this.shapes.length == 1 ? this.shapes[0].bounds().clone() : this.diagram.getOriginBoundingBox(this.shapes);
+        complete: function () {
+            this.refresh();
+            this._internalChange = undefined;
+            this._rotating = undefined;
+        },
+        refreshBounds: function () {
+            var bounds = this.shapes.length == 1 ? this.shapes[0].visualBounds().clone() : this.diagram.getOriginBoundingBox(this.shapes);
             this.bounds(bounds);
-
+        },
+        refresh: function () {
+            var that = this, b, bounds;
             bounds = this.bounds();
             if (this.shapes.length > 0) {
                 this.visual.visible(true);
