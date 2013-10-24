@@ -11,6 +11,10 @@
 <body>
     <script src="../../src/kendo.core.js"></script>
     <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/dataviz/util.js"></script>
+    <script src="../../src/dataviz/geometry.js"></script>
+    <script src="../../src/dataviz/drawing/core.js"></script>
+    <script src="../../src/dataviz/drawing/shapes.js"></script>
     <script src="../../src/kendo.dataviz.map.js"></script>
     <script>
         var TOLERANCE = 1e-6;
@@ -19,6 +23,7 @@
             Point = dataviz.Point2D,
 
             map = dataviz.map,
+            Extent = map.Extent,
             Location = map.Location;
 
         (function() {
@@ -53,6 +58,129 @@
 
             test("init from lng, lat array", function() {
                 ok(Location.fromLngLat([10, 20]).equals(new Location(20, 10)));
+            });
+
+        })();
+
+        (function() {
+            var extent;
+
+            // ------------------------------------------------------------
+            module("Extent", {
+                setup: function() {
+                    extent = new Extent(
+                        new Location(45, -90),
+                        new Location(-45, 90)
+                    );
+                }
+            });
+
+            test("contains for negative longitude", function() {
+                ok(extent.contains(new Location(0, -89)));
+            });
+
+            test("contains for positive longitude", function() {
+                ok(extent.contains(new Location(0, 89)));
+            });
+
+            test("contains for negative latitude", function() {
+                ok(extent.contains(new Location(-44, 0)));
+            });
+
+            test("contains for positive latitude", function() {
+                ok(extent.contains(new Location(44, 0)));
+            });
+
+            test("does not contain for negative longitude", function() {
+                ok(!extent.contains(new Location(0, -91)));
+            });
+
+            test("does not contain for positive longitude", function() {
+                ok(!extent.contains(new Location(0, 91)));
+            });
+
+            test("does not contain for negative latitude", function() {
+                ok(!extent.contains(new Location(-46, 0)));
+            });
+
+            test("does not contain for positive latitude", function() {
+                ok(!extent.contains(new Location(46, 0)));
+            });
+
+            test("contains location on longitude limit", function() {
+                ok(extent.contains(new Location(0, 90)));
+            });
+
+            test("contains location on latitude limit", function() {
+                ok(extent.contains(new Location(45, 0)));
+            });
+
+            test("contains with array", function() {
+                ok(extent.contains([-89, 0]));
+            });
+
+            test("does not contain with array", function() {
+                ok(!extent.contains([-91, 0]));
+            });
+
+            test("containsAny with one matching and one non-matching", function() {
+                ok(extent.containsAny([
+                    new Location(0, -89), new Location(0, -91)
+                ]));
+            });
+
+            test("containsAny with two matching", function() {
+                ok(extent.containsAny([
+                    new Location(0, -89), new Location(0, 89)
+                ]));
+            });
+
+            test("containsAny with two non-matching", function() {
+                ok(!extent.containsAny([
+                    new Location(0, -91), new Location(0, 91)
+                ]));
+            });
+
+            // ------------------------------------------------------------
+            module("Extent / User units", {
+                setup: function() {
+                    extent = new Extent(
+                        new Location(500, -500),
+                        new Location(-500, 500)
+                    );
+                }
+            });
+
+            test("contains point with negative x", function() {
+                ok(extent.contains(new Location(0, -400)));
+            });
+
+            test("contains point with positive x", function() {
+                ok(extent.contains(new Location(0, 400)));
+            });
+
+            test("contains point with negative y", function() {
+                ok(extent.contains(new Location(-400, 0)));
+            });
+
+            test("contains point with positive y", function() {
+                ok(extent.contains(new Location(400, 0)));
+            });
+
+            test("does not contain point with negative x", function() {
+                ok(!extent.contains(new Location(0, -600)));
+            });
+
+            test("does not contain with positive x", function() {
+                ok(!extent.contains(new Location(0, 600)));
+            });
+
+            test("does not contain with negative y", function() {
+                ok(!extent.contains(new Location(-600, 0)));
+            });
+
+            test("does not contain with positive y", function() {
+                ok(!extent.contains(new Location(600, 0)));
             });
 
         })();

@@ -1,12 +1,8 @@
 (function ($, undefined) {
     // Imports ================================================================
-    var PRECISION = 4;
-
-    // Imports ================================================================
     var proxy = $.proxy,
 
         kendo = window.kendo,
-        Class = kendo.Class,
         Observable = kendo.Observable,
 
         dataviz = kendo.dataviz,
@@ -14,9 +10,6 @@
 
         d = dataviz.drawing,
         Group = d.Group,
-
-        util = dataviz.util,
-        round = util.round,
 
         map = dataviz.map,
         Location = map.Location;
@@ -59,14 +52,11 @@
             this.surface.clear();
 
             var group = new Group();
-            if (data.type === "FeatureCollection") {
-                for (var i = 0; i < data.features.length; i++) {
-                    group.append(this._feature(data.features[i]));
-                }
-            } else {
-                group.append(this._feature(data));
+            this._loadItem(data, group);
+
+            if (group.children.length > 0) {
+                this.surface.draw(group);
             }
-            this.surface.draw(group);
         },
 
         reset: function() {
@@ -79,63 +69,81 @@
             this.surface.draw(this._buildPolygon(coords, style));
         },
 
-        _buildPolygon: function(coords, style) {
+        _loadItem: function(item, container) {
+            switch(item.type) {
+                case "FeatureCollection":
+                    for (var i = 0; i < item.features.length; i++) {
+                        this._loadItem(item.features[i], container);
+                    }
+                    break;
+
+                case "Feature":
+                    this._loadGeometry(item.geometry, container, item);
+                    break;
+
+                default:
+                    this._loadGeometry(item, container, item);
+                    break;
+            }
+        },
+
+        _loadGeometry: function(geometry, container, item) {
+            var coords = geometry.coordinates;
+
+            switch(geometry.type) {
+                case "MultiPolygon":
+                    for (var i = 0; i < coords.length; i++) {
+                        this._loadPolygon(coords[i], container, item);
+                    }
+                    break;
+
+                case "Polygon":
+                    this._loadPolygon(coords, container, item);
+                    break;
+            }
+        },
+
+        _loadPolygon: function(rings, container, item) {
+            var viewport = this.map.viewport(),
+                visible = false;
+
+            for (var i = 0; i < rings.length; i++) {
+                visible = visible || viewport.containsAny(rings[i]);
+            }
+
+            if (visible) {
+                var shape = this._buildPolygon(rings);
+                this.trigger("shapeCreated", { shape: shape, dataItem: item });
+                // TODO: Cancellable?
+
+                container.append(shape);
+            }
+        },
+
+        _buildPolygon: function(rings, style) {
             style = deepExtend({
                 stroke: { width: 1, color: "black" },
                 fill: { color: "red", opacity: 0.5 }
             }, style);
 
-            var path = coords.length > 1 ?
+            var path = rings.length > 1 ?
                 new d.MultiPath(style) : new d.Path(style);
 
-            for (var i = 0; i < coords.length; i++) {
-                var ring = coords[i];
-                var ringPoints = [];
-
-                for (var j = 0; j < ring.length; j++) {
-                    var point = ring[j];
-                    var l = Location.fromLngLat(point);
-                    var p = this.map.layerPoint(l);
-
-                    // TODO: Discard path if entirely outside viewport
+            for (var i = 0; i < rings.length; i++) {
+                for (var j = 0; j < rings[i].length; j++) {
+                    var point = this.map.layerPoint(
+                        Location.fromLngLat(rings[i][j])
+                    );
 
                     if (j === 0) {
-                        path.moveTo(p.x, p.y);
+                        path.moveTo(point.x, point.y);
                     } else {
-                        path.lineTo(p.x, p.y);
+                        path.lineTo(point.x, point.y);
                     }
                 }
             }
 
             return path;
-        },
-
-        _feature: function(feature) {
-            var geometry = feature.geometry,
-                shape;
-
-            switch(geometry.type) {
-                case "Polygon":
-                    shape = this._buildPolygon(geometry.coordinates);
-                    break;
-
-                case "MultiPolygon":
-                    var coords = geometry.coordinates,
-                        i;
-
-                    shape = new Group();
-                    for (i = 0; i < coords.length; i++) {
-                        shape.append(this._buildPolygon(coords[i]));
-                    }
-                    break;
-            }
-
-            this.trigger("shapeCreated", {
-                shape: shape,
-                feature: feature
-            });
-
-            return shape;
         },
 
         _drag: function() {

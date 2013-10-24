@@ -60,14 +60,14 @@
         $("#map").kendoMap({
             view: {
                 center: [51.505, -0.09],
-                zoom: 4
+                zoom: 2
             },
             layers: [{
                 type: "shape",
                 url: "countries.geo.json",
                 copyright: "&copy; FooBar",
                 shapeCreated: function(e) {
-                    var users = e.feature.properties.users;
+                    var users = e.dataItem.properties.users;
                     if (users) {
                         setColor(e.shape, users);
                     }

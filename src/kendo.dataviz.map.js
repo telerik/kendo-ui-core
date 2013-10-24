@@ -31,7 +31,8 @@ kendo_module({
         defined = dataviz.defined,
 
         util = dataviz.util,
-        limit = util.limitValue;
+        limit = util.limitValue,
+        valueOrDefault = util.valueOrDefault;
 
     // Constants ==============================================================
     var PI = math.PI,
@@ -124,12 +125,11 @@ kendo_module({
 
         viewport: function() {
             var map = this,
-                options = map.options,
                 scale = map.scale(),
                 halfWidth = map.element.width() / 2,
                 halfHeight = map.element.height() / 2,
                 crs = map.crs,
-                cp = map.crs.toPoint(map.center(), scale);
+                cp = crs.toPoint(map.center(), scale);
 
             var p0 = cp.clone();
             p0.x -= halfWidth;
@@ -140,8 +140,8 @@ kendo_module({
             p1.y += halfHeight;
 
             return new Extent(
-                map.crs.toLocation(p0, scale),
-                map.crs.toLocation(p1, scale)
+                crs.toLocation(p0, scale),
+                crs.toLocation(p1, scale)
             );
         },
 
@@ -160,6 +160,7 @@ kendo_module({
     });
 
     // Implementation =========================================================
+    // TODO: Flip lat (y), lng (x) before it's too late!
     var Location = function(lat, lng) {
         this.lat = lat;
         this.lng = lng;
@@ -189,6 +190,28 @@ kendo_module({
         init: function(nw, se) {
             this.nw = nw;
             this.se = se;
+        },
+
+        contains: function(loc) {
+            var nw = this.nw,
+                se = this.se,
+                lng = valueOrDefault(loc.lng, loc[0]),
+                lat = valueOrDefault(loc.lat, loc[1]);
+
+            return loc &&
+                   lng + 180 >= nw.lng + 180 &&
+                   lng + 180 <= se.lng + 180 &&
+                   lat + 90 >= se.lat + 90 &&
+                   lat + 90 <= nw.lat + 90;
+        },
+
+        containsAny: function(locs) {
+            var result = false;
+            for (var i = 0; i < locs.length; i++) {
+                result = result || this.contains(locs[i]);
+            }
+
+            return result;
         }
     });
 
@@ -467,6 +490,7 @@ kendo_module({
                 SphericalMercator: SphericalMercator
             },
 
+            Extent: Extent,
             Location: Location
         }
     });
