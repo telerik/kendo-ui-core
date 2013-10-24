@@ -19,6 +19,8 @@
             EndMessages = new SchedulerRecurrenceEditorEndMessages();
 
             OffsetPositionsMessages = new SchedulerRecurrenceEditorOffsetPositionsMessages();
+
+            WeekdaysMessages = new SchedulerRecurrenceEditorWeekdaysMessages();
         }
 
         public SchedulerRecurrenceEditorFrequenciesMessages FrequenciesMessages { get; set; }
@@ -34,6 +36,8 @@
         public SchedulerRecurrenceEditorEndMessages EndMessages { get; set; }
 
         public SchedulerRecurrenceEditorOffsetPositionsMessages OffsetPositionsMessages { get; set; }
+
+        public SchedulerRecurrenceEditorWeekdaysMessages WeekdaysMessages { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -78,6 +82,12 @@
             if (offsetPositionsMessages.Count > 0)
             {
                 json["offsetPositions"] = offsetPositionsMessages;
+            }
+
+            IDictionary<string, object> weekdaysMessages = WeekdaysMessages.ToJson();
+            if (weekdaysMessages.Count > 0)
+            {
+                json["weekdays"] = weekdaysMessages;
             }
         }
     }

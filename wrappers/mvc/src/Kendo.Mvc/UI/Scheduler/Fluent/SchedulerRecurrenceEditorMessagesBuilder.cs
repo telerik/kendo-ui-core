@@ -108,5 +108,18 @@
 
             return this;
         }
+
+        /// <summary>
+        /// Sets the Recurrence Editor Weekdays messages of the scheduler.
+        /// </summary>
+        /// <param name="addViewAction">The lambda which configures the scheduler recurrence editor weekdays messages</param>
+        public SchedulerRecurrenceEditorMessagesBuilder Weekdays(Action<SchedulerRecurrenceEditorWeekdaysMessagesBuilder> addViewAction)
+        {
+            SchedulerRecurrenceEditorWeekdaysMessagesBuilder builder = new SchedulerRecurrenceEditorWeekdaysMessagesBuilder(editorMessages.WeekdaysMessages);
+
+            addViewAction(builder);
+
+            return this;
+        }
     }
 }

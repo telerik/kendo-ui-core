@@ -672,4 +672,13 @@
   <data name="Grid_Done" xml:space="preserve">
     <value>Готово</value>
   </data>
+  <data name="Scheduler_Recurrence_Editor_Weekdays_Day" xml:space="preserve">
+    <value>ден</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekdays_Weekday" xml:space="preserve">
+    <value>делник</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekdays_Weekend" xml:space="preserve">
+    <value>почивен ден</value>
+  </data>
 </root>

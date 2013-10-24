@@ -1465,6 +1465,33 @@ namespace Kendo.Mvc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to day.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Weekdays_Day {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Weekdays_Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to weekday.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Weekdays_Weekday {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Weekdays_Weekday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to weekend day.
+        /// </summary>
+        public static string Scheduler_Recurrence_Editor_Weekdays_Weekend {
+            get {
+                return ResourceManager.GetString("Scheduler_Recurrence_Editor_Weekdays_Weekend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Repeat every: .
         /// </summary>
         public static string Scheduler_Recurrence_Editor_Weekly_RepeatEvery {

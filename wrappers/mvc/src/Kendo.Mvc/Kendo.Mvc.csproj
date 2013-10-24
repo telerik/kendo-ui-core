@@ -1148,6 +1148,7 @@
     <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorMessagesBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorMonthlyMessagesBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorOffsetPositionsMessagesBuilder.cs" />
+    <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorWeekdaysMessagesBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorWeeklyMessagesBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceEditorYearlyMessagesBuilder.cs" />
     <Compile Include="UI\Scheduler\Fluent\SchedulerRecurrenceMessagesBuilder.cs" />
@@ -1176,6 +1177,7 @@
     <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceEditorMessages.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceEditorMonthlyMessages.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceEditorOffsetPositionsMessages.cs" />
+    <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceEditorWeekdaysMessages.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceEditorWeeklyMessages.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceEditorYearlyMessages.cs" />
     <Compile Include="UI\Scheduler\Settings\SchedulerRecurrenceMessages.cs" />

@@ -678,4 +678,13 @@
   <data name="Grid_Done" xml:space="preserve">
     <value>Done</value>
   </data>
+  <data name="Scheduler_Recurrence_Editor_Weekdays_Day" xml:space="preserve">
+    <value>day</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekdays_Weekday" xml:space="preserve">
+    <value>weekday</value>
+  </data>
+  <data name="Scheduler_Recurrence_Editor_Weekdays_Weekend" xml:space="preserve">
+    <value>weekend day</value>
+  </data>
 </root>
