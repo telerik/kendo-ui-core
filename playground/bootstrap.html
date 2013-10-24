@@ -198,6 +198,14 @@
                 text-align: right;
             }
 
+            .ra-section {
+                margin-bottom: 20px;
+            }
+
+            .ra-well-overlay {
+                margin: -16px -20px -19px;
+            }
+
             #panelbar .k-content {
                 padding: 1em;
             }
@@ -306,8 +314,9 @@
                     <div id="tabstrip">
                         <ul>
                             <li class="k-state-active">Sales per day</li>
-                            <li>Area charts</li>
-                            <li>Bar charts</li>
+                            <li>Sales per region</li>
+                            <li>Revenue per product</li>
+                            <li>Market share per product</li>
                         </ul>
                         <div>
                             <div id="sales-per-day"></div>
@@ -316,7 +325,7 @@
                 </div>
             </div>
 
-            <section class="col-sm-12 well">
+            <section class="well">
                 <h2 class="ra-well-title">Profile Setup</h2>
 
                 <div class="form-horizontal form-widgets col-sm-6">
@@ -406,38 +415,33 @@
                 </div>
             </section>
 
-            <div id="orders"></div>
+            <div id="orders" class="ra-section"></div>
 
-            <div id="schedule"></div>
+            <div id="schedule" class="ra-section"></div>
 
-            <section id="gallery">
-                <h2>Latest photo uploads</h2>
+            <section id="gallery" class="well">
+                <h2 class="ra-well-title">Latest photo uploads</h2>
 
-                <label>
-                    Thumbnail size
-                    <input type="range" id="thumbnail-size" />
-                </label>
+                <script id="listview-template" type="x-kendo-template">
+                    <figure class="col-xs-6 col-md-4 col-lg-2">
+                        <img src="#= src #" class="img-responsive" />
+                        <figcaption class="hidden-xs">
+                            <h3>Photo title</h3>
+                            <p class="hidden-sm">
+                                Longer description of the photo<br />
+                                on two or more lines
+                            </p>
+                        </figcaption>
+                    </figure>
+                </script>
+
+                <div id="listview" class="ra-well-overlay row"></div>
             </section>
 
-            <script id="listview-template" type="x-kendo-template">
-                <figure class="col-xs-6 col-md-4 col-lg-2">
-                    <img src="#= src #" class="img-responsive" />
-                    <figcaption class="hidden-xs">
-                        <h3>Photo title</h3>
-                        <p class="hidden-sm">
-                            Longer description of the photo<br />
-                            on two or more lines
-                        </p>
-                    </figcaption>
-                </figure>
-            </script>
+            <section id="faq" class="well">
+                <h2 class="ra-well-title"><abbr title="Frequently Asked Questions">FAQ</abbr></h2>
 
-            <div id="listview"></div>
-
-            <section id="faq" class="panel">
-                <h2><abbr title="Frequently Asked Questions">FAQ</abbr></h2>
-
-                <ul id="panelbar">
+                <ul id="panelbar" class="ra-well-overlay">
                     <li class="k-state-active">
                         What is Kendo UI?
                         <div>
@@ -636,7 +640,8 @@
                 },
                 scrollable: false,
                 sortable: true,
-                pageable: true,
+                groupable: true,
+                pageable: { buttonCount: 4 },
                 columns: [
                     { field: "OrderID", width: "70px" },
                     { field: "ShipCountry", title:"Ship Country", width: "20%" },
@@ -651,8 +656,7 @@
                 views: [
                     { type: "day", selected: true },
                     "week",
-                    "month",
-                    "agenda"
+                    "month"
                 ],
                 mobile: "phone",
                 timezone: "Etc/UTC",
