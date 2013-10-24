@@ -1,9 +1,8 @@
-<div data-role="view" data-init="initScheduler" data-stretch="true">
+<div data-role="view" data-init="initScheduler">
     <header data-role="header"></header>
     <div id="scheduler"></div>
 </div>
 <script>
-
     function initScheduler() {
         $("#scheduler").kendoScheduler({
             date: new Date("2013/6/13"),
@@ -11,9 +10,9 @@
             height: 600,
             views: [
                 "day",
-                { type: "week", selected: true },
+                { type: "week", selected: true, selectedDateFormat: "{0:ddd,MMM dd,yyyy} - {1:ddd,MMM dd,yyyy}" },
                 "month",
-                "agenda"
+                { type: "agenda", selectedDateFormat: "{0:ddd, M/dd/yyyy} - {1:ddd, M/dd/yyyy}" },
             ],
             mobile: "phone",
             timezone: "Etc/UTC",
