@@ -66,11 +66,25 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
         private AuthorizationContext AuthorizationContextFactory(RequestContext requestContext, string controllerName, string actionName, string areaName)
         {
-            ControllerContext controllerContext = controllerContextCache.GetControllerContext(requestContext, controllerName, areaName);            
-            
+            ControllerContext controllerContext = controllerContextCache.GetControllerContext(requestContext, controllerName, areaName);
+
+            if (controllerContext == null)
+            {
+                return null;
+            }
+
+            IController controller = controllerContext.Controller;
+
+            if (controller != null)
+            {
+                var controllerTypeName = controller.GetType().Name;
+
+                controllerName = controllerTypeName.Substring(0, controllerTypeName.Length - "Controller".Length);
+            }
+
             ControllerDescriptor controllerDescriptor = controllerDescriptorCache.GetControllerDescriptor(controllerName, areaName);
 
-            if (controllerContext == null || controllerDescriptor == null)
+            if (controllerDescriptor == null)
             {
                 return null;
             }

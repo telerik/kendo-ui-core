@@ -52,6 +52,15 @@ namespace Kendo.Mvc.Infrastructure.Implementation
 
             if (authorizationContext != null)
             {
+                IController controller = authorizationContext.Controller;
+
+                if (controller != null)
+                {
+                    var controllerTypeName = controller.GetType().Name;
+
+                    controllerName = controllerTypeName.Substring(0, controllerTypeName.Length - "Controller".Length);
+                }
+
                 List<AuthorizeAttribute> authorizeAttributes = authorizeAttributeCache.GetAuthorizeAttributes(requestContext, controllerName, actionName, routeValues).ToList();
                 authorizeAttributes.AddRange(GlobalFilters.Filters.Select(f => f.Instance).OfType<AuthorizeAttribute>());
 
