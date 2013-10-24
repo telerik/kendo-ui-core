@@ -1488,8 +1488,8 @@ kendo_module({
             } else {
                 html += "</div></div>";
                 that.editView = that.pane.append(
-                    '<div data-' + kendo.ns + 'role="view" data-' + kendo.ns + 'init-widgets="false">'+
-                        '<div data-' + kendo.ns + 'role="header">'+
+                    '<div data-' + kendo.ns + 'role="view" data-' + kendo.ns + 'init-widgets="false" class="k-grid-edit-form">'+
+                        '<div data-' + kendo.ns + 'role="header" class="k-header">'+
                             that._createButton({ name: "update", text: updateText, attr: attr }) +
                             (options.title || "Edit") +
                             that._createButton({ name: "canceledit", text: cancelText, attr: attr }) +

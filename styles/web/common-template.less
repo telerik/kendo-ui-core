@@ -4602,6 +4602,8 @@ div[name="recurrenceRule"] > .k-dropdown
     margin: .5em 0 .7em;
 }
 
+.km-pane-wrapper .k-grid-edit-form > .km-header,
+.km-pane-wrapper .k-grid-column-menu > .km-header,
 .km-pane-wrapper .k-scheduler-edit-form > .km-header
 {
     border-style: solid;
@@ -4617,21 +4619,26 @@ div[name="recurrenceRule"] > .k-dropdown
     padding: .6em;
 }
 
+.km-pane-wrapper .k-grid-edit-form .k-multiselect,
 .km-pane-wrapper .k-scheduler-edit-form .k-multiselect
 {
     width: 15em;
 }
 
+.km-pane-wrapper .k-grid-edit-form .k-dropdown-wrap,
 .km-pane-wrapper .k-scheduler-edit-form .k-dropdown-wrap
 {
     display: block;
 }
 
+.km-pane-wrapper .k-grid-column-menu .k-done,
+.km-pane-wrapper .k-grid-edit-form .k-grid-update,
 .km-pane-wrapper .k-scheduler-edit-form .k-scheduler-update
 {
     float: right;
 }
 
+.km-pane-wrapper .k-grid-edit-form .k-grid-cancel,
 .km-pane-wrapper .k-scheduler-edit-form .k-scheduler-cancel
 {
     float: left;
@@ -4658,6 +4665,47 @@ div[name="recurrenceRule"] > .k-dropdown
 {
     text-decoration: none;
     color: inherit;
+}
+
+/* Adaptive Grid */
+
+.km-pane-wrapper > div.km-pane
+{
+    .box-shadow(none);
+    font-weight: normal;
+}
+
+.km-pane-wrapper .k-grid-edit-form .km-content > .km-scroll-container,
+.km-pane-wrapper .k-grid-column-menu .km-content > .km-scroll-container
+{
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+    padding: .6em;
+    .box-sizing(border-box);
+}
+
+.km-pane-wrapper .k-grid-edit-form .k-edit-label
+{
+    width: 17%;
+}
+
+.km-pane-wrapper .k-grid-edit-form .k-edit-field
+{
+    width: 77%;
+}
+
+.km-pane-wrapper .k-grid-edit-form .k-popup-edit-form,
+.km-pane-wrapper .k-grid-edit-form .k-edit-form-container
+{
+    overflow: hidden;
+    width: auto;
+}
+
+.km-pane-wrapper .k-grid-edit-form .k-edit-field .k-textbox,
+.km-pane-wrapper .k-grid-edit-form .k-edit-field .k-numerictextbox
+{
+    width: 100%;
 }
 
 /* Tooltip */
