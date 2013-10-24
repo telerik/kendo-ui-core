@@ -46,7 +46,8 @@
     <kendo:scheduler name="scheduler" timezone="Etc/UTC" height="600" date="<%= date %>" startTime="<%= startTime %>">
     	<kendo:scheduler-views>
     		<kendo:scheduler-view type="day" />
-    		<kendo:scheduler-view type="week" selected="true" />
+    		<kendo:scheduler-view type="workWeek" selected="true" />
+    		<kendo:scheduler-view type="week" />
     		<kendo:scheduler-view type="month"  />
     		<kendo:scheduler-view type="agenda" />
     	</kendo:scheduler-views>

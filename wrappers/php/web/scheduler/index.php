@@ -164,7 +164,8 @@ $scheduler->timezone("Etc/UTC")
         ->height(600)
         ->addResource($resource)
         ->addView(array('type' => 'day', 'startTime' => new DateTime('2013/6/13 7:00')),
-            array('type' => 'week', 'selected' => true, 'startTime' => new DateTime('2013/6/13 7:00')), 'month', 'agenda')
+            array('type' => 'workWeek', 'selected' => true, 'startTime' => new DateTime('2013/6/13 7:00')),
+            array('type' => 'week', 'startTime' => new DateTime('2013/6/13 7:00')), 'month', 'agenda')
         ->dataSource($dataSource);
 
 ?>
