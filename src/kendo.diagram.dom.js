@@ -451,14 +451,11 @@ kendo_module({
                 var bounds = this.bounds(), rotatedPoint,
                     angle = this.rotate().angle;
                 if (value.isEmpty && !value.isEmpty()) { // rect selection
-                    return Intersect.rects(value, bounds, angle ? 360 - angle : 0);
+                    return Intersect.rects(value, bounds, angle ? angle : 0);
                 }
                 else { // point
-                    rotatedPoint = value.clone().rotate(bounds.center(), 360 - angle); // cloning is important because rotate modifies the point inline.
+                    rotatedPoint = value.clone().rotate(bounds.center(), angle); // cloning is important because rotate modifies the point inline.
                     if (bounds.contains(rotatedPoint)) {
-                        return this;
-                    }
-                    if (this.adorner && this.adorner._hitTest(value)) {
                         return this;
                     }
                 }

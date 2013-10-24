@@ -226,11 +226,11 @@ kendo_module({
         },
         rotatedBounds: function (angle) {
             var rect = this.clone(),
-                c = rect.center(),
-                br = rect.bottomRight().rotate(c, 360 - angle),
-                tl = rect.topLeft().rotate(c, 360 - angle),
-                tr = rect.topRight().rotate(c, 360 - angle),
-                bl = rect.bottomLeft().rotate(c, 360 - angle);
+                points = this.rotatedPoints(angle),
+                tl = points[0],
+                tr = points[1],
+                br = points[2],
+                bl = points[3];
 
             rect.x = Math.min(br.x, tl.x, tr.x, bl.x);
             rect.y = Math.min(br.y, tl.y, tr.y, bl.y);
@@ -238,6 +238,16 @@ kendo_module({
             rect.height = Math.max(br.y, tl.y, tr.y, bl.y) - rect.y;
 
             return rect;
+        },
+        rotatedPoints: function (angle) {
+            var rect = this,
+                c = rect.center(),
+                br = rect.bottomRight().rotate(c, 360 - angle),
+                tl = rect.topLeft().rotate(c, 360 - angle),
+                tr = rect.topRight().rotate(c, 360 - angle),
+                bl = rect.bottomLeft().rotate(c, 360 - angle);
+
+            return [tl, tr, br, bl];
         },
         toString: function () {
             return this.x + " " + this.y + " " + this.width + " " + this.height;
