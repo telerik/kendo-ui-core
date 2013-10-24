@@ -5970,14 +5970,18 @@ kendo_module({
         addValue: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 options = chart.options,
-                value = data.valueFields,
                 children = chart.children,
                 pointColor = data.fields.color || series.color,
-                valueParts = chart.splitValue(value),
+                valueParts = chart.splitValue(data.valueFields),
                 hasValue = areNumbers(valueParts),
                 categoryPoints = chart.categoryPoints[categoryIx],
                 dataItem = series.data[categoryIx],
                 point, cluster;
+
+            data.valueFields = deepExtend({}, data.valueFields, {
+                mean: data.fields.mean,
+                outliers: data.fields.outliers
+            });
 
             if (!categoryPoints) {
                 chart.categoryPoints[categoryIx] = categoryPoints = [];
@@ -6001,7 +6005,7 @@ kendo_module({
             }
 
             if (point) {
-                chart.updateRange(value, categoryIx, series);
+                chart.updateRange(data.valueFields, categoryIx, series);
 
                 cluster.append(point);
 
@@ -11177,7 +11181,7 @@ kendo_module({
 
     SeriesBinder.current.register(
         [BOX_PLOT],
-        ["lower", "q1", "median", "q3", "upper", "mean", "outliers"], [CATEGORY, COLOR, NOTE_TEXT]
+        ["lower", "q1", "median", "q3", "upper"], ["mean", "outliers", CATEGORY, COLOR, NOTE_TEXT]
     );
 
     DefaultAggregates.current.register(
