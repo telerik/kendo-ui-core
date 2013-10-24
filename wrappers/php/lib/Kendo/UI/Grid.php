@@ -164,6 +164,16 @@ By default the column menu is not enabled.Can be set to a JavaScript object whic
     }
 
     /**
+    * If set to true and the grid is viewed on mobile browser it will use adaptive rendering.Can be set to a string phone or tablet which will force the widget to use adaptive rendering regardless of browser type.
+The grid uses same layout for both phone and tablet.
+    * @param boolean|string $value
+    * @return \Kendo\UI\Grid
+    */
+    public function mobile($value) {
+        return $this->setProperty('mobile', $value);
+    }
+
+    /**
     * Sets the detailTemplate option of the Grid.
     * The id of the template used for rendering the detail rows in the grid.
     * @param string $value The id of the element which represents the kendo template.

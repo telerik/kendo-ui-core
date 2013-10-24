@@ -77,6 +77,33 @@ class GridFilterableMessages extends \Kendo\SerializableObject {
         return $this->setProperty('selectValue', $value);
     }
 
+    /**
+    * The text of the cancel button in the filter menu header (available in mobile mode only).
+    * @param string $value
+    * @return \Kendo\UI\GridFilterableMessages
+    */
+    public function cancel($value) {
+        return $this->setProperty('cancel', $value);
+    }
+
+    /**
+    * The text of the operator item in filter menu (available in mobile mode only).
+    * @param string $value
+    * @return \Kendo\UI\GridFilterableMessages
+    */
+    public function operator($value) {
+        return $this->setProperty('operator', $value);
+    }
+
+    /**
+    * The text of the value item in filter menu (available in mobile mode only).
+    * @param string $value
+    * @return \Kendo\UI\GridFilterableMessages
+    */
+    public function value($value) {
+        return $this->setProperty('value', $value);
+    }
+
 //<< Properties
 }
 

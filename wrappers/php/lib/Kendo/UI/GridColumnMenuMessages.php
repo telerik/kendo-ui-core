@@ -41,6 +41,24 @@ class GridColumnMenuMessages extends \Kendo\SerializableObject {
         return $this->setProperty('sortDescending', $value);
     }
 
+    /**
+    * The text message displayed in the menu header (available in mobile mode only).
+    * @param string $value
+    * @return \Kendo\UI\GridColumnMenuMessages
+    */
+    public function settings($value) {
+        return $this->setProperty('settings', $value);
+    }
+
+    /**
+    * The text message displayed in the menu header button (available in mobile mode only).
+    * @param string $value
+    * @return \Kendo\UI\GridColumnMenuMessages
+    */
+    public function done($value) {
+        return $this->setProperty('done', $value);
+    }
+
 //<< Properties
 }
 

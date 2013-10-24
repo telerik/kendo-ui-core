@@ -15,6 +15,26 @@ class GridEditable extends \Kendo\SerializableObject {
     }
 
     /**
+    * If confirmation is enabled the grid will display a confirmation dialog when the user clicks the "destroy" command button.
+If the grid is in mobile mode this text will be used for the cancel button.
+    * @param string $value
+    * @return \Kendo\UI\GridEditable
+    */
+    public function cancelDelete($value) {
+        return $this->setProperty('cancelDelete', $value);
+    }
+
+    /**
+    * If confirmation is enabled the grid will display a confirmation dialog when the user clicks the "destroy" command button.
+If the grid is in mobile mode this text will be used for the confirm button.
+    * @param string $value
+    * @return \Kendo\UI\GridEditable
+    */
+    public function confirmDelete($value) {
+        return $this->setProperty('confirmDelete', $value);
+    }
+
+    /**
     * The position at which new data items are inserted in the grid. Must be set to either "top" or "bottom". By default new data items are inserted at the top.
     * @param string $value
     * @return \Kendo\UI\GridEditable
