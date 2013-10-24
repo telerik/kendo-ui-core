@@ -68,7 +68,7 @@ kendo_module({
         init: function(element, options) {
             var that = this,
                 containerPopup = element.closest(".km-modalview-wrapper"),
-                mobileContainer = element.closest(".km-root").children().first(),
+                mobileContainer = element.closest(".km-root").children('.km-pane').first(),
                 container = containerPopup[0] ? containerPopup : mobileContainer,
                 popupOptions = {
                     viewport: mobileContainer,
