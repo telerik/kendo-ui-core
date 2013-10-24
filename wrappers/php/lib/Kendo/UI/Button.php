@@ -9,7 +9,7 @@ class Button extends \Kendo\UI\Widget {
 
     protected function createElement() {
         $tag = $this->getProperty('tag');
-        
+
         if (!$tag) {
             $tag = 'button';
         }
@@ -66,15 +66,6 @@ In case you want to use an icon from the Kendo UI theme sprite background image,
     */
     public function spriteCssClass($value) {
         return $this->setProperty('spriteCssClass', $value);
-    }
-
-    /**
-    * The content of the Button
-    * @param  $value
-    * @return \Kendo\UI\Button
-    */
-    public function content($value) {
-        return $this->setProperty('content', $value);
     }
 
     /**
