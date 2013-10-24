@@ -246,7 +246,7 @@
                 setTimeout(function() {
                     start();
                     eventElement.release(10, 10);
-                    ok(eventElement.hasClass("k-scheduler-hold"));
+                    ok(eventElement.hasClass("k-event-active"));
                 }, 805);
             });
 
@@ -272,8 +272,8 @@
                         start();
                         eventElement.release(10, 10);
 
-                        equal(scheduler.element.find(".k-scheduler-hold").length, 1);
-                        ok(eventElement.hasClass("k-scheduler-hold"));
+                        equal(scheduler.element.find(".k-event-active").length, 1);
+                        ok(eventElement.hasClass("k-event-active"));
                     }, 805);
                 }, 805);
             });
@@ -288,7 +288,7 @@
                 setTimeout(function() {
                     start();
                     eventElement.release(10, 10);
-                    ok(eventElement.hasClass("k-scheduler-hold"));
+                    ok(eventElement.hasClass("k-event-active"));
                 }, 805);
             });
 
@@ -312,7 +312,7 @@
                     nextEventElement.move(20, 20);
 
                     start();
-                    ok(!scheduler.element.find(".k-scheduler-hold").length);
+                    ok(!scheduler.element.find(".k-event-active").length);
 
                 }, 805);
             });
