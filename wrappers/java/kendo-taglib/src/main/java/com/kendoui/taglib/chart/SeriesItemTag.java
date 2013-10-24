@@ -201,6 +201,22 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("downColorField", value);
     }
 
+    public boolean getDynamicHeight() {
+        return (boolean)getProperty("dynamicHeight");
+    }
+
+    public void setDynamicHeight(boolean value) {
+        setProperty("dynamicHeight", value);
+    }
+
+    public boolean getDynamicSlope() {
+        return (boolean)getProperty("dynamicSlope");
+    }
+
+    public void setDynamicSlope(boolean value) {
+        setProperty("dynamicSlope", value);
+    }
+
     public java.lang.String getExplodeField() {
         return (java.lang.String)getProperty("explodeField");
     }
@@ -297,6 +313,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("name", value);
     }
 
+    public float getNeckRatio() {
+        return (float)getProperty("neckRatio");
+    }
+
+    public void setNeckRatio(float value) {
+        setProperty("neckRatio", value);
+    }
+
     public java.lang.String getNegativeColor() {
         return (java.lang.String)getProperty("negativeColor");
     }
@@ -335,6 +359,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setPadding(float value) {
         setProperty("padding", value);
+    }
+
+    public float getSegmentSpacing() {
+        return (float)getProperty("segmentSpacing");
+    }
+
+    public void setSegmentSpacing(float value) {
+        setProperty("segmentSpacing", value);
     }
 
     public float getSize() {

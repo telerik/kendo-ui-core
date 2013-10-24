@@ -91,14 +91,6 @@ public class SeriesItemLabelsTag extends  BaseTag  /* interfaces *//* interfaces
         setEvent("visible", value.getBody());
     }
 
-    public java.lang.String getAlign() {
-        return (java.lang.String)getProperty("align");
-    }
-
-    public void setAlign(java.lang.String value) {
-        setProperty("align", value);
-    }
-
     public java.lang.String getBackground() {
         return (java.lang.String)getProperty("background");
     }
