@@ -1,14 +1,16 @@
 
         <div id="example" class="k-content">
 
-            <input id="slider" class="temperature" />
-            <br /><br /><br />
-            <div id="rangeslider" class="humidity">
-                <input />
-                <input />
+            <div class="demo-section">
+                <h3>Slider</h3>
+                <input id="slider" class="temperature" />
+                <h3>RangeSlider</h3>
+                <div id="rangeslider" class="humidity">
+                    <input />
+                    <input />
+                </div>
             </div>
 
-            <br /><br />
 
             <script>
                 $(document).ready(function() {
@@ -131,5 +133,17 @@
                     </span>
                 </li>
             </ul>
-
+            
+            <style scoped>
+                .demo-section {
+                    width: 400px;
+                    padding: 0 30px 40px;
+                }
+                .demo-section h3 {
+                    padding: 30px 0 10px;
+                }
+                #textButton, #disabledButton {
+                    width: 150px;
+                }
+            </style>
         </div>
