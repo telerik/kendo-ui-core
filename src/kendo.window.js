@@ -79,16 +79,16 @@ kendo_module({
             };
 
             wrapper
-                .find(KWINDOWRESIZEHANDLES).hide().end()
-                .find(MINIMIZE_MAXIMIZE).parent().hide()
+                .children(KWINDOWRESIZEHANDLES).hide().end()
+                .children(KWINDOWTITLEBAR).find(MINIMIZE_MAXIMIZE).parent().hide()
                     .eq(0).before(templates.action({ name: "Restore" }));
 
             callback.call(that);
 
             if (actionId == "maximize") {
-                that.wrapper.find(KWINDOWTITLEBAR).find(PIN_UNPIN).parent().hide();
+                that.wrapper.children(KWINDOWTITLEBAR).find(PIN_UNPIN).parent().hide();
             } else {
-                that.wrapper.find(KWINDOWTITLEBAR).find(PIN_UNPIN).parent().show();
+                that.wrapper.children(KWINDOWTITLEBAR).find(PIN_UNPIN).parent().show();
             }
 
             return that;
@@ -193,7 +193,7 @@ kendo_module({
             wrapper
                 .on("mouseenter" + NS, TITLEBAR_BUTTONS, function () { $(this).addClass(KHOVERSTATE); })
                 .on("mouseleave" + NS, TITLEBAR_BUTTONS, function () { $(this).removeClass(KHOVERSTATE); })
-                .on("click" + NS, TITLEBAR_BUTTONS, proxy(that._windowActionHandler, that));
+                .on("click" + NS, "> " + TITLEBAR_BUTTONS, proxy(that._windowActionHandler, that));
 
             windowContent
                 .on("keydown" + NS, proxy(that._keydown, that))
@@ -207,7 +207,7 @@ kendo_module({
             id = element.attr("id");
             if (id) {
                 id = id + "_wnd_title";
-                wrapper.find(KWINDOWTITLEBAR)
+                wrapper.children(KWINDOWTITLEBAR)
                        .children(KWINDOWTITLE)
                        .attr("id", id);
 
@@ -218,7 +218,7 @@ kendo_module({
                     });
             }
 
-            wrapper.add(wrapper.find(".k-resize-handle,.k-window-titlebar"))
+            wrapper.add(wrapper.children(".k-resize-handle," + KWINDOWTITLEBAR))
                     .on("mousedown" + NS, proxy(that.toFront, that));
 
             that.touchScroller = kendo.touchScroller(element);
@@ -310,7 +310,7 @@ kendo_module({
             } else if (this.resizing) {
                 wrapper
                     .off("dblclick" + NS)
-                    .find(KWINDOWRESIZEHANDLES).remove();
+                    .children(KWINDOWRESIZEHANDLES).remove();
 
                 this.resizing.destroy();
                 this.resizing = null;
@@ -527,7 +527,7 @@ kendo_module({
             var that = this,
                 wrapper = that.wrapper,
                 options = that.options,
-                titleBar = wrapper.find(KWINDOWTITLEBAR),
+                titleBar = wrapper.children(KWINDOWTITLEBAR),
                 title = titleBar.children(KWINDOWTITLE),
                 titleBarHeight = titleBar.outerHeight();
 
@@ -667,7 +667,7 @@ kendo_module({
                 options.visible = false;
 
                 $(KWINDOW).each(function(i, element) {
-                    var contentElement = $(element).find(KWINDOWCONTENT);
+                    var contentElement = $(element).children(KWINDOWCONTENT);
 
                     // Remove overlay set by toFront
                     if (element != wrapper && contentElement.find("> ." + KCONTENTFRAME).length > 0) {
@@ -730,7 +730,7 @@ kendo_module({
             $(KWINDOW).each(function(i, element) {
                 var windowObject = $(element),
                     zIndexNew = windowObject.css(ZINDEX),
-                    contentElement = windowObject.find(KWINDOWCONTENT);
+                    contentElement = windowObject.children(KWINDOWCONTENT);
 
                 if (!isNaN(zIndexNew)) {
                     zIndex = Math.max(+zIndexNew, zIndex);
@@ -861,7 +861,7 @@ kendo_module({
 
             if (force || !that.options.pinned && !that.options.isMaximized) {
                 wrapper.css({position: "fixed", top: top - win.scrollTop(), left: left - win.scrollLeft()});
-                wrapper.find(KWINDOWTITLEBAR).find(KPIN).addClass("k-i-unpin").removeClass("k-i-pin");
+                wrapper.children(KWINDOWTITLEBAR).find(KPIN).addClass("k-i-unpin").removeClass("k-i-pin");
 
                 that.options.pinned = true;
             }
@@ -876,7 +876,7 @@ kendo_module({
 
             if (that.options.pinned && !that.options.isMaximized) {
                 wrapper.css({position: "", top: top + win.scrollTop(), left: left + win.scrollLeft()});
-                wrapper.find(KWINDOWTITLEBAR).find(KUNPIN).addClass("k-i-pin").removeClass("k-i-unpin");
+                wrapper.children(KWINDOWTITLEBAR).find(KUNPIN).addClass("k-i-pin").removeClass("k-i-unpin");
 
                 that.options.pinned = false;
             }
@@ -1125,7 +1125,7 @@ kendo_module({
 
             wrapper
                 .append(templates.overlay)
-                .find(KWINDOWRESIZEHANDLES).not(e.currentTarget).hide();
+                .children(KWINDOWRESIZEHANDLES).not(e.currentTarget).hide();
 
             $(BODY).css(CURSOR, e.currentTarget.css(CURSOR));
         },
@@ -1187,7 +1187,7 @@ kendo_module({
 
             wrapper
                 .find(KOVERLAY).remove().end()
-                .find(KWINDOWRESIZEHANDLES).not(e.currentTarget).show();
+                .children(KWINDOWRESIZEHANDLES).not(e.currentTarget).show();
 
             $(BODY).css(CURSOR, "");
 
@@ -1247,7 +1247,7 @@ kendo_module({
 
             wnd.wrapper
                 .append(templates.overlay)
-                .find(KWINDOWRESIZEHANDLES).hide();
+                .children(KWINDOWRESIZEHANDLES).hide();
 
             $(BODY).css(CURSOR, e.currentTarget.css(CURSOR));
         },
@@ -1266,7 +1266,7 @@ kendo_module({
             var wnd = this.owner;
 
             wnd.wrapper
-                .find(KWINDOWRESIZEHANDLES).toggle(!wnd.options.isMinimized).end()
+                .children(KWINDOWRESIZEHANDLES).toggle(!wnd.options.isMinimized).end()
                 .find(KOVERLAY).remove();
 
             $(BODY).css(CURSOR, "");
