@@ -88,16 +88,17 @@ kendo_module({
                     '#=field#'+
                     '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
                 '</div>'+
-                '<form class="k-filter-menu k-mobile-list k-secondary">'+
-                    '<div>' +
-                        '<label>#=messages.operator#'+
+                '<form class="k-filter-menu k-mobile-list k-secondary k-header">'+
+                    '<ul class="k-filter-help-text"><li><span class="k-link">#=messages.info#</span>'+
+                    '<ul>'+
+                        '<li class="k-item"><label class="k-label">#=messages.operator#'+
                             '<select data-#=ns#bind="value: filters[0].operator">'+
                                 '#for(var op in operators){#'+
                                     '<option value="#=op#">#=operators[op]#</option>' +
                                 '#}#'+
                             '</select>'+
-                        '</label>'+
-                        '<label>#=messages.value#'+
+                        '</label></li>' +
+                        '<li class="k-item"><label class="k-label">#=messages.value#'+
                             '#if(values){#' +
                                 '<select data-#=ns#bind="value:filters[0].value">'+
                                     '<option value="">#=messages.selectValue#</option>' +
@@ -109,18 +110,22 @@ kendo_module({
                                 '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="#=inputType#" '+
                                 '#=role==="numerictextbox" ? "data-" + ns + "role=\'" + role + "\' data-" + ns + "spinners=\'false\'" : ""# />'+
                             '#}#' +
-                        '</label>'+
+                        '</label></li>'+
                         '#if(extra){#'+
-                            '<label><input type="radio" name="logic" data-#=ns#bind="checked: logic" value="and" />#=messages.and#</label>'+
-                            '<label><input type="radio" name="logic" data-#=ns#bind="checked: logic" value="or" />#=messages.or#</label>'+
-                            '<label>#=messages.operator#'+
+                        '</ul>'+
+                        '<ul class="k-filter-help-text"><li><span class="k-link"></span>'+
+                            '<li class="k-item"><label class="k-label"><input type="radio" name="logic" class="k-check" data-#=ns#bind="checked: logic" value="and" />#=messages.and#</label></li>'+
+                            '<li class="k-item"><label class="k-label"><input type="radio" name="logic" class="k-check" data-#=ns#bind="checked: logic" value="or" />#=messages.or#</label></li>'+
+                        '</ul>'+
+                        '<ul class="k-filter-help-text"><li><span class="k-link"></span>'+
+                            '<li class="k-item"><label class="k-label">#=messages.operator#'+
                                 '<select data-#=ns#bind="value: filters[1].operator">'+
                                     '#for(var op in operators){#'+
                                         '<option value="#=op#">#=operators[op]#</option>' +
                                     '#}#'+
                                 '</select>'+
-                            '</label>'+
-                            '<label>#=messages.value#'+
+                            '</label></li>'+
+                            '<li class="k-item"><label class="k-label">#=messages.value#'+
                                 '#if(values){#' +
                                     '<select data-#=ns#bind="value:filters[1].value">'+
                                         '<option value="">#=messages.selectValue#</option>' +
@@ -132,11 +137,12 @@ kendo_module({
                                     '<input data-#=ns#bind="value:filters[1].value" class="k-textbox" type="#=inputType#" '+
                                     '#=role==="numerictextbox" ? "data-" + ns + "role=\'" + role + "\' data-" + ns + "spinners=\'false\'" : ""# />'+
                                 '#}#' +
-                            '</label>'+
+                            '</label></li>'+
                         '#}#'+
-                        '<div>'+
+                        '</ul>'+
+                        '</li><li class="k-button-container">' +
                             '<button type="reset" class="k-button">#=messages.clear#</button>'+
-                        '</div>'+
+                        '</li></ul>' +
                     '</div>'+
                 '</form>'+
             '</div>';

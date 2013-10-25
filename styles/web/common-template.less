@@ -5083,14 +5083,6 @@ div[name="recurrenceRule"] > .k-dropdown
     -webkit-appearance: none;
 }
 
-.km-pane-wrapper .k-mobile-list .k-check
-{
-    position: absolute;
-    top: 50%;
-    right: .7em;
-    margin-top: -.5em;
-}
-
 .km-pane-wrapper .k-mobile-list .k-link .k-check,
 .km-pane-wrapper .k-mobile-list .k-label .k-check
 {
@@ -5098,6 +5090,40 @@ div[name="recurrenceRule"] > .k-dropdown
     font-size: inherit;
     width: 1em;
     height: .9em;
+}
+
+.km-pane-wrapper .k-mobile-list .k-item input:not([type="checkbox"]):not([type="radio"]),
+.km-pane-wrapper .k-mobile-list .k-item select:not([multiple]),
+.km-pane-wrapper .k-mobile-list .k-item textarea
+{
+    line-height: inherit;
+    vertical-align: middle;
+    padding: .5em 0;
+    width: 80%;
+    top: 0;
+    border: 0;
+    background: transparent;
+    .box-shadow(none);
+    .border-radius(0)
+}
+
+.km-pane-wrapper .k-mobile-list .k-item input,
+.km-pane-wrapper .k-mobile-list .k-item select:not([multiple]),
+.km-pane-wrapper .k-mobile-list .k-item textarea
+{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: absolute;
+    right: .8em;
+}
+
+.km-pane-wrapper .k-mobile-list input.k-check
+{
+    position: absolute;
+    top: 50%;
+    right: .8em;
+    margin-top: -.5em;
 }
 
 /* Tooltip */
