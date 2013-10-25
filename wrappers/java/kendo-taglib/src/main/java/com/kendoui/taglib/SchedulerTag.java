@@ -251,6 +251,14 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("minorTimeHeaderTemplate", value);
     }
 
+    public java.lang.Object getMobile() {
+        return (java.lang.Object)getProperty("mobile");
+    }
+
+    public void setMobile(java.lang.Object value) {
+        setProperty("mobile", value);
+    }
+
     public boolean getSelectable() {
         return (boolean)getProperty("selectable");
     }

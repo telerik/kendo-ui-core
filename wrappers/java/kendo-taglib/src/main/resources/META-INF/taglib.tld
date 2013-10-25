@@ -15147,6 +15147,12 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>If set to true and the scheduler is viewed on mobile browser it will use adaptive rendering.Can be set to a string phone or tablet which will force the widget to use adaptive rendering regardless of browser type.</description>
+            <name>mobile</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
             <description>If set to true the user would be able to select scheduler cells and events. By default selection is disabled.</description>
             <name>selectable</name>
             <rtexprvalue>true</rtexprvalue>
