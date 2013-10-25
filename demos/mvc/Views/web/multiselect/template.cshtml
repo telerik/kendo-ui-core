@@ -16,7 +16,10 @@
                     $("#customers").kendoMultiSelect({
                         dataTextField: "ContactName",
                         dataValueField: "CustomerID",
-                        // define custom template
+                        headerTemplate: '<div class="k-widget k-header dropdown-header">' +
+                            '<span class="first">Photo</span>' +
+                            '<span class="last">Contact info</span>' +
+                            '</div>',
                         itemTemplate: '<img src=\"../../content/web/Customers/${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />' +
                                       '<h3>${ data.ContactName }</h3>' +
                                       '<p>${ data.CompanyName }</p>',
@@ -39,6 +42,27 @@
             </script>
 
             <style scoped>
+                .dropdown-header {
+                    overflow:hidden;
+                    font-size: 1.3em;
+                    padding: 5px 2px;
+                    margin: -2px -2px 0;
+                    border-width: 0 0 1px;
+                }
+
+                .dropdown-header .first {
+                    width: 65px;
+                    margin-left:4px;
+                    display: block;
+                    float: left;
+                    text-align: left;
+                }
+
+                .dropdown-header .last {
+                    margin-left: 22px;
+                    float: left;
+                }
+
                 .demo-section {
                     width: 400px;
                     margin: 30px auto 50px;
@@ -55,6 +79,9 @@
                     margin-right: 5px;
                     vertical-align: top;
                 }
+                #customers-list {
+                    padding-bottom: 30px;
+                }
                 #customers-list .k-item {
                     overflow: hidden; /* clear floated images */
                 }
@@ -63,11 +90,13 @@
                     -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
                     box-shadow: 0 0 2px rgba(0,0,0,.4);
                     float: left;
+                    width: 70px;
+                    heigth: 70px;
                     margin: 5px 20px 5px 0;
                 }
                 #customers-list h3 {
-                    margin: 30px 0 10px 0;
-                    font-size: 2em;
+                    margin: 20px 0 5px 0;
+                    font-size: 1.6em;
                 }
                 #customers-list p {
                     margin: 0;
