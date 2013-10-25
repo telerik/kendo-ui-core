@@ -3032,6 +3032,18 @@ The last element is always created like a rectangle since there is no following 
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>The data item field which contains the series.errorBars high value.</description>
+            <name>errorHighField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the series.errorBars low value.</description>
+            <name>errorLowField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The data item field which contains a boolean value indicating whether the sector is exploded.</description>
             <name>explodeField</name>
             <rtexprvalue>true</rtexprvalue>
@@ -3219,6 +3231,18 @@ or series name (for other available series types) in the legend.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The data item field which contains the series.errorBars xAxis high value.</description>
+            <name>xerrorhighfield</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the series.errorBars xAxis low value.</description>
+            <name>xerrorlowfield</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The data item field containing the X value.</description>
             <name>xfield</name>
             <rtexprvalue>true</rtexprvalue>
@@ -3227,6 +3251,18 @@ or series name (for other available series types) in the legend.</description>
         <attribute>
             <description>The name of the Y axis to use.** Available for bubble, scatter, scatterLine and polar series. **</description>
             <name>yaxis</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the series.errorBars yAxis high value.</description>
+            <name>yerrorhighfield</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the series.errorBars yAxis low value.</description>
+            <name>yerrorlowfield</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -3324,6 +3360,86 @@ or series name (for other available series types) in the legend.</description>
     </tag>
 
 
+    <tag>
+        <description>The error bars of the chart series.</description>
+        <name>chart-seriesItem-errorBars</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemErrorBarsTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The color of the error bars. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to false, the error bars caps will not be displayed. By default the caps are visible.</description>
+            <name>endCaps</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The error bars value.The following value types are supported:</description>
+            <name>value</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The xAxis error bars value. See the series.errorBars.value option for a list of the supported value types.</description>
+            <name>xvalue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The yAxis error bars value. See the series.errorBars.value option for a list of the supported value types.</description>
+            <name>yvalue</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The error bars line options.</description>
+        <name>chart-seriesItem-errorBars-line</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemErrorBarsLineTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The dash type of the error bars line.The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The width of the line.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The error bars value.The following value types are supported:</description>
+        <name>chart-seriesItem-errorBars-value</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemErrorBarsValueFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The xAxis error bars value. See the series.errorBars.value option for a list of the supported value types.</description>
+        <name>chart-seriesItem-errorBars-xValue</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemErrorBarsXValueFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>The yAxis error bars value. See the series.errorBars.value option for a list of the supported value types.</description>
+        <name>chart-seriesItem-errorBars-yValue</name>
+        <tag-class>com.kendoui.taglib.chart.SeriesItemErrorBarsYValueFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
     <tag>
         <description>The chart series extremes configuration.</description>
         <name>chart-seriesItem-extremes</name>

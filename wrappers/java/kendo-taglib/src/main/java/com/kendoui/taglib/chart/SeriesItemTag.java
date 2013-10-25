@@ -57,6 +57,10 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("connectors", value);
     }
 
+    public void setErrorBars(com.kendoui.taglib.chart.SeriesItemErrorBarsTag value) {
+        setProperty("errorBars", value);
+    }
+
     public void setExtremes(com.kendoui.taglib.chart.SeriesItemExtremesTag value) {
         setProperty("extremes", value);
     }
@@ -215,6 +219,22 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setDynamicSlope(boolean value) {
         setProperty("dynamicSlope", value);
+    }
+
+    public java.lang.String getErrorHighField() {
+        return (java.lang.String)getProperty("errorHighField");
+    }
+
+    public void setErrorHighField(java.lang.String value) {
+        setProperty("errorHighField", value);
+    }
+
+    public java.lang.String getErrorLowField() {
+        return (java.lang.String)getProperty("errorLowField");
+    }
+
+    public void setErrorLowField(java.lang.String value) {
+        setProperty("errorLowField", value);
     }
 
     public java.lang.String getExplodeField() {
@@ -465,6 +485,22 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("xAxis", value);
     }
 
+    public java.lang.String getXerrorhighfield() {
+        return (java.lang.String)getProperty("xErrorHighField");
+    }
+
+    public void setXerrorhighfield(java.lang.String value) {
+        setProperty("xErrorHighField", value);
+    }
+
+    public java.lang.String getXerrorlowfield() {
+        return (java.lang.String)getProperty("xErrorLowField");
+    }
+
+    public void setXerrorlowfield(java.lang.String value) {
+        setProperty("xErrorLowField", value);
+    }
+
     public java.lang.String getXfield() {
         return (java.lang.String)getProperty("xField");
     }
@@ -479,6 +515,22 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setYaxis(java.lang.String value) {
         setProperty("yAxis", value);
+    }
+
+    public java.lang.String getYerrorhighfield() {
+        return (java.lang.String)getProperty("yErrorHighField");
+    }
+
+    public void setYerrorhighfield(java.lang.String value) {
+        setProperty("yErrorHighField", value);
+    }
+
+    public java.lang.String getYerrorlowfield() {
+        return (java.lang.String)getProperty("yErrorLowField");
+    }
+
+    public void setYerrorlowfield(java.lang.String value) {
+        setProperty("yErrorLowField", value);
     }
 
     public java.lang.String getYfield() {
