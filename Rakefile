@@ -57,6 +57,7 @@ require 'cdn'
 require 'tests'
 require 'codegen'
 require 'nuget'
+require 'winrm_tools'
 require 'playground'
 
 ROOT_MAP = {
@@ -671,11 +672,19 @@ namespace :build do
             sh "rsync -avc --del dist/demos/staging-php/ #{WEB_ROOT}/staging-php/"
 
 
-            endpoint = "http://kendoiis.telerik.com:5985/wsman"
-            winrm = WinRM::WinRMWebService.new(endpoint, :plaintext, :user => "telerik.com\\TeamFoundationUser", :pass => "voyant69", :disable_sspi => true)
-            winrm.cmd('iisreset /stop')
+            # Deploy MVC demos on kendoiis
+            remote = WinRemote.new "kendoiis.telerik.com"
+            remote.stop_iis()
+
             sh "rsync -avc --del dist/aspnetmvc-demos/ /mnt/kendo-iis/stable-demos-src/"
-            winrm.cmd('iisreset /start')
+
+            shares = "c:\\shares"
+            source = "#{shares}\\stable-demos-src"
+
+            remote.build_and_deploy("#{source}\\VS2012\\", "#{shares}\\staging-mvc\\")
+            remote.build_and_deploy("#{source}\\VS2013\\", "#{shares}\\staging-mvc5\\")
+
+            remote.start_iis()
         end
 
         desc 'Package and publish bundles to the Stable directory'
