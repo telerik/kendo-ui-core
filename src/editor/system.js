@@ -401,16 +401,17 @@ var Clipboard = Class.extend({
     },
 
     _contentModification: function(before, after) {
-        var editor = this.editor;
+        var that = this;
+        var editor = that.editor;
         var range = editor.getRange();
         var startRestorePoint = new RestorePoint(range);
 
         dom.persistScrollTop(editor.document);
 
-        before.call(this, editor, range);
+        before.call(that, editor, range);
 
         setTimeout(function() {
-            after.call(this, editor, range);
+            after.call(that, editor, range);
 
             var endRestorePoint = new RestorePoint(editor.getRange());
             var genericCommand = new GenericCommand(startRestorePoint, endRestorePoint);
@@ -418,6 +419,56 @@ var Clipboard = Class.extend({
             editor.undoRedoStack.push(genericCommand);
             editor._selectionChange();
         });
+    },
+
+    _fixTagNesting: function(html) {
+        var tags = /<(\/?)([a-z][a-z0-9]*)([^>]*)>/gi;
+        var stack = [];
+        var dom = editorNS.Dom;
+
+        html = html.replace(tags, function(match, closing, tagName) {
+            closing = !!closing;
+            tagName = tagName.toLowerCase();
+
+            var result = "";
+            var inline = dom.inline[tagName];
+
+            function closeLastTag() {
+                result = "</" + stack.pop() + ">" + result;
+            }
+
+            if (closing) {
+                if (!stack.length) {
+                    return "";
+                }
+
+                do {
+                    if (dom.block[stack[stack.length-1]] && inline) {
+                        return result;
+                    }
+
+                    closeLastTag();
+                } while (stack.length && stack[stack.length-1] != tagName);
+            } else {
+                if (!inline) {
+                    while (dom.inline[stack[stack.length-1]]) {
+                        closeLastTag();
+                    }
+                }
+
+                stack.push(tagName);
+
+                result += match;
+            }
+
+            return result;
+        });
+
+        while (stack.length) {
+            html += "</" + stack.pop() + ">";
+        }
+
+        return html;
     },
 
     oncut: function() {
@@ -471,7 +522,7 @@ var Clipboard = Class.extend({
 
                 containers.remove();
 
-                html = html.replace(/\ufeff/g, "");
+                html = this._fixTagNesting(html.replace(/\ufeff/g, ""));
 
                 args.html = html;
 

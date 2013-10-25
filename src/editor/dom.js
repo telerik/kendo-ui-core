@@ -127,6 +127,9 @@ var whitespace = /^\s+$/,
         };
 
 var Dom = {
+    block: block,
+    inline: inline,
+
     findNodeIndex: function(node, skipText) {
         var i = 0;
 
