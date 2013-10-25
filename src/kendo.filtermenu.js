@@ -582,7 +582,7 @@ kendo_module({
 
         _closeForm: function() {
             if (this._isMobile) {
-                this.pane.navigate("");
+                this.pane.navigate("", this.options.animations.left);
             } else {
                 this.popup.close();
             }
@@ -597,7 +597,7 @@ kendo_module({
             }
 
             if (this._isMobile) {
-                this.pane.navigate(this.view);
+                this.pane.navigate(this.view, this.options.animations.right);
             } else {
                 this.popup.toggle();
             }
@@ -673,6 +673,10 @@ kendo_module({
                 operator: "Operator",
                 value: "Value",
                 cancel: "Cancel"
+            },
+            animations: {
+                left: "slide",
+                right: "slide:right"
             }
         }
     });

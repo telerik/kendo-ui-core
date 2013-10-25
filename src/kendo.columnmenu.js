@@ -94,7 +94,10 @@ kendo_module({
             },
             columns: true,
             sortable: true,
-            filterable: true
+            filterable: true,
+            animations: {
+                right: "slide:right"
+            }
         },
 
         _createMenu: function() {
@@ -204,7 +207,7 @@ kendo_module({
             }
 
             if (this._isMobile) {
-                this.pane.navigate(this.view);
+                this.pane.navigate(this.view, this.options.animations.right);
             } else {
                 this.popup.toggle();
             }
@@ -404,7 +407,7 @@ kendo_module({
                         var item = $(e.item);
 
                         if (item.hasClass("k-filter-item")) {
-                            that.pane.navigate(that.filterMenu.view);
+                            that.pane.navigate(that.filterMenu.view, that.options.animations.right);
                         }
                     });
                 }
