@@ -24,6 +24,7 @@
         <ol id="qunit-tests"></ol>
         <script>
             var MultiDayView = kendo.ui.MultiDayView,
+                WorkWeekView = kendo.ui.WorkWeekView,
                 SchedulerEvent = kendo.data.SchedulerEvent,
                 container;
 
@@ -35,6 +36,13 @@
                 },
                 calculateDateRange: function() {
                     this._render(this.options.dates || [new Date()]);
+                }
+            });
+
+            var MyWorkWeekView = WorkWeekView.extend({
+                init: function(element, options) {
+                    var that = this;
+                    WorkWeekView.fn.init.call(that, element, options);
                 }
             });
 
@@ -1817,6 +1825,36 @@
                 ok(view.content.find("td").last().hasClass("k-nonwork-hour"));
             });
 
+            test("first day is correctly set in workWeekView", function() {
+
+                var view = new MyWorkWeekView(container,  {
+                    date: new Date(),
+                    workWeekStart: 0,
+                });
+
+                var row = view.content.find("tr:first");
+                var startOffset = row.find("td:first").offset();
+                var startSlot = view._slotByPosition(startOffset.left, startOffset.top);
+                var startDate = startSlot.startDate().getDay();
+
+                equal(startDate, 0);
+            });
+
+            test("last day is correctly set in workWeekView", function() {
+
+                var view = new MyWorkWeekView(container,  {
+                    date: new Date(),
+                    workWeekEnd: 2
+                });
+
+                var row = view.content.find("tr:first");
+                var endOffset = row.find("td:last").offset();
+                var endSlot = view._slotByPosition(endOffset.left, endOffset.top);
+                var endDate = endSlot.startDate().getDay();
+
+                equal(endDate, 2);
+            });
+
             module("Multi Day View ARIA rendering", {
                 setup: function() {
                     container = document.createElement("div");
@@ -1841,7 +1879,6 @@
 
                 equal(rows.filter("[role=row]").length, rows.length);
             });
-
 
             test("View renders time tr elements with 'row' role", function() {
                 var view = setup({
