@@ -9,4 +9,6 @@ else
 end
 
 gem_package "bundler"
-gem_package "rake"
+gem_package "rake" do
+    version "0.9.2.2"
+end
