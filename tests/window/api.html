@@ -760,6 +760,15 @@
                 ok(resizingDestroy.calls("destroy"), 1);
             });
 
+            test("setting new title updates widget options", function() {
+                var newTitle = "foo",
+                    dialog = createWindow();
+
+                dialog.title(newTitle);
+
+                equal(dialog.options.title, newTitle);
+            });
+
             asyncTest("overlay is not hidden when showing second modal window after closing first", function() {
                 var dialog = createWindow({
                     animation: { close: { duration: 500 } },

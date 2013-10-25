@@ -548,6 +548,7 @@ kendo_module({
             }
 
             title.text(text);
+            that.options.title = text;
 
             return that;
         },
@@ -780,7 +781,7 @@ kendo_module({
             var restoreOptions = that.restoreOptions;
 
             if (!options.isMaximized && !options.isMinimized) {
-                return;
+                return that;
             }
 
             if (minHeight && minHeight != Infinity) {
