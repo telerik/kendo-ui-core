@@ -158,7 +158,13 @@
                     seriesDefaults: {
                         neckRatio: slider.value(),
                         dynamicHeight : $('#dynamicHeight').is(':checked'),
-                        dynamicSlope : $('#dynamicSlope').is(':checked')
+                        dynamicSlope : $('#dynamicSlope').is(':checked'),
+                        labels: {
+                            visible: true,
+                            background: "transparent",
+                            color:"white",
+                            format: "N0"
+                        },
                     }
                 }
 
