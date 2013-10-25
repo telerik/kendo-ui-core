@@ -335,10 +335,10 @@
                 <div class="col-lg-8">
                     <div id="tabstrip">
                         <ul>
-                            <li>Revenue</li>
+                            <li class="k-state-active">Revenue</li>
                             <li>Sales per day</li>
                             <li>Sales per region</li>
-                            <li class="k-state-active">Market share</li>
+                            <li>Market share</li>
                         </ul>
                         <div><div id="revenue"></div></div>
                         <div><div id="sales-per-day"></div></div>
@@ -656,13 +656,19 @@
 
             $("#menu").kendoMenu();
 
+            function resizeTabStripContent() {
+                kendo.resize("#tabstrip");
+            }
+
             $("#tabstrip").kendoTabStrip({
                 animation: {
-                    open: {
-                        effects: "fadeIn"
-                        }
-                    }
-                });
+                    open: { effects: "fadeIn" }
+                },
+                activate: resizeTabStripContent
+            });
+
+            // resize nested charts when window resizes
+            $(window).resize(resizeTabStripContent);
 
             $("#sales-per-day").kendoChart({
                 theme: "bootstrap",
