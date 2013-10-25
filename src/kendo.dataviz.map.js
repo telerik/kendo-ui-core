@@ -26,9 +26,11 @@ kendo_module({
 
         dataviz = kendo.dataviz,
         Matrix = dataviz.Matrix,
-        Point = dataviz.Point2D,
         deepExtend = kendo.deepExtend,
         defined = dataviz.defined,
+
+        g = dataviz.geometry,
+        Point = g.Point,
 
         util = dataviz.util,
         limit = util.limitValue,
@@ -96,16 +98,14 @@ kendo_module({
         },
 
         toScreenPoint: function(location) {
-            var origin = this.toLayerPoint(this.viewport().nw);
-            var point = this.crs.toPoint(location, this.scale());
-            point.x -= origin.x;
-            point.y -= origin.y;
+            var origin = this.toLayerPoint(this._screenOrigin);
+            var point = this.toLayerPoint(location);
 
-            return point;
+            return point.subtract(origin);
         },
 
         _scroll: function(e) {
-            var center = this.toLayerPoint(this._origin);
+            var center = this.toLayerPoint(this._scrollOrigin);
             center.x += e.scrollLeft;
             center.y += e.scrollTop;
             this.center(this.crs.toLocation(center, this.scale()));
@@ -118,7 +118,8 @@ kendo_module({
         },
 
         _reset: function() {
-            this._origin = this.center();
+            this._scrollOrigin = this.center();
+            this._screenOrigin = this.viewport().nw;
             this._resetScroller();
             this.trigger("reset");
         },

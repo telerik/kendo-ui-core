@@ -101,6 +101,13 @@
             return this;
         },
 
+        subtract: function(other) {
+            this.x -= other.x;
+            this.y -= other.y;
+
+            return this;
+        },
+
         distanceTo: function(other) {
             var dx = this.x - other.x;
             var dy = this.y - other.y;
