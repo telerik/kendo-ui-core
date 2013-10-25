@@ -360,7 +360,7 @@ kendo_module({
                 tl = bounds.topLeft(),
                 br = bounds.bottomRight();
 
-            return Rect.fromPoints(this.diagram.transformPoint(tl), this.diagram.transformPoint(br));
+            return Rect.fromPoints(tl, br);
         },
         select: function (value) {
             if (this.isSelected != value) {
@@ -1203,13 +1203,10 @@ kendo_module({
             }
             return result;
         },
-        transformRect: function (r) { // transforms point from main canvas coordinates to non-transformed (origin).
-            var result = r;
-            if (this._matrix) {
-                var tl = this._matrix.apply(r.topLeft()),
-                    br = this._matrix.apply(r.bottomRight());
+        transformRect: function (r) { // transforms rect from main canvas coordinates to non-transformed (origin).
+            var tl = this.transformPoint(r.topLeft()),
+                br = this.transformPoint(r.bottomRight()),
                 result = Rect.fromPoints(tl, br);
-            }
             return result;
         },
         focus: function () {
@@ -1443,12 +1440,12 @@ kendo_module({
             var rect = Rect.empty(), di = this._getDiagramItems(items), temp;
             if (di.shapes.length > 0) {
                 var item = di.shapes[0];
-                rect = item.rotatedBounds().clone();
+                rect = item.rotatedBounds();
                 rect.x -= item._rotationOffset.x;
                 rect.y -= item._rotationOffset.y;
                 for (var i = 1; i < di.shapes.length; i++) {
                     item = di.shapes[i];
-                    temp = item.rotatedBounds().clone();
+                    temp = item.rotatedBounds();
                     temp.x -= item._rotationOffset.x;
                     temp.y -= item._rotationOffset.y;
                     rect = rect.union(temp);

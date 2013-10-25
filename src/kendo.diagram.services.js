@@ -1172,9 +1172,15 @@ kendo_module({
             that.options = deepExtend({}, that.options, options);
             that.visual = new Group();
             that.diagram.bind("pan", function () {
+                if(that.refreshBounds){
+                    that.refreshBounds();
+                }
                 that.refresh();
             });
             that.diagram.bind("zoom", function () {
+                if(that.refreshBounds){
+                    that.refreshBounds();
+                }
                 that.refresh();
             });
         },
@@ -1397,7 +1403,7 @@ kendo_module({
         bounds: function (value) {
             if (value) {
                 this._innerBounds = value.clone();
-                this._bounds = value.inflate(this.options.offset, this.options.offset);
+                this._bounds = this.diagram.transformRect(value).inflate(this.options.offset, this.options.offset);
             }
             else {
                 return this._bounds;
@@ -1545,7 +1551,7 @@ kendo_module({
                 center, shape, i, angle, newBounds, changed = 0;
             if (handle.y === -2 && handle.x === -1) {
                 center = this._innerBounds.center();
-                this._angle = Math.findAngle(center, this.diagram.transformPoint(p));
+                this._angle = Math.findAngle(center, p);
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
                     angle = (this._angle + this.initialRotates[i] - this._startAngle) % 360;
@@ -1630,7 +1636,7 @@ kendo_module({
             this._rotating = undefined;
         },
         refreshBounds: function () {
-            var bounds = this.shapes.length == 1 ? this.shapes[0].visualBounds().clone() : this.diagram.getOriginBoundingBox(this.shapes);
+            var bounds = this.shapes.length == 1 ? this.shapes[0].bounds().clone() : this.diagram.getOriginBoundingBox(this.shapes);
             this.bounds(bounds);
         },
         refresh: function () {
