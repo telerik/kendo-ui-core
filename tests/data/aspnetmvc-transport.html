@@ -8,6 +8,7 @@
     <script src="../../src/kendo.data.js"></script>
     <script src="../../src/kendo.scheduler.js"></script>
     <script src="../../src/aspnetmvc/kendo.data.aspnetmvc.js"></script>
+    <script src="../../src/cultures/kendo.culture.bg-BG.js"></script>
 
     <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
 
@@ -429,6 +430,167 @@
                 var result = transport.parameterMap(options);
                 equal(result.filter, "(foo~eq~'bar'~or~(baz~eq~1~or~baz2~eq~1))~or~moo~contains~'boo'");
             });
+
+            test("parameterMap serializes objects using dot notation", function() {
+                var transport = new Transport({}),
+                    result = transport.parameterMap({foo: {bar: 1}}, "update");
+
+                equal(result["foo.bar"], 1);
+            });
+
+            test("parameterMap serializes arrays using bracket notation", function() {
+                var transport = new Transport({}),
+                    result = transport.parameterMap({foo: [1,2]}, "update");
+
+                equal(result["foo[0]"], 1);
+                equal(result["foo[1]"], 2);
+            });
+
+            test("parameterMap serializes arrays of objects using bracket and dot notation", function() {
+                var transport = new Transport({}),
+                    result = transport.parameterMap({foo: [{bar: 1}, {bar: 2}]}, "update");
+
+                equal(result["foo[0].bar"], 1);
+                equal(result["foo[1].bar"], 2);
+            });
+
+            test("parameterMap serializes arrays of objects using bracket and dot notation", function() {
+                var transport = new Transport({}),
+                    result = transport.parameterMap({foo: [{bar: 1}, {bar: 2}]}, "update");
+
+                equal(result["foo[0].bar"], 1);
+                equal(result["foo[1].bar"], 2);
+            });
+
+            test("parameterMap serializes nested arrays", function() {
+                var transport = new Transport({}),
+                    result = transport.parameterMap({foo: [[1],[2]]}, "update");
+
+                equal(result["foo[0][0]"], 1);
+                equal(result["foo[1][0]"], 2);
+            });
+
+            test("parameterMap serializes nested arrays of objects", function() {
+                var transport = new Transport({}),
+                    result = transport.parameterMap({foo: [[{bar: 1}],[{bar: 2}]]}, "update");
+
+                equal(result["foo[0][0].bar"], 1);
+                equal(result["foo[1][0].bar"], 2);
+            });
+
+            test("parameterMap serializes models array", function() {
+                var transport = new Transport({}),
+                    result = transport.parameterMap({models: [{foo: 1}, {foo: 2}]}, "update");
+
+                equal(result["models[0].foo"], 1);
+                equal(result["models[1].foo"], 2);
+            });
+
+            test("parameterMap removes models array from the data", function() {
+                var transport = new Transport({}),
+                    data = {models: [{foo: 1}, {foo: 2}]},
+                    result = transport.parameterMap(data, "update");
+
+                ok(!data.models);
+            });
+
+            test("parameterMap does not override a nested field with a field that has the full path name", function() {
+                var transport = new Transport({}),
+                    result = transport.parameterMap({foo: {bar: 2}, "foo.bar": 1}, "update");
+
+                equal(result["foo.bar"], "2");
+            });
+
+            test("parameterMap serializes dates using General date/time pattern", function() {
+                var transport = new Transport({}),
+                    value = new Date(2010, 0, 14),
+                    expectedResult = kendo.format("{0:G}", value),
+                    result = transport.parameterMap({date: value}, "update");
+
+                equal(result.date, expectedResult);
+            });
+
+            test("parameterMap serializes dates in nested objects using General date/time pattern", function() {
+                var transport = new Transport({}),
+                    value = new Date(2010, 0, 14),
+                    expectedResult = kendo.format("{0:G}", value),
+                    result = transport.parameterMap({foo: {date: value}}, "update");
+
+                equal(result["foo.date"], expectedResult);
+            });
+
+            test("parameterMap serializes dates in array using General date/time pattern", function() {
+                var transport = new Transport({}),
+                    value = new Date(2010, 0, 14),
+                    expectedResult = kendo.format("{0:G}", value),
+                    result = transport.parameterMap({foo: [value]}, "update");
+
+                equal(result["foo[0]"], expectedResult);
+            });
+
+            test("parameterMap serializes numbers with dot separator for the default culture", function() {
+                var transport = new Transport({}),
+                    value = 1011.1,
+                    expectedResult = "1011.1",
+                    result = transport.parameterMap({foo: value}, "update");
+
+                equal(result.foo, expectedResult);
+            });
+
+            test("parameterMap serializes numbers in nested objects with dot separator for the default culture", function() {
+                var transport = new Transport({}),
+                    value = 1011.1,
+                    expectedResult = "1011.1",
+                    result = transport.parameterMap({foo: {bar: value}}, "update");
+
+                equal(result["foo.bar"], expectedResult);
+            });
+
+            test("parameterMap serializes numbers in array with dot separator for the default culture", function() {
+                var transport = new Transport({}),
+                    value = 1011.1,
+                    expectedResult = "1011.1",
+                    result = transport.parameterMap({foo: [value]}, "update");
+
+                equal(result["foo[0]"], expectedResult);
+            });
+
+            test("parameterMap serializes integer numbers without separator", function() {
+                var transport = new Transport({}),
+                    value = 1011,
+                    expectedResult = "1011",
+                    result = transport.parameterMap({foo: value}, "update");
+
+                equal(result.foo, expectedResult);
+            });
+
+            test("parameterMap serializes dates based on the current culture", function() {
+                kendo.culture("bg-BG");
+                try {
+                    var transport = new Transport({}),
+                        value = new Date(2010, 0, 14),
+                        expectedResult = kendo.format("{0:G}", value),
+                        result = transport.parameterMap({date: value}, "update");
+                    equal(result.date, expectedResult);
+                } finally {
+                    kendo.culture("en-US");
+                }
+            });
+
+            test("parameterMap serializes numbers based on the current culture", function() {
+                kendo.culture("bg-BG");
+                try {
+                    var transport = new Transport({}),
+                        value = 1011.1,
+                        expectedResult = "1011,1",
+                        result = transport.parameterMap({foo: [value]}, "update");
+
+                    equal(result["foo[0]"], expectedResult);
+                } finally {
+                    kendo.culture("en-US");
+                }
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

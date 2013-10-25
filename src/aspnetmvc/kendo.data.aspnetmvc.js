@@ -9,7 +9,10 @@ kendo_module({
 (function ($, undefined) {
     var kendo = window.kendo,
         escapeQuoteRegExp = /'/ig,
-        extend = $.extend;
+        extend = $.extend,
+        isArray = $.isArray,
+        isPlainObject = $.isPlainObject,
+        POINT = ".";
 
     function parameterMap(options, operation, encode, stringifyDates) {
        var result = {};
@@ -65,12 +68,7 @@ kendo_module({
 
        if (operation != "read" ) {
            if (options.models) {
-               var prefix = "models",
-                   models = options.models;
-
-               for (var i = 0; i < models.length; i++) {
-                   serializeItem(result, models[i], prefix + "[" + i + "].", stringifyDates);
-               }
+               serializeArray(result, options.models, "models", stringifyDates);
            } else if (options) {
                serializeItem(result, options, "", stringifyDates);
            }
@@ -81,62 +79,58 @@ kendo_module({
        delete options.take;
        delete options.skip;
 
-       return extend(result, options);
+       return extend({}, options, result);
     }
 
-    function serializeItem(result, item, prefix, stringifyDates) {
-        var value,
-            key;
+    function convertNumber(value){
+        var separator = kendo.culture().numberFormat[POINT];
+        value = value.toString().replace(POINT, separator);
 
-        item = convert(item, stringifyDates);
+        return value;
+    }
 
-        for (var member in item) {
-            key = prefix + member;
-            value = item[member];
-
-            if ($.isPlainObject(value)) {
-                flatten(result, value, key);
-                delete item[member];
+    function convert(value, stringifyDates) {
+        if (value instanceof Date) {
+            if (stringifyDates) {
+                value = kendo.stringify(value).replace(/"/g, "");
             } else {
-                result[key] = value;
+                value = kendo.format("{0:G}", value);
+            }
+        } else if (typeof value === "number") {
+            value = convertNumber(value);
+        }
+
+        return value;
+    }
+
+    function serialize(result, value, data, key, prefix, stringifyDates) {
+        if (isArray(value)) {
+            serializeArray(result, value, prefix, stringifyDates);
+        } else if (isPlainObject(value)) {
+            serializeItem(result, value, prefix, stringifyDates);
+        } else {
+            if (result[prefix] === undefined) {
+                result[prefix] = data[key]  = convert(value, stringifyDates);
             }
         }
     }
 
-    function convert(values, stringifyDates) {
-        for (var key in values) {
-            var value = values[key];
-
-            if (value instanceof Date) {
-                if(stringifyDates) {
-                    values[key] = kendo.stringify(value).replace(/"/g, "");
-                } else {
-                    values[key] = kendo.format("{0:G}", value);
-                }
-            }
-
-            if (typeof value === "number") {
-                value = value.toString();
-            }
-
-            if (value == null) {
-                delete values[key];
-            }
-
-            if ($.isPlainObject(value)) {
-                convert(value);
-            }
+    function serializeItem(result, data, prefix, stringifyDates) {
+        for (var key in data) {
+            var valuePrefix = prefix ? prefix + "." + key : key,
+                value = data[key];
+            serialize(result, value, data, key, valuePrefix, stringifyDates);
         }
-        return values;
     }
 
-    function flatten(result, value, prefix) {
-        for (var key in value) {
-            if ($.isPlainObject(value[key])) {
-                flatten(result, value[key], prefix ? prefix + "." + key : key);
-            } else {
-                result[prefix ? prefix + "." + key : key] = value[key];
-            }
+    function serializeArray(result, data, prefix, stringifyDates) {
+        for (var sourceIndex = 0, destinationIndex = 0; sourceIndex < data.length; sourceIndex++) {
+            var value = data[sourceIndex],
+                key = "[" + destinationIndex + "]",
+                valuePrefix = prefix + key;
+            serialize(result, value, data, key, valuePrefix, stringifyDates);
+
+            destinationIndex++;
         }
     }
 
