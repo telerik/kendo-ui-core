@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Kinetic scroll for diagram</title>
+        <link href="../../styles/mobile/kendo.mobile.all.css" rel="stylesheet" />
+        
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.slider.js"></script>
+        <script src="../../src/kendo.resizable.js"></script>
+        <script src="../../src/kendo.splitter.js"></script>
+        <script src="../../src/kendo.listview.js"></script>
+        <script src="../../src/kendo.colorpicker.js"></script>
+        <script src="../../src/kendo.menu.js"></script>
+
+        <script>kendo.support.hasHW3D = false;</script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+
+        <script src="../../src/kendo.diagram.utils.js"></script>
+        <script src="../../src/kendo.diagram.math.js"></script>
+        <script src="../../src/kendo.diagram.layout.js"></script>
+        <script src="../../src/kendo.diagram.svg.js"></script>
+        <script src="../../src/kendo.diagram.services.js"></script>
+        <script src="../../src/kendo.diagram.extensions.js"></script>
+        <script src="../../src/kendo.diagram.dom.js"></script>
+
+        <script src="jquery.hotkeys.js"></script>
+
+        <script src="shapes.js"></script>
+
+        <style type="text/css">
+            #canvas
+            {
+                width: 900px;
+                height: 300px;
+                border: 1px solid green;
+            }
+
+            #canvas .km-scroll-wrapper
+            {
+                width: 100%;
+                height: 100%;
+                position: relative;
+            }
+            #canvas .km-scroll-wrapper
+            {
+                width: 100%;
+                height: 100%;
+                position: relative;
+            }
+            #canvas .km-scroll-container {
+                /*width: 100%;
+                height: 100%;*/
+            }
+            
+
+            #scrollable .km-touch-scrollbar {
+                width: 12px;
+                height: 12px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="scrollable" style="width: 200px; height: 200px;overflow:scroll;">
+            <div id="content" style="width: 400px; height: 400px; background: #ccc;"></div>
+        </div>
+        <script>
+            var wScroll;
+            $(function() {
+                var dom = $("#scrollable").kendoMobileScroller({
+                    scroll: function(e) {
+                        console.log(e);
+                    },
+                    useNative: true
+                });
+
+                wScroll = dom.data("kendoMobileScroller");
+            });
+        </script>
+
+        <div id="canvas"></div>
+        <script>
+            var Shapes = {},
+            diagram,
+            Point = kendo.diagram.Point;
+            for(var i = 0; i < shapesSource.length; i++) {
+                shape = shapesSource[i].options;
+                shape.background = 'steelblue';
+                Shapes[shape.name] = shape;
+            }
+			
+            $(function() {
+                $("#canvas").kendoDiagram();
+                diagram = $("#canvas").data("kendoDiagram");
+
+                var canvasResizer = function(args) {
+                    var diagram = args.sender,
+                        viewport = diagram.element,
+                        viewportSize = new kendo.diagram.Rect(0, 0, viewport.width(), viewport.height()),
+                        cumulativeSize = diagram.getBoundingBox(diagram.shapes);
+
+                    cumulativeSize = cumulativeSize.union(viewportSize);
+
+                    diagram.canvas.size(cumulativeSize);
+                }
+
+                diagram.bind("boundsChange", canvasResizer);
+                diagram.bind("shapeAdd", canvasResizer);
+
+                var seq = Shapes["Sequential Data"];
+                seq.text = "Sequential Data.";
+                var shape1 = diagram.addShape(new Point(100, 100), seq);
+
+                //prepareDiagramScroller(diagram);
+                
+                shape2 = diagram.addShape(new Point(300, 300), Shapes.Wave);
+                shape2.content("content");
+                return;
+                
+                var shape3 = diagram.addShape(new Point(370, 400), Shapes.Rectangle);
+                var shape4 = diagram.addShape(new Point(400, 200), kendo.deepExtend({content: "Custom connectors"}, Shapes.Triangle));
+                var topCor = shape2.getConnector("Auto");
+                var topCor2 = shape3.getConnector("Auto");
+                var bottomCor = shape1.getConnector("Auto");
+                var bottomCor2 = shape4.getConnector("Auto");
+                diagram.connect(bottomCor, topCor);
+                var con2 = diagram.connect(bottomCor, topCor2);
+                diagram.connect(bottomCor, bottomCor2);
+                diagram.connect(new Point(200, 600), new Point(400, 800), {content: "Floating connection" });
+                con2.content("Connection Label");
+				
+                // Org Chart also...
+                var s1 = diagram.addShape(new Point(800, 0), Shapes.Rectangle);
+				
+                var s2 = diagram.addShape(new Point(600, 200), Shapes.Rectangle);
+                var s3 = diagram.addShape(new Point(1000, 200), Shapes.Rectangle);
+				
+                var s4 = diagram.addShape(new Point(600, 400), Shapes.Rectangle);
+                var s5 = diagram.addShape(new Point(1000, 400), Shapes.Rectangle);
+                var s6 = diagram.addShape(new Point(800, 400), Shapes.Rectangle);
+				
+                diagram.connect(s1, s2);
+                diagram.connect(s1, s3);
+                diagram.connect(s2, s4);
+                diagram.connect(s3, s5);
+                diagram.connect(s3, s6);
+            });
+
+            var dScroll;
+            function prepareDiagramScroller(diagram) {
+                canvas = diagram.canvas;
+            
+                var scroller = diagram.scroller = $(diagram.scrollable).kendoMobileScroller({
+                    scroll: function(args) {
+                        canvas.element.style[kendo.support.transitions.prefix + "Transform"] = "translate(" + args.scrollLeft + "px," + args.scrollTop +"px) scale(" + args.sender.movable.scale + ")";
+                        canvas.native.setAttribute("viewBox", [args.scrollLeft, args.scrollTop, canvas.element.offsetWidth, canvas.element.offsetHeight].join(","));
+                    }
+                }).data("kendoMobileScroller");
+                scroller.dimensions.x.forceEnabled();
+                scroller.dimensions.x.update();
+                scroller.dimensions.y.forceEnabled();
+                scroller.dimensions.y.update();
+                scroller.enable();
+            }
+        </script>
+    </body>
+</html>

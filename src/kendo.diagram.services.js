@@ -534,22 +534,41 @@ kendo_module({
     var PanTool = EmptyTool.extend({
         init: function (toolService) {
             EmptyTool.fn.init.call(this, toolService);
+
+            var diagram = this.toolService.diagram,
+                canvas = diagram.canvas;
+            
+            diagram.scroller = this.scroller = $(diagram.scrollable).kendoMobileScroller({
+                scroll: function(args) {
+                    var canvasSize = canvas.size();
+                    canvas.element.style[kendo.support.transitions.prefix + "Transform"] = "translate(" + args.scrollLeft + "px," + args.scrollTop + "px) scale(" + args.sender.movable.scale + ")";
+                    canvas.native.setAttribute("viewBox", [args.scrollLeft, args.scrollTop, parseInt(canvasSize.width), parseInt(canvasSize.height)].join(","));
+                }
+            }).data("kendoMobileScroller");
+            this.scroller.disable();
         },
         tryActivate: function (meta) {
             return this.toolService.hoveredItem === undefined && meta.ctrlKey;
         },
         start: function (p) {
+            this.scroller.enable();
+            return;
+
             this.toolService.isPanning = true;
             this.panStart = this.toolService.diagram._pan;
             this.panOffset = p;
             this.panDelta = new Point();	//relative to root
         },
         move: function (p) {
+            return;
             var diagram = this.toolService.diagram;
             this.panDelta = p.plus(this.panDelta).minus(this.panOffset);
             diagram.pan(this.panStart.plus(this.panDelta));
         },
         end: function () {
+            this.scroller.disable();
+            return;
+
             var diagram = this.toolService.diagram;
             diagram.undoRedoService.begin();
             diagram.undoRedoService.add(new PanUndoUnit(this.panStart, diagram._pan, diagram));

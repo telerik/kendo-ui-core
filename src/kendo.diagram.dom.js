@@ -48,6 +48,7 @@ kendo_module({
         CASCADING = "Cascading",
         POLYLINE = "Polyline",
         BOUNDSCHANGE = "boundsChange",
+        SHAPEADD = "shapeAdd",
         CHANGE = "change",
         ERROR = "error",
         AUTO = "Auto",
@@ -310,9 +311,7 @@ kendo_module({
 
                 this.shapeVisual.redraw({ width: value.width, height: value.height });
                 this.refreshConnections();
-                if (this.diagram) {
-                    this.diagram.trigger(BOUNDSCHANGE, {item: this, bounds: this._bounds.clone()}); // the trigger modifies the arguments internally.
-                }
+                this.triggerBoundsChange();
             }
             if (this.contentVisual && !this.contentVisual._measured) {
                 this.contentVisual.redraw(this._bounds);
@@ -331,6 +330,11 @@ kendo_module({
             }
             else {
                 return this._bounds.topLeft();
+            }
+        },
+        triggerBoundsChange: function() {
+            if (this.diagram) {
+                this.diagram.trigger(BOUNDSCHANGE, {item: this, bounds: this._bounds.clone()}); // the trigger modifies the arguments internally.
             }
         },
 
@@ -1064,6 +1068,7 @@ kendo_module({
             element = that.element; // the hosting element
 
             that.element.addClass("k-widget k-diagram").attr("role", "diagram");
+<<<<<<< HEAD
             that.canvas = new Canvas(element); // the root SVG Canvas
             this.mainLayer = new Group({
                 id: "main-layer"
@@ -1073,6 +1078,12 @@ kendo_module({
                 id: "adorner-layer"
             });
             this.canvas.append(this.adornerLayer);
+=======
+            var canvasContainer = $("<div class='k-canvas-container'></div>").appendTo(element)[0];
+            that.canvas = new Canvas(canvasContainer); // the root SVG Canvas
+            that.scrollable = $("<div />").appendTo(that.element).append(that.canvas.element);
+
+>>>>>>> spike of kendo scroller
             that._initialize();
             this.resizingAdorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable});
             this._adorn(this.resizingAdorner, true);
@@ -1107,7 +1118,7 @@ kendo_module({
             },
             allowDrop: true
         },
-        events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE],
+        events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE, SHAPEADD],
         destroy: function () {
             var that = this;
             Widget.fn.destroy.call(that);
@@ -1275,6 +1286,9 @@ kendo_module({
                 shape.diagram = this;
                 this.mainLayer.append(shape.visual);
             }
+
+            this.trigger(SHAPEADD, {item: shape});
+
             return shape;
         },
         undo: function () {
@@ -1568,8 +1582,10 @@ kendo_module({
             }
         },
         documentToCanvasPoint: function (dPoint) {
-            var containerOffset = this.element.offset();
-            return new Point(dPoint.x - containerOffset.left, dPoint.y - containerOffset.top);
+            var containerOffset = this.element.offset(),
+                scroll = this.scroller.movable;
+            console.log(dPoint.y - containerOffset.top + scroll.y);
+            return new Point(dPoint.x - containerOffset.left - scroll.x, dPoint.y - containerOffset.top - scroll.y);
         },
         setDataSource: function (dataSource) {
             this.options.dataSource = dataSource;
