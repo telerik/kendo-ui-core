@@ -40,7 +40,7 @@
     </style>
 </head>
 <body>
-    <div id="map" style="width: 800px; height: 600px;"></div>
+    <div id="map" style="width: 1024px; height: 512px;"></div>
     <script>
         var scale = chroma
             .scale(["white", "green"])
@@ -58,21 +58,52 @@
         }
 
         $("#map").kendoMap({
+            // TODO: Move to root level
             view: {
                 center: [51.505, -0.09],
-                zoom: 2
+                zoom: 4
+            },
+            controls: {
+                compass: true, // boolean, object
+                compass: {
+                    position: "topLeft" // "topRight", "bottomLeft", "bottomRight"
+                }
+                zoom: true, // boolean, object
+                scale: true, // boolean, object
+                birdsEyeView: true // miniMap? boolean, object
             },
             layers: [{
                 type: "shape",
                 url: "countries.geo.json",
-                copyright: "&copy; FooBar",
-                shapeCreated: function(e) {
-                    var users = e.dataItem.properties.users;
-                    if (users) {
-                        setColor(e.shape, users);
-                    }
+                copyright: "&copy; FooBar"
+            }],
+            markerDefaults: {
+                shape: "pin", // circle, target, targetPin, ...
+                size: 10,
+                color: "blue"
+            },
+            markers: [{
+                position: [51.5, -0.09],
+                color: "red",
+                tooltip: {
+                    // Nested tooltip configuration
+                    // content: "Marker",
+                    // autoHide: false,
+                    // height: 
+                    // width:
+                    // position: "top",
+                    // showAfter
+                    // showOn
                 }
-            }]
+            }],
+
+            // Events
+            shapeCreated: function(e) {
+                var users = e.dataItem.properties.users;
+                if (users) {
+                    setColor(e.shape, users);
+                }
+            }
         });
 
         var map = $("#map").data("kendoMap");
