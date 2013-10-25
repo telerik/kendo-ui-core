@@ -66,7 +66,8 @@ kendo_module({
         options: {
             name: "Map",
             layers: [],
-            minScale: 256,
+            zoom: 3,
+            minSize: 256,
             minZoom: 2
         },
 
@@ -87,7 +88,7 @@ kendo_module({
         },
 
         scale: function() {
-            return this.options.minScale * pow(2, this.options.view.zoom);
+            return this.options.minSize * pow(2, this.options.view.zoom);
         },
 
         toLayerPoint: function(location) {
