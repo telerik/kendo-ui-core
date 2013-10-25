@@ -270,9 +270,9 @@ kendo_module({
             for (var i = 0; i < this.shapes.length; i++) {
                 var shape = this.shapes[i];
                 shape.bounds(this.undoStates[i]);
-                shape.refresh();
             }
             if (this.adorner) {
+                this.adorner.refreshBounds();
                 this.adorner.complete();
             }
         },
@@ -280,9 +280,9 @@ kendo_module({
             for (var i = 0; i < this.shapes.length; i++) {
                 var shape = this.shapes[i];
                 shape.bounds(this.redoStates[i]);
-                shape.refresh();
             }
             if (this.adorner) {
+                this.adorner.refreshBounds();
                 this.adorner.complete();
             }
         }
@@ -332,13 +332,12 @@ kendo_module({
     });
 
     var RotateUnit = Class.extend({
-        init: function (adorner, shapes, undoRotates, angle) {
+        init: function (adorner, shapes, undoRotates) {
             this.shapes = shapes;
             this.undoRotates = undoRotates;
             this.title = "Rotation";
             this.redoRotates = [];
             this.redoAngle = adorner._angle;
-            this.undoAngle = angle;
             this.adorner = adorner;
             this.center = adorner._innerBounds.center();
             for (var i = 0; i < this.shapes.length; i++) {
@@ -352,8 +351,10 @@ kendo_module({
                 shape = this.shapes[i];
                 shape.rotate(this.undoRotates[i], this.center);
             }
-            this.adorner._angle = this.undoAngle;
-            this.adorner.complete();
+            if (this.adorner) {
+                this.adorner._initialize();
+                this.adorner.complete();
+            }
         },
         redo: function () {
             var i, shape;
@@ -361,8 +362,10 @@ kendo_module({
                 shape = this.shapes[i];
                 shape.rotate(this.redoRotates[i], this.center);
             }
-            this.adorner._angle = this.redoAngle;
-            this.adorner.complete();
+            if (this.adorner) {
+                this.adorner._initialize();
+                this.adorner.complete();
+            }
         }
     });
 
@@ -597,12 +600,12 @@ kendo_module({
         end: function () {
             var diagram = this.toolService.diagram, unit;
             if (this.adorner) {
-                diagram.undoRedoService.begin();
+                //diagram.undoRedoService.begin();
                 unit = this.adorner.stop();
                 if (unit) {
-                    diagram.undoRedoService.addCompositeItem(unit);
+                    diagram.undoRedoService.add(unit, false);
                 }
-                diagram.undoRedoService.commit();
+                //diagram.undoRedoService.commit();
             }
             this.adorner = undefined;
             this.handle = undefined;
@@ -1487,6 +1490,9 @@ kendo_module({
         },
         _initialize: function (items) {
             var that = this, i, item;
+            if (!items) {
+                items = this.diagram.select();
+            }
             that.shapes = [];
             for (i = 0; i < items.length; i++) {
                 item = items[i];
@@ -1607,7 +1613,8 @@ kendo_module({
             var unit;
             if (this._cp != this._sp) {
                 if (this._rotating) {
-                    unit = new RotateUnit(this, this.shapes, this.initialRotates, this._initialAngle);
+                    unit = new RotateUnit(this, this.shapes, this.initialRotates);
+                    this._rotating = false;
                 }
                 else {
                     unit = new TransformUnit(this.shapes, this.shapeStates, this);
