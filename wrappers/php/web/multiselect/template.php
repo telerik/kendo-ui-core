@@ -37,6 +37,13 @@ $multiselect->minLength(1)
             ->dataTextField('ContactName')
             ->dataValueField('CustomerID')
             ->dataSource($dataSource)
+            ->headerTemplate(<<<TEMPLATE
+                <div class="k-widget k-header dropdown-header">
+                    <span class="first">photo</span>
+                    <span class="last">contact info</span>
+                </div>
+TEMPLATE
+            )
             ->itemTemplate(<<<TEMPLATE
                 <img src="../../content/web/Customers/#= CustomerID #.jpg" alt="#= CustomerID #" />
                 <h3>#: ContactName #</h3>
@@ -65,6 +72,26 @@ echo $multiselect->render();
     });
 </script>
 <style scoped>
+    .dropdown-header {
+        overflow:hidden;
+        font-size: 1.3em;
+        padding: 5px 2px;
+        margin: -2px -2px 0;
+        border-width: 0 0 1px;
+    }
+
+    .dropdown-header .first {
+        width: 65px;
+        margin-left:4px;
+        display: block;
+        float: left;
+        text-align: left;
+    }
+
+    .dropdown-header .last {
+        margin-left: 22px;
+        float: left;
+    }
     .demo-section {
         width: 400px;
         margin: 30px auto 50px;
@@ -81,6 +108,9 @@ echo $multiselect->render();
         margin-right: 5px;
         vertical-align: top;
     }
+    #customers-list {
+        padding-bottom: 30px;
+    }
     #customers-list .k-item {
         overflow: hidden; /* clear floated images */
     }
@@ -89,11 +119,13 @@ echo $multiselect->render();
         -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
         box-shadow: 0 0 2px rgba(0,0,0,.4);
         float: left;
+        width: 70px;
+        height: 70px;
         margin: 5px 20px 5px 0;
     }
     #customers-list h3 {
-        margin: 30px 0 10px 0;
-        font-size: 2em;
+        margin: 20px 0 5px 0;
+        font-size: 1.6em;
     }
     #customers-list p {
         margin: 0;
