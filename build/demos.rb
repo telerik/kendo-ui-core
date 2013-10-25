@@ -297,7 +297,6 @@ def patched_web_config(name, source, cdn_root, themebuilder_root)
     task
 end
 
-directory 'dist/demos/staging-mvc'
 directory 'dist/demos/staging-php'
 
 namespace :demos do
@@ -371,13 +370,14 @@ namespace :demos do
     end
 
 
-    desc('Build mvc demos for staging')
+    directory 'dist/aspnetmvc-demos'
+
+    desc('Prepare examples for staging')
     task :staging_mvc => [
         'bundles:aspnetmvc.commercial',
-        'dist/demos/staging-mvc'
+        'dist/aspnetmvc-demos'
     ] do
-        sh 'cp -a dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/VS2012/Kendo.Mvc.Examples/* dist/demos/staging-mvc'
-        sh 'cp -a dist/binaries/demos/Kendo.Mvc.Examples/bin/* dist/demos/staging-mvc/bin'
+        sh 'cp -a dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/VS* dist/aspnetmvc-demos'
     end
 
     task :production_site => [:release,

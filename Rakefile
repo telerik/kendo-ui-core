@@ -674,7 +674,7 @@ namespace :build do
             endpoint = "http://kendoiis.telerik.com:5985/wsman"
             winrm = WinRM::WinRMWebService.new(endpoint, :plaintext, :user => "telerik.com\\TeamFoundationUser", :pass => "voyant69", :disable_sspi => true)
             winrm.cmd('iisreset /stop')
-            sh "rsync -avc --del dist/demos/staging-mvc/ /mnt/kendo-iis/staging-mvc/"
+            sh "rsync -avc --del dist/aspnetmvc-demos/ /mnt/kendo-iis/stable-demos-src/"
             winrm.cmd('iisreset /start')
         end
 
