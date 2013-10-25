@@ -1513,7 +1513,7 @@ kendo_module({
             if (!this._isMobile) {
                 this._editContainer.data("kendoWindow").center().open();
             } else {
-                this.pane.navigate(this.editView);
+                this.pane.navigate(this.editView, this._editAnimation);
             }
         },
 
@@ -2374,6 +2374,8 @@ kendo_module({
                 if (options.height) {
                     this.pane.element.parent().css(HEIGHT, options.height);
                 }
+
+                this._editAnimation = "slide";
             }
         },
 

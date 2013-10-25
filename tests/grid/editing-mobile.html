@@ -61,7 +61,10 @@
                 }, options);
                 dataSource = options.dataSource;
 
-                return table.kendoGrid(options).data("kendoGrid");
+                var grid = table.kendoGrid(options).data("kendoGrid");
+                grid._editAnimation = "";
+
+                return grid;
             }
 
             QUnit.config.reorder = false;
