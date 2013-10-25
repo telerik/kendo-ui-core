@@ -1068,8 +1068,10 @@ kendo_module({
             element = that.element; // the hosting element
 
             that.element.addClass("k-widget k-diagram").attr("role", "diagram");
-<<<<<<< HEAD
-            that.canvas = new Canvas(element); // the root SVG Canvas
+            var canvasContainer = $("<div class='k-canvas-container'></div>").appendTo(element)[0];
+            that.canvas = new Canvas(canvasContainer); // the root SVG Canvas
+            that.scrollable = $("<div />").appendTo(that.element).append(that.canvas.element);
+
             this.mainLayer = new Group({
                 id: "main-layer"
             });
@@ -1078,12 +1080,7 @@ kendo_module({
                 id: "adorner-layer"
             });
             this.canvas.append(this.adornerLayer);
-=======
-            var canvasContainer = $("<div class='k-canvas-container'></div>").appendTo(element)[0];
-            that.canvas = new Canvas(canvasContainer); // the root SVG Canvas
-            that.scrollable = $("<div />").appendTo(that.element).append(that.canvas.element);
 
->>>>>>> spike of kendo scroller
             that._initialize();
             this.resizingAdorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable});
             this._adorn(this.resizingAdorner, true);
