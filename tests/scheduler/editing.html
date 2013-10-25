@@ -350,6 +350,15 @@
                 ok(saveEvent.calls("removeEvent"));
             });
 
+            test("destroy button should be removed for create new events", function() {
+                var scheduler = setup();
+
+                scheduler.addEvent();
+
+                var button = scheduler._editor.container.find("a.k-scheduler-delete");
+                equal(button.length, 0);
+            });
+
             test("clicking update buttons calls update event", function() {
                 var scheduler = setup(),
                     saveEvent = stub(scheduler, "saveEvent");

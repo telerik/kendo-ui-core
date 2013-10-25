@@ -1296,7 +1296,11 @@ kendo_module({
 
             html += '<div class="k-edit-buttons k-state-default">';
             html += this.createButton({ name: "update", text: updateText, attr: attr }) + this.createButton({ name: "canceledit", text: cancelText, attr: attr });
-            html += this.createButton({ name: "delete", text: deleteText, attr: attr });
+
+            if (!model.isNew()) {
+                html += this.createButton({ name: "delete", text: deleteText, attr: attr });
+            }
+
             html += '</div></div></div>';
 
             var container = this.container = $(html)
