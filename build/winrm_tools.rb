@@ -34,10 +34,9 @@ class WinRemote
         exec("xcopy #{source} #{destination} /y /e")
     end
 
-    def build_and_deploy(source, destination)
+    def deploy(source, destination)
         clean_dir(destination)
-        build(source + "Kendo.Mvc.Examples.sln")
-        cp_r(source + "Kendo.Mvc.Examples", destination)
+        cp_r(source, destination)
     end
 end
 

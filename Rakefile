@@ -674,16 +674,18 @@ namespace :build do
 
             # Deploy MVC demos on kendoiis
             remote = WinRemote.new "kendoiis.telerik.com"
-            remote.stop_iis()
 
             sh "rsync -avc --del dist/aspnetmvc-demos/ /mnt/kendo-iis/stable-demos-src/"
 
             shares = "c:\\shares"
             source = "#{shares}\\stable-demos-src"
 
-            remote.build_and_deploy("#{source}\\VS2012\\", "#{shares}\\staging-mvc\\")
-            remote.build_and_deploy("#{source}\\VS2013\\", "#{shares}\\staging-mvc5\\")
+            remote.build("#{source}\\VS2012\\Kendo.Mvc.Examples.sln")
+            remote.build("#{source}\\VS2013\\Kendo.Mvc.Examples.sln")
 
+            remote.stop_iis()
+            remote.deploy("#{source}\\VS2012\\Kendo.Mvc.Examples", "#{shares}\\staging-mvc\\")
+            remote.deploy("#{source}\\VS2013\\Kendo.Mvc.Examples", "#{shares}\\staging-mvc5\\")
             remote.start_iis()
         end
 
