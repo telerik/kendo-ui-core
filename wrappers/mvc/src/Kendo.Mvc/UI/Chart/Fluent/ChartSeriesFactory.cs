@@ -1109,8 +1109,107 @@ namespace Kendo.Mvc.UI.Fluent
             return new ChartPieSeriesBuilder<TModel>(pieSeries);
         }
 
+
+        //****************************************************************************************************************************************
+
         /// <summary>
-        /// Defines bound pie series.
+        /// Defines bound funnel series.
+        /// </summary>
+        public virtual ChartFunnelSeriesBuilder<TModel> Funnel<TValue>(
+            Expression<Func<TModel, TValue>> expressionValue,
+            Expression<Func<TModel, string>> categoryExpression,
+            Expression<Func<TModel, string>> expressionColor = null,
+            Expression<Func<TModel, bool>> expressionVisibleInLegend = null
+            )
+        {
+            ChartFunnelSeries<TModel, TValue> funnelSeries = new ChartFunnelSeries<TModel, TValue>(expressionValue, categoryExpression, expressionColor, expressionVisibleInLegend);
+
+            Container.Series.Add(funnelSeries);
+
+            return new ChartFunnelSeriesBuilder<TModel>(funnelSeries);
+        }
+
+        /// <summary>
+        /// Defines bound funnel series.
+        /// </summary>
+        public virtual ChartFunnelSeriesBuilder<TModel> Funnel(
+            string valueMemberName,
+            string categoryMemberName,
+            string colorMemberName = null,
+            string visibleInLegendMemberName = null
+            )
+        {
+            return Funnel(null, valueMemberName, categoryMemberName, colorMemberName, visibleInLegendMemberName);
+        }
+
+        /// <summary>
+        /// Defines bound funnel series.
+        /// </summary>
+        public virtual ChartFunnelSeriesBuilder<TModel> Funnel(
+            Type memberType,
+            string valueMemberName,
+            string categoryMemberName,
+            string colorMemberName = null,
+            string visibleInLegendMemberName = null
+            )
+        {
+            var valueExpr = BuildMemberExpression(memberType, valueMemberName);
+            var categoryExpr = BuildMemberExpression(typeof(string), categoryMemberName);
+            var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(typeof(string), colorMemberName) : null;
+            var visibleInlegendExpr = visibleInLegendMemberName.HasValue() ? BuildMemberExpression(typeof(bool), visibleInLegendMemberName) : null;
+
+            var seriesType = typeof(ChartFunnelSeries<,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type);
+            var series = (IChartFunnelSeries)BuildSeries(seriesType, valueExpr, categoryExpr, colorExpr, visibleInlegendExpr);
+
+            if (!series.Name.HasValue())
+            {
+                series.Name = valueMemberName.AsTitle();
+            }
+
+            if (!series.Member.HasValue())
+            {
+                series.Member = valueMemberName.AsTitle();
+            }
+
+            if (!series.CategoryMember.HasValue())
+            {
+                series.CategoryMember = categoryMemberName.AsTitle();
+            }
+
+            if (!series.ColorMember.HasValue())
+            {
+                series.ColorMember = colorMemberName.AsTitle();
+            }
+
+            if (!series.VisibleInLegendMember.HasValue())
+            {
+                series.VisibleInLegendMember = visibleInLegendMemberName.AsTitle();
+            }
+
+            Container.Series.Add((ChartSeriesBase<TModel>)series);
+
+            return new ChartFunnelSeriesBuilder<TModel>(series);
+        }
+
+        /// <summary>
+        /// Defines funnel series bound to inline data.
+        /// </summary>
+        /// <param name="data">
+        /// The data to bind to
+        /// </param>
+        public virtual ChartFunnelSeriesBuilder<TModel> Funnel(IEnumerable data)
+        {
+            ChartFunnelSeries<TModel, object> funnelSeries = new ChartFunnelSeries<TModel, object>(data);
+
+            Container.Series.Add(funnelSeries);
+
+            return new ChartFunnelSeriesBuilder<TModel>(funnelSeries);
+        }
+
+        //****************************************************************************************************************************************
+
+        /// <summary>
+        /// Defines bound Donut series.
         /// </summary>
         public virtual ChartDonutSeriesBuilder<TModel> Donut<TValue>(
             Expression<Func<TModel, TValue>> expressionValue,

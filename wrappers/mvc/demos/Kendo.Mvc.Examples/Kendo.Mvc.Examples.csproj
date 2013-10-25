@@ -176,6 +176,10 @@
     <Compile Include="Controllers\DataViz\Bullet_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Bullet_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bullet_Charts\Remote_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Funnel_Charts\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Funnel_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Funnel_Charts\Pie_LabelsController.cs" />
+    <Compile Include="Controllers\DataViz\Funnel_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Customization\PlotBandsController.cs" />
     <Compile Include="Controllers\DataViz\Dashboards\Car_DashboardController.cs" />
     <Compile Include="Controllers\DataViz\Donut_Charts\Donut_LabelsController.cs" />
@@ -2838,6 +2842,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\polar_charts\smooth_polar_line.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\funnel_charts\index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\funnel_charts\local_data.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\funnel_charts\pie_labels.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\funnel_charts\remote_data.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
