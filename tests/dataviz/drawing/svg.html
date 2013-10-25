@@ -387,6 +387,20 @@
         ok(pathNode.render().indexOf("cursor") === -1);
     });
 
+    test("renders visibility attribute", function() {
+        path.visible(false);
+        ok(pathNode.render().indexOf("visibility='hidden'") !== -1);
+    });
+
+    test("does not render visibility if not set", function() {
+        ok(pathNode.render().indexOf("visibility") === -1);
+    });
+
+    test("does not render visibility if set to true", function() {
+        path.visible(true);
+        ok(pathNode.render().indexOf("visibility") === -1);
+    });
+
     test("geometryChange sets path", function() {
         path.moveTo(0, 0);
         pathNode.attr = function(name, value) {
@@ -404,6 +418,24 @@
         };
 
         path.options.set("fill.color", "red");
+    });
+
+    test("optionsChange sets visibility to hidden", function() {
+        pathNode.attr = function(name, value) {
+            equal(name, "visibility");
+            equal(value, "hidden");
+        };
+
+        path.visible(false);
+    });
+
+    test("optionsChange sets visibility to visible", function() {
+        pathNode.attr = function(name, value) {
+            equal(name, "visibility");
+            equal(value, "visible");
+        };
+
+        path.visible(true);
     });
 
     // ------------------------------------------------------------

@@ -219,6 +219,8 @@
 
             if (name) {
                 this.attr(name, e.value);
+            } else if (e.field === "visible") {
+                this.attr("visibility", e.value ? "visible" : "hidden");
             }
 
             this.invalidate();
@@ -314,8 +316,17 @@
             return "";
         },
 
+        renderVisibility: function() {
+            if (this.srcElement.options.visible === false) {
+                return renderAttr("visibility", "hidden");
+            }
+
+            return "";
+        },
+
         template: renderTemplate(
             "<path style='#= d.renderCursor() #' " +
+            "#= d.renderVisibility() # " +
             "#= kendo.dataviz.util.renderAttr('d', d.renderSegments()) # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
