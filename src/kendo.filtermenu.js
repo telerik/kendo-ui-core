@@ -82,13 +82,13 @@ kendo_module({
             '</div>';
 
         var defaultMobileTemplate =
-            '<div data-#=ns#role="view" data-#=ns#init-widgets="false">'+
-                '<div data-#=ns#role="header">'+
+            '<div data-#=ns#role="view" data-#=ns#init-widgets="false" class="k-grid-filter-menu">'+
+                '<div data-#=ns#role="header" class="k-header">'+
                     '<button class="k-button k-cancel">#=messages.cancel#</button>'+
                     '#=field#'+
                     '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
                 '</div>'+
-                '<form class="k-filter-menu k-secondary">'+
+                '<form class="k-filter-menu k-mobile-list k-secondary">'+
                     '<div>' +
                         '<label>#=messages.operator#'+
                             '<select data-#=ns#bind="value: filters[0].operator">'+
@@ -140,29 +140,27 @@ kendo_module({
             '</div>';
 
     var booleanMobileTemplate =
-            '<div data-#=ns#role="view" data-#=ns#init-widgets="false">'+
-                '<div data-#=ns#role="header">'+
+            '<div data-#=ns#role="view" data-#=ns#init-widgets="false" class="k-grid-filter-menu">'+
+                '<div data-#=ns#role="header" class="k-header">'+
                     '<button class="k-button k-cancel">#=messages.cancel#</button>'+
                     '#=field#'+
                     '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
                 '</div>'+
-                '<form class="k-filter-menu k-secondary">'+
-                    '<div>' +
-                        '<div class="k-filter-help-text">#=messages.info#</div>'+
-                        '<ul>'+
-                            '<li><label>'+
-                                '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="true" name="filters[0].value"/>' +
-                                '#=messages.isTrue#' +
-                            '</label></li>' +
-                            '<li><label>'+
-                                '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="false" name="filters[0].value"/>' +
-                                '#=messages.isFalse#' +
-                            '</label></li>' +
-                        '</ul>'+
-                        '<div>' +
-                            '<button type="reset" class="k-button">#=messages.clear#</button>'+
-                        '</div>' +
-                    '</div>'+
+                '<form class="k-filter-menu k-mobile-list k-secondary k-header">'+
+                    '<ul class="k-filter-help-text"><li><span class="k-link">#=messages.info#</span>'+
+                    '<ul>'+
+                        '<li class="k-item"><label class="k-label">'+
+                            '<input class="k-check" type="radio" data-#=ns#bind="checked: filters[0].value" value="true" name="filters[0].value"/>' +
+                            '#=messages.isTrue#' +
+                        '</label></li>' +
+                        '<li class="k-item"><label class="k-label">'+
+                            '<input class="k-check" type="radio" data-#=ns#bind="checked: filters[0].value" value="false" name="filters[0].value"/>' +
+                            '#=messages.isFalse#' +
+                        '</label></li>' +
+                    '</ul>'+
+                    '</li><li class="k-button-container">' +
+                        '<button type="reset" class="k-button">#=messages.clear#</button>'+
+                    '</li></ul>' +
                 '</form>'+
             '</div>';
 

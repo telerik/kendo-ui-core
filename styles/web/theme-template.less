@@ -388,7 +388,7 @@ textarea.k-textbox:hover,
 .k-icon,
 .k-state-disabled .k-icon,
 .k-column-menu .k-sprite,
-.k-column-menu .k-check:checked
+.k-mobile-list .k-check:checked
 {
     opacity: @default-icon-opacity;
 }
@@ -398,7 +398,7 @@ textarea.k-textbox:hover,
 .k-grouping-dropclue,
 .k-drop-hint,
 .k-column-menu .k-sprite,
-.k-column-menu .k-check:checked
+.k-mobile-list .k-check:checked
 {
     background-image: @sprite-image;
     border-color: transparent;
@@ -743,8 +743,8 @@ td.k-state-focused.k-state-selected,
 .k-pager-wrap .k-link:hover,
 .k-dropdown .k-state-focused,
 .k-imagebrowser-dropzone,
-.km-pane-wrapper .k-column-menu .k-link:active,
-.km-pane-wrapper .k-column-menu .k-label:active
+.km-pane-wrapper .k-mobile-list .k-item .k-link:active,
+.km-pane-wrapper .k-mobile-list .k-item .k-label:active
 {
     color: @hover-text-color;
     background-color: @hover-background-color;
@@ -1372,19 +1372,19 @@ div.k-imagebrowser-dropzone em
 
 /* Column Menu in Adaptive Grid */
 
-.km-pane-wrapper .k-column-menu .k-item
+.km-pane-wrapper .k-mobile-list .k-item
 {
     color: @widget-text-color;
     background-color: @widget-background-color;
     border-top: 1px solid @cell-border-color;
 }
 
-.km-pane-wrapper .k-column-menu .k-item:last-child
+.km-pane-wrapper .k-mobile-list .k-item:last-child
 {
     .box-shadow(inset 0 -1px 0 @cell-border-color);
 }
 
-.km-pane-wrapper .k-column-menu > ul > li > .k-link
+.km-pane-wrapper .k-mobile-list > ul > li > .k-link
 {
     color: darken(@cell-border-color, 30);
     border-bottom: 1px solid @cell-border-color;
@@ -1699,7 +1699,7 @@ div.k-imagebrowser-dropzone em
     .k-tool-icon.k-state-selected,
     .k-tool-icon.k-state-selected.k-state-hover,
     .k-column-menu .k-sprite,
-    .k-column-menu .k-check {
+    .k-mobile-list .k-check {
         background-image: url('@{image-folder}/sprite_2x.png');
         background-size: 340px 336px;
     }
