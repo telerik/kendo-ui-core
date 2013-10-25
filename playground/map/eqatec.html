@@ -64,18 +64,57 @@
                 zoom: 4
             },
             controls: {
-                compass: true, // boolean, object
-                compass: {
+                navigator: true, // boolean, object
+                navigator: {
                     position: "topLeft" // "topRight", "bottomLeft", "bottomRight"
-                }
+                },
                 zoom: true, // boolean, object
                 scale: true, // boolean, object
                 birdsEyeView: true // miniMap? boolean, object
             },
-            layers: [{
+            theme: "default",
+            layerDefaults: {
+                shape: {
+                    fill: {
+                        color: "red",
+                        opacity: 0.1
+                    },
+                    stroke: {
+                        width: 1,
+                        color: "black",
+                        opacity: 1
+                    }
+                },
+                tile: {
+                    urlTemplate: "tiles/#= zoom #/#= x #/#= y #.png",
+                    copyright: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+                }
+            },
+            layers: [/*{
+                    type: "tile",
+                    urlTemplate: "tiles/#= zoom #/#= x #/#= y #.png",
+                    copyright: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+                }, */{
                 type: "shape",
-                url: "countries.geo.json",
-                copyright: "&copy; FooBar"
+                dataSource: {
+                    // TODO Custom transport
+                    type: "geojson",
+                    transport: {
+                        read: "countries.geo.json"
+                    }
+                },
+                copyright: "&copy; FooBar",
+                fill: "red",//string | object
+                fill: {
+                    color: "red",
+                    opacity: 0.1
+                },
+                // stroke: string | object
+                stroke: {
+                    width: 1,
+                    color: "black",
+                    opacity: 1
+                }
             }],
             markerDefaults: {
                 shape: "pin", // circle, target, targetPin, ...
@@ -98,6 +137,10 @@
             }],
 
             // Events
+            click: $.noop,
+            markerCreated: $.noop,
+            markerHover: $.noop,
+            shapeHover: $.noop,
             shapeCreated: function(e) {
                 var users = e.dataItem.properties.users;
                 if (users) {
