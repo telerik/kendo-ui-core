@@ -51,14 +51,16 @@ kendo_module({
             map._initOptions(options);
             map.scrollWrap = $("<div></div>").appendTo(map.element);
 
+            map.crs = new EPSG3857();
+
             map.layers = new ObservableArray([]);
             map._renderLayers();
 
             var scroller = map.scroller = new kendo.mobile.ui.Scroller(map.scrollWrap);
             scroller.bind("scroll", proxy(map._scroll, map));
-            map._resetScroller();
+            scroller.bind("scrollEnd", proxy(map._scrollEnd, map));
 
-            map.crs = new EPSG3857();
+            map._reset();
         },
 
         options: {
@@ -70,15 +72,15 @@ kendo_module({
 
         events:[
             "reset", // TODO: Redraw?
-            "move"
+            "drag",
+            "dragEnd"
         ],
 
         zoom: function(level) {
             if (defined(level)) {
                 this.options.view.zoom = limit(level, this.options.minZoom, MAX_ZOOM);
 
-                this._resetScroller();
-                this.trigger("reset");
+                this._reset();
             } else {
                 return this.options.view.zoom;
             }
@@ -88,12 +90,36 @@ kendo_module({
             return this.options.minScale * pow(2, this.options.view.zoom);
         },
 
-        layerPoint: function(location) {
+        toLayerPoint: function(location) {
             return this.crs.toPoint(location, this.scale());
         },
 
-        _scroll: function() {
+        toScreenPoint: function(location) {
+            var origin = this.toLayerPoint(this.viewport().nw);
+            var point = this.crs.toPoint(location, this.scale());
+            point.x -= origin.x;
+            point.y -= origin.y;
+
+            return point;
+        },
+
+        _scroll: function(e) {
+            var center = this.toLayerPoint(this._origin);
+            center.x += e.scrollLeft;
+            center.y += e.scrollTop;
+            this.center(this.crs.toLocation(center, this.scale()));
+
             this.trigger("drag");
+        },
+
+        _scrollEnd: function(e) {
+            this.trigger("dragEnd");
+        },
+
+        _reset: function() {
+            this._origin = this.center();
+            this._resetScroller();
+            this.trigger("reset");
         },
 
         _resetScroller: function() {

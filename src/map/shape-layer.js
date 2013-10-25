@@ -11,6 +11,9 @@
         d = dataviz.drawing,
         Group = d.Group,
 
+        util = dataviz.util,
+        round = util.round,
+
         map = dataviz.map,
         Location = map.Location;
 
@@ -37,6 +40,7 @@
 
             map.bind("reset", proxy(this.reset, this));
             map.bind("drag", proxy(this._drag, this));
+            map.bind("dragEnd", proxy(this._dragEnd, this));
 
             if (this.options.url) {
                 $.getJSON(this.options.url, proxy(this.load, this));
@@ -111,13 +115,13 @@
                 visible = visible || viewport.containsAny(rings[i]);
             }
 
-            if (visible) {
-                var shape = this._buildPolygon(rings);
-                this.trigger("shapeCreated", { shape: shape, dataItem: item });
-                // TODO: Cancellable?
+            var shape = this._buildPolygon(rings, { visible: visible });
+            shape.rings = rings;
 
-                container.append(shape);
-            }
+            this.trigger("shapeCreated", { shape: shape, dataItem: item });
+            // TODO: Cancellable?
+
+            container.append(shape);
         },
 
         _buildPolygon: function(rings, style) {
@@ -131,7 +135,7 @@
 
             for (var i = 0; i < rings.length; i++) {
                 for (var j = 0; j < rings[i].length; j++) {
-                    var point = this.map.layerPoint(
+                    var point = this.map.toScreenPoint(
                         Location.fromLngLat(rings[i][j])
                     );
 
@@ -147,6 +151,9 @@
         },
 
         _drag: function() {
+            // TODO: Feature detection for surface viewBox
+            // If not supported (e.g. canvas), do nothing
+
             var scroller = this.map.scroller;
             var offset = { x: scroller.scrollLeft, y: scroller.scrollTop };
             var element = this.element;
@@ -156,10 +163,16 @@
             var height = this.element.height();
 
             this.movable.moveTo(offset);
+
             var viewBox = kendo.format("{0} {1} {2} {3}",
-                                       offset.x, offset.y, width, height);
+                                       round(offset.x, 4), round(offset.y, 4), width, height);
 
             $("svg", element)[0].setAttribute("viewBox", viewBox);
+        },
+
+        _dragEnd: function() {
+            //console.log("drag end, reloading");
+            //this.reset();
         }
     });
 
