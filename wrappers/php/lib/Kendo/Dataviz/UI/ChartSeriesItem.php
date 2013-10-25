@@ -161,6 +161,69 @@ The last element is always created like a rectangle since there is no following 
     }
 
     /**
+    * The error bars of the chart series.
+    * @param \Kendo\Dataviz\UI\ChartSeriesItemErrorBars|array $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function errorBars($value) {
+        return $this->setProperty('errorBars', $value);
+    }
+
+    /**
+    * The data item field which contains the series.errorBars low value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function errorLowField($value) {
+        return $this->setProperty('errorLowField', $value);
+    }
+
+    /**
+    * The data item field which contains the series.errorBars high value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function errorHighField($value) {
+        return $this->setProperty('errorHighField', $value);
+    }
+
+    /**
+    * The data item field which contains the series.errorBars xAxis low value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function xErrorLowField($value) {
+        return $this->setProperty('xErrorLowField', $value);
+    }
+
+    /**
+    * The data item field which contains the series.errorBars xAxis high value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function xErrorHighField($value) {
+        return $this->setProperty('xErrorHighField', $value);
+    }
+
+    /**
+    * The data item field which contains the series.errorBars yAxis low value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function yErrorLowField($value) {
+        return $this->setProperty('yErrorLowField', $value);
+    }
+
+    /**
+    * The data item field which contains the series.errorBars yAxis high value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function yErrorHighField($value) {
+        return $this->setProperty('yErrorHighField', $value);
+    }
+
+    /**
     * The data item field which contains a boolean value indicating whether the sector is exploded.
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
