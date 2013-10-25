@@ -224,6 +224,11 @@
                 margin-bottom: 10px;
             }
 
+            #listview figure {
+                border: 1px solid #e7e7e7;
+                border-radius: 3px;
+            }
+
             footer {
                 text-align: right;
                 font-size: 0.8571em;
@@ -439,9 +444,9 @@
 
                 <script id="listview-template" type="x-kendo-template">
                     <figure class="col-xs-6 col-md-4 col-lg-2">
-                        <img src="#= src #" class="img-responsive" />
+                        <img src="bootstrap/photos/#= id #.jpg" class="img-responsive" />
                         <figcaption class="hidden-xs">
-                            <h3>Photo title</h3>
+                            <h3>#: title #</h3>
                             <p class="hidden-sm">
                                 Longer description of the photo<br />
                                 on two or more lines
@@ -978,18 +983,16 @@
             $("#listview").kendoListView({
                 dataSource: {
                     data: [
-                        { src: "bootstrap/photo.png" },
-                        { src: "bootstrap/photo.png" },
-                        { src: "bootstrap/photo.png" },
-                        { src: "bootstrap/photo.png" },
-                        { src: "bootstrap/photo.png" },
-                        { src: "bootstrap/photo.png" },
-                        { src: "bootstrap/photo.png" },
-                        { src: "bootstrap/photo.png" },
-                        { src: "bootstrap/photo.png" },
-                        { src: "bootstrap/photo.png" },
-                        { src: "bootstrap/photo.png" },
-                        { src: "bootstrap/photo.png" }
+                        { id: 1, title: "Photo Title" },
+                        { id: 2, title: "Photo Title" },
+                        { id: 3, title: "Photo Title" },
+                        { id: 4, title: "Photo Title" },
+                        { id: 5, title: "Photo Title" },
+                        { id: 6, title: "Photo Title" },
+                        { id: 7, title: "Photo Title" },
+                        { id: 8, title: "Photo Title" },
+                        { id: 9, title: "Photo Title" },
+                        { id: 10, title: "Photo Title" }
                     ]
                 },
                 template: $("#listview-template").html()
