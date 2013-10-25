@@ -170,6 +170,28 @@ The supported filter values are startswith, endswith and contains.
     }
 
     /**
+    * Sets the headerTemplate option of the ComboBox.
+    * Specifies a static HTML content, which will be rendered as a header of the popup element.
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\ComboBox
+    */
+    public function headerTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('headerTemplate', $value);
+    }
+
+    /**
+    * Sets the headerTemplate option of the ComboBox.
+    * Specifies a static HTML content, which will be rendered as a header of the popup element.
+    * @param string $value The template content.
+    * @return \Kendo\UI\ComboBox
+    */
+    public function headerTemplate($value) {
+        return $this->setProperty('headerTemplate', $value);
+    }
+
+    /**
     * Sets the template option of the ComboBox.
     * The template used to render the items. By default the widget displays only the text of the data item (configured via dataTextField).
     * @param string $value The id of the element which represents the kendo template.
