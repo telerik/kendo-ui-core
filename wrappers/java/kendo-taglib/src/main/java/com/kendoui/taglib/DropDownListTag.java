@@ -142,6 +142,14 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
         setProperty("enable", value);
     }
 
+    public java.lang.String getHeaderTemplate() {
+        return (java.lang.String)getProperty("headerTemplate");
+    }
+
+    public void setHeaderTemplate(java.lang.String value) {
+        setProperty("headerTemplate", value);
+    }
+
     public float getHeight() {
         return (float)getProperty("height");
     }

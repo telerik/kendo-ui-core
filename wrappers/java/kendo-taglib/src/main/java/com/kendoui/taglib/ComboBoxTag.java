@@ -150,6 +150,14 @@ public class ComboBoxTag extends WidgetTag /* interfaces */implements DataBoundW
         setProperty("filter", value);
     }
 
+    public java.lang.String getHeaderTemplate() {
+        return (java.lang.String)getProperty("headerTemplate");
+    }
+
+    public void setHeaderTemplate(java.lang.String value) {
+        setProperty("headerTemplate", value);
+    }
+
     public float getHeight() {
         return (float)getProperty("height");
     }

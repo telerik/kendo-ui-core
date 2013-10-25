@@ -57,6 +57,12 @@ all data items which begin with the current widget value are displayed in the su
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Specifies a static HTML content, which will be rendered as a header of the popup element.</description>
+            <name>headerTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The height of the suggestion popup in pixels. The default value is 200 pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
@@ -9102,6 +9108,12 @@ The supported filter values are startswith, endswith and contains.</description>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Specifies a static HTML content, which will be rendered as a header of the popup element.</description>
+            <name>headerTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The height of the suggestion popup in pixels. The default value is 200 pixels.</description>
             <name>height</name>
             <rtexprvalue>true</rtexprvalue>
@@ -10436,6 +10448,12 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <name>enable</name>
             <rtexprvalue>true</rtexprvalue>
             <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Specifies a static HTML content, which will be rendered as a header of the popup element.</description>
+            <name>headerTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The height of the suggestion popup in pixels. The default value is 200 pixels.</description>
@@ -13368,6 +13386,145 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
         <body-content>JSP</body-content>
     </tag>
     <tag>
+        <description>Map</description>
+        <name>map</name>
+        <tag-class>com.kendoui.taglib.MapTag</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>The mandatory and unique name of the widget. Used as the &quot;id&quot; attribute of the widget HTML element.</description>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The map center. Coordinates are listed as [Latitude, Longitude].
+You can also use a kendo.dataviz.map.Location instance.</description>
+            <name>center</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The configuration of built-in map controls.</description>
+            <name>controls</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The default configuration for map layers by type.</description>
+            <name>layerDefaults</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The configuration of the map layers.
+The layer type is determined by the value of the type field.</description>
+            <name>layers</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The default options for all markers.</description>
+            <name>markerDefaults</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The initial markers to display on the map.</description>
+            <name>markers</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The maximum zoom level.</description>
+            <name>maxZoom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The size of the map in pixels at zoom level 0.</description>
+            <name>minSize</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The minimum zoom level.</description>
+            <name>minZoom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The map theme name.The built-in themes are:</description>
+            <name>theme</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The initial zoom level.Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features).The map size is derived from the zoom level and minScale options: size = (2 ^ zoom) * minSize</description>
+            <name>zoom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Fired when the user clicks on the map.</description>
+            <name>click</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when a marker is created, but is not rendered yet.</description>
+            <name>markerCreated</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when a marker is hovered.</description>
+            <name>markerHover</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when a shape is created, but is not rendered yet.</description>
+            <name>shapeCreated</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when a shape is hovered.</description>
+            <name>shapeHover</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <dynamic-attributes>true</dynamic-attributes>
+    </tag>
+
+
+    <tag>
+        <description>Fired when the user clicks on the map.</description>
+        <name>map-click</name>
+        <tag-class>com.kendoui.taglib.map.ClickFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when a marker is created, but is not rendered yet.</description>
+        <name>map-markerCreated</name>
+        <tag-class>com.kendoui.taglib.map.MarkerCreatedFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when a marker is hovered.</description>
+        <name>map-markerHover</name>
+        <tag-class>com.kendoui.taglib.map.MarkerHoverFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when a shape is created, but is not rendered yet.</description>
+        <name>map-shapeCreated</name>
+        <tag-class>com.kendoui.taglib.map.ShapeCreatedFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when a shape is hovered.</description>
+        <name>map-shapeHover</name>
+        <tag-class>com.kendoui.taglib.map.ShapeHoverFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
         <description>Menu</description>
         <name>menu</name>
         <tag-class>com.kendoui.taglib.MenuTag</tag-class>
@@ -13639,6 +13796,12 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <description>The filtering method used to determine the suggestions for the current value. Filtration is turned of by default.
 The supported filter values are startswith, endswith and contains.</description>
             <name>filter</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>Specifies a static HTML content, which will be rendered as a header of the popup element.</description>
+            <name>headerTemplate</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
