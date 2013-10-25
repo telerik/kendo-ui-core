@@ -266,6 +266,11 @@ namespace Kendo.Mvc.UI
             /// Toolbar which contains different commands
             /// </summary>
             public const string ToolBar = "k-grid-toolbar";
+
+            /// <summary>
+            /// Pager navigation icon
+            /// </summary>
+            public const string PagerNavigation = "k-pager-nav";
         }
 
         /// <summary>

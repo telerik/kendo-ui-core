@@ -36,7 +36,10 @@ namespace Kendo.Mvc.UI.Html
 
             var a = new HtmlElement("a")
                 .AddClass(UIPrimitives.Link)
+                .AddClass(UIPrimitives.Grid.PagerNavigation)
                 .ToggleClass(UIPrimitives.DisabledState, !enabled)
+                .ToggleClass("k-pager-first", text == "seek-w")
+                .ToggleClass("k-pager-last", text == "seek-e")
                 .Attribute("href", url)
                 .Attribute("data-page", page.ToString(CultureInfo.InvariantCulture))
                 .ToggleAttribute("href", disabledUrl, !enabled);
