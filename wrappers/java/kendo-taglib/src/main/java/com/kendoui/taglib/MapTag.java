@@ -2,7 +2,7 @@
 package com.kendoui.taglib;
 
 
-
+import com.kendoui.taglib.map.*;
 import com.kendoui.taglib.json.Function;
 
 
