@@ -38,8 +38,8 @@ $dropDownList->dataTextField('ContactName')
              ->attr('style', 'width:400px')
              ->headerTemplate(<<<TEMPLATE
                 <div class="k-widget k-header dropdown-header">
-                    <span class="first">photo</span>
-                    <span class="last">contact info</span>
+                    <span class="first">Photo</span>
+                    <span class="last">Contact info</span>
                 </div>
 TEMPLATE
             )
