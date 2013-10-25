@@ -228,6 +228,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * If set to true and the scheduler is viewed on mobile browser it will use adaptive rendering.Can be set to a string phone or tablet which will force the widget to use adaptive rendering regardless of browser type.
+    * @param boolean|string $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function mobile($value) {
+        return $this->setProperty('mobile', $value);
+    }
+
+    /**
     * Adds SchedulerResource to the Scheduler.
     * @param \Kendo\UI\SchedulerResource|array,... $value one or more SchedulerResource to add.
     * @return \Kendo\UI\Scheduler
