@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../styles/web/kendo.common.css">
         <link rel="stylesheet" href="../styles/web/kendo.bootstrap.css">
-            <link rel="stylesheet" href="../styles/dataviz/kendo.dataviz.css">
+        <link rel="stylesheet" href="../styles/dataviz/kendo.dataviz.css">
 
         <script src="../src/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -211,7 +211,7 @@
             #tabstrip .k-chart {
                 height: 156px;
             }
-            
+
             #tabstrip .k-content {
                 padding: 1px;
             }
@@ -224,9 +224,16 @@
                 margin-bottom: 10px;
             }
 
+            #listview {
+                list-style-type: none;
+                padding: 0 0 15px;
+            }
+
             #listview figure {
                 border: 1px solid #e7e7e7;
                 border-radius: 3px;
+                padding: 5px;
+                margin-top: 15px;
             }
 
             footer {
@@ -443,19 +450,21 @@
                 <h2 class="ra-well-title">Latest photo uploads</h2>
 
                 <script id="listview-template" type="x-kendo-template">
-                    <figure class="col-xs-6 col-md-4 col-lg-2">
-                        <img src="bootstrap/photos/#= id #.jpg" class="img-responsive" />
-                        <figcaption class="hidden-xs">
-                            <h3>#: title #</h3>
-                            <p class="hidden-sm">
-                                Longer description of the photo<br />
-                                on two or more lines
-                            </p>
-                        </figcaption>
-                    </figure>
+                    <li class="col-xs-6 col-md-4 col-lg-2">
+                        <figure>
+                            <img src="bootstrap/photos/#= id #.jpg" class="img-responsive" />
+                            <figcaption class="hidden-xs">
+                                <h3>#: title #</h3>
+                                <p class="hidden-sm">
+                                    Longer description of the photo<br />
+                                    on two or more lines
+                                </p>
+                            </figcaption>
+                        </figure>
+                    </li>
                 </script>
 
-                <div id="listview" class="ra-well-overlay row"></div>
+                <ul id="listview" class="ra-well-overlay row"></ul>
             </section>
 
             <section id="faq" class="well">
@@ -717,7 +726,7 @@
                     visible: true
                 }
             });
-            
+
             $("#sales-per-region").kendoChart({
                 theme: "bootstrap",
                 legend: {
@@ -805,7 +814,7 @@
                     template: "#= series.name # <br /> #= category #: #= value #"
                 }
             });
-            
+
             $("#revenue").kendoChart({
                 theme: "bootstrap",
                 legend: {
@@ -828,7 +837,7 @@
                         visible: false
                     }
                 },
-                
+
                 axisDefaults: {
                     categories: ["Oct 1", "Oct 2", "Oct 3", "Oct 4", "Oct 5", "Oct 6",
                                  "Oct 7", "Oct 8", "Oct 9", "Oct 10", "Oct 11", "Oct 12",
