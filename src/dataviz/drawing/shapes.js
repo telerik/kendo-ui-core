@@ -18,12 +18,31 @@
         defined = util.defined;
 
     // Drawing primitives =====================================================
-    var Group = Class.extend({
-        init: function() {
-            var group = this;
+    var Element = Class.extend({
+        init: function(options) {
+            var shape = this;
 
-            group.observer = null;
-            group.children = [];
+            shape.observer = null;
+            shape.options = new OptionsStore(options || {});
+            shape.options.observer = this;
+        },
+
+        optionsChange: function(e) {
+            if (this.observer) {
+                this.observer.optionsChange(e);
+            }
+        },
+
+        visible: function(visible) {
+            this.options.set("visible", visible);
+            return this;
+        }
+    });
+
+    var Group = Element.extend({
+        init: function(options) {
+            this.children = [];
+            Element.fn.init.call(this, options);
         },
 
         childrenChange: function(action, items, index) {
@@ -48,22 +67,8 @@
         }
     });
 
-    var Shape = Class.extend({
-        init: function(options) {
-            var shape = this;
-
-            shape.observer = null;
-            shape.options = new OptionsStore(options || {});
-            shape.options.observer = this;
-        },
-
+    var Shape = Element.extend({
         geometryChange: util.mixins.geometryChange,
-
-        optionsChange: function(e) {
-            if (this.observer) {
-                this.observer.optionsChange(e);
-            }
-        },
 
         fill: function(color, opacity) {
             this.options.set("fill", {

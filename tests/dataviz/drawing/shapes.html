@@ -31,10 +31,15 @@
         Path = d.Path;
 
     // ------------------------------------------------------------
-    module("Group");
+    var group;
+
+    module("Group", {
+        setup: function() {
+            group = new Group();
+        }
+    });
 
     test("append adds children", function() {
-        var group = new Group();
         var child = new Group();
         group.append(child);
 
@@ -42,7 +47,6 @@
     });
 
     test("append triggers childrenChange", function() {
-        var group = new Group();
         var child = new Group();
 
         group.observer = {
@@ -55,7 +59,6 @@
     });
 
     test("clear triggers childrenChange", function() {
-        var group = new Group();
         var child = new Group();
         group.append(child);
 
@@ -66,6 +69,25 @@
         }
 
         group.clear();
+    });
+
+    test("visible triggers optionsChange", function() {
+        group.observer = {
+            optionsChange: function() {
+                ok(true);
+            }
+        }
+
+        group.visible(false);
+    });
+
+    test("visible sets visible", function() {
+        group.visible(false);
+        ok(group.options.visible);
+    });
+
+    test("visible returns group", function() {
+        deepEqual(group.visible(false), group);
     });
 
     // ------------------------------------------------------------
