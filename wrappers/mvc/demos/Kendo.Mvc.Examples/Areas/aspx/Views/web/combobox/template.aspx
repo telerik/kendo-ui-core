@@ -20,6 +20,10 @@
               });
           })
           .Filter("startswith")
+          .HeaderTemplate("<div class=\"k-widget k-header dropdown-header\">" +
+                              "<span class=\"first\">Photo</span>" +
+                              "<span class=\"last\">Contact info</span>" +
+                          "</div>")
           .Template("<img src=\"" + Url.Content("~/Content/web/Customers/") + "${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />" +
                     "<dl>" +
                         "<dt>Contact:</dt><dd>${ data.ContactName }</dd>" +
@@ -35,9 +39,31 @@
     </p>
 </div>
 
-<style scoped>
+<style>
+    .dropdown-header {
+        overflow:hidden;
+        font-size: 1.3em;
+        padding: 5px 2px;
+        margin: -2px -2px 0;
+        border-width: 0 0 1px;
+    }
+
+    .dropdown-header .first {
+        width: 65px;
+        margin-left:4px;
+        display: block;
+        float: left;
+        text-align: left;
+    }
+
+    .dropdown-header .last {
+        margin-left: 22px;
+        float: left;
+    }
+
     .demo-section {
         width: 400px;
+        margin: 35px auto 50px;
         padding: 30px;
     }
     .demo-section h2 {
@@ -45,6 +71,10 @@
         font-size: 1.2em;
         margin-bottom: 10px;
     }
+    #customers-list {
+        padding-bottom: 30px;
+    }
+
     #customers-list .k-item {
         overflow: hidden; /* clear floated images */
     }
@@ -53,11 +83,13 @@
         -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
         box-shadow: 0 0 2px rgba(0,0,0,.4);
         float: left;
+        width: 70px;
+        height: 70px;
         margin: 5px 20px 5px 0px;
     }
     #customers-list h3 {
-        margin: 30px 0 10px 0;
-        font-size: 2em;
+        margin: 20px 0 5px 0;
+        font-size: 1.6em;
     }
     #customers-list p {
         margin: 0;

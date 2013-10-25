@@ -196,6 +196,43 @@ namespace Kendo.Mvc.UI.Fluent
             return this as TDropDownBuilder;
         }
 
+        /// <summary>
+        /// Header template which will be rendered as a static header of the popup element.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .HeaderTemplate("<div><h2>Customers</h2></div>")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TDropDownBuilder HeaderTemplate(string headerTemplate)
+        {
+            Component.HeaderTemplate = headerTemplate;
+
+            return this as TDropDownBuilder;
+        }
+
+        /// <summary>
+        /// HeaderTemplateId to be used for rendering the static header of the popup element.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .HeaderTemplateId("widgetHeaderTemplateId")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public TDropDownBuilder HeaderTemplateId(string headerTemplateId)
+        {
+            Component.HeaderTemplateId = headerTemplateId;
+
+            return this as TDropDownBuilder;
+        }
+
+
         public TDropDownBuilder ValuePrimitive(bool valuePrimitive)
         {
             Component.ValuePrimitive = valuePrimitive;
