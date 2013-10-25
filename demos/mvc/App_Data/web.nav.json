@@ -1160,43 +1160,37 @@
                      "text": "Basic usage",
                      "url": "progressbar/index.html",
                      "title": "Basic usage of Kendo UI ProgressBar widget",
-                     "meta": "This example shows the core widget features",
-                     "packages": ["!jsp"]
+                     "meta": "This example shows the core widget features"
                  },
                  {
                     "text": "Chunk ProgressBar",
                     "url": "progressbar/chunk.html",
                     "title": "Displaying a progress in chunks",
-                    "meta": "",
-                    "packages": ["!jsp"]
+                    "meta": ""
                  },
                  {
                     "text": "Custom Label",
                     "url": "progressbar/customlabel.html",
                     "title": "Displaying a custom progress label",
-                    "meta": "",
-                    "packages": ["!jsp"]
+                    "meta": ""
                  },
                  {
                     "text": "Events",
                     "url": "progressbar/events.html",
                     "title": "Events in Kendo UI ProgressBar widget",
-                    "meta": "",
-                    "packages": ["!jsp"]
+                    "meta": ""
                  },
                  {
                     "text": "API",
                     "url": "progressbar/api.html",
                     "title": "Kendo UI ProgressBar API demo",
-                    "meta": "",
-                    "packages": ["!jsp"]
+                    "meta": ""
                  },
                  {
                     "text": "RTL Support",
                     "url": "progressbar/rtl.html",
                     "title": "Kendo UI ProgressBar RTL Support",
-                    "meta": "",
-                    "packages": ["!jsp"]
+                    "meta": ""
                  },
                  {
                     "text": "MVVM",
