@@ -273,7 +273,7 @@ kendo_module({
             }
             if (this.adorner) {
                 this.adorner.refreshBounds();
-                this.adorner.complete();
+                this.adorner.refresh();
             }
         },
         redo: function () {
@@ -283,7 +283,7 @@ kendo_module({
             }
             if (this.adorner) {
                 this.adorner.refreshBounds();
-                this.adorner.complete();
+                this.adorner.refresh();
             }
         }
     });
@@ -353,7 +353,7 @@ kendo_module({
             }
             if (this.adorner) {
                 this.adorner._initialize();
-                this.adorner.complete();
+                this.adorner.refresh();
             }
         },
         redo: function () {
@@ -364,7 +364,7 @@ kendo_module({
             }
             if (this.adorner) {
                 this.adorner._initialize();
-                this.adorner.complete();
+                this.adorner.refresh();
             }
         }
     });
@@ -1172,13 +1172,13 @@ kendo_module({
             that.options = deepExtend({}, that.options, options);
             that.visual = new Group();
             that.diagram.bind("pan", function () {
-                if(that.refreshBounds){
+                if (that.refreshBounds) {
                     that.refreshBounds();
                 }
                 that.refresh();
             });
             that.diagram.bind("zoom", function () {
-                if(that.refreshBounds){
+                if (that.refreshBounds) {
                     that.refreshBounds();
                 }
                 that.refresh();
@@ -1543,7 +1543,6 @@ kendo_module({
                 var shape = this.shapes[i];
                 this.shapeStates.push(shape.bounds());
             }
-            this._initialAngle = this._angle;
         },
         move: function (handle, p) {
             var delta = p.minus(this._cp), dragging,
@@ -1628,12 +1627,9 @@ kendo_module({
             }
 
             this._manipulating = undefined;
-            return unit;
-        },
-        complete: function () {
-            this.refresh();
             this._internalChange = undefined;
             this._rotating = undefined;
+            return unit;
         },
         refreshBounds: function () {
             var bounds = this.shapes.length == 1 ? this.shapes[0].bounds().clone() : this.diagram.getOriginBoundingBox(this.shapes);
