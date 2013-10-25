@@ -34,16 +34,16 @@ $chart_oct->title(array('position' => 'bottom', 'text' => 'October'))
 $series = new \Kendo\Dataviz\UI\ChartSeriesItem();
 $series
        ->data(array(
-            array('category' => 'Impressions', 'value' => 444444, 'color' => '#0e5a72'),
-            array('category' => 'Clicks', 'value' => 356854, 'color' => '#166f99'),
-            array('category' => 'Unique Visitors', 'value' => 280022, 'color' => '#2185b4'),
-            array('category' => 'Downloads', 'value' => 190374, 'color' => '#319fd2'),
-            array('category' => 'Purchases', 'value' => 120392, 'color' => '#3eaee2'),
+            array('category' => 'Impressions', 'value' => 984528, 'color' => '#0e5a72'),
+            array('category' => 'Clicks', 'value' => 856287, 'color' => '#166f99'),
+            array('category' => 'Unique Visitors', 'value' => 643694, 'color' => '#2185b4'),
+            array('category' => 'Downloads', 'value' => 567843, 'color' => '#319fd2'),
+            array('category' => 'Purchases', 'value' => 389137, 'color' => '#3eaee2'),
         ));
 
 $chart_nov = new \Kendo\Dataviz\UI\Chart('chart-nov');
 
-$chart_nov->title(array('position' => 'bottom', 'text' => 'October'))
+$chart_nov->title(array('position' => 'bottom', 'text' => 'November'))
       ->seriesDefaults($seriesDefault)
       ->addSeriesItem($series)
       ->legend(array('visible' => false))
@@ -51,16 +51,16 @@ $chart_nov->title(array('position' => 'bottom', 'text' => 'October'))
 
 $series = new \Kendo\Dataviz\UI\ChartSeriesItem();
 $series->data(array(
-            array('category' => 'Impressions', 'value' => 222222, 'color' => '#0e5a72'),
-            array('category' => 'Clicks', 'value' => 356854, 'color' => '#166f99'),
-            array('category' => 'Unique Visitors', 'value' => 280022, 'color' => '#2185b4'),
-            array('category' => 'Downloads', 'value' => 190374, 'color' => '#319fd2'),
-            array('category' => 'Purchases', 'value' => 120392, 'color' => '#3eaee2'),
+            array('category' => 'Impressions', 'value' => 1200528, 'color' => '#0e5a72'),
+            array('category' => 'Clicks', 'value' => 989287, 'color' => '#166f99'),
+            array('category' => 'Unique Visitors', 'value' => 885694, 'color' => '#2185b4'),
+            array('category' => 'Downloads', 'value' => 788843, 'color' => '#319fd2'),
+            array('category' => 'Purchases', 'value' => 694137, 'color' => '#3eaee2'),
         ));
 
 $chart_dec = new \Kendo\Dataviz\UI\Chart('chart-dec');
 
-$chart_dec->title(array('position' => 'bottom', 'text' => 'October'))
+$chart_dec->title(array('position' => 'bottom', 'text' => 'December'))
       ->seriesDefaults($seriesDefault)
       ->addSeriesItem($series)
       ->legend(array('visible' => false))
