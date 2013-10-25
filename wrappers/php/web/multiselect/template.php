@@ -71,7 +71,7 @@ echo $multiselect->render();
         customers.wrapper.attr("id", "customers-wrapper");
     });
 </script>
-<style scoped>
+<style>
     .dropdown-header {
         overflow:hidden;
         font-size: 1.3em;

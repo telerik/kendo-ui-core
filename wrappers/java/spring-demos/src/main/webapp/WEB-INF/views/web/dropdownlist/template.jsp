@@ -40,7 +40,7 @@
             </kendo:dropDownList>
         </div>
 
-        <style scoped>
+        <style>
             .dropdown-header {
                 overflow:hidden;
                 font-size: 1.3em;
