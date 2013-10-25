@@ -702,9 +702,7 @@ kendo_module({
         },
         end: function (p) {
             var unit = this._c.adorner.stop(p);
-            this.toolService.diagram.undoRedoService.begin();
-            this.toolService.diagram.undoRedoService.add(unit);
-            this.toolService.diagram.undoRedoService.commit();
+            this.toolService.diagram.undoRedoService.add(unit, false);
         },
         getCursor: function () {
             return Cursors.move;
@@ -925,8 +923,6 @@ kendo_module({
                     this.hoveredItem._hover(true);
                 }
             }
-
-            //this.hoveredAdorner = undefined;
         },
         _removeHover: function () {
             if (this.hoveredItem) {
@@ -955,6 +951,7 @@ kendo_module({
                 if (hit.x !== 0 && hit.y !== 0) { // hit testing for resizers or rotator, otherwise if (0,0) than pass through.
                     return;
                 }
+                hit = undefined;
             }
             else {
                 this.hoveredAdorner = undefined;
@@ -1358,8 +1355,8 @@ kendo_module({
             that._refreshHandler = function () {
                 if (!that._internalChange) {
                     that.refreshBounds();
+                    that.refresh();
                 }
-                that.refresh();
             };
 
             that._rotatedHandler = function () {
@@ -1539,7 +1536,7 @@ kendo_module({
         move: function (handle, p) {
             var delta = p.minus(this._cp), dragging,
                 dtl = new Point(), dbr = new Point(), bounds,
-                center, shape, i, angle, newBounds, change;
+                center, shape, i, angle, newBounds, changed = 0;
             if (handle.y === -2 && handle.x === -1) {
                 center = this._innerBounds.center();
                 this._angle = Math.findAngle(center, this.diagram.transformPoint(p));
@@ -1549,6 +1546,7 @@ kendo_module({
                     shape.rotate(angle, center);
                     this._rotating = true;
                 }
+                this.refresh();
             } else {
                 if (handle.x === 0 && handle.y === 0) {
                     dbr = dtl = delta; // dragging
@@ -1579,13 +1577,14 @@ kendo_module({
                     if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) {
                         shape.bounds(newBounds);
                         shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
-                        change = true;
+                        changed += 1;
                     }
                 }
 
-                if (change) {
+                if (changed == i) {
                     newBounds = this._displaceBounds(this._innerBounds, dtl, dbr, dragging);
                     this.bounds(newBounds);
+                    this.refresh();
                 }
                 this._positions();
             }
