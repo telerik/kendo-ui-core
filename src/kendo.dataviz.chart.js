@@ -3199,6 +3199,7 @@ kendo_module({
                 low = point.low,
                 high = point.high,
                 isVertical = !chart.options.invertAxes,
+                options = point.options.errorBars,
                 errorBar,
                 stackedErrorRange;
 
@@ -3211,7 +3212,7 @@ kendo_module({
                 chart.updateRange({value: high}, categoryIx, series);
             }
 
-            errorBar = new CategoricalErrorBar(low, high, isVertical, chart.plotArea, series.errorBars);
+            errorBar = new CategoricalErrorBar(low, high, isVertical, chart, series, options);
             point.errorBars = [errorBar];
             point.append(errorBar);
         },
@@ -4003,12 +4004,13 @@ kendo_module({
     deepExtend(Target.fn, PointEventsMixin);
 
     var ErrorBarBase = ChartElement.extend({
-        init: function(low, high, isVertical, plotArea, options) {
+        init: function(low, high, isVertical, chart, series, options) {
             var errorBar = this;
             errorBar.low = low;
             errorBar.high = high;
             errorBar.isVertical = isVertical;
-            errorBar.plotArea = plotArea;
+            errorBar.chart = chart;
+            errorBar.series = series;
 
             ChartElement.fn.init.call(errorBar, options);
         },
@@ -4101,8 +4103,10 @@ kendo_module({
     var CategoricalErrorBar = ErrorBarBase.extend({
         getAxis: function() {
             var errorBar = this,
-                plotArea = errorBar.plotArea,
-                axis = plotArea.valueAxis;
+                chart = errorBar.chart,
+                series = errorBar.series,
+                axis = chart.seriesValueAxis(series);
+
             return axis;
         }
     });
@@ -4110,8 +4114,10 @@ kendo_module({
     var ScatterErrorBar = ErrorBarBase.extend({
         getAxis: function() {
             var errorBar = this,
-                plotArea = errorBar.plotArea,
-                axis = errorBar.isVertical ? plotArea.axisY : plotArea.axisX;
+                chart = errorBar.chart,
+                series = errorBar.series,
+                axes = chart.seriesAxes(series),
+                axis = errorBar.isVertical ? axes.y : axes.x;
             return axis;
         }
     });
@@ -5127,8 +5133,7 @@ kendo_module({
 
             if (isNumber(value)) {
                 if (isNumber(lowValue) && isNumber(highValue)) {
-                    chart.addPointErrorBar(lowValue,
-                        highValue, point, field, series, errorBars);
+                    errorRange = {low: lowValue, high: highValue};
                 }
 
                 if (errorBars && defined(errorBars[valueErrorField])) {
@@ -5137,22 +5142,32 @@ kendo_module({
                         new ErrorRangeCalculator(errorBars[valueErrorField], series, field);
 
                     errorRange = chart.seriesErrorRanges[field][seriesIx].getErrorRange(value);
-                    chart.addPointErrorBar(errorRange.low, errorRange.high, point, field, series, errorBars);
+                }
+
+                if (errorRange) {
+                    chart.addPointErrorBar(errorRange, point, field);
                 }
             }
         },
 
-        addPointErrorBar: function(low, high, point, field, series, options){
+        addPointErrorBar: function(errorRange, point, field){
             var chart = this,
-                errorBar,
+                low = errorRange.low,
+                high = errorRange.high,
+                series = point.series,
                 isVertical = field === Y,
-                item = {};
+                options = point.options.errorBars,
+                item = {},
+                errorBar;
+
             point[field + "Low"] = low;
             point[field + "High"] = high;
+
             point.errorBars = point.errorBars || [];
-            errorBar = new ScatterErrorBar(low, high, isVertical, chart.plotArea, options);
+            errorBar = new ScatterErrorBar(low, high, isVertical, chart, series, options);
             point.errorBars.push(errorBar);
             point.append(errorBar);
+
             item[field] = low;
             chart.updateRange(item, series);
             item[field] = high;
