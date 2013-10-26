@@ -2,16 +2,7 @@
     <div class="chart-wrapper">
         <div id="chart"></div>
     </div>
-    <div class="configuration-horizontal">
-        <div class="config-section">
-            <span class="configHead">Style</span>
-            <ul class="options">
-                <li>
-                    <input id="style" />
-                </li>
-            </ul>
-        </div>
-    </div>
+
     <script>
         function createChart() {
             $("#chart").kendoChart({
@@ -26,7 +17,7 @@
                     stack: true,
                     radarArea: {
                         line: {
-                            style: "normal"
+                            style: "smooth"
                         }
                     }
                 },
@@ -60,39 +51,7 @@
             });
         }
 
-        $("#style").kendoDropDownList({
-            dataSource: [{
-                text: "Normal",
-                value: "normal"
-            }, {
-                text: "Smooth",
-                value: "smooth"
-            }],
-            dataTextField: "text",
-            dataValueField: "value",
-            change: function () {
-                var chart = $("#chart").data("kendoChart");
-                chart.setOptions({
-                    seriesDefaults: {
-                        type: "radarArea",
-                        stack: true,
-                        radarArea: {
-                            line: {
-                                style: this.value()
-                            }
-                        }
-                    }
-                });
-            }
-        });
-
         $(document).ready(createChart);
         $(document).bind("kendo:skinChange", createChart);
     </script>
-
-    <style scoped>
-        .chart-wrapper, .chart-wrapper .k-chart {
-            height: 300px;
-        }
-    </style>
 </div>

@@ -720,7 +720,7 @@
             
             
              $("#area").kendoChart({
-                theme: "metro",               
+                          
                 title: {
                     text: "Gross domestic product growth /GDP annual %/"
                 },
@@ -733,17 +733,20 @@
                 series: [{
                     name: "India",
                     data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855],
+                    color: "red",
                     errorBars:{
                         value: 2
                     }
                 },{
                     name: "World",
+                    color: "black",
                     data: [1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727],
                     errorBars:{
                         value: "stddev"
                     }
                 },{
                     name: "Haiti",
+                    color: "blue",
                     data: [-0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590]
                 }],
                 valueAxis: {

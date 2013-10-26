@@ -1,0 +1,50 @@
+﻿<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                title: {
+                    text: "A digital signal"
+                },
+                legend: {
+                    visible: false
+                },
+                series: [{
+                    type: "line",
+                    data: [20, 1, 18, 3, 15, 5, 10, 6, 9, 6, 10, 5, 13, 3, 16, 1, 19, 1, 20, 2, 18, 5, 12, 7, 10, 8],
+                    style: "step",
+                    markers: {
+                        visible: false
+                    }
+                }],
+                categoryAxis: {
+                    title: {
+                        text: "time"
+                    },
+                    majorGridLines: {
+                        visible: false
+                    },
+                    majorTicks: {
+                        visible: false
+                    }
+                },
+                valueAxis: {
+                    max: 22,
+                    title: {
+                        text: "voltage"
+                    },
+                    majorGridLines: {
+                        visible: false
+                    },
+                    visible: false
+                }
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>
