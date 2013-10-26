@@ -66,13 +66,13 @@
                     "new": "true"
                 }, {
                     "text": "Step Area",
-                    "url": "area-charts/step.html",
+                    "url": "area-charts/step-area.html",
                     "title": "Example of using Kendo UI Area Chart with step line style",
                     "meta": "This demo shows how to configure step line style for the Kendo UI Area Chart",
                     "new": "true"
                 }, {
                     "text": "Smooth Area",
-                    "url": "area-charts/smooth.html",
+                    "url": "area-charts/smooth-area.html",
                     "title": "Example of using Kendo UI Area Chart with smooth line style",
                     "meta": "This demo shows how to configure smooth line style for the Kendo UI Area Chart",
                     "new": "true"
@@ -277,13 +277,13 @@
                     "new": "true"
                 }, {
                     "text": "Step line",
-                    "url": "line-charts/step.html",
+                    "url": "line-charts/step-line.html",
                     "title": "Example of using Kendo UI Line Chart with step line style",
                     "meta": "This demo shows how to configure step line style for the Kendo UI Line Chart",
                     "new": "true"
                 }, {
                     "text": "Smooth line",
-                    "url": "line-charts/smooth.html",
+                    "url": "line-charts/smooth-line.html",
                     "title": "Example of using Kendo UI Line Chart with smooth line style",
                     "meta": "This demo shows how to configure smooth line style for the Kendo UI Line Chart",
                     "new": "true"
@@ -443,7 +443,7 @@
                     "packages": ["!mvc", "!jsp", "!php"]
                 }, {
                     "text": "Smooth line",
-                    "url": "scatter-charts/smooth.html",
+                    "url": "scatter-charts/smooth-scatter-line.html",
                     "title": "Example of using smooth line style for the Kendo UI Scatter Line Chart",
                     "meta": "This demo shows how to configure the Kendo UI Scatter Line Chart to use smooth line style",
                     "new": "true"
@@ -492,7 +492,7 @@
                     "packages": ["!mvc", "!jsp", "!php"]
                 }, {
                     "text": "Smooth line",
-                    "url": "radar-charts/smooth.html",
+                    "url": "radar-charts/smooth-radar-line.html",
                     "title": "Example of using smooth line style for the Kendo UI Radar Charts",
                     "meta": "This demo shows how to configure the Kendo UI Radar Charts to use smooth line style",
                     "new": "true"
@@ -536,7 +536,7 @@
                     "packages": ["!mvc", "!jsp", "!php"]
                 }, {
                     "text": "Smooth line",
-                    "url": "polar-charts/smooth.html",
+                    "url": "polar-charts/smooth-polar-line.html",
                     "title": "Example of using smooth line style for Kendo UI Polar Charts",
                     "meta": "This demo shows how to configure the Kendo UI Polar Charts to use smooth line style",
                     "new": "true"
