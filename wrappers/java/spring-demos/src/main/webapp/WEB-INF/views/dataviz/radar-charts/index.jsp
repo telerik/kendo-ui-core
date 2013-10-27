@@ -16,11 +16,11 @@
              <kendo:chart-legend position="bottom" />
              <kendo:chart-series>
                 <kendo:chart-seriesItem
-                	type="radarLine"
+                	type="radarLine" style="smooth"
                 	data="<%= new double[] { 116, 165, 215, 75, 100, 49, 80, 116, 108, 90, 67, 76, 91, 255, 120 } %>"
                 	name="Market value as of 2007" />
                 <kendo:chart-seriesItem
-                	type="radarLine"
+                	type="radarLine" style="smooth"
                 	data="<%= new double[] { 64, 85, 97, 27, 16, 26, 35, 32, 26, 17, 10, 7, 19, 5 } %>"
                 	name="Market value as of 2009" />
              </kendo:chart-series>

@@ -7,7 +7,7 @@
         function createChart() {
             $("#chart").kendoChart({
                 title: {
-                    text: "Russian Federation Gross domestic product growth /GDP annual %/"
+                    text: "Gross domestic product growth and standard error"
                 },
                 legend: {
                     visible: false
@@ -15,8 +15,7 @@
                 seriesDefaults: {
                     type: "column"
                 },
-                series: [{
-                    name: "Russian Federation",
+                series: [{                    
                     data: [4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, -7.832, 4.3, 4.3],
                     errorBars: {
                         value: "stderr"

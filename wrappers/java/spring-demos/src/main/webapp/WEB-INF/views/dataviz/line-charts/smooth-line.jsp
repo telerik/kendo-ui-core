@@ -7,8 +7,9 @@
              <kendo:chart-title text="A digital signal" />
              <kendo:chart-legend visible="false" />
              <kendo:chart-series>
-             	<kendo:chart-seriesItem type="area" data="<%= new double[] { 20, 1, 18, 3, 15, 5, 10, 6, 9, 6, 10, 5, 13, 3, 16, 1, 19, 1, 20, 2, 18, 5, 12, 7, 10, 8 } %>">
-             		<kendo:chart-seriesItem-line style="step" />
+             	<kendo:chart-seriesItem type="line" style="smooth"
+             		data="<%= new double[] { 20, 1, 18, 3, 15, 5, 10, 6, 9, 6, 10, 5, 13, 3, 16, 1, 19, 1, 20, 2, 18, 5, 12, 7, 10, 8 } %>">
+             		<kendo:chart-seriesItem-markers visible="false" />
              	</kendo:chart-seriesItem>
              </kendo:chart-series>
              <kendo:chart-categoryAxis>
