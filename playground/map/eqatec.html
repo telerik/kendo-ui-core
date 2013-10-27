@@ -53,7 +53,7 @@
                 }
             } else if (shape.options) {
                 var color = scale(users).hex();
-                shape.options.set("fill.color", color);
+                shape.fill(color);
             }
         }
 
@@ -75,14 +75,16 @@
             theme: "default",
             layerDefaults: {
                 shape: {
-                    fill: {
-                        color: "red",
-                        opacity: 0.1
-                    },
-                    stroke: {
-                        width: 1,
-                        color: "black",
-                        opacity: 1
+                    style: {
+                        fill: {
+                            color: "red",
+                            opacity: 0.1
+                        },
+                        stroke: {
+                            width: 1,
+                            color: "black",
+                            opacity: 1
+                        }
                     }
                 },
                 tile: {
@@ -90,34 +92,20 @@
                     copyright: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
                 }
             },
-            layers: [/*{
-                    type: "tile",
-                    urlTemplate: "tiles/#= zoom #/#= x #/#= y #.png",
-                    copyright: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
-                }, */{
+            layers: [{
                 type: "shape",
-
-                url: "countries.geo.json",
-
                 dataSource: {
-                    // TODO Custom transport
                     type: "geojson",
                     transport: {
                         read: "countries.geo.json"
                     }
                 },
                 copyright: "&copy; FooBar",
-                fill: "red",//string | object
-                fill: {
-                    color: "red",
-                    opacity: 0.1
-                },
-                // stroke: string | object
-                stroke: {
-                    width: 1,
-                    color: "black",
-                    opacity: 1,
-                    dashType: "dot"
+                style: {
+                    fill: {
+                        color: "red",
+                        opacity: 0.1
+                    }
                 }
             }],
             markerDefaults: {
@@ -145,6 +133,7 @@
             markerCreated: $.noop,
             markerHover: $.noop,
             shapeHover: $.noop,
+            //TODO: mouseover / mouseout?
             shapeCreated: function(e) {
                 var users = e.dataItem.properties.users;
                 if (users) {

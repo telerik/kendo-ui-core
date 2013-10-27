@@ -4,6 +4,7 @@
 
         kendo = window.kendo,
         Observable = kendo.Observable,
+        DataSource = kendo.data.DataSource,
 
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
@@ -42,30 +43,21 @@
             map.bind("drag", proxy(this._drag, this));
             map.bind("dragEnd", proxy(this._dragEnd, this));
 
-            if (this.options.url) {
-                $.getJSON(this.options.url, proxy(this.load, this));
-            }
+            this._initDataSource();
         },
 
         events: [
             "shapeCreated"
         ],
 
-        load: function(data) {
-            this._data = data;
-            this.surface.clear();
-
-            var group = new Group();
-            this._loadItem(data, group);
-
-            if (group.children.length > 0) {
-                this.surface.draw(group);
-            }
+        options: {
+            autoBind: true,
+            dataSource: {}
         },
 
         reset: function() {
             if (this._data) {
-                this.load(this._data);
+                this._load(this._data);
             }
         },
 
@@ -73,41 +65,62 @@
             this.surface.draw(this._buildPolygon(coords, style));
         },
 
-        _loadItem: function(item, container) {
-            switch(item.type) {
-                case "FeatureCollection":
-                    for (var i = 0; i < item.features.length; i++) {
-                        this._loadItem(item.features[i], container);
-                    }
-                    break;
+        _initDataSource: function() {
+            var dsOptions = this.options.dataSource;
+            this._dataChange = proxy(this._dataChange, this);
+            this.dataSource = DataSource
+                .create(dsOptions)
+                .bind("change", this._dataChange);
 
-                case "Feature":
-                    this._loadGeometry(item.geometry, container, item);
-                    break;
-
-                default:
-                    this._loadGeometry(item, container, item);
-                    break;
+            if (dsOptions && this.options.autoBind) {
+                this.dataSource.fetch();
             }
         },
 
-        _loadGeometry: function(geometry, container, item) {
+        _dataChange: function(data) {
+            this._load(data.items);
+        },
+
+        _load: function(data) {
+            this._data = data;
+            this.surface.clear();
+
+            var container = new Group();
+
+            for (var i = 0; i < data.length; i++) {
+                var item = data[i];
+
+                switch(item.type) {
+                    case "Feature":
+                        this._loadGeometryTo(container, item.geometry, item);
+                        break;
+
+                    default:
+                        this._loadGeometryTo(container, item, item);
+                        break;
+                }
+            }
+
+            this.surface.draw(container);
+        },
+
+        _loadGeometryTo: function(container, geometry, dataItem) {
             var coords = geometry.coordinates;
 
             switch(geometry.type) {
                 case "MultiPolygon":
                     for (var i = 0; i < coords.length; i++) {
-                        this._loadPolygon(coords[i], container, item);
+                        this._loadPolygon(container, coords[i], dataItem);
                     }
                     break;
 
                 case "Polygon":
-                    this._loadPolygon(coords, container, item);
+                    this._loadPolygon(container, coords, dataItem);
                     break;
             }
         },
 
-        _loadPolygon: function(rings, container, item) {
+        _loadPolygon: function(container, rings, dataItem) {
             var viewport = this.map.viewport(),
                 visible = false;
 
@@ -115,20 +128,17 @@
                 visible = visible || viewport.containsAny(rings[i]);
             }
 
-            var shape = this._buildPolygon(rings, { visible: visible });
-            shape.rings = rings;
+            var shape = this._buildPolygon(rings);
+            shape.visible(visible);
 
-            this.trigger("shapeCreated", { shape: shape, dataItem: item });
-            // TODO: Cancellable?
-
-            container.append(shape);
+            var args = { shape: shape, dataItem: dataItem };
+            if (!this.trigger("shapeCreated", args)) {
+                container.append(shape)
+            }
         },
 
         _buildPolygon: function(rings, style) {
-            style = deepExtend({
-                stroke: { width: 1, color: "black" },
-                fill: { color: "red", opacity: 0.5 }
-            }, style);
+            var style = style || this.options.style;
 
             var path = rings.length > 1 ?
                 new d.MultiPath(style) : new d.Path(style);
@@ -177,6 +187,28 @@
     });
 
     // Exports ================================================================
+    deepExtend(kendo.data, {
+        schemas: {
+            geojson: {
+                type: "json",
+                data: function(data) {
+                    if (data.type === "FeatureCollection") {
+                        return data.features;
+                    }
+
+                    return data;
+                }
+            }
+        },
+        transports: {
+            geojson: {
+                read: {
+                    dataType: "json"
+                }
+            }
+        }
+    });
+
     deepExtend(dataviz, {
         map: {
             layers: {
