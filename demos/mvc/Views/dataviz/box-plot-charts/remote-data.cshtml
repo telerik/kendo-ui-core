@@ -1,0 +1,42 @@
+<div id="example" class="k-content">
+    <div class="chart-wrapper">
+        <div id="chart"></div>
+    </div>
+    <script>
+        function createChart() {
+            $("#chart").kendoChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "../../content/dataviz/js/monthly-temperatures.json",
+                            dataType: "json"
+                        }
+                    },
+                    sort: {
+                        field: "year",
+                        dir: "asc"
+                    }
+                },
+                title: {
+                    text: "Monthly Mean Temperatures"
+                },
+                legend: {
+                    visible: false
+                },
+                series: [{
+                    type: "boxPlot",
+                    lowerField: "lower",
+                    q1Field: "q1",
+                    medianField: "median",
+                    q3Field: "q3",
+                    upperField: "upper",
+                    outliersField: "outliers",
+                    categoryField: "year"
+                }]
+            });
+        }
+
+        $(document).ready(createChart);
+        $(document).bind("kendo:skinChange", createChart);
+    </script>
+</div>

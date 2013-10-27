@@ -593,6 +593,7 @@
     <None Include="content\dataviz\js\april-sales.json" />
     <None Include="content\dataviz\js\budget-report.json" />
     <None Include="content\dataviz\js\antenna-gain.json" />
+    <None Include="content\dataviz\js\monthly-temperatures.json" />
     <None Include="content\dataviz\js\wind-data.json" />
     <None Include="content\dataviz\js\job-stats.json" />
     <None Include="content\dataviz\js\crime-stats.json" />
@@ -794,21 +795,6 @@
     <Content Include="Views\web\progressbar\rtl.cshtml" />
     <Content Include="Views\web\progressbar\mvvm.cshtml" />
     <Content Include="Views\web\progressbar\chunk.cshtml" />
-    <Content Include="Views\dataviz\step-area-charts\date-axis.cshtml" />
-    <Content Include="Views\dataviz\step-area-charts\grouped-data.cshtml" />
-    <Content Include="Views\dataviz\step-area-charts\index.cshtml" />
-    <Content Include="Views\dataviz\step-area-charts\local-data.cshtml" />
-    <Content Include="Views\dataviz\step-area-charts\multiple-axes.cshtml" />
-    <Content Include="Views\dataviz\step-area-charts\remote-data.cshtml" />
-    <Content Include="Views\dataviz\step-area-charts\stacked-area.cshtml" />
-    <Content Include="Views\dataviz\step-line-charts\date-axis.cshtml" />
-    <Content Include="Views\dataviz\step-line-charts\grouped-data.cshtml" />
-    <Content Include="Views\dataviz\step-line-charts\index.cshtml" />
-    <Content Include="Views\dataviz\step-line-charts\local-data.cshtml" />
-    <Content Include="Views\dataviz\step-line-charts\multiple-axes.cshtml" />
-    <Content Include="Views\dataviz\step-line-charts\notes.cshtml" />
-    <Content Include="Views\dataviz\step-line-charts\remote-data.cshtml" />
-    <Content Include="Views\dataviz\step-line-charts\stacked-line.cshtml" />
     <Content Include="Views\dataviz\funnel-charts\index.cshtml" />
     <Content Include="Views\dataviz\funnel-charts\remote-data.cshtml" />
     <Content Include="Views\dataviz\funnel-charts\funnel-labels.cshtml" />
@@ -824,6 +810,10 @@
     </Content>
     <Content Include="Views\dataviz\area-charts\step-area.cshtml" />
     <Content Include="Views\dataviz\line-charts\step-line.cshtml" />
+    <Content Include="Views\dataviz\box-plot-charts\index.cshtml" />
+    <Content Include="Views\dataviz\box-plot-charts\local-data.cshtml" />
+    <Content Include="Views\dataviz\box-plot-charts\remote-data.cshtml" />
+    <Content Include="Views\dataviz\box-plot-charts\mvvm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

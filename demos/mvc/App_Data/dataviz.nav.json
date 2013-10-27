@@ -160,6 +160,31 @@
             ],
             "name": "bar-charts"
         }, {
+            "text": "Box Plot Charts",
+            "documentation": "dataviz/chart",
+            "spriteCssClass": "chartBoxPlotIcon",
+            "items": [{
+                    "text": "Basic usage",
+                    "url": "box-plot-charts/index.html",
+                    "title": "Kendo UI HTML5 Box Plot Charts Example"
+                }, {
+                    "text": "Binding to remote data",
+                    "url": "box-plot-charts/remote-data.html",
+                    "title": "Binding to remote data example | Kendo UI Box Plot Charts"
+                }, {
+                    "text": "Binding to local data",
+                    "url": "box-plot-charts/local-data.html",
+                    "title": "Kendo UI jQuery Box Plot Charts binding to local data demo"
+                }, {
+                    "text": "MVVM",
+                    "url": "box-plot-charts/mvvm.html",
+                    "title": "MVVM support in Kendo UI Chart",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                }
+            ],
+            "name": "pie-charts"
+        }, {
             "text": "Bubble Charts",
             "name": "bubble-charts",
             "documentation": "dataviz/chart",
