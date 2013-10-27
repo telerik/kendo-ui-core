@@ -4,6 +4,7 @@
     "recipe[apt]",
     "recipe[zsh]",
     "recipe[git]",
+    "recipe[ruby::brightbox]",
     "recipe[ruby]",
     "recipe[nodejs]",
     "recipe[java]",
