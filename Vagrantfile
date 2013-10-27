@@ -88,7 +88,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.cookbooks_path = "ci/cookbooks"
     chef.roles_path = "ci"
     chef.add_role "workstation"
-    chef.add_recipe "vagrant"
 
     user = ENV['USER']
 
