@@ -6,17 +6,17 @@
     <c:url value="/web/multiselect/template/read" var="readUrl" />
 
     <%
-    String headertemplate = "<div class=\"k-widget k-header dropdown-header\">' +
+    String headerTemplate = "<div class=\"k-widget k-header dropdown-header\">" +
                             "<span class=\"first\">Photo</span>" +
                             "<span class=\"last\">Contact info</span>" +
                             "</div>";
 
     String itemTemplate = "<img src=\"../../resources/web/Customers/#:data.customerId#.jpg\"  alt=\"#:data.customerId#\" />" +
-                          "<h3>#: data.ContactName #</h3>" +
-                          "<p>#: data.CompanyName #</p>";
+                          "<h3>#: data.contactName #</h3>" +
+                          "<p>#: data.companyName #</p>";
 
     String tagTemplate = "<img class=\"tag-image\" src=\"../../resources/web/Customers/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" />" +
-                          "#: data.ContactName #";
+                          "#: data.contactName #";
     %>
 
     <div class="demo-section">

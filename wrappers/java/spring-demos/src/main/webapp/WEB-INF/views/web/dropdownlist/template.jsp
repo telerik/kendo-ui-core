@@ -7,16 +7,14 @@
         <c:url value="/web/dropdownlist/template/read" var="readUrl" />
 
         <%
-        String headertemplate = "<div class=\"k-widget k-header dropdown-header\">' +
+        String headerTemplate = "<div class=\"k-widget k-header dropdown-header\">" +
             "<span class=\"first\">Photo</span>" +
             "<span class=\"last\">Contact info</span>" +
             "</div>";
 
         String template = "<img src=\"../../resources/web/Customers/#:data.customerId#.jpg\"  alt=\"#:data.customerId#\" />" +
-                "<dl>" +
-                "<dt>Contact:</dt><dd>#:data.contactName#</dd>" +
-                "<dt>Company:</dt><dd>#:data.companyName#</dd>" +
-            "</dl>";
+                "<h3>${ data.contactName }</h3>" +
+                "<p>${ data.companyName }</p>";
         %>
 
         <div class="demo-section">
@@ -71,13 +69,13 @@
                 font-size: 1.2em;
                 margin-bottom: 10px;
             }
-            #titles-list {
+            #customers-list {
                 padding-bottom: 30px;
             }
-            #titles-list .k-item {
+            #customers-list .k-item {
                 overflow: hidden; /* clear floated images */
             }
-            #titles-list img {
+            #customers-list img {
                 -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
                 -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
                 box-shadow: 0 0 2px rgba(0,0,0,.4);
@@ -86,11 +84,11 @@
                 height: 70px;
                 margin: 5px 20px 5px 0;
             }
-            #titles-list h3 {
+            #customers-list h3 {
                 margin: 20px 0 5px 0;
                 font-size: 1.6em;
             }
-            #titles-list p {
+            #customers-list p {
                 margin: 0;
             }
         </style>

@@ -7,7 +7,7 @@
         <c:url value="/web/combobox/template/read" var="readUrl" />
 
         <%
-        String headertemplate = "<div class=\"k-widget k-header dropdown-header\">' +
+        String headerTemplate = "<div class=\"k-widget k-header dropdown-header\">" +
             "<span class=\"first\">Photo</span>" +
             "<span class=\"last\">Contact info</span>" +
             "</div>";
