@@ -10389,7 +10389,7 @@ kendo_module({
                 srcValues = sa._bindField(data.values, field.canonicalName);
                 value = field.transform(srcValues, series, data.dataItems, group);
 
-                if (value !== null && typeof value === OBJECT) {
+                if (value !== null && typeof value === OBJECT && !defined(value.length)) {
                     result = value;
                     break;
                 } else {
