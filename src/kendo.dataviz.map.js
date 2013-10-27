@@ -56,6 +56,7 @@ kendo_module({
             map.crs = new EPSG3857();
 
             map.layers = new ObservableArray([]);
+            map.crs = new EPSG3857();
             map._renderLayers();
 
             var scroller = map.scroller = new kendo.mobile.ui.Scroller(map.scrollWrap);
@@ -435,6 +436,25 @@ kendo_module({
         '<img class="k-tile" unselectable="on" src="#= url #" ' +
         'style="left: #= left #px; top: #= top #px;"></img>');
 
+    var TilePool = Class.extend({
+        init: function(crs, options) {
+            this.crs = crs;
+            this._initOptions(options);
+        },
+
+        options: {},
+
+        get: function(point, scale) {
+            var pool = this,
+                point = pool.crs.toPoint(point, scale);
+
+            return new Point(
+                math.floor(point.x / pool.options.tileSize),
+                math.floor(point.y / pool.options.tileSize)
+            );
+        }
+    });
+
     var TileLayer = Class.extend({
         init: function(map, options) {
             var layer = this;
@@ -447,12 +467,14 @@ kendo_module({
             );
 
             map.bind("reset", proxy(layer.reset, layer));
+            layer.pool = new TilePool(new EPSG3857(), {
+                tileSize: layer.options.tileSize
+            });
         },
 
         options: {
-            url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
-            tileSize: 256,
-            zoom: 0
+            zoom: 0,
+            tileSize: 256
         },
 
         destroy: function() {
@@ -464,26 +486,62 @@ kendo_module({
             this._render();
         },
 
+        //metersToPixels: function(mx, my) {
+        //    var center = this.crs.c,
+        //        res = center / this.map.scale(),
+        //        px = (mx + center / 2) / res,
+        //        py = (my + center / 2) / res;
+
+        //    return { px: px, py: py };
+        //},
+
+        //metersToTile: function(mx, my) {
+        //    var point = this.metersToPixels(mx, my);
+
+        //    return this.pixelsToTile(point.px, point.py);
+        //},
+
+        //pixelsToTile: function(px, py) {
+        //    var minSize = this.map.options.minSize,
+        //        tx = math.floor(math.ceil(px / minSize) - 1),
+        //        ty = math.floor(math.ceil(py / minSize) - 1);
+
+        //    return { x: tx, y: ty };
+        //},
+
         _render: function() {
-            var options = this.options,
+            var tile = this,
+                options = this.options,
                 tileSize = options.tileSize,
                 zoom = options.zoom,
                 size = pow(2, zoom),
-                urlTemplate = template(options.url),
+                urlTemplate = template(options.urlTemplate),
+                map = tile.map,
                 output = "";
 
-            for (var x = 0; x < size; x++) {
-                for (var y = 0; y < size; y++) {
+            var nw = map.viewport().nw;
+            var point = tile.pool.get(nw, map.scale());
+            var tileX = point.x;
+            var tileY = point.y;
+            var a = 0;
+            var b = 0;
+
+            for (var x = tileX; x < tileX + 4; x++) {
+                for (var y = tileY; y < tileY + 4; y++) {
                     output += TILE_TEMPLATE({
                         url: urlTemplate({
                             zoom: zoom, x: x, y: y
                         }),
                         tileSize: tileSize,
-                        left: x * tileSize,
-                        top: y * tileSize
+                        left: a * tileSize,
+                        top: b * tileSize
                     });
+                    b++;
                 }
+                b = 0;
+                a++;
             }
+            console.log(output, tileX, tileY);
 
             this.element[0].innerHTML = output;
         }

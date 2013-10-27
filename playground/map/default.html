@@ -10,9 +10,12 @@
         <script src="../../src/kendo.mobile.scroller.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
-        <script src="../../src/kendo.dataviz.vml.js"></script>
-        <script src="../../src/kendo.dataviz.svg.js"></script>
-        <script src="../../src/kendo.dataviz.canvas.js"></script>
+        <script src="../../src/dataviz/util.js"></script>
+        <script src="../../src/dataviz/geometry.js"></script>
+        <script src="../../src/dataviz/drawing/core.js"></script>
+        <script src="../../src/dataviz/drawing/shapes.js"></script>
+        <script src="../../src/dataviz/drawing/svg.js"></script>
+        <script src="../../src/dataviz/drawing/canvas.js"></script>
         <script src="../../src/kendo.dataviz.map.js"></script>
         <script src="../../src/map/shape-layer.js"></script>
         <script src="proj4.js"></script>
@@ -42,16 +45,12 @@
             $("#map").kendoMap({
                 view: {
                     center: [42.4482453, 27.4157791],
-                    zoom: 4
+                    zoom: 3
                 },
                 layers: [{
                     type: "tile",
-                    url: "tiles/#= zoom #/#= x #/#= y #.png",
+                    urlTemplate: "http://tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                     copyright: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
-                }, {
-                    type: "shape",
-                    url: "countries.geo.json",
-                    copyright: "&copy; FooBar"
                 }],
                 markers: [{
                     position: [51.5, -0.09],
@@ -59,9 +58,6 @@
                     open: true // ?
                 }]
             });
-
-            var map = $("#map").data("kendoMap");
-            console.log(map.viewport());
 
             $(document).on("mousewheel", function(e) {
                 var delta = kendo.dataviz.mwDelta(e);
