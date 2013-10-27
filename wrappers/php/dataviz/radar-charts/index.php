@@ -28,7 +28,7 @@ $tooltip->visible(true)
 $chart = new \Kendo\Dataviz\UI\Chart('chart');
 $chart->title(array('text' => 'Market Value of Major Banks'))
       ->legend(array('position' => 'bottom'))
-      ->seriesDefaults(array('type' => 'radarLine'))
+      ->seriesDefaults(array('type' => 'radarLine', 'style' => 'smooth'))
       ->addSeriesItem($mv2007, $mv2009)
       ->addCategoryAxisItem($categoryAxis)
       ->addValueAxisItem($valueAxis)

@@ -14,7 +14,7 @@ $categoryAxis->title(array('text' => 'time'))
              ->majorTicks(array('visible' => false));
 
 $valueAxis = new \Kendo\Dataviz\UI\ChartValueAxisItem();
-$valueAxis->max(20)
+$valueAxis->max(22)
 		  ->title(array('text' => 'voltage'))
           ->majorGridLines(array('visible' => false))
           ->visible(false);

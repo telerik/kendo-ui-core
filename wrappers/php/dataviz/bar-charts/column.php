@@ -46,9 +46,16 @@ $chart->title(array('text' => 'Gross domestic product growth /GDP annual %/'))
       ->addCategoryAxisItem($cateogrySeriesAxis)
       ->addCategoryAxisItem($categoryLabelsAxis)
       ->tooltip($tooltip)
+      ->chartArea(array('background' => 'transparent'))
       ->seriesDefaults(array('type' => 'column'));
 
 echo $chart->render();
 ?>
+
+<style type="text/css">
+    #chart {
+        background: center no-repeat url('../../content/shared/styles/world-map.png');
+    }
+</style>
 
 <?php require_once '../../include/footer.php'; ?>

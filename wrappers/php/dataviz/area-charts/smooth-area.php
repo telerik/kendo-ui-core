@@ -4,10 +4,9 @@ require_once '../../lib/Kendo/Autoload.php';
 require_once '../../include/header.php';
 
 $signal = new \Kendo\Dataviz\UI\ChartSeriesItem();
-$signal->type('line')
+$signal->type('area')
        ->data(array(20, 1, 18, 3, 15, 5, 10, 6, 9, 6, 10, 5, 13, 3, 16, 1, 19, 1, 20, 2, 18, 5, 12, 7, 10, 8))
-	   ->markers(array('visible' => false))
-	   ->style('step');
+	   ->line(array('style' => 'smooth'));
 
 $categoryAxis = new \Kendo\Dataviz\UI\ChartCategoryAxisItem();
 $categoryAxis->title(array('text' => 'time'))

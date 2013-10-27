@@ -31,8 +31,15 @@ $chart->addSeriesItem($total, $unique)
       ->legend(array('visible' => false))
       ->seriesDefaults(array('type' => 'bar'))
       ->title(array('text' => 'Site Visitors Stats /thousands/'))
+      ->chartArea(array('background' => 'transparent'))
       ->tooltip($tooltip);
 
 echo $chart->render();
 ?>
+
+<style type="text/css">
+    #chart {
+        background: center no-repeat url('../../content/shared/styles/world-map.png');
+    }
+</style>
 <?php require_once '../../include/footer.php'; ?>

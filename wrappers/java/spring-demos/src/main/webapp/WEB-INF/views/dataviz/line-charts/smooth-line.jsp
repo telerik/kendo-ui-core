@@ -20,7 +20,7 @@
                 </kendo:chart-categoryAxisItem>
              </kendo:chart-categoryAxis>
              <kendo:chart-valueAxis>
-                <kendo:chart-valueAxisItem visible="false">
+                <kendo:chart-valueAxisItem visible="false" max="22">
                     <kendo:chart-valueAxisItem-title text="voltage" />
                     <kendo:chart-valueAxisItem-majorGridLines visible="false"/>
                 </kendo:chart-valueAxisItem>
