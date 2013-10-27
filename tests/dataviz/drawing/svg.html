@@ -387,6 +387,10 @@
         ok(pathNode.render().indexOf("cursor") === -1);
     });
 
+    test("does not render style if not set", function() {
+        ok(pathNode.render().indexOf("style") === -1);
+    });
+
     test("renders visibility attribute", function() {
         path.visible(false);
         ok(pathNode.render().indexOf("visibility='hidden'") !== -1);

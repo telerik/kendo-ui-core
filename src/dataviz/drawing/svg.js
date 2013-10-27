@@ -26,7 +26,7 @@
         TRANSPARENT = "transparent",
         UNDEFINED = "undefined";
 
-    // SVG rendering surface =============================================================
+    // SVG rendering surface ==================================================
     var Surface = Observable.extend({
         init: function(container, options) {
             Observable.fn.init.call(this);
@@ -312,8 +312,6 @@
             if (cursor) {
                 return "cursor:" + cursor + ";";
             }
-
-            return "";
         },
 
         renderVisibility: function() {
@@ -325,7 +323,7 @@
         },
 
         template: renderTemplate(
-            "<path style='#= d.renderCursor() #' " +
+            "<path #= kendo.dataviz.util.renderAttr('style', d.renderCursor()) # " +
             "#= d.renderVisibility() # " +
             "#= kendo.dataviz.util.renderAttr('d', d.renderSegments()) # " +
             "#= d.renderStroke() # " +
