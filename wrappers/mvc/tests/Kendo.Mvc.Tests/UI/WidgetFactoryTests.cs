@@ -100,7 +100,9 @@ namespace Kendo.Mvc.UI.Tests
             _factory.RangeSlider<float>()
                 .Deferred().Name("foo").Render();
 
-            _factory.DeferredScripts().ToHtmlString().ShouldContain("<script>");
+            var output = _factory.DeferredScripts().ToHtmlString();
+            output.ShouldContain("<script>");
+            output.ShouldContain(".kendoRangeSlider(");
         }
 
         [Fact]
@@ -110,6 +112,40 @@ namespace Kendo.Mvc.UI.Tests
                 .Name("foo").Render();
 
             _factory.DeferredScripts().ToHtmlString().ShouldNotContain("<script>");
+        }
+
+        [Fact]
+        public void DeferredScriptsFor_renders_scripts_for_widget()
+        {
+            _factory.RangeSlider<float>()
+                .Deferred().Name("foo").Render();
+
+            var output = _factory.DeferredScriptsFor("foo").ToHtmlString();
+            output.ShouldContain("<script>");
+            output.ShouldContain(".kendoRangeSlider(");
+        }
+
+        [Fact]
+        public void DeferredScriptsFor_renders_scripts_only_for_the_specified_widget()
+        {
+            _factory.RangeSlider<float>()
+                .Deferred().Name("foo").Render();
+
+            _factory.Slider().Name("bar").Deferred().Render();
+
+            var output = _factory.DeferredScriptsFor("foo").ToHtmlString();
+            output.ShouldNotContain("bar");
+        }
+
+        [Fact]
+        public void DeferredScriptsFor_does_not_render_script_tags_if_told_so()
+        {
+            _factory.RangeSlider<float>()
+                .Deferred().Name("foo").Render();
+
+            var output = _factory.DeferredScriptsFor("foo", false).ToHtmlString();
+
+            output.ShouldNotContain("<script>");
         }
     }
 }

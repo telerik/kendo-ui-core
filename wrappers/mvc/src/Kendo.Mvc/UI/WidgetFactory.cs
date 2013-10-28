@@ -12,6 +12,8 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.UI.Html;
     using System.Collections;
+    using System.Text;
+    using System.Collections.Specialized;
 
     /// <summary>
     /// Creates the fluent API builders of the Kendo UI widgets
@@ -1142,11 +1144,59 @@ namespace Kendo.Mvc.UI.Fluent
         public virtual MvcHtmlString DeferredScripts(bool renderScriptTags = true)
         {
             var items = ViewContext.HttpContext.Items;
+
             if (items.Contains(WidgetBase.DeferredScriptsKey))
             {
-                var format = renderScriptTags ? "<script>{0}</script>" : "{0}";
-                return new MvcHtmlString(string.Format(format, items[WidgetBase.DeferredScriptsKey]));
+                var scripts = (OrderedDictionary)items[WidgetBase.DeferredScriptsKey];
+
+                return DeferredScripts(scripts.Values.Cast<string>(), renderScriptTags);
             }
+
+            return MvcHtmlString.Empty;
+        }
+
+        private MvcHtmlString DeferredScripts(IEnumerable<string> scripts, bool renderScriptTags)
+        {
+            var result = new StringBuilder();
+
+            if (renderScriptTags)
+            {
+                result.Append("<script>");
+            }
+
+            foreach (var script in scripts)
+            {
+                result.Append(script);
+            }
+
+            if (renderScriptTags)
+            {
+                result.Append("</script>");
+            }
+
+            return new MvcHtmlString(result.ToString());
+        }
+
+        /// <summary>
+        /// Returns the initialization scripts for the specified widget.
+        /// </summary>
+        /// <param name="name">The name of the widget.</param>
+        /// <param name="renderScriptTags">Determines if the script should be rendered within a script tag</param>
+        /// <returns></returns>
+        public virtual MvcHtmlString DeferredScriptsFor(string name, bool renderScriptTags = true)
+        {
+            var items = ViewContext.HttpContext.Items;
+
+            if (items.Contains(WidgetBase.DeferredScriptsKey))
+            {
+                var scripts = (OrderedDictionary)items[WidgetBase.DeferredScriptsKey];
+
+                if (scripts.Contains(name))
+                {
+                    return DeferredScripts(new [] { (string)scripts[name] }, renderScriptTags);
+                }
+            }
+
             return MvcHtmlString.Empty;
         }
 
@@ -1391,6 +1441,7 @@ namespace Kendo.Mvc.UI.Fluent
             return new MobileViewBuilder(new MobileView(ViewContext, Initializer, UrlGenerator));
         }
         //<< MobileComponents
+
     }
 
     public class WidgetFactory<TModel> : WidgetFactory

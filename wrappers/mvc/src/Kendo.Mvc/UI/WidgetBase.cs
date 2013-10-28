@@ -13,6 +13,7 @@ namespace Kendo.Mvc.UI
     using System.Web.Util;
     using System.Web;
     using System.Text.RegularExpressions;
+    using System.Collections.Specialized;
 
     public abstract class WidgetBase : IWidget, IScriptableComponent
     {
@@ -220,12 +221,19 @@ namespace Kendo.Mvc.UI
         private void AppendScriptToContext(string script)
         {
             var items = ViewContext.HttpContext.Items;
-            var current = "";
+
+            var scripts = new OrderedDictionary();
+
             if (items.Contains(DeferredScriptsKey))
             {
-                current = (string)items[DeferredScriptsKey];
+                scripts = (OrderedDictionary)items[DeferredScriptsKey];
             }
-            items[DeferredScriptsKey] = current + script;
+            else
+            {
+                items[DeferredScriptsKey] = scripts;
+            }
+
+            scripts[Name] = script;
         }
 
         public MvcHtmlString ToClientTemplate()
