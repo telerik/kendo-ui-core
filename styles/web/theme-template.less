@@ -347,6 +347,7 @@ textarea.k-textbox:hover,
 .k-pager-wrap,
 .k-textbox,
 .k-button,
+.k-progressbar,
 .k-draghandle,
 .k-autocomplete,
 .k-state-highlight,
@@ -874,6 +875,19 @@ div.k-imagebrowser-dropzone em
 .k-slider .k-draghandle
 {
     color: @disabled-text-color;
+}
+
+/* Progressbar */
+
+.k-progressbar-indeterminate
+{
+    background: url('@{image-folder}/indeterminate.gif');
+}
+
+.k-progressbar-indeterminate .k-progress-status-wrap,
+.k-progressbar-indeterminate .k-state-selected
+{
+    display: none;
 }
 
 /* Slider */

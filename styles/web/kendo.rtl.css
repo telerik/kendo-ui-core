@@ -334,6 +334,14 @@
     margin-left: 5px;
 }
 
+/* Progressbar */
+
+.k-rtl .k-progressbar > .k-reset
+{
+    left: auto;
+    right: -1px;
+}
+
 /* Scheduler */
 
 .k-rtl .k-scheduler-toolbar > ul
