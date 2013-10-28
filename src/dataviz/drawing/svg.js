@@ -48,11 +48,11 @@
             "click"
         ],
 
-        viewport: function(rect) {
+        translate: function(offset) {
             var viewBox = kendo.format(
                 "{0} {1} {2} {3}",
-                round(rect.p0.x, 4), round(rect.p0.y, 4),
-                rect.width(), rect.height());
+                offset.x, offset.y,
+                this._width, this._height);
 
             this.element.setAttribute("viewBox", viewBox);
         },
@@ -89,7 +89,12 @@
 
             this._root.attachTo(this.element);
 
-            $(this.element).on("click", $.proxy(this._click, this));
+            var element = $(this.element);
+            this._click = $.proxy(this._click, this);
+            element.on("click", this._click);
+
+            this._width = element.width();
+            this._height = element.height();
         },
 
         _click: function(e) {

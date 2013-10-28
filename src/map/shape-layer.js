@@ -43,7 +43,6 @@
             this.movable = new kendo.ui.Movable(this.element);
 
             map.bind("reset", proxy(this.reset, this));
-            map.bind("drag", proxy(this._drag, this));
             map.bind("dragEnd", proxy(this._dragEnd, this));
 
             this._initDataSource();
@@ -86,25 +85,24 @@
 
         _load: function(data) {
             this._data = data;
+            this.root = new Group();
             this.surface.clear();
-
-            var container = new Group();
 
             for (var i = 0; i < data.length; i++) {
                 var item = data[i];
 
                 switch(item.type) {
                     case "Feature":
-                        this._loadGeometryTo(container, item.geometry, item);
+                        this._loadGeometryTo(this.root, item.geometry, item);
                         break;
 
                     default:
-                        this._loadGeometryTo(container, item, item);
+                        this._loadGeometryTo(this.root, item, item);
                         break;
                 }
             }
 
-            this.surface.draw(container);
+            this.surface.draw(this.root);
         },
 
         _loadGeometryTo: function(container, geometry, dataItem) {
@@ -124,25 +122,7 @@
         },
 
         _loadPolygon: function(container, rings, dataItem) {
-            var viewport = this.map.viewport(),
-                visible = false;
-
-            if (rings.length > 0) {
-                var r = rings[0];
-                var extent = new Extent(
-                    Location.fromLngLat(r[0]),
-                    Location.fromLngLat(r[1])
-                );
-
-                for (var i = 0; i < rings.length; i++) {
-                    extent.includeAll(rings[i]);
-                }
-
-                visible = viewport.overlaps(extent);
-            }
-
             var shape = this._buildPolygon(rings);
-            shape.visible(visible);
 
             var args = { shape: shape, dataItem: dataItem };
             if (!this.trigger("shapeCreated", args)) {
@@ -173,18 +153,12 @@
             return path;
         },
 
-        _drag: function() {
-            var map = this.map;
-            var viewport = map.viewport();
-            var nw = map.toScreenPoint(viewport.nw);
-            var se = map.toScreenPoint(viewport.se);
-
-            this.surface.viewport(new g.Rect(nw, se));
-            this.movable.moveTo(nw);
-        },
-
         _dragEnd: function() {
-            //this.reset();
+            var map = this.map;
+            var nw = map.toScreenPoint(map.viewport().nw);
+
+            this.surface.translate(nw);
+            this.movable.moveTo(nw);
         }
     });
 
