@@ -221,6 +221,14 @@ public class ViewTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("selectedDateFormat", value);
     }
 
+    public boolean getShowWorkHours() {
+        return (boolean)getProperty("showWorkHours");
+    }
+
+    public void setShowWorkHours(boolean value) {
+        setProperty("showWorkHours", value);
+    }
+
     public java.lang.String getSlotTemplate() {
         return (java.lang.String)getProperty("slotTemplate");
     }

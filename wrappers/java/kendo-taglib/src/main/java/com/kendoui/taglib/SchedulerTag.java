@@ -267,6 +267,14 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("selectable", value);
     }
 
+    public boolean getShowWorkHours() {
+        return (boolean)getProperty("showWorkHours");
+    }
+
+    public void setShowWorkHours(boolean value) {
+        setProperty("showWorkHours", value);
+    }
+
     public boolean getSnap() {
         return (boolean)getProperty("snap");
     }

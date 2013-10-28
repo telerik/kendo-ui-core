@@ -11299,7 +11299,7 @@ Custom tools and tools that require configuration are defined as objects.The ava
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>When specifying a tool as an object, a tool name is required.</description>
+            <description>When specifying a tool as an object, a tool name is required. Please note that "undo" and "redo" are reserved tool names.</description>
             <name>name</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
@@ -15438,6 +15438,12 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>If set to true the view will be initially shown in business hours mode. By default view is displyed in full day mode.</description>
+            <name>showWorkHours</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>If set to true the scheduler will snap events to the nearest slot during dragging (resizing or moving). Set it to false to allow free moving and resizing of events.</description>
             <name>snap</name>
             <rtexprvalue>true</rtexprvalue>
@@ -16374,6 +16380,12 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
             <name>selectedDateFormat</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>If set to true the view will be initially shown in business hours mode. By default view is displyed in full day mode.</description>
+            <name>showWorkHours</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
         <attribute>
             <description>The template used to render the time slot cells.The fields which can be used in the template are:</description>
