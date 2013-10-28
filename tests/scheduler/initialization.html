@@ -511,7 +511,7 @@
 
                 scheduler.view().trigger("navigate", { view: "day", isWorkDay: true });
 
-                ok(scheduler.view().options.workDay);
+                ok(scheduler.view().options.showWorkHours);
             });
 
             test("navigate event is rasied when view is switch to business hours", 3, function() {

@@ -529,7 +529,7 @@ kendo_module({
             name: "MultiDayView",
             selectedDateFormat: "{0:D}",
             allDaySlot: true,
-            workDay: false,
+            showWorkHours: false,
             title: "",
             startTime: kendo.date.today(),
             endTime: kendo.date.today(),
@@ -739,7 +739,7 @@ kendo_module({
                     html += '<ul class="k-reset k-header k-toolbar">';
 
                     html += '<li class="k-state-default k-scheduler-fullday"><a href="#" class="k-link"><span class="k-icon k-i-clock"></span>';
-                    html += (options.workDay ? options.messages.showFullDay : options.messages.showWorkDay) + '</a></li>';
+                    html += (options.showWorkHours ? options.messages.showFullDay : options.messages.showWorkDay) + '</a></li>';
 
                     html += '</ul>';
 
@@ -755,7 +755,7 @@ kendo_module({
 
                 this.footer.on("click" + NS, ".k-scheduler-fullday", function(e) {
                     e.preventDefault();
-                    that.trigger("navigate", { view: that.name || options.name, date: that.startDate(), isWorkDay: !options.workDay });
+                    that.trigger("navigate", { view: that.name || options.name, date: that.startDate(), isWorkDay: !options.showWorkHours });
                 });
             }
         },
@@ -938,12 +938,12 @@ kendo_module({
 
         startTime: function() {
             var options = this.options;
-            return options.workDay ? options.workDayStart : options.startTime;
+            return options.showWorkHours ? options.workDayStart : options.startTime;
         },
 
         endTime: function() {
             var options = this.options;
-            return options.workDay ? options.workDayEnd : options.endTime;
+            return options.showWorkHours ? options.workDayEnd : options.endTime;
         },
 
         startDate: function() {

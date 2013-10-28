@@ -2718,7 +2718,7 @@ kendo_module({
                 }
 
                 if (type) {
-                    view = new type(this.wrapper, trimOptions(extend(true, {}, this.options, isSettings ? view : {}, { resources: this.resources, date: this.date(), workDay: this._workDayMode })));
+                    view = new type(this.wrapper, trimOptions(extend(true, {}, this.options, isSettings ? view : {}, { resources: this.resources, date: this.date(), showWorkHours: this._workDayMode })));
                 } else {
                     throw new Error("There is no such view");
                 }

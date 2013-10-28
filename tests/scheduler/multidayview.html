@@ -1753,7 +1753,7 @@
             test("workDayStart is used when rendered in work mode", function() {
                 var view = setup({
                     workDayStart: new Date("2013/6/6 10:00"),
-                    workDay: true,
+                    showWorkHours: true,
                     dates: [new Date("2013/6/6")]
                 });
 
@@ -1763,7 +1763,7 @@
             test("workDayEnd is used when rendered in work mode", function() {
                 var view = setup({
                     workDayEnd: new Date("2013/6/6 14:00"),
-                    workDay: true,
+                    showWorkHours: true,
                     dates: [new Date("2013/6/6")]
                 });
 
@@ -1772,7 +1772,7 @@
 
             test("default workDayEnd and workDayStart are used when rendered in work mode", function() {
                 var view = setup({
-                    workDay: true,
+                    showWorkHours: true,
                     dates: [new Date("2013/6/6")]
                 });
 
@@ -1806,7 +1806,7 @@
                     dates: [new Date("2013/6/6")],
                     workWeekStart: 4,
                     workWeekEnd: 4,
-                    workDay: true
+                    showWorkHours: true
                 });
 
                 ok(!view.content.find("td.k-nonwork-hour").length);
