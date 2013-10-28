@@ -4,24 +4,24 @@
     </div>
     <script>
         var data = [
-            { year: 1990, lower: 1.3, q1: 2.15, median: 2.95, q3: 3.725, upper: 4.7, median: 2.9, outliers: [1, 9] },
-            { year: 1991, lower: 2, q1: 3.825, median: 5.45, q3: 6.425, upper: 8.2, median: 5.2, outliers: [1.5, 2, 8.9] },
-            { year: 1992, lower: 3.8, q1: 4.725, median: 5.55, q3: 5.75, upper: 8.7, median: 5.5 },
-            { year: 1993, lower: 3, q1: 4.375, median: 4.95, q3: 5.85, upper: 8, median: 5.2, outliers: [3, 9.5] },
-            { year: 1994, lower: 2.5, q1: 3.925, median: 4.15, q3: 4.45, upper: 5.1, median: 4.1 },
-            { year: 1995, lower: 2.4, q1: 3.725, median: 4.95, q3: 5.85, upper: 7.7, median: 4.9, outliers: [2.1, 8.3, 9.8] },
-            { year: 1996, lower: 1.7, q1: 2.3, median: 3.9, q3: 5, upper: 5.5, median: 3.7, outliers: [1.1, 9.1] },
-            { year: 1997, lower: 2.2, q1: 2.5, median: 3.1, q3: 3.975, upper: 4.3, median: 3.2, outliers: [1.6, 1.8, 9.8] },
-            { year: 1998, lower: 1.9, q1: 2.7, median: 3.35, q3: 4.575, upper: 5.7, median: 3.6, outliers: [1.1, 8.3] },
-            { year: 1999, lower: 1.7, q1: 2.65, median: 3.3, q3: 4.05, upper: 5, median: 3.4 },
-            { year: 2000, lower: 1.4, q1: 2.25, median: 3.3, q3: 4.65, upper: 5.7, median: 3.4 },
-            { year: 2001, lower: 1.9, q1: 2.85, median: 4, q3: 4.45, upper: 6.1, median: 3.9, outliers: [1, 1.2] },
-            { year: 2002, lower: 1.5, q1: 2.35, median: 4.1, q3: 5.225, upper: 5.7, median: 3.9, outliers: [9, 9.5] },
-            { year: 2003, lower: 1.8, q1: 2.325, median: 3.35, q3: 4, upper: 5.4, median: 3.3, outliers: [1, 6] },
-            { year: 2004, lower: 1.8, q1: 2.75, median: 3.35, q3: 3.825, upper: 4.9, median: 3.4 },
-            { year: 2005, lower: 1.7, q1: 2.275, median: 3.2, q3: 3.825, upper: 5.5, median: 3.2, outliers: [0.5, 6.7] },
-            { year: 2006, lower: 1.2, q1: 1.95, median: 2.45, q3: 3.075, upper: 3.5, median: 2.5 },
-            { year: 2007, lower: 1.3, q1: 1.9, median: 3.05, q3: 3.425, upper: 4, median: 2.7, outliers: [7, 8.5] }
+            { year: 1990, lower: 1.3, q1: 2.15, median: 2.95, q3: 3.725, upper: 4.7, mean: 2.9, outliers: [1, 9] },
+            { year: 1991, lower: 2, q1: 3.825, median: 5.45, q3: 6.425, upper: 8.2, mean: 5.2, outliers: [1.5, 2, 8.9] },
+            { year: 1992, lower: 3.8, q1: 4.725, median: 5.55, q3: 5.75, upper: 8.7, mean: 5.5 },
+            { year: 1993, lower: 3, q1: 4.375, median: 4.95, q3: 5.85, upper: 8, mean: 5.2, outliers: [3, 9.5] },
+            { year: 1994, lower: 2.5, q1: 3.925, median: 4.15, q3: 4.45, upper: 5.1, mean: 4.1 },
+            { year: 1995, lower: 2.4, q1: 3.725, median: 4.95, q3: 5.85, upper: 7.7, mean: 4.9, outliers: [2.1, 8.3, 9.8] },
+            { year: 1996, lower: 1.7, q1: 2.3, median: 3.9, q3: 5, upper: 5.5, mean: 3.7, outliers: [1.1, 9.1] },
+            { year: 1997, lower: 2.2, q1: 2.5, median: 3.1, q3: 3.975, upper: 4.3, mean: 3.2, outliers: [1.6, 1.8, 9.8] },
+            { year: 1998, lower: 1.9, q1: 2.7, median: 3.35, q3: 4.575, upper: 5.7, mean: 3.6, outliers: [1.1, 8.3] },
+            { year: 1999, lower: 1.7, q1: 2.65, median: 3.3, q3: 4.05, upper: 5, mean: 3.4 },
+            { year: 2000, lower: 1.4, q1: 2.25, median: 3.3, q3: 4.65, upper: 5.7, mean: 3.4 },
+            { year: 2001, lower: 1.9, q1: 2.85, median: 4, q3: 4.45, upper: 6.1, mean: 3.9, outliers: [1, 1.2] },
+            { year: 2002, lower: 1.5, q1: 2.35, median: 4.1, q3: 5.225, upper: 5.7, mean: 3.9, outliers: [9, 9.5] },
+            { year: 2003, lower: 1.8, q1: 2.325, median: 3.35, q3: 4, upper: 5.4, mean: 3.3, outliers: [1, 6] },
+            { year: 2004, lower: 1.8, q1: 2.75, median: 3.35, q3: 3.825, upper: 4.9, mean: 3.4 },
+            { year: 2005, lower: 1.7, q1: 2.275, median: 3.2, q3: 3.825, upper: 5.5, mean: 3.2, outliers: [0.5, 6.7] },
+            { year: 2006, lower: 1.2, q1: 1.95, median: 2.45, q3: 3.075, upper: 3.5, mean: 2.5 },
+            { year: 2007, lower: 1.3, q1: 1.9, median: 3.05, q3: 3.425, upper: 4, mean: 2.7, outliers: [7, 8.5] }
         ];
 
         function createChart() {
@@ -42,6 +42,7 @@
                     medianField: "median",
                     q3Field: "q3",
                     upperField: "upper",
+                    meanField: "mean",
                     outliersField: "outliers"
                 }],
                 categoryAxis: {
