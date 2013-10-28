@@ -2,8 +2,8 @@ kendo_module({
     id: "dataviz.map",
     name: "Map",
     category: "dataviz",
-    description: "",
-    depends: [ "data", "userevents", "dataviz.core", "dataviz.svg", "dataviz.themes" ]
+    description: "The Kendo DataViz Map displays spatial data",
+    depends: [ "data", "userevents", "dataviz.core", "dataviz.themes", "mobile.scroller" ]
 });
 
 (function ($, undefined) {
