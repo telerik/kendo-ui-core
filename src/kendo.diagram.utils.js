@@ -113,7 +113,10 @@ kendo_module({
                 throw "Not an array of points.";
             }
             for (var i = 0; i < v.length; i += 2) {
-                points.push(new kendo.diagram.Point(v[i], v[i + 1]));
+                points.push(new kendo.diagram.Point(
+                    parseInt(v[i], 10),
+                    parseInt(v[i + 1], 10)
+                ));
             }
             return points;
         },
