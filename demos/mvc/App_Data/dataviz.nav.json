@@ -71,7 +71,7 @@
                     "meta": "This demo shows how to configure step line style for the Kendo UI Area Chart",
                     "new": "true"
                 }, {
-                    "text": "Smooth Area",
+                    "text": "Smooth (Spline) Area",
                     "url": "area-charts/smooth-area.html",
                     "title": "Example of using Kendo UI Area Chart with smooth line style",
                     "meta": "This demo shows how to configure smooth line style for the Kendo UI Area Chart",
@@ -246,77 +246,6 @@
             }
             ]
         }, {
-            "text": "Line Charts",
-            "documentation": "dataviz/chart",
-            "spriteCssClass": "chartLineIcon",
-            "items": [{
-                    "text": "Basic usage",
-                    "url": "line-charts/index.html",
-                    "title": "Kendo UI Line Charts Demo",
-                    "meta": "This example illustrates the features and core functionality of Kendo UI Line Charts component. HTML5 line graphs show trends over a specific time period."
-                }, {
-                    "text": "Stacked line",
-                    "url": "line-charts/stacked-line.html",
-                    "title": "Kendo UI Stacked Line Charts Demo",
-                    "meta": "This demo shows how you can easily implement Kendo UI Stacked Line Charts in your business webapp."
-                }, {
-                    "text": "Date axis",
-                    "url": "line-charts/date-axis.html",
-                    "title": "Example of Kendo UI HTML5 Line Charts Date Axis",
-                    "meta": "This demo illustrates the date axis in Kendo UI Line Charts can be easily changed by setting the configuration and specifying the aggregate function value."
-                }, {
-                    "text": "Multi-axis",
-                    "url": "line-charts/multiple-axes.html",
-                    "title": "Multi-axes feature example | Kendo UI Line Charts widget",
-                    "meta": "This demo shows how easily Kendo UI Line Charts can be customized to achieve what you want in your app. Apply multiple axes to your Kendo UI Line Charts."
-                }, {
-                    "text": "Notes",
-                    "url": "line-charts/notes.html",
-                    "title": "Notes feature example | Kendo UI Line Charts widget",
-                    "meta": "This demo shows how to place annotations in your Kendo UI Charts."
-                }, {
-                    "text": "Binding to remote data",
-                    "url": "line-charts/remote-data.html",
-                    "title": "Binding to remote data example | Kendo UI Line Charts features",
-                    "meta": "This example illustrates how binding to remote data works in Kendo UI Line Charts and the demo source code would guide you how to apply it to your line chart."
-                }, {
-                    "text": "Binding to local data",
-                    "url": "line-charts/local-data.html",
-                    "title": "Binding to local data example | Kendo UI Line Charts",
-                    "meta": "This example illustrates how Kendo UI Line Charts use existing objects as data points."
-                }, {
-                    "text": "Binding to grouped data",
-                    "url": "line-charts/grouped-data.html",
-                    "title": "Binding to grouped data demo | Kendo UI Line Charts",
-                    "meta": "This example illustrates how binding to grouped data feature works in Kendo UI Line Charts."
-                }, {
-                    "text": "MVVM",
-                    "url": "line-charts/mvvm.html",
-                    "title": "MVVM support in Kendo UI Chart",
-                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                    "packages": ["!mvc", "!jsp", "!php"]
-                }, {
-                    "text": "Error Bars",
-                    "url": "line-charts/error-bars.html",
-                    "title": "Example of using ErrorBars for Kendo UI Line Chart",
-                    "meta": "This demo shows how to use ErrorBars for Kendo UI Line Chart",
-                    "new": "true"
-                }, {
-                    "text": "Step line",
-                    "url": "line-charts/step-line.html",
-                    "title": "Example of using Kendo UI Line Chart with step line style",
-                    "meta": "This demo shows how to configure step line style for the Kendo UI Line Chart",
-                    "new": "true"
-                }, {
-                    "text": "Smooth line",
-                    "url": "line-charts/smooth-line.html",
-                    "title": "Example of using Kendo UI Line Chart with smooth line style",
-                    "meta": "This demo shows how to configure smooth line style for the Kendo UI Line Chart",
-                    "new": "true"
-                }
-            ],
-            "name": "line-charts"
-        }, {
             "text": "Donut Charts",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartDonutIcon",
@@ -384,6 +313,77 @@
             }],
             "name": "funnel-charts"
         }, {
+            "text": "Line Charts",
+            "documentation": "dataviz/chart",
+            "spriteCssClass": "chartLineIcon",
+            "items": [{
+                    "text": "Basic usage",
+                    "url": "line-charts/index.html",
+                    "title": "Kendo UI Line Charts Demo",
+                    "meta": "This example illustrates the features and core functionality of Kendo UI Line Charts component. HTML5 line graphs show trends over a specific time period."
+                }, {
+                    "text": "Stacked line",
+                    "url": "line-charts/stacked-line.html",
+                    "title": "Kendo UI Stacked Line Charts Demo",
+                    "meta": "This demo shows how you can easily implement Kendo UI Stacked Line Charts in your business webapp."
+                }, {
+                    "text": "Date axis",
+                    "url": "line-charts/date-axis.html",
+                    "title": "Example of Kendo UI HTML5 Line Charts Date Axis",
+                    "meta": "This demo illustrates the date axis in Kendo UI Line Charts can be easily changed by setting the configuration and specifying the aggregate function value."
+                }, {
+                    "text": "Multi-axis",
+                    "url": "line-charts/multiple-axes.html",
+                    "title": "Multi-axes feature example | Kendo UI Line Charts widget",
+                    "meta": "This demo shows how easily Kendo UI Line Charts can be customized to achieve what you want in your app. Apply multiple axes to your Kendo UI Line Charts."
+                }, {
+                    "text": "Notes",
+                    "url": "line-charts/notes.html",
+                    "title": "Notes feature example | Kendo UI Line Charts widget",
+                    "meta": "This demo shows how to place annotations in your Kendo UI Charts."
+                }, {
+                    "text": "Binding to remote data",
+                    "url": "line-charts/remote-data.html",
+                    "title": "Binding to remote data example | Kendo UI Line Charts features",
+                    "meta": "This example illustrates how binding to remote data works in Kendo UI Line Charts and the demo source code would guide you how to apply it to your line chart."
+                }, {
+                    "text": "Binding to local data",
+                    "url": "line-charts/local-data.html",
+                    "title": "Binding to local data example | Kendo UI Line Charts",
+                    "meta": "This example illustrates how Kendo UI Line Charts use existing objects as data points."
+                }, {
+                    "text": "Binding to grouped data",
+                    "url": "line-charts/grouped-data.html",
+                    "title": "Binding to grouped data demo | Kendo UI Line Charts",
+                    "meta": "This example illustrates how binding to grouped data feature works in Kendo UI Line Charts."
+                }, {
+                    "text": "MVVM",
+                    "url": "line-charts/mvvm.html",
+                    "title": "MVVM support in Kendo UI Chart",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                }, {
+                    "text": "Error Bars",
+                    "url": "line-charts/error-bars.html",
+                    "title": "Example of using ErrorBars for Kendo UI Line Chart",
+                    "meta": "This demo shows how to use ErrorBars for Kendo UI Line Chart",
+                    "new": "true"
+                }, {
+                    "text": "Step line",
+                    "url": "line-charts/step-line.html",
+                    "title": "Example of using Kendo UI Line Chart with step line style",
+                    "meta": "This demo shows how to configure step line style for the Kendo UI Line Chart",
+                    "new": "true"
+                }, {
+                    "text": "Smooth (Spline) line",
+                    "url": "line-charts/smooth-line.html",
+                    "title": "Example of using Kendo UI Line Chart with smooth line style",
+                    "meta": "This demo shows how to configure smooth line style for the Kendo UI Line Chart",
+                    "new": "true"
+                }
+            ],
+            "name": "line-charts"
+        },  {
             "text": "Pie Charts",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartPieIcon",
@@ -416,7 +416,100 @@
                 }
             ],
             "name": "pie-charts"
-        }, {
+        },  {
+            "text": "Polar Charts",
+            "documentation": "dataviz/chart",
+            "spriteCssClass": "chartPolarIcon",
+            "items": [{
+                    "text": "Basic usage",
+                    "url": "polar-charts/index.html",
+                    "title": "Kendo UI jQuery-based Polar Charts Demo",
+                    "meta": "This demo illustrates how Kendo UI Polar Charts component can be added to your web page in order to visualize quantitive data. Learn how to define your polar chart."
+                }, {
+                    "text": "Polar scatter",
+                    "url": "polar-charts/polar-scatter.html",
+                    "title": "Kendo UI Polar Charts | Example of polar scatter chart",
+                    "meta": "This demo shows how to configure Kendo UI Polar Scatter Chart"
+                }, {
+                    "text": "Polar area",
+                    "url": "polar-charts/polar-area.html",
+                    "title": "Kendo UI Polar Charts | Example of polar area chart",
+                    "meta": "This demo illustrates how to configure Kendo UI Polar Area Chart"
+                }, {
+                    "text": "Binding to remote data",
+                    "url": "polar-charts/remote-data.html",
+                    "title": "Example of jQuery & HTML5 Kendo UI Polar Chart bound to remote data",
+                    "meta": "This demo shows how Kendo UI Polar Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data."
+                }, {
+                    "text": "Binding to local data",
+                    "url": "polar-charts/local-data.html",
+                    "title": "Kendo UI Polar Charts binding to local data example",
+                    "meta": "This sample demonstrates that Kendo UI HTML5 chart can use existing objects as data points."
+                }, {
+                    "text": "MVVM",
+                    "url": "polar-charts/mvvm.html",
+                    "title": "MVVM support in Kendo UI Chart",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                }, {
+                    "text": "Smooth (Spline) line",
+                    "url": "polar-charts/smooth-polar-line.html",
+                    "title": "Example of using smooth line style for Kendo UI Polar Charts",
+                    "meta": "This demo shows how to configure the Kendo UI Polar Charts to use smooth line style",
+                    "new": "true"
+                }
+            ],
+            "name": "polar-charts"
+        },  {
+            "text": "Radar Charts",
+            "documentation": "dataviz/chart",
+            "spriteCssClass": "chartRadarIcon",
+            "items": [{
+                    "text": "Basic usage",
+                    "url": "radar-charts/index.html",
+                    "title": "Kendo UI jQuery-based Radar Charts Demo",
+                    "meta": "This demo illustrates how Kendo UI Radar Charts component can be added to your web page in order to visualize quantitive data. Learn how to define your radar chart."
+                }, {
+                    "text": "Radar area",
+                    "url": "radar-charts/radar-area.html",
+                    "title": "Kendo UI Radar Charts | Example of radar area chart",
+                    "meta": "This demo shows how to configure Kendo UI Radar Area Chart"
+                }, {
+                    "text": "Radar column",
+                    "url": "radar-charts/radar-column.html",
+                    "title": "Kendo UI Radar Charts | Example of radar column chart",
+                    "meta": "This demo illustrates how to display a Kendo UI Radar Column Chart"
+                }, {
+                    "text": "Binding to remote data",
+                    "url": "radar-charts/remote-data.html",
+                    "title": "Example of jQuery & HTML5 Kendo UI Radar Charts bound to remote data",
+                    "meta": "This demo shows how Kendo UI Radar Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data."
+                }, {
+                    "text": "Binding to local data",
+                    "url": "radar-charts/local-data.html",
+                    "title": "Kendo UI Radar Charts binding to local data example",
+                    "meta": "This sample demonstrates that Kendo UI HTML5 chart can use existing objects as data points."
+                }, {
+                    "text": "Binding to grouped data",
+                    "url": "radar-charts/grouped-data.html",
+                    "title": "Kendo UI Radar Charts | Example of binding to grouped data",
+                    "meta": "With this example you will learn how to bind grouping data to Kendo UI Radar Charts."
+                }, {
+                    "text": "MVVM",
+                    "url": "radar-charts/mvvm.html",
+                    "title": "MVVM support in Kendo UI Chart",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                }, {
+                    "text": "Smooth (Spline) line",
+                    "url": "radar-charts/smooth-radar-line.html",
+                    "title": "Example of using smooth line style for the Kendo UI Radar Charts",
+                    "meta": "This demo shows how to configure the Kendo UI Radar Charts to use smooth line style",
+                    "new": "true"
+                }
+            ],
+            "name": "radar-charts"
+        },  {
             "text": "Scatter Charts",
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartScatterIcon",
@@ -468,7 +561,7 @@
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
                     "packages": ["!mvc", "!jsp", "!php"]
                 }, {
-                    "text": "Smooth line",
+                    "text": "Smooth (Spline) line",
                     "url": "scatter-charts/smooth-scatter-line.html",
                     "title": "Example of using smooth line style for the Kendo UI Scatter Line Chart",
                     "meta": "This demo shows how to configure the Kendo UI Scatter Line Chart to use smooth line style",
@@ -476,100 +569,7 @@
                 }
             ],
             "name": "scatter-charts"
-        }, {
-            "text": "Radar Charts",
-            "documentation": "dataviz/chart",
-            "spriteCssClass": "chartRadarIcon",
-            "items": [{
-                    "text": "Basic usage",
-                    "url": "radar-charts/index.html",
-                    "title": "Kendo UI jQuery-based Radar Charts Demo",
-                    "meta": "This demo illustrates how Kendo UI Radar Charts component can be added to your web page in order to visualize quantitive data. Learn how to define your radar chart."
-                }, {
-                    "text": "Radar area",
-                    "url": "radar-charts/radar-area.html",
-                    "title": "Kendo UI Radar Charts | Example of radar area chart",
-                    "meta": "This demo shows how to configure Kendo UI Radar Area Chart"
-                }, {
-                    "text": "Radar column",
-                    "url": "radar-charts/radar-column.html",
-                    "title": "Kendo UI Radar Charts | Example of radar column chart",
-                    "meta": "This demo illustrates how to display a Kendo UI Radar Column Chart"
-                }, {
-                    "text": "Binding to remote data",
-                    "url": "radar-charts/remote-data.html",
-                    "title": "Example of jQuery & HTML5 Kendo UI Radar Charts bound to remote data",
-                    "meta": "This demo shows how Kendo UI Radar Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data."
-                }, {
-                    "text": "Binding to local data",
-                    "url": "radar-charts/local-data.html",
-                    "title": "Kendo UI Radar Charts binding to local data example",
-                    "meta": "This sample demonstrates that Kendo UI HTML5 chart can use existing objects as data points."
-                }, {
-                    "text": "Binding to grouped data",
-                    "url": "radar-charts/grouped-data.html",
-                    "title": "Kendo UI Radar Charts | Example of binding to grouped data",
-                    "meta": "With this example you will learn how to bind grouping data to Kendo UI Radar Charts."
-                }, {
-                    "text": "MVVM",
-                    "url": "radar-charts/mvvm.html",
-                    "title": "MVVM support in Kendo UI Chart",
-                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                    "packages": ["!mvc", "!jsp", "!php"]
-                }, {
-                    "text": "Smooth line",
-                    "url": "radar-charts/smooth-radar-line.html",
-                    "title": "Example of using smooth line style for the Kendo UI Radar Charts",
-                    "meta": "This demo shows how to configure the Kendo UI Radar Charts to use smooth line style",
-                    "new": "true"
-                }
-            ],
-            "name": "radar-charts"
-        }, {
-            "text": "Polar Charts",
-            "documentation": "dataviz/chart",
-            "spriteCssClass": "chartPolarIcon",
-            "items": [{
-                    "text": "Basic usage",
-                    "url": "polar-charts/index.html",
-                    "title": "Kendo UI jQuery-based Polar Charts Demo",
-                    "meta": "This demo illustrates how Kendo UI Polar Charts component can be added to your web page in order to visualize quantitive data. Learn how to define your polar chart."
-                }, {
-                    "text": "Polar scatter",
-                    "url": "polar-charts/polar-scatter.html",
-                    "title": "Kendo UI Polar Charts | Example of polar scatter chart",
-                    "meta": "This demo shows how to configure Kendo UI Polar Scatter Chart"
-                }, {
-                    "text": "Polar area",
-                    "url": "polar-charts/polar-area.html",
-                    "title": "Kendo UI Polar Charts | Example of polar area chart",
-                    "meta": "This demo illustrates how to configure Kendo UI Polar Area Chart"
-                }, {
-                    "text": "Binding to remote data",
-                    "url": "polar-charts/remote-data.html",
-                    "title": "Example of jQuery & HTML5 Kendo UI Polar Chart bound to remote data",
-                    "meta": "This demo shows how Kendo UI Polar Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data."
-                }, {
-                    "text": "Binding to local data",
-                    "url": "polar-charts/local-data.html",
-                    "title": "Kendo UI Polar Charts binding to local data example",
-                    "meta": "This sample demonstrates that Kendo UI HTML5 chart can use existing objects as data points."
-                }, {
-                    "text": "MVVM",
-                    "url": "polar-charts/mvvm.html",
-                    "title": "MVVM support in Kendo UI Chart",
-                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                    "packages": ["!mvc", "!jsp", "!php"]
-                }, {
-                    "text": "Smooth line",
-                    "url": "polar-charts/smooth-polar-line.html",
-                    "title": "Example of using smooth line style for Kendo UI Polar Charts",
-                    "meta": "This demo shows how to configure the Kendo UI Polar Charts to use smooth line style",
-                    "new": "true"
-                }
-            ],
-            "name": "polar-charts"
-        }, {
+        },  {
             "text": "Sparklines",
             "documentation": "dataviz/sparkline",
             "spriteCssClass": "sparklineIcon",
@@ -626,29 +626,6 @@
     ],
     "gauges": [
         {
-            "text": "Radial Gauge",
-            "spriteCssClass": "gaugeRadialIcon",
-            "documentation": "dataviz/radialgauge",
-            "items": [{
-                "text": "Basic usage",
-                "url": "radial-gauge/index.html",
-                "title": "Demo for core features in Kendo UI Radial Gauge widget",
-                "meta": "This sample demonstrates the core functionality of Kendo UI Radial Gauge which helps you easily visualize an indicator within a range of values."
-            }, {
-                "text": "Scale options",
-                "url": "radial-gauge/scale-options.html",
-                "title": "Kendo UI Radial Gauge scale customization demo",
-                "meta": "This example shows how you can easily use simple options to configure the gauge, enable/disable scale ranges and gauge labels."
-            }, {
-                "text": "MVVM",
-                "url": "radial-gauge/mvvm.html",
-                "title": "MVVM support in Kendo UI Radial Gauge",
-                "meta": "Value and visible MVVM binding support in Kendo UI Radial Gauge",
-                "packages": ["!mvc", "!jsp", "!php"]
-            }
-            ],
-            "name": "radial-gauge"
-        }, {
             "text": "Linear Gauge",
             "spriteCssClass": "gaugeLinearIcon",
             "documentation": "dataviz/lineargauge",
@@ -671,7 +648,30 @@
             }
             ],
             "name": "linear-gauge"
-        }
+        },  {
+            "text": "Radial Gauge",
+            "spriteCssClass": "gaugeRadialIcon",
+            "documentation": "dataviz/radialgauge",
+            "items": [{
+                "text": "Basic usage",
+                "url": "radial-gauge/index.html",
+                "title": "Demo for core features in Kendo UI Radial Gauge widget",
+                "meta": "This sample demonstrates the core functionality of Kendo UI Radial Gauge which helps you easily visualize an indicator within a range of values."
+            }, {
+                "text": "Scale options",
+                "url": "radial-gauge/scale-options.html",
+                "title": "Kendo UI Radial Gauge scale customization demo",
+                "meta": "This example shows how you can easily use simple options to configure the gauge, enable/disable scale ranges and gauge labels."
+            }, {
+                "text": "MVVM",
+                "url": "radial-gauge/mvvm.html",
+                "title": "MVVM support in Kendo UI Radial Gauge",
+                "meta": "Value and visible MVVM binding support in Kendo UI Radial Gauge",
+                "packages": ["!mvc", "!jsp", "!php"]
+            }
+            ],
+            "name": "radial-gauge"
+        } 
     ],
     "Bar & QR Codes": [
         {
