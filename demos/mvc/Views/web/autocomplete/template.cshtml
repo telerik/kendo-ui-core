@@ -14,9 +14,9 @@
                     var autocomplete = $("#customers").kendoAutoComplete({
                         minLength: 1,
                         dataTextField: "ContactName",
-                        headertemplate: '<div class="k-widget k-header dropdown-header">' +
-                            '<span class="first">photo</span>' +
-                            '<span class="last">contact info</span>' +
+                        headerTemplate: '<div class="k-widget k-header dropdown-header">' +
+                            '<span class="first">Photo</span>' +
+                            '<span class="last">Contact info</span>' +
                             '</div>',
                         template: '<img src=\"../../content/web/Customers/${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />' +
                                 '<h3>${ data.ContactName }</h3>' +
