@@ -251,6 +251,69 @@ The last element is always created like a rectangle since there is no following 
     }
 
     /**
+    * The data item field which contains the series lower value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function lowerField($value) {
+        return $this->setProperty('lowerField', $value);
+    }
+
+    /**
+    * The data item field which contains the series q1 value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function q1Field($value) {
+        return $this->setProperty('q1Field', $value);
+    }
+
+    /**
+    * The data item field which contains the series median value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function medianField($value) {
+        return $this->setProperty('medianField', $value);
+    }
+
+    /**
+    * The data item field which contains the series q3 value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function q3Field($value) {
+        return $this->setProperty('q3Field', $value);
+    }
+
+    /**
+    * The data item field which contains the series upper value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function upperField($value) {
+        return $this->setProperty('upperField', $value);
+    }
+
+    /**
+    * The data item field which contains the series mean value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function meanField($value) {
+        return $this->setProperty('meanField', $value);
+    }
+
+    /**
+    * The data item field which contains the series outliers value.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\ChartSeriesItem
+    */
+    public function outliresField($value) {
+        return $this->setProperty('outliresField', $value);
+    }
+
+    /**
     * The distance between the category clusters.
     * @param float $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem

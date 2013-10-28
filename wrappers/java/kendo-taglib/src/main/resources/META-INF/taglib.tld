@@ -3086,6 +3086,12 @@ The last element is always created like a rectangle since there is no following 
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The data item field which contains the series lower value.</description>
+            <name>lowerField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The margin around each donut series (ring). A numeric value will set all margins.</description>
             <name>margin</name>
             <rtexprvalue>true</rtexprvalue>
@@ -3096,6 +3102,18 @@ The last element is always created like a rectangle since there is no following 
             <name>maxSize</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the series mean value.</description>
+            <name>meanField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the series median value.</description>
+            <name>medianField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The minimum size of the chart bubble series marker.</description>
@@ -3146,10 +3164,28 @@ The last element is always created like a rectangle since there is no following 
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>The data item field which contains the series outliers value.</description>
+            <name>outliresField</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The padding around the chart (equal on all sides).</description>
             <name>padding</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the series q1 value.</description>
+            <name>q1Field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the series q3 value.</description>
+            <name>q3Field</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
         </attribute>
         <attribute>
             <description>The space in pixels between the different segments of the funnel chart.</description>
@@ -3202,6 +3238,12 @@ The last element is always created like a rectangle since there is no following 
         <attribute>
             <description>The type of the series.The supported values are:</description>
             <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data item field which contains the series upper value.</description>
+            <name>upperField</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
