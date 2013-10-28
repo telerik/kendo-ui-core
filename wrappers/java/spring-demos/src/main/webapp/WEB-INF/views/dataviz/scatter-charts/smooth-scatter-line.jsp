@@ -9,8 +9,8 @@
          <kendo:chart name="chart">
              <kendo:chart-title text="Charge current vs. charge time" />
              <kendo:chart-series>
-                <kendo:chart-seriesItem type="scatterLine" style="smooth" data="<%= new int[][] { {10, 10}, {15, 20}, {20, 25}, {32, 40}, {43, 50}, {55, 60}, {60, 70}, {70, 80}, {90, 100} } %>" name="0.8C" />
-                <kendo:chart-seriesItem type="scatterLine" style="smooth" data="<%= new int[][] { {10, 40}, {17, 50}, {18, 70}, {35, 90}, {47, 95}, {60, 100} } %>" name="1.6C" />
+                <kendo:chart-seriesItem type="scatterLine" style="smooth" data="<%= new int[][] { {10, 10}, {15, 20}, {20, 25}, {32, 15}, {43, 50}, {55, 30}, {60, 70}, {70, 50}, {90, 100} } %>" name="0.8C" />
+                <kendo:chart-seriesItem type="scatterLine" style="smooth" data="<%= new int[][] { {10, 40}, {17, 50}, {22, 70}, {35, 60}, {47, 95}, {60, 100} } %>" name="1.6C" />
                 <kendo:chart-seriesItem type="scatterLine" style="smooth" data="<%= new int[][] { {10, 70}, {13, 90}, {25, 100} } %>" name="3.1C" />
              </kendo:chart-series>
              <kendo:chart-xAxis>

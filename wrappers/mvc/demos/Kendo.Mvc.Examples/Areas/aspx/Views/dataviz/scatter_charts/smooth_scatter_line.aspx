@@ -15,14 +15,14 @@
         .Series(series => {
             series.ScatterLine(new int[][] {
                     new [] {10, 10}, new [] {15, 20}, new [] {20, 25},
-                    new [] {32, 40}, new [] {43, 50}, new [] {55, 60},
-                    new [] {60, 70}, new [] {70, 80}, new [] {90, 100}
+                    new [] {32, 15}, new [] {43, 50}, new [] {55, 30},
+                    new [] {60, 70}, new [] {70, 50}, new [] {90, 100}
                 })
                 .Name("0.8C");
             
             series.ScatterLine(new int[][] {
-                    new [] {10, 40}, new [] {17, 50}, new [] {18, 70},
-                    new [] {35, 90}, new [] {47, 95}, new [] {60, 100}
+                    new [] {10, 40}, new [] {17, 50}, new [] {22, 70},
+                    new [] {35, 60}, new [] {47, 95}, new [] {60, 100}
                 })
                 .Name("1.6C");
 
