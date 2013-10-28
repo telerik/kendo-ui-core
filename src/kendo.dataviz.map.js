@@ -153,6 +153,7 @@ kendo_module({
             this.trigger("reset");
         },
 
+        // TODO: Rename to extent
         viewport: function() {
             var map = this,
                 scale = map.scale(),

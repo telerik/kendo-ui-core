@@ -163,16 +163,11 @@
         },
 
         _drag: function() {
-            var scroller = this.map.scroller;
-            var x = scroller.scrollLeft;
-            var y = scroller.scrollTop;
+            var map = this.map;
+            var viewport = map.viewport();
+            var nw = map.toScreenPoint(viewport.nw);
+            var se = map.toScreenPoint(viewport.se);
 
-            var width = this.element.width();
-            var height = this.element.height();
-            var element = this.element;
-
-            var nw = new g.Point(x, y);
-            var se = new g.Point(x + width, y + height);
             this.surface.viewport(new g.Rect(nw, se));
             this.movable.moveTo(nw);
         },
