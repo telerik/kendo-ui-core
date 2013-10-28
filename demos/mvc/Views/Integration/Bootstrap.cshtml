@@ -1,16 +1,26 @@
+@{
+    Layout = null;
+}
+
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Responsive Kendo UI</title>
+        <title>Kendo UI &hearts; Twitter Bootstrap: Responsive demo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../styles/web/kendo.common.css">
-        <link rel="stylesheet" href="../styles/web/kendo.bootstrap.css">
-        <link rel="stylesheet" href="../styles/dataviz/kendo.dataviz.css">
 
-        <script src="../src/jquery.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="../src/kendo.all.js"></script>
+        <link rel="stylesheet" href="@Url.Content("~/content/integration/bootstrap-integration/css/bootstrap.min.css")" />
+        @foreach (string styleName in Kendo.Models.StyleGroups.Bootstrap) {
+        <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
+        }
+
+        @foreach (string scriptName in Kendo.Models.ScriptGroups.All) {
+        <script src="@Url.Script(scriptName)"></script>
+        }
+        <script src="@Url.Content("~/content/integration/bootstrap-integration/js/bootstrap.min.js")"></script>
+
+        @if (ViewBag.Debug) {
+        <script src="@Url.Content("~/content/shared/js/less.js")"></script>
+        }
 
         <style>
             html, body {
@@ -241,7 +251,7 @@
                 font-size: 0.8571em;
             }
 
-            @media (max-width: 767px) {
+            @@media (max-width: 767px) {
                 header .container {
                     padding-right: 0;
                 }
@@ -320,7 +330,7 @@
 
                         <div class="row">
                             <div class="col-lg-5 col-sm-2">
-                                <img src="bootstrap/avatar.jpg" class="ra-avatar img-responsive" />
+                                <img src="@Url.Content("~/content/integration/bootstrap-integration/avatar.jpg")" class="ra-avatar img-responsive" />
                             </div>
 
                             <div class="col-lg-7 col-sm-2">
@@ -452,7 +462,7 @@
                 <script id="listview-template" type="x-kendo-template">
                     <li class="col-xs-6 col-md-4 col-lg-2">
                         <figure>
-                            <img src="bootstrap/photos/#= id #.jpg" class="img-responsive" />
+                            <img src="@Url.Content("~/content/integration/bootstrap-integration/photos/#= id #.jpg")" class="img-responsive" />
                             <figcaption class="hidden-xs">
                                 <h3>#: title #</h3>
                                 <p class="hidden-sm">

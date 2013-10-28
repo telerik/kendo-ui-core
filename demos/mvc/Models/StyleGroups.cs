@@ -63,5 +63,16 @@ namespace Kendo.Models
             "kendo.mobile.all.min.css"
 #endif
         };
+
+        public static readonly IList<string> Bootstrap = new string[]
+        {
+#if DEBUG
+            "web/kendo.common.less",
+            "web/kendo.bootstrap.less"
+#else
+            "kendo.common.min.css",
+            "kendo.bootstrap.min.css"
+#endif
+        };
     }
 }

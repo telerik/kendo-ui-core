@@ -6,23 +6,29 @@ namespace Kendo.Controllers
 {
     public class IntegrationController : BaseController
     {
-        public ActionResult Sushi()
-        {
+        private void SetDebug() {
 #if DEBUG
             ViewBag.Debug = true;
 #else
             ViewBag.Debug = false;
 #endif
+        }
+
+        public ActionResult Sushi()
+        {
+            SetDebug();
             return View();
         }
 
         public ActionResult Simulator()
         {
-#if DEBUG
-            ViewBag.Debug = true;
-#else
-            ViewBag.Debug = false;
-#endif
+            SetDebug();
+            return View();
+        }
+
+        public ActionResult Bootstrap()
+        {
+            SetDebug();
             return View();
         }
     }

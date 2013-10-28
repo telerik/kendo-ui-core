@@ -35,6 +35,12 @@ namespace Kendo
             );
 
             routes.MapRoute(
+                "Bootstrap",
+                "bootstrap",
+                new { controller = "Integration", action = "Bootstrap" }
+            );
+
+            routes.MapRoute(
                 "Sushi",
                 "sushi",
                 new { controller = "Integration", action = "Sushi" }
