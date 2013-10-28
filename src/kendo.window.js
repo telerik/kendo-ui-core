@@ -392,7 +392,7 @@ kendo_module({
                 offset, handled,
                 distance = 10,
                 isMaximized = that.options.isMaximized,
-                newWidth, newHeight;
+                newWidth, newHeight, w, h;
 
             if (e.target != e.currentTarget || that._closing) {
                 return;
@@ -432,10 +432,17 @@ kendo_module({
                 }
 
                 if (handled) {
-                    wrapper.css({
-                        width: constrain(newWidth, options.minWidth, options.maxWidth),
-                        height: constrain(newHeight, options.minHeight, options.maxHeight)
-                    });
+                    w = constrain(newWidth, options.minWidth, options.maxWidth);
+                    h = constrain(newHeight, options.minHeight, options.maxHeight);
+                    
+                    if (!isNaN(w)) {
+                        wrapper.width(w);
+                        that.options.width = w + "px";
+                    }
+                    if (!isNaN(h)) {
+                        wrapper.height(h);
+                        that.options.height = h + "px";
+                    }
 
                     that.resize();
                 }
@@ -802,6 +809,9 @@ kendo_module({
                 .find(MINIMIZE_MAXIMIZE).parent().show().end().end()
                 .find(PIN_UNPIN).parent().show();
 
+            that.options.width = restoreOptions.width;
+            that.options.height = restoreOptions.height;
+
             $("html, body").css(OVERFLOW, "");
             if (this._documentScrollTop && this._documentScrollTop > 0) {
                 $(document).scrollTop(this._documentScrollTop);
@@ -885,16 +895,22 @@ kendo_module({
         _onDocumentResize: function () {
             var that = this,
                 wrapper = that.wrapper,
-                wnd = $(window);
+                wnd = $(window),
+                w, h;
 
             if (!that.options.isMaximized) {
                 return;
             }
 
+            w = wnd.width();
+            h = wnd.height() - parseInt(wrapper.css("padding-top"), 10);
+
             wrapper.css({
-                    width: wnd.width(),
-                    height: wnd.height() - parseInt(wrapper.css("padding-top"), 10)
+                    width: w,
+                    height: h
                 });
+            that.options.width = w;
+            that.options.height = h;
 
             that.resize();
         },

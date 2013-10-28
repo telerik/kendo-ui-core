@@ -299,6 +299,17 @@
                 equal(dialogObject.wrapper.height(), 105);
             });
 
+            test("resizing window with the keyboard updates widget options", 2, function() {
+                var initialSize = 200,
+                    dialog = createWindow({ width: initialSize, height: initialSize });
+
+                dialog.element.press(keys.RIGHT, { ctrlKey: true });
+                dialog.element.press(keys.DOWN, { ctrlKey: true });
+
+                equal(dialog.options.width, initialSize + 10 + "px");
+                equal(dialog.options.height, initialSize + 10 + "px");
+            });
+
             test("hitting arrow keys in nested input does not trigger keyboard support", function() {
                 createWindow({
                     content: {
