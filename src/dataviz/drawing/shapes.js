@@ -55,6 +55,19 @@
             }
         },
 
+        traverse: function(callback) {
+            var children = this.children;
+
+            for (var i = 0; i < children.length; i++) {
+                var child = children[i];
+                callback(child);
+
+                if (child.traverse) {
+                    child.traverse(callback);
+                }
+            }
+        },
+
         append: function() {
             append(this.children, arguments);
             this.childrenChange("add", arguments);

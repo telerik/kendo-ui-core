@@ -90,6 +90,26 @@
         deepEqual(group.visible(false), group);
     });
 
+    test("traverse traverses children", function() {
+        var child = new Group();
+        group.append(child);
+
+        group.traverse(function(item) {
+            deepEqual(item, child);
+        });
+    });
+
+    test("traverse traverses child groups", 2, function() {
+        var childGroup = new Group();
+        group.append(childGroup);
+        var child = new Group();
+        childGroup.append(child);
+
+        group.traverse(function(item) {
+            ok(true);
+        });
+    });
+
     // ------------------------------------------------------------
     var shape;
 
