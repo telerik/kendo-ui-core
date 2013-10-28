@@ -138,10 +138,11 @@ namespace Kendo.Mvc.UI.Tests.Chart
         [Fact]
         public void Line_should_set_line_configuration()
         {
-            builder.Line(2, "lineColor", ChartDashType.Dash);
+            builder.Line(2, "lineColor", ChartDashType.Dash, ChartAreaStyle.Step);
             series.Line.Color.ShouldEqual("lineColor");
             series.Line.Width.ShouldEqual(2);
             series.Line.DashType.ShouldEqual(ChartDashType.Dash);
+            series.Line.Style.ShouldEqual(ChartAreaStyle.Step);
         }
 
         [Fact]
@@ -175,6 +176,20 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.MissingValues(ChartAreaMissingValues.Interpolate);
             series.MissingValues.ShouldEqual(ChartAreaMissingValues.Interpolate);
+        }
+
+        [Fact]
+        public void ErrorBars_should_configure_errorBars()
+        {
+            builder.ErrorBars(e => e.Value(1.1).Color("Red"));
+            series.ErrorBars.Value.ShouldEqual(1.1);
+            series.ErrorBars.Color.ShouldEqual("Red");
+        }
+
+        [Fact]
+        public void ErrorBars_should_return_builder()
+        {
+            builder.ErrorBars(e => e.Value(1)).ShouldBeSameAs(builder);
         }
     }
 }

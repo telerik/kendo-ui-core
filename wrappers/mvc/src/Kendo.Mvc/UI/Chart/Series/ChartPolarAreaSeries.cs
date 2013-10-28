@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Resources;
     using System.Collections;
 
-    public class ChartPolarAreaSeries<TModel, TXValue, TYValue> : ChartScatterSeries<TModel, TXValue, TYValue> where TModel : class
+    public class ChartPolarAreaSeries<TModel, TXValue, TYValue> : ChartScatterSeriesBase<TModel, TXValue, TYValue>, IChartPolarAreaSeries where TModel : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartPolarAreaSeries{TModel, TXValue, TYValue}" /> class.
@@ -37,6 +37,21 @@ namespace Kendo.Mvc.UI
         public ChartPolarAreaSeries()
             : base()
         {
+        }
+
+        /// <summary>
+        /// The polar area chart line configuration.
+        /// </summary>
+        public ChartPolarAreaLine Line
+        {
+            get;
+            set;
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+            Line = new ChartPolarAreaLine();
         }
 
         public override IChartSerializer CreateSerializer()

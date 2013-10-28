@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI
     using System.Linq.Expressions;
     using System.Collections;
 
-    public class ChartPolarLineSeries<TModel, TXValue, TYValue> : ChartScatterSeries<TModel, TXValue, TYValue> where TModel : class
+    public class ChartPolarLineSeries<TModel, TXValue, TYValue> : ChartScatterLineSeriesBase<TModel, TXValue, TYValue>, IChartPolarLineSeries where TModel : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartPolarLineSeries{TModel, TXValue, TYValue}" /> class.
@@ -35,6 +35,21 @@ namespace Kendo.Mvc.UI
         public ChartPolarLineSeries()
             : base()
         {
+        }
+
+        /// <summary>
+        /// The style of the series.
+        /// </summary>
+        public ChartPolarLineStyle Style
+        {
+            get;
+            set;
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();            
+            Style = ChartPolarLineStyle.Normal;
         }
 
         public override IChartSerializer CreateSerializer()

@@ -2,11 +2,14 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
 
-    internal class ChartPolarLineSeriesSerializer : ChartScatterSeriesSerializer
+    internal class ChartPolarLineSeriesSerializer : ChartScatterLineSeriesSerializerBase
     {
-        public ChartPolarLineSeriesSerializer(IChartScatterSeries series)
+        private readonly IChartPolarLineSeries series;
+
+        public ChartPolarLineSeriesSerializer(IChartPolarLineSeries series)
             : base(series)
         {
+            this.series = series;
         }
 
         public override IDictionary<string, object> Serialize()
@@ -14,6 +17,12 @@ namespace Kendo.Mvc.UI
             var result = base.Serialize();
 
             result["type"] = "polarLine";
+
+
+            if (series.Style != ChartPolarLineStyle.Normal)
+            {
+                result["style"] = series.Style.ToString().ToLowerInvariant();
+            }
 
             return result;
         }

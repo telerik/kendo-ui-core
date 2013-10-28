@@ -153,5 +153,32 @@ namespace Kendo.Mvc.UI.Tests.Chart
             builder.MissingValues(ChartLineMissingValues.Interpolate);
             series.MissingValues.ShouldEqual(ChartLineMissingValues.Interpolate);
         }
+
+        [Fact]
+        public void Style_should_set_style()
+        {
+            builder.Style(ChartLineStyle.Step);
+            series.Style.ShouldEqual(ChartLineStyle.Step);
+        }
+
+        [Fact]
+        public void Style_should_return_builder()
+        {
+            builder.Style(ChartLineStyle.Smooth).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void ErrorBars_should_configure_errorBars()
+        {
+            builder.ErrorBars(e=> e.Value(1.1).Color("Red"));
+            series.ErrorBars.Value.ShouldEqual(1.1);
+            series.ErrorBars.Color.ShouldEqual("Red");
+        }
+
+        [Fact]
+        public void ErrorBars_should_return_builder()
+        {
+            builder.ErrorBars(e=> e.Value(1)).ShouldBeSameAs(builder);
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Resources;
     using System.Collections;
 
-    public class ChartPolarScatterSeries<TModel, TXValue, TYValue> : ChartScatterSeries<TModel, TXValue, TYValue> where TModel : class
+    public class ChartPolarScatterSeries<TModel, TXValue, TYValue> : ChartScatterSeriesBase<TModel, TXValue, TYValue>, IChartPolarScatterSeries where TModel : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartPolarScatterSeries{TModel, TXValue, TYValue}" /> class.

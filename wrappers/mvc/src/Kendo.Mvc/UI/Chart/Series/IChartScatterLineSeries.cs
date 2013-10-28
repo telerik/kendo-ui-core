@@ -1,29 +1,11 @@
 namespace Kendo.Mvc.UI
 {
-    public interface IChartScatterLineSeries : IChartScatterSeries
+    public interface IChartScatterLineSeries : IScatterLineSeries
     {
         /// <summary>
-        /// The line chart line width.
+        /// The scatter line chart error bars configuration.
         /// </summary>
-        double? Width
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The chart line dash type.
-        /// </summary>
-        ChartDashType? DashType
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The behavior for handling missing values in scatter line series.
-        /// </summary>
-        ChartScatterLineMissingValues? MissingValues
+        ScatterErrorBars ErrorBars
         {
             get;
             set;

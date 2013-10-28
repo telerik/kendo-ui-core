@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI
     using System.Collections;
     using System.Linq.Expressions;
 
-    public class ChartRadarColumnSeries<TModel, TValue, TCategory> : ChartBarSeries<TModel, TValue, TCategory> where TModel : class
+    public class ChartRadarColumnSeries<TModel, TValue, TCategory> : ChartBarSeriesBase<TModel, TValue, TCategory>, IChartRadarColumnSeries where TModel : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartRadarColumnSeries{TModel, TValue}"/> class.

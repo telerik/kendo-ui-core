@@ -3,7 +3,7 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using Kendo.Mvc.Infrastructure;
 
-    internal class ChartScatterLineSeriesSerializer : ChartScatterSeriesSerializer
+    internal class ChartScatterLineSeriesSerializer : ChartScatterLineSeriesSerializerBase
     {
         private readonly IChartScatterLineSeries series;
 
@@ -17,13 +17,16 @@ namespace Kendo.Mvc.UI
         {
             var result = base.Serialize();
 
-            FluentDictionary.For(result)
-                .Add("type", "scatterLine")
-                .Add("style", series.Style.ToString().ToLowerInvariant(), ChartScatterLineStyle.Normal.ToString().ToLowerInvariant())
-                .Add("width", series.Width, () => series.Width.HasValue)
-                .Add("dashType", series.DashType.ToString().ToLowerInvariant(), () => series.DashType.HasValue)
-                .Add("missingValues", series.MissingValues.ToString().ToLowerInvariant(),
-                                      () => series.MissingValues.HasValue);
+            if (series.Style != ChartScatterLineStyle.Normal)
+	        {
+                result["style"] = series.Style.ToString().ToLowerInvariant();
+	        }
+
+            var errorBars = series.ErrorBars.CreateSerializer().Serialize();
+            if (errorBars.Count > 0)
+            {
+                result.Add("errorBars", errorBars);
+            }
 
             return result;
         }

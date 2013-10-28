@@ -246,5 +246,32 @@ namespace Kendo.Mvc.UI.Tests
         {
             GetJson(series).ContainsKey("missingValues").ShouldBeFalse();
         }
+
+        [Fact]
+        public void Serializes_Style()
+        {
+            series.Style = ChartLineStyle.Step;
+            GetJson(series)["style"].ShouldEqual("step");
+        }
+
+        [Fact]
+        public void Should_not_seriale_default_Style()
+        {
+            GetJson(series).ContainsKey("style").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_ErrorBars()
+        {
+            series.ErrorBars = new CategoricalErrorBars();
+            series.ErrorBars.Value = 1;
+            GetJson(series).ContainsKey("errorBars").ShouldBeTrue();
+        }
+
+        [Fact]
+        public void Should_not_seriale_default_ErrorBars()
+        {
+            GetJson(series).ContainsKey("errorBars").ShouldBeFalse();
+        }
     }
 }

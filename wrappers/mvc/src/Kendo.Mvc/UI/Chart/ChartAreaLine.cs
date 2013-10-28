@@ -11,19 +11,19 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ChartAreaLine" /> class.
+        /// </summary>
+        public ChartAreaLine()
+        {
+        }
+
+        /// <summary>
         /// The style of the area.
         /// </summary>
         public ChartAreaStyle Style
         {
             get;
             set;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ChartLine" /> class.
-        /// </summary>
-        public ChartAreaLine()
-        {
         }
 
         public override IChartSerializer CreateSerializer()

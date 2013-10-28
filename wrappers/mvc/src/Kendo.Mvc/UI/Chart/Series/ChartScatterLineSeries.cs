@@ -5,7 +5,7 @@ namespace Kendo.Mvc.UI
     using System.Collections;
 
     public class ChartScatterLineSeries<TModel, TXValue, TYValue>
-        : ChartScatterSeries<TModel, TXValue, TYValue>, IChartScatterLineSeries
+        : ChartScatterLineSeriesBase<TModel, TXValue, TYValue>, IChartScatterLineSeries
         where TModel : class
     {
         /// <summary>
@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI
             Expression<Func<TModel, TYValue>> yValueExpression,
             Expression<Func<TModel, string>> noteTextExpression)
             : base(xValueExpression, yValueExpression, noteTextExpression)
-        {
+        {            
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Kendo.Mvc.UI
         /// <param name="data">The data.</param>
         public ChartScatterLineSeries(IEnumerable data)
             : base(data)
-        {
+        {            
         }
 
         /// <summary>
@@ -36,31 +36,13 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public ChartScatterLineSeries()
             : base()
-        {
+        {            
         }
 
         /// <summary>
-        /// The chart line width.
+        /// The error bars of the series.
         /// </summary>
-        public double? Width
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The chart line dashType.
-        /// </summary>
-        public ChartDashType? DashType
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The behavior for handling missing values in scatter line series.
-        /// </summary>
-        public ChartScatterLineMissingValues? MissingValues
+        public ScatterErrorBars ErrorBars
         {
             get;
             set;
@@ -75,9 +57,18 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        protected override void Initialize()
+        {
+            base.Initialize();
+            ErrorBars = new ScatterErrorBars();
+            Style = ChartScatterLineStyle.Normal;
+        }
+
         public override IChartSerializer CreateSerializer()
         {
             return new ChartScatterLineSeriesSerializer(this);
         }
+
+
     }
 }

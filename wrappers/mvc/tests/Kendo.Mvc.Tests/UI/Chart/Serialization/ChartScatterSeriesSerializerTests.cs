@@ -89,6 +89,7 @@ namespace Kendo.Mvc.UI.Tests
         {
             return series.CreateSerializer().Serialize();
         }
+
         [Fact]
         public virtual void Serializes_type()
         {
