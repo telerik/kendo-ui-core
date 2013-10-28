@@ -45,7 +45,7 @@ kendo_module({
         PI_DIV_4 = PI / 4,
         DEG_TO_RAD = PI / 180,
         MAX_ZOOM = 18,
-        VELOCITY_MULTIPLIER = 5m;
+        VELOCITY_MULTIPLIER = 5;
 
     // Map widget =============================================================
     var Map = Widget.extend({

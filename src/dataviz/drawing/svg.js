@@ -14,8 +14,7 @@
         BaseNode = d.BaseNode,
 
         util = dataviz.util,
-        renderAttr = util.renderAttr,
-        round = util.round;
+        renderAttr = util.renderAttr;
 
     // Constants ==============================================================
     var BUTT = "butt",

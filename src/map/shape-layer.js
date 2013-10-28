@@ -9,16 +9,10 @@
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
 
-        g = dataviz.geometry,
-
         d = dataviz.drawing,
         Group = d.Group,
 
-        util = dataviz.util,
-        round = util.round,
-
         map = dataviz.map,
-        Extent = map.Extent,
         Location = map.Location;
 
     // Constants ==============================================================
@@ -91,14 +85,10 @@
             for (var i = 0; i < data.length; i++) {
                 var item = data[i];
 
-                switch(item.type) {
-                    case "Feature":
-                        this._loadGeometryTo(this.root, item.geometry, item);
-                        break;
-
-                    default:
-                        this._loadGeometryTo(this.root, item, item);
-                        break;
+                if (item.type === "Feature") {
+                    this._loadGeometryTo(this.root, item.geometry, item);
+                } else {
+                    this._loadGeometryTo(this.root, item, item);
                 }
             }
 
@@ -131,8 +121,7 @@
         },
 
         _buildPolygon: function(rings, style) {
-            var style = style || this.options.style;
-
+            style = style || this.options.style;
             var path = rings.length > 1 ?
                 new d.MultiPath(style) : new d.Path(style);
 
