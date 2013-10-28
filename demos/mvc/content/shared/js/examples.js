@@ -191,6 +191,12 @@
             }, 100);
         },
 
+        getCurrentCommonLink: function() {
+            return $("head link").filter(function () {
+                return /kendo\.common/gi.test(this.href);
+            });
+        },
+
         getCurrentThemeLink: function () {
             return $("head link").filter(function () {
                 return (/kendo\./gi).test(this.href) && !(/common|rtl|dataviz/gi).test(this.href);

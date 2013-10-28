@@ -22,6 +22,8 @@
         <script src="@Url.Content("~/content/shared/js/less.js")"></script>
         }
 
+        <script src="@Url.Content("~/content/shared/js/examples.js")"></script>
+
         <link rel="stylesheet" href="@Url.Content("~/content/integration/bootstrap-integration/styles.css")" />
     </head>
     <body>
@@ -53,7 +55,7 @@
             </div>
         </header>
 
-        <div id="demo" class="container">
+        <div id="example" class="container">
             <ul id="menu">
                 <li><a href="#profile">Profile</a></li>
                 <li><a href="#schedule">Schedule</a></li>
@@ -263,48 +265,8 @@
         <script>
             // init page controls
 
-            var commonRe = /kendo\.common/gi;
-
-            function kendoStylesheets() {
-                return $("head link").filter(function () {
-                    return (/kendo\./gi).test(this.href);
-                });
-            }
-
-            function commonLink() {
-                return kendoStylesheets().filter(function () {
-                    return commonRe.test(this.href);
-                });
-            }
-
-            function themeLink() {
-                return kendoStylesheets().filter(function () {
-                    return !commonRe.test(this.href);
-                });
-            }
-
             function path(url) {
                 return /(.*\/)[^\/]*$/gi.exec(url)[1];
-            }
-
-            function changeStylesheet(linkCallback) {
-                return function(e) {
-                    var link = linkCallback();
-
-                    if (link.length) {
-                        var href = link[0].getAttribute("href");
-                        var linkPath = path(href);
-                        var extension = /\.(less|css)$/.exec(href)[1];
-
-                        link[0].setAttribute("href", kendo.format("{0}kendo.{1}.{2}", linkPath, this.value(), extension));
-
-                        if (extension == "less") {
-                            less.refresh(true);
-                        }
-
-                        document.body.style.cssText = document.body.style.cssText;
-                    }
-                };
             }
 
             $("#dimensions").kendoDropDownList({
@@ -315,7 +277,25 @@
                     { text: "Default", value: "common" },
                     { text: "Bootstrap", value: "common-bootstrap" }
                 ],
-                change: changeStylesheet(commonLink)
+                change: function(e) {
+                    var link = Application.getCurrentCommonLink();
+
+                    if (link.length) {
+                        var href = link[0].getAttribute("href");
+                        var linkPath = path(href);
+                        var extension = /\.(less|css)$/.exec(href)[1];
+
+                        link[0].setAttribute("href",
+                            kendo.format("{0}kendo.{1}.{2}", linkPath, this.value(), extension)
+                        );
+
+                        if (extension == "less") {
+                            less.refresh(true);
+                        }
+
+                        document.body.style.cssText = document.body.style.cssText;
+                    }
+                }
             });
 
             $("#theme").kendoDropDownList({
@@ -337,7 +317,7 @@
                 ],
                 change: function(e) {
                     theme = this.value();
-                    changeStylesheet(themeLink).call(this, e);
+                    Application.replaceTheme(theme);
                     initCharts(theme);
                 }
             });
@@ -945,7 +925,7 @@
 
             $("#panelbar").kendoPanelBar();
 
-            $("#demo .form-widgets")
+            $("#example .form-widgets")
                 .find("select:not([multiple])").kendoDropDownList().end()
                 .find("select[multiple]").kendoMultiSelect().end()
                 .find("input:not([type])").addClass("k-textbox").end()
@@ -954,7 +934,7 @@
                     format: "0 years"
                 });
 
-            $("#demo textarea").kendoEditor({
+            $("#example textarea").kendoEditor({
                 tools: [
                     "formatting",
                     "bold", "italic", "underline",

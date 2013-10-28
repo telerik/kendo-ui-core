@@ -68,10 +68,12 @@ namespace Kendo.Models
         {
 #if DEBUG
             "web/kendo.common-bootstrap.less",
-            "web/kendo.bootstrap.less"
+            "web/kendo.bootstrap.less",
+            "mobile/kendo.mobile.all.less"
 #else
             "kendo.common-bootstrap.min.css",
-            "kendo.bootstrap.min.css"
+            "kendo.bootstrap.min.css",
+            "kendo.mobile.all.min.css"
 #endif
         };
     }
