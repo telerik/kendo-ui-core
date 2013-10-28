@@ -140,5 +140,29 @@ namespace Kendo.Mvc.UI.Fluent
         {
             return new ChartRadarLineSeriesBuilder<TModel>(chart.SeriesDefaults.RadarLine);
         }
+
+        /// <summary>
+        /// Defines the default settings for polar line series.
+        /// </summary>
+        public virtual ChartPolarLineSeriesBuilder<TModel> PolarLine()
+        {
+            return new ChartPolarLineSeriesBuilder<TModel>(chart.SeriesDefaults.PolarLine);
+        }
+
+        /// <summary>
+        /// Defines the default settings for polar area series.
+        /// </summary>
+        public virtual ChartPolarAreaSeriesBuilder<TModel> PolarArea()
+        {
+            return new ChartPolarAreaSeriesBuilder<TModel>(chart.SeriesDefaults.PolarArea);
+        }
+
+        /// <summary>
+        /// Defines the default settings for polar scatter series.
+        /// </summary>
+        public virtual ChartPolarScatterSeriesBuilder<TModel> PolarScatter()
+        {
+            return new ChartPolarScatterSeriesBuilder<TModel>(chart.SeriesDefaults.PolarScatter);
+        }
     }
 }
