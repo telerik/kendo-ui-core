@@ -2806,16 +2806,32 @@ kendo_module({
 
             if (that.dataSource && that._refreshHandler) {
                 that.dataSource
-                    .unbind(CHANGE, that._refreshHandler);
-                    //.unbind(ERROR, that._errorHandler);
+                    .unbind(CHANGE, that._refreshHandler)
+                    .unbind("progress", that._progressHandler)
+                    .unbind("error", that._errorHandler);
             } else {
-                //that._errorHandler = proxy(that._error, that);
                 that._refreshHandler = proxy(that.refresh, that);
+                that._progressHandler = proxy(that._requestStart, that);
+                that._errorHandler = proxy(that._error, that);
             }
 
             that.dataSource = kendo.data.SchedulerDataSource.create(dataSource)
-                .bind(CHANGE, that._refreshHandler);
-                //.bind(ERROR, that._errorHandler);
+                .bind(CHANGE, that._refreshHandler)
+                .bind("progress", that._progressHandler)
+                .bind("error", that._errorHandler);
+        },
+
+        _error: function() {
+            this._progress(false);
+        },
+
+        _requestStart: function() {
+            this._progress(true);
+        },
+
+        _progress: function(toggle) {
+            var element = this.element.find(".k-scheduler-content");
+            kendo.ui.progress(element, toggle);
         },
 
         _resources: function() {
@@ -2990,6 +3006,8 @@ kendo_module({
 
         refresh: function(e) {
             var view = this.view();
+
+            this._progress(false);
 
             e = e || {};
 
