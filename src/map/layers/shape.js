@@ -24,14 +24,16 @@
             });
 
             this._initOptions(options);
+            this.map = map;
 
             this.element = $("<div class='k-layer'></div>").appendTo(
                 map.scrollWrap // TODO: API for allocating a scrollable element?
             ).css("width", options.width).css("height", options.height);
-
-            this.map = map;
-            this.surface = new d.svg.Surface(this.element[0], options); // TODO: Automatic choice
             this.movable = new kendo.ui.Movable(this.element);
+
+            this.surface = new d.svg.Surface(this.element[0], options); // TODO: Automatic choice
+            this._click = proxy(this._click, this);
+            this.surface.bind("click", this._click);
 
             map.bind("reset", proxy(this.reset, this));
             map.bind("dragEnd", proxy(this._dragEnd, this));
@@ -106,8 +108,9 @@
 
         _loadPolygon: function(container, rings, dataItem) {
             var shape = this._buildPolygon(rings);
+            shape.dataItem = dataItem;
 
-            var args = { layer: this, shape: shape, dataItem: dataItem };
+            var args = { layer: this, shape: shape };
             if (!this.map.trigger("shapeCreated", args)) {
                 container.append(shape);
             }
@@ -141,6 +144,16 @@
 
             this.surface.translate(nw);
             this.movable.moveTo(nw);
+        },
+
+        _click: function(e) {
+            var args = {
+                layer: this,
+                shape: e.shape,
+                originalEvent: e.originalEvent
+            };
+
+            this.map.trigger("shapeClick", args);
         }
     });
 

@@ -72,6 +72,7 @@ kendo_module({
             "reset",
             "drag",
             "dragEnd",
+            "shapeClick",
             "shapeCreated"
         ],
 

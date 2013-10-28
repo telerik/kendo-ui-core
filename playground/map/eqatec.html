@@ -145,8 +145,11 @@
             markerHover: $.noop,
             shapeHover: $.noop,
             //TODO: mouseover / mouseout?
+            shapeClick: function(e) {
+                console.log(e);
+            },
             shapeCreated: function(e) {
-                var users = e.dataItem.properties.users;
+                var users = e.shape.dataItem.properties.users;
                 if (users) {
                     setColor(e.shape, users);
                 }
