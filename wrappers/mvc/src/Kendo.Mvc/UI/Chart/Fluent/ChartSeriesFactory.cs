@@ -1911,7 +1911,7 @@ namespace Kendo.Mvc.UI.Fluent
             var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
             var ntoeTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
             var seriesType = typeof(ChartRadarColumnSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
-            var series = (IChartRadarColumnSeries)BuildSeries(seriesType, valueExpr, colorExpr, categoryExpr, ntoeTextExpr);
+            var series = (IBarSeries)BuildSeries(seriesType, valueExpr, colorExpr, categoryExpr, ntoeTextExpr);
 
             series.Member = valueMemberName;
             series.ColorMember = colorMemberName;

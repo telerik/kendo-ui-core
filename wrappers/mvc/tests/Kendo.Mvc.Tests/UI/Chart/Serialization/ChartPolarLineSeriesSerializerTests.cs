@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI.Tests
 {
     using System.Collections.Generic;
     using Kendo.Mvc.UI.Tests.Chart;
+    using Kendo.Mvc.UI;
     using Xunit;
 
     public class ChartPolarLineSeriesSerializerTests

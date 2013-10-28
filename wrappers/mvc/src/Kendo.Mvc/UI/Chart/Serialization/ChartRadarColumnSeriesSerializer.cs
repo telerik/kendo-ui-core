@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI
 
     internal class ChartRadarColumnSeriesSerializer : ChartBarSeriesSerializerBase
     {
-        public ChartRadarColumnSeriesSerializer(IChartRadarColumnSeries series)
+        public ChartRadarColumnSeriesSerializer(IBarSeries series)
             : base(series)
         {
         }

@@ -413,7 +413,6 @@
     <Compile Include="UI\Chart\Serialization\ChartBarSeriesSerializerBase.cs" />
     <Compile Include="UI\Chart\Fluent\ChartRadarColumnSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Series\IBarSeries.cs" />
-    <Compile Include="UI\Chart\Series\IChartRadarColumnSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartLineSeries.cs" />
     <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Serialization\ChartLineSeriesSerializer.cs" />

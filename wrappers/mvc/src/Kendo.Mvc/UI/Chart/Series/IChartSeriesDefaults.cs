@@ -117,7 +117,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The default settings for all radar column series.
         /// </summary>
-        IChartRadarColumnSeries RadarColumn
+        IBarSeries RadarColumn
         {
             get;
         }
