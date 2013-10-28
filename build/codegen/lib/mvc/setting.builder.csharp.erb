@@ -6,13 +6,13 @@ namespace Kendo.Mvc.UI.Fluent
     using Kendo.Mvc.Extensions;
 
     /// <summary>
-    /// Defines the fluent API for configuring the <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %> settings.
+    /// Defines the fluent API for configuring the <%= self.instance_of?(array_option_class) ? csharp_item_class : csharp_class %> settings.
     /// </summary>
-    public class <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %>Builder: IHideObjectMembers
+    public class <%= self.instance_of?(array_option_class) ? csharp_item_class : csharp_class %>Builder: IHideObjectMembers
     {
-        private readonly <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %> container;
+        private readonly <%= self.instance_of?(array_option_class) ? csharp_item_class : csharp_class %> container;
 
-        public <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %>Builder(<%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %> settings)
+        public <%= self.instance_of?(array_option_class) ? csharp_item_class : csharp_class %>Builder(<%= self.instance_of?(array_option_class) ? csharp_item_class : csharp_class %> settings)
         {
             container = settings;
         }
@@ -20,7 +20,7 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         //<< Fields
 
-        <% if self.instance_of?(ArrayOption) %>
+        <% if self.instance_of?(array_option_class) %>
         /// <summary>
         /// Sets the HTML attributes.
         /// </summary>

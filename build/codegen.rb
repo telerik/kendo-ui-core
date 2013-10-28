@@ -5,7 +5,9 @@ require 'codegen/lib/component'
 
 require 'nokogiri'
 require 'codegen/lib/mvc/api'
+require 'codegen/lib/mvc/mvc'
 require 'codegen/lib/mvc/mobile'
+require 'codegen/lib/mvc/dataviz'
 require 'codegen/lib/java/module'
 require 'codegen/lib/java/composite_option'
 require 'codegen/lib/java/event'
@@ -50,13 +52,12 @@ namespace :generate do
             end
         end
 
-        namespace :mobile do
-
-            desc 'Generate MVC Mobile wrappers'
+        namespace :dataviz do
+            desc 'Generate MVC DataViz wrappers'
             task :wrappers do
-                MARKDOWN = FileList['docs/api/mobile/*.md'].exclude(/listview|swipe|loader|pane|touch|scroller/)
+                MARKDOWN = FileList['docs/api/dataviz/map.md']
 
-                components = MARKDOWN.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Mobile::Wrappers::Component) }
+                components = MARKDOWN.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Wrappers::DataViz::Component) }
                     .sort { |a, b| a.name <=> b.name }
 
                 component_register = ''
@@ -65,7 +66,42 @@ namespace :generate do
 
                     import_metadata(component)
 
-                    generator = CodeGen::MVC::Mobile::Wrappers::Generator.new('wrappers/mvc/src/Kendo.Mvc/UI')
+                    generator = CodeGen::MVC::Wrappers::Generator.new('wrappers/mvc/src/Kendo.Mvc/UI')
+
+                    generator.component(component)
+
+                    generator.cs_proj(component)
+
+                    component.register(component_register)
+                end
+
+                factory_file = 'wrappers/mvc/src/Kendo.Mvc/UI/WidgetFactory.cs'
+
+                content = File.read(factory_file)
+
+                content = content.sub(/\/\/>> DataVizComponents(.|\n)*\/\/<< DataVizComponents/,
+                             "//>> DataVizComponents #{component_register}//<< DataVizComponents")
+
+                File.write(factory_file, content.dos)
+            end
+        end
+
+        namespace :mobile do
+
+            desc 'Generate MVC Mobile wrappers'
+            task :wrappers do
+                MARKDOWN = FileList['docs/api/mobile/*.md'].exclude(/listview|swipe|loader|pane|touch|scroller/)
+
+                components = MARKDOWN.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Wrappers::Mobile::Component) }
+                    .sort { |a, b| a.name <=> b.name }
+
+                component_register = ''
+
+                components.each do |component|
+
+                    import_metadata(component)
+
+                    generator = CodeGen::MVC::Wrappers::Generator.new('wrappers/mvc/src/Kendo.Mvc/UI')
 
                     generator.component(component)
 

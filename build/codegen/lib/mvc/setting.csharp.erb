@@ -5,19 +5,19 @@ namespace Kendo.Mvc.UI
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
-    public class <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %> : JsonObject
+    public class <%= self.instance_of?(array_option_class) ? csharp_item_class : csharp_class %> : JsonObject
     {
-        public <%= self.instance_of?(ArrayOption) ? csharp_item_class : csharp_class %>()
+        public <%= self.instance_of?(array_option_class) ? csharp_item_class : csharp_class %>()
         {
             //>> Initialization
             //<< Initialization
 
-            <% if self.instance_of?(ArrayOption) %>
+            <% if self.instance_of?(array_option_class) %>
             HtmlAttributes = new RouteValueDictionary();
             <% end %>
         }
 
-        <% if self.instance_of?(ArrayOption) %>
+        <% if self.instance_of?(array_option_class) %>
         /// <summary>
         /// Gets the HTML attributes.
         /// </summary>
