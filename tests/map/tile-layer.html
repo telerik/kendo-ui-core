@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shape layer</title>
+    <script src="../jquery-loader.js"></script>
+    <script src="../qunit/qunit/qunit.js"></script>
+    <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+    <script src="../kendo-test-helpers.js"></script>
+    <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+</head>
+<body>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/dataviz/util.js"></script>
+    <script src="../../src/dataviz/geometry.js"></script>
+    <script src="../../src/kendo.dataviz.map.js"></script>
+    <script>
+        var dataviz = kendo.dataviz,
+            map = dataviz.map,
+
+            TileLayer = map.layers.TileLayer,
+            Location = map.Location;
+
+        (function() {
+
+            var tile,
+                pool;
+
+            // ------------------------------------------------------------
+            module("Tile layer / Pool", {
+                setup: function() {
+                    var map = {
+                        scrollWrap: $("<div></div>"),
+                        bind: function() {}
+                    };
+                    tile = new TileLayer(map, {
+                        tileSize: 256,
+                        maxSize: 10
+                    });
+                    pool = tile.pool;
+                }
+            });
+
+            //test("should not have more then 10 items", function() {
+            //    ok(pool._items.length <= 10);
+            //});
+
+        })();
+
+    </script>
+
+    <h1 id="qunit-header">kendo.map</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+
+</body>
+</html>
