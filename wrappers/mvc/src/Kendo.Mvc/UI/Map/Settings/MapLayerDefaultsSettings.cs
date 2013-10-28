@@ -1,6 +1,7 @@
 namespace Kendo.Mvc.UI
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
@@ -42,9 +43,17 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            json["shape"] = Shape.ToJson();
+            var shape = Shape.ToJson();
+            if (shape.Any())
+            {
+                json["shape"] = shape;
+            }
                 
-            json["tile"] = Tile.ToJson();
+            var tile = Tile.ToJson();
+            if (tile.Any())
+            {
+                json["tile"] = tile;
+            }
                 
         //<< Serialization
         }

@@ -1,6 +1,7 @@
 namespace Kendo.Mvc.UI
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
@@ -42,9 +43,17 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            json["navigator"] = Navigator.ToJson();
+            var navigator = Navigator.ToJson();
+            if (navigator.Any())
+            {
+                json["navigator"] = navigator;
+            }
                 
-            json["zoom"] = Zoom.ToJson();
+            var zoom = Zoom.ToJson();
+            if (zoom.Any())
+            {
+                json["zoom"] = zoom;
+            }
                 
         //<< Serialization
         }

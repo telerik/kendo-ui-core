@@ -32,7 +32,7 @@ namespace Kendo.Mvc.UI
         
             if (UrlTemplateId.HasValue())
             {
-                json["url-template"] = UrlTemplateId;
+                json["urlTemplate"] = UrlTemplateId;
             }
             
             if (Copyright.HasValue())

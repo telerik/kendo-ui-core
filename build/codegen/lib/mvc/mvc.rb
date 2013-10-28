@@ -75,16 +75,6 @@ module CodeGen::MVC::Wrappers
         <%= composite_options.map { |option| option.to_initialization }.join %>
         //<< Initialization})
 
-        COMPONENT_FIELD_SERIALIZATION = ERB.new(%{//>> Serialization
-        <% composite_options.each do |option| %>
-            options["<%= option.name %>"] = <%= option.csharp_name %>.ToJson();
-        <% end %>
-        <% simple_options.each do |option| %>
-            options["<%= option.name %>"] = <%= option.csharp_name %>;
-        <% end %>
-            //<< Serialization})
-
-
         COMPONENT_FLUENT_FIELDS = ERB.new(%{//>> Fields
         <%= unique_options.map { |option| option.to_fluent }.join %>
         //<< Fields})
@@ -212,13 +202,13 @@ module CodeGen::MVC::Wrappers
                 return ERB.new(%{
             if (<%=csharp_name%>.HasValue())
             {
-                json["<%= name.to_attribute %>"] = <%=csharp_name%>;
+                json["<%= name %>"] = <%=csharp_name%>;
             }
             }).result(binding)
             end
 
             ERB.new(%{
-            json["<%= name.to_attribute %>"] = <%= csharp_name %>;
+            json["<%= name %>"] = <%= csharp_name %>;
                 }).result(binding)
         end
 
@@ -258,7 +248,11 @@ module CodeGen::MVC::Wrappers
 
         def to_client_option
             ERB.new(%{
-            json["<%= name.to_attribute %>"] = <%=csharp_name%>.ToJson();
+            var <%= name %> = <%= csharp_name %>.ToJson();
+            if (<%= name %>.Any())
+            {
+                json["<%= name %>"] = <%= name %>;
+            }
                 }).result(binding)
         end
 
@@ -311,7 +305,7 @@ module CodeGen::MVC::Wrappers
 
             csharp = csharp.sub(/\/\/>> Initialization(.|\n)*\/\/<< Initialization/, COMPOSITE_FIELD_INITIALIZATION.result(binding))
 
-            csharp = csharp.sub(/\/\/>> Serialization(.|\n)*\/\/<< Serialization/, COMPONENT_FIELD_SERIALIZATION.result(binding))
+            csharp = csharp.sub(/\/\/>> Serialization(.|\n)*\/\/<< Serialization/, FIELD_SERIALIZATION.result(binding))
         end
 
         def to_html_builder(filename)

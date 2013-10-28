@@ -7,6 +7,7 @@ namespace Kendo.Mvc.UI
     using System.Web.Mvc;
     using System.Web.UI;
     using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Extensions;
 
     public class Map : WidgetBase
     {
@@ -77,34 +78,56 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(Events);
+            var json = new Dictionary<string, object>(Events);
 
             //>> Serialization
         
-            options["controls"] = Controls.ToJson();
-        
-            options["layerDefaults"] = LayerDefaults.ToJson();
-        
-            options["layers"] = Layers.ToJson();
-        
-            options["markerDefaults"] = MarkerDefaults.ToJson();
-        
-            options["markers"] = Markers.ToJson();
-        
-        
-            options["maxZoom"] = MaxZoom;
-        
-            options["minSize"] = MinSize;
-        
-            options["minZoom"] = MinZoom;
-        
-            options["theme"] = Theme;
-        
-            options["zoom"] = Zoom;
-        
-            //<< Serialization
+            var controls = Controls.ToJson();
+            if (controls.Any())
+            {
+                json["controls"] = controls;
+            }
+                
+            var layerDefaults = LayerDefaults.ToJson();
+            if (layerDefaults.Any())
+            {
+                json["layerDefaults"] = layerDefaults;
+            }
+                
+            var layers = Layers.ToJson();
+            if (layers.Any())
+            {
+                json["layers"] = layers;
+            }
+                
+            var markerDefaults = MarkerDefaults.ToJson();
+            if (markerDefaults.Any())
+            {
+                json["markerDefaults"] = markerDefaults;
+            }
+                
+            var markers = Markers.ToJson();
+            if (markers.Any())
+            {
+                json["markers"] = markers;
+            }
+                
+            json["minZoom"] = MinZoom;
+                
+            json["maxZoom"] = MaxZoom;
+                
+            json["minSize"] = MinSize;
+                
+            if (Theme.HasValue())
+            {
+                json["theme"] = Theme;
+            }
+            
+            json["zoom"] = Zoom;
+                
+        //<< Serialization
 
-            writer.Write(Initializer.Initialize(Selector, "Map", options));
+            writer.Write(Initializer.Initialize(Selector, "Map", json));
 
             base.WriteInitializationScript(writer);
         }

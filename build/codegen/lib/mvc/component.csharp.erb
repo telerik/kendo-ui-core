@@ -7,6 +7,7 @@ namespace Kendo.Mvc.UI
     using System.Web.Mvc;
     using System.Web.UI;
     using Kendo.Mvc.Infrastructure;
+    using Kendo.Mvc.Extensions;
 
     public class <%= csharp_class %> : WidgetBase
     {
@@ -25,12 +26,12 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            var options = new Dictionary<string, object>(Events);
+            var json = new Dictionary<string, object>(Events);
 
 //>> Serialization
 //<< Serialization
 
-            writer.Write(Initializer.Initialize(Selector, "<%= name %>", options));
+            writer.Write(Initializer.Initialize(Selector, "<%= name %>", json));
 
             base.WriteInitializationScript(writer);
         }

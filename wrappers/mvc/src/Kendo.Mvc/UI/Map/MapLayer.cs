@@ -1,6 +1,7 @@
 namespace Kendo.Mvc.UI
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
@@ -46,7 +47,11 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            json["layer"] = Layer.ToJson();
+            var layer = Layer.ToJson();
+            if (layer.Any())
+            {
+                json["layer"] = layer;
+            }
                 
         //<< Serialization
         }

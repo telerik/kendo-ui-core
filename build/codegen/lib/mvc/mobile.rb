@@ -43,10 +43,31 @@ module CodeGen::MVC::Wrappers::Mobile
             end
         end
 
+        def to_client_option
+            if csharp_type.eql?('string')
+                return ERB.new(%{
+            if (<%=csharp_name%>.HasValue())
+            {
+                json["<%= name.to_attribute %>"] = <%=csharp_name%>;
+            }
+            }).result(binding)
+            end
+
+            ERB.new(%{
+            json["<%= name.to_attribute %>"] = <%= csharp_name %>;
+                }).result(binding)
+        end
+
     end
 
     class CompositeOption < CodeGen::MVC::Wrappers::CompositeOption
         include Options
+
+        def to_client_option
+            ERB.new(%{
+            json["<%= name.to_attribute %>"] = <%=csharp_name%>.ToJson();
+                }).result(binding)
+        end
     end
 
     class ArrayItem < CompositeOption
