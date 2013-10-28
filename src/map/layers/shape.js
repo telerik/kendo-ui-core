@@ -147,13 +147,15 @@
         },
 
         _click: function(e) {
-            var args = {
-                layer: this,
-                shape: e.shape,
-                originalEvent: e.originalEvent
-            };
+            if (e.shape) {
+                var args = {
+                    layer: this,
+                    shape: e.shape,
+                    originalEvent: e.originalEvent
+                };
 
-            this.map.trigger("shapeClick", args);
+                this.map.trigger("shapeClick", args);
+            }
         }
     });
 
