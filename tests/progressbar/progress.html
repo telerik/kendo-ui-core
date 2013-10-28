@@ -627,44 +627,6 @@
                 }, 30);
             });
 
-
-            asyncTest("isFinished is set to true when the value is set to max value", function() {
-                pb = createProgressbar({
-                    min: 0,
-                    max: 130,
-                    value: 10,
-                    type: "chunk",
-                    showStatus: true
-                });
-
-                pb.value(130);
-
-                setTimeout(function() {
-                    ok(pb._isFinished);
-
-                    start();
-                }, 30);
-            });
-
-            asyncTest("isFinished remains true when the value is set to max value and then decreased", function() {
-                pb = createProgressbar({
-                    min: 0,
-                    max: 130,
-                    value: 10,
-                    type: "chunk",
-                    showStatus: true
-                });
-
-                pb.value(130);
-                pb.value(50);
-
-                setTimeout(function() {
-                    ok(pb._isFinished);
-
-                    start();
-                }, 30);
-            });
-
             asyncTest("Correct chunk count is updated when range is more than chunkCount", function() {
                 pb = createProgressbar({
                     min: 0,

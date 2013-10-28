@@ -335,7 +335,6 @@ kendo_module({
 
             if (currentValue === options.max && that._isStarted) {
                 that.trigger(COMPLETE, { value: options.max });
-                that._isFinished = true;
             }
         },
 
