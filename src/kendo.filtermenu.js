@@ -108,7 +108,7 @@ kendo_module({
                                 '</select>' +
                             '#}else{#' +
                                 '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="#=inputType#" '+
-                                '#=role==="numerictextbox" ? "data-" + ns + "role=\'" + role + "\' data-" + ns + "spinners=\'false\'" : ""# />'+
+                                '#=role==="numerictextbox" ? "data-" + ns + "role=\'" + role + "\'" : ""# />'+
                             '#}#' +
                         '</label></li>'+
                         '#if(extra){#'+
@@ -135,7 +135,7 @@ kendo_module({
                                     '</select>' +
                                 '#}else{#' +
                                     '<input data-#=ns#bind="value:filters[1].value" class="k-textbox" type="#=inputType#" '+
-                                    '#=role==="numerictextbox" ? "data-" + ns + "role=\'" + role + "\' data-" + ns + "spinners=\'false\'" : ""# />'+
+                                    '#=role==="numerictextbox" ? "data-" + ns + "role=\'" + role + "\'" : ""# />'+
                                 '#}#' +
                             '</label></li>'+
                         '#}#'+
