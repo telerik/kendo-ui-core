@@ -31,7 +31,23 @@ module CodeGen::MVC::Wrappers::Mobile
         include Options
     end
 
+    class ArrayItem < CompositeOption
+        def csharp_class
+            owner.csharp_item_class
+        end
+
+        def full_name
+            @owner.full_name
+        end
+
+    end
+
     class ArrayOption < CompositeOption
+        include CodeGen::Array
+
+        def item_class
+            ArrayItem
+        end
         def csharp_class
             "List<#{csharp_item_class}>"
         end
@@ -42,6 +58,18 @@ module CodeGen::MVC::Wrappers::Mobile
 
         def csharp_item_class
             "#{owner.csharp_class}#{csharp_name.chop}"
+        end
+
+        def delete_ignored
+            item.delete_ignored
+        end
+
+        def composite_options
+            []
+        end
+
+        def unique_options
+            item.unique_options
         end
     end
 

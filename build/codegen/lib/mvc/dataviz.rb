@@ -31,7 +31,19 @@ module CodeGen::MVC::Wrappers::DataViz
         include Options
     end
 
+    class ArrayItem < CompositeOption
+        def csharp_class
+            owner.csharp_item_class
+        end
+    end
+
     class ArrayOption < CompositeOption
+        include CodeGen::Array
+
+        def item_class
+            ArrayItem
+        end
+
         def csharp_class
             "List<#{csharp_item_class}>"
         end
@@ -42,6 +54,10 @@ module CodeGen::MVC::Wrappers::DataViz
 
         def csharp_item_class
             "#{owner.csharp_class}#{csharp_name.chop}"
+        end
+
+        def delete_ignored
+            item.delete_ignored
         end
     end
 

@@ -16,6 +16,8 @@ module CodeGen::MVC::Wrappers
     }
 
     SERIALIZATION_SKIP_LIST = [
+        'map.center',
+        'map.markers.position',
         'actionsheet.items.text',
         'buttongroup.items.text',
         'tabstrip.items.text',
@@ -24,6 +26,8 @@ module CodeGen::MVC::Wrappers
     ]
 
     IGNORED = [
+        'map.center',
+        'map.markers.position',
         'popover.popup.direction',
         'layout.id',
         'view.model',
@@ -94,7 +98,7 @@ module CodeGen::MVC::Wrappers
         /// <%= description.gsub(/\r?\n/, '\n\t\t/// ').html_encode()%>
         /// </summary>
         /// <param name="configurator">The action that configures the <%= csharp_name.downcase %>.</param>
-        public <%= owner.csharp_class %>Builder <%= csharp_name%>(Action<<%= csharp_builder_class %>> configurator)
+        public <%= owner.respond_to?('csharp_item_class') ? owner.csharp_item_class : owner.csharp_class %>Builder <%= csharp_name%>(Action<<%= csharp_builder_class %>> configurator)
         {
             configurator(new <%= csharp_builder_class %>(container.<%= csharp_name%>));
             return this;
@@ -201,12 +205,12 @@ module CodeGen::MVC::Wrappers
             {
                 json["<%= name.to_attribute %>"] = <%=csharp_name%>;
             }
-        }).result(binding)
+            }).result(binding)
             end
 
             ERB.new(%{
             json["<%= name.to_attribute %>"] = <%= csharp_name %>;
-            }).result(binding)
+                }).result(binding)
         end
 
         def to_enum
@@ -218,7 +222,11 @@ module CodeGen::MVC::Wrappers
         include Options
 
         def csharp_class
-            "#{owner.csharp_class.gsub(/Settings/, "")}#{csharp_name}Settings"
+            prefix = owner.csharp_class.sub('Settings','')
+                                       .sub('List<', '')
+                                       .sub('>', '')
+
+           "#{prefix}#{csharp_name}Settings"
         end
 
         def csharp_builder_class
@@ -228,7 +236,7 @@ module CodeGen::MVC::Wrappers
         def to_initialization
             ERB.new(%{
             <%=csharp_name%> = new <%=csharp_class%>();
-            }).result(binding)
+                }).result(binding)
         end
 
         def to_declaration
@@ -242,7 +250,7 @@ module CodeGen::MVC::Wrappers
         def to_client_option
             ERB.new(%{
             json["<%= name.to_attribute %>"] = <%=csharp_name%>.ToJson();
-            }).result(binding)
+                }).result(binding)
         end
 
         def get_binding
@@ -351,6 +359,7 @@ module CodeGen::MVC::Wrappers
 
             enums
         end
+
     end
 
     class Generator
@@ -412,18 +421,24 @@ module CodeGen::MVC::Wrappers
                     next
                 end
 
-                # write *Settings.cs file
-                filename = "#{@path}/#{component.path}/Settings/#{option.csharp_class}.cs"
+                write_composite_option(component, option)
 
-                write_file(filename, component.to_setting(filename, option))
+            end
+        end
 
-                # write *SettingsBuilder.cs file
-                filename = "#{@path}/#{component.path}/Fluent/#{option.csharp_builder_class}.cs"
+        def write_composite_option(component, option)
+            # write *Settings.cs file
+            filename = "#{@path}/#{component.path}/Settings/#{option.csharp_class}.cs"
 
-                write_file(filename, component.to_fluent_setting(filename, option))
+            write_file(filename, component.to_setting(filename, option))
 
-                # nested composite options
-                options.push(*option.composite_options) if option.composite_options
+            # write *SettingsBuilder.cs file
+            filename = "#{@path}/#{component.path}/Fluent/#{option.csharp_builder_class}.cs"
+
+            write_file(filename, component.to_fluent_setting(filename, option))
+
+            option.composite_options.each do |o|
+                write_composite_option(component, o)
             end
         end
 
@@ -440,6 +455,10 @@ module CodeGen::MVC::Wrappers
             #write *ItemBuilder.cs file
             filename = "#{@path}/#{option.owner.path}/Fluent/#{option.csharp_item_class}Builder.cs"
             write_file(filename, component.to_fluent_setting(filename, option))
+
+            option.item.composite_options.each do |o|
+                write_composite_option(component, o)
+            end
         end
 
         def write_events(component)
