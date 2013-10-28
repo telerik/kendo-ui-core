@@ -473,10 +473,6 @@ kendo_module({
     });
 
     // Layers =================================================================
-    var TILE_TEMPLATE = template(
-        '<img class="k-tile" unselectable="on" src="#= url #" ' +
-        'style="left: #= left #px; top: #= top #px;"></img>');
-
     var ImageTile = Class.extend({
         init: function(options) {
             this.element = $("<img class='k-tile' unselectable='on'></img>");
@@ -506,7 +502,7 @@ kendo_module({
 
         destroy: function() {
             this.element.remove();
-        },
+        }
     });
 
     var TilePool = Class.extend({
@@ -534,8 +530,8 @@ kendo_module({
         },
 
         clear: function() {
-            var items = pool._items,
-                i, item;
+            var items = this._items,
+                i;
 
             for (i = 0; i < items.length; i++) {
                 items[i].clear();
@@ -543,8 +539,8 @@ kendo_module({
         },
 
         destroy: function() {
-            var items = pool._items,
-                i, item;
+            var items = this._items,
+                i;
 
             for (i = 0; i < items.length; i++) {
                 items[i].destroy();
@@ -565,10 +561,10 @@ kendo_module({
 
             for (i = 0; i < items.length; i++) {
                 item = items[i];
-                currentDist = point.distanceTo(center);
+                currentDist = item.screenPoint.distanceTo(center);
                 if (dist > currentDist) {
                     index = i;
-                    distance = currentDist;
+                    dist = currentDist;
                 }
             }
 
@@ -613,7 +609,7 @@ kendo_module({
                 zoom = options.zoom,
                 urlTemplate = template(options.urlTemplate),
                 map = layer.map,
-                output = "",
+                //output = "",
                 scale = layer.map.scale(),
                 nwToPoint = layer.crs.toPoint(map.viewport().nw, scale);
 
@@ -628,7 +624,6 @@ kendo_module({
                     zoom: zoom, x: tileIndex.x, y: tileIndex.y
                 })
             });
-            console.log(tile);
 
             //var tileX = point.x;
             //var tileY = point.y;
