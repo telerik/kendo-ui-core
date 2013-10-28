@@ -4,6 +4,10 @@ html, body {
     min-width: 320px;
 }
 
+#example {
+    padding-top: 2em;
+}
+
 header {
     margin: 0;
     font-size: 20px;
