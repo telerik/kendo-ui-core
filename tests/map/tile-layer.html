@@ -14,6 +14,7 @@
     <script src="../../src/dataviz/util.js"></script>
     <script src="../../src/dataviz/geometry.js"></script>
     <script src="../../src/kendo.dataviz.map.js"></script>
+    <script src="../../src/map/tile-layer.js"></script>
     <script>
         var dataviz = kendo.dataviz,
             map = dataviz.map,
@@ -41,9 +42,9 @@
                 }
             });
 
-            //test("should not have more then 10 items", function() {
-            //    ok(pool._items.length <= 10);
-            //});
+            test("should not have more then 10 items", function() {
+                ok(pool._items.length <= 10);
+            });
 
         })();
 
