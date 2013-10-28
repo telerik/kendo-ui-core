@@ -474,24 +474,28 @@ kendo_module({
         },
 
         update: function(options) {
-            this.element.prop("src", options.url);
+            var element = this.element;
+
+            if (element.hide()) {
+                element.show();
+            }
+
+            element.prop("src", options.url);
             this.url = options.url;
 
-            this.element.offset(options.offset);
-            this.offset = options.offset;
-
-            // rename to
+            element.offset(options.point);
             this.point = options.point;
+
+            this.screenPoint = options.screenPoint;
             this.index = options.index;
         },
 
         clear: function() {
-            // hide all image elements
-            this.items = [];
+            this.element.hide();
         },
 
         destroy: function() {
-            // remove all image tiles
+            this.element.remove();
         },
     });
 
@@ -520,12 +524,21 @@ kendo_module({
         },
 
         clear: function() {
-            // hide all image elements
-            this.items = [];
+            var items = pool._items,
+                i, item;
+
+            for (i = 0; i < items.length; i++) {
+                items[i].clear();
+            }
         },
 
         destroy: function() {
-            // remove all image tiles
+            var items = pool._items,
+                i, item;
+
+            for (i = 0; i < items.length; i++) {
+                items[i].destroy();
+            }
         },
 
         _create: function(options) {
@@ -595,11 +608,11 @@ kendo_module({
                 nwToPoint = layer.crs.toPoint(map.viewport().nw, scale);
 
             var tileIndex = layer._getTileIndex(nwToPoint);
-            var tilePoint = new Point(tileIndex.x * tileSize, tileIndex.y * tileSize);
-            var offset = tilePoint.clone().subtract(nwToPoint);
+            var screenPoint = new Point(tileIndex.x * tileSize, tileIndex.y * tileSize);
+            var point = screenPoint.clone().subtract(nwToPoint);
             var tile = layer._createTile({
-                point: tilePoint,
-                offset: offset,
+                screenPoint: screenPoint,
+                point: point,
                 index: tileIndex,
                 url: urlTemplate({
                     zoom: zoom, x: tileIndex.x, y: tileIndex.y
