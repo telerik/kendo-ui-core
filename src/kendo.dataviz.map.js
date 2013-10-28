@@ -39,11 +39,13 @@ kendo_module({
         valueOrDefault = util.valueOrDefault;
 
     // Constants ==============================================================
-    var PI = math.PI,
+    var FRICTION = 0.90,
+        PI = math.PI,
         PI_DIV_2 = PI / 2,
         PI_DIV_4 = PI / 4,
         DEG_TO_RAD = PI / 180,
-        MAX_ZOOM = 18;
+        MAX_ZOOM = 18,
+        VELOCITY_MULTIPLIER = 5m;
 
     // Map widget =============================================================
     var Map = Widget.extend({
@@ -58,10 +60,12 @@ kendo_module({
             map.crs = new EPSG3857();
 
             map.layers = new ObservableArray([]);
-            map.crs = new EPSG3857();
             map._renderLayers();
 
-            var scroller = map.scroller = new kendo.mobile.ui.Scroller(map.scrollWrap);
+            var scroller = map.scroller = new kendo.mobile.ui.Scroller(map.scrollWrap, {
+                friction: FRICTION,
+                velocityMultiplier: VELOCITY_MULTIPLIER
+            });
             scroller.bind("scroll", proxy(map._scroll, map));
             scroller.bind("scrollEnd", proxy(map._scrollEnd, map));
 
@@ -131,8 +135,10 @@ kendo_module({
             var scroller = this.scroller;
             scroller.dimensions.y.makeVirtual();
             scroller.dimensions.x.makeVirtual();
-            scroller.dimensions.x.virtualSize(0, this.scale());
-            scroller.dimensions.y.virtualSize(0, this.scale());
+
+            var nw = this.toLayerPoint(this.viewport().nw);
+            scroller.dimensions.x.virtualSize(-nw.x, this.scale() - nw.x);
+            scroller.dimensions.y.virtualSize(-nw.y, this.scale() - nw.y);
         },
 
         _renderLayers: function() {
@@ -154,6 +160,7 @@ kendo_module({
             this.trigger("reset");
         },
 
+        // TODO: Rename to extent
         viewport: function() {
             var map = this,
                 scale = map.scale(),
