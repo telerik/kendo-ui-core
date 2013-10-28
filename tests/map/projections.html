@@ -115,6 +115,14 @@
                 );
             });
 
+            test("inverse out of bounds", function() {
+                mercator = new projections.Mercator();
+
+                var r = mercator.inverse(new Point(Number.MAX_VALUE, Number.MAX_VALUE));
+                close(r.lng, mercator.MAX_LNG, TOLERANCE, "X");
+                close(r.lat, mercator.MAX_LAT, TOLERANCE, "Y");
+            });
+
         })();
 
         (function() {
