@@ -560,9 +560,15 @@
                     var link = linkCallback();
 
                     if (link.length) {
-                        var linkPath = path(link[0].getAttribute("href"));
+                        var href = link[0].getAttribute("href");
+                        var linkPath = path(href);
+                        var extension = /\.(less|css)$/.exec(href)[1];
 
-                        link[0].setAttribute("href", linkPath + this.value());
+                        link[0].setAttribute("href", linkPath + this.value() + "." + extension);
+
+                        if (extension == "less") {
+                            less.refresh();
+                        }
                     }
                 };
             }
@@ -570,10 +576,10 @@
             $("#dimensions").kendoDropDownList({
                 dataTextField: "text",
                 dataValueField: "value",
-                value: "kendo.common-bootstrap.css",
+                value: "kendo.common-bootstrap",
                 dataSource: [
-                    { text: "Default", value: "kendo.common.css" },
-                    { text: "Bootstrap", value: "kendo.common-bootstrap.css" }
+                    { text: "Default", value: "kendo.common" },
+                    { text: "Bootstrap", value: "kendo.common-bootstrap" }
                 ],
                 change: changeStylesheet(commonLink)
             });
@@ -581,19 +587,19 @@
             $("#theme").kendoDropDownList({
                 dataTextField: "text",
                 dataValueField: "value",
-                value: "kendo.bootstrap.css",
+                value: "kendo.bootstrap",
                 dataSource: [
-                    { text: "Default", value: "kendo.default.css" },
-                    { text: "Blue Opal", value: "kendo.blueopal.css" },
-                    { text: "Bootstrap", value: "kendo.bootstrap.css" },
-                    { text: "Silver", value: "kendo.silver.css" },
-                    { text: "Uniform", value: "kendo.uniform.css" },
-                    { text: "Metro", value: "kendo.metro.css" },
-                    { text: "Black", value: "kendo.black.css" },
-                    { text: "Metro Black", value: "kendo.metroblack.css" },
-                    { text: "High Contrast", value: "kendo.highcontrast.css" },
-                    { text: "Moonlight", value: "kendo.moonlight.css" },
-                    { text: "Flat", value: "kendo.flat.css" }
+                    { text: "Default", value: "kendo.default" },
+                    { text: "Blue Opal", value: "kendo.blueopal" },
+                    { text: "Bootstrap", value: "kendo.bootstrap" },
+                    { text: "Silver", value: "kendo.silver" },
+                    { text: "Uniform", value: "kendo.uniform" },
+                    { text: "Metro", value: "kendo.metro" },
+                    { text: "Black", value: "kendo.black" },
+                    { text: "Metro Black", value: "kendo.metroblack" },
+                    { text: "High Contrast", value: "kendo.highcontrast" },
+                    { text: "Moonlight", value: "kendo.moonlight" },
+                    { text: "Flat", value: "kendo.flat" }
                 ],
                 change: changeStylesheet(themeLink)
             });
