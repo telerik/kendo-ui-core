@@ -135,7 +135,7 @@ namespace Kendo.Mvc.UI.Fluent
             var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(typeof(string), colorMemberName) : null;
             var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
             var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
-            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), colorMemberName) : null;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
             var seriesType = typeof(ChartBarSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
             var series = (IChartBarSeries)BuildSeries(seriesType, valueExpr, colorExpr, categoryExpr, noteTextExpr);
 
