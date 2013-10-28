@@ -47,7 +47,7 @@ $dataSourceAfter->data(array(
 
 $after = new \Kendo\Dataviz\UI\Chart('after');
 
-$after->title(array('text' => 'Before optimization'))
+$after->title(array('text' => 'After optimization'))
       ->dataSource($dataSourceAfter)
       ->addSeriesItem($series)
       ->legend(array('visible' => false))
@@ -63,6 +63,8 @@ $after->title(array('text' => 'Before optimization'))
 <style scoped>
     .chart-wrapper {
         height: 400px;
+        width:730px;
+        margin:20px auto;
     }
     .chart-wrapper h2 {
         padding: 20px 0 0 25px;

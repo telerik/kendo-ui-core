@@ -39,7 +39,6 @@ $chart->title(array('text' => 'The AIDA model'))
 
 ?>
 
-<div id="example" class="k-content">
     <div class="chart-wrapper">
         <?php echo $chart->render(); ?>
     </div>
@@ -113,16 +112,6 @@ $chart->title(array('text' => 'The AIDA model'))
             </ul>
         </div>
     </div>
-    <style scoped>
-        .chart-wrapper #chart {
-            width: 400px;
-            height: 410px;
-            margin: 0 auto;
-        }
-        .configuration-horizontal .config-section {
-            min-width: 120px;
-        }
-    </style>
     <script>
         function createChart() {
             $("#chartFoo").kendoChart({
@@ -234,16 +223,14 @@ $chart->title(array('text' => 'The AIDA model'))
             })
         }
     </script>
-</div>
-
-
-
-
-
-
-
-
-
-
-
+    <style scoped>
+        .chart-wrapper #chart {
+            width: 400px;
+            height: 410px;
+            margin: 0 auto;
+        }
+        .configuration-horizontal .config-section {
+            min-width: 120px;
+        }
+    </style>
 <?php require_once '../../include/footer.php'; ?>

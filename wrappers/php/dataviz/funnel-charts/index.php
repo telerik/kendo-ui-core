@@ -94,28 +94,13 @@ $chart_dec->title(array('position' => 'bottom', 'text' => 'December'))
             </ul>
         </div>
         <div class="config-section">
-            <span class="configHead">Neck Size Ratio</span>
+            <span class="configHead">Neck/Base Ratio</span>
             <ul class="options">
                 <li><input id="neckSlider" value="0.3"/></li>
             </ul>
         </div>
+        <i>Dynamic slope means the slope for each segment depends on the ratio between the current and the next value</i>
     </div>
-    <style scoped>
-        .chart-wrapper {
-            height: 360px;
-        }
-        .chart-wrapper h2 {
-            padding: 20px 0 0 25px;
-        }
-        #chart-oct,
-        #chart-nov,
-        #chart-dec {
-            display: inline-block;
-            width: 180px;
-            height: 300px;
-            margin: 15px 25px;
-        }
-    </style>
     <script>
 
         function refresh() {
@@ -160,5 +145,23 @@ $chart_dec->title(array('position' => 'bottom', 'text' => 'December'))
         });
 
     </script>
+    <style scoped>
+        .chart-wrapper {
+            height: 360px;
+            width:730px;
+            margin:20px auto;
+        }
+        .chart-wrapper h2 {
+            padding: 20px 0 0 25px;
+        }
+        #chart-oct,
+        #chart-nov,
+        #chart-dec {
+            display: inline-block;
+            width: 180px;
+            height: 300px;
+            margin: 15px 25px;
+        }
+    </style>
 
 <?php require_once '../../include/footer.php'; ?>
