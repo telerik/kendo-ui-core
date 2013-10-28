@@ -6,7 +6,7 @@ when "windows"
     end
 else
 
-    apt_repository "ruby-ng" do
+    apt_repository "node.js" do
       uri "http://ppa.launchpad.net/chris-lea/node.js/ubuntu"
       distribution node['lsb']['codename']
       components ["main"]

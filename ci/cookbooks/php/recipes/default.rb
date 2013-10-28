@@ -1,4 +1,4 @@
-apt_repository "ruby-ng" do
+apt_repository "php5" do
   uri "http://ppa.launchpad.net/ondrej/php5/ubuntu"
   distribution node['lsb']['codename']
   components ["main"]
