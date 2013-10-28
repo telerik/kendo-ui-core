@@ -113,10 +113,15 @@ kendo_module({
             if (that._outOfBounds()) {
                 that._snapBack();
             } else {
-                that.velocity = Math.max(Math.min(e.touch[that.axis].velocity * VELOCITY_MULTIPLIER, MAX_VELOCITY), -MAX_VELOCITY);
+                that.velocity = Math.max(Math.min(
+                    e.touch[that.axis].velocity * that.velocityMultiplier,
+                    MAX_VELOCITY), -MAX_VELOCITY);
+
                 if (that.velocity) {
                     that.tapCapture.captureNext();
                     Animation.fn.start.call(that);
+                } else {
+                    that._end();
                 }
             }
         },
@@ -124,7 +129,7 @@ kendo_module({
         tick: function() {
             var that = this,
                 dimension = that.dimension,
-                friction = that._outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION,
+                friction = that._outOfBounds() ? OUT_OF_BOUNDS_FRICTION : that.friction,
                 delta = (that.velocity *= friction),
                 location = that.movable[that.axis] + delta;
 
@@ -556,6 +561,8 @@ kendo_module({
                 userEvents: that.userEvents,
                 dimension: dimension,
                 elastic: that.options.elastic,
+                friction: that.options.friction || FRICTION,
+                velocityMultiplier: that.options.velocityMultiplier || VELOCITY_MULTIPLIER,
                 end: function() {
                     scrollBar.hide();
                     that.trigger("scrollEnd", {
