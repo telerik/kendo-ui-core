@@ -12,6 +12,8 @@ kendo_module({
         atan = math.atan,
         exp = math.exp,
         pow = math.pow,
+        max = math.max,
+        min = math.min,
         sin = math.sin,
         log = math.log,
         tan = math.tan,
@@ -244,6 +246,29 @@ kendo_module({
             }
 
             return result;
+        },
+
+        include: function(loc) {
+            var nw = this.nw,
+                se = this.se,
+                lng = valueOrDefault(loc.lng, loc[0]),
+                lat = valueOrDefault(loc.lat, loc[1]);
+
+            nw.lng = min(nw.lng, min(lng, se.lng));
+            nw.lat = max(nw.lat, max(lat, se.lat));
+
+            se.lng = max(se.lng, max(lng, nw.lng));
+            se.lat = min(se.lat, min(lat, nw.lat));
+        },
+
+        includeAll: function(locs) {
+            for (var i = 0; i < locs.length; i++) {
+                this.include(locs[i]);
+            }
+        },
+
+        overlaps: function(extent) {
+            return this.containsAny([extent.nw, extent.se]);
         }
     });
 

@@ -183,6 +183,141 @@
                 ok(!extent.contains(new Location(600, 0)));
             });
 
+            // ------------------------------------------------------------
+            module("Extent / include", {
+                setup: function() {
+                    extent = new Extent(
+                        new Location(0, 0),
+                        new Location(0, 0)
+                    );
+                }
+            });
+
+            test("extends nw edge to negative longitude", function() {
+                extent.include(new Location(0, -100));
+                equal(extent.nw.lng, -100);
+            });
+
+            test("extends nw edge to positive latitude", function() {
+                extent.include(new Location(45, 0));
+                equal(extent.nw.lat, 45);
+            });
+
+            test("does not extends nw edge beyond sw latitude", function() {
+                extent.include(new Location(-45, 0));
+                equal(extent.nw.lat, 0);
+            });
+
+            test("does not extends nw edge beyond sw longitude", function() {
+                extent.include(new Location(0, 100));
+                equal(extent.nw.lng, 0);
+            });
+
+            test("extends se edge to positive longitude", function() {
+                extent.include(new Location(0, 100));
+                equal(extent.se.lng, 100);
+            });
+
+            test("extends se edge to negative latitude", function() {
+                extent.include(new Location(-45, 0));
+                equal(extent.se.lat, -45);
+            });
+
+            test("does not extends se edge beyond nw latitude", function() {
+                extent.include(new Location(45, 0));
+                equal(extent.se.lat, 0);
+            });
+
+            test("does not extends se edge beyond nw longitude", function() {
+                extent.include(new Location(0, -100));
+                equal(extent.se.lng, 0);
+            });
+
+            test("include accepts lng, lat array", function() {
+                extent.include([10, 10]);
+                equal(extent.nw.lat, 10);
+                equal(extent.se.lng, 10);
+            });
+
+            test("includeAll includes all locations", function() {
+                extent.includeAll([
+                    new Location(10, -10),
+                    new Location(-10, 10)
+                ]);
+
+                ok(extent.nw.equals(new Location(10, -10)));
+                ok(extent.se.equals(new Location(-10, 10)));
+            });
+
+            test("includeAll accepts lng, lat arrays", function() {
+                extent.includeAll([
+                    [10, 10],
+                    [-10, -10]
+                ]);
+
+                ok(extent.nw.equals(new Location(10, -10)));
+                ok(extent.se.equals(new Location(-10, 10)));
+            });
+
+            // ------------------------------------------------------------
+            module("Extent / overlaps", {
+                setup: function() {
+                    extent = new Extent(
+                        new Location(10, -10),
+                        new Location(-10, 10)
+                    );
+                }
+            });
+
+            test("overlaps at nw edge", function() {
+                ok(extent.overlaps(new Extent(
+                    new Location(20, 20),
+                    new Location(-10, 10)
+                )))
+            });
+
+            test("overlaps at se edge", function() {
+                ok(extent.overlaps(new Extent(
+                    new Location(-10, 10),
+                    new Location(-20, 20)
+                )))
+            });
+
+            test("overlaps at middle", function() {
+                ok(extent.overlaps(new Extent(
+                    new Location(5, -5),
+                    new Location(-5, 5)
+                )))
+            });
+
+            test("does not overlap west", function() {
+                ok(!extent.overlaps(new Extent(
+                    new Location(-100, 20),
+                    new Location(-20, 10)
+                )))
+            });
+
+            test("does not overlap east", function() {
+                ok(!extent.overlaps(new Extent(
+                    new Location(100, 20),
+                    new Location(20, 10)
+                )))
+            });
+
+            test("does not overlap north", function() {
+                ok(!extent.overlaps(new Extent(
+                    new Location(90, -10),
+                    new Location(20, 10)
+                )))
+            });
+
+            test("does not overlap south", function() {
+                ok(!extent.overlaps(new Extent(
+                    new Location(20, -10),
+                    new Location(90, 10)
+                )))
+            });
+
         })();
 
     </script>
