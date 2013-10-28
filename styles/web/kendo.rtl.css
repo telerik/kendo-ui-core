@@ -342,6 +342,11 @@
     right: -1px;
 }
 
+.k-rtl .k-progressbar-horizontal li.k-last
+{
+    border-left-width: 0;
+}
+
 /* Scheduler */
 
 .k-rtl .k-scheduler-toolbar > ul
