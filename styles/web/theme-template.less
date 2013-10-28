@@ -750,8 +750,7 @@ td.k-state-focused.k-state-selected,
 .k-dropdown .k-state-focused,
 .k-imagebrowser-dropzone,
 .k-mobile-list .k-item > .k-link:active,
-.k-mobile-list .k-item > .k-label:active,
-.km-pane-wrapper .k-mobile-list .k-edit-label:active
+.k-mobile-list .k-item > .k-label:active
 {
     color: @hover-text-color;
     background-color: @hover-background-color;
@@ -1399,6 +1398,11 @@ div.k-imagebrowser-dropzone em
 .km-pane-wrapper .k-mobile-list .k-edit-label
 {
     color: @widget-text-color;
+}
+
+.km-pane-wrapper .k-mobile-list .k-item,
+.km-pane-wrapper .k-mobile-list .k-edit-field
+{
     background-color: @widget-background-color;
     border-top: 1px solid @cell-border-color;
 }
@@ -1413,10 +1417,14 @@ div.k-imagebrowser-dropzone em
     color: darken(@cell-border-color, 30);
 }
 
-.km-pane-wrapper .k-mobile-list > ul > li > .k-link,
-.km-pane-wrapper .k-mobile-list .k-edit-label:nth-last-child(2)
+.km-pane-wrapper .k-mobile-list > ul > li > .k-link
 {
     border-bottom: 1px solid @cell-border-color;
+}
+
+.km-pane-wrapper .k-mobile-list .k-edit-field
+{
+    .box-shadow(0 1px 0 @cell-border-color);
 }
 
 /* /Column Menu */

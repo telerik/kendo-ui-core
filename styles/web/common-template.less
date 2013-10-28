@@ -5157,11 +5157,6 @@ div[name="recurrenceRule"] > .k-dropdown
     line-height: 2em;
 }
 
-.km-pane-wrapper .k-scheduler-edit-form > .km-content
-{
-    padding: .6em;
-}
-
 .km-pane-wrapper .k-grid-edit-form .k-multiselect,
 .km-pane-wrapper .k-scheduler-edit-form .k-multiselect
 {
@@ -5226,7 +5221,7 @@ div[name="recurrenceRule"] > .k-dropdown
     font-weight: normal;
 }
 
-.km-pane-wrapper .k-grid-edit-form .km-content > .km-scroll-container,
+.km-pane-wrapper .k-popup-edit-form .km-content > .km-scroll-container,
 .km-pane-wrapper .k-grid-column-menu .km-content > .km-scroll-container,
 .km-pane-wrapper .k-grid-filter-menu .km-content > .km-scroll-container
 {
@@ -5234,19 +5229,6 @@ div[name="recurrenceRule"] > .k-dropdown
     width: 100%;
     min-height: 100%;
     .box-sizing(border-box);
-}
-
-.km-pane-wrapper .k-mobile-list .k-edit-label label
-{
-    display: block;
-    width: 23%;
-    text-align: left;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: .5em 1em;
-    margin: -.5em -1em;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
 }
 
 .km-pane-wrapper .k-mobile-list .k-edit-field
@@ -5259,12 +5241,6 @@ div[name="recurrenceRule"] > .k-dropdown
 {
     overflow: hidden;
     width: auto;
-}
-
-.km-pane-wrapper .k-grid-edit-form .k-edit-field .k-textbox,
-.km-pane-wrapper .k-grid-edit-form .k-edit-field .k-numerictextbox
-{
-    width: 100%;
 }
 
 .km-pane-wrapper .k-filter-menu .k-button
@@ -5306,6 +5282,16 @@ div[name="recurrenceRule"] > .k-dropdown
     margin-top: -1.1rem;
 }
 
+.km-pane-wrapper .k-mobile-list .k-state-disabled
+{
+    opacity: 1;
+}
+
+.km-pane-wrapper .k-mobile-list .k-state-disabled > *
+{
+    opacity: .7;
+}
+
 .km-pane-wrapper .k-mobile-list .k-item,
 .km-pane-wrapper .k-mobile-list .k-item > .k-link,
 .km-pane-wrapper .k-mobile-list .k-item > .k-label,
@@ -5320,29 +5306,37 @@ div[name="recurrenceRule"] > .k-dropdown
     font-size: 1em;
 }
 
-.km-pane-wrapper .k-edit-form-container
+.km-pane-wrapper .k-edit-form-container,
+.km-pane-wrapper .k-scheduler-edit-form .km-scroll-container
 {
     padding-top: 1em;
+    width: 100%;
 }
 
 .km-pane-wrapper .k-mobile-list .k-edit-label
 {
+    position: absolute;
     margin: 0;
-    width: 100%;
     float: none;
     clear: none;
+    width: 100%;
 }
 
-.km-pane-wrapper .k-mobile-list .k-edit-field
+.km-pane-wrapper .k-mobile-list .k-edit-field,
+.km-pane-wrapper .k-mobile-list .k-edit-label label
 {
-    position: absolute;
-    right: 0;
-    margin: -2.3em 0 0;
-    float: none;
-    clear: none;
+    display: block;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: .1em 0;
+    margin: 0;
 }
 
 .km-pane-wrapper .k-mobile-list .k-item,
+.km-pane-wrapper .k-mobile-list .k-edit-field,
 .km-pane-wrapper .k-mobile-list .k-edit-label
 {
     font-size: 1em;
@@ -5350,15 +5344,31 @@ div[name="recurrenceRule"] > .k-dropdown
     overflow: hidden;
 }
 
+.km-pane-wrapper .k-mobile-list .k-edit-field,
+.km-pane-wrapper .k-mobile-list .k-edit-label
+{
+    line-height: 2em;
+    width: 100%;
+    float: none;
+    clear: none;
+}
+
+.km-pane-wrapper .k-mobile-list .k-edit-field
+{
+    padding: .5em 0;
+}
+
 .km-pane-wrapper .k-mobile-list .k-item > *
 {
     line-height: normal;
 }
 
+.km-pane-wrapper .k-mobile-list .k-edit-buttons,
 .km-pane-wrapper .k-mobile-list .k-button-container
 {
     .box-sizing(border-box);
     padding: .5em 1em;
+    margin: 0;
 }
 
 .km-pane-wrapper .k-mobile-list > ul > li > .k-link,
@@ -5413,29 +5423,30 @@ div[name="recurrenceRule"] > .k-dropdown
 {
     border: 0;
     font-size: inherit;
-    width: 1em;
-    height: .9em;
+    width: 1.4em;
+    height: 1.4em;
+    margin-right: 1em;
 }
 
-.km-pane-wrapper .km-pane .k-mobile-list *:not(.k-state-default) > input:not([type="checkbox"]):not([type="radio"]),
+.km-pane-wrapper .km-pane .k-mobile-list input:not([type="checkbox"]):not([type="radio"]),
 .km-pane-wrapper .km-pane .k-mobile-list select:not([multiple]),
 .km-pane-wrapper .km-pane .k-mobile-list textarea,
-.km-pane-wrapper .k-mobile-list .k-widget
+.km-pane-wrapper .k-edit-field > *:not([type="checkbox"]):not([type="radio"]):not(.k-button)
 {
     font-size: 1em;
-    line-height: 1.4em;
+    line-height: 2em;
     vertical-align: middle;
-    padding: .5em 0;
-    top: 0;
+    height: auto;
+    padding: 0;
     border: 0;
+    margin: 0;
     background: transparent;
     .box-shadow(none);
-    .border-radius(0)
+    .border-radius(0);
 }
 
 .km-pane-wrapper .k-mobile-list .k-widget
 {
-    margin-top: -.3em;
     border: 0;
     .border-radius(0);
 }
@@ -5447,39 +5458,60 @@ div[name="recurrenceRule"] > .k-dropdown
     background: transparent;
 }
 
-.km-pane-wrapper .k-mobile-list .k-item *:not(.k-state-default) > input:not([type="checkbox"]):not([type="radio"]),
-.km-pane-wrapper .k-mobile-list .k-item select:not([multiple]),
-.km-pane-wrapper .k-mobile-list .k-item textarea,
-.km-pane-wrapper .k-mobile-list .k-widget
+.km-pane-wrapper *:not(.k-state-default) > input:not([type="checkbox"]):not([type="radio"]),
+.km-pane-wrapper .k-mobile-list select:not([multiple]),
+.km-pane-wrapper .k-mobile-list textarea,
+.km-pane-wrapper .k-edit-field > *:not([type="checkbox"]):not([type="radio"]):not(.k-button)
 {
     width: 80%;
+    padding: .5em 0;
+    margin: -.5em 0;
 }
 
-.km-pane-wrapper .km-pane .k-mobile-list *:not(.k-state-default) > input,
+.km-pane-wrapper .km-pane .k-mobile-list input,
 .km-pane-wrapper .km-pane .k-mobile-list select:not([multiple]),
 .km-pane-wrapper .km-pane .k-mobile-list textarea,
-.km-pane-wrapper .km-pane .k-mobile-list .k-widget
+.km-pane-wrapper .k-mobile-list .k-edit-field > *
 {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    position: absolute;
-    right: .8em;
-}
-
-.km-pane-wrapper .km-pane .k-mobile-list textarea
-{
-    position: relative;
-    right: auto;
     float: right;
+    z-index: 1;
+    position: relative;
 }
 
-.km-pane-wrapper .k-mobile-list input.k-check
+.km-pane-wrapper .k-mobile-list .k-scheduler-timezones .k-edit-field:nth-child(2)
+{
+    padding-left: 1em;
+}
+
+.km-pane-wrapper .k-mobile-list .k-scheduler-timezones .k-edit-field:nth-child(2) label
+{
+    width: 100%;
+}
+
+.km-pane-wrapper .k-mobile-list .k-edit-field > .k-button
+{
+    margin-left: 20%;
+    float: left;
+}
+
+.km-pane-wrapper .k-mobile-list .k-numeric-wrap
+{
+    position: static;
+}
+
+.km-pane-wrapper .k-mobile-list .k-numerictextbox .k-select
 {
     position: absolute;
-    top: 50%;
-    right: .8em;
-    margin-top: -.5em;
+    top: 0;
+    right: 0;
+}
+
+.km-pane-wrapper .k-mobile-list .k-numerictextbox .k-link
+{
+    height: 50%;
 }
 
 .km-pane-wrapper .k-grid .k-button,
