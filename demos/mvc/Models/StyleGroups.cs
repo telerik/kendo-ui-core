@@ -69,10 +69,14 @@ namespace Kendo.Models
 #if DEBUG
             "web/kendo.common-bootstrap.less",
             "web/kendo.bootstrap.less",
+            "dataviz/kendo.dataviz.css",
+            "dataviz/kendo.dataviz.bootstrap.css",
             "mobile/kendo.mobile.all.less"
 #else
             "kendo.common-bootstrap.min.css",
             "kendo.bootstrap.min.css",
+            "kendo.dataviz.min.css",
+            "kendo.dataviz.bootstrap.min.css",
             "kendo.mobile.all.min.css"
 #endif
         };
