@@ -8,6 +8,9 @@
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.scheduler.view.js"></script>
         <script src="../../src/kendo.scheduler.dayview.js"></script>
         <script src="../../src/kendo.scheduler.js"></script>
@@ -1825,7 +1828,7 @@
                 ok(view.content.find("td").last().hasClass("k-nonwork-hour"));
             });
 
-            test("first day is correctly set in workWeekView", function() {
+            test("first day is correctly set in workWeek view", function() {
 
                 var view = new MyWorkWeekView(container,  {
                     date: new Date(),
@@ -1840,7 +1843,7 @@
                 equal(startDate, 0);
             });
 
-            test("last day is correctly set in workWeekView", function() {
+            test("last day is correctly set in workWeek view", function() {
 
                 var view = new MyWorkWeekView(container,  {
                     date: new Date(),
@@ -1853,6 +1856,82 @@
                 var endDate = endSlot.startDate().getDay();
 
                 equal(endDate, 2);
+            });
+
+            test("previous button is working correctly in workWeek view", function() {
+                var scheduler = container.kendoScheduler({
+                    views: ["workWeek"],
+                    workWeekStart: 2,
+                    workWeekEnd: 5,
+                    date: new Date("2013/6/16"),
+                    dataSource: []
+                }).data("kendoScheduler");
+
+                scheduler.toolbar.find(".k-nav-prev").click();
+
+                var view = scheduler.view();
+                var row = view.content.find("tr:first");
+                var offset = row.find("td:first").offset();
+                var startSlot = view._slotByPosition(offset.left, offset.top);
+
+                equal(startSlot.startDate().getDate(), 4);
+            });
+
+            test("next button is working correctly in workWeek view", function() {
+                var scheduler = container.kendoScheduler({
+                    views: ["workWeek"],
+                    workWeekStart: 2,
+                    workWeekEnd: 5,
+                    date: new Date("2013/6/16"),
+                    dataSource: []
+                }).data("kendoScheduler");
+
+                scheduler.toolbar.find(".k-nav-next").click();
+
+                var view = scheduler.view();
+                var row = view.content.find("tr:first");
+                var offset = row.find("td:first").offset();
+                var startSlot = view._slotByPosition(offset.left, offset.top);
+
+                equal(startSlot.startDate().getDate(), 18);
+            });
+
+            test("previous button is working correctly in workWeek view with workWeekStart greater then workWeekEnd", function() {
+                var scheduler = container.kendoScheduler({
+                    views: ["workWeek"],
+                    workWeekStart: 5,
+                    workWeekEnd: 2,
+                    date: new Date("2013/6/16"),
+                    dataSource: []
+                }).data("kendoScheduler");
+
+                scheduler.toolbar.find(".k-nav-prev").click();
+
+                var view = scheduler.view();
+                var row = view.content.find("tr:first");
+                var offset = row.find("td:first").offset();
+                var startSlot = view._slotByPosition(offset.left, offset.top);
+
+                equal(startSlot.startDate().getDate(), 7);
+            });
+
+            test("next button is working correctly in workWeek view with workWeekStart greater then workWeekEnd", function() {
+                var scheduler = container.kendoScheduler({
+                    views: ["workWeek"],
+                    workWeekStart: 5,
+                    workWeekEnd: 2,
+                    date: new Date("2013/6/16"),
+                    dataSource: []
+                }).data("kendoScheduler");
+
+                scheduler.toolbar.find(".k-nav-next").click();
+
+                var view = scheduler.view();
+                var row = view.content.find("tr:first");
+                var offset = row.find("td:first").offset();
+                var startSlot = view._slotByPosition(offset.left, offset.top);
+
+                equal(startSlot.startDate().getDate(), 21);
             });
 
             module("Multi Day View ARIA rendering", {

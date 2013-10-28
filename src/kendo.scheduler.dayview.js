@@ -161,6 +161,23 @@ kendo_module({
             }
     }
 
+    function getWorkDays(options) {
+        var workDays = [];
+        var dayIndex = options.workWeekStart;
+
+        workDays.push(dayIndex);
+
+        while(options.workWeekEnd != dayIndex) {
+            if(dayIndex > 6 ) {
+                dayIndex -= 7;
+            } else {
+                dayIndex++;
+            }
+            workDays.push(dayIndex);
+        }
+        return workDays;
+    }
+
     var MultiDayView = SchedulerView.extend({
         init: function(element, options) {
             var that = this;
@@ -168,6 +185,8 @@ kendo_module({
             SchedulerView.fn.init.call(that, element, options);
 
             that.title = that.options.title || that.options.name;
+
+            that._workDays = getWorkDays(that.options);
 
             that._templates();
 
@@ -894,10 +913,15 @@ kendo_module({
         },
 
         _isWorkDay: function(date) {
-            var options = this.options;
             var day = date.getDay();
+            var workDays =  this._workDays;
 
-            return day >= options.workWeekStart && day <= options.workWeekEnd;
+            for (var i = 0; i < workDays.length; i++) {
+                if (workDays[i] === day) {
+                    return true;
+                }
+            }
+            return false;
         },
 
         _render: function(dates) {
@@ -1525,24 +1549,27 @@ kendo_module({
        }),
        WorkWeekView: MultiDayView.extend({
            options: {
-               title: "Work Week",
-               selectedDateFormat: "{0:D} - {1:D}"
+              title: "Work Week",
+              selectedDateFormat: "{0:D} - {1:D}"
            },
-           name: "workWeek",
-           calculateDateRange: function() {
-               var selectedDate = this.options.date,
-                   start = kendo.date.dayOfWeek(selectedDate, this.calendarInfo().firstDay, -1),
-                   idx, length,
-                   dates = [];
+            nextDate: function() {
+                return kendo.date.dayOfWeek(kendo.date.nextDay(this.endDate()), this.options.workWeekEnd, 1);
+            },
+            previousDate: function() {
+                return kendo.date.previousDay(this.startDate());
+            },
+            calculateDateRange: function() {
+                var selectedDate = this.options.date,
+                    start = kendo.date.dayOfWeek(selectedDate, this.options.workWeekStart, -1),
+                    end = kendo.date.dayOfWeek(start, this.options.workWeekEnd, 1),
+                    dates = [];
 
-               for (idx = 0, length = 7; idx < length; idx++) {
-                   if (this._isWorkDay(start)) {
-                       dates.push(start);
-                   }
-                   start = kendo.date.nextDay(start);
-               }
-               this._render(dates);
-           }
+                while (start <= end) {
+                    dates.push(start);
+                    start = kendo.date.nextDay(start);
+                }
+                this._render(dates);
+            }
        })
 
     });
