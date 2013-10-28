@@ -73,7 +73,10 @@ kendo_module({
             "drag",
             "dragEnd",
             "shapeClick",
-            "shapeCreated"
+            "shapeCreated",
+            // TODO: Naming, especially for mobile
+            "shapeMouseover",
+            "shapeMouseout"
         ],
 
         zoom: function(level) {

@@ -32,8 +32,15 @@
             this.movable = new kendo.ui.Movable(this.element);
 
             this.surface = new d.svg.Surface(this.element[0], options); // TODO: Automatic choice
-            this._click = proxy(this._click, this);
+
+            this._click = this._handler("shapeClick");
             this.surface.bind("click", this._click);
+
+            this._mouseover = this._handler("shapeMouseover");
+            this.surface.bind("mouseover", this._mouseover);
+
+            this._mouseout = this._handler("shapeMouseout");
+            this.surface.bind("mouseout", this._mouseout);
 
             map.bind("reset", proxy(this.reset, this));
             map.bind("dragEnd", proxy(this._dragEnd, this));
@@ -146,16 +153,19 @@
             this.movable.moveTo(nw);
         },
 
-        _click: function(e) {
-            if (e.shape) {
-                var args = {
-                    layer: this,
-                    shape: e.shape,
-                    originalEvent: e.originalEvent
-                };
+        _handler: function(event) {
+            var layer = this;
+            return function(e) {
+                if (e.shape) {
+                    var args = {
+                        layer: layer,
+                        shape: e.shape,
+                        originalEvent: e.originalEvent
+                    };
 
-                this.map.trigger("shapeClick", args);
-            }
+                    layer.map.trigger(event, args);
+                }
+            };
         }
     });
 

@@ -36,6 +36,10 @@
             this.bind(this.events, this.options);
 
             this._root = new RootNode();
+            this._click = this._handler("click");
+            this._mouseover = this._handler("mouseover");
+            this._mouseout = this._handler("mouseout");
+
             this._appendTo(container);
         },
 
@@ -45,7 +49,9 @@
         },
 
         events: [
-            "click"
+            "click",
+            "mouseover",
+            "mouseout"
         ],
 
         translate: function(offset) {
@@ -90,25 +96,30 @@
             this._root.attachTo(this.element);
 
             var element = $(this.element);
-            this._click = $.proxy(this._click, this);
+
             element.on("click", this._click);
+            element.on("mouseover", this._mouseover);
+            element.on("mouseout", this._mouseout);
 
             this._width = element.width();
             this._height = element.height();
         },
 
-        _click: function(e) {
-            var node = e.target._kendoNode,
-                shape = null;
+        _handler: function(event) {
+            var surface = this;
+            return function(e) {
+                var node = e.target._kendoNode,
+                    shape = null;
 
-            if (node) {
-                shape = node.srcElement;
-            }
+                if (node) {
+                    shape = node.srcElement;
+                }
 
-            this.trigger("click", {
-                shape: shape,
-                originalEvent: e
-            });
+                surface.trigger(event, {
+                    shape: shape,
+                    originalEvent: e
+                });
+            };
         }
     });
 

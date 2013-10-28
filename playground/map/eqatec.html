@@ -115,7 +115,7 @@
                 copyright: "&copy; FooBar",
                 style: {
                     fill: {
-                        color: "#cf0"
+                        opacity: 0.7
                     }
                 }
             }],
@@ -144,9 +144,14 @@
             markerCreated: $.noop,
             markerHover: $.noop,
             shapeHover: $.noop,
-            //TODO: mouseover / mouseout?
+            shapeMouseover: function(e) {
+                e.shape.options.set("fill.opacity", 1);
+            },
+            shapeMouseout: function(e) {
+                e.shape.options.set("fill.opacity", 0.7);
+            },
             shapeClick: function(e) {
-                console.log(e);
+                e.shape.fill("blue");
             },
             shapeCreated: function(e) {
                 var users = e.shape.dataItem.properties.users;
