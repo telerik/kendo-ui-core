@@ -169,22 +169,6 @@
         </div>   
         <i>Dynamic slope means the slope for each segment depends on the ratio between the current and the next value</i>     
     </div>
-    <style scoped>
-        .chart-wrapper {
-            height: 360px;
-        }
-        .chart-wrapper h2 {
-            padding: 20px 0 0 25px;
-        }
-        #chart-oct,
-        #chart-nov,
-        #chart-dec {
-            display: inline-block;
-            width: 180px;
-            height: 300px;
-            margin: 15px 25px;
-        }
-    </style>
     <script>
         function refresh() {
             var slider = $('#neckSlider').data("kendoSlider");
@@ -228,9 +212,21 @@
         
     </script>
 
-<style>
+<style scoped>
     .chart-wrapper {
+        height: 360px;
         width:730px;
         margin: 20px auto;
+    }
+    .chart-wrapper h2 {
+        padding: 20px 0 0 25px;
+    }
+    #chart-oct,
+    #chart-nov,
+    #chart-dec {
+        display: inline-block;
+        width: 180px;
+        height: 300px;
+        margin: 15px 25px;
     }
 </style>
