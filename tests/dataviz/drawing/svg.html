@@ -337,10 +337,6 @@
         ok(pathNode.render().indexOf("stroke-linecap='butt'") !== -1);
     });
 
-    test("renders default stroke linecap", function() {
-        ok(pathNode.render().indexOf("stroke-linecap='square'") !== -1);
-    });
-
     test("overrides stroke linecap when dashType is set", function() {
         path.options.set("stroke.dashType", "dot");
         path.options.set("stroke.lineCap", "foo");
@@ -365,6 +361,7 @@
         path.options.set("fill", { color: "red", opacity: 0.5 });
         var svg = pathNode.render();
 
+        console.log(svg);
         ok(svg.indexOf("fill='red'") !== -1);
         ok(svg.indexOf("fill-opacity='0.5'") !== -1);
     });
@@ -415,13 +412,86 @@
         path.lineTo(10, 10);
     });
 
-    test("optionsChange sets fill", function() {
+    test("optionsChange sets fill color", function() {
         pathNode.attr = function(name, value) {
             equal(name, "fill");
             equal(value, "red");
         };
 
         path.options.set("fill.color", "red");
+    });
+
+    test("optionsChange sets fill opacity", function() {
+        pathNode.attr = function(name, value) {
+            equal(name, "fill-opacity");
+            equal(value, 0.4);
+        };
+
+        path.options.set("fill.opacity", 0.4);
+    });
+
+    test("optionsChange sets fill color to none for transparent", function() {
+        pathNode.attr = function(name, value) {
+            equal(name, "fill");
+            equal(value, "none");
+        };
+
+        path.options.set("fill.color", "transparent");
+    });
+
+    test("optionsChange sets fill", 2, function() {
+        pathNode.attr = function(name, value) {
+            if (name === "fill") {
+                equal(value, "red");
+            } else if (name === "fill-opacity") {
+                equal(value, 0.4);
+            } else {
+                ok(false);
+            }
+        };
+
+        path.options.set("fill", { color: "red", opacity: 0.4 });
+    });
+
+    test("optionsChange sets stroke color", function() {
+        pathNode.attr = function(name, value) {
+            equal(name, "stroke");
+            equal(value, "red");
+        };
+
+        path.options.set("stroke.color", "red");
+    });
+
+    test("optionsChange sets stroke width", function() {
+        pathNode.attr = function(name, value) {
+            equal(name, "stroke-width");
+            equal(value, 4);
+        };
+
+        path.options.set("stroke.width", 4);
+    });
+
+    test("optionsChange sets stroke opacity", function() {
+        pathNode.attr = function(name, value) {
+            equal(name, "stroke-opacity");
+            equal(value, 0.4);
+        };
+
+        path.options.set("stroke.opacity", 0.4);
+    });
+
+    test("optionsChange sets stroke", 3, function() {
+        pathNode.attr = function(name, value) {
+            if (name === "stroke") {
+                equal(value, "red");
+            } else if (name === "stroke-opacity") {
+                equal(value, 0.4);
+            } else if (name === "stroke-width") {
+                equal(value, 4);
+            }
+        };
+
+        path.options.set("stroke", { color: "red", opacity: 0.4, width: 4 });
     });
 
     test("optionsChange sets visibility to hidden", function() {
