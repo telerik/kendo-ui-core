@@ -91,6 +91,68 @@ kendo_module({
 
     // Geometric primitives ===================================================
 
+    // MERGE WITH DIAGRAM MATH
+    var Matrix = Class.extend({
+        init: function (a, b, c, d, e, f) {
+            this.a = a || 0;
+            this.b = b || 0;
+            this.c = c || 0;
+            this.d = d || 0;
+            this.e = e || 0;
+            this.f = f || 0;
+        },
+        times: function (m) {
+            return new Matrix(
+                this.a * m.a + this.c * m.b,
+                this.b * m.a + this.d * m.b,
+                this.a * m.c + this.c * m.d,
+                this.b * m.c + this.d * m.d,
+                this.a * m.e + this.c * m.f + this.e,
+                this.b * m.e + this.d * m.f + this.f
+            );
+        }
+    });
+
+    // TODO: Backport method names
+    deepExtend(Matrix, {
+        translate: function (x, y) {
+            var m = new Matrix();
+            m.a = 1;
+            m.b = 0;
+            m.c = 0;
+            m.d = 1;
+            m.e = x;
+            m.f = y;
+            return m;
+        },
+        unit: function () {
+            return new Matrix(1, 0, 0, 1, 0, 0);
+        },
+        rotate: function (angle, x, y) {
+            var m = new Matrix();
+            m.a = math.cos(angle * DEG_TO_RAD);
+            m.b = math.sin(angle * DEG_TO_RAD);
+            m.c = -m.b;
+            m.d = m.a;
+            m.e = (x - x * m.a + y * m.b) || 0;
+            m.f = (y - y * m.a - x * m.b) || 0;
+            return m;
+        },
+        scale: function (scaleX, scaleY) {
+            var m = new Matrix();
+            m.a = scaleX;
+            m.b = 0;
+            m.c = 0;
+            m.d = scaleY;
+            m.e = 0;
+            m.f = 0;
+            return m;
+        }
+    });
+
+    kendo.dataviz.Matrix = Matrix;
+
+
     // TODO: Rename to Point?
     var Point2D = function(x, y) {
         var point = this;
@@ -98,8 +160,8 @@ kendo_module({
             return new Point2D(x, y);
         }
 
-        point.x = round(x || 0, COORD_PRECISION);
-        point.y = round(y || 0, COORD_PRECISION);
+        point.x = x || 0;
+        point.y = y || 0;
     };
 
     Point2D.fn = Point2D.prototype = {
@@ -136,11 +198,29 @@ kendo_module({
             return point;
         },
 
+        multiply: function(a) {
+            var point = this;
+
+            point.x *= a;
+            point.y *= a;
+
+            return point;
+        },
+
         distanceTo: function(point) {
             var dx = this.x - point.x,
                 dy = this.y - point.y;
 
             return math.sqrt(dx * dx + dy * dy);
+        },
+
+        transform: function(mx) {
+            var point = this;
+
+            point.x = mx.a * point.x + mx.c * point.y + mx.e;
+            point.y = mx.b * point.x + mx.d * point.y + mx.f;
+
+            return point;
         }
     };
 
@@ -383,8 +463,8 @@ kendo_module({
                 ax = math.cos(radianAngle),
                 ay = math.sin(radianAngle),
                 radius = innerRadius ? ring.ir : ring.r,
-                x = ring.c.x - (ax * radius),
-                y = ring.c.y - (ay * radius);
+                x = round(ring.c.x - (ax * radius), COORD_PRECISION),
+                y = round(ring.c.y - (ay * radius), COORD_PRECISION);
 
             return new Point2D(x, y);
         },
@@ -425,7 +505,7 @@ kendo_module({
                 startVector = new Point2D(startPoint.x - c.x, startPoint.y - c.y),
                 endPoint = ring.point(endAngle),
                 endVector = new Point2D(endPoint.x - c.x, endPoint.y - c.y),
-                dist = dx * dx + dy *dy;
+                dist = round(dx * dx + dy *dy, COORD_PRECISION);
 
             return (startVector.equals(vector) || clockwise(startVector, vector)) &&
                    !clockwise(endVector, vector) &&
@@ -3523,7 +3603,7 @@ kendo_module({
     }
 
     function append(first, second) {
-        [].push.apply(first, second);
+        first.push.apply(first, second);
     }
 
     function ceil(value, step) {
@@ -3869,8 +3949,8 @@ kendo_module({
 
         point: function (xValue, yValue, xField, yField) {
             var controlPoint = Point2D();
-            controlPoint[xField] = round(xValue, COORD_PRECISION);
-            controlPoint[yField] = round(yValue, COORD_PRECISION);
+            controlPoint[xField] = xValue;
+            controlPoint[yField] = yValue;
 
             return controlPoint;
         },
@@ -3884,6 +3964,25 @@ kendo_module({
             return result;
         }
     };
+    function limitValue(value, min, max) {
+        return math.max(math.min(value, max), min);
+    }
+
+    function mwDelta(e) {
+        var origEvent = e.originalEvent,
+            delta = 0;
+
+        if (origEvent.wheelDelta) {
+            delta = -origEvent.wheelDelta / 120;
+            delta = delta > 0 ? math.ceil(delta) : math.floor(delta);
+        }
+
+        if (origEvent.detail) {
+            delta = round(origEvent.detail / 3);
+        }
+
+        return delta;
+    }
 
     // Exports ================================================================
     deepExtend(kendo.dataviz, {
@@ -3935,6 +4034,7 @@ kendo_module({
         FadeAnimationDecorator: FadeAnimationDecorator,
         IDPool: IDPool,
         LRUCache: LRUCache,
+        Matrix: Matrix,
         Note: Note,
         NumericAxis: NumericAxis,
         Point2D: Point2D,
@@ -3965,7 +4065,9 @@ kendo_module({
         inArray: inArray,
         interpolateValue: interpolateValue,
         last: last,
+        limitValue: limitValue,
         measureText: measureText,
+        mwDelta: mwDelta,
         rotatePoint: rotatePoint,
         round: round,
         ceil: ceil,

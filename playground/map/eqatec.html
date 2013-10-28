@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map sandbox</title>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <script src="../../src/jquery.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.fx.js"></script>
+    <script src="../../src/kendo.userevents.js"></script>
+    <script src="../../src/kendo.draganddrop.js"></script>
+    <script src="../../src/kendo.mobile.scroller.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/dataviz/util.js"></script>
+    <script src="../../src/dataviz/geometry.js"></script>
+    <script src="../../src/dataviz/drawing/core.js"></script>
+    <script src="../../src/dataviz/drawing/shapes.js"></script>
+    <script src="../../src/dataviz/drawing/svg.js"></script>
+    <script src="../../src/dataviz/drawing/canvas.js"></script>
+    <script src="../../src/map/location.js"></script>
+    <script src="../../src/map/crs.js"></script>
+    <script src="../../src/map/layers/shape.js"></script>
+    <script src="../../src/map/main.js"></script>
+    <script src="chroma.min.js"></script>
+    <style>
+        .k-layer {
+            position: absolute;
+        }
+
+        .k-tile {
+            position: absolute;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+
+        #map {
+            background: #005;
+        }
+
+        #map .km-scroll-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        var scale = chroma
+            .scale(["white", "green"])
+            .domain([1, 1000]);
+
+        function setColor(shape, users) {
+            if (shape.children) {
+                for (var i = 0; i < shape.children.length; i++) {
+                    setColor(shape.children[i], users);
+                }
+            } else if (shape.options) {
+                var color = scale(users).hex();
+                shape.fill(color);
+            }
+        }
+
+        $("#map").kendoMap({
+            // TODO: Move to root level
+            view: {
+                center: [51.505, -0.09],
+                zoom: 4
+            },
+            controls: {
+                navigator: true, // boolean, object
+                navigator: {
+                    position: "topLeft" // "topRight", "bottomLeft", "bottomRight"
+                },
+                zoom: true, // boolean, object
+                scale: true, // boolean, object
+                birdsEyeView: true // miniMap? boolean, object
+            },
+            theme: "default",
+            layerDefaults: {
+                shape: {
+                    style: {
+                        fill: {
+                            color: "red",
+                            opacity: 0.1
+                        },
+                        stroke: {
+                            width: 1,
+                            color: "black",
+                            opacity: 1
+                        }
+                    }
+                },
+                tile: {
+                    urlTemplate: "tiles/#= zoom #/#= x #/#= y #.png",
+                    copyright: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+                }
+            },
+            layers: [{
+                type: "shape",
+                dataSource: {
+                    type: "geojson",
+                    transport: {
+                        read: "countries.geo.json"
+                    }
+                },
+                copyright: "&copy; FooBar",
+                style: {
+                    fill: {
+                        color: "#cf0"
+                    }
+                },
+                    shapeCreated: function(e) {
+                        var users = e.dataItem.properties.users;
+                        if (users) {
+                            setColor(e.shape, users);
+                        }
+                    }
+            }],
+            markerDefaults: {
+                shape: "pin", // circle, target, targetPin, ...
+                size: 10,
+                color: "blue"
+            },
+            markers: [{
+                position: [51.5, -0.09],
+                color: "red",
+                tooltip: {
+                    // Nested tooltip configuration
+                    // content: "Marker",
+                    // autoHide: false,
+                    // height: 
+                    // width:
+                    // position: "top",
+                    // showAfter
+                    // showOn
+                }
+            }],
+
+            // Events
+            click: $.noop,
+            markerCreated: $.noop,
+            markerHover: $.noop,
+            shapeHover: $.noop,
+            //TODO: mouseover / mouseout?
+            shapeCreated: function(e) {
+                var users = e.dataItem.properties.users;
+                if (users) {
+                    setColor(e.shape, users);
+                }
+            }
+        });
+
+        var map = $("#map").data("kendoMap");
+
+        $(document).on("DOMMouseScroll mousewheel", function(e) {
+            var delta = kendo.dataviz.mwDelta(e);
+            e.preventDefault();
+
+            delta = delta > 0 ? -1 : 1;
+            map.zoom(map.zoom() + delta);
+        });
+    </script>
+</body>
+</html>
+

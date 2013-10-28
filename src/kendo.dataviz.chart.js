@@ -70,6 +70,8 @@ kendo_module({
         inArray = dataviz.inArray,
         interpolateValue = dataviz.interpolateValue,
         last = dataviz.last,
+        limitValue = dataviz.limitValue,
+        mwDelta = dataviz.mwDelta,
         round = dataviz.round,
         renderTemplate = dataviz.renderTemplate,
         uniqueId = dataviz.uniqueId,
@@ -10821,10 +10823,6 @@ kendo_module({
         return array.length === 1 ? array[0] : array;
     }
 
-    function limitValue(value, min, max) {
-        return math.max(math.min(value, max), min);
-    }
-
     function axisGroupBox(axes) {
         var length = axes.length,
             box, i, axisBox;
@@ -10951,22 +10949,6 @@ kendo_module({
         }
 
         return ranges;
-    }
-
-    function mwDelta(e) {
-        var origEvent = e.originalEvent,
-            delta = 0;
-
-        if (origEvent.wheelDelta) {
-            delta = -origEvent.wheelDelta / 120;
-            delta = delta > 0 ? math.ceil(delta) : math.floor(delta);
-        }
-
-        if (origEvent.detail) {
-            delta = round(origEvent.detail / 3);
-        }
-
-        return delta;
     }
 
     function evalOptions(options, context, state) {
@@ -11289,7 +11271,6 @@ kendo_module({
         isNumber: isNumber,
         floorDate: floorDate,
         filterSeriesByType: filterSeriesByType,
-        limitValue: limitValue,
         lteDateIndex: lteDateIndex,
         evalOptions: evalOptions,
         singleItemOrArray: singleItemOrArray,

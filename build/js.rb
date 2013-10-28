@@ -11,6 +11,7 @@ JS_BUNDLES_MIN = JS_BUNDLES.ext('min.js');
 # All JavaScript files from src/
 SRC_JS = FileList['src/kendo*.js']
     .include('src/kendo.editor.js')
+    .include('src/kendo.dataviz.map.js')
     .include('src/kendo.aspnetmvc.js')
     .include('src/cultures/*.js')
     .exclude('**/*.min.js')
@@ -62,6 +63,15 @@ file_merge "src/kendo.editor.js" => [
     "src/editor/tables.js"
 ]
 file "src/kendo.editor.js" => JS_BUILDFILE
+
+file_merge "src/kendo.dataviz.map.js" => [
+    "src/map/location.js",
+    "src/map/crs.js",
+    "src/map/layers/shape.js",
+    "src/map/layers/tile.js",
+    "src/map/main.js"
+]
+file "src/kendo.dataviz.map.js" => JS_BUILDFILE
 
 file_merge "src/kendo.aspnetmvc.js" => [
     "src/aspnetmvc/kendo.data.aspnetmvc.js",
@@ -155,7 +165,8 @@ DATAVIZ_JS = FileList[
     "src/kendo.dataviz.sparkline.js",
     "src/kendo.dataviz.svg.js",
     "src/kendo.dataviz.vml.js",
-    "src/kendo.dataviz.canvas.js"
+    "src/kendo.dataviz.canvas.js",
+    "src/kendo.dataviz.map.js"
 ]
 
 DATAVIZ_SRC_JS = FileList[DATAVIZ_JS].include('src/cultures/*.js', 'src/kendo.timezones.js', 'src/kendo.dataviz.js').exclude('**/*.min.js')

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spherical Mercator</title>
+    <script src="../../src/jquery.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.userevents.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/kendo.dataviz.map.js"></script>
+    <script src="../perf/benchmark.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="log-project">Running benchmark ... </div>
+    <div id="log-inverse">Running benchmark ... </div>
+    <script id="row-template" type="x-kendo/template">
+        <div>User agent: #= navigator.userAgent #
+        <table>
+            <tr>
+                <th>Position</th><th>Contender</th>
+                <th>Ops/sec (higher is better)</th>
+            </tr>
+            # for (var i = 0; i < data.length; i++) { #
+                <tr>
+                    <td>#= (i + 1) #</td>
+                    <td>#= data[i].name #</td>
+                    <td>#= kendo.toString(data[i].hz, "N") #</td>
+                </tr>
+            # } #
+        </table>
+        </div>
+    </script>
+    <script>
+        var dataviz = kendo.dataviz,
+            spatial = dataviz.spatial,
+            Mercator = spatial.projections.Mercator;
+
+        var SphericalMercator = Mercator.extend({
+            init: function(options) {
+                Mercator.fn.init.call(this, options);
+                this.options.datum.e = 0;
+            },
+
+            MAX_LNG: 180,
+            MAX_LAT: 85.0511287798
+        });
+
+        var builtin = new spatial.projections.SphericalMercator();
+        var candidate = new SphericalMercator();
+
+        var locations = [];
+        for (var i = 0; i < 1000; i++) {
+            locations.push(new spatial.Location(42, 24 + 0.0001 * i));
+        }
+
+        var points = [];
+        for (i = 0; i < 1000; i++) {
+            points.push(new dataviz.Point2D(2773710, 5269070 + 0.0001 * i));
+        }
+
+        new Benchmark.Suite()
+        .add("project", function() {
+            for (var i = 0; i < locations.length; i++) {
+                var p = builtin.project(locations[i]);
+            }
+        })
+        .add("project (based on elliptical projection)", function() {
+            for (var i = 0; i < locations.length; i++) {
+                var p = candidate.project(locations[i]);
+            }
+        })
+        .on("complete", function() {
+            var results = $.makeArray(this);
+            results.sort(function(a, b) { return b.hz - a.hz });
+
+            var rowTemplate = kendo.template($("#row-template").html());
+            $("#log-project").html(rowTemplate(results));
+        })
+        .run(true);
+
+        new Benchmark.Suite()
+        .add("inverse", function() {
+            for (var i = 0; i < points.length; i++) {
+                var l = builtin.inverse(points[i]);
+            }
+        })
+        .add("inverse (based on elliptical projection)", function() {
+            for (var i = 0; i < points.length; i++) {
+                var l = candidate.inverse(points[i]);
+            }
+        })
+        .on("complete", function() {
+            var results = $.makeArray(this);
+            results.sort(function(a, b) { return b.hz - a.hz });
+
+            var rowTemplate = kendo.template($("#row-template").html());
+            $("#log-inverse").html(rowTemplate(results));
+        })
+        .run(true);
+    </script>
+</body>
+</html>

@@ -328,6 +328,10 @@ kendo_module({
         // non-standard collection methods
         remove: function(item) {
             this.splice(this.indexOf(item), 1);
+        },
+
+        empty: function() {
+            this.splice(0, this.length);
         }
     });
 

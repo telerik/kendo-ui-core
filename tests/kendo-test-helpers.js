@@ -31,4 +31,24 @@ function stub(that, methods) {
     return that;
 }
 
+function arrayClose(a, b, tolerance) {
+    if (a.length != b.length) {
+        ok(false, "Arrays differ in size " + "(expected " + b.length + ", got " + a.length + " elements)");
+    } else if (a.length) {
+        for (var i = 0; i < a.length; i++) {
+            if (a[i].length) {
+                arrayClose(a[i], b[i], tolerance, "Values at index " + i);
+            } else {
+                QUnit.close(a[i], b[i], tolerance, "Values at index " + i);
+            }
+        }
+    } else {
+        ok(true);
+    }
+}
+
+var close = QUnit.close,
+    notClose = QUnit.notClose;
+
+
 QUnit.config.hidepassed = true;

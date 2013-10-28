@@ -26,6 +26,7 @@
                 Chart = dataviz.ui.Chart,
                 Box2D = dataviz.Box2D,
                 Point2D = dataviz.Point2D,
+                Matrix = dataviz.Matrix,
                 box,
                 targetBox;
 
@@ -353,6 +354,22 @@
                 equal(new Point2D(1, 1).distanceTo(new Point2D(2, 2)), Math.sqrt(2));
             });
 
+            test("multiply applies to x and y", function() {
+                deepEqual(point.multiply(2), new Point2D(20, 40));
+            });
+
+            test("multiply returns point", function() {
+                deepEqual(point.multiply(2), point);
+            });
+
+            test("transform applies matrix", function() {
+                deepEqual(point.transform(Matrix.translate(10, 10)), new Point2D(20, 30));
+            });
+
+            test("transform returns point", function() {
+                deepEqual(point.transform(Matrix.unit), point);
+            });
+
             (function() {
                 var sector;
 
@@ -393,7 +410,7 @@
 
                 test("point returns intersection point for angle", function() {
                     var point = sector.point(180);
-                    deepEqual([point.x, point.y], [40, 20])
+                    arrayClose([point.x, point.y], [40, 20], 1e-6)
                 });
             })();
 
@@ -1422,6 +1439,30 @@
 
             test("returns other types as-is", function() {
                 equal(dataviz.decodeEntities(1), 1);
+            });
+
+
+            // ------------------------------------------------------------
+            append = dataviz.append;
+
+            module("append");
+
+            test("appends array to array", function() {
+                var arr = [1];
+                append(arr, [2, 3]);
+
+                deepEqual(arr, [1, 2, 3]);
+            });
+
+            test("calls push method", function() {
+                function Foo() { };
+                Foo.prototype.push = function() {
+                    ok(true);
+                };
+
+                var foo = new Foo();
+
+                append(foo, []);
             });
 
             // ------------------------------------------------------------

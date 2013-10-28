@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Surface sandbox</title>
+    <script src="../../src/jquery.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/dataviz/util.js"></script>
+    <script src="../../src/dataviz/geometry.js"></script>
+    <script src="../../src/dataviz/drawing/core.js"></script>
+    <script src="../../src/dataviz/drawing/shapes.js"></script>
+    <script src="../../src/dataviz/drawing/svg.js"></script>
+    <script src="../../src/dataviz/drawing/canvas.js"></script>
+</head>
+<body>
+    <div id="wrap" style="width: 200px; height: 200px;"></div>
+    <input type="button" value="Toggle ticks" onclick="toggleTicks()" />
+    <input type="button" value="Toggle color" onclick="toggleColor()" />
+    <input type="button" value="Stop" onclick="stop()" />
+    <select id="surfaceType" onchange="reset()">
+        <option value="svg" selected="selected">SVG</option>
+        <option value="canvas">Canvas</option>
+        <option value="vml" disabled="disabled">VML</option>
+    </select>
+    <script>
+    var SVG_NS = "http://www.w3.org/2000/svg",
+        DEG_TO_RAD = Math.PI / 180;
+
+    var doc = document,
+        math = Math,
+        noop = $.noop,
+        proxy = $.proxy;
+
+    var dataviz = kendo.dataviz,
+        geometry = dataviz.geometry,
+        Point = geometry.Point,
+
+        drawing = dataviz.drawing,
+        Group = drawing.Group,
+        Path = drawing.Path;
+
+    var center = new Point(50,50);
+
+    var seconds = new Path().stroke("red").moveTo(center).lineTo(50, 0);
+    var minutes = new Path().stroke("black", 1.2).moveTo(center).lineTo(50, 5);
+    var hours = new Path().stroke("black", 2).moveTo(center).lineTo(50, 25);
+
+    var ticks = new Group();
+    var clock = new Group();
+    clock.append(hours, minutes, seconds, ticks);
+
+    var interval;
+    var surface;
+    function reset() {
+        stop();
+
+        var surfaceType = $("#surfaceType").val();
+        surface = new drawing[surfaceType].Surface($("#wrap")[0]);
+        surface.draw(clock);
+
+        surface.bind("click", function(e) {
+            console.log("click", e);
+        });
+
+        interval = setInterval(function() {
+            seconds.segments[1].anchor.rotate(center, -6);
+            minutes.segments[1].anchor.rotate(center, -0.1);
+            hours.segments[1].anchor.rotate(center, -0.0017);
+        }, 10);
+    }
+
+    function stop() {
+        if (interval) {
+            clearInterval(interval)
+            surface.clear();
+        }
+    }
+
+    function addTicks() {
+        for (var i = 0; i < 360; i += 30) {
+            var p1 = new Point(50, 10).rotate(center, i);
+            var p2 = new Point(50, 0).rotate(center, i);
+            ticks.append(new Path({
+                stroke: {
+                    color: "black",
+                    width: 0.5
+                }
+            }).moveTo(p1).lineTo(p2));
+        }
+    }
+
+    function removeTicks() {
+        ticks.clear();
+    }
+
+    function toggleTicks() {
+        if (ticks.children.length === 0) {
+            addTicks();
+        } else {
+            removeTicks();
+        }
+    }
+
+    function toggleColor() {
+        var stroke = seconds.options.stroke;
+        if (stroke.color === "red") {
+            seconds.options.set("stroke.color", "blue");
+        } else {
+            stroke.set("color", "red");
+        }
+    }
+
+    reset();
+
+    </script>
+</body>
+</html>
+
