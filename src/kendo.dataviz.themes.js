@@ -1530,15 +1530,15 @@ kendo_module({
     registerTheme("bootstrap", {
         chart: {
             title: {
-                color: "#343434"
+                color: "#333333"
             },
             legend: {
                 labels: {
-                    color: "#343434"
+                    color: "#333333"
                 },
                 inactiveItems: {
                     labels: {
-                        color: "#9A9A9A"
+                        color: "#999999"
                     },
                     markers: {
                         color: "#9A9A9A"
@@ -1547,33 +1547,36 @@ kendo_module({
             },
             seriesDefaults: {
                 labels: {
-                    color: "#343434"
+                    color: "#333333"
+                },
+				overlay: {
+                    gradient: "none"
                 },
                 errorBars: {
                     color: "#343434"
                 },
                 notes: {
                     icon: {
-                        background: "transparent",
+                        background: "#000000",
                         border: {
-                            color: "#b8b8b8"
+                            color: "#000000"
                         }
                     },
                     label: {
-                        color: "#343434"
+                        color: "#ffffff"
                     },
                     line: {
-                        color: "#b8b8b8"
+                        color: "#000000"
                     }
                 },
                 pie: {
                     overlay: {
-                        gradient: "sharpBevel"
+                        gradient: "none"
                     }
                 },
                 donut: {
                     overlay: {
-                        gradient: "sharpGlass"
+                        gradient: "none"
                     }
                 },
                 line: {
@@ -1595,12 +1598,12 @@ kendo_module({
                     }
                 },
                 area: {
-                    opacity: 0.3
+                    opacity: 0.8
                 },
                 candlestick: {
                     downColor: "#d0d0d0",
                     line: {
-                        color: "#d0d0d0"
+                        color: "#333333"
                     },
                     border: {
                         _brightness: 1.5,
@@ -1615,72 +1618,72 @@ kendo_module({
                 },
                 ohlc: {
                     line: {
-                        color: "#d0d0d0"
+                        color: "#333333"
                     }
                 }
             },
             chartArea: {
                 background: "#ffffff"
             },
-            seriesColors: ["#006dcc", "#49AFCD", "#5BB75B", "#FAA732", "#DA4F49", "#363636"],
+            seriesColors: ["#428bca", "#5bc0de", "#5cb85c", "#f2b661", "#e67d4a", "#da3b36"],
             axisDefaults: {
                 line: {
-                    color: "#b8b8b8"
+                    color: "#cccccc"
                 },
                 minorTicks: {
-                    color: "#dddddd"
+                    color: "#ebebeb"
                 },
                 majorTicks: {
-                    color: "#b8b8b8"
+                    color: "#cccccc"
                 },
                 labels: {
-                    color: "#343434"
+                    color: "#333333"
                 },
                 majorGridLines: {
-                    color: "#b8b8b8"
+                    color: "#cccccc"
                 },
                 minorGridLines: {
-                    color: "#dddddd"
+                    color: "#ebebeb"
                 },
                 title: {
-                    color: "#343434"
+                    color: "#333333"
                 },
                 crosshair: {
-                    color: "#b8b8b8"
+                    color: "#000000"
                 },
                 notes: {
                     icon: {
-                        background: "transparent",
+                        background: "#000000",
                         border: {
-                            color: "#b8b8b8"
+                            color: "#000000"
                         }
                     },
                     label: {
-                        color: "#343434"
+                        color: "#ffffff"
                     },
                     line: {
-                        color: "#b8b8b8"
+                        color: "#000000"
                     }
                 }
             }
         },
         gauge: {
             pointer: {
-                color: "#0044cc"
+                color: "#428bca"
             },
             scale: {
-                rangePlaceholderColor: "#b8b8b8",
+                rangePlaceholderColor: "#cccccc",
                 labels: {
-                    color: "#343434"
+                    color: "#333333"
                 },
                 minorTicks: {
-                    color: "#dddddd"
+                    color: "#ebebeb"
                 },
                 majorTicks: {
-                    color: "#b8b8b8"
+                    color: "#cccccc"
                 },
                 line: {
-                    color: "#b8b8b8"
+                    color: "#cccccc"
                 }
             }
         }
