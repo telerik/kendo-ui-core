@@ -364,6 +364,30 @@
         }
 
         /// <summary>
+        /// If set to true day and week views will be initially shown in business hours mode.
+        /// </summary>
+        /// <remarks>This options is applicable only to work week, week and day views</remarks>
+        /// <param name="value"></param>
+        public SchedulerBuilder<TModel> ShowWorkHours(bool value)
+        {
+            Component.ShowWorkHours = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// If set day and week views will be initially shown in business hours mode.
+        /// </summary>
+        /// <remarks>This options is applicable only to work week, week and day views</remarks>
+        /// <param name="value"></param>
+        public SchedulerBuilder<TModel> ShowWorkHours()
+        {
+            Component.ShowWorkHours = true;
+
+            return this;
+        }
+
+        /// <summary>
         /// If set to true the scheduler will enable the selection
         /// </summary>
         /// <param name="selectable">The selectable.</param>

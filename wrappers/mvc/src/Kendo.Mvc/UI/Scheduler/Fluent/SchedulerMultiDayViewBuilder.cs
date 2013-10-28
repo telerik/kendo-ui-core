@@ -385,6 +385,28 @@
         }
 
         /// <summary>
+        /// If set to true the view will be initially shown in business hours mode.
+        /// </summary>
+        /// <param name="value"></param>
+        public SchedulerMultiDayViewBuilder<TView> ShowWorkHours(bool value)
+        {
+            view.ShowWorkHours = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// If set the view will be initially shown in business hours mode.
+        /// </summary>
+        /// <param name="value"></param>
+        public SchedulerMultiDayViewBuilder<TView> ShowWorkHours()
+        {
+            view.ShowWorkHours = true;
+
+            return this;
+        }
+
+        /// <summary>
         /// If set to false the scheduler will not display the "footer" area. Default value is true.
         /// </summary>
         /// <param name="showFooter">The footer</param>

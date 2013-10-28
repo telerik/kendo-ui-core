@@ -211,6 +211,12 @@
             set;
         }
 
+        public bool ShowWorkHours
+        {
+            get;
+            set;
+        }
+
         public MobileMode Mobile
         {
             get;
@@ -350,6 +356,11 @@
             if (MajorTick != null)
             {
                 options["majorTick"] = MajorTick;
+            }
+
+            if (ShowWorkHours)
+            {
+                options["showWorkHours"] = ShowWorkHours;
             }
 
             if (!string.IsNullOrEmpty(MajorTimeHeaderTemplate))

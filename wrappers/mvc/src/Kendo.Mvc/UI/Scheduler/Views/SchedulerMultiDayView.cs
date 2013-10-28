@@ -127,6 +127,12 @@
             set;
         }
 
+        public bool ShowWorkHours
+        {
+            get;
+            set;
+        }
+
         public bool WorkDayCommand 
         {
             get;
@@ -265,6 +271,8 @@
             {
                 json["workWeekEnd"] = WorkWeekEnd;
             }
+
+            json["showWorkHours"] = ShowWorkHours;
         }
     }
 }
