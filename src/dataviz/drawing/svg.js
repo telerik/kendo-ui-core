@@ -85,6 +85,8 @@
         _appendTo: function(container) {
             renderSVG(container, this._template(this));
             this.element = container.firstElementChild;
+            alignToScreen(this.element);
+
             this._root.attachTo(this.element);
 
             $(this.element).on("click", $.proxy(this._click, this));
@@ -382,6 +384,25 @@
             };
         }
     })();
+
+    function alignToScreen(element) {
+        var ctm;
+
+        try {
+            ctm = element.getScreenCTM ? element.getScreenCTM() : null;
+        } catch (e) { }
+
+        if (ctm) {
+            var left = - ctm.e % 1,
+                top = - ctm.f % 1,
+                style = element.style;
+
+            if (left !== 0 || top !== 0) {
+                style.left = left + "px";
+                style.top = top + "px";
+            }
+        }
+    }
 
     // Exports ================================================================
     deepExtend(d, {
