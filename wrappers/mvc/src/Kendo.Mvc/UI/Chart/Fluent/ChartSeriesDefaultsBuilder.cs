@@ -78,6 +78,14 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Defines the default settings for funnel series.
+        /// </summary>
+        public virtual ChartFunnelSeriesBuilder<TModel> Funnel()
+        {
+            return new ChartFunnelSeriesBuilder<TModel>(chart.SeriesDefaults.Funnel);
+        }
+
+        /// <summary>
         /// Defines the default settings for scatter series.
         /// </summary>
         public virtual ChartScatterSeriesBuilder<TModel> Scatter()

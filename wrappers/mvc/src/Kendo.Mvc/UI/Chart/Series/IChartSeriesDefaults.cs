@@ -67,6 +67,14 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
+        /// The default settings for all funnel series
+        /// </summary>
+        IChartFunnelSeries Funnel
+        {
+            get;
+        }
+
+        /// <summary>
         /// The default settings for all scatter series
         /// </summary>
         IChartScatterSeries Scatter

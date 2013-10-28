@@ -23,6 +23,7 @@ namespace Kendo.Mvc.UI
             RadarArea = new ChartRadarAreaSeries<T, object>();
             RadarColumn = new ChartRadarColumnSeries<T, object>();
             RadarLine = new ChartRadarLineSeries<T, object>();
+            Funnel = new ChartFunnelSeries<T, object>();
             PolarArea = new ChartPolarAreaSeries<T, object, object>();
             PolarLine = new ChartPolarLineSeries<T, object, object>();
             PolarScatter = new ChartPolarScatterSeries<T, object, object>();
@@ -202,6 +203,13 @@ namespace Kendo.Mvc.UI
         public override IChartSerializer CreateSerializer()
         {
             return new ChartSeriesDefaultsSerializer(this);
+        }
+
+
+        public IChartFunnelSeries Funnel
+        {
+            get;
+            private set;
         }
     }
 }
