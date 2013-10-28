@@ -41,9 +41,9 @@
                 m.RecurrenceId(f => f.RecurrenceID);
             })
         .Read("Meetings_Read", "Scheduler")
-        .Create(create => create.Action("Meetings_Create", "Scheduler").Data("serialize"))
+        .Create(create => create.Action("Meetings_Create", "Scheduler"))
         .Destroy("Meetings_Destroy", "Scheduler")
-        .Update(update => update.Action("Meetings_Update", "Scheduler").Data("serialize"))
+        .Update(update => update.Action("Meetings_Update", "Scheduler"))
     )
 )
 
@@ -131,26 +131,3 @@
         </span>
     </li>
 </ul>
-
-<script type="text/javascript">
-    function serialize(data) {
-        for (var property in data) {
-            if ($.isArray(data[property])) {
-                serializeArray(property, data[property], data);
-            }
-        }
-    }
-
-    function serializeArray(prefix, array, result) {
-        for (var i = 0; i < array.length; i++) {
-            if ($.isPlainObject(array[i])) {
-                for (var property in array[i]) {
-                    result[prefix + "[" + i + "]." + property] = array[i][property];
-                }
-            }
-            else {
-                result[prefix + "[" + i + "]"] = array[i];
-            }
-        }
-    }
-</script>
