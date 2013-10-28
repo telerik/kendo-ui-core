@@ -1,8 +1,9 @@
-bash "Add php 5.4 PPA" do
-    code <<-SH
-        apt-add-repository -y ppa:ondrej/php5
-        apt-get update -y
-    SH
+apt_repository "ruby-ng" do
+  uri "http://ppa.launchpad.net/ondrej/php5/ubuntu"
+  distribution node['lsb']['codename']
+  components ["main"]
+  keyserver "hkp://keyserver.ubuntu.com:80/"
+  key "E5267A6C"
 end
 
 package "php5-common"

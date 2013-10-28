@@ -5,11 +5,13 @@ when "windows"
         action :install
     end
 else
-    bash "Add nodejs PPA" do
-        code <<-SH
-            apt-add-repository -y ppa:chris-lea/node.js
-            apt-get update -y
-        SH
+
+    apt_repository "ruby-ng" do
+      uri "http://ppa.launchpad.net/chris-lea/node.js/ubuntu"
+      distribution node['lsb']['codename']
+      components ["main"]
+      keyserver "hkp://keyserver.ubuntu.com:80/"
+      key "C7917B12"
     end
 
     package "nodejs"
