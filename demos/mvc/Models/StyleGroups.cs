@@ -67,10 +67,10 @@ namespace Kendo.Models
         public static readonly IList<string> Bootstrap = new string[]
         {
 #if DEBUG
-            "web/kendo.common.less",
+            "web/kendo.common-bootstrap.less",
             "web/kendo.bootstrap.less"
 #else
-            "kendo.common.min.css",
+            "kendo.common-bootstrap.min.css",
             "kendo.bootstrap.min.css"
 #endif
         };

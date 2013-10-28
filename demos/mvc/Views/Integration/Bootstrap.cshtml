@@ -26,6 +26,7 @@
             html, body {
                 margin: 0;
                 padding: 0;
+                min-width: 320px;
             }
 
             header {
@@ -531,7 +532,7 @@
         <script>
             // init page controls
 
-            var commonRe = /common/gi;
+            var commonRe = /kendo\.common/gi;
 
             function kendoStylesheets() {
                 return $("head link").filter(function () {
