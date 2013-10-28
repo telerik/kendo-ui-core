@@ -864,6 +864,7 @@
     <Compile Include="UI\Grid\Settings\GroupableMessages.cs" />
     <Compile Include="UI\Grid\Settings\NumberOperators.cs" />
     <Compile Include="UI\Grid\Settings\StringOperators.cs" />
+    <Compile Include="UI\Map\Map.cs" />
     <Compile Include="UI\Menu\MenuDirection.cs" />
     <Compile Include="UI\MobileListView\Fluent\MobileListViewLinkItemBuilder.cs" />
     <Compile Include="UI\MobileListView\Fluent\MobileListViewItemBuilderBase.cs" />
@@ -1753,4 +1754,33 @@
   <ItemGroup>
     <Compile Include="UI\MobileApplication\Fluent\MobileApplicationEventBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\Map\Map.cs" /><Compile Include="UI\Map\Fluent\MapBuilder.cs" /><Compile Include="UI\Map\Settings\MapControlsSettings.cs" /><Compile Include="UI\Map\Fluent\MapControlsSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapControlsNavigatorSettings.cs" /><Compile Include="UI\Map\Fluent\MapControlsNavigatorSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapControlsZoomSettings.cs" /><Compile Include="UI\Map\Fluent\MapControlsZoomSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapLayerDefaultsSettings.cs" /><Compile Include="UI\Map\Fluent\MapLayerDefaultsSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapLayerDefaultsShapeSettings.cs" /><Compile Include="UI\Map\Fluent\MapLayerDefaultsShapeSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapLayerDefaultsTileSettings.cs" /><Compile Include="UI\Map\Fluent\MapLayerDefaultsTileSettingsBuilder.cs" /><Compile Include="UI\Map\Fluent\MapLayerFactory.cs" /><Compile Include="UI\Map\MapLayer.cs" /><Compile Include="UI\Map\Fluent\MapLayerBuilder.cs" /><Compile Include="UI\Map\Settings\MapLayerFillSettings.cs" /><Compile Include="UI\Map\Fluent\MapLayerFillSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapLayerStrokeSettings.cs" /><Compile Include="UI\Map\Fluent\MapLayerStrokeSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapMarkerDefaultsSettings.cs" /><Compile Include="UI\Map\Fluent\MapMarkerDefaultsSettingsBuilder.cs" /><Compile Include="UI\Map\Fluent\MapMarkerFactory.cs" /><Compile Include="UI\Map\MapMarker.cs" /><Compile Include="UI\Map\Fluent\MapMarkerBuilder.cs" /><Compile Include="UI\Map\Fluent\MapEventBuilder.cs" /><Compile Include="UI\Map\Html\MapHtmlBuilder.cs" /></ItemGroup></Project>
+  <ItemGroup>
+    <Compile Include="UI\Map\Fluent\MapBuilder.cs" />
+    <Compile Include="UI\Map\Settings\MapControlsSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapControlsSettingsBuilder.cs" />
+    <Compile Include="UI\Map\Settings\MapControlsNavigatorSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapControlsNavigatorSettingsBuilder.cs" />
+    <Compile Include="UI\Map\Settings\MapControlsZoomSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapControlsZoomSettingsBuilder.cs" />
+    <Compile Include="UI\Map\Settings\MapLayerDefaultsSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerDefaultsSettingsBuilder.cs" />
+    <Compile Include="UI\Map\Settings\MapLayerDefaultsShapeSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerDefaultsShapeSettingsBuilder.cs" />
+    <Compile Include="UI\Map\Settings\MapLayerDefaultsTileSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerDefaultsTileSettingsBuilder.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerFactory.cs" />
+    <Compile Include="UI\Map\MapLayer.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerBuilder.cs" />
+    <Compile Include="UI\Map\Settings\MapLayerFillSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerFillSettingsBuilder.cs" />
+    <Compile Include="UI\Map\Settings\MapLayerStrokeSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerStrokeSettingsBuilder.cs" />
+    <Compile Include="UI\Map\Settings\MapMarkerDefaultsSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapMarkerDefaultsSettingsBuilder.cs" />
+    <Compile Include="UI\Map\Fluent\MapMarkerFactory.cs" />
+    <Compile Include="UI\Map\MapMarker.cs" />
+    <Compile Include="UI\Map\Fluent\MapMarkerBuilder.cs" />
+    <Compile Include="UI\Map\Fluent\MapEventBuilder.cs" />
+    <Compile Include="UI\Map\Html\MapHtmlBuilder.cs" />
+  </ItemGroup>
+</Project>

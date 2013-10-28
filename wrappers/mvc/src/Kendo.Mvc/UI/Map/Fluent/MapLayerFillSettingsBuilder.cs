@@ -35,7 +35,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The default fill opacity (0 to 1) for layer shapes.
         /// </summary>
         /// <param name="value">The value that configures the opacity.</param>
-        public MapLayerFillSettingsBuilder Opacity(int value)
+        public MapLayerFillSettingsBuilder Opacity(double value)
         {
             container.Opacity = value;
 

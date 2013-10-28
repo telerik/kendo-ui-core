@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI
         
         public string Color { get; set; }
         
-        public int Size { get; set; }
+        public double Size { get; set; }
         
         public string Shape { get; set; }
         

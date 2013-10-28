@@ -1200,6 +1200,23 @@ namespace Kendo.Mvc.UI.Fluent
             return MvcHtmlString.Empty;
         }
 
+        //>> DataVizComponents 
+        /// <summary>
+        /// Creates a <see cref="Map"/>
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().Map()
+        ///             .Name("Map")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public virtual MapBuilder Map()
+        {
+            return new MapBuilder(new Map(ViewContext, Initializer, UrlGenerator));
+        }
+        //<< DataVizComponents
+
         //>> MobileComponents 
         /// <summary>
         /// Creates a <see cref="MobileActionSheet"/>

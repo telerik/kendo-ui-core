@@ -35,7 +35,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The default stroke opacity (0 to 1) for layer shapes.
         /// </summary>
         /// <param name="value">The value that configures the opacity.</param>
-        public MapLayerStrokeSettingsBuilder Opacity(int value)
+        public MapLayerStrokeSettingsBuilder Opacity(double value)
         {
             container.Opacity = value;
 

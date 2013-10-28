@@ -7,7 +7,7 @@ end
 
 module CodeGen::MVC::Wrappers
     TYPES = {
-        'Number' => 'int',
+        'Number' => 'double',
         'String' => 'string',
         'Boolean' => 'bool',
         'Object' => 'object',
@@ -75,6 +75,15 @@ module CodeGen::MVC::Wrappers
         <%= composite_options.map { |option| option.to_initialization }.join %>
         //<< Initialization})
 
+        COMPONENT_FIELD_SERIALIZATION = ERB.new(%{//>> Serialization
+        <% composite_options.each do |option| %>
+            options["<%= option.name %>"] = <%= option.csharp_name %>.ToJson();
+        <% end %>
+        <% simple_options.each do |option| %>
+            options["<%= option.name %>"] = <%= option.csharp_name %>;
+        <% end %>
+            //<< Serialization})
+
 
         COMPONENT_FLUENT_FIELDS = ERB.new(%{//>> Fields
         <%= unique_options.map { |option| option.to_fluent }.join %>
@@ -116,7 +125,7 @@ module CodeGen::MVC::Wrappers
         /// <param name="handler">The name of the JavaScript function that will handle the <%= name %> event.</param>
         public <%= owner.csharp_class %>EventBuilder <%= csharp_name %>(string handler)
         {
-            Handler("<%= name.to_attribute %>", handler);
+            Handler("<%= event_name %>", handler);
 
             return this;
         }
@@ -261,6 +270,10 @@ module CodeGen::MVC::Wrappers
     class Event < CodeGen::Event
         include Options
 
+        def event_name
+            name
+        end
+
         def to_fluent
             FLUENT_EVENT_DECLARATION.result(binding)
         end
@@ -285,14 +298,20 @@ module CodeGen::MVC::Wrappers
             name
         end
 
+        def component_template
+            COMPONENT
+        end
+
         def to_class(filename)
             @files.push(filename)
 
-            csharp = File.exists?(filename) ? File.read(filename) : COMPONENT.result(binding)
+            csharp = File.exists?(filename) ? File.read(filename) : component_template.result(binding)
 
             csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FIELDS.result(binding))
 
             csharp = csharp.sub(/\/\/>> Initialization(.|\n)*\/\/<< Initialization/, COMPOSITE_FIELD_INITIALIZATION.result(binding))
+
+            csharp = csharp.sub(/\/\/>> Serialization(.|\n)*\/\/<< Serialization/, COMPONENT_FIELD_SERIALIZATION.result(binding))
         end
 
         def to_html_builder(filename)

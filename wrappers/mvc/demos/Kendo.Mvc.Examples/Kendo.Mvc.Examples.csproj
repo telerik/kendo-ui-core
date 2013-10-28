@@ -202,6 +202,7 @@
     <Compile Include="Controllers\DataViz\Line_Charts\NotesController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Line_Charts\Stacked_LineController.cs" />
+    <Compile Include="Controllers\DataViz\Map\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Pie_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Pie_Charts\Local_DataController.cs" />
     <Compile Include="Controllers\DataViz\Pie_Charts\Pie_LabelsController.cs" />
@@ -2853,6 +2854,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\funnel_charts\remote_data.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\map\index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

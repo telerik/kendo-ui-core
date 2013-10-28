@@ -32,7 +32,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the markerCreated event.</param>
         public MapEventBuilder MarkerCreated(string handler)
         {
-            Handler("marker-created", handler);
+            Handler("markerCreated", handler);
 
             return this;
         }
@@ -43,7 +43,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the markerHover event.</param>
         public MapEventBuilder MarkerHover(string handler)
         {
-            Handler("marker-hover", handler);
+            Handler("markerHover", handler);
 
             return this;
         }
@@ -54,7 +54,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the shapeCreated event.</param>
         public MapEventBuilder ShapeCreated(string handler)
         {
-            Handler("shape-created", handler);
+            Handler("shapeCreated", handler);
 
             return this;
         }
@@ -65,7 +65,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="handler">The name of the JavaScript function that will handle the shapeHover event.</param>
         public MapEventBuilder ShapeHover(string handler)
         {
-            Handler("shape-hover", handler);
+            Handler("shapeHover", handler);
 
             return this;
         }

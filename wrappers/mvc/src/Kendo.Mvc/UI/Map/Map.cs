@@ -63,34 +63,60 @@ namespace Kendo.Mvc.UI
             private set;
         }
         
-        public int MinZoom { get; set; }
+        public double MinZoom { get; set; }
         
-        public int MaxZoom { get; set; }
+        public double MaxZoom { get; set; }
         
-        public int MinSize { get; set; }
+        public double MinSize { get; set; }
         
         public string Theme { get; set; }
         
-        public int Zoom { get; set; }
+        public double Zoom { get; set; }
         
         //<< Fields
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            //no initializtion scripts for mobile widgets
+            var options = new Dictionary<string, object>(Events);
+
+            //>> Serialization
+        
+            options["controls"] = Controls.ToJson();
+        
+            options["layerDefaults"] = LayerDefaults.ToJson();
+        
+            options["layers"] = Layers.ToJson();
+        
+            options["markerDefaults"] = MarkerDefaults.ToJson();
+        
+            options["markers"] = Markers.ToJson();
+        
+        
+            options["maxZoom"] = MaxZoom;
+        
+            options["minSize"] = MinSize;
+        
+            options["minZoom"] = MinZoom;
+        
+            options["theme"] = Theme;
+        
+            options["zoom"] = Zoom;
+        
+            //<< Serialization
+
+            writer.Write(Initializer.Initialize(Selector, "Map", options));
+
+            base.WriteInitializationScript(writer);
         }
 
-        
         protected override void WriteHtml(HtmlTextWriter writer)
         {
             var html = new MapHtmlBuilder(this).Build();
 
             html.WriteTo(writer);
 
-            //prevent rendering empty script tag
-            //base.WriteHtml(writer);
+            base.WriteHtml(writer);
         }
-        
     }
 }
 

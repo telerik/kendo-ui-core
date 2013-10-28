@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// The default marker size in pixels.
         /// </summary>
         /// <param name="value">The value that configures the size.</param>
-        public MapMarkerDefaultsSettingsBuilder Size(int value)
+        public MapMarkerDefaultsSettingsBuilder Size(double value)
         {
             container.Size = value;
 

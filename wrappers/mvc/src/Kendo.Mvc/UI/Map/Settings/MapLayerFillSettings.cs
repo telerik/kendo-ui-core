@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI
         
         public string Color { get; set; }
         
-        public int Opacity { get; set; }
+        public double Opacity { get; set; }
         
         //<< Fields
 

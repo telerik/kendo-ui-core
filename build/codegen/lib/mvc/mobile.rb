@@ -23,8 +23,26 @@ module CodeGen::MVC::Wrappers::Mobile
 
     end
 
+    TYPES = {
+        'Number' => 'int',
+        'String' => 'string',
+        'Boolean' => 'bool',
+        'Object' => 'object',
+        'Function' => 'string',
+        'Date' => 'DateTime'
+    }
+
     class Option < CodeGen::MVC::Wrappers::Option
         include Options
+
+        def csharp_type
+            if values
+                "#{owner.csharp_class.gsub(/Settings/, "")}#{csharp_name}"
+            else
+                TYPES[type[0]]
+            end
+        end
+
     end
 
     class CompositeOption < CodeGen::MVC::Wrappers::CompositeOption
@@ -75,8 +93,13 @@ module CodeGen::MVC::Wrappers::Mobile
 
     class Event < CodeGen::MVC::Wrappers::Event
         include Options
+
+        def event_name
+            name.to_attribute
+        end
     end
 
+    COMPONENT = ERB.new(File.read("build/codegen/lib/mvc/mobile.component.csharp.erb"), 0, '%<>')
 
     class Component < CodeGen::MVC::Wrappers::Component
         include Options
@@ -85,5 +108,8 @@ module CodeGen::MVC::Wrappers::Mobile
             "Mobile#{@name}"
         end
 
+        def component_template
+            COMPONENT
+        end
     end
 end

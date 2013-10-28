@@ -37,9 +37,12 @@ namespace :generate do
     end
 
     desc 'Generate all server wrappers and their API reference'
-    task :all => [:php, :jsp, 'mvc:mobile:wrappers', 'mvc:api']
+    task :all => [:php, :jsp, 'mvc:wrappers', 'mvc:api']
 
     namespace :mvc do
+
+        desc 'Generate MVC DataViz and Mobile wrappers'
+        task :wrappers => ['mvc:dataviz:wrappers', 'mvc:mobile:wrappers']
 
         desc 'Generate MVC API reference'
         task :api => 'Kendo.Mvc.xml' do
@@ -55,9 +58,9 @@ namespace :generate do
         namespace :dataviz do
             desc 'Generate MVC DataViz wrappers'
             task :wrappers do
-                MARKDOWN = FileList['docs/api/dataviz/map.md']
+                markdown = FileList['docs/api/dataviz/map.md']
 
-                components = MARKDOWN.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Wrappers::DataViz::Component) }
+                components = markdown.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Wrappers::DataViz::Component) }
                     .sort { |a, b| a.name <=> b.name }
 
                 component_register = ''
@@ -90,9 +93,9 @@ namespace :generate do
 
             desc 'Generate MVC Mobile wrappers'
             task :wrappers do
-                MARKDOWN = FileList['docs/api/mobile/*.md'].exclude(/listview|swipe|loader|pane|touch|scroller/)
+                markdown = FileList['docs/api/mobile/*.md'].exclude(/listview|swipe|loader|pane|touch|scroller/)
 
-                components = MARKDOWN.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Wrappers::Mobile::Component) }
+                components = markdown.map { |filename| CodeGen::MarkdownParser.read(filename, CodeGen::MVC::Wrappers::Mobile::Component) }
                     .sort { |a, b| a.name <=> b.name }
 
                 component_register = ''
