@@ -30,7 +30,7 @@ namespace Kendo.Mvc.UI
                 .Add("lowerField", series.LowerMember, () => series.LowerMember.HasValue())
                 .Add("q1Field", series.Q1Member, () => series.Q1Member.HasValue())
                 .Add("medianField", series.MedianMember, () => series.MedianMember.HasValue())
-                .Add("q3Member", series.Q3Member, () => series.Q3Member.HasValue())
+                .Add("q3Field", series.Q3Member, () => series.Q3Member.HasValue())
                 .Add("upperField", series.UpperMember, () => series.UpperMember.HasValue())
                 .Add("meanField", series.MeanMember, () => series.MeanMember.HasValue())
                 .Add("outliersField", series.OutliersMember, () => series.OutliersMember.HasValue())
