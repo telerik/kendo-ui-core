@@ -135,7 +135,7 @@
 
             var args = { shape: shape, dataItem: dataItem };
             if (!this.trigger("shapeCreated", args)) {
-                container.append(shape)
+                container.append(shape);
             }
         },
 

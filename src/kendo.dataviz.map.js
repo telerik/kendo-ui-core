@@ -114,7 +114,7 @@ kendo_module({
             this.trigger("drag");
         },
 
-        _scrollEnd: function(e) {
+        _scrollEnd: function() {
             this.trigger("dragEnd");
         },
 
@@ -440,18 +440,28 @@ kendo_module({
         init: function(crs, options) {
             this.crs = crs;
             this._initOptions(options);
+            this._items = [];
         },
 
-        options: {},
+        options: {
+            maxSize: 100
+        },
 
-        get: function(point, scale) {
+        get: function(loc, scale) {
             var pool = this,
-                point = pool.crs.toPoint(point, scale);
+                point = pool.crs.toPoint(loc, scale),
+                result = new Point(
+                    math.floor(point.x / pool.options.tileSize),
+                    math.floor(point.y / pool.options.tileSize)
+                );
 
-            return new Point(
-                math.floor(point.x / pool.options.tileSize),
-                math.floor(point.y / pool.options.tileSize)
-            );
+            if (pool._items.length > pool.options.maxSize) {
+                // Remove an item and add the new one.
+            } else {
+                this._items.push(result);
+            }
+
+            return result;
         }
     });
 
@@ -474,7 +484,10 @@ kendo_module({
 
         options: {
             zoom: 0,
-            tileSize: 256
+            tileSize: 256,
+            pool: {
+                length: 100
+            }
         },
 
         destroy: function() {
@@ -486,35 +499,11 @@ kendo_module({
             this._render();
         },
 
-        //metersToPixels: function(mx, my) {
-        //    var center = this.crs.c,
-        //        res = center / this.map.scale(),
-        //        px = (mx + center / 2) / res,
-        //        py = (my + center / 2) / res;
-
-        //    return { px: px, py: py };
-        //},
-
-        //metersToTile: function(mx, my) {
-        //    var point = this.metersToPixels(mx, my);
-
-        //    return this.pixelsToTile(point.px, point.py);
-        //},
-
-        //pixelsToTile: function(px, py) {
-        //    var minSize = this.map.options.minSize,
-        //        tx = math.floor(math.ceil(px / minSize) - 1),
-        //        ty = math.floor(math.ceil(py / minSize) - 1);
-
-        //    return { x: tx, y: ty };
-        //},
-
         _render: function() {
             var tile = this,
                 options = this.options,
                 tileSize = options.tileSize,
                 zoom = options.zoom,
-                size = pow(2, zoom),
                 urlTemplate = template(options.urlTemplate),
                 map = tile.map,
                 output = "";
@@ -541,7 +530,6 @@ kendo_module({
                 b = 0;
                 a++;
             }
-            console.log(output, tileX, tileY);
 
             this.element[0].innerHTML = output;
         }
