@@ -2063,16 +2063,22 @@
             "packages": [ "online" ],
             "items": [
                 {
-                    "text": "Using KnockoutJS with Kendo",
+                    "text": "Kendo UI + KnockoutJS",
                     "url": "integration/index.html",
                     "title": "Example of KnockoutJS integration with Kendo UI Web framework",
                     "meta": "This demo illustrates how KnockoutJS dynamic JavaScript UIs can be integrated with Kendo UI HTML5 & CSS3 Web framework."
                 },
                 {
-                    "text": "Using jQuery templates with Kendo",
+                    "text": "Kendo UI + jQuery templates",
                     "url": "integration/jquery-templates.html",
                     "title": "Integrating jQuery templates with Kendo UI Web examples",
                     "meta": "This demo illustrates how jQuery templates can be integrated with the robust Kendo UI framework for web app development."
+                },
+                {
+                    "text": "Kendo UI + Twitter Bootstrap",
+                    "url": "integration/bootstrap.html",
+                    "title": "Integrating Twitter Bootstrap with Kendo UI responsive webapp example",
+                    "meta": "This demo illustrates how Twitter Bootstrap can be integrated with the Kendo UI framework into a responsive web application."
                 }
             ]
         }

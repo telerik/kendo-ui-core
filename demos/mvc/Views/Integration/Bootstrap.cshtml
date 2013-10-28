@@ -146,13 +146,14 @@
             }
 
             #configure {
+                z-index: 10;
                 width: 50px;
                 height: 50px;
                 overflow: hidden;
                 border-width: 0 0 0 1px;
                 background-color: transparent;
-                float: right;
-                position: relative;
+                position: absolute;
+                top: 0; right: 0;
                 color: #fff;
             }
 
@@ -251,6 +252,12 @@
                 font-size: 0.8571em;
             }
 
+            header .container h1.visible-sm {
+                padding-top: 10px;
+                line-height: 33px;
+                padding-bottom: 10px;
+            }
+
             @@media (max-width: 767px) {
                 header .container {
                     padding-right: 0;
@@ -289,7 +296,8 @@
     <body>
         <header>
             <div class="container" class="row">
-                <h1 class="col-sm-3">Kendo UI</h1>
+                <h1 class="col-sm-3 hidden-sm">Kendo UI &hearts; Bootstrap</h1>
+                <h1 class="col-sm-3 visible-sm">Kendo UI &hearts;<br/> Bootstrap</h1>
 
                 <button id="configure" class="visible-xs"><span class="glyphicon glyphicon-align-justify"></span></button>
 
