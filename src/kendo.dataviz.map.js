@@ -12,8 +12,6 @@ kendo_module({
         atan = math.atan,
         exp = math.exp,
         pow = math.pow,
-        max = math.max,
-        min = math.min,
         sin = math.sin,
         log = math.log,
         tan = math.tan,
@@ -33,9 +31,14 @@ kendo_module({
         g = dataviz.geometry,
         Point = g.Point,
 
+        map = dataviz.map,
+        Extent = map.Extent,
+        Location = map.Location,
+
         util = dataviz.util,
-        limit = util.limitValue,
-        valueOrDefault = util.valueOrDefault;
+        rad = util.rad,
+        deg = util.deg,
+        limit = util.limitValue;
 
     // Constants ==============================================================
     var FRICTION = 0.90,
@@ -193,94 +196,6 @@ kendo_module({
             }
 
             return this._center;
-        }
-    });
-
-    // Implementation =========================================================
-    // TODO: Flip lat (y), lng (x) before it's too late!
-    var Location = function(lat, lng) {
-        this.lat = lat;
-        this.lng = lng;
-    };
-
-    Location.prototype = {
-        FORMAT: "{0:N6},{1:N6}",
-
-        toString: function() {
-            return kendo.format(this.FORMAT, this.lng, this.lat);
-        },
-
-        equals: function(loc) {
-            return loc && loc.lat === this.lat && loc.lng === this.lng;
-        }
-    };
-
-    Location.fromLngLat = function(ll) {
-        return new Location(ll[1], ll[0]);
-    };
-
-    Location.fromLatLng = function(ll) {
-        return new Location(ll[0], ll[1]);
-    };
-
-    var Extent = Class.extend({
-        init: function(nw, se) {
-            this.nw = nw;
-            this.se = se;
-        },
-
-        contains: function(loc) {
-            var nw = this.nw,
-                se = this.se,
-                lng = valueOrDefault(loc.lng, loc[0]),
-                lat = valueOrDefault(loc.lat, loc[1]);
-
-            return loc &&
-                   lng + 180 >= nw.lng + 180 &&
-                   lng + 180 <= se.lng + 180 &&
-                   lat + 90 >= se.lat + 90 &&
-                   lat + 90 <= nw.lat + 90;
-        },
-
-        containsAny: function(locs) {
-            var result = false;
-            for (var i = 0; i < locs.length; i++) {
-                result = result || this.contains(locs[i]);
-            }
-
-            return result;
-        },
-
-        include: function(loc) {
-            var nw = this.nw,
-                se = this.se,
-                lng = valueOrDefault(loc.lng, loc[0]),
-                lat = valueOrDefault(loc.lat, loc[1]);
-
-            nw.lng = min(nw.lng, lng);
-            nw.lat = max(nw.lat, lat);
-
-            se.lng = max(se.lng, lng);
-            se.lat = min(se.lat, lat);
-        },
-
-        includeAll: function(locs) {
-            for (var i = 0; i < locs.length; i++) {
-                this.include(locs[i]);
-            }
-        },
-
-        edges: function() {
-            var nw = this.nw,
-                se = this.se;
-
-            return [nw, new Location(nw.lat, se.lng),
-                    se, new Location(nw.lng, se.lat)];
-        },
-
-        overlaps: function(extent) {
-            return this.containsAny(extent.edges()) ||
-                   extent.containsAny(this.edges());
         }
     });
 
@@ -471,15 +386,6 @@ kendo_module({
         }
     });
 
-    // Helper methods =========================================================
-    function rad(degrees) {
-        return degrees * DEG_TO_RAD;
-    }
-
-    function deg(radians) {
-        return radians / DEG_TO_RAD;
-    }
-
     // Exports ================================================================
     dataviz.ui.plugin(Map);
 
@@ -497,10 +403,7 @@ kendo_module({
                 Equirectangular: Equirectangular,
                 Mercator: Mercator,
                 SphericalMercator: SphericalMercator
-            },
-
-            Extent: Extent,
-            Location: Location
+            }
         }
     });
 
