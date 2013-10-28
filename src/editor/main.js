@@ -430,7 +430,7 @@ kendo_module({
 
                     if (toolName) {
                         e.preventDefault();
-                        if (!/undo|redo/.test(toolName)) {
+                        if (!/^(undo|redo)$/.test(toolName)) {
                             editor.keyboard.endTyping(true);
                         }
                         editor.trigger("keydown", e);
@@ -821,7 +821,7 @@ kendo_module({
 
                 that.trigger("execute", { name: name, command: command });
 
-                if (/undo|redo/i.test(name)) {
+                if (/^(undo|redo)$/i.test(name)) {
                     that.undoRedoStack[name]();
                 } else if (command) {
                     if (!command.managesUndoRedo) {
