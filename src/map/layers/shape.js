@@ -3,7 +3,7 @@
     var proxy = $.proxy,
 
         kendo = window.kendo,
-        Observable = kendo.Observable,
+        Class = kendo.Class,
         DataSource = kendo.data.DataSource,
 
         dataviz = kendo.dataviz,
@@ -16,17 +16,14 @@
         Location = map.Location;
 
     // Constants ==============================================================
-    var ShapeLayer = Observable.extend({
+    var ShapeLayer = Class.extend({
         init: function(map, options) {
-            Observable.fn.init.call(this);
-
             options = deepExtend({}, options, {
                 width: map.element.width(),
                 height: map.element.height()
             });
 
             this._initOptions(options);
-            this.bind(this.events, options);
 
             this.element = $("<div class='k-layer'></div>").appendTo(
                 map.scrollWrap // TODO: API for allocating a scrollable element?
@@ -41,10 +38,6 @@
 
             this._initDataSource();
         },
-
-        events: [
-            "shapeCreated"
-        ],
 
         options: {
             autoBind: true,
@@ -114,8 +107,8 @@
         _loadPolygon: function(container, rings, dataItem) {
             var shape = this._buildPolygon(rings);
 
-            var args = { shape: shape, dataItem: dataItem };
-            if (!this.trigger("shapeCreated", args)) {
+            var args = { layer: this, shape: shape, dataItem: dataItem };
+            if (!this.map.trigger("shapeCreated", args)) {
                 container.append(shape);
             }
         },

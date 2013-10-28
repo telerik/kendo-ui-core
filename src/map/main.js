@@ -41,10 +41,11 @@ kendo_module({
             Widget.fn.init.call(map, element);
 
             map._initOptions(options);
-            map.scrollWrap = $("<div></div>").appendTo(map.element);
+            this.bind(this.events, options);
+
+            map.scrollWrap = $("<div />").appendTo(map.element);
 
             map.crs = new EPSG3857();
-
             map.layers = new ObservableArray([]);
             map._renderLayers();
 
@@ -52,6 +53,7 @@ kendo_module({
                 friction: FRICTION,
                 velocityMultiplier: VELOCITY_MULTIPLIER
             });
+
             scroller.bind("scroll", proxy(map._scroll, map));
             scroller.bind("scrollEnd", proxy(map._scrollEnd, map));
 
@@ -67,9 +69,10 @@ kendo_module({
         },
 
         events:[
-            "reset", // TODO: Redraw?
+            "reset",
             "drag",
-            "dragEnd"
+            "dragEnd",
+            "shapeCreated"
         ],
 
         zoom: function(level) {
