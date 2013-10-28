@@ -201,6 +201,7 @@ header .k-dropdown-wrap.k-state-default .k-input {
 #tabstrip .k-content {
     min-height: 156px;
 }
+
 #tabstrip .k-chart {
     height: 156px;
 }
@@ -211,6 +212,24 @@ header .k-dropdown-wrap.k-state-default .k-input {
 
 #tabstrip-4 {
     text-align: center;
+}
+
+#tabstrip .km-icon {
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+
+#tabstrip .km-icon:after {
+    font: 1.3em/1em "Kendo UI" !important;
+}
+
+.revenue:after { content: "\E08C"; }
+.spd:after { content: "\E04B"; }
+.spr:after { content: "\E050"; }
+.share:after { content: "\E04E"; }
+
+.k-tabstrip .k-link:hover {
+    text-decoration: none;
 }
 .market-donut {
     display: inline-block;
