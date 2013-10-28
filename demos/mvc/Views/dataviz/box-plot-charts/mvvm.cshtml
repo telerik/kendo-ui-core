@@ -14,8 +14,9 @@
                                 q3Field: 'q3',
                                 upperField: 'upper',
                                 outliersField: 'outliers',
-                                categoryFiled: 'year'
+                                categoryField: 'year'
                               }]"
+                 data-category-axis="{ labels: { rotation: '-90' }}"
                  data-bind="visible: isVisible,
                             source: monthlyTemperatures,
                             events: { seriesHover: onSeriesHover }"></div>
@@ -50,7 +51,7 @@
             monthlyTemperatures: new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: "../../content/dataviz/js/monthly-temperatures.json",
+                        url: "../../content/dataviz/js/ozone.json",
                         dataType: "json"
                     }
                 },
