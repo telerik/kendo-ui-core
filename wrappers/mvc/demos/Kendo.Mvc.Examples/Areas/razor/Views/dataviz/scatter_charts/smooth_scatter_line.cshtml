@@ -6,7 +6,7 @@
             .Visible(true)
         )
         .SeriesDefaults(seriesDefaults =>
-            seriesDefaults.ScatterLine().Style(ChartScatterLineStyle.Normal)
+            seriesDefaults.ScatterLine().Style(ChartScatterLineStyle.Smooth)
         )
         .Series(series => {
             series.ScatterLine(new int[][] {
@@ -43,43 +43,3 @@
         )
     ) 
 </div>
-
-<div class="configuration-horizontal">
-    <div class="config-section">
-        <span class="configHead">Style</span>
-        <ul class="options">
-            <li>
-                @(
-                    Html.Kendo().DropDownList()
-                        .Name("style")
-                        .Items(items =>
-                        {
-                            items.Add().Text("Normal").Value("normal");                            
-                            items.Add().Text("Smooth").Value("smooth");
-                        })
-                        .DataTextField("Text")
-                        .DataValueField("Value")
-                        .Events(events=> events.Change("onStyleChange"))
-                )
-            </li>
-        </ul>
-    </div>
-</div>
-
-<script>
-    function onStyleChange() {
-        var chart = $("#chart").data("kendoChart");
-        chart.setOptions({
-            seriesDefaults: {
-                type: "scatterLine",
-                style: this.value()
-            }
-        });
-    }
-</script>
-
-<style scoped>
-    .chart-wrapper, .chart-wrapper .k-chart {
-        height: 300px;
-    }
-</style>

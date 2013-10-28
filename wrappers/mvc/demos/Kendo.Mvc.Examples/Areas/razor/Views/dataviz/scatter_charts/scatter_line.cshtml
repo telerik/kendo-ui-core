@@ -5,9 +5,6 @@
         .Legend(legend => legend
             .Visible(true)
         )
-        .SeriesDefaults(seriesDefaults =>
-            seriesDefaults.ScatterLine().Style(ChartScatterLineStyle.Smooth)
-        )
         .Series(series => {
             series.ScatterLine(new int[][] {
                     new [] {10, 10}, new [] {15, 20}, new [] {20, 25},

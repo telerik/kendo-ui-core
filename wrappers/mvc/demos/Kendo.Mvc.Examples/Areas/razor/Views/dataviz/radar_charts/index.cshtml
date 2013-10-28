@@ -5,6 +5,7 @@
         .Legend(legend => legend
             .Position(ChartLegendPosition.Bottom)
         )
+        .SeriesDefaults(seriesDefaults => seriesDefaults.RadarLine().Style(ChartRadarLineStyle.Smooth))
         .Series(series => {
             series.RadarLine(new double[] {
                     116, 165, 215, 75, 100, 49, 80,

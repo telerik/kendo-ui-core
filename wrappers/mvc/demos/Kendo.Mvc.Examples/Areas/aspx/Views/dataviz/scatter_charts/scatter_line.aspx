@@ -8,9 +8,6 @@
         .Legend(legend => legend
             .Visible(true)
         )
-        .SeriesDefaults(seriesDefaults =>
-            seriesDefaults.ScatterLine().Style(ChartScatterLineStyle.Smooth)
-        )
         .Series(series =>
         {
             series.ScatterLine(new int[][] {
