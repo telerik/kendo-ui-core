@@ -74,32 +74,20 @@ $chart_dec->title(array('position' => 'bottom', 'text' => 'December'))
     </div>
     <div class="configuration-horizontal">
         <div class="config-section">
-            <span class="configHead">Dynamic Slope</span>
-            <ul class="options">
-                <li>
-                    <label>
-                        <input type="checkbox" id="dynamicSlope"/> True
-                    </label>
-                </li>
-            </ul>
+            <label class="configHead"><input type="checkbox" id="dynamicSlope"/> Dynamic Slope</label> 
+            <i>The slope for each segment depends on the ratio between the current and the next value</i>           
         </div>
         <div class="config-section">
-            <span class="configHead">Dynamic Height</span>
-            <ul class="options">
-                <li>
-                    <label>
-                        <input type="checkbox" id="dynamicHeight"/> True
-                    </label>
-                </li>
-            </ul>
+            <label class="configHead"><input type="checkbox" id="dynamicHeight"/> Dynamic Height</label>
+            <i>The height of the segment is the overall percentage for that dataItem</i>  
         </div>
         <div class="config-section">
-            <span class="configHead">Neck/Base Ratio</span>
+            <span class="configHead">Neck Ratio</span>
             <ul class="options">
                 <li><input id="neckSlider" value="0.3"/></li>
             </ul>
+            <i>The ratio between the bases of the whole funnel element</i>
         </div>
-        <i>Dynamic slope means the slope for each segment depends on the ratio between the current and the next value</i>
     </div>
     <script>
 
@@ -161,6 +149,10 @@ $chart_dec->title(array('position' => 'bottom', 'text' => 'December'))
             width: 180px;
             height: 300px;
             margin: 15px 25px;
+        }
+        .config-section
+        {
+            width:125px;
         }
     </style>
 
