@@ -42,6 +42,7 @@ kendo_module({
         ARIADISABLED = "aria-disabled",
         TreeView,
         subGroup, nodeContents, nodeIcon,
+        spriteRe,
         bindings = {
             text: "dataTextField",
             url: "dataUrlField",
@@ -98,6 +99,8 @@ kendo_module({
         };
     }
 
+    spriteRe = /k-sprite/;
+
     function moveContents(node, container) {
         var tmp;
 
@@ -109,7 +112,11 @@ kendo_module({
                 tmp.nodeValue = $.trim(tmp.nodeValue);
             }
 
-            container.insertBefore(tmp, container.firstChild);
+            if (spriteRe.test(tmp.className)) {
+                container.insertBefore(tmp, container.firstChild);
+            } else {
+                container.appendChild(tmp);
+            }
         }
     }
 

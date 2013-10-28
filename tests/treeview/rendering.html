@@ -106,6 +106,16 @@
                 equal(sprite[0], kin[0].firstChild);
             });
 
+            test("extends lists with sprites", function() {
+                var element = treeviewFromHtml("<ul><li><span class='k-sprite foo' />foo</li></ul>");
+
+                var kin = element.find("span.k-in");
+                var sprite = kin.find(".k-sprite");
+
+                equal(sprite.length, 1);
+                equal(sprite[0], kin[0].firstChild);
+            });
+
             module("groups", moduleOptions);
 
             test("renders lines class for first level", function() {
