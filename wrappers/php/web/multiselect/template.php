@@ -39,17 +39,19 @@ $multiselect->minLength(1)
             ->dataSource($dataSource)
             ->headerTemplate(<<<TEMPLATE
                 <div class="k-widget k-header dropdown-header">
-                    <span class="first">Photo</span>
-                    <span class="last">Contact info</span>
+                    <span class="first">photo</span>
+                    <span class="last">contact info</span>
                 </div>
 TEMPLATE
             )
             ->itemTemplate(<<<TEMPLATE
-                <img src="../../content/web/Customers/#= CustomerID #.jpg" alt="#= CustomerID #" />
-                <h3>#: ContactName #</h3>
-                <h3>#: CompanyName #</h3>
+            <img src="../../content/web/Customers/#= CustomerID #.jpg" alt="#= CustomerID #" />
+            <dl>
+                <dt>Contact:</dt><dd>#: ContactName #</dd>
+                <dt>Company:</dt><dd>#: CompanyName #</dd>
+            </dl>
 TEMPLATE
-            )
+            );
             ->tagTemplate(<<<TEMPLATE
                 <img class="tag-image" src="../../content/web/Customers/#= CustomerID #.jpg" alt="#= CustomerID #" />
                 #: ContactName #
@@ -65,13 +67,7 @@ echo $multiselect->render();
         Click the MultiSelect to see the customized appearance of the items.
     </p>
 </div>
-<script>
-    $(function() {
-        var customers = $("#customers").data("kendoMultiSelect");
-        customers.wrapper.attr("id", "customers-wrapper");
-    });
-</script>
-<style>
+<style scoped>
     .dropdown-header {
         overflow:hidden;
         font-size: 1.3em;

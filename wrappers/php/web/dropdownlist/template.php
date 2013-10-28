@@ -93,13 +93,13 @@ echo $dropDownList->render();
         font-size: 1.2em;
         margin-bottom: 10px;
     }
-    #titles-list {
+    #customers-list {
         padding-bottom: 30px;
     }
-    #titles-list .k-item {
+    #customers-list .k-item {
         overflow: hidden; /* clear floated images */
     }
-    #titles-list img {
+    #customers-list img {
         -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
         -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
         box-shadow: 0 0 2px rgba(0,0,0,.4);
@@ -108,11 +108,11 @@ echo $dropDownList->render();
         height: 70px;
         margin: 5px 20px 5px 0;
     }
-    #titles-list h3 {
+    #customers-list h3 {
         margin: 20px 0 5px 0;
         font-size: 1.6em;
     }
-    #titles-list p {
+    #customers-list p {
         margin: 0;
     }
 </style>
