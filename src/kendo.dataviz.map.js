@@ -128,8 +128,10 @@ kendo_module({
             var scroller = this.scroller;
             scroller.dimensions.y.makeVirtual();
             scroller.dimensions.x.makeVirtual();
-            scroller.dimensions.x.virtualSize(0, this.scale());
-            scroller.dimensions.y.virtualSize(0, this.scale());
+
+            var nw = this.toLayerPoint(this.viewport().nw);
+            scroller.dimensions.x.virtualSize(-nw.x, this.scale());
+            scroller.dimensions.y.virtualSize(-nw.y, this.scale());
         },
 
         _renderLayers: function() {

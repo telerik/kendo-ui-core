@@ -14,7 +14,8 @@
         BaseNode = d.BaseNode,
 
         util = dataviz.util,
-        renderAttr = util.renderAttr;
+        renderAttr = util.renderAttr,
+        round = util.round;
 
     // Constants ==============================================================
     var BUTT = "butt",
@@ -46,6 +47,15 @@
         events: [
             "click"
         ],
+
+        viewport: function(rect) {
+            var viewBox = kendo.format(
+                "{0} {1} {2} {3}",
+                round(rect.p0.x, 4), round(rect.p0.y, 4),
+                rect.width(), rect.height());
+
+            this.element.setAttribute("viewBox", viewBox);
+        },
 
         draw: function(element) {
             this._root.load([element]);

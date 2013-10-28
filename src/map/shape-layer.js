@@ -9,6 +9,8 @@
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
 
+        g = dataviz.geometry,
+
         d = dataviz.drawing,
         Group = d.Group,
 
@@ -161,27 +163,21 @@
         },
 
         _drag: function() {
-            // TODO: Feature detection for surface viewBox
-            // If not supported (e.g. canvas), do nothing
-
             var scroller = this.map.scroller;
-            var offset = { x: scroller.scrollLeft, y: scroller.scrollTop };
-            var element = this.element;
+            var x = scroller.scrollLeft;
+            var y = scroller.scrollTop;
 
-            // TODO: Viewport info
             var width = this.element.width();
             var height = this.element.height();
+            var element = this.element;
 
-            this.movable.moveTo(offset);
-
-            var viewBox = kendo.format("{0} {1} {2} {3}",
-                                       round(offset.x, 4), round(offset.y, 4), width, height);
-
-            $("svg", element)[0].setAttribute("viewBox", viewBox);
+            var nw = new g.Point(x, y);
+            var se = new g.Point(x + width, y + height);
+            this.surface.viewport(new g.Rect(nw, se));
+            this.movable.moveTo(nw);
         },
 
         _dragEnd: function() {
-            //console.log("drag end, reloading");
             //this.reset();
         }
     });
