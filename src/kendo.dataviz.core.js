@@ -3949,8 +3949,8 @@ kendo_module({
 
         point: function (xValue, yValue, xField, yField) {
             var controlPoint = Point2D();
-            controlPoint[xField] = round(xValue, COORD_PRECISION);
-            controlPoint[yField] = round(yValue, COORD_PRECISION);
+            controlPoint[xField] = xValue;
+            controlPoint[yField] = yValue;
 
             return controlPoint;
         },
