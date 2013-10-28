@@ -219,7 +219,9 @@
                 margin: -16px -20px -19px;
             }
 
-            #tabstrip .k-content,
+            #tabstrip .k-content {
+                min-height: 156px;
+            }
             #tabstrip .k-chart {
                 height: 156px;
             }
@@ -227,7 +229,15 @@
             #tabstrip .k-content {
                 padding: 1px;
             }
-
+            
+            #tabstrip-4 {
+                text-align: center;
+            }
+            .market-donut {
+                display: inline-block;
+                width: 170px;
+            }
+            
             #panelbar .k-content {
                 padding: 1em;
             }
@@ -354,18 +364,19 @@
                 <div class="col-lg-8">
                     <div id="tabstrip">
                         <ul>
-                            <li class="k-state-active">Revenue</li>
+                            <li>Revenue</li>
                             <li>Sales per day</li>
                             <li>Sales per region</li>
-                            <li>Market share</li>
+                            <li class="k-state-active">Market share</li>
                         </ul>
                         <div><div id="revenue"></div></div>
                         <div><div id="sales-per-day"></div></div>
                         <div><div id="sales-per-region"></div></div>
                         <div>
-                            <div id="market-canterbury"></div>
-                            <div id="market-manchester"></div>
-                            <div id="market-rochester"></div>
+                            <div id="market-alice-mutton" class="market-donut"></div>
+                            <div id="market-gravad-lax" class="market-donut"></div>
+                            <div id="market-inlagd-sill" class="market-donut"></div>
+                            <div id="market-spegesild" class="market-donut"></div>
                         </div>
                     </div>
                 </div>
@@ -936,6 +947,155 @@
                 tooltip: {
                     visible: true,
                     template: "#= series.name # <br /> #= category #: $#= value #"
+                }
+            });
+            
+            
+            $("#market-alice-mutton").kendoChart({
+                title: {
+                    text: "Alice Mutton",
+                    position: "bottom",
+                    padding: 4,
+                    margin: 0
+                },
+                legend: {
+                    visible: false
+                },
+                chartArea: {
+                    margin: {
+                        top: 15,
+                        bottom: 0
+                    }
+                },
+                seriesDefaults: {
+                    type: "donut"
+                },
+                series: [{
+                    name: "2011",
+                    data: [{ category: "Canterbury", value: 30},
+                           { category: "Manchester", value: 45},
+                           { category: "Rochester", value: 25}],
+                            padding: 0
+                },{
+                    name: "2012",
+                    data: [{ category: "Canterbury", value: 64},
+                           { category: "Manchester", value: 12},
+                           { category: "Rochester", value: 24}]
+                }],
+                tooltip: {
+                    visible: true,
+                    template: "#= category # (#= series.name #): #= value #%"
+                }
+            });
+            
+            $("#market-gravad-lax").kendoChart({
+                title: {
+                    text: "Gravad lax",
+                    position: "bottom",
+                    padding: 4,
+                    margin: 0
+                },
+                legend: {
+                    visible: false
+                },
+                chartArea: {
+                    margin: {
+                        top: 15,
+                        bottom: 0
+                    }
+                },
+                seriesDefaults: {
+                    type: "donut"
+                },
+                series: [{
+                    name: "2011",
+                    data: [{ category: "Canterbury", value: 22},
+                           { category: "Manchester", value: 18},
+                           { category: "Rochester", value: 60}],
+                            padding: 0
+                },{
+                    name: "2012",
+                    data: [{ category: "Canterbury", value: 35},
+                           { category: "Manchester", value: 20},
+                           { category: "Rochester", value: 45}]
+                }],
+                tooltip: {
+                    visible: true,
+                    template: "#= category # (#= series.name #): #= value #%"
+                }
+            });
+            
+            $("#market-inlagd-sill").kendoChart({
+                title: {
+                    text: "Inlagd Sill",
+                    position: "bottom",
+                    padding: 4,
+                    margin: 0
+                },
+                legend: {
+                    visible: false
+                },
+                chartArea: {
+                    margin: {
+                        top: 15,
+                        bottom: 0
+                    }
+                },
+                seriesDefaults: {
+                    type: "donut"
+                },
+                series: [{
+                    name: "2011",
+                    data: [{ category: "Canterbury", value: 30},
+                           { category: "Manchester", value: 21},
+                           { category: "Rochester", value: 49}],
+                            padding: 0
+                },{
+                    name: "2012",
+                    data: [{ category: "Canterbury", value: 32},
+                           { category: "Manchester", value: 25},
+                           { category: "Rochester", value: 43}]
+                }],
+                tooltip: {
+                    visible: true,
+                    template: "#= category # (#= series.name #): #= value #%"
+                }
+            });
+            
+            $("#market-spegesild").kendoChart({
+                title: {
+                    text: "Spegesild",
+                    position: "bottom",
+                    padding: 4,
+                    margin: 0
+                },
+                legend: {
+                    visible: false
+                },
+                chartArea: {
+                    margin: {
+                        top: 15,
+                        bottom: 0
+                    }
+                },
+                seriesDefaults: {
+                    type: "donut"
+                },
+                series: [{
+                    name: "2011",
+                    data: [{ category: "Canterbury", value: 37},
+                           { category: "Manchester", value: 42},
+                           { category: "Rochester", value: 21}],
+                            padding: 0
+                },{
+                    name: "2012",
+                    data: [{ category: "Canterbury", value: 32},
+                           { category: "Manchester", value: 30},
+                           { category: "Rochester", value: 38}]
+                }],
+                tooltip: {
+                    visible: true,
+                    template: "#= category # (#= series.name #): #= value #%"
                 }
             });
 
