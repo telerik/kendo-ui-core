@@ -17,17 +17,17 @@
         {
             var result = new Dictionary<string, object>();
 
-            if (this.errorBars.Color.HasValue())
+            if (errorBars.Color.HasValue())
             {
-                result["color"] = this.errorBars.Color;
+                result["color"] = errorBars.Color;
             }
 
-            if (this.errorBars.EndCaps.HasValue)
+            if (errorBars.EndCaps.HasValue)
             {
-                result["endCaps"] = this.errorBars.EndCaps;
+                result["endCaps"] = errorBars.EndCaps;
             }
 
-            var line = this.errorBars.Line.CreateSerializer().Serialize();
+            var line = errorBars.Line.CreateSerializer().Serialize();
             if (line.Count > 0)
             {
                 result.Add("line", line);

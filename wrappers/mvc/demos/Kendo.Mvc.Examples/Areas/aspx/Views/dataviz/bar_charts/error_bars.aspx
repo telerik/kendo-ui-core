@@ -5,17 +5,17 @@
 <div class="chart-wrapper">
     <%= Html.Kendo().Chart()
             .Name("chart")
-            .Title("Russian Federation Gross domestic product growth /GDP annual %/")
+            .Title("Gross domestic product growth and standard error")
             .Legend(legend => legend.Visible(false))
             .Series(series =>                 
-                series.Column(new double[] { 4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, -7.832, 4.3, 4.3 }).Name("Russian Federation")
+                series.Column(new double[] { 4.743, 7.295, 7.175, 6.376, 8.153, 8.535, 5.247, -7.832, 4.3, 4.3 })
                     .ErrorBars(errorBars => errorBars.Value("stderr"))                   
             )
             .ValueAxis(axis => axis
                 .Numeric()
                     .Labels(labels => labels.Format("{0}%")) 
                     .Line(line => line.Visible(false))                               
-                    .AxisCrossingValue(0, int.MinValue)
+                    .AxisCrossingValue(0)
             )
             .CategoryAxis(axis => axis      
                 .Line(line => line.Visible(false))
@@ -25,7 +25,6 @@
             .Tooltip(tooltip => tooltip
                 .Visible(true)
                 .Format("{0}%")
-                .Template("#= series.name #: #= value #")
             )
     %>
 </div>

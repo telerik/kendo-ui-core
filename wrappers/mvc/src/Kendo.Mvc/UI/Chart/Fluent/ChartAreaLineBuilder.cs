@@ -18,72 +18,6 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Sets the line color
-        /// </summary>
-        /// <param name="color">The line color (CSS format).</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .Series(series => series
-        ///               .Area(s => s.Sales)
-        ///               .Line(line => line.Color("#f00"))
-        ///           )
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public override ChartLineBuilderBase Color(string color)
-        {
-            base.Color(color);
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the line width
-        /// </summary>
-        /// <param name="width">The line width.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .Series(series => series
-        ///               .Area(s => s.Sales)
-        ///               .Line(line => line.Width(6))
-        ///           )
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>        
-        public override ChartLineBuilderBase Width(int width)
-        {
-            base.Width(width);
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the line dashType.
-        /// </summary>
-        /// <param name="dashType">The line dashType.</param>
-        /// <example>
-        /// <code lang="CS">
-        /// &lt;% Html.Kendo().Chart()
-        ///           .Name("Chart")
-        ///           .Series(series => series
-        ///               .Area(s => s.Sales)
-        ///               .Line(line => line.DashType(ChartDashType.Dot))
-        ///           )
-        ///           .Render();
-        /// %&gt;
-        /// </code>
-        /// </example>
-        public override ChartLineBuilderBase DashType(ChartDashType dashType)
-        {
-            base.DashType(dashType);
-            return this;
-        }
-
-        /// <summary>
         /// Sets the line opacity.
         /// </summary>
         /// <param name="opacity">The line opacity.</param>
@@ -106,7 +40,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Configures the style for line series.
+        /// Configures the line style for area series.
         /// </summary>
         /// <param name="style">The style. The default is normal.</param>
         /// <example>

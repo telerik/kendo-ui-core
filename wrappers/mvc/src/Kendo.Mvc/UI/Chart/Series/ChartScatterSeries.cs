@@ -6,7 +6,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Resources;
     using System.Collections;
 
-    public class ChartScatterSeries<TModel, TXValue, TYValue> : ChartSeriesBase<TModel>, IChartScatterSeries where TModel : class
+    public class ChartScatterSeries<TModel, TXValue, TYValue> : ChartScatterSeriesBase<TModel, TXValue, TYValue>, IChartScatterSeries where TModel : class
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChartScatterSeries{TModel, TXValue, TYValue}" /> class.
@@ -18,27 +18,8 @@ namespace Kendo.Mvc.UI
             Expression<Func<TModel, TXValue>> xValueExpression,
             Expression<Func<TModel, TYValue>> yValueExpression,
             Expression<Func<TModel, string>> noteTextExpression)
-            : base()
-        {
-            if (typeof(TModel).IsPlainType() && !(xValueExpression.IsBindable() || yValueExpression.IsBindable()))
-            {
-                throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
-            }
-
-            XMember = xValueExpression.MemberWithoutInstance();
-            YMember = yValueExpression.MemberWithoutInstance();
-
-            if (noteTextExpression != null)
-            {
-                if (typeof(TModel).IsPlainType() && !noteTextExpression.IsBindable())
-                {
-                    throw new InvalidOperationException(Exceptions.MemberExpressionRequired);
-                }
-
-                NoteTextMember = noteTextExpression.MemberWithoutInstance();
-            }
-
-            Initialize();
+            : base(xValueExpression, yValueExpression, noteTextExpression)
+        { 
         }
 
         /// <summary>
@@ -46,10 +27,8 @@ namespace Kendo.Mvc.UI
         /// </summary>
         /// <param name="data">The data.</param>
         public ChartScatterSeries(IEnumerable data)
-            : base()
+            : base(data)
         {
-            Data = data;
-            Initialize();
         }
 
         /// <summary>
@@ -58,82 +37,6 @@ namespace Kendo.Mvc.UI
         public ChartScatterSeries()
             : base()
         {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Gets the model X data member name.
-        /// </summary>
-        /// <value>The model X data member name.</value>
-        public string XMember
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets the model Y data member name.
-        /// </summary>
-        /// <value>The model Y data member name.</value>
-        public string YMember
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets the model note text member name.
-        /// </summary>
-        /// <value>The model note text member name.</value>
-        public string NoteTextMember
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the X axis name to use for this series.
-        /// </summary>
-        public string XAxis
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the Y axis name to use for this series.
-        /// </summary>
-        public string YAxis
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets the scatter chart data labels configuration
-        /// </summary>
-        public ChartPointLabels Labels
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The line chart markers configuration.
-        /// </summary>
-        public ChartMarkers Markers
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// The scatter chart data source.
-        /// </summary>
-        public IEnumerable Data
-        {
-            get;
-            set;
         }
 
         /// <summary>
@@ -145,10 +48,9 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        protected virtual void Initialize()
+        protected override void Initialize()
         {
-            Labels = new ChartPointLabels();
-            Markers = new ChartMarkers();
+            base.Initialize();
             ErrorBars = new ScatterErrorBars();
         }
 

@@ -4,10 +4,10 @@ namespace Kendo.Mvc.UI
     using System.Collections;
     using System.Linq.Expressions;
 
-    public class ChartRadarLineSeries<TModel, TValue, TCategory> : ChartLineSeries<TModel, TValue, TCategory> where TModel : class
+    public class ChartRadarLineSeries<TModel, TValue, TCategory> : ChartLineSeriesBase<TModel, TValue, TCategory>, IChartRadarLineSeries where TModel : class
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartBarSeries{TModel, TValue}"/> class.
+        /// Initializes a new instance of the <see cref="ChartRadarLineSeries{TModel, TValue, TCategory}"/> class.
         /// </summary>
         /// <param name="expression">The expression used to extract the point value from the chart model.</param>
         /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
@@ -18,7 +18,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartRadarLineSeries{TModel, TValue}"/> class.
+        /// Initializes a new instance of the <see cref="ChartRadarLineSeries{TModel, TValue, TCategory}"/> class.
         /// </summary>
         /// <param name="data">The data to bind to.</param>
         public ChartRadarLineSeries(IEnumerable data)
@@ -27,7 +27,7 @@ namespace Kendo.Mvc.UI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ChartRadarLineSeries{TModel, TValue}" /> class.
+        /// Initializes a new instance of the <see cref="ChartRadarLineSeries{TModel, TValue, TCategory}" /> class.
         /// </summary>
         public ChartRadarLineSeries()
             : base()
@@ -37,6 +37,21 @@ namespace Kendo.Mvc.UI
         public override IChartSerializer CreateSerializer()
         {
             return new ChartRadarLineSeriesSerializer(this);
+        }
+
+        /// <summary>
+        /// The style of the line.
+        /// </summary>
+        public ChartRadarLineStyle Style
+        {
+            get;
+            set;
+        }
+
+        protected override void Initialize()
+        {
+            base.Initialize();
+            Style = ChartRadarLineStyle.Normal;
         }
     }
 

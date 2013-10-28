@@ -2,9 +2,9 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
 
-    internal class ChartRadarColumnSeriesSerializer : ChartBarSeriesSerializer
+    internal class ChartRadarColumnSeriesSerializer : ChartBarSeriesSerializerBase
     {
-        public ChartRadarColumnSeriesSerializer(IChartBarSeries series)
+        public ChartRadarColumnSeriesSerializer(IBarSeries series)
             : base(series)
         {
         }

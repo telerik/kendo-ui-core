@@ -10,7 +10,7 @@ namespace Kendo.Mvc.UI.Fluent
     /// <typeparam name="TSeries">The type of the data item</typeparam>
     /// <typeparam name="TBuilder">The type of the builder</typeparam>
     public abstract class ChartScatterSeriesBuilderBase<TSeries, TBuilder> : ChartSeriesBuilderBase<TSeries, TBuilder>
-        where TSeries : IChartScatterSeries
+        where TSeries : IScatterSeries
         where TBuilder : ChartScatterSeriesBuilderBase<TSeries, TBuilder>
     {
         /// <summary>
@@ -44,7 +44,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             configurator(new ChartPointLabelsBuilder(Series.Labels));
 
-            return this as TBuilder;
+            return (TBuilder)this;
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Series.Labels.Visible = visible;
 
-            return this as TBuilder;
+            return (TBuilder)this;
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             configurator(new ChartMarkersBuilder(Series.Markers));
 
-            return this as TBuilder;
+            return (TBuilder)this;
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Series.Markers.Visible = visible;
 
-            return this as TBuilder;
+            return (TBuilder)this;
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Series.XAxis = axis;
 
-            return this as TBuilder;
+            return (TBuilder)this;
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             Series.YAxis = axis;
 
-            return this as TBuilder;
+            return (TBuilder)this;
         }
 
         /// <summary>
@@ -164,13 +164,6 @@ namespace Kendo.Mvc.UI.Fluent
         public override TBuilder Axis(string axis)
         {
             return base.Axis(axis);
-        }
-
-        public virtual TBuilder ErrorBars(Action<ScatterErrorBarsBuilder> configurator)
-        {
-            configurator(new ScatterErrorBarsBuilder(Series.ErrorBars));
-
-            return this as TBuilder;
         }
     }
 }

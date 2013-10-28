@@ -4,7 +4,7 @@
         .Title("Budget report")
         .Legend(legend => legend
             .Position(ChartLegendPosition.Bottom)
-        )
+        )        
         .DataSource(ds => ds.Read(read => read.Action("_BudgetReport", "Radar_Charts")))
         .Series(series => {
             series.RadarLine(model => model.Budget);

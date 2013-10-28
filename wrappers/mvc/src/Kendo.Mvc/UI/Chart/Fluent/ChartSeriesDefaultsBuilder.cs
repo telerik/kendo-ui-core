@@ -120,25 +120,49 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines the default settings for radar area series.
         /// </summary>
-        public virtual ChartAreaSeriesBuilder<TModel> RadarArea()
+        public virtual ChartRadarAreaSeriesBuilder<TModel> RadarArea()
         {
-            return new ChartAreaSeriesBuilder<TModel>(chart.SeriesDefaults.RadarArea);
+            return new ChartRadarAreaSeriesBuilder<TModel>(chart.SeriesDefaults.RadarArea);
         }
 
         /// <summary>
         /// Defines the default settings for radar column series.
         /// </summary>
-        public virtual ChartBarSeriesBuilder<TModel> RadarColumn()
+        public virtual ChartRadarColumnSeriesBuilder<TModel> RadarColumn()
         {
-            return new ChartBarSeriesBuilder<TModel>(chart.SeriesDefaults.RadarColumn);
+            return new ChartRadarColumnSeriesBuilder<TModel>(chart.SeriesDefaults.RadarColumn);
         }
 
         /// <summary>
         /// Defines the default settings for radar line series.
         /// </summary>
-        public virtual ChartLineSeriesBuilder<TModel> RadarLine()
+        public virtual ChartRadarLineSeriesBuilder<TModel> RadarLine()
         {
-            return new ChartLineSeriesBuilder<TModel>(chart.SeriesDefaults.RadarLine);
+            return new ChartRadarLineSeriesBuilder<TModel>(chart.SeriesDefaults.RadarLine);
+        }
+
+        /// <summary>
+        /// Defines the default settings for polar line series.
+        /// </summary>
+        public virtual ChartPolarLineSeriesBuilder<TModel> PolarLine()
+        {
+            return new ChartPolarLineSeriesBuilder<TModel>(chart.SeriesDefaults.PolarLine);
+        }
+
+        /// <summary>
+        /// Defines the default settings for polar area series.
+        /// </summary>
+        public virtual ChartPolarAreaSeriesBuilder<TModel> PolarArea()
+        {
+            return new ChartPolarAreaSeriesBuilder<TModel>(chart.SeriesDefaults.PolarArea);
+        }
+
+        /// <summary>
+        /// Defines the default settings for polar scatter series.
+        /// </summary>
+        public virtual ChartPolarScatterSeriesBuilder<TModel> PolarScatter()
+        {
+            return new ChartPolarScatterSeriesBuilder<TModel>(chart.SeriesDefaults.PolarScatter);
         }
     }
 }

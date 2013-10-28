@@ -2,9 +2,9 @@ namespace Kendo.Mvc.UI
 {
     using System.Collections.Generic;
 
-    internal class ChartPolarScatterSeriesSerializer : ChartScatterSeriesSerializer
+    internal class ChartPolarScatterSeriesSerializer : ChartScatterSeriesSerializerBase
     {
-        public ChartPolarScatterSeriesSerializer(IChartScatterSeries series)
+        public ChartPolarScatterSeriesSerializer(IChartPolarScatterSeries series)
             : base(series)
         {
         }

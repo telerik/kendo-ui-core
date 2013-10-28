@@ -243,5 +243,19 @@ namespace Kendo.Mvc.UI.Tests.Chart
             builder.Highlight(false).ShouldBeSameAs(builder);
         }
 
+        [Fact]
+        public void ErrorBars_should_configure_errorBars()
+        {
+            builder.ErrorBars(e => e.Value(1.1).Color("Red"));
+            series.ErrorBars.Value.ShouldEqual(1.1);
+            series.ErrorBars.Color.ShouldEqual("Red");
+        }
+
+        [Fact]
+        public void ErrorBars_should_return_builder()
+        {
+            builder.ErrorBars(e => e.Value(1)).ShouldBeSameAs(builder);
+        }
+
     }
 }

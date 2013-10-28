@@ -4,7 +4,7 @@ namespace Kendo.Mvc.UI
     using Kendo.Mvc.Infrastructure;
     using Kendo.Mvc.Extensions;
 
-    internal class ChartLineSeriesSerializer : ChartSeriesSerializerBase
+    internal class ChartLineSeriesSerializer : ChartLineSeriesSerializerBase
     {
         private readonly IChartLineSeries series;
 
@@ -18,31 +18,10 @@ namespace Kendo.Mvc.UI
         {
             var result = base.Serialize();
 
-            FluentDictionary.For(result)
-                .Add("type", series.Orientation == ChartSeriesOrientation.Horizontal ? "line" : "verticalLine")
-                .Add("style", series.Style.ToString().ToLowerInvariant(), ChartAreaStyle.Normal.ToString().ToLowerInvariant())
-                .Add("stack", series.Stacked, false)
-                .Add("aggregate", series.Aggregate.ToString().ToLowerInvariant(), () => series.Aggregate != null)
-                .Add("field", series.Member, () => { return series.Data == null && series.Member.HasValue(); })
-                .Add("categoryField", series.CategoryMember, () => { return series.Data == null && series.CategoryMember.HasValue(); })
-                .Add("data", series.Data, () => { return series.Data != null; })
-                .Add("width", series.Width, () => series.Width.HasValue)
-                .Add("dashType", series.DashType.ToString().ToLowerInvariant(), () => series.DashType.HasValue)
-                .Add("noteTextField", series.NoteTextMember, () => series.NoteTextMember.HasValue())
-                .Add("missingValues", series.MissingValues.ToString().ToLowerInvariant(),
-                                      () => series.MissingValues.HasValue);
-
-            var labelsData = series.Labels.CreateSerializer().Serialize();
-            if (labelsData.Count > 0)
+            if (series.Style != ChartLineStyle.Normal)
             {
-                result.Add("labels", labelsData);
-            }
-
-            var markers = series.Markers.CreateSerializer().Serialize();
-            if (markers.Count > 0)
-            {
-                result.Add("markers", markers);
-            }
+                result["style"] = series.Style.ToString().ToLowerInvariant();
+            }               
 
             var errorBars = series.ErrorBars.CreateSerializer().Serialize();
             if (errorBars.Count > 0)

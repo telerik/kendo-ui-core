@@ -148,7 +148,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The default settings for all radar area series.
         /// </summary>
-        public IChartAreaSeries RadarArea
+        public IChartRadarAreaSeries RadarArea
         {
             get;
             private set;
@@ -157,7 +157,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The default settings for all radar column series.
         /// </summary>
-        public IChartBarSeries RadarColumn
+        public IBarSeries RadarColumn
         {
             get;
             private set;
@@ -166,7 +166,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The default settings for all radar line series.
         /// </summary>
-        public IChartLineSeries RadarLine
+        public IChartRadarLineSeries RadarLine
         {
             get;
             private set;
@@ -175,7 +175,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The default settings for all polar area series.
         /// </summary>
-        public IChartScatterSeries PolarArea
+        public IChartPolarAreaSeries PolarArea
         {
             get;
             private set;
@@ -184,7 +184,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The default settings for all polar line series.
         /// </summary>
-        public IChartScatterSeries PolarLine
+        public IChartPolarLineSeries PolarLine
         {
             get;
             private set;
@@ -193,7 +193,7 @@ namespace Kendo.Mvc.UI
         /// <summary>
         /// The default settings for all polar scatter series.
         /// </summary>
-        public IChartScatterSeries PolarScatter
+        public IChartPolarScatterSeries PolarScatter
         {
             get;
             private set;

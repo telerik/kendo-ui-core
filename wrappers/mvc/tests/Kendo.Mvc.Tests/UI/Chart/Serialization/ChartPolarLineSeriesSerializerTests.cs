@@ -2,6 +2,7 @@ namespace Kendo.Mvc.UI.Tests
 {
     using System.Collections.Generic;
     using Kendo.Mvc.UI.Tests.Chart;
+    using Kendo.Mvc.UI;
     using Xunit;
 
     public class ChartPolarLineSeriesSerializerTests
@@ -20,6 +21,19 @@ namespace Kendo.Mvc.UI.Tests
         public void Serializes_type()
         {
             GetJson(series)["type"].ShouldEqual("polarLine");
+        }
+
+        [Fact]
+        public void Serializes_Style()
+        {
+            series.Style = ChartPolarLineStyle.Smooth;
+            GetJson(series)["style"].ShouldEqual("smooth");
+        }
+
+        [Fact]
+        public void Should_not_serialize_default_Style()
+        {
+            GetJson(series).ContainsKey("style").ShouldBeFalse();
         }
 
         protected static IDictionary<string, object> GetJson(IChartSeries series)

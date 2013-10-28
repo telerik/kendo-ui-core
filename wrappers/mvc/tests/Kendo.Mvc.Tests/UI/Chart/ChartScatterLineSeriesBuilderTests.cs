@@ -87,6 +87,7 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.Axis("Secondary").ShouldBeSameAs(builder);
         }
+
         [Fact]
         public void Labels_should_set_labels_visibility()
         {
@@ -132,6 +133,33 @@ namespace Kendo.Mvc.UI.Tests.Chart
         {
             builder.MissingValues(ChartScatterLineMissingValues.Interpolate);
             series.MissingValues.ShouldEqual(ChartScatterLineMissingValues.Interpolate);
+        }
+
+        [Fact]
+        public void Style_should_set_style()
+        {
+            builder.Style(ChartScatterLineStyle.Smooth);
+            series.Style.ShouldEqual(ChartScatterLineStyle.Smooth);
+        }
+
+        [Fact]
+        public void Style_should_return_builder()
+        {
+            builder.Style(ChartScatterLineStyle.Smooth).ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void ErrorBars_should_configure_errorBars()
+        {
+            builder.ErrorBars(e => e.YValue(1.1).Color("Red"));
+            series.ErrorBars.YValue.ShouldEqual(1.1);
+            series.ErrorBars.Color.ShouldEqual("Red");
+        }
+
+        [Fact]
+        public void ErrorBars_should_return_builder()
+        {
+            builder.ErrorBars(e => e.XValue(1)).ShouldBeSameAs(builder);
         }
     }
 }
