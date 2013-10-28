@@ -1,5 +1,9 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
 <div class="chart-wrapper">
-    @(
+    <%=
         Html.Kendo().Chart<Kendo.Mvc.Examples.Models.ElectricityProduction>()
         .Name("chart")
         .Series(
@@ -19,7 +23,7 @@
         .Legend(false)
         .Title("Spain windpower electricity production (GWh)")
         .Tooltip(tt=>tt.Visible(true).Template("#= category # - #= value # GWh"))
-    )
+     %>
 </div>
 
 <style scoped>
@@ -28,3 +32,5 @@
         margin: 0 auto;
     }
 </style>
+
+</asp:Content>

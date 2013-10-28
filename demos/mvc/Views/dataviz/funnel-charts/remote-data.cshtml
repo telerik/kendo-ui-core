@@ -2,12 +2,6 @@
     <div class="chart-wrapper">
         <div id="chart"></div>
     </div>
-    <style scoped>
-        .chart-wrapper .k-chart {
-            width: 400px;
-            margin: 0 auto;
-        }
-    </style>
     <script>
         function createChart() {
             $("#chart").kendoChart({
@@ -45,7 +39,7 @@
                 }],
                 tooltip: {
                     visible: true,
-                    template: "#= dataItem.year # - #= value # GWh"
+                    template: "#= category # - #= value # GWh"
                 }
             });
         }
@@ -53,4 +47,10 @@
         $(document).ready(createChart);
         $(document).bind("kendo:skinChange", createChart);
     </script>
+    <style scoped>
+        .chart-wrapper .k-chart {
+            width: 400px;
+            margin: 0 auto;
+        }
+    </style>
 </div>

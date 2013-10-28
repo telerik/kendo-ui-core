@@ -1,7 +1,10 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="chart-wrapper">
         <h2>Sales statistics</h2>
-        @(Html.Kendo().Chart().Name("chart-oct")
+        <%=Html.Kendo().Chart().Name("chart-oct")
             .Series(series =>
                 series.Funnel(new dynamic[]{
                     new {
@@ -46,8 +49,8 @@
                 .DynamicHeight(false);
             })
             .Tooltip(tt => tt.Visible(true).Template("#=category#"))
-        )
-        @(Html.Kendo().Chart().Name("chart-nov")
+        %>
+        <%=Html.Kendo().Chart().Name("chart-nov")
             .Series(series =>
                 series.Funnel(new dynamic[]{
                     new {
@@ -92,8 +95,8 @@
                 .DynamicHeight(false);
             })
             .Tooltip(tt => tt.Visible(true).Template("#=category#"))
-        )
-        @(Html.Kendo().Chart().Name("chart-dec")
+        %>
+        <%=Html.Kendo().Chart().Name("chart-dec")
             .Series(series =>
                 series.Funnel(new dynamic[]{
                     new {
@@ -138,7 +141,7 @@
                 .DynamicHeight(false);
             })
             .Tooltip(tt => tt.Visible(true).Template("#=category#"))
-        )
+        %>
     </div>
     <div class="configuration-horizontal">
         <div class="config-section">
@@ -234,3 +237,5 @@
         margin: 20px auto;
     }
 </style>
+
+</asp:Content>

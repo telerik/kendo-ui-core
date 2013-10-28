@@ -72,16 +72,6 @@
             </ul>
         </div>
     </div>
-    <style scoped>
-        .chart-wrapper #chart {
-            width: 400px;
-            height: 410px;
-            margin: 0 auto;
-        }
-        .configuration-horizontal .config-section {
-            min-width: 120px;
-        }
-    </style>
     <script>
         function createChart() {
             $("#chart").kendoChart({
@@ -94,7 +84,7 @@
                 seriesDefaults: {
                     dynamicHeight: false,
                     labels: {
-                        template: "#= dataItem.category #",
+                        template: "#= category #",
                         visible: true,
                         font: "15px sans-serif",
                         align: "center",
@@ -170,7 +160,7 @@
             var seriesOptions = {
                 dynamicHeight: false,
                 labels: {
-                    template: "#= dataItem.category #",
+                    template: "#= category #",
                     visible: labels,
                     font: slider.value() + "px sans-serif",
                     align: alignLabels,
@@ -195,4 +185,14 @@
             })
         }
     </script>
+    <style scoped>
+        .chart-wrapper #chart {
+            width: 400px;
+            height: 410px;
+            margin: 0 auto;
+        }
+        .configuration-horizontal .config-section {
+            min-width: 120px;
+        }
+    </style>
 </div>

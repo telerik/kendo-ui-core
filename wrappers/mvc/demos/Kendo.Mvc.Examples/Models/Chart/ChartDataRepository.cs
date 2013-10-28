@@ -146,6 +146,60 @@ namespace Kendo.Mvc.Examples.Models
             };
         }
 
+        public static IList<SiteOptimizationItem> BeforeOptimizationData()
+        {
+            return new List<SiteOptimizationItem>
+            {
+                new SiteOptimizationItem{
+                    Description= "All Visitors",
+                    Visitors= 23945
+                }, 
+                new SiteOptimizationItem{
+                    Description= "Tried the Demos",
+                    Visitors= 19156
+                }, 
+                new SiteOptimizationItem{
+                    Description= "Downloaded",
+                    Visitors= 13984
+                }, 
+                new SiteOptimizationItem{
+                    Description= "Requested a Quote",
+                    Visitors= 3216
+                }, 
+                new SiteOptimizationItem{
+                    Description= "Purchased",
+                    Visitors= 1673
+                }
+            };
+        }
+
+        public static IList<SiteOptimizationItem> AfterOptimizationData()
+        {
+            return new List<SiteOptimizationItem>
+            {
+                new SiteOptimizationItem{
+                    Description= "All Visitors",
+                    Visitors= 28536
+                },
+                new SiteOptimizationItem{
+                    Description= "Tried the Demos",
+                    Visitors= 26539
+                },
+                new SiteOptimizationItem{
+                    Description= "Downloaded",
+                    Visitors= 23088
+                },
+                new SiteOptimizationItem{
+                    Description= "Requested a Quote",
+                    Visitors= 13853
+                },
+                new SiteOptimizationItem{
+                    Description= "Purchased",
+                    Visitors= 9697
+                }
+            };
+        }
+
         public static IList<EngineDataPoint> EngineData()
         {
             return new EngineDataPoint[]

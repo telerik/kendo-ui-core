@@ -178,7 +178,7 @@
     <Compile Include="Controllers\DataViz\Bullet_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Funnel_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Funnel_Charts\Local_DataController.cs" />
-    <Compile Include="Controllers\DataViz\Funnel_Charts\Pie_LabelsController.cs" />
+    <Compile Include="Controllers\DataViz\Funnel_Charts\Funnel_LabelsController.cs" />
     <Compile Include="Controllers\DataViz\Funnel_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Customization\PlotBandsController.cs" />
     <Compile Include="Controllers\DataViz\Dashboards\Car_DashboardController.cs" />
@@ -547,6 +547,7 @@
     <Compile Include="Models\Chart\ChartDataRepository.Polar.cs" />
     <Compile Include="Models\Chart\ChartDataRepository.Radar.cs" />
     <Compile Include="Models\Chart\ChartDataRepository.Stock.cs" />
+    <Compile Include="Models\Chart\SiteOmptimizationItem.cs" />
     <Compile Include="Models\Chart\DatePoint.cs" />
     <Compile Include="Models\Chart\ElectricityProduction.cs" />
     <Compile Include="Models\Chart\ElectricitySource.cs" />
@@ -2848,7 +2849,7 @@
     <Content Include="Areas\razor\Views\dataviz\funnel_charts\local_data.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\razor\Views\dataviz\funnel_charts\pie_labels.cshtml" />
+    <Content Include="Areas\razor\Views\dataviz\funnel_charts\funnel_labels.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\funnel_charts\remote_data.cshtml" />

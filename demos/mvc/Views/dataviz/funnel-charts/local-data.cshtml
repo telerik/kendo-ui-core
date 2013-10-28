@@ -4,20 +4,6 @@
         <div id="before"></div>
         <div id="after"></div>
     </div>
-    <style scoped>
-        .chart-wrapper {
-            height: 400px;
-        }
-        .chart-wrapper h2 {
-            padding: 20px 0 0 25px;
-        }
-        .chart-wrapper .k-chart {
-            display: inline-block;
-            width: 290px;
-            height: 350px;
-            margin: 0 30px 0 20px;
-        }
-    </style>
     <script>
         var dataBefore = [{
             description: "All Visitors",
@@ -80,13 +66,13 @@
                         color:"black",
                         visible: true,
                         background: "transparent",
-                        template: "#= dataItem.description #: #= value#",
+                        template: "#= category #: #= value#",
                         align: "left"
                     }
                 }],
                 tooltip: {
                     visible: true,
-                    template: "#= dataItem.description # #= kendo.format('{0:p}',data.value/dataItem.parent()[0].visitors)#"
+                    template: "#= category # #= kendo.format('{0:p}',value/dataItem.parent()[0].visitors)#"
                 }
             });
         }
@@ -99,4 +85,18 @@
         $(document).ready(createCharts);
         $(document).bind("kendo:skinChange", createCharts);
     </script>
+    <style scoped>
+        .chart-wrapper {
+            height: 400px;
+        }
+        .chart-wrapper h2 {
+            padding: 20px 0 0 25px;
+        }
+        .chart-wrapper .k-chart {
+            display: inline-block;
+            width: 290px;
+            height: 350px;
+            margin: 0 30px 0 20px;
+        }
+    </style>
 </div>

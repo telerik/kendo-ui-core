@@ -1,6 +1,10 @@
- <div class="chart-wrapper">
+<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/DataViz.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+<div class="chart-wrapper">
 <h2>Website optimization stats</h2>
-    @(
+    <%=
         Html.Kendo().Chart((IEnumerable<Kendo.Mvc.Examples.Models.SiteOptimizationItem>)ViewData["before"]).Name("before")
         .Series(srs =>                
             srs.Funnel(
@@ -22,8 +26,8 @@
         .Tooltip(
             tt=>tt.Visible(true).Template("#= category # #= kendo.format('{0:p}',value/dataItem.parent()[0].Visitors)#")
         )
-    )
-    @(
+    %>
+    <%=
         Html.Kendo().Chart((IEnumerable<Kendo.Mvc.Examples.Models.SiteOptimizationItem>)ViewData["after"]).Name("after")
         .Series(srs =>                
             srs.Funnel(
@@ -45,7 +49,7 @@
         .Tooltip(
             tt=>tt.Visible(true).Template("#= category # #= kendo.format('{0:p}',value/dataItem.parent()[0].Visitors)#")
         )
-    )
+    %>
 </div>
 <style scoped>
     .chart-wrapper {
@@ -63,3 +67,5 @@
         margin: 0 30px 0 20px;
     }
 </style>
+
+</asp:Content>

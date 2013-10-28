@@ -224,6 +224,7 @@ namespace Kendo.Mvc.UI
             Labels = new ChartFunnelLabels();
             Border = new ChartElementBorder();
             DynamicHeight = true;
+            NeckRatio = 0.3;
             Type = "funnel";
         }
 

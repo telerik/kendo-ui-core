@@ -9,7 +9,9 @@ namespace Kendo.Mvc.Examples.Controllers
     {
         public ActionResult Local_Data()
         {
-            return View(ChartDataRepository.SpainElectricityBreakdown());
+            ViewData["before"] = ChartDataRepository.BeforeOptimizationData();
+            ViewData["after"] = ChartDataRepository.AfterOptimizationData();
+            return View();
         }
     }
 }

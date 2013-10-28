@@ -27,93 +27,79 @@
             </ul>
         </div>
         <div class="config-section">
-            <span class="configHead">Neck Size Ratio</span>
+            <span class="configHead">Neck/Base Ratio</span>
             <ul class="options">
                 <li><input id="neckSlider" value="0.3"/></li>
             </ul>
-        </div>
+        </div>   
+        <i>Dynamic slope means the slope for each segment depends on the ratio between the current and the next value</i>     
     </div>
-    <style scoped>
-        .chart-wrapper {
-            height: 360px;
-        }
-        .chart-wrapper h2 {
-            padding: 20px 0 0 25px;
-        }
-        #chart-oct,
-        #chart-nov,
-        #chart-dec {
-            display: inline-block;
-            width: 180px;
-            height: 300px;
-            margin: 15px 25px;
-        }
-    </style>
+
     <script>
         var octData = [{
                     category: "Impressions ",
                     value: 434823,
-                    foo: "#0e5a7e"
+                    color: "#0e5a7e"
                 },{
                     category: "Clicks",
                     value: 356854,
-                    foo: "#166f99"
+                    color: "#166f99"
                 },{
                     category: "Unique Visitors",
                     value: 280022,
-                    foo: "#2185b4"
+                    color: "#2185b4"
                 },{
                     category: "Downloads",
                     value: 190374,
-                    foo: "#319fd2"
+                    color: "#319fd2"
                 },{
                     category: "Purchases",
                     value: 120392,
-                    foo: "#3eaee2"
+                    color: "#3eaee2"
                 }];
 
         var novData =  [{
                     category: "Impressions ",
                     value: 984528,
-                    foo: "#0e5a7e"
+                    color: "#0e5a7e"
                 },{
                     category: "Clicks",
                     value: 856287,
-                    foo: "#166f99"
+                    color: "#166f99"
                 },{
                     category: "Unique Visitors",
                     value: 643694,
-                    foo: "#2185b4"
+                    color: "#2185b4"
                 },{
                     category: "Downloads",
                     value: 567843,
-                    foo: "#319fd2"
+                    color: "#319fd2"
                 },{
                     category: "Purchases",
                     value: 389137,
-                    foo: "#3eaee2"
+                    color: "#3eaee2"
                 }];
 
         var decData = [{
                     category: "Impressions ",
                     value: 1200528,
-                    foo: "#0e5a7e"
+                    color: "#0e5a7e"
                 },{
                     category: "Clicks",
                     value: 989287,
-                    foo: "#166f99"
+                    color: "#166f99"
                 },{
                     category: "Unique Visitors",
                     value: 885694,
-                    foo: "#2185b4"
+                    color: "#2185b4"
                 },{
                     category: "Downloads",
                     value: 788843,
-                    foo: "#319fd2"
+                    color: "#319fd2"
                 },{
                     category: "Purchases",
                     value: 694137,
-                    foo: "#3eaee2"
+                    color: "#3eaee2"
                 }];
             
         function createChart(chartName,data,text){
@@ -141,7 +127,7 @@
                 }],
                 tooltip: {
                     visible: true,
-                    template: "#= dataItem.category #"
+                    template: "#= category #"
                 }
             });
         }
@@ -156,7 +142,6 @@
                 var options =
                 {
                     seriesDefaults: {
-                        colorField:"foo",
                         neckRatio: slider.value(),
                         dynamicHeight : $('#dynamicHeight').is(':checked'),
                         dynamicSlope : $('#dynamicSlope').is(':checked'),
@@ -197,4 +182,20 @@
         });
         
     </script>
+    <style scoped>
+        .chart-wrapper {
+            height: 360px;
+        }
+        .chart-wrapper h2 {
+            padding: 20px 0 0 25px;
+        }
+        #chart-oct,
+        #chart-nov,
+        #chart-dec {
+            display: inline-block;
+            width: 180px;
+            height: 300px;
+            margin: 15px 25px;
+        }
+    </style>
 </div>

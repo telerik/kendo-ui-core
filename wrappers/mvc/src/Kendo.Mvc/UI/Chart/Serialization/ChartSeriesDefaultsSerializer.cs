@@ -38,6 +38,9 @@ namespace Kendo.Mvc.UI
             var donutData = seriesDefaults.Donut.CreateSerializer().Serialize();
             donutData.Remove("type");
 
+            var funnelData = seriesDefaults.Funnel.CreateSerializer().Serialize();
+            funnelData.Remove("type");
+
             var scatterData = seriesDefaults.Scatter.CreateSerializer().Serialize();
             scatterData.Remove("type");
 
@@ -81,6 +84,7 @@ namespace Kendo.Mvc.UI
                   .Add("verticalArea", verticalAreaData, () => verticalAreaData.Count > 0)
                   .Add("pie", pieData, () => pieData.Count > 0)
                   .Add("donut", donutData, () => donutData.Count > 0)
+                  .Add("funnel", funnelData, () => funnelData.Count > 0)
                   .Add("scatter", scatterData, () => scatterData.Count > 0)
                   .Add("scatterLine", scatterLineData, () => scatterLineData.Count > 0)
                   .Add("ohlc", ohlcData, () => ohlcData.Count > 0)
