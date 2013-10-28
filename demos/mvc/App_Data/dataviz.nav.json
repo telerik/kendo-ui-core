@@ -161,6 +161,7 @@
             "name": "bar-charts"
         }, {
             "text": "Box Plot Charts",
+            "new" : true,
             "documentation": "dataviz/chart",
             "spriteCssClass": "chartBoxPlotIcon",
             "items": [{
