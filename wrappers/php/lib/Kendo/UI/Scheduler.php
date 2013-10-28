@@ -255,6 +255,15 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * If set to true the view will be initially shown in business hours mode. By default view is displyed in full day mode.
+    * @param boolean $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function showWorkHours($value) {
+        return $this->setProperty('showWorkHours', $value);
+    }
+
+    /**
     * If set to true the scheduler will snap events to the nearest slot during dragging (resizing or moving). Set it to false to allow free moving and resizing of events.
     * @param boolean $value
     * @return \Kendo\UI\Scheduler
