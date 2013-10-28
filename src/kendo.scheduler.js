@@ -1238,9 +1238,7 @@ kendo_module({
         },
 
         showDialog: function(options) {
-            var html = kendo.format("<div class='k-popup-edit-form" +
-                       (this._isMobile() ? ' k-mobile-list' : '') +
-                       "'><div class='k-edit-form-container'><p class='k-popup-message'>{0}</p>", options.text);
+            var html = kendo.format("<div class='k-popup-edit-form'><div class='k-edit-form-container'><p class='k-popup-message'>{0}</p>", options.text);
 
             html += '<div class="k-edit-buttons k-state-default">';
 
