@@ -383,8 +383,6 @@
     <Compile Include="UI\Chart\Enums\ChartRadarAreaStyle.cs" />
     <Compile Include="UI\Chart\Enums\ChartPolarAreaStyle.cs" />
     <Compile Include="UI\Chart\Enums\ChartPolarLineStyle.cs" />
-    <Compile Include="UI\Chart\Enums\RenderingMode.cs" />
-    <Compile Include="UI\Chart\CategoricalErrorBars.cs" />
     <Compile Include="UI\Chart\ChartAreaLine.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAreaLineBuilder.cs" />
     <Compile Include="UI\Chart\Series\ChartAreaSeries.cs" />
