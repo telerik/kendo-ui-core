@@ -193,7 +193,7 @@
 
         getCurrentCommonLink: function() {
             return $("head link").filter(function () {
-                return /kendo\.common/gi.test(this.href);
+                return (/kendo\.common/gi).test(this.href);
             });
         },
 
