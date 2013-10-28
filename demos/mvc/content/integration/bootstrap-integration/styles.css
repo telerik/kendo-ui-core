@@ -1,0 +1,280 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    min-width: 320px;
+}
+
+header {
+    margin: 0;
+    font-size: 20px;
+    color: #fff;
+    background-color: #272727;
+}
+
+header h1,
+header button {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+header .container h1 {
+    margin: 0;
+    font-size: 21px;
+    line-height: 65px;
+    padding-top: 20px;
+    padding-left: 0;
+}
+
+#configure,
+header label {
+    border-style: solid;
+    border-color: #636363;
+    border-width: 0 0 0 1px;
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+header .container {
+    position: relative;
+}
+
+header .description {
+    text-transform: uppercase;
+    color: #ccc;
+    font-size: 10px;
+    line-height: 29px;
+}
+
+header .k-dropdown,
+header #font-size-value {
+    font-size: 18px;
+    line-height: 45px;
+    margin-bottom: 9px;
+}
+
+header .k-dropdown {
+    width: 100%;
+}
+
+header .k-dropdown-wrap {
+    background-image: none !important;
+}
+
+header .k-dropdown,
+header .k-dropdown-wrap.k-state-default {
+    background-color: transparent;
+    border-color: #5c5c5c;
+    border-radius: 0;
+}
+
+header .k-dropdown-wrap.k-state-hover,
+header .k-dropdown-wrap.k-state-active,
+header .k-dropdown-wrap.k-state-focused {
+    background-color: #030303;
+}
+
+header .k-dropdown-wrap.k-state-focused {
+    box-shadow: none;
+}
+
+header .k-dropdown .k-input {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: auto;
+    text-indent: 14px;
+}
+
+header .k-dropdown .k-input,
+header .k-dropdown-wrap .k-select {
+    line-height: 45px;
+}
+
+header .k-dropdown .k-i-arrow-s {
+    background-image: url("http://cdn.kendostatic.com/2013.2.918/styles/Bootstrap/sprite.png");
+    background-position: -16px -32px;
+}
+
+header .k-dropdown-wrap.k-state-default .k-input {
+    color: #fff;
+}
+
+.k-popup.ra-list {
+    background-color: #010101;
+    border-color: #5c5c5c;
+    color: #fff;
+    padding: 0;
+    border-radius: 0;
+}
+
+.k-popup.ra-list .k-state-hover,
+.k-popup.ra-list .k-state-selected,
+.k-popup.ra-list .k-state-focused {
+    background-image: none;
+    background-color: #555;
+    box-shadow: none;
+    color: #fff;
+    border-color: #555;
+}
+
+.k-popup.ra-list .k-item {
+    border-radius: 0;
+    text-indent: 7px;
+}
+
+#configure {
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-width: 0 0 0 1px;
+    background-color: transparent;
+    position: absolute;
+    top: 0; right: 0;
+    color: #fff;
+}
+
+#demo {
+    padding-top: 46px;
+}
+
+#menu {
+    margin-bottom: 30px;
+}
+
+#profile {
+    position: relative;
+}
+
+.ra-well-title {
+    font-size: 1.2857em;
+    line-height: 1.2857em;
+    border-bottom: 1px solid #e7e7e7;
+    margin: -5px -19px 0.8333em;
+    padding: 0 19px 0.7222em;
+}
+
+.ra-avatar {
+    border: 1px solid #e7e7e7;
+    border-radius: 2px;
+}
+
+.ra-first-name {
+    display: block;
+    margin-top: 0.8571em;
+}
+
+.ra-last-name {
+    display: block;
+    font-size: 1.7143em;
+    line-height: 1.3em;
+}
+
+.ra-position {
+    font-size: 0.8571em;
+    color: #999;
+    padding-bottom: 2em;
+}
+
+.form-group .k-widget,
+.form-group .k-textbox {
+    width: 100%;
+}
+
+.buttons-wrap {
+    border-top: 1px solid #e7e7e7;
+    padding-top: .5em;
+    text-align: right;
+}
+
+.ra-section {
+    margin-bottom: 20px;
+}
+
+.ra-well-overlay {
+    margin: -16px -20px -19px;
+}
+
+#tabstrip .k-content {
+    min-height: 156px;
+}
+#tabstrip .k-chart {
+    height: 156px;
+}
+
+#tabstrip .k-content {
+    padding: 1px;
+}
+
+#tabstrip-4 {
+    text-align: center;
+}
+.market-donut {
+    display: inline-block;
+    width: 170px;
+}
+
+#panelbar .k-content {
+    padding: 1em;
+}
+
+#panelbar ul {
+    margin-bottom: 10px;
+}
+
+#listview {
+    list-style-type: none;
+    padding: 0 0 15px;
+}
+
+#listview figure {
+    border: 1px solid #e7e7e7;
+    border-radius: 3px;
+    padding: 5px;
+    margin-top: 15px;
+}
+
+footer {
+    text-align: right;
+    font-size: 0.8571em;
+}
+
+header .container h1.visible-sm {
+    padding-top: 10px;
+    line-height: 33px;
+    padding-bottom: 10px;
+}
+
+@@media (max-width: 767px) {
+    header .container {
+        padding-right: 0;
+    }
+
+    header .container h1 {
+        padding-top: 0;
+        line-height: 50px;
+    }
+
+    header label {
+        border-width: 1px 0 0 0;
+        display: block;
+    }
+
+    #configurator-wrap {
+        position: absolute;
+        overflow: hidden;
+        height: 260px;
+        right: 0;
+        top: 50px;
+        z-index: 1000;
+        padding: 0;
+        width: 320px;
+    }
+
+    #configurator {
+        background-color: #272727;
+        position: absolute;
+        width: 100%;
+        margin: 0;
+    }
+}
+
