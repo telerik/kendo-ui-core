@@ -1005,7 +1005,7 @@ kendo_module({
             that._endTimezone = model.endTimezone || "";
 
             if (!timezoneView) {
-                var html = '<div data-role="view" class="k-popup-edit-form k-scheduler-edit-form">' +
+                var html = '<div data-role="view" class="k-popup-edit-form k-scheduler-edit-form k-mobile-list">' +
                            '<div data-role="header" class="k-header"><a href="#" class="k-button k-scheduler-cancel">' + messages.cancel + '</a>' +
                            messages.editor.timezoneTitle + '<a href="#" class="k-button k-scheduler-update">' + messages.save + '</a></div></div>';
 
@@ -1103,7 +1103,7 @@ kendo_module({
             var cancelText = messages.cancel;
             var titleText = messages.editor.editorTitle;
 
-            html += '<div data-role="view" class="k-popup-edit-form k-scheduler-edit-form" id="edit" ' + kendo.attr("uid") + '="' + model.uid + '">' +
+            html += '<div data-role="view" class="k-popup-edit-form k-scheduler-edit-form k-mobile-list" id="edit" ' + kendo.attr("uid") + '="' + model.uid + '">' +
                 '<div data-role="header" class="k-header"><a href="#" class="k-button k-scheduler-cancel">' + cancelText + '</a>' +
                 titleText + '<a href="#" class="k-button k-scheduler-update">' + updateText + '</a></div>';
 
@@ -1238,7 +1238,9 @@ kendo_module({
         },
 
         showDialog: function(options) {
-            var html = kendo.format("<div class='k-popup-edit-form'><div class='k-edit-form-container'><p class='k-popup-message'>{0}</p>", options.text);
+            var html = kendo.format("<div class='k-popup-edit-form" +
+                       (this._isMobile() ? ' k-mobile-list' : '') +
+                       "'><div class='k-edit-form-container'><p class='k-popup-message'>{0}</p>", options.text);
 
             html += '<div class="k-edit-buttons k-state-default">';
 

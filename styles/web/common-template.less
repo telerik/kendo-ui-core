@@ -489,7 +489,9 @@ html body .k-button-bare.k-upload-button:hover
 .k-si-close { .sprite-hoverable(10, 5); }
 .k-multiselect .k-delete { .sprite-position(10, 5); }
 .k-multiselect .k-state-hover .k-delete { .sprite-position(11, 5); }
-.k-i-tick, .k-insert, .k-update, .k-check:checked { .sprite-hoverable(2, 2); }
+.k-i-tick, .k-insert, .k-update, .k-check:checked,
+.k-mobile-list .k-edit-field > [type=checkbox],
+.k-mobile-list .k-edit-field > [type=radio] { .sprite-hoverable(2, 2); }
 .k-i-cancel, .k-cancel, .k-denied { .sprite-hoverable(2, 3); }
 .k-i-plus, .k-add { .sprite-hoverable(2, 4); }
 .k-i-funnel, .k-filter { .sprite-hoverable(2, 5); }
@@ -5204,7 +5206,9 @@ div[name="recurrenceRule"] > .k-dropdown
 
 *:not(.km-pane) > .km-shim .km-actionsheet-title
 {
-    display: none;
+    text-align: center;
+    line-height: 3em;
+    margin-bottom: -.3em;
 }
 
 *:not(.km-pane) > .km-shim > .k-animation-container
@@ -5232,14 +5236,22 @@ div[name="recurrenceRule"] > .k-dropdown
     .box-sizing(border-box);
 }
 
-.km-pane-wrapper .k-grid-edit-form .k-edit-label
+.km-pane-wrapper .k-mobile-list .k-edit-label label
 {
-    width: 17%;
+    display: block;
+    width: 23%;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: .5em 1em;
+    margin: -.5em -1em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-.km-pane-wrapper .k-grid-edit-form .k-edit-field
+.km-pane-wrapper .k-mobile-list .k-edit-field
 {
-    width: 77%;
+    width: 74%;
 }
 
 .km-pane-wrapper .k-grid-edit-form .k-popup-edit-form,
@@ -5267,16 +5279,23 @@ div[name="recurrenceRule"] > .k-dropdown
     border-color: red;
 }
 
-
 /* Column Menu in Adaptive Grid */
 
-.km-pane-wrapper .k-mobile-list,
+.km-pane-wrapper .km-pane *
+{
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+}
+
+.km-pane-wrapper .km-pane .k-mobile-list,
 .km-pane-wrapper .k-mobile-list ul
 {
     padding: 0;
     margin: 0;
     list-style-type: none;
     overflow: hidden;
+    .border-radius(0);
+    background: none;
 }
 
 .km-pane-wrapper .km-switch
@@ -5288,8 +5307,9 @@ div[name="recurrenceRule"] > .k-dropdown
 }
 
 .km-pane-wrapper .k-mobile-list .k-item,
-.km-pane-wrapper .k-mobile-list .k-item .k-link,
-.km-pane-wrapper .k-mobile-list .k-item .k-label
+.km-pane-wrapper .k-mobile-list .k-item > .k-link,
+.km-pane-wrapper .k-mobile-list .k-item > .k-label,
+.km-pane-wrapper .k-mobile-list .k-edit-label
 {
     display: block;
     position: relative;
@@ -5297,11 +5317,35 @@ div[name="recurrenceRule"] > .k-dropdown
     vertical-align: middle;
     .box-sizing(border-box);
     padding: .5em 1em;
+    font-size: 1em;
 }
 
-.km-pane-wrapper .k-mobile-list .k-item
+.km-pane-wrapper .k-edit-form-container
 {
-    font-size: 1.1em;
+    padding-top: 1em;
+}
+
+.km-pane-wrapper .k-mobile-list .k-edit-label
+{
+    margin: 0;
+    width: 100%;
+    float: none;
+    clear: none;
+}
+
+.km-pane-wrapper .k-mobile-list .k-edit-field
+{
+    position: absolute;
+    right: 0;
+    margin: -2.3em 0 0;
+    float: none;
+    clear: none;
+}
+
+.km-pane-wrapper .k-mobile-list .k-item,
+.km-pane-wrapper .k-mobile-list .k-edit-label
+{
+    font-size: 1em;
     line-height: 1.6em;
     overflow: hidden;
 }
@@ -5317,7 +5361,8 @@ div[name="recurrenceRule"] > .k-dropdown
     padding: .5em 1em;
 }
 
-.km-pane-wrapper .k-mobile-list > ul > li > .k-link
+.km-pane-wrapper .k-mobile-list > ul > li > .k-link,
+.km-pane-wrapper .k-mobile-list .k-filter-help-text .k-link
 {
     display: block;
     padding: .2em 1em;
@@ -5340,26 +5385,31 @@ div[name="recurrenceRule"] > .k-dropdown
     border-bottom: 0;
 }
 
-.km-pane-wrapper .k-mobile-list .k-link,
-.km-pane-wrapper .k-mobile-list .k-label
+.km-pane-wrapper .k-mobile-list .k-item > .k-link,
+.km-pane-wrapper .k-mobile-list .k-item > .k-label
 {
     line-height: inherit;
     text-decoration: none;
     margin: -.5em -1em;
 }
 
-/* Column Menu Checkboxes */
+/* Mobile list form elements */
 
 .k-check[type=checkbox],
-.k-check[type=radio]
+.k-check[type=radio],
+.k-mobile-list .k-edit-field > [type=checkbox],
+.k-mobile-list .k-edit-field > [type=radio]
 {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
+    background-color: transparent;
 }
 
 .km-pane-wrapper .k-mobile-list .k-link .k-check,
-.km-pane-wrapper .k-mobile-list .k-label .k-check
+.km-pane-wrapper .k-mobile-list .k-label .k-check,
+.k-mobile-list .k-edit-field > [type=checkbox],
+.k-mobile-list .k-edit-field > [type=radio]
 {
     border: 0;
     font-size: inherit;
@@ -5367,14 +5417,15 @@ div[name="recurrenceRule"] > .k-dropdown
     height: .9em;
 }
 
-.km-pane-wrapper .k-mobile-list .k-item input:not([type="checkbox"]):not([type="radio"]),
-.km-pane-wrapper .k-mobile-list .k-item select:not([multiple]),
-.km-pane-wrapper .k-mobile-list .k-item textarea
+.km-pane-wrapper .km-pane .k-mobile-list *:not(.k-state-default) > input:not([type="checkbox"]):not([type="radio"]),
+.km-pane-wrapper .km-pane .k-mobile-list select:not([multiple]),
+.km-pane-wrapper .km-pane .k-mobile-list textarea,
+.km-pane-wrapper .k-mobile-list .k-widget
 {
-    line-height: inherit;
+    font-size: 1em;
+    line-height: 1.4em;
     vertical-align: middle;
     padding: .5em 0;
-    width: 80%;
     top: 0;
     border: 0;
     background: transparent;
@@ -5382,15 +5433,45 @@ div[name="recurrenceRule"] > .k-dropdown
     .border-radius(0)
 }
 
-.km-pane-wrapper .k-mobile-list .k-item input,
+.km-pane-wrapper .k-mobile-list .k-widget
+{
+    margin-top: -.3em;
+    border: 0;
+    .border-radius(0);
+}
+
+.km-pane-wrapper .k-mobile-list .k-widget .k-input,
+.km-pane-wrapper .k-mobile-list .k-widget .k-state-default
+{
+    border: 0;
+    background: transparent;
+}
+
+.km-pane-wrapper .k-mobile-list .k-item *:not(.k-state-default) > input:not([type="checkbox"]):not([type="radio"]),
 .km-pane-wrapper .k-mobile-list .k-item select:not([multiple]),
-.km-pane-wrapper .k-mobile-list .k-item textarea
+.km-pane-wrapper .k-mobile-list .k-item textarea,
+.km-pane-wrapper .k-mobile-list .k-widget
+{
+    width: 80%;
+}
+
+.km-pane-wrapper .km-pane .k-mobile-list *:not(.k-state-default) > input,
+.km-pane-wrapper .km-pane .k-mobile-list select:not([multiple]),
+.km-pane-wrapper .km-pane .k-mobile-list textarea,
+.km-pane-wrapper .km-pane .k-mobile-list .k-widget
 {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     position: absolute;
     right: .8em;
+}
+
+.km-pane-wrapper .km-pane .k-mobile-list textarea
+{
+    position: relative;
+    right: auto;
+    float: right;
 }
 
 .km-pane-wrapper .k-mobile-list input.k-check
@@ -5399,6 +5480,18 @@ div[name="recurrenceRule"] > .k-dropdown
     top: 50%;
     right: .8em;
     margin-top: -.5em;
+}
+
+.km-pane-wrapper .k-grid .k-button,
+.km-pane-wrapper .k-edit-form-container .k-button
+{
+    margin: 0;
+}
+
+.km-pane-wrapper .k-grid .k-button + .k-button,
+.km-pane-wrapper .k-edit-form-container .k-button + .k-button
+{
+    margin: 0 0 0 .18em;
 }
 
 /* Tooltip */

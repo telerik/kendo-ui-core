@@ -88,7 +88,7 @@ kendo_module({
                     '#=field#'+
                     '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
                 '</div>'+
-                '<form class="k-filter-menu k-mobile-list k-secondary k-header">'+
+                '<form class="k-filter-menu k-mobile-list k-secondary">'+
                     '<ul class="k-filter-help-text"><li><span class="k-link">#=messages.info#</span>'+
                     '<ul>'+
                         '<li class="k-item"><label class="k-label">#=messages.operator#'+
@@ -154,7 +154,7 @@ kendo_module({
                     '#=field#'+
                     '<button type="submit" class="k-button k-submit">#=messages.filter#</button>'+
                 '</div>'+
-                '<form class="k-filter-menu k-mobile-list k-secondary k-header">'+
+                '<form class="k-filter-menu k-mobile-list k-secondary">'+
                     '<ul class="k-filter-help-text"><li><span class="k-link">#=messages.info#</span>'+
                     '<ul>'+
                         '<li class="k-item"><label class="k-label">'+

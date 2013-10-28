@@ -465,7 +465,7 @@ kendo_module({
                     '${messages.settings}'+
                     '<button class="k-button k-done">#=messages.done#</button>'+
                 '</div>'+
-                '<div class="k-column-menu k-mobile-list k-header"><ul><li>'+
+                '<div class="k-column-menu k-mobile-list"><ul><li>'+
                     '<span class="k-link">${field}</span><ul>'+
                 '#if(sortable){#'+
                     '<li class="k-item k-sort-asc"><span class="k-link"><span class="k-sprite k-i-sort-asc"></span>${messages.sortAscending}</span></li>'+

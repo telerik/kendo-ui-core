@@ -1374,7 +1374,7 @@ kendo_module({
 
         _createPopupEditor: function(model) {
             var that = this,
-                html = '<div ' + kendo.attr("uid") + '="' + model.uid + '" class="k-popup-edit-form"><div class="k-edit-form-container">',
+                html = '<div ' + kendo.attr("uid") + '="' + model.uid + '" class="k-popup-edit-form' + (that._isMobile ? ' k-mobile-list' : '') + '"><div class="k-edit-form-container">',
                 column,
                 command,
                 fields = [],
