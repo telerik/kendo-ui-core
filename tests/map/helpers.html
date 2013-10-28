@@ -283,11 +283,25 @@
                 )))
             });
 
-            test("overlaps at middle", function() {
+            test("overlaps within", function() {
                 ok(extent.overlaps(new Extent(
                     new Location(5, -5),
                     new Location(-5, 5)
                 )))
+            });
+
+            test("overlaps around", function() {
+                ok(extent.overlaps(new Extent(
+                    new Location(50, -50),
+                    new Location(-50, 50)
+                )))
+            });
+
+            test("overlaps implicit edge", function() {
+                ok(extent.overlaps(new Extent(
+                    new Location(20, 5),
+                    new Location(5, 20)
+                )));
             });
 
             test("does not overlap west", function() {

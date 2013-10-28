@@ -254,11 +254,11 @@ kendo_module({
                 lng = valueOrDefault(loc.lng, loc[0]),
                 lat = valueOrDefault(loc.lat, loc[1]);
 
-            nw.lng = min(nw.lng, min(lng, se.lng));
-            nw.lat = max(nw.lat, max(lat, se.lat));
+            nw.lng = min(nw.lng, lng);
+            nw.lat = max(nw.lat, lat);
 
-            se.lng = max(se.lng, max(lng, nw.lng));
-            se.lat = min(se.lat, min(lat, nw.lat));
+            se.lng = max(se.lng, lng);
+            se.lat = min(se.lat, lat);
         },
 
         includeAll: function(locs) {
@@ -267,8 +267,17 @@ kendo_module({
             }
         },
 
+        edges: function() {
+            var nw = this.nw,
+                se = this.se;
+
+            return [nw, new Location(nw.lat, se.lng),
+                    se, new Location(nw.lng, se.lat)];
+        },
+
         overlaps: function(extent) {
-            return this.containsAny([extent.nw, extent.se]);
+            return this.containsAny(extent.edges()) ||
+                   extent.containsAny(this.edges());
         }
     });
 

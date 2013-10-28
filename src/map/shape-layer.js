@@ -18,6 +18,7 @@
         round = util.round,
 
         map = dataviz.map,
+        Extent = map.Extent,
         Location = map.Location;
 
     // Constants ==============================================================
@@ -126,8 +127,18 @@
             var viewport = this.map.viewport(),
                 visible = false;
 
-            for (var i = 0; i < rings.length; i++) {
-                visible = visible || viewport.containsAny(rings[i]);
+            if (rings.length > 0) {
+                var r = rings[0];
+                var extent = new Extent(
+                    Location.fromLngLat(r[0]),
+                    Location.fromLngLat(r[1])
+                );
+
+                for (var i = 0; i < rings.length; i++) {
+                    extent.includeAll(rings[i]);
+                }
+
+                visible = viewport.overlaps(extent);
             }
 
             var shape = this._buildPolygon(rings);
