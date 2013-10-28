@@ -10,6 +10,7 @@
             srs=>srs.Funnel("Wind","Year")
                 .DynamicHeight(false)
                 .DynamicSlope(true)
+                .SegmentSpacing(2)
                 .Labels(lbl=>lbl.Visible(true).Template("#= category #"))
                     
         )            

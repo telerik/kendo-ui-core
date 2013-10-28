@@ -22,6 +22,7 @@
                     .Align(ChartFunnelLabelsAlign.Left)
             )
         )
+        .Title("Before optimization")
         .Legend(false)
         .Tooltip(
             tt=>tt.Visible(true).Template("#= category # #= kendo.format('{0:p}',value/dataItem.parent()[0].Visitors)#")
@@ -45,6 +46,7 @@
                     .Align(ChartFunnelLabelsAlign.Left)
             )
         )
+        .Title("After optimization")
         .Legend(false)
         .Tooltip(
             tt=>tt.Visible(true).Template("#= category # #= kendo.format('{0:p}',value/dataItem.parent()[0].Visitors)#")
