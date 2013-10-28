@@ -169,6 +169,9 @@
     <Compile Include="Controllers\DataViz\Bar_Charts\PlotbandsController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bar_Charts\Stacked_BarController.cs" />
+    <Compile Include="Controllers\DataViz\Box_Plot_Charts\IndexController.cs" />
+    <Compile Include="Controllers\DataViz\Box_Plot_Charts\Local_DataController.cs" />
+    <Compile Include="Controllers\DataViz\Box_Plot_Charts\Remote_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bubble_Charts\Grouped_DataController.cs" />
     <Compile Include="Controllers\DataViz\Bubble_Charts\IndexController.cs" />
     <Compile Include="Controllers\DataViz\Bubble_Charts\Local_DataController.cs" />
@@ -544,6 +547,7 @@
     <Compile Include="Models\Chart\AprilSales.cs" />
     <Compile Include="Models\Chart\BlogComments.cs" />
     <Compile Include="Models\Chart\BudgetReportItem.cs" />
+    <Compile Include="Models\Chart\ChartDataRepository.BoxPlot.cs" />
     <Compile Include="Models\Chart\ChartDataRepository.cs" />
     <Compile Include="Models\Chart\ChartDataRepository.Polar.cs" />
     <Compile Include="Models\Chart\ChartDataRepository.Radar.cs" />
@@ -556,6 +560,7 @@
     <Compile Include="Models\Chart\GrandSlam.cs" />
     <Compile Include="Models\Chart\InternetUsers.cs" />
     <Compile Include="Models\Chart\Medals.cs" />
+    <Compile Include="Models\Chart\OzoneConcentration.cs" />
     <Compile Include="Models\Chart\PricePerformance.cs" />
     <Compile Include="Models\Chart\ProteinScoreItem.cs" />
     <Compile Include="Models\Chart\ScreenResolution.cs" />
@@ -688,6 +693,9 @@
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\plotbands.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bar_charts\stacked_bar.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\box_plot_charts\index.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\box_plot_charts\local_data.aspx" />
+    <Content Include="Areas\aspx\Views\dataviz\box_plot_charts\remote_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bubble_charts\grouped_data.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bubble_charts\index.aspx" />
     <Content Include="Areas\aspx\Views\dataviz\bubble_charts\local_data.aspx" />
@@ -2857,6 +2865,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\map\index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\box_plot_charts\index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\box_plot_charts\local_data.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\dataviz\box_plot_charts\remote_data.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

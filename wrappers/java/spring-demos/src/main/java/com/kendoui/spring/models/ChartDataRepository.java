@@ -3955,4 +3955,47 @@ public class ChartDataRepository {
         
         return result;
     }
+    
+    public static List<BoxPlotPoint> MonthlyMeanTemperatures() {
+        List<BoxPlotPoint> result = new ArrayList<BoxPlotPoint>();
+        result.add(new BoxPlotPoint(26.2, 38.3, 51.0, 61.45, 68.9, 49.0, new double[] { 18.3, 20, 70, 72,5}));
+        result.add(new BoxPlotPoint(26.4, 38.125, 46.8, 60.425, 66.8, 47.3, new double[] { 18, 69, 71.3, 71.5}));
+        result.add(new BoxPlotPoint(31.6, 41.725, 52.35, 62.175, 70.8, 52.3, new double[] { 14, 16.4, 74}));
+        result.add(new BoxPlotPoint(34.4, 39.375, 49.9 , 61.425, 69.2, 50.3, new double[] { 16, 18, 72, 72.5}));
+        result.add(new BoxPlotPoint(29.9, 38.35, 50.4 , 60.875, 69.7, 49.9, new double[] { 19, 20, 76, 78}));
+        result.add(new BoxPlotPoint(22.3, 36.875, 48.9, 62.65, 70.3, 49.0, new double[] { 16.5, 17, 74, 75, 78}));
+        result.add(new BoxPlotPoint(32.3, 39.5, 54.1 , 61.175, 67.3, 50.8, new double[] { 13, 14, 15, 74.3, 75.2, 76}));
+        result.add(new BoxPlotPoint(28.5, 36.075, 50.5, 64.2, 70.4, 49.6, new double[] { 18, 22, 73.4, 75}));
+        result.add(new BoxPlotPoint(33.6, 40.65, 49.55, 62.8, 69.2, 51.1, new double[] { 17, 73}));
+        result.add(new BoxPlotPoint(33.6, 38.6, 47.9, 60.825, 67, 49.7, new double[] { 12, 13.5, 16, 73, 74.6, 77}));
+        result.add(new BoxPlotPoint(31.9, 36.425, 49.3, 61.825, 69.7, 49.4, new double[] { 17, 76}));
+        result.add(new BoxPlotPoint(34, 41.225, 51.15, 62.4, 68.8, 51.6, new double[] { 14.6, 17.3, 72.3, 74}));
+        
+        return result;
+    }    
+    
+    public static List<BoxPlotCategoryPoint> OzoneConcentration() {
+        List<BoxPlotCategoryPoint> result = new ArrayList<BoxPlotCategoryPoint>();        
+        result.add(new BoxPlotCategoryPoint(1990, 1.3, 2.15, 2.95, 3.725, 4.7, 2.9, new double[] {1, 9}));
+        result.add(new BoxPlotCategoryPoint(1991, 2, 3.825, 5.45, 6.425, 8.2, 5.2, new double[] {1.5, 2, 8.9}));
+        result.add(new BoxPlotCategoryPoint(1992, 3.8, 4.725, 5.55, 5.75, 8.7, 5.5, null));
+        result.add(new BoxPlotCategoryPoint(1993, 3, 4.375, 4.95, 5.85, 8, 5.2, new double[] {3, 9.5}));
+        result.add(new BoxPlotCategoryPoint(1994, 2.5, 3.925, 4.15, 4.45, 5.1, 4.1, null));
+        result.add(new BoxPlotCategoryPoint(1995, 2.4, 3.725, 4.95, 5.85, 7.7, 4.9, new double[] {2.1, 8.3, 9.8}));
+        result.add(new BoxPlotCategoryPoint(1996, 1.7, 2.3, 3.9, 5, 5.5, 3.7, new double[] {1.1, 9.1}));
+        result.add(new BoxPlotCategoryPoint(1997, 2.2, 2.5, 3.1, 3.975, 4.3, 3.2, new double[] {1.6, 1.8, 9.8}));
+        result.add(new BoxPlotCategoryPoint(1998, 1.9, 2.7, 3.35, 4.575, 5.7, 3.6, new double[] {1.1, 8.3}));
+        result.add(new BoxPlotCategoryPoint(1999, 1.7, 2.65, 3.3, 4.05, 5, 3.4, null));
+        result.add(new BoxPlotCategoryPoint(2000, 1.4, 2.25, 3.3, 4.65, 5.7, 3.4, null));
+        result.add(new BoxPlotCategoryPoint(2001, 1.9, 2.85, 4, 4.45, 6.1, 3.9, new double[] {1, 1.2}));
+        result.add(new BoxPlotCategoryPoint(2002, 1.5, 2.35, 4.1, 5.225, 5.7, 3.9, new double[] {9, 9.5}));
+        result.add(new BoxPlotCategoryPoint(2003, 1.8, 2.325, 3.35, 4, 5.4, 3.3, new double[] {1, 6}));
+        result.add(new BoxPlotCategoryPoint(2004, 1.8, 2.75, 3.35, 3.825, 4.9, 3.4, null));
+        result.add(new BoxPlotCategoryPoint(2005, 1.7, 2.275, 3.2, 3.825, 5.5, 3.2, new double[] {0.5, 6.7}));
+        result.add(new BoxPlotCategoryPoint(2006, 1.2, 1.95, 2.45, 3.075, 3.5, 2.5, null));
+        result.add(new BoxPlotCategoryPoint(2007, 1.3, 1.9, 3.05, 3.425, 4, 2.7, new double[] {7, 8.5}));
+        
+        return result;
+    }   
+
 }
