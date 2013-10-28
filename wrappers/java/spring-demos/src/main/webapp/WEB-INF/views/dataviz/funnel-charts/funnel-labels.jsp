@@ -10,7 +10,7 @@
         <kendo:chart-series>
            <kendo:chart-seriesItem type="funnel" data="${funnelData}" dynamicHeight="false">
            		<kendo:chart-seriesItem-labels template="#= dataItem.category #" visible="true" font="15px sans-serif"  
-           			position="center" background="transparent" color="#000" padding="5" format="N0">
+           			position="center" background="transparent" color="#000" padding="5" format="N0" align="center">
            			<kendo:chart-seriesItem-labels-border width="1" dashType="dot" color="#000" />
            		</kendo:chart-seriesItem-labels>               
            </kendo:chart-seriesItem>

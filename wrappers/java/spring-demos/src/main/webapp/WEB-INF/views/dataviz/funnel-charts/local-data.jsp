@@ -14,7 +14,7 @@
                 <kendo:chart-seriesItem type="funnel" field="visitors" categoryField="description" 
                 	dynamicSlope="true" dynamicHeight="false">
                     <kendo:chart-seriesItem-labels color="black" visible="true" background="transparent"
-                    	template="#= dataItem.description #: #= value#" />
+                    	template="#= dataItem.description #: #= value#" align="left" />
                 </kendo:chart-seriesItem>
              </kendo:chart-series>
              <kendo:chart-tooltip visible="true" template="#= dataItem.description # #= kendo.format('{0:p}',data.value/dataItem.parent()[0].visitors)#" />
@@ -30,7 +30,7 @@
                 <kendo:chart-seriesItem type="funnel" field="visitors" categoryField="description" 
                 	dynamicSlope="true" dynamicHeight="false">
                     <kendo:chart-seriesItem-labels color="black" visible="true" background="transparent"
-                    	template="#= dataItem.description #: #= value#" />
+                    	template="#= dataItem.description #: #= value#" align="left" />
                 </kendo:chart-seriesItem>
              </kendo:chart-series>
              <kendo:chart-tooltip visible="true" template="#= dataItem.description # #= kendo.format('{0:p}',data.value/dataItem.parent()[0].visitors)#" />
