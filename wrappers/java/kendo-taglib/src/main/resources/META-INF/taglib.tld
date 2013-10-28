@@ -3650,6 +3650,12 @@ By default chart series highlighting is enabled.</description>
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>The label alignment when series.type is set to "donut", "funnel" or "pie".The supported values  for "donut" and "pie" are:The supported values for "funnel" are:</description>
+            <name>align</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>The background color of the labels. Accepts a valid CSS color string, including hex and rgb.</description>
             <name>background</name>
             <rtexprvalue>true</rtexprvalue>
