@@ -256,6 +256,14 @@ header .k-dropdown-wrap.k-state-default .k-input {
     margin-top: 15px;
 }
 
+figure h4 {
+    font-size: 1.15em;
+}
+
+figure p.hidden-sm {
+    min-height: 80px;
+}
+
 footer {
     text-align: right;
     font-size: 0.8571em;
