@@ -43,7 +43,7 @@
             this.surface.bind("mouseleave", this._mouseleave);
 
             map.bind("reset", proxy(this.reset, this));
-            map.bind("dragEnd", proxy(this._dragEnd, this));
+            map.bind("panEnd", proxy(this._panEnd, this));
 
             this._initDataSource();
         },
@@ -145,7 +145,7 @@
             return path;
         },
 
-        _dragEnd: function() {
+        _panEnd: function() {
             var map = this.map;
             var nw = map.toScreenPoint(map.viewport().nw);
 

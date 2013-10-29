@@ -70,12 +70,13 @@ kendo_module({
 
         events:[
             "reset",
-            "drag",
-            "dragEnd",
+            "pan",
+            "panEnd",
             "shapeClick",
             "shapeCreated",
             "shapeMouseEnter",
-            "shapeMouseLeave"
+            "shapeMouseLeave",
+            "zoom"
         ],
 
         zoom: function(level) {
@@ -109,11 +110,11 @@ kendo_module({
             center.y += e.scrollTop;
             this.center(this.crs.toLocation(center, this.scale()));
 
-            this.trigger("drag");
+            this.trigger("pan");
         },
 
         _scrollEnd: function() {
-            this.trigger("dragEnd");
+            this.trigger("panEnd");
         },
 
         _reset: function() {
