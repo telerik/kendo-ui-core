@@ -16,6 +16,7 @@ kendo_module({
         kendo = window.kendo,
         ObservableArray = kendo.data.ObservableArray,
         Widget = kendo.ui.Widget,
+        deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
         defined = dataviz.defined,
@@ -73,7 +74,20 @@ kendo_module({
             zoom: 3,
             minSize: 256,
             minZoom: 2,
-            maxZoom: 18
+            maxZoom: 18,
+            layerDefaults: {
+                shape: {
+                    style: {
+                        fill: {
+                            color: "#fff"
+                        },
+                        stroke: {
+                            color: "#aaa",
+                            width: 0.5
+                        }
+                    }
+                }
+            }
         },
 
         events:[
@@ -195,16 +209,14 @@ kendo_module({
             scrollWrap.empty();
 
             for (var i = 0; i < defs.length; i++) {
-                // TODO: Either pass layer type directly or create from a factory based on type id
                 var options = defs[i];
-                var type = dataviz.map.layers[options.type];
-                if (type) {
-                    // TODO: Set layer size
-                    layers.push(new type(this, options));
-                }
-            }
+                var type = options.type || "shape";
+                var defaults = this.options.layerDefaults[type];
+                var impl = dataviz.map.layers[type];
 
-            this.trigger("reset");
+                // TODO: Set layer size
+                layers.push(new impl(this, deepExtend({}, defaults, options)));
+            }
         }
     });
 
