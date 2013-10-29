@@ -328,6 +328,10 @@ kendo_module({
         _buffer: function() {
             var itemsPerPage = this.options.itemsPerPage;
 
+            if(this.buffer) {
+                this.buffer.destroy();
+            }
+
             if(itemsPerPage > 1) {
                 this.buffer = new BatchBuffer(this.dataSource, itemsPerPage);
             } else {

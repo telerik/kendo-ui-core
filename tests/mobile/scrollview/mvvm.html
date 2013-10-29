@@ -61,6 +61,34 @@
                 equal($("#scrollview").data("kendoMobileScrollView").items().eq(1).text(), "1");
                 equal($("#scrollview").data("kendoMobileScrollView").items().eq(2).text(), "2");
             });
+
+            test("ScrollView rebinds to a new DataSource", 3, function() {
+                var appContent = '<div data-role="view" data-model="viewModel"> <div id="scrollview" data-role="scrollview" data-bind="source: ds" data-template="scrollview-mvvm-tmp"></div> </div>';
+
+                $("#qunit-fixture").html(appContent);
+                window.viewModel = kendo.observable({
+                    ds: [{foo: 1}, {foo: 2}]
+                });
+                var app = new kendo.mobile.Application($("#qunit-fixture"));
+
+                var widget = $("#scrollview").data("kendoMobileScrollView");
+                var oldDataSource = widget.dataSource;
+                oldDataSource.bind("change", function() {
+                    console.log("change");
+                });
+
+                var newDataSource = new kendo.data.DataSource({
+                    data: [ {foo: 3}, {foo: 4} ]
+                });
+                
+                window.viewModel.set("ds", newDataSource);
+
+                equal($("#scrollview").data("kendoMobileScrollView").items().eq(1).text(), "3");
+                equal($("#scrollview").data("kendoMobileScrollView").items().eq(2).text(), "4");
+
+                // oldDataSource.data([{foo: 5}, { foo: 6 }]);
+                equal($("#scrollview").data("kendoMobileScrollView").items().eq(1).text(), "3");
+            });
         </script>
     </body>
 </html>
