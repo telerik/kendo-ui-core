@@ -144,6 +144,9 @@ kendo_module({
         },
 
         stop: function() {
+            if (!this._started) {
+                return;
+            }
             this.adapter.stop();
             this.unbind(CHANGE);
             this._started = false;
