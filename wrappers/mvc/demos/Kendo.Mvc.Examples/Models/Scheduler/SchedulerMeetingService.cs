@@ -48,6 +48,11 @@
                     meeting.Atendees = new int[0];
                 }
 
+                if (string.IsNullOrEmpty(meeting.Title))
+                {
+                    meeting.Title = "";
+                }
+
                 var entity = meeting.ToEntity();
 
                 foreach (var atendeeId in meeting.Atendees)
