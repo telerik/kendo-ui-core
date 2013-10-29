@@ -75,7 +75,6 @@
                     };
 
                     var options = {
-                        dataSource: dataSourceConfig,
                         autoBind: true,
                         template: "<div class='foo'>#: foo #</div>",
                         emptyTemplate: "<div>empty</div>"
@@ -83,6 +82,8 @@
 
                     element = $("<div style='width: 400px;' />").appendTo("#qunit-fixture").wrap("<div style='width: 400px;' />");
                     content = new VirtualScrollViewContent(element, new ElasticPane(element), options);
+                    content.setDataSource(dataSourceConfig);
+                    content.dataSource.fetch();
                 }
             });
 
@@ -112,9 +113,11 @@
 
             test("creates buffer correctly", 2, function() {
                 var content = new VirtualScrollViewContent(element, new ElasticPane(element), { itemsPerPage: 1, template: "", emptyTemplate: "" });
+                content.setDataSource();
                 ok(content.buffer instanceof kendo.data.Buffer);
-
+                
                 content = new VirtualScrollViewContent(element, new ElasticPane(element), { itemsPerPage: 6, template: "", emptyTemplate: "" });
+                content.setDataSource();
                 ok(content.buffer instanceof BatchBuffer);
             });
 
@@ -206,6 +209,8 @@
 
                     pane = new ElasticPane(element);
                     content = new VirtualScrollViewContent(element, pane, options);
+                    content.setDataSource(dataSourceConfig);
+                    content.dataSource.fetch();
                     content.resizeTo({width: 400 });
                 }
             });

@@ -722,7 +722,10 @@ kendo_module({
         },
 
         setDataSource: function(dataSource) {
-            // the listView should have a ready datasource for MVVM to function properly. But an empty datasource should not empty the element
+            if (!(this._content instanceof VirtualScrollViewContent)) {
+                return;
+            }
+            // the scrollview should have a ready datasource for MVVM to function properly. But an empty datasource should not empty the element
             var emptyDataSource = !dataSource;
             this.dataSource = DataSource.create(dataSource);
 
