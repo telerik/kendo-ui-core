@@ -455,7 +455,7 @@
 
 .k-panelbar > li.k-state-default > .k-link
 {
-	color: @widget-text-color;
+    color: @widget-text-color;
 }
 
 .k-panelbar > li > .k-link.k-state-selected
@@ -470,7 +470,7 @@
 
 .k-panelbar .k-state-focused
 {
-	.box-shadow(inset @focused-shadow);
+    .box-shadow(inset @focused-shadow);
 }
 
 .k-panelbar .k-state-focused.k-state-selected,
@@ -561,47 +561,6 @@ td.k-state-focused.k-state-selected,
     border-color: @widget-border-color;
 }
 
-//metrics
-.k-slider-track
-{
-    border-width: 1px;
-    border-style: solid;
-}
-
-.k-grid tr td
-{
-    border-width: 1px 0 0 1px;
-    border-style: solid;
-}
-
-.k-pager-numbers .k-link
-{
-    height: 1.83333em;/*IE7*/
-}
-
-.k-pager-numbers .k-link,
-.k-pager-numbers .k-state-selected
-{
-    margin-right: 0;
-}
-
-.k-grid .k-pager-numbers,
-.k-pager-wrap>.k-link
-{
-    margin: 0;
-}
-
-.k-pager-wrap .k-link
-{
-    border-right: none;
-}
-
-.k-pager-nav.k-pager-last
-{
-    border-right-width: 1px;
-    border-right-style: solid;
-}
-
 .k-state-focused,
 .k-button:focus,
 .k-button.k-state-focused,
@@ -639,14 +598,14 @@ td.k-state-focused.k-state-selected,
 }
 
 .k-flatcolorpicker .k-hue-slider .k-draghandle {
-	.box-shadow(@draghandle-shadow);
-	background: transparent;			
-	border: 5px solid @draghandle-border-color;
-	&:hover, &:focus {
-		border-color: @draghandle-border-color;
-		.box-shadow(0 0 8px 0 rgba(102,175,233,0.75));			
-		border-width: 5px;
-		padding: 0;
-	}
+    .box-shadow(@draghandle-shadow);
+    background: transparent;
+    border: 5px solid @draghandle-border-color;
+    &:hover, &:focus {
+        border-color: @draghandle-border-color;
+        .box-shadow(0 0 8px 0 rgba(102,175,233,0.75));
+        border-width: 5px;
+        padding: 0;
+    }
 }
- 
+
