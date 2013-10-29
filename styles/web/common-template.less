@@ -5239,7 +5239,6 @@ div[name="recurrenceRule"] > .k-dropdown
 .km-pane-wrapper .k-grid-edit-form .k-popup-edit-form,
 .km-pane-wrapper .k-grid-edit-form .k-edit-form-container
 {
-    overflow: hidden;
     width: auto;
 }
 
@@ -5269,7 +5268,6 @@ div[name="recurrenceRule"] > .k-dropdown
     padding: 0;
     margin: 0;
     list-style-type: none;
-    overflow: hidden;
     .border-radius(0);
     background: none;
 }
@@ -5302,7 +5300,7 @@ div[name="recurrenceRule"] > .k-dropdown
     list-style-type: none;
     vertical-align: middle;
     .box-sizing(border-box);
-    padding: .5em 1em;
+    padding: .5em 0 .5em 1em;
     font-size: 1em;
 }
 
@@ -5347,7 +5345,6 @@ div[name="recurrenceRule"] > .k-dropdown
 .km-pane-wrapper .k-mobile-list .k-edit-field,
 .km-pane-wrapper .k-mobile-list .k-edit-label
 {
-    line-height: 2em;
     width: 100%;
     float: none;
     clear: none;
@@ -5377,7 +5374,7 @@ div[name="recurrenceRule"] > .k-dropdown
 }
 
 .km-pane-wrapper .k-mobile-list > ul > li > .k-link,
-.km-pane-wrapper .k-mobile-list .k-filter-help-text .k-link
+.km-pane-wrapper .k-mobile-list .k-filter-help-text > li > .k-link
 {
     display: block;
     padding: .2em 1em;
@@ -5405,7 +5402,7 @@ div[name="recurrenceRule"] > .k-dropdown
 {
     line-height: inherit;
     text-decoration: none;
-    margin: -.5em -1em;
+    margin: -.5em 0 -.5em -1em;
 }
 
 /* Mobile list form elements */
@@ -5428,18 +5425,19 @@ div[name="recurrenceRule"] > .k-dropdown
 {
     border: 0;
     font-size: inherit;
-    width: 1.4em;
-    height: 1.4em;
+    width: 1em;
+    height: 1em;
     margin-right: 1em;
 }
 
 .km-pane-wrapper .km-pane .k-mobile-list input:not([type="checkbox"]):not([type="radio"]),
 .km-pane-wrapper .km-pane .k-mobile-list select:not([multiple]),
 .km-pane-wrapper .km-pane .k-mobile-list textarea,
+.km-pane-wrapper .k-mobile-list .k-widget,
 .km-pane-wrapper .k-edit-field > *:not([type="checkbox"]):not([type="radio"]):not(.k-button)
 {
     font-size: 1em;
-    line-height: 2em;
+    line-height: 1.6em;
     vertical-align: middle;
     height: auto;
     padding: 0;
@@ -5466,6 +5464,7 @@ div[name="recurrenceRule"] > .k-dropdown
 .km-pane-wrapper *:not(.k-state-default) > input:not([type="checkbox"]):not([type="radio"]),
 .km-pane-wrapper .k-mobile-list select:not([multiple]),
 .km-pane-wrapper .k-mobile-list textarea,
+.km-pane-wrapper .k-mobile-list .k-widget,
 .km-pane-wrapper .k-edit-field > *:not([type="checkbox"]):not([type="radio"]):not(.k-button)
 {
     width: 80%;
@@ -5476,6 +5475,7 @@ div[name="recurrenceRule"] > .k-dropdown
 .km-pane-wrapper .km-pane .k-mobile-list input,
 .km-pane-wrapper .km-pane .k-mobile-list select:not([multiple]),
 .km-pane-wrapper .km-pane .k-mobile-list textarea,
+.km-pane-wrapper .k-mobile-list .k-widget,
 .km-pane-wrapper .k-mobile-list .k-edit-field > *
 {
     -webkit-appearance: none;
