@@ -1167,7 +1167,7 @@ p#copy
 .progressBarIcon{background-position:-120px -140px;}
 .chartFunnelIcon{background-position:-100px -140px;}
 .chartBoxPlotIcon{background-position:-140px -140px;}
-.mapIcon{background-position:-60px -40px;}
+.mapIcon{background-position:0 -160px;}
 
 #mainWrapInner
 {
