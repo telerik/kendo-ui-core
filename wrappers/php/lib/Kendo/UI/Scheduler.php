@@ -361,6 +361,20 @@ That way all users would see the same dates and times no matter their configured
     }
 
     /**
+    * Sets the change event of the Scheduler.
+    * Fired when the user selects a cell or event in the scheduler.The event handler function context (available via the this keyword) will be set to the widget instance.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\UI\Scheduler
+    */
+    public function change($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('change', $value);
+    }
+
+    /**
     * Sets the dataBinding event of the Scheduler.
     * Fired before the widget binds to its data source.The event handler function context (available via the this keyword) will be set to the widget instance.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
