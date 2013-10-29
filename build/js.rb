@@ -151,6 +151,7 @@ WEB_MIN_JS_MAP = FileList[WEB_SRC_JS].ext('min.js.map')
 
 DATAVIZ_JS = FileList[
     "src/kendo.core.js",
+    "src/kendo.fx.js",
     "src/kendo.router.js",
     "src/kendo.view.js",
     "src/kendo.data.odata.js",
@@ -158,6 +159,8 @@ DATAVIZ_JS = FileList[
     "src/kendo.data.js",
     "src/kendo.binder.js",
     "src/kendo.userevents.js",
+    "src/kendo.draganddrop.js",
+    "src/kendo.mobile.scroller.js",
     "src/kendo.dataviz.core.js",
     "src/kendo.dataviz.themes.js",
     "src/kendo.dataviz.chart.js",
