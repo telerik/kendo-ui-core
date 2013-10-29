@@ -6,30 +6,24 @@ namespace Kendo.Mvc.UI
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
-    public class MapLayerDefaultsShapeSettings : JsonObject
+    public class MapLayerDefaultsShapeStyleStrokeSettings : JsonObject
     {
-        public MapLayerDefaultsShapeSettings()
+        public MapLayerDefaultsShapeStyleStrokeSettings()
         {
             //>> Initialization
         
-            Style = new MapLayerDefaultsShapeStyleSettings();
-                
         //<< Initialization
-
-            
         }
-
-        
 
         //>> Fields
         
-        public string Copyright { get; set; }
+        public string Color { get; set; }
         
-        public MapLayerDefaultsShapeStyleSettings Style
-        {
-            get;
-            private set;
-        }
+        public string DashType { get; set; }
+        
+        public double Opacity { get; set; }
+        
+        public double Width { get; set; }
         
         //<< Fields
 
@@ -37,16 +31,19 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Copyright.HasValue())
+            if (Color.HasValue())
             {
-                json["copyright"] = Copyright;
+                json["color"] = Color;
             }
             
-            var style = Style.ToJson();
-            if (style.Any())
+            if (DashType.HasValue())
             {
-                json["style"] = style;
+                json["dashType"] = DashType;
             }
+            
+            json["opacity"] = Opacity;
+                
+            json["width"] = Width;
                 
         //<< Serialization
         }

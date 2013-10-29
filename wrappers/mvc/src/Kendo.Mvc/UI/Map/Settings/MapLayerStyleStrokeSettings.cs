@@ -6,38 +6,24 @@ namespace Kendo.Mvc.UI
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
-    public class MapMarker : JsonObject
+    public class MapLayerStyleStrokeSettings : JsonObject
     {
-        public MapMarker()
+        public MapLayerStyleStrokeSettings()
         {
             //>> Initialization
         
         //<< Initialization
-
-            
-            HtmlAttributes = new RouteValueDictionary();
-            
         }
-
-        
-        /// <summary>
-        /// Gets the HTML attributes.
-        /// </summary>
-        /// <value>The HTML attributes.</value>
-        public IDictionary<string, object> HtmlAttributes
-        {
-            get;
-            private set;
-        }
-        
 
         //>> Fields
         
         public string Color { get; set; }
         
-        public double Size { get; set; }
+        public double DashType { get; set; }
         
-        public MapMarkerShape Shape { get; set; }
+        public double Opacity { get; set; }
+        
+        public double Width { get; set; }
         
         //<< Fields
 
@@ -50,9 +36,11 @@ namespace Kendo.Mvc.UI
                 json["color"] = Color;
             }
             
-            json["size"] = Size;
+            json["dashType"] = DashType;
                 
-            json["shape"] = Shape;
+            json["opacity"] = Opacity;
+                
+            json["width"] = Width;
                 
         //<< Serialization
         }

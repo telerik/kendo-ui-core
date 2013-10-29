@@ -6,20 +6,19 @@ namespace Kendo.Mvc.UI
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
-    public class MapMarker : JsonObject
+    public class <%= self.instance_of?(array_option_class) ? csharp_item_class : csharp_class %> : JsonObject
     {
-        public MapMarker()
+        public <%= self.instance_of?(array_option_class) ? csharp_item_class : csharp_class %>()
         {
             //>> Initialization
-        
-        //<< Initialization
+            //<< Initialization
 
-            
+            <% if self.instance_of?(array_option_class) %>
             HtmlAttributes = new RouteValueDictionary();
-            
+            <% end %>
         }
 
-        
+        <% if self.instance_of?(array_option_class) %>
         /// <summary>
         /// Gets the HTML attributes.
         /// </summary>
@@ -29,32 +28,15 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-        
+        <% end %>
 
         //>> Fields
-        
-        public string Color { get; set; }
-        
-        public double Size { get; set; }
-        
-        public MapMarkerShape Shape { get; set; }
-        
         //<< Fields
 
         protected override void Serialize(IDictionary<string, object> json)
         {
             //>> Serialization
-        
-            if (Color.HasValue())
-            {
-                json["color"] = Color;
-            }
-            
-            json["size"] = Size;
-                
-            json["shape"] = Shape;
-                
-        //<< Serialization
+            //<< Serialization
         }
     }
 }

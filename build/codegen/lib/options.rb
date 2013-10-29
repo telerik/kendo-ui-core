@@ -40,6 +40,8 @@ module CodeGen
 
             values = settings[:values]
 
+            remove_existing = settings[:remove_existing] || false
+
             return unless types
 
             if types.is_a?(String)
@@ -57,18 +59,23 @@ module CodeGen
             if parents.any?
 
                 parents.each do |parent|
+                    parent.add_option(
+                      :name => name,
+                      :type => type,
+                      :recursive => recursive,
+                      :content => content,
+                      :default => default,
+                      :prefix => parent.name + '.',
+                      :values => values,
+                      :description => description,
+                      :remove_existing => remove_existing
+                    )
 
-                    parent.add_option(:name => name,
-                                      :type => type,
-                                      :recursive => recursive,
-                                      :content => content,
-                                      :default => default,
-                                      :prefix => parent.name + '.',
-                                      :values => values,
-                                      :description => description)
                 end
 
             else
+
+                @options.delete_if { |o| o.name == name } if remove_existing
 
                 @options.push option_class.new(:name => name,
                                                :owner => self,
@@ -78,7 +85,6 @@ module CodeGen
                                                :default => default,
                                                :values => values,
                                                :description => description)
-
             end
 
         end

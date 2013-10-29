@@ -1,0 +1,11 @@
+@(Html.Kendo().Map()
+      .Name("map")
+      .Layers(layers => 
+       {
+           layers.Add()
+              .DataSource(dataSource => dataSource
+                  .GeoJson()
+                  .Read(read => read.Url("~/Content/dataviz/map/countries-users.geo.json"))
+              );
+       })
+)

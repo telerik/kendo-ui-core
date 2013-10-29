@@ -3,6 +3,7 @@ namespace Kendo.Mvc.UI.Fluent
     using System.Collections.Generic;
     using System.Collections;
     using System;
+    using System.Web.Mvc;
 
     /// <summary>
     /// Defines the fluent API for configuring the Kendo Map for ASP.NET MVC.
@@ -10,13 +11,19 @@ namespace Kendo.Mvc.UI.Fluent
     public class MapBuilder: WidgetBuilderBase<Map, MapBuilder>, IHideObjectMembers
     {
         private readonly Map container;
+        private readonly ViewContext viewContext;
+        private readonly IUrlGenerator urlGenerator;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Map"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
-        public MapBuilder(Map component)
+        public MapBuilder(Map component, ViewContext viewContext, IUrlGenerator urlGenerator)
             : base(component)
         {
+            this.viewContext = viewContext;
+            this.urlGenerator = urlGenerator;
+
             container = component;
         }
 
@@ -49,7 +56,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The action that configures the layers.</param>
         public MapBuilder Layers(Action<MapLayerFactory> configurator)
         {
-            configurator(new MapLayerFactory(container.Layers));
+            configurator(new MapLayerFactory(container.Layers, viewContext, urlGenerator));
             return this;
         }
         

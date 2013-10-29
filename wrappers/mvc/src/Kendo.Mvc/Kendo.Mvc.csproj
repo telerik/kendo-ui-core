@@ -864,6 +864,8 @@
     <Compile Include="UI\Grid\Settings\GroupableMessages.cs" />
     <Compile Include="UI\Grid\Settings\NumberOperators.cs" />
     <Compile Include="UI\Grid\Settings\StringOperators.cs" />
+    <Compile Include="UI\Map\Fluent\GeoJsonDataSourceBuilder.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerDataSourceBuilder.cs" />
     <Compile Include="UI\Map\Map.cs" />
     <Compile Include="UI\Menu\MenuDirection.cs" />
     <Compile Include="UI\MobileListView\Fluent\MobileListViewLinkItemBuilder.cs" />
@@ -1782,5 +1784,22 @@
     <Compile Include="UI\Map\Fluent\MapMarkerBuilder.cs" />
     <Compile Include="UI\Map\Fluent\MapEventBuilder.cs" />
     <Compile Include="UI\Map\Html\MapHtmlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Map\MapShape.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UI\Map\Settings\MapLayerDefaultsShapeStyleSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerDefaultsShapeStyleSettingsBuilder.cs" />
+    <Compile Include="UI\Map\Settings\MapLayerDefaultsShapeStyleFillSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerDefaultsShapeStyleFillSettingsBuilder.cs" />
+    <Compile Include="UI\Map\Settings\MapLayerDefaultsShapeStyleStrokeSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerDefaultsShapeStyleStrokeSettingsBuilder.cs" />
+    <Compile Include="UI\Map\Settings\MapLayerStyleSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerStyleSettingsBuilder.cs" />
+    <Compile Include="UI\Map\Settings\MapLayerStyleFillSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerStyleFillSettingsBuilder.cs" />
+    <Compile Include="UI\Map\Settings\MapLayerStyleStrokeSettings.cs" />
+    <Compile Include="UI\Map\Fluent\MapLayerStyleStrokeSettingsBuilder.cs" />
   </ItemGroup>
 </Project>

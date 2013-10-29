@@ -1,0 +1,6 @@
+:options:
+    - :name: markers.shape
+      :type: Object
+      :values:
+          - pin
+          - circle

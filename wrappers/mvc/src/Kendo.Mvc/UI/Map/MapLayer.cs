@@ -10,49 +10,68 @@ namespace Kendo.Mvc.UI
     {
         public MapLayer()
         {
+            DataSource = new DataSource();
             //>> Initialization
         
-            Layer = new MapLayer();
+            Style = new MapLayerStyleSettings();
                 
         //<< Initialization
-
-            
-            HtmlAttributes = new RouteValueDictionary();
-            
         }
 
-        
-        /// <summary>
-        /// Gets the HTML attributes.
-        /// </summary>
-        /// <value>The HTML attributes.</value>
-        public IDictionary<string, object> HtmlAttributes
-        {
-            get;
-            private set;
-        }
-        
+        public DataSource DataSource { get; set; }
 
         //>> Fields
         
-        public MapLayer Layer
+        public bool AutoBind { get; set; }
+        
+        public string Type { get; set; }
+        
+        public string Copyright { get; set; }
+        
+        public MapLayerStyleSettings Style
         {
             get;
             private set;
         }
+        
+        public string UrlTemplateId { get; set; }
         
         //<< Fields
 
         protected override void Serialize(IDictionary<string, object> json)
         {
+            var dataSource = DataSource.ToJson();
+
+            if (dataSource.Any())
+            {
+                json["dataSource"] = dataSource;
+            }
+
             //>> Serialization
         
-            var layer = Layer.ToJson();
-            if (layer.Any())
+            json["autoBind"] = AutoBind;
+                
+            if (Type.HasValue())
             {
-                json["layer"] = layer;
+                json["type"] = Type;
+            }
+            
+            if (Copyright.HasValue())
+            {
+                json["copyright"] = Copyright;
+            }
+            
+            var style = Style.ToJson();
+            if (style.Any())
+            {
+                json["style"] = style;
             }
                 
+            if (UrlTemplateId.HasValue())
+            {
+                json["urlTemplate"] = UrlTemplateId;
+            }
+            
         //<< Serialization
         }
     }

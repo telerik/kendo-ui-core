@@ -62,6 +62,8 @@ module CodeGen
 
                 @options.delete_if { |o| o.name == option[:name] }
 
+                option[:remove_existing] = true
+
                 add_option(option)
 
             end

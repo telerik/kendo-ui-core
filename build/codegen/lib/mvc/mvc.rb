@@ -17,6 +17,7 @@ module CodeGen::MVC::Wrappers
 
     SERIALIZATION_SKIP_LIST = [
         'map.center',
+        'map.layers.datasource',
         'map.markers.position',
         'actionsheet.items.text',
         'buttongroup.items.text',
@@ -27,6 +28,7 @@ module CodeGen::MVC::Wrappers
 
     IGNORED = [
         'map.center',
+        'map.layers.datasource',
         'map.markers.position',
         'popover.popup.direction',
         'layout.id',
@@ -169,6 +171,7 @@ module CodeGen::MVC::Wrappers
 
         def delete_ignored
             return if @options.nil?
+
 
             @options.delete_if do |option|
                 option.delete_ignored
@@ -328,10 +331,18 @@ module CodeGen::MVC::Wrappers
             csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FLUENT_FIELDS.result(binding))
         end
 
+        def setting_template
+            SETTING
+        end
+
+        def setting_fluent_template
+            SETTING_FLUENT
+        end
+
         def to_setting(filename, option)
             @files.push(filename)
 
-            csharp = File.exists?(filename) ? File.read(filename) : SETTING.result(option.get_binding)
+            csharp = File.exists?(filename) ? File.read(filename) : setting_template.result(option.get_binding)
 
             csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FIELDS.result(option.get_binding))
 
@@ -343,7 +354,7 @@ module CodeGen::MVC::Wrappers
         def to_fluent_setting(filename, option)
             @files.push(filename)
 
-            csharp = File.exists?(filename) ? File.read(filename) : SETTING_FLUENT.result(option.get_binding)
+            csharp = File.exists?(filename) ? File.read(filename) : setting_fluent_template.result(option.get_binding)
 
             csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FLUENT_FIELDS.result(option.get_binding))
         end

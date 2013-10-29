@@ -27,23 +27,45 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Fired when a marker is created, but is not rendered yet.
+        /// Fired when the map is reset, e.g. on initial load or during zoom.
         /// </summary>
-        /// <param name="handler">The name of the JavaScript function that will handle the markerCreated event.</param>
-        public MapEventBuilder MarkerCreated(string handler)
+        /// <param name="handler">The name of the JavaScript function that will handle the reset event.</param>
+        public MapEventBuilder Reset(string handler)
         {
-            Handler("markerCreated", handler);
+            Handler("reset", handler);
 
             return this;
         }
         
         /// <summary>
-        /// Fired when a marker is hovered.
+        /// Fired while the map viewport is being moved.
         /// </summary>
-        /// <param name="handler">The name of the JavaScript function that will handle the markerHover event.</param>
-        public MapEventBuilder MarkerHover(string handler)
+        /// <param name="handler">The name of the JavaScript function that will handle the pan event.</param>
+        public MapEventBuilder Pan(string handler)
         {
-            Handler("markerHover", handler);
+            Handler("pan", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fires after the map viewport has been moved.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the panEnd event.</param>
+        public MapEventBuilder PanEnd(string handler)
+        {
+            Handler("panEnd", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fired when a shape is clicked or tapped.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the shapeClick event.</param>
+        public MapEventBuilder ShapeClick(string handler)
+        {
+            Handler("shapeClick", handler);
 
             return this;
         }
@@ -60,12 +82,45 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// Fired when a shape is hovered.
+        /// Fired when the mouse enters a shape.
         /// </summary>
-        /// <param name="handler">The name of the JavaScript function that will handle the shapeHover event.</param>
-        public MapEventBuilder ShapeHover(string handler)
+        /// <param name="handler">The name of the JavaScript function that will handle the shapeMouseEnter event.</param>
+        public MapEventBuilder ShapeMouseEnter(string handler)
         {
-            Handler("shapeHover", handler);
+            Handler("shapeMouseEnter", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fired when the mouse leaves a shape.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the shapeMouseLeave event.</param>
+        public MapEventBuilder ShapeMouseLeave(string handler)
+        {
+            Handler("shapeMouseLeave", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fired when the map zoom level is about to change.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the zoomStart event.</param>
+        public MapEventBuilder ZoomStart(string handler)
+        {
+            Handler("zoomStart", handler);
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Fired when the map zoom level has changed.
+        /// </summary>
+        /// <param name="handler">The name of the JavaScript function that will handle the zoomEnd event.</param>
+        public MapEventBuilder ZoomEnd(string handler)
+        {
+            Handler("zoomEnd", handler);
 
             return this;
         }

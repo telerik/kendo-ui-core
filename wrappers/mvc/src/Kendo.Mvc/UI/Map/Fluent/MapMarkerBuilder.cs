@@ -20,12 +20,35 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// The initial markers to display on the map.
+        /// The marker color. Accepts a valid CSS color string, including hex and rgb.
         /// </summary>
-        /// <param name="configurator">The action that configures the marker.</param>
-        public MapMarkerBuilder Marker(Action<MapMarkerBuilder> configurator)
+        /// <param name="value">The value that configures the color.</param>
+        public MapMarkerBuilder Color(string value)
         {
-            configurator(new MapMarkerBuilder(container.Marker));
+            container.Color = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The marker size in pixels.
+        /// </summary>
+        /// <param name="value">The value that configures the size.</param>
+        public MapMarkerBuilder Size(double value)
+        {
+            container.Size = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value">The value that configures the shape.</param>
+        public MapMarkerBuilder Shape(MapMarkerShape value)
+        {
+            container.Shape = value;
+
             return this;
         }
         

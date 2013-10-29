@@ -1213,7 +1213,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </example>
         public virtual MapBuilder Map()
         {
-            return new MapBuilder(new Map(ViewContext, Initializer, UrlGenerator));
+            return new MapBuilder(new Map(ViewContext, Initializer, UrlGenerator), ViewContext, UrlGenerator);
         }
         //<< DataVizComponents
 
