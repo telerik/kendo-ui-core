@@ -34,7 +34,7 @@ $(function() {
         var isAllDay = selection.isAllDay; //if selected slot/event is all day
         var element = selection.element; //jQuery object holding selected elements
 
-        var message = "change -> selection from {0:g} till {1:g}";
+        var message = "change:: selection from {0:g} till {1:g}";
 
         if (element.data("uid")) {
             var event = $("#scheduler").data("kendoScheduler").occurrenceByUid(element.data("uid"));
