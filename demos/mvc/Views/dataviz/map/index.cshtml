@@ -1,14 +1,19 @@
 <div id="example" class="k-content absConf">
-    <div class="chart-wrapper" style="margin: auto;">
+    <div class="map-wrapper" style="margin: auto;">
         <div id="map"></div>
     </div>
     <script>
         function createMap() {
             $("#map").kendoMap({
+                center: [51.505, -0.09],
+                zoom: 2,
+                layers: [{
+                    type: "tile",
+                    urlTemplate: "http://tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png"
+                }]
             });
         }
 
         $(document).ready(createMap);
-        $(document).bind("kendo:skinChange", createMap);
     </script>
 </div>
