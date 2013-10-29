@@ -277,7 +277,7 @@ header .container h1.visible-sm {
     padding-bottom: 10px;
 }
 
-@@media (max-width: 767px) {
+@media (max-width: 767px) {
     header .container {
         padding-right: 0;
     }
