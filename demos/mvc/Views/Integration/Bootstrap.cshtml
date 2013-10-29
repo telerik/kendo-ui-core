@@ -207,10 +207,9 @@
                         <figure>
                             <img src="@Url.Content("~/content/integration/bootstrap-integration/photos/#= id #.jpg")" class="img-responsive" />
                             <figcaption class="hidden-xs">
-                                <h3>#: title #</h3>
+                                <h4>#: title #</h4>
                                 <p class="hidden-sm">
-                                    Longer description of the photo<br />
-                                    on two or more lines
+                                    #: description #
                                 </p>
                             </figcaption>
                         </figure>
@@ -916,16 +915,18 @@
             $("#listview").kendoListView({
                 dataSource: {
                     data: [
-                        { id: 1, title: "Photo Title" },
-                        { id: 2, title: "Photo Title" },
-                        { id: 3, title: "Photo Title" },
-                        { id: 4, title: "Photo Title" },
-                        { id: 5, title: "Photo Title" },
-                        { id: 6, title: "Photo Title" },
-                        { id: 7, title: "Photo Title" },
-                        { id: 8, title: "Photo Title" },
-                        { id: 9, title: "Photo Title" },
-                        { id: 10, title: "Photo Title" }
+                        { id: 1, title: "Sunrise", description: "And what a great July morning it was..." },
+                        { id: 2, title: "Fisherman", description: "Fishing on the north shore" },
+                        { id: 3, title: "Green Forest", description: "Summer is everywhere" },
+                        { id: 4, title: "Cactus", description: "A yellow one..." },
+                        { id: 5, title: "Moss", description: "Nice mossy green" },
+                        { id: 6, title: "Red Boat", description: "In the middle of nowhere" },
+                        { id: 7, title: "Country Road", description: "On my way home" },
+                        { id: 8, title: "Bloom", description: "Cherry blossoms in full bloom" },
+                        { id: 9, title: "San Francisco", description: "San Francisco by sunset" },
+                        { id: 10, title: "Peaks", description: "Was a great holiday" },
+                        { id: 11, title: "Thunderstorm", description: "Midnight storm on its way" },
+                        { id: 12, title: "Leafs", description: "Autumn leafs on the patio" }
                     ]
                 },
                 template: $("#listview-template").html()
