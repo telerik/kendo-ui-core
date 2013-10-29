@@ -2176,8 +2176,14 @@ kendo_module({
                     after: "End repeat after",
                     on: "End repeat on"
                 },
+                daily: {
+                    interval: ""
+                },
+                weekly: {
+                    interval: ""
+                },
                 monthly: {
-                    interval: " month(s)",
+                    interval: "",
                     repeatBy: "Repeat by: ",
                     dayOfMonth: "Day of the month",
                     dayOfWeek: "Day of the week",
@@ -2186,7 +2192,7 @@ kendo_module({
                     day: "Day "
                 },
                 yearly: {
-                    interval: " year(s)",
+                    interval: "",
                     repeatBy: "Repeat by: ",
                     dayOfMonth: "Day of the month",
                     dayOfWeek: "Day of the week",
