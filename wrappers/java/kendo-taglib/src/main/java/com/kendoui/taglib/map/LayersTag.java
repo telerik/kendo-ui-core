@@ -22,7 +22,10 @@ public class LayersTag extends BaseTag /* interfaces */ /* interfaces */ {
     public int doEndTag() throws JspException {
 //>> doEndTag
 //<< doEndTag
+        MapTag parent = (MapTag)findParentWithClass(MapTag.class);
 
+        parent.setLayers(this);
+        
         return super.doEndTag();
     }
 

@@ -3,18 +3,14 @@ package com.kendoui.taglib.map;
 
 
 import com.kendoui.taglib.BaseTag;
-
-
-
-
-
+import com.kendoui.taglib.DataBoundWidget;
 
 import com.kendoui.taglib.DataSourceTag;
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class LayerTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class LayerTag extends BaseTag implements DataBoundWidget {
     
     @Override
     public int doEndTag() throws JspException {

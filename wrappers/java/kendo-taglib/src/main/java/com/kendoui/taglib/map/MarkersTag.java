@@ -23,6 +23,10 @@ public class MarkersTag extends BaseTag /* interfaces */ /* interfaces */ {
 //>> doEndTag
 //<< doEndTag
 
+        MapTag parent = (MapTag)findParentWithClass(MapTag.class);
+
+        parent.setMarkers(this);
+        
         return super.doEndTag();
     }
 
