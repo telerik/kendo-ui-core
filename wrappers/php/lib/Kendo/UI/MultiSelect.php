@@ -31,6 +31,15 @@ class MultiSelect extends \Kendo\UI\Widget {
     }
 
     /**
+    * Controls whether to close the widget suggestion list on item selection.
+    * @param boolean $value
+    * @return \Kendo\UI\MultiSelect
+    */
+    public function autoClose($value) {
+        return $this->setProperty('autoClose', $value);
+    }
+
+    /**
     * Sets the data source of the MultiSelect.
     * @param array|\Kendo\Data\DataSource $value
     * @return \Kendo\UI\MultiSelect
