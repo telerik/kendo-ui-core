@@ -1344,7 +1344,7 @@ kendo_module({
         values = values.slice(firstDay).concat(values.slice(0, firstDay));
 
         for (idx = 0; idx < length; idx++) {
-            result += '<label><input class="k-recur-weekday-checkbox" type="checkbox" value="' + values[idx] + '" /> ' + shortNames[idx] + "</label>";
+            result += '<label class="k-check"><input class="k-recur-weekday-checkbox" type="checkbox" value="' + values[idx] + '" /> ' + shortNames[idx] + "</label>";
         }
 
         return result;
