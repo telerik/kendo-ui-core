@@ -27,6 +27,23 @@ $(function() {
         kendoConsole.log("cancel");
     }
 
+    function scheduler_change(e) {
+        var selection = e.selection;
+        var start = selection.start; //Selection start date
+        var end = selection.end; //Selection end date
+        var isAllDay = selection.isAllDay; //if selected slot/event is all day
+        var element = selection.element; //jQuery object holding selected elements
+
+        var message = "change -> selection from {0:g} till {1:g}";
+
+        if (element.data("uid")) {
+            var event = $("#scheduler").data("kendoScheduler").occurrenceByUid(element.data("uid"));
+            message += ". The selected event is '" + event.title + "'";
+        }
+
+        kendoConsole.log(kendo.format(message, start, end));
+    }
+
     function scheduler_edit(e) {
         kendoConsole.log("edit");
     }
@@ -74,6 +91,7 @@ $(function() {
             "month",
             "agenda"
         ],
+        selectable: true,
         dataBinding: scheduler_dataBinding,
         dataBound: scheduler_dataBound,
         save: scheduler_save,
@@ -81,6 +99,7 @@ $(function() {
         edit: scheduler_edit,
         add: scheduler_add,
         cancel: scheduler_cancel,
+        change: scheduler_change,
         moveStart: scheduler_moveStart,
         move: scheduler_move,
         moveEnd: scheduler_moveEnd,

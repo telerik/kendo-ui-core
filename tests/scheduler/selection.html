@@ -588,6 +588,142 @@
                    container.closest(".k-scheduler").kendoScheduler("destroy").remove();
                 }
             });
+
+            module("Selection events", {
+                setup: function() {
+                    container = $("<div />");
+                    $(document.body).append(container);
+                },
+
+                teardown: function() {
+                   container.closest(".k-scheduler").kendoScheduler("destroy").remove();
+                }
+            });
+
+            function setupWidget(options) {
+                now = kendo.date.today();
+                options = options || {};
+
+                options = $.extend({
+                    selectable: true,
+                    views: [
+                        "day",
+                        { type: "week", selected: true }
+                    ],
+                    dataSource: [
+                        { start: now, end: new Date(now + (60 * 60 * 1000)), title: "Test" }
+                    ]
+                }, options);
+
+                scheduler = new Scheduler(container, options);
+
+                container.focus();
+            }
+
+            test("Scheduler raises change event on slot selection", 5, function() {
+                setupWidget();
+
+                scheduler.bind("change", function(e) {
+                    var selection = e.selection;
+                    var td = container.find(".k-scheduler-header td").eq(5);
+                    var slot = scheduler.view().selectionByElement(td);
+
+                    deepEqual(selection.start, slot.startDate());
+                    deepEqual(selection.end, slot.endDate());
+                    equal(selection.isAllDay, slot.isDaySlot);
+
+                    equal(selection.element.length, 1);
+                    equal(selection.element[0], td[0]);
+                });
+
+                var td = container.find(".k-scheduler-header td").eq(5);
+
+                td.trigger({
+                    type: "mousedown",
+                    currentTarget: td
+                });
+            });
+
+            test("Scheduler raises change event on shift + keydown navigation", 1, function() {
+                setupWidget();
+
+                scheduler.bind("change", function(e) {
+                    var selection = e.selection;
+
+                    equal(selection.element.length, 2);
+                });
+
+                scheduler.wrapper.trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN,
+                    shiftKey: true
+                });
+            });
+
+            test("Scheduler raises change event on event click", 2, function() {
+                setupWidget();
+
+                scheduler.bind("change", function(e) {
+                    var selection = e.selection;
+                    var dataItem = scheduler.dataSource.view()[0];
+
+                    equal(selection.element.length, 1);
+                    equal(selection.element.eq(0).data("uid"), dataItem.uid);
+                });
+
+                var event = scheduler.wrapper.find(".k-event");
+
+                event.trigger({
+                    type: "mousedown",
+                    currentTarget: event
+                });
+            });
+
+            test("Scheduler raises change event with resources", function() {
+                var today = kendo.date.today();
+
+                setupWidget({
+                    dataSource: [
+                        { roomId: 2, start: today, end: new Date(today + (60 * 60 * 1000)), title: "Test" }
+                    ],
+                    group: {
+                        resources: ["Rooms"]
+                    },
+                    resources: [
+                    {
+                        field: "roomId",
+                        name: "Rooms",
+                        dataSource: [
+                            { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                            { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                        ],
+                        valuePrimitive: true,
+                        title: "Room"
+                    }]
+                });
+
+                scheduler.bind("change", function(e) {
+                    var selection = e.selection;
+                    var dataItem = scheduler.dataSource.view()[0];
+                    var resources = selection.resources;
+
+                    equal(selection.element.length, 1);
+                    equal(selection.element.eq(0).data("uid"), dataItem.uid);
+
+                    equal(resources.length, 1);
+                    equal(resources[0].resource.name, "Rooms");
+                    equal(resources[0].value, 2);
+
+                });
+
+                var event = scheduler.wrapper.find(".k-event");
+
+                event.trigger({
+                    type: "mousedown",
+                    currentTarget: event
+                });
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

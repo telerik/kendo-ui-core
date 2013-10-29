@@ -1572,6 +1572,16 @@ kendo_module({
                 current.setAttribute("id", this._ariaId);
                 current.setAttribute("aria-label", labelFormat);
                 wrapper.attr("aria-activedescendant", this._ariaId);
+
+                this.trigger("change", {
+                    selection: {
+                        start: new Date(selection.start),
+                        end: new Date(selection.end),
+                        isAllDay: selection.isAllDay,
+                        element: this.wrapper.find("td.k-state-selected, div.k-state-selected"),
+                        resources: view._resourceByGroupIndex(selection.groupIndex)
+                    }
+                });
             }
         },
 
@@ -1809,7 +1819,8 @@ kendo_module({
             "resizeStart",
             "resize",
             "resizeEnd",
-            "navigate"
+            "navigate",
+            "change"
         ],
 
         destroy: function() {
@@ -2128,7 +2139,6 @@ kendo_module({
             });
         },
 
-        //TODO: Refactor
         _updateEvent: function(dir, event, eventInfo) {
             var that = this;
 

@@ -1338,6 +1338,28 @@ kendo_module({
             return result;
         },
 
+        _resourceByGroupIndex: function(resourceIndex) {
+            var resources = this.groupedResources;
+            var result = [];
+
+            if (resources.length) {
+                for (var idx = resources.length - 1; idx >=0; idx--) {
+                    var resource = resources[idx];
+
+                    if (resource.name) {
+                        result.push({
+                            resource: resource,
+                            value: this._resourceValue(resource, resource.dataSource.at(resourceIndex % resource.dataSource.total()))
+                        })
+                    }
+
+                    resourceIndex = Math.floor(resourceIndex / resource.dataSource.total());
+                }
+            }
+
+            return result;
+        },
+
         _createResizeHint: function(left, top, width, height) {
             return $(HINT).css({
                 left: left,
