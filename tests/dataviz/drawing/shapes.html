@@ -131,11 +131,6 @@
         equal(shape.options.fill.opacity, 1);
     });
 
-    test("fill opacity is 1 by default", function() {
-        shape.fill("red");
-        equal(shape.options.fill.opacity, 1);
-    });
-
     test("fill triggers optionsChange", function() {
         shape.observer = {
             optionsChange: function() {
@@ -155,16 +150,6 @@
 
         equal(shape.options.stroke.color, "red");
         equal(shape.options.stroke.width, 2);
-        equal(shape.options.stroke.opacity, 1);
-    });
-
-    test("stroke width is 1 by default", function() {
-        shape.stroke("red");
-        equal(shape.options.stroke.width, 1);
-    });
-
-    test("stroke opacity is 1 by default", function() {
-        shape.stroke("red");
         equal(shape.options.stroke.opacity, 1);
     });
 

@@ -3,7 +3,7 @@
     var proxy = $.proxy,
 
         kendo = window.kendo,
-        Observable = kendo.Observable,
+        Class = kendo.Class,
         DataSource = kendo.data.DataSource,
 
         dataviz = kendo.dataviz,
@@ -16,35 +16,37 @@
         Location = map.Location;
 
     // Constants ==============================================================
-    var ShapeLayer = Observable.extend({
+    var ShapeLayer = Class.extend({
         init: function(map, options) {
-            Observable.fn.init.call(this);
-
             options = deepExtend({}, options, {
                 width: map.element.width(),
                 height: map.element.height()
             });
 
             this._initOptions(options);
-            this.bind(this.events, options);
+            this.map = map;
 
             this.element = $("<div class='k-layer'></div>").appendTo(
                 map.scrollWrap // TODO: API for allocating a scrollable element?
             ).css("width", options.width).css("height", options.height);
-
-            this.map = map;
-            this.surface = new d.svg.Surface(this.element[0], options); // TODO: Automatic choice
             this.movable = new kendo.ui.Movable(this.element);
 
+            this.surface = new d.svg.Surface(this.element[0], options); // TODO: Automatic choice
+
+            this._click = this._handler("shapeClick");
+            this.surface.bind("click", this._click);
+
+            this._mouseenter = this._handler("shapeMouseEnter");
+            this.surface.bind("mouseenter", this._mouseenter);
+
+            this._mouseleave = this._handler("shapeMouseLeave");
+            this.surface.bind("mouseleave", this._mouseleave);
+
             map.bind("reset", proxy(this.reset, this));
-            map.bind("dragEnd", proxy(this._dragEnd, this));
+            map.bind("panEnd", proxy(this._panEnd, this));
 
             this._initDataSource();
         },
-
-        events: [
-            "shapeCreated"
-        ],
 
         options: {
             autoBind: true,
@@ -113,9 +115,10 @@
 
         _loadPolygon: function(container, rings, dataItem) {
             var shape = this._buildPolygon(rings);
+            shape.dataItem = dataItem;
 
-            var args = { shape: shape, dataItem: dataItem };
-            if (!this.trigger("shapeCreated", args)) {
+            var args = { layer: this, shape: shape };
+            if (!this.map.trigger("shapeCreated", args)) {
                 container.append(shape);
             }
         },
@@ -142,12 +145,27 @@
             return path;
         },
 
-        _dragEnd: function() {
+        _panEnd: function() {
             var map = this.map;
             var nw = map.toScreenPoint(map.viewport().nw);
 
             this.surface.translate(nw);
             this.movable.moveTo(nw);
+        },
+
+        _handler: function(event) {
+            var layer = this;
+            return function(e) {
+                if (e.shape) {
+                    var args = {
+                        layer: layer,
+                        shape: e.shape,
+                        originalEvent: e.originalEvent
+                    };
+
+                    layer.map.trigger(event, args);
+                }
+            };
         }
     });
 

@@ -84,20 +84,25 @@
         geometryChange: util.mixins.geometryChange,
 
         fill: function(color, opacity) {
-            this.options.set("fill", {
-               color: color,
-               opacity: opacity || 1
-            });
+            this.options.set("fill.color", color);
+
+            if (defined(opacity)) {
+                this.options.set("fill.opacity", opacity);
+            }
 
             return this;
         },
 
         stroke: function(color, width, opacity) {
-            this.options.set("stroke", {
-               color: color,
-               width: width || 1,
-               opacity: opacity || 1
-            });
+            this.options.set("stroke.color", color);
+
+            if (defined(width)) {
+               this.options.set("stroke.width", width);
+            }
+
+            if (defined(opacity)) {
+               this.options.set("stroke.opacity", opacity);
+            }
 
             return this;
         }

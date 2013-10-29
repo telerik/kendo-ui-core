@@ -8,6 +8,7 @@
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
+        defined = dataviz.defined,
         renderTemplate = dataviz.renderTemplate,
 
         d = dataviz.drawing,
@@ -35,6 +36,10 @@
             this.bind(this.events, this.options);
 
             this._root = new RootNode();
+            this._click = this._handler("click");
+            this._mouseenter = this._handler("mouseenter");
+            this._mouseleave = this._handler("mouseleave");
+
             this._appendTo(container);
         },
 
@@ -44,7 +49,9 @@
         },
 
         events: [
-            "click"
+            "click",
+            "mouseenter",
+            "mouseleave"
         ],
 
         translate: function(offset) {
@@ -89,25 +96,27 @@
             this._root.attachTo(this.element);
 
             var element = $(this.element);
-            this._click = $.proxy(this._click, this);
+
             element.on("click", this._click);
+            element.on("mouseover", this._mouseenter);
+            element.on("mouseout", this._mouseleave);
 
             this._width = element.width();
             this._height = element.height();
         },
 
-        _click: function(e) {
-            var node = e.target._kendoNode,
-                shape = null;
+        _handler: function(event) {
+            var surface = this;
 
-            if (node) {
-                shape = node.srcElement;
-            }
-
-            this.trigger("click", {
-                shape: shape,
-                originalEvent: e
-            });
+            return function(e) {
+                var node = e.target._kendoNode;
+                if (node) {
+                    surface.trigger(event, {
+                        shape: node.srcElement,
+                        originalEvent: e
+                    });
+                }
+            };
         }
     });
 
@@ -231,25 +240,50 @@
         },
 
         optionsChange: function(e) {
-            var name = this.attributeMap[e.field];
+            switch(e.field) {
+                case "fill":
+                    this.allAttr(this.mapFill(e.value));
+                    break;
 
-            if (name) {
-                this.attr(name, e.value);
-            } else if (e.field === "visible") {
-                this.attr("visibility", e.value ? "visible" : "hidden");
+                case "fill.color":
+                    this.allAttr(this.mapFill({ color: e.value }));
+                    break;
+
+                case "stroke":
+                    this.allAttr(this.mapStroke(e.value));
+                    break;
+
+                case "visible":
+                    this.attr("visibility", e.value ? "visible" : "hidden");
+                    break;
+
+                default:
+                    var name = this.attributeMap[e.field];
+                    if (name) {
+                        this.attr(name, e.value);
+                    }
+                    break;
             }
 
             this.invalidate();
         },
 
         attributeMap: {
-            "fill.color": "fill",
-            "stroke.color": "stroke"
+            "fill.opacity": "fill-opacity",
+            "stroke.color": "stroke",
+            "stroke.width": "stroke-width",
+            "stroke.opacity": "stroke-opacity"
         },
 
         attr: function(name, value) {
             if (this.element) {
                 this.element.setAttribute(name, value);
+            }
+        },
+
+        allAttr: function(attrs) {
+            for (var i = 0; i < attrs.length; i++) {
+                this.attr(attrs[i][0], attrs[i][1]);
             }
         },
 
@@ -277,14 +311,30 @@
             }
         },
 
-        renderStroke: function() {
-            var stroke = this.srcElement.options.stroke || {};
+        mapStroke: function(stroke) {
+            var attrs = [];
 
-            return renderAttr("stroke", stroke.color) +
-                   renderAttr("stroke-width", stroke.width) +
-                   renderAttr("stroke-opacity", stroke.opacity) +
-                   renderAttr("stroke-dasharray", this.renderDashType(stroke)) +
-                   renderAttr("stroke-linecap", this.renderLinecap(stroke));
+            if (stroke) {
+                attrs.push(["stroke", stroke.color]);
+                attrs.push(["stroke-width", stroke.width]);
+                attrs.push(["stroke-linecap", this.renderLinecap(stroke)]);
+
+                if (defined(stroke.opacity)) {
+                    attrs.push(["stroke-opacity", stroke.opacity]);
+                }
+
+                if (defined(stroke.dashType)) {
+                    attrs.push(["stroke-dasharray", this.renderDashType(stroke)]);
+                }
+            }
+
+            return attrs;
+        },
+
+        renderStroke: function() {
+            return renderAllAttr(
+                this.mapStroke(this.srcElement.options.stroke)
+            );
         },
 
         renderDashType: function (stroke) {
@@ -311,15 +361,26 @@
             return (dashType && dashType != SOLID) ? BUTT : lineCap;
         },
 
-        renderFill: function() {
-            var fill = this.srcElement.options.fill;
+        mapFill: function(fill) {
+            var attrs = [];
 
             if (fill && fill.color !== TRANSPARENT) {
-                return renderAttr("fill", fill.color) +
-                       renderAttr("fill-opacity", fill.opacity);
+                attrs.push(["fill", fill.color]);
+
+                if (defined(fill.opacity)) {
+                    attrs.push(["fill-opacity", fill.opacity]);
+                }
+            } else {
+                attrs.push(["fill", NONE]);
             }
 
-            return renderAttr("fill", NONE);
+            return attrs;
+        },
+
+        renderFill: function() {
+            return renderAllAttr(
+                this.mapFill(this.srcElement.options.fill)
+            );
         },
 
         renderCursor: function() {
@@ -406,6 +467,15 @@
                 style.top = top + "px";
             }
         }
+    }
+
+    function renderAllAttr(attrs) {
+        var output = "";
+        for (var i = 0; i < attrs.length; i++) {
+            output += renderAttr(attrs[i][0], attrs[i][1]);
+        }
+
+        return output;
     }
 
     // Exports ================================================================
