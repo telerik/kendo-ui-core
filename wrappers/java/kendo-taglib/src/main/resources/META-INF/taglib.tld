@@ -13862,10 +13862,10 @@ instance.</description>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>The layer type. Supported types are:</description>
+            <description></description>
             <name>type</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>The URL template for tile layers. Template variables:</description>
@@ -14004,10 +14004,10 @@ You can also use a kendo.dataviz.map.Location instance.</description>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>The marker shape. Supported shapes:</description>
+            <description></description>
             <name>shape</name>
             <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.String</type>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>The marker size in pixels.</description>

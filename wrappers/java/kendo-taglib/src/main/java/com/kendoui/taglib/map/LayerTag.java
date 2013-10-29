@@ -75,11 +75,11 @@ public class LayerTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("dataSource", dataSource);
     }
 
-    public java.lang.String getType() {
-        return (java.lang.String)getProperty("type");
+    public java.lang.Object getType() {
+        return (java.lang.Object)getProperty("type");
     }
 
-    public void setType(java.lang.String value) {
+    public void setType(java.lang.Object value) {
         setProperty("type", value);
     }
 
