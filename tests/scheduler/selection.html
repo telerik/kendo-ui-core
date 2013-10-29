@@ -601,8 +601,11 @@
             });
 
             function setupWidget(options) {
-                now = kendo.date.today();
+                today = kendo.date.today();
                 options = options || {};
+
+                var end = new Date(today);
+                end.setHours(1);
 
                 options = $.extend({
                     selectable: true,
@@ -611,7 +614,7 @@
                         { type: "week", selected: true }
                     ],
                     dataSource: [
-                        { start: now, end: new Date(now + (60 * 60 * 1000)), title: "Test" }
+                        { start: today, end: end, title: "Test" }
                     ]
                 }, options);
 
@@ -681,10 +684,12 @@
 
             test("Scheduler raises change event with resources", function() {
                 var today = kendo.date.today();
+                var end = new Date(today);
+                end.setHours(1);
 
                 setupWidget({
                     dataSource: [
-                        { roomId: 2, start: today, end: new Date(today + (60 * 60 * 1000)), title: "Test" }
+                        { roomId: 2, start: today, end: end, title: "Test" }
                     ],
                     group: {
                         resources: ["Rooms"]
