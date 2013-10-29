@@ -119,6 +119,7 @@
     <Content Include="bin\System.Web.WebPages.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="content\dataviz\js\kendo.examples.nav.js" />
+    <Content Include="content\dataviz\map\js\chroma.min.js" />
     <Content Include="content\dataviz\overview\bar.png" />
     <Content Include="content\dataviz\overview\bubble.png" />
     <Content Include="content\dataviz\overview\donut.png" />
@@ -593,6 +594,7 @@
     <None Include="content\dataviz\js\april-sales.json" />
     <None Include="content\dataviz\js\budget-report.json" />
     <None Include="content\dataviz\js\antenna-gain.json" />
+    <None Include="content\dataviz\map\countries-users.geo.json" />
     <None Include="content\dataviz\js\monthly-temperatures.json" />
     <None Include="content\dataviz\js\wind-data.json" />
     <None Include="content\dataviz\js\job-stats.json" />
