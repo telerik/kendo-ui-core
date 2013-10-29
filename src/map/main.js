@@ -77,7 +77,7 @@ kendo_module({
             "shapeCreated",
             "shapeMouseEnter",
             "shapeMouseLeave",
-            "zoom",
+            "zoomStart",
             "zoomEnd"
         ],
 
