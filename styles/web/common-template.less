@@ -490,8 +490,8 @@ html body .k-button-bare.k-upload-button:hover
 .k-multiselect .k-delete { .sprite-position(10, 5); }
 .k-multiselect .k-state-hover .k-delete { .sprite-position(11, 5); }
 .k-i-tick, .k-insert, .k-update, .k-check:checked,
-.k-mobile-list .k-edit-field > [type=checkbox],
-.k-mobile-list .k-edit-field > [type=radio] { .sprite-hoverable(2, 2); }
+.k-mobile-list .k-edit-field [type=checkbox],
+.k-mobile-list .k-edit-field [type=radio] { .sprite-hoverable(2, 2); }
 .k-i-cancel, .k-cancel, .k-denied { .sprite-hoverable(2, 3); }
 .k-i-plus, .k-add { .sprite-hoverable(2, 4); }
 .k-i-funnel, .k-filter { .sprite-hoverable(2, 5); }
@@ -5412,8 +5412,8 @@ div[name="recurrenceRule"] > .k-dropdown
 
 .k-check[type=checkbox],
 .k-check[type=radio],
-.k-mobile-list .k-edit-field > [type=checkbox],
-.k-mobile-list .k-edit-field > [type=radio]
+.k-mobile-list .k-edit-field [type=checkbox],
+.k-mobile-list .k-edit-field [type=radio]
 {
     appearance: none;
     -moz-appearance: none;
@@ -5423,8 +5423,8 @@ div[name="recurrenceRule"] > .k-dropdown
 
 .km-pane-wrapper .k-mobile-list .k-link .k-check,
 .km-pane-wrapper .k-mobile-list .k-label .k-check,
-.k-mobile-list .k-edit-field > [type=checkbox],
-.k-mobile-list .k-edit-field > [type=radio]
+.k-mobile-list .k-edit-field [type=checkbox],
+.k-mobile-list .k-edit-field [type=radio]
 {
     border: 0;
     font-size: inherit;
@@ -5489,14 +5489,15 @@ div[name="recurrenceRule"] > .k-dropdown
     position: relative;
 }
 
-.km-pane-wrapper .k-mobile-list .k-scheduler-timezones .k-edit-field:nth-child(2)
-{
-    padding-left: 1em;
-}
-
-.km-pane-wrapper .k-mobile-list .k-scheduler-timezones .k-edit-field:nth-child(2) label
+.km-pane-wrapper .k-mobile-list .k-edit-field > * > select:not([multiple]),
+.km-pane-wrapper .k-mobile-list .k-scheduler-timezones .k-edit-field label.k-check
 {
     width: 100%;
+}
+
+.km-pane-wrapper .k-mobile-list .k-scheduler-timezones .k-edit-field label.k-check
+{
+    text-indent: 1em;
 }
 
 .km-pane-wrapper .k-mobile-list .k-edit-field > .k-button
@@ -5547,6 +5548,11 @@ div[name="recurrenceRule"] > .k-dropdown
     .km-pane-wrapper .k-mobile-list .k-edit-field > .k-button
     {
         margin-left: 50%;
+    }
+
+    .km-pane-wrapper .k-mobile-list .k-edit-field > .k-timezone-button
+    {
+        margin-left: 1em;
     }
 }
 

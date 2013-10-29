@@ -391,8 +391,8 @@ textarea.k-textbox:hover,
 .k-state-disabled .k-icon,
 .k-column-menu .k-sprite,
 .k-mobile-list .k-check:checked,
-.k-mobile-list .k-edit-field > [type=checkbox]:checked,
-.k-mobile-list .k-edit-field > [type=radio]:checked
+.k-mobile-list .k-edit-field [type=checkbox]:checked,
+.k-mobile-list .k-edit-field [type=radio]:checked
 {
     opacity: @default-icon-opacity;
 }
@@ -403,8 +403,8 @@ textarea.k-textbox:hover,
 .k-drop-hint,
 .k-column-menu .k-sprite,
 .k-mobile-list .k-check:checked,
-.k-mobile-list .k-edit-field > [type=checkbox]:checked,
-.k-mobile-list .k-edit-field > [type=radio]:checked
+.k-mobile-list .k-edit-field [type=checkbox]:checked,
+.k-mobile-list .k-edit-field [type=radio]:checked
 {
     background-image: @sprite-image;
     border-color: transparent;
@@ -751,7 +751,8 @@ td.k-state-focused.k-state-selected,
 .k-imagebrowser-dropzone,
 .k-mobile-list .k-item > .k-link:active,
 .k-mobile-list .k-item > .k-label:active,
-.k-mobile-list .k-edit-label.k-check:active
+.k-mobile-list .k-edit-label.k-check:active,
+.k-mobile-list .k-scheduler-timezones .k-edit-field:nth-child(2):active
 {
     color: @hover-text-color;
     background-color: @hover-background-color;
@@ -1396,7 +1397,8 @@ div.k-imagebrowser-dropzone em
 /* Column Menu in Adaptive Grid */
 
 .km-pane-wrapper .k-mobile-list .k-item,
-.km-pane-wrapper .k-mobile-list .k-edit-label
+.km-pane-wrapper .k-mobile-list .k-edit-label,
+.km-pane-wrapper .k-mobile-list .k-edit-field
 {
     color: @widget-text-color;
 }
@@ -1739,9 +1741,9 @@ div.k-imagebrowser-dropzone em
     .k-tool-icon.k-state-selected,
     .k-tool-icon.k-state-selected.k-state-hover,
     .k-column-menu .k-sprite,
-    .k-mobile-list .k-check,
-    .k-mobile-list .k-edit-field > [type=checkbox],
-    .k-mobile-list .k-edit-field > [type=radio] {
+    .k-mobile-list .k-check:checked,
+    .k-mobile-list .k-edit-field [type=checkbox]:checked,
+    .k-mobile-list .k-edit-field [type=radio]:checked {
         background-image: url('@{image-folder}/sprite_2x.png');
         background-size: 340px 336px;
     }

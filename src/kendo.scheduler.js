@@ -1138,6 +1138,15 @@ kendo_module({
                     validateOnBlur: true
                 }).data("kendoEditable");
 
+            // TODO: Replace this code with labels and for="ID"
+            container.find("input[type=checkbox],input[type=radio]")
+                     .parent(".k-edit-field")
+                     .addClass("k-check")
+                     .prev(".k-edit-label")
+                     .addClass("k-check")
+                     .click(function() {
+                         $(this).next().children("input").click();
+                     });
 
             if (!this.trigger("edit", { container: container, model: model })) {
 

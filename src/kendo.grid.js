@@ -1509,6 +1509,7 @@ kendo_module({
                     clearContainer: false
                 }).data("kendoEditable");
 
+            // TODO: Replace this code with labels and for="ID"
             if (that._isMobile) {
                 container.find("input[type=checkbox],input[type=radio]")
                          .parent(".k-edit-field")
