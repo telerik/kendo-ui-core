@@ -16,15 +16,6 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * The layer type. Supported types are:
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\MapLayer
-    */
-    public function type($value) {
-        return $this->setProperty('type', $value);
-    }
-
-    /**
     * Sets the data source of the MapLayer.
     * @param array|\Kendo\Data\DataSource $value
     * @return \Kendo\Dataviz\UI\MapLayer
@@ -71,6 +62,15 @@ data source is fired. By default the widget will bind to the data source specifi
     */
     public function urlTemplate($value) {
         return $this->setProperty('urlTemplate', $value);
+    }
+
+    /**
+    * 
+    * @param  $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function type($value) {
+        return $this->setProperty('type', $value);
     }
 
 //<< Properties

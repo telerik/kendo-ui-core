@@ -34,8 +34,8 @@ You can also use a kendo.dataviz.map.Location instance.
     }
 
     /**
-    * The marker shape. Supported shapes:
-    * @param string $value
+    * 
+    * @param  $value
     * @return \Kendo\Dataviz\UI\MapMarker
     */
     public function shape($value) {
