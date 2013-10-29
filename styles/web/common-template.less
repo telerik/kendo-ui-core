@@ -2363,10 +2363,10 @@ span.k-datetimepicker .k-select+.k-select
 .k-dropdown-wrap .k-input,
 .k-selectbox .k-input
 {
-    height: 1.65em;
-    line-height: 1.65em;
+    height: @input-height;
+    line-height: @input-height;
     padding: 0.177em 0;
-    text-indent: 4px;
+    text-indent: @input-indent;
     border: 0;
     margin: 0;
 }
@@ -2384,8 +2384,8 @@ span.k-datetimepicker .k-select+.k-select
 .k-numeric-wrap .k-select,
 .k-dropdown-wrap .k-select
 {
-    min-height: 1.65em;
-    line-height: 2em;
+    min-height: @input-height;
+    line-height: (@input-height + .35em);
     vertical-align: middle;
     -moz-box-sizing: border-box;
     text-align: center;
@@ -2480,7 +2480,7 @@ body .k-datetimepicker .k-select
     height: 1.31em;
     line-height: 1.31em;
     padding: 0.18em 0;
-    text-indent: 4px;
+    text-indent: @input-indent;
     border: 0;
     margin: 1px 0 0;
     float: left;
@@ -2801,12 +2801,13 @@ div.k-treeview
 
 input.k-textbox
 {
-    height: 2.13em;
+    height: (@input-height + 0.48em);
+    text-indent: @input-indent;
 }
 
 .k-ie input.k-textbox
 {
-    text-indent: 2px;
+    text-indent: (@input-indent - 2);
 }
 
 .k-ff input.k-textbox
@@ -2814,7 +2815,7 @@ input.k-textbox
     height: 2.17em;
 }
 
-.k-ie7 input.k-textbox { line-height: 1.72em; height: 1.72em; text-indent: .3em; }
+.k-ie7 input.k-textbox { line-height: 1.72em; height: 1.72em; text-indent: @input-indent; }
 
 textarea.k-textbox
 {
