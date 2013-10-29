@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .k-chart,
 .k-gauge,
 .k-sparkline,
@@ -215,13 +216,13 @@ span.k-sparkline,
 	position: relative;
 }
 
-.k-compass button
+.k-compass > button
 {
 	border-color: transparent;
 	background: none;
 }
 
-.k-compass .k-button
+.k-compass > .k-button
 {
 	padding: 0;
 	line-height: 10px;
@@ -257,7 +258,7 @@ span.k-sparkline,
 	margin-top: -9px;
 }
 
-.k-compass .k-compass-c
+.k-compass > .k-compass-c
 {
 	width: 16px;
 	height: 16px;
@@ -267,7 +268,7 @@ span.k-sparkline,
 	margin-top: -8px;
 }
 
-.k-compass-c span
+.k-compass-c > span
 {
 	display: block;
 	width: 6px;
