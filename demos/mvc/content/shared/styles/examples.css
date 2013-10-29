@@ -2636,26 +2636,26 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     font-size: 1.2rem;
 }
 
-#example .km-wp-light .km-content,
-#example .km-wp-light .km-button,
-#example .km-wp-light .km-navbar,
-#example .km-wp-light .km-detail,
-.mobileExample .km-wp-light input:not(.k-input),
+.mobileExample .km-wp-light .km-content,
+.mobileExample .km-wp-light .km-button,
+.mobileExample .km-wp-light .km-navbar,
+.mobileExample .km-wp-light .km-detail,
+.mobileExample .km-wp-light *:not(.k-label) > input:not(.k-input),
 .mobileExample .km-wp-light .k-dropdown,
-.mobileExample .km-wp-light textarea,
-.mobileExample .km-wp-light select
+.mobileExample .km-wp-light *:not(.k-label) > textarea,
+.mobileExample .km-wp-light *:not(.k-label) > select
 {
     background: #fff;
 }
 
-#example .km-wp-dark .km-content,
-#example .km-wp-dark .km-button,
-#example .km-wp-dark .km-navbar,
-#example .km-wp-dark .km-detail,
-.mobileExample .km-wp-dark input:not(.k-input),
+.mobileExample .km-wp-dark .km-content,
+.mobileExample .km-wp-dark .km-button,
+.mobileExample .km-wp-dark .km-navbar,
+.mobileExample .km-wp-dark .km-detail,
+.mobileExample .km-wp-dark *:not(.k-label) > input:not(.k-input),
 .mobileExample .km-wp-dark .k-dropdown,
-.mobileExample .km-wp-dark textarea,
-.mobileExample .km-wp-dark select
+.mobileExample .km-wp-dark *:not(.k-label) > textarea,
+.mobileExample .km-wp-dark *:not(.k-label) > select
 {
     background: #000;
 }

@@ -5533,6 +5533,22 @@ div[name="recurrenceRule"] > .k-dropdown
     margin: 0 0 0 .18em;
 }
 
+@media all and (max-width: 699px) {
+    .km-pane-wrapper *:not(.k-state-default) > input:not([type="checkbox"]):not([type="radio"]),
+    .km-pane-wrapper .k-mobile-list select:not([multiple]),
+    .km-pane-wrapper .k-mobile-list textarea,
+    .km-pane-wrapper .k-mobile-list .k-widget,
+    .km-pane-wrapper .k-edit-field > *:not([type="checkbox"]):not([type="radio"]):not(.k-button)
+    {
+        width: 50%;
+    }
+
+    .km-pane-wrapper .k-mobile-list .k-edit-field > .k-button
+    {
+        margin-left: 50%;
+    }
+}
+
 /* Tooltip */
 
 .k-tooltip
