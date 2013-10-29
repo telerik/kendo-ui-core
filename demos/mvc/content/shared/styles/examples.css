@@ -1167,6 +1167,7 @@ p#copy
 .progressBarIcon{background-position:-120px -140px;}
 .chartFunnelIcon{background-position:-100px -140px;}
 .chartBoxPlotIcon{background-position:-140px -140px;}
+.mapIcon{background-position:-60px -40px;}
 
 #mainWrapInner
 {
@@ -1646,10 +1647,10 @@ p#copy
 .widgetGrid .qrcodes
 {
     width:180px;
-    min-height: 100px;
+    min-height: 98px;
     background:rgba(221, 221, 221, 0.33);
     margin-left: -180px;
-    margin-top: 78px;
+    margin-top: 80px;
 }
 
 .widgetGrid .gauges ul,
@@ -1662,14 +1663,15 @@ p#copy
 .widgetGrid .geoviz
 {
     width:150px;
-    min-height: 100px;
+    min-height: 80px;
     background:rgba(221, 221, 221, 0.15);
 }
 
 .widgetGrid .geoviz
 {
     margin-left: -150px;
-    margin-top: 78px;
+    margin-top: 80px;
+    min-height: 98px;
 }
 
 .wideCol.dashboards ul,
