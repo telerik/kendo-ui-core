@@ -1,3 +1,26 @@
-        <div id="example" class="k-content">
-            <a href="@Url.Content("~/bootstrap/")">Launch demo</a>
-        </div>
+<div id="example" class="k-content">
+    <div id="bootstrap">
+        <h2>Kendo UI &hearts; Bootstrap</h2>
+        <p>This demo shows how to use Kendo UI and <a href="http://getbootstrap.com/" title="Bootstrap">Twitter Bootstrap</a> on the same page.</p>
+        <a class="launchButton" target="_blank" href="@Url.Content("~/bootstrap/")">Launch Demo</a>
+    </div>
+    <style>
+        #example {
+            background-color: #fff;
+        }
+        #bootstrap {
+            background: url('../../content/shared/images/bootstrap.png') no-repeat left bottom transparent;
+            min-height: 200px;
+            padding: 80px 0 0 480px;
+            margin: 0 20px 30px;
+            border-bottom: 1px solid #DFDFDF;
+        }
+        #bootstrap p a {
+            color: #E26B1D;
+            text-decoration: none;
+        }
+        #bootstrap p a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</div>
