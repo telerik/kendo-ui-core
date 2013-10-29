@@ -1639,7 +1639,7 @@ kendo_module({
 
             var template = kendo.template('<ul>'+
                 '<li class="km-actionsheet-title">#:title#</li>'+
-                '<li><a href="\\#">#:confirmDelete#</a></li>'+
+                '<li><a href="\\#" class="k-button">#:confirmDelete#</a></li>'+
             '</ul>');
 
             var html = $(template(messages)).appendTo(that.view.element);
