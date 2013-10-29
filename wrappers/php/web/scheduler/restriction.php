@@ -29,8 +29,37 @@ $data = array(
             )
 );
 
+$model = new \Kendo\Data\DataSourceSchemaModel();
+
+$startField = new \Kendo\Data\DataSourceSchemaModelField('start');
+$startField->type('date');
+
+$endField = new \Kendo\Data\DataSourceSchemaModelField('end');
+$endField->type('date');
+
+$titleField = new \Kendo\Data\DataSourceSchemaModelField('title');
+$titleField->defaultValue('No title')
+        ->validation(array('required' => true));
+
+$roomIdField = new \Kendo\Data\DataSourceSchemaModelField('roomId');
+$roomIdField->nullable(true);
+
+$atendeeField = new \Kendo\Data\DataSourceSchemaModelField('attendee');
+$atendeeField->defaultValue(1);
+
+$model->id('meetingID')
+    ->addField($roomIdField)
+    ->addField($startField)
+    ->addField($endField)
+    ->addField($atendeeField)
+    ->addField($titleField);
+
+$schema = new \Kendo\Data\DataSourceSchema();
+$schema->model($model);
+
 $dataSource = new \Kendo\Data\DataSource();
-$dataSource->data($data);
+$dataSource->data($data)
+        ->schema($schema);
 
 $roomResource = new \Kendo\UI\SchedulerResource();
 $roomResource->field('roomId')
@@ -42,10 +71,9 @@ $roomResource->field('roomId')
     ));
 
 $atendeesResource = new \Kendo\UI\SchedulerResource();
-$atendeesResource->field('atendees')
-    ->title('Atendees')
-    ->multiple(true)
-    ->name('Atendees')
+$atendeesResource->field('attendee')
+    ->title('Atendee')
+    ->name('Atendee')
     ->dataSource(array(
         array('text'=> 'Alex', 'value' => 1, 'color' => '#f8a398'),
         array('text'=> 'Bob', 'value' => 2, 'color' => '#51a0ed')
