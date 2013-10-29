@@ -399,7 +399,11 @@ kendo_module({
                 computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
             }
 
-            width = computedWidth - (list.outerWidth() - list.width());
+            if (list.css("box-sizing") !== "border-box") {
+                width = computedWidth - (list.outerWidth() - list.width());
+            } else {
+                width = computedWidth;
+            }
 
             list.css({
                 fontFamily: wrapper.css("font-family"),
