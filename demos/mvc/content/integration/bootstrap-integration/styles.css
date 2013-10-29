@@ -225,7 +225,7 @@ header .k-dropdown-wrap.k-state-default .k-input {
 
 #tabstrip .k-tabstrip-items span {
     float: left;
-    line-height: 18px;
+    line-height: 1.3em;
     vertical-align: middle;
 }
 
