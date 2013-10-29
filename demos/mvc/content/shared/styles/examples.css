@@ -2660,6 +2660,20 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     background: #000;
 }
 
+.mobileExample .km-pane-wrapper *:not(.k-state-default) > input:not([type="checkbox"]):not([type="radio"]),
+.mobileExample .km-pane-wrapper .k-mobile-list select:not([multiple]),
+.mobileExample .km-pane-wrapper .k-mobile-list textarea,
+.mobileExample .km-pane-wrapper .k-mobile-list .k-widget,
+.mobileExample .km-pane-wrapper .k-edit-field > *:not([type="checkbox"]):not([type="radio"]):not(.k-button)
+{
+    width: 50%;
+}
+
+.mobileExample .km-pane-wrapper .k-mobile-list .k-edit-field > .k-button
+{
+    margin-left: 50%;
+}
+
 #example .km-wp .km-tabstrip .km-button,
 #example .km-wp .km-tabstrip .km-button.km-state-active
 {
