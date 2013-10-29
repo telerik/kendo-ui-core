@@ -40,6 +40,24 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Controls whether to close the widget suggestion list on item selection.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().MultiSelect()
+        ///             .Name("MultiSelect")
+        ///             .AutoClose(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public MultiSelectBuilder AutoClose(bool autoClose)
+        {
+            Component.AutoClose = autoClose;
+
+            return this;
+        }
+
+        /// <summary>
         /// Binds the MultiSelect to a list of DropDownListItem.
         /// </summary>
         /// <param name="dataSource">The data source.</param>
