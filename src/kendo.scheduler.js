@@ -2609,7 +2609,7 @@ kendo_module({
                 view.bind(EDIT, this._viewEditHandler);
             }
 
-           if (that._viewNavigateHandler) {
+            if (that._viewNavigateHandler) {
                 view.unbind("navigate", that._viewNavigateHandler);
             }
 
