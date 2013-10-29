@@ -2105,6 +2105,16 @@
             "name": "aeroviewr"
         },
         {
+            "text": "Bootstrap",
+            "thumbnailUrl": "content/web/overview/bootstrap-dash.gif",
+            "expanded": "true",
+            "packages": [ "online" ],
+            "items": [{
+                "url": "../bootstrap/"
+            }],
+            "name": "bootstrap"
+        },
+        {
             "text": "Sushi",
             "packages": [ "offline" ],
             "items": [{
@@ -2121,6 +2131,15 @@
                 "url": "spa/Aeroviewr.html"
             }],
             "name": "aeroviewr"
+        },
+        {
+            "text": "Bootstrap",
+            "packages": [ "offline" ],
+            "items": [{
+                "text": "Launch Bootstrap Sample Application",
+                "url": "spa/Bootstrap.html"
+            }],
+            "name": "bootstrap"
         }
     ]
 }
