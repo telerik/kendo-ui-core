@@ -296,16 +296,16 @@
                 }, TEST_TIMEOUT);
             });
 
-            asyncTest("swift swipe to left snaps the content back to the current page if buffer end is reached", 2, function() {
-                pane.moveTo(-50);
-                content.paneMoved(LEFT_SWIPE);
-                setTimeout(function() {
-                    start();
-                    content.updatePage();
-                    equal(content.page, 1);
-                    equal(pane.offset(), 0);
-                }, TEST_TIMEOUT);
-            });
+            // asyncTest("swift swipe to left snaps the content back to the current page if buffer end is reached", 2, function() {
+            //     pane.moveTo(-50);
+            //     content.paneMoved(LEFT_SWIPE);
+            //     setTimeout(function() {
+            //         start();
+            //         content.updatePage();
+            //         equal(content.page, 1);
+            //         equal(pane.offset(), 0);
+            //     }, TEST_TIMEOUT);
+            // });
 
             asyncTest("preventing default reverts back to the previous page", 2, function() {
                 pane.moveTo(50);
