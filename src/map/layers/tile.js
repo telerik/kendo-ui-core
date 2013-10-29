@@ -45,7 +45,6 @@
         },
 
         reset: function(e) {
-            this.options.zoom = e.sender.options.view.zoom;
             this._render();
         },
 
@@ -53,48 +52,42 @@
             var layer = this,
                 options = this.options,
                 tileSize = options.tileSize,
-                zoom = options.zoom,
-                urlTemplate = template(options.urlTemplate),
                 map = layer.map,
-                //output = "",
+                zoom = map.options.zoom,
+                urlTemplate = template(options.urlTemplate),
                 scale = layer.map.scale(),
                 nwToPoint = layer.crs.toPoint(map.viewport().nw, scale);
 
             var tileIndex = layer._getTileIndex(nwToPoint);
             var screenPoint = new Point(tileIndex.x * tileSize, tileIndex.y * tileSize);
             var point = screenPoint.clone().subtract(nwToPoint);
-            var tile = layer._createTile({
-                screenPoint: screenPoint,
-                point: point,
-                index: tileIndex,
-                url: urlTemplate({
-                    zoom: zoom, x: tileIndex.x, y: tileIndex.y
-                })
-            });
+            var size = {
+                x: math.ceil((math.abs(point.x) + map.element.width()) / tileSize),
+                y: math.ceil((math.abs(point.y) + map.element.height()) / tileSize)
+            };
 
-            //var tileX = point.x;
-            //var tileY = point.y;
-            //var a = 0;
-            //var b = 0;
-
-            //for (var x = tileX; x < tileX + 4; x++) {
-            //    for (var y = tileY; y < tileY + 4; y++) {
-
-            //        output += {
-            //            url: urlTemplate({
-            //                zoom: zoom, x: x, y: y
-            //            }),
-            //            tileSize: tileSize,
-            //            left: a * tileSize,
-            //            top: b * tileSize
-            //        });
-            //        b++;
-            //    }
-            //    b = 0;
-            //    a++;
-            //}
-            //console.log(output);
-            //this.element[0].innerHTML = output;
+            for (var x = 0; x < size.x; x++) {
+                for (var y = 0; y < size.y; y++) {
+                    var xIndex = tileIndex.x + x;
+                    var yIndex = tileIndex.y + y;
+                    var screenPoint = new Point(
+                        xIndex * tileSize,
+                        yIndex * tileSize
+                    );
+                    var tile = layer._createTile({
+                        screenPoint: screenPoint,
+                        point: screenPoint.clone().subtract(nwToPoint),
+                        index: {
+                            x: xIndex,
+                            y: yIndex
+                        },
+                        url: urlTemplate({
+                            zoom: zoom, x: xIndex, y: yIndex
+                        })
+                    });
+                    this.element.append(tile.element);
+                }
+            }
         },
 
         _getTileIndex: function(point) {
@@ -130,7 +123,10 @@
             element.prop("src", options.url);
             this.url = options.url;
 
-            element.offset(options.point);
+            element.offset({
+                top: options.point.y,
+                left: options.point.x
+            });
             this.point = options.point;
 
             this.screenPoint = options.screenPoint;
