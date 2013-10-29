@@ -1288,7 +1288,7 @@ kendo_module({
                 return true;
             }
 
-            var overlaps = true;
+            var overlaps = startTime !== slotEndTime;
 
             return isInTimeRange(startTime, slotStartTime, slotEndTime, overlaps) ||
                 isInTimeRange(endTime, slotStartTime, slotEndTime, overlaps) ||

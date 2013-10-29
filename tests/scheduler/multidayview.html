@@ -535,6 +535,22 @@
                 ok(!container.find(".k-event").length);
             });
 
+            test("single day event which start at the end of the time range is not displayed", function() {
+                var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+                    view = setup({
+                        endTime: new Date(2013, 1, 26, 17, 0, 0),
+                        dates: [
+                           selectedDate
+                        ]
+                    }),
+                    events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 17, 0, 0), end: new Date(2013, 1, 26, 19, 0, 0), title: "my event" })];
+
+                view.render(events);
+
+                ok(!container.find(".k-event").length);
+            });
+
+
             test("single day event which starts and ends at the views bounderies is shown", function() {
                 var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
                     view = setup({
