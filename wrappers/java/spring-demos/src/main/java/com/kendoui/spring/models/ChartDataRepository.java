@@ -3997,5 +3997,29 @@ public class ChartDataRepository {
         
         return result;
     }   
+    
+    public static List<BoxPlotCategoryPoint> OzoneConcentrationRemote() {
+        List<BoxPlotCategoryPoint> result = new ArrayList<BoxPlotCategoryPoint>();        
+        result.add(new BoxPlotCategoryPoint(1996, 1.3, 2.15, 2.95, 3.725, 4.7, 2.9, new double[] {1, 9}));
+        result.add(new BoxPlotCategoryPoint(1997, 2, 3.825, 5.45, 6.425, 8.2, 5.2, new double[] {1.5, 2, 8.9}));
+        result.add(new BoxPlotCategoryPoint(1998, 3.8, 4.725, 5.55, 5.75, 8.7, 5.5, null));
+        result.add(new BoxPlotCategoryPoint(1999, 3, 4.375, 4.95, 5.85, 8, 5.2, new double[] {3, 9.5}));
+        result.add(new BoxPlotCategoryPoint(2000, 2.5, 3.925, 4.15, 4.45, 5.1, 4.1, null));
+        result.add(new BoxPlotCategoryPoint(2001, 2.4, 3.725, 4.95, 5.85, 7.7, 4.9, new double[] {2.1, 8.3, 9.8}));
+        result.add(new BoxPlotCategoryPoint(2002, 1.7, 2.3, 3.9, 5, 5.5, 3.7, new double[] {1.1, 9.1}));
+        result.add(new BoxPlotCategoryPoint(2003, 2.2, 2.5, 3.1, 3.975, 4.3, 3.2, new double[] {1.6, 1.8, 9.8}));
+        result.add(new BoxPlotCategoryPoint(2004, 1.9, 2.7, 3.35, 4.575, 5.7, 3.6, new double[] {1.1, 8.3}));
+        result.add(new BoxPlotCategoryPoint(2005, 1.7, 2.65, 3.3, 4.05, 5, 3.4, null));
+        result.add(new BoxPlotCategoryPoint(2006, 1.4, 2.25, 3.3, 4.65, 5.7, 3.4, null));
+        result.add(new BoxPlotCategoryPoint(2007, 1.9, 2.85, 4, 4.45, 6.1, 3.9, new double[] {1, 1.2}));
+        result.add(new BoxPlotCategoryPoint(2008, 1.5, 2.35, 4.1, 5.225, 5.7, 3.9, new double[] {9, 9.5}));
+        result.add(new BoxPlotCategoryPoint(2009, 1.8, 2.325, 3.35, 4, 5.4, 3.3, new double[] {1, 6}));
+        result.add(new BoxPlotCategoryPoint(2010, 1.8, 2.75, 3.35, 3.825, 4.9, 3.4, null));
+        result.add(new BoxPlotCategoryPoint(2011, 1.7, 2.275, 3.2, 3.825, 5.5, 3.2, new double[] {0.5, 6.7}));
+        result.add(new BoxPlotCategoryPoint(2012, 1.2, 1.95, 2.45, 3.075, 3.5, 2.5, null));
+        result.add(new BoxPlotCategoryPoint(2013, 1.3, 1.9, 3.05, 3.425, 4, 2.7, new double[] {7, 8.5}));
+        
+        return result;
+    }  
 
 }

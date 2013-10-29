@@ -18,13 +18,9 @@
                  </kendo:dataSource-transport>
              </kendo:dataSource>
              <kendo:chart-series>
-                <kendo:chart-seriesItem type="boxPlot"  />
+                <kendo:chart-seriesItem type="boxPlot" lowerField="lower" q1Field="q1" medianField="median" q3Field="q3"
+                	upperField="upper" meanField="mean" outliersField="outliers" categoryField="year" />
              </kendo:chart-series>
-             <kendo:chart-categoryAxis>
-                <kendo:chart-categoryAxisItem field="year">
-                	<kendo:chart-categoryAxisItem-majorGridLines visible="false"/>
-                </kendo:chart-categoryAxisItem>
-             </kendo:chart-categoryAxis>
          </kendo:chart>
     </div>
 <demo:footer />

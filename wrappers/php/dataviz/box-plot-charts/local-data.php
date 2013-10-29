@@ -5,8 +5,14 @@ require_once '../../include/header.php';
 
 $series = new \Kendo\Dataviz\UI\ChartSeriesItem();
 $series->type('boxPlot')       
-       ->categoryField('year');
-
+       ->lowerField('lower')
+       ->q1Field('q1')
+       ->medianField('median')
+       ->q3Field('q3')
+       ->upperField('upper')
+       ->meanField('mean')
+       ->outliersField('outliers');       
+       
 $dataSource = new \Kendo\Data\DataSource();
 
 $dataSource->data(ozone_oncentration());

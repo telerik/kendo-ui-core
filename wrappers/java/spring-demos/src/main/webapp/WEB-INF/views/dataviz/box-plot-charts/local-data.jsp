@@ -7,7 +7,8 @@
              <kendo:chart-legend visible="false" />
               <kendo:dataSource data="${ozoneConcentration}" />
              <kendo:chart-series>
-                <kendo:chart-seriesItem type="boxPlot"  />
+                <kendo:chart-seriesItem type="boxPlot" lowerField="lower" q1Field="q1" medianField="median" q3Field="q3"
+                	upperField="upper" meanField="mean" outliersField="outliers" />
              </kendo:chart-series>
              <kendo:chart-categoryAxis>
                 <kendo:chart-categoryAxisItem field="year">

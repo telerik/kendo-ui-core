@@ -5,7 +5,7 @@ require_once '../../include/chart_data.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Content-Type: application/json');
 
-    $result = ozone_oncentration();
+    $result = ozone_oncentration_remote();
 
     echo json_encode($result);
 
@@ -18,7 +18,14 @@ require_once '../../include/header.php';
 <?php
     $series = new \Kendo\Dataviz\UI\ChartSeriesItem();
     $series->type('boxPlot')       
-           ->categoryField('year');
+           ->lowerField('lower')
+           ->q1Field('q1')
+           ->medianField('median')
+           ->q3Field('q3')
+           ->upperField('upper')   
+           ->meanField('mean')           
+           ->outliersField('outliers')
+           ->categoryField('year');  
 
     $transport = new \Kendo\Data\DataSourceTransport();
     $transport->read(array('url' => 'remote-data.php', 'type' => 'POST', 'dataType' => 'json'));
@@ -28,17 +35,12 @@ require_once '../../include/header.php';
     $dataSource->transport($transport)
                ->addSortItem(array('field' => 'year', 'dir' => 'asc'));
 
-    $categoryAxis = new \Kendo\Dataviz\UI\ChartCategoryAxisItem();
-    $categoryAxis->field('year')
-                 ->majorGridLines(array('visible' => false));
-
     $chart = new \Kendo\Dataviz\UI\Chart('chart');
 
     $chart->title(array('text' => 'Ozone Concentration (ppm)'))
           ->legend(array('visible' => false))
           ->dataSource($dataSource)
-          ->addSeriesItem($series)
-          ->addCategoryAxisItem($categoryAxis);
+          ->addSeriesItem($series);
 
     echo $chart->render();
 ?>

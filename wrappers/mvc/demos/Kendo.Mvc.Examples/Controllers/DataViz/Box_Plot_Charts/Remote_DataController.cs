@@ -14,7 +14,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult _OzoneConcentration()
         {
-            return Json(ChartDataRepository.OzoneConcentration());
+            return Json(ChartDataRepository.OzoneConcentrationRemote());
         }
     }
 }

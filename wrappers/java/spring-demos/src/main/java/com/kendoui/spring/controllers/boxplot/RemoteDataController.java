@@ -20,6 +20,6 @@ public class RemoteDataController {
     
     @RequestMapping(value = "/remote-data/read", method = RequestMethod.POST)
     public @ResponseBody List<BoxPlotCategoryPoint> read() {
-        return ChartDataRepository.OzoneConcentration();
+        return ChartDataRepository.OzoneConcentrationRemote();
     }
 }
