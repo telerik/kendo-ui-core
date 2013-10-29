@@ -205,3 +205,80 @@ span.k-sparkline,
 .k-map .k-layer {
     position: relative;
 }
+/* Map Compass */
+
+.k-compass
+{
+	width: 4.8em;
+	height: 4.8em;
+	border-radius: 5em;
+	position: relative;
+}
+
+.k-compass button
+{
+	border-color: transparent;
+	background: none;
+}
+
+.k-compass .k-button
+{
+	padding: 0;
+	line-height: 10px;
+	border-radius: 1em;
+	position: absolute;
+}
+
+.k-compass-n
+{
+	top: 3px;
+	left: 50%;
+	margin-left: -9px;
+}
+
+.k-compass-e
+{
+	right: 3px;
+	top: 50%;
+	margin-top: -9px;
+}
+
+.k-compass-s
+{
+	bottom: 3px;
+	left: 50%;
+	margin-left: -9px;
+}
+
+.k-compass-w
+{
+	left: 3px;
+	top: 50%;
+	margin-top: -9px;
+}
+
+.k-compass .k-compass-c
+{
+	width: 16px;
+	height: 16px;
+	left: 50%;
+	top: 50%;
+	margin-left: -8px;
+	margin-top: -8px;
+}
+
+.k-compass-c span
+{
+	display: block;
+	width: 6px;
+	height:6px;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 10px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -5px;
+	margin-top: -5px;
+}
+
