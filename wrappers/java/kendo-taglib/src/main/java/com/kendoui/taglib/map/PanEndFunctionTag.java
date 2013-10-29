@@ -9,7 +9,7 @@ import com.kendoui.taglib.MapTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class MarkerCreatedFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class PanEndFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
@@ -19,7 +19,7 @@ public class MarkerCreatedFunctionTag extends FunctionTag /* interfaces */ /* in
         MapTag parent = (MapTag)findParentWithClass(MapTag.class);
 
 
-        parent.setMarkerCreated(this);
+        parent.setPanEnd(this);
 
 //<< doEndTag
 

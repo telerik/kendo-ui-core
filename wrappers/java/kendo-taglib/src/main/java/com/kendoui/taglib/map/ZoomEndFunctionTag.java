@@ -9,7 +9,7 @@ import com.kendoui.taglib.MapTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class MarkerHoverFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class ZoomEndFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
@@ -19,7 +19,7 @@ public class MarkerHoverFunctionTag extends FunctionTag /* interfaces */ /* inte
         MapTag parent = (MapTag)findParentWithClass(MapTag.class);
 
 
-        parent.setMarkerHover(this);
+        parent.setZoomEnd(this);
 
 //<< doEndTag
 

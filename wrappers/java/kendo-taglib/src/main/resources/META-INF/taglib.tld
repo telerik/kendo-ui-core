@@ -13569,37 +13569,6 @@ You can also use a kendo.dataviz.map.Location instance.</description>
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>The configuration of built-in map controls.</description>
-            <name>controls</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
-            <description>The default configuration for map layers by type.</description>
-            <name>layerDefaults</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
-            <description>The configuration of the map layers.
-The layer type is determined by the value of the type field.</description>
-            <name>layers</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
-            <description>The default options for all markers.</description>
-            <name>markerDefaults</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
-            <description>The initial markers to display on the map.</description>
-            <name>markers</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>java.lang.Object</type>
-        </attribute>
-        <attribute>
             <description>The maximum zoom level.</description>
             <name>maxZoom</name>
             <rtexprvalue>true</rtexprvalue>
@@ -13635,13 +13604,23 @@ The layer type is determined by the value of the type field.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when a marker is created, but is not rendered yet.</description>
-            <name>markerCreated</name>
+            <description>Fired when the map is reset, e.g. on initial load or during zoom.</description>
+            <name>reset</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when a marker is hovered.</description>
-            <name>markerHover</name>
+            <description>Fired while the map viewport is being moved.</description>
+            <name>pan</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fires after the map viewport has been moved.</description>
+            <name>panEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when a shape is clicked or tapped.</description>
+            <name>shapeClick</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -13650,12 +13629,394 @@ The layer type is determined by the value of the type field.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when a shape is hovered.</description>
-            <name>shapeHover</name>
+            <description>Fired when the mouse enters a shape.</description>
+            <name>shapeMouseEnter</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the mouse leaves a shape.</description>
+            <name>shapeMouseLeave</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the map zoom level is about to change.</description>
+            <name>zoomStart</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the map zoom level has changed.</description>
+            <name>zoomEnd</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <dynamic-attributes>true</dynamic-attributes>
     </tag>
+
+    <tag>
+        <description>The configuration of built-in map controls.</description>
+        <name>map-controls</name>
+        <tag-class>com.kendoui.taglib.map.ControlsTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>Enables or disables the built-in navigator control (directional pad).</description>
+            <name>navigator</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>Enables or disables the built-in zoom control (+/- button).</description>
+            <name>zoom</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>Enables or disables the built-in navigator control (directional pad).</description>
+        <name>map-controls-navigator</name>
+        <tag-class>com.kendoui.taglib.map.ControlsNavigatorTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The position of the navigator control. Possible values include:</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>Enables or disables the built-in zoom control (+/- button).</description>
+        <name>map-controls-zoom</name>
+        <tag-class>com.kendoui.taglib.map.ControlsZoomTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The position of the zoom control. Possible values include:</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
+        <description>The default configuration for map layers by type.</description>
+        <name>map-layerDefaults</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The default configuration for shape layers.</description>
+        <name>map-layerDefaults-shape</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsShapeTag</tag-class>
+        <body-content>JSP</body-content>
+
+        <attribute>
+            <description>The copyright message for all shape layers.</description>
+            <name>copyright</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+    <tag>
+        <description>The default style for shapes.</description>
+        <name>map-layerDefaults-shape-style</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsShapeStyleTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The default fill for layer shapes.
+Accepts a valid CSS color string or object with detailed configuration.</description>
+        <name>map-layerDefaults-shape-style-fill</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsShapeStyleFillTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The default fill color for layer shapes.
+Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The default fill opacity (0 to 1) for layer shapes.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The default stroke for layer shapes.
+Accepts a valid CSS color string or object with detailed configuration.</description>
+        <name>map-layerDefaults-shape-style-stroke</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsShapeStyleStrokeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The default stroke color for layer shapes.
+Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The default dash type for layer shapes.
+The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The default stroke opacity (0 to 1) for layer shapes.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The default stroke width for layer shapes.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
+        <description>The default configuration for tile layers.</description>
+        <name>map-layerDefaults-tile</name>
+        <tag-class>com.kendoui.taglib.map.LayerDefaultsTileTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The copyright message for all tile layers.</description>
+            <name>copyright</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The URL template for tile layers. Template variables:</description>
+            <name>urlTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+    <tag>
+        <description>The configuration of the map layers.
+The layer type is determined by the value of the type field.</description>
+        <name>map-layers</name>
+        <tag-class>com.kendoui.taglib.map.LayersTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The configuration of the map layers.
+The layer type is determined by the value of the type field.</description>
+        <name>map-layer</name>
+        <tag-class>com.kendoui.taglib.map.LayerTag</tag-class>
+
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>If set to false the layer will not bind to the data source during initialization. In this case data binding will occur when the change event of the
+data source is fired. By default the widget will bind to the data source specified in the configuration.</description>
+            <name>autoBind</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
+            <description>The copyright message for the layer.</description>
+            <name>copyright</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The data source of the layer. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
+instance.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The layer type. Supported types are:</description>
+            <name>type</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The URL template for tile layers. Template variables:</description>
+            <name>urlTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+
+    <tag>
+        <description>The default style for shapes.</description>
+        <name>map-layer-style</name>
+        <tag-class>com.kendoui.taglib.map.LayerStyleTag</tag-class>
+        <body-content>JSP</body-content>
+
+
+    </tag>
+
+    <tag>
+        <description>The default fill for layer shapes.
+Accepts a valid CSS color string or object with detailed configuration.</description>
+        <name>map-layer-style-fill</name>
+        <tag-class>com.kendoui.taglib.map.LayerStyleFillTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The default fill color for layer shapes.
+Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The default fill opacity (0 to 1) for layer shapes.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+    <tag>
+        <description>The default stroke for layer shapes.
+Accepts a valid CSS color string or object with detailed configuration.</description>
+        <name>map-layer-style-stroke</name>
+        <tag-class>com.kendoui.taglib.map.LayerStyleStrokeTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The default stroke color for layer shapes.
+Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The default dash type for layer shapes.
+The following dash types are supported:</description>
+            <name>dashType</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The default stroke opacity (0 to 1) for layer shapes.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+        <attribute>
+            <description>The default stroke width for layer shapes.</description>
+            <name>width</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+
+
+    <tag>
+        <description>The default options for all markers.</description>
+        <name>map-markerDefaults</name>
+        <tag-class>com.kendoui.taglib.map.MarkerDefaultsTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The default marker color. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The default marker shape. Supported shapes:</description>
+            <name>shape</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The default marker size in pixels.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+
+    </tag>
+
+
+
+    <tag>
+        <description>The initial markers to display on the map.</description>
+        <name>map-markers</name>
+        <tag-class>com.kendoui.taglib.map.MarkersTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+
+    <tag>
+        <description>The initial markers to display on the map.</description>
+        <name>map-marker</name>
+        <tag-class>com.kendoui.taglib.map.MarkerTag</tag-class>
+
+        <body-content>empty</body-content>
+        <attribute>
+            <description>The marker color. Accepts a valid CSS color string, including hex and rgb.</description>
+            <name>color</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The marker position. Coordinates are listed as [Latitude, Longitude].
+You can also use a kendo.dataviz.map.Location instance.</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The marker shape. Supported shapes:</description>
+            <name>shape</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The marker size in pixels.</description>
+            <name>size</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>float</type>
+        </attribute>
+    </tag>
+
 
 
     <tag>
@@ -13665,15 +14026,27 @@ The layer type is determined by the value of the type field.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when a marker is created, but is not rendered yet.</description>
-        <name>map-markerCreated</name>
-        <tag-class>com.kendoui.taglib.map.MarkerCreatedFunctionTag</tag-class>
+        <description>Fired when the map is reset, e.g. on initial load or during zoom.</description>
+        <name>map-reset</name>
+        <tag-class>com.kendoui.taglib.map.ResetFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when a marker is hovered.</description>
-        <name>map-markerHover</name>
-        <tag-class>com.kendoui.taglib.map.MarkerHoverFunctionTag</tag-class>
+        <description>Fired while the map viewport is being moved.</description>
+        <name>map-pan</name>
+        <tag-class>com.kendoui.taglib.map.PanFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fires after the map viewport has been moved.</description>
+        <name>map-panEnd</name>
+        <tag-class>com.kendoui.taglib.map.PanEndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when a shape is clicked or tapped.</description>
+        <name>map-shapeClick</name>
+        <tag-class>com.kendoui.taglib.map.ShapeClickFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -13683,9 +14056,27 @@ The layer type is determined by the value of the type field.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when a shape is hovered.</description>
-        <name>map-shapeHover</name>
-        <tag-class>com.kendoui.taglib.map.ShapeHoverFunctionTag</tag-class>
+        <description>Fired when the mouse enters a shape.</description>
+        <name>map-shapeMouseEnter</name>
+        <tag-class>com.kendoui.taglib.map.ShapeMouseEnterFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the mouse leaves a shape.</description>
+        <name>map-shapeMouseLeave</name>
+        <tag-class>com.kendoui.taglib.map.ShapeMouseLeaveFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the map zoom level is about to change.</description>
+        <name>map-zoomStart</name>
+        <tag-class>com.kendoui.taglib.map.ZoomStartFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the map zoom level has changed.</description>
+        <name>map-zoomEnd</name>
+        <tag-class>com.kendoui.taglib.map.ZoomEndFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

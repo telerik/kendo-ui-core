@@ -9,7 +9,7 @@ import com.kendoui.taglib.MapTag;
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class ShapeHoverFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class ShapeClickFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
@@ -19,7 +19,7 @@ public class ShapeHoverFunctionTag extends FunctionTag /* interfaces */ /* inter
         MapTag parent = (MapTag)findParentWithClass(MapTag.class);
 
 
-        parent.setShapeHover(this);
+        parent.setShapeClick(this);
 
 //<< doEndTag
 

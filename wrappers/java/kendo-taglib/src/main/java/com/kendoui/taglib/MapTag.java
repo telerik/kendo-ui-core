@@ -45,24 +45,68 @@ public class MapTag extends WidgetTag /* interfaces *//* interfaces */ {
         return "map";
     }
 
+    public void setControls(com.kendoui.taglib.map.ControlsTag value) {
+        setProperty("controls", value);
+    }
+
+    public void setLayerDefaults(com.kendoui.taglib.map.LayerDefaultsTag value) {
+        setProperty("layerDefaults", value);
+    }
+
+    public void setLayers(LayersTag value) {
+
+        setProperty("layers", value.layers());
+
+    }
+
+    public void setMarkerDefaults(com.kendoui.taglib.map.MarkerDefaultsTag value) {
+        setProperty("markerDefaults", value);
+    }
+
+    public void setMarkers(MarkersTag value) {
+
+        setProperty("markers", value.markers());
+
+    }
+
     public void setClick(ClickFunctionTag value) {
         setEvent("click", value.getBody());
     }
 
-    public void setMarkerCreated(MarkerCreatedFunctionTag value) {
-        setEvent("markerCreated", value.getBody());
+    public void setPan(PanFunctionTag value) {
+        setEvent("pan", value.getBody());
     }
 
-    public void setMarkerHover(MarkerHoverFunctionTag value) {
-        setEvent("markerHover", value.getBody());
+    public void setPanEnd(PanEndFunctionTag value) {
+        setEvent("panEnd", value.getBody());
+    }
+
+    public void setReset(ResetFunctionTag value) {
+        setEvent("reset", value.getBody());
+    }
+
+    public void setShapeClick(ShapeClickFunctionTag value) {
+        setEvent("shapeClick", value.getBody());
     }
 
     public void setShapeCreated(ShapeCreatedFunctionTag value) {
         setEvent("shapeCreated", value.getBody());
     }
 
-    public void setShapeHover(ShapeHoverFunctionTag value) {
-        setEvent("shapeHover", value.getBody());
+    public void setShapeMouseEnter(ShapeMouseEnterFunctionTag value) {
+        setEvent("shapeMouseEnter", value.getBody());
+    }
+
+    public void setShapeMouseLeave(ShapeMouseLeaveFunctionTag value) {
+        setEvent("shapeMouseLeave", value.getBody());
+    }
+
+    public void setZoomEnd(ZoomEndFunctionTag value) {
+        setEvent("zoomEnd", value.getBody());
+    }
+
+    public void setZoomStart(ZoomStartFunctionTag value) {
+        setEvent("zoomStart", value.getBody());
     }
 
     public java.lang.Object getCenter() {
@@ -71,46 +115,6 @@ public class MapTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setCenter(java.lang.Object value) {
         setProperty("center", value);
-    }
-
-    public java.lang.Object getControls() {
-        return (java.lang.Object)getProperty("controls");
-    }
-
-    public void setControls(java.lang.Object value) {
-        setProperty("controls", value);
-    }
-
-    public java.lang.Object getLayerDefaults() {
-        return (java.lang.Object)getProperty("layerDefaults");
-    }
-
-    public void setLayerDefaults(java.lang.Object value) {
-        setProperty("layerDefaults", value);
-    }
-
-    public java.lang.Object getLayers() {
-        return (java.lang.Object)getProperty("layers");
-    }
-
-    public void setLayers(java.lang.Object value) {
-        setProperty("layers", value);
-    }
-
-    public java.lang.Object getMarkerDefaults() {
-        return (java.lang.Object)getProperty("markerDefaults");
-    }
-
-    public void setMarkerDefaults(java.lang.Object value) {
-        setProperty("markerDefaults", value);
-    }
-
-    public java.lang.Object getMarkers() {
-        return (java.lang.Object)getProperty("markers");
-    }
-
-    public void setMarkers(java.lang.Object value) {
-        setProperty("markers", value);
     }
 
     public float getMaxZoom() {
@@ -165,28 +169,52 @@ public class MapTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("click", new Function(value));
     }
 
-    public String getMarkerCreated() {
-        Function property = ((Function)getProperty("markerCreated"));
+    public String getPan() {
+        Function property = ((Function)getProperty("pan"));
         if (property != null) {
             return property.getBody();
         }
         return null;
     }
 
-    public void setMarkerCreated(String value) {
-        setProperty("markerCreated", new Function(value));
+    public void setPan(String value) {
+        setProperty("pan", new Function(value));
     }
 
-    public String getMarkerHover() {
-        Function property = ((Function)getProperty("markerHover"));
+    public String getPanEnd() {
+        Function property = ((Function)getProperty("panEnd"));
         if (property != null) {
             return property.getBody();
         }
         return null;
     }
 
-    public void setMarkerHover(String value) {
-        setProperty("markerHover", new Function(value));
+    public void setPanEnd(String value) {
+        setProperty("panEnd", new Function(value));
+    }
+
+    public String getReset() {
+        Function property = ((Function)getProperty("reset"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setReset(String value) {
+        setProperty("reset", new Function(value));
+    }
+
+    public String getShapeClick() {
+        Function property = ((Function)getProperty("shapeClick"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setShapeClick(String value) {
+        setProperty("shapeClick", new Function(value));
     }
 
     public String getShapeCreated() {
@@ -201,16 +229,52 @@ public class MapTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("shapeCreated", new Function(value));
     }
 
-    public String getShapeHover() {
-        Function property = ((Function)getProperty("shapeHover"));
+    public String getShapeMouseEnter() {
+        Function property = ((Function)getProperty("shapeMouseEnter"));
         if (property != null) {
             return property.getBody();
         }
         return null;
     }
 
-    public void setShapeHover(String value) {
-        setProperty("shapeHover", new Function(value));
+    public void setShapeMouseEnter(String value) {
+        setProperty("shapeMouseEnter", new Function(value));
+    }
+
+    public String getShapeMouseLeave() {
+        Function property = ((Function)getProperty("shapeMouseLeave"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setShapeMouseLeave(String value) {
+        setProperty("shapeMouseLeave", new Function(value));
+    }
+
+    public String getZoomEnd() {
+        Function property = ((Function)getProperty("zoomEnd"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setZoomEnd(String value) {
+        setProperty("zoomEnd", new Function(value));
+    }
+
+    public String getZoomStart() {
+        Function property = ((Function)getProperty("zoomStart"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setZoomStart(String value) {
+        setProperty("zoomStart", new Function(value));
     }
 
 //<< Attributes
