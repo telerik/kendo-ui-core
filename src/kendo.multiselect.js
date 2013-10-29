@@ -122,6 +122,7 @@ kendo_module({
             name: "MultiSelect",
             enabled: true,
             autoBind: true,
+            autoClose: true,
             highlightFirst: true,
             dataTextField: "",
             dataValueField: "",
@@ -281,6 +282,16 @@ kendo_module({
             }
         },
 
+        _close: function() {
+            var that = this;
+            if (that.options.autoClose || !that._visibleItems) {
+                that.close();
+            } else {
+                that.current(that.options.highlightFirst ? first(that.ul[0]) : null);
+                that.popup._position();
+            }
+        },
+
         close: function() {
             this.popup.close();
             this.current(null);
@@ -296,7 +307,7 @@ kendo_module({
                 that._filterSource();
             } else if (that._visibleItems && that._allowSelection()) {
                 that.popup.open();
-                that.current(that.options.highlightFirst ? $(first(that.ul[0])) : null);
+                that.current(that.options.highlightFirst ? first(that.ul[0]) : null);
             }
         },
 
@@ -330,7 +341,7 @@ kendo_module({
                 that.popup._position();
 
                 if (that.options.highlightFirst) {
-                    li = $(first(that.ul[0]));
+                    li = first(that.ul[0]);
                 }
             }
 
@@ -518,13 +529,13 @@ kendo_module({
 
             if (!e.isDefaultPrevented()) {
                 if (that.trigger(SELECT, {item: li})) {
-                    that.close();
+                    that._close();
                     return;
                 }
 
                 that._select(li);
                 that._change();
-                that.close();
+                that._close();
             }
         },
 
@@ -558,7 +569,7 @@ kendo_module({
                 if (current) {
                     current = sibling(current[0], NEXT);
                 } else {
-                    current = that.ul[0].firstChild;
+                    current = first(that.ul[0]);
                 }
 
                 if (current) {
@@ -569,7 +580,7 @@ kendo_module({
                     if (current) {
                         current = sibling(current[0], PREV);
                     } else {
-                        current = that.ul[0].lastChild;
+                        current = last(that.ul[0]);
                     }
 
                     that.current($(current));
@@ -594,14 +605,14 @@ kendo_module({
             } else if (key === keys.ENTER && visible) {
                 if (current) {
                     if (that.trigger(SELECT, {item: current})) {
-                        that.close();
+                        that._close();
                         return;
                     }
                     that._select(current);
                 }
 
                 that._change();
-                that.close();
+                that._close();
                 e.preventDefault();
             } else if (key === keys.ESC) {
                 if (visible) {
@@ -613,7 +624,7 @@ kendo_module({
                 that.close();
             } else if (key === keys.HOME) {
                 if (visible) {
-                    that.current($(first(that.ul[0])));
+                    that.current(first(that.ul[0]));
                 } else if (!hasValue) {
                     tag = that.tagList[0].firstChild;
 
@@ -623,7 +634,7 @@ kendo_module({
                 }
             } else if (key === keys.END) {
                 if (visible) {
-                    that.current($(last(that.ul[0])));
+                    that.current(last(that.ul[0]));
                 } else if (!hasValue) {
                     tag = that.tagList[0].lastChild;
 
@@ -639,7 +650,7 @@ kendo_module({
                 if (tag && tag[0]) {
                     that._unselect(tag);
                     that._change();
-                    that.close();
+                    that._close();
                 }
             } else {
                 clearTimeout(that._typing);
@@ -1012,6 +1023,10 @@ kendo_module({
             item = sibling(item, NEXT);
         }
 
+        if (item) {
+            return $(item);
+        }
+
         return item;
     }
 
@@ -1020,6 +1035,10 @@ kendo_module({
 
         if (item && item.style.display === "none") {
             item = sibling(item, PREV);
+        }
+
+        if (item) {
+            return $(item);
         }
 
         return item;
