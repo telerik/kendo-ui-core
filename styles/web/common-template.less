@@ -5363,6 +5363,11 @@ div[name="recurrenceRule"] > .k-dropdown
     padding: .3em 0;
 }
 
+.km-pane-wrapper .k-mobile-list .k-scheduler-toolbar ul li
+{
+    line-height: 2em;
+}
+
 .km-pane-wrapper .k-mobile-list .k-item > *
 {
     line-height: normal;
@@ -5377,7 +5382,8 @@ div[name="recurrenceRule"] > .k-dropdown
 }
 
 .km-pane-wrapper .k-mobile-list > ul > li > .k-link,
-.km-pane-wrapper .k-mobile-list .k-filter-help-text > li > .k-link
+.km-pane-wrapper .k-mobile-list .k-filter-help-text > li > .k-link,
+.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-label:nth-child(3)
 {
     display: block;
     padding: .2em 1em;
@@ -5388,6 +5394,11 @@ div[name="recurrenceRule"] > .k-dropdown
     line-height: 2em;
     background: transparent;
     border-top: 1em solid transparent;
+}
+
+.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-label:nth-child(3)
+{
+    position: relative;
 }
 
 .km-pane-wrapper .k-mobile-list .k-item:first-child
@@ -5489,6 +5500,24 @@ div[name="recurrenceRule"] > .k-dropdown
     position: relative;
 }
 
+.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-field .k-check
+{
+    margin: 0;
+    padding-left: 1em;
+    .box-sizing(border-box);
+}
+
+.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-field .k-check:first-child
+{
+    margin-top: -.5em;
+}
+
+.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-field .k-check:last-child
+{
+    margin-bottom: -.5em;
+}
+
+.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-field .k-check,
 .km-pane-wrapper .k-mobile-list .k-edit-field > * > select:not([multiple]),
 .km-pane-wrapper .k-mobile-list .k-scheduler-timezones .k-edit-field label.k-check
 {
