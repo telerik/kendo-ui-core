@@ -3,52 +3,227 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Scrollview</title>
         <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.flat.less">
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.min.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.fx.js"></script>
-        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.mobile.loader.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
         <script src="../../src/kendo.mobile.view.js"></script>
         <script src="../../src/kendo.mobile.pane.js"></script>
         <script src="../../src/kendo.mobile.navbar.js"></script>
         <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.popover.js"></script>
         <script src="../../src/kendo.mobile.listview.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../../src/kendo.mobile.scrollview.js"></script>
-        <script>
-            $(window).load(function() {
-                new kendo.mobile.Application();
-            });
-
-            function initScrollView(e) {
-                setTimeout(function() {
-                    var s = e.view.element.find("#scrollview");
-                    s.kendoMobileScrollView();
-                    s.kendoMobileScrollView('refresh');
-                }, 100);
-            }
-        </script>
     </head>
     <body>
-        <div data-role="view" data-init="initScrollView">
-            <div id="scrollview">
-                <div data-role="page">Foo</div>
-                <div data-role="page">Bar</div>
-                <div data-role="page">Baz</div>
+    <script type="text/x-kendo-template" id="tmpl">
+        <div class="pg">
+            # for (var i = 0; i < data.length; i++) { #
+                # var item = data[i]; #
+                <div class="item"><span>#= i #</span></div>
+            # } #
+        </div>
+    </script>
+    <div id="home-view"
+        data-role="view"
+        data-stretch="true"
+        data-init="app.views.home.init"
+        data-layout="default-layout"
+        data-title="My App">
+        <div class="content-left">
+            <div id="scrollview-top"></div>
+            <p class="section-header"><span class="km-calendar" style="font-size:1.5em;padding-right:4px;"></span>Upcoming Dates</p>
+            <div id="scrollview-bottom">
             </div>
+        </div>
+        <div class="sidebar-right" class="h100">
+            <div class="home egobox">
+                <div class="ego-photo"></div>
+                <div class="ego-info">
+                    <p class="fullname ego-userinfo"></p>
+                    <p class="title ego-userinfo"></p>
+                    <p class="company ego-userinfo"></p>
+                    <p class="address ego-userinfo"></p>
+                </div>
+                <a data-role="button" class="blue" data-inline="true" data-theme="blue" data-corners="false" href="my-account.html">Edit</a>
+                <a data-role="button" class="red" data-inline="true" data-theme="red" data-corners="false"
+                    >Logout</a>
+            </div>
+            <div class="home-favorites h100" data-role="scroller">
+                <ul id="list-favorites"></ul>
+            </div>
+        </div>
+    </div>
+    <!-- Application Layouts -->
+    <div data-role="layout" data-id="default-layout"
+        data-stretch="false">
+        <div data-role="popover" id="popover-more"
+            data-popup='{"height": "238px", "width": "22em"}'>
+            <div data-role="view">
+                <ul data-role="listview" data-click="app.utils.closeAllPopovers">
+                    <li><a data-target="_top" data-rel="modalview" href="#modal-about">About</a></li>
+                    <li><a data-target="_top" href="#">Cinco</a></li>
+                    <li><a data-target="_top" href="#">Seis</a></li>
+                    <li><a data-target="_top" href="#">Siete</a></li>
+                    <li><a data-target="_top" href="#">Ocho</a></li>
+                    <li><a data-target="_top" href="#">Nueve</a></li>
+                </ul>
+            </div>
+        </div>
+        <header data-role="header">
+            <div data-role="navbar">
+                <a id="app-backbutton" data-align="left" data-role="backbutton">Back</a>
+                <span data-role="view-title">My APp</span>
+                <a id="app-helpbutton" data-role="button" data-icon="help" data-align="right"></a>
+                <a href="#modal-feedback" data-rel="modalview" data-role="button" data-icon="my-feedback" data-align="right"></a>
+                <a href="#notifications-drawer" class="btn-notifications" data-rel="drawer" data-role="button" data-icon="menuicon" data-align="right"></a>
+            </div>
+        </header>
+        <footer data-role="footer">
+            <div id="tabstrip" data-role="tabstrip">
+                <a href="#home-view" data-icon="home">Home</a>
+                <a href="#" data-icon="my-about">Does</a>
+                <a href="#" data-icon="organize">Tres</a>
+                <a href="#" data-icon="my-globe">Cuatro</a>
+                <a id="tab-more" data-icon="more">More</a>
+            </div> 
+        </footer>
+        <div id="popover-acct" data-role="popover" data-direction="right" data-popup='{"direction":"right","height": "auto"}'>
+            <div data-role="view">
+                <ul data-role="listview">
+                    <li><a style="min-height: 40px;" data-target="_top" href="my-account.html" data-icon="user">My Account</a></li>
+                    <li><a style="min-height: 40px;" data-target="_top" data-icon="power">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Application Layouts -->
+    <script>
+        var topScrollView, bottomScrollView;
+        var topDashboard = new kendo.data.DataSource({
+            // pageSize:18,
+            data:[
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"}
+            ]
+        });
 
-            <a data-role="button" href="#bar">Bar</a>
-        </div>
-        <div data-role="view" id="bar">
-            <div data-role="scrollview">
-                <div data-role="page">Foo</div>
-                <div data-role="page">Bar</div>
-                <div data-role="page">Baz</div>
-            </div>
-        </div>
+        var bottomDashboard = new kendo.data.DataSource({
+            // pageSize:12,
+            data:[
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"},
+            {title:"Uno",desc:"desc"}
+            ]
+        });
+
+        topScrollView = $("#scrollview-top");
+        bottomScrollView = $("#scrollview-bottom");
+
+        var app = {
+            views: {
+                home:{
+                    init:function(e){
+                        topScrollView.kendoMobileScrollView({
+                            template: $("#tmpl").html(),
+                            dataSource: topDashboard,
+                            itemsPerPage: 3
+                        });
+                        bottomScrollView.kendoMobileScrollView({
+                            template: $("#tmpl").html(),
+                            dataSource: bottomDashboard,
+                            itemsPerPage: 2
+                        });
+                    },
+                    show:function(e){
+                        console.log("show");
+                    },
+                    hide:function(e){
+                        console.log("hide");
+                    }
+                }
+            }
+        };
+
+        var kendoApp = new kendo.mobile.Application($(document.body), {skin: "flat", transition:"slide" });
+    </script>
+
+    <style>
+        .km-scrollview {
+            position: relative;
+        }
+
+        #home-view {
+            height:100%;
+        }
+
+        #scrollview-top,
+        #scrollview-bottom {
+            /* padding: 1em; */
+            width: 100%;
+        }
+        .content-left {
+            overflow: hidden;
+            background-color: #e4e4e4;
+        }
+        .sidebar-right {
+            float: right;
+            width: 320px;
+            height: 100%;
+            border-left: 1px solid #c2c2c2;
+        }
+
+        .pg {
+
+        }
+
+        .item {
+            display: inner-block;
+            width: 100%;
+            height: 30px;
+            border: 1px solid #ccc;
+            background: #fff;
+        }
+        /* This seems to clear up the resizing issue */
+        /*
+        #scrollview-top > div:first-child,
+        #scrollview-bottom > div:first-child {
+            -webkit-transform: translate3d(0px, 0px, 0px) scale(1);
+        }
+        */
+    </style>
+
     </body>
 </html>
