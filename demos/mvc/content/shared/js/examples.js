@@ -26,7 +26,7 @@
                 duration: 300
             }
         },
-        skinRegex = /kendo\.\w+(\.min)?\.(.+)/i,
+        skinRegex = /kendo\.[\w\-]+(\.min)?\.(.+)/i,
         dvSkinRegex = /kendo\.dataviz\.(?!min)\w+?(\.css|\.min.css)/gi,
         supports = {
             sessionStorage: (function () {
@@ -209,6 +209,12 @@
             });
         },
 
+        getCommonUrl: function (common) {
+            var currentCommonUrl = Application.getCurrentCommonLink().attr("href");
+
+            return currentCommonUrl.replace(skinRegex, "kendo." + common + "$1.$2");
+        },
+
         getThemeUrl: function (themeName) {
             var currentThemeUrl = Application.getCurrentThemeLink().attr("href");
 
@@ -225,26 +231,9 @@
         replaceWebTheme: function (themeName) {
             var newThemeUrl = Application.getThemeUrl(themeName),
                 oldThemeName = $(doc).data("kendoSkin"),
-                less = window.less,
-                themeLink = Application.getCurrentThemeLink(),
-                isLess = /\.less$/.test(themeLink.attr("href")),
-                exampleElement = $("#example");
+                themeLink = Application.getCurrentThemeLink();
 
             Application.updateLink(themeLink, newThemeUrl);
-
-            if (isLess) {
-                $("head style[id^='less']").remove();
-
-                less.sheets = $("head link[href$='.less']").map(function () {
-                    return this;
-                });
-
-                less.refresh(true);
-            }
-
-            if (exampleElement.length) {
-                exampleElement[0].style.cssText = exampleElement[0].style.cssText;
-            }
 
             Application.publishTheme(themeName);
             $(doc.documentElement).removeClass("k-" + oldThemeName).addClass("k-" + themeName);
@@ -261,7 +250,9 @@
 
         updateLink: function (link, url) {
             var newLink,
-                exampleElement = $("#example");
+                exampleElement = $("#example"),
+                less = window.less,
+                isLess = /\.less$/.test(link.attr("href"));
 
             if (kendo.support.browser.msie && kendo.support.browser.version < 11) {
                 newLink = $(doc.createStyleSheet(url));
@@ -270,11 +261,21 @@
                 link.eq(0).before(newLink);
             }
 
+            link.remove();
+
+            if (isLess) {
+                $("head style[id^='less']").remove();
+
+                less.sheets = $("head link[href$='.less']").map(function () {
+                    return this;
+                });
+
+                less.refresh(true);
+            }
+
             if (exampleElement.length) {
                 exampleElement[0].style.cssText = exampleElement[0].style.cssText;
             }
-
-            link.remove();
         },
 
         replaceTheme: function (themeName) {

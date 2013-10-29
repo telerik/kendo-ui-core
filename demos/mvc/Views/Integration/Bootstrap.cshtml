@@ -285,23 +285,8 @@
                     { text: "Bootstrap", value: "common-bootstrap" }
                 ],
                 change: function(e) {
-                    var link = Application.getCurrentCommonLink();
-
-                    if (link.length) {
-                        var href = link[0].getAttribute("href");
-                        var linkPath = path(href);
-                        var extension = /\.(less|css)$/.exec(href)[1];
-
-                        link[0].setAttribute("href",
-                            kendo.format("{0}kendo.{1}.{2}", linkPath, this.value(), extension)
-                        );
-
-                        if (extension == "less") {
-                            less.refresh(true);
-                        }
-
-                        document.body.style.cssText = document.body.style.cssText;
-                    }
+                    var commonLink = Application.getCurrentCommonLink();
+                    Application.updateLink(commonLink, Application.getCommonUrl(this.value()));
                 }
             });
 
@@ -829,6 +814,7 @@
                     "week",
                     "month"
                 ],
+                editable: false,
                 timezone: "Etc/UTC",
                 dataSource: {
                     batch: true,
