@@ -363,46 +363,6 @@
             // init sample widgets
             var serviceBaseUrl = "http://demos.kendoui.com/service";
 
-            var dataSource = new kendo.data.DataSource({
-                    transport: {
-                        read:  {
-                            url: serviceBaseUrl + "/Products",
-                            dataType: "jsonp"
-                        },
-                        update: {
-                            url: serviceBaseUrl + "/Products/Update",
-                            dataType: "jsonp"
-                        },
-                        destroy: {
-                            url: serviceBaseUrl + "/Products/Destroy",
-                            dataType: "jsonp"
-                        },
-                        create: {
-                            url: serviceBaseUrl + "/Products/Create",
-                            dataType: "jsonp"
-                        },
-                        parameterMap: function(options, operation) {
-                            if (operation !== "read" && options.models) {
-                                return {models: kendo.stringify(options.models)};
-                            }
-                        }
-                    },
-                    batch: true,
-                    pageSize: 10,
-                    schema: {
-                        model: {
-                            id: "ProductID",
-                            fields: {
-                                ProductID: { editable: false, nullable: true },
-                                ProductName: { validation: { required: true } },
-                                UnitPrice: { type: "number", validation: { required: true, min: 1} },
-                                Discontinued: { type: "boolean" },
-                                UnitsInStock: { type: "number", validation: { min: 0, required: true } }
-                            }
-                        }
-                    }
-                });
-
             $("#menu").kendoMenu();
 
             function resizeTabStripContent() {
