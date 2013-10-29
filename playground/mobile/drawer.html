@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Drawer Proof of concept</title>
-        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.flat.less">
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.min.js"></script>
         <script src="../../src/kendo.core.js"></script>
@@ -24,102 +24,18 @@
         <script src="../../src/kendo.mobile.drawer.js"></script>
         <script src="../../src/kendo.mobile.navbar.js"></script>
         <style>
-            .km-drawer .km-insetcontent {
-                background: black;
-                color: white;
-            }
+
         </style>
 </head>
-<body>
 
 
-    <style>
-        .km-ul:before,
-        .km-ul:after  {
-            content: "\E0F1";
-        }
-
-        .km-content {
-            background: white;
-        }
-    </style>
-
-    <div data-role="drawer" id="right-drawer" data-position="right" style="width: 150px" data-views="['bar']">
+    <div data-role="drawer" id="my-drawer" style="width: 150px">
         <ul data-role="listview" data-style="inset">
             <li>Item 1</li>
             <li>Item 1</li>
             <li>Item 1</li>
             <li>Item 1</li>
             <li>Item 1</li>
-        </ul>
-    </div>
-
-    <div data-role="drawer" id="my-drawer">
-       <ul data-role="listview" data-style="inset" data-type="group">
-           <li>
-               Heading
-               <ul>
-                   <li>Item</li>
-                   <li><a href="#foo">Foo</a></li>
-                   <li><a href="#bar">Bar</a></li>
-                   <li>Item</li>
-               </ul>
-           </li>
-           <li>
-               Heading
-               <ul>
-                   <li>Item</li>
-                   <li>Item</li>
-                   <li>Item</li>
-               </ul>
-           </li>
-           <li>
-               Heading
-               <ul>
-                   <li>Item</li>
-                   <li>Item</li>
-                   <li>Item</li>
-               </ul>
-           </li>
-           <li>
-               Heading
-               <ul>
-                   <li>Item</li>
-                   <li>Item</li>
-                   <li>Item</li>
-               </ul>
-           </li>
-           <li>
-               Heading
-               <ul>
-                   <li>Item</li>
-                   <li>Item</li>
-                   <li>Item</li>
-               </ul>
-           </li>
-
-        </ul>
-    </div>
-
-    <div data-role="view" id="bar" data-title="bar">
-        <header data-role="header">
-            <div data-role="navbar">
-                <a data-role="button" href="#my-drawer" data-rel="drawer" data-icon="ul" data-align="left"></a>
-                <span data-role="view-title"></span>
-                <a data-role="button" href="#right-drawer" data-rel="drawer" data-icon="ul" data-align="right"></a>
-            </div>
-        </header>
-
-        <ul data-role="listview" data-style="inset">
-            <li>Bar 1</li>
-            <li>Bar 1</li>
-            <li>Bar 1</li>
-            <li>Bar 1</li>
-            <li>Bar 1</li>
-            <li>Bar 1</li>
-            <li>Bar 1</li>
-            <li>Bar 1</li>
-            <li>Bar 1</li>
         </ul>
     </div>
 
@@ -131,23 +47,134 @@
             </div>
         </header>
 
-        <ul data-role="listview" data-style="inset">
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-            <li>Item 1</li>
-        </ul>
+        <a data-role="button" href="#bar">Bar</a>
+
+        <form action="./index.html">
+            <ul data-role="listview" data-style="inset">
+                <li>
+                    <label>Select element
+                        <select>
+                            <option value="First Option">First Option</option>
+                            <option value="Second Option">Second Option</option>
+                            <option value="Third Option">Third Option</option>
+                            <option value="Fourth Option">Fourth Option</option>
+                        </select>
+                    </label>
+                </li>
+                <li>
+                    <label>DropDownList
+                        <select id="dropdown">
+                            <option value="First Option">First Option</option>
+                            <option value="Second Option">Second Option</option>
+                            <option value="Third Option">Third Option</option>
+                            <option value="Fourth Option">Fourth Option</option>
+                            <option value="First Option">Fifth Option</option>
+                            <option value="Sixth Option">Sixth Option</option>
+                        </select>
+                    </label>
+                </li>
+                <li>
+                    <label>Slider
+                        <input id="slider" type="range" max="100" />
+                    </label>
+                </li>
+                <li>
+                    <label>Type text
+                        <input type="text" value="Text" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Type password
+                        <input type="password" value="password" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Type search
+                        <input type="search" value="search" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Type url
+                        <input type="url" value="http://www.kendoui.com" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Type email
+                        <input type="email" value="kendoui@kendoui.com" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Type number
+                        <input type="number" value="20" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Type tel
+                        <input type="tel" value="+44 22 11 10" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Type date
+                        <input type="date" value="2012-03-22" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Type time
+                        <input type="time" value="22:30" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Type month
+                        <input type="month" value="2012-01" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Type datetime
+                        <input type="datetime" value="2012-03-22T20:15Z" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Type datetime-local
+                        <input type="datetime-local" value="2012-03-22T20:15" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        Textarea
+                        <textarea style="resize: none">Multiline
+                            Text</textarea>
+                    </label>
+                </li>
+            </ul>
+        </form>
     </div>
 
+    <div data-role="view" id="bar">
+        <a data-role="button" href="#foo">Back to foo</a>
+    </div>
+
+    <div data-role="layout" data-id="default">
+        <header data-role="header">
+            <div data-role="navbar">
+                <a data-role="button" href="#my-drawer" data-rel="drawer" data-icon="ul" data-align="left"></a>
+                <span data-role="view-title"></span>
+            </div>
+        </header>
+    </div>
 
     <script type="text/javascript">
-        new kendo.mobile.Application(document.body, { skin: "flat" });
+        new kendo.mobile.Application(document.body, { skin: "flat", layout: "default", transition: "slide" });
     </script>
 </body>
 </html>
