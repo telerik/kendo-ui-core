@@ -746,6 +746,29 @@
             "name": "stock-chart"
         }
     ],
+    "geoviz": [{
+            "text": "Map",
+            "name": "map",
+            "documentation": "dataviz/map",
+            "spriteCssClass": "mapIcon",
+            "items": [{
+                "text": "Basic usage",
+                "url": "map/index.html",
+                "title": "Example of Kendo UI Map with a simple tile layer",
+                "meta": "With this demo built with Kendo UI, you will be able to find out how Kendo UI Map widget can be implemented for tile maps."
+            }, {
+                "text": "Binding to GeoJSON",
+                "url": "map/geojson.html",
+                "title": "Displaying GeoJSON shapes Kendo UI map layer",
+                "meta": "This demo illustrates how to bind a Kendo UI map layer to GeoJSON shapes."
+            }, {
+                "text": "Events",
+                "url": "map/events.html",
+                "title": "Events API for Kendo UI Chart component",
+                "meta": "This sample demonstrates the events which are specific to Kendo UI Map component."
+			}]
+        }
+    ],
     "Sample Dashboards": [
         {
             "text": "Stock History",

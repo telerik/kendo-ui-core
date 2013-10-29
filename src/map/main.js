@@ -29,8 +29,8 @@ kendo_module({
         limit = util.limitValue;
 
     // Constants ==============================================================
-    var FRICTION = 0.90,
-        MAX_ZOOM = 18,
+    var CSS_PREFIX = "k-",
+        FRICTION = 0.90,
         VELOCITY_MULTIPLIER = 5;
 
     // Map widget =============================================================
@@ -38,9 +38,15 @@ kendo_module({
         init: function(element, options) {
             var map = this;
 
+            kendo.destroy(element);
             Widget.fn.init.call(map, element);
 
             map._initOptions(options);
+
+            this.element
+                .addClass(CSS_PREFIX + this.options.name.toLowerCase())
+                .empty();
+
             this.bind(this.events, options);
 
             map.scrollWrap = $("<div />").appendTo(map.element);
@@ -63,9 +69,11 @@ kendo_module({
         options: {
             name: "Map",
             layers: [],
+            center: [0, 0],
             zoom: 3,
             minSize: 256,
-            minZoom: 2
+            minZoom: 2,
+            maxZoom: 18
         },
 
         events:[
@@ -81,18 +89,38 @@ kendo_module({
             "zoomEnd"
         ],
 
-        zoom: function(level) {
-            if (defined(level)) {
-                this.options.view.zoom = limit(level, this.options.minZoom, MAX_ZOOM);
+        destroy: function() {
+            this.scroller.destroy();
+            Widget.fn.destroy.call(this);
+        },
 
+        zoom: function(level) {
+            var options = this.options;
+
+            if (defined(level)) {
+                options.zoom = limit(level, options.minZoom, options.maxZoom);
                 this._reset();
+
+                return this;
             } else {
-                return this.options.view.zoom;
+                return options.zoom;
             }
         },
 
+        center: function(center) {
+            // TODO: Accept lat,lng array and Location
+            // TODO: Make setter chainable
+            if (center) {
+                this._center = center;
+            } else if (!this._center) {
+                this._center = Location.fromLatLng(this.options.center);
+            }
+
+            return this._center;
+        },
+
         scale: function() {
-            return this.options.minSize * pow(2, this.options.view.zoom);
+            return this.options.minSize * pow(2, this.options.zoom);
         },
 
         toLayerPoint: function(location) {
@@ -104,6 +132,29 @@ kendo_module({
             var point = this.toLayerPoint(location);
 
             return point.subtract(origin);
+        },
+
+        // TODO: Rename to extent
+        viewport: function() {
+            var map = this,
+                scale = map.scale(),
+                halfWidth = map.element.width() / 2,
+                halfHeight = map.element.height() / 2,
+                crs = map.crs,
+                cp = crs.toPoint(map.center(), scale);
+
+            var p0 = cp.clone();
+            p0.x -= halfWidth;
+            p0.y -= halfHeight;
+
+            var p1 = cp.clone();
+            p1.x += halfWidth;
+            p1.y += halfHeight;
+
+            return new Extent(
+                crs.toLocation(p0, scale),
+                crs.toLocation(p1, scale)
+            );
         },
 
         _scroll: function(e) {
@@ -148,47 +199,12 @@ kendo_module({
                 var options = defs[i];
                 var type = dataviz.map.layers[options.type];
                 if (type) {
+                    // TODO: Set layer size
                     layers.push(new type(this, options));
                 }
             }
 
             this.trigger("reset");
-        },
-
-        // TODO: Rename to extent
-        viewport: function() {
-            var map = this,
-                scale = map.scale(),
-                halfWidth = map.element.width() / 2,
-                halfHeight = map.element.height() / 2,
-                crs = map.crs,
-                cp = crs.toPoint(map.center(), scale);
-
-            var p0 = cp.clone();
-            p0.x -= halfWidth;
-            p0.y -= halfHeight;
-
-            var p1 = cp.clone();
-            p1.x += halfWidth;
-            p1.y += halfHeight;
-
-            return new Extent(
-                crs.toLocation(p0, scale),
-                crs.toLocation(p1, scale)
-            );
-        },
-
-        center: function(center) {
-            if (center) {
-                this._center = center;
-            } else if (!this._center) {
-                this._center = new Location(
-                    this.options.view.center[0],
-                    this.options.view.center[1]
-                );
-            }
-
-            return this._center;
         }
     });
 
