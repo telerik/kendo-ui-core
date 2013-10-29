@@ -49,6 +49,11 @@ kendo_module({
         name: "Column resizing",
         description: "Support for column resizing",
         depends: [ "resizable" ]
+    }, {
+        id: "grid-mobile",
+        name: "Grid adaptive rendering",
+        description: "Support for adaptive rendering",
+        depends: [ "mobile.actionsheet", "mobile.pane" ]
     } ]
 });
 

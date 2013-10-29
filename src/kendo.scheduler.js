@@ -20,6 +20,11 @@ kendo_module({
         name: "Scheduler Month View",
         description: "Scheduler Month View",
         depends: [ "scheduler.monthview" ]
+    }, {
+        id: "scheduler-mobile",
+        name: "Scheduler adaptive rendering",
+        description: "Support for adaptive rendering",
+        depends: [ "mobile.actionsheet", "mobile.pane" ]
     } ]
 });
 
