@@ -16,11 +16,15 @@
         Location = map.Location;
 
     // Constants ==============================================================
+    var DEFAULT_WIDTH = 600,
+        DEFAULT_HEIGHT = 400;
+
+    // Implementation =========================================================
     var ShapeLayer = Class.extend({
         init: function(map, options) {
             options = deepExtend({}, options, {
-                width: map.element.width(),
-                height: map.element.height()
+                width: map.element.width() || DEFAULT_WIDTH,
+                height: map.element.height() || DEFAULT_HEIGHT
             });
 
             this._initOptions(options);
