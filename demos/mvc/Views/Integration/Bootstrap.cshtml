@@ -325,7 +325,7 @@
                 ],
                 change: function(e) {
                     theme = this.value();
-                    Application.replaceTheme(theme);
+                    Application.changeTheme(theme, true);
                     initCharts(theme);
                 }
             });
