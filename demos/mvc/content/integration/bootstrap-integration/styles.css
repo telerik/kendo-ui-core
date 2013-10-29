@@ -278,6 +278,10 @@ header .container h1.visible-sm {
 }
 
 @media (max-width: 767px) {
+    .k-menu.k-menu-horizontal .k-item {
+        float: none;
+    }
+
     header .container {
         padding-right: 0;
     }
