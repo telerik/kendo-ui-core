@@ -9,10 +9,12 @@
         .StartTime(new DateTime(2013, 6, 13, 7, 00, 00))
         .Height(400)
         .Timezone("Etc/UTC")
+        .Selectable(true)
         .Events(e =>
         {
             e.DataBinding("scheduler_dataBinding");
             e.DataBound("scheduler_dataBound");
+            e.Change("scheduler_change");
             e.Save("scheduler_save");
             e.Remove("scheduler_remove");
             e.Cancel("scheduler_cancel");
@@ -53,6 +55,24 @@
 
     function scheduler_dataBound(e) {
         kendoConsole.log("dataBound");
+    }
+
+    function scheduler_change(e) {
+        var selection = e.selection;
+        var start = selection.start; //Selection start date
+        var end = selection.end; //Selection end date
+        var isAllDay = selection.isAllDay; //if selected slot/event is all day
+        var element = selection.element; //jQuery object holding selected elements
+
+        var message = "change:: selection from {0:g} till {1:g}";
+
+        if (element.data("uid")) {
+            var event = $("#scheduler").data("kendoScheduler").occurrenceByUid(element.data("uid"));
+
+            message += ". The selected event is '" + event.title + "'";
+        }
+
+        kendoConsole.log(kendo.format(message, start, end));
     }
 
     function scheduler_save(e) {
