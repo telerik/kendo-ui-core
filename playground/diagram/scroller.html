@@ -20,10 +20,7 @@
         <script src="../../src/kendo.colorpicker.js"></script>
         <script src="../../src/kendo.menu.js"></script>
 
-        <script>kendo.support.hasHW3D = false;</script>
-        <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.fx.js"></script>
-        <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
 
         <script src="../../src/kendo.diagram.utils.js"></script>
@@ -114,8 +111,8 @@
                     diagram.canvas.size(cumulativeSize);
                 }
 
-                diagram.bind("boundsChange", canvasResizer);
-                diagram.bind("shapeAdd", canvasResizer);
+                //diagram.bind("boundsChange", canvasResizer);
+                //diagram.bind("shapeAdd", canvasResizer);
 
                 var seq = Shapes["Sequential Data"];
                 seq.text = "Sequential Data.";

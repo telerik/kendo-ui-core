@@ -249,8 +249,10 @@ kendo_module({
 
             return [tl, tr, br, bl];
         },
-        toString: function () {
-            return this.x + " " + this.y + " " + this.width + " " + this.height;
+        toString: function (delimiter) {
+            delimiter = delimiter || " ";
+
+            return this.x + delimiter + this.y + delimiter + this.width + delimiter + this.height;
         }
     });
 

@@ -785,18 +785,31 @@ kendo_module({
         size: function() {
             var canvas = this,
                 size = Visual.fn.size.apply(canvas, arguments),
-                viewBox = canvas.native.viewBox.baseVal ? Rect.toRect(canvas.native.viewBox.baseVal) : Rect.empty();
+                viewBox = this.viewBox();
 
             this._styledSize(canvas.native);
+
             viewBox.width = size.width;
             viewBox.height = size.height;
-            this.native.setAttribute("viewBox", viewBox.x + "," + viewBox.y + "," + viewBox.width + "," + viewBox.height);
+            this.viewBox(viewBox);
 
             return size;
         },
         _styledSize: function(node) {
             var size  = this._sz;
             $(node).css(size);
+        },
+        viewBox: function(rect) {
+            var canvas = this;
+            
+            if(Utils.isUndefined(rect)) {
+                return canvas.native.viewBox.baseVal ? Rect.toRect(canvas.native.viewBox.baseVal) : Rect.empty();
+            }
+
+            rect = Rect.toRect(rect);
+            if(!isNaN(rect.width) && !isNaN(rect.height)) {
+                this.native.setAttribute("viewBox", rect.toString(","));
+            }
         },
         append: function (shape) {
             this.native.appendChild(shape.native);

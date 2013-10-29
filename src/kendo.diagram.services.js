@@ -18,7 +18,8 @@ kendo_module({
         Point = diagram.Point,
         Circle = diagram.Circle,
         Path = diagram.Path,
-        deepExtend = kendo.deepExtend;
+        deepExtend = kendo.deepExtend,
+        Movable = kendo.ui.Movable;
     // Constants ==============================================================
     var Cursors = {
             arrow: "default",
@@ -533,47 +534,46 @@ kendo_module({
 
     var PanTool = EmptyTool.extend({
         init: function (toolService) {
-            EmptyTool.fn.init.call(this, toolService);
+            var tool = this;
+            EmptyTool.fn.init.call(tool, toolService);
 
-            var diagram = this.toolService.diagram,
+            var diagram = tool.toolService.diagram,
                 canvas = diagram.canvas;
             
-            diagram.scroller = this.scroller = $(diagram.scrollable).kendoMobileScroller({
-                scroll: function(args) {
-                    var canvasSize = canvas.size();
-                    canvas.element.style[kendo.support.transitions.prefix + "Transform"] = "translate(" + args.scrollLeft + "px," + args.scrollTop + "px) scale(" + args.sender.movable.scale + ")";
-                    canvas.native.setAttribute("viewBox", [args.scrollLeft, args.scrollTop, parseInt(canvasSize.width), parseInt(canvasSize.height)].join(","));
-                }
+            diagram.scroller = tool.scroller = $(diagram.scrollable).kendoMobileScroller({
+                scroll: $.proxy(tool._move, tool)
             }).data("kendoMobileScroller");
-            this.scroller.disable();
+
+            tool.movableCanvas = new Movable(canvas.element);
+
+            tool.scroller.disable();
         },
         tryActivate: function (meta) {
             return this.toolService.hoveredItem === undefined && meta.ctrlKey;
         },
-        start: function (p) {
-            this.scroller.enable();
-            return;
+        start: function () {
+            var diagram = this.toolService.diagram,
+                canvas = diagram.canvas,
+                canvasSize = canvas.size();
 
-            this.toolService.isPanning = true;
-            this.panStart = this.toolService.diagram._pan;
-            this.panOffset = p;
-            this.panDelta = new Point();	//relative to root
+            this.scroller.enable();
+            this.currentCanvasSize = canvasSize;
         },
-        move: function (p) {
-            return;
-            var diagram = this.toolService.diagram;
-            this.panDelta = p.plus(this.panDelta).minus(this.panOffset);
-            diagram.pan(this.panStart.plus(this.panDelta));
+        move: function() {},//the tool itself should not handle the scrolling. Let kendo scroller take care of this part. Check _move
+        _move: function (args) {
+            var tool = this,
+                diagram = tool.toolService.diagram,
+                canvas = diagram.canvas,
+                canvasSize = tool.currentCanvasSize || canvas.size(),
+                scrollPos = new Point(args.scrollLeft, args.scrollTop),
+                viewBox = new Rect(scrollPos.x, scrollPos.y, parseInt(canvasSize.width, 10), parseInt(canvasSize.height, 10));
+
+            diagram._storePan(scrollPos.times(-1));
+            tool.movableCanvas.moveTo(scrollPos);
+            canvas.viewBox(viewBox);
         },
         end: function () {
             this.scroller.disable();
-            return;
-
-            var diagram = this.toolService.diagram;
-            diagram.undoRedoService.begin();
-            diagram.undoRedoService.add(new PanUndoUnit(this.panStart, diagram._pan, diagram));
-            diagram.undoRedoService.commit();
-            this.toolService.isPanning = false;
         },
         getCursor: function () {
             return Cursors.move;
