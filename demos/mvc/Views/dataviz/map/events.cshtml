@@ -18,14 +18,46 @@
                     },
                     style: {
                         stroke: {
-                            color: "#aaa"
+                            color: "#ccebc5"
+                        },
+                        fill: {
+                            color: "#b3cde3"
                         }
                     }
                 }],
+                click: onClick,
+                reset: onReset,
+                pan: onPan,
+                panEnd: onPanEnd,
+                shapeClick: onShapeClick,
                 shapeCreated: onShapeCreated,
                 shapeMouseEnter: onShapeMouseEnter,
-                shapeMouseLeave: onShapeMouseLeave
+                shapeMouseLeave: onShapeMouseLeave,
+                zoomStart: onZoomStart,
+                zoomEnd: onZoomEnd
             });
+        }
+
+        function onClick(e) {
+            kendoConsole.log("Click at ...");
+        }
+
+        function onReset(e) {
+            kendoConsole.log("Reset");
+        }
+
+        function onPan(e) {
+            kendoConsole.log("Pan");
+        }
+
+        function onPanEnd(e) {
+            kendoConsole.log("Pan end");
+        }
+
+        function onShapeClick(e) {
+            kendoConsole.log(kendo.format(
+                "Shape click :: {0}", e.shape.dataItem.properties.name
+            ));
         }
 
         function onShapeCreated(e) {
@@ -45,6 +77,14 @@
                 "Shape mouseLeave :: {0}", e.shape.dataItem.properties.name
             ));
         }        
+
+        function onZoomStart(e) {
+            kendoConsole.log("Zoom start");
+        }
+
+        function onZoomEnd(e) {
+            kendoConsole.log("Zoom end");
+        }
 
         $(document).ready(createMap);
     </script>
