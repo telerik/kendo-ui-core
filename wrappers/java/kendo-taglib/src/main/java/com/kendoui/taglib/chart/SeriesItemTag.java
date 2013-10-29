@@ -293,6 +293,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("lowField", value);
     }
 
+    public java.lang.String getLowerField() {
+        return (java.lang.String)getProperty("lowerField");
+    }
+
+    public void setLowerField(java.lang.String value) {
+        setProperty("lowerField", value);
+    }
+
     public float getMargin() {
         return (float)getProperty("margin");
     }
@@ -307,6 +315,22 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setMaxSize(float value) {
         setProperty("maxSize", value);
+    }
+
+    public java.lang.String getMeanField() {
+        return (java.lang.String)getProperty("meanField");
+    }
+
+    public void setMeanField(java.lang.String value) {
+        setProperty("meanField", value);
+    }
+
+    public java.lang.String getMedianField() {
+        return (java.lang.String)getProperty("medianField");
+    }
+
+    public void setMedianField(java.lang.String value) {
+        setProperty("medianField", value);
     }
 
     public float getMinSize() {
@@ -373,12 +397,36 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
         setProperty("openField", value);
     }
 
+    public java.lang.String getOutliersField() {
+        return (java.lang.String)getProperty("outliersField");
+    }
+
+    public void setOutliersField(java.lang.String value) {
+        setProperty("outliersField", value);
+    }
+
     public float getPadding() {
         return (float)getProperty("padding");
     }
 
     public void setPadding(float value) {
         setProperty("padding", value);
+    }
+
+    public java.lang.String getQ1Field() {
+        return (java.lang.String)getProperty("q1Field");
+    }
+
+    public void setQ1Field(java.lang.String value) {
+        setProperty("q1Field", value);
+    }
+
+    public java.lang.String getQ3Field() {
+        return (java.lang.String)getProperty("q3Field");
+    }
+
+    public void setQ3Field(java.lang.String value) {
+        setProperty("q3Field", value);
     }
 
     public float getSegmentSpacing() {
@@ -451,6 +499,14 @@ public class SeriesItemTag extends  BaseTag  /* interfaces *//* interfaces */ {
 
     public void setType(java.lang.String value) {
         setProperty("type", value);
+    }
+
+    public java.lang.String getUpperField() {
+        return (java.lang.String)getProperty("upperField");
+    }
+
+    public void setUpperField(java.lang.String value) {
+        setProperty("upperField", value);
     }
 
     public boolean getVisibleInLegend() {

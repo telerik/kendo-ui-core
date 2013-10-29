@@ -309,8 +309,8 @@ The last element is always created like a rectangle since there is no following 
     * @param string $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItem
     */
-    public function outliresField($value) {
-        return $this->setProperty('outliresField', $value);
+    public function outliersField($value) {
+        return $this->setProperty('outliersField', $value);
     }
 
     /**
