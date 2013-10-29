@@ -32,7 +32,9 @@ kendo_module({
         CHANGING = "changing",
         REFRESH = "refresh",
         CURRENT_PAGE_CLASS = "km-current-page",
+        VIRTUAL_PAGE_CLASS = "km-virtual-page",
         FUNCTION = "function",
+        ITEM_CHANGE = "itemChange",
 
         VIRTUAL_PAGE_COUNT = 3,
         LEFT_PAGE = -1,
@@ -302,16 +304,15 @@ kendo_module({
             that.pages = [];
             that._initPages();
             that.resizeTo(that.pane.size());
-            that.dataSource = DataSource.create(options.dataSource);
-            that._buffer();
-            that._pendingPageRefresh = false;
-            that._pendingWidgetRefresh = false;
-
-            if(that.options.autoBind) {
-                that.dataSource.fetch();
-            }
 
             that.pane.dimension.forceEnabled();
+        },
+
+        setDataSource: function(dataSource) {
+            this.dataSource = DataSource.create(dataSource);
+            this._buffer();
+            this._pendingPageRefresh = false;
+            this._pendingWidgetRefresh = false;
         },
 
         _viewShow: function() {
@@ -320,12 +321,16 @@ kendo_module({
                 setTimeout(function() {
                     that._resetPages();
                 }, 0);
-                that._pendingWidgetRefresh= false;
+                that._pendingWidgetRefresh = false;
             }
         },
 
         _buffer: function() {
             var itemsPerPage = this.options.itemsPerPage;
+
+            if(this.buffer) {
+                this.buffer.destroy();
+            }
 
             if(itemsPerPage > 1) {
                 this.buffer = new BatchBuffer(this.dataSource, itemsPerPage);
@@ -529,7 +534,7 @@ kendo_module({
         },
 
         _onReset: function() {
-            this.pageCount = this.dataSource.total();
+            this.pageCount = ceil(this.dataSource.total() / this.options.itemsPerPage);
 
             if(this.element.is(":visible")) {
                 this._resetPages();
@@ -576,6 +581,8 @@ kendo_module({
             }
 
             kendo.mobile.init(page.element);
+            this.trigger(ITEM_CHANGE, { item: page.element, data: view, ns: kendo.mobile.ui });
+
         }
     });
 
@@ -583,7 +590,7 @@ kendo_module({
 
     var Page = kendo.Class.extend({
         init: function(container) {
-            this.element = $("<div class='km-virtual-page'></div>");
+            this.element = $("<div class='" + VIRTUAL_PAGE_CLASS + "'></div>");
             this.width = container.width();
             this.element.width(this.width);
             container.append(this.element);
@@ -643,12 +650,20 @@ kendo_module({
 
             that.page = options.page;
 
-            that._content = options.dataSource ? new VirtualScrollViewContent(that.inner, that.pane, options) : new ScrollViewContent(that.inner, that.pane);
+            var empty = this.inner.children().length === 0;
+
+            that._content = empty ? new VirtualScrollViewContent(that.inner, that.pane, options) : new ScrollViewContent(that.inner, that.pane);
             that._content.page = that.page;
 
             that._content.bind("reset", function() {
                 that._syncWithContent();
             });
+
+            that._content.bind(ITEM_CHANGE, function(e) {
+                that.trigger(ITEM_CHANGE, e);
+            });
+
+            that.setDataSource(options.dataSource);
         },
 
         options: {
@@ -704,6 +719,23 @@ kendo_module({
         scrollTo: function(page, instant) {
             this._content.scrollTo(page, instant);
             this._syncWithContent();
+        },
+
+        setDataSource: function(dataSource) {
+            // the listView should have a ready datasource for MVVM to function properly. But an empty datasource should not empty the element
+            var emptyDataSource = !dataSource;
+            this.dataSource = DataSource.create(dataSource);
+
+            this._content.setDataSource(this.dataSource);
+
+            if (this.options.autoBind && !emptyDataSource) {
+                // this.items().remove();
+                this.dataSource.fetch();
+            }
+        },
+
+        items: function() {
+            return this.element.find("." + VIRTUAL_PAGE_CLASS);
         },
 
         _syncWithContent: function() {
