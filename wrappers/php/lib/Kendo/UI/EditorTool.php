@@ -6,7 +6,7 @@ class EditorTool extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * When specifying a tool as an object, a tool name is required.
+    * When specifying a tool as an object, a tool name is required. Please note that "undo" and "redo" are reserved tool names.
     * @param string $value
     * @return \Kendo\UI\EditorTool
     */

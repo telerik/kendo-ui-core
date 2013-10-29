@@ -263,6 +263,15 @@ class SchedulerView extends \Kendo\SerializableObject {
     }
 
     /**
+    * If set to true the view will be initially shown in business hours mode. By default view is displyed in full day mode.
+    * @param boolean $value
+    * @return \Kendo\UI\SchedulerView
+    */
+    public function showWorkHours($value) {
+        return $this->setProperty('showWorkHours', $value);
+    }
+
+    /**
     * Sets the slotTemplate option of the SchedulerView.
     * The template used to render the time slot cells.The fields which can be used in the template are:
     * @param string $value The id of the element which represents the kendo template.
