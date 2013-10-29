@@ -1531,12 +1531,12 @@ p#copy
 .widgetGrid .narrowCol
 {
     float:left;
-    width:465px;
+    width:435px;
 }
 
 .widgetGrid .narrowCol
 {
-    width:260px;
+    width:220px;
 }
 
 .widgetGrid .narrowCol ul:empty
@@ -1589,7 +1589,7 @@ p#copy
 .widgetGrid .wideCol ul,
 .widgetGrid .narrowCol ul
 {
-    min-width: 98px;
+    min-width: 90px;
 }
 
 .widgetGrid li
@@ -1629,28 +1629,26 @@ p#copy
 
 .widgetGrid .dashboards
 {
-    width:235px;
+    width:310px;
 }
 
-.widgetGrid .dataviz .dashboards
-{
-    width:370px;
-}
 
-.widgetGrid .gauges
+.widgetGrid .gauges,
+.widgetGrid .financial,
+.widgetGrid .qrcodes,
+.widgetGrid .geoviz
 {
-    width:180px;
-    min-height: 78px;
+    width:197px;
+    min-height:80px;
     background:rgba(221, 221, 221, 0.33);
 }
 
-.widgetGrid .qrcodes
+.widgetGrid .qrcodes,
+.widgetGrid .geoviz
 {
-    width:180px;
-    min-height: 98px;
-    background:rgba(221, 221, 221, 0.33);
-    margin-left: -180px;
-    margin-top: 80px;
+    margin-left:-197px;
+    margin-top:80px;
+    min-height:98px;
 }
 
 .widgetGrid .gauges ul,
@@ -1662,17 +1660,9 @@ p#copy
 .widgetGrid .financial,
 .widgetGrid .geoviz
 {
-    width:150px;
-    min-height: 80px;
     background:rgba(221, 221, 221, 0.15);
 }
 
-.widgetGrid .geoviz
-{
-    margin-left: -150px;
-    margin-top: 80px;
-    min-height: 98px;
-}
 
 .wideCol.dashboards ul,
 #deviceList
@@ -1684,19 +1674,19 @@ p#copy
 .wideCol.dashboards ul,
 .narrowCol.dashboards ul
 {
-    margin-top:35px;
+    margin-top:25px;
 }
 
 .dashboards li
 {
     float:left;
-    width:105px;
+    width:94px;
     text-align: center;
 }
 
 .dashboards a
 {
-    width:90px;
+    width:80px;
 }
 
 .dashboards a:first-child
@@ -1709,6 +1699,7 @@ p#copy
 .dashboards a+a
 {
     padding:3px 0 0;
+    width: 94px;
 }
 
 .dashboards img
