@@ -1639,7 +1639,7 @@ kendo_module({
 
             var template = kendo.template('<ul>'+
                 '<li class="km-actionsheet-title">#:title#</li>'+
-                '<li><a href="\\#" class="k-button">#:confirmDelete#</a></li>'+
+                '<li><a href="\\#" class="k-button k-grid-delete">#:confirmDelete#</a></li>'+
             '</ul>');
 
             var html = $(template(messages)).appendTo(that.view.element);
@@ -2382,7 +2382,7 @@ kendo_module({
 
                 this.pane = kendo.mobile.ui.Pane.wrap(html);
                 this.view = this.pane.view();
-                this._actionSheetPopupOptions = $(document.documentElement).hasClass("km-root") ? {} : {
+                this._actionSheetPopupOptions = $(document.documentElement).hasClass("km-root") ? { modal: false } : {
                     align: "bottom center",
                     position: "bottom center",
                     effect: "slideIn:up"

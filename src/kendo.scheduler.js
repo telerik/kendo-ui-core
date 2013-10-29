@@ -964,7 +964,7 @@ kendo_module({
             this.view = this.pane.view();
             this._actionSheetButtonTemplate = kendo.template('<li><a #=attr# class="k-button #=className#" href="\\#">#:text#</a></li>');
 
-            this._actionSheetPopupOptions = $(document.documentElement).hasClass("km-root") ? {} : {
+            this._actionSheetPopupOptions = $(document.documentElement).hasClass("km-root") ? { modal: false } : {
                 align: "bottom center",
                 position: "bottom center",
                 effect: "slideIn:up"
