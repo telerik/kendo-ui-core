@@ -85,6 +85,14 @@ public class MultiSelectTag extends WidgetTag /* interfaces */implements DataBou
         setProperty("autoBind", value);
     }
 
+    public boolean getAutoClose() {
+        return (boolean)getProperty("autoClose");
+    }
+
+    public void setAutoClose(boolean value) {
+        setProperty("autoClose", value);
+    }
+
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
     }

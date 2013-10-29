@@ -14317,6 +14317,12 @@ by setting the close animation.  Each animation also has a direction which can b
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>Controls whether to close the widget suggestion list on item selection.</description>
+            <name>autoClose</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>The data source of the widget which is used to display a list of values. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
 instance.If the dataSource option is set to a JavaScript object or array the widget will initialize a new kendo.data.DataSource instance using that value as data source configuration.If the dataSource option is an existing kendo.data.DataSource instance the widget will use that instance and will not initialize a new one.</description>
             <name>dataSource</name>
