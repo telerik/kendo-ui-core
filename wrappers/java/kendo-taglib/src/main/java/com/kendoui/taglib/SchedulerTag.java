@@ -87,6 +87,10 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setEvent("cancel", value.getBody());
     }
 
+    public void setChange(ChangeFunctionTag value) {
+        setEvent("change", value.getBody());
+    }
+
     public void setDataBinding(DataBindingFunctionTag value) {
         setEvent("dataBinding", value.getBody());
     }
@@ -361,6 +365,18 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
 
     public void setCancel(String value) {
         setProperty("cancel", new Function(value));
+    }
+
+    public String getChange() {
+        Function property = ((Function)getProperty("change"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setChange(String value) {
+        setProperty("change", new Function(value));
     }
 
     public String getDataBinding() {

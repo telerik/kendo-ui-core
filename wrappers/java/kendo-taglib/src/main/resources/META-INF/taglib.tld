@@ -15943,6 +15943,11 @@ That way all users would see the same dates and times no matter their configured
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
+            <description>Fired when the user selects a cell or event in the scheduler.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+            <name>change</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
             <description>Fired before the widget binds to its data source.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>dataBinding</name>
             <rtexprvalue>true</rtexprvalue>
@@ -16974,6 +16979,12 @@ By default the Kendo UI Scheduler widget displays "day" and "week" view.</descri
         <description>Fired when the user cancels editing by clicking the "cancel" button.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
         <name>scheduler-cancel</name>
         <tag-class>com.kendoui.taglib.scheduler.CancelFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the user selects a cell or event in the scheduler.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
+        <name>scheduler-change</name>
+        <tag-class>com.kendoui.taglib.scheduler.ChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
