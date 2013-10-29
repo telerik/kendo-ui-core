@@ -232,8 +232,8 @@
                 var patternView = view.find(".k-recur-view");
                 var interval = patternView.find("[data-role=numerictextbox].k-recur-interval");
 
-                var weekday = patternView.find("[data-role=dropdownlist].k-recur-weekday");
-                var weekdayOffset = patternView.find("[data-role=dropdownlist].k-recur-weekday-offset");
+                var weekday = patternView.find("select.k-recur-weekday");
+                var weekdayOffset = patternView.find("select.k-recur-weekday-offset");
 
                 var monthday = patternView.find("[data-role=numerictextbox].k-recur-monthday");
 
@@ -260,12 +260,12 @@
                 var patternView = view.find(".k-recur-view");
                 var interval = patternView.find("[data-role=numerictextbox].k-recur-interval");
 
-                var weekday = patternView.find("[data-role=dropdownlist].k-recur-weekday");
-                var weekdayOffset = patternView.find("[data-role=dropdownlist].k-recur-weekday-offset");
+                var weekday = patternView.find("select.k-recur-weekday");
+                var weekdayOffset = patternView.find("select.k-recur-weekday-offset");
 
                 var monthday = patternView.find("[data-role=numerictextbox].k-recur-monthday");
 
-                var month = patternView.find("[data-role=dropdownlist].k-recur-month");
+                var month = patternView.find("select.k-recur-month");
 
                 ok(interval[0]);
                 equal(interval.data("kendoNumericTextBox").value(), 2);

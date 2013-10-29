@@ -1571,9 +1571,11 @@ kendo_module({
             var that = this;
             var weekDays = that._value.weekDays;
             var positions = that._value.positions;
+            var weekDayOffsetWidget = that._weekDayOffset;
             var weekDayOffset;
             var weekDayValue;
             var length;
+            var method;
 
             if (weekDays) {
                 length = weekDays.length;
@@ -1597,8 +1599,10 @@ kendo_module({
                     weekDayOffset = weekDays.offset || "";
                 }
 
-                that._weekDayOffset.value(weekDayOffset);
-                that._weekDay.value(weekDayValue);
+                method = weekDayOffsetWidget.value ? "value" : "val";
+
+                weekDayOffsetWidget[method](weekDayOffset);
+                that._weekDay[method](weekDayValue);
             }
         },
 
@@ -2077,9 +2081,9 @@ kendo_module({
            '</div>' +
            '<div class="k-weekday-view" style="display:none">' +
                '<div class="k-edit-label"><label>#:messages.every#</label></div>' +
-               '<div class="k-edit-field"><input class="k-recur-weekday-offset" /></div>' +
+               '<div class="k-edit-field"><select class="k-recur-weekday-offset"></select></div>' +
                '<div class="k-edit-label"><label>#:messages.day#</label></div>' +
-               '<div class="k-edit-field"><input class="k-recur-weekday" /></div>' +
+               '<div class="k-edit-field"><select class="k-recur-weekday"></select></div>' +
            '</div>' +
        '# } else if (frequency === "yearly") { #' +
            '<div class="k-edit-label"><label>#:messages.repeatBy#</label></div>' +
@@ -2090,12 +2094,12 @@ kendo_module({
            '</div>' +
            '<div class="k-weekday-view" style="display:none">' +
                '<div class="k-edit-label"><label>#:messages.every#</label></div>' +
-               '<div class="k-edit-field"><input class="k-recur-weekday-offset" /></div>' +
+               '<div class="k-edit-field"><select class="k-recur-weekday-offset"></select></div>' +
                '<div class="k-edit-label"><label>#:messages.day#</label></div>' +
-               '<div class="k-edit-field"><input class="k-recur-weekday" /></div>' +
+               '<div class="k-edit-field"><select class="k-recur-weekday"></select></div>' +
            '</div>' +
            '<div class="k-edit-label"><label>#:messages.month#</label></div>' +
-           '<div class="k-edit-field"><input class="k-recur-month" /></div>' +
+           '<div class="k-edit-field"><select class="k-recur-month"></select></div>' +
        '# } #'
     );
 
@@ -2126,6 +2130,8 @@ kendo_module({
             BaseRecurrenceEditor.fn.init.call(that, element, options);
 
             options = that.options;
+
+            that._optionTemplate = kendo.template('<option value="#:value#">#:text#</option>');
 
             that.value(options.value);
 
@@ -2454,31 +2460,76 @@ kendo_module({
             that._initUntil();
         },
 
+        _initWeekDay: function() {
+            var that = this, data;
+
+            var weekdayMessage = that.options.messages.weekdays;
+            var offsetMessage = that.options.messages.offsetPositions;
+
+            var weekDaySelect = that._container.find(".k-recur-weekday");
+
+            var change = function() {
+                that._weekDayRule();
+                that.trigger("change");
+            };
+
+            if (weekDaySelect[0]) {
+                that._weekDayOffset = that._container.find(".k-recur-weekday-offset")
+                                          .html(that._options([
+                                            { text: offsetMessage.first, value: "1" },
+                                            { text: offsetMessage.second, value: "2" },
+                                            { text: offsetMessage.third, value: "3" },
+                                            { text: offsetMessage.fourth, value: "4" },
+                                            { text: offsetMessage.last, value: "-1" }
+                                          ]))
+                                          .change(change);
+
+                data = [
+                    { text: weekdayMessage.day, value: "day" },
+                    { text: weekdayMessage.weekday, value: "weekday" },
+                    { text: weekdayMessage.weekend, value: "weekend" }
+                ];
+
+                data = data.concat($.map(kendo.culture().calendar.days.names, function(dayName, idx) {
+                    return {
+                        text: dayName,
+                        value: idx
+                    };
+                }));
+
+                that._weekDay = weekDaySelect.html(that._options(data))
+                                             .change(change)
+                                             .val(that.options.start.getDay());
+
+                that._weekDayView();
+            }
+        },
+
         _initMonth: function() {
             var that = this;
             var rule = that._value;
             var start = that.options.start;
             var month = rule.months || [start.getMonth() + 1];
-            var monthInput = that._container.find(".k-recur-month");
+            var monthSelect = that._container.find(".k-recur-month");
             var monthNames = kendo.culture().calendar.months.names;
 
-            if (monthInput[0]) {
-                that._monthDropDownList = new DropDownList(monthInput, {
-                    dataTextField: "text",
-                    dataValueField: "value",
-                    dataSource: $.map(monthNames, function(monthName, idx) {
-                        return {
-                            text: monthName,
-                            value: idx + 1
-                        };
-                    }),
-                    change: function() {
-                        rule.months = [Number(this.value())];
-                    }
+            if (monthSelect[0]) {
+                var data = $.map(monthNames, function(monthName, idx) {
+                    return {
+                        text: monthName,
+                        value: idx + 1
+                    };
                 });
 
+                monthSelect.html(that._options(data))
+                           .change(function() {
+                               rule.months = [Number(this.value)];
+                           });
+
+                that._monthSelect = monthSelect;
+
                 if (month) {
-                    that._monthDropDownList.value(month[0]);
+                    monthSelect.val(month[0]);
                 }
             }
 
@@ -2506,10 +2557,10 @@ kendo_module({
                 });
 
                 var init = function(val) {
-                    var weekDayName = that._weekDay.value();
-                    var weekDayOffset = that._weekDayOffset.value();
+                    var weekDayName = that._weekDay.val();
+                    var weekDayOffset = that._weekDayOffset.val();
                     var monthDay = that._monthDay.value();
-                    var month = that._monthDropDownList ? that._monthDropDownList.value() : null;
+                    var month = that._monthSelect ? that._monthSelect.val() : null;
 
                     if (val === "monthday") {
                         rule.weekDays = null;
@@ -2562,6 +2613,23 @@ kendo_module({
                                .on("change", function() {
                                    that._value.until = kendo.parseDate(this.value, "yyyy-MM-dd");
                                });
+        },
+
+        _options: function(data, optionLabel) {
+            var idx = 0;
+            var html = "";
+            var length = data.length;
+            var template = this._optionTemplate;
+
+            if (optionLabel) {
+                html += template({ value: "", text: optionLabel });
+            }
+
+            for (; idx < length; idx++) {
+                html += template(data[idx]);
+            }
+
+            return html;
         }
     });
 
