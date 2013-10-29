@@ -315,3 +315,32 @@ header .container h1.visible-sm {
     }
 }
 
+.k-black body,
+.k-metroblack body,
+.k-black .well,
+.k-metroblack .well,
+.k-black .ra-well-title,
+.k-metroblack .ra-well-title
+{
+    border-color: #444;
+    background-color: #1e1e1e;
+    color: #fff;
+}
+
+.k-highcontrast body,
+.k-highcontrast .well
+.k-highcontrast .ra-well-title
+{
+    border-color: #664e62;
+    background-color: #2c232b;
+    color: #fff;
+}
+
+.k-moonlight body,
+.k-moonlight .well,
+.k-moonlight .ra-well-title
+{
+    border-color: #171e28;
+    background-color: #212a33;
+    color: #fff;
+}
