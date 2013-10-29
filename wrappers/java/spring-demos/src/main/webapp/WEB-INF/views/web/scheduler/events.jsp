@@ -12,9 +12,9 @@
 <c:url value="/web/scheduler/events/destroy" var="destroyUrl" />
 
 <%
-	Date date = new SimpleDateFormat("yyyy/MM/dd").parse("2013/6/13");
-	
-	Date startTime = new SimpleDateFormat("yyyy/MM/dd hh:mm").parse("2013/6/13 7:00");
+    Date date = new SimpleDateFormat("yyyy/MM/dd").parse("2013/6/13");
+    
+    Date startTime = new SimpleDateFormat("yyyy/MM/dd hh:mm").parse("2013/6/13 7:00");
 %>
 <demo:header />
 <script>
@@ -24,6 +24,23 @@ function scheduler_dataBinding(e) {
 
 function scheduler_dataBound(e) {
     kendoConsole.log("dataBound");
+}
+
+function scheduler_change(e) {
+    var selection = e.selection;
+    var start = selection.start; //Selection start date
+    var end = selection.end; //Selection end date
+    var isAllDay = selection.isAllDay; //if selected slot/event is all day
+    var element = selection.element; //jQuery object holding selected elements
+
+    var message = "change:: selection from {0:g} till {1:g}";
+
+    if (element.data("uid")) {
+        var event = $("#scheduler").data("kendoScheduler").occurrenceByUid(element.data("uid"));
+        message += ". The selected event is '" + event.title + "'";
+    }
+
+    kendoConsole.log(kendo.format(message, start, end));
 }
 
 function scheduler_save(e) {
@@ -70,17 +87,17 @@ function scheduler_navigate(e) {
     kendoConsole.log(kendo.format("navigate:: action:{0}; view:{1}; date:{2:d};", e.action, e.view, e.date));
 }
 </script>
-    <kendo:scheduler name="scheduler" timezone="Etc/UTC" height="400" date="<%= date %>" startTime="<%= startTime %>"
-    	dataBinding="scheduler_dataBinding" dataBound="scheduler_dataBound" save="scheduler_save"
-    	remove="scheduler_remove" edit="scheduler_edit" cancel="scheduler_cancel" moveStart="scheduler_moveStart"
-    	moveEnd="scheduler_moveEnd" move="scheduler_move" resizeStart="scheduler_resizeStart"
-    	resizeEnd="scheduler_resizeEnd" resize="scheduler_resize" navigate="scheduler_navigate">
-    	<kendo:scheduler-views>
-    		<kendo:scheduler-view type="day" />
-    		<kendo:scheduler-view type="week" selected="true" />
-    		<kendo:scheduler-view type="month"  />
-    		<kendo:scheduler-view type="agenda" />
-    	</kendo:scheduler-views>
+    <kendo:scheduler name="scheduler" timezone="Etc/UTC" height="400" date="<%= date %>" startTime="<%= startTime %>" selectable="true"
+        dataBinding="scheduler_dataBinding" dataBound="scheduler_dataBound" change="scheduler_change" save="scheduler_save"
+        remove="scheduler_remove" edit="scheduler_edit" cancel="scheduler_cancel" moveStart="scheduler_moveStart"
+        moveEnd="scheduler_moveEnd" move="scheduler_move" resizeStart="scheduler_resizeStart"
+        resizeEnd="scheduler_resizeEnd" resize="scheduler_resize" navigate="scheduler_navigate">
+        <kendo:scheduler-views>
+            <kendo:scheduler-view type="day" />
+            <kendo:scheduler-view type="week" selected="true" />
+            <kendo:scheduler-view type="month"  />
+            <kendo:scheduler-view type="agenda" />
+        </kendo:scheduler-views>
         <kendo:dataSource batch="true">
              <kendo:dataSource-schema>
                 <kendo:dataSource-schema-model id="taskId">
@@ -104,15 +121,15 @@ function scheduler_navigate(e) {
                 <kendo:dataSource-transport-update url="${updateUrl}" dataType="json" type="POST" contentType="application/json" />
                 <kendo:dataSource-transport-destroy url="${destroyUrl}" dataType="json" type="POST" contentType="application/json" />
                 <kendo:dataSource-transport-parameterMap>
-                	<script>
-	                	function parameterMap(options, type) { 
-	                		if(type==="read"){
-	                			return JSON.stringify(options);
-	                		} else {
-	                			return JSON.stringify(options.models);
-	                		}
-	                	}
-                	</script>
+                    <script>
+                        function parameterMap(options, type) { 
+                            if(type==="read"){
+                                return JSON.stringify(options);
+                            } else {
+                                return JSON.stringify(options.models);
+                            }
+                        }
+                    </script>
                 </kendo:dataSource-transport-parameterMap>              
             </kendo:dataSource-transport>
         </kendo:dataSource>
