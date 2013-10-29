@@ -1,0 +1,14 @@
+<div id="example" class="k-content absConf">
+    <div class="chart-wrapper" style="margin: auto;">
+        <div id="map"></div>
+    </div>
+    <script>
+        function createMap() {
+            $("#map").kendoMap({
+            });
+        }
+
+        $(document).ready(createMap);
+        $(document).bind("kendo:skinChange", createMap);
+    </script>
+</div>

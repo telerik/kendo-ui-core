@@ -1658,11 +1658,18 @@ p#copy
     padding-bottom: 8px;
 }
 
-.widgetGrid .financial
+.widgetGrid .financial,
+.widgetGrid .geoviz
 {
     width:150px;
-    min-height: 178px;
+    min-height: 100px;
     background:rgba(221, 221, 221, 0.15);
+}
+
+.widgetGrid .geoviz
+{
+    margin-left: -150px;
+    margin-top: 78px;
 }
 
 .wideCol.dashboards ul,
