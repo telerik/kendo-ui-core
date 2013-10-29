@@ -1509,6 +1509,17 @@ kendo_module({
                     clearContainer: false
                 }).data("kendoEditable");
 
+            if (that._isMobile) {
+                container.find("input[type=checkbox],input[type=radio]")
+                         .parent(".k-edit-field")
+                         .addClass("k-check")
+                         .prev(".k-edit-label")
+                         .addClass("k-check")
+                         .click(function() {
+                             $(this).next().children("input").click();
+                         });
+            }
+
             that._openPopUpEditor();
 
             that.trigger(EDIT, { container: container, model: model });
