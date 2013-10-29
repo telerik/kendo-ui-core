@@ -122,7 +122,6 @@ kendo_module({
             layout: "",
             collapsible: false,
             initial: null,
-            historyTransition: null,
             loading: "<h1>Loading...</h1>"
         },
 
@@ -156,7 +155,6 @@ kendo_module({
             var that = this,
                 options = that.options,
                 initial = options.initial,
-                historyTransition = options.historyTransition,
                 viewEngine = this.viewEngine;
 
             router.bind("init", function(e) {
