@@ -199,6 +199,7 @@ kendo_module({
                 var options = defs[i];
                 var type = dataviz.map.layers[options.type];
                 if (type) {
+                    // TODO: Set layer size
                     layers.push(new type(this, options));
                 }
             }
