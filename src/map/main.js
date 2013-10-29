@@ -211,11 +211,9 @@ kendo_module({
             for (var i = 0; i < defs.length; i++) {
                 // TODO: Either pass layer type directly or create from a factory based on type id
                 var options = defs[i];
-                var type = dataviz.map.layers[options.type];
-                if (type) {
-                    // TODO: Set layer size
-                    layers.push(new type(this, options));
-                }
+                var type = dataviz.map.layers[options.type || "shape"];
+                // TODO: Set layer size
+                layers.push(new type(this, options));
             }
 
             this.trigger("reset");
