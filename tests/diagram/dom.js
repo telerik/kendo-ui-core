@@ -103,30 +103,30 @@ test("Bring into view - many shapes", function () {
     deepEqual(kdiagram.pan(), newPan);
 });
 
-test("Bring into view - after zoom", function () {
-    var s = kdiagram.addShape(new Point());
-    var s1 = kdiagram.addShape(new Point(500, 500));
-    kdiagram.zoom(2);
-    var rect = s.visualBounds().union(s1.visualBounds()),
-        viewport = kdiagram.viewport();
+//test("Bring into view - after zoom", function () {
+//    var s = kdiagram.addShape(new Point());
+//    var s1 = kdiagram.addShape(new Point(500, 500));
+//    kdiagram.zoom(2);
+//    var rect = s.visualBounds().union(s1.visualBounds()),
+//        viewport = kdiagram.viewport();
 
-    kdiagram.bringIntoView([s, s1]);
-    var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
-    deepEqual(kdiagram.pan(), newPan);
-});
+//    kdiagram.bringIntoView([s, s1]);
+//    var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center());
+//    deepEqual(kdiagram.pan(), newPan);
+//});
 
-test("Bring into view - after zoom and pan", function () {
-    var s = kdiagram.addShape(new Point());
-    var s1 = kdiagram.addShape(new Point(500, 500));
-    kdiagram.zoom(2);
-    kdiagram.pan(new Point(300, 300));
-    var rect = s.visualBounds().union(s1.visualBounds()),
-        viewport = kdiagram.viewport();
+//test("Bring into view - after zoom and pan", function () {
+//    var s = kdiagram.addShape(new Point());
+//    var s1 = kdiagram.addShape(new Point(500, 500));
+//    kdiagram.zoom(2);
+//    kdiagram.pan(new Point(300, 300));
+//    var rect = s.visualBounds().union(s1.visualBounds()),
+//        viewport = kdiagram.viewport();
 
-    var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center()).plus(kdiagram.pan());
-    kdiagram.bringIntoView([s, s1]);
-    deepEqual(kdiagram.pan(), newPan);
-});
+//    var newPan = new Point(viewport.width / 2, viewport.height / 2).minus(rect.center()).plus(kdiagram.pan());
+//    kdiagram.bringIntoView([s, s1]);
+//    deepEqual(kdiagram.pan(), newPan);
+//});
 
 test("Bring into view - align top right", function () {
     var s = kdiagram.addShape(new Point());
@@ -242,16 +242,16 @@ test("Shape bounds changed event is raised after bounds set", function () {
     ok(raised);
 });
 
-test("Shape visual bounds is ok after pan", function () {
-    var s = kdiagram.addShape(new Point(0, 0));
-    kdiagram.pan(new Point(100, 100));
+//test("Shape visual bounds is ok after pan", function () {
+//    var s = kdiagram.addShape(new Point(0, 0));
+//    kdiagram.pan(new Point(100, 100));
 
-    var pan = kdiagram.pan();
-    var vb = s.visualBounds();
-    var b = s.bounds();
-    equal(b.x + pan.x, vb.x);
-    equal(b.y + pan.y, vb.y);
-});
+//    var pan = kdiagram.pan();
+//    var vb = s.visualBounds();
+//    var b = s.bounds();
+//    equal(b.x + pan.x, vb.x);
+//    equal(b.y + pan.y, vb.y);
+//});
 
 test("Shape visual bounds is ok after zoom", function () {
     var s = kdiagram.addShape(new Point(0, 0));
