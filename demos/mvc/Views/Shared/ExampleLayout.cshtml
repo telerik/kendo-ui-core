@@ -115,7 +115,9 @@
                         tabstrip.select(0);
                     }
                 }
-            }).find("li:first").click();
+            })
+            .data("kendoTabStrip")
+            .select(0);
 
         </script>
     }
