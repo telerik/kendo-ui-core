@@ -69,6 +69,7 @@ kendo_module({
         },
 
         events:[
+            "click",
             "reset",
             "pan",
             "panEnd",
@@ -76,7 +77,8 @@ kendo_module({
             "shapeCreated",
             "shapeMouseEnter",
             "shapeMouseLeave",
-            "zoom"
+            "zoom",
+            "zoomEnd"
         ],
 
         zoom: function(level) {
