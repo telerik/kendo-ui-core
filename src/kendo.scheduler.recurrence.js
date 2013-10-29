@@ -2144,7 +2144,6 @@ kendo_module({
 
         options: {
             name: "MobileRecurrenceEditor",
-            spinners: false,
             messages: {
                 cancel: "Cancel",
                 update: "Save",
