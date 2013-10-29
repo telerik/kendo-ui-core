@@ -818,6 +818,7 @@
     <Content Include="Views\dataviz\box-plot-charts\mvvm.cshtml" />
     <Content Include="Views\dataviz\map\geojson.cshtml" />
     <Content Include="Views\dataviz\map\index.cshtml" />
+    <Content Include="Views\dataviz\map\events.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
