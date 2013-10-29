@@ -1350,7 +1350,7 @@ kendo_module({
                         result.push({
                             resource: resource,
                             value: this._resourceValue(resource, resource.dataSource.at(resourceIndex % resource.dataSource.total()))
-                        })
+                        });
                     }
 
                     resourceIndex = Math.floor(resourceIndex / resource.dataSource.total());
