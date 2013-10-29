@@ -74,6 +74,11 @@
         {
             if (ValidateModel(meeting, modelState))
             {
+                if (string.IsNullOrEmpty(meeting.Title))
+                {
+                    meeting.Title = "";
+                }
+
                 var entity = db.Meetings.Include("MeetingAtendees").FirstOrDefault(m => m.MeetingID == meeting.MeetingID);
 
                 entity.Title = meeting.Title;

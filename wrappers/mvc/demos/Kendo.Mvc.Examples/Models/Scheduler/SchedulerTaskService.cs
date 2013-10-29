@@ -62,6 +62,11 @@
         {
             if (ValidateModel(task, modelState))
             {
+                if (string.IsNullOrEmpty(task.Title))
+                {
+                    task.Title = "";
+                }
+
                 var entity = task.ToEntity();
                 db.Tasks.Attach(entity);
                 db.Entry(entity).State = EntityState.Modified;
