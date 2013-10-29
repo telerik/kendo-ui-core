@@ -35,9 +35,9 @@ namespace Kendo.Mvc.UI
         
         public string Color { get; set; }
         
-        public double Size { get; set; }
+        public double? Size { get; set; }
         
-        public MapMarkerShape Shape { get; set; }
+        public MapMarkerShape? Shape { get; set; }
         
         //<< Fields
 
@@ -50,9 +50,15 @@ namespace Kendo.Mvc.UI
                 json["color"] = Color;
             }
             
-            json["size"] = Size;
+            if (Size.HasValue)
+            {
+                json["size"] = Size;
+            }
                 
-            json["shape"] = Shape;
+            if (Shape.HasValue)
+            {
+                json["shape"] = Shape;
+            }
                 
         //<< Serialization
         }

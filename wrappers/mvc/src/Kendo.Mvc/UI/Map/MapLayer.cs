@@ -22,9 +22,7 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public bool AutoBind { get; set; }
-        
-        public string Type { get; set; }
+        public bool? AutoBind { get; set; }
         
         public string Copyright { get; set; }
         
@@ -35,6 +33,8 @@ namespace Kendo.Mvc.UI
         }
         
         public string UrlTemplateId { get; set; }
+        
+        public MapLayerType? Type { get; set; }
         
         //<< Fields
 
@@ -49,13 +49,11 @@ namespace Kendo.Mvc.UI
 
             //>> Serialization
         
-            json["autoBind"] = AutoBind;
-                
-            if (Type.HasValue())
+            if (AutoBind.HasValue)
             {
-                json["type"] = Type;
+                json["autoBind"] = AutoBind;
             }
-            
+                
             if (Copyright.HasValue())
             {
                 json["copyright"] = Copyright;
@@ -72,6 +70,11 @@ namespace Kendo.Mvc.UI
                 json["urlTemplate"] = UrlTemplateId;
             }
             
+            if (Type.HasValue)
+            {
+                json["type"] = Type;
+            }
+                
         //<< Serialization
         }
     }

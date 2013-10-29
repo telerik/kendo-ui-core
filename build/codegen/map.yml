@@ -1,4 +1,9 @@
 :options:
+    - :name: layers.type
+      :type: Object
+      :values:
+          - tile
+          - shape
     - :name: markers.shape
       :type: Object
       :values:

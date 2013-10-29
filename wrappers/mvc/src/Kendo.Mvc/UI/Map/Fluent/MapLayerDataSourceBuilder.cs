@@ -25,6 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
 
         public GeoJsonDataSourceBuilder GeoJson()
         {
+            dataSource.Type = DataSourceType.GeoJson;
             return new GeoJsonDataSourceBuilder(dataSource, viewContext, urlGenerator);
         }
     }

@@ -78,7 +78,14 @@ namespace Kendo.Mvc.UI
 
             if (Type != null)
             {
-                json["type"] = "aspnetmvc-" + Type.ToString().ToLower();
+                if (Type == DataSourceType.Ajax || Type == DataSourceType.Server)
+                {
+                    json["type"] = "aspnetmvc-" + Type.ToString().ToLower();
+                }
+                else
+                {
+                    json["type"] = Type.ToString().ToLower();
+                }
             }
 
             if (OrderBy.Any())

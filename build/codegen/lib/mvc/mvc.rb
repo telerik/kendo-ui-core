@@ -55,7 +55,7 @@ module CodeGen::MVC::Wrappers
         //<< Fields})
 
         FIELD_DECLARATION = ERB.new(%{
-        public <%= csharp_type %> <%= csharp_name %> { get; set; }
+        public <%= csharp_type == 'string' ? csharp_type : csharp_type + '?'%> <%= csharp_name %> { get; set; }
         })
 
         FIELD_SERIALIZATION = ERB.new(%{//>> Serialization
@@ -192,8 +192,12 @@ module CodeGen::MVC::Wrappers
             end
         end
 
+        def declaration_template
+            FIELD_DECLARATION
+        end
+
         def to_declaration
-            FIELD_DECLARATION.result(binding)
+            declaration_template.result(binding)
         end
 
         def to_fluent
@@ -211,7 +215,10 @@ module CodeGen::MVC::Wrappers
             end
 
             ERB.new(%{
-            json["<%= name %>"] = <%= csharp_name %>;
+            if (<%= csharp_name %>.HasValue)
+            {
+                json["<%= name %>"] = <%= csharp_name %>;
+            }
                 }).result(binding)
         end
 

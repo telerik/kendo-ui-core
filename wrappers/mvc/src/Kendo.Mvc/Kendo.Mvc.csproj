@@ -1802,4 +1802,4 @@
     <Compile Include="UI\Map\Settings\MapLayerStyleStrokeSettings.cs" />
     <Compile Include="UI\Map\Fluent\MapLayerStyleStrokeSettingsBuilder.cs" />
   </ItemGroup>
-</Project>
+<ItemGroup><Compile Include="UI\Map\MapType.cs" /></ItemGroup></Project>

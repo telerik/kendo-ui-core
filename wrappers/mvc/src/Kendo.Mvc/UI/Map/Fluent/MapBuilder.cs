@@ -11,20 +11,27 @@ namespace Kendo.Mvc.UI.Fluent
     public class MapBuilder: WidgetBuilderBase<Map, MapBuilder>, IHideObjectMembers
     {
         private readonly Map container;
-        private readonly ViewContext viewContext;
-        private readonly IUrlGenerator urlGenerator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Map"/> class.
         /// </summary>
         /// <param name="component">The component.</param>
-        public MapBuilder(Map component, ViewContext viewContext, IUrlGenerator urlGenerator)
+        public MapBuilder(Map component)
             : base(component)
         {
-            this.viewContext = viewContext;
-            this.urlGenerator = urlGenerator;
-
             container = component;
+        }
+
+        /// <summary>
+        /// Configures the center of the map.
+        /// </summary>
+        /// <param name="latitude">The latitude</param>
+        /// <param name="longtitude">The longtitude</param>
+        public MapBuilder Center(double latitude, double longtitude)
+        {
+            container.Center = new[] { latitude, longtitude };
+
+            return this;
         }
 
         //>> Fields
@@ -56,7 +63,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The action that configures the layers.</param>
         public MapBuilder Layers(Action<MapLayerFactory> configurator)
         {
-            configurator(new MapLayerFactory(container.Layers, viewContext, urlGenerator));
+            configurator(new MapLayerFactory(container.Layers));
             return this;
         }
         

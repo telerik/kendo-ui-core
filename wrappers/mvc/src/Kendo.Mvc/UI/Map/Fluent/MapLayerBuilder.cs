@@ -12,14 +12,10 @@ using System.Web.Mvc;
     public class MapLayerBuilder: IHideObjectMembers
     {
         private readonly MapLayer container;
-        private readonly ViewContext viewContext;
-        private readonly IUrlGenerator urlGenerator;
 
-        public MapLayerBuilder(MapLayer settings, ViewContext viewContext, IUrlGenerator urlGenerator)
+        public MapLayerBuilder(MapLayer settings)
         {
             container = settings;
-            this.viewContext = viewContext;
-            this.urlGenerator = urlGenerator;
         }
 
         /// <summary>
@@ -44,17 +40,6 @@ using System.Web.Mvc;
         public MapLayerBuilder AutoBind(bool value)
         {
             container.AutoBind = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// The layer type. Supported types are:
-        /// </summary>
-        /// <param name="value">The value that configures the type.</param>
-        public MapLayerBuilder Type(string value)
-        {
-            container.Type = value;
 
             return this;
         }
@@ -87,6 +72,17 @@ using System.Web.Mvc;
         public MapLayerBuilder UrlTemplateId(string value)
         {
             container.UrlTemplateId = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value">The value that configures the type.</param>
+        public MapLayerBuilder Type(MapLayerType value)
+        {
+            container.Type = value;
 
             return this;
         }

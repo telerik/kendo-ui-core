@@ -21,9 +21,9 @@ namespace Kendo.Mvc.UI
         
         public string DashType { get; set; }
         
-        public double Opacity { get; set; }
+        public double? Opacity { get; set; }
         
-        public double Width { get; set; }
+        public double? Width { get; set; }
         
         //<< Fields
 
@@ -41,9 +41,15 @@ namespace Kendo.Mvc.UI
                 json["dashType"] = DashType;
             }
             
-            json["opacity"] = Opacity;
+            if (Opacity.HasValue)
+            {
+                json["opacity"] = Opacity;
+            }
                 
-            json["width"] = Width;
+            if (Width.HasValue)
+            {
+                json["width"] = Width;
+            }
                 
         //<< Serialization
         }

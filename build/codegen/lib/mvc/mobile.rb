@@ -32,6 +32,10 @@ module CodeGen::MVC::Wrappers::Mobile
         'Date' => 'DateTime'
     }
 
+        FIELD_DECLARATION = ERB.new(%{
+        public <%= csharp_type %> <%= csharp_name %> { get; set; }
+        })
+
     class Option < CodeGen::MVC::Wrappers::Option
         include Options
 
@@ -41,6 +45,10 @@ module CodeGen::MVC::Wrappers::Mobile
             else
                 TYPES[type[0]]
             end
+        end
+
+        def declaration_template
+            FIELD_DECLARATION
         end
 
         def to_client_option
@@ -121,6 +129,8 @@ module CodeGen::MVC::Wrappers::Mobile
     end
 
     COMPONENT = ERB.new(File.read("build/codegen/lib/mvc/mobile.component.csharp.erb"), 0, '%<>')
+    SETTING = ERB.new(File.read("build/codegen/lib/mvc/mobile.setting.csharp.erb"), 0, '%<>')
+    SETTING_FLUENT = ERB.new(File.read("build/codegen/lib/mvc/mobile.setting.builder.csharp.erb"), 0, '%<>')
 
     class Component < CodeGen::MVC::Wrappers::Component
         include Options
@@ -131,6 +141,14 @@ module CodeGen::MVC::Wrappers::Mobile
 
         def component_template
             COMPONENT
+        end
+
+        def setting_template
+            SETTING
+        end
+
+        def setting_fluent_template
+            SETTING_FLUENT
         end
     end
 end

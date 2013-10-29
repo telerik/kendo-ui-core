@@ -19,7 +19,7 @@ namespace Kendo.Mvc.UI
         
         public string Color { get; set; }
         
-        public double Opacity { get; set; }
+        public double? Opacity { get; set; }
         
         //<< Fields
 
@@ -32,7 +32,10 @@ namespace Kendo.Mvc.UI
                 json["color"] = Color;
             }
             
-            json["opacity"] = Opacity;
+            if (Opacity.HasValue)
+            {
+                json["opacity"] = Opacity;
+            }
                 
         //<< Serialization
         }

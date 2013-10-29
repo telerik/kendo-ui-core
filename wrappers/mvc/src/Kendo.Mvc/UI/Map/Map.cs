@@ -32,6 +32,8 @@ namespace Kendo.Mvc.UI
         //<< Initialization
         }
 
+        public double[] Center { get; set; }
+
 //>> Fields
         
         public MapControlsSettings Controls
@@ -64,21 +66,26 @@ namespace Kendo.Mvc.UI
             private set;
         }
         
-        public double MinZoom { get; set; }
+        public double? MinZoom { get; set; }
         
-        public double MaxZoom { get; set; }
+        public double? MaxZoom { get; set; }
         
-        public double MinSize { get; set; }
+        public double? MinSize { get; set; }
         
         public string Theme { get; set; }
         
-        public double Zoom { get; set; }
+        public double? Zoom { get; set; }
         
         //<< Fields
 
         public override void WriteInitializationScript(TextWriter writer)
         {
             var json = new Dictionary<string, object>(Events);
+
+            if (Center != null)
+            {
+                json["center"] = Center;
+            }
 
             //>> Serialization
         
@@ -112,18 +119,30 @@ namespace Kendo.Mvc.UI
                 json["markers"] = markers;
             }
                 
-            json["minZoom"] = MinZoom;
+            if (MinZoom.HasValue)
+            {
+                json["minZoom"] = MinZoom;
+            }
                 
-            json["maxZoom"] = MaxZoom;
+            if (MaxZoom.HasValue)
+            {
+                json["maxZoom"] = MaxZoom;
+            }
                 
-            json["minSize"] = MinSize;
+            if (MinSize.HasValue)
+            {
+                json["minSize"] = MinSize;
+            }
                 
             if (Theme.HasValue())
             {
                 json["theme"] = Theme;
             }
             
-            json["zoom"] = Zoom;
+            if (Zoom.HasValue)
+            {
+                json["zoom"] = Zoom;
+            }
                 
         //<< Serialization
 

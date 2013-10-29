@@ -22,7 +22,7 @@ namespace Kendo.Mvc.UI
         
         public string Color { get; set; }
         
-        public double Size { get; set; }
+        public double? Size { get; set; }
         
         public string Shape { get; set; }
         
@@ -37,7 +37,10 @@ namespace Kendo.Mvc.UI
                 json["color"] = Color;
             }
             
-            json["size"] = Size;
+            if (Size.HasValue)
+            {
+                json["size"] = Size;
+            }
                 
             if (Shape.HasValue())
             {
