@@ -214,11 +214,6 @@ header .k-dropdown-wrap.k-state-default .k-input {
     text-align: center;
 }
 
-#tabstrip .km-icon {
-    display: inline-block;
-    vertical-align: text-bottom;
-}
-
 #tabstrip .km-icon:after {
     font: 1.3em/1em "Kendo UI" !important;
 }
@@ -228,9 +223,16 @@ header .k-dropdown-wrap.k-state-default .k-input {
 .spr:after { content: "\E050"; }
 .share:after { content: "\E04E"; }
 
-.k-tabstrip .k-link:hover {
-    text-decoration: none;
+#tabstrip .k-tabstrip-items span {
+    float: left;
+    line-height: 18px;
+    vertical-align: middle;
 }
+
+#tabstrip .k-tabstrip-items .hidden-xs {
+    margin-left: 4px;
+}
+
 .market-donut {
     display: inline-block;
     width: 170px;
