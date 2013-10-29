@@ -42,6 +42,7 @@
             m.Id(f => f.TaskID);
             m.Field(f => f.Title).DefaultValue("No title");
             m.RecurrenceId(f => f.RecurrenceID);
+            m.Field(f => f.Title).DefaultValue("No title");
         })
         .Read(read => read.Action("Read", "Scheduler").Data("sendCulture"))
         .Create(create => create.Action("Create", "Scheduler").Data("sendCulture"))

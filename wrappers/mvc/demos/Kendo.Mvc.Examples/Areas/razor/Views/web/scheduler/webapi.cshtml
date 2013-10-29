@@ -16,6 +16,7 @@
             m.Id(f => f.TaskID);
             m.Field(f => f.Title).DefaultValue("No title");
             m.RecurrenceId(f => f.RecurrenceID);
+            m.Field(f => f.Title).DefaultValue("No title");
         })
         .Events(events => events.Error("error_handler"))
         .Read(read => read.Url(Url.Content("~/api/task")).Type(HttpVerbs.Get))

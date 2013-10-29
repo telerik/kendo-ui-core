@@ -35,6 +35,7 @@
             m.Id(f => f.TaskID);
             m.Field(f => f.Title).DefaultValue("No title");
             m.RecurrenceId(f => f.RecurrenceID);
+            m.Field(f => f.Title).DefaultValue("No title");
         })
         .Read("Read", "Scheduler")
         .Create("Create", "Scheduler")

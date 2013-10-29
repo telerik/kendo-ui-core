@@ -29,8 +29,8 @@
                 .DataValueField("Value")
                 .DataColorField("Color")
                 .BindTo(new[] { 
-                    new { Text = "Alex", Value = 1, Color = "#f8a398" } ,
-                    new { Text = "Bob", Value = 2, Color = "#51a0ed" } ,
+                    new { Text = "Alex", Value = 1, Color = "#f8a398" },
+                    new { Text = "Bob", Value = 2, Color = "#51a0ed" },
                     new { Text = "Charlie", Value = 3, Color = "#56ca85" } 
                 });
          })
@@ -39,10 +39,11 @@
                 m.Id(f => f.MeetingID);
                 m.Field(f => f.Title).DefaultValue("No title");
                 m.RecurrenceId(f => f.RecurrenceID);
+                m.Field(f=> f.Title).DefaultValue("No title");
             })
         .Read("Meetings_Read", "Scheduler")
-        .Create(create => create.Action("Meetings_Create", "Scheduler"))
-        .Destroy(destroy => destroy.Action("Meetings_Destroy", "Scheduler"))
-        .Update(update => update.Action("Meetings_Update", "Scheduler"))
+        .Create("Meetings_Create", "Scheduler")
+        .Destroy("Meetings_Destroy", "Scheduler")
+        .Update("Meetings_Update", "Scheduler")
     )
 )

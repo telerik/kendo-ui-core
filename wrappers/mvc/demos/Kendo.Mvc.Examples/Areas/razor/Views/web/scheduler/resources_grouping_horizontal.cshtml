@@ -40,10 +40,11 @@
                 m.Id(f => f.MeetingID);
                 m.Field(f => f.Title).DefaultValue("No title");
                 m.RecurrenceId(f => f.RecurrenceID);
+                m.Field(f => f.Title).DefaultValue("No title");
             })
             .Read("Grouping_Horizontal_Read", "Scheduler")
-            .Create(create => create.Action("Grouping_Horizontal_Create", "Scheduler"))
+            .Create("Grouping_Horizontal_Create", "Scheduler")
             .Destroy("Grouping_Horizontal_Destroy", "Scheduler")
-            .Update(update => update.Action("Grouping_Horizontal_Update", "Scheduler"))
+            .Update("Grouping_Horizontal_Update", "Scheduler")
     )
 )

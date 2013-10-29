@@ -40,11 +40,12 @@
                 m.Id(f => f.MeetingID);
                 m.Field(f => f.Title).DefaultValue("No title");
                 m.RecurrenceId(f => f.RecurrenceID);
+                m.Field(f => f.Title).DefaultValue("No title");
             })
         .Read("Meetings_Read", "Scheduler")
-        .Create(create => create.Action("Meetings_Create", "Scheduler"))
+        .Create("Meetings_Create", "Scheduler")
         .Destroy("Meetings_Destroy", "Scheduler")
-        .Update(update => update.Action("Meetings_Update", "Scheduler"))
+        .Update("Meetings_Update", "Scheduler")
     )
 )
 
