@@ -3850,7 +3850,7 @@ kendo_module({
                     batchBuffer.trigger("reset");
                 },
                 "resize": function () {
-                    batchBuffer._total = this.length / batchBuffer.batchSize;
+                    batchBuffer._total = Math.ceil(this.length / batchBuffer.batchSize);
                     batchBuffer.trigger("resize", { total: batchBuffer.total(), offset: this.offset });
                 }
             });
@@ -3875,7 +3875,7 @@ kendo_module({
                 item = buffer.at(skip + i);
 
                 if (item === undefined) {
-                    return;
+                    break;
                 }
 
                 view.push(item);
