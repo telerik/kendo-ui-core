@@ -16,7 +16,11 @@
     })
     .Timezone("Etc/UTC")
     .DataSource(d => d
-        .Model(m => m.Id(f => f.TaskID))
+        .Model(m => { 
+               m.Id(f => f.TaskID);  
+               m.Field(f => f.Title).DefaultValue("No title");
+               m.RecurrenceId(f => f.RecurrenceID);                                                     
+        })
         .Events(events => events.Error("error_handler"))
         .Read(read => read.Url(Url.Content("~/api/task")).Type(HttpVerbs.Get))
         .Create(create => create.Url(Url.Content("~/api/task")).Type(HttpVerbs.Post))

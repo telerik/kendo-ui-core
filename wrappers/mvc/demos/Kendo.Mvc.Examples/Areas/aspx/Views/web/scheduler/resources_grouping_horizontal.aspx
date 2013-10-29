@@ -43,6 +43,8 @@
     .DataSource(d => d
             .Model(m => { 
                 m.Id(f => f.MeetingID);                                                 
+                m.Field(f => f.Title).DefaultValue("No title");
+                m.RecurrenceId(f => f.RecurrenceID);                                         
             })
             .Read("Grouping_Horizontal_Read", "Scheduler")
             .Create(create => create.Action("Grouping_Horizontal_Create", "Scheduler").Data("serialize"))

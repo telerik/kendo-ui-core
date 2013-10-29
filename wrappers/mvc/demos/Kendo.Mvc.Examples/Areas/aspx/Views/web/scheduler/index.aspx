@@ -35,7 +35,9 @@
     .DataSource(d => d
         .Model(m => {
             m.Id(f => f.TaskID);
+            m.Field(f => f.Title).DefaultValue("No title");
             m.Field(f => f.OwnerID).DefaultValue(1);
+            m.RecurrenceId(f => f.RecurrenceID);
         })
         .Read("Read", "Scheduler")
         .Create("Create", "Scheduler")

@@ -47,7 +47,9 @@
     )
     .DataSource(dataSource => 
         dataSource.Model(m => { 
-               m.Id(f => f.MeetingID);                                                 
+               m.Id(f => f.MeetingID);  
+               m.Field(f => f.Title).DefaultValue("No title");
+               m.RecurrenceId(f => f.RecurrenceID);                                                     
         })
     )
     .BindTo(Model) 

@@ -16,7 +16,11 @@
         views.AgendaView();
     })
     .DataSource(d => d
-        .Model(m => m.Id(f => f.TaskID))
+        .Model(m => {
+            m.Id(f => f.TaskID);
+            m.Field(f => f.Title).DefaultValue("No title");
+            m.RecurrenceId(f => f.RecurrenceID);
+        })
         .Read("Read", "Scheduler")
         .Create("Create", "Scheduler")
         .Destroy("Destroy", "Scheduler")

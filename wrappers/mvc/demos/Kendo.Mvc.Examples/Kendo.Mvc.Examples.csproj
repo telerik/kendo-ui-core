@@ -962,16 +962,12 @@
     <Content Include="Areas\aspx\Views\web\scheduler\restriction.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\move_resize.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\rtl.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\globalization.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\resources_grouping_vertical.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\resources_grouping_horizontal.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\events.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\globalization.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\index.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\resources.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\resources_grouping_horizontal.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\resources_grouping_vertical.aspx" />
-    <Content Include="Areas\aspx\Views\web\scheduler\rtl.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\selection.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\templates.aspx" />
     <Content Include="Areas\aspx\Views\web\slider\api.aspx" />
@@ -2874,6 +2870,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\razor\Views\dataviz\box_plot_charts\remote_data.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\scheduler\move_resize.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\scheduler\restriction.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
