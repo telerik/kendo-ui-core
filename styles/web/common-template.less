@@ -5383,7 +5383,8 @@ div[name="recurrenceRule"] > .k-dropdown
 
 .km-pane-wrapper .k-mobile-list > ul > li > .k-link,
 .km-pane-wrapper .k-mobile-list .k-filter-help-text > li > .k-link,
-.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-label:nth-child(3)
+.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-label:nth-child(3),
+.km-pane-wrapper #recurrence .km-scroll-container > .k-edit-label:first-child
 {
     display: block;
     padding: .2em 1em;
@@ -5396,7 +5397,8 @@ div[name="recurrenceRule"] > .k-dropdown
     border-top: 1em solid transparent;
 }
 
-.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-label:nth-child(3)
+.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-label:nth-child(3),
+.km-pane-wrapper #recurrence .km-scroll-container > .k-edit-label:first-child
 {
     position: relative;
 }
@@ -5500,6 +5502,46 @@ div[name="recurrenceRule"] > .k-dropdown
     position: relative;
 }
 
+.km-pane-wrapper .k-scheduler-views
+{
+    width: 300px;
+}
+
+.km-pane-wrapper .k-mobile-list .k-edit-field.k-scheduler-toolbar
+{
+    background: transparent;
+    border: 0;
+    .box-shadow(none);
+    padding: .5em 1em;
+}
+
+.km-pane-wrapper #recurrence .k-scheduler-navigation
+{
+    width: 100%;
+}
+
+.km-pane-wrapper .k-scheduler-views,
+.km-pane-wrapper .k-mobile-list .k-scheduler-navigation
+{
+    display: table;
+    table-layout: fixed;
+}
+
+.km-pane-wrapper .k-scheduler-views li,
+.km-pane-wrapper .k-mobile-list .k-scheduler-navigation li
+{
+    display: table-cell;
+    text-align: center;
+}
+
+.km-pane-wrapper .k-scheduler-views li a,
+.km-pane-wrapper .k-mobile-list .k-scheduler-navigation li a
+{
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+}
+
 .km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-field .k-check
 {
     margin: 0;
@@ -5515,13 +5557,6 @@ div[name="recurrenceRule"] > .k-dropdown
 .km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-field .k-check:last-child
 {
     margin-bottom: -.5em;
-}
-
-.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-field .k-check,
-.km-pane-wrapper .k-mobile-list .k-edit-field > * > select:not([multiple]),
-.km-pane-wrapper .k-mobile-list .k-scheduler-timezones .k-edit-field label.k-check
-{
-    width: 100%;
 }
 
 .km-pane-wrapper .k-mobile-list .k-scheduler-timezones .k-edit-field label.k-check
@@ -5583,6 +5618,18 @@ div[name="recurrenceRule"] > .k-dropdown
     {
         margin-left: 1em;
     }
+
+    .km-pane-wrapper .k-scheduler-views
+    {
+        width: 230px;
+    }
+}
+
+.km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-field .k-check,
+.km-pane-wrapper .k-mobile-list .k-edit-field > * > select:not([multiple]),
+.km-pane-wrapper .k-mobile-list .k-scheduler-timezones .k-edit-field label.k-check
+{
+    width: 100%;
 }
 
 /* Tooltip */
