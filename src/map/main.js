@@ -73,7 +73,21 @@ kendo_module({
             zoom: 3,
             minSize: 256,
             minZoom: 2,
-            maxZoom: 18
+            maxZoom: 18,
+            layerDefaults: {
+                shape: {
+                    style: {
+                        fill: {
+                            color: "#fff",
+                            opacity: 0
+                        },
+                        stroke: {
+                            color: "#000",
+                            width: 0.5
+                        }
+                    }
+                }
+            }
         },
 
         events:[
