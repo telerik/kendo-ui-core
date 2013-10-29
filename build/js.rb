@@ -65,11 +65,11 @@ file_merge "src/kendo.editor.js" => [
 file "src/kendo.editor.js" => JS_BUILDFILE
 
 file_merge "src/kendo.dataviz.map.js" => [
-    "src/dataviz/util.js"
-    "src/dataviz/geometry.js"
-    "src/dataviz/drawing/core.js"
-    "src/dataviz/drawing/shapes.js"
-    "src/dataviz/drawing/svg.js"
+    "src/dataviz/util.js",
+    "src/dataviz/geometry.js",
+    "src/dataviz/drawing/core.js",
+    "src/dataviz/drawing/shapes.js",
+    "src/dataviz/drawing/svg.js",
     "src/map/location.js",
     "src/map/crs.js",
     "src/map/layers/shape.js",
