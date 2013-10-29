@@ -568,10 +568,13 @@ kendo_module({
             var buffer = this.buffer,
                 template = this.template,
                 emptyTemplate = this.emptyTemplate,
-                view;
+                view = null;
 
             if(index >= 0) {
                 view = buffer.at(index);
+                if ($.isArray(view) && !view.length) {
+                    view = null;
+                }
             }
 
             if(view) {
