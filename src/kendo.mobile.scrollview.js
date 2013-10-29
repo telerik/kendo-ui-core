@@ -534,7 +534,7 @@ kendo_module({
         },
 
         _onReset: function() {
-            this.pageCount = this.dataSource.total();
+            this.pageCount = ceil(this.dataSource.total() / this.options.itemsPerPage);
 
             if(this.element.is(":visible")) {
                 this._resetPages();
