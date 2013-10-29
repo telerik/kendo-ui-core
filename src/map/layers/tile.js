@@ -30,6 +30,9 @@
             );
 
             map.bind("reset", proxy(layer.reset, layer));
+            map.bind("scroll", proxy(layer._scroll, map));
+            map.bind("drag", proxy(layer._drag, this));
+            map.bind("dragEnd", proxy(layer._dragEnd, this));
             layer.crs = new EPSG3857();
             layer.pool = new TilePool();
         },
@@ -45,49 +48,91 @@
         },
 
         reset: function(e) {
+            this.basePoint = this.crs.toPoint(this.map.viewport().nw, this.map.scale());
             this._render();
         },
 
+        _scroll: function(e) {
+            console.log("scroll: ", e);
+        },
+
+        _drag: function(e) {
+            var layer = this,
+                now = new Date(),
+                timestamp = layer._drag.timestamp;
+
+            if (!timestamp || now - timestamp > 100) {
+                this._loadTiles();
+                layer._drag.timestamp = now;
+            }
+        },
+
+        _dragEnd: function(e) {
+            console.log("dragEnd: ", e);
+        },
+
         _render: function() {
+            this._loadTiles();
+        },
+
+        _loadTiles: function() {
             var layer = this,
                 options = this.options,
                 tileSize = options.tileSize,
                 map = layer.map,
                 zoom = map.options.zoom,
                 urlTemplate = template(options.urlTemplate),
-                scale = layer.map.scale(),
-                nwToPoint = layer.crs.toPoint(map.viewport().nw, scale);
+                nwToPoint = layer.crs.toPoint(map.viewport().nw, map.scale());
 
-            var tileIndex = layer._getTileIndex(nwToPoint);
-            var screenPoint = new Point(tileIndex.x * tileSize, tileIndex.y * tileSize);
-            var point = screenPoint.clone().subtract(nwToPoint);
-            var size = {
-                x: math.ceil((math.abs(point.x) + map.element.width()) / tileSize),
-                y: math.ceil((math.abs(point.y) + map.element.height()) / tileSize)
-            };
+            var firstTileIndex = layer._getTileIndex(nwToPoint);
+            var screenPoint = layer._indexToScreenPoint(firstTileIndex);
+            var point = screenPoint.clone().subtract(layer.basePoint);
+            size = layer._getSize(point);
 
             for (var x = 0; x < size.x; x++) {
                 for (var y = 0; y < size.y; y++) {
-                    var xIndex = tileIndex.x + x;
-                    var yIndex = tileIndex.y + y;
-                    var screenPoint = new Point(
-                        xIndex * tileSize,
-                        yIndex * tileSize
-                    );
+                    var index = {
+                        x: firstTileIndex.x + x,
+                        y: firstTileIndex.y + y
+                    };
+
+                    var screenPoint = layer._indexToScreenPoint(index);
+                    var point = screenPoint.clone().subtract(layer.basePoint);
                     var tile = layer._createTile({
                         screenPoint: screenPoint,
-                        point: screenPoint.clone().subtract(nwToPoint),
-                        index: {
-                            x: xIndex,
-                            y: yIndex
-                        },
+                        point: point,
+                        index: index,
                         url: urlTemplate({
-                            zoom: zoom, x: xIndex, y: yIndex
+                            zoom: zoom, x: index.x, y: index.y
                         })
                     });
-                    this.element.append(tile.element);
+
+                    if (!tile.visible) {
+                        this.element.append(tile.element);
+                        tile.visible = true;
+                    }
                 }
             }
+        },
+
+        _getSize: function(screenPoint) {
+            return {
+                x: math.ceil((math.abs(screenPoint.x) + this.map.element.width()) / this.options.tileSize),
+                y: math.ceil((math.abs(screenPoint.y) + this.map.element.height()) / this.options.tileSize)
+            };
+        },
+
+        _indexToScreenPoint: function(index, offset) {
+            if (!offset) {
+                offset = {
+                    x: 0,
+                    y: 0
+                };
+            }
+
+            return new Point(
+                index.x * this.options.tileSize + offset.x,
+                index.y * this.options.tileSize + offset.y)
         },
 
         _getTileIndex: function(point) {
@@ -131,10 +176,12 @@
 
             this.screenPoint = options.screenPoint;
             this.index = options.index;
+            this.id = "x:" + this.index.x + "y:" + this.index.y;
         },
 
         clear: function() {
             this.element.hide();
+            this.visible = false;
         },
 
         destroy: function() {
@@ -185,16 +232,32 @@
         },
 
         _create: function(options) {
+            var pool = this,
+                items = pool._items,
+                oldTile, i, item;
+
             var tile = new ImageTile(options);
-            this._items.push(tile);
+
+            for (i = 0; i < items.length; i++) {
+                item = items[i];
+                if (item.id === tile.id) {
+                    oldTile = item;
+                    tile = oldTile;
+                }
+            }
+
+            if (!oldTile) {
+                this._items.push(tile);
+            }
+
             return tile;
         },
 
         _update: function(center, options) {
             var pool = this,
                 items = pool._items,
-                currentDist = -Number.MAV_VALUE,
-                dist, index, i, item;
+                dist = Number.MAX_VALUE,
+                currentDist, index, i, item;
 
             for (i = 0; i < items.length; i++) {
                 item = items[i];

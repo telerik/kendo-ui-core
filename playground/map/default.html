@@ -60,14 +60,6 @@
                     open: true // ?
                 }]
             });
-
-            $(document).on("mousewheel", function(e) {
-                var delta = kendo.dataviz.mwDelta(e);
-                e.preventDefault();
-
-                delta = delta > 0 ? -1 : 1;
-                map.zoom(map.zoom() + delta);
-            });
         </script>
     </body>
 </html>
