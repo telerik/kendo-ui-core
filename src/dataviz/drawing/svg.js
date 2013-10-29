@@ -37,8 +37,8 @@
 
             this._root = new RootNode();
             this._click = this._handler("click");
-            this._mouseover = this._handler("mouseover");
-            this._mouseout = this._handler("mouseout");
+            this._mouseenter = this._handler("mouseenter");
+            this._mouseleave = this._handler("mouseleave");
 
             this._appendTo(container);
         },
@@ -50,8 +50,8 @@
 
         events: [
             "click",
-            "mouseover",
-            "mouseout"
+            "mouseenter",
+            "mouseleave"
         ],
 
         translate: function(offset) {
@@ -98,8 +98,8 @@
             var element = $(this.element);
 
             element.on("click", this._click);
-            element.on("mouseover", this._mouseover);
-            element.on("mouseout", this._mouseout);
+            element.on("mouseover", this._mouseenter);
+            element.on("mouseout", this._mouseleave);
 
             this._width = element.width();
             this._height = element.height();
@@ -107,18 +107,15 @@
 
         _handler: function(event) {
             var surface = this;
+
             return function(e) {
-                var node = e.target._kendoNode,
-                    shape = null;
-
+                var node = e.target._kendoNode;
                 if (node) {
-                    shape = node.srcElement;
+                    surface.trigger(event, {
+                        shape: node.srcElement,
+                        originalEvent: e
+                    });
                 }
-
-                surface.trigger(event, {
-                    shape: shape,
-                    originalEvent: e
-                });
             };
         }
     });

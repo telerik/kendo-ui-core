@@ -36,11 +36,11 @@
             this._click = this._handler("shapeClick");
             this.surface.bind("click", this._click);
 
-            this._mouseover = this._handler("shapeMouseover");
-            this.surface.bind("mouseover", this._mouseover);
+            this._mouseenter = this._handler("shapeMouseEnter");
+            this.surface.bind("mouseenter", this._mouseenter);
 
-            this._mouseout = this._handler("shapeMouseout");
-            this.surface.bind("mouseout", this._mouseout);
+            this._mouseleave = this._handler("shapeMouseLeave");
+            this.surface.bind("mouseleave", this._mouseleave);
 
             map.bind("reset", proxy(this.reset, this));
             map.bind("dragEnd", proxy(this._dragEnd, this));

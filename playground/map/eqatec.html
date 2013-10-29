@@ -143,13 +143,6 @@
             click: $.noop,
             markerCreated: $.noop,
             markerHover: $.noop,
-            shapeHover: $.noop,
-            shapeMouseover: function(e) {
-                e.shape.options.set("fill.opacity", 1);
-            },
-            shapeMouseout: function(e) {
-                e.shape.options.set("fill.opacity", 0.7);
-            },
             shapeClick: function(e) {
                 e.shape.fill("blue");
             },
@@ -158,6 +151,12 @@
                 if (users) {
                     setColor(e.shape, users);
                 }
+            },
+            shapeMouseEnter: function(e) {
+                e.shape.options.set("fill.opacity", 1);
+            },
+            shapeMouseLeave: function(e) {
+                e.shape.options.set("fill.opacity", 0.7);
             }
         });
 
