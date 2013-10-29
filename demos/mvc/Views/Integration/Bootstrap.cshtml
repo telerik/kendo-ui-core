@@ -16,7 +16,6 @@
         @foreach (string scriptName in Kendo.Models.ScriptGroups.All) {
         <script src="@Url.Script(scriptName)"></script>
         }
-        <script src="@Url.Content("~/content/integration/bootstrap-integration/js/bootstrap.min.js")"></script>
 
         @if (ViewBag.Debug) {
         <script src="@Url.Content("~/content/shared/js/less.js")"></script>
