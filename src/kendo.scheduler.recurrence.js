@@ -1466,6 +1466,7 @@ kendo_module({
                 "monthly",
                 "yearly"
             ],
+            mobile: false,
             messages: {
                 frequencies: {
                     never: "Never",
@@ -1533,7 +1534,7 @@ kendo_module({
                     min: 1,
                     change: function() {
                         rule.interval = this.value();
-                        that.trigger("change");
+                        that._trigger();
                     }
                 });
         },
@@ -1616,7 +1617,7 @@ kendo_module({
 
             var change = function() {
                 that._weekDayRule();
-                that.trigger("change");
+                that._trigger();
             };
 
             if (weekDayInput[0]) {
@@ -1670,7 +1671,9 @@ kendo_module({
                         };
                     });
 
-                    that.trigger("change");
+                    if (!that.options.mobile) {
+                        that._trigger();
+                    }
                 });
 
                 if (rule.weekDays) {
@@ -1707,7 +1710,7 @@ kendo_module({
                         var value = this.value();
 
                         rule.monthDays = value ? [value] : value;
-                        that.trigger("change");
+                        that._trigger();
                     }
                 });
             }
@@ -1726,7 +1729,7 @@ kendo_module({
                 min: 1,
                 change: function() {
                     rule.count = this.value();
-                    that.trigger("change");
+                    that._trigger();
                 }
             }).data("kendoNumericTextBox");
         },
@@ -1743,9 +1746,15 @@ kendo_module({
                 value: until || start,
                 change: function() {
                     rule.until = this.value();
-                    that.trigger("change");
+                    that._trigger();
                 }
             }).data("kendoDatePicker");
+        },
+
+        _trigger: function() {
+            if (!this.options.mobile) {
+                this.trigger("change");
+            }
         }
     });
 
@@ -2140,10 +2149,17 @@ kendo_module({
             that._initRepeatButton();
 
             that._initRepeatEnd();
+
+            that._defaultValue = that._value;
         },
 
         options: {
             name: "MobileRecurrenceEditor",
+            animations: {
+                left: "slide",
+                right: "slide:right"
+            },
+            mobile: true,
             messages: {
                 cancel: "Cancel",
                 update: "Save",
@@ -2215,7 +2231,7 @@ kendo_module({
                                     .on(CLICK + that._namespace, function(e) {
                                         e.preventDefault();
                                         that._createView("repeat");
-                                        that._pane.navigate("recurrence");
+                                        that._pane.navigate("recurrence", that.options.animations.left);
                                     });
 
             that.element.append(that._repeatButton);
@@ -2235,7 +2251,7 @@ kendo_module({
                     }
 
                     that._createView("end");
-                    that._pane.navigate("recurrence");
+                    that._pane.navigate("recurrence", that.options.animations.left);
                 })
                 .insertAfter(endLabelField);
 
@@ -2363,6 +2379,9 @@ kendo_module({
 
                 if ($(this).hasClass("k-scheduler-update")) {
                     that.trigger("change");
+                    that._defaultValue = $.extend({}, that._value);
+                } else {
+                    that._value = that._defaultValue;
                 }
 
                 var frequency = that._value.freq;
@@ -2373,7 +2392,7 @@ kendo_module({
 
                 that._destroyView();
 
-                that._pane.navigate(returnViewId);
+                that._pane.navigate(returnViewId, that.options.animations.right);
             });
 
             that._container = that._view.element.find(".k-recur-view");
