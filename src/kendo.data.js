@@ -3700,23 +3700,6 @@ kendo_module({
             return this.dataSource.data().indexOf(item) + this.dataOffset;
         },
 
-        _prefetch: function() {
-            var buffer = this,
-                pageSize = this.pageSize,
-                prefetchOffset = this.skip + pageSize,
-                dataSource = this.dataSource;
-
-            if (!dataSource.inRange(prefetchOffset, pageSize) && !this._prefetching && this.prefetch) {
-                this._prefetching = true;
-                this.trigger("prefetching", { skip: prefetchOffset, take: pageSize });
-
-                dataSource.prefetch(prefetchOffset, pageSize, function() {
-                    buffer._prefetching = false;
-                    buffer.trigger("prefetched", { skip: prefetchOffset, take: pageSize });
-                });
-            }
-        },
-
         total: function() {
             return parseInt(this.dataSource.total(), 10);
         },
@@ -3759,6 +3742,27 @@ kendo_module({
             this.offset = null;
             this.range(offset);
         },
+
+        destroy: function() {
+            this.unbind();    
+        },
+
+        _prefetch: function() {
+            var buffer = this,
+                pageSize = this.pageSize,
+                prefetchOffset = this.skip + pageSize,
+                dataSource = this.dataSource;
+
+            if (!dataSource.inRange(prefetchOffset, pageSize) && !this._prefetching && this.prefetch) {
+                this._prefetching = true;
+                this.trigger("prefetching", { skip: prefetchOffset, take: pageSize });
+
+                dataSource.prefetch(prefetchOffset, pageSize, function() {
+                    buffer._prefetching = false;
+                    buffer.trigger("prefetched", { skip: prefetchOffset, take: pageSize });
+                });
+            }
+        },     
 
         _goToRange: function(offset, expanding) {
             if (this.offset !== offset) {
@@ -3882,6 +3886,11 @@ kendo_module({
 
         total: function() {
             return this._total;
+        },
+
+        destroy: function() {
+            this.buffer.destroy();
+            this.unbind();    
         }
     });
 
