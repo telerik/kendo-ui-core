@@ -49,6 +49,3 @@ function arrayClose(a, b, tolerance) {
 
 var close = QUnit.close,
     notClose = QUnit.notClose;
-
-
-QUnit.config.hidepassed = true;

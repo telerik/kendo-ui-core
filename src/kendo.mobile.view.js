@@ -339,9 +339,9 @@ kendo_module({
         }
     });
 
-    function fade(source, destination) {
+    function fade(source, destination, reverse) {
         if (source[0] && destination[0] && source[0] != destination[0]) {
-            source.kendoAnimateTo(destination, {effects: "fade", duration: TRANSITION_DURATION });
+            source.kendoAnimateTo(destination, {effects: "fade", duration: TRANSITION_DURATION, reverse: reverse });
         }
     }
 
@@ -364,7 +364,7 @@ kendo_module({
                 lower = current,
                 transition = that._transition();
 
-            if (transition.reverse && !transition.parallax) {
+            if (transition.reverse) {
                 upper = current;
                 lower = next;
             }
@@ -373,8 +373,8 @@ kendo_module({
             lower.element.css(Z_INDEX, 0);
 
             if (transition.parallax) {
-                fade(current.footer, next.footer);
-                fade(current.header, next.header);
+                fade(current.footer, next.footer, transition.reverse);
+                fade(current.header, next.header, transition.reverse);
                 currentContent = current.parallaxContents(next);
                 nextContent = next.parallaxContents(current);
             }

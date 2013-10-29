@@ -59,7 +59,7 @@
         <script>
             var application;
 
-            QUnit.config.testTimeout = 500;
+            QUnit.config.testTimeout = 800;
             QUnit.config.reorder = false;
 
             var init = kendo.mobile.init,
@@ -108,6 +108,23 @@
                  ');
 
                 equal(document.title, "foo", "view title applies view title attribute");
+            });
+
+            asyncTest("Syncs pane and browser history", 1, function() {
+                setup('<div data-role="view" id="foo">foo</div><div id="bar" data-role="view">bar</div><div id="baz" data-role="view">baz</div>');
+
+                application.navigate("#bar");
+                application.navigate("#baz");
+                application.navigate("#:back");
+
+                setTimeout(function() {
+                    history.back();
+                }, 300);
+
+                setTimeout(function() {
+                    start();
+                    equal(application.view().id, "/");
+                }, 400);
             });
 
             if (kendo.support.mobileOS.android) {
@@ -301,7 +318,7 @@
                 ok(!application.element.hasClass("km-ios6"));
             });
 
-            if (navigator.__defineGetter__) {
+            if (navigator.__defineGetter__ && !kendo.support.browser.safari) {
                 test("Forcing platform layout still reports correct device", 1, function() {
                     setup('<div data-role="view" />', {
                         platform: "android"

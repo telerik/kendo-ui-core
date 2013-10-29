@@ -121,6 +121,7 @@ kendo_module({
                 useNativeScrolling: false,
                 statusBarStyle: "black",
                 transition: "",
+                historyTransition: HISTORY_TRANSITION,
                 updateDocumentTitle: true
             }, options);
 
@@ -237,35 +238,9 @@ kendo_module({
         },
 
         _startHistory: function() {
-            var that = this,
-                initial = that.options.initial,
-                router = new kendo.Router({
-                    pushState: that.options.pushState,
-                    root: that.options.root,
-                    init: function(e) {
-                        var url = e.url,
-                            attrUrl = that.options.pushState ? url : "/";
-
-                        that.pane.viewEngine.rootView.attr(kendo.attr("url"), attrUrl);
-
-                        if (url === "/" && initial) {
-                            router.navigate(initial, true);
-                            e.preventDefault(); // prevents from executing routeMissing, by default
-                        }
-                    },
-
-                    routeMissing: function(e) {
-                        that.pane.navigate(e.url, HISTORY_TRANSITION);
-                    }
-                });
-
-            that.pane.bind("navigate", function(e) {
-                router.navigate(e.url, true);
-            });
-
-            router.start();
-
-            that.router = router;
+            this.router = new kendo.Router({ pushState: this.options.pushState, root: this.options.root });
+            this.pane.bindToRouter(this.router);
+            this.router.start();
         },
 
         _setupElementClass: function() {

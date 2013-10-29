@@ -48,7 +48,27 @@ kendo_module({
                 element.addClass("km-collapsible-pane");
             }
 
-            that.history = [];
+            this.history = [];
+            this.historyCallback = function(url) {
+                var transition = that.transition;
+                that.transition = null;
+                that.viewEngine.showView(url, transition);
+            };
+
+            that._historyNavigate = function(url) {
+                if (url === BACK) {
+                    if (that.history.length === 1) {
+                        return;
+                    }
+
+                    that.history.pop();
+                    url = that.history[that.history.length - 1];
+                } else {
+                    that.history.push(url);
+                }
+
+                that.historyCallback(url);
+            };
 
             that.loader = new Loader(element, {
                 loading: that.options.loading
@@ -102,6 +122,7 @@ kendo_module({
             layout: "",
             collapsible: false,
             initial: null,
+            historyTransition: null,
             loading: "<h1>Loading...</h1>"
         },
 
@@ -111,7 +132,7 @@ kendo_module({
             SAME_VIEW_REQUESTED
         ],
 
-         append: function(html) {
+        append: function(html) {
             return this.viewEngine.append(html);
         },
 
@@ -122,25 +143,41 @@ kendo_module({
         },
 
         navigate: function(url, transition) {
-            var that = this,
-                history = that.history;
-
             if (url instanceof View) {
                 url = url.id;
             }
 
-            if (url === BACK) {
-                if (history.length === 1) {
-                    return;
+            this.transition = transition;
+
+            this._historyNavigate(url);
+        },
+
+        bindToRouter: function(router) {
+            var that = this,
+                options = that.options,
+                initial = options.initial,
+                historyTransition = options.historyTransition,
+                viewEngine = this.viewEngine;
+
+            router.bind("init", function(e) {
+                var url = e.url,
+                    attrUrl = router.pushState ? url : "/";
+
+                viewEngine.rootView.attr(kendo.attr("url"), attrUrl);
+
+                if (url === "/" && initial) {
+                    router.navigate(initial, true);
+                    e.preventDefault(); // prevents from executing routeMissing, by default
                 }
+            });
 
-                history.pop();
-                url = history[history.length - 1];
-            } else {
-                history.push(url);
-            }
+            router.bind("routeMissing", function(e) {
+                that.historyCallback(e.url);
+            });
 
-            that.viewEngine.showView(url, transition);
+            that._historyNavigate = function(url) {
+                router.navigate(url);
+            };
         },
 
         hideLoading: function() {
