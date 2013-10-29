@@ -3744,7 +3744,7 @@ kendo_module({
         },
 
         destroy: function() {
-            this.unbind();    
+            this.unbind();
         },
 
         _prefetch: function() {
@@ -3762,7 +3762,7 @@ kendo_module({
                     buffer.trigger("prefetched", { skip: prefetchOffset, take: pageSize });
                 });
             }
-        },     
+        },
 
         _goToRange: function(offset, expanding) {
             if (this.offset !== offset) {
@@ -3890,7 +3890,7 @@ kendo_module({
 
         destroy: function() {
             this.buffer.destroy();
-            this.unbind();    
+            this.unbind();
         }
     });
 
