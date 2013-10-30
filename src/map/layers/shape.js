@@ -58,6 +58,9 @@
         },
 
         reset: function() {
+            this.surface.translate({ x: 0, y: 0 });
+            this.movable.moveTo({ x: 0, y: 0 });
+
             if (this._data) {
                 this._load(this._data);
             }
@@ -134,7 +137,7 @@
 
             for (var i = 0; i < rings.length; i++) {
                 for (var j = 0; j < rings[i].length; j++) {
-                    var point = this.map.toScreenPoint(
+                    var point = this.map.toViewPoint(
                         Location.fromLngLat(rings[i][j])
                     );
 
@@ -151,7 +154,7 @@
 
         _panEnd: function() {
             var map = this.map;
-            var nw = map.toScreenPoint(map.viewport().nw);
+            var nw = map.toViewPoint(map.extent().nw);
 
             this.surface.translate(nw);
             this.movable.moveTo(nw);

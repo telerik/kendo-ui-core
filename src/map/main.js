@@ -21,17 +21,21 @@ kendo_module({
         dataviz = kendo.dataviz,
         defined = dataviz.defined,
 
+        g = dataviz.geometry,
+
         map = dataviz.map,
         Extent = map.Extent,
         Location = map.Location,
         EPSG3857 = map.crs.EPSG3857,
 
         util = dataviz.util,
+        valueOrDefault = util.valueOrDefault,
         limit = util.limitValue;
 
     // Constants ==============================================================
     var CSS_PREFIX = "k-",
         FRICTION = 0.90,
+        MOUSEWHEEL = "DOMMouseScroll mousewheel",
         VELOCITY_MULTIPLIER = 5;
 
     // Map widget =============================================================
@@ -40,31 +44,36 @@ kendo_module({
             var map = this;
 
             kendo.destroy(element);
-            Widget.fn.init.call(map, element);
+            Widget.fn.init.call(this, element);
 
-            map._initOptions(options);
+            this._initOptions(options);
 
             this.element
                 .addClass(CSS_PREFIX + this.options.name.toLowerCase())
+                .css("position", "relative")
                 .empty();
 
             this.bind(this.events, options);
 
-            map.scrollWrap = $("<div />").appendTo(map.element);
+            this.scrollWrap = $("<div />").appendTo(this.element);
 
-            map.crs = new EPSG3857();
-            map.layers = new ObservableArray([]);
-            map._renderLayers();
+            this.crs = new EPSG3857();
+            this.layers = new ObservableArray([]);
+            this._renderLayers();
 
-            var scroller = map.scroller = new kendo.mobile.ui.Scroller(map.scrollWrap, {
+            var scroller = this.scroller = new kendo.mobile.ui.Scroller(this.scrollWrap, {
                 friction: FRICTION,
-                velocityMultiplier: VELOCITY_MULTIPLIER
+                velocityMultiplier: VELOCITY_MULTIPLIER,
+                zoom: true
             });
 
-            scroller.bind("scroll", proxy(map._scroll, map));
-            scroller.bind("scrollEnd", proxy(map._scrollEnd, map));
+            scroller.bind("scroll", proxy(this._scroll, this));
+            scroller.bind("scrollEnd", proxy(this._scrollEnd, this));
 
-            map._reset();
+            this._mousewheel = proxy(this._mousewheel, this);
+            this.element.bind(MOUSEWHEEL, this._mousewheel);
+
+            this._reset();
         },
 
         options: {
@@ -114,7 +123,6 @@ kendo_module({
             if (defined(level)) {
                 options.zoom = limit(level, options.minZoom, options.maxZoom);
                 this._reset();
-
                 return this;
             } else {
                 return options.zoom;
@@ -123,59 +131,84 @@ kendo_module({
 
         center: function(center) {
             // TODO: Accept lat,lng array and Location
-            // TODO: Make setter chainable
             if (center) {
                 this._center = center;
-            } else if (!this._center) {
-                this._center = Location.fromLatLng(this.options.center);
+                return this;
+            } else {
+                if (!this._center) {
+                    this._center = Location.fromLatLng(this.options.center);
+                }
+
+                return this._center;
             }
-
-            return this._center;
         },
 
-        scale: function() {
-            return this.options.minSize * pow(2, this.options.zoom);
+        origin: function(origin) {
+            // TODO: Accept lat,lng array and Location
+            if (origin) {
+                this._origin = origin;
+                return this;
+            } else {
+                if (!this._origin) {
+                    var topLeft = this.toLayerPoint(this.center()).clone();
+                    var size = this._viewportSize();
+
+                    topLeft.x -= size.width / 2;
+                    topLeft.y -= size.height / 2;
+
+                    this._origin = this.toLayerLocation(topLeft);
+                }
+
+                return this._origin;
+            }
         },
 
-        toLayerPoint: function(location) {
-            return this.crs.toPoint(location, this.scale());
+        extent: function() {
+            var nw = this.origin();
+            var bottomRight = this.toLayerPoint(nw).clone();
+            var size = this._viewportSize();
+
+            bottomRight.x += size.width;
+            bottomRight.y += size.height;
+
+            var se = this.toLayerLocation(bottomRight);
+            return new Extent(nw, se);
         },
 
-        toScreenPoint: function(location) {
-            var origin = this.toLayerPoint(this._screenOrigin);
+        scale: function(zoom) {
+            zoom = valueOrDefault(zoom, this.options.zoom);
+            return this.options.minSize * pow(2, zoom);
+        },
+
+        toLayerPoint: function(location, zoom) {
+            return this.crs.toPoint(location, this.scale(zoom));
+        },
+
+        toLayerLocation: function(point, zoom) {
+            return this.crs.toLocation(point, this.scale(zoom));
+        },
+
+        toViewPoint: function(location) {
+            var origin = this.toLayerPoint(this._viewOrigin);
             var point = this.toLayerPoint(location);
 
             return point.subtract(origin);
         },
 
-        // TODO: Rename to extent
-        viewport: function() {
-            var map = this,
-                scale = map.scale(),
-                halfWidth = map.element.width() / 2,
-                halfHeight = map.element.height() / 2,
-                crs = map.crs,
-                cp = crs.toPoint(map.center(), scale);
-
-            var p0 = cp.clone();
-            p0.x -= halfWidth;
-            p0.y -= halfHeight;
-
-            var p1 = cp.clone();
-            p1.x += halfWidth;
-            p1.y += halfHeight;
-
-            return new Extent(
-                crs.toLocation(p0, scale),
-                crs.toLocation(p1, scale)
-            );
+        toViewLocation: function(point) {
+            var origin = this.toLayerPoint(this.origin());
+            point = point.clone();
+            point.x += origin.x;
+            point.y += origin.y;
+            return this.toLayerLocation(point);
         },
 
         _scroll: function(e) {
-            var center = this.toLayerPoint(this._scrollOrigin);
-            center.x += e.scrollLeft;
-            center.y += e.scrollTop;
-            this.center(this.crs.toLocation(center, this.scale()));
+            var origin = this.toLayerPoint(this._viewOrigin);
+            origin.x += e.scrollLeft;
+            origin.y += e.scrollTop;
+
+            this.origin(this.toLayerLocation(origin));
 
             this.trigger("pan");
         },
@@ -185,18 +218,20 @@ kendo_module({
         },
 
         _reset: function() {
-            this._scrollOrigin = this.center();
-            this._screenOrigin = this.viewport().nw;
+            this._viewOrigin = this.origin();
             this._resetScroller();
             this.trigger("reset");
         },
 
         _resetScroller: function() {
             var scroller = this.scroller;
+
+            scroller.reset();
+
             scroller.dimensions.y.makeVirtual();
             scroller.dimensions.x.makeVirtual();
 
-            var nw = this.toLayerPoint(this.viewport().nw);
+            var nw = this.toLayerPoint(this.extent().nw);
             scroller.dimensions.x.virtualSize(-nw.x, this.scale() - nw.x);
             scroller.dimensions.y.virtualSize(-nw.y, this.scale() - nw.y);
         },
@@ -217,6 +252,45 @@ kendo_module({
                 // TODO: Set layer size
                 layers.push(new impl(this, deepExtend({}, defaults, options)));
             }
+        },
+
+        _mousewheel: function(e) {
+            e.preventDefault();
+
+            var delta = dataviz.mwDelta(e) > 0 ? -1 : 1;
+            var options = this.options;
+            var fromZoom = this.zoom();
+            var toZoom = limit(fromZoom + delta, options.minZoom, options.maxZoom);
+
+            if (toZoom !== fromZoom) {
+                this.trigger("zoomStart");
+
+                var cursor = new g.Point(e.offsetX, e.offsetY);
+                var location = this.toViewLocation(cursor);
+                var preZoom = this.toLayerPoint(location);
+                var postZoom = this.toLayerPoint(location, toZoom);
+                var diff = postZoom.subtract(preZoom);
+
+                var origin = this.toLayerPoint(this.origin());
+                origin.x += diff.x;
+                origin.y += diff.y;
+                var toOrigin = this.toLayerLocation(origin, toZoom);
+
+                this.origin(toOrigin);
+                this.zoom(toZoom);
+
+                this.trigger("zoomEnd");
+            }
+        },
+
+        _viewportSize: function() {
+            var element = this.element;
+            var scale = this.scale();
+
+            return {
+                width: math.min(scale, element.width()),
+                height: math.min(scale, element.height())
+            };
         }
     });
 
