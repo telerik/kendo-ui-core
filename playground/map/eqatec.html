@@ -132,18 +132,13 @@
             },
             shapeMouseLeave: function(e) {
                 e.shape.options.set("fill.color", e.shape.oldColor);
+            },
+            zoomEnd: function(e) {
+                //console.log(e.sender.toScreenPoint(e.sender.center()).toString());
             }
         });
 
         var map = $("#map").data("kendoMap");
-
-        $(document).on("DOMMouseScroll mousewheel", function(e) {
-            var delta = kendo.dataviz.mwDelta(e);
-            e.preventDefault();
-
-            delta = delta > 0 ? -1 : 1;
-            map.zoom(map.zoom() + delta);
-        });
     </script>
 </body>
 </html>

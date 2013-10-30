@@ -21,17 +21,21 @@ kendo_module({
         dataviz = kendo.dataviz,
         defined = dataviz.defined,
 
+        g = dataviz.geometry,
+
         map = dataviz.map,
         Extent = map.Extent,
         Location = map.Location,
         EPSG3857 = map.crs.EPSG3857,
 
         util = dataviz.util,
+        valueOrDefault = util.valueOrDefault,
         limit = util.limitValue;
 
     // Constants ==============================================================
     var CSS_PREFIX = "k-",
         FRICTION = 0.90,
+        MOUSEWHEEL = "DOMMouseScroll mousewheel",
         VELOCITY_MULTIPLIER = 5;
 
     // Map widget =============================================================
@@ -40,9 +44,9 @@ kendo_module({
             var map = this;
 
             kendo.destroy(element);
-            Widget.fn.init.call(map, element);
+            Widget.fn.init.call(this, element);
 
-            map._initOptions(options);
+            this._initOptions(options);
 
             this.element
                 .addClass(CSS_PREFIX + this.options.name.toLowerCase())
@@ -50,21 +54,25 @@ kendo_module({
 
             this.bind(this.events, options);
 
-            map.scrollWrap = $("<div />").appendTo(map.element);
+            this.scrollWrap = $("<div />").appendTo(this.element);
 
-            map.crs = new EPSG3857();
-            map.layers = new ObservableArray([]);
-            map._renderLayers();
+            this.crs = new EPSG3857();
+            this.layers = new ObservableArray([]);
+            this._renderLayers();
 
-            var scroller = map.scroller = new kendo.mobile.ui.Scroller(map.scrollWrap, {
+            var scroller = this.scroller = new kendo.mobile.ui.Scroller(this.scrollWrap, {
                 friction: FRICTION,
-                velocityMultiplier: VELOCITY_MULTIPLIER
+                velocityMultiplier: VELOCITY_MULTIPLIER,
+                zoom: true
             });
 
-            scroller.bind("scroll", proxy(map._scroll, map));
-            scroller.bind("scrollEnd", proxy(map._scrollEnd, map));
+            scroller.bind("scroll", proxy(this._scroll, this));
+            scroller.bind("scrollEnd", proxy(this._scrollEnd, this));
 
-            map._reset();
+            this._mousewheel = proxy(this._mousewheel, this);
+            this.element.bind(MOUSEWHEEL, this._mousewheel);
+
+            this._reset();
         },
 
         options: {
@@ -133,12 +141,13 @@ kendo_module({
             return this._center;
         },
 
-        scale: function() {
-            return this.options.minSize * pow(2, this.options.zoom);
+        scale: function(zoom) {
+            zoom = valueOrDefault(zoom, this.options.zoom);
+            return this.options.minSize * pow(2, zoom);
         },
 
-        toLayerPoint: function(location) {
-            return this.crs.toPoint(location, this.scale());
+        toLayerPoint: function(location, zoom) {
+            return this.crs.toPoint(location, this.scale(zoom));
         },
 
         toScreenPoint: function(location) {
@@ -148,34 +157,64 @@ kendo_module({
             return point.subtract(origin);
         },
 
-        // TODO: Rename to extent
-        viewport: function() {
-            var map = this,
-                scale = map.scale(),
-                halfWidth = map.element.width() / 2,
-                halfHeight = map.element.height() / 2,
-                crs = map.crs,
-                cp = crs.toPoint(map.center(), scale);
+        screenPointToLocation: function(point) {
+            var origin = this.toLayerPoint(this.origin());
+            point = point.clone();
+            point.x += origin.x;
+            point.y += origin.y;
+            return this.layerPointToLocation(point);
+        },
 
-            var p0 = cp.clone();
-            p0.x -= halfWidth;
-            p0.y -= halfHeight;
+        layerPointToLocation: function(point, zoom) {
+            return this.crs.toLocation(point, this.scale(zoom));
+        },
 
-            var p1 = cp.clone();
-            p1.x += halfWidth;
-            p1.y += halfHeight;
+        extent: function() {
+            var scale = this.scale(),
+                element = this.element,
+                width = math.min(scale, element.width()),
+                height = math.min(scale, element.height()),
+                crs = this.crs,
+                nw = this.toLayerPoint(this.origin());
+
+            var se = nw.clone();
+            se.x += width;
+            se.y += height;
 
             return new Extent(
-                crs.toLocation(p0, scale),
-                crs.toLocation(p1, scale)
+                this.origin(),
+                crs.toLocation(se, scale)
             );
         },
 
+        origin: function(origin) {
+            if (origin) {
+                this._origin = origin;
+            } else {
+                if (!this._origin) {
+                    var scale = this.scale(),
+                        element = this.element,
+                        halfWidth = math.min(scale, element.width()) / 2,
+                        halfHeight = math.min(scale, element.height()) / 2,
+                        crs = this.crs,
+                        nw = crs.toPoint(this.center(), scale).clone();
+
+                    nw.x -= halfWidth;
+                    nw.y -= halfHeight;
+
+                    this._origin = crs.toLocation(nw, scale);
+                }
+
+                return this._origin;
+            }
+        },
+
         _scroll: function(e) {
-            var center = this.toLayerPoint(this._scrollOrigin);
-            center.x += e.scrollLeft;
-            center.y += e.scrollTop;
-            this.center(this.crs.toLocation(center, this.scale()));
+            var origin = this.toLayerPoint(this._screenOrigin);
+            origin.x += e.scrollLeft;
+            origin.y += e.scrollTop;
+
+            this.origin(this.layerPointToLocation(origin));
 
             this.trigger("pan");
         },
@@ -185,18 +224,20 @@ kendo_module({
         },
 
         _reset: function() {
-            this._scrollOrigin = this.center();
-            this._screenOrigin = this.viewport().nw;
+            this._screenOrigin = this.origin();
             this._resetScroller();
             this.trigger("reset");
         },
 
         _resetScroller: function() {
             var scroller = this.scroller;
+
+            scroller.reset();
+
             scroller.dimensions.y.makeVirtual();
             scroller.dimensions.x.makeVirtual();
 
-            var nw = this.toLayerPoint(this.viewport().nw);
+            var nw = this.toLayerPoint(this.extent().nw);
             scroller.dimensions.x.virtualSize(-nw.x, this.scale() - nw.x);
             scroller.dimensions.y.virtualSize(-nw.y, this.scale() - nw.y);
         },
@@ -216,6 +257,35 @@ kendo_module({
 
                 // TODO: Set layer size
                 layers.push(new impl(this, deepExtend({}, defaults, options)));
+            }
+        },
+
+        _mousewheel: function(e) {
+            e.preventDefault();
+
+            var delta = dataviz.mwDelta(e) > 0 ? -1 : 1;
+            var options = this.options;
+            var fromZoom = this.zoom();
+            var toZoom = limit(fromZoom + delta, options.minZoom, options.maxZoom);
+
+            if (toZoom !== fromZoom) {
+                this.trigger("zoomStart");
+
+                var cursor = new g.Point(e.offsetX, e.offsetY);
+                var location = this.screenPointToLocation(cursor);
+                var preZoom = this.toLayerPoint(location);
+                var postZoom = this.toLayerPoint(location, toZoom);
+                var diff = postZoom.subtract(preZoom);
+
+                var origin = this.toLayerPoint(this.origin());
+                origin.x += diff.x;
+                origin.y += diff.y;
+                var toOrigin = this.layerPointToLocation(origin, toZoom);
+
+                this.origin(toOrigin);
+                this.zoom(toZoom);
+
+                this.trigger("zoomEnd");
             }
         }
     });
