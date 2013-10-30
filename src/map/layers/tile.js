@@ -17,6 +17,10 @@
         map = dataviz.map,
         EPSG3857 = map.crs.EPSG3857;
 
+    // Constants ==============================================================
+    var DEFAULT_WIDTH = 600,
+        DEFAULT_HEIGHT = 400;
+
     // Image tile layer =============================================================
     var TileLayer = Class.extend({
         init: function(map, options) {
