@@ -210,7 +210,7 @@
             var pool = this,
                 item;
 
-            if (pool._items.length >= pool.maxSize) {
+            if (pool._items.length >= pool.options.maxSize) {
                 item = pool._update(center, options);
             } else {
                 item = pool._create(options);

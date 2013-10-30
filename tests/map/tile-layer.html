@@ -117,8 +117,7 @@
                 tile.visible = true;
                 tile.clear()
 
-                ok(!tile.visible);
-                ok(tile.element.is(":hidden"));
+                ok(tile.element[0].style.visibility === "hidden");
             });
 
             test("destroy should remove the element", function() {
