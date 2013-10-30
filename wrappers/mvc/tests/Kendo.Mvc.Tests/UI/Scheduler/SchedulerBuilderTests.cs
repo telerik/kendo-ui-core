@@ -50,12 +50,38 @@
         }
 
         [Fact]
+        public void StartTime_int_overload_sets_the_corresponding_property()
+        {
+            var hours = 1;
+            var min = 1;
+            var sec = 1;
+            builder.StartTime(hours, min, sec);
+
+            var today = DateTime.Today;
+
+            Assert.Equal(new DateTime(today.Year, today.Month, today.Day, hours, min, sec), scheduler.StartTime);
+        }
+
+        [Fact]
         public void EndTime_sets_the_corresponding_property()
         {
             var endtime = new DateTime();
             builder.EndTime(endtime);
 
             Assert.Equal(endtime, scheduler.EndTime);
+        }
+
+        [Fact]
+        public void EndTime_int_overload_sets_the_corresponding_property()
+        {
+            var hours = 1;
+            var min = 1;
+            var sec = 1;
+            builder.EndTime(hours, min, sec);
+
+            var today = DateTime.Today;
+
+            Assert.Equal(new DateTime(today.Year, today.Month, today.Day, hours, min, sec), scheduler.EndTime);
         }
 
         [Fact]
@@ -68,12 +94,38 @@
         }
 
         [Fact]
+        public void WorkDayStart_int_overload_sets_the_corresponding_property()
+        {
+            var hours = 1;
+            var min = 1;
+            var sec = 1;
+            builder.WorkDayStart(hours, min, sec);
+
+            var today = DateTime.Today;
+
+            Assert.Equal(new DateTime(today.Year, today.Month, today.Day, hours, min, sec), scheduler.WorkDayStart);
+        }
+
+        [Fact]
         public void WorkDayEnd_sets_the_corresponding_property()
         {
             var workdayend = new DateTime();
             builder.WorkDayEnd(workdayend);
 
             Assert.Equal(workdayend, scheduler.WorkDayEnd);
+        }
+
+        [Fact]
+        public void WorkDayEnd_int_overload_sets_the_corresponding_property()
+        {
+            var hours = 1;
+            var min = 1;
+            var sec = 1;
+            builder.WorkDayEnd(hours, min, sec);
+
+            var today = DateTime.Today;
+
+            Assert.Equal(new DateTime(today.Year, today.Month, today.Day, hours, min, sec), scheduler.WorkDayEnd);
         }
 
         [Fact]
@@ -272,6 +324,14 @@
             builder.ShowWorkHours(showworkhours);
 
             Assert.Equal(showworkhours, scheduler.ShowWorkHours);
+        }
+
+        [Fact]
+        public void ShowWorkHours_no_argument_overload_sets_the_corresponding_property()
+        {
+            builder.ShowWorkHours();
+
+            Assert.Equal(true, scheduler.ShowWorkHours);
         }
 
         [Fact]
