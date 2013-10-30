@@ -34,7 +34,11 @@
             ).css("width", options.width).css("height", options.height);
 
             map.bind("reset", proxy(layer.reset, layer));
-            map.bind("pan", proxy(layer._pan, this));
+            if (kendo.support.mobileOS) {
+                map.bind("panEnd", proxy(layer._loadTiles, layer));
+            } else {
+                map.bind("pan", proxy(layer._pan, this));
+            }
             layer.crs = new EPSG3857();
             layer.pool = new TilePool();
         },
