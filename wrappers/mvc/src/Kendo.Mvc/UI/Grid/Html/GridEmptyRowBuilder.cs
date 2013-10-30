@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI.Html
 
         public IHtmlNode CreateRow()
         {
-            var tr = new HtmlElement("tr").AddClass("t-no-data");
+            var tr = new HtmlElement("tr").AddClass("k-no-data");
 
             var td = new HtmlElement("td")
                 .Attribute("colspan", Colspan.ToString())

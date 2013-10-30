@@ -37,7 +37,7 @@ namespace Kendo.Mvc.UI.Html.Tests
         [Fact]
         public void Should_set_css_class_to_row()
         {
-            builder.CreateRow().Attribute("class").ShouldContain("t-no-data");
+            builder.CreateRow().Attribute("class").ShouldContain("k-no-data");
         }
 
         [Fact]
