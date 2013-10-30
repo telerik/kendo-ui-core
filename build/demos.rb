@@ -28,6 +28,12 @@ OFFLINE_DEMO_TEMPLATE_OPTIONS = {
         additional_stylesheets: %W(
             ../../content/spa/aeroviewr/css/aeroviewr.css
         )
+    },
+    "/web/bootstrap/index.html" => {
+        skip_back_button: true,
+        additional_stylesheets: %W(
+            ../../content/integration/bootstrap-integration/css/bootstrap.min.css
+        )
     }
 }
 

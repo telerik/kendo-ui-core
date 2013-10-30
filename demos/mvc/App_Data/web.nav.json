@@ -2137,7 +2137,7 @@
             "packages": [ "offline" ],
             "items": [{
                 "text": "Launch Bootstrap Sample Application",
-                "url": "spa/Bootstrap.html"
+                "url": "integration/bootstrap.html"
             }],
             "name": "bootstrap"
         }
