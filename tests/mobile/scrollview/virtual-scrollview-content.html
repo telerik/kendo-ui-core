@@ -38,7 +38,6 @@
             }
 
             var ElasticPane = kendo.mobile.ui.ScrollViewElasticPane,
-                TEST_TIMEOUT = 1000,
                 Page = kendo.mobile.ui.VirtualPage,
                 BatchBuffer = kendo.data.BatchBuffer,
                 Buffer = kendo.data.Buffer,
@@ -215,111 +214,89 @@
                 }
             });
 
-           asyncTest("small drag snaps the content back to the current page", 2, function() {
+           test("small drag snaps the content back to the current page", 2, function() {
                 pane.moveTo(50);
-                content.paneMoved(NUDGE);
-                setTimeout(function() {
-                    start();
-                    equal(content.page, 0);
-                    equal(pane.offset(), 0);
-                }, TEST_TIMEOUT);
+                content.paneMoved(NUDGE, false, $.noop, true);
+
+                equal(content.page, 0);
+                equal(pane.offset(), 0);
             });
 
-           asyncTest("slow drag to right snaps the content back to the current page when ScrollView is at the first page", 2, function() {
+           test("slow drag to right snaps the content back to the current page when ScrollView is at the first page", 2, function() {
                 pane.moveTo(-200);
-                content.paneMoved(NUDGE);
-                setTimeout(function() {
-                    start();
-                    equal(content.page, 0);
-                    equal(pane.offset(), 0);
-                }, TEST_TIMEOUT);
+                content.paneMoved(NUDGE, false, $.noop, true);
+
+                equal(content.page, 0);
+                equal(pane.offset(), 0);
             });
 
-           asyncTest("slow drag to right snaps the content back to the previous page when ScrollView is NOT at the first page", 3, function() {
+           test("slow drag to right snaps the content back to the previous page when ScrollView is NOT at the first page", 3, function() {
                 content.scrollTo(7);
                 equal(content.page, 7);
 
                 pane.moveTo(-200);
-                content.paneMoved(NUDGE);
+                content.paneMoved(NUDGE, false, $.noop, true);
 
-                setTimeout(function() {
-                    start();
-                    content.updatePage();
-                    equal(content.page, 6);
-                    equal(pane.offset(), 0);
-                }, TEST_TIMEOUT);
+                content.updatePage();
+                equal(content.page, 6);
+                equal(pane.offset(), 0);
             });
 
-           asyncTest("slow drag to left snaps the content back to the next page when ScrollView", 2, function() {
+           test("slow drag to left snaps the content back to the next page when ScrollView", 2, function() {
                 pane.moveTo(200);
-                content.paneMoved(NUDGE);
+                content.paneMoved(NUDGE, false, $.noop, true);
 
-                setTimeout(function() {
-                    start();
-                    content.updatePage();
-                    equal(content.page, 1);
-                    equal(pane.offset(), 0);
-                }, TEST_TIMEOUT);
+                content.updatePage();
+                equal(content.page, 1);
+                equal(pane.offset(), 0);
             });
 
-            asyncTest("swift swipe to right snaps the content back to the current page when ScrollView is at the first page", 2, function() {
+            test("swift swipe to right snaps the content back to the current page when ScrollView is at the first page", 2, function() {
                 pane.moveTo(50);
-                content.paneMoved(RIGHT_SWIPE);
+                content.paneMoved(RIGHT_SWIPE, false, $.noop, true);
 
-                setTimeout(function() {
-                    start();
-                    equal(content.page, 0);
-                    equal(pane.offset(), 0);
-                }, TEST_TIMEOUT);
+                equal(content.page, 0);
+                equal(pane.offset(), 0);
             });
 
-            asyncTest("swift swipe to right snaps the content back to the previous page when ScrollView is not at the first page", 2, function() {
+            test("swift swipe to right snaps the content back to the previous page when ScrollView is not at the first page", 2, function() {
                 content.scrollTo(7);
                 pane.moveTo(50);
-                content.paneMoved(RIGHT_SWIPE);
-                setTimeout(function() {
-                    start();
-                    content.updatePage();
-                    equal(content.page, 6);
-                    equal(pane.offset(), 0);
-                }, TEST_TIMEOUT);
+                content.paneMoved(RIGHT_SWIPE, false, $.noop, true);
+
+                content.updatePage();
+                equal(content.page, 6);
+                equal(pane.offset(), 0);
             });
 
-            asyncTest("swift swipe to left snaps the content to the next page if buffer end is NOT reached", 2, function() {
+            test("swift swipe to left snaps the content to the next page if buffer end is NOT reached", 2, function() {
                 pane.moveTo(-50);
-                content.paneMoved(LEFT_SWIPE);
-                setTimeout(function() {
-                    start();
-                    content.updatePage();
-                    equal(content.page, 1);
-                    equal(pane.offset(), 0);
-                }, TEST_TIMEOUT);
+                content.paneMoved(LEFT_SWIPE, false, $.noop, true);
+
+                content.updatePage();
+                equal(content.page, 1);
+                equal(pane.offset(), 0);
             });
 
-            // asyncTest("swift swipe to left snaps the content back to the current page if buffer end is reached", 2, function() {
-            //     pane.moveTo(-50);
-            //     content.paneMoved(LEFT_SWIPE);
-            //     setTimeout(function() {
-            //         start();
-            //         content.updatePage();
-            //         equal(content.page, 1);
-            //         equal(pane.offset(), 0);
-            //     }, TEST_TIMEOUT);
-            // });
+            test("swift swipe to left snaps the content back to the current page if buffer end is reached", 2, function() {
+                pane.moveTo(-50);
+                content.paneMoved(LEFT_SWIPE, false, $.noop, true);
 
-            // asyncTest("preventing default reverts back to the previous page", 2, function() {
-            //     pane.moveTo(50);
-            //     var preventDefaultCallback = function() { return true; };
+                content.updatePage();
+                equal(content.page, 1);
+                equal(pane.offset(), 0);
+            });
 
-            //     content.paneMoved(LEFT_SWIPE, false, preventDefaultCallback);
+            test("preventing default reverts back to the previous page", 2, function() {
+                pane.moveTo(50);
+                var preventDefaultCallback = function() { return true; };
 
-            //     setTimeout(function() {
-            //         start();
-            //         content.updatePage();
-            //         equal(content.page, 0);
-            //         equal(pane.offset(), 0);
-            //     }, TEST_TIMEOUT);
-            // });
+                content.paneMoved(LEFT_SWIPE, false, preventDefaultCallback, true);
+
+                content.updatePage();
+                equal(content.page, 0);
+                equal(pane.offset(), 0);
+            });
 
         </script>
     </body>

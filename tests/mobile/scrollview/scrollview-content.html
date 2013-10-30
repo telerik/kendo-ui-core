@@ -38,7 +38,6 @@
         <script>
             QUnit.config.reorder = false;
 
-            var TIMEOUT = 500;
             var ElasticPane = kendo.mobile.ui.ScrollViewElasticPane;
             var ScrollViewContent = kendo.mobile.ui.ScrollViewContent;
 
@@ -150,86 +149,69 @@
                 }
             });
 
-            asyncTest("small drag snaps the content back to the current page", 2, function() {
+            test("small drag snaps the content back to the current page", 2, function() {
                 pane.moveTo(50);
-                content.paneMoved(NUDGE);
-                setTimeout(function() {
-                    start();
-                    equal(content.page, 0);
-                    equal(pane.offset(), 0);
-                }, TIMEOUT);
+                content.paneMoved(NUDGE, false, $.noop, true);
+
+                equal(content.page, 0);
+                equal(pane.offset(), 0);
             });
 
-            asyncTest("swift drag moves the content to the next page", 2, function() {
+            test("swift drag moves the content to the next page", 2, function() {
                 pane.moveTo(50);
-                content.paneMoved(LEFT_SWIPE);
-                setTimeout(function() {
-                    start();
-                    content.updatePage();
-                    equal(content.page, 1);
-                    equal(pane.offset(), 200);
-                }, TIMEOUT);
+                content.paneMoved(LEFT_SWIPE, false, $.noop, true);
+
+                content.updatePage();
+                equal(content.page, 1);
+                equal(pane.offset(), 200);
             });
 
-            asyncTest("preventing default reverts back to the previous page", 2, function() {
+            test("preventing default reverts back to the previous page", 2, function() {
                 pane.moveTo(50);
                 var preventDefaultCallback = function() { return true; };
 
-                content.paneMoved(LEFT_SWIPE, false, preventDefaultCallback);
+                content.paneMoved(LEFT_SWIPE, false, preventDefaultCallback, true);
 
-                setTimeout(function() {
-                    start();
-                    content.updatePage();
-                    equal(content.page, 0);
-                    equal(pane.offset(), 0);
-                }, TIMEOUT);
+                content.updatePage();
+                equal(content.page, 0);
+                equal(pane.offset(), 0);
             });
 
-            asyncTest("swift right drag moves the content to the previous page", 2, function() {
+            test("swift right drag moves the content to the previous page", 2, function() {
                 content.scrollTo(1, true);
                 pane.moveTo(150);
-                content.paneMoved(RIGHT_SWIPE);
+                content.paneMoved(RIGHT_SWIPE, false, $.noop, true);
 
-                setTimeout(function() {
-                    start();
-                    content.updatePage();
-                    equal(content.page, 0);
-                    equal(pane.offset(), 0);
-                }, TIMEOUT);
+                content.updatePage();
+                equal(content.page, 0);
+                equal(pane.offset(), 0);
             });
 
-            asyncTest("long drag snaps the content to the next page", 2, function() {
+            test("long drag snaps the content to the next page", 2, function() {
                 pane.moveTo(150);
-                content.paneMoved(NUDGE);
-                setTimeout(function() {
-                    start();
-                    content.updatePage();
-                    equal(content.page, 1);
-                    equal(pane.offset(), 200);
-                }, TIMEOUT);
+                content.paneMoved(NUDGE, false, $.noop, true);
+
+                content.updatePage();
+                equal(content.page, 1);
+                equal(pane.offset(), 200);
             });
 
-            asyncTest("drag left side of the boundaries snaps the content to the next page", 2, function() {
+            test("drag left side of the boundaries snaps the content to the next page", 2, function() {
                 pane.moveTo(-150);
-                content.paneMoved(NUDGE);
-                setTimeout(function() {
-                    start();
-                    content.updatePage();
-                    equal(content.page, 0);
-                    equal(pane.offset(), 0);
-                }, TIMEOUT);
+                content.paneMoved(NUDGE, false, $.noop, true);
+
+                content.updatePage();
+                equal(content.page, 0);
+                equal(pane.offset(), 0);
             });
 
-            asyncTest("drag right side of the boundaries snaps the content to the next page", 2, function() {
+            test("drag right side of the boundaries snaps the content to the next page", 2, function() {
                 pane.moveTo(300);
-                content.paneMoved(NUDGE);
+                content.paneMoved(NUDGE, false, $.noop, true);
 
-                setTimeout(function() {
-                    start();
-                    content.updatePage();
-                    equal(content.page, 1);
-                    equal(pane.offset(), 200);
-                }, TIMEOUT);
+                content.updatePage();
+                equal(content.page, 1);
+                equal(pane.offset(), 200);
             });
         </script>
     </body>

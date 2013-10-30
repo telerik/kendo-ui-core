@@ -218,7 +218,7 @@ kendo_module({
             this.pane.transitionTo(- page * this.pane.size().width, Transition.easeOutExpo, instant);
         },
 
-        paneMoved: function(swipeType, bounce, callback) {
+        paneMoved: function(swipeType, bounce, callback, /*internal*/ instant) {
             var that = this,
                 pane = that.pane,
                 width = pane.size().width * that.pageSize,
@@ -243,7 +243,7 @@ kendo_module({
                 }
             }
 
-            pane.transitionTo(snap, ease);
+            pane.transitionTo(snap, ease, instant);
         },
 
         updatePage: function() {
@@ -426,7 +426,7 @@ kendo_module({
             this.page = page;
         },
 
-        paneMoved: function(swipeType, bounce, callback) {
+        paneMoved: function(swipeType, bounce, callback, /*internal*/ instant) {
             var that = this,
                 pane = that.pane,
                 width = pane.size().width,
@@ -455,11 +455,11 @@ kendo_module({
             }
 
             if(delta === 0) {
-                that._cancelMove(ease);
+                that._cancelMove(ease, instant);
             } else if (delta === -1) {
-                that._moveBackward();
+                that._moveBackward(instant);
             } else if (delta === 1) {
-                that._moveForward();
+                that._moveForward(instant);
             }
         },
 
@@ -510,8 +510,8 @@ kendo_module({
             this.pane.transitionTo(this.width, kendo.effects.Transition.easeOutExpo, instant);
         },
 
-        _cancelMove: function(ease) {
-            this.pane.transitionTo(0, ease, false);
+        _cancelMove: function(ease, /*internal*/ instant) {
+            this.pane.transitionTo(0, ease, instant);
         },
 
         _resetPages: function() {
