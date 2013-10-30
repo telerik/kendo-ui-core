@@ -448,6 +448,7 @@ kendo_module({
 
             if (newCoordinates != that.coordinates) {
                 if (kendo.support.browser.msie && kendo.support.browser.version < 10) {
+                    that.element[0].style.position = "relative";
                     that.element[0].style.left = that.x + "px";
                     that.element[0].style.top = that.y + "px";
                 } else {
