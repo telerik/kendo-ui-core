@@ -269,6 +269,7 @@ figure p.hidden-sm {
 footer {
     text-align: right;
     font-size: 0.8571em;
+    padding: 2em 0;
 }
 
 header .container h1.visible-sm {
