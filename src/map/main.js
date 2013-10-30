@@ -154,7 +154,7 @@ kendo_module({
         },
 
         origin: function(origin) {
-            var size = this._viewportSize(),
+            var size = this._viewSize(),
                 topLeft;
 
             if (origin) {
@@ -203,7 +203,6 @@ kendo_module({
             return this.crs.toPoint(location, this.scale(zoom), clamp);
         },
 
-        // TODO: Consider renaming to layerPointToLocation
         layerToLocation: function(point, zoom) {
             var clamp = !this.options.wraparound;
             return  this.crs.toLocation(point, this.scale(zoom), clamp);
@@ -217,7 +216,6 @@ kendo_module({
             return point.subtract(origin);
         },
 
-        // TODO: Consider renaming to viewPointToLocation
         viewToLocation: function(point) {
             var origin = this.locationToLayer(this.origin());
             point = point.clone();
