@@ -50,6 +50,7 @@ kendo_module({
 
             this.element
                 .addClass(CSS_PREFIX + this.options.name.toLowerCase())
+                .css("position", "relative")
                 .empty();
 
             this.bind(this.events, options);
@@ -122,7 +123,6 @@ kendo_module({
             if (defined(level)) {
                 options.zoom = limit(level, options.minZoom, options.maxZoom);
                 this._reset();
-
                 return this;
             } else {
                 return options.zoom;
@@ -131,14 +131,58 @@ kendo_module({
 
         center: function(center) {
             // TODO: Accept lat,lng array and Location
-            // TODO: Make setter chainable
             if (center) {
                 this._center = center;
-            } else if (!this._center) {
-                this._center = Location.fromLatLng(this.options.center);
-            }
+                return this;
+            } else {
+                if (!this._center) {
+                    this._center = Location.fromLatLng(this.options.center);
+                }
 
-            return this._center;
+                return this._center;
+            }
+        },
+
+        origin: function(origin) {
+            // TODO: Accept lat,lng array and Location
+            if (origin) {
+                this._origin = origin;
+                return this;
+            } else {
+                if (!this._origin) {
+                    var scale = this.scale(),
+                        element = this.element,
+                        halfWidth = math.min(scale, element.width()) / 2,
+                        halfHeight = math.min(scale, element.height()) / 2,
+                        crs = this.crs,
+                        nw = crs.toPoint(this.center(), scale).clone();
+
+                    nw.x -= halfWidth;
+                    nw.y -= halfHeight;
+
+                    this._origin = crs.toLocation(nw, scale);
+                }
+
+                return this._origin;
+            }
+        },
+
+        extent: function() {
+            var scale = this.scale(),
+                element = this.element,
+                width = math.min(scale, element.width()),
+                height = math.min(scale, element.height()),
+                crs = this.crs,
+                nw = this.toLayerPoint(this.origin());
+
+            var se = nw.clone();
+            se.x += width;
+            se.y += height;
+
+            return new Extent(
+                this.origin(),
+                crs.toLocation(se, scale)
+            );
         },
 
         scale: function(zoom) {
@@ -167,46 +211,6 @@ kendo_module({
 
         layerPointToLocation: function(point, zoom) {
             return this.crs.toLocation(point, this.scale(zoom));
-        },
-
-        extent: function() {
-            var scale = this.scale(),
-                element = this.element,
-                width = math.min(scale, element.width()),
-                height = math.min(scale, element.height()),
-                crs = this.crs,
-                nw = this.toLayerPoint(this.origin());
-
-            var se = nw.clone();
-            se.x += width;
-            se.y += height;
-
-            return new Extent(
-                this.origin(),
-                crs.toLocation(se, scale)
-            );
-        },
-
-        origin: function(origin) {
-            if (origin) {
-                this._origin = origin;
-            } else {
-                if (!this._origin) {
-                    var scale = this.scale(),
-                        element = this.element,
-                        halfWidth = math.min(scale, element.width()) / 2,
-                        halfHeight = math.min(scale, element.height()) / 2,
-                        crs = this.crs,
-                        nw = crs.toPoint(this.center(), scale).clone();
-
-                    nw.x -= halfWidth;
-                    nw.y -= halfHeight;
-
-                    this._origin = crs.toLocation(nw, scale);
-                }
-
-                return this._origin;
-            }
         },
 
         _scroll: function(e) {
