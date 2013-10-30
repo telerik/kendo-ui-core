@@ -283,12 +283,28 @@ kendo_module({
         },
 
         _click: function(e) {
-            var cursor = new g.Point(e.offsetX, e.offsetY);
-
+            var cursor = this._mousePoint(e);
             this.trigger("click", {
                 originalEvent: e,
                 location: this.viewToLocation(cursor)
             });
+        },
+
+        _mousePoint: function(e) {
+            var x = valueOrDefault(e.offsetX, e.originalEvent.layerX);
+            var y = valueOrDefault(e.offsetY, e.originalEvent.layerY);
+
+            var target = $(e.target);
+            while(target.closest(".k-layer").length > 0) {
+                if (target.closest("svg").length === 0) {
+                    var offset = target.position();
+                    x += offset.left;
+                    y += offset.top;
+                }
+                target = target.offsetParent();
+            }
+
+            return new g.Point(x, y);
         },
 
         _mousewheel: function(e) {
@@ -301,7 +317,7 @@ kendo_module({
             if (toZoom !== fromZoom) {
                 this.trigger("zoomStart", { originalEvent: e });
 
-                var cursor = new g.Point(e.offsetX, e.offsetY);
+                var cursor = this._mousePoint(e);
                 var location = this.viewToLocation(cursor);
                 var preZoom = this.locationToLayer(location);
                 var postZoom = this.locationToLayer(location, toZoom);
