@@ -62,6 +62,7 @@ kendo_module({
             this._initMarkers();
             this._initControls();
             this._reset();
+            scroller.bind("scale", proxy(this._scale, this));
 
             this._mousewheel = proxy(this._mousewheel, this);
             this.element.bind("click", proxy(this._click, this));
@@ -317,6 +318,10 @@ kendo_module({
                 origin: this.origin(),
                 center: this.center()
             });
+        },
+
+        _scale: function() {
+
         },
 
         _reset: function() {

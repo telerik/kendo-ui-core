@@ -317,6 +317,11 @@ kendo_module({
                         } else {
                             userEvents.cancel();
                         }
+                    },
+                    gestureend: function(e) {
+                        that.trigger("scale", {
+                            center: e.center
+                        });
                     }
                 }),
 
