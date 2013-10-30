@@ -5601,14 +5601,16 @@ div[name="recurrenceRule"] > .k-dropdown
     height: 2.4em;
     line-height: 2.1em;
     .border-radius(2em);
+    .box-sizing(border-box);
 }
 
 .km-pane-wrapper .k-pager-numbers .k-link,
 .km-pane-wrapper .k-pager-numbers .k-state-selected
 {
     width: auto;
-    line-height: 2.4em;
+    line-height: 2.2em;
     padding: 0 .86em;
+    min-width: .7em;
 }
 
 .km-pane-wrapper .k-pager-wrap
@@ -5653,11 +5655,18 @@ div[name="recurrenceRule"] > .k-dropdown
         margin-right: 0;
     }
 
+    .km-pane-wrapper .k-pager-wrap
+    {
+        position: relative;
+    }
+
     .km-pane-wrapper .k-pager-numbers
     {
         width: auto;
         display: block;
         overflow: hidden;
+        margin-right: 5.5em;
+        float: none;
     }
 
     .km-pane-wrapper .k-pager-nav
@@ -5668,7 +5677,14 @@ div[name="recurrenceRule"] > .k-dropdown
     .km-pane-wrapper .k-pager-nav:nth-last-child(2),
     .km-pane-wrapper .k-pager-nav:nth-last-child(3)
     {
-        float: right;
+        position: absolute;
+        right: .3em;
+        top: .3em;
+    }
+
+    .km-pane-wrapper .k-pager-nav:nth-last-child(3)
+    {
+        right: 3em;
     }
 
     .km-pane-wrapper .k-pager-info
