@@ -28,6 +28,11 @@ namespace :tests do
         sh "build/xunit/xunit.console.clr4.exe wrappers/mvc/tests/Kendo.Mvc.Tests/bin/Release/Kendo.Mvc.Tests.dll"
     end
 
+    desc "Check test suite for missing test files"
+    task :check_suite do
+        sh "tests/check-test-suite.sh"
+    end
+
     { CI: 8884, Production: 8885 }.each do |env, port|
         output = "#{env}-test-results.xml"
 
@@ -36,7 +41,7 @@ namespace :tests do
         end
 
         desc "Run #{env} tests"
-        task env => [output, :java] do
+        task env => [:check_suite, output, :java] do
             sh "touch #{output}"
         end
     end
