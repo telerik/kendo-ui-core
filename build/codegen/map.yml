@@ -1,11 +1,13 @@
 :options:
     - :name: layers.type
-      :type: Object
+      :type: String
+      :description: The layer type. Supported types are "tile" and "shape".
       :values:
           - tile
           - shape
     - :name: markers.shape
-      :type: Object
+      :type: String
+      :description: The marker shape. Supported shapes are "pin" and "circle".
       :values:
           - pin
           - circle

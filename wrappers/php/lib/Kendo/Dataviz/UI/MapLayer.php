@@ -65,8 +65,8 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * 
-    * @param  $value
+    * The layer type. Supported types are "tile" and "shape".
+    * @param string $value
     * @return \Kendo\Dataviz\UI\MapLayer
     */
     public function type($value) {
