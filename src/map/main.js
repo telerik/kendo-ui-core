@@ -184,8 +184,8 @@ kendo_module({
             return this.crs.toPoint(location, this.scale(zoom));
         },
 
-        toScreenPoint: function(location) {
-            var origin = this.toLayerPoint(this._screenOrigin);
+        toViewPoint: function(location) {
+            var origin = this.toLayerPoint(this._viewOrigin);
             var point = this.toLayerPoint(location);
 
             return point.subtract(origin);
@@ -204,7 +204,7 @@ kendo_module({
         },
 
         _scroll: function(e) {
-            var origin = this.toLayerPoint(this._screenOrigin);
+            var origin = this.toLayerPoint(this._viewOrigin);
             origin.x += e.scrollLeft;
             origin.y += e.scrollTop;
 
@@ -218,7 +218,7 @@ kendo_module({
         },
 
         _reset: function() {
-            this._screenOrigin = this.origin();
+            this._viewOrigin = this.origin();
             this._resetScroller();
             this.trigger("reset");
         },
