@@ -1575,9 +1575,11 @@ kendo_module({
             if (current) {
                 var labelFormat;
                 var data = selection;
+                var events = this._selectedEvents();
+                var slots = view._selectedSlots;
 
-                if (selection.events[0]) {
-                    data = this.occurrenceByUid(selection.events[selection.events.length - 1]) || selection;
+                if (events[0]) {
+                    data = events[0] || selection;
                     labelFormat = kendo.format(this.options.messages.ariaEventLabel, data.title, data.start, data.start);
                 } else {
                     labelFormat = kendo.format(this.options.messages.ariaSlotLabel, data.start, data.end);
@@ -1588,15 +1590,31 @@ kendo_module({
                 wrapper.attr("aria-activedescendant", this._ariaId);
 
                 this.trigger("change", {
-                    selection: {
-                        start: new Date(selection.start),
-                        end: new Date(selection.end),
-                        isAllDay: selection.isAllDay,
-                        element: this.wrapper.find("td.k-state-selected, div.k-state-selected"),
-                        resources: view._resourceByGroupIndex(selection.groupIndex)
-                    }
+                    start: selection.start,
+                    end: selection.end,
+                    events: events,
+                    slots: slots,
+                    resources: view._resourceBySlot(selection)
                 });
             }
+        },
+
+        _selectedEvents: function() {
+            var uids = this._selection.events;
+            var length = uids.length;
+            var idx = 0;
+            var event;
+
+            var events = [];
+
+            for (; idx < length; idx++) {
+                event = this.occurrenceByUid(uids[idx]);
+                if (event) {
+                    events.push(event);
+                }
+            }
+
+            return events;
         },
 
         _mouseMove: function(e) {

@@ -948,6 +948,7 @@ kendo_module({
             this._moveHint = $();
             this._cellId = kendo.guid();
             this._resourcesForGroups();
+            this._selectedSlots = [];
         },
 
         _isMobile: function() {
@@ -1240,18 +1241,28 @@ kendo_module({
                 isAllDay = true;
             }
 
+            this._selectedSlots = [];
+
             var ranges = group.ranges(selection.start, selection.end, isAllDay, false);
             var element;
+            var slot;
 
             for (var rangeIndex = 0; rangeIndex < ranges.length; rangeIndex++) {
                 var range = ranges[rangeIndex];
-
                 var collection = range.collection;
 
                 for (var slotIndex = range.start.index; slotIndex <= range.end.index; slotIndex++) {
-                    element = collection.at(slotIndex).element;
+                    slot = collection.at(slotIndex);
+
+                    element = slot.element;
                     element.setAttribute("aria-selected", true);
                     addSelectedState(element);
+
+                    this._selectedSlots.push({
+                        start: slot.startDate(),
+                        end: slot.endDate(),
+                        element: element
+                    });
                 }
             }
 
@@ -1330,28 +1341,6 @@ kendo_module({
 
                     var setter = kendo.setter(resource.field);
                     setter(result, value);
-
-                    resourceIndex = Math.floor(resourceIndex / resource.dataSource.total());
-                }
-            }
-
-            return result;
-        },
-
-        _resourceByGroupIndex: function(resourceIndex) {
-            var resources = this.groupedResources;
-            var result = [];
-
-            if (resources.length) {
-                for (var idx = resources.length - 1; idx >=0; idx--) {
-                    var resource = resources[idx];
-
-                    if (resource.name) {
-                        result.push({
-                            resource: resource,
-                            value: this._resourceValue(resource, resource.dataSource.at(resourceIndex % resource.dataSource.total()))
-                        });
-                    }
 
                     resourceIndex = Math.floor(resourceIndex / resource.dataSource.total());
                 }

@@ -623,20 +623,19 @@
                 container.focus();
             }
 
-            test("Scheduler raises change event on slot selection", 5, function() {
+            test("Scheduler raises change event on slot selection", 4, function() {
                 setupWidget();
 
                 scheduler.bind("change", function(e) {
-                    var selection = e.selection;
+                    var selection = e;
                     var td = container.find(".k-scheduler-header td").eq(5);
                     var slot = scheduler.view().selectionByElement(td);
 
                     deepEqual(selection.start, slot.startDate());
                     deepEqual(selection.end, slot.endDate());
-                    equal(selection.isAllDay, slot.isDaySlot);
 
-                    equal(selection.element.length, 1);
-                    equal(selection.element[0], td[0]);
+                    equal(selection.slots.length, 1);
+                    equal(selection.slots[0].element, td[0]);
                 });
 
                 var td = container.find(".k-scheduler-header td").eq(5);
@@ -651,9 +650,7 @@
                 setupWidget();
 
                 scheduler.bind("change", function(e) {
-                    var selection = e.selection;
-
-                    equal(selection.element.length, 2);
+                    equal(e.slots.length, 2);
                 });
 
                 scheduler.wrapper.trigger({
@@ -667,11 +664,11 @@
                 setupWidget();
 
                 scheduler.bind("change", function(e) {
-                    var selection = e.selection;
+                    var selection = e;
                     var dataItem = scheduler.dataSource.view()[0];
 
-                    equal(selection.element.length, 1);
-                    equal(selection.element.eq(0).data("uid"), dataItem.uid);
+                    equal(selection.events.length, 1);
+                    equal(selection.events[0], dataItem);
                 });
 
                 var event = scheduler.wrapper.find(".k-event");
@@ -689,36 +686,43 @@
 
                 setupWidget({
                     dataSource: [
-                        { roomId: 2, start: today, end: end, title: "Test" }
+                        { roomId2: 4, roomId: 2, start: today, end: end, title: "Test" }
                     ],
                     group: {
-                        resources: ["Rooms"]
+                        resources: ["Rooms", "Rooms2"]
                     },
                     resources: [
-                    {
-                        field: "roomId",
-                        name: "Rooms",
-                        dataSource: [
-                            { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
-                            { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
-                        ],
-                        valuePrimitive: true,
-                        title: "Room"
-                    }]
+                        {
+                            field: "roomId",
+                            name: "Rooms",
+                            dataSource: [
+                                { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                                { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                            ],
+                            valuePrimitive: true,
+                            title: "Room"
+                        }, {
+                            field: "roomId2",
+                            name: "Rooms2",
+                            dataSource: [
+                                { text: "101", value: 3, color: "#6eb3fa" },
+                                { text: "201", value: 4, color: "#f58a8a" }
+                            ],
+                            valuePrimitive: true,
+                            title: "Room2"
+                        }
+                    ]
                 });
 
                 scheduler.bind("change", function(e) {
-                    var selection = e.selection;
+                    var selection = e;
                     var dataItem = scheduler.dataSource.view()[0];
                     var resources = selection.resources;
 
-                    equal(selection.element.length, 1);
-                    equal(selection.element.eq(0).data("uid"), dataItem.uid);
-
-                    equal(resources.length, 1);
-                    equal(resources[0].resource.name, "Rooms");
-                    equal(resources[0].value, 2);
-
+                    equal(selection.events.length, 1);
+                    equal(selection.events[0], dataItem);
+                    equal(resources.roomId, 2);
+                    equal(resources.roomId2, 4);
                 });
 
                 var event = scheduler.wrapper.find(".k-event");
