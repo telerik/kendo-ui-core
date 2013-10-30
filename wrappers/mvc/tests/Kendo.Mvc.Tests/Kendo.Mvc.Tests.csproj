@@ -140,6 +140,7 @@
     <Compile Include="UI\RecurrenceEditor\RecurrenceEditorHtmlBuilderTests.cs" />
     <Compile Include="UI\RecurrenceEditor\RecurrenceEditorTestHelper.cs" />
     <Compile Include="UI\Scheduler\SchedulerBuilderTests.cs" />
+    <Compile Include="UI\Scheduler\SchedulerEditableBuilderTests.cs" />
     <Compile Include="UI\Scheduler\SchedulerEvent.cs" />
     <Compile Include="UI\Scheduler\SchedulerTestHelper.cs" />
     <Compile Include="UI\Sparkline\SparklineSeriesDefaultsBuilderTests.cs" />
