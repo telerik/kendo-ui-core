@@ -41,8 +41,6 @@ kendo_module({
     // Map widget =============================================================
     var Map = Widget.extend({
         init: function(element, options) {
-            var map = this;
-
             kendo.destroy(element);
             Widget.fn.init.call(this, element);
 
