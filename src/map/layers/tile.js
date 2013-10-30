@@ -45,6 +45,7 @@
 
         reset: function(e) {
             this._basePoint = this.crs.toPoint(this.map.viewport().nw, this.map.scale());
+            this.pool.clear();
             this._render();
         },
 
@@ -60,7 +61,6 @@
         },
 
         _render: function() {
-            this.pool.clear();
             this._loadTiles();
         },
 
@@ -157,25 +157,25 @@
 
     var ImageTile = Class.extend({
         init: function(options) {
-            this.element = $("<img unselectable='on'></img>");
+            this.element = $("<img style='position: absolute; display: block; visibility: visible;' unselectable='on'></img>");
             this.update(options);
             this.visible = false;
         },
 
         update: function(options) {
             var element = this.element;
+            htmlElement = element[0];
 
-            if (element.is(":hidden")) {
-                element.show();
+            if (htmlElement.style.visibility === "hidden") {
+                htmlElement.style.visibility = "visible";
+                htmlElement.style.display = "block";
             }
 
-            element.prop("src", options.url);
+            htmlElement.setAttribute("src", options.url);
             this.url = options.url;
 
-            element.offset({
-                top: options.point.y,
-                left: options.point.x
-            });
+            htmlElement.style.top = options.point.y + "px";
+            htmlElement.style.left = options.point.x + "px";
             this.point = options.point;
 
             this.screenPoint = options.screenPoint;
@@ -185,12 +185,12 @@
         },
 
         clear: function() {
-            this.element.hide();
-            this.visible = false;
+            this.element[0].style.visibility = "hidden";
         },
 
         destroy: function() {
             this.element.remove();
+            this.element = null;
         }
     });
 
@@ -209,7 +209,7 @@
             var pool = this,
                 item;
 
-            if (pool._items.length >= pool.options.maxSize) {
+            if (pool._items.length >= pool.maxSize) {
                 item = pool._update(center, options);
             } else {
                 item = pool._create(options);

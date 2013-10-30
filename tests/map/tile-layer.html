@@ -121,12 +121,12 @@
                 ok(tile.element.is(":hidden"));
             });
 
-            //test("destroy should remove the element", function() {
-            //    tile = createImageTile();
-            //    tile.destroy();
-            //
-            //    ok(tile.element);
-            //});
+            test("destroy should remove the element", function() {
+                tile = createImageTile();
+                tile.destroy();
+
+                ok(!tile.element);
+            });
 
             // ------------------------------------------------------------
             module("Tile layer / TileImage/ Update", {
