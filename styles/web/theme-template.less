@@ -1390,15 +1390,24 @@ div.k-imagebrowser-dropzone em
 
 /* Column Menu in Adaptive Grid */
 
+.k-ie .km-pane-wrapper .k-widget,
+.k-ie .km-pane-wrapper .k-group,
+.k-ie .km-pane-wrapper .k-content,
+.k-ie .km-pane-wrapper .k-header,
 .k-ie .km-pane-wrapper .k-popup-edit-form .k-edit-field .k-button,
-.k-ie .km-pane-wrapper .k-scheduler *:not(.k-state-selected) > *:not(.k-state-selected),
-.k-ie .km-pane-wrapper .k-grid *:not(.k-state-selected) > *:not(.k-state-selected),
-.k-ie .km-pane-wrapper .km-header *,
 .km-pane-wrapper .k-mobile-list .k-item,
 .km-pane-wrapper .k-mobile-list .k-edit-label,
 .km-pane-wrapper .k-mobile-list .k-edit-field
 {
     color: @widget-text-color;
+}
+
+@media screen and (-ms-high-contrast: active)
+              and (-ms-high-contrast: none) {
+    div.km-pane-wrapper a
+    {
+        color: @widget-text-color;
+    }
 }
 
 .km-pane-wrapper .k-mobile-list .k-item,
