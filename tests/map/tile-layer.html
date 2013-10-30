@@ -65,7 +65,8 @@
                 url: options.url || "",
                 index: new Point(options.index.x, options.index.y),
                 point: new Point(options.point.x, options.point.y),
-                screenPoint: new Point(options.screenPoint.x, options.screenPoint.y)
+                screenPoint: new Point(options.screenPoint.x, options.screenPoint.y),
+                zoom: options.zoom || 1
             });
         }
 
@@ -100,10 +101,11 @@
                     index: {
                         x: 1,
                         y: 1
-                    }
+                    },
+                    zoom: 1
                 });
 
-                ok(tile.id === "x:1y:1");
+                ok(tile.id === "x:1y:1zoom:1");
             });
 
             test("initial visible should be false", function() {
@@ -175,10 +177,11 @@
                     point: {
                         x: 1,
                         y: 1
-                    }
+                    },
+                    zoom: 1
                 });
 
-                ok(tile.id === "x:1y:1");
+                ok(tile.id === "x:1y:1zoom:1");
             });
 
             test("should set visible to true", function() {
