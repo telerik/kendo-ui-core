@@ -1350,6 +1350,33 @@ kendo_module({
         }
     });
 
+    function hitToOppositeSide(hit, bounds) {
+        if (hit.x == -1 && hit.y == -1) {
+            return bounds.bottomRight();
+        }
+        else if (hit.x == 1 && hit.y == 1) {
+            return bounds.topLeft();
+        }
+        else if (hit.x == -1 && hit.y == 1) {
+            return bounds.topRight();
+        }
+        else if (hit.x == 1 && hit.y == -1) {
+            return bounds.bottomLeft();
+        }
+        else if (hit.x === 0 && hit.y == -1) {
+            return bounds.bottom();
+        }
+        else if (hit.x === 0 && hit.y == 1) {
+            return bounds.top();
+        }
+        else if (hit.x == 1 && hit.y === 0) {
+            return bounds.left();
+        }
+        else if (hit.x == -1 && hit.y === 0) {
+            return bounds.right();
+        }
+    }
+
     var ResizingAdorner = AdornerBase.extend({
         init: function (diagram, options) {
             var that = this;
@@ -1566,7 +1593,7 @@ kendo_module({
         move: function (handle, p) {
             var delta = p.minus(this._cp), dragging,
                 dtl = new Point(), dbr = new Point(), bounds,
-                center, shape, i, angle, newBounds, changed = 0;
+                center, shape, i, angle, newBounds, changed = 0, staticPoint, scaleX, scaleY;
             if (handle.y === -2 && handle.x === -1) {
                 center = this._innerBounds.center();
                 this._angle = Math.findAngle(center, p);
@@ -1600,10 +1627,24 @@ kendo_module({
                     }
                 }
 
+                if (!dragging) {
+                    staticPoint = hitToOppositeSide(handle, this._innerBounds);
+                    scaleX = (this._innerBounds.width + delta.x * handle.x) / this._innerBounds.width;
+                    scaleY = (this._innerBounds.height + delta.y * handle.y) / this._innerBounds.height;
+                }
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
                     bounds = shape.bounds();
-                    newBounds = this._displaceBounds(bounds, dtl, dbr, dragging);
+                    if (dragging) {
+                        newBounds = this._displaceBounds(bounds, dtl, dbr, dragging);
+                    }
+                    else {
+                        newBounds = bounds.clone();
+                        newBounds.scale(scaleX, scaleY, staticPoint, this._innerBounds.center(), shape.rotate().angle);
+                        var newCenter = newBounds.center(); // fixes the new rotation center.
+                        newCenter.rotate(bounds.center(), -this._angle);
+                        newBounds = new Rect(newCenter.x - newBounds.width / 2, newCenter.y - newBounds.height / 2, newBounds.width, newBounds.height);
+                    }
                     if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) {
                         shape.bounds(newBounds);
                         shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
@@ -1628,7 +1669,7 @@ kendo_module({
                 newCenter;
             if (!dragging) {
                 newCenter = newBounds.center();
-                newCenter.rotate(bounds.center(), 360 - this._angle);
+                newCenter.rotate(bounds.center(), -this._angle);
                 newBounds = new Rect(newCenter.x - newBounds.width / 2, newCenter.y - newBounds.height / 2, newBounds.width, newBounds.height);
             }
             return newBounds;

@@ -253,6 +253,23 @@ kendo_module({
             delimiter = delimiter || " ";
 
             return this.x + delimiter + this.y + delimiter + this.width + delimiter + this.height;
+        },
+        scale: function (scaleX, scaleY, staicPoint, adornerCenter, angle) {
+            var tl = this.topLeft();
+            var thisCenter = this.center();
+            tl.rotate(thisCenter, 360 - angle).rotate(adornerCenter, angle);
+
+            var delta = staicPoint.minus(tl);
+            var scaled = new Point(delta.x * scaleX, delta.y * scaleY);
+            var position = delta.minus(scaled);
+            tl = tl.plus(position);
+            tl.rotate(adornerCenter, 360 - angle).rotate(thisCenter, angle);
+
+            this.x = tl.x;
+            this.y = tl.y;
+
+            this.width *= scaleX;
+            this.height *= scaleY;
         }
     });
 
