@@ -57,7 +57,7 @@
 
         reset: function(e) {
             this._basePoint = this.map.locationToLayer(this.map.origin());
-            this.pool.clear();
+            this.pool.destroy();
             this._render();
         },
 
@@ -120,7 +120,8 @@
                         index: index,
                         url: urlTemplate({
                             zoom: zoom, x: index.x, y: index.y
-                        })
+                        }),
+                        zoom: zoom
                     });
 
                     if (!tile.visible) {
@@ -193,7 +194,7 @@
 
             this.screenPoint = options.screenPoint;
             this.index = options.index;
-            this.id = "x:" + this.index.x + "y:" + this.index.y;
+            this.id = "x:" + this.index.x + "y:" + this.index.y + "zoom:" + options.zoom;
             this.visible = true;
         },
 
@@ -202,8 +203,10 @@
         },
 
         destroy: function() {
-            this.element.remove();
-            this.element = null;
+            if (this.element) {
+                this.element.remove();
+                this.element = null;
+            }
         }
     });
 
@@ -247,6 +250,8 @@
             for (i = 0; i < items.length; i++) {
                 items[i].destroy();
             }
+
+            this._items = [];
         },
 
         _create: function(options) {
@@ -273,7 +278,7 @@
         },
 
         _tileId: function(options) {
-            return "x:" + options.index.x + "y:" + options.index.y;
+            return "x:" + options.index.x + "y:" + options.index.y + "zoom:" + options.zoom;
         },
 
         _update: function(center, options) {
