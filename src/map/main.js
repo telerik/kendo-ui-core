@@ -156,7 +156,7 @@ kendo_module({
                     topLeft.x -= size.width / 2;
                     topLeft.y -= size.height / 2;
 
-                    this._origin = this.layerPointToLocation(topLeft);
+                    this._origin = this.toLayerLocation(topLeft);
                 }
 
                 return this._origin;
@@ -171,7 +171,7 @@ kendo_module({
             bottomRight.x += size.width;
             bottomRight.y += size.height;
 
-            var se = this.layerPointToLocation(bottomRight);
+            var se = this.toLayerLocation(bottomRight);
             return new Extent(nw, se);
         },
 
@@ -184,6 +184,10 @@ kendo_module({
             return this.crs.toPoint(location, this.scale(zoom));
         },
 
+        toLayerLocation: function(point, zoom) {
+            return this.crs.toLocation(point, this.scale(zoom));
+        },
+
         toViewPoint: function(location) {
             var origin = this.toLayerPoint(this._viewOrigin);
             var point = this.toLayerPoint(location);
@@ -191,16 +195,12 @@ kendo_module({
             return point.subtract(origin);
         },
 
-        screenPointToLocation: function(point) {
+        toViewLocation: function(point) {
             var origin = this.toLayerPoint(this.origin());
             point = point.clone();
             point.x += origin.x;
             point.y += origin.y;
-            return this.layerPointToLocation(point);
-        },
-
-        layerPointToLocation: function(point, zoom) {
-            return this.crs.toLocation(point, this.scale(zoom));
+            return this.toLayerLocation(point);
         },
 
         _scroll: function(e) {
@@ -208,7 +208,7 @@ kendo_module({
             origin.x += e.scrollLeft;
             origin.y += e.scrollTop;
 
-            this.origin(this.layerPointToLocation(origin));
+            this.origin(this.toLayerLocation(origin));
 
             this.trigger("pan");
         },
@@ -266,7 +266,7 @@ kendo_module({
                 this.trigger("zoomStart");
 
                 var cursor = new g.Point(e.offsetX, e.offsetY);
-                var location = this.screenPointToLocation(cursor);
+                var location = this.toViewLocation(cursor);
                 var preZoom = this.toLayerPoint(location);
                 var postZoom = this.toLayerPoint(location, toZoom);
                 var diff = postZoom.subtract(preZoom);
@@ -274,7 +274,7 @@ kendo_module({
                 var origin = this.toLayerPoint(this.origin());
                 origin.x += diff.x;
                 origin.y += diff.y;
-                var toOrigin = this.layerPointToLocation(origin, toZoom);
+                var toOrigin = this.toLayerLocation(origin, toZoom);
 
                 this.origin(toOrigin);
                 this.zoom(toZoom);
