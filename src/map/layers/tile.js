@@ -44,7 +44,7 @@
         },
 
         reset: function(e) {
-            this._basePoint = this.crs.toPoint(this.map.viewport().nw, this.map.scale());
+            this._basePoint = this.map.locationToLayer(this.map.origin());
             this.pool.clear();
             this._render();
         },
@@ -65,9 +65,10 @@
         },
 
         _viewportSize: function() {
-            var viewport = this.map.viewport(),
-                nw = this.crs.toPoint(viewport.nw, this.map.scale()),
-                se = this.crs.toPoint(viewport.se, this.map.scale()),
+            var map = this.map,
+                extent = map.extent(),
+                nw = map.locationToLayer(extent.nw),
+                se = map.locationToLayer(extent.se),
                 diff = se.subtract(nw);
 
             return {
@@ -83,9 +84,9 @@
                 map = layer.map,
                 zoom = map.options.zoom,
                 urlTemplate = template(options.urlTemplate),
-                nwToPoint = layer.crs.toPoint(map.viewport().nw, map.scale());
+                nwToPoint = map.locationToLayer(map.origin());
 
-            var center = layer.crs.toPoint(map.center(), map.scale());
+            var center = map.locationToLayer(map.center());
 
             var firstTileIndex = layer._getTileIndex(nwToPoint);
             var screenPoint = layer._indexToScreenPoint(firstTileIndex);
