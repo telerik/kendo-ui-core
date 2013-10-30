@@ -748,7 +748,7 @@
     ],
     "geoviz": [{
             "text": "Map",
-            "new" : true,
+            "beta": true,
             "name": "map",
             "documentation": "dataviz/map",
             "spriteCssClass": "mapIcon",
