@@ -1,41 +1,52 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>Kendo UI Map Compass</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>Kendo UI Map Compass</title>
 
-<link href="../styles/web/kendo.common.less" rel="stylesheet/less" />
-<link href="../styles/web/kendo.silver.less" rel="stylesheet/less" />
-<script src="../demos/mvc/content/shared/js/less.js"></script>
-<link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
+        <link href="../styles/web/kendo.common.less" rel="stylesheet/less" />
+        <link href="../styles/web/kendo.silver.less" rel="stylesheet/less" />
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/map/compass.js"></script>
 
-<style>
+        <style>
 
-html
-{
-	font: 12px sans-serif;
-}
+            html
+            {
+                font: 12px sans-serif;
+            }
 
-/* theme */
+            /* theme */
 
-.k-compass .k-compass-c > span
-{
-	border-color: #515967; /* @widget text color */
-}
+            .k-compass .k-compass-c > span
+            {
+                border-color: #515967; /* @widget text color */
+            }
 
-</style>
-</head>
-<body>
+        </style>
+    </head>
+    <body>
 
-<div class="k-widget k-header k-shadow k-compass">
+        <div class="k-widget k-header k-shadow k-compass">
+            <button type="button" class="k-button k-compass-n"><span class="k-icon k-i-arrow-n"></span></button>
+            <button type="button" class="k-button k-compass-e"><span class="k-icon k-i-arrow-e"></span></button>
+            <button type="button" class="k-button k-compass-s"><span class="k-icon k-i-arrow-s"></span></button>
+            <button type="button" class="k-button k-compass-w"><span class="k-icon k-i-arrow-w"></span></button>
+            <button type="button" class="k-button k-compass-c"><span></span></button>
+        </div>
 
-<button type="button" class="k-button k-compass-n"><span class="k-icon k-i-arrow-n"></span></button>
-<button type="button" class="k-button k-compass-e"><span class="k-icon k-i-arrow-e"></span></button>
-<button type="button" class="k-button k-compass-s"><span class="k-icon k-i-arrow-s"></span></button>
-<button type="button" class="k-button k-compass-w"><span class="k-icon k-i-arrow-w"></span></button>
-<button type="button" class="k-button k-compass-c"><span></span></button>
-
-</div>
-
-</body>
+        <div id="compass">
+        </div>
+        <script>
+            $("#compass").kendoCompass({
+                pan: function(e) {
+                    console.log("pan", e.x, e.y);
+                }
+            });
+        </script>
+    </body>
 </html>

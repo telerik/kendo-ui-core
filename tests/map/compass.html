@@ -1,0 +1,120 @@
+<html>
+<head>
+    <title>Compass</title>
+    <script src="../jquery-loader.js"></script>
+    <script src="../qunit/qunit/qunit.js"></script>
+    <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+    <script src="../kendo-test-helpers.js"></script>
+    <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+</head>
+<body>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/map/compass.js"></script>
+
+    <script>
+
+        test("adds css classes to wrapper", function() {
+            var dom = $("<div>").kendoCompass();
+
+            ok(dom.is(".k-widget.k-compass.k-header.k-shadow"));
+        });
+
+        test("creates north button", function() {
+            var dom = $("<div>").kendoCompass();
+
+            ok(dom.find("button:eq(0)").is(".k-button.k-compass-n"));
+            ok(dom.find("button:eq(0) span").is(".k-icon.k-i-arrow-n"));
+        });
+
+        test("creates east button", function() {
+            var dom = $("<div>").kendoCompass();
+
+            ok(dom.find("button:eq(1)").is(".k-button.k-compass-e"));
+            ok(dom.find("button:eq(1) span").is(".k-icon.k-i-arrow-e"));
+        });
+
+        test("creates south button", function() {
+            var dom = $("<div>").kendoCompass();
+
+            ok(dom.find("button:eq(2)").is(".k-button.k-compass-s"));
+            ok(dom.find("button:eq(2) span").is(".k-icon.k-i-arrow-s"));
+        });
+
+        test("creates west button", function() {
+            var dom = $("<div>").kendoCompass();
+
+            ok(dom.find("button:eq(3)").is(".k-button.k-compass-w"));
+            ok(dom.find("button:eq(3) span").is(".k-icon.k-i-arrow-w"));
+        });
+
+        test("creates center button", function() {
+            var dom = $("<div>").kendoCompass();
+
+            ok(dom.find("button:eq(4)").is(".k-button.k-compass-c"));
+        });
+
+        test("clicking the north button triggers the pan event with positive y argument and zero x argument", 2, function() {
+            var dom = $("<div>").kendoCompass({
+                pan: function(e) {
+                    equal(e.y, 1);
+                    equal(e.x, 0);
+                }
+            });
+
+            dom.find(".k-compass-n").trigger("click");
+        });
+
+        test("clicking the south button triggers the pan event with negative y argument and zero x argument", 2, function() {
+            var dom = $("<div>").kendoCompass({
+                pan: function(e) {
+                    equal(e.y, -1);
+                    equal(e.x, 0);
+                }
+            });
+
+            dom.find(".k-compass-s").trigger("click");
+        });
+
+        test("clicking the east button triggers the pan event with positive x argument and zero y argument", 2, function() {
+            var dom = $("<div>").kendoCompass({
+                pan: function(e) {
+                    equal(e.y, 0);
+                    equal(e.x, 1);
+                }
+            });
+
+            dom.find(".k-compass-e").trigger("click");
+        });
+
+        test("clicking the west button triggers the pan event with negative x argument and zero y argument", 2, function() {
+            var dom = $("<div>").kendoCompass({
+                pan: function(e) {
+                    equal(e.y, 0);
+                    equal(e.x, -1);
+                }
+            });
+
+            dom.find(".k-compass-w").trigger("click");
+        });
+
+        test("clicking the center button triggers the center event", 1, function() {
+            var dom = $("<div>").kendoCompass({
+                center: function() {
+                    ok(true)
+                }
+            });
+
+            dom.find(".k-compass-c").trigger("click");
+        });
+    </script>
+
+    <h1 id="qunit-header">Compass</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+</body>
+</html>

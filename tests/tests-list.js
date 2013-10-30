@@ -316,6 +316,7 @@ var tests = [
     "map/crs.html",
     "map/helpers.html",
     "map/lint.html",
+    "map/compass.html",
     "menu/api.html",
     "menu/events.html",
     "menu/keyboard.html",
