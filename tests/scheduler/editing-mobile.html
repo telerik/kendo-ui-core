@@ -120,6 +120,15 @@
                 equal(close.calls("close"), 1);
             });
 
+            test("editable is destroyed on close",1, function() {
+                var scheduler = setup();
+
+                scheduler.editEvent(scheduler.dataSource.at(0));
+                scheduler.cancelEvent();
+
+                ok(!scheduler._editor.editable);
+            });
+
             test("edit view is removed", 1, function() {
                 var scheduler = setup();
 

@@ -1204,6 +1204,10 @@ kendo_module({
                 views.remove();
 
                 this.container = null;
+                if (this.editable) {
+                    this.editable.destroy();
+                    this.editable = null;
+                }
                 this.timezoneView = null;
             }
         }
