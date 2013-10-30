@@ -332,7 +332,7 @@ kendo_module({
                 return this._bounds.topLeft();
             }
         },
-        triggerBoundsChange: function() {
+        triggerBoundsChange: function () {
             if (this.diagram) {
                 this.diagram.trigger(BOUNDSCHANGE, {item: this, bounds: this._bounds.clone()}); // the trigger modifies the arguments internally.
             }
@@ -1187,17 +1187,17 @@ kendo_module({
             if (pan instanceof Point && !pan.equals(this._pan)) {
                 this._storePan(pan);
                 this._panTransform(pan, animated);
-                
+
                 this.trigger(PAN);
             }
 
             return this._pan;
         },
-        _panTransform: function(pos, animated) {
+        _panTransform: function (pos, animated) {
             var diagram = this,
                 pan = pos || diagram._pan;
 
-            if(this.scroller) {
+            if (this.scroller) {
                 var scrollMethod = (animated === true ? "animatedScrollTo" : "scrollTo");
 
                 diagram.scroller[scrollMethod](pan.x, pan.y);
@@ -1207,7 +1207,7 @@ kendo_module({
                 diagram.transformMainLayer();
             }
         },
-        _storePan: function(pan) {
+        _storePan: function (pan) {
             this._pan = pan;
         },
         viewport: function () {
@@ -1221,7 +1221,7 @@ kendo_module({
             transform.render(this.mainLayer.native);
             this._matrix = transform.toMatrix();
         },
-        zoomMainLayer: function() {
+        zoomMainLayer: function () {
             var zoom = this._zoom;
 
             var transform = new CompositeTransform(0, 0, zoom, zoom);
@@ -1466,7 +1466,8 @@ kendo_module({
             }
         },
         getBoundingBox: function (items) {
-            var rect = Rect.empty(), di = this._getDiagramItems(items);
+            var rect = Rect.empty(),
+                di = Utils.isDefined(items) ? this._getDiagramItems(items) : {shapes: this.shapes};
             if (di.shapes.length > 0) {
                 var item = di.shapes[0];
                 rect = item.rotatedBounds();
@@ -1613,7 +1614,7 @@ kendo_module({
 
             return this.documentToViewportPoint(dPoint).minus(scroll);
         },
-        documentToViewportPoint: function(dPoint) {
+        documentToViewportPoint: function (dPoint) {
             var containerOffset = this.element.offset();
 
             return new Point(dPoint.x - containerOffset.left, dPoint.y - containerOffset.top);
@@ -1785,7 +1786,7 @@ kendo_module({
                 this.dataSource.fetch();
             }
         },
-        _attachEvents: function() {
+        _attachEvents: function () {
             var diagram = this;
 
             diagram.bind(BOUNDSCHANGE, $.proxy(this._autosizeCanvas, this));
@@ -1871,7 +1872,7 @@ kendo_module({
             }
             this._adorn(this._connectorsAdorner, value);
         },
-        _autosizeCanvas: function(args) {
+        _autosizeCanvas: function (args) {
             var diagram = args.sender || this,
                 zoom = diagram.zoom(),
                 viewport = diagram.element,
@@ -1880,7 +1881,7 @@ kendo_module({
 
             cumulativeSize.width = (cumulativeSize.width + cumulativeSize.x) * zoom;
             cumulativeSize.height = (cumulativeSize.height + cumulativeSize.y) * zoom;
-            
+
             cumulativeSize = cumulativeSize.union(viewportSize);
 
             diagram.canvas.size(cumulativeSize);
