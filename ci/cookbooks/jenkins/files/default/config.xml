@@ -32,14 +32,14 @@
       <userId>anonymous</userId>
     </slave>
     <slave>
-      <name>kendobuild-winslave1</name>
+      <name>kendoiis</name>
       <description>Windows slave</description>
       <remoteFS>C:\Jenkins</remoteFS>
       <numExecutors>2</numExecutors>
       <mode>EXCLUSIVE</mode>
       <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
       <launcher class="hudson.slaves.JNLPLauncher"/>
-      <label>windows slave</label>
+      <label>windows</label>
       <nodeProperties/>
       <userId>anonymous</userId>
     </slave>
