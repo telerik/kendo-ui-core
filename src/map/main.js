@@ -182,7 +182,7 @@ kendo_module({
         extent: function() {
             var nw = this.origin();
             var bottomRight = this.locationToLayer(nw);
-            var size = this._viewportSize();
+            var size = this._viewSize();
 
             bottomRight.x += size.width;
             bottomRight.y += size.height;
@@ -202,6 +202,7 @@ kendo_module({
             return this.crs.toPoint(location, this.scale(zoom), clamp);
         },
 
+        // TODO: Consider renaming to layerPointToLocation
         layerToLocation: function(point, zoom) {
             var clamp = !this.options.wraparound;
             return  this.crs.toLocation(point, this.scale(zoom), clamp);
@@ -215,6 +216,7 @@ kendo_module({
             return point.subtract(origin);
         },
 
+        // TODO: Consider renaming to viewPointToLocation
         viewToLocation: function(point) {
             var origin = this.locationToLayer(this.origin());
             point = point.clone();
@@ -367,7 +369,7 @@ kendo_module({
             }
         },
 
-        _viewportSize: function() {
+        _viewSize: function() {
             var element = this.element;
             var scale = this.scale();
             var width = element.width();
