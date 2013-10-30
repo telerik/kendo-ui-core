@@ -137,7 +137,7 @@
 
             for (var i = 0; i < rings.length; i++) {
                 for (var j = 0; j < rings[i].length; j++) {
-                    var point = this.map.toViewPoint(
+                    var point = this.map.locationToView(
                         Location.fromLngLat(rings[i][j])
                     );
 
@@ -154,7 +154,7 @@
 
         _panEnd: function() {
             var map = this.map;
-            var nw = map.toViewPoint(map.extent().nw);
+            var nw = map.locationToView(map.extent().nw);
 
             this.surface.translate(nw);
             this.movable.moveTo(nw);

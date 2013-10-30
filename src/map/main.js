@@ -148,13 +148,13 @@ kendo_module({
                 return this;
             } else {
                 if (!this._origin) {
-                    var topLeft = this.toLayerPoint(this.center()).clone();
+                    var topLeft = this.locationToLayer(this.center()).clone();
                     var size = this._viewportSize();
 
                     topLeft.x -= size.width / 2;
                     topLeft.y -= size.height / 2;
 
-                    this._origin = this.toLayerLocation(topLeft);
+                    this._origin = this.layerToLocation(topLeft);
                 }
 
                 return this._origin;
@@ -163,13 +163,13 @@ kendo_module({
 
         extent: function() {
             var nw = this.origin();
-            var bottomRight = this.toLayerPoint(nw).clone();
+            var bottomRight = this.locationToLayer(nw).clone();
             var size = this._viewportSize();
 
             bottomRight.x += size.width;
             bottomRight.y += size.height;
 
-            var se = this.toLayerLocation(bottomRight);
+            var se = this.layerToLocation(bottomRight);
             return new Extent(nw, se);
         },
 
@@ -178,35 +178,35 @@ kendo_module({
             return this.options.minSize * pow(2, zoom);
         },
 
-        toLayerPoint: function(location, zoom) {
+        locationToLayer: function(location, zoom) {
             return this.crs.toPoint(location, this.scale(zoom));
         },
 
-        toLayerLocation: function(point, zoom) {
+        layerToLocation: function(point, zoom) {
             return this.crs.toLocation(point, this.scale(zoom));
         },
 
-        toViewPoint: function(location) {
-            var origin = this.toLayerPoint(this._viewOrigin);
-            var point = this.toLayerPoint(location);
+        locationToView: function(location) {
+            var origin = this.locationToLayer(this._viewOrigin);
+            var point = this.locationToLayer(location);
 
             return point.subtract(origin);
         },
 
-        toViewLocation: function(point) {
-            var origin = this.toLayerPoint(this.origin());
+        viewToLocation: function(point) {
+            var origin = this.locationToLayer(this.origin());
             point = point.clone();
             point.x += origin.x;
             point.y += origin.y;
-            return this.toLayerLocation(point);
+            return this.layerToLocation(point);
         },
 
         _scroll: function(e) {
-            var origin = this.toLayerPoint(this._viewOrigin);
+            var origin = this.locationToLayer(this._viewOrigin);
             origin.x += e.scrollLeft;
             origin.y += e.scrollTop;
 
-            this.origin(this.toLayerLocation(origin));
+            this.origin(this.layerToLocation(origin));
 
             this.trigger("pan");
         },
@@ -229,7 +229,7 @@ kendo_module({
             scroller.dimensions.y.makeVirtual();
             scroller.dimensions.x.makeVirtual();
 
-            var nw = this.toLayerPoint(this.extent().nw);
+            var nw = this.locationToLayer(this.extent().nw);
             scroller.dimensions.x.virtualSize(-nw.x, this.scale() - nw.x);
             scroller.dimensions.y.virtualSize(-nw.y, this.scale() - nw.y);
         },
@@ -264,15 +264,15 @@ kendo_module({
                 this.trigger("zoomStart");
 
                 var cursor = new g.Point(e.offsetX, e.offsetY);
-                var location = this.toViewLocation(cursor);
-                var preZoom = this.toLayerPoint(location);
-                var postZoom = this.toLayerPoint(location, toZoom);
+                var location = this.viewToLocation(cursor);
+                var preZoom = this.locationToLayer(location);
+                var postZoom = this.locationToLayer(location, toZoom);
                 var diff = postZoom.subtract(preZoom);
 
-                var origin = this.toLayerPoint(this.origin());
+                var origin = this.locationToLayer(this.origin());
                 origin.x += diff.x;
                 origin.y += diff.y;
-                var toOrigin = this.toLayerLocation(origin, toZoom);
+                var toOrigin = this.layerToLocation(origin, toZoom);
 
                 this.origin(toOrigin);
                 this.zoom(toZoom);
