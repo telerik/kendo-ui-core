@@ -26,7 +26,7 @@
             e.ResizeStart("scheduler_resizeStart");
             e.Resize("scheduler_resize");
             e.ResizeEnd("scheduler_resizeEnd");
-            e.Navigate("scheduler_navigate");            
+            e.Navigate("scheduler_navigate");
         })
         .Views(views =>
         {
@@ -62,18 +62,15 @@
     }
 
     function scheduler_change(e) {
-        var selection = e.selection;
-        var start = selection.start; //Selection start date
-        var end = selection.end; //Selection end date
-        var isAllDay = selection.isAllDay; //if selected slot/event is all day
-        var element = selection.element; //jQuery object holding selected elements
+        var start = e.start; //selection start date
+        var end = e.end; //selection end date
+        var slots = e.slots; //list of selected slots
+        var events = e.events; //list of selected Scheduler events
 
         var message = "change:: selection from {0:g} till {1:g}";
 
-        if (element.data("uid")) {
-            var event = $("#scheduler").data("kendoScheduler").occurrenceByUid(element.data("uid"));
-
-            message += ". The selected event is '" + event.title + "'";
+        if (events.length) {
+            message += ". The selected event is '" + events[events.length - 1].title + "'";
         }
 
         kendoConsole.log(kendo.format(message, start, end));
