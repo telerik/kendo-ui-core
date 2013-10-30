@@ -1319,6 +1319,9 @@ kendo_module({
             this.undoRedoService.redo();
         },
         remove: function (items, undoable) {
+            if (Utils.isUndefined(undoable)) {
+                undoable = true;
+            }
             if (undoable) {
                 this.undoRedoService.begin();
             }
@@ -1900,6 +1903,9 @@ kendo_module({
                 i;
 
             function addShape(node) {
+                if (Utils.isUndefined(node)) { // happens on updating dataSource
+                    return;
+                }
                 var shape = that.dataMap.first(function (item) {
                     return item.uid === node.uid;
                 });
