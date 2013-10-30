@@ -7,6 +7,7 @@
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.selectable.js"></script>
         <script src="../../src/kendo.pager.js"></script>
         <script src="../../src/kendo.listview.js"></script>
@@ -74,7 +75,7 @@
             test("ListView adds aria-selected=true on SPACEBAR", function() {
                 var ul = setup();
 
-                ul.focus();
+                ul.data("kendoListView").current(ul.children().eq(0));
                 ul.trigger({
                     type: "keydown",
                     keyCode: kendo.keys.SPACEBAR
@@ -86,7 +87,7 @@
             test("ListView adds id to the last selected item", function() {
                 var ul = setup();
 
-                ul.focus();
+                ul.data("kendoListView").current(ul.children().eq(0));
                 ul.trigger({
                     type: "keydown",
                     keyCode: kendo.keys.SPACEBAR
@@ -98,7 +99,7 @@
             test("ListView adds aria-activedescendant to the listview", function() {
                 var ul = setup();
 
-                ul.focus();
+                ul.data("kendoListView").current(ul.children().eq(0));
                 ul.trigger({
                     type: "keydown",
                     keyCode: kendo.keys.SPACEBAR
@@ -114,7 +115,8 @@
                     navigatable: true
                 }).data("kendoListView");
 
-                var li = listview.element.focus().find(".k-state-focused");
+                listview.current(listview.element.children().eq(0));
+                var li = listview.element.find(".k-state-focused");
 
                 equal(li.attr("id"), "custom[1]");
             });
@@ -126,7 +128,7 @@
                     navigatable: true
                 }).data("kendoListView");
 
-                listview.element.focus();
+                listview.current(listview.element.children().eq(0));
 
                 equal(listview.element.attr("aria-activedescendant"), "custom[1]");
             });

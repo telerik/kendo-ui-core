@@ -308,6 +308,7 @@ var tests = [
     "listview/listview.html",
     "listview/editing.html",
     "listview/mvvm.html",
+    "listview/aria.html",
     "listview/lint.html",
     "map/projections.html",
     "map/tile-layer.html",
