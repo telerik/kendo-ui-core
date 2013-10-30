@@ -35,7 +35,7 @@
 
             this.element = $("<div class='k-layer'></div>").appendTo(
                 map.scrollWrap // TODO: API for allocating a scrollable element?
-            ).css("width", options.width).css("height", options.height);
+            ).css({ "position": "relative", "width": options.width, "height": options.height });
 
             map.bind("reset", proxy(layer.reset, layer));
             if (kendo.support.mobileOS) {
