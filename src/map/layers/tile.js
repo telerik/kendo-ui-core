@@ -21,13 +21,17 @@
     var TileLayer = Class.extend({
         init: function(map, options) {
             var layer = this;
-
-            layer.map = map;
+            options = deepExtend({}, options, {
+                width: map.element.width() || DEFAULT_WIDTH,
+                height: map.element.height() || DEFAULT_HEIGHT
+            });
 
             this._initOptions(options);
+            layer.map = map;
+
             this.element = $("<div class='k-layer'></div>").appendTo(
-                map.scrollWrap
-            );
+                map.scrollWrap // TODO: API for allocating a scrollable element?
+            ).css("width", options.width).css("height", options.height);
 
             map.bind("reset", proxy(layer.reset, layer));
             map.bind("pan", proxy(layer._pan, this));
