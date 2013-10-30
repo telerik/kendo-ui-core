@@ -89,7 +89,7 @@
             });
 
             test("calling resize will execute setSize with getSize result", 2, function() {
-                widget.setSize = function(size) {
+                widget._resize = function(size) {
                     equal(size.width, 500);
                     equal(size.height, 400);
                 }
@@ -98,7 +98,7 @@
             });
 
             test("resize caches the size value and ignores subsequent calls", 1, function() {
-                widget.setSize = function(size) {
+                widget._resize = function(size) {
                     ok(true);
                 }
 
@@ -116,7 +116,7 @@
             });
 
             test("changing dimensions invalidates the caching", 2, function() {
-                widget.setSize = function(size) {
+                widget._resize = function(size) {
                     ok(true);
                 }
 
