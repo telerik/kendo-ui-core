@@ -21,8 +21,11 @@
         var dataviz = kendo.dataviz,
             map = dataviz.map,
 
-            TileLayer = map.layers.TileLayer,
-            Location = map.Location;
+            TilePool = map.layers.TilePool,
+            ImageTile = map.layers.ImageTile,
+            Location = map.Location,
+
+            Point = dataviz.geometry.Point;
 
         (function() {
 
@@ -32,20 +35,166 @@
             // ------------------------------------------------------------
             module("Tile layer / Pool", {
                 setup: function() {
-                    var map = {
-                        scrollWrap: $("<div></div>"),
-                        bind: function() {}
-                    };
-                    tile = new TileLayer(map, {
-                        tileSize: 256,
-                        maxSize: 10
-                    });
-                    pool = tile.pool;
+                    pool = new TilePool();
                 }
             });
 
             test("should not have more then 10 items", function() {
-                ok(pool._items.length <= 10);
+                pool.options.maxSize = 10;
+                for (var i = 0; i < 15; i++) {
+                    pool.get({ x: 5, y: 5 },{
+                        index: new Point(i, i),
+                        screenPoint: new Point(i, i),
+                        point: new Point(i, i)
+                    });
+                }
+
+                ok(pool._items.length === 10);
+            });
+
+        })();
+
+        function createImageTile(options) {
+            // value or initial value
+            options = options || {};
+            options.index = options.index || { x: 0, y: 0 };
+            options.point = options.point || { x: 0, y: 0 };
+            options.screenPoint = options.screenPoint || { x: 0, y: 0 };
+
+            return new ImageTile({
+                url: options.url || "",
+                index: new Point(options.index.x, options.index.y),
+                point: new Point(options.point.x, options.point.y),
+                screenPoint: new Point(options.screenPoint.x, options.screenPoint.y)
+            });
+        }
+
+        (function() {
+            var tile;
+
+            // ------------------------------------------------------------
+            module("Tile layer / TileImage");
+
+            test("should render url", function() {
+                tile = createImageTile({
+                    url: "url"
+                });
+
+                ok(tile.element.attr("src") === "url");
+            });
+
+            test("should render offset", function() {
+                tile = createImageTile({
+                    point: {
+                        x: 20,
+                        y: 10
+                    }
+                });
+
+                ok(parseInt(tile.element.css("top")) == 10);
+                ok(parseInt(tile.element.css("left")) == 20);
+            });
+
+            test("should have id", function() {
+                tile = createImageTile({
+                    index: {
+                        x: 1,
+                        y: 1
+                    }
+                });
+
+                ok(tile.id === "x:1y:1");
+            });
+
+            test("initial visible should be false", function() {
+                tile = createImageTile();
+
+                ok(!tile.visible);
+            });
+
+            test("clear should hide set visible false and hide the element", function() {
+                tile = createImageTile();
+                tile.visible = true;
+                tile.clear()
+
+                ok(!tile.visible);
+                ok(tile.element.is(":hidden"));
+            });
+
+            //test("destroy should remove the element", function() {
+            //    tile = createImageTile();
+            //    tile.destroy();
+            //
+            //    ok(tile.element);
+            //});
+
+            // ------------------------------------------------------------
+            module("Tile layer / TileImage/ Update", {
+                setup: function() {
+                    tile = createImageTile();
+                }
+            });
+
+            test("should render url", function() {
+                tile.update({
+                    url: "url",
+                    index: {
+                        x: 1,
+                        y: 1
+                    },
+                    point: {
+                        x: 20,
+                        y: 10
+                    }
+                });
+
+                ok(tile.element.attr("src") === "url");
+            });
+
+            test("should render offset", function() {
+                tile.update({
+                    point: {
+                        x: 20,
+                        y: 10
+                    },
+                    index: {
+                        x: 1,
+                        y: 1
+                    }
+                });
+
+                ok(parseInt(tile.element.css("top")) == 10);
+                ok(parseInt(tile.element.css("left")) == 20);
+            });
+
+            test("should have id", function() {
+                tile.update({
+                    index: {
+                        x: 1,
+                        y: 1
+                    },
+                    point: {
+                        x: 1,
+                        y: 1
+                    }
+                });
+
+                ok(tile.id === "x:1y:1");
+            });
+
+            test("should set visible to true", function() {
+                tile.update({
+                    index: {
+                        x: 1,
+                        y: 1
+                    },
+                    point: {
+                        x: 1,
+                        y: 1
+                    }
+                });
+
+                ok(tile.visible === true);
             });
 
         })();

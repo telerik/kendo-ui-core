@@ -26,7 +26,7 @@
                 position: absolute;
             }
 
-            .k-tile {
+            img {
                 position: absolute;
                 user-select: none;
                 -moz-user-select: none;
@@ -45,10 +45,8 @@
         <div id="map" style="width: 800px; height: 600px;"></div>
         <script>
             $("#map").kendoMap({
-                view: {
-                    center: [42.4482453, 27.4157791],
-                    zoom: 3
-                },
+                center: [42.4482453, 27.4157791],
+                zoom: 10,
                 layers: [{
                     type: "tile",
                     urlTemplate: "http://tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
@@ -59,6 +57,16 @@
                     text: "Marker with popup",
                     open: true // ?
                 }]
+            });
+
+            var map = $("#map").data("kendoMap");
+
+            $(document).on("mousewheel", function(e) {
+                var delta = kendo.dataviz.mwDelta(e);
+                e.preventDefault();
+
+                delta = delta > 0 ? -1 : 1;
+                map.zoom(map.zoom() + delta);
             });
         </script>
     </body>

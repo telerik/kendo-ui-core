@@ -30,16 +30,12 @@
             );
 
             map.bind("reset", proxy(layer.reset, layer));
-            map.bind("scroll", proxy(layer._scroll, map));
-            map.bind("drag", proxy(layer._drag, this));
-            map.bind("dragEnd", proxy(layer._dragEnd, this));
+            map.bind("pan", proxy(layer._pan, this));
             layer.crs = new EPSG3857();
             layer.pool = new TilePool();
         },
 
         options: {
-            // TODO: Read from map
-            zoom: 0,
             tileSize: 256
         },
 
@@ -48,31 +44,36 @@
         },
 
         reset: function(e) {
-            this.basePoint = this.crs.toPoint(this.map.viewport().nw, this.map.scale());
+            this._basePoint = this.crs.toPoint(this.map.viewport().nw, this.map.scale());
             this._render();
         },
 
-        _scroll: function(e) {
-            console.log("scroll: ", e);
-        },
-
-        _drag: function(e) {
+        _pan: function(e) {
             var layer = this,
                 now = new Date(),
-                timestamp = layer._drag.timestamp;
+                timestamp = layer._pan.timestamp;
 
             if (!timestamp || now - timestamp > 100) {
                 this._loadTiles();
-                layer._drag.timestamp = now;
+                layer._pan.timestamp = now;
             }
         },
 
-        _dragEnd: function(e) {
-            console.log("dragEnd: ", e);
+        _render: function() {
+            this.pool.clear();
+            this._loadTiles();
         },
 
-        _render: function() {
-            this._loadTiles();
+        _viewportSize: function() {
+            var viewport = this.map.viewport(),
+                nw = this.crs.toPoint(viewport.nw, this.map.scale()),
+                se = this.crs.toPoint(viewport.se, this.map.scale()),
+                diff = se.subtract(nw);
+
+            return {
+                width: diff.x,
+                height: diff.y
+            };
         },
 
         _loadTiles: function() {
@@ -84,9 +85,11 @@
                 urlTemplate = template(options.urlTemplate),
                 nwToPoint = layer.crs.toPoint(map.viewport().nw, map.scale());
 
+            var center = layer.crs.toPoint(map.center(), map.scale());
+
             var firstTileIndex = layer._getTileIndex(nwToPoint);
             var screenPoint = layer._indexToScreenPoint(firstTileIndex);
-            var point = screenPoint.clone().subtract(layer.basePoint);
+            var point = screenPoint.clone().subtract(nwToPoint);
             size = layer._getSize(point);
 
             for (var x = 0; x < size.x; x++) {
@@ -97,8 +100,8 @@
                     };
 
                     var screenPoint = layer._indexToScreenPoint(index);
-                    var point = screenPoint.clone().subtract(layer.basePoint);
-                    var tile = layer._createTile({
+                    var point = screenPoint.clone().subtract(layer._basePoint);
+                    var tile = layer._createTile(center, {
                         screenPoint: screenPoint,
                         point: point,
                         index: index,
@@ -116,9 +119,10 @@
         },
 
         _getSize: function(screenPoint) {
+            var viewportSize = this._viewportSize();
             return {
-                x: math.ceil((math.abs(screenPoint.x) + this.map.element.width()) / this.options.tileSize),
-                y: math.ceil((math.abs(screenPoint.y) + this.map.element.height()) / this.options.tileSize)
+                x: math.ceil((math.abs(screenPoint.x) + viewportSize.width) / this.options.tileSize),
+                y: math.ceil((math.abs(screenPoint.y) + viewportSize.height) / this.options.tileSize)
             };
         },
 
@@ -146,22 +150,22 @@
             return tile;
         },
 
-        _createTile: function(options) {
-            var center = this.crs.toPoint(this.map.center(), this.map.scale());
+        _createTile: function(center, options) {
             return this.pool.get(center, options);
         }
     });
 
     var ImageTile = Class.extend({
         init: function(options) {
-            this.element = $("<img class='k-tile' unselectable='on'></img>");
+            this.element = $("<img unselectable='on'></img>");
             this.update(options);
+            this.visible = false;
         },
 
         update: function(options) {
             var element = this.element;
 
-            if (element.hide()) {
+            if (element.is(":hidden")) {
                 element.show();
             }
 
@@ -177,6 +181,7 @@
             this.screenPoint = options.screenPoint;
             this.index = options.index;
             this.id = "x:" + this.index.x + "y:" + this.index.y;
+            this.visible = true;
         },
 
         clear: function() {
@@ -204,10 +209,10 @@
             var pool = this,
                 item;
 
-            if (pool._items.length > pool.options.maxSize) {
-                item = this._update(center, options);
+            if (pool._items.length >= pool.options.maxSize) {
+                item = pool._update(center, options);
             } else {
-                item = this._create(options);
+                item = pool._create(options);
             }
 
             return item;
@@ -236,39 +241,52 @@
                 items = pool._items,
                 oldTile, i, item;
 
-            var tile = new ImageTile(options);
+            var tileId = pool._tileId(options);
 
             for (i = 0; i < items.length; i++) {
                 item = items[i];
-                if (item.id === tile.id) {
+                if (item.id === tileId) {
                     oldTile = item;
                     tile = oldTile;
                 }
             }
 
             if (!oldTile) {
+                tile = new ImageTile(options);
                 this._items.push(tile);
             }
 
             return tile;
         },
 
+        _tileId: function(options) {
+            return "x:" + options.index.x + "y:" + options.index.y;
+        },
+
         _update: function(center, options) {
             var pool = this,
                 items = pool._items,
-                dist = Number.MAX_VALUE,
+                dist = -Number.MAX_VALUE,
                 currentDist, index, i, item;
+
+            var tileId = pool._tileId(options);
 
             for (i = 0; i < items.length; i++) {
                 item = items[i];
-                currentDist = item.screenPoint.distanceTo(center);
-                if (dist > currentDist) {
+                currentDist = item.screenPoint.clone().distanceTo(center);
+                if (item.id === tileId) {
+                    return items[i];
+                }
+
+                if (dist < currentDist) {
                     index = i;
                     dist = currentDist;
                 }
             }
 
             items[index].update(options);
+
+            return items[index];
         }
     });
 
