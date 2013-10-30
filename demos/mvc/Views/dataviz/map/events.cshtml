@@ -39,7 +39,9 @@
         }
 
         function onClick(e) {
-            kendoConsole.log("Click at ...");
+            kendoConsole.log(kendo.format(
+                "Click at :: {0}", e.location.toString()
+            ));
         }
 
         function onReset(e) {
@@ -47,11 +49,15 @@
         }
 
         function onPan(e) {
-            kendoConsole.log("Pan");
+            kendoConsole.log(kendo.format(
+                "Pan to :: {0}", e.center.toString()
+            ));
         }
 
         function onPanEnd(e) {
-            kendoConsole.log("Pan end");
+            kendoConsole.log(kendo.format(
+                "Pan ended at :: {0}", e.center.toString()
+            ));
         }
 
         function onShapeClick(e) {

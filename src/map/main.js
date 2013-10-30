@@ -69,6 +69,7 @@ kendo_module({
             scroller.bind("scrollEnd", proxy(this._scrollEnd, this));
 
             this._mousewheel = proxy(this._mousewheel, this);
+            this.element.bind("click", proxy(this._click, this));
             this.element.bind(MOUSEWHEEL, this._mousewheel);
 
             this._reset();
@@ -219,11 +220,19 @@ kendo_module({
 
             this.origin(this.layerToLocation(origin));
 
-            this.trigger("pan");
+            this.trigger("pan", {
+                originalEvent: e,
+                origin: this.origin(),
+                center: this.center()
+            });
         },
 
-        _scrollEnd: function() {
-            this.trigger("panEnd");
+        _scrollEnd: function(e) {
+            this.trigger("panEnd", {
+                originalEvent: e,
+                origin: this.origin(),
+                center: this.center()
+            });
         },
 
         _reset: function() {
@@ -263,16 +272,34 @@ kendo_module({
             }
         },
 
+        _viewportSize: function() {
+            var element = this.element;
+            var scale = this.scale();
+
+            return {
+                width: math.min(scale, element.width()),
+                height: math.min(scale, element.height())
+            };
+        },
+
+        _click: function(e) {
+            var cursor = new g.Point(e.offsetX, e.offsetY);
+
+            this.trigger("click", {
+                originalEvent: e,
+                location: this.viewToLocation(cursor)
+            });
+        },
+
         _mousewheel: function(e) {
             e.preventDefault();
-
             var delta = dataviz.mwDelta(e) > 0 ? -1 : 1;
             var options = this.options;
             var fromZoom = this.zoom();
             var toZoom = limit(fromZoom + delta, options.minZoom, options.maxZoom);
 
             if (toZoom !== fromZoom) {
-                this.trigger("zoomStart");
+                this.trigger("zoomStart", { originalEvent: e });
 
                 var cursor = new g.Point(e.offsetX, e.offsetY);
                 var location = this.viewToLocation(cursor);
@@ -288,18 +315,8 @@ kendo_module({
                 this.origin(toOrigin);
                 this.zoom(toZoom);
 
-                this.trigger("zoomEnd");
+                this.trigger("zoomEnd", { originalEvent: e });
             }
-        },
-
-        _viewportSize: function() {
-            var element = this.element;
-            var scale = this.scale();
-
-            return {
-                width: math.min(scale, element.width()),
-                height: math.min(scale, element.height())
-            };
         }
     });
 
