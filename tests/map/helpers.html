@@ -62,6 +62,18 @@
                 ok(Location.fromLngLat([10, 20]).equals(new Location(20, 10)));
             });
 
+            test("create from lng, lat", function() {
+                ok(Location.create(10, 20).equals(new Location(10, 20)));
+            });
+
+            test("create from lng, lat array", function() {
+                ok(Location.create([10, 20]).equals(new Location(10, 20)));
+            });
+
+            test("create from Location", function() {
+                ok(Location.create(new Location(10, 20)).equals(new Location(10, 20)));
+            });
+
         })();
 
         (function() {

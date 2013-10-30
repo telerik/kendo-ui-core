@@ -22,10 +22,14 @@ kendo_module({
         valueOrDefault = util.valueOrDefault;
 
     // Implementation =========================================================
-    // TODO: Flip lat (y), lng (x) before it's too late!
     var Location = function(lat, lng) {
-        this.lat = lat;
-        this.lng = lng;
+        if (arguments.length === 1) {
+            this.lat = lat[0];
+            this.lng = lat[1];
+        } else {
+            this.lat = lat;
+            this.lng = lng;
+        }
     };
 
     Location.prototype = {
@@ -46,6 +50,16 @@ kendo_module({
 
     Location.fromLatLng = function(ll) {
         return new Location(ll[0], ll[1]);
+    };
+
+    Location.create = function(arg0, arg1) {
+        if (arg0 instanceof Location) {
+            return arg0;
+        } else if (arguments.length === 1 && arg0.length === 2) {
+            return Location.fromLatLng(arg0);
+        } else {
+            return new Location(arg0, arg1);
+        }
     };
 
     var Extent = Class.extend({

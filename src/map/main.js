@@ -128,16 +128,15 @@ kendo_module({
         },
 
         center: function(center) {
-            // TODO: Accept lat,lng array and Location
             if (center) {
-                this._center = center;
+                this._center = Location.create(center);
                 this._origin = null;
                 this._reset();
 
                 return this;
             } else {
                 if (!this._center) {
-                    this._center = Location.fromLatLng(this.options.center);
+                    this._center = Location.create(this.options.center);
                 }
 
                 return this._center;
@@ -145,11 +144,11 @@ kendo_module({
         },
 
         origin: function(origin) {
-            // TODO: Accept lat,lng array and Location
             var size = this._viewportSize(),
                 topLeft;
 
             if (origin) {
+                origin = Location.create(origin);
                 topLeft = this.locationToLayer(origin);
                 topLeft.x += size.width / 2;
                 topLeft.y += size.height / 2;
@@ -189,6 +188,7 @@ kendo_module({
         },
 
         locationToLayer: function(location, zoom) {
+            location = Location.create(location);
             return this.crs.toPoint(location, this.scale(zoom));
         },
 
@@ -197,6 +197,7 @@ kendo_module({
         },
 
         locationToView: function(location) {
+            location = Location.create(location);
             var origin = this.locationToLayer(this._viewOrigin);
             var point = this.locationToLayer(location);
 
