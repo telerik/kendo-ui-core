@@ -150,17 +150,13 @@ kendo_module({
                 return this;
             } else {
                 if (!this._origin) {
-                    var scale = this.scale(),
-                        element = this.element,
-                        halfWidth = math.min(scale, element.width()) / 2,
-                        halfHeight = math.min(scale, element.height()) / 2,
-                        crs = this.crs,
-                        nw = crs.toPoint(this.center(), scale).clone();
+                    var topLeft = this.toLayerPoint(this.center()).clone();
+                    var size = this._viewportSize();
 
-                    nw.x -= halfWidth;
-                    nw.y -= halfHeight;
+                    topLeft.x -= size.width / 2;
+                    topLeft.y -= size.height / 2;
 
-                    this._origin = crs.toLocation(nw, scale);
+                    this._origin = this.layerPointToLocation(topLeft);
                 }
 
                 return this._origin;
@@ -168,21 +164,15 @@ kendo_module({
         },
 
         extent: function() {
-            var scale = this.scale(),
-                element = this.element,
-                width = math.min(scale, element.width()),
-                height = math.min(scale, element.height()),
-                crs = this.crs,
-                nw = this.toLayerPoint(this.origin());
+            var nw = this.origin();
+            var bottomRight = this.toLayerPoint(nw).clone();
+            var size = this._viewportSize();
 
-            var se = nw.clone();
-            se.x += width;
-            se.y += height;
+            bottomRight.x += size.width;
+            bottomRight.y += size.height;
 
-            return new Extent(
-                this.origin(),
-                crs.toLocation(se, scale)
-            );
+            var se = this.layerPointToLocation(bottomRight);
+            return new Extent(nw, se);
         },
 
         scale: function(zoom) {
@@ -291,6 +281,16 @@ kendo_module({
 
                 this.trigger("zoomEnd");
             }
+        },
+
+        _viewportSize: function() {
+            var element = this.element;
+            var scale = this.scale();
+
+            return {
+                width: math.min(scale, element.width()),
+                height: math.min(scale, element.height())
+            };
         }
     });
 
