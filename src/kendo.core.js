@@ -1604,7 +1604,10 @@ function pad(number, digits, end) {
             if (!percentage) {
                 wrapper.css({
                     width: element.outerWidth(),
-                    height: element.outerHeight()
+                    height: element.outerHeight(),
+                    boxSizing: "content-box",
+                    mozBoxSizing: "content-box",
+                    webkitBoxSizing: "content-box"
                 });
             }
         }
