@@ -1362,6 +1362,9 @@ kendo_module({
                         this.select("All");
                     }
                 }
+                else if (itemsOrRect.toString().toLowerCase() === "none") {
+                    this.select(false);
+                }
                 else if (itemsOrRect.toString().toLowerCase() === "all") {
                     items = this.shapes.concat(this.connections);
                     this._internalSelection = true;
