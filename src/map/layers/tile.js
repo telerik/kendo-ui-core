@@ -33,9 +33,7 @@
             this._initOptions(options);
             layer.map = map;
 
-            this.element = $("<div class='k-layer'></div>").appendTo(
-                map.scrollWrap // TODO: API for allocating a scrollable element?
-            ).css({ "width": options.width, "height": options.height });
+            this.element = $(this._template(this)).appendTo(map.scrollWrap);
 
             map.bind("reset", proxy(layer.reset, layer));
             if (kendo.support.mobileOS) {
@@ -60,6 +58,13 @@
             this.pool.destroy();
             this._render();
         },
+
+        _template: kendo.template(
+            "<div class='k-layer'" +
+                "style='width: #= kendo.dataviz.util.renderSize(options.width) #;" +
+                "height: #= kendo.dataviz.util.renderSize(options.height) #;'>" +
+            "</div>"
+        ),
 
         _pan: function(e) {
             var layer = this,

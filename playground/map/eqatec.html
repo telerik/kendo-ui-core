@@ -22,25 +22,8 @@
     <script src="../../src/map/layers/shape.js"></script>
     <script src="../../src/map/main.js"></script>
     <script src="chroma.min.js"></script>
+    <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.css">
     <style>
-        .k-layer {
-            position: absolute;
-        }
-
-        .k-tile {
-            position: absolute;
-            user-select: none;
-            -moz-user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-        }
-
-        #map .km-scroll-wrapper {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
         html, body, #map {
             width: 100%;
             height: 100%;
@@ -114,7 +97,9 @@
             }],
 
             // Events
-            click: $.noop,
+            click: function(e) {
+                console.log(e.location.toString());
+            },
             markerCreated: $.noop,
             markerHover: $.noop,
             shapeClick: function(e) {

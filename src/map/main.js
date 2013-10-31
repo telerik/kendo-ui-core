@@ -283,12 +283,20 @@ kendo_module({
         },
 
         _click: function(e) {
-            var cursor = new g.Point(e.offsetX, e.offsetY);
-
+            var cursor = this._mousePoint(e);
             this.trigger("click", {
                 originalEvent: e,
                 location: this.viewToLocation(cursor)
             });
+        },
+
+        _mousePoint: function(e) {
+            var offset = this.element.offset();
+            var scroller = this.scroller;
+            var x = scroller.scrollLeft + e.pageX - offset.left;
+            var y = scroller.scrollTop + e.pageY - offset.top;
+
+            return new g.Point(x, y);
         },
 
         _mousewheel: function(e) {
@@ -301,7 +309,7 @@ kendo_module({
             if (toZoom !== fromZoom) {
                 this.trigger("zoomStart", { originalEvent: e });
 
-                var cursor = new g.Point(e.offsetX, e.offsetY);
+                var cursor = this._mousePoint(e);
                 var location = this.viewToLocation(cursor);
                 var preZoom = this.locationToLayer(location);
                 var postZoom = this.locationToLayer(location, toZoom);
