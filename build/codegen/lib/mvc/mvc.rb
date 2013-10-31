@@ -477,7 +477,7 @@ module CodeGen::MVC::Wrappers
             #write *Factory.cs file
             filename = "#{@path}/#{option.owner.path}/Fluent/#{option.csharp_builder_class}.cs"
             component.files.push(filename)
-            write_file(filename, ITEM_FACTORY.result(option.get_binding))
+            write_file(filename, ITEM_FACTORY.result(option.get_binding)) unless File.exists?(filename)
 
             #write *Item.cs file
             filename = "#{@path}/#{option.owner.path}/#{option.csharp_item_class}.cs"
