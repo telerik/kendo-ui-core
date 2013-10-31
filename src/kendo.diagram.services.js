@@ -957,11 +957,11 @@ kendo_module({
             var hit, d = this.diagram;
 
             // connectors
+            if (this._hoveredConnector) {
+                this._hoveredConnector._hover(false);
+                this._hoveredConnector = undefined;
+            }
             if (d._connectorsAdorner._visible) {
-                if (this._hoveredConnector) {
-                    this._hoveredConnector._hover(false);
-                    this._hoveredConnector = undefined;
-                }
                 hit = d._connectorsAdorner._hitTest(point);
                 if (hit) {
                     return hit;
