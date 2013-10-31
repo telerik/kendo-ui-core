@@ -68,12 +68,12 @@
             "click"
         ],
 
-        append: function() {
+        draw: function() {
             this._root.load(arguments);
         },
 
         clear: function() {
-            this._root.empty();
+            this._root.clear();
         },
 
         _template: renderTemplate(
@@ -148,8 +148,7 @@
                     childNode.load(children);
                 }
 
-                node.childNodes.push(childNode);
-                childNode.parent = this;
+                node.append(childNode);
             }
         },
 
@@ -323,7 +322,7 @@
     }
 
     // Exports ================================================================
-    deepExtend(dataviz, {
+    deepExtend(dataviz.drawing, {
         canvas: {
             Surface: Surface,
             Node: Node,
