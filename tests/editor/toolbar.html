@@ -480,6 +480,14 @@
 
                 ok(active().is(".k-underline"));
             });
+
+            test("right arrow focuses color picker", function() {
+                bindToMock([ "bold", "foreColor", "underline" ]);
+
+                dom.find(".k-bold").press(keys.RIGHT);
+
+                ok(active().is(".k-colorpicker"));
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

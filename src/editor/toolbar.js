@@ -9,7 +9,7 @@
     var NS = ".kendoEditor";
 
     var focusable = "a.k-tool-icon:not(.k-state-disabled)," +
-                    ".k-colorpicker,.k-selectbox,.k-dropdown,.k-combobox .k-input";
+                    ".k-widget.k-colorpicker,.k-selectbox,.k-dropdown,.k-combobox .k-input";
 
     var Toolbar = Widget.extend({
         init: function(element, options) {
