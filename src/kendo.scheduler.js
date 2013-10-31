@@ -2080,6 +2080,10 @@ kendo_module({
                     endTime = kendo.date.toUtcTime(event.end);
                 },
                 drag: function(e) {
+                    if (!slot) {
+                        return;
+                    }
+
                     var dragHandle = $(e.currentTarget);
 
                     var dir = direction(dragHandle);
