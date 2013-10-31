@@ -1,5 +1,4 @@
 require 'zip/zip'
-require 'debugger'
 
 class ZipTask < Rake::FileTask
     include Rake::DSL
