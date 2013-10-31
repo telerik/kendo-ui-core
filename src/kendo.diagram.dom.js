@@ -1257,7 +1257,6 @@ kendo_module({
 
             that.select(false);
             that.mainLayer.clear();
-            this._initialize();
         },
         connect: function (source, target, options) {
             var connection = new Connection(source, target, options);
@@ -1814,10 +1813,10 @@ kendo_module({
             }
             if (that.dataSource && that._refreshHandler) {
                 that._unbindDataSource();
-            } else {
-                that._refreshHandler = proxy(that.refreshSource, that);
-                that._errorHandler = proxy(that._error, that);
             }
+
+            that._refreshHandler = proxy(that.refreshSource, that);
+            that._errorHandler = proxy(that._error, that);
 
             that.dataSource = HierarchicalDataSource.create(dataSource)
                 .bind(CHANGE, that._refreshHandler)
