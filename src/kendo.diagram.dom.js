@@ -21,6 +21,7 @@ kendo_module({
         Circle = diagram.Circle,
         CompositeTransform = diagram.CompositeTransform,
         Rect = diagram.Rect,
+        Rect = diagram.Rect,
         Path = diagram.Path,
         DeleteShapeUnit = diagram.DeleteShapeUnit,
         DeleteConnectionUnit = diagram.DeleteConnectionUnit,
@@ -1081,6 +1082,8 @@ kendo_module({
             });
             this.canvas.append(this.adornerLayer);
 
+            this.toolService = new ToolService(this);
+            this._attachEvents();
             that._initialize();
             that._fetchFreshData();
             this.resizingAdorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable});
@@ -1778,19 +1781,15 @@ kendo_module({
             this._selectedItems = [];
             this.connections = [];
             this._adorners = [];
-
             this.dataMap = [];
-
             this.undoRedoService = new UndoRedoService();
-            this.toolService = new ToolService(this);
-            this._attachEvents();
 
             /**
              * The unique identifier of this Diagram
              * @type {string}
              */
             this.id = kendo.diagram.randomId();
-            this._accessors();
+            // this._accessors();
         },
         _attachEvents: function () {
             var diagram = this;
