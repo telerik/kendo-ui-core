@@ -1,10 +1,12 @@
 require 'zip/zip'
+require 'debugger'
 
 class ZipTask < Rake::FileTask
     include Rake::DSL
 
-    def needed?
-        true
+    def out_of_date?(stamp)
+        dir = name.pathmap('%d/%n')
+        FileList["#{dir}/**/*"].any? { |n| application[n, @scope].timestamp > stamp }
     end
 
     def execute(args=nil)
