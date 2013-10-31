@@ -461,7 +461,18 @@ textarea.k-textbox:hover,
 }
 
 /* Scheduler */
-.k-scheduler,
+
+.k-scheduler
+{
+    color: @event-text-color;
+    background-color: @scheduler-background-color;
+}
+
+.k-scheduler-layout
+{
+    color: @widget-text-color;
+}
+
 .k-scheduler-datecolumn,
 .k-scheduler-groupcolumn
 {
@@ -509,7 +520,7 @@ textarea.k-textbox:hover,
 }
 
 .k-event-inverse {
-    color: @scheduler-background-color;
+    color: @event-inverse-text-color;
 }
 
 .k-event.k-state-selected
