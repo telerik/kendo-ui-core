@@ -21,7 +21,6 @@ kendo_module({
         Circle = diagram.Circle,
         CompositeTransform = diagram.CompositeTransform,
         Rect = diagram.Rect,
-        Rect = diagram.Rect,
         Path = diagram.Path,
         DeleteShapeUnit = diagram.DeleteShapeUnit,
         DeleteConnectionUnit = diagram.DeleteConnectionUnit,

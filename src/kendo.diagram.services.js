@@ -844,7 +844,9 @@ kendo_module({
         },
         doubleClick: function (p, meta) {
             this._activateTool(deepExtend(meta, { doubleClick: true }));
-            this.activeTool.doubleClick(p, meta);
+            if (this.activeTool.doubleClick) {
+                this.activeTool.doubleClick(p, meta);
+            }
             this._updateCursor(p);
         },
         keyDown: function (key, meta) {
