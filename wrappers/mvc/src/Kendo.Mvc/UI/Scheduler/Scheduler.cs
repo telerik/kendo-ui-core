@@ -73,6 +73,18 @@
             set;
         }
 
+        public DateTime? Min
+        {
+            get;
+            set;
+        }
+
+        public DateTime? Max
+        {
+            get;
+            set;
+        }
+
         public DateTime? WorkDayStart
         {
             get;
@@ -283,6 +295,16 @@
                 options["endTime"] = EndTime;
             }
 
+            if (Min != null)
+            {
+                options["min"] = Min;
+            }
+
+            if (Max != null)
+            {
+                options["max"] = Max;
+            }
+            
             if (WorkDayStart != null)
             {
                 options["workDayStart"] = WorkDayStart;

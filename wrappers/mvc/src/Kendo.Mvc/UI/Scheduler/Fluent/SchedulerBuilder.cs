@@ -737,6 +737,28 @@
         }
 
         /// <summary>
+        /// Constraints the minimum date which can be selected via the scheduler navigation.
+        /// </summary>
+        /// <param name="date">The min date</param>
+        public SchedulerBuilder<TModel> Min(DateTime date)
+        {
+            Component.Min = date;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Constraints the maximum date which can be selected via the scheduler navigation.
+        /// </summary>
+        /// <param name="date">The max date</param>
+        public SchedulerBuilder<TModel> Max(DateTime date)
+        {
+            Component.Max = date;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the resources grouping configuration of the scheduler.
         /// </summary>
         /// <param name="configuration">The lambda which configures the scheduler grouping</param>
