@@ -729,6 +729,39 @@
                 ok(slot !== null && typeof slot == "object");
             });
 
+            test("date past max is not selected", function() {
+                var scheduler = new Scheduler(container, {
+                        date: new Date("1/1/2013"),
+                        max: new Date("1/2/2013")
+                    });
+
+                scheduler.date(new Date("1/3/2013"));
+                deepEqual(scheduler.date(), new Date("1/1/2013"));
+            });
+
+            test("date before min is not selected", function() {
+                var scheduler = new Scheduler(container, {
+                        date: new Date("2/2/2013"),
+                        min: new Date("2/1/2013")
+                    });
+
+                scheduler.date(new Date("1/3/2013"));
+                deepEqual(scheduler.date(), new Date("2/2/2013"));
+            });
+
+            test("min and max is set to calendar", function() {
+                var scheduler = new Scheduler(container, {
+                    date: new Date("2/2/2013"),
+                    min: new Date("2/1/2013"),
+                    max: new Date("2/3/2013")
+                });
+
+                scheduler.toolbar.find(".k-nav-current").click();
+
+                equal(scheduler.calendar.options.min, scheduler.options.min);
+                equal(scheduler.calendar.options.max, scheduler.options.max);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

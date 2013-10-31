@@ -1789,6 +1789,8 @@ kendo_module({
             snap: true,
             mobile: false,
             timezone: "",
+            min: new Date(1900, 0, 1),
+            max: new Date(2099, 11, 31),
             messages: {
                 today: "Today",
                 save: "Save",
@@ -2956,7 +2958,7 @@ kendo_module({
         },
 
         date: function(value) {
-            if (value != null) {
+            if (value != null && getDate(value) >= getDate(this.options.min) && getDate(value) <= getDate(this.options.max)) {
                 this._model.set("selectedDate", value);
             }
             return getDate(this._model.get("selectedDate"));
@@ -3038,7 +3040,9 @@ kendo_module({
                                         that.date(date);
                                         that.popup.close();
                                     }
-                                }
+                                },
+                                min: that.options.min,
+                                max: that.options.max
                             });
                         }
                         that.calendar.value(that.date());
