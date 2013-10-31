@@ -1255,6 +1255,7 @@ kendo_module({
                 that._unbindDataSource();
             }
 
+            that.select(false);
             that.mainLayer.clear();
             this._initialize();
         },
