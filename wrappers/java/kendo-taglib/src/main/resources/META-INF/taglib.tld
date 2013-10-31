@@ -15859,6 +15859,18 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>java.lang.String</type>
         </attribute>
         <attribute>
+            <description>Constraints the maximum date which can be selected via the scheduler navigation.</description>
+            <name>max</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+        <attribute>
+            <description>Constraints the minimum date which can be selected via the scheduler navigation.</description>
+            <name>min</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.util.Date</type>
+        </attribute>
+        <attribute>
             <description>The number of time slots to display per major tick.</description>
             <name>minorTickCount</name>
             <rtexprvalue>true</rtexprvalue>

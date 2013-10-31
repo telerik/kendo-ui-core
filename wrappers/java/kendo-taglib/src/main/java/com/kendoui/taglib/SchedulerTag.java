@@ -239,6 +239,22 @@ public class SchedulerTag extends WidgetTag /* interfaces */implements DataBound
         setProperty("majorTimeHeaderTemplate", value);
     }
 
+    public java.util.Date getMax() {
+        return (java.util.Date)getProperty("max");
+    }
+
+    public void setMax(java.util.Date value) {
+        setProperty("max", value);
+    }
+
+    public java.util.Date getMin() {
+        return (java.util.Date)getProperty("min");
+    }
+
+    public void setMin(java.util.Date value) {
+        setProperty("min", value);
+    }
+
     public float getMinorTickCount() {
         return (float)getProperty("minorTickCount");
     }
