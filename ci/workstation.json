@@ -9,5 +9,6 @@
     "recipe[java]",
     "recipe[mono]",
     "recipe[nginx::workstation]",
+    "recipe[php::workstation]",
     "recipe[mono-fcgi::workstation]"
 ]}

@@ -1,4 +1,4 @@
-user root;
+user www-data;
 worker_processes 4;
 pid /var/run/nginx.pid;
 
@@ -32,6 +32,7 @@ http {
         listen   80;
         server_name localhost;
         autoindex on;
+        index  index.html index.htm index.php;
         root  <%= @home_dir %>;
 
         location /kendo {
