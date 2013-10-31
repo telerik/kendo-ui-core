@@ -1083,7 +1083,10 @@ kendo_module({
 
             that._initialize();
             this.resizingAdorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable});
+            this._connectorsAdorner = new ConnectorsAdorner(this);
+
             this._adorn(this.resizingAdorner, true);
+            this._adorn(this._connectorsAdorner, true);
             that.element.on("mousemove" + NS, proxy(that._mouseMove, that))
                 .on("mouseup" + NS, proxy(that._mouseUp, that))
                 .on("dblclick" + NS, proxy(that._doubleClick, that))
@@ -1868,9 +1871,10 @@ kendo_module({
         },
         _showConnectors: function (shape, value) {
             if (value) {
-                this._connectorsAdorner = new ConnectorsAdorner(shape);
+                this._connectorsAdorner.show(shape);
+            } else {
+                this._connectorsAdorner.destroy();
             }
-            this._adorn(this._connectorsAdorner, value);
         },
         _autosizeCanvas: function (args) {
             var diagram = args.sender || this,

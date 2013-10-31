@@ -539,7 +539,7 @@ kendo_module({
 
             var diagram = tool.toolService.diagram,
                 canvas = diagram.canvas;
-            
+
             diagram.scroller = tool.scroller = $(diagram.scrollable).kendoMobileScroller({
                 scroll: $.proxy(tool._move, tool)
             }).data("kendoMobileScroller");
@@ -559,7 +559,8 @@ kendo_module({
             this.scroller.enable();
             this.currentCanvasSize = canvasSize;
         },
-        move: function() {},//the tool itself should not handle the scrolling. Let kendo scroller take care of this part. Check _move
+        move: function () {
+        },//the tool itself should not handle the scrolling. Let kendo scroller take care of this part. Check _move
         _move: function (args) {
             var tool = this,
                 diagram = tool.toolService.diagram,
@@ -956,7 +957,7 @@ kendo_module({
             var hit, d = this.diagram;
 
             // connectors
-            if (d._connectorsAdorner) {
+            if (d._connectorsAdorner._visible) {
                 if (this._hoveredConnector) {
                     this._hoveredConnector._hover(false);
                     this._hoveredConnector = undefined;
@@ -1313,22 +1314,37 @@ kendo_module({
     });
 
     var ConnectorsAdorner = AdornerBase.extend({
-        init: function (shape, options) {
-            var that = this, ctr, i, len;
+        init: function (diagram, options) {
+            var that = this;
+            AdornerBase.fn.init.call(that, diagram, options);
+            that._refreshHandler = function (e) {
+                if (e.item == that.shape) {
+                    that.refresh();
+                }
+            };
+        },
+        show: function (shape) {
+            var that = this, len, i, ctr;
+            that._visible = true;
             that.shape = shape;
-            AdornerBase.fn.init.call(that, that.shape.diagram, options);
+            that.diagram.bind("boundsChange", that._refreshHandler);
             len = shape.connectors.length;
             that.connectors = [];
+            that.visual.clear();
             for (i = 0; i < len; i++) {
                 ctr = new ConnectorVisual(shape.connectors[i]);
                 that.connectors.push(ctr);
                 that.visual.append(ctr.visual);
             }
-            that.shape.diagram.bind("boundsChange", function () {
-                that.refresh();
-            });
-
+            that.visual.visible(true);
             that.refresh();
+        },
+        destroy: function () {
+            var that = this;
+            that.diagram.unbind("boundsChange", that._refreshHandler);
+            that.shape = undefined;
+            that._visible = undefined;
+            that.visual.visible(false);
         },
         _hitTest: function (p) {
             var ctr, i;
@@ -1342,11 +1358,13 @@ kendo_module({
             }
         },
         refresh: function () {
-            var bounds = this.shape.visualBounds();
-            this.visual.position(bounds.topLeft());
-            $.each(this.connectors, function () {
-                this.refresh();
-            });
+            if (this.shape) {
+                var bounds = this.shape.visualBounds();
+                this.visual.position(bounds.topLeft());
+                $.each(this.connectors, function () {
+                    this.refresh();
+                });
+            }
         }
     });
 
