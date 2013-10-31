@@ -1308,7 +1308,7 @@ kendo_module({
                 options = deepExtend(options, { x: point.x, y: point.y });
                 shape = new Shape(options);
             }
-            if (options.undoable) {
+            if (options.undoable === true) {
                 var unit = new kendo.diagram.AddShapeUnit(shape, this);
                 this.undoRedoService.add(unit);
             }

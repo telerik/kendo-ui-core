@@ -2775,7 +2775,8 @@ kendo_module({
                 id: id,
                 radius: 10,
                 background: "#778899",
-                data: "circle"
+                data: "circle",
+                undoable: false
             }, shapeOptions);
 
             return kendoDiagram.addShape(p, shapeOptions);
