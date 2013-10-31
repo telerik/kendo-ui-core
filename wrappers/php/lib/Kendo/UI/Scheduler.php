@@ -188,12 +188,30 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
+    * Constraints the maximum date which can be selected via the scheduler navigation.
+    * @param date $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function max($value) {
+        return $this->setProperty('max', $value);
+    }
+
+    /**
     * The configuration of the scheduler messages. Use this option to customize or localize the scheduler messages.
     * @param \Kendo\UI\SchedulerMessages|array $value
     * @return \Kendo\UI\Scheduler
     */
     public function messages($value) {
         return $this->setProperty('messages', $value);
+    }
+
+    /**
+    * Constraints the minimum date which can be selected via the scheduler navigation.
+    * @param date $value
+    * @return \Kendo\UI\Scheduler
+    */
+    public function min($value) {
+        return $this->setProperty('min', $value);
     }
 
     /**
