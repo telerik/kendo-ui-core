@@ -291,18 +291,10 @@ kendo_module({
         },
 
         _mousePoint: function(e) {
-            var x = valueOrDefault(e.offsetX, e.originalEvent.layerX);
-            var y = valueOrDefault(e.offsetY, e.originalEvent.layerY);
-
-            var target = $(e.target);
-            while(target.closest(".k-layer").length > 0) {
-                if (target.closest("svg").length === 0) {
-                    var offset = target.position();
-                    x += offset.left;
-                    y += offset.top;
-                }
-                target = target.offsetParent();
-            }
+            var offset = this.element.offset();
+            var scroller = this.scroller;
+            var x = scroller.scrollLeft + e.pageX - offset.left;
+            var y = scroller.scrollTop + e.pageY - offset.top;
 
             return new g.Point(x, y);
         },
