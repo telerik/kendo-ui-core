@@ -1082,6 +1082,7 @@ kendo_module({
             this.canvas.append(this.adornerLayer);
 
             that._initialize();
+            that._fetchFreshData();
             this.resizingAdorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable});
             this._connectorsAdorner = new ConnectorsAdorner(this);
 
@@ -1128,6 +1129,11 @@ kendo_module({
             // TODO: Destroy all the shapes, connections and the tons of other stuff!
             that.canvas.element.removeChild(that.canvas.native);
             that.canvas = undefined;
+
+            if(that.scroller) {
+                that.scroller.destroy();
+                that.scroller.element.remove();
+            }
         },
         zoom: function (zoom, staticPoint) {
             if (zoom) {
@@ -1167,7 +1173,7 @@ kendo_module({
             var i, options, con;
             this.options = json.options;
             this.clear();
-            this._initialize();
+            this._fetchFreshData();
             for (i = 0; i < json.shapes.length; i++) {
                 options = json.shapes[i].options;
                 options.undoable = false;
@@ -1257,6 +1263,7 @@ kendo_module({
 
             that.select(false);
             that.mainLayer.clear();
+            that._initialize();
         },
         connect: function (source, target, options) {
             var connection = new Connection(source, target, options);
@@ -1784,10 +1791,6 @@ kendo_module({
              */
             this.id = kendo.diagram.randomId();
             this._accessors();
-            this._dataSource();
-            if (this.options.autoBind) {
-                this.dataSource.fetch();
-            }
         },
         _attachEvents: function () {
             var diagram = this;
@@ -1795,6 +1798,12 @@ kendo_module({
             diagram.bind(BOUNDSCHANGE, $.proxy(this._autosizeCanvas, this));
             diagram.bind(SHAPEADD, $.proxy(this._autosizeCanvas, this));
             diagram.bind(ZOOM, $.proxy(this._autosizeCanvas, this));
+        },
+        _fetchFreshData: function() {
+            this._dataSource();
+            if (this.options.autoBind) {
+                this.dataSource.fetch();
+            }
         },
         _dataSource: function () {
             var that = this,
