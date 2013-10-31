@@ -293,8 +293,8 @@ kendo_module({
         _mousePoint: function(e) {
             var offset = this.element.offset();
             var scroller = this.scroller;
-            var x = scroller.scrollLeft + e.pageX - offset.left;
-            var y = scroller.scrollTop + e.pageY - offset.top;
+            var x = scroller.scrollLeft + e.originalEvent.pageX - offset.left;
+            var y = scroller.scrollTop + e.originalEvent.pageY - offset.top;
 
             return new g.Point(x, y);
         },
