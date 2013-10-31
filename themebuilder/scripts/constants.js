@@ -194,6 +194,7 @@
             "@current-time-color":                  constant(BGCOLOR, ".k-scheduler-now-line"),
             "@event-background-color":              constant(BGCOLOR, ".k-event"),
             "@event-text-color":                    constant(COLOR, ".k-event"),
+            "@event-inverse-text-color":            constant(COLOR, ".k-event-inverse"),
             "@scheduler-nonwork-background-color":  constant(BGCOLOR, ".k-scheduler-table .k-nonwork-hour"),
             "@resize-background-color":             constant(BGCOLOR, ".k-ie7 .k-event .k-resize-handle, .k-event .k-resize-handle:after"),
 
