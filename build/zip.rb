@@ -3,6 +3,10 @@ require 'zip/zip'
 class ZipTask < Rake::FileTask
     include Rake::DSL
 
+    def needed?
+        true
+    end
+
     def execute(args=nil)
 
         dir = name.pathmap('%d/%n')
