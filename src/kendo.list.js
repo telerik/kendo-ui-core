@@ -488,11 +488,23 @@ kendo_module({
                 itemOffsetHeight = item.offsetHeight,
                 ulScrollTop = ul.scrollTop,
                 ulOffsetHeight = ul.clientHeight,
-                bottomDistance = itemOffsetTop + itemOffsetHeight;
+                bottomDistance = itemOffsetTop + itemOffsetHeight,
+                touchScroller = this._touchScroller,
+                elementHeight;
 
-            ul.scrollTop = ulScrollTop > itemOffsetTop ?
-                           itemOffsetTop : bottomDistance > (ulScrollTop + ulOffsetHeight) ?
-                           bottomDistance - ulOffsetHeight : ulScrollTop;
+            if (touchScroller) {
+                elementHeight = this.list.height();
+
+                if (itemOffsetTop > elementHeight) {
+                    itemOffsetTop = itemOffsetTop - elementHeight + itemOffsetHeight;
+                }
+
+                touchScroller.scrollTo(0, -itemOffsetTop);
+            } else {
+                ul.scrollTop = ulScrollTop > itemOffsetTop ?
+                               itemOffsetTop : bottomDistance > (ulScrollTop + ulOffsetHeight) ?
+                               bottomDistance - ulOffsetHeight : ulScrollTop;
+            }
         },
 
         _template: function() {

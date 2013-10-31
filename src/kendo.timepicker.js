@@ -244,11 +244,23 @@ kendo_module({
                 itemOffsetHeight = item.offsetHeight,
                 ulScrollTop = ul.scrollTop,
                 ulOffsetHeight = ul.clientHeight,
-                bottomDistance = itemOffsetTop + itemOffsetHeight;
+                bottomDistance = itemOffsetTop + itemOffsetHeight,
+                touchScroller = this._touchScroller,
+                elementHeight;
 
+            if (touchScroller) {
+                elementHeight = this.list.height();
+
+                if (itemOffsetTop > elementHeight) {
+                    itemOffsetTop = itemOffsetTop - elementHeight + itemOffsetHeight;
+                }
+
+                touchScroller.scrollTo(0, -itemOffsetTop);
+            } else {
                 ul.scrollTop = ulScrollTop > itemOffsetTop ?
                                itemOffsetTop : bottomDistance > (ulScrollTop + ulOffsetHeight) ?
                                bottomDistance - ulOffsetHeight : ulScrollTop;
+            }
         },
 
         select: function(li) {
@@ -383,7 +395,7 @@ kendo_module({
                 isRtl: support.isRtl(options.anchor)
             }));
 
-            kendo.touchScroller(that.popup.element);
+            that._touchScroller = kendo.touchScroller(that.popup.element);
         },
 
         move: function(e) {
