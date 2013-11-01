@@ -3,6 +3,9 @@
     <head>
         <title>kendo.ui.window Tests</title>
         <script src="test-scripts.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
     </head>
     <body>
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>
@@ -31,10 +34,12 @@
 
             var Window = kendo.ui.Window;
 
+            function cleanup() {
+                $(".k-widget, .k-animation-container").remove();
+            }
+
             module("interaction", {
-                teardown: function() {
-                    $(".k-widget").remove();
-                }
+                teardown: cleanup
             });
 
             function createWindow(options, element) {
@@ -84,13 +89,35 @@
 
                 var handle = dialog.wrapper.find(".k-resize-se");
                 var start = handle.offset();
+                var end = initialSize + resizeChange;
 
                 userEvents.press(start.left, start.top, handle[0]);
-                userEvents.move(initialSize + resizeChange, initialSize + resizeChange + parseInt(dialog.wrapper.css("padding-top"), 10), handle[0]);
+                userEvents.move(end, end + parseInt(dialog.wrapper.css("padding-top"), 10), handle[0]);
                 userEvents.end(0, 0, handle[0]);
-                
-                equal(dialog.options.width, initialSize + resizeChange + "px");
-                equal(dialog.options.height, initialSize + resizeChange + "px");
+
+                equal(dialog.options.width, end + "px");
+                equal(dialog.options.height, end + "px");
+            });
+
+            var ddl, dialog;
+
+            module("integration", {
+                setup: function() {
+                    dialog = createWindow();
+                    ddl = $("<input id='ddl' />").appendTo(dialog.element)
+                        .kendoDropDownList({
+                            dataSource: [ "foo", "bar" ],
+                            animation: false
+                        }).data("kendoDropDownList");
+                },
+                teardown: cleanup
+            });
+
+            test("popups are closed when closing window", function() {
+                ddl.open();
+                dialog.wrapper.find(".k-window-titlebar").trigger("mousedown");
+
+                ok($("#ddl-list").is(":hidden"));
             });
 
         </script>

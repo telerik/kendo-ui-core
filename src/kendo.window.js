@@ -1234,6 +1234,8 @@ kendo_module({
             dragend: proxy(that.dragend, that),
             dragcancel: proxy(that.dragcancel, that)
         });
+
+        that._draggable.userEvents.stopPropagation = false;
     }
 
     WindowDragging.prototype = {
