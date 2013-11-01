@@ -588,15 +588,17 @@ kendo_module({
                 element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
             }
 
-            chart._userEvents = new kendo.UserEvents(element, {
-                global: true,
-                filter: ":not(.k-selector)",
-                multiTouch: false,
-                tap: proxy(chart._tap, chart),
-                start: proxy(chart._start, chart),
-                move: proxy(chart._move, chart),
-                end: proxy(chart._end, chart)
-            });
+            if (kendo.UserEvents) {
+                chart._userEvents = new kendo.UserEvents(element, {
+                    global: true,
+                    filter: ":not(.k-selector)",
+                    multiTouch: false,
+                    tap: proxy(chart._tap, chart),
+                    start: proxy(chart._start, chart),
+                    move: proxy(chart._move, chart),
+                    end: proxy(chart._end, chart)
+                });
+            }
         },
 
         _mouseout: function(e) {
