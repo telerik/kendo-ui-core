@@ -10,6 +10,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
@@ -538,7 +539,8 @@
             });
 
             (function() {
-                var segment,
+                var chart,
+                    segment,
                     segmentElement,
                     plotArea;
 
@@ -564,7 +566,7 @@
                         seriesClick: callback
                     });
 
-                    segmentElement.click();
+                    clickChart(chart, 0, 0, segmentElement);
                 }
 
                 function segmentHover(callback) {
@@ -584,24 +586,12 @@
                     segmentClick(function() { ok(true); });
                 });
 
-                test("fires on touchstart", 1, function() {
-                    createFunnelChart({
-                        seriesClick: function() {
-                            ok(true);
-                        }
-                    });
-
-                    segmentElement.trigger($.Event("touchstart", {
-                        originalEvent: { }
-                    }));
-                });
-
                 test("fires when clicking segment labels", 1, function() {
                     createFunnelChart({
                         seriesClick: function() { ok(true); }
                     });
                     var label = plotArea.charts[0].labels[0];
-                    $(getElement(label.options.id)).click();
+                    clickChart(chart, 0, 0, getElement(label.options.id));
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -633,16 +623,14 @@
                     segmentHover(function() { ok(true); });
                 });
 
-                test("fires on touchstart", 1, function() {
+                test("fires on press", 1, function() {
                     createFunnelChart({
                         seriesHover: function() {
                             ok(true);
                         }
                     });
 
-                    segmentElement.trigger($.Event("touchstart", {
-                        originalEvent: { }
-                    }));
+                    chart._userEvents.press(0, 0, segmentElement);
                 });
 
                 test("fires when hovering segment labels", 1, function() {

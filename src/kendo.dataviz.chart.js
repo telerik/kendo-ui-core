@@ -98,7 +98,6 @@ kendo_module({
         CENTER = "center",
         CHANGE = "change",
         CIRCLE = "circle",
-        CLICK_NS = "click" + NS,
         CLIP = dataviz.CLIP,
         COLOR = "color",
         COLUMN = "column",
@@ -199,7 +198,6 @@ kendo_module({
         TOOLTIP_SHOW_DELAY = 100,
         TOOLTIP_HIDE_DELAY = 100,
         TOOLTIP_INVERSE = "tooltip-inverse",
-        TOUCH_START_NS = "touchstart" + NS,
         VALUE = "value",
         VERTICAL_AREA = "verticalArea",
         VERTICAL_BULLET = "verticalBullet",
@@ -593,7 +591,8 @@ kendo_module({
                     global: true,
                     filter: ":not(.k-selector)",
                     multiTouch: false,
-                    tap: proxy(chart._tap, chart),
+                    press: proxy(chart._press, chart),
+                    tap: proxy(chart._click, chart),
                     start: proxy(chart._start, chart),
                     move: proxy(chart._move, chart),
                     end: proxy(chart._end, chart)
@@ -607,6 +606,12 @@ kendo_module({
 
             if (element && element.leave) {
                 element.leave(chart, e);
+            }
+        },
+
+        _press: function(e) {
+            if (!this._startHover(e)) {
+                this._unsetActivePoint();
             }
         },
 
@@ -1163,16 +1168,6 @@ kendo_module({
             }
 
             return result;
-        },
-
-        _tap: function(e) {
-            var chart = this;
-
-            if (!chart._startHover(e)) {
-                chart._unsetActivePoint();
-            }
-
-            chart._click(e);
         },
 
         _legendItemClick: function(seriesIndex, pointIndex) {

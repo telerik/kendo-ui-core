@@ -10,6 +10,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
@@ -1516,7 +1517,7 @@
 
                     legend = chart._model.children[0];
                     label = legend.children[0];
-                    $(getElement(label.options.id)).click();
+                    $(getElement(label.options.id)).mousedown().mouseup();
                 }
 
                 // ------------------------------------------------------------

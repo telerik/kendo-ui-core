@@ -11,6 +11,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
@@ -3371,7 +3372,8 @@
                 var chart,
                     bar,
                     barElement,
-                    plotArea;
+                    plotArea,
+                    plotAreaElement;
 
                 var TOLERANCE = 5;
 
@@ -3388,7 +3390,8 @@
 
                     plotArea = chart._model.children[1];
                     bar = plotArea.charts[0].points[0];
-                    barElement = $(getElement(bar.options.id));
+                    barElement = getElement(bar.options.id);
+                    plotAreaElement = getElement(plotArea.options.id);
                 }
 
                 // ------------------------------------------------------------
@@ -3401,9 +3404,7 @@
                         plotAreaClick: function() { ok(true); }
                     });
 
-                    barElement.trigger({
-                        type: "click", clientX: 300, clientY: 300
-                    });
+                    clickChart(chart, 300, 300, barElement);
                 });
 
                 test("fires when clicking plot area directly", 1, function() {
@@ -3411,9 +3412,7 @@
                         plotAreaClick: function() { ok(true); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 300
-                    });
+                    clickChart(chart, 300, 300, plotAreaElement);
                 });
 
                 test("does not fire when clicking outside of axis range", 0, function() {
@@ -3421,9 +3420,7 @@
                         plotAreaClick: function() { ok(false); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 580
-                    });
+                    clickChart(chart, 300, 580, plotAreaElement);
                 });
 
                 test("does not fire when clicking on axes", 0, function() {
@@ -3431,9 +3428,7 @@
                         plotAreaClick: function() { ok(false); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 3000, clientY: 0
-                    });
+                    clickChart(chart, 3000, 0, plotAreaElement);
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -3441,9 +3436,7 @@
                         plotAreaClick: function(e) { close(e.value, 0.4, TOLERANCE); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 400
-                    });
+                    clickChart(chart, 300, 400, plotAreaElement);
                 });
 
                 test("event arguments contain multiple values", 2, function() {
@@ -3452,9 +3445,7 @@
                         plotAreaClick: function(e) { arrayClose(e.value, [1, 250], TOLERANCE); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 300
-                    });
+                    clickChart(chart, 300, 300, plotAreaElement);
                 });
 
                 test("event arguments contain category", 1, function() {
@@ -3462,9 +3453,7 @@
                         plotAreaClick: function(e) { equal(e.category, "A"); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 300
-                    });
+                    clickChart(chart, 300, 300, plotAreaElement);
                 });
 
                 test("event arguments contain empty category", 1, function() {
@@ -3475,9 +3464,7 @@
                         plotAreaClick: function(e) { equal(e.category, ""); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 400
-                    });
+                    clickChart(chart, 300, 400, plotAreaElement);
                 });
 
                 test("event arguments contain all categories", 1, function() {
@@ -3490,9 +3477,7 @@
                         plotAreaClick: function(e) { deepEqual(e.category, ["A", "a"]); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 300
-                    });
+                    clickChart(chart, 300, 300, plotAreaElement);
                 });
 
                 test("event arguments contain categories when second axis is moved", 1, function() {
@@ -3508,9 +3493,7 @@
                         plotAreaClick: function(e) { deepEqual(e.category, ["A", "a"]); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 300
-                    });
+                    clickChart(chart, 300, 300, plotAreaElement);
                 });
 
                 test("event arguments contain date category", 1, function() {
@@ -3522,9 +3505,7 @@
                         plotAreaClick: function(e) { equal(e.category.toString(), date.toString()); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 300
-                    });
+                    clickChart(chart, 300, 300, plotAreaElement);
                 });
 
                 // ------------------------------------------------------------
@@ -3564,6 +3545,7 @@
                     });
 
                     plotArea = chart._model.children[1];
+                    plotAreaElement = getElement(plotArea.options.id);
                 }
 
                 module("Categorical Plot Area / Events / plotAreaClick / Panes", {
@@ -3577,9 +3559,7 @@
                         }
                     );
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 450
-                    });
+                    clickChart(chart, 300, 450, plotAreaElement);
                 });
 
                 test("values are scoped to pane", 1, function() {
@@ -3589,9 +3569,7 @@
                         }
                     );
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 450
-                    });
+                    clickChart(chart, 300, 450, plotAreaElement);
                 });
 
                 test("uses primary category axis if the pane lacks one", 1, function() {
@@ -3618,9 +3596,7 @@
 
                     plotArea = chart._model.children[1];
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 300
-                    });
+                    clickChart(chart, 300, 300, plotAreaElement);
                 });
 
             })();
@@ -4509,6 +4485,7 @@
                     point,
                     pointElement,
                     plotArea,
+                    plotAreaElement,
                     TOLERANCE = 1;
 
                 function createScatterChart(options) {
@@ -4521,6 +4498,7 @@
                     }, options));
 
                     plotArea = chart._model.children[1];
+                    plotAreaElement = getElement(plotArea.options.id);
                     point = plotArea.charts[0].points[0];
                     pointElement = $(getElement(point.options.id));
                 }
@@ -4535,9 +4513,7 @@
                         plotAreaClick: function() { ok(true); }
                     });
 
-                    pointElement.trigger({
-                        type: "click", clientX: 300, clientY: 300
-                    });
+                    clickChart(chart, 300, 300, plotAreaElement);
                 });
 
                 test("fires when clicking plot area directly", 1, function() {
@@ -4545,9 +4521,7 @@
                         plotAreaClick: function() { ok(true); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 300
-                    });
+                    clickChart(chart, 300, 300, plotAreaElement);
                 });
 
                 test("does not fire when clicking outside of axis range", 0, function() {
@@ -4555,9 +4529,7 @@
                         plotAreaClick: function() { ok(false); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 3000, clientY: 0
-                    });
+                    clickChart(chart, 3000, 0, plotAreaElement);
                 });
 
                 test("event arguments contain x axis value", 1, function() {
@@ -4565,9 +4537,7 @@
                         plotAreaClick: function(e) { close(e.x, 12, TOLERANCE); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 200, clientY: 500
-                    });
+                    clickChart(chart, 200, 500, plotAreaElement);
                 });
 
                 test("event arguments contain multiple x axis values", 2, function() {
@@ -4576,9 +4546,7 @@
                         plotAreaClick: function(e) { arrayClose(e.x, [12, 193], TOLERANCE); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 200, clientY: 500
-                    });
+                    clickChart(chart, 200, 500, plotAreaElement);
                 });
 
                 test("event arguments contain y axis value", 1, function() {
@@ -4586,9 +4554,7 @@
                         plotAreaClick: function(e) { close(e.y, 24, TOLERANCE); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 200, clientY: 500
-                    });
+                    clickChart(chart, 200, 500, plotAreaElement);
                 });
 
                 test("event arguments contain multiple y axis values", 2, function() {
@@ -4597,9 +4563,7 @@
                         plotAreaClick: function(e) { arrayClose(e.y, [24, 278], TOLERANCE); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 200, clientY: 500
-                    });
+                    clickChart(chart, 200, 500, plotAreaElement);
                 });
 
             })();

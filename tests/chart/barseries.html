@@ -10,6 +10,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
@@ -2339,7 +2340,8 @@
                         seriesClick: callback
                     });
 
-                    barElement.click();
+                    chart._userEvents.press(0, 0, barElement);
+                    chart._userEvents.end(0, 0);
                 }
 
                 function barHover(callback) {
@@ -2359,18 +2361,6 @@
                     barClick(function() { ok(true); });
                 });
 
-                test("fires on touchstart", 1, function() {
-                    createBarChart({
-                        seriesClick: function() {
-                            ok(true);
-                        }
-                    });
-
-                    barElement.trigger($.Event("touchstart", {
-                        originalEvent: { }
-                    }));
-                });
-
                 test("fires when clicking bar labels", 1, function() {
                     createBarChart({
                         seriesDefaults: {
@@ -2383,7 +2373,9 @@
                         seriesClick: function() { ok(true); }
                     });
                     var label = plotArea.charts[0].points[0].children[0];
-                    $(getElement(label.options.id)).click();
+
+                    chart._userEvents.press(0, 0, getElement(label.options.id));
+                    chart._userEvents.end(0, 0);
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -2415,16 +2407,14 @@
                     barHover(function() { ok(true); });
                 });
 
-                test("fires on touchstart", 1, function() {
+                test("fires on press", 1, function() {
                     createBarChart({
                         seriesHover: function() {
                             ok(true);
                         }
                     });
 
-                    barElement.trigger($.Event("touchstart", {
-                        originalEvent: { }
-                    }));
+                    chart._userEvents.press(0, 0, barElement);
                 });
 
                 test("fires when hovering bar labels", 1, function() {

@@ -10,6 +10,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
@@ -1257,7 +1258,8 @@
                         seriesClick: callback
                     });
 
-                    getElementFromModel(marker).click();
+                    chart._userEvents.press(0, 0, getElementFromModel(marker));
+                    chart._userEvents.end(0, 0);
                 }
 
                 function linePointHover(callback) {
@@ -1273,7 +1275,8 @@
                         seriesClick: callback
                     });
 
-                    triggerEvent("click", getElementFromModel(segment), x, y);
+                    chart._userEvents.press(x, y, getElementFromModel(segment));
+                    chart._userEvents.end(x, y);
                 }
 
                 function lineHover(callback, x, y) {
@@ -1304,7 +1307,8 @@
                         },
                         seriesClick: function(e) { ok(true); }
                     });
-                    getElementFromModel(label).click();
+                    chart._userEvents.press(0, 0, getElementFromModel(label));
+                    chart._userEvents.end(0, 0);
                 });
 
                 test("event arguments contain value", 1, function() {
