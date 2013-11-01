@@ -39,6 +39,21 @@
                 }
             });
 
+        })();
+
+
+        (function() {
+
+            var tile,
+                pool;
+
+            // ------------------------------------------------------------
+            module("Tile layer / Pool", {
+                setup: function() {
+                    pool = new TilePool();
+                }
+            });
+
             test("should not have more then 10 items", function() {
                 pool.options.maxSize = 10;
                 for (var i = 0; i < 15; i++) {

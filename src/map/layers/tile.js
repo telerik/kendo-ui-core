@@ -15,7 +15,9 @@
         Point = g.Point,
 
         map = dataviz.map,
-        EPSG3857 = map.crs.EPSG3857;
+
+        util = dataviz.util,
+        renderSize = util.renderSize;
 
     // Constants ==============================================================
     var DEFAULT_WIDTH = 600,
@@ -41,12 +43,12 @@
             } else {
                 map.bind("pan", proxy(layer._pan, this));
             }
-            layer.crs = new EPSG3857();
             layer.pool = new TilePool();
         },
 
         options: {
-            tileSize: 256
+            tileSize: 256,
+            subdomains: ["a", "b", "c"]
         },
 
         destroy: function() {
@@ -54,6 +56,7 @@
         },
 
         reset: function(e) {
+            this._subdomainIndex = 0;
             this._basePoint = this.map.locationToLayer(this.map.origin());
             this.pool.destroy();
             this._render();
@@ -123,10 +126,13 @@
                         screenPoint: screenPoint,
                         point: point,
                         index: index,
+                        zoom: zoom,
                         url: urlTemplate({
-                            zoom: zoom, x: index.x, y: index.y
-                        }),
-                        zoom: zoom
+                            zoom: zoom,
+                            x: index.x,
+                            y: index.y,
+                            subdomain: this._getSubdomain()
+                        })
                     });
 
                     if (!tile.visible) {
@@ -135,6 +141,12 @@
                     }
                 }
             }
+        },
+
+        _getSubdomain: function() {
+            var subdomains = this.options.subdomains;
+
+            return subdomains[this._subdomainIndex++ % subdomains.length];
         },
 
         _getSize: function(screenPoint) {
@@ -146,12 +158,7 @@
         },
 
         _indexToScreenPoint: function(index, offset) {
-            if (!offset) {
-                offset = {
-                    x: 0,
-                    y: 0
-                };
-            }
+            offset = offset || { x: 0, y: 0 };
 
             return new Point(
                 index.x * this.options.tileSize + offset.x,
@@ -193,8 +200,8 @@
             htmlElement.setAttribute("src", options.url);
             this.url = options.url;
 
-            htmlElement.style.top = options.point.y + "px";
-            htmlElement.style.left = options.point.x + "px";
+            htmlElement.style.top = renderSize(options.point.y);
+            htmlElement.style.left = renderSize(options.point.x);
             this.point = options.point;
 
             this.screenPoint = options.screenPoint;
