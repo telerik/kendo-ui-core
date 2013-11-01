@@ -58,7 +58,7 @@
     test("Resizing/Selection adorner", function () {
         var i = d.shapes[0];
         i.select(true);
-        var adorner = d.resizingAdorner;
+        var adorner = d._resizingAdorner;
         ok(adorner, "Adorner is present.");
         deepEqual(i.visualBounds().inflate(adorner.options.offset, adorner.options.offset), adorner.bounds(), "Adoner has correct bounds");
     });
@@ -67,7 +67,7 @@
         var last = d.shapes[d.shapes.length - 1];
 
         last.select(true);
-        var adorner = d.resizingAdorner;
+        var adorner = d._resizingAdorner;
         var delta = new Point(adorner.options.offset + 4, adorner.options.offset + 4);
         var testP = last.bounds().bottomRight().plus(delta);
 
@@ -76,7 +76,7 @@
 
     test("Resizing adorner - correct cursor after rotation - 50", function () {
         var last = d.shapes[d.shapes.length - 1];
-        var adorner = d.resizingAdorner;
+        var adorner = d._resizingAdorner;
 
         last.select(true);
         last.rotate(50);

@@ -602,9 +602,9 @@ kendo_module({
                 }
             }
             if (!this.handle) {
-                this.handle = diagram.resizingAdorner._hitTest(p);
+                this.handle = diagram._resizingAdorner._hitTest(p);
                 if (this.handle) {
-                    this.adorner = diagram.resizingAdorner;
+                    this.adorner = diagram._resizingAdorner;
                 }
             }
             if (this.adorner) {
@@ -970,9 +970,9 @@ kendo_module({
                 }
             }
 
-            hit = this.diagram.resizingAdorner._hitTest(point);
+            hit = this.diagram._resizingAdorner._hitTest(point);
             if (hit) {
-                this.hoveredAdorner = d.resizingAdorner;
+                this.hoveredAdorner = d._resizingAdorner;
                 if (hit.x !== 0 && hit.y !== 0) { // hit testing for resizers or rotator, otherwise if (0,0) than pass through.
                     return;
                 }

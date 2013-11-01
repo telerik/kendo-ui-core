@@ -1085,10 +1085,10 @@ kendo_module({
             this._attachEvents();
             that._initialize();
             that._fetchFreshData();
-            this.resizingAdorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable});
+            this._resizingAdorner = new ResizingAdorner(this, { resizable: this.options.resizable, rotatable: this.options.rotatable});
             this._connectorsAdorner = new ConnectorsAdorner(this);
 
-            this._adorn(this.resizingAdorner, true);
+            this._adorn(this._resizingAdorner, true);
             this._adorn(this._connectorsAdorner, true);
             that.element.on("mousemove" + NS, proxy(that._mouseMove, that))
                 .on("mouseup" + NS, proxy(that._mouseUp, that))
