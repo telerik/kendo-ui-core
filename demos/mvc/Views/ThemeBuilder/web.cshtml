@@ -162,7 +162,12 @@
         <div>Left pane</div>
         <div>Right pane</div>
     </div>
+
+    <h3>Progress bar</h3>
+    <div id="progress"></div>
 </div>
+
+<div id="scheduler"></div>
 
 </div>
 
@@ -185,7 +190,7 @@
     .column {
         width: 29%;
         padding: 0 2%;
-        margin: 0;
+        margin: 0 0 2em;
         float: left;
     }
 
@@ -195,6 +200,10 @@
 
     .column .k-widget {
         margin-bottom: 14px;
+    }
+
+    #scheduler {
+        clear: both;
     }
 
     #middle-column {
@@ -387,5 +396,67 @@
             operator: "greaterThanEqual",
             value: 2000
         }]);
+
+        var serviceBaseUrl = "http://demos.kendoui.com/service";
+        $("#scheduler").kendoScheduler({
+            date: new Date("2013/6/13"),
+            startTime: new Date("2013/6/13 07:00 AM"),
+            endTime: new Date("2013/6/13 08:00 PM"),
+            views: [
+                { type: "day", selected: true },
+                "week",
+                "month"
+            ],
+            editable: false,
+            timezone: "Etc/UTC",
+            dataSource: {
+                batch: true,
+                transport: {
+                    read: {
+                        url: serviceBaseUrl + "/meetings",
+                        dataType: "jsonp"
+                    },
+                    update: {
+                        url: serviceBaseUrl + "/meetings/update",
+                        dataType: "jsonp"
+                    },
+                    create: {
+                        url: serviceBaseUrl + "/meetings/create",
+                        dataType: "jsonp"
+                    },
+                    destroy: {
+                        url: serviceBaseUrl + "/meetings/destroy",
+                        dataType: "jsonp"
+                    },
+                    parameterMap: function(options, operation) {
+                        if (operation !== "read" && options.models) {
+                            return {models: kendo.stringify(options.models)};
+                        }
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "meetingID",
+                        fields: {
+                            meetingID: { from: "MeetingID", type: "number" },
+                            title: { from: "Title", defaultValue: "No title", validation: { required: true } },
+                            start: { type: "date", from: "Start" },
+                            end: { type: "date", from: "End" },
+                            startTimezone: { from: "StartTimezone" },
+                            endTimezone: { from: "EndTimezone" },
+                            description: { from: "Description" },
+                            recurrenceId: { from: "RecurrenceID" },
+                            recurrenceRule: { from: "RecurrenceRule" },
+                            recurrenceException: { from: "RecurrenceException" },
+                            roomId: { from: "RoomID", nullable: true },
+                            atendees: { from: "Atendees", nullable: true },
+                            isAllDay: { type: "boolean", from: "IsAllDay" }
+                        }
+                    }
+                }
+            }
+        });
+
+        $("#progress").kendoProgressBar({ value: 40 });
     });
 </script>
