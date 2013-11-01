@@ -165,7 +165,8 @@ namespace Kendo.Models
             "kendo.mobile.modalview.js"
 #else
             jQueryPath,
-            "kendo.all.min.js"
+            "kendo.all.min.js",
+            "kendo.timezones.min.js"
 #endif
             };
     }
