@@ -243,6 +243,24 @@ kendo_module({
             .replace(splatParam, '(.*?)') + '$');
     }
 
+    function urlParams(url) {
+        var queryString = url.split('?')[1] || "",
+            params = {},
+            paramParts = queryString.split(/&|=/),
+            length = paramParts.length,
+            idx = 0;
+
+        for (; idx < length; idx += 2) {
+            params[paramParts[idx]] = paramParts[idx + 1];
+        }
+
+        return params;
+    }
+
+    function stripUrl(url) {
+        return url.replace(/(\?.*)|(#.*)/g, "");
+    }
+
     var Route = kendo.Class.extend({
         init: function(route, callback) {
             if (!(route instanceof RegExp)) {
@@ -254,15 +272,22 @@ kendo_module({
         },
 
         callback: function(url) {
-            var params = this.route.exec(url).slice(1),
+            var params,
                 idx = 0,
-                length = params.length;
+                length,
+                queryStringParams = urlParams(url);
+
+            url = stripUrl(url);
+            params = this.route.exec(url).slice(1);
+            length = params.length;
 
             for (; idx < length; idx ++) {
                 if (typeof params[idx] !== 'undefined') {
                     params[idx] = decodeURIComponent(params[idx]);
                 }
             }
+
+            params.push(queryStringParams);
 
             this._callback.apply(null, params);
         },

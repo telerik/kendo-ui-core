@@ -82,6 +82,18 @@ test("parses params", 1, function(){
     navigate("/foo");
 });
 
+test("parses query string params", 2, function(){
+    var router = new kendo.Router();
+
+    router.route("/:foo", function(foo, params) {
+        equal(foo, "foo");
+        equal(params.baz, "Q");
+    });
+
+    router.start();
+    navigate("/foo?baz=Q");
+});
+
 test("parses optional params", 4, function() {
     var router = new kendo.Router();
 
@@ -98,6 +110,27 @@ test("parses optional params", 4, function() {
     router.start();
     navigate("/foo/bar");
     navigate("/foo");
+});
+
+test("parses optional params and query string params", 7, function() {
+    var router = new kendo.Router();
+
+    router.route("/:foo(/:bar)", function(foo, bar, params) {
+        equal(foo, "foo");
+
+        if (bar) {
+            equal(bar, "bar");
+            equal(params.baz, "Q");
+        } else {
+            equal(params.baz, "Q");
+            equal(params.qux, "qux");
+            ok(true);
+        }
+    });
+
+    router.start();
+    navigate("/foo/bar?baz=Q");
+    navigate("/foo?baz=Q&qux=qux");
 });
 
 test("parses splat params", 2, function() {
@@ -121,6 +154,16 @@ test("triggers change on url change", 2, function(){
     router.start();
     router.one("change", function(e) { equal(e.url, "/foo") });
     navigate("/foo");
+});
+
+test("triggers change on query string params change", 2, function(){
+    var router = new kendo.Router();
+
+    router.start();
+    router.one("change", function(e) { equal(e.url, "/foo?bar=A") });
+    navigate("/foo?bar=A");
+    router.one("change", function(e) { equal(e.url, "/foo?bar=B") });
+    navigate("/foo?bar=B");
 });
 
 test("preventing default does not hit the route", 0, function(){
