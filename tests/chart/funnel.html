@@ -586,6 +586,11 @@
                     segmentClick(function() { ok(true); });
                 });
 
+                test("fires on subsequent click", 2, function() {
+                    segmentClick(function() { ok(true); });
+                    clickChart(chart, 0, 0, segmentElement);
+                });
+
                 test("fires when clicking segment labels", 1, function() {
                     createFunnelChart({
                         seriesClick: function() { ok(true); }
@@ -623,14 +628,24 @@
                     segmentHover(function() { ok(true); });
                 });
 
-                test("fires on press", 1, function() {
+                test("fires on tap", 1, function() {
                     createFunnelChart({
                         seriesHover: function() {
                             ok(true);
                         }
                     });
 
-                    chart._userEvents.press(0, 0, segmentElement);
+                    clickChart(chart, 0, 0, segmentElement);
+                });
+
+                test("does not fire on subsequent tap", 1, function() {
+                    createFunnelChart({
+                        seriesHover: function() {
+                            ok(true);
+                        }
+                    });
+
+                    clickChart(chart, 0, 0, segmentElement);
                 });
 
                 test("fires when hovering segment labels", 1, function() {

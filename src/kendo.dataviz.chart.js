@@ -591,8 +591,7 @@ kendo_module({
                     global: true,
                     filter: ":not(.k-selector)",
                     multiTouch: false,
-                    press: proxy(chart._press, chart),
-                    tap: proxy(chart._click, chart),
+                    tap: proxy(chart._tap, chart),
                     start: proxy(chart._start, chart),
                     move: proxy(chart._move, chart),
                     end: proxy(chart._end, chart)
@@ -606,12 +605,6 @@ kendo_module({
 
             if (element && element.leave) {
                 element.leave(chart, e);
-            }
-        },
-
-        _press: function(e) {
-            if (!this._startHover(e)) {
-                this._unsetActivePoint();
             }
         },
 
@@ -804,6 +797,21 @@ kendo_module({
                 clientX - offset.left - paddingLeft + win.scrollLeft(),
                 clientY - offset.top - paddingTop + win.scrollTop()
             );
+        },
+
+        _tap: function(e) {
+            var chart = this,
+                element = chart._getChartElement(e);
+
+            if (chart._activePoint === element) {
+                chart._click(e);
+            } else {
+                if (!chart._startHover(e)) {
+                    chart._unsetActivePoint();
+                }
+
+                chart._click(e);
+            }
         },
 
         _click: function(e) {
