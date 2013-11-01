@@ -1142,11 +1142,10 @@ kendo_module({
                 var currentZoom = this._zoom;
                 zoom = this._zoom = this.getValidZoom(zoom);
 
-                if (staticPoint !== undefined) {
-                    var zoomRatio = zoom / currentZoom;
-                    var diagramStaticPoint = staticPoint.minus(this._pan);
-                    var zoomedStaticPoint = diagramStaticPoint.times(zoomRatio);
-                    this._pan = staticPoint.minus(zoomedStaticPoint);
+                if (!Utils.isUndefined(staticPoint)) {//Viewpoint vector is constant
+                    var zoomedPoint = staticPoint.times(zoom);
+                    var viewportVector = staticPoint.times(currentZoom).plus(this._pan);
+                    this._storePan(viewportVector.minus(zoomedPoint));//pan + zoomed point = viewpoint vector
                 }
 
                 this._panTransform();
@@ -1626,10 +1625,10 @@ kendo_module({
 
             return this.documentToViewportPoint(dPoint).minus(scroll);
         },
-        documentToViewportPoint: function (dPoint) {
+        documentToViewportPoint: function (point) {
             var containerOffset = this.element.offset();
 
-            return new Point(dPoint.x - containerOffset.left, dPoint.y - containerOffset.top);
+            return new Point(point.x - containerOffset.left, point.y - containerOffset.top);
         },
         setDataSource: function (dataSource) {
             this.options.dataSource = dataSource;
@@ -1765,8 +1764,8 @@ kendo_module({
         },
         _calculatePosition: function (e) {
             var pointEvent = (e.pageX === undefined ? e.originalEvent : e),
-                dPoint = new Point(pointEvent.pageX, pointEvent.pageY),
-                offset = this.documentToCanvasPoint(dPoint);
+                point = new Point(pointEvent.pageX, pointEvent.pageY),
+                offset = this.documentToCanvasPoint(point);
 
             return this._normalizePointZoom(offset);
         },

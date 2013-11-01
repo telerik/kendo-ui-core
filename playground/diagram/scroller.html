@@ -68,23 +68,6 @@
         </style>
     </head>
     <body>
-        <div id="scrollable" style="width: 200px; height: 200px;overflow:scroll;">
-            <div id="content" style="width: 400px; height: 400px; background: #ccc;"></div>
-        </div>
-        <script>
-            var wScroll;
-            $(function() {
-                var dom = $("#scrollable").kendoMobileScroller({
-                    scroll: function(e) {
-                        console.log(e);
-                    },
-                    useNative: true
-                });
-
-                wScroll = dom.data("kendoMobileScroller");
-            });
-        </script>
-
         <div id="canvas"></div>
         <script>
             var Shapes = {},
@@ -100,30 +83,13 @@
                 $("#canvas").kendoDiagram();
                 diagram = $("#canvas").data("kendoDiagram");
 
-                var canvasResizer = function(args) {
-                    var diagram = args.sender,
-                        viewport = diagram.element,
-                        viewportSize = new kendo.diagram.Rect(0, 0, viewport.width(), viewport.height()),
-                        cumulativeSize = diagram.getBoundingBox(diagram.shapes);
-
-                    cumulativeSize = cumulativeSize.union(viewportSize);
-
-                    diagram.canvas.size(cumulativeSize);
-                }
-
-                //diagram.bind("boundsChange", canvasResizer);
-                //diagram.bind("shapeAdd", canvasResizer);
-
                 var seq = Shapes["Sequential Data"];
                 seq.text = "Sequential Data.";
                 var shape1 = diagram.addShape(new Point(100, 100), seq);
 
-                //prepareDiagramScroller(diagram);
-                
                 shape2 = diagram.addShape(new Point(300, 300), Shapes.Wave);
                 shape2.content("content");
-                return;
-                
+
                 var shape3 = diagram.addShape(new Point(370, 400), Shapes.Rectangle);
                 var shape4 = diagram.addShape(new Point(400, 200), kendo.deepExtend({content: "Custom connectors"}, Shapes.Triangle));
                 var topCor = shape2.getConnector("Auto");
