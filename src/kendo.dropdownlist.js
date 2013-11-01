@@ -49,6 +49,8 @@ kendo_module({
             options = that.options;
             element = that.element.on("focus" + ns, that._focusHandler);
 
+            this._inputTemplate();
+
             that._reset();
 
             that._word = "";
@@ -112,6 +114,7 @@ kendo_module({
             text: null,
             value: null,
             template: "",
+            inputTemplate: "",
             delay: 500,
             height: 200,
             dataTextField: "",
@@ -136,6 +139,7 @@ kendo_module({
             Select.fn.setOptions.call(this, options);
 
             this._template();
+            this._inputTemplate();
             this._accessors();
             this._aria();
         },
@@ -241,13 +245,56 @@ kendo_module({
             }
         },
 
-        text: function (text) {
+        /*text: function (text) {
             var span = this.span;
 
             if (text !== undefined) {
                 span.text(text);
             } else {
                 return span.text();
+            }
+        },*/
+
+        text: function (text) {
+            text = text === null ? "" : text;
+
+            var that = this,
+                span = that.span,
+                ignoreCase = that.options.ignoreCase,
+                dataItem = that.dataItem(),
+                loweredText = text;
+
+            if (text !== undefined) {
+                if (typeof text === "string") {
+                    if (that.options.dataTextField) {
+                        text = {};
+                        text[that.options.dataTextField] = loweredText;
+                    }
+
+                    if (ignoreCase) {
+                        loweredText = loweredText.toLowerCase();
+                    }
+
+                    that._select(function(data) {
+                        data = that._text(data);
+
+                        if (ignoreCase) {
+                            data = (data + "").toLowerCase();
+                        }
+
+                        return data === loweredText;
+                    });
+
+                    dataItem = that.dataItem() || text;
+                } else {
+                    dataItem = text;
+                }
+
+                if (dataItem) {
+                    span.html(that.inputTemplate(dataItem));
+                }
+            } else {
+                return dataItem ? that._text(dataItem) : "";
             }
         },
 
@@ -533,7 +580,6 @@ kendo_module({
                 current = that._current,
                 data = that._data(),
                 value,
-                text,
                 idx;
 
             li = that._get(li);
@@ -546,11 +592,10 @@ kendo_module({
                 idx = ui.List.inArray(li[0], that.ul[0]);
                 if (idx > -1) {
                     data = data[idx];
-                    text = that._text(data);
                     value = that._value(data);
                     that.selectedIndex = idx;
 
-                    that.text(text);
+                    that.text(data);
                     that._accessor(value !== undefined ? value : text, idx);
                     that._selectedValue = that._accessor();
 
@@ -639,6 +684,20 @@ kendo_module({
             that.text(optionLabel);
             that.element.val("");
             that.selectedIndex = -1;
+        },
+
+        _inputTemplate: function() {
+            var that = this,
+                template = that.options.inputTemplate;
+
+
+            if (!template) {
+                template = $.proxy(kendo.template('#:this._text(data)#'), that);
+            } else {
+                template = kendo.template(template);
+            }
+
+            that.inputTemplate = template;
         }
     });
 

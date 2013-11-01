@@ -22,6 +22,8 @@
                             '<span class="first">Photo</span>' +
                             '<span class="last">Contact info</span>' +
                             '</div>',
+
+                        inputTemplate: '<img class="selected-item" src=\"../../content/web/Customers/${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" /><span>#:data.ContactName#</span>',
                         template: '<img src=\"../../content/web/Customers/${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />' +
                                       '<h3>${ data.ContactName }</h3>' +
                                       '<p>${ data.CompanyName }</p>',
@@ -39,7 +41,12 @@
                 });
             </script>
 
-            <style scoped>
+            <style>
+                .selected-item {
+                    float: left;
+                    width: 16px;
+                    margin: 0 4px;
+                }
 
                 .dropdown-header {
                     overflow:hidden;
