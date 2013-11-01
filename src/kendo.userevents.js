@@ -549,6 +549,8 @@ kendo_module({
                 api: true,
                 pageX: x,
                 pageY: y,
+                clientX: x,
+                clientY: y,
                 target: target || this.element,
                 stopPropagation: $.noop,
                 preventDefault: $.noop

@@ -11,6 +11,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
@@ -63,7 +64,8 @@
                 var chart,
                     point,
                     pointElement,
-                    plotArea;
+                    plotArea,
+                    plotAreaElement;
 
                 var TOLERANCE = 5;
 
@@ -77,6 +79,7 @@
                     }, options));
 
                     plotArea = chart._model.children[1];
+                    plotAreaElement = getElement(plotArea.options.id);
                     point = plotArea.charts[0].points[0];
                     pointElement = $(getElement(point.options.id));
                 }
@@ -91,9 +94,7 @@
                         plotAreaClick: function() { ok(true); }
                     });
 
-                    pointElement.trigger({
-                        type: "click", clientX: 300, clientY: 300
-                    });
+                    clickChart(chart, pointElement, 300, 300);
                 });
 
                 test("fires when clicking plot area directly", function() {
@@ -101,9 +102,7 @@
                         plotAreaClick: function() { ok(true); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 300
-                    });
+                    clickChart(chart, plotAreaElement, 300, 300);
                 });
 
                 test("does not fire when clicking outside of axis range", 0, function() {
@@ -111,9 +110,7 @@
                         plotAreaClick: function() { ok(false); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 580
-                    });
+                    clickChart(chart, plotAreaElement, 300, 580);
                 });
 
                 test("does not fire when clicking on axes", 0, function() {
@@ -121,9 +118,7 @@
                         plotAreaClick: function() { ok(false); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 3000, clientY: 0
-                    });
+                    clickChart(chart, plotAreaElement, 3000, 0);
                 });
 
                 test("event arguments contain x value", 1, function() {
@@ -131,9 +126,7 @@
                         plotAreaClick: function(e) { close(e.x, 180, TOLERANCE); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 400
-                    });
+                    clickChart(chart, plotAreaElement, 300, 400);
                 });
 
                 test("event arguments contain y value", 1, function() {
@@ -141,9 +134,7 @@
                         plotAreaClick: function(e) { close(e.y, 6, TOLERANCE); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 300, clientY: 300
-                    });
+                    clickChart(chart, plotAreaElement, 300, 300);
                 });
 
             })();

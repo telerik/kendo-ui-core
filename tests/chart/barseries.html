@@ -10,6 +10,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
@@ -2339,7 +2340,7 @@
                         seriesClick: callback
                     });
 
-                    barElement.click();
+                    clickChart(chart, barElement);
                 }
 
                 function barHover(callback) {
@@ -2359,16 +2360,9 @@
                     barClick(function() { ok(true); });
                 });
 
-                test("fires on touchstart", 1, function() {
-                    createBarChart({
-                        seriesClick: function() {
-                            ok(true);
-                        }
-                    });
-
-                    barElement.trigger($.Event("touchstart", {
-                        originalEvent: { }
-                    }));
+                test("fires on subsequent click", 2, function() {
+                    barClick(function() { ok(true); });
+                    clickChart(chart, barElement);
                 });
 
                 test("fires when clicking bar labels", 1, function() {
@@ -2383,7 +2377,8 @@
                         seriesClick: function() { ok(true); }
                     });
                     var label = plotArea.charts[0].points[0].children[0];
-                    $(getElement(label.options.id)).click();
+
+                    clickChart(chart, getElement(label.options.id));
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -2415,16 +2410,25 @@
                     barHover(function() { ok(true); });
                 });
 
-                test("fires on touchstart", 1, function() {
+                test("fires on tap", 1, function() {
                     createBarChart({
                         seriesHover: function() {
                             ok(true);
                         }
                     });
 
-                    barElement.trigger($.Event("touchstart", {
-                        originalEvent: { }
-                    }));
+                    clickChart(chart, barElement);
+                });
+
+                test("does not fire on subsequent tap", 1, function() {
+                    createBarChart({
+                        seriesHover: function() {
+                            ok(true);
+                        }
+                    });
+
+                    clickChart(chart, barElement);
+                    clickChart(chart, barElement);
                 });
 
                 test("fires when hovering bar labels", 1, function() {

@@ -10,6 +10,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
@@ -1455,7 +1456,9 @@
 
                     plotArea = chart._model.children[1];
                     label = plotArea.categoryAxis.labels[1];
-                    $(getElement(label.options.id)).click();
+
+                    chart._userEvents.press(0, 0, getElement(label.options.id));
+                    chart._userEvents.end(0, 0);
                 }
 
                 // ------------------------------------------------------------

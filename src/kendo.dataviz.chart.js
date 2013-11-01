@@ -98,7 +98,6 @@ kendo_module({
         CENTER = "center",
         CHANGE = "change",
         CIRCLE = "circle",
-        CLICK_NS = "click" + NS,
         CLIP = dataviz.CLIP,
         COLOR = "color",
         COLUMN = "column",
@@ -199,7 +198,6 @@ kendo_module({
         TOOLTIP_SHOW_DELAY = 100,
         TOOLTIP_HIDE_DELAY = 100,
         TOOLTIP_INVERSE = "tooltip-inverse",
-        TOUCH_START_NS = "touchstart" + NS,
         VALUE = "value",
         VERTICAL_AREA = "verticalArea",
         VERTICAL_BULLET = "verticalBullet",
@@ -580,11 +578,9 @@ kendo_module({
             var chart = this,
                 element = chart.element;
 
-            element.on(CLICK_NS, proxy(chart._click, chart));
             element.on(MOUSEOVER_NS, proxy(chart._mouseover, chart));
             element.on(MOUSEOUT_NS, proxy(chart._mouseout, chart));
             element.on(MOUSEWHEEL_NS, proxy(chart._mousewheel, chart));
-            element.on(TOUCH_START_NS, proxy(chart._tap, chart));
             element.on(MOUSELEAVE_NS, proxy(chart._mouseleave, chart));
             if (chart._shouldAttachMouseMove()) {
                 element.on(MOUSEMOVE_NS, proxy(chart._mousemove, chart));
@@ -595,6 +591,7 @@ kendo_module({
                     global: true,
                     filter: ":not(.k-selector)",
                     multiTouch: false,
+                    tap: proxy(chart._tap, chart),
                     start: proxy(chart._start, chart),
                     move: proxy(chart._move, chart),
                     end: proxy(chart._end, chart)
@@ -800,6 +797,21 @@ kendo_module({
                 clientX - offset.left - paddingLeft + win.scrollLeft(),
                 clientY - offset.top - paddingTop + win.scrollTop()
             );
+        },
+
+        _tap: function(e) {
+            var chart = this,
+                element = chart._getChartElement(e);
+
+            if (chart._activePoint === element) {
+                chart._click(e);
+            } else {
+                if (!chart._startHover(e)) {
+                    chart._unsetActivePoint();
+                }
+
+                chart._click(e);
+            }
         },
 
         _click: function(e) {
@@ -1164,16 +1176,6 @@ kendo_module({
             }
 
             return result;
-        },
-
-        _tap: function(e) {
-            var chart = this;
-
-            if (!chart._startHover(e)) {
-                chart._unsetActivePoint();
-            }
-
-            chart._click(e);
         },
 
         _legendItemClick: function(seriesIndex, pointIndex) {

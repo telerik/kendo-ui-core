@@ -205,6 +205,11 @@ function serializeFontCache() {
         .append($("<textarea id='cache' rows='25' cols='160' />").text(result));
 }
 
+function clickChart(chart, element, x, y) {
+    chart._userEvents.press(x || 0, y || 0, element);
+    chart._userEvents.end(x || 0, y || 0);
+}
+
 // Primed cache for measureText - used to avoid browser rendering differences
 // Replace with the result from serializeFontCache();
 (function() {

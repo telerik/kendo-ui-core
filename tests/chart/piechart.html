@@ -10,6 +10,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
@@ -1163,11 +1164,12 @@
 
             (function() {
                 // ------------------------------------------------------------
-                var labelElement,
+                var chart,
+                    labelElement,
                     segmentElement;
 
                 function createPieChart(options) {
-                    var chart = createChart($.extend({
+                    chart = createChart($.extend({
                         series: [{
                             type: "pie",
                             data: [1],
@@ -1196,11 +1198,13 @@
                 });
 
                 test("fires when clicking points", 1, function() {
-                    segmentElement.click();
+                    chart._userEvents.press(0, 0, segmentElement);
+                    chart._userEvents.end(0, 0);
                 });
 
                 test("fires when clicking labels", 1, function() {
-                    labelElement.click();
+                    chart._userEvents.press(0, 0, labelElement);
+                    chart._userEvents.end(0, 0);
                 });
 
                 // ------------------------------------------------------------

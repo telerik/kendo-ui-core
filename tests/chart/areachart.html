@@ -10,6 +10,7 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
@@ -1280,7 +1281,8 @@
                         seriesClick: callback
                     });
 
-                    triggerEvent("click", getElement(segment), x, y);
+                    chart._userEvents.press(x, y, getElement(segment));
+                    chart._userEvents.end(x, y);
                 }
 
                 function areaHover(callback, x, y) {
