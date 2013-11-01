@@ -152,24 +152,35 @@ var BlockFormatter = Class.extend({
     },
 
     apply: function (nodes) {
-        var that = this,
-            formatNodes = dom.is(nodes[0], "img") ? [nodes[0]] : that.finder.findSuitable(nodes),
-            formatToApply = formatNodes.length ? EditorUtils.formatByName(dom.name(formatNodes[0]), that.format) : that.format[0],
-            tag, attributes, i, len;
+        var format, values = this.values;
 
-        if (!formatToApply) { // if focus is next to standalone image
+        function attributes(format) {
+            return extend({}, format && format.attr, values);
+        }
+
+        var images = $.filter("img", nodes);
+        var imageFormat = EditorUtils.formatByName("img", this.format);
+        var imageAttributes = attributes(imageFormat);
+        $.each(images, function() {
+            dom.attr(this, imageAttributes);
+        });
+
+        // only images were selected, no need to wrap
+        if (images.length == nodes.length) {
             return;
         }
 
-        tag = formatToApply.tags[0];
-        attributes = extend({}, formatToApply.attr, that.values);
+        var nonImages = $.filter("img", nodes, true);
+        var formatNodes = this.finder.findSuitable(nonImages);
 
         if (formatNodes.length) {
-            for (i = 0, len = formatNodes.length; i < len; i++) {
-                dom.attr(formatNodes[i], attributes);
+            for (var i = 0, len = formatNodes.length; i < len; i++) {
+                format = EditorUtils.formatByName(dom.name(formatNodes[i]), this.format);
+                dom.attr(formatNodes[i], attributes(format));
             }
         } else {
-            that.wrap(tag, attributes, nodes);
+            format = this.format[0];
+            this.wrap(format.tags[0], attributes(format), nonImages);
         }
     },
 

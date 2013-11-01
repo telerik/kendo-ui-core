@@ -173,6 +173,22 @@
                 equal(editor.value(), '<p><img src="foo" style="float:right;" /></p>');
             });
 
+            test("apply on image and sibling element", function() {
+                editor.value('<img src="foo" /><p>foo</p>');
+
+                justifyRight.apply([ editor.body.firstChild, editor.body.lastChild ]);
+
+                equal(editor.value(), '<img src="foo" style="float:right;" /><p style="text-align:right;">foo</p>');
+            });
+
+            test("apply on image and sibling text", function() {
+                editor.value('<img src="foo" />foo');
+
+                justifyRight.apply([ editor.body.firstChild, editor.body.lastChild ]);
+
+                equal(editor.value(), '<div style="text-align:right;"><img src="foo" style="float:right;" />foo</div>');
+            });
+
             test("remove on image", function() {
                 editor.value('<img style="float:right" src="foo" />');
 
