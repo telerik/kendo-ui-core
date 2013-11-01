@@ -86,7 +86,7 @@ kendo_module({
             } else if (that.selectedIndex === -1) {
                 text = options.text || "";
                 if (!text) {
-                    optionLabel = that._optionLabelText(options.optionLabel),
+                    optionLabel = options.optionLabel,
                     useOptionLabel = optionLabel && options.index === 0;
 
                     if (that._isSelect) {
@@ -100,7 +100,7 @@ kendo_module({
                     }
                 }
 
-                that.text(text);
+                that._textAccessor(text);
             }
 
             kendo.notify(that);
@@ -211,9 +211,9 @@ kendo_module({
             if (!that._fetch) {
                 if (length) {
                     that._selectItem();
-                } else if (that.text() !== optionLabel) {
+                } else if (that._textAccessor() !== optionLabel) {
                     that.element.val("");
-                    that.text("");
+                    that._textAccessor("");
                 }
             }
 
@@ -245,34 +245,39 @@ kendo_module({
             }
         },
 
-        /*text: function (text) {
+        _textAccessor: function(text) {
+            var dataItem = this.dataItem();
             var span = this.span;
 
             if (text !== undefined) {
-                span.text(text);
+                if ($.isPlainObject(text)) {
+                    dataItem = text;
+                } else if (!dataItem || this._text(dataItem) !== text) {
+                    if (this.options.dataTextField) {
+                        dataItem = {};
+                        dataItem[this.options.dataTextField] = text;
+                        dataItem[this.options.dataValueField] = this._accessor();
+                    } else {
+                        dataItem = text;
+                    }
+                }
+
+                span.html(this.inputTemplate(dataItem));
             } else {
-                return span.text();
+                return dataItem ? this._text(dataItem) : span.text();
             }
-        },*/
+        },
 
         text: function (text) {
-            text = text === null ? "" : text;
+            var that = this;
+            var ignoreCase = that.options.ignoreCase;
 
-            var that = this,
-                span = that.span,
-                ignoreCase = that.options.ignoreCase,
-                dataItem = that.dataItem(),
-                loweredText = text;
+            text = text === null ? "" : text;
 
             if (text !== undefined) {
                 if (typeof text === "string") {
-                    if (that.options.dataTextField) {
-                        text = {};
-                        text[that.options.dataTextField] = loweredText;
-                    }
-
                     if (ignoreCase) {
-                        loweredText = loweredText.toLowerCase();
+                        text = text.toLowerCase();
                     }
 
                     that._select(function(data) {
@@ -285,16 +290,12 @@ kendo_module({
                         return data === loweredText;
                     });
 
-                    dataItem = that.dataItem() || text;
-                } else {
-                    dataItem = text;
+                    text = that.dataItem();
                 }
 
-                if (dataItem) {
-                    span.html(that.inputTemplate(dataItem));
-                }
+                that._textAccessor(text);
             } else {
-                return dataItem ? that._text(dataItem) : "";
+                return that._textAccessor();
             }
         },
 
@@ -595,7 +596,7 @@ kendo_module({
                     value = that._value(data);
                     that.selectedIndex = idx;
 
-                    that.text(data);
+                    that._textAccessor(data);
                     that._accessor(value !== undefined ? value : text, idx);
                     that._selectedValue = that._accessor();
 
@@ -681,9 +682,10 @@ kendo_module({
                 return;
             }
 
-            that.text(optionLabel);
-            that.element.val("");
             that.selectedIndex = -1;
+
+            that.element.val("");
+            that._textAccessor(optionLabel);
         },
 
         _inputTemplate: function() {
