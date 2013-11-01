@@ -1478,7 +1478,7 @@ kendo_module({
 
             that._resources();
 
-            that._resizeHandler = proxy(that._resize, that);
+            that._resizeHandler = proxy(that.resize, that);
 
             that.wrapper.on("mousedown" + NS + " selectstart" + NS, function(e) {
                 e.preventDefault();
@@ -2732,20 +2732,7 @@ kendo_module({
         },
 
         _resize: function() {
-            var wnd = $(window);
-
-            var width = wnd.width();
-            var height = wnd.height();
-            var currentWidth = this._currentWindowWidth;
-            var currentHeight = this._currentWindowHeight;
-
-            if (height !== currentHeight || width !== currentWidth) {
-
-                this._currentWindowWidth = width;
-                this._currentWindowHeight = height;
-
-                this.refresh({ action: "resize" });
-            }
+            this.refresh({ action: "resize" });
         },
 
         _adjustSelectedDate: function() {

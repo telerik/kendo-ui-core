@@ -1567,9 +1567,13 @@ kendo_module({
                 that.table.addClass("k-scrollbar-v");
                 that.datesHeader.css("padding-" + paddingDirection, scrollbarWidth - parseInt(that.datesHeader.children().css("border-" + paddingDirection + "-width"), 10));
                 this._scrollbarWidth = scrollbarWidth;
+            } else {
+                that.datesHeader.css("padding-" + paddingDirection, "");
             }
             if (contentDiv.offsetHeight - contentDiv.clientHeight > 0 || contentDiv.clientHeight > that.content.children(".k-scheduler-table").height()) {
                 that.table.addClass("k-scrollbar-h");
+            } else {
+                that.table.removeClass("k-scrollbar-h");
             }
         },
 
