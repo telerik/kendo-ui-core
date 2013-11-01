@@ -118,10 +118,6 @@ body {
     margin-bottom: 5px;
 }
 
-.k-colorpicker .k-select {
-    padding: 3px;
-}
-
 .k-colorpicker .k-i-arrow-s {
     margin-top: -1px;
 }
@@ -196,7 +192,6 @@ textarea {
 
 .k-gradient-editor .k-preview {
     width: 15px;
-    height: 21px;
     display: inline-block;
     vertical-align: middle;
     border-radius: 0 3px 3px 0;
