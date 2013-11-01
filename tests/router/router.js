@@ -94,6 +94,38 @@ test("parses query string params", 2, function(){
     navigate("/foo?baz=Q");
 });
 
+test("handles complex query string parameters", 6, function(){
+    var router = new kendo.Router();
+
+    router.route("/:foo", function(foo, params) {
+        equal(foo, "foo");
+        equal(params.key1, "");
+        equal(params.key2, "value");
+        equal(params.key3, "Rock & Roll");
+        equal(params["rock&roll"], "here to stay");
+        equal(params.key4, "baz");
+    });
+
+    router.start();
+    navigate("/foo?key1=&key2=value&key3=Rock%20%26%20Roll&rock%26roll=here%20to%20stay&key4=foo&key4=bar&key4=baz");
+});
+
+test("no exception is rised when invalid query string parameters are passed", 2, function(){
+    var router = new kendo.Router();
+
+    router.route("/:foo", function(foo, params) {
+        equal(foo, "foo");
+        ok(true);
+    });
+
+    router.start();
+    try {
+        navigate("/foo?key1&value");
+    } catch(e) {
+        ok(false, "Error should not be thrown");
+    }
+});
+
 test("parses optional params", 4, function() {
     var router = new kendo.Router();
 

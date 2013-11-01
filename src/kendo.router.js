@@ -251,7 +251,7 @@ kendo_module({
             idx = 0;
 
         for (; idx < length; idx += 2) {
-            params[paramParts[idx]] = paramParts[idx + 1];
+            params[decodeURIComponent(paramParts[idx])] = decodeURIComponent(paramParts[idx + 1]);
         }
 
         return params;
