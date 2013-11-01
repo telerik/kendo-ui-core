@@ -49,6 +49,7 @@
             map.bind("reset", proxy(this.reset, this));
             map.bind("panEnd", proxy(this._panEnd, this));
 
+            this._loader = new GeoJSONLoader(this.map, this.options.style, this);
             this._initDataSource();
         },
 
@@ -86,70 +87,21 @@
             this._load(data.items);
         },
 
+        _shapeCreated: function(shape) {
+            var args = { layer: this, shape: shape };
+            return this.map.trigger("shapeCreated", args);
+        },
+
         _load: function(data) {
             this._data = data;
-            this.root = new Group();
             this.surface.clear();
 
             for (var i = 0; i < data.length; i++) {
-                var item = data[i];
-
-                if (item.type === "Feature") {
-                    this._loadGeometryTo(this.root, item.geometry, item);
-                } else {
-                    this._loadGeometryTo(this.root, item, item);
+                var shape = this._loader.parse(data[i]);
+                if (shape) {
+                    this.surface.draw(shape);
                 }
             }
-
-            this.surface.draw(this.root);
-        },
-
-        _loadGeometryTo: function(container, geometry, dataItem) {
-            var coords = geometry.coordinates;
-
-            switch(geometry.type) {
-                case "MultiPolygon":
-                    for (var i = 0; i < coords.length; i++) {
-                        this._loadPolygon(container, coords[i], dataItem);
-                    }
-                    break;
-
-                case "Polygon":
-                    this._loadPolygon(container, coords, dataItem);
-                    break;
-            }
-        },
-
-        _loadPolygon: function(container, rings, dataItem) {
-            var shape = this._buildPolygon(rings);
-            shape.dataItem = dataItem;
-
-            var args = { layer: this, shape: shape };
-            if (!this.map.trigger("shapeCreated", args)) {
-                container.append(shape);
-            }
-        },
-
-        _buildPolygon: function(rings, style) {
-            style = style || this.options.style;
-            var path = rings.length > 1 ?
-                new d.MultiPath(style) : new d.Path(style);
-
-            for (var i = 0; i < rings.length; i++) {
-                for (var j = 0; j < rings[i].length; j++) {
-                    var point = this.map.locationToView(
-                        Location.fromLngLat(rings[i][j])
-                    );
-
-                    if (j === 0) {
-                        path.moveTo(point.x, point.y);
-                    } else {
-                        path.lineTo(point.x, point.y);
-                    }
-                }
-            }
-
-            return path;
         },
 
         _panEnd: function() {
@@ -173,6 +125,86 @@
                     layer.map.trigger(event, args);
                 }
             };
+        }
+    });
+
+    var GeoJSONLoader = Class.extend({
+        init: function(locator, defaultStyle, observer) {
+            this.observer = observer;
+            this.locator = locator;
+            this.style = defaultStyle;
+        },
+
+        parse: function(item) {
+            var root = new Group();
+
+            if (item.type === "Feature") {
+                this._loadGeometryTo(root, item.geometry, item);
+            } else {
+                this._loadGeometryTo(root, item, item);
+            }
+
+            if (root.children.length === 1) {
+                root = root.children[0];
+            }
+
+            return root;
+        },
+
+        _shapeCreated: function(shape) {
+            if (this.observer) {
+                return this.observer._shapeCreated(shape);
+            }
+
+            // Cancelled: false
+            return false;
+        },
+
+        _loadGeometryTo: function(container, geometry, dataItem) {
+            var coords = geometry.coordinates;
+
+            switch(geometry.type) {
+                case "MultiPolygon":
+                    for (var i = 0; i < coords.length; i++) {
+                        this._loadPolygon(container, coords[i], dataItem);
+                    }
+                    break;
+
+                case "Polygon":
+                    this._loadPolygon(container, coords, dataItem);
+                    break;
+            }
+        },
+
+        _loadPolygon: function(container, rings, dataItem) {
+            var shape = this._buildPolygon(rings);
+            shape.dataItem = dataItem;
+
+            if (!this._shapeCreated(shape)) {
+                container.append(shape);
+            }
+        },
+
+        _buildPolygon: function(rings, style) {
+            style = style || this.style;
+            var path = rings.length > 1 ?
+                new d.MultiPath(style) : new d.Path(style);
+
+            for (var i = 0; i < rings.length; i++) {
+                for (var j = 0; j < rings[i].length; j++) {
+                    var point = this.locator.locationToView(
+                        Location.fromLngLat(rings[i][j])
+                    );
+
+                    if (j === 0) {
+                        path.moveTo(point.x, point.y);
+                    } else {
+                        path.lineTo(point.x, point.y);
+                    }
+                }
+            }
+
+            return path;
         }
     });
 
@@ -204,7 +236,8 @@
             layers: {
                 shape: ShapeLayer,
                 ShapeLayer: ShapeLayer
-            }
+            },
+            GeoJSONLoader: GeoJSONLoader
         }
     });
 

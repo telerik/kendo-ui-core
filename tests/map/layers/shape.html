@@ -23,20 +23,24 @@
     <script src="../../../src/map/layers/shape.js"></script>
     <script>
         var dataviz = kendo.dataviz,
-            map = dataviz.map,
+            g = dataviz.geometry,
+            d = dataviz.drawing,
 
+            map = dataviz.map,
             ShapeLayer = map.layers.ShapeLayer,
             Location = map.Location;
 
         (function() {
             // ------------------------------------------------------------
-            module("Shape Loader", {
+            module("Shape Layer", {
                 setup: function() {
                 }
             });
 
+            test("test_name", function() {
+                ok(true);
+            });
         })();
-
     </script>
 
     <h1 id="qunit-header">kendo.chart</h1>

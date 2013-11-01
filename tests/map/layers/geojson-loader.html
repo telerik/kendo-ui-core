@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shape layer</title>
+    <script src="../../jquery-loader.js"></script>
+    <script src="../../qunit/qunit/qunit.js"></script>
+    <script src="../../qunit/addons/close-enough/qunit-close-enough.js"></script>
+    <script src="../../kendo-test-helpers.js"></script>
+    <link href="../../qunit/qunit/qunit.css" rel="stylesheet"/>
+</head>
+<body>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.dataviz.core.js"></script>
+    <script src="../../../src/kendo.dataviz.core.js"></script>
+    <script src="../../../src/dataviz/util.js"></script>
+    <script src="../../../src/dataviz/geometry.js"></script>
+    <script src="../../../src/dataviz/drawing/core.js"></script>
+    <script src="../../../src/dataviz/drawing/shapes.js"></script>
+    <script src="../../../src/dataviz/drawing/svg.js"></script>
+    <script src="../../../src/dataviz/drawing/canvas.js"></script>
+    <script src="../../../src/map/location.js"></script>
+    <script src="../../../src/map/crs.js"></script>
+    <script src="../../../src/map/layers/shape.js"></script>
+    <script>
+        var dataviz = kendo.dataviz,
+            g = dataviz.geometry,
+            d = dataviz.drawing,
+
+            map = dataviz.map,
+            ShapeLayer = map.layers.ShapeLayer,
+            Location = map.Location;
+
+        var locator = {
+            locationToView: function(loc) {
+                return new g.Point(loc.lng, loc.lat);
+            }
+        };
+
+        var style = {
+            stroke: {
+                color: "black"
+            }
+        };
+
+        (function() {
+            var loader;
+            var polygon;
+            var path;
+
+            // ------------------------------------------------------------
+            module("GeoJSON Loader / Polygon", {
+                setup: function() {
+                    loader = new map.GeoJSONLoader(locator, style);
+                    polygon = {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+                                [100.0, 1.0], [100.0, 0.0] ]
+                        ]
+                    };
+                    path = loader.parse(polygon);
+                }
+            });
+
+            test("result is Path", function() {
+                ok(path instanceof d.Path);
+            });
+        })();
+
+        (function() {
+            var loader;
+            var polygon;
+            var group;
+
+            // ------------------------------------------------------------
+            module("GeoJSON Loader / MultiPolygon", {
+                setup: function() {
+                    loader = new map.GeoJSONLoader(locator, style);
+                    polygon = { "type": "MultiPolygon",
+                        "coordinates": [
+                            [[[102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [102.0, 3.0], [102.0, 2.0]]],
+                            [[[100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0]]]
+                        ]
+                    };
+                    group = loader.parse(polygon);
+                }
+            });
+
+            test("parses to a group", function() {
+                ok(group instanceof d.Group);
+            });
+
+            test("parses polygons to child paths", function() {
+                ok(group.children[0] instanceof d.Path);
+                ok(group.children[1] instanceof d.Path);
+                equal(group.children.length, 2);
+            });
+        })();
+
+        (function() {
+            var loader;
+            var feature;
+            var group;
+
+            // ------------------------------------------------------------
+            module("GeoJSON Loader / Feature", {
+                setup: function() {
+                    loader = new map.GeoJSONLoader(locator, style);
+                    feature = { "type": "Feature",
+                        "geometry": {
+                            "type": "Polygon",
+                            "coordinates": [[
+                                [-180.0, 10.0], [20.0, 90.0], [180.0, -5.0], [-30.0, -90.0]
+                            ]]
+                        }
+                    };
+                    group = loader.parse(feature);
+                }
+            });
+
+            test("result is Path", function() {
+                ok(group instanceof d.Path);
+            });
+        })();
+    </script>
+
+    <h1 id="qunit-header">kendo.chart</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+
+</body>
+</html>
