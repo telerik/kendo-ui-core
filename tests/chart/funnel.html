@@ -566,7 +566,7 @@
                         seriesClick: callback
                     });
 
-                    clickChart(chart, 0, 0, segmentElement);
+                    clickChart(chart, segmentElement);
                 }
 
                 function segmentHover(callback) {
@@ -588,7 +588,7 @@
 
                 test("fires on subsequent click", 2, function() {
                     segmentClick(function() { ok(true); });
-                    clickChart(chart, 0, 0, segmentElement);
+                    clickChart(chart, segmentElement);
                 });
 
                 test("fires when clicking segment labels", 1, function() {
@@ -596,7 +596,7 @@
                         seriesClick: function() { ok(true); }
                     });
                     var label = plotArea.charts[0].labels[0];
-                    clickChart(chart, 0, 0, getElement(label.options.id));
+                    clickChart(chart, getElement(label.options.id));
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -635,7 +635,7 @@
                         }
                     });
 
-                    clickChart(chart, 0, 0, segmentElement);
+                    clickChart(chart, segmentElement);
                 });
 
                 test("does not fire on subsequent tap", 1, function() {
@@ -645,7 +645,7 @@
                         }
                     });
 
-                    clickChart(chart, 0, 0, segmentElement);
+                    clickChart(chart, segmentElement);
                 });
 
                 test("fires when hovering segment labels", 1, function() {

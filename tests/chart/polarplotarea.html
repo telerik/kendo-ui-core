@@ -94,7 +94,7 @@
                         plotAreaClick: function() { ok(true); }
                     });
 
-                    clickChart(chart, 300, 300, pointElement);
+                    clickChart(chart, pointElement, 300, 300);
                 });
 
                 test("fires when clicking plot area directly", function() {
@@ -102,7 +102,7 @@
                         plotAreaClick: function() { ok(true); }
                     });
 
-                    clickChart(chart, 300, 300, plotAreaElement);
+                    clickChart(chart, plotAreaElement, 300, 300);
                 });
 
                 test("does not fire when clicking outside of axis range", 0, function() {
@@ -110,7 +110,7 @@
                         plotAreaClick: function() { ok(false); }
                     });
 
-                    clickChart(chart, 300, 580, plotAreaElement);
+                    clickChart(chart, plotAreaElement, 300, 580);
                 });
 
                 test("does not fire when clicking on axes", 0, function() {
@@ -118,9 +118,7 @@
                         plotAreaClick: function() { ok(false); }
                     });
 
-                    $(getElement(plotArea.options.id)).trigger({
-                        type: "click", clientX: 3000, clientY: 0
-                    });
+                    clickChart(chart, plotAreaElement, 3000, 0);
                 });
 
                 test("event arguments contain x value", 1, function() {
@@ -128,7 +126,7 @@
                         plotAreaClick: function(e) { close(e.x, 180, TOLERANCE); }
                     });
 
-                    clickChart(chart, 300, 400, plotAreaElement);
+                    clickChart(chart, plotAreaElement, 300, 400);
                 });
 
                 test("event arguments contain y value", 1, function() {
@@ -136,7 +134,7 @@
                         plotAreaClick: function(e) { close(e.y, 6, TOLERANCE); }
                     });
 
-                    clickChart(chart, 300, 300, plotAreaElement);
+                    clickChart(chart, plotAreaElement, 300, 300);
                 });
 
             })();

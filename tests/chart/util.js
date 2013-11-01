@@ -205,7 +205,7 @@ function serializeFontCache() {
         .append($("<textarea id='cache' rows='25' cols='160' />").text(result));
 }
 
-function clickChart(chart, x, y, element) {
+function clickChart(chart, element, x, y) {
     chart._userEvents.press(x || 0, y || 0, element);
     chart._userEvents.end(x || 0, y || 0);
 }

@@ -2340,7 +2340,7 @@
                         seriesClick: callback
                     });
 
-                    clickChart(chart, 0, 0, barElement);
+                    clickChart(chart, barElement);
                 }
 
                 function barHover(callback) {
@@ -2362,7 +2362,7 @@
 
                 test("fires on subsequent click", 2, function() {
                     barClick(function() { ok(true); });
-                    clickChart(chart, 0, 0, barElement);
+                    clickChart(chart, barElement);
                 });
 
                 test("fires when clicking bar labels", 1, function() {
@@ -2378,8 +2378,7 @@
                     });
                     var label = plotArea.charts[0].points[0].children[0];
 
-                    chart._userEvents.press(0, 0, getElement(label.options.id));
-                    chart._userEvents.end(0, 0);
+                    clickChart(chart, getElement(label.options.id));
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -2418,7 +2417,7 @@
                         }
                     });
 
-                    clickChart(chart, 0, 0, barElement);
+                    clickChart(chart, barElement);
                 });
 
                 test("does not fire on subsequent tap", 1, function() {
@@ -2428,8 +2427,8 @@
                         }
                     });
 
-                    clickChart(chart, 0, 0, barElement);
-                    clickChart(chart, 0, 0, barElement);
+                    clickChart(chart, barElement);
+                    clickChart(chart, barElement);
                 });
 
                 test("fires when hovering bar labels", 1, function() {

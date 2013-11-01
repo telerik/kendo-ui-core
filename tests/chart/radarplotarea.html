@@ -163,7 +163,7 @@
                         plotAreaClick: function() { ok(true); }
                     });
 
-                    clickChart(chart, 300, 300, pointElement);
+                    clickChart(chart, pointElement, 300, 300);
                 });
 
                 test("fires when clicking plot area directly", function() {
@@ -171,7 +171,7 @@
                         plotAreaClick: function() { ok(true); }
                     });
 
-                    clickChart(chart, 300, 300, plotAreaElement);
+                    clickChart(chart, plotAreaElement, 300, 300);
                 });
 
                 test("does not fire when clicking outside of axis range", 0, function() {
@@ -179,7 +179,7 @@
                         plotAreaClick: function() { ok(false); }
                     });
 
-                    clickChart(chart, 300, 580, plotAreaElement);
+                    clickChart(chart, plotAreaElement, 300, 580);
                 });
 
                 test("does not fire when clicking on axes", 0, function() {
@@ -187,7 +187,7 @@
                         plotAreaClick: function() { ok(false); }
                     });
 
-                    clickChart(chart, 3000, 0, plotAreaElement);
+                    clickChart(chart, plotAreaElement, 3000, 0);
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -195,7 +195,7 @@
                         plotAreaClick: function(e) { close(e.value, 0.4, TOLERANCE); }
                     });
 
-                    clickChart(chart, 300, 400, plotAreaElement);
+                    clickChart(chart, plotAreaElement, 300, 400);
                 });
 
                 test("event arguments contain category", 1, function() {
@@ -203,7 +203,7 @@
                         plotAreaClick: function(e) { equal(e.category, "A"); }
                     });
 
-                    clickChart(chart, 300, 300, plotAreaElement);
+                    clickChart(chart, plotAreaElement, 300, 300);
                 });
 
                 test("event arguments contain empty category", 1, function() {
@@ -214,7 +214,7 @@
                         plotAreaClick: function(e) { equal(e.category, ""); }
                     });
 
-                    clickChart(chart, 300, 400, plotAreaElement);
+                    clickChart(chart, plotAreaElement, 300, 400);
                 });
 
                 test("event arguments contain date category", 1, function() {
@@ -226,7 +226,7 @@
                         plotAreaClick: function(e) { equal(e.category.toString(), date.toString()); }
                     });
 
-                    clickChart(chart, 300, 300, plotAreaElement);
+                    clickChart(chart, plotAreaElement, 300, 300);
                 });
 
             })();
