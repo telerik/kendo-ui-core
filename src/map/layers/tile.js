@@ -32,34 +32,44 @@
                 height: map.element.height() || DEFAULT_HEIGHT
             });
 
-            this._initOptions(options);
+            layer._initOptions(options);
             layer.map = map;
 
             this.element = $(this._template(this)).appendTo(map.scrollWrap);
 
+            layer._loadView();
+
             map.bind("reset", proxy(layer.reset, layer));
             if (kendo.support.mobileOS) {
-                map.bind("panEnd", proxy(layer._loadTiles, layer));
+                map.bind("panEnd", proxy(layer._render, layer));
             } else {
                 map.bind("pan", proxy(layer._pan, this));
             }
-            layer.pool = new TilePool();
         },
 
         options: {
-            tileSize: 256,
             subdomains: ["a", "b", "c"]
         },
 
+        _loadView: function() {
+            this._view = new TileView(this.element, map, this.options.submodule);
+            this._updateView();
+        },
+
+        _updateView: function() {
+            this._view.center(this.map.center());
+            this._view.extent(this.map.extent());
+            this._view.zoom(this.map.zoom());
+        },
+
         destroy: function() {
-            this.element.empty();
+            this._view.destroy();
+            this._view = null;
         },
 
         reset: function(e) {
-            this._subdomainIndex = 0;
-            this._basePoint = this.map.locationToLayer(this.map.origin());
-            this.pool.destroy();
-            this._render();
+            this._view.clear();
+            this._view.render();
         },
 
         _template: kendo.template(
@@ -75,20 +85,76 @@
                 timestamp = layer._pan.timestamp;
 
             if (!timestamp || now - timestamp > 100) {
-                this._loadTiles();
+                this._view.render();
                 layer._pan.timestamp = now;
             }
         },
 
         _render: function() {
-            this._loadTiles();
+            this._view.render();
+        }
+    });
+
+    var TileView = Class.extend({
+        init: function(element, locator, options) {
+            this.pool = new TilePool();
+            this.locator = locator;
         },
 
-        _viewportSize: function() {
-            var map = this.map,
-                extent = map.extent(),
-                nw = map.locationToLayer(extent.nw),
-                se = map.locationToLayer(extent.se),
+        options: {
+            tileSize: 256
+        },
+
+        // remove the getter
+        center: function(center) {
+            if (center) {
+                this.center = center;
+            } else {
+                return this.center;
+            }
+        },
+
+        extent: function(extent) {
+            if (extent) {
+                this.extent = extent;
+            } else {
+                return this.extent;
+            }
+        },
+
+        zoom: function(zoom) {
+            if (zoom) {
+                this.zoom = zoom;
+            } else {
+                return this.zoom;
+            }
+        },
+
+        pointToTileIndex: function(point) {
+            return new Point(
+                math.floor(point.x / this.options.tileSize),
+                math.floor(point.y / this.options.tileSize)
+            );
+        },
+
+        createTile: function(options) {
+            return this.pool.get(this.center, options);
+        },
+
+        tileCount: function() {
+            var size = this.size(),
+                firstTileIndex = this.getTileIndex(this.extent.nw),
+                screenPoint = layer._indexToScreenPoint(firstTileIndex);
+
+            return {
+                x: math.ceil((math.abs(screenPoint.x) + size.width) / this.options.tileSize),
+                y: math.ceil((math.abs(screenPoint.y) + size.height) / this.options.tileSize)
+            };
+        },
+
+        size: function() {
+            var nw = this.locator.locationToLayer(this.extent.nw),
+                se = this.locator.locationToLayer(this.extent.se),
                 diff = se.subtract(nw);
 
             return {
@@ -97,21 +163,43 @@
             };
         },
 
-        _loadTiles: function() {
-            var layer = this,
-                options = this.options,
-                tileSize = options.tileSize,
-                map = layer.map,
-                zoom = map.options.zoom,
-                urlTemplate = template(options.urlTemplate),
-                nwToPoint = map.locationToLayer(map.origin());
+        indexToPoint: function(index, offset) {
+            offset = offset || { x: 0, y: 0 };
 
-            var center = map.locationToLayer(map.center());
+            return new Point(
+                index.x * this.options.tileSize + offset.x,
+                index.y * this.options.tileSize + offset.y)
+            };
+        },
 
-            var firstTileIndex = layer._getTileIndex(nwToPoint);
-            var screenPoint = layer._indexToScreenPoint(firstTileIndex);
-            var point = screenPoint.clone().subtract(nwToPoint);
-            size = layer._getSize(point);
+        subdomainText: function() {
+            var subdomains = this.options.subdomains;
+
+            return subdomains[this.subdomainIndex++ % subdomains.length];
+        },
+
+        clear: function() {
+            // rename destroy to empty
+            this.pool.destroy();
+        },
+
+        destroy: function() {
+            this.element.empty();
+            this.pool.destroy();
+        }
+
+        reset: function() {
+            this.subdomainIndex = 0;
+            this._basePoint = this.locator.locationToLayer(this.extent.nw);
+            this.load();
+        },
+
+        render: function() {
+            var urlTemplate = template(this.options.urlTemplate),
+                nwToPoint = this.locator.locationToLayer(this.extent.nw);
+
+            var firstTileIndex = this.pointToTileIndex(nwToPoint);
+            size = this.tileCount();
 
             for (var x = 0; x < size.x; x++) {
                 for (var y = 0; y < size.y; y++) {
@@ -120,18 +208,19 @@
                         y: firstTileIndex.y + y
                     };
 
-                    var screenPoint = layer._indexToScreenPoint(index);
-                    var point = screenPoint.clone().subtract(layer._basePoint);
-                    var tile = layer._createTile(center, {
+                    var screenPoint = this.indexToPoint(index);
+                    // baseOffset
+                    var point = screenPoint.clone().subtract(this._basePoint);
+                    var tile = this._createTile(this.locator.locationToLayer(this.center), {
                         screenPoint: screenPoint,
                         point: point,
                         index: index,
-                        zoom: zoom,
+                        zoom: this.zoom,
                         url: urlTemplate({
-                            zoom: zoom,
+                            zoom: this.zoom,
                             x: index.x,
                             y: index.y,
-                            subdomain: this._getSubdomain()
+                            subdomain: this.subdomainText()
                         })
                     });
 
@@ -141,44 +230,8 @@
                     }
                 }
             }
-        },
-
-        _getSubdomain: function() {
-            var subdomains = this.options.subdomains;
-
-            return subdomains[this._subdomainIndex++ % subdomains.length];
-        },
-
-        _getSize: function(screenPoint) {
-            var viewportSize = this._viewportSize();
-            return {
-                x: math.ceil((math.abs(screenPoint.x) + viewportSize.width) / this.options.tileSize),
-                y: math.ceil((math.abs(screenPoint.y) + viewportSize.height) / this.options.tileSize)
-            };
-        },
-
-        _indexToScreenPoint: function(index, offset) {
-            offset = offset || { x: 0, y: 0 };
-
-            return new Point(
-                index.x * this.options.tileSize + offset.x,
-                index.y * this.options.tileSize + offset.y)
-        },
-
-        _getTileIndex: function(point) {
-            var layer = this,
-                options = layer.options,
-                tile = new Point(
-                    math.floor(point.x / options.tileSize),
-                    math.floor(point.y / options.tileSize)
-                );
-
-            return tile;
-        },
-
-        _createTile: function(center, options) {
-            return this.pool.get(center, options);
         }
+
     });
 
     var ImageTile = Class.extend({
@@ -188,10 +241,12 @@
             this.visible = false;
         },
 
+        // rename this to load
         update: function(options) {
             var element = this.element;
             htmlElement = element[0];
 
+            // consider to remove this
             if (htmlElement.style.visibility === "hidden") {
                 htmlElement.style.visibility = "visible";
                 htmlElement.style.display = "block";
@@ -210,6 +265,7 @@
             this.visible = true;
         },
 
+        // rename this to unload
         clear: function() {
             this.element[0].style.visibility = "hidden";
         },
@@ -255,6 +311,7 @@
             }
         },
 
+        // rename destroy
         destroy: function() {
             var items = this._items,
                 i;
