@@ -44,69 +44,121 @@
 
         (function() {
             var loader;
-            var polygon;
-            var path;
+            var item;
+            var result;
+
+            // ------------------------------------------------------------
+            module("GeoJSON Loader / LineString", {
+                setup: function() {
+                    loader = new map.GeoJSONLoader(locator, style);
+                    item = {
+                        "type": "LineString",
+                        "coordinates": [ [100.0, 0.0], [101.0, 1.0] ]
+                    };
+                    result = loader.parse(item);
+                }
+            });
+
+            test("parsers to path", function() {
+                ok(result instanceof d.Path);
+            });
+        })();
+
+        (function() {
+            var loader;
+            var item;
+            var result;
+
+            // ------------------------------------------------------------
+            module("GeoJSON Loader / MultiLineString", {
+                setup: function() {
+                    loader = new map.GeoJSONLoader(locator, style);
+                    item = { "type": "MultiLineString",
+                        "coordinates": [
+                            [ [100.0, 0.0], [101.0, 1.0] ],
+                            [ [102.0, 2.0], [103.0, 3.0] ]
+                        ]
+                    };
+                    result = loader.parse(item);
+                }
+            });
+
+            test("parses to a group", function() {
+                ok(result instanceof d.Group);
+            });
+
+            test("parses paths to child paths", function() {
+                ok(result.children[0] instanceof d.Path);
+                ok(result.children[1] instanceof d.Path);
+                equal(result.children.length, 2);
+            });
+        })();
+
+        (function() {
+            var loader;
+            var item;
+            var result;
 
             // ------------------------------------------------------------
             module("GeoJSON Loader / Polygon", {
                 setup: function() {
                     loader = new map.GeoJSONLoader(locator, style);
-                    polygon = {
+                    item = {
                         "type": "Polygon",
                         "coordinates": [
                             [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
                                 [100.0, 1.0], [100.0, 0.0] ]
                         ]
                     };
-                    path = loader.parse(polygon);
+                    result = loader.parse(item);
                 }
             });
 
-            test("result is Path", function() {
-                ok(path instanceof d.Path);
+            test("parses to a path", function() {
+                ok(result instanceof d.Path);
             });
         })();
 
         (function() {
             var loader;
-            var polygon;
-            var group;
+            var item;
+            var result;
 
             // ------------------------------------------------------------
             module("GeoJSON Loader / MultiPolygon", {
                 setup: function() {
                     loader = new map.GeoJSONLoader(locator, style);
-                    polygon = { "type": "MultiPolygon",
+                    item = { "type": "MultiPolygon",
                         "coordinates": [
                             [[[102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [102.0, 3.0], [102.0, 2.0]]],
                             [[[100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0]]]
                         ]
                     };
-                    group = loader.parse(polygon);
+                    result = loader.parse(item);
                 }
             });
 
             test("parses to a group", function() {
-                ok(group instanceof d.Group);
+                ok(result instanceof d.Group);
             });
 
             test("parses polygons to child paths", function() {
-                ok(group.children[0] instanceof d.Path);
-                ok(group.children[1] instanceof d.Path);
-                equal(group.children.length, 2);
+                ok(result.children[0] instanceof d.Path);
+                ok(result.children[1] instanceof d.Path);
+                equal(result.children.length, 2);
             });
         })();
 
         (function() {
             var loader;
-            var feature;
-            var group;
+            var item;
+            var result;
 
             // ------------------------------------------------------------
             module("GeoJSON Loader / Feature", {
                 setup: function() {
                     loader = new map.GeoJSONLoader(locator, style);
-                    feature = { "type": "Feature",
+                    item = { "type": "Feature",
                         "geometry": {
                             "type": "Polygon",
                             "coordinates": [[
@@ -114,12 +166,12 @@
                             ]]
                         }
                     };
-                    group = loader.parse(feature);
+                    result = loader.parse(item);
                 }
             });
 
-            test("result is Path", function() {
-                ok(group instanceof d.Path);
+            test("parses to a path", function() {
+                ok(result instanceof d.Path);
             });
         })();
     </script>

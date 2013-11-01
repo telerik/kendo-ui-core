@@ -162,16 +162,27 @@
 
         _loadGeometryTo: function(container, geometry, dataItem) {
             var coords = geometry.coordinates;
+            var i;
 
             switch(geometry.type) {
-                case "MultiPolygon":
-                    for (var i = 0; i < coords.length; i++) {
-                        this._loadPolygon(container, coords[i], dataItem);
+                case "LineString":
+                    this._loadPolygon(container, [coords], dataItem);
+                    break;
+
+                case "MultiLineString":
+                    for (i = 0; i < coords.length; i++) {
+                        this._loadPolygon(container, [coords[i]], dataItem);
                     }
                     break;
 
                 case "Polygon":
                     this._loadPolygon(container, coords, dataItem);
+                    break;
+
+                case "MultiPolygon":
+                    for (i = 0; i < coords.length; i++) {
+                        this._loadPolygon(container, coords[i], dataItem);
+                    }
                     break;
             }
         },
