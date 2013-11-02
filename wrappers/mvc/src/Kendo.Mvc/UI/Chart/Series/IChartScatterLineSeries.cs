@@ -1,16 +1,7 @@
 namespace Kendo.Mvc.UI
 {
-    public interface IChartScatterLineSeries : IScatterLineSeries
+    public interface IChartScatterLineSeries : IScatterLineSeries, IScatterErrorBarsSeries 
     {
-        /// <summary>
-        /// The scatter line chart error bars configuration.
-        /// </summary>
-        ScatterErrorBars ErrorBars
-        {
-            get;
-            set;
-        }
-
         /// <summary>
         /// The style of the series.
         /// </summary>

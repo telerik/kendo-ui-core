@@ -67,6 +67,43 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="valueExpression">
         /// The expression used to extract the point value from the chart model
         /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the point category from the chart model
+        /// </param>
+        /// <param name="errorLowExpression">
+        /// The expression used to extract the point error low value from the chart model
+        /// </param>
+        /// <param name="errorHighExpression">
+        /// The expression used to extract the point error high value from the chart model
+        /// </param>
+        /// <param name="colorExpression">
+        /// The expression used to extract the point color from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the point note text from the chart model
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> Bar<TValue, TCategory, TErrorLowValue, TErrorHighValue>(
+            Expression<Func<TModel, TValue>> valueExpression,
+            Expression<Func<TModel, TCategory>> categoryExpression,
+            Expression<Func<TModel, TErrorLowValue>> errorLowExpression,
+            Expression<Func<TModel, TErrorHighValue>> errorHighExpression,
+            Expression<Func<TModel, string>> colorExpression = null,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var barSeries = new ChartBarSeries<TModel, TValue, TCategory, TErrorLowValue, TErrorHighValue>(
+                valueExpression, categoryExpression, errorLowExpression, errorHighExpression, colorExpression, noteTextExpression);
+
+            Container.Series.Add(barSeries);
+
+            return new ChartBarSeriesBuilder<TModel>(barSeries);
+        }
+
+        /// <summary>
+        /// Defines bound bar series.
+        /// </summary>
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
+        /// </param>
         /// <param name="colorExpression">
         /// The expression used to extract the point color from the chart model
         /// </param>
@@ -88,6 +125,39 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines bound bar series.
         /// </summary>
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
+        /// </param>
+        /// <param name="errorLowExpression">
+        /// The expression used to extract the point error low value from the chart model
+        /// </param>
+        /// <param name="errorHighExpression">
+        /// The expression used to extract the point error high value from the chart model
+        /// </param>
+        /// <param name="colorExpression">
+        /// The expression used to extract the point color from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the point note text from the chart model
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> Bar<TValue, TErrorLowValue, TErrorHighValue>(
+            Expression<Func<TModel, TValue>> valueExpression,
+            Expression<Func<TModel, TErrorLowValue>> errorLowExpression,
+            Expression<Func<TModel, TErrorHighValue>> errorHighExpression,
+            Expression<Func<TModel, string>> colorExpression = null,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var barSeries = new ChartBarSeries<TModel, TValue, string, TErrorLowValue, TErrorHighValue>(
+                valueExpression, null, errorLowExpression, errorHighExpression, colorExpression, noteTextExpression);
+
+            Container.Series.Add(barSeries);
+
+            return new ChartBarSeriesBuilder<TModel>(barSeries);
+        }
+
+        /// <summary>
+        /// Defines bound bar series.
+        /// </summary>
         /// <param name="valueMemberName">
         /// The name of the value member.
         /// </param>
@@ -97,13 +167,24 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="categoryMemberName">
         /// The name of the category member.
         /// </param>
+        /// <param name="noteTextMemberName">
+        /// The name of the note text member.
+        /// </param>
+        /// <param name="errorLowMemberName">
+        /// The name of the error low member.
+        /// </param>
+        /// <param name="errorHighMemberName">
+        /// The name of the error high member.
+        /// </param>
         public virtual ChartBarSeriesBuilder<TModel> Bar(
             string valueMemberName,
             string colorMemberName = null,
             string categoryMemberName = null,
-            string noteTextMemberName = null)
+            string noteTextMemberName = null,
+            string errorLowMemberName = null, 
+            string errorHighMemberName = null)
         {
-            return Bar(null, valueMemberName, colorMemberName, categoryMemberName, noteTextMemberName);
+            return Bar(null, valueMemberName, colorMemberName, categoryMemberName, noteTextMemberName, errorLowMemberName, errorHighMemberName);
         }
 
         /// <summary>
@@ -124,17 +205,26 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
+        /// <param name="errorLowMemberName">
+        /// The name of the error low member.
+        /// </param>
+        /// <param name="errorHighMemberName">
+        /// The name of the error high member.
+        /// </param>
         public virtual ChartBarSeriesBuilder<TModel> Bar(
             Type memberType,
             string valueMemberName,
             string colorMemberName = null,
             string categoryMemberName = null,
-            string noteTextMemberName = null)
+            string noteTextMemberName = null,
+            string errorLowMemberName = null, 
+            string errorHighMemberName = null)
         {
             var valueExpr = BuildMemberExpression(memberType, valueMemberName);
             var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(typeof(string), colorMemberName) : null;
             var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
             var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
+
             var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
             var seriesType = typeof(ChartBarSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
             var series = (IChartBarSeries)BuildSeries(seriesType, valueExpr, colorExpr, categoryExpr, noteTextExpr);
@@ -142,6 +232,9 @@ namespace Kendo.Mvc.UI.Fluent
             series.Member = valueMemberName;
             series.ColorMember = colorMemberName;
             series.NoteTextMember = noteTextMemberName;
+            series.CategoryMember = categoryMemberName;
+            series.ErrorLowMember = errorLowMemberName;
+            series.ErrorHighMember = errorHighMemberName; 
 
             if (!series.Name.HasValue())
             {
@@ -201,6 +294,41 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="valueExpression">
         /// The expression used to extract the point value from the chart model
         /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the point category from the chart model
+        /// </param>
+        /// <param name="errorLowExpression">
+        /// The expression used to extract the point error low value from the chart model
+        /// </param>
+        /// <param name="errorHighExpression">
+        /// The expression used to extract the point error high value from the chart model
+        /// </param>
+        /// <param name="colorExpression">
+        /// The expression used to extract the point color from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the point note text from the chart model
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> Column<TValue, TCategory, TErrorLowValue, TErrorHighValue>(
+            Expression<Func<TModel, TValue>> valueExpression,
+            Expression<Func<TModel, TCategory>> categoryExpression,
+            Expression<Func<TModel, TErrorLowValue>> errorLowExpression,
+            Expression<Func<TModel, TErrorHighValue>> errorHighExpression,
+            Expression<Func<TModel, string>> colorExpression = null,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var builder = Bar(valueExpression, categoryExpression, errorLowExpression, errorHighExpression, colorExpression, noteTextExpression);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines bound column series.
+        /// </summary>
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
+        /// </param>
         /// <param name="colorExpression">
         /// The expression used to extract the point color from the chart model
         /// </param>
@@ -219,7 +347,38 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Defines bound bar series.
+        /// Defines bound column series.
+        /// </summary>
+        /// <param name="valueExpression">
+        /// The expression used to extract the point value from the chart model
+        /// </param>
+        /// <param name="errorLowExpression">
+        /// The expression used to extract the point error low value from the chart model
+        /// </param>
+        /// <param name="errorHighExpression">
+        /// The expression used to extract the point error high value from the chart model
+        /// </param>
+        /// <param name="colorExpression">
+        /// The expression used to extract the point color from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the point note text from the chart model
+        /// </param>
+        public virtual ChartBarSeriesBuilder<TModel> Column<TValue, TErrorLowValue, TErrorHighValue>(
+            Expression<Func<TModel, TValue>> valueExpression,
+            Expression<Func<TModel, TErrorLowValue>> errorLowExpression,
+            Expression<Func<TModel, TErrorHighValue>> errorHighExpression,
+            Expression<Func<TModel, string>> colorExpression = null,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var builder = Bar(valueExpression, errorLowExpression, errorHighExpression, colorExpression, noteTextExpression);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }       
+
+        /// <summary>
+        /// Defines bound column series.
         /// </summary>
         /// <param name="valueMemberName">
         /// The name of the value member.
@@ -233,17 +392,26 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
+        /// <param name="errorLowMemberName">
+        /// The name of the error low member.
+        /// </param>
+        /// <param name="errorHighMemberName">
+        /// The name of the error high member.
+        /// </param>
         public virtual ChartBarSeriesBuilder<TModel> Column(
             string valueMemberName,
             string colorMemberName = null,
             string categoryMemberName = null,
-            string noteTextMemberName = null)
+            string noteTextMemberName = null,
+            string errorLowMemberName = null,
+            string errorHighMemberName = null)
         {
-            return Column(null, valueMemberName, colorMemberName, categoryMemberName, noteTextMemberName);
+            return Column(null, valueMemberName, colorMemberName, categoryMemberName, noteTextMemberName,
+                errorLowMemberName, errorHighMemberName);
         }
 
         /// <summary>
-        /// Defines bound bar series.
+        /// Defines bound column series.
         /// </summary>
         /// <param name="memberType">
         /// The type of the value member.
@@ -260,21 +428,30 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
+        /// <param name="errorLowMemberName">
+        /// The name of the error low member.
+        /// </param>
+        /// <param name="errorHighMemberName">
+        /// The name of the error high member.
+        /// </param>
         public virtual ChartBarSeriesBuilder<TModel> Column(
             Type memberType,
             string valueMemberName,
             string colorMemberName = null,
             string categoryMemberName = null,
-            string noteTextMemberName = null)
+            string noteTextMemberName = null,
+            string errorLowMemberName = null,
+            string errorHighMemberName = null)
         {
-            var builder = Bar(memberType, valueMemberName, colorMemberName, categoryMemberName, noteTextMemberName);
+            var builder = Bar(memberType, valueMemberName, colorMemberName, categoryMemberName, noteTextMemberName,
+                errorLowMemberName, errorHighMemberName);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
 
             return builder;
         }
 
         /// <summary>
-        /// Defines bar series bound to inline data.
+        /// Defines column series bound to inline data.
         /// </summary>
         /// <param name="data">
         /// The data to bind to
@@ -319,6 +496,39 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="expression">
         /// The expression used to extract the value from the chart model.
         /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the category from the chart model.
+        /// </param>
+        /// <param name="errorLowExpression">
+        /// The expression used to extract the point error low value from the chart model
+        /// </param>
+        /// <param name="errorHighExpression">
+        /// The expression used to extract the point error high value from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartLineSeriesBuilder<TModel> Line<TValue, TCategory, TErrorLowValue, TErrorHighValue>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, TCategory>> categoryExpression,
+            Expression<Func<TModel, TErrorLowValue>> errorLowExpression,
+            Expression<Func<TModel, TErrorHighValue>> errorHighExpression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var lineSeries = new ChartLineSeries<TModel, TValue, TCategory, TErrorLowValue, TErrorHighValue>(
+                expression, categoryExpression, errorLowExpression, errorHighExpression, noteTextExpression);
+
+            Container.Series.Add(lineSeries);
+
+            return new ChartLineSeriesBuilder<TModel>(lineSeries);
+        }
+
+        /// <summary>
+        /// Defines bound line series.
+        /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
         /// <param name="noteTextExpression">
         /// The expression used to extract the note text from the chart model.
         /// </param>
@@ -327,6 +537,35 @@ namespace Kendo.Mvc.UI.Fluent
             Expression<Func<TModel, string>> noteTextExpression = null)
         {
             var lineSeries = new ChartLineSeries<TModel, TValue, string>(expression, null, noteTextExpression);
+
+            Container.Series.Add(lineSeries);
+
+            return new ChartLineSeriesBuilder<TModel>(lineSeries);
+        }
+
+        /// <summary>
+        /// Defines bound line series.
+        /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
+        /// <param name="errorLowExpression">
+        /// The expression used to extract the point error low value from the chart model
+        /// </param>
+        /// <param name="errorHighExpression">
+        /// The expression used to extract the point error high value from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartLineSeriesBuilder<TModel> Line<TValue, TErrorLowValue, TErrorHighValue>(
+            Expression<Func<TModel, TValue>> expression,            
+            Expression<Func<TModel, TErrorLowValue>> errorLowExpression,
+            Expression<Func<TModel, TErrorHighValue>> errorHighExpression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var lineSeries = new ChartLineSeries<TModel, TValue, string, TErrorLowValue, TErrorHighValue>(
+                expression, null, errorLowExpression, errorHighExpression, noteTextExpression);
 
             Container.Series.Add(lineSeries);
 
@@ -345,9 +584,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
-        public virtual ChartLineSeriesBuilder<TModel> Line(string memberName, string categoryMemberName = null, string noteTextExpression = null)
+        /// <param name="errorLowMemberName">
+        /// The name of the error low member.
+        /// </param>
+        /// <param name="errorHighMemberName">
+        /// The name of the error high member.
+        /// </param>
+        public virtual ChartLineSeriesBuilder<TModel> Line(string memberName, string categoryMemberName = null,
+            string noteTextExpression = null, string errorLowMemberName = null, string errorHighMemberName = null)
         {
-            return Line(null, memberName, categoryMemberName, noteTextExpression);
+            return Line(null, memberName, categoryMemberName, noteTextExpression, errorLowMemberName, errorHighMemberName);
         }
 
         /// <summary>
@@ -365,16 +611,28 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
-        public virtual ChartLineSeriesBuilder<TModel> Line(Type memberType, string memberName, string categoryMemberName = null, string noteTextExpression = null)
+        /// <param name="errorLowMemberName">
+        /// The name of the error low member.
+        /// </param>
+        /// <param name="errorHighMemberName">
+        /// The name of the error high member.
+        /// </param>
+        public virtual ChartLineSeriesBuilder<TModel> Line(Type memberType, string memberName, string categoryMemberName = null, 
+            string noteTextMemberName = null, string errorLowMemberName = null, string errorHighMemberName = null)
         {
             var valueExpr = BuildMemberExpression(memberType, memberName);
             var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
-            var noteTextExpr = noteTextExpression.HasValue() ? BuildMemberExpression(null, noteTextExpression) : null;
             var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;            
+
             var seriesType = typeof(ChartLineSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
             var series = (IChartLineSeries)BuildSeries(seriesType, valueExpr, categoryExpr, noteTextExpr);
 
             series.Member = memberName;
+            series.CategoryMember = categoryMemberName;
+            series.ErrorLowMember = errorLowMemberName;
+            series.ErrorHighMember = errorHighMemberName;
+            series.NoteTextMember = noteTextMemberName;
 
             if (!series.Name.HasValue())
             {
@@ -430,6 +688,37 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="expression">
         /// The expression used to extract the value from the chart model.
         /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the category from the chart model.
+        /// </param>
+        /// <param name="errorLowExpression">
+        /// The expression used to extract the point error low value from the chart model
+        /// </param>
+        /// <param name="errorHighExpression">
+        /// The expression used to extract the point error high value from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartLineSeriesBuilder<TModel> VerticalLine<TValue, TCategory, TErrorLowValue, TErrorHighValue>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, TCategory>> categoryExpression,
+            Expression<Func<TModel, TErrorLowValue>> errorLowExpression,
+            Expression<Func<TModel, TErrorHighValue>> errorHighExpression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var builder = Line(expression, categoryExpression, errorLowExpression, errorHighExpression, noteTextExpression);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines bound vertical line series.
+        /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
         /// <param name="noteTextExpression">
         /// The expression used to extract the note text from the chart model.
         /// </param>
@@ -438,6 +727,33 @@ namespace Kendo.Mvc.UI.Fluent
             Expression<Func<TModel, string>> noteTextExpression = null)
         {
             var builder = Line(expression, noteTextExpression);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }
+
+        /// <summary>
+        /// Defines bound vertical line series.
+        /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
+        /// <param name="errorLowExpression">
+        /// The expression used to extract the point error low value from the chart model
+        /// </param>
+        /// <param name="errorHighExpression">
+        /// The expression used to extract the point error high value from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartLineSeriesBuilder<TModel> VerticalLine<TValue, TErrorLowValue, TErrorHighValue>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, TErrorLowValue>> errorLowExpression,
+            Expression<Func<TModel, TErrorHighValue>> errorHighExpression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var builder = Line(expression, errorLowExpression, errorHighExpression, noteTextExpression);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
 
             return builder;
@@ -455,9 +771,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
-        public virtual ChartLineSeriesBuilder<TModel> VerticalLine(string memberName, string categoryMemberName = null, string noteTextMemberName = null)
+        /// <param name="errorLowMemberName">
+        /// The name of the error low member.
+        /// </param>
+        /// <param name="errorHighMemberName">
+        /// The name of the error high member.
+        /// </param>
+        public virtual ChartLineSeriesBuilder<TModel> VerticalLine(string memberName, string categoryMemberName = null, string noteTextMemberName = null,
+            string errorLowMemberName = null, string errorHighMemberName = null)
         {
-            var builder = Line(memberName, categoryMemberName, noteTextMemberName);
+            var builder = Line(memberName, categoryMemberName, noteTextMemberName, errorLowMemberName, errorHighMemberName);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
 
             return builder;
@@ -478,13 +801,21 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
+        /// <param name="errorLowMemberName">
+        /// The name of the error low member.
+        /// </param>
+        /// <param name="errorHighMemberName">
+        /// The name of the error high member.
+        /// </param>
         public virtual ChartLineSeriesBuilder<TModel> VerticalLine(
             Type memberType,
             string memberName,
             string categoryMemberName = null,
-            string noteTextMemberName = null)
+            string noteTextMemberName = null,
+            string errorLowMemberName = null, 
+            string errorHighMemberName = null)
         {
-            var builder = Line(memberType, memberName, categoryMemberName, noteTextMemberName);
+            var builder = Line(memberType, memberName, categoryMemberName, noteTextMemberName, errorLowMemberName, errorHighMemberName);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
 
             return builder;
@@ -530,6 +861,30 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="expression">
         /// The expression used to extract the value from the chart model.
         /// </param>
+        /// <param name="errorLowExpression">
+        /// The expression used to extract the point error low value from the chart model
+        /// </param>
+        /// <param name="errorHighExpression">
+        /// The expression used to extract the point error high value from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartAreaSeriesBuilder<TModel> Area<TValue, TErrorLowValue, TErrorHighValue>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, TErrorLowValue>> errorLowExpression,
+            Expression<Func<TModel, TErrorHighValue>> errorHighExpression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            return Area<TValue, string, TErrorLowValue, TErrorHighValue>(expression, null, errorLowExpression, errorHighExpression, noteTextExpression);
+        }
+
+        /// <summary>
+        /// Defines bound area series.
+        /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
         /// <param name="categoryExpression">
         /// The expression used to extract the category from the chart model.
         /// </param>
@@ -551,6 +906,39 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines bound area series.
         /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the category from the chart model.
+        /// </param>
+        /// <param name="errorLowExpression">
+        /// The expression used to extract the point error low value from the chart model
+        /// </param>
+        /// <param name="errorHighExpression">
+        /// The expression used to extract the point error high value from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartAreaSeriesBuilder<TModel> Area<TValue, TCategory, TErrorLowValue, TErrorHighValue>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, TCategory>> categoryExpression,
+            Expression<Func<TModel, TErrorLowValue>> errorLowExpression,
+            Expression<Func<TModel, TErrorHighValue>> errorHighExpression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            ChartAreaSeries<TModel, TValue, TCategory> areaSeries = new ChartAreaSeries<TModel, TValue, TCategory, TErrorLowValue, TErrorHighValue>(
+                expression, categoryExpression, errorLowExpression, errorHighExpression, noteTextExpression);
+
+            Container.Series.Add(areaSeries);
+
+            return new ChartAreaSeriesBuilder<TModel>(areaSeries);
+        }
+
+        /// <summary>
+        /// Defines bound area series.
+        /// </summary>
         /// <param name="memberName">
         /// The name of the value member.
         /// </param>
@@ -560,9 +948,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
-        public virtual ChartAreaSeriesBuilder<TModel> Area(string memberName, string categoryMemberName = null, string noteTextMemberName = null)
+        /// <param name="errorLowMemberName">
+        /// The name of the error low member.
+        /// </param>
+        /// <param name="errorHighMemberName">
+        /// The name of the error high member.
+        /// </param>
+        public virtual ChartAreaSeriesBuilder<TModel> Area(string memberName, string categoryMemberName = null, string noteTextMemberName = null,
+            string errorLowMemberName = null, string errorHighMemberName = null)
         {
-            return Area(null, memberName, categoryMemberName, noteTextMemberName);
+            return Area(null, memberName, categoryMemberName, noteTextMemberName, errorLowMemberName, errorHighMemberName);
         }
 
         /// <summary>
@@ -580,16 +975,29 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
-        public virtual ChartAreaSeriesBuilder<TModel> Area(Type memberType, string memberName, string categoryMemberName = null, string noteTextMemberName = null)
+        /// <param name="errorLowMemberName">
+        /// The name of the error low member.
+        /// </param>
+        /// <param name="errorHighMemberName">
+        /// The name of the error high member.
+        /// </param>
+        public virtual ChartAreaSeriesBuilder<TModel> Area(Type memberType, string memberName, string categoryMemberName = null,
+            string noteTextMemberName = null, string errorLowMemberName = null, string errorHighMemberName = null)
         {
             var valueExpr = BuildMemberExpression(memberType, memberName);
             var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
             var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
-            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(null, noteTextMemberName) : null;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;            
+
             var seriesType = typeof(ChartAreaSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
+
             var series = (IChartAreaSeries)BuildSeries(seriesType, valueExpr, categoryExpr, noteTextExpr);
 
             series.Member = memberName;
+            series.CategoryMember = categoryMemberName;
+            series.ErrorLowMember = errorLowMemberName;
+            series.ErrorHighMember = errorHighMemberName;
+            series.NoteTextMember = noteTextMemberName;
 
             if (!series.Name.HasValue())
             {
@@ -645,6 +1053,37 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="expression">
         /// The expression used to extract the value from the chart model.
         /// </param>
+        /// <param name="categoryExpression">
+        /// The expression used to extract the category from the chart model.
+        /// </param>
+        /// <param name="errorLowExpression">
+        /// The expression used to extract the point error low value from the chart model
+        /// </param>
+        /// <param name="errorHighExpression">
+        /// The expression used to extract the point error high value from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartAreaSeriesBuilder<TModel> VerticalArea<TValue, TCategory, TErrorLowValue, TErrorHighValue>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, TCategory>> categoryExpression,
+            Expression<Func<TModel, TErrorLowValue>> errorLowExpression,
+            Expression<Func<TModel, TErrorHighValue>> errorHighExpression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var builder = Area(expression, categoryExpression, errorLowExpression, errorHighExpression, noteTextExpression);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }        
+
+        /// <summary>
+        /// Defines bound vertical area series.
+        /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
         /// <param name="noteTextExpression">
         /// The expression used to extract the note text from the chart model.
         /// </param>
@@ -661,6 +1100,33 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines bound vertical area series.
         /// </summary>
+        /// <param name="expression">
+        /// The expression used to extract the value from the chart model.
+        /// </param>
+        /// <param name="errorLowExpression">
+        /// The expression used to extract the point error low value from the chart model
+        /// </param>
+        /// <param name="errorHighExpression">
+        /// The expression used to extract the point error high value from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model.
+        /// </param>
+        public virtual ChartAreaSeriesBuilder<TModel> VerticalArea<TValue, TErrorLowValue, TErrorHighValue>(
+            Expression<Func<TModel, TValue>> expression,
+            Expression<Func<TModel, TErrorLowValue>> errorLowExpression,
+            Expression<Func<TModel, TErrorHighValue>> errorHighExpression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var builder = Area(expression, errorLowExpression, errorHighExpression, noteTextExpression);
+            builder.Series.Orientation = ChartSeriesOrientation.Vertical;
+
+            return builder;
+        }        
+
+        /// <summary>
+        /// Defines bound vertical area series.
+        /// </summary>
         /// <param name="memberName">
         /// The name of the value member.
         /// </param>
@@ -670,9 +1136,16 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
-        public virtual ChartAreaSeriesBuilder<TModel> VerticalArea(string memberName, string categoryMemberName = null, string noteTextMemberName = null)
+        /// <param name="errorLowMemberName">
+        /// The name of the error low member.
+        /// </param>
+        /// <param name="errorHighMemberName">
+        /// The name of the error high member.
+        /// </param>
+        public virtual ChartAreaSeriesBuilder<TModel> VerticalArea(string memberName, string categoryMemberName = null,
+            string noteTextMemberName = null, string errorLowMemberName = null, string errorHighMemberName = null)
         {
-            var builder = Area(memberName, categoryMemberName, noteTextMemberName);
+            var builder = Area(memberName, categoryMemberName, noteTextMemberName, errorLowMemberName, errorHighMemberName);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
 
             return builder;
@@ -693,13 +1166,21 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
+        /// <param name="errorLowMemberName">
+        /// The name of the error low member.
+        /// </param>
+        /// <param name="errorHighMemberName">
+        /// The name of the error high member.
+        /// </param>
         public virtual ChartAreaSeriesBuilder<TModel> VerticalArea(
             Type memberType,
             string memberName,
             string categoryMemberName = null,
-            string noteTextMemberName = null)
+            string noteTextMemberName = null, 
+            string errorLowMemberName = null, 
+            string errorHighMemberName = null)
         {
-            var builder = Area(memberType, memberName, categoryMemberName, noteTextMemberName);
+            var builder = Area(memberType, memberName, categoryMemberName, noteTextMemberName, errorLowMemberName, errorHighMemberName);
             builder.Series.Orientation = ChartSeriesOrientation.Vertical;
 
             return builder;
@@ -750,6 +1231,93 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines bound scatter series.
         /// </summary>
+        /// <param name="xValueExpression">
+        /// The expression used to extract the X value from the chart model
+        /// </param>
+        /// <param name="yValueExpression">
+        /// The expression used to extract the Y value from the chart model
+        /// </param>
+        /// <param name="errorBarsAxisType">
+        /// The axis type used for the error low and high value
+        /// </param>
+        /// <param name="errorLowValueExpression">
+        /// The expression used to extract the point error low value from the chart model
+        /// </param>
+        /// <param name="errorHighValueExpression">
+        /// The expression used to extract the point error high value from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> Scatter<TXValue, TYValue, TErrorLowValue, TErrorHighValue>(
+            Expression<Func<TModel, TXValue>> xValueExpression,
+            Expression<Func<TModel, TYValue>> yValueExpression,
+            ScatterErrorBarsAxisType errorBarsAxisType,
+            Expression<Func<TModel, TErrorLowValue>> errorLowValueExpression,
+            Expression<Func<TModel, TErrorHighValue>> errorHighValueExpression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            IChartScatterSeries scatterSeries;
+            if (errorBarsAxisType == ScatterErrorBarsAxisType.X)
+            {
+                scatterSeries = new ChartScatterSeries<TModel, TXValue, TYValue, TErrorLowValue, TErrorHighValue, object, object>(
+                    xValueExpression, yValueExpression, errorLowValueExpression, errorHighValueExpression, null, null, noteTextExpression);
+            }
+            else
+            {
+                scatterSeries = new ChartScatterSeries<TModel, TXValue, TYValue, object, object, TErrorLowValue, TErrorHighValue>(
+                    xValueExpression, yValueExpression, null, null, errorLowValueExpression, errorHighValueExpression, noteTextExpression);
+            }
+
+            Container.Series.Add(scatterSeries);
+
+            return new ChartScatterSeriesBuilder<TModel>(scatterSeries);
+        }
+
+        /// <summary>
+        /// Defines bound scatter series.
+        /// </summary>
+        /// <param name="xValueExpression">
+        /// The expression used to extract the X value from the chart model
+        /// </param>
+        /// <param name="yValueExpression">
+        /// The expression used to extract the Y value from the chart model
+        /// </param>
+        /// <param name="xErrorLowValueExpression">
+        /// The expression used to extract the point x error low value from the chart model
+        /// </param>
+        /// <param name="xErrorHighValueExpression">
+        /// The expression used to extract the point x error high value from the chart model
+        /// </param>
+        /// <param name="yErrorLowValueExpression">
+        /// The expression used to extract the point y error low value from the chart model
+        /// </param>
+        /// <param name="yErrorHighValueExpression">
+        /// The expression used to extract the point y error high value from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the note text from the chart model
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> Scatter<TXValue, TYValue, TXErrorLowValue, TXErrorHighValue, TYErrorLowValue, TYErrorHighValue>(
+            Expression<Func<TModel, TXValue>> xValueExpression,
+            Expression<Func<TModel, TYValue>> yValueExpression,
+            Expression<Func<TModel, TXErrorLowValue>> xErrorLowValueExpression,
+            Expression<Func<TModel, TXErrorHighValue>> xErrorHighValueExpression,
+            Expression<Func<TModel, TYErrorLowValue>> yErrorLowValueExpression,
+            Expression<Func<TModel, TYErrorHighValue>> yErrorHighValueExpression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var scatterSeries = new ChartScatterSeries<TModel, TXValue, TYValue, TXErrorLowValue, TXErrorHighValue, TYErrorLowValue, TYErrorHighValue>(
+                xValueExpression, yValueExpression, xErrorLowValueExpression, xErrorHighValueExpression, yErrorLowValueExpression, yErrorHighValueExpression, noteTextExpression);
+
+            Container.Series.Add(scatterSeries);
+
+            return new ChartScatterSeriesBuilder<TModel>(scatterSeries);
+        }
+
+        /// <summary>
+        /// Defines bound scatter series.
+        /// </summary>
         /// <param name="xMemberName">
         /// The name of the X value member.
         /// </param>
@@ -759,9 +1327,23 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
-        public virtual ChartScatterSeriesBuilder<TModel> Scatter(string xMemberName, string yMemberName, string noteTextMemberName = null)
+        /// <param name="xErrorLowMemberName">
+        /// The name of the x axis error low member.
+        /// </param>
+        /// <param name="xErrorHighMemberName">
+        /// The name of the x axis error high member.
+        /// </param>
+        /// <param name="yErrorLowMemberName">
+        /// The name of the y axis error low member.
+        /// </param>
+        /// <param name="yErrorHighMemberName">
+        /// The name of the y axis error high member.
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> Scatter(string xMemberName, string yMemberName, string noteTextMemberName = null,
+            string xErrorLowMemberName = null, string xErrorHighMemberName = null, string yErrorLowMemberName = null, string yErrorHighMemberName = null)
         {
-            return Scatter(null, xMemberName, yMemberName, noteTextMemberName);
+            return Scatter(null, xMemberName, yMemberName, noteTextMemberName, xErrorLowMemberName, xErrorHighMemberName, 
+                yErrorLowMemberName, yErrorHighMemberName);
         }
 
         /// <summary>
@@ -779,17 +1361,34 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
         /// </param>
-        public virtual ChartScatterSeriesBuilder<TModel> Scatter(Type memberType, string xMemberName, string yMemberName, string noteTextMemberName = null)
+        /// <param name="xErrorLowMemberName">
+        /// The name of the x axis error low member.
+        /// </param>
+        /// <param name="xErrorHighMemberName">
+        /// The name of the x axis error high member.
+        /// </param>
+        /// <param name="yErrorLowMemberName">
+        /// The name of the y axis error low member.
+        /// </param>
+        /// <param name="yErrorHighMemberName">
+        /// The name of the y axis error high member.
+        /// </param>
+        public virtual ChartScatterSeriesBuilder<TModel> Scatter(Type memberType, string xMemberName, string yMemberName, string noteTextMemberName = null,
+            string xErrorLowMemberName = null, string xErrorHighMemberName = null, string yErrorLowMemberName = null, string yErrorHighMemberName = null)
         {
             var expressionX = BuildMemberExpression(memberType, xMemberName);
             var expressionY = BuildMemberExpression(memberType, yMemberName);
-            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(null, noteTextMemberName) : null;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
 
             var seriesType = typeof(ChartScatterSeries<,,>).MakeGenericType(typeof(TModel), expressionX.Body.Type, expressionY.Body.Type);
             var series = (IChartScatterSeries)BuildSeries(seriesType, expressionX, expressionY, noteTextExpr);
 
             series.XMember = xMemberName;
             series.YMember = yMemberName;
+            series.XErrorLowMember = xErrorLowMemberName;
+            series.XErrorHighMember = xErrorHighMemberName;
+            series.YErrorLowMember = yErrorLowMemberName;
+            series.YErrorHighMember = yErrorHighMemberName;
             series.NoteTextMember = noteTextMemberName;
 
             if (!series.Name.HasValue())
@@ -844,6 +1443,93 @@ namespace Kendo.Mvc.UI.Fluent
         /// <summary>
         /// Defines bound scatter line series.
         /// </summary>
+        /// <param name="xValueExpression">
+        /// The expression used to extract the X value from the chart model
+        /// </param>
+        /// <param name="yValueExpression">
+        /// The expression used to extract the Y value from the chart model
+        /// </param>
+        /// <param name="errorBarsAxisType">
+        /// The axis type used for the error low and high value
+        /// </param>
+        /// <param name="errorLowValueExpression">
+        /// The expression used to extract the point error low value from the chart model
+        /// </param>
+        /// <param name="errorHighValueExpression">
+        /// The expression used to extract the point error high value from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the Y value from the chart model
+        /// </param>
+        public virtual ChartScatterLineSeriesBuilder<TModel> ScatterLine<TXValue, TYValue, TErrorLowValue, TErrorHighValue>(
+            Expression<Func<TModel, TXValue>> xValueExpression,
+            Expression<Func<TModel, TYValue>> yValueExpression,
+            ScatterErrorBarsAxisType errorBarsType,
+            Expression<Func<TModel, TErrorLowValue>> errorLowValueExpression,
+            Expression<Func<TModel, TErrorHighValue>> errorHighValueExpression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            IChartScatterLineSeries scatterSeries;
+            if (errorBarsType == ScatterErrorBarsAxisType.X)
+            {
+                scatterSeries = new ChartScatterLineSeries<TModel, TXValue, TYValue, TErrorLowValue, TErrorHighValue, object, object>(
+                    xValueExpression, yValueExpression, errorLowValueExpression, errorHighValueExpression, null, null, noteTextExpression);
+            }
+            else
+            {
+                scatterSeries = new ChartScatterLineSeries<TModel, TXValue, TYValue, object, object, TErrorLowValue, TErrorHighValue>(
+                    xValueExpression, yValueExpression, null, null, errorLowValueExpression, errorHighValueExpression, noteTextExpression);
+            }
+
+            Container.Series.Add(scatterSeries);
+
+            return new ChartScatterLineSeriesBuilder<TModel>(scatterSeries);
+        }
+
+        /// <summary>
+        /// Defines bound scatter line series.
+        /// </summary>
+        /// <param name="xValueExpression">
+        /// The expression used to extract the X value from the chart model
+        /// </param>
+        /// <param name="yValueExpression">
+        /// The expression used to extract the Y value from the chart model
+        /// </param>
+        /// <param name="xErrorLowValueExpression">
+        /// The expression used to extract the point x error low value from the chart model
+        /// </param>
+        /// <param name="xErrorHighValueExpression">
+        /// The expression used to extract the point x error high value from the chart model
+        /// </param>
+        /// <param name="yErrorLowValueExpression">
+        /// The expression used to extract the point y error low value from the chart model
+        /// </param>
+        /// <param name="yErrorHighValueExpression">
+        /// The expression used to extract the point y error high value from the chart model
+        /// </param>
+        /// <param name="noteTextExpression">
+        /// The expression used to extract the Y value from the chart model
+        /// </param>
+        public virtual ChartScatterLineSeriesBuilder<TModel> ScatterLine<TXValue, TYValue, TXErrorLowValue, TXErrorHighValue, TYErrorLowValue, TYErrorHighValue>(
+            Expression<Func<TModel, TXValue>> xValueExpression,
+            Expression<Func<TModel, TYValue>> yValueExpression,
+            Expression<Func<TModel, TXErrorLowValue>> xErrorLowValueExpression,
+            Expression<Func<TModel, TXErrorHighValue>> xErrorHighValueExpression,
+            Expression<Func<TModel, TYErrorLowValue>> yErrorLowValueExpression,
+            Expression<Func<TModel, TYErrorHighValue>> yErrorHighValueExpression,
+            Expression<Func<TModel, string>> noteTextExpression = null)
+        {
+            var scatterSeries = new ChartScatterLineSeries<TModel, TXValue, TYValue, TXErrorLowValue, TXErrorHighValue, TYErrorLowValue, TYErrorHighValue>(
+                xValueExpression, yValueExpression, xErrorLowValueExpression, xErrorHighValueExpression, yErrorLowValueExpression, yErrorHighValueExpression, noteTextExpression);
+
+            Container.Series.Add(scatterSeries);
+
+            return new ChartScatterLineSeriesBuilder<TModel>(scatterSeries);
+        }        
+
+        /// <summary>
+        /// Defines bound scatter line series.
+        /// </summary>
         /// <param name="xMemberName">
         /// The name of the X value member.
         /// </param>
@@ -853,9 +1539,23 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextExpression">
         /// The name of the Y value member.
         /// </param>
-        public virtual ChartScatterLineSeriesBuilder<TModel> ScatterLine(string xMemberName, string yMemberName, string noteTextExpression = null)
+        /// <param name="xErrorLowMemberName">
+        /// The name of the x axis error low member.
+        /// </param>
+        /// <param name="xErrorHighMemberName">
+        /// The name of the x axis error high member.
+        /// </param>
+        /// <param name="yErrorLowMemberName">
+        /// The name of the y axis error low member.
+        /// </param>
+        /// <param name="yErrorHighMemberName">
+        /// The name of the y axis error high member.
+        /// </param>
+        public virtual ChartScatterLineSeriesBuilder<TModel> ScatterLine(string xMemberName, string yMemberName, string noteTextExpression = null,
+            string xErrorLowMemberName = null, string xErrorHighMemberName = null, string yErrorLowMemberName = null, string yErrorHighMemberName = null)
         {
-            return ScatterLine(null, xMemberName, yMemberName, noteTextExpression);
+            return ScatterLine(null, xMemberName, yMemberName, noteTextExpression, xErrorLowMemberName, xErrorHighMemberName,
+                yErrorLowMemberName, yErrorHighMemberName);
         }
 
         /// <summary>
@@ -873,17 +1573,34 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="noteTextExpression">
         /// The name of the Y value member.
         /// </param>
-        public virtual ChartScatterLineSeriesBuilder<TModel> ScatterLine(Type memberType, string xMemberName, string yMemberName, string noteTextMemberName = null)
+        /// <param name="xErrorLowMemberName">
+        /// The name of the x axis error low member.
+        /// </param>
+        /// <param name="xErrorHighMemberName">
+        /// The name of the x axis error high member.
+        /// </param>
+        /// <param name="yErrorLowMemberName">
+        /// The name of the y axis error low member.
+        /// </param>
+        /// <param name="yErrorHighMemberName">
+        /// The name of the y axis error high member.
+        /// </param>
+        public virtual ChartScatterLineSeriesBuilder<TModel> ScatterLine(Type memberType, string xMemberName, string yMemberName, string noteTextMemberName = null,
+            string xErrorLowMemberName = null, string xErrorHighMemberName = null, string yErrorLowMemberName = null, string yErrorHighMemberName = null)
         {
             var expressionX = BuildMemberExpression(memberType, xMemberName);
             var expressionY = BuildMemberExpression(memberType, yMemberName);
-            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(null, noteTextMemberName) : null;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
 
             var seriesType = typeof(ChartScatterLineSeries<,,>).MakeGenericType(typeof(TModel), expressionX.Body.Type, expressionY.Body.Type);
             var series = (IChartScatterLineSeries)BuildSeries(seriesType, expressionX, expressionY, noteTextExpr);
 
             series.XMember = xMemberName;
             series.YMember = yMemberName;
+            series.XErrorLowMember = xErrorLowMemberName;
+            series.XErrorHighMember = xErrorHighMemberName;
+            series.YErrorLowMember = yErrorLowMemberName;
+            series.YErrorHighMember = yErrorHighMemberName;
             series.NoteTextMember = noteTextMemberName;
 
             if (!series.Name.HasValue())
@@ -1109,9 +1826,6 @@ namespace Kendo.Mvc.UI.Fluent
             return new ChartPieSeriesBuilder<TModel>(pieSeries);
         }
 
-
-        //****************************************************************************************************************************************
-
         /// <summary>
         /// Defines bound funnel series.
         /// </summary>
@@ -1204,9 +1918,7 @@ namespace Kendo.Mvc.UI.Fluent
             Container.Series.Add(funnelSeries);
 
             return new ChartFunnelSeriesBuilder<TModel>(funnelSeries);
-        }
-
-        //****************************************************************************************************************************************
+        }        
 
         /// <summary>
         /// Defines bound Donut series.
@@ -1386,7 +2098,7 @@ namespace Kendo.Mvc.UI.Fluent
             var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(memberType, colorMemberName) : null;
             var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(memberType, categoryMemberName) : null;
             var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
-            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(memberType, noteTextMemberName) : null;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
 
             var seriesType = typeof(ChartOHLCSeries<,,>).MakeGenericType(
                 typeof(TModel), openExpr.Body.Type, categoryType
@@ -1502,7 +2214,7 @@ namespace Kendo.Mvc.UI.Fluent
             var downColorExpr = downColorMemberName.HasValue() ? BuildMemberExpression(memberType, downColorMemberName) : null;
             var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(memberType, categoryMemberName) : null;
             var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
-            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(memberType, noteTextMemberName) : null;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
 
             var seriesType = typeof(ChartCandlestickSeries<,,>).MakeGenericType(
                 typeof(TModel), openExpr.Body.Type, categoryType
@@ -1880,7 +2592,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             var valueExpr = BuildMemberExpression(memberType, valueMemberName);
             var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
-            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(null, noteTextMemberName) : null;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
             var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
             var seriesType = typeof(ChartRadarAreaSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
             var series = (IChartRadarAreaSeries)BuildSeries(seriesType, valueExpr, categoryExpr, noteTextExpr);
@@ -2133,7 +2845,7 @@ namespace Kendo.Mvc.UI.Fluent
             var valueExpr = BuildMemberExpression(memberType, valueMemberName);
             var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(null, categoryMemberName) : null;
             var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
-            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(null, noteTextMemberName) : null;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
             var seriesType = typeof(ChartRadarLineSeries<,,>).MakeGenericType(typeof(TModel), valueExpr.Body.Type, categoryType);
             var series = (IChartRadarLineSeries)BuildSeries(seriesType, valueExpr, categoryExpr, noteTextExpr);
 
@@ -2224,7 +2936,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             var expressionX = BuildMemberExpression(memberType, xMemberName);
             var expressionY = BuildMemberExpression(memberType, yMemberName);
-            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(null, noteTextMemberName) : null;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
 
             var seriesType = typeof(ChartPolarAreaSeries<,,>).MakeGenericType(typeof(TModel), expressionX.Body.Type, expressionY.Body.Type);
             var series = (IChartPolarAreaSeries)BuildSeries(seriesType, expressionX, expressionY, noteTextExpr);
@@ -2315,7 +3027,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             var expressionX = BuildMemberExpression(memberType, xMemberName);
             var expressionY = BuildMemberExpression(memberType, yMemberName);
-            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(null, noteTextMemberName) : null;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
 
             var seriesType = typeof(ChartPolarLineSeries<,,>).MakeGenericType(typeof(TModel), expressionX.Body.Type, expressionY.Body.Type);
             var series = (IChartPolarLineSeries)BuildSeries(seriesType, expressionX, expressionY, noteTextExpr);
@@ -2409,7 +3121,7 @@ namespace Kendo.Mvc.UI.Fluent
         {
             var expressionX = BuildMemberExpression(memberType, xMemberName);
             var expressionY = BuildMemberExpression(memberType, yMemberName);
-            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(null, noteTextMemberName) : null;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
 
             var seriesType = typeof(ChartPolarScatterSeries<,,>).MakeGenericType(typeof(TModel), expressionX.Body.Type, expressionY.Body.Type);
             var series = (IChartPolarScatterSeries)BuildSeries(seriesType, expressionX, expressionY, noteTextExpr);
@@ -2534,7 +3246,7 @@ namespace Kendo.Mvc.UI.Fluent
             var colorExpr = colorMemberName.HasValue() ? BuildMemberExpression(memberType, colorMemberName) : null;
             var categoryExpr = categoryMemberName.HasValue() ? BuildMemberExpression(memberType, categoryMemberName) : null;
             var categoryType = categoryExpr == null ? typeof(string) : categoryExpr.Body.Type;
-            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(memberType, noteTextMemberName) : null;
+            var noteTextExpr = noteTextMemberName.HasValue() ? BuildMemberExpression(typeof(string), noteTextMemberName) : null;
 
             var seriesType = typeof(ChartBoxPlotSeries<,,>).MakeGenericType(
                 typeof(TModel), lowerExpr.Body.Type, categoryType

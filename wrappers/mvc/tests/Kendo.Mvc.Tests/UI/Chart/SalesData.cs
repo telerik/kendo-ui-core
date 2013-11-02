@@ -15,6 +15,10 @@ namespace Kendo.Mvc.UI.Tests
 
         public decimal RepSales { get; set; }
 
+        public decimal RepSalesLow { get; set; }
+
+        public decimal RepSalesHigh { get; set; }
+
         public bool Explode { get; set; }
 
         public bool VisibleInLegend { get; set; }
@@ -37,6 +41,8 @@ namespace Kendo.Mvc.UI.Tests
                     DateString = "Aug 2010",
                     TotalSales = 15458,
                     RepSales = 2015,
+                    RepSalesLow = 2000,
+                    RepSalesHigh = 2100,
                     Explode = true,
                     VisibleInLegend = true,
                     Color = "red",
@@ -52,6 +58,8 @@ namespace Kendo.Mvc.UI.Tests
                     DateString = "Sept 2010",
                     TotalSales = 26598,
                     RepSales = 6003,
+                    RepSalesLow = 6000,
+                    RepSalesHigh = 6100,
                     Explode = false,
                     VisibleInLegend = true,
                     NoteText = "NoteText"

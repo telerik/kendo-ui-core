@@ -204,5 +204,79 @@ namespace Kendo.Mvc.UI.Tests
             series.YAxis = string.Empty;
             GetJson(series).ContainsKey("yAxis").ShouldBeFalse();
         }
+
+        [Fact]
+        public void Serializes_ErrorBars()
+        {
+            series.ErrorBars = new ScatterErrorBars();
+            series.ErrorBars.XValue = 1;
+            GetJson(series).ContainsKey("errorBars").ShouldBeTrue();
+        }
+
+        [Fact]
+        public void Should_not_serialize_default_ErrorBars()
+        {
+            GetJson(series).ContainsKey("errorBars").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_x_error_low_and_high_name()
+        {
+            series.XErrorLowMember = "low";
+            series.XErrorHighMember = "high";
+            GetJson(series).ContainsKey("xErrorLowField").ShouldBeTrue();
+            GetJson(series).ContainsKey("xErrorHighField").ShouldBeTrue();
+        }
+
+        [Fact]
+        public void Should_not_serialize_only_x_error_low_name()
+        {
+            series.XErrorLowMember = "low";
+            GetJson(series).ContainsKey("xErrorLowField").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_not_serialize_only_x_error_high_name()
+        {
+            series.XErrorHighMember = "high";
+            GetJson(series).ContainsKey("xErrorHighField").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_not_serialize_default_x_error_low_and_high_name()
+        {
+            GetJson(series).ContainsKey("xErrorLowField").ShouldBeFalse();
+            GetJson(series).ContainsKey("xErrorHighField").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Serializes_y_error_low_and_high_name()
+        {
+            series.YErrorLowMember = "low";
+            series.YErrorHighMember = "high";
+            GetJson(series).ContainsKey("yErrorLowField").ShouldBeTrue();
+            GetJson(series).ContainsKey("yErrorHighField").ShouldBeTrue();
+        }
+
+        [Fact]
+        public void Should_not_serialize_only_y_error_low_name()
+        {
+            series.YErrorLowMember = "low";
+            GetJson(series).ContainsKey("yErrorLowField").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_not_serialize_only_y_error_high_name()
+        {
+            series.YErrorHighMember = "high";
+            GetJson(series).ContainsKey("yErrorHighField").ShouldBeFalse();
+        }
+
+        [Fact]
+        public void Should_not_serialize_default_y_error_low_and_high_name()
+        {
+            GetJson(series).ContainsKey("yErrorLowField").ShouldBeFalse();
+            GetJson(series).ContainsKey("yErrorHighField").ShouldBeFalse();
+        }
     }
 }

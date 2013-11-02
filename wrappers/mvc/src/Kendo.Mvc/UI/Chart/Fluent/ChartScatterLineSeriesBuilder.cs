@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///            .Name("Chart")
         ///            .Series(series => series
         ///                .ScatterLine(s => s.x, s => s.y)
-        ///                .Style(ChartLineStyle.Smooth);
+        ///                .Style(ChartScatterLineStyle.Smooth);
         ///            )
         /// %&gt;
         /// </code>

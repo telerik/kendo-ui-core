@@ -384,12 +384,14 @@
     <Compile Include="UI\Chart\Enums\ChartPolarAreaStyle.cs" />
     <Compile Include="UI\Chart\Enums\ChartPolarLineStyle.cs" />
     <Compile Include="UI\Chart\ChartAreaLine.cs" />
+    <Compile Include="UI\Chart\Enums\ScatterErrorBarsAxisType.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAreaLineBuilder.cs" />
     <Compile Include="UI\Chart\Series\ChartAreaSeries.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAreaSeriesBuilder.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAreaSeriesSerializer.cs" />
     <Compile Include="UI\Chart\Series\ChartRadarAreaSeries.cs" />
     <Compile Include="UI\Chart\Serialization\ChartRadarAreaSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Series\ICategoricalErrorBarsSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartAreaSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartAreaSeriesBase.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAreaSeriesBuilderBase.cs" />
@@ -446,6 +448,7 @@
     <Compile Include="UI\Chart\Series\IChartPolarLineSeries.cs" />
     <Compile Include="UI\Chart\Series\IChartPolarScatterSeries.cs" />
     <Compile Include="UI\Chart\Series\IPolarAreaSeries.cs" />
+    <Compile Include="UI\Chart\Series\IScatterErrorBarsSeries.cs" />
     <Compile Include="UI\Chart\Series\IScatterLineSeries.cs" />
     <Compile Include="UI\Chart\Series\IScatterSeries.cs" />
     <Compile Include="UI\Chart\Series\ChartPolarAreaSeries.cs" />

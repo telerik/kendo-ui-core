@@ -1,21 +1,12 @@
 namespace Kendo.Mvc.UI
 {
-    public interface IChartAreaSeries : IAreaSeries
+    public interface IChartAreaSeries : IAreaSeries, ICategoricalErrorBarsSeries
     {
 
         /// <summary>
         /// The area chart line configuration.
         /// </summary>
         ChartAreaLine Line
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the series error bars options
-        /// </summary>
-        CategoricalErrorBars ErrorBars
         {
             get;
             set;
