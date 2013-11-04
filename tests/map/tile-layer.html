@@ -47,6 +47,17 @@
             var tile,
                 pool;
 
+            function addItemsToPool(count) {
+                count = count || 15;
+                for (var i = 0; i < count; i++) {
+                    pool.get({ x: 5, y: 5 },{
+                        index: new Point(i, i),
+                        point: new Point(i, i),
+                        offset: new Point(i, i)
+                    });
+                }
+            }
+
             // ------------------------------------------------------------
             module("Tile layer / Pool", {
                 setup: function() {
@@ -56,15 +67,32 @@
 
             test("should not have more then 10 items", function() {
                 pool.options.maxSize = 10;
-                for (var i = 0; i < 15; i++) {
-                    pool.get({ x: 5, y: 5 },{
-                        index: new Point(i, i),
-                        point: new Point(i, i),
-                        offset: new Point(i, i)
-                    });
-                }
-
+                addItemsToPool();
                 ok(pool._items.length === 10);
+            });
+
+            test("empty should remove the items", function() {
+                addItemsToPool();
+                pool.empty();
+                ok(pool._items.length === 0);
+            });
+
+            test("should reuse the items", function() {
+                pool.options.maxSize = 10;
+                addItemsToPool(11);
+                ok(pool._items[0].index.x === 10);
+                ok(pool._items[0].index.y === 10);
+            });
+
+            test("_tileId should return correct id", function() {
+                var id = pool._tileId({
+                    index: {
+                        x: 0,
+                        y: 0
+                    },
+                    zoom: 0
+                })
+                ok(id === "x:0y:0zoom:0");
             });
 
         })();
@@ -161,13 +189,13 @@
 
             test("should render offset", function() {
                 tile.load({
-                    offset: {
-                        x: 20,
-                        y: 10
-                    },
                     index: {
                         x: 1,
                         y: 1
+                    },
+                    offset: {
+                        x: 20,
+                        y: 10
                     }
                 });
 
