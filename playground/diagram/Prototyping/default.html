@@ -270,8 +270,8 @@
 </body>
 <script type="text/x-kendo-tmpl" id="template">
     <div class="shape">
-        <svg>
-        <g transform="scale(0.5)" >
+        <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 100 100" width="100" height="100">
+        <g>
         <title>#:options.name#</title>
             #= new XMLSerializer().serializeToString(kendo.diagram.Shape.createShapeVisual(options).native) #
             </g>

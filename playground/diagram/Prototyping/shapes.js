@@ -40,8 +40,7 @@ var shapesSource = [
                 var p2 = new kendo.diagram.Path({
                     data: "M0.0063586687,0 L100.09337,0.83333409 L48.91906,86.91008 L48.146362,86.451004 C19.281487,68.825462 0,36.928093 0,0.50500053 z",
                     background: "Blue",
-                    width: 100,
-                    y: 100
+                    y: 99
                 });
                 g.append(p);
                 g.append(p1);
