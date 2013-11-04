@@ -50,6 +50,7 @@ TEMPLATE
                 <dt>Company:</dt><dd>#: CompanyName #</dd>
             </dl>
 TEMPLATE
+            )
              ->valueTemplate(<<<TEMPLATE
             <img class="selected-value" src="../../content/web/Customers/#= CustomerID #.jpg" alt="#= CustomerID #" />
             <span>#:data.ContactName#</span>
