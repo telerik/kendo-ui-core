@@ -1,6 +1,6 @@
 ﻿
         <div id="example" class="k-content">
-            <input type="file" name="files" id="upload" />
+            <input type="file" name="files" id="files" />
 
             <script id="fileTemplate" type="text/x-kendo-template">
                 <span class='k-progress'></span>
@@ -14,7 +14,7 @@
 
             <script>
                 $(document).ready(function () {
-                    $("#upload").kendoUpload({
+                    $("#files").kendoUpload({
                         multiple: true,
                         async: {
                             saveUrl: "save",
