@@ -163,15 +163,18 @@
         _loadGeometryTo: function(container, geometry, dataItem) {
             var coords = geometry.coordinates;
             var i;
+            var path;
 
             switch(geometry.type) {
                 case "LineString":
-                    this._loadPolygon(container, [coords], dataItem);
+                    path = this._loadPolygon(container, [coords], dataItem);
+                    path.options.fill = null;
                     break;
 
                 case "MultiLineString":
                     for (i = 0; i < coords.length; i++) {
-                        this._loadPolygon(container, [coords[i]], dataItem);
+                        path = this._loadPolygon(container, [coords[i]], dataItem);
+                        path.options.fill = null;
                     }
                     break;
 
@@ -194,12 +197,13 @@
             if (!this._shapeCreated(shape)) {
                 container.append(shape);
             }
+
+            return shape;
         },
 
-        _buildPolygon: function(rings, style) {
-            style = style || this.style;
-            var path = rings.length > 1 ?
-                new d.MultiPath(style) : new d.Path(style);
+        _buildPolygon: function(rings) {
+            var type = rings.length > 1 ? d.MultiPath : d.Path;
+            var path = new type(this.style);
 
             for (var i = 0; i < rings.length; i++) {
                 for (var j = 0; j < rings[i].length; j++) {

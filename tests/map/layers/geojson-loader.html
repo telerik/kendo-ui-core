@@ -37,6 +37,9 @@
         };
 
         var style = {
+            fill: {
+                color: "red"
+            },
             stroke: {
                 color: "black"
             }
@@ -61,6 +64,10 @@
 
             test("parsers to path", function() {
                 ok(result instanceof d.Path);
+            });
+
+            test("does not set fill", function() {
+                equal(result.options.fill, null);
             });
         })();
 
