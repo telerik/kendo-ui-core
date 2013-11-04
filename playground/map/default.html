@@ -20,14 +20,32 @@
         <script src="../../src/map/crs.js"></script>
         <script src="../../src/map/layers/tile.js"></script>
         <script src="../../src/map/main.js"></script>
-        <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.css">
+        <script src="proj4.js"></script>
+        <style>
+            .k-layer {
+                position: absolute;
+            }
+
+            img {
+                user-select: none;
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+            }
+
+            #map .km-scroll-wrapper {
+                position: relative;
+                width: 100%;
+                height: 100%;
+            }
+        </style>
     </head>
     <body>
         <div id="map" style="width: 800px; height: 600px;"></div>
         <script>
             $("#map").kendoMap({
                 center: [42.4482453, 27.4157791],
-                zoom: 2,
+                zoom: 4,
                 layers: [{
                     type: "tile",
                     urlTemplate: "http://tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
@@ -37,10 +55,7 @@
                     position: [51.5, -0.09],
                     text: "Marker with popup",
                     open: true // ?
-                }],
-                click: function(e) {
-                    console.log(e.location.toString());
-                }
+                }]
             });
         </script>
     </body>

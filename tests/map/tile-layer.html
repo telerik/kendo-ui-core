@@ -59,8 +59,8 @@
                 for (var i = 0; i < 15; i++) {
                     pool.get({ x: 5, y: 5 },{
                         index: new Point(i, i),
-                        screenPoint: new Point(i, i),
-                        point: new Point(i, i)
+                        point: new Point(i, i),
+                        offset: new Point(i, i)
                     });
                 }
 
@@ -73,14 +73,14 @@
             // value or initial value
             options = options || {};
             options.index = options.index || { x: 0, y: 0 };
+            options.offset = options.offset || { x: 0, y: 0 };
             options.point = options.point || { x: 0, y: 0 };
-            options.screenPoint = options.screenPoint || { x: 0, y: 0 };
 
             return new ImageTile({
                 url: options.url || "",
                 index: new Point(options.index.x, options.index.y),
+                offset: new Point(options.offset.x, options.offset.y),
                 point: new Point(options.point.x, options.point.y),
-                screenPoint: new Point(options.screenPoint.x, options.screenPoint.y),
                 zoom: options.zoom || 1
             });
         }
@@ -89,7 +89,7 @@
             var tile;
 
             // ------------------------------------------------------------
-            module("Tile layer / TileImage");
+            module("Tile layer / ImageTile");
 
             test("should render url", function() {
                 tile = createImageTile({
@@ -101,7 +101,7 @@
 
             test("should render offset", function() {
                 tile = createImageTile({
-                    point: {
+                    offset: {
                         x: 20,
                         y: 10
                     }
@@ -129,14 +129,6 @@
                 ok(!tile.visible);
             });
 
-            test("clear should hide set visible false and hide the element", function() {
-                tile = createImageTile();
-                tile.visible = true;
-                tile.clear()
-
-                ok(tile.element[0].style.visibility === "hidden");
-            });
-
             test("destroy should remove the element", function() {
                 tile = createImageTile();
                 tile.destroy();
@@ -145,20 +137,20 @@
             });
 
             // ------------------------------------------------------------
-            module("Tile layer / TileImage/ Update", {
+            module("Tile layer / ImageTile/ Update", {
                 setup: function() {
                     tile = createImageTile();
                 }
             });
 
             test("should render url", function() {
-                tile.update({
+                tile.load({
                     url: "url",
                     index: {
                         x: 1,
                         y: 1
                     },
-                    point: {
+                    offset: {
                         x: 20,
                         y: 10
                     }
@@ -168,8 +160,8 @@
             });
 
             test("should render offset", function() {
-                tile.update({
-                    point: {
+                tile.load({
+                    offset: {
                         x: 20,
                         y: 10
                     },
@@ -184,12 +176,12 @@
             });
 
             test("should have id", function() {
-                tile.update({
+                tile.load({
                     index: {
                         x: 1,
                         y: 1
                     },
-                    point: {
+                    offset: {
                         x: 1,
                         y: 1
                     },
@@ -200,12 +192,12 @@
             });
 
             test("should set visible to true", function() {
-                tile.update({
+                tile.load({
                     index: {
                         x: 1,
                         y: 1
                     },
-                    point: {
+                    offset: {
                         x: 1,
                         y: 1
                     }

@@ -47,12 +47,8 @@
             }
         },
 
-        options: {
-            subdomains: ["a", "b", "c"]
-        },
-
         _loadView: function() {
-            this._view = new TileView(this.element, map, this.options.submodule);
+            this._view = new TileView(this.element, this.map, this.options);
             this._updateView();
         },
 
@@ -68,8 +64,9 @@
         },
 
         reset: function(e) {
+            this._updateView();
             this._view.clear();
-            this._view.render();
+            this._view.reset();
         },
 
         _template: kendo.template(
@@ -85,49 +82,41 @@
                 timestamp = layer._pan.timestamp;
 
             if (!timestamp || now - timestamp > 100) {
-                this._view.render();
+                this._render();
                 layer._pan.timestamp = now;
             }
         },
 
         _render: function() {
+            this._updateView();
             this._view.render();
         }
     });
 
     var TileView = Class.extend({
         init: function(element, locator, options) {
-            this.pool = new TilePool();
+            this.element = element;
             this.locator = locator;
+            this._initOptions(options);
+
+            this.pool = new TilePool();
         },
 
         options: {
-            tileSize: 256
+            tileSize: 256,
+            subdomains: ["a", "b", "c"]
         },
 
-        // remove the getter
         center: function(center) {
-            if (center) {
-                this.center = center;
-            } else {
-                return this.center;
-            }
+            this._center = center;
         },
 
         extent: function(extent) {
-            if (extent) {
-                this.extent = extent;
-            } else {
-                return this.extent;
-            }
+            this._extent = extent;
         },
 
         zoom: function(zoom) {
-            if (zoom) {
-                this.zoom = zoom;
-            } else {
-                return this.zoom;
-            }
+            this._zoom = zoom;
         },
 
         pointToTileIndex: function(point) {
@@ -137,24 +126,28 @@
             );
         },
 
+        clear: function() {
+            this.pool.empty();
+        },
+
         createTile: function(options) {
-            return this.pool.get(this.center, options);
+            return this.pool.get(this.locator.locationToLayer(this._center), options);
         },
 
         tileCount: function() {
             var size = this.size(),
-                firstTileIndex = this.getTileIndex(this.extent.nw),
-                screenPoint = layer._indexToScreenPoint(firstTileIndex);
+                firstTileIndex = this.pointToTileIndex(this._extent.nw),
+                point = this.indexToPoint(firstTileIndex);
 
             return {
-                x: math.ceil((math.abs(screenPoint.x) + size.width) / this.options.tileSize),
-                y: math.ceil((math.abs(screenPoint.y) + size.height) / this.options.tileSize)
+                x: math.ceil((math.abs(point.x) + size.width) / this.options.tileSize),
+                y: math.ceil((math.abs(point.y) + size.height) / this.options.tileSize)
             };
         },
 
         size: function() {
-            var nw = this.locator.locationToLayer(this.extent.nw),
-                se = this.locator.locationToLayer(this.extent.se),
+            var nw = this.locator.locationToLayer(this._extent.nw),
+                se = this.locator.locationToLayer(this._extent.se),
                 diff = se.subtract(nw);
 
             return {
@@ -168,8 +161,7 @@
 
             return new Point(
                 index.x * this.options.tileSize + offset.x,
-                index.y * this.options.tileSize + offset.y)
-            };
+                index.y * this.options.tileSize + offset.y);
         },
 
         subdomainText: function() {
@@ -178,25 +170,20 @@
             return subdomains[this.subdomainIndex++ % subdomains.length];
         },
 
-        clear: function() {
-            // rename destroy to empty
-            this.pool.destroy();
-        },
-
         destroy: function() {
             this.element.empty();
-            this.pool.destroy();
-        }
+            this.pool.empty();
+        },
 
         reset: function() {
             this.subdomainIndex = 0;
-            this._basePoint = this.locator.locationToLayer(this.extent.nw);
-            this.load();
+            this._basePoint = this.locator.locationToLayer(this._extent.nw);
+            this.render();
         },
 
         render: function() {
             var urlTemplate = template(this.options.urlTemplate),
-                nwToPoint = this.locator.locationToLayer(this.extent.nw);
+                nwToPoint = this.locator.locationToLayer(this._extent.nw);
 
             var firstTileIndex = this.pointToTileIndex(nwToPoint);
             size = this.tileCount();
@@ -208,16 +195,15 @@
                         y: firstTileIndex.y + y
                     };
 
-                    var screenPoint = this.indexToPoint(index);
-                    // baseOffset
-                    var point = screenPoint.clone().subtract(this._basePoint);
-                    var tile = this._createTile(this.locator.locationToLayer(this.center), {
-                        screenPoint: screenPoint,
+                    var point = this.indexToPoint(index);
+                    var offset = point.clone().subtract(this._basePoint);
+                    var tile = this.createTile({
                         point: point,
+                        offset: offset,
                         index: index,
-                        zoom: this.zoom,
+                        zoom: this._zoom,
                         url: urlTemplate({
-                            zoom: this.zoom,
+                            zoom: this._zoom,
                             x: index.x,
                             y: index.y,
                             subdomain: this.subdomainText()
@@ -231,43 +217,33 @@
                 }
             }
         }
-
     });
 
     var ImageTile = Class.extend({
         init: function(options) {
             this.element = $("<img style='position: absolute; display: block; visibility: visible;' unselectable='on'></img>");
-            this.update(options);
+            this.load(options);
             this.visible = false;
         },
 
-        // rename this to load
-        update: function(options) {
+        load: function(options) {
             var element = this.element;
             htmlElement = element[0];
 
-            // consider to remove this
-            if (htmlElement.style.visibility === "hidden") {
-                htmlElement.style.visibility = "visible";
-                htmlElement.style.display = "block";
-            }
+            htmlElement.style.visibility = "visible";
+            htmlElement.style.display = "block";
 
             htmlElement.setAttribute("src", options.url);
             this.url = options.url;
 
-            htmlElement.style.top = renderSize(options.point.y);
-            htmlElement.style.left = renderSize(options.point.x);
-            this.point = options.point;
+            htmlElement.style.top = renderSize(options.offset.y);
+            htmlElement.style.left = renderSize(options.offset.x);
+            this.offset = options.offset;
 
-            this.screenPoint = options.screenPoint;
+            this.point = options.point;
             this.index = options.index;
             this.id = "x:" + this.index.x + "y:" + this.index.y + "zoom:" + options.zoom;
             this.visible = true;
-        },
-
-        // rename this to unload
-        clear: function() {
-            this.element[0].style.visibility = "hidden";
         },
 
         destroy: function() {
@@ -302,17 +278,7 @@
             return item;
         },
 
-        clear: function() {
-            var items = this._items,
-                i;
-
-            for (i = 0; i < items.length; i++) {
-                items[i].clear();
-            }
-        },
-
-        // rename destroy
-        destroy: function() {
+        empty: function() {
             var items = this._items,
                 i;
 
@@ -360,7 +326,7 @@
 
             for (i = 0; i < items.length; i++) {
                 item = items[i];
-                currentDist = item.screenPoint.clone().distanceTo(center);
+                currentDist = item.point.clone().distanceTo(center);
                 if (item.id === tileId) {
                     return items[i];
                 }
@@ -371,7 +337,7 @@
                 }
             }
 
-            items[index].update(options);
+            items[index].load(options);
 
             return items[index];
         }
