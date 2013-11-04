@@ -14,8 +14,6 @@
         g = dataviz.geometry,
         Point = g.Point,
 
-        map = dataviz.map,
-
         util = dataviz.util,
         renderSize = util.renderSize;
 
@@ -48,14 +46,22 @@
         },
 
         _loadView: function() {
-            this._view = new TileView(this.element, this.map, this.options);
+            this._view = new TileView(this.element, this.options);
             this._updateView();
         },
 
         _updateView: function() {
-            this._view.center(this.map.center());
-            this._view.extent(this.map.extent());
-            this._view.zoom(this.map.zoom());
+            var view = this._view,
+                map = this.map,
+                extent = map.extent(),
+                extentToPoint = {
+                    nw: map.locationToLayer(extent.nw),
+                    se: map.locationToLayer(extent.se)
+                };
+
+            view.center(map.locationToLayer(map.center()));
+            view.extent(extentToPoint);
+            view.zoom(map.zoom());
         },
 
         destroy: function() {
@@ -63,7 +69,7 @@
             this._view = null;
         },
 
-        reset: function(e) {
+        reset: function() {
             this._updateView();
             this._view.clear();
             this._view.reset();
@@ -76,7 +82,7 @@
             "</div>"
         ),
 
-        _pan: function(e) {
+        _pan: function() {
             var layer = this,
                 now = new Date(),
                 timestamp = layer._pan.timestamp;
@@ -94,9 +100,8 @@
     });
 
     var TileView = Class.extend({
-        init: function(element, locator, options) {
+        init: function(element, options) {
             this.element = element;
-            this.locator = locator;
             this._initOptions(options);
 
             this.pool = new TilePool();
@@ -131,7 +136,7 @@
         },
 
         createTile: function(options) {
-            return this.pool.get(this.locator.locationToLayer(this._center), options);
+            return this.pool.get(this._center, options);
         },
 
         tileCount: function() {
@@ -146,8 +151,8 @@
         },
 
         size: function() {
-            var nw = this.locator.locationToLayer(this._extent.nw),
-                se = this.locator.locationToLayer(this._extent.se),
+            var nw = this._extent.nw,
+                se = this._extent.se,
                 diff = se.subtract(nw);
 
             return {
@@ -177,27 +182,27 @@
 
         reset: function() {
             this.subdomainIndex = 0;
-            this._basePoint = this.locator.locationToLayer(this._extent.nw);
+            this._basePoint = this._extent.nw;
             this.render();
         },
 
         render: function() {
             var urlTemplate = template(this.options.urlTemplate),
-                nwToPoint = this.locator.locationToLayer(this._extent.nw);
+                nwToPoint = this._extent.nw,
+                size = this.tileCount(),
+                firstTileIndex = this.pointToTileIndex(nwToPoint),
+                index, point, offset, tile, x, y;
 
-            var firstTileIndex = this.pointToTileIndex(nwToPoint);
-            size = this.tileCount();
-
-            for (var x = 0; x < size.x; x++) {
-                for (var y = 0; y < size.y; y++) {
-                    var index = {
+            for (x = 0; x < size.x; x++) {
+                for (y = 0; y < size.y; y++) {
+                    index = {
                         x: firstTileIndex.x + x,
                         y: firstTileIndex.y + y
                     };
 
-                    var point = this.indexToPoint(index);
-                    var offset = point.clone().subtract(this._basePoint);
-                    var tile = this.createTile({
+                    point = this.indexToPoint(index);
+                    offset = point.clone().subtract(this._basePoint);
+                    tile = this.createTile({
                         point: point,
                         offset: offset,
                         index: index,
@@ -227,8 +232,7 @@
         },
 
         load: function(options) {
-            var element = this.element;
-            htmlElement = element[0];
+            var htmlElement = this.element[0];
 
             htmlElement.style.visibility = "visible";
             htmlElement.style.display = "block";
@@ -292,9 +296,8 @@
         _create: function(options) {
             var pool = this,
                 items = pool._items,
-                oldTile, i, item;
-
-            var tileId = pool._tileId(options);
+                tileId = pool._tileId(options),
+                oldTile, i, item, tile;
 
             for (i = 0; i < items.length; i++) {
                 item = items[i];

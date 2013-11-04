@@ -30,12 +30,22 @@
         (function() {
 
             var tile,
-                pool;
+                element;
+
+            function createTile(options) {
+                var element = $("<div class='k-layer' style='width: 800px; height: 800px;'></div>")
+                                .appendTo(document.body);
+
+                tile = new TileView(element, {});
+            }
 
             // ------------------------------------------------------------
-            module("Tile layer", {
+            module("Tile view", {
                 setup: function() {
-                    pool = new TilePool();
+                    createTile();
+                },
+                teardown: function() {
+                    $(".k-layer").remove();
                 }
             });
 
