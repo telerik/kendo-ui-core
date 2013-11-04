@@ -60,12 +60,11 @@ var ViewHtmlCommand = Command.extend({
 });
 
 extend(ViewHtmlCommand, {
-    template: "<div class='k-editor-dialog k-viewhtml-dialog'>" +
+    template: "<div class='k-editor-dialog k-popup-edit-form k-edit-form-container k-viewhtml-dialog'>" +
                 "<textarea class='k-editor-textarea k-input'></textarea>" +
-                "<div class='k-button-wrapper'>" +
+                "<div class='k-edit-buttons k-state-default'>" +
                     "<button class='k-dialog-update k-button'>#: dialogUpdate #</button>" +
-                    "&nbsp;#: dialogButtonSeparator #&nbsp;" +
-                    "<a href='\\#' class='k-dialog-close k-link'>#: dialogCancel #</a>" +
+                    "<button class='k-dialog-close k-button k-secondary'>#: dialogCancel #</button>" +
                 "</div>" +
             "</div>",
     indent: function(content) {
