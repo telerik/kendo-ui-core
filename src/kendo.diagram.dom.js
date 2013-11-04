@@ -1139,7 +1139,7 @@ kendo_module({
         zoom: function (zoom, staticPoint) {
             if (zoom) {
                 var currentZoom = this._zoom;
-                zoom = this._zoom = this.getValidZoom(zoom);
+                zoom = this._zoom = this._getValidZoom(zoom);
 
                 if (!Utils.isUndefined(staticPoint)) {//Viewpoint vector is constant
                     var zoomedPoint = staticPoint.times(zoom);
@@ -1189,7 +1189,7 @@ kendo_module({
                 this.addConnection(new Connection(from, to, options));
             }
         },
-        getValidZoom: function (zoom) {
+        _getValidZoom: function (zoom) {
             return Math.min(Math.max(zoom, 0.55), 2.0); //around 0.5 something exponential happens...!?
         },
         pan: function (pan, animated) {
@@ -1213,7 +1213,7 @@ kendo_module({
                 this.zoomMainLayer();
             }
             else {
-                diagram.transformMainLayer();
+                diagram._transformMainLayer();
             }
         },
         _storePan: function (pan) {
@@ -1222,7 +1222,7 @@ kendo_module({
         viewport: function () {
             return this.canvas.bounds();
         },
-        transformMainLayer: function () {
+        _transformMainLayer: function () {
             var pan = this._pan,
                 zoom = this._zoom;
 
@@ -1820,7 +1820,7 @@ kendo_module({
                 that._unbindDataSource();
             }
 
-            that._refreshHandler = proxy(that.refreshSource, that);
+            that._refreshHandler = proxy(that._refreshSource, that);
             that._errorHandler = proxy(that._error, that);
 
             that.dataSource = HierarchicalDataSource.create(dataSource)
@@ -1895,7 +1895,7 @@ kendo_module({
 
             diagram.canvas.size(cumulativeSize);
         },
-        refresh: function () {
+        _refresh: function () {
             var i;
 //            for (i = 0; i < this.shapes.length; i++) { // does nothing.
 //                this.shapes[i].refresh();
@@ -1907,7 +1907,7 @@ kendo_module({
         findByUid: function (uid) {
             return this.element.find(".k-shape[" + kendo.attr("uid") + "=" + uid + "]");
         },
-        refreshSource: function (e) {
+        _refreshSource: function (e) {
             var that = this,
                 node = e.node,
                 action = e.action,

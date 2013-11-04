@@ -169,13 +169,13 @@ test("get canvas point of mouse event", function () {
 });
 
 test("limit zoom with min/max values", function () {
-    equal(kdiagram.getValidZoom(0.2), 0.55, "below min");
-    equal(kdiagram.getValidZoom(0.55), 0.55, "is min");
-    equal(kdiagram.getValidZoom(0.7), 0.7, "valid, zoom out");
-    equal(kdiagram.getValidZoom(1), 1, "valid, no zoom");
-    equal(kdiagram.getValidZoom(1.4), 1.4, "valid, zoom in");
-    equal(kdiagram.getValidZoom(2), 2, "is max");
-    equal(kdiagram.getValidZoom(2.2), 2, "above max");
+    equal(kdiagram._getValidZoom(0.2), 0.55, "below min");
+    equal(kdiagram._getValidZoom(0.55), 0.55, "is min");
+    equal(kdiagram._getValidZoom(0.7), 0.7, "valid, zoom out");
+    equal(kdiagram._getValidZoom(1), 1, "valid, no zoom");
+    equal(kdiagram._getValidZoom(1.4), 1.4, "valid, zoom in");
+    equal(kdiagram._getValidZoom(2), 2, "is max");
+    equal(kdiagram._getValidZoom(2.2), 2, "above max");
 });
 
 test("zoom does not change the pan", function () {
