@@ -2731,8 +2731,14 @@ kendo_module({
             return view;
         },
 
-        _resize: function() {
-            this.refresh({ action: "resize" });
+        resize: function(force) {
+            var size = this.getSize(),
+                currentSize = this._size;
+
+            if (force || !currentSize || size.width !== currentSize.width || size.height !== currentSize.height) {
+                this.refresh({ action: "resize" });
+                this._size = size;
+            }
         },
 
         _adjustSelectedDate: function() {

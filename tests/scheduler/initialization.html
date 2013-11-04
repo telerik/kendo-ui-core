@@ -762,6 +762,15 @@
                 equal(scheduler.calendar.options.max, scheduler.options.max);
             });
 
+            test("kendo.resize does not trigger resize event", 0, function() {
+                var scheduler = new Scheduler(container, {
+                    resize: function() {
+                        ok(true);
+                    }
+                });
+
+                kendo.resize(container);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
