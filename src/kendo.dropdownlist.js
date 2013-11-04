@@ -250,7 +250,7 @@ kendo_module({
             var span = this.span;
 
             if (text !== undefined) {
-                if ($.isPlainObject(text)) {
+                if ($.isPlainObject(text) || text instanceof kendo.data.ObservableObject) {
                     dataItem = text;
                 } else if (!dataItem || this._text(dataItem) !== text) {
                     if (this.options.dataTextField) {
@@ -264,11 +264,12 @@ kendo_module({
 
                 span.html(this.inputTemplate(dataItem));
             } else {
-                return dataItem ? this._text(dataItem) : span.text();
+                return span.text();
             }
         },
 
         text: function (text) {
+            var dataItem;
             var that = this;
             var ignoreCase = that.options.ignoreCase;
 
@@ -280,17 +281,17 @@ kendo_module({
                         text = text.toLowerCase();
                     }
 
-                    that._select(function(data) {
+                    dataItem = that._select(function(data) {
                         data = that._text(data);
 
                         if (ignoreCase) {
                             data = (data + "").toLowerCase();
                         }
 
-                        return data === loweredText;
+                        return data === text;
                     });
 
-                    text = that.dataItem();
+                    text = dataItem || text;
                 }
 
                 that._textAccessor(text);
@@ -579,7 +580,7 @@ kendo_module({
         _select: function(li) {
             var that = this,
                 current = that._current,
-                data = that._data(),
+                data = null,
                 value,
                 idx;
 
@@ -592,12 +593,12 @@ kendo_module({
 
                 idx = ui.List.inArray(li[0], that.ul[0]);
                 if (idx > -1) {
-                    data = data[idx];
+                    data = that._data()[idx];
                     value = that._value(data);
                     that.selectedIndex = idx;
 
                     that._textAccessor(data);
-                    that._accessor(value !== undefined ? value : text, idx);
+                    that._accessor(value !== undefined ? value : that._text(data), idx);
                     that._selectedValue = that._accessor();
 
                     that.current(li.addClass(SELECTED));
@@ -607,6 +608,8 @@ kendo_module({
                     }
                 }
             }
+
+            return data;
         },
 
         _triggerEvents: function() {
