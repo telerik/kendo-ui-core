@@ -211,7 +211,7 @@
 
                 dropdownlist.text("<script>alert('test');<\/script>");
 
-                equal(dropdownlist.text(), "&lt;script&gt;alert('test');&lt;/script&gt;");
+                equal(dropdownlist.text(), "<script>alert('test');<\/script>");
             });
 
             test("text method selects correct item based on text value", function() {
@@ -222,26 +222,26 @@
                 }).data("kendoDropDownList");
 
                 stub(dropdownlist, {
-                    inputTemplate: dropdownlist.inputTemplate
+                    valueTemplate: dropdownlist.valueTemplate
                 });
 
                 dropdownlist.text("Bar");
 
-                equal(dropdownlist.args("inputTemplate")[0], dropdownlist.dataSource.view()[1]);
+                equal(dropdownlist.args("valueTemplate")[0], dropdownlist.dataSource.view()[1]);
             });
 
-            test("text method passes object to inputTemplate if no data", function() {
+            test("text method passes object to valueTemplate if no data", function() {
                 var dropdownlist = input.kendoDropDownList({
                     dataTextField: "text",
                     dataValueField: "value"
                 }).data("kendoDropDownList");
 
                 stub(dropdownlist, {
-                    inputTemplate: dropdownlist.inputTemplate
+                    valueTemplate: dropdownlist.valueTemplate
                 });
 
                 dropdownlist.text("Bar");
-                var data = dropdownlist.args("inputTemplate")[0];
+                var data = dropdownlist.args("valueTemplate")[0];
 
                 ok(data);
                 equal(data.text, "Bar");

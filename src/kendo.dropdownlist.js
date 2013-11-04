@@ -114,7 +114,7 @@ kendo_module({
             text: null,
             value: null,
             template: "",
-            inputTemplate: "",
+            valueTemplate: "",
             delay: 500,
             height: 200,
             dataTextField: "",
@@ -670,7 +670,7 @@ kendo_module({
 
         _inputTemplate: function() {
             var that = this,
-                template = that.options.inputTemplate;
+                template = that.options.valueTemplate;
 
 
             if (!template) {
@@ -679,7 +679,7 @@ kendo_module({
                 template = kendo.template(template);
             }
 
-            that.inputTemplate = template;
+            that.valueTemplate = template;
         },
 
         _textAccessor: function(text) {
@@ -699,9 +699,9 @@ kendo_module({
                     }
                 }
 
-                span.html(this.inputTemplate(dataItem));
+                span.html(this.valueTemplate(dataItem));
             } else {
-                return span.html();
+                return span.text();
             }
         }
     });
