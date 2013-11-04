@@ -53,6 +53,10 @@ kendo_module({
             orientation: HORIZONTAL
         },
 
+        resize: function() {
+            // Overrides base widget resize
+        },
+
         _max: function(e) {
             var that = this,
                 hintSize = that.hint ? that.hint[that._sizingDom]() : 0,

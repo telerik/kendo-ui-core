@@ -276,6 +276,17 @@
                 ok(div.find(".hint").hasClass("foo"));
             });
 
+            test("kendo.resize does not trigger resize event", 0, function() {
+                var resizable = setup({
+                        resize: function() {
+                            ok(true);
+                        }
+                    });
+
+                div.css({ width:10 });
+
+                kendo.resize(div);
+            });
         </script>
     </body>
 </html
