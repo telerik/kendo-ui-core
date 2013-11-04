@@ -188,7 +188,7 @@ bundle :name => 'complete.trial',
            :dir => 'examples'
        },
        :contents => {
-            'js' => COMPLETE_MIN_JS + JQUERY_MAP,
+            'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
        }
 
@@ -300,7 +300,7 @@ bundle :name => 'aspnetmvc.trial',
            :template_dir => 'mvc'
        },
        :contents => {
-            'js' => TRIAL_MIN_JS + JQUERY_MAP,
+            'js' => TRIAL_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
        }
        .merge(MVC_CONTENT),
@@ -334,7 +334,7 @@ bundle :name => 'aspnetmvc.hotfix.trial',
        :type_script => { %w(web mobile dataviz framework) => "all" },
        :changelog => %w(web mobile dataviz framework aspnetmvc),
        :contents => {
-            'js' => TRIAL_MIN_JS + JQUERY_MAP,
+            'js' => TRIAL_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
             'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
             'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
@@ -469,7 +469,7 @@ bundle :name => 'jsp.trial',
        :changelog => %w(web mobile dataviz framework jsp),
        :type_script => { %w(web mobile dataviz framework) => 'all' },
        :contents => {
-            'js' => COMPLETE_MIN_JS + JQUERY_MAP,
+            'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
        }
        .merge(JSP_CONTENT),
@@ -507,7 +507,7 @@ bundle :name => 'php.trial',
        :changelog => %w(web mobile dataviz framework php),
        :type_script => { %w(web mobile dataviz framework) => 'all' },
        :contents => {
-            'js' => COMPLETE_MIN_JS + JQUERY_MAP,
+            'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
        }
        .merge(PHP_CONTENT),
@@ -522,7 +522,7 @@ bundle :name => 'php.commercial',
        :product => 'Kendo UI Complete for PHP',
        :upload_as_internal_build => true,
        :contents => {
-            'js' => MVC_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
+            'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
             'src/js' => COMPLETE_SRC_JS,
             'src/styles' => SRC_CSS,
