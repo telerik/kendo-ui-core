@@ -25,6 +25,12 @@
             background-color: #fff;
         }
 
+        #canvas .km-scroll-wrapper {
+            height: 100%;
+            position: relative;
+            width: 100%;
+        }
+
         .menu-text {
             margin-right: 10px;
         }
@@ -66,10 +72,6 @@
             margin: 10px;
         }
 
-        #splitter {
-            height: 89%;
-        }
-
         #toolbarDiv {
             padding-top: 5px;
             padding-bottom: 5px;
@@ -101,7 +103,7 @@
         }
 
         #menu {
-            margin-left: 0px;;
+            margin-left: 0px;
         }
 
         #logo {
@@ -316,6 +318,28 @@
 
 <script>
 
+function createSplitters() {
+    $("#mainDiv").kendoSplitter({
+        orientation: "vertical",
+        panes: [
+            { collapsible: false, resizable: false, size: "32px" },
+            { collapsible: false, resizable: false, size: "32px" },
+            { collapsible: false, resizable: false, scrollable: false },
+            { collapsible: false, resizable: false, size: "50px" }
+        ],
+        resize: function() {
+            console.log(arguments);
+        }
+    });
+    $("#splitter").kendoSplitter({
+        orientation: "horizontal",
+        panes: [
+            { collapsible: false, scrollable: false, size: "18%" },
+            { collapsible: false, scrollable: false }
+        ]
+    });
+}
+
 var Shapes = {
 };
 
@@ -493,13 +517,7 @@ $(function () {
         }
     });
 
-    $("#splitter").kendoSplitter({
-        panes: [
-            { collapsible: false },
-            { collapsible: false,
-                size: "82%" }
-        ]
-    });
+    createSplitters();
 
     $("#undoButton").click(function (e) {
         diagram.undo();
