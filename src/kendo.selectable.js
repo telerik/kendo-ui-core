@@ -229,7 +229,7 @@ kendo_module({
         },
 
         _select: function(e) {
-            var selector = "input,a,textarea,.k-multiselect-wrap",
+            var selector = "input,a,textarea,.k-multiselect-wrap,select",
                 msie = kendo.support.browser.msie;
             if ($(e.event.target).is(selector)) {
                 this.userEvents.cancel();
