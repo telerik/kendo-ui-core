@@ -1106,7 +1106,7 @@ kendo_module({
             name: "Diagram",
             zoomRate: 1.1,
             dataSource: {},
-            dragAndDrop: false,
+            dragAndDrop: true,
             template: "",
             dataTextField: null,
             autoBind: true,
@@ -1118,8 +1118,7 @@ kendo_module({
                 enabled: true,
                 offsetX: 20,
                 offsetY: 20
-            },
-            allowDrop: true
+            }
         },
         events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE, SHAPEADD],
         destroy: function () {
@@ -1509,7 +1508,7 @@ kendo_module({
         _drop: function () {
             var that = this,
                 options = that.options;
-            if (options.allowDrop && kendo.ui.DropTarget) {
+            if (options.dragAndDrop && kendo.ui.DropTarget) {
                 this.element.kendoDropTarget({
                     drop: function (e) {
                         var item, pos, dp, normal;

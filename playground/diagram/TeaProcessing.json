@@ -18,7 +18,7 @@
             }
         ]
     },
-    "dragAndDrop": false,
+    "dragAndDrop": true,
     "template": "",
     "dataTextField": ["text"],
     "autoBind": true,
@@ -34,7 +34,6 @@
         "offsetX": 20,
         "offsetY": 20
     },
-    "allowDrop": true,
     "dataUrlField": ["url"],
     "dataSpriteCssClassField": ["spriteCssClass"],
     "dataImageUrlField": ["imageUrl"]
