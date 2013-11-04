@@ -610,6 +610,28 @@
                 }, 805);
             });
 
+            asyncTest("handler is hidden if mobile grid is refreshed", 1, function() {
+                var grid = new Grid(table, {
+                    mobile: "phone",
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true,
+                    columns: ["foo", "bar"]
+                }),
+                column = grid.thead.find("th:first"),
+                offset = column.offset();
+
+                column.press(offset.top, offset.left);
+
+                setTimeout(function() {
+                    start();
+                    column.release(offset.top, offset.left);
+
+                    grid.refresh();
+
+                    ok(!grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").is(":visible"));
+                }, 805);
+            });
+
             asyncTest("css class is added to the column on tap and hold", 1, function() {
                 var grid = new Grid(table, {
                     mobile: "phone",

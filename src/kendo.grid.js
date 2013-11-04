@@ -700,6 +700,9 @@ kendo_module({
 
             if (that.resizable) {
                 that.resizable.destroy();
+                if (that._resizeUserEvents) {
+                    that._resizeUserEvents.destroy();
+                }
             }
 
             if (that.virtualScrollable) {
@@ -883,6 +886,7 @@ kendo_module({
 
             that._resizeUserEvents = new kendo.UserEvents(that.thead, {
                 filter: "th:not(.k-group-cell,.k-hierarchy-cell)",
+                threshold: 10,
                 hold: function(e) {
                     var th = $(e.target);
 
@@ -901,12 +905,13 @@ kendo_module({
                 columnStart,
                 columnWidth,
                 gridWidth,
+                isMobile = this._isMobile,
                 col, th;
 
             if (options.resizable) {
                 container = options.scrollable ? that.wrapper.find(".k-grid-header-wrap:first") : that.wrapper;
 
-                if (this._isMobile) {
+                if (isMobile) {
                     that._positionColumnResizeHandleTouch(container);
                 } else {
                     that._positionColumnResizeHandle(container);
@@ -921,6 +926,10 @@ kendo_module({
                     },
                     start: function(e) {
                         th = $(e.currentTarget).data("th");
+
+                        if (isMobile) {
+                            that.resizeHandle.hide();
+                        }
 
                         var index = $.inArray(th[0], th.parent().children(":visible")),
                             contentTable = that.tbody.parent(),
@@ -975,11 +984,13 @@ kendo_module({
                                 newWidth: newWidth
                             });
                         }
+
                         that.resizeHandle.hide();
                         th.removeClass("k-column-active");
                         th = null;
                     }
                 });
+
             }
         },
 
@@ -2793,6 +2804,7 @@ kendo_module({
                 menuOptions,
                 sortable,
                 filterable,
+                isMobile = this._isMobile,
                 closeCallback = function() {
                     focusTable(that.thead.parent(), true);
                 },
@@ -2828,7 +2840,8 @@ kendo_module({
                                 messages: columnMenu.messages,
                                 owner: that,
                                 closeCallback: closeCallback,
-                                init: initCallback
+                                init: initCallback,
+                                filter: isMobile ? ":not(.k-column-active)" : ""
                             };
 
                             cell.kendoColumnMenu(menuOptions);
@@ -2907,7 +2920,7 @@ kendo_module({
                             }
 
                             cell.attr("data-" + kendo.ns +"field", column.field)
-                                .kendoSortable(extend({}, sortable, column.sortable, { dataSource: that.dataSource, aria: true }));
+                                .kendoSortable(extend({}, sortable, column.sortable, { dataSource: that.dataSource, aria: true, filter: ":not(.k-column-active)" }));
                         }
                     });
             }
@@ -3799,6 +3812,10 @@ kendo_module({
             that._destroyEditable();
 
             that._progress(false);
+
+            if (that.resizeHandle) {
+                that.resizeHandle.hide();
+            }
 
             that._data = [];
 

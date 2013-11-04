@@ -92,6 +92,7 @@ kendo_module({
                 done: "Done",
                 settings: "Column Settings"
             },
+            filter: "",
             columns: true,
             sortable: true,
             filterable: true,
@@ -201,6 +202,12 @@ kendo_module({
         _click: function(e) {
             e.preventDefault();
             e.stopPropagation();
+
+            var options = this.options;
+
+            if (options.filter && this.element.is(!options.filter)) {
+                return;
+            }
 
             if (!this.popup && !this.pane) {
                 this._init();

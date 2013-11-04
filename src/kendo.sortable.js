@@ -44,7 +44,8 @@ kendo_module({
             name: "Sortable",
             mode: SINGLE,
             allowUnsort: true,
-            compare: null
+            compare: null,
+            filter: ""
         },
 
         destroy: function() {
@@ -102,6 +103,12 @@ kendo_module({
                 idx,
                 length;
 
+            e.preventDefault();
+
+            if (options.filter && !element.is(options.filter)) {
+                return;
+            }
+
             if (dir === ASC) {
                 dir = DESC;
             } else if (dir === DESC && options.allowUnsort) {
@@ -122,7 +129,6 @@ kendo_module({
                 sort.push({ field: field, dir: dir, compare: compare });
             }
 
-            e.preventDefault();
 
             that.dataSource.sort(sort);
         }

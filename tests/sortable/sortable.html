@@ -230,6 +230,19 @@
                 equal(button.attr("aria-sort"), "ascending");
             });
 
+            test("clicking element which does not match the filter has no effect", function() {
+                var sorter = setup(button.attr("data-field", "foo").addClass("k-column-active"), {
+                    dataSource: dataSource,
+                    filter: ":not(.k-column-active)"
+                } );
+
+                button.click();
+
+                var sort = dataSource.sort();
+
+                ok(!sort);
+            });
+
        </script>
     </body>
 </html>
