@@ -12,15 +12,18 @@
             "<span class=\"last\">Contact info</span>" +
             "</div>";
 
-        String template = "<img src=\"../../resources/web/Customers/#:data.customerId#.jpg\"  alt=\"#:data.customerId#\" />" +
-                "<h3>${ data.contactName }</h3>" +
-                "<p>${ data.companyName }</p>";
+        string template = "<img src=\"../../resources/web/customers/#:data.customerid#.jpg\"  alt=\"#:data.customerid#\" />" +
+                "<h3>${ data.contactname }</h3>" +
+                "<p>${ data.companyname }</p>";
+
+        String valueTemplate = "<img class=\"selected-value\" src=\"../../resources/web/Customers/#:data.customerId#.jpg\"  alt=\"#:data.customerId#\" />" +
+                "<span>#:data.ContactName#</span>"
         %>
 
         <div class="demo-section">
             <h2>Customers</h2>
-            <kendo:dropDownList name="customers" headerTemplate="<%=headerTemplate%>" template="<%=template%>" height="300"
-                dataTextField="contactName" dataValueField="customerId" style="width:400px">
+            <kendo:dropDownList name="customers" headerTemplate="<%=headerTemplate%>" template="<%=template%>" valueTemplate="<%=valueTemplate%>"
+                height="300" dataTextField="contactName" dataValueField="customerId" style="width:400px">
                 <kendo:dataSource>
                     <kendo:dataSource-transport>
                        <kendo:dataSource-transport-read url="${readUrl}" type="POST" contentType="application/json"/>
@@ -69,6 +72,13 @@
                 font-size: 1.2em;
                 margin-bottom: 10px;
             }
+
+            .selected-value {
+                float: left;
+                width: 16px;
+                margin: 0 4px;
+            }
+
             #customers-list {
                 padding-bottom: 30px;
             }
