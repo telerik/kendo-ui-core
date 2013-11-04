@@ -143,6 +143,7 @@
     <script src="../../../src/kendo.data.js"></script>
     <script src="../../../src/kendo.popup.js"></script>
     <script src="../../../src/kendo.list.js"></script>
+    <script src="../../../src/kendo.panelbar.js"></script>
     <script src="../../../src/kendo.dropdownlist.js"></script>
     <script src="../../../src/kendo.dataviz.core.js"></script>
     <script src="../../../src/kendo.userevents.js"></script>
@@ -241,8 +242,17 @@
     </div>
     <div id="splitter">
         <div id="toolBoxDiv">
-            <div id="toolboxTitle">Shapes</div>
-            <div id="toolBox"></div>
+            <ul id="panelbar">
+                <li>
+                    Frames
+                    <div id="framesToolBox">
+                        <img src="iPhone.png" width="200"/>
+                    </div>
+                <li>
+                    Widgets
+                    <div id="toolBox"></div>
+                </li>
+            </ul>
         </div>
         <div id="canvasDiv">
             <div id="canvas"></div>
@@ -265,6 +275,12 @@
             </g>
         </svg>
     </div>
+
+
+
+
+
+
 </script>
 
 <script>
@@ -342,6 +358,9 @@ $(function () {
         return false;
     }
 
+    var pannel = $("#panelbar").kendoPanelBar({
+    });
+
     $("#canvas").kendoDiagram({
         zoom: function (e) {
             slider.value(this._zoom);
@@ -389,6 +408,34 @@ $(function () {
             svg = svg.clone();
             svg.data("data", item.options);
             return svg;
+        }
+    });
+
+    pannel.kendoDraggable({
+        filter: "img",
+        hint: function (row) {
+            var img = document.createElement("img");
+            img.src = row[0].src;
+            $(img).css({width: 200});
+
+            var options = {
+                data: function () {
+                    var g = new kendo.diagram.Group({
+                        autoSize: true
+                    });
+                    var im = new kendo.diagram.Image({
+                        source: row[0].src,
+                        width: row.width(),
+                        height: row.height()
+                    });
+                    g.append(im);
+                    return g;
+                },
+                connectors: []
+            };
+            $(img).data("data", options);
+
+            return img;
         }
     });
 
