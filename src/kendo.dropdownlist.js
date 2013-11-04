@@ -245,29 +245,6 @@ kendo_module({
             }
         },
 
-        _textAccessor: function(text) {
-            var dataItem = this.dataItem();
-            var span = this.span;
-
-            if (text !== undefined) {
-                if ($.isPlainObject(text) || text instanceof kendo.data.ObservableObject) {
-                    dataItem = text;
-                } else if (!dataItem || this._text(dataItem) !== text) {
-                    if (this.options.dataTextField) {
-                        dataItem = {};
-                        dataItem[this.options.dataTextField] = text;
-                        dataItem[this.options.dataValueField] = this._accessor();
-                    } else {
-                        dataItem = text;
-                    }
-                }
-
-                span.html(this.inputTemplate(dataItem));
-            } else {
-                return span.text();
-            }
-        },
-
         text: function (text) {
             var dataItem;
             var that = this;
@@ -703,6 +680,29 @@ kendo_module({
             }
 
             that.inputTemplate = template;
+        },
+
+        _textAccessor: function(text) {
+            var dataItem = this.dataItem();
+            var span = this.span;
+
+            if (text !== undefined) {
+                if ($.isPlainObject(text) || text instanceof kendo.data.ObservableObject) {
+                    dataItem = text;
+                } else if (!dataItem || this._text(dataItem) !== text) {
+                    if (this.options.dataTextField) {
+                        dataItem = {};
+                        dataItem[this.options.dataTextField] = text;
+                        dataItem[this.options.dataValueField] = this._accessor();
+                    } else {
+                        dataItem = text;
+                    }
+                }
+
+                span.html(this.inputTemplate(dataItem));
+            } else {
+                return span.text();
+            }
         }
     });
 
