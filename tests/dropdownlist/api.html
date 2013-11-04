@@ -214,6 +214,40 @@
                 equal(dropdownlist.text(), "<script>alert('test');<\/script>");
             });
 
+            test("text method selects correct item based on text value", function() {
+                var dropdownlist = input.kendoDropDownList({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "value"
+                }).data("kendoDropDownList");
+
+                stub(dropdownlist, {
+                    valueTemplate: dropdownlist.valueTemplate
+                });
+
+                dropdownlist.text("Bar");
+
+                equal(dropdownlist.args("valueTemplate")[0], dropdownlist.dataSource.view()[1]);
+            });
+
+            test("text method passes object to valueTemplate if no data", function() {
+                var dropdownlist = input.kendoDropDownList({
+                    dataTextField: "text",
+                    dataValueField: "value"
+                }).data("kendoDropDownList");
+
+                stub(dropdownlist, {
+                    valueTemplate: dropdownlist.valueTemplate
+                });
+
+                dropdownlist.text("Bar");
+                var data = dropdownlist.args("valueTemplate")[0];
+
+                ok(data);
+                equal(data.text, "Bar");
+                equal(data.value, "");
+            });
+
             test('enable(false) should disable dropDownList', function() {
                 var dropdownlist = new DropDownList(input);
 

@@ -214,6 +214,14 @@ public class DropDownListTag extends WidgetTag /* interfaces */implements DataBo
         setProperty("valuePrimitive", value);
     }
 
+    public java.lang.String getValueTemplate() {
+        return (java.lang.String)getProperty("valueTemplate");
+    }
+
+    public void setValueTemplate(java.lang.String value) {
+        setProperty("valueTemplate", value);
+    }
+
     public String getCascade() {
         Function property = ((Function)getProperty("cascade"));
         if (property != null) {

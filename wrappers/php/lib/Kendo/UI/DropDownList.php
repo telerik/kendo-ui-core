@@ -177,6 +177,28 @@ Help topic showing how cascading functionality works
     }
 
     /**
+    * Sets the valueTemplate option of the DropDownList.
+    * The valueTemplate used to render the selected value. By default the widget displays only the text of the data item (configured via dataTextField).
+    * @param string $value The id of the element which represents the kendo template.
+    * @return \Kendo\UI\DropDownList
+    */
+    public function valueTemplateId($value) {
+        $value = new \Kendo\Template($value);
+
+        return $this->setProperty('valueTemplate', $value);
+    }
+
+    /**
+    * Sets the valueTemplate option of the DropDownList.
+    * The valueTemplate used to render the selected value. By default the widget displays only the text of the data item (configured via dataTextField).
+    * @param string $value The template content.
+    * @return \Kendo\UI\DropDownList
+    */
+    public function valueTemplate($value) {
+        return $this->setProperty('valueTemplate', $value);
+    }
+
+    /**
     * The text of the widget used when the autoBind is set to false.
     * @param string $value
     * @return \Kendo\UI\DropDownList
