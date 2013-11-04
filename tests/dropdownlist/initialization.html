@@ -334,6 +334,17 @@
                 equal(list.children()[0].outerHTML, "<div>Header</div>");
             });
 
+            test("defining input template", function() {
+                var dropdownlist = new DropDownList(input, {
+                    inputTemplate: "#= data #",
+                    dataSource: ["<strong>Test</strong>"]
+                });
+
+                var span = dropdownlist.span;
+
+                equal(span.html(), "<strong>Test</strong>");
+            });
+
             test("should populate text and value if items", function() {
                 var dropdownlist = new DropDownList(input, {
                     dataTextField: "text",

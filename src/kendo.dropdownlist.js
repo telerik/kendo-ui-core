@@ -246,17 +246,15 @@ kendo_module({
         },
 
         text: function (text) {
-            var dataItem;
             var that = this;
+            var dataItem, loweredText;
             var ignoreCase = that.options.ignoreCase;
 
             text = text === null ? "" : text;
 
             if (text !== undefined) {
                 if (typeof text === "string") {
-                    if (ignoreCase) {
-                        text = text.toLowerCase();
-                    }
+                    loweredText = ignoreCase ? text.toLowerCase() : text;
 
                     dataItem = that._select(function(data) {
                         data = that._text(data);
@@ -265,10 +263,12 @@ kendo_module({
                             data = (data + "").toLowerCase();
                         }
 
-                        return data === text;
+                        return data === loweredText;
                     });
 
-                    text = dataItem || text;
+                    if (dataItem) {
+                        text = dataItem;
+                    }
                 }
 
                 that._textAccessor(text);
@@ -701,7 +701,7 @@ kendo_module({
 
                 span.html(this.inputTemplate(dataItem));
             } else {
-                return span.text();
+                return span.html();
             }
         }
     });
