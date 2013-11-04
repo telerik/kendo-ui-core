@@ -50,6 +50,10 @@ TEMPLATE
                 <dt>Company:</dt><dd>#: CompanyName #</dd>
             </dl>
 TEMPLATE
+             ->valueTemplate(<<<TEMPLATE
+            <img class="selected-value" src="../../content/web/Customers/#= CustomerID #.jpg" alt="#= CustomerID #" />
+            <span>#:data.ContactName#</span>
+TEMPLATE
             );
 
 echo $dropDownList->render();
@@ -93,6 +97,13 @@ echo $dropDownList->render();
         font-size: 1.2em;
         margin-bottom: 10px;
     }
+
+    .selected-value {
+        float: left;
+        width: 16px;
+        margin: 0 4px;
+    }
+
     #customers-list {
         padding-bottom: 30px;
     }
