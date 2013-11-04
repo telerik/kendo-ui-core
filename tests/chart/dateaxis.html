@@ -843,6 +843,17 @@
                     equal(dateAxis.options.baseUnit, "days");
                 });
 
+                brazilTimezoneTest("Base unit is determined by series delta (Brazil DST boundary)", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2013/10/18"), new Date("2013/10/19"), new Date("2013/10/20")
+                        ]
+                    });
+
+                    ok(false, "Good luck finding out that the interval is a whole day");
+                    equal(dateAxis.options.baseUnit, "days");
+                });
+
                 test("Base unit calculation ignores repeating categories", function() {
                     createDateCategoryAxis({
                         categories: [
