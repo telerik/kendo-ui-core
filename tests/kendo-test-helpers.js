@@ -49,7 +49,10 @@ function arrayClose(a, b, tolerance) {
 
 function isBrazilTimezone() {
     var d = new Date().toString();
-    return d.indexOf("BRST") !== -1 || d.indexOf("BRT") != -1;
+    return d.indexOf("BRST") !== -1 ||
+           d.indexOf("BRT") != -1 ||
+           d.indexOf("South America Daylight Time") != -1 ||
+           d.indexOf("South America Standard Time") != -1;
 }
 
 function brazilTimezoneTest(testName, expected, callback ) {

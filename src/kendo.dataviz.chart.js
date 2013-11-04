@@ -10723,10 +10723,12 @@ kendo_module({
     }
 
     function addDuration(date, value, unit, weekStartDay) {
-        var result = date;
+        var result = date,
+            hours;
 
         if (date) {
             date = toDate(date);
+            hours = date.getHours();
 
             if (unit === YEARS) {
                 result = new Date(date.getFullYear() + value, 0, 1);
@@ -10734,8 +10736,10 @@ kendo_module({
                 result = new Date(date.getFullYear(), date.getMonth() + value, 1);
             } else if (unit === WEEKS) {
                 result = addDuration(startOfWeek(date, weekStartDay), value * 7, DAYS);
+                kendo.date.adjustDST(result, hours);
             } else if (unit === DAYS) {
                 result = new Date(date.getFullYear(), date.getMonth(), date.getDate() + value);
+                kendo.date.adjustDST(result, hours);
             } else if (unit === HOURS) {
                 result = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + value);
                 if (value > 0 && dateEquals(date, result)) {

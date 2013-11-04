@@ -928,6 +928,16 @@
                 deepEqual(addDuration(dateA, 75.1, "seconds"), new Date("2010/01/01 10:01:15"));
             });
 
+            brazilTimezoneTest("Adding days skips Brazil DST transition", function() {
+                deepEqual(addDuration(new Date("2013/10/19"), 1, "days"),
+                          new Date("2013/10/20 01:00:00"));
+            });
+
+            brazilTimezoneTest("Adding weeks skips Brazil DST transition", function() {
+                deepEqual(addDuration(new Date("2013/10/13"), 1, "weeks"),
+                          new Date("2013/10/20 01:00:00"));
+            });
+
             // ------------------------------------------------------------
             var toDate = dataviz.toDate;
 
