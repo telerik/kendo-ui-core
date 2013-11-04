@@ -23,7 +23,7 @@
                             '<span class="last">Contact info</span>' +
                             '</div>',
 
-                        valueTemplate: '<img class="selected-item" src=\"../../content/web/Customers/${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" /><span>#:data.ContactName#</span>',
+                        valueTemplate: '<img class="selected-value" src=\"../../content/web/Customers/#:data.CustomerID#.jpg\" alt=\"#:data.CustomerID#\" /><span>#:data.ContactName#</span>',
                         template: '<img src=\"../../content/web/Customers/${data.CustomerID}.jpg\" alt=\"${data.CustomerID}\" />' +
                                       '<h3>${ data.ContactName }</h3>' +
                                       '<p>${ data.CompanyName }</p>',
@@ -42,12 +42,6 @@
             </script>
 
             <style>
-                .selected-item {
-                    float: left;
-                    width: 16px;
-                    margin: 0 4px;
-                }
-
                 .dropdown-header {
                     overflow:hidden;
                     font-size: 1.3em;
@@ -78,6 +72,13 @@
                     font-size: 1.2em;
                     margin-bottom: 10px;
                 }
+
+                .selected-value {
+                    float: left;
+                    width: 16px;
+                    margin: 0 4px;
+                }
+
                 #titles-list {
                     padding-bottom: 30px;
                 }
