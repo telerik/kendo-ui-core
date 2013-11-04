@@ -821,55 +821,75 @@ kendo_module({
             that._wrapper();
         },
 
+        _createResizeHandle: function(container, th) {
+            var that = this;
+            var indicatorWidth = that.options.columnResizeHandleWidth;
+            var scrollable = that.options.scrollable;
+            var resizeHandle = that.resizeHandle;
+            var left;
+
+            if (!resizeHandle) {
+                resizeHandle = that.resizeHandle = $('<div class="k-resize-handle"/>');
+                container.append(resizeHandle);
+            }
+
+            if (!isRtl) {
+                left = th[0].offsetWidth;
+
+                th.prevAll(":visible").each(function() {
+                    left += this.offsetWidth;
+                });
+            } else {
+                var headerWrap = th.closest(".k-grid-header-wrap"),
+                ieCorrection = browser.msie ? headerWrap.scrollLeft() : 0,
+                webkitCorrection = browser.webkit ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft()) : 0,
+                firefoxCorrection = browser.mozilla ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft())) : 0;
+                left = th.position().left - webkitCorrection + firefoxCorrection - ieCorrection;
+            }
+
+            resizeHandle.css({
+                top: scrollable ? 0 : heightAboveHeader(that.wrapper),
+                left: left - indicatorWidth,
+                height: th.outerHeight(),
+                width: indicatorWidth * 3
+            })
+            .data("th", th)
+            .show();
+        },
+
         _positionColumnResizeHandle: function(container) {
             var that = this,
-                scrollable = that.options.scrollable,
                 resizeHandle = that.resizeHandle,
-                indicatorWidth = that.options.columnResizeHandleWidth,
-                left;
+                indicatorWidth = that.options.columnResizeHandleWidth;
 
             that.thead.on("mousemove" + NS, "th:not(.k-group-cell,.k-hierarchy-cell)", function(e) {
-                 var th = $(this),
+                var th = $(this),
                     clientX = e.clientX,
                     winScrollLeft = $(window).scrollLeft(),
                     position = th.offset().left + (!isRtl ? this.offsetWidth : 0);
 
                 if(clientX + winScrollLeft > position - indicatorWidth &&  clientX + winScrollLeft < position + indicatorWidth) {
-                    if (!resizeHandle) {
-                        resizeHandle = that.resizeHandle = $('<div class="k-resize-handle"/>');
-                        container.append(resizeHandle);
-                    }
-
-                    if (!isRtl) {
-                        left = this.offsetWidth;
-
-                        th.prevAll(":visible").each(function() {
-                            left += this.offsetWidth;
-                        });
-                    } else {
-                        var headerWrap = th.closest(".k-grid-header-wrap"),
-                            ieCorrection = browser.msie ? headerWrap.scrollLeft() : 0,
-                            webkitCorrection = browser.webkit ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft()) : 0,
-                            firefoxCorrection = browser.mozilla ? (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - (headerWrap[0].scrollWidth - headerWrap[0].offsetWidth - headerWrap.scrollLeft())) : 0;
-                        left = th.position().left - webkitCorrection + firefoxCorrection - ieCorrection;
-                    }
-
-                    resizeHandle.css({
-                        top: scrollable ? 0 : heightAboveHeader(that.wrapper),
-                        left: left - indicatorWidth,
-                        height: th.outerHeight(),
-                        width: indicatorWidth * 3
-                    })
-                    .data("th", th)
-                    .show();
-
+                    that._createResizeHandle(container, th);
+                } else if (resizeHandle) {
+                    resizeHandle.hide();
                 } else {
+                    cursor(that.wrapper, "");
+                }
+            });
+        },
 
-                   if (resizeHandle) {
-                       resizeHandle.hide();
-                   } else {
-                       cursor(that.wrapper, "");
-                   }
+        _positionColumnResizeHandleTouch: function(container) {
+            var that = this;
+
+            that._resizeUserEvents = new kendo.UserEvents(that.thead, {
+                filter: "th:not(.k-group-cell,.k-hierarchy-cell)",
+                hold: function(e) {
+                    var th = $(e.target);
+
+                    e.preventDefault();
+
+                    th.addClass("k-column-active");
+                    that._createResizeHandle(container, th);
                 }
             });
         },
@@ -886,7 +906,11 @@ kendo_module({
             if (options.resizable) {
                 container = options.scrollable ? that.wrapper.find(".k-grid-header-wrap:first") : that.wrapper;
 
-                that._positionColumnResizeHandle(container);
+                if (this._isMobile) {
+                    that._positionColumnResizeHandleTouch(container);
+                } else {
+                    that._positionColumnResizeHandle(container);
+                }
 
                 that.resizable = new ui.Resizable(container, {
                     handle: ".k-resize-handle",
@@ -952,6 +976,7 @@ kendo_module({
                             });
                         }
                         that.resizeHandle.hide();
+                        th.removeClass("k-column-active");
                         th = null;
                     }
                 });

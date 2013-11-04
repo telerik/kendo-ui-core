@@ -137,6 +137,7 @@ namespace Kendo.Models
             "kendo.filtermenu.js",
             "kendo.pager.js",
             "kendo.sortable.js",
+            "kendo.resizable.js",
             "kendo.columnmenu.js",
             "kendo.grid.js",
             "kendo.scheduler.view.js",

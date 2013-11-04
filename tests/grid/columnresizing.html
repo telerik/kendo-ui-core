@@ -15,6 +15,15 @@
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.resizable.js"></script>
         <script src="../../src/kendo.grid.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.popover.js"></script>
+        <script src="../../src/kendo.mobile.actionsheet.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
         <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
         <style>
@@ -248,6 +257,39 @@
                 table,
                 DataSource = kendo.data.DataSource,
                 indicatorWidth = 3;
+
+            function triggerTouchEvent(element, type, info) {
+                info.target = element;
+                return element.trigger($.Event(type, { originalEvent: { changedTouches: [ info ] }}));
+            }
+
+            $.fn.press = function (x, y) {
+                return triggerTouchEvent(this, "touchstart", {
+                    pageX: x,
+                    pageY: y,
+                    id: 1
+                })
+            }
+
+            $.fn.move = function (x, y) {
+                return triggerTouchEvent(this, "touchmove", {
+                    pageX: x,
+                    pageY: y,
+                    id: 1
+                })
+            }
+
+            $.fn.release = function (x, y) {
+                return triggerTouchEvent(this, "touchend", {
+                    pageX: x,
+                    pageY: y,
+                    id: 1
+                })
+            }
+
+            $.fn.tap = function(info) {
+                return this.press(10, 10).release(10, 10);
+            }
 
             module("grid column resize", {
                 setup: function() {
@@ -548,7 +590,45 @@
                 equal(firstColumn[0].offsetWidth, initialWidth + 20);
             });
 
+            asyncTest("handler is added to the header on tap and hold in mobile grid", 1, function() {
+                var grid = new Grid(table, {
+                    mobile: "phone",
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true,
+                    columns: ["foo", "bar"]
+                }),
+                column = grid.thead.find("th:first"),
+                offset = column.offset();
 
+                column.press(offset.top, offset.left);
+
+                setTimeout(function() {
+                    start();
+                    column.release(offset.top, offset.left);
+
+                    equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").length, 1);
+                }, 805);
+            });
+
+            asyncTest("css class is added to the column on tap and hold", 1, function() {
+                var grid = new Grid(table, {
+                    mobile: "phone",
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true,
+                    columns: ["foo", "bar"]
+                }),
+                column = grid.thead.find("th:first"),
+                offset = column.offset();
+
+                column.press(offset.top, offset.left);
+
+                setTimeout(function() {
+                    start();
+                    column.release(offset.top, offset.left);
+
+                    ok(column.hasClass("k-column-active"));
+                }, 805);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
