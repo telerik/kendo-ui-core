@@ -233,6 +233,10 @@
                         return data.features;
                     }
 
+                    if (data.type === "GeometryCollection") {
+                        return data.geometries;
+                    }
+
                     return data;
                 }
             }

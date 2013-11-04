@@ -10,7 +10,7 @@
 </head>
 <body>
     <script src="../../../src/kendo.core.js"></script>
-    <script src="../../../src/kendo.dataviz.core.js"></script>
+    <script src="../../../src/kendo.data.js"></script>
     <script src="../../../src/kendo.dataviz.core.js"></script>
     <script src="../../../src/dataviz/util.js"></script>
     <script src="../../../src/dataviz/geometry.js"></script>
@@ -179,6 +179,97 @@
 
             test("parses to a path", function() {
                 ok(result instanceof d.Path);
+            });
+        })();
+
+        (function() {
+            var ds;
+            var gc = {
+                "type": "GeometryCollection",
+                "geometries": [{
+                    "type": "Polygon",
+                    "coordinates": [
+                        [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+                            [100.0, 1.0], [100.0, 0.0] ]
+                    ]
+                }, {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+                            [100.0, 1.0], [100.0, 0.0] ]
+                    ]
+                }]
+            };
+
+            // ------------------------------------------------------------
+            module("GeoJSON Data Source / Geometry Collection", {
+                setup: function() {
+                    ds = new kendo.data.DataSource({
+                        type: "geojson",
+                        transport: {
+                            read: function(opt) { opt.success(gc); }
+                        }
+                    });
+
+                    ds.read();
+                }
+            });
+
+            test("splits geometries", function() {
+                equal(ds.view().length, 2);
+            });
+        })();
+
+        (function() {
+            var ds;
+            var gc = {
+                "type": "FeatureCollection",
+                "features": [
+                    {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            -80.87088507656375,
+                            35.21515162500578
+                        ]
+                    },
+                    "properties": {
+                        "name": "ABBOTT NEIGHBORHOOD PARK",
+                        "address": "1300  SPRUCE ST"
+                    }
+                }, {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            -80.83775386582222,
+                            35.24980190252168
+                        ]
+                    },
+                    "properties": {
+                        "name": "DOUBLE OAKS CENTER",
+                        "address": "1326 WOODWARD AV"
+                    }
+                }]
+            };
+
+            // ------------------------------------------------------------
+            module("GeoJSON Data Source / Feature Collection", {
+                setup: function() {
+                    ds = new kendo.data.DataSource({
+                        type: "geojson",
+                        transport: {
+                            read: function(opt) { opt.success(gc); }
+                        }
+                    });
+
+                    ds.read();
+                }
+            });
+
+            test("splits features", function() {
+                equal(ds.view().length, 2);
             });
         })();
     </script>
