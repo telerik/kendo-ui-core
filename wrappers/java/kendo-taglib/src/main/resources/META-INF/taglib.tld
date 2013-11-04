@@ -10669,6 +10669,12 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>boolean</type>
         </attribute>
         <attribute>
+            <description>The valueTemplate used to render the selected value. By default the widget displays only the text of the data item (configured via dataTextField).</description>
+            <name>valueTemplate</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>Fired when the value of the widget is changed by the user.The event handler function context (available via the this keyword) will be set to the widget instance.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
