@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
   <actions/>
-  <description>Builds the ASP.NET MVC DLLs from the 'stable' branch and publishes the build artifacts</description>
-  <logRotator>
+  <description>Builds the ASP.NET MVC DLLs from the &apos;stable&apos; branch and publishes the build artifacts</description>
+  <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>2</daysToKeep>
     <numToKeep>10</numToKeep>
     <artifactDaysToKeep>2</artifactDaysToKeep>
@@ -9,16 +10,16 @@
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.7">
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.8">
       <projectUrl>https://github.com/telerik/kendo/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.4.0">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@1.5.0">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <name/>
-        <refspec/>
+        <name></name>
+        <refspec></refspec>
         <url>git@github.com:telerik/kendo.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
@@ -43,15 +44,15 @@
       <url>https://github.com/telerik/kendo/</url>
     </browser>
     <submoduleCfg class="list"/>
-    <relativeTargetDir/>
-    <reference/>
-    <excludedRegions/>
-    <excludedUsers/>
-    <gitConfigName/>
-    <gitConfigEmail/>
+    <relativeTargetDir></relativeTargetDir>
+    <reference></reference>
+    <excludedRegions></excludedRegions>
+    <excludedUsers></excludedUsers>
+    <gitConfigName></gitConfigName>
+    <gitConfigEmail></gitConfigEmail>
     <skipTag>false</skipTag>
-    <includedRegions/>
-    <scmName/>
+    <includedRegions></includedRegions>
+    <scmName></scmName>
   </scm>
   <assignedNode>windows</assignedNode>
   <canRoam>false</canRoam>
@@ -77,7 +78,7 @@
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
     <hudson.tasks.BuildTrigger>
-      <childProjects>stable-demos</childProjects>
+      <childProjects>stable-demos, stable-bundles</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
