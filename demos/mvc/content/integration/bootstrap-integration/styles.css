@@ -1,3 +1,20 @@
+@font-face {
+    font-family: "Kendo UI";
+    src: url("http://cdn.kendostatic.com/2013.3.1030/styles/images/kendoui.woff") format("woff"),
+         url("http://cdn.kendostatic.com/2013.3.1030/styles/images/kendoui.ttf") format("truetype");
+}
+
+body:before
+{
+    font-family: "Kendo UI";
+    content: "\a0";
+    font-size: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+    z-index: -1;
+}
+
 html, body {
     margin: 0;
     padding: 0;
