@@ -80,7 +80,7 @@ def find_navigation_item(navigation, filename)
     end
 end
 
-def offline_navigation(suite)
+def offline_navigation(suite, path)
 
     navigation = YAML.load(File.read("demos/mvc/App_Data/#{suite}.nav.json"))
 
@@ -89,6 +89,9 @@ def offline_navigation(suite)
     navigation.each do |name, categories|
         offline[name] = []
         categories.each do |category|
+
+            next if path.include?('mobile.commercial') && category['name'] == 'adaptive'
+
             if include_item?(category)
                 category['items'] = category['items'].find_all { |item| include_item?(item) }
 
@@ -106,6 +109,8 @@ def offline_demos(navigation, path)
 
     navigation.each do |name, categories|
         categories.each do |category|
+
+
             category['items'].each do |item|
                 demos.push("#{path}/#{item['url']}") unless item['external']
             end
@@ -144,7 +149,7 @@ def demos(options)
 
         suite_path  = "#{path}/#{suite}"
 
-        navigation = offline_navigation(suite)
+        navigation = offline_navigation(suite, path)
 
         files = files + offline_demos(navigation, suite_path).include("#{suite_path}/index.html");
 
@@ -159,8 +164,7 @@ def demos(options)
 
         end
 
-        template = ERB.new(File.read("build/templates/#{template_dir}/#{suite}-example.html.erb"))
-
+        template = ERB.new(File.read("build/templates/#{template_dir}/#{suite}-example.html.erb"), 0, '%<>')
 
         # Create offline demos by processing the corresponding .cshtml files
         rule /#{path}\/#{suite}\/.+\.html/ => lambda { |t| find_demo_src(t, path) } do |t|

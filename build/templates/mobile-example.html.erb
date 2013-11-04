@@ -4,9 +4,15 @@
     <title><%= title %></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" >
     <script src="../../../js/jquery.min.js"></script>
-    <script src="../../../js/kendo.mobile.min.js"></script>
-    <script src="../../content/shared/js/console.js"></script>
+% if suites.size > 1
+    <script src="../../../js/kendo.all.min.js"></script>
     <link href="../../../styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="../../../styles/kendo.rtl.min.css" rel="stylesheet">
+    <link href="../../../styles/kendo.default.min.css" rel="stylesheet">
+% else
+    <script src="../../../js/kendo.mobile.min.js"></script>
+% end
+    <script src="../../content/shared/js/console.js"></script>
     <link href="../../../styles/kendo.mobile.all.min.css" rel="stylesheet" />
     <style>
         [href*=index], #back-button
