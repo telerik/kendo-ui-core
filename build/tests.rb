@@ -33,7 +33,7 @@ namespace :tests do
         sh "tests/check-test-suite.sh"
     end
 
-    { CI: 8884, Production: 8885 }.each do |env, port|
+    { CI: 8884, Production: 8885, TZ: 8886 }.each do |env, port|
         output = "#{env}-test-results.xml"
 
         file output => [MIN_JS, MIN_CSS, KENDO_CONFIG_FILE, tests].flatten do |t|
