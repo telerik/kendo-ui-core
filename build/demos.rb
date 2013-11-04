@@ -4,6 +4,8 @@ require 'erb'
 DEMOS_CSHTML = FileList['demos/mvc/Views/*/**/*.cshtml']
 DEMOS_CS = FileList['demos/mvc/**/*.cs']
 
+DEMOS_BULDFILES = FileList['build/demos.rb'].include('build/templates/**/*.erb')
+
 BUNDLE_INDEX_TEMPLATE = ERB.new(File.read('build/templates/bundle-index.html.erb'))
 
 OFFLINE_DEMO_TEMPLATE_OPTIONS = {
@@ -167,7 +169,7 @@ def demos(options)
         template = ERB.new(File.read("build/templates/#{template_dir}/#{suite}-example.html.erb"), 0, '%<>')
 
         # Create offline demos by processing the corresponding .cshtml files
-        rule /#{path}\/#{suite}\/.+\.html/ => lambda { |t| find_demo_src(t, path) } do |t|
+        rule /#{path}\/#{suite}\/.+\.html/ => lambda { |t| DEMOS_BULDFILES.include(find_demo_src(t, path)) } do |t|
             body = File.read(find_demo_src(t.name, path))
             body.gsub!(/@section \w+ {(.|\n|\r)+?}/, '')
             body.gsub!(/@{(.|\n|\r)+?}/, '')
