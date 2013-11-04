@@ -47,5 +47,22 @@ function arrayClose(a, b, tolerance) {
     }
 }
 
+function isBrazilTimezone() {
+    var d = new Date().toString();
+    return d.indexOf("BRST") !== -1 || d.indexOf("BRT") != -1;
+}
+
+function brazilTimezoneTest(testName, expected, callback ) {
+    if ( arguments.length === 2 ) {
+        callback = expected;
+        expected = null;
+    }
+
+    if (isBrazilTimezone()) {
+        QUnit.test(testName, expected, callback);
+    }
+}
+QUnit.brazilTimezoneTest = brazilTimezoneTest;
+
 var close = QUnit.close,
     notClose = QUnit.notClose;

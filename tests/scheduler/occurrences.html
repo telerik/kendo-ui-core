@@ -276,9 +276,7 @@
                 equal(events[2].end.getMinutes(), 30);
             });
 
-            /*
-            //Uncomment when timezone is Brasilia (-06:00)
-            test("Hourly method honours DST in Brasilia", function() {
+            brazilTimezoneTest("Hourly method honours DST in Brasilia", function() {
                 var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
@@ -294,7 +292,7 @@
 
                 equal(events[0].end.getHours(), 2);
                 equal(events[0].endTime.getHours(), 1);
-            });*/
+            });
 
             module("DAILY Occurrences");
             test("DAILY occurrences method returns one occurrence (FREQ: DAILY)", function() {
