@@ -60,7 +60,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>bundle --path ~/gems &amp;&amp; TEST_URL=&apos;http://kendobuild/staging-php/&apos; MAP_FROM=&apos;(.*)\.html&apos; MAP_TO=&apos;\1.php&apos; ./run-selenium2.sh</command>
+      <command>bundle --path ~/gems &amp;&amp; TEST_URL=&apos;http://kendobuild/staging-php/&apos; MAP_FROM=&apos;(.*)\.html&apos; MAP_TO=&apos;\1.php&apos; ./run-selenium2.sh test:wrappers</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
