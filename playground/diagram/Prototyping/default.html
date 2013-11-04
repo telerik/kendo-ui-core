@@ -31,7 +31,6 @@
 
         #toolBoxDiv {
             float: left;
-            margin: 5px;
         }
 
         k-slider {
@@ -66,8 +65,10 @@
             margin: 10px;
         }
 
-        #splitter {
-            height: 89%;
+        #canvas .km-scroll-wrapper {
+            height: 100%;
+            position: relative;
+            width: 100%;
         }
 
         #toolbarDiv {
@@ -98,10 +99,11 @@
         #menuWrapper {
             position: relative;
             top: 0;
+            overflow: visible;
         }
 
         #menu {
-            margin-left: 0px;;
+            margin-left: 0px;
         }
 
         #logo {
@@ -275,12 +277,6 @@
             </g>
         </svg>
     </div>
-
-
-
-
-
-
 </script>
 
 <script>
@@ -308,6 +304,29 @@ function loadDiagram() {
 $(function () {
     function onload() {
     }
+
+    function createSplitters() {
+        $("#mainDiv").kendoSplitter({
+            orientation: "vertical",
+            panes: [
+                { collapsible: false, resizable: false, size: "32px" },
+                { collapsible: false, resizable: false, size: "32px" },
+                { collapsible: false, resizable: false, scrollable: false },
+                { collapsible: false, resizable: false, size: "50px" }
+            ],
+            resize: function () {
+                console.log(arguments);
+            }
+        });
+        $("#splitter").kendoSplitter({
+            orientation: "horizontal",
+            panes: [
+                { collapsible: false, scrollable: true, size: "18%" },
+                { collapsible: false, scrollable: false }
+            ]
+        });
+    }
+    createSplitters();
 
     $(document).bind('keydown', 'Ctrl+s', function (e) {
         saveDiagram();
@@ -437,14 +456,6 @@ $(function () {
 
             return img;
         }
-    });
-
-    $("#splitter").kendoSplitter({
-        panes: [
-            { collapsible: false },
-            { collapsible: false,
-                size: "82%" }
-        ]
     });
 
     $("#undoButton").click(function (e) {

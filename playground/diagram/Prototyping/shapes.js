@@ -24,6 +24,38 @@ var shapesSource = [
     },
     {
         options: {
+            name: "Pie Chart",
+            data: function () {
+                var g = new kendo.diagram.Group({
+                    autoSize: true
+                });
+                var p = new kendo.diagram.Path({
+                    data: "M199.5,100 C199.5,154.95233 154.95233,199.5 100,199.5 C45.047668,199.5 0.5,154.95233 0.5,100 C0.5,45.047668 45.047668,0.5 100,0.5 C154.95233,0.5 199.5,45.047668 199.5,100 z",
+                    background: "Red"
+                });
+                var p1 = new kendo.diagram.Path({
+                    data: "M99.493675,0.5 L99.493675,99.493675 L0.5,99.493675 L0.52617007,97.425537 C1.8667064,44.513519 44.513519,1.8667064 97.425537,0.52617007 z",
+                    background: "Aqua"
+                });
+                var p2 = new kendo.diagram.Path({
+                    data: "M0.0063586687,0 L100.09337,0.83333409 L48.91906,86.91008 L48.146362,86.451004 C19.281487,68.825462 0,36.928093 0,0.50500053 z",
+                    background: "Blue",
+                    width: 100,
+                    y: 100
+                });
+                g.append(p);
+                g.append(p1);
+                g.append(p2);
+                return g;
+            },
+            height: 100,
+            width: 100,
+            connectors: [],
+            editable: false
+        }
+    },
+    {
+        options: {
             name: "Charm",
             data: "M19,22 L42,22 L42,42 L19,38.714287 z M0,22 L17,22 L17,38.42857 L0,36 z M17,3.5714288 L17,20 L0,20 L0,5.9999995 z M42,0 L42,20 L19,20 L19,3.2857139 z",
             connectors: []
