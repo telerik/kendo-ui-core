@@ -1,0 +1,572 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>Prototyping </title>
+    <link rel="shortcut icon" href="http://demos.kendoui.com/favicon.ico">
+    <link href="../../../styles/web/kendo.common.css" rel="stylesheet"/>
+    <link href="../../../styles/web/kendo.moonlight.css" rel="stylesheet"/>
+    <style type="text/css">
+        html, body, #mainDiv {
+            height: 100%;
+            overflow: hidden;
+            width: 100%;
+            margin: 0;
+            font-family: "Segoe UI", Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica, Sans-Serif;
+            font-size: 10pt;
+        }
+
+        #canvasDiv {
+
+        }
+
+        #canvas {
+            height: 100%;
+            background-color: #fff;
+        }
+
+        .menu-text {
+            margin-right: 10px;
+        }
+
+        #toolBoxDiv {
+            float: left;
+            margin: 5px;
+        }
+
+        k-slider {
+            margin-left: 10px;
+        }
+
+        .shape {
+            float: left;
+            margin: 3px;
+            cursor: pointer;
+        }
+
+        .shape:hover {
+            background-color: rgba(0, 0, 0, 0.25);
+        }
+
+        .shape svg {
+            width: 50px;
+            max-height: 50px;
+        }
+
+        .shape h3 {
+
+            font-size: 10pt;
+            overflow: hidden;
+            font-weight: normal;
+            max-width: 45px;
+            font-variant: small-caps;
+        }
+
+        h2 {
+            margin: 10px;
+        }
+
+        #splitter {
+            height: 89%;
+        }
+
+        #toolbarDiv {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background-color: #212a33;
+            color: #fff;
+            min-height: 30px;
+        }
+
+        #toolBox {
+            padding-top: 10px;
+            border-color: transparent;
+        }
+
+        #zoomPanel {
+            display: inline-block;
+            float: right;
+            margin-right: 15px;
+            margin-top: 10px;
+        }
+
+        #footer {
+            background-color: #212a33;
+            height: 50px;
+        }
+
+        #menuWrapper {
+            position: relative;
+            top: 0;
+        }
+
+        #menu {
+            margin-left: 0px;;
+        }
+
+        #logo {
+            position: absolute;
+            top: 5px;
+            right: 0;
+            margin-right: 5px;
+            height: 80%;
+        }
+
+        #toolboxTitle {
+            color: #fff;
+            font-size: 14pt;
+            font-variant: small-caps;
+            margin-top: 7px;
+            margin-bottom: 7px;
+            margin-left: 5px;
+        }
+
+        #upload-wrap {
+            float: left;
+            height: 30px;
+            width: 200px;
+            display: none;
+        }
+
+        .group {
+            border-right: 3px solid #38546d;
+
+            padding-left: 10px;
+            padding-right: 10px;
+            float: left;
+
+        }
+    </style>
+
+    <script src="../../../src/jquery.js"></script>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.data.js"></script>
+    <script src="../../../src/kendo.popup.js"></script>
+    <script src="../../../src/kendo.list.js"></script>
+    <script src="../../../src/kendo.dropdownlist.js"></script>
+    <script src="../../../src/kendo.dataviz.core.js"></script>
+    <script src="../../../src/kendo.userevents.js"></script>
+    <script src="../../../src/kendo.draganddrop.js"></script>
+    <script src="../../../src/kendo.slider.js"></script>
+    <script src="../../../src/kendo.resizable.js"></script>
+    <script src="../../../src/kendo.splitter.js"></script>
+    <script src="../../../src/kendo.listview.js"></script>
+    <script src="../../../src/kendo.colorpicker.js"></script>
+    <script src="../../../src/kendo.menu.js"></script>
+    <script src="../../../src/kendo.fx.js"></script>
+    <script src="../../../src/kendo.mobile.scroller.js"></script>
+    <script src="../../../src/kendo.diagram.utils.js"></script>
+    <script src="../../../src/kendo.diagram.math.js"></script>
+    <script src="../../../src/kendo.diagram.layout.js"></script>
+    <script src="../../../src/kendo.diagram.svg.js"></script>
+    <script src="../../../src/kendo.diagram.services.js"></script>
+    <script src="../../../src/kendo.diagram.extensions.js"></script>
+    <script src="../../../src/kendo.diagram.dom.js"></script>
+
+    <script src="../jquery.hotkeys.js"></script>
+
+    <script src="shapes.js"></script>
+</head>
+<body>
+<a href="#" id="savelink"></a>
+
+<div id="mainDiv">
+    <div id="menuWrapper">
+        <ul id="menu">
+            <li>
+                File
+                <ul>
+                    <li id="mnuNew" title="CTRL+N">New</li>
+                    <li id="mnuOpen" title="CTRL+O">Open</li>
+                    <li id="mnuSave" title="CTRL+S"><a href="#" id="mnuaSave" style="color:#fff;">Save</a></li>
+                </ul>
+            </li>
+            <li>
+                Edit
+                <ul>
+                    <li id="mnuUndo" title="CTRL+Z">Undo</li>
+                    <li id="mnuRedo" title="CTRL+Y">Redo</li>
+                    <hr/>
+                    <li id="mnuCut" title="CTRL+X">Cut</li>
+                    <li id="mnuCopy" title="CTRL+C">Copy</li>
+                    <li id="mnuPaste" title="CTRL+P">Paste</li>
+                    <li id="mnuDelete" title="DEL">Delete</li>
+                    <hr/>
+                    <li id="mnuSelectAll" title="CTRL+A">Select All</li>
+                </ul>
+            </li>
+            <li>Arrange
+                <ul>
+                    <li id="mnuToFront">Bring to front</li>
+                    <li id="mnuToBack">Send to back</li>
+                    <li>Align selection
+                        <ul>
+                            <li id="mnuAlignLeft">Left</li>
+                            <li id="mnuAlignRight">Right</li>
+                            <li id="mnuAlignTop">Top</li>
+                            <li id="mnuAlignBottom">Bottom</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <a href="http://www.telerik.com" title="Telerik | Kendo UI"><img id="logo" src="telerik-logo.png"/></a>
+    </div>
+
+    <div id="toolbarDiv">
+        <div class="group">
+            <input type="button" class="k-button" id="undoButton" title="Undo (CTRL+Z)" value="Undo"/>
+            <input type="button" class="k-button" id="redoButton" title="Redo (CTRL+Y)" value="Redo"/>
+            <input type="button" class="k-button" id="deleteButton" title="Delete (DEL)" value="Delete"/>
+            <input type="button" class="k-button" id="selectAllButton" title="Select All (CTRL+A)"
+                   value="SelectAll"/>
+        </div>
+        <div class="group">
+            <a type="button" class="k-button" id="saveButton" title="Save As (CTRL + S)" href="#">Save</a>
+            <input type="button" class="k-button" value="Load" title="Load (CTRL+O)"
+                   id="loadButton" onclick="loadDiagram();"/>
+
+            <div id="upload-wrap">
+                <input type="file" id="upload-field"/>
+            </div>
+        </div>
+        <div class="group">
+            <input type="button" class="k-button" id="toFrontButton" title="To Front" value="To Front"/>
+            <input type="button" class="k-button" id="toBackButton" title="To Back" value="To Back"/>
+        </div>
+        <div class="group">
+            <span class="menu-text">Canvas:</span><input id="backgroundPicker"/>
+            <span class="menu-text">Object:</span><input id="shapePicker"/>
+        </div>
+    </div>
+    <div id="splitter">
+        <div id="toolBoxDiv">
+            <div id="toolboxTitle">Shapes</div>
+            <div id="toolBox"></div>
+        </div>
+        <div id="canvasDiv">
+            <div id="canvas"></div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div id="zoomPanel">
+            <input id="slider"/>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/x-kendo-tmpl" id="template">
+    <div class="shape">
+        <svg>
+        <g transform="scale(0.5)" >
+        <title>#:options.name#</title>
+            #= new XMLSerializer().serializeToString(kendo.diagram.Shape.createShapeVisual(options).native) #
+            </g>
+        </svg>
+    </div>
+</script>
+
+<script>
+
+var Shapes = {
+};
+
+for (var i = 0; i < shapesSource.length; i++) {
+    shape = shapesSource[i].options;
+    shape.background = 'steelblue';
+    shape.strokeWidth = 0;
+    Shapes[shape.name] = shape;
+}
+
+
+function receivedText() {
+    //result = fr.result;
+    document.getElementById('editor').appendChild(document.createTextNode(fr.result))
+}
+
+function loadDiagram() {
+    document.getElementById('upload-field').click();
+}
+
+$(function () {
+    function onload() {
+    }
+
+    $(document).bind('keydown', 'Ctrl+s', function (e) {
+        saveDiagram();
+        return false;
+    });
+    $(document).bind('keydown', 'Ctrl+o', function (e) {
+        loadDiagram();
+        return false;
+    });
+    $(document).bind('keydown', 'Ctrl+n', function (e) {
+        diagram.clear();
+        return false;
+    });
+    $(document).bind('keydown', 'Ctrl+a', function (e) {
+        selectAll();
+        return false;
+    });
+
+    function colourNameToHex(colour) {
+        var colours = {"aliceblue": "#f0f8ff", "antiquewhite": "#faebd7", "aqua": "#00ffff", "aquamarine": "#7fffd4", "azure": "#f0ffff",
+            "beige": "#f5f5dc", "bisque": "#ffe4c4", "black": "#000000", "blanchedalmond": "#ffebcd", "blue": "#0000ff", "blueviolet": "#8a2be2", "brown": "#a52a2a", "burlywood": "#deb887",
+            "cadetblue": "#5f9ea0", "chartreuse": "#7fff00", "chocolate": "#d2691e", "coral": "#ff7f50", "cornflowerblue": "#6495ed", "cornsilk": "#fff8dc", "crimson": "#dc143c", "cyan": "#00ffff",
+            "darkblue": "#00008b", "darkcyan": "#008b8b", "darkgoldenrod": "#b8860b", "darkgray": "#a9a9a9", "darkgreen": "#006400", "darkkhaki": "#bdb76b", "darkmagenta": "#8b008b", "darkolivegreen": "#556b2f",
+            "darkorange": "#ff8c00", "darkorchid": "#9932cc", "darkred": "#8b0000", "darksalmon": "#e9967a", "darkseagreen": "#8fbc8f", "darkslateblue": "#483d8b", "darkslategray": "#2f4f4f", "darkturquoise": "#00ced1",
+            "darkviolet": "#9400d3", "deeppink": "#ff1493", "deepskyblue": "#00bfff", "dimgray": "#696969", "dodgerblue": "#1e90ff",
+            "firebrick": "#b22222", "floralwhite": "#fffaf0", "forestgreen": "#228b22", "fuchsia": "#ff00ff",
+            "gainsboro": "#dcdcdc", "ghostwhite": "#f8f8ff", "gold": "#ffd700", "goldenrod": "#daa520", "gray": "#808080", "green": "#008000", "greenyellow": "#adff2f",
+            "honeydew": "#f0fff0", "hotpink": "#ff69b4",
+            "indianred ": "#cd5c5c", "indigo ": "#4b0082", "ivory": "#fffff0", "khaki": "#f0e68c",
+            "lavender": "#e6e6fa", "lavenderblush": "#fff0f5", "lawngreen": "#7cfc00", "lemonchiffon": "#fffacd", "lightblue": "#add8e6", "lightcoral": "#f08080", "lightcyan": "#e0ffff", "lightgoldenrodyellow": "#fafad2",
+            "lightgrey": "#d3d3d3", "lightgreen": "#90ee90", "lightpink": "#ffb6c1", "lightsalmon": "#ffa07a", "lightseagreen": "#20b2aa", "lightskyblue": "#87cefa", "lightslategray": "#778899", "lightsteelblue": "#b0c4de",
+            "lightyellow": "#ffffe0", "lime": "#00ff00", "limegreen": "#32cd32", "linen": "#faf0e6",
+            "magenta": "#ff00ff", "maroon": "#800000", "mediumaquamarine": "#66cdaa", "mediumblue": "#0000cd", "mediumorchid": "#ba55d3", "mediumpurple": "#9370d8", "mediumseagreen": "#3cb371", "mediumslateblue": "#7b68ee",
+            "mediumspringgreen": "#00fa9a", "mediumturquoise": "#48d1cc", "mediumvioletred": "#c71585", "midnightblue": "#191970", "mintcream": "#f5fffa", "mistyrose": "#ffe4e1", "moccasin": "#ffe4b5",
+            "navajowhite": "#ffdead", "navy": "#000080",
+            "oldlace": "#fdf5e6", "olive": "#808000", "olivedrab": "#6b8e23", "orange": "#ffa500", "orangered": "#ff4500", "orchid": "#da70d6",
+            "palegoldenrod": "#eee8aa", "palegreen": "#98fb98", "paleturquoise": "#afeeee", "palevioletred": "#d87093", "papayawhip": "#ffefd5", "peachpuff": "#ffdab9", "peru": "#cd853f", "pink": "#ffc0cb", "plum": "#dda0dd", "powderblue": "#b0e0e6", "purple": "#800080",
+            "red": "#ff0000", "rosybrown": "#bc8f8f", "royalblue": "#4169e1",
+            "saddlebrown": "#8b4513", "salmon": "#fa8072", "sandybrown": "#f4a460", "seagreen": "#2e8b57", "seashell": "#fff5ee", "sienna": "#a0522d", "silver": "#c0c0c0", "skyblue": "#87ceeb", "slateblue": "#6a5acd", "slategray": "#708090", "snow": "#fffafa", "springgreen": "#00ff7f", "steelblue": "#4682b4",
+            "tan": "#d2b48c", "teal": "#008080", "thistle": "#d8bfd8", "tomato": "#ff6347", "turquoise": "#40e0d0",
+            "violet": "#ee82ee",
+            "wheat": "#f5deb3", "white": "#ffffff", "whitesmoke": "#f5f5f5",
+            "yellow": "#ffff00", "yellowgreen": "#9acd32"};
+
+        if (typeof colours[colour.toLowerCase()] != 'undefined')
+            return colours[colour.toLowerCase()];
+
+        return false;
+    }
+
+    $("#canvas").kendoDiagram({
+        zoom: function (e) {
+            slider.value(this._zoom);
+        },
+        select: function (e) {
+            var items = e.items;
+            var sp = $("#shapePicker").data("kendoColorPicker");
+            if (items.length === 1 && items[0] instanceof kendo.diagram.Shape) {
+                try {
+                    var bg = items[0].options.background;
+                    if (kendo.diagram.Utils.isDefined(bg)) {
+                        var color = kendo.parseColor(bg);
+                        sp.value(color);
+                    }
+
+                } catch (ex) {
+                    var byname = colourNameToHex(bg);
+                    if (byname) sp.value(byname);
+                }
+            }
+            else {
+                sp.value("#fff");
+            }
+        }
+    });
+    var diagram = $("#canvas").data("kendoDiagram"),
+            kendo = window.kendo,
+            Point = kendo.diagram.Point;
+
+
+    var list = $("#toolBox").kendoListView({
+        dataSource: {
+            data: shapesSource
+        },
+        template: kendo.template($("#template").html())
+        //selectable: "single"
+    });
+
+    list.kendoDraggable({
+        filter: "div[role=option]",
+        hint: function (row) {
+            var svg = row.children("svg"),
+                    list = $("#toolBox").data("kendoListView"),
+                    item = list.dataSource.getByUid(row.data().uid);
+            svg = svg.clone();
+            svg.data("data", item.options);
+            return svg;
+        }
+    });
+
+    $("#splitter").kendoSplitter({
+        panes: [
+            { collapsible: false },
+            { collapsible: false,
+                size: "82%" }
+        ]
+    });
+
+    $("#undoButton").click(function (e) {
+        diagram.undo();
+    });
+    $("#redoButton").click(function (e) {
+        diagram.redo();
+    });
+    $("#deleteButton").click(function (e) {
+        diagram.remove(diagram.select(), true);
+    });
+    function selectAll() {
+        diagram.select("All");
+        $("#canvas").focus();
+    }
+
+    $("#selectAllButton").click(function (e) {
+        selectAll();
+    });
+
+    function saveDiagram() {
+        window.URL = window.URL || window.webkitURL;
+        var save = $("#savelink"),
+                json = JSON.stringify(diagram.save()),
+                blob = new Blob([json], {type: "application\/json"}),
+                url = URL.createObjectURL(blob);
+
+        var a = document.getElementById('savelink');
+        a.href = window.URL.createObjectURL(blob);
+        a.download = 'diagram.json';
+        a.click();
+        return false;
+    }
+
+    $("#saveButton").click(function (e) {
+        saveDiagram();
+    });
+    $('#upload-field').change(function (e) {
+        var reader = new FileReader(),
+                f = e.target.files[0];
+
+        reader.onload = (function (file) {
+            return function (e) {
+                var saved = diagram.load(JSON.parse(e.target.result));
+            };
+        })(f);
+
+        // Read in the image file as a data URL.
+        reader.readAsBinaryString(f);
+    })
+
+    $("#selectAllButton").click(function (e) {
+        selectAll();
+    });
+    $("#toFrontButton").click(function (e) {
+        diagram.toFront();
+    });
+    $("#toBackButton").click(function (e) {
+        diagram.toBack();
+    });
+    $("#layoutButton").click(function (e) {
+        onLayoutChanged();
+    });
+
+    function onZoom(e) {
+        diagram.zoom(e.value);
+    }
+
+    var slider = $("#slider").kendoSlider({
+        min: 0.6,
+        value: 1,
+        max: 2,
+        smallStep: .1,
+        largeStep: .2,
+        tickPlacement: "none",
+        change: onZoom,
+        slide: onZoom
+    }).data("kendoSlider");
+
+    var onLayoutChanged = function (e) {
+        layout($("#Layouts").data("kendoDropDownList").value());
+    };
+
+    $("#backgroundPicker").kendoColorPicker({
+        value: "#fff",
+        buttons: false,
+        select: function (e) {
+            $("#canvas").css("background-color", e.value);
+        }
+    });
+
+    function onMenuSelect(e) {
+        switch (e.item.id) {
+            case "mnuNew":
+                diagram.clear();
+                break;
+            case "mnuSave":
+                saveDiagram();
+                break;
+            case "mnuOpen":
+                loadDiagram();
+                break;
+            case "mnuUndo":
+                diagram.undo();
+                break;
+            case "mnuRedo":
+                diagram.redo();
+                break;
+            case "mnuCut":
+                diagram.cut();
+                break;
+            case "mnuCopy":
+                diagram.copy();
+                break;
+            case "mnuPaste":
+                diagram.paste();
+                break;
+            case "mnuDelete":
+                diagram.remove(diagram.select(), true);
+                break;
+            case "mnuSelectAll":
+                selectAll();
+                break;
+            case "mnuToFront":
+                diagram.toFront();
+                break;
+            case "mnuToBack":
+                diagram.toBack();
+                break;
+            case "mnuAlignLeft":
+                diagram.alignShapes();
+                break;
+            case "mnuAlignRight":
+                diagram.alignShapes("Right");
+                break;
+            case "mnuAlignTop":
+                diagram.alignShapes("Top");
+                break;
+            case "mnuAlignBottom":
+                diagram.alignShapes("Bottom");
+                break;
+        }
+    }
+
+    function load(url) {
+        $.ajax({
+            dataType: "json",
+            url: url,
+
+            success: function (data) {
+                diagram.load(data);
+            }
+        });
+    }
+
+    $("#menu").kendoMenu({
+        select: onMenuSelect
+    });
+    $("#shapePicker").kendoColorPicker({
+        value: "#fff",
+        buttons: false,
+        select: function (e) {
+            var items = diagram.select();
+            for (var i = 0; i < items.length; i++) {
+                items[i].redraw({background: e.value});
+            }
+        }
+    });
+    onload();
+});
+</script>
+</html>
