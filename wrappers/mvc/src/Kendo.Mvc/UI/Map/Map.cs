@@ -34,6 +34,14 @@ namespace Kendo.Mvc.UI
 
         public double[] Center { get; set; }
 
+        public IUrlGenerator UrlGenerator
+        {
+            get
+            {
+                return urlGenerator;
+            }
+        }
+
 //>> Fields
         
         public MapControlsSettings Controls

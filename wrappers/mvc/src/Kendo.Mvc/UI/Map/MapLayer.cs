@@ -5,17 +5,32 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
+    using System.Web.Mvc;
 
     public class MapLayer : JsonObject
     {
-        public MapLayer()
+        public MapLayer(ViewContext viewContext, IUrlGenerator urlGenerator)
         {
             DataSource = new DataSource();
+            ViewContext = viewContext;
+            UrlGenerator = urlGenerator;
             //>> Initialization
         
             Style = new MapLayerStyleSettings();
                 
         //<< Initialization
+        }
+
+        public ViewContext ViewContext
+        {
+            get;
+            private set;
+        }
+
+        public IUrlGenerator UrlGenerator
+        {
+            get;
+            private set;
         }
 
         public DataSource DataSource { get; set; }

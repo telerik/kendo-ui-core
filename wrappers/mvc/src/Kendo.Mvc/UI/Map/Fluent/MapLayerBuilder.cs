@@ -25,7 +25,7 @@ using System.Web.Mvc;
         /// <returns></returns>
         public MapLayerBuilder DataSource(Action<MapLayerDataSourceBuilder> configurator)
         {
-            configurator(new MapLayerDataSourceBuilder(container.DataSource, null, null));
+            configurator(new MapLayerDataSourceBuilder(container.DataSource, container.ViewContext, container.UrlGenerator));
 
             return this;
         }
