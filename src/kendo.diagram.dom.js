@@ -78,7 +78,7 @@ kendo_module({
         DEFAULT_CONNECTION_STROKE = "Gray",
         DEFAULT_CONNECTION_STARTCAP = "FilledCircle",
         DEFAULT_CONNECTION_ENDCAP = "ArrowEnd",
-        DEFAULT_CONNECTOR_SIZE = 8;
+        DEFAULT_CONNECTOR_SIZE = 8,
         DEFAULT_HOVER_COLOR = "#70CAFF";
 
     diagram.DefaultConnectors = [
@@ -634,7 +634,7 @@ kendo_module({
                     }
                 }
             }
-        },
+        }
     });
 
     Shape.createShapeVisual = function (options) {
