@@ -442,7 +442,6 @@ kendo_module({
                 this.diagram.trigger(BOUNDSCHANGE, {item: this, bounds: this._bounds.clone()}); // the trigger modifies the arguments internally.
             }
         },
-
         /**
          * Returns a clone of this shape.
          * @returns {Shape}
@@ -457,7 +456,6 @@ kendo_module({
              clone.options.id = clone.id;*/
             return clone;
         },
-
         visualBounds: function () {
             var bounds = this.bounds(),
                 tl = bounds.topLeft(),
@@ -539,36 +537,10 @@ kendo_module({
             }
             return result;
         },
-        _rotate: function () {
-            var rotation = this.options.rotation;
-            if (rotation && rotation.angle) {
-                this.rotate(rotation.angle);
-            }
-            this._rotationOffset = new Point();
-        },
-        _hover: function (value) {
-            this.shapeVisual._hover(value);
-            this.diagram._showConnectors(this, value);
-        },
         refreshConnections: function () {
             $.each(this.connections(), function () {
                 this.refresh();
             });
-        },
-        _hitTest: function (value) {
-            if (this.visible()) {
-                var bounds = this.bounds(), rotatedPoint,
-                    angle = this.rotate().angle;
-                if (value.isEmpty && !value.isEmpty()) { // rect selection
-                    return Intersect.rects(value, bounds, angle ? angle : 0);
-                }
-                else { // point
-                    rotatedPoint = value.clone().rotate(bounds.center(), angle); // cloning is important because rotate modifies the point inline.
-                    if (bounds.contains(rotatedPoint)) {
-                        return this;
-                    }
-                }
-            }
         },
         /**
          * Gets a connector of this shape either by the connector's supposed name or
@@ -618,7 +590,34 @@ kendo_module({
                 this.options = deepExtend({}, this.options, options);
             }
             this.shapeVisual.redraw(options);
-        }
+        },
+
+        _rotate: function () {
+            var rotation = this.options.rotation;
+            if (rotation && rotation.angle) {
+                this.rotate(rotation.angle);
+            }
+            this._rotationOffset = new Point();
+        },
+        _hover: function (value) {
+            this.shapeVisual._hover(value);
+            this.diagram._showConnectors(this, value);
+        },
+        _hitTest: function (value) {
+            if (this.visible()) {
+                var bounds = this.bounds(), rotatedPoint,
+                    angle = this.rotate().angle;
+                if (value.isEmpty && !value.isEmpty()) { // rect selection
+                    return Intersect.rects(value, bounds, angle ? angle : 0);
+                }
+                else { // point
+                    rotatedPoint = value.clone().rotate(bounds.center(), angle); // cloning is important because rotate modifies the point inline.
+                    if (bounds.contains(rotatedPoint)) {
+                        return this;
+                    }
+                }
+            }
+        },
     });
 
     Shape.createShapeVisual = function (options) {
