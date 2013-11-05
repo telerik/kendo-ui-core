@@ -23,12 +23,14 @@
         Point = g.Point,
 
         d = dataviz.drawing,
+        Circle = d.Circle,
         Group = d.Group,
         MultiPath = d.MultiPath,
         Path = d.Path,
 
         svg = d.svg,
         Node = svg.Node,
+        CircleNode = svg.CircleNode,
         GroupNode = svg.GroupNode,
         PathNode = svg.PathNode,
         MultiPathNode = svg.MultiPathNode,
@@ -361,7 +363,6 @@
         path.options.set("fill", { color: "red", opacity: 0.5 });
         var svg = pathNode.render();
 
-        console.log(svg);
         ok(svg.indexOf("fill='red'") !== -1);
         ok(svg.indexOf("fill-opacity='0.5'") !== -1);
     });
@@ -529,6 +530,26 @@
             .moveTo(10, 10).lineTo(10, 20);
 
         ok(multiPathNode.render().indexOf("d='M0 0 10 20 M10 10 10 20'") !== -1);
+    });
+
+    // ------------------------------------------------------------
+    var circle,
+        circleNode;
+
+    module("CircleNode", {
+        setup: function() {
+            var geometry = new g.Circle(new Point(10, 20), 30);
+            circle = new Circle(geometry);
+            circleNode = new CircleNode(circle);
+        }
+    });
+
+    test("renders center", function() {
+        ok(circleNode.render().indexOf("cx='10' cy='20'") !== -1);
+    });
+
+    test("renders radius", function() {
+        ok(circleNode.render().indexOf("r='30'") !== -1);
     });
     </script>
 

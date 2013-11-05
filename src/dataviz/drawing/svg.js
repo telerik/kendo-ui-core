@@ -81,6 +81,7 @@
         },
 
         _template: renderTemplate(
+            // TODO: Append XML prefix only during export
             "<?xml version='1.0' ?>" +
             "<svg xmlns='" + SVG_NS + "' version='1.1' " +
             "width='#= kendo.dataviz.util.renderSize(d.options.width) #' " +
@@ -140,6 +141,8 @@
                     childNode = new PathNode(srcElement);
                 } else if (srcElement instanceof d.MultiPath) {
                     childNode = new MultiPathNode(srcElement);
+                } else if (srcElement instanceof d.Circle) {
+                    childNode = new CircleNode(srcElement);
                 }
 
                 if (children && children.length > 0) {
@@ -235,7 +238,7 @@
 
     var PathNode = Node.extend({
         geometryChange: function() {
-            this.attr("d", this.renderSegments());
+            this.attr("d", this.renderData());
             this.invalidate();
         },
 
@@ -287,7 +290,7 @@
             }
         },
 
-        renderSegments: function() {
+        renderData: function() {
             return this.printPath(this.srcElement);
         },
 
@@ -402,7 +405,7 @@
         template: renderTemplate(
             "<path #= kendo.dataviz.util.renderAttr('style', d.renderCursor()) # " +
             "#= d.renderVisibility() # " +
-            "#= kendo.dataviz.util.renderAttr('d', d.renderSegments()) # " +
+            "#= kendo.dataviz.util.renderAttr('d', d.renderData()) # " +
             "#= d.renderStroke() # " +
             "#= d.renderFill() # " +
             "stroke-linejoin='round'></path>"
@@ -410,7 +413,7 @@
     });
 
     var MultiPathNode = PathNode .extend({
-        renderSegments: function() {
+        renderData: function() {
             var paths = this.srcElement.paths;
 
             if (paths.length > 0) {
@@ -424,6 +427,17 @@
                 return result.join(" ");
             }
         }
+    });
+
+    var CircleNode = PathNode.extend({
+        template: renderTemplate(
+            "<circle #= kendo.dataviz.util.renderAttr('style', d.renderCursor()) # " +
+            "cx='#= this.srcElement.geometry.center.x #' cy='#= this.srcElement.geometry.center.y #' " +
+            "r='#= this.srcElement.geometry.radius #' " +
+            "#= d.renderVisibility() # " +
+            "#= d.renderStroke() # " +
+            "#= d.renderFill() #></circle>"
+        )
     });
 
     // Helpers ================================================================
@@ -481,6 +495,7 @@
     // Exports ================================================================
     deepExtend(d, {
         svg: {
+            CircleNode: CircleNode,
             GroupNode: GroupNode,
             MultiPathNode: MultiPathNode,
             Node: Node,

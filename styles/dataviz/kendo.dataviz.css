@@ -204,7 +204,7 @@ span.k-sparkline,
 }
 
 .k-map .k-layer {
-    position: relative;
+    position: absolute;
 }
 /* Map Compass */
 
