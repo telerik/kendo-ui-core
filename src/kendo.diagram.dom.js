@@ -751,7 +751,6 @@ kendo_module({
         targetPoint: function () {
             return this._resolvedTargetConnector ? this._resolvedTargetConnector.position() : this._targetPoint;
         },
-
         /**
          * Gets or sets the Point where the target of the connection resides.
          * @param target The target of this connection. Can be a Point, Shape, Connector.
@@ -793,7 +792,6 @@ kendo_module({
             }
             return this.targetConnector ? this.targetConnector : this._targetPoint;
         },
-
         /**
          * Gets or sets the PathDefiner of the targetPoint.
          * The right part of this definer is always null since it defines the target tangent.
@@ -817,7 +815,6 @@ kendo_module({
                 return this._targetDefiner;
             }
         },
-
         /**
          * Selects or unselects this connections.
          * @param value True to select, false to unselect.
@@ -842,7 +839,6 @@ kendo_module({
                 }
             }
         },
-
         /**
          * Gets or sets the bounds of this connection.
          * @param value A Rect object.
@@ -856,7 +852,6 @@ kendo_module({
                 return this._bounds;
             }
         },
-
         /**
          * Gets or sets the connection type (see ConnectionType enumeration).
          * @param value A ConnectionType value.
@@ -883,7 +878,6 @@ kendo_module({
                 return this._type;
             }
         },
-
         /**
          * Gets or sets the collection of *intermediate* points.
          * The 'allPoints()' property will return all the points.
@@ -917,7 +911,6 @@ kendo_module({
                 return pts;
             }
         },
-
         /**
          * Gets all the points of this connection. This is the combination of the sourcePoint, the points and the targetPoint.
          * @returns {Array}
@@ -932,7 +925,46 @@ kendo_module({
             pts.push(this.targetPoint());
             return pts;
         },
+        refresh: function () {
+            resolveConnectors(this);
+            var globalSourcePoint = this.sourcePoint(), globalSinkPoint = this.targetPoint(),
+                boundsTopLeft, localSourcePoint, localSinkPoint, middle;
 
+            // this.visual.position(boundsTopLeft);    //global coordinates!
+            this._refreshPath();
+
+            boundsTopLeft = this._bounds.topLeft();
+            localSourcePoint = globalSourcePoint.minus(boundsTopLeft);
+            localSinkPoint = globalSinkPoint.minus(boundsTopLeft);
+            if (this.contentVisual) {
+                middle = Point.fn.middleOf(localSourcePoint, localSinkPoint);
+                this.contentVisual.position(new Point(middle.x + boundsTopLeft.x, middle.y + boundsTopLeft.y));
+            }
+
+            if (this.adorner) {
+                this.adorner.refresh();
+            }
+        },
+        redraw: function (options) {
+            this.options = deepExtend({}, this.options, options);
+            this.content(this.options.content);
+            if (Utils.isDefined(this.options.points) && this.options.points.length > 0) {
+                this.points(this.options.points);
+                this._refreshPath();
+            }
+            this.path.redraw(options);
+        },
+        /**
+         * Returns a clone of this connection.
+         * @returns {Connection}
+         */
+        clone: function () {
+            var json = this.serialize(),
+                clone = new Connection(this.from, this.to, json.options);
+            clone.diagram = this.diagram;
+
+            return clone;
+        },
         serialize: function () {
 
             var json = deepExtend({},
@@ -947,6 +979,7 @@ kendo_module({
             json.options.points = this.points();
             return json;
         },
+
         /**
          * Returns whether the given Point or Rect hits this connection.
          * @param value
@@ -1000,46 +1033,6 @@ kendo_module({
         },
         _drawPath: function (data) {
             this.path.redraw({ data: data  });
-        },
-        refresh: function () {
-            resolveConnectors(this);
-            var globalSourcePoint = this.sourcePoint(), globalSinkPoint = this.targetPoint(),
-                boundsTopLeft, localSourcePoint, localSinkPoint, middle;
-
-            // this.visual.position(boundsTopLeft);    //global coordinates!
-            this._refreshPath();
-
-            boundsTopLeft = this._bounds.topLeft();
-            localSourcePoint = globalSourcePoint.minus(boundsTopLeft);
-            localSinkPoint = globalSinkPoint.minus(boundsTopLeft);
-            if (this.contentVisual) {
-                middle = Point.fn.middleOf(localSourcePoint, localSinkPoint);
-                this.contentVisual.position(new Point(middle.x + boundsTopLeft.x, middle.y + boundsTopLeft.y));
-            }
-
-            if (this.adorner) {
-                this.adorner.refresh();
-            }
-        },
-        redraw: function (options) {
-            this.options = deepExtend({}, this.options, options);
-            this.content(this.options.content);
-            if (Utils.isDefined(this.options.points) && this.options.points.length > 0) {
-                this.points(this.options.points);
-                this._refreshPath();
-            }
-            this.path.redraw(options);
-        },
-        /**
-         * Returns a clone of this connection.
-         * @returns {Connection}
-         */
-        clone: function () {
-            var json = this.serialize(),
-                clone = new Connection(this.from, this.to, json.options);
-            clone.diagram = this.diagram;
-
-            return clone;
         },
         _clearSourceConnector: function () {
             this.sourceConnector.connections.remove(this);
