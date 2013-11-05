@@ -56,6 +56,8 @@ kendo_module({
             };
 
             that._historyNavigate = function(url) {
+                var params = kendo.parseQueryStringParams(url);
+
                 if (url === BACK) {
                     if (that.history.length === 1) {
                         return;
@@ -67,7 +69,7 @@ kendo_module({
                     that.history.push(url);
                 }
 
-                that.historyCallback(url);
+                that.historyCallback(url, params);
             };
 
             that.loader = new Loader(element, {
