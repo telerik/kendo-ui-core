@@ -362,7 +362,7 @@ kendo_module({
                 url = "/";
             }
 
-            if (this.trigger(CHANGE, {url: e.url})) {
+            if (this.trigger(CHANGE, { url: e.url, params: urlParams(e.url) })) {
                 e.preventDefault();
                 return;
             }

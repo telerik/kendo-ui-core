@@ -198,6 +198,17 @@ test("triggers change on query string params change", 2, function(){
     navigate("/foo?bar=B");
 });
 
+test("query string parameters are available in change event", 2, function(){
+    var router = new kendo.Router();
+
+    router.start();
+    router.bind("change", function(e) {
+        equal(e.params.bar, "A");
+        equal(e.params.baz, "B");
+    });
+    navigate("/foo?bar=A&baz=B");
+});
+
 test("preventing default does not hit the route", 0, function(){
     var router = new kendo.Router();
 
