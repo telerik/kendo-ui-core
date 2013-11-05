@@ -956,7 +956,7 @@ kendo_module({
             }
         },
         _hitTest: function (point) {
-            var hit, d = this.diagram;
+            var hit, d = this.diagram, item, i;
 
             // connectors
             if (this._hoveredConnector) {
@@ -983,7 +983,15 @@ kendo_module({
             }
 
             if (!this.activeTool || this.activeTool.type !== "ConnectionTool") {
-                hit = this._hitTestItems(d._selectedItems, point);
+                var selectedConnections = []; // only the connections should have higher presence because the connection edit point is on top of connector.
+                // TODO: This should be reworked. The connection adorner should be one for all selected connections and should be hit tested prior the connections and shapes itself.
+                for (i = 0; i < d._selectedItems.length; i++) {
+                    item = d._selectedItems[i];
+                    if (item instanceof diagram.Connection) {
+                        selectedConnections.push(item);
+                    }
+                }
+                hit = this._hitTestItems(selectedConnections, point);
             }
             // Shapes | Connectors
             return hit || this._hitTestItems(d.shapes, point) || this._hitTestItems(d.connections, point);
