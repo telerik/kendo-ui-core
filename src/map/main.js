@@ -64,6 +64,8 @@ kendo_module({
                 velocityMultiplier: VELOCITY_MULTIPLIER,
                 zoom: true
             });
+            // TODO: Rename to scrollElement
+            this.scrollWrap = scroller.scrollElement;
 
             scroller.bind("scroll", proxy(this._scroll, this));
             scroller.bind("scrollEnd", proxy(this._scrollEnd, this));
@@ -73,6 +75,7 @@ kendo_module({
             this.element.bind(MOUSEWHEEL, this._mousewheel);
 
             this._reset();
+            this._renderMarkers();
         },
 
         options: {
@@ -275,6 +278,10 @@ kendo_module({
                 // TODO: Set layer size
                 layers.push(new impl(this, deepExtend({}, defaults, options)));
             }
+        },
+
+        _renderMarkers: function() {
+            this.markers = new map.layers.MarkerLayer(this, this.options);
         },
 
         _viewportSize: function() {
