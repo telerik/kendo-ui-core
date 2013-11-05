@@ -150,7 +150,7 @@
         size: function() {
             var nw = this._extent.nw,
                 se = this._extent.se,
-                diff = se.subtract(nw);
+                diff = se.clone().subtract(nw);
 
             return {
                 width: diff.x,
@@ -179,7 +179,7 @@
 
         reset: function() {
             this.subdomainIndex = 0;
-            this._basePoint = this._extent.nw;
+            this.basePoint = this._extent.nw;
             this.render();
         },
 
@@ -205,7 +205,7 @@
 
         createTile: function(index) {
             var point = this.indexToPoint(index),
-                offset = point.clone().subtract(this._basePoint),
+                offset = point.clone().subtract(this.basePoint),
                 urlTemplate = template(this.options.urlTemplate),
                 tileOptions = {
                     index: index,
@@ -354,7 +354,8 @@
                 TileLayer: TileLayer,
 
                 ImageTile: ImageTile,
-                TilePool: TilePool
+                TilePool: TilePool,
+                TileView: TileView
             }
         }
     });
