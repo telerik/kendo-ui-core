@@ -430,6 +430,14 @@
     });
 
     var CircleNode = PathNode.extend({
+        geometryChange: function() {
+            var geometry = this.srcElement.geometry;
+            this.attr("cx", geometry.center.x);
+            this.attr("cy", geometry.center.y);
+            this.attr("r", geometry.radius);
+            this.invalidate();
+        },
+
         template: renderTemplate(
             "<circle #= kendo.dataviz.util.renderAttr('style', d.renderCursor()) # " +
             "cx='#= this.srcElement.geometry.center.x #' cy='#= this.srcElement.geometry.center.y #' " +

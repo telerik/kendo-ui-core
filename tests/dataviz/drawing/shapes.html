@@ -189,20 +189,44 @@
     });
 
     // ------------------------------------------------------------
-    module("Circle");
+    var circleGeometry,
+        circle;
+
+    module("Circle", {
+        setup: function() {
+            circleGeometry = new g.Circle(new g.Point(0, 0), 10);
+            circle = new Circle(circleGeometry);
+        }
+    });
 
     test("sets initial geometry", function() {
-        var geometry = new g.Circle(new g.Point(0, 0), 10);
-        var circle = new Circle(geometry);
-
-        deepEqual(circle.geometry, geometry);
+        deepEqual(circle.geometry, circleGeometry);
     });
 
     test("sets initial options", function() {
-        var geometry = new g.Circle(new g.Point(0, 0), 10);
-        var circle = new Circle(geometry, { foo: true });
+        var circle = new Circle(circleGeometry, { foo: true });
 
         ok(circle.options.foo);
+    });
+
+    test("changing the center triggers geometryChange", function() {
+        circle.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        circle.geometry.center.set("x", 5);
+    });
+
+    test("changing the radius triggers geometryChange", function() {
+        circle.observer = {
+            geometryChange: function() {
+                ok(true);
+            }
+        };
+
+        circle.geometry.set("radius", 5);
     });
 
     // ------------------------------------------------------------

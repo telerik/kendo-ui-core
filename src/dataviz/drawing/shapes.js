@@ -123,6 +123,7 @@
             Shape.fn.init.call(circle, options);
 
             circle.geometry = geometry || new g.Circle();
+            circle.geometry.observer = this;
         }
     });
 
