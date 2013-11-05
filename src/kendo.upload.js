@@ -100,6 +100,7 @@ kendo_module({
                 "dropFilesHere": "drop files here to upload",
                 "statusUploading": "uploading",
                 "statusUploaded": "uploaded",
+                "statusWarning": "warning",
                 "statusFailed": "failed",
                 "headerStatusUploading": "Uploading...",
                 "headerStatusUploaded": "Done"
@@ -539,15 +540,23 @@ kendo_module({
         },
 
         _updateHeaderUploadStatus: function() {
-            var currentlyUploading = $('.k-file', this.wrapper).not('.k-file-success, .k-file-error');
-            if (currentlyUploading.length === 0) {
-                var headerUploadStatus = $('.k-upload-status-total', this.wrapper);
-                var headerUploadStatusIcon = $('.k-icon', headerUploadStatus)
-                                              .removeClass('k-loading')
-                                              .addClass('k-warning')
-                                              .text(this.localization.statusUploaded);
+            var that = this;
+            var localization = that.localization;
+            var currentlyUploading = $('.k-file', that.wrapper).not('.k-file-success, .k-file-error');
+            var failedUploads;
+            var headerUploadStatus;
+            var headerUploadStatusIcon;
 
-                headerUploadStatus.text(this.localization.headerStatusUploaded)
+            if (currentlyUploading.length === 0) {
+                failedUploads = $('.k-file.k-file-error', that.wrapper);
+
+                headerUploadStatus = $('.k-upload-status-total', that.wrapper);
+                headerUploadStatusIcon = $('.k-icon', headerUploadStatus)
+                                              .removeClass('k-loading')
+                                              .addClass((failedUploads.length !== 0) ? 'k-warning' : "k-i-tick")
+                                              .text((failedUploads.length !== 0) ? localization.statusWarning : localization.statusUploaded);
+
+                headerUploadStatus.text(that.localization.headerStatusUploaded)
                                   .append(headerUploadStatusIcon);
             }
         },

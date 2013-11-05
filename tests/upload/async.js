@@ -63,17 +63,30 @@
         equal($(".k-upload-status-total", uploadInstance.wrapper).clone().children().remove().end().text(), "Done");
     });
 
-    test("k-upload-status-total icon reverts back to warning if upload is canceled and there are other finished uploads", function(){
+    test("k-upload-status-total icon reverts back to success if upload is canceled and there are no failed uploads", function(){
         simulateUpload();
+        simulateFileSelect();
+        $(".k-cancel", uploadInstance.wrapper).trigger("click");
+        equal($(".k-upload-status-total .k-i-tick", uploadInstance.wrapper).length, 1);
+    });
+
+    test("k-upload-status-total icon reverts back to warning if upload is canceled and there are failed uploads", function(){
+        simulateUploadWithResponse(errorResponse);
         simulateFileSelect();
         $(".k-cancel", uploadInstance.wrapper).trigger("click");
         equal($(".k-upload-status-total .k-warning", uploadInstance.wrapper).length, 1);
     });
 
-    test("k-upload-status-total shows warning icon when upload is finished", function(){
-        simulateUpload();
+    test("k-upload-status-total shows warning icon when upload has not finished successfully", function(){
+        simulateUploadWithResponse(errorResponse);
 
         equal($(".k-upload-status-total .k-warning", uploadInstance.wrapper).length, 1);
+    });
+
+    test("k-upload-status-total shows success icon when upload has finished successfully", function(){
+        simulateUpload();
+
+        equal($(".k-upload-status-total .k-i-tick", uploadInstance.wrapper).length, 1);
     });
 
     test("k-upload-status-total contains correct text when upload is finished", function(){
@@ -82,10 +95,16 @@
         equal($(".k-upload-status-total", uploadInstance.wrapper).clone().children().remove().end().text(), "Done");
     });
 
-    test("k-upload-status-total warning icon span contains correct text when upload is finished", function(){
+    test("k-upload-status-total warning icon span contains correct text when upload has finished with errors", function(){
+        simulateUploadWithResponse(errorResponse);
+
+        equal($(".k-upload-status-total .k-warning", uploadInstance.wrapper).text(), "warning");
+    });
+
+    test("k-upload-status-total success icon span contains correct text when upload has finished successfully", function(){
         simulateUpload();
 
-        equal($(".k-upload-status-total .k-warning", uploadInstance.wrapper).text(), "uploaded");
+        equal($(".k-upload-status-total .k-i-tick", uploadInstance.wrapper).text(), "uploaded");
     });
 
     test("k-file-progress is rendered when upload starts", function() {
