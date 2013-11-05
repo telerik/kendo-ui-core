@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.router.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.userevents.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.listview.js"></script>
+        <script src="../../src/kendo.mobile.modalview.js"></script>
+        <script src="../../src/kendo.mobile.tabstrip.js"></script>
+    </head>
+    <body>
+        <div id="forms" data-role="view" data-title="Form Elements" data-init="initForm" data-use-native-scrolling="true">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                </div>
+            </header>
+            <form action="./index.html">
+                <ul data-role="listview" data-style="inset">
+                    <li>
+                        <label>Select element
+                            <select>
+                                <option value="First Option">First Option</option>
+                                <option value="Second Option">Second Option</option>
+                                <option value="Third Option">Third Option</option>
+                                <option value="Fourth Option">Fourth Option</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li>
+                        <label>DropDownList
+                            <select id="dropdown">
+                                <option value="First Option">First Option</option>
+                                <option value="Second Option">Second Option</option>
+                                <option value="Third Option">Third Option</option>
+                                <option value="Fourth Option">Fourth Option</option>
+                                <option value="First Option">Fifth Option</option>
+                                <option value="Sixth Option">Sixth Option</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li>
+                        <label>Slider
+                            <input id="slider" type="range" max="100" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>Type text
+                            <input type="text" value="Text" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Type password
+                            <input type="password" value="password" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Type search
+                            <input type="search" value="search" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Type url
+                            <input type="url" value="http://www.kendoui.com" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Type email
+                            <input type="email" value="kendoui@kendoui.com" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Type number
+                            <input type="number" value="20" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Type tel
+                            <input type="tel" value="+44 22 11 10" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Type date
+                            <input type="date" value="2012-03-22" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Type time
+                            <input type="time" value="22:30" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Type month
+                            <input type="month" value="2012-01" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Type datetime
+                            <input type="datetime" value="2012-03-22T20:15Z" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Type datetime-local
+                            <input type="datetime-local" value="2012-03-22T20:15" />
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            Textarea
+                            <textarea style="resize: none">Multiline
+                                Text</textarea>
+                        </label>
+                    </li>
+                </ul>
+            </form>
+            <footer data-role="footer">
+                <div data-role="tabstrip">
+                    <a href="#tabstrip-profile" data-icon="contacts">Profile
+                        </a><a href="#tabstrip-sales" data-icon="history">Sales
+                        </a><a href="#tabstrip-rating" data-icon="favorites">Rating
+                    </a><a href="#tabstrip-settings" data-icon="settings">Settings</a>
+                </div>
+            </footer>
+        </div>
+        <script>
+            function initForm(e) {
+                var body = $(".km-pane");
+
+                if (kendo.ui.DropDownList) {
+                    $("#dropdown").kendoDropDownList({
+                        // The options are needed only for the desktop demo, remove them for mobile.
+                        popup: { appendTo: body },
+                        animation: { open: { effects: body.hasClass("km-android") ? "fadeIn" : body.hasClass("km-ios") || body.hasClass("km-wp") ? "slideIn:up" : "slideIn:down" } }
+                    });
+                }
+
+                if (kendo.ui.Slider) {
+                    $("#slider").kendoSlider({ tooltip: { enabled: false } });
+                }
+
+                e.view.content.on('focus', 'textarea, input', function(event) {
+                    e.view.scroller.scrollIntoView(event.target);
+                });
+            }
+        </script>
+
+        <style scoped>
+            #forms input:not([type=checkbox]):not([type=radio]),
+            #forms select,
+            #forms .k-dropdown
+            {
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                width: 50%;
+            }
+        </style>
+
+
+        <script>
+            var app = new kendo.mobile.Application(document.body, { useNativeScrolling: false });
+        </script>
+    </body>
+</html>

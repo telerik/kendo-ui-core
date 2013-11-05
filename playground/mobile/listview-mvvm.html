@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -22,62 +23,19 @@
         <script src="../../src/kendo.mobile.modalview.js"></script>
     </head>
     <body>
-        <div id="boatsView" data-role="view" data-title="Boats" data-model="LunchBoat.boatsViewModel">
-            <ul class="boat-list" data-bind="source: boats" data-style="inset" data-role="listview" data-template="boat-template"></ul>
+        <div data-role="view" data-model="foo">
+           <ul data-role="listview" data-bind="source: ds" data-endless-scroll="true" data-virtual-view-size="50"></ul>
         </div>
 
-        <script id="boat-template" type="text/x-kendo-template">
-            #= boatId #
-            <h2 class="destination" data-bind="text: destination"></h2>
-            <ul data-role="listview" data-bind="source: crewMembers" class="crew-member-list" data-template="crew-member-template"></ul>
-            <ul data-role="listview" class="crew-member-list">
-                <li>
-                    <button data-role="button" data-click="LunchBoat.addSelfToBoat" data-boat-id="#= data.boatId #">+</button>
-                </li>
-            </ul>
-        </script>
-
-        <script id="crew-member-template" type="text/x-kendo-template">
-            <span class="crew-member" data-bind="text: name"></span>
-        </script>
-
         <script>
-            var Boat = kendo.data.Model.define({
-                id: "boatId",
-                fields: {
-                    destination: {
-                        type: "string"
-                    },
-                    crewMembers: {
-                        defaultValue: []
-                    },
-                    boatId: {
-                        type: "number"
-                    }
-                }
-            });
-            var data = [
-            new Boat({ destination: "Chipotle", crewMembers: [ { name: "Todd" }, { name: "Jeff" } ], boatId: 2 })
-            ];
+            var ds = [];
+            for (var i = 0; i < 100; i ++) {
+                ds[i] = { num: i};
+            }
 
-            var dataSource = new kendo.data.DataSource({
-                data: data,
-                schema: {
-                    model: Boat
-                }
-            });
+            var foo = kendo.observable({ ds: new kendo.data.DataSource({ data: ds }) });
 
-            window.LunchBoat = {
-                boatsViewModel: kendo.observable({
-                    boats: dataSource
-                }),
-                addSelfToBoat: function (e) {
-                    var boat = window.LunchBoat.boatsViewModel.boats.data()[0];
-                    boat.crewMembers.push({ name: "Self" });
-                }
-            };
-
-            var app = new kendo.mobile.Application(document.body, {});
+            new kendo.mobile.Application();
         </script>
     </body>
 </html>

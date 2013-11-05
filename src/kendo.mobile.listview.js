@@ -289,6 +289,10 @@ kendo_module({
         },
 
         totalHeight: function() {
+            if (!this.items[0]) {
+                return 0;
+            }
+
             var list = this,
                 items = list.items,
                 top = items[0].top,
@@ -404,6 +408,10 @@ kendo_module({
 
         content: function(index) {
             return this.buffer.at(index);
+        },
+
+        destroy: function() {
+            this.unbind();
         },
 
         _resize: function() {
@@ -538,10 +546,31 @@ kendo_module({
 
             this.chromeHeight = listView.wrapper.children().not(listView.element).outerHeight() || 0;
             this.listView = listView;
+            this.scroller = listView.scroller();
             this.options = listView.options;
 
             listView.bind("_dataSource", function(e) {
                 binder.setDataSource(e.dataSource);
+            });
+
+            listView.bind("resize", function() {
+                if (!binder.list.items.length) {
+                    return;
+                }
+
+                binder.scroller.reset();
+                binder.buffer.range(0);
+                binder.list.refresh();
+            });
+
+            this.scroller.makeVirtual();
+
+            this.scroller.bind("scroll", function(e) {
+                binder.list.update(e.scrollTop);
+            });
+
+            this.scroller.bind("scrollEnd", function(e) {
+                binder.list.batchUpdate(e.scrollTop);
             });
         },
 
@@ -560,10 +589,6 @@ kendo_module({
                 buffer,
                 footer;
 
-            if (!scroller) {
-                throw new Error("In order for the listview virtual mode to work as expected, the listview element should be inside a touch scroller container");
-            }
-
             if (this.dataSource) {
                 this._unbindDataSource();
             }
@@ -576,12 +601,20 @@ kendo_module({
                 throw new Error("the DataSource does not have page size configured. Page Size setting is mandatory for the mobile listview virtual scrolling to work as expected.");
             }
 
+            if (this.buffer) {
+                this.buffer.destroy();
+            }
+
             buffer = new kendo.data.Buffer(dataSource, Math.floor(pageSize / 2), pressToLoadMore);
 
             if (pressToLoadMore) {
                 footer = new VirtualListViewPressToLoadMore(listView, buffer);
             } else {
                 footer = new VirtualListViewLoadingIndicator(listView);
+            }
+
+            if (this.list) {
+                this.list.destroy();
             }
 
             var list = new VirtualList({
@@ -591,35 +624,17 @@ kendo_module({
                 height: function() { return scroller.height(); }
             });
 
-            scroller.makeVirtual();
-
-            scroller.bind("scroll", function(e) {
-                list.update(e.scrollTop);
-            });
-
-            scroller.bind("scrollEnd", function(e) {
-                list.batchUpdate(e.scrollTop);
-            });
-
             list.bind("resize", function() {
                 binder.updateScrollerSize();
             });
 
             list.bind("reset", function() {
-                footer.enable();
+                binder.footer.enable();
             });
 
             list.bind("endReached", function() {
                 footer.disable();
                 binder.updateScrollerSize();
-            });
-
-            listView.bind("resize", function() {
-                if (list.items.length) {
-                    scroller.reset();
-                    buffer.range(0);
-                    list.refresh();
-                }
             });
 
             buffer.bind("expand", function() {
