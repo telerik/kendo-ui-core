@@ -82,8 +82,8 @@
                 var events = occurrences(schedulerEvent, new Date(2000, 10, 10), new Date(2000, 10, 10, 20));
 
                 equal(events.length, 2);
-                equal(events[1].start.getTime(), +new Date(2000, 10, 10, 19, 0));
-                equal(events[1].end.getTime(), +new Date(2000, 10, 10, 20, 0));
+                deepEqual(events[1].start, new Date(2000, 10, 10, 19, 0));
+                deepEqual(events[1].end, new Date(2000, 10, 10, 20, 0));
             });
 
             test("HOURLY method limits BYHOUR", function() {
@@ -1242,7 +1242,7 @@
                 equal(events[0].end.getTime(), +new Date(2013, 10, 29, 17, 0));
             });
 
-            test("WEEKLY occurrences method limits by BYMONTH=12 and INTERVAL=2", function() {
+            test("WEEKLY occurrence method limits by BYMONTH=12 and INTERVAL=2", function() {
                 var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
@@ -1253,10 +1253,14 @@
 
                 var events = occurrences(schedulerEvent, new Date(2013, 10, 27), new Date(2014, 0, 1));
 
-                equal(events.length, 5);
+                equal(events.length, 4);
+                deepEqual(events[0].start, new Date(2013, 11, 10, 16, 30));
+                deepEqual(events[1].start, new Date(2013, 11, 13, 16, 30));
+                deepEqual(events[2].start, new Date(2013, 11, 24, 16, 30));
+                deepEqual(events[3].start, new Date(2013, 11, 27, 16, 30));
             });
 
-            test("WEEKLY occurrences method limits by BYMONTH=11,12", function() {
+            test("WEEKLY occurrence method limits by BYMONTH=11,12", function() {
                 var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
@@ -1416,6 +1420,74 @@
                 var events = occurrences(schedulerEvent, new Date(2013, 5, 14), new Date(2013, 5, 15));
 
                 equal(events.length, 1);
+            });
+
+            test("WEEKLY expands correctly with interval and MO wkst option", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date("1997/8/5 09:00"),
+                    end: new Date("1997/8/5 09:30"),
+                    recurrenceRule: "FREQ=WEEKLY;INTERVAL=2;COUNT=4;BYDAY=TU,SU;WKST=MO"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(1997, 7, 5), new Date(1997, 8, 5));
+
+                deepEqual(events[0].start, new Date(1997, 7, 5, 9));
+                deepEqual(events[1].start, new Date(1997, 7, 10, 9));
+                deepEqual(events[2].start, new Date(1997, 7, 19, 9));
+                deepEqual(events[3].start, new Date(1997, 7, 24, 9));
+            });
+
+            test("WEEKLY expands correctly with interval and SU wkst option", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date("1997/8/5 09:00"),
+                    end: new Date("1997/8/5 09:30"),
+                    recurrenceRule: "FREQ=WEEKLY;INTERVAL=2;COUNT=4;BYDAY=TU,SU;WKST=SU"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(1997, 7, 5), new Date(1997, 8, 5));
+
+                deepEqual(events[0].start, new Date(1997, 7, 5, 9));
+                deepEqual(events[1].start, new Date(1997, 7, 17, 9));
+                deepEqual(events[2].start, new Date(1997, 7, 19, 9));
+                deepEqual(events[3].start, new Date(1997, 7, 31, 9));
+            });
+
+            test("WEEKLY expands correctly with interval with one year interval", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date("2013/8/5 09:00"),
+                    end: new Date("2013/8/5 09:30"),
+                    recurrenceRule: "FREQ=WEEKLY;INTERVAL=2;BYDAY=TU,FR;WKST=MO"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(2014, 7, 1), new Date(2014, 8, 1));
+
+                deepEqual(events[0].start, new Date(2014, 7, 5, 9));
+                deepEqual(events[1].start, new Date(2014, 7, 8, 9));
+                deepEqual(events[2].start, new Date(2014, 7, 19, 9));
+                deepEqual(events[3].start, new Date(2014, 7, 22, 9));
+            });
+
+            test("WEEKLY expands correctly with interval with two year interval", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date("2013/8/5 09:00"),
+                    end: new Date("2013/8/5 09:30"),
+                    recurrenceRule: "FREQ=WEEKLY;INTERVAL=2;BYDAY=TU,FR;WKST=MO"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(2015, 7, 1), new Date(2015, 8, 1));
+
+                deepEqual(events[0].start, new Date(2015, 7, 4, 9));
+                deepEqual(events[1].start, new Date(2015, 7, 7, 9));
+                deepEqual(events[2].start, new Date(2015, 7, 18, 9));
+                deepEqual(events[3].start, new Date(2015, 7, 21, 9));
             });
 
             module("MONTHLY Occurrences");
