@@ -12,10 +12,12 @@
         <ol id="qunit-tests"></ol>
 
         <script>
+            function teardown () {
+                $(".k-treeview,.k-item").remove();
+            }
+
             module("api", {
-                teardown: function () {
-                    $(".k-treeview,.k-item").remove();
-                }
+                teardown: teardown
             });
 
             test("enable(node, false) disables node", function() {
@@ -995,6 +997,99 @@
                 var changeEvents = dataSource._events.change;
 
                 ok(!changeEvents || !changeEvents.length);
+            });
+
+            test("expandPath expands root node", function() {
+                createTreeView([
+                    { id: 1, text: "foo", items: [
+                        { id: 2, text: "bar" }
+                    ] }
+                ]);
+
+                treeviewObject.expandPath([ 1 ]);
+
+                ok(treeviewObject.dataSource.get(1).expanded);
+            });
+
+            test("expandPath expands multiple levels", 2, function() {
+                createTreeView([
+                    { id: 1, text: "foo", items: [
+                        { id: 2, text: "bar", items: [
+                            { id: 3, text: "baz" }
+                        ] }
+                    ] }
+                ]);
+
+                treeviewObject.expandPath([ 1, 2 ], function() {
+                    var ds = treeviewObject.dataSource;
+                    ok(ds.get(1).expanded);
+                    ok(ds.get(2).expanded);
+                });
+            });
+
+            test("expandPath works with expanded nodes", function() {
+                createTreeView([
+                    { id: 1, text: "foo", expanded: true, items: [
+                        { id: 2, text: "bar", items: [
+                            { id: 3, text: "baz" }
+                        ] }
+                    ] }
+                ]);
+
+                treeviewObject.expandPath([ 1, 2 ], function() {
+                    var ds = treeviewObject.dataSource;
+                    ok(ds.get(1).expanded);
+                    ok(ds.get(2).expanded);
+                });
+            });
+
+            module("expandPath async", {
+                setup: function() {
+                    var id = 1;
+
+                    createTreeView({
+                        dataSource: {
+                            transport: {
+                                read: function(options) {
+                                    options.success([
+                                        { id: id++, text: "foo", hasChildren: true }
+                                    ]);
+                                }
+                            },
+                            schema: {
+                                model: {
+                                    id: "id",
+                                    hasChildren: "hasChildren"
+                                }
+                            }
+                        }
+                    });
+                },
+                teardown: teardown
+            });
+
+            asyncTest("expandPath loads async nodes", 1, function() {
+                var timeout = setTimeout(start, 200);
+
+                treeviewObject.expandPath([ 1 ], function() {
+                    clearTimeout(timeout);
+                    start();
+
+                    var root = treeviewObject.dataSource.get(1);
+                    ok(root.expanded);
+                });
+            });
+
+            asyncTest("expandPath loads multiple async nodes", 1, function() {
+                var timeout = setTimeout(start, 200);
+
+                treeviewObject.expandPath([ 1, 2, 3 ], function() {
+                    clearTimeout(timeout);
+                    start();
+
+                    var inner = treeviewObject.dataSource.get(3);
+                    ok(inner.expanded);
+                });
             });
 
         </script>

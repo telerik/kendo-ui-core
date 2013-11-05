@@ -1774,6 +1774,42 @@ kendo_module({
             return this.element.find(".k-item[" + kendo.attr("uid") + "=" + uid + "]");
         },
 
+        expandPath: function(path, complete) {
+            var dataSource = this.dataSource;
+            var node = dataSource.get(path[0]);
+            complete = complete || $.noop;
+
+            // expand loaded nodes
+            while (path.length > 0 && (node.expanded || node.loaded())) {
+                node.set("expanded", true);
+                path.shift();
+                node = dataSource.get(path[0]);
+            }
+
+            if (!path.length) {
+                return complete();
+            }
+
+            // expand async nodes
+            dataSource.bind("change", function expandLevel(e) {
+                // listen to the change event to know when the node has been loaded
+                var id = e.node && e.node.id;
+
+                // proceed if the change is caused by the last fetching
+                if (id && id === path[0]) {
+                    path.shift();
+
+                    if (path.length) {
+                        dataSource.get(path[0]).set("expanded", true);
+                    } else {
+                        complete();
+                    }
+                }
+            });
+
+            node.set("expanded", true);
+        },
+
         _renderItem: function (options) {
             if (!options.group) {
                 options.group = {};
