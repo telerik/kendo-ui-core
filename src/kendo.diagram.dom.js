@@ -61,8 +61,25 @@ kendo_module({
         ROTATE = "rotate",
         PAN = "pan",
         ZOOM = "zoom",
-        DEFAULTWIDTH = 100,
-        DEFAULTHEIGHT = 100;
+        CONNECTION_CSS = "k-connection",
+        SHAPE_CSS = "k-shape",
+        CONNECTOR_CSS = "k-connector",
+        DEFAULT_SHAPE_TYPE = "rectangle",
+        DEFAULT_SHAPE_WIDTH = 100,
+        DEFAULT_SHAPE_HEIGHT = 100,
+        DEFAULT_SHAPE_MINWIDTH = 20,
+        DEFAULT_SHAPE_MINHEIGHT = 20,
+        DEFAULT_SHAPE_POSITION = 0,
+        DEFAULT_SHAPE_STROKEWIDTH = 1,
+        DEFAULT_SHAPE_STROKECOLOR = "DimGray",
+        DEFAULT_SHAPE_STROKEDASH = "none",
+        DEFAULT_SHAPE_BACKGROUND = "SteelBlue",
+        DEFAULT_CONNECTION_BACKGROUND = "Yellow",
+        DEFAULT_CONNECTION_STROKE = "Gray",
+        DEFAULT_CONNECTION_STARTCAP = "FilledCircle",
+        DEFAULT_CONNECTION_ENDCAP = "ArrowEnd",
+        DEFAULT_CONNECTOR_SIZE = 8;
+        DEFAULT_HOVER_COLOR = "#70CAFF";
 
     diagram.DefaultConnectors = [
         {
@@ -322,11 +339,11 @@ kendo_module({
             this.shape = shape;
         },
         options: {
-            width: 8,
-            height: 8,
-            background: "Yellow",
-            hoveredBackground: "#70CAFF",
-            cssClass: "connector"
+            width: DEFAULT_CONNECTOR_SIZE,
+            height: DEFAULT_CONNECTOR_SIZE,
+            background: DEFAULT_CONNECTION_BACKGROUND,
+            hoveredBackground: DEFAULT_HOVER_COLOR,
+            cssClass: CONNECTOR_CSS
         },
         position: function () {
             if (this.options.position) {
@@ -381,19 +398,19 @@ kendo_module({
         },
         options: {
             type: "Shape",
-            cssClass: "k-shape",
-            data: "rectangle",
-            stroke: "Black",
-            strokeWidth: 1,
-            strokeDashArray: "none",
-            x: 0,
-            y: 0,
-            minWidth: 20,
-            minHeight: 20,
-            width: DEFAULTWIDTH,
-            height: DEFAULTHEIGHT,
-            background: "steelblue",
-            hoveredBackground: "#70CAFF",
+            cssClass: SHAPE_CSS,
+            data: DEFAULT_SHAPE_TYPE,
+            stroke: DEFAULT_SHAPE_STROKECOLOR,
+            strokeWidth: DEFAULT_SHAPE_STROKEWIDTH,
+            strokeDashArray: DEFAULT_SHAPE_STROKEDASH,
+            x: DEFAULT_SHAPE_POSITION,
+            y: DEFAULT_SHAPE_POSITION,
+            minWidth: DEFAULT_SHAPE_MINWIDTH,
+            minHeight: DEFAULT_SHAPE_MINHEIGHT,
+            width: DEFAULT_SHAPE_WIDTH,
+            height: DEFAULT_SHAPE_HEIGHT,
+            background: DEFAULT_SHAPE_BACKGROUND,
+            hoveredBackground: DEFAULT_HOVER_COLOR,
             connectors: diagram.DefaultConnectors,
             rotation: {
                 angle: 0
@@ -421,7 +438,7 @@ kendo_module({
             if (this.contentVisual && !this.contentVisual._measured) {
                 this.contentVisual.redraw(this._bounds);
             }
-            if (this.options.width === DEFAULTWIDTH && this.options.height === DEFAULTHEIGHT) { // no dimensions, assuming autosize for paths, groups...
+            if (this.options.width === DEFAULT_SHAPE_WIDTH && this.options.height === DEFAULT_SHAPE_HEIGHT) { // no dimensions, assuming autosize for paths, groups...
                 size = this.shapeVisual._measure();
                 if (size) {
                     this.bounds(new Rect(this.options.x, this.options.y, size.width, size.height));
@@ -662,12 +679,12 @@ kendo_module({
             that.refresh();
         },
         options: {
-            stroke: "gray",
-            hoveredStroke: "#70CAFF",
-            startCap: "FilledCircle",
-            endCap: "ArrowEnd",
+            stroke: DEFAULT_CONNECTION_STROKE,
+            hoveredStroke: DEFAULT_HOVER_COLOR,
+            startCap: DEFAULT_CONNECTION_STARTCAP,
+            endCap: DEFAULT_CONNECTION_ENDCAP,
             points: [],
-            cssClass: "k-connection"
+            cssClass: CONNECTION_CSS
         },
 
         /**
