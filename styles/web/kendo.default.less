@@ -5,7 +5,7 @@
 
 /* Widget Base Styles */
 @widget-text-color: #2e2e2e;
-@widget-gradient: "#f6f6f6 0%, #eaeaea 100%";
+@widget-gradient: "rgba(255,255,255,.6) 0%, rgba(255,255,255,.0) 100%";
 @widget-background-color: #fff;
 @widget-border-color: #c5c5c5;
 @widget-shadow: none;
@@ -43,29 +43,29 @@
 
 /* Hover State */
 @hover-text-color: @widget-text-color;
-@hover-gradient: "#cbc5c2 0%, #a99f9a 100%";
-@hover-background-color: #a99f9a;
-@hover-border-color: #a99f9a;
+@hover-gradient: "rgba(255,255,255,.4) 0%, rgba(255,255,255,.0) 100%";
+@hover-background-color: #bcb4b0;
+@hover-border-color: @hover-background-color;
 @hover-shadow: none;
 
 /* Selected State */
 @selected-text-color: #fff;
-@selected-gradient: "#fe761b 0%, #e15613 100%";
-@selected-background-color: #f0713a;
-@selected-border-color: #f0713a;
+@selected-gradient: "rgba(255,255,255,.2) 0%, rgba(255,255,255,.0) 100%";
+@selected-background-color: #f35800;
+@selected-border-color: @selected-background-color;
 @selected-shadow: none;
 
 /*Focused State*/
 @focused-border-color: @hover-border-color;
 @focused-shadow: 0 0 3px 0 @shadow-color;
-@focused-item-shadow: inset 0 0 3px 1px @hover-border-color;
-@focused-active-item-shadow: inset 0 0 3px 1px darken(@selected-border-color, 15%);
+@focused-item-shadow: inset 0 0 5px 1px @hover-border-color;
+@focused-active-item-shadow: inset 0 0 3px 4px darken(@selected-border-color, 4%);
 
 /* Active State */
 @active-text-color: @widget-text-color;
 @active-gradient:  none;
 @active-background-color: @widget-background-color;
-@active-border-color: #f0713a;
+@active-border-color: @selected-background-color;
 @active-shadow: none;
 
 /* Error State */

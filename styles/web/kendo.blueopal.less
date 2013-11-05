@@ -5,7 +5,7 @@
 
 /* Widget Base Styles */
 @widget-text-color: #003f59;
-@widget-gradient: "#eaf4f9 0%, #dbecf4 100%";
+@widget-gradient: "rgba(255,255,255,.45) 0%, rgba(255,255,255,.0) 100%";
 @widget-background-color: #fff;
 @widget-border-color: #94c0d2;
 @widget-shadow: none;
@@ -32,7 +32,7 @@
 @button-background-color: @header-background-color;
 
 /* Group Base Styles */
-@group-background-color: #daecf4;
+@group-background-color: @header-background-color;
 @group-border-color: @widget-border-color;
 
 /* Content */
@@ -42,24 +42,24 @@
 /* Widget States */
 
 /* Hover State */
-@hover-text-color: #005c83;
-@hover-gradient: "#afe4fa 0%, #7dd3f6 100%";
-@hover-background-color: #7dd3f6;
+@hover-text-color: @widget-text-color;
+@hover-gradient: "rgba(255,255,255,.4) 0%, rgba(255,255,255,.0) 100%";
+@hover-background-color: #7bd2f6;
 @hover-border-color: #7ec6e3;
 @hover-shadow: none;
 
 /* Selected State */
 @selected-text-color: #fff;
-@selected-gradient: "#12739d 0%, #58a5c6 100%";
-@selected-background-color: #58a5c6;
-@selected-border-color: #58a5c6;
-@selected-shadow: inset 0 0 8px rgba(0,92,131,.5);
+@selected-gradient: "rgba(255,255,255,.0) 0%, rgba(255,255,255,.23) 100%";
+@selected-background-color: #13688c;
+@selected-border-color: @selected-background-color;
+@selected-shadow: inset 0 0 7px rgba(0,92,131,.5);
 
 /*Focused State*/
 @focused-border-color: @hover-border-color;
 @focused-shadow: 0 0 3px 0 @shadow-color;
 @focused-item-shadow: inset 0 0 3px 1px @hover-border-color;
-@focused-active-item-shadow: inset 0 0 3px 1px darken(@selected-border-color, 15%);
+@focused-active-item-shadow: @selected-shadow, inset 0 0 7px 1px darken(@selected-border-color, 5%);
 
 /* Active State */
 @active-text-color: @widget-text-color;
@@ -84,7 +84,7 @@
 /* Validation Message */
 @validation-text-color: #2e6172;
 @validation-background-color: #ffebaf;
-@validation-border-color: #ffebaf;
+@validation-border-color: @validation-background-color;
 
 /* Splitter */
 @splitbar-background-color: @header-background-color;
