@@ -335,7 +335,23 @@ module CodeGen::MVC::Wrappers
 
             csharp = File.exists?(filename) ? File.read(filename) : COMPONENT_FLUENT.result(binding)
 
-            csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FLUENT_FIELDS.result(binding))
+            csharp = prepare_fluent_fields(csharp, unique_options)
+        end
+
+        def prepare_fluent_fields(csharp, options)
+            fields = csharp.match(/\/\/>> Fields(.|\n)*\/\/<< Fields/)[0]
+
+            parts = options.map do |o|
+                match = fields.match("//>> #{o.csharp_name}$(.|\n)*//<< #{o.csharp_name}$")
+
+                if match.nil?
+                    o.to_fluent
+                else
+                    "\n\t\t#{match[0]}\n"
+                end
+            end
+
+            csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, "//>> Fields\n        #{parts.join}\n        //<< Fields")
         end
 
         def setting_template
@@ -363,7 +379,7 @@ module CodeGen::MVC::Wrappers
 
             csharp = File.exists?(filename) ? File.read(filename) : setting_fluent_template.result(option.get_binding)
 
-            csharp = csharp.sub(/\/\/>> Fields(.|\n)*\/\/<< Fields/, COMPONENT_FLUENT_FIELDS.result(option.get_binding))
+            csharp = prepare_fluent_fields(csharp, option.unique_options)
         end
 
         def to_events(filename)
