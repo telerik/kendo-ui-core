@@ -109,7 +109,8 @@
 
         options: {
             tileSize: 256,
-            subdomains: ["a", "b", "c"]
+            subdomains: ["a", "b", "c"],
+            urlTemplate: ""
         },
 
         center: function(center) {
@@ -135,14 +136,10 @@
             this.pool.empty();
         },
 
-        createTile: function(options) {
-            return this.pool.get(this._center, options);
-        },
-
         tileCount: function() {
             var size = this.size(),
                 firstTileIndex = this.pointToTileIndex(this._extent.nw),
-                point = this.indexToPoint(firstTileIndex);
+                point = this.indexToPoint(firstTileIndex).subtract(this._extent.nw);
 
             return {
                 x: math.ceil((math.abs(point.x) + size.width) / this.options.tileSize),
@@ -187,32 +184,15 @@
         },
 
         render: function() {
-            var urlTemplate = template(this.options.urlTemplate),
-                nwToPoint = this._extent.nw,
-                size = this.tileCount(),
-                firstTileIndex = this.pointToTileIndex(nwToPoint),
-                index, point, offset, tile, x, y;
+            var size = this.tileCount(),
+                firstTileIndex = this.pointToTileIndex(this._extent.nw),
+                tile, x, y;
 
             for (x = 0; x < size.x; x++) {
                 for (y = 0; y < size.y; y++) {
-                    index = {
+                    tile = this.createTile({
                         x: firstTileIndex.x + x,
                         y: firstTileIndex.y + y
-                    };
-
-                    point = this.indexToPoint(index);
-                    offset = point.clone().subtract(this._basePoint);
-                    tile = this.createTile({
-                        point: point,
-                        offset: offset,
-                        index: index,
-                        zoom: this._zoom,
-                        url: urlTemplate({
-                            zoom: this._zoom,
-                            x: index.x,
-                            y: index.y,
-                            subdomain: this.subdomainText()
-                        })
                     });
 
                     if (!tile.visible) {
@@ -221,6 +201,26 @@
                     }
                 }
             }
+        },
+
+        createTile: function(index) {
+            var point = this.indexToPoint(index),
+                offset = point.clone().subtract(this._basePoint),
+                urlTemplate = template(this.options.urlTemplate),
+                tileOptions = {
+                    index: index,
+                    point: point,
+                    offset: offset,
+                    zoom: this._zoom,
+                    url: urlTemplate({
+                        zoom: this._zoom,
+                        x: index.x,
+                        y: index.y,
+                        subdomain: this.subdomainText()
+                    })
+                };
+
+            return this.pool.get(this._center, tileOptions);
         }
     });
 
