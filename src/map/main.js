@@ -250,7 +250,7 @@ kendo_module({
             scroller.dimensions.x.makeVirtual();
 
             var nw = this.locationToLayer(this.extent().nw);
-            scroller.dimensions.x.virtualSize(-nw.x, this.scale() - nw.x);
+            scroller.dimensions.x.virtualSize(-Number.MAX_VALUE, Number.MAX_VALUE);
             scroller.dimensions.y.virtualSize(-nw.y, this.scale() - nw.y);
         },
 

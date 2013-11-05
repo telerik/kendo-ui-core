@@ -20,6 +20,7 @@
     <script src="../../src/map/location.js"></script>
     <script src="../../src/map/crs.js"></script>
     <script src="../../src/map/layers/shape.js"></script>
+    <script src="../../src/map/layers/marker.js"></script>
     <script src="../../src/map/main.js"></script>
     <script src="chroma.min.js"></script>
     <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.css">
@@ -50,7 +51,7 @@
 
         $("#map").kendoMap({
             center: [51.505, -0.09],
-            zoom: 4,
+            zoom: 3,
             controls: {
                 navigator: true, // boolean, object
                 navigator: {
@@ -71,7 +72,13 @@
                 dataSource: {
                     type: "geojson",
                     transport: {
-                        read: "countries.geo.json"
+                        read: "cat.geo.json"
+                    }
+                },
+                style: {
+                    fill: {
+                        color: "#cf0",
+                        opacity: 0.5
                     }
                 },
                 copyright: "&copy; FooBar"
