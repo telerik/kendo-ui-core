@@ -56,12 +56,6 @@ kendo_module({
         RIGHT = "Right",
         LEFT = "Left",
         BOTTOM = "Bottom",
-        bindings = {
-            text: "dataTextField",
-            url: "dataUrlField",
-            spriteCssClass: "dataSpriteCssClassField",
-            imageUrl: "dataImageUrlField"
-        },
         MAXINT = 9007199254740992,
         SELECT = "select",
         ROTATE = "rotate",
@@ -1108,7 +1102,6 @@ kendo_module({
             dataSource: {},
             dragAndDrop: true,
             template: "",
-            dataTextField: null,
             autoBind: true,
             resizable: true,
             rotatable: true,
@@ -2002,7 +1995,6 @@ kendo_module({
              * @type {string}
              */
             this.id = kendo.diagram.randomId();
-            // this._accessors();
         },
         _attachEvents: function () {
             var diagram = this;
@@ -2050,33 +2042,6 @@ kendo_module({
         },
         _error: function () {
             // TODO: Do something?
-        },
-        _accessors: function () {
-            var that = this,
-                options = that.options,
-                i, field, textField,
-                element = that.element;
-
-            for (i in bindings) {
-                if (bindings.hasOwnProperty(i)) {
-                    field = options[bindings[i]];
-                    textField = element.attr(kendo.attr(i + "-field"));
-
-                    if (!field && textField) {
-                        field = textField;
-                    }
-
-                    if (!field) {
-                        field = i;
-                    }
-
-                    if (!Utils.isArray(field)) {
-                        field = [field];
-                    }
-
-                    options[bindings[i]] = field;
-                }
-            }
         },
         _adorn: function (adorner, isActive) {
             if (isActive !== undefined && adorner) {

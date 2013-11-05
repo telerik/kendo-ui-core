@@ -20,7 +20,6 @@
     },
     "dragAndDrop": true,
     "template": "",
-    "dataTextField": ["text"],
     "autoBind": true,
     "resizable": true,
     "rotatable": true,
@@ -33,10 +32,8 @@
         "enabled": true,
         "offsetX": 20,
         "offsetY": 20
-    },
-    "dataUrlField": ["url"],
-    "dataSpriteCssClassField": ["spriteCssClass"],
-    "dataImageUrlField": ["imageUrl"]
+    }
+
 }, "shapes": [
     {
         "options": {
