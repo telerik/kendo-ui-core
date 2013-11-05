@@ -223,6 +223,8 @@ module CodeGen::TypeScript
                 parameter_combinations = parameter_types.first.product(*parameter_types[1..-1]).uniq
             end
 
+            parameter_combinations = parameter_types if parameter_combinations.empty?
+
             parameter_combinations.map do |combination|
                 declaration = "#{name}(#{type_script_parameters(combination)}): "
 
@@ -448,7 +450,7 @@ namespace :type_script do
         namespace branch do
             desc "Test TypeScript generation"
             task :test do
-#                sh "cd docs && git fetch && git reset --hard origin/#{branch}"
+                sh "cd docs && git fetch && git reset --hard origin/#{branch}"
 
                 SUITES.each do |suite, dependencies|
                     path = "dist/kendo.#{suite}.d.ts"
