@@ -59,7 +59,7 @@
 @focused-border-color: #67afe9;
 @focused-shadow: 0 0 7px 0 #67afe9;
 @focused-item-shadow: inset 0 0 7px 0 #67afe9;
-@focused-active-item-shadow: inset 0 0 3px 1px darken(#003db7, 15%);
+@focused-active-item-shadow: inset 0 0 10px 3px darken(#428bca, 8%);
 
 /* Active State */
 @active-text-color: @widget-text-color;
@@ -268,6 +268,12 @@
     background-color: @multiselect-buttons-hover-background;
 }
 
+.k-multiselect .k-button:active
+{
+    color: @multiselect-buttons-color;
+	.box-shadow(@focused-active-item-shadow);
+}
+
 .k-list>.k-state-hover
 {
    border-color: @hover-background-color;
@@ -382,7 +388,7 @@
 	.k-picker-wrap.k-state-active.k-state-border-down
 	{
 		.box-shadow(@concave-shadow);
-	}
+	}	
 }
 
 /* Slider */
@@ -451,7 +457,8 @@
 .k-autocomplete.k-state-focused,
 .k-picker-wrap.k-state-focused,
 .k-numeric-wrap.k-state-focused,
-.k-dropdown-wrap.k-state-focused
+.k-dropdown-wrap.k-state-focused,
+.k-multiselect.k-header.k-state-focused
 {
     background-color: @widget-background-color;
     .composite-background(@hover-gradient);
@@ -512,6 +519,11 @@
     color: @widget-text-color;
 }
 
+.k-panelbar .k-state-focused
+{
+    .box-shadow(inset @focused-shadow);
+}
+
 .k-panelbar > li > .k-link.k-state-selected
 {
     color: @selected-text-color;
@@ -522,17 +534,18 @@
     color: @hover-text-color;
 }
 
-.k-panelbar .k-state-focused
-{
-    .box-shadow(inset @focused-shadow);
-}
-
 .k-panelbar .k-state-focused.k-state-selected,
 td.k-state-focused.k-state-selected,
 .k-state-selected td.k-state-focused,
 .k-listview>.k-state-focused.k-state-selected
 {
     .box-shadow(@focused-active-item-shadow);
+}
+
+.k-panelbar .k-state-focused.k-state-hover
+{
+    background: @hover-background-color;
+	.box-shadow(none);
 }
 
 .k-pager-wrap
@@ -638,7 +651,7 @@ td.k-state-focused.k-state-selected,
 {
     color: @widget-text-color;
     background-color: @select-background-color;
-    border-color: @form-widgets-border-color;
+    border-color: @focused-border-color;
     .box-shadow(@selected-shadow);
 }
 
@@ -664,8 +677,8 @@ td.k-state-focused.k-state-selected,
     }
 }
 
-// Pager
 
+// Pager
 .k-pager-numbers .k-link
 {
     height: 1.83333em;/*IE7*/
