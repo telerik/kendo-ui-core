@@ -389,7 +389,11 @@ textarea.k-textbox:hover,
 
 .k-icon,
 .k-state-disabled .k-icon,
-.k-column-menu .k-sprite,
+.k-column-menu .k-sprite
+{
+    opacity: @default-icon-opacity;
+}
+
 .k-mobile-list .k-check:checked,
 .k-mobile-list .k-edit-field [type=checkbox]:checked,
 .k-mobile-list .k-edit-field [type=radio]:checked
@@ -401,7 +405,13 @@ textarea.k-textbox:hover,
 .k-tool-icon,
 .k-grouping-dropclue,
 .k-drop-hint,
-.k-column-menu .k-sprite,
+.k-column-menu .k-sprite
+{
+    background-image: @sprite-image;
+    border-color: transparent;
+}
+
+/* IE will ignore the above selectors if these are added too */
 .k-mobile-list .k-check:checked,
 .k-mobile-list .k-edit-field [type=checkbox]:checked,
 .k-mobile-list .k-edit-field [type=radio]:checked
