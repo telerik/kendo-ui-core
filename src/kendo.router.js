@@ -380,7 +380,7 @@ kendo_module({
                  }
             }
 
-            if (this.trigger(ROUTE_MISSING, { url: url })) {
+            if (this.trigger(ROUTE_MISSING, { url: url, params: urlParams(url) })) {
                 e.preventDefault();
             }
         }

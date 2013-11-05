@@ -229,6 +229,22 @@ test("triggers route missing if no route found", 2, function(){
     navigate("/foo");
 });
 
+test("query string parameters are available in the route missing event", 3, function() {
+    var router = new kendo.Router();
+
+    router.route("/", function() {
+        ok(true);
+    });
+
+    router.bind("routeMissing", function(e) {
+        equal(e.params.bar, "A");
+        equal(e.params.baz, "B");
+    });
+
+    router.start();
+    navigate("/foo?bar=A&baz=B");
+})
+
 test("navigate method navigates to a given url", 1, function(){
     var router = new kendo.Router();
 
