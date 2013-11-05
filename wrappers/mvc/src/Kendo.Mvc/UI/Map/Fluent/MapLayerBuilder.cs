@@ -25,7 +25,7 @@ using System.Web.Mvc;
         /// <returns></returns>
         public MapLayerBuilder DataSource(Action<MapLayerDataSourceBuilder> configurator)
         {
-            configurator(new MapLayerDataSourceBuilder(container.DataSource, null, null));
+            configurator(new MapLayerDataSourceBuilder(container.DataSource, container.ViewContext, container.UrlGenerator));
 
             return this;
         }
@@ -77,7 +77,7 @@ using System.Web.Mvc;
         }
         
         /// <summary>
-        /// 
+        /// The layer type. Supported types are "tile" and "shape".
         /// </summary>
         /// <param name="value">The value that configures the type.</param>
         public MapLayerBuilder Type(MapLayerType value)
