@@ -504,7 +504,7 @@ kendo_module({
         SHOW_START = "showStart",
         SAME_VIEW_REQUESTED = "sameViewRequested",
         VIEW_SHOW = "viewShow";
-
+/*
     function urlParams(url) {
         var queryString = url.split('?')[1] || "",
             params = {},
@@ -518,7 +518,7 @@ kendo_module({
 
         return params;
     }
-
+*/
     var ViewEngine = Observable.extend({
         init: function(options) {
             var that = this,
@@ -563,7 +563,7 @@ kendo_module({
             return this._view;
         },
 
-        showView: function(url, transition) {
+        showView: function(url, transition, params) {
             url = url.replace(new RegExp("^" + this.remoteViewURLPrefix), "");
             if (url === "" && this.remoteViewURLPrefix) {
                 url = "/";
@@ -578,7 +578,7 @@ kendo_module({
 
             var that = this,
                 showClosure = function(view) {
-                    that._show(view, transition, urlParams(url));
+                    that._show(view, transition, params);
                 },
                 element = that._findViewElement(url),
                 view = element.data("kendoView");
