@@ -3512,6 +3512,23 @@ function pad(number, digits, end) {
             }
         });
     };
+
+    kendo.parseQueryStringParams = function(url) {
+        var queryString = url.split('?')[1] || "",
+            params = {},
+            paramParts = queryString.split(/&|=/),
+            length = paramParts.length,
+            idx = 0;
+
+        for (; idx < length; idx += 2) {
+            if(paramParts[idx] !== "") {
+                params[decodeURIComponent(paramParts[idx])] = decodeURIComponent(paramParts[idx + 1]);
+            }
+        }
+
+        return params;
+    };
+
 })(jQuery, eval);
 
 /*global kendo_module:true */

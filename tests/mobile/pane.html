@@ -53,6 +53,10 @@
                 return new kendo.mobile.ui.Pane(root.children().first());
             }
 
+            function checkParams(e) {
+                equal(e.view.params["foo"], "baz");
+            }
+
             module("mobile pane", {
                 teardown: function() {
                     root.empty();
@@ -63,6 +67,12 @@
                 pane = buildPane('<div data-role="view" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>');
                 pane.navigate("#bar");
                 visible("#bar");
+            });
+
+            test("parses url params upon navigation", 1, function() {
+                pane = buildPane('<div data-role="view" id="foo">Foo</div><div data-role="view" id="bar" data-show="checkParams">Bar</div>');
+
+                pane.navigate("#bar?foo=baz");
             });
 
             test("implements initial view setting", 1, function() {

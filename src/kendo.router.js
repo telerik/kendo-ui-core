@@ -243,20 +243,6 @@ kendo_module({
             .replace(splatParam, '(.*?)') + '$');
     }
 
-    function urlParams(url) {
-        var queryString = url.split('?')[1] || "",
-            params = {},
-            paramParts = queryString.split(/&|=/),
-            length = paramParts.length,
-            idx = 0;
-
-        for (; idx < length; idx += 2) {
-            params[decodeURIComponent(paramParts[idx])] = decodeURIComponent(paramParts[idx + 1]);
-        }
-
-        return params;
-    }
-
     function stripUrl(url) {
         return url.replace(/(\?.*)|(#.*)/g, "");
     }
@@ -275,7 +261,7 @@ kendo_module({
             var params,
                 idx = 0,
                 length,
-                queryStringParams = urlParams(url);
+                queryStringParams = kendo.parseQueryStringParams(url);
 
             url = stripUrl(url);
             params = this.route.exec(url).slice(1);
@@ -362,7 +348,7 @@ kendo_module({
                 url = "/";
             }
 
-            if (this.trigger(CHANGE, { url: e.url, params: urlParams(e.url) })) {
+            if (this.trigger(CHANGE, { url: e.url, params: kendo.parseQueryStringParams(e.url) })) {
                 e.preventDefault();
                 return;
             }
@@ -380,7 +366,7 @@ kendo_module({
                  }
             }
 
-            if (this.trigger(ROUTE_MISSING, { url: url, params: urlParams(url) })) {
+            if (this.trigger(ROUTE_MISSING, { url: url, params: kendo.parseQueryStringParams(url) })) {
                 e.preventDefault();
             }
         }
