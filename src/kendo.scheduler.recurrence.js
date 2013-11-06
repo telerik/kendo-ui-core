@@ -389,48 +389,50 @@ kendo_module({
 
             interval: function (rule, current) {
                 var start = new Date(rule._startPeriod);
+                var hours = current.getHours();
+                var weekStart = rule.weekStart;
                 var interval = rule.interval;
-                var diff = current - start;
-                var yearDiff;
-
+                var frequency = rule.freq;
+                var modified = false;
                 var excess = 0;
                 var month = 0;
                 var day = 1;
+                var diff;
 
-                if (rule.freq === "hourly") {
-                    diff = Math.floor(diff / (60 * kendo.date.MS_PER_MINUTE));
-
+                if (frequency === "hourly") {
+                    diff = Math.floor((current - start) / (60 * kendo.date.MS_PER_MINUTE));
                     excess = intervalExcess(diff, interval);
 
                     if (excess !== 0) {
                         this._hour(current, rule, excess);
-                        return true;
+                        modified = true;
                     }
-
-                } else if (rule.freq === "daily") {
-                    diff = Math.floor(diff / kendo.date.MS_PER_DAY);
-
+                } else if (frequency === "daily") {
+                    diff = Math.floor((current - start) / kendo.date.MS_PER_DAY);
                     excess = intervalExcess(diff, interval);
 
                     if (excess !== 0) {
                         this._date(current, rule, excess);
-
-                        return true;
+                        modified = true;
                     }
 
-                } else if (rule.freq === "weekly") {
-                    excess = intervalExcess(calculateWeekDiff(rule, current), interval);
+                } else if (frequency === "weekly") {
+                    diff = (current.getFullYear() - start.getFullYear()) * 52;
+
+                    excess = weekInYear(current, weekStart) - weekInYear(start, weekStart) + diff;
+                    excess = intervalExcess(excess, interval);
 
                     if (excess !== 0) {
                         kendo.date.setDayOfWeek(current, rule.weekStart, -1);
+
                         current.setDate(current.getDate() + (excess * 7));
+                        adjustDST(current, hours);
 
-                        return true;
+                        modified = true;
                     }
-                } else if (rule.freq === "monthly") {
-                    yearDiff = current.getFullYear() - start.getFullYear();
-
-                    diff = current.getMonth() - start.getMonth() + (yearDiff * 12);
+                } else if (frequency === "monthly") {
+                    diff = current.getFullYear() - start.getFullYear();
+                    diff = current.getMonth() - start.getMonth() + (diff * 12);
 
                     excess = intervalExcess(diff, interval);
 
@@ -438,10 +440,13 @@ kendo_module({
                         day = rule._hasRuleValue ? 1 : current.getDate();
 
                         current.setFullYear(current.getFullYear(), current.getMonth() + excess, day);
-                        return true;
+                        adjustDST(current, hours);
+
+                        modified = true;
                     }
-                } else if (rule.freq === "yearly") {
-                    yearDiff = current.getFullYear() - start.getFullYear();
+                } else if (frequency === "yearly") {
+                    diff = current.getFullYear() - start.getFullYear();
+                    excess = intervalExcess(diff, interval);
 
                     if (!rule.months) {
                         month = current.getMonth();
@@ -451,14 +456,15 @@ kendo_module({
                         day = current.getDate();
                     }
 
-                    excess = intervalExcess(yearDiff, interval);
-
                     if (excess !== 0) {
                         current.setFullYear(current.getFullYear() + excess, month, day);
+                        adjustDST(current, hours);
+
+                        modified = true;
                     }
                 }
 
-                return false;
+                return modified;
             },
 
             _hour: function(date, rule, interval) {
@@ -504,11 +510,7 @@ kendo_module({
         DailyFrequency = BaseFrequency.extend({
             next: function(date, rule) {
                 if (!BaseFrequency.fn.next(date, rule)) {
-                    if (rule.hours) {
-                        this._hour(date, rule, 1);
-                    } else {
-                        this._date(date, rule, 1);
-                    }
+                    this[rule.hours ? "_hour" : "_date"](date, rule, 1);
                 }
             }
         }),
@@ -604,23 +606,6 @@ kendo_module({
             "yearly" : new YearlyFrequency()
         },
         CLICK = "click";
-
-    //TODO: refactor
-    function calculateWeekDiff(rule, current) {
-        var start = rule._startPeriod;
-        var weekStart = rule.weekStart;
-        var startYear = start.getFullYear();
-        var yearDiff = current.getFullYear() - startYear;
-
-        var startWeek = weekInYear(start, weekStart);
-        var currentWeek = weekInYear(current, weekStart);
-
-        if (yearDiff > 0) {
-            currentWeek += (yearDiff * 52);
-        }
-
-        return currentWeek - startWeek;
-    }
 
     function intervalExcess(diff, interval) {
         if (diff !== 0 && diff < interval) {
