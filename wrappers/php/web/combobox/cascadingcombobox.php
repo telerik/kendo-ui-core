@@ -59,6 +59,7 @@ $categories->dataSource(array('transport' => $transport, 'schema' => $schema, 's
            ->dataTextField('CategoryName')
            ->dataValueField('CategoryID')
            ->attr('style', 'width:300px')
+           ->filter('contains')
            ->placeholder('Select category ...');
 
 echo $categories->render();
@@ -78,6 +79,7 @@ $products->dataSource(array('transport' => $transport, 'schema' => $schema, 'ser
          ->dataTextField('ProductName')
          ->dataValueField('ProductID')
          ->attr('style', 'width:300px')
+         ->filter('contains')
          ->placeholder('Select product ...');
 
 echo $products->render();
@@ -97,6 +99,7 @@ $products->dataSource(array('transport' => $transport, 'schema' => $schema, 'ser
          ->dataTextField('OrderID')
          ->dataValueField('OrderID')
          ->attr('style', 'width:300px')
+         ->filter('contains')
          ->placeholder('Select order ...');
 
 echo $products->render();
