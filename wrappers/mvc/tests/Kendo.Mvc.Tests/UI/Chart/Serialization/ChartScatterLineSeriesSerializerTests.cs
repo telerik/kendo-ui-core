@@ -269,8 +269,8 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Serializes_x_error_low_and_high_name()
         {
-            series.XErrorLowMember = "low";
-            series.XErrorHighMember = "high";
+            series.ErrorBars.XLowMember = "low";
+            series.ErrorBars.XHighMember = "high";
             GetJson(series).ContainsKey("xErrorLowField").ShouldBeTrue();
             GetJson(series).ContainsKey("xErrorHighField").ShouldBeTrue();
         }
@@ -278,14 +278,14 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Should_not_serialize_only_x_error_low_name()
         {
-            series.XErrorLowMember = "low";
+            series.ErrorBars.XLowMember = "low";
             GetJson(series).ContainsKey("xErrorLowField").ShouldBeFalse();
         }
 
         [Fact]
         public void Should_not_serialize_only_x_error_high_name()
         {
-            series.XErrorHighMember = "high";
+            series.ErrorBars.XHighMember = "high";
             GetJson(series).ContainsKey("xErrorHighField").ShouldBeFalse();
         }
 
@@ -299,8 +299,8 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Serializes_y_error_low_and_high_name()
         {
-            series.YErrorLowMember = "low";
-            series.YErrorHighMember = "high";
+            series.ErrorBars.YLowMember = "low";
+            series.ErrorBars.YHighMember = "high";
             GetJson(series).ContainsKey("yErrorLowField").ShouldBeTrue();
             GetJson(series).ContainsKey("yErrorHighField").ShouldBeTrue();
         }
@@ -308,14 +308,14 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Should_not_serialize_only_y_error_low_name()
         {
-            series.YErrorLowMember = "low";
+            series.ErrorBars.YLowMember = "low";
             GetJson(series).ContainsKey("yErrorLowField").ShouldBeFalse();
         }
 
         [Fact]
         public void Should_not_serialize_only_y_error_high_name()
         {
-            series.YErrorHighMember = "high";
+            series.ErrorBars.YHighMember = "high";
             GetJson(series).ContainsKey("yErrorHighField").ShouldBeFalse();
         }
 

@@ -52,7 +52,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///            .Name("Chart")
         ///            .Series(series => series
         ///                .Line(s => s.Sales)
-        ///                .ErrorBars(e => e.Value(1));
+        ///                .ErrorBars(e => e.Value(1))
         ///            )
         /// %&gt;
         /// </code>

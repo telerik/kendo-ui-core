@@ -384,7 +384,6 @@
     <Compile Include="UI\Chart\Enums\ChartPolarAreaStyle.cs" />
     <Compile Include="UI\Chart\Enums\ChartPolarLineStyle.cs" />
     <Compile Include="UI\Chart\ChartAreaLine.cs" />
-    <Compile Include="UI\Chart\Enums\ScatterErrorBarsAxisType.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAreaLineBuilder.cs" />
     <Compile Include="UI\Chart\Series\ChartAreaSeries.cs" />
     <Compile Include="UI\Chart\Fluent\ChartAreaSeriesBuilder.cs" />

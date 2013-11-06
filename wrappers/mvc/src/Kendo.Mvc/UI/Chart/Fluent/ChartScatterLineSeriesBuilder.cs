@@ -30,7 +30,7 @@ namespace Kendo.Mvc.UI.Fluent
         ///            .Name("Chart")
         ///            .Series(series => series
         ///                .ScatterLine(s => s.x, s => s.y)
-        ///                .ErrorBars(e => e.XValue(1));
+        ///                .ErrorBars(e => e.XValue(1))
         ///             )
         /// %&gt;
         /// </code>

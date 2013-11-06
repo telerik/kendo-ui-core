@@ -23,6 +23,17 @@ namespace Kendo.Mvc.UI.Fluent
         /// Configures the series error bars
         /// </summary>
         /// <param name="configurator">The configuration action.</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series
+        ///                .Bar(s => s.Sales)
+        ///                .ErrorBars(e => e.Value(1))
+        ///            )
+        /// %&gt;
+        /// </code>
+        /// </example>   
         public ChartBarSeriesBuilder<T> ErrorBars(Action<CategoricalErrorBarsBuilder> configurator)
         {
             configurator(new CategoricalErrorBarsBuilder(Series.ErrorBars));

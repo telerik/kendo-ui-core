@@ -57,24 +57,6 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        /// <summary>
-        /// Gets or sets the series error low member name
-        /// </summary>
-        public string ErrorLowMember
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets the series error high member name
-        /// </summary>
-        public string ErrorHighMember
-        {
-            get;
-            set;
-        }
-
         public override IChartSerializer CreateSerializer()
         {
             return new ChartBarSeriesSerializer(this);
@@ -113,34 +95,6 @@ namespace Kendo.Mvc.UI
         /// </summary>
         public ChartBarSeries()
         {
-        }
-    }
-
-    public class ChartBarSeries<TModel, TValue, TCategory, TErrorLowValue, TErrorHighValue> : ChartBarSeries<TModel, TValue, TCategory>
-    where TModel : class
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ChartBarSeries{TModel, TValue, TCategory, TErrorLowValue, TErrorHighValue}"/> class.
-        /// </summary>
-        /// <param name="expression">The expression used to extract the point value from the chart model.</param>
-        /// <param name="categoryExpression">The expression used to extract the point category from the chart model.</param>
-        /// <param name="errorLowExpression">The expression used to extract the point error low value from the chart model.</param>
-        /// <param name="errorHighExpression">The expression used to extract the point error high value from the chart model.</param>
-        /// <param name="colorExpression">The expression used to extract the point color from the chart model.</param>
-        /// <param name="noteTextExpression">The expression used to extract the point note text from the chart model.</param>
-        public ChartBarSeries(Expression<Func<TModel, TValue>> expression, Expression<Func<TModel, TCategory>> categoryExpression, Expression<Func<TModel, TErrorLowValue>> errorLowExpression, 
-            Expression<Func<TModel, TErrorHighValue>> errorHighExpression, Expression<Func<TModel, string>> colorExpression, Expression<Func<TModel, string>> noteTextExpression)
-            : base(expression, colorExpression, categoryExpression, noteTextExpression)
-        {
-            if (errorLowExpression != null)
-            {
-                ErrorLowMember = errorLowExpression.MemberWithoutInstance();
-            }
-
-            if (errorHighExpression != null)
-            {
-                ErrorHighMember = errorHighExpression.MemberWithoutInstance();
-            }
         }
     }
 }

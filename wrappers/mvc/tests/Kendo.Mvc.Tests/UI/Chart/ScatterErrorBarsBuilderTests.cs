@@ -181,5 +181,86 @@
             builder.YValue((o) => null);
             errorBars.YValue.ShouldBeType(typeof(ClientHandlerDescriptor));
         }
+
+        [Fact]
+        public void XLowField_returns_Builder()
+        {
+            builder.XLowField("low").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void XLowField_sets_x_low_member()
+        {
+            builder.XLowField("low");
+            errorBars.XLowMember.ShouldEqual("low");
+        }
+
+        [Fact]
+        public void XHighField_returns_Builder()
+        {
+            builder.XHighField("high").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void XHighField_sets_x_high_member()
+        {
+            builder.XHighField("high");
+            errorBars.XHighMember.ShouldEqual("high");
+        }
+
+        [Fact]
+        public void XFields_returns_Builder()
+        {
+            builder.XFields("low", "high").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void XFields_sets_x_low_and_high_member()
+        {
+            builder.XFields("low", "high");
+            errorBars.XLowMember.ShouldEqual("low");
+            errorBars.XHighMember.ShouldEqual("high");
+        }
+
+
+        [Fact]
+        public void YLowField_returns_Builder()
+        {
+            builder.YLowField("low").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void YLowField_sets_y_low_member()
+        {
+            builder.YLowField("low");
+            errorBars.YLowMember.ShouldEqual("low");
+        }
+
+        [Fact]
+        public void YHighField_returns_Builder()
+        {
+            builder.YHighField("high").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void YHighField_sets_y_high_member()
+        {
+            builder.YHighField("high");
+            errorBars.YHighMember.ShouldEqual("high");
+        }
+
+        [Fact]
+        public void YFields_returns_Builder()
+        {
+            builder.YFields("low", "high").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void YFields_sets_y_low_and_high_member()
+        {
+            builder.YFields("low", "high");
+            errorBars.YLowMember.ShouldEqual("low");
+            errorBars.YHighMember.ShouldEqual("high");
+        }
     }
 }

@@ -29,16 +29,16 @@ namespace Kendo.Mvc.UI
                 result.Add("errorBars", errorBars);
             }
 
-            if (series.XErrorLowMember.HasValue() && series.XErrorHighMember.HasValue())
+            if (series.ErrorBars.XLowMember.HasValue() && series.ErrorBars.XHighMember.HasValue())
             {
-                result["xErrorLowField"] = series.XErrorLowMember;
-                result["xErrorHighField"] = series.XErrorHighMember;
+                result["xErrorLowField"] = series.ErrorBars.XLowMember;
+                result["xErrorHighField"] = series.ErrorBars.XHighMember;
             }
 
-            if (series.YErrorLowMember.HasValue() && series.YErrorHighMember.HasValue())
+            if (series.ErrorBars.YLowMember.HasValue() && series.ErrorBars.YHighMember.HasValue())
             {
-                result["yErrorLowField"] = series.YErrorLowMember;
-                result["yErrorHighField"] = series.YErrorHighMember;
+                result["yErrorLowField"] = series.ErrorBars.YLowMember;
+                result["yErrorHighField"] = series.ErrorBars.YHighMember;
             }
 
             return result;

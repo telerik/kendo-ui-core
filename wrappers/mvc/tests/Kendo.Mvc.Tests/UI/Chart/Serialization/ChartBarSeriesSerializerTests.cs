@@ -315,11 +315,12 @@ namespace Kendo.Mvc.UI.Tests
             GetJson(series).ContainsKey("errorBars").ShouldBeFalse();
         }
 
+
         [Fact]
         public void Serializes_error_low_and_high_name()
         {
-            series.ErrorLowMember = "low";
-            series.ErrorHighMember = "high";
+            series.ErrorBars.LowMember = "low";
+            series.ErrorBars.HighMember = "high";
             GetJson(series).ContainsKey("errorLowField").ShouldBeTrue();
             GetJson(series).ContainsKey("errorHighField").ShouldBeTrue();
         }
@@ -327,14 +328,14 @@ namespace Kendo.Mvc.UI.Tests
         [Fact]
         public void Should_not_serialize_only_error_low_name()
         {
-            series.ErrorLowMember = "low";
+            series.ErrorBars.LowMember = "low";
             GetJson(series).ContainsKey("errorLowField").ShouldBeFalse();
         }
 
         [Fact]
         public void Should_not_serialize_only_error_high_name()
         {
-            series.ErrorHighMember = "high";
+            series.ErrorBars.HighMember = "high";
             GetJson(series).ContainsKey("errorHighField").ShouldBeFalse();
         }
 

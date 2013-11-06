@@ -126,5 +126,45 @@
             builder.Value((o) => null);
             errorBars.Value.ShouldBeType(typeof(ClientHandlerDescriptor));
         }
+
+        [Fact]
+        public void LowField_returns_Builder()
+        {
+            builder.LowField("low").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void LowField_sets_low_member()
+        {
+            builder.LowField("low");
+            errorBars.LowMember.ShouldEqual("low");
+        }
+        
+        [Fact]
+        public void HighField_returns_Builder()
+        {
+            builder.HighField("high").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void HighField_sets_high_member()
+        {
+            builder.HighField("high");
+            errorBars.HighMember.ShouldEqual("high");
+        }
+
+        [Fact]
+        public void Fields_returns_Builder()
+        {
+            builder.Fields("low", "high").ShouldBeSameAs(builder);
+        }
+
+        [Fact]
+        public void Fields_sets_low_and_high_member()
+        {
+            builder.Fields("low", "high");
+            errorBars.LowMember.ShouldEqual("low");
+            errorBars.HighMember.ShouldEqual("high");
+        }
     }
 }
