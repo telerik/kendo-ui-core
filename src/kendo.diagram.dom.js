@@ -441,7 +441,12 @@ kendo_module({
             if (this.options.width === DEFAULT_SHAPE_WIDTH && this.options.height === DEFAULT_SHAPE_HEIGHT) { // no dimensions, assuming autosize for paths, groups...
                 size = this.shapeVisual._measure();
                 if (size) {
-                    this.bounds(new Rect(this.options.x, this.options.y, size.width, size.height));
+                    if (this.shapeVisual.options.autoSize) {
+                        this.bounds(new Rect(this.options.x, this.options.y, size.width, size.height));
+                    }
+                    else {
+                        this.shapeVisual.redraw();
+                    }
                 }
             }
             return this._bounds;
@@ -1135,7 +1140,7 @@ kendo_module({
             that.canvas.element.removeChild(that.canvas.native);
             that.canvas = undefined;
 
-            if(that.scroller) {
+            if (that.scroller) {
                 that.scroller.destroy();
                 that.scroller.element.remove();
             }
@@ -2012,7 +2017,7 @@ kendo_module({
             diagram.bind(SHAPEADD, $.proxy(this._autosizeCanvas, this));
             diagram.bind(ZOOM, $.proxy(this._autosizeCanvas, this));
         },
-        _fetchFreshData: function() {
+        _fetchFreshData: function () {
             this._dataSource();
             if (this.options.autoBind) {
                 this.dataSource.fetch();

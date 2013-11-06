@@ -41,15 +41,12 @@
             float: left;
             margin: 3px;
             cursor: pointer;
+            width: 100px;
+            height: 100px;
         }
 
         .shape:hover {
             background-color: rgba(0, 0, 0, 0.25);
-        }
-
-        .shape svg {
-            width: 50px;
-            max-height: 50px;
         }
 
         .shape h3 {
@@ -166,7 +163,7 @@
     <script src="../../../src/kendo.diagram.extensions.js"></script>
     <script src="../../../src/kendo.diagram.dom.js"></script>
 
-    <script src="../jquery.hotkeys.js"></script>
+    <script src="../Generic/jquery.hotkeys.js"></script>
 
     <script src="shapes.js"></script>
 </head>
@@ -248,7 +245,8 @@
                 <li>
                     Frames
                     <div id="framesToolBox">
-                        <img src="iPhone.png" width="200"/>
+                        <img src="iPhone.png" width="150"/>
+                        <img src="iPad.png" width="325"/>
                     </div>
                 <li>
                     Widgets
@@ -270,13 +268,14 @@
 </body>
 <script type="text/x-kendo-tmpl" id="template">
     <div class="shape">
-        <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 100 100" width="100" height="100">
+        <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 100 100" width="100%" height="100%">
         <g>
         <title>#:options.name#</title>
             #= new XMLSerializer().serializeToString(kendo.diagram.Shape.createShapeVisual(options).native) #
             </g>
         </svg>
     </div>
+
 </script>
 
 <script>
@@ -321,11 +320,12 @@ $(function () {
         $("#splitter").kendoSplitter({
             orientation: "horizontal",
             panes: [
-                { collapsible: false, scrollable: true, size: "18%" },
+                { collapsible: false, scrollable: true, size: "350px" },
                 { collapsible: false, scrollable: false }
             ]
         });
     }
+
     createSplitters();
 
     $(document).bind('keydown', 'Ctrl+s', function (e) {
@@ -425,6 +425,7 @@ $(function () {
                     list = $("#toolBox").data("kendoListView"),
                     item = list.dataSource.getByUid(row.data().uid);
             svg = svg.clone();
+            svg.css({width: row.width(), height: row.height()});
             svg.data("data", item.options);
             return svg;
         }
@@ -435,7 +436,7 @@ $(function () {
         hint: function (row) {
             var img = document.createElement("img");
             img.src = row[0].src;
-            $(img).css({width: 200});
+            $(img).css({width: 2 * row.width()});
 
             var options = {
                 data: function () {
@@ -444,8 +445,8 @@ $(function () {
                     });
                     var im = new kendo.diagram.Image({
                         source: row[0].src,
-                        width: row.width(),
-                        height: row.height()
+                        width: 2 * row.width(),
+                        height: 2 * row.height()
                     });
                     g.append(im);
                     return g;

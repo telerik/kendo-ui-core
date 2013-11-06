@@ -463,6 +463,9 @@ kendo_module({
             var that = this;
             VisualBase.fn.init.call(that, document.createElementNS(SVGNS, "path"), options);
         },
+        options: {
+            autoSize: true
+        },
         data: function (value) {
             if (value) {
                 this.options.data = value;
@@ -628,6 +631,9 @@ kendo_module({
         init: function (options) {
             Element.fn.init.call(this, document.createElementNS(SVGNS, "image"), options);
         },
+        options: {
+            autoSize: true
+        },
         redraw: function (options) {
             Element.fn.redraw.call(this, options);
             this.native.setAttributeNS(SVGXLINK, "href", this.options.source);
@@ -701,9 +707,9 @@ kendo_module({
         },
         redraw: function (options) {
             Element.fn.redraw.call(this, options);
-            if (this.options.autoSize) {
-                this.size();
-            }
+            //if (this.options.autoSize) {
+            this.size();
+            //}
         }
     });
 
@@ -782,7 +788,7 @@ kendo_module({
         focus: function () {
             this.element.focus();
         },
-        size: function() {
+        size: function () {
             var canvas = this,
                 size = Visual.fn.size.apply(canvas, arguments),
                 viewBox = this.viewBox();
@@ -795,19 +801,19 @@ kendo_module({
 
             return size;
         },
-        _styledSize: function(node) {
-            var size  = this._sz;
+        _styledSize: function (node) {
+            var size = this._sz;
             $(node).css(size);
         },
-        viewBox: function(rect) {
+        viewBox: function (rect) {
             var canvas = this;
-            
-            if(Utils.isUndefined(rect)) {
+
+            if (Utils.isUndefined(rect)) {
                 return canvas.native.viewBox.baseVal ? Rect.toRect(canvas.native.viewBox.baseVal) : Rect.empty();
             }
 
             rect = Rect.toRect(rect);
-            if(!isNaN(rect.width) && !isNaN(rect.height)) {
+            if (!isNaN(rect.width) && !isNaN(rect.height)) {
                 this.native.setAttribute("viewBox", rect.toString(","));
             }
         },

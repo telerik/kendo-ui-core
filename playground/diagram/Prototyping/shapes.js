@@ -27,7 +27,9 @@ var shapesSource = [
             name: "Pie Chart",
             data: function () {
                 var g = new kendo.diagram.Group({
-                    autoSize: true
+//                    autoSize: true,
+                    height: 100,
+                    width: 100
                 });
                 var p = new kendo.diagram.Path({
                     data: "M199.5,100 C199.5,154.95233 154.95233,199.5 100,199.5 C45.047668,199.5 0.5,154.95233 0.5,100 C0.5,45.047668 45.047668,0.5 100,0.5 C154.95233,0.5 199.5,45.047668 199.5,100 z",
@@ -47,8 +49,6 @@ var shapesSource = [
                 g.append(p2);
                 return g;
             },
-            height: 100,
-            width: 100,
             connectors: [],
             editable: false
         }
