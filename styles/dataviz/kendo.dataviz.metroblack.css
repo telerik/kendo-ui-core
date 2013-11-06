@@ -65,3 +65,16 @@
     -webkit-border-radius: 0;
     border-radius: 0;
 }
+
+/* Map */
+
+.k-map .k-marker {
+    background-image: url("MetroBlack/markers.png");
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .k-map .k-marker {
+        background-image: url("MetroBlack/markers_2x.png");
+    }
+}
+

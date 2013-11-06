@@ -50,3 +50,16 @@
     background: rgba(166,177,193,.7);
     height: 4px;
 }
+
+/* Map */
+
+.k-map .k-marker {
+    background-image: url("Silver/markers.png");
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .k-map .k-marker {
+        background-image: url("Silver/markers_2x.png");
+    }
+}
+

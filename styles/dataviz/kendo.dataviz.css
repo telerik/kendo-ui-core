@@ -237,8 +237,6 @@ span.k-sparkline,
 
 .k-map .km-scroll-wrapper,
 .k-map .km-scroll-container,
-.k-map .k-layer-container,
-.k-map .k-overlay-container,
 .k-map .k-layer {
     position: absolute;
     width: 100%;
@@ -249,6 +247,27 @@ span.k-sparkline,
     position: absolute;
     width: 28px;
     height: 40px;
+    margin: -40px 0 0 -14px;
+}
+
+.k-map .k-marker-pin {
+    background-position: 0px 0px;
+}
+
+.k-map .k-marker-pin-target {
+    background-position: 0px 40px;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .k-map .k-marker {
+        width: 56px;
+        height: 80px;
+        margin: -80px 0 0 -28px;
+    }
+
+    .k-map .k-marker-pin-target {
+        background-position: 0px 80px;
+    }
 }
 
 /* Map Compass */

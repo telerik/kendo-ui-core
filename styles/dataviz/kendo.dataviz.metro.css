@@ -60,8 +60,21 @@
 
 .k-chart .k-tooltip,
 .k-sparkline .k-tooltip {
-  	background-image: none;
-	-moz-border-radius: 0;
+    background-image: none;
+    -moz-border-radius: 0;
     -webkit-border-radius: 0;
     border-radius: 0;
 }
+
+/* Map */
+
+.k-map .k-marker {
+    background-image: url("Metro/markers.png");
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .k-map .k-marker {
+        background-image: url("Metro/markers_2x.png");
+    }
+}
+

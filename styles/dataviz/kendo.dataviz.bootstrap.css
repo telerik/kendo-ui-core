@@ -64,3 +64,16 @@
 .k-sparkline .k-tooltip {
   background-image: none;
 }
+
+/* Map */
+
+.k-map .k-marker {
+    background-image: url("Bootstrap/markers.png");
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .k-map .k-marker {
+        background-image: url("Bootstrap/markers_2x.png");
+    }
+}
+
