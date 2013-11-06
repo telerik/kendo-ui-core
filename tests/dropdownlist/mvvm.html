@@ -502,6 +502,19 @@
                 ok(!dropdownlist.ul.children().length);
             });
 
+            test("Widget sets optionLabel when source binding is used", function() {
+                var dom = $('<select data-text-field="text" data-option-label="test" data-bind="source:dataSource" data-role="dropdownlist" />');
+
+                var observable = kendo.observable({
+                    dataSource: [{text:"foo"}, {text:"bar"}]
+                });
+
+                kendo.bind(dom, observable);
+                var dropdownlist = dom.data("kendoDropDownList");
+
+                equal(dropdownlist.select(), 0);
+                equal(dropdownlist.text(), "test");
+            });
 
         </script>
 

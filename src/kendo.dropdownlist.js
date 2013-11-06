@@ -217,7 +217,7 @@ kendo_module({
                 }
             }
 
-            that._bound = true;
+            that._bound = !!length;
             that.trigger("dataBound");
         },
 

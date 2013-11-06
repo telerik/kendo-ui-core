@@ -883,6 +883,17 @@
                 ok(!ddl.value());
                 ok(!ddl.text());
             });
+
+            test("Widget uses options.index if value was not defined", function() {
+                var select = $("<select></select>");
+
+                var ddl = select.kendoDropDownList({
+                    dataSource: ["Value1", "Value2"],
+                    index: 1
+                }).data("kendoDropDownList");
+
+                equal(ddl.value(), "Value2");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

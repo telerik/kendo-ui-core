@@ -833,12 +833,18 @@ kendo_module({
             return pressed;
         },
 
-        _selectItem: function(value) {
+        _selectItem: function() {
             var that = this,
                 options = that.options,
-                index = that.selectedIndex;
+                index = that.selectedIndex,
+                useOptionIndex,
+                value;
 
-            value = that._selectedValue || options.value || that._accessor();
+            useOptionIndex = that._isSelect && !that._initial && !options.value && options.index && !that._bound;
+
+            if (!useOptionIndex) {
+                value = that._selectedValue || options.value || that._accessor();
+            }
 
             if (value) {
                 that.value(value);
