@@ -1369,7 +1369,7 @@ kendo_module({
         },
         refresh: function () {
             if (this.shape) {
-                var bounds = this.shape.visualBounds();
+                var bounds = this.shape.bounds("transformed");
                 this.visual.position(bounds.topLeft());
                 $.each(this.connectors, function () {
                     this.refresh();
@@ -1804,7 +1804,7 @@ kendo_module({
         },
         refresh: function () {
             var p = this._c.shape.diagram.transformPoint(this._c.position()),
-                relative = p.minus(this._c.shape.visualBounds().topLeft()),
+                relative = p.minus(this._c.shape.bounds("transformed").topLeft()),
                 value = new Rect(p.x, p.y, 0, 0);
             value.inflate(this.options.width / 2, this.options.height / 2);
             this._visualBounds = value;

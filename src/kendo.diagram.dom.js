@@ -418,27 +418,44 @@ kendo_module({
             content: ""
         },
         bounds: function (value) {
-            var point, size;
+            var point, size, bounds;
             if (value) {
-                this._bounds = value;
-                if (this.contentVisual) {
-                    this.contentVisual.redraw(this._bounds);
+                if (Utils.isString(value)) {
+                    switch (value) {
+                        case "transformed" :
+                            bounds = this._transformedBounds();
+                            break;
+                        case "rotated" :
+                            bounds = this._rotatedBounds();
+                            break;
+                        default:
+                            bounds = this._bounds;
+                    }
                 }
-                point = value.topLeft();
-                this.options.x = point.x;
-                this.options.y = point.y;
-                this.options.width = value.width;
-                this.options.height = value.height;
-                this.visual.position(point);
+                else { // we assume Rect.
+                    this._bounds = value;
+                    if (this.contentVisual) {
+                        this.contentVisual.redraw(this._bounds);
+                    }
+                    point = value.topLeft();
+                    this.options.x = point.x;
+                    this.options.y = point.y;
+                    this.options.width = value.width;
+                    this.options.height = value.height;
+                    this.visual.position(point);
 
-                this.shapeVisual.redraw({ width: value.width, height: value.height });
-                this.refreshConnections();
-                this.triggerBoundsChange();
+                    this.shapeVisual.redraw({ width: value.width, height: value.height });
+                    this.refreshConnections();
+                    this.triggerBoundsChange();
+                }
+            }
+            else {
+                bounds = this._bounds;
             }
             if (this.contentVisual && !this.contentVisual._measured) {
                 this.contentVisual.redraw(this._bounds);
             }
-            if (this.options.width === DEFAULT_SHAPE_WIDTH && this.options.height === DEFAULT_SHAPE_HEIGHT) { // no dimensions, assuming autosize for paths, groups...
+            if (!this.shapeVisual._measured && this.options.width === DEFAULT_SHAPE_WIDTH && this.options.height === DEFAULT_SHAPE_HEIGHT) { // no dimensions, assuming autosize for paths, groups...
                 size = this.shapeVisual._measure();
                 if (size) {
                     if (this.shapeVisual.options.autoSize) {
@@ -449,7 +466,7 @@ kendo_module({
                     }
                 }
             }
-            return this._bounds;
+            return bounds;
         },
         position: function (point) {
             if (point) {
@@ -478,22 +495,8 @@ kendo_module({
              clone.options.id = clone.id;*/
             return clone;
         },
-        visualBounds: function () {
-            var bounds = this.bounds(),
-                tl = bounds.topLeft(),
-                br = bounds.bottomRight();
-            return Rect.fromPoints(this.diagram.transformPoint(tl), this.diagram.transformPoint(br));
-        },
-        rotatedBounds: function () {
-            var bounds = this.bounds().rotatedBounds(this.rotate().angle),
-                tl = bounds.topLeft(),
-                br = bounds.bottomRight();
-
-            return Rect.fromPoints(tl, br);
-        },
         select: function (value) {
-            if(Utils.isUndefined(value))
-            {
+            if (Utils.isUndefined(value)) {
                 value = true;
             }
             if (this.isSelected != value) {
@@ -620,7 +623,19 @@ kendo_module({
             }
             this.shapeVisual.redraw(options);
         },
+        _transformedBounds: function () {
+            var bounds = this.bounds(),
+                tl = bounds.topLeft(),
+                br = bounds.bottomRight();
+            return Rect.fromPoints(this.diagram.transformPoint(tl), this.diagram.transformPoint(br));
+        },
+        _rotatedBounds: function () {
+            var bounds = this.bounds().rotatedBounds(this.rotate().angle),
+                tl = bounds.topLeft(),
+                br = bounds.bottomRight();
 
+            return Rect.fromPoints(tl, br);
+        },
         _rotate: function () {
             var rotation = this.options.rotation;
             if (rotation && rotation.angle) {
@@ -1388,7 +1403,7 @@ kendo_module({
             var rect, viewport = this.viewport(), align, old, newPan, deltaPan;
             options = deepExtend({animate: false, align: "center middle"}, options);
             if (node instanceof DiagramElement) {
-                rect = node.visualBounds();
+                rect = node.bounds("transformed");
             }
             else if (Utils.isArray(node)) {
                 rect = this.getBoundingBox(node);
@@ -1605,10 +1620,10 @@ kendo_module({
                 di = Utils.isDefined(items) ? this._getDiagramItems(items) : {shapes: this.shapes};
             if (di.shapes.length > 0) {
                 var item = di.shapes[0];
-                rect = item.rotatedBounds();
+                rect = item.bounds("rotated");
                 for (var i = 1; i < di.shapes.length; i++) {
                     item = di.shapes[i];
-                    rect = rect.union(item.rotatedBounds());
+                    rect = rect.union(item.bounds("rotated"));
                 }
             }
             return rect;
@@ -1617,12 +1632,12 @@ kendo_module({
             var rect = Rect.empty(), di = this._getDiagramItems(items), temp;
             if (di.shapes.length > 0) {
                 var item = di.shapes[0];
-                rect = item.rotatedBounds();
+                rect = item.bounds("rotated");
                 rect.x -= item._rotationOffset.x;
                 rect.y -= item._rotationOffset.y;
                 for (var i = 1; i < di.shapes.length; i++) {
                     item = di.shapes[i];
-                    temp = item.rotatedBounds();
+                    temp = item.bounds("rotated");
                     temp.x -= item._rotationOffset.x;
                     temp.y -= item._rotationOffset.y;
                     rect = rect.union(temp);

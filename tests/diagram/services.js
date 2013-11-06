@@ -60,7 +60,7 @@
         i.select(true);
         var adorner = d._resizingAdorner;
         ok(adorner, "Adorner is present.");
-        deepEqual(i.visualBounds().inflate(adorner.options.offset, adorner.options.offset), adorner.bounds(), "Adoner has correct bounds");
+        deepEqual(i.bounds("transformed").inflate(adorner.options.offset, adorner.options.offset), adorner.bounds(), "Adoner has correct bounds");
     });
 
     test("Resizing adorner - correct cursor", function () {

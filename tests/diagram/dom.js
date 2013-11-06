@@ -130,7 +130,7 @@ test("Bring into view - many shapes", function () {
 
 test("Bring into view - align top right", function () {
     var s = kdiagram.addShape(new Point());
-    var rect = s.visualBounds(),
+    var rect = s.bounds("transformed"),
         viewport = kdiagram.viewport();
 
     var newPan = viewport.topRight().minus(rect.topRight()).plus(kdiagram.pan());
@@ -141,7 +141,7 @@ test("Bring into view - align top right", function () {
 
 test("Bring into view - align center bottom", function () {
     var s = kdiagram.addShape(new Point());
-    var rect = s.visualBounds(),
+    var rect = s.bounds("transformed"),
         viewport = kdiagram.viewport();
 
     var newPan = viewport.bottom().minus(rect.bottom()).plus(kdiagram.pan());
@@ -258,7 +258,7 @@ test("Shape visual bounds is ok after zoom", function () {
     var z = 0.5;
     z = kdiagram.zoom(z);
 
-    var vb = s.visualBounds();
+    var vb = s.bounds("transformed");
     var b = s.bounds();
     QUnit.close(b.width, vb.width / z, tolerance);
     QUnit.close(b.height, vb.height / z, tolerance);
