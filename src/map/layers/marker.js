@@ -1,6 +1,7 @@
 (function ($, undefined) {
     // Imports ================================================================
     var proxy = $.proxy,
+        math = Math,
 
         kendo = window.kendo,
         Class = kendo.Class,
@@ -22,7 +23,7 @@
             this.map = map;
 
             this.element = $("<div class='k-layer'></div>").appendTo(
-                map.scrollWrap // TODO: API for allocating a scrollable element?
+                map.overlayContainer
             );
 
             map.bind("reset", proxy(this._reset, this));
@@ -67,7 +68,7 @@
         moveTo: function(left, top) {
             left -= this.element.width() / 2;
             top -= this.element.height();
-            this.element.css({ left: left, top: top });
+            this.element.css({ left: math.round(left), top: math.round(top) });
         },
 
         _template: kendo.template(

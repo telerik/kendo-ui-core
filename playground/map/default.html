@@ -19,8 +19,10 @@
         <script src="../../src/map/location.js"></script>
         <script src="../../src/map/crs.js"></script>
         <script src="../../src/map/layers/tile.js"></script>
+        <script src="../../src/map/layers/marker.js"></script>
         <script src="../../src/map/main.js"></script>
         <script src="proj4.js"></script>
+        <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.css">
         <style>
             .k-layer {
                 position: absolute;
@@ -44,15 +46,15 @@
         <div id="map" style="width: 800px; height: 600px;"></div>
         <script>
             $("#map").kendoMap({
-                center: [42.4482453, 27.4157791],
-                zoom: 3,
+                center: [51.5, -0.09],
+                zoom: 7,
                 layers: [{
                     type: "tile",
                     urlTemplate: "http://tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
                     copyright: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
                 }],
                 markers: [{
-                    position: [51.5, -0.09],
+                    location: [51.5, -0.09],
                     text: "Marker with popup",
                     open: true // ?
                 }]

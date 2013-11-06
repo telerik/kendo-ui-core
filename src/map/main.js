@@ -49,26 +49,19 @@ kendo_module({
             this.element
                 .addClass(CSS_PREFIX + this.options.name.toLowerCase())
                 .css("position", "relative")
-                .empty();
+                .empty()
+                .append($(this._template(this)));
+
+            this.layerContainer = this.element.find(".k-layer-container");
+            this.overlayContainer = this.element.find(".k-overlay-container");
+
+            this._initScroller();
 
             this.bind(this.events, options);
 
-            this.scrollWrap = $("<div />").appendTo(this.element);
-
             this.crs = new EPSG3857();
             this.layers = new ObservableArray([]);
-            this._renderLayers();
-
-            var scroller = this.scroller = new kendo.mobile.ui.Scroller(this.scrollWrap, {
-                friction: FRICTION,
-                velocityMultiplier: VELOCITY_MULTIPLIER,
-                zoom: true
-            });
-            // TODO: Rename to scrollElement
-            this.scrollWrap = scroller.scrollElement;
-
-            scroller.bind("scroll", proxy(this._scroll, this));
-            scroller.bind("scrollEnd", proxy(this._scrollEnd, this));
+            this._initLayers();
 
             this._mousewheel = proxy(this._mousewheel, this);
             this.element.bind("click", proxy(this._click, this));
@@ -217,6 +210,46 @@ kendo_module({
             return this.layerToLocation(point);
         },
 
+        _template: kendo.template(
+            "<div>" +
+                "<div class='k-layer-container'></div>" +
+                "<div class='k-overlay-container'></div>" +
+            "</div>"
+        ),
+
+        _initScroller: function() {
+            var scroller = this.scroller = new kendo.mobile.ui.Scroller(
+                this.element.children(0), {
+                    friction: FRICTION,
+                    velocityMultiplier: VELOCITY_MULTIPLIER,
+                    zoom: true
+                });
+
+            scroller.bind("scroll", proxy(this._scroll, this));
+            scroller.bind("scrollEnd", proxy(this._scrollEnd, this));
+
+            // TODO: Rename to scrollElement
+            this.scrollWrap = scroller.scrollElement;
+        },
+
+        _initLayers: function() {
+            var defs = this.options.layers,
+                layers = this.layers = [],
+                layerContainer = this.layerContainer;
+
+            layerContainer.empty();
+
+            for (var i = 0; i < defs.length; i++) {
+                var options = defs[i];
+                var type = options.type || "shape";
+                var defaults = this.options.layerDefaults[type];
+                var impl = dataviz.map.layers[type];
+
+                // TODO: Set layer size
+                layers.push(new impl(this, deepExtend({}, defaults, options)));
+            }
+        },
+
         _scroll: function(e) {
             var origin = this.locationToLayer(this._viewOrigin);
             origin.x += e.scrollLeft;
@@ -269,7 +302,7 @@ kendo_module({
 
             scrollWrap.empty();
 
-            for (var i = 0; i < defs.length; i++)  {
+            for (var i = 0; i < defs.length; i++) {
                 var options = defs[i];
                 var type = options.type || "shape";
                 var defaults = this.options.layerDefaults[type];

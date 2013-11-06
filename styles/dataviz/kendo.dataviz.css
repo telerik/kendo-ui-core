@@ -195,16 +195,54 @@ span.k-sparkline,
     width: 100%;
 }
 
+/* Mobile Scroller */
+.km-scroll-container {
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-margin-collapse: separate;
+  -webkit-transform: translatez(0);
+}
+.km-touch-scrollbar {
+  position: absolute;
+  visibility: hidden;
+  z-index: 200000;
+  height: .3em;
+  width: .3em;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  -webkit-transition: opacity 0.3s linear;
+  -moz-transition: opacity 0.3s linear;
+  -o-transition: opacity 0.3s linear;
+  transition: opacity 0.3s linear;
+}
+.km-vertical-scrollbar {
+  height: 100%;
+  right: 2px;
+  top: 2px;
+}
+.km-horizontal-scrollbar {
+  width: 100%;
+  left: 2px;
+  bottom: 2px;
+}
+
 /* Map */
 
 .k-map .km-scroll-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    padding-bottom: 0;
 }
 
+.k-map .km-scroll-wrapper,
+.k-map .km-scroll-container,
+.k-map .k-layer-container,
+.k-map .k-overlay-container,
 .k-map .k-layer {
     position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 .k-map .k-marker {

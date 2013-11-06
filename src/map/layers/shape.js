@@ -30,9 +30,11 @@
             this._initOptions(options);
             this.map = map;
 
-            this.element = $("<div class='k-layer'></div>").appendTo(
-                map.scrollWrap // TODO: API for allocating a scrollable element?
-            ).css("width", options.width).css("height", options.height);
+            this.element = $("<div class='k-layer'></div>")
+                .appendTo(map.layerContainer)
+                .css("width", options.width)
+                .css("height", options.height);
+
             this.movable = new kendo.ui.Movable(this.element);
 
             this.surface = new d.svg.Surface(this.element[0], options); // TODO: Automatic choice
