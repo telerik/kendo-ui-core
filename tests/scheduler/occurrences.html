@@ -2186,6 +2186,29 @@
                 equal(events.length, 1);
             });
 
+            test("YEARLY expands correctly with interval", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date("1997/3/10 09:00"),
+                    end: new Date("1997/3/10 09:30"),
+                    recurrenceRule: "FREQ=YEARLY;INTERVAL=2;COUNT=10;BYMONTH=1,2,3"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(1997, 0, 1), new Date(2013, 0, 15));
+
+                deepEqual(events[0].start, new Date(1997, 2, 10, 9));
+                deepEqual(events[1].start, new Date(1999, 0, 10, 9));
+                deepEqual(events[2].start, new Date(1999, 1, 10, 9));
+                deepEqual(events[3].start, new Date(1999, 2, 10, 9));
+                deepEqual(events[4].start, new Date(2001, 0, 10, 9));
+                deepEqual(events[5].start, new Date(2001, 1, 10, 9));
+                deepEqual(events[6].start, new Date(2001, 2, 10, 9));
+                deepEqual(events[7].start, new Date(2003, 0, 10, 9));
+                deepEqual(events[8].start, new Date(2003, 1, 10, 9));
+                deepEqual(events[9].start, new Date(2003, 2, 10, 9));
+            });
+
             module("Exception recurring dates");
 
             test("expand method should return the event if no recurrenceRule", function() {
