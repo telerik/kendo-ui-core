@@ -563,7 +563,10 @@ kendo_module({
 
             if (idx == -1) {
                 if (that.options.highlightFirst && !that.text()) {
-                    li = $(that.ul[0].firstChild);
+                    li = that.ul[0].firstChild;
+                    if (li) {
+                        li = $(li);
+                    }
                 } else {
                     li = NULL;
                 }
