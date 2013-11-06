@@ -10974,7 +10974,7 @@ kendo_module({
         }
 
         for (property in options) {
-            if (!inArray(property, state.excluded)) {
+            if (!inArray(property, state.excluded)&&options.hasOwnProperty(property)) {
                 propValue = options[property];
                 if (isFn(propValue)) {
                     options[property] = valueOrDefault(propValue(context), defaults[property]);
