@@ -243,6 +243,10 @@ kendo_module({
             .replace(splatParam, '(.*?)') + '$');
     }
 
+    function stripUrl(url) {
+        return url.replace(/(\?.*)|(#.*)/g, "");
+    }
+
     var Route = kendo.Class.extend({
         init: function(route, callback) {
             if (!(route instanceof RegExp)) {
@@ -254,15 +258,22 @@ kendo_module({
         },
 
         callback: function(url) {
-            var params = this.route.exec(url).slice(1),
+            var params,
                 idx = 0,
-                length = params.length;
+                length,
+                queryStringParams = kendo.parseQueryStringParams(url);
+
+            url = stripUrl(url);
+            params = this.route.exec(url).slice(1);
+            length = params.length;
 
             for (; idx < length; idx ++) {
                 if (typeof params[idx] !== 'undefined') {
                     params[idx] = decodeURIComponent(params[idx]);
                 }
             }
+
+            params.push(queryStringParams);
 
             this._callback.apply(null, params);
         },
@@ -337,7 +348,7 @@ kendo_module({
                 url = "/";
             }
 
-            if (this.trigger(CHANGE, {url: e.url})) {
+            if (this.trigger(CHANGE, { url: e.url, params: kendo.parseQueryStringParams(e.url) })) {
                 e.preventDefault();
                 return;
             }
@@ -355,7 +366,7 @@ kendo_module({
                  }
             }
 
-            if (this.trigger(ROUTE_MISSING, { url: url })) {
+            if (this.trigger(ROUTE_MISSING, { url: url, params: kendo.parseQueryStringParams(url) })) {
                 e.preventDefault();
             }
         }

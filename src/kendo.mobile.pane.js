@@ -49,13 +49,15 @@ kendo_module({
             }
 
             this.history = [];
-            this.historyCallback = function(url) {
+            this.historyCallback = function(url, params) {
                 var transition = that.transition;
                 that.transition = null;
-                that.viewEngine.showView(url, transition);
+                that.viewEngine.showView(url, transition, params);
             };
 
             that._historyNavigate = function(url) {
+                var params = kendo.parseQueryStringParams(url);
+
                 if (url === BACK) {
                     if (that.history.length === 1) {
                         return;
@@ -67,7 +69,7 @@ kendo_module({
                     that.history.push(url);
                 }
 
-                that.historyCallback(url);
+                that.historyCallback(url, params);
             };
 
             that.loader = new Loader(element, {
@@ -170,7 +172,7 @@ kendo_module({
             });
 
             router.bind("routeMissing", function(e) {
-                that.historyCallback(e.url);
+                that.historyCallback(e.url, e.params);
             });
 
             that._historyNavigate = function(url) {

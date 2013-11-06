@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../src/jquery.min.js"></script>
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.fx.js"></script>
+    <script src="../src/kendo.draganddrop.js"></script>
+    <script src="../src/kendo.userevents.js"></script>
+    <script src="../src/kendo.router.js"></script>
+    <script src="../src/kendo.data.js"></script>
+    <script src="../src/kendo.binder.js"></script>
+    <script src="../src/kendo.view.js"></script>
+    <script src="../src/kendo.list.js"></script>
+    <script src="../src/kendo.popup.js"></script>
+    <script src="../src/kendo.dropdownlist.js"></script>
+    <script src="../src/kendo.listview.js"></script>
+    <script src="../src/kendo.mobile.view.js"></script>
+    <script src="../src/kendo.mobile.loader.js"></script>
+    <script src="../src/kendo.mobile.scroller.js"></script>
+    <script src="../src/kendo.mobile.pane.js"></script>
+    <script src="../src/kendo.mobile.application.js"></script>
+    <link href="../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" type="text/css" />
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
+</head>
+<body>
+    <div id="home" data-role="view">
+        home
+    </div>
+
+    <div id="foo" data-show="show" data-role="view">
+        foo
+    </div>
+
+    <script>
+        var app = new kendo.mobile.Application();
+        function show(e) {
+            console.log(e.view.params);
+        }
+
+        //app.navigate("#foo?bar=Qax");
+        //app.navigate("#foo?bar=rrr&foo=bbb");
+        //app.navigate("#foo");
+    </script>
+</body>
+</html>
