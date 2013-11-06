@@ -700,7 +700,11 @@ kendo_module({
 
             if (that.resizable) {
                 that.resizable.destroy();
+
                 if (that._resizeUserEvents) {
+                    if (that._resizeHandleDocumentClickHandler) {
+                        $(document).off("click", that._resizeHandleDocumentClickHandler);
+                    }
                     that._resizeUserEvents.destroy();
                 }
             }
@@ -881,6 +885,23 @@ kendo_module({
             });
         },
 
+        _resizeHandleDocumentClick: function(e) {
+            console.log(1);
+            if ($(e.target).closest(".k-column-active").length) {
+                return;
+            }
+
+            $(document).off(e);
+
+            if (this.resizeHandle) {
+
+                this.resizeHandle.data("th")
+                    .removeClass("k-column-active");
+
+                this.resizeHandle.hide();
+            }
+        },
+
         _positionColumnResizeHandleTouch: function(container) {
             var that = this;
 
@@ -894,6 +915,12 @@ kendo_module({
 
                     th.addClass("k-column-active");
                     that._createResizeHandle(container, th);
+
+                    if (!that._resizeHandleDocumentClickHandler) {
+                        that._resizeHandleDocumentClickHandler = proxy(that._resizeHandleDocumentClick, that);
+                    }
+
+                    $(document).on("click", that._resizeHandleDocumentClickHandler);
                 }
             });
         },
