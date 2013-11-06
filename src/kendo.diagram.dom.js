@@ -611,6 +611,9 @@ kendo_module({
             if (options) {
                 this.options = deepExtend({}, this.options, options);
             }
+            if (Utils.isDefined(this.options.content)) {
+                this.content(this.options.content);
+            }
             this.shapeVisual.redraw(options);
         },
 
