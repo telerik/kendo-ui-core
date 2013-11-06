@@ -1179,7 +1179,8 @@ function pad(number, digits, end) {
             ch, count, length, pattern,
             pmHour, UTC, ISO8601, matches,
             amDesignators, pmDesignators,
-            hoursOffset, minutesOffset;
+            hoursOffset, minutesOffset,
+            hasTime;
 
         if (!format) {
             format = "d"; //shord date format
@@ -1344,16 +1345,24 @@ function pad(number, digits, end) {
             }
         }
 
-        if (year === null) {
+        hasTime = hours !== null || minutes !== null || seconds || null;
+
+        if (year === null && month === null && day === null && hasTime) {
             year = defaultYear;
+            month = date.getMonth();
+            day = date.getDate();
+        } else {
+            if (year === null) {
+                year = defaultYear;
+            }
+
+            if (day === null) {
+                day = 1;
+            }
         }
 
         if (pmHour && hours < 12) {
             hours += 12;
-        }
-
-        if (day === null) {
-            day = 1;
         }
 
         if (UTC) {

@@ -824,6 +824,15 @@
                 var result = parse("2013/01/17");
                 deepEqual(result, new Date("2013/01/17 00:00:00"));
             });
+
+            test("parseDate uses today's date when parse only time portion", function() {
+                var today = new Date();
+                var result = parse("10:00 AM", "hh:mm tt");
+
+                today.setHours(10, 0, 0, 0);
+
+                deepEqual(result, today);
+            });
         </script>
     </body>
 </html>
