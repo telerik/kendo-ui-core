@@ -129,6 +129,7 @@ kendo_module({
 
         _header: function() {
             var template = this.options.headerTemplate;
+            var header;
 
             if ($.isFunction(template)) {
                 template = template();
@@ -136,7 +137,10 @@ kendo_module({
 
             if (template) {
                 this.list.prepend(template);
-                this.header = $(this.list[0].firstChild);
+
+                header = this.ul.prev();
+
+                this.header = header[0] ? header : null;
             }
         },
 
