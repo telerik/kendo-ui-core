@@ -63,7 +63,7 @@
                 r = datum.a,
                 lng0 = options.centralMeridian,
                 lat = limit(loc.lat, -proj.MAX_LAT, proj.MAX_LAT),
-                lng = loc.lng,//limit(loc.lng, -proj.MAX_LNG, proj.MAX_LNG),
+                lng = loc.lng,
                 x = rad(lng - lng0) * r,
                 y = proj._projectLat(lat);
 

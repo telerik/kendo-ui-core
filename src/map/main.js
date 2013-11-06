@@ -95,7 +95,8 @@ kendo_module({
                         }
                     }
                 }
-            }
+            },
+            wraparound: true
         },
 
         events:[
@@ -250,7 +251,11 @@ kendo_module({
             scroller.dimensions.x.makeVirtual();
 
             var nw = this.locationToLayer(this.extent().nw);
-            scroller.dimensions.x.virtualSize(-Number.MAX_VALUE, Number.MAX_VALUE);
+            if (this.options.wraparound) {
+                scroller.dimensions.x.virtualSize(-Number.MAX_VALUE, Number.MAX_VALUE);
+            } else {
+                scroller.dimensions.x.virtualSize(-nw.x, this.scale() - nw.x);
+            }
             scroller.dimensions.y.virtualSize(-nw.y, this.scale() - nw.y);
         },
 
@@ -261,7 +266,7 @@ kendo_module({
 
             scrollWrap.empty();
 
-            for (var i = 0; i < defs.length; i++) {
+            for (var i = 0; i < defs.length; i++)  {
                 var options = defs[i];
                 var type = options.type || "shape";
                 var defaults = this.options.layerDefaults[type];

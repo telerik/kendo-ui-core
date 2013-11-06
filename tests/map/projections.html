@@ -17,9 +17,11 @@
     <script src="../../src/map/crs.js"></script>
     <script src="../../src/map/main.js"></script>
     <script>
-        var TOLERANCE = Math.pow(10, -6);
+        var TOLERANCE = Math.pow(10, -6),
+            COORD_PRECISION = 6;
 
         var dataviz = kendo.dataviz,
+            round = dataviz.round,
             Point = dataviz.Point2D,
 
             map = dataviz.map,
@@ -98,6 +100,20 @@
                 );
             });
 
+            test("forward our of the bounds should return correct coords", function() {
+                mercator = new projections.Mercator();
+
+                forward(mercator,
+                    new Location(0, 200),
+                    new Point(22263898.158654712, 0)
+                );
+
+                forward(mercator,
+                    new Location(0, -200),
+                    new Point(-22263898.158654712, 0)
+                );
+            });
+
             test("inverse", function() {
                 $.each(mercatorIdentities, function() {
                     var point = this[1];
@@ -117,11 +133,16 @@
                 );
             });
 
-            test("inverse out of bounds", function() {
+            test("inverse out of bounds should return correct coords", function() {
                 mercator = new projections.Mercator();
+                console.log(TOLERANCE);
 
-                var r = mercator.inverse(new Point(Number.MAX_VALUE, Number.MAX_VALUE));
-                close(r.lng, mercator.MAX_LNG, TOLERANCE, "X");
+                var r = mercator.inverse(new Point(200, Number.MAX_VALUE));
+                close(round(r.lng, COORD_PRECISION), 0.001797, TOLERANCE, "X");
+                close(r.lat, mercator.MAX_LAT, TOLERANCE, "Y");
+
+                var r = mercator.inverse(new Point(-200, Number.MAX_VALUE));
+                close(round(r.lng, COORD_PRECISION), -0.001797, TOLERANCE, "X");
                 close(r.lat, mercator.MAX_LAT, TOLERANCE, "Y");
             });
 
