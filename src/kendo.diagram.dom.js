@@ -596,11 +596,11 @@ kendo_module({
             var b = this.bounds(),
                 fnName = side[0].toLowerCase() + side.slice(1);
             if (Utils.isFunction(b[fnName])) {
-                return this.transformPoint(b[fnName]());
+                return this._transformPoint(b[fnName]());
             }
             return b.center();
         },
-        transformPoint: function (absolutePoint) {
+        _transformPoint: function (absolutePoint) {
             var rotate = this.rotate(),
                 bounds = this.bounds(),
                 tl = bounds.topLeft(),
