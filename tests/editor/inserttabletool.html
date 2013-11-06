@@ -25,7 +25,7 @@
             module("Editor / InsertTableTool", {
                 setup: function() {
                     editor = $("<textarea></textarea>").appendTo("#qunit-fixture").kendoEditor().data("kendoEditor");
-                    tool = editor.wrapper.find('.k-createTable');
+                    tool = editor.wrapper.find('.k-createTable').parent();
                 },
                 teardown: function() {
                     editor.destroy();

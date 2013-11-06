@@ -82,7 +82,7 @@ var PopupTool = Tool.extend({
     },
 
     _toggle: function(e) {
-        var button = $(e.target).closest(".k-tool-icon");
+        var button = $(e.target).closest(".k-tool");
 
         if (!button.hasClass("k-state-disabled")) {
             this.popup().toggle();

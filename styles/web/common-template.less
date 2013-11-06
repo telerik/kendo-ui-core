@@ -3248,19 +3248,28 @@ table.k-editor
     white-space: nowrap;
 }
 
+
+.k-button-group .k-tool {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 1px 0;
+    width: @editor-icon-size;
+    height: @editor-icon-size;
+    line-height: @editor-icon-size;
+}
+
 .k-button-group .k-tool-icon
 {
     width: 24px;
     height: 24px;
-    margin: 1px 0;
     vertical-align: middle;
 }
 
 .editor-icon(@x, @y) {
     background-position: @x @y;
 
-    &.k-state-hover,
-    &.k-state-selected {
+    .k-state-hover &,
+    .k-state-selected & {
         background-position: (@x - 24) @y;
     }
 }
@@ -3272,6 +3281,8 @@ table.k-editor
 .k-strikethrough { .editor-icon(-240px, -72px); }
 .k-foreColor { .editor-icon(-240px, -96px); }
 .k-backColor { .editor-icon(-240px, -120px); }
+.k-colorpicker .k-foreColor { background-position: -240px -96px; }
+.k-colorpicker .k-backColor { background-position: -240px -120px; }
 .k-justifyLeft { .editor-icon(-240px, -144px); }
 .k-justifyCenter { .editor-icon(-240px, -168px); }
 .k-justifyRight { .editor-icon(-240px, -192px); }
@@ -3318,24 +3329,24 @@ table.k-editor
     line-height: 0;
 }
 
-.k-button-group .k-tool-icon
+.k-button-group .k-tool
 {
     border-style: solid;
     border-width: 1px 0 1px 1px;
 }
 
-.k-rtl .k-button-group .k-tool-icon
+.k-rtl .k-button-group .k-tool
 {
     border-style: solid;
     border-width: 1px 1px 1px 0;
 }
 
-.k-button-group .k-tool-icon.k-group-end
+.k-button-group .k-tool.k-group-end
 {
     border-right-width: 1px;
 }
 
-.k-rtl .k-button-group .k-tool-icon.k-group-end
+.k-rtl .k-button-group .k-tool.k-group-end
 {
     border-left-width: 1px;
 }
@@ -6639,6 +6650,7 @@ html .k-upload-empty
 .k-window-content,
 .k-link,
 .k-icon,
+.k-tool,
 .k-tool-icon,
 .k-splitbar
 {

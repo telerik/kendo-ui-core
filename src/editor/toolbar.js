@@ -8,7 +8,7 @@
     var keys = kendo.keys;
     var NS = ".kendoEditor";
 
-    var focusable = "a.k-tool-icon:not(.k-state-disabled)," +
+    var focusable = "a.k-tool:not(.k-state-disabled)," +
                     ".k-widget.k-colorpicker,.k-selectbox,.k-dropdown,.k-combobox .k-input";
 
     var Toolbar = Widget.extend({
@@ -133,7 +133,7 @@
             that._attachEvents();
 
             that.items().each(function initializeTool() {
-                var toolName = that._toolFromClassName(this),
+                var toolName = that._toolName(this),
                     tool = that.tools[toolName],
                     messages = editor.options.messages,
                     description = messages[toolName],
@@ -384,14 +384,14 @@
                     startGroup();
                 }
 
-                if (options.exec && toolElement.hasClass("k-tool-icon")) {
+                if (options.exec && toolElement.hasClass("k-tool")) {
                     toolElement.click(proxy(options.exec, editorElement[0]));
                 }
             }
 
             endGroup();
 
-            $(that.element).children(":has(> .k-tool-icon)").addClass("k-button-group");
+            $(that.element).children(":has(> .k-tool)").addClass("k-button-group");
 
             if (that.options.popup && browser.msie && browser.version < 9) {
                 that.window.wrapper.find("*").attr("unselectable", "on");
@@ -412,7 +412,7 @@
 
         _attachEvents: function() {
             var that = this,
-                buttons = "[role=button].k-tool-icon",
+                buttons = "[role=button].k-tool",
                 enabledButtons = buttons + ":not(.k-state-disabled)",
                 disabledButtons = buttons + ".k-state-disabled";
 
@@ -467,7 +467,7 @@
                     e.stopPropagation();
                     button.removeClass("k-state-hover");
                     if (!button.is("[data-popup]")) {
-                        that._editor.exec(that._toolFromClassName(this));
+                        that._editor.exec(that._toolName(this));
                     }
                 })
                 .on("click" + NS, disabledButtons, function(e) { e.preventDefault(); });
@@ -475,13 +475,19 @@
         },
 
 
-        _toolFromClassName: function (element) {
+        _toolName: function (element) {
             if (!element) {
                 return;
             }
 
-            var tool = $.grep(element.className.split(" "), function (x) {
-                return !/^k-(widget|tool-icon|state-hover|header|combobox|dropdown|selectbox|colorpicker)$/i.test(x);
+            var className = element.className;
+
+            if (/k-tool\b/i.test(className)) {
+                className = element.firstChild.className;
+            }
+
+            var tool = $.grep(className.split(" "), function (x) {
+                return !/^k-(widget|tool|tool-icon|state-hover|header|combobox|dropdown|selectbox|colorpicker)$/i.test(x);
             });
 
             return tool[0] ? tool[0].substring(tool[0].lastIndexOf("-") + 1) : "custom";
@@ -499,7 +505,7 @@
             }
 
             that.items().each(function () {
-                var tool = that.tools[that._toolFromClassName(this)];
+                var tool = that.tools[that._toolName(this)];
                 if (tool && tool.update) {
                     tool.update($(this), nodes);
                 }

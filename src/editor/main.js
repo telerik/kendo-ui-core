@@ -46,9 +46,9 @@ kendo_module({
             '</tbody></table>',
 
         buttonTemplate:
-            '<a href="" role="button" class="k-tool-icon #= data.cssClass #"' +
+            '<a href="" role="button" class="k-tool"' +
             '#= data.popup ? " data-popup" : "" #' +
-            ' unselectable="on" title="#= data.title #">#= data.title #</a>',
+            ' unselectable="on" title="#= data.title #"><span class="k-tool-icon #= data.cssClass #">#= data.title #</span></a>',
 
         colorPickerTemplate:
             '<div class="k-colorpicker #= data.cssClass #" />',

@@ -73,7 +73,7 @@
                 var execArgs = [];
 
                 withMock(editor, "exec", function() { execArgs = arguments; }, function() {
-                    $('.k-bold', editor.wrapper).click();
+                    $('.k-bold', editor.wrapper).parent().click();
 
                     equal(execArgs.length, 1);
                     equal(execArgs[0], 'bold');
@@ -101,7 +101,7 @@
 
                 editor.trigger('select');
 
-                ok($('.k-bold', editor.wrapper).hasClass('k-state-selected'));
+                ok($('.k-bold', editor.wrapper).parent().hasClass('k-state-selected'));
             });
 
             test('handle word selection', function() {
@@ -114,7 +114,7 @@
 
                 editor.trigger('select');
 
-                ok($('.k-bold', editor.wrapper).hasClass('k-state-selected'));
+                ok($('.k-bold', editor.wrapper).parent().hasClass('k-state-selected'));
             });
 
             test('handle mixed selection', function() {
@@ -141,7 +141,7 @@
 
                 editor.trigger('select');
 
-                ok($('.k-justifyRight', editor.wrapper).hasClass('k-state-selected'));
+                ok($('.k-justifyRight', editor.wrapper).parent().hasClass('k-state-selected'));
             });
 
             if (!kendo.support.browser.msie) {
@@ -226,6 +226,17 @@
                 toolbar.bindTo(mockEditorTools(array, options));
             }
 
+            function getTool(className) {
+                var tool = dom.find(".k-" + className);
+
+                if (tool.hasClass("k-tool-icon")) {
+                    tool = tool.closest(".k-tool");
+                }
+
+                return tool;
+            }
+
+
             test("expands tool configuration for default tool", function() {
                 bindToMock([ "bold" ]);
 
@@ -260,7 +271,7 @@
 
                 toolbar.bindTo(editorMock);
 
-                dom.find(".k-bold").trigger("click");
+                getTool("bold").trigger("click");
 
                 ok(args);
                 equal(args[0], "bold");
@@ -299,7 +310,7 @@
             test("unlink tool applies custom title", function() {
                 bindToMock([ "unlink" ], { messages: { unlink: "foo" } });
 
-                equal(dom.find(".k-unlink").attr("title"), "foo");
+                equal(getTool("unlink").attr("title"), "foo");
             });
 
             test("clicking disabled links should not navigate", function() {
@@ -312,7 +323,7 @@
 
                 dom.bind("click", navigationListener);
 
-                dom.find(".k-tool-icon.k-state-disabled:first").trigger("click");
+                dom.find(".k-tool.k-state-disabled:first").trigger("click");
 
                 dom.unbind("click", navigationListener);
 
@@ -328,10 +339,10 @@
                 equal(dom.find("li.k-tool-group").length, 2);
                 equal(dom.find(".k-group-start").length, 2);
                 equal(dom.find(".k-group-end").length, 2);
-                ok(dom.find(".k-bold").hasClass("k-group-start"));
-                ok(dom.find(".k-insertImage").hasClass("k-group-start"));
-                ok(dom.find(".k-underline").hasClass("k-group-end"));
-                ok(dom.find(".k-createLink").hasClass("k-group-end"));
+                ok(getTool("bold").hasClass("k-group-start"));
+                ok(getTool("insertImage").hasClass("k-group-start"));
+                ok(getTool("underline").hasClass("k-group-end"));
+                ok(getTool("createLink").hasClass("k-group-end"));
             });
 
             test("hidden buttons do not end groups", function() {
@@ -342,7 +353,7 @@
                 dom.find(".k-unlink").addClass(".k-state-disabled");
                 toolbar._updateContext();
 
-                equal(dom.find(".k-createLink.k-group-end").length, 1);
+                ok(getTool("createLink").hasClass("k-group-end"));
             });
 
             test("break tool renders row breaking element", function() {
@@ -351,7 +362,7 @@
                     "createLink", "unlink"
                 ]);
 
-                equal(dom.find(".k-row-break").length, 1);
+                equal(getTool("row-break").length, 1);
             });
 
             test("custom tools are moved into new groups", function() {
@@ -361,7 +372,7 @@
                     "fontName"
                 ]);
 
-                equal(dom.find(".k-tool-group").length, 3);
+                equal(getTool("tool-group").length, 3);
             });
 
             test("custom tools are moved into separate groups", function() {
@@ -370,7 +381,7 @@
                     { name: "custom2", template: "<b class='bar' />" }
                 ]);
 
-                equal(dom.find(".k-tool-group").length, 2);
+                equal(getTool("tool-group").length, 2);
             });
 
             test("custom tools exec function is bound to tool click", 2, function() {
@@ -381,7 +392,7 @@
                     } }
                 ]);
 
-                dom.find(".k-tool-icon").trigger("click");
+                dom.find(".k-tool").trigger("click");
             });
 
             test("buttons honor tooltip configuration", function() {
@@ -389,7 +400,7 @@
                     { name: "custom", tooltip: "foo" }
                 ]);
 
-                equal(dom.find(".k-tool-icon").attr("title"), "foo");
+                equal(dom.find(".k-tool").attr("title"), "foo");
             });
 
             test("nameless custom commands are rendered", function() {
@@ -404,6 +415,10 @@
 
             function active() {
                 return $(kendo._activeElement());
+            }
+
+            function isToolActive(className) {
+                return active()[0] == getTool(className)[0];
             }
 
             $.fn.press = function (key) {
@@ -428,63 +443,63 @@
 
                 toolbar.focus();
 
-                ok(active().is(".k-bold"));
+                ok(isToolActive("bold"));
             });
 
             test("right arrow focuses next tool", function() {
                 bindToMock([ "bold", "italic" ]);
 
-                dom.find(".k-bold").press(keys.RIGHT);
+                getTool("bold").press(keys.RIGHT);
 
-                ok(active().is(".k-italic"));
+                ok(isToolActive("italic"));
             });
 
             test("right arrow focuses tool in next group", function() {
                 bindToMock([ "bold", "createLink" ]);
 
-                dom.find(".k-bold").press(keys.RIGHT);
+                getTool("bold").press(keys.RIGHT);
 
-                ok(active().is(".k-createLink"));
+                ok(isToolActive("createLink"));
             });
 
             test("right arrow focuses first tool in next group", function() {
                 bindToMock([ "bold", "createLink", "unlink" ]);
 
-                dom.find(".k-bold").press(keys.RIGHT);
+                getTool("bold").press(keys.RIGHT);
 
-                ok(active().is(".k-createLink"));
+                ok(isToolActive("createLink"));
             });
 
             test("left arrow focuses previous tool", function() {
                 bindToMock([ "bold", "italic" ]);
 
-                dom.find(".k-italic").press(keys.LEFT);
+                getTool("italic").press(keys.LEFT);
 
-                ok(active().is(".k-bold"));
+                ok(isToolActive("bold"));
             });
 
             test("right arrow focuses tool in next group", function() {
                 bindToMock([ "bold", "createLink" ]);
 
-                dom.find(".k-createLink").press(keys.LEFT);
+                getTool("createLink").press(keys.LEFT);
 
-                ok(active().is(".k-bold"));
+                ok(isToolActive("bold"));
             });
 
             test("right arrow skips disabled tools", function() {
                 bindToMock([ "bold", "italic", "underline" ]);
 
-                dom.find(".k-italic").addClass("k-state-disabled");
+                getTool("italic").addClass("k-state-disabled");
 
-                dom.find(".k-bold").press(keys.RIGHT);
+                getTool("bold").press(keys.RIGHT);
 
-                ok(active().is(".k-underline"));
+                ok(isToolActive("underline"));
             });
 
             test("right arrow focuses color picker", function() {
                 bindToMock([ "bold", "foreColor", "underline" ]);
 
-                dom.find(".k-bold").press(keys.RIGHT);
+                getTool("bold").press(keys.RIGHT);
 
                 ok(active().is(".k-colorpicker"));
             });
