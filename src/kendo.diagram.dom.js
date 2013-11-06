@@ -603,6 +603,15 @@ kendo_module({
             }
             return b.center();
         },
+        redraw: function (options) {
+            if (options) {
+                this.options = deepExtend({}, this.options, options);
+            }
+            if (Utils.isDefined(this.options.content)) {
+                this.content(this.options.content);
+            }
+            this.shapeVisual.redraw(options);
+        },
         _transformPoint: function (absolutePoint) {
             var rotate = this.rotate(),
                 bounds = this.bounds(),
@@ -613,15 +622,6 @@ kendo_module({
                 result.rotate(rotate.center().plus(tl), 360 - rotate.angle);
             }
             return result;
-        },
-        redraw: function (options) {
-            if (options) {
-                this.options = deepExtend({}, this.options, options);
-            }
-            if (Utils.isDefined(this.options.content)) {
-                this.content(this.options.content);
-            }
-            this.shapeVisual.redraw(options);
         },
         _transformedBounds: function () {
             var bounds = this.bounds(),
