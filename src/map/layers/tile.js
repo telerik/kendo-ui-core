@@ -9,6 +9,7 @@
         template = kendo.template,
 
         dataviz = kendo.dataviz,
+        round = dataviz.round,
         deepExtend = kendo.deepExtend,
 
         g = dataviz.geometry,
@@ -210,7 +211,7 @@
                 tileOptions = {
                     index: index,
                     point: point,
-                    offset: offset,
+                    offset: roundPoint(offset),
                     zoom: this._zoom,
                     url: urlTemplate({
                         zoom: this._zoom,
@@ -345,6 +346,11 @@
             return items[index];
         }
     });
+
+    // Methods ================================================================
+    function roundPoint(point) {
+        return new Point(round(point.x), round(point.y));
+    }
 
     // Exports ================================================================
     deepExtend(dataviz, {
