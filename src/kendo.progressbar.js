@@ -242,7 +242,6 @@ kendo_module({
             var percentageParsed = parseInt(percentage * 100, 10) / 100;
             var completedChunksCount = math.floor(percentageParsed / percentagesPerChunk);
             var completedChunks;
-            var chunkContainer = that.wrapper.find("ul.k-reset");
 
             if((options.orientation === HORIZONTAL && !(options.reverse)) ||
                (options.orientation === VERTICAL && options.reverse)) {
