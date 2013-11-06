@@ -56,17 +56,18 @@
         },
 
         options: {
-            shape: "default"
+            shape: "pinTarget"
         },
 
         moveTo: function(left, top) {
-            left -= this.element.width() / 2;
-            top -= this.element.height();
-            this.element.css({ left: math.round(left), top: math.round(top) });
+            this.element.css({
+                left: math.round(left),
+                top: math.round(top)
+            });
         },
 
         _template: kendo.template(
-            "<span class='k-marker k-marker-#= options.shape #'></span>"
+            "<span class='k-marker k-marker-#= kendo.toHyphens(options.shape) #'></span>"
         )
     });
 
