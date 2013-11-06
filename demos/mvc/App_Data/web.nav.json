@@ -1169,6 +1169,13 @@
                     "meta": ""
                  },
                  {
+                    "text": "Vertical ProgressBar",
+                    "url": "progressbar/vertical.html",
+                    "title": "Displaying a vertical progress",
+                    "meta": "",
+                    "packages": ["!mvc", "!jsp", "!php"]
+                 },
+                 {
                     "text": "Custom Label",
                     "url": "progressbar/customlabel.html",
                     "title": "Displaying a custom progress label",

@@ -1,0 +1,82 @@
+﻿<div id="example" class="k-content">
+    <div class="demo-section">
+        <div id="totalProgressBar"></div>
+        <div id="loadingProgressBar"></div>
+        <div class="loadingInfo">
+            <h2>Loading styles</h2>
+            <p>Loaded: <span class="loadingStatus">0%</span></p>
+            <p>Item <span class="chunkStatus">1</span> of 4</p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#totalProgressBar").kendoProgressBar({
+                type: "chunk",
+                chunkCount: 4,
+                min: 0,
+                max: 4,
+                orientation: "vertical"
+            });
+
+            $("#loadingProgressBar").kendoProgressBar({
+                orientation: "vertical",
+                showStatus: false,
+                animation: false,
+                change: function (e) {
+                    $(".loadingStatus").text(e.value + "%");
+                },
+                complete: onComplete
+            });
+
+            load();
+        });
+
+        function onComplete(e){
+            var total = $("#totalProgressBar").data("kendoProgressBar");
+            total.value(total.value() + 1);
+
+            if (total.value() < total.options.max) {
+                $(".chunkStatus").text(total.value() + 1);
+                $(".loadingInfo h2").text("Loading " + itemsToLoad[total.value()]);
+
+                load();
+            }
+        }
+
+        function load() {
+            var pb = $("#loadingProgressBar").data("kendoProgressBar");
+            pb.value(0);
+
+            var interval = setInterval(function () {
+                if (pb.value() < 100) {
+                    pb.value(pb.value() + 1);
+                } else {
+                    clearInterval(interval);
+                }
+            }, 30);
+        }
+
+        var itemsToLoad = ["styles", "scripts", "images", "fonts"];
+    </script>
+
+    <style scoped>
+        .k-progressbar
+        {
+            width: 15px;
+            height: 150px;
+        }
+        
+        #loadingProgressBar
+        {
+            margin-left: 10px;
+        }
+        
+        .loadingInfo
+        {
+            display: inline-block;
+            width: 300px;
+            margin-left: 30px;
+        }
+    </style>
+</div>
