@@ -132,6 +132,7 @@ var tests = [
     "core/resizing.html",
     "core/util.html",
     "core/lint.html",
+    "core/support.html",
     "data/datareader.html",
     "data/xmldatareader.html",
     "data/datasource/read.html",

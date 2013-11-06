@@ -1928,7 +1928,27 @@ function pad(number, digits, end) {
 
         support.eventCapture = document.documentElement.addEventListener;
 
-        support.placeholder = "placeholder" in document.createElement("input");
+        var input = document.createElement("input");
+
+        support.placeholder = "placeholder" in input;
+
+        support.input = (function() {
+            var types = ["number", "date", "time", "month", "week", "datetime", "datetime-local"];
+            var length = types.length;
+            var result = {};
+            var idx = 0;
+            var type;
+
+            for (;idx < length; idx++) {
+                type = types[idx];
+                input.setAttribute("type", type);
+
+                result[type.replace("-", "")] = input.type !== "text";
+            }
+
+            return result;
+        })();
+
         support.stableSort = (function() {
             var sorted = [0,1,2,3,4,5,6,7,8,9,10,11,12].sort(function() { return 0; } );
             return sorted[0] === 0 && sorted[1] === 1 && sorted[2] === 2 && sorted[3] === 3 && sorted[4] === 4 &&
