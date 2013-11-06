@@ -886,7 +886,6 @@ kendo_module({
         },
 
         _resizeHandleDocumentClick: function(e) {
-            console.log(1);
             if ($(e.target).closest(".k-column-active").length) {
                 return;
             }
