@@ -5,7 +5,8 @@
 
 /* Widget Base Styles */
 @widget-text-color: #fff;
-@widget-gradient: "rgba(255,255,255,.12) 0%, rgba(255,255,255,.08) 50%, rgba(255,255,255,.05) 51%, rgba(255,255,255,.0) 100%";
+//@widget-gradient: "rgba(255,255,255,.12) 0%, rgba(255,255,255,.08) 50%, rgba(255,255,255,.05) 51%, rgba(255,255,255,.0) 100%";
+@widget-gradient:"rgba(255,255,255,.12) 0%, rgba(255,255,255,.20) 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.07) 100%";
 @widget-background-color: #4d4d4d;
 @widget-border-color: #2b2b2b;
 @widget-shadow: none;
@@ -13,7 +14,7 @@
 /* Selects, Dropdowns */
 @select-background-color: #272727;
 @select-border-color: @widget-border-color;
-@select-hover-background-color: #3d3d3d;
+@select-hover-background-color: #080808;
 @select-group-background-color: @select-background-color;
 
 /* Inputs */
@@ -43,7 +44,8 @@
 
 /* Hover State */
 @hover-text-color: @widget-text-color;
-@hover-gradient: "rgba(255,255,255,.12) 0%, rgba(255,255,255,.20) 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.07) 100%";
+//@hover-gradient: "rgba(255,255,255,.12) 0%, rgba(255,255,255,.20) 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.07) 100%";
+@hover-gradient: "rgba(255,255,255,.12) 0%, rgba(255,255,255,.08) 50%, rgba(255,255,255,.05) 51%, rgba(255,255,255,.0) 100%";
 @hover-background-color: #3d3d3d;
 @hover-border-color: @widget-border-color;
 @hover-shadow: none;
@@ -57,7 +59,7 @@
 
 /*Focused State*/
 @focused-border-color: @hover-border-color;
-@focused-shadow: 0 0 3px 0 @shadow-color;
+@focused-shadow: 0 0 3px 0 #0066cc;
 @focused-item-shadow: inset 0 0 3px 1px @hover-border-color;
 @focused-active-item-shadow: inset 0 0 3px 1px darken(@selected-border-color, 15%);
 
@@ -152,10 +154,10 @@
 @tabstrip-tabs-color: @widget-text-color;
 @form-widget-color: @widget-text-color;
 @drop-down-border-color: @widget-border-color;
-@drop-down-hover-border-color: @widget-border-color;
-@drop-down-focused-border-color: @widget-border-color;
+@drop-down-hover-border-color: #080808;
+@drop-down-focused-border-color: #0066cc;
 @calendar-group-background-color: @group-background-color; 
-@drop-down-background: #1d1d1d;
+@drop-down-background: #272727;
 @drop-down-text-color: @widget-text-color;
 @secondary-border-color: @widget-border-color;
 @secondary-text-color: @widget-text-color;

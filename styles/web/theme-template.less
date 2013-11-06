@@ -1503,17 +1503,6 @@ div.k-imagebrowser-dropzone em
     border-color: @drop-down-hover-border-color;
 }
 
-.k-autocomplete.k-state-focused,
-.k-picker-wrap.k-state-focused,
-.k-numeric-wrap.k-state-focused,
-.k-dropdown-wrap.k-state-focused
-{
-    background-color: @select-hover-background-color;
-    .composite-background(@hover-gradient);
-    background-position: 50% 50%;
-    border-color: @drop-down-focused-border-color;
-}
-
 .k-multiselect.k-header
 {
     border-color: @drop-down-border-color;
@@ -1524,9 +1513,17 @@ div.k-imagebrowser-dropzone em
     border-color: @drop-down-hover-border-color;
 }
 
+.k-autocomplete.k-state-focused,
+.k-picker-wrap.k-state-focused,
+.k-numeric-wrap.k-state-focused,
+.k-dropdown-wrap.k-state-focused,
 .k-multiselect.k-header.k-state-focused
 {
+    background-color: @select-hover-background-color;
+    .composite-background(@hover-gradient);
+    background-position: 50% 50%;
     border-color: @drop-down-focused-border-color;
+    .box-shadow(@focused-shadow);
 }
 
 .k-list-container

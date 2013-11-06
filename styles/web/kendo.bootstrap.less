@@ -418,6 +418,16 @@
    border-color: @draghandle-selected-background;
 }
 
+.k-draghandle.k-state-focused,
+.k-draghandle.k-state-focused:link,
+.k-slider-buttons .k-button:focus,
+.k-slider-buttons .k-button:active
+{
+    .box-shadow(@focused-shadow);
+	border-color: @drop-down-focused-border-color;
+	background-color: @widget-background-color;
+}
+
 .k-autocomplete.k-state-default,
 .k-picker-wrap.k-state-default,
 .k-numeric-wrap.k-state-default,
@@ -679,11 +689,6 @@ td.k-state-focused.k-state-selected,
 
 
 // Pager
-.k-pager-numbers .k-link
-{
-    height: 1.83333em;/*IE7*/
-}
-
 .k-pager-numbers .k-link,
 .k-pager-numbers .k-state-selected
 {
