@@ -4,11 +4,13 @@
         <div id="loadingProgressBar"></div>
         <div class="loadingInfo">
             <h2>Loading styles</h2>
-            <p>Loaded: <span class="loadingStatus">0%</span></p>
-            <p>Item <span class="chunkStatus">1</span> of 4</p>
+            <div class="statusContainer">
+                <p>Loaded: <span class="loadingStatus">0%</span></p>
+                <p>Item <span class="chunkStatus">1</span> of 4</p>
+            </div>
+            <button class="k-button reloadButton">Reload</button>
         </div>
     </div>
-
     <script>
         $(document).ready(function () {
             $("#totalProgressBar").kendoProgressBar({
@@ -16,7 +18,12 @@
                 chunkCount: 4,
                 min: 0,
                 max: 4,
-                orientation: "vertical"
+                orientation: "vertical",
+                complete: function (e) {
+                    $(".loadingInfo h2").text("All items loaded");
+                    $(".statusContainer").hide();
+                    $(".reloadButton").show();
+                }
             });
 
             $("#loadingProgressBar").kendoProgressBar({
@@ -32,7 +39,7 @@
             load();
         });
 
-        function onComplete(e){
+        function onComplete(e) {
             var total = $("#totalProgressBar").data("kendoProgressBar");
             total.value(total.value() + 1);
 
@@ -57,9 +64,20 @@
             }, 30);
         }
 
+        $(".reloadButton").click(function () {
+            $(this).hide();
+            $(".statusContainer").show();
+
+            $("#totalProgressBar").data("kendoProgressBar").value(0);
+            $("#loadingProgressBar").data("kendoProgressBar").value(0);
+            $(".loadingInfo h2").text("Loading " + itemsToLoad[0]);
+            $(".chunkStatus").text(1);
+
+            load();
+        });
+
         var itemsToLoad = ["styles", "scripts", "images", "fonts"];
     </script>
-
     <style scoped>
         .k-progressbar
         {
@@ -77,6 +95,11 @@
             display: inline-block;
             width: 300px;
             margin-left: 30px;
+        }
+
+        .reloadButton
+        {
+            display: none;
         }
     </style>
 </div>
