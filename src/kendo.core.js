@@ -1681,6 +1681,18 @@ function pad(number, digits, end) {
         return dflt !== undefined ? dflt : agent;
     }
 
+    function toHyphens(str) {
+        return str.replace(/([a-z][A-Z])/g, function (g) {
+            return g[0] + '-' + g[1].toLowerCase();
+        });
+    }
+
+    function toCamelCase(str) {
+        return str.replace(/\-(\w)/g, function (strMatch, g1) {
+            return g1.toUpperCase();
+        });
+    }
+
     function getComputedStyles(element, properties) {
         var styles = {}, computedStyle;
 
@@ -1697,7 +1709,7 @@ function pad(number, digits, end) {
 
             if (properties) {
                 $.each(properties, function(idx, value) {
-                    styles[value] = computedStyle[value.replace(/\-(\w)/g, function (strMatch, g1) { return g1.toUpperCase(); })];
+                    styles[value] = computedStyle[toCamelCase(value)];
                 });
             }
         }
@@ -2318,6 +2330,8 @@ function pad(number, digits, end) {
         deepExtend: deepExtend,
         getComputedStyles: getComputedStyles,
         size: size,
+        toCamelCase: toCamelCase,
+        toHyphens: toHyphens,
         getOffset: kendo.getOffset || getOffset,
         parseEffects: kendo.parseEffects || parseEffects,
         toggleClass: kendo.toggleClass || toggleClass,
