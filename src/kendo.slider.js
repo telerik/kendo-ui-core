@@ -36,6 +36,7 @@ kendo_module({
         TRACK_SELECTOR = ".k-slider-track",
         TICK_SELECTOR = ".k-tick",
         STATE_SELECTED = "k-state-selected",
+        STATE_FOCUSED = "k-state-focused",
         STATE_DEFAULT = "k-state-default",
         STATE_DISABLED = "k-state-disabled",
         PRECISION = 3,
@@ -430,7 +431,7 @@ kendo_module({
                 val = val[that._activeHandle];
             }
 
-            $(target).addClass(STATE_SELECTED);
+            $(target).addClass(STATE_FOCUSED + " " + STATE_SELECTED);
 
             if (drag) {
                 that._activeHandleDrag = drag;
@@ -459,7 +460,7 @@ kendo_module({
             var that = this,
                 drag = that._activeHandleDrag;
 
-            $(e.target).removeClass(STATE_SELECTED);
+            $(e.target).removeClass(STATE_FOCUSED + " " + STATE_SELECTED);
 
             if (drag) {
                 drag._removeTooltip();
@@ -650,7 +651,7 @@ kendo_module({
                     target = $(e.target);
 
                 if (target.hasClass("k-draghandle")) {
-                    target.addClass(STATE_SELECTED);
+                    target.addClass(STATE_FOCUSED + " " + STATE_SELECTED);
                     return;
                 }
 
@@ -937,7 +938,7 @@ kendo_module({
             this.owner._activeDragHandle = this;
 
             owner.element.off(MOUSE_OVER);
-            that.element.addClass(STATE_SELECTED);
+            that.element.addClass(STATE_FOCUSED + " " + STATE_SELECTED);
             $(document.documentElement).css("cursor", "pointer");
 
             that.dragableArea = owner._getDraggableArea();
@@ -1310,7 +1311,7 @@ kendo_module({
                     from, to, drag;
 
                 if (target.hasClass("k-draghandle")) {
-                    target.addClass(STATE_SELECTED);
+                    target.addClass(STATE_FOCUSED + " " + STATE_SELECTED);
                     return;
                 }
 
