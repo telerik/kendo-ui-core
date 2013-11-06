@@ -22,14 +22,12 @@
             this._initOptions(options);
             this.map = map;
 
-            this.element = $("<div class='k-layer'></div>").appendTo(
-                map.overlayContainer
-            );
+            this.element = $("<div class='k-layer'></div>")
+                            .css("z-index", 1000)
+                            .appendTo(map.scrollElement);
 
             map.bind("reset", proxy(this._reset, this));
 
-            this.markers = [];
-            this._load();
         },
 
         create: function(options) {
@@ -40,17 +38,13 @@
             this.markers.push(marker);
         },
 
-        _load: function() {
+        _reset: function() {
+            this.element.empty();
+            this.markers = [];
+
             var markers = this.options.markers;
             for (var i = 0; i < markers.length; markers++) {
                 this.create(markers[i]);
-            }
-        },
-
-        _reset: function() {
-            for (var i = 0; i < this.markers.length; i++) {
-                var point = this.map.locationToView(this.markers[i].options.location);
-                this.markers[i].moveTo(point.x, point.y);
             }
         }
     });

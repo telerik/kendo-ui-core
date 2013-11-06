@@ -31,7 +31,7 @@
             this.map = map;
 
             this.element = $("<div class='k-layer'></div>")
-                .appendTo(map.layerContainer)
+                .appendTo(map.scrollElement)
                 .css("width", options.width)
                 .css("height", options.height);
 

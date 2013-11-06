@@ -8,7 +8,8 @@ kendo_module({
 
 (function ($, undefined) {
     // Imports ================================================================
-    var math = Math,
+    var doc = document,
+        math = Math,
         pow = math.pow,
 
         proxy = $.proxy,
@@ -45,30 +46,25 @@ kendo_module({
             Widget.fn.init.call(this, element);
 
             this._initOptions(options);
+            this.bind(this.events, options);
+
+            this.crs = new EPSG3857();
 
             this.element
                 .addClass(CSS_PREFIX + this.options.name.toLowerCase())
                 .css("position", "relative")
                 .empty()
-                .append($(this._template(this)));
-
-            this.layerContainer = this.element.find(".k-layer-container");
-            this.overlayContainer = this.element.find(".k-overlay-container");
+                .append(doc.createElement("div"));
 
             this._initScroller();
-
-            this.bind(this.events, options);
-
-            this.crs = new EPSG3857();
-            this.layers = new ObservableArray([]);
             this._initLayers();
+            this._initMarkers();
 
             this._mousewheel = proxy(this._mousewheel, this);
             this.element.bind("click", proxy(this._click, this));
             this.element.bind(MOUSEWHEEL, this._mousewheel);
 
             this._reset();
-            this._renderMarkers();
         },
 
         options: {
@@ -210,13 +206,6 @@ kendo_module({
             return this.layerToLocation(point);
         },
 
-        _template: kendo.template(
-            "<div>" +
-                "<div class='k-layer-container'></div>" +
-                "<div class='k-overlay-container'></div>" +
-            "</div>"
-        ),
-
         _initScroller: function() {
             var scroller = this.scroller = new kendo.mobile.ui.Scroller(
                 this.element.children(0), {
@@ -228,16 +217,13 @@ kendo_module({
             scroller.bind("scroll", proxy(this._scroll, this));
             scroller.bind("scrollEnd", proxy(this._scrollEnd, this));
 
-            // TODO: Rename to scrollElement
-            this.scrollWrap = scroller.scrollElement;
+            this.scrollElement = scroller.scrollElement;
         },
 
         _initLayers: function() {
             var defs = this.options.layers,
                 layers = this.layers = [],
-                layerContainer = this.layerContainer;
-
-            layerContainer.empty();
+                scrollElement = this.scrollElement;
 
             for (var i = 0; i < defs.length; i++) {
                 var options = defs[i];
@@ -313,7 +299,7 @@ kendo_module({
             }
         },
 
-        _renderMarkers: function() {
+        _initMarkers: function() {
             this.markers = new map.layers.MarkerLayer(this, this.options);
         },
 
