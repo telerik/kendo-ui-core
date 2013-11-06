@@ -392,6 +392,8 @@ kendo_module({
                 var interval = rule.interval;
                 var diff = current - start;
                 var excess = 0;
+                var yearDiff;
+                var day;
 
                 if (rule.freq === "hourly") {
                     diff = Math.floor(diff / (60 * kendo.date.MS_PER_MINUTE));
@@ -421,6 +423,19 @@ kendo_module({
                         kendo.date.setDayOfWeek(current, rule.weekStart, -1);
                         current.setDate(current.getDate() + (excess * 7));
 
+                        return true;
+                    }
+                } else if (rule.freq === "monthly") {
+                    yearDiff = current.getFullYear() - start.getFullYear();
+
+                    diff = current.getMonth() - start.getMonth() + (yearDiff * 12);
+
+                    excess = intervalExcess(diff, interval);
+
+                    if (excess !== 0) {
+                        day = rule._hasRuleValue ? 1 : current.getDate();
+
+                        current.setFullYear(current.getFullYear(), current.getMonth() + excess, day);
                         return true;
                     }
                 }
