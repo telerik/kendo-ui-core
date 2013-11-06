@@ -702,7 +702,7 @@ kendo_module({
                 return;
             }
 
-            if (!that.options.openOnClick || that.clicked) {
+            if ((!that.options.openOnClick || that.clicked) && !touch) {
                 if (!contains(e.currentTarget, e.relatedTarget) && hasChildren) {
                     that.open(element);
                 }
