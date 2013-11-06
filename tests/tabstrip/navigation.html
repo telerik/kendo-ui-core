@@ -272,6 +272,32 @@
             ts.destroy();
             tabStripHtml.remove();
         });
+
+        test("TabStrip does not focus wrapper when click input element", function() {
+            var tabStripHtml = $('<div><ul></ul></div>').appendTo(document.body);
+            var ts = tabStripHtml.kendoTabStrip().data("kendoTabStrip");
+
+            ts.append({
+                encoded: false,
+                content: '<p>Dummy text for tab 1</p>',
+                text: 'Tab 1'
+            });
+
+            ts.append({
+                encoded: false,
+                content: '<p><span class="k-item"><input id="input1" /></span></p>',
+                text: 'Tab 2'
+            });
+
+            ts.select(1);
+
+            $("#input1").click();
+
+            notEqual(ts.wrapper[0], document.activeElement);
+
+            ts.destroy();
+            tabStripHtml.remove();
+        });
     </script>
 
     <h1 id="qunit-header">kendo.ui.TabStrip Tests</h1>

@@ -190,11 +190,6 @@ kendo_module({
 
             that.wrapper
                 .on(MOUSEENTER + NS + " " + MOUSELEAVE + NS, HOVERABLEITEMS, that._toggleHover)
-                .on("click" + NS, NAVIGATABLEITEMS, function() {
-                    if (that.wrapper[0] !== document.activeElement) {
-                        that.wrapper.focus();
-                    }
-                })
                 .on("keydown" + NS, $.proxy(that._keydown, that))
                 .on("focus" + NS, $.proxy(that._active, that))
                 .on("blur" + NS, function() { that._current(null); });
@@ -202,6 +197,10 @@ kendo_module({
             that.wrapper.children(".k-tabstrip-items")
                 .on(CLICK + NS, ".k-state-disabled .k-link", false)
                 .on(CLICK + NS, " > " + NAVIGATABLEITEMS, function(e) {
+                    if (that.wrapper[0] !== document.activeElement) {
+                        that.wrapper.focus();
+                    }
+
                     if (that._click($(e.currentTarget))) {
                         e.preventDefault();
                     }
