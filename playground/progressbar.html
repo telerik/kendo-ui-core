@@ -13,49 +13,6 @@
         <script src="../src/kendo.binder.js"></script>
         <script src="../src/kendo.progressbar.js" type="text/javascript" charset="utf-8"></script>
     <style>
-
-    /* New additions */
-    /*.k-progressbar-horizontal .k-item.k-first
-    {
-        margin-left: 0;
-    }
-
-    .k-progressbar-horizontal .k-item
-    {
-        margin-left: -1px;
-    }
-
-    .k-progressbar-horizontal .k-item.k-last
-    {
-        border-right-width: 0;
-    }
-
-    .k-progressbar-vertical .k-item.k-first
-    {
-        margin-top: 0;
-    }
-
-    .k-progressbar-vertical .k-item
-    {
-        margin-top: -1px;
-    }
-
-    .k-progressbar-vertical li.k-item.k-last
-    {
-        border-bottom-width: 0;
-    }
-
-    .k-progress-status
-    {
-        min-width: 10px;
-        white-space:nowrap;
-    }
-
-    .k-rtl .k-progressbar-horizontal li.k-last
-    {
-        border-left-width: 0;
-    }
-    */
 </style>
 </head>
     <body>
@@ -80,7 +37,7 @@
 
             $("#progressbar-chunk").kendoProgressBar({
                 type: "chunk",
-                chunkCount: 5,
+                chunkCount: 6,
                 min: 0,
                 max: 0.005,
                 value: 0,
@@ -135,7 +92,7 @@
                 orientation: "vertical",
                 reverse: false,
                 type: "chunk",
-                chunkCount: 3,
+                chunkCount: 6,
                 start: function(e) {
                     console.log("Start event. Value: " + e.value);
                 },

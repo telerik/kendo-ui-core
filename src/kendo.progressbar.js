@@ -257,8 +257,6 @@ kendo_module({
 
             completedChunks.removeClass(KUPCOMINGCHUNK)
                            .addClass(KCOMPLETEDCHUNK);
-
-            chunkContainer.toggleClass(KCOMPLETEDCHUNK, options.value === options.max);
         },
 
         _updateProgressWrapper: function(percentage) {
