@@ -492,6 +492,10 @@ kendo_module({
             return Rect.fromPoints(tl, br);
         },
         select: function (value) {
+            if(Utils.isUndefined(value))
+            {
+                value = true;
+            }
             if (this.isSelected != value) {
                 this.isSelected = value;
                 if (this.isSelected) {
