@@ -672,7 +672,7 @@ kendo_module({
         options: {
             name: "ScrollView",
             page: 0,
-            duration: 300,
+            duration: 400,
             velocityThreshold: 0.8,
             contentHeight: "auto",
             pageSize: 1,
