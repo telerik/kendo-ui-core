@@ -312,7 +312,8 @@
                    new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "event 5" }),
                    new kendo.data.SchedulerEvent({ start: new Date(2013, 1, 5), end: new Date(2013, 1, 5), title: "event 6" })
                ]);
-               equal(view.content.find(".k-event").length, 5);
+
+               equal(view.content.find(".k-event").length, 4);
                equal(view.content.find(".k-more-events").length, 1);
             });
 

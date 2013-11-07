@@ -748,7 +748,7 @@ kendo_module({
 
                         cellCount ++;
 
-                        var eventCount = Math.floor((clientHeight - firstChildHeight) / (this.options.eventHeight + 3));
+                        var eventCount = Math.floor((clientHeight - firstChildHeight) / (this.options.eventHeight + 3)) - 1;// add space for the more button
 
                         cell.setAttribute("role", "gridcell");
                         cell.setAttribute("aria-selected", false);
