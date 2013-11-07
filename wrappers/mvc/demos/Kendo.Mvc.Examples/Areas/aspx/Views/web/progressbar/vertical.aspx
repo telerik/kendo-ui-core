@@ -1,8 +1,33 @@
-﻿<div id="example" class="k-content">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/aspx/Views/Shared/Web.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+    <div id="example" class="k-content">
     <div class="demo-section">
         <div class="loading">
-            <div id="totalProgressBar"></div>
-            <div id="loadingProgressBar"></div>
+             <%= Html.Kendo().ProgressBar()
+                  .Name("totalProgressBar")
+                  .Type(ProgressBarType.Chunk)
+                  .ChunkCount(4)
+                  .Min(0)
+                  .Max(4)
+                  .Orientation(ProgressBarOrientation.Vertical)
+                  .Events(e => e.Complete("onTotalComplete"))
+            %>
+
+             <%= Html.Kendo().ProgressBar()
+                  .Name("loadingProgressBar")
+                  .Orientation(ProgressBarOrientation.Vertical)
+                  .ShowStatus(false)
+                  .Animation(false)
+                  .Events(e => 
+                    {
+                        e.Change("onChange");
+                        e.Complete("onComplete"); 
+                    })
+            %>
         </div>
         <div class="loadingInfo">
             <h2>Loading styles</h2>
@@ -18,23 +43,6 @@
 
     <script>
         $(document).ready(function () {
-            $("#totalProgressBar").kendoProgressBar({
-                type: "chunk",
-                chunkCount: 4,
-                min: 0,
-                max: 4,
-                orientation: "vertical",
-                complete: onTotalComplete
-            });
-
-            $("#loadingProgressBar").kendoProgressBar({
-                orientation: "vertical",
-                showStatus: false,
-                animation: false,
-                change: onChange,
-                complete: onComplete
-            });
-
             load();
         });
 
@@ -94,6 +102,13 @@
             padding: 30px 30px 30px 50px;
             overflow: auto;
         }
+
+        .demo-section h2
+        {
+            margin: 0;
+            padding: 0;
+        }
+
         .k-progressbar
         {
             width: 8px;
@@ -123,3 +138,5 @@
         }
     </style>
 </div>
+
+</asp:Content>

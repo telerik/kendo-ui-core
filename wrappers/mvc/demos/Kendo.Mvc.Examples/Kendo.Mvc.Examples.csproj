@@ -455,6 +455,7 @@
     <Compile Include="Controllers\Web\ProgressBar\EventsController.cs" />
     <Compile Include="Controllers\Web\ProgressBar\IndexController.cs" />
     <Compile Include="Controllers\Web\ProgressBar\RtlController.cs" />
+    <Compile Include="Controllers\Web\ProgressBar\VerticalController.cs" />
     <Compile Include="Controllers\Web\Scheduler\WebApiController.cs" />
     <Compile Include="Controllers\Web\Scheduler\ApiController.cs" />
     <Compile Include="Controllers\Web\Scheduler\RestrictionController.cs" />
@@ -959,6 +960,7 @@
     <Content Include="Areas\aspx\Views\web\progressbar\events.aspx" />
     <Content Include="Areas\aspx\Views\web\progressbar\index.aspx" />
     <Content Include="Areas\aspx\Views\web\progressbar\rtl.aspx" />
+    <Content Include="Areas\aspx\Views\web\progressbar\vertical.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\api.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\webapi.aspx" />
     <Content Include="Areas\aspx\Views\web\scheduler\restriction.aspx" />
@@ -2901,6 +2903,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\aspx\Views\dataviz\funnel_charts\remote_data.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\web\progressbar\vertical.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
