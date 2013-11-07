@@ -13,9 +13,13 @@
 
         <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
+        <div contentEditable="true" id="inline"></div>
+
         <script>
 
             var editor = $("#Editor1").kendoEditor().data("kendoEditor");
+
+            var inline = $("#inline").kendoEditor().data("kendoEditor");
 
             var BlockFormatter = kendo.ui.editor.BlockFormatter;
 
@@ -259,6 +263,14 @@
                 formatter.remove([editor.body.firstChild.firstChild]);
 
                 equal(editor.value(), "<p>foo</p>");
+            });
+
+            test("does not apply formatting on inline editor body", function() {
+                inline.value("foo");
+
+                justifyCenter.apply([inline.body.firstChild]);
+
+                equal(inline.value(), '<div style="text-align:center;">foo</div>');
             });
 
         </script>

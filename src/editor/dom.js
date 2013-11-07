@@ -479,6 +479,14 @@ var Dom = {
         return newElement;
     },
 
+    editableParent: function(node) {
+        while (node.nodeType == 3 || node.contentEditable !== 'true') {
+            node = node.parentNode;
+        }
+
+        return node;
+    },
+
     wrap: function (node, wrapper) {
         Dom.insertBefore(wrapper, node);
         wrapper.appendChild(node);

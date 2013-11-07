@@ -27,7 +27,7 @@
 
             $("#Editor1").kendoEditor();
 
-            $("#inline").kendoEditor();
+            var inline = $("#inline").kendoEditor().data("kendoEditor");
 
             $("#EditorWithStyleSheets").kendoEditor({
                 stylesheets: [
@@ -41,7 +41,6 @@
             module("API", {
                 setup: function() {
                     editor = getEditor();
-                    inline = getEditor("#inline");
                 }
             });
 
