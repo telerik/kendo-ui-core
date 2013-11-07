@@ -516,7 +516,9 @@ declare module kendo.data {
         idField: string;
         _defaultId: any;
         fields: DataSourceSchemaModelFields;
-        defaults: any;
+        defaults: {
+            [field: string]: any;
+        };
         constructor(data?: any);
         init(data?: any):void;
         dirty: boolean;
@@ -1182,10 +1184,13 @@ interface JQuery {
     kendoDropTargetArea(): JQuery;
     kendoDropTargetArea(options: kendo.ui.DropTargetAreaOptions): JQuery;
 
+    data(key: string): any;
+
 % components.each do |component|
 % if component.full_name.include?('ui')
     kendo<%= component.plugin%>(): JQuery;
     kendo<%= component.plugin%>(options: <%= component.namespace %>.<%= component.type_script_options_type%>): JQuery;
+    data(key: "kendo<%= component.plugin %>") : <%= component.full_name %>;
 
 % end
 % end
