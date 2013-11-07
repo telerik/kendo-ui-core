@@ -11,7 +11,8 @@
 <body>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.dataviz.core.js"></script>
-    <script src="../../../src/kendo.dataviz.core.js"></script>
+    <script src="../../../src/kendo.popup.js"></script>
+    <script src="../../../src/kendo.tooltip.js"></script>
     <script src="../../../src/dataviz/util.js"></script>
     <script src="../../../src/dataviz/geometry.js"></script>
     <script src="../../../src/dataviz/drawing/core.js"></script>
@@ -133,6 +134,18 @@
                 equal(marker.element.css("top"), "200px");
             });
 
+            test("showAt sets tooltip position", function() {
+                marker = new Marker({ tooltip: { content: "foo" } });
+                marker.addTo(layer);
+                marker.tooltip.show();
+
+                marker.tooltip.popup._position = function() {
+                    ok(true);
+                };
+
+                marker.showAt(new g.Point(10, 20));
+            });
+
             test("hide clears element", function() {
                 marker.hide();
 
@@ -162,6 +175,14 @@
                 equal(layer.element.children().length, 0);
             });
 
+            test("hide removes tooltip", function() {
+                marker = new Marker({ tooltip: { content: "foo" } });
+                marker.addTo(layer);
+                marker.hide();
+
+                ok(!marker.tooltip);
+            });
+
             test("dispose calls hide", function() {
                 marker.hide = function() { ok(true); };
                 marker.dispose();
@@ -170,6 +191,63 @@
             test("dispose clears layer reference", function() {
                 marker.dispose();
                 ok(!marker.layer);
+            });
+
+            test("creates tooltip if content is set", function() {
+                marker = new Marker({ tooltip: { content: "foo" } });
+                marker.addTo(layer);
+                ok(marker.tooltip);
+            });
+
+            test("creates tooltip if template is set", function() {
+                marker = new Marker({ tooltip: { template: "foo" } });
+                marker.addTo(layer);
+                ok(marker.tooltip);
+            });
+
+            test("creates tooltip if contentUrl is set", function() {
+                marker = new Marker({ tooltip: { contentUrl: "foo" } });
+                marker.addTo(layer);
+                ok(marker.tooltip);
+            });
+
+            test("tooltip is not created by default", function() {
+                marker = new Marker({ tooltip: {} });
+                marker.addTo(layer);
+                ok(!marker.tooltip);
+            });
+
+            test("tooltip has reference to marker", function() {
+                marker = new Marker({ tooltip: { content: "foo" } });
+                marker.addTo(layer);
+                deepEqual(marker.tooltip.marker, marker);
+            });
+
+            test("tooltip template is converted to content", function() {
+                marker = new Marker({ tooltip: { template: "foo" } });
+                marker.addTo(layer);
+
+                equal(marker.tooltip.options.content({}), "foo");
+            });
+
+            test("tooltip template receives location", function() {
+                marker = new Marker({
+                   location: new Location(20, 10),
+                   tooltip: { template: "#= location.toString() #" }
+                });
+                marker.addTo(layer);
+
+                equal(marker.tooltip.options.content({}), marker.options.location.toString());
+            });
+
+            test("tooltip template receives marker", function() {
+                marker = new Marker({
+                   location: new Location(20, 10),
+                   tooltip: { template: "#= marker.options.location.toString() #" }
+                });
+                marker.addTo(layer);
+
+                equal(marker.tooltip.options.content({}), marker.options.location.toString());
             });
 
             // ------------------------------------------------------------

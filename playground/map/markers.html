@@ -83,14 +83,16 @@
                 copyright: "&copy; FooBar"
             }],
             markers: [{
-                location: [51.5, -0.09],
-                tooltip: {
-                content: "foo"
-                }
+                location: [51.5, -0.09]
             }, {
                 location: [42.717417, 24.917194],
                 tooltip: {
-                    content: "#= marker.options.location.toString() #: Botev"
+                    template: "#= location.toString() #: Botev"
+                }
+            }, {
+                location: [42, 26],
+                tooltip: {
+                    content: "Botev"
                 }
             }],
 

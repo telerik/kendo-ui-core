@@ -119,12 +119,22 @@
                 left: math.round(point.x),
                 top: math.round(point.y)
             });
+
+            if (this.tooltip && this.tooltip.popup) {
+                // TODO: Expose popup/tooltip updatePosition? method
+                this.tooltip.popup._position();
+            }
         },
 
         hide: function() {
             if (this.element) {
                 this.element.remove();
                 this.element = null;
+            }
+
+            if (this.tooltip) {
+                this.tooltip.destroy();
+                this.tooltip = null;
             }
         },
 
@@ -147,9 +157,27 @@
                     layer.element.append(this.element);
                 }
 
-                var tooltip = options.tooltip;
-                if (tooltip && (tooltip.content || tooltip.contentUrl) && Tooltip) {
-                    this.tooltip = new Tooltip(this.element, options.tooltip);
+                this.renderTooltip();
+            }
+        },
+
+        renderTooltip: function() {
+            var marker = this;
+            var options = marker.options.tooltip;
+
+            if (options && Tooltip) {
+                var template = options.template;
+                if (template) {
+                    var contentTemplate = kendo.template(template);
+                    options.content = function(e) {
+                        e.location = marker.options.location;
+                        e.marker = marker;
+                        return contentTemplate(e);
+                    };
+                }
+
+                if (options.content || options.contentUrl) {
+                    this.tooltip = new Tooltip(this.element, options);
                     this.tooltip.marker = this;
                 }
             }
