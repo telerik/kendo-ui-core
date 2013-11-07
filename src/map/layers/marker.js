@@ -7,6 +7,7 @@
 
         kendo = window.kendo,
         Class = kendo.Class,
+        Tooltip = kendo.ui.Tooltip,
 
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
@@ -49,7 +50,7 @@
         },
 
         _addOne: function(arg) {
-            var marker = Marker.create(arg);
+            var marker = Marker.create(arg, this.options.markerDefaults);
             marker.addTo(this);
 
             return marker;
@@ -145,16 +146,22 @@
                 if (layer) {
                     layer.element.append(this.element);
                 }
+
+                var tooltip = options.tooltip;
+                if (tooltip && (tooltip.content || tooltip.contentUrl) && Tooltip) {
+                    this.tooltip = new Tooltip(this.element, options.tooltip);
+                    this.tooltip.marker = this;
+                }
             }
         }
     });
 
-    Marker.create = function(arg) {
+    Marker.create = function(arg, defaults) {
         if (arg instanceof Marker) {
             return arg;
         }
 
-        return new Marker(arg);
+        return new Marker(deepExtend({}, arg, defaults));
     };
 
     // Exports ================================================================

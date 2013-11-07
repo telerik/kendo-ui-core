@@ -3,7 +3,7 @@ kendo_module({
     name: "Map",
     category: "dataviz",
     description: "The Kendo DataViz Map displays spatial data",
-    depends: [ "data", "userevents", "dataviz.core", "dataviz.themes", "mobile.scroller" ]
+    depends: [ "data", "userevents", "tooltip", "dataviz.core", "dataviz.themes", "mobile.scroller" ]
 });
 
 (function ($, undefined) {
@@ -69,12 +69,6 @@ kendo_module({
         options: {
             name: "Map",
             layers: [],
-            markers: [],
-            center: [0, 0],
-            zoom: 3,
-            minSize: 256,
-            minZoom: 2,
-            maxZoom: 18,
             layerDefaults: {
                 shape: {
                     style: {
@@ -88,6 +82,19 @@ kendo_module({
                     }
                 }
             },
+            center: [0, 0],
+            zoom: 3,
+            minSize: 256,
+            minZoom: 2,
+            maxZoom: 18,
+            markers: [],
+            markerDefaults: {
+                tooltip: {
+                    autoHide: false,
+                    position: "top",
+                    showOn: "click"
+                }
+            }
             wraparound: true
         },
 
@@ -236,7 +243,9 @@ kendo_module({
         },
 
         _initMarkers: function() {
-            this.markers = new map.layers.MarkerLayer(this);
+            this.markers = new map.layers.MarkerLayer(this, {
+                markerDefaults: this.options.markerDefaults
+            });
             this.markers.add(this.options.markers);
         },
 

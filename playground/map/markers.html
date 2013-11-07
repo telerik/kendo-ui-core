@@ -8,6 +8,8 @@
     <script src="../../src/kendo.fx.js"></script>
     <script src="../../src/kendo.userevents.js"></script>
     <script src="../../src/kendo.draganddrop.js"></script>
+    <script src="../../src/kendo.popup.js"></script>
+    <script src="../../src/kendo.tooltip.js"></script>
     <script src="../../src/kendo.mobile.scroller.js"></script>
     <script src="../../src/kendo.data.js"></script>
     <script src="../../src/kendo.dataviz.core.js"></script>
@@ -23,6 +25,8 @@
     <script src="../../src/map/layers/marker.js"></script>
     <script src="../../src/map/main.js"></script>
     <script src="chroma.min.js"></script>
+    <link rel="stylesheet" href="../../styles/web/kendo.common.css">
+    <link rel="stylesheet" href="../../styles/web/kendo.default.css">
     <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.css">
     <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.default.css">
     <style>
@@ -78,23 +82,15 @@
                 },
                 copyright: "&copy; FooBar"
             }],
-            markerDefaults: {
-                shape: "pin", // circle, target, targetPin, ...
-                size: 10,
-                color: "blue"
-            },
             markers: [{
                 location: [51.5, -0.09],
-                color: "red",
                 tooltip: {
-                    // Nested tooltip configuration
-                    // content: "Marker",
-                    // autoHide: false,
-                    // height: 
-                    // width:
-                    // position: "top",
-                    // showAfter
-                    // showOn
+                content: "foo"
+                }
+            }, {
+                location: [42.717417, 24.917194],
+                tooltip: {
+                    content: "#= marker.options.location.toString() #: Botev"
                 }
             }],
 

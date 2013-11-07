@@ -185,6 +185,11 @@
                 ok(marker.options.foo);
             });
 
+            test("sets marker default options", function() {
+                var marker = Marker.create({ foo: true }, { bar: true });
+                ok(marker.options.foo && marker.options.bar);
+            });
+
             test("returns existing instance", function() {
                 var src = new Marker();
                 var marker = Marker.create(src);
@@ -220,6 +225,12 @@
             test("add creates marker", function() {
                 layer.add({});
                 equal(layer.items.length, 1);
+            });
+
+            test("add sets markerDefaults", function() {
+                layer.options.markerDefaults = { foo: true };
+                layer.add({});
+                ok(layer.items[0].options.foo);
             });
 
             test("add creates markers from array", function() {
@@ -262,7 +273,7 @@
                 });
             });
 
-            test("update updates location", function() {
+            test("updates location", function() {
                 var marker = layer.add({ location: [50, 10] });
                 marker.showAt = function(point) {
                     equal(point.x, 10);
