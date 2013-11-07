@@ -208,6 +208,10 @@
     text-align: center;
     cursor: pointer;
     text-decoration: none;
+}
+
+body .k-button
+{
     .border-box;
 }
 
@@ -1264,6 +1268,7 @@ ul.k-menu-vertical .k-separator,
 .k-grid table
 {
     width: 100%;
+    margin: 0; /* override CSS libraries */
     border-collapse: separate;
     border-spacing: 0;
     empty-cells: show;
@@ -6638,6 +6643,7 @@ html .k-upload-empty
     bottom: 2px;
 }
 
+/* Bootstrap 3 */
 .k-widget,
 .k-header,
 .k-content,
@@ -6652,8 +6658,15 @@ html .k-upload-empty
 .k-icon,
 .k-tool,
 .k-tool-icon,
-.k-splitbar
+.k-splitbar,
+
+/* Zurb Foundation 4 */
+.k-animation-container,
+.k-widget *,
+.k-animation-container *,
+.k-widget *:before,
+.k-animation-container *:after
+
 {
     .box-sizing(content-box);
 }
-
