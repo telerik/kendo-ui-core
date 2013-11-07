@@ -1935,6 +1935,7 @@ function pad(number, digits, end) {
         support.input = (function() {
             var types = ["number", "date", "time", "month", "week", "datetime", "datetime-local"];
             var length = types.length;
+            var value = "test";
             var result = {};
             var idx = 0;
             var type;
@@ -1942,8 +1943,9 @@ function pad(number, digits, end) {
             for (;idx < length; idx++) {
                 type = types[idx];
                 input.setAttribute("type", type);
+                input.value = value;
 
-                result[type.replace("-", "")] = input.type !== "text";
+                result[type.replace("-", "")] = input.type !== "text" && input.value !== value;
             }
 
             return result;

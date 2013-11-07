@@ -31,6 +31,7 @@ kendo_module({
 (function($, undefined) {
     var kendo = window.kendo,
         date = kendo.date,
+        input_support = kendo.support.input,
         MS_PER_DAY = date.MS_PER_DAY,
         getDate = date.getDate,
         getMilliseconds = kendo.date.getMilliseconds,
@@ -94,14 +95,16 @@ kendo_module({
             '</div>'),
         MOBILEDATERANGEEDITOR = function(container, options) {
             var attr = { name: options.field };
+            var datepicker_role = !input_support.date ? kendo.attr("role") + '="datepicker" ' : "";
+            var datetimepicker_role = !input_support.datetimelocal ? kendo.attr("role") + '="datetimepicker" ' : "";
 
             appendTimezoneAttr(attr, options);
             appendDateCompareValidator(attr, options);
 
-            $('<input type="datetime-local" required ' + kendo.attr("type") + '="date" ' + kendo.attr("bind") + '="value:' + options.field +',invisible:isAllDay" />')
+            $('<input type="datetime-local" required ' + kendo.attr("type") + '="date" ' + datetimepicker_role + kendo.attr("bind") + '="value:' + options.field +',invisible:isAllDay" />')
                 .attr(attr).appendTo(container);
 
-            $('<input type="date" required ' + kendo.attr("type") + '="date" ' + kendo.attr("bind") + '="value:' + options.field +',visible:isAllDay" />')
+            $('<input type="date" required ' + kendo.attr("type") + '="date" ' + datepicker_role + kendo.attr("bind") + '="value:' + options.field +',visible:isAllDay" />')
                 .attr(attr).appendTo(container);
 
             $('<span ' + kendo.attr("for") + '="' + options.field + '" class="k-invalid-msg"/>').hide().appendTo(container);

@@ -34,43 +34,43 @@
             });
 
             test("kendo.support checks for number type", function() {
-                input.type = "number";
+                input.setAttribute("type", "number");
 
                 equal(kendo.support.input.number, input.type === "number");
             });
 
             test("kendo.support checks for date type", function() {
-                input.type = "date";
+                input.setAttribute("type", "date");
 
                 equal(kendo.support.input.date, input.type === "date");
             });
 
             test("kendo.support checks for time type", function() {
-                input.type = "time";
+                input.setAttribute("type", "time");
 
                 equal(kendo.support.input.time, input.type === "time");
             });
 
             test("kendo.support checks for month type", function() {
-                input.type = "month";
+                input.setAttribute("type", "month");
 
                 equal(kendo.support.input.month, input.type === "month");
             });
 
             test("kendo.support checks for week type", function() {
-                input.type = "week";
+                input.setAttribute("type", "week");
 
                 equal(kendo.support.input.week, input.type === "week");
             });
 
             test("kendo.support checks for datetime type", function() {
-                input.type = "datetime";
+                input.setAttribute("type", "datetime");
 
                 equal(kendo.support.input.datetime, input.type === "datetime");
             });
 
             test("kendo.support checks for datetime-local type", function() {
-                input.type = "datetime-local";
+                input.setAttribute("type", "datetime-local");
 
                 equal(kendo.support.input.datetimelocal, input.type === "datetime-local");
             });
