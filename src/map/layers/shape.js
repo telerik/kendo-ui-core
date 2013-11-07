@@ -89,9 +89,22 @@
             this._load(data.items);
         },
 
-        _shapeCreated: function(shape) {
+        shapeCreated: function(shape) {
             var args = { layer: this, shape: shape };
             return this.map.trigger("shapeCreated", args);
+        },
+
+        markerCreated: function(location, dataItem) {
+            var marker = new map.Marker(deepExtend(
+                { location: location },
+                this.map.options.markerDefaults
+            ));
+            marker.dataItem = dataItem;
+
+            var args = { marker: marker };
+            if (!this.map.trigger("markerCreated", args)) {
+                this.map.markers.add(marker);
+            }
         },
 
         _load: function(data) {
@@ -155,11 +168,17 @@
 
         _shapeCreated: function(shape) {
             if (this.observer) {
-                return this.observer._shapeCreated(shape);
+                return this.observer.shapeCreated(shape);
             }
 
             // Cancelled: false
             return false;
+        },
+
+        _markerCreated: function(location, dataItem) {
+            if (this.observer) {
+                this.observer.markerCreated(location, dataItem);
+            }
         },
 
         _loadGeometryTo: function(container, geometry, dataItem) {
@@ -187,6 +206,16 @@
                 case "MultiPolygon":
                     for (i = 0; i < coords.length; i++) {
                         this._loadPolygon(container, coords[i], dataItem);
+                    }
+                    break;
+
+                case "Point":
+                    this._loadPoint(coords, dataItem);
+                    break;
+
+                case "MultiPoint":
+                    for (i = 0; i < coords.length; i++) {
+                        this._loadPoint(coords[i], dataItem);
                     }
                     break;
             }
@@ -222,6 +251,10 @@
             }
 
             return path;
+        },
+
+        _loadPoint: function(coords, dataItem) {
+            this._markerCreated(Location.fromLngLat(coords), dataItem);
         }
     });
 

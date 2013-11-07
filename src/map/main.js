@@ -89,6 +89,7 @@ kendo_module({
             maxZoom: 18,
             markers: [],
             markerDefaults: {
+                shape: "pinTarget",
                 tooltip: {
                     autoHide: false,
                     position: "top",

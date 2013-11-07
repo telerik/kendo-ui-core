@@ -92,11 +92,7 @@
 
     var Marker = Class.extend({
         init: function(options) {
-            this._initOptions(options);
-        },
-
-        options: {
-            shape: "pinTarget"
+            this.options = options || {};
         },
 
         addTo: function(parent) {
@@ -149,7 +145,7 @@
                 var layer = this.layer;
 
                 this.element = $(doc.createElement("span"))
-                    .addClass("k-marker k-marker-" + kendo.toHyphens(options.shape))
+                    .addClass("k-marker k-marker-" + kendo.toHyphens(options.shape || "pin"))
                     .attr("alt", options.title)
                     .css("zIndex", options.zIndex);
 
