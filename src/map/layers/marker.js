@@ -7,13 +7,9 @@
 
         kendo = window.kendo,
         Class = kendo.Class,
-        DataSource = kendo.data.DataSource,
 
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
-
-        d = dataviz.drawing,
-        Group = d.Group,
 
         map = dataviz.map,
         Location = map.Location;
@@ -34,7 +30,8 @@
         },
 
         dispose: function() {
-            // TODO
+            this.map.unbind("reset", this.reset);
+            this.clear();
         },
 
         options: {
@@ -76,15 +73,15 @@
         },
 
         update: function(marker) {
+            // TODO: Do not show markers outside the map extent
             var loc = marker.options.location;
             if (loc) {
                 loc = Location.create(loc);
-                marker.showAt(this.map.locationToView(loc))
+                marker.showAt(this.map.locationToView(loc));
             }
         },
 
         reset: function() {
-            // TODO: Update all markers and set visibility / position
             var items = this.items;
             for (var i = 0; i < items.length; i++) {
                 this.update(items[i]);
@@ -158,7 +155,7 @@
         }
 
         return new Marker(arg);
-    }
+    };
 
     // Exports ================================================================
     deepExtend(dataviz, {

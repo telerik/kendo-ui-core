@@ -306,6 +306,21 @@
                 layer.update = function() { ok(true); };
                 layer.reset();
             });
+
+            test("dispose clears markers", function() {
+                layer.clear = function() { ok(true); };
+                layer.dispose();
+            });
+
+            test("dispose detaches handlers", function() {
+                map.unbind = function(name, handler) {
+                    if (name === "reset") {
+                        equal(handler, layer.reset);
+                    }
+                };
+
+                layer.dispose();
+            });
         })();
     </script>
 
