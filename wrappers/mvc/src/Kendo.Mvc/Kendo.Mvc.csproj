@@ -866,6 +866,10 @@
     <Compile Include="UI\Grid\Settings\GroupableMessages.cs" />
     <Compile Include="UI\Grid\Settings\NumberOperators.cs" />
     <Compile Include="UI\Grid\Settings\StringOperators.cs" />
+    <Compile Include="UI\HierarchicalDataSource\Fluent\HierarchicalDataSourceBuilder.cs" />
+    <Compile Include="UI\HierarchicalDataSource\Fluent\HierarchicalModelDescriptorBuilder.cs" />
+    <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSource.cs" />
+    <Compile Include="UI\HierarchicalDataSource\HierarchicalModelDescriptor.cs" />
     <Compile Include="UI\Map\Fluent\GeoJsonDataSourceBuilder.cs" />
     <Compile Include="UI\Map\Fluent\MapLayerDataSourceBuilder.cs" />
     <Compile Include="UI\Map\Map.cs" />

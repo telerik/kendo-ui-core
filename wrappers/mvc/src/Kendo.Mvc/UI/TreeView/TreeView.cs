@@ -34,7 +34,7 @@ namespace Kendo.Mvc.UI
 
             Checkboxes = new TreeViewCheckboxesSettings();
 
-            DataSource = new DataSource();
+            DataSource = new HierarchicalDataSource();
 
             AutoBind = true;
         }
@@ -63,7 +63,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public DataSource DataSource
+        public HierarchicalDataSource DataSource
         {
             get;
             private set;
