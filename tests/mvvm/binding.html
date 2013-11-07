@@ -1413,9 +1413,7 @@
                 ok(true);
             });
 
-            var date = $('<input type="date">');
-
-            if (date[0].type == "date") {
+            if (kendo.support.input.date) {
                 test("input type date value binding", function() {
                     var dom = $('<input type="date" data-bind="value: date">');
 
@@ -1427,9 +1425,7 @@
                 });
             }
 
-            var datetime = $('<input type="datetime-local">');
-
-            if (datetime[0].type == "datetime-local") {
+            if (kendo.support.input.datetimelocal) {
                 test("input type datetime value binding", function() {
                     var dom = $('<input type="datetime-local" data-bind="value: date">');
 
@@ -1441,9 +1437,7 @@
                 });
             }
 
-            var number = $('<input type="number">');
-
-            if (number[0].type == "number") {
+            if (kendo.support.input.number) {
                 test("input type number value binding", function() {
                     var dom = $('<input type="number" data-bind="value: number">');
 
