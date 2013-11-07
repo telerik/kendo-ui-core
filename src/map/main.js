@@ -15,7 +15,6 @@ kendo_module({
         proxy = $.proxy,
 
         kendo = window.kendo,
-        ObservableArray = kendo.data.ObservableArray,
         Widget = kendo.ui.Widget,
         deepExtend = kendo.deepExtend,
 
@@ -56,20 +55,21 @@ kendo_module({
                 .empty()
                 .append(doc.createElement("div"));
 
+            this._viewOrigin = this.origin();
             this._initScroller();
             this._initLayers();
             this._initMarkers();
+            this._reset();
 
             this._mousewheel = proxy(this._mousewheel, this);
             this.element.bind("click", proxy(this._click, this));
             this.element.bind(MOUSEWHEEL, this._mousewheel);
-
-            this._reset();
         },
 
         options: {
             name: "Map",
             layers: [],
+            markers: [],
             center: [0, 0],
             zoom: 3,
             minSize: 256,
@@ -222,8 +222,7 @@ kendo_module({
 
         _initLayers: function() {
             var defs = this.options.layers,
-                layers = this.layers = [],
-                scrollElement = this.scrollElement;
+                layers = this.layers = [];
 
             for (var i = 0; i < defs.length; i++) {
                 var options = defs[i];
@@ -234,6 +233,11 @@ kendo_module({
                 // TODO: Set layer size
                 layers.push(new impl(this, deepExtend({}, defaults, options)));
             }
+        },
+
+        _initMarkers: function() {
+            this.markers = new map.layers.MarkerLayer(this);
+            this.markers.add(this.options.markers);
         },
 
         _scroll: function(e) {
@@ -297,10 +301,6 @@ kendo_module({
                 // TODO: Set layer size
                 layers.push(new impl(this, deepExtend({}, defaults, options)));
             }
-        },
-
-        _initMarkers: function() {
-            this.markers = new map.layers.MarkerLayer(this, this.options);
         },
 
         _viewportSize: function() {

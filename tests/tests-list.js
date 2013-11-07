@@ -317,6 +317,7 @@ var tests = [
     "map/helpers.html",
     "map/layers/geojson-loader.html",
     "map/layers/shape.html",
+    "map/layers/marker.html",
     "map/layers/tile.html",
     "map/compass.html",
     "map/lint.html",

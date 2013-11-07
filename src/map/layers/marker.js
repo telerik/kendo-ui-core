@@ -1,7 +1,9 @@
 (function ($, undefined) {
     // Imports ================================================================
-    var proxy = $.proxy,
+    var doc = document,
         math = Math,
+        indexOf = $.inArray,
+        proxy = $.proxy,
 
         kendo = window.kendo,
         Class = kendo.Class,
@@ -20,56 +22,143 @@
     var MarkerLayer = Class.extend({
         init: function(map, options) {
             this._initOptions(options);
-            this.map = map;
 
+            this.items = [];
+            this.map = map;
             this.element = $("<div class='k-layer'></div>")
-                            .css("z-index", 1000)
+                            .css("zIndex", this.options.zIndex)
                             .appendTo(map.scrollElement);
 
-            map.bind("reset", proxy(this._reset, this));
-
+            this.reset = proxy(this.reset, this);
+            map.bind("reset", this.reset);
         },
 
-        create: function(options) {
-            var marker = new Marker(this.element, options);
-            var loc = Location.create(options.location);
-            var point = this.map.locationToView(loc);
-            marker.moveTo(point.x, point.y)
-            this.markers.push(marker);
+        dispose: function() {
+            // TODO
         },
 
-        _reset: function() {
-            this.element.empty();
-            this.markers = [];
+        options: {
+            zIndex: 1000
+        },
 
-            var markers = this.options.markers;
-            for (var i = 0; i < markers.length; markers++) {
-                this.create(markers[i]);
+        add: function(arg) {
+            if ($.isArray(arg)) {
+                for (var i = 0; i < arg.length; i++) {
+                    this._addOne(arg[i]);
+                }
+            } else {
+                return this._addOne(arg);
+            }
+        },
+
+        _addOne: function(arg) {
+            var marker = Marker.create(arg);
+            marker.addTo(this);
+
+            return marker;
+        },
+
+        remove: function(marker) {
+            marker.dispose();
+
+            var index = indexOf(marker, this.items);
+            if (index > -1) {
+                this.items.splice(index, 1);
+            }
+        },
+
+        clear: function() {
+            for (var i = 0; i < this.items.length; i++) {
+                this.items[i].dispose();
+            }
+
+            this.items = [];
+        },
+
+        update: function(marker) {
+            var loc = marker.options.location;
+            if (loc) {
+                loc = Location.create(loc);
+                marker.showAt(this.map.locationToView(loc))
+            }
+        },
+
+        reset: function() {
+            // TODO: Update all markers and set visibility / position
+            var items = this.items;
+            for (var i = 0; i < items.length; i++) {
+                this.update(items[i]);
             }
         }
     });
 
     var Marker = Class.extend({
-        init: function(wrapper, options) {
+        init: function(options) {
             this._initOptions(options);
-            this.element = $(this._template(this)).appendTo(wrapper);
         },
 
         options: {
             shape: "pinTarget"
         },
 
-        moveTo: function(left, top) {
+        addTo: function(parent) {
+            this.layer = parent.markers || parent;
+            this.layer.items.push(this);
+            this.layer.update(this);
+        },
+
+        setLocation: function(loc) {
+            this.options.location = Location.create(loc);
+
+            if (this.layer) {
+                this.layer.update(this);
+            }
+        },
+
+        showAt: function(point) {
+            this.render();
             this.element.css({
-                left: math.round(left),
-                top: math.round(top)
+                left: math.round(point.x),
+                top: math.round(point.y)
             });
         },
 
-        _template: kendo.template(
-            "<span class='k-marker k-marker-#= kendo.toHyphens(options.shape) #'></span>"
-        )
+        hide: function() {
+            if (this.element) {
+                this.element.remove();
+                this.element = null;
+            }
+        },
+
+        dispose: function() {
+            this.layer = null;
+            this.hide();
+        },
+
+        render: function() {
+            if (!this.element) {
+                var options = this.options;
+                var layer = this.layer;
+
+                this.element = $(doc.createElement("span"))
+                    .addClass("k-marker k-marker-" + kendo.toHyphens(options.shape))
+                    .attr("alt", options.title)
+                    .css("zIndex", options.zIndex);
+
+                if (layer) {
+                    layer.element.append(this.element);
+                }
+            }
+        }
     });
+
+    Marker.create = function(arg) {
+        if (arg instanceof Marker) {
+            return arg;
+        }
+
+        return new Marker(arg);
+    }
 
     // Exports ================================================================
     deepExtend(dataviz, {
