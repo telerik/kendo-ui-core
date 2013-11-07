@@ -159,12 +159,12 @@
             };
         },
 
-        indexToPoint: function(index, offset) {
-            offset = offset || { x: 0, y: 0 };
+        indexToPoint: function(index, currentIndex) {
+            var x = index.x, y = index.y;
 
             return new Point(
-                index.x * this.options.tileSize + offset.x,
-                index.y * this.options.tileSize + offset.y);
+                x * this.options.tileSize,
+                y * this.options.tileSize);
         },
 
         subdomainText: function() {
@@ -204,12 +204,14 @@
             }
         },
 
-        createTile: function(index) {
-            var point = this.indexToPoint(index),
+        createTile: function(currentIndex) {
+            var index = this.limit(currentIndex),
+                point = this.indexToPoint(index, currentIndex),
                 offset = point.clone().subtract(this.basePoint),
                 urlTemplate = template(this.options.urlTemplate),
                 tileOptions = {
                     index: index,
+                    currentIndex: currentIndex,
                     point: point,
                     offset: roundPoint(offset),
                     zoom: this._zoom,
@@ -222,6 +224,24 @@
                 };
 
             return this.pool.get(this._center, tileOptions);
+        },
+
+        limit: function(index) {
+            return {
+                x: this.limitValue(index.x),
+                y: this.limitValue(index.y)
+            };
+        },
+
+        limitValue: function(value) {
+            var limit = math.pow(2, this._zoom) - 1;
+            if (value >= 0) {
+                value = value % limit;
+            } else {
+                value = limit + value % limit;
+            }
+
+            return value;
         }
     });
 
@@ -247,7 +267,8 @@
 
             this.point = options.point;
             this.index = options.index;
-            this.id = "x:" + this.index.x + "y:" + this.index.y + "zoom:" + options.zoom;
+            this.currentIndex = options.currentIndex;
+            this.id = "x:" + this.currentIndex.x + "y:" + this.currentIndex.y + "zoom:" + options.zoom;
             this.visible = true;
         },
 
@@ -308,7 +329,9 @@
                 }
             }
 
-            if (!oldTile) {
+            if (oldTile) {
+                oldTile.load(options);
+            } else {
                 tile = new ImageTile(options);
                 this._items.push(tile);
             }
@@ -317,7 +340,7 @@
         },
 
         _tileId: function(options) {
-            return "x:" + options.index.x + "y:" + options.index.y + "zoom:" + options.zoom;
+            return "x:" + options.currentIndex.x + "y:" + options.currentIndex.y + "zoom:" + options.zoom;
         },
 
         _update: function(center, options) {
