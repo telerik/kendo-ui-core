@@ -268,6 +268,8 @@ kendo_module({
         },
 
         show: function(target) {
+            target = target || this.element;
+
             saveTitleAttributes(target);
             this._show(target);
         },

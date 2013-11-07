@@ -68,6 +68,14 @@
                 ok(tooltip.popup.visible());
             });
 
+            test("shows a popup on default element", function() {
+                var tooltip = new Tooltip(container, {});
+
+                tooltip.show();
+
+                ok(tooltip.popup.visible());
+            });
+
             test("content is added to the tooltip", function() {
                 var tooltip = new Tooltip(container, {
                     content: "bar"
