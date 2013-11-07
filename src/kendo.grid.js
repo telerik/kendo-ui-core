@@ -892,11 +892,13 @@ kendo_module({
 
             $(document).off(e);
 
-            if (this.resizeHandle) {
+            this._hideResizeHandle();
+        },
 
+        _hideResizeHandle: function() {
+            if (this.resizeHandle) {
                 this.resizeHandle.data("th")
                     .removeClass("k-column-active");
-
                 this.resizeHandle.hide();
             }
         },
@@ -954,7 +956,7 @@ kendo_module({
                         th = $(e.currentTarget).data("th");
 
                         if (isMobile) {
-                            that.resizeHandle.hide();
+                            that._hideResizeHandle();
                         }
 
                         var index = $.inArray(th[0], th.parent().children(":visible")),
@@ -1011,8 +1013,7 @@ kendo_module({
                             });
                         }
 
-                        that.resizeHandle.hide();
-                        th.removeClass("k-column-active");
+                        that._hideResizeHandle();
                         th = null;
                     }
                 });
@@ -1030,6 +1031,9 @@ kendo_module({
                 that._draggableInstance = that.wrapper.kendoDraggable({
                     group: kendo.guid(),
                     filter: that.content ? ".k-grid-header:first " + HEADERCELLS : "table:first>.k-grid-header " + HEADERCELLS,
+                    drag: function() {
+                        that._hideResizeHandle();
+                    },
                     hint: function(target) {
                         return $('<div class="k-header k-drag-clue" />')
                             .css({
@@ -1080,6 +1084,8 @@ kendo_module({
             if (sourceIndex === destIndex) {
                 return;
             }
+
+            that._hideResizeHandle();
 
             that.columns.splice(sourceIndex, 1);
             that.columns.splice(destIndex, 0, column);
@@ -3839,9 +3845,7 @@ kendo_module({
 
             that._progress(false);
 
-            if (that.resizeHandle) {
-                that.resizeHandle.hide();
-            }
+            that._hideResizeHandle();
 
             that._data = [];
 
