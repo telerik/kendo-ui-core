@@ -113,6 +113,12 @@
             var dy = this.y - other.y;
 
             return math.sqrt(dx * dx + dy * dy);
+        },
+
+        round: function(precision) {
+            this.x = round(this.x, precision);
+            this.y = round(this.y, precision);
+            return this;
         }
     });
 

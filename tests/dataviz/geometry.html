@@ -197,6 +197,38 @@
         deepEqual(point.transform(Matrix.unit), point);
     });
 
+    test("round rounds x", function() {
+        point.x = 5.5;
+        point.round();
+
+        equal(point.x, 6);
+    });
+
+    test("round rounds x to precision", function() {
+        point.x = 5.151;
+        point.round(2);
+
+        equal(point.x, 5.15);
+    });
+
+    test("round rounds y", function() {
+        point.y = 5.5;
+        point.round();
+
+        equal(point.y, 6);
+    });
+
+    test("round rounds y to precision", function() {
+        point.y = 5.151;
+        point.round(2);
+
+        equal(point.y, 5.15);
+    });
+
+    test("round returns point", function() {
+        deepEqual(point.round(), point);
+    });
+
     test("toString concatenates x and y", function() {
         equal(point.toString(), "10 20");
     });
