@@ -86,7 +86,7 @@
             "<svg xmlns='" + SVG_NS + "' version='1.1' " +
             "width='#= kendo.dataviz.util.renderSize(d.options.width) #' " +
             "height='#= kendo.dataviz.util.renderSize(d.options.height) #' " +
-            "style='position: relative;'>#= d._root.render() #</svg>"
+            "style='position: absolute;'>#= d._root.render() #</svg>"
         ),
 
         _appendTo: function(container) {

@@ -28,7 +28,7 @@
 
             this.movable = new kendo.ui.Movable(this.element);
 
-            this.surface = new d.svg.Surface(this.element[0], options); // TODO: Automatic choice
+            this.surface = new d.svg.Surface(this.element[0]); // TODO: Automatic choice
 
             this._click = this._handler("shapeClick");
             this.surface.bind("click", this._click);
