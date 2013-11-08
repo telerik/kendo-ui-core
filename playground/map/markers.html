@@ -24,6 +24,7 @@
     <script src="../../src/map/layers/shape.js"></script>
     <script src="../../src/map/layers/marker.js"></script>
     <script src="../../src/map/layers/tile.js"></script>
+    <script src="../../src/map/compass.js"></script>
     <script src="../../src/map/main.js"></script>
     <script src="chroma.min.js"></script>
     <link rel="stylesheet" href="../../styles/web/kendo.common.css">
@@ -87,11 +88,7 @@
                     template: "London (#= location.toString() #)"
                 }
             }],
-            // Events
-            click: function(e) {
-                console.log(e.location.toString());
-            },
-            markerCreated: $.noop,
+            // Events,
             // TODO: Remove
             markerHover: $.noop,
             shapeCreated: function(e) {

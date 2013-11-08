@@ -271,12 +271,18 @@ span.k-sparkline,
     }
 }
 
+.k-map .k-compass {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
 /* Map Compass */
 
 .k-compass
 {
-    width: 4.8em;
-    height: 4.8em;
+    width: 4em;
+    height: 4em;
     border-radius: 5em;
     position: relative;
 }
