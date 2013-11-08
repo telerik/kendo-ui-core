@@ -19,6 +19,7 @@ kendo_module({
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
+        Compass = dataviz.ui.Compass,
         defined = dataviz.defined,
 
         g = dataviz.geometry,
@@ -59,6 +60,7 @@ kendo_module({
             this._initScroller();
             this._initLayers();
             this._initMarkers();
+            this._initControls();
             this._reset();
 
             this._mousewheel = proxy(this._mousewheel, this);
@@ -68,6 +70,11 @@ kendo_module({
 
         options: {
             name: "Map",
+            controls: {
+                navigator: {
+                    panStep: 100
+                }
+            },
             layers: [],
             layerDefaults: {
                 shape: {
@@ -214,6 +221,41 @@ kendo_module({
             return this.layerToLocation(point);
         },
 
+        _initControls: function() {
+            var controls = this.options.controls;
+            if (Compass && controls.navigator && !kendo.support.mobileOS) {
+                var element = $(doc.createElement("div")).appendTo(this.element);
+                var compass = this.compass = new Compass(element, controls.navigator);
+
+                this._compassPan = proxy(this._compassPan, this);
+                compass.bind("pan", this._compassPan);
+
+                this._compassCenter = proxy(this._compassCenter, this);
+                compass.bind("center", this._compassCenter);
+            }
+        },
+
+        _compassPan: function(e) {
+            var map = this;
+            var scroller = map.scroller;
+
+            var bounds = this._virtualSize;
+            var height = this.element.height();
+            var width = this.element.width();
+
+            // TODO: Move limits in scroller
+            var x = limit(-scroller.scrollLeft - e.x, bounds.x.min, bounds.x.max - width);
+            var y = scroller.scrollTop - e.y;
+            y = limit(y, bounds.y.min, bounds.y.max - height);
+
+            map.scroller.one("scroll", function(e) { map._scrollEnd(e); });
+            map.scroller.scrollTo(x, -y);
+        },
+
+        _compassCenter: function() {
+            this.center(this.options.center);
+        },
+
         _initScroller: function() {
             var scroller = this.scroller = new kendo.mobile.ui.Scroller(
                 this.element.children(0), {
@@ -251,12 +293,11 @@ kendo_module({
         },
 
         _scroll: function(e) {
-            var origin = this.locationToLayer(this._viewOrigin);
+            var origin = this.locationToLayer(this._viewOrigin).round();
             origin.x += e.scrollLeft;
             origin.y += e.scrollTop;
 
             this.origin(this.layerToLocation(origin));
-
             this.trigger("pan", {
                 originalEvent: e,
                 origin: this.origin(),
@@ -292,13 +333,17 @@ kendo_module({
             x.makeVirtual();
             y.makeVirtual();
 
+            var xBounds = { min: -topLeft.x, max: scale - topLeft.x };
             if (this.options.wraparound) {
-                x.virtualSize(-maxScale, maxScale);
-            } else {
-                x.virtualSize(-topLeft.x, scale - topLeft.x);
+                xBounds.min = -maxScale;
+                xBounds.max = maxScale;
             }
+            x.virtualSize(xBounds.min, xBounds.max);
 
-            y.virtualSize(-topLeft.y, scale - topLeft.y);
+            var yBounds = { min: -topLeft.y, max: scale - topLeft.y };
+            y.virtualSize(yBounds.min, yBounds.max);
+
+            this._virtualSize = { x: xBounds, y: yBounds };
         },
 
         _renderLayers: function() {

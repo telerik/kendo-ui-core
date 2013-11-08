@@ -107,6 +107,29 @@
 
             dom.find(".k-compass-c").trigger("click");
         });
+
+        test("pan event x argument is multiplied by panStep", function() {
+            var dom = $("<div>").kendoCompass({
+                panStep: 100,
+                pan: function(e) {
+                    equal(e.x, 100);
+                }
+            });
+
+            dom.find(".k-compass-e").trigger("click");
+        });
+
+        test("pan event y argument is multiplied by panStep", function() {
+            var dom = $("<div>").kendoCompass({
+                panStep: 100,
+                pan: function(e) {
+                    equal(e.y, 100);
+                }
+            });
+
+            dom.find(".k-compass-n").trigger("click");
+        });
+
     </script>
 
     <h1 id="qunit-header">Compass</h1>

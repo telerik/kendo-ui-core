@@ -21,8 +21,9 @@
     <script src="../../src/dataviz/drawing/shapes.js"></script>
     <script src="../../src/map/location.js"></script>
     <script src="../../src/map/crs.js"></script>
-    <script src="../../src/map/main.js"></script>
+    <script src="../../src/map/compass.js"></script>
     <script src="../../src/map/layers/marker.js"></script>
+    <script src="../../src/map/main.js"></script>
     <script>
         var dataviz = kendo.dataviz,
             Point = dataviz.Point2D,
@@ -89,6 +90,60 @@
                 var scale = map.scale();
                 var y = map.scroller.dimensions.y;
                 equal(y._virtualMax - y._virtualMin, scale);
+            });
+        })();
+
+        (function() {
+            // ------------------------------------------------------------
+            module("Map / Compass", {
+                setup: createMap,
+                teardown: destroyMap
+            });
+
+            test("compass is created by default", function() {
+                ok(map.compass);
+            });
+
+            test("compass is not created on mobile devices", function() {
+                var mobileOS = kendo.support.mobileOS;
+
+                kendo.support.mobileOS = true;
+                createMap();
+                ok(!map.compass);
+                kendo.support.mobileOS = mobileOS;
+            });
+
+            test("compass is not created if disabled", function() {
+                createMap({ controls: { navigator: false } });
+                ok(!map.compass);
+            });
+
+            test("compass options are passed", function() {
+                createMap({ controls: { navigator: { foo: true } } });
+                ok(map.compass.options.foo);
+            });
+
+            test("panning triggers pan and panEnd", 2, function() {
+                map.bind("pan", function() {
+                    map.bind("panEnd", function() {
+                        ok(true);
+                    });
+
+                    ok(true);
+                });
+                map.compass.trigger("pan", { x: 100, y: 0 });
+            });
+
+            test("panning moves origin", function() {
+                map.bind("panEnd", function() {
+                    ok(new Location(17, -162).equals(map.origin().round()));
+                });
+                map.compass.trigger("pan", { x: 100, y: 100 });
+            });
+
+            test("center resets center", function() {
+                map.bind("reset", function() { ok(true); });
+                map.compass.trigger("center");
             });
         })();
 
