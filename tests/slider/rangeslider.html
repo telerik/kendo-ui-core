@@ -321,6 +321,16 @@
                 equal(inputs.eq(1).val(), 0);
             });
 
+            test("rangeSlider resize should resize", function () {
+                var rangeSlider = newRangeSlider({ min: -2, max: 40 }, $("<div><input value='0' /><input value='0' /></div>"));
+
+                var initialWidth = rangeSlider._trackDiv.width();
+                rangeSlider.wrapper.width(400);
+                rangeSlider.resize();
+                var currentWidth = rangeSlider._trackDiv.width();
+                ok(initialWidth != currentWidth);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.RangeSlider Tests</h1>

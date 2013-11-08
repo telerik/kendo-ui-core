@@ -57,7 +57,7 @@ kendo_module({
             that._isHorizontal = options.orientation == "horizontal";
             that._isRtl = that._isHorizontal && kendo.support.isRtl(element);
             that._position = that._isHorizontal ? "left" : "bottom";
-            that._size = that._isHorizontal ? "width" : "height";
+            that._sizeFn = that._isHorizontal ? "width" : "height";
             that._outerSize = that._isHorizontal ? "outerWidth" : "outerHeight";
 
             options.tooltip.format = options.tooltip.enabled ? options.tooltip.format || "{0}" : "{0}";
@@ -68,26 +68,11 @@ kendo_module({
 
             that._setTrackDivWidth();
 
-            that._maxSelection = that._trackDiv[that._size]();
+            that._maxSelection = that._trackDiv[that._sizeFn]();
 
-            var sizeBetweenTicks = that._maxSelection / ((options.max - options.min) / options.smallStep);
-            var pixelWidths = that._calculateItemsWidth(math.floor(that._distance / options.smallStep));
-
-            if (options.tickPlacement != "none" && sizeBetweenTicks >= 2) {
-                that._trackDiv.before(createSliderItems(options, that._distance));
-                that._setItemsWidth(pixelWidths);
-                that._setItemsTitle();
-            }
-
-            that._calculateSteps(pixelWidths);
+            that._sliderItemsInit();
 
             that._tabindex(that.wrapper.find(DRAG_HANDLE));
-
-            if (options.tickPlacement != "none" && sizeBetweenTicks >= 2 &&
-                options.largeStep > options.smallStep) {
-                that._setItemsLargeTick();
-            }
-
             that[options.enabled ? "enable" : "disable"]();
 
             var rtlDirectionSign = kendo.support.isRtl(that.wrapper) ? -1 : 1;
@@ -122,11 +107,45 @@ kendo_module({
             tooltip: { enabled: true, format: "{0}" }
         },
 
+        _resize: function() {
+            this._setTrackDivWidth();
+            this.wrapper.find(".k-slider-items").remove();
+
+            this._maxSelection = this._trackDiv[this._sizeFn]();
+            this._sliderItemsInit();
+            this._refresh();
+        },
+
+        _sliderItemsInit: function() {
+            var that = this,
+                options = that.options;
+
+            var sizeBetweenTicks = that._maxSelection / ((options.max - options.min) / options.smallStep);
+            var pixelWidths = that._calculateItemsWidth(math.floor(that._distance / options.smallStep));
+
+            if (options.tickPlacement != "none" && sizeBetweenTicks >= 2) {
+                that._trackDiv.before(createSliderItems(options, that._distance));
+                that._setItemsWidth(pixelWidths);
+                that._setItemsTitle();
+            }
+
+            that._calculateSteps(pixelWidths);
+
+            if (options.tickPlacement != "none" && sizeBetweenTicks >= 2 &&
+                options.largeStep > options.smallStep) {
+                that._setItemsLargeTick();
+            }
+        },
+
+        getSize: function() {
+            return kendo.dimensions(this.wrapper);
+        },
+
         _setTrackDivWidth: function() {
             var that = this,
                 trackDivPosition = parseFloat(that._trackDiv.css(that._isRtl ? "right" : that._position), 10) * 2;
 
-            that._trackDiv[that._size]((that.wrapper[that._size]() - 2) - trackDivPosition);
+            that._trackDiv[that._sizeFn]((that.wrapper[that._sizeFn]() - 2) - trackDivPosition);
         },
 
         _setItemsWidth: function(pixelWidths) {
@@ -142,15 +161,15 @@ kendo_module({
                 selection = 0;
 
             for (i = 0; i < count - 2; i++) {
-                $(items[i + 1])[that._size](pixelWidths[i]);
+                $(items[i + 1])[that._sizeFn](pixelWidths[i]);
             }
 
             if (that._isHorizontal) {
-                $(items[first]).addClass("k-first")[that._size](pixelWidths[last - 1]);
-                $(items[last]).addClass("k-last")[that._size](pixelWidths[last]);
+                $(items[first]).addClass("k-first")[that._sizeFn](pixelWidths[last - 1]);
+                $(items[last]).addClass("k-last")[that._sizeFn](pixelWidths[last]);
             } else {
-                $(items[last]).addClass("k-first")[that._size](pixelWidths[last]);
-                $(items[first]).addClass("k-last")[that._size](pixelWidths[last - 1]);
+                $(items[last]).addClass("k-first")[that._sizeFn](pixelWidths[last]);
+                $(items[first]).addClass("k-last")[that._sizeFn](pixelWidths[last - 1]);
             }
 
             if (that._distance % options.smallStep !== 0 && !that._isHorizontal) {
@@ -200,7 +219,7 @@ kendo_module({
                             .html("<span class='k-label'>" + item.attr("title") + "</span>");
 
                         if (i !== 0 && i !== items.length - 1) {
-                            item.css("line-height", item[that._size]() + "px");
+                            item.css("line-height", item[that._sizeFn]() + "px");
                         }
                     }
                 }
@@ -210,7 +229,7 @@ kendo_module({
         _calculateItemsWidth: function(itemsCount) {
             var that = this,
                 options = that.options,
-                trackDivSize = parseFloat(that._trackDiv.css(that._size)) + 1,
+                trackDivSize = parseFloat(that._trackDiv.css(that._sizeFn)) + 1,
                 pixelStep = trackDivSize / that._distance,
                 itemWidth,
                 pixelWidths,
@@ -886,7 +905,7 @@ kendo_module({
                 halfDragHanndle = parseInt(dragHandle[that._outerSize]() / 2, 10),
                 rtlCorrection = that._isRtl ? 2 : 0;
 
-            selectionDiv[that._size](that._isRtl ? that._maxSelection - selection : selection);
+            selectionDiv[that._sizeFn](that._isRtl ? that._maxSelection - selection : selection);
             dragHandle.css(that._position, selection - halfDragHanndle - rtlCorrection);
         }
 
@@ -1596,7 +1615,7 @@ kendo_module({
 
             selection = math.abs(selectionStart - selectionEnd);
 
-            selectionDiv[that._size](selection);
+            selectionDiv[that._sizeFn](selection);
             if (that._isRtl) {
                 selectionPosition = math.max(selectionStart, selectionEnd);
                 selectionDiv.css("right", that._maxSelection - selectionPosition - 1);

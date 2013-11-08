@@ -2683,7 +2683,8 @@ function pad(number, digits, end) {
         $(element).each(function() {
             var child = $(this), widget;
 
-            if (!child.is(":visible")) {
+            if (!child.is(":visible") &&
+                $.inArray(child.attr("data-role"), ["slider", "rangeslider"]) === -1) {
                 return;
             }
 

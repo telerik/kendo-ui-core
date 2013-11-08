@@ -290,6 +290,16 @@
                 equal(slider.element.val(), 0);
             });
 
+            test("slider resize should resize", function () {
+                var slider = newSlider({}, $("<input />"));
+
+                var initialWidth = slider._trackDiv.width();
+                slider.wrapper.width(400);
+                slider.resize();
+                var currentWidth = slider._trackDiv.width();
+                ok(initialWidth != currentWidth);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Slider Tests</h1>
