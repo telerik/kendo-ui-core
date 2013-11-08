@@ -30,6 +30,24 @@
             test("false for undefined", function() {
                 ok(!isFunction());
             });
+
+            // ------------------------------------------------------------
+            var toCamelCase = kendo.toCamelCase;
+
+            module("toCamelCase");
+
+            test("replaces dashes with next letter in upper case", function() {
+                equal(toCamelCase("foo-bar-baz"), "fooBarBaz")
+            });
+
+            // ------------------------------------------------------------
+            var toHyphens = kendo.toHyphens;
+
+            module("toHyphens");
+
+            test("replaces ...-a... with ...A...", function() {
+                equal(toHyphens("fooBarBaz"), "foo-bar-baz")
+            });
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

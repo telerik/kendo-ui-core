@@ -22,27 +22,31 @@ kendo_module({
         valueOrDefault = util.valueOrDefault;
 
     // Implementation =========================================================
-    var Location = function(lat, lng) {
-        if (arguments.length === 1) {
-            this.lat = lat[0];
-            this.lng = lat[1];
-        } else {
-            this.lat = lat;
-            this.lng = lng;
-        }
-    };
+    var Location = Class.extend({
+        init: function(lat, lng) {
+            if (arguments.length === 1) {
+                this.lat = lat[0];
+                this.lng = lat[1];
+            } else {
+                this.lat = lat;
+                this.lng = lng;
+            }
+        },
 
-    Location.prototype = {
         FORMAT: "{0:N6},{1:N6}",
 
         toString: function() {
             return kendo.format(this.FORMAT, this.lng, this.lat);
         },
 
+        toArray: function() {
+            return [this.lat, this.lng];
+        },
+
         equals: function(loc) {
             return loc && loc.lat === this.lat && loc.lng === this.lng;
         }
-    };
+    });
 
     Location.fromLngLat = function(ll) {
         return new Location(ll[1], ll[0]);

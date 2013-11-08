@@ -21,6 +21,7 @@
     <script src="../../../src/map/location.js"></script>
     <script src="../../../src/map/crs.js"></script>
     <script src="../../../src/map/layers/shape.js"></script>
+    <script src="../../../src/map/layers/marker.js"></script>
     <script>
         var dataviz = kendo.dataviz,
             g = dataviz.geometry,
@@ -69,6 +70,26 @@
             test("does not set fill", function() {
                 equal(result.options.fill, null);
             });
+
+            test("triggers shapeCreated on observer", function() {
+                loader.observer = {
+                    shapeCreated: function() {
+                        ok(true);
+                    }
+                };
+                result = loader.parse(item);
+            });
+
+            test("cancelling shapeCreated does not add shape", function() {
+                loader.observer = {
+                    shapeCreated: function(e) {
+                        return true;
+                    }
+                };
+
+                result = loader.parse(item);
+                ok(!result);
+            });
         })();
 
         (function() {
@@ -98,6 +119,38 @@
                 ok(result.children[0] instanceof d.Path);
                 ok(result.children[1] instanceof d.Path);
                 equal(result.children.length, 2);
+            });
+
+            test("triggers shapeCreated on observer", function() {
+                loader.observer = {
+                    shapeCreated: function() {
+                        ok(true);
+                    }
+                };
+                result = loader.parse(item);
+            });
+
+            test("cancelling shapeCreated does not add shape", function() {
+                loader.observer = {
+                    shapeCreated: function(e) {
+                        return true;
+                    }
+                };
+                result = loader.parse(item);
+
+                ok(!result);
+            });
+
+            test("cancelling shapeCreated leaves second shape intact", function() {
+                var i = 0;
+                loader.observer = {
+                    shapeCreated: function(e) {
+                        return i++ > 0;
+                    }
+                };
+                result = loader.parse(item);
+
+                ok(result instanceof d.Path);
             });
         })();
 
@@ -272,6 +325,115 @@
                 equal(ds.view().length, 2);
             });
         })();
+
+        (function() {
+            var loader;
+            var item;
+            var result;
+
+            // ------------------------------------------------------------
+            module("GeoJSON Loader / Point", {
+                setup: function() {
+                    loader = new map.GeoJSONLoader(locator, style);
+                    item = {
+                        "type": "Point",
+                        "coordinates": [-105.01621, 39.57422]
+                    };
+                }
+            });
+
+            test("parses to a circle", function() {
+                result = loader.parse(item);
+                ok(result instanceof d.Circle);
+            });
+
+            test("triggers shapeCreated on observer", function() {
+                loader.observer = {
+                    shapeCreated: function() {
+                        ok(true);
+                    }
+                };
+
+                result = loader.parse(item);
+            });
+
+            test("cancelling shapeCreated does not add shape", function() {
+                loader.observer = {
+                    shapeCreated: function(e) {
+                        return true;
+                    }
+                };
+
+                result = loader.parse(item);
+
+                ok(!result);
+            });
+        })();
+
+        (function() {
+            var loader;
+            var item;
+            var result;
+
+            // ------------------------------------------------------------
+            module("GeoJSON Loader / MultiPoint", {
+                setup: function() {
+                    loader = new map.GeoJSONLoader(locator, style);
+                    item = {
+                        "type": "MultiPoint",
+                        "coordinates": [
+                            [-105.01621, 39.57422],
+                            [-80.6665134, 35.0539943]
+                        ]
+                    };
+                    result = loader.parse(item);
+                }
+            });
+
+            test("parses to a group", function() {
+                ok(result instanceof d.Group);
+            });
+
+            test("parses points to child circles", function() {
+                ok(result.children[0] instanceof d.Circle);
+                ok(result.children[1] instanceof d.Circle);
+                equal(result.children.length, 2);
+            });
+
+            test("triggers shapeCreated on observer", 2, function() {
+                loader.observer = {
+                    shapeCreated: function() {
+                        ok(true);
+                    }
+                };
+
+                result = loader.parse(item);
+            });
+
+            test("cancelling shapeCreated does not add shape", function() {
+                loader.observer = {
+                    shapeCreated: function(e) {
+                        return true;
+                    }
+                };
+                result = loader.parse(item);
+
+                ok(!result);
+            });
+
+            test("cancelling shapeCreated leaves second shape intact", function() {
+                var i = 0;
+                loader.observer = {
+                    shapeCreated: function(e) {
+                        return i++ > 0;
+                    }
+                };
+                result = loader.parse(item);
+
+                ok(result instanceof d.Circle);
+            });
+        })();
+
     </script>
 
     <h1 id="qunit-header">kendo.chart</h1>

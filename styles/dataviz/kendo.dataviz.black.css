@@ -52,3 +52,15 @@
 .k-chart .k-navigator-hint .k-scroll {
     background: #ffffff;
 }
+
+/* Map */
+
+.k-map .k-marker {
+    background-image: url("Black/markers.png");
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .k-map .k-marker {
+        background-image: url("Black/markers_2x.png");
+    }
+}

@@ -195,91 +195,155 @@ span.k-sparkline,
     width: 100%;
 }
 
+/* Mobile Scroller */
+.km-scroll-container {
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-margin-collapse: separate;
+  -webkit-transform: translatez(0);
+}
+.km-touch-scrollbar {
+  position: absolute;
+  visibility: hidden;
+  z-index: 200000;
+  height: .3em;
+  width: .3em;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  -webkit-transition: opacity 0.3s linear;
+  -moz-transition: opacity 0.3s linear;
+  -o-transition: opacity 0.3s linear;
+  transition: opacity 0.3s linear;
+}
+.km-vertical-scrollbar {
+  height: 100%;
+  right: 2px;
+  top: 2px;
+}
+.km-horizontal-scrollbar {
+  width: 100%;
+  left: 2px;
+  bottom: 2px;
+}
+
 /* Map */
 
 .k-map .km-scroll-wrapper {
-    position: relative;
+    padding-bottom: 0;
+}
+
+.k-map .km-scroll-wrapper,
+.k-map .km-scroll-container,
+.k-map .k-layer {
+    position: absolute;
     width: 100%;
     height: 100%;
 }
 
-.k-map .k-layer {
+.k-map .k-marker {
     position: absolute;
+    width: 28px;
+    height: 40px;
+    margin: -40px 0 0 -14px;
 }
+
+.k-map .k-marker-pin {
+    background-position: 0px 0px;
+}
+
+.k-map .k-marker-pin-target {
+    background-position: 0px 40px;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .k-map .k-marker {
+        width: 56px;
+        height: 80px;
+        margin: -80px 0 0 -28px;
+    }
+
+    .k-map .k-marker-pin-target {
+        background-position: 0px 80px;
+    }
+}
+
 /* Map Compass */
 
 .k-compass
 {
-	width: 4.8em;
-	height: 4.8em;
-	border-radius: 5em;
-	position: relative;
+    width: 4.8em;
+    height: 4.8em;
+    border-radius: 5em;
+    position: relative;
 }
 
 .k-compass > button
 {
-	border-color: transparent;
-	background: none;
+    border-color: transparent;
+    background: none;
 }
 
 .k-compass > .k-button
 {
-	padding: 0;
-	line-height: 10px;
-	border-radius: 1em;
-	position: absolute;
+    padding: 0;
+    line-height: 10px;
+    border-radius: 1em;
+    position: absolute;
 }
 
 .k-compass-n
 {
-	top: 3px;
-	left: 50%;
-	margin-left: -9px;
+    top: 3px;
+    left: 50%;
+    margin-left: -9px;
 }
 
 .k-compass-e
 {
-	right: 3px;
-	top: 50%;
-	margin-top: -9px;
+    right: 3px;
+    top: 50%;
+    margin-top: -9px;
 }
 
 .k-compass-s
 {
-	bottom: 3px;
-	left: 50%;
-	margin-left: -9px;
+    bottom: 3px;
+    left: 50%;
+    margin-left: -9px;
 }
 
 .k-compass-w
 {
-	left: 3px;
-	top: 50%;
-	margin-top: -9px;
+    left: 3px;
+    top: 50%;
+    margin-top: -9px;
 }
 
 .k-compass > .k-compass-c
 {
-	width: 16px;
-	height: 16px;
-	left: 50%;
-	top: 50%;
-	margin-left: -8px;
-	margin-top: -8px;
+    width: 16px;
+    height: 16px;
+    left: 50%;
+    top: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
 }
 
 .k-compass-c > span
 {
-	display: block;
-	width: 6px;
-	height:6px;
-	border-style: solid;
-	border-width: 2px;
-	border-radius: 10px;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	margin-left: -5px;
-	margin-top: -5px;
+    display: block;
+    width: 6px;
+    height:6px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -5px;
+    margin-top: -5px;
 }
 

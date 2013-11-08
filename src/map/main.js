@@ -3,18 +3,18 @@ kendo_module({
     name: "Map",
     category: "dataviz",
     description: "The Kendo DataViz Map displays spatial data",
-    depends: [ "data", "userevents", "dataviz.core", "dataviz.themes", "mobile.scroller" ]
+    depends: [ "data", "userevents", "tooltip", "dataviz.core", "dataviz.themes", "mobile.scroller" ]
 });
 
 (function ($, undefined) {
     // Imports ================================================================
-    var math = Math,
+    var doc = document,
+        math = Math,
         pow = math.pow,
 
         proxy = $.proxy,
 
         kendo = window.kendo,
-        ObservableArray = kendo.data.ObservableArray,
         Widget = kendo.ui.Widget,
         deepExtend = kendo.deepExtend,
 
@@ -45,44 +45,30 @@ kendo_module({
             Widget.fn.init.call(this, element);
 
             this._initOptions(options);
+            this.bind(this.events, options);
+
+            this.crs = new EPSG3857();
 
             this.element
                 .addClass(CSS_PREFIX + this.options.name.toLowerCase())
                 .css("position", "relative")
-                .empty();
+                .empty()
+                .append(doc.createElement("div"));
 
-            this.bind(this.events, options);
-
-            this.scrollWrap = $("<div />").appendTo(this.element);
-
-            this.crs = new EPSG3857();
-            this.layers = new ObservableArray([]);
-            this._renderLayers();
-
-            var scroller = this.scroller = new kendo.mobile.ui.Scroller(this.scrollWrap, {
-                friction: FRICTION,
-                velocityMultiplier: VELOCITY_MULTIPLIER,
-                zoom: true
-            });
-
-            scroller.bind("scroll", proxy(this._scroll, this));
-            scroller.bind("scrollEnd", proxy(this._scrollEnd, this));
+            this._viewOrigin = this.origin();
+            this._initScroller();
+            this._initLayers();
+            this._initMarkers();
+            this._reset();
 
             this._mousewheel = proxy(this._mousewheel, this);
             this.element.bind("click", proxy(this._click, this));
             this.element.bind(MOUSEWHEEL, this._mousewheel);
-
-            this._reset();
         },
 
         options: {
             name: "Map",
             layers: [],
-            center: [0, 0],
-            zoom: 3,
-            minSize: 256,
-            minZoom: 2,
-            maxZoom: 18,
             layerDefaults: {
                 shape: {
                     style: {
@@ -94,6 +80,20 @@ kendo_module({
                             width: 0.5
                         }
                     }
+                }
+            },
+            center: [0, 0],
+            zoom: 3,
+            minSize: 256,
+            minZoom: 1,
+            maxZoom: 18,
+            markers: [],
+            markerDefaults: {
+                shape: "pinTarget",
+                tooltip: {
+                    autoHide: false,
+                    position: "top",
+                    showOn: "click"
                 }
             },
             wraparound: true
@@ -214,6 +214,42 @@ kendo_module({
             return this.layerToLocation(point);
         },
 
+        _initScroller: function() {
+            var scroller = this.scroller = new kendo.mobile.ui.Scroller(
+                this.element.children(0), {
+                    friction: FRICTION,
+                    velocityMultiplier: VELOCITY_MULTIPLIER,
+                    zoom: true
+                });
+
+            scroller.bind("scroll", proxy(this._scroll, this));
+            scroller.bind("scrollEnd", proxy(this._scrollEnd, this));
+
+            this.scrollElement = scroller.scrollElement;
+        },
+
+        _initLayers: function() {
+            var defs = this.options.layers,
+                layers = this.layers = [];
+
+            for (var i = 0; i < defs.length; i++) {
+                var options = defs[i];
+                var type = options.type || "shape";
+                var defaults = this.options.layerDefaults[type];
+                var impl = dataviz.map.layers[type];
+
+                // TODO: Set layer size
+                layers.push(new impl(this, deepExtend({}, defaults, options)));
+            }
+        },
+
+        _initMarkers: function() {
+            this.markers = new map.layers.MarkerLayer(this, {
+                markerDefaults: this.options.markerDefaults
+            });
+            this.markers.add(this.options.markers);
+        },
+
         _scroll: function(e) {
             var origin = this.locationToLayer(this._viewOrigin);
             origin.x += e.scrollLeft;
@@ -266,7 +302,7 @@ kendo_module({
 
             scrollWrap.empty();
 
-            for (var i = 0; i < defs.length; i++)  {
+            for (var i = 0; i < defs.length; i++) {
                 var options = defs[i];
                 var type = options.type || "shape";
                 var defaults = this.options.layerDefaults[type];

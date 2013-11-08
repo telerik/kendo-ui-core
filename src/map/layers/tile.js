@@ -35,7 +35,7 @@
             layer._initOptions(options);
             layer.map = map;
 
-            this.element = $(this._template(this)).appendTo(map.scrollWrap);
+            this.element = $(this._template(this)).appendTo(map.scrollElement);
 
             layer._loadView();
 

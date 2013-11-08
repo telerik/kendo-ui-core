@@ -68,6 +68,14 @@
                 ok(tooltip.popup.visible());
             });
 
+            test("shows a popup on default element", function() {
+                var tooltip = new Tooltip(container, {});
+
+                tooltip.show();
+
+                ok(tooltip.popup.visible());
+            });
+
             test("content is added to the tooltip", function() {
                 var tooltip = new Tooltip(container, {
                     content: "bar"
@@ -103,11 +111,27 @@
                 equal(tooltip.content.find("span").text(), "bar");
             });
 
-            test("content as function element is passed", 3,  function() {
+            test("content as function target is passed", 3,  function() {
                 var tooltip = new Tooltip(container, {
                     content: function(e) {
 
-                        ok(container[0], e.element);
+                        deepEqual(e.target, container);
+
+                        return "<span>bar</span>";
+                    }
+                });
+
+                tooltip.show(container);
+
+                ok(tooltip.content.find("span").length);
+                equal(tooltip.content.find("span").text(), "bar");
+            });
+
+            test("content as function sender is passed", 3,  function() {
+                var tooltip = new Tooltip(container, {
+                    content: function(e) {
+
+                        deepEqual(tooltip, e.sender);
 
                         return "<span>bar</span>";
                     }

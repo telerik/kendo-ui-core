@@ -52,3 +52,15 @@
     background: rgba(252,116,26,.7);
     height: 4px;
 }
+
+/* Map */
+
+.k-map .k-marker {
+    background-image: url("Default/markers.png");
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .k-map .k-marker {
+        background-image: url("Default/markers_2x.png");
+    }
+}

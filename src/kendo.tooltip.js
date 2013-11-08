@@ -217,7 +217,7 @@ kendo_module({
                         });
                 }
             } else if (contentOptions && isFunction(contentOptions)) {
-                contentOptions = contentOptions({ target: target });
+                contentOptions = contentOptions({ sender: this, target: target });
                 that.content.html(contentOptions || "");
             } else {
                 that.content.html(contentOptions);
@@ -268,6 +268,8 @@ kendo_module({
         },
 
         show: function(target) {
+            target = target || this.element;
+
             saveTitleAttributes(target);
             this._show(target);
         },

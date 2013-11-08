@@ -25,7 +25,7 @@
 .k-chart .k-handle {
     background-color: #10c4b2;
     width: 1px;
-	}
+    }
 
 .k-chart .k-handle:hover {
     background-color: #2eb3a6;
@@ -54,18 +54,30 @@
 
 .k-chart .k-tooltip,
 .k-sparkline .k-tooltip {
-  	background-image: none;
-	-moz-border-radius: 0;
+    background-image: none;
+    -moz-border-radius: 0;
     -webkit-border-radius: 0;
     border-radius: 0;
 }
 
 .k-chart .k-tooltip{
-	-webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-	box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 }
 
 .k-navigator-hint .k-tooltip {
     box-shadow: 0 0 0 rgba(0,0,0,0);
     background: #fff;
+}
+
+/* Map */
+
+.k-map .k-marker {
+    background-image: url("Flat/markers.png");
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2) {
+    .k-map .k-marker {
+        background-image: url("Flat/markers_2x.png");
+    }
 }
