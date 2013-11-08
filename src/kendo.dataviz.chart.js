@@ -7423,7 +7423,16 @@ kendo_module({
                 color: BLACK,
                 width: 0
             },
-            legend: {}
+            legend: {
+                inactiveItems: {
+                    labels: {
+                        color: "#919191"
+                    },
+                    markers: {
+                        color: "#919191"
+                    }
+                }
+            }
         },
 
         setSeriesIndexes: function() {
