@@ -1521,14 +1521,6 @@ kendo_module({
         viewport: function () {
             return this.canvas.bounds();
         },
-        zoomMainLayer: function () {
-            var zoom = this._zoom;
-
-            var transform = new CompositeTransform(0, 0, zoom, zoom);
-            transform.render(this.mainLayer.native);
-            this._matrix = transform.toMatrix();
-        },
-
         copy: function () {
             if (this.options.copy.enabled) {
                 this._clipboard.clear();
@@ -1755,7 +1747,7 @@ kendo_module({
                 var scrollMethod = (animated === true ? "animatedScrollTo" : "scrollTo");
 
                 diagram.scroller[scrollMethod](pan.x, pan.y);
-                this.zoomMainLayer();
+                this._zoomMainLayer();
             }
             else {
                 diagram._transformMainLayer();
@@ -1763,6 +1755,15 @@ kendo_module({
         },
         _storePan: function (pan) {
             this._pan = pan;
+        },
+        _zoomMainLayer: function () {
+            var zoom = this._zoom;
+
+            var transform = new CompositeTransform(0, 0, zoom, zoom);
+            transform.render(this.mainLayer.native);
+            this._matrix = transform.toMatrix();
+            var panMatrix = diagram.Matrix.translation(this._pan.x, this._pan.y);
+            //this._matrix = this._matrix.times(panMatrix);
         },
         _transformMainLayer: function () {
             var pan = this._pan,

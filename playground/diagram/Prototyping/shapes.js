@@ -1,6 +1,14 @@
 var shapesSource = [
     {
         options: {
+            name: "Text",
+            content: "Text",
+            connectors: [],
+            background: "white"
+        }
+    },
+    {
+        options: {
             name: "Circle",
             data: "Circle",
             rx: 50,

@@ -275,7 +275,6 @@
             </g>
         </svg>
     </div>
-
 </script>
 
 <script>
@@ -285,19 +284,20 @@ var Shapes = {
 
 for (var i = 0; i < shapesSource.length; i++) {
     shape = shapesSource[i].options;
-    shape.background = 'steelblue';
+    if (!shape.background) {
+        shape.background = 'steelblue';
+    }
     shape.strokeWidth = 0;
     Shapes[shape.name] = shape;
 }
 
 
 function receivedText() {
-    //result = fr.result;
-    document.getElementById('editor').appendChild(document.createTextNode(fr.result))
+    $('#editor').appendChild(document.createTextNode(fr.result))
 }
 
 function loadDiagram() {
-    document.getElementById('upload-field').click();
+    $('#upload-field').click();
 }
 
 $(function () {
@@ -314,7 +314,6 @@ $(function () {
                 { collapsible: false, resizable: false, size: "50px" }
             ],
             resize: function () {
-                console.log(arguments);
             }
         });
         $("#splitter").kendoSplitter({
