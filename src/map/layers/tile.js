@@ -57,8 +57,8 @@
                 map = this.map,
                 extent = map.extent(),
                 extentToPoint = {
-                    nw: map.locationToLayer(extent.nw),
-                    se: map.locationToLayer(extent.se)
+                    nw: map.locationToLayer(extent.nw).round(),
+                    se: map.locationToLayer(extent.se).round()
                 };
 
             view.center(map.locationToLayer(map.center()));
