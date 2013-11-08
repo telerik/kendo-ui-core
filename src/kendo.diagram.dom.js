@@ -1762,8 +1762,6 @@ kendo_module({
             var transform = new CompositeTransform(0, 0, zoom, zoom);
             transform.render(this.mainLayer.native);
             this._matrix = transform.toMatrix();
-            var panMatrix = diagram.Matrix.translation(this._pan.x, this._pan.y);
-            //this._matrix = this._matrix.times(panMatrix);
         },
         _transformMainLayer: function () {
             var pan = this._pan,
