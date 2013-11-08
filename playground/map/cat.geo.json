@@ -692,14 +692,14 @@
     "properties": {},
     "geometry": {
       "type": "Point",
-      "coordinates": [-145.546875, 45.82879925192134]
+      "coordinates": [-145.546875, 33]
     }
   }, {
     "type": "Feature",
     "properties": {},
     "geometry": {
       "type": "Point",
-      "coordinates": [-103.88671875, 46.195042108660154]
+      "coordinates": [-105, 33]
     }
   }]
 }

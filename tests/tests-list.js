@@ -312,6 +312,7 @@ var tests = [
     "listview/mvvm.html",
     "listview/aria.html",
     "listview/lint.html",
+    "map/main.html",
     "map/projections.html",
     "map/crs.html",
     "map/helpers.html",

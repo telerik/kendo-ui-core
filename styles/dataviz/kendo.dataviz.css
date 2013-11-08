@@ -248,6 +248,7 @@ span.k-sparkline,
     width: 28px;
     height: 40px;
     margin: -40px 0 0 -14px;
+    cursor: pointer;
 }
 
 .k-map .k-marker-pin {

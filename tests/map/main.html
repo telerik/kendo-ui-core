@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Helpers</title>
+    <script src="../jquery-loader.js"></script>
+    <script src="../qunit/qunit/qunit.js"></script>
+    <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+    <script src="../kendo-test-helpers.js"></script>
+    <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+</head>
+<body>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.fx.js"></script>
+    <script src="../../src/kendo.userevents.js"></script>
+    <script src="../../src/kendo.draganddrop.js"></script>
+    <script src="../../src/kendo.mobile.scroller.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/dataviz/util.js"></script>
+    <script src="../../src/dataviz/geometry.js"></script>
+    <script src="../../src/dataviz/drawing/core.js"></script>
+    <script src="../../src/dataviz/drawing/shapes.js"></script>
+    <script src="../../src/map/location.js"></script>
+    <script src="../../src/map/crs.js"></script>
+    <script src="../../src/map/main.js"></script>
+    <script src="../../src/map/layers/marker.js"></script>
+    <script>
+        var dataviz = kendo.dataviz,
+            Point = dataviz.Point2D,
+
+            m = dataviz.map,
+            Extent = m.Extent,
+            Location = m.Location;
+
+        var map;
+        function createMap(options) {
+            var element = $("<div></div>").appendTo($("#qunit-fixture"));
+            map = new kendo.dataviz.ui.Map(element, options);
+            return map;
+        }
+
+        function destroyMap() {
+            map.destroy();
+            map.element.remove();
+        }
+
+        (function() {
+            // ------------------------------------------------------------
+            module("Map / Extent", {
+                setup: createMap,
+                teardown: destroyMap
+            });
+
+            test("se corner wraps around by default", function() {
+                createMap({ zoom: 0 });
+                map.element.css("width", "2000px");
+                ok(map.extent().se.round().lng > 180);
+            });
+
+            test("se corner does not wrap around", function() {
+                createMap({ zoom: 1, wraparound: false });
+                map.element.css("width", "2000px");
+                equal(map.extent().se.round().lng, 180);
+            });
+        })();
+
+        (function() {
+            // ------------------------------------------------------------
+            module("Map / Scroller", {
+                setup: createMap,
+                teardown: destroyMap
+            });
+
+            test("x virtualSize is 20x scale when wraparound is true", function() {
+                var scale = map.scale();
+                var x = map.scroller.dimensions.x;
+                equal(x._virtualMin, -20 * scale);
+                equal(x._virtualMax, 20 * scale);
+            });
+
+            test("x virtualSize is scale when wraparound is false", function() {
+                createMap({ wraparound: false });
+                var scale = map.scale();
+                var x = map.scroller.dimensions.x;
+                equal(x._virtualMin, 0);
+                equal(x._virtualMax, scale);
+            });
+
+            test("y virtualSize equals scale", function() {
+                var scale = map.scale();
+                var y = map.scroller.dimensions.y;
+                equal(y._virtualMax - y._virtualMin, scale);
+            });
+        })();
+
+    </script>
+
+    <h1 id="qunit-header">kendo.chart</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+
+</body>
+</html>
