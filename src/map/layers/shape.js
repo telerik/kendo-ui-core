@@ -95,9 +95,10 @@
         shapeCreated: function(shape) {
             var cancelled = false;
             if (shape instanceof d.Circle) {
-                this._createMarker(shape);
-                cancelled = true;
-            } else {
+                cancelled = !this._createMarker(shape);
+            }
+
+            if (!cancelled) {
                 var args = { layer: this, shape: shape };
                 cancelled = this.map.trigger("shapeCreated", args);
             }
@@ -113,9 +114,12 @@
             marker.dataItem = dataItem;
 
             var args = { marker: marker };
-            if (!this.map.trigger("markerCreated", args)) {
+            var cancelled = this.map.trigger("markerCreated", args);
+            if (!cancelled) {
                 this.map.markers.add(marker);
             }
+
+            return cancelled;
         },
 
         _panEnd: function() {
