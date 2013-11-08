@@ -95,7 +95,7 @@ kendo_module({
                     position: "top",
                     showOn: "click"
                 }
-            }
+            },
             wraparound: true
         },
 
