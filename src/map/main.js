@@ -19,6 +19,7 @@ kendo_module({
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
+        Compass = dataviz.ui.Compass,
         defined = dataviz.defined,
 
         g = dataviz.geometry,
@@ -59,6 +60,7 @@ kendo_module({
             this._initScroller();
             this._initLayers();
             this._initMarkers();
+            this._initControls();
             this._reset();
 
             this._mousewheel = proxy(this._mousewheel, this);
@@ -68,6 +70,11 @@ kendo_module({
 
         options: {
             name: "Map",
+            controls: {
+                navigator: {
+                    panStep: 100
+                }
+            },
             layers: [],
             layerDefaults: {
                 shape: {
@@ -214,6 +221,35 @@ kendo_module({
             return this.layerToLocation(point);
         },
 
+        _initControls: function() {
+            var controls = this.options.controls;
+            if (Compass && controls.navigator && !kendo.support.mobileOS) {
+                var element = $(doc.createElement("div")).appendTo(this.element);
+                var compass = this.compass = new Compass(element, controls.navigator);
+
+                this._compassPan = proxy(this._compassPan, this);
+                compass.bind("pan", this._compassPan);
+
+                this._compassCenter = proxy(this._compassCenter, this);
+                compass.bind("center", this._compassCenter);
+            }
+        },
+
+        _compassPan: function(e) {
+            var map = this;
+            var scroller = map.scroller;
+
+            var x = -scroller.scrollLeft - e.x;
+            var y = -scroller.scrollTop + e.y;
+
+            map.scroller.one("scroll", function(e) { map._scrollEnd(e); });
+            map.scroller.scrollTo(x, y);
+        },
+
+        _compassCenter: function() {
+            this.center(this.options.center);
+        },
+
         _initScroller: function() {
             var scroller = this.scroller = new kendo.mobile.ui.Scroller(
                 this.element.children(0), {
@@ -251,12 +287,11 @@ kendo_module({
         },
 
         _scroll: function(e) {
-            var origin = this.locationToLayer(this._viewOrigin);
+            var origin = this.locationToLayer(this._viewOrigin).round();
             origin.x += e.scrollLeft;
             origin.y += e.scrollTop;
 
             this.origin(this.layerToLocation(origin));
-
             this.trigger("pan", {
                 originalEvent: e,
                 origin: this.origin(),
