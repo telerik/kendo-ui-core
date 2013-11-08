@@ -42,7 +42,12 @@
                 equal(loc.toString(), "80.112305,51.937117");
             });
 
+            test("toArray returns lat, lng array", function() {
+                deepEqual(loc.toArray(), [51.9371170300465, 80.11230468750001]);
+            });
+
             test("equals fails with different latitude", function() {
+
                 ok(!new Location(10, 20).equals(new Location(11, 20)));
             });
 

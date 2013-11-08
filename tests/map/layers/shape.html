@@ -10,7 +10,10 @@
 </head>
 <body>
     <script src="../../../src/kendo.core.js"></script>
-    <script src="../../../src/kendo.dataviz.core.js"></script>
+    <script src="../../../src/kendo.data.js"></script>
+    <script src="../../../src/kendo.fx.js"></script>
+    <script src="../../../src/kendo.userevents.js"></script>
+    <script src="../../../src/kendo.draganddrop.js"></script>
     <script src="../../../src/kendo.dataviz.core.js"></script>
     <script src="../../../src/dataviz/util.js"></script>
     <script src="../../../src/dataviz/geometry.js"></script>
@@ -21,6 +24,8 @@
     <script src="../../../src/map/location.js"></script>
     <script src="../../../src/map/crs.js"></script>
     <script src="../../../src/map/layers/shape.js"></script>
+    <script src="../../../src/map/layers/marker.js"></script>
+    <script src="helpers.js"></script>
     <script>
         var dataviz = kendo.dataviz,
             g = dataviz.geometry,
@@ -31,14 +36,47 @@
             Location = map.Location;
 
         (function() {
+            var map;
+            var layer;
+            var pointData = [{
+                "type": "Point",
+                "coordinates": [-105.01621, 39.57422]
+            }];
+
             // ------------------------------------------------------------
-            module("Shape Layer", {
+            module("Shape Layer / Markers", {
                 setup: function() {
+                    map = new MapMock();
+                    layer = new ShapeLayer(map);
                 }
             });
 
-            test("test_name", function() {
-                ok(true);
+            test("adds marker when parsing points", function() {
+                map.markers = {
+                    add: function() { ok(true); }
+                };
+
+                layer._load(pointData);
+            });
+
+            test("sets marker location", function() {
+                map.markers = {
+                    add: function(marker) {
+                        deepEqual(marker.options.location, [39.57422, -105.01621]);
+                    }
+                };
+
+                layer._load(pointData);
+            });
+
+            test("sets marker dataItem", function() {
+                map.markers = {
+                    add: function(marker) {
+                        deepEqual(marker.dataItem, pointData[0]);
+                    }
+                };
+
+                layer._load(pointData);
             });
         })();
     </script>

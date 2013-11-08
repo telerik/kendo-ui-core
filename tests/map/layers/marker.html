@@ -22,6 +22,7 @@
     <script src="../../../src/map/location.js"></script>
     <script src="../../../src/map/crs.js"></script>
     <script src="../../../src/map/layers/marker.js"></script>
+    <script src="helpers.js"></script>
     <link rel="stylesheet" href="../../../styles/dataviz/kendo.dataviz.css">
     <script>
         var Class = kendo.Class,
@@ -34,17 +35,6 @@
             Marker = map.Marker,
             MarkerLayer = map.layers.MarkerLayer,
             Location = map.Location;
-
-        var MapMock = kendo.Observable.extend({
-            init: function() {
-                this.scrollElement = $("#scroll-element");
-                kendo.Observable.fn.init.call(this);
-            },
-
-            locationToView: function(loc) {
-                return new g.Point(loc.lng, loc.lat);
-            }
-        });
 
         var LayerMock = Class.extend({
             init: function(element) {
@@ -418,11 +408,7 @@
     <div id="qunit-testrunner-toolbar"></div>
     <h2 id="qunit-userAgent"></h2>
     <ol id="qunit-tests"></ol>
-    <div id="qunit-fixture">
-        <div class="k-map">
-            <div id="scroll-element"></div>
-        </div>
-    </div>
+    <div id="qunit-fixture"></div>
     <ul id="log"></ul>
 
 </body>

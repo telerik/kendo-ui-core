@@ -70,6 +70,26 @@
             test("does not set fill", function() {
                 equal(result.options.fill, null);
             });
+
+            test("triggers shapeCreated on observer", function() {
+                loader.observer = {
+                    shapeCreated: function() {
+                        ok(true);
+                    }
+                };
+                result = loader.parse(item);
+            });
+
+            test("cancelling shapeCreated does not add shape", function() {
+                loader.observer = {
+                    shapeCreated: function(e) {
+                        return true;
+                    }
+                };
+
+                result = loader.parse(item);
+                ok(!result);
+            });
         })();
 
         (function() {
@@ -99,6 +119,38 @@
                 ok(result.children[0] instanceof d.Path);
                 ok(result.children[1] instanceof d.Path);
                 equal(result.children.length, 2);
+            });
+
+            test("triggers shapeCreated on observer", function() {
+                loader.observer = {
+                    shapeCreated: function() {
+                        ok(true);
+                    }
+                };
+                result = loader.parse(item);
+            });
+
+            test("cancelling shapeCreated does not add shape", function() {
+                loader.observer = {
+                    shapeCreated: function(e) {
+                        return true;
+                    }
+                };
+                result = loader.parse(item);
+
+                ok(!result);
+            });
+
+            test("cancelling shapeCreated leaves second shape intact", function() {
+                var i = 0;
+                loader.observer = {
+                    shapeCreated: function(e) {
+                        return i++ > 0;
+                    }
+                };
+                result = loader.parse(item);
+
+                ok(result instanceof d.Path);
             });
         })();
 
@@ -290,14 +342,31 @@
                 }
             });
 
-            test("triggers markerCreated on observer", function() {
+            test("parses to a circle", function() {
+                result = loader.parse(item);
+                ok(result instanceof d.Circle);
+            });
+
+            test("triggers shapeCreated on observer", function() {
                 loader.observer = {
-                    markerCreated: function() {
+                    shapeCreated: function() {
                         ok(true);
                     }
                 };
 
                 result = loader.parse(item);
+            });
+
+            test("cancelling shapeCreated does not add shape", function() {
+                loader.observer = {
+                    shapeCreated: function(e) {
+                        return true;
+                    }
+                };
+
+                result = loader.parse(item);
+
+                ok(!result);
             });
         })();
 
@@ -307,13 +376,14 @@
             var result;
 
             // ------------------------------------------------------------
-            module("GeoJSON Loader / MultiPolygon", {
+            module("GeoJSON Loader / MultiPoint", {
                 setup: function() {
                     loader = new map.GeoJSONLoader(locator, style);
-                    item = { "type": "MultiPolygon",
+                    item = {
+                        "type": "MultiPoint",
                         "coordinates": [
-                            [[[102.0, 2.0], [103.0, 2.0], [103.0, 3.0], [102.0, 3.0], [102.0, 2.0]]],
-                            [[[100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0], [100.0, 0.0]]]
+                            [-105.01621, 39.57422],
+                            [-80.6665134, 35.0539943]
                         ]
                     };
                     result = loader.parse(item);
@@ -324,10 +394,43 @@
                 ok(result instanceof d.Group);
             });
 
-            test("parses polygons to child paths", function() {
-                ok(result.children[0] instanceof d.Path);
-                ok(result.children[1] instanceof d.Path);
+            test("parses points to child circles", function() {
+                ok(result.children[0] instanceof d.Circle);
+                ok(result.children[1] instanceof d.Circle);
                 equal(result.children.length, 2);
+            });
+
+            test("triggers shapeCreated on observer", 2, function() {
+                loader.observer = {
+                    shapeCreated: function() {
+                        ok(true);
+                    }
+                };
+
+                result = loader.parse(item);
+            });
+
+            test("cancelling shapeCreated does not add shape", function() {
+                loader.observer = {
+                    shapeCreated: function(e) {
+                        return true;
+                    }
+                };
+                result = loader.parse(item);
+
+                ok(!result);
+            });
+
+            test("cancelling shapeCreated leaves second shape intact", function() {
+                var i = 0;
+                loader.observer = {
+                    shapeCreated: function(e) {
+                        return i++ > 0;
+                    }
+                };
+                result = loader.parse(item);
+
+                ok(result instanceof d.Circle);
             });
         })();
 

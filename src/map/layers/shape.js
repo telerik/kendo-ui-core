@@ -9,31 +9,22 @@
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
 
+        g = dataviz.geometry,
+
         d = dataviz.drawing,
         Group = d.Group,
 
         map = dataviz.map,
         Location = map.Location;
 
-    // Constants ==============================================================
-    var DEFAULT_WIDTH = 600,
-        DEFAULT_HEIGHT = 400;
-
     // Implementation =========================================================
     var ShapeLayer = Class.extend({
         init: function(map, options) {
-            options = deepExtend({}, options, {
-                width: map.element.width() || DEFAULT_WIDTH,
-                height: map.element.height() || DEFAULT_HEIGHT
-            });
-
             this._initOptions(options);
             this.map = map;
 
             this.element = $("<div class='k-layer'></div>")
-                .appendTo(map.scrollElement)
-                .css("width", options.width)
-                .css("height", options.height);
+                .appendTo(map.scrollElement);
 
             this.movable = new kendo.ui.Movable(this.element);
 
@@ -89,24 +80,6 @@
             this._load(data.items);
         },
 
-        shapeCreated: function(shape) {
-            var args = { layer: this, shape: shape };
-            return this.map.trigger("shapeCreated", args);
-        },
-
-        markerCreated: function(location, dataItem) {
-            var marker = new map.Marker(deepExtend(
-                { location: location },
-                this.map.options.markerDefaults
-            ));
-            marker.dataItem = dataItem;
-
-            var args = { marker: marker };
-            if (!this.map.trigger("markerCreated", args)) {
-                this.map.markers.add(marker);
-            }
-        },
-
         _load: function(data) {
             this._data = data;
             this.surface.clear();
@@ -116,6 +89,32 @@
                 if (shape) {
                     this.surface.draw(shape);
                 }
+            }
+        },
+
+        shapeCreated: function(shape) {
+            var cancelled = false;
+            if (shape instanceof d.Circle) {
+                this._createMarker(shape);
+                cancelled = true;
+            } else {
+                var args = { layer: this, shape: shape };
+                cancelled = this.map.trigger("shapeCreated", args);
+            }
+
+            return cancelled;
+        },
+
+        _createMarker: function(shape) {
+            var dataItem = shape.dataItem;
+            var marker = new map.Marker({
+               location: shape.location.toArray()
+            });
+            marker.dataItem = dataItem;
+
+            var args = { marker: marker };
+            if (!this.map.trigger("markerCreated", args)) {
+                this.map.markers.add(marker);
             }
         },
 
@@ -159,7 +158,7 @@
                 this._loadGeometryTo(root, item, item);
             }
 
-            if (root.children.length === 1) {
+            if (root.children.length < 2) {
                 root = root.children[0];
             }
 
@@ -167,18 +166,13 @@
         },
 
         _shapeCreated: function(shape) {
-            if (this.observer) {
-                return this.observer.shapeCreated(shape);
+            var cancelled = false;
+
+            if (this.observer && this.observer.shapeCreated) {
+                cancelled = this.observer.shapeCreated(shape);
             }
 
-            // Cancelled: false
-            return false;
-        },
-
-        _markerCreated: function(location, dataItem) {
-            if (this.observer) {
-                this.observer.markerCreated(location, dataItem);
-            }
+            return cancelled;
         },
 
         _loadGeometryTo: function(container, geometry, dataItem) {
@@ -210,26 +204,30 @@
                     break;
 
                 case "Point":
-                    this._loadPoint(coords, dataItem);
+                    this._loadPoint(container, coords, dataItem);
                     break;
 
                 case "MultiPoint":
                     for (i = 0; i < coords.length; i++) {
-                        this._loadPoint(coords[i], dataItem);
+                        this._loadPoint(container, coords[i], dataItem);
                     }
                     break;
             }
+        },
+
+        _loadShape: function(container, shape) {
+            if (!this._shapeCreated(shape)) {
+                container.append(shape);
+            }
+
+            return shape;
         },
 
         _loadPolygon: function(container, rings, dataItem) {
             var shape = this._buildPolygon(rings);
             shape.dataItem = dataItem;
 
-            if (!this._shapeCreated(shape)) {
-                container.append(shape);
-            }
-
-            return shape;
+            return this._loadShape(container, shape);
         },
 
         _buildPolygon: function(rings) {
@@ -253,8 +251,16 @@
             return path;
         },
 
-        _loadPoint: function(coords, dataItem) {
-            this._markerCreated(Location.fromLngLat(coords), dataItem);
+        _loadPoint: function(container, coords, dataItem) {
+            var location = Location.fromLngLat(coords);
+            var point = this.locator.locationToView(location);
+
+            var circle = new g.Circle(point, 1);
+            var shape = new d.Circle(circle);
+            shape.dataItem = dataItem;
+            shape.location = location;
+
+            return this._loadShape(container, shape);
         }
     });
 
