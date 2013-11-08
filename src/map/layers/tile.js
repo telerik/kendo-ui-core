@@ -16,7 +16,8 @@
         Point = g.Point,
 
         util = dataviz.util,
-        renderSize = util.renderSize;
+        renderSize = util.renderSize,
+        limit = util.limitValue;
 
     // Constants ==============================================================
     var DEFAULT_WIDTH = 600,
@@ -159,12 +160,12 @@
             };
         },
 
-        indexToPoint: function(index, offset) {
-            offset = offset || { x: 0, y: 0 };
+        indexToPoint: function(index) {
+            var x = index.x, y = index.y;
 
             return new Point(
-                index.x * this.options.tileSize + offset.x,
-                index.y * this.options.tileSize + offset.y);
+                x * this.options.tileSize,
+                y * this.options.tileSize);
         },
 
         subdomainText: function() {
@@ -204,12 +205,14 @@
             }
         },
 
-        createTile: function(index) {
-            var point = this.indexToPoint(index),
+        createTile: function(currentIndex) {
+            var index = this.wrapIndex(currentIndex),
+                point = this.indexToPoint(currentIndex),
                 offset = point.clone().subtract(this.basePoint),
                 urlTemplate = template(this.options.urlTemplate),
                 tileOptions = {
                     index: index,
+                    currentIndex: currentIndex,
                     point: point,
                     offset: roundPoint(offset),
                     zoom: this._zoom,
@@ -222,6 +225,25 @@
                 };
 
             return this.pool.get(this._center, tileOptions);
+        },
+
+        wrapIndex: function(index) {
+            var boundary = math.pow(2, this._zoom);
+            return {
+                x: this.wrapValue(index.x, boundary),
+                y: limit(index.y, 0, boundary - 1)
+            };
+        },
+
+        wrapValue: function(value, boundary) {
+            var remainder = (math.abs(value) % boundary);
+            if (value >= 0) {
+                value = remainder;
+            } else {
+                value = boundary - (remainder === 0 ? boundary : remainder);
+            }
+
+            return value;
         }
     });
 
@@ -247,7 +269,8 @@
 
             this.point = options.point;
             this.index = options.index;
-            this.id = "x:" + this.index.x + "y:" + this.index.y + "zoom:" + options.zoom;
+            this.currentIndex = options.currentIndex;
+            this.id = "x:" + this.currentIndex.x + "y:" + this.currentIndex.y + "zoom:" + options.zoom;
             this.visible = true;
         },
 
@@ -308,7 +331,9 @@
                 }
             }
 
-            if (!oldTile) {
+            if (oldTile) {
+                oldTile.load(options);
+            } else {
                 tile = new ImageTile(options);
                 this._items.push(tile);
             }
@@ -317,7 +342,7 @@
         },
 
         _tileId: function(options) {
-            return "x:" + options.index.x + "y:" + options.index.y + "zoom:" + options.zoom;
+            return "x:" + options.currentIndex.x + "y:" + options.currentIndex.y + "zoom:" + options.zoom;
         },
 
         _update: function(center, options) {

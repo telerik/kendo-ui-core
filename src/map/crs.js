@@ -63,7 +63,7 @@
                 r = datum.a,
                 lng0 = options.centralMeridian,
                 lat = limit(loc.lat, -proj.MAX_LAT, proj.MAX_LAT),
-                lng = limit(loc.lng, -proj.MAX_LNG, proj.MAX_LNG),
+                lng = loc.lng,
                 x = rad(lng - lng0) * r,
                 y = proj._projectLat(lat);
 
@@ -90,10 +90,10 @@
                 datum = options.datum,
                 r = datum.a,
                 lng0 = options.centralMeridian,
-                lng = limit(point.x / (DEG_TO_RAD * r) + lng0, -proj.MAX_LNG, proj.MAX_LNG),
+                lng = point.x / (DEG_TO_RAD * r) + lng0,
                 lat = limit(proj._inverseY(point.y), -proj.MAX_LAT, proj.MAX_LAT);
 
-            lng = limit(lng, -proj.MAX_LNG, proj.MAX_LNG);
+            lng = lng;
             lat = limit(lat, -proj.MAX_LAT, proj.MAX_LAT);
 
             return new Location(lat, lng);

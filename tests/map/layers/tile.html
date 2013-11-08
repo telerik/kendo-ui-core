@@ -2,21 +2,21 @@
 <html>
 <head>
     <title>Shape layer</title>
-    <script src="../jquery-loader.js"></script>
-    <script src="../qunit/qunit/qunit.js"></script>
-    <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
-    <script src="../kendo-test-helpers.js"></script>
-    <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+    <script src="../../jquery-loader.js"></script>
+    <script src="../../qunit/qunit/qunit.js"></script>
+    <script src="../../qunit/addons/close-enough/qunit-close-enough.js"></script>
+    <script src="../../kendo-test-helpers.js"></script>
+    <link href="../../qunit/qunit/qunit.css" rel="stylesheet"/>
 </head>
 <body>
-    <script src="../../src/kendo.core.js"></script>
-    <script src="../../src/kendo.dataviz.core.js"></script>
-    <script src="../../src/dataviz/util.js"></script>
-    <script src="../../src/dataviz/geometry.js"></script>
-    <script src="../../src/map/location.js"></script>
-    <script src="../../src/map/crs.js"></script>
-    <script src="../../src/map/layers/tile.js"></script>
-    <script src="../../src/map/main.js"></script>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.dataviz.core.js"></script>
+    <script src="../../../src/dataviz/util.js"></script>
+    <script src="../../../src/dataviz/geometry.js"></script>
+    <script src="../../../src/map/location.js"></script>
+    <script src="../../../src/map/crs.js"></script>
+    <script src="../../../src/map/layers/tile.js"></script>
+    <script src="../../../src/map/main.js"></script>
     <script>
         var dataviz = kendo.dataviz,
             map = dataviz.map,
@@ -34,10 +34,14 @@
             var view;
 
             function createView(options) {
+                options = options || {};
+
                 var element = $("<div class='k-layer' style='width: 800px; height: 800px;'></div>")
                                 .appendTo(document.body);
 
-                view = new TileView(element, {});
+                view = new TileView(element, {
+                    tileSize: options.tileSize || 256
+                });
 
                 view.center(new Point(2400, 1500));
                 view.extent({
@@ -45,7 +49,7 @@
                     se: new Point(2760, 1810)
                 });
                 // top left corner
-                view.basePoint = new Point(1960, 1210);
+                view.basePoint = options.basePoint || new Point(1960, 1210);
                 view.subdomainIndex = 0;
                 view.zoom(4);
             }
@@ -74,11 +78,14 @@
             });
 
             test("indexToPoint should return the corret tile point", function() {
-                ok(view.indexToPoint({ x: 1, y: 1}).equals(new Point(256, 256)));
+                ok(view.indexToPoint({ x: 1, y: 1 }).equals(new Point(256, 256)));
+                ok(view.indexToPoint({ x: -1, y: -1 }).equals(new Point(-256, -256)));
             });
 
             test("pointToTileIndex should return the corret tile index", function() {
-                ok(view.pointToTileIndex({ x: 257, y: 257}).equals(new Point(1, 1)));
+                view.zoom(3);
+                ok(view.pointToTileIndex({ x: 256, y: 256 }).equals(new Point(1, 1)));
+                ok(view.pointToTileIndex({ x: -256, y: 0 }).equals(new Point(-1, 0)));
             });
 
             test("subdomainText should return the corect subdomain", function() {
@@ -102,9 +109,41 @@
                 var tile = view.createTile(index);
                 ok(tile.point.equals(new Point(256, 256)));
                 ok(tile.offset.equals(new Point(-1704, -954)));
-                equal(tile.index, index);
+                equal(tile.index.x, index.x);
+                equal(tile.index.y, index.y);
                 equal(tile.url, "a/4/1/1.png");
                 ok(!tile.visible);
+            });
+
+            test("createTile should return the correct offset", function() {
+                createView({ basePoint: new Point(10, 10), tileSize: 10 });
+                view.zoom(3);
+                var index = { x: -1, y: 0 };
+                var offset = view.createTile(index).offset;
+                equal(offset.x, -20);
+                equal(offset.y, -10);
+
+                createView({ basePoint: new Point(10, 10), tileSize: 10 });
+                view.zoom(3);
+                var index = { x: 8, y: 0 };
+                var offset = view.createTile(index).offset;
+                equal(offset.x, 70);
+                equal(offset.y, -10);
+            });
+
+            test("wrapValue should set the index of the tiles in the current matrix size", function() {
+                view.zoom(3);
+                var boundary = 8;
+                equal(view.wrapValue(1, boundary), 1);
+                equal(view.wrapValue(7, boundary), 7);
+                equal(view.wrapValue(8, boundary), 0);
+                equal(view.wrapValue(9, boundary), 1);
+                equal(view.wrapValue(-1, boundary), 7);
+                equal(view.wrapValue(-8, boundary), 0);
+                equal(view.wrapValue(-9, boundary), 7);
+                equal(view.wrapValue(-14, boundary), 2);
+                equal(view.wrapValue(-16, boundary), 0);
+
             });
 
         })();
@@ -120,6 +159,7 @@
                 for (var i = 0; i < count; i++) {
                     pool.get({ x: 5, y: 5 },{
                         index: new Point(i, i),
+                        currentIndex: new Point(i, i),
                         point: new Point(i, i),
                         offset: new Point(i, i)
                     });
@@ -153,7 +193,7 @@
 
             test("_tileId should return correct id", function() {
                 var id = pool._tileId({
-                    index: {
+                    currentIndex: {
                         x: 0,
                         y: 0
                     },
@@ -169,12 +209,14 @@
             // value or initial value
             options = options || {};
             options.index = options.index || { x: 0, y: 0 };
+            options.currentIndex = options.index || { x: 0, y: 0 };
             options.offset = options.offset || { x: 0, y: 0 };
             options.point = options.point || { x: 0, y: 0 };
 
             return new ImageTile({
                 url: options.url || "",
                 index: new Point(options.index.x, options.index.y),
+                currentIndex: new Point(options.currentIndex.x, options.currentIndex.y),
                 offset: new Point(options.offset.x, options.offset.y),
                 point: new Point(options.point.x, options.point.y),
                 zoom: options.zoom || 1
@@ -246,6 +288,10 @@
                         x: 1,
                         y: 1
                     },
+                    currentIndex: {
+                        x: 1,
+                        y: 1
+                    },
                     offset: {
                         x: 20,
                         y: 10
@@ -258,6 +304,10 @@
             test("should render offset", function() {
                 tile.load({
                     index: {
+                        x: 1,
+                        y: 1
+                    },
+                    currentIndex: {
                         x: 1,
                         y: 1
                     },
@@ -277,6 +327,10 @@
                         x: 1,
                         y: 1
                     },
+                    currentIndex: {
+                        x: 1,
+                        y: 1
+                    },
                     offset: {
                         x: 1,
                         y: 1
@@ -290,6 +344,10 @@
             test("should set visible to true", function() {
                 tile.load({
                     index: {
+                        x: 1,
+                        y: 1
+                    },
+                    currentIndex: {
                         x: 1,
                         y: 1
                     },
