@@ -110,7 +110,8 @@
             test("renders no z-index by default", function() {
                 marker = new Marker();
                 marker.addTo(layer);
-                equal(marker.element.css("zIndex"), "");
+                var zIndex = marker.element.css("zIndex");
+                ok(zIndex == "" || zIndex == "auto");
             });
 
             test("renders z-index", function() {
