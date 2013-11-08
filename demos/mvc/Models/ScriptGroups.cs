@@ -59,6 +59,7 @@ namespace Kendo.Models
             "map/crs.js",
             "map/layers/shape.js",
             "map/layers/tile.js",
+            "map/layers/marker.js",
             "map/main.js",
 
             "kendo.combobox.js",

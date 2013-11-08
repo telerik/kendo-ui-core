@@ -75,6 +75,7 @@ file_merge "src/kendo.dataviz.map.js" => [
     "src/map/crs.js",
     "src/map/layers/shape.js",
     "src/map/layers/tile.js",
+    "src/map/layers/marker.js",
     "src/map/main.js"
 ]
 file "src/kendo.dataviz.map.js" => JS_BUILDFILE
