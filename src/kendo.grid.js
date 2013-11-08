@@ -836,7 +836,7 @@ kendo_module({
             var left;
 
             if (!resizeHandle) {
-                resizeHandle = that.resizeHandle = $('<div class="k-resize-handle"/>');
+                resizeHandle = that.resizeHandle = $('<div class="k-resize-handle"><div class="k-resize-handle-inner"></div></div>');
                 container.append(resizeHandle);
             }
 
@@ -2442,7 +2442,7 @@ kendo_module({
                                 options.mobile === "tablet";
 
             if (this._isMobile) {
-                var html = this.wrapper.wrap(
+                var html = this.wrapper.addClass("k-grid-mobile").wrap(
                         '<div data-' + kendo.ns + 'role="view" ' +
                         'data-' + kendo.ns + 'init-widgets="false"></div>'
                     )

@@ -393,7 +393,9 @@ textarea.k-textbox:hover,
 .k-tool-icon,
 .k-grouping-dropclue,
 .k-drop-hint,
-.k-column-menu .k-sprite
+.k-column-menu .k-sprite,
+.k-grid-mobile .k-resize-handle-inner:before,
+.k-grid-mobile .k-resize-handle-inner:after
 {
     background-image: @sprite-image;
     border-color: transparent;
@@ -1399,7 +1401,12 @@ div.k-imagebrowser-dropzone em
     .border-radius(@inner-border-radius - 1);
 }
 
-/* Column Menu in Adaptive Grid */
+/* Adaptive Grid */
+
+.k-grid-mobile .k-column-active + th.k-header
+{
+    border-left-color: @widget-text-color;
+}
 
 .k-ie .km-pane-wrapper .k-widget,
 .k-ie .km-pane-wrapper .k-group,

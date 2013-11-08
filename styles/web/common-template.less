@@ -5287,6 +5287,43 @@ div[name="recurrenceRule"] > .k-dropdown
     margin: 0;
 }
 
+.k-grid-mobile .k-resize-handle-inner
+{
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    left: -7px;
+    width: 17px;
+    height: 17px;
+    border-style: solid;
+    border-width: 2px;
+    .border-radius(10px);
+}
+
+.k-grid-mobile .k-resize-handle-inner:before
+{
+    content: "";
+    position: absolute;
+    top: 50%;
+    margin-top: -3px;
+    left: 1px;
+    width: 6px;
+    height: 6px;
+    background-position: -5px -53px;
+}
+
+.k-grid-mobile .k-resize-handle-inner:after
+{
+    content: "";
+    position: absolute;
+    top: 50%;
+    margin-top: -3px;
+    right: 1px;
+    width: 6px;
+    height: 6px;
+    background-position: -5px -21px;
+}
+
 /* Adaptive Grid & Scheduler */
 
 .km-pane-wrapper .km-pane *
