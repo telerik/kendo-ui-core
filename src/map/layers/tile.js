@@ -16,7 +16,8 @@
         Point = g.Point,
 
         util = dataviz.util,
-        renderSize = util.renderSize;
+        renderSize = util.renderSize,
+        limit = util.limitValue;
 
     // Constants ==============================================================
     var DEFAULT_WIDTH = 600,
@@ -159,7 +160,7 @@
             };
         },
 
-        indexToPoint: function(index, currentIndex) {
+        indexToPoint: function(index) {
             var x = index.x, y = index.y;
 
             return new Point(
@@ -205,8 +206,8 @@
         },
 
         createTile: function(currentIndex) {
-            var index = this.limit(currentIndex),
-                point = this.indexToPoint(index, currentIndex),
+            var index = this.wrapIndex(currentIndex),
+                point = this.indexToPoint(currentIndex),
                 offset = point.clone().subtract(this.basePoint),
                 urlTemplate = template(this.options.urlTemplate),
                 tileOptions = {
@@ -226,19 +227,20 @@
             return this.pool.get(this._center, tileOptions);
         },
 
-        limit: function(index) {
+        wrapIndex: function(index) {
+            var boundary = math.pow(2, this._zoom);
             return {
-                x: this.limitValue(index.x),
-                y: this.limitValue(index.y)
+                x: this.wrapValue(index.x, boundary),
+                y: limit(index.y, 0, boundary - 1)
             };
         },
 
-        limitValue: function(value) {
-            var limit = math.pow(2, this._zoom) - 1;
+        wrapValue: function(value, boundary) {
+            var remainder = (math.abs(value) % boundary);
             if (value >= 0) {
-                value = value % limit;
+                value = remainder;
             } else {
-                value = limit + value % limit;
+                value = boundary - (remainder === 0 ? boundary : remainder);
             }
 
             return value;

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shape layer</title>
+    <script src="../../jquery-loader.js"></script>
+    <script src="../../qunit/qunit/qunit.js"></script>
+    <script src="../../qunit/addons/close-enough/qunit-close-enough.js"></script>
+    <script src="../../kendo-test-helpers.js"></script>
+    <link href="../../qunit/qunit/qunit.css" rel="stylesheet"/>
+</head>
+<body>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.dataviz.core.js"></script>
+    <script src="../../../src/dataviz/util.js"></script>
+    <script src="../../../src/dataviz/geometry.js"></script>
+    <script src="../../../src/map/location.js"></script>
+    <script src="../../../src/map/crs.js"></script>
+    <script src="../../../src/map/layers/tile.js"></script>
+    <script src="../../../src/map/main.js"></script>
+    <script>
+        var dataviz = kendo.dataviz,
+            map = dataviz.map,
+
+            TilePool = map.layers.TilePool,
+            ImageTile = map.layers.ImageTile,
+            TileView = map.layers.TileView,
+            Location = map.Location,
+
+            Point = dataviz.geometry.Point;
+
+
+        (function() {
+
+            var view;
+
+            function createView(options) {
+                options = options || {};
+
+                var element = $("<div class='k-layer' style='width: 800px; height: 800px;'></div>")
+                                .appendTo(document.body);
+
+                view = new TileView(element, {
+                    tileSize: options.tileSize || 256
+                });
+
+                view.center(new Point(2400, 1500));
+                view.extent({
+                    nw: new Point(1960, 1210),
+                    se: new Point(2760, 1810)
+                });
+                // top left corner
+                view.basePoint = options.basePoint || new Point(1960, 1210);
+                view.subdomainIndex = 0;
+                view.zoom(4);
+            }
+
+            // ------------------------------------------------------------
+            module("Tile view", {
+                setup: function() {
+                    createView();
+                },
+                teardown: function() {
+                    $(".k-layer").remove();
+                }
+            });
+
+            test("should render tiles", function() {
+                view.render();
+                ok(view.element.children().length === 16);
+            });
+
+            test("tileCount should calculate the matrix", function() {
+                deepEqual(view.tileCount(), { x: 4, y: 4 });
+            });
+
+            test("size should calculate the corrent size", function() {
+                deepEqual(view.size(), { width: 800, height: 600 });
+            });
+
+            test("indexToPoint should return the corret tile point", function() {
+                ok(view.indexToPoint({ x: 1, y: 1 }).equals(new Point(256, 256)));
+                ok(view.indexToPoint({ x: -1, y: -1 }).equals(new Point(-256, -256)));
+            });
+
+            test("pointToTileIndex should return the corret tile index", function() {
+                view.zoom(3);
+                ok(view.pointToTileIndex({ x: 256, y: 256 }).equals(new Point(1, 1)));
+                ok(view.pointToTileIndex({ x: -256, y: 0 }).equals(new Point(-1, 0)));
+            });
+
+            test("subdomainText should return the corect subdomain", function() {
+                equal(view.subdomainText(), "a");
+            });
+
+            test("clear should clear the tile pool", function() {
+                view.clear();
+                equal(view.pool._items.length, 0);
+            });
+
+            test("destroy should clear the element and the pool", function() {
+                view.destroy();
+                equal(view.pool._items.length, 0);
+                equal(view.element.children().length, 0);
+            });
+
+            test("createTile should render tile from a tile index", function() {
+                view.options.urlTemplate = "#= subdomain #/#= zoom #/#= x #/#= y #.png";
+                var index = { x: 1, y:1 };
+                var tile = view.createTile(index);
+                ok(tile.point.equals(new Point(256, 256)));
+                ok(tile.offset.equals(new Point(-1704, -954)));
+                equal(tile.index.x, index.x);
+                equal(tile.index.y, index.y);
+                equal(tile.url, "a/4/1/1.png");
+                ok(!tile.visible);
+            });
+
+            test("createTile should return the correct offset", function() {
+                createView({ basePoint: new Point(10, 10), tileSize: 10 });
+                view.zoom(3);
+                var index = { x: -1, y: 0 };
+                var offset = view.createTile(index).offset;
+                equal(offset.x, -20);
+                equal(offset.y, -10);
+
+                createView({ basePoint: new Point(10, 10), tileSize: 10 });
+                view.zoom(3);
+                var index = { x: 8, y: 0 };
+                var offset = view.createTile(index).offset;
+                equal(offset.x, 70);
+                equal(offset.y, -10);
+            });
+
+            test("wrapValue should set the index of the tiles in the current matrix size", function() {
+                view.zoom(3);
+                var boundary = 8;
+                equal(view.wrapValue(1, boundary), 1);
+                equal(view.wrapValue(7, boundary), 7);
+                equal(view.wrapValue(8, boundary), 0);
+                equal(view.wrapValue(9, boundary), 1);
+                equal(view.wrapValue(-1, boundary), 7);
+                equal(view.wrapValue(-8, boundary), 0);
+                equal(view.wrapValue(-9, boundary), 7);
+                equal(view.wrapValue(-14, boundary), 2);
+                equal(view.wrapValue(-16, boundary), 0);
+
+            });
+
+        })();
+
+
+        (function() {
+
+            var tile,
+                pool;
+
+            function addItemsToPool(count) {
+                count = count || 15;
+                for (var i = 0; i < count; i++) {
+                    pool.get({ x: 5, y: 5 },{
+                        index: new Point(i, i),
+                        currentIndex: new Point(i, i),
+                        point: new Point(i, i),
+                        offset: new Point(i, i)
+                    });
+                }
+            }
+
+            // ------------------------------------------------------------
+            module("Tile layer / Pool", {
+                setup: function() {
+                    pool = new TilePool();
+                }
+            });
+
+            test("should not have more then 10 items", function() {
+                pool.options.maxSize = 10;
+                addItemsToPool();
+                equal(pool._items.length, 10);
+            });
+
+            test("empty should remove the items", function() {
+                addItemsToPool();
+                pool.empty();
+                equal(pool._items.length, 0);
+            });
+
+            test("should reuse the items", function() {
+                pool.options.maxSize = 10;
+                addItemsToPool(11);
+                ok(pool._items[0].index.equals(new Point(10, 10)));
+            });
+
+            test("_tileId should return correct id", function() {
+                var id = pool._tileId({
+                    currentIndex: {
+                        x: 0,
+                        y: 0
+                    },
+                    zoom: 0
+                });
+
+                equal(id, "x:0y:0zoom:0");
+            });
+
+        })();
+
+        function createImageTile(options) {
+            // value or initial value
+            options = options || {};
+            options.index = options.index || { x: 0, y: 0 };
+            options.currentIndex = options.index || { x: 0, y: 0 };
+            options.offset = options.offset || { x: 0, y: 0 };
+            options.point = options.point || { x: 0, y: 0 };
+
+            return new ImageTile({
+                url: options.url || "",
+                index: new Point(options.index.x, options.index.y),
+                currentIndex: new Point(options.currentIndex.x, options.currentIndex.y),
+                offset: new Point(options.offset.x, options.offset.y),
+                point: new Point(options.point.x, options.point.y),
+                zoom: options.zoom || 1
+            });
+        }
+
+        (function() {
+            var tile;
+
+            // ------------------------------------------------------------
+            module("Tile layer / ImageTile");
+
+            test("should render url", function() {
+                tile = createImageTile({
+                    url: "url"
+                });
+
+                equal(tile.element.attr("src"), "url");
+            });
+
+            test("should render offset", function() {
+                tile = createImageTile({
+                    offset: {
+                        x: 20,
+                        y: 10
+                    }
+                });
+
+                equal(parseInt(tile.element.css("top")), 10);
+                equal(parseInt(tile.element.css("left")), 20);
+            });
+
+            test("should have id", function() {
+                tile = createImageTile({
+                    index: {
+                        x: 1,
+                        y: 1
+                    },
+                    zoom: 1
+                });
+
+                ok(tile.id === "x:1y:1zoom:1");
+            });
+
+            test("initial visible should be false", function() {
+                tile = createImageTile();
+
+                ok(!tile.visible);
+            });
+
+            test("destroy should remove the element", function() {
+                tile = createImageTile();
+                tile.destroy();
+
+                ok(!tile.element);
+            });
+
+            // ------------------------------------------------------------
+            module("Tile layer / ImageTile/ Update", {
+                setup: function() {
+                    tile = createImageTile();
+                }
+            });
+
+            test("should render url", function() {
+                tile.load({
+                    url: "url",
+                    index: {
+                        x: 1,
+                        y: 1
+                    },
+                    currentIndex: {
+                        x: 1,
+                        y: 1
+                    },
+                    offset: {
+                        x: 20,
+                        y: 10
+                    }
+                });
+
+                equal(tile.element.attr("src"), "url");
+            });
+
+            test("should render offset", function() {
+                tile.load({
+                    index: {
+                        x: 1,
+                        y: 1
+                    },
+                    currentIndex: {
+                        x: 1,
+                        y: 1
+                    },
+                    offset: {
+                        x: 20,
+                        y: 10
+                    }
+                });
+
+                equal(parseInt(tile.element.css("top")), 10);
+                equal(parseInt(tile.element.css("left")), 20);
+            });
+
+            test("should have id", function() {
+                tile.load({
+                    index: {
+                        x: 1,
+                        y: 1
+                    },
+                    currentIndex: {
+                        x: 1,
+                        y: 1
+                    },
+                    offset: {
+                        x: 1,
+                        y: 1
+                    },
+                    zoom: 1
+                });
+
+                equal(tile.id, "x:1y:1zoom:1");
+            });
+
+            test("should set visible to true", function() {
+                tile.load({
+                    index: {
+                        x: 1,
+                        y: 1
+                    },
+                    currentIndex: {
+                        x: 1,
+                        y: 1
+                    },
+                    offset: {
+                        x: 1,
+                        y: 1
+                    }
+                });
+
+                ok(tile.visible);
+            });
+
+        })();
+
+    </script>
+
+    <h1 id="qunit-header">kendo.map</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+
+</body>
+</html>
