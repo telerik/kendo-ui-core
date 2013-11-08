@@ -239,11 +239,17 @@ kendo_module({
             var map = this;
             var scroller = map.scroller;
 
-            var x = -scroller.scrollLeft - e.x;
-            var y = -scroller.scrollTop + e.y;
+            var bounds = this._virtualSize;
+            var height = this.element.height();
+            var width = this.element.width();
+
+            // TODO: Move limits in scroller
+            var x = limit(-scroller.scrollLeft - e.x, bounds.x.min, bounds.x.max - width);
+            var y = scroller.scrollTop - e.y;
+            y = limit(y, bounds.y.min, bounds.y.max - height);
 
             map.scroller.one("scroll", function(e) { map._scrollEnd(e); });
-            map.scroller.scrollTo(x, y);
+            map.scroller.scrollTo(x, -y);
         },
 
         _compassCenter: function() {
@@ -327,13 +333,17 @@ kendo_module({
             x.makeVirtual();
             y.makeVirtual();
 
+            var xBounds = { min: -topLeft.x, max: scale - topLeft.x };
             if (this.options.wraparound) {
-                x.virtualSize(-maxScale, maxScale);
-            } else {
-                x.virtualSize(-topLeft.x, scale - topLeft.x);
+                xBounds.min = -maxScale;
+                xBounds.max = maxScale;
             }
+            x.virtualSize(xBounds.min, xBounds.max);
 
-            y.virtualSize(-topLeft.y, scale - topLeft.y);
+            var yBounds = { min: -topLeft.y, max: scale - topLeft.y };
+            y.virtualSize(yBounds.min, yBounds.max);
+
+            this._virtualSize = { x: xBounds, y: yBounds };
         },
 
         _renderLayers: function() {
