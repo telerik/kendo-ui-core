@@ -787,7 +787,7 @@ kendo_module({
 
             editor.size((bounds.width - 20) * diagram.zoom(), editorHeight * diagram.zoom());
 
-            var tp = diagram.transformPoint(bounds.topLeft());
+            var tp = diagram.toOrigin(bounds.topLeft());
 
             editor.position(tp.plus(formattingOffset));
             nativeEditor.css({ fontSize: (15 * diagram.zoom()) || 0 });
@@ -1318,8 +1318,8 @@ kendo_module({
             return sb.contains(p) ? -1 : (tb.contains(p) ? 1 : 0);
         },
         refresh: function () {
-            this.spVisual.redraw({ center: this.diagram.transformPoint(this.connection.sourcePoint()) });
-            this.epVisual.redraw({ center: this.diagram.transformPoint(this.connection.targetPoint()) });
+            this.spVisual.redraw({ center: this.diagram.toOrigin(this.connection.sourcePoint()) });
+            this.epVisual.redraw({ center: this.diagram.toOrigin(this.connection.targetPoint()) });
         }
     });
 
@@ -1477,14 +1477,14 @@ kendo_module({
         bounds: function (value) {
             if (value) {
                 this._innerBounds = value.clone();
-                this._bounds = this.diagram.transformRect(value).inflate(this.options.offset, this.options.offset);
+                this._bounds = this.diagram.toOrigin(value).inflate(this.options.offset, this.options.offset);
             }
             else {
                 return this._bounds;
             }
         },
         _hitTest: function (p) {
-            var tp = this.diagram.transformPoint(p),
+            var tp = this.diagram.toOrigin(p),
                 i, hit, handleBounds, handlesCount = this.map.length, handle;
             if (this._angle) {
                 tp = tp.clone().rotate(this._bounds.center(), this._angle);
@@ -1720,7 +1720,7 @@ kendo_module({
             return unit;
         },
         refreshBounds: function () {
-            var bounds = this.shapes.length == 1 ? this.shapes[0].bounds().clone() : this.diagram.getOriginBoundingBox(this.shapes);
+            var bounds = this.shapes.length == 1 ? this.shapes[0].bounds().clone() : this.diagram.getBoundingBox(this.shapes, true);
             this.bounds(bounds);
         },
         refresh: function () {
@@ -1784,7 +1784,7 @@ kendo_module({
             this.refresh();
         },
         refresh: function () {
-            var visualBounds = Rect.fromPoints(this.diagram.transformPoint(this._sp), this.diagram.transformPoint(this._ep));
+            var visualBounds = Rect.fromPoints(this.diagram.toOrigin(this._sp), this.diagram.toOrigin(this._ep));
             this.bounds(Rect.fromPoints(this._sp, this._ep));
             this.visual.position(visualBounds.topLeft());
             this.visual.redraw({ height: visualBounds.height + 1, width: visualBounds.width + 1 });
@@ -1803,7 +1803,7 @@ kendo_module({
             this.visual.background(value ? this.options.hoveredBackground : this.options.background);
         },
         refresh: function () {
-            var p = this._c.shape.diagram.transformPoint(this._c.position()),
+            var p = this._c.shape.diagram.toOrigin(this._c.position()),
                 relative = p.minus(this._c.shape.bounds("transformed").topLeft()),
                 value = new Rect(p.x, p.y, 0, 0);
             value.inflate(this.options.width / 2, this.options.height / 2);
@@ -1811,7 +1811,7 @@ kendo_module({
             this.visual.redraw({ center: new Point(relative.x, relative.y) });
         },
         _hitTest: function (p) {
-            var tp = this._c.shape.diagram.transformPoint(p);
+            var tp = this._c.shape.diagram.toOrigin(p);
             return this._visualBounds.contains(tp);
         }
     });

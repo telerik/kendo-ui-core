@@ -446,7 +446,7 @@ kendo_module({
 
                     this.shapeVisual.redraw({ width: value.width, height: value.height });
                     this.refreshConnections();
-                    this.triggerBoundsChange();
+                    this._triggerBoundsChange();
                 }
             }
             else {
@@ -474,11 +474,6 @@ kendo_module({
             }
             else {
                 return this._bounds.topLeft();
-            }
-        },
-        triggerBoundsChange: function () {
-            if (this.diagram) {
-                this.diagram.trigger(BOUNDSCHANGE, {item: this, bounds: this._bounds.clone()}); // the trigger modifies the arguments internally.
             }
         },
         /**
@@ -612,6 +607,11 @@ kendo_module({
             }
             this.shapeVisual.redraw(options);
         },
+        _triggerBoundsChange: function () {
+            if (this.diagram) {
+                this.diagram.trigger(BOUNDSCHANGE, {item: this, bounds: this._bounds.clone()}); // the trigger modifies the arguments internally.
+            }
+        },
         _transformPoint: function (absolutePoint) {
             var rotate = this.rotate(),
                 bounds = this.bounds(),
@@ -627,7 +627,7 @@ kendo_module({
             var bounds = this.bounds(),
                 tl = bounds.topLeft(),
                 br = bounds.bottomRight();
-            return Rect.fromPoints(this.diagram.transformPoint(tl), this.diagram.transformPoint(br));
+            return Rect.fromPoints(this.diagram.toOrigin(tl), this.diagram.toOrigin(br));
         },
         _rotatedBounds: function () {
             var bounds = this.bounds().rotatedBounds(this.rotate().angle),
@@ -1130,7 +1130,6 @@ kendo_module({
             // TODO: We may consider using real Clipboard, but is very hacky to do so.
             that._clipboard = [];
             that._drop();
-
         },
         options: {
             name: "Diagram",
@@ -1167,10 +1166,8 @@ kendo_module({
                 that.scroller.element.remove();
             }
         },
-
         save: function () {
             var json = {}, i, shape, con;
-            //deepExtend(json, {options: this.options});
             json.options = this.options;
             json.shapes = [];
             json.connections = [];
@@ -1205,7 +1202,6 @@ kendo_module({
                 this.addConnection(new Connection(from, to, options));
             }
         },
-
         focus: function () {
             var x = window.scrollX, y = window.scrollY;
             this.canvas.focus();
@@ -1221,7 +1217,6 @@ kendo_module({
             that.mainLayer.clear();
             that._initialize();
         },
-
         connect: function (source, target, options) {
             var connection = new Connection(source, target, options);
             return this.addConnection(connection);
@@ -1235,7 +1230,6 @@ kendo_module({
             }
             return false;
         },
-
         addConnection: function (connection, undoable) {
             if (undoable === undefined) {
                 undoable = true;
@@ -1307,7 +1301,6 @@ kendo_module({
         redo: function () {
             this.undoRedoService.redo();
         },
-
         /**
          * Selects items on the basis of the given input or returns the current selection if none.
          * @param itemsOrRect DiagramElement, Array of elements, "All", false or Rect. A value 'false' will deselect everything.
@@ -1374,7 +1367,6 @@ kendo_module({
                 return this._selectedItems; // returns all selected items.
             }
         },
-
         toFront: function (items, undoable) {
             var result = this._getDiagramItems(items), indices;
             if (Utils.isUndefined(undoable) || undoable) {
@@ -1596,7 +1588,7 @@ kendo_module({
 
             }
         },
-
+        // Miro: I would make that private and/or use toOrigin instead.
         documentToCanvasPoint: function (dPoint) {
             var scroll = this._pan;
 
@@ -1607,59 +1599,60 @@ kendo_module({
 
             return new Point(point.x - containerOffset.left, point.y - containerOffset.top);
         },
-        getBoundingBox: function (items) {
-            var rect = Rect.empty(),
+        /**
+         * Gets the bounding rectangle of the given items.
+         * @param items DiagramElement, Array of elements.
+         * @param origin Boolean. Pass 'true' if you need to get the bounding box of the shapes without their rotation offset.
+         * @returns {Rect}
+         */
+        getBoundingBox: function (items, origin) {
+            var rect = Rect.empty(), temp,
                 di = Utils.isDefined(items) ? this._getDiagramItems(items) : {shapes: this.shapes};
             if (di.shapes.length > 0) {
                 var item = di.shapes[0];
-                rect = item.bounds("rotated");
-                for (var i = 1; i < di.shapes.length; i++) {
-                    item = di.shapes[i];
-                    rect = rect.union(item.bounds("rotated"));
+                if (origin === true) {
+                    rect.x -= item._rotationOffset.x;
+                    rect.y -= item._rotationOffset.y;
                 }
-            }
-            return rect;
-        },
-        getOriginBoundingBox: function (items) {
-            var rect = Rect.empty(), di = this._getDiagramItems(items), temp;
-            if (di.shapes.length > 0) {
-                var item = di.shapes[0];
                 rect = item.bounds("rotated");
-                rect.x -= item._rotationOffset.x;
-                rect.y -= item._rotationOffset.y;
                 for (var i = 1; i < di.shapes.length; i++) {
                     item = di.shapes[i];
                     temp = item.bounds("rotated");
-                    temp.x -= item._rotationOffset.x;
-                    temp.y -= item._rotationOffset.y;
+                    if (origin === true) {
+                        temp.x -= item._rotationOffset.x;
+                        temp.y -= item._rotationOffset.y;
+                    }
                     rect = rect.union(temp);
                 }
             }
             return rect;
         },
-        transformPoint: function (p) { // transforms point from main canvas coordinates to non-transformed (origin).
-            var result = p;
-            if (this._matrix) {
-                result = this._matrix.apply(p);
+        /**
+         * Transforms point or rect from main canvas coordinates to non-transformed (origin).
+         * @param value Point, Rect.
+         * @returns {Point, Rect}
+         */
+        toOrigin: function (value) {
+            var result = value;
+            if (value instanceof Point) {
+                if (this._matrix) {
+                    result = this._matrix.apply(value);
+                }
             }
-            return result;
-        },
-        transformRect: function (r) { // transforms rect from main canvas coordinates to non-transformed (origin).
-            var tl = this.transformPoint(r.topLeft()),
-                br = this.transformPoint(r.bottomRight()),
+            else {
+                var tl = this.toOrigin(value.topLeft()),
+                    br = this.toOrigin(value.bottomRight());
                 result = Rect.fromPoints(tl, br);
+            }
             return result;
         },
         setDataSource: function (dataSource) {
             this.options.dataSource = dataSource;
-
             this._dataSource();
-
             if (this.options.autoBind) {
                 this.dataSource.fetch();
             }
         },
-
         /**
          * Performs a diagram layout of the given type.
          * @param layoutType The layout algorithm to be applied (TreeLayout, LayeredLayout, SpringLayout).
