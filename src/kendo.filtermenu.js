@@ -108,7 +108,7 @@ kendo_module({
                                 '</select>' +
                             '#}else{#' +
                                 '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="#=inputType#" '+
-                                '#=role==="numerictextbox" ? "data-" + ns + "role=\'" + role + "\'" : ""# />'+
+                                '#=useRole ? "data-" + ns + "role=\'" + role + "\'" : ""# />'+
                             '#}#' +
                         '</label></li>'+
                         '#if(extra){#'+
@@ -135,7 +135,7 @@ kendo_module({
                                     '</select>' +
                                 '#}else{#' +
                                     '<input data-#=ns#bind="value:filters[1].value" class="k-textbox" type="#=inputType#" '+
-                                    '#=role==="numerictextbox" ? "data-" + ns + "role=\'" + role + "\'" : ""# />'+
+                                    '#=useRole ? "data-" + ns + "role=\'" + role + "\'" : ""# />'+
                                 '#}#' +
                             '</label></li>'+
                         '#}#'+
@@ -402,6 +402,7 @@ kendo_module({
                     operators: operators,
                     type: type,
                     role: role,
+                    useRole: (!kendo.support.input.date && type === "date") || type === "number",
                     inputType: mobileRoles[type],
                     values: convertItems(options.values)
                 }));
