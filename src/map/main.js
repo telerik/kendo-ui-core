@@ -280,19 +280,25 @@ kendo_module({
 
         _resetScroller: function() {
             var scroller = this.scroller;
+            var x = scroller.dimensions.x;
+            var y = scroller.dimensions.y;
+            var scale = this.scale();
+            var maxScale = 20 * scale;
+            var nw = this.extent().nw;
+            var topLeft = this.locationToLayer(nw).round();
 
             scroller.reset();
 
-            scroller.dimensions.y.makeVirtual();
-            scroller.dimensions.x.makeVirtual();
+            x.makeVirtual();
+            y.makeVirtual();
 
-            var nw = this.locationToLayer(this.extent().nw);
             if (this.options.wraparound) {
-                scroller.dimensions.x.virtualSize(-Number.MAX_VALUE, Number.MAX_VALUE);
+                x.virtualSize(-maxScale, maxScale);
             } else {
-                scroller.dimensions.x.virtualSize(-nw.x, this.scale() - nw.x);
+                x.virtualSize(-topLeft.x, scale - topLeft.x);
             }
-            scroller.dimensions.y.virtualSize(-nw.y, this.scale() - nw.y);
+
+            y.virtualSize(-topLeft.y, scale - topLeft.y);
         },
 
         _renderLayers: function() {
@@ -316,9 +322,11 @@ kendo_module({
         _viewportSize: function() {
             var element = this.element;
             var scale = this.scale();
+            var width = element.width();
+            var maxWidth = this.options.wraparound ? width : scale;
 
             return {
-                width: math.min(scale, element.width()),
+                width: math.max(scale, maxWidth),
                 height: math.min(scale, element.height())
             };
         },

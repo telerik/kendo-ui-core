@@ -79,6 +79,38 @@
                 ok(Location.create(new Location(10, 20)).equals(new Location(10, 20)));
             });
 
+            test("round rounds lng", function() {
+                loc.lng = 5.5;
+                loc.round();
+
+                equal(loc.lng, 6);
+            });
+
+            test("round rounds lng to precision", function() {
+                loc.lng = 5.151;
+                loc.round(2);
+
+                equal(loc.lng, 5.15);
+            });
+
+            test("round rounds lat", function() {
+                loc.lat = 5.5;
+                loc.round();
+
+                equal(loc.lat, 6);
+            });
+
+            test("round rounds lat to precision", function() {
+                loc.lat = 5.151;
+                loc.round(2);
+
+                equal(loc.lat, 5.15);
+            });
+
+            test("round returns location", function() {
+                deepEqual(loc.round(), loc);
+            });
+
         })();
 
         (function() {

@@ -57,7 +57,7 @@
 
         $("#map").kendoMap({
             center: [51, 0],
-            zoom: 2,
+            zoom: 1,
             controls: {
                 navigator: true, // boolean, object
                 navigator: {
@@ -81,17 +81,10 @@
                 },
                 copyright: "&copy; FooBar"
             }],
-            _markers: [{
-                location: [51.5, -0.09]
-            }, {
-                location: [42.717417, 24.917194],
+            markers: [{
+                location: [51.5, -0.09],
                 tooltip: {
-                    template: "#= location.toString() #: Botev"
-                }
-            }, {
-                location: [42, 26],
-                tooltip: {
-                    content: "Botev"
+                    template: "London (#= location.toString() #)"
                 }
             }],
             // Events

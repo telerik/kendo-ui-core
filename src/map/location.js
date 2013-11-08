@@ -19,6 +19,7 @@ kendo_module({
         deepExtend = kendo.deepExtend,
 
         util = dataviz.util,
+        round = util.round,
         valueOrDefault = util.valueOrDefault;
 
     // Implementation =========================================================
@@ -45,6 +46,12 @@ kendo_module({
 
         equals: function(loc) {
             return loc && loc.lat === this.lat && loc.lng === this.lng;
+        },
+
+        round: function(precision) {
+            this.lng = round(this.lng, precision);
+            this.lat = round(this.lat, precision);
+            return this;
         }
     });
 
