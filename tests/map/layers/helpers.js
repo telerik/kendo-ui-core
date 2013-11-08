@@ -8,6 +8,7 @@ var MapMock = Observable.extend({
     init: function() {
         this.element = $("<div class='k-map'></div>").appendTo($("#qunit-fixture"));
         this.scrollElement = $("<div id='scroll-element'></div>").appendTo(this.element);
+        this.options = {};
         Observable.fn.init.call(this);
     },
 

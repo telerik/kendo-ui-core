@@ -108,9 +108,9 @@
 
         _createMarker: function(shape) {
             var dataItem = shape.dataItem;
-            var marker = new map.Marker({
+            var marker = map.Marker.create({
                location: shape.location.toArray()
-            });
+            }, this.map.options.markerDefaults);
             marker.dataItem = dataItem;
 
             var args = { marker: marker };

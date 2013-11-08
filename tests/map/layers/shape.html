@@ -60,6 +60,16 @@
                 layer._load(pointData);
             });
 
+            test("sets default marker options", function() {
+                map.options.markerDefaults = { foo: true };
+
+                map.markers = {
+                    add: function(marker) { ok(marker.options.foo); }
+                };
+
+                layer._load(pointData);
+            });
+
             test("sets marker location", function() {
                 map.markers = {
                     add: function(marker) {

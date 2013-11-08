@@ -23,6 +23,7 @@
     <script src="../../src/map/crs.js"></script>
     <script src="../../src/map/layers/shape.js"></script>
     <script src="../../src/map/layers/marker.js"></script>
+    <script src="../../src/map/layers/tile.js"></script>
     <script src="../../src/map/main.js"></script>
     <script src="chroma.min.js"></script>
     <link rel="stylesheet" href="../../styles/web/kendo.common.css">
@@ -55,8 +56,8 @@
         }
 
         $("#map").kendoMap({
-            center: [51.505, -0.09],
-            zoom: 4,
+            center: [51, 0],
+            zoom: 2,
             controls: {
                 navigator: true, // boolean, object
                 navigator: {
@@ -67,22 +68,20 @@
                 birdsEyeView: true // miniMap? boolean, object
             },
             theme: "default",
-            layerDefaults: {
-                tile: {
-                    urlTemplate: "tiles/#= zoom #/#= x #/#= y #.png",
-                    copyright: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
-                }
-            },
             layers: [{
+                    type: "tile",
+                    urlTemplate: "http://tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+                    copyright: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+            }, {
                 dataSource: {
                     type: "geojson",
                     transport: {
-                        read: "countries.geo.json"
+                        read: "cat.geo.json"
                     }
                 },
                 copyright: "&copy; FooBar"
             }],
-            markers: [{
+            _markers: [{
                 location: [51.5, -0.09]
             }, {
                 location: [42.717417, 24.917194],
@@ -95,31 +94,18 @@
                     content: "Botev"
                 }
             }],
-
             // Events
             click: function(e) {
                 console.log(e.location.toString());
             },
             markerCreated: $.noop,
+            // TODO: Remove
             markerHover: $.noop,
-            shapeClick: function(e) {
-                e.shape.fill("blue");
-            },
             shapeCreated: function(e) {
-                var users = e.shape.dataItem.properties.users;
-                if (users) {
-                    setColor(e.shape, users);
+                var color = e.shape.dataItem.properties.color;
+                if (color) {
+                    e.shape.fill(color, 0.2);
                 }
-            },
-            shapeMouseEnter: function(e) {
-                e.shape.oldColor = e.shape.options.fill.color;
-                e.shape.options.set("fill.color", "red");
-            },
-            shapeMouseLeave: function(e) {
-                e.shape.options.set("fill.color", e.shape.oldColor);
-            },
-            zoomEnd: function(e) {
-                //console.log(e.sender.toScreenPoint(e.sender.center()).toString());
             }
         });
 

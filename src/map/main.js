@@ -85,7 +85,7 @@ kendo_module({
             center: [0, 0],
             zoom: 3,
             minSize: 256,
-            minZoom: 2,
+            minZoom: 1,
             maxZoom: 18,
             markers: [],
             markerDefaults: {
