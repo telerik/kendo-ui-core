@@ -62,7 +62,6 @@ kendo_module({
             this._initMarkers();
             this._initControls();
             this._reset();
-            scroller.bind("scale", proxy(this._scale, this));
 
             this._mousewheel = proxy(this._mousewheel, this);
             this.element.bind("click", proxy(this._click, this));
@@ -154,7 +153,7 @@ kendo_module({
         },
 
         origin: function(origin) {
-            var size = this._viewSize(),
+            var size = this._viewportSize(),
                 topLeft;
 
             if (origin) {
@@ -183,7 +182,7 @@ kendo_module({
         extent: function() {
             var nw = this.origin();
             var bottomRight = this.locationToLayer(nw);
-            var size = this._viewSize();
+            var size = this._viewportSize();
 
             bottomRight.x += size.width;
             bottomRight.y += size.height;
@@ -271,6 +270,7 @@ kendo_module({
 
             scroller.bind("scroll", proxy(this._scroll, this));
             scroller.bind("scrollEnd", proxy(this._scrollEnd, this));
+            scroller.bind("scale", proxy(this._scale, this));
 
             this.scrollElement = scroller.scrollElement;
         },
@@ -299,8 +299,10 @@ kendo_module({
 
         _scroll: function(e) {
             var origin = this.locationToLayer(this._viewOrigin).round();
-            origin.x += e.scrollLeft;
-            origin.y += e.scrollTop;
+            var movable = e.sender.movable;
+            var offset = new g.Point(movable.x, movable.y).multiply(-1).multiply(1/movable.scale);
+            origin.x += offset.x;
+            origin.y += offset.y;
 
             this.origin(this.layerToLocation(origin));
             this.trigger("pan", {
@@ -318,8 +320,15 @@ kendo_module({
             });
         },
 
-        _scale: function() {
+        _scale: function(e) {
+            var movable = e.sender.movable;
 
+            console.log(this.origin().toString());
+            var scale = this.scale() * movable.scale;
+            var tiles = scale / this.options.minSize;
+            var zoom = math.log(tiles) / math.log(2);
+            this.zoom(math.round(zoom));
+            return;
         },
 
         _reset: function() {
@@ -372,7 +381,7 @@ kendo_module({
             }
         },
 
-        _viewSize: function() {
+        _viewportSize: function() {
             var element = this.element;
             var scale = this.scale();
             var width = element.width();

@@ -39,7 +39,10 @@
                     location: [51.5, -0.09],
                     text: "Marker with popup",
                     open: true // ?
-                }]
+                }],
+                click: function(e) {
+                    console.log(e.location.toString());
+                }
             });
         </script>
     </body>
