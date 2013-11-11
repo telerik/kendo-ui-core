@@ -109,7 +109,7 @@ var InsertTableTool = PopupTool.extend({
             command: TableCommand,
             popupTemplate:
                 "<div class='k-ct-popup'>" +
-                    new Array(this.cols * this.rows + 1).join("<div class='k-ct-cell k-state-disabled' />") +
+                    new Array(this.cols * this.rows + 1).join("<span class='k-ct-cell k-state-disabled' />") +
                     "<div class='k-status'>Cancel</div>" +
                 "</div>"
         }));
