@@ -2,7 +2,7 @@
     <a id="mobile-button1" data-click="logClick" data-role="button" style="display: block; margin: 2em; text-align: center;">Trigger Event 1</a>
     <a id="mobile-button2" data-click="logClick" data-role="button" style="display: block; margin: 2em; text-align: center;">Trigger Event 2</a>
     <a id="mobile-button3" data-click="logClick" data-role="button" style="display: block; margin: 2em; text-align: center;">Trigger Event 3</a>
-    <div class="console"></div>
+    <div class="console km-widget km-listview km-listgroupinset"></div>
 </div>
 
 <script>
@@ -10,13 +10,3 @@
         kendoConsole.log(this.element.prop("id") + " was clicked!");
     }
 </script>
-
-<style scoped>
-    .km-root .console {
-        background-color: transparent;
-        border: 0;
-        margin: 1.4em 1em;
-        overflow: hidden;
-        height: auto;
-    }
-</style>
