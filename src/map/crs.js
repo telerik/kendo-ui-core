@@ -56,14 +56,14 @@
             datum: WGS84
         },
 
-        forward: function(loc) {
+        forward: function(loc, clamp) {
             var proj = this,
                 options = proj.options,
                 datum = options.datum,
                 r = datum.a,
                 lng0 = options.centralMeridian,
                 lat = limit(loc.lat, -proj.MAX_LAT, proj.MAX_LAT),
-                lng = loc.lng,
+                lng = clamp ? limit(loc.lng, -proj.MAX_LNG, proj.MAX_LNG) : loc.lng,
                 x = rad(lng - lng0) * r,
                 y = proj._projectLat(lat);
 
@@ -84,7 +84,7 @@
             return r * log(ts * p);
         },
 
-        inverse: function(point) {
+        inverse: function(point, clamp) {
             var proj = this,
                 options = proj.options,
                 datum = options.datum,
@@ -93,8 +93,9 @@
                 lng = point.x / (DEG_TO_RAD * r) + lng0,
                 lat = limit(proj._inverseY(point.y), -proj.MAX_LAT, proj.MAX_LAT);
 
-            lng = lng;
-            lat = limit(lat, -proj.MAX_LAT, proj.MAX_LAT);
+            if (clamp) {
+                lng = limit(lng, -proj.MAX_LNG, proj.MAX_LNG);
+            }
 
             return new Location(lat, lng);
         },
@@ -173,21 +174,21 @@
         },
 
         // Location <-> Point (screen coordinates for a given scale)
-        toPoint: function(loc, scale) {
-            var point = this._proj.forward(loc);
+        toPoint: function(loc, scale, clamp) {
+            var point = this._proj.forward(loc, clamp);
 
             return point
                 .transform(this._tm)
                 .multiply(scale || 1);
         },
 
-        toLocation: function(point, scale) {
+        toLocation: function(point, scale, clamp) {
             point = point
                 .clone()
                 .multiply(1 / (scale || 1))
                 .transform(this._itm);
 
-            return this._proj.inverse(point);
+            return this._proj.inverse(point, clamp);
         }
     });
 
