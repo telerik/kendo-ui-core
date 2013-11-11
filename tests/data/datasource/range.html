@@ -568,6 +568,22 @@
                 equal(view[2].foo, 4);
             });
 
+            test("range from grouped and sorted local data is with the correct order", function() {
+                var dataSource = new DataSource({
+                    pageSize: 3,
+                    data: [{ foo: 11, bar: 1 },{ foo: 6, bar: 1 },{ foo: 1, bar: 1 },{ foo: 5, bar:1 },{ foo: 3, bar:1 },{ foo: 2, bar:1 },{ foo: 4, bar:1 },{ foo: 7, bar:1 },{ foo: 8, bar:1 },{ foo: 9, bar:1 }, { foo: 10, bar: 1}]
+                });
+
+                dataSource.sort({ field: "foo", dir: "asc" });
+                dataSource.group({ field: "bar" });
+                dataSource.range(0,11);
+                var view = dataSource.view()[0].items;
+                equal(view.length, 11);
+                equal(view[0].foo, 1);
+                equal(view[1].foo, 2);
+                equal(view[2].foo, 3);
+            });
+
             test("initial order is preserved after unsorting a range with local data", function() {
                 var dataSource = new DataSource({
                     pageSize: 3,
