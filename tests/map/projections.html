@@ -66,7 +66,11 @@
                      [8918060.96408808604, 6755099.41088569630]],
 
                     [[52.4827802220782, -5.625],
-                     [-626172.1357121640, 6853979.3008168675]]
+                     [-626172.1357121640, 6853979.3008168675]],
+
+                    // Longitude out of bounds
+                    [[-90, -360],
+                     [-40075016.68557849, -20037508.34277572]]
                 ];
 
             var mercator;
@@ -100,18 +104,10 @@
                 );
             });
 
-            test("forward our of the bounds should return correct coords", function() {
-                mercator = new projections.Mercator();
-
-                forward(mercator,
-                    new Location(0, 200),
-                    new Point(22263898.158654712, 0)
-                );
-
-                forward(mercator,
-                    new Location(0, -200),
-                    new Point(-22263898.158654712, 0)
-                );
+            test("forward with longitude clamping", function() {
+                var loc = new Location(0, -360);
+                var point = mercator.forward(loc, true);
+                close(point.x, -20037508.34278924763, TOLERANCE);
             });
 
             test("inverse", function() {
@@ -133,19 +129,11 @@
                 );
             });
 
-            test("inverse out of bounds should return correct coords", function() {
-                mercator = new projections.Mercator();
-                console.log(TOLERANCE);
-
-                var r = mercator.inverse(new Point(200, Number.MAX_VALUE));
-                close(round(r.lng, COORD_PRECISION), 0.001797, TOLERANCE, "X");
-                close(r.lat, mercator.MAX_LAT, TOLERANCE, "Y");
-
-                var r = mercator.inverse(new Point(-200, Number.MAX_VALUE));
-                close(round(r.lng, COORD_PRECISION), -0.001797, TOLERANCE, "X");
-                close(r.lat, mercator.MAX_LAT, TOLERANCE, "Y");
+            test("inverse with longitude clamping", function() {
+                var point = new Point(-40000000, 0);
+                var loc = mercator.inverse(point, true);
+                equal(loc.lng, -180);
             });
-
         })();
 
         (function() {
@@ -196,6 +184,12 @@
                 });
             });
 
+            test("forward with longitude clamping", function() {
+                var loc = new Location(0, -360);
+                var point = mercator.forward(loc, true);
+                close(point.x, -20037508.34278924763, TOLERANCE);
+            });
+
             test("inverse", function() {
                 $.each(mercatorIdentities, function() {
                     var point = this[1];
@@ -203,6 +197,12 @@
                     inverse(mercator,
                         new Point(point[0], point[1]));
                 });
+            });
+
+            test("inverse with longitude clamping", function() {
+                var point = new Point(-40000000, 0);
+                var loc = mercator.inverse(point, true);
+                equal(loc.lng, -180);
             });
 
         })();

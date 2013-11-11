@@ -197,12 +197,14 @@ kendo_module({
         },
 
         locationToLayer: function(location, zoom) {
+            var clamp = !this.options.wraparound;
             location = Location.create(location);
-            return this.crs.toPoint(location, this.scale(zoom));
+            return this.crs.toPoint(location, this.scale(zoom), clamp);
         },
 
         layerToLocation: function(point, zoom) {
-            return this.crs.toLocation(point, this.scale(zoom));
+            var clamp = !this.options.wraparound;
+            return  this.crs.toLocation(point, this.scale(zoom), clamp);
         },
 
         locationToView: function(location) {
@@ -239,17 +241,19 @@ kendo_module({
             var map = this;
             var scroller = map.scroller;
 
+            var x = scroller.scrollLeft + e.x;
+            var y = scroller.scrollTop - e.y;
+
             var bounds = this._virtualSize;
             var height = this.element.height();
             var width = this.element.width();
 
             // TODO: Move limits in scroller
-            var x = limit(-scroller.scrollLeft - e.x, bounds.x.min, bounds.x.max - width);
-            var y = scroller.scrollTop - e.y;
+            x = limit(x, bounds.x.min, bounds.x.max - width);
             y = limit(y, bounds.y.min, bounds.y.max - height);
 
             map.scroller.one("scroll", function(e) { map._scrollEnd(e); });
-            map.scroller.scrollTo(x, -y);
+            map.scroller.scrollTo(-x, -y);
         },
 
         _compassCenter: function() {
@@ -359,7 +363,6 @@ kendo_module({
                 var defaults = this.options.layerDefaults[type];
                 var impl = dataviz.map.layers[type];
 
-                // TODO: Set layer size
                 layers.push(new impl(this, deepExtend({}, defaults, options)));
             }
         },
@@ -368,10 +371,12 @@ kendo_module({
             var element = this.element;
             var scale = this.scale();
             var width = element.width();
-            var maxWidth = this.options.wraparound ? width : scale;
 
+            if (!this.options.wraparound) {
+                width = math.min(scale, width);
+            }
             return {
-                width: math.max(scale, maxWidth),
+                width: width,
                 height: math.min(scale, element.height())
             };
         },
