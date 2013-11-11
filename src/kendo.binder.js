@@ -1277,7 +1277,7 @@ kendo_module({
             if (data[idx].hasSubgroups) {
                 result = result.concat(flattenGroups(data[idx].items));
             } else {
-                result = result.concat(data[idx].items);
+                result = result.concat.apply(result, data[idx].items);
             }
         }
         return result;
