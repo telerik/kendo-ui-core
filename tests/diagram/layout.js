@@ -14,6 +14,7 @@ var Adapter = kendo.diagram.GraphAdapter;
 var Point = kendo.diagram.Point;
 var Set = kendo.diagram.Set;
 var Utils = diagram.Utils;
+var randomDiagram = diagram.Graph.Utils.randomDiagram;
 /*-------------Testing Utils----------------------------------*/
 
 QUnit.testSkip = function () {
@@ -178,7 +179,7 @@ testSkip('Random diagram layout', function () {
     var diagram = diagramElement.data("kendoDiagram");
     diagram.canvas.native.setAttribute("height", "1000");
 
-    diagram.randomDiagram(parseInt(Math.random() * 150 + 1), 3, false);
+    randomDiagram(diagram, parseInt(Math.random() * 150 + 1), 3, false);
 
     diagram.layout({type: "tree", subtype: "Right"});
     ok(true);
@@ -209,7 +210,7 @@ testSkip('Radial layout', function () {
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
     diagram.canvas.native.setAttribute("height", "1000");
-    diagram.randomDiagram(20, 5, true);
+    randomDiagram(20, 5, true);
     var root = diagram.getId("0");
     root.shapeVisual.background("Orange");
     diagram.layout({type: "tree", subtype: "Radial"});
@@ -276,7 +277,7 @@ testSkip('Mindmap layout', function () {
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
     diagram.canvas.native.setAttribute("height", "1000");
-    diagram.randomDiagram(250, 3, true);
+    randomDiagram(250, 3, true);
     var root = diagram.getId("0");
     root.shapeVisual.background("Green");
 
@@ -296,7 +297,7 @@ testSkip('Tip-over tree layout', function () {
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
     diagram.canvas.native.setAttribute("height", "1000");
-    diagram.randomDiagram(50, 3, true);
+    randomDiagram(50, 3, true);
 
     var root = diagram.getId("0");
     root.shapeVisual.background("red");
@@ -336,8 +337,7 @@ testSkip('Layered layout', function () {
     var diagramElement = $("#canvas").kendoDiagram();
     var diagram = diagramElement.data("kendoDiagram");
     diagram.canvas.native.setAttribute("height", "1000");
-    diagram.randomDiagram(50, 15, false, true);
-
+    randomDiagram(50, 15, false, true);
 
     /*  var g = Predefined.Forest(3,3,3);
      var div = GetRoot();

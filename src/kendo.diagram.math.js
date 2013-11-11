@@ -3031,6 +3031,19 @@ kendo_module({
                 }
                 return g;
             }
+        },
+
+        /**
+         * Generates a random diagram.
+         * @param diagram The host diagram.
+         * @param shapeCount The number of shapes the random diagram should contain.
+         * @param maxIncidence The maximum degree the shapes can have.
+         * @param isTree Whether the generated diagram should be a tree
+         * @param layoutType The optional layout type to apply after the diagram is generated.
+         */
+        randomDiagram: function (diagram, shapeCount, maxIncidence, isTree, randomSize) {
+            var g = kendo.diagram.Graph.Utils.createRandomConnectedGraph(shapeCount, maxIncidence, isTree);
+            Graph.Utils.createDiagramFromGraph(diagram, g, false, randomSize);
         }
     };
 

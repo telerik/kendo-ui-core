@@ -141,10 +141,11 @@
 <script src="../../../src/kendo.diagram.layout.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-var diagram, animId, useRandomSizes = false;
-var Predefined = kendo.diagram.Graph.Predefined;
-var GraphUtils = kendo.diagram.Graph.Utils;
-var animateTransitions = false;
+var diagram, animId, useRandomSizes = false,
+        Predefined = kendo.diagram.Graph.Predefined,
+        GraphUtils = kendo.diagram.Graph.Utils,
+        randomDiagram = GraphUtils.randomDiagram,
+        animateTransitions = false;
 
 function init() {
     var diagramElement = $("#canvas").kendoDiagram();
@@ -154,7 +155,7 @@ function init() {
 
 function SingleRandomTree() {
     diagram.clear();
-    diagram.randomDiagram(20, 5, true, useRandomSizes);
+    randomDiagram(diagram, 20, 5, true, useRandomSizes);
     layout();
 }
 
@@ -168,7 +169,7 @@ function BalancedForest() {
 function RandomForest() {
     diagram.clear();
     for (var i = 0; i < 5; i++) {
-        diagram.randomDiagram(20, 5, true, useRandomSizes);
+        randomDiagram(diagram, 20, 5, true, useRandomSizes);
     }
     layout();
 }
@@ -179,7 +180,7 @@ function RandomGraph(count) {
     }
     diagram.clear();
     for (var i = 0; i < count; i++) {
-        diagram.randomDiagram(20, 5, false, useRandomSizes);
+        randomDiagram(diagram, 20, 5, false, useRandomSizes);
     }
     layout();
 }

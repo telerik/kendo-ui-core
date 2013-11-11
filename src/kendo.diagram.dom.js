@@ -1749,17 +1749,6 @@ kendo_module({
             }
             this.isLayouting = false;
         },
-        /**
-         * Generates a random diagram.
-         * @param shapeCount The number of shapes the random diagram should contain.
-         * @param maxIncidence The maximum degree the shapes can have.
-         * @param isTree Whether the generated diagram should be a tree
-         * @param layoutType The optional layout type to apply after the diagram is generated.
-         */
-        randomDiagram: function (shapeCount, maxIncidence, isTree, randomSize) {
-            var g = kendo.diagram.Graph.Utils.createRandomConnectedGraph(shapeCount, maxIncidence, isTree);
-            kendo.diagram.Graph.Utils.createDiagramFromGraph(this, g, false, randomSize);
-        },
         findByUid: function (uid) {
             return this.element.find(".k-shape[" + kendo.attr("uid") + "=" + uid + "]");
         },
