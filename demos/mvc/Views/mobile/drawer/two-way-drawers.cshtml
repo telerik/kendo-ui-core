@@ -1,52 +1,53 @@
 <div data-role="view" id="two-drawer-home" data-title="Friends">
     <header data-role="header">
         <div data-role="navbar">
-            <a data-role="button" data-rel="drawer" href="#left-drawer" data-icon="comments" data-align="left"></a>
+            <a data-role="backbutton" id="back-button" class="nav-button" data-align="left">Back</a>
             <span data-role="view-title"></span>
-            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
-            <a data-role="button" data-rel="drawer" href="#right-drawer" data-icon="share" data-align="right"></a>
+            <a data-role="button" data-rel="drawer" href="#right-drawer" data-icon="share" data-align="right" ></a>
         </div>
     </header>
-
-    <ul data-role="listview" data-type="group">
-        <li>
-            A
-            <ul>
-                <li><h2>Ann Devon</h2><img src="../../content/mobile/overview/ann.jpg" /></li>
-                <li><h2>Annette Roulet</h2><img src="../../content/mobile/overview/annette.jpg" /></li>
-                <li><h2>Antonio Moreno</h2><img src="../../content/mobile/overview/antonio.jpg" /></li>
-            </ul>
-        </li>
-        <li>
-            C
-            <ul>
-                <li><h2>Carine Schmitt</h2><img src="../../content/mobile/overview/carine.jpg" /></li>
-                <li><h2>Catherine Dewey</h2><img src="../../content/mobile/overview/catherine.jpg" /></li>
-            </ul>
-        </li>
-        <li>
-           D
-            <ul>
-                <li><h2>Daniel Tonini</h2><img src="../../content/mobile/overview/daniel.jpg" /></li>
-                <li><h2>Diego Roel</h2><img src="../../content/mobile/overview/diego.jpg" /></li>
-            </ul>
-        </li>
-        <li>
-            E
-            <ul>
-                <li><h2>Eduardo Saavedra</h2><img src="../../content/mobile/overview/eduardo.jpg" /></li>
-                <li><h2>Elizabeth Brown</h2><img src="../../content/mobile/overview/elizabeth.jpg" /></li>
-            </ul>
-        </li>
-        <li>
-            F
-            <ul>
-                <li><h2>Felipe Izquierdo</h2><img src="../../content/mobile/overview/felipe.jpg" /></li>
-                <li><h2>Fran Wilson</h2><img src="../../content/mobile/overview/fran.jpg" /></li>
-                <li><h2>Francisco Chang</h2><img src="../../content/mobile/overview/francisco.jpg" /></li>
-            </ul>
-        </li>
-    </ul>
+    <a class="left-btn" data-role="button" data-rel="drawer" href="#left-drawer" data-icon="comments"></a>
+    <div data-role="content">
+        <ul data-role="listview" data-type="group">
+            <li>
+                A
+                <ul>
+                    <li><h2>Ann Devon</h2><img src="../../content/mobile/overview/ann.jpg" /></li>
+                    <li><h2>Annette Roulet</h2><img src="../../content/mobile/overview/annette.jpg" /></li>
+                    <li><h2>Antonio Moreno</h2><img src="../../content/mobile/overview/antonio.jpg" /></li>
+                </ul>
+            </li>
+            <li>
+                C
+                <ul>
+                    <li><h2>Carine Schmitt</h2><img src="../../content/mobile/overview/carine.jpg" /></li>
+                    <li><h2>Catherine Dewey</h2><img src="../../content/mobile/overview/catherine.jpg" /></li>
+                </ul>
+            </li>
+            <li>
+               D
+                <ul>
+                    <li><h2>Daniel Tonini</h2><img src="../../content/mobile/overview/daniel.jpg" /></li>
+                    <li><h2>Diego Roel</h2><img src="../../content/mobile/overview/diego.jpg" /></li>
+                </ul>
+            </li>
+            <li>
+                E
+                <ul>
+                    <li><h2>Eduardo Saavedra</h2><img src="../../content/mobile/overview/eduardo.jpg" /></li>
+                    <li><h2>Elizabeth Brown</h2><img src="../../content/mobile/overview/elizabeth.jpg" /></li>
+                </ul>
+            </li>
+            <li>
+                F
+                <ul>
+                    <li><h2>Felipe Izquierdo</h2><img src="../../content/mobile/overview/felipe.jpg" /></li>
+                    <li><h2>Fran Wilson</h2><img src="../../content/mobile/overview/fran.jpg" /></li>
+                    <li><h2>Francisco Chang</h2><img src="../../content/mobile/overview/francisco.jpg" /></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <div data-role="drawer" id="left-drawer" style="width: 270px" data-title="Communities" data-views="['two-drawer-home', '@Url.Content("~/mobile/m/drawer/two-way-drawers.html")']">
@@ -89,6 +90,36 @@
 </script>
 
 <style>
+    .km-root .left-btn
+    {
+        position: absolute;
+        z-index: 9999;
+        top: 7em;
+        left: -1em;
+        padding-right: 0;
+        padding-left: 0;
+        width: 5em;
+        line-height: 4em;
+        border-radius: 10em;
+        -webkit-border-radius: 10em;
+        border: 1px solid rgba(255,255,255,.8);
+        background: rgba(0,0,0,.8);
+        color: #fff;
+        box-shadow: 0 0 .5em #000;
+        -webkit-box-shadow: 0 0 .6em #222;
+    }
+    
+    .mobileExample .km-wp-light .km-button.left-btn
+    {
+        background: rgba(0,0,0,.8);
+    }
+    
+    .km-root .left-btn .km-icon
+    {
+        display: block;
+        margin: 1em auto;
+    }
+    
     .km-ios #left-drawer .km-content, .km-android #left-drawer .km-content, .km-blackberry #left-drawer .km-content,
     .km-ios #left-drawer .km-list > li, .km-android #left-drawer .km-list > li, .km-blackberry #left-drawer .km-list > li,
     .km-ios #left-drawer .km-listview-link > .km-icon, .km-android #left-drawer .km-listview-link > .km-icon, .km-blackberry #left-drawer .km-listview-link > .km-icon,
