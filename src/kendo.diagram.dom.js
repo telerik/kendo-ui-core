@@ -48,7 +48,7 @@ kendo_module({
         CASCADING = "Cascading",
         POLYLINE = "Polyline",
         BOUNDSCHANGE = "boundsChange",
-        SHAPEADD = "shapeAdd",
+        ITEMSCHANGE = "itemsChange",
         CHANGE = "change",
         ERROR = "error",
         AUTO = "Auto",
@@ -1154,9 +1154,9 @@ kendo_module({
                 offsetY: 20
             }
         },
-
-        events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE, SHAPEADD],
-
+        
+        events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE, ITEMSCHANGE],
+        
         destroy: function () {
             var that = this;
             Widget.fn.destroy.call(that);
@@ -1301,7 +1301,7 @@ kendo_module({
                 this.mainLayer.append(shape.visual);
             }
 
-            this.trigger(SHAPEADD, {item: shape});
+            this._raiseItemsAdded([shape]);
 
             return shape;
         },
@@ -1311,13 +1311,15 @@ kendo_module({
          * @param undoable.
          */
         remove: function (items, undoable) {
+            var isMultiple = $.isArray(items);
+
             if (Utils.isUndefined(undoable)) {
                 undoable = true;
             }
             if (undoable) {
                 this.undoRedoService.begin();
             }
-            if (items instanceof Array) {
+            if (isMultiple) {
                 items = items.slice(0);
                 for (var i = 0; i < items.length; i++) {
                     this._removeItem(items[i], undoable);
@@ -1329,6 +1331,8 @@ kendo_module({
             if (undoable) {
                 this.undoRedoService.commit();
             }
+
+            this._raiseItemsRemoved(isMultiple ? items : [items]);
         },
         /**
          * Executes the next undoable action on top of the undo stack if any.
@@ -2067,7 +2071,7 @@ kendo_module({
             var diagram = this;
 
             diagram.bind(BOUNDSCHANGE, $.proxy(this._autosizeCanvas, this));
-            diagram.bind(SHAPEADD, $.proxy(this._autosizeCanvas, this));
+            diagram.bind(ITEMSCHANGE, $.proxy(this._autosizeCanvas, this));
             diagram.bind(ZOOM, $.proxy(this._autosizeCanvas, this));
         },
         _fetchFreshData: function () {
@@ -2143,6 +2147,17 @@ kendo_module({
 
             diagram.canvas.size(cumulativeSize);
         },
+
+        _raiseItemsAdded: function(items) {
+            this._raiseItemsChanged({added: items});
+        },
+        _raiseItemsRemoved: function(items) {
+            this._raiseItemsChanged({removed: items});
+        },
+        _raiseItemsChanged: function(collections) {
+            this.trigger(ITEMSCHANGE, collections);
+        },
+
         _refresh: function () {
             var i;
             for (i = 0; i < this.connections.length; i++) {

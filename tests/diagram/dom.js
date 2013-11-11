@@ -264,6 +264,47 @@ test("Shape visual bounds is ok after zoom", function () {
     QUnit.close(b.height, vb.height / z, tolerance);
 });
 
+test("Add shape raises itemschange event", function() {
+    var eventShape = null,
+        called = false;
+
+    kdiagram.bind("itemsChange", function(args) {
+        eventShape = args.added[0];
+        called = true;
+    });
+
+    var addedShape = kdiagram.addShape(new Point(0, 0));
+    QUnit.ok(called, "itemschange event should be raised");
+    QUnit.equal(eventShape, addedShape, "the reported shape should be the same as the added");
+});
+
+test("Remove shape raises itemschange event", function() {
+    var eventShape = null,
+        called = false,
+        shape = kdiagram.addShape(new Point(0, 0));
+
+    kdiagram.bind("itemsChange", function(args) {
+        eventShape = args.removed[0];
+        called = true;
+    });
+
+    kdiagram.remove(shape);
+    QUnit.ok(called, "itemschange event should be raised");
+    QUnit.equal(eventShape, shape, "the reported shape should be the same as the removed");
+});
+
+test("Remove multiple items raises itemschange event", function() {
+    var eventShapes = [],
+        shapes = [kdiagram.addShape(new Point(0, 0)), kdiagram.addShape(new Point(1, 0))];
+
+    kdiagram.bind("itemsChange", function(args) {
+        eventShapes = args.removed;
+    });
+
+    kdiagram.remove(shapes);
+    QUnit.equal(eventShapes.length, shapes.length, "all shapes should be reported by the event handler");
+});
+
 //test("Bring to front - no arguments. Rearrange shapes", function () {
 //    var s1 = kdiagram.addShape(new Point(0, 0));
 //    var s2 = kdiagram.addShape(new Point(50, 50));
