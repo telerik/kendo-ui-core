@@ -22,7 +22,7 @@ kendo_module({
 
     var Drawer = ui.View.extend({
         init: function(element, options) {
-            // move the drawer to the top, in order hide it
+            // move the drawer to the top, in order to hide it
             $(element).parent().prepend(element);
 
             mobile.ui.Widget.fn.init.call(this, element, options);
@@ -68,7 +68,7 @@ kendo_module({
 
             this.visible = false;
 
-            this.element.addClass("km-drawer").addClass(this.leftPositioned ? "km-left-drawer" : "km-right-drawer");
+            this.element.hide().addClass("km-drawer").addClass(this.leftPositioned ? "km-left-drawer" : "km-right-drawer");
             this.trigger(INIT);
         },
 
@@ -134,6 +134,7 @@ kendo_module({
             }
 
             this._setAsCurrent();
+            this.element.show();
 
             this.trigger(SHOW, { view: this });
             return true;
@@ -206,6 +207,7 @@ kendo_module({
                     that._transitioning = false;
                     if (movable[AXIS] === 0) {
                         element[0].style.cssText = "";
+                        that.element.hide();
                     }
                 }
             });
