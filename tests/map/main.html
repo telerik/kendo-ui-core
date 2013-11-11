@@ -188,6 +188,52 @@
                 map.compass.trigger("pan", { x: 100, y: 100 });
             });
 
+            test("panning is limited to world extent (west)", function() {
+                createMap({ wraparound: false });
+                map.bind("panEnd", function() {
+                    equal(map.scroller.scrollLeft, -768);
+                });
+                map.compass.trigger("pan", { x: -10000, y: 0 });
+            });
+
+            test("panning is limited to world extent (east)", function() {
+                createMap({ wraparound: false });
+                map.bind("panEnd", function() {
+                    equal(map.scroller.scrollLeft, 768);
+                });
+                map.compass.trigger("pan", { x: 10000, y: 0 });
+            });
+
+            test("panning is limited to world extent (north)", function() {
+                createMap({ wraparound: false });
+                map.bind("panEnd", function() {
+                    equal(map.scroller.scrollTop, 768);
+                });
+                map.compass.trigger("pan", { x: 0, y: -10000 });
+            });
+
+            test("panning is limited to world extent (south)", function() {
+                createMap({ wraparound: false });
+                map.bind("panEnd", function() {
+                    equal(map.scroller.scrollTop, -768);
+                });
+                map.compass.trigger("pan", { x: 0, y: 10000 });
+            });
+
+            test("panning wraps around world (west)", function() {
+                map.bind("panEnd", function() {
+                    equal(map.scroller.scrollLeft, -10000);
+                });
+                map.compass.trigger("pan", { x: -10000, y: 0 });
+            });
+
+            test("panning wraps around (east)", function() {
+                map.bind("panEnd", function() {
+                    equal(map.scroller.scrollLeft, 10000);
+                });
+                map.compass.trigger("pan", { x: 10000, y: 0 });
+            });
+
             test("center resets center", function() {
                 map.bind("reset", function() { ok(true); });
                 map.compass.trigger("center");

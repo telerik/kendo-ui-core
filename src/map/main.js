@@ -241,11 +241,19 @@ kendo_module({
             var map = this;
             var scroller = map.scroller;
 
-            var x = -scroller.scrollLeft - e.x;
+            var x = scroller.scrollLeft + e.x;
             var y = scroller.scrollTop - e.y;
 
+            var bounds = this._virtualSize;
+            var height = this.element.height();
+            var width = this.element.width();
+
+            // TODO: Move limits in scroller
+            x = limit(x, bounds.x.min, bounds.x.max - width);
+            y = limit(y, bounds.y.min, bounds.y.max - height);
+
             map.scroller.one("scroll", function(e) { map._scrollEnd(e); });
-            map.scroller.scrollTo(x, -y);
+            map.scroller.scrollTo(-x, -y);
         },
 
         _compassCenter: function() {
