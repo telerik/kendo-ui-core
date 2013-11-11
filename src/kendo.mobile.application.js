@@ -12,7 +12,7 @@ kendo_module({
         support = kendo.support,
         Pane = mobile.ui.Pane,
 
-        DEFAULT_OS = "ios",
+        DEFAULT_OS = "ios7",
         OS = support.mobileOS,
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
         VERTICAL = "km-vertical",
