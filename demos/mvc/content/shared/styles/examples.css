@@ -1847,7 +1847,6 @@ pre.prettyprint
     min-height: 10em;
     height: auto;
     overflow-y: auto;
-    font: inherit;
 }
 
 .km-root .console div

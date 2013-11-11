@@ -5,17 +5,19 @@
     background-color: #FFF;
     border: 1px solid #CCC;
     color: #333;
-    font: 11px Consolas, Monaco, "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
-    height: 200px;
-    margin: 1.4em 0 0;
+    font: normal .8em/2.5em Consolas, Monaco, "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+    min-height: 10em;
+    height: auto;
+    margin: 2em;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto
     text-align: left;
 }
 
 .console .count
 {
-    background-color: #91AFEF;
+    background-color: #f00;
+    background-clip: border-box;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
     border-radius: 15px;
@@ -29,7 +31,11 @@
 {
     background-position: 6px -95px;
     border-bottom: 1px solid #DDD;
-    padding: 5px 5px 4px 24px;
+    padding: 0;
+    min-height: 2.5em;
+    color: #333;
+    vertical-align: middle;
+    text-indent: .6em;
 }
 
 .console .error
@@ -37,4 +43,9 @@
     background-position: 6px -135px;
 }
 
+.km-root .km-android .console .count
+{
+    background-color: #f00;
+    background-clip: border-box;
+}
 /*configurator*/
