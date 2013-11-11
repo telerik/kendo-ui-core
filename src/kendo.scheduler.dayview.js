@@ -873,6 +873,7 @@ kendo_module({
                 var idx;
                 var length;
                 var classes = "";
+                var tmplDate;
 
                 content = '<tr' + (majorTick ? ' class="k-middle-row"' : "") + '>';
 
@@ -891,7 +892,10 @@ kendo_module({
                         }
 
                         content += '<td' + (classes !== "" ? ' class="' + classes + '"' : "") + ">";
-                        content += slotTemplate({ date: date });
+                        tmplDate = kendo.date.getDate(dates[idx]);
+                        kendo.date.setTime(tmplDate, kendo.date.getMilliseconds(date));
+
+                        content += slotTemplate({ date: tmplDate });
                         content += "</td>";
                     }
                 }

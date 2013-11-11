@@ -215,6 +215,17 @@
                 equal(view.content.find("td").last().text(), "foo");
             });
 
+            test("correct date is passed to slotTemplate", function() {
+                var view = setup({
+                    slotTemplate: function(data) {
+                        deepEqual(kendo.date.getDate(data.date), new Date("1/26/2013"));
+                    },
+                    dates: [
+                        new Date("1/26/2013")
+                    ]
+                });
+            });
+
             test("render all day slots template", function() {
                 var view = setup({
                     allDaySlotTemplate: "foo",
