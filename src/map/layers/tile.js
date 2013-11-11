@@ -221,7 +221,8 @@
                         x: index.x,
                         y: index.y,
                         subdomain: this.subdomainText()
-                    })
+                    }),
+                    opacity: this.options.opacity
                 };
 
             return this.pool.get(this._center, tileOptions);
@@ -266,6 +267,8 @@
             htmlElement.style.top = renderSize(options.offset.y);
             htmlElement.style.left = renderSize(options.offset.x);
             this.offset = options.offset;
+
+            htmlElement.style.opacity = options.opacity;
 
             this.point = options.point;
             this.index = options.index;

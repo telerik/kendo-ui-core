@@ -28,7 +28,6 @@
 
             Point = dataviz.geometry.Point;
 
-
         (function() {
 
             var view;
@@ -212,6 +211,7 @@
             options.currentIndex = options.index || { x: 0, y: 0 };
             options.offset = options.offset || { x: 0, y: 0 };
             options.point = options.point || { x: 0, y: 0 };
+            options.opacity = options.opacity || 0;
 
             return new ImageTile({
                 url: options.url || "",
@@ -219,7 +219,8 @@
                 currentIndex: new Point(options.currentIndex.x, options.currentIndex.y),
                 offset: new Point(options.offset.x, options.offset.y),
                 point: new Point(options.point.x, options.point.y),
-                zoom: options.zoom || 1
+                zoom: options.zoom || 1,
+                opacity: options.opacity
             });
         }
 
@@ -272,6 +273,13 @@
                 tile.destroy();
 
                 ok(!tile.element);
+            });
+
+            test("renders opacity", function() {
+                tile = createImageTile();
+
+                debugger;
+                equal(tile.element.css("opacity"), 0);
             });
 
             // ------------------------------------------------------------
