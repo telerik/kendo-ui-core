@@ -130,7 +130,7 @@ var LinkCommand = Command.extend({
             range = that.getRange(),
             collapsed = range.collapsed,
             nodes,
-            initialText = null,
+            initialText = "",
             messages = that.editor.options.messages;
 
         range = that.lockRange(true);
@@ -155,8 +155,10 @@ var LinkCommand = Command.extend({
                 }
 
                 text = $("#k-editor-link-text", element).val();
-                if (text !== initialText && (text || nodes.length === 0)) {
-                    that.attributes.innerHTML = dom.stripBom(text) || href;
+                if (!text && !initialText) {
+                    that.attributes.innerHTML = href;
+                } else if (text && (text !== initialText)) {
+                    that.attributes.innerHTML = dom.stripBom(text);
                 }
 
                 target = $("#k-editor-link-target", element).is(":checked");
@@ -181,6 +183,18 @@ var LinkCommand = Command.extend({
             that.releaseRange(range);
         }
 
+        function linkText(nodes) {
+            var text = "";
+
+            if (nodes.length == 1) {
+                text = nodes[0].nodeValue;
+            } else if (nodes.length) {
+                text = nodes[0].nodeValue + nodes[1].nodeValue;
+            }
+
+            return dom.stripBom(text);
+        }
+
         var a = nodes.length ? that.formatter.finder.findSuitable(nodes[0]) : null;
 
         var dialog = this.createDialog(that._dialogTemplate(), {
@@ -200,7 +214,7 @@ var LinkCommand = Command.extend({
             }).end()
             // IE < 8 returns absolute url if getAttribute is not used
             .find("#k-editor-link-url").val(a ? a.getAttribute("href", 2) : "http://").end()
-            .find("#k-editor-link-text").val(nodes.length > 0 ? (nodes.length == 1 ? nodes[0].nodeValue : nodes[0].nodeValue + nodes[1].nodeValue) : "").end()
+            .find("#k-editor-link-text").val(linkText(nodes)).end()
             .find("#k-editor-link-title").val(a ? a.title : "").end()
             .find("#k-editor-link-target").attr("checked", a ? a.target == "_blank" : false).end()
             .data("kendoWindow")

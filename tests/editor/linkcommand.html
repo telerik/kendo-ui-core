@@ -457,6 +457,13 @@
                 equal(editor.value(), '<a href="baz">foo </a><em><a href="baz">bar</a></em>');
             });
 
+            test("text field does not show bom text (focus caret gets lost)", function() {
+                var range = createRangeFromText(editor, "foo ||");
+                execLinkCommandOnRange(range);
+
+                equal($("#k-editor-link-text").val().replace(/\ufeff/g, "BOM"), "");
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
