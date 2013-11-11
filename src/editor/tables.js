@@ -93,6 +93,10 @@ var PopupTool = Tool.extend({
         this.popup().close();
 
         ui.removeClass("k-state-hover");
+    },
+
+    destroy: function() {
+        this._popup.destroy();
     }
 });
 

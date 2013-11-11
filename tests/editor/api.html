@@ -168,6 +168,30 @@
                 ok(true);
             });
 
+            (function() {
+
+                var inline;
+
+                module("API / destroy", {
+                    setup: function() {
+                        inline = $("<div contentEditable />")
+                            .appendTo("#qunit-fixture")
+                            .kendoEditor().data("kendoEditor");
+                    }
+                });
+
+                test("destroy destroys toolbar", function() {
+                    var called;
+
+                    withMock(inline.toolbar, "destroy", function() { called = true; }, function() {
+                        inline.destroy();
+
+                        ok(called);
+                    });
+                });
+
+            })();
+
         </script>
 
         <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

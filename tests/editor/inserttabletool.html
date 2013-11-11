@@ -64,6 +64,18 @@
                 equal($(".k-ct-popup:visible").length, 0);
             });
 
+            test("destroy method destroys popup", function() {
+                var toolbar = editor.toolbar;
+                var popup = toolbar.toolById("createtable")._popup;
+                var called;
+
+                withMock(popup, "destroy", function() { called = true }, function() {
+                    toolbar.destroy();
+
+                    ok(called);
+                });
+            });
+
         </script>
     </body>
 </html>

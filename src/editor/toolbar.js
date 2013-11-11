@@ -410,6 +410,22 @@
             });
         },
 
+        destroy: function() {
+            Widget.fn.destroy.call(this);
+
+            var id, tools = this.tools;
+
+            for (id in tools) {
+                if (tools[id].destroy) {
+                    tools[id].destroy();
+                }
+            }
+
+            if (this.window) {
+                this.window.destroy();
+            }
+        },
+
         _attachEvents: function() {
             var that = this,
                 buttons = "[role=button].k-tool",

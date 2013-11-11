@@ -590,6 +590,8 @@ kendo_module({
             $(document).off("mousedown", proxy(that._endTyping, that))
                        .off("mouseup", proxy(that._mouseup, that));
 
+            that.toolbar.destroy();
+
             kendo.destroy(that.wrapper);
         },
 

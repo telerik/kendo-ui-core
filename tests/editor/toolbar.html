@@ -411,6 +411,45 @@
                 equal(dom.find(".foo").length, 1);
             });
 
+            module("destroy", {
+                setup: function() {
+                    dom = $("<ul class='k-editor-toolbar' />").appendTo("body");
+                    toolbar = new editorNS.Toolbar(dom[0], { popup: true });
+                },
+                teardown: function() {
+                    dom.remove();
+
+                    if (toolbar && toolbar.destroy) {
+                        toolbar.destroy();
+                    }
+                }
+            });
+
+            test("destroy destroys popup window", function() {
+                bindToMock([ "bold" ]);
+
+                var called;
+
+                withMock(toolbar.window, "destroy", function() { called = true; }, function() {
+                    toolbar.destroy();
+
+                    ok(called);
+                });
+            });
+
+            test("destroy calls destroy on tools", function() {
+                bindToMock([ "bold" ]);
+
+                var called;
+
+                withMock(toolbar.tools.bold, "destroy", function() { called = true; }, function() {
+                    toolbar.destroy();
+
+                    ok(called);
+                });
+            });
+
+
             module("Keyboard navigation", mockedToolbarModule);
 
             function active() {
