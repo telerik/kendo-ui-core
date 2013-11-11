@@ -32,3 +32,11 @@
       :type: String
       :description: The default View transition.
 
+    - :name: panes.collapsible
+      :type: Boolean
+      :description: Defines whether the pane is collapsible. Collapsible panes are automatically hidden when the device is in portrait orientation.
+
+    - :name: panes.portraitWidth
+      :type: String
+      :description: Defines the width of the pane in portrait orientation.
+

@@ -76,7 +76,14 @@ namespace Kendo.Mvc.UI
 
             foreach (var item in pane.ToJson())
             {
-                dom.Attribute("data-" + item.Key, item.Value.ToString());
+                if (item.Value.GetType() == typeof(bool))
+                {
+                    dom.Attribute("data-" + item.Key, item.Value.ToString().ToLower());
+                }
+                else
+                {
+                    dom.Attribute("data-" + item.Key, item.Value.ToString());
+                }
             }
 
             AddEventAttributes(dom, pane.Events);

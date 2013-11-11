@@ -45,6 +45,10 @@ namespace Kendo.Mvc.UI
         
         public string Transition { get; set; }
         
+        public bool Collapsible { get; set; }
+        
+        public string PortraitWidth { get; set; }
+        
         //<< Fields
 
         public HtmlTemplate Content
@@ -85,6 +89,13 @@ namespace Kendo.Mvc.UI
             if (Transition.HasValue())
             {
                 json["transition"] = Transition;
+            }
+            
+            json["collapsible"] = Collapsible;
+                
+            if (PortraitWidth.HasValue())
+            {
+                json["portrait-width"] = PortraitWidth;
             }
             
         //<< Serialization

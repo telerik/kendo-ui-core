@@ -74,7 +74,40 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
+        /// <summary>
+        /// Defines whether the pane is collapsible. Collapsible panes are automatically hidden when the device is in portrait orientation.
+        /// </summary>
+        /// <param name="value">The value that configures the collapsible.</param>
+        public MobileSplitViewPaneBuilder Collapsible(bool value)
+        {
+            container.Collapsible = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Defines the width of the pane in portrait orientation.
+        /// </summary>
+        /// <param name="value">The value that configures the portraitwidth.</param>
+        public MobileSplitViewPaneBuilder PortraitWidth(string value)
+        {
+            container.PortraitWidth = value;
+
+            return this;
+        }
+        
         //<< Fields
+
+        /// <summary>
+        /// Defines the width of the pane in portrait orientation (in pixels).
+        /// </summary>
+        /// <param name="value">The value that configures the portraitwidth.</param>
+        public MobileSplitViewPaneBuilder PortraitWidth(int value)
+        {
+            container.PortraitWidth = value + "px";
+
+            return this;
+        }
 
         /// <summary>
         /// Sets the HTML content which the pane should display.
