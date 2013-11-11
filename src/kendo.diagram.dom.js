@@ -1009,8 +1009,11 @@ kendo_module({
 
             return clone;
         },
+        /**
+         * Returns a serialized connection in json format. Consist of the options and the model.
+         * @returns {Connection}
+         */
         serialize: function () {
-
             var json = deepExtend({},
                 {
                     options: this.options,
@@ -1217,10 +1220,23 @@ kendo_module({
             that.mainLayer.clear();
             that._initialize();
         },
+        /**
+         * Connects two items.
+         * @param source Shape, Connector, Point.
+         * @param target Shape, Connector, Point.
+         * @param options Connection options that will be passed to the newly created connection.
+         * @returns The newly created connection.
+         */
         connect: function (source, target, options) {
             var connection = new Connection(source, target, options);
             return this.addConnection(connection);
         },
+        /**
+         * Determines whether the the two items are connected.
+         * @param source Shape, Connector, Point.
+         * @param target Shape, Connector, Point.
+         * @returns true if the two items are connected.
+         */
         connected: function (source, target) {
             for (var i = 0; i < this.connections.length; i++) {
                 var c = this.connections[i];
@@ -1230,6 +1246,12 @@ kendo_module({
             }
             return false;
         },
+        /**
+         * Adds connection to the diagram.
+         * @param connection Connection.
+         * @param undoable Boolean.
+         * @returns The newly created connection.
+         */
         addConnection: function (connection, undoable) {
             if (undoable === undefined) {
                 undoable = true;
@@ -1246,18 +1268,24 @@ kendo_module({
 
             return connection;
         },
-        addShape: function (point, options) {
+        /**
+         * Adds shape to the diagram.
+         * @param item Shape, Point. If point is passed it will be created new Shape and positioned at that point.
+         * @param options. The options to be passed to the newly created Shape.
+         * @returns The newly created shape.
+         */
+        addShape: function (item, options) {
             var shape;
             options = deepExtend({undoable: true}, options);
 
-            if (Utils.isUndefined(point)) {
-                point = new Point(0, 0);
+            if (Utils.isUndefined(item)) {
+                item = new Point(0, 0);
             }
-            if (point instanceof Shape) {
-                shape = point;
+            if (item instanceof Shape) {
+                shape = item;
             }
             else { // consider it a point
-                options = deepExtend(options, { x: point.x, y: point.y });
+                options = deepExtend(options, { x: item.x, y: item.y });
                 shape = new Shape(options);
             }
             if (options.undoable === true) {
@@ -1274,6 +1302,11 @@ kendo_module({
 
             return shape;
         },
+        /**
+         * Removes items (or single item) from the diagram.
+         * @param items DiagramElement, Array of Items.
+         * @param undoable.
+         */
         remove: function (items, undoable) {
             if (Utils.isUndefined(undoable)) {
                 undoable = true;
@@ -1294,10 +1327,15 @@ kendo_module({
                 this.undoRedoService.commit();
             }
         },
-
+        /**
+         * Executes the next undoable action on top of the undo stack if any.
+         */
         undo: function () {
             this.undoRedoService.undo();
         },
+        /**
+         * Executes the previous undoable action on top of the redo stack if any.
+         */
         redo: function () {
             this.undoRedoService.redo();
         },
@@ -1367,6 +1405,11 @@ kendo_module({
                 return this._selectedItems; // returns all selected items.
             }
         },
+        /**
+         * Brings to front the passed items.
+         * @param items DiagramElement, Array of Items.
+         * @param undoable. By default the action is undoable.
+         */
         toFront: function (items, undoable) {
             var result = this._getDiagramItems(items), indices;
             if (Utils.isUndefined(undoable) || undoable) {
@@ -1379,6 +1422,11 @@ kendo_module({
                 this._fixOrdering(result, true);
             }
         },
+        /**
+         * Sends to back the passed items.
+         * @param items DiagramElement, Array of Items.
+         * @param undoable. By default the action is undoable.
+         */
         toBack: function (items, undoable) {
             var result = this._getDiagramItems(items), indices;
             if (Utils.isUndefined(undoable) || undoable) {
@@ -1391,17 +1439,23 @@ kendo_module({
                 this._fixOrdering(result, false);
             }
         },
-        bringIntoView: function (node, options) { // jQuery|Item|Array|Rect
+        /**
+         * Bring into view the passed item(s) or rectangle.
+         * @param items DiagramElement, Array of Items, Rect.
+         * @param options. align - controls the position of the calculated rectangle relative to the viewport.
+         * "Center middle" will position the items in the center. animate - controls if the pan should be animated.
+         */
+        bringIntoView: function (item, options) { // jQuery|Item|Array|Rect
             var rect, viewport = this.viewport(), align, old, newPan, deltaPan;
             options = deepExtend({animate: false, align: "center middle"}, options);
-            if (node instanceof DiagramElement) {
-                rect = node.bounds("transformed");
+            if (item instanceof DiagramElement) {
+                rect = item.bounds("transformed");
             }
-            else if (Utils.isArray(node)) {
-                rect = this.getBoundingBox(node);
+            else if (Utils.isArray(item)) {
+                rect = this.getBoundingBox(item);
             }
-            else if (node instanceof Rect) {
-                rect = node.clone();
+            else if (item instanceof Rect) {
+                rect = item.clone();
             }
             if (options.align !== "none" || !viewport.contains(rect.center())) {
                 if (options.align === "none") {
@@ -1706,7 +1760,6 @@ kendo_module({
             var g = kendo.diagram.Graph.Utils.createRandomConnectedGraph(shapeCount, maxIncidence, isTree);
             kendo.diagram.Graph.Utils.createDiagramFromGraph(this, g, false, randomSize);
         },
-
         findByUid: function (uid) {
             return this.element.find(".k-shape[" + kendo.attr("uid") + "=" + uid + "]");
         },
@@ -1728,7 +1781,6 @@ kendo_module({
             });
             return found;
         },
-
         _getValidZoom: function (zoom) {
             return Math.min(Math.max(zoom, 0.55), 2.0); //around 0.5 something exponential happens...!?
         },
@@ -1895,7 +1947,7 @@ kendo_module({
                 if (Utils.isUndefined(node)) { // happens on updating dataSource
                     return;
                 }
-                var shape = that.dataMap.first(function (item) {
+                var shape = that._dataMap.first(function (item) {
                     return item.uid === node.uid;
                 });
                 if (shape) {
@@ -1909,7 +1961,7 @@ kendo_module({
                 };
                 shape = new Shape(opt, node);
                 that.addShape(shape);
-                that.dataMap.push({uid: node.uid, shape: shape});
+                that._dataMap.push({uid: node.uid, shape: shape});
                 return shape;
             }
 
@@ -2015,13 +2067,8 @@ kendo_module({
             this._selectedItems = [];
             this.connections = [];
             this._adorners = [];
-            this.dataMap = [];
+            this._dataMap = [];
             this.undoRedoService = new UndoRedoService();
-
-            /**
-             * The unique identifier of this Diagram
-             * @type {string}
-             */
             this.id = kendo.diagram.randomId();
         },
         _attachEvents: function () {
@@ -2106,14 +2153,10 @@ kendo_module({
         },
         _refresh: function () {
             var i;
-//            for (i = 0; i < this.shapes.length; i++) { // does nothing.
-//                this.shapes[i].refresh();
-//            }
             for (i = 0; i < this.connections.length; i++) {
                 this.connections[i].refresh();
             }
         }
-
     });
 
     ui.plugin(Diagram);
@@ -2123,5 +2166,4 @@ kendo_module({
         Connection: Connection,
         Connector: Connector
     });
-})
-    (window.kendo.jQuery);
+})(window.kendo.jQuery);
