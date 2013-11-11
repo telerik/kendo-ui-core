@@ -28,6 +28,12 @@
         background-color: #369;
     }
 
+    .km-ios7 .transitions-button,
+    .km-ios7 .transitions-cancel {
+        color: #fff;
+        border-color: transparent;
+    }
+
     .km-blackberry .transitions-button,
     .km-blackberry .transitions-cancel {
         margin: .6em 1.8em 0;
@@ -56,6 +62,7 @@
     }
 
     .km-ios #view-transitions-welcome .km-button,
+    .km-ios7 #view-transitions-welcome .km-content .km-button,
     .km-blackberry #view-transitions-welcome .km-content .km-button,
     .km-flat #view-transitions-welcome .km-content .km-button {
         background-color: DarkRed;
@@ -63,6 +70,7 @@
     }
     
     .km-ios #view-transitions-login .transitions-button,
+    .km-ios7 #view-transitions-login .transitions-button,
     .km-blackberry #view-transitions-login .km-content .transitions-button,
     .km-flat #view-transitions-login .km-content .transitions-button {
         background-color: Green;
@@ -77,7 +85,9 @@
     }
 
     .km-ios #view-transitions .km-button,
-    .km-ios #view-transitions-login .transitions-cancel {
+    .km-ios7 #view-transitions .km-button,
+    .km-ios #view-transitions-login .transitions-cancel,
+    .km-ios7 #view-transitions-login .transitions-cancel {
         background-color: #000;
     }
     
@@ -90,6 +100,9 @@
     .km-ios #view-transitions .km-navbar,
     .km-ios #view-transitions-login .km-navbar,
     .km-ios #view-transitions-welcome .km-navbar,
+    .km-ios7 #view-transitions .km-navbar,
+    .km-ios7 #view-transitions-login .km-navbar,
+    .km-ios7 #view-transitions-welcome .km-navbar,
     .km-blackberry #view-transitions .km-navbar,
     .km-blackberry #view-transitions-login .km-navbar,
     .km-blackberry #view-transitions-welcome .km-navbar,
@@ -98,5 +111,10 @@
     .km-flat #view-transitions-welcome .km-navbar {
         background-color: #000;
 	    color: #fff;
+    }
+    .km-ios7 #view-transitions .km-navbar,
+    .km-ios7 #view-transitions-login .km-navbar,
+    .km-ios7 #view-transitions-welcome .km-navbar {
+        border-color: transparent;
     }
 </style>

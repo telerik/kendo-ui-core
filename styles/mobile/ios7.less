@@ -11,7 +11,7 @@
 @ios7-border-width: 1px;
 @ios7-border-radius: 3px;
 @ios7-border-color: #007aff;
-@ios7-second-border-color: #ccc;
+@ios7-second-border-color: rgba(180, 180, 180, .5);
 @ios7-secondary-border-radius: 5px;
 @ios7-inline-border-radius: @ios7-border-radius - 1px;
 @ios7-active-color: #fff;
@@ -41,6 +41,7 @@
 .km-ios7 .km-navbar,
 .km-ios7 .km-tabstrip
 {
+    background-clip: border-box;
     background-color: @ios7-light-background;
 }
 
