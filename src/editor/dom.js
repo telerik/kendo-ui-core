@@ -642,6 +642,13 @@ var Dom = {
             result = Dom.blockParentOrBody(result);
         }
 
+        var editableParents = map(nodes, Dom.editableParent);
+        var editableAncestor = Dom.commonAncestor(editableParents)[0];
+
+        if ($.contains(result, editableAncestor)) {
+            result = editableAncestor;
+        }
+
         return result;
     }
 };

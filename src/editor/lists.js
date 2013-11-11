@@ -215,8 +215,8 @@ var ListFormatter = Class.extend({
     },
 
     applyOnSection: function (section, nodes) {
-        var tag = this.tag,
-            commonAncestor = dom.closestSplittableParent(nodes);
+        var tag = this.tag;
+        var commonAncestor = dom.closestSplittableParent(nodes);
 
         var ancestors = [];
 
@@ -290,11 +290,17 @@ var ListFormatter = Class.extend({
             sections = [],
             lastSection,
             lastNodes,
-            section;
+            section,
+            editableParent;
 
         // split nodes into sections that need to be different lists
         do {
             section = dom.parentOfType(nodes[i], ["td","body"]);
+            editableParent = dom.editableParent(nodes[i]);
+
+            if ($.contains(section, editableParent)) {
+                section = editableParent;
+            }
 
             if (!lastSection || section != lastSection) {
                 if (lastSection) {

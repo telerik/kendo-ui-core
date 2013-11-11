@@ -13,6 +13,8 @@
 
     <textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea>
 
+    <div id="inline" contentEditable></div>
+
     <script>
 
         function clean(html) {
@@ -22,6 +24,7 @@
         }
 
         var editor = $("#Editor1").kendoEditor().data("kendoEditor");
+        var inline = $("#inline").kendoEditor().data("kendoEditor");
         var ListFormatter = kendo.ui.editor.ListFormatter;
         var formatter;
 
@@ -498,6 +501,12 @@
             var range = createRangeFromText(editor, "foo<p>bar</p><p>|baz</p><p>qux|</p>");
             formatter.toggle(range);
             equal(editor.value(), "foo<p>bar</p><ul><li>baz</li><li>qux</li></ul>");
+        });
+
+        test("formatting text node in inline editor does not change the inline element", function() {
+            var range = createRangeFromText(inline, "f|o|o");
+            formatter.toggle(range);
+            equal(inline.value(), "<ul><li>foo</li></ul>");
         });
 
     </script>
