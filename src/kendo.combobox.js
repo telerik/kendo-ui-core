@@ -681,7 +681,7 @@ kendo_module({
 
                 input.val(placeholder);
 
-                if (!placeholder) { //} && input[0] === activeElement()) {
+                if (!placeholder && input[0] === activeElement()) {
                     List.selectText(input[0], 0, 0);
                 }
             }

@@ -682,11 +682,12 @@ kendo_module({
 
         _placeholder: function(show) {
             var that = this,
-                input = that.input;
+                input = that.input,
+                active = activeElement();
 
             if (show === undefined) {
                 show = false;
-                if (input[0] !== activeElement()) {
+                if (input[0] !== active) {
                     show = !that._dataItems[0];
                 }
                 that.wrapper.removeClass(FOCUSEDCLASS);
@@ -698,7 +699,7 @@ kendo_module({
             input.toggleClass("k-readonly", show)
                  .val(show ? that.options.placeholder : "");
 
-            if (input[0] === document.activeElement) {
+            if (input[0] === active) {
                 List.selectText(input[0], 0, 0);
             }
 
