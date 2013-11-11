@@ -3,8 +3,13 @@ var shapesSource = [
         options: {
             name: "Text",
             content: "Text",
+            //data: "text",
             connectors: [],
-            background: "white"
+            background: "white",
+            hoveredBackground: "white",
+            fillOpacity: 0
+            //autoSize: true,
+            //height: 30
         }
     },
     {

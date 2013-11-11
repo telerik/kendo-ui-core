@@ -158,6 +158,7 @@ kendo_module({
             this._originWidth = DEFAULTWIDTH;
             this._originHeight = DEFAULTHEIGHT;
             this._visible = true;
+            this._transform = new CompositeTransform();
             element.native = native;
             element.options = deepExtend({}, element.options, options);
             element.redraw();
@@ -197,21 +198,19 @@ kendo_module({
                 this.options.x = this._pos.x;
                 this.options.y = this._pos.y;
             }
+            this._transform.translate = new Translation(this.options.x, this.options.y);
             this._renderTransform();
             return this._pos;
         },
         rotate: function (angle, center) {
             if (angle !== undefined) {
-                this._rotate = new Rotation(angle, center.x, center.y);
+                this._transform.rotate = new Rotation(angle, center.x, center.y);
                 this._renderTransform();
             }
-
-            return this._rotate || new Rotation(0);
+            return this._transform.rotate || new Rotation(0);
         },
         _renderTransform: function () {
-            var t = new CompositeTransform(this.options.x, this.options.y);
-            t.rotate = this._rotate;
-            t.render(this.native);
+            this._transform.render(this.native);
         },
         _hover: function () {
         },
@@ -257,6 +256,7 @@ kendo_module({
             that.setAtr("stroke", "stroke");
             that.setAtr("stroke-dasharray", "strokeDashArray");
             that.setAtr("stroke-width", "strokeWidth");
+            that.setAtr("fill-opacity", "fillOpacity");
             that.background();
         },
         _hover: function (value) {
@@ -304,7 +304,7 @@ kendo_module({
         }
     });
 
-    var TextBlock = Visual.extend({
+    var TextBlock = VisualBase.extend({
         init: function (options) {
             var that = this;
             that._originSize = Rect.empty();
@@ -336,6 +336,22 @@ kendo_module({
             this.setAtr("font-size", "fontSize");
             this.setAtr("font-weight", "fontWeight");
             this.content(this.options.text);
+        },
+        size: function () {
+//            if (this.options.autoSize) {
+//                var that = this;
+//                var scaleX = that.options.width / that._originWidth,
+//                    scaleY = that.options.height / that._originHeight,
+//                    x = that.options.x || 0,
+//                    y = that.options.y || 0;
+//
+//                scaleX = Utils.isNumber(scaleX) ? scaleX : 1;
+//                scaleY = Utils.isNumber(scaleY) ? scaleY : 1;
+//
+//                this._transform.translate = new Translation(x, y);
+//                this._transform.scale = new Scale(scaleX, scaleY);
+//                this._renderTransform();
+//            }
         },
         align: function (alignment) {
             this.options.align = alignment;
@@ -484,8 +500,9 @@ kendo_module({
             scaleX = Utils.isNumber(scaleX) ? scaleX : 1;
             scaleY = Utils.isNumber(scaleY) ? scaleY : 1;
 
-            var transform = new CompositeTransform(x, y, scaleX, scaleY);
-            that.native.setAttribute("transform", transform.toString());
+            this._transform.translate = new Translation(x, y);
+            this._transform.scale = new Scale(scaleX, scaleY);
+            this._renderTransform();
         },
         redraw: function (options) {
             var that = this;
@@ -702,8 +719,9 @@ kendo_module({
             scaleX = Utils.isNumber(scaleX) ? scaleX : 1;
             scaleY = Utils.isNumber(scaleY) ? scaleY : 1;
 
-            var transform = new CompositeTransform(x, y, scaleX, scaleY);
-            this.native.setAttribute("transform", transform.toString());
+            this._transform.translate = new Translation(x, y);
+            this._transform.scale = new Scale(scaleX, scaleY);
+            this._renderTransform();
         },
         redraw: function (options) {
             Element.fn.redraw.call(this, options);

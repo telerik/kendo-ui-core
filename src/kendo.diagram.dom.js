@@ -418,7 +418,7 @@ kendo_module({
             content: ""
         },
         bounds: function (value) {
-            var point, size, bounds;
+            var point, size, bounds, options;
             if (value) {
                 if (Utils.isString(value)) {
                     switch (value) {
@@ -433,17 +433,18 @@ kendo_module({
                     }
                 }
                 else { // we assume Rect.
+                    options = this.options;
                     this._bounds = value;
                     if (this.contentVisual) {
                         this.contentVisual.redraw(this._bounds);
                     }
                     point = value.topLeft();
-                    this.options.x = point.x;
-                    this.options.y = point.y;
-                    this.options.width = value.width;
-                    this.options.height = value.height;
+                    options.x = point.x;
+                    options.y = point.y;
                     this.visual.position(point);
 
+                    options.width = value.width;
+                    options.height = value.height;
                     this.shapeVisual.redraw({ width: value.width, height: value.height });
                     this.refreshConnections();
                     this._triggerBoundsChange();
@@ -673,6 +674,8 @@ kendo_module({
                     return new Rectangle(shapeOptions);
                 case "circle":
                     return new Circle(shapeOptions);
+//                case "text":
+//                    return new TextBlock(shapeOptions);
                 default:
                     var p = new Path(shapeOptions);
                     return p;
