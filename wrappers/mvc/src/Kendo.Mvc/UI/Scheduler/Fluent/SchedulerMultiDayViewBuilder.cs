@@ -397,8 +397,7 @@
 
         /// <summary>
         /// If set the view will be initially shown in business hours mode.
-        /// </summary>
-        /// <param name="value"></param>
+        /// </summary>        
         public SchedulerMultiDayViewBuilder<TView> ShowWorkHours()
         {
             view.ShowWorkHours = true;

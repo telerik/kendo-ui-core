@@ -378,8 +378,7 @@
         /// <summary>
         /// If set day and week views will be initially shown in business hours mode.
         /// </summary>
-        /// <remarks>This options is applicable only to work week, week and day views</remarks>
-        /// <param name="value"></param>
+        /// <remarks>This options is applicable only to work week, week and day views</remarks>        
         public SchedulerBuilder<TModel> ShowWorkHours()
         {
             Component.ShowWorkHours = true;

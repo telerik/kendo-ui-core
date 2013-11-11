@@ -704,13 +704,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// </param>
         /// <param name="noteTextMemberName">
         /// The name of the note text member.
-        /// </param>
-        /// <param name="errorLowMemberName">
-        /// The name of the error low member.
-        /// </param>
-        /// <param name="errorHighMemberName">
-        /// The name of the error high member.
-        /// </param>
+        /// </param>       
         public virtual ChartAreaSeriesBuilder<TModel> VerticalArea(
             Type memberType,
             string memberName,
