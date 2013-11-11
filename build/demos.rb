@@ -95,7 +95,9 @@ def offline_navigation(suite, path)
             next if path.include?('mobile.commercial') && category['name'] == 'adaptive'
 
             if include_item?(category)
-                category['items'] = category['items'].find_all { |item| include_item?(item) }
+                category['items'] = category['items'].find_all do |item|
+                    include_item?(item) && !(item['external'] && path.include?('web.commercial'))
+                end
 
                 offline[name].push(category)
             end
@@ -112,10 +114,10 @@ def offline_demos(navigation, path)
     navigation.each do |name, categories|
         categories.each do |category|
 
-
             category['items'].each do |item|
                 demos.push("#{path}/#{item['url']}") unless item['external']
             end
+
         end
     end
 
@@ -156,7 +158,7 @@ def demos(options)
         files = files + offline_demos(navigation, suite_path).include("#{suite_path}/index.html");
 
         # Build the index.html page of the suite
-        file "#{suite_path}/index.html" => "build/templates/#{template_dir}/suite-index.html.erb" do |t|
+        file "#{suite_path}/index.html" => DEMOS_BULDFILES.include("build/templates/#{template_dir}/suite-index.html.erb") do |t|
 
             template = ERB.new(File.read("build/templates/#{template_dir}/suite-index.html.erb"))
 
