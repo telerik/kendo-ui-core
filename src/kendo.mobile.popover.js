@@ -105,6 +105,7 @@ kendo_module({
 
             that.overlay = $(OVERLAY).appendTo(container).hide();
             popupOptions.appendTo = that.overlay;
+            popupOptions.copyAnchorStyles = false;
 
             if (options.className) {
                 that.overlay.addClass(options.className);
