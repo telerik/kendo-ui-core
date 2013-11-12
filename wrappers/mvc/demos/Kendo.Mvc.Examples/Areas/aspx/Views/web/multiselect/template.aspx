@@ -18,6 +18,7 @@
               });
           })
           .Height(300)
+          .HtmlAttributes(new { style = "width: 400px" })
           .HeaderTemplate("<div class=\"dropdown-header\">" +
                         "<span class=\"k-widget k-header\">Photo</span>" +
                         "<span class=\"k-widget k-header\">Contact info</span>" +

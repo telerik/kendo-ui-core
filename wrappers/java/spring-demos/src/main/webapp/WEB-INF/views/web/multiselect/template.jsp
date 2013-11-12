@@ -21,7 +21,7 @@
     <div class="demo-section">
         <h2>Select Customers</h2>
 
-        <kendo:multiSelect name="customers" placeholder="type 'John' ..."
+        <kendo:multiSelect name="customers" placeholder="type 'John' ..." style="width:400px"
             headerTemplate="<%=headerTemplate%>" itemTemplate="<%=itemTemplate%>" tagTemplate="<%=tagTemplate%>"
             height="300" dataTextField="contactName" dataValueField="customerID">
             <kendo:dataSource serverFiltering="true">
