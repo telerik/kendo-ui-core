@@ -468,7 +468,7 @@
 
     var kendoSkin = "silver";
 
-    window.kendoMobileOS = "ios";
+    window.kendoMobileOS = "ios7";
 
     $(Application.init);
 
