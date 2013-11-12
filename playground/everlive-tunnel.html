@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Piping data to Everlive</title>
+    <script src="../src/jquery.min.js"></script>
+    <script src="../src/kendo.web.min.js"></script>
+    <script src="../demos/mvc/content/shared/js/everlive.all.js"></script>
+</head>
+<body>
+    <button>Pipe data to Everlive</button>
+
+    <script>
+        $(document).ready(function() {
+
+        var everlive = new Everlive({
+            apiKey: "3q4sHgIqESXbpvOp",
+            scheme: "http"
+        });
+
+        var model = {
+            fields: {
+                OrderID: { type: "number" },
+                Freight: { type: "number" },
+                ShipName: { type: "string" },
+                OrderDate: { type: "date" },
+                ShipCity: { type: "string" }
+            }
+        };
+
+        var source = new kendo.data.DataSource({
+            type: "odata",
+            transport: {
+                read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+            },
+            schema: {
+                model: model
+            },
+            pageSize: 20,
+            serverPaging: true,
+            serverFiltering: true,
+            serverSorting: true
+        });
+
+        source.read();
+
+        var destination = new kendo.data.DataSource({
+            type: "everlive",
+            schema: {
+                model: {
+                    id: "Id",
+                    fields: {
+                        CreatedBy: { type: "string" },
+                        CreatedAt: { type: "date" },
+                        ModifiedAt: { type: "date" },
+                        Freight: { type: "number" },
+                        OrderDate: { type: "date" },
+                        ShipName: { type: "string" },
+                        ShipCity: { type: "string" }
+                    }
+                }
+            },
+            transport: {
+                typeName: "Order"
+            }
+        });
+
+        destination.read();
+
+        $("button").click(function() {
+            var sourceData = source.data();
+            var destinationData = destination.data();
+
+            if (destinationData.length && confirm("Destination is not empty. Would you like to purge it?")) {
+                while (destinationData.length) {
+                    destination.remove(destinationData[0]);
+                }
+            }
+
+            destination.data(sourceData);
+
+            destination.sync();
+        });
+        });
+    </script>
+</body>
+</html>
