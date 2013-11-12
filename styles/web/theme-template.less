@@ -443,8 +443,7 @@ textarea.k-textbox:hover,
 {
     color: @disabled-text-color;
     border-color: @widget-border-color;
-    .composite-background(@widget-gradient);
-    background-color: transparent;
+    background-color: @button-background-color;
 }
 
 .k-draghandle
@@ -687,7 +686,7 @@ textarea.k-textbox:hover,
 .k-listview>.k-state-focused,
 .k-grid-header th.k-state-focused,
 td.k-state-focused,
-.k-button:focus,
+.k-button:focus:not(.k-state-disabled):not([disabled]),
 .k-button.k-state-focused
 {
     .box-shadow(@focused-item-shadow);
@@ -697,7 +696,7 @@ td.k-state-focused,
 .k-list>.k-state-focused.k-state-selected,
 .k-listview>.k-state-focused.k-state-selected,
 td.k-state-focused.k-state-selected,
-.k-button:focus:active
+.k-button:focus:active:not(.k-state-disabled):not([disabled])
 {
     .box-shadow(@focused-active-item-shadow);
 }
