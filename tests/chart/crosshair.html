@@ -21,27 +21,38 @@
                 TOLERANCE = 1;
 
             (function() {
-                var crosshair, element, axis,
-                    plotArea, view,l;
+                var crosshair, element,
+                    chartBox = Box2D(0,0,200,200),
+                    plotArea, view;
 
                 function PlotAreaStub() { }
 
                 $.extend(PlotAreaStub.prototype, {
                     options: { },
                     backgroundBox: function () {
-                        return Box2D(0,0,200,200);
+                        return chartBox;
                     }
                 });
 
                 function createAxis(options) {
-                    axis = { options: $.extend({}, { vertical: true }, options) };
+                    options = options || {};
+                    var axis = new dataviz.NumericAxis(0, 1, options);
+                    axis.reflow(chartBox);
+                    axis.plotArea = new PlotAreaStub();
+                    var categoryAxis = new dataviz.CategoryAxis(
+                        $.extend({
+                            categories: ["Foo", "Bar"]
+                        }, options)
+                    );
+                    categoryAxis.reflow(chartBox);
+
+                    axis.pane = { axes: [categoryAxis] };
+                    return axis;
                 }
 
                 function createCrosshair(options, axisOptions) {
                     view = new ViewStub();
-                    createAxis(axisOptions);
-                    axis.plotArea = new PlotAreaStub();
-                    crosshair = new dataviz.Crosshair(axis, options);
+                    crosshair = new dataviz.Crosshair(createAxis(), options);
                     crosshair.getViewElements(view);
                     element = crosshair.element;
                 }
@@ -83,15 +94,8 @@
                 test("returns vertical points", function() {
                     createCrosshair();
                     points = crosshair.linePoints();
-                    deepEqual([points[0].x, points[0].y], [0,0]);
-                    deepEqual([points[1].x, points[1].y], [200,0]);
-                });
-
-                test("returns horizontal points", function() {
-                createCrosshair({}, { vertical: false });
-                    points = crosshair.linePoints();
-                    deepEqual([points[0].x, points[0].y], [0,0]);
-                    deepEqual([points[1].x, points[1].y], [0,200]);
+                    deepEqual([points[0].x, points[0].y], [0,7.5]);
+                    deepEqual([points[1].x, points[1].y], [199,7.5]);
                 });
 
             })();
