@@ -1,0 +1,57 @@
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+            <script src="../../content/shared/js/everlive.all.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    var everlive = new Everlive({
+                        apiKey: "3q4sHgIqESXbpvOp",
+                        scheme: "http"
+                    });
+
+                    var dataSource = new kendo.data.DataSource({
+                        type: "everlive",
+                        schema: {
+                            model: {
+                                id: "Id",
+                                fields: {
+                                    CreatedBy: { type: "string" },
+                                    CreatedAt: { type: "date" },
+                                    ModifiedAt: { type: "date" },
+                                    Freight: { type: "number" },
+                                    OrderDate: { type: "date" },
+                                    ShipName: { type: "string" },
+                                    ShipCity: { type: "string" }
+                                }
+                            }
+                        },
+                        transport: {
+                            typeName: "Order"
+                        }
+                    });
+
+                    $("#grid").kendoGrid({
+                        dataSource: dataSource,
+                        height: 430,
+                        sortable: true,
+                        pageable: false,
+                        columns: [
+                            "Freight",
+                            {
+                                field: "OrderDate",
+                                title: "Order Date",
+                                width: 120,
+                                format: "{0:MM/dd/yyyy}"
+                            }, {
+                                field: "ShipName",
+                                title: "Ship Name",
+                                width: 260
+                            }, {
+                                field: "ShipCity",
+                                title: "Ship City",
+                                width: 150
+                            }
+                        ]
+                    });
+                });
+            </script>
+        </div>
