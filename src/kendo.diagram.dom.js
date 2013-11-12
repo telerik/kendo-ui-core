@@ -614,16 +614,15 @@ kendo_module({
                 this.diagram.trigger(BOUNDSCHANGE, {item: this, bounds: this._bounds.clone()}); // the trigger modifies the arguments internally.
             }
         },
-        _transformPoint: function (absolutePoint) {
+        _transformPoint: function (point) {
             var rotate = this.rotate(),
                 bounds = this.bounds(),
-                tl = bounds.topLeft(),
-                result = absolutePoint;
+                tl = bounds.topLeft();
 
             if (rotate.angle) {
-                result.rotate(rotate.center().plus(tl), 360 - rotate.angle);
+                point.rotate(rotate.center().plus(tl), 360 - rotate.angle);
             }
-            return result;
+            return point;
         },
         _transformedBounds: function () {
             var bounds = this.bounds(),
@@ -1829,7 +1828,7 @@ kendo_module({
                             item = e.draggable.hint.data("data");
                             pos = e.draggable.hintOffset;
                             dp = that.documentToCanvasPoint(new Point(pos.left, pos.top));
-                            normal = that._normalizePointZoom(dp.minus(that.pan()));
+                            normal = that._normalizePointZoom(dp);
 
                             that.addShape(normal, item);
                         }

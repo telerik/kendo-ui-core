@@ -40,7 +40,7 @@
             margin: 5px;
         }
 
-        k-slider {
+        .k-slider {
             margin-left: 10px;
         }
 
@@ -104,7 +104,7 @@
         }
 
         #menu {
-            margin-left: 0px;
+            margin-left: 0;
         }
 
         #logo {
@@ -184,7 +184,6 @@
                     <li id="mnuNew" title="CTRL+N">New</li>
                     <li id="mnuOpen" title="CTRL+O">Open</li>
                     <li id="mnuSave" title="CTRL+S"><a href="#" id="mnuaSave" style="color:#fff;">Save</a></li>
-                    <hr/>
                     <li id="mnuTea" title="Sample diagram">Tea Processing</li>
                     <li id="mnuFlowchart" title="Sample diagram">Flowchart</li>
                     <li id="mnuFloorplan" title="Sample diagram">Floorplan</li>
@@ -195,12 +194,10 @@
                 <ul>
                     <li id="mnuUndo" title="CTRL+Z">Undo</li>
                     <li id="mnuRedo" title="CTRL+Y">Redo</li>
-                    <hr/>
                     <li id="mnuCut" title="CTRL+X">Cut</li>
                     <li id="mnuCopy" title="CTRL+C">Copy</li>
                     <li id="mnuPaste" title="CTRL+P">Paste</li>
                     <li id="mnuDelete" title="DEL">Delete</li>
-                    <hr/>
                     <li id="mnuSelectAll" title="CTRL+A">Select All</li>
                 </ul>
             </li>
@@ -364,56 +361,22 @@ function loadDiagram() {
 $(function () {
     function onload() {
         load("Flowchart.json");
-        /*var seq = Shapes.SequentialData;
-         seq.text = "Sequential Data.";
-         var shape1 = diagram.addShape(new Point(100, 100), seq);
-         shape2 = diagram.addShape(new Point(100, 400), Shapes.Wave);
-         shape2.content("content");
-
-         var shape3 = diagram.addShape(new Point(370, 400), Shapes.Rectangle);
-         var shape4 = diagram.addShape(new Point(400, 200), kendo.deepExtend({content: "Custom connectors"}, Shapes.Triangle));
-         var topCor = shape2.getConnector("Auto");
-         var topCor2 = shape3.getConnector("Auto");
-         var bottomCor = shape1.getConnector("Auto");
-         var bottomCor2 = shape4.getConnector("Auto");
-         diagram.connect(bottomCor, topCor);
-         var con2 = diagram.connect(bottomCor, topCor2);
-         diagram.connect(bottomCor, bottomCor2);
-         diagram.connect(new Point(200, 600), new Point(400, 800), {content: "Floating connection" });
-         con2.content("Connection Label");
-
-         // Org Chart also...
-         var s1 = diagram.addShape(new Point(800, 0), Shapes.Rectangle);
-
-         var s2 = diagram.addShape(new Point(600, 200), Shapes.Rectangle);
-         var s3 = diagram.addShape(new Point(1000, 200), Shapes.Rectangle);
-
-         var s4 = diagram.addShape(new Point(600, 400), Shapes.Rectangle);
-         var s5 = diagram.addShape(new Point(1000, 400), Shapes.Rectangle);
-         var s6 = diagram.addShape(new Point(800, 400), Shapes.Rectangle);
-
-         diagram.connect(s1, s2);
-         diagram.connect(s1, s3);
-         diagram.connect(s2, s4);
-         diagram.connect(s3, s5);
-         diagram.connect(s3, s6);
-         onLayoutChanged();*/
     }
 
 
-    $(document).bind('keydown', 'Ctrl+s', function (e) {
+    $(document).bind('keydown', 'Ctrl+s', function () {
         saveDiagram();
         return false;
     });
-    $(document).bind('keydown', 'Ctrl+o', function (e) {
+    $(document).bind('keydown', 'Ctrl+o', function () {
         loadDiagram();
         return false;
     });
-    $(document).bind('keydown', 'Ctrl+n', function (e) {
+    $(document).bind('keydown', 'Ctrl+n', function () {
         diagram.clear();
         return false;
     });
-    $(document).bind('keydown', 'Ctrl+a', function (e) {
+    $(document).bind('keydown', 'Ctrl+a', function () {
         selectAll();
         return false;
     });
