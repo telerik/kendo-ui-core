@@ -961,6 +961,24 @@
                 );
 
                 // ------------------------------------------------------------
+                module("Column Chart / Labels", {
+                    setup: function() {
+                        setupBarChart(plotArea, { series: [{
+                            data: [10, 0, null],
+                            labels: { visible: true }
+                        }] });
+                    }
+                });
+
+                test("creates labels for 0 values", 1, function() {
+                    equal(series.points[1].label.children[0].children[0].content, "0");
+                });
+
+                test("creates empty labels for null values", 1, function() {
+                    equal(series.points[2].label.children[0].children[0].content, "");
+                });
+
+                // ------------------------------------------------------------
                 module("Column Chart / Labels / Positive Values", {
                     setup: function() {
                         setupBarChart(plotArea, { series: [{

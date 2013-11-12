@@ -2838,7 +2838,7 @@ kendo_module({
                 value = bar.value,
                 options = bar.options,
                 labels = options.labels,
-                labelText = value,
+                labelText = value !== null ? value : "",
                 labelTemplate;
 
             if (bar._rendered) {
@@ -2847,7 +2847,7 @@ kendo_module({
                 bar._rendered = true;
             }
 
-            if (labels.visible && value) {
+            if (labels.visible) {
                 if (labels.template) {
                     labelTemplate = template(labels.template);
                     labelText = labelTemplate({
