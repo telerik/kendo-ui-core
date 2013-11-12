@@ -7,14 +7,13 @@
         <c:url value="/web/dropdownlist/template/read" var="readUrl" />
 
         <%
-        String headerTemplate = "<div class=\"k-widget k-header dropdown-header\">" +
-            "<span class=\"first\">Photo</span>" +
-            "<span class=\"last\">Contact info</span>" +
+        String headerTemplate = "<div class=\"dropdown-header\">" +
+                "<span class=\"k-widget k-header\">Photo</span>" +
+                "<span class=\"k-widget k-header\">Contact info</span>" +
             "</div>";
 
-        string template = "<img src=\"../../resources/web/customers/#:data.customerid#.jpg\"  alt=\"#:data.customerid#\" />" +
-                "<h3>${ data.contactname }</h3>" +
-                "<p>${ data.companyname }</p>";
+        String template = "<span class=\"k-state-default\"><img src=\"../../resources/web/Customers/#:data.customerId#.jpg\" alt=\"#:data.customerId#\" /></span>" +
+                          "<span class=\"k-state-default\"><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>";
 
         String valueTemplate = "<img class=\"selected-value\" src=\"../../resources/web/Customers/#:data.customerId#.jpg\"  alt=\"#:data.customerId#\" />" +
                 "<span>#:data.ContactName#</span>"
@@ -43,24 +42,24 @@
 
         <style>
             .dropdown-header {
-                overflow:hidden;
-                font-size: 1.3em;
-                padding: 5px 2px;
-                margin: -2px -2px 0;
-                border-width: 0 0 1px;
+                font-size: 1.2em;
             }
 
-            .dropdown-header .first {
-                width: 65px;
-                margin-left:4px;
-                display: block;
-                float: left;
+            .dropdown-header > span {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
                 text-align: left;
+                display: inline-block;
+                border-style: solid;
+                border-width: 0 0 1px 1px;
+                padding: .3em .6em;
+                width: 312px;
             }
 
-            .dropdown-header .last {
-                margin-left: 22px;
-                float: left;
+            .dropdown-header > span:first-child {
+                width: 82px;
+                border-left-width: 0;
             }
 
             .demo-section {
@@ -80,26 +79,45 @@
             }
 
             #customers-list {
-                padding-bottom: 30px;
+                padding-bottom: 26px;
             }
-            #customers-list .k-item {
-                overflow: hidden; /* clear floated images */
+
+            #customers-list .k-item > span{
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                display: inline-block;
+                border-style: solid;
+                border-width: 0 0 1px 1px;
+                vertical-align: top;
+                min-height: 95px;
+                width: 79%;
+                padding: .6em 0 0 .6em;
             }
+
+            #customers-list .k-item > span:first-child{
+                width: 77px;
+                border-left-width: 0;
+                padding: .6em 0 0 0;
+            }
+
             #customers-list img {
                 -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
                 -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
                 box-shadow: 0 0 2px rgba(0,0,0,.4);
-                float: left;
                 width: 70px;
                 height: 70px;
-                margin: 5px 20px 5px 0;
             }
+
             #customers-list h3 {
-                margin: 20px 0 5px 0;
                 font-size: 1.6em;
+                margin: 0;
+                padding: 0;
             }
+
             #customers-list p {
                 margin: 0;
+                padding: 0;
             }
         </style>
     </div>
