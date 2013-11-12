@@ -321,13 +321,9 @@ kendo_module({
 
             WINDOW.on("load", hideBar);
 
-            kendo.onResize(hideBar);
-
-            that.element[0].addEventListener("touchstart", function(e) {
-                if (!kendo.triggeredByInput(e)) {
-                    that._hideBar();
-                }
-            }, true);
+            kendo.onResize(function () {
+                setTimeout(window.scrollTo, 0, 0, 1);
+            });
         },
 
         _setupDocumentTitle: function() {
@@ -342,23 +338,10 @@ kendo_module({
 
         _hideBar: function() {
             var that = this,
-                element = that.element,
-                orientation = window.orientation + "",
-                initialHeight = that._initialHeight,
-                newHeight;
+                element = that.element;
 
-            if (!initialHeight[orientation]) {
-                initialHeight[orientation] = WINDOW.height();
-            }
-
-            newHeight = initialHeight[orientation] + BARCOMPENSATION;
-
-            if (newHeight != element.height()) {
-                element.height(newHeight);
-                $(window).trigger(kendo.support.resize);
-            }
-
-            setTimeout(window.scrollTo, 0, 0, 1);
+            element.height(kendo.support.transforms.css + "calc(100% + " + BARCOMPENSATION + "px)");
+            $(window).trigger(kendo.support.resize);
         }
     });
 
