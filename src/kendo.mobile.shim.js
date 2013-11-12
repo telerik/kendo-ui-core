@@ -31,8 +31,13 @@ kendo_module({
 
             that.shim = shim;
             that.element = element;
+            options = that.options;
 
-            if (!that.options.modal) {
+            if (options.className) {
+                that.shim.addClass(options.className);
+            }
+
+            if (!options.modal) {
                 that.shim.on("up", "hide");
             }
 
@@ -47,10 +52,10 @@ kendo_module({
                 animation: {
                     open: {
                         effects: effect,
-                        duration: that.options.duration
+                        duration: options.duration
                     },
                     close: {
-                        duration: that.options.duration
+                        duration: options.duration
                     }
                 },
                 deactivate: function() {
@@ -66,7 +71,7 @@ kendo_module({
 
         options: {
             name: "Shim",
-            modal: true,
+            modal: false,
             align: undefined,
             position: undefined,
             effect: undefined,
@@ -74,12 +79,11 @@ kendo_module({
         },
 
         show: function() {
-            this.shim.css("height", this.shim.parent()[0].scrollHeight);
             this.popup.open();
         },
 
         hide: function(e) {
-            if (!e || !$.contains(this.shim[0], e.target)) {
+            if (!e || !$.contains(this.shim.children()[0], e.target)) {
                 this.popup.close();
             }
         },

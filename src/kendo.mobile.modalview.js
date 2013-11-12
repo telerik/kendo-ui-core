@@ -41,7 +41,8 @@ kendo_module({
                 modal: options.modal,
                 position: "center center",
                 align: "center center",
-                effect: "fade:in"
+                effect: "fade:in",
+                className: "km-modalview-root"
             });
 
             that._layout();

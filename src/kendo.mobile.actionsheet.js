@@ -43,7 +43,7 @@ kendo_module({
                 .on("click", BUTTONS, kendo.preventDefault);
 
             that.wrapper = element.parent();
-            that.shim = new ShimClass(that.wrapper, $.extend({modal: os.ios && os.majorVersion < 7}, that.options.popup) );
+            that.shim = new ShimClass(that.wrapper, $.extend({modal: os.ios && os.majorVersion < 7, className: "km-actionsheet-root"}, that.options.popup) );
 
             kendo.notify(that, ui);
 

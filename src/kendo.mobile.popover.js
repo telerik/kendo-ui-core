@@ -106,6 +106,10 @@ kendo_module({
             that.overlay = $(OVERLAY).appendTo(container).hide();
             popupOptions.appendTo = that.overlay;
 
+            if (options.className) {
+                that.overlay.addClass(options.className);
+            }
+
             that.popup = new kendo.ui.Popup(that.wrapper, $.extend(true, popupOptions, ANIMATION, DIRECTIONS[options.direction]));
         },
 
@@ -174,6 +178,7 @@ kendo_module({
             options = that.options;
 
             popupOptions = $.extend({
+                className: "km-popover-root",
                 "show": function() { that.trigger(OPEN, { target: that.popup.target() }); },
                 "hide": function() { that.trigger(CLOSE); }
             }, this.options.popup);
