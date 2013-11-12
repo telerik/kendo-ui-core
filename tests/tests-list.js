@@ -180,6 +180,7 @@ var tests = [
     "diagram/formatting.html",
     "diagram/intersection.html",
     "diagram/math.html",
+	"diagram/layout.html",
     "diagram/services.html",
     "diagram/svg.html",
     "diagram/utils.html",
