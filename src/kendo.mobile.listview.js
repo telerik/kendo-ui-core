@@ -716,7 +716,10 @@ kendo_module({
             listView.trigger(DATA_BINDING);
 
             if (action === "add" && !groupedMode) {
-                listView.insertAt(dataItems, e.index);
+                var index = view.indexOf(dataItems[0]);
+                if (index > -1) {
+                    listView.insertAt(dataItems, index);
+                }
             } else if (action === "remove" && !groupedMode) {
                 listView.remove(dataItems);
             } else if (groupedMode) {
