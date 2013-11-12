@@ -35,9 +35,14 @@
             layer._initOptions(options);
             layer.map = map;
 
-            this.element = $(this._template(this)).appendTo(map.scrollElement);
+            this.element = $("<div class='k-layer'></div>")
+                           .css({
+                               "zIndex": this.options.zIndex,
+                               "opacity": this.options.opacity
+                           })
+                           .appendTo(map.scrollElement);
 
-            layer._loadView();
+            this._view = new TileView(this.element, this.options);
 
             map.bind("reset", proxy(layer.reset, layer));
             if (kendo.support.mobileOS) {
@@ -45,11 +50,6 @@
             } else {
                 map.bind("pan", proxy(layer._pan, this));
             }
-        },
-
-        _loadView: function() {
-            this._view = new TileView(this.element, this.options);
-            this._updateView();
         },
 
         _updateView: function() {
@@ -76,13 +76,6 @@
             this._view.clear();
             this._view.reset();
         },
-
-        _template: kendo.template(
-            "<div class='k-layer'" +
-                "style='width: #= kendo.dataviz.util.renderSize(options.width) #;" +
-                "height: #= kendo.dataviz.util.renderSize(options.height) #;'>" +
-            "</div>"
-        ),
 
         _pan: function() {
             var layer = this,
@@ -221,8 +214,7 @@
                         x: index.x,
                         y: index.y,
                         subdomain: this.subdomainText()
-                    }),
-                    opacity: this.options.opacity
+                    })
                 };
 
             return this.pool.get(this._center, tileOptions);
@@ -267,8 +259,6 @@
             htmlElement.style.top = renderSize(options.offset.y);
             htmlElement.style.left = renderSize(options.offset.x);
             this.offset = options.offset;
-
-            htmlElement.style.opacity = options.opacity;
 
             this.point = options.point;
             this.index = options.index;

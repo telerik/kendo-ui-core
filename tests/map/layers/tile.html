@@ -7,6 +7,7 @@
     <script src="../../qunit/addons/close-enough/qunit-close-enough.js"></script>
     <script src="../../kendo-test-helpers.js"></script>
     <link href="../../qunit/qunit/qunit.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../../styles/dataviz/kendo.dataviz.css">
 </head>
 <body>
     <script src="../../../src/kendo.core.js"></script>
@@ -17,16 +18,45 @@
     <script src="../../../src/map/crs.js"></script>
     <script src="../../../src/map/layers/tile.js"></script>
     <script src="../../../src/map/main.js"></script>
+    <script src="helpers.js"></script>
     <script>
         var dataviz = kendo.dataviz,
             map = dataviz.map,
 
             TilePool = map.layers.TilePool,
+            TileLayer = map.layers.TileLayer,
             ImageTile = map.layers.ImageTile,
             TileView = map.layers.TileView,
             Location = map.Location,
 
             Point = dataviz.geometry.Point;
+
+        (function() {
+            var map,
+                layer;
+
+            // ------------------------------------------------------------
+            module("Tile Layer", {
+                setup: function() {
+                    map = new MapMock();
+                    layer = new TileLayer(map);
+                }
+            });
+
+            test("appends to scrollElement", function() {
+                ok(layer.element.parent().is("#scroll-element"));
+            });
+
+            test("sets custom z-index", function() {
+                layer = new TileLayer(map, { zIndex: 100 });
+                equal(layer.element.css("zIndex"), 100);
+            });
+
+            test("sets opacity", function() {
+                layer = new TileLayer(map, { opacity: 0.5 });
+                equal(layer.element.css("opacity"), 0.5);
+            });
+        })();
 
         (function() {
 
@@ -273,13 +303,6 @@
                 tile.destroy();
 
                 ok(!tile.element);
-            });
-
-            test("renders opacity", function() {
-                tile = createImageTile();
-
-                debugger;
-                equal(tile.element.css("opacity"), 0);
             });
 
             // ------------------------------------------------------------
