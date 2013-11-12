@@ -1756,9 +1756,9 @@ p#copy
     bottom: 0;
     left: 0;
     width: 84px;
-    height: 80px;
+    height: 100px;
     margin: 0 auto;
-    background: no-repeat url(../../mobile/shared/sprite.devices.png);
+    background: no-repeat url(../../mobile/shared/sprite.devices-13-q3.png);
     background-size: auto 100%;
     text-indent:-4444px;
     text-align:center;
@@ -1770,12 +1770,12 @@ p#copy
     transition: all 0.1s ease 0s;
 }
 
-#deviceList .iosThumb{background-position: 0 30px;}
-#deviceList .androidThumb{background-position: 25% 30px;}
-#deviceList .blackberryThumb{background-position: 50% 30px;}
-#deviceList .meegoThumb{background-position: 100% 30px;}
-#deviceList .wpThumb{background-position: 75% 30px;}
-#deviceList .flatThumb{background-position: 100% 30px;}
+#deviceList .iosThumb{background-position: 0 25px;}
+#deviceList .androidThumb{background-position: 25% 25px;}
+#deviceList .blackberryThumb{background-position: 50% 25px;}
+#deviceList .meegoThumb{background-position: 100% 25px;}
+#deviceList .wpThumb{background-position: 75% 25px;}
+#deviceList .flatThumb{background-position: 100% 25px;}
 
 #deviceList .selectedThumb .iosThumb,#deviceList li:hover .iosThumb{background-position: 0 0;}
 #deviceList .selectedThumb .androidThumb,#deviceList li:hover .androidThumb{background-position: 25% 0;}
