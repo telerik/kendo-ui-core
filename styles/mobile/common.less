@@ -1734,6 +1734,21 @@
 
 /* ModalView */
 
+.km-modalview-root
+{
+    text-align: center;
+}
+
+.km-modalview-root > .k-animation-container
+{
+    text-align: left;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    display: inline-block !important;
+    vertical-align: middle;
+}
+
 .km-modalview,
 .km-modalview-wrapper:before
 {
@@ -1749,8 +1764,11 @@
     box-flex: 1;
 }
 
+.km-modalview-root:before,
 .km-modalview-wrapper:before
 {
+    vertical-align: middle;
+    height: 100%;
     margin-left: -1px;
     content: "\a0";
     width: 0px;

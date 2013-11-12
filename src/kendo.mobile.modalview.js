@@ -25,8 +25,8 @@ kendo_module({
             element = that.element;
             options = that.options;
 
-            width = element[0].style.width || element.css("width");
-            height = element[0].style.height || element.css("height");
+            width = element[0].style.width || "auto";
+            height = element[0].style.height || "auto";
 
             element.addClass("km-modalview").wrap(WRAP);
 
@@ -51,15 +51,6 @@ kendo_module({
             that.element.css("display", "");
 
             that.trigger(INIT);
-            kendo.onResize(function() {
-                var positionedElement = that.wrapper.parent(),
-                    viewPort = positionedElement.parent();
-
-                positionedElement.css({
-                    top: (viewPort.height() - positionedElement.height()) / 2 + "px",
-                    left: (viewPort.width() - positionedElement.width()) / 2 + "px"
-                });
-            });
         },
 
         events: [
