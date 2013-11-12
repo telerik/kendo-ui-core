@@ -44,10 +44,10 @@ namespace Kendo.Models
         {
 #if DEBUG
             "web/kendo.common.less",
-            "web/kendo.black.less"
+            "web/kendo.metroblack.less"
 #else
             "kendo.common.min.css",
-            "kendo.black.min.css"
+            "kendo.metroblack.min.css"
 #endif
         };
 
