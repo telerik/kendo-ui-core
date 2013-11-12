@@ -164,6 +164,7 @@
     <script src="../../../src/kendo.diagram.dom.js"></script>
 
     <script src="../Generic/jquery.hotkeys.js"></script>
+    <script src="tools.js"></script>
 
     <script src="shapes.js"></script>
 </head>
@@ -238,6 +239,9 @@
             <span class="menu-text">Canvas:</span><input id="backgroundPicker"/>
             <span class="menu-text">Object:</span><input id="shapePicker"/>
         </div>
+        <div class="group">
+            <span class="menu-text">Tools:</span><input id="toolsPicker"/>
+        </div>
     </div>
     <div id="splitter">
         <div id="toolBoxDiv">
@@ -275,6 +279,8 @@
             </g>
         </svg>
     </div>
+
+
 </script>
 
 <script>
@@ -408,7 +414,6 @@ $(function () {
             kendo = window.kendo,
             Point = kendo.diagram.Point;
 
-
     var list = $("#toolBox").kendoListView({
         dataSource: {
             data: shapesSource
@@ -516,9 +521,6 @@ $(function () {
     $("#toBackButton").click(function (e) {
         diagram.toBack();
     });
-    $("#layoutButton").click(function (e) {
-        onLayoutChanged();
-    });
 
     function onZoom(e) {
         diagram.zoom(e.value);
@@ -534,10 +536,6 @@ $(function () {
         change: onZoom,
         slide: onZoom
     }).data("kendoSlider");
-
-    var onLayoutChanged = function (e) {
-        layout($("#Layouts").data("kendoDropDownList").value());
-    };
 
     $("#backgroundPicker").kendoColorPicker({
         value: "#fff",
@@ -610,6 +608,23 @@ $(function () {
             }
         });
     }
+
+    var tools = [
+        {value: "SelectionTool", text: "Selection"},
+        {value: "TextTool", text: "Text"},
+        {value: "ShapeTool", text: "ShapeTool"}
+    ];
+
+    $("#toolsPicker").kendoDropDownList({
+        dataTextField: "text",
+        dataValueField: "value",
+        dataSource: tools,
+        change: function (e) {
+            var tool = new kendo.diagram[$("#toolsPicker").val().toString()]();
+            tool.toolService = diagram.toolService;
+            diagram.toolService.tools[4] = tool;
+        }
+    });
 
     $("#menu").kendoMenu({
         select: onMenuSelect

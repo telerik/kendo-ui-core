@@ -620,12 +620,10 @@ kendo_module({
         end: function () {
             var diagram = this.toolService.diagram, unit;
             if (this.adorner) {
-                //diagram.undoRedoService.begin();
                 unit = this.adorner.stop();
                 if (unit) {
                     diagram.undoRedoService.add(unit, false);
                 }
-                //diagram.undoRedoService.commit();
             }
             this.adorner = undefined;
             this.handle = undefined;
@@ -812,7 +810,7 @@ kendo_module({
             this.activeTool = undefined;
         },
         start: function (p, meta) {
-            meta = deepExtend({}, meta);
+            //meta = deepExtend({}, meta);
             this._updateHoveredItem(p);
             this._finishEditShape();
             this._activateTool(meta);
@@ -822,7 +820,7 @@ kendo_module({
             return true;
         },
         move: function (p, meta) {
-            meta = deepExtend({}, meta);
+            //meta = deepExtend({}, meta);
             var updateHovered = true;
             if (this.activeTool) {
                 updateHovered = this.activeTool.move(p, meta);
@@ -834,7 +832,7 @@ kendo_module({
             return true;
         },
         end: function (p, meta) {
-            meta = deepExtend({}, meta);
+            //meta = deepExtend({}, meta);
             if (this.activeTool) {
                 this.activeTool.end(p, meta);
             }
@@ -906,6 +904,10 @@ kendo_module({
 
             diagram.zoom(z, p);
             return true;
+        },
+        addTool: function(tool, index){
+            tool.toolService = this;
+            this.tools.splice(index, 0, tool);
         },
         _discardNewConnection: function () {
             if (this.newConnection) {
@@ -1837,6 +1839,7 @@ kendo_module({
         ToBackUnit: ToBackUnit,
         ConnectionRouterBase: ConnectionRouterBase,
         PolylineRouter: PolylineRouter,
-        CascadingRouter: CascadingRouter
+        CascadingRouter: CascadingRouter,
+        SelectionTool: SelectionTool
     });
 })(window.kendo.jQuery);
