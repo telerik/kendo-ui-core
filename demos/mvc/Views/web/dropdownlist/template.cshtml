@@ -3,7 +3,7 @@
 
             <div class="demo-section">
                 <h2>Customers</h2>
-                <input id="titles" style="width: 400px;"/>
+                <input id="customers" style="width: 400px;"/>
             </div>
             
             <div class="demo-section">
@@ -15,7 +15,7 @@
 
             <script>
                 $(document).ready(function() {
-                    $("#titles").kendoDropDownList({
+                    $("#customers").kendoDropDownList({
                         dataTextField: "ContactName",
                         dataValueField: "CustomerID",
                         headerTemplate: '<div class="dropdown-header">' +
@@ -35,7 +35,7 @@
                         }
                     });
 
-                    var dropdownlist = $("#titles").data("kendoDropDownList");
+                    var dropdownlist = $("#customers").data("kendoDropDownList");
                 });
             </script>
 
@@ -77,11 +77,11 @@
                     margin: 0 4px;
                 }
 
-                #titles-list {
+                #customers-list {
                     padding-bottom: 26px;
                 }
 
-                #titles-list .k-item > span{
+                #customers-list .k-item > span{
                     -webkit-box-sizing: border-box;
                     -moz-box-sizing: border-box;
                     box-sizing: border-box;
@@ -94,13 +94,13 @@
                     padding: .6em 0 0 .6em;
                 }
 
-                #titles-list .k-item > span:first-child{
+                #customers-list .k-item > span:first-child{
                     width: 77px;
                     border-left-width: 0;
                     padding: .6em 0 0 0;
                 }
 
-                #titles-list img {
+                #customers-list img {
                     -moz-box-shadow: 0 0 2px rgba(0,0,0,.4);
                     -webkit-box-shadow: 0 0 2px rgba(0,0,0,.4);
                     box-shadow: 0 0 2px rgba(0,0,0,.4);
@@ -108,13 +108,13 @@
                     height: 70px;
                 }
 
-                #titles-list h3 {
+                #customers-list h3 {
                     font-size: 1.6em;
                     margin: 0;
                     padding: 0;
                 }
 
-                #titles-list p {
+                #customers-list p {
                     margin: 0;
                     padding: 0;
                 }
