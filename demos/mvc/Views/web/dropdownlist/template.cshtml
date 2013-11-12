@@ -23,7 +23,7 @@
                                 '<span class="k-widget k-header">Contact info</span>' +
                             '</div>',
                         valueTemplate: '<img class="selected-value" src=\"../../content/web/Customers/#:data.CustomerID#.jpg\" alt=\"#:data.CustomerID#\" /><span>#:data.ContactName#</span>',
-                        template: '<span class="k-state-default"><img src=\"../../content/web/Customers/${data.CustomerID}.jpg\" alt=\"#:data.CustomerID#\" /></span>' +
+                        template: '<span class="k-state-default"><img src=\"../../content/web/Customers/#:data.CustomerID#.jpg\" alt=\"#:data.CustomerID#\" /></span>' +
                                   '<span class="k-state-default"><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>',
                         dataSource: {
                             transport: {
@@ -95,7 +95,7 @@
                 }
 
                 #titles-list .k-item > span:first-child{
-                    width: 21%;
+                    width: 77px;
                     border-left-width: 0;
                     padding: .6em 0 0 0;
                 }
