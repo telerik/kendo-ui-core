@@ -103,8 +103,8 @@ kendo_module({
                 that._cellID = id + "_cell_selected";
             }
 
-            value = options.value;
             normalize(options);
+            value = parse(options.value, options.format, options.culture);
 
             that._index = views[options.start];
             that._current = new DATE(+restrictValue(value, options.min, options.max));

@@ -295,6 +295,14 @@
 
                 ok(!cal._cell.hasClass("k-state-focused"));
             });
+
+            test("Widget does not fall into infinitive loop", function() {
+                var cal = new Calendar(div, {
+                    value: '2000/10/5'
+                });
+
+                ok(true);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
