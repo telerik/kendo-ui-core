@@ -1770,14 +1770,14 @@ p#copy
     transition: all 0.1s ease 0s;
 }
 
-#deviceList .iosThumb{background-position: 0 25px;}
+#deviceList .ios7Thumb{background-position: 0 25px;}
 #deviceList .androidThumb{background-position: 25% 25px;}
 #deviceList .blackberryThumb{background-position: 50% 25px;}
 #deviceList .meegoThumb{background-position: 100% 25px;}
 #deviceList .wpThumb{background-position: 75% 25px;}
 #deviceList .flatThumb{background-position: 100% 25px;}
 
-#deviceList .selectedThumb .iosThumb,#deviceList li:hover .iosThumb{background-position: 0 0;}
+#deviceList .selectedThumb .ios7Thumb,#deviceList li:hover .ios7Thumb{background-position: 0 0;}
 #deviceList .selectedThumb .androidThumb,#deviceList li:hover .androidThumb{background-position: 25% 0;}
 #deviceList .selectedThumb .blackberryThumb,#deviceList li:hover .blackberryThumb{background-position: 50% 0;}
 #deviceList .selectedThumb .meegoThumb,#deviceList li:hover .meegoThumb{background-position: 100% 0;}

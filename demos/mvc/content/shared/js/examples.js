@@ -472,7 +472,7 @@
 
     $(Application.init);
 
-    var mobileClasses = "km-ios km-android km-blackberry km-ios4 km-wp km-flat";
+    var mobileClasses = "km-ios km-ios4 km-ios5 km-ios6 km-ios7 km-android km-blackberry km-wp km-flat";
 
     function applyCurrentTheme() {
         if (supports.sessionStorage) {
@@ -492,7 +492,7 @@
         }
 
         $(container).removeClass(mobileClasses).addClass("km-" + kendoMobileOS);
-        $("#device-wrapper").removeClass("ios android blackberry wp flat").addClass(kendoMobileOS);
+        $("#device-wrapper").removeClass("ios7 android blackberry wp flat").addClass(kendoMobileOS);
         $("#deviceList .selectedThumb").removeClass("selectedThumb");
         $("#deviceList ." + kendoMobileOS + "Thumb").parent().addClass("selectedThumb");
     }
@@ -523,7 +523,7 @@
 
         var oses = new kendo.data.DataSource({
             data: [
-                { text: "iOS", value: "ios" },
+                { text: "iOS", value: "ios7" },
                 { text: "Android", value: "android" },
                 { text: "Blackberry", value: "blackberry" },
                 { text: "WP8", value: "wp" },
