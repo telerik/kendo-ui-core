@@ -513,6 +513,9 @@ kendo_module({
         apply: function (p) {
             return new Point(this.a * p.x + this.c * p.y + this.e, this.b * p.x + this.d * p.y + this.f);
         },
+        applyRect: function (r) {
+            return Rect.fromPoints(this.apply(r.topLeft()), this.apply(r.bottomRight()));
+        },
         toString: function () {
             return "matrix(" + this.a + " " + this.b + " " + this.c + " " + this.d + " " + this.e + " " + this.f + ")";
         }

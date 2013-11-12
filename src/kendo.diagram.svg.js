@@ -338,20 +338,12 @@ kendo_module({
             this.content(this.options.text);
         },
         size: function () {
-//            if (this.options.autoSize) {
-//                var that = this;
-//                var scaleX = that.options.width / that._originWidth,
-//                    scaleY = that.options.height / that._originHeight,
-//                    x = that.options.x || 0,
-//                    y = that.options.y || 0;
-//
-//                scaleX = Utils.isNumber(scaleX) ? scaleX : 1;
-//                scaleY = Utils.isNumber(scaleY) ? scaleY : 1;
-//
-//                this._transform.translate = new Translation(x, y);
-//                this._transform.scale = new Scale(scaleX, scaleY);
-//                this._renderTransform();
-//            }
+            // TODO: scale texta to fit the rectangle in case of text shape.
+        },
+        bounds: function () {
+            var o = this.options,
+                containerRect = new Rect(o.x, o.y, o.width, o.height);
+            return containerRect;
         },
         align: function (alignment) {
             this.options.align = alignment;
@@ -360,7 +352,7 @@ kendo_module({
         _align: function () {
             this._measure();
             var o = this.options,
-                containerRect = new Rect(o.x, o.y, o.width, o.height),
+                containerRect = this.bounds(),
                 aligner = new RectAlign(containerRect),
                 contentBounds = aligner.align(this._originSize, o.align);
 

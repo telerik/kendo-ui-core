@@ -307,7 +307,8 @@ kendo_module({
                             x: bounds.x,
                             y: bounds.y,
                             width: bounds.width,
-                            height: bounds.height
+                            height: bounds.height,
+                            autoSize: this.options.autoSize
                         });
 
                         this.visual.append(this.contentVisual);
@@ -674,8 +675,8 @@ kendo_module({
                     return new Rectangle(shapeOptions);
                 case "circle":
                     return new Circle(shapeOptions);
-//                case "text":
-//                    return new TextBlock(shapeOptions);
+                case "text": // Maybe should be something else.
+                    return new Rectangle(shapeOptions);
                 default:
                     var p = new Path(shapeOptions);
                     return p;

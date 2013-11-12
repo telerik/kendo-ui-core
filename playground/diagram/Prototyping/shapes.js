@@ -3,12 +3,12 @@ var shapesSource = [
         options: {
             name: "Text",
             content: "Text",
-            //data: "text",
+            data: "text",
             connectors: [],
             background: "white",
             hoveredBackground: "white",
-            fillOpacity: 0
-            //autoSize: true,
+            fillOpacity: 0,
+            autoSize: true,
             //height: 30
         }
     },
