@@ -23,6 +23,7 @@
     border-radius: 15px;
     color: #FFFFFF;
     font-size: 10px;
+    font-weight: bold;
     margin-left: 5px;
     padding: 2px 6px 2px 5px;
 }
@@ -47,5 +48,6 @@
 {
     background-color: #f00;
     background-clip: border-box;
+    font-weight: bold;
 }
 /*configurator*/
