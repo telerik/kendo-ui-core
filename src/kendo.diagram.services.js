@@ -810,7 +810,7 @@ kendo_module({
             this.activeTool = undefined;
         },
         start: function (p, meta) {
-            //meta = deepExtend({}, meta);
+            meta = deepExtend({}, meta);
             this._updateHoveredItem(p);
             this._finishEditShape();
             this._activateTool(meta);
@@ -820,7 +820,7 @@ kendo_module({
             return true;
         },
         move: function (p, meta) {
-            //meta = deepExtend({}, meta);
+            meta = deepExtend({}, meta);
             var updateHovered = true;
             if (this.activeTool) {
                 updateHovered = this.activeTool.move(p, meta);
@@ -832,7 +832,7 @@ kendo_module({
             return true;
         },
         end: function (p, meta) {
-            //meta = deepExtend({}, meta);
+            meta = deepExtend({}, meta);
             if (this.activeTool) {
                 this.activeTool.end(p, meta);
             }
