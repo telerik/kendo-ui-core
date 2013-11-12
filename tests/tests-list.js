@@ -83,6 +83,7 @@ var tests = [
     "chart/funnel.html",
     "chart/selection.html",
     "chart/mvvm.html",
+    "chart/crosshair.html",
     "chart/api.html",
     "chart/error-bar.html",
     "chart/curveprocessor.html",
