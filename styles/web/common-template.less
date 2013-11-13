@@ -5543,7 +5543,7 @@ div[name="recurrenceRule"] > .k-dropdown
 .km-pane-wrapper .k-edit-field > *:not([type="checkbox"]):not([type="radio"]):not(.k-button)
 {
     width: 80%;
-    padding: .5em 0;
+    padding: .6em 0;
     margin: -.5em 0;
 }
 
@@ -5629,16 +5629,33 @@ div[name="recurrenceRule"] > .k-dropdown
     float: left;
 }
 
-.km-pane-wrapper .k-mobile-list .k-numeric-wrap
+.km-pane-wrapper .k-mobile-list .k-picker-wrap,
+.km-pane-wrapper .k-mobile-list .k-numeric-wrap,
+.km-pane-wrapper .k-mobile-list .k-dropdown-wrap
 {
     position: static;
+    .box-shadow(none);
 }
 
+.km-pane-wrapper .k-mobile-list .k-datepicker .k-select,
+.km-pane-wrapper .k-mobile-list .k-datetimepicker .k-select,
 .km-pane-wrapper .k-mobile-list .k-numerictextbox .k-select
 {
     position: absolute;
     top: 0;
     right: 0;
+    line-height: auto;
+}
+
+.km-pane-wrapper .k-mobile-list .k-datepicker .k-select:before,
+.km-pane-wrapper .k-mobile-list .k-datetimepicker .k-select:before,
+.km-pane-wrapper .k-mobile-list .k-numerictextbox .k-select:before
+{
+    content: "\a0";
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
 }
 
 .km-pane-wrapper .k-mobile-list .k-numerictextbox .k-link
