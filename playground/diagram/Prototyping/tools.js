@@ -1,4 +1,4 @@
-$(function () {
+(function () {
     var kendo = window.kendo,
         Class = kendo.Class,
         diagram = kendo.diagram;
