@@ -117,6 +117,14 @@ public class EditorTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("stylesheets", value);
     }
 
+    public java.lang.String getTag() {
+        return (java.lang.String)getProperty("tag");
+    }
+
+    public void setTag(java.lang.String value) {
+        setProperty("tag", value);
+    }
+
     public String getChange() {
         Function property = ((Function)getProperty("change"));
         if (property != null) {

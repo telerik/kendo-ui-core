@@ -15,7 +15,7 @@ class MenuAnimationOpen extends \Kendo\SerializableObject {
     }
 
     /**
-    * Defines the animation duration.
+    * Defines the animation duration in milliseconds.
     * @param float $value
     * @return \Kendo\UI\MenuAnimationOpen
     */

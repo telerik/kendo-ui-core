@@ -24,15 +24,6 @@ class PanelBarAnimationExpand extends \Kendo\SerializableObject {
         return $this->setProperty('effects', $value);
     }
 
-    /**
-    * 
-    * @param boolean $value
-    * @return \Kendo\UI\PanelBarAnimationExpand
-    */
-    public function show($value) {
-        return $this->setProperty('show', $value);
-    }
-
 //<< Properties
 }
 

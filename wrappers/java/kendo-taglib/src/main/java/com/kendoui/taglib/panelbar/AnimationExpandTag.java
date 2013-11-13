@@ -67,14 +67,6 @@ public class AnimationExpandTag extends  BaseTag  /* interfaces *//* interfaces 
         setProperty("effects", value);
     }
 
-    public boolean getShow() {
-        return (boolean)getProperty("show");
-    }
-
-    public void setShow(boolean value) {
-        setProperty("show", value);
-    }
-
 //<< Attributes
 
 }

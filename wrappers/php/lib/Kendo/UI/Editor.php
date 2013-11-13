@@ -3,12 +3,24 @@
 namespace Kendo\UI;
 
 class Editor extends \Kendo\UI\Widget {
+    protected $ignore = array('content', 'tag');
+
     protected function name() {
         return 'Editor';
     }
 
     protected function createElement() {
-        $element = new \Kendo\Html\Element('textarea');
+        $tag = $this->getProperty('tag');
+
+        if (gettype($tag) != 'string') {
+            $tag = 'textarea';
+        }
+
+        $element = new \Kendo\Html\Element($tag);
+
+        if ($tag != 'textarea') {
+            $element->attr('contentEditable', 'true');
+        }
 
         $content = $this->getProperty('content');
 
@@ -63,6 +75,15 @@ class Editor extends \Kendo\UI\Widget {
     */
     public function imageBrowser($value) {
         return $this->setProperty('imageBrowser', $value);
+    }
+
+    /**
+    * The tag that will be rendered. Defaults to "textarea". Triggers the inline edit mode if different.
+    * @param string $value
+    * @return \Kendo\UI\Editor
+    */
+    public function tag($value) {
+        return $this->setProperty('tag', $value);
     }
 
     /**

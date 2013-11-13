@@ -10835,6 +10835,12 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
+            <description>The tag that will be rendered. Defaults to "textarea". Triggers the inline edit mode if different.</description>
+            <name>tag</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>Fires when Editor is blurred and its content has changed.</description>
             <name>change</name>
             <rtexprvalue>true</rtexprvalue>
@@ -11943,7 +11949,7 @@ Each table row consists of table cells (&lt;td&gt;) which represent the grid col
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The width of the column. Numeric values are treated as pixels. Also refer to Column Widths.</description>
+            <description>The width of the column. Numeric values are treated as pixels. For more important information, please refer to Column Widths.</description>
             <name>width</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
@@ -14182,7 +14188,7 @@ by setting the close animation.  Each animation also has a direction which can b
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Defines the animation duration.</description>
+            <description>Defines the animation duration in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -14204,7 +14210,7 @@ by setting the close animation.  Each animation also has a direction which can b
         <body-content>empty</body-content>
 
         <attribute>
-            <description>Defines the animation duration.</description>
+            <description>Defines the animation duration in milliseconds.</description>
             <name>duration</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -14919,12 +14925,6 @@ is closed. Options include "fadeOut".</description>
             <name>effects</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
-        </attribute>
-        <attribute>
-            <description></description>
-            <name>show</name>
-            <rtexprvalue>true</rtexprvalue>
-            <type>boolean</type>
         </attribute>
 
     </tag>

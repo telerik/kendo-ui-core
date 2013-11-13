@@ -2,4 +2,7 @@
     - :name: content
       :type: Object
       :description: The content of the editor
+    - :name: tag
+      :type: String
+      :description: The tag that will be rendered. Defaults to "textarea". Triggers the inline edit mode if different.
 :content: true
