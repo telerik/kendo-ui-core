@@ -3,6 +3,7 @@
             <script src="../../content/shared/js/everlive.all.js"></script>
             <script>
                 $(document).ready(function() {
+                    // initialize Everlive application with application API key
                     var everlive = new Everlive({
                         apiKey: "3q4sHgIqESXbpvOp",
                         scheme: "http"
@@ -10,41 +11,51 @@
 
                     var dataSource = new kendo.data.DataSource({
                         type: "everlive",
+                        transport: {
+                            // binding to the Order type in Everlive
+                            typeName: "Order"
+                        },
                         schema: {
                             model: {
                                 id: "Id",
                                 fields: {
-                                    CreatedBy: { type: "string" },
-                                    CreatedAt: { type: "date" },
+                                    // default Everlive fields
+                                    CreatedBy:  { type: "string" },
+                                    CreatedAt:  { type: "date" },
                                     ModifiedAt: { type: "date" },
-                                    Freight: { type: "number" },
-                                    OrderDate: { type: "date" },
-                                    ShipName: { type: "string" },
-                                    ShipCity: { type: "string" }
+
+                                    // type fields
+                                    Freight:    { type: "number" },
+                                    OrderDate:  { type: "date" },
+                                    ShipName:   { type: "string" },
+                                    ShipCity:   { type: "string" }
                                 }
                             }
                         },
-                        transport: {
-                            typeName: "Order"
-                        }
+                        serverPaging: true,
+                        pageSize: 20,
+
+                        serverSorting: true,
+                        sort: { field: 'OrderDate', dir: 'asc' }
                     });
 
                     $("#grid").kendoGrid({
                         dataSource: dataSource,
                         height: 430,
                         sortable: true,
-                        pageable: false,
+                        pageable: true,
                         columns: [
-                            "Freight",
                             {
+                                field: "Freight",
+                                width: 100
+                            }, {
                                 field: "OrderDate",
                                 title: "Order Date",
                                 width: 120,
                                 format: "{0:MM/dd/yyyy}"
                             }, {
                                 field: "ShipName",
-                                title: "Ship Name",
-                                width: 260
+                                title: "Ship Name"
                             }, {
                                 field: "ShipCity",
                                 title: "Ship City",
