@@ -2434,7 +2434,7 @@ kendo_module({
                         until = null;
                     } else if (that._until) {
                         count = null;
-                        until = kendo.parseDate(that._until.val(), "yyyy-MM-dd");
+                        until = that._until.val ? kendo.parseDate(that._until.val(), "yyyy-MM-dd") : that._until.value();
                     }
 
                     rule.count = count;
@@ -2709,14 +2709,25 @@ kendo_module({
             var that = this;
             var input = that._container.find(".k-recur-until");
             var start = that.options.start;
-            var until = that._value.until;
+            var rule = that._value;
+            var until = rule.until;
             var min = until && until < start ? until : start;
 
-            that._until = input.attr("min", kendo.toString(min, "yyyy-MM-dd"))
-                               .val(kendo.toString(until || start, "yyyy-MM-dd"))
-                               .on("change", function() {
-                                   that._value.until = kendo.parseDate(this.value, "yyyy-MM-dd");
-                               });
+            if (kendo.support.input.date) {
+                that._until = input.attr("min", kendo.toString(min, "yyyy-MM-dd"))
+                                   .val(kendo.toString(until || start, "yyyy-MM-dd"))
+                                   .on("change", function() {
+                                       rule.until = kendo.parseDate(this.value, "yyyy-MM-dd");
+                                   });
+            } else {
+                that._until = input.kendoDatePicker({
+                    min: min,
+                    value: until || start,
+                    change: function() {
+                        rule.until = this.value();
+                    }
+                }).data("kendoDatePicker");
+            }
         },
 
         _options: function(data, optionLabel) {
