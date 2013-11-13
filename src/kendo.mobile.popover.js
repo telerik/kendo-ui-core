@@ -106,6 +106,7 @@ kendo_module({
             that.overlay = $(OVERLAY).appendTo(container).hide();
             popupOptions.appendTo = that.overlay;
             popupOptions.copyAnchorStyles = false;
+            popupOptions.autosize = true;
 
             if (options.className) {
                 that.overlay.addClass(options.className);
@@ -117,7 +118,7 @@ kendo_module({
         options: {
             name: "Popup",
             width: 240,
-            height: 320,
+            height: "",
             direction: "down"
         },
 
@@ -176,8 +177,6 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
-            options = that.options;
-
             popupOptions = $.extend({
                 className: "km-popover-root",
                 "show": function() { that.trigger(OPEN, { target: that.popup.target() }); },
@@ -211,6 +210,7 @@ kendo_module({
             this.popup.show(target);
             if (!this.initialOpen) {
                 this.pane.navigate("");
+                this.popup.popup._position();
                 this.initialOpen = true;
             }
         },

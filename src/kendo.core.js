@@ -1553,7 +1553,7 @@ function pad(number, digits, end) {
     }
 })();
 
-    function wrap(element) {
+    function wrap(element, autosize) {
         var browser = support.browser,
             percentage,
             isRtl = element.css("direction") == "rtl";
@@ -1576,8 +1576,8 @@ function pad(number, digits, end) {
 
             percentage = percentWidth || percentHeight;
 
-            if (!percentWidth) { width = element.outerWidth(); }
-            if (!percentHeight) { height = element.outerHeight(); }
+            if (!percentWidth && (!autosize || (autosize && width))) { width = element.outerWidth(); }
+            if (!percentHeight && (!autosize || (autosize && height))) { height = element.outerHeight(); }
 
             element.wrap(
                          $("<div/>")

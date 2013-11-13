@@ -41,6 +41,7 @@ kendo_module({
         ABORT_ID = "abortId",
         OVERFLOW = "overflow",
         TRANSLATE = "translate",
+        POSITION = "position",
         COMPLETE_CALLBACK = "completeCallback",
         TRANSITION = cssPrefix + "transition",
         TRANSFORM = cssPrefix + "transform",
@@ -637,7 +638,7 @@ kendo_module({
                                     }
                                 } else {
                                     if (value in translateProperties && properties[value] !== undefined) {
-                                        var position = element.css("position"),
+                                        var position = element.css(POSITION),
                                             isFixed = (position == "absolute" || position == "fixed");
 
                                         if (!element.data(TRANSLATE)) {
@@ -707,7 +708,14 @@ kendo_module({
         animateTo: function(element, destination, options) {
             var direction,
                 commonParent = element.parents().filter(destination.parents()).first(),
-                originalOverflow;
+                both = $().add(element).add(destination),
+                isAbsolute = element.css(POSITION) == "absolute",
+                originalOverflow, originalPosition;
+
+            if (!isAbsolute) {
+                originalPosition = element.css(POSITION);
+                both.css(POSITION, "absolute");
+            }
 
             options = parseTransitionEffects(options);
             if (!support.mobileOS.android) {
@@ -724,6 +732,9 @@ kendo_module({
                 element.each(function() { this.style.cssText = ""; });
                 if (!support.mobileOS.android) {
                     commonParent.css(OVERFLOW, originalOverflow);
+                }
+                if (!isAbsolute) {
+                    both.css(POSITION, originalPosition);
                 }
                 if (options.completeCallback) {
                     options.completeCallback.call(element, animatedElement);

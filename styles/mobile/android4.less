@@ -15,6 +15,7 @@
 
 .km-android .km-view > *,
 .km-android .km-modalview,
+.km-android .km-popover-root .km-view,
 .km-android .km-splitview .km-view,
 .km-android .km-pane-wrapper .km-view
 {
@@ -32,6 +33,7 @@
     visibility: hidden;
 }
 
+.km-android .km-popover-root .km-view-title,
 .km-android .km-modalview .km-view-title,
 .km-android .km-splitview .km-view-title
 {
@@ -1136,7 +1138,7 @@
     display: none !important;
 }
 
-.km-android .km-popup:before,
+.km-android .km-popup:not(.km-pane):before,
 .km-android .km-actionsheet-wrapper:before
 {
     content: "\a0";
@@ -1319,6 +1321,11 @@
 .km-android .km-popup.km-pane .km-content
 {
     background: #202125;
+}
+
+.km-android .km-popover-root .km-list:last-child
+{
+    margin-bottom: 0;
 }
 
 /* ModalView */

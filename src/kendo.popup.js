@@ -161,6 +161,7 @@ kendo_module({
             collision: "flip fit",
             viewport: window,
             copyAnchorStyles: true,
+            autosize: false,
             modal: false,
             animation: {
                 open: {
@@ -234,7 +235,7 @@ kendo_module({
                     }
                 }
 
-                that.wrapper = wrapper = kendo.wrap(element)
+                that.wrapper = wrapper = kendo.wrap(element, options.autosize)
                                         .css({
                                             overflow: HIDDEN,
                                             display: "block",
