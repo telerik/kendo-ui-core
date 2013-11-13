@@ -19,10 +19,9 @@
     height: 4rem;
     float: left;
     margin-right: 1rem;
-    -webkit-box-shadow: 0 2px 3px #333;
-    box-shadow: 0 2px 3px #333;
-    -webkit-border-radius: 8px;
-    border-radius: 8px;
+    -webkit-border-radius: 4rem;
+    border: 1px solid rgba(0,0,0,.3);
+    border-radius: 4rem;
     margin-bottom: 3px;
     margin-left: 2px;
 }
@@ -178,12 +177,17 @@
 #menu .item-list .km-button,
 #index .item-list .km-button
 {
-    width: 3.4em;
+    width: 5em;
     text-align: center;
 }
 
 .km-root .red-button {
     background-color: #B11C1A;
+}
+.km-root .km-ios7 .red-button {
+    background-color: #fff;
+    border-color: #B11C1A;
+    color: #B11C1A;
 }
 
 .km-root .red-button:active {
