@@ -643,6 +643,91 @@
                 kendo.bind(dom, observable);
                 ok(true);
             });
+
+            test("Adding item to empty observable array raises change with add action", 4, function() {
+                var dom = $('<select data-role="multiselect" data-text-field="Text" data-value-field="ID" data-bind="value: data,source: multiselectData"></select>');
+                var observable = kendo.observable({
+                    data: [],
+                    multiselectData: [{ID: 1, Text: "Text1"}, {ID: 2, Text: "Text2"}, {ID: 3,    Text: "Text3"}]
+                });
+
+                kendo.bind(dom, observable);
+
+                var multiselect = dom.data("kendoMultiSelect");
+
+                observable.data.bind("change", function(e) {
+                    equal(e.action, "add");
+                    equal(e.items.length, 1);
+                    equal(e.items[0], observable.multiselectData[0]);
+                    equal(e.index, 0);
+                });
+
+                multiselect.value([1]);
+                multiselect.trigger("change");
+            });
+
+            test("Adding item to non-empty observable array raises change event with add action (value primitive)", 4, function() {
+                var dom = $('<select data-role="multiselect" data-text-field="Text" data-value-field="ID" data-value-primitive="true" data-bind="value: data,source: multiselectData"></select>');
+                var observable = kendo.observable({
+                    data: [1],
+                    multiselectData: [{ID: 1, Text: "Text1"}, {ID: 2, Text: "Text2"}, {ID: 3,    Text: "Text3"}]
+                });
+
+                kendo.bind(dom, observable);
+
+                var multiselect = dom.data("kendoMultiSelect");
+
+                observable.data.bind("change", function(e) {
+                    equal(e.action, "add");
+                    equal(e.items.length, 1);
+                    equal(e.items[0], 2);
+                    equal(e.index, 1);
+                });
+
+                multiselect.value([1, 2]);
+                multiselect.trigger("change");
+            });
+
+            test("Remove item raises change with remove action (value primitive)", 4, function() {
+                var dom = $('<select data-role="multiselect" data-text-field="Text" data-value-field="ID" data-value-primitive="true" data-bind="value: data,source: multiselectData"></select>');
+                var observable = kendo.observable({
+                    data: [1,2],
+                    multiselectData: [{ID: 1, Text: "Text1"}, {ID: 2, Text: "Text2"}, {ID: 3,    Text: "Text3"}]
+                });
+
+                kendo.bind(dom, observable);
+
+                var multiselect = dom.data("kendoMultiSelect");
+
+                observable.data.bind("change", function(e) {
+                    equal(e.action, "remove");
+                    equal(e.items.length, 1);
+                    equal(e.items[0], 2);
+                    equal(e.index, 1);
+                });
+
+                multiselect.value([1]);
+                multiselect.trigger("change");
+            });
+
+            test("Remove first item raises change with correct index", 1, function() {
+                var dom = $('<select data-role="multiselect" data-text-field="Text" data-value-field="ID" data-value-primitive="true" data-bind="value: data,source: multiselectData"></select>');
+                var observable = kendo.observable({
+                    data: [1,2],
+                    multiselectData: [{ID: 1, Text: "Text1"}, {ID: 2, Text: "Text2"}, {ID: 3,    Text: "Text3"}]
+                });
+
+                kendo.bind(dom, observable);
+
+                var multiselect = dom.data("kendoMultiSelect");
+
+                observable.data.bind("change", function(e) {
+                    equal(e.index, 0);
+                });
+
+                multiselect.value([2]);
+                multiselect.trigger("change");
+            });
         </script>
 
         <script id="template" type="text/x-kendo-template">

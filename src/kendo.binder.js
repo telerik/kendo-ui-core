@@ -1089,20 +1089,78 @@ kendo_module({
 
                 change: function() {
                     var that = this,
-                        value = that.bindings[VALUE].get(),
+                        oldValues = that.bindings[VALUE].get(),
                         valuePrimitive = that.options.valuePrimitive,
-                        values = valuePrimitive ? that.widget.value() : that.widget.dataItems();
+                        newValues = valuePrimitive ? that.widget.value() : that.widget.dataItems();
+
+                    var field = this.options.dataValueField || this.options.dataTextField;
+
+                    newValues = newValues.slice(0);
 
                     that._initChange = true;
 
-                    if (value instanceof ObservableArray) {
-                        if (values.length) {
-                            splice.call(value, 0, value.length);
+                    if (oldValues instanceof ObservableArray) {
+                        var remove = [];
+
+                        var newLength = newValues.length;
+
+                        var i = 0, j = 0;
+                        var old = oldValues[i];
+                        var same = false;
+                        var removeIndex;
+                        var newValue;
+                        var found;
+
+                        while (old) {
+                            found = false;
+                            for (j = 0; j < newLength; j++) {
+                                if (valuePrimitive) {
+                                    same = newValues[j] == old;
+                                } else {
+                                    newValue = newValues[j];
+
+                                    newValue = newValue.get ? newValue.get(field) : newValue;
+                                    same = newValue == (old.get ? old.get(field) : old);
+                                }
+
+                                if (same) {
+                                    newValues.splice(j, 1);
+                                    newLength -= 1;
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (!found) {
+                                remove.push(old);
+                                splice.call(oldValues, i, 1);
+                                removeIndex = i;
+                            } else {
+                                i++
+                            }
+
+                            old = oldValues[i];
                         }
 
-                        value.splice.apply(value, [0, value.length].concat(values));
+                        splice.apply(oldValues, [oldValues.length, 0].concat(newValues));
+
+                        if (remove.length) {
+                            oldValues.trigger("change", {
+                                action: "remove",
+                                items: remove,
+                                index: removeIndex
+                            });
+                        }
+
+                        if (newValues.length) {
+                            oldValues.trigger("change", {
+                                action: "add",
+                                items: newValues,
+                                index: oldValues.length - 1
+                            });
+                        }
                     } else {
-                        that.bindings[VALUE].set(values);
+                        that.bindings[VALUE].set(newValues);
                     }
 
                     that._initChange = false;
