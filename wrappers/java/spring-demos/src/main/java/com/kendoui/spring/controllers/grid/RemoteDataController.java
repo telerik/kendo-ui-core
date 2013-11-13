@@ -11,9 +11,9 @@ import com.kendoui.spring.models.DataSourceRequest;
 import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.OrderDao;
 
-@Controller("grid-remote-binding-controller")
+@Controller("grid-remote-data-controller")
 @RequestMapping(value="/web/grid/")
-public class RemoteBindingController {
+public class RemoteDataController {
     @Autowired 
     private OrderDao order;
 

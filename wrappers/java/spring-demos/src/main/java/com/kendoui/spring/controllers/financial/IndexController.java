@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kendoui.spring.models.ChartDataRepository;
 import com.kendoui.spring.models.StockDataPoint;
 
-@Controller("dataviz-financial-home-controller")
+@Controller("dataviz-financial-index-controller")
 @RequestMapping(value="/dataviz/financial/")
-public class HomeController {
+public class IndexController {
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) throws ParseException {      
         DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");

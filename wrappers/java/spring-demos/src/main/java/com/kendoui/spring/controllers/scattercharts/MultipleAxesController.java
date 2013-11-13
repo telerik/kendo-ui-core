@@ -9,7 +9,7 @@ import com.kendoui.spring.models.ChartDataRepository;
 
 @Controller("dataviz-scatter_charts-multiple_axes-controller")
 @RequestMapping(value="/dataviz/scatter-charts/")
-public class MultipeAxesController {
+public class MultipleAxesController {
     @RequestMapping(value = "/multiple-axes", method = RequestMethod.GET)
     public String index(Model model) {
         model.addAttribute("engineData", ChartDataRepository.EngineData());

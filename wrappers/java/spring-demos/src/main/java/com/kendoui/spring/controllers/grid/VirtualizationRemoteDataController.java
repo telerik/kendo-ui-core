@@ -11,9 +11,9 @@ import com.kendoui.spring.models.DataSourceRequest;
 import com.kendoui.spring.models.DataSourceResult;
 import com.kendoui.spring.models.OrderDao;
 
-@Controller("grid-virtualization-controller")
+@Controller("grid-virtualization-remote-data-controller")
 @RequestMapping(value="/web/grid/")
-public class RemoteVirtualizationController {
+public class VirtualizationRemoteDataController {
     @Autowired 
     private OrderDao order;
 

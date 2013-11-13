@@ -1,4 +1,4 @@
-package com.kendoui.spring.controllers.pie;
+package com.kendoui.spring.controllers.piecharts;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

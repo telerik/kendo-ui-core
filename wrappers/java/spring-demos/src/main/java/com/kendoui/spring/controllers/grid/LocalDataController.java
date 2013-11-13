@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kendoui.spring.models.ProductDao;
 
-@Controller("grid-local-binding-controller")
+@Controller("grid-local-data-controller")
 @RequestMapping(value="/web/grid/")
-public class LocalBindingController {
+public class LocalDataController {
     @Autowired 
     private ProductDao product;
     

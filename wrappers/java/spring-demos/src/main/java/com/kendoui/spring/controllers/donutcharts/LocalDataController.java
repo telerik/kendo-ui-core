@@ -1,4 +1,4 @@
-package com.kendoui.spring.controllers.donut;
+package com.kendoui.spring.controllers.donutcharts;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

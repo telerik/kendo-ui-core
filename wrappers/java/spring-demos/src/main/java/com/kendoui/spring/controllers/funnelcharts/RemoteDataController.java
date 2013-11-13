@@ -1,4 +1,4 @@
-package com.kendoui.spring.controllers.funnel;
+package com.kendoui.spring.controllers.funnelcharts;
 
 import java.util.List;
 

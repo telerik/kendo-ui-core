@@ -1,4 +1,4 @@
-package com.kendoui.spring.controllers.boxplot;
+package com.kendoui.spring.controllers.boxplotcharts;
 
 import java.util.List;
 

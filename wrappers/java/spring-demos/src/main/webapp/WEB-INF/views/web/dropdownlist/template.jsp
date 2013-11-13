@@ -16,7 +16,7 @@
                           "<span class=\"k-state-default\"><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>";
 
         String valueTemplate = "<img class=\"selected-value\" src=\"../../resources/web/Customers/#:data.customerId#.jpg\"  alt=\"#:data.customerId#\" />" +
-                "<span>#:data.ContactName#</span>"
+                "<span>#:data.ContactName#</span>";
         %>
 
         <div class="demo-section">
