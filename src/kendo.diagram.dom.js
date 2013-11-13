@@ -117,7 +117,9 @@ kendo_module({
             this.to = this.pan;
         },
         update: function (tick) {
-            this.diagram.pan(new Point(this.from.x + (this.to.x - this.from.x) * tick, this.from.y + (this.to.y - this.from.y) * tick));
+            var diagram = this.diagram;
+            diagram._storePan(new Point(this.from.x + (this.to.x - this.from.x) * tick, this.from.y + (this.to.y - this.from.y) * tick));
+            diagram._transformMainLayer();
         }
     });
 
@@ -1455,7 +1457,9 @@ kendo_module({
          * "Center middle" will position the items in the center. animate - controls if the pan should be animated.
          */
         bringIntoView: function (item, options) { // jQuery|Item|Array|Rect
-            var rect, viewport = this.viewport(), align, old, newPan, deltaPan;
+            var rect,
+                viewport = this.viewport();
+
             options = deepExtend({animate: false, align: "center middle"}, options);
             if (item instanceof DiagramElement) {
                 rect = item.bounds("transformed");
@@ -1470,18 +1474,13 @@ kendo_module({
                 if (options.align === "none") {
                     options.align = "center middle";
                 }
-                old = rect.clone();
-                align = new kendo.diagram.RectAlign(viewport);
+                var old = rect.clone(),
+                    align = new kendo.diagram.RectAlign(viewport);
+
                 align.align(rect, options.align);
-                deltaPan = old.topLeft().minus(rect.topLeft());
-                newPan = this.pan().minus(deltaPan);
-                if (options.animate) {
-                    var t = new Ticker();
-                    t.addAdapter(new PanAdapter({pan: newPan, diagram: this}));
-                    t.play();
-                } else {
-                    this.pan(newPan);
-                }
+
+                var newPan = rect.topLeft().minus(old.topLeft());
+                this.pan(newPan, options.animate);
             }
         },
         alignShapes: function (direction) {
@@ -1574,7 +1573,9 @@ kendo_module({
             return this._pan;
         },
         viewport: function () {
-            return this.canvas.bounds();
+            var element = this.element;
+
+            return new Rect(0, 0, element.width(), element.height());
         },
         copy: function () {
             if (this.options.copy.enabled) {
@@ -1793,7 +1794,14 @@ kendo_module({
                 this._zoomMainLayer();
             }
             else {
-                diagram._transformMainLayer();
+                if(animated) {
+                     var t = new Ticker();
+                         t.addAdapter(new PanAdapter({pan: pan, diagram: this}));
+                         t.play();
+                }
+                else {
+                    diagram._transformMainLayer();
+                }
             }
         },
         _storePan: function (pan) {

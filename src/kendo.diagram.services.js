@@ -559,8 +559,7 @@ kendo_module({
             this.scroller.enable();
             this.currentCanvasSize = canvasSize;
         },
-        move: function () {
-        },//the tool itself should not handle the scrolling. Let kendo scroller take care of this part. Check _move
+        move: function () {},//the tool itself should not handle the scrolling. Let kendo scroller take care of this part. Check _move
         _move: function (args) {
             var tool = this,
                 diagram = tool.toolService.diagram,
@@ -574,6 +573,7 @@ kendo_module({
             canvas.viewBox(viewBox);
         },
         end: function () {
+            this.currentCanvasSize = undefined;
             this.scroller.disable();
         },
         getCursor: function () {
