@@ -113,10 +113,6 @@
     box-sizing: @sizing;
 }
 
-.border-box {
-    .box-sizing(border-box);
-}
-
 /* main gradient */
 
 .k-block,
@@ -193,7 +189,6 @@
 .k-block
 {
     padding: 2px;
-    .border-box;
 }
 
 /* button */
@@ -208,11 +203,6 @@
     text-align: center;
     cursor: pointer;
     text-decoration: none;
-}
-
-body .k-button
-{
-    .border-box;
 }
 
 .k-ie7 .k-button { line-height: normal; }
@@ -775,7 +765,6 @@ div.k-window-content
     padding: .58em;
     overflow: auto;
     outline: 0;
-    .border-box;
 }
 
 .k-window-content > .km-scroll-container
@@ -980,7 +969,6 @@ div.k-window-content
 .k-tabstrip > .k-content > .km-scroll-container
 {
     padding: .3em .92em;
-    .border-box;
 }
 
 /* PanelBar */
@@ -1980,13 +1968,6 @@ html body .k-grid tbody .k-button-icon
     width: 100%;
 }
 
-.k-edit-cell .k-widget,
-.k-grid-edit-row .k-widget,
-.k-grid-edit-row .text-box
-{
-    .border-box;
-}
-
 .k-ie7 .k-edit-cell>.text-box,
 .k-ie7 .k-edit-cell>.k-textbox,
 .k-ie7 .k-edit-cell>.k-widget,
@@ -2331,12 +2312,6 @@ span.k-datetimepicker .k-select,
 span.k-datetimepicker .k-select+.k-select
 {
     right: 0;
-}
-
-.k-textbox,
-.k-autocomplete
-{
-    .border-box;
 }
 
 .k-textbox > input,
@@ -2800,7 +2775,6 @@ div.k-treeview
 .k-textbox
 {
     outline: 0;
-    .border-box;
     padding: 2px .3em;
     line-height: 1.6em;
 }
@@ -5136,7 +5110,6 @@ div[name="recurrenceRule"] > .k-dropdown
 {
     list-style-type: none;
     padding: inherit 1em;
-    .box-sizing(border-box);
     line-height: 2em;
 }
 
@@ -5155,7 +5128,6 @@ div[name="recurrenceRule"] > .k-dropdown
     height: 100%;
     background: rgba(0,0,0,.6);
     z-index:10001;
-    .box-sizing(border-box);
 }
 
 .km-shim .k-animation-container,
@@ -5394,8 +5366,7 @@ div[name="recurrenceRule"] > .k-dropdown
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    .box-sizing(border-box);
     padding: .1em 0;
     margin: 0;
 }
@@ -6677,30 +6648,29 @@ html .k-upload-empty
     bottom: 2px;
 }
 
-/* Bootstrap 3 */
-.k-widget,
-.k-header,
-.k-content,
-.k-autocomplete .k-input,
-.k-picker-wrap .k-input,
-.k-dropdown-wrap .k-input,
-.k-picker-wrap .k-input,
-.k-numeric-wrap .k-input,
-.k-window-titlebar,
-.k-window-content,
-.k-link,
-.k-icon,
-.k-tool,
-.k-tool-icon,
-.k-splitbar,
+/* Bootstrap 3, Zurb Foundation 4, etc */
 
-/* Zurb Foundation 4 */
 .k-animation-container,
+.k-widget,
 .k-widget *,
 .k-animation-container *,
 .k-widget *:before,
 .k-animation-container *:after
-
 {
     .box-sizing(content-box);
+}
+
+.k-button,
+.k-textbox,
+.k-autocomplete,
+div.k-window-content,
+.k-tabstrip > .k-content > .km-scroll-container,
+.k-block,
+.k-edit-cell .k-widget,
+.k-grid-edit-row .k-widget,
+.k-grid-edit-row .text-box,
+.km-actionsheet > li,
+.km-shim
+{
+    .box-sizing(border-box);
 }
