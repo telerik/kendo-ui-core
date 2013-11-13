@@ -10761,7 +10761,9 @@ kendo_module({
                 result = new Date(date.getTime() + value * TIME_PER_SECOND);
             }
 
-            result.setMilliseconds(0);
+            if (result.getMilliseconds() > 0) {
+                result.setMilliseconds(0);
+            }
         }
 
         return result;
