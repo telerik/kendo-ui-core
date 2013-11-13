@@ -2698,9 +2698,16 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     width: 50%;
 }
 
+.mobileExample .km-pane-wrapper .k-mobile-list .k-recur-view > .k-edit-field .k-check,
+.mobileExample .km-pane-wrapper .k-mobile-list .k-edit-field > * > select:not([multiple]),
+.mobileExample .km-pane-wrapper .k-mobile-list .k-scheduler-timezones .k-edit-field label.k-check
+{
+    width: 100%;
+}
+
 .mobileExample .km-pane-wrapper .k-scheduler-views
 {
-    width: 230px;
+    width: 200px;
 }
 
 .mobileExample .km-pane-wrapper .k-mobile-list .k-edit-field > .k-button
