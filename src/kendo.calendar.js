@@ -171,7 +171,7 @@ kendo_module({
             that[PREVARROW].off(ns);
             that[NEXTARROW].off(ns);
 
-            kendo.destroy(that._view);
+            kendo.destroy(that._table);
 
             if (today) {
                 kendo.destroy(today.off(ns));
