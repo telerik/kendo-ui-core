@@ -832,8 +832,10 @@ kendo_module({
                     }
                     else if (target instanceof Shape) {
                         this.targetConnector = target.getConnector(AUTO);// target.getConnector(this.sourcePoint());
-                        this.targetConnector.connections.push(this);
-                        this.refresh();
+                        if (this.targetConnector) {
+                            this.targetConnector.connections.push(this);
+                            this.refresh();
+                        }
                     }
                 }
             }
@@ -1154,9 +1156,9 @@ kendo_module({
                 offsetY: 20
             }
         },
-        
+
         events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE, ITEMSCHANGE],
-        
+
         destroy: function () {
             var that = this;
             Widget.fn.destroy.call(that);
@@ -2148,13 +2150,13 @@ kendo_module({
             diagram.canvas.size(cumulativeSize);
         },
 
-        _raiseItemsAdded: function(items) {
+        _raiseItemsAdded: function (items) {
             this._raiseItemsChanged({added: items});
         },
-        _raiseItemsRemoved: function(items) {
+        _raiseItemsRemoved: function (items) {
             this._raiseItemsChanged({removed: items});
         },
-        _raiseItemsChanged: function(collections) {
+        _raiseItemsChanged: function (collections) {
             this.trigger(ITEMSCHANGE, collections);
         },
 
