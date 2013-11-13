@@ -1136,7 +1136,7 @@ kendo_module({
                                 splice.call(oldValues, i, 1);
                                 removeIndex = i;
                             } else {
-                                i++
+                                i += 1;
                             }
 
                             old = oldValues[i];
