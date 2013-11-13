@@ -10395,7 +10395,12 @@ kendo_module({
                 field,
                 srcValues,
                 value,
+                firstDataItem = data.dataItems[0],
                 result = {};
+
+            if (!isArray(firstDataItem)) {
+                result = extend(result, firstDataItem);
+            }
 
             for (i = 0; i < seriesFields.length; i++) {
                 field = seriesFields[i];

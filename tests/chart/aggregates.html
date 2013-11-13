@@ -80,6 +80,12 @@
                 deepEqual(aggregate(series), { value: 5, bar: 1 });
             });
 
+            test("extends first dataItem", function() {
+                series.data[0].bar = true;
+
+                deepEqual(aggregate(series), { value: 2, bar: true });
+            });
+
             test("returns empty aggregate for empty source points array", function() {
                 var sa = new SeriesAggregator(series, binder, defaults);
 
@@ -129,6 +135,12 @@
                 };
 
                 deepEqual(aggregate(series), { fooValue: 5, bar: 1 });
+            });
+
+            test("extends first dataItem", function() {
+                series.data[0].bar = true;
+
+                deepEqual(aggregate(series), { fooValue: 2, bar: true });
             });
 
             test("returns empty aggregate for empty source points array", function() {
@@ -184,6 +196,12 @@
                 };
 
                 deepEqual(aggregate(series), { foo: { value: 5 }, bar: 1 });
+            });
+
+            test("extends first dataItem", function() {
+                series.data[0].bar = true;
+
+                deepEqual(aggregate(series), { foo: { value: 2 }, bar: true });
             });
 
             test("returns empty aggregate for empty source points array", function() {
@@ -293,6 +311,11 @@
                 deepEqual(aggregate(series), { open: 5, close: 5 });
             });
 
+            test("extends first dataItem", function() {
+                series.data[0].bar = true;
+                deepEqual(aggregate(series), { open: 10, close: 20, color: "red", bar: true });
+            });
+
             test("root-level named aggregate is applied to value fields only", function() {
                 series.aggregate = "max";
 
@@ -343,6 +366,11 @@
                 };
 
                 deepEqual(aggregate(series), { fooOpen: 5, fooClose: 20 });
+            });
+
+            test("extends first dataItem", function() {
+                series.data[0].bar = true;
+                deepEqual(aggregate(series), { fooOpen: 10, fooClose: 20, bar: true });
             });
 
             test("accepts data items from top-level aggregate", function() {
