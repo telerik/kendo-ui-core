@@ -54,6 +54,18 @@
                ok(div.data("kendoRecurrenceEditor") instanceof RecurrenceEditor);
             });
 
+            test("kendoRecurrenceEditor overrides frequencies", function() {
+                var widget = div.kendoRecurrenceEditor({
+                    frequencies: ["never", "daily"]
+                }).data("kendoRecurrenceEditor");
+
+                var freq = widget.options.frequencies;
+
+                equal(freq.length, 2);
+                equal(freq[0], "never");
+                equal(freq[1], "daily");
+            });
+
             test("renders dropdownlist for frequencies", function() {
                 div.kendoRecurrenceEditor();
 

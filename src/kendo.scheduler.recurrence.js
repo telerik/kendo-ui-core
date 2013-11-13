@@ -1507,8 +1507,9 @@ kendo_module({
 
     var BaseRecurrenceEditor = Widget.extend({
         init: function(element, options) {
-            var that = this,
-                start;
+            var start;
+            var that = this;
+            var frequencies = options && options.frequencies;
 
             Widget.fn.init.call(that, element, options);
 
@@ -1516,6 +1517,10 @@ kendo_module({
 
             options = that.options;
             options.start = start = options.start || date.today();
+
+            if (frequencies) {
+                options.frequencies = frequencies;
+            }
 
             if (typeof start === "string") {
                 options.start = kendo.parseDate(start, "yyyyMMddTHHmmss");
