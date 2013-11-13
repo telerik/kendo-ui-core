@@ -1512,6 +1512,11 @@ p#copy
     text-align: center;
 }
 
+.demo-section > p > a {
+    color: #e15613;
+    text-decoration: none;
+}
+
 .k-block
 {
     width: 200px;
