@@ -79,6 +79,7 @@ body
 .device
 {
     height: 40px;
+    margin: 30px auto;
 }
 
 .selector

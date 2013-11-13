@@ -15,16 +15,16 @@
 
 .device-container.vertical
 {
-    width: 1074px;
+    width: 1019px;
     height: 810px;
-    padding: 2.86cm 8.3cm 4.02cm 8.31cm;
+    padding: 3.2cm 7.64cm 4.13cm 7.65cm;
 }
 
 .device-container.horizontal
 {
     width: 1230px;
     height: 735px;
-    padding: 2.68cm 8.4cm 6.16cm 8.4cm;
+    padding: 3.69cm 8.5cm 5.6cm;
 }
 
 #address-bar
@@ -35,16 +35,16 @@
 .device-container.vertical #address-bar
 {
     font-size: 11px;
-    left: 454px;
-    top: 85px;
+    left: 395px;
+    top: 77px;
     width: 184px;
 }
 
 .device-container.horizontal #address-bar
 {
     font-size: 11px;
-    left: 458px;
-    top: 78px;
+    left: 428px;
+    top: 95px;
     width: 268px;
 }
 
@@ -53,18 +53,18 @@
     width: 20px;
     height: 20px;
     border-radius: 15px;
-    border: 1px solid rgba(0,0,0,.2);
-    background: rgba(255,255,255,.5);
+    border: 1px solid rgba(0,0,0,.3);
+    background: rgba(0,0,0,.1);
 }
 
-#navigate-back.vertical
+.device-container.vertical #navigate-back
 {
-    top: 85px;
-    left: 319px;
+    top: 78px;
+    left: 299px;
 }
 
 .device-container.horizontal #navigate-back
 {
-    top: 79px;
-    left: 322px;
+    top: 96px;
+    left: 332px;
 }

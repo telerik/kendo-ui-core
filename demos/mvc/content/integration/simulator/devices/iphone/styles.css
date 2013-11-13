@@ -5,13 +5,13 @@
 
 .device-container.vertical .device-skin
 {
-    padding-top: 3.22cm;
+    padding-top: 0;
     background-image: url("images/vertical.png");
 }
 
 .device-container.horizontal .device-skin
 {
-    padding-top: .86cm;
+    padding-top: 0;
     background-image: url("images/horizontal.png");
 }
 
@@ -19,26 +19,26 @@
 {
     bottom: -100px;
     width: 1050px;
-    height: 802px;
-    padding: 4.5cm 10.52cm 9.14cm;
+    height: 849px;
+    padding: 3.75cm 10.61cm 8cm 10.6cm;
 }
 
 .device-container.horizontal
 {
-    bottom: -100px;
-    width: 748px;
-    height: 658px;
-    padding: 2.06cm 5.14cm 11.3cm 5.22cm;
+    bottom: -50px;
+    width: 850px;
+    height: 696px;
+    padding: .58cm 5.27cm 11.3cm 5.27cm;
 }
 
 .device-container.vertical iframe
 {
-    height: 288px;
+    height: 357px;
 }
 
 .device-container.horizontal iframe
 {
-    height: 154px;
+    height: 254px;
 }
 
 #address-bar
@@ -48,16 +48,16 @@
 
 .device-container.vertical #address-bar
 {
-    left: 406px;
-    top: 141px;
-    width: 138px;
+    left: 413px;
+    top: 113px;
+    width: 168px;
 }
 
 .device-container.horizontal #address-bar
 {
-    left: 206px;
-    top: 50px;
-    width: 200px;
+    left: 188px;
+    top: 37px;
+    width: 240px;
 }
 
 .device-container #navigate-back
@@ -65,23 +65,25 @@
     top: auto;
 }
 
-.device-container #navigate-back:hover
+#navigate-back
 {
-    background: rgba(255,255,255,.3);
+    border-radius: 15px;
+    border: 1px solid rgba(0,0,0,.3);
+    background: rgba(0,0,0,.1);
 }
 
 .device-container.vertical #navigate-back
 {
-    bottom: 315px;
-    left: 412px;
+    bottom: 319px;
+    left: 406px;
     width: 25px;
     height: 25px;
 }
 
 .device-container.horizontal #navigate-back
 {
-    bottom: 406px;
-    left: 214px;
-    width: 19px;
-    height: 19px;
+    bottom: 374px;
+    left: 182px;
+    width: 21px;
+    height: 21px;
 }

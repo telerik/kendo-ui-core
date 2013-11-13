@@ -3,14 +3,14 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
         var original = $("#simulator")[0].src,
             mobiles = {
             ipad: {
-                ua: "Mozilla/5.0(iPad; U; CPU OS 6_1 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/6.0.2 Mobile/8F191 Safari/6533.18.5",
+                ua: "Mozilla/5.0(iPad; U; CPU OS 7_0_2 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0.2 Mobile/11a501 Safari/8536.25",
                 size: "11px"
             },
             iphone: {
-                ua: "Mozilla/5.0 (iPhone; U; CPU iPhone OS 6_0 like Mac OS X; xx-xx) AppleWebKit/532.9 (KHTML, like Gecko) Mobile/7D11",
+                ua: "Mozilla/5.0 (iPhone; U; CPU iPhone OS 7_0_2 like Mac OS X; xx-xx) AppleWebKit/537.51.1 (KHTML, like Gecko) Mobile/11a501",
                 size: "12px"
             },
-            nexuss: {
+            nexus5: {
                 ua: "Mozilla/5.0 (Linux; U; Android 2.3.3; en-gb; Nexus S Build/GRI20) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
                 size: "12px"
             },
@@ -148,9 +148,9 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla) {
                                     })
                                     .kendoDropDownList({
                                         dataSource: [
-                                            { text: "Apple iPad 2", value: "ipad" },
-                                            { text: "Apple iPhone 4", value: "iphone" },
-                                            { text: "Google Nexus S", value: "nexuss" },
+                                            { text: "Apple iPad Air", value: "ipad" },
+                                            { text: "Apple iPhone 5S", value: "iphone" },
+                                            { text: "Google Nexus 5", value: "nexus5" },
                                             { text: "Acer Iconia Tab A100", value: "a100" },
                                             { text: "BlackBerry Z10", value: "z10" },
                                             { text: "BlackBerry PlayBook", value: "playbook" },
