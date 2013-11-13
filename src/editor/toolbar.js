@@ -135,8 +135,9 @@
             that.items().each(function initializeTool() {
                 var toolName = that._toolName(this),
                     tool = that.tools[toolName],
+                    options = tool && tool.options,
                     messages = editor.options.messages,
-                    description = messages[toolName],
+                    description = options && options.tooltip || messages[toolName],
                     ui = $(this);
 
                 if (!tool || !tool.initialize) {

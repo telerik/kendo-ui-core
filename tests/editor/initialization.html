@@ -67,6 +67,14 @@
                 kendo.ui.editor.ColorTool.fn.options.palette = defaultPalette;
             });
 
+            test("tool options are passed to toolbar", function() {
+                setup("foo", {
+                    tools: [ { name: "bold", tooltip: "foo" } ]
+                });
+
+                equal($(".k-tool").attr("title"), "foo");
+            });
+
             module("initialization from div[contentEditable]", {
                 teardown: function() {
                     $(".k-widget, .k-editor-toolbar").remove();
