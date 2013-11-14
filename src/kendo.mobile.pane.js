@@ -86,6 +86,10 @@ kendo_module({
                 loader: that.loader
             });
 
+            that.viewEngine.bind("showStart", function(e) {
+                that.closeActiveDialogs();
+            });
+
             that.viewEngine.bind(VIEW_SHOW, function(e) {
                 that.trigger(VIEW_SHOW, e);
             });
@@ -107,6 +111,13 @@ kendo_module({
             });
 
             that._setupAppLinks();
+        },
+
+        closeActiveDialogs: function() {
+            var dialogs = this.element.find(roleSelector("actionsheet popover modalview")).filter(":visible");
+            dialogs.each(function() {
+                kendo.widgetInstance($(this), ui).close();
+            });
         },
 
         navigateToInitial: function() {

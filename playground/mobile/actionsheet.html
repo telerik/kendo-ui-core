@@ -34,8 +34,9 @@
         <div data-role="view">
             <a href="#foo" data-role="button">Foo</a>
         </div>
+
         <div data-role="view" data-init="wireActionSheet" id="foo">
-            <a data-role="button" id="button">Reply</a>
+            <a data-role="button" id="button" href="#bar" data-rel="actionsheet">Reply</a>
 
             <ul data-role="actionsheet" id="bar">
                 <li>Foo</li>
@@ -47,21 +48,9 @@
             $(function() {
                 var app = new kendo.mobile.Application(document.body, {
                     init: function() {
-                        app.router.bind("back", function(e) {
-                            $("#bar").data("kendoMobileActionSheet").close();
-                            e.preventDefault();
-                        });
                     }
                 });
             });
-
-            function wireActionSheet() {
-                $("#button").data("kendoMobileButton").bind("click", function(e) {
-                    $("#bar").data("kendoMobileActionSheet").open($("#button"));
-                    e.preventDefault();
-                });
-            }
-
         </script>
     </body>
 </html>
