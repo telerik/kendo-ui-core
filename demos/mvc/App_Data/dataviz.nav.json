@@ -41,7 +41,8 @@
                     "text": "Binding to remote data",
                     "url": "area-charts/remote-data.html",
                     "title": "Example of jQuery & HTML5 Kendo UI Area Chart bound to remote data",
-                    "meta": "This demo shows how Kendo UI Area Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data."
+                    "meta": "This demo shows how Kendo UI Area Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data.",
+                    "requiresServer": true
                 }, {
                     "text": "Binding to local data",
                     "url": "area-charts/local-data.html",
@@ -51,13 +52,15 @@
                     "text": "Binding to grouped data",
                     "url": "area-charts/grouped-data.html",
                     "title": "Kendo UI Area Charts | Example of binding to grouped data",
-                    "meta": "With this example you will learn how to bind grouping data to Kendo UI Area Charts."
+                    "meta": "With this example you will learn how to bind grouping data to Kendo UI Area Charts.",
+                    "requiresServer": true
                 }, {
                     "text": "MVVM",
                     "url": "area-charts/mvvm.html",
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                    "packages": ["!mvc", "!jsp", "!php"]
+                    "packages": ["!mvc", "!jsp", "!php"],
+                    "requiresServer": true
                 }, {
                     "text": "Error Bars",
                     "url": "area-charts/error-bars.html",
@@ -117,7 +120,8 @@
                     "text": "Binding to remote data",
                     "url": "bar-charts/remote-data.html",
                     "title": "Binding to remote data demo | Kendo UI HTML5 jQuery Bar Charts",
-                    "meta": "This demo shows how Kendo UI Bar Charts widget can be bound to remote data to produce high-performance report in your business app."
+                    "meta": "This demo shows how Kendo UI Bar Charts widget can be bound to remote data to produce high-performance report in your business app.",
+                    "requiresServer": true
                 }, {
                     "text": "Binding to local data",
                     "url": "bar-charts/local-data.html",
@@ -127,12 +131,14 @@
                     "text": "Binding to grouped data",
                     "url": "bar-charts/grouped-data.html",
                     "title": "Grouped data binding demo for Kendo UI HTML5 Bar Charts",
-                    "meta": "This example shows the feature of binding to grouped data in Kendo UI Bar Charts. See the source code to find how to use name templates for the data group."
+                    "meta": "This example shows the feature of binding to grouped data in Kendo UI Bar Charts. See the source code to find how to use name templates for the data group.",
+                    "requiresServer": true
                 }, {
                     "text": "Plot bands",
                     "url": "bar-charts/plotbands.html",
                     "title": "Plot Bands example in Kendo UI Bar chart",
-                    "meta": "This sample demonstrates how to add plot bands to your Kendo UI jQuery charts in order to plot data within some borders."
+                    "meta": "This sample demonstrates how to add plot bands to your Kendo UI jQuery charts in order to plot data within some borders.",
+                    "requiresServer": true
                 }, {
                     "text": "Gap and spacing",
                     "url": "bar-charts/gap-spacing.html",
@@ -149,7 +155,8 @@
                     "url": "bar-charts/mvvm.html",
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                    "packages": ["!mvc", "!jsp", "!php"]
+                    "packages": ["!mvc", "!jsp", "!php"],
+                    "requiresServer": true
                 }, {
                     "text": "Error Bars",
                     "url": "bar-charts/error-bars.html",
@@ -171,7 +178,8 @@
                 }, {
                     "text": "Binding to remote data",
                     "url": "box-plot-charts/remote-data.html",
-                    "title": "Binding to remote data example | Kendo UI Box Plot Charts"
+                    "title": "Binding to remote data example | Kendo UI Box Plot Charts",
+                    "requiresServer": true
                 }, {
                     "text": "Binding to local data",
                     "url": "box-plot-charts/local-data.html",
@@ -181,7 +189,8 @@
                     "url": "box-plot-charts/mvvm.html",
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                    "packages": ["!mvc", "!jsp", "!php"]
+                    "packages": ["!mvc", "!jsp", "!php"],
+                    "requiresServer": true
                 }
             ],
             "name": "pie-charts"
@@ -199,7 +208,8 @@
                     "text": "Binding to remote data",
                     "url": "bubble-charts/remote-data.html",
                     "title": "Binding to remote data example | Kendo UI Bubble Chart demo",
-                    "meta": "This demo illustrates binding to remote data feature of Kendo UI Bubble Chart for rich HTML5 visualizations."
+                    "meta": "This demo illustrates binding to remote data feature of Kendo UI Bubble Chart for rich HTML5 visualizations.",
+                    "requiresServer": true
                 }, {
                     "text": "Binding to local data",
                     "url": "bubble-charts/local-data.html",
@@ -209,13 +219,15 @@
                     "text": "Binding to grouped data",
                     "url": "bubble-charts/grouped-data.html",
                     "title": "Binding to grouped data example | Kendo UI HTML5 Bubble Charts",
-                    "meta": "This demo shows how to bind Kendo UI Bubble Charts component to grouped data. See how you can implement the feature in your rich web app."
+                    "meta": "This demo shows how to bind Kendo UI Bubble Charts component to grouped data. See how you can implement the feature in your rich web app.",
+                    "requiresServer": true
                 }, {
                     "text": "MVVM",
                     "url": "bubble-charts/mvvm.html",
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                    "packages": ["!mvc", "!jsp", "!php"]
+                    "packages": ["!mvc", "!jsp", "!php"],
+                    "requiresServer": true
                 }
             ]
         }, {
@@ -236,13 +248,15 @@
                     "text": "Binding to remote data",
                     "url": "bullet-charts/remote-data.html",
                     "title": "Binding Kendo UI Bullet Chart to remote data",
-                    "meta": "This online demo will show you how to bind a Kendo UI Bullet Chart to remote data."
+                    "meta": "This online demo will show you how to bind a Kendo UI Bullet Chart to remote data.",
+					"requiresServer": true
             }, {
-                "text": "MVVM",
-                "url": "bullet-charts/mvvm.html",
-                "title": "MVVM support in Kendo UI Chart",
-                "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                "packages": ["!mvc", "!jsp", "!php"]
+                    "text": "MVVM",
+                    "url": "bullet-charts/mvvm.html",
+                    "title": "MVVM support in Kendo UI Chart",
+                    "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
+                    "packages": ["!mvc", "!jsp", "!php"],
+                    "requiresServer": true
             }
             ]
         }, {
@@ -263,7 +277,8 @@
                     "text": "Binding to remote data",
                     "url": "donut-charts/remote-data.html",
                     "title": "Binding to remote data demo for Kendo UI Donut Charts",
-                    "meta": "This example shows how to bind Kendo UI Donut Charts to remote data."
+                    "meta": "This example shows how to bind Kendo UI Donut Charts to remote data.",
+                    "requiresServer": true
                 }, {
                     "text": "Binding to local data",
                     "url": "donut-charts/local-data.html",
@@ -274,7 +289,8 @@
                     "url": "donut-charts/mvvm.html",
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                    "packages": ["!mvc", "!jsp", "!php"]
+                    "packages": ["!mvc", "!jsp", "!php"],
+                    "requiresServer": true
                 }
             ],
             "name": "donut-charts"
@@ -297,7 +313,8 @@
                     "text": "Binding to remote data",
                     "url": "funnel-charts/remote-data.html",
                     "title": "Binding to remote data demo for Kendo UI Funnel Charts",
-                    "meta": "This example shows how to bind Kendo UI Funnel Charts to remote data."
+                    "meta": "This example shows how to bind Kendo UI Funnel Charts to remote data.",
+                    "requiresServer": true
                 }, {
                     "text": "Binding to local data",
                     "url": "funnel-charts/local-data.html",
@@ -309,7 +326,8 @@
                     "url": "funnel-charts/mvvm.html",
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                    "packages": ["!mvc", "!jsp", "!php"]
+                    "packages": ["!mvc", "!jsp", "!php"],
+                    "requiresServer": true
             }],
             "name": "funnel-charts"
         }, {
@@ -345,7 +363,8 @@
                     "text": "Binding to remote data",
                     "url": "line-charts/remote-data.html",
                     "title": "Binding to remote data example | Kendo UI Line Charts features",
-                    "meta": "This example illustrates how binding to remote data works in Kendo UI Line Charts and the demo source code would guide you how to apply it to your line chart."
+                    "meta": "This example illustrates how binding to remote data works in Kendo UI Line Charts and the demo source code would guide you how to apply it to your line chart.",
+                    "requiresServer": true
                 }, {
                     "text": "Binding to local data",
                     "url": "line-charts/local-data.html",
@@ -355,13 +374,15 @@
                     "text": "Binding to grouped data",
                     "url": "line-charts/grouped-data.html",
                     "title": "Binding to grouped data demo | Kendo UI Line Charts",
-                    "meta": "This example illustrates how binding to grouped data feature works in Kendo UI Line Charts."
+                    "meta": "This example illustrates how binding to grouped data feature works in Kendo UI Line Charts.",
+                    "requiresServer": true
                 }, {
                     "text": "MVVM",
                     "url": "line-charts/mvvm.html",
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                    "packages": ["!mvc", "!jsp", "!php"]
+                    "packages": ["!mvc", "!jsp", "!php"],
+                    "requiresServer": true
                 }, {
                     "text": "Error Bars",
                     "url": "line-charts/error-bars.html",
@@ -401,7 +422,8 @@
                     "text": "Binding to remote data",
                     "url": "pie-charts/remote-data.html",
                     "title": "Binding to remote data example | Kendo UI Pie Charts",
-                    "meta": "This demo illustrates how Kendo UI Pie Charts can be bound to remote data by configuring Kendo UI DataSource component."
+                    "meta": "This demo illustrates how Kendo UI Pie Charts can be bound to remote data by configuring Kendo UI DataSource component.",
+                    "requiresServer": true
                 }, {
                     "text": "Binding to local data",
                     "url": "pie-charts/local-data.html",
@@ -412,7 +434,8 @@
                     "url": "pie-charts/mvvm.html",
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                    "packages": ["!mvc", "!jsp", "!php"]
+                    "packages": ["!mvc", "!jsp", "!php"],
+                    "requiresServer": true
                 }
             ],
             "name": "pie-charts"
@@ -439,7 +462,8 @@
                     "text": "Binding to remote data",
                     "url": "polar-charts/remote-data.html",
                     "title": "Example of jQuery & HTML5 Kendo UI Polar Chart bound to remote data",
-                    "meta": "This demo shows how Kendo UI Polar Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data."
+                    "meta": "This demo shows how Kendo UI Polar Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data.",
+                    "requiresServer": true
                 }, {
                     "text": "Binding to local data",
                     "url": "polar-charts/local-data.html",
@@ -450,7 +474,8 @@
                     "url": "polar-charts/mvvm.html",
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                    "packages": ["!mvc", "!jsp", "!php"]
+                    "packages": ["!mvc", "!jsp", "!php"],
+                    "requiresServer": true
                 }, {
                     "text": "Smooth (Spline) line",
                     "url": "polar-charts/smooth-polar-line.html",
@@ -483,7 +508,8 @@
                     "text": "Binding to remote data",
                     "url": "radar-charts/remote-data.html",
                     "title": "Example of jQuery & HTML5 Kendo UI Radar Charts bound to remote data",
-                    "meta": "This demo shows how Kendo UI Radar Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data."
+                    "meta": "This demo shows how Kendo UI Radar Chart can be bound to remote data by configuring the DataSource transport which defines how the DataSource interacts with remote data.",
+                    "requiresServer": true
                 }, {
                     "text": "Binding to local data",
                     "url": "radar-charts/local-data.html",
@@ -493,19 +519,22 @@
                     "text": "Binding to grouped data",
                     "url": "radar-charts/grouped-data.html",
                     "title": "Kendo UI Radar Charts | Example of binding to grouped data",
-                    "meta": "With this example you will learn how to bind grouping data to Kendo UI Radar Charts."
+                    "meta": "With this example you will learn how to bind grouping data to Kendo UI Radar Charts.",
+                    "requiresServer": true
                 }, {
                     "text": "MVVM",
                     "url": "radar-charts/mvvm.html",
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                    "packages": ["!mvc", "!jsp", "!php"]
+                    "packages": ["!mvc", "!jsp", "!php"],
+                    "requiresServer": true
                 }, {
                     "text": "Smooth (Spline) line",
                     "url": "radar-charts/smooth-radar-line.html",
                     "title": "Example of using smooth line style for the Kendo UI Radar Charts",
                     "meta": "This demo shows how to configure the Kendo UI Radar Charts to use smooth line style",
-                    "new": "true"
+                    "new": "true",
+                    "requiresServer": true
                 }
             ],
             "name": "radar-charts"
@@ -527,7 +556,8 @@
                     "text": "Date axis",
                     "url": "scatter-charts/date-axis.html",
                     "title": "Date Axis demo in Kendo UI Scatter Charts ",
-                    "meta": "This example illustrates all properties, specific to date value axis of Kendo UI jQuery Scatter Charts."
+                    "meta": "This example illustrates all properties, specific to date value axis of Kendo UI jQuery Scatter Charts.",
+                    "requiresServer": true
                 }, {
                     "text": "Multi-axis",
                     "url": "scatter-charts/multiple-axes.html",
@@ -537,7 +567,8 @@
                     "text": "Binding to remote data",
                     "url": "scatter-charts/remote-data.html",
                     "title": "Remote data-bound scatter series example | Kendo UI Scatter Charts",
-                    "meta": "This demo shows how scatter series of Kendo UI Scatter Charts can be bound to remote data source items."
+                    "meta": "This demo shows how scatter series of Kendo UI Scatter Charts can be bound to remote data source items.",
+                    "requiresServer": true
                 }, {
                     "text": "Binding to local data",
                     "url": "scatter-charts/local-data.html",
@@ -547,7 +578,8 @@
                     "text": "Binding to grouped data",
                     "url": "scatter-charts/grouped-data.html",
                     "title": "Example of Kendo UI Scatter Charts bound to grouped data",
-                    "meta": "This demo shows how define a group of values in Kendo UI Scatter Charts by configuring the parameters in the DataSource component."
+                    "meta": "This demo shows how define a group of values in Kendo UI Scatter Charts by configuring the parameters in the DataSource component.",
+                    "requiresServer": true
                 }, {
                     "text": "Pan and zoom",
                     "url": "scatter-charts/pan-and-zoom.html",
@@ -559,7 +591,8 @@
                     "url": "scatter-charts/mvvm.html",
                     "title": "MVVM support in Kendo UI Chart",
                     "meta": "Events, source and visible MVVM binding support in Kendo UI Chart",
-                    "packages": ["!mvc", "!jsp", "!php"]
+                    "packages": ["!mvc", "!jsp", "!php"],
+                    "requiresServer": true
                 }, {
                     "text": "Smooth (Spline) line",
                     "url": "scatter-charts/smooth-scatter-line.html",
@@ -610,7 +643,8 @@
                     "text": "Events",
                     "url": "api/events.html",
                     "title": "Events API for Kendo UI HTML5 charting components | Kendo UI DataViz Demos",
-                    "meta": "This sample demonstrates the events which are specific to Kendo UI HTML5 chart components."
+                    "meta": "This sample demonstrates the events which are specific to Kendo UI HTML5 chart components.",
+                    "requiresServer": true
                 }, {
                     "text": "Selection",
                     "url": "api/selection.html",
@@ -731,12 +765,14 @@
                 "text": "Basic usage",
                 "url": "financial/index.html",
                 "title": "Example of Kendo UI charts for stock analysis apps",
-                "meta": "With this demo for a stock chart, built with Kendo UI, you will be able to find out how Kendo UI chart widgets can be implemented in a financial app."
+                "meta": "With this demo for a stock chart, built with Kendo UI, you will be able to find out how Kendo UI chart widgets can be implemented in a financial app.",
+                "requiresServer": true
             }, {
                 "text": "Multiple panes",
                 "url": "financial/panes.html",
                 "title": "Multiple panes in Kendo UI stock chart",
-                "meta": "This demo illustrates the use of multiple graph panes in Kendo UI Stock chart."
+                "meta": "This demo illustrates the use of multiple graph panes in Kendo UI Stock chart.",
+                "requiresServer": true
             }, {
                 "text": "Virtualization",
                 "url": "financial/virtualization.html",
@@ -761,12 +797,14 @@
                 "text": "Binding to GeoJSON",
                 "url": "map/geojson.html",
                 "title": "Displaying GeoJSON shapes Kendo UI map layer",
-                "meta": "This demo illustrates how to bind a Kendo UI map layer to GeoJSON shapes."
+                "meta": "This demo illustrates how to bind a Kendo UI map layer to GeoJSON shapes.",
+                "requiresServer": true
             }, {
                 "text": "Events",
                 "url": "map/events.html",
                 "title": "Events API for Kendo UI Chart component",
-                "meta": "This sample demonstrates the events which are specific to Kendo UI Map component."
+                "meta": "This sample demonstrates the events which are specific to Kendo UI Map component.",
+                "requiresServer": true
 			}]
         }
     ],

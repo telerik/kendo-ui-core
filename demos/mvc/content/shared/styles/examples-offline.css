@@ -389,6 +389,25 @@ ul.keyboard-legend li a {
     height: 430px;
 }
 
+.chart-wrapper,
+.map-wrapper {
+    position: relative;
+    height: 430px;
+    margin: 0 auto 15px auto;
+    padding: 10px;
+}
+
+#example.absConf .chart-wrapper,
+#example.absConf .map-wrapper
+{
+    margin-left: 0;
+}
+
+.chart-wrapper .k-chart,
+.map-wrapper .k-map {
+    height: 430px;
+}
+
 #page > h2 {
     float: none;
     text-align: center;

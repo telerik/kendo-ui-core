@@ -14,5 +14,15 @@
 <body>
     <a class="offline-button" href="../index.html">Back</a>
     <%= body %>
+	
+	<% if requiresServer %>
+		<div class='demo-section'>
+			<h3>Note:</h3>
+			<p>
+				Security restrictions prevent this example from working in all browsers when the page is loaded from the file system (via file:// protocol). 
+				If the demo is not working as expected, please host the Kendo folder on a web server. 
+			</p>
+		</div>
+	<% end %>
 </body>
 </html>

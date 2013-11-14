@@ -186,7 +186,9 @@ def demos(options)
             ensure_path(t.name)
 
             item = find_navigation_item(navigation, t.name)
-
+			
+			requiresServer = item['requiresServer'].nil? ? false : item['requiresServer']
+			
             File.open(t.name, 'w') do |file|
                 title = item['text'] # used by the template and passed via 'binding'
 
