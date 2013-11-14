@@ -38,7 +38,7 @@
                     kendoConsole.log("command :: " + e.name);
                 }
                 function onPaste(e) {
-                    kendoConsole.log("paste");
+                    kendoConsole.log("paste :: " + kendo.htmlEncode(e.html));
                 }
 
                 $("#editor").kendoEditor({
