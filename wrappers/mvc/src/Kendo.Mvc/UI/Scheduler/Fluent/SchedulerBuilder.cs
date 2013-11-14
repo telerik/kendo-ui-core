@@ -779,9 +779,9 @@
         ///    ))
         /// </code>
         /// </example>
-        public SchedulerBuilder<TModel> Group(Action<SchedulerGroupBuilder<TModel>> configuration)
+        public SchedulerBuilder<TModel> Group(Action<SchedulerGroupBuilder> configuration)
         {
-            var factory = new SchedulerGroupBuilder<TModel>(Component);
+            var factory = new SchedulerGroupBuilder(Component.Group);
 
             configuration(factory);
 

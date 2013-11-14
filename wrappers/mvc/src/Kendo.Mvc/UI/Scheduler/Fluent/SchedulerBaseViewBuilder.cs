@@ -206,6 +206,20 @@
 
             return (TViewBuilder)this;
         }
+
+        /// <summary>
+        /// Sets the resources grouping configuration of the view.
+        /// </summary>
+        /// <param name="configuration">The lambda which configures the view grouping</param>
+        /// <summary>
+        public TViewBuilder Groups(Action<SchedulerGroupBuilder> configuration)
+        {
+            var factory = new SchedulerGroupBuilder(view.Group);
+
+            configuration(factory);
+
+            return (TViewBuilder)this;
+        }
     }
 
 }

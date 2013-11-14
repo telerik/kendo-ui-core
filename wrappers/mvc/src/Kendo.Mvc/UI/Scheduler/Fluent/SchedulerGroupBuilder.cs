@@ -3,27 +3,26 @@
     /// <summary>
     /// Creates resources grouping for the <see cref="Scheduler{TModel}" /> class.
     /// </summary>
-    public class SchedulerGroupBuilder<TModel> : IHideObjectMembers
-        where TModel : class, ISchedulerEvent
+    public class SchedulerGroupBuilder : IHideObjectMembers
     {
-        private readonly IScheduler<TModel> container;
+        private readonly SchedulerGroupSettings settings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SchedulerGroupBuilder{TModel}"/> class.
         /// </summary>
         /// <param name="container">The container</param>
-        public SchedulerGroupBuilder(IScheduler<TModel> container)
+        public SchedulerGroupBuilder(SchedulerGroupSettings settings)
         {
-            this.container = container;
+            this.settings = settings;
         }
 
         /// <summary>
         /// Sets the resources by which the scheduler will be grouped.
         /// </summary>
         /// <param name="names">The names of the resources</param>
-        public SchedulerGroupBuilder<TModel> Resources(params string[] names)
+        public SchedulerGroupBuilder Resources(params string[] names)
         {
-            container.Group.Resources = names;
+            settings.Resources = names;
 
             return this;
         }
@@ -32,9 +31,9 @@
         /// The orientation of the group headers.
         /// </summary>
         /// <param name="value">The orientation</param>        
-        public SchedulerGroupBuilder<TModel> Orientation(SchedulerGroupOrientation value)
+        public SchedulerGroupBuilder Orientation(SchedulerGroupOrientation value)
         {
-            container.Group.Orientation = value;
+            settings.Orientation = value;
             return this;
         }
     }
