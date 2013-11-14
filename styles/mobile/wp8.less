@@ -586,6 +586,11 @@
     height: 78%;
 }
 
+.km-wp .km-listview-label input[type=radio]:after
+{
+    margin: 11% 0 0 11%;
+}
+
 .km-wp .km-listview-label input[type=checkbox]:after
 {
     margin: -60% 0 0 10%;
@@ -593,7 +598,6 @@
     height: 120%;
 }
 
-.km-wp .km-listview-label input[type=radio]:checked:after,
 .km-wp .km-listview-label input[type=checkbox]:checked:after
 {
     color: @main-text-dark;
@@ -601,10 +605,20 @@
     .transform(scale(1,1.2));
 }
 
-.km-wp-light .km-listview-label input[type=radio]:checked:after,
 .km-wp-light .km-listview-label input[type=checkbox]:checked:after
 {
     color: @main-text-light;
+}
+
+.km-wp .km-listview-label input[type=radio]:checked:after
+{
+    color: transparent;
+    background: @main-text-dark;
+}
+
+.km-wp-light .km-listview-label input[type=radio]:checked:after
+{
+    background: @main-text-light;
 }
 
 .km-wp .km-state-active input[type=radio]:before,

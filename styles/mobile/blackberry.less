@@ -1203,6 +1203,14 @@
     position: absolute;
 }
 
+.km-blackberry .km-listview-label input[type=radio]:after
+{
+    position: relative;
+    margin: 20% auto;
+    width: 70%;
+    height: 70%;
+}
+
 .km-blackberry .km-listview-label input[type=radio]:checked,
 .km-blackberry .km-listview-label input[type=checkbox]:checked
 {
@@ -1210,13 +1218,21 @@
     background-color: @blackberry-active-background;
 }
 
-.km-blackberry .km-listview-label input[type=radio]:after,
 .km-blackberry .km-listview-label input[type=checkbox]:after
 {
     .transform(scale(.8,1));
     .transform-origin(25% 50%);
     text-shadow: 0 1px 1px rgba(0,0,0,.2);
 }
+
+.km-blackberry .km-listview-label input[type=radio]:checked:after
+{
+    color: transparent;
+    .linear-gradient-image(top, #fff, #f9f9f9 10%, #eee);
+    .box-shadow(0 1px 1px rgba(0,0,0,.7));
+}
+
+
 
 /* ActionSheet */
 
