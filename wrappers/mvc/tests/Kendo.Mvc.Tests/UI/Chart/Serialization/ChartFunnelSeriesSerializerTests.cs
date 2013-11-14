@@ -11,8 +11,6 @@ namespace Kendo.Mvc.UI.Tests
         ChartFunnelSeries<SalesData, decimal> series;
         public ChartFunnelSeriesSerializerTests()
         {
-            //var chart = ChartTestHelper.CreateChart<SalesData>();
-            //chart.Data = SalesDataBuilder.GetCollection();
             series = new ChartFunnelSeries<SalesData, decimal>(s => s.RepSales, s => s.RepName, s => s.Color, s=>s.VisibleInLegend);
         }
 
