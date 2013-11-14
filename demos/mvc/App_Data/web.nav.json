@@ -617,14 +617,6 @@
                     "meta": "This example and demo source code illustrate how KendoGrid component can be bound to remote data by using the DataSource component."
                 },
                 {
-                    "text": "Binding to Everlive",
-                    "url": "grid/everlive.html",
-                    "title": "Binding to Everlive | Kendo UI Grid demo",
-                    "meta": "This example shows how the Kendo UI Grid can be bound to Telerik Everlive which will provide the backend functionality",
-                    "new": true,
-                    "packages": ["!mvc", "!jsp", "!php"]
-                },
-                {
                     "text": "Custom ajax binding",
                     "url": "grid/customajaxbinding.html",
                     "packages": ["mvc"]
