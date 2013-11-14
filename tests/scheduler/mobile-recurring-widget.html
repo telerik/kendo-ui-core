@@ -382,8 +382,14 @@
 
                 until.click();
 
-                var untilInput = view.find(".k-recur-until");
-                var value = kendo.parseDate(untilInput.val(), "yyyy-MM-dd");
+                var untilInput = view.find("input.k-recur-until");
+                var value;
+
+                if (kendo.support.input.date) {
+                    value = kendo.parseDate(untilInput.val(), "yyyy-MM-dd");
+                } else {
+                    value = untilInput.data("kendoDatePicker").value();
+                }
 
                 value = kendo.timezone.convert(value, value.getTimezoneOffset(), "Etc/UTC");
 
