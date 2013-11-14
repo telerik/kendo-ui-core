@@ -708,12 +708,12 @@ kendo_module({
         animateTo: function(element, destination, options) {
             var direction,
                 commonParent = element.parents().filter(destination.parents()).first(),
-                both = $().add(element).add(destination),
+                both = $().add(element.parent()).add(destination.parent()),
                 isAbsolute = element.css(POSITION) == "absolute",
                 originalOverflow, originalPosition;
 
             if (!isAbsolute) {
-                originalPosition = element.css(POSITION);
+                originalPosition = both.css(POSITION);
                 both.css(POSITION, "absolute");
             }
 
