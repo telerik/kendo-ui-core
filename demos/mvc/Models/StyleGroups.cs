@@ -11,15 +11,15 @@ namespace Kendo.Models
 #if DEBUG
             "web/kendo.common.less",
             "web/kendo.rtl.css",
-            "web/kendo.default.less",
+            "web/kendo.silver.less",
             "dataviz/kendo.dataviz.css",
-            "dataviz/kendo.dataviz.default.css"
+            "dataviz/kendo.dataviz.silver.css"
 #else
             "kendo.common.min.css",
             "kendo.rtl.min.css",
-            "kendo.default.min.css",
+            "kendo.silver.min.css",
             "kendo.dataviz.min.css",
-            "kendo.dataviz.default.min.css"
+            "kendo.dataviz.silver.min.css"
 #endif
         };
 
@@ -55,11 +55,11 @@ namespace Kendo.Models
         {
 #if DEBUG
             "web/kendo.common.less",
-            "web/kendo.default.less",
+            "web/kendo.silver.less",
             "mobile/kendo.mobile.all.less"
 #else
             "kendo.common.min.css",
-            "kendo.default.min.css",
+            "kendo.silver.min.css",
             "kendo.mobile.all.min.css"
 #endif
         };
