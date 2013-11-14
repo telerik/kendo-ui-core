@@ -57,7 +57,7 @@ kendo_module({
             '<select title="#= data.title #" class="#= data.cssClass #" />',
 
         dropDownListTemplate:
-            '<select title="#= data.title #" class="#= data.cssClass #" />',
+            '<span class="k-editor-dropdown"><select title="#= data.title #" class="#= data.cssClass #" /></span>',
 
         separatorTemplate:
             '<span class="k-separator" />',

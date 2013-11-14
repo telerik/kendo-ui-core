@@ -14,7 +14,7 @@ var SelectBox = DropDownList.extend({
 
         // overlay drop-down with popout for snappier interaction
         if (kendo.support.mobileOS.ios) {
-            that._initSelectOverlay(element);
+            that._initSelectOverlay();
         }
 
         that.bind("open", function() {
@@ -45,12 +45,11 @@ var SelectBox = DropDownList.extend({
         name: "SelectBox"
     },
 
-    _initSelectOverlay: function(element) {
-        element = $(element);
-
+    _initSelectOverlay: function() {
+        var element = $(this.element);
         var select = $("<select class='k-select-overlay' />");
         var wrapper = element.closest(".k-widget");
-        var selectBox = element.data(this.type).kendoSelectBox;
+        var selectBox = this;
 
         select.on("change", function() {
             selectBox.value(this.value);
