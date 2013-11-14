@@ -117,7 +117,8 @@ kendo_module({
         COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>',
         isRtl = false,
         browser = kendo.support.browser,
-        isIE7 = browser.msie && browser.version == 7;
+        isIE7 = browser.msie && browser.version == 7,
+        isIE8 = browser.msie && browser.version == 8;
 
     var VirtualScrollable =  Widget.extend({
         init: function(element, options) {
@@ -3984,8 +3985,11 @@ kendo_module({
 
        if (isHeader || !$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,span.k-link,.k-input,.k-multiselect-wrap")) {
            setTimeout(function() {
-               //DOMElement.focus() only for header, because IE doesn't really focus the table
-               focusTable(currentTable, true);
+               //Do not focus if widget, because in IE8 a DDL will be closed
+               if (!(isIE8 && $(kendo._activeElement()).hasClass("k-widget"))) {
+                    //DOMElement.focus() only for header, because IE doesn't really focus the table
+                    focusTable(currentTable, true);
+                }
            });
        }
 
