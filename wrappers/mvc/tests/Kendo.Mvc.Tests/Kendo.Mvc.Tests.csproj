@@ -122,6 +122,7 @@
     <Compile Include="UI\Chart\ChartSelectionMousewheelBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartAxisSelectionBuilderTests.cs" />
     <Compile Include="UI\Chart\ChartSeriesFactoryTests.cs" />
+    <Compile Include="UI\Chart\ChartFunnelSeriesBuilderTests.cs" />
     <Compile Include="UI\Chart\ScatterErrorBarsBuilderTests.cs" />
     <Compile Include="UI\Chart\Serialization\CategoricalErrorBarsSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAxisSelectionSerializerTests.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="UI\Chart\Serialization\ChartPolarLineSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartPolarScatterSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ChartAreaLineSerializerTests.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartFunnelSeriesSerializerTests.cs" />
     <Compile Include="UI\Chart\Serialization\ScatterErrorBarsSerializerTests.cs" />
     <Compile Include="UI\ComboBox\ComboBoxSerializationTests.cs" />
     <Compile Include="UI\DatePicker\DatePickerClientEventsBuilderTests.cs" />

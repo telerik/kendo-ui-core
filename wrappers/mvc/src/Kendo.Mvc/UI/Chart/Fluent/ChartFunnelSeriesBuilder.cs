@@ -68,6 +68,25 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// Sets the opacity of the funnel series.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;% Html.Kendo().Chart()
+        ///            .Name("Chart")
+        ///            .Series(series => series.Funnel(s => s.Sales, s => s.DateString).Opacity(0.3))
+        ///            .Render();
+        /// %&gt;
+        /// </code>
+        /// </example>        
+        public ChartFunnelSeriesBuilder<T> Opacity(double opacity)
+        {
+            Series.Opacity = opacity;
+
+            return this;
+        }
+
+        /// <summary>
         /// Sets the neck ratio of the funnel chart.
         /// </summary>
         /// <example>

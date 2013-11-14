@@ -86,6 +86,13 @@ namespace Kendo.Mvc.UI.Tests.Chart
         }
 
         [Fact]
+        public void Funnel_sets_FunnelSeries_options()
+        {
+            builder.Funnel().SegmentSpacing(42);
+            chart.SeriesDefaults.Funnel.SegmentSpacing.ShouldEqual(42);
+        }
+
+        [Fact]
         public void Bullet_sets_BulletSeries_options()
         {
             builder.Bullet().Color("color");
