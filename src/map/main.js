@@ -353,7 +353,7 @@ kendo_module({
             var topLeft = this.locationToLayer(nw).round();
 
             scroller.reset();
-            scroller.userEvents._disposeAll();
+            scroller.userEvents.cancel();
 
             if (this.zoom() === this.options.maxZoom) {
                 scroller.pane.dimensions.maxScale = 1;
