@@ -5,12 +5,12 @@
 <script>
     function initScheduler() {
         $("#scheduler").kendoScheduler({
-            date: new Date("2013/6/13"),
-            startTime: new Date("2013/6/13 07:00 AM"),
+            date: new Date("2013/6/26"),
+            startTime: new Date("2013/6/26 07:00 AM"),
             height: 600,
             views: [
-                "day",
-                { type: "week", selected: true, selectedDateFormat: "{0:ddd,MMM dd,yyyy} - {1:ddd,MMM dd,yyyy}" },
+                { type: "day", selected: true },
+                { type: "week", selectedDateFormat: "{0:ddd,MMM dd,yyyy} - {1:ddd,MMM dd,yyyy}" },
                 "month",
                 { type: "agenda", selectedDateFormat: "{0:ddd, M/dd/yyyy} - {1:ddd, M/dd/yyyy}" },
             ],
