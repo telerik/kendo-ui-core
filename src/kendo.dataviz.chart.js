@@ -4987,9 +4987,7 @@ kendo_module({
                 previousPoints = prevSegment.curvePoints.slice(0).reverse();
                 previousPoints.unshift(previousPoints[0]);
                 points = points.concat(previousPoints);
-                points.push(last(previousPoints));
-                points.push(points[0]);
-                points.push(points[0]);
+                points.push(last(previousPoints), points[0], points[0]);
             } else {
                 points = segment.curvePoints;
             }
