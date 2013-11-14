@@ -446,9 +446,10 @@ kendo_module({
         },
 
         _disposeAll: function() {
-            $.each(this.touches, function() {
-                this.dispose();
-            });
+            var touches = this.touches;
+            while (touches.length > 0) {
+                touches.pop().dispose();
+            }
         },
 
         _isMoved: function() {

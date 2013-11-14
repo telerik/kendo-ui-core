@@ -36,6 +36,7 @@ kendo_module({
     // Constants ==============================================================
     var CSS_PREFIX = "k-",
         FRICTION = 0.90,
+        FRICTION_MOBILE = 0.93,
         MOUSEWHEEL = "DOMMouseScroll mousewheel",
         VELOCITY_MULTIPLIER = 5;
 
@@ -261,9 +262,10 @@ kendo_module({
         },
 
         _initScroller: function() {
+            var friction = kendo.support.mobileOS ? FRICTION_MOBILE : FRICTION;
             var scroller = this.scroller = new kendo.mobile.ui.Scroller(
                 this.element.children(0), {
-                    friction: FRICTION,
+                    friction: friction,
                     velocityMultiplier: VELOCITY_MULTIPLIER,
                     zoom: true
                 });
@@ -351,6 +353,13 @@ kendo_module({
             var topLeft = this.locationToLayer(nw).round();
 
             scroller.reset();
+            scroller.userEvents._disposeAll();
+
+            if (this.zoom() === this.options.maxZoom) {
+                scroller.pane.dimensions.maxScale = 1;
+            } else {
+                scroller.pane.dimensions.maxScale = 100;
+            }
 
             x.makeVirtual();
             y.makeVirtual();
