@@ -699,7 +699,7 @@
                 themes: [
                     { text: "Default", value: "default", colors: ["#ef6f1c", "#e24b17", "#5a4b43", "#ededed"] },
                     { text: "Blue Opal", value: "blueopal", colors: ["#076186", "#7ed3f6", "#94c0d2", "#daecf4"] },
-                    { text: "Bootstrap", value: "bootstrap", colors: ["#0044cc", "#0088cc", "#333333", "#e6e6e6"] },
+                    { text: "Bootstrap", value: "bootstrap", colors: ["#3276b1", "#67afe9", "#ebebeb", "#ffffff"] },
                     { text: "Silver", value: "silver", colors: ["#298bc8", "#515967", "#bfc6d0", "#eaeaec"] },
                     { text: "Uniform", value: "uniform", colors: ["#666666", "#cccccc", "#e7e7e7", "#ffffff"] },
                     { text: "Metro", value: "metro", colors: ["#8ebc00", "#787878", "#e5e5e5", "#ffffff"] },
