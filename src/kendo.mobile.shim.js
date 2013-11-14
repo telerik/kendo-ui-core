@@ -83,7 +83,7 @@ kendo_module({
         },
 
         hide: function(e) {
-            if (!e || !$.contains(this.shim.children()[0], e.target)) {
+            if (!e || !$.contains(this.shim.children().children(".k-popup")[0], e.target)) {
                 this.popup.close();
             }
         },
