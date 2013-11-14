@@ -86,7 +86,7 @@ kendo_module({
                 loader: that.loader
             });
 
-            that.viewEngine.bind("showStart", function(e) {
+            that.viewEngine.bind("showStart", function() {
                 that.closeActiveDialogs();
             });
 
