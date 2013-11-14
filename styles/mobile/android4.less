@@ -1313,6 +1313,58 @@
     margin-bottom: 0;
 }
 
+.km-android .km-popup-arrow
+{
+    z-index: -1;
+}
+
+.km-android .km-popup-arrow:after,
+.km-android .km-popup-arrow:before
+{
+    border-color: rgba(255,255,255,.2) transparent;
+    border-style: solid;
+    border-width: 0 15px 15px;
+}
+
+.km-android .km-popup-arrow:after
+{
+    border-color: #202125 transparent;
+}
+
+.km-android .km-left .km-popup-arrow:after,
+.km-android .km-right .km-popup-arrow:after
+{
+    border-color: transparent #202125;
+}
+
+.km-android .km-down .km-popup-arrow:before
+{
+    margin-top: -1px;
+}
+
+.km-android .km-up .km-popup-arrow:before
+{
+    margin-top: 1px;
+}
+
+.km-android .km-up .km-popup-arrow:after,
+.km-android .km-up .km-popup-arrow:before
+{
+    border-width: 15px 15px 0 15px;
+}
+
+.km-android .km-left .km-popup-arrow:after,
+.km-android .km-left .km-popup-arrow:before
+{
+    border-width: 15px 0 15px 15px;
+}
+
+.km-android .km-right .km-popup-arrow:after,
+.km-android .km-right .km-popup-arrow:before
+{
+    border-width: 15px 15px 15px 0;
+}
+
 /* ModalView */
 
 .km-android .km-modalview-wrapper
