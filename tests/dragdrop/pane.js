@@ -87,6 +87,13 @@ test("zooms content", function() {
     equal(movable.scale, 2.6);
 })
 
+test("zooms content to maxScale", function() {
+    dimensions.maxScale = 2;
+    press(10, 10);
+    press(13, 14, 2);
+    move(15, 22, 2);
+    equal(movable.scale, 2);
+})
 
 test("zooms to a given point", 2, function() {
     press(10, 10);

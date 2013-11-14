@@ -349,8 +349,8 @@ kendo_module({
                         scaleDelta += (1 - scaleDelta) * 0.8;
                     }
 
-                    if (movable.scale >= maxScale && scaleDelta > 1) {
-                        scaleDelta = 1;
+                    if (movable.scale * scaleDelta >= maxScale) {
+                        scaleDelta = maxScale / movable.scale;
                     }
 
                     coordinates = {
