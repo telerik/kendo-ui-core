@@ -1171,7 +1171,7 @@
 /* :not() shouldn't have specificity... */
 .km-blackberry .km-listview-label input[type=checkbox]:not(.k-input):not(.k-input):not(.k-input):not(.k-input):not(.k-input)
 {
-    margin-top: -.7em;
+    margin-top: -.4em;
 }
 
 .km-blackberry .km-listview-label input[type=radio],
@@ -1179,15 +1179,10 @@
 {
     border: 1px solid rgba(0,0,0,.5);
     .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.3)");
-    width: 1.4em;
-    height: 1.4em;
+    width: 1.05em;
+    height: 1em;
+    font-size: 1.6em;
     .border-radius(@blackberry-border-radius);
-}
-
-.km-blackberry .km-listview-label input[type=radio]
-{
-    width: 1.3em;
-    height: 1.3em;
 }
 
 .km-blackberry .km-listview-label input[type=radio],
@@ -1202,52 +1197,25 @@
 {
     content: "\a0";
     display: block;
-    margin: 20% auto;
-    width: 70%;
-    height: 70%;
-}
-
-.km-blackberry .km-listview-label input[type=checkbox]:after
-{
-    margin-top: 15%;
-    margin-left: 6%;
-    width: 90%;
-    height: 76%;
-}
-
-.km-blackberry .km-listview-label input[type=checkbox]:checked:before
-{
-    position: absolute;
-    margin-top: 10%;
-    margin-left: 3%;
+    left: 0;
     width: 100%;
-    height: 90%;
-    background: rgba(0,0,0,.4);
+    height: 100%;
+    position: absolute;
 }
 
 .km-blackberry .km-listview-label input[type=radio]:checked,
 .km-blackberry .km-listview-label input[type=checkbox]:checked
 {
+    color: #eee;
     background-color: @blackberry-active-background;
 }
 
-.km-blackberry .km-listview-label input[type=radio]:checked:after,
-.km-blackberry .km-listview-label input[type=checkbox]:checked:after
+.km-blackberry .km-listview-label input[type=radio]:after,
+.km-blackberry .km-listview-label input[type=checkbox]:after
 {
-    .linear-gradient-image(top, #fff, #f9f9f9 10%, #eee);
-    .box-shadow(0 1px 1px rgba(0,0,0,.7));
-}
-
-.km-blackberry .km-listview-label input[type=checkbox]:checked:after,
-.km-blackberry .km-listview-label input[type=checkbox]:checked:before
-{
-    -webkit-mask-box-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAsBJREFUeNrsmzFIAzEUhlMLgtCpUBBcC05CwUnoKgidBEHo5FpwFQqCUBBcnQpOTgWh4CQIroLgdOAkFJw6CU6dCkK9SCyK9fr+5CV39+qDN/bC+5I/l/9dWphMJmqRY0kteghaAcU4I10SIUdxVj5rFwTggFi8zvZ08oUAKMU5JBb/EueyNAAdYPabP+QvAMCa0TSl+Ptf+58AAD1g9rekAajF+U4svjfzDZhzAPfE4sdGKqIA7AJL/+zPM1BOAejX2IBY/NC8JkUBOAJmv5V4Cs4hgHKcb8TiI3NEFgWgC8z+zlwflDMAVeC1d0MygjkDcEMsXkNalwZgG1j6XXIrICcAEK//ZjZKUQBaqNeXBADx+oMvry8JwBkw+3vIg6cAbDOQ1x/beH0pABCvX5MGYAsovmczQNYBUL3+aJbXzzuAJjD7p7aDZBUAi9fPM4A2MPsHLgNlEUBZ0VvciV4fPQhdAS5rMyNev+462HcAmvwrceAn5LgJxAan17c5Cu8B9Dspev2xaYywA9DRT0kKDQD+OdegswCkIYWieRar13dxg6GlgHj9Q07NJdnhPqBHFymUgBb3gHvzTQJQCSQFxOs3uHfdeQ0R31Ko+vT6XB0hRAqoH6d6/Xcbr88FoAJoFJFCHVhdl76OndSeoA8pPPr2+txNUU4pIF7/2GfTAQGASCFKkMIK0OJ28vo+2uIcUkC8ftN3z83mu4CLFJDrbFGIlrMNABcpXIT0+r4A6NgHCjkxv0Gus/VVoHD5NIZK4S601/cNAJWC03W2LAJApRDc64cAoOOaEUBLBQ4OAIgUkvLZtcWdFgAuKTRUCsF5QcJFCrcqpeAEsGopBW9ePzQAWyl0VYrh444QIoWRWTmiACBSaKuUw9ctMUrDY6j8fF/MBACKFJoqA+ETQJIUHlRGQtde+P/3+ILHhwADAA2kPASxM5juAAAAAElFTkSuQmCC');
-}
-
-.km-blackberry .km-state-active input[type=radio]:checked:after,
-.km-blackberry .km-state-active input[type=checkbox]:checked:after
-{
-    background-color: #eee;
+    .transform(scale(.8,1));
+    .transform-origin(25% 50%);
+    text-shadow: 0 1px 1px rgba(0,0,0,.2);
 }
 
 /* ActionSheet */

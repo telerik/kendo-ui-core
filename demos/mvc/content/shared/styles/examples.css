@@ -2999,7 +2999,7 @@ ul.keyboard-legend li a {
 #device-wrapper .km-detaildisclose:before,
 #device-wrapper .km-loading:after
 {
-    font: 1em/1em "Kendo UI Examples";
+    font-family: "Kendo UI Examples";
 }
 
 /* Retina Support */
