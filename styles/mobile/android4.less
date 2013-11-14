@@ -1224,19 +1224,30 @@
     height: 78%;
 }
 
+.km-android .km-listview-label input[type=radio]:after
+{
+    margin: 11% 0 0 11%;
+}
+
 .km-android .km-listview-label input[type=checkbox]:after
 {
-    margin: -30% 0 0 20%;
+    margin: -20% 0 0 20%;
     width: 120%;
     height: 120%;
     .transform(scale(1,1.2));
 }
 
-.km-android .km-listview-label input[type=radio]:checked:after,
 .km-android .km-listview-label input[type=checkbox]:checked:after
 {
     color: #41a6cb;
     text-shadow: 0 1px 1px rgba(0,0,0,.2);
+}
+
+.km-android .km-listview-label input[type=radio]:checked:after
+{
+    color: transparent;
+    background: #41a6cb;
+    .box-shadow(0 0 3px #61C6EB);
 }
 
 .km-android .km-state-active input[type=radio]:before,
@@ -1292,15 +1303,20 @@
 
 /* PopOver */
 
-.km-android .km-popover-arrow
+.km-android .km-popup-wrapper
 {
-    display: none;
+    padding: 7px 7px 13px;
 }
 
 .km-android .km-popup.km-pane .km-view
 {
     border-color: #333;
     padding: 1px;
+}
+
+.km-android .km-popup.km-pane
+{
+    .box-shadow(0 0 10px rgba(0,0,0,.5));
 }
 
 .km-android .km-popup.km-pane .km-content
@@ -1313,17 +1329,12 @@
     margin-bottom: 0;
 }
 
-.km-android .km-popup-arrow
-{
-    z-index: -1;
-}
-
 .km-android .km-popup-arrow:after,
 .km-android .km-popup-arrow:before
 {
-    border-color: rgba(255,255,255,.2) transparent;
+    border-color: #202125 transparent;
     border-style: solid;
-    border-width: 0 15px 15px;
+    border-width: 0 10px 10px;
 }
 
 .km-android .km-popup-arrow:after
@@ -1350,19 +1361,19 @@
 .km-android .km-up .km-popup-arrow:after,
 .km-android .km-up .km-popup-arrow:before
 {
-    border-width: 15px 15px 0 15px;
+    border-width: 10px 10px 0 10px;
 }
 
 .km-android .km-left .km-popup-arrow:after,
 .km-android .km-left .km-popup-arrow:before
 {
-    border-width: 15px 0 15px 15px;
+    border-width: 10px 0 10px 10px;
 }
 
 .km-android .km-right .km-popup-arrow:after,
 .km-android .km-right .km-popup-arrow:before
 {
-    border-width: 15px 15px 15px 0;
+    border-width: 10px 10px 10px 0;
 }
 
 /* ModalView */
