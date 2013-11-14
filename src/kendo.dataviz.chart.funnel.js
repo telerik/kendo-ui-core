@@ -433,6 +433,7 @@ kendo_module({
                 view.createPolyline(segment.points, true, {
                     id: options.id,
                     fill: options.color,
+                    fillOpacity:options.opacity,
                     stroke: border.color,
                     strokeOpacity: border.opacity,
                     strokeWidth: border.width,
