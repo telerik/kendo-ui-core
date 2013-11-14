@@ -215,12 +215,12 @@ kendo_module({
             return point.subtract(origin);
         },
 
-        viewToLocation: function(point) {
-            var origin = this.locationToLayer(this.origin());
+        viewToLocation: function(point, zoom) {
+            var origin = this.locationToLayer(this.origin(), zoom);
             point = point.clone();
             point.x += origin.x;
             point.y += origin.y;
-            return this.layerToLocation(point);
+            return this.layerToLocation(point, zoom);
         },
 
         _initControls: function() {
@@ -270,7 +270,7 @@ kendo_module({
 
             scroller.bind("scroll", proxy(this._scroll, this));
             scroller.bind("scrollEnd", proxy(this._scrollEnd, this));
-            scroller.bind("scale", proxy(this._scale, this));
+            scroller.userEvents.bind("gestureend", proxy(this._scale, this));
 
             this.scrollElement = scroller.scrollElement;
         },
@@ -321,14 +321,18 @@ kendo_module({
         },
 
         _scale: function(e) {
-            var movable = e.sender.movable;
-
-            console.log(this.origin().toString());
+            var movable = this.scroller.movable;
             var scale = this.scale() * movable.scale;
             var tiles = scale / this.options.minSize;
-            var zoom = math.log(tiles) / math.log(2);
-            this.zoom(math.round(zoom));
-            return;
+            var zoom = math.round(math.log(tiles) / math.log(2));
+
+            var gestureCenter = new g.Point(e.center.x, e.center.y);
+            var centerLocation = this.viewToLocation(gestureCenter, zoom);
+            var centerPoint = this.locationToLayer(centerLocation, zoom);
+            var originPoint = centerPoint.subtract(gestureCenter);
+
+            this.origin(this.layerToLocation(originPoint, zoom));
+            this.zoom(zoom);
         },
 
         _reset: function() {
