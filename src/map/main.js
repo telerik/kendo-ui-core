@@ -325,16 +325,19 @@ kendo_module({
         _scale: function(e) {
             var movable = this.scroller.movable;
             var scale = this.scale() * movable.scale;
+            var actualScale = this.scale() * math.min(movable.scale, this._maxScale);
             var tiles = scale / this.options.minSize;
+            var actualTiles = actualScale / this.options.minSize;
             var zoom = math.round(math.log(tiles) / math.log(2));
+            var actualZoom = math.round(math.log(actualTiles) / math.log(2));
 
             var gestureCenter = new g.Point(e.center.x, e.center.y);
             var centerLocation = this.viewToLocation(gestureCenter, zoom);
-            var centerPoint = this.locationToLayer(centerLocation, zoom);
+            var centerPoint = this.locationToLayer(centerLocation, actualZoom);
             var originPoint = centerPoint.subtract(gestureCenter);
 
-            this.origin(this.layerToLocation(originPoint, zoom));
-            this.zoom(zoom);
+            this.origin(this.layerToLocation(originPoint, actualZoom));
+            this.zoom(actualZoom);
         },
 
         _reset: function() {
@@ -355,11 +358,10 @@ kendo_module({
             scroller.reset();
             scroller.userEvents.cancel();
 
-            if (this.zoom() === this.options.maxZoom) {
-                scroller.pane.dimensions.maxScale = 1;
-            } else {
-                scroller.pane.dimensions.maxScale = 100;
-            }
+            var headroom = this.options.maxZoom - this.zoom();
+            //scroller.pane.dimensions.maxScale = pow(2, headroom + 1);
+
+            this._maxScale = pow(2, headroom);
 
             x.makeVirtual();
             y.makeVirtual();
