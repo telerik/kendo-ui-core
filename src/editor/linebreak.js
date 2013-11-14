@@ -74,8 +74,8 @@ var ParagraphCommand = Command.extend({
 
         marker = this._insertMarker(doc, range);
 
-        li = dom.parentOfType(marker, ['li']);
-        heading = dom.parentOfType(marker, 'h1,h2,h3,h4,h5,h6'.split(','));
+        li = dom.closestEditableOfType(marker, ['li']);
+        heading = dom.closestEditableOfType(marker, 'h1,h2,h3,h4,h5,h6'.split(','));
 
         if (li) {
             rng = range.cloneRange();

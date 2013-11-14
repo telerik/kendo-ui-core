@@ -399,6 +399,19 @@
             equal(editor.value(), '<p>foo</p><p></p><p><a></a>bar</p>');
         });
 
+        test("does not break out of inline editor within list", function() {
+            var dom = $("<ul><li><div contentEditable /></li></ul>").appendTo("#qunit-fixture");
+            var inline = dom.find("[contentEditable]").kendoEditor({ value: "foo" }).data("kendoEditor");
+            var range = inline.createRange();
+            range.setStart(inline.body.firstChild, 3);
+            range.collapse(true);
+
+            inline.exec("insertParagraph");
+
+            equal(inline.value("<p>foo</p><p></p>"));
+            equal($("#qunit-fixture .k-editor").length, 1);
+        });
+
     </script>
 
     <h1 id="qunit-header">kendo.ui.Editor Tests</h1>

@@ -650,6 +650,27 @@ var Dom = {
         }
 
         return result;
+    },
+
+    closestEditable: function(node, types) {
+        var closest = Dom.parentOfType(node, types);
+        var editable = Dom.editableParent(node);
+
+        if (closest && editable && $.contains(closest, editable)) {
+            closest = editable;
+        } else if (!closest && editable) {
+            closest = editable;
+        }
+
+        return closest;
+    },
+
+    closestEditableOfType: function(node, types) {
+        var editable = Dom.closestEditable(node, types);
+
+        if (editable && Dom.ofType(editable, types)) {
+            return editable;
+        }
     }
 };
 

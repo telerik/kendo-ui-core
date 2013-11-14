@@ -290,17 +290,11 @@ var ListFormatter = Class.extend({
             sections = [],
             lastSection,
             lastNodes,
-            section,
-            editableParent;
+            section;
 
         // split nodes into sections that need to be different lists
         do {
-            section = dom.parentOfType(nodes[i], ["td","body"]);
-            editableParent = dom.editableParent(nodes[i]);
-
-            if ($.contains(section, editableParent)) {
-                section = editableParent;
-            }
+            section = dom.closestEditable(nodes[i], ["td","body"]);
 
             if (!lastSection || section != lastSection) {
                 if (lastSection) {
