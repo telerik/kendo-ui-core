@@ -70,7 +70,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// Suppress initialization script rendering. Note that this options should be used in conjunction with <see cref="WidgetFactory.DeferredScripts"/>
         /// </summary>        
         /// <returns></returns>
-        public virtual TBuilder Deferred(bool deffered=true)
+        public virtual TBuilder Deferred(bool deferred=true)
         {
             Component.HasDeferredInitialization = deffered;
 
