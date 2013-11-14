@@ -72,7 +72,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <returns></returns>
         public virtual TBuilder Deferred(bool deferred=true)
         {
-            Component.HasDeferredInitialization = deffered;
+            Component.HasDeferredInitialization = deferred;
 
             return this as TBuilder;
         }
