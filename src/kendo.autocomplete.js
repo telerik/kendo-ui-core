@@ -139,7 +139,8 @@ kendo_module({
             highlightFirst: false,
             separator: null,
             placeholder: "",
-            animation: {}
+            animation: {},
+            value: null
         },
 
         _dataSource: function() {

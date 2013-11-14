@@ -442,6 +442,11 @@
                 notEqual(input[0], document.activeElement);
             });
 
+            test("AutoComplete uses input value if options.value is null", function() {
+                var autocomplete = new AutoComplete(input.val("test"));
+
+                equal(input.val(), "test");
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
