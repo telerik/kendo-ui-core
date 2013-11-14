@@ -25,7 +25,9 @@ kendo_module({
         init: function(element, options) {
             var that = this,
                 os = support.mobileOS,
-                ShimClass = os && os.tablet ? Popup : Shim;
+                type = options.type,
+                tablet = (type && type == "tablet") || (!type && os && os.tablet),
+                ShimClass = tablet ? Popup : Shim;
 
             Widget.fn.init.call(that, element, options);
 
@@ -42,12 +44,14 @@ kendo_module({
                 .on("up", BUTTONS, "_click")
                 .on("click", BUTTONS, kendo.preventDefault);
 
-            that.wrapper = element.parent();
+            that.wrapper = element.parent().addClass(type ? " km-actionsheet-" + type : "");
             that.shim = new ShimClass(that.wrapper, $.extend({modal: os.ios && os.majorVersion < 7, className: "km-actionsheet-root"}, that.options.popup) );
 
             kendo.notify(that, ui);
 
-            kendo.onResize($.proxy(this, "_resize"));
+            if (tablet) {
+                kendo.onResize($.proxy(this, "_resize"));
+            }
         },
 
         events: [
@@ -110,19 +114,7 @@ kendo_module({
         },
 
         _resize: function() {
-            if (support.mobileOS.tablet) {
-                this.shim.hide();
-            } else { // phone
-                if (this.element.is(":visible")) {
-                    var positionedElement = this.wrapper.parent(),
-                        viewPort = positionedElement.parent();
-
-                    positionedElement.css({
-                        top: (viewPort.height() - positionedElement.height()) + "px",
-                        width: viewPort.width() + "px"
-                    });
-                }
-            }
+            this.shim.hide();
         }
     });
 

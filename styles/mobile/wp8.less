@@ -138,6 +138,7 @@
 .km-wp .km-button:active,
 .km-wp .km-detail.km-state-active,
 .km-wp .km-button.km-state-active,
+.km-wp .km-actionsheet > li > a:hover,
 .km-wp .km-actionsheet > li > a:active,
 .km-wp .km-popup li.k-item:active,
 .km-wp .km-popup li.k-state-selected
@@ -149,6 +150,7 @@
 .km-wp .km-detail.km-state-active,
 .km-wp *:not(.km-tabstrip) > .km-button:active,
 .km-wp *:not(.km-tabstrip) > .km-button.km-state-active,
+.km-wp .km-actionsheet > li > a:hover,
 .km-wp .km-actionsheet > li > a:active,
 .km-wp .km-popup li.k-item:active,
 .km-wp .km-popup li.k-state-selected
@@ -971,6 +973,17 @@
 
 /* ActionSheet */
 
+.km-actionsheet-root > .k-animation-container
+{
+    left: 0 !important;
+}
+
+
+.km-actionsheet-wrapper
+{
+    bottom: 0;
+}
+
 .km-wp .km-popup .k-item,
 .km-wp .km-actionsheet > li
 {
@@ -979,12 +992,13 @@
 
 .km-wp .km-popup .k-item,
 .km-wp li.km-actionsheet-title,
-.km-wp .km-actionsheet a
+.km-wp .km-actionsheet > li > a
 {
     display: block;
     padding: .3em .8em;
     .border-radius(0);
     background: none;
+    .box-shadow(none);
     border: 0;
 }
 

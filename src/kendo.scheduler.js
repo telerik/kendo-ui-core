@@ -1065,12 +1065,17 @@ kendo_module({
         },
 
         showDialog: function(options) {
+            var type = "";
             var html = "<ul><li class=\"km-actionsheet-title\">" + options.title + "</li>";
 
             var target = this.element.find(".k-event[" + kendo.attr("uid") + "='" + options.model.uid + "']");
 
             if (this.container) {
                 target = this.container.find(".k-scheduler-delete");
+
+                if (target[0]) {
+                    type = 'phone';
+                }
             }
 
             for (var buttonIndex = 0; buttonIndex < options.buttons.length; buttonIndex++) {
@@ -1082,6 +1087,7 @@ kendo_module({
             var actionSheet = $(html)
                 .appendTo(this.pane.view().element)
                 .kendoMobileActionSheet({
+                    type: type,
                     cancel: this.options.messages.cancel,
                     cancelTemplate: '<li class="km-actionsheet-cancel"><a class="k-button" href="\\#">#:cancel#</a></li>',
                     close: function() {

@@ -1416,14 +1416,14 @@
     .box-sizing(border-box);
 }
 
-.km-tablet .km-android .km-actionsheet
+.km-tablet .km-android *:not(.km-actionsheet-phone) > .km-actionsheet
 {
     margin: 0;
     width: 100%;
     .box-shadow(0 0 7px #000);
 }
 
-.km-tablet .km-android .km-actionsheet :nth-last-child(2) > a
+.km-tablet .km-android *:not(.km-actionsheet-phone) > .km-actionsheet :nth-last-child(2) > a
 {
-    border-bottom: 0;
+    border-bottom-width: 0;
 }
