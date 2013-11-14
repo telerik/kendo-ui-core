@@ -130,8 +130,12 @@ kendo_module({
             var options = this.options;
 
             if (defined(level)) {
-                options.zoom = limit(level, options.minZoom, options.maxZoom);
-                this._reset();
+                level = limit(level, options.minZoom, options.maxZoom);
+                if (options.zoom !== level) {
+                    options.zoom = level;
+                    this._reset();
+                }
+
                 return this;
             } else {
                 return options.zoom;
@@ -422,9 +426,8 @@ kendo_module({
 
         _mousePoint: function(e) {
             var offset = this.element.offset();
-            var scroller = this.scroller;
-            var x = scroller.scrollLeft + e.originalEvent.pageX - offset.left;
-            var y = scroller.scrollTop + e.originalEvent.pageY - offset.top;
+            var x = e.originalEvent.pageX - offset.left;
+            var y = e.originalEvent.pageY - offset.top;
 
             return new g.Point(x, y);
         },
@@ -441,16 +444,9 @@ kendo_module({
 
                 var cursor = this._mousePoint(e);
                 var location = this.viewToLocation(cursor);
-                var preZoom = this.locationToLayer(location);
                 var postZoom = this.locationToLayer(location, toZoom);
-                var diff = postZoom.subtract(preZoom);
-
-                var origin = this.locationToLayer(this.origin());
-                origin.x += diff.x;
-                origin.y += diff.y;
-                var toOrigin = this.layerToLocation(origin, toZoom);
-
-                this.origin(toOrigin);
+                var origin = postZoom.subtract(cursor);
+                this.origin(this.layerToLocation(origin, toZoom));
                 this.zoom(toZoom);
 
                 this.trigger("zoomEnd", { originalEvent: e });
