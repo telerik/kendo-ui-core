@@ -10,6 +10,7 @@ kendo_module({
     // Imports ================================================================
     var doc = document,
         math = Math,
+        min = math.min,
         pow = math.pow,
 
         proxy = $.proxy,
@@ -323,21 +324,27 @@ kendo_module({
         },
 
         _scale: function(e) {
-            var movable = this.scroller.movable;
-            var scale = this.scale() * movable.scale;
-            var actualScale = this.scale() * math.min(movable.scale, this._maxScale);
-            var tiles = scale / this.options.minSize;
-            var actualTiles = actualScale / this.options.minSize;
-            var zoom = math.round(math.log(tiles) / math.log(2));
-            var actualZoom = math.round(math.log(actualTiles) / math.log(2));
+            var scale = this.scroller.movable.scale;
+            var zoom = this._scaleToZoom(scale);
+
+            var maxScale = pow(2, this.options.maxZoom - this.zoom());
+            var mapZoom = this._scaleToZoom(min(scale, maxScale));
 
             var gestureCenter = new g.Point(e.center.x, e.center.y);
             var centerLocation = this.viewToLocation(gestureCenter, zoom);
-            var centerPoint = this.locationToLayer(centerLocation, actualZoom);
+            var centerPoint = this.locationToLayer(centerLocation, mapZoom);
             var originPoint = centerPoint.subtract(gestureCenter);
 
-            this.origin(this.layerToLocation(originPoint, actualZoom));
-            this.zoom(actualZoom);
+            this.origin(this.layerToLocation(originPoint, mapZoom));
+            this.zoom(mapZoom);
+        },
+
+        _scaleToZoom: function(scaleDelta) {
+            var scale = this.scale() * scaleDelta;
+            var tiles = scale / this.options.minSize;
+            var zoom = math.log(tiles) / math.log(2);
+
+            return math.round(zoom);
         },
 
         _reset: function() {
@@ -357,11 +364,6 @@ kendo_module({
 
             scroller.reset();
             scroller.userEvents.cancel();
-
-            var headroom = this.options.maxZoom - this.zoom();
-            //scroller.pane.dimensions.maxScale = pow(2, headroom + 1);
-
-            this._maxScale = pow(2, headroom);
 
             x.makeVirtual();
             y.makeVirtual();
@@ -402,11 +404,11 @@ kendo_module({
             var width = element.width();
 
             if (!this.options.wraparound) {
-                width = math.min(scale, width);
+                width = min(scale, width);
             }
             return {
                 width: width,
-                height: math.min(scale, element.height())
+                height: min(scale, element.height())
             };
         },
 
