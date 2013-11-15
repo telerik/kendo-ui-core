@@ -1683,7 +1683,7 @@ function pad(number, digits, end) {
 
     function toHyphens(str) {
         return str.replace(/([a-z][A-Z])/g, function (g) {
-            return g[0] + '-' + g[1].toLowerCase();
+            return g.charAt(0) + '-' + g.charAt(1).toLowerCase();
         });
     }
 

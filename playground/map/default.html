@@ -21,7 +21,6 @@
         <script src="../../src/map/layers/tile.js"></script>
         <script src="../../src/map/layers/marker.js"></script>
         <script src="../../src/map/main.js"></script>
-        <script src="proj4.js"></script>
         <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.css">
         <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.default.css">
     </head>
@@ -30,7 +29,7 @@
         <script>
             $("#map").kendoMap({
                 center: [51.5, -0.09],
-                zoom: 7,
+                zoom: 18,
                 layers: [{
                     type: "tile",
                     key: "AqaPuZWytKRUA8Nm5nqvXHWGL8BDCXvK8onCl2PkC581Zp3T_fYAQBiwIphJbRAK"
@@ -39,7 +38,10 @@
                     location: [51.5, -0.09],
                     text: "Marker with popup",
                     open: true // ?
-                }]
+                }],
+                click: function(e) {
+                    //console.log(e.location.toString());
+                }
             });
         </script>
     </body>

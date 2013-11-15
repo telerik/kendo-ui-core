@@ -393,6 +393,12 @@ test("raises end on end call", 1, function(){
     userEvents.end(15, 25);
 });
 
+test("cancel clears active touches", function(){
+    press(5, 15, 2);
+    userEvents.cancel();
+    equal(userEvents.touches.length, 0);
+});
+
 module("selection", {
     setup: function() {
         element = $('<div />');

@@ -246,6 +246,7 @@ kendo_module({
             that.x = new PaneDimension(extend({horizontal: true}, options));
             that.y = new PaneDimension(extend({horizontal: false}, options));
             that.forcedMinScale = options.minScale;
+            that.maxScale = options.maxScale || 100;
 
             that.bind(CHANGE, options);
         },
@@ -340,11 +341,16 @@ kendo_module({
                         scaleDelta = e.distance / previousGesture.distance,
 
                         minScale = that.dimensions.minScale,
+                        maxScale = that.dimensions.maxScale,
                         coordinates;
 
                     if (movable.scale <= minScale && scaleDelta < 1) {
                         // Resist shrinking. Instead of shrinking from 1 to 0.5, it will shrink to 0.5 + (1 /* minScale */ - 0.5) * 0.8 = 0.9;
                         scaleDelta += (1 - scaleDelta) * 0.8;
+                    }
+
+                    if (movable.scale * scaleDelta >= maxScale) {
+                        scaleDelta = maxScale / movable.scale;
                     }
 
                     coordinates = {
