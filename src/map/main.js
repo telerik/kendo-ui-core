@@ -330,17 +330,13 @@ kendo_module({
         _scale: function(e) {
             var scale = this.scroller.movable.scale;
             var zoom = this._scaleToZoom(scale);
-
-            var maxScale = pow(2, this.options.maxZoom - this.zoom());
-            var mapZoom = this._scaleToZoom(min(scale, maxScale));
-
             var gestureCenter = new g.Point(e.center.x, e.center.y);
             var centerLocation = this.viewToLocation(gestureCenter, zoom);
-            var centerPoint = this.locationToLayer(centerLocation, mapZoom);
+            var centerPoint = this.locationToLayer(centerLocation, zoom);
             var originPoint = centerPoint.subtract(gestureCenter);
 
-            this.origin(this.layerToLocation(originPoint, mapZoom));
-            this.zoom(mapZoom);
+            this.origin(this.layerToLocation(originPoint, zoom));
+            this.zoom(zoom);
         },
 
         _scaleToZoom: function(scaleDelta) {
@@ -368,6 +364,8 @@ kendo_module({
 
             scroller.reset();
             scroller.userEvents.cancel();
+            var maxZoom = this.options.maxZoom - this.zoom();
+            scroller.dimensions.maxScale = pow(2, maxZoom);
 
             x.makeVirtual();
             y.makeVirtual();
