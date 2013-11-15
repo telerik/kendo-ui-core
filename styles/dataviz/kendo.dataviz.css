@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .k-chart,
 .k-gauge,
 .k-sparkline,
@@ -243,6 +242,10 @@ span.k-sparkline,
     height: 100%;
 }
 
+.k-map .km-touch-scrollbar {
+    display: none;
+}
+
 .k-map .k-marker {
     position: absolute;
     width: 28px;
@@ -353,4 +356,5 @@ span.k-sparkline,
     margin-left: -5px;
     margin-top: -5px;
 }
+
 
