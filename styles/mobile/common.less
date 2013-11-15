@@ -4,6 +4,14 @@
 
 @-ms-viewport { width: device-width; }
 
+// Fix the wrong window.outerHeight in iOS7 iPad landscape
+@media (orientation:landscape) {
+    .km-tablet .km-ios7 {
+        position: fixed;
+        bottom: 0;
+    }
+}
+
 .km-root
 {
     font-size: .92em;
