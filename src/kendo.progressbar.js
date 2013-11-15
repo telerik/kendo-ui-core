@@ -73,6 +73,14 @@ kendo_module({
             
             Widget.fn.setOptions.call(that, options);
 
+            if (options.hasOwnProperty("reverse")) {
+                that.wrapper.toggleClass("k-progressbar-reverse", options.reverse);
+            }
+
+            if (options.hasOwnProperty("enable")) {
+                that.enable(options.enable);
+            }
+
             that._progressAnimation();
 
             that._validateValue();
