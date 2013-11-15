@@ -79,7 +79,7 @@
         {
             "text": "Button",
             "name": "button",
-            "new": true,
+            "new": "true",
             "documentation": "web/button",
             "spriteCssClass": "buttonIcon",
             "items": [
@@ -621,7 +621,7 @@
                     "url": "grid/everlive.html",
                     "title": "Binding to Everlive | Kendo UI Grid demo",
                     "meta": "This example shows how the Kendo UI Grid can be bound to Telerik Everlive which will provide the backend functionality",
-                    "new": true,
+                    "new": "true",
                     "packages": ["!mvc", "!jsp", "!php"]
                 },
                 {
@@ -842,9 +842,9 @@
                 }, {
                     "text": "Adaptive Rendering",
                     "url": "../mobile/adaptive/grid.html",
-                    "new": true,
+                    "new": "true",
                     "title": "Adaptive Rendering of Kendo UI Grid",
-                    "external": true,
+                    "external": "true",
                     "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
@@ -1116,7 +1116,7 @@
                     "url": "panelbar/ajax.html",
                     "title": "Example of loading content with AJAX in Kendo UI Accordion",
                     "meta": "This example shows how content is loaded in KendoPanelBar component with AJAX.",
-                    "requiresServer": true
+                    "requiresServer": "true"
                 },
                 {
                     "text": "Animation effects",
@@ -1129,7 +1129,7 @@
                     "url": "panelbar/events.html",
                     "title": "Events in Kendo UI accordion widget | KendoPanelBar demo",
                     "meta": "This example demonstrates how events in KendoPanelBar widget work and you can set them to expand the content area of the accordion.",
-                    "requiresServer": true
+                    "requiresServer": "true"
                 },
                 {
                     "text": "API",
@@ -1161,7 +1161,7 @@
         {
              "text": "ProgressBar",
              "name": "progressbar",
-             "new": true,
+             "new": "true",
              "spriteCssClass": "progressBarIcon",
              "items": [
                  {
@@ -1293,9 +1293,9 @@
                 }, {
                     "text": "Adaptive Rendering",
                     "url": "../mobile/adaptive/scheduler.html",
-                    "new": true,
+                    "new": "true",
                     "title": "Adaptive Rendering of Kendo UI Scheduler",
-                    "external": true,
+                    "external": "true",
                     "packages": ["!mvc", "!jsp", "!php"]
                 }
             ]
@@ -1360,21 +1360,21 @@
                     "url": "splitter/ajax.html",
                     "title": "AJAX Content in Kendo UI Splitter widget | Kendo UI Web demo",
                     "meta": "This demo shows how AJAX content is loaded in the container's display area of Kendo UI Splitter control.",
-                    "requiresServer": true
+                    "requiresServer": "true"
                 },
                 {
                     "text": "Events",
                     "url": "splitter/events.html",
                     "title": "Events in Kendo UI Splitter widget | Kendo UI Web demo",
                     "meta": "This demo shows the events which change the behavior of Kendo UI Splitter. Find more about resize events and Javascript function names to be called before the panel is collapsed.",
-                    "requiresServer": true
+                    "requiresServer": "true"
                 },
                 {
                     "text": "API",
                     "url": "splitter/api.html",
                     "title": "Kendo UI Splitter API Demo",
                     "meta": "This example shows how API of Kendo UI Splitter widget works. Find all API functions to expand/collapse content and resize the pane.",
-                    "requiresServer": true
+                    "requiresServer": "true"
                 },
                 {
                     "text": "RTL support",
@@ -1420,7 +1420,7 @@
                     "url": "tabstrip/ajax.html",
                     "title": "AJAX loaded content demo in Kendo UI TabStrip widget",
                     "meta": "This sample shows how the tabs in Kendo UI TabStrip control are dynamically loaded with AJAX upon selection of a tab.",
-                    "requiresServer": true
+                    "requiresServer": "true"
                 },
                 {
                     "text": "Animation effects",
@@ -1433,7 +1433,7 @@
                     "url": "tabstrip/events.html",
                     "title": "Example of Kendo UI TabStrip Events",
                     "meta": "This sample shows how you can trigger select event in Kendo UI TabStrip. Find demo source code for all types of events in KendoTabStrip.",
-                    "requiresServer": true
+                    "requiresServer": "true"
                 },
                 {
                     "text": "API",
@@ -1535,7 +1535,7 @@
                     "url": "tooltip/ajax.html",
                     "title": "AJAX loaded content with Kendo UI Tooltip widget",
                     "meta": "This example illustrates how the content in Kendo UI Tooltip widget can be loaded, using AJAX.",
-                    "requiresServer": true
+                    "requiresServer": "true"
                 },
                 {
                     "text": "Content template",
@@ -1737,7 +1737,7 @@
                     "url": "window/ajax.html",
                     "title": "AJAX loaded content with Kendo UI Window widget",
                     "meta": "This example illustrates how content in Kendo UI window widget can be loaded, using AJAX.",
-                    "requiresServer": true
+                    "requiresServer": "true"
                 },
                 {
                     "text": "Animation effects",
@@ -1750,14 +1750,14 @@
                     "url": "window/events.html",
                     "title": "Events in Kendo UI Window demo",
                     "meta": "This demo shows how to fire events in  Kendo UI jQuery window control. Refresh, activate, open, dragend, dragstart are some of the events which you can trigger.",
-                    "requiresServer": true
+                    "requiresServer": "true"
                 },
                 {
                     "text": "API",
                     "url": "window/api.html",
                     "title": "Example of Kendo UI Window API",
                     "meta": "This sample shows how you can use the API of kendoWindow widget to refresh the content of the window, open and close it.",
-                    "requiresServer": true
+                    "requiresServer": "true"
                 },
                 {
                     "text": "RTL support",
@@ -1805,7 +1805,7 @@
                     "url": "datasource/xml-data.html",
                     "title": "Kendo UI DataSource bound to XML | Kendo UI Web Demos",
                     "meta": "This example shows how you can bind Kendo UI Data Source control to XML Data format.",
-                    "requiresServer": true
+                    "requiresServer": "true"
                 },
                 {
                     "text": "Remote data operations",
@@ -1824,7 +1824,7 @@
                     "url": "datasource/shared-datasource.html",
                     "title": " Shared DataSource Demo | Kendo UI Web demos",
                     "meta": "This example demonstrates a shared DataSource which can be created to enable multiple UI widgets to bind to the same data collection.",
-                    "requiresServer": true
+                    "requiresServer": "true"
                 }
             ]
         },
@@ -2143,7 +2143,7 @@
             "items": [{
                 "text": "Launch Sushi Sample Application",
                 "url": "spa/Sushi.html",
-                "requiresServer": true
+                "requiresServer": "true"
             }],
             "name": "websushi"
         },
@@ -2155,15 +2155,6 @@
                 "url": "spa/Aeroviewr.html"
             }],
             "name": "aeroviewr"
-        },
-        {
-            "text": "Bootstrap",
-            "packages": [ "offline" ],
-            "items": [{
-                "text": "Launch Bootstrap Sample Application",
-                "url": "integration/bootstrap.html"
-            }],
-            "name": "bootstrap"
         }
     ]
 }

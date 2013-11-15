@@ -956,3 +956,9 @@ table tbody td:after{
     height: 100px;
     overflow: hidden;
 }
+
+/* for offline demo */
+.demo-section {
+    color: #bababa;
+    width: 50%;
+}
