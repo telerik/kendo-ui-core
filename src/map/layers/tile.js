@@ -26,7 +26,9 @@
     // Image tile layer =============================================================
     var TileLayer = Class.extend({
         init: function(map, options) {
-            var layer = this;
+            var layer = this,
+                viewType = layer._viewType();
+
             options = deepExtend({}, options, {
                 width: map.element.width() || DEFAULT_WIDTH,
                 height: map.element.height() || DEFAULT_HEIGHT
@@ -35,21 +37,29 @@
             layer._initOptions(options);
             layer.map = map;
 
-            this.element = $("<div class='k-layer'></div>")
+            layer.element = $("<div class='k-layer'></div>")
                            .css({
-                               "zIndex": this.options.zIndex,
-                               "opacity": this.options.opacity
+                               "zIndex": layer.options.zIndex,
+                               "opacity": layer.options.opacity
                            })
                            .appendTo(map.scrollElement);
 
-            this._view = new TileView(this.element, this.options);
+            layer._view = new viewType(layer.element, layer.options);
 
             map.bind("reset", proxy(layer.reset, layer));
             if (kendo.support.mobileOS) {
                 map.bind("panEnd", proxy(layer._render, layer));
             } else {
-                map.bind("pan", proxy(layer._pan, this));
+                map.bind("pan", proxy(layer._pan, layer));
             }
+        },
+
+        opitons: {
+            settingsUrl: "http://dev.virtualearth.net/REST/v1/Imagery/Metadata/#= mapType #?output=json&jsonp=bingTileParams&key=#= key #"
+        },
+
+        _viewType: function() {
+            return TileView;
         },
 
         _updateView: function() {
@@ -91,6 +101,53 @@
         _render: function() {
             this._updateView();
             this._view.render();
+        }
+    });
+
+    var BingLayer = TileLayer.extend({
+        init: function(map, options) {
+            this._initOptions(options);
+
+            var settingsTemplate = template(this.options.settingsUrl),
+                settingsUrl = settingsTemplate({
+                    key: this.options.key,
+                    mapType: this.options.mapType
+                });
+
+            this.map = map;
+
+            $.ajax({
+                url: settingsUrl,
+                type: "get",
+                dataType: "jsonp",
+                jsonpCallback: "bingTileParams",
+                success: proxy(this._success, this)
+            });
+        },
+
+        options: {
+            settingsUrl: "http://dev.virtualearth.net/REST/v1/Imagery/Metadata/#= mapType #?output=json&jsonp=bingTileParams&key=#= key #",
+            mapType: "road"
+        },
+
+        _success: function(data) {
+            var resource = data.resourceSets[0].resources[0];
+
+            TileLayer.fn.init.call(this, this.map, {
+                urlTemplate: resource.imageUrl
+                    .replace("{subdomain}", "#= subdomain #")
+                    .replace("{quadkey}", "#= quadkey #")
+                    .replace("{culture}", "#= culture #"),
+                subdomains: resource.imageUrlSubdomains,
+                maxZoom: resource.zoomMax,
+                minZoom: resource.zoomMin
+            });
+
+            this.reset();
+        },
+
+        _viewType: function() {
+            return BingView;
         }
     });
 
@@ -209,15 +266,19 @@
                     point: point,
                     offset: roundPoint(offset),
                     zoom: this._zoom,
-                    url: urlTemplate({
-                        zoom: this._zoom,
-                        x: index.x,
-                        y: index.y,
-                        subdomain: this.subdomainText()
-                    })
+                    url: urlTemplate(this.tileUrlOptions(index))
                 };
 
             return this.pool.get(this._center, tileOptions);
+        },
+
+        tileUrlOptions: function(index) {
+            return {
+                zoom: this._zoom,
+                x: index.x,
+                y: index.y,
+                subdomain: this.subdomainText()
+            };
         },
 
         wrapIndex: function(index) {
@@ -237,6 +298,42 @@
             }
 
             return value;
+        }
+    });
+
+    var BingView = TileView.extend({
+        options: {
+            culture: "en-Us"
+        },
+
+        tileUrlOptions: function(index) {
+            return {
+                quadkey: this.tileQuadKey(index),
+                subdomain: this.subdomainText(),
+                culture: this.options.culture
+            };
+        },
+
+        tileQuadKey: function(index) {
+            var quadKey = "",
+                digit, mask, i;
+
+            for (i = this._zoom; i > 0; i--) {
+                digit = 0;
+                mask = 1 << (i - 1);
+
+                if ((index.x & mask) !== 0) {
+                    digit++;
+                }
+
+                if ((index.y & mask) !== 0) {
+                    digit += 2;
+                }
+
+                quadKey += digit;
+            }
+
+            return quadKey;
         }
     });
 
@@ -377,9 +474,13 @@
                 tile: TileLayer,
                 TileLayer: TileLayer,
 
+                bing: BingLayer,
+                BingLayer: BingLayer,
+
                 ImageTile: ImageTile,
                 TilePool: TilePool,
-                TileView: TileView
+                TileView: TileView,
+                BingView: BingView
             }
         }
     });
