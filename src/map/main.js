@@ -424,8 +424,9 @@ kendo_module({
 
         _mousePoint: function(e) {
             var offset = this.element.offset();
-            var x = e.originalEvent.pageX - offset.left;
-            var y = e.originalEvent.pageY - offset.top;
+            var event = e.originalEvent;
+            var x = valueOrDefault(event.pageX, event.clientX) - offset.left;
+            var y = valueOrDefault(event.pageY, event.clientY) - offset.top;
 
             return new g.Point(x, y);
         },
