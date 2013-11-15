@@ -56,7 +56,7 @@ public class ResourcesController {
             meeting.setRecurrenceException((String)model.get("recurrenceException"));
             meeting.setRecurrenceId((Integer)model.get("recurrenceId"));
             meeting.setRoomId((Integer)model.get("roomId"));
-            meeting.setAtendees((List<Integer>)model.get("atendees"));
+            meeting.setAttendees((List<Integer>)model.get("attendees"));
             
             meetings.add(meeting);
         }
@@ -87,7 +87,7 @@ public class ResourcesController {
             meeting.setRecurrenceException((String)model.get("recurrenceException"));
             meeting.setRecurrenceId((Integer)model.get("recurrenceId"));
             meeting.setRoomId((Integer)model.get("roomId"));
-            meeting.setAtendees((List<Integer>)model.get("atendees"));
+            meeting.setAttendees((List<Integer>)model.get("attendees"));
             
             meetings.add(meeting);
         }

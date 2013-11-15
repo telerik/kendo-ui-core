@@ -44,14 +44,14 @@ $titleField->defaultValue('No title')
 $roomIdField = new \Kendo\Data\DataSourceSchemaModelField('roomId');
 $roomIdField->nullable(true);
 
-$atendeeField = new \Kendo\Data\DataSourceSchemaModelField('attendee');
-$atendeeField->defaultValue(1);
+$attendeeField = new \Kendo\Data\DataSourceSchemaModelField('attendee');
+$attendeeField->defaultValue(1);
 
 $model->id('meetingID')
     ->addField($roomIdField)
     ->addField($startField)
     ->addField($endField)
-    ->addField($atendeeField)
+    ->addField($attendeeField)
     ->addField($titleField);
 
 $schema = new \Kendo\Data\DataSourceSchema();
@@ -70,10 +70,10 @@ $roomResource->field('roomId')
         array('text'=> 'Meeting Room 201', 'value' => 2, 'color' => '#f58a8a')
     ));
 
-$atendeesResource = new \Kendo\UI\SchedulerResource();
-$atendeesResource->field('attendee')
-    ->title('Atendee')
-    ->name('Atendee')
+$attendeesResource = new \Kendo\UI\SchedulerResource();
+$attendeesResource->field('attendee')
+    ->title('Attendee')
+    ->name('Attendee')
     ->dataSource(array(
         array('text'=> 'Alex', 'value' => 1, 'color' => '#f8a398'),
         array('text'=> 'Bob', 'value' => 2, 'color' => '#51a0ed')
@@ -82,7 +82,7 @@ $atendeesResource->field('attendee')
 $scheduler = new \Kendo\UI\Scheduler('scheduler');
 $scheduler->date(new DateTime('2013/6/13'))
         ->height(600)
-        ->addResource($roomResource, $atendeesResource)
+        ->addResource($roomResource, $attendeesResource)
         ->group(array('resources' => array('Rooms')))
         ->addView(array('type' => 'day', 'startTime' => new DateTime('2013/6/13 7:00')))
         ->resize('scheduler_resize')

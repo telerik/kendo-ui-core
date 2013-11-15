@@ -34,7 +34,7 @@ public class RestrictionController {
         meeting.setStart(format.parse("2013/6/13 10:30"));
         meeting.setEnd(format.parse("2013/6/13 11:30"));
         meeting.setRoomId(1);
-        meeting.setAtendees(new ArrayList<Integer>() {{ add(1); }});
+        meeting.setAttendees(new ArrayList<Integer>() {{ add(1); }});
         
         meetings.add(meeting);
         
@@ -46,7 +46,7 @@ public class RestrictionController {
         meeting.setStart(format.parse("2013/6/13 9:00"));
         meeting.setEnd(format.parse("2013/6/13 12:30"));
         meeting.setRoomId(2);
-        meeting.setAtendees(new ArrayList<Integer>() {{ add(2); }});
+        meeting.setAttendees(new ArrayList<Integer>() {{ add(2); }});
         
         meetings.add(meeting);
         
@@ -57,7 +57,7 @@ public class RestrictionController {
         meeting.setStart(format.parse("2013/6/13 13:00"));
         meeting.setEnd(format.parse("2013/6/13 14:30"));
         meeting.setRoomId(1);
-        meeting.setAtendees(new ArrayList<Integer>() {{ add(2); }});
+        meeting.setAttendees(new ArrayList<Integer>() {{ add(2); }});
         
         meetings.add(meeting);
         model.addAttribute("meetings", meetings);

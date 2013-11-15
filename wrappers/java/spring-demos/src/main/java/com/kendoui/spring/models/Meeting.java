@@ -33,7 +33,7 @@ public class Meeting {
     private boolean isAllDay;
     private Date start;
     private Date end;
-    private List<Integer> atendees;
+    private List<Integer> attendees;
     
     @Id
     @Column(name="MeetingID")
@@ -130,12 +130,12 @@ public class Meeting {
     }
 
     @Transient
-    public List<Integer> getAtendees() {
-        return atendees;
+    public List<Integer> getAttendees() {
+        return attendees;
     }
 
-    public void setAtendees(List<Integer> atendees) {
-        this.atendees = atendees;
+    public void setAttendees(List<Integer> attendees) {
+        this.attendees = attendees;
     }
 
 }

@@ -58,12 +58,12 @@
     		<kendo:scheduler-view type="month" />
     		<kendo:scheduler-view type="agenda" />    		    		
     	</kendo:scheduler-views>
-    	<kendo:scheduler-group resources="<%= new String[] { \"Rooms\",\"Atendees\" } %>" orientation="vertical" />
+    	<kendo:scheduler-group resources="<%= new String[] { \"Rooms\",\"Attendees\" } %>" orientation="vertical" />
     	<kendo:scheduler-resources>
     	    <kendo:scheduler-resource field="roomId" title="Room" name="Rooms">
     			<kendo:dataSource data="<%= rooms %>" />
     		</kendo:scheduler-resource>
-    		<kendo:scheduler-resource field="atendees" title="Atendees" multiple="true" name="Atendees">
+    		<kendo:scheduler-resource field="attendees" title="Attendees" multiple="true" name="Attendees">
     			<kendo:dataSource data="<%= people %>" />
     		</kendo:scheduler-resource>
     	</kendo:scheduler-resources>
@@ -76,7 +76,7 @@
                          <kendo:dataSource-schema-model-field name="description" type="string" />
                          <kendo:dataSource-schema-model-field name="isAllDay" type="boolean" />
                          <kendo:dataSource-schema-model-field name="recurrenceRule" type="string" nullable="true"/>
-                         <kendo:dataSource-schema-model-field name="atendees" nullable="true"/>
+                         <kendo:dataSource-schema-model-field name="attendees" nullable="true"/>
                          <kendo:dataSource-schema-model-field name="recurrenceId" type="number" nullable="true" />
                          <kendo:dataSource-schema-model-field name="recurrenceException" type="string" nullable="true" />
                          <kendo:dataSource-schema-model-field name="roomId" nullable="true"/>

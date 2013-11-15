@@ -24,11 +24,11 @@ puts %Q{
         [RoomID] INT
     );
 
-    DROP TABLE MeetingAtendees;
+    DROP TABLE MeetingAttendees;
 
-    CREATE TABLE MeetingAtendees (
+    CREATE TABLE MeetingAttendees (
         [MeetingID] INTEGER,
-        [AtendeeID] INTEGER
+        [AttendeeID] INTEGER
     );
 
     DROP TABLE Tasks;
@@ -80,12 +80,12 @@ CSV.foreach('tasks.csv', :headers => true) do |row|
     }
 end
 
-CSV.foreach('meeting-atendees.csv', :headers => true) do |row|
+CSV.foreach('meeting-attendees.csv', :headers => true) do |row|
     puts %Q{
-    INSERT INTO MeetingAtendees
-        ([MeetingID], [AtendeeID])
+    INSERT INTO MeetingAttendees
+        ([MeetingID], [AttendeeID])
     VALUES
-        (#{row['MeetingID']}, #{row['AtendeeID']});
+        (#{row['MeetingID']}, #{row['AttendeeID']});
     }
 end
 

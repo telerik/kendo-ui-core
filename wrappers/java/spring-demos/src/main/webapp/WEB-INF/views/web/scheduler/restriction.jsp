@@ -55,7 +55,7 @@
     	    <kendo:scheduler-resource field="roomId" title="Room" name="Rooms">
     			<kendo:dataSource data="<%= rooms %>" />
     		</kendo:scheduler-resource>
-    		<kendo:scheduler-resource field="atendees" title="Atendees" multiple="true" name="Atendees">
+    		<kendo:scheduler-resource field="attendees" title="Attendees" multiple="true" name="Attendees">
     			<kendo:dataSource data="<%= people %>" />
     		</kendo:scheduler-resource>
     	</kendo:scheduler-resources>

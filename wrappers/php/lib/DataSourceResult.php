@@ -545,7 +545,7 @@ class DataSourceResult {
             $statement = $this->db->prepare($sql);
             $statement->execute();
             $data = $statement->fetchAll(PDO::FETCH_NUM);
-            $result['data'][$index]['Atendees'] = $data;
+            $result['data'][$index]['Attendees'] = $data;
         }
 
         return $result;

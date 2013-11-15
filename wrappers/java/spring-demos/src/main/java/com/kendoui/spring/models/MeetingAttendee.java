@@ -9,10 +9,10 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 
 @Entity
-@Table(name="MeetingAtendees")
-public class MeetingAtendee implements Serializable {
+@Table(name="MeetingAttendees")
+public class MeetingAttendee implements Serializable {
     private int meetingId;
-    private int atendeeId;
+    private int attendeeId;
 
     @Id
     @Column(name="MeetingID")
@@ -25,12 +25,12 @@ public class MeetingAtendee implements Serializable {
     }
 
     @Id
-    @Column(name="AtendeeID")
-    public int getAtendeeId() {
-        return atendeeId;
+    @Column(name="AttendeeID")
+    public int getAttendeeId() {
+        return attendeeId;
     }
 
-    public void setAtendeeId(int atendeeId) {
-        this.atendeeId = atendeeId;
+    public void setAttendeeId(int attendeeId) {
+        this.attendeeId = attendeeId;
     }
 }

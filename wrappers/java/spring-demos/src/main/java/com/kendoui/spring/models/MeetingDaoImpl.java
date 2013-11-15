@@ -27,18 +27,18 @@ public class MeetingDaoImpl implements MeetingDao {
         List <Meeting> meetings = criteria.list();
 
         for (Meeting meeting : meetings) {
-            List<Integer> atendees = new ArrayList<Integer>();
+            List<Integer> attendees = new ArrayList<Integer>();
             
-            criteria = session.createCriteria(MeetingAtendee.class);
+            criteria = session.createCriteria(MeetingAttendee.class);
             criteria.add(Restrictions.eq("meetingId", meeting.getMeetingId()));
             
-            List<MeetingAtendee> meetingAtendees = criteria.list(); 
+            List<MeetingAttendee> meetingAttendees = criteria.list(); 
             
-            for (MeetingAtendee atendee : meetingAtendees) {
-               atendees.add(atendee.getAtendeeId());
+            for (MeetingAttendee attendee : meetingAttendees) {
+               attendees.add(attendee.getAttendeeId());
             }
             
-            meeting.setAtendees(atendees);
+            meeting.setAttendees(attendees);
         }
         
         return meetings;
@@ -49,32 +49,32 @@ public class MeetingDaoImpl implements MeetingDao {
         Session session = sessionFactory.getCurrentSession();
         
         for (Meeting meeting : meetings) {
-            Criteria criteria = sessionFactory.getCurrentSession().createCriteria(MeetingAtendee.class);
+            Criteria criteria = sessionFactory.getCurrentSession().createCriteria(MeetingAttendee.class);
             criteria.add(Restrictions.eq("meetingId", meeting.getMeetingId()));
             
-            List<MeetingAtendee> meetingAtendees = criteria.list();
+            List<MeetingAttendee> meetingAttendees = criteria.list();
             
-            List<Integer> atendees = meeting.getAtendees();
+            List<Integer> attendees = meeting.getAttendees();
             
-            for (MeetingAtendee atendee : meetingAtendees) {
-                if (atendees != null) {
-                    if (atendees.contains(atendee.getAtendeeId())) {
-                        atendees.remove((Object)atendee.getAtendeeId());
+            for (MeetingAttendee attendee : meetingAttendees) {
+                if (attendees != null) {
+                    if (attendees.contains(attendee.getAttendeeId())) {
+                        attendees.remove((Object)attendee.getAttendeeId());
                     } else {
-                        session.delete(atendee);
+                        session.delete(attendee);
                     }
                 }
             }
             
-            if (atendees != null) {
-                for (int atendeeId : atendees) {
+            if (attendees != null) {
+                for (int attendeeId : attendees) {
                     
-                    MeetingAtendee atendee = new MeetingAtendee();
+                    MeetingAttendee attendee = new MeetingAttendee();
                     
-                    atendee.setAtendeeId(atendeeId);
-                    atendee.setMeetingId(meeting.getMeetingId());
+                    attendee.setAttendeeId(attendeeId);
+                    attendee.setMeetingId(meeting.getMeetingId());
                     
-                    session.saveOrUpdate(atendee);
+                    session.saveOrUpdate(attendee);
                 }
             }
 
@@ -97,13 +97,13 @@ public class MeetingDaoImpl implements MeetingDao {
                 session.delete(recurrenceException);
             }
             
-            criteria = sessionFactory.getCurrentSession().createCriteria(MeetingAtendee.class);
+            criteria = sessionFactory.getCurrentSession().createCriteria(MeetingAttendee.class);
             criteria.add(Restrictions.eq("meetingId", meeting.getMeetingId()));
             
-            List<MeetingAtendee> meetingAtendees = criteria.list(); 
+            List<MeetingAttendee> meetingAttendees = criteria.list(); 
             
-            for (MeetingAtendee atendee : meetingAtendees) {
-                session.delete(atendee);
+            for (MeetingAttendee attendee : meetingAttendees) {
+                session.delete(attendee);
             }
 
             session.delete(session.load(Meeting.class, meeting.getMeetingId()));

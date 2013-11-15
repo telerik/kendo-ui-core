@@ -16,16 +16,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     switch($type) {
         case 'create':
-            $result = $result->createWithAssociation('Meetings', 'MeetingAtendees', $columns, $request->models, 'MeetingID', array('Atendees' => 'AtendeeID'));
+            $result = $result->createWithAssociation('Meetings', 'MeetingAttendees', $columns, $request->models, 'MeetingID', array('Attendees' => 'AttendeeID'));
             break;
         case 'update':
-            $result = $result->updateWithAssociation('Meetings', 'MeetingAtendees', $columns, $request->models, 'MeetingID', array('Atendees' => 'AtendeeID'));
+            $result = $result->updateWithAssociation('Meetings', 'MeetingAttendees', $columns, $request->models, 'MeetingID', array('Attendees' => 'AttendeeID'));
             break;
         case 'destroy':
-            $result = $result->destroyWithAssociation('Meetings', 'MeetingAtendees', $request->models, 'MeetingID');
+            $result = $result->destroyWithAssociation('Meetings', 'MeetingAttendees', $request->models, 'MeetingID');
             break;
         default:
-            $result = $result->readWithAssociation('Meetings', 'MeetingAtendees', 'MeetingID', array('AtendeeID' => 'Atendees'), array('MeetingID', 'RoomID'), $request);
+            $result = $result->readWithAssociation('Meetings', 'MeetingAttendees', 'MeetingID', array('AttendeeID' => 'Attendees'), array('MeetingID', 'RoomID'), $request);
             break;
     }
 
@@ -117,8 +117,8 @@ $roomIdField = new \Kendo\Data\DataSourceSchemaModelField('roomId');
 $roomIdField->from('RoomID')
         ->nullable(true);
 
-$atendeesField = new \Kendo\Data\DataSourceSchemaModelField('atendees');
-$atendeesField->from('Atendees')
+$attendeesField = new \Kendo\Data\DataSourceSchemaModelField('attendees');
+$attendeesField->from('Attendees')
         ->nullable(true);
 
 $model->id('meetingID')
@@ -133,7 +133,7 @@ $model->id('meetingID')
     ->addField($recurrenceRuleField)
     ->addField($recurrenceExceptionField)
     ->addField($roomIdField)
-    ->addField($atendeesField)
+    ->addField($attendeesField)
     ->addField($isAllDayField);
 
 $schema = new \Kendo\Data\DataSourceSchema();
@@ -155,9 +155,9 @@ $roomResource->field('roomId')
         array('text'=> 'Meeting Room 201', 'value' => 2, 'color' => '#f58a8a')
     ));
 
-$atendeesResource = new \Kendo\UI\SchedulerResource();
-$atendeesResource->field('atendees')
-    ->title('Atendees')
+$attendeesResource = new \Kendo\UI\SchedulerResource();
+$attendeesResource->field('attendees')
+    ->title('Attendees')
     ->multiple(true)
     ->dataSource(array(
         array('text'=> 'Alex', 'value' => 1, 'color' => '#f8a398'),
@@ -169,7 +169,7 @@ $scheduler = new \Kendo\UI\Scheduler('scheduler');
 $scheduler->timezone("Etc/UTC")
         ->date(new DateTime('2013/6/13'))
         ->height(600)
-        ->addResource($roomResource, $atendeesResource)
+        ->addResource($roomResource, $attendeesResource)
         ->addView(array('type' => 'day', 'startTime' => new DateTime('2013/6/13 7:00')),
             array('type' => 'week', 'selected' => true, 'startTime' => new DateTime('2013/6/13 7:00')), 'month', 'agenda')
         ->dataSource($dataSource);
