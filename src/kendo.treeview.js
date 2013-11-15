@@ -1295,41 +1295,40 @@ kendo_module({
             }
         },
 
+        _appendItems: function(index, items, parentNode) {
+            var group = subGroup(parentNode);
+            var children = group.children();
+            var collapsed = !this._expanded(parentNode);
+
+            if (typeof index == UNDEFINED) {
+                index = children.length;
+            }
+
+            this._insertNode(items, index, parentNode, function(item, group) {
+                // insert node into DOM
+                if (index == children.length) {
+                    item.appendTo(group);
+                } else {
+                    item.insertBefore(children.eq(index));
+                }
+            }, collapsed);
+
+            if (this._expanded(parentNode)) {
+                this._updateNodeClasses(parentNode);
+                subGroup(parentNode).css("display", "block");
+            }
+        },
+
         refresh: function(e) {
             var that = this,
                 parentNode = that.wrapper,
                 node = e.node,
                 action = e.action,
                 items = e.items,
-                index = e.index,
                 options = that.options,
                 loadOnDemand = options.loadOnDemand,
                 checkChildren = options.checkboxes && options.checkboxes.checkChildren,
                 i;
-
-            function append(items, parentNode) {
-                var group = subGroup(parentNode),
-                    children = group.children(),
-                    collapsed = !that._expanded(parentNode);
-
-                if (typeof index == UNDEFINED) {
-                    index = children.length;
-                }
-
-                that._insertNode(items, index, parentNode, function(item, group) {
-                    // insert node into DOM
-                    if (index == children.length) {
-                        item.appendTo(group);
-                    } else {
-                        item.insertBefore(children.eq(index));
-                    }
-                }, collapsed);
-
-                if (that._expanded(parentNode)) {
-                    that._updateNodeClasses(parentNode);
-                    subGroup(parentNode).css("display", "block");
-                }
-            }
 
             if (e.field) {
                 return that._updateNode(e.field, items);
@@ -1347,7 +1346,7 @@ kendo_module({
             }
 
             if (action == "add") {
-                append(items, parentNode);
+                this._appendItems(e.index, items, parentNode);
             } else if (action == "remove") {
                 that._remove(that.findByUid(items[0].uid), false);
             } else {
@@ -1357,7 +1356,7 @@ kendo_module({
                     if (!items.length) {
                         updateNodeHtml(parentNode);
                     } else {
-                        append(items, parentNode);
+                        this._appendItems(e.index, items, parentNode);
                     }
                 } else {
                     that.root = that.wrapper.html(that._renderGroup({
