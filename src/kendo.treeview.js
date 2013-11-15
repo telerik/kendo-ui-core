@@ -718,6 +718,10 @@ kendo_module({
 
         _bubbleIndeterminate: function(node) {
             // bottom-up setting of indeterminate state of parent nodes
+            if (!node.length) {
+                return;
+            }
+
             var parentNode = this.parent(node),
                 checkbox;
 
@@ -1357,6 +1361,8 @@ kendo_module({
                         updateNodeHtml(parentNode);
                     } else {
                         this._appendItems(e.index, items, parentNode);
+
+                        this._bubbleIndeterminate(subGroup(parentNode).children().last());
                     }
                 } else {
                     that.root = that.wrapper.html(that._renderGroup({

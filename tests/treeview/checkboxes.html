@@ -525,6 +525,42 @@
                 ok(treeviewObject.dataItem(".k-item:last").checked);
             });
 
+            asyncTest("indeterminate state is updated when fetching remote nodes", function() {
+                var timeout = setTimeout(start, 1000);
+
+                createTreeView({
+                    dataSource: {
+                        transport: {
+                            read: function(options) {
+                                if (options.data.id) {
+                                    setTimeout(function(){
+                                        options.success([
+                                            { text: "sub1", checked: true, hasChildren: false},
+                                            { text: "sub2", checked: false, hasChildren: false}
+                                        ]);
+
+                                        clearTimeout(timeout);
+                                        start();
+                                        ok(treeview.find(":checkbox:first").prop("indeterminate"));
+                                    }, 100);
+                                } else {
+                                    options.success([
+                                        { id: 1, text: "item", hasChildren: true, expanded: true }
+                                    ]);
+                                }
+                            }
+                        },
+                        schema: {
+                            model: {
+                                id: "id",
+                                hasChildren: "hasChildren"
+                            }
+                        },
+                    },
+                    checkboxes: { checkChildren: true }
+                });
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>
