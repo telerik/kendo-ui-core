@@ -194,40 +194,6 @@ span.k-sparkline,
     width: 100%;
 }
 
-/* Mobile Scroller */
-.km-scroll-container {
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: -moz-none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-margin-collapse: separate;
-  -webkit-transform: translatez(0);
-}
-.km-touch-scrollbar {
-  position: absolute;
-  visibility: hidden;
-  z-index: 200000;
-  height: .3em;
-  width: .3em;
-  background-color: rgba(0, 0, 0, 0.7);
-  opacity: 0;
-  -webkit-transition: opacity 0.3s linear;
-  -moz-transition: opacity 0.3s linear;
-  -o-transition: opacity 0.3s linear;
-  transition: opacity 0.3s linear;
-}
-.km-vertical-scrollbar {
-  height: 100%;
-  right: 2px;
-  top: 2px;
-}
-.km-horizontal-scrollbar {
-  width: 100%;
-  left: 2px;
-  bottom: 2px;
-}
-
 /* Map */
 
 .k-map .km-scroll-wrapper {
@@ -284,9 +250,9 @@ span.k-sparkline,
 
 .k-compass
 {
-    width: 4em;
-    height: 4em;
-    border-radius: 5em;
+    width: 67px;
+    height: 67px;
+    border-radius: 80px;
     position: relative;
 }
 
@@ -300,32 +266,32 @@ span.k-sparkline,
 {
     padding: 0;
     line-height: 10px;
-    border-radius: 1em;
+    border-radius: 16px;
     position: absolute;
 }
 
-.k-compass-n
+.k-compass .k-compass-n
 {
     top: 3px;
     left: 50%;
     margin-left: -9px;
 }
 
-.k-compass-e
+.k-compass .k-compass-e
 {
     right: 3px;
     top: 50%;
     margin-top: -9px;
 }
 
-.k-compass-s
+.k-compass .k-compass-s
 {
     bottom: 3px;
     left: 50%;
     margin-left: -9px;
 }
 
-.k-compass-w
+.k-compass .k-compass-w
 {
     left: 3px;
     top: 50%;
