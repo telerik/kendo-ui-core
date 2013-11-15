@@ -144,7 +144,20 @@
         }
 
         /// <summary>
-        /// Sets the events configuration of the scheduler.
+        /// Sets the messages of the recurrenceEditor.
+        /// </summary>
+        /// <param name="addViewAction">The lambda which configures the scheduler messages</param>
+        public RecurrenceEditorBuilder Messages(Action<SchedulerRecurrenceEditorMessagesBuilder> addViewAction)
+        {
+            SchedulerRecurrenceEditorMessagesBuilder builder = new SchedulerRecurrenceEditorMessagesBuilder(Component.Messages);
+
+            addViewAction(builder);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the events configuration of the recurrenceEditor.
         /// </summary>
         /// <param name="clientEventsAction">The lambda which configures the recurrenceEditor events</param>
         /// <example>

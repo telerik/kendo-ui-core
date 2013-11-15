@@ -16,6 +16,8 @@
             Frequencies = new List<RecurrenceEditorFrequency>();
 
             FirstWeekDay = 0;
+
+            Messages = new SchedulerRecurrenceEditorMessages();
         }
 
         public DateTime? Start
@@ -40,6 +42,12 @@
         {
             get;
             set;
+        }
+
+        public SchedulerRecurrenceEditorMessages Messages
+        {
+            get;
+            private set;
         }
 
         public IList<RecurrenceEditorFrequency> Frequencies
@@ -79,6 +87,12 @@
             if (!string.IsNullOrEmpty(Value))
             {
                 options["value"] = Value;
+            }
+
+            var messages = Messages.ToJson();
+            if (messages.Count > 0)
+            {
+                options["messages"] = messages;
             }
 
             if (Frequencies.Count > 0)
