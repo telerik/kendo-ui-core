@@ -168,7 +168,6 @@ var InsertTableTool = PopupTool.extend({
                 cells.removeClass(SELECTEDSTATE);
                 status.text("Cancel");
             })
-            .on("mousedown" + NS, false)
             .on("mouseup" + NS, function(e) {
                 var t = tableFromLocation(e);
 

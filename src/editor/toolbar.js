@@ -437,7 +437,9 @@
                 .off(NS)
                 .on("mouseenter" + NS, enabledButtons, function() { $(this).addClass("k-state-hover"); })
                 .on("mouseleave" + NS, enabledButtons, function() { $(this).removeClass("k-state-hover"); })
-                .on("mousedown" + NS, buttons, false)
+                .on("mousedown" + NS, buttons, function(e) {
+                    e.preventDefault();
+                })
                 .on("keydown" + NS, focusable, function(e) {
                     var current = this;
                     var focusElement,
