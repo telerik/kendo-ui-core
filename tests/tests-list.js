@@ -156,6 +156,7 @@ var tests = [
     "dataviz/drawing/core.html",
     "dataviz/drawing/shapes.html",
     "dataviz/drawing/svg.html",
+    "dataviz/drawing/vml.html",
     "dataviz/geometry.html",
     "dataviz/lint.html",
     "data/datasource/sync-response.html",

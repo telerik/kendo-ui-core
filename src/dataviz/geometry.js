@@ -50,18 +50,6 @@
             return point && point.x === this.x && point.y === this.y;
         },
 
-        toString: function(precision) {
-            var x = this.x,
-                y = this.y;
-
-            if (defined(precision)) {
-                x = round(x, precision);
-                y = round(y, precision);
-            }
-
-            return x + " " + y;
-        },
-
         clone: function() {
             return new Point(this.x, this.y);
         },
@@ -121,6 +109,20 @@
             return this;
         }
     });
+
+    // IE < 9 doesn't allow to override toString on definition
+    Point.fn.toString = function(precision, separator) {
+        var x = this.x,
+            y = this.y;
+
+        if (defined(precision)) {
+            x = round(x, precision);
+            y = round(y, precision);
+        }
+
+        separator = separator || " ";
+        return x + separator + y;
+    };
 
     var Rect = Class.extend({
         init: function(p0, p1) {

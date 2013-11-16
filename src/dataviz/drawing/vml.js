@@ -19,16 +19,13 @@
         renderAllAttr = util.renderAllAttr;
 
     // Constants ==============================================================
-    var BUTT = "butt",
-        DASH_ARRAYS = dataviz.DASH_ARRAYS,
-        NONE = "none",
+    var NONE = "none",
         SOLID = "solid",
         SQUARE = "square",
-        SVG_NS = "http://www.w3.org/2000/svg",
         TRANSPARENT = "transparent",
         UNDEFINED = "undefined";
 
-    // SVG rendering surface ==================================================
+    // VML rendering surface ==================================================
     var Surface = Observable.extend({
         init: function(container, options) {
             Observable.fn.init.call(this);
@@ -56,13 +53,7 @@
         ],
 
         translate: function(offset) {
-            var viewBox = kendo.format(
-                "{0} {1} {2} {3}",
-                offset.x, offset.y,
-                this._width, this._height);
-
-            this._offset = offset;
-            this.element.setAttribute("viewBox", viewBox);
+            // TODO
         },
 
         draw: function(element) {
@@ -73,49 +64,33 @@
             this._root.clear();
         },
 
-        svg: function() {
-            return this._template(this);
-        },
-
         destroy: function() {
             this.clear();
             $(this.element).kendoDestroy();
         },
 
-        // TODO: Implement same resize pattern as kendo.Widget
-        resize: function() {
-            var element = $(this.element);
-            this._width = element.width();
-            this._height = element.height();
-
-            if (this._offset) {
-                this.translate(this._offset);
-            }
-        },
-
         _template: renderTemplate(
-            // TODO: Append XML prefix only during export
-            "<?xml version='1.0' ?>" +
-            "<svg xmlns='" + SVG_NS + "' version='1.1' " +
-            "width='#= kendo.dataviz.util.renderSize(d.options.width) #' " +
-            "height='#= kendo.dataviz.util.renderSize(d.options.height) #' " +
-            "style='position: absolute;'>#= d._root.render() #</svg>"
+            "<div style='" +
+                "width:#= kendo.dataviz.util.renderSize(d.options.width) #; " +
+                "height:#= kendo.dataviz.util.renderSize(d.options.height) #; " +
+                "position: absolute;'" +
+            "><#= d._root.render() #/div>"
         ),
 
         _appendTo: function(container) {
-            renderSVG(container, this._template(this));
-            this.element = container.firstElementChild;
-            alignToScreen(this.element);
+            if (doc.namespaces) {
+                doc.namespaces.add("kvml", "urn:schemas-microsoft-com:vml", "#default#VML");
+            }
+
+            container.innerHTML = this._template(this);
+            this.element = container.firstChild;
 
             this._root.attachTo(this.element);
 
             var element = $(this.element);
-
             element.on("click", this._click);
             element.on("mouseover", this._mouseenter);
             element.on("mouseout", this._mouseleave);
-
-            this.resize();
         },
 
         _handler: function(event) {
@@ -171,17 +146,18 @@
 
         attachTo: function(domElement) {
             var container = doc.createElement("div");
-            renderSVG(container,
-                "<svg xmlns='" + SVG_NS + "' version='1.1'>" +
-                this.render() +
-                "</svg>"
-            );
 
-            var element = container.firstChild.firstChild;
+            container.style.display = "none";
+            doc.body.appendChild(container);
+            container.innerHTML = this.render();
+
+            var element = container.firstChild;
             if (element) {
                 domElement.appendChild(element);
                 this.setElement(element);
             }
+
+            doc.body.removeChild(container);
         },
 
         setElement: function(element) {
@@ -244,11 +220,89 @@
 
     var GroupNode = Node.extend({
         template: renderTemplate(
-            "<g>#= d.renderChildren() #</g>"
+            "<div>#= d.renderChildren() #</div>"
+        )
+    });
+
+    var StrokeNode = Node.extend({
+        mapStroke: function(stroke) {
+            var attrs = [];
+
+            if (stroke) {
+                attrs.push(["on", "true"]);
+                attrs.push(["color", stroke.color]);
+                attrs.push(["weight", stroke.width + "px"]);
+
+                if (defined(stroke.opacity)) {
+                    attrs.push(["opacity", stroke.opacity]);
+                }
+
+                if (defined(stroke.dashType)) {
+                    attrs.push(["dashstyle", stroke.dashType]);
+                }
+            } else {
+                attrs.push(["on", "false"]);
+            }
+
+            return attrs;
+        },
+
+        renderStroke: function() {
+            return renderAllAttr(
+                this.mapStroke(this.srcElement.options.stroke)
+            );
+        },
+
+        template: renderTemplate(
+            "<kvml:stroke #= d.renderStroke() #></kvml:stroke>"
+        )
+    });
+
+    var FillNode = Node.extend({
+        isEnabled: function() {
+            var fill = this.options.fill;
+            return !!fill && fill.toLowerCase() !== TRANSPARENT;
+        },
+
+        mapFill: function(fill) {
+            var attrs = [];
+
+            if (fill && fill.color !== TRANSPARENT) {
+                attrs.push(["on", "true"]);
+                attrs.push(["color", fill.color]);
+
+                if (defined(fill.opacity)) {
+                    attrs.push(["opacity", fill.opacity]);
+                }
+            } else {
+                attrs.push(["on", "false"]);
+            }
+
+            return attrs;
+        },
+
+        renderFill: function() {
+            return renderAllAttr(
+                this.mapFill(this.srcElement.options.fill)
+            );
+        },
+
+        template: renderTemplate(
+            "<kvml:fill #= d.renderFill() #></kvml:fill>"
         )
     });
 
     var PathNode = Node.extend({
+        init: function(srcElement) {
+            this.fill = new FillNode(srcElement);
+            this.stroke = new StrokeNode(srcElement);
+
+            Node.fn.init.call(this, srcElement);
+
+            this.append(this.fill);
+            this.append(this.stroke);
+        },
+
         geometryChange: function() {
             this.attr("d", this.renderData());
             this.invalidate();
@@ -257,37 +311,33 @@
         optionsChange: function(e) {
             switch(e.field) {
                 case "fill":
-                    this.allAttr(this.mapFill(e.value));
+                    // TODO
                     break;
 
                 case "fill.color":
-                    this.allAttr(this.mapFill({ color: e.value }));
+                    // TODO
                     break;
 
                 case "stroke":
-                    this.allAttr(this.mapStroke(e.value));
+                    // TODO
                     break;
 
                 case "visible":
-                    this.attr("visibility", e.value ? "visible" : "hidden");
+                    // TODO
                     break;
 
                 default:
-                    var name = this.attributeMap[e.field];
-                    if (name) {
-                        this.attr(name, e.value);
-                    }
+                    // TODO
+                    /*
+                    "fill.opacity": "fill-opacity",
+                    "stroke.color": "stroke",
+                    "stroke.width": "stroke-width",
+                    "stroke.opacity": "stroke-opacity"
+                    */
                     break;
             }
 
             this.invalidate();
-        },
-
-        attributeMap: {
-            "fill.opacity": "fill-opacity",
-            "stroke.color": "stroke",
-            "stroke.width": "stroke-width",
-            "stroke.opacity": "stroke-opacity"
         },
 
         attr: function(name, value) {
@@ -314,66 +364,22 @@
                     i;
 
                 for (i = 0; i < segments.length; i++) {
-                    parts.push(segments[i].anchor.toString(1));
+                    parts.push(segments[i].anchor.toString(0, ","));
                 }
 
-                output = "M" + parts.join(" ");
+                output = "m " + parts.shift() + " l " + parts.join(" ");
                 if (path.options.closed) {
-                    output += "Z";
+                    output += " x";
                 }
+
+                output += " e";
 
                 return output;
             }
         },
 
-        mapStroke: function(stroke) {
-            var attrs = [];
-
-            if (stroke) {
-                attrs.push(["stroke", stroke.color]);
-                attrs.push(["stroke-width", stroke.width]);
-                attrs.push(["stroke-linecap", this.renderLinecap(stroke)]);
-
-                if (defined(stroke.opacity)) {
-                    attrs.push(["stroke-opacity", stroke.opacity]);
-                }
-
-                if (defined(stroke.dashType)) {
-                    attrs.push(["stroke-dasharray", this.renderDashType(stroke)]);
-                }
-            }
-
-            return attrs;
-        },
-
         renderStroke: function() {
-            return renderAllAttr(
-                this.mapStroke(this.srcElement.options.stroke)
-            );
-        },
-
-        renderDashType: function (stroke) {
-            var width = stroke.width || 1,
-                dashType = stroke.dashType;
-
-            if (dashType && dashType != SOLID) {
-                var dashArray = DASH_ARRAYS[dashType.toLowerCase()],
-                    result = [],
-                    i;
-
-                for (i = 0; i < dashArray.length; i++) {
-                    result.push(dashArray[i] * width);
-                }
-
-                return result.join(" ");
-            }
-        },
-
-        renderLinecap: function(stroke) {
-            var dashType = stroke.dashType,
-                lineCap = stroke.lineCap || SQUARE;
-
-            return (dashType && dashType != SOLID) ? BUTT : lineCap;
+            // TODO
         },
 
         mapFill: function(fill) {
@@ -414,17 +420,28 @@
             return "";
         },
 
+        renderCoordsize: function() {
+            var scale = this.srcElement.options.align === false ?  10000 : 1;
+            return "coordsize='" + scale + " " + scale + "'";
+        },
+
+        renderSize: function() {
+            var scale = this.srcElement.options.align === false ?  100 : 1;
+            return "width:" + scale + "px; height:" + scale + "px;";
+        },
+
         template: renderTemplate(
-            "<path #= kendo.dataviz.util.renderAttr('style', d.renderCursor()) # " +
-            "#= d.renderVisibility() # " +
-            "#= kendo.dataviz.util.renderAttr('d', d.renderData()) # " +
-            "#= d.renderStroke() # " +
-            "#= d.renderFill() # " +
-            "stroke-linejoin='round'></path>"
+            "<kvml:shape " +
+            "style='position:absolute; #= d.renderSize() # " +
+            "#= d.renderCursor() #' " +
+            "coordorigin='0 0' #= d.renderCoordsize() #>" +
+                "#= d.renderChildren() #" +
+                "<kvml:path #= kendo.dataviz.util.renderAttr('v', d.renderData()) # />" +
+            "</kvml:shape>"
         )
     });
 
-    var MultiPathNode = PathNode .extend({
+    var MultiPathNode = PathNode.extend({
         renderData: function() {
             var paths = this.srcElement.paths;
 
@@ -461,51 +478,18 @@
     });
 
     // Helpers ================================================================
-    var renderSVG = function(container, svg) {
-        container.innerHTML = svg;
-    };
-
-    (function() {
-        var testFragment = "<svg xmlns='" + SVG_NS + "'></svg>",
-            testContainer = doc.createElement("div"),
-            hasParser = typeof DOMParser != UNDEFINED;
-
-        testContainer.innerHTML = testFragment;
-
-        if (hasParser && testContainer.firstChild.namespaceURI != SVG_NS) {
-            renderSVG = function(container, svg) {
-                var parser = new DOMParser(),
-                    chartDoc = parser.parseFromString(svg, "text/xml"),
-                    importedDoc = doc.adoptNode(chartDoc.documentElement);
-
-                container.innerHTML = "";
-                container.appendChild(importedDoc);
-            };
+    function renderAllAttr(attrs) {
+        var output = "";
+        for (var i = 0; i < attrs.length; i++) {
+            output += renderAttr(attrs[i][0], attrs[i][1]);
         }
-    })();
 
-    function alignToScreen(element) {
-        var ctm;
-
-        try {
-            ctm = element.getScreenCTM ? element.getScreenCTM() : null;
-        } catch (e) { }
-
-        if (ctm) {
-            var left = - ctm.e % 1,
-                top = - ctm.f % 1,
-                style = element.style;
-
-            if (left !== 0 || top !== 0) {
-                style.left = left + "px";
-                style.top = top + "px";
-            }
-        }
+        return output;
     }
 
     // Exports ================================================================
     deepExtend(d, {
-        svg: {
+        vml: {
             CircleNode: CircleNode,
             GroupNode: GroupNode,
             MultiPathNode: MultiPathNode,
