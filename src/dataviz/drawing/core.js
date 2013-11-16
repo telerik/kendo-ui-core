@@ -2,6 +2,7 @@
 
     // Imports ================================================================
     var $ = jQuery,
+        doc = document,
         noop = $.noop,
         toString = Object.prototype.toString,
 
@@ -155,11 +156,69 @@
         }
     });
 
+    var SurfaceFactory = function() {
+        this._views = [];
+    };
+
+    SurfaceFactory.prototype = {
+        register: function(name, type, order) {
+            var views = this._views,
+                defaultView = views[0],
+                entry = {
+                    name: name,
+                    type: type,
+                    order: order
+                };
+
+            if (!defaultView || order < defaultView.order) {
+                views.unshift(entry);
+            } else {
+                views.push(entry);
+            }
+        },
+
+        create: function(options, preferred) {
+            var views = this._views,
+                match = views[0];
+
+            if (preferred) {
+                preferred = preferred.toLowerCase();
+                for (var i = 0; i < views.length; i++) {
+                    if (views[i].name === preferred) {
+                        match = views[i];
+                        break;
+                    }
+                }
+            }
+
+            if (match) {
+                return new match.type(options);
+            }
+
+            kendo.logToConsole(
+                "Warning: KendoUI DataViz cannot render. Possible causes:\n" +
+                "- The browser does not support SVG, VML and Canvas. User agent: " + navigator.userAgent + "\n" +
+                "- The kendo.dataviz.(svg|vml|canvas).js scripts are not loaded");
+        }
+    };
+
+    SurfaceFactory.current = new SurfaceFactory();
+
+    kendo.support.svg = (function() {
+        return doc.implementation.hasFeature(
+            "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
+    })();
+
+    kendo.support.canvas = (function() {
+        return !!doc.createElement("canvas").getContext;
+    })();
+
     // Exports ================================================================
     deepExtend(dataviz, {
         drawing: {
             BaseNode: BaseNode,
-            OptionsStore: OptionsStore
+            OptionsStore: OptionsStore,
+            SurfaceFactory: SurfaceFactory
         }
     });
 

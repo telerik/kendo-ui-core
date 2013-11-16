@@ -504,6 +504,11 @@
     }
 
     // Exports ================================================================
+
+    if (kendo.support.svg) {
+        d.SurfaceFactory.current.register("svg", Surface, 10);
+    }
+
     deepExtend(d, {
         svg: {
             CircleNode: CircleNode,

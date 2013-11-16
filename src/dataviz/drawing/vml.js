@@ -488,6 +488,11 @@
     }
 
     // Exports ================================================================
+
+    if (kendo.support.browser.msie) {
+        d.SurfaceFactory.current.register("vml", Surface, 20);
+    }
+
     deepExtend(d, {
         vml: {
             CircleNode: CircleNode,
