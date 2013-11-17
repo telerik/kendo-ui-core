@@ -30,7 +30,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_Territories_Region", "Region", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KendoCRUDService.Models.EF.Region), "Territories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Territory), true)]
 [assembly: EdmRelationshipAttribute("SampleModel", "CustomerCustomerDemo", "CustomerDemographics", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.CustomerDemographic), "Customers", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Customer))]
 [assembly: EdmRelationshipAttribute("SampleModel", "EmployeeTerritories", "Employees", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Employee), "Territories", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Territory))]
-[assembly: EdmRelationshipAttribute("SampleModel", "FK_MeetingAtendee_Meeting", "Meeting", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KendoCRUDService.Models.EF.Meeting), "MeetingAtendee", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.MeetingAtendee), true)]
+[assembly: EdmRelationshipAttribute("SampleModel", "FK_MeetingAttendee_Meeting", "Meeting", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(KendoCRUDService.Models.EF.Meeting), "MeetingAttendee", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.MeetingAttendee), true)]
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_Meetings_Meetings", "Meeting", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.Meeting), "Meeting1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Meeting), true)]
 [assembly: EdmRelationshipAttribute("SampleModel", "FK_Tasks_Tasks", "Task", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(KendoCRUDService.Models.EF.Task), "Task1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(KendoCRUDService.Models.EF.Task), true)]
 
@@ -295,18 +295,18 @@ namespace KendoCRUDService.Models.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<MeetingAtendee> MeetingAtendees
+        public ObjectSet<MeetingAttendee> MeetingAttendees
         {
             get
             {
-                if ((_MeetingAtendees == null))
+                if ((_MeetingAttendees == null))
                 {
-                    _MeetingAtendees = base.CreateObjectSet<MeetingAtendee>("MeetingAtendees");
+                    _MeetingAttendees = base.CreateObjectSet<MeetingAttendee>("MeetingAttendees");
                 }
-                return _MeetingAtendees;
+                return _MeetingAttendees;
             }
         }
-        private ObjectSet<MeetingAtendee> _MeetingAtendees;
+        private ObjectSet<MeetingAttendee> _MeetingAttendees;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -449,11 +449,11 @@ namespace KendoCRUDService.Models.EF
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the MeetingAtendees EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the MeetingAttendees EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToMeetingAtendees(MeetingAtendee meetingAtendee)
+        public void AddToMeetingAttendees(MeetingAttendee meetingAttendee)
         {
-            base.AddObject("MeetingAtendees", meetingAtendee);
+            base.AddObject("MeetingAttendees", meetingAttendee);
         }
     
         /// <summary>
@@ -2268,18 +2268,18 @@ namespace KendoCRUDService.Models.EF
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_MeetingAtendee_Meeting", "MeetingAtendee")]
-        public EntityCollection<MeetingAtendee> MeetingAtendees
+        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_MeetingAttendee_Meeting", "MeetingAttendee")]
+        public EntityCollection<MeetingAttendee> MeetingAttendees
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MeetingAtendee>("SampleModel.FK_MeetingAtendee_Meeting", "MeetingAtendee");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<MeetingAttendee>("SampleModel.FK_MeetingAttendee_Meeting", "MeetingAttendee");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MeetingAtendee>("SampleModel.FK_MeetingAtendee_Meeting", "MeetingAtendee", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<MeetingAttendee>("SampleModel.FK_MeetingAttendee_Meeting", "MeetingAttendee", value);
                 }
             }
         }
@@ -2351,24 +2351,24 @@ namespace KendoCRUDService.Models.EF
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="MeetingAtendee")]
+    [EdmEntityTypeAttribute(NamespaceName="SampleModel", Name="MeetingAttendee")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class MeetingAtendee : EntityObject
+    public partial class MeetingAttendee : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new MeetingAtendee object.
+        /// Create a new MeetingAttendee object.
         /// </summary>
         /// <param name="meetingID">Initial value of the MeetingID property.</param>
-        /// <param name="atendeeID">Initial value of the AtendeeID property.</param>
-        public static MeetingAtendee CreateMeetingAtendee(global::System.Int32 meetingID, global::System.Int32 atendeeID)
+        /// <param name="attendeeID">Initial value of the AttendeeID property.</param>
+        public static MeetingAttendee CreateMeetingAttendee(global::System.Int32 meetingID, global::System.Int32 attendeeID)
         {
-            MeetingAtendee meetingAtendee = new MeetingAtendee();
-            meetingAtendee.MeetingID = meetingID;
-            meetingAtendee.AtendeeID = atendeeID;
-            return meetingAtendee;
+            MeetingAttendee meetingAttendee = new MeetingAttendee();
+            meetingAttendee.MeetingID = meetingID;
+            meetingAttendee.AttendeeID = attendeeID;
+            return meetingAttendee;
         }
 
         #endregion
@@ -2407,27 +2407,27 @@ namespace KendoCRUDService.Models.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 AtendeeID
+        public global::System.Int32 AttendeeID
         {
             get
             {
-                return _AtendeeID;
+                return _AttendeeID;
             }
             set
             {
-                if (_AtendeeID != value)
+                if (_AttendeeID != value)
                 {
-                    OnAtendeeIDChanging(value);
-                    ReportPropertyChanging("AtendeeID");
-                    _AtendeeID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("AtendeeID");
-                    OnAtendeeIDChanged();
+                    OnAttendeeIDChanging(value);
+                    ReportPropertyChanging("AttendeeID");
+                    _AttendeeID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AttendeeID");
+                    OnAttendeeIDChanged();
                 }
             }
         }
-        private global::System.Int32 _AtendeeID;
-        partial void OnAtendeeIDChanging(global::System.Int32 value);
-        partial void OnAtendeeIDChanged();
+        private global::System.Int32 _AttendeeID;
+        partial void OnAttendeeIDChanging(global::System.Int32 value);
+        partial void OnAttendeeIDChanged();
 
         #endregion
 
@@ -2440,16 +2440,16 @@ namespace KendoCRUDService.Models.EF
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_MeetingAtendee_Meeting", "Meeting")]
+        [EdmRelationshipNavigationPropertyAttribute("SampleModel", "FK_MeetingAttendee_Meeting", "Meeting")]
         public Meeting Meeting
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Meeting>("SampleModel.FK_MeetingAtendee_Meeting", "Meeting").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Meeting>("SampleModel.FK_MeetingAttendee_Meeting", "Meeting").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Meeting>("SampleModel.FK_MeetingAtendee_Meeting", "Meeting").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Meeting>("SampleModel.FK_MeetingAttendee_Meeting", "Meeting").Value = value;
             }
         }
         /// <summary>
@@ -2461,13 +2461,13 @@ namespace KendoCRUDService.Models.EF
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Meeting>("SampleModel.FK_MeetingAtendee_Meeting", "Meeting");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Meeting>("SampleModel.FK_MeetingAttendee_Meeting", "Meeting");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Meeting>("SampleModel.FK_MeetingAtendee_Meeting", "Meeting", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Meeting>("SampleModel.FK_MeetingAttendee_Meeting", "Meeting", value);
                 }
             }
         }

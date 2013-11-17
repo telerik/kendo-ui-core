@@ -10,7 +10,7 @@ namespace KendoCRUDService.Models
     {
         public int MeetingID { get; set; }        
         public int? RoomID { get; set; }
-        public IEnumerable<int> Atendees { get; set; }
+        public IEnumerable<int> Attendees { get; set; }
 
         public Meeting ToEntity()
         {
