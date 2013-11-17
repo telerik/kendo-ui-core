@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="SampleModel.Customer" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SampleModel.Employee" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SampleModel.Intraday" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SampleModel.MeetingAtendee" Width="1.5" PointX="8" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SampleModel.MeetingAttendee" Width="1.5" PointX="8" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SampleModel.Meeting" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="SampleModel.Order_Detail" Width="1.5" PointX="7.5" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SampleModel.Order" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
@@ -25,7 +25,7 @@
         <AssociationConnector Association="SampleModel.FK_Orders_Customers" ManuallyRouted="false" />
         <AssociationConnector Association="SampleModel.FK_Employees_Employees" ManuallyRouted="false" />
         <AssociationConnector Association="SampleModel.FK_Orders_Employees" ManuallyRouted="false" />
-        <AssociationConnector Association="SampleModel.FK_MeetingAtendee_Meeting" ManuallyRouted="false" />
+        <AssociationConnector Association="SampleModel.FK_MeetingAttendee_Meeting" ManuallyRouted="false" />
         <AssociationConnector Association="SampleModel.FK_Meetings_Meetings" ManuallyRouted="false" />
         <AssociationConnector Association="SampleModel.FK_Order_Details_Orders" ManuallyRouted="false" />
         <AssociationConnector Association="SampleModel.FK_Order_Details_Products" ManuallyRouted="false" />

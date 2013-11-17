@@ -16,7 +16,7 @@ namespace Kendo.Mvc.Examples.Models
     {
         public Meeting()
         {
-            this.MeetingAtendees = new HashSet<MeetingAtendee>();
+            this.MeetingAttendees = new HashSet<MeetingAttendee>();
             this.Meetings1 = new HashSet<Meeting>();
         }
     
@@ -33,7 +33,7 @@ namespace Kendo.Mvc.Examples.Models
         public string StartTimezone { get; set; }
         public string EndTimezone { get; set; }
     
-        public virtual ICollection<MeetingAtendee> MeetingAtendees { get; set; }
+        public virtual ICollection<MeetingAttendee> MeetingAttendees { get; set; }
         public virtual ICollection<Meeting> Meetings1 { get; set; }
         public virtual Meeting Meeting1 { get; set; }
     }

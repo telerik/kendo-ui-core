@@ -35,7 +35,7 @@
                     RecurrenceRule = meeting.RecurrenceRule,
                     RecurrenceException = meeting.RecurrenceException,
                     RecurrenceID = meeting.RecurrenceID,
-                    Atendees = meeting.MeetingAtendees.Select(m => m.AtendeeID).ToArray()
+                    Attendees = meeting.MeetingAttendees.Select(m => m.AttendeeID).ToArray()
                 }).AsQueryable();
         }
 
@@ -43,9 +43,9 @@
         {
             if (ValidateModel(meeting, modelState))
             {
-                if (meeting.Atendees == null)
+                if (meeting.Attendees == null)
                 {
-                    meeting.Atendees = new int[0];
+                    meeting.Attendees = new int[0];
                 }
 
                 if (string.IsNullOrEmpty(meeting.Title))
@@ -55,11 +55,11 @@
 
                 var entity = meeting.ToEntity();
 
-                foreach (var atendeeId in meeting.Atendees)
+                foreach (var attendeeId in meeting.Attendees)
                 {
-                    entity.MeetingAtendees.Add(new MeetingAtendee
+                    entity.MeetingAttendees.Add(new MeetingAttendee
                     {
-                        AtendeeID = atendeeId
+                        AttendeeID = attendeeId
                     });
                 }
 
@@ -79,7 +79,7 @@
                     meeting.Title = "";
                 }
 
-                var entity = db.Meetings.Include("MeetingAtendees").FirstOrDefault(m => m.MeetingID == meeting.MeetingID);
+                var entity = db.Meetings.Include("MeetingAttendees").FirstOrDefault(m => m.MeetingID == meeting.MeetingID);
 
                 entity.Title = meeting.Title;
                 entity.Start = meeting.Start;
@@ -93,22 +93,22 @@
                 entity.StartTimezone = meeting.StartTimezone;
                 entity.EndTimezone = meeting.EndTimezone;
 
-                foreach (var meetingAttendee in entity.MeetingAtendees.ToList())
+                foreach (var meetingAttendee in entity.MeetingAttendees.ToList())
                 {
-                    entity.MeetingAtendees.Remove(meetingAttendee);
+                    entity.MeetingAttendees.Remove(meetingAttendee);
                 }
 
-                if (meeting.Atendees != null)
+                if (meeting.Attendees != null)
                 {
-                    foreach (var atendeeId in meeting.Atendees)
+                    foreach (var attendeeId in meeting.Attendees)
                     {
-                        var meetingAttendee = new MeetingAtendee
+                        var meetingAttendee = new MeetingAttendee
                         {
                             MeetingID = entity.MeetingID,
-                            AtendeeID = atendeeId
+                            AttendeeID = attendeeId
                         };
 
-                        entity.MeetingAtendees.Add(meetingAttendee);
+                        entity.MeetingAttendees.Add(meetingAttendee);
                     }
                 }
 
@@ -118,27 +118,27 @@
 
         public virtual void Delete(MeetingViewModel meeting, ModelStateDictionary modelState)
         {
-            if (meeting.Atendees == null)
+            if (meeting.Attendees == null)
             {
-                meeting.Atendees = new int[0];
+                meeting.Attendees = new int[0];
             }
 
             var entity = meeting.ToEntity();
 
             db.Meetings.Attach(entity);
 
-            var atendees = meeting.Atendees.Select(atendee => new MeetingAtendee
+            var attendees = meeting.Attendees.Select(attendee => new MeetingAttendee
             {
-                AtendeeID = atendee,
+                AttendeeID = attendee,
                 MeetingID = entity.MeetingID
             });
 
-            foreach (var atendee in atendees)
+            foreach (var attendee in attendees)
             {
-                db.MeetingAtendees.Attach(atendee);
+                db.MeetingAttendees.Attach(attendee);
             }
 
-            entity.MeetingAtendees.Clear();
+            entity.MeetingAttendees.Clear();
 
             var recurrenceExceptions = db.Meetings.Where(m => m.RecurrenceID == entity.MeetingID);
 

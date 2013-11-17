@@ -19,7 +19,7 @@
                     Start = new DateTime(2013,6,13,10,30,00 , DateTimeKind.Utc),
                     End = new DateTime(2013,6,13,11,30,00, DateTimeKind.Utc),
                     RoomID = 1,
-                    Atendees = new [] { 1 } 
+                    Attendees = new [] { 1 }
                 },
                 new MeetingViewModel {
                     MeetingID = 2,
@@ -27,7 +27,7 @@
                     Start = new DateTime(2013,6,13,9,00,00 , DateTimeKind.Utc),
                     End = new DateTime(2013,6,13,12,30,00, DateTimeKind.Utc),
                     RoomID = 2,
-                    Atendees = new [] { 2 } 
+                    Attendees = new [] { 2 }
                 },
                 new MeetingViewModel {
                     MeetingID = 1,
@@ -35,7 +35,7 @@
                     Start = new DateTime(2013,6,13,13,00,00 , DateTimeKind.Utc),
                     End = new DateTime(2013,6,13,14,30,00, DateTimeKind.Utc),
                     RoomID = 1,
-                    Atendees = new [] { 1 } 
+                    Attendees = new [] { 1 }
                 }
             };
 

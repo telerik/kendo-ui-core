@@ -30,7 +30,7 @@ namespace Kendo.Mvc.Examples.Models
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Intraday> Intradays { get; set; }
-        public DbSet<MeetingAtendee> MeetingAtendees { get; set; }
+        public DbSet<MeetingAttendee> MeetingAttendees { get; set; }
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<Order_Detail> Order_Details { get; set; }
         public DbSet<Order> Orders { get; set; }

@@ -15,7 +15,7 @@
         views.AgendaView();
     })
     .Timezone("Etc/UTC")
-    .Group(group => group.Resources("Rooms", "Atendees").Orientation(SchedulerGroupOrientation.Vertical))
+    .Group(group => group.Resources("Rooms", "Attendees").Orientation(SchedulerGroupOrientation.Vertical))
     .Resources(resource =>
          {
             resource.Add(m => m.RoomID)
@@ -28,9 +28,9 @@
                     new { Text = "Meeting Room 101", Value = 1, Color = "#6eb3fa" },
                     new { Text = "Meeting Room 201", Value = 2, Color = "#f58a8a" } 
                 });
-            resource.Add(m => m.Atendees)
-                .Title("Atendees")
-                .Name("Atendees")
+            resource.Add(m => m.Attendees)
+                .Title("Attendees")
+                .Name("Attendees")
                 .Multiple(true)
                 .DataTextField("Text")
                 .DataValueField("Value")

@@ -572,6 +572,9 @@
     <Compile Include="Models\Chart\WindDataItem.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
+    <Compile Include="Models\MeetingAttendee.cs">
+      <DependentUpon>Sample.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TreeViewItemModel.cs" />
     <Compile Include="Models\CompensationStats.cs" />
     <Compile Include="Models\Config.cs" />
@@ -594,9 +597,6 @@
     </Compile>
     <Compile Include="Models\JobGrowth.cs" />
     <Compile Include="Models\Meeting.cs">
-      <DependentUpon>Sample.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MeetingAtendee.cs">
       <DependentUpon>Sample.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NavigationExample.cs" />
