@@ -59,7 +59,7 @@ kendo_module({
                 .empty()
                 .append(doc.createElement("div"));
 
-            this._viewOrigin = this.origin();
+            this._viewOrigin = this._getOrigin();
             this._initScroller();
             this._initLayers();
             this._initMarkers();
@@ -148,49 +148,17 @@ kendo_module({
 
         center: function(center) {
             if (center) {
-                this._center = Location.create(center);
-                this._origin = null;
+                this.options.center = Location.create(center).toArray();
                 this._reset();
 
                 return this;
             } else {
-                if (!this._center) {
-                    this._center = Location.create(this.options.center);
-                }
-
-                return this._center;
-            }
-        },
-
-        origin: function(origin) {
-            var size = this._viewportSize(),
-                topLeft;
-
-            if (origin) {
-                origin = Location.create(origin);
-                topLeft = this.locationToLayer(origin);
-                topLeft.x += size.width / 2;
-                topLeft.y += size.height / 2;
-
-                this._origin = origin;
-                this._center = this.layerToLocation(topLeft);
-
-                return this;
-            } else {
-                if (!this._origin) {
-                    topLeft = this.locationToLayer(this.center());
-                    topLeft.x -= size.width / 2;
-                    topLeft.y -= size.height / 2;
-
-                    this._origin = this.layerToLocation(topLeft);
-                }
-
-                return this._origin;
+                return Location.create(this.options.center);
             }
         },
 
         extent: function() {
-            var nw = this.origin();
+            var nw = this._getOrigin();
             var bottomRight = this.locationToLayer(nw);
             var size = this._viewportSize();
 
@@ -226,11 +194,40 @@ kendo_module({
         },
 
         viewToLocation: function(point, zoom) {
-            var origin = this.locationToLayer(this.origin(), zoom);
+            var origin = this.locationToLayer(this._getOrigin(), zoom);
             point = point.clone();
             point.x += origin.x;
             point.y += origin.y;
             return this.layerToLocation(point, zoom);
+        },
+
+        _setOrigin: function(origin) {
+            var size = this._viewportSize(),
+                topLeft;
+
+            origin = this._origin = Location.create(origin);
+            topLeft = this.locationToLayer(origin);
+            topLeft.x += size.width / 2;
+            topLeft.y += size.height / 2;
+
+            this.options.center = this.layerToLocation(topLeft).toArray();
+
+            return this;
+        },
+
+        _getOrigin: function(invalidate) {
+            var size = this._viewportSize(),
+                topLeft;
+
+            if (invalidate || !this._origin) {
+                topLeft = this.locationToLayer(this.center());
+                topLeft.x -= size.width / 2;
+                topLeft.y -= size.height / 2;
+
+                this._origin = this.layerToLocation(topLeft);
+            }
+
+            return this._origin;
         },
 
         _initControls: function() {
@@ -330,10 +327,10 @@ kendo_module({
             origin.x += offset.x;
             origin.y += offset.y;
 
-            this.origin(this.layerToLocation(origin));
+            this._setOrigin(this.layerToLocation(origin));
             this.trigger("pan", {
                 originalEvent: e,
-                origin: this.origin(),
+                origin: this._getOrigin(),
                 center: this.center()
             });
         },
@@ -341,7 +338,7 @@ kendo_module({
         _scrollEnd: function(e) {
             this.trigger("panEnd", {
                 originalEvent: e,
-                origin: this.origin(),
+                origin: this._getOrigin(),
                 center: this.center()
             });
         },
@@ -354,7 +351,7 @@ kendo_module({
             var centerPoint = this.locationToLayer(centerLocation, zoom);
             var originPoint = centerPoint.subtract(gestureCenter);
 
-            this.origin(this.layerToLocation(originPoint, zoom));
+            this._setOrigin(this.layerToLocation(originPoint, zoom));
             this.zoom(zoom);
         },
 
@@ -371,7 +368,7 @@ kendo_module({
                 this._attribution.clear();
             }
 
-            this._viewOrigin = this.origin();
+            this._viewOrigin = this._getOrigin(true);
             this._resetScroller();
             this.trigger("reset");
         },
@@ -471,7 +468,7 @@ kendo_module({
                 var location = this.viewToLocation(cursor);
                 var postZoom = this.locationToLayer(location, toZoom);
                 var origin = postZoom.subtract(cursor);
-                this.origin(this.layerToLocation(origin, toZoom));
+                this._setOrigin(this.layerToLocation(origin, toZoom));
                 this.zoom(toZoom);
 
                 this.trigger("zoomEnd", { originalEvent: e });
