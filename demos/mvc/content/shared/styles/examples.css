@@ -2721,6 +2721,69 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     margin-left: 50%;
 }
 
+.mobileExample .km-pane-wrapper .k-mobile-list .k-edit-field > .k-timezone-button
+{
+    margin-left: 1em;
+}
+
+.mobileExample .km-pane-wrapper .k-nav-today a
+{
+    padding-left: .6em;
+    padding-right: .6em;
+}
+
+.mobileExample .km-pane-wrapper li.k-nav-current
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.mobileExample .km-pane-wrapper .k-pager-wrap
+{
+    position: relative;
+}
+
+.mobileExample .km-pane-wrapper .k-pager-numbers
+{
+    width: auto;
+    display: block;
+    overflow: hidden;
+    margin-right: 5.5em;
+    float: none;
+    text-overflow: ellipsis;
+    height: 2.4em;
+    text-align: center;
+}
+
+.mobileExample .km-pane-wrapper .k-pager-numbers li
+{
+    float: none;
+    display: inline-block;
+}
+
+.mobileExample .km-pane-wrapper .k-pager-nav
+{
+    float: left;
+}
+
+.mobileExample .km-pane-wrapper .k-pager-nav:nth-last-child(2),
+.mobileExample .km-pane-wrapper .k-pager-nav:nth-last-child(3)
+{
+    position: absolute;
+    right: .3em;
+    top: .3em;
+}
+
+.mobileExample .km-pane-wrapper .k-pager-nav:nth-last-child(3)
+{
+    right: 3em;
+}
+
+.mobileExample .km-pane-wrapper .k-pager-info
+{
+    display: none;
+}
+
 #example .km-wp .km-tabstrip .km-button,
 #example .km-wp .km-tabstrip .km-button.km-state-active
 {
