@@ -194,6 +194,22 @@
             });
         })();
 
+        (function() {
+            // ------------------------------------------------------------
+            module("Map / setOptions", {
+                setup: createMap,
+                teardown: destroyMap
+            });
+
+            test("resets map", function() {
+                map._reset = function() {
+                    ok(true);
+                };
+
+                map.setOptions({ foo: true });
+            });
+        })();
+
     </script>
 
     <h1 id="qunit-header">kendo.chart</h1>

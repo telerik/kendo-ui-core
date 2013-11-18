@@ -169,6 +169,11 @@ kendo_module({
             return new Extent(nw, se);
         },
 
+        setOptions: function(options) {
+            Widget.fn.setOptions.call(this, options);
+            this._reset();
+        },
+
         scale: function(zoom) {
             zoom = valueOrDefault(zoom, this.options.zoom);
             return this.options.minSize * pow(2, zoom);
