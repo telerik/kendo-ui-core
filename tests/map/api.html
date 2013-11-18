@@ -210,6 +210,25 @@
             });
         })();
 
+        (function() {
+            // ------------------------------------------------------------
+            module("Map / viewSize", {
+                setup: createMap,
+                teardown: destroyMap
+            });
+
+            test("returns element size", function() {
+                map.element.css({ width: 1024, height: 1024 });
+                deepEqual(map.viewSize(), { width: 1024, height: 1024 });
+            });
+
+            test("returns view size if smaller than element size", function() {
+                map.options.minZoom = 0;
+                map.zoom(0);
+                deepEqual(map.viewSize(), { width: 512, height: 256 });
+            });
+        })();
+
     </script>
 
     <h1 id="qunit-header">kendo.chart</h1>

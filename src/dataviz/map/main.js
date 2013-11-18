@@ -160,7 +160,7 @@ kendo_module({
         extent: function() {
             var nw = this._getOrigin();
             var bottomRight = this.locationToLayer(nw);
-            var size = this._viewportSize();
+            var size = this.viewSize();
 
             bottomRight.x += size.width;
             bottomRight.y += size.height;
@@ -201,8 +201,30 @@ kendo_module({
             return this.layerToLocation(point, zoom);
         },
 
+        eventToView: function(e) {
+            // TODO
+        },
+
+        eventToLocation: function(e) {
+            // TODO
+        },
+
+        viewSize: function() {
+            var element = this.element;
+            var scale = this._layerSize();
+            var width = element.width();
+
+            if (!this.options.wraparound) {
+                width = min(scale, width);
+            }
+            return {
+                width: width,
+                height: min(scale, element.height())
+            };
+        },
+
         _setOrigin: function(origin) {
-            var size = this._viewportSize(),
+            var size = this.viewSize(),
                 topLeft;
 
             origin = this._origin = Location.create(origin);
@@ -216,7 +238,7 @@ kendo_module({
         },
 
         _getOrigin: function(invalidate) {
-            var size = this._viewportSize(),
+            var size = this.viewSize(),
                 topLeft;
 
             if (invalidate || !this._origin) {
@@ -423,21 +445,6 @@ kendo_module({
             }
         },
 
-        // TODO: Rename to viewSize (public)
-        _viewportSize: function() {
-            var element = this.element;
-            var scale = this._layerSize();
-            var width = element.width();
-
-            if (!this.options.wraparound) {
-                width = min(scale, width);
-            }
-            return {
-                width: width,
-                height: min(scale, element.height())
-            };
-        },
-
         _layerSize: function(zoom) {
             zoom = valueOrDefault(zoom, this.options.zoom);
             return this.options.minSize * pow(2, zoom);
@@ -451,6 +458,7 @@ kendo_module({
             });
         },
 
+        // TODO
         _mousePoint: function(e) {
             var offset = this.element.offset();
             var event = e.originalEvent;
