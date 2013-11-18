@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" >
 
     <link href="../../content/shared/styles/examples-offline.css" rel="stylesheet">
+    <link href="../../../styles/kendo.common.min.css" rel="stylesheet">
+    <link href="../../../styles/kendo.default.min.css" rel="stylesheet">
     <link href="../../../styles/kendo.dataviz.min.css" rel="stylesheet">
+    <link href="../../../styles/kendo.dataviz.default.min.css" rel="stylesheet">
 
     <script src="../../../js/jquery.min.js"></script>
     <script src="../../../js/kendo.dataviz.min.js"></script>
@@ -14,15 +17,15 @@
 <body>
     <a class="offline-button" href="../index.html">Back</a>
     <%= body %>
-	
-	<% if requiresServer %>
-		<div class='demo-section'>
-			<h3>Note:</h3>
-			<p>
-				Security restrictions prevent this example from working in all browsers when the page is loaded from the file system (via file:// protocol). 
-				If the demo is not working as expected, please host the Kendo folder on a web server. 
-			</p>
-		</div>
-	<% end %>
+
+    <% if requiresServer %>
+        <div class='demo-section'>
+            <h3>Note:</h3>
+            <p>
+                Security restrictions prevent this example from working in all browsers when the page is loaded from the file system (via file:// protocol).
+                If the demo is not working as expected, please host the Kendo folder on a web server.
+            </p>
+        </div>
+    <% end %>
 </body>
 </html>

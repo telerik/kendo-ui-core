@@ -267,7 +267,7 @@ bundle :name => 'dataviz.commercial',
        :upload_as_internal_build => true,
        :contents => {
             'js' => DATAVIZ_MIN_JS + DATAVIZ_MIN_JS_MAP + JQUERY_MAP,
-            'styles' => DATAVIZ_MIN_CSS,
+            'styles' => DATAVIZ_MIN_CSS + WEB_MIN_CSS,
             'src/js' => DATAVIZ_SRC_JS,
             'src/styles' => DATAVIZ_SRC_CSS
        }
