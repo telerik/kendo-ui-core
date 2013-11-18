@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
-        ///             .Scrolling(scrolling => scrolling.Height("20em"))
+        ///             .Scrolling(scrolling => scrolling.Height("20em")) // use "auto" to remove the default height and make the Grid expand automatically
         /// %&gt;
         /// </code>
         /// </example>
