@@ -1794,10 +1794,10 @@ kendo_module({
                 this._zoomMainLayer();
             }
             else {
-                if(animated) {
-                     var t = new Ticker();
-                         t.addAdapter(new PanAdapter({pan: pan, diagram: this}));
-                         t.play();
+                if (animated) {
+                    var t = new Ticker();
+                    t.addAdapter(new PanAdapter({pan: pan, diagram: this}));
+                    t.play();
                 }
                 else {
                     diagram._transformMainLayer();

@@ -3,81 +3,57 @@
         Class = kendo.Class,
         diagram = kendo.diagram;
 
-    var ShapeTool = Class.extend({
+    var ToolBase = Class.extend({
         init: function () {
         },
         tryActivate: function () {
-            return this.toolService.hoveredItem === undefined;
+            return this.toolService.hoveredItem === undefined && this.toolService.hoveredAdorner === undefined;
         },
         start: function (p) {
             var diagram = this.toolService.diagram;
             this.sp = p;
             diagram.select(false);
-            diagram.selector.start(p);
         },
         move: function (p) {
             var diagram = this.toolService.diagram;
-            diagram.selector.move(p);
+            if (this.sp.distanceTo(p) > 5) {
+                this._started = true;
+                diagram.selector.start(this.sp);
+                diagram.selector.move(p);
+            }
         },
-        end: function (p, meta) {
+        end: function (p) {
             var d = this.toolService.diagram,
+                rect;
+            if (this._started) {
                 rect = diagram.Rect.fromPoints(this.sp, p);
-            d.addShape(rect.topLeft(), {width: rect.width, height: rect.height});
+                d.addShape(rect.topLeft(), this.shapeOptions(rect));
+                d.selector.end();
+                this._started = undefined;
+            }
+        },
+        shapeOptions: function () {
         },
         getCursor: function () {
             return diagram.Cursors.arrow;
         }
     });
 
-    var LinkTool = Class.extend({
-        init: function () {
-        },
-        tryActivate: function () {
-            return this.toolService.hoveredItem === undefined;
-        },
-        start: function (p) {
-            var diagram = this.toolService.diagram;
-            this.sp = p;
-            diagram.select(false);
-            diagram.selector.start(p);
-        },
-        move: function (p) {
-            var diagram = this.toolService.diagram;
-            diagram.selector.move(p);
-        },
-        end: function (p, meta) {
-            var d = this.toolService.diagram,
-                rect = diagram.Rect.fromPoints(this.sp, p);
-            d.addShape(rect.topLeft(), {width: rect.width, height: rect.height});
-        },
-        getCursor: function () {
-            return diagram.Cursors.arrow;
+    var ShapeTool = ToolBase.extend({
+        shapeOptions: function (rect) {
+            return {width: rect.width, height: rect.height};
         }
     });
 
-    var TextTool = Class.extend({
-        init: function () {
-        },
-        tryActivate: function () {
-            return this.toolService.hoveredItem === undefined;
-        },
-        start: function (p) {
-            var diagram = this.toolService.diagram;
-            this.sp = p;
-            diagram.select(false);
-            diagram.selector.start(p);
-        },
-        move: function (p) {
-            var diagram = this.toolService.diagram;
-            diagram.selector.move(p);
-        },
-        end: function (p, meta) {
-            var d = this.toolService.diagram,
-                rect = diagram.Rect.fromPoints(this.sp, p);
-            d.addShape(rect.topLeft(), {width: rect.width, height: rect.height});
-        },
-        getCursor: function () {
-            return diagram.Cursors.arrow;
+    var LinkTool = ToolBase.extend({
+        shapeOptions: function (rect) {
+            return {width: rect.width, height: rect.height, fillOpacity: 0.2, content: "link"};
+        }
+    });
+
+    var TextTool = ToolBase.extend({
+        shapeOptions: function (rect) {
+            return {width: rect.width, height: rect.height, fillOpacity: 0};
         }
     });
 
