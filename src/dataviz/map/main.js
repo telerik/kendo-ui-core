@@ -174,20 +174,15 @@ kendo_module({
             this._reset();
         },
 
-        scale: function(zoom) {
-            zoom = valueOrDefault(zoom, this.options.zoom);
-            return this.options.minSize * pow(2, zoom);
-        },
-
         locationToLayer: function(location, zoom) {
             var clamp = !this.options.wraparound;
             location = Location.create(location);
-            return this.crs.toPoint(location, this.scale(zoom), clamp);
+            return this.crs.toPoint(location, this._layerSize(zoom), clamp);
         },
 
         layerToLocation: function(point, zoom) {
             var clamp = !this.options.wraparound;
-            return  this.crs.toLocation(point, this.scale(zoom), clamp);
+            return  this.crs.toLocation(point, this._layerSize(zoom), clamp);
         },
 
         locationToView: function(location) {
@@ -361,7 +356,7 @@ kendo_module({
         },
 
         _scaleToZoom: function(scaleDelta) {
-            var scale = this.scale() * scaleDelta;
+            var scale = this._layerSize() * scaleDelta;
             var tiles = scale / this.options.minSize;
             var zoom = math.log(tiles) / math.log(2);
 
@@ -382,7 +377,7 @@ kendo_module({
             var scroller = this.scroller;
             var x = scroller.dimensions.x;
             var y = scroller.dimensions.y;
-            var scale = this.scale();
+            var scale = this._layerSize();
             var maxScale = 20 * scale;
             var nw = this.extent().nw;
             var topLeft = this.locationToLayer(nw).round();
@@ -428,9 +423,10 @@ kendo_module({
             }
         },
 
+        // TODO: Rename to viewSize (public)
         _viewportSize: function() {
             var element = this.element;
-            var scale = this.scale();
+            var scale = this._layerSize();
             var width = element.width();
 
             if (!this.options.wraparound) {
@@ -440,6 +436,11 @@ kendo_module({
                 width: width,
                 height: min(scale, element.height())
             };
+        },
+
+        _layerSize: function(zoom) {
+            zoom = valueOrDefault(zoom, this.options.zoom);
+            return this.options.minSize * pow(2, zoom);
         },
 
         _click: function(e) {

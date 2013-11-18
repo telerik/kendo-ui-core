@@ -51,22 +51,22 @@
                 teardown: destroyMap
             });
 
-            test("x virtualSize is 20x scale when wraparound is true", function() {
-                var scale = map.scale();
+            test("x virtualSize is 20x layer size when wraparound is true", function() {
+                var scale = map._layerSize();
                 var x = map.scroller.dimensions.x;
                 equal(x._virtualMin, -20 * scale);
                 equal(x._virtualMax, 20 * scale);
             });
 
-            test("x virtualSize is scale when wraparound is false", function() {
+            test("x virtualSize is layer size when wraparound is false", function() {
                 createMap({ wraparound: false });
-                var scale = map.scale();
+                var scale = map._layerSize();
                 var x = map.scroller.dimensions.x;
                 equal(x._virtualMax - x._virtualMin, 2048);
             });
 
-            test("y virtualSize equals scale", function() {
-                var scale = map.scale();
+            test("y virtualSize equals layer size", function() {
+                var scale = map._layerSize();
                 var y = map.scroller.dimensions.y;
                 equal(y._virtualMax - y._virtualMin, scale);
             });
