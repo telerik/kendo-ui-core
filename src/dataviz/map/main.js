@@ -202,11 +202,20 @@ kendo_module({
         },
 
         eventToView: function(e) {
-            // TODO
+            var offset = this.element.offset();
+            var event = e.originalEvent || e;
+            var x = valueOrDefault(event.pageX, event.clientX) - offset.left;
+            var y = valueOrDefault(event.pageY, event.clientY) - offset.top;
+
+            return new g.Point(x, y);
+        },
+
+        eventToLayer: function(e) {
+            return this.locationToLayer(this.eventToLocation(e));
         },
 
         eventToLocation: function(e) {
-            // TODO
+            return this.viewToLocation(this.eventToView(e));
         },
 
         viewSize: function() {
@@ -451,21 +460,11 @@ kendo_module({
         },
 
         _click: function(e) {
-            var cursor = this._mousePoint(e);
+            var cursor = this.eventToView(e);
             this.trigger("click", {
                 originalEvent: e,
                 location: this.viewToLocation(cursor)
             });
-        },
-
-        // TODO
-        _mousePoint: function(e) {
-            var offset = this.element.offset();
-            var event = e.originalEvent;
-            var x = valueOrDefault(event.pageX, event.clientX) - offset.left;
-            var y = valueOrDefault(event.pageY, event.clientY) - offset.top;
-
-            return new g.Point(x, y);
         },
 
         _mousewheel: function(e) {
@@ -478,7 +477,7 @@ kendo_module({
             if (toZoom !== fromZoom) {
                 this.trigger("zoomStart", { originalEvent: e });
 
-                var cursor = this._mousePoint(e);
+                var cursor = this.eventToView(e);
                 var location = this.viewToLocation(cursor);
                 var postZoom = this.locationToLayer(location, toZoom);
                 var origin = postZoom.subtract(cursor);

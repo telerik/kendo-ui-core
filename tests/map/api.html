@@ -34,14 +34,16 @@
 
         var map;
         function createMap(options) {
-            var element = $("<div style='width: 512px; height: 512px;'></div>").appendTo($("#qunit-fixture"));
+            var element = $("<div style='width: 512px; height: 512px;'></div>")
+                          .appendTo($("#container"));
+
             map = new kendo.dataviz.ui.Map(element, options);
             return map;
         }
 
         function destroyMap() {
             map.destroy();
-            map.element.remove();
+            $("#container").empty();
         }
 
         (function() {
@@ -196,6 +198,66 @@
 
         (function() {
             // ------------------------------------------------------------
+            module("Map / Location <-> View", {
+                setup: function() {
+                    createMap({ zoom: 1 });
+                },
+                teardown: destroyMap
+            });
+
+            test("locationToView maps location to view coordinates", function() {
+                var point = map.locationToView(new Location(90, 240));
+                ok(point.round().equals(new Point(597, 0)));
+            });
+
+            test("locationToView maps location to view coordinates at specified zoom", function() {
+                var point = map.locationToView(new Location(0, 0), 3);
+                ok(point.round().equals(new Point(256, 256)));
+            });
+
+            test("viewToLocation maps view coordinates to location", function() {
+                var loc = map.viewToLocation(new Point(597, 0));
+                ok(loc.round().equals(new Location(85, 240)));
+            });
+
+            test("viewToLocation maps view coordinates to location at specified zoom", function() {
+                var loc = map.viewToLocation(new Point(1024, 1024), 3);
+                ok(loc.round().equals(new Location(0, 0)));
+            });
+        })();
+
+        (function() {
+            // ------------------------------------------------------------
+            module("Map / Event -> Location", {
+                setup: function() {
+                    createMap({ zoom: 2 });
+                },
+                teardown: destroyMap
+            });
+
+            test("eventToLocation maps event coordinates to location", function() {
+                var loc = map.eventToLocation({ pageX: 100, pageY: 100 });
+                ok(loc.round().equals(new Location(48, -55)));
+            });
+
+            test("eventToLocation maps jQuery event coordinates to location", function() {
+                var loc = map.eventToLocation({ originalEvent: { pageX: 100, pageY: 100 } });
+                ok(loc.round().equals(new Location(48, -55)));
+            });
+
+            test("eventToView maps event coordinates to view coordinates", function() {
+                var point = map.eventToView({ pageX: 100, pageY: 100 });
+                ok(point.round().equals(new Point(100, 100)));
+            });
+
+            test("eventToView maps event coordinates to layer coordinates", function() {
+                var point = map.eventToLayer({ pageX: 100, pageY: 100 });
+                ok(point.round().equals(new Point(356, 356)));
+            });
+        })();
+
+        (function() {
+            // ------------------------------------------------------------
             module("Map / setOptions", {
                 setup: createMap,
                 teardown: destroyMap
@@ -230,6 +292,8 @@
         })();
 
     </script>
+
+    <div id="container" style="position: absolute; top: 0; left: 0;"></div>
 
     <h1 id="qunit-header">kendo.chart</h1>
     <h2 id="qunit-banner"></h2>
