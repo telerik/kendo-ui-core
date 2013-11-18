@@ -28,17 +28,19 @@
         <div id="progressbar-chunk-vert"></div>
          <script>
             $("#progressbar").kendoProgressBar({
-                reverse: true
+                value: false,
+                change: function(){
+                    console.log("change");
+                }
             });
 
-            $("#progressbar").data("kendoProgressBar").value(10);
 
             $("#progressbar-chunk").kendoProgressBar({
                 type: "chunk",
                 chunkCount: 6,
-                min: 0,
-                max: 0.005,
-                value: 0,
+                min: 100,
+                max: 200,
+                value: false,
                 enable: true,
                 animation: false,
                 orientation: "horizontal",

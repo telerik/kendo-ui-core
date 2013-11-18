@@ -219,11 +219,17 @@ kendo_module({
             var options = that.options;
 
             if (value !== false) {
-                if (value <= options.min) {
+                if (value <= options.min || value === true) {
                     return options.min;
                 } else if (value >= options.max) {
                     return options.max;
                 }
+            } else if (value === false) {
+                return false;
+            }
+
+            if(isNaN(that._roundValue(value))) {
+                return options.min;
             }
 
             return value;
