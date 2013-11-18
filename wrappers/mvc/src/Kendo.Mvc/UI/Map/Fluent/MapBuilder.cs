@@ -56,7 +56,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-		//>> Layers
         /// <summary>
         /// The configuration of the map layers.
 		/// The layer type is determined by the value of the type field.
@@ -64,11 +63,10 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The action that configures the layers.</param>
         public MapBuilder Layers(Action<MapLayerFactory> configurator)
         {
-            configurator(new MapLayerFactory(container.Layers, container.ViewContext, container.UrlGenerator));
+            configurator(new MapLayerFactory(container.Layers));
             return this;
         }
-        //<< Layers
-
+        
         /// <summary>
         /// The default options for all markers.
         /// </summary>

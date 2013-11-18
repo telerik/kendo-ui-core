@@ -25,6 +25,8 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
+        public bool? Attribution { get; set; }
+        
         public MapControlsNavigatorSettings Navigator
         {
             get;
@@ -43,6 +45,11 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
+            if (Attribution.HasValue)
+            {
+                json["attribution"] = Attribution;
+            }
+                
             var navigator = Navigator.ToJson();
             if (navigator.Any())
             {

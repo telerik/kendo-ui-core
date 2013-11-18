@@ -20,6 +20,17 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
+        /// Enables or disables the built-in attribution control.
+        /// </summary>
+        /// <param name="value">The value that configures the attribution.</param>
+        public MapControlsSettingsBuilder Attribution(bool value)
+        {
+            container.Attribution = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// Enables or disables the built-in navigator control (directional pad).
         /// </summary>
         /// <param name="configurator">The action that configures the navigator.</param>

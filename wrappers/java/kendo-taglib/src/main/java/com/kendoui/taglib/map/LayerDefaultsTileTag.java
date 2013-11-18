@@ -51,12 +51,28 @@ public class LayerDefaultsTileTag extends  BaseTag  /* interfaces */ /* interfac
         return "map-layerDefaults-tile";
     }
 
-    public java.lang.String getCopyright() {
-        return (java.lang.String)getProperty("copyright");
+    public java.lang.String getAttribution() {
+        return (java.lang.String)getProperty("attribution");
     }
 
-    public void setCopyright(java.lang.String value) {
-        setProperty("copyright", value);
+    public void setAttribution(java.lang.String value) {
+        setProperty("attribution", value);
+    }
+
+    public java.lang.String getOpacity() {
+        return (java.lang.String)getProperty("opacity");
+    }
+
+    public void setOpacity(java.lang.String value) {
+        setProperty("opacity", value);
+    }
+
+    public java.lang.Object getSubdomains() {
+        return (java.lang.Object)getProperty("subdomains");
+    }
+
+    public void setSubdomains(java.lang.Object value) {
+        setProperty("subdomains", value);
     }
 
     public java.lang.String getUrlTemplate() {

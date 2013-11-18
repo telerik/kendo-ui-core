@@ -20,12 +20,12 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// The copyright message for all shape layers.
+        /// The attribution for all shape layers.
         /// </summary>
-        /// <param name="value">The value that configures the copyright.</param>
-        public MapLayerDefaultsShapeSettingsBuilder Copyright(string value)
+        /// <param name="value">The value that configures the attribution.</param>
+        public MapLayerDefaultsShapeSettingsBuilder Attribution(string value)
         {
-            container.Copyright = value;
+            container.Attribution = value;
 
             return this;
         }
