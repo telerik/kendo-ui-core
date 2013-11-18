@@ -559,7 +559,8 @@ kendo_module({
             this.scroller.enable();
             this.currentCanvasSize = canvasSize;
         },
-        move: function () {},//the tool itself should not handle the scrolling. Let kendo scroller take care of this part. Check _move
+        move: function () {
+        },//the tool itself should not handle the scrolling. Let kendo scroller take care of this part. Check _move
         _move: function (args) {
             var tool = this,
                 diagram = tool.toolService.diagram,
@@ -905,7 +906,7 @@ kendo_module({
             diagram.zoom(z, p);
             return true;
         },
-        addTool: function(tool, index){
+        addTool: function (tool, index) {
             tool.toolService = this;
             this.tools.splice(index, 0, tool);
         },
@@ -1675,7 +1676,7 @@ kendo_module({
                         newCenter.rotate(bounds.center(), -this._angle);
                         newBounds = new Rect(newCenter.x - newBounds.width / 2, newCenter.y - newBounds.height / 2, newBounds.width, newBounds.height);
                     }
-                    if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) {
+                    if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight || (delta.x > 0 || delta.y > 0)) { // if we up-size very small shape
                         shape.bounds(newBounds);
                         shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
                         changed += 1;
