@@ -15,15 +15,11 @@
         BaseNode = d.BaseNode,
 
         util = dataviz.util,
-        renderAttr = util.renderAttr,
         renderAllAttr = util.renderAllAttr;
 
     // Constants ==============================================================
     var NONE = "none",
-        SOLID = "solid",
-        SQUARE = "square",
-        TRANSPARENT = "transparent",
-        UNDEFINED = "undefined";
+        TRANSPARENT = "transparent";
 
     // VML rendering surface ==================================================
     var Surface = Observable.extend({
@@ -226,17 +222,13 @@
 
     var StrokeNode = Node.extend({
         optionsChange: function(e) {
-            switch(e.field) {
-                case "stroke":
-                    this.allAttr(this.mapStroke(e.value));
-                    break;
-
-                default:
-                    var name = this.attributeMap[e.field];
-                    if (name) {
-                        this.attr(name, e.value);
-                    }
-                    break;
+            if (e.field === "stroke") {
+                this.allAttr(this.mapStroke(e.value));
+            } else {
+                var name = this.attributeMap[e.field];
+                if (name) {
+                    this.attr(name, e.value);
+                }
             }
 
             this.invalidate();
@@ -527,18 +519,7 @@
         )
     });
 
-    // Helpers ================================================================
-    function renderAllAttr(attrs) {
-        var output = "";
-        for (var i = 0; i < attrs.length; i++) {
-            output += renderAttr(attrs[i][0], attrs[i][1]);
-        }
-
-        return output;
-    }
-
     // Exports ================================================================
-
     if (kendo.support.browser.msie) {
         d.SurfaceFactory.current.register("vml", Surface, 20);
     }
