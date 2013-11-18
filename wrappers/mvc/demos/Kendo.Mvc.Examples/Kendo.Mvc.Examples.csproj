@@ -384,7 +384,7 @@
     <Compile Include="Controllers\Web\Grid\Custom_CommandController.cs" />
     <Compile Include="Controllers\Web\Grid\DetailTemplateController.cs" />
     <Compile Include="Controllers\Web\Grid\EditingController.cs" />
-    <Compile Include="Controllers\Web\Grid\EditingCustomValidationController.cs" />
+    <Compile Include="Controllers\Web\Grid\Editing_Custom_ValidationController.cs" />
     <Compile Include="Controllers\Web\Grid\Editing_CustomController.cs" />
     <Compile Include="Controllers\Web\Grid\Editing_InlineController.cs" />
     <Compile Include="Controllers\Web\Grid\Editing_PopupController.cs" />
@@ -886,7 +886,7 @@
     <Content Include="Areas\aspx\Views\web\grid\custom_command.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\detailtemplate.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\editing.aspx" />
-    <Content Include="Areas\aspx\Views\web\grid\editingcustomvalidation.aspx" />
+    <Content Include="Areas\aspx\Views\web\grid\editing_custom_validation.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\editing_custom.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\editing_inline.aspx" />
     <Content Include="Areas\aspx\Views\web\grid\editing_popup.aspx" />
@@ -2561,7 +2561,7 @@
     <Content Include="Areas\razor\Views\web\grid\custom_command.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\detailtemplate.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\editing.cshtml" />
-    <Content Include="Areas\razor\Views\web\grid\editingcustomvalidation.cshtml" />
+    <Content Include="Areas\razor\Views\web\grid\editing_custom_validation.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\editing_custom.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\editing_inline.cshtml" />
     <Content Include="Areas\razor\Views\web\grid\editing_popup.cshtml" />

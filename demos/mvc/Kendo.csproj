@@ -820,6 +820,8 @@
     <Content Include="Views\dataviz\map\index.cshtml" />
     <Content Include="Views\dataviz\map\events.cshtml" />
     <Content Include="Views\web\progressbar\vertical.cshtml" />
+    <Content Include="Views\web\grid\editing-custom-validation.cshtml" />
+    <Content Include="Views\web\validator\custom-validation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

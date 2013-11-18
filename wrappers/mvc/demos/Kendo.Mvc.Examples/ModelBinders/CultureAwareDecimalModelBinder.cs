@@ -15,7 +15,7 @@
             try
             {
                 actualValue = Convert.ToDecimal(valueResult.AttemptedValue,
-                    CultureInfo.InvariantCulture);
+                    CultureInfo.CurrentCulture);
             }
             catch (FormatException e)
             {

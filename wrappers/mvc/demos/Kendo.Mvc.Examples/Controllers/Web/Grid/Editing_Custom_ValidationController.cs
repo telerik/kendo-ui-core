@@ -8,7 +8,7 @@ namespace Kendo.Mvc.Examples.Controllers
 {
     public partial class GridController : Controller
     {
-        public ActionResult EditingCustomValidation()
+        public ActionResult Editing_Custom_Validation()
         {
             return View();
         }

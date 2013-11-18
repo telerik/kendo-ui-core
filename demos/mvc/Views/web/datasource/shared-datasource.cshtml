@@ -1,163 +1,72 @@
         <div id="example" class="k-content">
-            <div id="datasource-views">
-                <div class="selector">
-                    <h3>Estimated Internet Users (Source: ITU)</h3>
+            <div class="demo-section">
+                <div>
+                    <h3>Products</h3>
                     <div class="section-box">
-                        <label for="country">Select country:</label>
-                        <input id="country" />
+                        <label for="productName">Select product name: </label>
+                        <input id="productName" name="productName" style="width:300px;" />
                     </div>
-                </div>
-                <div id="chart"></div>
-                <div id="grid"></div>
+                </div>                
+                 <div id="grid"></div>
             </div>
 
             <style scoped>
-                .k-chart {
-                    height: 200px;
-                    margin: 30px auto;
+                
+                #grid 
+                {
+                    margin-top: 10px;
                 }
-                #datasource-views {
-                    padding: 20px;
-                    margin: 30px;
-                }
+                
                 .section-box {
                     margin-top: 20px;
                     padding: 10px;
-                    text-align: center;
-                }
-                .section-box span {
-                    text-align: left;
-                }
-                #datasource-views, .section-box {
                     -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
                     -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
                     box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
                     -webkit-border-radius: 8px;
                     -moz-border-radius: 8px;
-                    border-radius: 8px;
-                }
+                    border-radius: 8px;                    
+                }       
+                                  
             </style>
 
             <script>
-                var transport = {
-                    read: {
-                        url: "../../content/web/datasource/internet-users.json",
-                        dataType: "json"
-                    }
-                };
+               $(function () {
+                    var productsDataSource = new kendo.data.DataSource({
+                            type: "odata",
+                            serverFiltering: true,
+                            serverPaging: true,
+                            serverSorting: true,
+                            pageSize: 10,
+                            transport: {
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Products"
+                            },
+                    });   
 
-                var countriesDataSource = new kendo.data.DataSource({
-                    transport: transport,
-                    group: {
-                        field: "country",
-                        dir: "asc"
-                    }
-                });
+                    productsDataSource.read();
 
-                var sharedDataSource = new kendo.data.DataSource({
-                    transport: transport,
-                    sort: {
-                        field: "year",
-                        dir: "asc"
-                    }
-                });
-
-                function filterCountries() {
-                    sharedDataSource.filter([{
-                        field: "country",
-                        operator: "equals",
-                        value: $("#country").val()
-                    }, {
-                        field: "year",
-                        operator: "greaterThanEqual",
-                        value: 2000
-                    }]);
-                }
-
-                for (var group in countriesDataSource.view()) {
-                    group = countriesDataSource.view()[group];
-                    for (var i = 1; i < group.items.length; i++) group.items[i].growth = (group.items[i].value - group.items[i-1].value) / 100.0
-                }
-
-                function createGrid() {
+                    $("#productName").kendoAutoComplete({
+                        autoBind: false,
+                        dataSource: productsDataSource,
+                        dataTextField: "ProductName",
+                        filter: "contains",
+                        minLength: 2                                                        
+                    });
+                    
                     $("#grid").kendoGrid({
-                        dataSource: sharedDataSource,
+                        dataSource: productsDataSource,
                         autoBind: false,
-                        sortable: {
-                            allowUnsort: false
-                        },
+                        pageable: true,
+                        height: 300,
+                        selectable: true,
                         columns: [
-                            {
-                                field: "year",
-                                title: "Year",
-                                width: "100px"
-                            },
-                            {
-                                field: "value",
-                                title: "Estimated Users",
-                                template: '#= kendo.toString(value, "N0") #'
-                            },
-                            {
-                                field: "growth",
-                                title: "Growth",
-                                template: '#= kendo.toString(growth, "p") #',
-                                width: "100px"
-                            }
+                            {field: "ProductName", title: "ProductName"},
+                            { field: "UnitPrice", title: "Unit Price", format: "{0:c}", width: "100px" },
+                            { field: "UnitsInStock", title:"Units In Stock", width: "100px" },
+                            { field: "Discontinued", width: "100px" }
                         ]
-                    });
-                }
-
-                function createChart() {
-                    $("#chart").kendoChart({
-                        dataSource: sharedDataSource,
-                        autoBind: false,
-                        legend: {
-                            visible: false
-                        },
-                        series: [{
-                            type: "column",
-                            field: "value"
-                        }],
-                        axisDefaults: {
-                            labels: {
-                                font: "11px Tahoma, sans-serif"
-                            }
-                        },
-                        valueAxis: {
-                            labels: {
-                                format: "{0:N0}"
-                            }
-                        },
-                        categoryAxis: {
-                            field: "year"
-                        },
-                        tooltip: {
-                            visible: true,
-                            format: "{0:N0}"
-                        }
-                    });
-                }
-
-                $(document).ready(function() {
-                    $("#country")
-                        .val("United States")
-                        .width(220)
-                        .kendoDropDownList({
-                            dataSource: countriesDataSource,
-                            dataTextField: "value",
-                            dataValueField: "value",
-                            change: filterCountries
-                        });
-
-                    createGrid();
-                    createChart();
-
-                    filterCountries();
-
-                    $("#example").bind("kendo:skinChange", function(e) {
-                        createChart();
-                        sharedDataSource.read();
-                    });
+                    });                                                                         
                 });
+
             </script>
         </div>

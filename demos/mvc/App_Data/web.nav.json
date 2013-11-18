@@ -675,8 +675,9 @@
                 },
                 {
                     "text": "Custom validator editing",
-                    "url": "grid/editingcustomvalidation.html",
-                    "packages": ["mvc"]
+                    "url": "grid/editing-custom-validation.html",
+                    "title": "Custom Validation example for Kendo UI Grid widget",
+                    "meta": " This example demonstrates how to implement custom validation rule in a Kendo UI Grid."
                 },
                 {
                     "text": "Paging",
@@ -2035,6 +2036,11 @@
                     "url": "validator/index.html",
                     "title": "Kendo UI Validator Demo",
                     "meta": "This demo illustrates the core functionality of Kendo UI Validator component in Kendo UI Web framework."
+                }, {
+                    "text": "Custom validation",
+                    "url": "validator/custom-validation.html",
+                    "title": "Custom rule Kendo UI Validator Demo",
+                    "meta": "This demo illustrates how to implement a custom validation rule for the Kendo UI Validator component in Kendo UI Web framework."
                 }
             ]
         },
