@@ -52,12 +52,17 @@
         },
 
         reset: function() {
+            this._updateAttribution();
             this.surface.translate({ x: 0, y: 0 });
             this.movable.moveTo({ x: 0, y: 0 });
 
             if (this._data) {
                 this._load(this._data);
             }
+        },
+
+        _updateAttribution: function() {
+            this.map.attribution.add(this.options.attribution);
         },
 
         polygon: function(coords, style) {

@@ -21,6 +21,7 @@ kendo_module({
 
         dataviz = kendo.dataviz,
         Compass = dataviz.ui.Compass,
+        Attribution = dataviz.ui.Attribution,
         defined = dataviz.defined,
 
         g = dataviz.geometry,
@@ -75,6 +76,9 @@ kendo_module({
             controls: {
                 navigator: {
                     panStep: 100
+                },
+                attribution: {
+                    visible: true
                 }
             },
             layers: [],
@@ -231,16 +235,25 @@ kendo_module({
 
         _initControls: function() {
             var controls = this.options.controls;
+
             if (Compass && controls.navigator && !kendo.support.mobileOS) {
-                var element = $(doc.createElement("div")).appendTo(this.element);
-                var compass = this.compass = new Compass(element, controls.navigator);
-
-                this._compassPan = proxy(this._compassPan, this);
-                compass.bind("pan", this._compassPan);
-
-                this._compassCenter = proxy(this._compassCenter, this);
-                compass.bind("center", this._compassCenter);
+                this._createCompass(controls.navigator);
             }
+
+            if (Attribution && controls.attribution) {
+                this._createAttribution(controls.attribution);
+            }
+        },
+
+        _createCompass: function(options) {
+            var element = $(doc.createElement("div")).appendTo(this.element);
+            var compass = this.compass = new Compass(element, options);
+
+            this._compassPan = proxy(this._compassPan, this);
+            compass.bind("pan", this._compassPan);
+
+            this._compassCenter = proxy(this._compassCenter, this);
+            compass.bind("center", this._compassCenter);
         },
 
         _compassPan: function(e) {
@@ -264,6 +277,11 @@ kendo_module({
 
         _compassCenter: function() {
             this.center(this.options.center);
+        },
+
+        _createAttribution: function(options) {
+            var element = $(doc.createElement("div")).appendTo(this.element);
+            this.attribution = new Attribution(element, options);
         },
 
         _initScroller: function() {
@@ -348,6 +366,10 @@ kendo_module({
         },
 
         _reset: function() {
+            if (this._attribution) {
+                this._attribution.clear();
+            }
+
             this._viewOrigin = this.origin();
             this._resetScroller();
             this.trigger("reset");

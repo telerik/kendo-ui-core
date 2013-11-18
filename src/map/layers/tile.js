@@ -55,7 +55,7 @@
         },
 
         opitons: {
-            settingsUrl: "http://dev.virtualearth.net/REST/v1/Imagery/Metadata/#= mapType #?output=json&jsonp=bingTileParams&key=#= key #"
+            settingsUrl: "http://dev.virtualearth.net/REST/v1/Imagery/Metadata/#= mapType #?output=json&jsonp=bingTileParams&include=ImageryProviders&key=#= key #"
         },
 
         _viewType: function() {
@@ -82,9 +82,14 @@
         },
 
         reset: function() {
+            this._updateAttribution();
             this._updateView();
             this._view.clear();
             this._view.reset();
+        },
+
+        _updateAttribution: function() {
+            this.map.attribution.add(this.options.attribution);
         },
 
         _pan: function() {
@@ -126,7 +131,7 @@
         },
 
         options: {
-            settingsUrl: "http://dev.virtualearth.net/REST/v1/Imagery/Metadata/#= mapType #?output=json&jsonp=bingTileParams&key=#= key #",
+            settingsUrl: "http://dev.virtualearth.net/REST/v1/Imagery/Metadata/#= mapType #?output=json&jsonp=bingTileParams&include=ImageryProviders&key=#= key #",
             mapType: "road"
         },
 
