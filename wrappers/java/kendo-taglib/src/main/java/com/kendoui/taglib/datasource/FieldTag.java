@@ -36,11 +36,14 @@ public class FieldTag extends BaseTag {
     }
     
     public void setDefaultValue(Object value) {
+        String stringValue = value.toString();
         try {
-            value = Double.parseDouble(value.toString());
+            value = Double.parseDouble(stringValue);
         }catch(NumberFormatException e) {
-            try {
-                value = Boolean.parseBoolean(value.toString());
+            try {                            
+                if (stringValue.equalsIgnoreCase("true") || stringValue.equalsIgnoreCase("false")) {
+                    value = Boolean.parseBoolean(stringValue);
+                }
             }catch(Exception boolExc) {
             }
         }
