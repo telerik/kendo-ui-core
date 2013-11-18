@@ -246,16 +246,16 @@ kendo_module({
                 ulOffsetHeight = ul.clientHeight,
                 bottomDistance = itemOffsetTop + itemOffsetHeight,
                 touchScroller = this._touchScroller,
-                yDimension;
+                elementHeight;
 
             if (touchScroller) {
-                yDimension = touchScroller.dimensions.y;
+                elementHeight = this.list.height();
 
-                if (yDimension.enabled && itemOffsetTop > yDimension.size) {
-                    itemOffsetTop = itemOffsetTop - yDimension.size + itemOffsetHeight + 4;
-
-                    touchScroller.scrollTo(0, -itemOffsetTop);
+                if (itemOffsetTop > elementHeight) {
+                    itemOffsetTop = itemOffsetTop - elementHeight + itemOffsetHeight;
                 }
+
+                touchScroller.scrollTo(0, -itemOffsetTop);
             } else {
                 ul.scrollTop = ulScrollTop > itemOffsetTop ?
                                itemOffsetTop : bottomDistance > (ulScrollTop + ulOffsetHeight) ?
@@ -544,8 +544,7 @@ kendo_module({
 
             element.addClass("k-input")
                    .attr({
-                        "role": "textbox",
-                        "aria-haspopup": true,
+                        "role": "combobox",
                         "aria-expanded": false,
                         "aria-owns": timeView._timeViewID
                    });
