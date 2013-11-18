@@ -13,9 +13,9 @@
     <script src="../../src/kendo.dataviz.core.js"></script>
     <script src="../../src/dataviz/util.js"></script>
     <script src="../../src/dataviz/geometry.js"></script>
-    <script src="../../src/map/location.js"></script>
-    <script src="../../src/map/crs.js"></script>
-    <script src="../../src/map/main.js"></script>
+    <script src="../../src/dataviz/map/location.js"></script>
+    <script src="../../src/dataviz/map/crs.js"></script>
+    <script src="../../src/dataviz/map/main.js"></script>
     <script>
         var TOLERANCE = Math.pow(10, -6),
             COORD_PRECISION = 6;
@@ -161,7 +161,11 @@
                      [8918060.96408808976, 6788763.38325125352]],
 
                     [[52.4827802220782, -5.625],
-                     [-626172.13571216457, 6887893.49283379968]]
+                     [-626172.13571216457, 6887893.49283379968]],
+
+                    // Longitude out of bounds
+                    [[-90, -360],
+                     [-40075016.68557849, -20037508.34278074]]
                 ];
 
             var mercator;
