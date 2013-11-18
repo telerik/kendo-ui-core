@@ -450,7 +450,16 @@ kendo_module({
 
         refresh: function() {
             var that = this,
-                newCoordinates = translate(that.x, that.y, that.scale);
+                x = that.x,
+                y = that.y,
+                newCoordinates;
+
+            if (that.round) {
+                x = Math.round(x);
+                y = Math.round(y);
+            }
+
+            newCoordinates = translate(x, y, that.scale);
 
             if (newCoordinates != that.coordinates) {
                 if (kendo.support.browser.msie && kendo.support.browser.version < 10) {

@@ -32,8 +32,8 @@ kendo_module({
         EPSG3857 = map.crs.EPSG3857,
 
         util = dataviz.util,
-        valueOrDefault = util.valueOrDefault,
-        limit = util.limitValue;
+        limit = util.limitValue,
+        valueOrDefault = util.valueOrDefault;
 
     // Constants ==============================================================
     var CSS_PREFIX = "k-",
@@ -325,6 +325,7 @@ kendo_module({
         _scroll: function(e) {
             var origin = this.locationToLayer(this._viewOrigin).round();
             var movable = e.sender.movable;
+
             var offset = new g.Point(movable.x, movable.y).multiply(-1).multiply(1/movable.scale);
             origin.x += offset.x;
             origin.y += offset.y;
@@ -386,8 +387,11 @@ kendo_module({
 
             scroller.reset();
             scroller.userEvents.cancel();
+
             var maxZoom = this.options.maxZoom - this.zoom();
             scroller.dimensions.maxScale = pow(2, maxZoom);
+
+            scroller.movable.round = true;
 
             x.makeVirtual();
             y.makeVirtual();
