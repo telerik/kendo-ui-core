@@ -24,6 +24,10 @@ SPRING_DEMOS_SRC = FileList[SPRING_DEMOS_SRC_ROOT + '**/*'].exclude('**/target/*
                     .include(FileList[SPRING_DEMOS_NAVIGATION]
                          .sub('demos/mvc/App_Data/', SPRING_DEMOS_RESOURCES)
                     )
+                    .include(FileList[SPRING_DEMOS_RESOURCES + '**/*'])
+
+# Delete all resource files copied by `rake java:assets`
+CLEAN.include(FileList[SPRING_DEMOS_RESOURCES + '**/*'])
 
 JSP_BUNDLES = ['jsp.trial', 'jsp.commercial']
 

@@ -314,6 +314,7 @@ def patched_web_config(name, source, cdn_root, themebuilder_root)
 end
 
 directory 'dist/demos/staging-php'
+directory 'dist/demos/staging-java'
 
 namespace :demos do
 
@@ -366,9 +367,9 @@ namespace :demos do
 
     desc('Build java demos for staging')
     task :staging_java => [
-        'java:spring'
+        'java:spring',
+        'dist/demos/staging-java'
     ] do
-        sh "rm -rf dist/demos/staging-java/"
         sh "unzip -d dist/demos/staging-java/ #{SPRING_DEMOS_WAR}"
     end
 
