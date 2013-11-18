@@ -6,6 +6,15 @@ class MapControls extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
+    * Enables or disables the built-in attribution control.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\MapControls
+    */
+    public function attribution($value) {
+        return $this->setProperty('attribution', $value);
+    }
+
+    /**
     * Enables or disables the built-in navigator control (directional pad).
     * @param boolean|\Kendo\Dataviz\UI\MapControlsNavigator|array $value
     * @return \Kendo\Dataviz\UI\MapControls

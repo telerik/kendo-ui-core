@@ -61,6 +61,14 @@ public class ControlsTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         setProperty("zoom", value);
     }
 
+    public boolean getAttribution() {
+        return (boolean)getProperty("attribution");
+    }
+
+    public void setAttribution(boolean value) {
+        setProperty("attribution", value);
+    }
+
     public boolean getNavigator() {
         return (boolean)getProperty("navigator");
     }

@@ -6,12 +6,12 @@ class MapLayerDefaultsShape extends \Kendo\SerializableObject {
 //>> Properties
 
     /**
-    * The copyright message for all shape layers.
+    * The attribution for all shape layers.
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapLayerDefaultsShape
     */
-    public function copyright($value) {
-        return $this->setProperty('copyright', $value);
+    public function attribution($value) {
+        return $this->setProperty('attribution', $value);
     }
 
     /**

@@ -13670,6 +13670,12 @@ You can also use a kendo.dataviz.map.Location instance.</description>
         <body-content>JSP</body-content>
 
         <attribute>
+            <description>Enables or disables the built-in attribution control.</description>
+            <name>attribution</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>Enables or disables the built-in navigator control (directional pad).</description>
             <name>navigator</name>
             <rtexprvalue>true</rtexprvalue>
@@ -13734,8 +13740,8 @@ You can also use a kendo.dataviz.map.Location instance.</description>
         <body-content>JSP</body-content>
 
         <attribute>
-            <description>The copyright message for all shape layers.</description>
-            <name>copyright</name>
+            <description>The attribution for all shape layers.</description>
+            <name>attribution</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
@@ -13821,10 +13827,22 @@ The following dash types are supported:</description>
         <body-content>empty</body-content>
 
         <attribute>
-            <description>The copyright message for all tile layers.</description>
-            <name>copyright</name>
+            <description>The attribution for all tile layers.</description>
+            <name>attribution</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The the opacity of all tile layers.</description>
+            <name>opacity</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>The subdomains for the all tile layers.</description>
+            <name>subdomains</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
         </attribute>
         <attribute>
             <description>The URL template for tile layers. Template variables:</description>
@@ -13854,6 +13872,12 @@ The layer type is determined by the value of the type field.</description>
 
         <body-content>JSP</body-content>
         <attribute>
+            <description>The attribution for the layer.</description>
+            <name>attribution</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
             <description>If set to false the layer will not bind to the data source during initialization. In this case data binding will occur when the change event of the
 data source is fired. By default the widget will bind to the data source specified in the configuration.</description>
             <name>autoBind</name>
@@ -13861,15 +13885,21 @@ data source is fired. By default the widget will bind to the data source specifi
             <type>boolean</type>
         </attribute>
         <attribute>
-            <description>The copyright message for the layer.</description>
-            <name>copyright</name>
+            <description>The data source of the layer. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
+instance.</description>
+            <name>dataSource</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.Object</type>
+        </attribute>
+        <attribute>
+            <description>The the opacity of all tile layers.</description>
+            <name>opacity</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.String</type>
         </attribute>
         <attribute>
-            <description>The data source of the layer. Can be a JavaScript object which represents a valid data source configuration, a JavaScript array or an existing kendo.data.DataSource
-instance.</description>
-            <name>dataSource</name>
+            <description>The subdomains for the all tile layers.</description>
+            <name>subdomains</name>
             <rtexprvalue>true</rtexprvalue>
             <type>java.lang.Object</type>
         </attribute>
@@ -21204,7 +21234,7 @@ and is about to render it.</description>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fires when the splitter layout has changed</description>
+            <description>This event is now obsolete and will be removed in the future. Please use the resize event instead.Fires when the splitter layout has changed</description>
             <name>layoutChange</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -21307,7 +21337,7 @@ and is about to render it.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fires when the splitter layout has changed</description>
+        <description>This event is now obsolete and will be removed in the future. Please use the resize event instead.Fires when the splitter layout has changed</description>
         <name>splitter-layoutChange</name>
         <tag-class>com.kendoui.taglib.splitter.LayoutChangeFunctionTag</tag-class>
         <body-content>JSP</body-content>

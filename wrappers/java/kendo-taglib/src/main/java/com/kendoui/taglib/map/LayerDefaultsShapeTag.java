@@ -55,12 +55,12 @@ public class LayerDefaultsShapeTag extends  BaseTag  /* interfaces */ /* interfa
         setProperty("style", value);
     }
 
-    public java.lang.String getCopyright() {
-        return (java.lang.String)getProperty("copyright");
+    public java.lang.String getAttribution() {
+        return (java.lang.String)getProperty("attribution");
     }
 
-    public void setCopyright(java.lang.String value) {
-        setProperty("copyright", value);
+    public void setAttribution(java.lang.String value) {
+        setProperty("attribution", value);
     }
 
 //<< Attributes

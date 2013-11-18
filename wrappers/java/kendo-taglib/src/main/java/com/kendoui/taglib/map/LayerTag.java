@@ -51,6 +51,14 @@ public class LayerTag extends BaseTag implements DataBoundWidget {
         setProperty("style", value);
     }
 
+    public java.lang.String getAttribution() {
+        return (java.lang.String)getProperty("attribution");
+    }
+
+    public void setAttribution(java.lang.String value) {
+        setProperty("attribution", value);
+    }
+
     public boolean getAutoBind() {
         return (boolean)getProperty("autoBind");
     }
@@ -59,16 +67,24 @@ public class LayerTag extends BaseTag implements DataBoundWidget {
         setProperty("autoBind", value);
     }
 
-    public java.lang.String getCopyright() {
-        return (java.lang.String)getProperty("copyright");
-    }
-
-    public void setCopyright(java.lang.String value) {
-        setProperty("copyright", value);
-    }
-
     public void setDataSource(DataSourceTag dataSource) {
         setProperty("dataSource", dataSource);
+    }
+
+    public java.lang.String getOpacity() {
+        return (java.lang.String)getProperty("opacity");
+    }
+
+    public void setOpacity(java.lang.String value) {
+        setProperty("opacity", value);
+    }
+
+    public java.lang.Object getSubdomains() {
+        return (java.lang.Object)getProperty("subdomains");
+    }
+
+    public void setSubdomains(java.lang.Object value) {
+        setProperty("subdomains", value);
     }
 
     public java.lang.String getType() {

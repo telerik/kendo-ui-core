@@ -23,7 +23,7 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public string Copyright { get; set; }
+        public string Attribution { get; set; }
         
         public MapLayerDefaultsShapeStyleSettings Style
         {
@@ -37,9 +37,9 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Copyright.HasValue())
+            if (Attribution.HasValue())
             {
-                json["copyright"] = Copyright;
+                json["attribution"] = Attribution;
             }
             
             var style = Style.ToJson();

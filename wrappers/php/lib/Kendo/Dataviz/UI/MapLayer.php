@@ -25,12 +25,30 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * The copyright message for the layer.
+    * The attribution for the layer.
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapLayer
     */
-    public function copyright($value) {
-        return $this->setProperty('copyright', $value);
+    public function attribution($value) {
+        return $this->setProperty('attribution', $value);
+    }
+
+    /**
+    * The the opacity of all tile layers.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function opacity($value) {
+        return $this->setProperty('opacity', $value);
+    }
+
+    /**
+    * The subdomains for the all tile layers.
+    * @param array $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function subdomains($value) {
+        return $this->setProperty('subdomains', $value);
     }
 
     /**

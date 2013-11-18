@@ -99,7 +99,7 @@ class Splitter extends \Kendo\UI\Widget {
 
     /**
     * Sets the layoutChange event of the Splitter.
-    * Fires when the splitter layout has changed
+    * This event is now obsolete and will be removed in the future. Please use the resize event instead.Fires when the splitter layout has changed
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\UI\Splitter
     */
