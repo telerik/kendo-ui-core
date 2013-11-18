@@ -228,7 +228,7 @@
         }
 
         /// <summary>
-        /// Sets the current value of the ProgressBar
+        /// Sets the initial value of the ProgressBar
         /// </summary>
         /// <param name="value">Number specifying the value</param>
         /// <example>
@@ -242,6 +242,27 @@
         /// </code>
         /// </example>
         public ProgressBarBuilder Value(double value)
+        {
+            Component.Value = value;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the initial value of the ProgressBar
+        /// </summary>
+        /// <param name="value">Pass false to set indeterminate value</param>
+        /// <example>
+        /// <code lang="CS">
+        /// &lt;%= Html.Kendo().ProgressBar()
+        ///     .Name(&quot;progressBar&quot;)
+        ///     .Min(100)
+        ///     .Max(200)
+        ///     .Value(false)
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public ProgressBarBuilder Value(bool value)
         {
             Component.Value = value;
 

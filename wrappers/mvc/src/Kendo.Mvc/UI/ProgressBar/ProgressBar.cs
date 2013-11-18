@@ -104,7 +104,7 @@
         /// <summary>
         /// Gets or sets the current value of the ProgressBar 
         /// </summary>
-        public double? Value
+        public object Value
         {
             get;
             set;
@@ -174,7 +174,7 @@
                 options.Add("type", Type.ToString().ToLowerInvariant());
             }
 
-            if (Value.HasValue)
+            if (Value != null)
             {
                 options.Add("value", Value);
             }
