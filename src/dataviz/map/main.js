@@ -232,16 +232,16 @@ kendo_module({
             };
         },
 
-        _setOrigin: function(origin) {
+        _setOrigin: function(origin, zoom) {
             var size = this.viewSize(),
                 topLeft;
 
             origin = this._origin = Location.create(origin);
-            topLeft = this.locationToLayer(origin);
+            topLeft = this.locationToLayer(origin, zoom);
             topLeft.x += size.width / 2;
             topLeft.y += size.height / 2;
 
-            this.options.center = this.layerToLocation(topLeft).toArray();
+            this.options.center = this.layerToLocation(topLeft, zoom).toArray();
 
             return this;
         },
@@ -259,6 +259,11 @@ kendo_module({
             }
 
             return this._origin;
+        },
+
+        _zoomAround: function(pivot, level) {
+            this._setOrigin(this.layerToLocation(pivot, level), level);
+            this.zoom(level);
         },
 
         _initControls: function() {
@@ -382,8 +387,7 @@ kendo_module({
             var centerPoint = this.locationToLayer(centerLocation, zoom);
             var originPoint = centerPoint.subtract(gestureCenter);
 
-            this._setOrigin(this.layerToLocation(originPoint, zoom));
-            this.zoom(zoom);
+            this._zoomAround(originPoint, zoom);
         },
 
         _scaleToZoom: function(scaleDelta) {
@@ -481,8 +485,7 @@ kendo_module({
                 var location = this.viewToLocation(cursor);
                 var postZoom = this.locationToLayer(location, toZoom);
                 var origin = postZoom.subtract(cursor);
-                this._setOrigin(this.layerToLocation(origin, toZoom));
-                this.zoom(toZoom);
+                this._zoomAround(origin, toZoom);
 
                 this.trigger("zoomEnd", { originalEvent: e });
             }
