@@ -70,13 +70,14 @@ file_merge "src/kendo.dataviz.map.js" => [
     "src/dataviz/drawing/core.js",
     "src/dataviz/drawing/shapes.js",
     "src/dataviz/drawing/svg.js",
-    "src/map/location.js",
-    "src/map/compass.js",
-    "src/map/crs.js",
-    "src/map/layers/shape.js",
-    "src/map/layers/tile.js",
-    "src/map/layers/marker.js",
-    "src/map/main.js"
+    "src/dataviz/map/location.js",
+    "src/dataviz/map/compass.js",
+    "src/dataviz/map/attribution.js",
+    "src/dataviz/map/crs.js",
+    "src/dataviz/map/layers/shape.js",
+    "src/dataviz/map/layers/tile.js",
+    "src/dataviz/map/layers/marker.js",
+    "src/dataviz/map/main.js"
 ]
 file "src/kendo.dataviz.map.js" => JS_BUILDFILE
 
