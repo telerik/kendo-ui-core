@@ -47,6 +47,7 @@
             layer._view = new viewType(layer.element, layer.options);
 
             map.bind("reset", proxy(layer.reset, layer));
+            map.bind("resize", proxy(this.resize, this));
             if (kendo.support.mobileOS) {
                 map.bind("panEnd", proxy(layer._render, layer));
             } else {
@@ -86,6 +87,10 @@
             this._updateView();
             this._view.clear();
             this._view.reset();
+        },
+
+        resize: function() {
+            this._render();
         },
 
         _updateAttribution: function() {

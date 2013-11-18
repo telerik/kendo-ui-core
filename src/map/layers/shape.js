@@ -40,6 +40,7 @@
             this.surface.bind("mouseleave", this._mouseleave);
 
             map.bind("reset", proxy(this.reset, this));
+            map.bind("resize", proxy(this.resize, this));
             map.bind("panEnd", proxy(this._panEnd, this));
 
             this._loader = new GeoJSONLoader(this.map, this.options.style, this);
@@ -59,6 +60,10 @@
             if (this._data) {
                 this._load(this._data);
             }
+        },
+
+        resize: function() {
+            this.surface.resize();
         },
 
         _updateAttribution: function() {

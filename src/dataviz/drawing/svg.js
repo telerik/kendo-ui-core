@@ -60,6 +60,7 @@
                 offset.x, offset.y,
                 this._width, this._height);
 
+            this._offset = offset;
             this.element.setAttribute("viewBox", viewBox);
         },
 
@@ -78,6 +79,17 @@
         destroy: function() {
             this.clear();
             $(this.element).kendoDestroy();
+        },
+
+        // TODO: Implement same resize pattern as kendo.Widget
+        resize: function() {
+            var element = $(this.element);
+            this._width = element.width();
+            this._height = element.height();
+
+            if (this._offset) {
+                this.translate(this._offset);
+            }
         },
 
         _template: renderTemplate(
@@ -102,8 +114,7 @@
             element.on("mouseover", this._mouseenter);
             element.on("mouseout", this._mouseleave);
 
-            this._width = element.width();
-            this._height = element.height();
+            this.resize();
         },
 
         _handler: function(event) {
