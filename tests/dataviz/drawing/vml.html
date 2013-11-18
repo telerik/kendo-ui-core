@@ -622,7 +622,6 @@
             .moveTo(0, 0).lineTo(10, 20)
             .moveTo(10, 10).lineTo(10, 20);
 
-        console.log(multiPathNode.render());
         ok(multiPathNode.render().indexOf("v='m 0,0 l 10,20 m 10,10 l 10,20 e'") !== -1);
     });
 
@@ -639,29 +638,30 @@
     });
 
     test("renders center", function() {
-        ok(circleNode.render().indexOf("cx='10' cy='20'") !== -1);
+        console.log(circleNode.render());
+        ok(circleNode.render().indexOf("top:-10px;left:-20px;") !== -1);
     });
 
     test("renders radius", function() {
-        ok(circleNode.render().indexOf("r='30'") !== -1);
+        ok(circleNode.render().indexOf("width:60px;height:60px;") !== -1);
     });
 
     test("geometryChange sets center", 2, function() {
-        circleNode.attr = function(name, value) {
-            if (name === "cx") {
-                equal(value, 20);
-            } else if (name === "cy") {
-                equal(value, 40);
+        circleNode.css = function(name, value) {
+            if (name === "left") {
+                equal(value, "-10px");
+            } else if (name === "top") {
+                equal(value, "10px");
             }
         };
 
         circle.geometry.center.multiply(2);
     });
 
-    test("geometryChange sets radius", 1, function() {
-        circleNode.attr = function(name, value) {
-            if (name === "r") {
-                equal(value, 60);
+    test("geometryChange sets radius", 2, function() {
+        circleNode.css = function(name, value) {
+            if (name === "width" || name === "height") {
+                equal(value, "120px");
             }
         };
 

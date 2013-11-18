@@ -448,6 +448,8 @@
             if (cursor) {
                 return "cursor:" + cursor + ";";
             }
+
+            return "";
         },
 
         renderVisibility: function() {
@@ -465,7 +467,7 @@
 
         renderSize: function() {
             var scale = this.srcElement.options.align === false ? 100 : 1;
-            return "width:" + scale + "px; height:" + scale + "px;";
+            return "width:" + scale + "px;height:" + scale + "px;";
         },
 
         template: renderTemplate(
@@ -502,20 +504,35 @@
 
     var CircleNode = PathNode.extend({
         geometryChange: function() {
-            var geometry = this.srcElement.geometry;
-            this.attr("cx", geometry.center.x);
-            this.attr("cy", geometry.center.y);
-            this.attr("r", geometry.radius);
+            var radius = this.radius();
+            var center = this.center();
+            var diameter = radius * 2;
+
+            this.css("left", center.x - radius + "px");
+            this.css("top", center.y - radius + "px");
+            this.css("width", diameter + "px");
+            this.css("height", diameter + "px");
             this.invalidate();
         },
 
+        center: function() {
+            return this.srcElement.geometry.center;
+        },
+
+        radius: function() {
+            return this.srcElement.geometry.radius;
+        },
+
         template: renderTemplate(
-            "<circle #= kendo.dataviz.util.renderAttr('style', d.renderCursor()) # " +
-            "cx='#= this.srcElement.geometry.center.x #' cy='#= this.srcElement.geometry.center.y #' " +
-            "r='#= this.srcElement.geometry.radius #' " +
-            "#= d.renderVisibility() # " +
-            "#= d.renderStroke() # " +
-            "#= d.renderFill() #></circle>"
+            "<kvml:oval " +
+            "style='position:absolute;" +
+            "#= d.renderVisibility() #" +
+            "#= d.renderCursor() #" +
+            "width:#= d.radius() * 2 #px;height:#= d.radius() * 2 #px;" +
+            "top:#= d.center().y - d.radius() #px;" +
+            "left:#= d.center().x - d.radius() #px;'>" +
+                "#= d.renderChildren() #" +
+            "</kvml:oval>"
         )
     });
 
