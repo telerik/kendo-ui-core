@@ -495,11 +495,13 @@ kendo_module({
                 ulOffsetHeight = ul.clientHeight,
                 bottomDistance = itemOffsetTop + itemOffsetHeight,
                 touchScroller = this._touchScroller,
-                headerHeight;
+                yDimension, headerHeight;
 
             if (touchScroller) {
-                if (touchScroller.dimensions.y.enabled && itemOffsetTop > touchScroller.dimensions.y.size) {
-                    itemOffsetTop = itemOffsetTop - touchScroller.dimensions.y.size + itemOffsetHeight + 4; // TODO: remove the magic number
+                yDimension = touchScroller.dimensions.y;
+
+                if (yDimension.enabled && itemOffsetTop > yDimension.size) {
+                    itemOffsetTop = itemOffsetTop - yDimension.size + itemOffsetHeight + 4;
 
                     touchScroller.scrollTo(0, -itemOffsetTop);
                 }
