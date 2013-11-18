@@ -7,7 +7,7 @@
 
     function viewInit(e) {
         showButton = $("#show").bind(kendo.support.mouseup, function() {
-                        showButton.stop(true,true).fadeOut();
+                        showButton.animate({ opacity: 0 });
                         startLoading();
                      });
 
@@ -22,7 +22,7 @@
     }
 
     function viewHide(e) {
-        showButton.stop(true,true).fadeIn();
+        showButton.animate({ opacity: 1 });
         hideLoader();
     }
 
@@ -38,7 +38,7 @@
             loaderElement.text(--seconds + " seconds left!"); //update text of the loading popup
 
             if (seconds == 0) {
-                showButton.stop(true,true).fadeIn();
+                showButton.animate({ opacity: 1 });
                 hideLoader();
             }
         }, 1000);
