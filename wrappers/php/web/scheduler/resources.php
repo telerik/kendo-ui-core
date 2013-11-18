@@ -119,7 +119,7 @@ $roomIdField->from('RoomID')
 
 $attendeesField = new \Kendo\Data\DataSourceSchemaModelField('attendees');
 $attendeesField->from('Attendees')
-        ->nullable(true);
+        ->defaultValue([]);
 
 $model->id('meetingID')
     ->addField($meetingIdField)

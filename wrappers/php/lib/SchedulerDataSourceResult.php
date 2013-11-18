@@ -6,7 +6,7 @@ class SchedulerDataSourceResult extends DataSourceResult {
     }
 
     public function read($table, $properties, $request = null) {
-         $properties = array_merge($properties, array('Title', 'strftime(\'%Y-%m-%dT%H:%M:%SZ\', Start) as Start', 'strftime(\'%Y-%m-%dT%H:%M:%SZ\', End) as End', 'IsAllDay', 'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException'));
+         $properties = array_merge($properties, array('Title', 'strftime(\'%Y-%m-%dT%H:%M:%SZ\', Start) as Start', 'strftime(\'%Y-%m-%dT%H:%M:%SZ\', End) as End', 'IsAllDay', 'StartTimezone', 'EndTimezone', 'Description', 'RecurrenceID', 'RecurrenceRule', 'RecurrenceException'));
 
         return parent::read($table, $properties, $request);
     }
@@ -89,7 +89,8 @@ class SchedulerDataSourceResult extends DataSourceResult {
 
                 if (isset($joinTable)) {
                     $error = $this->updateAssociation($joinTable, $model, $key, $associationMap);
-                    $errors[] = array_merge($errors, $error);
+                    $errors = array_merge($errors, $error);
+
                 }
             }
         }
@@ -145,7 +146,7 @@ class SchedulerDataSourceResult extends DataSourceResult {
                 } else {
                     if (isset($joinTable)) {
                        $error = $this->updateAssociation($joinTable, $model, $key, $associationMap);
-                       $errors[] = array_merge($errors, $error);
+                       $errors = array_merge($errors, $error);
                     }
                 }
             }
@@ -187,7 +188,7 @@ class SchedulerDataSourceResult extends DataSourceResult {
 
         $associationKey = array_keys($associationMap)[0];
 
-        if (!isset($error) && isset($model->$associationKey)) {
+        if ($error == null && isset($model->$associationKey)) {
             $associations = $model->$associationKey;
 
             if (is_array($associations)) {
@@ -210,7 +211,6 @@ class SchedulerDataSourceResult extends DataSourceResult {
         } else {
             $errors[] = $error;
         }
-
         return $errors;
     }
 
