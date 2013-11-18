@@ -198,6 +198,9 @@ span.k-sparkline,
 
 .k-map .km-scroll-wrapper {
     padding-bottom: 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .k-map .km-scroll-wrapper,
@@ -323,4 +326,14 @@ span.k-sparkline,
     margin-top: -5px;
 }
 
+/* Attribution */
 
+.k-map .k-attribution {
+    background-color: rgba(255, 255, 255, 0.8);
+    bottom: 0;
+    font-size: 10px;
+    padding: 2px 4px;
+    position: absolute;
+    right: 0;
+    z-index: 1000;
+}
