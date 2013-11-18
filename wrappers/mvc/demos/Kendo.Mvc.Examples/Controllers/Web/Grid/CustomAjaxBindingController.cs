@@ -22,19 +22,28 @@ namespace Kendo.Mvc.Examples.Controllers
 
         public ActionResult CustomAjaxBinding_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var loadOptions = new DataLoadOptions();
-
-            loadOptions.LoadWith<Order>(o => o.Customer);
-
             var dataContext = new SampleEntities();
-            
-            IQueryable<Order> orders = dataContext.Orders;            
+
+            // Convert to view model to avoid JSON serialization problems due to circular references.
+            IQueryable<OrderViewModel> orders = dataContext.Orders.Select(o => new OrderViewModel
+            {
+                OrderID = o.OrderID,
+                ShipCity = o.ShipCity,
+                ShipCountry = o.ShipCountry,
+                ShipName = o.ShipName
+            });
 
             orders = orders.ApplyOrdersFiltering(request.Filters);
 
             var total = orders.Count();
 
             orders = orders.ApplyOrdersSorting(request.Groups, request.Sorts);
+
+            if (!request.Sorts.Any())
+            {
+                // Entity Framework doesn't support paging on unsorted data.
+                orders = orders.OrderBy(o => o.OrderID);
+            }
 
             orders = orders.ApplyOrdersPaging(request.Page, request.PageSize);
 
@@ -52,7 +61,7 @@ namespace Kendo.Mvc.Examples.Controllers
 
     public static class AjaxCustomBindingExtensions
     {
-        public static IQueryable<Order> ApplyOrdersPaging(this IQueryable<Order> data, int page, int pageSize)
+        public static IQueryable<OrderViewModel> ApplyOrdersPaging(this IQueryable<OrderViewModel> data, int page, int pageSize)
         {
             if (pageSize > 0 && page > 0)
             {
@@ -64,12 +73,12 @@ namespace Kendo.Mvc.Examples.Controllers
             return data;
         }
 
-        public static IEnumerable ApplyOrdersGrouping(this IQueryable<Order> data, IList<GroupDescriptor>
+        public static IEnumerable ApplyOrdersGrouping(this IQueryable<OrderViewModel> data, IList<GroupDescriptor>
             groupDescriptors)
         {
             if (groupDescriptors != null && groupDescriptors.Any())
             {
-                Func<IEnumerable<Order>, IEnumerable<AggregateFunctionsGroup>> selector = null;
+                Func<IEnumerable<OrderViewModel>, IEnumerable<AggregateFunctionsGroup>> selector = null;
                 foreach (var group in groupDescriptors.Reverse())
                 {
                     if (selector == null)
@@ -118,8 +127,8 @@ namespace Kendo.Mvc.Examples.Controllers
             return data.ToList();
         }
 
-        private static Func<IEnumerable<Order>, IEnumerable<AggregateFunctionsGroup>>
-            BuildGroup<T>(Expression<Func<Order, T>> groupSelector, Func<IEnumerable<Order>,
+        private static Func<IEnumerable<OrderViewModel>, IEnumerable<AggregateFunctionsGroup>>
+            BuildGroup<T>(Expression<Func<OrderViewModel, T>> groupSelector, Func<IEnumerable<OrderViewModel>,
             IEnumerable<AggregateFunctionsGroup>> selectorBuilder)
         {
             var tempSelector = selectorBuilder;
@@ -133,8 +142,8 @@ namespace Kendo.Mvc.Examples.Controllers
                          });
         }
 
-        private static IEnumerable<AggregateFunctionsGroup> BuildInnerGroup<T>(IEnumerable<Order>
-            group, Expression<Func<Order, T>> groupSelector)
+        private static IEnumerable<AggregateFunctionsGroup> BuildInnerGroup<T>(IEnumerable<OrderViewModel>
+            group, Expression<Func<OrderViewModel, T>> groupSelector)
         {
             return group.GroupBy(groupSelector.Compile())
                     .Select(i => new AggregateFunctionsGroup
@@ -145,7 +154,7 @@ namespace Kendo.Mvc.Examples.Controllers
                     });
         }
 
-        public static IQueryable<Order> ApplyOrdersSorting(this IQueryable<Order> data,
+        public static IQueryable<OrderViewModel> ApplyOrdersSorting(this IQueryable<OrderViewModel> data,
                     IList<GroupDescriptor> groupDescriptors, IList<SortDescriptor> sortDescriptors)
         {
             if (groupDescriptors != null && groupDescriptors.Any())
@@ -167,7 +176,7 @@ namespace Kendo.Mvc.Examples.Controllers
             return data;
         }
 
-        private static IQueryable<Order> AddSortExpression(IQueryable<Order> data, ListSortDirection
+        private static IQueryable<OrderViewModel> AddSortExpression(IQueryable<OrderViewModel> data, ListSortDirection
                     sortDirection, string memberName)
         {
             if (sortDirection == ListSortDirection.Ascending)
@@ -177,14 +186,14 @@ namespace Kendo.Mvc.Examples.Controllers
                     case "OrderID":
                         data = data.OrderBy(order => order.OrderID);
                         break;
-                    case "Customer.ContactName":
-                        data = data.OrderBy(order => order.Customer.ContactName);
+                    case "ShipCity":
+                        data = data.OrderBy(order => order.ShipCity);
                         break;
-                    case "ShipAddress":
-                        data = data.OrderBy(order => order.ShipAddress);
+                    case "ShipCountry":
+                        data = data.OrderBy(order => order.ShipCountry);
                         break;
-                    case "OrderDate":
-                        data = data.OrderBy(order => order.OrderDate);
+                    case "ShipName":
+                        data = data.OrderBy(order => order.ShipName);
                         break;
                 }
             }
@@ -195,26 +204,26 @@ namespace Kendo.Mvc.Examples.Controllers
                     case "OrderID":
                         data = data.OrderByDescending(order => order.OrderID);
                         break;
-                    case "Customer.ContactName":
-                        data = data.OrderByDescending(order => order.Customer.ContactName);
+                    case "ShipCity":
+                        data = data.OrderByDescending(order => order.ShipCity);
                         break;
-                    case "ShipAddress":
-                        data = data.OrderByDescending(order => order.ShipAddress);
+                    case "ShipCountry":
+                        data = data.OrderByDescending(order => order.ShipCountry);
                         break;
-                    case "OrderDate":
-                        data = data.OrderByDescending(order => order.OrderDate);
+                    case "ShipName":
+                        data = data.OrderByDescending(order => order.ShipName);
                         break;
                 }
             }
             return data;
         }
 
-        public static IQueryable<Order> ApplyOrdersFiltering(this IQueryable<Order> data,
+        public static IQueryable<OrderViewModel> ApplyOrdersFiltering(this IQueryable<OrderViewModel> data,
            IList<IFilterDescriptor> filterDescriptors)
         {
             if (filterDescriptors.Any())
             {
-                data = data.Where(ExpressionBuilder.Expression<Order>(filterDescriptors));
+                data = data.Where(ExpressionBuilder.Expression<OrderViewModel>(filterDescriptors, false));
             }
             return data;
         }

@@ -29,6 +29,12 @@ namespace Kendo.Mvc.Examples.Controllers
 
             orders = orders.ApplySorting(request.Groups, request.Sorts);
 
+            if (request.Sorts == null || !request.Sorts.Any())
+            {
+                // Entity Framework doesn't support paging on unsorted data.
+                orders = orders.OrderBy(o => o.OrderID);
+            }
+
             orders = orders.ApplyPaging(request.Page, request.PageSize);
 
             IEnumerable data =  orders.ApplyGrouping(request.Groups);

@@ -34,8 +34,18 @@ namespace Kendo.Mvc
 
         public static Expression<Func<T, bool>> Expression<T>(IList<IFilterDescriptor> filterDescriptors)
         {
+            return Expression<T>(filterDescriptors, true);
+        }
+
+        public static Expression<Func<T, bool>> Expression<T>(IList<IFilterDescriptor> filterDescriptors, bool checkForNull)
+        {
             ParameterExpression parameterExpression = System.Linq.Expressions.Expression.Parameter(typeof(T), "item");
-            return (Expression<Func<T, bool>>) new FilterDescriptorCollectionExpressionBuilder(parameterExpression, filterDescriptors).CreateFilterExpression();
+
+            var builder = new FilterDescriptorCollectionExpressionBuilder(parameterExpression, filterDescriptors);
+
+            builder.Options.LiftMemberAccessToNull = checkForNull;
+
+            return (Expression<Func<T, bool>>) builder.CreateFilterExpression();
         }
     }
 }
