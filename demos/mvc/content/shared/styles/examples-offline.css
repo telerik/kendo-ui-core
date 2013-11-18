@@ -382,6 +382,12 @@ ul.keyboard-legend li a {
     text-align: center;
 }
 
+.demo-section p a.hyperlink,
+.config-section a {
+    color: #e15613;
+    text-decoration: none;
+}
+
 .k-chart {
     margin: 0 auto 15px auto;
     height: 430px;

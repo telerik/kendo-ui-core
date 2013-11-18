@@ -1512,7 +1512,8 @@ p#copy
     text-align: center;
 }
 
-.demo-section > p > a {
+.demo-section p a.hyperlink,
+.config-section a {
     color: #e15613;
     text-decoration: none;
 }
