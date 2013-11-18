@@ -46,102 +46,6 @@
 
         (function() {
             // ------------------------------------------------------------
-            module("Map / Extent", {
-                setup: createMap,
-                teardown: destroyMap
-            });
-
-            test("se corner wraps around by default", function() {
-                createMap({ zoom: 0 });
-                map.element.css("width", "2000px");
-                ok(map.extent().se.round().lng > 180);
-            });
-
-            test("se corner does not wrap around", function() {
-                createMap({ zoom: 1, wraparound: false });
-                map.element.css("width", "2000px");
-                equal(map.extent().se.round().lng, 180);
-            });
-
-            test("se is clipped visible area", function() {
-                createMap({ zoom: 3 });
-                map.element.css("width", "1024px");
-                equal(map.extent().se.round().lng, 135);
-            });
-        })();
-
-        (function() {
-            // ------------------------------------------------------------
-            module("Map / Location <-> Layer", {
-                setup: function() {
-                    createMap({ zoom: 1 });
-                },
-                teardown: destroyMap
-            });
-
-            test("locationToLayer maps location to layer coordinates", function() {
-                var point = map.locationToLayer(new Location(90, 240));
-                ok(point.round().equals(new Point(597, 0)));
-            });
-
-            test("locationToLayer maps location to layer coordinates at specified zoom", function() {
-                var point = map.locationToLayer(new Location(0, 0), 3);
-                ok(point.round().equals(new Point(1024, 1024)));
-            });
-
-            test("locationToLayer clamps coordinates when wraparound is false", function() {
-                createMap({ zoom: 1, wraparound: false });
-                var point = map.locationToLayer(new Location(90, 240));
-                ok(point.round().equals(new Point(512, 0)));
-            });
-
-            test("layerToLocation maps layer coordinates to location", function() {
-                var loc = map.layerToLocation(new Point(597, 0));
-                ok(loc.round().equals(new Location(85, 240)));
-            });
-
-            test("layerToLocation maps layer coordinates to location at specified zoom", function() {
-                var loc = map.layerToLocation(new Point(1024, 1024), 3);
-                ok(loc.round().equals(new Location(0, 0)));
-            });
-
-            test("layerToLocation maps layer coordinates to location when wraparound is false", function() {
-                createMap({ zoom: 1, wraparound: false });
-                var loc = map.layerToLocation(new Point(512, 0));
-                ok(loc.round().equals(new Location(85, 180)));
-            });
-        })();
-
-        (function() {
-            // ------------------------------------------------------------
-            module("Map / Scroller", {
-                setup: createMap,
-                teardown: destroyMap
-            });
-
-            test("x virtualSize is 20x scale when wraparound is true", function() {
-                var scale = map.scale();
-                var x = map.scroller.dimensions.x;
-                equal(x._virtualMin, -20 * scale);
-                equal(x._virtualMax, 20 * scale);
-            });
-
-            test("x virtualSize is scale when wraparound is false", function() {
-                createMap({ wraparound: false });
-                var scale = map.scale();
-                var x = map.scroller.dimensions.x;
-                equal(x._virtualMax - x._virtualMin, 2048);
-            });
-
-            test("y virtualSize equals scale", function() {
-                var scale = map.scale();
-                var y = map.scroller.dimensions.y;
-                equal(y._virtualMax - y._virtualMin, scale);
-            });
-        })();
-
-        (function() {
-            // ------------------------------------------------------------
             module("Map / Compass", {
                 setup: createMap,
                 teardown: destroyMap
@@ -183,7 +87,7 @@
 
             test("panning moves origin", function() {
                 map.bind("panEnd", function() {
-                    ok(new Location(53, -27).equals(map.origin().round()));
+                    ok(new Location(53, -27).equals(map.extent().nw.round()));
                 });
                 map.compass.trigger("pan", { x: 100, y: 100 });
             });
