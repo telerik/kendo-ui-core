@@ -225,6 +225,42 @@
     });
 
     var StrokeNode = Node.extend({
+        optionsChange: function(e) {
+            switch(e.field) {
+                case "stroke":
+                    this.allAttr(this.mapStroke(e.value));
+                    break;
+
+                default:
+                    var name = this.attributeMap[e.field];
+                    if (name) {
+                        this.attr(name, e.value);
+                    }
+                    break;
+            }
+
+            this.invalidate();
+        },
+
+        attributeMap: {
+            "stroke.color": "color",
+            "stroke.width": "weight",
+            "stroke.opacity": "opacity",
+            "stroke.dashType": "dashstyle"
+        },
+
+        attr: function(name, value) {
+            if (this.element) {
+                this.element.setAttribute(name, value);
+            }
+        },
+
+        allAttr: function(attrs) {
+            for (var i = 0; i < attrs.length; i++) {
+                this.attr(attrs[i][0], attrs[i][1]);
+            }
+        },
+
         mapStroke: function(stroke) {
             var attrs = [];
 
@@ -259,9 +295,41 @@
     });
 
     var FillNode = Node.extend({
-        isEnabled: function() {
-            var fill = this.options.fill;
-            return !!fill && fill.toLowerCase() !== TRANSPARENT;
+        optionsChange: function(e) {
+            switch(e.field) {
+                case "fill":
+                    this.allAttr(this.mapFill(e.value));
+                    break;
+
+                case "fill.color":
+                    this.allAttr(this.mapFill({ color: e.value }));
+                    break;
+
+                default:
+                    var name = this.attributeMap[e.field];
+                    if (name) {
+                        this.attr(name, e.value);
+                    }
+                    break;
+            }
+
+            this.invalidate();
+        },
+
+        attributeMap: {
+            "fill.opacity": "opacity"
+        },
+
+        attr: function(name, value) {
+            if (this.element) {
+                this.element.setAttribute(name, value);
+            }
+        },
+
+        allAttr: function(attrs) {
+            for (var i = 0; i < attrs.length; i++) {
+                this.attr(attrs[i][0], attrs[i][1]);
+            }
         },
 
         mapFill: function(fill) {
@@ -304,37 +372,17 @@
         },
 
         geometryChange: function() {
-            this.attr("d", this.renderData());
+            this.attr("v", this.renderData());
             this.invalidate();
         },
 
         optionsChange: function(e) {
-            switch(e.field) {
-                case "fill":
-                    // TODO
-                    break;
-
-                case "fill.color":
-                    // TODO
-                    break;
-
-                case "stroke":
-                    // TODO
-                    break;
-
-                case "visible":
-                    // TODO
-                    break;
-
-                default:
-                    // TODO
-                    /*
-                    "fill.opacity": "fill-opacity",
-                    "stroke.color": "stroke",
-                    "stroke.width": "stroke-width",
-                    "stroke.opacity": "stroke-opacity"
-                    */
-                    break;
+            if (e.field === "visible") {
+                this.css("display", e.value ? "block" : "none");
+            } else if (e.field.indexOf("fill") === 0) {
+                this.fill.optionsChange(e);
+            } else if (e.field.indexOf("stroke") === 0) {
+                this.stroke.optionsChange(e);
             }
 
             this.invalidate();
@@ -352,11 +400,17 @@
             }
         },
 
+        css: function(name, value) {
+            if (this.element) {
+                this.element.style[name] = value;
+            }
+        },
+
         renderData: function() {
             return this.printPath(this.srcElement);
         },
 
-        printPath: function(path) {
+        printPath: function(path, open) {
             var segments = path.segments;
             if (segments.length > 0) {
                 var parts = [],
@@ -372,14 +426,12 @@
                     output += " x";
                 }
 
-                output += " e";
+                if (open !== true) {
+                    output += " e";
+                }
 
                 return output;
             }
-        },
-
-        renderStroke: function() {
-            // TODO
         },
 
         mapFill: function(fill) {
@@ -398,12 +450,6 @@
             return attrs;
         },
 
-        renderFill: function() {
-            return renderAllAttr(
-                this.mapFill(this.srcElement.options.fill)
-            );
-        },
-
         renderCursor: function() {
             var cursor = this.srcElement.options.cursor;
 
@@ -414,25 +460,27 @@
 
         renderVisibility: function() {
             if (this.srcElement.options.visible === false) {
-                return renderAttr("visibility", "hidden");
+                return "display:none;";
             }
 
             return "";
         },
 
         renderCoordsize: function() {
-            var scale = this.srcElement.options.align === false ?  10000 : 1;
+            var scale = this.srcElement.options.align === false ? 10000 : 1;
             return "coordsize='" + scale + " " + scale + "'";
         },
 
         renderSize: function() {
-            var scale = this.srcElement.options.align === false ?  100 : 1;
+            var scale = this.srcElement.options.align === false ? 100 : 1;
             return "width:" + scale + "px; height:" + scale + "px;";
         },
 
         template: renderTemplate(
             "<kvml:shape " +
-            "style='position:absolute; #= d.renderSize() # " +
+            "style='position:absolute;" +
+            "#= d.renderSize() # " +
+            "#= d.renderVisibility() # " +
             "#= d.renderCursor() #' " +
             "coordorigin='0 0' #= d.renderCoordsize() #>" +
                 "#= d.renderChildren() #" +
@@ -447,10 +495,12 @@
 
             if (paths.length > 0) {
                 var result = [],
-                    i;
+                    i,
+                    open;
 
                 for (i = 0; i < paths.length; i++) {
-                    result.push(this.printPath(paths[i]));
+                    open = i < paths.length - 1;
+                    result.push(this.printPath(paths[i], open));
                 }
 
                 return result.join(" ");
@@ -496,11 +546,13 @@
     deepExtend(d, {
         vml: {
             CircleNode: CircleNode,
+            FillNode: FillNode,
             GroupNode: GroupNode,
             MultiPathNode: MultiPathNode,
             Node: Node,
             PathNode: PathNode,
             RootNode: RootNode,
+            StrokeNode: StrokeNode,
             Surface: Surface
         }
     });
