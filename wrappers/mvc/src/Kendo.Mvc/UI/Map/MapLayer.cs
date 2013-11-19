@@ -35,6 +35,8 @@ namespace Kendo.Mvc.UI
 
         public DataSource DataSource { get; set; }
 
+        public string[] Subdomains { get; set; }
+
         //>> Fields
         
         public bool? AutoBind { get; set; }
@@ -62,6 +64,11 @@ namespace Kendo.Mvc.UI
             if (dataSource.Any())
             {
                 json["dataSource"] = dataSource;
+            }
+
+            if (Subdomains != null)
+            {
+                json["subdomains"] = Subdomains;
             }
 
             //>> Serialization

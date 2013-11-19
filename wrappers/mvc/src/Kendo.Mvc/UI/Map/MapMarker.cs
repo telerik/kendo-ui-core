@@ -29,7 +29,8 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-        
+
+        public double[] Position { get; set; }
 
         //>> Fields
         
@@ -43,6 +44,11 @@ namespace Kendo.Mvc.UI
 
         protected override void Serialize(IDictionary<string, object> json)
         {
+            if (Position != null)
+            {
+                json["position"] = Position;
+            }
+
             //>> Serialization
         
             if (Color.HasValue())

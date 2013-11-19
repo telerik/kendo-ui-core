@@ -30,6 +30,17 @@ using System.Web.Mvc;
             return this;
         }
 
+        /// <summary>
+        /// Configures of the subdomains.
+        /// </summary>
+        /// <param name="subdomains">The subdomains</param>
+        public MapLayerBuilder Subdomains(string[] subdomains)
+        {
+            container.Subdomains = subdomains;
+
+            return this;
+        }
+
         //>> Fields
         
         /// <summary>
@@ -56,7 +67,7 @@ using System.Web.Mvc;
         }
         
         /// <summary>
-        /// The the opacity of all tile layers.
+        /// The the opacity for the layer.
         /// </summary>
         /// <param name="value">The value that configures the opacity.</param>
         public MapLayerBuilder Opacity(string value)
