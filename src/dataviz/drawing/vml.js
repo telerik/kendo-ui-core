@@ -48,6 +48,10 @@
             "mouseleave"
         ],
 
+        // TODO
+        // This translation negates the Movable offset
+        // and is not strictly necessary.
+        // Figure out a better API
         translate: function(offset) {
             var style = this.element.style;
             style.top = -offset.y;

@@ -47,7 +47,6 @@
             });
 
             test("equals fails with different latitude", function() {
-
                 ok(!new Location(10, 20).equals(new Location(11, 20)));
             });
 
@@ -111,6 +110,37 @@
                 deepEqual(loc.round(), loc);
             });
 
+            test("wrap wraps lng", function() {
+                loc.lng = 200;
+                loc.wrap();
+
+                equal(loc.lng, 20);
+            });
+
+            test("wrap wraps negative lng", function() {
+                loc.lng = -200;
+                loc.wrap();
+
+                equal(loc.lng, -20);
+            });
+
+            test("wrap wraps lat", function() {
+                loc.lat = 100;
+                loc.wrap();
+
+                equal(loc.lat, 10);
+            });
+
+            test("wrap wraps negative lat", function() {
+                loc.lat = -100;
+                loc.wrap();
+
+                equal(loc.lat, -10);
+            });
+
+            test("wrap returns location", function() {
+                deepEqual(loc.wrap(), loc);
+            });
         })();
 
         (function() {
