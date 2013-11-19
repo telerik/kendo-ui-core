@@ -802,8 +802,14 @@
             }, {
                 "text": "Events",
                 "url": "map/events.html",
-                "title": "Events API for Kendo UI Chart component",
+                "title": "Events API for Kendo UI Map component",
                 "meta": "This sample demonstrates the events which are specific to Kendo UI Map component.",
+                "requiresServer": "true"
+            }, {
+                "text": "API",
+                "url": "map/api.html",
+                "title": "API for Kendo UI Map component",
+                "meta": "This sample demonstrates the public methods which are specific to Kendo UI Map component.",
                 "requiresServer": "true"
             }]
         }

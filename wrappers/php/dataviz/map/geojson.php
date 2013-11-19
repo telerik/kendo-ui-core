@@ -13,8 +13,8 @@ $layer->type("shape")
       ->style(array('fill' => array('opacity' => 0.7)));
 
 $map = new \Kendo\Dataviz\UI\Map('map');
-$map->center(array(51.505, -0.09))
-    ->zoom(4)
+$map->center(array(30.2681, -97.7448))
+    ->zoom(3)
     ->addLayer($layer)
     ->shapeCreated('onShapeCreated')
     ->shapeMouseEnter('onShapeMouseEnter')
