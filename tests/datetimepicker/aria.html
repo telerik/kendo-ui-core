@@ -39,11 +39,7 @@
             });
 
             test("DateTimePicker adds role to the input element", function() {
-                equal(input.attr("role"), "textbox");
-            });
-
-            test("DateTimePicker adds aria-haspopup", function() {
-                equal(input.attr("aria-haspopup"), "true");
+                equal(input.attr("role"), "combobox");
             });
 
             test("DateTimePicker adds aria-expanded", function() {
@@ -108,13 +104,14 @@
                 equal(instance.element.attr("aria-owns"), undefined);
             });
 
-            test("DateTimePicker sets aria-label on change", function() {
-                instance.value(new Date());
+            test("DateTimePicker sets aria-activedescendant", function() {
+                instance.value("10/10/2000 12:00 AM");
+                instance.open("time");
 
-                ok(instance.element.attr("aria-label"));
+                equal(instance.element.attr("aria-activedescendant"), instance.timeView._optionID);
             });
 
-            test("DateTimePicker sets aria-label after navigation", function() {
+            test("DateTimePicker sets aria-activedescendant after navigation", function() {
                 instance.open();
 
                 instance.element.focus().trigger({
@@ -123,20 +120,33 @@
                     keyCode: 40
                 });
 
-                equal(instance.element.attr("aria-label"), kendo.toString(instance.dateView._current, "G"));
+                var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+
+                equal(instance.element.attr("aria-activedescendant"), cell.attr("id"));
             });
 
-            test("DateTimePicker sets aria-activedescendant", function() {
-                instance.open("time");
-                instance.value("10/10/2000 12:00 AM");
-                equal(instance.element.attr("aria-activedescendant"), instance.timeView._optionID);
-            });
-
-            test("DateTimePicker removes aria-activedescendant", function() {
+            test("DateTimePicker sets aria-label to focused cell", function() {
                 instance.open();
-                instance.value("10/10/2000 12:00 AM");
-                instance.value("10/10/2000 12:10 AM");
-                equal(instance.element.attr("aria-activedescendant"), undefined);
+
+                var date = kendo.date.today();
+                var cell = instance.dateView.calendar.element.find("td.k-state-focused");
+
+                equal(cell.attr("aria-label"), kendo.toString(date, "G"));
+            });
+
+            test("DateTimePicker removes aria-label from previous cell", function() {
+                instance.open();
+
+                instance.element.focus().trigger({
+                    type: "keydown",
+                    preventDefault: function() {},
+                    keyCode: 40
+                });
+
+                var date = kendo.date.today();
+                var cell = instance.dateView.calendar.element.find("td[aria-label]");
+
+                equal(cell.length, 1);
             });
 
         </script>
