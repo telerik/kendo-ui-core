@@ -36,10 +36,6 @@ kendo_module({
 
         FORMAT: "{0:N6},{1:N6}",
 
-        toString: function() {
-            return kendo.format(this.FORMAT, this.lng, this.lat);
-        },
-
         toArray: function() {
             return [this.lat, this.lng];
         },
@@ -52,8 +48,19 @@ kendo_module({
             this.lng = round(this.lng, precision);
             this.lat = round(this.lat, precision);
             return this;
+        },
+
+        wrap: function() {
+            this.lng = this.lng % 180;
+            this.lat = this.lat % 90;
+            return this;
         }
     });
+
+    // IE < 9 doesn't allow to override toString on definition
+    Location.fn.toString = function() {
+        return kendo.format(this.FORMAT, this.lng, this.lat);
+    };
 
     Location.fromLngLat = function(ll) {
         return new Location(ll[1], ll[0]);

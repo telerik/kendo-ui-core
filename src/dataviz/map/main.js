@@ -343,7 +343,6 @@ kendo_module({
                 var defaults = this.options.layerDefaults[type];
                 var impl = dataviz.map.layers[type];
 
-                // TODO: Set layer size
                 layers.push(new impl(this, deepExtend({}, defaults, options)));
             }
         },

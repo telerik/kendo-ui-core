@@ -1467,7 +1467,7 @@ kendo_module({
         },
 
         timePassed: function() {
-            return Math.min(this.duration, (Date.now()) - this.startDate);
+            return Math.min(this.duration, (new Date()) - this.startDate);
         },
 
         moveTo: function(options) {
@@ -1481,7 +1481,7 @@ kendo_module({
 
             that.tick = that._easeProxy(options.ease);
 
-            that.startDate = Date.now();
+            that.startDate = new Date();
             that.start();
         },
 

@@ -2,6 +2,7 @@
 
     // Imports ================================================================
     var $ = jQuery,
+        doc = document,
         noop = $.noop,
         toString = Object.prototype.toString,
 
@@ -10,6 +11,60 @@
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz;
+
+    // Base surface ==========================================================
+    var Surface = kendo.Observable.extend({
+        clear: noop,
+
+        destroy: function() {
+            this.clear();
+            $(this.element).kendoDestroy();
+        },
+
+        resize: function(force) {
+            var size = this.getSize(),
+                currentSize = this._size;
+
+            if (force || !currentSize ||
+                size.width !== currentSize.width || size.height !== currentSize.height) {
+                this._size = size;
+                this._resize(size);
+            }
+        },
+
+        getSize: function() {
+            return kendo.dimensions($(this.element));
+        },
+
+        setSize: function(size) {
+            $(this.element).css({
+                width: size.width,
+                height: size.height
+            });
+
+            this.resize();
+        },
+
+        _resize: noop,
+
+        _handler: function(event) {
+            var surface = this;
+
+            return function(e) {
+                var node = e.target._kendoNode;
+                if (node) {
+                    surface.trigger(event, {
+                        shape: node.srcElement,
+                        originalEvent: e
+                    });
+                }
+            };
+        }
+    });
+
+    Surface.create = function(element, options, preferred) {
+        return SurfaceFactory.current.create(element, options, preferred);
+    };
 
     // Stage node ============================================================
     var BaseNode = Class.extend({
@@ -155,11 +210,70 @@
         }
     });
 
+    var SurfaceFactory = function() {
+        this._views = [];
+    };
+
+    SurfaceFactory.prototype = {
+        register: function(name, type, order) {
+            var views = this._views,
+                defaultView = views[0],
+                entry = {
+                    name: name,
+                    type: type,
+                    order: order
+                };
+
+            if (!defaultView || order < defaultView.order) {
+                views.unshift(entry);
+            } else {
+                views.push(entry);
+            }
+        },
+
+        create: function(element, options, preferred) {
+            var views = this._views,
+                match = views[0];
+
+            if (preferred) {
+                preferred = preferred.toLowerCase();
+                for (var i = 0; i < views.length; i++) {
+                    if (views[i].name === preferred) {
+                        match = views[i];
+                        break;
+                    }
+                }
+            }
+
+            if (match) {
+                return new match.type(element, options);
+            }
+
+            kendo.logToConsole(
+                "Warning: KendoUI DataViz cannot render. Possible causes:\n" +
+                "- The browser does not support SVG, VML and Canvas. User agent: " + navigator.userAgent + "\n" +
+                "- The kendo.dataviz.(svg|vml|canvas).js scripts are not loaded");
+        }
+    };
+
+    SurfaceFactory.current = new SurfaceFactory();
+
+    kendo.support.svg = (function() {
+        return doc.implementation.hasFeature(
+            "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
+    })();
+
+    kendo.support.canvas = (function() {
+        return !!doc.createElement("canvas").getContext;
+    })();
+
     // Exports ================================================================
     deepExtend(dataviz, {
         drawing: {
             BaseNode: BaseNode,
-            OptionsStore: OptionsStore
+            OptionsStore: OptionsStore,
+            Surface: Surface,
+            SurfaceFactory: SurfaceFactory
         }
     });
 
