@@ -534,6 +534,36 @@ kendo_module({
 
     var PanTool = EmptyTool.extend({
         init: function (toolService) {
+            EmptyTool.fn.init.call(this, toolService);
+        },
+        tryActivate: function (meta) {
+            return this.toolService.hoveredItem === undefined && meta.ctrlKey;
+        },
+        start: function (p) {
+            this.toolService.isPanning = true;
+            this.panStart = this.toolService.diagram._pan;
+            this.panOffset = p;
+            this.panDelta = new Point();	//relative to root
+        },
+        move: function (p) {
+            var diagram = this.toolService.diagram;
+            this.panDelta = p.plus(this.panDelta).minus(this.panOffset);
+            diagram.pan(this.panStart.plus(this.panDelta));
+        },
+        end: function () {
+            var diagram = this.toolService.diagram;
+            diagram.undoRedoService.begin();
+            diagram.undoRedoService.add(new PanUndoUnit(this.panStart, diagram._pan, diagram));
+            diagram.undoRedoService.commit();
+            this.toolService.isPanning = false;
+        },
+        getCursor: function () {
+            return Cursors.move;
+        }
+    });
+
+    var ScrollerTool = EmptyTool.extend({
+        init: function (toolService) {
             var tool = this;
             EmptyTool.fn.init.call(tool, toolService);
 
@@ -807,7 +837,15 @@ kendo_module({
     var ToolService = Class.extend({
         init: function (diagram) {
             this.diagram = diagram;
-            this.tools = [new ContentEditTool(this), new PanTool(this), new ConnectionEditTool(this), new ConnectionTool(this), new SelectionTool(this), new PointerTool(this)]; // the order matters.
+            this.tools = [
+                new ContentEditTool(this),
+                diagram.options.useScroller ? new ScrollerTool(this) : new PanTool(this),
+                new ConnectionEditTool(this),
+                new ConnectionTool(this),
+                new SelectionTool(this),
+                new PointerTool(this)
+            ]; // the order matters.
+
             this.activeTool = undefined;
         },
         start: function (p, meta) {

@@ -15,19 +15,19 @@ var shapesSource = [
                 {
                     name: "Top",
                     position: function (shape) {
-                        return shape.transformPoint(shape.bounds().top());
+                        return shape._transformPoint(shape.bounds().top());
                     }
                 },
                 {
                     name: "Right",
                     position: function (shape) {
-                        return shape.transformPoint(shape.bounds().bottomRight());
+                        return shape._transformPoint(shape.bounds().bottomRight());
                     }
                 },
                 {
                     name: "Left",
                     position: function (shape) {
-                        return shape.transformPoint(shape.bounds().bottomLeft());
+                        return shape._transformPoint(shape.bounds().bottomLeft());
                     }
                 },
                 {

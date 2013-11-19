@@ -1121,7 +1121,9 @@ kendo_module({
             that.element.addClass("k-widget k-diagram").attr("role", "diagram");
             var canvasContainer = $("<div class='k-canvas-container'></div>").appendTo(element)[0];
             that.canvas = new Canvas(canvasContainer); // the root SVG Canvas
-            that.scrollable = $("<div />").appendTo(that.element).append(that.canvas.element);
+            if(that.options.useScroller) {
+                that.scrollable = $("<div />").appendTo(that.element).append(that.canvas.element);
+            }
 
             this.mainLayer = new Group({
                 id: "main-layer"
@@ -1161,6 +1163,7 @@ kendo_module({
             autoBind: true,
             resizable: true,
             rotatable: true,
+            useScroller: true,
             visualTemplate: null,
             tooltip: { enabled: true, format: "{0}" },
             copy: {
@@ -2106,9 +2109,11 @@ kendo_module({
         _attachEvents: function () {
             var diagram = this;
 
-            diagram.bind(BOUNDSCHANGE, $.proxy(this._autosizeCanvas, this));
-            diagram.bind(ITEMSCHANGE, $.proxy(this._autosizeCanvas, this));
-            diagram.bind(ZOOM, $.proxy(this._autosizeCanvas, this));
+            if(diagram.scroller) {
+                diagram.bind(BOUNDSCHANGE, $.proxy(this._autosizeCanvas, this));
+                diagram.bind(ITEMSCHANGE, $.proxy(this._autosizeCanvas, this));
+                diagram.bind(ZOOM, $.proxy(this._autosizeCanvas, this));
+            }
         },
         _fetchFreshData: function () {
             this._dataSource();
