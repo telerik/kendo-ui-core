@@ -51,6 +51,19 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// Configures the position of the marker.
+        /// </summary>
+        /// <param name="latitude">The latitude</param>
+        /// <param name="longtitude">The longtitude</param>
+        public MapMarkerBuilder Position(double latitude, double longtitude)
+        {
+            container.Position = new[] { latitude, longtitude };
+
+            return this;
+        }
+
         
         //<< Fields
 

@@ -31,7 +31,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The attribution for all tile layers.
+        /// The attribution of all tile layers.
         /// </summary>
         /// <param name="value">The value that configures the attribution.</param>
         public MapLayerDefaultsTileSettingsBuilder Attribution(string value)
