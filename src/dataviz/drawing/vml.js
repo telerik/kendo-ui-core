@@ -60,10 +60,15 @@
 
         draw: function(element) {
             this._root.load([element]);
+            var e = this.element;
+            setTimeout(function() {
+                e.style.display = "block";
+            }, 0);
         },
 
         clear: function() {
             this._root.clear();
+            this.element.style.display = "none";
         },
 
         destroy: function() {
