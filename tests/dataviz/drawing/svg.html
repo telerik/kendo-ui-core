@@ -80,7 +80,7 @@
     });
 
     test("getSize returns element dimensions", function() {
-        $(surface.element).css({ width: 1000, height: 1000 });
+        surface.setSize({ width: 1000, height: 1000 });
 
         deepEqual(surface.getSize(), {
             width: 1000,
@@ -609,7 +609,7 @@
     <h2 id="qunit-userAgent"></h2>
     <ol id="qunit-tests"></ol>
 
-    <div id="container"></div>
+    <div id="container" style="position: absolute;"></div>
     <div id="qunit-fixture">test markup, will be hidden</div>
     <ul id="log"></ul>
 </body>
