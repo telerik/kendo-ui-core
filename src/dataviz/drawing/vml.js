@@ -59,16 +59,22 @@
         },
 
         draw: function(element) {
-            this._root.load([element]);
-            var e = this.element;
-            setTimeout(function() {
-                e.style.display = "block";
-            }, 0);
+            var surface = this;
+            surface._root.load([element]);
+
+            if (kendo.support.browser.version < 8) {
+                setTimeout(function() {
+                    surface.element.style.display = "block";
+                }, 0);
+            }
         },
 
         clear: function() {
             this._root.clear();
-            this.element.style.display = "none";
+
+            if (kendo.support.browser.version < 8) {
+                this.element.style.display = "none";
+            }
         },
 
         destroy: function() {
@@ -214,6 +220,24 @@
             }
 
             BaseNode.fn.clear.call(this);
+        },
+
+        attr: function(name, value) {
+            if (this.element) {
+                this.element[name] = value;
+            }
+        },
+
+        allAttr: function(attrs) {
+            for (var i = 0; i < attrs.length; i++) {
+                this.attr(attrs[i][0], attrs[i][1]);
+            }
+        },
+
+        css: function(name, value) {
+            if (this.element) {
+                this.element.style[name] = value;
+            }
         }
     });
 
@@ -250,18 +274,6 @@
             "stroke.width": "weight",
             "stroke.opacity": "opacity",
             "stroke.dashType": "dashstyle"
-        },
-
-        attr: function(name, value) {
-            if (this.element) {
-                this.element.setAttribute(name, value);
-            }
-        },
-
-        allAttr: function(attrs) {
-            for (var i = 0; i < attrs.length; i++) {
-                this.attr(attrs[i][0], attrs[i][1]);
-            }
         },
 
         mapStroke: function(stroke) {
@@ -323,18 +335,6 @@
             "fill.opacity": "opacity"
         },
 
-        attr: function(name, value) {
-            if (this.element) {
-                this.element.setAttribute(name, value);
-            }
-        },
-
-        allAttr: function(attrs) {
-            for (var i = 0; i < attrs.length; i++) {
-                this.attr(attrs[i][0], attrs[i][1]);
-            }
-        },
-
         mapFill: function(fill) {
             var attrs = [];
 
@@ -389,24 +389,6 @@
             }
 
             this.invalidate();
-        },
-
-        attr: function(name, value) {
-            if (this.element) {
-                this.element.setAttribute(name, value);
-            }
-        },
-
-        allAttr: function(attrs) {
-            for (var i = 0; i < attrs.length; i++) {
-                this.attr(attrs[i][0], attrs[i][1]);
-            }
-        },
-
-        css: function(name, value) {
-            if (this.element) {
-                this.element.style[name] = value;
-            }
         },
 
         renderData: function() {

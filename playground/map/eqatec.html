@@ -69,14 +69,10 @@
             },
             theme: "default",
             layers: [{
-                type: "tile",
-                urlTemplate: "http://tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                copyright: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
-            }, {
                 dataSource: {
                     type: "geojson",
                     transport: {
-                        read: "cat.geo.json"
+                        read: "countries.geo.json"
                     }
                 },
                 style: {
