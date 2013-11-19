@@ -5,7 +5,7 @@
 
 <kendo:map name="map" center="<%= new double[] {51.505, -0.09 } %>" zoom="4">
 	<kendo:map-layers>
-		<kendo:map-layer type="tile" urlTemplate="http://tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png" />
+		<kendo:map-layer type="tile" urlTemplate="http://tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png" attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors" />
 	</kendo:map-layers>
 </kendo:map>
 
