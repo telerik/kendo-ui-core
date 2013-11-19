@@ -27,8 +27,9 @@
                 .appendTo(map.scrollElement);
 
             this.movable = new kendo.ui.Movable(this.element);
-
             this.surface = d.SurfaceFactory.current.create(this.element[0]);
+
+            this._markers = [];
 
             this._click = this._handler("shapeClick");
             this.surface.bind("click", this._click);
@@ -92,6 +93,7 @@
 
         _load: function(data) {
             this._data = data;
+            this._clearMarkers();
             this.surface.clear();
 
             for (var i = 0; i < data.length; i++) {
@@ -127,9 +129,17 @@
             var cancelled = this.map.trigger("markerCreated", args);
             if (!cancelled) {
                 this.map.markers.add(marker);
+                this._markers.push(marker);
             }
 
             return cancelled;
+        },
+
+        _clearMarkers: function() {
+            for (var i = 0; i < this._markers.length; i++) {
+                this.map.markers.remove(this._markers[i]);
+            }
+            this._markers = [];
         },
 
         _panEnd: function() {
