@@ -196,6 +196,10 @@ span.k-sparkline,
 
 /* Map */
 
+.k-map {
+    height: 600px;
+}
+
 .k-map .km-scroll-wrapper {
     padding-bottom: 0;
     -moz-user-select: none;
