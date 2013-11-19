@@ -1173,10 +1173,18 @@ kendo_module({
             that.canvas.element.removeChild(that.canvas.native);
             that.canvas = undefined;
 
-            if (that.scroller) {
-                that.scroller.destroy();
-                that.scroller.element.remove();
+            that.destroyScroller();
+        },
+        destroyScroller: function() {
+            var scroller = this.scroller;
+
+            if(!scroller) {
+                return;
             }
+
+            scroller.destroy();
+            scroller.element.remove();
+            this.scroller = null;
         },
         save: function () {
             var json = {}, i, shape, con;
