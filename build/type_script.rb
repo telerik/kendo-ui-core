@@ -204,36 +204,20 @@ module CodeGen::TypeScript
             @owner.type_script_type + @name.pascalize
         end
 
-        def type_script_parameters(types)
-            params = unique_parameters.each_with_index.map do |p, index|
-                type_script_type = CodeGen::TypeScript.type(types[index])
-
-                "#{p.name}#{p.optional ? "?" : ""}: #{type_script_type}"
-            end
-
-            params.join(', ')
+        def type_script_parameters
+            unique_parameters.map { |p| "#{p.name}#{p.optional ? "?" : ""}: #{p.type_script_type}" }.join(', ')
         end
 
-        def type_script_declarations
-            parameter_types = unique_parameters.map { |p| p.type }
+        def type_script_declaration
+            declaration = "#{name}(#{type_script_parameters}): "
 
-            parameter_combinations = []
-
-            if parameter_types.size > 1
-                parameter_combinations = parameter_types.first.product(*parameter_types[1..-1]).uniq
+            if @result
+                declaration += @result.type_script_type
+            else
+                declaration += 'void'
             end
 
-            parameter_combinations.map do |combination|
-                declaration = "#{name}(#{type_script_parameters(combination)}): "
-
-                if @result
-                    declaration += @result.type_script_type
-                else
-                    declaration += 'void'
-                end
-
-                declaration + ';'
-            end
+            declaration + ';'
         end
 
         def unique_parameters
@@ -448,7 +432,7 @@ namespace :type_script do
         namespace branch do
             desc "Test TypeScript generation"
             task :test do
-#                sh "cd docs && git fetch && git reset --hard origin/#{branch}"
+                sh "cd docs && git fetch && git reset --hard origin/#{branch}"
 
                 SUITES.each do |suite, dependencies|
                     path = "dist/kendo.#{suite}.d.ts"
