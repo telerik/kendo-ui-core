@@ -54,6 +54,7 @@ namespace Kendo.Models
             "dataviz/drawing/core.js",
             "dataviz/drawing/shapes.js",
             "dataviz/drawing/svg.js",
+            "dataviz/drawing/vml.js",
             "dataviz/map/location.js",
             "dataviz/map/compass.js",
             "dataviz/map/attribution.js",

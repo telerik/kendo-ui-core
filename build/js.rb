@@ -70,6 +70,7 @@ file_merge "src/kendo.dataviz.map.js" => [
     "src/dataviz/drawing/core.js",
     "src/dataviz/drawing/shapes.js",
     "src/dataviz/drawing/svg.js",
+    "src/dataviz/drawing/vml.js",
     "src/dataviz/map/location.js",
     "src/dataviz/map/compass.js",
     "src/dataviz/map/attribution.js",
