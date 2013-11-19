@@ -31,12 +31,23 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The copyright message for all tile layers.
+        /// The attribution for all tile layers.
         /// </summary>
-        /// <param name="value">The value that configures the copyright.</param>
-        public MapLayerDefaultsTileSettingsBuilder Copyright(string value)
+        /// <param name="value">The value that configures the attribution.</param>
+        public MapLayerDefaultsTileSettingsBuilder Attribution(string value)
         {
-            container.Copyright = value;
+            container.Attribution = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The the opacity of all tile layers.
+        /// </summary>
+        /// <param name="value">The value that configures the opacity.</param>
+        public MapLayerDefaultsTileSettingsBuilder Opacity(string value)
+        {
+            container.Opacity = value;
 
             return this;
         }

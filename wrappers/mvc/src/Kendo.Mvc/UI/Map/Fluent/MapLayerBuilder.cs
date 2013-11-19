@@ -45,12 +45,23 @@ using System.Web.Mvc;
         }
         
         /// <summary>
-        /// The copyright message for the layer.
+        /// The attribution for the layer.
         /// </summary>
-        /// <param name="value">The value that configures the copyright.</param>
-        public MapLayerBuilder Copyright(string value)
+        /// <param name="value">The value that configures the attribution.</param>
+        public MapLayerBuilder Attribution(string value)
         {
-            container.Copyright = value;
+            container.Attribution = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// The the opacity of all tile layers.
+        /// </summary>
+        /// <param name="value">The value that configures the opacity.</param>
+        public MapLayerBuilder Opacity(string value)
+        {
+            container.Opacity = value;
 
             return this;
         }

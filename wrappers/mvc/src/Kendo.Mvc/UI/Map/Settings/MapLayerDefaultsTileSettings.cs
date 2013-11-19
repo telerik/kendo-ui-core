@@ -22,7 +22,9 @@ namespace Kendo.Mvc.UI
         
         public string UrlTemplateId { get; set; }
         
-        public string Copyright { get; set; }
+        public string Attribution { get; set; }
+        
+        public string Opacity { get; set; }
         
         //<< Fields
 
@@ -35,9 +37,14 @@ namespace Kendo.Mvc.UI
                 json["urlTemplate"] = UrlTemplateId;
             }
             
-            if (Copyright.HasValue())
+            if (Attribution.HasValue())
             {
-                json["copyright"] = Copyright;
+                json["attribution"] = Attribution;
+            }
+            
+            if (Opacity.HasValue())
+            {
+                json["opacity"] = Opacity;
             }
             
         //<< Serialization
