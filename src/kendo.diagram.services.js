@@ -1676,7 +1676,7 @@ kendo_module({
                         newCenter.rotate(bounds.center(), -this._angle);
                         newBounds = new Rect(newCenter.x - newBounds.width / 2, newCenter.y - newBounds.height / 2, newBounds.width, newBounds.height);
                     }
-                    if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight || (delta.x > 0 || delta.y > 0)) { // if we up-size very small shape
+                    if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) { // if we up-size very small shape
                         shape.bounds(newBounds);
                         shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
                         changed += 1;

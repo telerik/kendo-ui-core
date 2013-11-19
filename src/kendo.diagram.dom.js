@@ -422,6 +422,7 @@ kendo_module({
         },
         bounds: function (value) {
             var point, size, bounds, options;
+            options = this.options;
             if (value) {
                 if (Utils.isString(value)) {
                     switch (value) {
@@ -436,8 +437,6 @@ kendo_module({
                     }
                 }
                 else { // we assume Rect.
-                    options = this.options;
-                    this._bounds = value;
                     if (this.contentVisual) {
                         this.contentVisual.redraw(this._bounds);
                     }
@@ -446,9 +445,12 @@ kendo_module({
                     options.y = point.y;
                     this.visual.position(point);
 
-                    options.width = value.width;
-                    options.height = value.height;
-                    this.shapeVisual.redraw({ width: value.width, height: value.height });
+                    options.width = Math.max(value.width, options.minWidth);
+                    options.height = Math.max(value.height, options.minHeight);
+
+                    this._bounds = new Rect(options.x, options.y, options.width, options.height);
+
+                    this.shapeVisual.redraw({ width: options.width, height: options.height });
                     this.refreshConnections();
                     this._triggerBoundsChange();
                 }
@@ -459,11 +461,11 @@ kendo_module({
             if (this.contentVisual && !this.contentVisual._measured) {
                 this.contentVisual.redraw(this._bounds);
             }
-            if (!this.shapeVisual._measured && this.options.width === DEFAULT_SHAPE_WIDTH && this.options.height === DEFAULT_SHAPE_HEIGHT) { // no dimensions, assuming autosize for paths, groups...
+            if (!this.shapeVisual._measured && this.options.width === DEFAULT_SHAPE_WIDTH && options.height === DEFAULT_SHAPE_HEIGHT) { // no dimensions, assuming autosize for paths, groups...
                 size = this.shapeVisual._measure();
                 if (size) {
                     if (this.shapeVisual.options.autoSize) {
-                        this.bounds(new Rect(this.options.x, this.options.y, size.width, size.height));
+                        this.bounds(new Rect(options.x, options.y, size.width, size.height));
                     }
                     else {
                         this.shapeVisual.redraw();
