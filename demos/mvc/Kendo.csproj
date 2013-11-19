@@ -832,6 +832,7 @@
     <Content Include="Views\web\validator\custom-validation.cshtml" />
     <Content Include="Views\Shared\Products.cshtml" />
     <Content Include="Views\Shared\Telerik-Navigation.cshtml" />
+    <Content Include="Views\dataviz\map\bing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
