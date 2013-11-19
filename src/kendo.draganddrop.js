@@ -245,6 +245,7 @@ kendo_module({
 
             that.x = new PaneDimension(extend({horizontal: true}, options));
             that.y = new PaneDimension(extend({horizontal: false}, options));
+            that.container = options.container;
             that.forcedMinScale = options.minScale;
             that.maxScale = options.maxScale || 100;
 
@@ -330,6 +331,7 @@ kendo_module({
             that.userEvents.bind(["move", "end", "gesturestart", "gesturechange"], {
                 gesturestart: function(e) {
                     that.gesture = e;
+                    that.offset = that.dimensions.container.offset();
                 },
 
                 gesturechange: function(e) {
@@ -353,9 +355,12 @@ kendo_module({
                         scaleDelta = maxScale / movable.scale;
                     }
 
+                    var offsetX = movable.x + that.offset.left,
+                        offsetY = movable.y + that.offset.top;
+
                     coordinates = {
-                        x: (movable.x - previousCenter.x) * scaleDelta + center.x - movable.x,
-                        y: (movable.y - previousCenter.y) * scaleDelta + center.y - movable.y
+                        x: (offsetX - previousCenter.x) * scaleDelta + center.x - offsetX,
+                        y: (offsetY - previousCenter.y) * scaleDelta + center.y - offsetY
                     };
 
                     movable.scaleWith(scaleDelta);
