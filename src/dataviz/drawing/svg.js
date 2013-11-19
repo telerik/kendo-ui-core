@@ -15,7 +15,8 @@
 
         util = dataviz.util,
         renderAttr = util.renderAttr,
-        renderAllAttr = util.renderAllAttr;
+        renderAllAttr = util.renderAllAttr,
+        renderSize = util.renderSize;
 
     // Constants ==============================================================
     var BUTT = "butt",
@@ -41,6 +42,11 @@
             this._mouseleave = this._handler("mouseleave");
 
             this._appendTo(container);
+        },
+
+        options: {
+            width: "100%",
+            height: "100%"
         },
 
         events: [
@@ -69,6 +75,12 @@
 
         svg: function() {
             return this._template(this);
+        },
+
+        setSize: function(size) {
+            this.element.setAttribute("width", renderSize(size.width));
+            this.element.setAttribute("height", renderSize(size.height));
+            this.resize();
         },
 
         _resize: function() {

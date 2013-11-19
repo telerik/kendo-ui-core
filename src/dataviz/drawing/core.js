@@ -33,7 +33,10 @@
         },
 
         getSize: function() {
-            return kendo.dimensions($(this.element));
+            return {
+                width: $(this.element).width(),
+                height: $(this.element).height()
+            };
         },
 
         setSize: function(size) {
