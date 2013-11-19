@@ -48,12 +48,6 @@
             ok(dom.find("button:eq(3) span").is(".k-icon.k-i-arrow-w"));
         });
 
-        test("creates center button", function() {
-            var dom = $("<div>").kendoCompass();
-
-            ok(dom.find("button:eq(4)").is(".k-button.k-compass-c"));
-        });
-
         test("clicking the north button triggers the pan event with positive y argument and zero x argument", 2, function() {
             var dom = $("<div>").kendoCompass({
                 pan: function(e) {
@@ -96,16 +90,6 @@
             });
 
             dom.find(".k-compass-w").trigger("click");
-        });
-
-        test("clicking the center button triggers the center event", 1, function() {
-            var dom = $("<div>").kendoCompass({
-                center: function() {
-                    ok(true)
-                }
-            });
-
-            dom.find(".k-compass-c").trigger("click");
         });
 
         test("pan event x argument is multiplied by panStep", function() {
