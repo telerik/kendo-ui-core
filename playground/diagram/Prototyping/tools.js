@@ -32,7 +32,8 @@
                 this._started = undefined;
             }
         },
-        shapeOptions: function () {
+        shapeOptions: function (rect) {
+            return {width: rect.width, height: rect.height, connectors: []};
         },
         getCursor: function () {
             return diagram.Cursors.arrow;
@@ -40,20 +41,17 @@
     });
 
     var ShapeTool = ToolBase.extend({
-        shapeOptions: function (rect) {
-            return {width: rect.width, height: rect.height};
-        }
     });
 
     var LinkTool = ToolBase.extend({
         shapeOptions: function (rect) {
-            return {width: rect.width, height: rect.height, fillOpacity: 0.2, content: "link"};
+            return kendo.deepExtend(ToolBase.fn.shapeOptions(rect), {fillOpacity: 0.2, content: "link"});
         }
     });
 
     var TextTool = ToolBase.extend({
         shapeOptions: function (rect) {
-            return {width: rect.width, height: rect.height, fillOpacity: 0};
+            return kendo.deepExtend(ToolBase.fn.shapeOptions(rect), {fillOpacity: 0});
         }
     });
 

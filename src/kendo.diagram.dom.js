@@ -443,13 +443,11 @@ kendo_module({
                     point = value.topLeft();
                     options.x = point.x;
                     options.y = point.y;
-                    this.visual.position(point);
-
                     options.width = Math.max(value.width, options.minWidth);
                     options.height = Math.max(value.height, options.minHeight);
-
                     this._bounds = new Rect(options.x, options.y, options.width, options.height);
 
+                    this.visual.position(point);
                     this.shapeVisual.redraw({ width: options.width, height: options.height });
                     this.refreshConnections();
                     this._triggerBoundsChange();
@@ -1139,7 +1137,7 @@ kendo_module({
                 .mousewheel(proxy(that._wheel, that), { ns: NS })
                 .on("keydown" + NS, proxy(that._keydown, that));
             that.selector = new Selector(that);
-            // TODO: We may consider using real Clipboard, but is very hacky to do so.
+            // TODO: We may consider using real Clipboard API once is supported by the standart.
             that._clipboard = [];
             that._drop();
         },
