@@ -5,12 +5,12 @@ require_once '../../include/header.php';
 
 $layer = new \Kendo\Dataviz\UI\MapLayer();
 $layer->type("tile")
-	  ->urlTemplate("http://tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
-	  ->attribution("&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors");
+      ->urlTemplate("http://tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png")
+      ->attribution("&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors");
 
 $map = new \Kendo\Dataviz\UI\Map('map');
-$map->center(array(51.505, -0.09))
-    ->zoom(4)
+$map->center(array(30.2681, -97.7448))
+    ->zoom(3)
     ->addLayer($layer);
 
 echo $map->render();
