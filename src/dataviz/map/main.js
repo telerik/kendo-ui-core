@@ -398,8 +398,8 @@ kendo_module({
         },
 
         _reset: function() {
-            if (this._attribution) {
-                this._attribution.clear();
+            if (this.attribution) {
+                this.attribution.clear();
             }
 
             this._viewOrigin = this._getOrigin(true);
