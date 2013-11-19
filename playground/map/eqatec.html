@@ -29,6 +29,7 @@
     <script src="../../src/dataviz/map/main.js"></script>
     <script src="chroma.min.js"></script>
     <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.css">
+    <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.default.css">
     <style>
         #map {
             width: 800px;
@@ -108,7 +109,7 @@
 
             // Events
             click: function(e) {
-                console.log(e.location.toString());
+                //console.log(e.location.toString());
             },
             markerCreated: $.noop,
             markerHover: $.noop,
@@ -122,11 +123,16 @@
                 }
             },
             shapeMouseEnter: function(e) {
-                e.shape.oldColor = e.shape.options.fill.color;
-                e.shape.options.set("fill.color", "red");
+                var fill = e.shape.options.fill;
+                if (fill) {
+                    e.shape.oldColor = fill.color;
+                    e.shape.options.set("fill.color", "red");
+                }
             },
             shapeMouseLeave: function(e) {
-                e.shape.options.set("fill.color", e.shape.oldColor);
+                if (e.shape.oldColor) {
+                    e.shape.options.set("fill.color", e.shape.oldColor);
+                }
             },
             zoomEnd: function(e) {
                 //console.log(e.sender.toScreenPoint(e.sender.center()).toString());
