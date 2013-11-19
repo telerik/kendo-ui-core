@@ -1,4 +1,5 @@
 var movable, pane, dimensions, userEvents;
+var fixture = $("<div style='top:0; position: absolute; left: 0;' />").appendTo(document.body);
 
 module("pane dimensions");
 
