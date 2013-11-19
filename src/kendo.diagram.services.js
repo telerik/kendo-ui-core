@@ -1435,7 +1435,7 @@ kendo_module({
                 that.visual.append(that.rotationThumb);
             }
             that.diagram.bind("select", function (e) {
-                that._initialize(e.items);
+                that._initialize(e.selected);
             });
 
             that._refreshHandler = function () {

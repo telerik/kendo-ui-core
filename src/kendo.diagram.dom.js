@@ -79,7 +79,8 @@ kendo_module({
         DEFAULT_CONNECTION_STARTCAP = "FilledCircle",
         DEFAULT_CONNECTION_ENDCAP = "ArrowEnd",
         DEFAULT_CONNECTOR_SIZE = 8,
-        DEFAULT_HOVER_COLOR = "#70CAFF";
+        DEFAULT_HOVER_COLOR = "#70CAFF",
+        ALL = "all";
 
     diagram.DefaultConnectors = [
         {
@@ -495,18 +496,23 @@ kendo_module({
             return clone;
         },
         select: function (value) {
+            var diagram = this.diagram, selected, deselected;
             if (Utils.isUndefined(value)) {
                 value = true;
             }
             if (this.isSelected != value) {
+                selected = [];
+                deselected = [];
                 this.isSelected = value;
                 if (this.isSelected) {
-                    this.diagram._selectedItems.push(this);
+                    diagram._selectedItems.push(this);
+                    selected.push(this);
                 } else {
-                    this.diagram._selectedItems.remove(this);
+                    diagram._selectedItems.remove(this);
+                    deselected.push(this);
                 }
-                if (!this.diagram._internalSelection) {
-                    this.diagram.trigger(SELECT, {items: [this]});
+                if (!diagram._internalSelection) {
+                    diagram._selectionChanged(selected, deselected);
                 }
             }
         },
@@ -871,22 +877,27 @@ kendo_module({
          * @param value True to select, false to unselect.
          */
         select: function (value) {
+            var diagram = this.diagram, selected, deselected;
             if (this.isSelected !== value) {
                 this.isSelected = value;
+                selected = [];
+                deselected = [];
                 if (this.isSelected) {
                     this.adorner = new ConnectionEditAdorner(this);
-                    this.diagram._adorn(this.adorner, true);
-                    this.diagram._selectedItems.push(this);
+                    diagram._adorn(this.adorner, true);
+                    diagram._selectedItems.push(this);
+                    selected.push(this);
                 } else {
                     if (this.adorner) {
-                        this.diagram._adorn(this.adorner, false);
-                        this.diagram._selectedItems.remove(this);
+                        diagram._adorn(this.adorner, false);
+                        diagram._selectedItems.remove(this);
                         this.adorner = undefined;
+                        deselected.push(this);
                     }
                 }
                 this.refresh();
-                if (!this.diagram._internalSelection) {
-                    this.diagram.trigger(SELECT, {items: [this]});
+                if (!diagram._internalSelection) {
+                    diagram._selectionChanged(selected, deselected);
                 }
             }
         },
@@ -1173,10 +1184,10 @@ kendo_module({
 
             that.destroyScroller();
         },
-        destroyScroller: function() {
+        destroyScroller: function () {
             var scroller = this.scroller;
 
-            if(!scroller) {
+            if (!scroller) {
                 return;
             }
 
@@ -1365,27 +1376,30 @@ kendo_module({
          * @returns {Array}
          */
         select: function (itemsOrRect, options) {
-            var i, item, items, rect, selected = [];
+            var i, item, items, rect, selected, deselected;
             options = deepExtend({  addToSelection: false }, options);
             var addToSelection = options.addToSelection;
-
             if (itemsOrRect !== undefined) {
+                this._internalSelection = true;
+                deselected = [];
+                selected = [];
                 if (!addToSelection) {
                     while (this._selectedItems.length > 0) {
-                        this._selectedItems[0].select(false);
+                        item = this._selectedItems[0];
+                        item.select(false);
+                        deselected.push(item);
                     }
                 }
                 if (Utils.isBoolean(itemsOrRect)) {
                     if (itemsOrRect !== false) {
-                        this.select("All");
+                        this.select(ALL);
                     }
                 }
                 else if (itemsOrRect.toString().toLowerCase() === "none") {
                     this.select(false);
                 }
-                else if (itemsOrRect.toString().toLowerCase() === "all") {
+                else if (itemsOrRect.toString().toLowerCase() === ALL) {
                     items = this.shapes.concat(this.connections);
-                    this._internalSelection = true;
                     for (i = 0; i < items.length; i++) {
                         item = items[i];
                         item.select(true);
@@ -1395,7 +1409,6 @@ kendo_module({
                 else if (itemsOrRect instanceof Rect) {
                     rect = itemsOrRect;
                     items = this.shapes.concat(this.connections);
-                    this._internalSelection = true;
                     for (i = 0; i < items.length; i++) {
                         item = items[i];
                         if (!rect || item._hitTest(rect)) {
@@ -1417,7 +1430,9 @@ kendo_module({
                     itemsOrRect.select(true);
                     selected.push(itemsOrRect);
                 }
-                this.trigger(SELECT, {items: selected});
+                if (selected.length > 0 || deselected.length > 0) {
+                    this._selectionChanged(selected, deselected);
+                }
                 this._internalSelection = false;
             }
             else {
@@ -1787,6 +1802,9 @@ kendo_module({
                 return c.visual.native.id === id;
             });
             return found;
+        },
+        _selectionChanged: function (selected, deselected) {
+            this.trigger(SELECT, {selected: selected, deselected: deselected});
         },
         _getValidZoom: function (zoom) {
             return Math.min(Math.max(zoom, 0.55), 2.0); //around 0.5 something exponential happens...!?

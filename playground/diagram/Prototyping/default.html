@@ -379,7 +379,7 @@ $(function () {
             slider.value(this._zoom);
         },
         select: function (e) {
-            var items = e.items;
+            var items = e.selected;
             var sp = $("#shapePicker").data("kendoColorPicker");
             if (items.length === 1 && items[0] instanceof kendo.diagram.Shape) {
                 try {
