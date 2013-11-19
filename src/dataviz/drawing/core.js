@@ -12,6 +12,60 @@
 
         dataviz = kendo.dataviz;
 
+    // Base surface ==========================================================
+    var Surface = kendo.Observable.extend({
+        clear: noop,
+
+        destroy: function() {
+            this.clear();
+            $(this.element).kendoDestroy();
+        },
+
+        resize: function(force) {
+            var size = this.getSize(),
+                currentSize = this._size;
+
+            if (force || !currentSize ||
+                size.width !== currentSize.width || size.height !== currentSize.height) {
+                this._size = size;
+                this._resize(size);
+            }
+        },
+
+        getSize: function() {
+            return kendo.dimensions($(this.element));
+        },
+
+        setSize: function(size) {
+            $(this.element).css({
+                width: size.width,
+                height: size.height
+            });
+
+            this.resize();
+        },
+
+        _resize: noop,
+
+        _handler: function(event) {
+            var surface = this;
+
+            return function(e) {
+                var node = e.target._kendoNode;
+                if (node) {
+                    surface.trigger(event, {
+                        shape: node.srcElement,
+                        originalEvent: e
+                    });
+                }
+            };
+        }
+    });
+
+    Surface.create = function(element, options, preferred) {
+        return SurfaceFactory.current.create(element, options, preferred);
+    };
+
     // Stage node ============================================================
     var BaseNode = Class.extend({
         init: function(srcElement) {
@@ -218,6 +272,7 @@
         drawing: {
             BaseNode: BaseNode,
             OptionsStore: OptionsStore,
+            Surface: Surface,
             SurfaceFactory: SurfaceFactory
         }
     });

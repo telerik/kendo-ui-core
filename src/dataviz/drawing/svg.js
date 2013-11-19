@@ -4,7 +4,6 @@
     var doc = document,
 
         kendo = window.kendo,
-        Observable = kendo.Observable,
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
@@ -29,9 +28,9 @@
         UNDEFINED = "undefined";
 
     // SVG rendering surface ==================================================
-    var Surface = Observable.extend({
+    var Surface = d.Surface.extend({
         init: function(container, options) {
-            Observable.fn.init.call(this);
+            d.Surface.fn.init.call(this);
 
             this.options = deepExtend({}, this.options, options);
             this.bind(this.events, this.options);
@@ -44,11 +43,6 @@
             this._appendTo(container);
         },
 
-        options: {
-            width: "100%",
-            height: "100%"
-        },
-
         events: [
             "click",
             "mouseenter",
@@ -59,7 +53,7 @@
             var viewBox = kendo.format(
                 "{0} {1} {2} {3}",
                 offset.x, offset.y,
-                this._width, this._height);
+                this._size.width, this._size.height);
 
             this._offset = offset;
             this.element.setAttribute("viewBox", viewBox);
@@ -77,17 +71,7 @@
             return this._template(this);
         },
 
-        destroy: function() {
-            this.clear();
-            $(this.element).kendoDestroy();
-        },
-
-        // TODO: Implement same resize pattern as kendo.Widget
-        resize: function() {
-            var element = $(this.element);
-            this._width = element.width();
-            this._height = element.height();
-
+        _resize: function() {
             if (this._offset) {
                 this.translate(this._offset);
             }
@@ -116,20 +100,6 @@
             element.on("mouseout", this._mouseleave);
 
             this.resize();
-        },
-
-        _handler: function(event) {
-            var surface = this;
-
-            return function(e) {
-                var node = e.target._kendoNode;
-                if (node) {
-                    surface.trigger(event, {
-                        shape: node.srcElement,
-                        originalEvent: e
-                    });
-                }
-            };
         }
     });
 

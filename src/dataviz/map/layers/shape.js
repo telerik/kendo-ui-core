@@ -27,7 +27,7 @@
                 .appendTo(map.scrollElement);
 
             this.movable = new kendo.ui.Movable(this.element);
-            this.surface = d.SurfaceFactory.current.create(this.element[0], {
+            this.surface = d.Surface.create(this.element[0], {
                 width: map.scrollElement.width(),
                 height: map.scrollElement.height()
             });
@@ -67,8 +67,9 @@
         },
 
         resize: function() {
-            // TODO: Need to call setSize
-            this.surface.resize();
+            this.surface.setSize(
+                this.map.getSize()
+            );
         },
 
         _updateAttribution: function() {
