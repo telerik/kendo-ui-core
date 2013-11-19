@@ -18,8 +18,7 @@ kendo_module({
            '</button>', dir);
     }
 
-    var BUTTONS = button("n") + button("e") + button("s") + button("w") +
-        '<button class="k-button k-compass-c"><span/></button>';
+    var BUTTONS = button("n") + button("e") + button("s") + button("w");
 
     var Compass = Widget.extend({
         init: function(element, options) {
@@ -37,7 +36,6 @@ kendo_module({
         },
 
         events: [
-            "center",
             "pan"
         ],
 
@@ -47,24 +45,20 @@ kendo_module({
             var panStep = this.options.panStep;
             var button = $(e.currentTarget);
 
-            if (button.is(".k-compass-c")) {
-                this.trigger("center");
-            } else {
-                if (button.is(".k-compass-n")) {
-                    y = 1;
-                } else if (button.is(".k-compass-s")) {
-                    y = -1;
-                } else if (button.is(".k-compass-e")) {
-                    x = 1;
-                } else if (button.is(".k-compass-w")) {
-                    x = -1;
-                }
-
-                this.trigger("pan", {
-                    x: x * panStep,
-                    y: y * panStep
-                });
+            if (button.is(".k-compass-n")) {
+                y = 1;
+            } else if (button.is(".k-compass-s")) {
+                y = -1;
+            } else if (button.is(".k-compass-e")) {
+                x = 1;
+            } else if (button.is(".k-compass-w")) {
+                x = -1;
             }
+
+            this.trigger("pan", {
+                x: x * panStep,
+                y: y * panStep
+            });
         }
     });
 
