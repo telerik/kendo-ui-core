@@ -25,7 +25,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
-        ///             .Scrolling(scrolling => scrolling.Enabled((bool)ViewData["enableScrolling"]))
+        ///             .Scrollable(s => s.Enabled((bool)ViewData["enableScrolling"]))
         /// %&gt;
         /// </code>
         /// </example>
@@ -47,7 +47,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
-        ///             .Scrolling(scrolling => scrolling.Height(400))
+        ///             .Scrollable(s => s.Height(400))
         /// %&gt;
         /// </code>
         /// </example>
@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <code lang="CS">
         ///  &lt;%= Html.Kendo().Grid(Model)
         ///             .Name("Grid")
-        ///             .Scrolling(scrolling => scrolling.Height("20em")) // use "auto" to remove the default height and make the Grid expand automatically
+        ///             .Scrollable(s => s.Height("20em")) // use "auto" to remove the default height and make the Grid expand automatically
         /// %&gt;
         /// </code>
         /// </example>
