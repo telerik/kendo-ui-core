@@ -274,40 +274,67 @@ span.k-sparkline,
     background: none;
 }
 
-.k-compass > .k-button
+.k-ie7 .k-compass > button
 {
+    border-width: 0;
+    display: block;
+}
+
+.k-ie7 .k-compass > button > span
+{
+    vertical-align: top;
+    display: block;
+}
+
+div.k-compass > .k-button
+{
+    margin: 0;
     padding: 0;
     line-height: 10px;
     border-radius: 16px;
     position: absolute;
+    font-size: 1px; /*IE7*/
+    line-height: 1px;
 }
 
-.k-compass .k-compass-n
+div.k-compass .k-compass-n
 {
     top: 2px;
     left: 50%;
     margin-left: -9px;
 }
 
-.k-compass .k-compass-e
+div.k-compass .k-compass-e
 {
     right: 2px;
     top: 50%;
     margin-top: -9px;
 }
 
-.k-compass .k-compass-s
+div.k-compass .k-compass-s
 {
     bottom: 2px;
     left: 50%;
     margin-left: -9px;
 }
 
-.k-compass .k-compass-w
+div.k-compass .k-compass-w
 {
     left: 2px;
     top: 50%;
     margin-top: -9px;
+}
+
+.k-ie7 div.k-compass .k-compass-n,
+.k-ie7 div.k-compass .k-compass-s
+{
+    margin-left: -8px;
+}
+
+.k-ie7 div.k-compass .k-compass-w,
+.k-ie7 div.k-compass .k-compass-e
+{
+    margin-top: -8px;
 }
 
 /* Attribution */
