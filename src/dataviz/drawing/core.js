@@ -177,7 +177,7 @@
             }
         },
 
-        create: function(options, preferred) {
+        create: function(element, options, preferred) {
             var views = this._views,
                 match = views[0];
 
@@ -192,7 +192,7 @@
             }
 
             if (match) {
-                return new match.type(options);
+                return new match.type(element, options);
             }
 
             kendo.logToConsole(

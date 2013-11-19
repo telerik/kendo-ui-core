@@ -49,7 +49,9 @@
         ],
 
         translate: function(offset) {
-            // TODO
+            var style = this.element.style;
+            style.top = -offset.y;
+            style.left = -offset.x;
         },
 
         draw: function(element) {
