@@ -208,11 +208,16 @@ span.k-sparkline,
 }
 
 .k-map .km-scroll-wrapper,
-.k-map .km-scroll-container,
-.k-map .k-layer {
+.k-map .km-scroll-container {
     position: absolute;
     width: 100%;
     height: 100%;
+}
+
+.k-map .k-layer {
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .k-map .km-touch-scrollbar {

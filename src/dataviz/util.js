@@ -52,6 +52,15 @@
         return defined(value) ? " " + name + "='" + value + "' " : "";
     }
 
+    function renderAllAttr(attrs) {
+        var output = "";
+        for (var i = 0; i < attrs.length; i++) {
+            output += renderAttr(attrs[i][0], attrs[i][1]);
+        }
+
+        return output;
+    }
+
     function renderSize(size) {
         if (typeof size !== "string") {
             size += "px";
@@ -82,6 +91,7 @@
             round: round,
             rad: rad,
             renderAttr: renderAttr,
+            renderAllAttr: renderAllAttr,
             renderSize: renderSize,
             valueOrDefault: valueOrDefault
         }

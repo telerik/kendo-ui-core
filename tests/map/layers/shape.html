@@ -60,6 +60,13 @@
                 layer._load(pointData);
             });
 
+            test("removes old markers on _load", function() {
+                map.markers.remove = function() { ok(true); }
+
+                layer._load(pointData);
+                layer._load(pointData);
+            });
+
             test("sets default marker options", function() {
                 map.options.markerDefaults = { foo: true };
 
