@@ -1,0 +1,20 @@
+<div id="example" class="k-content absConf">
+    <div class="map-wrapper" style="margin: auto;">
+        <div id="map"></div>
+    </div>
+    <script>
+        function createMap() {
+            $("#map").kendoMap({
+                center: [51.505, -0.09],
+                zoom: 11,
+                layers: [{
+                    type: "bing",
+                    urlTemplate: "http://tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png",
+                    key: "AqaPuZWytKRUA8Nm5nqvXHWGL8BDCXvK8onCl2PkC581Zp3T_fYAQBiwIphJbRAK"
+                }]
+            });
+        }
+
+        $(document).ready(createMap);
+    </script>
+</div>
