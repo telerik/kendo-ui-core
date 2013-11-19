@@ -39,7 +39,9 @@ namespace Kendo.Mvc.UI
         
         public bool? AutoBind { get; set; }
         
-        public string Copyright { get; set; }
+        public string Attribution { get; set; }
+        
+        public string Opacity { get; set; }
         
         public MapLayerStyleSettings Style
         {
@@ -69,9 +71,14 @@ namespace Kendo.Mvc.UI
                 json["autoBind"] = AutoBind;
             }
                 
-            if (Copyright.HasValue())
+            if (Attribution.HasValue())
             {
-                json["copyright"] = Copyright;
+                json["attribution"] = Attribution;
+            }
+            
+            if (Opacity.HasValue())
+            {
+                json["opacity"] = Opacity;
             }
             
             var style = Style.ToJson();
