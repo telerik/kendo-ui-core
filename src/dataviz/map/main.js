@@ -61,8 +61,8 @@ kendo_module({
 
             this._viewOrigin = this._getOrigin();
             this._initScroller();
-            this._initLayers();
             this._initMarkers();
+            this._initLayers();
             this._initControls();
             this._reset();
 
