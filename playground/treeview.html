@@ -2,9 +2,9 @@
 <html>
     <head>
         <title>TreeView binding</title>
-        <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
-        <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
-        <link rel="stylesheet" type="text/css" href="../demos/mvc/content/shared/styles/examples.css"></link>
+        <link rel="stylesheet" href="../styles/web/kendo.common.min.css"/>
+        <link rel="stylesheet" href="../styles/web/kendo.default.min.css"/>
+        <link rel="stylesheet" href="../demos/mvc/content/shared/styles/examples.css"></link>
 
         <script src="../demos/mvc/content/shared/js/less.js"></script>
 
@@ -18,40 +18,52 @@
         <script src="../src/kendo.treeview.js"></script>
     </head>
     <body>
-        <div id="treeview"></div>
+        <button id="initTree">Init Tree</button>
+        <button id="disposeTree">Dispose Tree</button>
+
+        <div id="container"></div>
 
         <script>
-            $(document).ready(function() {
+            $(function () {
+                var data = [
+                    { title : 'account', activated : true, items : [
+                        { title : 'account.node1', activated : true, items : [] },
+                        { title : 'account.node2', activated : true, items : [
+                            { title : 'account.node2.leaf1', activated : false, items : [] },
+                            { title : 'account.node2.leaf2', activated : true, items : [] }
+                        ] }
+                    ] },
+                    { title : "device", activated : true, items : [
+                        { title : 'device.node1', activated : true, items : [] },
+                        { title : 'device.node2', activated : false, items : [
+                            { title : 'device.node2.leaf1', activated : true, items : [] },
+                            { title : 'device.node2.leaf2', activated : true, items : [] }
+                        ] }
+                    ] },
+                    { title : "interaction", activated : true, items : [
+                        { title : 'interaction.node1', activated : true, items : [] },
+                        { title : 'interaction.node2', activated : false, items : [
+                            { title : 'interaction.node2.leaf1', activated : true, items : [
+                                { title : 'interaction.node2.leaf1.leaf', activated : true, items : [] },
+                                { title : 'interaction.node2.leaf2.leaf', activated : true, items : [] }
+                            ] },
+                            { title : 'interaction.node2.leaf2', activated : true, items : [] }
+                        ] }
+                    ] }
+                ];
 
-                var data = [];
-
-                function populate(data, depth) {
-                    for (var i = 0; i < 10; i++) {
-                        data.push({ text: "Node " + i });
-
-                        if (depth > 1) {
-                            data[i].items = [];
-                            populate(data[i].items, depth - 1);
-                        }
-                    }
-                }
-
-                populate(data, 3);
-
-                $("#treeview").kendoTreeView({
-                    checkboxes: { checkChildren: true },
-                    dataSource: data
+                $('#initTree').on('click', function () {
+                    $('<div id="tree-container" />')
+                        .appendTo("#container")
+                        .kendoTreeView({
+                            template : '<div class="#= !item.activated ? "disabled" : ""#">#= item.title #</div>',
+                            dataSource : data
+                        });
                 });
 
-                var checkbox = $("#treeview :checkbox:first");
-
-                var start = new Date();
-
-                checkbox
-                    .prop("checked", true).trigger("change")
-                    .prop("checked", false).trigger("change");
-
-                console.log("elapsed: ", new Date() - start);
+                $('#disposeTree').on('click', function () {
+                    $("#tree-container").kendoTreeView("destroy").empty().remove();
+                });
             });
         </script>
     </body>

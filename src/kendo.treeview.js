@@ -1552,7 +1552,7 @@ kendo_module({
 
             Widget.fn.destroy.call(that);
 
-            that.element.off(NS);
+            that.wrapper.off(NS);
 
             that._unbindDataSource();
 
@@ -1561,6 +1561,8 @@ kendo_module({
             }
 
             kendo.destroy(that.element);
+
+            that.root = that.wrapper = that.element = null;
         },
 
         _expanded: function(node, value) {
