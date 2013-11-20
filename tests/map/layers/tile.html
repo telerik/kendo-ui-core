@@ -56,6 +56,22 @@
                 layer = new TileLayer(map, { opacity: 0.5 });
                 equal(layer.element.css("opacity"), 0.5);
             });
+
+            test("adds attribution on map reset", function() {
+                map.attribution = {
+                    add: function() {
+                        ok(true);
+                    }
+                };
+
+                layer = new TileLayer(map, { attribution: "Foo" });
+                layer.reset();
+            });
+
+            test("does not add attribution if unavailable", 0, function() {
+                layer = new TileLayer(map, { attribution: "Foo" });
+                layer.reset();
+            });
         })();
 
         (function() {

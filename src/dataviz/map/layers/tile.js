@@ -94,7 +94,10 @@
         },
 
         _updateAttribution: function() {
-            this.map.attribution.add(this.options.attribution);
+            var attr= this.map.attribution;
+            if (attr) {
+                attr.add(this.options.attribution);
+            }
         },
 
         _pan: function() {

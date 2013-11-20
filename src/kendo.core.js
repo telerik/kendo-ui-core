@@ -1655,6 +1655,8 @@ function pad(number, digits, end) {
                 propValue.constructor !== ObservableArray && propValue.constructor !== DataSource) {
                 if (propValue instanceof Date) {
                     destination[property] = new Date(propValue.getTime());
+                } else if (isFunction(propValue.clone)) {
+                    destination[property] = propValue.clone();
                 } else {
                     destProp = destination[property];
                     if (typeof (destProp) === OBJECT) {
