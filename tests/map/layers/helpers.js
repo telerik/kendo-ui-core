@@ -2,7 +2,8 @@ var kendo = window.kendo,
     Observable = kendo.Observable,
 
     dataviz = kendo.dataviz,
-    g = dataviz.geometry;
+    g = dataviz.geometry,
+    m = dataviz.map;
 
 var MapMock = Observable.extend({
     init: function() {
@@ -14,6 +15,26 @@ var MapMock = Observable.extend({
 
     locationToView: function(loc) {
         return new g.Point(loc.lng, loc.lat);
+    },
+
+    locationToLayer: function(loc) {
+        return new g.Point(loc.lng, loc.lat);
+    },
+
+    center: function() {
+        return new m.Location(0, 0);
+    },
+
+
+    zoom: function() {
+        return 3;
+    },
+
+    extent: function() {
+        return new m.Extent(
+            new m.Location(50, -180),
+            new m.Location(-50, 180)
+        );
     }
 });
 
