@@ -532,7 +532,7 @@ kendo_module({
                     if (ul[0] && that.trigger(OPEN, { item: li[0] }) === false) {
 
                         if (!ul.find(".k-group")[0] && ul.children(".k-item").length > 1) {
-                            ul.css({maxHeight: $(window).height(), overflow: "auto"});
+                            setTimeout(function(){ul.css({maxHeight: $(window).height(), overflow: "auto"});}); // timeout required by IE7
                         } else {
                             ul.css({maxHeight: "", overflow: ""});
                         }
