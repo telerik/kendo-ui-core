@@ -141,6 +141,14 @@
             test("wrap returns location", function() {
                 deepEqual(loc.wrap(), loc);
             });
+
+            test("clone copies location", function() {
+                deepEqual(loc.toArray(), loc.clone().toArray());
+            });
+
+            test("clone returns copy", function() {
+                ok(loc !== loc.clone());
+            });
         })();
 
         (function() {

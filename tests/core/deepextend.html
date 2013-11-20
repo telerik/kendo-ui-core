@@ -23,7 +23,12 @@
                         },
                         colors: ["red"],
                         border: 5,
-                        date: new Date()
+                        date: new Date(),
+                        foo: {
+                            clone: function() {
+                                return true;
+                            }
+                        }
                     };
 
                     dst = {
@@ -51,7 +56,11 @@
 
             test("Clones dates", function() {
                 equal(dst.date.getTime(), src.date.getTime());
-                ok(dst != src);
+                ok(dst.date != src.date);
+            });
+
+            test("Clones objects with clone method", function() {
+                ok(dst.foo);
             });
 
         </script>
