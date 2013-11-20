@@ -684,16 +684,17 @@ kendo_module({
 
         _textAccessor: function(text) {
             var dataItem = this.dataItem();
+            var options = this.options;
             var span = this.span;
 
             if (text !== undefined) {
                 if ($.isPlainObject(text) || text instanceof kendo.data.ObservableObject) {
                     dataItem = text;
                 } else if (!dataItem || this._text(dataItem) !== text) {
-                    if (this.options.dataTextField) {
+                    if (options.dataTextField) {
                         dataItem = {};
-                        dataItem[this.options.dataTextField] = text;
-                        dataItem[this.options.dataValueField] = this._accessor();
+                        assign(dataItem, options.dataTextField.split("."), text);
+                        assign(dataItem, options.dataValueField.split("."), this._accessor());
                     } else {
                         dataItem = text;
                     }
