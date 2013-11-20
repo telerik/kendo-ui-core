@@ -44,6 +44,10 @@ kendo_module({
             return loc && loc.lat === this.lat && loc.lng === this.lng;
         },
 
+        clone: function() {
+            return new Location(this.lat, this.lng);
+        },
+
         round: function(precision) {
             this.lng = round(this.lng, precision);
             this.lat = round(this.lat, precision);

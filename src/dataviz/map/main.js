@@ -3,7 +3,7 @@ kendo_module({
     name: "Map",
     category: "dataviz",
     description: "The Kendo DataViz Map displays spatial data",
-    depends: [ "data", "userevents", "tooltip", "dataviz.core", "dataviz.themes", "mobile.scroller" ]
+    depends: [ "data", "userevents", "tooltip", "dataviz.core", "mobile.scroller" ]
 });
 
 (function ($, undefined) {
@@ -61,8 +61,8 @@ kendo_module({
 
             this._viewOrigin = this._getOrigin();
             this._initScroller();
-            this._initLayers();
             this._initMarkers();
+            this._initLayers();
             this._initControls();
             this._reset();
 
