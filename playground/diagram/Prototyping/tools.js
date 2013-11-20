@@ -60,9 +60,7 @@
                 rect = diagram.Rect.fromPoints(this.sp, p);
                 var shape = d.addShape(rect.topLeft(), this.shapeOptions(rect));
                 d.selector.end();
-
-                // shape.openEditor();
-
+                d.editor(shape);
                 this._started = undefined;
             }
         }

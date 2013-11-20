@@ -764,65 +764,12 @@ kendo_module({
     var ContentEditTool = EmptyTool.extend({
         init: function (toolService) {
             EmptyTool.fn.init.call(this, toolService);
-
-            this.editor = new diagram.TextBlockEditor();
-            this.editor.bind("finishEdit", $.proxy(this._finishEdit, this));
-            this.toolService.diagram.bind("zoom", $.proxy(this._positionEditor, this));
         },
         doubleClick: function () {
-            var editor = this.editor;
-            var shape = this.toolService.hoveredItem;
-
-            this.toolService.editable = editor;
-            this.toolService.editShape = shape;
-
-            this._showEditor();
-
-            var shapeContent = shape.content();
-            shape.content("");
-            editor.originalContent = shapeContent;
-            editor.content(shapeContent);
-            editor.focus();
+            this.toolService.diagram.editor(this.toolService.hoveredItem);
         },
         tryActivate: function (meta) {
             return meta.doubleClick && this.toolService.hoveredItem;
-        },
-        _showEditor: function () {
-            var diagram = this.toolService.diagram,
-                editor = this.editor;
-
-            editor.visible(true);
-            diagram.element.context.appendChild(editor.native);
-
-            this._positionEditor();
-        },
-        _positionEditor: function () {
-            if (!this.toolService.editShape) {
-                return;
-            }
-
-            var diagram = this.toolService.diagram,
-                editor = this.editor,
-                nativeEditor = $(editor.native),
-                bounds = this.toolService.editShape.bounds();
-
-            var cssDim = function (prop) {
-                return parseInt(nativeEditor.css(prop), 10);
-            };
-
-            var editorHeight = 20;
-            var nativeOffset = new Point(cssDim("borderLeftWidth") + cssDim("paddingLeft"), cssDim("borderTopWidth") + cssDim("paddingTop"));
-            var formattingOffset = new Point(10, bounds.height / 2 - editorHeight / 2).minus(nativeOffset).times(diagram.zoom());
-
-            editor.size((bounds.width - 20) * diagram.zoom(), editorHeight * diagram.zoom());
-
-            var tp = diagram.toOrigin(bounds.topLeft());
-
-            editor.position(tp.plus(formattingOffset));
-            nativeEditor.css({ fontSize: (15 * diagram.zoom()) || 0 });
-        },
-        _finishEdit: function () {
-            this.toolService._finishEditShape();
         }
     });
 
@@ -851,7 +798,7 @@ kendo_module({
         start: function (p, meta) {
             meta = deepExtend({}, meta);
             this._updateHoveredItem(p);
-            this._finishEditShape();
+            this.diagram._finishEditShape();
             this._activateTool(meta);
             this.activeTool.start(p, meta);
             this._updateCursor(p);
@@ -1046,16 +993,6 @@ kendo_module({
                     return hit;
                 }
             }
-        },
-        _finishEditShape: function () {
-            if (!this.editShape) {
-                return;
-            }
-
-            var unit = new ContentChangedUndoUnit(this.editShape, this.editable.originalContent, this.editable.content());
-            this.diagram.undoRedoService.add(unit);
-            this.editable.visible(false);
-            this.editable = this.editShape = undefined;
         }
     });
 
@@ -1766,8 +1703,8 @@ kendo_module({
         },
         refresh: function () {
             var that = this, b, bounds;
-            bounds = this.bounds();
             if (this.shapes.length > 0) {
+                bounds = this.bounds();
                 this.visual.visible(true);
                 this.visual.position(bounds.topLeft());
                 $.each(this.map, function () {

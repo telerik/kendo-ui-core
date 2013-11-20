@@ -80,7 +80,10 @@ kendo_module({
         DEFAULT_CONNECTION_ENDCAP = "ArrowEnd",
         DEFAULT_CONNECTOR_SIZE = 8,
         DEFAULT_HOVER_COLOR = "#70CAFF",
-        ALL = "all";
+        ALL = "all",
+        ABSOLUTE = "absolute",
+        TRANSFORMED = "transformed",
+        ROTATED = "rotated";
 
     diagram.DefaultConnectors = [
         {
@@ -427,10 +430,16 @@ kendo_module({
             if (value) {
                 if (Utils.isString(value)) {
                     switch (value) {
-                        case "transformed" :
+                        case TRANSFORMED :
                             bounds = this._transformedBounds();
                             break;
-                        case "rotated" :
+                        case ABSOLUTE :
+                            bounds = this._transformedBounds();
+                            var pan = this.diagram._pan;
+                            bounds.x += pan.x;
+                            bounds.y += pan.y;
+                            break;
+                        case ROTATED :
                             bounds = this._rotatedBounds();
                             break;
                         default:
@@ -1121,7 +1130,7 @@ kendo_module({
             that.element.addClass("k-widget k-diagram").attr("role", "diagram");
             var canvasContainer = $("<div class='k-canvas-container'></div>").appendTo(element)[0];
             that.canvas = new Canvas(canvasContainer); // the root SVG Canvas
-            if(that.options.useScroller) {
+            if (that.options.useScroller) {
                 that.scrollable = $("<div />").appendTo(that.element).append(that.canvas.element);
             }
 
@@ -1153,6 +1162,7 @@ kendo_module({
             // TODO: We may consider using real Clipboard API once is supported by the standart.
             that._clipboard = [];
             that._drop();
+            that._initEditor();
         },
         options: {
             name: "Diagram",
@@ -1170,6 +1180,11 @@ kendo_module({
                 enabled: true,
                 offsetX: 20,
                 offsetY: 20
+            },
+            editor: {
+                height: 20,
+                margin: 10,
+                fontSize: 15
             }
         },
 
@@ -1488,7 +1503,7 @@ kendo_module({
 
             options = deepExtend({animate: false, align: "center middle"}, options);
             if (item instanceof DiagramElement) {
-                rect = item.bounds("transformed");
+                rect = item.bounds(TRANSFORMED);
             }
             else if (Utils.isArray(item)) {
                 rect = this.getBoundingBox(item);
@@ -1708,10 +1723,10 @@ kendo_module({
                     rect.x -= item._rotationOffset.x;
                     rect.y -= item._rotationOffset.y;
                 }
-                rect = item.bounds("rotated");
+                rect = item.bounds(ROTATED);
                 for (var i = 1; i < di.shapes.length; i++) {
                     item = di.shapes[i];
-                    temp = item.bounds("rotated");
+                    temp = item.bounds(ROTATED);
                     if (origin === true) {
                         temp.x -= item._rotationOffset.x;
                         temp.y -= item._rotationOffset.y;
@@ -1722,7 +1737,7 @@ kendo_module({
             return rect;
         },
         /**
-         * Transforms point or rect from main canvas coordinates to non-transformed (origin).
+         * Transforms point or rect from main canvas coordinates to non-transformed (origin/visual).
          * @param value Point, Rect.
          * @returns {Point, Rect}
          */
@@ -1809,6 +1824,56 @@ kendo_module({
                 return c.visual.native.id === id;
             });
             return found;
+        },
+        /**
+         * Shows the built-in editor of target item.
+         * @options object. Preset options to customize the editor look and behavior.
+         */
+        editor: function (item, options) { // support custome editors via the options for vNext
+            var editor = this._editor;
+
+            editor.options = deepExtend(this.options.editor, options);
+            this._editItem = item;
+            this._showEditor();
+            var shapeContent = item.content();
+            item.content("");
+            editor.originalContent = shapeContent;
+            editor.content(shapeContent);
+            editor.focus();
+        },
+        _initEditor: function () {
+            this._editor = new diagram.TextBlockEditor();
+            this._editor.bind("finishEdit", $.proxy(this._finishEditShape, this));
+        },
+        _showEditor: function () {
+            var editor = this._editor;
+
+            editor.visible(true);
+            this.element.context.appendChild(editor.native);
+            this._positionEditor();
+        },
+        _positionEditor: function () {
+            var editor = this._editor,
+                options = editor.options,
+                nativeEditor = $(editor.native),
+                bounds = this._editItem.bounds("absolute"),
+                cssDim = function (prop) {
+                    return parseInt(nativeEditor.css(prop), 10);
+                },
+                nativeOffset = new Point(cssDim("borderLeftWidth") + cssDim("paddingLeft"), cssDim("borderTopWidth") + cssDim("paddingTop")),
+                formattingOffset = new Point(options.margin, bounds.height / 2 - options.height / 2).minus(nativeOffset);
+
+            editor.size((bounds.width - 2 * options.margin), options.height);
+            editor.position(bounds.topLeft().plus(formattingOffset));
+            nativeEditor.css({ fontSize: options.fontSize });
+        },
+        _finishEditShape: function () {
+            var editor = this._editor, item = this._editItem;
+            if (item) {
+                var unit = new diagram.ContentChangedUndoUnit(item, editor.originalContent, editor.content());
+                this.undoRedoService.add(unit);
+                editor.visible(false);
+            }
         },
         _selectionChanged: function (selected, deselected) {
             this.trigger(SELECT, {selected: selected, deselected: deselected});
@@ -2113,7 +2178,7 @@ kendo_module({
         _attachEvents: function () {
             var diagram = this;
 
-            if(diagram.scroller) {
+            if (diagram.scroller) {
                 diagram.bind(BOUNDSCHANGE, $.proxy(this._autosizeCanvas, this));
                 diagram.bind(ITEMSCHANGE, $.proxy(this._autosizeCanvas, this));
                 diagram.bind(ZOOM, $.proxy(this._autosizeCanvas, this));
@@ -2191,6 +2256,9 @@ kendo_module({
             cumulativeSize = cumulativeSize.union(viewportSize);
 
             diagram.canvas.size(cumulativeSize);
+            if (this._editor.visible()) {
+                this._positionEditor();
+            }
         },
 
         _raiseItemsAdded: function (items) {
