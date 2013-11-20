@@ -77,26 +77,38 @@ var __meta__ = {
 
         _createElement: function() {
             var that = this,
+                wrap = that._wrap,
+                wrapper = "<" + that.tagName + " />",
                 element,
                 content;
 
             try {
                 content = $(document.getElementById(that.content) || that.content); // support passing id without #
+
+                if (content[0].tagName === SCRIPT) {
+                    content = content.html();
+                }
             } catch(e) {
                 if (sizzleErrorRegExp.test(e.message)) {
                     content = that.content;
                 }
             }
 
-            element = $("<" + that.tagName + " />").append(content[0].tagName === SCRIPT ? content.html() : content);
-
-            // drop the wrapper if asked - this seems like the easiest (although not very intuitive) way to avoid messing up templates with questionable content, like the one below
-            // <script id="my-template">
-            // foo
-            // <span> Span </span>
-            // </script>
-            if (!that._wrap) {
-               element = element.contents();
+            if (typeof content === "string") {
+                element = $(wrapper).append(content);
+                // drop the wrapper if asked - this seems like the easiest (although not very intuitive) way to avoid messing up templates with questionable content, like the one below
+                // <script id="my-template">
+                // foo
+                // <span> Span </span>
+                // </script>
+                if (!wrap) {
+                   element = element.contents();
+                }
+            } else {
+                element = content;
+                if (wrap) {
+                    element = element.wrap(wrapper).parent();
+                }
             }
 
             return element;
