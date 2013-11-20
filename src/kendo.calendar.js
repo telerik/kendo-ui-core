@@ -556,6 +556,7 @@ kendo_module({
 
             if (cell) {
                 cell.removeAttr(ARIA_SELECTED)
+                    .removeAttr("aria-label")
                     .removeAttr(ID);
             }
 
