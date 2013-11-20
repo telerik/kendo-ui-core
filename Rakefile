@@ -521,6 +521,7 @@ bundle :name => 'php.commercial',
        :changelog => %w(web mobile dataviz framework php),
        :product => 'Kendo UI Complete for PHP',
        :upload_as_internal_build => true,
+       :type_script => { %w(web mobile dataviz framework) => 'all' },
        :contents => {
             'js' => COMPLETE_MIN_JS + COMPLETE_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
