@@ -63,8 +63,20 @@ module CodeGen::TypeScript
     end
 
     module Declaration
+        attr_accessor :jsdoc
+
         def type_script_declaration
-            "#{name}?: #{type_script_type};"
+            declaration = "#{name}?: #{type_script_type};"
+
+            if jsdoc
+                #indentation is important!
+                declaration = %{/**
+        #{description}
+        */
+        #{declaration}}
+            end
+
+            declaration
         end
 
         def type_script_type
@@ -121,6 +133,11 @@ module CodeGen::TypeScript
             result
         end
 
+        def jsdoc=(value)
+            @jsdoc = value
+
+            options.each { |option| option.jsdoc = value }
+        end
     end
 
     class Event < CodeGen::Event
@@ -138,6 +155,20 @@ module CodeGen::TypeScript
             return @owner.type_script_type + @name.pascalize + 'Event' if @options.size > 0
 
             @owner.type_script_type + 'Event'
+        end
+
+        def type_script_declaration
+            declaration = "#{name}?(e: #{type_script_type}): void;";
+
+            if jsdoc
+                #indentation is important!
+                declaration = %{/**
+        #{description}
+        */
+        #{declaration}}
+            end
+
+            declaration
         end
     end
 
@@ -164,7 +195,17 @@ module CodeGen::TypeScript
 
         def type_script_declaration
 
-            "#{name}: #{type_script_type};"
+            declaration = "#{name}: #{type_script_type};"
+
+            if jsdoc
+                #indentation is important!
+                declaration = %{/**
+                #{description}
+                */
+                #{declaration}%}
+            end
+
+            declaration
         end
     end
 
@@ -192,6 +233,9 @@ module CodeGen::TypeScript
     end
 
     class Method < CodeGen::Method
+
+        attr_accessor :jsdoc
+
         def result_class
             Result
         end
@@ -215,6 +259,14 @@ module CodeGen::TypeScript
                 declaration += @result.type_script_type
             else
                 declaration += 'void'
+            end
+
+            if jsdoc
+                #indentation is important!
+                declaration = %{/**
+        #{description}
+        */
+        #{declaration}}
             end
 
             declaration + ';'
@@ -274,6 +326,13 @@ module CodeGen::TypeScript
             return 'Mobile' + @name if @full_name.include?('mobile')
 
             @name
+        end
+
+        def jsdoc=(value)
+            super(value)
+
+            methods.each { |option| option.jsdoc = value }
+            events.each  { |event| event.jsdoc = value }
         end
 
         def mobile?
@@ -350,6 +409,9 @@ module CodeGen::TypeScript
             CodeGen::TypeScript.type(@type[0])
         end
 
+        def jsdoc=(value)
+            @jsdoc = value
+        end
     end
 
     class ArrayOption < CompositeOption
@@ -376,7 +438,7 @@ module CodeGen::TypeScript
 
 end
 
-def get_type_script(name, sources)
+def get_type_script(name, sources, jsdoc)
 
     sources = sources.find_all { |source| !CodeGen::TypeScript::EXCLUDE.include?(source) && source.end_with?('.md') }
 
@@ -390,7 +452,13 @@ def get_type_script(name, sources)
 
     namespaces = components.group_by { |component| component.namespace }
 
+    if jsdoc
+        components.each { |component| component.jsdoc = true }
+    end
+
     suite = name.match(/kendo\.([^.]*)\.d\.ts/).captures.first
+
+    suite = 'mobile' if suite == 'icenium'
 
     TYPE_SCRIPT.result(binding)
 end
@@ -403,7 +471,9 @@ class TypeScriptTask < Rake::FileTask
 
         $stderr.puts("Creating #{name}") if VERBOSE
 
-        File.write(name, get_type_script(name, prerequisites))
+        jsdoc = name.include?('icenium')
+
+        File.write(name, get_type_script(name, prerequisites, jsdoc))
     end
 end
 
