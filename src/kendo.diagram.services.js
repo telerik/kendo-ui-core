@@ -944,9 +944,9 @@ kendo_module({
             diagram.zoom(z, p);
             return true;
         },
-        addTool: function (tool, index) {
+        setTool: function (tool, index) {
             tool.toolService = this;
-            this.tools.splice(index, 0, tool);
+            this.tools[index] = tool;
         },
         _discardNewConnection: function () {
             if (this.newConnection) {

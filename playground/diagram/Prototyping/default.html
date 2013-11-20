@@ -263,13 +263,14 @@
 </body>
 <script type="text/x-kendo-tmpl" id="template">
     <div class="shape">
-        <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200" width="100" height="100">
+        <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 200 200">
             <g>
                 <title>#:options.name#</title>
                 #= new XMLSerializer().serializeToString((new kendo.diagram.Shape(options)).visual.native) #
             </g>
         </svg>
     </div>
+
 </script>
 
 <script>
@@ -611,8 +612,7 @@ $(function () {
         dataSource: tools,
         change: function (e) {
             var tool = new kendo.diagram[$("#toolsPicker").val().toString()]();
-            tool.toolService = diagram.toolService;
-            diagram.toolService.tools[4] = tool;
+            diagram.toolService.setTool(tool, 4);
         }
     });
 

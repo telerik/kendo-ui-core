@@ -33,7 +33,7 @@
             }
         },
         shapeOptions: function (rect) {
-            return {width: rect.width, height: rect.height, connectors: []};
+            return {width: rect.width, height: rect.height, connectors: [], strokeWidth: 0};
         },
         getCursor: function () {
             return diagram.Cursors.arrow;
@@ -52,6 +52,19 @@
     var TextTool = ToolBase.extend({
         shapeOptions: function (rect) {
             return kendo.deepExtend(ToolBase.fn.shapeOptions(rect), {fillOpacity: 0});
+        },
+        end: function (p) {
+            var d = this.toolService.diagram,
+                rect;
+            if (this._started) {
+                rect = diagram.Rect.fromPoints(this.sp, p);
+                var shape = d.addShape(rect.topLeft(), this.shapeOptions(rect));
+                d.selector.end();
+
+                // shape.openEditor();
+
+                this._started = undefined;
+            }
         }
     });
 
