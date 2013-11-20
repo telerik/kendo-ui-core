@@ -1496,6 +1496,7 @@ kendo_module({
             else if (item instanceof Rect) {
                 rect = item.clone();
             }
+            console.log(rect);
             if (options.align !== "none" || !viewport.contains(rect.center())) {
                 if (options.align === "none") {
                     options.align = "center middle";
@@ -1506,6 +1507,9 @@ kendo_module({
                 align.align(rect, options.align);
 
                 var newPan = rect.topLeft().minus(old.topLeft());
+                if(!this.options.useScroller) {
+                    newPan = this.pan().plus(newPan);
+                }
                 this.pan(newPan, options.animate);
             }
         },

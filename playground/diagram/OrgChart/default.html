@@ -51,6 +51,10 @@
             width: 100%;
         }
 
+        .k-canvas-container {
+            width: 100%;
+            height: 100%;
+        }
     </style>
     <link href="../../../styles/web/kendo.default.css" rel="stylesheet"/>
     <link href="../../../styles/web/kendo.common.css" rel="stylesheet"/>
@@ -181,7 +185,8 @@ $(function () {
     function createDiagram(template) {
         var options = {
             dataSource: dataSource,
-            autoBind: false
+            autoBind: false,
+            useScroller: false
         }
         if (kendo.diagram.Utils.isFunction(window[template])) {
             options.visualTemplate = window[template];
