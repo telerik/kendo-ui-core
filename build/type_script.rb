@@ -72,6 +72,7 @@ module CodeGen::TypeScript
                 #indentation is important!
                 declaration = %{/**
         #{description}
+        @member {#{type_script_type}}
         */
         #{declaration}}
             end
@@ -179,6 +180,8 @@ module CodeGen::TypeScript
     }
 
     class Field < CodeGen::Field
+        attr_accessor :jsdoc
+
         def type_script_type
             raise "#{name} doesn't have a type specified" unless @type
 
@@ -339,6 +342,7 @@ module CodeGen::TypeScript
 
             methods.each { |option| option.jsdoc = value }
             events.each  { |event| event.jsdoc = value }
+            fields.each  { |field| field.jsdoc = value }
         end
 
         def mobile?
@@ -513,7 +517,7 @@ namespace :type_script do
                 SUITES.each do |suite, dependencies|
                     path = "dist/kendo.#{suite}.d.ts"
 
-                    File.write(path, get_type_script(path, dependencies))
+                    File.write(path, get_type_script(path, dependencies, false))
 
                     sh "node_modules/typescript/bin/tsc #{path}"
                 end
