@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <script src="../src/jquery.min.js"></script>
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.fx.js"></script>
+    <script src="../src/kendo.draganddrop.js"></script>
+    <script src="../src/kendo.userevents.js"></script>
+    <script src="../src/kendo.router.js"></script>
+    <script src="../src/kendo.data.js"></script>
+    <script src="../src/kendo.binder.js"></script>
+    <script src="../src/kendo.view.js"></script>
+    <script src="../src/kendo.list.js"></script>
+    <script src="../src/kendo.popup.js"></script>
+    <script src="../src/kendo.dropdownlist.js"></script>
+    <script src="../src/kendo.listview.js"></script>
+    <link href="../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" type="text/css" />
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div id="content"></div>
+    </div>
+
+    <script id="index" type="text/x-kendo-template">
+        <h1>Hello world!</h1>
+        <div id="menu-placeholder"></div>
+    </script>
+
+    <script id="menu" type="text/x-kendo-template">
+        <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+        </ul>
+    </script>
+
+  <script>
+      var layout = new kendo.Layout("container", { wrap: false } );
+      var menu = new kendo.Fragment("menu", { wrap: false } );
+
+      var index = new kendo.View("#index");
+
+      index.fragments({
+          '#menu-placeholder': menu
+      });
+
+      layout.render();
+      layout.showIn('#content', index);
+  </script>
+</body>
+</html>

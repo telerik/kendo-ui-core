@@ -18,6 +18,9 @@ var __meta__ = {
         INIT = "init",
         SHOW = "show",
         HIDE = "hide",
+
+        ATTACH = "attach",
+        DETACH = "detach",
         sizzleErrorRegExp = /unrecognized expression/;
 
     var View = Observable.extend({
@@ -30,6 +33,7 @@ var __meta__ = {
             that.tagName = options.tagName || "div";
             that.model = options.model;
             that._wrap = options.wrap !== false;
+            that._fragments = {};
 
             that.bind([ INIT, SHOW, HIDE ], options);
         },
@@ -38,7 +42,7 @@ var __meta__ = {
             var that = this,
                 notInitialized = !that.element;
 
-            // The order below matters - kendo.bind should be happen when the element is in the DOM, and SHOW should be triggered after INIT.
+            // The order below matters - kendo.bind should happen when the element is in the DOM, and show should be triggered after init.
 
             if (notInitialized) {
                 that.element = that._createElement();
@@ -54,6 +58,7 @@ var __meta__ = {
             }
 
             if (container) {
+                that._eachFragment(ATTACH);
                 that.trigger(SHOW);
             }
 
@@ -61,6 +66,7 @@ var __meta__ = {
         },
 
         hide: function() {
+            that._eachFragment(DETACH);
             this.element.detach();
             this.trigger(HIDE);
         },
@@ -72,6 +78,16 @@ var __meta__ = {
                 kendo.unbind(element);
                 kendo.destroy(element);
                 element.remove();
+            }
+        },
+
+        fragments: function(fragments) {
+            $.extend(this._fragments, fragments);
+        },
+
+        _eachFragment: function(methodName) {
+            for (var placeholder in this._fragments) {
+                this._fragments[placeholder][methodName](this, placeholder);
             }
         },
 
@@ -133,6 +149,17 @@ var __meta__ = {
         }
     });
 
+    var Fragment = View.extend({
+        attach: function(view, placeholder) {
+            view.element.find(placeholder).replaceWith(this.render());
+        },
+
+        detach: function() {
+            console.log('detach', arguments);
+        },
+    })
+
+    kendo.Fragment = Fragment;
     kendo.Layout = Layout;
     kendo.View = View;
 })(window.kendo.jQuery);
