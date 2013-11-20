@@ -217,6 +217,10 @@ kendo_module({
             that._current = calendar._move(e);
         },
 
+        current: function(date) {
+            this._current = date;
+            this.calendar._focus(date);
+        },
 
         value: function(value) {
             var that = this,
@@ -305,21 +309,21 @@ kendo_module({
                 open: function(e) {
                     var options = that.options,
                         date;
+
                     if (that.trigger(OPEN)) {
                         e.preventDefault();
                     } else {
                         if (that.element.val() !== that._oldText) {
                             date = parse(element.val(), options.parseFormats, options.culture);
-                            if (!date) {
-                                that.dateView.value(date);
-                            } else {
-                                that.dateView._current = date;
-                                that.dateView.calendar._focus(date);
-                            }
+
+                            that.dateView[date ? "current" : "value"](date);
                         }
 
                         element.attr(ARIA_EXPANDED, true);
                         div.attr(ARIA_HIDDEN, false);
+
+                        that._updateARIA(date);
+
                     }
                 }
             }));
@@ -336,8 +340,7 @@ kendo_module({
             element
                 .addClass("k-input")
                 .attr({
-                    role: "textbox",
-                    "aria-haspopup": true,
+                    role: "combobox",
                     "aria-expanded": false,
                     "aria-owns": that.dateView._dateViewID
                 });
@@ -661,7 +664,14 @@ kendo_module({
         },
 
         _updateARIA: function(date) {
-            this.element.attr("aria-label", this._ariaTemplate({ current: date }));
+            var that = this;
+            var calendar = that.dateView.calendar;
+            var cell = calendar._cell;
+
+            cell.attr("aria-label", that._ariaTemplate({ current: date || calendar.current() }));
+
+            that.element.removeAttr("aria-activedescendant");
+            that.element.attr("aria-activedescendant", cell.attr("id"));
         }
     });
 
