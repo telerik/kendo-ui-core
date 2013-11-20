@@ -232,6 +232,18 @@ module CodeGen::TypeScript
         end
     end
 
+    METHOD_JSDOC = ERB.new(%{/**
+        <%= description %>
+        @method
+        <%- unique_parameters.each do |parameter| -%>
+        @param {<%= parameter.type_script_type %>} <%= parameter.name %> - <%= parameter.description %>
+        <%- end -%>
+        <%- if result -%>
+        @returns {<%= result.type_script_type %>} <%= result.description %>
+        <%- end -%>
+        */
+        <%= declaration %>}, 0, '-')
+
     class Method < CodeGen::Method
 
         attr_accessor :jsdoc
@@ -261,13 +273,7 @@ module CodeGen::TypeScript
                 declaration += 'void'
             end
 
-            if jsdoc
-                #indentation is important!
-                declaration = %{/**
-        #{description}
-        */
-        #{declaration}}
-            end
+            declaration = METHOD_JSDOC.result(binding) if jsdoc
 
             declaration + ';'
         end
