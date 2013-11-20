@@ -1783,6 +1783,8 @@ function pad(number, digits, end) {
             }
         });
 
+        table = null;
+
         support.transforms = transforms;
         support.transitions = transitions;
 
@@ -1962,6 +1964,8 @@ function pad(number, digits, end) {
 
             return result;
         })();
+
+        input = null;
 
         support.stableSort = (function() {
             var sorted = [0,1,2,3,4,5,6,7,8,9,10,11,12].sort(function() { return 0; } );
