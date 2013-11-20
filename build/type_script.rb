@@ -63,8 +63,21 @@ module CodeGen::TypeScript
     end
 
     module Declaration
+        attr_accessor :jsdoc
+
         def type_script_declaration
-            "#{name}?: #{type_script_type};"
+            declaration = "#{name}?: #{type_script_type};"
+
+            if jsdoc
+                #indentation is important!
+                declaration = %{/**
+        #{description}
+        @member {#{type_script_type}}
+        */
+        #{declaration}}
+            end
+
+            declaration
         end
 
         def type_script_type
@@ -121,6 +134,11 @@ module CodeGen::TypeScript
             result
         end
 
+        def jsdoc=(value)
+            @jsdoc = value
+
+            options.each { |option| option.jsdoc = value }
+        end
     end
 
     class Event < CodeGen::Event
@@ -139,6 +157,20 @@ module CodeGen::TypeScript
 
             @owner.type_script_type + 'Event'
         end
+
+        def type_script_declaration
+            declaration = "#{name}?(e: #{type_script_type}): void;";
+
+            if jsdoc
+                #indentation is important!
+                declaration = %{/**
+        #{description}
+        */
+        #{declaration}}
+            end
+
+            declaration
+        end
     end
 
     FIELD_OVERRIDES = {
@@ -148,6 +180,8 @@ module CodeGen::TypeScript
     }
 
     class Field < CodeGen::Field
+        attr_accessor :jsdoc
+
         def type_script_type
             raise "#{name} doesn't have a type specified" unless @type
 
@@ -164,7 +198,17 @@ module CodeGen::TypeScript
 
         def type_script_declaration
 
-            "#{name}: #{type_script_type};"
+            declaration = "#{name}: #{type_script_type};"
+
+            if jsdoc
+                #indentation is important!
+                declaration = %{/**
+                #{description}
+                */
+                #{declaration}%}
+            end
+
+            declaration
         end
     end
 
@@ -191,7 +235,22 @@ module CodeGen::TypeScript
         end
     end
 
+    METHOD_JSDOC = ERB.new(%{/**
+        <%= description %>
+        @method
+        <%- unique_parameters.each do |parameter| -%>
+        @param {<%= parameter.type_script_type %>} <%= parameter.name %> - <%= parameter.description %>
+        <%- end -%>
+        <%- if result -%>
+        @returns {<%= result.type_script_type %>} <%= result.description %>
+        <%- end -%>
+        */
+        <%= declaration %>}, 0, '-')
+
     class Method < CodeGen::Method
+
+        attr_accessor :jsdoc
+
         def result_class
             Result
         end
@@ -216,6 +275,8 @@ module CodeGen::TypeScript
             else
                 declaration += 'void'
             end
+
+            declaration = METHOD_JSDOC.result(binding) if jsdoc
 
             declaration + ';'
         end
@@ -274,6 +335,14 @@ module CodeGen::TypeScript
             return 'Mobile' + @name if @full_name.include?('mobile')
 
             @name
+        end
+
+        def jsdoc=(value)
+            super(value)
+
+            methods.each { |option| option.jsdoc = value }
+            events.each  { |event| event.jsdoc = value }
+            fields.each  { |field| field.jsdoc = value }
         end
 
         def mobile?
@@ -350,6 +419,9 @@ module CodeGen::TypeScript
             CodeGen::TypeScript.type(@type[0])
         end
 
+        def jsdoc=(value)
+            @jsdoc = value
+        end
     end
 
     class ArrayOption < CompositeOption
@@ -376,7 +448,7 @@ module CodeGen::TypeScript
 
 end
 
-def get_type_script(name, sources)
+def get_type_script(name, sources, jsdoc)
 
     sources = sources.find_all { |source| !CodeGen::TypeScript::EXCLUDE.include?(source) && source.end_with?('.md') }
 
@@ -390,7 +462,13 @@ def get_type_script(name, sources)
 
     namespaces = components.group_by { |component| component.namespace }
 
+    if jsdoc
+        components.each { |component| component.jsdoc = true }
+    end
+
     suite = name.match(/kendo\.([^.]*)\.d\.ts/).captures.first
+
+    suite = 'mobile' if suite == 'icenium'
 
     TYPE_SCRIPT.result(binding)
 end
@@ -403,7 +481,9 @@ class TypeScriptTask < Rake::FileTask
 
         $stderr.puts("Creating #{name}") if VERBOSE
 
-        File.write(name, get_type_script(name, prerequisites))
+        jsdoc = name.include?('icenium')
+
+        File.write(name, get_type_script(name, prerequisites, jsdoc))
     end
 end
 
@@ -437,7 +517,7 @@ namespace :type_script do
                 SUITES.each do |suite, dependencies|
                     path = "dist/kendo.#{suite}.d.ts"
 
-                    File.write(path, get_type_script(path, dependencies))
+                    File.write(path, get_type_script(path, dependencies, false))
 
                     sh "node_modules/typescript/bin/tsc #{path}"
                 end

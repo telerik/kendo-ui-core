@@ -456,6 +456,7 @@ bundle :name => 'winjs.commercial',
        }
 
 bundle :name => 'icenium',
+       :type_script => { %w(mobile framework) => 'icenium' },
        :contents => {
             'styles' => ICENIUM_MIN_CSS,
             'js' => ICENIUM_MIN_JS + JQUERY_MAP
