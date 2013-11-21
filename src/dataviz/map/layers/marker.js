@@ -166,7 +166,7 @@
                 if (template) {
                     var contentTemplate = kendo.template(template);
                     options.content = function(e) {
-                        e.location = marker.options.location;
+                        e.location = Location.create(marker.options.location);
                         e.marker = marker;
                         return contentTemplate(e);
                     };
