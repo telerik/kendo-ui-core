@@ -11,6 +11,8 @@ namespace Kendo.Mvc.UI
         public MapMarker()
         {
             //>> Initialization
+
+            Tooltip = new MapMarkersTooltipSettings();
         
         //<< Initialization
 
@@ -30,35 +32,29 @@ namespace Kendo.Mvc.UI
             private set;
         }
 
-        public double[] Position { get; set; }
+        public double[] Location { get; set; }
 
         //>> Fields
+
+        public MapMarkersTooltipSettings Tooltip { get; set; }
         
-        public string Color { get; set; }
-        
-        public double? Size { get; set; }
-        
-        public MapMarkerShape? Shape { get; set; }
+        public MapMarkersShape? Shape { get; set; }
         
         //<< Fields
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            if (Position != null)
+            if (Location != null)
             {
-                json["position"] = Position;
+                json["location"] = Location;
             }
 
             //>> Serialization
-        
-            if (Color.HasValue())
+
+            var tooltip = Tooltip.ToJson();
+            if (tooltip.Any())
             {
-                json["color"] = Color;
-            }
-            
-            if (Size.HasValue)
-            {
-                json["size"] = Size;
+                json["tooltip"] = tooltip;
             }
                 
             if (Shape.HasValue)
