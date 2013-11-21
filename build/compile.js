@@ -14,7 +14,6 @@ var ARGV = OPT
     .describe("overwrite", "Only for kendo-config, if specified the file will be overwritten")
     .describe("beautify", "Output indented code (helps debugging)")
     .describe("nomangle", "Don't mangle names (helps debugging)")
-    .describe("genmap", "Generate source maps")
     .boolean("amd").default("amd", true)
     .boolean("srcmap").default("srcmap", true)
     .boolean("deps")
@@ -23,7 +22,6 @@ var ARGV = OPT
     .boolean("overwrite")
     .boolean("beautify")
     .boolean("nomangle")
-    .boolean("genmap")
     .wrap(80)
     .argv;
 
@@ -118,12 +116,11 @@ if (ARGV.bundle) {
         toplevel = get_wrapper().wrap("kendo", [], toplevel);
     }
     var code = toplevel.print_to_string(codegen_options);
-    fs.writeFileSync(destination_min, code);
-
     if (ARGV["srcmap"]) {
-        code += "\n//@ sourceMappingURL=" + path.basename(destination_min) + ".map";
+        code += "/*\n//@ sourceMappingURL=" + path.basename(destination_min) + ".map\n*/";
         fs.writeFileSync(destination_min + ".map", source_map.toString());
     }
+    fs.writeFileSync(destination_min, code);
 
     process.exit(0);
 }
@@ -261,12 +258,11 @@ files.forEach(function (file){
     }
 
     code = ast.print_to_string(codegen_options);
-    fs.writeFileSync(output, code);
-
     if (ARGV["srcmap"]) {
-        code += "\n//@ sourceMappingURL=" + path.basename(output) + ".map";
+        code += "/*\n//@ sourceMappingURL=" + path.basename(output) + ".map\n*/";
         fs.writeFileSync(output + ".map", source_map.toString());
     }
+    fs.writeFileSync(output, code);
 });
 
 function extract_widget_info(ast) {
