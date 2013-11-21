@@ -185,7 +185,7 @@
             return arg;
         }
 
-        return new Marker(deepExtend({}, arg, defaults));
+        return new Marker(deepExtend({}, defaults, arg));
     };
 
     // Exports ================================================================

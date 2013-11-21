@@ -259,6 +259,11 @@
                 ok(marker.options.foo && marker.options.bar);
             });
 
+            test("default options are overriden by instance options", function() {
+                var marker = Marker.create({ foo: true }, { foo: false });
+                ok(marker.options.foo);
+            });
+
             test("returns existing instance", function() {
                 var src = new Marker();
                 var marker = Marker.create(src);
