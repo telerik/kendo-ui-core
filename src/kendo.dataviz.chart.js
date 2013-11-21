@@ -9409,7 +9409,9 @@ kendo_module({
                 "# for(var i = 0; i < points.length; i++) { #" +
                 "# var point = points[i]; #" +
                 "<tr>" +
-                    "<td>#= point.series.name #:</td>" +
+                    "# if(point.series.name) { # " +
+                        "<td> #= point.series.name #:</td>" +
+                    "# } #" +
                     "<td>#= content(point) #</td>" +
                 "</tr>" +
                 "# } #" +
@@ -9428,11 +9430,10 @@ kendo_module({
                 content;
 
             points = $.grep(points, function(p) {
-                var series = p.series,
-                    hasName = !!series.name,
-                    exclude = series.tooltip && series.tooltip.visible === false;
+                var tooltip = p.series.tooltip,
+                    excluded = tooltip && tooltip.visible === false;
 
-                return hasName && !exclude;
+                return !excluded;
             });
 
             if (points.length > 0) {
