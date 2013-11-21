@@ -10,7 +10,6 @@ class Map extends \Kendo\UI\Widget {
 
     /**
     * The map center. Coordinates are listed as [Latitude, Longitude].
-You can also use a kendo.dataviz.map.Location instance.
     * @param array $value
     * @return \Kendo\Dataviz\UI\Map
     */
@@ -91,12 +90,12 @@ You can also use a kendo.dataviz.map.Location instance.
     }
 
     /**
-    * The map theme name.The built-in themes are:
-    * @param string $value
+    * Specifies whether the map should wrap around the east-west edges.
+    * @param boolean $value
     * @return \Kendo\Dataviz\UI\Map
     */
-    public function theme($value) {
-        return $this->setProperty('theme', $value);
+    public function wraparound($value) {
+        return $this->setProperty('wraparound', $value);
     }
 
     /**

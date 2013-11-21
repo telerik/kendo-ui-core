@@ -4,6 +4,7 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
+    using System.Linq;
 
     public class MapMarkerDefaultsSettings : JsonObject
     {
@@ -11,6 +12,8 @@ namespace Kendo.Mvc.UI
         {
             //>> Initialization
         
+            Tooltip = new MapMarkerDefaultsTooltipSettings();
+                
         //<< Initialization
 
             
@@ -20,11 +23,13 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
         
-        public string Color { get; set; }
-        
-        public double? Size { get; set; }
-        
         public string Shape { get; set; }
+        
+        public MapMarkerDefaultsTooltipSettings Tooltip
+        {
+            get;
+            private set;
+        }
         
         //<< Fields
 
@@ -32,21 +37,17 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Color.HasValue())
-            {
-                json["color"] = Color;
-            }
-            
-            if (Size.HasValue)
-            {
-                json["size"] = Size;
-            }
-                
             if (Shape.HasValue())
             {
                 json["shape"] = Shape;
             }
             
+            var tooltip = Tooltip.ToJson();
+            if (tooltip.Any())
+            {
+                json["tooltip"] = tooltip;
+            }
+                
         //<< Serialization
         }
     }

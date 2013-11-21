@@ -66,6 +66,16 @@ namespace Kendo.Mvc.UI.Fluent
             configurator(new MapLayerFactory(container.Layers, container.ViewContext, container.UrlGenerator));
             return this;
         }
+
+        /// <summary>
+        /// The configuration of the map markers.
+        /// </summary>
+        /// <param name="configurator">The action that configures the markers.</param>
+        public MapBuilder Markers(Action<MapMarkerFactory> configurator)
+        {
+            configurator(new MapMarkerFactory(container.Markers));
+            return this;
+        }
         
         /// <summary>
         /// The default options for all markers.
@@ -74,16 +84,6 @@ namespace Kendo.Mvc.UI.Fluent
         public MapBuilder MarkerDefaults(Action<MapMarkerDefaultsSettingsBuilder> configurator)
         {
             configurator(new MapMarkerDefaultsSettingsBuilder(container.MarkerDefaults));
-            return this;
-        }
-        
-        /// <summary>
-        /// The initial markers to display on the map.
-        /// </summary>
-        /// <param name="configurator">The action that configures the markers.</param>
-        public MapBuilder Markers(Action<MapMarkerFactory> configurator)
-        {
-            configurator(new MapMarkerFactory(container.Markers));
             return this;
         }
         
@@ -121,12 +121,12 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The map theme name.The built-in themes are:
+        /// Specifies whether the map should wrap around the east-west edges.
         /// </summary>
-        /// <param name="value">The value that configures the theme.</param>
-        public MapBuilder Theme(string value)
+        /// <param name="value">The value that configures the wraparound.</param>
+        public MapBuilder Wraparound(bool value)
         {
-            container.Theme = value;
+            container.Wraparound = value;
 
             return this;
         }
