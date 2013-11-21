@@ -309,6 +309,8 @@ kendo_module({
                 item,
                 initialOffset = this.offset;
 
+            if (!items[0]) return;
+
             if (this.lastDirection) { // scrolling up
                 while(items[items.length - 1].bottom > top + height * 2) {
                     if (this.offset === 0) {
@@ -359,6 +361,8 @@ kendo_module({
                 up = (this.lastTop || 0) > top,
                 topBorder = top - padding,
                 bottomBorder = top + height + padding;
+
+            if (!items[0]) return;
 
             this.lastTop = top;
             this.lastDirection = up;
