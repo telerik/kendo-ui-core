@@ -83,7 +83,7 @@ namespace :download_builder do
         config_file_path = File.join(dist_path,  "kendo-config.#{VERSION}.json").sub(/((\w+|\.){6})\./, '\1 ')
 
         task config_file_path do |t|
-            sh "rm #{dist_path}kendo-config.*", :verbose => VERBOSE
+            sh "rm -f #{dist_path}kendo-config.*", :verbose => VERBOSE
             sh "node #{COMPILEJS} --kendo-config > '#{config_file_path}'", :verbose => VERBOSE
         end
 
