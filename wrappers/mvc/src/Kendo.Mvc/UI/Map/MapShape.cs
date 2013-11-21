@@ -1,12 +1,9 @@
 namespace Kendo.Mvc.UI
 {
     public enum MapMarkersShape
-    {
-        
-        Pin ,
-        
-        Circle 
-        
+    {        
+        Pin,        
+        PinTarget
     }
 }
 

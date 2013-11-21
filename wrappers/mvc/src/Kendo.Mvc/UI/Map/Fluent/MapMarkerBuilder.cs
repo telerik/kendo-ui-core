@@ -20,32 +20,10 @@ namespace Kendo.Mvc.UI.Fluent
         //>> Fields
         
         /// <summary>
-        /// The marker color. Accepts a valid CSS color string, including hex and rgb.
-        /// </summary>
-        /// <param name="value">The value that configures the color.</param>
-        public MapMarkerBuilder Color(string value)
-        {
-            container.Color = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// The marker size in pixels.
-        /// </summary>
-        /// <param name="value">The value that configures the size.</param>
-        public MapMarkerBuilder Size(double value)
-        {
-            container.Size = value;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// The marker shape. Supported shapes are "pin" and "circle".
+        /// The marker shape. Supported shapes are "pin" and "pinTarget".
         /// </summary>
         /// <param name="value">The value that configures the shape.</param>
-        public MapMarkerBuilder Shape(MapMarkerShape value)
+        public MapMarkerBuilder Shape(MapMarkersShape value)
         {
             container.Shape = value;
 
@@ -53,17 +31,26 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
-        /// Configures the position of the marker.
+        /// Configures the location of the marker.
         /// </summary>
         /// <param name="latitude">The latitude</param>
         /// <param name="longtitude">The longtitude</param>
-        public MapMarkerBuilder Position(double latitude, double longtitude)
+        public MapMarkerBuilder Location(double latitude, double longtitude)
         {
-            container.Position = new[] { latitude, longtitude };
+            container.Location = new[] { latitude, longtitude };
 
             return this;
         }
 
+        /// <summary>
+        /// The tooltip options for this marker.
+        /// </summary>
+        /// <param name="configurator">The action that configures the tooltip.</param>
+        public MapMarkerBuilder Tooltip(Action<MapMarkersTooltipSettingsBuilder> configurator)
+        {
+            configurator(new MapMarkersTooltipSettingsBuilder(container.Tooltip));
+            return this;
+        }
         
         //<< Fields
 

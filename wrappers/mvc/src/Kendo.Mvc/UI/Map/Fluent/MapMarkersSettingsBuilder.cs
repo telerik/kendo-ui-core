@@ -30,7 +30,7 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
-        /// The marker shape. Supported shapes are "pin" and "circle".
+        /// The marker shape. Supported shapes are "pin" and "pinTarget".
         /// </summary>
         /// <param name="value">The value that configures the shape.</param>
         public MapMarkersSettingsBuilder Shape(MapMarkersShape value)
