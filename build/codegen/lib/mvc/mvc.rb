@@ -32,7 +32,6 @@ module CodeGen::MVC::Wrappers
         'map.layerdefaults.tile.subdomains',
         'map.layers.subdomains',
         'map.markers',
-        'map.markers.position',
         'popover.popup.direction',
         'layout.id',
         'view.model',

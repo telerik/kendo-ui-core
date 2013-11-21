@@ -121,6 +121,12 @@ namespace Kendo.Mvc.UI
                 json["markerDefaults"] = markerDefaults;
             }
                 
+            var markers = Markers.ToJson();
+            if (markers.Any())
+            {
+                json["markers"] = markers;
+            }
+                
             if (MinZoom.HasValue)
             {
                 json["minZoom"] = MinZoom;
