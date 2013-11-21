@@ -4,6 +4,7 @@ namespace Kendo.Mvc.UI
     using System.Collections.Generic;
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
+    using System.Linq;
 
     public class MapMarkerDefaultsSettings : JsonObject
     {
