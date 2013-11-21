@@ -37,57 +37,81 @@
         </style>
     </head>
     <body>
-<div data-role="view" data-init="mobileListViewEndlessScrolling" data-title="Scroll down to load">
-    <header data-role="header">
-        <div data-role="navbar">
-            <span data-role="view-title"></span>
-            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        <div data-role="view" data-init="mobileListViewFiltering" data-title="Scroll down to load">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title"></span>
+                    <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+                </div>
+            </header>
+
+            <ul id="filterable-listview"></ul>
         </div>
-    </header>
 
-    <ul id="endless-scrolling"></ul>
-</div>
-
-<script type="text/x-kendo-tmpl" id="endless-scrolling-template">
-    <div class="product">
-        <h3>#:ProductName#</h3>
-        <p>#:kendo.toString(UnitPrice, "c")#</p>
-    </div>
-</script>
-
-<script>
-    var dataSource = new kendo.data.DataSource({
-        type: "odata",
-        transport: {
-            read: {
-                url: "http://demos.kendoui.com/service/Northwind.svc/Products"
-            }
-        },
-        schema: {
-            total: function () { return 77; }
-        },
-        sort: {
-            field: "ProductID",
-            dir: "desc"
-        },
-        serverPaging: true,
-        serverSorting: true,
-        pageSize: 50
-    });
-
-    function mobileListViewEndlessScrolling() {
-
-        $("#endless-scrolling").kendoMobileListView({
-            dataSource: dataSource,
-            template: $("#endless-scrolling-template").text(),
-            endlessScroll: true
-        });
-    }
-</script>
-
+        <script type="text/x-kendo-tmpl" id="mobile-listview-filtering-template">
+            <div class="product">
+                <h3>#:ProductName#</h3>
+                <p>#:kendo.toString(UnitPrice, "c")#</p>
+            </div>
+        </script>
 
         <script>
-            new kendo.mobile.Application(document.body);
+            function mobileListViewFiltering() {
+                var dataSource = new kendo.data.DataSource({
+                    type: "odata",
+                    transport: {
+                        read: {
+                            url: "http://demos.kendoui.com/service/Northwind.svc/Products"
+                        }
+                    },
+                    sort: {
+                        field: "ProductName",
+                        dir: "desc"
+                    },
+                    serverPaging: true,
+                    serverFiltering: true,
+                    serverSorting: true,
+                    pageSize: 50
+                });
+
+                $("#filterable-listview").kendoMobileListView({
+                    dataSource: dataSource,
+                    template: $("#mobile-listview-filtering-template").text(),
+                    autoBind: false,
+                    filterable: {
+                        field: "ProductName",
+                        operator: "startswith"
+                    },
+                    endlessScroll: true
+                });
+            }
+        </script>
+
+        <style scoped>
+            .product h3 {
+                font-size: 1.3em;
+                line-height: 1.4em;
+                margin: 0;
+                padding: 0;
+                height: 1.3em;
+                overflow: hidden;
+            }
+            .product p {
+                font-size: 1em;
+                margin: 0;
+                padding: .3em 0 0;
+            }
+            .pullImage {
+                width: 64px;
+                height: 64px;
+                border-radius: 3px;
+                float: left;
+                margin-right: 10px;
+            }
+        </style>
+
+        <script>
+            var app = new kendo.mobile.Application(document.body);
         </script>
     </body>
 </html>

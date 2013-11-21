@@ -183,8 +183,8 @@ kendo_module({
             $.extend(this, {
                 virtual: true,
                 forcedEnabled: true,
-                _virtualMin: 1000,
-                _virtualMax: -1000
+                _virtualMin: 0,
+                _virtualMax: 0
             });
         },
 
