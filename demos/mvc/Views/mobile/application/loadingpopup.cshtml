@@ -18,7 +18,8 @@
     function hideLoader() {
         clearInterval(interval);
         kendoMobileApplication.hideLoading(); //hide loading popup
-        loaderElement.removeClass("loaderHeading").text("Loading...");
+        kendoMobileApplication.changeLoadingMessage("Loading...");
+        loaderElement.removeClass("loaderHeading");
     }
 
     function viewHide(e) {
@@ -30,12 +31,13 @@
         hideLoader();
         var seconds = 5;
 
-        loaderElement.text(seconds + " seconds left!").addClass("loaderHeading");
+        loaderElement.addClass("loaderHeading");
+        kendoMobileApplication.changeLoadingMessage(seconds + " seconds left!");
 
         kendoMobileApplication.showLoading(); //show loading popup
 
         interval = setInterval(function() {
-            loaderElement.text(--seconds + " seconds left!"); //update text of the loading popup
+            kendoMobileApplication.changeLoadingMessage(--seconds + " seconds left!"); //update text of the loading popup
 
             if (seconds == 0) {
                 showButton.animate({ opacity: 1 });
