@@ -235,14 +235,43 @@ module CodeGen::TypeScript
         end
     end
 
+    class ParameterCombinations
+        include Enumerable
+
+        def initialize(parameters)
+            @parameters = parameters
+        end
+
+        def each &block
+            if @parameters.empty?
+                block.call @parameters
+            else
+                type_indices = @parameters.map { |p| 1.step(p.type.size, 1).to_a.map { |i| i-1 } }
+
+                type_indices_product = type_indices[0].product(*type_indices[1..type_indices.length])
+                #puts "multi-signature method: #{type_indices_product.size} signatures, #{@parameters[0].type.join(',')}" if type_indices_product.size > 1
+
+                type_indices_product.each do |combination|
+                    params = @parameters.each_with_index.map do |p, index|
+                        param = p.clone()
+                        param.type = [ param.type[combination[index]] ]
+                        param
+                    end
+
+                    block.call params
+                end
+            end
+        end
+    end
+
     METHOD_JSDOC = ERB.new(%{/**
         <%= description %>
         @method
-        <%- unique_parameters.each do |parameter| -%>
-        @param {<%= parameter.type_script_type %>} <%= parameter.name %> - <%= parameter.description %>
+        <%- combination.each do |parameter| -%>
+        @param <%= parameter.name %> - <%= parameter.description %>
         <%- end -%>
         <%- if result -%>
-        @returns {<%= result.type_script_type %>} <%= result.description %>
+        @returns <%= result.description %>
         <%- end -%>
         */
         <%= declaration %>}, 0, '-')
@@ -263,22 +292,33 @@ module CodeGen::TypeScript
             @owner.type_script_type + @name.pascalize
         end
 
-        def type_script_parameters
-            unique_parameters.map { |p| "#{p.name}#{p.optional ? "?" : ""}: #{p.type_script_type}" }.join(', ')
-        end
+        def type_script_parameters(parameters)
+            params = parameters.map do |p|
+                type_script_type = CodeGen::TypeScript.type(p.type[0])
 
-        def type_script_declaration
-            declaration = "#{name}(#{type_script_parameters}): "
-
-            if @result
-                declaration += @result.type_script_type
-            else
-                declaration += 'void'
+                "#{p.name}#{p.optional ? "?" : ""}: #{type_script_type}"
             end
 
-            declaration = METHOD_JSDOC.result(binding) if jsdoc
+            params.join(', ')
+        end
 
-            declaration + ';'
+        def type_script_declarations
+            combinations = ParameterCombinations.new(unique_parameters)
+
+            if @result
+                result_type = @result.type_script_type
+            else
+                result_type = 'void'
+            end
+
+            combinations.map do |combination|
+
+                declaration = "#{name}(#{type_script_parameters(combination)}): #{result_type}"
+
+                declaration = METHOD_JSDOC.result(binding) if jsdoc
+
+                declaration + ';'
+            end
         end
 
         def unique_parameters
@@ -512,7 +552,7 @@ namespace :type_script do
         namespace branch do
             desc "Test TypeScript generation"
             task :test do
-                sh "cd docs && git fetch && git reset --hard origin/#{branch}"
+#                sh "cd docs && git fetch && git reset --hard origin/#{branch}"
 
                 SUITES.each do |suite, dependencies|
                     path = "dist/kendo.#{suite}.d.ts"
