@@ -18,7 +18,7 @@ rule /^dist\/download-builder.+\.min\.js$/ =>
 
             f.write contents;
         end
-        compilejs(t.name, "--no-amd")
+        compilejs(t.name, "--no-amd --no-srcmap")
     end
 
 namespace :download_builder do
