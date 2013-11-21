@@ -9,6 +9,16 @@ class Barcode extends \Kendo\UI\Widget {
 //>> Properties
 
     /**
+    * Sets the preferred rendering engine.
+If it is not supported by the browser, the Barcode will switch to the first available mode.The supported values are:
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\Barcode
+    */
+    public function renderAs($value) {
+        return $this->setProperty('renderAs', $value);
+    }
+
+    /**
     * The background of the barcode area.
 Any valid CSS color string will work here, including hex and rgb.
     * @param string $value
@@ -62,16 +72,6 @@ Any valid CSS color string will work here, including hex and rgb.
     */
     public function padding($value) {
         return $this->setProperty('padding', $value);
-    }
-
-    /**
-    * Sets the preferred rendering engine.
-If it is not supported by the browser, the Barcode will switch to the first available mode.The supported values are:
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\Barcode
-    */
-    public function renderAs($value) {
-        return $this->setProperty('renderAs', $value);
     }
 
     /**

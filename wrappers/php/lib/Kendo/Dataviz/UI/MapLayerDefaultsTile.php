@@ -28,12 +28,21 @@ class MapLayerDefaultsTile extends \Kendo\SerializableObject {
     }
 
     /**
-    * The attribution for all tile layers.
+    * The attribution of all tile layers.
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapLayerDefaultsTile
     */
     public function attribution($value) {
         return $this->setProperty('attribution', $value);
+    }
+
+    /**
+    * The subdomain of all tile layers.
+    * @param array $value
+    * @return \Kendo\Dataviz\UI\MapLayerDefaultsTile
+    */
+    public function subdomains($value) {
+        return $this->setProperty('subdomains', $value);
     }
 
     /**
@@ -43,15 +52,6 @@ class MapLayerDefaultsTile extends \Kendo\SerializableObject {
     */
     public function opacity($value) {
         return $this->setProperty('opacity', $value);
-    }
-
-    /**
-    * The subdomains for the all tile layers.
-    * @param array $value
-    * @return \Kendo\Dataviz\UI\MapLayerDefaultsTile
-    */
-    public function subdomains($value) {
-        return $this->setProperty('subdomains', $value);
     }
 
 //<< Properties

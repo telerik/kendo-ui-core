@@ -56,7 +56,7 @@ using System.Web.Mvc;
         }
         
         /// <summary>
-        /// The attribution for the layer.
+        /// The attribution for the layer. Accepts valid HTML.
         /// </summary>
         /// <param name="value">The value that configures the attribution.</param>
         public MapLayerBuilder Attribution(string value)

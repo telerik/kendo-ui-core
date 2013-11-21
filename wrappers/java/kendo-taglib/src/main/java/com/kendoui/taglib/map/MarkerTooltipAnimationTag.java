@@ -6,25 +6,23 @@ import com.kendoui.taglib.BaseTag;
 
 
 
-import com.kendoui.taglib.MapTag;
-
 
 
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class MarkerDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces */ {
+public class MarkerTooltipAnimationTag extends  BaseTag  /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        MapTag parent = (MapTag)findParentWithClass(MapTag.class);
+        MarkerTooltipTag parent = (MarkerTooltipTag)findParentWithClass(MarkerTooltipTag.class);
 
 
-        parent.setMarkerDefaults(this);
+        parent.setAnimation(this);
 
 //<< doEndTag
 
@@ -50,19 +48,15 @@ public class MarkerDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
 //>> Attributes
 
     public static String tagName() {
-        return "map-markerDefaults";
+        return "map-marker-tooltip-animation";
     }
 
-    public void setTooltip(com.kendoui.taglib.map.MarkerDefaultsTooltipTag value) {
-        setProperty("tooltip", value);
+    public void setClose(com.kendoui.taglib.map.MarkerTooltipAnimationCloseTag value) {
+        setProperty("close", value);
     }
 
-    public java.lang.String getShape() {
-        return (java.lang.String)getProperty("shape");
-    }
-
-    public void setShape(java.lang.String value) {
-        setProperty("shape", value);
+    public void setOpen(com.kendoui.taglib.map.MarkerTooltipAnimationOpenTag value) {
+        setProperty("open", value);
     }
 
 //<< Attributes

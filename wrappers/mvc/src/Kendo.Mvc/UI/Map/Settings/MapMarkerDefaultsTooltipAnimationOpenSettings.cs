@@ -1,34 +1,25 @@
 namespace Kendo.Mvc.UI
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Web.Routing;
     using Kendo.Mvc.Extensions;
 
-    public class MapMarkerDefaultsSettings : JsonObject
+    public class MapMarkerDefaultsTooltipAnimationOpenSettings : JsonObject
     {
-        public MapMarkerDefaultsSettings()
+        public MapMarkerDefaultsTooltipAnimationOpenSettings()
         {
             //>> Initialization
         
-            Tooltip = new MapMarkerDefaultsTooltipSettings();
-                
         //<< Initialization
-
-            
         }
-
-        
 
         //>> Fields
         
-        public string Shape { get; set; }
+        public string Effects { get; set; }
         
-        public MapMarkerDefaultsTooltipSettings Tooltip
-        {
-            get;
-            private set;
-        }
+        public double? Duration { get; set; }
         
         //<< Fields
 
@@ -36,15 +27,14 @@ namespace Kendo.Mvc.UI
         {
             //>> Serialization
         
-            if (Shape.HasValue())
+            if (Effects.HasValue())
             {
-                json["shape"] = Shape;
+                json["effects"] = Effects;
             }
             
-            var tooltip = Tooltip.ToJson();
-            if (tooltip.Any())
+            if (Duration.HasValue)
             {
-                json["tooltip"] = tooltip;
+                json["duration"] = Duration;
             }
                 
         //<< Serialization
