@@ -380,7 +380,93 @@
                     showNow(dataPointMock);
                     equal(element.css("opacity"), 1);
                 });
+            })();
 
+            (function() {
+                var tooltip,
+                    plotArea,
+                    point;
+
+                function createPlotArea() {
+                    plotArea = {
+                        categoryAxis: {
+                            pointCategoryIndex: function() {
+                            },
+
+                            getCategory: function() {
+                            },
+
+                            getSlot: function() {
+                                return new dataviz.Box2D();
+                            },
+
+                            options: {
+                                vertical: false
+                            }
+                        }
+                    };
+                }
+
+                function createTooltip(options) {
+                    createPlotArea();
+                    createPoint();
+
+                    tooltip = new dataviz.SharedTooltip($("#chart"), plotArea, options);
+                }
+
+                function createPoint(options) {
+                    point = {
+                        value: 1,
+                        box: new dataviz.Box2D(0, 0, 10, 10),
+                        options: {
+                            tooltip: {
+                                template: "foo"
+                            }
+                        },
+                        series: {
+                            name: "series"
+                        },
+                        tooltipAnchor: function() {
+                            return new dataviz.Point2D();
+                        }
+                    };
+
+                    $.extend(point, options);
+                }
+
+                function show() {
+                    tooltip.showAt([point], new dataviz.Point2D(0, 0));
+                }
+
+                // ------------------------------------------------------------
+                module("Shared Tooltip", {
+                    setup: function() {
+                        createTooltip();
+                    }
+                });
+
+                test("shows shared tooltip", function() {
+                    show();
+                    ok(tooltip.element.html().indexOf("foo") !== -1);
+                });
+
+                test("shows series name in default template", function() {
+                    show();
+                    equal(tooltip.element.find("td").length, 2);
+                    ok(tooltip.element.html().indexOf("series") !== -1);
+                });
+
+                test("shows shared tooltip for series w/o name", function() {
+                    point.series.name = null;
+                    show();
+                    ok(tooltip.element.html().indexOf("foo") !== -1);
+                });
+
+                test("doesn't show empty series name in default template", function() {
+                    point.series.name = null;
+                    show();
+                    equal(tooltip.element.find("td").length, 1);
+                });
             })();
 
         </script>
