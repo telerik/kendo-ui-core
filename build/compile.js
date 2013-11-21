@@ -7,6 +7,7 @@ var path = require("path");
 var OPT = require("optimist");
 var ARGV = OPT
     .describe("amd", "Wrap for RequireJS")
+    .describe("srcmap", "Generate source map")
     .describe("deps", "List dependencies")
     .describe("bundle", "Create a bundle")
     .describe("kendo-config", "Generate download-builder/kendo-config.json (to STDOUT)")
@@ -15,6 +16,7 @@ var ARGV = OPT
     .describe("nomangle", "Don't mangle names (helps debugging)")
     .describe("genmap", "Generate source maps")
     .boolean("amd").default("amd", true)
+    .boolean("srcmap").default("srcmap", true)
     .boolean("deps")
     .boolean("bundle")
     .boolean("kendo-config")
@@ -116,9 +118,13 @@ if (ARGV.bundle) {
         toplevel = get_wrapper().wrap("kendo", [], toplevel);
     }
     var code = toplevel.print_to_string(codegen_options);
-    code += "\n//@ sourceMappingURL=" + path.basename(destination_min) + ".map";
     fs.writeFileSync(destination_min, code);
-    fs.writeFileSync(destination_min + ".map", source_map.toString());
+
+    if (ARGV["srcmap"]) {
+        code += "\n//@ sourceMappingURL=" + path.basename(destination_min) + ".map";
+        fs.writeFileSync(destination_min + ".map", source_map.toString());
+    }
+
     process.exit(0);
 }
 
@@ -255,9 +261,12 @@ files.forEach(function (file){
     }
 
     code = ast.print_to_string(codegen_options);
-    code += "\n//@ sourceMappingURL=" + path.basename(output) + ".map";
     fs.writeFileSync(output, code);
-    fs.writeFileSync(output + ".map", source_map.toString());
+
+    if (ARGV["srcmap"]) {
+        code += "\n//@ sourceMappingURL=" + path.basename(output) + ".map";
+        fs.writeFileSync(output + ".map", source_map.toString());
+    }
 });
 
 function extract_widget_info(ast) {
