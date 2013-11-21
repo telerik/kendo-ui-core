@@ -1511,7 +1511,6 @@ kendo_module({
             else if (item instanceof Rect) {
                 rect = item.clone();
             }
-            console.log(rect);
             if (options.align !== "none" || !viewport.contains(rect.center())) {
                 if (options.align === "none") {
                     options.align = "center middle";
