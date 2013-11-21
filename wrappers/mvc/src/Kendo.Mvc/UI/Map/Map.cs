@@ -24,10 +24,10 @@ namespace Kendo.Mvc.UI
             LayerDefaults = new MapLayerDefaultsSettings();
                 
             Layers = new List<MapLayer>();
+
+            Markers = new List<MapMarker>();
                 
             MarkerDefaults = new MapMarkerDefaultsSettings();
-                
-            Markers = new List<MapMarker>();
                 
         //<< Initialization
         }
@@ -61,14 +61,14 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-        
-        public MapMarkerDefaultsSettings MarkerDefaults
+
+        public List<MapMarker> Markers
         {
             get;
             private set;
         }
         
-        public List<MapMarker> Markers
+        public MapMarkerDefaultsSettings MarkerDefaults
         {
             get;
             private set;
@@ -80,7 +80,7 @@ namespace Kendo.Mvc.UI
         
         public double? MinSize { get; set; }
         
-        public string Theme { get; set; }
+        public bool? Wraparound { get; set; }
         
         public double? Zoom { get; set; }
         
@@ -142,11 +142,11 @@ namespace Kendo.Mvc.UI
                 json["minSize"] = MinSize;
             }
                 
-            if (Theme.HasValue())
+            if (Wraparound.HasValue)
             {
-                json["theme"] = Theme;
+                json["wraparound"] = Wraparound;
             }
-            
+                
             if (Zoom.HasValue)
             {
                 json["zoom"] = Zoom;

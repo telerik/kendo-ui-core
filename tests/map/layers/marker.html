@@ -231,6 +231,16 @@
                 equal(marker.tooltip.options.content({}), marker.options.location.toString());
             });
 
+            test("tooltip template converts array to location", function() {
+                marker = new Marker({
+                   location: [20, 10],
+                   tooltip: { template: "#= location.toString() #" }
+                });
+                marker.addTo(layer);
+
+                equal(marker.tooltip.options.content({}), new Location(20, 10).toString());
+            });
+
             test("tooltip template receives marker", function() {
                 marker = new Marker({
                    location: new Location(20, 10),
@@ -257,6 +267,11 @@
             test("sets marker default options", function() {
                 var marker = Marker.create({ foo: true }, { bar: true });
                 ok(marker.options.foo && marker.options.bar);
+            });
+
+            test("default options are overriden by instance options", function() {
+                var marker = Marker.create({ foo: true }, { foo: false });
+                ok(marker.options.foo);
             });
 
             test("returns existing instance", function() {

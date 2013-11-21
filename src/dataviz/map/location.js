@@ -19,6 +19,7 @@ kendo_module({
         deepExtend = kendo.deepExtend,
 
         util = dataviz.util,
+        defined = util.defined,
         round = util.round,
         valueOrDefault = util.valueOrDefault;
 
@@ -75,12 +76,14 @@ kendo_module({
     };
 
     Location.create = function(arg0, arg1) {
-        if (arg0 instanceof Location) {
-            return arg0;
-        } else if (arguments.length === 1 && arg0.length === 2) {
-            return Location.fromLatLng(arg0);
-        } else {
-            return new Location(arg0, arg1);
+        if (defined(arg0)) {
+            if (arg0 instanceof Location) {
+                return arg0;
+            } else if (arguments.length === 1 && arg0.length === 2) {
+                return Location.fromLatLng(arg0);
+            } else {
+                return new Location(arg0, arg1);
+            }
         }
     };
 

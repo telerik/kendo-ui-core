@@ -53,12 +53,8 @@ public class MarkerDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
         return "map-markerDefaults";
     }
 
-    public java.lang.String getColor() {
-        return (java.lang.String)getProperty("color");
-    }
-
-    public void setColor(java.lang.String value) {
-        setProperty("color", value);
+    public void setTooltip(com.kendoui.taglib.map.MarkerDefaultsTooltipTag value) {
+        setProperty("tooltip", value);
     }
 
     public java.lang.String getShape() {
@@ -67,14 +63,6 @@ public class MarkerDefaultsTag extends  BaseTag  /* interfaces */ /* interfaces 
 
     public void setShape(java.lang.String value) {
         setProperty("shape", value);
-    }
-
-    public float getSize() {
-        return (float)getProperty("size");
-    }
-
-    public void setSize(float value) {
-        setProperty("size", value);
     }
 
 //<< Attributes

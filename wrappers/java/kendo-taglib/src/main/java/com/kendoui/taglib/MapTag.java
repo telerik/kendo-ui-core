@@ -141,12 +141,12 @@ public class MapTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("minZoom", value);
     }
 
-    public java.lang.String getTheme() {
-        return (java.lang.String)getProperty("theme");
+    public boolean getWraparound() {
+        return (boolean)getProperty("wraparound");
     }
 
-    public void setTheme(java.lang.String value) {
-        setProperty("theme", value);
+    public void setWraparound(boolean value) {
+        setProperty("wraparound", value);
     }
 
     public float getZoom() {

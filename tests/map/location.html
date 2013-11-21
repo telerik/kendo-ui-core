@@ -78,6 +78,10 @@
                 ok(Location.create(new Location(10, 20)).equals(new Location(10, 20)));
             });
 
+            test("create from undefined", function() {
+                equal(Location.create(undefined), undefined);
+            });
+
             test("round rounds lng", function() {
                 loc.lng = 5.5;
                 loc.round();

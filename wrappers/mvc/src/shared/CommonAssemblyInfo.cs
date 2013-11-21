@@ -11,14 +11,14 @@ using System.Security;
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(true)]
 #if MVC3
-[assembly: AssemblyVersion("2013.3.1022.340")]
-[assembly: AssemblyFileVersion("2013.3.1022.340")]
+[assembly: AssemblyVersion("2014.1.21.340")]
+[assembly: AssemblyFileVersion("2014.1.21.340")]
 #elif MVC4
-[assembly: AssemblyVersion("2013.3.1022.440")]
-[assembly: AssemblyFileVersion("2013.3.1022.440")]
+[assembly: AssemblyVersion("2014.1.21.440")]
+[assembly: AssemblyFileVersion("2014.1.21.440")]
 #elif MVC5
-[assembly: AssemblyVersion("2013.3.1022.545")]
-[assembly: AssemblyFileVersion("2013.3.1022.545")]
+[assembly: AssemblyVersion("2014.1.21.545")]
+[assembly: AssemblyFileVersion("2014.1.21.545")]
 #endif
 [assembly: SecurityRules(SecurityRuleSet.Level1)]
 [assembly: AllowPartiallyTrustedCallers]

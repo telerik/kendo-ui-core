@@ -25,7 +25,7 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * The attribution for the layer.
+    * The attribution for the layer. Accepts valid HTML.
     * @param string $value
     * @return \Kendo\Dataviz\UI\MapLayer
     */
@@ -34,21 +34,22 @@ data source is fired. By default the widget will bind to the data source specifi
     }
 
     /**
-    * The the opacity of all tile layers.
-    * @param string $value
-    * @return \Kendo\Dataviz\UI\MapLayer
-    */
-    public function opacity($value) {
-        return $this->setProperty('opacity', $value);
-    }
-
-    /**
-    * The subdomains for the all tile layers.
+    * A list of subdomains to use for loading tiles.
+Alternating between different subdomains allows more requests to be executed in parallel.
     * @param array $value
     * @return \Kendo\Dataviz\UI\MapLayer
     */
     public function subdomains($value) {
         return $this->setProperty('subdomains', $value);
+    }
+
+    /**
+    * The the opacity for the layer.
+    * @param string $value
+    * @return \Kendo\Dataviz\UI\MapLayer
+    */
+    public function opacity($value) {
+        return $this->setProperty('opacity', $value);
     }
 
     /**
