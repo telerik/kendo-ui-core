@@ -1612,8 +1612,8 @@ kendo_module({
         },
         pan: function (pan, animated) {
             if (pan instanceof Point && !pan.equals(this._pan)) {
+                this._animatePan(pan, !animated);
                 this._storePan(pan);
-                this._panTransform(pan, animated);
 
                 this.trigger(PAN);
             }
@@ -1884,26 +1884,39 @@ kendo_module({
         _getValidZoom: function (zoom) {
             return Math.min(Math.max(zoom, 0.55), 2.0); //around 0.5 something exponential happens...!?
         },
-        _panTransform: function (pos, animated) {
+        _panTransform: function (pos) {
             var diagram = this,
                 pan = pos || diagram._pan;
 
-            if (this.scroller) {
-                var scrollMethod = (animated === true ? "animatedScrollTo" : "scrollTo");
-
-                diagram.scroller[scrollMethod](pan.x, pan.y);
-                this._zoomMainLayer();
+            if(this.scroller) {
+                diagram.scroller.scrollTo(pan.x, pan.y);
+                diagram._zoomMainLayer();
             }
             else {
-                if (animated) {
-                    var t = new Ticker();
-                    t.addAdapter(new PanAdapter({pan: pan, diagram: this}));
-                    t.play();
+                diagram._transformMainLayer();
+            }
+        },
+        _animatePan: function(pan, skipAnimation) {
+            var diagram = this;
+
+            if(skipAnimation) {
+                this._panTransform(pan);
+            }
+            else {
+                if(diagram.scroller) {
+                    diagram.scroller.animatedScrollTo(pan.x, pan.y);
+                    diagram._zoomMainLayer();
                 }
                 else {
-                    diagram._transformMainLayer();
+                    var t = new Ticker();
+                    t.addAdapter(new PanAdapter({pan: pan, diagram: this}));
+                    t.onStep = function() { diagram._finishPan(); };
+                    t.play();
                 }
             }
+        },
+        _finishPan: function() {
+           this.trigger(PAN);
         },
         _storePan: function (pan) {
             this._pan = pan;
