@@ -29,8 +29,9 @@ module CodeGen::MVC::Wrappers
     IGNORED = [
         'map.center',
         'map.layers.datasource',
-		'map.layerdefaults.tile.subdomains',
-		'map.layers.subdomains',
+        'map.layerdefaults.tile.subdomains',
+        'map.layers.subdomains',
+        'map.markers',
         'map.markers.position',
         'popover.popup.direction',
         'layout.id',
