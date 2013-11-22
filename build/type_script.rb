@@ -263,7 +263,7 @@ module CodeGen::TypeScript
         end
 
         def each &block
-            @combination.each { |p| block.call p }
+            @combinations.each { |p| block.call p }
         end
     end
 
