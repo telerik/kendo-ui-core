@@ -26,8 +26,8 @@ namespace Kendo.Mvc.UI
             Layers = new List<MapLayer>();
 
             Markers = new List<MapMarker>();
-                
-            MarkerDefaults = new MapMarkerDefaultsSettings();
+
+            MarkerDefaults = new MapMarkerDefaultsSettings(this);
                 
         //<< Initialization
         }
@@ -67,7 +67,7 @@ namespace Kendo.Mvc.UI
             get;
             private set;
         }
-        
+
         public MapMarkerDefaultsSettings MarkerDefaults
         {
             get;

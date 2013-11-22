@@ -870,9 +870,11 @@
     <Compile Include="UI\HierarchicalDataSource\Fluent\HierarchicalModelDescriptorBuilder.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalDataSource.cs" />
     <Compile Include="UI\HierarchicalDataSource\HierarchicalModelDescriptor.cs" />
+    <Compile Include="UI\Map\Fluent\MapMarkerTooltipBuilder.cs" />
     <Compile Include="UI\Map\Fluent\GeoJsonDataSourceBuilder.cs" />
     <Compile Include="UI\Map\Fluent\MapLayerDataSourceBuilder.cs" />
     <Compile Include="UI\Map\Map.cs" />
+    <Compile Include="UI\Map\Settings\MapMarkerDefaultsSettings.cs" />
     <Compile Include="UI\Menu\MenuDirection.cs" />
     <Compile Include="UI\MobileListView\Fluent\MobileListViewLinkItemBuilder.cs" />
     <Compile Include="UI\MobileListView\Fluent\MobileListViewItemBuilderBase.cs" />
@@ -1359,6 +1361,7 @@
     <Compile Include="UI\TimezoneEditor\Fluent\TimezoneEditorEventBuilder.cs" />
     <Compile Include="UI\TimezoneEditor\Html\TimezoneEditorHtmlBuilder.cs" />
     <Compile Include="UI\TimezoneEditor\TimezoneEditor.cs" />
+    <Compile Include="UI\Tooltip\Fluent\TooltipSettingsBuilder.cs" />
     <Compile Include="UI\Tooltip\Fluent\TooltipEventBuilder.cs" />
     <Compile Include="UI\Tooltip\TooltipShowOn.cs" />
     <Compile Include="UI\Tooltip\Fluent\TooltipBuilder.cs" />
@@ -1783,7 +1786,6 @@
     <Compile Include="UI\Map\Fluent\MapLayerFillSettingsBuilder.cs" />
     <Compile Include="UI\Map\Settings\MapLayerStrokeSettings.cs" />
     <Compile Include="UI\Map\Fluent\MapLayerStrokeSettingsBuilder.cs" />
-    <Compile Include="UI\Map\Settings\MapMarkerDefaultsSettings.cs" />
     <Compile Include="UI\Map\Fluent\MapMarkerDefaultsSettingsBuilder.cs" />
     <Compile Include="UI\Map\Fluent\MapMarkerFactory.cs" />
     <Compile Include="UI\Map\MapMarker.cs" />
@@ -1808,4 +1810,7 @@
     <Compile Include="UI\Map\Settings\MapLayerStyleStrokeSettings.cs" />
     <Compile Include="UI\Map\Fluent\MapLayerStyleStrokeSettingsBuilder.cs" />
   </ItemGroup>
-<ItemGroup><Compile Include="UI\Map\MapType.cs" /></ItemGroup><ItemGroup><Compile Include="UI\Map\Settings\MapMarkerDefaultsTooltipSettings.cs" /><Compile Include="UI\Map\Fluent\MapMarkerDefaultsTooltipSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapMarkerDefaultsTooltipAnimationSettings.cs" /><Compile Include="UI\Map\Fluent\MapMarkerDefaultsTooltipAnimationSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapMarkerDefaultsTooltipAnimationCloseSettings.cs" /><Compile Include="UI\Map\Fluent\MapMarkerDefaultsTooltipAnimationCloseSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapMarkerDefaultsTooltipAnimationOpenSettings.cs" /><Compile Include="UI\Map\Fluent\MapMarkerDefaultsTooltipAnimationOpenSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapMarkerDefaultsTooltipContentSettings.cs" /><Compile Include="UI\Map\Fluent\MapMarkerDefaultsTooltipContentSettingsBuilder.cs" /></ItemGroup><ItemGroup><Compile Include="UI\Map\Settings\MapMarkersSettings.cs" /><Compile Include="UI\Map\Fluent\MapMarkersSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapMarkersTooltipSettings.cs" /><Compile Include="UI\Map\Fluent\MapMarkersTooltipSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapMarkersTooltipAnimationSettings.cs" /><Compile Include="UI\Map\Fluent\MapMarkersTooltipAnimationSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapMarkersTooltipAnimationCloseSettings.cs" /><Compile Include="UI\Map\Fluent\MapMarkersTooltipAnimationCloseSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapMarkersTooltipAnimationOpenSettings.cs" /><Compile Include="UI\Map\Fluent\MapMarkersTooltipAnimationOpenSettingsBuilder.cs" /><Compile Include="UI\Map\Settings\MapMarkersTooltipContentSettings.cs" /><Compile Include="UI\Map\Fluent\MapMarkersTooltipContentSettingsBuilder.cs" /></ItemGroup></Project>
+  <ItemGroup>
+    <Compile Include="UI\Map\MapType.cs" />
+  </ItemGroup>
+</Project>

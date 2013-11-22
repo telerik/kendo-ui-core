@@ -50,6 +50,14 @@ namespace Kendo.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
+            var options = ToJson();
+            writer.Write(Initializer.InitializeFor(SanitizeSelector(Container), "Tooltip", options));
+
+            base.WriteInitializationScript(writer);
+        }
+
+        public IDictionary<string, object> ToJson()
+        {
             var options = new Dictionary<string, object>(Events);
 
             if (Filter.HasValue())
@@ -59,7 +67,7 @@ namespace Kendo.Mvc.UI
 
             if (Position != TooltipPosition.Bottom)
             {
-                options["position"] = Enum.GetName(typeof(TooltipPosition), Position).ToLowerInvariant(); 
+                options["position"] = Enum.GetName(typeof(TooltipPosition), Position).ToLowerInvariant();
             }
 
             if (ShowAfter.HasValue)
@@ -107,9 +115,7 @@ namespace Kendo.Mvc.UI
 
             SerializeContent(options);
 
-            writer.Write(Initializer.InitializeFor(SanitizeSelector(Container), "Tooltip", options));
-
-            base.WriteInitializationScript(writer);
+            return options;
         }
 
         private void SerializeContent(Dictionary<string, object> options)
