@@ -77,9 +77,7 @@ kendo_module({
                 navigator: {
                     panStep: 100
                 },
-                attribution: {
-                    visible: true
-                }
+                attribution: true
             },
             layers: [],
             layerDefaults: {
@@ -99,7 +97,7 @@ kendo_module({
             zoom: 3,
             minSize: 256,
             minZoom: 1,
-            maxZoom: 18,
+            maxZoom: 19,
             markers: [],
             markerDefaults: {
                 shape: "pinTarget",
