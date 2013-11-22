@@ -235,32 +235,37 @@ module CodeGen::TypeScript
         end
     end
 
+    # explodes parameters with multiple types to an array of parameters, each with a single type
     class ParameterCombinations
         include Enumerable
 
         def initialize(parameters)
+            if parameters.any?
+                type_indices = parameters.map { |p| 0.step(p.type.size-1).to_a }
+
+                type_indices_product = type_indices[0].product(*type_indices[1..type_indices.length])
+
+                parameters = type_indices_product.map do |combination|
+                    parameters.each_with_index.map do |p, index|
+                        param = p.clone()
+                        param.type = CodeGen::TypeScript.type(param.type[combination[index]])
+                        param
+                    end
+                end
+
+                # remove duplicate signatures, caused by type translation
+                parameters.uniq! do |params|
+                    params.map { |p| p.type }.join(':')
+                end
+            else
+                parameters = [[]]
+            end
+
             @parameters = parameters
         end
 
         def each &block
-            if @parameters.empty?
-                block.call @parameters
-            else
-                type_indices = @parameters.map { |p| 1.step(p.type.size, 1).to_a.map { |i| i-1 } }
-
-                type_indices_product = type_indices[0].product(*type_indices[1..type_indices.length])
-                #puts "multi-signature method: #{type_indices_product.size} signatures, #{@parameters[0].type.join(',')}" if type_indices_product.size > 1
-
-                type_indices_product.each do |combination|
-                    params = @parameters.each_with_index.map do |p, index|
-                        param = p.clone()
-                        param.type = [ param.type[combination[index]] ]
-                        param
-                    end
-
-                    block.call params
-                end
-            end
+            @parameters.each { |p| block.call p }
         end
     end
 
@@ -294,9 +299,7 @@ module CodeGen::TypeScript
 
         def type_script_parameters(parameters)
             params = parameters.map do |p|
-                type_script_type = CodeGen::TypeScript.type(p.type[0])
-
-                "#{p.name}#{p.optional ? "?" : ""}: #{type_script_type}"
+                "#{p.name}#{p.optional ? "?" : ""}: #{p.type}"
             end
 
             params.join(', ')
@@ -545,19 +548,22 @@ namespace :type_script do
                  .include('docs/api/framework/*.md'),
 
         'mobile' => FileList["docs/api/mobile/*.md"]
-                .include('docs/api/framework/*.md')
+                .include('docs/api/framework/*.md'),
+
+        'icenium' => FileList["docs/api/mobile/*.md"]
+                .include('docs/api/framework/*.md'),
     }
 
     %w(master production).each do |branch|
         namespace branch do
             desc "Test TypeScript generation"
             task :test do
-#                sh "cd docs && git fetch && git reset --hard origin/#{branch}"
+                sh "cd docs && git fetch && git reset --hard origin/#{branch}"
 
                 SUITES.each do |suite, dependencies|
                     path = "dist/kendo.#{suite}.d.ts"
 
-                    File.write(path, get_type_script(path, dependencies, false))
+                    File.write(path, get_type_script(path, dependencies, suite == 'icenium'))
 
                     sh "node_modules/typescript/bin/tsc #{path}"
                 end
