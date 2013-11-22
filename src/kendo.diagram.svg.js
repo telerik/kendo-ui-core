@@ -229,9 +229,9 @@ kendo_module({
         },
         _hover: function () {
         },
-        _measure: function () {
+        _measure: function (force) {
             var box, n = this.native;
-            if (!this._measured) {
+            if (!this._measured || force) {
                 try {
                     box = n.getBBox();
                     if (box.width && box.height) {
@@ -369,7 +369,7 @@ kendo_module({
             if (!this.options.align) {
                 return;
             }
-            this._measure();
+            this._measure(true);
             var o = this.options,
                 containerRect = this.bounds(),
                 aligner = new RectAlign(containerRect),
