@@ -241,8 +241,8 @@ kendo_module({
         transports: {
             "aspnetmvc-ajax": kendo.data.RemoteTransport.extend({
                 init: function(options) {
-                    var that = this;
-                    var stringifyDates = options.stringifyDates;
+                    var that = this,
+                        stringifyDates = (options || {}).stringifyDates;
 
                     kendo.data.RemoteTransport.fn.init.call(this,
                         extend(true, {}, this.options, options, {
