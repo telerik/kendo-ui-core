@@ -2900,10 +2900,11 @@ kendo_module({
 
         range: function(skip, take) {
             skip = math.min(skip || 0, this.total());
+
             var that = this,
-            pageSkip = math.max(math.floor(skip / take), 0) * take,
-            size = math.min(pageSkip + take, that.total()),
-            data;
+                pageSkip = math.max(math.floor(skip / take), 0) * take,
+                size = math.min(pageSkip + take, that.total()),
+                data;
 
             data = that._findRange(skip, math.min(skip + take, that.total()));
 
@@ -3047,35 +3048,44 @@ kendo_module({
 
         _prefetchSuccessHandler: function (skip, size, callback) {
             var that = this;
+
             return function(data) {
                 var found = false,
                     range = { start: skip, end: size, data: [] },
                     idx,
-                    length;
+                    length,
+                    temp;
 
                 that._dequeueRequest();
-
-                for (idx = 0, length = that._ranges.length; idx < length; idx++) {
-                    if (that._ranges[idx].start === skip) {
-                        found = true;
-                        range = that._ranges[idx];
-                        break;
-                    }
-                }
-                if (!found) {
-                    that._ranges.push(range);
-                }
-
 
                 that.trigger(REQUESTEND, { response: data, type: "read" });
 
                 data = that.reader.parse(data);
-                range.data = that._observe(that._readData(data));
+
+                temp = that._readData(data);
+
+                if (temp.length) {
+                    for (idx = 0, length = that._ranges.length; idx < length; idx++) {
+                        if (that._ranges[idx].start === skip) {
+                            found = true;
+                            range = that._ranges[idx];
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        that._ranges.push(range);
+                    }
+                }
+
+                range.data = that._observe(temp);
                 range.end = range.start + that._flatData(range.data).length;
                 that._ranges.sort( function(x, y) { return x.start - y.start; } );
                 that._total = that.reader.total(data);
-                if (callback) {
+
+                if (callback && temp.length) {
                     callback();
+                } else {
+                    that.trigger(CHANGE, {});
                 }
             };
         },
