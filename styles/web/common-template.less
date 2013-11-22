@@ -936,16 +936,23 @@ div.k-window-content
     left: 0;
     width: 0;
     height: 0;
+    width: 20%;
     position: absolute;
     background: transparent;
     border-top: 1px solid transparent;
     border-color: inherit;
     .transition("width 200ms linear");
+    -webkit-animation: k-tab-loader 1s ease-in-out infinite;
+    -moz-animation: k-tab-loader 1s ease-in-out infinite;
+    animation: k-tab-loader 1s ease-in-out infinite;
 }
 
 .k-tabstrip-items .k-loading.k-complete
 {
     width: 100%;
+    -webkit-animation: none;
+    -moz-animation: none;
+    animation: none;
 }
 
 .k-tabstrip > .k-content,
@@ -972,6 +979,24 @@ div.k-window-content
 .k-tabstrip > .k-content > .km-scroll-container
 {
     padding: .3em .92em;
+}
+
+@-webkit-keyframes k-tab-loader {
+    0% { left: 0; }
+    50% { left: 80%; }
+    100% { left: 0; }
+}
+
+@-moz-keyframes k-tab-loader {
+    0% { left: 0; }
+    50% { left: 80%; }
+    100% { left: 0; }
+}
+
+@keyframes k-tab-loader {
+    0% { left: 0; }
+    50% { left: 80%; }
+    100% { left: 0; }
 }
 
 /* PanelBar */
