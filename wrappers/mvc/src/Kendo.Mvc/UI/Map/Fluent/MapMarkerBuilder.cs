@@ -46,9 +46,9 @@ namespace Kendo.Mvc.UI.Fluent
         /// The tooltip options for this marker.
         /// </summary>
         /// <param name="configurator">The action that configures the tooltip.</param>
-        public MapMarkerBuilder Tooltip(Action<MapMarkersTooltipSettingsBuilder> configurator)
+        public MapMarkerBuilder Tooltip(Action<MapMarkerTooltipBuilder> configurator)
         {
-            configurator(new MapMarkersTooltipSettingsBuilder(container.Tooltip));
+            configurator(new MapMarkerTooltipBuilder(container.Tooltip));
             return this;
         }
         

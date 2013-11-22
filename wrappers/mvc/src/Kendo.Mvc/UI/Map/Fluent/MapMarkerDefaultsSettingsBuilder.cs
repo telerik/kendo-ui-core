@@ -24,7 +24,7 @@ namespace Kendo.Mvc.UI.Fluent
 		/// For example "pinTarget" is rendered as "k-marker-pin-target".
         /// </summary>
         /// <param name="value">The value that configures the shape.</param>
-        public MapMarkerDefaultsSettingsBuilder Shape(string value)
+        public MapMarkerDefaultsSettingsBuilder Shape(MapMarkersShape value)
         {
             container.Shape = value;
 
@@ -35,15 +35,13 @@ namespace Kendo.Mvc.UI.Fluent
         /// Default Kendo UI Tooltip options for this marker.
         /// </summary>
         /// <param name="configurator">The action that configures the tooltip.</param>
-        public MapMarkerDefaultsSettingsBuilder Tooltip(Action<MapMarkerDefaultsTooltipSettingsBuilder> configurator)
+        public MapMarkerDefaultsSettingsBuilder Tooltip(Action<MapMarkerTooltipBuilder> configurator)
         {
-            configurator(new MapMarkerDefaultsTooltipSettingsBuilder(container.Tooltip));
+            configurator(new MapMarkerTooltipBuilder(container.Tooltip));
             return this;
         }
-        
-        //<< Fields
 
-        
+        //<< Fields        
     }
 }
 

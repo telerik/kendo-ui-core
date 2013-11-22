@@ -8,20 +8,12 @@ namespace Kendo.Mvc.UI
 
     public class MapMarker : JsonObject
     {
-        public MapMarker()
+        public MapMarker(Map map)
         {
-            //>> Initialization
-
-            Tooltip = new MapMarkersTooltipSettings();
-        
-        //<< Initialization
-
-            
+            Tooltip = new Tooltip(map.ViewContext, map.Initializer, map.ViewData);
             HtmlAttributes = new RouteValueDictionary();
-            
         }
 
-        
         /// <summary>
         /// Gets the HTML attributes.
         /// </summary>
@@ -34,13 +26,9 @@ namespace Kendo.Mvc.UI
 
         public double[] Location { get; set; }
 
-        //>> Fields
-
-        public MapMarkersTooltipSettings Tooltip { get; set; }
+        public Tooltip Tooltip { get; set; }
         
         public MapMarkersShape? Shape { get; set; }
-        
-        //<< Fields
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -48,8 +36,6 @@ namespace Kendo.Mvc.UI
             {
                 json["location"] = Location;
             }
-
-            //>> Serialization
 
             var tooltip = Tooltip.ToJson();
             if (tooltip.Any())
@@ -61,8 +47,6 @@ namespace Kendo.Mvc.UI
             {
                 json["shape"] = Shape;
             }
-                
-        //<< Serialization
         }
     }
 }

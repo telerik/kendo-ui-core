@@ -73,7 +73,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// <param name="configurator">The action that configures the markers.</param>
         public MapBuilder Markers(Action<MapMarkerFactory> configurator)
         {
-            configurator(new MapMarkerFactory(container.Markers));
+            configurator(new MapMarkerFactory(container));
             return this;
         }
         
