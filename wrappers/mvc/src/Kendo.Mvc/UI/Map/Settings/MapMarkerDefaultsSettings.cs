@@ -8,47 +8,26 @@ namespace Kendo.Mvc.UI
 
     public class MapMarkerDefaultsSettings : JsonObject
     {
-        public MapMarkerDefaultsSettings()
+        public MapMarkerDefaultsSettings(Map map)
         {
-            //>> Initialization
-        
-            Tooltip = new MapMarkerDefaultsTooltipSettings();
-                
-        //<< Initialization
-
-            
+            Tooltip = new Tooltip(map.ViewContext, map.Initializer, map.ViewData);
         }
 
-        
-
-        //>> Fields
-        
-        public string Shape { get; set; }
-        
-        public MapMarkerDefaultsTooltipSettings Tooltip
-        {
-            get;
-            private set;
-        }
-        
-        //<< Fields
+        public Tooltip Tooltip { get; set; }
+        public MapMarkersShape? Shape { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
-            //>> Serialization
-        
-            if (Shape.HasValue())
-            {
-                json["shape"] = Shape;
-            }
-            
             var tooltip = Tooltip.ToJson();
             if (tooltip.Any())
             {
                 json["tooltip"] = tooltip;
             }
-                
-        //<< Serialization
+
+            if (Shape.HasValue)
+            {
+                json["shape"] = Shape;
+            }
         }
     }
 }
