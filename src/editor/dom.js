@@ -671,6 +671,22 @@ var Dom = {
         if (editable && Dom.ofType(editable, types)) {
             return editable;
         }
+    },
+
+    filter: function(tagName, nodes, invert) {
+        var i = 0;
+        var len = nodes.length;
+        var result = [];
+        var name;
+
+        for (; i < len; i++) {
+            name = Dom.name(nodes[i]);
+            if ((!invert && name == tagName) || (invert && name != tagName)) {
+                result.push(nodes[i]);
+            }
+        }
+
+        return result;
     }
 };
 
