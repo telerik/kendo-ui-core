@@ -152,6 +152,20 @@ kendo_module({
         }
     });
 
+    function sizeTransform(element) {
+        var scaleX = element.options.width / element._originWidth,
+            scaleY = element.options.height / element._originHeight,
+            x = element.options.x || 0,
+            y = element.options.y || 0;
+
+        scaleX = Utils.isNumber(scaleX) ? scaleX : 1;
+        scaleY = Utils.isNumber(scaleY) ? scaleY : 1;
+
+        element._transform.translate = new Translation(x, y);
+        element._transform.scale = new Scale(scaleX, scaleY);
+        element._renderTransform();
+    }
+
     var Element = Class.extend({
         init: function (native, options) {
             var element = this;
@@ -338,7 +352,11 @@ kendo_module({
             this.content(this.options.text);
         },
         size: function () {
-            // TODO: scale texta to fit the rectangle in case of text shape.
+            // TODO: scale text to fit the rectangle in case of text shape.
+//            if (this.options.autoSize) {
+//                //this.options.x = this.options.y = 0;
+//                sizeTransform(this);
+//            }
         },
         bounds: function () {
             var o = this.options,
@@ -350,15 +368,15 @@ kendo_module({
             this._align(alignment);
         },
         _align: function () {
+            if (!this.options.align) {
+                return;
+            }
             this._measure();
             var o = this.options,
                 containerRect = this.bounds(),
                 aligner = new RectAlign(containerRect),
                 contentBounds = aligner.align(this._originSize, o.align);
 
-            if (!this.options.align) {
-                return;
-            }
             contentBounds.y += contentBounds.height;
             this.position(contentBounds.topLeft());
         }
@@ -442,6 +460,10 @@ kendo_module({
                             that.trigger("finishEdit", e);
                         }
                         e.stopPropagation();
+                    })
+                    .on("focusout", function (e) {
+                        that.trigger("finishEdit", e);
+                        e.stopPropagation();
                     });
             return input[0];
         }
@@ -483,18 +505,7 @@ kendo_module({
             }
         },
         size: function () {
-            var that = this;
-            var scaleX = that.options.width / that._originWidth,
-                scaleY = that.options.height / that._originHeight,
-                x = that.options.x || 0,
-                y = that.options.y || 0;
-
-            scaleX = Utils.isNumber(scaleX) ? scaleX : 1;
-            scaleY = Utils.isNumber(scaleY) ? scaleY : 1;
-
-            this._transform.translate = new Translation(x, y);
-            this._transform.scale = new Scale(scaleX, scaleY);
-            this._renderTransform();
+            sizeTransform(this);
         },
         redraw: function (options) {
             var that = this;
@@ -703,23 +714,11 @@ kendo_module({
             }
         },
         size: function () {
-            var scaleX = this.options.width / this._originWidth,
-                scaleY = this.options.height / this._originHeight,
-                x = this.options.x || 0,
-                y = this.options.y || 0;
-
-            scaleX = Utils.isNumber(scaleX) ? scaleX : 1;
-            scaleY = Utils.isNumber(scaleY) ? scaleY : 1;
-
-            this._transform.translate = new Translation(x, y);
-            this._transform.scale = new Scale(scaleX, scaleY);
-            this._renderTransform();
+            sizeTransform(this);
         },
         redraw: function (options) {
             Element.fn.redraw.call(this, options);
-            //if (this.options.autoSize) {
             this.size();
-            //}
         }
     });
 

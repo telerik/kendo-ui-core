@@ -255,7 +255,11 @@ kendo_module({
         options: {
             background: "Green",
             hoveredBackground: "#70CAFF",
-            cursor: Cursors.grip
+            cursor: Cursors.grip,
+            content: {
+                align: "center middle",
+                text: ""
+            }
         },
         _getCursor: function (point) {
             if (this.adorner) {
@@ -292,40 +296,31 @@ kendo_module({
             }
             return json;
         },
-        content: function (content) {
-            if (content !== undefined) {
-                if (!content) {
-                    if (this.contentVisual) {
-                        this.visual.remove(this.contentVisual);
+        content: function (text) {
+            if (text !== undefined) {
+                text = text || "";
+                if (text === "") {
+                    if (this._contentVisual) {
+                        this.visual.remove(this._contentVisual);
                     }
-                    this.contentVisual = undefined;
-                    this.options.content = "";
+                    this._contentVisual = undefined;
                 }
                 else {
                     var bounds = this.bounds();
-                    if (this.contentVisual && this.contentVisual instanceof TextBlock) {
-                        this.contentVisual.options.text = content.toString();
+                    if (this._contentVisual && this._contentVisual instanceof TextBlock) {
+                        this._contentVisual.redraw({text: text});
                     }
                     else {
-                        this.contentVisual = new TextBlock({
-                            text: content.toString(),
-                            align: "center middle",
-                            x: bounds.x,
-                            y: bounds.y,
-                            width: bounds.width,
-                            height: bounds.height,
-                            autoSize: this.options.autoSize
-                        });
-
-                        this.visual.append(this.contentVisual);
+                        var options = deepExtend(this.options.content, {text: text.toString(), width: bounds.width, height: bounds.height});
+                        this._contentVisual = new TextBlock(options);
+                        this.visual.append(this._contentVisual);
+                        this._contentVisual.redraw();
                     }
-                    this.options.content = content.toString();
-                    this.contentVisual.redraw();
-                    this.refresh();
                 }
+                this.options.content.text = text.toString();
             }
 
-            return this.contentVisual ? this.contentVisual.content() : "";
+            return this.options.content.text;
         },
         _hitTest: function (point) {
             var bounds = this.bounds();
@@ -334,7 +329,7 @@ kendo_module({
         _template: function () {
             var that = this;
             if (that.options.template && that.model) {
-                that.options.content = kendo.template(that.options.template, {paramName: "item"})(that.model);
+                that.options.content.text = kendo.template(that.options.template, {paramName: "item"})(that.model);
             }
         }
     });
@@ -398,9 +393,7 @@ kendo_module({
             that.isContainer = false;
             that.isCollapsed = false;
             that.id = that.visual.native.id;
-            if (Utils.isDefined(options.content)) {
-                that.content(options.content);
-            }
+            that.content(options.content.text);
             that._rotate();
         },
         options: {
@@ -421,8 +414,7 @@ kendo_module({
             connectors: diagram.DefaultConnectors,
             rotation: {
                 angle: 0
-            },
-            content: ""
+            }
         },
         bounds: function (value) {
             var point, size, bounds, options;
@@ -447,9 +439,6 @@ kendo_module({
                     }
                 }
                 else { // we assume Rect.
-                    if (this.contentVisual) {
-                        this.contentVisual.redraw(this._bounds);
-                    }
                     point = value.topLeft();
                     options.x = point.x;
                     options.y = point.y;
@@ -458,7 +447,11 @@ kendo_module({
                     this._bounds = new Rect(options.x, options.y, options.width, options.height);
 
                     this.visual.position(point);
+                    //this.visual.redraw({ width: options.width, height: options.height });
                     this.shapeVisual.redraw({ width: options.width, height: options.height });
+                    if (this._contentVisual) {
+                        this._contentVisual.redraw({ width: options.width, height: options.height });
+                    }
                     this.refreshConnections();
                     this._triggerBoundsChange();
                 }
@@ -466,9 +459,9 @@ kendo_module({
             else {
                 bounds = this._bounds;
             }
-            if (this.contentVisual && !this.contentVisual._measured) {
-                this.contentVisual.redraw(this._bounds);
-            }
+//            if (this._contentVisual && !this._contentVisual._measured) {
+//                this._contentVisual.redraw();
+//            }
             if (!this.shapeVisual._measured && this.options.width === DEFAULT_SHAPE_WIDTH && options.height === DEFAULT_SHAPE_HEIGHT) { // no dimensions, assuming autosize for paths, groups...
                 size = this.shapeVisual._measure();
                 if (size) {
@@ -476,6 +469,7 @@ kendo_module({
                         this.bounds(new Rect(options.x, options.y, size.width, size.height));
                     }
                     else {
+                        //this.visual.redraw();
                         this.shapeVisual.redraw();
                     }
                 }
@@ -621,9 +615,8 @@ kendo_module({
             if (options) {
                 this.options = deepExtend({}, this.options, options);
             }
-            if (Utils.isDefined(this.options.content)) {
-                this.content(this.options.content);
-            }
+            this.content(this.options.content.text);
+            //this.visual.redraw(options);
             this.shapeVisual.redraw(options);
         },
         _triggerBoundsChange: function () {
@@ -718,7 +711,7 @@ kendo_module({
             that._sourcePoint = that._targetPoint = new Point();
             that.source(from);
             that.target(to);
-            that.content(that.options.content);
+            that.content(that.options.content.text);
             that.definers = [];
             if (Utils.isDefined(options) && options.points) {
                 that.points(options.points);
@@ -1007,9 +1000,9 @@ kendo_module({
             boundsTopLeft = this._bounds.topLeft();
             localSourcePoint = globalSourcePoint.minus(boundsTopLeft);
             localSinkPoint = globalSinkPoint.minus(boundsTopLeft);
-            if (this.contentVisual) {
+            if (this._contentVisual) {
                 middle = Point.fn.middleOf(localSourcePoint, localSinkPoint);
-                this.contentVisual.position(new Point(middle.x + boundsTopLeft.x, middle.y + boundsTopLeft.y));
+                this._contentVisual.position(new Point(middle.x + boundsTopLeft.x, middle.y + boundsTopLeft.y));
             }
 
             if (this.adorner) {
@@ -1018,7 +1011,7 @@ kendo_module({
         },
         redraw: function (options) {
             this.options = deepExtend({}, this.options, options);
-            this.content(this.options.content);
+            this.content(this.options.content.text);
             if (Utils.isDefined(this.options.points) && this.options.points.length > 0) {
                 this.points(this.options.points);
                 this._refreshPath();
@@ -1235,7 +1228,7 @@ kendo_module({
         },
         load: function (json) {
             var i, options, con;
-            this.options = json.options;
+            this.options = deepExtend(this.options, json.options);
             this.clear();
             this._fetchFreshData();
             for (i = 0; i < json.shapes.length; i++) {
@@ -1525,7 +1518,7 @@ kendo_module({
                 align.align(rect, options.align);
 
                 var newPan = rect.topLeft().minus(old.topLeft());
-                if(!this.options.useScroller) {
+                if (!this.options.useScroller) {
                     newPan = this.pan().plus(newPan);
                 }
                 this.pan(newPan, options.animate);

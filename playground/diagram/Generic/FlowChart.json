@@ -74,7 +74,9 @@
             "rotation": {
                 "angle": 0
             },
-            "content": "Custom ctrs",
+            "content": {
+                "text": "Custom ctrs"
+            },
             "resizable": true,
             "rotatable": true,
             "undoable": false,
@@ -98,7 +100,6 @@
             "rotation": {
                 "angle": 0
             },
-            "content": "",
             "resizable": true,
             "rotatable": true,
             "undoable": false,
@@ -121,7 +122,6 @@
             "rotation": {
                 "angle": 0
             },
-            "content": "",
             "resizable": true,
             "rotatable": true,
             "undoable": false,
@@ -159,7 +159,9 @@
             "rotation": {
                 "angle": 0
             },
-            "content": "Custom connectors",
+            "content": {
+                "text": "Custom connectors"
+            },
             "resizable": true,
             "rotatable": true,
             "undoable": false,
@@ -182,7 +184,6 @@
             "rotation": {
                 "angle": 0
             },
-            "content": "",
             "resizable": true,
             "rotatable": true,
             "undoable": false,
@@ -205,7 +206,6 @@
             "rotation": {
                 "angle": 0
             },
-            "content": "",
             "resizable": true,
             "rotatable": true,
             "undoable": false,
@@ -228,7 +228,6 @@
             "rotation": {
                 "angle": 0
             },
-            "content": "",
             "resizable": true,
             "rotatable": true,
             "undoable": false,
@@ -252,7 +251,6 @@
             "rotation": {
                 "angle": 0
             },
-            "content": "",
             "resizable": true,
             "rotatable": true,
             "undoable": false,
@@ -276,7 +274,6 @@
             "rotation": {
                 "angle": 0
             },
-            "content": "",
             "resizable": true,
             "rotatable": true,
             "undoable": false,
@@ -300,7 +297,6 @@
             "rotation": {
                 "angle": 0
             },
-            "content": "",
             "resizable": true,
             "rotatable": true,
             "undoable": false,
@@ -323,7 +319,6 @@
             "rotation": {
                 "angle": 0
             },
-            "content": "",
             "undoable": false,
             "name": "Cloud Shape"
         }
@@ -392,7 +387,9 @@
             "startCap": "FilledCircle",
             "endCap": "ArrowEnd",
             "points": [],
-            "content": "Floating connection",
+            "content": {
+                "text": "Floating connection"
+            },
             "undoable": false
         },
         "from": "(214,429)",

@@ -422,6 +422,9 @@ kendo_module({
         right: function (content) {
             return this._hAlign(content, this._right);
         },
+        hStretch: function (content) {
+            return this._hAlign(content, this._stretch);
+        },
         top: function (content) {
             return this._vAlign(content, this._top);
         },
@@ -430,6 +433,9 @@ kendo_module({
         },
         bottom: function (content) {
             return this._vAlign(content, this._bottom);
+        },
+        vStretch: function (content) {
+            return this._vAlign(content, this._stretch);
         },
 
         _left: function (container) {
@@ -449,6 +455,9 @@ kendo_module({
         },
         _bottom: function (container, content) {
             return container.height - content.height;
+        },
+        _stretch: function () {
+            return 0;
         },
 
         _hAlign: function (content, alignCalc) {

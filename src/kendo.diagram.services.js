@@ -798,7 +798,6 @@ kendo_module({
         start: function (p, meta) {
             meta = deepExtend({}, meta);
             this._updateHoveredItem(p);
-            this.diagram._finishEditShape();
             this._activateTool(meta);
             this.activeTool.start(p, meta);
             this._updateCursor(p);

@@ -51,7 +51,7 @@
 
     var TextTool = ToolBase.extend({
         shapeOptions: function (rect) {
-            return kendo.deepExtend(ToolBase.fn.shapeOptions(rect), {fillOpacity: 0});
+            return kendo.deepExtend(ToolBase.fn.shapeOptions(rect), {fillOpacity: 0, autoSize: true});
         },
         end: function (p) {
             var d = this.toolService.diagram,
