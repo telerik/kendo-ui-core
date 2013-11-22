@@ -1836,7 +1836,7 @@
                 deepEqual(events[2].start, new Date(1997, 10, 27, 9));
             });
 
-            test("MONHTLY expands correctly with interval", function() {
+            test("MONHTLY expands correctly with interval and BYDAY", function() {
                 var schedulerEvent = new SchedulerEvent({
                     uid: "id",
                     title: "Title",
@@ -1851,6 +1851,21 @@
                 deepEqual(events[4].start, new Date(1997, 8, 30, 9));
                 deepEqual(events[8].start, new Date(1997, 10, 25, 9));
                 deepEqual(events[10].start, new Date(1998, 0, 13, 9));
+            });
+
+            test("MONHTLY expands correctly with interval", function() {
+                var schedulerEvent = new SchedulerEvent({
+                    uid: "id",
+                    title: "Title",
+                    start: new Date("1997/9/2 09:00"),
+                    end: new Date("1997/9/2 09:30"),
+                    recurrenceRule: "FREQ=MONTHLY;INTERVAL=3"
+                });
+
+                var events = occurrences(schedulerEvent, new Date(1998, 1, 22), new Date(1998, 2, 8));
+
+                equal(events.length, 1);
+                deepEqual(events[0].start, new Date(1998, 2, 2, 9));
             });
 
             module("YEARLY Occurrences");

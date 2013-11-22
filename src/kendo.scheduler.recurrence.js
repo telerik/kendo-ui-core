@@ -608,13 +608,17 @@ kendo_module({
         CLICK = "click";
 
     function intervalExcess(diff, interval) {
+        var excess;
         if (diff !== 0 && diff < interval) {
-            diff = interval - diff;
+            excess = interval - diff;
         } else {
-            diff = diff % interval;
+            excess = diff % interval;
+            if (excess) {
+                excess = interval - excess;
+            }
         }
 
-        return diff;
+        return excess;
     }
 
     function dayInYear(date) {
