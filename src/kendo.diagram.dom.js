@@ -299,25 +299,16 @@ kendo_module({
         content: function (text) {
             if (text !== undefined) {
                 text = text || "";
-                if (text === "") {
-                    if (this._contentVisual) {
-                        this.visual.remove(this._contentVisual);
-                    }
-                    this._contentVisual = undefined;
+                var bounds = this.bounds(),
+                    options = deepExtend(this.options.content, {text: text.toString(), width: bounds.width, height: bounds.height});
+                if (this.shapeVisual instanceof TextBlock) {
+                    this._contentVisual = this.shapeVisual;
                 }
-                else {
-                    var bounds = this.bounds();
-                    if (this._contentVisual && this._contentVisual instanceof TextBlock) {
-                        this._contentVisual.redraw({text: text});
-                    }
-                    else {
-                        var options = deepExtend(this.options.content, {text: text.toString(), width: bounds.width, height: bounds.height});
-                        this._contentVisual = new TextBlock(options);
-                        this.visual.append(this._contentVisual);
-                        this._contentVisual.redraw();
-                    }
+                if (!this._contentVisual) {
+                    this._contentVisual = new TextBlock();
+                    this.visual.append(this._contentVisual);
                 }
-                this.options.content.text = text.toString();
+                this._contentVisual.redraw(options);
             }
 
             return this.options.content.text;
@@ -459,9 +450,6 @@ kendo_module({
             else {
                 bounds = this._bounds;
             }
-//            if (this._contentVisual && !this._contentVisual._measured) {
-//                this._contentVisual.redraw();
-//            }
             if (!this.shapeVisual._measured && this.options.width === DEFAULT_SHAPE_WIDTH && options.height === DEFAULT_SHAPE_HEIGHT) { // no dimensions, assuming autosize for paths, groups...
                 size = this.shapeVisual._measure();
                 if (size) {
@@ -685,7 +673,7 @@ kendo_module({
                 case "circle":
                     return new Circle(shapeOptions);
                 case "text": // Maybe should be something else.
-                    return new Rectangle(shapeOptions);
+                    return new TextBlock(shapeOptions);
                 default:
                     var p = new Path(shapeOptions);
                     return p;
@@ -1832,10 +1820,11 @@ kendo_module({
             this._editItem = item;
             this._showEditor();
             var shapeContent = item.content();
-            item.content("");
+            //item.content("");
             editor.originalContent = shapeContent;
             editor.content(shapeContent);
             editor.focus();
+            return editor;
         },
         _initEditor: function () {
             this._editor = new diagram.TextBlockEditor();
@@ -1881,7 +1870,7 @@ kendo_module({
             var diagram = this,
                 pan = pos || diagram._pan;
 
-            if(this.scroller) {
+            if (this.scroller) {
                 diagram.scroller.scrollTo(pan.x, pan.y);
                 diagram._zoomMainLayer();
             }
@@ -1889,27 +1878,29 @@ kendo_module({
                 diagram._transformMainLayer();
             }
         },
-        _animatePan: function(pan, skipAnimation) {
+        _animatePan: function (pan, skipAnimation) {
             var diagram = this;
 
-            if(skipAnimation) {
+            if (skipAnimation) {
                 this._panTransform(pan);
             }
             else {
-                if(diagram.scroller) {
+                if (diagram.scroller) {
                     diagram.scroller.animatedScrollTo(pan.x, pan.y);
                     diagram._zoomMainLayer();
                 }
                 else {
                     var t = new Ticker();
                     t.addAdapter(new PanAdapter({pan: pan, diagram: this}));
-                    t.onStep = function() { diagram._finishPan(); };
+                    t.onStep = function () {
+                        diagram._finishPan();
+                    };
                     t.play();
                 }
             }
         },
-        _finishPan: function() {
-           this.trigger(PAN);
+        _finishPan: function () {
+            this.trigger(PAN);
         },
         _storePan: function (pan) {
             this._pan = pan;

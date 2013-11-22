@@ -414,61 +414,54 @@ kendo_module({
         },
 
         left: function (content) {
-            return this._hAlign(content, this._left);
+            return this._align(content, this._left);
         },
         center: function (content) {
-            return this._hAlign(content, this._center);
+            return this._align(content, this._center);
         },
         right: function (content) {
-            return this._hAlign(content, this._right);
+            return this._align(content, this._right);
         },
-        hStretch: function (content) {
-            return this._hAlign(content, this._stretch);
+        stretch: function (content) {
+            return this._align(content, this._stretch);
         },
         top: function (content) {
-            return this._vAlign(content, this._top);
+            return this._align(content, this._top);
         },
         middle: function (content) {
-            return this._vAlign(content, this._middle);
+            return this._align(content, this._middle);
         },
         bottom: function (content) {
-            return this._vAlign(content, this._bottom);
-        },
-        vStretch: function (content) {
-            return this._vAlign(content, this._stretch);
+            return this._align(content, this._bottom);
         },
 
-        _left: function (container) {
-            return container.x;
+        _left: function (container, content) {
+            content.x = container.x;
         },
         _center: function (container, content) {
-            return ((container.width - content.width) / 2) || 0;
+            content.x = ((container.width - content.width) / 2) || 0;
         },
         _right: function (container, content) {
-            return container.width - content.width;
+            content.x = container.width - content.width;
         },
-        _top: function (container) {
-            return container.y;
+        _top: function (container, content) {
+            content.y = container.y;
         },
         _middle: function (container, content) {
-            return ((container.height - content.height) / 2) || 0;
+            content.y = ((container.height - content.height) / 2) || 0;
         },
         _bottom: function (container, content) {
-            return container.height - content.height;
+            content.y = container.height - content.height;
         },
-        _stretch: function () {
-            return 0;
+        _stretch: function (container, content) {
+            content.x = 0;
+            content.y = 0;
+            content.height = container.height;
+            content.width = container.width;
         },
-
-        _hAlign: function (content, alignCalc) {
+        _align: function (content, alignCalc) {
             content = Rect.toRect(content);
-            content.x = alignCalc(this.container, content);
-
-            return content;
-        },
-        _vAlign: function (content, alignCalc) {
-            content = Rect.toRect(content);
-            content.y = alignCalc(this.container, content);
+            alignCalc(this.container, content);
 
             return content;
         }

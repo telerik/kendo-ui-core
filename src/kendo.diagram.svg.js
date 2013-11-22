@@ -169,6 +169,7 @@ kendo_module({
     var Element = Class.extend({
         init: function (native, options) {
             var element = this;
+            this._originSize = Rect.empty();
             this._originWidth = DEFAULTWIDTH;
             this._originHeight = DEFAULTHEIGHT;
             this._visible = true;
@@ -232,8 +233,9 @@ kendo_module({
             var box, n = this.native;
             if (!this._measured) {
                 try {
-                    box = this._originSize = n.getBBox();
+                    box = n.getBBox();
                     if (box.width && box.height) {
+                        this._originSize = new Rect(box.left, box.right, box.width, box.height);
                         this._originWidth = box.width;
                         this._originHeight = box.height;
                         this._measured = true;
@@ -321,8 +323,8 @@ kendo_module({
     var TextBlock = VisualBase.extend({
         init: function (options) {
             var that = this;
-            that._originSize = Rect.empty();
             Visual.fn.init.call(that, document.createElementNS(SVGNS, "text"), options);
+            this.native.setAttribute("dominant-baseline", "hanging");
         },
         options: {
             stroke: "none",
@@ -352,15 +354,11 @@ kendo_module({
             this.content(this.options.text);
         },
         size: function () {
-            // TODO: scale text to fit the rectangle in case of text shape.
-//            if (this.options.autoSize) {
-//                //this.options.x = this.options.y = 0;
-//                sizeTransform(this);
-//            }
+            sizeTransform(this);
         },
         bounds: function () {
             var o = this.options,
-                containerRect = new Rect(o.x, o.y, o.width, o.height);
+                containerRect = new Rect(0, 0, o.width, o.height);
             return containerRect;
         },
         align: function (alignment) {
@@ -377,8 +375,10 @@ kendo_module({
                 aligner = new RectAlign(containerRect),
                 contentBounds = aligner.align(this._originSize, o.align);
 
-            contentBounds.y += contentBounds.height;
             this.position(contentBounds.topLeft());
+            o.width = contentBounds.width;
+            o.height = contentBounds.height;
+            this.size();
         }
     });
 

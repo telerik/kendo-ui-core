@@ -1761,10 +1761,12 @@ kendo_module({
             this.refresh();
         },
         refresh: function () {
-            var visualBounds = Rect.fromPoints(this.diagram.toOrigin(this._sp), this.diagram.toOrigin(this._ep));
-            this.bounds(Rect.fromPoints(this._sp, this._ep));
-            this.visual.position(visualBounds.topLeft());
-            this.visual.redraw({ height: visualBounds.height + 1, width: visualBounds.width + 1 });
+            if (this._sp) {
+                var visualBounds = Rect.fromPoints(this.diagram.toOrigin(this._sp), this.diagram.toOrigin(this._ep));
+                this.bounds(Rect.fromPoints(this._sp, this._ep));
+                this.visual.position(visualBounds.topLeft());
+                this.visual.redraw({ height: visualBounds.height + 1, width: visualBounds.width + 1 });
+            }
         }
     });
 
