@@ -878,7 +878,7 @@ kendo_module({
 
             SchedulerView.fn.destroy.call(this);
 
-            if (this._isMobile() && !this._isMobilePhoneView()) {
+            if (this._isMobile() && !this._isMobilePhoneView() && this.options.editable) {
                 if (this.options.editable.create !== false) {
                     this._addUserEvents.destroy();
                 }
