@@ -648,6 +648,49 @@
                 equal(dataSource.view().length, 40);
             });
 
+            function generator(size) {
+                var data = [];
+
+                for (var idx = 0; idx < size; idx++) {
+                    data.push({ foo: idx });
+                }
+
+                return data;
+            }
+
+            test("range total is change during the request", function() {
+                var mainData = generator(80),
+                    dataSource = new DataSource({
+                        pageSize: 10,
+                        serverPaging: true,
+                        serverFiltering: true,
+                        transport: {
+                            read: function(options) {
+                                var data = [];
+                                var skip = options.data.skip;
+                                var take = options.data.take;
+
+                                data = mainData.slice(skip, skip + take);
+
+                                console.log(data);
+                                options.success({ data: data, total: mainData.length });
+                            }
+                        },
+                        schema: {
+                            data: "data",
+                            total: "total"
+                        }
+                    });
+
+                dataSource.page(1);
+
+                mainData = generator(2);
+                dataSource.range(8, 10);
+
+                equal(dataSource.view().length, 10);
+                equal(dataSource.view()[0].foo, 0);
+            });
+
             test("range total is updated", function() {
                 var totalCount = 47,
                     dataSource = new DataSource({
@@ -729,6 +772,7 @@
                 dataSource.read();
                 dataSource.range(6, 20);
                 var view = dataSource.view();
+
                 equal(view.length, 1);
                 equal(view[0].items.length, 20);
                 equal(view[0].items[0].foo, 6);
