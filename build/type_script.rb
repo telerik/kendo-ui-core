@@ -235,7 +235,6 @@ module CodeGen::TypeScript
         end
     end
 
-    # explodes parameters with multiple types to an array of parameters, each with a single type
     class ParameterCombinations
         include Enumerable
 
@@ -245,6 +244,7 @@ module CodeGen::TypeScript
 
                 type_indices_product = type_indices[0].product(*type_indices[1..type_indices.length])
 
+                # explode parameters with multiple types to an array of parameters with a single type
                 parameters = type_indices_product.map do |combination|
                     parameters.each_with_index.map do |p, index|
                         param = p.clone()
@@ -254,18 +254,16 @@ module CodeGen::TypeScript
                 end
 
                 # remove duplicate signatures, caused by type translation
-                parameters.uniq! do |params|
+                @combinations = parameters.uniq do |params|
                     params.map { |p| p.type }.join(':')
                 end
             else
-                parameters = [[]]
+                @combinations = [[]]
             end
-
-            @parameters = parameters
         end
 
         def each &block
-            @parameters.each { |p| block.call p }
+            @combination.each { |p| block.call p }
         end
     end
 
