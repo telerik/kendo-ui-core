@@ -32,6 +32,7 @@ namespace Kendo.Mvc.UI
             FontSize = Messages.Editor_FontSize;
             FontSizeInherit = Messages.Editor_FontSizeInherit;
             FormatBlock = Messages.Editor_FormatBlock;
+            Formatting = Messages.Editor_Formatting;
             Styles = Messages.Editor_Styles;
             ForeColor = Messages.Editor_ForeColor;
             BackColor = Messages.Editor_BackColor;
@@ -78,6 +79,7 @@ namespace Kendo.Mvc.UI
         public string FontSize { get; set; }
         public string FontSizeInherit { get; set; }
         public string FormatBlock { get; set; }
+        public string Formatting { get; set; }
         public string Styles { get; set; }
         public string ForeColor { get; set; }
         public string BackColor { get; set; }
@@ -123,6 +125,7 @@ namespace Kendo.Mvc.UI
         private const string DefaultFontSize = "Select font size";
         private const string DefaultFontSizeInherit = "(inherited size)";
         private const string DefaultFormatBlock = "Format";
+        private const string DefaultFormatting = "Format";
         private const string DefaultStyles = "Styles";
         private const string DefaultBackColor = "Background color";
         private const string DefaultForeColor = "Color";
@@ -263,6 +266,11 @@ namespace Kendo.Mvc.UI
             if (FormatBlock != DefaultFormatBlock)
             {
                 json["formatBlock"] = FormatBlock;
+            }
+
+            if (Formatting != DefaultFormatting)
+            {
+                json["formatting"] = Formatting;
             }
 
             if (Styles != DefaultStyles)

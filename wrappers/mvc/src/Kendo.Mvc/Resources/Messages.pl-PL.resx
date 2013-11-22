@@ -687,4 +687,7 @@
   <data name="Upload_HeaderStatusUploading" xml:space="preserve">
     <value>Uploading...</value>
   </data>
+  <data name="Editor_Formatting" xml:space="preserve">
+    <value>Format</value>
+  </data>
 </root>

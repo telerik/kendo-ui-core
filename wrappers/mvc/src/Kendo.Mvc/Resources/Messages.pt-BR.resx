@@ -684,4 +684,7 @@
   <data name="Upload_UploadSelectedFiles1" xml:space="preserve">
     <value>Enviar arquivos</value>
   </data>
+  <data name="Editor_Formatting" xml:space="preserve">
+    <value>Format</value>
+  </data>
 </root>

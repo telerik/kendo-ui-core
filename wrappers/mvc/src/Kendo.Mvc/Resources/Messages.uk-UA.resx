@@ -699,4 +699,7 @@
   <data name="Upload_UploadSelectedFiles" xml:space="preserve">
     <value>Upload files</value>
   </data>
+  <data name="Editor_Formatting" xml:space="preserve">
+    <value>Format</value>
+  </data>
 </root>
