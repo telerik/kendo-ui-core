@@ -370,7 +370,7 @@ bundle :name => 'aspnetmvc.commercial',
            :template_dir => 'mvc'
        },
        :product => 'Kendo UI Complete for ASP.NET MVC',
-       :upload_as_internal_build => true,
+       :upload_as_internal_build => false,
        :contents => {
             'js' => MVC_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
             'styles' => MIN_CSS_RESOURCES,
