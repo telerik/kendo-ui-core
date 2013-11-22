@@ -158,7 +158,7 @@ var BlockFormatter = Class.extend({
             return extend({}, format && format.attr, values);
         }
 
-        var images = $.filter("img", nodes);
+        var images = dom.filter("img", nodes);
         var imageFormat = EditorUtils.formatByName("img", this.format);
         var imageAttributes = attributes(imageFormat);
         $.each(images, function() {
@@ -170,7 +170,7 @@ var BlockFormatter = Class.extend({
             return;
         }
 
-        var nonImages = $.filter("img", nodes, true);
+        var nonImages = dom.filter("img", nodes, true);
         var formatNodes = this.finder.findSuitable(nonImages);
 
         if (formatNodes.length) {
