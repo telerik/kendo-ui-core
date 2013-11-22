@@ -687,4 +687,7 @@
   <data name="Scheduler_Recurrence_Editor_Weekdays_Weekend" xml:space="preserve">
     <value>weekend day</value>
   </data>
+  <data name="Editor_Formatting" xml:space="preserve">
+    <value>Format</value>
+  </data>
 </root>
