@@ -8,11 +8,11 @@ namespace Kendo.Mvc.UI
 
     public class MapMarker : JsonObject
     {
-        public MapMarker()
+        public MapMarker(Map map)
         {
             //>> Initialization
 
-            Tooltip = new MapMarkersTooltipSettings();
+            Tooltip = new Tooltip(map.ViewContext, map.Initializer, map.ViewData);
         
         //<< Initialization
 
@@ -36,7 +36,7 @@ namespace Kendo.Mvc.UI
 
         //>> Fields
 
-        public MapMarkersTooltipSettings Tooltip { get; set; }
+        public Tooltip Tooltip { get; set; }
         
         public MapMarkersShape? Shape { get; set; }
         

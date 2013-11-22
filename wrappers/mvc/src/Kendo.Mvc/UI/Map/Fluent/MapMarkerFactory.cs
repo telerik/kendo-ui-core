@@ -8,16 +8,18 @@ namespace Kendo.Mvc.UI.Fluent
     /// </summary>
     public class MapMarkerFactory : IHideObjectMembers
     {
+        private Map map;
         private readonly List<MapMarker> container;
 
-        public MapMarkerFactory(List<MapMarker> container)
+        public MapMarkerFactory(Map map)
         {
-            this.container = container;
+            this.map = map;
+            this.container = map.Markers;
         }
 
         public virtual MapMarkerBuilder Add()
         {
-            var item = new MapMarker();
+            var item = new MapMarker(this.map);
 
             container.Add(item);
 
