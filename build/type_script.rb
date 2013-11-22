@@ -235,14 +235,48 @@ module CodeGen::TypeScript
         end
     end
 
+    # explodes parameters with multiple types to an array of parameters, each with a single type
+    class ParameterCombinations
+        include Enumerable
+
+        def initialize(parameters)
+            if parameters.any?
+                type_indices = parameters.map { |p| 0.step(p.type.size-1).to_a }
+
+                type_indices_product = type_indices[0].product(*type_indices[1..type_indices.length])
+
+                parameters = type_indices_product.map do |combination|
+                    parameters.each_with_index.map do |p, index|
+                        param = p.clone()
+                        param.type = CodeGen::TypeScript.type(param.type[combination[index]])
+                        param
+                    end
+                end
+
+                # remove duplicate signatures, caused by type translation
+                parameters.uniq! do |params|
+                    params.map { |p| p.type }.join(':')
+                end
+            else
+                parameters = [[]]
+            end
+
+            @parameters = parameters
+        end
+
+        def each &block
+            @parameters.each { |p| block.call p }
+        end
+    end
+
     METHOD_JSDOC = ERB.new(%{/**
         <%= description %>
         @method
-        <%- unique_parameters.each do |parameter| -%>
-        @param {<%= parameter.type_script_type %>} <%= parameter.name %> - <%= parameter.description %>
+        <%- combination.each do |parameter| -%>
+        @param <%= parameter.name %> - <%= parameter.description %>
         <%- end -%>
         <%- if result -%>
-        @returns {<%= result.type_script_type %>} <%= result.description %>
+        @returns <%= result.description %>
         <%- end -%>
         */
         <%= declaration %>}, 0, '-')
@@ -263,22 +297,31 @@ module CodeGen::TypeScript
             @owner.type_script_type + @name.pascalize
         end
 
-        def type_script_parameters
-            unique_parameters.map { |p| "#{p.name}#{p.optional ? "?" : ""}: #{p.type_script_type}" }.join(', ')
-        end
-
-        def type_script_declaration
-            declaration = "#{name}(#{type_script_parameters}): "
-
-            if @result
-                declaration += @result.type_script_type
-            else
-                declaration += 'void'
+        def type_script_parameters(parameters)
+            params = parameters.map do |p|
+                "#{p.name}#{p.optional ? "?" : ""}: #{p.type}"
             end
 
-            declaration = METHOD_JSDOC.result(binding) if jsdoc
+            params.join(', ')
+        end
 
-            declaration + ';'
+        def type_script_declarations
+            combinations = ParameterCombinations.new(unique_parameters)
+
+            if @result
+                result_type = @result.type_script_type
+            else
+                result_type = 'void'
+            end
+
+            combinations.map do |combination|
+
+                declaration = "#{name}(#{type_script_parameters(combination)}): #{result_type}"
+
+                declaration = METHOD_JSDOC.result(binding) if jsdoc
+
+                declaration + ';'
+            end
         end
 
         def unique_parameters
@@ -505,7 +548,10 @@ namespace :type_script do
                  .include('docs/api/framework/*.md'),
 
         'mobile' => FileList["docs/api/mobile/*.md"]
-                .include('docs/api/framework/*.md')
+                .include('docs/api/framework/*.md'),
+
+        'icenium' => FileList["docs/api/mobile/*.md"]
+                .include('docs/api/framework/*.md'),
     }
 
     %w(master production).each do |branch|
@@ -517,7 +563,7 @@ namespace :type_script do
                 SUITES.each do |suite, dependencies|
                     path = "dist/kendo.#{suite}.d.ts"
 
-                    File.write(path, get_type_script(path, dependencies, false))
+                    File.write(path, get_type_script(path, dependencies, suite == 'icenium'))
 
                     sh "node_modules/typescript/bin/tsc #{path}"
                 end

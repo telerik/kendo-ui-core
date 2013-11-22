@@ -79,6 +79,7 @@ module CodeGen
 
     class Parameter
         attr_reader :name, :description, :type, :owner, :optional
+        attr_writer :type
 
         def composite?
             false
