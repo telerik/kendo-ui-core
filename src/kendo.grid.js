@@ -3807,6 +3807,10 @@ kendo_module({
             kendo.ui.progress(element, toggle);
         },
 
+        _resize: function() {
+            this.refresh();
+        },
+
         refresh: function(e) {
             var that = this,
                 length,
