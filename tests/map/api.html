@@ -26,7 +26,9 @@
     <script src="../../src/dataviz/map/main.js"></script>
     <script>
         var dataviz = kendo.dataviz,
-            Point = dataviz.Point2D,
+
+            g = dataviz.geometry,
+            Point = g.Point,
 
             m = dataviz.map,
             Extent = m.Extent,
@@ -90,7 +92,7 @@
                 teardown: destroyMap
             });
 
-            test("constraints to maxZoom", function() {
+            test("not constrained to maxZoom", function() {
                 createMap({ maxZoom: 4 });
                 map.zoom(10);
                 deepEqual(map.options.zoom, 4);
@@ -240,6 +242,12 @@
                 ok(loc.round().equals(new Location(48, -55)));
             });
 
+            test("eventToLocation maps event coordinates to location w/scroll", function() {
+                map._compassPan({ x: 0, y: 100 });
+                var loc = map.eventToLocation({ pageX: 100, pageY: 200 });
+                ok(loc.round().equals(new Location(48, -55)));
+            });
+
             test("eventToLocation maps jQuery event coordinates to location", function() {
                 var loc = map.eventToLocation({ originalEvent: { pageX: 100, pageY: 100 } });
                 ok(loc.round().equals(new Location(48, -55)));
@@ -250,8 +258,20 @@
                 ok(point.round().equals(new Point(100, 100)));
             });
 
-            test("eventToView maps event coordinates to layer coordinates", function() {
+            test("eventToView maps event coordinates to view coordinates w/scroll", function() {
+                map._compassPan({ x: 0, y: 100 });
+                var point = map.eventToView({ pageX: 100, pageY: 200 });
+                ok(point.round().equals(new Point(100, 100)));
+            });
+
+            test("eventToLayer maps event coordinates to layer coordinates", function() {
                 var point = map.eventToLayer({ pageX: 100, pageY: 100 });
+                ok(point.round().equals(new Point(356, 356)));
+            });
+
+            test("eventToLayer maps event coordinates to layer coordinates w/scroll", function() {
+                map._compassPan({ x: 0, y: 100 });
+                var point = map.eventToLayer({ pageX: 100, pageY: 200 });
                 ok(point.round().equals(new Point(356, 356)));
             });
         })();

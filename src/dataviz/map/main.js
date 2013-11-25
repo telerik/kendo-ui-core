@@ -193,19 +193,13 @@ kendo_module({
 
         viewToLocation: function(point, zoom) {
             var origin = this.locationToLayer(this._getOrigin(), zoom);
-            point = point.clone();
-            point.x += origin.x;
-            point.y += origin.y;
+            point = point.clone().add(origin);
             return this.layerToLocation(point, zoom);
         },
 
         eventToView: function(e) {
-            var offset = this.element.offset();
-            var event = e.originalEvent || e;
-            var x = valueOrDefault(event.pageX, event.clientX) - offset.left;
-            var y = valueOrDefault(event.pageY, event.clientY) - offset.top;
-
-            return new g.Point(x, y);
+            var cursor = this._eventOffset(e);
+            return this.locationToView(this.viewToLocation(cursor));
         },
 
         eventToLayer: function(e) {
@@ -213,7 +207,8 @@ kendo_module({
         },
 
         eventToLocation: function(e) {
-            return this.viewToLocation(this.eventToView(e));
+            var cursor = this._eventOffset(e);
+            return this.viewToLocation(cursor);
         },
 
         viewSize: function() {
@@ -460,8 +455,17 @@ kendo_module({
             return this.options.minSize * pow(2, zoom);
         },
 
+        _eventOffset: function(e) {
+            var offset = this.element.offset();
+            var event = e.originalEvent || e;
+            var x = valueOrDefault(event.pageX, event.clientX) - offset.left;
+            var y = valueOrDefault(event.pageY, event.clientY) - offset.top;
+
+            return new g.Point(x, y);
+        },
+
         _click: function(e) {
-            var cursor = this.eventToView(e);
+            var cursor = this._eventOffset(e);
             this.trigger("click", {
                 originalEvent: e,
                 location: this.viewToLocation(cursor)
@@ -478,7 +482,7 @@ kendo_module({
             if (toZoom !== fromZoom) {
                 this.trigger("zoomStart", { originalEvent: e });
 
-                var cursor = this.eventToView(e);
+                var cursor = this._eventOffset(e);
                 var location = this.viewToLocation(cursor);
                 var postZoom = this.locationToLayer(location, toZoom);
                 var origin = postZoom.subtract(cursor);
