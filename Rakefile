@@ -398,6 +398,47 @@ bundle :name => 'aspnetmvc.commercial',
            'dist/bundles/aspnetmvc.commercial/wrappers/aspnetmvc/Examples/VS2013/Kendo.Mvc.Examples.sln'
        ]
 
+bundle :name => 'aspnetmvc.internal.commercial',
+       :license => 'src-license-complete',
+       :eula => 'aspnetmvc',
+       :vsdoc => {
+           %w(web mobile dataviz framework) => 'all',
+           %w(web framework) => 'web',
+           %w(dataviz framework) => 'dataviz',
+           %w(mobile framework) => 'mobile'
+       },
+       :intellisense => {
+           %w(web mobile dataviz framework) => 'all',
+           %w(web framework) => 'web',
+           %w(dataviz framework) => 'dataviz',
+           %w(mobile framework) => 'mobile'
+       },
+       :type_script => { %w(web mobile dataviz framework) => "all" },
+       :changelog => %w(web mobile dataviz framework aspnetmvc),
+       :product => 'Kendo UI Complete for ASP.NET MVC',
+       :upload_as_internal_build => true,
+       :contents => {
+            'js' => MVC_MIN_JS + MVC_MIN_JS_MAP + JQUERY_MAP,
+            'styles' => MIN_CSS_RESOURCES,
+            'wrappers/aspnetmvc/EditorTemplates/ascx' => MVC_ASCX_EDITOR_TEMPLATES,
+            'wrappers/aspnetmvc/EditorTemplates/razor' => MVC_RAZOR_EDITOR_TEMPLATES,
+            'wrappers/aspnetmvc/LegacyThemes' => FileList['wrappers/mvc/legacy-themes/**/*'],
+            'src/js' => MVC_SRC_JS,
+            'src/styles' => SRC_CSS,
+            'src/Kendo.Mvc/packages' => FileList['wrappers/mvc/packages/**/*.*'],
+            'src/Kendo.Mvc/Kendo.Mvc' => FileList['wrappers/mvc/src/Kendo.Mvc/**/*']
+                .exclude('**/bin/**/*')
+                .exclude('**/obj/**/*')
+                .exclude('**/*.csproj'),
+       }.merge(MVC_BINARIES),
+       :prerequisites => [
+           'mvc:assets',
+           'dist/bundles/aspnetmvc.internal.commercial/src/Kendo.Mvc/Kendo.Mvc.sln',
+           'dist/bundles/aspnetmvc.internal.commercial/src/Kendo.Mvc/Kendo.Mvc/Kendo.snk',
+           'dist/bundles/aspnetmvc.internal.commercial/src/Kendo.Mvc/Kendo.Mvc/CommonAssemblyInfo.cs',
+           'dist/bundles/aspnetmvc.internal.commercial/src/Kendo.Mvc/Kendo.Mvc/Kendo.Mvc.csproj'
+       ]
+
 bundle :name => 'aspnetmvc.hotfix.commercial',
        :license => 'src-license-complete',
        :eula => 'aspnetmvc',
@@ -536,6 +577,7 @@ bundle :name => 'php.commercial',
 
 BUNDLES = [
     'aspnetmvc.commercial',
+    'aspnetmvc.internal.commercial',
     'aspnetmvc.hotfix.commercial',
     'aspnetmvc.hotfix.trial',
     'aspnetmvc.trial',
