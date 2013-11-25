@@ -12,7 +12,6 @@
         <script src="../../src/kendo.data.odata.js"></script>
         <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.router.js"></script>
-        <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.fx.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
@@ -24,20 +23,9 @@
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../../src/kendo.mobile.buttongroup.js"></script>
         <script src="../../src/kendo.mobile.listview.js"></script>
-        <style>
-            .km-listview li {
-                line-height: 50px;
-                border-bottom: 1px solid #eee;
-                border-top: 1px solid #fff;
-            }
-
-            #detail .km-content {
-                background: #f4f4f4;
-            }
-        </style>
     </head>
     <body>
-        <div data-role="view" data-init="mobileListViewFiltering" data-title="Scroll down to load">
+        <div data-role="view" data-model="model" data-title="Scroll down to load">
             <header data-role="header">
                 <div data-role="navbar">
                     <span data-role="view-title"></span>
@@ -45,72 +33,39 @@
                 </div>
             </header>
 
-            <ul id="filterable-listview"></ul>
+            <ul data-template="endless-scrolling-template" data-role="listview" data-bind="source: foo" data-endless-scroll="true"></ul>
         </div>
 
-        <script type="text/x-kendo-tmpl" id="mobile-listview-filtering-template">
+        <script type="text/x-kendo-tmpl" id="endless-scrolling-template">
             <div class="product">
+                <img src="../../content/web/foods/#=ProductID#.jpg" alt="#=ProductName# image" class="pullImage"/>
                 <h3>#:ProductName#</h3>
                 <p>#:kendo.toString(UnitPrice, "c")#</p>
             </div>
         </script>
 
         <script>
-            function mobileListViewFiltering() {
-                var dataSource = new kendo.data.DataSource({
+            var model = kendo.observable({
+                foo: new kendo.data.DataSource({
                     type: "odata",
                     transport: {
                         read: {
                             url: "http://demos.kendoui.com/service/Northwind.svc/Products"
                         }
                     },
+                    schema: {
+                        total: function () { return 77; }
+                    },
                     sort: {
-                        field: "ProductName",
+                        field: "ProductID",
                         dir: "desc"
                     },
                     serverPaging: true,
-                    serverFiltering: true,
                     serverSorting: true,
                     pageSize: 50
-                });
+                })
+            });
 
-                $("#filterable-listview").kendoMobileListView({
-                    dataSource: dataSource,
-                    template: $("#mobile-listview-filtering-template").text(),
-                    autoBind: false,
-                    filterable: {
-                        field: "ProductName",
-                        operator: "startswith"
-                    },
-                    endlessScroll: true
-                });
-            }
-        </script>
-
-        <style scoped>
-            .product h3 {
-                font-size: 1.3em;
-                line-height: 1.4em;
-                margin: 0;
-                padding: 0;
-                height: 1.3em;
-                overflow: hidden;
-            }
-            .product p {
-                font-size: 1em;
-                margin: 0;
-                padding: .3em 0 0;
-            }
-            .pullImage {
-                width: 64px;
-                height: 64px;
-                border-radius: 3px;
-                float: left;
-                margin-right: 10px;
-            }
-        </style>
-
-        <script>
             var app = new kendo.mobile.Application(document.body);
         </script>
     </body>
