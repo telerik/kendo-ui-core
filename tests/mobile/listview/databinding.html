@@ -632,51 +632,6 @@
                     scroller.trigger("pull");
                 });
             });
-
-            module("press to load more", {
-                setup: function() {
-                    location.hash = '';
-                    $.mockjaxSettings.responseTime = 0;
-                    $.mockjaxSettings.contentType = "text/html";
-                },
-
-                teardown: function() {
-                    $.mockjaxClear();
-                    kendo.history.stop();
-                }
-            });
-
-            function setup(html, options) {
-                $("#qunit-fixture").html(html);
-                application = new kendo.mobile.Application($("#qunit-fixture"), options);
-            }
-
-            function testData(skip, take) {
-                var data = [];
-                for (var i = skip; i < take; i ++) {
-                    data.push(i);
-                }
-
-                return data;
-            }
-
-            module("endless scrolling", {
-                setup: function() {
-                    location.hash = '';
-                    $.mockjaxSettings.responseTime = 0;
-                    $.mockjaxSettings.contentType = "text/html";
-                },
-
-                teardown: function() {
-                    $.mockjaxClear();
-                    kendo.history.stop();
-                }
-            });
-
-            function setup(html, options) {
-                $("#qunit-fixture").html(html);
-                application = new kendo.mobile.Application($("#qunit-fixture"), options);
-            }
         </script>
     </body>
 </html>
