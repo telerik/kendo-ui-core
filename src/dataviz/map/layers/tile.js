@@ -15,6 +15,9 @@
         g = dataviz.geometry,
         Point = g.Point,
 
+        Extent = dataviz.map.Extent,
+        Location = dataviz.map.Location,
+
         util = dataviz.util,
         renderSize = util.renderSize,
         limit = util.limitValue;
@@ -47,16 +50,26 @@
             layer._view = new viewType(layer.element, layer.options);
 
             map.bind("reset", proxy(layer.reset, layer));
-            map.bind("resize", proxy(this.resize, this));
+            map.bind("resize", proxy(this.resize, layer));
             if (kendo.support.mobileOS) {
                 map.bind("panEnd", proxy(layer._render, layer));
             } else {
                 map.bind("pan", proxy(layer._pan, layer));
             }
+
+            this._updateAttribution();
         },
 
         opitons: {
             settingsUrl: "http://dev.virtualearth.net/REST/v1/Imagery/Metadata/#= mapType #?output=json&jsonp=bingTileParams&include=ImageryProviders&key=#= key #"
+        },
+
+        _updateAttribution: function() {
+            var attr = this.map.attribution;
+
+            if (attr) {
+                attr.add(this.options.attribution);
+            }
         },
 
         _viewType: function() {
@@ -83,7 +96,6 @@
         },
 
         reset: function() {
-            this._updateAttribution();
             this._updateView();
             this._view.clear();
             this._view.reset();
@@ -91,13 +103,6 @@
 
         resize: function() {
             this._render();
-        },
-
-        _updateAttribution: function() {
-            var attr= this.map.attribution;
-            if (attr) {
-                attr.add(this.options.attribution);
-            }
         },
 
         _pan: function() {
@@ -144,7 +149,7 @@
         },
 
         _success: function(data) {
-            var resource = data.resourceSets[0].resources[0];
+            var resource = this.resource = data.resourceSets[0].resources[0];
 
             TileLayer.fn.init.call(this, this.map, {
                 urlTemplate: resource.imageUrl
@@ -156,11 +161,36 @@
                 minZoom: resource.zoomMin
             });
 
+            this._addAttribution();
             this.reset();
         },
 
         _viewType: function() {
             return BingView;
+        },
+
+        _addAttribution: function() {
+            var attr = this.map.attribution;
+            if (attr) {
+                var items = this.resource.imageryProviders;
+                if (items) {
+                    for (var i = 0; i < items.length; i++) {
+                        var item = items[i];
+                        for (var y = 0; y < item.coverageAreas.length; y++) {
+                            var area = item.coverageAreas[y];
+                            attr.add({
+                                text: item.attribution,
+                                minZoom: area.zoomMin,
+                                maxZoom: area.zoomMax,
+                                extent: new Extent(
+                                    new Location(area.bbox[2], area.bbox[1]),
+                                    new Location(area.bbox[0], area.bbox[3])
+                                )
+                            });
+                        }
+                    }
+                }
+            }
         }
     });
 

@@ -24,30 +24,49 @@
         <script src="../../src/dataviz/map/attribution.js"></script>
         <script src="../../src/dataviz/map/compass.js"></script>
         <script src="../../src/dataviz/map/main.js"></script>
-        <link rel="stylesheet" href="../../styles/web/kendo.common.css">
-        <link rel="stylesheet" href="../../styles/web/kendo.default.css">
+        <script src="proj4.js"></script>
         <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.css">
         <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.default.css">
         <style>
-            body {
-                padding: 100px;
+            #map .k-attribution {
+                background-color: rgba(255, 255, 255, 0.8);
+                bottom: 0;
+                color: #666666;
+                font-size: 10px;
+                padding: 2px 4px;
+                position: absolute;
+                right: 0;
+                z-index: 1000;
+            }
+
+            .k-map .k-marker {
+                background-image: url("your path goes here");
             }
         </style>
     </head>
     <body>
-    <div id="map"></div>
-    <script>
-        $("#map").kendoMap({
-            layers: [{
-                type: "tile",
-                urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
-                attribution: "&copy; OpenStreetMap"
-            }],
-            markers: [{
-                position: [42, 47]
-            }]
-        });
-    </script>
+        <div id="map" style="width: 800px; height: 600px;"></div>
+        <script>
+            $("#map").kendoMap({
+                center: [51.5, -0.09],
+                zoom: 7,
+                layers: [{
+                    type: "bing",
+                    key: "AqaPuZWytKRUA8Nm5nqvXHWGL8BDCXvK8onCl2PkC581Zp3T_fYAQBiwIphJbRAK",
+                    attribution: "rrrr"
+                }],
+                markers: [{
+                    location: [51.5, -0.09],
+                    text: "Marker with popup",
+                    open: true // ?
+                }],
+                controls: {
+                    navigator: {
+                        visible: true
+                    }
+                }
+            });
+        </script>
     </body>
 </html>
 

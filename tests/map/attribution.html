@@ -1,0 +1,154 @@
+<html>
+<head>
+    <title>Attribution</title>
+    <script src="../jquery-loader.js"></script>
+    <script src="../qunit/qunit/qunit.js"></script>
+    <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
+    <script src="../kendo-test-helpers.js"></script>
+    <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+</head>
+<body>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/dataviz/util.js"></script>
+    <script src="../../src/dataviz/geometry.js"></script>
+    <script src="../../src/dataviz/map/location.js"></script>
+    <script src="../../src/dataviz/map/crs.js"></script>
+    <script src="../../src/dataviz/map/main.js"></script>
+    <script src="../../src/dataviz/map/attribution.js"></script>
+
+    <script>
+
+        var element,
+            attr,
+            Location = kendo.dataviz.map.Location,
+            Extent = kendo.dataviz.map.Extent;
+
+
+        function createAttribution(options) {
+            options = options || {};
+
+            attr = $("<div>").kendoAttribution(options).data("kendoAttribution");
+
+            attr._zoom = 2;
+        }
+
+        // ------------------------------------------------------------
+        module("Attribution", {
+            setup: function() {
+                createAttribution();
+            },
+            teardown: function() {
+                $(".k-attribution").remove();
+            }
+        });
+
+        test("adds css classes to wrapper", function() {
+            ok(attr.element.is(".k-widget.k-attribution"));
+        });
+
+        test("should update extent and the zoom level", function() {
+            attr.filter(new Location(0,0), 3);
+
+            ok(attr._extent);
+            equal(attr._zoom, 3);
+        });
+
+        test("adds item to the items collection", function() {
+            attr.add("foo");
+
+            equal(attr.items[0].text, "foo");
+            equal(attr.element.html(), "foo");
+        });
+
+        test("removes item from the items collection", function() {
+            attr.add("foo");
+            attr.add("foo1");
+            attr.remove("foo");
+
+            equal(attr.items.length, 1);
+            equal(attr.items[0].text, "foo1");
+        });
+
+        test("clears items collection", function() {
+            attr.add("foo");
+            attr.clear();
+
+            equal(attr.items.length, 0);
+        });
+
+        test("clears the element", function() {
+            attr.add("foo");
+            attr.clear();
+
+            equal(attr.element.html(), "");
+        });
+
+        test("_itemText return item", function() {
+            equal(attr._itemText({ text: "foo" }), "foo");
+        });
+
+        test("_inArea returns item in the area", function() {
+            attr.filter(new Location(0, 0), 3);
+            equal(attr._itemText({
+                text: "foo",
+                extent: new Extent(new Location(1, -1), new Location(-1,1))
+            }), "foo");
+        });
+
+        test("_inArea should not return item outside of area", function() {
+            attr.filter(new Location(0, 0), 3);
+            equal(attr._itemText({
+                text: "foo",
+                extent: new Extent(new Location(10, 10), new Location(20,20))
+            }), "");
+        });
+
+        test("_inZoomLevel returns item in the zoom level", function() {
+            attr.filter(null, 4);
+            equal(attr._itemText({
+                text: "foo",
+                minZoom: 1,
+                maxZoom: 20
+            }), "foo");
+        });
+
+        test("_inZoomLevel should not return item outside zoom level", function() {
+            attr.filter(null, 4);
+            equal(attr._itemText({
+                text: "foo",
+                minZoom: 7,
+                maxZoom: 20
+            }), "");
+        });
+
+        test("item template", function() {
+            createAttribution({
+                itemTemplate: "#= text #bar"
+            });
+            attr.add("foo");
+
+            equal(attr.element.html(), "foobar");
+        });
+
+        test("separator", function() {
+            createAttribution({
+                separator: "bar"
+            });
+            attr.add("foo");
+            attr.add("baz");
+
+            equal(attr.element.html(), "foobarbaz");
+        });
+
+    </script>
+
+    <h1 id="qunit-header">Compass</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+</body>
+</html>

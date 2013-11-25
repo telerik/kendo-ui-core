@@ -62,8 +62,8 @@ kendo_module({
             this._viewOrigin = this._getOrigin();
             this._initScroller();
             this._initMarkers();
-            this._initLayers();
             this._initControls();
+            this._initLayers();
             this._reset();
 
             this._mousewheel = proxy(this._mousewheel, this);
@@ -399,7 +399,7 @@ kendo_module({
 
         _reset: function() {
             if (this.attribution) {
-                this.attribution.clear();
+                this.attribution.filter(this.center(), this.zoom());
             }
 
             this._viewOrigin = this._getOrigin(true);

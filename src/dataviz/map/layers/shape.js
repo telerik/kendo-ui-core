@@ -49,6 +49,8 @@
 
             this._loader = new GeoJSONLoader(this.map, this.options.style, this);
             this._initDataSource();
+
+            this._updateAttribution();
         },
 
         options: {
@@ -56,8 +58,15 @@
             dataSource: {}
         },
 
+        _updateAttribution: function() {
+            var attr = this.map.attribution;
+
+            if (attr) {
+                attr.add(this.options.attribution);
+            }
+        },
+
         reset: function() {
-            this._updateAttribution();
             this.surface.translate({ x: 0, y: 0 });
             this.movable.moveTo({ x: 0, y: 0 });
 
@@ -70,10 +79,6 @@
             this.surface.setSize(
                 this.map.getSize()
             );
-        },
-
-        _updateAttribution: function() {
-            this.map.attribution.add(this.options.attribution);
         },
 
         polygon: function(coords, style) {
