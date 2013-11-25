@@ -51,7 +51,7 @@ kendo_module({
             };
 
             var userEvents = this.userEvents = new kendo.UserEvents(this.pane.element, {
-                filter: roleSelector("view"),
+                filter: roleSelector("view splitview"),
                 allowSelection: true
             });
 
