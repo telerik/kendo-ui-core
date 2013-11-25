@@ -558,7 +558,7 @@ kendo_module({
             this.options = listView.options;
 
             listView.bind("_dataSource", function(e) {
-                binder.setDataSource(e.dataSource);
+                binder.setDataSource(e.dataSource, e.empty);
             });
 
             listView.bind("resize", function() {
@@ -587,7 +587,7 @@ kendo_module({
             this.buffer.unbind();
         },
 
-        setDataSource: function(dataSource) {
+        setDataSource: function(dataSource, empty) {
             var binder = this,
                 options = this.options,
                 listView = this.listView,
@@ -605,7 +605,7 @@ kendo_module({
 
             pageSize = dataSource.pageSize() || options.virtualViewSize;
 
-            if (!pageSize) {
+            if (!pageSize && !empty) {
                 throw new Error("the DataSource does not have page size configured. Page Size setting is mandatory for the mobile listview virtual scrolling to work as expected.");
             }
 
@@ -958,7 +958,7 @@ kendo_module({
             var emptyDataSource = !dataSource;
             this.dataSource = DataSource.create(dataSource);
 
-            this.trigger("_dataSource", { dataSource: this.dataSource });
+            this.trigger("_dataSource", { dataSource: this.dataSource, empty: emptyDataSource });
 
             if (this.options.autoBind && !emptyDataSource) {
                 this.items().remove();
