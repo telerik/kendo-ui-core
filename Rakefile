@@ -622,8 +622,7 @@ namespace :build do
         namespace env do
             desc 'Build and publish ASP.NET MVC DLLs for #{destination} distribution'
             task :aspnetmvc_binaries => [ "mvc:binaries", "tests:aspnetmvc" ] do
-                sh "if exist L: ( net use L: /delete /yes )"
-                sh "net use L: #{ARCHIVE_ROOT} /user:telerik.com\\TeamFoundationUser voyant69"
+                sh "if not exist L: ( net use L: #{ARCHIVE_ROOT} /user:telerik.com\\TeamFoundationUser voyant69 )"
 
                 target_dir = "L:\\#{destination}\\binaries\\"
 
