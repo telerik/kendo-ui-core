@@ -300,7 +300,7 @@ kendo_module({
             that.pane = pane;
             that.options = options;
             that._templates();
-            that.page = 0;
+            that.page = options.page || 0;
             that.pages = [];
             that._initPages();
             that.resizeTo(that.pane.size());
@@ -515,10 +515,10 @@ kendo_module({
         },
 
         _resetPages: function() {
-            this._updatePagesContent();
-            this._repositionPages();
+            this.page = this.options.page || 0;
 
-            this.page = 0;
+            this._updatePagesContent(this.page);
+            this._repositionPages();
 
             this.trigger("reset");
         },

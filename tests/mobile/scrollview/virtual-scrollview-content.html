@@ -114,7 +114,7 @@
                 var content = new VirtualScrollViewContent(element, new ElasticPane(element), { itemsPerPage: 1, template: "", emptyTemplate: "" });
                 content.setDataSource();
                 ok(content.buffer instanceof kendo.data.Buffer);
-                
+
                 content = new VirtualScrollViewContent(element, new ElasticPane(element), { itemsPerPage: 6, template: "", emptyTemplate: "" });
                 content.setDataSource();
                 ok(content.buffer instanceof BatchBuffer);
@@ -171,7 +171,50 @@
                 equal(content.pages[1].element.text(), "0");
                 equal(content.pages[2].element.text(), "1");
                 equal(content.page, 0);
-            })
+            });
+
+            module("VirtualScrollView content inital page", {
+                setup: function() {
+
+                    var dataSourceConfig = {
+                        transport: {
+                            read: function(options) {
+
+                                var results = [], data = options.data;
+                                for (var i = data.skip; i < data.skip + data.take; i ++) {
+                                    results.push({ foo: i });
+                                }
+
+                                options.success(results);
+                            }
+                        },
+                        pageSize: 36,
+                        serverPaging: true,
+                        schema: {
+                            total: function() { return 100000; }
+                        }
+                    };
+
+                    var options = {
+                        autoBind: true,
+                        template: "<div class='foo'>#: foo #</div>",
+                        emptyTemplate: "<div>empty</div>",
+                        page: 16
+                    };
+
+                    element = $("<div style='width: 400px;' />").appendTo("#qunit-fixture").wrap("<div style='width: 400px;' />");
+                    content = new VirtualScrollViewContent(element, new ElasticPane(element), options);
+                    content.setDataSource(dataSourceConfig);
+                    content.dataSource.fetch();
+                }
+            });
+
+            test("Initial page is set to the one specified by the user", 3, function() {
+                //page: 16
+                equal(content.pages[0].element.text(), "15");
+                equal(content.pages[1].element.text(), "16");
+                equal(content.pages[2].element.text(), "17");
+            });
 
             var content,
                 pane;
