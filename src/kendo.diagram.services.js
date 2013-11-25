@@ -1596,12 +1596,23 @@ kendo_module({
             }
         },
         move: function (handle, p) {
-            var delta = p.minus(this._cp), dragging,
-                dtl = new Point(), dbr = new Point(), bounds,
-                center, shape, i, angle, newBounds, changed = 0, staticPoint, scaleX, scaleY;
+            var delta ,
+                dragging,
+                dtl = new Point(),
+                dbr = new Point(),
+                bounds,
+                center,
+                shape,
+                i,
+                angle,
+                newBounds,
+                changed = 0,
+                staticPoint,
+                scaleX,
+                scaleY;
             if (handle.y === -2 && handle.x === -1) {
                 center = this._innerBounds.center();
-                this._angle = Math.findAngle(center, p);
+                this._angle = this._truncateAngle(Math.findAngle(center, p));
                 for (i = 0; i < this.shapes.length; i++) {
                     shape = this.shapes[i];
                     angle = (this._angle + this.initialRotates[i] - this._startAngle) % 360;
@@ -1610,6 +1621,7 @@ kendo_module({
                 }
                 this.refresh();
             } else {
+                delta = p.minus(this._cp);
                 if (handle.x === 0 && handle.y === 0) {
                     dbr = dtl = delta; // dragging
                     dragging = true;
@@ -1667,6 +1679,19 @@ kendo_module({
 
             this._cp = p;
         },
+        _truncateAngle: function (a) {
+            var snapAngle = Math.max(this.diagram.options.snapAngle, 5);
+            return this.diagram.options.snapping ? Math.floor((a % 360) / snapAngle) * snapAngle : (a % 360);
+        },
+        _truncateDistance: function (d) {
+            if (d instanceof kendo.diagram.Point) {
+                return new kendo.diagram.Point(this._truncateDistance(d.x), this._truncateDistance(d.y));
+            } else {
+                var snapSize = Math.max(this.diagram.options.snapSize, 5);
+                return this.diagram.options.snapping ? Math.floor(d / snapSize) * snapSize : d;
+            }
+        },
+
         _displaceBounds: function (bounds, dtl, dbr, dragging) {
             var tl = bounds.topLeft().plus(dtl),
                 br = bounds.bottomRight().plus(dbr),
