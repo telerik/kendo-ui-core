@@ -63,6 +63,47 @@
                 equal(dom.find(".k-item").length, 1);
             });
 
+            test("initialization populates model expanded state", function() {
+                var dom = treeFromHtml(
+                    '<div class="k-widget k-treeview" id="treeview">' +
+                        '<ul class="k-group">' +
+                            '<li class="k-item k-first k-last" data-expanded="true">' +
+                                '<div class="k-top k-bot">' +
+                                    '<span class="k-icon k-minus"></span>' +
+                                    '<span class="k-in">foo</span>' +
+                                '</div>' +
+                                '<ul class="k-group">' +
+                                    '<li class="k-item">' +
+                                        '<div class="k-top">' +
+                                            '<span class="k-in">bar</span>' +
+                                        '</div>' +
+                                    '</li>' +
+                                '</ul>' +
+                            '</li>' +
+                        '</ul>' +
+                    '</div>');
+
+                ok(dom.data("kendoTreeView").dataSource.data()[0].expanded);
+            });
+
+            test("initialization populates model checked state", function() {
+                var dom = treeFromHtml(
+                    '<div class="k-widget k-treeview" id="treeview">' +
+                        '<ul class="k-group">' +
+                            '<li class="k-item k-first k-last">' +
+                                '<div class="k-top k-bot">' +
+                                    '<span class="k-checkbox"><input type="checkbox" checked></span>' +
+                                    '<span class="k-in">foo</span>' +
+                                '</div>' +
+                            '</li>' +
+                        '</ul>' +
+                    '</div>', {
+                    checkboxes: true
+                });
+
+                ok(dom.data("kendoTreeView").dataSource.data()[0].checked);
+            });
+
             test("toggle buttons are rendered correctly when initializing from html", function() {
                 var dom = treeFromHtml("<ul>" +
                     "<li>foo<ul><li>baz</li></ul></li>" +
