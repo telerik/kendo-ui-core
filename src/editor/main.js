@@ -717,9 +717,12 @@ kendo_module({
 
         _focusBody: function() {
             var body = this.body;
+            var documentElement = this.document.documentElement;
 
             if (kendo._activeElement() != body) {
+                var scrollTop = documentElement.scrollTop;
                 body.focus();
+                documentElement.scrollTop = scrollTop;
             }
         },
 
