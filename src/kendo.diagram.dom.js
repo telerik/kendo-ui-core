@@ -384,7 +384,7 @@ kendo_module({
             that.isContainer = false;
             that.isCollapsed = false;
             that.id = that.visual.native.id;
-            that.content(options.content.text);
+            that.content(that.content());
             that._rotate();
         },
         options: {
@@ -436,13 +436,8 @@ kendo_module({
                     options.width = Math.max(value.width, options.minWidth);
                     options.height = Math.max(value.height, options.minHeight);
                     this._bounds = new Rect(options.x, options.y, options.width, options.height);
-
                     this.visual.position(point);
-                    //this.visual.redraw({ width: options.width, height: options.height });
-                    this.shapeVisual.redraw({ width: options.width, height: options.height });
-                    if (this._contentVisual) {
-                        this._contentVisual.redraw({ width: options.width, height: options.height });
-                    }
+                    this.redraw({ width: options.width, height: options.height });
                     this.refreshConnections();
                     this._triggerBoundsChange();
                 }
@@ -603,8 +598,10 @@ kendo_module({
             if (options) {
                 this.options = deepExtend({}, this.options, options);
             }
-            this.content(this.options.content.text);
-            //this.visual.redraw(options);
+
+            if (this._contentVisual) {
+                this._contentVisual.redraw({ width: this.options.width, height: this.options.height });
+            }
             this.shapeVisual.redraw(options);
         },
         _triggerBoundsChange: function () {
@@ -1328,6 +1325,7 @@ kendo_module({
             }
 
             this._raiseItemsAdded([shape]);
+            shape.redraw();
 
             return shape;
         },

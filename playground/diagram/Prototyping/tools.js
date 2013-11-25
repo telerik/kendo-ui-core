@@ -45,7 +45,7 @@
 
     var LinkTool = ToolBase.extend({
         shapeOptions: function (rect) {
-            return kendo.deepExtend(ToolBase.fn.shapeOptions(rect), {fillOpacity: 0.2, content: "link"});
+            return kendo.deepExtend(ToolBase.fn.shapeOptions(rect), {fillOpacity: 0.2, content: {text: "link"}});
         }
     });
 

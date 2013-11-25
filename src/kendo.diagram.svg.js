@@ -158,8 +158,8 @@ kendo_module({
             x = element.options.x || 0,
             y = element.options.y || 0;
 
-        scaleX = Utils.isNumber(scaleX) ? scaleX : 1;
-        scaleY = Utils.isNumber(scaleY) ? scaleY : 1;
+        scaleX = scaleX ? scaleX : 1;
+        scaleY = scaleY ? scaleY : 1;
 
         element._transform.translate = new Translation(x, y);
         element._transform.scale = new Scale(scaleX, scaleY);
@@ -197,7 +197,7 @@ kendo_module({
         },
         redraw: function (options) {
             if (options) {
-                this.options = deepExtend({}, this.options, options);
+                deepExtend(this.options, options);
             }
             this.setAtr("id", "id");
             this.setAtr("class", "cssClass");
