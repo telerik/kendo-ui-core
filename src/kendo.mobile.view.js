@@ -59,6 +59,7 @@ kendo_module({
 
             that._id();
             that._layout();
+            that._overlay();
             that._scroller();
             that._model();
         },
@@ -304,13 +305,17 @@ kendo_module({
 
             that.element.prepend(that.header).append(that.footer);
 
-            that.overlay = $(UI_OVERLAY).appendTo(that.element);
 
             if (that.layout) {
                 that.layout.setup(that);
             }
+        },
+
+        _overlay: function() {
+            this.overlay = $(UI_OVERLAY).appendTo(this.element);
         }
     });
+
 
     var ViewClone = kendo.mobile.ui.Widget.extend({
         init: function(view) {

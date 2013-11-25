@@ -24,6 +24,7 @@ kendo_module({
 
             that._id();
             that._layout();
+            that._overlay();
             that._style();
             kendo.mobile.init(element.children(kendo.roleSelector("modalview")));
 
