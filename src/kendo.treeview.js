@@ -230,7 +230,7 @@ kendo_module({
                     that.dataSource.fetch();
                 }
             } else {
-                that._attachUids();
+                that._syncHtmlAndDataSource();
             }
 
             if (options.checkboxes && options.checkboxes.checkChildren) {
@@ -281,21 +281,31 @@ kendo_module({
             }
         },
 
-        _attachUids: function(root, dataSource) {
-            var that = this,
-                data,
-                uidAttr = kendo.attr("uid");
+        _syncHtmlAndDataSource: function(root, dataSource) {
+            root = root || this.root;
+            dataSource = dataSource || this.dataSource;
 
-            root = root || that.root;
-            dataSource = dataSource || that.dataSource;
+            var data = dataSource.view();
+            var uidAttr = kendo.attr("uid");
+            var expandedAttr = kendo.attr("expanded");
+            var inferCheckedState = this.options.checkboxes;
+            var items = root.children("li");
+            var i, item, dataItem;
 
-            data = dataSource.view();
+            for (i = 0; i < items.length; i++) {
+                dataItem = data[i];
 
-            root.children("li").each(function(index, item) {
-                item = $(item).attr(uidAttr, data[index].uid);
-                item.attr("role", "treeitem");
-                that._attachUids(item.children("ul"), data[index].children);
-            });
+                item = items.eq(i);
+
+                item.attr("role", "treeitem").attr(uidAttr, dataItem.uid);
+
+                dataItem.expanded = item.attr(expandedAttr) === "true";
+                if (inferCheckedState) {
+                    dataItem.checked = checkboxes(item).prop(CHECKED);
+                }
+
+                this._syncHtmlAndDataSource(item.children("ul"), dataItem.children);
+            }
         },
 
         _animation: function() {
