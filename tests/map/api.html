@@ -230,7 +230,7 @@
 
         (function() {
             // ------------------------------------------------------------
-            module("Map / Event -> Location", {
+            module("Map / Event coordinates", {
                 setup: function() {
                     createMap({ zoom: 2 });
                 },
@@ -273,6 +273,12 @@
                 map._compassPan({ x: 0, y: 100 });
                 var point = map.eventToLayer({ pageX: 100, pageY: 200 });
                 ok(point.round().equals(new Point(356, 356)));
+            });
+
+            test("eventOffset maps event coordinates to offset", function() {
+                map._compassPan({ x: 0, y: 100 });
+                var point = map.eventOffset({ pageX: 100, pageY: 200 });
+                ok(point.round().equals(new Point(100, 200)));
             });
         })();
 

@@ -197,8 +197,17 @@ kendo_module({
             return this.layerToLocation(point, zoom);
         },
 
+        eventOffset: function(e) {
+            var offset = this.element.offset();
+            var event = e.originalEvent || e;
+            var x = valueOrDefault(event.pageX, event.clientX) - offset.left;
+            var y = valueOrDefault(event.pageY, event.clientY) - offset.top;
+
+            return new g.Point(x, y);
+        },
+
         eventToView: function(e) {
-            var cursor = this._eventOffset(e);
+            var cursor = this.eventOffset(e);
             return this.locationToView(this.viewToLocation(cursor));
         },
 
@@ -207,7 +216,7 @@ kendo_module({
         },
 
         eventToLocation: function(e) {
-            var cursor = this._eventOffset(e);
+            var cursor = this.eventOffset(e);
             return this.viewToLocation(cursor);
         },
 
@@ -455,17 +464,8 @@ kendo_module({
             return this.options.minSize * pow(2, zoom);
         },
 
-        _eventOffset: function(e) {
-            var offset = this.element.offset();
-            var event = e.originalEvent || e;
-            var x = valueOrDefault(event.pageX, event.clientX) - offset.left;
-            var y = valueOrDefault(event.pageY, event.clientY) - offset.top;
-
-            return new g.Point(x, y);
-        },
-
         _click: function(e) {
-            var cursor = this._eventOffset(e);
+            var cursor = this.eventOffset(e);
             this.trigger("click", {
                 originalEvent: e,
                 location: this.viewToLocation(cursor)
@@ -482,7 +482,7 @@ kendo_module({
             if (toZoom !== fromZoom) {
                 this.trigger("zoomStart", { originalEvent: e });
 
-                var cursor = this._eventOffset(e);
+                var cursor = this.eventOffset(e);
                 var location = this.viewToLocation(cursor);
                 var postZoom = this.locationToLayer(location, toZoom);
                 var origin = postZoom.subtract(cursor);
