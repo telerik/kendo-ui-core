@@ -1587,6 +1587,7 @@ kendo_module({
         start: function (p) {
             this._sp = p;
             this._cp = p;
+            this._lp = p;
             this._manipulating = true;
             this._internalChange = true;
             this.shapeStates = [];
@@ -1621,7 +1622,20 @@ kendo_module({
                 }
                 this.refresh();
             } else {
-                delta = p.minus(this._cp);
+                if (this.diagram.options.snapping) {
+                    var thr = this._truncateDistance(p.minus(this._lp));
+                    // threshold
+                    if (thr.x === 0 && thr.y === 0) {
+                        this._cp = p;
+                        return;
+                    }
+                    delta = thr;
+                    this._lp = new Point(this._lp.x + thr.x, this._lp.y + thr.y);
+                }
+                else {
+                    delta = p.minus(this._cp);
+                }
+
                 if (handle.x === 0 && handle.y === 0) {
                     dbr = dtl = delta; // dragging
                     dragging = true;
@@ -1649,30 +1663,34 @@ kendo_module({
                     scaleX = (this._innerBounds.width + delta.x * handle.x) / this._innerBounds.width;
                     scaleY = (this._innerBounds.height + delta.y * handle.y) / this._innerBounds.height;
                 }
-                for (i = 0; i < this.shapes.length; i++) {
-                    shape = this.shapes[i];
-                    bounds = shape.bounds();
-                    if (dragging) {
-                        newBounds = this._displaceBounds(bounds, dtl, dbr, dragging);
-                    }
-                    else {
-                        newBounds = bounds.clone();
-                        newBounds.scale(scaleX, scaleY, staticPoint, this._innerBounds.center(), shape.rotate().angle);
-                        var newCenter = newBounds.center(); // fixes the new rotation center.
-                        newCenter.rotate(bounds.center(), -this._angle);
-                        newBounds = new Rect(newCenter.x - newBounds.width / 2, newCenter.y - newBounds.height / 2, newBounds.width, newBounds.height);
-                    }
-                    if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) { // if we up-size very small shape
-                        shape.bounds(newBounds);
-                        shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
-                        changed += 1;
-                    }
-                }
 
-                if (changed == i) {
-                    newBounds = this._displaceBounds(this._innerBounds, dtl, dbr, dragging);
-                    this.bounds(newBounds);
-                    this.refresh();
+                {
+
+                    for (i = 0; i < this.shapes.length; i++) {
+                        shape = this.shapes[i];
+                        bounds = shape.bounds();
+                        if (dragging) {
+                            newBounds = this._displaceBounds(bounds, dtl, dbr, dragging);
+                        }
+                        else {
+                            newBounds = bounds.clone();
+                            newBounds.scale(scaleX, scaleY, staticPoint, this._innerBounds.center(), shape.rotate().angle);
+                            var newCenter = newBounds.center(); // fixes the new rotation center.
+                            newCenter.rotate(bounds.center(), -this._angle);
+                            newBounds = new Rect(newCenter.x - newBounds.width / 2, newCenter.y - newBounds.height / 2, newBounds.width, newBounds.height);
+                        }
+                        if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) { // if we up-size very small shape
+                            shape.bounds(newBounds);
+                            shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
+                            changed += 1;
+                        }
+                    }
+
+                    if (changed == i) {
+                        newBounds = this._displaceBounds(this._innerBounds, dtl, dbr, dragging);
+                        this.bounds(newBounds);
+                        this.refresh();
+                    }
                 }
                 this._positions();
             }

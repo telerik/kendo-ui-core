@@ -1163,7 +1163,10 @@ kendo_module({
                 height: 20,
                 margin: 10,
                 fontSize: 15
-            }
+            },
+            snapping: true,
+            snapSize: 10,
+            snapAngle: 10
         },
 
         events: [ZOOM, PAN, SELECT, ROTATE, BOUNDSCHANGE, ITEMSCHANGE],
