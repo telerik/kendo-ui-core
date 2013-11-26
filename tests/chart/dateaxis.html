@@ -306,7 +306,7 @@
                     });
 
                     equal(dateAxis.categoryIndex(new Date("2012/02/01 21:00:00")), 0);
-                    equal(dateAxis.categoryIndex(new Date("2012/02/03 03:00:00")), 3);
+                    equal(dateAxis.categoryIndex(new Date("2012/02/03 03:00:00")), 2);
                 });
 
                 test("category indicies when rounding is disabled and not applicable (justified)", function() {
@@ -692,6 +692,32 @@
                     });
 
                     deepEqual(dataviz.last(dateAxis.options.categories), new Date("2012/03/01"));
+                });
+
+                test("Does not add categories beyond last day", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/01/01"), new Date("2012/01/01 12:00:00"),
+                            new Date("2012/01/02"), new Date("2012/01/02 12:00:00")
+                        ],
+                        baseUnit: "days",
+                        roundToBaseUnit: false
+                    });
+
+                    deepEqual(dataviz.last(dateAxis.options.categories), new Date("2012/01/02"));
+                });
+
+                test("Does not add categories beyond last week", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2013/02/24"), new Date("2013/03/02"),
+                            new Date("2013/03/03"), new Date("2013/03/09")
+                        ],
+                        baseUnit: "weeks",
+                        roundToBaseUnit: false
+                    });
+
+                    deepEqual(dataviz.last(dateAxis.options.categories), new Date("2013/03/03"));
                 });
 
                 // ------------------------------------------------------------
@@ -1304,8 +1330,9 @@
                 });
 
                 test("Returns correct last partial slot", function() {
+                    var lineBox = dateAxis.lineBox();
                     sameBox(dateAxis.getSlot(4),
-                            new Box2D(777, 0, 777, 0),
+                            new Box2D(lineBox.x2, 0, lineBox.x2, 0),
                             TOLERANCE);
                 });
 
@@ -1424,8 +1451,8 @@
                 });
 
                 test("Returns correct last partial slot (right edge)", function() {
-                    deepEqual(dateAxis.getCategory(new Point2D(785, 0)).toString(),
-                         new Date("2012/02/05 01:00:00").toString());
+                    deepEqual(dateAxis.getCategory(new Point2D(dateAxis.lineBox().x2, 0)).toString(),
+                         new Date("2012/02/05 00:00:00").toString());
                 });
 
                 // ------------------------------------------------------------
