@@ -14,10 +14,11 @@
             margin: 0;
             font-family: "Segoe UI", Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica, Sans-Serif;
             font-size: 10pt;
+
         }
 
         #canvasDiv {
-
+            background-color: #FFF;
         }
 
         #canvas {
@@ -249,8 +250,13 @@
                 </li>
             </ul>
         </div>
+
         <div id="canvasDiv">
+            <canvas id="backgroundGrid"
+                    style="z-index: 0; position: absolute;top: 0;left: 0;"></canvas>
             <div id="canvas"></div>
+
+
         </div>
     </div>
 
@@ -271,9 +277,59 @@
         </svg>
     </div>
 
+
+
+
 </script>
 
 <script>
+
+var canvas = document.getElementById('backgroundGrid');
+var ctx = canvas.getContext('2d');
+
+function updateGrid(v) {
+    var canv = document.getElementById('canvas');
+    canvas.width = canv.clientWidth;
+    canvas.height = canv.clientHeight;
+    ctx.clear();
+    ctx.beginPath();
+
+    var width = canvas.width;
+    var height = canvas.height;
+    var delta = v <= 0.7 ? 20 : 10;
+    for (var i = 0; i < width; i += (v * delta)) {
+        if (i % (v * 100) === 0) continue;
+        ctx.moveTo(i + 0.5, 0);
+        ctx.lineTo(i + 0.5, height)
+    }
+
+    for (var i = 0; i < height; i += (v * delta)) {
+        if (i % (v * 100) === 0) continue;
+        ctx.moveTo(0, i + 0.5);
+        ctx.lineTo(width, i + 0.5)
+    }
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.2);'
+    ctx.stroke();
+
+    ctx.beginPath();
+    for (var i = 0; i < width; i += (v * 100)) {
+        ctx.moveTo(i + 0.5, 0);
+        ctx.lineTo(i + 0.5, height)
+    }
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.3);'
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+
+    ctx.beginPath();
+    for (var i = 0; i < height; i += (v * 100)) {
+        ctx.moveTo(0, i + 0.5);
+        ctx.lineTo(width, i + 0.5)
+    }
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.3);'
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+}
+
 
 var Shapes = {
 };
@@ -296,8 +352,23 @@ function loadDiagram() {
     $('#upload-field').click();
 }
 
+CanvasRenderingContext2D.prototype.clear =
+        CanvasRenderingContext2D.prototype.clear || function (preserveTransform) {
+            if (preserveTransform) {
+                this.save();
+                this.setTransform(1, 0, 0, 1, 0, 0);
+            }
+
+            this.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+            if (preserveTransform) {
+                this.restore();
+            }
+        };
+
 $(function () {
     function onload() {
+        updateGrid(1.0);
     }
 
     function createSplitters() {
@@ -378,6 +449,7 @@ $(function () {
     $("#canvas").kendoDiagram({
         zoom: function (e) {
             slider.value(this._zoom);
+            updateGrid(this._zoom);
         },
         select: function (e) {
             var items = e.selected;
