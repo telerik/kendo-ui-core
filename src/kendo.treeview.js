@@ -1692,7 +1692,7 @@ kendo_module({
                 model = model.toJSON();
             }
 
-            var parentNode = data.parent();
+            var parentNode = !data._dataSource && data.parent();
 
             if (parentNode) {
                 parentNode.hasChildren = true;

@@ -215,7 +215,7 @@
                     }
                 });
 
-                var viewModel, dom;
+                var viewModel, dom, treeview;
 
                 function setupObservableBinding(data) {
                     viewModel = kendo.observable({
@@ -226,6 +226,8 @@
                         .kendoTreeView({
                             dataSource: viewModel.products
                         });
+
+                    treeview = dom.data("kendoTreeView");
                 }
 
                 test("binding to hierarchical observable", function() {
@@ -339,6 +341,18 @@
 
                     ok(dom.find(".k-image").attr("src").indexOf("file") >= 0);
                     ok(!dom.find(".k-image").attr("src").indexOf("folder") >= 0);
+                });
+
+                test("append of item works", function() {
+                    setupObservableBinding([
+                        { text: "foo", expanded: true, items: [
+                            { text: "bar" }
+                        ] }
+                    ]);
+
+                    treeview.append(dom.find(".k-item .k-item"));
+
+                    ok(dom.find(".k-item").length, 2);
                 });
 
                 test("declarative binding", function() {
