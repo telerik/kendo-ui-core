@@ -237,7 +237,7 @@ kendo_module({
             options = that.options;
 
             if (!options.appendToElement) {
-                link = element.addClass("k-filterable").find(".k-grid-filter");
+                link = element.addClass("k-with-icon k-filterable").find(".k-grid-filter");
 
                 if (!link[0]) {
                     link = element.prepend('<a class="k-grid-filter" href="#"><span class="k-icon k-filter"/></a>').find(".k-grid-filter");
