@@ -176,7 +176,7 @@ module CodeGen::TypeScript
 
     FIELD_OVERRIDES = {
         'Grid' => {
-            'columns' => 'Array<GridColumn>'
+            'columns' => 'GridColumn[]'
         }
     }
 

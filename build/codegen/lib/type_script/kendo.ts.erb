@@ -492,14 +492,18 @@ declare module kendo.data {
 
     module binders { }
 
+    interface Bindings {
+        [key: string]: Binding;
+    }
+
     class Binder extends Class {
         static fn: Binder;
         static extend(prototype: Object): Binder;
 
         element: any;
-        bindings: { [key: string]: Binding; };
-        constructor(element: any, bindings: { [key: string]: Binding; }, options?: BinderOptions);
-        init(element: any, bindings: { [key: string]: Binding; }, options?: BinderOptions): void;
+        bindings: Bindings;
+        constructor(element: any, bindings: Bindings, options?: BinderOptions);
+        init(element: any, bindings: Bindings, options?: BinderOptions): void;
         bind(binding: Binding, attribute: string);
         destroy(): void;
         refresh(): void;
@@ -516,7 +520,7 @@ declare module kendo.data {
         get(name: string): any;
         parent(): ObservableObject;
         set(name: string, value: any): void;
-        toJSON(): { [key: string]: any; };
+        toJSON(): Object;
         uid: string;
     }
 
@@ -535,16 +539,8 @@ declare module kendo.data {
         isNew(): boolean;
         static idField: string;
         static fields: DataSourceSchemaModelFields;
-        static define(options: DataSourceSchemaModelWithFieldsObject): {
-            idField: string;
-            fields: DataSourceSchemaModelFields;
-            new (data?: any): Model;
-        };
-        static define(options: DataSourceSchemaModelWithFieldsArray): {
-            idField: string;
-            fields: DataSourceSchemaModelFields;
-            new (data?: any): Model;
-        };
+        static define(options: DataSourceSchemaModelWithFieldsObject): typeof Model;
+        static define(options: DataSourceSchemaModelWithFieldsArray): typeof Model;
     }
 
     class SchedulerEvent extends Model {
@@ -561,18 +557,10 @@ declare module kendo.data {
         recurrenceId: any;
         recurrenceRule: string;
         recurrenceException: string;
-
-        static define(options: DataSourceSchemaModelWithFieldsObject): {
-            idField: string;
-            fields: DataSourceSchemaModelFields;
-            new (data?: any): SchedulerEvent;
-        };
-
-        static define(options: DataSourceSchemaModelWithFieldsArray): {
-            idField: string;
-            fields: DataSourceSchemaModelFields;
-            new (data?: any): SchedulerEvent;
-        };
+        static idField: string;
+        static fields: DataSourceSchemaModelFields;
+        static define(options: DataSourceSchemaModelWithFieldsObject): typeof SchedulerEvent;
+        static define(options: DataSourceSchemaModelWithFieldsArray): typeof SchedulerEvent;
     }
 
     class Node extends Model {
@@ -667,11 +655,7 @@ declare module kendo.data {
     }
 
     interface DataSourceSchemaWithConstructorModel extends DataSourceSchema {
-        model?: {
-            idField: string;
-            fields: DataSourceSchemaModelFields;
-            new (data?: any): Model;
-        };
+        model?:  typeof Model;
     }
 
     interface DataSourceSchemaModel {
@@ -987,20 +971,28 @@ declare module kendo.ui {
         static fn: Widget;
         static extend(prototype: Object): Widget;
 
-        constructor(element: Element, options?: any);
-        constructor(element: JQuery, options?: any);
-        constructor(selector: String, options?: any);
-        init(element: Element, options?: any): void;
-        init(element: JQuery, options?: any): void;
-        init(selector: String, options: Object): void;
+        constructor(element: Element, options?: Object);
+        constructor(element: JQuery, options?: Object);
+        constructor(selector: String, options?: Object);
+        init(element: Element, options?: Object): void;
+        init(element: JQuery, options?: Object): void;
+        init(selector: String, options?: Object): void;
         destroy(): void;
         element: JQuery;
         setOptions(options: Object): void;
+        resize(force?: boolean): void;
     }
 
-    function plugin(widget: kendo.ui.Widget, register?: Object, prefix?: String);
-    function plugin(widget: any, register?: Object, prefix?: String);
-    function plugin(widget: new (element: Element, options: Object) => kendo.ui.Widget, register?: Object, prefix?: String);
+    function plugin(widget: typeof kendo.ui.Widget, register?: typeof kendo.ui, prefix?: String);
+    function plugin(widget: any, register?: typeof kendo.ui, prefix?: String);
+% if suite =~ /all|mobile/
+    function plugin(widget: typeof kendo.ui.Widget, register?: typeof kendo.mobile.ui, prefix?: String);
+    function plugin(widget: any, register?: typeof kendo.mobile.ui, prefix?: String);
+% end
+% if suite =~ /all|dataviz/
+    function plugin(widget: typeof kendo.ui.Widget, register?: typeof kendo.dataviz.ui, prefix?: String);
+    function plugin(widget: any, register?: typeof kendo.dataviz.ui, prefix?: String);
+% end
 
     class Draggable extends kendo.ui.Widget{
         element: JQuery;
@@ -1160,7 +1152,8 @@ declare module kendo.mobile.ui {
 declare module kendo.dataviz.ui {
     function registerTheme(name: string, options: any);
 
-    function plugin(widget: new (element: Element, options: Object) => kendo.ui.Widget);
+    function plugin(widget: typeof kendo.ui.Widget);
+    function plugin(widget: any);
 }
 
 declare module kendo.dataviz.map {
@@ -1195,6 +1188,10 @@ declare module <%= key %> {
 %   end
 }
 % end
+
+interface HTMLElement {
+    kendoBindingTarget: kendo.data.Binding;
+}
 
 interface JQueryXHR {
 }
