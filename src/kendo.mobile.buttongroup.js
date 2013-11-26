@@ -77,7 +77,7 @@ kendo_module({
             item = buttongroup.find(item);
             badge = $(item.children(".km-badge")[0] || createBadge(value).appendTo(item));
 
-            if (value) {
+            if (value || value === 0) {
                 badge.html(value);
                 return this;
             }

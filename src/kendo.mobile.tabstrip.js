@@ -86,7 +86,7 @@ kendo_module({
             item = tabstrip.find(item);
             badge = $(item.find(".km-badge")[0] || createBadge(value).insertAfter(item.children(".km-icon")));
 
-            if (value) {
+            if (value || value === 0) {
                 badge.html(value);
                 return this;
             }
