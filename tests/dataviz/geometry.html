@@ -189,6 +189,14 @@
         deepEqual(point.subtract(new Point(5, 10)), point);
     });
 
+    test("add x and y", function() {
+        deepEqual(point.add(new Point(5, 10)), new Point(15, 30));
+    });
+
+    test("add returns point", function() {
+        deepEqual(point.add(new Point(5, 10)), point);
+    });
+
     test("transform applies matrix", function() {
         deepEqual(point.transform(Matrix.translate(10, 10)), new Point(20, 30));
     });

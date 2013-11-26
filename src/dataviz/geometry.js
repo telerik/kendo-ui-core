@@ -89,6 +89,13 @@
             return this;
         },
 
+        add: function(other) {
+            this.x += other.x;
+            this.y += other.y;
+
+            return this;
+        },
+
         subtract: function(other) {
             this.x -= other.x;
             this.y -= other.y;
