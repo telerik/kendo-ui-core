@@ -154,6 +154,15 @@ kendo_module({
             }
         },
 
+        _resize: function() {
+            var t = this.options.transitions;
+            this.options.transitions = false;
+
+            Chart.fn._redraw.call(this);
+
+            this.options.transitions = t;
+        },
+
         _redraw: function() {
             var chart = this,
                 navigator = chart._navigator;
