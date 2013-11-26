@@ -4772,14 +4772,18 @@ kendo_module({
                 markerBoxCenter = point.markerBox().center();
                 if (categoryAxis.options.justified) {
                     result.push(Point2D(prevMarkerBoxCenter.x, prevMarkerBoxCenter.y));
-                    result.push(Point2D(markerBoxCenter.x, prevMarkerBoxCenter.y));
+                    if (vertical) {
+                        result.push(Point2D(prevMarkerBoxCenter.x, markerBoxCenter.y));
+                    } else {
+                        result.push(Point2D(markerBoxCenter.x, prevMarkerBoxCenter.y));
+                    }
                     result.push(Point2D(markerBoxCenter.x, markerBoxCenter.y));
                 } else {
                     if (vertical) {
                         result.push(Point2D(prevMarkerBoxCenter.x, prevPoint.box[Y + dir]));
                         result.push(Point2D(prevMarkerBoxCenter.x, prevPoint.box[Y + revDir]));
                         if (isInterpolate) {
-                            result.push(Point2D(markerBoxCenter.x, prevPoint.box[Y + revDir]));
+                            result.push(Point2D(prevMarkerBoxCenter.x, point.box[Y + dir]));
                         }
                         result.push(Point2D(markerBoxCenter.x, point.box[Y + dir]));
                         result.push(Point2D(markerBoxCenter.x, point.box[Y + revDir]));
@@ -4787,7 +4791,7 @@ kendo_module({
                         result.push(Point2D(prevPoint.box[X + dir], prevMarkerBoxCenter.y));
                         result.push(Point2D(prevPoint.box[X + revDir], prevMarkerBoxCenter.y));
                         if (isInterpolate) {
-                            result.push(Point2D(prevPoint.box[X + revDir], markerBoxCenter.y));
+                            result.push(Point2D(point.box[X + dir], prevMarkerBoxCenter.y));
                         }
                         result.push(Point2D(point.box[X + dir], markerBoxCenter.y));
                         result.push(Point2D(point.box[X + revDir], markerBoxCenter.y));
