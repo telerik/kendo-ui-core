@@ -2310,7 +2310,7 @@ kendo_module({
                          max: addDuration(max || maxCategory, baseUnitStep, baseUnit, options.weekStartDay) };
             } else {
                 return { min: toDate(min || minCategory),
-                         max: toDate(max || maxCategory) };
+                         max: toDate(max || this._srcMaxDate || maxCategory) };
             }
         },
 
@@ -2374,7 +2374,8 @@ kendo_module({
                     range = axis.range(axis.options),
                     timeRange = range.max - range.min,
                     scale = lineSize / timeRange,
-                    divisions = categories.length,
+                    justified = options.justified,
+                    divisions = categories.length - (justified ? 1 : 0),
                     dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
                     startEdge = dir === 1 ? 1 : 2,
                     endEdge = dir === 1 ? 2 : 1,
@@ -2420,7 +2421,11 @@ kendo_module({
             }
 
             if (!options.roundToBaseUnit && !dateEquals(last(groups), max)) {
-                groups.push(max);
+                if (max < nextDate) {
+                    this._srcMaxDate = max;
+                } else {
+                    groups.push(max);
+                }
             }
 
             options.srcCategories = categories;
@@ -2448,8 +2453,6 @@ kendo_module({
             var axis = this,
                 options = axis.options,
                 categories = options.categories,
-                maxIndex = categories.length - 1,
-                roundedValue,
                 equalsRoundedMax,
                 index;
 
@@ -2461,12 +2464,6 @@ kendo_module({
             }
 
             index = lteDateIndex(value, categories);
-            if (index === maxIndex && !options.justified && !options.roundToBaseUnit) {
-                roundedValue = addDuration(value, 0, options.baseUnit, options.startOfWeek);
-                if (!dateEquals(roundedValue, value)) {
-                    index--;
-                }
-            }
 
             return index;
         },
