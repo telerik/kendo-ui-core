@@ -214,7 +214,7 @@ a.k-button
 }
 
 /* Override the important default line-height in Firefox 4+ */
-.k-button:-moz-any(input) {
+.k-ff input.k-button {
     padding-bottom: 0.37em;
     padding-top: 0.37em;
 }
@@ -5134,20 +5134,21 @@ div[name="recurrenceRule"] > .k-dropdown
     vertical-align: top;
 }
 
-:-moz-any(.km-view,.km-pane)
+.k-ff .km-view,
+.k-ff .km-pane
 {
     overflow: hidden;
 }
 
-.k-ff18 *:-moz-any(.km-view,.km-pane),
-.k-ff19 *:-moz-any(.km-view,.km-pane),
-.k-ff20 *:-moz-any(.km-view,.km-pane),
-.k-ff21 *:-moz-any(.km-view,.km-pane)
+.k-ff18 .km-view, .k-ff18 .km-pane,
+.k-ff19 .km-view, .k-ff19 .km-pane,
+.k-ff20 .km-view, .k-ff20 .km-pane,
+.k-ff21 .km-view, .k-ff21 .km-pane
 {
     position: relative;
 }
 
-:-moz-any(.km-view)
+.k-ff .km-view
 {
     display: -moz-inline-box;
     display: flex;
