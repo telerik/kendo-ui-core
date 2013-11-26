@@ -60,7 +60,7 @@
 % if event.options.size > 0
     interface <%= event.type_script_type %> extends <%= type_script_type %>Event {
 % event.options.each do |option|
-% if option.name != 'sender'
+% if option.name != 'sender' && option.name != 'preventDefault'
         <%= option.type_script_declaration %>
 % end
 % end
