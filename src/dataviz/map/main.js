@@ -77,9 +77,7 @@ kendo_module({
                 navigator: {
                     panStep: 100
                 },
-                attribution: {
-                    visible: true
-                }
+                attribution: true
             },
             layers: [],
             layerDefaults: {
@@ -99,7 +97,7 @@ kendo_module({
             zoom: 3,
             minSize: 256,
             minZoom: 1,
-            maxZoom: 18,
+            maxZoom: 19,
             markers: [],
             markerDefaults: {
                 shape: "pinTarget",
@@ -195,13 +193,11 @@ kendo_module({
 
         viewToLocation: function(point, zoom) {
             var origin = this.locationToLayer(this._getOrigin(), zoom);
-            point = point.clone();
-            point.x += origin.x;
-            point.y += origin.y;
+            point = point.clone().add(origin);
             return this.layerToLocation(point, zoom);
         },
 
-        eventToView: function(e) {
+        eventOffset: function(e) {
             var offset = this.element.offset();
             var event = e.originalEvent || e;
             var x = valueOrDefault(event.pageX, event.clientX) - offset.left;
@@ -210,12 +206,18 @@ kendo_module({
             return new g.Point(x, y);
         },
 
+        eventToView: function(e) {
+            var cursor = this.eventOffset(e);
+            return this.locationToView(this.viewToLocation(cursor));
+        },
+
         eventToLayer: function(e) {
             return this.locationToLayer(this.eventToLocation(e));
         },
 
         eventToLocation: function(e) {
-            return this.viewToLocation(this.eventToView(e));
+            var cursor = this.eventOffset(e);
+            return this.viewToLocation(cursor);
         },
 
         viewSize: function() {
@@ -463,7 +465,7 @@ kendo_module({
         },
 
         _click: function(e) {
-            var cursor = this.eventToView(e);
+            var cursor = this.eventOffset(e);
             this.trigger("click", {
                 originalEvent: e,
                 location: this.viewToLocation(cursor)
@@ -480,7 +482,7 @@ kendo_module({
             if (toZoom !== fromZoom) {
                 this.trigger("zoomStart", { originalEvent: e });
 
-                var cursor = this.eventToView(e);
+                var cursor = this.eventOffset(e);
                 var location = this.viewToLocation(cursor);
                 var postZoom = this.locationToLayer(location, toZoom);
                 var origin = postZoom.subtract(cursor);
