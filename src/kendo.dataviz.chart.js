@@ -3184,7 +3184,10 @@ kendo_module({
 
         render: function() {
             var chart = this;
+            console.time("traverseDataPoints");
             chart.traverseDataPoints(proxy(chart.addValue, chart));
+            console.timeEnd("traverseDataPoints");
+            console.log("Points: " + this.points.length);
         },
 
         addErrorBar: function(point, data, categoryIx) {
