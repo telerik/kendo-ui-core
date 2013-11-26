@@ -201,6 +201,14 @@ declare module kendo {
     function unbind(element: JQuery): void;
     function unbind(element: Element): void;
     function guid(): string;
+    function widgetInstance(element: JQuery, suite: typeof kendo.ui): kendo.ui.Widget;
+% if suite =~ /all|mobile/
+    function widgetInstance(element: JQuery, suite: typeof kendo.mobile.ui): kendo.ui.Widget;
+% end
+% if suite =~ /all|dataviz/
+    function widgetInstance(element: JQuery, suite: typeof kendo.dataviz.ui): kendo.ui.Widget;
+% end
+
 
     var ns: string;
 
@@ -1148,12 +1156,36 @@ declare module kendo.mobile.ui {
     }
 }
 % end
-% if suite =~ /all|datviz/
+% if suite =~ /all|dataviz/
 declare module kendo.dataviz.ui {
     function registerTheme(name: string, options: any);
 
     function plugin(widget: new (element: Element, options: Object) => kendo.ui.Widget);
 }
+
+declare module kendo.dataviz.map {
+    class Location {
+    }
+
+    class Extent {
+    }
+}
+
+declare module kendo.dataviz.map.layer {
+    class Shape {
+    }
+}
+
+declare module kendo.dataviz.drawing {
+    class Shape {
+    }
+}
+
+declare module kendo.dataviz.geometry {
+    class Point {
+    }
+}
+
 % end
 % namespaces.keys.each do |key|
 declare module <%= key %> {
