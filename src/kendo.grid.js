@@ -2559,14 +2559,16 @@ kendo_module({
             if (that.options.scrollable) {
                 expander = that.table.parent().children('.' + hiddenDivClass);
                 that._setContentWidthHandler = proxy(that._setContentWidth, that);
-                if (!that.dataSource.view().length) {
+                if (!that.dataSource || !that.dataSource.view().length) {
                     if (!expander[0]) {
                         expander = $(hiddenDiv).appendTo(that.table.parent());
                         if (resizable) {
                             resizable.bind("resize", that._setContentWidthHandler);
                         }
                     }
-                    expander.width(that.thead.width());
+                    if (that.thead) {
+                        expander.width(that.thead.width());
+                    }
                 } else if (expander[0]) {
                     expander.remove();
                     if (resizable) {
@@ -3808,7 +3810,8 @@ kendo_module({
         },
 
         _resize: function() {
-            this.refresh();
+            this._setContentHeight();
+            this._setContentWidth();
         },
 
         refresh: function(e) {
