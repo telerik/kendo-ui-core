@@ -81,7 +81,7 @@ kendo_module({
         badge: function (value) {
             var badge = this.badgeElement = this.badgeElement || createBadge(value).appendTo(this.element);
 
-            if (value) {
+            if (value || value === 0) {
                 badge.html(value);
                 return this;
             }
