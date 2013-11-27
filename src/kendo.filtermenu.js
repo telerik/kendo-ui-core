@@ -575,6 +575,7 @@ kendo_module({
 
         _submit: function(e) {
             e.preventDefault();
+            e.stopPropagation();
 
             this.filter(this.filterModel.toJSON());
 
