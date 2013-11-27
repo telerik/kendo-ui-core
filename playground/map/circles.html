@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map sandbox</title>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <script src="../../src/jquery.js"></script>
+    <script src="../../src/kendo.core.js"></script>
+    <script src="../../src/kendo.fx.js"></script>
+    <script src="../../src/kendo.userevents.js"></script>
+    <script src="../../src/kendo.draganddrop.js"></script>
+    <script src="../../src/kendo.popup.js"></script>
+    <script src="../../src/kendo.tooltip.js"></script>
+    <script src="../../src/kendo.mobile.scroller.js"></script>
+    <script src="../../src/kendo.data.js"></script>
+    <script src="../../src/kendo.dataviz.core.js"></script>
+    <script src="../../src/dataviz/util.js"></script>
+    <script src="../../src/dataviz/geometry.js"></script>
+    <script src="../../src/dataviz/drawing/core.js"></script>
+    <script src="../../src/dataviz/drawing/shapes.js"></script>
+    <script src="../../src/dataviz/drawing/svg.js"></script>
+    <script src="../../src/dataviz/drawing/vml.js"></script>
+    <script src="../../src/dataviz/drawing/canvas.js"></script>
+    <script src="../../src/dataviz/map/location.js"></script>
+    <script src="../../src/dataviz/map/crs.js"></script>
+    <script src="../../src/dataviz/map/layers/tile.js"></script>
+    <script src="../../src/dataviz/map/layers/shape.js"></script>
+    <script src="../../src/dataviz/map/layers/marker.js"></script>
+    <script src="../../src/dataviz/map/attribution.js"></script>
+    <script src="../../src/dataviz/map/main.js"></script>
+    <script src="chroma.min.js"></script>
+    <link rel="stylesheet" href="../../styles/web/kendo.common.css">
+    <link rel="stylesheet" href="../../styles/web/kendo.default.css">
+    <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.css">
+    <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.default.css">
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+    var demoData = {
+        "type": "FeatureCollection",
+        "features": [{
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 0, 52 ]
+            },
+            "properties": {
+                "value": 10
+            }
+        }, {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 5, 52 ]
+            },
+            "properties": {
+                "value": 15
+            }
+        }, {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [ 12, 52 ]
+            },
+            "properties": {
+                "value": 20
+            }
+        }]
+    };
+
+    $("#map").kendoMap({
+        center: [52, 0],
+        layers: [{
+            type: "tile",
+            urlTemplate: "http://tile2.opencyclemap.org/transport/#= zoom #/#= x #/#= y #.png",
+            attribution: "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+        }, {
+            type: "shape",
+            attribution: "Foo",
+            dataSource: {
+                type: "geojson",
+                transport: {
+                    read: function(e) {
+                        e.success(demoData);
+                    }
+                }
+            }
+        }],
+        markerCreated: function(e) {
+            // Don't create a markers for GeoJSON Points
+            e.preventDefault();
+        },
+        shapeCreated: function(e) {
+            var value = e.shape.dataItem.properties.value;
+            if (value) {
+                // A circle is created by default for GeoJSON Point geometries
+                // Just set its radius and color
+                e.shape.geometry.radius = value;
+                e.shape.fill("red", 0.5);
+            }
+        }
+    });
+    </script>
+</body>
+</html>
+
