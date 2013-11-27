@@ -13,7 +13,8 @@ kendo_module({
         deepExtend = kendo.deepExtend,
         dataviz = kendo.dataviz,
         Utils = diagram.Utils,
-        Point = dataviz.Point2D;
+        Point = dataviz.Point2D,
+        isFunction = kendo.isFunction;
 
     // Constants ==============================================================
     var HITTESTAREA = 3,
@@ -405,7 +406,7 @@ kendo_module({
             return content;
         },
         _singleAlign: function (content, alignment) {
-            if (Utils.isFunction(this[alignment])) {
+            if (isFunction(this[alignment])) {
                 return this[alignment](content);
             }
             else {

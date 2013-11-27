@@ -188,7 +188,7 @@ $(function () {
             autoBind: false,
             useScroller: false
         }
-        if (kendo.diagram.Utils.isFunction(window[template])) {
+        if (kendo.isFunction(window[template])) {
             options.visualTemplate = window[template];
         }
         else {

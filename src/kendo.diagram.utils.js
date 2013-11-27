@@ -10,6 +10,7 @@ kendo_module({
         diagram = kendo.diagram = {},
         Class = kendo.Class,
         deepExtend = kendo.deepExtend,
+        isArray = $.isArray,
         EPSILON = 1e-06;
 
     /*-------------------Diverse utilities----------------------------*/
@@ -40,12 +41,6 @@ kendo_module({
             return Object.hasOwnProperty.call(obj, key);
         },
         /**
-         * Returns whether the given object is a function.
-         */
-        isFunction: function (obj) {
-            return typeof obj === 'function';
-        },
-        /**
          * Returns whether the given object is a string.
          */
         isString: function (obj) {
@@ -70,7 +65,7 @@ kendo_module({
             if (obj === null) {
                 return true;
             }
-            if (Utils.isArray(obj) || Utils.isString(obj)) {
+            if (isArray(obj) || Utils.isString(obj)) {
                 return obj.length === 0;
             }
             for (var key in obj) {
@@ -79,12 +74,6 @@ kendo_module({
                 }
             }
             return true;
-        },
-        /**
-         * Returns whether the object is an array.
-         */
-        isArray: function (obj) {
-            return Object.prototype.toString.call(obj) == '[object Array]';
         },
         /**
          * Returns an array of the specified size and with each entry set to the given value.
@@ -417,7 +406,7 @@ kendo_module({
     if (!Array.prototype.apply) {
         Array.prototype.apply = function (method) {
             var args = Array.prototype.slice.call(arguments, 1).prepend(0);  // dummy holder at first position to replace in apply below
-            var isFunc = Utils.isFunction(method);
+            var isFunc = kendo.isFunction(method);
             return this.map(function (value) {
                 args.splice(0, 1, value);
                 return (isFunc ? method : value[method]).apply(method, args);

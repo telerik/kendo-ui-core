@@ -42,7 +42,11 @@ kendo_module({
         Dictionary = diagram.Dictionary,
         PolylineRouter = diagram.PolylineRouter,
         CascadingRouter = diagram.CascadingRouter,
-        isUndefined = Utils.isUndefined;
+        isUndefined = Utils.isUndefined,
+        isDefined = Utils.isDefined,
+        isArray = $.isArray,
+        isFunction = kendo.isFunction,
+        isString = Utils.isString;
 
     // Constants ==============================================================
     var NS = ".kendoDiagram",
@@ -413,7 +417,7 @@ kendo_module({
             var point, size, bounds, options;
             options = this.options;
             if (value) {
-                if (Utils.isString(value)) {
+                if (isString(value)) {
                     switch (value) {
                         case TRANSFORMED :
                             bounds = this._transformedBounds();
@@ -572,7 +576,7 @@ kendo_module({
          */
         getConnector: function (nameOrPoint) {
             var i, ctr;
-            if (Utils.isString(nameOrPoint)) {
+            if (isString(nameOrPoint)) {
                 nameOrPoint = nameOrPoint.toLocaleLowerCase();
                 for (i = 0; i < this.connectors.length; i++) {
                     ctr = this.connectors[i];
@@ -591,7 +595,7 @@ kendo_module({
         getPosition: function (side) {
             var b = this.bounds(),
                 fnName = side[0].toLowerCase() + side.slice(1);
-            if (Utils.isFunction(b[fnName])) {
+            if (isFunction(b[fnName])) {
                 return this._transformPoint(b[fnName]());
             }
             return b.center();
@@ -665,7 +669,7 @@ kendo_module({
     Shape.createShapeVisual = function (options) {
         var shapeOptions = deepExtend({}, options, { x: 0, y: 0 }),
             visualTemplate = shapeOptions.data; // Shape visual should not have position in its parent group.
-        if (Utils.isString(visualTemplate)) {
+        if (isString(visualTemplate)) {
             switch (shapeOptions.data.toLocaleLowerCase()) {
                 case "rectangle":
                     return new Rectangle(shapeOptions);
@@ -678,7 +682,7 @@ kendo_module({
                     return p;
             }
         }
-        else if (Utils.isFunction(visualTemplate)) {// custom template
+        else if (isFunction(visualTemplate)) {// custom template
             return visualTemplate(shapeOptions.context);
         }
         return new Rectangle(shapeOptions);
@@ -700,7 +704,7 @@ kendo_module({
             that.target(to);
             that.content(that.options.content.text);
             that.definers = [];
-            if (Utils.isDefined(options) && options.points) {
+            if (isDefined(options) && options.points) {
                 that.points(options.points);
             }
             that.refresh();
@@ -729,7 +733,7 @@ kendo_module({
          * @param undoable Whether the change or assignment should be undoable.
          */
         source: function (source, undoable) {
-            if (Utils.isDefined(source)) {
+            if (isDefined(source)) {
                 if (undoable && this.diagram) {
                     this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, source));
                 }
@@ -801,7 +805,7 @@ kendo_module({
          * @param undoable  Whether the change or assignment should be undoable.
          */
         target: function (target, undoable) {
-            if (Utils.isDefined(target)) {
+            if (isDefined(target)) {
                 if (undoable && this.diagram) {
                     this.diagram.undoRedoService.addCompositeItem(new kendo.diagram.ConnectionEditUnit(this, target));
                 }
@@ -954,7 +958,7 @@ kendo_module({
 
             } else {
                 var pts = [];
-                if (Utils.isDefined(this.definers)) {
+                if (isDefined(this.definers)) {
                     for (var k = 0; k < this.definers.length; k++) {
                         pts.push(this.definers[k].point);
                     }
@@ -999,7 +1003,7 @@ kendo_module({
         redraw: function (options) {
             this.options = deepExtend({}, this.options, options);
             this.content(this.options.content.text);
-            if (Utils.isDefined(this.options.points) && this.options.points.length > 0) {
+            if (isDefined(this.options.points) && this.options.points.length > 0) {
                 this.points(this.options.points);
                 this._refreshPath();
             }
@@ -1179,7 +1183,6 @@ kendo_module({
 
             that.clear();
             that.element.off(NS);
-            // TODO: Destroy all the shapes, connections and the tons of other stuff!
             that.canvas.element.removeChild(that.canvas.native);
             that.canvas = undefined;
 
@@ -1340,7 +1343,7 @@ kendo_module({
          * @param undoable.
          */
         remove: function (items, undoable) {
-            var isMultiple = $.isArray(items);
+            var isMultiple = isArray(items);
 
             if (isUndefined(undoable)) {
                 undoable = true;
@@ -1493,7 +1496,7 @@ kendo_module({
             if (item instanceof DiagramElement) {
                 rect = item.bounds(TRANSFORMED);
             }
-            else if (Utils.isArray(item)) {
+            else if (isArray(item)) {
                 rect = this.getBoundingBox(item);
             }
             else if (item instanceof Rect) {
@@ -1703,7 +1706,7 @@ kendo_module({
          */
         getBoundingBox: function (items, origin) {
             var rect = Rect.empty(), temp,
-                di = Utils.isDefined(items) ? this._getDiagramItems(items) : {shapes: this.shapes};
+                di = isDefined(items) ? this._getDiagramItems(items) : {shapes: this.shapes};
             if (di.shapes.length > 0) {
                 var item = di.shapes[0];
                 if (origin === true) {
@@ -1970,7 +1973,7 @@ kendo_module({
             if (!items) {
                 args = this._selectedItems;
             }
-            else if (!Utils.isArray(items)) {
+            else if (!isArray(items)) {
                 args = [items];
             }
             for (i = 0; i < args.length; i++) {
@@ -2198,7 +2201,7 @@ kendo_module({
                 options = that.options,
                 dataSource = options.dataSource;
 
-            dataSource = Utils.isArray(dataSource) ? { data: dataSource } : dataSource;
+            dataSource = isArray(dataSource) ? { data: dataSource } : dataSource;
 
             if (!dataSource.fields) {
                 dataSource.fields = [
