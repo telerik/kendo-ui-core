@@ -143,6 +143,7 @@
 
         test("should not add empty text", function() {
             attr.add();
+            attr.add("");
 
             equal(attr.element.html(), "");
         });
