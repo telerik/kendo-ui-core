@@ -289,8 +289,8 @@
             var location = Location.fromLngLat(coords);
             var point = this.locator.locationToView(location);
 
-            var circle = new g.Circle(point, 1);
-            var shape = new d.Circle(circle);
+            var circle = new g.Circle(point, 10);
+            var shape = new d.Circle(circle, this.style);
             shape.dataItem = dataItem;
             shape.location = location;
 
