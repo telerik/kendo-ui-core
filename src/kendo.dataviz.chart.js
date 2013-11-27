@@ -7373,12 +7373,8 @@ kendo_module({
                 allAxes = axes.concat(pane.parent.axes),
                 vGridLines = [],
                 hGridLines = [],
-                gridLines,
-                i,
-                j,
-                axis,
-                vertical,
-                altAxis;
+                gridLines, i, j, axis,
+                vertical, altAxis;
 
             for (i = 0; i < axes.length; i++) {
                 axis = axes[i];
@@ -7510,7 +7506,7 @@ kendo_module({
                         currentCrosshair = new Crosshair(axis, axis.options.crosshair);
 
                         plotArea.crosshairs.push(currentCrosshair);
-                        plotArea.append(currentCrosshair);
+                        pane.content.append(currentCrosshair);
                     }
                 }
             }
@@ -8200,6 +8196,7 @@ kendo_module({
             },
             valueAxis: {}
         },
+
         render: function(panes) {
             var plotArea = this;
 
@@ -8210,6 +8207,7 @@ kendo_module({
             plotArea.createCharts(panes);
             plotArea.createValueAxes(panes);
         },
+
         removeAxis: function(axis) {
             var plotArea = this,
                 axisName = axis.options.name;
