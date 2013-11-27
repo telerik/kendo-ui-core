@@ -45,7 +45,8 @@ namespace Kendo.Mvc.UI
                 
             if (Shape.HasValue)
             {
-                json["shape"] = Shape;
+                var shapeName = Shape.ToString();
+                json["shape"] = shapeName.ToLowerInvariant()[0] + shapeName.Substring(1);
             }
         }
     }
