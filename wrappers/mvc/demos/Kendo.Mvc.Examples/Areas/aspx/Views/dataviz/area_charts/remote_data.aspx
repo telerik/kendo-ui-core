@@ -20,6 +20,7 @@
             .Categories(model => model.Year)
             .Labels(labels => labels.Rotation(-90))
             .Justify()
+            .Crosshair(c => c.Visible(true))
         )
         .ValueAxis(axis => axis.Numeric()
             .Labels(labels => labels.Format("{0:N0}"))
@@ -27,6 +28,7 @@
         )
         .Tooltip(tooltip => tooltip
             .Visible(true)
+            .Shared(true)
             .Format("{0:N0}")
         )
     %>
