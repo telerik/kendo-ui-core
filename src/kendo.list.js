@@ -132,7 +132,7 @@ kendo_module({
             var header;
 
             if ($.isFunction(template)) {
-                template = template();
+                template = template({});
             }
 
             if (template) {
