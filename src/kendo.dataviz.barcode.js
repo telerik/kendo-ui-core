@@ -1402,15 +1402,12 @@ kendo_module({
 
     encodings.ean13 = Encoding.extend({
         initValue: function(value, width, height){
-            if(typeof(value)=="number"){
-                value+="";
-            }
+            value+="";
+
             if(value.length!=12 || /\D/.test(value)){
-                throw new Error('Invalid value provided');
+                throw new Error('The value of the "EAN13" encoding should be 12 symbols');
             }
-            else if(value.length<12){
-                value = '';
-            }
+
             var that = this;
             that.pattern = [];
             that.options.height = height;
