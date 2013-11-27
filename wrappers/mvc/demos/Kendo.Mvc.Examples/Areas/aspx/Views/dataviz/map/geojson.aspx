@@ -2,8 +2,8 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <%: Html.Kendo().Map()
       .Name("map")
-      .Center(51.505, -0.09)
-      .Zoom(4)
+      .Center(30.2681, -97.7448)
+      .Zoom(3)
       .Layers(layers => 
        {
            layers.Add()
