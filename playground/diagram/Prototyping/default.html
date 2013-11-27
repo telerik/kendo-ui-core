@@ -252,10 +252,11 @@
         </div>
 
         <div id="canvasDiv">
-            <canvas id="backgroundGrid"
-                    style="z-index: 0; position: absolute;top: 0;left: 0;"></canvas>
+            <canvas id="backgroundGrid" style="z-index: 0; position: absolute;top: 0;left: 0;"></canvas>
+            <canvas  id='ruler' style="position: absolute;top: 0;left: 0;"></canvas>
+            <canvas id='guides' style="z-index:0; position: absolute;top: 0;left: 0;"></canvas>
+            
             <div id="canvas"></div>
-
 
         </div>
     </div>
@@ -277,57 +278,158 @@
         </svg>
     </div>
 
+
+
+
+
 </script>
 
 <script>
 
-var canvas = document.getElementById('backgroundGrid');
-var ctx = canvas.getContext('2d');
+var backgroundGridElement = document.getElementById('backgroundGrid'),
+        rulerElement = document.getElementById('ruler'),
+        guidesElement = document.getElementById('guides'),
+        diagramElement = document.getElementById('canvas'),
+        gridContext = backgroundGridElement.getContext('2d'),
+        rulerContext = rulerElement.getContext('2d'),
+        guidesContext = guidesElement.getContext('2d'),
+        ruler,
+        GUTTERSIZE = 25;
 
-function updateGrid(v) {
-    var canv = document.getElementById('canvas');
-    canvas.width = canv.clientWidth;
-    canvas.height = canv.clientHeight;
-    ctx.clear();
-    ctx.beginPath();
+function updateGuides(guidePosition)
+{
+    if(!guidePosition)return;
+    guidesElement.width = diagramElement.clientWidth;
+    guidesElement.height = diagramElement.clientHeight;
+    guidesContext.clear();
+    guidesContext.beginPath();
+    guidesContext.moveTo(guidePosition.x, 0.5);
+    guidesContext.lineTo(guidePosition.x, guidesElement.width + 0.5)
+    guidesContext.moveTo(0.5, guidePosition.y );
+    guidesContext.lineTo(guidesElement.width + 0.5, guidePosition.y)
+    guidesContext.strokeStyle = 'red';
+    guidesContext.lineWidth = 1.5;
+    guidesContext.stroke();
+}
+function updateGrid(zoom) {
 
-    var width = canvas.width;
-    var height = canvas.height;
+    backgroundGridElement.width = diagramElement.clientWidth;
+    backgroundGridElement.height = diagramElement.clientHeight;
+    gridContext.clear();
+    gridContext.beginPath();
+
+    var width = backgroundGridElement.width;
+    var height = backgroundGridElement.height;
+    var delta = zoom <= 0.7 ? 20 : 10;
+    for (var i = 0; i < width; i += (zoom * delta)) {
+        if (i % (zoom * 100) === 0) continue;
+        gridContext.moveTo(i + 0.5, 0);
+        gridContext.lineTo(i + 0.5, height)
+    }
+
+    for (var i = 0; i < height; i += (zoom * delta)) {
+        if (i % (zoom * 100) === 0) continue;
+        gridContext.moveTo(0, i + 0.5);
+        gridContext.lineTo(width, i + 0.5)
+    }
+    gridContext.lineWidth = 0.5;
+    gridContext.strokeStyle = 'rgba(0, 0, 0, 0.2);'
+    gridContext.stroke();
+
+    gridContext.beginPath();
+    for (var i = 0; i < width; i += (zoom * 100)) {
+        gridContext.moveTo(i + 0.5, 0);
+        gridContext.lineTo(i + 0.5, height)
+    }
+    gridContext.strokeStyle = 'rgba(0, 0, 0, 0.3);'
+    gridContext.lineWidth = 1.2;
+    gridContext.stroke();
+
+    gridContext.beginPath();
+    for (var i = 0; i < height; i += (zoom * 100)) {
+        gridContext.moveTo(0, i + 0.5);
+        gridContext.lineTo(width, i + 0.5)
+    }
+    gridContext.strokeStyle = 'rgba(0, 0, 0, 0.3);'
+    gridContext.lineWidth = 1.2;
+    gridContext.stroke();
+
+}
+function relMouseCoords(event) {
+    var totalOffsetX = 0;
+    var totalOffsetY = 0;
+    var canvasX = 0;
+    var canvasY = 0;
+    var currentElement = diagramElement;
+
+    do {
+        totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
+        totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
+    }
+    while (currentElement = currentElement.offsetParent)
+
+    canvasX = event.pageX - totalOffsetX;
+    canvasY = event.pageY - totalOffsetY;
+
+    return {x: canvasX, y: canvasY}
+}
+HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
+function updateRuler(v) {
+
+    var diagramElement = document.getElementById('canvas');
+    rulerElement.width = diagramElement.clientWidth;
+    rulerElement.height = diagramElement.clientHeight;
+    this.rulerContext.clear();
+    this.rulerContext.fillStyle = "rgb(33, 42, 51)";
+    this.rulerContext.fillRect(0, 0, this.rulerElement.width, GUTTERSIZE);
+    this.rulerContext.fillRect(0, 0, GUTTERSIZE, this.rulerElement.height);
+
+    gridContext.beginPath();
+    this.rulerContext.strokeStyle = "#aaaaaa";
+
+    var width = backgroundGridElement.width;
+    var height = backgroundGridElement.height;
     var delta = v <= 0.7 ? 20 : 10;
     for (var i = 0; i < width; i += (v * delta)) {
-        if (i % (v * 100) === 0) continue;
-        ctx.moveTo(i + 0.5, 0);
-        ctx.lineTo(i + 0.5, height)
+        if (i % (v * 100) === 0 || i <= GUTTERSIZE) continue;
+        rulerContext.moveTo(i + 0.5, 0);
+        rulerContext.lineTo(i + 0.5, 10)
     }
 
     for (var i = 0; i < height; i += (v * delta)) {
-        if (i % (v * 100) === 0) continue;
-        ctx.moveTo(0, i + 0.5);
-        ctx.lineTo(width, i + 0.5)
+        if (i % (v * 100) === 0 || i <= GUTTERSIZE) continue;
+        rulerContext.moveTo(0, i + 0.5);
+        rulerContext.lineTo(10, i + 0.5)
     }
-    ctx.strokeStyle = 'rgba(0, 0, 0, 0.2);'
-    ctx.stroke();
+    rulerContext.lineWidth = 0.5;
 
-    ctx.beginPath();
+    rulerContext.stroke();
+
+    rulerContext.beginPath();
     for (var i = 0; i < width; i += (v * 100)) {
-        ctx.moveTo(i + 0.5, 0);
-        ctx.lineTo(i + 0.5, height)
+        rulerContext.moveTo(i + 0.5, 0);
+        rulerContext.lineTo(i + 0.5, 15)
     }
-    ctx.strokeStyle = 'rgba(0, 0, 0, 0.3);'
-    ctx.lineWidth = 1.2;
-    ctx.stroke();
 
-    ctx.beginPath();
+    rulerContext.lineWidth = 1.2;
+    rulerContext.stroke();
+
+    rulerContext.beginPath();
     for (var i = 0; i < height; i += (v * 100)) {
-        ctx.moveTo(0, i + 0.5);
-        ctx.lineTo(width, i + 0.5)
+        rulerContext.moveTo(0, i + 0.5);
+        rulerContext.lineTo(15, i + 0.5)
     }
-    ctx.strokeStyle = 'rgba(0, 0, 0, 0.3);'
-    ctx.lineWidth = 1.2;
-    ctx.stroke();
+
+    rulerContext.lineWidth = 1.2;
+    rulerContext.stroke();
 }
+function loadRuler() {
 
-
+    diagramElement.onmousemove = function (e) {
+        var guidePosition = relMouseCoords(e);
+        updateGuides(guidePosition);
+    }
+}
 var Shapes = {
 };
 
@@ -366,6 +468,8 @@ CanvasRenderingContext2D.prototype.clear =
 $(function () {
     function onload() {
         updateGrid(1.0);
+        loadRuler();
+        updateRuler(1.0);
     }
 
     function createSplitters() {
@@ -447,6 +551,11 @@ $(function () {
         zoom: function (e) {
             slider.value(this._zoom);
             updateGrid(this._zoom);
+            updateRuler(this._zoom);
+            function rerule() {
+                updateRuler(this._zoom);
+            };
+            window.onresize = rerule.call(this);
         },
         select: function (e) {
             var items = e.selected;
