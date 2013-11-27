@@ -182,7 +182,7 @@ kendo_module({
                 that.iconElement = element.prepend($(iconSpan + '" />'));
             }
 
-            if (badge) {
+            if (badge || badge === 0) {
                 that.badgeElement = createBadge(badge).appendTo(element);
             }
         }

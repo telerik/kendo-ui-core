@@ -145,7 +145,7 @@ kendo_module({
                 button.prepend(iconSpan);
                 if (icon) {
                     iconSpan.addClass("km-" + icon);
-                    if (badge) {
+                    if (badge || badge === 0) {
                         createBadge(badge).insertAfter(iconSpan);
                     }
                 }
