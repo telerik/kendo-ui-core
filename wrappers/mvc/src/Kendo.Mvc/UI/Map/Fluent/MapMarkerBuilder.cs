@@ -31,6 +31,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
 
         /// <summary>
+        /// The marker shape name. The "pin" and "pinTarget" shapes are predefined.
+        /// </summary>
+        /// <param name="value">The name of the shape.</param>
+        public MapMarkerBuilder Shape(string name)
+        {
+            container.ShapeName = name;
+
+            return this;
+        }
+
+        /// <summary>
         /// Configures the location of the marker.
         /// </summary>
         /// <param name="latitude">The latitude</param>
