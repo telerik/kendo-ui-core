@@ -2357,6 +2357,26 @@ kendo_module({
             options.baseUnit = baseUnit;
         },
 
+        _timeScale: function() {
+            var axis = this,
+                range = axis.range(),
+                options = axis.options,
+                lineBox = axis.lineBox(),
+                vertical = options.vertical,
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                timeRange;
+
+            if (options.justified) {
+                var categoryLimits = sparseArrayLimits(options.categories);
+                var maxCategory = toTime(categoryLimits.max);
+                timeRange = toDate(options.max || maxCategory) - range.min;
+            } else {
+                timeRange = range.max - range.min;
+            }
+
+            return lineSize / timeRange;
+        },
+
         getMajorTickPositions: function() {
             var axis = this,
                 options = axis.options,
@@ -2369,13 +2389,10 @@ kendo_module({
                 var vertical = options.vertical,
                     reverse = options.reverse,
                     lineBox = axis.lineBox(),
-                    lineSize = vertical ? lineBox.height() : lineBox.width(),
                     startTime = categories[0].getTime(),
-                    range = axis.range(axis.options),
-                    timeRange = range.max - range.min,
-                    scale = lineSize / timeRange,
                     justified = options.justified,
                     divisions = categories.length - (justified ? 1 : 0),
+                    scale= axis._timeScale(),
                     dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
                     startEdge = dir === 1 ? 1 : 2,
                     endEdge = dir === 1 ? 2 : 1,
