@@ -3810,8 +3810,10 @@ kendo_module({
         },
 
         _resize: function() {
-            this._setContentHeight();
-            this._setContentWidth();
+            if (this.content) {
+                this._setContentHeight();
+                this._setContentWidth();
+            }
         },
 
         refresh: function(e) {
