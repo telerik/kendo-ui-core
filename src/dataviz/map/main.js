@@ -115,6 +115,7 @@ kendo_module({
             "reset",
             "pan",
             "panEnd",
+            "markerCreated",
             "shapeClick",
             "shapeCreated",
             "shapeMouseEnter",
