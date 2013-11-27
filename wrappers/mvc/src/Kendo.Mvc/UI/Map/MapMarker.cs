@@ -27,8 +27,10 @@ namespace Kendo.Mvc.UI
         public double[] Location { get; set; }
 
         public Tooltip Tooltip { get; set; }
-        
+
         public MapMarkersShape? Shape { get; set; }
+
+        public string ShapeName { get; set; }
 
         protected override void Serialize(IDictionary<string, object> json)
         {
@@ -42,8 +44,12 @@ namespace Kendo.Mvc.UI
             {
                 json["tooltip"] = tooltip;
             }
-                
-            if (Shape.HasValue)
+
+            if (ShapeName.HasValue())
+            {
+                json["shape"] = ShapeName;
+            }
+            else if (Shape.HasValue)
             {
                 var shapeName = Shape.ToString();
                 json["shape"] = shapeName.ToLowerInvariant()[0] + shapeName.Substring(1);
