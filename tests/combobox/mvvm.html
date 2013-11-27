@@ -185,6 +185,16 @@
                 equal(observable.items[0]._events["change"].length, 2); //1 for the text binding and 1 for the ObservableArray
             });
 
+            test("binding header template", function() {
+                var dom = $('<select data-header-template="headerTemplate" data-role="combobox" data-bind="source:items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+
+                kendo.bind(dom, observable);
+
+                equal($.trim(dom.data("kendoComboBox").list.children(":first")[0].outerHTML), "<strong>Title</strong>");
+            });
+
             test("removing items from the model updates the UI", function() {
                 var dom = $('<select data-bind="source:items" />');
 
@@ -475,6 +485,9 @@
         </script>
         <script id="template-with-attributes" type="text/x-kendo-template">
             <strong data-bind="text:text"></strong>
+        </script>
+        <script id="headerTemplate" type="text/x-kendo-template">
+           <strong>Title</strong>
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
