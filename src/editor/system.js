@@ -505,6 +505,7 @@ var Clipboard = Class.extend({
             },
             function afterPaste(editor, range) {
                 var html = "", args = { html: "" }, containers;
+                var browser = kendo.support.browser;
 
                 editor.selectRange(range);
 
@@ -522,7 +523,11 @@ var Clipboard = Class.extend({
 
                 containers.remove();
 
-                html = this._fixTagNesting(html.replace(/\ufeff/g, ""));
+                html = html.replace(/\ufeff/g, "");
+
+                if (browser.msie && browser.version < 9) {
+                    html = this._fixTagNesting(html);
+                }
 
                 args.html = html;
 
@@ -764,7 +769,9 @@ var MSWordFormatCleaner = Cleaner.extend({
             i = attributes.length;
 
         while (i--) {
-            element.removeAttributeNode(attributes[i]);
+            if (attributes[i].name != "colspan") {
+                element.removeAttributeNode(attributes[i]);
+            }
         }
     },
 
@@ -794,6 +801,7 @@ var MSWordFormatCleaner = Cleaner.extend({
 
     convertHeaders: function(row) {
         var cells = row.cells,
+            i,
             boldedCells = $.map(cells, function(cell) {
                 var child = $(cell).children("p").children("strong")[0];
 
@@ -803,17 +811,17 @@ var MSWordFormatCleaner = Cleaner.extend({
             });
 
         if (boldedCells.length == cells.length) {
-            for (var i = 0; i < boldedCells.length; i++) {
+            for (i = 0; i < boldedCells.length; i++) {
                 dom.unwrap(boldedCells[i]);
             }
 
-            $(row).closest("table").find("colgroup").after(
-                "<thead><tr>" +
-                $.map(cells, function(cell) {
-                    return "<th>" + $(cell).html() + "</th>";
-                }).join("") +
-                "</tr></thead>"
-            ).end().end().remove();
+            $(row).closest("table")
+                .find("colgroup").after("<thead></thead>").end()
+                .find("thead").append(row);
+
+            for (i = 0; i < cells.length; i++) {
+                dom.changeTag(cells[i], "th");
+            }
         }
     },
 
@@ -848,12 +856,20 @@ var MSWordFormatCleaner = Cleaner.extend({
     tables: function(placeholder) {
         var tables = $(placeholder).find("table"),
             that = this,
-            firstRow, i;
+            rows,
+            firstRow, longestRow, i, j;
 
         for (i = 0; i < tables.length; i++) {
-            firstRow = tables[i].rows[0];
+            rows = tables[i].rows;
+            longestRow = firstRow = rows[0];
 
-            that.createColGroup(firstRow);
+            for (j = 1; j < rows.length; j++) {
+                if (rows[j].cells.length > longestRow.cells.length) {
+                    longestRow = rows[j];
+                }
+            }
+
+            that.createColGroup(longestRow);
             that.convertHeaders(firstRow);
 
             that.removeAttributes(tables[i]);
