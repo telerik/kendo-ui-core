@@ -310,17 +310,17 @@ declare module kendo {
     }
 
     class Layout extends View {
-        showIn(selector: string, view: View);
+        showIn(selector: string, view: View): void;
         regions: { [selector: string]: View; };
     }
 
     class History extends Observable {
-        start(options): void;
+        start(options: Object): void;
         stop(): void;
         current: string;
         root: string;
-        change(callback): void;
-        navigate(location: string, silent?: boolean);
+        change(callback: Function): void;
+        navigate(location: string, silent?: boolean): void;
     }
 
     var history: History;
@@ -350,7 +350,7 @@ declare module kendo {
         start(): void;
         destroy(): void;
         route(route: string, callback: Function): void;
-        navigate(location: string, silent?: boolean);
+        navigate(location: string, silent?: boolean): void;
         routes: Route[];
     }
 
@@ -473,9 +473,9 @@ declare module kendo.data {
         dependencies: { [path: string]: boolean; };
         observable: boolean;
         constructor(parents: any[], path: string);
-        change(e): void;
-        start(source): void;
-        stop(source): void;
+        change(e: Object): void;
+        start(source: kendo.Observable): void;
+        stop(source: kendo.Observable): void;
         get (): any;
         set (value: any): void;
         destroy(): void;
@@ -486,8 +486,8 @@ declare module kendo.data {
     }
 
     class TemplateBinding extends Binding {
-        constructor(source, path, template);
-        render(value): string;
+        constructor(source: kendo.Observable, path: string, template: Function);
+        render(value: Object): string;
     }
 
     module binders { }
@@ -504,7 +504,7 @@ declare module kendo.data {
         bindings: Bindings;
         constructor(element: any, bindings: Bindings, options?: BinderOptions);
         init(element: any, bindings: Bindings, options?: BinderOptions): void;
-        bind(binding: Binding, attribute: string);
+        bind(binding: Binding, attribute: string): void;
         destroy(): void;
         refresh(): void;
         refresh(attribute: string): void;
@@ -706,16 +706,16 @@ declare module kendo.data {
         shift(): any;
         toJSON(): any[];
         unshift(...items: any[]): number;
-        wrapAll(source, target): any;
-        wrap(object, parent): any;
+        wrapAll(source: Object, target: Object): any;
+        wrap(object: Object, parent: Object): any;
         indexOf(item: any): number;
-        forEach(callback: (item, index: number, source: ObservableArray) => void ): void;
-        map(callback: (item, index: number, source: ObservableArray) => any): any[];
-        filter(callback: (item, index: number, source: ObservableArray) => boolean): any[];
-        find(callback: (item, index: number, source: ObservableArray) => boolean): any;
-        every(callback: (item, index: number, source: ObservableArray) => boolean): boolean;
-        some(callback: (item, index: number, source: ObservableArray) => boolean): boolean;
-        remove(item): void;
+        forEach(callback: (item: Object, index: number, source: ObservableArray) => void ): void;
+        map(callback: (item: Object, index: number, source: ObservableArray) => any): any[];
+        filter(callback: (item: Object, index: number, source: ObservableArray) => boolean): any[];
+        find(callback: (item: Object, index: number, source: ObservableArray) => boolean): any;
+        every(callback: (item: Object, index: number, source: ObservableArray) => boolean): boolean;
+        some(callback: (item: Object, index: number, source: ObservableArray) => boolean): boolean;
+        remove(item: Object): void;
     }
 
     interface ObservableArrayEvent {
@@ -965,7 +965,7 @@ declare module kendo.data.transports {
 }
 
 declare module kendo.ui {
-    function progress(container: JQuery, toggle: boolean);
+    function progress(container: JQuery, toggle: boolean): void;
 
     class Widget extends Observable {
         static fn: Widget;
@@ -983,15 +983,15 @@ declare module kendo.ui {
         resize(force?: boolean): void;
     }
 
-    function plugin(widget: typeof kendo.ui.Widget, register?: typeof kendo.ui, prefix?: String);
-    function plugin(widget: any, register?: typeof kendo.ui, prefix?: String);
+    function plugin(widget: typeof kendo.ui.Widget, register?: typeof kendo.ui, prefix?: String): void;
+    function plugin(widget: any, register?: typeof kendo.ui, prefix?: String): void;
 % if suite =~ /all|mobile/
-    function plugin(widget: typeof kendo.ui.Widget, register?: typeof kendo.mobile.ui, prefix?: String);
-    function plugin(widget: any, register?: typeof kendo.mobile.ui, prefix?: String);
+    function plugin(widget: typeof kendo.ui.Widget, register?: typeof kendo.mobile.ui, prefix?: String): void;
+    function plugin(widget: any, register?: typeof kendo.mobile.ui, prefix?: String): void;
 % end
 % if suite =~ /all|dataviz/
-    function plugin(widget: typeof kendo.ui.Widget, register?: typeof kendo.dataviz.ui, prefix?: String);
-    function plugin(widget: any, register?: typeof kendo.dataviz.ui, prefix?: String);
+    function plugin(widget: typeof kendo.ui.Widget, register?: typeof kendo.dataviz.ui, prefix?: String): void;
+    function plugin(widget: any, register?: typeof kendo.dataviz.ui, prefix?: String): void;
 % end
 
     class Draggable extends kendo.ui.Widget{
@@ -1150,10 +1150,10 @@ declare module kendo.mobile.ui {
 % end
 % if suite =~ /all|dataviz/
 declare module kendo.dataviz.ui {
-    function registerTheme(name: string, options: any);
+    function registerTheme(name: string, options: any): void;
 
-    function plugin(widget: typeof kendo.ui.Widget);
-    function plugin(widget: any);
+    function plugin(widget: typeof kendo.ui.Widget): void;
+    function plugin(widget: any): void;
 }
 
 declare module kendo.dataviz.map {
