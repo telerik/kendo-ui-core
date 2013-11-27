@@ -12,7 +12,6 @@ kendo_module({
         template = kendo.template,
 
         dataviz = kendo.dataviz,
-        defined = dataviz.defined,
         valueOrDefault = dataviz.util.valueOrDefault;
 
     var Attribution = Widget.extend({
@@ -36,7 +35,7 @@ kendo_module({
         },
 
         add: function(item) {
-            if (defined(item)) {
+            if (item) {
                 if (typeof item === "string") {
                     item = { text: item };
                 }
