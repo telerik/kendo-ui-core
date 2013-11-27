@@ -18,6 +18,7 @@ kendo_module({
         RectAlign = diagram.RectAlign,
         Matrix = diagram.Matrix,
         Utils = diagram.Utils,
+        isUndefined = Utils.isUndefined,
         MatrixVector = diagram.MatrixVector;
 
     // Constants ==============================================================
@@ -179,7 +180,7 @@ kendo_module({
             element.redraw();
         },
         visible: function (value) {
-            if (Utils.isUndefined(value)) {
+            if (isUndefined(value)) {
                 return this._visible;
             }
             else {
@@ -188,7 +189,7 @@ kendo_module({
             }
         },
         setAtr: function (atr, prop) {
-            if (Utils.isUndefined(prop) || Utils.isUndefined(this.options[prop])) {
+            if (isUndefined(prop) || isUndefined(this.options[prop])) {
                 return;
             }
             if (this.options[prop] !== undefined) {
@@ -435,7 +436,7 @@ kendo_module({
             $(this.native).focus();
         },
         content: function (text) {
-            if (!Utils.isUndefined(text)) {
+            if (!isUndefined(text)) {
                 this.native.value = this.options.text = text;
             }
 
@@ -628,7 +629,7 @@ kendo_module({
 
         },
         points: function (value) {
-            if (Utils.isUndefined(value)) {
+            if (isUndefined(value)) {
                 return this._points;
             }
             else {
@@ -817,7 +818,7 @@ kendo_module({
         viewBox: function (rect) {
             var canvas = this;
 
-            if (Utils.isUndefined(rect)) {
+            if (isUndefined(rect)) {
                 return canvas.native.viewBox.baseVal ? Rect.toRect(canvas.native.viewBox.baseVal) : Rect.empty();
             }
 

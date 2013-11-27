@@ -41,7 +41,8 @@ kendo_module({
         ToFrontUnit = diagram.ToFrontUnit,
         Dictionary = diagram.Dictionary,
         PolylineRouter = diagram.PolylineRouter,
-        CascadingRouter = diagram.CascadingRouter;
+        CascadingRouter = diagram.CascadingRouter,
+        isUndefined = Utils.isUndefined;
 
     // Constants ==============================================================
     var NS = ".kendoDiagram",
@@ -268,7 +269,7 @@ kendo_module({
             return Cursors.select;
         },
         visible: function (value) {
-            if (Utils.isUndefined(value)) {
+            if (isUndefined(value)) {
                 return this.visual.visible();
             }
             else {
@@ -405,7 +406,8 @@ kendo_module({
             connectors: diagram.DefaultConnectors,
             rotation: {
                 angle: 0
-            }
+            },
+            editable: true
         },
         bounds: function (value) {
             var point, size, bounds, options;
@@ -483,7 +485,7 @@ kendo_module({
         },
         select: function (value) {
             var diagram = this.diagram, selected, deselected;
-            if (Utils.isUndefined(value)) {
+            if (isUndefined(value)) {
                 value = true;
             }
             if (this.isSelected != value) {
@@ -1077,7 +1079,7 @@ kendo_module({
             return data + " L" + pr(end);
         },
         _refreshPath: function () {
-            if (Utils.isUndefined(this.path)) {
+            if (isUndefined(this.path)) {
                 return;
             }
             this._drawPath(this._calcPathData());
@@ -1307,7 +1309,7 @@ kendo_module({
             var shape;
             options = deepExtend({undoable: true}, options);
 
-            if (Utils.isUndefined(item)) {
+            if (isUndefined(item)) {
                 item = new Point(0, 0);
             }
             if (item instanceof Shape) {
@@ -1340,7 +1342,7 @@ kendo_module({
         remove: function (items, undoable) {
             var isMultiple = $.isArray(items);
 
-            if (Utils.isUndefined(undoable)) {
+            if (isUndefined(undoable)) {
                 undoable = true;
             }
             if (undoable) {
@@ -1450,7 +1452,7 @@ kendo_module({
          */
         toFront: function (items, undoable) {
             var result = this._getDiagramItems(items), indices;
-            if (Utils.isUndefined(undoable) || undoable) {
+            if (isUndefined(undoable) || undoable) {
                 indices = indicesOfItems(this.mainLayer.native, result.visuals);
                 var unit = new ToFrontUnit(this, items, indices);
                 this.undoRedoService.add(unit);
@@ -1467,7 +1469,7 @@ kendo_module({
          */
         toBack: function (items, undoable) {
             var result = this._getDiagramItems(items), indices;
-            if (Utils.isUndefined(undoable) || undoable) {
+            if (isUndefined(undoable) || undoable) {
                 indices = indicesOfItems(this.mainLayer.native, result.visuals);
                 var unit = new ToBackUnit(this, items, indices);
                 this.undoRedoService.add(unit);
@@ -1514,7 +1516,7 @@ kendo_module({
             }
         },
         alignShapes: function (direction) {
-            if (Utils.isUndefined(direction)) {
+            if (isUndefined(direction)) {
                 direction = "Left";
             }
             var items = this.select(),
@@ -1581,7 +1583,7 @@ kendo_module({
                 var currentZoom = this._zoom;
                 zoom = this._zoom = this._getValidZoom(zoom);
 
-                if (!Utils.isUndefined(staticPoint)) {//Viewpoint vector is constant
+                if (!isUndefined(staticPoint)) {//Viewpoint vector is constant
                     var zoomedPoint = staticPoint.times(zoom);
                     var viewportVector = staticPoint.times(currentZoom).plus(this._pan);
                     this._storePan(viewportVector.minus(zoomedPoint));//pan + zoomed point = viewpoint vector
@@ -1756,7 +1758,7 @@ kendo_module({
             this.isLayouting = true;
             // TODO: raise layout event?
             var type;
-            if (Utils.isUndefined(options) || Utils.isUndefined(options.type)) {
+            if (isUndefined(options) || isUndefined(options.type)) {
                 type = "Tree";
             }
             else {
@@ -1816,15 +1818,15 @@ kendo_module({
          */
         editor: function (item, options) { // support custome editors via the options for vNext
             var editor = this._editor;
-
-            editor.options = deepExtend(this.options.editor, options);
-            this._editItem = item;
-            this._showEditor();
-            var shapeContent = item.content();
-            //item.content("");
-            editor.originalContent = shapeContent;
-            editor.content(shapeContent);
-            editor.focus();
+            if (isUndefined(item.options.editable) || item.options.editable === true) {
+                editor.options = deepExtend(this.options.editor, options);
+                this._editItem = item;
+                this._showEditor();
+                var shapeContent = item.content();
+                editor._originalContent = shapeContent;
+                editor.content(shapeContent);
+                editor.focus();
+            }
             return editor;
         },
         _initEditor: function () {
@@ -1856,7 +1858,7 @@ kendo_module({
         _finishEditShape: function () {
             var editor = this._editor, item = this._editItem;
             if (item) {
-                var unit = new diagram.ContentChangedUndoUnit(item, editor.originalContent, editor.content());
+                var unit = new diagram.ContentChangedUndoUnit(item, editor._originalContent, editor.content());
                 this.undoRedoService.add(unit);
                 editor.visible(false);
             }
@@ -2049,7 +2051,7 @@ kendo_module({
                 i;
 
             function addShape(node) {
-                if (Utils.isUndefined(node)) { // happens on updating dataSource
+                if (isUndefined(node)) { // happens on updating dataSource
                     return;
                 }
                 var shape = that._dataMap.first(function (item) {

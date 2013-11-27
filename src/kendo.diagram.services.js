@@ -15,6 +15,7 @@ kendo_module({
         Rect = diagram.Rect,
         Rectangle = diagram.Rectangle,
         Utils = diagram.Utils,
+        isUndefined = Utils.isUndefined,
         Point = diagram.Point,
         Circle = diagram.Circle,
         Path = diagram.Path,
@@ -52,7 +53,7 @@ kendo_module({
 
     var LayoutUndoUnit = Class.extend({
         init: function (initialState, finalState, animate) {
-            if (Utils.isUndefined(animate)) {
+            if (isUndefined(animate)) {
                 this.animate = false;
             }
             else {
@@ -488,7 +489,7 @@ kendo_module({
             // throw away anything beyond this point if this is a new branch
             this.stack.splice(this.index, this.stack.length - this.index);
             this.stack.push(composite);
-            if (Utils.isUndefined(execute) || (execute && (execute === true))) {
+            if (isUndefined(execute) || (execute && (execute === true))) {
                 this.redo();
             }
             else {
