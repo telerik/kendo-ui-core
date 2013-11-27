@@ -564,7 +564,7 @@ namespace :type_script do
 
                     File.write(path, get_type_script(path, dependencies, suite == 'icenium'))
 
-                    sh "node_modules/typescript/bin/tsc #{path}"
+                    sh "node_modules/typescript/bin/tsc --noImplicitAny #{path}"
                 end
 
             end
