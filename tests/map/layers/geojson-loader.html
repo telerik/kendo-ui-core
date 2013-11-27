@@ -347,6 +347,16 @@
                 ok(result instanceof d.Circle);
             });
 
+            test("default radius", function() {
+                result = loader.parse(item);
+                equal(result.geometry.radius, 10);
+            });
+
+            test("default style", function() {
+                result = loader.parse(item);
+                equal(result.options.fill.color, "red");
+            });
+
             test("triggers shapeCreated on observer", function() {
                 loader.observer = {
                     shapeCreated: function() {
