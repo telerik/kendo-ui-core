@@ -723,6 +723,32 @@
                 // ------------------------------------------------------------
                 module("Date Category Axis / No Rounding / Justified");
 
+                test("Major ticks are positioned at exact time", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 15:00:00"), new Date("2012/02/05 15:00:00")
+                        ],
+                        roundToBaseUnit: false,
+                        justified: true
+                    });
+
+                    arrayClose(dateAxis.getMajorTickPositions(),
+                        [13, 99, 328, 557, 786] , 1);
+                });
+
+                test("Major ticks are not affected when start/end time match base unit", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2012/02/01 00:00:00"), new Date("2012/02/05 00:00:00")
+                        ],
+                        roundToBaseUnit: false,
+                        justified: true
+                    });
+
+                    arrayClose(dateAxis.getMajorTickPositions(),
+                        [14, 207, 400, 593, 787], 1);
+                });
+
                 test("First label is hidden if it does not match base unit", function() {
                     createDateCategoryAxis({
                         categories: [
@@ -1319,13 +1345,13 @@
 
                 test("Returns correct first full slot", function() {
                     sameBox(dateAxis.getSlot(1),
-                            new Box2D(98, 0, 98, 0),
+                            new Box2D(99, 0, 99, 0),
                             TOLERANCE);
                 });
 
                 test("Returns correct last full slot", function() {
                     sameBox(dateAxis.getSlot(3),
-                            new Box2D(551, 0, 551, 0),
+                            new Box2D(557, 0, 557, 0),
                             TOLERANCE);
                 });
 
