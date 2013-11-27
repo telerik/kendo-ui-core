@@ -107,7 +107,7 @@ kendo_module({
                 button.prepend($('<span class="km-icon km-' + icon + '"/>'));
             }
 
-            if (badge) {
+            if (badge || badge === 0) {
                 createBadge(badge).appendTo(button);
             }
         },
