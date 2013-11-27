@@ -141,6 +141,12 @@
             equal(attr.element.html(), "foobarbaz");
         });
 
+        test("should not add empty text", function() {
+            attr.add();
+
+            equal(attr.element.html(), "");
+        });
+
     </script>
 
     <h1 id="qunit-header">Compass</h1>
