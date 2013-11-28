@@ -960,7 +960,7 @@ kendo_module({
             }
         },
 
-        _mouseleave: function() {
+        _mouseleave: function(e) {
             var chart = this,
                 plotArea = chart._plotArea,
                 crosshairs = plotArea.crosshairs,
@@ -968,13 +968,15 @@ kendo_module({
                 highlight = chart._highlight,
                 i;
 
-            for (i = 0; i < crosshairs.length; i++) {
-                crosshairs[i].hide();
-            }
+            if (e.relatedTarget) {
+                for (i = 0; i < crosshairs.length; i++) {
+                    crosshairs[i].hide();
+                }
 
-            setTimeout(proxy(tooltip.hide, tooltip), TOOLTIP_HIDE_DELAY);
-            highlight.hide();
-            chart._tooltipCategoryIx = null;
+                setTimeout(proxy(tooltip.hide, tooltip), TOOLTIP_HIDE_DELAY);
+                highlight.hide();
+                chart._tooltipCategoryIx = null;
+            }
         },
 
         _unsetActivePoint: function() {
