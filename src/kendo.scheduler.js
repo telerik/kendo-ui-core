@@ -1229,7 +1229,8 @@ kendo_module({
         },
 
         editEvent: function(model) {
-            return this.editable = this._createPopupEditor(model);
+            this.editable = this._createPopupEditor(model);
+            return this.editable;
         },
 
         close: function() {

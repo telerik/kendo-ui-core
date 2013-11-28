@@ -86,7 +86,7 @@ kendo_module({
             } else if (that.selectedIndex === -1) {
                 text = options.text || "";
                 if (!text) {
-                    optionLabel = options.optionLabel,
+                    optionLabel = options.optionLabel;
                     useOptionLabel = optionLabel && options.index === 0;
 
                     if (that._isSelect) {

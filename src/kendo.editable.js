@@ -23,7 +23,7 @@ kendo_module({
     var specialRules = ["url", "email", "number", "date", "boolean"];
 
     function fieldType(field) {
-        field = field != null ? field : "";
+        field = field !== null ? field : "";
         return field.type || $.type(field) || "string";
     }
 
@@ -88,7 +88,7 @@ kendo_module({
             for (idx = 0, length = items.length; idx < length; idx++) {
                 item = items[idx];
                 text = item.text || item.value || item;
-                value = item.value == null ? (item.text || item) : item.value;
+                value = item.value === null ? (item.text || item) : item.value;
 
                 result[idx] = { text: text, value: value };
             }
@@ -181,7 +181,7 @@ kendo_module({
                 editor = isCustomEditor ? field.editor : editors[type],
                 container = that.element.find("[" + kendo.attr("container-for") + "=" + fieldName.replace(nameSpecialCharRegExp, "\\$1")+ "]");
 
-            editor = editor ? editor : editors["string"];
+            editor = editor ? editor : editors.string;
 
             if (isCustomEditor && typeof field.editor === "string") {
                 editor = function(container) {

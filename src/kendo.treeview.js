@@ -1,3 +1,4 @@
+/*jshint eqnull: true */
 kendo_module({
     id: "treeview",
     name: "TreeView",
@@ -1671,8 +1672,7 @@ kendo_module({
             var dataItem = node, dataSource, uid;
 
             if (node instanceof window.jQuery || isDomElement(node)) {
-                dataSource = this._objectOrSelf(node).dataSource,
-
+                dataSource = this._objectOrSelf(node).dataSource;
                 uid = $(node).attr(kendo.attr("uid"));
                 dataItem = dataSource.getByUid(uid);
 

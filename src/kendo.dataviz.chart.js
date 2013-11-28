@@ -7283,7 +7283,7 @@ kendo_module({
                 currentSize = 0;
 
             chart.seriesConfigs = [];
-            padding = padding > halfMinWidth - space ? halfMinWidth - space : padding,
+            padding = padding > halfMinWidth - space ? halfMinWidth - space : padding;
             totalSize = halfMinWidth - padding;
 
             for (i = 0; i < seriesCount; i++) {
@@ -7966,7 +7966,7 @@ kendo_module({
 
             for (i = 0; i < panes.length; i++) {
                 currentPane = panes[i];
-                axes = currentPane.axes,
+                axes = currentPane.axes;
                 overflowY = math.max(
                     0,
                     axisGroupBox(axes).height() - currentPane.contentBox.height()
@@ -9960,7 +9960,7 @@ kendo_module({
             that.chart = chart;
             that.chartElement = chartElement;
             that.categoryAxis = categoryAxis;
-            that._dateAxis = that.categoryAxis instanceof DateCategoryAxis,
+            that._dateAxis = that.categoryAxis instanceof DateCategoryAxis;
             that.valueAxis = valueAxis;
 
             if (that._dateAxis) {

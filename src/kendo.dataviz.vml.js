@@ -630,8 +630,8 @@ kendo_module({
                 endAngle -= 1 - angle;
             }
 
-            outerStartPoint = roundPointCoordinates(config.point(startAngle)),
-            innerStartPoint = roundPointCoordinates(config.point(startAngle, true)),
+            outerStartPoint = roundPointCoordinates(config.point(startAngle));
+            innerStartPoint = roundPointCoordinates(config.point(startAngle, true));
             outerEndPoint = roundPointCoordinates(config.point(endAngle));
             innerEndPoint = roundPointCoordinates(config.point(endAngle, true));
 

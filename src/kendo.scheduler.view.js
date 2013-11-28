@@ -1437,7 +1437,7 @@ kendo_module({
                         }
                     }
 
-                    if (eventResource != null) {
+                    if (eventResource !== null) {
                         var resourceColor = kendo.getter(resource.dataColorField)(eventResource);
 
                         resources.push({
