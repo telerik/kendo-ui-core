@@ -53,6 +53,10 @@ public class ControlsTag extends  BaseTag  /* interfaces */ /* interfaces */ {
         return "map-controls";
     }
 
+    public void setAttribution(com.kendoui.taglib.map.ControlsAttributionTag value) {
+        setProperty("attribution", value);
+    }
+
     public void setNavigator(com.kendoui.taglib.map.ControlsNavigatorTag value) {
         setProperty("navigator", value);
     }

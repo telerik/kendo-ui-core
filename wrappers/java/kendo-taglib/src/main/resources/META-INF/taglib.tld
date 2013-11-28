@@ -13580,7 +13580,8 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>java.lang.Object</type>
         </attribute>
         <attribute>
-            <description>The maximum zoom level.</description>
+            <description>The maximum zoom level.
+Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features).</description>
             <name>maxZoom</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13592,7 +13593,8 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <type>float</type>
         </attribute>
         <attribute>
-            <description>The minimum zoom level.</description>
+            <description>The minimum zoom level.
+Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features).</description>
             <name>minZoom</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
@@ -13615,8 +13617,9 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the map is reset, e.g. on initial load or during zoom.</description>
-            <name>reset</name>
+            <description>Fired when a marker has been created and is about to be displayed.
+Cancelling the event will prevent the marker from being shown.</description>
+            <name>markerCreated</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -13627,6 +13630,12 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
         <attribute>
             <description>Fires after the map viewport has been moved.</description>
             <name>panEnd</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>Fired when the map is reset.
+This typically occurs on initial load and after a zoom/center change.</description>
+            <name>reset</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
@@ -13688,6 +13697,22 @@ instance.If the dataSource option is set to a JavaScript object or array the wid
         </attribute>
 
     </tag>
+
+    <tag>
+        <description>Enables or disables the built-in attribution control.</description>
+        <name>map-controls-attribution</name>
+        <tag-class>com.kendoui.taglib.map.ControlsAttributionTag</tag-class>
+        <body-content>empty</body-content>
+
+        <attribute>
+            <description>The position of the attribution control. Possible values include:</description>
+            <name>position</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+
+    </tag>
+
 
     <tag>
         <description>Enables or disables the built-in navigator control (directional pad).</description>
@@ -14282,9 +14307,10 @@ will disable all animations in the widget.</description>
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the map is reset, e.g. on initial load or during zoom.</description>
-        <name>map-reset</name>
-        <tag-class>com.kendoui.taglib.map.ResetFunctionTag</tag-class>
+        <description>Fired when a marker has been created and is about to be displayed.
+Cancelling the event will prevent the marker from being shown.</description>
+        <name>map-markerCreated</name>
+        <tag-class>com.kendoui.taglib.map.MarkerCreatedFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>
@@ -14297,6 +14323,13 @@ will disable all animations in the widget.</description>
         <description>Fires after the map viewport has been moved.</description>
         <name>map-panEnd</name>
         <tag-class>com.kendoui.taglib.map.PanEndFunctionTag</tag-class>
+        <body-content>JSP</body-content>
+    </tag>
+    <tag>
+        <description>Fired when the map is reset.
+This typically occurs on initial load and after a zoom/center change.</description>
+        <name>map-reset</name>
+        <tag-class>com.kendoui.taglib.map.ResetFunctionTag</tag-class>
         <body-content>JSP</body-content>
     </tag>
     <tag>

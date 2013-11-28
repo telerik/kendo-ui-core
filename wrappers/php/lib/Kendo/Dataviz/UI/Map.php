@@ -64,6 +64,7 @@ class Map extends \Kendo\UI\Widget {
 
     /**
     * The minimum zoom level.
+Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features).
     * @param float $value
     * @return \Kendo\Dataviz\UI\Map
     */
@@ -73,6 +74,7 @@ class Map extends \Kendo\UI\Widget {
 
     /**
     * The maximum zoom level.
+Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features).
     * @param float $value
     * @return \Kendo\Dataviz\UI\Map
     */
@@ -122,17 +124,18 @@ class Map extends \Kendo\UI\Widget {
     }
 
     /**
-    * Sets the reset event of the Map.
-    * Fired when the map is reset, e.g. on initial load or during zoom.
+    * Sets the markerCreated event of the Map.
+    * Fired when a marker has been created and is about to be displayed.
+Cancelling the event will prevent the marker from being shown.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Map
     */
-    public function reset($value) {
+    public function markerCreated($value) {
         if (is_string($value)) {
             $value = new \Kendo\JavaScriptFunction($value);
         }
 
-        return $this->setProperty('reset', $value);
+        return $this->setProperty('markerCreated', $value);
     }
 
     /**
@@ -161,6 +164,21 @@ class Map extends \Kendo\UI\Widget {
         }
 
         return $this->setProperty('panEnd', $value);
+    }
+
+    /**
+    * Sets the reset event of the Map.
+    * Fired when the map is reset.
+This typically occurs on initial load and after a zoom/center change.
+    * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
+    * @return \Kendo\Dataviz\UI\Map
+    */
+    public function reset($value) {
+        if (is_string($value)) {
+            $value = new \Kendo\JavaScriptFunction($value);
+        }
+
+        return $this->setProperty('reset', $value);
     }
 
     /**
