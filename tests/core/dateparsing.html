@@ -6,6 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../kendo-test-helpers.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/cultures/kendo.culture.sv-SE.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -832,6 +833,19 @@
                 today.setHours(10, 0, 0, 0);
 
                 deepEqual(result, today);
+            });
+
+            test("parseDate persists time portion of UTC date in sv-SE culture", function() {
+                kendo.culture("sv-SE");
+
+                var date = kendo.parseDate("2013-09-27T13:43:21.33Z");
+
+                ok(date.getHours())
+                ok(date.getMinutes())
+                ok(date.getSeconds())
+                ok(date.getMilliseconds())
+
+                kendo.culture("en-US");
             });
         </script>
     </body>
