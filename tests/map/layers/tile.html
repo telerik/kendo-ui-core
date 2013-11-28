@@ -35,11 +35,15 @@
             var map,
                 layer;
 
+            function createTileLayer(options) {
+                map = new MapMock();
+                layer = new TileLayer(map, options);
+            }
+
             // ------------------------------------------------------------
             module("Tile Layer", {
                 setup: function() {
-                    map = new MapMock();
-                    layer = new TileLayer(map);
+                    createTileLayer();
                 }
             });
 
@@ -72,6 +76,15 @@
                 layer = new TileLayer(map, { attribution: "Foo" });
                 layer.reset();
             });
+
+            test("subdomains should be array", function() {
+                createTileLayer({
+                    subdomains: "abc"
+                });
+
+                ok(layer.options.subdomains instanceof Array);
+            });
+
         })();
 
         (function() {
@@ -160,6 +173,19 @@
                 ok(!tile.visible);
             });
 
+            test("tileUrlOptions", function() {
+                var index = { x: 1, y:1 };
+                var options = view.tileUrlOptions(index);
+                deepEqual(options, {
+                    x: 1,
+                    y: 1,
+                    s: "a",
+                    z: 4,
+                    subdomain: "a",
+                    zoom: 4
+                });
+            });
+
             test("createTile should return the correct offset", function() {
                 createView({ basePoint: new Point(10, 10), tileSize: 10 });
                 view.zoom(3);
@@ -188,7 +214,6 @@
                 equal(view.wrapValue(-9, boundary), 7);
                 equal(view.wrapValue(-14, boundary), 2);
                 equal(view.wrapValue(-16, boundary), 0);
-
             });
 
         })();
