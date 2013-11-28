@@ -9,6 +9,7 @@ namespace Kendo.Mvc.UI
     using System.Web.Mvc;
     using System.Web.Routing;
     using Extensions;
+    using System.Text.RegularExpressions;
 
     public class HtmlElement : IHtmlNode
     {
@@ -241,10 +242,12 @@ namespace Kendo.Mvc.UI
 
         public void WriteTo(TextWriter output)
         {
+            var html = tagBuilder.ToString(RenderMode != TagRenderMode.SelfClosing ? TagRenderMode.StartTag : TagRenderMode.SelfClosing).Replace("&#32;", " ");
+
+            output.Write(html);
+
             if (RenderMode != TagRenderMode.SelfClosing)
             {
-                output.Write(tagBuilder.ToString(TagRenderMode.StartTag));
-                
                 if (TemplateCallback != null)
                 {
                     TemplateCallback(output);
@@ -259,10 +262,6 @@ namespace Kendo.Mvc.UI
                 }
                 
                 output.Write(tagBuilder.ToString(TagRenderMode.EndTag));
-            }
-            else
-            {
-                output.Write(tagBuilder.ToString(TagRenderMode.SelfClosing));
             }
         }
     }
