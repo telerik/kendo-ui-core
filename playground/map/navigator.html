@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Kendo UI Map Compass</title>
+        <title>Kendo UI Map Navigator</title>
 
         <link href="../styles/web/kendo.common.less" rel="stylesheet/less" />
         <link href="../styles/web/kendo.silver.less" rel="stylesheet/less" />
@@ -11,7 +11,7 @@
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.dataviz.core.js"></script>
-        <script src="../src/map/compass.js"></script>
+        <script src="../src/map/navigator.js"></script>
 
         <style>
 
@@ -22,7 +22,7 @@
 
             /* theme */
 
-            .k-compass .k-compass-c > span
+            .k-navigator .k-navigator-c > span
             {
                 border-color: #515967; /* @widget text color */
             }
@@ -31,18 +31,18 @@
     </head>
     <body>
 
-        <div class="k-widget k-header k-shadow k-compass">
-            <button type="button" class="k-button k-compass-n"><span class="k-icon k-i-arrow-n"></span></button>
-            <button type="button" class="k-button k-compass-e"><span class="k-icon k-i-arrow-e"></span></button>
-            <button type="button" class="k-button k-compass-s"><span class="k-icon k-i-arrow-s"></span></button>
-            <button type="button" class="k-button k-compass-w"><span class="k-icon k-i-arrow-w"></span></button>
-            <button type="button" class="k-button k-compass-c"><span></span></button>
+        <div class="k-widget k-header k-shadow k-navigator">
+            <button type="button" class="k-button k-navigator-n"><span class="k-icon k-i-arrow-n"></span></button>
+            <button type="button" class="k-button k-navigator-e"><span class="k-icon k-i-arrow-e"></span></button>
+            <button type="button" class="k-button k-navigator-s"><span class="k-icon k-i-arrow-s"></span></button>
+            <button type="button" class="k-button k-navigator-w"><span class="k-icon k-i-arrow-w"></span></button>
+            <button type="button" class="k-button k-navigator-c"><span></span></button>
         </div>
 
-        <div id="compass">
+        <div id="navigator">
         </div>
         <script>
-            $("#compass").kendoCompass({
+            $("#navigator").kendoNavigator({
                 pan: function(e) {
                     console.log("pan", e.x, e.y);
                 }

@@ -326,7 +326,7 @@ var tests = [
     "map/layers/shape.html",
     "map/layers/marker.html",
     "map/layers/tile.html",
-    "map/compass.html",
+    "map/navigator.html",
     "map/attribution.html",
     "map/lint.html",
     "menu/api.html",

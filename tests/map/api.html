@@ -21,7 +21,7 @@
     <script src="../../src/dataviz/drawing/shapes.js"></script>
     <script src="../../src/dataviz/map/location.js"></script>
     <script src="../../src/dataviz/map/crs.js"></script>
-    <script src="../../src/dataviz/map/compass.js"></script>
+    <script src="../../src/dataviz/map/navigator.js"></script>
     <script src="../../src/dataviz/map/layers/marker.js"></script>
     <script src="../../src/dataviz/map/main.js"></script>
     <script>
@@ -243,7 +243,7 @@
             });
 
             test("eventToLocation maps event coordinates to location w/scroll", function() {
-                map._compassPan({ x: 0, y: 100 });
+                map._navigatorPan({ x: 0, y: 100 });
                 var loc = map.eventToLocation({ pageX: 100, pageY: 200 });
                 ok(loc.round().equals(new Location(48, -55)));
             });
@@ -259,7 +259,7 @@
             });
 
             test("eventToView maps event coordinates to view coordinates w/scroll", function() {
-                map._compassPan({ x: 0, y: 100 });
+                map._navigatorPan({ x: 0, y: 100 });
                 var point = map.eventToView({ pageX: 100, pageY: 200 });
                 ok(point.round().equals(new Point(100, 100)));
             });
@@ -270,13 +270,13 @@
             });
 
             test("eventToLayer maps event coordinates to layer coordinates w/scroll", function() {
-                map._compassPan({ x: 0, y: 100 });
+                map._navigatorPan({ x: 0, y: 100 });
                 var point = map.eventToLayer({ pageX: 100, pageY: 200 });
                 ok(point.round().equals(new Point(356, 356)));
             });
 
             test("eventOffset maps event coordinates to offset", function() {
-                map._compassPan({ x: 0, y: 100 });
+                map._navigatorPan({ x: 0, y: 100 });
                 var point = map.eventOffset({ pageX: 100, pageY: 200 });
                 ok(point.round().equals(new Point(100, 200)));
             });

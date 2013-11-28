@@ -252,15 +252,15 @@ span.k-sparkline,
     }
 }
 
-.k-map .k-compass {
+.k-map .k-navigator {
     position: absolute;
     top: 20px;
     left: 20px;
 }
 
-/* Map Compass */
+/* Map navigator */
 
-.k-compass
+.k-navigator
 {
     width: 50px;
     height: 50px;
@@ -268,25 +268,25 @@ span.k-sparkline,
     position: relative;
 }
 
-.k-compass > button
+.k-navigator > button
 {
     border-color: transparent;
     background: none;
 }
 
-.k-ie7 .k-compass > button
+.k-ie7 .k-navigator > button
 {
     border-width: 0;
     display: block;
 }
 
-.k-ie7 .k-compass > button > span
+.k-ie7 .k-navigator > button > span
 {
     vertical-align: top;
     display: block;
 }
 
-div.k-compass > .k-button
+div.k-navigator > .k-button
 {
     margin: 0;
     padding: 0;
@@ -297,42 +297,42 @@ div.k-compass > .k-button
     line-height: 1px;
 }
 
-div.k-compass .k-compass-n
+div.k-navigator .k-navigator-n
 {
     top: 2px;
     left: 50%;
     margin-left: -9px;
 }
 
-div.k-compass .k-compass-e
+div.k-navigator .k-navigator-e
 {
     right: 2px;
     top: 50%;
     margin-top: -9px;
 }
 
-div.k-compass .k-compass-s
+div.k-navigator .k-navigator-s
 {
     bottom: 2px;
     left: 50%;
     margin-left: -9px;
 }
 
-div.k-compass .k-compass-w
+div.k-navigator .k-navigator-w
 {
     left: 2px;
     top: 50%;
     margin-top: -9px;
 }
 
-.k-ie7 div.k-compass .k-compass-n,
-.k-ie7 div.k-compass .k-compass-s
+.k-ie7 div.k-navigator .k-navigator-n,
+.k-ie7 div.k-navigator .k-navigator-s
 {
     margin-left: -8px;
 }
 
-.k-ie7 div.k-compass .k-compass-w,
-.k-ie7 div.k-compass .k-compass-e
+.k-ie7 div.k-navigator .k-navigator-w,
+.k-ie7 div.k-navigator .k-navigator-e
 {
     margin-top: -8px;
 }
