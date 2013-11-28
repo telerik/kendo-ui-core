@@ -89,6 +89,7 @@ namespace Kendo.Mvc.UI.Fluent
         
         /// <summary>
         /// The minimum zoom level.
+		/// Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features).
         /// </summary>
         /// <param name="value">The value that configures the minzoom.</param>
         public MapBuilder MinZoom(double value)
@@ -100,6 +101,7 @@ namespace Kendo.Mvc.UI.Fluent
         
         /// <summary>
         /// The maximum zoom level.
+		/// Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features).
         /// </summary>
         /// <param name="value">The value that configures the maxzoom.</param>
         public MapBuilder MaxZoom(double value)

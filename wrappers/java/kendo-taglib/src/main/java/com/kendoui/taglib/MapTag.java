@@ -73,6 +73,10 @@ public class MapTag extends WidgetTag /* interfaces *//* interfaces */ {
         setEvent("click", value.getBody());
     }
 
+    public void setMarkerCreated(MarkerCreatedFunctionTag value) {
+        setEvent("markerCreated", value.getBody());
+    }
+
     public void setPan(PanFunctionTag value) {
         setEvent("pan", value.getBody());
     }
@@ -167,6 +171,18 @@ public class MapTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setClick(String value) {
         setProperty("click", new Function(value));
+    }
+
+    public String getMarkerCreated() {
+        Function property = ((Function)getProperty("markerCreated"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setMarkerCreated(String value) {
+        setProperty("markerCreated", new Function(value));
     }
 
     public String getPan() {

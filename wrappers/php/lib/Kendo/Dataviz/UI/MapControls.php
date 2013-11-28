@@ -7,7 +7,7 @@ class MapControls extends \Kendo\SerializableObject {
 
     /**
     * Enables or disables the built-in attribution control.
-    * @param boolean $value
+    * @param boolean|\Kendo\Dataviz\UI\MapControlsAttribution|array $value
     * @return \Kendo\Dataviz\UI\MapControls
     */
     public function attribution($value) {
