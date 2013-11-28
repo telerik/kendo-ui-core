@@ -720,6 +720,18 @@
                     deepEqual(dataviz.last(dateAxis.options.categories), new Date("2013/03/03"));
                 });
 
+                test("Last category label is hidden if it equals the range end", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2013/01/27"), new Date("2013/02/17")
+                        ],
+                        roundToBaseUnit: false,
+                        baseUnit: "weeks"
+                    });
+
+                    equal(dateAxis.labels[3].options.visible, false);
+                });
+
                 // ------------------------------------------------------------
                 module("Date Category Axis / No Rounding / Justified");
 
@@ -759,6 +771,20 @@
                     });
 
                     equal(dateAxis.labels[0].options.visible, false);
+                });
+
+                test("Last category is not stretched when max is set to range end", function() {
+                    createDateCategoryAxis({
+                        categories: [
+                            new Date("2013/01/27"), new Date("2013/02/16")
+                        ],
+                        baseUnit: "weeks",
+                        roundToBaseUnit: false,
+                        justified: true,
+                        max: new Date("2013/02/16")
+                    });
+
+                    equal(dateAxis.getMajorTickPositions()[1], 400);
                 });
 
                 // ------------------------------------------------------------

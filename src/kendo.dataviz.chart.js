@@ -2371,7 +2371,7 @@ kendo_module({
             if (options.justified) {
                 var categoryLimits = sparseArrayLimits(options.categories);
                 var maxCategory = toTime(categoryLimits.max);
-                timeRange = toDate(options.max || maxCategory) - range.min;
+                timeRange = toDate(maxCategory) - range.min;
             } else {
                 timeRange = range.max - range.min;
             }
@@ -2392,8 +2392,8 @@ kendo_module({
                     reverse = options.reverse,
                     lineBox = axis.lineBox(),
                     startTime = categories[0].getTime(),
-                    justified = options.justified,
-                    divisions = categories.length - (justified ? 1 : 0),
+                    collapse = options.justified,
+                    divisions = categories.length - (collapse ? 1 : 0),
                     scale= axis._timeScale(),
                     dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
                     startEdge = dir === 1 ? 1 : 2,
@@ -2462,6 +2462,8 @@ kendo_module({
             if (options.justified) {
                 var roundedDate = floorDate(date, baseUnit, options.weekStartDay);
                 visible = dateEquals(roundedDate, date);
+            } else if (!options.roundToBaseUnit) {
+                visible = !dateEquals(this.range().max, date);
             }
 
             labelOptions = deepExtend({ format: unitFormat }, labelOptions, { visible: visible });
