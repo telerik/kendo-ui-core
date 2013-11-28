@@ -185,7 +185,7 @@ test("Omits options.initial if location.hash", function() {
 
 test("Appends root and phone/tablet classes on documentElement", function () {
     setup('<div data-role="view" />');
-    ok($("#qunit-fixture").hasClass("km-root"));
+    ok($("#qunit-fixture").hasClass("km-root"), 'app has ' + $("#qunit-fixture").attr("class"));
     ok($("#qunit-fixture").hasClass("km-" + (os && os.tablet ? "tablet" : "phone")));
 });
 
