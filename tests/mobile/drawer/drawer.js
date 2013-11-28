@@ -1,5 +1,9 @@
 module('mobile drawer', {
     setup: function() {
+    },
+
+    teardown: function() {
+        kendo.history.stop();
     }
 });
 

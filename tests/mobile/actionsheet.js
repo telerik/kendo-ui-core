@@ -14,6 +14,9 @@ module("ActionSheet", {
         element = root.find("[data-role=actionsheet]");
         source = root.find("#source");
         actionSheet = element.data("kendoMobileActionSheet");
+    },
+    teardown: function() {
+        root.empty();
     }
 });
 
