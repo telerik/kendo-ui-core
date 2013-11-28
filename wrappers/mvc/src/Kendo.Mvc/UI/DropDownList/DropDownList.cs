@@ -36,7 +36,7 @@ namespace Kendo.Mvc.UI
             set;
         }
 
-        public string OptionLabel
+        public object OptionLabel
         {
             get;
             set;
@@ -73,7 +73,7 @@ namespace Kendo.Mvc.UI
                 options["index"] = SelectedIndex;
             }
 
-            if (!string.IsNullOrEmpty(OptionLabel))
+            if (OptionLabel != null)
             {
                 options["optionLabel"] = OptionLabel;
             }
