@@ -98,7 +98,7 @@ kendo_module({
                 field = element.attr(kendo.attr(FIELD)),
                 dir = element.attr(kendo.attr(DIR)),
                 options = that.options,
-                compare = that.options.compare,
+                compare = that.options.compare == null ? undefined : that.options.compare,
                 sort = that.dataSource.sort() || [],
                 idx,
                 length;
