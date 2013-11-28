@@ -2,30 +2,21 @@
 <html>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="@Url.Content("~/Content/web/kendo.common.min.css")">
-    <link rel="stylesheet" href="@Url.Content("~/Content/web/kendo.rtl.min.css")">
-    <link rel="stylesheet" href="@Url.Content("~/Content/web/kendo.default.min.css")">
-    <link rel="stylesheet" href="@Url.Content("~/Content/shared/examples-offline.css")">
+
+    @Styles.Render("~/Content/web/css")
+    @Styles.Render("~/Content/shared/css")
     
-    <script src="@Url.Content("~/Scripts/jquery.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/kendo.web.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/kendo.aspnetmvc.min.js")"></script>
-     <script src="@Url.Content("~/Scripts/kendo.timezones.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/console.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/prettify.min.js")"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/kendo-web")
+    @Scripts.Render("~/bundles/demo")
 
-@* Include the JavaScript for the current culture *@
-
-@{
-    var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString();
-}
-
+    @* Include the JavaScript for the current culture *@
+    @{ var culture = System.Threading.Thread.CurrentThread.CurrentCulture.ToString(); }
     <script src="@Url.Content("~/Scripts/cultures/kendo.culture." + culture + ".min.js")"></script>
 
-@* Set the current culture *@
-
+    @* Set the current culture *@
     <script>
         kendo.culture("@culture");
     </script>
