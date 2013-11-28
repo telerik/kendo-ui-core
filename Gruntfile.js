@@ -13,6 +13,7 @@ module.exports = function(grunt) {
                     files: [
                         { pattern: 'styles/**/*.*', watched: true, included: false },
                         'src/jquery.js',
+                        'tests/jquery.mockjax.js',
                         'src/kendo.core.js',
                         'src/kendo.data.js',
                         'src/kendo.list.js',
@@ -25,7 +26,6 @@ module.exports = function(grunt) {
                         'src/kendo.mobile.pane.js',
                         'src/kendo.mobile.shim.js',
                         'src/kendo*.js',
-                        'tests/jquery.mockjax.js',
                         'tests/kendo-test-helpers.js',
                         'demos/mvc/content/shared/js/less.js',
                         'tests/mobile/**/*.js'
