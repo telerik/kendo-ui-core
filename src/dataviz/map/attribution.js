@@ -20,6 +20,16 @@ kendo_module({
             this._initOptions(options);
             this.items = [];
             this.element.addClass("k-widget k-attribution");
+
+            if (options.position === "topLeft") {
+                this.element.addClass("k-top k-left");
+            } else if (options.position === "topRight") {
+                this.element.addClass("k-top k-right");
+            } else if (options.position === "bottomLeft") {
+                this.element.addClass("k-bottom k-left");
+            } else {
+                this.element.addClass("k-bottom k-right");
+            }
         },
 
         options: {

@@ -81,11 +81,11 @@ span.k-sparkline,
 }
 
 .k-bottom {
-    right: 0;
+    bottom: 0;
 }
 
 .k-top {
-    right: 0;
+    top: 0;
 }
 
 /*Stock Charts*/

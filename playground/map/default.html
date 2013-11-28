@@ -30,12 +30,10 @@
         <style>
             #map .k-attribution {
                 background-color: rgba(255, 255, 255, 0.8);
-                bottom: 0;
                 color: #666666;
                 font-size: 10px;
                 padding: 2px 4px;
                 position: absolute;
-                right: 0;
                 z-index: 1000;
             }
         </style>
@@ -57,8 +55,8 @@
                     open: true // ?
                 }],
                 controls: {
-                    navigator: {
-                        visible: true
+                    attribution: {
+                        position: "bottomLeft"
                     }
                 }
             });
