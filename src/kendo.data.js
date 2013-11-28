@@ -1,3 +1,4 @@
+/*jshint eqnull: true, loopfunc: true, evil: true */
 kendo_module({
     id: "data",
     name: "Data source",

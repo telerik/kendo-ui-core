@@ -1,3 +1,4 @@
+/* jshint eqnull: true */
 kendo_module({
     id: "filtermenu",
     name: "Filtering Menu",

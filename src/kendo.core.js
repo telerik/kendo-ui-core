@@ -1,3 +1,4 @@
+/*jshint loopfunc: true, evil: true, boss: true */
 (function($, undefined) {
     var kendo = window.kendo = window.kendo || { cultures: {} },
         extend = $.extend,

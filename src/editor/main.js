@@ -1,3 +1,4 @@
+/*jshint scripturl: true */
 kendo_module({
     id: "editor",
     name: "Editor",

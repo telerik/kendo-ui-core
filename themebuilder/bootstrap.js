@@ -1,3 +1,4 @@
+/*jshint scripturl: true */
 // bootstrapper file for Kendo ThemeBuilder
 (function() {
     var doc = document,
