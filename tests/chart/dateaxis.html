@@ -729,7 +729,7 @@
                         baseUnit: "weeks"
                     });
 
-                    equal(dateAxis.labels[3].options.visible, false);
+                    equal(dateAxis.labels.length, 3);
                 });
 
                 // ------------------------------------------------------------
@@ -770,7 +770,7 @@
                         justified: true
                     });
 
-                    equal(dateAxis.labels[0].options.visible, false);
+                    equal(dateAxis.labels[0].text, "2/2");
                 });
 
                 test("Last category is not stretched when max is set to range end", function() {

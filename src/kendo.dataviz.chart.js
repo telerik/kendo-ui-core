@@ -2121,21 +2121,16 @@ kendo_module({
             var axis = this,
                 options = axis.options,
                 dataItem = options.dataItems ? options.dataItems[index] : null,
-                category = valueOrDefault(options.categories[index], "");
+                category = valueOrDefault(options.categories[index], ""),
+                text = axis.axisLabelText(category, dataItem, labelOptions);
 
-            return new AxisLabel(category, index, dataItem, labelOptions);
+            return new AxisLabel(category, text, index, dataItem, labelOptions);
         },
 
         shouldRenderNote: function(value) {
             var categories = this.options.categories;
 
             return categories.length && (categories.length > value && value >= 0);
-        }
-    });
-
-    var AxisDateLabel = AxisLabel.extend({
-        formatValue: function(value, options) {
-            return kendo.toString(value, options.format, options.culture);
         }
     });
 
@@ -2480,8 +2475,13 @@ kendo_module({
                 visible = !dateEquals(this.range().max, date);
             }
 
-            labelOptions = deepExtend({ format: unitFormat }, labelOptions, { visible: visible });
-            return new AxisDateLabel(date, index, dataItem, labelOptions);
+            if (visible) {
+                labelOptions.format = labelOptions.format || unitFormat;
+                var text = this.axisLabelText(date, dataItem, labelOptions);
+                if (text) {
+                    return new AxisLabel(date, text, index, dataItem, labelOptions);
+                }
+            }
         },
 
         categoryIndex: function(value, range) {
@@ -2652,7 +2652,8 @@ kendo_module({
 
             labelOptions.format = labelOptions.format || unitFormat;
 
-            return new AxisDateLabel(date, index, null, labelOptions);
+            var text = this.axisLabelText(date, null, labelOptions);
+            return new AxisLabel(date, text, index, null, labelOptions);
         },
 
         timeUnits: function(delta) {

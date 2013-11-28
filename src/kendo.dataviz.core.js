@@ -1056,16 +1056,8 @@ kendo_module({
     };
 
     var AxisLabel = TextBox.extend({
-        init: function(value, index, dataItem, options) {
-            var label = this,
-                text = value;
-
-            if (options.template) {
-                label.template = template(options.template);
-                text = label.template({ value: value, dataItem: dataItem });
-            } else if (options.format) {
-                text = label.formatValue(value, options);
-            }
+        init: function(value, text, index, dataItem, options) {
+            var label = this;
 
             label.text = text;
             label.value = value;
@@ -1077,10 +1069,6 @@ kendo_module({
             );
 
             label.enableDiscovery();
-        },
-
-        formatValue: function(value, options) {
-            return autoFormat(options.format, value);
         },
 
         click: function(widget, e) {
@@ -1219,8 +1207,10 @@ kendo_module({
 
                 for (i = labelOptions.skip; i < labelsCount; i += step) {
                     label = axis.createAxisLabel(i, labelOptions);
-                    axis.append(label);
-                    axis.labels.push(label);
+                    if (label) {
+                        axis.append(label);
+                        axis.labels.push(label);
+                    }
                 }
             }
         },
@@ -1597,7 +1587,7 @@ kendo_module({
 
             for (i = 0; i < labels.length; i++) {
                 var label = labels[i],
-                    tickIx = labelOptions.skip + labelOptions.step * i,
+                    tickIx = label.index,
                     labelSize = vertical ? label.box.height() : label.box.width(),
                     labelPos = tickPositions[tickIx] - (labelSize / 2),
                     firstTickPosition, nextTickPosition, middle, labelX;
@@ -1702,6 +1692,23 @@ kendo_module({
             }
             axis.box[pos + 1] -= axis.lineBox()[pos + 1] - lineBox[pos + 1];
             axis.box[pos + 2] -= axis.lineBox()[pos + 2] - lineBox[pos + 2];
+        },
+
+        axisLabelText: function(value, dataItem, options) {
+            var text = value;
+
+            if (options.template) {
+                var tmpl = template(options.template);
+                text = tmpl({ value: value, dataItem: dataItem });
+            } else if (options.format) {
+                if (options.format.match(FORMAT_REGEX)) {
+                    text = kendo.format(options.format, value);
+                } else {
+                    text = kendo.toString(value, options.format, options.culture);
+                }
+            }
+
+            return text;
         }
     });
 
@@ -2349,9 +2356,10 @@ kendo_module({
         createAxisLabel: function(index, labelOptions) {
             var axis = this,
                 options = axis.options,
-                value = round(options.min + (index * options.majorUnit), DEFAULT_PRECISION);
+                value = round(options.min + (index * options.majorUnit), DEFAULT_PRECISION),
+                text = axis.axisLabelText(value, null, labelOptions);
 
-            return new AxisLabel(value, index, null, labelOptions);
+            return new AxisLabel(value, text, index, null, labelOptions);
         },
 
         shouldRenderNote: function(value) {
