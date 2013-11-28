@@ -148,6 +148,42 @@
             equal(attr.element.html(), "");
         });
 
+        test("should position at the top left", function() {
+            createAttribution({
+                position: "topLeft"
+            });
+
+            ok(attr.element.hasClass("k-top"));
+            ok(attr.element.hasClass("k-left"));
+        });
+
+        test("should position at the top right", function() {
+            createAttribution({
+                position: "topRight"
+            });
+
+            ok(attr.element.hasClass("k-top"));
+            ok(attr.element.hasClass("k-right"));
+        });
+
+        test("should position at the bottom left", function() {
+            createAttribution({
+                position: "bottomLeft"
+            });
+
+            ok(attr.element.hasClass("k-bottom"));
+            ok(attr.element.hasClass("k-left"));
+        });
+
+        test("should position at the bottom right", function() {
+            createAttribution({
+                position: "bottomRight"
+            });
+
+            ok(attr.element.hasClass("k-bottom"));
+            ok(attr.element.hasClass("k-right"));
+        });
+
     </script>
 
     <h1 id="qunit-header">Compass</h1>
