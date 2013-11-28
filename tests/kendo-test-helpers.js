@@ -69,7 +69,7 @@ function brazilTimezoneTest(testName, expected, callback ) {
 $('head').append('<link rel="stylesheet/less" href="/base/styles/mobile/kendo.mobile.all.less" type="text/css" />');
 
 $(function() {
-    QUnit.fixture = $("<div id='qunit-fixture'></div>").appendTo(document.body);
+    QUnit.fixture = $("<div id='qunit-fixture' style='height: 100px'></div>").appendTo(document.body);
 })
 
 QUnit.brazilTimezoneTest = brazilTimezoneTest;
