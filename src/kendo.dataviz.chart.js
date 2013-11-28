@@ -2298,6 +2298,15 @@ kendo_module({
             return unit || DAYS;
         },
 
+        _categoryRange: function(categories) {
+            var range = categories._range;
+            if (!range) {
+                range = categories._range = sparseArrayLimits(categories);
+            }
+
+            return range;
+        },
+
         range: function(options) {
             options = options || this.options;
 
@@ -2307,8 +2316,9 @@ kendo_module({
                 baseUnitStep = options.baseUnitStep || 1,
                 min = toTime(options.min),
                 max = toTime(options.max),
-                categoryLimits = sparseArrayLimits(categories),
-                minCategory = toTime(categoryLimits.min),
+                categoryLimits = this._categoryRange(categories);
+
+            var minCategory = toTime(categoryLimits.min),
                 maxCategory = toTime(categoryLimits.max);
 
             if (options.roundToBaseUnit) {
@@ -2373,7 +2383,7 @@ kendo_module({
                 timeRange;
 
             if (options.justified) {
-                var categoryLimits = sparseArrayLimits(options.categories);
+                var categoryLimits = this._categoryRange(options.categories);
                 var maxCategory = toTime(categoryLimits.max);
                 timeRange = toDate(maxCategory) - range.min;
             } else {
