@@ -47,6 +47,10 @@
                            })
                            .appendTo(map.scrollElement);
 
+            if (typeof layer.options.subdomains === "string") {
+                layer.options.subdomains = layer.options.subdomains.split("");
+            }
+
             layer._view = new viewType(layer.element, layer.options);
 
             map.bind("reset", proxy(layer.reset, layer));
@@ -58,10 +62,6 @@
             }
 
             this._updateAttribution();
-        },
-
-        opitons: {
-            settingsUrl: "http://dev.virtualearth.net/REST/v1/Imagery/Metadata/#= mapType #?output=json&jsonp=bingTileParams&include=ImageryProviders&key=#= key #"
         },
 
         _updateAttribution: function() {
@@ -316,11 +316,15 @@
         },
 
         tileUrlOptions: function(index) {
+            var subdomain = this.subdomainText();
+
             return {
                 zoom: this._zoom,
+                subdomain: subdomain,
+                z: this._zoom,
                 x: index.x,
                 y: index.y,
-                subdomain: this.subdomainText()
+                s: subdomain
             };
         },
 
