@@ -72,6 +72,22 @@ span.k-sparkline,
     padding: .1em .2em;
 }
 
+.k-left {
+    left: 0;
+}
+
+.k-right {
+    right: 0;
+}
+
+.k-bottom {
+    right: 0;
+}
+
+.k-top {
+    right: 0;
+}
+
 /*Stock Charts*/
 
 /* Selection */
@@ -341,10 +357,8 @@ div.k-navigator .k-navigator-w
 
 .k-map .k-attribution {
     background-color: rgba(255, 255, 255, 0.8);
-    bottom: 0;
     font-size: 10px;
     padding: 2px 4px;
     position: absolute;
-    right: 0;
     z-index: 1000;
 }
