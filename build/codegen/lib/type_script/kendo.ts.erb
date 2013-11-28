@@ -190,6 +190,9 @@ declare module kendo {
     function parseFloat(value: any, culture?: string): number;
     function parseInt(value: any, culture?: string): number;
     function render(template:(data: any) => string, data: any[]): string;
+    function resize(selector: string): void;
+    function resize(element: JQuery): void;
+    function resize(element: Element): void;
     function stringify(value: Object): string;
     function template(template: string, options?: TemplateOptions): (data: any) => string;
     function touchScroller(selector: string): void;
