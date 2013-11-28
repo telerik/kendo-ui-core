@@ -20,7 +20,7 @@ kendo_module({
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        Compass = dataviz.ui.Compass,
+        Navigator = dataviz.ui.Navigator,
         Attribution = dataviz.ui.Attribution,
         defined = dataviz.defined,
 
@@ -272,8 +272,8 @@ kendo_module({
         _initControls: function() {
             var controls = this.options.controls;
 
-            if (Compass && controls.navigator && !kendo.support.mobileOS) {
-                this._createCompass(controls.navigator);
+            if (Navigator && controls.navigator && !kendo.support.mobileOS) {
+                this._createNavigator(controls.navigator);
             }
 
             if (Attribution && controls.attribution) {
@@ -281,18 +281,18 @@ kendo_module({
             }
         },
 
-        _createCompass: function(options) {
+        _createNavigator: function(options) {
             var element = $(doc.createElement("div")).appendTo(this.element);
-            var compass = this.compass = new Compass(element, options);
+            var navigator = this.navigator = new Navigator(element, options);
 
-            this._compassPan = proxy(this._compassPan, this);
-            compass.bind("pan", this._compassPan);
+            this._navigatorPan = proxy(this._navigatorPan, this);
+            navigator.bind("pan", this._navigatorPan);
 
-            this._compassCenter = proxy(this._compassCenter, this);
-            compass.bind("center", this._compassCenter);
+            this._navigatorCenter = proxy(this._navigatorCenter, this);
+            navigator.bind("center", this._navigatorCenter);
         },
 
-        _compassPan: function(e) {
+        _navigatorPan: function(e) {
             var map = this;
             var scroller = map.scroller;
 
@@ -311,7 +311,7 @@ kendo_module({
             map.scroller.scrollTo(-x, -y);
         },
 
-        _compassCenter: function() {
+        _navigatorCenter: function() {
             this.center(this.options.center);
         },
 

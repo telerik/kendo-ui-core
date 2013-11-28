@@ -1,6 +1,6 @@
 kendo_module({
-    id: "dataviz.compass",
-    name: "Compass",
+    id: "dataviz.navigator",
+    name: "Navigator",
     category: "dataviz",
     depends: [ "dataviz.core" ],
     advanced: true
@@ -9,29 +9,29 @@ kendo_module({
 (function ($) {
     var kendo = window.kendo;
     var Widget = kendo.ui.Widget;
-    var NS = ".kendoCompass";
+    var NS = ".kendoNavigator";
 
     function button(dir) {
        return kendo.format(
-           '<button class="k-button k-compass-{0}">' +
+           '<button class="k-button k-navigator-{0}">' +
                '<span class="k-icon k-i-arrow-{0}"/>' +
            '</button>', dir);
     }
 
     var BUTTONS = button("n") + button("e") + button("s") + button("w");
 
-    var Compass = Widget.extend({
+    var Navigator = Widget.extend({
         init: function(element, options) {
             Widget.fn.init.call(this, element, options);
             this._initOptions(options);
 
-            this.element.addClass("k-widget k-header k-shadow k-compass")
+            this.element.addClass("k-widget k-header k-shadow k-navigator")
                         .append(BUTTONS)
                         .on("click" + NS, ".k-button", $.proxy(this, "_click"));
         },
 
         options: {
-            name: "Compass",
+            name: "Navigator",
             panStep: 1
         },
 
@@ -45,13 +45,13 @@ kendo_module({
             var panStep = this.options.panStep;
             var button = $(e.currentTarget);
 
-            if (button.is(".k-compass-n")) {
+            if (button.is(".k-navigator-n")) {
                 y = 1;
-            } else if (button.is(".k-compass-s")) {
+            } else if (button.is(".k-navigator-s")) {
                 y = -1;
-            } else if (button.is(".k-compass-e")) {
+            } else if (button.is(".k-navigator-e")) {
                 x = 1;
-            } else if (button.is(".k-compass-w")) {
+            } else if (button.is(".k-navigator-w")) {
                 x = -1;
             }
 
@@ -62,5 +62,5 @@ kendo_module({
         }
     });
 
-    kendo.dataviz.ui.plugin(Compass);
+    kendo.dataviz.ui.plugin(Navigator);
 })(jQuery);
