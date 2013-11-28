@@ -253,9 +253,9 @@
 
         <div id="canvasDiv">
             <canvas id="backgroundGrid" style="z-index: 0; position: absolute;top: 0;left: 0;"></canvas>
-            <canvas  id='ruler' style="position: absolute;top: 0;left: 0;"></canvas>
+            <canvas id='ruler' style="position: absolute;top: 0;left: 0;"></canvas>
             <canvas id='guides' style="z-index:0; position: absolute;top: 0;left: 0;"></canvas>
-            
+
             <div id="canvas"></div>
 
         </div>
@@ -282,6 +282,13 @@
 
 
 
+
+
+
+
+
+
+
 </script>
 
 <script>
@@ -294,25 +301,62 @@ var backgroundGridElement = document.getElementById('backgroundGrid'),
         rulerContext = rulerElement.getContext('2d'),
         guidesContext = guidesElement.getContext('2d'),
         ruler,
-        GUTTERSIZE = 25;
+        verticalGuides = [],
+        horizontalGuides = [],
+        volatileGuide,
+        GUTTERSIZE = 20;
 
-function updateGuides(guidePosition)
-{
-    if(!guidePosition)return;
+function updateGuides(zoom) {
+    if (!zoom) {
+        zoom = 1.0;
+    }
     guidesElement.width = diagramElement.clientWidth;
     guidesElement.height = diagramElement.clientHeight;
     guidesContext.clear();
-    guidesContext.beginPath();
-    guidesContext.moveTo(guidePosition.x, 0.5);
-    guidesContext.lineTo(guidePosition.x, guidesElement.width + 0.5)
-    guidesContext.moveTo(0.5, guidePosition.y );
-    guidesContext.lineTo(guidesElement.width + 0.5, guidePosition.y)
-    guidesContext.strokeStyle = 'red';
-    guidesContext.lineWidth = 1.5;
-    guidesContext.stroke();
-}
-function updateGrid(zoom) {
+    if (verticalGuides.length > 0) {
+        guidesContext.beginPath();
+        for (var i = 0; i < verticalGuides.length; i++) {
+            var location = verticalGuides[i];
+            guidesContext.moveTo(location * zoom, 0.5);
+            guidesContext.lineTo(location * zoom, guidesElement.height + 0.5)
+        }
+        guidesContext.strokeStyle = 'LimeGreen';
+        guidesContext.lineWidth = 1.5;
+        guidesContext.stroke();
+    }
+    if (horizontalGuides.length > 0) {
+        guidesContext.beginPath();
+        for (var i = 0; i < horizontalGuides.length; i++) {
+            var location = horizontalGuides[i];
+            guidesContext.moveTo(0.5, location * zoom);
+            guidesContext.lineTo(guidesElement.width + 0.5, location * zoom);
+        }
+        guidesContext.strokeStyle = 'LimeGreen';
+        guidesContext.lineWidth = 1.5;
+        guidesContext.stroke();
+    }
 
+
+    if (volatileGuide !== null) {
+        guidesContext.beginPath();
+        if (volatileGuide.x >= 0) {
+            guidesContext.moveTo(volatileGuide.x, 0.5);
+            guidesContext.lineTo(volatileGuide.x, guidesElement.height + 0.5)
+        }
+        if (volatileGuide.y >= 0) {
+            guidesContext.moveTo(0.5, volatileGuide.y);
+            guidesContext.lineTo(guidesElement.width + 0.5, volatileGuide.y);
+        }
+        guidesContext.strokeStyle = 'Orange';
+        guidesContext.lineWidth = 1.5;
+        guidesContext.stroke();
+    }
+}
+
+function updateGrid(zoom) {
+    if (!zoom) {
+        zoom = 1.0;
+    }
     backgroundGridElement.width = diagramElement.clientWidth;
     backgroundGridElement.height = diagramElement.clientHeight;
     gridContext.clear();
@@ -355,7 +399,12 @@ function updateGrid(zoom) {
     gridContext.stroke();
 
 }
-function relMouseCoords(event) {
+
+
+/**
+ * Transforms screen coordinates to diagram coordinates
+ */
+function getDiagramCoordinates(event) {
     var totalOffsetX = 0;
     var totalOffsetY = 0;
     var canvasX = 0;
@@ -373,7 +422,9 @@ function relMouseCoords(event) {
 
     return {x: canvasX, y: canvasY}
 }
-HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
+
+HTMLCanvasElement.prototype.getDiagramCoordinates = getDiagramCoordinates;
+
 function updateRuler(v) {
 
     var diagramElement = document.getElementById('canvas');
@@ -423,12 +474,51 @@ function updateRuler(v) {
     rulerContext.lineWidth = 1.2;
     rulerContext.stroke();
 }
+
 function loadRuler() {
 
-    diagramElement.onmousemove = function (e) {
-        var guidePosition = relMouseCoords(e);
-        updateGuides(guidePosition);
+    function movingNewGuide(e) {
+        if (horizontal) {
+            volatileGuide = new kendo.diagram.Point(-1, getDiagramCoordinates(e).y);
+        }
+        else {
+            volatileGuide = new kendo.diagram.Point(getDiagramCoordinates(e).x, -1);
+        }
+        updateGuides();
     }
+
+    var horizontal = false;
+    diagramElement.onmousedown = function (e) {
+        var guidePosition = getDiagramCoordinates(e);
+        if (guidePosition.x <= GUTTERSIZE) {
+            horizontal = false;
+            diagramElement.onmousemove = movingNewGuide;
+        }
+        if (guidePosition.y <= GUTTERSIZE) {
+            horizontal = true;
+            diagramElement.onmousemove = movingNewGuide;
+        }
+    }
+    function mouseup(e) {
+        diagramElement.onmousemove = null;
+        this.diagram = $("#canvas").data("kendoDiagram");
+        if (!volatileGuide) return;
+        if (volatileGuide.x > 0) {
+            if (this.diagram.options.snapping) {
+                volatileGuide.x = Math.floor(volatileGuide.x / this.diagram.options.snapSize) * this.diagram.options.snapSize;
+            }
+            verticalGuides.push(volatileGuide.x);
+        }
+        if (volatileGuide.y > 0) {
+            if (this.diagram.options.snapping) {
+                volatileGuide.y = Math.floor(volatileGuide.y / this.diagram.options.snapSize) * this.diagram.options.snapSize;
+            }
+            horizontalGuides.push(volatileGuide.y);
+        }
+        volatileGuide = null;
+        updateGuides();
+    }
+    diagramElement.onmouseup = mouseup;
 }
 var Shapes = {
 };
@@ -550,12 +640,13 @@ $(function () {
     $("#canvas").kendoDiagram({
         zoom: function (e) {
             slider.value(this._zoom);
-            updateGrid(this._zoom);
-            updateRuler(this._zoom);
-            function rerule() {
+
+            function redrawHelpers() {
+                updateGrid(this._zoom);
                 updateRuler(this._zoom);
+                updateGuides(this._zoom);
             };
-            window.onresize = rerule.call(this);
+            window.onresize = redrawHelpers.call(this);
         },
         select: function (e) {
             var items = e.selected;
