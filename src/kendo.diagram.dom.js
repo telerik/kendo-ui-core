@@ -68,6 +68,9 @@ kendo_module({
         ZOOM = "zoom",
         CONNECTION_CSS = "k-connection",
         SHAPE_CSS = "k-shape",
+        SINGLE = "single",
+        NONE = "none",
+        MULTIPLE = "multiple",
         CONNECTOR_CSS = "k-connector",
         DEFAULT_SHAPE_TYPE = "rectangle",
         DEFAULT_SHAPE_WIDTH = 100,
@@ -264,7 +267,9 @@ kendo_module({
             content: {
                 align: "center middle",
                 text: ""
-            }
+            },
+            editable: true,
+            selectable: true
         },
         _getCursor: function (point) {
             if (this.adorner) {
@@ -327,6 +332,9 @@ kendo_module({
             if (that.options.template && that.model) {
                 that.options.content.text = kendo.template(that.options.template, {paramName: "item"})(that.model);
             }
+        },
+        _canSelect: function () {
+            return this.options.selectable === true && this.diagram.options.selectable.type !== NONE;
         }
     });
 
@@ -410,8 +418,7 @@ kendo_module({
             connectors: diagram.DefaultConnectors,
             rotation: {
                 angle: 0
-            },
-            editable: true
+            }
         },
         bounds: function (value) {
             var point, size, bounds, options;
@@ -458,7 +465,6 @@ kendo_module({
                         this.bounds(new Rect(options.x, options.y, size.width, size.height));
                     }
                     else {
-                        //this.visual.redraw();
                         this.shapeVisual.redraw();
                     }
                 }
@@ -488,23 +494,30 @@ kendo_module({
             return clone;
         },
         select: function (value) {
-            var diagram = this.diagram, selected, deselected;
+            var diagram = this.diagram, selected, deselected, type;
             if (isUndefined(value)) {
                 value = true;
             }
-            if (this.isSelected != value) {
-                selected = [];
-                deselected = [];
-                this.isSelected = value;
-                if (this.isSelected) {
-                    diagram._selectedItems.push(this);
-                    selected.push(this);
-                } else {
-                    diagram._selectedItems.remove(this);
-                    deselected.push(this);
-                }
-                if (!diagram._internalSelection) {
-                    diagram._selectionChanged(selected, deselected);
+            if (this._canSelect()) {
+                if (this.isSelected != value) {
+                    type = this.diagram.options.selectable.type;
+                    selected = [];
+                    deselected = [];
+                    this.isSelected = value;
+                    if (this.isSelected) {
+                        if (type === SINGLE) {
+                            this.diagram.select(false);
+                        }
+                        diagram._selectedItems.push(this);
+                        selected.push(this);
+                    } else {
+                        diagram._selectedItems.remove(this);
+                        deselected.push(this);
+                    }
+                    if (!diagram._internalSelection) {
+                        diagram._selectionChanged(selected, deselected);
+                    }
+                    return true;
                 }
             }
         },
@@ -870,27 +883,34 @@ kendo_module({
          * @param value True to select, false to unselect.
          */
         select: function (value) {
-            var diagram = this.diagram, selected, deselected;
-            if (this.isSelected !== value) {
-                this.isSelected = value;
-                selected = [];
-                deselected = [];
-                if (this.isSelected) {
-                    this.adorner = new ConnectionEditAdorner(this);
-                    diagram._adorn(this.adorner, true);
-                    diagram._selectedItems.push(this);
-                    selected.push(this);
-                } else {
-                    if (this.adorner) {
-                        diagram._adorn(this.adorner, false);
-                        diagram._selectedItems.remove(this);
-                        this.adorner = undefined;
-                        deselected.push(this);
+            var diagram = this.diagram, selected, deselected, type;
+            if (this._canSelect()) {
+                if (this.isSelected !== value) {
+                    this.isSelected = value;
+                    selected = [];
+                    deselected = [];
+                    type = this.diagram.options.selectable.type;
+                    if (this.isSelected) {
+                        if (type === SINGLE) {
+                            this.diagram.select(false);
+                        }
+                        this.adorner = new ConnectionEditAdorner(this);
+                        diagram._adorn(this.adorner, true);
+                        diagram._selectedItems.push(this);
+                        selected.push(this);
+                    } else {
+                        if (this.adorner) {
+                            diagram._adorn(this.adorner, false);
+                            diagram._selectedItems.remove(this);
+                            this.adorner = undefined;
+                            deselected.push(this);
+                        }
                     }
-                }
-                this.refresh();
-                if (!diagram._internalSelection) {
-                    diagram._selectionChanged(selected, deselected);
+                    this.refresh();
+                    if (!diagram._internalSelection) {
+                        diagram._selectionChanged(selected, deselected);
+                    }
+                    return true;
                 }
             }
         },
@@ -985,7 +1005,6 @@ kendo_module({
             var globalSourcePoint = this.sourcePoint(), globalSinkPoint = this.targetPoint(),
                 boundsTopLeft, localSourcePoint, localSinkPoint, middle;
 
-            // this.visual.position(boundsTopLeft);    //global coordinates!
             this._refreshPath();
 
             boundsTopLeft = this._bounds.topLeft();
@@ -1169,6 +1188,10 @@ kendo_module({
                 height: 20,
                 margin: 10,
                 fontSize: 15
+            },
+            selectable: { // none, extended, multiple
+                type: MULTIPLE,
+                inclusive: true
             },
             snapping: true,
             snapSize: 10,
@@ -1385,7 +1408,7 @@ kendo_module({
          * @returns {Array}
          */
         select: function (itemsOrRect, options) {
-            var i, item, items, rect, selected, deselected;
+            var i, item, items, rect, selected, deselected, valueString;
             options = deepExtend({  addToSelection: false }, options);
             var addToSelection = options.addToSelection;
             if (itemsOrRect !== undefined) {
@@ -1395,24 +1418,14 @@ kendo_module({
                 if (!addToSelection) {
                     while (this._selectedItems.length > 0) {
                         item = this._selectedItems[0];
-                        item.select(false);
-                        deselected.push(item);
+                        if (item.select(false)) {
+                            deselected.push(item);
+                        }
                     }
                 }
                 if (Utils.isBoolean(itemsOrRect)) {
                     if (itemsOrRect !== false) {
                         this.select(ALL);
-                    }
-                }
-                else if (itemsOrRect.toString().toLowerCase() === "none") {
-                    this.select(false);
-                }
-                else if (itemsOrRect.toString().toLowerCase() === ALL) {
-                    items = this.shapes.concat(this.connections);
-                    for (i = 0; i < items.length; i++) {
-                        item = items[i];
-                        item.select(true);
-                        selected.push(item);
                     }
                 }
                 else if (itemsOrRect instanceof Rect) {
@@ -1421,8 +1434,9 @@ kendo_module({
                     for (i = 0; i < items.length; i++) {
                         item = items[i];
                         if (!rect || item._hitTest(rect)) {
-                            item.select(true);
-                            selected.push(item);
+                            if (item.select(true)) {
+                                selected.push(item);
+                            }
                         }
                     }
                 }
@@ -1430,14 +1444,31 @@ kendo_module({
                     for (i = 0; i < itemsOrRect.length; i++) {
                         item = items[i];
                         if (item instanceof DiagramElement) {
-                            item.select(true);
-                            selected.push(item);
+                            if (item.select(true)) {
+                                selected.push(item);
+                            }
                         }
                     }
                 }
                 else if (itemsOrRect instanceof DiagramElement) {
-                    itemsOrRect.select(true);
-                    selected.push(itemsOrRect);
+                    if (itemsOrRect.select(true)) {
+                        selected.push(itemsOrRect);
+                    }
+                }
+                else { // string with special meaning...
+                    valueString = itemsOrRect.toString().toLowerCase();
+                    if (valueString === NONE) {
+                        this.select(false);
+                    }
+                    else if (valueString === ALL) {
+                        items = this.shapes.concat(this.connections);
+                        for (i = 0; i < items.length; i++) {
+                            item = items[i];
+                            if (item.select(true)) {
+                                selected.push(item);
+                            }
+                        }
+                    }
                 }
                 if (selected.length > 0 || deselected.length > 0) {
                     this._selectionChanged(selected, deselected);
@@ -1684,7 +1715,6 @@ kendo_module({
                     copied.select(true);
                 }
                 this._copyOffset += 1;
-
             }
         },
         // Miro: I would make that private and/or use toOrigin instead.
@@ -2044,6 +2074,10 @@ kendo_module({
             else {
                 this.connections.remove(connection);
             }
+        },
+        _canRectSelect: function () {
+            var type = this.options.selectable.type;
+            return type === MULTIPLE;
         },
         _refreshSource: function (e) {
             var that = this,

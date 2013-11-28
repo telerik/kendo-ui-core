@@ -670,7 +670,7 @@ kendo_module({
             this.toolService = toolService;
         },
         tryActivate: function () {
-            return this.toolService.hoveredItem === undefined && this.toolService.hoveredAdorner === undefined;
+            return this.toolService.diagram._canRectSelect() && this.toolService.hoveredItem === undefined && this.toolService.hoveredAdorner === undefined;
         },
         start: function (p) {
             var diagram = this.toolService.diagram;
@@ -958,16 +958,18 @@ kendo_module({
                 }
             }
 
-            hit = this.diagram._resizingAdorner._hitTest(point);
-            if (hit) {
-                this.hoveredAdorner = d._resizingAdorner;
-                if (hit.x !== 0 && hit.y !== 0) { // hit testing for resizers or rotator, otherwise if (0,0) than pass through.
-                    return;
+            if (d._canRectSelect()) {
+                hit = this.diagram._resizingAdorner._hitTest(point);
+                if (hit) {
+                    this.hoveredAdorner = d._resizingAdorner;
+                    if (hit.x !== 0 && hit.y !== 0) { // hit testing for resizers or rotator, otherwise if (0,0) than pass through.
+                        return;
+                    }
+                    hit = undefined;
                 }
-                hit = undefined;
-            }
-            else {
-                this.hoveredAdorner = undefined;
+                else {
+                    this.hoveredAdorner = undefined;
+                }
             }
 
             if (!this.activeTool || this.activeTool.type !== "ConnectionTool") {
@@ -1409,8 +1411,8 @@ kendo_module({
                 that.rotationThumb = new Path(that.options.rotationThumb);
                 that.visual.append(that.rotationThumb);
             }
-            that.diagram.bind("select", function (e) {
-                that._initialize(e.selected);
+            that.diagram.bind("select", function () {
+                that._initialize();
             });
 
             that._refreshHandler = function () {
@@ -1546,11 +1548,9 @@ kendo_module({
             }
             return this._manipulating ? Cursors.move : Cursors.select;
         },
-        _initialize: function (items) {
-            var that = this, i, item;
-            if (!items) {
+        _initialize: function () {
+            var that = this, i, item,
                 items = this.diagram.select();
-            }
             that.shapes = [];
             for (i = 0; i < items.length; i++) {
                 item = items[i];

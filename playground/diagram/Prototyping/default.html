@@ -14,7 +14,6 @@
             margin: 0;
             font-family: "Segoe UI", Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica, Sans-Serif;
             font-size: 10pt;
-
         }
 
         #canvasDiv {
@@ -121,11 +120,9 @@
 
         .group {
             border-right: 3px solid #38546d;
-
             padding-left: 10px;
             padding-right: 10px;
             float: left;
-
         }
     </style>
 
@@ -157,7 +154,6 @@
 
     <script src="../Generic/jquery.hotkeys.js"></script>
     <script src="tools.js"></script>
-
     <script src="shapes.js"></script>
 </head>
 <body>
@@ -257,7 +253,6 @@
             <canvas id='guides' style="z-index:0; position: absolute;top: 0;left: 0;"></canvas>
 
             <div id="canvas"></div>
-
         </div>
     </div>
 
@@ -277,17 +272,6 @@
             </g>
         </svg>
     </div>
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
 
@@ -470,56 +454,12 @@ function updateRuler(v) {
         rulerContext.moveTo(0, i + 0.5);
         rulerContext.lineTo(15, i + 0.5)
     }
-
-    rulerContext.lineWidth = 1.2;
-    rulerContext.stroke();
+    ctx.strokeStyle = 'rgba(0, 0, 0, 0.3);'
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
 }
 
-function loadRuler() {
 
-    function movingNewGuide(e) {
-        if (horizontal) {
-            volatileGuide = new kendo.diagram.Point(-1, getDiagramCoordinates(e).y);
-        }
-        else {
-            volatileGuide = new kendo.diagram.Point(getDiagramCoordinates(e).x, -1);
-        }
-        updateGuides();
-    }
-
-    var horizontal = false;
-    diagramElement.onmousedown = function (e) {
-        var guidePosition = getDiagramCoordinates(e);
-        if (guidePosition.x <= GUTTERSIZE) {
-            horizontal = false;
-            diagramElement.onmousemove = movingNewGuide;
-        }
-        if (guidePosition.y <= GUTTERSIZE) {
-            horizontal = true;
-            diagramElement.onmousemove = movingNewGuide;
-        }
-    }
-    function mouseup(e) {
-        diagramElement.onmousemove = null;
-        this.diagram = $("#canvas").data("kendoDiagram");
-        if (!volatileGuide) return;
-        if (volatileGuide.x > 0) {
-            if (this.diagram.options.snapping) {
-                volatileGuide.x = Math.floor(volatileGuide.x / this.diagram.options.snapSize) * this.diagram.options.snapSize;
-            }
-            verticalGuides.push(volatileGuide.x);
-        }
-        if (volatileGuide.y > 0) {
-            if (this.diagram.options.snapping) {
-                volatileGuide.y = Math.floor(volatileGuide.y / this.diagram.options.snapSize) * this.diagram.options.snapSize;
-            }
-            horizontalGuides.push(volatileGuide.y);
-        }
-        volatileGuide = null;
-        updateGuides();
-    }
-    diagramElement.onmouseup = mouseup;
-}
 var Shapes = {
 };
 
@@ -558,8 +498,6 @@ CanvasRenderingContext2D.prototype.clear =
 $(function () {
     function onload() {
         updateGrid(1.0);
-        loadRuler();
-        updateRuler(1.0);
     }
 
     function createSplitters() {
@@ -640,13 +578,7 @@ $(function () {
     $("#canvas").kendoDiagram({
         zoom: function (e) {
             slider.value(this._zoom);
-
-            function redrawHelpers() {
-                updateGrid(this._zoom);
-                updateRuler(this._zoom);
-                updateGuides(this._zoom);
-            };
-            window.onresize = redrawHelpers.call(this);
+            updateGrid(this._zoom);
         },
         select: function (e) {
             var items = e.selected;
