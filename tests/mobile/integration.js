@@ -1,0 +1,28 @@
+module("tabstrip with application", {
+    setup: function() {
+        $("#qunit-fixture").css({ height: "100px", overflow: "hidden" });
+    },
+    teardown: function() {
+        location.hash = '';
+    }
+});
+
+function prevent(e) {
+    e.preventDefault();
+}
+
+test("preventing tabstrip navigation does not navigate the application", function() {
+    $("#qunit-fixture").html('<div data-role="view" id="foo"/> <div id="bar" data-role="view" />\
+        <div data-role="layout" data-id="default"><footer data-role="footer">\
+        <div data-role="tabstrip" data-select="prevent"><a href="#foo">Foo</a><a href="#bar">Bar</a></div>\
+    </footer></div>');
+
+    var app = new kendo.mobile.Application($("#qunit-fixture"), {
+        layout: "default"
+    });
+
+    var barLink = $("#qunit-fixture").find("a").eq(1);
+    barLink.trigger($.Event("mousedown"));
+    ok(!$("#qunit-fixture").find("#bar").is(":visible"));
+});
+
