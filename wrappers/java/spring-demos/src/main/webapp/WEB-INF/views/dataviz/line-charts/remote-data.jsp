@@ -25,6 +25,7 @@
              <kendo:chart-categoryAxis>
                 <kendo:chart-categoryAxisItem field="year">
                     <kendo:chart-categoryAxisItem-labels rotation="-90" />
+                    <kendo:chart-categoryAxisItem-crosshair visible="true" />
                 </kendo:chart-categoryAxisItem>
              </kendo:chart-categoryAxis>
              <kendo:chart-valueAxis>
@@ -32,7 +33,7 @@
                     <kendo:chart-valueAxisItem-labels format="{0:N0}" />
                 </kendo:chart-valueAxisItem>
              </kendo:chart-valueAxis>
-             <kendo:chart-tooltip visible="true" format="{0}%" />
+             <kendo:chart-tooltip visible="true" format="{0:N0}" shared="true" />
          </kendo:chart>
     </div>
 <demo:footer />
