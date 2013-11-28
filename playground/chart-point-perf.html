@@ -19,13 +19,21 @@
 </head>
 <body>
   <div id="chart" style="width: 1100px;"></div>
-  <button onclick="setData()">Load data</button>
   <script>
     $("#chart").kendoChart({
       dataSource: {
           transport: {
               read: "chart.json",
               type: "json"
+          },
+          schema: {
+              model: {
+                  fields: {
+                      Day: {
+                          type: "date"
+                      }
+                  }
+              }
           }
       },
       seriesDefaults: {
@@ -33,6 +41,9 @@
           width: 0.5,
           categoryField: "Day",
           highlight: {
+              visible: false
+          },
+          markers: {
               visible: false
           }
       },
@@ -73,7 +84,12 @@
             visible: true
         },
         labels: {
-            visible: false
+            template: function(data) {
+                var value = data.value;
+                if (value.getDate() === 1 && value.getMonth() % 4 === 0) {
+                    return kendo.toString(value, 'MMM yy');
+                }
+            }
         },
         majorTicks: {
             visible: false
@@ -88,7 +104,8 @@
       },
       legend: {
           visible: false
-      }
+      },
+      transitions: false
     });
   </script>
 </body>

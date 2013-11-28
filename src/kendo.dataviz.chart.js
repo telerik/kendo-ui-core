@@ -421,6 +421,7 @@ kendo_module({
         },
 
         _redraw: function() {
+            console.time("redraw");
             var chart = this,
                 model = chart._getModel(),
                 view;
@@ -440,6 +441,7 @@ kendo_module({
                 chart._highlight = new Highlight(view, chart._viewElement);
                 chart._setupSelection();
             }
+            console.timeEnd("redraw");
         },
 
         _sharedTooltip: function() {
@@ -3172,6 +3174,7 @@ kendo_module({
             chart.points = [];
             chart.categoryPoints = [];
             chart.seriesPoints = [];
+            chart.seriesOptions = [];
 
             chart.render();
         },
@@ -3188,6 +3191,17 @@ kendo_module({
             chart.traverseDataPoints(proxy(chart.addValue, chart));
             console.timeEnd("traverseDataPoints");
             console.log("Points: " + this.points.length);
+        },
+
+        pointOptions: function(series, seriesIx) {
+            var options = this.seriesOptions[seriesIx];
+            if (!options) {
+                this.seriesOptions[seriesIx] = options = deepExtend({
+                    vertical: !this.options.invertAxes
+                }, series);
+            }
+
+            return options;
         },
 
         addErrorBar: function(point, data, categoryIx) {
@@ -4635,7 +4649,7 @@ kendo_module({
             chart.renderSegments();
         },
 
-        createPoint: function(data, category, categoryIx, series) {
+        createPoint: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 value = data.valueFields.value,
                 options = chart.options,
@@ -4656,9 +4670,8 @@ kendo_module({
                 }
             }
 
-            pointOptions = deepExtend({
-                vertical: !options.invertAxes
-            }, series, {
+            pointOptions = this.pointOptions(series, seriesIx);
+            deepExtend(pointOptions, {
                 color: fields.color,
                 notes: { label: { text: data.fields.noteText } }
             });
