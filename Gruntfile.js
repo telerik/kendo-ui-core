@@ -31,7 +31,7 @@ module.exports = function(grunt) {
                         'tests/mobile/**/*.js'
                     ],
 
-                    exclude: [ 'src/kendo.web.js', 'src/kendo.aspnetmvc.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.winjs.js', 'src/*min.js', 'src/*dataviz*', 'src/*diagram*', 'src/*scheduler*' ],
+                    exclude: [ 'src/kendo.web.js', 'src/kendo.aspnetmvc.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.timezones.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js', 'src/*editor*', 'src/*dataviz*', 'src/*diagram*', 'src/*scheduler*' ],
 
                     reporters: ['progress' ],
 
