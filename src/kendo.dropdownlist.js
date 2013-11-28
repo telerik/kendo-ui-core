@@ -543,7 +543,7 @@ kendo_module({
 
             if (!that.ul[0].firstChild) {
                 dataSource.one(CHANGE, function () {
-                    if (dataSource.data()[0]) {
+                    if (dataSource.data()[0] && index > -1) {
                         that._selectNext(word, index);
                     }
                 }).fetch();
