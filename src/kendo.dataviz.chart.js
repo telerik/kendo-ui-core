@@ -1978,7 +1978,7 @@ kendo_module({
         getSlot: function(from, to) {
             var axis = this,
                 options = axis.options,
-                majorTicks = axis.getMajorTickPositions(),
+                majorTicks = axis.getTicks().majorTicks,
                 reverse = options.reverse,
                 justified = options.justified,
                 valueAxis = options.vertical ? Y : X,
@@ -2393,14 +2393,14 @@ kendo_module({
             return lineSize / timeRange;
         },
 
-        getMajorTickPositions: function() {
+        getTickPositions: function(count) {
             var axis = this,
                 options = axis.options,
                 categories = options.categories,
                 positions = [];
 
             if (options.roundToBaseUnit || categories.length === 0) {
-                positions = CategoryAxis.fn.getMajorTickPositions.call(axis);
+                positions = CategoryAxis.fn.getTickPositions.call(axis, count);
             } else {
                 var vertical = options.vertical,
                     reverse = options.reverse,
