@@ -10586,6 +10586,7 @@ kendo_module({
         delete seriesDefaults.polarLine;
         delete seriesDefaults.radarArea;
         delete seriesDefaults.radarLine;
+        delete seriesDefaults.errorBars;
     }
 
     function applySeriesColors(options) {
