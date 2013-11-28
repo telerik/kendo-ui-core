@@ -421,7 +421,6 @@ kendo_module({
         },
 
         _redraw: function() {
-            console.time("redraw");
             var chart = this,
                 model = chart._getModel(),
                 view;
@@ -434,6 +433,7 @@ kendo_module({
             view = chart._view =
                 dataviz.ViewFactory.current.create(model.options, chart.options.renderAs);
 
+            console.time("render");
             if (view) {
                 view.load(model);
                 chart._viewElement = chart._renderView(view);
@@ -441,7 +441,7 @@ kendo_module({
                 chart._highlight = new Highlight(view, chart._viewElement);
                 chart._setupSelection();
             }
-            console.timeEnd("redraw");
+            console.timeEnd("render");
         },
 
         _sharedTooltip: function() {
@@ -477,6 +477,7 @@ kendo_module({
         },
 
         _getModel: function() {
+            console.time("build model");
             var chart = this,
                 options = chart.options,
                 model = new RootElement(chart._modelOptions()),
@@ -493,6 +494,7 @@ kendo_module({
             model.append(plotArea);
             model.reflow();
 
+            console.timeEnd("build model");
             return model;
         },
 
@@ -3175,6 +3177,7 @@ kendo_module({
             chart.categoryPoints = [];
             chart.seriesPoints = [];
             chart.seriesOptions = [];
+            chart._evalSeries = [];
 
             chart.render();
         },
@@ -3187,10 +3190,7 @@ kendo_module({
 
         render: function() {
             var chart = this;
-            console.time("traverseDataPoints");
             chart.traverseDataPoints(proxy(chart.addValue, chart));
-            console.timeEnd("traverseDataPoints");
-            console.log("Points: " + this.points.length);
         },
 
         pointOptions: function(series, seriesIx) {
@@ -3287,14 +3287,25 @@ kendo_module({
             categoryPoints.push(point);
         },
 
-        evalPointOptions: function(options, value, category, categoryIx, series) {
-            evalOptions(options, {
-                value: value,
-                series: series,
-                dataItem: series.data[categoryIx],
-                category: category,
-                index: categoryIx
-            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+        evalPointOptions: function(options, value, category, categoryIx, series, seriesIx) {
+            var state = { defaults: series._defaults, excluded: ["data", "aggregate", "_events"] };
+
+            var doEval = this._evalSeries[seriesIx];
+            if (!defined(doEval)) {
+                this._evalSeries[seriesIx] = doEval = evalOptions(options, {}, state, true);
+            }
+
+            if (doEval) {
+                evalOptions(options, {
+                    value: value,
+                    series: series,
+                    dataItem: series.data[categoryIx],
+                    category: category,
+                    index: categoryIx
+                });
+            }
+
+            return options;
         },
 
         updateRange: function(data, categoryIx, series) {
@@ -3463,7 +3474,7 @@ kendo_module({
             return StackLayout;
         },
 
-        createPoint: function(data, category, categoryIx, series) {
+        createPoint: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 value = data.valueFields.value,
                 options = chart.options,
@@ -3498,7 +3509,7 @@ kendo_module({
             }
 
             chart.evalPointOptions(
-                pointOptions, value, category, categoryIx, series
+                pointOptions, value, category, categoryIx, series, seriesIx
             );
 
             point = new pointType(value, pointOptions);
@@ -3784,7 +3795,7 @@ kendo_module({
             }
         },
 
-        createPoint: function(data, category, categoryIx, series) {
+        createPoint: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 value = data.valueFields,
                 options = chart.options,
@@ -3803,7 +3814,7 @@ kendo_module({
             });
 
             chart.evalPointOptions(
-                bulletOptions, value, category, categoryIx, series
+                bulletOptions, value, category, categoryIx, series, seriesIx
             );
 
             bullet = new Bullet(value, bulletOptions);
@@ -4676,8 +4687,8 @@ kendo_module({
                 notes: { label: { text: data.fields.noteText } }
             });
 
-            chart.evalPointOptions(
-                pointOptions, value, category, categoryIx, series
+            pointOptions = chart.evalPointOptions(
+                pointOptions, value, category, categoryIx, series, seriesIx
             );
 
             point = new LinePoint(value, pointOptions);
@@ -5885,7 +5896,7 @@ kendo_module({
             return Candlestick;
         },
 
-        createPoint: function(data, category, categoryIx, series) {
+        createPoint: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 value = data.valueFields,
                 pointOptions = deepExtend({}, series, {
@@ -5894,7 +5905,7 @@ kendo_module({
                 pointType = chart.pointType();
 
             chart.evalPointOptions(
-                pointOptions, value, category, categoryIx, series
+                pointOptions, value, category, categoryIx, series, seriesIx
             );
 
             return new pointType(value, pointOptions);
@@ -11009,12 +11020,13 @@ kendo_module({
         return ranges;
     }
 
-    function evalOptions(options, context, state) {
+    function evalOptions(options, context, state, dryRun) {
         var property,
             propValue,
             excluded,
             defaults,
-            depth;
+            depth,
+            needsEval = false;
 
         state = state || {};
         excluded = state.excluded = state.excluded || [];
@@ -11029,15 +11041,20 @@ kendo_module({
             if (!inArray(property, state.excluded)&&options.hasOwnProperty(property)) {
                 propValue = options[property];
                 if (isFn(propValue)) {
-                    options[property] = valueOrDefault(propValue(context), defaults[property]);
+                    needsEval = true;
+                    if (!dryRun) {
+                        options[property] = valueOrDefault(propValue(context), defaults[property]);
+                    }
                 } else if (typeof propValue === OBJECT) {
                     state.defaults = defaults[property];
                     state.depth++;
-                    evalOptions(propValue, context, state);
+                    needsEval = evalOptions(propValue, context, state, dryRun) || needsEval;
                     state.depth--;
                 }
             }
         }
+
+        return needsEval;
     }
 
     function groupSeries(series, data) {
