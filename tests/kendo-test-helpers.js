@@ -65,6 +65,11 @@ function brazilTimezoneTest(testName, expected, callback ) {
         QUnit.test(testName, expected, callback);
     }
 }
+
+$(function() {
+    QUnit.fixture = $("<div id='qunit-fixture' />").appendTo(document.body);
+})
+
 QUnit.brazilTimezoneTest = brazilTimezoneTest;
 
 var close = QUnit.close,
