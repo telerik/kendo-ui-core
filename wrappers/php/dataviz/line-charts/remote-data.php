@@ -35,11 +35,13 @@ $valueAxis->labels(array('format' => 'N0'))
 $categoryAxis = new \Kendo\Dataviz\UI\ChartCategoryAxisItem();
 
 $categoryAxis->field('year')
-             ->labels(array('rotation' => -90));
+             ->labels(array('rotation' => -90))
+			 ->crosshair(array('visible' => true));
 
 $tooltip = new \Kendo\Dataviz\UI\ChartTooltip();
 $tooltip->visible(true)
-        ->format('N0');
+        ->format('N0')
+		->shared(true);
 
 $transport = new \Kendo\Data\DataSourceTransport();
 $transport->read(array('url' => 'remote-data.php', 'type' => 'POST', 'dataType' => 'json'));
