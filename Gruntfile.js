@@ -1,5 +1,6 @@
 module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     // Project configuration.
     grunt.initConfig({
@@ -46,6 +47,23 @@ module.exports = function(grunt) {
 
                     singleRun: false
                 }
+            }
+        },
+        jshint: {
+            files: [
+            'src/kendo*.js',
+            'src/editor/*.js',
+            'src/dataviz/**/*.js',
+            'tests/map/layers/helpers.js',
+            'demos/mvc/content/shared/js/examples.js',
+            'demos/mvc/content/shared/js/console.js',
+            'themebuilder/bootstrap.js',
+            'themebuilder/scripts/themebuilder.js',
+            'themebuilder/scripts/colorengine.js',
+            'themebuilder/scripts/constants.js'
+            ],
+            options: {
+                ignores: ['**/*.min.js', 'src/kendo.web.js', 'src/kendo.aspnetmvc.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.timezones.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/kendo.editor.js' ]
             }
         }
     });
