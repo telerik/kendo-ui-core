@@ -10455,8 +10455,8 @@ kendo_module({
                 firstDataItem = data.dataItems[0],
                 result = {};
 
-            if (!isArray(firstDataItem)) {
-                result = extend(result, firstDataItem);
+            if (!isNumber(firstDataItem) && !isArray(firstDataItem)) {
+                result = firstDataItem || {};
             }
 
             for (i = 0; i < seriesFields.length; i++) {
