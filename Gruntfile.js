@@ -11,6 +11,7 @@ module.exports = function(grunt) {
                     basePath: '',
                     frameworks: ['qunit'],
                     files: [
+                        { pattern: 'Gruntfile.js', watched: true, included: false },
                         { pattern: 'styles/**/*.*', watched: true, included: false },
                         'src/jquery.js',
                         'tests/jquery.mockjax.js',
@@ -26,8 +27,11 @@ module.exports = function(grunt) {
                         'src/kendo.mobile.pane.js',
                         'src/kendo.mobile.shim.js',
                         'src/kendo*.js',
+                        'tests/qunit/addons/close-enough/qunit-close-enough.js',
                         'tests/kendo-test-helpers.js',
                         'demos/mvc/content/shared/js/less.js',
+                        'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
+                        'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
                         'tests/mobile/**/*.js'
                     ],
 

@@ -66,6 +66,36 @@ function brazilTimezoneTest(testName, expected, callback ) {
     }
 }
 
+function triggerTouchEvent(element, type, info) {
+    info.target = element;
+    element.trigger($.Event(type, { originalEvent: { changedTouches: [ info ] }}));
+}
+
+function press(element, x, y, id) {
+    triggerTouchEvent(element, "touchstart", {
+        pageX: x,
+        pageY: y,
+        id: id || 1
+    })
+}
+
+function move(element, x, y, id) {
+    triggerTouchEvent(element, "touchmove", {
+        pageX: x,
+        pageY: y,
+        id: id || 1
+    })
+}
+
+function release(element, x, y, id) {
+    triggerTouchEvent(element, "touchend", {
+        pageX: x,
+        pageY: y,
+        id: id || 1
+    })
+}
+
+
 $('head').append('<link rel="stylesheet/less" href="/base/styles/mobile/kendo.mobile.all.less" type="text/css" />');
 
 $(function() {
@@ -82,3 +112,4 @@ QUnit.config.reorder = false;
 
 var close = QUnit.close,
     notClose = QUnit.notClose;
+
