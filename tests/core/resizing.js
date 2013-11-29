@@ -38,11 +38,11 @@ module("resizable widget", {
 
     teardown: function() {
         QUnit.fixture.css({
-            position: "auto",
-            top: "auto",
-            left: "auto",
-            width: "auto",
-            height: "auto"
+            position: "",
+            top: "",
+            left: "",
+            width: "",
+            height: ""
         });
     }
 });
