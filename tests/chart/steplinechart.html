@@ -614,7 +614,7 @@
                 });
 
                 test("line has same model id as its segment", function() {
-                    equal(view.log.path[0].style.data.modelId, lineChart._segments[0].options.modelId);
+                    equal(view.log.path[0].style.data.modelId, lineChart._segments[0].modelId);
                 });
 
                 test("renders line chart group", function() {
@@ -880,7 +880,7 @@
                     point = new LinePoint(VALUE,
                         $.extend(true, {
                             labels: { font: SANS12 }
-                        }, options)
+                        }, LinePoint.fn.defaults, options)
                     );
 
                     point.category = CATEGORY;
@@ -911,7 +911,7 @@
                 });
 
                 test("is discoverable", function() {
-                    ok(point.options.modelId);
+                    ok(point.modelId);
                 });
 
                 test("fills target box", function() {
@@ -937,9 +937,9 @@
                     equal(marker.options.rotation, 90);
                 });
 
-                test("hides marker if size is 0", function() {
+                test("doesn't create marker if size is 0", function() {
                     createPoint({ markers: { size: 0 } });
-                    ok(!marker.options.visible);
+                    ok(!marker);
                 });
 
                 test("sets marker background color", function() {
@@ -961,9 +961,9 @@
                     equal(marker.options.border.width, 4);
                 });
 
-                test("sets marker visibility", function() {
+                test("doesn't create marker", function() {
                     createPoint({ markers: { visible: false }});
-                    equal(marker.options.visible, false);
+                    ok(!marker);
                 });
 
                 test("sets marker shape type", function() {
@@ -997,14 +997,14 @@
                 });
 
                 test("sets marker id", function() {
-                    ok(marker.options.id.length > 0);
+                    ok(marker.id.length > 0);
                 });
 
                 test("marker has same model id", function() {
                     view = new ViewStub();
 
                     point.getViewElements(view);
-                    equal(marker.options.modelId, point.options.modelId);
+                    equal(marker.modelId, point.modelId);
                 });
 
                 test("highlightOverlay returns marker outline", function() {
@@ -1020,7 +1020,7 @@
                     view = new ViewStub();
 
                     point.highlightOverlay(view);
-                    equal(view.log.circle[0].style.data.modelId, point.options.modelId);
+                    equal(view.log.circle[0].style.data.modelId, point.modelId);
                 });
 
                 test("highlightOverlay applies render options for square markers", function() {
@@ -1227,7 +1227,7 @@
                     segment;
 
                 function getElementFromModel(modelElement) {
-                    return $(getElement(modelElement.options.id));
+                    return $(getElement(modelElement.id));
                 }
 
                 function createLineChart(options) {
@@ -1333,7 +1333,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     linePointClick(function(e) {
-                        equal(e.element[0], getElement(marker.options.id));
+                        equal(e.element[0], getElement(marker.id));
                     });
                 });
 
@@ -1397,7 +1397,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     linePointHover(function(e) {
-                        equal(e.element[0], getElement(marker.options.id));
+                        equal(e.element[0], getElement(marker.id));
                     });
                 });
 

@@ -599,6 +599,7 @@ kendo_module({
             element.children = [];
 
             element.options = deepExtend({}, element.options, options);
+            element.id = element.options.id;
         },
 
         reflow: function(targetBox) {
@@ -620,8 +621,7 @@ kendo_module({
 
         getViewElements: function(view) {
             var element = this,
-                options = element.options,
-                modelId = options.modelId,
+                modelId = element.modelId,
                 viewElements = [],
                 root,
                 children = element.children,
@@ -634,7 +634,7 @@ kendo_module({
 
                 if (!child.discoverable) {
                     child.options = child.options || {};
-                    child.options.modelId = modelId;
+                    child.modelId = modelId;
                 }
 
                 viewElements.push.apply(
@@ -652,10 +652,9 @@ kendo_module({
         },
 
         enableDiscovery: function() {
-            var element = this,
-                options = element.options;
+            var element = this;
 
-            options.modelId = IDPool.current.alloc();
+            element.modelId = IDPool.current.alloc();
             element.discoverable = true;
         },
 
@@ -663,8 +662,8 @@ kendo_module({
             var element = this,
                 children = element.children,
                 root = element.getRoot(),
-                modelId = element.options.modelId,
-                id = element.options.id,
+                modelId = element.modelId,
+                id = element.id,
                 pool = IDPool.current,
                 i;
 
@@ -777,10 +776,6 @@ kendo_module({
     });
 
     var BoxElement = ChartElement.extend({
-        init: function(options) {
-            ChartElement.fn.init.call(this, options);
-        },
-
         options: {
             align: LEFT,
             vAlign: TOP,
@@ -896,7 +891,7 @@ kendo_module({
                 border = options.border || {};
 
             return {
-                id: options.id,
+                id: this.id,
                 stroke: border.width ? border.color : "",
                 strokeWidth: border.width,
                 dashType: border.dashType,
@@ -905,7 +900,7 @@ kendo_module({
                 fillOpacity: options.opacity,
                 animation: options.animation,
                 zIndex: options.zIndex,
-                data: { modelId: options.modelId }
+                data: { modelId: boxElement.modelId }
             };
         }
     });
@@ -980,9 +975,10 @@ kendo_module({
             return [
                 view.createText(text.content,
                     deepExtend({}, options, {
+                        id: text.id,
                         x: text.box.x1, y: text.box.y1,
                         baseline: text.baseline,
-                        data: { modelId: options.modelId }
+                        data: { modelId: text.modelId }
                     })
                 )
             ];
@@ -1001,7 +997,7 @@ kendo_module({
             textBox.append(text);
 
             if (textBox.hasBox()) {
-                text.options.id = uniqueId();
+                text.id = uniqueId();
             }
 
             // Calculate size
@@ -1056,16 +1052,8 @@ kendo_module({
     };
 
     var AxisLabel = TextBox.extend({
-        init: function(value, index, dataItem, options) {
-            var label = this,
-                text = value;
-
-            if (options.template) {
-                label.template = template(options.template);
-                text = label.template({ value: value, dataItem: dataItem });
-            } else if (options.format) {
-                text = label.formatValue(value, options);
-            }
+        init: function(value, text, index, dataItem, options) {
+            var label = this;
 
             label.text = text;
             label.value = value;
@@ -1077,10 +1065,6 @@ kendo_module({
             );
 
             label.enableDiscovery();
-        },
-
-        formatValue: function(value, options) {
-            return autoFormat(options.format, value);
         },
 
         click: function(widget, e) {
@@ -1206,7 +1190,7 @@ kendo_module({
                 align = options.vertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
                     align: align, zIndex: options.zIndex,
-                    modelId: options.modelId
+                    modelId: axis.modelId
                 }),
                 step = labelOptions.step;
 
@@ -1219,8 +1203,10 @@ kendo_module({
 
                 for (i = labelOptions.skip; i < labelsCount; i += step) {
                     label = axis.createAxisLabel(i, labelOptions);
-                    axis.append(label);
-                    axis.labels.push(label);
+                    if (label) {
+                        axis.append(label);
+                        axis.labels.push(label);
+                    }
                 }
             }
         },
@@ -1484,7 +1470,7 @@ kendo_module({
             var axis = this,
                 items = [],
                 options = axis.options,
-                modelId = axis.plotArea.options.modelId,
+                modelId = axis.plotArea.modelId,
                 axisLineVisible = altAxis.options.line.visible,
                 majorGridLines = options.majorGridLines,
                 majorUnit = majorGridLines.visible ? options.majorUnit : 0,
@@ -1585,7 +1571,6 @@ kendo_module({
         arrangeLabels: function() {
             var axis = this,
                 options = axis.options,
-                labelOptions = options.labels,
                 labels = axis.labels,
                 labelsBetweenTicks = !options.justified,
                 vertical = options.vertical,
@@ -1597,7 +1582,7 @@ kendo_module({
 
             for (i = 0; i < labels.length; i++) {
                 var label = labels[i],
-                    tickIx = labelOptions.skip + labelOptions.step * i,
+                    tickIx = label.index,
                     labelSize = vertical ? label.box.height() : label.box.width(),
                     labelPos = tickPositions[tickIx] - (labelSize / 2),
                     firstTickPosition, nextTickPosition, middle, labelX;
@@ -1702,6 +1687,23 @@ kendo_module({
             }
             axis.box[pos + 1] -= axis.lineBox()[pos + 1] - lineBox[pos + 1];
             axis.box[pos + 2] -= axis.lineBox()[pos + 2] - lineBox[pos + 2];
+        },
+
+        axisLabelText: function(value, dataItem, options) {
+            var text = value;
+
+            if (options.template) {
+                var tmpl = template(options.template);
+                text = tmpl({ value: value, dataItem: dataItem });
+            } else if (options.format) {
+                if (options.format.match(FORMAT_REGEX)) {
+                    text = kendo.format(options.format, value);
+                } else {
+                    text = kendo.toString(value, options.format, options.culture);
+                }
+            }
+
+            return text;
         }
     });
 
@@ -1750,7 +1752,7 @@ kendo_module({
                 label = options.label,
                 icon = options.icon,
                 size = icon.size,
-                dataModelId = { data: { modelId: options.modelId } },
+                dataModelId = { data: { modelId: note.modelId } },
                 box = Box2D(),
                 marker, width, height;
 
@@ -1866,7 +1868,7 @@ kendo_module({
             var note = this,
                 elements = BoxElement.fn.getViewElements.call(note, view),
                 group = view.createGroup({
-                    data: { modelId: note.options.modelId },
+                    data: { modelId: note.modelId },
                     zIndex: 1
                 });
 
@@ -2349,9 +2351,10 @@ kendo_module({
         createAxisLabel: function(index, labelOptions) {
             var axis = this,
                 options = axis.options,
-                value = round(options.min + (index * options.majorUnit), DEFAULT_PRECISION);
+                value = round(options.min + (index * options.majorUnit), DEFAULT_PRECISION),
+                text = axis.axisLabelText(value, null, labelOptions);
 
-            return new AxisLabel(value, index, null, labelOptions);
+            return new AxisLabel(value, text, index, null, labelOptions);
         },
 
         shouldRenderNote: function(value) {
@@ -2504,7 +2507,7 @@ kendo_module({
 
         replace: function(model) {
             var view = this,
-                element = getElement(model.options.id);
+                element = getElement(model.id);
 
             if (element) {
                 view._freeIds(element);

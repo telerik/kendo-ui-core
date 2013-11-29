@@ -1656,11 +1656,11 @@
                 });
 
                 test("applies series fill color to bars", function() {
-                    equal(barChart.points[0].options.color, "#f00");
+                    equal(barChart.points[0].color, "#f00");
                 });
 
                 test("applies series negative fill color to negative bars", function() {
-                    equal(barChart.points[1].options.color, "#00f");
+                    equal(barChart.points[1].color, "#00f");
                 });
 
                 test("applies series opacity color to bars", function() {
@@ -1679,7 +1679,7 @@
                         }]
                     });
 
-                    equal(barChart.points[0].options.color, "#f00");
+                    equal(barChart.points[0].color, "#f00");
                 });
 
                 test("color fn argument contains value", 1, function() {
@@ -2021,7 +2021,7 @@
 
                 function createBar(options) {
                     box = new Box2D(0, 0, 100, 100);
-                    bar = new Bar(VALUE, options);
+                    bar = new Bar(VALUE, kendo.deepExtend({}, Bar.fn.defaults, options));
 
                     bar.category = CATEGORY;
                     bar.dataItem = { value: VALUE };
@@ -2076,7 +2076,7 @@
                 });
 
                 test("sets fill color", function() {
-                    deepEqual(rect.style.fill, bar.options.color);
+                    deepEqual(rect.style.fill, bar.color);
                 });
 
                 test("sets vertical", function() {
@@ -2152,7 +2152,7 @@
                 });
 
                 test("is discoverable", function() {
-                    ok(bar.options.modelId);
+                    ok(bar.modelId);
                 });
 
                 test("sets id on rect", function() {
@@ -2170,12 +2170,12 @@
                     view = new ViewStub();
 
                     bar.highlightOverlay(view);
-                    equal(view.log.rect[0].style.data.modelId, bar.options.modelId);
+                    equal(view.log.rect[0].style.data.modelId, bar.modelId);
                 });
 
                 test("label has same model id", function() {
                     createBar({ labels: { visible: true } });
-                    equal(label.options.modelId, bar.options.modelId);
+                    equal(label.modelId, bar.modelId);
                 });
 
                 test("tooltipAnchor is top right corner / vertical / above axis",
@@ -2318,11 +2318,11 @@
                 });
 
                 test("point color bound to color field", function() {
-                    equal(points[0].options.color, "red");
+                    equal(points[0].color, "red");
                 });
 
                 test("point color not bound to null color field", function() {
-                    equal(points[1].options.color, "#ff6800");
+                    equal(points[1].color, "#ff6800");
                 });
 
                 test("dataItem sent to label template", function() {
@@ -2350,7 +2350,7 @@
 
                     plotArea = chart._model.children[1];
                     bar = plotArea.charts[0].points[0];
-                    barElement = $(getElement(bar.options.id));
+                    barElement = $(getElement(bar.id));
                 }
 
                 function barClick(callback) {
@@ -2396,7 +2396,7 @@
                     });
                     var label = plotArea.charts[0].points[0].children[0];
 
-                    clickChart(chart, getElement(label.options.id));
+                    clickChart(chart, getElement(label.id));
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -2415,7 +2415,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     barClick(function(e) {
-                        equal(e.element[0], getElement(bar.options.id));
+                        equal(e.element[0], getElement(bar.id));
                     });
                 });
 
@@ -2461,7 +2461,7 @@
                         seriesHover: function() { ok(true); }
                     });
                     var label = plotArea.charts[0].points[0].children[0];
-                    $(getElement(label.options.id)).mouseover();
+                    $(getElement(label.id)).mouseover();
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -2480,7 +2480,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     barHover(function(e) {
-                        equal(e.element[0], getElement(bar.options.id));
+                        equal(e.element[0], getElement(bar.id));
                     });
                 });
 

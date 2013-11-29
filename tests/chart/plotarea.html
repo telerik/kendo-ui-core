@@ -3267,7 +3267,7 @@
                     });
 
                     plotArea = chart._model.children[1];
-                    var paneId = plotArea.panes[0].options.id;
+                    var paneId = plotArea.panes[0].id;
                     var element = getElement(paneId);
 
                     plotArea.series[0].data[0] = 10;
@@ -3390,8 +3390,8 @@
 
                     plotArea = chart._model.children[1];
                     bar = plotArea.charts[0].points[0];
-                    barElement = getElement(bar.options.id);
-                    plotAreaElement = getElement(plotArea.options.id);
+                    barElement = getElement(bar.id);
+                    plotAreaElement = getElement(plotArea.id);
                 }
 
                 // ------------------------------------------------------------
@@ -3545,7 +3545,7 @@
                     });
 
                     plotArea = chart._model.children[1];
-                    plotAreaElement = getElement(plotArea.options.id);
+                    plotAreaElement = getElement(plotArea.id);
                 }
 
                 module("Categorical Plot Area / Events / plotAreaClick / Panes", {
@@ -4498,9 +4498,9 @@
                     }, options));
 
                     plotArea = chart._model.children[1];
-                    plotAreaElement = getElement(plotArea.options.id);
+                    plotAreaElement = getElement(plotArea.id);
                     point = plotArea.charts[0].points[0];
-                    pointElement = $(getElement(point.options.id));
+                    pointElement = $(getElement(point.id));
                 }
 
                 // ------------------------------------------------------------

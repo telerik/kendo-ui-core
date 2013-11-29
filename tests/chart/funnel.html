@@ -559,7 +559,7 @@
 
                     plotArea = chart._plotArea;
                     segment = plotArea.charts[0].points[0];
-                    segmentElement = $(getElement(segment.options.id));
+                    segmentElement = $(getElement(segment.id));
                 }
 
                 function segmentClick(callback) {
@@ -597,7 +597,7 @@
                         seriesClick: function() { ok(true); }
                     });
                     var label = plotArea.charts[0].labels[0];
-                    clickChart(chart, getElement(label.options.id));
+                    clickChart(chart, getElement(label.id));
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -616,7 +616,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     segmentClick(function(e) {
-                        equal(e.element[0], getElement(segment.options.id));
+                        equal(e.element[0], getElement(segment.id));
                     });
                 });
 
@@ -654,7 +654,7 @@
                         seriesHover: function() { ok(true); }
                     });
                     var label = plotArea.charts[0].labels[0];
-                    $(getElement(label.options.id)).mouseover();
+                    $(getElement(label.id)).mouseover();
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -673,7 +673,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     segmentHover(function(e) {
-                        equal(e.element[0], getElement(segment.options.id));
+                        equal(e.element[0], getElement(segment.id));
                     });
                 });
 
