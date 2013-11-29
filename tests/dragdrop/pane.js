@@ -1,144 +1,139 @@
-var movable, pane, dimensions, userEvents;
-var fixture = $("<div style='top:0; position: absolute; left: 0;' />").appendTo(document.body);
+(function() {
+    var movable,
+        pane,
+        dimensions,
+        userEvents,
+        fixture;
 
-module("pane dimensions");
-
-test("calculates min scale", 1, function() {
-    fixture.append('<div style="width:200px; height: 200px;"><div style="width:400px; height: 800px;">Element</div></div>');
-    var container = fixture.children().first();
-
-    element = container.children().first();
-
-    dimensions = new kendo.ui.PaneDimensions({
-        element: element,
-        container: container
+    module("pane dimensions", {
+        setup: function() {
+            fixture = $("<div style='top:0; position: absolute; left: 0;' />").appendTo(document.body);
+        },
+        teardown: function() {
+            fixture.remove();
+        }
     });
 
-    dimensions.refresh();
-    equal(dimensions.minScale, 0.25);
-
-    fixture.empty();
-})
-
-test("allows overriding min scale", 1, function() {
-    fixture.append('<div style="width:200px; height: 200px;"><div style="width:400px; height: 600px;">Element</div></div>');
-    var container = fixture.children().first();
-
-    element = container.children().first();
-
-    dimensions = new kendo.ui.PaneDimensions({
-        element: element,
-        container: container,
-        minScale: 1
-    });
-
-    dimensions.refresh();
-    equal(dimensions.minScale, 1);
-
-    fixture.empty();
-})
-
-module("pane", {
-    setup: function() {
-        kendo.support.touch = true;
-        fixture.append('<div style="width:200px; height: 200px;"><div style="width:400px; height: 400px;">Element</div></div>');
+    test("calculates min scale", 1, function() {
+        fixture.append('<div style="width:200px; height: 200px;"><div style="width:400px; height: 800px;">Element</div></div>');
         var container = fixture.children().first();
 
         element = container.children().first();
-
-        movable = new kendo.ui.Movable(element);
 
         dimensions = new kendo.ui.PaneDimensions({
             element: element,
             container: container
         });
 
-        userEvents = new kendo.UserEvents(element, {multiTouch: true});
+        dimensions.refresh();
+        equal(dimensions.minScale, 0.25);
+    })
 
-        pane = new kendo.ui.Pane({
-            movable: movable,
-            userEvents: userEvents,
-            dimensions: dimensions
+    test("allows overriding min scale", 1, function() {
+        fixture.append('<div style="width:200px; height: 200px;"><div style="width:400px; height: 600px;">Element</div></div>');
+        var container = fixture.children().first();
+
+        element = container.children().first();
+
+        dimensions = new kendo.ui.PaneDimensions({
+            element: element,
+            container: container,
+            minScale: 1
         });
 
         dimensions.refresh();
-    },
+        equal(dimensions.minScale, 1);
+    })
 
-    teardown: function() {
-        fixture.empty();
-    }
-});
+    module("pane", {
+        setup: function() {
+            kendo.support.touch = true;
+            fixture = $("<div style='top:0; position: absolute; left: 0;' />").appendTo(document.body);
+            fixture.append('<div style="width:200px; height: 200px;"><div style="width:400px; height: 400px;">Element</div></div>');
+            var container = fixture.children().first();
 
-function press(x, y, id) {
-    triggerTouchEvent("touchstart", { pageX: x, pageY: y, identifier: id || 1});
-}
+            element = container.children().first();
 
-function move(x, y, id) {
-    triggerTouchEvent("touchmove", { pageX: x, pageY: y, identifier: id || 1});
-}
+            movable = new kendo.ui.Movable(element);
 
-function release(id) {
-    triggerTouchEvent("touchend", { pageX: 1, pageY: 1, identifier: id || 1});
-}
+            dimensions = new kendo.ui.PaneDimensions({
+                element: element,
+                container: container
+            });
 
-test("zooms content", function() {
-    press(10, 10);
-    press(13, 14, 2);
-    move(15, 22, 2);
-    equal(movable.scale, 2.6);
-})
+            userEvents = new kendo.UserEvents(element, {multiTouch: true});
 
-test("zooms content to maxScale", function() {
-    dimensions.maxScale = 2;
-    press(10, 10);
-    press(13, 14, 2);
-    move(15, 22, 2);
-    equal(movable.scale, 2);
-})
+            pane = new kendo.ui.Pane({
+                movable: movable,
+                userEvents: userEvents,
+                dimensions: dimensions
+            });
 
-test("zooms to a given point", 2, function() {
-    press(10, 10);
-    press(13, 14, 2);
-    move(9, 6);
-    move(14, 18, 2);
+            dimensions.refresh();
+        },
 
-    QUnit.close(movable.x, -18.4, 0.1);
-    QUnit.close(movable.y, -19.2, 0.1);
-})
+        teardown: function() {
+            fixture.remove();
+        }
+    });
 
-test("offsets zoom point", function() {
-    press(10, 10);
-    press(13, 14, 2);
-    move(5, 5);
-    move(8, 9, 2);
+    test("zooms content", function() {
+        press(element, 10, 10);
+        press(element, 13, 14, 2);
+        move(element, 15, 22, 2);
+        equal(movable.scale, 2.6);
+    })
 
-    equal(movable.scale, 1);
-    QUnit.close(movable.x, -5, 0.1);
-    QUnit.close(movable.y, -5, 0.1);
-})
+    test("zooms content to maxScale", function() {
+        dimensions.maxScale = 2;
+        press(element, 10, 10);
+        press(element, 13, 14, 2);
+        move(element, 15, 22, 2);
+        equal(movable.scale, 2);
+    })
+    test("zooms to a given point", 2, function() {
+        press(element, 10, 10);
+        press(element, 13, 14, 2);
+        move(element, 9, 6);
+        move(element, 14, 18, 2);
 
-test("zooms to a given point after being offset", function() {
-    press(30, 10);
-    move(10, 10);
-    release();
+        QUnit.close(movable.x, -18.4, 0.1);
+        QUnit.close(movable.y, -19.2, 0.1);
+    })
 
-    equal(movable.x, -20);
+    test("offsets zoom point", function() {
+        press(element, 10, 10);
+        press(element, 13, 14, 2);
+        move(element, 5, 5);
+        move(element, 8, 9, 2);
 
-    press(10, 10);
-    press(13, 14, 2);
-    move(9, 6);
-    move(14, 18, 2);
+        equal(movable.scale, 1);
+        QUnit.close(movable.x, -5, 0.1);
+        QUnit.close(movable.y, -5, 0.1);
+    })
 
-    QUnit.close(movable.x, -70.4, 0.1);
-    QUnit.close(movable.y, -19.2, 0.1);
-})
+    test("zooms to a given point after being offset", function() {
+        press(element, 30, 10);
+        move(element, 10, 10);
+        release(element);
 
-test("zooming out causes friction", function() {
-    press(9, 6);
-    press(14, 18, 2);
-    move(10, 10);
-    move(13, 14, 2);
-    QUnit.close(movable.scale, 0.92 / 2, 0.1);
-});
+        equal(movable.x, -20);
 
+        press(element, 10, 10);
+        press(element, 13, 14, 2);
+        move(element, 9, 6);
+        move(element, 14, 18, 2);
+
+        QUnit.close(movable.x, -70.4, 0.1);
+        QUnit.close(movable.y, -19.2, 0.1);
+    })
+
+    test("zooming out causes friction", function() {
+        press(element, 9, 6);
+        press(element, 14, 18, 2);
+        move(element, 10, 10);
+        move(element, 13, 14, 2);
+        QUnit.close(movable.scale, 0.92 / 2, 0.1);
+    });
+})();
 

@@ -75,7 +75,9 @@ function press(element, x, y, id) {
     triggerTouchEvent(element, "touchstart", {
         pageX: x,
         pageY: y,
-        id: id || 1
+        clientX: x,
+        clientY: y,
+        identifier: id || 1
     })
 }
 
@@ -83,7 +85,9 @@ function move(element, x, y, id) {
     triggerTouchEvent(element, "touchmove", {
         pageX: x,
         pageY: y,
-        id: id || 1
+        clientX: x,
+        clientY: y,
+        identifier: id || 1
     })
 }
 
@@ -91,7 +95,9 @@ function release(element, x, y, id) {
     triggerTouchEvent(element, "touchend", {
         pageX: x,
         pageY: y,
-        id: id || 1
+        clientX: x,
+        clientY: y,
+        identifier: id || 1
     })
 }
 
@@ -103,7 +109,7 @@ $(function() {
 })
 
 QUnit.testDone(function( details ) {
-    QUnit.fixture.empty();
+    QUnit.fixture.empty().attr("class", "").attr("css", "");
 });
 
 QUnit.brazilTimezoneTest = brazilTimezoneTest;
