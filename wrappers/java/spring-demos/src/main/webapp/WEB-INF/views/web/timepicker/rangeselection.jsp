@@ -4,10 +4,10 @@
 
 <demo:header />
 <div class="demo-section" style="width:470px">
-    <label for="start">Start date:</label>
+    <label for="start">Start time:</label>
 	<kendo:timePicker name="start" value="${startValue}" min="${startMin}" max="${startMax}" change="startChange"></kendo:timePicker>
 	
-	<label for="end" style="margin-left:3em">End date:</label>
+	<label for="end" style="margin-left:3em">End time:</label>
 	<kendo:timePicker name="end" value="${endValue}" min="${endMin}" max="${endMax}"></kendo:timePicker>
 </div>
 

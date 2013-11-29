@@ -10,7 +10,7 @@
     <div class="demo-section">
         <h2>Invite Attendees</h2>
         <label for="required">Required</label>
-	    <kendo:multiSelect name="required" placeholder="Select attendees..." value="values">
+	    <kendo:multiSelect name="required" placeholder="Select attendees..." value="<%= values %>">
 	        <kendo:dataSource data="${attendees}"></kendo:dataSource>
 	    </kendo:multiSelect>
 	    <label for="optional">Optional</label>

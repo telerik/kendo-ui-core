@@ -14,7 +14,7 @@
 	            <button id="get" class="k-button">Get value</button>
 	        </li>
 	        <li>
-	            <input id="word" value="B" class="k-textbox" />
+	            <input id="word" class="k-textbox" />
 	            <button id="search" class="k-button">Find starting with</button>
 	        </li>
 	    </ul>
