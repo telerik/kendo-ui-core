@@ -38,10 +38,11 @@ module.exports = function(grunt) {
                         'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
                         'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
                         'tests/core/**/*.js',
+                        'tests/fx/*.js',
                         'tests/mobile/**/*.js',
                         'tests/userevents/**/*.js',
                         'tests/mvvm/*.js',
-                        'tests/autocomplete/*.js',
+                        // 'tests/autocomplete/*.js',
                         'tests/dragdrop/*.js'
                     ],
 
