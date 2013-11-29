@@ -40,6 +40,7 @@ module.exports = function(grunt) {
                         'tests/core/**/*.js',
                         'tests/mobile/**/*.js',
                         'tests/userevents/**/*.js',
+                        'tests/mvvm/*.js'
                         'tests/autocomplete/*.js'
                     ],
 
