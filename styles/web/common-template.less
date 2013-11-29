@@ -265,6 +265,14 @@ body .k-button-icon
     vertical-align: text-top;
 }
 
+.k-ie8 .k-button-icontext .k-icon,
+.k-ie8 .k-button-icontext .k-image
+{
+    margin-right: 3px;
+    margin-left: -3px;
+	vertical-align: text-top;
+}
+
 html body .k-button-bare
 {
     background: none !important; /*spares long selectors*/
@@ -6252,6 +6260,11 @@ html .k-upload-empty
 .k-dropzone .k-upload-status
 {
     line-height: 2.4;
+}
+
+.k-ie8 .k-upload-status-total
+{
+    line-height: 29px;
 }
 
 .k-progress
