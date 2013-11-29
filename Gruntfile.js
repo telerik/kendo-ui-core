@@ -37,7 +37,8 @@ module.exports = function(grunt) {
                         'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
                         'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
                         'tests/core/**/*.js',
-                        'tests/mobile/**/*.js'
+                        'tests/mobile/**/*.js',
+                        'tests/userevents/**/*.js',
                     ],
 
                     exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.aspnetmvc.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js', 'src/*editor*', 'src/*dataviz*', 'src/*diagram*', 'src/*scheduler*' ],
