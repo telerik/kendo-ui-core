@@ -55,7 +55,7 @@ kendo_module({
 
             $.extend(that, options);
 
-            that.applicationNativeScrolling = (mobile.application && mobile.application.options.useNativeScrolling);
+            that.applicationNativeScrolling = (mobile.application && mobile.application.options && mobile.application.options.useNativeScrolling);
 
             that._id();
             that._layout();
