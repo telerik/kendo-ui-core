@@ -4128,9 +4128,10 @@ kendo_module({
         getViewElements: function(view) {
             var errorBar = this,
                 options = errorBar.options,
+                parent = errorBar.parent,
                 line = options.line,
                 lineOptions = {
-                    stroke: options.color || line.color,
+                    stroke: parent ? parent.color : options.color || line.color,
                     strokeWidth: line.width,
                     zIndex: line.zIndex,
                     align: false,
