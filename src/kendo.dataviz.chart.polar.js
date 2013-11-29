@@ -101,7 +101,7 @@ kendo_module({
         gridLineElements: function(view, angles, radius, options) {
             var axis = this,
                 center = axis.box.center(),
-                modelId = axis.plotArea.options.modelId,
+                modelId = axis.plotArea.modelId,
                 i,
                 outerPt,
                 elements = [],
@@ -429,7 +429,7 @@ kendo_module({
 
         gridLineElements: function(view, center, ticks, angles, options) {
             var axis = this,
-                modelId = axis.plotArea.options.modelId,
+                modelId = axis.plotArea.modelId,
                 elements = [],
                 elementOptions,
                 points,

@@ -343,7 +343,7 @@
                 });
 
                 test("is discoverable", function() {
-                    ok(segment.options.modelId);
+                    ok(segment.modelId);
                 });
 
                 test("fills target box", function() {
@@ -388,12 +388,12 @@
                 });
 
                 test("sector has same model id", function() {
-                    equal(sector.style.data.modelId, segment.options.modelId);
+                    equal(sector.style.data.modelId, segment.modelId);
                 });
 
                 test("label has same model id", function() {
                     createSegment({ labels: { visible: true } });
-                    equal(segment.label.options.modelId, segment.options.modelId);
+                    equal(segment.label.modelId, segment.modelId);
                 });
 
                 // ------------------------------------------------------------
@@ -411,7 +411,7 @@
 
                 test("highlightOverlay element has same model id", function() {
                     segment.highlightOverlay(view);
-                    equal(view.log.sector[0].style.data.modelId, segment.options.modelId);
+                    equal(view.log.sector[0].style.data.modelId, segment.modelId);
                 });
 
                 test("highlightOverlay renders default border width", function() {
@@ -787,7 +787,7 @@
                 });
 
                 test("connector has same model id", function() {
-                    equal(view.log.path[0].style.data.modelId, firstSegment.options.modelId);
+                    equal(view.log.path[0].style.data.modelId, firstSegment.modelId);
                 });
 
                 test("start point", function() {
@@ -1184,8 +1184,8 @@
                         segment = plotArea.charts[0].points[0],
                         label = segment.children[0];
 
-                    segmentElement = $(dataviz.getElement(segment.options.id));
-                    labelElement = $(dataviz.getElement(label.options.id));
+                    segmentElement = $(dataviz.getElement(segment.id));
+                    labelElement = $(dataviz.getElement(label.id));
                 }
 
                 module("Pie Chart / Events / seriesClick ", {

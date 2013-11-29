@@ -675,7 +675,7 @@
                 });
 
                 test("area has same model id as its segment", function() {
-                    equal(polyline.style.data.modelId, areaChart._segments[0].options.modelId);
+                    equal(polyline.style.data.modelId, areaChart._segments[0].modelId);
                 });
 
                 test("renders area chart group", function() {
@@ -925,7 +925,7 @@
                     point = new LinePoint(VALUE,
                         $.extend(true, {
                             labels: { font: SANS12 }
-                        }, options)
+                        }, LinePoint.fn.defaults, options)
                     );
 
                     point.category = CATEGORY;
@@ -1028,14 +1028,14 @@
                 });
 
                 test("sets marker id", function() {
-                    ok(marker.options.id.length > 0);
+                    ok(marker.id.length > 0);
                 });
 
                 test("marker has same model id", function() {
                     view = new ViewStub();
 
                     point.getViewElements(view);
-                    equal(marker.options.modelId, point.options.modelId);
+                    equal(marker.modelId, point.modelId);
                 });
 
                 test("highlightOverlay returns marker outline", function() {
@@ -1051,7 +1051,7 @@
                     view = new ViewStub();
 
                     point.highlightOverlay(view);
-                    equal(view.log.circle[0].style.data.modelId, point.options.modelId);
+                    equal(view.log.circle[0].style.data.modelId, point.modelId);
                 });
 
                 test("highlightOverlay applies render options for square markers", function() {
@@ -1255,7 +1255,7 @@
                     segment;
 
                 function getElement(modelElement) {
-                    return $(dataviz.getElement(modelElement.options.id));
+                    return $(dataviz.getElement(modelElement.id));
                 }
 
                 function createAreaChart(options) {

@@ -399,7 +399,7 @@ kendo_module({
             ChartElement.fn.init.call(segment, options);
 
             segment.value = value;
-            segment.options.id = uniqueId();
+            segment.id = uniqueId();
             segment.options.index = segmentOptions.index;
             segment.enableDiscovery();
         },
@@ -431,13 +431,13 @@ kendo_module({
 
             elements.push(
                 view.createPolyline(segment.points, true, {
-                    id: options.id,
+                    id: segment.id,
                     fill: options.color,
                     fillOpacity:options.opacity,
                     stroke: border.color,
                     strokeOpacity: border.opacity,
                     strokeWidth: border.width,
-                    data: { modelId: options.modelId }
+                    data: { modelId: segment.modelId }
                 })
             );
 
@@ -459,7 +459,7 @@ kendo_module({
                 strokeOpacity: border.opacity,
                 strokeWidth: border.width,
                 fillOpacity:hlOptions.opacity,
-                data: { modelId: options.modelId }
+                data: { modelId: this.modelId }
             });
             var element = view.createPolyline(this.points,true,calcOptions);
             return element;

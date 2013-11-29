@@ -262,7 +262,7 @@
                 });
 
                 test("overlay rect has same model id as its segment", function() {
-                    equal(view.log.rect[1].style.data.modelId, candlestickChart.points[0].options.modelId);
+                    equal(view.log.rect[1].style.data.modelId, candlestickChart.points[0].modelId);
                 });
 
                 test("renders chart group", function() {
@@ -530,7 +530,7 @@
                 });
 
                 test("is discoverable", function() {
-                    ok(point.options.modelId);
+                    ok(point.modelId);
                 });
 
                 test("sets point border width", function() {
@@ -544,14 +544,14 @@
                 });
 
                 test("sets point id", function() {
-                    ok(point.options.id.length > 0);
+                    ok(point.id.length > 0);
                 });
 
                 test("point has same model id", function() {
                     view = new ViewStub();
 
                     point.getViewElements(view);
-                    equal(view.log.rect[1].style.data.modelId, point.options.modelId);
+                    equal(view.log.rect[1].style.data.modelId, point.modelId);
                 });
 
                 test("tooltipAnchor is at top right of point", function() {

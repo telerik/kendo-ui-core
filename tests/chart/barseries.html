@@ -2152,7 +2152,7 @@
                 });
 
                 test("is discoverable", function() {
-                    ok(bar.options.modelId);
+                    ok(bar.modelId);
                 });
 
                 test("sets id on rect", function() {
@@ -2170,12 +2170,12 @@
                     view = new ViewStub();
 
                     bar.highlightOverlay(view);
-                    equal(view.log.rect[0].style.data.modelId, bar.options.modelId);
+                    equal(view.log.rect[0].style.data.modelId, bar.modelId);
                 });
 
                 test("label has same model id", function() {
                     createBar({ labels: { visible: true } });
-                    equal(label.options.modelId, bar.options.modelId);
+                    equal(label.modelId, bar.modelId);
                 });
 
                 test("tooltipAnchor is top right corner / vertical / above axis",
@@ -2350,7 +2350,7 @@
 
                     plotArea = chart._model.children[1];
                     bar = plotArea.charts[0].points[0];
-                    barElement = $(getElement(bar.options.id));
+                    barElement = $(getElement(bar.id));
                 }
 
                 function barClick(callback) {
@@ -2396,7 +2396,7 @@
                     });
                     var label = plotArea.charts[0].points[0].children[0];
 
-                    clickChart(chart, getElement(label.options.id));
+                    clickChart(chart, getElement(label.id));
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -2415,7 +2415,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     barClick(function(e) {
-                        equal(e.element[0], getElement(bar.options.id));
+                        equal(e.element[0], getElement(bar.id));
                     });
                 });
 
@@ -2461,7 +2461,7 @@
                         seriesHover: function() { ok(true); }
                     });
                     var label = plotArea.charts[0].points[0].children[0];
-                    $(getElement(label.options.id)).mouseover();
+                    $(getElement(label.id)).mouseover();
                 });
 
                 test("event arguments contain value", 1, function() {
@@ -2480,7 +2480,7 @@
 
                 test("event arguments contain jQuery element", 1, function() {
                     barHover(function(e) {
-                        equal(e.element[0], getElement(bar.options.id));
+                        equal(e.element[0], getElement(bar.id));
                     });
                 });
 

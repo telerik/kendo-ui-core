@@ -247,7 +247,7 @@
                 });
 
                 test("is discoverable", function() {
-                    ok(segment.options.modelId);
+                    ok(segment.modelId);
                 });
 
                 test("fills target box", function() {
@@ -301,16 +301,16 @@
                     view = new ViewStub();
 
                     segment.highlightOverlay(view);
-                    equal(view.log.ring[0].style.data.modelId, segment.options.modelId);
+                    equal(view.log.ring[0].style.data.modelId, segment.modelId);
                 });
 
                 test("ring has same model id", function() {
-                    equal(ring.style.data.modelId, segment.options.modelId);
+                    equal(ring.style.data.modelId, segment.modelId);
                 });
 
                 test("label has same model id", function() {
                     createSegment({ labels: { visible: true } });
-                    equal(segment.label.options.modelId, segment.options.modelId);
+                    equal(segment.label.modelId, segment.modelId);
                 });
 
             })();
@@ -338,8 +338,8 @@
                         segment = plotArea.charts[0].points[0],
                         label = segment.children[0];
 
-                    segmentElement = $(dataviz.getElement(segment.options.id));
-                    labelElement = $(dataviz.getElement(label.options.id));
+                    segmentElement = $(dataviz.getElement(segment.id));
+                    labelElement = $(dataviz.getElement(label.id));
                 }
 
                 module("Donut Chart / Events / seriesClick ", {
