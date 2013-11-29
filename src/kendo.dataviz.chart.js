@@ -421,7 +421,6 @@ kendo_module({
         },
 
         _redraw: function() {
-            console.time("redraw");
             var chart = this,
                 model = chart._getModel(),
                 view;
@@ -441,7 +440,6 @@ kendo_module({
                 chart._highlight = new Highlight(view, chart._viewElement);
                 chart._setupSelection();
             }
-            console.timeEnd("redraw");
         },
 
         _sharedTooltip: function() {
@@ -2835,15 +2833,16 @@ kendo_module({
         init: function(value, options) {
             var bar = this;
 
-            ChartElement.fn.init.call(bar, options);
+            ChartElement.fn.init.call(bar);
 
+            bar.options = options;
+            bar.color = options.color || WHITE;
             bar.value = value;
             bar.id = uniqueId();
             bar.enableDiscovery();
         },
 
-        options: {
-            color: WHITE,
+        defaults: {
             border: {
                 width: 1
             },
@@ -2968,7 +2967,7 @@ kendo_module({
                 box = bar.box,
                 rectStyle = deepExtend({
                     id: bar.id,
-                    fill: options.color,
+                    fill: bar.color,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
                     vertical: options.vertical,
@@ -3006,7 +3005,7 @@ kendo_module({
         getBorderColor: function() {
             var bar = this,
                 options = bar.options,
-                color = options.color,
+                color = bar.color,
                 border = options.border,
                 borderColor = border.color,
                 brightness = border._brightness || BAR_BORDER_BRIGHTNESS;
@@ -3205,9 +3204,9 @@ kendo_module({
             var options = this.seriesOptions[seriesIx];
             if (!options) {
                 var defaults = this.pointType().fn.defaults;
-                this.seriesOptions[seriesIx] = options = deepExtend({
+                this.seriesOptions[seriesIx] = options = deepExtend({ }, defaults, {
                     vertical: !this.options.invertAxes
-                }, defaults, series);
+                }, series);
             }
 
             return options;
@@ -3490,7 +3489,6 @@ kendo_module({
                 options = chart.options,
                 children = chart.children,
                 isStacked = chart.options.isStacked,
-                labelOptions = deepExtend({}, series.labels),
                 point,
                 pointType = chart.pointType(),
                 pointOptions,
@@ -3498,31 +3496,35 @@ kendo_module({
                 clusterType = chart.clusterType(),
                 stackType = chart.stackType();
 
+            pointOptions = this.pointOptions(series, seriesIx);
+
+            var labelOptions = pointOptions.labels;
             if (isStacked) {
                 if (labelOptions.position == OUTSIDE_END) {
                     labelOptions.position = INSIDE_END;
                 }
             }
 
-            pointOptions = deepExtend({
-                vertical: !options.invertAxes,
-                overlay: series.overlay,
-                labels: labelOptions,
-                isStacked: isStacked
-            }, series, {
-                color: data.fields.color || undefined,
+            deepExtend(pointOptions, {
+                isStacked: isStacked,
                 notes: { label: { text: data.fields.noteText } }
             });
 
+            var color = data.fields.color || series.color;
             if (value < 0 && pointOptions.negativeColor) {
-                pointOptions.color = pointOptions.negativeColor;
+                color = pointOptions.negativeColor;
             }
 
-            chart.evalPointOptions(
+            pointOptions = chart.evalPointOptions(
                 pointOptions, value, category, categoryIx, series, seriesIx
             );
 
+            if (kendo.isFunction(series.color)) {
+                color = pointOptions.color;
+            }
+
             point = new pointType(value, pointOptions);
+            point.color = color;
 
             cluster = children[categoryIx];
             if (!cluster) {
