@@ -1,4 +1,4 @@
-(function($, evil, undefined) {
+(function($, undefined) {
     var kendo = window.kendo = window.kendo || { cultures: {} },
         extend = $.extend,
         each = $.each,
@@ -2556,7 +2556,7 @@ function pad(number, digits, end) {
         } else if (numberRegExp.test(value)) {
             value = parseFloat(value);
         } else if (jsonRegExp.test(value) && !jsonFormatRegExp.test(value)) {
-            value = evil("(" + value + ")");
+            value = new Function("return (" + value + ")")();
         }
 
         return value;
@@ -3581,7 +3581,7 @@ function pad(number, digits, end) {
         return params;
     };
 
-})(jQuery, eval);
+})(jQuery);
 
 /*global kendo_module:true */
 if (typeof kendo_module === "undefined") {
