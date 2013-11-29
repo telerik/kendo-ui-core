@@ -1736,7 +1736,7 @@ kendo_module({
                     fill: color,
                     stroke: color,
                     strokeWidth: options.markers.border.width,
-                    data: { modelId: label.options.modelId },
+                    data: { modelId: label.modelId },
                     cursor: {
                         style: POINTER
                     }
@@ -1974,7 +1974,7 @@ kendo_module({
         getSlot: function(from, to) {
             var axis = this,
                 options = axis.options,
-                majorTicks = axis.getMajorTickPositions(),
+                majorTicks = axis.getTicks().majorTicks,
                 reverse = options.reverse,
                 justified = options.justified,
                 valueAxis = options.vertical ? Y : X,
@@ -2117,21 +2117,16 @@ kendo_module({
             var axis = this,
                 options = axis.options,
                 dataItem = options.dataItems ? options.dataItems[index] : null,
-                category = valueOrDefault(options.categories[index], "");
+                category = valueOrDefault(options.categories[index], ""),
+                text = axis.axisLabelText(category, dataItem, labelOptions);
 
-            return new AxisLabel(category, index, dataItem, labelOptions);
+            return new AxisLabel(category, text, index, dataItem, labelOptions);
         },
 
         shouldRenderNote: function(value) {
             var categories = this.options.categories;
 
             return categories.length && (categories.length > value && value >= 0);
-        }
-    });
-
-    var AxisDateLabel = AxisLabel.extend({
-        formatValue: function(value, options) {
-            return kendo.toString(value, options.format, options.culture);
         }
     });
 
@@ -2294,6 +2289,15 @@ kendo_module({
             return unit || DAYS;
         },
 
+        _categoryRange: function(categories) {
+            var range = categories._range;
+            if (!range) {
+                range = categories._range = sparseArrayLimits(categories);
+            }
+
+            return range;
+        },
+
         range: function(options) {
             options = options || this.options;
 
@@ -2303,8 +2307,9 @@ kendo_module({
                 baseUnitStep = options.baseUnitStep || 1,
                 min = toTime(options.min),
                 max = toTime(options.max),
-                categoryLimits = sparseArrayLimits(categories),
-                minCategory = toTime(categoryLimits.min),
+                categoryLimits = this._categoryRange(categories);
+
+            var minCategory = toTime(categoryLimits.min),
                 maxCategory = toTime(categoryLimits.max);
 
             if (options.roundToBaseUnit) {
@@ -2369,7 +2374,7 @@ kendo_module({
                 timeRange;
 
             if (options.justified) {
-                var categoryLimits = sparseArrayLimits(options.categories);
+                var categoryLimits = this._categoryRange(options.categories);
                 var maxCategory = toTime(categoryLimits.max);
                 timeRange = toDate(maxCategory) - range.min;
             } else {
@@ -2379,14 +2384,14 @@ kendo_module({
             return lineSize / timeRange;
         },
 
-        getMajorTickPositions: function() {
+        getTickPositions: function(count) {
             var axis = this,
                 options = axis.options,
                 categories = options.categories,
                 positions = [];
 
             if (options.roundToBaseUnit || categories.length === 0) {
-                positions = CategoryAxis.fn.getMajorTickPositions.call(axis);
+                positions = CategoryAxis.fn.getTickPositions.call(axis, count);
             } else {
                 var vertical = options.vertical,
                     reverse = options.reverse,
@@ -2466,8 +2471,13 @@ kendo_module({
                 visible = !dateEquals(this.range().max, date);
             }
 
-            labelOptions = deepExtend({ format: unitFormat }, labelOptions, { visible: visible });
-            return new AxisDateLabel(date, index, dataItem, labelOptions);
+            if (visible) {
+                labelOptions.format = labelOptions.format || unitFormat;
+                var text = this.axisLabelText(date, dataItem, labelOptions);
+                if (text) {
+                    return new AxisLabel(date, text, index, dataItem, labelOptions);
+                }
+            }
         },
 
         categoryIndex: function(value, range) {
@@ -2638,7 +2648,8 @@ kendo_module({
 
             labelOptions.format = labelOptions.format || unitFormat;
 
-            return new AxisDateLabel(date, index, null, labelOptions);
+            var text = this.axisLabelText(date, null, labelOptions);
+            return new AxisLabel(date, text, index, null, labelOptions);
         },
 
         timeUnits: function(delta) {
@@ -2822,15 +2833,16 @@ kendo_module({
         init: function(value, options) {
             var bar = this;
 
-            ChartElement.fn.init.call(bar, options);
+            ChartElement.fn.init.call(bar);
 
+            bar.options = options;
+            bar.color = options.color || WHITE;
             bar.value = value;
-            bar.options.id = uniqueId();
+            bar.id = uniqueId();
             bar.enableDiscovery();
         },
 
-        options: {
-            color: WHITE,
+        defaults: {
             border: {
                 width: 1
             },
@@ -2954,15 +2966,15 @@ kendo_module({
                 } : {},
                 box = bar.box,
                 rectStyle = deepExtend({
-                    id: options.id,
-                    fill: options.color,
+                    id: bar.id,
+                    fill: bar.color,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
                     vertical: options.vertical,
                     aboveAxis: options.aboveAxis,
                     stackBase: options.stackBase,
                     animation: options.animation,
-                    data: { modelId: options.modelId }
+                    data: { modelId: bar.modelId }
                 }, border),
                 elements = [];
 
@@ -2985,8 +2997,7 @@ kendo_module({
             var bar = this,
                 box = bar.box;
 
-            options = deepExtend({ data: { modelId: bar.options.modelId } }, options);
-            options.id = null;
+            options = deepExtend({ data: { modelId: bar.modelId } }, options);
 
             return view.createRect(box, options);
         },
@@ -2994,7 +3005,7 @@ kendo_module({
         getBorderColor: function() {
             var bar = this,
                 options = bar.options,
-                color = options.color,
+                color = bar.color,
                 border = options.border,
                 borderColor = border.color,
                 brightness = border._brightness || BAR_BORDER_BRIGHTNESS;
@@ -3172,6 +3183,8 @@ kendo_module({
             chart.points = [];
             chart.categoryPoints = [];
             chart.seriesPoints = [];
+            chart.seriesOptions = [];
+            chart._evalSeries = [];
 
             chart.render();
         },
@@ -3185,6 +3198,18 @@ kendo_module({
         render: function() {
             var chart = this;
             chart.traverseDataPoints(proxy(chart.addValue, chart));
+        },
+
+        pointOptions: function(series, seriesIx) {
+            var options = this.seriesOptions[seriesIx];
+            if (!options) {
+                var defaults = this.pointType().fn.defaults;
+                this.seriesOptions[seriesIx] = options = deepExtend({ }, defaults, {
+                    vertical: !this.options.invertAxes
+                }, series);
+            }
+
+            return options;
         },
 
         addErrorBar: function(point, data, categoryIx) {
@@ -3270,14 +3295,25 @@ kendo_module({
             categoryPoints.push(point);
         },
 
-        evalPointOptions: function(options, value, category, categoryIx, series) {
-            evalOptions(options, {
-                value: value,
-                series: series,
-                dataItem: series.data[categoryIx],
-                category: category,
-                index: categoryIx
-            }, { defaults: series._defaults, excluded: ["data", "aggregate"] });
+        evalPointOptions: function(options, value, category, categoryIx, series, seriesIx) {
+            var state = { defaults: series._defaults, excluded: ["data", "aggregate", "_events"] };
+
+            var doEval = this._evalSeries[seriesIx];
+            if (!defined(doEval)) {
+                this._evalSeries[seriesIx] = doEval = evalOptions(options, {}, state, true);
+            }
+
+            if (doEval) {
+                evalOptions(options, {
+                    value: value,
+                    category: category,
+                    index: categoryIx,
+                    series: series,
+                    dataItem: series.data[categoryIx]
+                });
+            }
+
+            return options;
         },
 
         updateRange: function(data, categoryIx, series) {
@@ -3329,19 +3365,20 @@ kendo_module({
                     value = point.plotValue;
                 }
 
-                var categorySlot = chart.categorySlot(categoryAxis, categoryIx, valueAxis),
-                    valueSlot = chart.valueSlot(valueAxis, value, axisCrossingValue),
-                    pointSlot = chart.pointSlot(categorySlot, valueSlot),
-                    aboveAxis = valueAxis.options.reverse ?
-                                    value < axisCrossingValue : value >= axisCrossingValue;
-
-                if (point) {
-                    point.options.aboveAxis = aboveAxis;
-                    chart.reflowPoint(point, pointSlot);
+                var categorySlot = categorySlots[categoryIx];
+                if (!categorySlot) {
+                    categorySlots[categoryIx] = categorySlot =
+                        chart.categorySlot(categoryAxis, categoryIx, valueAxis);
                 }
 
-                if (!categorySlots[categoryIx]) {
-                    categorySlots[categoryIx] = categorySlot;
+                if (point) {
+                    var valueSlot = chart.valueSlot(valueAxis, value, axisCrossingValue);
+                    var pointSlot = chart.pointSlot(categorySlot, valueSlot);
+                    var aboveAxis = valueAxis.options.reverse ?
+                                        value < axisCrossingValue : value >= axisCrossingValue;
+
+                    point.options.aboveAxis = aboveAxis;
+                    chart.reflowPoint(point, pointSlot);
                 }
             });
 
@@ -3446,13 +3483,12 @@ kendo_module({
             return StackLayout;
         },
 
-        createPoint: function(data, category, categoryIx, series) {
+        createPoint: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 value = data.valueFields.value,
                 options = chart.options,
                 children = chart.children,
                 isStacked = chart.options.isStacked,
-                labelOptions = deepExtend({}, series.labels),
                 point,
                 pointType = chart.pointType(),
                 pointOptions,
@@ -3460,31 +3496,35 @@ kendo_module({
                 clusterType = chart.clusterType(),
                 stackType = chart.stackType();
 
+            pointOptions = this.pointOptions(series, seriesIx);
+
+            var labelOptions = pointOptions.labels;
             if (isStacked) {
                 if (labelOptions.position == OUTSIDE_END) {
                     labelOptions.position = INSIDE_END;
                 }
             }
 
-            pointOptions = deepExtend({
-                vertical: !options.invertAxes,
-                overlay: series.overlay,
-                labels: labelOptions,
-                isStacked: isStacked
-            }, series, {
-                color: data.fields.color || undefined,
+            deepExtend(pointOptions, {
+                isStacked: isStacked,
                 notes: { label: { text: data.fields.noteText } }
             });
 
+            var color = data.fields.color || series.color;
             if (value < 0 && pointOptions.negativeColor) {
-                pointOptions.color = pointOptions.negativeColor;
+                color = pointOptions.negativeColor;
             }
 
-            chart.evalPointOptions(
-                pointOptions, value, category, categoryIx, series
+            pointOptions = chart.evalPointOptions(
+                pointOptions, value, category, categoryIx, series, seriesIx
             );
 
+            if (kendo.isFunction(series.color)) {
+                color = pointOptions.color;
+            }
+
             point = new pointType(value, pointOptions);
+            point.color = color;
 
             cluster = children[categoryIx];
             if (!cluster) {
@@ -3767,7 +3807,7 @@ kendo_module({
             }
         },
 
-        createPoint: function(data, category, categoryIx, series) {
+        createPoint: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 value = data.valueFields,
                 options = chart.options,
@@ -3786,7 +3826,7 @@ kendo_module({
             });
 
             chart.evalPointOptions(
-                bulletOptions, value, category, categoryIx, series
+                bulletOptions, value, category, categoryIx, series, seriesIx
             );
 
             bullet = new Bullet(value, bulletOptions);
@@ -3838,7 +3878,7 @@ kendo_module({
             ChartElement.fn.init.call(bullet, options);
 
             bullet.value = value;
-            bullet.options.id = uniqueId();
+            bullet.id = uniqueId();
             bullet.enableDiscovery();
             bullet.render();
         },
@@ -3874,7 +3914,6 @@ kendo_module({
 
             if (defined(bullet.value.target)) {
                 bullet.target = new Target({
-                    id: bullet.options.id,
                     type: options.target.shape,
                     background: options.target.color || options.color,
                     opacity: options.opacity,
@@ -3883,6 +3922,7 @@ kendo_module({
                     vAlign: TOP,
                     align: RIGHT
                 });
+                bullet.target.id = bullet.id;
 
                 bullet.append(bullet.target);
             }
@@ -3954,14 +3994,14 @@ kendo_module({
                 } : {},
                 box = bullet.box,
                 rectStyle = deepExtend({
-                    id: options.id,
+                    id: bullet.id,
                     fill: options.color,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
                     vertical: options.vertical,
                     aboveAxis: options.aboveAxis,
                     animation: options.animation,
-                    data: { modelId: options.modelId }
+                    data: { modelId: bullet.modelId }
                 }, border),
                 elements = [];
 
@@ -4008,8 +4048,7 @@ kendo_module({
             var bullet = this,
                 box = bullet.box;
 
-            options = deepExtend({ data: { modelId: bullet.options.modelId } }, options);
-            options.id = null;
+            options = deepExtend({ data: { modelId: bullet.modelId } }, options);
 
             return view.createRect(box, options);
         },
@@ -4146,16 +4185,15 @@ kendo_module({
 
     var LinePoint = ChartElement.extend({
         init: function(value, options) {
-            var point = this,
-                border;
+            var point = this;
+
+            ChartElement.fn.init.call(point);
 
             point.value = value;
-            ChartElement.fn.init.call(point, options);
+            point.options = options;
+            point.id = uniqueId();
 
-            options = point.options;
-            options.id = uniqueId();
-
-            border = options.markers.border;
+            var border = options.markers.border;
             if (!defined(border.color)) {
                border.color =  options.color;
             }
@@ -4163,7 +4201,7 @@ kendo_module({
             point.enableDiscovery();
         },
 
-        options: {
+        defaults: {
             aboveAxis: true,
             vertical: true,
             markers: {
@@ -4201,8 +4239,6 @@ kendo_module({
                 options = point.options,
                 markers = options.markers,
                 labels = options.labels,
-                markerBackground = markers.background,
-                markerBorder = deepExtend({}, markers.border),
                 labelText = point.value;
 
             if (point._rendered) {
@@ -4211,26 +4247,11 @@ kendo_module({
                 point._rendered = true;
             }
 
-            if (!defined(markerBorder.color)) {
-                markerBorder.color =
-                    new Color(markerBackground).brightness(BAR_BORDER_BRIGHTNESS).toHex();
+            if (markers.visible && markers.size) {
+                point.marker = point.createMarker();
+                point.marker.id = point.id;
+                point.append(point.marker);
             }
-
-            point.marker = new ShapeElement({
-                id: point.options.id,
-                visible: markers.visible && markers.size,
-                type: markers.type,
-                width: markers.size,
-                height: markers.size,
-                rotation: markers.rotation,
-                background: markerBackground,
-                border: markerBorder,
-                opacity: markers.opacity,
-                zIndex: markers.zIndex,
-                animation: markers.animation
-            });
-
-            point.append(point.marker);
 
             if (labels.visible) {
                 if (labels.template) {
@@ -4265,6 +4286,36 @@ kendo_module({
             }
         },
 
+        markerBorder: function() {
+            var options = this.options.markers;
+            var background = options.background;
+            var border = deepExtend({}, options.border);
+
+            if (!defined(border.color)) {
+                border.color =
+                    new Color(background).brightness(BAR_BORDER_BRIGHTNESS).toHex();
+            }
+
+            return border;
+        },
+
+        createMarker: function() {
+            var options = this.options.markers;
+            var marker = new ShapeElement({
+                type: options.type,
+                width: options.size,
+                height: options.size,
+                rotation: options.rotation,
+                background: options.background,
+                border: this.markerBorder(),
+                opacity: options.opacity,
+                zIndex: options.zIndex,
+                animation: options.animation
+            });
+
+            return marker;
+        },
+
         createNote: function() {
             var point = this,
                 options = point.options.notes,
@@ -4290,6 +4341,11 @@ kendo_module({
         },
 
         markerBox: function() {
+            if (!this.marker) {
+                this.marker = this.createMarker();
+                this.marker.reflow(this._childBox);
+            }
+
             return this.marker.box;
         },
 
@@ -4319,7 +4375,11 @@ kendo_module({
                 }
             }
 
-            point.marker.reflow(childBox);
+            point._childBox = childBox;
+            if (point.marker) {
+                point.marker.reflow(childBox);
+            }
+
             point.reflowLabel(childBox);
 
             if(point.errorBars){
@@ -4329,7 +4389,7 @@ kendo_module({
             }
 
             if (point.note) {
-                if (point.marker.options.visible) {
+                if (point.marker) {
                     noteTargetBox = point.marker.box;
                 } else {
                     center = point.marker.box.center();
@@ -4342,7 +4402,6 @@ kendo_module({
         reflowLabel: function(box) {
             var point = this,
                 options = point.options,
-                marker = point.marker,
                 label = point.label,
                 anchor = options.labels.position;
 
@@ -4351,7 +4410,7 @@ kendo_module({
                 anchor = anchor === BELOW ? BOTTOM : anchor;
 
                 label.reflow(box);
-                label.box.alignTo(marker.box, anchor);
+                label.box.alignTo(point.markerBox(), anchor);
                 label.reflow(label.box);
             }
         },
@@ -4360,25 +4419,24 @@ kendo_module({
             var element = this,
                 highlight = element.options.highlight,
                 markers = highlight.markers,
-                marker = element.marker,
-                defaultColor = marker.options.border.color;
+                defaultColor = element.markerBorder().color;
 
-            options = deepExtend({ data: { modelId: element.options.modelId } }, options, {
+            options = deepExtend({ data: { modelId: element.modelId } }, options, {
                 fill: markers.color || defaultColor,
                 stroke: markers.border.color,
                 strokeWidth: markers.border.width,
                 strokeOpacity: markers.border.opacity || 0,
                 fillOpacity: markers.opacity || 1,
-                visible: markers.visible,
-                id: null
+                visible: markers.visible
             });
 
+            var marker = this.marker || this.createMarker();
             return marker.getViewElements(view, options)[0];
         },
 
         tooltipAnchor: function(tooltipWidth, tooltipHeight) {
             var point = this,
-                markerBox = point.marker.box,
+                markerBox = point.markerBox(),
                 aboveAxis = point.options.aboveAxis;
 
             return Point2D(
@@ -4399,12 +4457,14 @@ kendo_module({
         init: function(value, options) {
             var point = this;
 
-            LinePoint.fn.init.call(point, value, options);
+            LinePoint.fn.init.call(point, value,
+               deepExtend({}, this.defaults, options)
+            );
 
             point.category = value.category;
         },
 
-        options: {
+        defaults: {
             labels: {
                 position: CENTER
             },
@@ -4431,7 +4491,7 @@ kendo_module({
 
             return view.createCircle(center, radius, {
                 id: null,
-                data: { modelId: element.options.modelId },
+                data: { modelId: element.modelId },
                 stroke: borderColor,
                 strokeWidth: borderWidth,
                 strokeOpacity: highlight.border.opacity
@@ -4448,7 +4508,7 @@ kendo_module({
                 fillOpacity: element.highlighted ? opacity : undefined
             })[0];
 
-            marker.refresh(getElement(this.options.id));
+            marker.refresh(getElement(this.id));
         }
     });
 
@@ -4461,7 +4521,7 @@ kendo_module({
             segment.linePoints = linePoints;
             segment.series = series;
             segment.seriesIx = seriesIx;
-            segment.options.id = uniqueId();
+            segment.id = uniqueId();
 
             segment.enableDiscovery();
         },
@@ -4502,13 +4562,13 @@ kendo_module({
 
             return [
                 view.createPolyline(segment.points(), options.closed, {
-                    id: options.id,
+                    id: segment.id,
                     stroke: color,
                     strokeWidth: series.width,
                     strokeOpacity: series.opacity,
                     fill: "",
                     dashType: series.dashType,
-                    data: { modelId: options.modelId },
+                    data: { modelId: segment.modelId },
                     zIndex: -1
                 })
             ];
@@ -4632,7 +4692,11 @@ kendo_module({
             chart.renderSegments();
         },
 
-        createPoint: function(data, category, categoryIx, series) {
+        pointType: function() {
+            return LinePoint;
+        },
+
+        createPoint: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 value = data.valueFields.value,
                 options = chart.options,
@@ -4653,15 +4717,14 @@ kendo_module({
                 }
             }
 
-            pointOptions = deepExtend({
-                vertical: !options.invertAxes
-            }, series, {
+            pointOptions = this.pointOptions(series, seriesIx);
+            deepExtend(pointOptions, {
                 color: fields.color,
                 notes: { label: { text: data.fields.noteText } }
             });
 
-            chart.evalPointOptions(
-                pointOptions, value, category, categoryIx, series
+            pointOptions = chart.evalPointOptions(
+                pointOptions, value, category, categoryIx, series, seriesIx
             );
 
             point = new LinePoint(value, pointOptions);
@@ -4834,7 +4897,6 @@ kendo_module({
         },
         getViewElements: function(view) {
             var segment = this,
-                options = segment.options,
                 series = segment.series,
                 defaults = series._defaults,
                 color = series.color;
@@ -4847,13 +4909,13 @@ kendo_module({
 
             return [
                 view.createCubicCurve(segment.points(), {
-                    id: options.id,
+                    id: segment.id,
                     stroke: color,
                     strokeWidth: series.width,
                     strokeOpacity: series.opacity,
                     fill: "",
                     dashType: series.dashType,
-                    data: { modelId: options.modelId },
+                    data: { modelId: segment.modelId },
                     zIndex: -1
                 })
             ];
@@ -4916,11 +4978,11 @@ kendo_module({
 
             return [
                 view.createPolyline(areaPoints, false, {
-                    id: segment.options.id,
+                    id: segment.id,
                     fillOpacity: series.opacity,
                     fill: color,
                     stack: series.stack,
-                    data: { modelId: segment.options.modelId },
+                    data: { modelId: segment.modelId },
                     zIndex: -1
                 }),
                 view.createPolyline(linePoints, false, {
@@ -4928,7 +4990,7 @@ kendo_module({
                     strokeWidth: lineOptions.width,
                     strokeOpacity: lineOptions.opacity,
                     dashType: lineOptions.dashType,
-                    data: { modelId: segment.options.modelId },
+                    data: { modelId: segment.modelId },
                     strokeLineCap: "butt",
                     zIndex: -1,
                     align: false
@@ -5070,11 +5132,11 @@ kendo_module({
             );
 
            viewElements.push(view.createCubicCurve(curvePoints,{
-                    id: segment.options.id,
+                    id: segment.id,
                     fillOpacity: series.opacity,
                     fill: color,
                     stack: series.stack,
-                    data: { modelId: segment.options.modelId },
+                    data: { modelId: segment.modelId },
                     zIndex: -1
                 }, areaPoints));
 
@@ -5084,7 +5146,7 @@ kendo_module({
                     strokeWidth: lineOptions.width,
                     strokeOpacity: lineOptions.opacity,
                     dashType: lineOptions.dashType,
-                    data: { modelId: segment.options.modelId },
+                    data: { modelId: segment.modelId },
                     strokeLineCap: "butt",
                     zIndex: -1
                 }));
@@ -5271,7 +5333,7 @@ kendo_module({
                 point,
                 pointOptions;
 
-            pointOptions = deepExtend({
+            pointOptions = deepExtend({}, LinePoint.fn.defaults, {
                 markers: {
                     opacity: series.opacity
                 },
@@ -5583,7 +5645,7 @@ kendo_module({
 
             ChartElement.fn.init.call(point, options);
             point.value = value;
-            point.options.id = uniqueId();
+            point.id = uniqueId();
             point.enableDiscovery();
 
             point.createNote();
@@ -5745,9 +5807,9 @@ kendo_module({
             return borderColor;
         },
 
-        createOverlayRect: function(view, options) {
+        createOverlayRect: function(view) {
             return view.createRect(this.box, {
-                data: { modelId: options.modelId },
+                data: { modelId: this.modelId },
                 fill: "#fff",
                 fillOpacity: 0
             });
@@ -5869,7 +5931,7 @@ kendo_module({
             return Candlestick;
         },
 
-        createPoint: function(data, category, categoryIx, series) {
+        createPoint: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 value = data.valueFields,
                 pointOptions = deepExtend({}, series, {
@@ -5878,7 +5940,7 @@ kendo_module({
                 pointType = chart.pointType();
 
             chart.evalPointOptions(
-                pointOptions, value, category, categoryIx, series
+                pointOptions, value, category, categoryIx, series, seriesIx
             );
 
             return new pointType(value, pointOptions);
@@ -6118,7 +6180,7 @@ kendo_module({
 
             ChartElement.fn.init.call(point, options);
             point.value = value;
-            point.options.id = uniqueId();
+            point.id = uniqueId();
             point.enableDiscovery();
 
             point.createNote();
@@ -6261,7 +6323,7 @@ kendo_module({
                 }
 
                 element = new ShapeElement({
-                    id: point.options.id,
+                    id: point.id,
                     type: markers.type,
                     width: markers.size,
                     height: markers.size,
@@ -6326,7 +6388,7 @@ kendo_module({
                     stroke: options.line.color || options.color,
                     dashType: options.line.dashType,
                     strokeLineCap: "butt",
-                    data: { data: { modelId: options.modelId } }
+                    data: { data: { modelId: this.modelId } }
                 });
         },
 
@@ -6340,7 +6402,7 @@ kendo_module({
                     stroke: options.median.color || options.color,
                     dashType: options.median.dashType,
                     strokeLineCap: "butt",
-                    data: { data: { modelId: options.modelId } }
+                    data: { data: { modelId: this.modelId } }
                 });
         },
 
@@ -6355,7 +6417,7 @@ kendo_module({
                 body = deepExtend({
                     fill: options.color,
                     fillOpacity: options.opacity,
-                    data: { data: { modelId: options.modelId } }
+                    data: { data: { modelId: this.modelId } }
                 }, border);
 
             if (options.overlay) {
@@ -6377,7 +6439,7 @@ kendo_module({
                     stroke: options.mean.color || options.color,
                     dashType: options.mean.dashType,
                     strokeLineCap: "butt",
-                    data: { data: { modelId: options.modelId } }
+                    data: { data: { modelId: this.modelId } }
                 });
         },
 
@@ -6407,7 +6469,7 @@ kendo_module({
 
             ChartElement.fn.init.call(segment, options);
 
-            segment.options.id = uniqueId();
+            segment.id = uniqueId();
             segment.enableDiscovery();
         },
 
@@ -6550,7 +6612,7 @@ kendo_module({
 
             if (segment.value) {
                 elements.push(segment.createSegment(view, sector, deepExtend({
-                    id: options.id,
+                    id: segment.id,
                     fill: options.color,
                     overlay: overlay,
                     fillOpacity: options.opacity,
@@ -6558,7 +6620,7 @@ kendo_module({
                     animation: deepExtend(options.animation, {
                         delay: segment.animationDelay
                     }),
-                    data: { modelId: options.modelId },
+                    data: { modelId: segment.modelId },
                     zIndex: options.zIndex,
                     singleSegment: (segment.options.data || []).length === 1
                 }, border)));
@@ -6583,7 +6645,7 @@ kendo_module({
             var segment = this,
                 highlight = segment.options.highlight || {},
                 border = highlight.border || {},
-                outlineId = segment.options.id + OUTLINE_SUFFIX,
+                outlineId = segment.id + OUTLINE_SUFFIX,
                 element;
 
             options = deepExtend({}, options, { id: outlineId });
@@ -6596,7 +6658,7 @@ kendo_module({
                     strokeWidth: border.width,
                     stroke: border.color,
                     id: null,
-                    data: { modelId: segment.options.modelId }
+                    data: { modelId: segment.modelId }
                 }));
             }
 
@@ -7081,7 +7143,7 @@ kendo_module({
                                 type: FADEIN,
                                 delay: segment.animationDelay
                             },
-                            data: { modelId: segment.options.modelId }
+                            data: { modelId: segment.modelId }
                         });
 
                         lines.push(connectorLine);
@@ -7276,7 +7338,7 @@ kendo_module({
             BoxElement.fn.init.call(pane, options);
 
             options = pane.options;
-            options.id = uniqueId();
+            pane.id = uniqueId();
 
             pane.title = Title.buildTitle(options.title, pane, Pane.fn.options.title);
 
@@ -7353,7 +7415,7 @@ kendo_module({
             var pane = this,
                 elements = BoxElement.fn.getViewElements.call(pane, view),
                 group = view.createGroup({
-                    id: pane.options.id
+                    id: pane.id
                 }),
                 result = [];
 
@@ -7421,7 +7483,7 @@ kendo_module({
             plotArea.axes = [];
             plotArea.crosshairs = [];
 
-            plotArea.options.id = uniqueId();
+            plotArea.id = uniqueId();
             plotArea.enableDiscovery();
 
             plotArea.createPanes();
@@ -7785,7 +7847,7 @@ kendo_module({
             for (i = 0; i < yAxes.length; i++) {
                 axis = yAxes[i];
                 pane = axis.pane;
-                paneId = pane.options.id;
+                paneId = pane.id;
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
                 if (axis.options._overlap) {
@@ -7828,7 +7890,7 @@ kendo_module({
             for (i = 0; i < xAxes.length; i++) {
                 axis = xAxes[i];
                 pane = axis.pane;
-                paneId = pane.options.id;
+                paneId = pane.id;
                 plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
 
                 if (axis.options._overlap) {
@@ -8103,8 +8165,8 @@ kendo_module({
                     strokeWidth: 0.1
                 }),
                 view.createRect(bgBox, {
-                    id: options.id,
-                    data: { modelId: options.modelId },
+                    id: plotArea.id,
+                    data: { modelId: plotArea.modelId },
                     stroke: border.width ? border.color : "",
                     strokeWidth: border.width,
                     fill: WHITE,
@@ -9507,8 +9569,8 @@ kendo_module({
             ChartElement.fn.init.call(crosshair, options);
             crosshair.axis = axis;
 
-            if (!crosshair.options.id) {
-                crosshair.options.id = uniqueId();
+            if (!crosshair.id) {
+                crosshair.id = uniqueId();
             }
             crosshair._visible = false;
             crosshair.stickyMode = axis instanceof CategoryAxis;
@@ -9529,7 +9591,7 @@ kendo_module({
 
             crosshair.getViewElements(crosshair._view);
             element = crosshair.element;
-            element.refresh(getElement(crosshair.options.id));
+            element.refresh(getElement(crosshair.id));
         },
 
         showAt: function(point) {
@@ -9628,7 +9690,7 @@ kendo_module({
 
             crosshair.points = crosshair.linePoints();
             crosshair.element = view.createPolyline(crosshair.points, false, {
-                id: options.id,
+                id: crosshair.id,
                 stroke: options.color,
                 strokeWidth: options.width,
                 strokeOpacity: options.opacity,
@@ -10417,8 +10479,12 @@ kendo_module({
                 firstDataItem = data.dataItems[0],
                 result = {};
 
-            if (!isArray(firstDataItem)) {
-                result = extend(result, firstDataItem);
+            if (!isNumber(firstDataItem) && !isArray(firstDataItem)) {
+                if (data.dataItems.length > 1) {
+                    result = shallowCopy(firstDataItem);
+                } else {
+                    result = firstDataItem || {};
+                }
             }
 
             for (i = 0; i < seriesFields.length; i++) {
@@ -10583,6 +10649,7 @@ kendo_module({
         delete seriesDefaults.polarLine;
         delete seriesDefaults.radarArea;
         delete seriesDefaults.radarLine;
+        delete seriesDefaults.errorBars;
     }
 
     function applySeriesColors(options) {
@@ -10992,12 +11059,13 @@ kendo_module({
         return ranges;
     }
 
-    function evalOptions(options, context, state) {
+    function evalOptions(options, context, state, dryRun) {
         var property,
             propValue,
             excluded,
             defaults,
-            depth;
+            depth,
+            needsEval = false;
 
         state = state || {};
         excluded = state.excluded = state.excluded || [];
@@ -11012,15 +11080,20 @@ kendo_module({
             if (!inArray(property, state.excluded)&&options.hasOwnProperty(property)) {
                 propValue = options[property];
                 if (isFn(propValue)) {
-                    options[property] = valueOrDefault(propValue(context), defaults[property]);
+                    needsEval = true;
+                    if (!dryRun) {
+                        options[property] = valueOrDefault(propValue(context), defaults[property]);
+                    }
                 } else if (typeof propValue === OBJECT) {
                     state.defaults = defaults[property];
                     state.depth++;
-                    evalOptions(propValue, context, state);
+                    needsEval = evalOptions(propValue, context, state, dryRun) || needsEval;
                     state.depth--;
                 }
             }
         }
+
+        return needsEval;
     }
 
     function groupSeries(series, data) {
@@ -11166,6 +11239,17 @@ kendo_module({
                 path += ".";
             }
         }
+    }
+
+    function shallowCopy(src) {
+        var dst = {};
+        for (var prop in src) {
+            if (src.hasOwnProperty(prop)) {
+                dst[prop] = src[prop];
+            }
+        }
+
+        return dst;
     }
 
     // Exports ================================================================

@@ -47,12 +47,6 @@ kendo_module({
                 vericalLine: {
                     width: 2
                 },
-                stepLine: {
-                    width: 2
-                },
-                vericalStepLine: {
-                    width: 2
-                },
                 scatterLine: {
                     width: 1
                 },
@@ -68,28 +62,6 @@ kendo_module({
                     }
                 },
                 verticalArea: {
-                    opacity: 0.4,
-                    markers: {
-                        visible: false,
-                        size: 6
-                    },
-                    line: {
-                        opacity: 1,
-                        width: 0
-                    }
-                },
-                stepArea: {
-                    opacity: 0.4,
-                    markers: {
-                        visible: false,
-                        size: 6
-                    },
-                    line: {
-                        opacity: 1,
-                        width: 0
-                    }
-                },
-                verticalStepArea: {
                     opacity: 0.4,
                     markers: {
                         visible: false,

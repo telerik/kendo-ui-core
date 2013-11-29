@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas sandbox</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.userevents.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.gauge.js"></script>
+        <script src="../src/kendo.dataviz.qrcode.js"></script>
+        <script src="../src/kendo.dataviz.barcode.js"></script>
+        <script src="../src/kendo.dataviz.stock.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
+</head>
+<body>
+  <div id="chart" style="width: 1100px; height: 600px;"></div>
+  <script>
+    $("#chart").kendoChart({
+      dataSource: {
+          transport: {
+              read: "chart.json",
+              type: "json"
+          },
+          schema: {
+              model: {
+                  fields: {
+                      Day: {
+                          type: "date"
+                      }
+                  }
+              }
+          }
+      },
+      seriesDefaults: {
+          type: "line",
+          width: 0.5,
+          categoryField: "Day",
+          highlight: {
+              visible: false
+          },
+          markers: {
+              visible: false
+          }
+      },
+      series: [{
+          name: "Series 0",
+          field: "Series0"
+      }, {
+          name: "Series 1",
+          field: "Series1"
+      }, {
+          name: "Series 2",
+          field: "Series2"
+      }, {
+          name: "Series 3",
+          field: "Series3"
+      }, {
+          name: "Series 4",
+          field: "Series4"
+      }, {
+          name: "Series 5",
+          field: "Series5"
+      }, {
+          name: "Series 6",
+          field: "Series6"
+      }, {
+          name: "Series 7",
+          field: "Series7"
+      }, {
+          name: "Series 8",
+          field: "Series8"
+      }, {
+          name: "Series 9",
+          field: "Series9"
+      }],
+      categoryAxis: {
+        baseUnit: "days",
+        crosshair: {
+            visible: true
+        },
+        labels: {
+            template: function(data) {
+                var value = data.value;
+                if (value.getDate() === 1 && value.getMonth() % 4 === 0) {
+                    return kendo.toString(value, 'MMM yy');
+                }
+            }
+        },
+        majorTicks: {
+            visible: false
+        },
+        majorGridLines: {
+          visible: false
+        }
+      },
+      tooltip: {
+          visible: true,
+          shared: true
+      },
+      legend: {
+          visible: false
+      },
+      transitions: false
+    });
+  </script>
+</body>
+</html>
+
