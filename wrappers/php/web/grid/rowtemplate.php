@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $result = new DataSourceResult('sqlite:../../sample.db');
 
-    echo json_encode($result->read('Employees', array('EmployeeID', 'FirstName', 'LastName', 'Title', 'Country', 'Photo'), $request));
+    echo json_encode($result->read('Employees', array('EmployeeID', 'FirstName', 'LastName', 'Title', 'Country'), $request));
 
     exit;
 }
@@ -62,9 +62,23 @@ $dataSource = new \Kendo\Data\DataSource();
 $dataSource->transport($transport)
            ->schema($schema);
 
+$picture = new \Kendo\UI\GridColumn();
+$picture->field('EmployeeID')
+        ->width(110)
+        ->title('Picture');
+
+
+$details = new \Kendo\UI\GridColumn();
+$details->width(600)
+        ->title('Details');
+
+$id = new \Kendo\UI\GridColumn();
+$id->title('ID');
+
 $grid = new \Kendo\UI\Grid('grid');
 
 $grid->dataSource($dataSource)
+     ->addColumn($picture,$details,$id)
      ->rowTemplateId('row-template')
      ->altRowTemplateId('alt-row-template')
      ->height(430);
@@ -75,15 +89,15 @@ echo $grid->render();
 <script id="row-template" type="text/x-kendo-template">
   <tr>
     <td class="photo">
-      <img src="/resources/web/Employees/#:data.employeeId#.jpg" alt="#: data.employeeId #" />
+      <img src="../../content/web/Employees/#:EmployeeID#.jpg" alt="#: EmployeeID #" />
     </td>
     <td class="details">
-      <span class="title">#: title #</span>
-      <span class="description">Name : #: firstName# #: lastName#</span>
-      <span class="description">Country : #: country# </span>
+      <span class="title">#: Title #</span>
+      <span class="description">Name : #: FirstName# #: LastName#</span>
+      <span class="description">Country : #: Country# </span>
     </td>
     <td class="employeeID">
-      #: employeeId #
+      #: EmployeeID #
     </td>
   </tr>
 </script>
@@ -91,15 +105,15 @@ echo $grid->render();
 <script id="alt-row-template" type="text/x-kendo-template">
   <tr class="k-alt">
     <td class="photo">
-      <img src="/resources/web/Employees/#:data.employeeId#.jpg" alt="#: data.employeeId #" />
+      <img src="../../content/web/Employees/#:EmployeeID#.jpg" alt="#: EmployeeID #" />
     </td>
     <td class="details">
-      <span class="title">#: title #</span>
-      <span class="description">Name : #: firstName# #: lastName#</span>
-      <span class="description">Country : #: country# </span>
+      <span class="title">#: Title #</span>
+      <span class="description">Name : #: FirstName# #: LastName#</span>
+      <span class="description">Country : #: Country# </span>
     </td>
     <td class="employeeID">
-      #: employeeId #
+      #: EmployeeID #
     </td>
   </tr>
 </script>
