@@ -937,9 +937,9 @@
                     equal(marker.options.rotation, 90);
                 });
 
-                test("hides marker if size is 0", function() {
+                test("doesn't create marker if size is 0", function() {
                     createPoint({ markers: { size: 0 } });
-                    ok(!marker.options.visible);
+                    ok(!marker);
                 });
 
                 test("sets marker background color", function() {
@@ -961,9 +961,9 @@
                     equal(marker.options.border.width, 4);
                 });
 
-                test("sets marker visibility", function() {
+                test("doesn't create marker", function() {
                     createPoint({ markers: { visible: false }});
-                    equal(marker.options.visible, false);
+                    ok(!marker);
                 });
 
                 test("sets marker shape type", function() {

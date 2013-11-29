@@ -4239,8 +4239,6 @@ kendo_module({
                 options = point.options,
                 markers = options.markers,
                 labels = options.labels,
-                markerBackground = markers.background,
-                markerBorder = deepExtend({}, markers.border),
                 labelText = point.value;
 
             if (point._rendered) {
@@ -4249,26 +4247,11 @@ kendo_module({
                 point._rendered = true;
             }
 
-            if (!defined(markerBorder.color)) {
-                markerBorder.color =
-                    new Color(markerBackground).brightness(BAR_BORDER_BRIGHTNESS).toHex();
+            if (markers.visible && markers.size) {
+                point.marker = point.createMarker();
+                point.marker.id = point.id;
+                point.append(point.marker);
             }
-
-            point.marker = new ShapeElement({
-                visible: markers.visible && markers.size,
-                type: markers.type,
-                width: markers.size,
-                height: markers.size,
-                rotation: markers.rotation,
-                background: markerBackground,
-                border: markerBorder,
-                opacity: markers.opacity,
-                zIndex: markers.zIndex,
-                animation: markers.animation
-            });
-            point.marker.id = point.id;
-
-            point.append(point.marker);
 
             if (labels.visible) {
                 if (labels.template) {
@@ -4303,6 +4286,36 @@ kendo_module({
             }
         },
 
+        markerBorder: function() {
+            var options = this.options.markers;
+            var background = options.background;
+            var border = deepExtend({}, options.border);
+
+            if (!defined(border.color)) {
+                border.color =
+                    new Color(background).brightness(BAR_BORDER_BRIGHTNESS).toHex();
+            }
+
+            return border;
+        },
+
+        createMarker: function() {
+            var options = this.options.markers;
+            var marker = new ShapeElement({
+                type: options.type,
+                width: options.size,
+                height: options.size,
+                rotation: options.rotation,
+                background: options.background,
+                border: this.markerBorder(),
+                opacity: options.opacity,
+                zIndex: options.zIndex,
+                animation: options.animation
+            });
+
+            return marker;
+        },
+
         createNote: function() {
             var point = this,
                 options = point.options.notes,
@@ -4328,6 +4341,11 @@ kendo_module({
         },
 
         markerBox: function() {
+            if (!this.marker) {
+                this.marker = this.createMarker();
+                this.marker.reflow(this._childBox);
+            }
+
             return this.marker.box;
         },
 
@@ -4357,7 +4375,11 @@ kendo_module({
                 }
             }
 
-            point.marker.reflow(childBox);
+            point._childBox = childBox;
+            if (point.marker) {
+                point.marker.reflow(childBox);
+            }
+
             point.reflowLabel(childBox);
 
             if(point.errorBars){
@@ -4367,7 +4389,7 @@ kendo_module({
             }
 
             if (point.note) {
-                if (point.marker.options.visible) {
+                if (point.marker) {
                     noteTargetBox = point.marker.box;
                 } else {
                     center = point.marker.box.center();
@@ -4380,7 +4402,6 @@ kendo_module({
         reflowLabel: function(box) {
             var point = this,
                 options = point.options,
-                marker = point.marker,
                 label = point.label,
                 anchor = options.labels.position;
 
@@ -4389,7 +4410,7 @@ kendo_module({
                 anchor = anchor === BELOW ? BOTTOM : anchor;
 
                 label.reflow(box);
-                label.box.alignTo(marker.box, anchor);
+                label.box.alignTo(point.markerBox(), anchor);
                 label.reflow(label.box);
             }
         },
@@ -4398,8 +4419,7 @@ kendo_module({
             var element = this,
                 highlight = element.options.highlight,
                 markers = highlight.markers,
-                marker = element.marker,
-                defaultColor = marker.options.border.color;
+                defaultColor = element.markerBorder().color;
 
             options = deepExtend({ data: { modelId: element.modelId } }, options, {
                 fill: markers.color || defaultColor,
@@ -4410,12 +4430,13 @@ kendo_module({
                 visible: markers.visible
             });
 
+            var marker = this.marker || this.createMarker();
             return marker.getViewElements(view, options)[0];
         },
 
         tooltipAnchor: function(tooltipWidth, tooltipHeight) {
             var point = this,
-                markerBox = point.marker.box,
+                markerBox = point.markerBox(),
                 aboveAxis = point.options.aboveAxis;
 
             return Point2D(

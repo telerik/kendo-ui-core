@@ -991,9 +991,9 @@
                     equal(marker.options.border.width, 4);
                 });
 
-                test("sets marker visibility", function() {
+                test("doesn't create marker", function() {
                     createPoint({ markers: { visible: false }});
-                    equal(marker.options.visible, false);
+                    ok(!marker);
                 });
 
                 test("sets marker shape type", function() {
@@ -1236,7 +1236,7 @@
                         });
 
                         chart = $("#container").data("kendoChart");
-                        label = chart._plotArea.charts[0].points[0].children[1];
+                        label = chart._plotArea.charts[0].points[0].label;
                     },
                     teardown: function() {
                         $("#container").empty();
