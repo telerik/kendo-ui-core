@@ -280,18 +280,6 @@ asyncTest("Triggers init event handler", 1, function() {
     );
 });
 
-asyncTest("Should init even when called with empty jQuery object", 1, function() {
-    $("<div data-role='view' />").appendTo(document.body);
-
-    new kendo.mobile.Application($(), {
-        init: function (e) {
-            start();
-            ok(e.sender.element[0] == document.body);
-            e.sender.view().element.empty().remove();
-        }
-    });
-});
-
 /*
 test("Raises meaningful error when the app can't find views", 1, function() {
     try {
