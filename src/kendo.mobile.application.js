@@ -63,10 +63,10 @@ kendo_module({
             } else {
                 classes.push("km-" + os.name);
             }
-            classes.push("km-" + os.name + os.majorVersion);
-            classes.push("km-" + os.majorVersion);
-            classes.push("km-m" + (os.minorVersion ? os.minorVersion[0] : 0));
         }
+        classes.push("km-" + os.name + os.majorVersion);
+        classes.push("km-" + os.majorVersion);
+        classes.push("km-m" + (os.minorVersion ? os.minorVersion[0] : 0));
 
         if (os.appMode) {
             classes.push("km-app");
