@@ -334,6 +334,7 @@ kendo_module({
 
         _focus: function(li) {
             var that = this;
+            var userTriggered = true;
 
             if (that.popup.visible() && li && that.trigger(SELECT, {item: li})) {
                 that.close();
@@ -341,7 +342,7 @@ kendo_module({
             }
 
             that._select(li);
-            that._triggerCascade();
+            that._triggerCascade(userTriggered);
 
             that._blur();
         },
@@ -537,11 +538,12 @@ kendo_module({
             }
         },
 
-       _triggerCascade: function() {
+       _triggerCascade: function(userTriggered) {
             var that = this,
                 value = that.value();
+
             if ((!that._bound && value) || that._old !== value) {
-                that.trigger("cascade");
+                that.trigger("cascade", { userTriggered: userTriggered });
             }
         },
 
@@ -981,7 +983,9 @@ kendo_module({
 
                 change = function() {
                     var value = that._selectedValue || that.value();
-                    if (value) {
+                    if (that._userTriggered) {
+                        that._clearSelection(parent, true);
+                    } else if (value) {
                         that.value(value);
                         if (!that.dataSource.view()[0] || that.selectedIndex === -1) {
                             that._clearSelection(parent, true);
@@ -991,7 +995,8 @@ kendo_module({
                     }
 
                     that.enable();
-                    that._triggerCascade();
+                    that._triggerCascade(that._userTriggered);
+                    that._userTriggered = false;
                 };
                 select = function() {
                     var dataItem = parent.dataItem(),
@@ -1016,11 +1021,15 @@ kendo_module({
                     } else {
                         that.enable(false);
                         that._clearSelection(parent);
-                        that._triggerCascade();
+                        that._triggerCascade(that._userTriggered);
+                        that._userTriggered = false;
                     }
                 };
 
-                parent.bind("cascade", function() { select(); });
+                parent.bind("cascade", function(e) {
+                    that._userTriggered = e.userTriggered;
+                    select();
+                });
 
                 //refresh was called
                 if (parent._bound) {

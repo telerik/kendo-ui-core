@@ -752,6 +752,7 @@ kendo_module({
 
             if (isFiltered || !hasValue || custom) {
                 that.value("");
+                that.options.value = "";
             }
         }
     });
