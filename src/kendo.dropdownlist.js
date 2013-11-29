@@ -657,6 +657,9 @@ kendo_module({
             var that = this,
                 optionLabel = that.options.optionLabel;
 
+            that.options.value = "";
+            that._selectedValue = "";
+
             if (that.dataSource.view()[0] && optionLabel) {
                 that.select(0);
                 return;

@@ -407,6 +407,44 @@
                 equal(child.data("kendoDropDownList").text(), "Focus");
             });
 
+            test("Clear selected values of the child widgets on user selection", function() {
+                // array of all brands
+                var brands = [
+                    { id: 1, name: "Ford" },
+                    { id: 2, name: "BMW" },
+                    { id: 3, name: "Chevrolet" }
+                ];
+
+                // array of all models
+                var models = [
+                    { modelId: 1, name: "Explorer", brandId: 1},
+                    { modelId: 2, name: "Focus", brandId: 1},
+                    { modelId: 3, name: "X3", brandId: 1},
+                    { modelId: 1, name: "X5", brandId: 2},
+                    { modelId: 2, name: "Impala", brandId: 2},
+                    { modelId: 3, name: "Cruze", brandId: 2}
+                ];
+
+                parent.kendoDropDownList({
+                    dataTextField: "name",
+                    dataValueField: "id",
+                    dataSource: brands // bind it to the brands array
+                });
+
+                child.val("2").kendoDropDownList({
+                    dataTextField: "name",
+                    dataValueField: "modelId",
+                    optionLabel: { name: "", modelId: ""},
+                    cascadeFrom: "parent", // cascade from the brands dropdownlist
+                    cascadeFromField: "brandId",
+                    dataSource: models // bind it to the models array
+                });
+
+                parent.data("kendoDropDownList").ul.children().eq(1).click();
+
+                equal(child.data("kendoDropDownList").value(), "");
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
