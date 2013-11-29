@@ -24,6 +24,7 @@ module.exports = function(grunt) {
                         'src/kendo.list.js',
                         'src/kendo.calendar.js',
                         'src/kendo.popup.js',
+                        'src/kendo.autocomplete.js',
                         'src/kendo.datepicker.js',
                         'src/kendo.timepicker.js',
                         'src/kendo.mobile.view.js',
@@ -39,6 +40,7 @@ module.exports = function(grunt) {
                         'tests/core/**/*.js',
                         'tests/mobile/**/*.js',
                         'tests/userevents/**/*.js',
+                        'tests/autocomplete/*.js'
                     ],
 
                     exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.aspnetmvc.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js', 'src/*editor*', 'src/*dataviz*', 'src/*diagram*', 'src/*scheduler*' ],
