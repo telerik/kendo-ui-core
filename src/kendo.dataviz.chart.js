@@ -3368,19 +3368,20 @@ kendo_module({
                     value = point.plotValue;
                 }
 
-                var categorySlot = chart.categorySlot(categoryAxis, categoryIx, valueAxis),
-                    valueSlot = chart.valueSlot(valueAxis, value, axisCrossingValue),
-                    pointSlot = chart.pointSlot(categorySlot, valueSlot),
-                    aboveAxis = valueAxis.options.reverse ?
-                                    value < axisCrossingValue : value >= axisCrossingValue;
-
-                if (point) {
-                    point.options.aboveAxis = aboveAxis;
-                    chart.reflowPoint(point, pointSlot);
+                var categorySlot = categorySlots[categoryIx];
+                if (!categorySlot) {
+                    categorySlots[categoryIx] = categorySlot =
+                        chart.categorySlot(categoryAxis, categoryIx, valueAxis);
                 }
 
-                if (!categorySlots[categoryIx]) {
-                    categorySlots[categoryIx] = categorySlot;
+                if (point) {
+                    var valueSlot = chart.valueSlot(valueAxis, value, axisCrossingValue);
+                    var pointSlot = chart.pointSlot(categorySlot, valueSlot);
+                    var aboveAxis = valueAxis.options.reverse ?
+                                        value < axisCrossingValue : value >= axisCrossingValue;
+
+                    point.options.aboveAxis = aboveAxis;
+                    chart.reflowPoint(point, pointSlot);
                 }
             });
 
