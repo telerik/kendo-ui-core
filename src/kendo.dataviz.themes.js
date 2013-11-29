@@ -56,6 +56,15 @@ kendo_module({
                         visible: false,
                         size: 6
                     },
+                    highlight: {
+                        markers: {
+                            border: {
+                                color: "#fff",
+                                opacity: 1,
+                                width: 1
+                            }
+                        }
+                    },
                     line: {
                         opacity: 1,
                         width: 0
