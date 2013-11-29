@@ -72,6 +72,10 @@ $(function() {
     QUnit.fixture = $("<div id='qunit-fixture' style='height: 100px'></div>").appendTo(document.body);
 })
 
+QUnit.testDone(function( details ) {
+    QUnit.fixture.empty();
+});
+
 QUnit.brazilTimezoneTest = brazilTimezoneTest;
 QUnit.config.testTimeout = 800;
 QUnit.config.reorder = false;
