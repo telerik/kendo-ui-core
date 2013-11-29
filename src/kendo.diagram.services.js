@@ -958,18 +958,16 @@ kendo_module({
                 }
             }
 
-            if (d._canRectSelect()) {
-                hit = this.diagram._resizingAdorner._hitTest(point);
-                if (hit) {
-                    this.hoveredAdorner = d._resizingAdorner;
-                    if (hit.x !== 0 && hit.y !== 0) { // hit testing for resizers or rotator, otherwise if (0,0) than pass through.
-                        return;
-                    }
-                    hit = undefined;
+            hit = this.diagram._resizingAdorner._hitTest(point);
+            if (hit) {
+                this.hoveredAdorner = d._resizingAdorner;
+                if (hit.x !== 0 && hit.y !== 0) { // hit testing for resizers or rotator, otherwise if (0,0) than pass through.
+                    return;
                 }
-                else {
-                    this.hoveredAdorner = undefined;
-                }
+                hit = undefined;
+            }
+            else {
+                this.hoveredAdorner = undefined;
             }
 
             if (!this.activeTool || this.activeTool.type !== "ConnectionTool") {
