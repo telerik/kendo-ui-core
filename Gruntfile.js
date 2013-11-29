@@ -16,6 +16,10 @@ module.exports = function(grunt) {
                         'src/jquery.js',
                         'tests/jquery.mockjax.js',
                         'src/kendo.core.js',
+                        'src/kendo.timezones.js',
+                        'src/cultures/kendo.culture.de-DE.js',
+                        'src/cultures/kendo.culture.bg-BG.js',
+                        'src/cultures/kendo.culture.en-ZA.js',
                         'src/kendo.data.js',
                         'src/kendo.list.js',
                         'src/kendo.calendar.js',
@@ -32,10 +36,11 @@ module.exports = function(grunt) {
                         'demos/mvc/content/shared/js/less.js',
                         'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
                         'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
+                        'tests/core/**/*.js',
                         'tests/mobile/**/*.js'
                     ],
 
-                    exclude: [ 'src/kendo.web.js', 'src/kendo.aspnetmvc.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.timezones.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js', 'src/*editor*', 'src/*dataviz*', 'src/*diagram*', 'src/*scheduler*' ],
+                    exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.aspnetmvc.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js', 'src/*editor*', 'src/*dataviz*', 'src/*diagram*', 'src/*scheduler*' ],
 
                     reporters: ['progress' ],
 
