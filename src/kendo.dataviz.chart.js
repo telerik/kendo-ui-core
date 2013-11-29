@@ -421,6 +421,7 @@ kendo_module({
         },
 
         _redraw: function() {
+            console.time("redraw");
             var chart = this,
                 model = chart._getModel(),
                 view;
@@ -433,7 +434,6 @@ kendo_module({
             view = chart._view =
                 dataviz.ViewFactory.current.create(model.options, chart.options.renderAs);
 
-            console.time("render");
             if (view) {
                 view.load(model);
                 chart._viewElement = chart._renderView(view);
@@ -441,7 +441,7 @@ kendo_module({
                 chart._highlight = new Highlight(view, chart._viewElement);
                 chart._setupSelection();
             }
-            console.timeEnd("render");
+            console.timeEnd("redraw");
         },
 
         _sharedTooltip: function() {
@@ -477,7 +477,6 @@ kendo_module({
         },
 
         _getModel: function() {
-            console.time("build model");
             var chart = this,
                 options = chart.options,
                 model = new RootElement(chart._modelOptions()),
@@ -494,7 +493,6 @@ kendo_module({
             model.append(plotArea);
             model.reflow();
 
-            console.timeEnd("build model");
             return model;
         },
 
