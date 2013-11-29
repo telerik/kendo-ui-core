@@ -11,11 +11,11 @@ module.exports = function(grunt) {
                     basePath: '',
                     frameworks: ['qunit'],
                     files: [
-                        { pattern: 'Gruntfile.js', watched: true, included: false },
                         { pattern: 'styles/**/*.*', watched: true, included: false },
                         'src/jquery.js',
                         'tests/jquery.mockjax.js',
                         'src/kendo.core.js',
+                        'src/kendo.userevents.js',
                         'src/kendo.timezones.js',
                         'src/cultures/kendo.culture.de-DE.js',
                         'src/cultures/kendo.culture.bg-BG.js',
@@ -40,8 +40,9 @@ module.exports = function(grunt) {
                         'tests/core/**/*.js',
                         'tests/mobile/**/*.js',
                         'tests/userevents/**/*.js',
-                        'tests/mvvm/*.js'
-                        'tests/autocomplete/*.js'
+                        'tests/mvvm/*.js',
+                        'tests/autocomplete/*.js',
+                        'tests/dragdrop/*.js'
                     ],
 
                     exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.aspnetmvc.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js', 'src/*editor*', 'src/*dataviz*', 'src/*diagram*', 'src/*scheduler*' ],
