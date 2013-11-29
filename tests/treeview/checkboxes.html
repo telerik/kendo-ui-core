@@ -561,6 +561,29 @@
                 });
             });
 
+            test("do not bubble indeterminate state when statically loading items", function() {
+                createTreeView({
+                    loadOnDemand: false,
+                    checkboxes: { checkChildren: true }
+                });
+
+                var called = false;
+
+                treeviewObject._bubbleIndeterminate = function() {
+                    called = true;
+                };
+
+                treeviewObject.setDataSource({
+                    data: [
+                        { text: "foo", items: [
+                            { text: "bar" }
+                        ] }
+                    ]
+                });
+
+                ok(!called);
+            });
+
         </script>
 
         <div id="qunit-fixture"> </div>

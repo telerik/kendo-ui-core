@@ -1372,7 +1372,7 @@ kendo_module({
                     } else {
                         this._appendItems(e.index, items, parentNode);
 
-                        if (checkChildren) {
+                        if (loadOnDemand && checkChildren) {
                             this._bubbleIndeterminate(subGroup(parentNode).children().last());
                         }
                     }
