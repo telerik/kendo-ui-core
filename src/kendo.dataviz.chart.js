@@ -10478,7 +10478,11 @@ kendo_module({
                 result = {};
 
             if (!isNumber(firstDataItem) && !isArray(firstDataItem)) {
-                result = firstDataItem || {};
+                if (data.dataItems.length > 1) {
+                    result = shallowCopy(firstDataItem);
+                } else {
+                    result = firstDataItem || {};
+                }
             }
 
             for (i = 0; i < seriesFields.length; i++) {
@@ -11233,6 +11237,17 @@ kendo_module({
                 path += ".";
             }
         }
+    }
+
+    function shallowCopy(src) {
+        var dst = {};
+        for (var prop in src) {
+            if (src.hasOwnProperty(prop)) {
+                dst[prop] = src[prop];
+            }
+        }
+
+        return dst;
     }
 
     // Exports ================================================================
