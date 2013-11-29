@@ -1244,6 +1244,7 @@ kendo_module({
 
             var destroy = function() {
                 if (that.editable) {
+
                     that._detachModelChange();
                     that.editable.destroy();
                     that.editable = null;
@@ -1258,6 +1259,10 @@ kendo_module({
                 } else {
                     destroy();
                 }
+            }
+            if (that._actionSheet) {
+                that._actionSheet.destroy();
+                that._actionSheet = null;
             }
         },
 
@@ -1715,7 +1720,7 @@ kendo_module({
 
             var html = $(template(messages)).appendTo(that.view.element);
 
-            var actionSheet = new kendo.mobile.ui.ActionSheet(html, {
+            var actionSheet = that._actionSheet = new kendo.mobile.ui.ActionSheet(html, {
                 cancel: messages.cancelDelete,
                 cancelTemplate: '<li class="km-actionsheet-cancel"><a class="k-button" href="\\#">#:cancel#</a></li>',
                 close: function() {

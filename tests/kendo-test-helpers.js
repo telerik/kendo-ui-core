@@ -102,7 +102,9 @@ function release(element, x, y, id) {
 }
 
 
-$('head').append('<link rel="stylesheet/less" href="/base/styles/mobile/kendo.mobile.all.less" type="text/css" />');
+$('head')
+    .append('<link rel="stylesheet/less" href="/base/styles/mobile/kendo.mobile.all.less" type="text/css" />')
+    .append('<link rel="stylesheet/less" href="/base/styles/web/kendo.common.less" type="text/css" />');
 
 $(function() {
     QUnit.fixture = $("<div id='qunit-fixture' style='height: 100px'></div>").appendTo(document.body);
