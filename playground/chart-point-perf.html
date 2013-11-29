@@ -84,7 +84,12 @@
             visible: true
         },
         labels: {
-            visible: false
+            template: function(data) {
+                var value = data.value;
+                if (value.getDate() === 1 && value.getMonth() % 4 === 0) {
+                    return kendo.toString(value, 'MMM yy');
+                }
+            }
         },
         majorTicks: {
             visible: false
