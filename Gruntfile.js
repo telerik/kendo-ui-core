@@ -2,6 +2,24 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
+    var tests = [
+        'tests/grid/**/*.js',
+        'tests/core/**/*.js',
+        'tests/fx/*.js',
+        'tests/mobile/**/*.js',
+        'tests/userevents/**/*.js',
+        'tests/mvvm/*.js',
+        // 'tests/autocomplete/*.js',
+        'tests/dragdrop/*.js',
+        'tests/view/*.js',
+        'tests/router/**/*.js',
+    ],
+    passedTests = grunt.option('tests');
+
+    if (passedTests) {
+        tests = [passedTests];
+    }
+
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -101,17 +119,7 @@ module.exports = function(grunt) {
                         'demos/mvc/content/shared/js/less.js',
                         'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
                         'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
-                        'tests/grid/**/*.js',
-                        'tests/core/**/*.js',
-                        'tests/fx/*.js',
-                        'tests/mobile/**/*.js',
-                        'tests/userevents/**/*.js',
-                        'tests/mvvm/*.js',
-                        // 'tests/autocomplete/*.js',
-                        'tests/dragdrop/*.js',
-                        'tests/view/*.js',
-                        'tests/router/**/*.js',
-                    ],
+                    ].concat(tests),
                     exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.aspnetmvc.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js', 'src/*editor*', 'src/*dataviz*', 'src/*diagram*' ],
 
                     reporters: ['progress' ],
