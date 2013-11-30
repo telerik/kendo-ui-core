@@ -67,6 +67,7 @@
         }
     });
 
+
     kendo.deepExtend(diagram, {
         ShapeTool: ShapeTool,
         LinkTool: LinkTool,

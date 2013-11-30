@@ -525,7 +525,7 @@ kendo_module({
         },
         doubleClick: function () {
         },
-        tryActivate: function () {
+        tryActivate: function (p, meta) {
             return false;
         },
         getCursor: function () {
@@ -537,7 +537,7 @@ kendo_module({
         init: function (toolService) {
             EmptyTool.fn.init.call(this, toolService);
         },
-        tryActivate: function (meta) {
+        tryActivate: function (p,meta) {
             return this.toolService.hoveredItem === undefined && meta.ctrlKey;
         },
         start: function (p) {
@@ -579,7 +579,7 @@ kendo_module({
 
             tool.scroller.disable();
         },
-        tryActivate: function (meta) {
+        tryActivate: function (p,meta) {
             return this.toolService.hoveredItem === undefined && meta.ctrlKey;
         },
         start: function () {
@@ -621,7 +621,7 @@ kendo_module({
         init: function (toolService) {
             this.toolService = toolService;
         },
-        tryActivate: function () {
+        tryActivate: function (p,meta) {
             return true; // the pointer tool is last and handles all others requests.
         },
         start: function (p, meta) {
@@ -669,7 +669,7 @@ kendo_module({
         init: function (toolService) {
             this.toolService = toolService;
         },
-        tryActivate: function () {
+        tryActivate: function (p,meta) {
             return this.toolService.diagram._canRectSelect() && this.toolService.hoveredItem === undefined && this.toolService.hoveredAdorner === undefined;
         },
         start: function (p) {
@@ -702,7 +702,7 @@ kendo_module({
             this.toolService = toolService;
             this.type = "ConnectionTool";
         },
-        tryActivate: function (meta) {
+        tryActivate: function (p,meta) {
             return this.toolService._hoveredConnector && !meta.ctrlKey; // connector it seems
         },
         start: function (p, meta) {
@@ -736,7 +736,7 @@ kendo_module({
             this.toolService = toolService;
             this.type = "ConnectionTool";
         },
-        tryActivate: function () {
+        tryActivate: function (p,meta) {
             var item = this.toolService.hoveredItem,
                 isActive = item && item.path; // means it is connection
             if (isActive) {
@@ -769,7 +769,7 @@ kendo_module({
         doubleClick: function () {
             this.toolService.diagram.editor(this.toolService.hoveredItem);
         },
-        tryActivate: function (meta) {
+        tryActivate: function (p,meta) {
             return meta.doubleClick && this.toolService.hoveredItem;
         }
     });
@@ -799,7 +799,7 @@ kendo_module({
         start: function (p, meta) {
             meta = deepExtend({}, meta);
             this._updateHoveredItem(p);
-            this._activateTool(meta);
+            this._activateTool(p, meta);
             this.activeTool.start(p, meta);
             this._updateCursor(p);
             this.diagram.focus();
@@ -827,7 +827,7 @@ kendo_module({
             return true;
         },
         doubleClick: function (p, meta) {
-            this._activateTool(deepExtend(meta, { doubleClick: true }));
+            this._activateTool(p, deepExtend(meta, { doubleClick: true }));
             if (this.activeTool.doubleClick) {
                 this.activeTool.doubleClick(p, meta);
             }
@@ -901,10 +901,10 @@ kendo_module({
                 this.newConnection = undefined;
             }
         },
-        _activateTool: function (meta) {
+        _activateTool: function (p, meta) {
             for (var i = 0; i < this.tools.length; i++) {
                 var tool = this.tools[i];
-                if (tool.tryActivate(meta)) {
+                if (tool.tryActivate(p, meta)) {
                     this.activeTool = tool;
                     break; // activating the first available tool in the loop.
                 }
