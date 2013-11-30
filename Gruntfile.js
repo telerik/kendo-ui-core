@@ -3,6 +3,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
     var tests = [
+        { pattern: 'tests/**/*-fixture.html' },
+        { pattern: 'tests/menu/**/*png', included: false },
+        { pattern: 'tests/menu/**/*gif', included: false },
         'tests/grid/**/*.js',
         'tests/core/**/*.js',
         'tests/fx/*.js',
@@ -10,10 +13,12 @@ module.exports = function(grunt) {
         'tests/userevents/**/*.js',
         'tests/mvvm/*.js',
         // 'tests/autocomplete/*.js',
+        // 'tests/menu/*js',
         'tests/dragdrop/*.js',
         'tests/view/*.js',
         'tests/router/**/*.js',
     ],
+
     passedTests = grunt.option('tests');
 
     if (passedTests) {
