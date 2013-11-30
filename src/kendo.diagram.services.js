@@ -28,7 +28,11 @@ kendo_module({
             cross: "pointer",
             add: "pointer",
             move: "move",
-            select: "pointer"
+            select: "pointer",
+            south: "s-resize",
+            east: "e-resize",
+            west: "w-resize",
+            north: "n-resize"
         },
         HITTESTDISTANCE = 10,
         AUTO = "Auto",
@@ -537,7 +541,7 @@ kendo_module({
         init: function (toolService) {
             EmptyTool.fn.init.call(this, toolService);
         },
-        tryActivate: function (p,meta) {
+        tryActivate: function (p, meta) {
             return this.toolService.hoveredItem === undefined && meta.ctrlKey;
         },
         start: function (p) {
@@ -579,7 +583,7 @@ kendo_module({
 
             tool.scroller.disable();
         },
-        tryActivate: function (p,meta) {
+        tryActivate: function (p, meta) {
             return this.toolService.hoveredItem === undefined && meta.ctrlKey;
         },
         start: function () {
@@ -621,7 +625,7 @@ kendo_module({
         init: function (toolService) {
             this.toolService = toolService;
         },
-        tryActivate: function (p,meta) {
+        tryActivate: function (p, meta) {
             return true; // the pointer tool is last and handles all others requests.
         },
         start: function (p, meta) {
@@ -669,7 +673,7 @@ kendo_module({
         init: function (toolService) {
             this.toolService = toolService;
         },
-        tryActivate: function (p,meta) {
+        tryActivate: function (p, meta) {
             return this.toolService.diagram._canRectSelect() && this.toolService.hoveredItem === undefined && this.toolService.hoveredAdorner === undefined;
         },
         start: function (p) {
@@ -702,7 +706,7 @@ kendo_module({
             this.toolService = toolService;
             this.type = "ConnectionTool";
         },
-        tryActivate: function (p,meta) {
+        tryActivate: function (p, meta) {
             return this.toolService._hoveredConnector && !meta.ctrlKey; // connector it seems
         },
         start: function (p, meta) {
@@ -736,7 +740,7 @@ kendo_module({
             this.toolService = toolService;
             this.type = "ConnectionTool";
         },
-        tryActivate: function (p,meta) {
+        tryActivate: function (p, meta) {
             var item = this.toolService.hoveredItem,
                 isActive = item && item.path; // means it is connection
             if (isActive) {
@@ -769,7 +773,7 @@ kendo_module({
         doubleClick: function () {
             this.toolService.diagram.editor(this.toolService.hoveredItem);
         },
-        tryActivate: function (p,meta) {
+        tryActivate: function (p, meta) {
             return meta.doubleClick && this.toolService.hoveredItem;
         }
     });
