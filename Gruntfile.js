@@ -8,6 +8,7 @@ module.exports = function(grunt) {
         karma: {
             unit: {
                 options: {
+                    reportSlowerThan: 500,
                     basePath: '',
                     frameworks: ['qunit'],
                     files: [
@@ -108,7 +109,8 @@ module.exports = function(grunt) {
                         'tests/mvvm/*.js',
                         // 'tests/autocomplete/*.js',
                         'tests/dragdrop/*.js',
-                        'tests/view/*.js'
+                        'tests/view/*.js',
+                        'tests/router/**/*.js',
                     ],
                     exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.aspnetmvc.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js', 'src/*editor*', 'src/*dataviz*', 'src/*diagram*' ],
 
