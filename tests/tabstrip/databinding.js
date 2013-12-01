@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>TabStrip DataBinding</title>
-        <script src="../jquery-loader.js"></script>
-        <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../kendo-test-helpers.js"></script>
-        <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.tabstrip.js"></script>
-        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-</head>
-<body>
-    <script type="text/javascript">
+(function() {
         test("binding to data source", function() {
             var dom = $("<ul/>");
 
@@ -174,14 +161,4 @@
             equal(tabstrip.wrapper.find("li").length, 2);
             equal(tabstrip.wrapper.children("div").length, 2);
         });
-    </script>
-
-    <h1 id="qunit-header">kendo.ui.TabStrip Tests</h1>
-    <h2 id="qunit-banner"></h2>
-    <div id="qunit-testrunner-toolbar"></div>
-    <h2 id="qunit-userAgent"></h2>
-    <ol id="qunit-tests"></ol>
-    <div id="qunit-fixture">test markup, will be hidden</div>
-    <ul id="log"></ul>
-</body>
-</html>
+})();

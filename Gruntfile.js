@@ -17,7 +17,8 @@ module.exports = function(grunt) {
        'tests/dragdrop/*.js',
        'tests/view/*.js',
        'tests/router/**/*.js',
-       'tests/panelbar/*.js'
+       'tests/panelbar/*.js',
+       'tests/tabstrip/**/*.js',
     ],
 
     passedTests = grunt.option('tests');
