@@ -2104,8 +2104,21 @@ function pad(number, digits, end) {
             }
 
             return element;
+        },
+
+        disable: function() {
+            this.promise = this.promiseShim;
+            this.transitionPromise = this.transitionPromiseShim;
+        },
+
+        enable: function() {
+            this.promise = this.animatedPromise;
+            this.transitionPromise = this.animatedTransitionPromise;
         }
     });
+
+    effects.promiseShim = effects.promise;
+    effects.transitionPromiseShim = effects.transitionPromise;
 
     function prepareAnimationOptions(options, duration, reverse, complete) {
         if (typeof options === STRING) {
