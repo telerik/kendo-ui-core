@@ -127,7 +127,7 @@ module.exports = function(grunt) {
                     ].concat(tests),
                     exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.aspnetmvc.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js', 'src/*editor*', 'src/*dataviz*', 'src/*diagram*' ],
 
-                    reporters: ['progress' ],
+                    reporters: ['progress', 'growl' ],
 
                     port: 9876,
 

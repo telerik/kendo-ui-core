@@ -22,6 +22,7 @@
 
        "qunit": "*",
        "karma": "0.10.5",
-       "karma-qunit": "*"
+       "karma-qunit": "*",
+       "karma-growl-reporter": "~0.1"
    }
 }
