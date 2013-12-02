@@ -32,7 +32,8 @@ module.exports = function(grunt) {
        'tests/progressbar/*.js',
        'tests/popup/*.js',
        'tests/selectable/*.js',
-       'tests/listview/*.js'
+       'tests/listview/*.js',
+       'tests/download-builder/*.js',
        //'tests/treeview/*.js'
     ],
 
@@ -148,8 +149,32 @@ module.exports = function(grunt) {
                         { pattern: 'demos/mvc/App_Data/*json', included: false },
                         'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
                         'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
+
+                        'src/kendo.dataviz.core.js',
+                        'src/kendo.diagram.utils.js',
+                        'src/kendo.dataviz.canvas.js',
+                        'src/kendo.dataviz.themes.js',
+                        'src/kendo.dataviz.svg.js',
+                        'src/kendo.dataviz.vml.js',
+                        'src/kendo.diagram.math.js',
+                        'src/kendo.dataviz.barcode.js',
+                        'src/kendo.dataviz.qrcode.js',
+                        'src/kendo.dataviz.gauge.js',
+                        'src/kendo.diagram.svg.js',
+                        'src/kendo.dataviz.chart.js',
+                        'src/kendo.dataviz.sparkline.js',
+                        'src/kendo.dataviz.chart.polar.js',
+                        'src/kendo.dataviz.chart.funnel.js',
+                        'src/kendo.dataviz.stock.js',
+                        'src/kendo.diagram.services.js',
+                        'src/kendo.diagram.dom.js',
+                        { pattern: 'src/kendo.editor.js', included: false }, // download builder needs this
+                        'src/kendo.aspnetmvc.js',
+
+                        'download-builder/scripts/script-resolver.js',
+                        { pattern: 'download-builder/config/kendo-config.json', included: false },
                     ].concat(tests),
-                    exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.aspnetmvc.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js', 'src/*editor*', 'src/*dataviz*', 'src/*diagram*' ],
+                    exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js' ],
 
                     reporters: ['progress', 'osx' ],
 
