@@ -10,13 +10,13 @@
 
          var keys = kendo.keys;
 
-        $.fn.press = function(key) {
-            return this.trigger({ type: "keydown", keyCode: key } );
-        };
-
 
     module("Menu / Keyboard navigation", {
         setup: function () {
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keydown", keyCode: key } );
+            };
+
             QUnit.fixture.html(__html__['tests/menu/keyboard-fixture.html']);
             $("#Menu1").kendoMenu({ animation: false });
             menu = getMenu();

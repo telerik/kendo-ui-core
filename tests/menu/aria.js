@@ -6,11 +6,12 @@
         return menu;
     }
 
-    $.fn.press = function(key) {
-        return this.trigger({ type: "keydown", keyCode: key } );
-    };
-
     module("ARIA support", {
+        setup: function() {
+            $.fn.press = function(key) {
+                return this.trigger({ type: "keydown", keyCode: key } );
+            };
+        },
         teardown: function () {
             $("ul[data-role=menu]").remove();
         }
