@@ -1,4 +1,6 @@
 (function() {
+    var createTreeView = TreeViewHelpers.fromOptions;
+
     module("templates", TreeViewHelpers.basicModule);
 
     test("compiled item template", function() {
@@ -78,4 +80,4 @@
 
         equal(treeview.find(".k-item:visible").length, 2);
     });
-});
+})();

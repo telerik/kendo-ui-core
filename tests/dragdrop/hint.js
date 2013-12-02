@@ -5,7 +5,7 @@
 
     module("kendo Draggable", {
         setup: function() {
-            span = $("<span/>").appendTo(document.body);
+            span = $("<span/>").appendTo(QUnit.fixture);
             hint = span.clone();
         },
 

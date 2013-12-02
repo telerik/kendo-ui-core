@@ -1,12 +1,20 @@
 (function() {
-    module("enhancing DOM", TreeViewHelpers.basicModule);
+    module("enhancing DOM", {
+        setup: function() {
+            kendo.ns = "kendo-";
+        },
+        teardown: function() {
+            kendo.ns = "";
+            TreeViewHelpers.destroy();
+        }
+    });
 
-    function treeviewFromHtml(html) {
-        return $(html).appendTo(QUnit.fixture).kendoTreeView().parent();
+    function fromHtml(html) {
+        return TreeViewHelpers.fromHtml(html).parent();
     }
 
     test("basic classes", function() {
-        var element = treeviewFromHtml("<ul><li>item</li></ul>");
+        var element = fromHtml("<ul><li>item</li></ul>");
 
         ok(element.is("div"));
         ok(element.is(".k-widget.k-treeview"));
@@ -15,7 +23,7 @@
     });
 
     test("first level group sets lines", function() {
-        var element = treeviewFromHtml("<ul><li>item<ul><li>subitem</li></ul></li></ul>");
+        var element = fromHtml("<ul><li>item<ul><li>subitem</li></ul></li></ul>");
 
         ok(element.find("ul:first").is(".k-treeview-lines"));
         ok(element.find("ul:last").is(":not(.k-treeview-lines)"));
@@ -23,13 +31,13 @@
     });
 
     test("collapsed groups", function() {
-        var element = treeviewFromHtml("<ul><li data-kendo-expanded='false'>item<ul><li>subitem</li></ul></li></ul>");
+        var element = fromHtml("<ul><li data-kendo-expanded='false'>item<ul><li>subitem</li></ul></li></ul>");
 
         equal(element.find("ul:last").css("display"), "none");
     });
 
     test("node wrappers", function() {
-        var element = treeviewFromHtml("<ul><li>item</li></ul>"),
+        var element = fromHtml("<ul><li>item</li></ul>"),
             outerWrapper = element.find("li"),
             wrapper = element.find("div:first");
 
@@ -42,7 +50,7 @@
     });
 
     test("moves arbitrary content in the text wrapper", function() {
-        var element = treeviewFromHtml("<ul><li>item<span class='status'></span></li></ul>"),
+        var element = fromHtml("<ul><li>item<span class='status'></span></li></ul>"),
             wrapper = element.find("div:first");
 
         equal(wrapper.find("span.k-in").text(), "item");
@@ -51,7 +59,7 @@
     });
 
     test("does not nest wrapper elements", function() {
-        var element = treeviewFromHtml("<ul><li><div class='k-bot'><span class='k-in'>text</span></div></li></ul>"),
+        var element = fromHtml("<ul><li><div class='k-bot'><span class='k-in'>text</span></div></li></ul>"),
             wrapper = element.find("div:first");
 
         equal(element.find("div.k-bot").length, 1);
@@ -59,7 +67,7 @@
     });
 
     test("creates toggle buttons", function() {
-        var element = treeviewFromHtml("<ul><li data-kendo-expanded='true'>foo<ul><li>bar</li></ul></li></ul>"),
+        var element = fromHtml("<ul><li data-kendo-expanded='true'>foo<ul><li>bar</li></ul></li></ul>"),
             wrapper = element.find("div:first");
 
         equal(wrapper.find("span.k-icon.k-minus").length, 1);
@@ -67,13 +75,13 @@
     });
 
     test("extends link lists", function() {
-        var element = treeviewFromHtml("<ul><li><a href='#foo'>foo</a></li></ul>");
+        var element = fromHtml("<ul><li><a href='#foo'>foo</a></li></ul>");
 
         equal(element.find("a.k-in").length, 1);
     });
 
     test("extends link lists with sprites", function() {
-        var element = treeviewFromHtml("<ul><li><span class='k-sprite foo' /><a href='#foo'>foo</a></li></ul>");
+        var element = fromHtml("<ul><li><span class='k-sprite foo' /><a href='#foo'>foo</a></li></ul>");
 
         var kin = element.find("a.k-in");
         var sprite = kin.find(".k-sprite");
@@ -83,7 +91,7 @@
     });
 
     test("extends lists with sprites", function() {
-        var element = treeviewFromHtml("<ul><li><span class='k-sprite foo' />foo</li></ul>");
+        var element = fromHtml("<ul><li><span class='k-sprite foo' />foo</li></ul>");
 
         var kin = element.find("span.k-in");
         var sprite = kin.find(".k-sprite");
@@ -92,12 +100,17 @@
         equal(sprite[0], kin[0].firstChild);
     });
 
+    var treeview;
     var moduleOptions = {
-            setup: function() {
-                TreeViewHelpers.fromHtml("<div />");
-            },
-            teardown: TreeViewHelpers.destroy
-        };
+        setup: function() {
+            kendo.ns = "kendo-";
+            treeview = $("<div />").appendTo(QUnit.fixture);
+        },
+        teardown: function() {
+            kendo.ns = "";
+            TreeViewHelpers.destroy();
+        }
+    };
 
     module("groups", moduleOptions);
 
@@ -555,4 +568,4 @@
 
         ok(dom.find(".k-checkbox").next().is(".k-in"));
     });
-});
+})();

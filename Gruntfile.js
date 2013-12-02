@@ -35,7 +35,7 @@ module.exports = function(grunt) {
        'tests/listview/*.js',
        'tests/download-builder/*.js',
        'tests/editable/*.js',
-       //'tests/treeview/*.js'
+       'tests/treeview/*.js'
     ],
 
     passedTests = grunt.option('tests');

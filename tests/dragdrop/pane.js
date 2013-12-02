@@ -7,7 +7,7 @@
 
     module("pane dimensions", {
         setup: function() {
-            fixture = $("<div style='top:0; position: absolute; left: 0;' />").appendTo(document.body);
+            fixture = $("<div style='top:0; position: absolute; left: 0;' />").appendTo(QUnit.fixture);
         },
         teardown: function() {
             fixture.remove();
@@ -48,7 +48,7 @@
     module("pane", {
         setup: function() {
             kendo.support.touch = true;
-            fixture = $("<div style='top:0; position: absolute; left: 0;' />").appendTo(document.body);
+            fixture = $("<div style='top:0; position: absolute; left: 0;' />").appendTo(QUnit.fixture);
             fixture.append('<div style="width:200px; height: 200px;"><div style="width:400px; height: 400px;">Element</div></div>');
             var container = fixture.children().first();
 
@@ -73,6 +73,7 @@
         },
 
         teardown: function() {
+            kendo.support.touch = false;
             fixture.remove();
         }
     });
