@@ -19,6 +19,7 @@ module.exports = function(grunt) {
        'tests/demos/*.js',
        'tests/breadcrumbs/*.js',
        'tests/button/*.js',
+       'tests/colorpicker/*.js',
        'tests/selectable/*.js'
     ],
 
