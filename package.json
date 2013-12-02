@@ -20,8 +20,10 @@
        "grunt-contrib-jshint": "~0.7.2",
        "grunt-karma": "*",
 
-       "qunit": "*",
+       "qunitjs": "*",
        "karma": "0.10.5",
+       "karma-chrome-launcher": "~0.1",
+       "karma-html2js-preprocessor": "~0.1",
        "karma-qunit": "*",
        "karma-osx-reporter": "0.0.4"
    }
