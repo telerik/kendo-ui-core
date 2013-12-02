@@ -23,6 +23,6 @@
        "qunit": "*",
        "karma": "0.10.5",
        "karma-qunit": "*",
-       "karma-growl-reporter": "~0.1"
+       "karma-osx-reporter": "0.0.4"
    }
 }
