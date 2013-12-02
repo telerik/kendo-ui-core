@@ -1,21 +1,48 @@
-var treeview, treeviewObject;
+(function() {
+    var defaultAnimation;
+    var TreeView = kendo.ui.TreeView;
 
-function createTreeView(treeviewOptions, options) {
-    var container = document.body;
+    window.TreeViewHelpers = {
+        fromOptions: function (treeviewOptions, options) {
+            var container = QUnit.fixture;
 
-    options = options || {};
+            options = options || {};
 
-    if (options.rtl) {
-        container = $("<div class='k-rtl' />").appendTo(container);
-    }
+            if (options.rtl) {
+                container = $("<div class='k-rtl' />").appendTo(container);
+            }
 
-    treeview = $("<div />").appendTo(container).kendoTreeView(treeviewOptions);
-    treeviewObject = treeview.data("kendoTreeView");
+            window.treeview = $("<div />").appendTo(container).kendoTreeView(treeviewOptions);
+            window.treeviewObject = treeview.data("kendoTreeView");
 
-    return treeview;
-}
+            return window.treeview;
+        },
 
-function cleanArtifacts() {
-    $(".k-treeview,.k-drag-clue,.k-rtl").remove();
-}
+        fromHtml: function (html, options) {
+            window.treeview = $(html).appendTo(QUnit.fixture).kendoTreeView(options);
+            window.treeviewObject = treeview.data("kendoTreeView");
 
+            return window.treeview;
+        },
+
+        destroy: function () {
+            $(".k-treeview,.k-item,.k-drag-clue,.k-rtl").remove();
+            delete window.treeview;
+            delete window.treeviewObject;
+        }
+    };
+
+    TreeViewHelpers.basicModule = {
+        teardown: TreeViewHelpers.destroy
+    };
+
+    TreeViewHelpers.noAnimationMoudle = {
+        setup: function() {
+            kendo.effects.disable();
+        },
+        teardown: function() {
+            kendo.effects.enable();
+            TreeViewHelpers.destroy();
+        }
+    };
+})();
