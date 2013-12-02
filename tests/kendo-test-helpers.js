@@ -111,7 +111,7 @@ $(function() {
 })
 
 QUnit.testDone(function( details ) {
-    QUnit.fixture.empty().attr("class", "").attr("css", "");
+    QUnit.fixture.empty().attr("class", "").attr("style", "").css("height", "100px");
 });
 
 QUnit.brazilTimezoneTest = brazilTimezoneTest;

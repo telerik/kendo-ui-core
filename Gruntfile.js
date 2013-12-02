@@ -39,6 +39,7 @@ module.exports = function(grunt) {
        'tests/pager/*.js',
        'tests/resizable/*.js',
        'tests/searchbox/*.js',
+       'tests/sortable/*.js',
        //'tests/treeview/*.js'
     ],
 

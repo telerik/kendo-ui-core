@@ -1,8 +1,6 @@
 (function() {
     var Popup = kendo.ui.Popup, div, anchor, popup;
 
-    QUnit.config.reorder = false;
-
     function round100(value) {
         return Math.round(value);
     }
@@ -28,7 +26,6 @@
         equal(div.parent().css("zIndex"), "3");
     });
 
-
     asyncTest("mousedown outside the element should close it", function(){
         div.kendoPopup( {
             anchor: anchor,
@@ -42,7 +39,6 @@
 
         $(document.documentElement).mousedown();
     });
-
 
     test("mousedown inside toggleTarget should not close the popup", function() {
         var closed = false;
