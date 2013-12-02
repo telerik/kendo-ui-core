@@ -166,7 +166,7 @@ kendo_module({
                 editorNS = kendo.ui.editor,
                 toolbarContainer,
                 toolbarOptions,
-                type = editorNS.Dom.name(element);
+                type;
 
             /* suppress initialization in mobile webkit devices (w/o proper contenteditable support) */
             if (!supportedBrowser) {
@@ -175,9 +175,12 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
+
             that.options = deepExtend({}, that.options, options);
 
             element = that.element;
+
+            type = editorNS.Dom.name(element[0]);
 
             element.closest("form").on("submit" + NS, function () {
                 that.update();

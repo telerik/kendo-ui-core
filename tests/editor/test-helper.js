@@ -1,8 +1,21 @@
-var impl,
-    editor;
-
 function getEditor(selector) {
     return $(selector || '#Editor1').data("kendoEditor");
+}
+
+function editor_module(name, options, editorOptions) {
+    QUnit.moduleStart(function(details) {
+        if (details.name == name) {
+            $('<textarea id="editor-fixture"></textarea>').appendTo("body").kendoEditor(editorOptions);
+        }
+    });
+
+    QUnit.moduleDone(function(details) {
+        if (details.name == name) {
+            $("#editor-fixture").kendoEditor("destroy").closest(".k-editor").remove();
+        }
+    });
+
+    module(name, options);
 }
 
 function createRangeFromText(editor, html) {
@@ -35,7 +48,7 @@ function withMock(context, method, mock, callback) {
 }
 
 function propertyFrom(className, property) {
-    var element = $("<span class='" + className + "' />").appendTo("body");
+    var element = $("<span class='" + className + "' />").appendTo(QUnit.fixture);
     var result = element.css(property);
 
     element.remove();
