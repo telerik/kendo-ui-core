@@ -1,7 +1,4 @@
 (function() {
-    var defaultAnimation;
-    var TreeView = kendo.ui.TreeView;
-
     window.TreeViewHelpers = {
         fromOptions: function (treeviewOptions, options) {
             var container = QUnit.fixture;
@@ -28,20 +25,22 @@
             $(".k-treeview,.k-item,.k-drag-clue,.k-rtl").remove();
             delete window.treeview;
             delete window.treeviewObject;
-        }
-    };
-
-    TreeViewHelpers.basicModule = {
-        teardown: TreeViewHelpers.destroy
-    };
-
-    TreeViewHelpers.noAnimationMoudle = {
-        setup: function() {
-            kendo.effects.disable();
         },
-        teardown: function() {
-            kendo.effects.enable();
-            TreeViewHelpers.destroy();
+
+        basicModule: {
+            teardown: function() {
+                TreeViewHelpers.destroy();
+            }
+        },
+
+        noAnimationMoudle: {
+            setup: function() {
+                kendo.effects.disable();
+            },
+            teardown: function() {
+                kendo.effects.enable();
+                TreeViewHelpers.destroy();
+            }
         }
     };
 })();
