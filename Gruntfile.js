@@ -42,8 +42,8 @@ module.exports = function(grunt) {
        'tests/calendar/*.js',
        'tests/datepicker/*.js',
        'tests/diagram/*.js',
-       'tests/splitter/*.js'
-       //'tests/treeview/*.js'
+       'tests/splitter/*.js',
+       'tests/validation/*.js'
     ],
 
     passedTests = grunt.option('tests');
@@ -118,6 +118,7 @@ module.exports = function(grunt) {
                         "src/kendo.numerictextbox.js",
                         "src/kendo.binder.js",
                         "src/kendo.validator.js",
+                        'src/aspnetmvc/kendo.validator.aspnetmvc.js',
                         "src/kendo.editable.js",
                         "src/kendo.filtermenu.js",
                         "src/kendo.groupable.js",
