@@ -1315,20 +1315,20 @@ ul.k-menu-vertical .k-separator,
     background-color: transparent; /*remove gray background*/
 }
 
-.k-grid-header .k-header .k-link
+.k-grid-header .k-header > .k-link
 {
     display: block;
     min-height: 18px;
     line-height: 18px; /* due to sorting icons*/
     margin: -.5em -.6em -.4em -.6em;
     padding: .5em .6em .4em .6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .k-grid-header .k-with-icon .k-link
 {
     margin-right: 1.3em;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .k-grid-header .k-header .k-icon
