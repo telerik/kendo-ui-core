@@ -5,6 +5,7 @@
 
     module("Selection tests", {
         setup: function () {
+            QUnit.fixture.html('<div id=canvas />');
             $("#canvas").kendoDiagram();
 
             d = $("#canvas").getKendoDiagram();
@@ -89,6 +90,7 @@
 
     module("Tooling tests. Ensure the tools are activated correctly.", {
         setup: function () {
+            QUnit.fixture.html('<div id=canvas />');
             $("#canvas").kendoDiagram();
 
             d = $("#canvas").getKendoDiagram();
@@ -135,6 +137,7 @@
 
     module("Hitesting tests", {
         setup: function () {
+            QUnit.fixture.html('<div id=canvas />');
             $("#canvas").kendoDiagram();
 
             d = $("#canvas").getKendoDiagram();
@@ -148,6 +151,7 @@
     /*-----------Undoredo tests------------------------------------*/
     QUnit.module("UndoRedo tests", {
         setup: function () {
+            QUnit.fixture.html('<div id=canvas />');
             $("#canvas").kendoDiagram();
 
             d = $("#canvas").getKendoDiagram();

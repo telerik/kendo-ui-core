@@ -42,6 +42,7 @@ module.exports = function(grunt) {
        'tests/sortable/*.js',
        'tests/tooltip/*.js',
        'tests/calendar/*.js',
+       'tests/diagram/*.js',
        //'tests/treeview/*.js'
     ],
 
@@ -173,12 +174,15 @@ module.exports = function(grunt) {
                         'src/kendo.dataviz.chart.funnel.js',
                         'src/kendo.dataviz.stock.js',
                         'src/kendo.diagram.services.js',
+                        'src/kendo.diagram.extensions.js',
                         'src/kendo.diagram.dom.js',
+                        'src/kendo.diagram.layout.js',
                         { pattern: 'src/kendo.editor.js', included: false }, // download builder needs this
                         { pattern: 'src/kendo.aspnetmvc.js', included: false }, // download builder needs this
 
                         'download-builder/scripts/script-resolver.js',
                         { pattern: 'download-builder/config/kendo-config.json', included: false },
+                        'tests/diagram/common.js'
                     ].concat(tests),
                     exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js' ],
 
