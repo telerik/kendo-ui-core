@@ -45,21 +45,9 @@
                 center: [51.5, -0.09],
                 zoom: 7,
                 layers: [{
-                    type: "bing",
-                    key: "AqaPuZWytKRUA8Nm5nqvXHWGL8BDCXvK8onCl2PkC581Zp3T_fYAQBiwIphJbRAK",
-                    attribution: "rrrr",
-                    subdomains: "abc"
-                }],
-                markers: [{
-                    location: [51.5, -0.09],
-                    text: "Marker with popup",
-                    open: true // ?
-                }],
-                controls: {
-                    attribution: {
-                        position: "topRight"
-                    }
-                }
+                    type: "tile",
+                    urlTemplate: "http://#= s #.tile2.opencyclemap.org/transport/#= z #/#= x #/#= y #.png"
+                }]
             });
         </script>
     </body>
