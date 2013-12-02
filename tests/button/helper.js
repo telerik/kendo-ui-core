@@ -5,8 +5,8 @@ function getButton(contents) {
     if (typeof contents == "undefined") {
         contents = "text";
     }
-                
-    button = $("<button type='button'>" + contents + "</button>").appendTo(document.body);
+
+    button = $("<button type='button'>" + contents + "</button>").appendTo(QUnit.fixture);
 
     return button;
 }
@@ -15,8 +15,8 @@ function getSpanButton(contents) {
     if (typeof contents == "undefined") {
         contents = "text";
     }
-                
-    button = $("<span>" + contents + "</span>").appendTo(document.body);
+
+    button = $("<span>" + contents + "</span>").appendTo(QUnit.fixture);
 
     return button;
 }
@@ -29,7 +29,7 @@ function getButtonContainer(contents) {
     buttonContainer = $("<div class='buttonContainer'>" +
         "<button type='button'>" + contents + "</button>" +
         "<button type='button'>" + contents + "</button>" +
-    "</div>").appendTo(document.body);
+    "</div>").appendTo(QUnit.fixture);
 
     return buttonContainer;
 }

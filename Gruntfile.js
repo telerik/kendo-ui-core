@@ -18,6 +18,7 @@ module.exports = function(grunt) {
        'tests/tabstrip/**/*.js',
        'tests/demos/*.js',
        'tests/breadcrumbs/*.js',
+       'tests/button/*.js',
     ],
 
     passedTests = grunt.option('tests');
