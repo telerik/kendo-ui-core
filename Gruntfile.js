@@ -6,6 +6,7 @@ module.exports = function(grunt) {
         { pattern: 'tests/**/*-fixture.html' },
         { pattern: 'tests/menu/**/*png', included: false },
         { pattern: 'tests/menu/**/*gif', included: false },
+       'tests/model/**/*.js',
        'tests/data/**/*.js',
        'tests/autocomplete/*.js',
        'tests/grid/**/*.js',
