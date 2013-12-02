@@ -3,9 +3,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
     var tests = [
-        { pattern: 'tests/**/*-fixture.html' },
-        { pattern: 'tests/menu/**/*png', included: false },
-        { pattern: 'tests/menu/**/*gif', included: false },
        'tests/autocomplete/*.js',
        'tests/grid/**/*.js',
        'tests/core/**/*.js',
@@ -13,7 +10,7 @@ module.exports = function(grunt) {
        'tests/mobile/**/*.js',
        'tests/userevents/**/*.js',
        'tests/mvvm/*.js',
-       // 'tests/menu/*js',
+       'tests/menu/**/*.js',
        'tests/dragdrop/*.js',
        'tests/view/*.js',
        'tests/router/**/*.js',
@@ -38,6 +35,9 @@ module.exports = function(grunt) {
                     frameworks: ['qunit'],
                     files: [
                         { pattern: 'styles/**/*.*', watched: true, included: false },
+                        { pattern: 'tests/menu/**/*png', included: false },
+                        { pattern: 'tests/menu/**/*gif', included: false },
+                        { pattern: 'tests/**/*-fixture.html' },
                         'src/jquery.js',
                         'tests/jquery.mockjax.js',
 
@@ -141,7 +141,7 @@ module.exports = function(grunt) {
 
                     captureTimeout: 60000,
 
-                    singleRun: false
+                    singleRun: true
                 }
             }
         },
