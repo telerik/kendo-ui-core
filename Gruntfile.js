@@ -28,6 +28,7 @@ module.exports = function(grunt) {
        'tests/columnmenu/*.js',
        'tests/filtermenu/*.js',
        'tests/groupable/*.js',
+       'tests/imagebrowser/*.js',
        'tests/selectable/*.js'
        //'tests/treeview/*.js'
     ],
