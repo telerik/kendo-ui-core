@@ -40,6 +40,7 @@ module.exports = function(grunt) {
        'tests/resizable/*.js',
        'tests/searchbox/*.js',
        'tests/sortable/*.js',
+       'tests/tooltip/*.js',
        //'tests/treeview/*.js'
     ],
 
@@ -60,8 +61,6 @@ module.exports = function(grunt) {
                     frameworks: ['qunit'],
                     files: [
                         { pattern: 'styles/**/*.*', watched: true, included: false },
-                        { pattern: 'tests/menu/**/*png', included: false },
-                        { pattern: 'tests/menu/**/*gif', included: false },
                         { pattern: 'tests/**/*-fixture.html' },
                         'src/jquery.js',
                         'tests/jquery.mockjax.js',
