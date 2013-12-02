@@ -5,6 +5,9 @@ var editor;
 editor_module("editor exec", {
    setup: function() {
        editor = $("#editor-fixture").data("kendoEditor");
+   },
+   teardown: function() {
+       $(".k-window").remove();
    }
 });
 

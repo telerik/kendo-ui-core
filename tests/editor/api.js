@@ -9,6 +9,7 @@ module("editor api", {
     },
     teardown: function() {
         kendo.destroy(QUnit.fixture);
+        $(".k-window").remove();
     }
 });
 
