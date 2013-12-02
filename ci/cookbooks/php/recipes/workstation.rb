@@ -13,5 +13,11 @@ template "/etc/php5/fpm/pool.d/www.conf" do
 end
 
 service "php5-fpm" do
+    case node["platform"]
+    when "ubuntu"
+        if node["platform_version"].to_f >= 13.04
+            provider Chef::Provider::Service::Upstart
+        end
+    end
     action :restart
 end
