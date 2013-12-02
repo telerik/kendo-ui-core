@@ -2,7 +2,7 @@
     var createTreeView = TreeViewHelpers.fromOptions;
     var treeFromHtml = TreeViewHelpers.fromHtml;
 
-    module("api", TreeViewHelpers.basicModule);
+    module("API", TreeViewHelpers.basicModule);
 
     test("enable(node, false) disables node", function() {
         createTreeView([
@@ -89,7 +89,7 @@
             { text: "foo" }
         ]);
 
-        $("<div class='k-item' />").appendTo(document.body);
+        $("<div class='k-item' />").appendTo(QUnit.fixture);
 
         treeviewObject.select(".k-item:last");
 
@@ -622,11 +622,11 @@
             ] }
         ]);
 
-        var arbitraryItem = $("<div class='k-item' />").appendTo(document.body);
+        var arbitraryItem = $("<div class='k-item' />").appendTo(QUnit.fixture);
 
         treeviewObject.remove(".k-item:last");
 
-        equal(arbitraryItem.closest("body").length, 1);
+        ok($.contains(QUnit.fixture[0], arbitraryItem[0]));
     });
 
     test("expand() with selector string", function() {
@@ -838,7 +838,7 @@
             { text: "foo" }
         ]);
 
-        var wrap = $("<div class='k-item' />").appendTo("body").append(treeview);
+        var wrap = $("<div class='k-item' />").appendTo(QUnit.fixture).append(treeview);
 
         equal(treeviewObject.parent(treeview.find(".k-item")).length, 0);
     });

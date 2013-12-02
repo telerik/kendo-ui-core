@@ -360,7 +360,7 @@
     });
 
     test("checking root node items does not propagate state outside of treeview", function() {
-        var dom = $('<div class="k-item"><div><input type="checkbox" /></div><div class="t"></div></div>').appendTo("body");
+        var dom = $('<div class="k-item"><div><input type="checkbox" /></div><div class="t"></div></div>').appendTo(QUnit.fixture);
 
         var tree = dom.find(".t").kendoTreeView({
             checkboxes: {

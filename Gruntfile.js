@@ -4,7 +4,6 @@ module.exports = function(grunt) {
 
     var tests = [
         { pattern: 'tests/**/*-fixture.html' },
-        { pattern: 'tests/**/test-helper.js' },
         { pattern: 'tests/menu/**/*png', included: false },
         { pattern: 'tests/menu/**/*gif', included: false },
        'tests/data/**/*.js',
@@ -142,6 +141,7 @@ module.exports = function(grunt) {
 
                         'tests/qunit/addons/close-enough/qunit-close-enough.js',
                         'tests/kendo-test-helpers.js',
+                        'tests/**/test-helper.js',
                         'demos/mvc/content/shared/js/examples.js',
                         'demos/mvc/content/shared/js/less.js',
                         { pattern: 'demos/mvc/App_Data/*json', included: false },
@@ -172,6 +172,7 @@ module.exports = function(grunt) {
             'src/editor/*.js',
             'src/dataviz/**/*.js',
             'tests/map/layers/helpers.js',
+            'tests/**/test-helper.js',
             'demos/mvc/content/shared/js/examples.js',
             'demos/mvc/content/shared/js/console.js',
             'themebuilder/bootstrap.js',

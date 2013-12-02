@@ -1,6 +1,5 @@
 (function() {
     module("MVVM", TreeViewHelpers.basicModule);
-    /*
 
     test("initializes a treeview when data role is treeview", function() {
         var dom = $('<ul data-role="treeview"></ul>');
@@ -53,13 +52,15 @@
     });
 
     test("event is raised if attached as option", 1, function() {
-        var dom = $('<ul data-role="treeview" data-select="selectHandler"></ul>');
+        var dom = $('<ul data-role="treeview" data-bind="{ events: { select: selectHandler } }"></ul>');
 
-        kendo.bind(dom);
+        kendo.bind(dom, {
+            selectHandler: function() {
+                ok(true);
+            }
+        });
 
-        window.selectHandler = function() { ok(true); };
         dom.data("kendoTreeView").trigger("select");
-        delete window.selectHandler;
     });
 
     test("binding visible to true shows the treeview", function() {
@@ -118,12 +119,15 @@
         equal(dom.text(), "baz");
     });
 
+    /*
     test("template binding", function() {
 
         var dom = $(
-            '<script id="fooTemplate" type="text/x-kendo-template">#:item.text# foo</script>' +
-            '<div data-role="treview" data-template="fooTemplate" data-bind="source: source"></div>'
-        );
+            '<div>' +
+                '<script id="fooTemplate" type="text/x-kendo-template">#: item.text # foo</script>' +
+                '<div data-role="treview" data-template="fooTemplate" data-bind="source: source"></div>' +
+            '</div>'
+        ).appendTo(QUnit.fixture);
 
         var viewModel = kendo.observable({
             source: [
@@ -133,8 +137,9 @@
 
         kendo.bind(dom, viewModel);
 
-        equal(dom.text(), "bar foo");
+        equal(dom.find(".k-item").text(), "bar foo");
     });
+    */
 
     test("set multi-level dataTextField through data attribute", function() {
         var dom = $('<div data-text-field="[\'foo\',\'bar\']" data-bind="source: src" data-role="treeview" />');
@@ -360,5 +365,4 @@
             ok(dom.data("kendoTreeView").options.checkboxes);
         });
     })();
-    */
 })();

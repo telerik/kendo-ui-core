@@ -251,10 +251,10 @@
     });
 
     test("moving nodes between treeviews", function() {
-        var tree1 = $("<div />").appendTo("body").kendoTreeView([
+        var tree1 = $("<div />").appendTo(QUnit.fixture).kendoTreeView([
                 { text: "foo" }
             ]),
-            tree2 = $("<div />").appendTo("body").kendoTreeView([
+            tree2 = $("<div />").appendTo(QUnit.fixture).kendoTreeView([
                 { text: "bar" }
             ]);
 
@@ -296,10 +296,10 @@
     });
 
     test("Moving root level nodes between treeviews", function() {
-        var tree1 = $("<div />").appendTo("body").kendoTreeView([
+        var tree1 = $("<div />").appendTo(QUnit.fixture).kendoTreeView([
                 { text: "foo" }
             ]),
-            tree2 = $("<div />").appendTo("body").kendoTreeView([
+            tree2 = $("<div />").appendTo(QUnit.fixture).kendoTreeView([
                 { text: "bar" }
             ]);
 

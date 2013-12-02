@@ -1098,7 +1098,7 @@
     });
 
     test("focusing node set aria-activedescendant to the wrapper", function() {
-        treeview = $("<div id='treeview' />").appendTo(document.body)
+        var treeview = $("<div id='treeview' />").appendTo(QUnit.fixture)
             .kendoTreeView({
                 dataSource: [
                     { text: "foo" },
@@ -1115,7 +1115,7 @@
     });
 
     test("focusing node sets its id", function() {
-        treeview = $("<div id='treeview' />").appendTo(document.body)
+        var treeview = $("<div id='treeview' />").appendTo(QUnit.fixture)
             .kendoTreeView({
                 dataSource: [
                     { text: "foo" },
@@ -1131,7 +1131,7 @@
     });
 
     test("focusing node does not set its id if treeview does not have id", function() {
-        treeview = $("<div />").appendTo(document.body)
+        var treeview = $("<div />").appendTo(QUnit.fixture)
             .kendoTreeView({
                 dataSource: [
                     { text: "foo" },
@@ -1147,7 +1147,7 @@
     });
 
     test("aria-activedescendant is not set if id is not set", function() {
-        treeview = $("<div/>").appendTo(document.body)
+        var treeview = $("<div/>").appendTo(QUnit.fixture)
             .kendoTreeView({
                 dataSource: [
                     { text: "foo" },

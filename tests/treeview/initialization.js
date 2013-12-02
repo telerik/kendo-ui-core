@@ -3,6 +3,8 @@
     var createTreeView = TreeViewHelpers.fromOptions;
     var treeFromHtml = TreeViewHelpers.fromHtml;
 
+    module("initialization", TreeViewHelpers.basicModule);
+
     test("adds necessary classes to div", function() {
         ok(treeFromHtml("<div />").is(".k-widget.k-treeview"));
     });
@@ -12,7 +14,7 @@
     });
 
     test("allows init from non-div elements", function() {
-        ok($.contains(document.body, treeFromHtml("<section id='tree' />")[0]));
+        ok($.contains(QUnit.fixture[0], treeFromHtml("<section id='tree' />")[0]));
     });
 
     test("attaches treeview object to ul", function() {
