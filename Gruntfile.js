@@ -40,8 +40,10 @@ module.exports = function(grunt) {
        'tests/sortable/*.js',
        'tests/tooltip/*.js',
        'tests/calendar/*.js',
+       'tests/datepicker/*.js',
        'tests/diagram/*.js',
        'tests/splitter/*.js'
+       //'tests/treeview/*.js'
     ],
 
     passedTests = grunt.option('tests');
