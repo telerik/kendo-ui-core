@@ -28,10 +28,10 @@ module.exports = function(grunt) {
        'tests/filtermenu/*.js',
        'tests/groupable/*.js',
        'tests/imagebrowser/*.js',
-       'tests/selectable/*.js',
        'tests/progressbar/*.js',
        'tests/popup/*.js',
-       'tests/selectable/*.js'
+       'tests/selectable/*.js',
+       'tests/listview/*.js'
        //'tests/treeview/*.js'
     ],
 
