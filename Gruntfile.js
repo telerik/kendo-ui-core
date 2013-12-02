@@ -16,7 +16,8 @@ module.exports = function(grunt) {
        'tests/router/**/*.js',
        'tests/panelbar/*.js',
        'tests/tabstrip/**/*.js',
-       'tests/demos/*.js'
+       'tests/demos/*.js',
+       'tests/breadcrumbs/*.js',
     ],
 
     passedTests = grunt.option('tests');
@@ -144,7 +145,7 @@ module.exports = function(grunt) {
 
                     captureTimeout: 60000,
 
-                    singleRun: true
+                    singleRun: false
                 }
             }
         },
