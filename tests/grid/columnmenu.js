@@ -2,16 +2,19 @@
    var Grid = kendo.ui.Grid,
         table,
         data = [{ foo: "foo", bar: "bar" }],
+        ns,
         DataSource = kendo.data.DataSource;
 
     module("grid column menu", {
         setup: function() {
+            ns = kendo.ns;
             kendo.ns = "";
             table = $("<table></table>").appendTo(QUnit.fixture);
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
             table.closest(".k-grid").remove();
+            kendo.ns = ns;
         }
     });
 

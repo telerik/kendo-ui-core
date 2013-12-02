@@ -1,7 +1,7 @@
 (function() {
 
     var Grid = kendo.ui.Grid,
-    DataSource = kendo.data.DataSource;
+        DataSource = kendo.data.DataSource;
 
     function table() {
         return QUnit.fixture[0].appendChild(document.createElement("table"));
@@ -15,6 +15,7 @@
         teardown: function() {
             kendo.destroy(QUnit.fixture);
             $("div.k-grid").remove();
+            kendo.ns = "";
         }
     });
 

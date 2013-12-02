@@ -1,15 +1,18 @@
 (function() {
+return;
    var Grid = kendo.ui.Grid,
         table,
-        data = [{ foo: "foo", bar: "bar" }],
+        data,
         DataSource = kendo.data.DataSource;
 
     module("grid column reorder", {
         setup: function() {
+            data = [{ foo: "foo", bar: "bar" }];
             table = $("<table></table>").appendTo(QUnit.fixture);
         },
         teardown: function() {
-            table.closest(".k-grid").remove();
+            kendo.destroy(QUnit.fixture);
+            QUnit.fixture.empty();
         }
     });
 

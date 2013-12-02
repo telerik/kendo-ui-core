@@ -10,6 +10,7 @@ module("kendo.ui.AutoComplete placeholder", {
     },
     teardown: function() {
         kendo.destroy(QUnit.fixture);
+        kendo.ns = "";
     }
 });
 

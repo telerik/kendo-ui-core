@@ -9,7 +9,7 @@ module.exports = function(grunt) {
        'tests/model/**/*.js',
        'tests/data/**/*.js',
        'tests/autocomplete/*.js',
-       'tests/grid/**/*.js',
+       'tests/grid/*.js',
        'tests/core/**/*.js',
        'tests/fx/*.js',
        'tests/mobile/**/*.js',
