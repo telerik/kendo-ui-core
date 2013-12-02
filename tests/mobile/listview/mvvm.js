@@ -1,265 +1,266 @@
-module('mobile listview mvvm', {
-    setup: function() {
-        $('#qunit-fixture').append('<script id="template" type="text/x-kendo-template"><strong>#:text#</strong></script> \
-            <script id="template-with-attributes" type="text/x-kendo-template"><strong data-bind="text:text"></strong></script> \
-            <script id="template-with-events" type="text/x-kendo-template"><strong data-bind="text: foo, events:{ click: rootHandler}"></strong></script> \
+(function() {
+    module('mobile listview mvvm', {
+        setup: function() {
+            $('#qunit-fixture').append('<script id="template" type="text/x-kendo-template"><strong>#:text#</strong></script> \
+                <script id="template-with-attributes" type="text/x-kendo-template"><strong data-bind="text:text"></strong></script> \
+                <script id="template-with-events" type="text/x-kendo-template"><strong data-bind="text: foo, events:{ click: rootHandler}"></strong></script> \
             <script id="template-with-links" type="text/x-kendo-template"><a data-bind="text: foo"></a></script>');
-    }
-});
-
-test("initializes a listview when data role is listview", function() {
-    var dom = $('<ul data-role="listview"/>');
-
-    kendo.bind(dom, {}, kendo.mobile.ui);
-
-    ok(dom.data("kendoMobileListView") instanceof kendo.mobile.ui.ListView);
-});
-
-test("initalizes data source", function() {
-    var dom = $('<ul data-role="listview" data-bind="source:items" />');
-
-    kendo.bind(dom, { items: ["foo", "bar"] }, kendo.mobile.ui );
-
-    equal(dom.data("kendoMobileListView").dataSource.view()[0], "foo");
-    equal(dom.data("kendoMobileListView").dataSource.view()[1], "bar");
-});
-
-test("binding listview initialized before binding", function() {
-    var dom = $('<ul data-bind="source:items" />');
-
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
-
-    dom.kendoMobileListView();
-
-    kendo.bind(dom, observable, kendo.mobile.ui );
-
-    equal(dom.data("kendoMobileListView").dataSource.at(0).text, "foo");
-});
-
-test("binding listview initialized after binding", function() {
-    var dom = $('<ul data-bind="source:items" />');
-
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
-
-    kendo.bind(dom, observable, kendo.mobile.ui);
-
-    dom.kendoMobileListView();
-
-    equal(dom.data("kendoMobileListView").dataSource.at(0).text, "foo");
-});
-
-test("binding template", function() {
-    var dom = $('<ul data-role="listview" data-template="template" data-bind="source:items" />');
-
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
-
-    kendo.bind(dom, observable, kendo.mobile.ui);
-
-    equal($.trim(dom.find("li:first").html()), "<strong>foo</strong>");
-});
-
-test("binding template containing binding attributes", function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:items" />');
-
-    var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
-
-    kendo.bind(dom, observable, kendo.mobile.ui);
-
-    equal($.trim(dom.find("li:first").html()), '<strong data-bind="text:text">foo</strong>');
-});
-
-test("assign to DataSource as ViewModel field", function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource" />');
-
-    var dataSource = new kendo.data.DataSource({
-        data: [{text:"foo"}, {text:"bar"}]
+        }
     });
 
-    var observable = kendo.observable({
-        dataSource: dataSource
+    test("initializes a listview when data role is listview", function() {
+        var dom = $('<ul data-role="listview"/>');
+
+        kendo.bind(dom, {}, kendo.mobile.ui);
+
+        ok(dom.data("kendoMobileListView") instanceof kendo.mobile.ui.ListView);
     });
 
-    kendo.bind(dom, observable, kendo.mobile.ui);
+    test("initalizes data source", function() {
+        var dom = $('<ul data-role="listview" data-bind="source:items" />');
 
-    var listView = dom.data("kendoMobileListView");
+        kendo.bind(dom, { items: ["foo", "bar"] }, kendo.mobile.ui );
 
-    strictEqual(listView.dataSource, dataSource);
-});
-
-test("binding visible to false hides the widget", function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource, visible:visible" />');
-
-    var observable = kendo.observable({
-        visible: false
+        equal(dom.data("kendoMobileListView").dataSource.view()[0], "foo");
+        equal(dom.data("kendoMobileListView").dataSource.view()[1], "bar");
     });
 
-    kendo.bind(dom, observable, kendo.mobile.ui);
+    test("binding listview initialized before binding", function() {
+        var dom = $('<ul data-bind="source:items" />');
 
-    ok(dom.data("kendoMobileListView").wrapper.css("display") == "none", "Display is 'none'");
-});
+        var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
 
-test("binding visible to true shows the widget", function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-attributes" style="display:none" data-bind="source:dataSource, visible:visible" />');
+        dom.kendoMobileListView();
 
-    var observable = kendo.observable({
-        visible: true
+        kendo.bind(dom, observable, kendo.mobile.ui );
+
+        equal(dom.data("kendoMobileListView").dataSource.at(0).text, "foo");
     });
 
-    kendo.bind(dom, observable, kendo.mobile.ui);
+    test("binding listview initialized after binding", function() {
+        var dom = $('<ul data-bind="source:items" />');
 
-    ok(dom.data("kendoMobileListView").wrapper.css("display") != "none", "Display is not 'none'");
-});
+        var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
 
-test("changing visible to false hides the widget", function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource, visible:visible" />');
+        kendo.bind(dom, observable, kendo.mobile.ui);
 
-    var observable = kendo.observable({
-        visible: true
+        dom.kendoMobileListView();
+
+        equal(dom.data("kendoMobileListView").dataSource.at(0).text, "foo");
     });
 
-    kendo.bind(dom, observable, kendo.mobile.ui);
-    observable.set("visible", false);
+    test("binding template", function() {
+        var dom = $('<ul data-role="listview" data-template="template" data-bind="source:items" />');
 
-    ok(dom.data("kendoMobileListView").wrapper.css("display") == "none", "Display is 'none'");
-});
+        var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
-test("changing visible to true shows the widget", function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource, visible:visible" />');
+        kendo.bind(dom, observable, kendo.mobile.ui);
 
-    var observable = kendo.observable({
-        visible: false
+        equal($.trim(dom.find("li:first").html()), "<strong>foo</strong>");
     });
 
-    kendo.bind(dom, observable, kendo.mobile.ui);
-    observable.set("visible", true);
+    test("binding template containing binding attributes", function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:items" />');
 
-    ok(dom.data("kendoMobileListView").wrapper.css("display") != "none", "Display is not 'none'");
-});
+        var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
-test("binding invisible to true hides the widget", function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource, invisible:invisible" />');
+        kendo.bind(dom, observable, kendo.mobile.ui);
 
-    var observable = kendo.observable({
-        invisible: true
+        equal($.trim(dom.find("li:first").html()), '<strong data-bind="text:text">foo</strong>');
     });
 
-    kendo.bind(dom, observable, kendo.mobile.ui);
+    test("assign to DataSource as ViewModel field", function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource" />');
 
-    ok(dom.data("kendoMobileListView").wrapper.css("display") == "none", "display is 'none'");
-});
+        var dataSource = new kendo.data.DataSource({
+            data: [{text:"foo"}, {text:"bar"}]
+        });
 
-test("binding invisible to false shows the widget", function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-attributes" style="display:none" data-bind="source:dataSource, invisible:invisible" />');
+        var observable = kendo.observable({
+            dataSource: dataSource
+        });
 
-    var observable = kendo.observable({
-        invisible: false
+        kendo.bind(dom, observable, kendo.mobile.ui);
+
+        var listView = dom.data("kendoMobileListView");
+
+        strictEqual(listView.dataSource, dataSource);
     });
 
-    kendo.bind(dom, observable, kendo.mobile.ui);
+    test("binding visible to false hides the widget", function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource, visible:visible" />');
 
-    ok(dom.data("kendoMobileListView").wrapper.css("display") != "none", "display is not 'none'");
-});
+        var observable = kendo.observable({
+            visible: false
+        });
 
-test("changing invisible to true hides the widget", function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource, invisible:invisible" />');
+        kendo.bind(dom, observable, kendo.mobile.ui);
 
-    var observable = kendo.observable({
-        invisible: false
+        ok(dom.data("kendoMobileListView").wrapper.css("display") == "none", "Display is 'none'");
     });
 
-    kendo.bind(dom, observable, kendo.mobile.ui);
-    observable.set("invisible", true);
+    test("binding visible to true shows the widget", function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-attributes" style="display:none" data-bind="source:dataSource, visible:visible" />');
 
-    ok(dom.data("kendoMobileListView").wrapper.css("display") == "none", "display is 'none'");
-});
+        var observable = kendo.observable({
+            visible: true
+        });
 
-test("changing invisible to false shows the widget", function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource, invisible:invisible" />');
+        kendo.bind(dom, observable, kendo.mobile.ui);
 
-    var observable = kendo.observable({
-        invisible: true
+        ok(dom.data("kendoMobileListView").wrapper.css("display") != "none", "Display is not 'none'");
     });
 
-    kendo.bind(dom, observable, kendo.mobile.ui);
-    observable.set("invisible", false);
+    test("changing visible to false hides the widget", function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource, visible:visible" />');
 
-    ok(dom.data("kendoMobileListView").wrapper.css("display") != "none", "display is not 'none'");
-});
+        var observable = kendo.observable({
+            visible: true
+        });
 
-test("binds event handlers in template to root view model when item changes", function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-events" data-bind="source:dataSource" />');
+        kendo.bind(dom, observable, kendo.mobile.ui);
+        observable.set("visible", false);
 
-    var observable = kendo.observable({
-        dataSource: [ { foo: "foo" } ]
+        ok(dom.data("kendoMobileListView").wrapper.css("display") == "none", "Display is 'none'");
     });
 
-    stub(observable, "rootHandler");
+    test("changing visible to true shows the widget", function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource, visible:visible" />');
 
-    kendo.bind(dom, observable, kendo.mobile.ui);
+        var observable = kendo.observable({
+            visible: false
+        });
 
-    observable.dataSource[0].set("foo", "bar");
+        kendo.bind(dom, observable, kendo.mobile.ui);
+        observable.set("visible", true);
 
-    dom.find("li strong").click();
-
-    equal(observable.calls("rootHandler"), 1);
-});
-
-test("template with links styles the links when item changes", 2, function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" />');
-
-    var observable = kendo.observable({
-        dataSource: [ { foo: "foo" } ]
+        ok(dom.data("kendoMobileListView").wrapper.css("display") != "none", "Display is not 'none'");
     });
 
-    kendo.bind(dom, observable, kendo.mobile.ui);
+    test("binding invisible to true hides the widget", function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource, invisible:invisible" />');
 
-    ok(dom.find("li a").is(".km-listview-link"));
+        var observable = kendo.observable({
+            invisible: true
+        });
 
-    observable.dataSource[0].set("foo", "bar");
+        kendo.bind(dom, observable, kendo.mobile.ui);
 
-    ok(dom.find("li a").is(".km-listview-link"));
-});
-
-test("template with links styles the links when item is added", 2, function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" />');
-
-    var observable = kendo.observable({
-        dataSource: [ { foo: "foo" } ]
+        ok(dom.data("kendoMobileListView").wrapper.css("display") == "none", "display is 'none'");
     });
 
-    kendo.bind(dom, observable, kendo.mobile.ui);
+    test("binding invisible to false shows the widget", function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-attributes" style="display:none" data-bind="source:dataSource, invisible:invisible" />');
 
-    observable.dataSource.push({ foo: "bar" });
+        var observable = kendo.observable({
+            invisible: false
+        });
 
-    var anchors = dom.find("li a");
+        kendo.bind(dom, observable, kendo.mobile.ui);
 
-    equal(anchors.length, 2);
-    ok(anchors.last().is(".km-listview-link"));
-});
-
-test("ListView removes LI from UL if item is removed from list", function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" />');
-
-    var observable = kendo.observable({
-        dataSource: [ { foo: "foo" }, { foo: "baz" }]
+        ok(dom.data("kendoMobileListView").wrapper.css("display") != "none", "display is not 'none'");
     });
 
-    kendo.bind(dom, observable, kendo.mobile.ui);
-    observable.dataSource.splice(1, 1);
+    test("changing invisible to true hides the widget", function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource, invisible:invisible" />');
 
-    equal(dom.find("li a").length, 1);
-});
+        var observable = kendo.observable({
+            invisible: false
+        });
 
-test("enable filtering", function() {
-    var dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" data-filterable="true" />');
+        kendo.bind(dom, observable, kendo.mobile.ui);
+        observable.set("invisible", true);
 
-    var observable = kendo.observable({
-        dataSource: [ { foo: "foo" } ]
+        ok(dom.data("kendoMobileListView").wrapper.css("display") == "none", "display is 'none'");
     });
 
-    kendo.bind(dom, observable, kendo.mobile.ui);
+    test("changing invisible to false shows the widget", function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource, invisible:invisible" />');
 
-    ok(dom.data("kendoMobileListView").options.filterable);
-});
+        var observable = kendo.observable({
+            invisible: true
+        });
 
+        kendo.bind(dom, observable, kendo.mobile.ui);
+        observable.set("invisible", false);
 
+        ok(dom.data("kendoMobileListView").wrapper.css("display") != "none", "display is not 'none'");
+    });
+
+    test("binds event handlers in template to root view model when item changes", function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-events" data-bind="source:dataSource" />');
+
+        var observable = kendo.observable({
+            dataSource: [ { foo: "foo" } ]
+        });
+
+        stub(observable, "rootHandler");
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+
+        observable.dataSource[0].set("foo", "bar");
+
+        dom.find("li strong").click();
+
+        equal(observable.calls("rootHandler"), 1);
+    });
+
+    test("template with links styles the links when item changes", 2, function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" />');
+
+        var observable = kendo.observable({
+            dataSource: [ { foo: "foo" } ]
+        });
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+
+        ok(dom.find("li a").is(".km-listview-link"));
+
+        observable.dataSource[0].set("foo", "bar");
+
+        ok(dom.find("li a").is(".km-listview-link"));
+    });
+
+    test("template with links styles the links when item is added", 2, function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" />');
+
+        var observable = kendo.observable({
+            dataSource: [ { foo: "foo" } ]
+        });
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+
+        observable.dataSource.push({ foo: "bar" });
+
+        var anchors = dom.find("li a");
+
+        equal(anchors.length, 2);
+        ok(anchors.last().is(".km-listview-link"));
+    });
+
+    test("ListView removes LI from UL if item is removed from list", function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" />');
+
+        var observable = kendo.observable({
+            dataSource: [ { foo: "foo" }, { foo: "baz" }]
+        });
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+        observable.dataSource.splice(1, 1);
+
+        equal(dom.find("li a").length, 1);
+    });
+
+    test("enable filtering", function() {
+        var dom = $('<ul data-role="listview" data-template="template-with-links" data-bind="source:dataSource" data-filterable="true" />');
+
+        var observable = kendo.observable({
+            dataSource: [ { foo: "foo" } ]
+        });
+
+        kendo.bind(dom, observable, kendo.mobile.ui);
+
+        ok(dom.data("kendoMobileListView").options.filterable);
+    });
+
+})();

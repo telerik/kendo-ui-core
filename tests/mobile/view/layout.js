@@ -12,11 +12,14 @@
         view.switchWith(null, '', {}, $.noop);
     }
 
-    function success() {
-        ok(true);
-    }
 
-    module("mobile view");
+    module("mobile view", {
+        setup: function() {
+            window.layoutSuccess = function() {
+                ok(true);
+            }
+        }
+    });
 
     test("uses layout header and footer when shown", 2, function() {
         setup('<div data-role="view"></div>',
@@ -35,10 +38,10 @@
     });
 
     test("Layout triggers init", 1, function() {
-        setup('<div data-role="view">', '</div><div data-role="layout" data-init="success" />');
+        setup('<div data-role="view">', '</div><div data-role="layout" data-init="layoutSuccess" />');
     });
 
     test("Layout triggers show", 1, function() {
-        setup('<div data-role="view" data-layout="foo"></div>', '<div data-id="foo" data-role="layout" data-show="success" />');
+        setup('<div data-role="view" data-layout="foo"></div>', '<div data-id="foo" data-role="layout" data-show="layoutSuccess" />');
     });
 })();

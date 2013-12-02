@@ -14,13 +14,14 @@
         ok(root.find(selector).data("kendoView"));
     }
 
-    function success() {
-        ok(true);
-    }
-
     ////////////////////////////////////////////////////////////////////
     module("view engine view showing", {
         setup: function() {
+            window.viewEngineSuccess = function(e) {
+                ok(true);
+            }
+            $.mockjaxSettings.responseTime = 0;
+            $.mockjaxSettings.contentType = "text/html";
             root = $("<div />").appendTo(QUnit.fixture);
             root.html('<div data-role="view" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
             viewEngine = new kendo.mobile.ViewEngine({
@@ -28,6 +29,7 @@
             });
         },
         teardown: function() {
+            window.viewEngineSuccess = null;
             $.mockjaxClear();
         }
     });
@@ -58,7 +60,7 @@
     });
 
     test("shown view triggers show event", 1, function() {
-        root.html('<div data-role="view" data-show="success" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
+        root.html('<div data-role="view" data-show="viewEngineSuccess" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
         viewEngine = new kendo.mobile.ViewEngine({ container: root });
 
         viewEngine.showView("#foo");
@@ -73,7 +75,7 @@
     });
 
     test("after show is triggered after the view transition is finished", 1, function() {
-        root.html('<div data-role="view"id="foo">Foo</div><div data-after-show="success" data-role="view" id="bar">Bar</div>').show();
+        root.html('<div data-role="view"id="foo">Foo</div><div data-after-show="viewEngineSuccess" data-role="view" id="bar">Bar</div>').show();
         viewEngine = new kendo.mobile.ViewEngine({ container: root });
 
         viewEngine.showView("#foo");
@@ -81,7 +83,7 @@
     });
 
     test("hidden view triggers hide event", 1, function() {
-        root.html('<div data-role="view" data-hide="success" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
+        root.html('<div data-role="view" data-hide="viewEngineSuccess" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
         viewEngine = new kendo.mobile.ViewEngine({ container: root });
 
         viewEngine.showView("#foo");

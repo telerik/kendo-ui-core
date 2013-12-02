@@ -1,71 +1,71 @@
-var pane,
-    root;
+(function() {
+    var pane,
+        root;
 
-function hidden(selector) {
-    ok(!root.find(selector).is(":visible"));
-}
-
-function visible(selector) {
-    ok(root.find(selector).is(":visible"));
-}
-
-function view(selector) {
-    ok(root.find(selector).data("kendoView"));
-}
-
-////////////////////////////////////////////////////////////////////
-module("mobile loader initialization", {
-    setup: function() {
-        root = $("#qunit-fixture");
-        root.html('<a href="#" id="foo">Foo</a>').show();
-        loader = new kendo.mobile.ui.Loader(root, {timeout: 0});
+    function hidden(selector) {
+        ok(!root.find(selector).is(":visible"));
     }
-});
 
-test("hides loader initially", 1, function() {
-    hidden(loader.element);
-});
+    function visible(selector) {
+        ok(root.find(selector).is(":visible"));
+    }
 
-test("changeMessage method changes the loading message", 1, function() {
-    loader.changeMessage("Changed!");
-    ok(loader.element.find("h1").text() === "Changed!");
-});
+    function view(selector) {
+        ok(root.find(selector).data("kendoView"));
+    }
 
-asyncTest("shows loader element", 1, function() {
-    loader.show();
-    setTimeout(function() {
-        start();
-        visible(loader.element);
+    ////////////////////////////////////////////////////////////////////
+    module("mobile loader initialization", {
+        setup: function() {
+            root = $("#qunit-fixture");
+            root.html('<a href="#" id="foo">Foo</a>').show();
+            loader = new kendo.mobile.ui.Loader(root, {timeout: 0});
+        }
     });
-});
 
-asyncTest("hides loader element after shown", 1, function() {
-    loader.show();
-    setTimeout(function() {
-        start();
-        loader.hide();
+    test("hides loader initially", 1, function() {
         hidden(loader.element);
     });
-});
 
-// https://developer.mozilla.org/en/DOM/document.createEvent for the insanity below
-function dispatchClick(element) {
-    var evt = document.createEvent("MouseEvents");
-    evt.initMouseEvent("mouseup", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    test("changeMessage method changes the loading message", 1, function() {
+        loader.changeMessage("Changed!");
+        ok(loader.element.find("h1").text() === "Changed!");
+    });
 
-    element[0].dispatchEvent(evt);
-}
+    asyncTest("shows loader element", 1, function() {
+        loader.show();
+        setTimeout(function() {
+            start();
+            visible(loader.element);
+        });
+    });
 
-test("prevents events during transitions", 2, function() {
-    loader.transition();
-    var foo = root.find("#foo");
+    asyncTest("hides loader element after shown", 1, function() {
+        loader.show();
+        setTimeout(function() {
+            start();
+            loader.hide();
+            hidden(loader.element);
+        });
+    });
 
-    foo.on("mouseup", function(e) { ok(e.isDefaultPrevented()); });
+    // https://developer.mozilla.org/en/DOM/document.createEvent for the insanity below
+    function dispatchClick(element) {
+        var evt = document.createEvent("MouseEvents");
+        evt.initMouseEvent("mouseup", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
 
-    dispatchClick(foo);
-    loader.transitionDone();
-    foo.off("mouseup").on("mouseup", function() { ok(true); })
-    dispatchClick(foo);
-});
+        element[0].dispatchEvent(evt);
+    }
 
+    test("prevents events during transitions", 2, function() {
+        loader.transition();
+        var foo = root.find("#foo");
 
+        foo.on("mouseup", function(e) { ok(e.isDefaultPrevented()); });
+
+        dispatchClick(foo);
+        loader.transitionDone();
+        foo.off("mouseup").on("mouseup", function() { ok(true); })
+        dispatchClick(foo);
+    });
+})();
