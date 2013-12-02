@@ -35,7 +35,9 @@ module.exports = function(grunt) {
        'tests/listview/*.js',
        'tests/download-builder/*.js',
        'tests/editable/*.js',
-       'tests/treeview/*.js'
+       'tests/treeview/*.js',
+       'tests/pager/*.js',
+       //'tests/treeview/*.js'
     ],
 
     passedTests = grunt.option('tests');
@@ -170,7 +172,7 @@ module.exports = function(grunt) {
                         'src/kendo.diagram.services.js',
                         'src/kendo.diagram.dom.js',
                         { pattern: 'src/kendo.editor.js', included: false }, // download builder needs this
-                        'src/kendo.aspnetmvc.js',
+                        { pattern: 'src/kendo.aspnetmvc.js', included: false }, // download builder needs this
 
                         'download-builder/scripts/script-resolver.js',
                         { pattern: 'download-builder/config/kendo-config.json', included: false },
