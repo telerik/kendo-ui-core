@@ -3,9 +3,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
     var tests = [
-        { pattern: 'tests/**/*-fixture.html' },
-        { pattern: 'tests/menu/**/*png', included: false },
-        { pattern: 'tests/menu/**/*gif', included: false },
        'tests/model/**/*.js',
        'tests/data/**/*.js',
        'tests/autocomplete/*.js',
