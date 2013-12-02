@@ -2,7 +2,7 @@
 {
     public class SchedulerDayView : SchedulerMultiDayView
     {   
-        public SchedulerDayView() : base(SchedulerViewType.Day)
+        public SchedulerDayView(IScheduler scheduler) : base(SchedulerViewType.Day, scheduler)
         {            
         }
     }

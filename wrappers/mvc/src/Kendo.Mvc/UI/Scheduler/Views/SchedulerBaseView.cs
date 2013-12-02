@@ -5,12 +5,19 @@
 
     public abstract class SchedulerViewBase : JsonObject, ISchedulerView
     {
-        protected SchedulerViewBase(SchedulerViewType type)
+        protected SchedulerViewBase(SchedulerViewType type, IScheduler scheduler)
 	    {
             Type = type;
             Group = new SchedulerGroupSettings();
+            Scheduler = scheduler;
 	    }
         
+        public IScheduler Scheduler 
+        { 
+            get; 
+            protected set; 
+        }
+
         public string Title
         { 
             get; 
@@ -109,5 +116,6 @@
                 json["group"] = group;
             }
         }
+
     }
 }

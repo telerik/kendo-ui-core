@@ -5,7 +5,7 @@
 
     public class SchedulerAgendaView : SchedulerViewBase
     {
-        public SchedulerAgendaView() : base (SchedulerViewType.Agenda)
+        public SchedulerAgendaView(IScheduler scheduler) : base (SchedulerViewType.Agenda, scheduler)
         {            
         }
 
