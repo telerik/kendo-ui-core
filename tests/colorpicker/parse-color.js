@@ -1,22 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>parseColor tests</title>
-    <script src="test-scripts.js"></script>
-  </head>
-  <body>
-    <h1 id="qunit-header">parseColor</h1>
-    <h2 id="qunit-banner"></h2>
-    <div id="qunit-testrunner-toolbar"></div>
-    <h2 id="qunit-userAgent"></h2>
-    <ol id="qunit-tests"></ol>
-    <div id="qunit-fixture">test markup, will be hidden</div>
-    <ul id="log"></ul>
-
-    <div id="x"></div>
-
-    <script>
-
+(function() {
       var parseColor = kendo.parseColor;
 
       test("Convert desaturated color to HSV", function(){
@@ -93,7 +75,4 @@
           var color = parseColor("rgba(34,51,68,1)");
           ok(/^#223344/i.test(color.toCss()));
       });
-
-    </script>
-  </body>
-</html>
+})();
