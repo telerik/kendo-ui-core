@@ -46,6 +46,11 @@ namespace Kendo.Controllers
             if (suite == "mobile") {
                 ViewBag.scripts = Kendo.Models.ScriptGroups.Mobile;
                 ViewBag.styles = Kendo.Models.StyleGroups.Mobile;
+
+                if (ViewBag.CurrentExample.Url.StartsWith("adaptive") && IsMobileDevice())
+                {
+                    return Redirect(Url.RouteUrl("MobileDeviceIndex"));
+                }
             } else {
                 ViewBag.scripts = Kendo.Models.ScriptGroups.All;
                 ViewBag.styles = Kendo.Models.StyleGroups.All;
@@ -98,9 +103,15 @@ namespace Kendo.Controllers
             return frameworks;
         }
 
+        private bool IsMobileDevice()
+        {
+            return Regex.IsMatch(Request.UserAgent, "(blackberry|bb1\\w?;|playbook|meego;\\s*nokia|android|silk|iphone|ipad|ipod|windows phone|Mobile.*Firefox)", RegexOptions.IgnoreCase);
+        }
+
         public ActionResult SectionIndex(string suite, string section)
         {
-            var isMobileDevice = Regex.IsMatch(Request.UserAgent, "(blackberry|bb1\\w?;|playbook|meego;\\s*nokia|android|silk|iphone|ipad|ipod|windows phone|Mobile.*Firefox)", RegexOptions.IgnoreCase);
+            var isMobileDevice = IsMobileDevice();
+
             var redirect = RedirectPermanent(Url.Action("Index", new { suite = suite, section = section, example = "index" }));
 
             if (suite == "mobile" && isMobileDevice)
