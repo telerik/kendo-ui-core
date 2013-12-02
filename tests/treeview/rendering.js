@@ -441,7 +441,7 @@
     });
 
     test("treeview role is added if created from html", function() {
-        var element = $("<div class=\"k-treeview\"><ul><li>item</li></ul></div>").appendTo(document.body).kendoTreeView();
+        var element = $("<div class=\"k-treeview\"><ul><li>item</li></ul></div>").appendTo(QUnit.fixture).kendoTreeView();
 
         equal(element.attr("role"), "tree");
     });
@@ -563,7 +563,7 @@
     });
 
     test("server-rendered checkboxes are moved to k-checkbox container", function() {
-        var dom = $("<ul><li><input type='checkbox' />foo</li></ul>").appendTo("body");
+        var dom = $("<ul><li><input type='checkbox' />foo</li></ul>").appendTo(QUnit.fixture);
         dom.kendoTreeView();
 
         ok(dom.find(".k-checkbox").next().is(".k-in"));

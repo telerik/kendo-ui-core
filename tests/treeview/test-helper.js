@@ -12,14 +12,13 @@
                 container = $("<div class='k-rtl' />").appendTo(container);
             }
 
-            window.treeview = $("<div />").appendTo(container).kendoTreeView(treeviewOptions);
-            window.treeviewObject = treeview.data("kendoTreeView");
-
-            return window.treeview;
+            return TreeViewHelpers.fromHtml("<div />", treeviewOptions, container);
         },
 
-        fromHtml: function (html, options) {
-            window.treeview = $(html).appendTo(QUnit.fixture).kendoTreeView(options);
+        fromHtml: function (html, options, container) {
+            container = container || QUnit.fixture;
+
+            window.treeview = $(html).appendTo(container).kendoTreeView(options);
             window.treeviewObject = treeview.data("kendoTreeView");
 
             return window.treeview;
