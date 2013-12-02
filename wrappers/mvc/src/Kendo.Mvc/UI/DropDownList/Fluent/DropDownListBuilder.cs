@@ -275,5 +275,41 @@ namespace Kendo.Mvc.UI.Fluent
 
             return this;
         }
+
+        /// <summary>
+        /// ValueTemplate to be used to render the selected value.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .ValueTemplate("#= data #")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public DropDownListBuilder ValueTemplate(string valueTemplate)
+        {
+            Component.ValueTemplate = valueTemplate;
+
+            return this;
+        }
+
+        /// <summary>
+        /// ValueTemplateId to be used to render the selected value.
+        /// </summary>
+        /// <example>
+        /// <code lang="CS">
+        ///  &lt;%= Html.Kendo().DropDownList()
+        ///             .Name("DropDownList")
+        ///             .ValueTemplateId("widgetValueTemplateId")
+        /// %&gt;
+        /// </code>
+        /// </example>
+        public DropDownListBuilder ValueTemplateId(string valueTemplateId)
+        {
+            Component.ValueTemplateId = valueTemplateId;
+
+            return this;
+        }
     }
 }

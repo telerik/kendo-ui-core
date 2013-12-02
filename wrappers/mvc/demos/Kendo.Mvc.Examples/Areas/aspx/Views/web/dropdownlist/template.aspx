@@ -26,6 +26,7 @@
                     "</div>")
           .Template("<span class=\"k-state-default\"><img src=\"" + Url.Content("~/Content/web/Customers/") + "#:data.CustomerID#.jpg\" alt=\"#:data.CustomerID#\" /></span>" +
                     "<span class=\"k-state-default\"><h3>#: data.ContactName #</h3><p>#: data.CompanyName #</p></span>")
+          .ValueTemplate("<img class=\"selected-value\" src=\"" + Url.Content("~/Content/web/Customers/") + "#:data.CustomerID#.jpg\" alt=\"#:data.CustomerID#\" /><span>#:data.ContactName#</span>")
 %>
 </div>
             
@@ -67,6 +68,12 @@
         text-transform: uppercase;
         font-size: 1.2em;
         margin-bottom: 10px;
+    }
+
+    .selected-value {
+        float: left;
+        width: 16px;
+        margin: 0 4px;
     }
 
     #customers-list {
