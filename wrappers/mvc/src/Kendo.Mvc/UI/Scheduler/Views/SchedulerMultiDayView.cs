@@ -5,11 +5,13 @@
 
     public abstract class SchedulerMultiDayView : SchedulerViewBase
     {
-        protected SchedulerMultiDayView(SchedulerViewType type) : base(type)
+        protected SchedulerMultiDayView(SchedulerViewType type, IScheduler scheduler) 
+            : base(type, scheduler)
         {
             AllDaySlot = true;
             WorkDayCommand = true;
             Footer = true;
+            ShowWorkHours = scheduler.ShowWorkHours;
         }
 
         public string AllDayEventTemplate
@@ -272,7 +274,10 @@
                 json["workWeekEnd"] = WorkWeekEnd;
             }
 
-            json["showWorkHours"] = ShowWorkHours;
+            if (Scheduler.ShowWorkHours != ShowWorkHours)
+            {
+                json["showWorkHours"] = ShowWorkHours;
+            }
         }
     }
 }

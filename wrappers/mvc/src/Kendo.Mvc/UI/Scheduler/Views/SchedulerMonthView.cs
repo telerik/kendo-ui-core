@@ -5,7 +5,7 @@
 
     public class SchedulerMonthView : SchedulerViewBase
     {
-        public SchedulerMonthView() : base(SchedulerViewType.Month)
+        public SchedulerMonthView(IScheduler scheduler) : base(SchedulerViewType.Month, scheduler)
         {            
         }
 

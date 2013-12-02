@@ -4,8 +4,7 @@
     using System.Collections.Generic;
     using System.Web.Mvc;
 
-    public interface IScheduler<TModel>
-        where TModel : class
+    public interface IScheduler
     {
         DataSource DataSource
         {
@@ -50,6 +49,12 @@
         DateTime? WorkDayEnd
         {
             get;
+        }
+
+        bool ShowWorkHours
+        {
+            get;
+            set;
         }
 
         int? Height
@@ -152,11 +157,6 @@
             get;
         }
 
-        IList<SchedulerResource<TModel>> Resources
-        {
-            get;
-        }
-
         IList<SchedulerViewBase> Views
         {
             get;
@@ -168,6 +168,15 @@
         }
 
         SchedulerGroupSettings Group
+        {
+            get;
+        }
+    }
+
+    public interface IScheduler<TModel> : IScheduler
+        where TModel : class
+    {
+          IList<SchedulerResource<TModel>> Resources
         {
             get;
         }
