@@ -41,6 +41,7 @@ module.exports = function(grunt) {
        'tests/searchbox/*.js',
        'tests/sortable/*.js',
        'tests/tooltip/*.js',
+       'tests/calendar/*.js',
        //'tests/treeview/*.js'
     ],
 
