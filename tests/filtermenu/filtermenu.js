@@ -33,10 +33,15 @@
 
             dom = $("<th data-kendo-field=foo />");
         },
+
         teardown: function() {
             kendo.effects.enable();
             kendo.ns = "";
             dataSource.unbind("change");
+            if (filterMenu) {
+                filterMenu.destroy();
+                filterMenu = null;
+            }
             $(".k-filter-menu").remove();
         }
     });
@@ -54,6 +59,7 @@
 
         equal(filterMenu.link.attr("tabindex"), -1);
     });
+
 
     test("binds the operator select from the field", function(){
         filterMenu = setup(dom, {dataSource: dataSource});
@@ -633,7 +639,7 @@
         ok(!filterMenu1.popup.visible());
     });
 
-    test("first focusable element is foucused on popup activate", function() {
+    test("first focusable element is focused on popup activate", 1, function() {
         filterMenu = setup(dom, {extra: false, dataSource: dataSource});
 
         filterMenu.link.click();
@@ -675,6 +681,7 @@
 
         equal(filterMenu.form.find("[type='radio']").length, 2)
     });
+
 
     test("boolean filtering true values", function() {
         var filterMenu = setup(dom.attr("data-kendo-field", "boo"), {
