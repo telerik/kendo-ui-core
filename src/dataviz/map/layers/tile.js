@@ -258,7 +258,8 @@
 
             return new Point(
                 x * this.options.tileSize,
-                y * this.options.tileSize);
+                y * this.options.tileSize
+            );
         },
 
         subdomainText: function() {
@@ -292,7 +293,7 @@
 
                     if (!tile.visible) {
                         this.element.append(tile.element);
-                        tile.visible = true;
+                        tile.options.visible = true;
                     }
                 }
             }
@@ -302,30 +303,18 @@
             var index = this.wrapIndex(currentIndex),
                 point = this.indexToPoint(currentIndex),
                 offset = point.clone().subtract(this.basePoint),
-                urlTemplate = template(this.options.urlTemplate),
                 tileOptions = {
                     index: index,
                     currentIndex: currentIndex,
                     point: point,
                     offset: roundPoint(offset),
                     zoom: this._zoom,
-                    url: urlTemplate(this.tileUrlOptions(index))
+                    subdomain: this.subdomainText(),
+                    urlTemplate: this.options.urlTemplate,
+                    errorUrlTemplate: this.options.errorUrlTemplate
                 };
 
             return this.pool.get(this._center, tileOptions);
-        },
-
-        tileUrlOptions: function(index) {
-            var subdomain = this.subdomainText();
-
-            return {
-                zoom: this._zoom,
-                subdomain: subdomain,
-                z: this._zoom,
-                x: index.x,
-                y: index.y,
-                s: subdomain
-            };
         },
 
         wrapIndex: function(index) {
@@ -386,29 +375,63 @@
 
     var ImageTile = Class.extend({
         init: function(options) {
-            this.element = $("<img style='position: absolute; display: block; visibility: visible;' unselectable='on'></img>");
-            this.load(options);
-            this.visible = false;
+            this._initOptions(options);
+            this.createElement();
+            this.load();
+            // initially the image should be
+            this.options.visible = false;
+        },
+
+        options: {
+            urlTemplate: "",
+            errorUrlTemplate: "",
+            visible: false
+        },
+
+        createElement: function() {
+            this.element = $("<img style='position: absolute; display: block; visibility: visible;' unselectable='on'></img>")
+                            .error(proxy(function(e) {
+                                e.target.setAttribute("src", this.errorUrl());
+                            }, this));
         },
 
         load: function(options) {
+            this.options = deepExtend({}, this.options, options);
+
             var htmlElement = this.element[0];
 
             htmlElement.style.visibility = "visible";
             htmlElement.style.display = "block";
+            htmlElement.style.top = renderSize(this.options.offset.y);
+            htmlElement.style.left = renderSize(this.options.offset.x);
+            htmlElement.setAttribute("src", this.url());
 
-            htmlElement.setAttribute("src", options.url);
-            this.url = options.url;
+            this.options.id = tileId(this.options.currentIndex, this.options.zoom);
+            this.options.visible = true;
+        },
 
-            htmlElement.style.top = renderSize(options.offset.y);
-            htmlElement.style.left = renderSize(options.offset.x);
-            this.offset = options.offset;
+        url: function() {
+            var urlResult = template(this.options.urlTemplate);
 
-            this.point = options.point;
-            this.index = options.index;
-            this.currentIndex = options.currentIndex;
-            this.id = "x:" + this.currentIndex.x + "y:" + this.currentIndex.y + "zoom:" + options.zoom;
-            this.visible = true;
+            return urlResult(this.urlOptions());
+        },
+
+        errorUrl: function() {
+            var urlResult = template(this.options.errorUrlTemplate);
+
+            return urlResult(this.urlOptions());
+        },
+
+        urlOptions: function() {
+            var options = this.options;
+            return {
+                zoom: options.zoom,
+                subdomain: options.subdomain,
+                z: options.zoom,
+                x: options.index.x,
+                y: options.index.y,
+                s: options.subdomain
+            };
         },
 
         destroy: function() {
@@ -457,12 +480,12 @@
         _create: function(options) {
             var pool = this,
                 items = pool._items,
-                tileId = pool._tileId(options),
+                id = tileId(options.currentIndex, options.zoom),
                 oldTile, i, item, tile;
 
             for (i = 0; i < items.length; i++) {
                 item = items[i];
-                if (item.id === tileId) {
+                if (item.options.id === id) {
                     oldTile = item;
                     tile = oldTile;
                 }
@@ -478,22 +501,18 @@
             return tile;
         },
 
-        _tileId: function(options) {
-            return "x:" + options.currentIndex.x + "y:" + options.currentIndex.y + "zoom:" + options.zoom;
-        },
-
         _update: function(center, options) {
             var pool = this,
                 items = pool._items,
                 dist = -Number.MAX_VALUE,
                 currentDist, index, i, item;
 
-            var tileId = pool._tileId(options);
+            var id = tileId(options.currentIndex, options.zoom);
 
             for (i = 0; i < items.length; i++) {
                 item = items[i];
-                currentDist = item.point.clone().distanceTo(center);
-                if (item.id === tileId) {
+                currentDist = item.options.point.clone().distanceTo(center);
+                if (item.options.id === id) {
                     return items[i];
                 }
 
@@ -512,6 +531,10 @@
     // Methods ================================================================
     function roundPoint(point) {
         return new Point(round(point.x), round(point.y));
+    }
+
+    function tileId(index, zoom) {
+            return "x:" + index.x + "y:" + index.y + "zoom:" + zoom;
     }
 
     // Exports ================================================================
