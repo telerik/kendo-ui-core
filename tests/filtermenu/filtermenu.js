@@ -31,18 +31,15 @@
                 }
             });
 
-            dom = $("<th data-kendo-field=foo />");
+            dom = $("<th data-kendo-field=foo />").appendTo(QUnit.fixture);
         },
 
         teardown: function() {
             kendo.effects.enable();
-            kendo.ns = "";
             dataSource.unbind("change");
-            if (filterMenu) {
-                filterMenu.destroy();
-                filterMenu = null;
-            }
+            kendo.destroy(QUnit.fixture);
             $(".k-filter-menu").remove();
+            kendo.ns = "";
         }
     });
 

@@ -9,6 +9,7 @@
 
     module("kendo.ui.FilterMenu", {
         setup: function() {
+            kendo.effects.disable();
             container = $('<div id="container"><a data-kendo-field="foo" class="k-grid-filter"></a></div>')
                 .appendTo(QUnit.fixture);
 
@@ -20,6 +21,7 @@
             pane.view().purge();
             kendo.destroy(QUnit.fixture);
             container.remove();
+            kendo.effects.enable();
         }
     });
 

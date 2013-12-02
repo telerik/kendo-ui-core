@@ -7,6 +7,7 @@
 
     module("kendo.ui.Popup", {
         setup: function() {
+            kendo.effects.disable();
             div = $("<div style='background:red'>popup</div>");
             anchor = $("<div style='background:blue'>anchor</div>").appendTo(QUnit.fixture);
         },
@@ -14,7 +15,9 @@
             if (popup) {
                 popup.destroy();
             }
+            kendo.destroy(QUnit.fixture);
             div.add(anchor).remove();
+            kendo.effects.enable();
         }
     });
 

@@ -9,6 +9,7 @@
             handle = div.find("span");
         },
         teardown: function() {
+            kendo.destroy(QUnit.fixture);
             div.remove();
         }
     });
