@@ -16,6 +16,7 @@ module.exports = function(grunt) {
        'tests/router/**/*.js',
        'tests/panelbar/*.js',
        'tests/tabstrip/**/*.js',
+       'tests/demos/*.js'
     ],
 
     passedTests = grunt.option('tests');
@@ -123,7 +124,9 @@ module.exports = function(grunt) {
 
                         'tests/qunit/addons/close-enough/qunit-close-enough.js',
                         'tests/kendo-test-helpers.js',
+                        'demos/mvc/content/shared/js/examples.js',
                         'demos/mvc/content/shared/js/less.js',
+                        { pattern: 'demos/mvc/App_Data/*json', included: false },
                         'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
                         'demos/mvc/content/mobilethemebuilder/scripts/gradientengine.js',
                     ].concat(tests),
