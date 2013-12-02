@@ -10,6 +10,7 @@ module.exports = function(grunt) {
        'tests/data/**/*.js',
        'tests/autocomplete/*.js',
        'tests/grid/*.js',
+       'tests/reorderable/*.js',
        'tests/core/**/*.js',
        'tests/fx/*.js',
        'tests/mobile/**/*.js',
@@ -42,8 +43,7 @@ module.exports = function(grunt) {
        'tests/sortable/*.js',
        'tests/tooltip/*.js',
        'tests/calendar/*.js',
-       'tests/diagram/*.js',
-       //'tests/treeview/*.js'
+       'tests/diagram/*.js'
     ],
 
     passedTests = grunt.option('tests');
