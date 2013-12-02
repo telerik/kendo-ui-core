@@ -9,39 +9,39 @@
         return element.trigger($.Event(type, { originalEvent: { changedTouches: [ info ] }}));
     }
 
-    $.fn.press = function (x, y) {
-        return triggerTouchEvent(this, "touchstart", {
-            pageX: x,
-            pageY: y,
-            id: 1
-        })
-    }
-
-    $.fn.move = function (x, y) {
-        return triggerTouchEvent(this, "touchmove", {
-            pageX: x,
-            pageY: y,
-            id: 1
-        })
-    }
-
-    $.fn.release = function (x, y) {
-        return triggerTouchEvent(this, "touchend", {
-            pageX: x,
-            pageY: y,
-            id: 1
-        })
-    }
-
-    $.fn.tap = function(info) {
-        return this.press(10, 10).release(10, 10);
-    }
-
     module("grid column resize", {
         setup: function() {
             QUnit.config.testTimeout = 900;
             table = document.createElement("table");
             QUnit.fixture[0].appendChild(table);
+
+            $.fn.press = function (x, y) {
+                return triggerTouchEvent(this, "touchstart", {
+                    pageX: x,
+                    pageY: y,
+                    id: 1
+                })
+            };
+
+            $.fn.move = function (x, y) {
+                return triggerTouchEvent(this, "touchmove", {
+                    pageX: x,
+                    pageY: y,
+                    id: 1
+                })
+            };
+
+            $.fn.release = function (x, y) {
+                return triggerTouchEvent(this, "touchend", {
+                    pageX: x,
+                    pageY: y,
+                    id: 1
+                })
+            };
+
+            $.fn.tap = function(info) {
+                return this.press(10, 10).release(10, 10);
+            };
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);

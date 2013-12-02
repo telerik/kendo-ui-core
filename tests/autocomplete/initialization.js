@@ -1,14 +1,14 @@
 (function(){
 
-    var AutoComplete = kendo.ui.AutoComplete;
-    var input;
+var AutoComplete = kendo.ui.AutoComplete;
+var input;
 
-    module("kendo.ui.AutoComplete initialization", {
-        setup: function() {
-            input = $("<input>").appendTo(QUnit.fixture);
-        },
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
+module("kendo.ui.AutoComplete initialization", {
+    setup: function() {
+        input = $("<input>").appendTo(QUnit.fixture);
+    },
+    teardown: function() {
+        kendo.destroy(QUnit.fixture);
     }
 });
 
@@ -119,7 +119,7 @@ test("highlight first item", function() {
 });
 
 test("resetting dataSource detaches the previouse events", 0, function() {
-    var autocomplete = new AutoComplete($("<input/>"));
+    var autocomplete = new AutoComplete(input);
 
     var dataSource = autocomplete.dataSource;
 
@@ -133,7 +133,7 @@ test("resetting dataSource detaches the previouse events", 0, function() {
 });
 
 test("resetting DataSource rebinds the widget", function() {
-    var autocomplete = new AutoComplete($("<input/>"),{
+    var autocomplete = new AutoComplete(input, {
         dataTextField: "text"
     });
 
@@ -147,7 +147,7 @@ test("resetting DataSource rebinds the widget", function() {
 });
 
 test("dataItem() returns dataItem depending on passed index", function() {
-    var autocomplete = new AutoComplete($("<input/>"),{
+    var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
         dataSource:[{text: 1, value: 1}, {text:2, value:2}]
     });
@@ -156,7 +156,7 @@ test("dataItem() returns dataItem depending on passed index", function() {
 });
 
 test("dataItem() returns null if no argument", function() {
-    var autocomplete = new AutoComplete($("<input/>"),{
+    var autocomplete = new AutoComplete(input, {
         dataTextField: "text",
         dataSource:[{text: 1, value: 1}, {text:2, value:2}]
     });
@@ -165,7 +165,7 @@ test("dataItem() returns null if no argument", function() {
 });
 
 test("Value of the autocomplete is empty string when placeholder is used", function() {
-    var autocomplete = new AutoComplete($("<input/>"),{
+    var autocomplete = new AutoComplete(input, {
         placeholder: "input..."
     });
 
@@ -173,128 +173,12 @@ test("Value of the autocomplete is empty string when placeholder is used", funct
 });
 
 test("destroy method works", function() {
-    var autocomplete = new AutoComplete($("<input/>"),{
+    var autocomplete = new AutoComplete(input, {
         placeholder: "input..."
     });
 
     autocomplete.destroy();
     ok(true);
-});
-
-module("kendo.ui.AutoComplete ARIA", {
-    setup: function() {
-        input = $("<input />").appendTo(document.body);
-    },
-    teardown: function() {
-        var ac = input.data("kendoAutoComplete");
-        if (ac) {
-            ac.destroy();
-            ac.wrapper.remove();
-        } else {
-            input.remove();
-        }
-    }
-});
-
-test("AutoComplete adds ARIA role='textbox'", function() {
-    var autocomplete = new AutoComplete(input, {
-        placeholder: "input..."
-    });
-
-    equal(autocomplete.element.attr("role"), "textbox");
-});
-
-test("AutoComplete adds aria-haspopup", function() {
-    var autocomplete = new AutoComplete(input, {
-        placeholder: "input..."
-    });
-
-    equal(autocomplete.element.attr("aria-haspopup"), "true");
-});
-
-test("AutoComplete adds aria-owns", function() {
-    var autocomplete = new AutoComplete(input.attr("id", "test"), {
-        placeholder: "input..."
-    });
-
-    equal(autocomplete.element.attr("aria-owns"), autocomplete.ul.attr("id"));
-});
-
-test("AutoComplete adds aria-autocomplete='both'", function() {
-    var autocomplete = new AutoComplete(input.attr("id", "test"), {
-        placeholder: "input...",
-        suggest: true
-    });
-
-    equal(autocomplete.element.attr("aria-autocomplete"), "both");
-});
-
-test("AutoComplete adds aria-autocomplete='list' if no suggest", function() {
-    var autocomplete = new AutoComplete(input.attr("id", "test"), {
-        placeholder: "input...",
-        suggest: false
-    });
-
-    equal(autocomplete.element.attr("aria-autocomplete"), "list");
-});
-
-test("Autocomplete sets tabindex", function() {
-    var autocomplete = new AutoComplete(input.attr("id", "test"), {
-        placeholder: "input...",
-        suggest: false
-    });
-
-    equal(autocomplete.element.prop("tabIndex"), "0");
-});
-
-test("Autocomplete preserves tab order", function() {
-    var autocomplete = new AutoComplete(input.attr("tabIndex", "2"), {
-        placeholder: "input...",
-        suggest: false
-    });
-
-    equal(autocomplete.element.attr("tabIndex"), "2");
-});
-
-test("Autocomplete adds aria-disabled=false", function() {
-    var autocomplete = new AutoComplete(input.attr("tabIndex", "2"), {
-        placeholder: "input...",
-        suggest: false
-    });
-
-    equal(autocomplete.element.attr("aria-disabled"), "false");
-});
-
-test("Autocomplete adds aria-disabled=true", function() {
-    var autocomplete = new AutoComplete(input.attr("tabIndex", "2"), {
-        placeholder: "input...",
-        suggest: false,
-        enable: false
-    });
-
-    equal(autocomplete.element.attr("aria-disabled"), "true");
-});
-
-test("Autocomplete disables on init", function() {
-    var autocomplete = new AutoComplete(input.attr("tabIndex", "2"), {
-        placeholder: "input...",
-        suggest: false,
-        enabled: false
-    });
-
-    equal(autocomplete.element.attr("aria-disabled"), "true");
-});
-
-test("Autocomplete adds aria-expanded", function() {
-    var autocomplete = new AutoComplete(input, {
-        placeholder: "input...",
-        dataSource: ["Item"],
-        suggest: false
-    });
-
-    autocomplete.search("I");
-
-    equal(autocomplete.element.attr("aria-expanded"), "true");
 });
 
 //loading
