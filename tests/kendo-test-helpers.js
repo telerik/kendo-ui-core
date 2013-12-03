@@ -109,10 +109,6 @@ $('head')
 (function() {
     var domContentsLength;
 
-    function logContents() {
-        console.log($.map($(document.body).children(":not(script,#editor-fixture)"), function(x) { return x.className }));
-    }
-
     function getDomContentsLength() {
         return $(document.body).children(":not(script,#editor-fixture)").length;
     }
@@ -120,20 +116,18 @@ $('head')
     $(function() {
         QUnit.fixture = $("<div id='qunit-fixture' style='height: 100px'></div>").appendTo(document.body);
         domContentsLength = getDomContentsLength();
-        logContents();
     });
 
     QUnit.testDone(function( details ) {
         QUnit.fixture.empty().attr("class", "").attr("style", "").css("height", "100px");
-        var length = getDomContentsLength();
-        if (length != domContentsLength) {
-            domContentsLength = length;
 
-            if (!QUnit.suppressCleanupCheck) {
-                logContents();
-                console.warn(details.module, details.name, 'test did not clean DOM contents properly');
-            }
+        var length = getDomContentsLength();
+
+        if (!QUnit.suppressCleanupCheck && length != domContentsLength) {
+            console.warn(details.module, details.name, 'test did not clean DOM contents properly');
         }
+
+        domContentsLength = length;
     });
 })();
 
