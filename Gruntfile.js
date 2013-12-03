@@ -198,6 +198,7 @@ module.exports = function(grunt) {
                         'src/kendo.diagram.extensions.js',
                         'src/kendo.diagram.dom.js',
                         'src/kendo.diagram.layout.js',
+                        'test/chart/util.js',
                         { pattern: 'src/kendo.editor.js', included: false }, // download builder needs this
                         { pattern: 'src/kendo.aspnetmvc.js', included: false }, // download builder needs this
 
