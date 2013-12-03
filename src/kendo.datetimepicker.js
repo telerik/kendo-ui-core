@@ -246,6 +246,7 @@ kendo_module({
 
             Widget.fn.destroy.call(that);
 
+debugger;
             that.dateView.destroy();
             that.timeView.destroy();
 

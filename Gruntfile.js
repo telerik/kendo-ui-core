@@ -46,6 +46,7 @@ module.exports = function(grunt) {
        'tests/tooltip/*.js',
        'tests/calendar/*.js',
        'tests/datepicker/*.js',
+       'tests/datetimepicker/*.js',
        'tests/diagram/*.js',
        'tests/splitter/*.js',
        'tests/validation/*.js',
