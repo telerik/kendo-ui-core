@@ -13,12 +13,12 @@
         window.tabstripPrevent = function(e) {
             e.preventDefault();
         }
-        $("#qunit-fixture").html('<div data-role="view" id="foo"/> <div id="bar" data-role="view" />\
+        $("#qunit-fixture").html('<div><div data-role="view" id="foo"/> <div id="bar" data-role="view" />\
             <div data-role="layout" data-id="default"><footer data-role="footer">\
             <div data-role="tabstrip" data-select="window.tabstripPrevent"><a href="#foo">Foo</a><a href="#bar">Bar</a></div>\
-        </footer></div>');
+        </footer></div></div>');
 
-        var app = new kendo.mobile.Application($("#qunit-fixture"), {
+        var app = new kendo.mobile.Application($("#qunit-fixture").children().first(), {
             layout: "default"
         });
 

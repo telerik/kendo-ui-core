@@ -8,7 +8,7 @@
 
     module("ActionSheet", {
         setup: function() {
-            root = $('#qunit-fixture');
+            root = $("<div></div>").appendTo($('#qunit-fixture'));
             kendo.mobile.ui.Shim.fn.options.duration = 0;
             root.html(markup);
             new kendo.mobile.Application(root);
@@ -143,7 +143,7 @@
 
     module("integration", {
         setup: function() {
-            root = $('#qunit-fixture');
+            root = $("<div></div>").appendTo($('#qunit-fixture'));
             window.foo = kendo.observable({});
             kendo.mobile.ui.Shim.fn.options.duration = 0;
         },

@@ -10,7 +10,7 @@
         setup: function() {
         },
         teardown: function() {
-            QUnit.fixture.empty();
+            kendo.destroy(QUnit.fixture);
         }
     });
 
@@ -378,7 +378,7 @@
             data: [{foo: "foo", bar: "bar"}, {foo: "foo1", bar: "baz"}],
             group: [{field: "foo"}, {field: "bar"}]
         }),
-        grid = new Grid($("div"), { dataSource: dataSource });
+        grid = new Grid($("<div />").appendTo(QUnit.fixture), { dataSource: dataSource });
 
         var columns = grid.columns;
         equal(columns.length, 2);

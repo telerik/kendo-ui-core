@@ -3,7 +3,7 @@
         app;
 
     function setup(html) {
-        root = $('#qunit-fixture');
+        root = $("<div />").appendTo($('#qunit-fixture'));
         root.append(html).wrapInner("<div />");
         location.hash = '';
         app = new kendo.mobile.Application(root.children().first());
