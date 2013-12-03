@@ -2,6 +2,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
+    var browsers = ['Chrome'];
+
     var tests = [
        'tests/model/**/*.js',
        'tests/data/**/*.js',
@@ -48,13 +50,19 @@ module.exports = function(grunt) {
        'tests/splitter/*.js',
        'tests/validation/*.js',
        'tests/textbox/*.js',
+       'tests/timepicker/*.js',
        // 'tests/window/*.js'*/
-    ],
+    ];
 
-    passedTests = grunt.option('tests');
+    var testsOption = grunt.option('tests');
+    var browserOption = grunt.option('browser');
 
-    if (passedTests) {
-        tests = [passedTests];
+    if (browserOption) {
+        browsers = [ browserOption ];
+    }
+
+    if (testsOption) {
+        tests = [testsOption];
     }
 
     // Project configuration.
@@ -220,7 +228,7 @@ module.exports = function(grunt) {
 
                     autoWatch: true,
 
-                    browsers: ['Chrome'],
+                    browsers: browsers,
 
                     captureTimeout: 60000,
 
