@@ -1,30 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Helpers</title>
-    <script src="../jquery-loader.js"></script>
-    <script src="../qunit/qunit/qunit.js"></script>
-    <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
-    <script src="../kendo-test-helpers.js"></script>
-    <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
-</head>
-<body>
-    <script src="../../src/kendo.core.js"></script>
-    <script src="../../src/kendo.fx.js"></script>
-    <script src="../../src/kendo.userevents.js"></script>
-    <script src="../../src/kendo.draganddrop.js"></script>
-    <script src="../../src/kendo.mobile.scroller.js"></script>
-    <script src="../../src/kendo.dataviz.core.js"></script>
-    <script src="../../src/dataviz/util.js"></script>
-    <script src="../../src/dataviz/geometry.js"></script>
-    <script src="../../src/dataviz/drawing/core.js"></script>
-    <script src="../../src/dataviz/drawing/shapes.js"></script>
-    <script src="../../src/dataviz/map/location.js"></script>
-    <script src="../../src/dataviz/map/crs.js"></script>
-    <script src="../../src/dataviz/map/navigator.js"></script>
-    <script src="../../src/dataviz/map/layers/marker.js"></script>
-    <script src="../../src/dataviz/map/main.js"></script>
-    <script>
+(function() {
         var dataviz = kendo.dataviz,
 
             g = dataviz.geometry,
@@ -36,8 +10,10 @@
 
         var map;
         function createMap(options) {
-            var element = $("<div style='width: 512px; height: 512px;'></div>")
-                          .appendTo($("#container"));
+            var element = $("<div style='width: 512px; height: 512px; position: absolute; top: 0; left: 0'></div>")
+                          .appendTo(QUnit.fixture);
+
+            pushStyle(document.body, { "padding": "50px", "margin": 0 });
 
             map = new kendo.dataviz.ui.Map(element, options);
             return map;
@@ -45,7 +21,11 @@
 
         function destroyMap() {
             map.destroy();
-            $("#container").empty();
+
+            popStyle(document.body);
+
+            QUnit.config.fixture = "";
+            QUnit.fixture.empty();
         }
 
         (function() {
@@ -238,7 +218,7 @@
             });
 
             test("eventToLocation maps event coordinates to location", function() {
-                var loc = map.eventToLocation({ pageX: 100, pageY: 100 });
+                var loc = map.eventToLocation({ pageX: 150, pageY: 150 });
                 ok(loc.round().equals(new Location(48, -55)));
             });
 
@@ -249,12 +229,12 @@
             });
 
             test("eventToLocation maps jQuery event coordinates to location", function() {
-                var loc = map.eventToLocation({ originalEvent: { pageX: 100, pageY: 100 } });
+                var loc = map.eventToLocation({ originalEvent: { pageX: 150, pageY: 150 } });
                 ok(loc.round().equals(new Location(48, -55)));
             });
 
             test("eventToView maps event coordinates to view coordinates", function() {
-                var point = map.eventToView({ pageX: 100, pageY: 100 });
+                var point = map.eventToView({ pageX: 150, pageY: 150 });
                 ok(point.round().equals(new Point(100, 100)));
             });
 
@@ -265,7 +245,7 @@
             });
 
             test("eventToLayer maps event coordinates to layer coordinates", function() {
-                var point = map.eventToLayer({ pageX: 100, pageY: 100 });
+                var point = map.eventToLayer({ pageX: 150, pageY: 150 });
                 ok(point.round().equals(new Point(356, 356)));
             });
 
@@ -316,18 +296,4 @@
                 deepEqual(map.viewSize(), { width: 512, height: 256 });
             });
         })();
-
-    </script>
-
-    <div id="container" style="position: absolute; top: 0; left: 0;"></div>
-
-    <h1 id="qunit-header">kendo.chart</h1>
-    <h2 id="qunit-banner"></h2>
-    <div id="qunit-testrunner-toolbar"></div>
-    <h2 id="qunit-userAgent"></h2>
-    <ol id="qunit-tests"></ol>
-    <div id="qunit-fixture">test markup, will be hidden</div>
-    <ul id="log"></ul>
-
-</body>
-</html>
+})();

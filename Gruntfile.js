@@ -52,6 +52,7 @@ module.exports = function(grunt) {
        'tests/textbox/*.js',
        'tests/timepicker/*.js',
        // 'tests/window/*.js'*/
+       'tests/map/*.js'
     ];
 
     var testsOption = grunt.option('tests');
@@ -204,6 +205,17 @@ module.exports = function(grunt) {
                         'src/kendo.dataviz.chart.polar.js',
                         'src/kendo.dataviz.chart.funnel.js',
                         'src/kendo.dataviz.stock.js',
+
+                        "src/dataviz/util.js",
+                        "src/dataviz/geometry.js",
+                        "src/dataviz/drawing/core.js",
+                        "src/dataviz/drawing/shapes.js",
+                        "src/dataviz/map/location.js",
+                        "src/dataviz/map/crs.js",
+                        "src/dataviz/map/compass.js",
+                        "src/dataviz/map/layers/marker.js",
+                        "src/dataviz/map/main.js",
+
                         'src/kendo.diagram.services.js',
                         'src/kendo.diagram.extensions.js',
                         'src/kendo.diagram.dom.js',
