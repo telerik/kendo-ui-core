@@ -10,6 +10,7 @@
             div = $("<div><div class='container' style='height:20px;'></div><table><thead><th data-kendo-field='field1'></th><th data-kendo-field='field2'></th></thead></table></div>").prependTo(QUnit.fixture);
         },
         teardown: function() {
+            kendo.destroy(QUnit.fixture);
             kendo.ns = "";
             div.remove();
         }
