@@ -168,7 +168,7 @@ kendo_module({
                 that.dataSource.unbind(CHANGE, that._refreshHandler);
             }
 
-            if (that.options.columns) {
+            if (that.options.columns && that.owner) {
                 that.owner.unbind("columnShow", that._updateColumnsMenuHandler);
                 that.owner.unbind("columnHide", that._updateColumnsMenuHandler);
             }

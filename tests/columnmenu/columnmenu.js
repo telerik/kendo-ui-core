@@ -35,6 +35,7 @@
         },
         teardown: function() {
             kendo.effects.enable();
+            kendo.destroy(QUnit.fixture);
             kendo.ns = "";
             $(".k-filter-menu").remove();
             dom.remove();
