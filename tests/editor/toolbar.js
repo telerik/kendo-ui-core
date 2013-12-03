@@ -27,7 +27,7 @@ editor_module("editor toolbar", {
         "insertOrderedList",
         "indent",
         "outdent",
-        "formatBlock",
+        "formatting",
         "createLink",
         "unlink",
         "insertImage",

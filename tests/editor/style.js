@@ -12,8 +12,8 @@ editor_module("editor style", {
         QUnit.fixture.append('<div id="inline" contentEditable="true"></div>');
         inline = new kendo.ui.Editor("#inline",{
             tools: [
-                { name: "style", items: [
-                    { text: "foo", value: "foo" }
+                { name: "formatting", items: [
+                    { text: "foo", value: ".foo" }
                 ] }
             ]
         } );
@@ -23,8 +23,8 @@ editor_module("editor style", {
     }
 }, {
     tools: [
-        { name: "style", items: [
-            { text: "foo", value: "bar" }
+        { name: "formatting", items: [
+            { text: "foo", value: ".bar" }
         ] }
     ],
     stylesheets: [
@@ -36,12 +36,12 @@ editor_module("editor style", {
 test("exec applies css class to inline element", function() {
     var range = createRangeFromText(editor, '<span>|foo|</span>');
     editor.selectRange(range);
-    editor.exec("style", {value:"bar"});
+    editor.exec("formatting", { value: {className:"bar"}});
     equal(editor.value(), '<span class="bar">foo</span>');
 });
 
 function styleTool(editor) {
-    return editor.toolbar.items().filter(".k-style").data("kendoSelectBox");
+    return editor.toolbar.items().filter(".k-formatting").data("kendoSelectBox");
 }
 
 function styleInput(editor) {
@@ -52,7 +52,7 @@ test("tool displays styles initially", function() {
     editor.focus();
     editor.value("");
     editor.trigger("select");
-    equal(styleInput(editor).text(), "Styles");
+    equal(styleInput(editor).text(), "Format");
 });
 
 test("tool displays known values", function() {
@@ -69,13 +69,13 @@ test("tool selects known values for inline editor", function() {
     inline.selectRange(range);
     inline.trigger("select");
 
-    equal(inline.toolbar.items().filter(".k-style").val(), "foo");
+    equal(inline.toolbar.items().filter(".k-formatting").val(), ".foo");
 });
 
 test("tool applies classes in inline editor", function() {
     var range = createRangeFromText(inline, '<span>|foo|</span>');
     inline.selectRange(range);
-    inline.exec("style", {value:"bar"});
+    inline.exec("formatting", {value: {className:"bar"} });
     equal(inline.value(), '<span class="bar">foo</span>');
 });
 
