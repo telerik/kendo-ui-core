@@ -24,7 +24,18 @@ namespace Kendo.Mvc.UI
         }
 
         public string Filter { get; set; }
-        public string Container { get; set; }
+        private string container;
+
+        public string Container {
+            get
+            {
+                return container;
+            }
+            set
+            {
+                Name = container = value;
+            }
+        }
         public TooltipPosition Position { get; set; }
         public int? ShowAfter { get; set; }
         public bool Callout { get; set; }
