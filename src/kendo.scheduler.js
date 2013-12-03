@@ -2933,7 +2933,7 @@ kendo_module({
         _initModel: function() {
             var that = this;
             that._model = kendo.observable({
-               selectedDate: this.options.date,
+               selectedDate: new Date(this.options.date),
                formattedDate: ""
            });
 

@@ -54,7 +54,8 @@ module.exports = function(grunt) {
        'tests/timepicker/*.js',
        'tests/window/*.js',
        'tests/slider/*.js',
-       'tests/editor/*.js'
+       'tests/editor/*.js',
+       'tests/scheduler/*.js'
     ];
 
     var testsOption = grunt.option('tests');
