@@ -52,8 +52,8 @@ module.exports = function(grunt) {
        'tests/validation/*.js',
        'tests/textbox/*.js',
        'tests/timepicker/*.js',
-       // 'tests/window/*.js'*/
-      'tests/slider/*.js',
+       'tests/window/*.js',
+       'tests/slider/*.js',
        'tests/editor/*.js'
     ];
 

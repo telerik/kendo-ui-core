@@ -300,6 +300,10 @@
     });
 
     test("content() destroys nested widgets", function() {
+
+        console.warn("editable tests leave k-popup elements in the DOM");
+        $(".k-popup").remove();
+
         var dialog = createWindow();
 
         var ddl = $("<input />").appendTo(dialog.element);
@@ -667,6 +671,10 @@
     });
 
     test("destroying a window destroys nested components", function() {
+
+        console.warn("Tooltip (test) leaves .k-animation-container element in the DOM");
+        $("body > .k-animation-container").remove();
+
         var html = "<div id='dialog'><select><option>foo</option></select></div>";
 
         var dialog = $(html).appendTo(QUnit.fixture)

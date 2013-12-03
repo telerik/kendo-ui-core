@@ -15,6 +15,7 @@
             }
             kendo.support.touch = false;
             kendo.support.mobileOS = false;
+            kendo.support.kineticScrollNeeded = false;
         }
     });
 
