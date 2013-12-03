@@ -5,25 +5,26 @@
             $(element).data("kendoWindow").destroy();
         });
         QUnit.fixture.closest("body").find(".k-overlay").remove();
-        kendo.destroy(QUnit.fixture.closest("body"));
 
         kendo.effects.enable();
     }
 
+    var Widget = kendo.ui.Widget;
+
+    var ResizableWidget = Widget.extend({
+        init: function(element, options) {
+            
+            Widget.fn.init.call(this, element, options);
+            this.element.css({ width: "100%", height: "100%" });
+        },
+        options: {
+            name: "ResizableWidget"
+        }
+    });
+
     module("interaction", {
         setup: function() {
             kendo.effects.disable();
-            var Widget = kendo.ui.Widget;
-            var Window = kendo.ui.Window;
-            var ResizableWidget = Widget.extend({
-                init: function(element, options) {
-                    Widget.fn.init.call(this, element, options);
-                    this.element.css({ width: "100%", height: "100%" });
-                },
-                options: {
-                    name: "ResizableWidget"
-                }
-            });
             kendo.ui.plugin(ResizableWidget);
         },
         teardown: cleanup
@@ -61,9 +62,8 @@
 
     test("resizing window resizes inner widgets", 1, function() {
         var dialog = createWindow({});
-        var widgetElement = $("<div />").kendoResizableWidget();
+        var widgetElement = $("<div />").appendTo(dialog.element).kendoResizableWidget();
         widgetElement.data("kendoResizableWidget").bind("resize", function() { ok(true) });
-        dialog.element.append(widgetElement);
 
         dialog.resize();
     });

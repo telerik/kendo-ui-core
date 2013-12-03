@@ -2,8 +2,6 @@
     module("events", {
         setup: function() {
             kendo.effects.disable();
-            var Window = kendo.ui.Window,
-                dialog, dialogObject;
         },
         teardown: function() {
             QUnit.fixture.closest("body").find(".k-window-content").each(function(idx, element){
@@ -15,8 +13,8 @@
     });
 
     function createWindow(options) {
-        dialog = $("<div />").appendTo(QUnit.fixture).kendoWindow(options);
-        dialogObject = dialog.data("kendoWindow");
+        var dialog = $("<div />").appendTo(QUnit.fixture).kendoWindow(options);
+        var dialogObject = dialog.data("kendoWindow");
 
         return dialogObject;
     }
@@ -149,49 +147,56 @@
         ok(true);
     });
 
+    var keys;
+
     module("keyboard support", {
+        setup: function() {
+            keys = kendo.keys;
+
+            $.fn.press = function(key, options) {
+                return this.trigger($.extend({ type: "keydown", keyCode: key }, options ));
+            };
+        },
         teardown: function() {
-            $(".k-window,.k-overlay").remove();
+            QUnit.fixture.closest("body").find(".k-window-content").each(function(idx, element){
+                $(element).data("kendoWindow").destroy();
+            });
+            QUnit.fixture.closest("body").find(".k-overlay").remove();
             $.mockjaxClear();
         }
     });
 
-    var keys = kendo.keys;
-
-    $.fn.press = function(key, options) {
-        return this.trigger($.extend({ type: "keydown", keyCode: key }, options ));
-    };
-
     test("escape key triggers close event", 2, function() {
         var triggers = 0;
 
-        createWindow({
+        var dialog = createWindow({
             close: function(e) {
                 ok(true);
                 ok(e.userTriggered);
             }
         });
 
-        dialog.press(keys.ESC);
+        dialog.element.press(keys.ESC);
     });
 
-    test("hitting escape in closing window does trigger new close", function() {
+    test("hitting escape in closing window does not trigger new close", function() {
         var calls = 0;
 
-        createWindow({
+        var dialog = createWindow({
             close: function() {
                 calls++;
             },
             animation: { close: { duration: 50 } }
         });
 
-        dialog.press(keys.ESC).press(keys.ESC);
+        dialog.element.press(keys.ESC).press(keys.ESC);
 
         equal(calls, 1);
     });
 
     test("up arrow moves window up", function() {
-        createWindow({});
+        var dialogObject = createWindow({});
+        var dialog = dialogObject.element;
 
         var offset = dialogObject.wrapper.offset();
 
@@ -201,7 +206,8 @@
     });
 
     test("down arrow moves window down", function() {
-        createWindow({});
+        var dialogObject = createWindow({});
+        var dialog = dialogObject.element;
 
         var offset = dialogObject.wrapper.offset();
 
@@ -211,7 +217,8 @@
     });
 
     test("left arrow moves window left", function() {
-        createWindow({});
+        var dialogObject = createWindow({});
+        var dialog = dialogObject.element;
 
         var offset = dialogObject.wrapper.offset();
 
@@ -221,7 +228,8 @@
     });
 
     test("right arrow moves window right", function() {
-        createWindow({});
+        var dialogObject = createWindow({});
+        var dialog = dialogObject.element;
 
         var offset = dialogObject.wrapper.offset();
 
@@ -231,7 +239,8 @@
     });
 
     test("ctrl+down arrow expands window", function() {
-        createWindow({ height: 200 });
+        var dialogObject = createWindow({ height: 200 });
+        var dialog = dialogObject.element;
 
         dialog.press(keys.DOWN, { ctrlKey: true });
 
@@ -239,7 +248,8 @@
     });
 
     test("ctrl+up arrow shrinks window", function() {
-        createWindow({ height: 200 });
+        var dialogObject = createWindow({ height: 200 });
+        var dialog = dialogObject.element;
 
         dialog.press(keys.UP, { ctrlKey: true });
 
@@ -247,7 +257,8 @@
     });
 
     test("ctrl+left arrow shrinks window", function() {
-        createWindow({ width: 200 });
+        var dialogObject = createWindow({ width: 200 });
+        var dialog = dialogObject.element;
 
         dialog.press(keys.LEFT, { ctrlKey: true });
 
@@ -255,7 +266,8 @@
     });
 
     test("ctrl+right arrow expands window", function() {
-        createWindow({ width: 200 });
+        var dialogObject = createWindow({ width: 200 });
+        var dialog = dialogObject.element;
 
         dialog.press(keys.RIGHT, { ctrlKey: true });
 
@@ -263,10 +275,11 @@
     });
 
     test("ctrl+left takes minWidth into account", function() {
-        createWindow({
+        var dialogObject = createWindow({
             width: 100,
             minWidth: 95
         });
+        var dialog = dialogObject.element;
 
         dialog.press(keys.LEFT, { ctrlKey: true });
 
@@ -274,10 +287,11 @@
     });
 
     test("ctrl+right takes maxWidth into account", function() {
-        createWindow({
+        var dialogObject = createWindow({
             width: 100,
             maxWidth: 105
         });
+        var dialog = dialogObject.element;
 
         dialog.press(keys.RIGHT, { ctrlKey: true });
 
@@ -285,10 +299,11 @@
     });
 
     test("ctrl+up takes minHeight into account", function() {
-        createWindow({
+        var dialogObject = createWindow({
             height: 100,
             minHeight: 95
         });
+        var dialog = dialogObject.element;
 
         dialog.press(keys.UP, { ctrlKey: true });
 
@@ -296,10 +311,11 @@
     });
 
     test("ctrl+down takes maxHeight into account", function() {
-        createWindow({
+        var dialogObject = createWindow({
             height: 100,
             maxHeight: 105
         });
+        var dialog = dialogObject.element;
 
         dialog.press(keys.DOWN, { ctrlKey: true });
 
@@ -318,11 +334,12 @@
     });
 
     test("hitting arrow keys in nested input does not trigger keyboard support", function() {
-        createWindow({
+        var dialogObject = createWindow({
             content: {
                 template: "<input class='foo' />"
             }
         });
+        var dialog = dialogObject.element;
 
         var offset = dialogObject.wrapper.offset();
 
@@ -334,14 +351,14 @@
     test("hitting escape in a non-closable window does not close it", function() {
         var triggered = false;
 
-        createWindow({
+        var dialogObject = createWindow({
             actions: ["custom"],
             close: function() {
                 triggered = true;
             }
         });
 
-        dialog.press(keys.ESC);
+        dialogObject.element.press(keys.ESC);
 
         ok(!triggered);
     });
@@ -363,13 +380,13 @@
     });
 
     test("Resizing with keyboard raises resize event", 1, function() {
-        var wnd = createWindow({
+        var dialogObject = createWindow({
             resize: function() {
                 ok(true);
             }
         });
 
-        wnd.wrapper.children(".k-window-content").trigger({
+        dialogObject.wrapper.children(".k-window-content").trigger({
             type: "keydown",
             keyCode: 40,
             ctrlKey: true
