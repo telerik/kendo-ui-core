@@ -184,6 +184,7 @@ module.exports = function(grunt) {
                         'src/kendo.dataviz.svg.js',
                         'src/kendo.dataviz.vml.js',
                         'src/kendo.diagram.math.js',
+                        'tests/chart/util.js',
                         'src/kendo.dataviz.barcode.js',
                         'src/kendo.dataviz.qrcode.js',
                         'src/kendo.dataviz.gauge.js',
