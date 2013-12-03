@@ -16,6 +16,7 @@ module.exports = function(grunt) {
        'tests/menu/**/*.js',
        'tests/dragdrop/*.js',
        'tests/dropdownlist/*.js',
+       'tests/combobox/*.js',
        'tests/view/*.js',
        'tests/router/**/*.js',
        'tests/panelbar/*.js',
