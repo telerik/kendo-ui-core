@@ -201,7 +201,7 @@ test('slider should not trigger change if we decrease value with 1 step and valu
         result = false;
     };
 
-    var slider = newSlider({ "change": change, value: 0, tooltip: { enabled: false } }),
+    var slider = newSlider({ "change": change, value: 0 }),
         dragHandle = slider.wrapper.find(".k-draghandle").focus();
 
     dragHandle.trigger({ type: "keydown", keyCode: downArrow });
