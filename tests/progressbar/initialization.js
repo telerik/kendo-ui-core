@@ -9,8 +9,6 @@ function moduleSetup() {
 
 function moduleTeardown() {
     kendo.destroy(QUnit.fixture);
-
-    $(".progressBar").data("kendoProgressBar").destroy();
 }
 
 // -----------------------------------------------------------------------------------
