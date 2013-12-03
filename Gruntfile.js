@@ -73,7 +73,7 @@ module.exports = function(grunt) {
         karma: {
             unit: {
                 options: {
-                    reportSlowerThan: 500,
+                    reportSlowerThan: 1000,
                     basePath: '',
                     frameworks: ['qunit'],
                     files: [
