@@ -208,7 +208,6 @@ test('slider should not trigger change if we decrease value with 1 step and valu
     dragHandle.trigger({ type: "keydown", keyCode: leftArrow });
 
     ok(result);
-    debugger;
 });
 
 var slider;
