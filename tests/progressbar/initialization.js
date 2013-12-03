@@ -19,7 +19,9 @@ module("Initialization", {
 });
 
 test("kendoProgressBar attaches a progressbar object to target", function() {
-    var dom = $('<div/>', { class: "progressBar" });
+    var dom = $('<div/>');
+    dom.appendTo(QUnit.fixture);
+
     var pb = dom.kendoProgressBar();
 
     ok(pb.data("kendoProgressBar") instanceof ProgressBar);
