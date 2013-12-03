@@ -19,7 +19,8 @@ module("Initialization", {
 });
 
 test("kendoProgressBar attaches a progressbar object to target", function() {
-    var pb = $("div").kendoProgressBar();
+    var dom = $('<div/>');
+    var pb = dom.kendoProgressBar();
 
     ok(pb.data("kendoProgressBar") instanceof ProgressBar);
 });
