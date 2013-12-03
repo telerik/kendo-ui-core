@@ -29,6 +29,7 @@ module.exports = function(grunt) {
        'tests/filtermenu/*.js',
        'tests/groupable/*.js',
        'tests/imagebrowser/*.js',
+       'tests/multiselect/*.js',
        'tests/progressbar/*.js',
        'tests/popup/*.js',
        'tests/selectable/*.js',
