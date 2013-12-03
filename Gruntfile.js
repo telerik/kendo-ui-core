@@ -171,7 +171,6 @@ module.exports = function(grunt) {
                         'tests/qunit/addons/close-enough/qunit-close-enough.js',
                         'tests/kendo-test-helpers.js',
                         'tests/**/test-helper.js',
-                        'demos/mvc/content/shared/js/examples.js',
                         'demos/mvc/content/shared/js/less.js',
                         { pattern: 'demos/mvc/App_Data/*json', included: false },
                         'demos/mvc/content/mobilethemebuilder/scripts/colorengine.js',
@@ -204,6 +203,7 @@ module.exports = function(grunt) {
                         { pattern: 'download-builder/config/kendo-config.json', included: false },
                         'tests/diagram/common.js'
                     ].concat(tests),
+
                     exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js' ],
 
                     reporters: ['progress', 'osx' ],
