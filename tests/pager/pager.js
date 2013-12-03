@@ -8,6 +8,7 @@
             kendo.ns = "kendo-";
         },
         teardown: function() {
+            kendo.destroy(QUnit.fixture);
             kendo.ns = "";
         }
     });
@@ -24,7 +25,7 @@
             dataSource: dataSource,
             previousNext: false
         }, options);
-        var element = $("<div />").kendoPager(options);
+        var element = $("<div />").appendTo(QUnit.fixture).kendoPager(options);
         pager = element.data("kendoPager");
         return element;
     }
@@ -616,7 +617,7 @@
     test("dropdown is visible when pager is created multiple times", function() {
         setup();
 
-        container = $("<div/>").kendoPager({
+        container = $("<div/>").appendTo(QUnit.fixture).kendoPager({
             dataSource: dataSource,
             pageSizes: [10, 20]
         });
