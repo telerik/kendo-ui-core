@@ -52,7 +52,7 @@
             kendo.support.mouseAndTouchPresent = true;
 
             try {
-                var div = $$("<div />").appendTo(document.body).handler({
+                var div = $$("<div />").appendTo(QUnit.fixture).handler({
                         _down: function() { ok(true) },
                         _move: function() { ok(true) },
                         _up: function() { ok(true) }

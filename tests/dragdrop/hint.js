@@ -1,5 +1,6 @@
 (function() {
     var Draggable = kendo.ui.Draggable,
+        draggable,
         span,
         hint;
 
@@ -12,6 +13,9 @@
         teardown: function() {
             span.remove();
 
+            if (draggable) {
+                draggable.destroy();
+            }
             if (!$.isFunction(hint)) {
                 hint.remove();
             }
@@ -33,7 +37,7 @@
     }
 
     test("the hint is appended to the body", function() {
-        var draggable = setup();
+        draggable = setup();
 
         startDrag();
 
@@ -41,7 +45,7 @@
     });
 
     test("the hint is made absolute", function() {
-        var draggable = setup();
+        draggable = setup();
 
         startDrag();
 
@@ -49,7 +53,7 @@
     });
 
     asyncTest("the hint is removed from DOM after the draggable is destroyed", 1, function() {
-        var draggable = setup();
+        draggable = setup();
 
         draggable.bind("destroy", function() {
             start();
@@ -62,7 +66,7 @@
     });
 
     test("the hint is auto-postioned when dragged", function() {
-        var draggable = setup();
+        draggable = setup();
 
         var offset = kendo.getOffset(span);
 
@@ -74,7 +78,7 @@
     });
 
     test("the hint can be constrained horizontally", function() {
-        var draggable = setup({axis: "x"});
+        draggable = setup({axis: "x"});
 
         var offset = kendo.getOffset(span);
 
@@ -87,7 +91,7 @@
     });
 
     test("the hint can be constrained vertically", function() {
-        var draggable = setup({axis: "y"});
+        draggable = setup({axis: "y"});
 
         var offset = kendo.getOffset(span);
 
@@ -100,7 +104,7 @@
     });
 
     test("the hint is positioned using options.cursorOffset", function() {
-        var draggable = setup({ cursorOffset: { left: 1, top: 1 } });
+        draggable = setup({ cursorOffset: { left: 1, top: 1 } });
 
         startDrag();
 
@@ -109,7 +113,7 @@
     });
 
     test("the hint is positioned using options.cursorOffset", function() {
-        var draggable = setup({ cursorOffset: { left: 1, top: 1 } });
+        draggable = setup({ cursorOffset: { left: 1, top: 1 } });
 
         startDrag();
 
@@ -118,7 +122,7 @@
     });
 
     test("the hint is repositioned during dragging", function() {
-        var draggable = setup({ cursorOffset: { left: 10, top: 10 } });
+        draggable = setup({ cursorOffset: { left: 10, top: 10 } });
 
         startDrag();
         trigger("mousemove", {pageX: 100, pageY: 100});
@@ -128,8 +132,8 @@
     });
 
     test("hint as a function", function() {
-        var h = new $("<span/>"),
-            draggable = setup({ hint : function() { return h; } });
+        var h = new $("<span/>");
+        draggable = setup({ hint : function() { return h; } });
 
         startDrag();
 
@@ -138,7 +142,7 @@
     });
 
     test("hint as a function which returns a string", function() {
-        var draggable = setup({ hint : function() { return "<span>foo</span>"; } });
+        draggable = setup({ hint : function() { return "<span>foo</span>"; } });
 
         startDrag();
 

@@ -111,7 +111,7 @@
         test("destroy removes only destroyed object from cache", function() {
             target = new DropTarget(targetElement, { group: "qux" });
 
-            var quxElement = $("<div />").appendTo("body");
+            var quxElement = $("<div />").appendTo(QUnit.fixture);
             var quxTarget = new DropTarget(quxElement, { group: "qux" });
 
             target.destroy();
@@ -123,7 +123,7 @@
         test("destroyGroup removes complete group from cache", function() {
             target = new DropTarget(targetElement, { group: "qux" });
 
-            var quxElement = $("<div />").appendTo("body");
+            var quxElement = $("<div />").appendTo(QUnit.fixture);
             var quxTarget = new DropTarget(quxElement, { group: "qux" });
 
             DropTarget.destroyGroup("qux");
