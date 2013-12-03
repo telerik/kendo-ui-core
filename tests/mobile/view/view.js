@@ -14,6 +14,12 @@
                 <span></span>\
                 <a data-role="button">Button</a>\
             </script>');
+        },
+
+        teardown: function() {
+            if (view) {
+                view.destroy();
+            }
         }
     });
 

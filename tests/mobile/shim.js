@@ -3,15 +3,18 @@
 
     module("Shim", {
         setup: function () {
-           root = QUnit.fixture;
-           root.html('<div data-role="view"><div id="shim"></div></div>').wrapInner("<div />");
-           this.mobileOS = kendo.support.mobileOS;
-           kendo.support.mobileOS = kendo.support.detectOS("Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B176 Safari/7534.48.3");
-           app = root.children().first();
-       },
-       teardown: function() {
-           kendo.support.mobileOS = this.mobileOS;
-       }
+            root = QUnit.fixture;
+            root.html('<div data-role="view"><div id="shim"></div></div>').wrapInner("<div />");
+            this.mobileOS = kendo.support.mobileOS;
+            kendo.support.mobileOS = kendo.support.detectOS("Mozilla/5.0 (iPhone; CPU iPhone OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B176 Safari/7534.48.3");
+            app = root.children().first();
+        },
+        teardown: function() {
+            kendo.support.mobileOS = this.mobileOS;
+            if (shim) {
+                shim.destroy();
+            }
+        }
     });
 
     test("moves to body if no application is present", 1, function(){
