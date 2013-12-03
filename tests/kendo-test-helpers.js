@@ -107,6 +107,7 @@ $('head')
     .append('<link rel="stylesheet/less" href="/base/styles/web/kendo.common.less" type="text/css" />');
 
 var domContentsLength;
+
 $(function() {
     QUnit.fixture = $("<div id='qunit-fixture' style='height: 100px'></div>").appendTo(document.body);
     domContentsLength = $(document.body).children().not("script").length;

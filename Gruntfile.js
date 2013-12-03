@@ -43,8 +43,9 @@ module.exports = function(grunt) {
        'tests/datepicker/*.js',
        'tests/diagram/*.js',
        'tests/splitter/*.js',
-       'tests/validation/*.js'/*,
-       'tests/window/*.js'*/
+       'tests/validation/*.js',
+       'tests/textbox/*.js',
+       // 'tests/window/*.js'*/
     ],
 
     passedTests = grunt.option('tests');
