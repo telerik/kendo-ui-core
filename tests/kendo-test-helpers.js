@@ -140,7 +140,7 @@ $('head')
 
         var length = getDomContentsLength();
 
-        if (!QUnit.suppressCleanupCheck && length != domContentsLength) {
+        if (!QUnit.suppressCleanupCheck && length > domContentsLength) {
             console.warn(details.module, details.name, 'test did not clean DOM contents properly');
         }
 
