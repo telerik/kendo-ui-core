@@ -155,6 +155,19 @@
         move(element, 14, 24);
     });
 
+    module("hold", {
+        setup: function() {
+            kendo.UserEvents.minHold(100);
+            element = $('<div />').appendTo(QUnit.fixture);
+            userEvents = new UserEvents(element, {
+                threshold: 5
+            });
+        },
+        teardown: function() {
+            kendo.UserEvents.minHold(800);
+        }
+    });
+
     asyncTest("triggers hold after a while", 1, function(){
         userEvents.bind("hold", function(e) {
             ok(true);
@@ -165,7 +178,7 @@
         setTimeout(function() {
             start();
             release(element, 10, 20);
-        }, 1000);
+        }, 200);
     });
 
     asyncTest("does not trigger hold if released before that", 0, function(){
@@ -177,11 +190,11 @@
 
         setTimeout(function() {
             release(element, 10, 20);
-        }, 500);
+        }, 10);
 
         setTimeout(function() {
             start();
-        }, 1000);
+        }, 101);
     });
 
     asyncTest("does not trigger hold if moved before that", 0, function(){
@@ -193,12 +206,12 @@
 
         setTimeout(function() {
             move(element, 15, 25);
-        }, 500);
+        }, 50);
 
         setTimeout(function() {
             start();
             release(element, 15, 25);
-        }, 1000);
+        }, 101);
     });
 
     module("nested elements", {
