@@ -6,12 +6,16 @@ function editor_module(name, options, editorOptions) {
     QUnit.moduleStart(function(details) {
         if (details.name == name) {
             $('<textarea id="editor-fixture"></textarea>').appendTo("body").kendoEditor(editorOptions);
+
+            QUnit.suppressCleanupCheck = true;
         }
     });
 
     QUnit.moduleDone(function(details) {
         if (details.name == name) {
             $("#editor-fixture").kendoEditor("destroy").closest(".k-editor").remove();
+
+            QUnit.suppressCleanupCheck = false;
         }
     });
 

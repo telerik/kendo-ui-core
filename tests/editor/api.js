@@ -181,6 +181,8 @@ test("destroy destroys toolbar", function() {
 
         ok(called);
     });
+
+    editor.toolbar.destroy();
 });
 
 }());
