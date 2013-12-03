@@ -1,9 +1,8 @@
 (function() {
 
 var DateView = kendo.DateView;
+var dateview, dateview2;
 var div;
-
-//QUnit.config.testTimeout = 800;
 
 module("kendo.ui.DateView initialization", {
     setup: function() {
@@ -13,8 +12,16 @@ module("kendo.ui.DateView initialization", {
         div = $("<div />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.ns = "";
         kendo.effects.enable();
+        kendo.ns = "";
+
+        if (dateview) {
+            dateview.destroy();
+        }
+
+        if (dateview2) {
+            dateview2.destroy();
+        }
     }
 });
 
@@ -31,108 +38,111 @@ test("DateView re-assigns shared calendar", function() {
         start: "month",
         depth: "month",
         culture: "bg-BG"
-    },
-    dv1 = new DateView({
+    };
+
+    dateview = new DateView({
         value: new Date(),
         min: new Date(),
         max: new Date(),
         footer: '#= kendo.toString(data,"D") #',
         start: "month",
         depth: "month"
-    }),
-    dv2 = new DateView(options);
+    });
 
-    dv2._calendar();
+    dateview2 = new DateView(options);
 
-    var calendar = dv1.calendar,
-        popup = dv2.popup;
+    dateview2._calendar();
+
+    var calendar = dateview.calendar,
+        popup = dateview2.popup;
 
     equal(calendar.options.culture, options.culture);
     equal(+calendar.options.min, +options.min);
     equal(+calendar.options.max, +options.max);
     equal(calendar._events["change"][0], options.change);
-    equal(calendar.element.data("dateView"), dv2);
+    equal(calendar.element.data("dateView"), dateview2);
 
-    equal(popup.options.anchor, dv2.options.anchor);
-    equal(popup._events["open"][0], dv2.options.open);
-    equal(popup._events["close"][0], dv2.options.close);
+    equal(popup.options.anchor, dateview2.options.anchor);
+    equal(popup._events["open"][0], dateview2.options.open);
+    equal(popup._events["close"][0], dateview2.options.close);
 });
 
 test("DateView build templates", function() {
-    var dateView = new DateView();
+    dateview = new DateView();
 
-    ok(dateView.month);
-    ok(dateView.month.content);
-    ok(dateView.month.empty);
+    ok(dateview.month);
+    ok(dateview.month.content);
+    ok(dateview.month.empty);
 });
 
 test("DateView build footer template", function() {
-    var dateView = new DateView({
+    dateview = new DateView({
         footer: '#= kendo.toString(data,"D") #'
     });
 
-    ok(dateView.footer);
+    ok(dateview.footer);
 });
 
 test("DateView's footer template honors options.culture", function() {
-    var dateView = new DateView({
+    dateview = new DateView({
         culture: "bg-BG"
-    }),
-    today = new Date();
+    });
 
-    equal(dateView.footer(today), kendo.toString(today, "D", "bg-BG"));
+    var today = new Date();
+
+    equal(dateview.footer(today), kendo.toString(today, "D", "bg-BG"));
 });
 
 test("DateView sets the calendar.month templates", function() {
-    var dateView = new DateView({
+    dateview = new DateView({
         month: {
             content: "<div>#=data.value#</div>"
         }
     });
 
-    dateView._calendar();
+    dateview._calendar();
 
-    equal(dateView.calendar.month.content({}), dateView.month.content({}));
+    equal(dateview.calendar.month.content({}), dateview.month.content({}));
 });
 
-test("DateView change the footer using its footer template", function() {
-    var dateView = new DateView({
+test("DateView changes the footer using its footer template", function() {
+    dateview = new DateView({
         footer: "template"
     });
 
-    dateView.calendar = new kendo.ui.Calendar($("<div/>"));
-    dateView._calendar();
+    dateview._calendar();
 
-    equal(dateView.calendar._today.html(), "template");
+    equal(dateview.calendar._today.html(), "template");
 });
 
 test("DateView should create shared calendar", function() {
-    var dateView = new DateView();
+    dateview = new DateView();
 
-    ok(dateView.calendar);
+    ok(dateview.calendar);
 });
 
 test("DateView should create popup instance", function() {
-    var dateView = new DateView();
+    dateview = new DateView();
 
-    ok(dateView.popup);
+    ok(dateview.popup);
 });
 
 test("DateView persist focused value when calendar navigate", function() {
     var called = false,
-        date = new Date(2000, 10, 10),
-        dv1 = new DateView({
-            value: date,
-            min: date,
-            max: date,
-            start: "month"
-        });
+        date = new Date(2000, 10, 10);
 
-    dv1._calendar();
-    dv1.calendar.navigate(date, "month");
+    dateview = new DateView({
+        value: date,
+        min: date,
+        max: date,
+        start: "month"
+    });
 
-    equal(dv1.calendar._table.find(".k-state-focused").children().attr("data-kendo-value"), "2000/10/10");
-    equal(+dv1._current, +dv1.calendar._current);
+    dateview._calendar();
+    dateview.calendar.navigate(date, "month");
+
+    equal(dateview.calendar._table.find(".k-state-focused").children().attr("data-kendo-value"), "2000/10/10");
+    equal(+dateview._current, +dateview.calendar._current);
 });
 
 var input;
@@ -148,6 +158,7 @@ module("kendo.ui.DatePicker initialization", {
     teardown: function() {
         kendo.ns = "";
         kendo.effects.enable();
+        input.data("kendoDatePicker").destroy();
     }
 });
 
@@ -240,7 +251,7 @@ test("DatePicker wire icon click", function() {
 asyncTest("form reset support", 2, function() {
     input.attr("value", "12/12/2000");
 
-    var form = $("<form/>").appendTo(document.body).append(input),
+    var form = $("<form/>").appendTo(QUnit.fixture).append(input),
         datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
     datepicker.open();
@@ -258,7 +269,7 @@ asyncTest("form reset support", 2, function() {
 asyncTest("support for form defined by attribute", 2, function() {
     input.attr("form", "form1").attr("value", "12/12/2000");
 
-    var form = $("<form id='form1'/>").appendTo(document.body),
+    var form = $("<form id='form1'/>").appendTo(QUnit.fixture),
         datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
     datepicker.open();
@@ -339,8 +350,9 @@ test("DatePicker updates calendar's focused date", function() {
 
 if (!kendo.support.touch) {
     test("DatePickers changes the type of the input", function() {
-        var input = $("<input type='date'/>"),
-            datepicker = input.kendoDatePicker().data("kendoDatePicker");
+        input = $("<input type='date'/>");
+
+        var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
         equal(datepicker.element[0].type, "text");
         equal(datepicker.element.attr("type"), "text");

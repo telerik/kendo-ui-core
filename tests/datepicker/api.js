@@ -42,9 +42,6 @@ test("value method calls calendar.value() only if it is assigned to the dateView
         start: "month"
     });
 
-    dateview.calendar.element.data("dateView", {});
-    dateview.calendar.value(null);
-
     date.setDate(20);
     dateview.value(date);
 
