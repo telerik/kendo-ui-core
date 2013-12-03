@@ -5,6 +5,11 @@
 
     module("kendo.ui.TimePicker initialization", {
         setup: function() {
+
+            this.touch = kendo.support.touch;
+            this.mobileOS = kendo.support.mobileOS;
+            this.kineticScrollNeeded = kendo.support.kineticScrollNeeded;
+
             QUnit.config.testTimeout = 800;
             input = $("<input />").appendTo(QUnit.fixture);
         },
@@ -13,9 +18,9 @@
             if (widget) {
                 widget.destroy();
             }
-            kendo.support.touch = false;
-            kendo.support.mobileOS = false;
-            kendo.support.kineticScrollNeeded = false;
+            kendo.support.touch = this.touch;
+            kendo.support.mobileOS = this.mobileOS;
+            kendo.support.kineticScrollNeeded = this.kineticScrollNeeded;
         }
     });
 
