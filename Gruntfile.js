@@ -15,6 +15,7 @@ module.exports = function(grunt) {
        'tests/mvvm/*.js',
        'tests/menu/**/*.js',
        'tests/dragdrop/*.js',
+       'tests/dropdownlist/*.js',
        'tests/view/*.js',
        'tests/router/**/*.js',
        'tests/panelbar/*.js',
