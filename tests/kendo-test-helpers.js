@@ -106,12 +106,20 @@ $('head')
     .append('<link rel="stylesheet/less" href="/base/styles/mobile/kendo.mobile.all.less" type="text/css" />')
     .append('<link rel="stylesheet/less" href="/base/styles/web/kendo.common.less" type="text/css" />');
 
+var domContentsLength;
 $(function() {
     QUnit.fixture = $("<div id='qunit-fixture' style='height: 100px'></div>").appendTo(document.body);
+    domContentsLength = $(document.body).children().not("script").length;
 })
+
 
 QUnit.testDone(function( details ) {
     QUnit.fixture.empty().attr("class", "").attr("style", "").css("height", "100px");
+    var length = $(document.body).children().not("script").length;
+    if (length != domContentsLength) {
+        domContentsLength = length;
+        console.warn(details.module, details.name, 'test did not clean DOM contents properly');
+    }
 });
 
 QUnit.brazilTimezoneTest = brazilTimezoneTest;
