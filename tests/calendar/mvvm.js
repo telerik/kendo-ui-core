@@ -15,6 +15,7 @@ module("kendo.ui.Calendar MVVM", {
     teardown: function() {
         kendo.effects.enable();
         delete window.change;
+        kendo.destroy(QUnit.fixture);
     }
 });
 

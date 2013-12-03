@@ -13,6 +13,7 @@ module("kendo.ui.ComboBox initialization", {
         kendo.ns = "";
 
         combobox.destroy();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

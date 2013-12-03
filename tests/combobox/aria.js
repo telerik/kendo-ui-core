@@ -11,6 +11,7 @@ module("kendo.ui.ComboBox ARIA", {
     teardown: function() {
         kendo.effects.enable();
         input.data("kendoComboBox").destroy();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

@@ -9,6 +9,7 @@ module("kendo.ui.Calendar API", {
     },
     teardown: function() {
         kendo.effects.enable();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

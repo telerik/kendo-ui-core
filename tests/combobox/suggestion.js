@@ -66,6 +66,7 @@ module("kendo.ui.ComboBox suggestion", {
     teardown: function() {
         kendo.effects.enable();
         combobox.destroy();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

@@ -27,6 +27,7 @@ module("kendo.ui.ComboBox selection", {
     teardown: function() {
         kendo.effects.enable();
         combobox.destroy();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

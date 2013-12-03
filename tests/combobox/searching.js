@@ -31,6 +31,7 @@ module("kendo.ui.ComboBox searching", {
         kendo.effects.enable();
 
         combobox.destroy();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

@@ -24,6 +24,7 @@ module("autocomplete mvvm", {
       delete window.dataBound;
 
       kendo.destroy(dom);
+      kendo.destroy(QUnit.fixture);
   }
 });
 

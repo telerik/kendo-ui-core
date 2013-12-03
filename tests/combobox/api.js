@@ -25,6 +25,7 @@ module("kendo.ui.ComboBox selection", {
             select.data("kendoComboBox").destroy();
             select = null;
         }
+        kendo.destroy(QUnit.fixture);
     }
 });
 

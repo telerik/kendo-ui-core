@@ -22,6 +22,7 @@ module("kendo.ui.Calendar navigation", {
 
         calendar.destroy();
         div.remove();
+        kendo.destroy(QUnit.fixture);
     }
 });
 
@@ -512,6 +513,7 @@ module("kendo.ui.Calendar focus persistance", {
 
         calendar.destroy();
         div.remove();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

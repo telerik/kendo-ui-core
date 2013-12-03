@@ -10,6 +10,7 @@ module("kendo.ui.DateView API", {
     },
     teardown: function() {
         dateview.destroy();
+        kendo.destroy(QUnit.fixture);
     }
 });
 
@@ -42,11 +43,17 @@ test("value method calls calendar.value() only if it is assigned to the dateView
         start: "month"
     });
 
+    var calendar = dateview.calendar;
+    calendar.element.data("dateView", null);
+    calendar.value(kendo.date.today());
+
     date.setDate(20);
     dateview.value(date);
 
+    calendar.element.data("dateView", dateview);
+
     equal(+dateview._value, +date);
-    notEqual(+dateview.calendar.value(), +date);
+    notEqual(+calendar.value(), +date);
 
 });
 
@@ -110,6 +117,7 @@ module("kendo.ui.DateView API", {
     },
     teardown: function() {
         datepicker.destroy();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

@@ -12,6 +12,7 @@ module("kendo.ui.DatePicker ARIA", {
     },
     teardown: function() {
         instance.destroy();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

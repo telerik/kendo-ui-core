@@ -10,6 +10,7 @@ module("kendo.ui.Calendar initialization", {
     },
     teardown: function() {
         kendo.effects.enable();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

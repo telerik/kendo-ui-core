@@ -12,6 +12,7 @@ module("kendo.ui.DatePicker Events", {
     },
     teardown: function() {
         datepicker.destroy();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

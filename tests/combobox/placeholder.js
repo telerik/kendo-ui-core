@@ -9,6 +9,7 @@ module("kendo.ui.ComboBox placeholder", {
     },
     teardown: function() {
         input.data("kendoComboBox").destroy();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

@@ -12,6 +12,7 @@ module("kendo.ui.Calendar rendering", {
     teardown: function() {
         kendo.ns = "";
         div.remove();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

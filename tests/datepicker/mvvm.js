@@ -12,11 +12,13 @@ module("kendo.ui.Calendar MVVM", {
         delete window.change;
 
         dom.data("kendoDatePicker").destroy();
+        kendo.destroy(QUnit.fixture);
     }
 });
 
 test("initializes a datepicker when data role is datepicker", function() {
     dom = $('<input data-role="datepicker"/>');
+    dom.appendTo(QUnit.fixture);
 
     kendo.bind(dom);
 
@@ -25,6 +27,7 @@ test("initializes a datepicker when data role is datepicker", function() {
 
 test("initializes a options from data attributes", function() {
     dom = $('<input data-role="datepicker" data-start="year" />');
+    dom.appendTo(QUnit.fixture);
 
     kendo.bind(dom);
 
@@ -36,6 +39,7 @@ test("initializes a options from data attributes", function() {
 
 test("Preserve options after widget init", function() {
     dom = $('<input data-role="datepicker" />');
+    dom.appendTo(QUnit.fixture);
     dom.kendoDatePicker({
         start: "decade",
         depth: "decade"
@@ -51,6 +55,7 @@ test("Preserve options after widget init", function() {
 
 test("initializes options from data attributes after init of the widget", function() {
     dom = $('<input data-role="datepicker" data-format="{0:MM yyyy}" data-start="year" />');
+    dom.appendTo(QUnit.fixture);
     dom.kendoDatePicker();
 
     kendo.bind(dom);
@@ -66,6 +71,7 @@ test("initializes options from data attributes after init of the widget", functi
 
 test("initializes a parseFormats option from data attributes", function() {
     dom = $('<input data-role="datepicker" data-format="MM yyyy" data-parse-formats="MM/dd/yyyy" />');
+    dom.appendTo(QUnit.fixture);
 
     dom.kendoDatePicker();
     kendo.bind(dom);
@@ -78,6 +84,7 @@ test("initializes a parseFormats option from data attributes", function() {
 
 test("initializes a parseFormats option from data attribute with array value", function() {
     dom = $('<input data-role="datepicker" data-format="MM yyyy" data-parse-formats=\'["MM/dd/yyyy", "dd/MM/yyyy"]\' />');
+    dom.appendTo(QUnit.fixture);
 
     kendo.bind(dom);
 
@@ -90,6 +97,7 @@ test("initializes a parseFormats option from data attribute with array value", f
 
 test("initializes value from view model", function() {
     dom = $('<input data-role="datepicker" data-bind="value:value" />');
+    dom.appendTo(QUnit.fixture);
 
     var value = new Date();
 
@@ -100,6 +108,7 @@ test("initializes value from view model", function() {
 
 test("changing a value updates the view model", function() {
     dom = $('<input data-role="datepicker" data-bind="value:value" />');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({ value: null });
 
@@ -114,6 +123,7 @@ test("changing a value updates the view model", function() {
 
 test("changing to invalid value does not clear widget", function() {
     dom = $('<input data-role="datepicker" data-bind="value:value" />');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({ value: new Date() });
 
@@ -126,6 +136,7 @@ test("changing to invalid value does not clear widget", function() {
 
 test("binding datepicker initialized before binding", function() {
     dom = $('<input data-bind="value:value" />');
+    dom.appendTo(QUnit.fixture);
 
     var value = new Date(2011, 1, 2);
     var observable = kendo.observable({ value: null });
@@ -140,6 +151,7 @@ test("binding datepicker initialized before binding", function() {
 
 test("binding datepicker initialized after binding", function() {
     dom = $('<input data-bind="value:value" />');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({ value: null });
     var value = new Date(2011, 1, 2);
@@ -154,6 +166,7 @@ test("binding datepicker initialized after binding", function() {
 
 test("updating model value updates the UI", function() {
     dom = $('<input data-bind="value:value" />');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({ value: value });
 
@@ -168,6 +181,7 @@ test("updating model value updates the UI", function() {
 
 test("bindings are removed if element is rebind", 1, function() {
     dom = $('<input data-role="datepicker" data-bind="value:value" />');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({ value: new Date(2011, 1, 2) });
 
@@ -182,6 +196,7 @@ test("bindings are removed if element is rebind", 1, function() {
 
 test("binding target is destroyed", 1, function() {
     dom = $('<input data-role="datepicker" data-bind="value:value"/>');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({ value: null });
 
@@ -196,6 +211,7 @@ test("binding target is destroyed", 1, function() {
 
 test("dataBound event is raised if attached as option", 1, function() {
     dom = $('<input data-role="datepicker" data-change="change" />');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({
         items: [{text:"foo"}, {text:"bar"}]
@@ -207,6 +223,7 @@ test("dataBound event is raised if attached as option", 1, function() {
 
 test("dataBound event is raised if attached as option to a already initialized datepicker", 1, function() {
     dom = $('<input data-change="change" />').kendoDatePicker();
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({
         items: [{text:"foo"}, {text:"bar"}]
@@ -218,6 +235,7 @@ test("dataBound event is raised if attached as option to a already initialized d
 
 test("binding enabled to false disables the widget", function() {
     dom = $('<input data-bind="enabled:enabled" data-role="datepicker"/>');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({
         enabled: false
@@ -230,6 +248,7 @@ test("binding enabled to false disables the widget", function() {
 
 test("binding enabled to true enables the widget", function() {
     dom = $('<input data-bind="enabled:enabled" disabled="disabled" data-role="datepicker" />');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({
         enabled: true
@@ -242,6 +261,7 @@ test("binding enabled to true enables the widget", function() {
 
 test("binding disable to true disables the widget", function() {
     dom = $('<input data-bind="disabled:disabled" disabled="disabled" data-role="datepicker" />');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({
         disabled: false
@@ -254,6 +274,7 @@ test("binding disable to true disables the widget", function() {
 
 test("binding disabled to false enables the widget", function() {
     dom = $('<input data-bind="disabled:disabled" data-role="datepicker" />');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({
         disabled: true
@@ -266,6 +287,7 @@ test("binding disabled to false enables the widget", function() {
 
 test("binding visible to false hides the widget", function() {
     dom = $('<input data-bind="visible:visible" data-role="datepicker"/>');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({
         visible: false
@@ -278,6 +300,7 @@ test("binding visible to false hides the widget", function() {
 
 test("binding visible to true shows the widget", function() {
     dom = $('<input data-bind="visible:visible" data-role="datepicker" style="display:none"/>');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({
         visible: true
@@ -290,6 +313,7 @@ test("binding visible to true shows the widget", function() {
 
 test("changing visible to false hides the widget", function() {
     dom = $('<input data-bind="visible:visible" data-role="datepicker"/>');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({
         visible: true
@@ -303,6 +327,7 @@ test("changing visible to false hides the widget", function() {
 
 test("changing visible to true shows the widget", function() {
     dom = $('<input data-bind="visible:visible" data-role="datepicker"/>');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({
         visible: false
@@ -316,6 +341,7 @@ test("changing visible to true shows the widget", function() {
 
 test("binding invisible to true hides the widget", function() {
     dom = $('<input data-bind="invisible:invisible" data-role="datepicker"/>');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({
         invisible: true
@@ -328,6 +354,7 @@ test("binding invisible to true hides the widget", function() {
 
 test("binding invisible to false shows the widget", function() {
     dom = $('<input data-bind="invisible:invisible" data-role="datepicker" style="display:none"/>');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({
         invisible: false
@@ -340,6 +367,7 @@ test("binding invisible to false shows the widget", function() {
 
 test("changing invisible to true hides the widget", function() {
     dom = $('<input data-bind="invisible:invisible" data-role="datepicker"/>');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({
         invisible: false
@@ -353,6 +381,7 @@ test("changing invisible to true hides the widget", function() {
 
 test("changing invisible to false shows the widget", function() {
     dom = $('<input data-bind="invisible:invisible" data-role="datepicker"/>');
+    dom.appendTo(QUnit.fixture);
 
     var observable = kendo.observable({
         invisible: true
@@ -366,6 +395,7 @@ test("changing invisible to false shows the widget", function() {
 
 test("binding datepicker initialized before binding does not override change event handler of calendar", 1, function() {
     dom = $('<input data-bind="value: value" />');
+    dom.appendTo(QUnit.fixture);
 
     var value = new Date(2011, 1, 2);
     var observable = kendo.observable({ value: null });

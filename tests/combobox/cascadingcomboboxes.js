@@ -27,6 +27,7 @@ module("kendo.ui.ComboBox Cascading ComboBoxes", {
         destroy(parent);
         destroy(child);
         destroy(third);
+        kendo.destroy(QUnit.fixture);
    }
 });
 

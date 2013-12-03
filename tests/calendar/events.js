@@ -12,6 +12,7 @@ module("kendo.ui.Calendar events", {
     teardown: function() {
         kendo.effects.enable();
         instance.destroy();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

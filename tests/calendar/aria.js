@@ -15,6 +15,7 @@ module("kendo.ui.Calendar ARIA", {
         instance.destroy();
 
         kendo.effects.enable();
+        kendo.destroy(QUnit.fixture);
     }
 });
 

@@ -2,6 +2,7 @@
 
 var DateView = kendo.DateView;
 var dateview, dateview2;
+var anchor;
 var div;
 
 module("kendo.ui.DateView initialization", {
@@ -9,6 +10,7 @@ module("kendo.ui.DateView initialization", {
         kendo.ns = "kendo-";
         kendo.effects.disable();
 
+        anchor = $("<input/>").appendTo(QUnit.fixture);
         div = $("<div />").appendTo(QUnit.fixture);
     },
     teardown: function() {
@@ -22,12 +24,13 @@ module("kendo.ui.DateView initialization", {
         if (dateview2) {
             dateview2.destroy();
         }
+        kendo.destroy(QUnit.fixture);
     }
 });
 
 test("DateView re-assigns shared calendar", function() {
     var options = {
-        anchor: $("<input/>"),
+        anchor: anchor,
         value: new Date (2000, 10, 10),
         footer: '#= kendo.toString(data,"D") #',
         min: new Date (1900, 10, 10),
@@ -286,7 +289,7 @@ asyncTest("support for form defined by attribute", 2, function() {
 
 
 test("extend popup options if datepicker.options.popup", function() {
-    var appendTo = "body",
+    var appendTo = QUnit.fixture,
         datepicker = new kendo.ui.DatePicker(input, {
             popup: {
                 appendTo: appendTo
@@ -350,7 +353,7 @@ test("DatePicker updates calendar's focused date", function() {
 
 if (!kendo.support.touch) {
     test("DatePickers changes the type of the input", function() {
-        input = $("<input type='date'/>");
+        input = $("<input type='date'/>").appendTo(QUnit.fixture);
 
         var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
