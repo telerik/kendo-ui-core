@@ -21,7 +21,11 @@
             container = $("<div/>").appendTo(QUnit.fixture);
         },
         teardown: function() {
-            container.remove();
+           var widget = container.data("kendoImageBrowser");
+           if (widget) {
+               widget.destroy();
+           }
+           container.remove();
         }
     });
 
@@ -730,10 +734,13 @@
 
     test("destroy calls nested upload destroy", function() {
         var browser = setup({ transport: { uploadUrl: "foo" } }),
-            destroy = stub(container.find(".k-upload input").data("kendoUpload"), "destroy")
+            upload = container.find(".k-upload input").data("kendoUpload"),
+            originalDestroy = upload.destroy,
+            destroy = stub(upload, "destroy")
 
         browser.destroy();
         ok(destroy.calls("destroy"));
+        originalDestroy.call(upload);
     });
 
     test("destroy calls nested listview destroy", function() {
@@ -746,10 +753,12 @@
 
     test("destroy calls nested popup destroy", function() {
         var browser = setup(),
+            originalDestroy = browser.arrangeBy.destroy,
             destroy = stub(browser.arrangeBy, "destroy")
 
         browser.destroy();
         ok(destroy.calls("destroy"));
+        originalDestroy.call(browser.arrangeBy);
     });
 
     test("destroy calls nested searchbox destroy", function() {
