@@ -1,61 +1,55 @@
 (function(){
 
 var editor;
-
 var tool;
+var dom;
+var editorNS = kendo.ui.editor;
+var toolTemplate = kendo.template(editorNS.EditorUtils.buttonTemplate, { useWithBlock: false });
 
-editor_module("editor insert table tool", {
+module("editor insert table tool", {
     setup: function() {
         kendo.effects.disable();
-        editor = $("#editor-fixture").data("kendoEditor");
-        tool = editor.wrapper.find('.k-createTable').parent();
+        tool = new editorNS.InsertTableTool();
+        dom = $(toolTemplate({ popup: true, title: "createTable", cssClass: "createTable" }))
+            .appendTo(QUnit.fixture);
+        tool.initialize(dom, { title: "", editor: { exec: $.noop } });
     },
     teardown: function() {
         kendo.effects.enable();
+        tool.destroy();
     }
 });
 
 test("clicking a cell inserts a table", function() {
-    tool.click();
+    var popup = tool.popup();
+    popup.toggle();
 
-    var cell = $(".k-ct-cell:first"),
+    var cell = popup.element.find(".k-ct-cell:first"),
         offset = cell.offset();
 
-    cell.trigger({
-        type: "mouseup",
-        clientX: offset.left + cell.width()/2,
-        clientY: offset.top + cell.height()/2
+    var execArgs;
+
+    withMock(tool._editor, "exec", function() { execArgs = arguments; }, function() {
+        cell.trigger({
+            type: "mouseup",
+            clientX: offset.left + cell.width()/2,
+            clientY: offset.top + cell.height()/2
+        });
+
+        ok(execArgs);
+        equal(execArgs[0], "createTable");
+        deepEqual(execArgs[1], { rows: 1, columns: 1 });
     });
-
-    var dom = $("<div>" + editor.value() + "</div>");
-
-    equal(dom.find("table").length, 1);
-    equal(dom.find("tr:not(.k-selection-row)").length, 1);
-    equal(dom.find("td:not(.k-selection-cell,.k-select-all)").length, 1);
-
-    tool.click();
 });
 
 test("clicking the tool while it is disabled does not toggle the popup", function() {
-    tool.addClass("k-state-disabled");
+    dom.addClass("k-state-disabled");
 
-    tool.click();
+    dom.click();
     equal($(".k-ct-popup:visible").length, 0);
 
-    tool.click();
+    dom.click();
     equal($(".k-ct-popup:visible").length, 0);
-});
-
-test("destroy method destroys popup", function() {
-    var toolbar = editor.toolbar;
-    var popup = toolbar.toolById("createtable")._popup;
-    var called;
-
-    withMock(popup, "destroy", function() { called = true }, function() {
-        toolbar.destroy();
-
-        ok(called);
-    });
 });
 
 }());

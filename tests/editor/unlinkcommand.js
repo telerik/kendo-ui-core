@@ -58,7 +58,7 @@ test('unlink tool is initially disabled', function() {
     var range = createRangeFromText(editor, '|foo|');
     editor.selectRange(range);
     editor.trigger('select');
-    ok($('.k-unlink').parent().hasClass('k-state-disabled'));
+    ok(editor.toolbar.element.find('.k-unlink').parent().hasClass('k-state-disabled'));
 });
 
 test('unlink tool is enabled when cursor is inside a link', function() {
@@ -67,7 +67,7 @@ test('unlink tool is enabled when cursor is inside a link', function() {
     editor.selectRange(range);
 
     editor.trigger('select');
-    ok(!$('.k-unlink').parent().hasClass('k-state-disabled'));
+    ok(!editor.toolbar.element.find('.k-unlink').parent().hasClass('k-state-disabled'));
 });
 
 test('unlink tool is enabled when there is a link in the selection', function() {
@@ -76,7 +76,7 @@ test('unlink tool is enabled when there is a link in the selection', function() 
     editor.selectRange(range);
 
     editor.trigger('select');
-    ok(!$('.k-unlink').parent().hasClass('k-state-disabled'));
+    ok(!editor.toolbar.element.find('.k-unlink').parent().hasClass('k-state-disabled'));
 });
 
 }());

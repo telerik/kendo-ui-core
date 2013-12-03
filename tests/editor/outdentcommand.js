@@ -52,7 +52,8 @@ test('tool is enabled when cursor is inside block node with marginLeft', functio
     editor.selectRange(range);
     editor.focus();
     editor.trigger('select');
-    ok(!$('.k-outdent').parent().hasClass('k-state-disabled'));
+
+    ok(!editor.toolbar.element.find('.k-outdent').parent().hasClass('k-state-disabled'));
 });
 
 test('tool is enabled for nested list item', function() {
@@ -60,7 +61,7 @@ test('tool is enabled for nested list item', function() {
     editor.selectRange(range);
     editor.focus();
     editor.trigger('select');
-    ok(!$('.k-outdent').parent().hasClass('k-state-disabled'));
+    ok(!editor.toolbar.element.find('.k-outdent').parent().hasClass('k-state-disabled'));
 });
 
 test('tool is disabled for first-level lists', function() {
@@ -68,7 +69,7 @@ test('tool is disabled for first-level lists', function() {
     editor.selectRange(range);
     editor.focus();
     editor.trigger('select');
-    ok($('.k-outdent').parent().hasClass('k-state-disabled'));
+    ok(editor.toolbar.element.find('.k-outdent').parent().hasClass('k-state-disabled'));
 });
 
 test('tool is enabled for first-level lists with marginLeft', function() {
@@ -76,7 +77,7 @@ test('tool is enabled for first-level lists with marginLeft', function() {
     editor.selectRange(range);
     editor.focus();
     editor.trigger('select');
-    ok(!$('.k-outdent').parent().hasClass('k-state-disabled'));
+    ok(!editor.toolbar.element.find('.k-outdent').parent().hasClass('k-state-disabled'));
 });
 
 }());

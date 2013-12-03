@@ -176,17 +176,16 @@ var editorNS = kendo.ui.editor;
 
 var mockedToolbarModule = {
     setup: function() {
-        dom = $("<ul class='k-editor-toolbar' />").appendTo("body");
+        dom = $("<ul class='k-editor-toolbar' />").appendTo(QUnit.fixture);
         toolbar = new editorNS.Toolbar(dom[0]);
     },
 
     teardown: function() {
-        toolbar.destroy();
-        dom.remove();
+        kendo.destroy(QUnit.fixture);
     }
 };
 
-module("Tool configuration & rendering", mockedToolbarModule);
+module("editor toolbar configuration & rendering", mockedToolbarModule);
 
 function mockEditorTools(array, options) {
     return {
@@ -402,7 +401,7 @@ test("nameless custom commands are rendered", function() {
 
 module("destroy", {
     setup: function() {
-        dom = $("<ul class='k-editor-toolbar' />").appendTo("body");
+        dom = $("<ul class='k-editor-toolbar' />").appendTo(QUnit.fixture);
         toolbar = new editorNS.Toolbar(dom[0], { popup: true });
     },
     teardown: function() {
@@ -437,6 +436,20 @@ test("destroy calls destroy on tools", function() {
         ok(called);
     });
 });
+
+test("destroy destroys popup", function() {
+    bindToMock([ "createTable" ]);
+
+    var called;
+    var popup = toolbar.toolById("createtable")._popup;
+
+    withMock(popup, "destroy", function() { called = true }, function() {
+        toolbar.destroy();
+
+        ok(called);
+    });
+});
+
 
 
 module("Keyboard navigation", mockedToolbarModule);
