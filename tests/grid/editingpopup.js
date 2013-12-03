@@ -46,6 +46,8 @@
             table.closest(".k-grid").remove();
 
             $(".k-window").remove();
+            $(".k-overlay").remove();
+
             kendo.effects.enable();
         }
     });
@@ -322,7 +324,6 @@
 
         var wnd = grid._editContainer.data("kendoWindow");
         wnd.wrapper.find(".k-i-close").click();
-
         equal(cancelRow.calls("cancelRow"), 2);
     });
 

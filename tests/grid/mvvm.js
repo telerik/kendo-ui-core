@@ -24,6 +24,7 @@
             delete window.dataBound;
             kendo.destroy(QUnit.fixture);
             QUnit.fixture.empty();
+            $(".k-window, .k-overlay").remove();
         }
     });
 

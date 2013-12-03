@@ -32,7 +32,7 @@
 
     test("pageable uses the passed kendo.ui.Pager", function() {
         var dataSource = new DataSource({ data: [] }),
-            pager = new kendo.ui.Pager($("div").appendTo(QUnit.fixture), { dataSource: dataSource } ),
+            pager = new kendo.ui.Pager($("<div/>").appendTo(QUnit.fixture), { dataSource: dataSource } ),
             grid = new Grid(table(), { data: dataSource, pageable: pager } );
 
         equal(grid.pager, pager);
