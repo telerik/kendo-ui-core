@@ -9277,10 +9277,6 @@ kendo_module({
             tooltip.options = deepExtend({}, tooltip.options, options);
 
             tooltip.chartElement = chartElement;
-            tooltip.chartPadding = {
-                top: parseInt(chartElement.css("paddingTop"), 10),
-                left: parseInt(chartElement.css("paddingLeft"), 10)
-            };
 
             tooltip.template = BaseTooltip.template;
             if (!tooltip.template) {
@@ -9328,11 +9324,23 @@ kendo_module({
             tooltip.visible = true;
         },
 
+        _padding: function() {
+            if (!this._chartPadding) {
+                var chartElement = this.chartElement;
+                this._chartPadding = {
+                    top: parseInt(chartElement.css("paddingTop"), 10),
+                    left: parseInt(chartElement.css("paddingLeft"), 10)
+                };
+            }
+
+            return this._chartPadding;
+        },
+
         _offset: function() {
             var tooltip = this,
                 element = tooltip.element,
                 anchor = tooltip.anchor,
-                chartPadding = tooltip.chartPadding,
+                chartPadding = tooltip._padding(),
                 top = round(anchor.y + chartPadding.top),
                 left = round(anchor.x + chartPadding.left),
                 zoomLevel = kendo.support.zoomLevel(),
