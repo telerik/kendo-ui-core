@@ -26,6 +26,7 @@
             supportsCanvas = dataviz.supportsCanvas;
         },
         teardown: function() {
+            kendo.destroy(QUnit.fixture);
             dataviz.SVGView = SVGView;
             dataviz.CanvasView = CanvasView;
             dataviz.supportsCanvas = supportsCanvas;
