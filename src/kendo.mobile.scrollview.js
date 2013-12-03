@@ -202,7 +202,7 @@ kendo_module({
     kendo.mobile.ui.ScrollViewElasticPane = ElasticPane;
 
     var ScrollViewContent = kendo.Observable.extend({
-        init: function(element, pane) {
+        init: function(element, pane, options) {
             var that = this;
 
             kendo.Observable.fn.init.call(this);
@@ -210,7 +210,7 @@ kendo_module({
             that.pane = pane;
             that._getPages();
             this.page = 0;
-            this.pageSize = 1;
+            this.pageSize = options.pageSize || 1;
         },
 
         scrollTo: function(page, instant) {
@@ -655,7 +655,7 @@ kendo_module({
 
             var empty = this.inner.children().length === 0;
 
-            that._content = empty ? new VirtualScrollViewContent(that.inner, that.pane, options) : new ScrollViewContent(that.inner, that.pane);
+            that._content = empty ? new VirtualScrollViewContent(that.inner, that.pane, options) : new ScrollViewContent(that.inner, that.pane, options);
             that._content.page = that.page;
 
             that._content.bind("reset", function() {
