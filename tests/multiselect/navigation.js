@@ -15,7 +15,7 @@
 
     module("kendo.ui.MultiSelect navigation", {
         setup: function() {
-            $.fn.keydown = function(character) {
+            $.fn.press = function(character) {
                 var keyCode = character.charCodeAt(0);
                 $(this).trigger({
                     type: "keydown",
@@ -43,7 +43,7 @@
         var multiselect = new MultiSelect(select, { delay: 0 });
         var initial = multiselect.input.width();
 
-        multiselect.input.val("2").keydown("2");
+        multiselect.input.val("2").press("2");
 
         setTimeout(function() {
             start();
@@ -56,7 +56,7 @@
             wrapperWidth = 200;
 
         multiselect.wrapper.width(wrapperWidth);
-        multiselect.input.val("222222222222222222222222222222222222222222222").keydown("2");
+        multiselect.input.val("222222222222222222222222222222222222222222222").press("2");
 
         setTimeout(function() {
             start();

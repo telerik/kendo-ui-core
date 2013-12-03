@@ -13,7 +13,7 @@
 
     module("kendo.ui.MultiSelect filtering", {
         setup: function() {
-            $.fn.keydown = function(character) {
+            $.fn.press = function(character) {
                 var keyCode = character.charCodeAt(0);
                 $(this).trigger({
                     type: "keydown",
@@ -40,7 +40,7 @@
             delay: 0
         });
 
-        multiselect.input.val("Option1").keydown("1");
+        multiselect.input.val("Option1").press("1");
 
         setTimeout(function() {
             start();

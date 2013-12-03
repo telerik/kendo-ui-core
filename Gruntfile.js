@@ -53,7 +53,8 @@ module.exports = function(grunt) {
        'tests/textbox/*.js',
        'tests/timepicker/*.js',
        // 'tests/window/*.js'*/
-      'tests/slider/*.js'
+      'tests/slider/*.js',
+       'tests/editor/*.js'
     ];
 
     var testsOption = grunt.option('tests');
