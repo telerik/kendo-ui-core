@@ -9,6 +9,8 @@ function moduleSetup() {
 
 function moduleTeardown() {
     kendo.destroy(QUnit.fixture);
+
+    $(".progressBar").data("kendoProgressBar").destroy();
 }
 
 // -----------------------------------------------------------------------------------
@@ -19,7 +21,7 @@ module("Initialization", {
 });
 
 test("kendoProgressBar attaches a progressbar object to target", function() {
-    var dom = $('<div/>');
+    var dom = $('<div/>', { class: "progressBar" });
     var pb = dom.kendoProgressBar();
 
     ok(pb.data("kendoProgressBar") instanceof ProgressBar);
