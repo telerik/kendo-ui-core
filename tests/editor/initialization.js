@@ -68,19 +68,19 @@ test("tool options are passed to toolbar", function() {
 
 module("initialization from div[contentEditable]", {
     teardown: function() {
-        $(".k-widget, .k-editor-toolbar").remove();
+        kendo.destroy(QUnit.fixture);
     }
 });
 
 test("returns proper initial content", function() {
-    var dom = $("<div contentEditable='true'><p>foo</p></div>").appendTo("body");
+    var dom = $("<div contentEditable='true'><p>foo</p></div>").appendTo(QUnit.fixture);
     dom.kendoEditor();
 
     equal(dom.data("kendoEditor").value(), "<p>foo</p>");
 });
 
 test("adds k-editor class to contentEditable", function() {
-    var dom = $("<div contentEditable='true'><p>foo</p></div>").appendTo("body");
+    var dom = $("<div contentEditable='true'><p>foo</p></div>").appendTo(QUnit.fixture);
 
     dom.kendoEditor();
 
@@ -91,7 +91,7 @@ test("adds k-editor class to contentEditable", function() {
 
 if (!kendo.support.browser.msie) {
     test("processes value when initializing", function() {
-        var dom = $("<div contentEditable><p></p></div>").appendTo("body");
+        var dom = $("<div contentEditable><p></p></div>").appendTo(QUnit.fixture);
         dom.kendoEditor();
 
         equal(dom.find("br").length, 1);
