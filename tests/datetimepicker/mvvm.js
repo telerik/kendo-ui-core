@@ -50,8 +50,9 @@ test("Preserve options after widget init", function() {
 });
 
 test("Preserve specific options of the views", function() {
-    dom = $('<input data-role="datetimepicker" />'),
-        change = function() { },
+    dom = $('<input data-role="datetimepicker" />');
+
+    var change = function() { },
         close = function() { },
         open = function() { };
 
