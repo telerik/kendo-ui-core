@@ -92,12 +92,11 @@
         root.find("#fooAnchor").trigger("mouseup");
     });
 
-    asyncTest("is closed when closed", 1, function(){
+    test("is closed when closed", 1, function(){
+        kendo.effects.disable();
         popOver.openFor(root.find("#fooAnchor"));
         popOver.close();
-        setTimeout(function() {
-            start();
-            hidden("#foo");
-        }, 710);
+        hidden("#foo");
+        kendo.effects.enable();
     });
 })();

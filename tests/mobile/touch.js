@@ -154,14 +154,14 @@
 
     module("swipe events", {
         setup: function() {
-            this.testTimeout = QUnit.config.testTimeout;
-            QUnit.config.testTimeout = 1500;
+            this.maxDuration = kendo.ui.Touch.fn.options.maxDuration;
+            kendo.ui.Touch.fn.options.maxDuration = 100;
             element = $("<i />");
             touch = element.kendoTouch({ enableSwipe: true }).data("kendoTouch");
         },
 
         teardown: function() {
-            QUnit.config.testTimeout = this.testTimeout;
+            kendo.ui.Touch.fn.options.maxDuration = this.maxDuration;
         }
     });
 
@@ -209,7 +209,7 @@
             start();
             move(element, 40, 1);
             release(element, 40, 1);
-        }, 1100);
+        }, 200);
     });
 
     test("detects right swipe", 1, function() {
