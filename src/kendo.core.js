@@ -2699,23 +2699,32 @@ function pad(number, digits, end) {
         });
     };
 
+    function containmentComparer(a, b) {
+        return $.contains(a, b) ? -1 : 1;
+    }
+
+    function resizableWidget() {
+        var widget = $(this);
+        return ($.inArray(widget.attr("data-role"), ["slider", "rangeslider"]) > 0) || widget.is(":visible");
+    }
+
     kendo.resize = function(element) {
-        $(element).each(function() {
-            var child = $(this), widget;
+        var widgets = $(element).find("[data-" + kendo.ns + "role]").filter(resizableWidget);
 
-            if (!child.is(":visible") &&
-                $.inArray(child.attr("data-role"), ["slider", "rangeslider"]) === -1) {
-                return;
+        if (!widgets.length) {
+            return;
+        }
+
+        // sort widgets based on their parent-child relation
+        var widgetsArray = $.makeArray(widgets);
+        widgetsArray.sort(containmentComparer);
+
+        // resize widgets
+        $.each(widgetsArray, function () {
+            var widget = kendo.widgetInstance($(this));
+            if (widget) {
+                widget.resize();
             }
-
-            if (child.is("[data-" + kendo.ns + "role]")) {
-                widget = kendo.widgetInstance(child);
-                if (widget) {
-                    widget.resize();
-                }
-            }
-
-            kendo.resize(child.children());
         });
     };
 
