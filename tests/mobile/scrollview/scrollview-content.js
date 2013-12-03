@@ -17,7 +17,7 @@
     test("calculates pageCount correctly", 1, function() {
         element = $("<div style='width: 500px;' />").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
 
-        content = new ScrollViewContent(element, new ElasticPane(element));
+        content = new ScrollViewContent(element, new ElasticPane(element), {});
 
         content.resizeTo({ width: 200 });
         equal(content.pageCount, 3);
@@ -26,7 +26,7 @@
     test("resizes container and data-role=page elements as expected", 2, function() {
         element = $("<div style='position: absolute;'><div data-role=page style='display: inline-block'></div><div data-role=page style='display: inline-block'></div></div>").appendTo("#qunit-fixture").wrap("<div/>");
 
-        content = new ScrollViewContent(element, new ElasticPane(element));
+        content = new ScrollViewContent(element, new ElasticPane(element), {});
 
         content.resizeTo({ width: 200 });
         equal(content.element.width(), 400);
@@ -37,7 +37,7 @@
         element = $("<div style='width: 500px;' />").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
 
         var pane = new ElasticPane(element);
-        content = new ScrollViewContent(element, pane);
+        content = new ScrollViewContent(element, pane, {});
 
         equal(content.page, 0);
 
@@ -51,7 +51,7 @@
         element = $("<div style='width: 500px;' />").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
 
         var pane = new ElasticPane(element);
-        content = new ScrollViewContent(element, pane);
+        content = new ScrollViewContent(element, pane, {});
 
         equal(content.page, 0);
         content.scrollTo(1, true);
@@ -64,7 +64,7 @@
         element = $("<div style='position: absolute;'><div data-role=page style='display: inline-block'></div><div data-role=page style='display: inline-block'></div></div>").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
 
         var pane = new ElasticPane(element);
-        content = new ScrollViewContent(element, pane);
+        content = new ScrollViewContent(element, pane, {});
 
         equal(content.page, 0);
         content.scrollTo(1, true);
@@ -77,7 +77,7 @@
         element = $("<div style='position: absolute;'><div data-role=page style='display: inline-block'></div><div data-role=page style='display: inline-block'></div></div>").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
 
         var pane = new ElasticPane(element);
-        content = new ScrollViewContent(element, pane);
+        content = new ScrollViewContent(element, pane, {});
         content.page = 1;
         content.resizeTo({ width: 200 });
 
@@ -88,7 +88,7 @@
         element = $("<div style='position: absolute;'><div data-role=page style='display: inline-block'></div><div data-role=page style='display: inline-block'></div></div>").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
 
         var pane = new ElasticPane(element);
-        content = new ScrollViewContent(element, pane);
+        content = new ScrollViewContent(element, pane, {});
         content.page = 1;
         content.resizeTo({ width: 200 });
 
@@ -105,7 +105,7 @@
         setup: function () {
             element = $("<div style='position: absolute;'><div data-role=page style='display: inline-block'></div><div data-role=page style='display: inline-block'></div></div>").appendTo("#qunit-fixture").wrap("<div style='width: 200px;' />");
             pane = new ElasticPane(element);
-            content = new ScrollViewContent(element, pane);
+            content = new ScrollViewContent(element, pane, {});
             content.resizeTo({ width: 200 });
         }
     });
