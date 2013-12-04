@@ -10,7 +10,6 @@
     module("kendo.ui.Grid aggregates", {
         setup: function() {
             kendo.ns = "kendo-";
-            QUnit.config.testTimeout = 200;
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
