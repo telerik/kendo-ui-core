@@ -19,6 +19,7 @@ namespace Kendo.Mvc.Examples.Controllers
             {2,"#c00"}
         };
 
+        [HttpPost]
         public ActionResult _WorldScreenResolution()
         {
 

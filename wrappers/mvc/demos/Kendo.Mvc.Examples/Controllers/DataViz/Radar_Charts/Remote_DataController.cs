@@ -12,6 +12,7 @@ namespace Kendo.Mvc.Examples.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult _BudgetReport()
         {
             return Json(ChartDataRepository.BudgetReport());

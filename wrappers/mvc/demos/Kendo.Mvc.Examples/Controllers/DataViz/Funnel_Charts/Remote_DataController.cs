@@ -13,6 +13,7 @@ namespace Kendo.Mvc.Examples.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult SpainElectricityProduction()
         {
             return Json(ChartDataRepository.SpainElectricityProduction());

@@ -12,6 +12,7 @@ namespace Kendo.Mvc.Examples.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult _PricePerformanceData()
         {
             return Json(ChartDataRepository.PricePerformanceData());
