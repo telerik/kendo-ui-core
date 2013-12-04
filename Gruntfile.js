@@ -235,9 +235,11 @@ module.exports = function(grunt) {
 
                     exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js' ],
 
-                    reporters: ['progress', 'osx' ],
+                    reporters: ['progress', 'osx', 'junit' ],
 
-                    port: 9876,
+                    junitReporter: {
+                      outputFile: grunt.option('junit-results')
+                    },
 
                     colors: true,
 
@@ -247,7 +249,7 @@ module.exports = function(grunt) {
 
                     captureTimeout: 60000,
 
-                    singleRun: false
+                    singleRun: grunt.option('single-run')
                 }
             }
         },
