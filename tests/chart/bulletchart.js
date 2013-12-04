@@ -36,124 +36,125 @@
         };
     }
 
-    var bulletChart;
+    (function() {
+        var bulletChart;
 
-    var plotArea = stubPlotArea(
-        function(categoryIndex) {
-            return new Box2D();
-        },
-        function(value) {
-            return new Box2D();
-        },
-        {
-            categoryAxis: {
-                categories: ["A"]
+        var plotArea = stubPlotArea(
+            function(categoryIndex) {
+                return new Box2D();
+            },
+            function(value) {
+                return new Box2D();
+            },
+            {
+                categoryAxis: {
+                    categories: ["A"]
+                }
             }
-        }
-    );
+        );
 
-    // ------------------------------------------------------------
-    module("Bullet Chart / Rendering", {
-        setup: function() {
+        // ------------------------------------------------------------
+        module("Bullet Chart / Rendering", {
+            setup: function() {
+                bulletChart = new dataviz.BulletChart(plotArea, {
+                    series: [{
+                        data: [[0, 0]],
+                        color: "#f00",
+                        opacity: 0.5,
+                        overlay: "none"
+                    }]
+                });
+            }
+        });
+
+        test("applies series fill color to bars", function() {
+            equal(bulletChart.points[0].options.color, "#f00");
+        });
+
+        test("applies series opacity color to bullets", function() {
+            equal(bulletChart.points[0].options.opacity, 0.5);
+        });
+
+        test("applies series overlay to bullets", function() {
+            equal(bulletChart.points[0].options.overlay, "none");
+        });
+
+        test("applies color function", function() {
             bulletChart = new dataviz.BulletChart(plotArea, {
                 series: [{
+                    type: "bullet",
                     data: [[0, 0]],
-                    color: "#f00",
-                    opacity: 0.5,
-                    overlay: "none"
+                    color: function(bullet) { return "#f00" }
                 }]
             });
+
+            equal(bulletChart.points[0].options.color, "#f00");
+        });
+
+        test("color fn argument contains value", 2, function() {
+            new dataviz.BulletChart(plotArea, {
+                series: [{
+                    type: "bullet",
+                    data: [[0, 1]],
+                    color: function(bullet) {
+                        equal(bullet.value.current, 0);
+                        equal(bullet.value.target, 1);
+                    }
+                }]
+            });
+        });
+
+        test("color fn argument contains series", 1, function() {
+            new dataviz.BulletChart(plotArea, {
+                series: [{
+                    type: "bullet",
+                    name: "series 1",
+                    data: [[0, 0]],
+                    color: function(bubble) { equal(bubble.series.name, "series 1"); }
+                }]
+            });
+        });
+
+    })();
+
+    (function() {
+        var chart;
+
+        function createBulletChart(options) {
+            chart = createChart(kendo.deepExtend({
+                series: [{
+                    type: "bullet",
+                    data: [[1,2]]
+                }]
+            }, options));
         }
-    });
 
-    test("applies series fill color to bars", function() {
-        equal(bulletChart.points[0].options.color, "#f00");
-    });
-
-    test("applies series opacity color to bullets", function() {
-        equal(bulletChart.points[0].options.opacity, 0.5);
-    });
-
-    test("applies series overlay to bullets", function() {
-        equal(bulletChart.points[0].options.overlay, "none");
-    });
-
-    test("applies color function", function() {
-        bulletChart = new dataviz.BulletChart(plotArea, {
-            series: [{
-                type: "bullet",
-                data: [[0, 0]],
-                color: function(bullet) { return "#f00" }
-            }]
-        });
-
-        equal(bulletChart.points[0].options.color, "#f00");
-    });
-
-    test("color fn argument contains value", 2, function() {
-        new dataviz.BulletChart(plotArea, {
-            series: [{
-                type: "bullet",
-                data: [[0, 1]],
-                color: function(bullet) {
-                    equal(bullet.value.current, 0);
-                    equal(bullet.value.target, 1);
-                }
-            }]
-        });
-    });
-
-    test("color fn argument contains series", 1, function() {
-        new dataviz.BulletChart(plotArea, {
-            series: [{
-                type: "bullet",
-                name: "series 1",
-                data: [[0, 0]],
-                color: function(bubble) { equal(bubble.series.name, "series 1"); }
-            }]
-        });
-    });
-
-})();
-
-(function() {
-
-    var chart;
-
-    function createBulletChart(options) {
-        chart = createChart(kendo.deepExtend({
-            series: [{
-                type: "bullet",
-                data: [[1,2]]
-            }]
-        }, options));
-    }
-
-    // ------------------------------------------------------------
-    module("Bullet Chart / Configuration", {
-        teardown: function() {
-            destroyChart();
-        }
-    });
-
-    test("forces categoryAxis.justified to false", function() {
-        createBulletChart({
-            categoryAxis: {
-                justified: true
+        // ------------------------------------------------------------
+        module("Bullet Chart / Configuration", {
+            teardown: function() {
+                destroyChart();
             }
         });
 
-        ok(!chart._plotArea.categoryAxis.options.justified);
-    });
+        test("forces categoryAxis.justified to false", function() {
+            createBulletChart({
+                categoryAxis: {
+                    justified: true
+                }
+            });
 
-    test("with no data should not render target", function() {
-        createBulletChart({
-            series: [{
-                type: "bullet",
-                data: []
-            }]
+            ok(!chart._plotArea.categoryAxis.options.justified);
         });
 
-        ok(typeof chart._plotArea.charts[0].points[0].target === "undefined");
-    });
+        test("with no data should not render target", function() {
+            createBulletChart({
+                series: [{
+                    type: "bullet",
+                    data: []
+                }]
+            });
+
+            ok(typeof chart._plotArea.charts[0].points[0].target === "undefined");
+        });
+    })();
 })();

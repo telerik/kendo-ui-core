@@ -7,10 +7,10 @@
         defaults,
         series;
 
-    function aggregate(series) {
+    function aggregate(series, indexes) {
         var sa = new SeriesAggregator(series, binder, defaults);
 
-        return sa.aggregatePoints([0, 1]);
+        return sa.aggregatePoints(indexes || [0, 1]);
     }
 
     // ------------------------------------------------------------
@@ -63,6 +63,12 @@
         series.data[0].bar = true;
 
         deepEqual(aggregate(series), { value: 2, bar: true });
+        ok(aggregate !== series.data[0]);
+    });
+
+    test("overwrites only item", function() {
+        var aggr = aggregate(series, [0]);
+        ok(aggr === series.data[0]);
     });
 
     test("returns empty aggregate for empty source points array", function() {
