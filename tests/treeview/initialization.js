@@ -25,7 +25,7 @@
         var dom = treeFromHtml("<ul><li>foo</li></ul>", { foo: "bar" });
         var options = dom.data("kendoTreeView").options;
 
-        notEqual(options.foo, undefined)
+        notEqual(options.foo, undefined);
         equal(options.foo, "bar");
     });
 
@@ -119,7 +119,7 @@
         var dom = treeFromHtml("<ul tabindex='42' />");
 
         equal(dom.closest(".k-treeview").attr("tabindex"), 42);
-        ok(!dom.attr("tabindex"))
+        ok(!dom.attr("tabindex"));
     });
 
     test("initializing from array", function() {

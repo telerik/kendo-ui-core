@@ -208,7 +208,7 @@
             { text: "foo", expanded: true, items: [
                 { text: "bar" }
             ] }
-        ]),
+        ]);
 
         moveNode(treeviewObject, "foo", "bar");
 

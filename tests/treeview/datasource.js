@@ -403,7 +403,7 @@
             ]
         });
 
-        treeviewObject.dataItem(".k-item:first").children.sort({ field: "text", dir: "asc" })
+        treeviewObject.dataItem(".k-item:first").children.sort({ field: "text", dir: "asc" });
 
         equal(treeview.find(".k-item:first .k-item").length, 2);
     });

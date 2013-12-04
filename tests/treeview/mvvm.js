@@ -164,7 +164,7 @@
                     { text: "foo" }
                 ]
             })
-        })
+        });
 
         kendo.bind(dom, viewModel);
 
@@ -184,7 +184,7 @@
                     { text: "bar" }
                 ]
             })
-        })
+        });
 
         kendo.bind(dom, viewModel);
 
@@ -326,7 +326,7 @@
             viewModel.products[0].set("imageUrl", "file.png");
 
             ok(dom.find(".k-image").attr("src").indexOf("file") >= 0);
-            ok(!dom.find(".k-image").attr("src").indexOf("folder") >= 0);
+            ok(dom.find(".k-image").attr("src").indexOf("folder") < 0);
         });
 
         test("append of item works", function() {
