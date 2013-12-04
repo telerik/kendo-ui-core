@@ -678,7 +678,8 @@ kendo_module({
             reorderable: false,
             columnMenu: false,
             detailTemplate: null,
-            columnResizeHandleWidth: 3
+            columnResizeHandleWidth: 3,
+            mobile: ""
         },
 
         destroy: function() {
