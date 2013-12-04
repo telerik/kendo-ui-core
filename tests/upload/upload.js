@@ -1,4 +1,4 @@
-
+function uploadUploadEvent(createUpload) {
     test("upload fires when a file is about to be uploaded", function() {
         var uploadFired = false;
         uploadInstance = createUpload({ upload:
@@ -55,3 +55,4 @@
 
         equal($(".k-file", uploadInstance.wrapper).length, 0);
     });
+}

@@ -55,7 +55,8 @@ module.exports = function(grunt) {
        'tests/window/*.js',
        'tests/slider/*.js',
        'tests/editor/*.js',
-       'tests/scheduler/*.js'
+       'tests/scheduler/*.js',
+       'tests/upload/*.js'
     ];
 
     var testsOption = grunt.option('tests');
@@ -224,6 +225,9 @@ module.exports = function(grunt) {
                         'src/kendo.diagram.dom.js',
                         'src/kendo.diagram.layout.js',
                         'tests/chart/util.js',
+                        'tests/upload/helper.js',
+                        'tests/upload/select.js',
+                        'tests/upload/selection.js',
 
                         { pattern: 'src/kendo.editor.js', included: false }, // download builder needs this
                         { pattern: 'src/kendo.aspnetmvc.js', included: false }, // download builder needs this

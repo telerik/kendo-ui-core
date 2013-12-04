@@ -1,5 +1,4 @@
-
-
+function uploadAsyncNoMultiple(createUpload) {
  test("adding a second file should call remove action (multiple = false)", 1, function() {
         uploadInstance = createUpload({ multiple: false, async: {"saveUrl":'javascript:;',"removeUrl":'javascript:;'} });
 
@@ -24,4 +23,4 @@
 
         ok(!removeCalled);
     });
-
+}

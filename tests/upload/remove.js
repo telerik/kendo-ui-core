@@ -1,4 +1,4 @@
-
+function uploadRemoveEvent(createUpload) {
     test("remove fired when clicking remove", function() {
         var removeFired = false;
         uploadInstance = createUpload({ remove:
@@ -233,3 +233,4 @@
 
         ok(!removeCalled);
     });
+}

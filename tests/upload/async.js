@@ -1,3 +1,4 @@
+function uploadAsync(createUpload) {
     test("Upload wrapper should contain k-upload-empty class", function() {
         ok($(uploadInstance.wrapper).is(".k-upload-empty"));
     });
@@ -258,3 +259,4 @@
 
         simulateUpload();
     });
+}

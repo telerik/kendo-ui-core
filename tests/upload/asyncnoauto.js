@@ -1,4 +1,4 @@
-
+function asyncNoAuto(createUpload) {
     test("upload button is rendered on select", function() {
         simulateFileSelect();
 
@@ -97,3 +97,4 @@
         
         equal($(".k-upload-status-total", uploadInstance.wrapper).length, 1);
     });
+}

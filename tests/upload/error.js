@@ -1,4 +1,4 @@
-
+function uploadError(createUpload) {
     test("error is fired when upload action returns response that is not JSON", function() {
         var errorFired = false;
         uploadInstance = createUpload({ error:
@@ -361,3 +361,4 @@
 
         simulateRemoveWithResponse(errorResponse);
     });
+}

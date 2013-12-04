@@ -1,4 +1,4 @@
-
+function uploadCancel(createUpload) {
     test("cancel fired when clicking cancel", 1, function() {
         uploadInstance = createUpload({ cancel:
             function(e) {
@@ -34,3 +34,4 @@
         simulateFileSelect();
         $(".k-cancel", uploadInstance.wrapper).trigger("click");
     });
+}
