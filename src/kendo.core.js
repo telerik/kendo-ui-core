@@ -2709,7 +2709,7 @@ function pad(number, digits, end) {
     }
 
     kendo.resize = function(element) {
-        var widgets = $(element).find("[data-" + kendo.ns + "role]").filter(resizableWidget);
+        var widgets = $(element).find("[data-" + kendo.ns + "role]").addBack().filter(resizableWidget);
 
         if (!widgets.length) {
             return;
