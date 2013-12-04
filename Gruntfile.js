@@ -36,7 +36,7 @@ module.exports = function(grunt) {
        'tests/popup/*.js',
        'tests/selectable/*.js',
        'tests/listview/*.js',
-       // 'tests/download-builder/*.js',
+       //'tests/download-builder/*.js',
        'tests/editable/*.js',
        'tests/treeview/*.js',
        'tests/pager/*.js',
@@ -63,6 +63,7 @@ module.exports = function(grunt) {
        //'tests/chart/*.js',
        //'tests/stock/*.js',
        //'tests/sparkline/*.js',
+       'tests/map/**/*.js',
        'tests/themebuilder/*.js'
     ];
 
