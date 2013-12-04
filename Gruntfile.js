@@ -56,7 +56,13 @@ module.exports = function(grunt) {
        'tests/slider/*.js',
        'tests/editor/*.js',
        'tests/scheduler/*.js',
-       'tests/upload/*.js'
+       'tests/upload/*.js',
+       'tests/qrcode/*.js',
+       'tests/barcode/**/*.js',
+       'tests/gauge/*.js'
+       //'tests/chart/*.js',
+       //'tests/stock/*.js',
+       //'tests/sparkline/*.js',
     ];
 
     var testsOption = grunt.option('tests');
@@ -214,11 +220,19 @@ module.exports = function(grunt) {
                         "src/dataviz/geometry.js",
                         "src/dataviz/drawing/core.js",
                         "src/dataviz/drawing/shapes.js",
+                        "src/dataviz/drawing/svg.js",
+                        "src/dataviz/drawing/vml.js",
+                        "src/dataviz/drawing/canvas.js",
+
                         "src/dataviz/map/location.js",
                         "src/dataviz/map/crs.js",
-                        "src/dataviz/map/compass.js",
+                        "src/dataviz/map/navigator.js",
+                        "src/dataviz/map/layers/shape.js",
+                        "src/dataviz/map/layers/tile.js",
                         "src/dataviz/map/layers/marker.js",
                         "src/dataviz/map/main.js",
+                        "src/dataviz/map/attribution.js",
+                        'tests/map/util.js',
 
                         'src/kendo.diagram.services.js',
                         'src/kendo.diagram.extensions.js',
