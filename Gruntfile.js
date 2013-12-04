@@ -62,7 +62,7 @@ module.exports = function(grunt) {
        'tests/gauge/*.js',
        'tests/chart/*.js',
        //'tests/stock/*.js',
-       //'tests/sparkline/*.js',
+       'tests/sparkline/*.js',
        'tests/map/**/*.js',
        'tests/themebuilder/*.js'
     ];
