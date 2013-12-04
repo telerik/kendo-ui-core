@@ -59,10 +59,11 @@ module.exports = function(grunt) {
        'tests/upload/*.js',
        'tests/qrcode/*.js',
        'tests/barcode/**/*.js',
-       'tests/gauge/*.js'
+       'tests/gauge/*.js',
        //'tests/chart/*.js',
        //'tests/stock/*.js',
        //'tests/sparkline/*.js',
+       'tests/themebuilder/*.js'
     ];
 
     var testsOption = grunt.option('tests');
@@ -238,6 +239,9 @@ module.exports = function(grunt) {
                         'src/kendo.diagram.extensions.js',
                         'src/kendo.diagram.dom.js',
                         'src/kendo.diagram.layout.js',
+
+                        'themebuilder/scripts/themebuilder.js',
+
                         'tests/chart/util.js',
                         'tests/upload/helper.js',
                         'tests/upload/select.js',
@@ -282,7 +286,6 @@ module.exports = function(grunt) {
             'demos/mvc/content/shared/js/console.js',
             'themebuilder/bootstrap.js',
             'themebuilder/scripts/themebuilder.js',
-            'themebuilder/scripts/colorengine.js',
             'themebuilder/scripts/constants.js'
             ],
             options: {

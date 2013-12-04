@@ -6,15 +6,15 @@
         CLICK = "click",
         CHANGE = "change",
         ui = kendo.ui,
-        colorPicker = "ktb-colorpicker",
+        colorInput = "ktb-colorinput",
         numeric = "ktb-numeric",
         ObservableObject = kendo.data.ObservableObject,
         options = window.parent.KENDO_THEMEBUILDER_OPTIONS || {},
         propertyEditors = {
-            "color": colorPicker,
-            "background-color": colorPicker,
-            "border-color": colorPicker,
-            "box-shadow": colorPicker,
+            "color": colorInput,
+            "background-color": colorInput,
+            "border-color": colorInput,
+            "box-shadow": colorInput,
             "border-radius": numeric,
             "background-image": "ktb-combo",
             "opacity": "ktb-opacity"
@@ -71,10 +71,10 @@
                 return object;
             };
         },
-        ColorPicker = ui.ComboBox.extend({
+        ColorInput = ui.ComboBox.extend({
             init: function(element, options) {
                 if (options && options.change) {
-                    options.colorPickerChange = options.change;
+                    options.colorInputChange = options.change;
                     delete options.change;
                 }
 
@@ -92,12 +92,12 @@
 
                 this.bind(CHANGE, proxy(this._colorChange, this));
 
-                this.wrapper.addClass("k-colorpicker")
-                    .find(".k-colorpicker").removeClass(".k-colorpicker");
+                this.wrapper.addClass("k-colorinput")
+                    .find(".k-colorinput").removeClass(".k-colorinput");
             },
 
             _colorChange: function() {
-                var changeHandler = this.options.colorPickerChange,
+                var changeHandler = this.options.colorInputChange,
                     value = this._updateColorPreview();
 
                 value = toHex(value);
@@ -407,7 +407,7 @@
                     var selector, object;
 
                     for (selector in widgets) {
-                        object = $(selector, targetDocument).data(widgets[selector]);
+                        object = jQuery(selector, targetDocument).data(widgets[selector]);
 
                         if (object) {
                             return object.options.theme;
@@ -478,11 +478,11 @@
                 var w = "defaultView" in targetDocument ? targetDocument.defaultView : targetDocument.parentWindow;
 
                 this.source("json", function(theme) {
-					var dataviz = w.kendo.dataviz;
+                    var dataviz = w.kendo.dataviz;
 
-					if (dataviz && dataviz.ui && dataviz.ui.registerTheme) {
-						dataviz.ui.registerTheme("newTheme", theme);
-					}
+                    if (dataviz && dataviz.ui && dataviz.ui.registerTheme) {
+                        dataviz.ui.registerTheme("newTheme", theme);
+                    }
                 });
 
                 function setTheme(selector, component) {
@@ -592,7 +592,7 @@
 
                 $(".stylable-elements")
                     .kendoPanelBar()
-                    .find(".ktb-colorpicker").kendoColorPicker({
+                    .find(".ktb-colorinput").kendoColorInput({
                         change: changeHandler
                     }).end()
                     .find(".ktb-gradient").kendoGradientEditor({
@@ -722,14 +722,14 @@
                     themeContent = view.find("textarea").val(),
                     theme = this.themes[suite == "web" ? 0 : 1],
                     clientObjects = {
-                        "ktb-colorpicker": "kendoColorPicker",
+                        "ktb-colorinput": "kendoColorInput",
                         "ktb-numeric": "kendoNumericTextBox",
                         "ktb-combo": "kendoComboBox"
                     };
 
                 theme.deserialize(themeContent, this.targetDocument);
 
-                $("input.ktb-colorpicker,input.ktb-numeric,input.ktb-combo").each(function() {
+                $("input.ktb-colorinput,input.ktb-numeric,input.ktb-combo").each(function() {
                     var dataType = this.className.replace(/k-formatted-value|k-input|\s+/gi, ""),
                         clientObject = $(this).data(clientObjects[dataType]),
                         constant = theme.constants[this.id];
@@ -898,8 +898,8 @@
             }
         });
 
-    ColorPicker.fn.options = extend(kendo.ui.ComboBox.fn.options, {
-        name: "ColorPicker",
+    ColorInput.fn.options = extend({}, kendo.ui.ComboBox.fn.options, {
+        name: "ColorInput",
         autoBind: false,
         dataTextField: "text",
         dataValueField: "value",
@@ -915,7 +915,7 @@
         })
     });
 
-    kendo.ui.plugin(ColorPicker);
+    kendo.ui.plugin(ColorInput);
     kendo.ui.plugin(GradientEditor);
 
     extend(kendo, {

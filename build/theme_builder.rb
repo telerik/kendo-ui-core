@@ -79,7 +79,6 @@ end
 file_merge 'themebuilder/scripts/themebuilder.all.js' => [
     'themebuilder/scripts/less.js',
     'themebuilder/scripts/themebuilder.js',
-    'themebuilder/scripts/colorengine.js',
     'themebuilder/scripts/template.js'
 ]
 file 'themebuilder/scripts/themebuilder.all.js' => THEME_BUILDER_BUILDFILE
