@@ -561,7 +561,7 @@ kendo_module({
 
     UserEvents.minHold = function(value) {
         DEFAULT_MIN_HOLD = value;
-    }
+    };
 
     kendo.getTouches = getTouches;
     kendo.touchDelta = touchDelta;
