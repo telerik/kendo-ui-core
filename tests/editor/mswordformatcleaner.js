@@ -167,15 +167,15 @@ test("mixed nested lists same margin", function() {
 });
 
 test("ordered list from parenthesis", function() {
-    equal(clean('<p class="MsoListParagraphCxSpFirst" style="text-indent: -0.25in;"><span style="font-family: Symbol;"><span style="">1)<span style="font: 7pt &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span>foo</p>'), '<ol><li>foo</li></ol>')
+    equal(clean('<p class="MsoListParagraphCxSpFirst" style="text-indent: -0.25in;"><span style="font-family: Symbol;"><span style="">1)<span style="font: 7pt &quot;Times New Roman&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></span>foo</p>'), '<ol><li>foo</li></ol>');
 });
 
 test("handling unclosed tags", function() {
-    equal(clean('<h2>foo<br></h2><div>bar</div>'), '<h2>foo</h2><div>bar</div>')
+    equal(clean('<h2>foo<br></h2><div>bar</div>'), '<h2>foo</h2><div>bar</div>');
 });
 
 test("cleaning attribute values with encoded quotes", function() {
-    equal(clean('<span style="mso-bidi-font-family:&quot;Times New Roman&quot;;">foo</span>'), '<span>foo</span>')
+    equal(clean('<span style="mso-bidi-font-family:&quot;Times New Roman&quot;;">foo</span>'), '<span>foo</span>');
 });
 
 test("converting bold tags to strong", function() {

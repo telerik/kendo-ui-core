@@ -29,7 +29,7 @@ function assertCommand(type, name) {
 test("exec pushes command to undo stack", function() {
     var pushArgument;
 
-    withMock(editor.undoRedoStack, "push", function() { pushArgument = arguments[0] }, function() {
+    withMock(editor.undoRedoStack, "push", function() { pushArgument = arguments[0]; }, function() {
         editor.value("foo");
 
         var range = editor.createRange();

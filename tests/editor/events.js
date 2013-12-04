@@ -42,13 +42,13 @@ var changeRaised = false;
 var selectionChangeRaised = false;
 var executeRaised = false;
 
-function type(type, keyCode, ctrl, alt, shift) {
+function type(eventType, keyCode, ctrl, alt, shift) {
     var e = $.Event();
     e.keyCode = keyCode;
     e.ctrlKey = !!ctrl;
     e.altKey = !!alt;
     e.shiftKey = !!shift;
-    e.type = type;
+    e.type = eventType;
 
     $(editor.body).trigger(e);
 }

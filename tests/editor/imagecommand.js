@@ -25,7 +25,7 @@ test('exec creates window', function() {
     var range = createRangeFromText(editor, '|foo|');
     execImageCommandOnRange(range);
 
-    equal($('.k-window').length, 1)
+    equal($('.k-window').length, 1);
 });
 
 test('clicking close closes the window', function() {
@@ -33,7 +33,7 @@ test('clicking close closes the window', function() {
     execImageCommandOnRange(range);
 
     $('.k-window-action .k-i-close').click();
-    equal($('.k-window').length, 0)
+    equal($('.k-window').length, 0);
 });
 
 test('clicking insert closes the window', function() {
@@ -41,7 +41,7 @@ test('clicking insert closes the window', function() {
     execImageCommandOnRange(range);
 
     $('.k-dialog-insert').click();
-    equal($('.k-window').length, 0)
+    equal($('.k-window').length, 0);
 });
 
 test('clicking insert inserts image if url is set', function() {
@@ -50,7 +50,7 @@ test('clicking insert inserts image if url is set', function() {
 
     $('#k-editor-image-url').val('foo');
     $('.k-dialog-insert').click();
-    equal(editor.value(), '<img alt="" src="foo" />')
+    equal(editor.value(), '<img alt="" src="foo" />');
 });
 
 test('clicking insert does not insert image if url is not set', function() {
@@ -59,7 +59,7 @@ test('clicking insert does not insert image if url is not set', function() {
 
     $('#k-editor-image-url').val('');
     $('.k-dialog-insert').click();
-    equal(editor.value(), 'foo')
+    equal(editor.value(), 'foo');
 });
 
 test('clicking insert updates existing src', function() {
@@ -70,7 +70,7 @@ test('clicking insert updates existing src', function() {
 
     $('#k-editor-image-url').val('foo');
     $('.k-dialog-insert').click();
-    equal(editor.value(), '<img alt="" src="foo" style="float:left;" />')
+    equal(editor.value(), '<img alt="" src="foo" style="float:left;" />');
 });
 
 test('url text is set', function() {
@@ -94,7 +94,7 @@ test('hitting enter in url inserts image', function() {
         .val('http://foo')
         .trigger(e);
 
-    equal(editor.value(), '<img alt="" src="http://foo" />')
+    equal(editor.value(), '<img alt="" src="http://foo" />');
     equal($('.k-window').length, 0);
 });
 
@@ -107,10 +107,10 @@ test('hitting esc in url cancels', function() {
     e.keyCode = 27;
 
     $('#k-editor-image-url')
-    .val('foo')
-    .trigger(e);
+        .val('foo')
+        .trigger(e);
 
-    equal(editor.value(), 'foo')
+    equal(editor.value(), 'foo');
     equal($('.k-window').length, 0);
 });
 
@@ -122,10 +122,10 @@ test('hitting enter in title field inserts link', function() {
     e.type = 'keydown';
     e.keyCode = 13;
 
-    $('#k-editor-image-url').val('http://foo')
+    $('#k-editor-image-url').val('http://foo');
     $('#k-editor-image-title').trigger(e);
 
-    equal(editor.value(), '<img alt="" src="http://foo" />')
+    equal(editor.value(), '<img alt="" src="http://foo" />');
     equal($('.k-window').length, 0);
 });
 
@@ -137,12 +137,11 @@ test('hitting esc in title cancels', function() {
     e.type = 'keydown';
     e.keyCode = 27;
 
-    $('#k-editor-image-url')
-    .val('foo')
+    $('#k-editor-image-url').val('foo');
 
     $('#k-editor-image-title').trigger(e);
 
-    equal(editor.value(), 'foo')
+    equal(editor.value(), 'foo');
     equal($('.k-window').length, 0);
 });
 
@@ -150,14 +149,12 @@ test('setting title sets alt', function() {
     var range = createRangeFromText(editor, '|foo|');
     execImageCommandOnRange(range);
 
-    $('#k-editor-image-url')
-    .val('http://foo');
+    $('#k-editor-image-url').val('http://foo');
 
-    $('#k-editor-image-title')
-    .val('bar')
+    $('#k-editor-image-title').val('bar');
 
     $('.k-dialog-insert').click();
-    equal(editor.value(), '<img alt="bar" src="http://foo" />')
+    equal(editor.value(), '<img alt="bar" src="http://foo" />');
 });
 
 test('title text box is filled from alt', function() {
@@ -174,8 +171,7 @@ test('undo restores content', function() {
 
     var command = execImageCommandOnRange(range);
 
-    $('#k-editor-image-url')
-    .val('foo');
+    $('#k-editor-image-url').val('foo');
 
     $('.k-dialog-insert').click();
     command.undo();
@@ -191,11 +187,10 @@ test('exec inserts image with empty range', function() {
 
     execImageCommandOnRange(range);
 
-    $('#k-editor-image-url')
-    .val('http://foo');
+    $('#k-editor-image-url').val('http://foo');
 
     $('.k-dialog-insert').click();
-    equal(editor.value(), 'foo <img alt="" src="http://foo" />')
+    equal(editor.value(), 'foo <img alt="" src="http://foo" />');
 });
 
 test('link is not created if url is http slash slash', function() {
@@ -204,7 +199,7 @@ test('link is not created if url is http slash slash', function() {
     execImageCommandOnRange(range);
 
     $('.k-dialog-insert').click();
-    equal(editor.value(), 'foo')
+    equal(editor.value(), 'foo');
 });
 
 test('cursor is put after image', function() {
@@ -226,7 +221,7 @@ test('closing the window restores content', function() {
 
     $('.k-window').css({width:200,height:300}).find('.k-i-close').click();
 
-    equal(editor.value(), 'foo')
+    equal(editor.value(), 'foo');
     equal($('.k-window').length, 0);
 });
 
@@ -236,7 +231,7 @@ test("applying substitues spaces with %20", function() {
 
     $('#k-editor-image-url').val('foo bar baz');
     $('.k-dialog-insert').click();
-    equal(editor.value(), '<img alt="" src="foo%20bar%20baz" />')
+    equal(editor.value(), '<img alt="" src="foo%20bar%20baz" />');
 });
 
 test("window title can be localized", function() {

@@ -20,7 +20,7 @@ test('typing handler keydown creates start restore point if typing', function() 
     editor.keyboard = {
         isTypingKey: function () { return true; },
         startTyping: function () {},
-        isTypingInProgress: function() { return false}
+        isTypingInProgress: function() { return false; }
     };
 
     var handler = new TypingHandler(editor);
@@ -35,8 +35,8 @@ test('typing handler keydown calls startTyping', function() {
 
     editor.keyboard = {
         isTypingKey: function () { return true; },
-        startTyping: function () { callback = arguments[0] },
-        isTypingInProgress: function() { return false}
+        startTyping: function () { callback = arguments[0]; },
+        isTypingInProgress: function() { return false; }
     };
 
     var handler = new TypingHandler(editor);
@@ -48,48 +48,48 @@ test('typing handler keydown returns true', function() {
     editor.keyboard = {
         isTypingKey: function () { return true; },
         startTyping: function () {},
-        isTypingInProgress: function() { return false}
+        isTypingInProgress: function() { return false; }
     };
 
     var handler = new TypingHandler(editor);
-    ok(handler.keydown())
+    ok(handler.keydown());
 });
 
 test('typing handler keydown returns false if typing is in progress', function() {
     editor.keyboard = {
         isTypingKey: function () { return true; },
         startTyping: function () {},
-        isTypingInProgress: function() { return true}
+        isTypingInProgress: function() { return true; }
     };
 
     var handler = new TypingHandler(editor);
-    ok(!handler.keydown())
+    ok(!handler.keydown());
 });
 
 test('typing handler keydown returns false if not typing', function() {
     editor.keyboard = {
         isTypingKey: function () { return false; },
         startTyping: function () {},
-        isTypingInProgress: function() { return true}
+        isTypingInProgress: function() { return true; }
     };
 
     var handler = new TypingHandler(editor);
-    ok(!handler.keydown())
+    ok(!handler.keydown());
 });
 
 test('typing handler keyup creates end restore point if typing', function() {
     editor.keyboard = {
         isTypingKey: function () { return true; },
-        startTyping: function (callback) {this.callback = callback},
-        isTypingInProgress: function() { return false},
-        endTyping: function () {this.callback()}
+        startTyping: function (callback) { this.callback = callback; },
+        isTypingInProgress: function() { return false; },
+        endTyping: function () { this.callback(); }
     };
 
     var handler = new TypingHandler(editor);
 
     handler.keydown();
 
-    editor.keyboard.isTypingInProgress = function() { return true};
+    editor.keyboard.isTypingInProgress = function() { return true; };
 
     handler.keyup();
 
@@ -99,19 +99,19 @@ test('typing handler keyup creates end restore point if typing', function() {
 test('typing handler keyup creates undo command', function() {
     editor.keyboard = {
         isTypingKey: function () { return true; },
-        startTyping: function (callback) {this.callback = callback},
-        isTypingInProgress: function() { return false},
-        endTyping: function () {this.callback()}
+        startTyping: function (callback) { this.callback = callback; },
+        isTypingInProgress: function() { return false; },
+        endTyping: function () { this.callback(); }
     };
 
     var command;
-    editor.undoRedoStack.push = function(){ command = arguments[0] };
+    editor.undoRedoStack.push = function(){ command = arguments[0]; };
 
     var handler = new TypingHandler(editor);
 
     handler.keydown();
 
-    editor.keyboard.isTypingInProgress = function() { return true};
+    editor.keyboard.isTypingInProgress = function() { return true; };
 
     handler.keyup();
 
@@ -121,39 +121,39 @@ test('typing handler keyup creates undo command', function() {
 test('typing handler keyup returns true when typing', function() {
     editor.keyboard = {
         isTypingKey: function () { return true; },
-        startTyping: function (callback) {this.callback = callback},
-        isTypingInProgress: function() { return false},
-        endTyping: function () {this.callback()}
+        startTyping: function (callback) { this.callback = callback; },
+        isTypingInProgress: function() { return false; },
+        endTyping: function () { this.callback(); }
     };
 
     var command;
-    editor.undoRedoStack.push = function(){ command = arguments[0] };
+    editor.undoRedoStack.push = function(){ command = arguments[0]; };
 
     var handler = new TypingHandler(editor);
 
     handler.keydown();
 
-    editor.keyboard.isTypingInProgress = function() { return true};
+    editor.keyboard.isTypingInProgress = function() { return true; };
 
-    ok(handler.keyup())
+    ok(handler.keyup());
 });
 
 test('typing handler keyup returns false when not typing', function() {
     editor.keyboard = {
         isTypingKey: function () { return true; },
-        startTyping: function (callback) {this.callback = callback},
-        isTypingInProgress: function() { return false},
-        endTyping: function () {this.callback()}
+        startTyping: function (callback) { this.callback = callback; },
+        isTypingInProgress: function() { return false; },
+        endTyping: function () { this.callback(); }
     };
 
     var command;
-    editor.undoRedoStack.push = function(){ command = arguments[0] };
+    editor.undoRedoStack.push = function(){ command = arguments[0]; };
 
     var handler = new TypingHandler(editor);
 
     handler.keydown();
 
-    ok(!handler.keyup())
+    ok(!handler.keyup());
 });
 
 }());

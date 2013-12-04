@@ -18,7 +18,7 @@ function makeEvent(keyCode) {
 }
 
 test("find shorcut by single character", function() {
-    var commands = { bold: { options: { key: 'B'} } }
+    var commands = { bold: { options: { key: 'B'} } };
 
     var e = makeEvent();
 
@@ -89,7 +89,7 @@ test("editor dispatches shortcuts to exec", function() {
 
     editor.exec = function() {
         command = arguments[0];
-    }
+    };
 
     var e = makeEvent();
     e.ctrlKey = true;
@@ -105,7 +105,7 @@ test("ctrl z calls undo", function() {
 
     editor.exec = function () {
         command = arguments[0];
-    }
+    };
 
     var e = makeEvent('Z'.charCodeAt(0));
     e.ctrlKey = true;
@@ -121,7 +121,7 @@ test("ctrl y calls redo", function() {
 
     editor.exec = function() {
         command = arguments[0];
-    }
+    };
 
     var e = makeEvent('Y'.charCodeAt(0));
     e.ctrlKey = true;
@@ -137,7 +137,7 @@ test("shift enter calls new line", function() {
 
     editor.exec = function () {
         command = arguments[0];
-    }
+    };
 
     var e = makeEvent(13);
     e.shiftKey = true;
@@ -153,7 +153,7 @@ test("enter calls paragraph", function() {
 
     editor.exec = function () {
         command = arguments[0];
-    }
+    };
 
     var e = makeEvent(13);
     e.type = 'keydown';

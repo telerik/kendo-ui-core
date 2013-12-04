@@ -251,12 +251,12 @@ test("keydown calls the keydown method of the handlers", function() {
     var calls = 0;
 
     initKeyboard([
-        { keydown: function () { calls++ } },
-        { keydown: function () { calls++ } }
+        { keydown: function () { calls++; } },
+        { keydown: function () { calls++; } }
     ]);
 
     keyboard.keydown();
-    equal(calls, 2)
+    equal(calls, 2);
 });
 
 test("keydown calls the keydown breaks if some handler returns true", function() {
@@ -264,11 +264,11 @@ test("keydown calls the keydown breaks if some handler returns true", function()
 
     initKeyboard([
         { keydown: function () { calls++; return true; } },
-        { keydown: function () { calls++ } }
+        { keydown: function () { calls++; } }
     ]);
 
     keyboard.keydown();
-    equal(calls, 1)
+    equal(calls, 1);
 });
 
 test("keydown passes the argument to handler", function() {
@@ -276,44 +276,44 @@ test("keydown passes the argument to handler", function() {
     var arg;
 
     initKeyboard([
-        { keydown: function () { arg = arguments[0] } }
+        { keydown: function () { arg = arguments[0]; } }
     ]);
 
     keyboard.keydown(e);
-    equal(arg, e)
+    equal(arg, e);
 });
 
 test("keyup calls the keydup method of the handlers", function() {
     var calls = 0;
     initKeyboard([
-        { keyup: function () { calls++ } },
-        { keyup: function () { calls++ } }
+        { keyup: function () { calls++; } },
+        { keyup: function () { calls++; } }
     ]);
 
     keyboard.keyup();
-    equal(calls, 2)
+    equal(calls, 2);
 });
 
 test("keyup calls the keyup breaks if some handler returns true", function() {
     var calls = 0;
     initKeyboard([
         { keyup: function () { calls++; return true; } },
-        { keyup: function () { calls++ } }
+        { keyup: function () { calls++; } }
     ]);
 
     keyboard.keyup();
-    equal(calls, 1)
+    equal(calls, 1);
 });
 
 test("keyup passes the argument to handler", function() {
     var e = {};
     var arg;
     initKeyboard([
-        { keyup: function () { arg = arguments[0] } }
+        { keyup: function () { arg = arguments[0]; } }
     ]);
 
     keyboard.keyup(e);
-    equal(arg, e)
+    equal(arg, e);
 });
 
 }());

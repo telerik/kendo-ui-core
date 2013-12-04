@@ -9,7 +9,7 @@ editor_module("editor view html command", {
     },
     teardown: function() {
         kendo.destroy(QUnit.fixture);
-        $(".k-window,.k-overlay").remove()
+        $(".k-window,.k-overlay").remove();
         editor.unbind("change");
     }
 });

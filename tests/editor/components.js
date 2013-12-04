@@ -10,7 +10,7 @@ editor_module("editor components", {
 
         $.fn.press = function(key, ctrl, shift) {
             return this.trigger( { type: "keydown", keyCode: key, ctrlKey: ctrl, shiftKey: shift } );
-        }
+        };
     }
 }, {
     tools: [

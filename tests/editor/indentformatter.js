@@ -92,7 +92,7 @@ test('apply nests selected lis in previous li', function() {
 });
 
 test("remove when dom is invalid", function() {
-    editor.value("<ul><li>foo</li><ul><li>bar</li></ul></ul>")
+    editor.value("<ul><li>foo</li><ul><li>bar</li></ul></ul>");
     formatter.remove([editor.body.firstChild.lastChild.firstChild.firstChild]);
     equal(editor.value(), '<ul><li>foo</li><li>bar</li></ul>');
 });

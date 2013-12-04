@@ -80,7 +80,7 @@ test("popup buttons do not call exec", function() {
 });
 
 test('handle carret selection', function() {
-    editor.value('<strong>foo</strong>')
+    editor.value('<strong>foo</strong>');
     var range = editor.createRange();
     range.setStart(editor.body.firstChild.firstChild, 1);
     range.setEnd(editor.body.firstChild.firstChild, 1);
@@ -94,7 +94,7 @@ test('handle carret selection', function() {
 });
 
 test('handle word selection', function() {
-    editor.value('<strong>foo</strong>')
+    editor.value('<strong>foo</strong>');
     var range = editor.createRange();
     range.selectNodeContents(editor.body.firstChild);
 
@@ -107,7 +107,7 @@ test('handle word selection', function() {
 });
 
 test('handle mixed selection', function() {
-    editor.value('<ul><li>foo</li></ul><ul><li>bar</li></ul>')
+    editor.value('<ul><li>foo</li></ul><ul><li>bar</li></ul>');
     var range = editor.createRange();
     range.setStart(editor.body.firstChild.firstChild.firstChild, 1);
     range.setEnd(editor.body.firstChild.firstChild.firstChild, 1);
@@ -178,6 +178,12 @@ var mockedToolbarModule = {
     setup: function() {
         dom = $("<ul class='k-editor-toolbar' />").appendTo(QUnit.fixture);
         toolbar = new editorNS.Toolbar(dom[0]);
+        $.fn.press = function (key) {
+            $(this).trigger({
+                type: "keydown",
+                keyCode: key
+            });
+        };
     },
 
     teardown: function() {
@@ -443,7 +449,7 @@ test("destroy destroys popup", function() {
     var called;
     var popup = toolbar.toolById("createtable")._popup;
 
-    withMock(popup, "destroy", function() { called = true }, function() {
+    withMock(popup, "destroy", function() { called = true; }, function() {
         toolbar.destroy();
 
         ok(called);
@@ -460,13 +466,6 @@ function active() {
 
 function isToolActive(className) {
     return active()[0] == getTool(className)[0];
-}
-
-$.fn.press = function (key) {
-    $(this).trigger({
-        type: "keydown",
-        keyCode: key
-    });
 }
 
 var keys = kendo.keys;

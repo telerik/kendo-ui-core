@@ -83,7 +83,7 @@ test('apply and cursor', function() {
     range.collapse(true);
     var command = createListCommand({ tag: 'ul', range: range });
     command.exec();
-    equal(editor.value(), '<ul><li>foo</li><li>bar</li></ul>')
+    equal(editor.value(), '<ul><li>foo</li><li>bar</li></ul>');
 });
 
 test('exec puts cursor in empty li', function() {
@@ -92,7 +92,7 @@ test('exec puts cursor in empty li', function() {
     var command = createListCommand({ tag: 'ul', range: editor.getRange() });
     command.exec();
     editor.getRange().insertNode(editor.document.createElement('a'));
-    equal(editor.value(), '<ul><li><a></a></li></ul>')
+    equal(editor.value(), '<ul><li><a></a></li></ul>');
 });
 
 test("exec does not replace inline editor container", function() {

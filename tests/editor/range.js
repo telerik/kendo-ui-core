@@ -242,7 +242,7 @@ test("extractContents updates original range when container is element node", fu
 });
 
 test("extractContents updates original range when whole text element is removed", function() {
-    editor.value("<p>foo</p><p>bar<a></a>baz</p>")
+    editor.value("<p>foo</p><p>bar<a></a>baz</p>");
     var range = editor.createRange();
     var anchor = editor.body.lastChild.childNodes[1];
     range.selectNode(anchor);
@@ -260,7 +260,7 @@ test("extractContents updates original range when whole text element is removed"
 });
 
 test("extractContents does not update original range when outside range", function() {
-    editor.value("<p>foo</p><p>bar<strong>baz</strong>foo</p>")
+    editor.value("<p>foo</p><p>bar<strong>baz</strong>foo</p>");
     var range = editor.createRange();
     var anchor = editor.body.lastChild.childNodes[1];
     range.selectNode(anchor);

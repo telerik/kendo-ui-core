@@ -10,7 +10,7 @@ editor_module("editor block format finder", {
    teardown: function() {
        kendo.destroy(QUnit.fixture);
    }
-})
+});
 
 var BlockFormatFinder = kendo.ui.editor.BlockFormatFinder;
 

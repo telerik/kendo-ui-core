@@ -24,7 +24,7 @@ test("editor value is get from textarea", function() {
 });
 
 test("color tools react to palette definition", function() {
-    var customColor = "#ff1ff1"
+    var customColor = "#ff1ff1";
     setup("bar", {
         tools: [
             { name: "foreColor", palette: [customColor] }
@@ -39,7 +39,7 @@ test("color tools react to palette definition", function() {
 });
 
 test("define global ColorTool palette", function() {
-    var customColor = "#ff1ff1"
+    var customColor = "#ff1ff1";
 
     var defaultPalette = kendo.ui.editor.ColorTool.fn.options.palette;
     kendo.ui.editor.ColorTool.fn.options.palette = [customColor];

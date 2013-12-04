@@ -48,7 +48,7 @@ test('exec deletes selected content', function() {
     editor.value('foobar');
     var range = editor.createRange();
     range.setStart(editor.body.firstChild, 1);
-    range.setEnd(editor.body.firstChild, 5)
+    range.setEnd(editor.body.firstChild, 5);
     var command = createParagraphCommand(range);
     command.exec();
     equal(editor.value(), '<p>f</p><p>r</p>');

@@ -88,7 +88,7 @@ test("restoreSelection restores element selection", function() {
 });
 
 function selectRangeInValue(editor, value) {
-    editor.selectRange(createRangeFromText(editor, value))
+    editor.selectRange(createRangeFromText(editor, value));
 }
 
 test("state returns true when tool is toggled", function() {

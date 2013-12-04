@@ -7,7 +7,7 @@ function formatRange(range, format) {
         formatter: function() {
             return new kendo.ui.editor.InlineFormatter(format);
         }
-    })
+    });
     command.editor = editor;
     command.exec();
 }

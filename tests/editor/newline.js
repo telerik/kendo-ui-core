@@ -33,7 +33,7 @@ test("exec moves cursor after br", function() {
     command.exec();
     range = editor.getRange();
     range.insertNode(editor.document.createElement('hr'));
-    equal(editor.value(), 'f<br /><hr />oo')
+    equal(editor.value(), 'f<br /><hr />oo');
 });
 
 test("exec replaces selection with br", function() {

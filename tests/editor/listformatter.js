@@ -266,7 +266,7 @@ test("toggle applies format if format is not found", function() {
     var argument;
     formatter.apply = function () {
         argument = arguments[0];
-    }
+    };
     formatter.toggle(range);
     ok($.isArray(argument));
 });
@@ -277,7 +277,7 @@ test("toggle removes format if format is found", function() {
     var argument;
     formatter.remove = function () {
         argument = arguments[0];
-    }
+    };
     formatter.toggle(range);
     ok($.isArray(argument));
 });
@@ -446,7 +446,7 @@ test("remove from nested list", function() {
 });
 
 test("remove from deeply nested list", function() {
-    var range = createRangeFromText(editor, "<ul><li>foo<ul><li>bar<ul><li>|baz|</li></ul></li></ul></li></ul>")
+    var range = createRangeFromText(editor, "<ul><li>foo<ul><li>bar<ul><li>|baz|</li></ul></li></ul></li></ul>");
 
     formatter.toggle(range);
     equal(editor.value(), "<ul><li>foo<ul><li>bar</li></ul></li></ul><p>baz</p>");

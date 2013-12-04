@@ -27,7 +27,7 @@ test("exec creates window", function() {
     var range = createRangeFromText(editor, "|foo|");
     execLinkCommandOnRange(range);
 
-    equal($(".k-window").length, 1)
+    equal($(".k-window").length, 1);
 });
 
 test("clicking close closes the window", function() {
@@ -189,7 +189,7 @@ test("hitting enter in name field inserts link", function() {
     $("#k-editor-link-url").val("foo");
     $("#k-editor-link-text").trigger(evt("keydown", 13));
 
-    equal(editor.value(), '<a href="foo">foo</a>')
+    equal(editor.value(), '<a href="foo">foo</a>');
     equal($(".k-window").length, 0);
 });
 
@@ -200,7 +200,7 @@ test("hitting enter in title field inserts link", function() {
     $("#k-editor-link-url").val("foo");
     $("#k-editor-link-title").trigger(evt("keydown", 13));
 
-    equal(editor.value(), '<a href="foo">foo</a>')
+    equal(editor.value(), '<a href="foo">foo</a>');
     equal($(".k-window").length, 0);
 });
 
@@ -244,7 +244,7 @@ test("setting title", function() {
     $("#k-editor-link-title").val("bar");
     $(".k-dialog-insert").click();
 
-    equal(editor.value(), '<a href="foo" title="bar">foo</a>')
+    equal(editor.value(), '<a href="foo" title="bar">foo</a>');
 });
 
 test("setting opening in new window", function() {
@@ -280,7 +280,7 @@ test("updatung link text", function() {
     $("#k-editor-link-text").val("bar");
     $(".k-dialog-insert").click();
 
-    equal(editor.value(), '<a href="foo">bar</a>')
+    equal(editor.value(), '<a href="foo">bar</a>');
 });
 
 test("updating link text from caret", function() {
@@ -295,7 +295,7 @@ test("updating link text from caret", function() {
     $("#k-editor-link-text").val("bar");
     $(".k-dialog-insert").click();
 
-    equal(editor.value(), '<a href="foo">bar</a>')
+    equal(editor.value(), '<a href="foo">bar</a>');
 });
 
 test("undo restores content", function() {
@@ -330,7 +330,7 @@ test("redo creates link", function() {
     command.undo();
     command.redo();
 
-    equal(editor.value(), '<a href="foo">bar</a>')
+    equal(editor.value(), '<a href="foo">bar</a>');
 });
 
 test("link is not created if url is http slash slash", function() {

@@ -9,7 +9,7 @@ function formatRange(range, format) {
         formatter: function() {
             return new kendo.ui.editor.BlockFormatter(format);
         }
-    })
+    });
     command.editor = editor;
     command.exec();
 }
