@@ -2710,7 +2710,7 @@ kendo_module({
                     .find(".k-scheduler-views li")
                     .removeClass("k-state-selected")
                     .end()
-                    .find(".k-view-" + name)
+                    .find(".k-view-" + name.replace(/\./g, "\\."))
                     .addClass("k-state-selected");
             }
         },
