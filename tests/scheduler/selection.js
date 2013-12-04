@@ -541,7 +541,9 @@
         setup: function() {
             now = new Date();
             container = $("<div />");
-            $(document.body).append(container);
+
+            QUnit.fixture.append(container);
+
             scheduler = new Scheduler(container, {
                 selectable: true,
                 views: [
@@ -557,18 +559,18 @@
         },
 
         teardown: function() {
-           container.closest(".k-scheduler").kendoScheduler("destroy").remove();
+            kendo.destroy(QUnit.fixture);
         }
     });
 
     module("Selection events", {
         setup: function() {
             container = $("<div />");
-            $(document.body).append(container);
+            QUnit.fixture.append(container);
         },
 
         teardown: function() {
-           container.closest(".k-scheduler").kendoScheduler("destroy").remove();
+            kendo.destroy(QUnit.fixture);
         }
     });
 

@@ -1939,14 +1939,14 @@
     module("Multi Day View ARIA rendering", {
         setup: function() {
             container = document.createElement("div");
-            document.body.appendChild(container);
+            QUnit.fixture[0].appendChild(container);
             container = $(container).addClass("k-scheduler").css({
                 width: 1000,
                 height: 800
             });
         },
         teardown: function() {
-            $(container).remove();
+            kendo.destroy(QUnit.fixture);
         }
     });
 

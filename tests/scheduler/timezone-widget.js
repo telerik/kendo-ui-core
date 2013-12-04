@@ -103,11 +103,10 @@
 
     module("kendo.ui.TimezoneEditor interaction", {
         setup: function() {
-            div = $("<div />").appendTo(document.body);
+            div = $("<div />").appendTo(QUnit.fixture);
         },
         teardown: function() {
-            div.data("kendoTimezoneEditor").destroy();
-            div.remove();
+            kendo.destroy(QUnit.fixture);
         }
     });
 
@@ -147,11 +146,10 @@
 
     module("kendo.ui.TimezoneEditor events", {
         setup: function() {
-            div = $("<div />").appendTo(document.body);
+            div = $("<div />").appendTo(QUnit.fixture);
         },
         teardown: function() {
-            div.data("kendoTimezoneEditor").destroy();
-            div.remove();
+            kendo.destroy(QUnit.fixture);
         }
     });
 

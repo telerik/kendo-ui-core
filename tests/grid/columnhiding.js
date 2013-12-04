@@ -6,10 +6,10 @@
 
     module("grid column hiding", {
         setup: function() {
-            div = $("<div></div>").appendTo(document.body);
+            div = $("<div></div>").appendTo(QUnit.fixture);
         },
         teardown: function() {
-            div.closest(".k-grid").remove();
+            kendo.destroy(QUnit.fixture);
         }
     });
 

@@ -94,11 +94,10 @@
 
     module("kendo.ui.MobileTimezoneEditor interaction", {
         setup: function() {
-            div = $("<div />").appendTo(document.body);
+            div = $("<div />").appendTo(QUnit.fixture);
         },
         teardown: function() {
-            div.data("kendoMobileTimezoneEditor").destroy();
-            div.remove();
+            kendo.destroy(QUnit.fixture);
         }
     });
 
@@ -144,11 +143,10 @@
 
     module("kendo.ui.MobileTimezoneEditor events", {
         setup: function() {
-            div = $("<div />").appendTo(document.body);
+            div = $("<div />").appendTo(QUnit.fixture);
         },
         teardown: function() {
-            div.data("kendoMobileTimezoneEditor").destroy();
-            div.remove();
+            kendo.destroy(QUnit.fixture);
         }
     });
 
