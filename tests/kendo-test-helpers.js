@@ -101,24 +101,6 @@ function release(element, x, y, id) {
     })
 }
 
-function pushStyle(element, css) {
-    element = $(element);
-    var stack = element.data("_cssStack") || [];
-    stack.push(element[0].style.cssText);
-    element.css(css);
-}
-
-function popStyle(element) {
-    var stack = $(element).data("_cssStack");
-    if (stack) {
-        element.style.cssText = stack.pop();
-
-        if (stack.length === 0) {
-            element.data("_cssStack", null);
-        }
-    }
-}
-
 $('head')
     .append('<link rel="stylesheet/less" href="/base/styles/mobile/kendo.mobile.all.less" type="text/css" />')
     .append('<link rel="stylesheet/less" href="/base/styles/web/kendo.common.less" type="text/css" />')
