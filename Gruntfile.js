@@ -55,8 +55,6 @@ module.exports = function(grunt) {
        'tests/window/*.js',
        'tests/slider/*.js',
        'tests/editor/*.js',
-       'tests/scheduler/*.js',
-       'tests/upload/*.js',
        'tests/qrcode/*.js',
        'tests/barcode/**/*.js',
        'tests/gauge/*.js',
@@ -64,7 +62,9 @@ module.exports = function(grunt) {
        //'tests/stock/*.js',
        'tests/sparkline/*.js',
        'tests/map/**/*.js',
-       'tests/themebuilder/*.js'
+       'tests/themebuilder/*.js',
+       'tests/scheduler/*.js',
+       'tests/upload/*.js'
     ];
 
     var testsOption = grunt.option('tests');
