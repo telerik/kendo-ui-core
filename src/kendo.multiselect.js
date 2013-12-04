@@ -975,6 +975,8 @@ kendo_module({
 
             computedStyles.position = "absolute";
             computedStyles.visibility = "hidden";
+            computedStyles.top = -3333;
+            computedStyles.left = -3333;
 
             this._span = $("<span/>").css(computedStyles).appendTo(this.wrapper);
         },

@@ -147,6 +147,8 @@
 
         equal(searchText.css("position"), "absolute");
         equal(searchText.css("visibility"), "hidden");
+        equal(searchText.css("top"), "-3333px");
+        equal(searchText.css("left"), "-3333px");
         equal(searchText.css("font-size"), input.css("font-size"));
         equal(searchText.css("font-style"), input.css("font-style"));
         equal(searchText.css("font-weight"), input.css("font-weight"));
