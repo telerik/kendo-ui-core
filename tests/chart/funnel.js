@@ -1,9 +1,4 @@
 (function() {
-    var chart,
-        segment,
-        segmentElement,
-        plotArea;
-
     var dataviz = kendo.dataviz,
         getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
@@ -11,7 +6,7 @@
         box = new Box2D(0, 0, 800, 600),
         chart;
 
-    function createChart(options) {
+    function createFunnelChart(options) {
         var plotArea = {
             options: {
                 seriesColors: ["red", "green", "blue"],
@@ -28,7 +23,7 @@
     // ------------------------------------------------------------
     module("dynamicSlope false", {
         setup: function() {
-            createChart({
+            createFunnelChart({
                 dynamicHeight:false,
                 series: [{
                     data: [{
@@ -74,7 +69,7 @@
 
     module("dynamicSlope false", {
         setup: function() {
-            createChart({
+            createFunnelChart({
                 dynamicSlope:false,
                 series: [{
                     data: [{
@@ -115,7 +110,7 @@
 
     module("max neckRatio", {
         setup: function() {
-            createChart({
+            createFunnelChart({
                 dynamicSlope:false,
                 neckRatio: 1,
                 series: [{
@@ -157,7 +152,7 @@
 
     module("min neckRatio", {
         setup: function() {
-            createChart({
+            createFunnelChart({
                 dynamicSlope:false,
                 neckRatio: 0,
                 series: [{
@@ -199,7 +194,7 @@
 
     module("Series setup", {
         setup: function() {
-            createChart({
+            createFunnelChart({
                 series: [{
                     type: "funnel",
                     opacity:0.3,
@@ -239,7 +234,7 @@
 
     module("Series with empty data", {
         setup: function() {
-            createChart({
+            createFunnelChart({
                 series: [{
                     type: "funnel",
                     data: []
@@ -257,7 +252,7 @@
 
     module("Series with empty data", {
         setup: function() {
-            createChart({
+            createFunnelChart({
                 series: [{
                     type: "funnel",
                     dynamicSlope:true,
@@ -275,7 +270,7 @@
 
     module("dynamicSlope false with spacing", {
         setup: function() {
-            createChart({
+            createFunnelChart({
                 dynamicSlope:false,
                 segmentSpacing:30,
                 neckRatio: 0,
@@ -318,7 +313,7 @@
 
     module("dynamicSlope false with spacing", {
         setup: function() {
-            createChart({
+            createFunnelChart({
                 dynamicSlope:false,
                 segmentSpacing:33,
                 neckRatio: 0,
@@ -362,7 +357,7 @@
 
     module("dynamicSlope true", {
         setup: function() {
-            createChart({
+            createFunnelChart({
                 dynamicSlope:true,
                 series: [{
                     data: [{
@@ -403,7 +398,7 @@
 
     module("dynamicSlope true with spacing", {
         setup: function() {
-            createChart({
+            createFunnelChart({
                 segmentSpacing : 22,
                 dynamicSlope:true,
                 series: [{
@@ -445,7 +440,7 @@
 
     module("using label with template", {
         setup: function() {
-            createChart({
+            createFunnelChart({
                 segmentSpacing : 22,
                 dynamicSlope:true,
                 labels: {
@@ -559,140 +554,142 @@
         ], TOLERANCE);
     });
 
-    function createFunnelChart(options) {
-        QUnit.fixture.html("<div id='container'></div>")
-        chart = $("#container").kendoChart($.extend({
-            series: [{
-                type: "funnel",
-                labels:{
-                    visible:true
-                },
-                data: [{ value: 1, category: "A" }]
-            }]
-        }, options))
-        .data("kendoChart");
+    (function() {
+        var chart,
+            segment,
+            segmentElement,
+            plotArea;
 
-        plotArea = chart._plotArea;
-        segment = plotArea.charts[0].points[0];
-        segmentElement = $(getElement(segment.options.id));
-    }
+        function createFunnelChart(options) {
+            chart = createChart($.extend({
+                series: [{
+                    type: "funnel",
+                    labels:{
+                        visible:true
+                    },
+                    data: [{ value: 1, category: "A" }]
+                }]
+            }, options));
 
-    function segmentClick(callback) {
-        createFunnelChart({
-            seriesClick: callback
-        });
-
-        clickChart(chart, segmentElement);
-    }
-
-    function segmentHover(callback) {
-        createFunnelChart({
-            seriesHover: callback
-        });
-
-        segmentElement.mouseover();
-    }
-
-    // ------------------------------------------------------------
-    module("Funnel Chart / Events / seriesClick", {
-        teardown: function(){
-            destroyChart();
+            plotArea = chart._plotArea;
+            segment = plotArea.charts[0].points[0];
+            segmentElement = $(getElement(segment.id));
         }
-    });
 
-    test("fires when clicking segments", 1, function() {
-        segmentClick(function() { ok(true); });
-    });
+        function segmentClick(callback) {
+            createFunnelChart({
+                seriesClick: callback
+            });
 
-    test("fires on subsequent click", 2, function() {
-        segmentClick(function() { ok(true); });
-        clickChart(chart, segmentElement);
-    });
-
-    test("fires when clicking segment labels", 1, function() {
-        createFunnelChart({
-            seriesClick: function() { ok(true); }
-        });
-        var label = plotArea.charts[0].labels[0];
-        clickChart(chart, getElement(label.options.id));
-    });
-
-    test("event arguments contain value", 1, function() {
-        segmentClick(function(e) { equal(e.value, 1); });
-    });
-
-    test("event arguments contain category", 1, function() {
-        segmentClick(function(e) { equal(e.category, "A"); });
-    });
-
-    test("event arguments contain series", 1, function() {
-        segmentClick(function(e) {
-            deepEqual(e.series, chart.options.series[0]);
-        });
-    });
-
-    test("event arguments contain jQuery element", 1, function() {
-        segmentClick(function(e) {
-            equal(e.element[0], getElement(segment.options.id));
-        });
-    });
-
-    module("Funnel Chart / Events / seriesHover", {
-        teardown: function(){
-            destroyChart();
+            clickChart(chart, segmentElement);
         }
-    });
 
-    test("fires when hovering segments", 1, function() {
-        segmentHover(function() { ok(true); });
-    });
+        function segmentHover(callback) {
+            createFunnelChart({
+                seriesHover: callback
+            });
 
-    test("fires on tap", 1, function() {
-        createFunnelChart({
-            seriesHover: function() {
-                ok(true);
-            }
+            segmentElement.mouseover();
+        }
+
+        // ------------------------------------------------------------
+        module("Funnel Chart / Events / seriesClick", {
+            teardown: destroyChart
         });
 
-        clickChart(chart, segmentElement);
-    });
-
-    test("does not fire on subsequent tap", 1, function() {
-        createFunnelChart({
-            seriesHover: function() {
-                ok(true);
-            }
+        test("fires when clicking segments", 1, function() {
+            segmentClick(function() { ok(true); });
         });
 
-        clickChart(chart, segmentElement);
-    });
-
-    test("fires when hovering segment labels", 1, function() {
-        createFunnelChart({
-            seriesHover: function() { ok(true); }
+        test("fires on subsequent click", 2, function() {
+            segmentClick(function() { ok(true); });
+            clickChart(chart, segmentElement);
         });
-        var label = plotArea.charts[0].labels[0];
-        $(getElement(label.options.id)).mouseover();
-    });
 
-    test("event arguments contain value", 1, function() {
-        segmentHover(function(e) { equal(e.value, 1); });
-    });
-
-    test("event arguments contain category", 1, function() {
-        segmentHover(function(e) { equal(e.category, "A"); });
-    });
-
-    test("event arguments contain series", 1, function() {
-        segmentHover(function(e) {
-            deepEqual(e.series, chart.options.series[0]);
+        test("fires when clicking segment labels", 1, function() {
+            createFunnelChart({
+                seriesClick: function() { ok(true); }
+            });
+            var label = plotArea.charts[0].labels[0];
+            clickChart(chart, getElement(label.id));
         });
-    });
 
-    test("event arguments contain jQuery element", 1, function() {
-        segmentHover(function(e) {
-            equal(e.element[0], getElement(segment.options.id));
+        test("event arguments contain value", 1, function() {
+            segmentClick(function(e) { equal(e.value, 1); });
         });
-    });
 
+        test("event arguments contain category", 1, function() {
+            segmentClick(function(e) { equal(e.category, "A"); });
+        });
+
+        test("event arguments contain series", 1, function() {
+            segmentClick(function(e) {
+                deepEqual(e.series, chart.options.series[0]);
+            });
+        });
+
+        test("event arguments contain jQuery element", 1, function() {
+            segmentClick(function(e) {
+                equal(e.element[0], getElement(segment.id));
+            });
+        });
+
+        // ------------------------------------------------------------
+        module("Funnel Chart / Events / seriesHover", {
+            teardown: destroyChart
+        });
+
+        test("fires when hovering segments", 1, function() {
+            segmentHover(function() { ok(true); });
+        });
+
+        test("fires on tap", 1, function() {
+            createFunnelChart({
+                seriesHover: function() {
+                    ok(true);
+                }
+            });
+
+            clickChart(chart, segmentElement);
+        });
+
+        test("does not fire on subsequent tap", 1, function() {
+            createFunnelChart({
+                seriesHover: function() {
+                    ok(true);
+                }
+            });
+
+            clickChart(chart, segmentElement);
+        });
+
+        test("fires when hovering segment labels", 1, function() {
+            createFunnelChart({
+                seriesHover: function() { ok(true); }
+            });
+            var label = plotArea.charts[0].labels[0];
+            $(getElement(label.id)).mouseover();
+        });
+
+        test("event arguments contain value", 1, function() {
+            segmentHover(function(e) { equal(e.value, 1); });
+        });
+
+        test("event arguments contain category", 1, function() {
+            segmentHover(function(e) { equal(e.category, "A"); });
+        });
+
+        test("event arguments contain series", 1, function() {
+            segmentHover(function(e) {
+                deepEqual(e.series, chart.options.series[0]);
+            });
+        });
+
+        test("event arguments contain jQuery element", 1, function() {
+            segmentHover(function(e) {
+                equal(e.element[0], getElement(segment.id));
+            });
+        });
+
+    })();
 })();

@@ -113,6 +113,8 @@ module.exports = function(grunt) {
                         'src/kendo.datepicker.js',
                         'src/kendo.timepicker.js',
 
+                        "src/cultures/kendo.culture.es-ES.js",
+
                         'src/kendo.mobile.loader.js',
                         'src/kendo.mobile.scroller.js',
                         'src/kendo.mobile.view.js',

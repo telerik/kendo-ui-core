@@ -51,9 +51,7 @@
 
         // ------------------------------------------------------------
         module("Selection / Configuration", {
-            teardown: function() {
-                destroyChart();
-            }
+            teardown: destroyChart
         });
 
         test("Selection is created for categoryAxis", function() {
@@ -171,9 +169,7 @@
                     }
                 });
             },
-            teardown: function() {
-                destroyChart();
-            }
+            teardown: destroyChart
         });
 
         test("selectStart fires on UserEvents start", function() {
@@ -432,9 +428,7 @@
                     }
                 });
             },
-            teardown: function() {
-                destroyChart();
-            }
+            teardown: destroyChart
         });
 
         test("selection shrinks left on mousewheel up", function() {
@@ -580,9 +574,7 @@
                     }
                 });
             },
-            teardown: function() {
-                destroyChart();
-            }
+            teardown: destroyChart
         });
 
         test("from can be parsed from string", function() {
@@ -674,9 +666,7 @@
                     }
                 });
             },
-            teardown: function() {
-                destroyChart();
-            }
+            teardown: destroyChart
         });
 
         test("selection is rendered at chosen location", function() {

@@ -191,5 +191,4 @@
         var segment = PolarAreaChart.fn.createSegment([], {data: [], line: {style: SMOOTH}}, 0);
         ok(segment instanceof SplinePolarAreaSegment);
     });
-
 })();

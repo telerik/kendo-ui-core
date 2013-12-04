@@ -177,8 +177,8 @@ function createChart(options) {
     return div.data("kendoChart");
 }
 
-function destroyChart(element) {
-    var element = element || $("#container");
+function destroyChart() {
+    var element = $("#container");
     kendo.destroy(element);
     element.unbind().empty();
 }

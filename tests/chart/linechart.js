@@ -50,9 +50,9 @@
     }
 
     (function() {
-        var positiveSeries = { data: [1, 2], style: "step", labels: {} },
-            negativeSeries = { data: [-1, -2], style: "step", labels: {} },
-            sparseSeries = { data: [1, 2, undefined, 2], style: "step", width: 0 },
+        var positiveSeries = { data: [1, 2], labels: {} },
+            negativeSeries = { data: [-1, -2], labels: {} },
+            sparseSeries = { data: [1, 2, undefined, 2], width: 0 },
             VALUE_AXIS_MAX = 2,
             CATEGORY_AXIS_Y = 2;
 
@@ -72,7 +72,7 @@
         );
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Positive Values", {
+        module("Line Chart / Positive Values", {
             setup: function() {
                 setupLineChart(plotArea, { series: [ positiveSeries ] });
             }
@@ -155,14 +155,14 @@
         test("Throws error when unable to locate value axis", function() {
             raises(function() {
                     setupLineChart(plotArea, {
-                        series: [{ axis: "b", data: [1], style: "step" }]
+                        series: [{ axis: "b", data: [1] }]
                     });
                 },
                 /Unable to locate value axis with name b/);
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Negative Values", {
+        module("Line Chart / Negative Values", {
             setup: function() {
                 setupLineChart(plotArea, { series: [ negativeSeries ] });
             }
@@ -200,7 +200,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Multiple Series", {
+        module("Line Chart / Multiple Series", {
             setup: function() {
                 setupLineChart(plotArea, { series: [ negativeSeries, positiveSeries ] });
             }
@@ -219,14 +219,13 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Multiple Category Axes", {
+        module("Line Chart / Multiple Category Axes", {
             setup: function() {
                 var chart = createChart({
                     series: [{
                         type: "line",
                         data: [1],
-                        categoryAxis: "secondary",
-                        style: "step"
+                        categoryAxis: "secondary"
                     }],
                     valueAxis: {
                         axisCrossingValue: [10, 0]
@@ -240,6 +239,9 @@
                 });
 
                 series = chart._model._plotArea.charts[0];
+            },
+            teardown: function() {
+                destroyChart();
             }
         });
 
@@ -252,7 +254,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Mismatched series", {
+        module("Line Chart / Mismatched series", {
             setup: function() {
                 setupLineChart(plotArea, {
                 series: [ { data: [1, 2, 3] },
@@ -282,7 +284,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Missing values", {
+        module("Line Chart / Missing values", {
             setup: function() {
                 setupLineChart(plotArea, {
                     series: [ sparseSeries ]
@@ -344,7 +346,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Stack / Positive Values", {
+        module("Line Chart / Stack / Positive Values", {
             setup: function() {
                 setupLineChart(plotArea, {
                     series: [ positiveSeries, positiveSeries, positiveSeries ],
@@ -369,7 +371,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Stack / Negative Values", {
+        module("Line Chart / Stack / Negative Values", {
             setup: function() {
                 setupLineChart(plotArea, {
                     series: [ negativeSeries, negativeSeries, negativeSeries ],
@@ -394,7 +396,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Stack / Mixed Values", {
+        module("Line Chart / Stack / Mixed Values", {
             setup: function() {
                 setupLineChart(plotArea, {
                     series: [{
@@ -426,7 +428,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Stack / Mixed Series", {
+        module("Line Chart / Stack / Mixed Series", {
             setup: function() {
                 plotArea.namedValueAxes.a = plotArea.valueAxis;
                 plotArea.namedValueAxes.b = plotArea.valueAxis;
@@ -452,7 +454,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Stack / Missing values", {
+        module("Line Chart / Stack / Missing values", {
             setup: function() {
                 setupLineChart(plotArea, {
                     series: [ sparseSeries, sparseSeries ],
@@ -493,9 +495,7 @@
             });
 
             deepEqual(pointCoordinates, [
-                [ 0, 1 ], [ 1, 1 ], [ 1, 1 ], [ 1, 0 ],
-                [ 2, 0 ], [ 1, 0 ], [ 2, 0 ], [ 3, 0 ],
-                [ 3, 0 ], [ 4, 0 ]
+                [ 0.5, 1 ], [ 1.5, 0 ], [ 3.5, 0 ]
             ]);
         });
 
@@ -508,23 +508,21 @@
             });
 
             deepEqual(pointCoordinates, [
-                [ 0, 1 ], [ 1, 1 ], [ 1, 0 ], [ 2, 0]
+                [ 0.5, 1 ], [ 1.5, 0 ]
             ]);
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Stack / Panes");
+        module("Line Chart / Stack / Panes");
 
         test("charts in different panes are not stacked", function() {
             var chart = createChart({
                 series: [{
                     stack: true,
-                    style: "step",
                     type: "line",
                     data: [1]
                 }, {
                     type: "line",
-                    style: "step",
                     data: [2],
                     axis: "b"
                 }],
@@ -549,7 +547,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Rendering", {
+        module("Line Chart / Rendering", {
             setup: function() {
                 setupLineChart(plotArea, {
                     series: [
@@ -606,7 +604,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Rendering / Missing Values");
+        module("Line Chart / Rendering / Missing Values");
 
         test("line stops before missing value", function() {
             setupLineChart(plotArea, {
@@ -616,7 +614,7 @@
             });
 
             deepEqual(pointCoordinates, [
-                [ 0, 1 ], [ 1, 1 ], [ 1, 0 ], [ 2, 0 ]
+                [ 0.5, 1 ], [ 1.5, 0 ]
             ]);
         });
 
@@ -634,13 +632,12 @@
             setupLineChart(plotArea, {
                 series: [{
                     data: [ null, 1, 2 ],
-                    width: 0,
-                    style: "step"
+                    width: 0
                 }]
             });
 
             deepEqual(pointCoordinates, [
-                [ 1, 1 ], [ 2, 1 ], [ 2, 1 ], [ 2, 0 ], [ 3, 0 ]
+                [ 1.5, 1 ], [ 2.5, 0 ]
             ]);
         });
 
@@ -652,9 +649,7 @@
             });
 
             deepEqual(pointCoordinates, [
-                [ 0, 1 ], [ 1, 1 ], [ 1, 1 ],
-                [ 1, 0 ], [ 2, 0 ], [ 1, 0 ],
-                [ 2, 0 ], [ 3, 0 ], [ 3, 0 ], [ 4, 0 ]
+                [ 0.5, 1 ], [ 1.5, 0 ], [ 3.5, 0 ]
             ]);
         });
 
@@ -666,10 +661,7 @@
             });
 
             deepEqual(pointCoordinates, [
-                [ 0, 1 ], [ 1, 1 ], [ 1, 0 ],
-                [ 2, 0 ], [ 1, 0 ], [ 2, 0 ],
-                [ 2, 2 ], [ 3, 2 ], [ 2, 2 ],
-                [ 3, 2 ], [ 3, 0 ], [ 4, 0 ]
+                [ 0.5, 1 ], [ 1.5, 0 ], [ 2.5, 2 ], [ 3.5, 0 ]
             ]);
         });
 
@@ -725,18 +717,16 @@
         }
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Configuration", {
+        module("Line Chart / Configuration", {
             setup: function() {
                 createLineChart();
-            },
-            teardown: destroyChart
+            }
         });
 
         test("remove series if visible is set to false", function() {
             var chart = createChart({
                 seriesDefaults: {
-                    type: "line",
-                    style: "step"
+                    type: "line"
                 },
                 series: [{
                     data: [1],
@@ -884,7 +874,7 @@
         }
 
         // ------------------------------------------------------------
-        module("Step Line Point", {
+        module("Line Point", {
             setup: function() {
                 createPoint();
             }
@@ -1042,7 +1032,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Point / Labels", {
+        module("Line Point / Labels", {
             setup: function() {
                 createPoint({ labels: { visible: true } });
             }
@@ -1125,7 +1115,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Point / Labels / Template");
+        module("Line Point / Labels / Template");
 
         test("renders template", function() {
             createPoint({ labels: { visible: true, template: "${value}%" } });
@@ -1163,7 +1153,7 @@
             label;
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Integration", {
+        module("Line Chart / Integration", {
             setup: function() {
                 chart = createChart({
                     dataSource: {
@@ -1178,7 +1168,6 @@
                     series: [{
                         name: "Value",
                         type: "line",
-                        style: "step",
                         field: "value"
                     }],
                     categoryAxis: {
@@ -1213,11 +1202,14 @@
             chart = createChart($.extend({
                 series: [{
                     type: "line",
-                    style: "step",
                     data: [1, 2]
                 }],
                 categoryAxis: {
                     categories: ["A"]
+                },
+                chartArea: {
+                    width: 600,
+                    height: 400
                 }
             }, options));
 
@@ -1265,7 +1257,7 @@
         }
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Events / seriesClick", {
+        module("Line Chart / Events / seriesClick", {
             teardown: destroyChart
         });
 
@@ -1327,7 +1319,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Events / seriesHover", {
+        module("Line Chart / Events / seriesHover", {
             teardown: function() {
                 destroyChart();
                 $(document.body).unbind(".tracking");

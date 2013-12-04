@@ -1,25 +1,24 @@
 (function() {
     var dataviz = kendo.dataviz,
-        getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
         categoriesCount = dataviz.categoriesCount,
         chartBox = new Box2D(0, 0, 800, 600),
-        lineChart,
+        areaChart,
         root,
         view,
         pointCoordinates,
         TOLERANCE = 1;
 
-    function setupLineChart(plotArea, options) {
+    function setupStepAreaChart(plotArea, options) {
         view = new ViewStub();
 
-        lineChart = new dataviz.LineChart(plotArea, options);
+        areaChart = new dataviz.AreaChart(plotArea, options);
 
         root = new dataviz.RootElement();
-        root.append(lineChart);
+        root.append(areaChart);
 
-        lineChart.reflow();
-        lineChart.getViewElements(view);
+        areaChart.reflow();
+        areaChart.getViewElements(view);
         pointCoordinates = mapPoints(view.log.path[0].points);
     }
 
@@ -27,6 +26,9 @@
         return new function() {
             this.categoryAxis = this.primaryCategoryAxis = {
                 getSlot: getCategorySlot,
+                lineBox: function() {
+                    return new Box2D(0,2,2,2);
+                },
                 options: {
                     categories: ["A", "B"]
                 }
@@ -34,6 +36,9 @@
 
             this.valueAxis = {
                 getSlot: getValueSlot,
+                lineBox: function() {
+                    return new Box2D(0,0,0,2);
+                },
                 options: {}
             };
 
@@ -50,9 +55,9 @@
     }
 
     (function() {
-        var positiveSeries = { data: [1, 2], style: "step", labels: {} },
-            negativeSeries = { data: [-1, -2], style: "step", labels: {} },
-            sparseSeries = { data: [1, 2, undefined, 2], style: "step", width: 0 },
+        var positiveSeries = { data: [1, 2], labels: {}, line: { style: "step" } },
+            negativeSeries = { data: [-1, -2], labels: {}, line: { style: "step" } },
+            sparseSeries = { data: [1, 2, undefined, 2], line: { style: "step" } },
             VALUE_AXIS_MAX = 2,
             CATEGORY_AXIS_Y = 2;
 
@@ -61,7 +66,7 @@
                 return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
                                  categoryIndex + 1, CATEGORY_AXIS_Y);
             },
-            function(value, b) {
+            function(value) {
                 var value = typeof value === "undefined" ? 0 : value,
                     valueY = VALUE_AXIS_MAX - value,
                     slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
@@ -72,31 +77,31 @@
         );
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Positive Values", {
+        module("Area Chart / Positive Values", {
             setup: function() {
-                setupLineChart(plotArea, { series: [ positiveSeries ] });
+                setupStepAreaChart(plotArea, { series: [ positiveSeries ] });
             }
         });
 
-        test("Creates points for lineChart data points", function() {
-            equal(lineChart.points.length, positiveSeries.data.length);
+        test("Creates points for areaChart data points", function() {
+            equal(areaChart.points.length, positiveSeries.data.length);
         });
 
         test("Reports minimum series value for default axis", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
+            deepEqual(areaChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
         });
 
         test("Reports maximum series value for default axis", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
+            deepEqual(areaChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
         });
 
         test("Reports number of categories", function() {
-            setupLineChart(plotArea, {series: [ positiveSeries ]});
-            equal(categoriesCount(lineChart.options.series), positiveSeries.data.length);
+            setupStepAreaChart(plotArea, {series: [ positiveSeries ]});
+            equal(categoriesCount(areaChart.options.series), positiveSeries.data.length);
         });
 
         test("points are distributed across category axis", function() {
-            var pointsX = $.map(lineChart.points, function(point) {
+            var pointsX = $.map(areaChart.points, function(point) {
                 return point.box.x1;
             });
 
@@ -104,21 +109,51 @@
         });
 
         test("points are aligned to category axis", function() {
-            var pointsY = $.map(lineChart.points, function(point) {
+            var pointsY = $.map(areaChart.points, function(point) {
                 return point.box.y2;
             });
 
             deepEqual(pointsY, [CATEGORY_AXIS_Y, CATEGORY_AXIS_Y]);
         });
 
+        test("segments are clipped to category axis", function() {
+            setupStepAreaChart(plotArea, { series: [ positiveSeries ]});
+
+            equal(areaChart._segments[0].points()[0].y, CATEGORY_AXIS_Y);
+        });
+
+        test("segments are clipped to secondary category axis", function() {
+            plotArea.namedCategoryAxes["secondary"] = {
+                getSlot: function(categoryIndex) {
+                    return new Box2D(categoryIndex, 0,
+                                     categoryIndex + 1, 0);
+                },
+                lineBox: function() {
+                    ok(true)
+                    return new Box2D(0,0,2,0);
+                },
+                options: {
+                    categories: ["A", "B"]
+                }
+            };
+
+            setupStepAreaChart(plotArea, { series: [{
+                categoryAxis: "secondary",
+                data: [1, 2],
+                labels: {}
+            }]});
+
+            equal(areaChart._segments[0].points()[0].y, 0);
+        });
+
         test("points have set width", function() {
-            $.each(lineChart.points, function() {
+            $.each(areaChart.points, function() {
                 equal(this.box.width(), 1);
             });
         });
 
         test("points have set height according to value", function() {
-            var pointHeights = $.map(lineChart.points, function(point) {
+            var pointHeights = $.map(areaChart.points, function(point) {
                 return point.box.height();
             });
 
@@ -126,58 +161,58 @@
         });
 
         test("getNearestPoint returns nearest series point", function() {
-            var point = lineChart.points[1],
-                result = lineChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 0);
+            var point = areaChart.points[1],
+                result = areaChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 0);
 
             ok(result === point);
         });
 
         test("sets point owner", function() {
-            ok(lineChart.points[0].owner === lineChart);
+            ok(areaChart.points[0].owner === areaChart);
         });
 
         test("sets point series", function() {
-            ok(lineChart.points[0].series === positiveSeries);
+            ok(areaChart.points[0].series === positiveSeries);
         });
 
         test("sets point series index", function() {
-            ok(lineChart.points[0].seriesIx === 0);
+            ok(areaChart.points[0].seriesIx === 0);
         });
 
         test("sets point category", function() {
-            equal(lineChart.points[0].category, "A");
+            equal(areaChart.points[0].category, "A");
         });
 
         test("sets point dataItem", function() {
-            equal(typeof lineChart.points[0].dataItem, "number");
+            equal(typeof areaChart.points[0].dataItem, "number");
         });
 
         test("Throws error when unable to locate value axis", function() {
             raises(function() {
-                    setupLineChart(plotArea, {
-                        series: [{ axis: "b", data: [1], style: "step" }]
+                    setupStepAreaChart(plotArea, {
+                        series: [{ axis: "b", data: [1], line: { style: "step" } }]
                     });
                 },
                 /Unable to locate value axis with name b/);
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Negative Values", {
+        module("Area Chart / Negative Values", {
             setup: function() {
-                setupLineChart(plotArea, { series: [ negativeSeries ] });
+                setupStepAreaChart(plotArea, { series: [ negativeSeries ] });
             }
         });
 
         test("Reports minimum series value for default axis", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].min, negativeSeries.data[1]);
+            deepEqual(areaChart.valueAxisRanges[undefined].min, negativeSeries.data[1]);
         });
 
         test("Reports maximum series value for default axis", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].max, negativeSeries.data[0]);
+            deepEqual(areaChart.valueAxisRanges[undefined].max, negativeSeries.data[0]);
         });
 
         test("point tops are aligned to category axis", function() {
-            var pointsY = $.map(lineChart.points, function(point) {
+            var pointsY = $.map(areaChart.points, function(point) {
                 return point.box.y1;
             });
 
@@ -185,7 +220,7 @@
         });
 
         test("points have set height according to value", function() {
-            var pointHeights = $.map(lineChart.points, function(point) {
+            var pointHeights = $.map(areaChart.points, function(point) {
                 return point.box.height();
             });
 
@@ -193,68 +228,57 @@
         });
 
         test("getNearestPoint returns nearest series point", function() {
-            var point = lineChart.points[1],
-                result = lineChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 0);
+            var point = areaChart.points[1],
+                result = areaChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 0);
 
             ok(result === point);
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Multiple Series", {
+        module("Area Chart / Multiple Series", {
             setup: function() {
-                setupLineChart(plotArea, { series: [ negativeSeries, positiveSeries ] });
+                plotArea.namedValueAxes.secondary = plotArea.valueAxis;
+
+                setupStepAreaChart(plotArea, {
+                    series: [
+                    $.extend({ }, positiveSeries),
+                    $.extend({ axis: "secondary" }, negativeSeries  )
+                ] });
             }
+        });
+
+        test("Reports minimum series value for primary axis", function() {
+            deepEqual(areaChart.valueAxisRanges[undefined].min, positiveSeries.data[0]);
+        });
+
+        test("Reports maximum series value for primary axis", function() {
+            deepEqual(areaChart.valueAxisRanges[undefined].max, positiveSeries.data[1]);
+        });
+
+        test("Reports minimum series value for secondary axis", function() {
+            deepEqual(areaChart.valueAxisRanges.secondary.min, negativeSeries.data[1]);
+        });
+
+        test("Reports maximum series value for secondary axis", function() {
+            deepEqual(areaChart.valueAxisRanges.secondary.max, negativeSeries.data[0]);
         });
 
         test("Reports number of categories for two series", function() {
-            setupLineChart(plotArea, {series: [ positiveSeries, negativeSeries ]});
-            equal(categoriesCount(lineChart.options.series), positiveSeries.data.length);
+            setupStepAreaChart(plotArea, {series: [ positiveSeries, negativeSeries ]});
+            equal(categoriesCount(areaChart.options.series), positiveSeries.data.length);
         });
 
         test("getNearestPoint returns nearest series point", function() {
-            var point = lineChart.points[1],
-                result = lineChart.getNearestPoint(point.box.x2, point.box.y2 + 100, 1);
+            var point = areaChart.points[1],
+                result = areaChart.getNearestPoint(point.box.x2, point.box.y2 + 100, 1);
 
             ok(result === point);
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Multiple Category Axes", {
+        module("Area Chart / Mismatched series", {
             setup: function() {
-                var chart = createChart({
-                    series: [{
-                        type: "line",
-                        data: [1],
-                        categoryAxis: "secondary",
-                        style: "step"
-                    }],
-                    valueAxis: {
-                        axisCrossingValue: [10, 0]
-                    },
-                    categoryAxis: [{
-                        categories: ["A"]
-                    }, {
-                        name: "secondary",
-                        categories: ["B"]
-                    }]
-                });
-
-                series = chart._model._plotArea.charts[0];
-            }
-        });
-
-        test("sets category axis to first series category axis", function() {
-            equal(series.categoryAxis.options.name, "secondary");
-        });
-
-        test("line is marked as above axis with respect to its category axis", function() {
-            equal(series.points[0].options.aboveAxis, true);
-        });
-
-        // ------------------------------------------------------------
-        module("Step Line Chart / Mismatched series", {
-            setup: function() {
-                setupLineChart(plotArea, {
+                setupStepAreaChart(plotArea, {
                 series: [ { data: [1, 2, 3] },
                           positiveSeries
                     ]
@@ -263,90 +287,123 @@
         });
 
         test("Reports minimum series value for default axis", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].min, 1);
+            deepEqual(areaChart.valueAxisRanges[undefined].min, 1);
         });
 
         test("Reports maximum series value for default axis", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].max, 3);
+            deepEqual(areaChart.valueAxisRanges[undefined].max, 3);
         });
 
         test("Reports number of categories", function() {
-            equal(categoriesCount(lineChart.options.series), 3);
+            equal(categoriesCount(areaChart.options.series), 3);
         });
 
         test("getNearestPoint returns nearest series point", function() {
-            var point = lineChart.points[3],
-                result = lineChart.getNearestPoint(point.box.x2 + 100, point.box.y2, 1);
+            var point = areaChart.points[3],
+                result = areaChart.getNearestPoint(point.box.x2, point.box.y2 + 10, 1);
 
             ok(result === point);
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Missing values", {
+        module("Area Chart / Missing values", {
             setup: function() {
-                setupLineChart(plotArea, {
+                setupStepAreaChart(plotArea, {
                     series: [ sparseSeries ]
                 });
             }
         });
 
-        test("reports minimum series value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].min, 1);
+        test("Reports minimum series value for default axis", function() {
+            deepEqual(areaChart.valueAxisRanges[undefined].min, 1);
         });
 
-        test("reports maximum series value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].max, 2);
+        test("Reports maximum series value for default axis", function() {
+            deepEqual(areaChart.valueAxisRanges[undefined].max, 2);
         });
 
-        test("ignores null values when reporting minimum series value", function() {
-            setupLineChart(plotArea, {
-                series: [{ data: [1, 2, null] }]
+        test("missing points are assumed to be 0 by default", function() {
+            equal(areaChart.points[2].value, 0);
+        });
+
+        test("omits missing points", function() {
+            setupStepAreaChart(plotArea, {
+                series: [
+                    $.extend({ missingValues: "gap" }, sparseSeries)
+                ]
             });
-            equal(lineChart.valueAxisRanges[undefined].min, 1);
-        });
 
-        test("omits missing points by default", function() {
-            equal(lineChart.points[2], null);
+            equal(areaChart.points[2], null);
         });
 
         test("omits missing points when interpolating", function() {
-            setupLineChart(plotArea, {
+            setupStepAreaChart(plotArea, {
                 series: [
                     $.extend({ missingValues: "interpolate" }, sparseSeries)
                 ]
             });
 
-            equal(lineChart.points[2], null);
-        });
-
-        test("missing points are assumed to be 0", function() {
-            setupLineChart(plotArea, {
-                series: [
-                    $.extend({ missingValues: "zero" }, sparseSeries)
-                ]
-            });
-
-            equal(lineChart.points[2].value, 0);
+            equal(areaChart.points[2], null);
         });
 
         test("getNearestPoint returns nearest series point (left)", function() {
-            var point = lineChart.points[1],
-                result = lineChart.getNearestPoint(point.box.x2 + 0.1, point.box.y2, 0);
+            setupStepAreaChart(plotArea, {
+                series: [
+                    $.extend({ missingValues: "gap" }, sparseSeries)
+                ]
+            });
+
+            var point = areaChart.points[1],
+                result = areaChart.getNearestPoint(point.box.x2 + 0.1, point.box.y2, 0);
 
             ok(result === point);
         });
 
         test("getNearestPoint returns nearest series point (right)", function() {
-            var point = lineChart.points[3],
-                result = lineChart.getNearestPoint(point.box.x1 - 0.1, point.box.y1, 0);
+            setupStepAreaChart(plotArea, {
+                series: [
+                    $.extend({ missingValues: "gap" }, sparseSeries)
+                ]
+            });
+
+            var point = areaChart.points[3],
+                result = areaChart.getNearestPoint(point.box.x1 - 0.1, point.box.y1, 0);
 
             ok(result === point);
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Stack / Positive Values", {
+        module("Area Chart / Panes");
+
+        test("area fill is clipped to value axis box", function() {
+            var chart = createChart({
+                series: [{
+                    type: "area",
+                    data: [1, 2, 3]
+                }],
+                panes: [{
+                    name: "top"
+                }, {
+                    name: "bottom"
+                }],
+                valueAxis: [{
+                }],
+                categoryAxis: {
+                    pane: "bottom",
+                    categories: ["A"]
+                }
+            });
+
+            var plotArea = chart._model._plotArea;
+            var areaChart = plotArea.charts[0];
+            equal(areaChart._segments[0].points()[0].y,
+                   plotArea.panes[0].axes[0].lineBox().y2);
+        });
+
+        // ------------------------------------------------------------
+        module("Area Chart / Stack / Positive Values", {
             setup: function() {
-                setupLineChart(plotArea, {
+                setupStepAreaChart(plotArea, {
                     series: [ positiveSeries, positiveSeries, positiveSeries ],
                     isStacked: true }
                 );
@@ -354,24 +411,24 @@
         });
 
         test("reports stacked minumum value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].min, 1);
+            equal(areaChart.valueAxisRanges[undefined].min, 1);
         });
 
         test("reports stacked maximum value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].max, 6);
+            equal(areaChart.valueAxisRanges[undefined].max, 6);
         });
 
         test("point plot values are stacked", function() {
             deepEqual(
-                $.map(lineChart.points, function(point) { return point.plotValue }),
+                $.map(areaChart.points, function(point) { return point.plotValue }),
                 [1, 2, 3, 2, 4, 6]
             );
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Stack / Negative Values", {
+        module("Area Chart / Stack / Negative Values", {
             setup: function() {
-                setupLineChart(plotArea, {
+                setupStepAreaChart(plotArea, {
                     series: [ negativeSeries, negativeSeries, negativeSeries ],
                     isStacked: true
                 });
@@ -379,24 +436,24 @@
         });
 
         test("reports stacked minumum value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].min, -6);
+            equal(areaChart.valueAxisRanges[undefined].min, -6);
         });
 
         test("reports stacked maximum value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].max, -1);
+            equal(areaChart.valueAxisRanges[undefined].max, -1);
         });
 
         test("point plot values are stacked", function() {
             deepEqual(
-                $.map(lineChart.points, function(point) { return point.plotValue }),
+                $.map(areaChart.points, function(point) { return point.plotValue }),
                 [-1, -2, -3, -2, -4, -6]
             );
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Stack / Mixed Values", {
+        module("Area Chart / Stack / Mixed Values", {
             setup: function() {
-                setupLineChart(plotArea, {
+                setupStepAreaChart(plotArea, {
                     series: [{
                         data: [2, 2],
                         labels: {}
@@ -410,15 +467,15 @@
         });
 
         test("reports stacked minumum value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].min, 1);
+            equal(areaChart.valueAxisRanges[undefined].min, 1);
         });
 
         test("reports stacked maximum value for default axis", function() {
-            equal(lineChart.valueAxisRanges[undefined].max, 2);
+            equal(areaChart.valueAxisRanges[undefined].max, 2);
         });
 
         test("points have set height according to stack value", function() {
-            var pointHeights = $.map(lineChart.points, function(point) {
+            var pointHeights = $.map(areaChart.points, function(point) {
                 return point.box.height();
             });
 
@@ -426,12 +483,12 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Stack / Mixed Series", {
+        module("Area Chart / Stack / Mixed Series", {
             setup: function() {
                 plotArea.namedValueAxes.a = plotArea.valueAxis;
                 plotArea.namedValueAxes.b = plotArea.valueAxis;
 
-                setupLineChart(plotArea, {
+                setupStepAreaChart(plotArea, {
                     series: [
                         // Both axes should be on same axis.
                         // This rule is intentionally broken for the tests.
@@ -444,48 +501,49 @@
         });
 
         test("reports stacked minumum value for default axis", function() {
-            equal(lineChart.valueAxisRanges.a.min, 0);
+            equal(areaChart.valueAxisRanges.a.min, 0);
         });
 
         test("reports stacked maximum value for default axis", function() {
-            equal(lineChart.valueAxisRanges.a.max, 2);
+            equal(areaChart.valueAxisRanges.a.max, 2);
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Stack / Missing values", {
+        module("Area Chart / Stack / Missing values", {
             setup: function() {
-                setupLineChart(plotArea, {
+                sparseSeries.line = { width: 0, style: "step" };
+                setupStepAreaChart(plotArea, {
                     series: [ sparseSeries, sparseSeries ],
                     isStacked: true
                 });
             }
         });
 
-        test("Reports minimum series value", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].min, 1);
+        test("Reports minimum series value for default axis", function() {
+            deepEqual(areaChart.valueAxisRanges[undefined].min, 1);
         });
 
-        test("Reports maximum series value", function() {
-            deepEqual(lineChart.valueAxisRanges[undefined].max, 4);
+        test("Reports maximum series value for default axis", function() {
+            deepEqual(areaChart.valueAxisRanges[undefined].max, 4);
         });
 
         test("missing points are assumed to be 0 by default", function() {
-            equal(lineChart.points[4].value, 0);
+            equal(areaChart.points[4].value, 0);
         });
 
-        test("missing points are skipped", function() {
-            setupLineChart(plotArea, {
+        test("omits missing points", function() {
+            setupStepAreaChart(plotArea, {
                 series: [
                     $.extend({ missingValues: "gap" }, sparseSeries)
                 ],
                 isStacked: true
             });
 
-            equal(lineChart.points[4], null);
+            equal(areaChart.points[4], null);
         });
 
-        test("line is drawn between existing points", function() {
-            setupLineChart(plotArea, {
+        test("line is drawn between existing points when interpolating", function() {
+            setupStepAreaChart(plotArea, {
                 series: [
                     $.extend({ missingValues: "interpolate" }, sparseSeries)
                 ],
@@ -493,38 +551,22 @@
             });
 
             deepEqual(pointCoordinates, [
-                [ 0, 1 ], [ 1, 1 ], [ 1, 1 ], [ 1, 0 ],
-                [ 2, 0 ], [ 1, 0 ], [ 2, 0 ], [ 3, 0 ],
-                [ 3, 0 ], [ 4, 0 ]
-            ]);
-        });
-
-        test("line stops before missing value", function() {
-            setupLineChart(plotArea, {
-                series: [
-                    $.extend({ missingValues: "gap" }, sparseSeries)
-                ],
-                isStacked: true
-            });
-
-            deepEqual(pointCoordinates, [
-                [ 0, 1 ], [ 1, 1 ], [ 1, 0 ], [ 2, 0]
+                [ 0, 2 ], [ 0, 1 ], [ 1, 1 ], [ 1, 1 ], [ 1, 0 ], [ 2, 0 ],
+                [ 1, 0 ], [ 2, 0 ], [ 3, 0 ], [ 3, 0 ], [ 4, 0 ], [ 4, 2 ]
             ]);
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Stack / Panes");
+        module("Area Chart / Stack / Panes");
 
         test("charts in different panes are not stacked", function() {
             var chart = createChart({
                 series: [{
                     stack: true,
-                    style: "step",
-                    type: "line",
+                    type: "area",
                     data: [1]
                 }, {
-                    type: "line",
-                    style: "step",
+                    type: "area",
                     data: [2],
                     axis: "b"
                 }],
@@ -543,61 +585,80 @@
                 }
             });
 
-            var lineCharts = chart._model._plotArea.charts;
-            equal(lineCharts[0].points[0].plotValue, undefined);
-            equal(lineCharts[1].points[0].plotValue, undefined);
+            var areaCharts = chart._model._plotArea.charts;
+            equal(areaCharts[0].points[0].plotValue, undefined);
+            equal(areaCharts[1].points[0].plotValue, undefined);
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Rendering", {
+        var polyline;
+
+        module("Area Chart / Rendering", {
             setup: function() {
-                setupLineChart(plotArea, {
-                    series: [
-                        $.extend({
-                                width: 4,
-                                color: "#cf0",
-                                opacity: 0.5
-                            },
-                            positiveSeries
-                        )
-                    ]
+                setupStepAreaChart(plotArea, {
+                    series: [{
+                        data: [1, 2],
+                        labels: {},
+                        line: {
+                            width: 2,
+                            color: "lineColor",
+                            opacity: 0.5,
+                            dashType: "dot",
+                            style: "line"
+                        },
+                        color: "areaColor",
+                        opacity: 0.1
+                    }]
                 });
+
+                polyline = view.log.path[0];
+
             }
         });
 
-        test("sets line width", function() {
-            equal(view.log.path[0].style.strokeWidth, 4);
+        test("sets area line width", function() {
+            equal(view.log.path[1].style.strokeWidth, 2);
         });
 
-        test("sets line color", function() {
-            equal(view.log.path[0].style.stroke, "#cf0");
+        test("sets area line color", function() {
+            equal(view.log.path[1].style.stroke, "lineColor");
         });
 
-        test("sets line color to default if series color is fn", function() {
-            setupLineChart(plotArea, {
+        test("sets area line opacity", function() {
+            equal(view.log.path[1].style.strokeOpacity, 0.5);
+        });
+
+        test("sets area line opacity", function() {
+            equal(view.log.path[1].style.dashType, "dot");
+        });
+
+        test("sets area fill color", function() {
+            equal(polyline.style.fill, "areaColor");
+        });
+
+        test("sets area fill color to default if series color is fn", function() {
+            setupStepAreaChart(plotArea, {
                 series: [
                     $.extend({
-                            _defaults: { color: "#cf0" },
-                            width: 4,
-                            color: function() { },
-                            opacity: 0.5
+                            _defaults: { color: "areaColor" },
+                            color: function() { }
                         },
                         positiveSeries
                     )
                 ]
             });
-            equal(view.log.path[0].style.stroke, "#cf0");
+            equal(view.log.path[0].style.fill, "areaColor");
         });
 
-        test("sets line opacity", function() {
-            equal(view.log.path[0].style.strokeOpacity, 0.5);
+        test("sets area opacity", function() {
+            equal(polyline.style.fillOpacity, 0.1);
         });
 
-        test("line has same model id as its segment", function() {
-            equal(view.log.path[0].style.data.modelId, lineChart._segments[0].modelId);
+        test("area has same model id as its segment", function() {
+            equal(polyline.style.data.modelId, areaChart._segments[0].modelId);
         });
 
-        test("renders line chart group", function() {
+        test("renders area chart group", function() {
             equal(view.log.group.length, 1);
         });
 
@@ -605,78 +666,86 @@
             equal(view.log.group[0].options.animation.type, "clip");
         });
 
-        // ------------------------------------------------------------
-        module("Step Line Chart / Rendering / Missing Values");
+        test("area shape is open", function() {
+            equal(polyline.closed, false);
+        });
 
-        test("line stops before missing value", function() {
-            setupLineChart(plotArea, {
+        // ------------------------------------------------------------
+        module("Area Chart / Rendering / Missing Values", {
+            setup: function() {
+            sparseSeries.line = { width: 0, style: "step" };
+            }
+        });
+
+        test("area stops before missing value", function() {
+            setupStepAreaChart(plotArea, {
                 series: [
                     $.extend({ missingValues: "gap" }, sparseSeries)
                 ]
             });
 
             deepEqual(pointCoordinates, [
-                [ 0, 1 ], [ 1, 1 ], [ 1, 0 ], [ 2, 0 ]
+                [ 0, 2 ], [ 0, 1 ], [ 1, 1 ],
+                [ 1, 0 ], [ 2, 0 ], [ 2, 2 ]
             ]);
         });
 
-        test("no line is created for isolated points", function() {
-            setupLineChart(plotArea, {
+        test("no area is created for isolated points", function() {
+            setupStepAreaChart(plotArea, {
                 series: [
-                    sparseSeries
+                    $.extend({ missingValues: "gap" }, sparseSeries)
                 ]
             });
 
-            equal(view.log.path.length, 1);
+            equal(view.log.path.length, 2);
         });
 
-        test("line continues after missing value", function() {
-            setupLineChart(plotArea, {
+        test("area continues after missing value", function() {
+            setupStepAreaChart(plotArea, {
                 series: [{
+                    missingValues: "gap",
                     data: [ null, 1, 2 ],
-                    width: 0,
-                    style: "step"
+                    line: { width: 0, style: "step" }
                 }]
             });
 
             deepEqual(pointCoordinates, [
-                [ 1, 1 ], [ 2, 1 ], [ 2, 1 ], [ 2, 0 ], [ 3, 0 ]
+                [ 1, 2 ], [ 1, 1 ], [ 2, 1 ],
+                [ 2, 0 ], [ 3, 0 ], [ 3, 2 ]
             ]);
         });
 
-        test("line is drawn between existing points", function() {
-            setupLineChart(plotArea, {
+        test("area is drawn between existing points", function() {
+            setupStepAreaChart(plotArea, {
                 series: [
-                    sparseSeries
+                    $.extend({ missingValues: "interpolate" }, sparseSeries)
                 ]
             });
 
             deepEqual(pointCoordinates, [
-                [ 0, 1 ], [ 1, 1 ], [ 1, 1 ],
-                [ 1, 0 ], [ 2, 0 ], [ 1, 0 ],
-                [ 2, 0 ], [ 3, 0 ], [ 3, 0 ], [ 4, 0 ]
+                [ 0, 2 ], [ 0, 1 ], [ 1, 1 ], [ 1, 1 ],
+                [ 1, 0 ], [ 2, 0 ], [ 1, 0 ], [ 2, 0 ],
+                [ 3, 0 ], [ 3, 0 ], [ 4, 0 ], [ 4, 2 ]
             ]);
         });
 
-        test("line goes to zero for missing point", function() {
-            setupLineChart(plotArea, {
+        test("area goes to zero for missing point", function() {
+            setupStepAreaChart(plotArea, {
                 series: [
                     $.extend({ missingValues: "zero" }, sparseSeries)
                 ]
             });
 
             deepEqual(pointCoordinates, [
-                [ 0, 1 ], [ 1, 1 ], [ 1, 0 ],
-                [ 2, 0 ], [ 1, 0 ], [ 2, 0 ],
-                [ 2, 2 ], [ 3, 2 ], [ 2, 2 ],
-                [ 3, 2 ], [ 3, 0 ], [ 4, 0 ]
+                [ 0, 2 ], [ 0, 1 ], [ 1, 1 ], [ 1, 0 ], [ 2, 0 ], [ 1, 0 ], [ 2, 0 ],
+                [ 2, 2 ], [ 3, 2 ], [ 2, 2 ], [ 3, 2 ], [ 3, 0 ], [ 4, 0 ], [ 4, 2 ]
             ]);
         });
 
     })();
 
     (function() {
-        var lineChart,
+        var areaChart,
             MARGIN = PADDING = BORDER = 5,
             linePoint;
 
@@ -688,15 +757,15 @@
                 return new Box2D();
             },
             {
-                categoryAxis: { }
+                categoryAxis: {}
             }
         );
 
-        function createLineChart(options) {
-            lineChart = new dataviz.LineChart(plotArea, {
+        function createAreaChart(options) {
+            areaChart = new dataviz.AreaChart(plotArea, {
                 series: [$.extend({
                     data: [0, 1],
-                    color: "#f00",
+                    color: "areaColor",
                     markers: {
                         visible: false,
                         size: 10,
@@ -716,129 +785,105 @@
                         },
                         margin: MARGIN,
                         padding: PADDING
-                    },
-                    opacity: 0.5,
-                    dashType: "dot"
+                    }
                 }, options)]
             });
-            linePoint = lineChart.points[0];
+            areaPoint = areaChart.points[0];
         }
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Configuration", {
+        module("Area Chart / Configuration", {
             setup: function() {
-                createLineChart();
-            },
-            teardown: destroyChart
-        });
-
-        test("remove series if visible is set to false", function() {
-            var chart = createChart({
-                seriesDefaults: {
-                    type: "line",
-                    style: "step"
-                },
-                series: [{
-                    data: [1],
-                    visible: false
-                },{
-                    data: [1]
-                }]
-            });
-
-            var points = chart._model._plotArea.charts[0].points;
-
-            ok(points.length === 1);
+                createAreaChart();
+            }
         });
 
         test("applies visible to point markers", function() {
-            equal(linePoint.options.markers.visible, false);
+            equal(areaPoint.options.markers.visible, false);
         });
 
         test("applies series color to point markers border", function() {
-            equal(linePoint.options.markers.border.color, "#f00");
+            equal(areaPoint.options.markers.border.color, "areaColor");
         });
 
         test("applies opacity to point markers", function() {
-            equal(linePoint.options.markers.opacity, 0.2);
+            equal(areaPoint.options.markers.opacity, 0.2);
         });
 
         test("applies size to point markers", function() {
-            equal(linePoint.options.markers.size, 10);
+            equal(areaPoint.options.markers.size, 10);
         });
 
         test("applies type to point markers", function() {
-            equal(linePoint.options.markers.type, "triangle");
+            equal(areaPoint.options.markers.type, "triangle");
         });
 
         test("applies border color to point markers", function() {
-            createLineChart({ markers: { border: { color: "marker-border" } } });
-            equal(linePoint.options.markers.border.color, "marker-border");
+            createAreaChart({ markers: { border: { color: "marker-border" } } });
+            equal(areaPoint.options.markers.border.color, "marker-border");
         });
 
         test("applies border width to point markers.", function() {
-            equal(linePoint.options.markers.border.width, BORDER);
+            equal(areaPoint.options.markers.border.width, BORDER);
         });
 
         test("applies visible to point labels", function() {
-            equal(linePoint.options.labels.visible, false);
+            equal(areaPoint.options.labels.visible, false);
         });
 
         test("applies color to point labels", function() {
-            equal(linePoint.options.labels.color, "labels-color");
+            equal(areaPoint.options.labels.color, "labels-color");
         });
 
         test("applies background to point labels", function() {
-            equal(linePoint.options.labels.background, "labels-background");
+            equal(areaPoint.options.labels.background, "labels-background");
         });
 
         test("applies border color to point labels", function() {
-            equal(linePoint.options.labels.border.color, "labels-border");
+            equal(areaPoint.options.labels.border.color, "labels-border");
         });
 
         test("applies border width to point labels", function() {
-            equal(linePoint.options.labels.border.width, BORDER);
+            equal(areaPoint.options.labels.border.width, BORDER);
         });
 
         test("applies padding to point labels", function() {
-            equal(linePoint.options.labels.padding, PADDING);
+            equal(areaPoint.options.labels.padding, PADDING);
         });
 
         test("applies margin to point labels", function() {
-            equal(linePoint.options.labels.margin, MARGIN);
-        });
-
-        test("applies dashType", function() {
-            equal(linePoint.options.dashType, "dot");
+            equal(areaPoint.options.labels.margin, MARGIN);
         });
 
         test("applies color function", function() {
-            createLineChart({
-                color: function(point) { return "#f00" }
+            createAreaChart({
+                color: function(p) { return "#f00" }
             });
 
-            equal(linePoint.options.markers.border.color, "#f00");
+            equal(areaPoint.options.color, "#f00");
         });
 
         test("color fn argument contains value", 1, function() {
-            createLineChart({
+            createAreaChart({
                 data: [1],
-                color: function(point) { equal(point.value, 1); }
+                color: function(p) { equal(p.value, 1); }
             });
         });
 
-        test("color fn argument contains category", 1, function() {
-            createLineChart({
+        test("color fn argument contains dataItem", 1, function() {
+            createAreaChart({
                 data: [1],
-                color: function(point) { equal(point.category, "A"); }
+                color: function(p) {
+                    deepEqual(p.dataItem, 1);
+                }
             });
         });
 
         test("color fn argument contains series", 1, function() {
-            createLineChart({
-                name: "series 1",
+            createAreaChart({
+                name: "areaSeries",
                 data: [1],
-                color: function(point) { equal(point.series.name, "series 1"); }
+                color: function(p) { equal(p.series.name, "areaSeries"); }
             });
         });
 
@@ -884,14 +929,10 @@
         }
 
         // ------------------------------------------------------------
-        module("Step Line Point", {
+        module("Area Point", {
             setup: function() {
                 createPoint();
             }
-        });
-
-        test("is discoverable", function() {
-            ok(point.modelId);
         });
 
         test("fills target box", function() {
@@ -910,16 +951,6 @@
         test("sets marker height", function() {
             createPoint({ markers: { size: 10 } });
             equal(marker.options.height, 10);
-        });
-
-        test("sets marker rotation", function() {
-            createPoint({ markers: { rotation: 90 } });
-            equal(marker.options.rotation, 90);
-        });
-
-        test("doesn't create marker if size is 0", function() {
-            createPoint({ markers: { size: 0 } });
-            ok(!marker);
         });
 
         test("sets marker background color", function() {
@@ -1042,7 +1073,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Point / Labels", {
+        module("Area Point / Labels", {
             setup: function() {
                 createPoint({ labels: { visible: true } });
             }
@@ -1125,7 +1156,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Point / Labels / Template");
+        module("Area Point / Labels / Template");
 
         test("renders template", function() {
             createPoint({ labels: { visible: true, template: "${value}%" } });
@@ -1163,7 +1194,7 @@
             label;
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Integration", {
+        module("Area Chart / Integration", {
             setup: function() {
                 chart = createChart({
                     dataSource: {
@@ -1177,8 +1208,7 @@
                     },
                     series: [{
                         name: "Value",
-                        type: "line",
-                        style: "step",
+                        type: "area",
                         field: "value"
                     }],
                     categoryAxis: {
@@ -1186,11 +1216,9 @@
                     }
                 });
 
-                label = chart._plotArea.charts[0].points[0].children[1];
+                label = chart._plotArea.charts[0].points[0].label;
             },
-            teardown: function() {
-                destroyChart();
-            }
+            teardown: destroyChart
         });
 
         test("dataItem sent to label template", function() {
@@ -1201,206 +1229,79 @@
 
     (function() {
         var chart,
-            marker,
-            label,
             segment;
 
-        function getElementFromModel(modelElement) {
-            return $(getElement(modelElement.id));
+        function getElement(modelElement) {
+            return $(dataviz.getElement(modelElement.id));
         }
 
-        function createLineChart(options) {
+        function createAreaChart(options) {
             chart = createChart($.extend({
                 series: [{
-                    type: "line",
-                    style: "step",
+                    type: "area",
                     data: [1, 2]
                 }],
                 categoryAxis: {
-                    categories: ["A"]
+                    categories: ["A", "B"]
                 }
             }, options));
 
             var plotArea = chart._model.children[1],
-                lineChart = plotArea.charts[0],
-                point = lineChart.points[0];
+                lineChart = plotArea.charts[0];
 
-            marker = point.children[0];
-            label = point.children[1];
             segment = lineChart._segments[0];
         }
 
-        function linePointClick(callback) {
-            createLineChart({
+        function areaClick(callback, x, y) {
+            createAreaChart({
                 seriesClick: callback
             });
 
-            chart._userEvents.press(0, 0, getElementFromModel(marker));
-            chart._userEvents.end(0, 0);
-        }
-
-        function linePointHover(callback) {
-            createLineChart({
-                seriesHover: callback
-            });
-
-            getElementFromModel(marker).mouseover();
-        }
-
-        function lineClick(callback, x, y) {
-            createLineChart({
-                seriesClick: callback
-            });
-
-            chart._userEvents.press(x, y, getElementFromModel(segment));
+            chart._userEvents.press(x, y, getElement(segment));
             chart._userEvents.end(x, y);
         }
 
-        function lineHover(callback, x, y) {
-            createLineChart({
+        function areaHover(callback, x, y) {
+            createAreaChart({
                 seriesHover: callback
             });
 
-            triggerEvent("mouseover", getElementFromModel(segment), x, y);
+            triggerEvent("mouseover", getElement(segment), x, y);
         }
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Events / seriesClick", {
+        module("Area Chart / Events / seriesClick", {
             teardown: destroyChart
         });
 
-        test("fires when clicking line points", 1, function() {
-            linePointClick(function() { ok(true); });
+        test("fires when clicking segment", 1, function() {
+            areaClick(function() { ok(true); });
         });
 
-        test("fires when clicking line point labels", 1, function() {
-            createLineChart({
-                seriesDefaults: {
-                    line: {
-                        labels: {
-                            visible: true
-                        }
-                    }
-                },
-                seriesClick: function(e) { ok(true); }
-            });
-            chart._userEvents.press(0, 0, getElementFromModel(label));
-            chart._userEvents.end(0, 0);
+        test("fires for closest point when clicking segment (1)", 1, function() {
+            areaClick(function(e) { equal(e.value, 1); }, 0, 0);
         });
 
-        test("event arguments contain value", 1, function() {
-            linePointClick(function(e) { equal(e.value, 1); });
-        });
-
-        test("event arguments contain category", 1, function() {
-            linePointClick(function(e) { equal(e.category, "A"); });
-        });
-
-        test("event arguments contain series", 1, function() {
-            linePointClick(function(e) {
-                deepEqual(e.series, chart.options.series[0]);
-            });
-        });
-
-        test("event arguments contain dataItem", 1, function() {
-            linePointClick(function(e) {
-                deepEqual(e.value, e.value);
-            });
-        });
-
-        test("event arguments contain jQuery element", 1, function() {
-            linePointClick(function(e) {
-                equal(e.element[0], getElement(marker.id));
-            });
-        });
-
-        test("fires when clicking line", 1, function() {
-            lineClick(function() { ok(true); });
-        });
-
-        test("fires for closest point when clicking line (1)", 1, function() {
-            lineClick(function(e) { equal(e.value, 1); }, 0, 0);
-        });
-
-        test("fires for closest point when clicking line (2)", 1, function() {
-            lineClick(function(e) { equal(e.value, 2); }, 1000, 0);
+        test("fires for closest point when clicking segment (2)", 1, function() {
+            areaClick(function(e) { equal(e.value, 2); }, 1000, 0);
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Events / seriesHover", {
-            teardown: function() {
-                destroyChart();
-                $(document.body).unbind(".tracking");
-            }
+        module("Area Chart / Events / seriesHover", {
+            teardown: destroyChart
         });
 
-        test("fires when hovering line points", 1, function() {
-            linePointHover(function() { ok(true); });
+        test("fires when hovering segment", 1, function() {
+            areaHover(function() { ok(true); });
         });
 
-        test("fires when hovering line point labels", 1, function() {
-            createLineChart({
-                seriesDefaults: {
-                    line: {
-                        labels: {
-                            visible: true
-                        }
-                    }
-                },
-                seriesHover: function(e) { ok(true); }
-            });
-            getElementFromModel(label).mouseover();
+        test("fires for closest point when hovering segment (1)", 1, function() {
+            areaHover(function(e) { equal(e.value, 1); }, 0, 0);
         });
 
-        test("event arguments contain value", 1, function() {
-            linePointHover(function(e) { equal(e.value, 1); });
+        test("fires for closest point when hovering segment (2)", 1, function() {
+            areaHover(function(e) { equal(e.value, 2); }, 1000, 0);
         });
-
-        test("event arguments contain category", 1, function() {
-            linePointHover(function(e) { equal(e.category, "A"); });
-        });
-
-        test("event arguments contain series", 1, function() {
-            linePointHover(function(e) {
-                deepEqual(e.series, chart.options.series[0]);
-            });
-        });
-
-        test("event arguments contain dataItem", 1, function() {
-            linePointHover(function(e) {
-                deepEqual(e.dataItem, e.value);
-            });
-        });
-
-        test("event arguments contain jQuery element", 1, function() {
-            linePointHover(function(e) {
-                equal(e.element[0], getElement(marker.id));
-            });
-        });
-
-        test("fires when hovering line", 1, function() {
-            lineHover(function() { ok(true); });
-        });
-
-        test("fires for closest point when hovering line (1)", 1, function() {
-            lineHover(function(e) { equal(e.value, 1); }, 0, 0);
-        });
-
-        test("fires for closest point when hovering line (2)", 1, function() {
-            lineHover(function(e) { equal(e.value, 2); }, 1000, 0);
-        });
-
-        test("fires when moving over neighbor", 2, function() {
-            lineHover(function() { ok(true); });
-
-            var e = new jQuery.Event("mousemove"),
-                element = $("#container"),
-                offset = element.offset();
-
-            e.clientX = offset.left + 500;
-            e.clientY = offset.top + 100;
-            $(document.body).trigger(e);
-       });
 
     })();
 })();

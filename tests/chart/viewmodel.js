@@ -79,7 +79,7 @@
 
         test("enableDiscovery assigns unique model id", function() {
             chartElement.enableDiscovery();
-            ok(chartElement.options.modelId.length > 0);
+            ok(chartElement.modelId.length > 0);
         });
 
         test("getViewElements registers model id in root", function() {
@@ -89,7 +89,7 @@
             chartElement.enableDiscovery();
             chartElement.getViewElements(view);
 
-            ok(root.modelMap[chartElement.options.modelId]);
+            ok(root.modelMap[chartElement.modelId]);
         });
 
         test("getViewElements associates children with discoverable elements", function() {
@@ -102,8 +102,8 @@
             chartElement.enableDiscovery();
             chartElement.getViewElements(view);
 
-            equal(chartElement.options.modelId, child1.options.modelId);
-            equal(chartElement.options.modelId, child2.options.modelId);
+            equal(chartElement.modelId, child1.modelId);
+            equal(chartElement.modelId, child2.modelId);
         });
 
         test("getViewElements does not register associated elements", function() {
@@ -117,7 +117,7 @@
             chartElement.getViewElements(view);
             child.getViewElements(view);
 
-            ok(root.modelMap[child.options.modelId] == chartElement);
+            ok(root.modelMap[child.modelId] == chartElement);
         });
 
         test("getViewElements does not associate already discoverable children", function() {
@@ -130,7 +130,7 @@
 
             chartElement.getViewElements(view);
 
-            notEqual(chartElement.options.modelId, child1.options.modelId);
+            notEqual(chartElement.modelId, child1.modelId);
         });
 
         // ------------------------------------------------------------
@@ -157,7 +157,7 @@
             chartElement.getViewElements(view);
             chartElement.destroy();
 
-            ok(!root.modelMap[chartElement.options.modelId]);
+            ok(!root.modelMap[chartElement.modelId]);
         });
 
         test("unregisters modelId from IDPool", function() {
@@ -168,7 +168,7 @@
         });
 
         test("unregisters id from IDPool", function() {
-            chartElement.options.id = uniqueId();
+            chartElement.id = uniqueId();
             chartElement.destroy();
 
             equal(pool._pool.length, 1);
@@ -189,7 +189,7 @@
             chartElement.getViewElements(view);
             chartElement.destroy();
 
-            ok(!root.modelMap[child2.options.modelId]);
+            ok(!root.modelMap[child2.modelId]);
         });
     })();
 
@@ -818,7 +818,7 @@
         });
 
         test("renders id", function() {
-            boxElement.options.id = "id";
+            boxElement.id = "id";
             boxElement.reflow(targetBox);
             boxElement.getViewElements(view);
 
@@ -826,7 +826,7 @@
         });
 
         test("renders model id as data", function() {
-            boxElement.options.modelId = "id";
+            boxElement.modelId = "id";
             boxElement.reflow(targetBox);
             boxElement.getViewElements(view);
 
@@ -1098,7 +1098,7 @@
         });
 
         test("renders id", function() {
-            text.options.id = "id";
+            text.id = "id";
             text.reflow(new Box2D());
             text.getViewElements(view);
 
@@ -1106,7 +1106,7 @@
         });
 
         test("renders model id as data", function() {
-            text.options.modelId = "id";
+            text.modelId = "id";
             text.reflow(new Box2D());
             text.getViewElements(view);
 
@@ -1149,12 +1149,12 @@
         });
 
         test("sets unique id on text", function() {
-            notEqual(textBox.children[0].options.id, "");
+            notEqual(textBox.children[0].id, "");
         });
 
         test("retains id", function() {
             createTextBox({ id: "1" });
-            equal(textBox.options.id, "1");
+            equal(textBox.id, "1");
         });
 
         test("moves id to box when background or border are set", function() {
@@ -1165,7 +1165,7 @@
         test("assigns unique id to text when background or border is set", function() {
             createTextBox({ id: "1", border: { width: 1 }});
 
-            var id = textBox.children[0].options.id;
+            var id = textBox.children[0].id;
             notEqual(id, "1");
             notEqual(id, "");
         });
@@ -1496,14 +1496,12 @@
 
             legend = chart._model.children[0];
             label = legend.children[0];
-            clickChart(chart, getElement(label.options.id));
+            clickChart(chart, getElement(label.id));
         }
 
         // ------------------------------------------------------------
         module("Legend / Events / legendItemClick", {
-            teardown: function() {
-                destroyChart();
-            }
+            teardown: destroyChart
         });
 
         test("fires when clicking axis labels", 1, function() {
@@ -1782,7 +1780,7 @@
 
         test("Sets unique id", function() {
             pane = new Pane();
-            ok(pane.options.id);
+            ok(pane.id);
         });
 
         test("Title shrinks content box", function() {
