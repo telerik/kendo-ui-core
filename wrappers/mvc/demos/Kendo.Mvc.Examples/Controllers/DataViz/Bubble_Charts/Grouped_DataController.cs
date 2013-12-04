@@ -19,6 +19,7 @@ namespace Kendo.Mvc.Examples.Controllers
             {3,"#bb6e36"}
         };
 
+        [HttpPost]
         public ActionResult _Medals()
         {
             var medals = ChartDataRepository.Medals();
