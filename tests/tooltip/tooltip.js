@@ -17,8 +17,6 @@
             if (container.data("kendoTooltip")) {
                 container.kendoTooltip("destroy");
             }
-
-            container.remove();
         }
     });
 
@@ -207,19 +205,6 @@
         triggerEvent(container, "mouseleave");
 
         ok(!tooltip.popup.visible());
-    });
-
-    test("popup is destoryed if tooltip is destoryed", function() {
-        var tooltip = new Tooltip(container, {});
-
-        tooltip.show(container, "mouseenter");
-        triggerEvent(container, "mouseleave");
-
-        var popupDestroy = stub(tooltip.popup, "destroy");
-
-        tooltip.destroy();
-
-        ok(popupDestroy.calls("destroy"));
     });
 
     test("popup is shown for elements matched by the filter", function() {
