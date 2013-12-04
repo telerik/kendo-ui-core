@@ -819,6 +819,9 @@ var __meta__ = {
             }
 
             return segment;
+        },
+        options: {
+            clip: false
         }
     });
 

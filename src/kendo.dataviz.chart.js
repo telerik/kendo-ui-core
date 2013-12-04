@@ -3194,7 +3194,8 @@ var __meta__ = {
         options: {
             series: [],
             invertAxes: false,
-            isStacked: false
+            isStacked: false,
+            clip: true
         },
 
         render: function() {
@@ -3417,7 +3418,7 @@ var __meta__ = {
         },
 
         valueSlot: function(valueAxis, value, axisCrossingValue) {
-            return valueAxis.getSlot(value, axisCrossingValue);
+            return valueAxis.getSlot(value, axisCrossingValue, !this.options.clip);
         },
 
         categorySlot: function(categoryAxis, categoryIx) {
@@ -3454,7 +3455,17 @@ var __meta__ = {
 
         pointValue: function(data) {
             return data.valueFields.value;
-        }
+        },
+        
+        getViewElements: function (view) {
+            var chart = this,
+                group = view.createGroup({
+                    id: uniqueId(),
+                    clipPathId: chart.options.clip ? chart.pane.clipPath(view) : undefined
+                });
+            group.children = ChartElement.fn.getViewElements.call(chart, view);
+            return [group];
+        }         
     });
 
     var BarChart = CategoricalChart.extend({
@@ -5392,7 +5403,8 @@ var __meta__ = {
                 group = view.createGroup({
                     animation: {
                         type: CLIP
-                    }
+                    },
+                    clipPathId: chart.pane.clipPath(view)
                 });
 
             group.children = elements;
@@ -7366,6 +7378,52 @@ var __meta__ = {
                 pane.contentBox.y1 += pane.title.box.height();
             }
         },
+        
+        clipPath: function(view) {
+            var pane = this,
+                axes = pane.axes,
+                length = axes.length,
+                idx = 0,
+                options,
+                min, max,
+                valueBox,
+                currentBox,
+                targetBox,
+                axis,
+                vertical,
+                clipPathId = pane.clipPathId;
+                
+            if (clipPathId) {
+                return clipPathId;
+            }
+       
+            for (; idx < length; idx++) {
+                axis = axes[idx];
+                options = axis.options;
+                min = options.min; max = options.max;
+                if (defined(min) && defined(max)) {
+                    currentBox = axis.getSlot(min, max);
+                    vertical = axis.options.vertical;
+                    //needs further calculations
+                    targetBox = defined(valueBox) ? valueBox : pane.box;
+                    
+                    if (vertical) {
+                        currentBox.x1 = axis.box.x2;
+                        currentBox.x2 = targetBox.x2;
+                    } else {
+                        currentBox.y1 = targetBox.y1;
+                        currentBox.y2 = axis.box.y1;
+                    }
+                    valueBox = currentBox;
+                }
+            }            
+            
+            clipPathId = uniqueId(); 
+            view.createClipPath(clipPathId, valueBox);         
+            pane.clipPathId = clipPathId;
+            
+            return clipPathId;
+        },        
 
         getViewElements: function(view) {
             var pane = this,
@@ -7772,9 +7830,9 @@ var __meta__ = {
         },
 
         alignAxisTo: function(axis, targetAxis, crossingValue, targetCrossingValue) {
-            var slot = axis.getSlot(crossingValue, crossingValue),
+            var slot = axis.getSlot(crossingValue, crossingValue, true),
                 slotEdge = axis.options.reverse ? 2 : 1,
-                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue),
+                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue, true),
                 targetEdge = targetAxis.options.reverse ? 2 : 1,
                 axisBox = axis.box.translate(
                     targetSlot[X + targetEdge] - slot[X + slotEdge],

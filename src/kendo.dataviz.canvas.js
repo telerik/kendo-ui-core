@@ -108,8 +108,24 @@ var __meta__ = {
         },
 
         createGroup: function(options) {
-            return new CanvasGroup(options);
+            var group = new CanvasGroup(options),
+                clipPathId = options.clipPathId;
+            if (clipPathId) {
+                group.clipPath = this.definitions[clipPathId];
+            }
+            return group;
         },
+        
+        createClipPath: function(id, box) {
+            var view = this,
+                clipPath;
+       
+            if(!view.definitions[id]) {
+                clipPath = new CanvasClipPath({id: id});
+                clipPath.children.push(view.createRect(box, {fill: "none"}));
+                view.definitions[id] = clipPath;
+            }
+        },        
 
         createText: function(content, options) {
             return new CanvasText(content, options);
@@ -154,10 +170,33 @@ var __meta__ = {
             return new CanvasPin(pin, options);
         }
     });
+    
+    var CanvasClipPath = ViewElement.extend({
+        render: function (context) {
+            var clipPath = this,
+                children = clipPath.children,
+                idx = 0, length = children.length;
+         
+            context.beginPath();
+            for (; idx < length; idx++) {
+                children[idx].renderPoints(context);
+            }
+            context.clip();
+        }
+    });    
 
     var CanvasGroup = ViewElement.extend({
         render: function(context) {
-            this.renderContent(context);
+            var group = this,
+                clipPath = group.clipPath;
+            if (clipPath) {
+                context.save();
+                clipPath.render(context)
+            }
+            group.renderContent(context);
+            if (clipPath) {
+                context.restore();                
+            }
         },
 
         renderContent: CanvasView.fn.renderContent

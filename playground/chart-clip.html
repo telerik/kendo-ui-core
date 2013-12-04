@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clip</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.chart.polar.js"></script>
+        <script src="../src/kendo.dataviz.stock.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.dataviz.canvas.js"></script>        
+</head>
+<body>
+   
+  <div id="chart" style="margin-top:100px;"></div>
+  <div id="radarChart"></div>
+  <script>
+    $("#chart").kendoChart({
+        series: [{
+            type: "line",
+            data: [1, 100, 1, 50]
+        }],
+        valueAxis: {
+            max: 80,
+            min: 30
+        }
+    });
+    
+    $("#radarChart").kendoChart({
+        seriesDefaults: {
+            type: "radarLine"
+        },
+        series: [{
+            name: "Market value as of 2007",
+            data: [1, 100, 1]
+        }],
+        categoryAxis: {
+            categories: ["Santander", "JP Morgan", "HSBC"]
+        },
+        valueAxis: {
+            max: 80,
+            min: 30
+        }
+    });
+  </script>
+</body>
+</html>
+

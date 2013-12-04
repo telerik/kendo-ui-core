@@ -2263,7 +2263,7 @@ var __meta__ = {
             return axis.getTickPositions(axis.options.minorUnit);
         },
 
-        getSlot: function(a, b) {
+        getSlot: function(a, b, limit) {
             var axis = this,
                 options = axis.options,
                 reverse = options.reverse,
@@ -2286,8 +2286,10 @@ var __meta__ = {
                 b = a || 0;
             }
 
-            a = math.max(math.min(a, options.max), options.min);
-            b = math.max(math.min(b, options.max), options.min);
+            if (limit) {
+                a = math.max(math.min(a, options.max), options.min);
+                b = math.max(math.min(b, options.max), options.min);
+            }
 
             if (vertical) {
                 p1 = options.max - math.max(a, b);

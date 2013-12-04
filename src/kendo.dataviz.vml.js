@@ -196,10 +196,28 @@ var __meta__ = {
         },
 
         createGroup: function(options) {
-            return this.decorate(
-                new VMLGroup(this.setDefaults(options))
-            );
+            var view = this,
+                group = view.decorate(new VMLGroup(view.setDefaults(options))),
+                clipPathId = options.clipPathId,
+                clipPath = view.definitions[clipPathId];
+                
+            if (clipPath) {                
+                clipPath.children.push(group);
+                group = clipPath;                
+            }
+            
+            return group;
         },
+        
+        createClipPath: function(id, box) {
+            var view = this,
+                clipPath;
+   
+            if(!view.definitions[id]) {
+                clipPath = view.decorate(new VMLClipRect(box, {id: id}));                
+                view.definitions[id] = clipPath;
+            }
+        },        
 
         createGradient: function(options) {
             var validRadial = defined(options.cx) && defined(options.cy) && defined(options.bbox);
