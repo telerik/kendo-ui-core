@@ -11,7 +11,8 @@
 
     module("grid column resize", {
         setup: function() {
-            QUnit.config.testTimeout = 900;
+            kendo.UserEvents.minHold(50);
+
             table = document.createElement("table");
             QUnit.fixture[0].appendChild(table);
 
@@ -46,6 +47,7 @@
         teardown: function() {
             kendo.destroy(QUnit.fixture);
             $(table).closest(".k-grid").remove();
+            kendo.UserEvents.minHold(800);
         }
     });
 
@@ -355,7 +357,7 @@
             column.release(offset.top, offset.left);
 
             equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").length, 1);
-        }, 805);
+        }, 100);
     });
 
     asyncTest("handler is hidden if mobile grid is refreshed", 1, function() {
@@ -377,7 +379,7 @@
             grid.refresh();
 
             ok(!grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").is(":visible"));
-        }, 805);
+        }, 100);
     });
 
     asyncTest("css class is added to the column on tap and hold", 1, function() {
@@ -397,6 +399,6 @@
             column.release(offset.top, offset.left);
 
             ok(column.hasClass("k-column-active"));
-        }, 805);
+        }, 100);
     });
 })();

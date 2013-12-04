@@ -1,7 +1,9 @@
+(function() {
     var $$ = kendo.jQuery;
 
     module("kendo jQuery", {
         setup: function() {
+            QUnit.config.testTimeout = 700;
             kendo.support.touch = true;
         },
         teardown: function() {
@@ -103,3 +105,4 @@
     test("find returns instances of kendo.jQuery", function() {
         ok($$().find("body") instanceof $$);
     });
+})();

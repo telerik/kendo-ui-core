@@ -14,8 +14,7 @@
 
     module("editing", {
         setup: function() {
-            this.timeout = QUnit.config.testTimeout;
-            QUnit.config.testTimeout = 2000;
+            kendo.UserEvents.minHold(50);
 
             container = $("<div>");
             container.appendTo(QUnit.fixture);
@@ -50,8 +49,8 @@
 
         },
         teardown: function() {
-            QUnit.config.testTimeout = this.timeout;
             kendo.destroy(QUnit.fixture);
+            kendo.UserEvents.minHold(800);
         }
     });
 
@@ -219,7 +218,7 @@
             start();
             eventElement.release(10, 10);
             ok(eventElement.hasClass("k-event-active"));
-        }, 805);
+        }, 100);
     });
 
     asyncTest("tap and hold on diffrent event cancel hold of the prev event", function() {
@@ -246,8 +245,8 @@
 
                 equal(scheduler.element.find(".k-event-active").length, 1);
                 ok(eventElement.hasClass("k-event-active"));
-            }, 805);
-        }, 805);
+            }, 100);
+        }, 100);
     });
 
     asyncTest("tap and hold on event add class to the element if move is disabled", function() {
@@ -261,7 +260,7 @@
             start();
             eventElement.release(10, 10);
             ok(eventElement.hasClass("k-event-active"));
-        }, 805);
+        }, 100);
     });
 
     asyncTest("move on diffrent event cancel hold of the prev event", function() {
@@ -286,7 +285,7 @@
             start();
             ok(!scheduler.element.find(".k-event-active").length);
 
-        }, 805);
+        }, 100);
     });
 
     module("Timezone editing", {
@@ -294,10 +293,10 @@
             var scriptTag = $("script:last");
 
             container = document.createElement("div");
-            document.body.appendChild(container);
+            QUnit.fixture[0].appendChild(container);
         },
         teardown: function() {
-            kendo.destroy($(container).closest(".k-scheduler"));
+            kendo.destroy(QUnit.fixture);
             $(".k-widget").remove();
         }
     });
