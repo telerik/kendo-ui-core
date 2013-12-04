@@ -224,11 +224,11 @@ kendo_module({
                     .removeClass(STATEDISABLED)
                     .on(HOVEREVENTS, that._toggleHover)
                     .on("mousedown" + ns, function(e) {
-                        var deleteButton = e.target.className.indexOf("k-delete") !== -1;
+                        if (e.target.nodeName.toLowerCase() !== "input") {
+                            e.preventDefault();
+                        }
 
-                        e.preventDefault();
-
-                        if (!deleteButton) {
+                        if (e.target.className.indexOf("k-delete") === -1) {
                             if (that.input[0] !== activeElement()) {
                                 that.input.focus();
                             }
