@@ -1,6 +1,4 @@
 (function() {
-    console.warn("SKIP: themebuilder integration tests that rely on page sandbox");
-    return;
     var ThemeBuilder = kendo.ThemeBuilder,
         LessTheme = kendo.LessTheme,
         JsonConstants = kendo.JsonConstants,
@@ -15,6 +13,55 @@
         BORDERCOLOR = "border-color",
         COLOR = "color";
 
+    function withSandbox(callback) {
+        var wnd, doc;
+        var iframe = $("<iframe />")[0];
+
+        $(iframe)
+            .appendTo(QUnit.fixture)
+            .prop("src", 'javascript:""');
+
+        wnd = iframe.contentWindow || iframe;
+        doc = wnd.document || iframe.contentDocument;
+
+        $(iframe).one("load", function() {
+            callback(wnd, doc);
+        });
+
+        doc.open();
+        doc.write(
+            "<!doctype html>" +
+            "<html>" +
+            "<head><meta charset='utf-8' />" +
+            "<script src='/base/src/jquery.js'></script>" +
+            "<script src='/base/src/kendo.core.js'></script>" +
+            "<script src='/base/src/kendo.userevents.js'></script>" +
+            "<script src='/base/src/kendo.draganddrop.js'></script>" +
+            "<script src='/base/src/kendo.window.js'></script>" +
+            "<script src='/base/src/kendo.panelbar.js'></script>" +
+            "<script src='/base/src/kendo.data.js'></script>" +
+            "<script src='/base/src/kendo.popup.js'></script>" +
+            "<script src='/base/src/kendo.list.js'></script>" +
+            "<script src='/base/src/kendo.numerictextbox.js'></script>" +
+            "<script src='/base/src/kendo.combobox.js'></script>" +
+            "<script src='/base/src/kendo.dataviz.core.js'></script>" +
+            "<script src='/base/src/kendo.dataviz.themes.js'></script>" +
+            "<script src='/base/themebuilder/scripts/themebuilder.js'></script>" +
+            "</head><body></body></html>"
+        );
+
+        doc.close();
+    }
+
+    function sandboxed_test(name, testMethod) {
+        asyncTest(name, function() {
+            withSandbox(function(wnd, doc) {
+                start();
+                testMethod.call(this, wnd, doc, wnd.$);
+            });
+        });
+    }
+
     module("themebuilder integration", {
         teardown: function() {
             kendo.destroy($("#kendo-themebuilder"));
@@ -22,35 +69,35 @@
         }
     });
 
-    function updateStyleSheet(cssText) {
-        LessTheme.prototype._updateStyleSheet(cssText, document);
+    function updateStyleSheet(cssText, doc) {
+        LessTheme.prototype._updateStyleSheet(cssText, doc);
     }
 
-    test("themebuilder object is available", function() {
-        ok(typeof ThemeBuilder == "function");
+    sandboxed_test("themebuilder object is available", function(wnd, doc, $) {
+        ok(typeof wnd.kendo.ThemeBuilder == "function");
     });
 
-    test("updateStyleSheet() adds CSS to document", function() {
-        updateStyleSheet(".foo { font-size: 8px; }");
+    sandboxed_test("updateStyleSheet() adds CSS to document", function(wnd, doc, $) {
+        updateStyleSheet(".foo { font-size: 8px; }", doc);
 
-        var element = $("<span class='foo' />").appendTo(QUnit.fixture);
+        var element = $("<span class='foo' />").appendTo(doc.body);
 
         equal(element.css("font-size"), "8px");
         equal($("style[title]").length, 1);
     });
 
-    test("updateStyleSheet() updates existing stylesheet", function() {
-        updateStyleSheet(".foo { font-size: 8px; }");
+    sandboxed_test("updateStyleSheet() updates existing stylesheet", function(wnd, doc, $) {
+        updateStyleSheet(".foo { font-size: 8px; }", doc);
 
-        updateStyleSheet("#qunit-fixture { font-size: 10px; } .foo { color: #f00; }");
+        updateStyleSheet("body { font-size: 10px; } .foo { color: #f00; }", doc);
 
-        var element = $("<span class='foo' />").appendTo(QUnit.fixture);
+        var element = $("<span class='foo' />").appendTo("body");
 
         equal($("style[title]").length, 1);
         equal($(".foo").css("font-size"), "10px");
     });
 
-    test("render() renders color picker for box-shadow-color properties", function() {
+    sandboxed_test("render() renders color picker for box-shadow-color properties", function(wnd, doc, $) {
         var constants = new LessTheme({
                 constants: {
                     "@foo-color": constant(".k-widget", "box-shadow")
@@ -63,12 +110,12 @@
                         "@foo-color": "foo color"
                     }
                 }
-            }, document);
+            }, doc);
 
         equal(themeBuilder.element.find("span.ktb-colorinput").length, 1);
     });
 
-    test("value of box-shadow color picker gets processed as color", function() {
+    sandboxed_test("value of box-shadow color picker gets processed as color", function(wnd, doc, $) {
 
         var constants = new LessTheme({
                 constants: {
@@ -76,14 +123,14 @@
                 }
             });
 
-        updateStyleSheet(".k-widget { box-shadow: 1px 1px 1px #b4d455; }");
+        updateStyleSheet(".k-widget { box-shadow: 1px 1px 1px #b4d455; }", doc);
 
-        constants.infer(document);
+        constants.infer(doc);
 
         equal(constants.serialize(), "@foo-color: #b4d455;");
     });
 
-    test("value of box-shadow color picker with inset shadow", function() {
+    sandboxed_test("value of box-shadow color picker with inset shadow", function(wnd, doc, $) {
 
         var constants = new LessTheme({
                 constants: {
@@ -91,14 +138,14 @@
                 }
             });
 
-        updateStyleSheet(".k-widget { box-shadow: inset 1px 1px 1px #b4d455; }");
+        updateStyleSheet(".k-widget { box-shadow: inset 1px 1px 1px #b4d455; }", doc);
 
-        constants.infer(document);
+        constants.infer(doc);
 
         equal(constants.serialize(), "@foo-color: #b4d455;");
     });
 
-    test("LessTheme are inferred on init", function() {
+    sandboxed_test("LessTheme are inferred on init", function(wnd, doc, $) {
         var constants = new LessTheme(),
             inferred = false;
 
@@ -106,12 +153,12 @@
             inferred = true;
         };
 
-        var themebuilder = new ThemeBuilder({ webConstants: constants }, document);
+        var themebuilder = new ThemeBuilder({ webConstants: constants }, doc);
 
         ok(inferred);
     });
 
-    test("_propertyChange updates constant", function() {
+    sandboxed_test("_propertyChange updates constant", function(wnd, doc, $) {
         var color = "#b4d455",
             constants = new LessTheme({
                 constants: {
@@ -120,7 +167,7 @@
             }),
             themebuilder = new ThemeBuilder({
                 webConstants: constants
-            });
+            }, doc);
 
         themebuilder._propertyChange({
             value: color,
@@ -130,7 +177,7 @@
         equal(constants.constants["@foo"].value, color);
     });
 
-    test("changing input value triggers _propertyChange", function() {
+    sandboxed_test("changing input value triggers _propertyChange", function(wnd, doc, $) {
         expect(2);
         var color = "#b4d455",
             themebuilder = new ThemeBuilder({
@@ -144,7 +191,7 @@
                         "@foo": "foo color"
                     }
                 }
-            });
+            }, doc);
 
         themebuilder._propertyChange = function(e) {
             equal(e.name, "@foo");
@@ -157,7 +204,7 @@
         colorInput.trigger("change");
     });
 
-    test("_propertyChange updates dataviz constant", function() {
+    sandboxed_test("_propertyChange updates dataviz constant", function(wnd, doc, $) {
         var color = "#b4d455",
             constants = new JsonConstants({
                 constants: {
@@ -166,7 +213,7 @@
             }),
             themebuilder = new ThemeBuilder({
                 datavizConstants: constants
-            });
+            }, doc);
 
         constants.applyTheme = $.noop;
 

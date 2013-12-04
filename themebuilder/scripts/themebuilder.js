@@ -352,7 +352,7 @@
             },
 
             _updateStyleSheet: function(cssText, targetDocument) {
-                var style = $("style[title='themebuilder']")[0];
+                var style = $("style[title='themebuilder']", targetDocument.documentElement)[0];
 
                 if (style) {
                     style.parentNode.removeChild(style);
