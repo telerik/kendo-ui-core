@@ -3,8 +3,18 @@
         getElement = dataviz.getElement,
         Box2D = dataviz.Box2D,
         chartBox = new Box2D(0, 0, 800, 600),
+        CategoryAxis,
         view,
         TOLERANCE = 2;
+
+    CategoryAxis = dataviz.CategoryAxis.extend({
+        options: {
+            labels: {
+                // Tests expect particular font size
+                font: "16px Verdana, sans-serif"
+            }
+        }
+    });
 
     function moduleSetup() {
         view = new ViewStub();
@@ -20,7 +30,7 @@
             MARGIN = PADDING = 5;
 
         function createCategoryAxis(options) {
-            categoryAxis = new dataviz.CategoryAxis(
+            categoryAxis = new CategoryAxis(
                 $.extend({
                     categories: ["Foo", "Bar"]
                 }, options)
@@ -32,14 +42,9 @@
         // ------------------------------------------------------------
         module("Category Axis / Horizontal / Rendering", {
             setup: function() {
-                this.font = dataviz.Text.fn.options.font;
-                dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
                 moduleSetup();
 
                 createCategoryAxis();
-            },
-            teardown: function() {
-                dataviz.Text.fn.options.font = this.font;
             }
         });
 
@@ -343,8 +348,6 @@
         // ------------------------------------------------------------
         module("Category Axis / Horizontal / Label Step / Rendering", {
             setup: function() {
-                this.font = dataviz.Text.fn.options.font;
-                dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
                 moduleSetup();
 
                 createCategoryAxis({
@@ -353,9 +356,6 @@
                 });
 
                 categoryAxis.getViewElements(view);
-            },
-            teardown: function() {
-                dataviz.Text.fn.options.font = this.font;
             }
         });
 
@@ -372,8 +372,6 @@
         // ------------------------------------------------------------
         module("Category Axis / Horizontal / Label Step and skip / Rendering", {
             setup: function() {
-                this.font = dataviz.Text.fn.options.font;
-                dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
                 moduleSetup();
 
                 createCategoryAxis({
@@ -382,9 +380,6 @@
                 });
 
                 categoryAxis.getViewElements(view);
-            },
-            teardown: function() {
-                dataviz.Text.fn.options.font = this.font;
             }
         });
 
@@ -401,14 +396,9 @@
         // ------------------------------------------------------------
         module("Category Axis / Horizontal / Mirrored / Rendering", {
             setup: function() {
-                this.font = dataviz.Text.fn.options.font;
-                dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
                 moduleSetup();
 
                 createCategoryAxis({ labels: { mirror: true } });
-            },
-            teardown: function() {
-                dataviz.Text.fn.options.font = this.font;
             }
         });
 
@@ -444,14 +434,9 @@
         // ------------------------------------------------------------
         module("Category Axis / Vertical / Rendering", {
             setup: function() {
-                this.font = dataviz.Text.fn.options.font;
-                dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
                 moduleSetup();
 
                 createCategoryAxis({ vertical: true });
-            },
-            teardown: function() {
-                dataviz.Text.fn.options.font = this.font;
             }
         });
 
@@ -638,9 +623,6 @@
                 });
 
                 categoryAxis.getViewElements(view);
-            },
-            teardown: function() {
-                dataviz.Text.fn.options.font = this.font;
             }
         });
 
@@ -666,9 +648,6 @@
                 });
 
                 categoryAxis.getViewElements(view);
-            },
-            teardown: function() {
-                dataviz.Text.fn.options.font = this.font;
             }
         });
 
@@ -726,7 +705,7 @@
             lineBox;
 
         function createCategoryAxis(options) {
-            categoryAxis = new dataviz.CategoryAxis(
+            categoryAxis = new CategoryAxis(
                 $.extend({
                     categories: ["Foo", "Bar", "Baz"]
                 }, options)
@@ -836,7 +815,7 @@
         });
 
         test("assumes 1 category when no categories are defined", function() {
-            categoryAxis = new dataviz.CategoryAxis();
+            categoryAxis = new CategoryAxis();
             categoryAxis.reflow(chartBox);
 
             var slot = categoryAxis.getSlot(0);
@@ -992,7 +971,7 @@
         // ------------------------------------------------------------
         module("CategoryAxis / getCategory / Horizontal ", {
             setup: function() {
-                categoryAxis = new dataviz.CategoryAxis({
+                categoryAxis = new CategoryAxis({
                     categories: ["Foo", "Bar", "Baz"],
                     vertical: false,
                     labels: { visible: false }
@@ -1023,7 +1002,7 @@
         });
 
         test("returns single category for leftmost point", function() {
-            categoryAxis = new dataviz.CategoryAxis({
+            categoryAxis = new CategoryAxis({
                 categories: ["Foo"],
                 vertical: false,
                 labels: { visible: false }
@@ -1034,7 +1013,7 @@
         });
 
         test("returns single category for righttmost point", function() {
-            categoryAxis = new dataviz.CategoryAxis({
+            categoryAxis = new CategoryAxis({
                 categories: ["Foo"],
                 vertical: false,
                 labels: { visible: false }
@@ -1047,7 +1026,7 @@
         // ------------------------------------------------------------
         module("CategoryAxis / getCategory / Horizontal / Reverse", {
             setup: function() {
-                categoryAxis = new dataviz.CategoryAxis({
+                categoryAxis = new CategoryAxis({
                     categories: ["Foo", "Bar", "Baz"],
                     vertical: false,
                     reverse: true,
@@ -1073,7 +1052,7 @@
         // ------------------------------------------------------------
         module("CategoryAxis / getCategory / Vertical ", {
             setup: function() {
-                categoryAxis = new dataviz.CategoryAxis({
+                categoryAxis = new CategoryAxis({
                     categories: ["Foo", "Bar", "Baz"],
                     vertical: true,
                     labels: { visible: false }
@@ -1104,7 +1083,7 @@
         });
 
         test("returns single category for topmost point", function() {
-            categoryAxis = new dataviz.CategoryAxis({
+            categoryAxis = new CategoryAxis({
                 categories: ["Foo"],
                 vertical: true,
                 labels: { visible: false }
@@ -1115,7 +1094,7 @@
         });
 
         test("returns single category for bottommost point", function() {
-            categoryAxis = new dataviz.CategoryAxis({
+            categoryAxis = new CategoryAxis({
                 categories: ["Foo"],
                 vertical: true,
                 labels: { visible: false }
@@ -1128,7 +1107,7 @@
         // ------------------------------------------------------------
         module("CategoryAxis / getCategory / Vertical / Reverse", {
             setup: function() {
-                categoryAxis = new dataviz.CategoryAxis({
+                categoryAxis = new CategoryAxis({
                     categories: ["Foo", "Bar", "Baz"],
                     vertical: true,
                     reverse: true,
@@ -1176,7 +1155,17 @@
                         to: 1,
                         color: "red",
                         opacity: 0.5
-                    }]
+                    }],
+                    labels: {
+                        // Tests expect particular font size
+                        font: "16px Verdana, sans-serif"
+                    }
+                },
+                valueAxis: {
+                    labels: {
+                        // Tests expect particular font size
+                        font: "16px Verdana, sans-serif"
+                    }
                 }
             });
 
@@ -1190,12 +1179,7 @@
         // ------------------------------------------------------------
         module("Category Axis / Plot Bands / Horizontal", {
             setup: function() {
-                this.font = dataviz.Text.fn.options.font;
-                dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
                 createPlotArea(lineSeriesData);
-            },
-            teardown: function() {
-                dataviz.Text.fn.options.font = this.font;
             }
         });
 
@@ -1219,12 +1203,7 @@
         // ------------------------------------------------------------
         module("Category Axis / Plot Bands / Vertical", {
             setup: function() {
-                this.font = dataviz.Text.fn.options.font;
-                dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
                 createPlotArea(barSeriesData);
-            },
-            teardown: function() {
-                dataviz.Text.fn.options.font = this.font;
             }
         });
 
@@ -1270,7 +1249,18 @@
                         text: "text",
                         color: "red",
                         opacity: 0.33,
+                        font: "16px Verdana, sans-serif",
                         position: "center"
+                    },
+                    labels: {
+                        // Tests expect particular font size
+                        font: "16px Verdana, sans-serif"
+                    }
+                },
+                valueAxis: {
+                    labels: {
+                        // Tests expect particular font size
+                        font: "16px Verdana, sans-serif"
                     }
                 }
             }, plotOptions));
@@ -1288,13 +1278,8 @@
         // ------------------------------------------------------------
         module("Category Axis / Title / Horizontal", {
             setup: function() {
-                this.font = dataviz.Text.fn.options.font;
-                dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
                 createPlotArea(lineSeriesData);
                 titleBox = plotArea.axisX.title.box;
-            },
-            teardown: function() {
-                dataviz.Text.fn.options.font = this.font;
             }
         });
 
@@ -1339,13 +1324,8 @@
         // ------------------------------------------------------------
         module("Category Axis / Horizontal / Mirrored / Title", {
             setup: function() {
-                this.font = dataviz.Text.fn.options.font;
-                dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
                 createPlotArea(lineSeriesData, { categoryAxis: { labels: { mirror: true } }});
                 titleBox = plotArea.axisX.title.box;
-            },
-            teardown: function() {
-                dataviz.Text.fn.options.font = this.font;
             }
         });
 
@@ -1379,13 +1359,8 @@
         // ------------------------------------------------------------
         module("Category Axis / Title / Vertical", {
             setup: function() {
-                this.font = dataviz.Text.fn.options.font;
-                dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
                 createPlotArea(barSeriesData);
                 titleBox = plotArea.axisY.title.box;
-            },
-            teardown: function() {
-                dataviz.Text.fn.options.font = this.font;
             }
         });
 
@@ -1425,13 +1400,8 @@
         // ------------------------------------------------------------
         module("Category Axis / Vertical / Mirrored / Title", {
             setup: function() {
-                this.font = dataviz.Text.fn.options.font;
-                dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
                 createPlotArea(barSeriesData, { categoryAxis: { labels: { mirror: true } }});
                 titleBox = plotArea.axisY.title.box;
-            },
-            teardown: function() {
-                dataviz.Text.fn.options.font = this.font;
             }
         });
 
@@ -1650,7 +1620,7 @@
             plot;
 
         function createCategoryAxis(options) {
-            categoryAxis = new dataviz.CategoryAxis(
+            categoryAxis = new CategoryAxis(
                 $.extend({
                     categories: ["Foo", "Bar", "Baz"]
                 }, options)

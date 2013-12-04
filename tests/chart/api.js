@@ -277,7 +277,7 @@
         var chart;
 
         function setupChart() {
-            chart = createChart{
+            chart = createChart({
                 series: [{
                     type: "bar",
                     data: [1, 2]

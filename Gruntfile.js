@@ -60,7 +60,7 @@ module.exports = function(grunt) {
        'tests/qrcode/*.js',
        'tests/barcode/**/*.js',
        'tests/gauge/*.js',
-       //'tests/chart/*.js',
+       'tests/chart/*.js',
        //'tests/stock/*.js',
        //'tests/sparkline/*.js',
        'tests/map/**/*.js',
