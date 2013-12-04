@@ -245,7 +245,7 @@
         ok(application.element.hasClass("km-android"));
     });
 
-    test("Setting skin removes the platform classes", 3, function() {
+    test("Setting skin removes the platform classes", 2, function() {
         setup('<div data-role="view" />', {
             platform: "ios",
             skin: "flat"
@@ -253,7 +253,6 @@
 
         ok(application.element.hasClass("km-flat"));
         ok(!application.element.hasClass("km-ios"));
-        ok(!application.element.hasClass("km-ios6"));
     });
 
     /*
