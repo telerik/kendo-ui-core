@@ -1950,6 +1950,7 @@ kendo_module({
                  end: options.messages.end
             };
 
+            kendo.destroy(that._container);
             that._container.html(RECURRENCE_VIEW_TEMPLATE(data));
 
             if (!frequency) {
