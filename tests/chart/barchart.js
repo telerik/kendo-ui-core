@@ -66,7 +66,6 @@
 
     test("default legend marker color is used when color is fn", function() {
         createBarChart([{ color: function() { return "#foo"; }, name: "aaa" }]);
-        debugger;
         equal(legend.options.items[0].markerColor, "#ff6800");
     });
 

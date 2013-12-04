@@ -43,6 +43,9 @@
                     }]
                 }]
             });
+        },
+        teardown: function() {
+            destroyChart();
         }
     });
 
@@ -86,6 +89,9 @@
                     }]
                 }]
             });
+        },
+        teardown: function() {
+            destroyChart();
         }
     });
 
@@ -125,6 +131,9 @@
                     }]
                 }]
             });
+        },
+        teardown: function() {
+            destroyChart();
         }
     });
 
@@ -164,6 +173,9 @@
                     }]
                 }]
             });
+        },
+        teardown: function() {
+            destroyChart();
         }
     });
 
@@ -203,6 +215,9 @@
                     }]
                 }]
             });
+        },
+        teardown: function() {
+            destroyChart();
         }
     })
 
@@ -230,6 +245,9 @@
                     data: []
                 }]
             });
+        },
+        teardown: function() {
+            destroyChart();
         }
     })
 
@@ -245,6 +263,9 @@
                     dynamicSlope:true,
                 }]
             });
+        },
+        teardown: function() {
+            destroyChart();
         }
     })
 
@@ -271,6 +292,9 @@
                     }]
                 }]
             });
+        },
+        teardown: function() {
+            destroyChart();
         }
     });
 
@@ -312,6 +336,9 @@
                     }]
                 }]
             });
+        },
+        teardown: function() {
+            destroyChart();
         }
     });
 
@@ -350,6 +377,9 @@
                     }]
                 }]
             });
+        },
+        teardown: function() {
+            destroyChart();
         }
     });
 
@@ -389,6 +419,9 @@
                     }]
                 }]
             });
+        },
+        teardown: function() {
+            destroyChart();
         }
     });
 
@@ -435,6 +468,9 @@
                     }]
                 }]
             });
+        },
+        teardown: function() {
+            destroyChart();
         }
     });
 
@@ -560,7 +596,7 @@
     // ------------------------------------------------------------
     module("Funnel Chart / Events / seriesClick", {
         teardown: function(){
-            destroyChart(chart.element)
+            destroyChart();
         }
     });
 
@@ -603,9 +639,8 @@
 
     module("Funnel Chart / Events / seriesHover", {
         teardown: function(){
-            destroyChart(chart.element)
+            destroyChart();
         }
-
     });
 
     test("fires when hovering segments", 1, function() {
