@@ -1,3 +1,4 @@
+/*jshint scripturl: true */
 function withSandbox(callback) {
     var wnd, doc;
     var iframe = $("<iframe />")[0];
