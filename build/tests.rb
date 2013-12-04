@@ -1,23 +1,5 @@
-
-def run_tests(output, port)
-    sh <<-SH
-export BROWSER_TEMP=`mktemp -dt tests.XXXXXXXXXXXXXXXXXXXXXXXXX`
-export FIREFOX_PROFILE=${BROWSER_TEMP##*.}
-
-case `uname -a` in
-  *Linux*)
-    xvfb-run -a firefox -no-remote -CreateProfile $FIREFOX_PROFILE
-    ;;
-  *Darwin*)
-    /Applications/Firefox.app/Contents/MacOS/firefox -no-remote -CreateProfile $FIREFOX_PROFILE
-    ;;
-esac
-
-tests/tests.js tests/ #{port} 1>#{output} || exit 1
-    SH
-end
-
 tests = FileList["tests/**/*"]
+
 namespace :tests do
     task :java do
         mvn(POM, 'clean test')
@@ -28,20 +10,22 @@ namespace :tests do
         sh "build/xunit/xunit.console.clr4.exe wrappers/mvc/tests/Kendo.Mvc.Tests/bin/Release/Kendo.Mvc.Tests.dll"
     end
 
-    desc "Check test suite for missing test files"
-    task :check_suite do
-        sh "tests/check-test-suite.sh"
-    end
-
-    { CI: 8884, Production: 8885, TZ: 8886 }.each do |env, port|
+    %w[CI Production TZ].each do |env|
         output = "#{env}-test-results.xml"
+        cmd = "./node_modules/.bin/grunt jshint karma --junit-results=#{output} --single-run=true"
 
         file output => [MIN_JS, MIN_CSS, KENDO_CONFIG_FILE, tests].flatten do |t|
-            run_tests(t.name, port)
+            sh <<-SH
+              if which xvfb-run >/dev/null; then
+                xvfb-run #{cmd}
+              else
+                #{cmd}
+              fi
+            SH
         end
 
         desc "Run #{env} tests"
-        task env => [:check_suite, output, :java] do
+        task env => [output, :java] do
             sh "touch #{output}"
         end
     end
