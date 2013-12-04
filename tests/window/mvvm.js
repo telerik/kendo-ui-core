@@ -138,7 +138,7 @@
         equal(window.wrapper.height(), 233);
     });
 
-    test("content can be initialized declaratively", function() {
+    test("set content through data attribute", function() {
         var dom = $('<div data-role="window" data-content="echo"></div>').appendTo(QUnit.fixture);
 
         kendo.bind(dom, {});
@@ -147,5 +147,15 @@
 
         ok(window.options.content);
         equal(window.options.content.url, "echo");
+    });
+
+    test("set appendTo through data attribute", function() {
+        var dom = $('<div data-role="window" data-append-to="#bar" /><div id="bar" />').appendTo(QUnit.fixture);
+
+        kendo.bind(dom, {});
+
+        var window = dom.data("kendoWindow");
+
+        ok($.contains($("#bar")[0], window.element[0]));
     });
 })();

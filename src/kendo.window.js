@@ -117,7 +117,7 @@ kendo_module({
                 options.actions = [];
             }
 
-            that.appendTo = $($(options.appendTo)[0] || document.body);
+            that.appendTo = $(options.appendTo);
 
             that._animations();
 
@@ -376,7 +376,8 @@ kendo_module({
             content: null,
             visible: null,
             height: null,
-            width: null
+            width: null,
+            appendTo: document.body
         },
 
         _closable: function() {
