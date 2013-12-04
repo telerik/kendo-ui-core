@@ -40,8 +40,7 @@ kendo_module({
         RIGHT = "Right",
         LEFT = "Left",
         BOTTOM = "Bottom",
-        DEFAULTCONNECTORNAMES = [TOP, RIGHT, BOTTOM, LEFT, AUTO],
-        ZOOM_RATE = 1.1;
+        DEFAULTCONNECTORNAMES = [TOP, RIGHT, BOTTOM, LEFT, AUTO];
 
     diagram.Cursors = Cursors;
 
@@ -884,12 +883,13 @@ kendo_module({
         wheel: function (p, meta) {
             var diagram = this.diagram,
                 delta = meta.delta,
-                z = diagram.zoom();
+                z = diagram.zoom(),
+                zoomRate = diagram.options.zoomRate;
 
             if (delta < 0) {
-                z *= ZOOM_RATE;
+                z *= zoomRate;
             } else {
-                z /= ZOOM_RATE;
+                z /= zoomRate;
             }
 
             diagram.zoom(z, p);
