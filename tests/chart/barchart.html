@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>UI5.Chart Tests</title>
+        <script src="../jquery-loader.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../kendo-test-helpers.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="util.js"></script>
+        <script type="text/javascript">
+
+            var dataviz = kendo.dataviz;
+
+            (function() {
+                var chart,
+                    model,
+                    title,
+                    legend,
+                    plotArea
+                    MARGIN = 10;
+
+                function createChart(series, options) {
+                    $("#container").kendoChart($.extend({
+                        title: {
+                            text: "Chart Title"
+                        },
+                        series: series,
+                        categoryAxis: {
+                            categories: ["Alpha", "Beta", "Charlie"]
+                        },
+                        chartArea: {
+                            margin: 0
+                        }
+                    }, options ));
+
+                    chart = $("#container").data("kendoChart");
+                    model = chart._model;
+                    title = model.children[0];
+                    legend = model.children[1];
+                    plotArea = model.children[2];
+                }
+
+                module("Bar Chart Model", {
+                    setup: function() {
+                        createChart([{
+                            name: "Value",
+                            type: "bar",
+                            data: [100, 200, 300]
+                        }]);
+                    },
+                    teardown: function() {
+                        $("#container").empty();
+                    }
+                });
+
+                test("model is a RootElement", function() {
+                    ok(model instanceof dataviz.RootElement);
+                });
+
+                test("title is created", function() {
+                    ok(title instanceof dataviz.Title);
+                });
+
+                test("title text is set", function() {
+                    equal(title.options.text, "Chart Title");
+                });
+
+                test("title box is positioned at top", function() {
+                    equal(title.box.y1, 0);
+                });
+
+                test("legend is created", function() {
+                    ok(legend instanceof dataviz.Legend);
+                });
+
+                test("legend series are populated", function() {
+                    equal(legend.options.items[0].text, "Value");
+                });
+
+                test("default legend marker color is used when color is fn", function() {
+                    createChart([{ color: function() { return "#foo"; }, name: "aaa" }]);
+                    equal(legend.options.items[0].markerColor, "#ff6800");
+                });
+
+                test("series can be excluded from legend", function() {
+                    createChart([{
+                        name: "Value",
+                        type: "bar",
+                        data: [100, 200, 300],
+                        visibleInLegend: false
+                    }]);
+
+                    equal(legend.options.items.length, 0);
+                });
+
+                test("legend labels template", function() {
+                    createChart([{
+                        name: "Value",
+                        type: "bar",
+                        data: [100, 200, 300],
+                        test: "test"
+                    }], {
+                        legend: {
+                            labels: {
+                                template: "#= text #-#= series.test #"
+                            }
+                        }
+                    });
+
+                    equal(legend.options.items[0].text, "Value-test");
+                });
+
+                test("legend is positioned at right", function() {
+                    equal(legend.box.x1,
+                        model.box.width() - legend.box.width() -MARGIN);
+                });
+
+                test("legend is positioned at vertical center", function() {
+                    var titleHeight = title.box.height(),
+                        vCenter = titleHeight +
+                                  ((model.box.height() - titleHeight - legend.box.height()) / 2);
+                    equal(legend.box.y1, vCenter);
+                });
+
+                test("Categorical plotArea is created", function() {
+                    ok(plotArea instanceof dataviz.CategoricalPlotArea);
+                });
+
+            })();
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <div id="container">
+        </div>
+    </body>
+</html>
