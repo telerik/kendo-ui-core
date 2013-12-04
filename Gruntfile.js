@@ -247,6 +247,14 @@ module.exports = function(grunt) {
                         'tests/upload/helper.js',
                         'tests/upload/select.js',
                         'tests/upload/selection.js',
+                        'tests/upload/async.js',
+                        'tests/upload/asyncnomultiple.js',
+                        'tests/upload/asyncnoauto.js',
+                        'tests/upload/upload.js',
+                        'tests/upload/success.js',
+                        'tests/upload/error.js',
+                        'tests/upload/cancel.js',
+                        'tests/upload/remove.js',
 
                         { pattern: 'src/kendo.editor.js', included: false }, // download builder needs this
                         { pattern: 'src/kendo.aspnetmvc.js', included: false }, // download builder needs this

@@ -1,7 +1,16 @@
-function uploadError(createUpload) {
+function uploadError(params) {
+    var createUpload = params.createUpload;
+    var simulateUpload = params.simulateUpload;
+    var simulateUploadWithResponse = params.simulateUploadWithResponse;
+    var errorResponse = params.errorResponse;
+    var validJSON = params.validJSON;
+    var simulateRemoveWithResponse = params.simulateRemoveWithResponse;
+    var simulateRemove = params.simulateRemove;
+    var simulateRemoveError = params.simulateRemoveError;
+
     test("error is fired when upload action returns response that is not JSON", function() {
         var errorFired = false;
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function() {
                 errorFired = true;
             }
@@ -14,7 +23,7 @@ function uploadError(createUpload) {
 
     test("error is not fired when upload action returns empty response", function() {
         var errorFired = false;
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function() {
                 errorFired = true;
             }
@@ -27,7 +36,7 @@ function uploadError(createUpload) {
 
     test("error is not fired when upload action returns valid JSON", function() {
         var errorFired = false;
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function() {
                 errorFired = true;
             }
@@ -40,7 +49,7 @@ function uploadError(createUpload) {
 
     test("error event arguments contain list of uploaded files", function() {
         var files = null;
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function(e) {
                 files = e.files;
             }
@@ -53,7 +62,7 @@ function uploadError(createUpload) {
 
     test("error event arguments contain original XHR", function() {
         var xhr = null;
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function(e) {
                 xhr = e.XMLHttpRequest;
             }
@@ -66,7 +75,7 @@ function uploadError(createUpload) {
 
     test("error event arguments contain XHR object with responseText", function() {
         var xhr = null;
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function(e) {
                 xhr = e.XMLHttpRequest;
             }
@@ -82,7 +91,7 @@ function uploadError(createUpload) {
     test("error is raised when remove action returns error code", function() {
         stop(1);
 
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function(e) {
                 ok(true);
                 start();
@@ -96,7 +105,7 @@ function uploadError(createUpload) {
     test("error is raised when remove action returns response that is not JSON", function() {
         stop(1);
 
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function(e) {
                 ok(true);
                 start();
@@ -108,7 +117,7 @@ function uploadError(createUpload) {
     });
 
     asyncTest("error is not fired when remove action returns empty response", function() {
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function(e) {
                 ok(false);
             }
@@ -124,7 +133,7 @@ function uploadError(createUpload) {
     });
 
     asyncTest("error is not fired when remove action returns valid JSON", function() {
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function(e) {
                 ok(false);
             }
@@ -142,7 +151,7 @@ function uploadError(createUpload) {
     test("error event arguments contain list of removed files", function() {
         stop(1);
 
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function(e) {
                 assertSelectedFile(e.files);
                 start();
@@ -156,7 +165,7 @@ function uploadError(createUpload) {
     test("error event arguments contain remove operation name", function() {
         stop(1);
 
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function(e) {
                 equal(e.operation, "remove");
                 start();
@@ -170,7 +179,7 @@ function uploadError(createUpload) {
     test("error event arguments contains original XHR for remove action", function() {
         stop(1);
 
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function(e) {
                 notEqual(e.XMLHttpRequest, null);
                 start();
@@ -184,7 +193,7 @@ function uploadError(createUpload) {
     test("error event arguments contains XHR with responseText for remove action", function() {
         stop(1);
 
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function(e) {
                 equal(e.XMLHttpRequest.responseText, errorResponse);
                 start();
@@ -198,7 +207,7 @@ function uploadError(createUpload) {
     test("error event arguments contains XHR with status for remove action", function() {
         stop(1);
 
-        uploadInstance = createUpload({ error:
+        var uploadInstance = createUpload({ error:
             function(e) {
                 equal(e.XMLHttpRequest.status, "200");
                 start();
@@ -217,7 +226,7 @@ function uploadError(createUpload) {
     test("error is raised when remove action returns error code for initially rendered files", function() {
         stop(1);
 
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -233,7 +242,7 @@ function uploadError(createUpload) {
     test("error is raised when remove action returns response that is not JSON for initially rendered files", function() {
         stop(1);
 
-        uploadInstance = createUpload({
+        var uploadInstance = createUpload({
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -247,7 +256,7 @@ function uploadError(createUpload) {
     });
 
     asyncTest("error is not fired when remove action returns empty response for initially rendered files", function() {
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -265,7 +274,7 @@ function uploadError(createUpload) {
     });
 
     asyncTest("error is not fired when remove action returns valid JSON for initially rendered files", function() {
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -285,7 +294,7 @@ function uploadError(createUpload) {
     test("error event arguments contain list of removed files for initially rendered files", function() {
         stop(1);
 
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -301,7 +310,7 @@ function uploadError(createUpload) {
     test("error event arguments contain remove operation name for initially rendered files", function() {
         stop(1);
 
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -317,7 +326,7 @@ function uploadError(createUpload) {
     test("error event arguments contains original XHR for remove action for initially rendered files", function() {
         stop(1);
 
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -333,7 +342,7 @@ function uploadError(createUpload) {
     test("error event arguments contains XHR with responseText for remove action for initially rendered files", function() {
         stop(1);
 
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -349,7 +358,7 @@ function uploadError(createUpload) {
     test("error event arguments contains XHR with status for remove action for initially rendered files", function() {
         stop(1);
 
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],

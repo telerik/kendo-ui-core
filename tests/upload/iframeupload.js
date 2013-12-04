@@ -19,6 +19,7 @@ function triggerIframeLoad(iframeIndex) {
 }
 
 function simulateIframeResponse(iframeIndex, response) {
+    var uploadInstance = $("#uploadInstance").data("kendoUpload");
     uploadInstance._module.processResponse($("#uploadInstance_" + iframeIndex), response || "");
 }
 
@@ -220,9 +221,9 @@ test("frame is not unregistered on failure to allow retry", function() {
     equal(uploadInstance._module.iframes.length, 1);
 });
 
-// <script src="async.js"></script>
-// <script src="selection.js"></script>
-// <script src="asyncnomultiple.js"></script>
+uploadAsync(createUpload, simulateUpload, simulateUploadWithResponse, simulateRemove, errorResponse);
+uploadSelection(createUpload);
+uploadAsyncNoMultiple(createUpload, simulateUpload);
 
 // -----------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------
@@ -318,8 +319,8 @@ test("clicking remove should remove upload form", function() {
     equal($(".k-file", uploadInstance.wrapper).data("form"), null);
 });
 
-// <script src="asyncnoauto.js"></script>
-// <script type="text/javascript">
+var noAutoConfig = { async: {"saveUrl": 'javascript:;', "removeUrl": 'javascript:;', autoUpload: false } };
+asyncNoAuto(createUpload, simulateUploadWithResponse, noAutoConfig, simulateRemove, errorResponse);
 
 // -----------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------
@@ -501,12 +502,40 @@ test("complete is fired when upload fails", 1, function() {
     simulateIframeResponse(0, errorResponse);
 });
 
-// <script src="select.js"></script>
-// <script src="upload.js"></script>
-// <script src="success.js"></script>
-// <script src="error.js"></script>
-// <script src="cancel.js"></script>
-// <script src="remove.js"></script>
+uploadSelect(createUpload);
+
+uploadUploadEvent(createUpload);
+
+var successEventTestsParameters = {
+    createUpload: createUpload,
+    simulateUpload: simulateUpload,
+    simulateUploadWithResponse: simulateUploadWithResponse,
+    validJSON: validJSON,
+    simulateRemove: simulateRemove,
+    simulateRemoveWithResponse: simulateRemoveWithResponse
+};
+uploadSuccess(successEventTestsParameters);
+
+var errorEventTestsParameters = {
+    createUpload: createUpload,
+    simulateUpload: simulateUpload,
+    simulateUploadWithResponse: simulateUploadWithResponse,
+    errorResponse: errorResponse,
+    validJSON: validJSON,
+    simulateRemoveWithResponse: simulateRemoveWithResponse,
+    simulateRemove: simulateRemove,
+    simulateRemoveError: simulateRemoveError
+};
+uploadError(errorEventTestsParameters);
+
+uploadCancel(createUpload);
+
+var removeEventTestsParameters = {
+    createUpload: createUpload,
+    simulateUpload: simulateUpload,
+    simulateRemove: simulateRemove
+};
+uploadRemoveEvent(removeEventTestsParameters);
 
 // -----------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------

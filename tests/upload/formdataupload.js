@@ -35,6 +35,7 @@ function createUpload(options) {
 }
 
 function simulateRequestSuccess(fileIndex, response) {
+    var uploadInstance = $("#uploadInstance").data("kendoUpload");
     uploadInstance._module.onRequestSuccess(
         { target: { responseText: response || "", statusText: "OK", status: 200 } },
         $(".k-file", uploadInstance.wrapper).eq(fileIndex)
@@ -42,6 +43,7 @@ function simulateRequestSuccess(fileIndex, response) {
 }
 
 function simulateRequestError(fileIndex, response) {
+    var uploadInstance = $("#uploadInstance").data("kendoUpload");
     uploadInstance._module.onRequestError(
         { target: { responseText: response || "", statusText: "error", status: 500 } },
         $(".k-file", uploadInstance.wrapper).eq(fileIndex)
@@ -279,11 +281,9 @@ test("Error event is raised when response code is above 299", function() {
     ok(errorFired);
 });
 
-/*
-<script src="async.js"></script>
-<script src="selection.js"></script>
-<script src="asyncnomultiple.js"></script>
-*/
+uploadAsync(createUpload, simulateUpload, simulateUploadWithResponse, simulateRemove, errorResponse);
+uploadSelection(createUpload);
+uploadAsyncNoMultiple(createUpload, simulateUpload);
 
 // -----------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------
@@ -429,7 +429,8 @@ test("clicking remove should not remove original file input if some related file
     equal($(".marker", uploadInstance.wrapper).length, 1);
 });
 
-// <script src="asyncnoauto.js"></script>
+var noAutoConfig = { async: {"saveUrl": 'javascript:;', "removeUrl": 'javascript:;', autoUpload: false } };
+asyncNoAuto(createUpload, simulateUploadWithResponse, noAutoConfig, simulateRemove, errorResponse);
 
     // -----------------------------------------------------------------------------------
     // -----------------------------------------------------------------------------------
@@ -681,12 +682,40 @@ test("clicking remove should not remove original file input if some related file
         simulateRequestError(0);
     });
 
-// <script src="select.js"></script>
-// <script src="upload.js"></script>
-// <script src="success.js"></script>
-// <script src="error.js"></script>
-// <script src="cancel.js"></script>
-// <script src="remove.js"></script>
+uploadSelect(createUpload);
+
+uploadUploadEvent(createUpload);
+
+var successEventTestsParameters = {
+    createUpload: createUpload,
+    simulateUpload: simulateUpload,
+    simulateUploadWithResponse: simulateUploadWithResponse,
+    validJSON: validJSON,
+    simulateRemove: simulateRemove,
+    simulateRemoveWithResponse: simulateRemoveWithResponse
+};
+uploadSuccess(successEventTestsParameters);
+
+var errorEventTestsParameters = {
+    createUpload: createUpload,
+    simulateUpload: simulateUpload,
+    simulateUploadWithResponse: simulateUploadWithResponse,
+    errorResponse: errorResponse,
+    validJSON: validJSON,
+    simulateRemoveWithResponse: simulateRemoveWithResponse,
+    simulateRemove: simulateRemove,
+    simulateRemoveError: simulateRemoveError
+};
+uploadError(errorEventTestsParameters);
+
+uploadCancel(createUpload);
+
+var removeEventTestsParameters = {
+    createUpload: createUpload,
+    simulateUpload: simulateUpload,
+    simulateRemove: simulateRemove
+};
+uploadRemoveEvent(removeEventTestsParameters);
 
 // ------------------------------------------------------------
 module("Upload / FormDataUpload / batch = true", {
