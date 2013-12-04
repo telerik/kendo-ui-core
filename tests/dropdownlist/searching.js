@@ -218,4 +218,19 @@
         ok(true);
     });
 
+    test("search does not raise exception when widget is not bound", function() {
+        var dropdownlist = new DropDownList(input, {
+            autoBind: false,
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: [
+                { text: "Item1", value: "1" }
+            ]
+        });
+
+        input.press("i");
+
+        ok(true);
+    });
+
 })();
