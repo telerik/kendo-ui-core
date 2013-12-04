@@ -6,10 +6,14 @@ var DateView = kendo.DateView,
 
 module("kendo.ui.DateView API", {
     setup: function() {
+        kendo.effects.disable();
         div = $("<div />").appendTo(QUnit.fixture);
     },
     teardown: function() {
+        kendo.effects.enable();
+
         dateview.destroy();
+
         kendo.destroy(QUnit.fixture);
     }
 });
@@ -35,28 +39,6 @@ test("value method should call calendar value and set dateView._value", function
     equal(+dateview.calendar.value(), +date);
 });
 
-test("value method calls calendar.value() only if it is assigned to the dateView", function() {
-    var date = new Date(2000, 10, 10);
-
-    dateview = new DateView({
-        value: date,
-        start: "month"
-    });
-
-    var calendar = dateview.calendar;
-    calendar.element.data("dateView", null);
-    calendar.value(kendo.date.today());
-
-    date.setDate(20);
-    dateview.value(date);
-
-    calendar.element.data("dateView", dateview);
-
-    equal(+dateview._value, +date);
-    notEqual(+calendar.value(), +date);
-
-});
-
 test("min() should set the options.min", function() {
     var date = new Date(2000, 10, 10);
 
@@ -67,19 +49,16 @@ test("min() should set the options.min", function() {
     equal(+dateview.options.min, +date);
 });
 
-test("min() should call calendar.min()", function() {
+test("min method sets calendar min value", function() {
     dateview = new DateView();
+    dateview._calendar();
 
     var date = new Date(2000, 10, 10),
         calendar = dateview.calendar;
 
-    stub(calendar, {min: calendar.min});
-
-    calendar.element.data("dateView", dateview);
-
     dateview.min(date);
 
-    equal(calendar.calls("min"), 1);
+    deepEqual(calendar.min(), date);
 });
 
 test("max() should set the options.max", function() {
@@ -92,19 +71,16 @@ test("max() should set the options.max", function() {
     equal(+dateview.options.max, +date);
 });
 
-test("max() should call calendar.max()", function() {
+test("max method sets calendar max value", function() {
     dateview = new DateView();
+    dateview._calendar();
 
     var date = new Date(2000, 10, 10),
         calendar = dateview.calendar;
 
-    stub(calendar, {max: calendar.max});
-
-    calendar.element.data("dateView", dateview);
-
     dateview.max(date);
 
-    equal(calendar.calls("max"), 1);
+    deepEqual(calendar.max(), date);
 });
 
 var input;
@@ -113,9 +89,11 @@ var DatePicker = kendo.ui.DatePicker;
 
 module("kendo.ui.DateView API", {
     setup: function() {
+        kendo.effects.disable();
         input = $("<input />").appendTo(QUnit.fixture);
     },
     teardown: function() {
+        kendo.effects.enable();
         datepicker.destroy();
         kendo.destroy(QUnit.fixture);
     }
@@ -204,9 +182,9 @@ test("value should update input when select date from calendar", function() {
     var date = new Date(2000, 10, 10);
 
     datepicker = input.kendoDatePicker().data("kendoDatePicker");
+    datepicker.open();
     datepicker.dateView.calendar.value(date);
-
-    $.proxy(datepicker.dateView.options.change, datepicker.dateView.calendar)();
+    datepicker.dateView.calendar.trigger("change");
 
     equal(+datepicker._value, +date);
     equal(input.val(), "11/10/2000");

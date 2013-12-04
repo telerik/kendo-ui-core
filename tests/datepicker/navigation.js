@@ -7,15 +7,6 @@ var DateView = kendo.DateView,
     input,
     div;
 
-function createDatePickerCalendar(dateview, options) {
-    var calendar = dateview.calendar;
-
-    calendar.destroy();
-    calendar.element.remove();
-
-    dateview.calendar = div.kendoCalendar($.extend({ focusOnNav: false}, options)).data("kendoCalendar");
-}
-
 module("kendo.ui.DatePicker API", {
     setup: function() {
         kendo.effects.disable();
@@ -71,8 +62,6 @@ test("navigate down should persist current viewedateviewalue", function() {
         depth: "month"
     });
 
-    createDatePickerCalendar(dateview);
-
     dateview.open();
 
     dateview.move(upEvent);
@@ -97,8 +86,6 @@ test("navigate should not move selection if value is bigger than max", function(
         max: date
     });
 
-    createDatePickerCalendar(dateview);
-
     dateview.open();
     dateview.move(event);
 
@@ -111,8 +98,6 @@ test("navigate should not move selection if value is less than min", function() 
         date = new Date(2000, 11, 1);
 
     dateview = new DateView({start: "month", depth: "month", value: date, min: date, max: new Date(2100, 10, 10)});
-
-    createDatePickerCalendar(dateview);
 
     dateview.open();
     dateview.move(event);
@@ -135,8 +120,6 @@ test("navigate should focus next day in month view", function() {
 
     kendo.calendar.views[0].setDate(focusedDate, 1);
 
-    createDatePickerCalendar(dateview);
-
     dateview.open();
     dateview.move(event);
 
@@ -152,8 +135,6 @@ test("navigate should focus previous day in month view", function() {
 
     focusedDate.setDate(focusedDate.getDate() - 1);
 
-    createDatePickerCalendar(dateview);
-
     dateview.open();
     dateview.move(event);
 
@@ -168,7 +149,6 @@ test("navigate should focus day on previous row in month view", function() {
 
     focusedDate.setDate(focusedDate.getDate() - 7);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.move(event);
 
@@ -183,7 +163,6 @@ test("navigate should focus day on next row in month view", function() {
 
     focusedDate.setDate(focusedDate.getDate() + 7);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.move(event);
 
@@ -197,7 +176,6 @@ test("navigate should focus next month in year view", function() {
     var event = { keyCode: keys.RIGHT, preventDefault: $.noop },
         focusedDate = new Date(dateview._current);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.calendar.navigateUp();
 
@@ -214,7 +192,6 @@ test("navigate should focus previous month in year view", function() {
     var event = { keyCode: keys.LEFT, preventDefault: $.noop },
         focusedDate = new Date(dateview._current);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.calendar.navigateUp();
 
@@ -232,7 +209,6 @@ test("navigate should focus month on previous row in year view", function() {
     var event = { keyCode: keys.UP, preventDefault: $.noop },
         focusedDate = new Date(dateview._current);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.calendar.navigateUp();
 
@@ -250,7 +226,6 @@ test("navigate should focus month on next row in year view", function() {
     var event = { keyCode: keys.DOWN, preventDefault: $.noop },
         focusedDate = new Date(dateview._current);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.calendar.navigateUp();
 
@@ -269,7 +244,6 @@ test("navigate should focus next year in decade view", function() {
     var event = { keyCode: keys.RIGHT, preventDefault: $.noop },
         focusedDate = new Date(dateview._current);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.calendar.navigate(null, "decade");
 
@@ -288,7 +262,6 @@ test("navigate should focus previous year in decade view", function() {
     var event = { keyCode: keys.LEFT, preventDefault: $.noop },
         focusedDate = new Date(dateview._current);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.calendar.navigate(null, "decade");
 
@@ -313,7 +286,6 @@ test("navigate should focus year on previous row in decade view", function() {
     var event = { keyCode: keys.UP, preventDefault: $.noop },
         focusedDate = new Date(dateview._current);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.calendar.navigate(null, "decade");
 
@@ -331,7 +303,6 @@ test("navigate should focus year on next row in decade view", function() {
     var event = { keyCode: keys.DOWN, preventDefault: $.noop },
         focusedDate = new Date(dateview._current);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.calendar.navigate(null, "decade");
 
@@ -350,7 +321,6 @@ test("navigate should focus next decade in century view", function() {
     var event = { keyCode: keys.RIGHT, preventDefault: $.noop },
         focusedDate = new Date(dateview._current);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.calendar.navigate(null, "century");
 
@@ -368,7 +338,6 @@ test("navigate should focus previous decade in century view", function() {
     var event = { keyCode: keys.LEFT, preventDefault: $.noop },
         focusedDate = new Date(dateview._current);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.calendar.navigate(null, "century");
 
@@ -386,7 +355,6 @@ test("navigate should focus decade on previous row in century view", function() 
     var event = { keyCode: keys.UP, preventDefault: $.noop },
         focusedDate = new Date(dateview._current);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.calendar.navigate(null, "century");
 
@@ -404,7 +372,6 @@ test("navigate should focus decade on next row in century view", function() {
     var event = { keyCode: keys.DOWN, preventDefault: $.noop },
         focusedDate = new Date(dateview._current);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.calendar.navigate(null, "century");
 
@@ -428,10 +395,10 @@ test("navigate down", function() {
         max: new Date(2111, 10, 10)
     });
 
-    createDatePickerCalendar(dateview);
+    dateview.open();
+
     stub(dateview.calendar, { navigateDown: dateview.calendar.navigateDown });
 
-    dateview.open();
     dateview.calendar.navigateUp();
 
     dateview.calendar._focus(dateview._current);
@@ -446,9 +413,9 @@ test("navigate up", function() {
 
     dateview = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)});
 
+    dateview.open();
     stub(dateview.calendar, "navigateUp");
 
-    dateview.open();
     dateview.move(event);
 
     equal(dateview.calendar.calls("navigateUp"), 1);
@@ -460,7 +427,6 @@ test("navigate down selects date", function() {
     var event = { keyCode: keys.DOWN, ctrlKey: true, preventDefault: $.noop },
         selectedDate = new Date(2000, 10, 15);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.calendar._focus(selectedDate);
 
@@ -474,10 +440,10 @@ test("navigate left", function() {
 
     dateview = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)});
 
-    createDatePickerCalendar(dateview);
+    dateview.open();
+
     stub(dateview.calendar, "navigateToPast");
 
-    dateview.open();
     dateview.move(event);
 
     equal(dateview.calendar.calls("navigateToPast"), 1);
@@ -488,10 +454,10 @@ test("navigate right", function() {
 
     dateview = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)});
 
-    createDatePickerCalendar(dateview);
+    dateview.open();
+
     stub(dateview.calendar, "navigateToFuture");
 
-    dateview.open();
     dateview.move(event);
 
     equal(dateview.calendar.calls("navigateToFuture"), 1);
@@ -502,7 +468,6 @@ test("Home should focus first day of current month", function() {
 
     dateview = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)});
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.move(event);
 
@@ -516,7 +481,6 @@ test("End should focus last day of current month", function() {
 
     dateview = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)});
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     dateview.move(event);
 
@@ -530,7 +494,6 @@ test("PageUp should focus same day in previous month", function() {
 
     dateview = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)});
 
-    createDatePickerCalendar(dateview);
     dateview.open();
     stub(dateview.calendar, {navigateToPast: dateview.calendar.navigateToPast});
 
@@ -544,7 +507,6 @@ test("PageDown should focus same day in next month", function() {
 
     dateview = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1900, 10, 10), max: new Date(2111, 10, 10)});
 
-    createDatePickerCalendar(dateview);
     dateview.open();
 
     stub(dateview.calendar, {navigateToFuture: dateview.calendar.navigateToFuture});
@@ -566,7 +528,6 @@ test("Enter should close date if select date", function() {
         depth: "month"
     });
 
-    createDatePickerCalendar(dateview);
     dateview.open();
 
     dateview.calendar._focus(dateview._current);
@@ -588,7 +549,6 @@ test("Enter should focus viewedDate", function() {
         depth: "month"
     });
 
-    createDatePickerCalendar(dateview);
     dateview.open();
 
     dateview.calendar.navigate(new Date(2000, 10, 10), "year");
@@ -612,7 +572,6 @@ test("Enter should select date", function() {
     var called, event = { keyCode: keys.ENTER, preventDefault: $.noop },
     focused = new Date(2000, 10, 11);
 
-    createDatePickerCalendar(dateview);
     dateview.open();
 
     stub(dateview.calendar, {navigateDown: dateview.calendar.navigateDown});
@@ -635,7 +594,6 @@ test("Enter should navigate down", function() {
         depth: "month"
     });
 
-    createDatePickerCalendar(dateview);
     dateview.open();
 
     stub(dateview.calendar, {navigateDown: dateview.calendar.navigateDown});
@@ -660,7 +618,6 @@ test("Esc should close dateView", function() {
         depth: "month"
     });
 
-    createDatePickerCalendar(dateview);
     dateview.open();
 
     stub(dateview.popup, "close");
@@ -694,7 +651,6 @@ test("click on selected date should close the dateView", 1, function() {
         }
     });
 
-    createDatePickerCalendar(dateview);
     dateview.value(new Date());
     dateview.open();
 

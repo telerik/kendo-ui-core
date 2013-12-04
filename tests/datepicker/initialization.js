@@ -1,7 +1,7 @@
 (function() {
 
 var DateView = kendo.DateView;
-var dateview, dateview2;
+var dateview;
 var anchor;
 var div;
 
@@ -21,113 +21,28 @@ module("kendo.ui.DateView initialization", {
             dateview.destroy();
         }
 
-        if (dateview2) {
-            dateview2.destroy();
-        }
         kendo.destroy(QUnit.fixture);
     }
-});
-
-test("DateView re-assigns shared calendar", function() {
-    var options = {
-        anchor: anchor,
-        value: new Date (2000, 10, 10),
-        footer: '#= kendo.toString(data,"D") #',
-        min: new Date (1900, 10, 10),
-        max: new Date (2100, 10, 10),
-        change: function() {},
-        open: function() {},
-        close: function() {},
-        start: "month",
-        depth: "month",
-        culture: "bg-BG"
-    };
-
-    dateview = new DateView({
-        value: new Date(),
-        min: new Date(),
-        max: new Date(),
-        footer: '#= kendo.toString(data,"D") #',
-        start: "month",
-        depth: "month"
-    });
-
-    dateview2 = new DateView(options);
-
-    dateview2._calendar();
-
-    var calendar = dateview.calendar,
-        popup = dateview2.popup;
-
-    equal(calendar.options.culture, options.culture);
-    equal(+calendar.options.min, +options.min);
-    equal(+calendar.options.max, +options.max);
-    equal(calendar._events["change"][0], options.change);
-    equal(calendar.element.data("dateView"), dateview2);
-
-    equal(popup.options.anchor, dateview2.options.anchor);
-    equal(popup._events["open"][0], dateview2.options.open);
-    equal(popup._events["close"][0], dateview2.options.close);
-});
-
-test("DateView build templates", function() {
-    dateview = new DateView();
-
-    ok(dateview.month);
-    ok(dateview.month.content);
-    ok(dateview.month.empty);
-});
-
-test("DateView build footer template", function() {
-    dateview = new DateView({
-        footer: '#= kendo.toString(data,"D") #'
-    });
-
-    ok(dateview.footer);
-});
-
-test("DateView's footer template honors options.culture", function() {
-    dateview = new DateView({
-        culture: "bg-BG"
-    });
-
-    var today = new Date();
-
-    equal(dateview.footer(today), kendo.toString(today, "D", "bg-BG"));
-});
-
-test("DateView sets the calendar.month templates", function() {
-    dateview = new DateView({
-        month: {
-            content: "<div>#=data.value#</div>"
-        }
-    });
-
-    dateview._calendar();
-
-    equal(dateview.calendar.month.content({}), dateview.month.content({}));
-});
-
-test("DateView changes the footer using its footer template", function() {
-    dateview = new DateView({
-        footer: "template"
-    });
-
-    dateview._calendar();
-
-    equal(dateview.calendar._today.html(), "template");
-});
-
-test("DateView should create shared calendar", function() {
-    dateview = new DateView();
-
-    ok(dateview.calendar);
 });
 
 test("DateView should create popup instance", function() {
     dateview = new DateView();
 
     ok(dateview.popup);
+});
+
+test("DateView does not create calendar on init", function() {
+    dateview = new DateView();
+
+    ok(!dateview.calendar);
+});
+
+test("DateView creates calendar on first open", function() {
+    dateview = new DateView();
+
+    dateview.open();
+
+    ok(dateview.calendar);
 });
 
 test("DateView persist focused value when calendar navigate", function() {
@@ -228,19 +143,16 @@ test("dateView should have correct options", function() {
     notEqual(options.change, dpOptions.change);
 });
 
-test("dateView onChange should call value()", function() {
-    var called = false,
-        datepicker = input.kendoDatePicker().data("kendoDatePicker");
+test("dateview updates datepicker on calendar change", function() {
+    var date = new Date(2010, 10, 10);
+    var datepicker = new DatePicker(input, { value: new Date(2000, 10, 10) });
+    var dateview = datepicker.dateView;
 
-    stub(datepicker, {
-        _change: datepicker.value,
-        close: datepicker.close
-    });
+    datepicker.open();
+    dateview.calendar.value(date);
+    dateview.calendar.trigger("change");
 
-    $.proxy(datepicker.dateView.options.change, datepicker.dateView.calendar)();
-
-    equal(datepicker.calls("_change"), 1);
-    equal(datepicker.calls("close"), 1);
+    deepEqual(datepicker.value(), date);
 });
 
 test("DatePicker wire icon click", function() {

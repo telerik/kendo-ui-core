@@ -5,12 +5,14 @@ var DatePicker = kendo.ui.DatePicker,
 
 module("kendo.ui.DatePicker ARIA", {
     setup: function() {
+        kendo.effects.disable();
         input = $("<input id='test' />").appendTo(QUnit.fixture);
         instance = new DatePicker(input, {
             ARIATemplate: "#=kendo.toString(current, 'D')#"
         });
     },
     teardown: function() {
+        kendo.effects.enable();
         instance.destroy();
         kendo.destroy(QUnit.fixture);
     }
@@ -65,7 +67,9 @@ test("DatePicker adds aria-controls to the toggle button", function() {
     equal(instance._dateIcon.attr("aria-controls"), "test_dateview");
 });
 
-test("DatePicker sets id to the shared calendar", function() {
+test("DatePicker sets id to the calendar", function() {
+    instance.dateView._calendar();
+
     ok(instance.dateView.calendar.element.attr("id"));
 });
 
