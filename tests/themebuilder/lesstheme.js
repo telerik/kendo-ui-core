@@ -15,16 +15,17 @@
         COLOR = "color",
         extend = $.extend;
 
-    module("themebuilder LESS themes (web)", {
-        teardown: function() {
-            $("#kendo-themebuilder, head style[title='themebuilder']").remove();
-        }
-    });
+    module("themebuilder LESS themes (web)");
 
     function createConstants(constants) {
         return new LessTheme({
             constants: constants
         });
+    }
+
+    function updateCssAndInfer(constants, css, doc) {
+        constants._updateStyleSheet(css, doc);
+        constants.infer(doc);
     }
 
     test("deserialize() single variable", function() {
@@ -70,95 +71,85 @@
         equal(theme.constants["@foo"].value, "#cccccc");
     });
 
-    test("infer() infers nested className selectors", function() {
+    sandboxed_test("infer() infers nested className selectors", function(win, doc) {
         var constants = createConstants({
             "@foo": constant(".k-widget .k-input", "font-size")
         });
 
-        constants._updateStyleSheet(".k-widget { font-size: 8px; }\n.k-widget .k-input { font-size: 10px; }", document);
-
-        constants.infer(document);
+        updateCssAndInfer(constants, ".k-widget { font-size: 8px; }\n.k-widget .k-input { font-size: 10px; }", doc);
 
         equal(constants.constants["@foo"].value, "10px");
     });
 
-    test("infer() selectors with multiple classNames", function() {
+    sandboxed_test("infer() selectors with multiple classNames", function(wnd, doc) {
         var constants = createConstants({
             "@foo": constant(".foo.bar", "font-size")
         });
 
-        constants._updateStyleSheet(".foo { font-size: 8px; }\n.foo.bar { font-size: 10px; }", document);
-
-        constants.infer(document);
+        updateCssAndInfer(constants, ".foo { font-size: 8px; }\n.foo.bar { font-size: 10px; }", doc);
 
         equal(constants.constants["@foo"].value, "10px");
     });
 
-    test("infer() infers nested tagName selectors", function() {
+    sandboxed_test("infer() infers nested tagName selectors", function(win, doc) {
         var constants = createConstants({
             "@foo": constant("dl dt", "font-size")
         });
 
-        constants._updateStyleSheet("dl { font-size: 8px; }\ndl dt { font-size: 10px; }", document);
-
-        constants.infer(document);
+        updateCssAndInfer(constants, "dl { font-size: 8px; }\ndl dt { font-size: 10px; }", doc);
 
         equal(constants.constants["@foo"].value, "10px");
     });
 
-    test("infer() infers basic property value", function() {
+    sandboxed_test("infer() infers basic property value", function(win, doc) {
         var constants = createConstants({
             "@foo": constant(".k-widget", "font-size")
         });
 
-        constants._updateStyleSheet(".k-widget { font-size: 9px; }", document);
-
-        constants.infer(document);
+        updateCssAndInfer(constants, ".k-widget { font-size: 9px; }", doc);
 
         equal(constants.constants["@foo"].value, "9px");
     });
 
-    test("infer() infers colors correctly", function() {
+    sandboxed_test("infer() infers colors correctly", function(win, doc) {
         var constants = createConstants({
             "@foo": constant(".k-widget", "background-color")
         });
 
-        constants._updateStyleSheet(".k-widget { background-color: #f11f11; }", document);
-
-        constants.infer(document);
+        updateCssAndInfer(constants, ".k-widget { background-color: #f11f11; }", doc);
 
         equal(constants.constants["@foo"].value, "#f11f11");
     });
 
-    test("infer() with multiple constants", function() {
+    sandboxed_test("infer() with multiple constants", function(wnd, doc) {
         var constants = createConstants({
             "@foo": constant(".k-widget", "background-color"),
             "@bar": constant(".k-widget", "border-color")
         });
 
         constants._updateStyleSheet(
-            ".k-widget { background-color: #f11f11; border-color: #f00f00; }", document
+            ".k-widget { background-color: #f11f11; border-color: #f00f00; }", doc
         );
 
-        constants.infer(document);
+        constants.infer(doc);
 
         equal(constants.constants["@foo"].value, "#f11f11");
         equal(constants.constants["@bar"].value, "#f00f00");
     });
 
-    test("infer() of border-radius", function() {
+    sandboxed_test("infer() of border-radius", function(wnd, doc) {
         var constants = createConstants({
             "@foo": constant(".k-widget", "border-radius")
         });
 
-        constants._updateStyleSheet(".k-widget { border-radius: 3px; }", document);
+        constants._updateStyleSheet(".k-widget { border-radius: 3px; }", doc);
 
-        constants.infer(document);
+        constants.infer(doc);
 
         equal(constants.constants["@foo"].value, "3px");
     });
 
-    test("infer() of computed constants", function() {
+    sandboxed_test("infer() of computed constants", function(win, doc) {
         var constants = createConstants({
             "@foo": {
                 infer: function() {
@@ -167,14 +158,12 @@
             }
         });
 
-        constants._updateStyleSheet(".bar { font-size: 20px; }", document);
-
-        constants.infer(document);
+        updateCssAndInfer(constants, ".bar { font-size: 20px; }", doc);
 
         equal(constants.constants["@foo"].value, "10px");
     });
 
-    test("infer() of readonly constants with value", function() {
+    sandboxed_test("infer() of readonly constants with value", function(win, doc) {
         var constants = createConstants({
             "@foo": {
                 readonly: true,
@@ -182,21 +171,17 @@
             }
         });
 
-        constants._updateStyleSheet(".bar { font-size: 20px; }", document);
-
-        constants.infer(document);
+        updateCssAndInfer(constants, ".bar { font-size: 20px; }", doc);
 
         equal(constants.constants["@foo"].value, "10px");
     });
 
-    test("infer() of selector with tagName", function() {
+    sandboxed_test("infer() of selector with tagName", function(win, doc) {
         var constants = createConstants({
             "@foo": constant("a.foo", "font-size")
         });
 
-        constants._updateStyleSheet(".foo:link { font-size: 20px; } .foo { font-size: 10px; }", document);
-
-        constants.infer(document);
+        updateCssAndInfer(constants, ".foo:link { font-size: 20px; } .foo { font-size: 10px; }", doc);
 
         equal(constants.constants["@foo"].value, "20px");
     });
