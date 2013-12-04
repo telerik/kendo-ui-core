@@ -253,15 +253,17 @@
             {
                 json["workDayEnd"] = WorkDayEnd;
             }
-
-            if (!WorkDayCommand)
-            {
-                json["workDayCommand"] = WorkDayCommand;
-            }
-      
+ 
             if (!Footer)
             {
                 json["footer"] = Footer;
+            }
+
+            if (!WorkDayCommand && Footer)
+            {
+                json["footer"] = new Dictionary<string, object>() {
+                    { "command", false }
+                };
             }
 
             if (WorkWeekStart != null)
