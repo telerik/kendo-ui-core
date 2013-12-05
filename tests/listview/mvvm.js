@@ -23,11 +23,12 @@
         },
         teardown: function() {
             window.dataBound = null;
+            kendo.destroy(QUnit.fixture);
         }
     });
 
     test("initializes a listview when data role is listview", function() {
-        var dom = $('<div data-role="listview"/>');
+        var dom = $('<div data-role="listview"/>').appendTo(QUnit.fixture);
 
         kendo.bind(dom);
 
@@ -35,7 +36,7 @@
     });
 
     test("initalizes data source", function() {
-        var dom = $('<div data-role="listview" data-bind="source:items" />');
+        var dom = $('<div data-role="listview" data-bind="source:items" />').appendTo(QUnit.fixture);
 
         kendo.bind(dom, { items: ["foo", "bar"] } );
 
@@ -44,7 +45,7 @@
     });
 
     test("binding listview initialized before binding", function() {
-        var dom = $('<div data-bind="source:items" />');
+        var dom = $('<div data-bind="source:items" />').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
 
@@ -56,7 +57,7 @@
     });
 
     test("binding listview initialized after binding", function() {
-        var dom = $('<div data-bind="source:items" />');
+        var dom = $('<div data-bind="source:items" />').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
 
@@ -68,7 +69,7 @@
     });
 
     test("binding template", function() {
-        var dom = $('<div data-role="listview" data-template="template" data-bind="source:items" />');
+        var dom = $('<div data-role="listview" data-template="template" data-bind="source:items" />').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -78,7 +79,7 @@
     });
 
     test("binding template containing binding attributes", function() {
-        var dom = $('<div data-role="listview" data-template="template-with-attributes" data-bind="source:items" />');
+        var dom = $('<div data-role="listview" data-template="template-with-attributes" data-bind="source:items" />').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -88,7 +89,7 @@
     });
 
     test("binding altTemplate", function() {
-        var dom = $('<div data-role="listview" data-template="template" data-alt-template="altTemplate" data-bind="source:items" />');
+        var dom = $('<div data-role="listview" data-template="template" data-alt-template="altTemplate" data-bind="source:items" />').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -98,7 +99,7 @@
     });
 
     test("binding editTemplate", function() {
-        var dom = $('<div data-role="listview" data-template="template" data-edit-template="editTemplate" data-bind="source:items" />');
+        var dom = $('<div data-role="listview" data-template="template" data-edit-template="editTemplate" data-bind="source:items" />').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -110,7 +111,7 @@
     });
 
     test("updating an item from the data source updates the corresponding listview item", function() {
-        var dom = $('<div data-role="listview" data-template="template-with-attributes" data-bind=" source:items" />');
+        var dom = $('<div data-role="listview" data-template="template-with-attributes" data-bind=" source:items" />').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -122,7 +123,7 @@
     });
 
     test("destroys binding targets when datasource changes", function() {
-        var dom = $('<div data-role="listview" data-template="template-with-attributes" data-bind=" source:items" />');
+        var dom = $('<div data-role="listview" data-template="template-with-attributes" data-bind=" source:items" />').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -133,7 +134,7 @@
     });
 
     test("destroys detaches the events to widget", function() {
-        var dom = $('<div data-role="listview" data-bind="source:items" />');
+        var dom = $('<div data-role="listview" data-bind="source:items" />').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -146,7 +147,7 @@
     });
 
     test("dataBound event is raised if attached as option", 2, function() {
-        var dom = $('<div data-role="listview" data-bound="dataBound" data-bind="source:items" />');
+        var dom = $('<div data-role="listview" data-bound="dataBound" data-bind="source:items" />').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({
             items: [{text:"foo"}, {text:"bar"}]
@@ -156,7 +157,7 @@
     });
 
     test("dataBound event is raised if attached as option to a already initialized listview", 1, function() {
-        var dom = $('<div data-bound="dataBound" data-bind="source:items" />').kendoListView();
+        var dom = $('<div data-bound="dataBound" data-bind="source:items" />').appendTo(QUnit.fixture).kendoListView();
 
         var observable = kendo.observable({
             items: [{text:"foo"}, {text:"bar"}]
@@ -167,7 +168,7 @@
 
 
     test("binding visible to true shows the listview", function() {
-        var dom = $('<div data-role="listview" data-bind="visible: visible"></div>');
+        var dom = $('<div data-role="listview" data-bind="visible: visible"></div>').appendTo(QUnit.fixture);
 
         kendo.bind(dom, { visible: true });
 
@@ -177,7 +178,7 @@
     });
 
     test("binding visible to false hides the listview", function() {
-        var dom = $('<div data-role="listview" data-bind="visible: visible"></div>');
+        var dom = $('<div data-role="listview" data-bind="visible: visible"></div>').appendTo(QUnit.fixture);
 
         kendo.bind(dom, { visible: false });
 
@@ -187,7 +188,7 @@
     });
 
     test("binding invisible to true hides the listview", function() {
-        var dom = $('<div data-role="listview" data-bind="invisible: invisible"></div>');
+        var dom = $('<div data-role="listview" data-bind="invisible: invisible"></div>').appendTo(QUnit.fixture);
 
         kendo.bind(dom, { invisible: true });
 
@@ -197,7 +198,7 @@
     });
 
     test("binding invisible to false shows the listview", function() {
-        var dom = $('<div data-role="listview" data-bind="invisible: invisible"></div>');
+        var dom = $('<div data-role="listview" data-bind="invisible: invisible"></div>').appendTo(QUnit.fixture);
 
         kendo.bind(dom, { invisible: false });
 
@@ -207,7 +208,7 @@
     });
 
     test("setting autobind when bound to DataSource", function() {
-        var dom = $('<div data-role="listview" data-bind="source:dataSource" data-auto-bind="false" data-template="template" />');
+        var dom = $('<div data-role="listview" data-bind="source:dataSource" data-auto-bind="false" data-template="template" />').appendTo(QUnit.fixture);
 
         var dataSource = new kendo.data.DataSource({
             data: [{text:"foo"}, {text:"bar"}]
@@ -224,7 +225,7 @@
     });
 
     test("binding selectable to true", function() {
-        var dom = $('<div data-role="listview" data-selectable="true"></div>');
+        var dom = $('<div data-role="listview" data-selectable="true"></div>').appendTo(QUnit.fixture);
 
         kendo.bind(dom);
 
@@ -234,7 +235,7 @@
     });
 
     test("binding navigatable to true", function() {
-        var dom = $('<div data-role="listview" data-navigatable="true"></div>');
+        var dom = $('<div data-role="listview" data-navigatable="true"></div>').appendTo(QUnit.fixture);
 
         kendo.bind(dom);
 
@@ -244,7 +245,7 @@
     });
 
     test("binds event handlers in template to root view model when item changes", function() {
-        var dom = $('<div data-role="listview" data-bind="source:dataSource"  data-template="template-with-events" />');
+        var dom = $('<div data-role="listview" data-bind="source:dataSource"  data-template="template-with-events" />').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({
             dataSource: [{ text:"foo" }]
@@ -264,7 +265,7 @@
     });
 
     test("setOptions changes template", function() {
-        var dom = $('<div data-role="listview" data-template="template" data-bind="source:items" />');
+        var dom = $('<div data-role="listview" data-template="template" data-bind="source:items" />').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 

@@ -9,7 +9,7 @@
             selectable: true,
             dataSource: dataSource = new DataSource({ data: [1,2,3,4,5] })
         }, options);
-        return $("<ul id='test'/>").kendoListView(options);
+        return $("<ul id='test'/>").appendTo(QUnit.fixture).kendoListView(options);
     }
 
     module("listview ARIA", {

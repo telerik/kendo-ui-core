@@ -25,8 +25,8 @@
             $("<div id=\"pager\"></div>").appendTo(QUnit.fixture);
         },
         teardown: function() {
-            kendo.ns = "";
             kendo.destroy(QUnit.fixture);
+            kendo.ns = "";
             $("#pager").remove();
             ul.remove();
         }
@@ -52,7 +52,7 @@
     });
 
     test("options as array is used for dataSource", function() {
-        var div = $("<div></div>").kendoListView([1,2,3]),
+        var div = $("<div></div>").appendTo(QUnit.fixture).kendoListView([1,2,3]),
         dataSource = div.data("kendoListView").dataSource.data();
 
         equal(dataSource.length, 3);
@@ -298,7 +298,7 @@
     });
 
     test("resetting dataSource detaches the previouse events",1, function() {
-        var listView = new kendo.ui.ListView($("<ul/>"), { template: "<li></li>" });
+        var listView = new kendo.ui.ListView($("<ul/>").appendTo(QUnit.fixture), { template: "<li></li>" });
 
         var dataSource = listView.dataSource;
         listView._dataSource();
@@ -312,7 +312,7 @@
     });
 
     test("resetting DataSource rebinds the widget", function() {
-        var listView = new kendo.ui.ListView($("<ul/>"), { template: "<li></li>" });
+        var listView = new kendo.ui.ListView($("<ul/>").appendTo(QUnit.fixture), { template: "<li></li>" });
 
         listView.setDataSource(new kendo.data.DataSource({
             data:[{text: 1, value: 1}, {text:2, value:2}]
