@@ -3310,7 +3310,7 @@ kendo_module({
                     index: categoryIx,
                     series: series,
                     dataItem: series.data[categoryIx]
-                });
+                }, state);
             }
 
             return options;
