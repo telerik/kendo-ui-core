@@ -64,7 +64,7 @@
 
         var div = $("<div style='height:2000px' />").appendTo(QUnit.fixture.height(2010)),
             scrollPosition = 300;
-        
+
         $(QUnit.fixture[0].ownerDocument).scrollTop(scrollPosition);
 
         window.maximize();
@@ -301,9 +301,6 @@
 
     test("content() destroys nested widgets", function() {
 
-        console.warn("editable tests leave k-popup elements in the DOM");
-        $(".k-popup").remove();
-
         var dialog = createWindow();
 
         var ddl = $("<input />").appendTo(dialog.element);
@@ -342,7 +339,7 @@
         equal(+wrapper(firstWindow).css("zIndex"), +wrapper(secondWindow).css("zIndex") + 2);
     });
 
-        
+
     test("toFront() overlays iframes of windows with lower z-index", function() {
         var firstWindow = createWindow(),
             secondWindow = createWindow({
@@ -353,7 +350,7 @@
 
         ok(secondWindow.element.find("> .k-overlay").length);
     });
-    
+
     test("toFront() removes overlay on foremost window", function() {
         var firstWindow = createWindow({
                 content: "http://www.telerik.com/"
@@ -372,7 +369,7 @@
             secondWindow1 = createWindow({
                 modal: true
             });
-            
+
             ok(parseInt(firstWindow1.wrapper.css("zIndex")) < parseInt($(".k-overlay").css("zIndex")));
     });
 
@@ -671,9 +668,6 @@
     });
 
     test("destroying a window destroys nested components", function() {
-
-        console.warn("Tooltip (test) leaves .k-animation-container element in the DOM");
-        $("body > .k-animation-container").remove();
 
         var html = "<div id='dialog'><select><option>foo</option></select></div>";
 
