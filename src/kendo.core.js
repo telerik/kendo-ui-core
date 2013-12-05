@@ -2880,19 +2880,25 @@ function pad(number, digits, end) {
     kendo.widgetInstance = function(element, suite) {
         var role = element.data(kendo.ns + "role");
 
-        // HACK!!! mobile view scroller widgets are instantiated on data-role="content" elements. We need to discover them when resizing.
-        if (role === "content") {
-            role = "scroller";
-        }
+        if (role) {
+            // HACK!!! mobile view scroller widgets are instantiated on data-role="content" elements. We need to discover them when resizing.
+            if (role === "content") {
+                role = "scroller";
+            }
 
-        if (!suite) {
-            suite = { roles: $.extend({}, kendo.mobile.ui.roles, kendo.dataviz.ui.roles, kendo.ui.roles) };
-        }
+            if (!suite) {
+                suite = { roles: $.extend({}, kendo.mobile.ui.roles, kendo.dataviz.ui.roles, kendo.ui.roles) };
+            }
 
-        var widget = suite.roles[role];
+            var widget = suite.roles[role];
 
-        if (widget) {
-            return element.data("kendo" + widget.fn.options.prefix + widget.fn.options.name);
+            if (role.indexOf(".") >= 0) {
+                widget = kendo.getter(role)(window);
+            }
+
+            if (widget) {
+                return element.data("kendo" + widget.fn.options.prefix + widget.fn.options.name);
+            }
         }
     };
 
