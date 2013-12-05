@@ -78,6 +78,12 @@ module.exports = function(grunt) {
         tests = [testsOption];
     }
 
+    var reporters = [ 'progress' ];
+
+    if (grunt.option('junit-results')) {
+        reporters.push('junit');
+    }
+
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -268,7 +274,7 @@ module.exports = function(grunt) {
 
                     exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js' ],
 
-                    reporters: ['progress', 'osx', 'junit' ],
+                    reporters: reporters,
 
                     junitReporter: {
                       outputFile: grunt.option('junit-results')
