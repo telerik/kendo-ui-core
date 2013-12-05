@@ -29,6 +29,8 @@
         },
 
         teardown: function() {
+            debugger;
+
             kendo.destroy(QUnit.fixture);
         }
     });

@@ -1899,6 +1899,14 @@ kendo_module({
                 that._editor.destroy();
             }
 
+            if (this._moveDraggable) {
+                this._moveDraggable.destroy();
+            }
+
+            if (this._resizeDraggable) {
+                this._resizeDraggable.destroy();
+            }
+
             element = that.element
                 .add(that.wrapper)
                 .add(that.toolbar)
@@ -3211,14 +3219,6 @@ kendo_module({
 
         destroy: function() {
             Widget.fn.destroy.call(this);
-
-            if (this._moveDraggable) {
-                this._moveDraggable.destroy();
-            }
-
-            if (this._resizeDraggable) {
-                this._resizeDraggable.destroy();
-            }
 
             kendo.destroy(this.wrapper);
         },

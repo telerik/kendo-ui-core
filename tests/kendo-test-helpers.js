@@ -144,7 +144,7 @@ $('head')
         }
 
         if (widgets.length) {
-            console.error.apply(console, [ details.module, details.name, 'active widgets left'].concat(widgets.map(function(widget) { return widget.options.name; })));
+            console.error.apply(console, [ details.module, details.name, 'active widgets left'].concat(widgets.map(function(widget) { return { name: widget.options.name, element: widget.element[0].className }; })));
             widgets = [];
         }
 

@@ -26,6 +26,7 @@
             container = $(container).addClass("k-scheduler");
         },
         teardown: function() {
+            container.data("kendoagenda").destroy();
             kendo.destroy(QUnit.fixture);
         }
     });

@@ -5,12 +5,15 @@
         setup: function() {
         },
         teardown: function() {
+            if (agenda) {
+                agenda.destroy();
+            }
             kendo.destroy(QUnit.fixture);
         }
     });
 
     function agendaView(options) {
-        var agenda = new kendo.ui.AgendaView($("<div>").appendTo(QUnit.fixture), options);
+        agenda = new kendo.ui.AgendaView($("<div>").appendTo(QUnit.fixture), options);
 
         return agenda;
     }
@@ -595,7 +598,14 @@
         equal(rows.filter("[aria-selected=false]").length, rows.length);
     });
 
-    module("mobile phone agenda view", { });
+    module("mobile phone agenda view", {
+        teardown: function() {
+            if (agenda) {
+                agenda.destroy();
+            }
+            kendo.destroy(QUnit.fixture);
+        }
+    });
 
     test("date cell has colspan equal to the number of detail columns", function() {
         var agenda = agendaView({ date: new Date("2013/06/06 00:00"), mobile: "phone" });
