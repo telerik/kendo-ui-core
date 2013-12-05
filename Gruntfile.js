@@ -210,7 +210,7 @@ module.exports = function(grunt) {
                         'download-builder/scripts/script-resolver.js',
                         { pattern: 'download-builder/config/kendo-config.json', included: false },
                         'tests/diagram/common.js'
-                    ].push(tests),
+                    ].concat(tests),
 
                     exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js' ],
 
