@@ -23,7 +23,10 @@
         view = new ViewStub();
     }
 
-    module("Linear Scale/ Ranges");
+    // ------------------------------------------------------------
+    module("Linear Scale/ Ranges", {
+        teardown: destroyMeasureBox
+    });
 
     test("render range from 10 to 20", function() {
         createScale({
@@ -59,7 +62,10 @@
         arrayClose([rect.x1 , rect.y1, rect.x2, rect.y2], [39, 238, 44, 276], TOLERANCE);
     });
 
-    module("RadialScale / Configuration");
+    // ------------------------------------------------------------
+    module("Linear Scale / Configuration", {
+        teardown: destroyMeasureBox
+    });
 
     test("render scale with default min, max and step", function() {
         createScale({ });
@@ -111,7 +117,10 @@
         equal(linearScale.options.minorUnit, 10);
     });
 
-    module("Linear Scale/ Ranges/ Configuration");
+    // ------------------------------------------------------------
+    module("Linear Scale/ Ranges/ Configuration", {
+        teardown: destroyMeasureBox
+    });
 
     test("render color", function() {
         createScale({

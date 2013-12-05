@@ -45,6 +45,7 @@
                 dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
             },
             teardown: function() {
+                destroyMeasureBox();
                 dataviz.Text.fn.options.font = this.font;
             }
         });
@@ -139,6 +140,7 @@
                 dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
             },
             teardown: function() {
+                destroyMeasureBox();
                 dataviz.Text.fn.options.font = this.font;
             }
         });
@@ -169,6 +171,7 @@
                 dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
             },
             teardown: function() {
+                destroyMeasureBox();
                 dataviz.Text.fn.options.font = this.font;
             }
         });
@@ -213,6 +216,7 @@
                 track = view.log.rect[1];
             },
             teardown: function() {
+                destroyMeasureBox();
                 dataviz.Text.fn.options.font = this.font;
             }
         });

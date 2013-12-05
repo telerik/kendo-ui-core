@@ -18,6 +18,7 @@
         }
     });
 
+    // ------------------------------------------------------------
     module("RadialScale", {
         setup: function() {
             radialScale = new RadialScale({
@@ -35,7 +36,8 @@
             radialScale.reflow(chartBox);
 
             ring = radialScale.ring;
-        }
+        },
+        teardown: destroyMeasureBox
     });
 
     test("reflow calculates scale ring position", function() {
@@ -107,6 +109,7 @@
         equal(radialScale.slotAngle(106), 48);
     });
 
+    // ------------------------------------------------------------
     module("RadialScale / Reverse", {
         setup: function() {
             radialScale = new RadialScale({
@@ -119,7 +122,8 @@
                 startAngle: 0,
                 reverse: true
             });
-        }
+        },
+        teardown: destroyMeasureBox
     });
 
     test("slotAngle() returns startAngle/endAngle for extreme values", function() {
@@ -167,7 +171,10 @@
         view = new ViewStub();
     }
 
-    module("RadialScale / Ranges");
+    // ------------------------------------------------------------
+    module("RadialScale / Ranges", {
+        teardown: destroyMeasureBox
+    });
 
     test("render default range", function() {
         createScale({
@@ -256,7 +263,10 @@
         equal(style.fillOpacity, 0.2);
     });
 
-    module("RadialScale / Configuration");
+    // ------------------------------------------------------------
+    module("RadialScale / Configuration", {
+        teardown: destroyMeasureBox
+    });
 
     test("render scale with default min, max and majorUnit", function() {
         createScale({ });

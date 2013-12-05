@@ -18,7 +18,9 @@ function createPlotArea(options) {
     box = plotArea.box;
 }
 
-module("PlotArea / Vertical");
+module("PlotArea / Vertical", {
+    teardown: destroyMeasureBox
+});
 
 test("getBox return centered box", function() {
     plotArea = new LinearGaugePlotArea();
@@ -30,7 +32,9 @@ test("getBox return centered box", function() {
     deepEqual([box.x1, box.y1, box.x2, box.y2], [100, 0, 200, 300]);
 });
 
-module("PlotArea / Horizontal");
+module("PlotArea / Horizontal", {
+    teardown: destroyMeasureBox
+});
 
 test("getBox return centered box", function() {
     plotArea = new LinearGaugePlotArea();
@@ -54,7 +58,8 @@ module("PlotArea / Configuration", {
                 }
             }
         });
-    }
+    },
+    teardown: destroyMeasureBox
 });
 
 test("renders background", function() {

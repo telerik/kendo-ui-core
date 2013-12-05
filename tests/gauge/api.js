@@ -19,13 +19,16 @@ function createGauge(options) {
     gauge = gaugeElement.data("kendoRadialGauge");
 }
 
+function destroyGauge() {
+    kendo.destroy(gaugeElement);
+    destroyMeasureBox();
+}
+
 module("Radial Gauge / API", {
     setup: function() {
         createGauge();
     },
-    teardown: function() {
-        kendo.destroy(gaugeElement);
-    }
+    teardown: destroyGauge
 });
 
 test("value() method calls pointer.value()", function() {
@@ -81,7 +84,7 @@ module("Radial Gauge / API / Export", {
         supportsCanvas = dataviz.supportsCanvas;
     },
     teardown: function() {
-        kendo.destroy(gaugeElement);
+        destroyGauge();
         dataviz.SVGView = SVGView;
         dataviz.CanvasView = CanvasView;
         dataviz.supportsCanvas = supportsCanvas;
@@ -176,9 +179,7 @@ module("Linear Gauge / API", {
 
         gauge = gaugeElement.data("kendoLinearGauge");
     },
-    teardown: function() {
-        kendo.destroy(gaugeElement);
-    }
+    teardown: destroyGauge
 });
 
 test("value() method calls pointer.value()", function() {
