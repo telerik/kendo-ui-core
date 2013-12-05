@@ -3,7 +3,15 @@
 
     module("switch mvvm", {
         setup: function() {
+            window.change = function() {
+                ok(true);
+            }
+
             dom = $('<input data-bind="checked:checked" />');
+        },
+
+        teardown: function() {
+            delete window.change;
         }
     });
 
@@ -90,10 +98,6 @@
 
         equal(destroy.calls("destroy"), 1);
     });
-
-    window.change = function() {
-        ok(true);
-    }
 
     test("change event is raised if attached as option", 1, function() {
         var dom = $('<input data-role="switch" data-change="change" />');
