@@ -4,11 +4,16 @@ module.exports = function(grunt) {
 
     var browsers = ['Chrome'];
 
-    var tests = grunt.option('tests') || 'tests/**/*.js';
+    var tests = [ "tests/**/*.js" ];
 
     var browserOption = grunt.option('browser');
+    var testsOption = grunt.option('tests');
     var jqueryOption = grunt.option('jquery');
     var jquery = 'src/jquery.js';
+
+    if (testsOption) {
+        tests = [ testsOption ];
+    }
 
     if (jqueryOption) {
         jquery = "http://code.jquery.com/jquery-" + jqueryOption + ".min.js";
@@ -35,6 +40,7 @@ module.exports = function(grunt) {
                     frameworks: ['qunit'],
                     files: [
                         { pattern: 'styles/**/*.*', watched: true, included: false },
+                        { pattern: 'tests/editor/editorStyles.css', included: false },
                         { pattern: 'tests/**/*-fixture.html' },
                         jquery,
                         'tests/jquery.mockjax.js',
@@ -139,8 +145,6 @@ module.exports = function(grunt) {
                         "src/editor/formatting.js",
                         "src/editor/toolbar.js",
                         "src/editor/tables.js",
-
-                        'tests/qunit/addons/close-enough/qunit-close-enough.js',
                         'tests/kendo-test-helpers.js',
                         'tests/**/test-helper.js',
                         'demos/mvc/content/shared/js/less.js',
