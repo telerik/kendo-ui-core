@@ -12,8 +12,6 @@ function destroy(input) {
     if (cb) {
         cb.destroy();
     }
-
-    input.closest(".k-widget").remove();
 }
 
 module("kendo.ui.ComboBox Cascading ComboBoxes", {
@@ -21,12 +19,15 @@ module("kendo.ui.ComboBox Cascading ComboBoxes", {
         kendo.effects.disable();
         parent = $("<input id='parent' />").appendTo(QUnit.fixture);
         child = $("<input />").appendTo(QUnit.fixture);
+        third = $("<input />").appendTo(QUnit.fixture);
     },
     teardown: function() {
         kendo.effects.enable();
+
         destroy(parent);
         destroy(child);
         destroy(third);
+
         kendo.destroy(QUnit.fixture);
    }
 });
@@ -350,8 +351,6 @@ test("Child on third level is disabled", function() {
         ]
     });
 
-    third = $("<input/>").appendTo(QUnit.fixture);
-
     var thirdCB = third.kendoComboBox({
         cascadeFrom: "child", //id of the child
         dataTextField: "childID",
@@ -369,9 +368,6 @@ test("Child on third level is disabled", function() {
 
     equal(thirdCB.value(), "");
     equal(thirdCB.element.attr("disabled"), "disabled");
-
-    thirdCB.popup.element.remove();
-    thirdCB.element.closest(".k-widget").remove();
 });
 
 test("Preserve filter expressions of the child combo", function() {
