@@ -11,8 +11,7 @@ module("kendo.ui.Calendar MVVM", {
     teardown: function() {
         delete window.change;
 
-        dom.data("kendoDatePicker").destroy();
-        kendo.destroy(QUnit.fixture);
+        kendo.destroy(dom);
     }
 });
 

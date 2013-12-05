@@ -15,13 +15,14 @@ module("kendo.ui.DateView initialization", {
     },
     teardown: function() {
         kendo.effects.enable();
-        kendo.ns = "";
 
         if (dateview) {
             dateview.destroy();
         }
 
         kendo.destroy(QUnit.fixture);
+
+        kendo.ns = "";
     }
 });
 
@@ -74,9 +75,11 @@ module("kendo.ui.DatePicker initialization", {
         input = $("<input />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.ns = "";
         kendo.effects.enable();
-        input.data("kendoDatePicker").destroy();
+
+        kendo.destroy(QUnit.fixture);
+
+        kendo.ns = "";
     }
 });
 

@@ -2,12 +2,12 @@
 
 var DateView = kendo.DateView,
     dateview,
-    div;
+    input;
 
 module("kendo.ui.DateView API", {
     setup: function() {
         kendo.effects.disable();
-        div = $("<div />").appendTo(QUnit.fixture);
+        input = $("<input />").appendTo(QUnit.fixture);
     },
     teardown: function() {
         kendo.effects.enable();
@@ -24,7 +24,7 @@ test("value method should call calendar value and set dateView._value", function
     dateview = new DateView({
         value: date,
         start: "month",
-        anchor: $("<input/>"),
+        anchor: input,
         min: new Date (1900, 10, 10),
         max: new Date (2100, 10, 10),
         depth: "month"

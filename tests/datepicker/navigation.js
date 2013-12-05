@@ -4,31 +4,27 @@ var DateView = kendo.DateView,
     keys = kendo.keys,
     dateview,
     anchor,
-    input,
-    div;
+    input;
 
 module("kendo.ui.DatePicker API", {
     setup: function() {
         kendo.effects.disable();
 
         kendo.ns = "kendo-";
-        div = $("<div />").appendTo(QUnit.fixture);
+
         input = $("<input />").appendTo(QUnit.fixture);
         anchor = $("<input />").appendTo(QUnit.fixture);
     },
     teardown: function() {
         kendo.effects.enable();
-        kendo.ns = "";
 
         if (dateview) {
             dateview.destroy();
         }
 
-        if (input.data("kendoDatePicker")) {
-            input.data("kendoDatePicker").destroy();
-        }
-
         kendo.destroy(QUnit.fixture);
+
+        kendo.ns = "";
     }
 });
 

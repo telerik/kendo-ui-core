@@ -193,6 +193,8 @@ kendo_module({
                 WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);
             }
 
+            kendo.destroy(that.element.children());
+
             if (options.appendTo[0] === document.body) {
                 parent = element.parent(".k-animation-container");
 
@@ -202,8 +204,6 @@ kendo_module({
                     element.remove();
                 }
             }
-
-            kendo.destroy(that.element.children());
         },
 
         open: function(x, y) {
