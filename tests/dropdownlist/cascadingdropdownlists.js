@@ -118,6 +118,44 @@
         equal(childCB.text(), "Select");
     });
 
+    test("Child widget selects first option after it was empty", 2, function() {
+        parent.kendoDropDownList({
+            dataTextField: "parentID",
+            dataValueField: "parentID",
+            dataSource: [
+                { parentID: 1 },
+                { parentID: 2 }
+            ]
+        });
+
+        child.kendoDropDownList({
+            cascadeFrom: "parent", //id of the parent
+            dataTextField: "childID",
+            dataValueField: "id",
+            dataSource:  [
+                { parentID: 1, childID: "1", id: 1 },
+                { parentID: 1, childID: "3", id: 2 }
+            ]
+        });
+
+        var parentCB = parent.data("kendoDropDownList"),
+            childCB = child.data("kendoDropDownList");
+
+        //select first item
+        parentCB.select(0);
+        parentCB.trigger("change");
+
+        //select second item
+        parentCB.select(1);
+        parentCB.trigger("change");
+
+        //select second item
+        parentCB.ul.children().first().click();
+
+        equal(childCB.value(), "1");
+        equal(childCB.text(), "1");
+    });
+
     asyncTest("Cascading DDLs with initial values", 2, function() {
         var ddl = new DropDownList(parent, {
             optionLabel: "Select",

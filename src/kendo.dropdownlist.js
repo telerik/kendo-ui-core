@@ -654,13 +654,12 @@ kendo_module({
         },
 
         _clearSelection: function() {
-            var that = this,
-                optionLabel = that.options.optionLabel;
+            var that = this;
 
             that.options.value = "";
             that._selectedValue = "";
 
-            if (that.dataSource.view()[0] && optionLabel) {
+            if (that.dataSource.view()[0]) {
                 that.select(0);
                 return;
             }
@@ -668,7 +667,7 @@ kendo_module({
             that.selectedIndex = -1;
 
             that.element.val("");
-            that._textAccessor(optionLabel);
+            that._textAccessor(that.options.optionLabel);
         },
 
         _inputTemplate: function() {
