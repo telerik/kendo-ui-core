@@ -564,6 +564,14 @@ kendo_module({
             }
         },
 
+        destroy: function() {
+            kendo.destroy(this.container);
+
+            for (var id in this.layouts) {
+                this.layouts[id].destroy();
+            }
+        },
+
         view: function() {
             return this._view;
         },
