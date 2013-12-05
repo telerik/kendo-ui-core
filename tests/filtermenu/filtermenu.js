@@ -57,7 +57,6 @@
         equal(filterMenu.link.attr("tabindex"), -1);
     });
 
-
     test("binds the operator select from the field", function(){
         filterMenu = setup(dom, {dataSource: dataSource});
 
@@ -191,7 +190,7 @@
     });
 
     test("parses filterMenu value according to field type", function() {
-        dom = $("<th data-kendo-field=bar />");
+        dom = $("<th data-kendo-field=bar />").appendTo(QUnit.fixture);
 
         filterMenu = setup(dom, {
             dataSource: dataSource
@@ -292,7 +291,7 @@
             ]
         });
 
-        dom = $("<th data-kendo-field=bar />");
+        dom = $("<th data-kendo-field=bar />").appendTo(QUnit.fixture);
 
         var filter2 = setup(dom, {
             dataSource: dataSource
@@ -321,7 +320,7 @@
             ]
         });
 
-        dom = $("<th data-kendo-field=bar />");
+        dom = $("<th data-kendo-field=bar />").appendTo(QUnit.fixture);
 
         var filter = setup(dom, {
             dataSource: dataSource
@@ -377,7 +376,7 @@
             ]
         });
 
-        dom = $("<th data-kendo-field=bar />");
+        dom = $("<th data-kendo-field=bar />").appendTo(QUnit.fixture);
 
         var filter2 = setup(dom, {
             dataSource: dataSource
