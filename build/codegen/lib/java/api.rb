@@ -1,4 +1,4 @@
-oodule CodeGen::Java::API
+module CodeGen::Java::API
 
     module Options
 
