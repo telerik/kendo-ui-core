@@ -229,6 +229,10 @@ kendo_module({
             that.options.model.unbind("set", that._validateProxy);
 
             kendo.unbind(that.element);
+
+            if (that.validatable) {
+                that.validatable.destroy();
+            }
             kendo.destroy(that.element);
 
             that.element.removeData("kendoValidator");
