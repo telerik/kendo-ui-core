@@ -6,9 +6,10 @@
 
     module("kendo.ui.Editable", {
         setup: function() {
-            div = $("<div />");
+            div = $("<div />").appendTo(QUnit.fixture);
         },
         teardown: function() {
+            kendo.destroy(QUnit.fixture);
         }
     });
 
