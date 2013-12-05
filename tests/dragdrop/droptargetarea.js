@@ -8,13 +8,11 @@
 
     module("kendo.ui.DropTargetArea", {
         setup: function() {
-            targetElement = $("<div><div class='test1'>&nbsp;</div><div class='test2'>&nbsp;</div></div>").prependTo(document.body);
-            span = $("<span>Foo</span>").prependTo(document.body);
+            targetElement = $("<div><div class='test1'>&nbsp;</div><div class='test2'>&nbsp;</div></div>").prependTo(QUnit.fixture);
+            span = $("<span>Foo</span>").prependTo(QUnit.fixture);
         },
         teardown: function() {
-            span.remove();
-            targetElement.remove();
-            draggable.destroy();
+            kendo.destroy(QUnit.fixture);
         }
     });
 
@@ -87,7 +85,7 @@
             });
     });
 
-    test("dom event argument is passed to the drop event", 2, function() {
+    test("dom event argument is passed to the drop event", 1, function() {
         setup( {
                 filter: ".test1",
                 drop: function(e) {

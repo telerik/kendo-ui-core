@@ -5,12 +5,11 @@
 
     module("kendo.ui.Draggable", {
         setup: function() {
-            span = $("<span/>").appendTo(document.body);
+            span = $("<span/>").appendTo(QUnit.fixture);
         },
 
         teardown: function() {
-            span.remove();
-            draggable && draggable.destroy();
+            kendo.destroy(span);
         }
     });
 

@@ -8,12 +8,11 @@
 
         module("kendo.ui.DropTarget", {
             setup: function() {
-                span = $("<span/>").prependTo(document.body);
-                targetElement = $("<div>foo</div>").prependTo(document.body);
+                span = $("<span/>").appendTo(QUnit.fixture);
+                targetElement = $("<div>foo</div>").appendTo(QUnit.fixture);
             },
             teardown: function() {
-                span.remove();
-                targetElement.remove();
+                kendo.destroy(QUnit.fixture);
             }
         });
 
