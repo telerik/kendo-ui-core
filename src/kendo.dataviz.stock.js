@@ -156,10 +156,9 @@ kendo_module({
 
         _resize: function() {
             var t = this.options.transitions;
+
             this.options.transitions = false;
-
-            Chart.fn._redraw.call(this);
-
+            this._fullRedraw();
             this.options.transitions = t;
         },
 
@@ -170,14 +169,21 @@ kendo_module({
             if (navigator && navigator.dataSource) {
                 navigator.redrawSlaves();
             } else {
-                if (!navigator) {
-                    navigator = chart._navigator = new Navigator(chart);
-                }
-
-                navigator.filterAxes();
-                Chart.fn._redraw.call(chart);
-                navigator.redraw();
+                chart._fullRedraw();
             }
+        },
+
+        _fullRedraw: function() {
+            var chart = this,
+                navigator = chart._navigator;
+
+            if (!navigator) {
+                navigator = chart._navigator = new Navigator(chart);
+            }
+
+            navigator.filterAxes();
+            Chart.fn._redraw.call(chart);
+            navigator.redraw();
         },
 
         _onDataChanged: function() {
