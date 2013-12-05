@@ -1,4 +1,6 @@
 (function() {
+    var cp;
+
     module("Color tools", {
         setup: function() {
             cp = $("<div>").kendoColorPalette().data("kendoColorPalette");
