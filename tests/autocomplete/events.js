@@ -8,8 +8,6 @@ module("kendo.ui.AutoComplete events", {
     setup: function() {
         input = $("<input>").appendTo(QUnit.fixture);
 
-        this.timeout = QUnit.config.testTimeout;
-
         $.fn.press = function(key) {
             return this.trigger({ type: "keydown", keyCode: key } );
         }
