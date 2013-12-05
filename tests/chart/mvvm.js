@@ -1,4 +1,16 @@
 (function() {
+
+    module("chart MVVM", {
+        setup: function() {
+            window.chartDataBound  = function() {
+                ok(true);
+            }
+        },
+        teardown: function() {
+            delete window.chartDataBound;
+        }
+    });
+
     test("initializes a chart when data role is chart", function() {
         var dom = $('<div data-role="chart"/>');
 
@@ -120,11 +132,6 @@
         equal(chart._events["dataBound"].length, 0);
         equal(chart._events["dataBinding"].length, 0);
     });
-
-    function chartDataBound() {
-        ok(true);
-    }
-    window.chartDataBound = chartDataBound;
 
     test("dataBound event is raised if attached as option", 1, function() {
         var dom = $('<div data-role="chart" data-bound="chartDataBound" data-bind="source:items" />').data("series", [{ field: "text" }]);

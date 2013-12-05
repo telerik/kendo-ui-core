@@ -271,7 +271,7 @@
                 return;
             }
 
-            var container = $("<div>").appendTo(document.body);
+            var container = $("<div>").appendTo(QUnit.fixture);
             view.renderTo(container[0]);
 
             view.definitions.updated = contentElementStub;
@@ -324,7 +324,7 @@
                 return;
             }
 
-            var container = $("<div />").appendTo(document.body);
+            var container = $("<div />").appendTo(QUnit.fixture);
             equal(view.renderTo(container[0]), container[0].firstElementChild);
             container.remove();
         });
@@ -1234,6 +1234,10 @@
                     }
                 });
                 decorator = new dataviz.SVGGradientDecorator(view);
+            },
+
+            teardown: function() {
+                window.location.hash = "";
             }
         });
 
