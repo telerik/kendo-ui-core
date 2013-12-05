@@ -2,7 +2,7 @@
     module("MVVM", TreeViewHelpers.basicModule);
 
     test("initializes a treeview when data role is treeview", function() {
-        var dom = $('<ul data-role="treeview"></ul>');
+        var dom = $('<ul data-role="treeview" />').appendTo(QUnit.fixture);
 
         kendo.bind(dom);
 
@@ -10,7 +10,7 @@
     });
 
     test("initializes a options from data attributes", function() {
-        var dom = $('<ul data-role="treeview" data-animation="false"></ul>');
+        var dom = $('<ul data-role="treeview" data-animation="false" />').appendTo(QUnit.fixture);
 
         kendo.bind(dom);
 
@@ -20,7 +20,7 @@
     });
 
     test("binding treeview initialized before binding", function() {
-        var dom = $('<ul data-animation="false"></ul>');
+        var dom = $('<ul data-animation="false" />').appendTo(QUnit.fixture);
 
         var treeview = dom.kendoTreeView().data("kendoTreeView");
 
@@ -30,7 +30,7 @@
     });
 
     test("binding containing binding attributes", function() {
-        var dom = $('<ul data-role="treeview"><span data-bind="text:text"></span></ul>');
+        var dom = $('<ul data-role="treeview"><span data-bind="text:text"></span></ul>').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({ text:"foo" });
 
@@ -40,7 +40,7 @@
     });
 
     test("updating viewModel updates the content", function() {
-        var dom = $('<ul data-role="treeview"><span data-bind="text:text"></span></ul>');
+        var dom = $('<ul data-role="treeview"><span data-bind="text:text"></span></ul>').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({ text:"foo" });
 
@@ -52,7 +52,7 @@
     });
 
     test("event is raised if attached as option", 1, function() {
-        var dom = $('<ul data-role="treeview" data-bind="{ events: { select: selectHandler } }"></ul>');
+        var dom = $('<ul data-role="treeview" data-bind="{ events: { select: selectHandler } }"></ul>').appendTo(QUnit.fixture);
 
         kendo.bind(dom, {
             selectHandler: function() {
@@ -64,7 +64,7 @@
     });
 
     test("binding visible to true shows the treeview", function() {
-        var dom = $('<div data-role="treeview" data-bind="visible: visible"></div>');
+        var dom = $('<div data-role="treeview" data-bind="visible: visible" />').appendTo(QUnit.fixture);
 
         kendo.bind(dom, { visible: true });
 
@@ -74,7 +74,7 @@
     });
 
     test("binding visible to false hides the treeview", function() {
-        var dom = $('<div data-role="treeview" data-bind="visible: visible"></div>');
+        var dom = $('<div data-role="treeview" data-bind="visible: visible" />').appendTo(QUnit.fixture);
 
         kendo.bind(dom, { visible: false });
 
@@ -84,7 +84,7 @@
     });
 
     test("binding invisible to true hides the treeview", function() {
-        var dom = $('<div data-role="treeview" data-bind="invisible: invisible"></div>');
+        var dom = $('<div data-role="treeview" data-bind="invisible: invisible" />').appendTo(QUnit.fixture);
 
         kendo.bind(dom, { invisible: true });
 
@@ -94,7 +94,7 @@
     });
 
     test("binding invisible to false shows the treeview", function() {
-        var dom = $('<div data-role="treeview" data-bind="invisible: invisible"></div>');
+        var dom = $('<div data-role="treeview" data-bind="invisible: invisible" />').appendTo(QUnit.fixture);
 
         kendo.bind(dom, { invisible: false });
 
@@ -104,7 +104,7 @@
     });
 
     test("source binding", function() {
-        var dom = $('<div data-role="treeview" data-bind="source: source"></div>');
+        var dom = $('<div data-role="treeview" data-bind="source: source" />').appendTo(QUnit.fixture);
 
         var viewModel = kendo.observable({
             source: new kendo.data.HierarchicalDataSource({
@@ -142,7 +142,7 @@
     */
 
     test("set multi-level dataTextField through data attribute", function() {
-        var dom = $('<div data-text-field="[\'foo\',\'bar\']" data-bind="source: src" data-role="treeview" />');
+        var dom = $('<div data-text-field="[\'foo\',\'bar\']" data-bind="source: src" data-role="treeview" />').appendTo(QUnit.fixture);
 
         kendo.bind(dom, kendo.observable({
             src: new kendo.data.HierarchicalDataSource({
@@ -156,7 +156,7 @@
     });
 
     test("adding items to root level when datasource is in observable object", function() {
-        var dom = $('<div data-bind="source: src" data-role="treeview" />');
+        var dom = $('<div data-bind="source: src" data-role="treeview" />').appendTo(QUnit.fixture);
 
         var viewModel = kendo.observable({
             src: new kendo.data.HierarchicalDataSource({
@@ -175,7 +175,7 @@
     });
 
     test("removing items from root level when datasource is in observable object", function() {
-        var dom = $('<div data-bind="source: src" data-role="treeview" />');
+        var dom = $('<div data-bind="source: src" data-role="treeview" />').appendTo(QUnit.fixture);
 
         var viewModel = kendo.observable({
             src: new kendo.data.HierarchicalDataSource({
@@ -358,7 +358,7 @@
         });
 
         test("enable checkboxes through data attribute", function() {
-            var dom = $('<ul data-role="treeview" data-checkboxes="true"></ul>');
+            var dom = $('<ul data-role="treeview" data-checkboxes="true"></ul>').appendTo(QUnit.fixture);
 
             kendo.bind(dom);
 
