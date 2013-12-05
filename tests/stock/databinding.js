@@ -49,7 +49,7 @@
             };
 
         function createStockChart(options) {
-            var div = $("<div id='container' />").appendTo(QUnit.fixture);
+            var div = $("<div id='container' style='width: 600px; height: 400px;' />").appendTo(QUnit.fixture);
             chart = div.kendoStockChart(deepExtend({
                 series: [{
                     field: "sales"
