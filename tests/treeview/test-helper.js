@@ -22,7 +22,7 @@
         },
 
         destroy: function () {
-            $(".k-treeview,.k-item,.k-drag-clue,.k-rtl").remove();
+            kendo.destroy(QUnit.fixture);
             delete window.treeview;
             delete window.treeviewObject;
         },

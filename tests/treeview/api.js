@@ -779,7 +779,7 @@
                     '<div class="k-top k-bot"><span class="k-in">bar</span></div>' +
                 '</li>' +
             '</ul>' +
-        '</div>').kendoTreeView();
+        '</div>').appendTo(QUnit.fixture).kendoTreeView();
 
         treeviewObject = treeview.data("kendoTreeView");
 
@@ -793,7 +793,7 @@
     });
 
     test("API methods work after initialization from empty rendered treeview", function() {
-        treeview = $('<div class="k-widget k-treeview" id="treeview"></div>').kendoTreeView();
+        treeview = $('<div class="k-widget k-treeview" id="treeview" />').appendTo(QUnit.fixture).kendoTreeView();
 
         treeviewObject = treeview.data("kendoTreeView");
 

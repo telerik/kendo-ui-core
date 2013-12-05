@@ -372,8 +372,6 @@
         check();
 
         ok(!dom.find(":checkbox").eq(0).is(":checked"));
-
-        dom.remove();
     });
 
     test("indeterminate state is initially set", function() {

@@ -148,13 +148,10 @@
     });
 
     asyncTest("initialization from ul with static data", 1, function() {
-        var timeout = setTimeout(start, 500);
-
         var dom = treeFromHtml("<ul />", {
             dataSource: {
                 data: [ { text: "foo" } ],
                 change: function () {
-                    clearTimeout(timeout);
                     start();
                     ok(true);
                 }

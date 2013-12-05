@@ -4,8 +4,8 @@
             kendo.ns = "kendo-";
         },
         teardown: function() {
-            kendo.ns = "";
             TreeViewHelpers.destroy();
+            kendo.ns = "";
         }
     });
 
@@ -107,8 +107,8 @@
             treeview = $("<div />").appendTo(QUnit.fixture);
         },
         teardown: function() {
-            kendo.ns = "";
             TreeViewHelpers.destroy();
+            kendo.ns = "";
         }
     };
 
