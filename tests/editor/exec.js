@@ -7,7 +7,7 @@ editor_module("editor exec", {
        editor = $("#editor-fixture").data("kendoEditor");
    },
    teardown: function() {
-       $(".k-window, .k-overlay").remove();
+       kendo.destroy("[data-role=window]");
    }
 });
 

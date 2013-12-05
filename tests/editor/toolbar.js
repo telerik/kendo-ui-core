@@ -187,6 +187,7 @@ var mockedToolbarModule = {
     },
 
     teardown: function() {
+        toolbar.destroy();
         kendo.destroy(QUnit.fixture);
     }
 };
@@ -458,7 +459,7 @@ test("destroy destroys popup", function() {
 
 
 
-module("Keyboard navigation", mockedToolbarModule);
+module("editor toolbar keyboard navigation", mockedToolbarModule);
 
 function active() {
     return $(kendo._activeElement());
