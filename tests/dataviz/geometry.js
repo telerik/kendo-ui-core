@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>DataViz / Drawing / Geometry</title>
-    <script src="../jquery-loader.js"></script>
-    <script src="../qunit/qunit/qunit.js"></script>
-    <script src="../qunit/addons/close-enough/qunit-close-enough.js"></script>
-    <script src="../kendo-test-helpers.js"></script>
-    <link rel="stylesheet" href="../qunit/qunit/qunit.css">
-</head>
-<body>
-    <script src="../../src/kendo.core.js"></script>
-    <script src="../../src/kendo.data.js"></script>
-    <script src="../../src/kendo.dataviz.core.js"></script>
-    <script src="../../src/dataviz/util.js"></script>
-    <script src="../../src/dataviz/geometry.js"></script>
-
-    <script>
+(function() {
     var dataviz = kendo.dataviz,
 
         g = dataviz.geometry,
@@ -405,16 +388,4 @@
         var clone = circle.clone();
         equal(clone.radius, circle.radius);
     });
-
-    </script>
-
-    <h1 id="qunit-header"></h1>
-    <h2 id="qunit-banner"></h2>
-    <div id="qunit-testrunner-toolbar"></div>
-    <h2 id="qunit-userAgent"></h2>
-    <ol id="qunit-tests"></ol>
-
-    <div id="qunit-fixture">test markup, will be hidden</div>
-    <ul id="log"></ul>
-</body>
-</html>
+})();

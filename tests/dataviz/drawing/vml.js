@@ -1,22 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>DataViz / Drawing / VML</title>
-    <script src="../../jquery-loader.js"></script>
-    <script src="../../qunit/qunit/qunit.js"></script>
-    <script src="../../kendo-test-helpers.js"></script>
-    <link rel="stylesheet" href="../../qunit/qunit/qunit.css">
-</head>
-<body>
-    <script src="../../../src/kendo.core.js"></script>
-    <script src="../../../src/kendo.dataviz.core.js"></script>
-    <script src="../../../src/dataviz/util.js"></script>
-    <script src="../../../src/dataviz/geometry.js"></script>
-    <script src="../../../src/dataviz/drawing/core.js"></script>
-    <script src="../../../src/dataviz/drawing/shapes.js"></script>
-    <script src="../../../src/dataviz/drawing/vml.js"></script>
-
-    <script>
+(function() {
     var dataviz = kendo.dataviz,
 
         g = dataviz.geometry,
@@ -44,7 +26,7 @@
 
     module("Surface", {
         setup: function() {
-            container = $("#container")[0];
+            container = QUnit.fixture[0];
             surface = new Surface(container);
         }
     });
@@ -55,7 +37,7 @@
     });
 
     test("appends element to container", function() {
-        equal($("#container > div").length, 1);
+        equal(QUnit.fixture.find("div").length, 1);
     });
 
     test("draw attaches element to root node", function() {
@@ -97,7 +79,7 @@
     // ------------------------------------------------------------
     module("Surface / Events", {
         setup: function() {
-            container = $("#container")[0];
+            container = QUnit.fixture[0];
             surface = new Surface(container);
         }
     });
@@ -688,16 +670,4 @@
 
         circle.geometry.set("radius", 60);
     });
-    </script>
-
-    <h1 id="qunit-header"></h1>
-    <h2 id="qunit-banner"></h2>
-    <div id="qunit-testrunner-toolbar"></div>
-    <h2 id="qunit-userAgent"></h2>
-    <ol id="qunit-tests"></ol>
-
-    <div id="container"></div>
-    <div id="qunit-fixture">test markup, will be hidden</div>
-    <ul id="log"></ul>
-</body>
-</html>
+})();
