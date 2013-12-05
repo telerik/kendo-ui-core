@@ -1,18 +1,21 @@
 (function() {
 
 var calendar = kendo.calendar,
-    template = new kendo.ui.Calendar($("<div/>")).month,
+    template,
     div;
 
 module("kendo.ui.Calendar rendering", {
     setup: function() {
+        var cal = new kendo.ui.Calendar($("<div/>"));
+        template = cal.month;
+        cal.destroy();
+
         kendo.ns = "kendo-";
         div = $("<div />").appendTo(QUnit.fixture);
     },
     teardown: function() {
-        kendo.ns = "";
-        div.remove();
         kendo.destroy(QUnit.fixture);
+        kendo.ns = "";
     }
 });
 
@@ -683,29 +686,29 @@ test("century renders k-other-month to the first and last cell of the view", fun
 });
 
 test("_footer should render footer link", function() {
-    var div = new kendo.ui.Calendar($("<div/>")).element;
+    var container = new kendo.ui.Calendar(div).element;
 
-    ok(div.find(".k-footer")[0]);
-    ok(div.find(".k-footer").children().length, 1);
-    ok(div.find(".k-footer").children()[0].nodeName, "a");
-    ok(div.find(".k-footer").children().html(),kendo.toString(new Date(), "D"));
-    ok(div.find(".k-footer").children().attr("title"),kendo.toString(new Date(), "D"));
+    ok(container.find(".k-footer")[0]);
+    ok(container.find(".k-footer").children().length, 1);
+    ok(container.find(".k-footer").children()[0].nodeName, "a");
+    ok(container.find(".k-footer").children().html(),kendo.toString(new Date(), "D"));
+    ok(container.find(".k-footer").children().attr("title"),kendo.toString(new Date(), "D"));
 });
 
 test("if no options.month then build template without WITH block", function() {
-    var cal = new kendo.ui.Calendar($("<div/>"));
+    var cal = new kendo.ui.Calendar(div);
 
     ok(cal.month.content.toString().indexOf("with") == -1);
 });
 
 test("set options.month build template with WITH block", function() {
-    var cal = new kendo.ui.Calendar($("<div/>"), {month: {content: "#=value#" }});
+    var cal = new kendo.ui.Calendar(div, {month: {content: "#=value#" }});
 
     ok(cal.month.content.toString().indexOf("with") != -1);
 });
 
 test("set options.month should be used as template", function() {
-    var cal = new kendo.ui.Calendar($("<div/>"), {month: {content: "#=value#" }}),
+    var cal = new kendo.ui.Calendar(div, {month: {content: "#=value#" }}),
         oldView = kendo.calendar.views[0].content, options;
 
     kendo.calendar.views[0].content = function(o) {

@@ -1,12 +1,11 @@
 (function() {
 
 var Calendar = kendo.ui.Calendar;
-var div;
+var dom;
 
 module("kendo.ui.Calendar MVVM", {
     setup: function() {
         kendo.effects.disable();
-        div = $("<div />").appendTo(QUnit.fixture);
 
         window.change = function() {
             ok(true);
@@ -15,12 +14,13 @@ module("kendo.ui.Calendar MVVM", {
     teardown: function() {
         kendo.effects.enable();
         delete window.change;
-        kendo.destroy(QUnit.fixture);
+
+        kendo.destroy(dom);
     }
 });
 
 test("initializes a calendar when data role is calendar", function() {
-    var dom = $('<div data-role="calendar"/>');
+    dom = $('<div data-role="calendar"/>');
 
     kendo.bind(dom);
 
@@ -28,7 +28,7 @@ test("initializes a calendar when data role is calendar", function() {
 });
 
 test("initializes a options from data attributes", function() {
-    var dom = $('<div data-role="calendar" data-start="year" />');
+    dom = $('<div data-role="calendar" data-start="year" />');
 
     kendo.bind(dom);
 
@@ -38,7 +38,7 @@ test("initializes a options from data attributes", function() {
 });
 
 test("initializes value from view model", function() {
-    var dom = $('<div data-role="calendar" data-bind="value:value" />');
+    dom = $('<div data-role="calendar" data-bind="value:value" />');
     var value = new Date();
 
     kendo.bind(dom, { value: value } );
@@ -47,7 +47,7 @@ test("initializes value from view model", function() {
 });
 
 test("initializes a options from data attributes after init of the widget", function() {
-    var dom = $('<div data-role="calendar" data-format="{0:MM yyyy}" data-start="year" />');
+    dom = $('<div data-role="calendar" data-format="{0:MM yyyy}" data-start="year" />');
     dom.kendoCalendar();
 
     kendo.bind(dom);
@@ -59,7 +59,7 @@ test("initializes a options from data attributes after init of the widget", func
 });
 
 test("changing a value updates the view model", function() {
-    var dom = $('<div data-role="calendar" data-bind="value:value" />');
+    dom = $('<div data-role="calendar" data-bind="value:value" />');
 
     var observable = kendo.observable({ value: null });
 
@@ -73,7 +73,7 @@ test("changing a value updates the view model", function() {
 });
 
 test("binding calendar initialized before binding", function() {
-    var dom = $('<div data-bind="value:value" />');
+    dom = $('<div data-bind="value:value" />');
 
     var value = new Date(2011, 1, 2);
     var observable = kendo.observable({ value: null });
@@ -87,7 +87,7 @@ test("binding calendar initialized before binding", function() {
 });
 
 test("binding calendar initialized after binding", function() {
-    var dom = $('<div data-bind="value:value" />');
+    dom = $('<div data-bind="value:value" />');
 
     var observable = kendo.observable({ value: null });
     var value = new Date(2011, 1, 2);
@@ -101,7 +101,7 @@ test("binding calendar initialized after binding", function() {
 });
 
 test("updating model value updates the UI", function() {
-    var dom = $('<div data-bind="value:value" />');
+    dom = $('<div data-bind="value:value" />');
 
     var observable = kendo.observable({ value: value });
 
@@ -115,7 +115,7 @@ test("updating model value updates the UI", function() {
 });
 
 test("bindings are removed if element is rebind", 1, function() {
-    var dom = $('<div data-role="calendar" data-bind="value:value" />');
+    dom = $('<div data-role="calendar" data-bind="value:value" />');
 
     var observable = kendo.observable({ value: new Date(2011, 1, 2) });
 
@@ -129,7 +129,7 @@ test("bindings are removed if element is rebind", 1, function() {
 });
 
 test("binding target is destroyed", 1, function() {
-    var dom = $('<div data-role="calendar" data-bind="value:value"/>');
+    dom = $('<div data-role="calendar" data-bind="value:value"/>');
 
     var observable = kendo.observable({ value: null });
 
@@ -143,7 +143,7 @@ test("binding target is destroyed", 1, function() {
 });
 
 test("change event is raised if attached as option", 1, function() {
-    var dom = $('<div data-role="calendar" data-change="change" />');
+    dom = $('<div data-role="calendar" data-change="change" />');
 
     var observable = kendo.observable({
         items: [{text:"foo"}, {text:"bar"}]
@@ -154,7 +154,7 @@ test("change event is raised if attached as option", 1, function() {
 });
 
 test("change event is raised if attached as option to a already initialized calendar", 1, function() {
-    var dom = $('<div data-change="change" />').kendoCalendar();
+    dom = $('<div data-change="change" />').kendoCalendar();
 
     var observable = kendo.observable({
         items: [{text:"foo"}, {text:"bar"}]
@@ -165,7 +165,7 @@ test("change event is raised if attached as option to a already initialized cale
 });
 
 test("binding visible to true shows the calendar", function() {
-    var dom = $('<div data-role="calendar" data-bind="visible: visible"></div>');
+    dom = $('<div data-role="calendar" data-bind="visible: visible"></div>');
 
     kendo.bind(dom, { visible: true });
 
@@ -175,7 +175,7 @@ test("binding visible to true shows the calendar", function() {
 });
 
 test("binding visible to false hides the calendar", function() {
-    var dom = $('<div data-role="calendar" data-bind="visible: visible"></div>');
+    dom = $('<div data-role="calendar" data-bind="visible: visible"></div>');
 
     kendo.bind(dom, { visible: false });
 
@@ -185,7 +185,7 @@ test("binding visible to false hides the calendar", function() {
 });
 
 test("binding invisible to true hides the calendar", function() {
-    var dom = $('<div data-role="calendar" data-bind="invisible: invisible"></div>');
+    dom = $('<div data-role="calendar" data-bind="invisible: invisible"></div>');
 
     kendo.bind(dom, { invisible: true });
 
@@ -195,7 +195,7 @@ test("binding invisible to true hides the calendar", function() {
 });
 
 test("binding invisible to false shows the calendar", function() {
-    var dom = $('<div data-role="calendar" data-bind="invisible: invisible"></div>');
+    dom = $('<div data-role="calendar" data-bind="invisible: invisible"></div>');
 
     kendo.bind(dom, { invisible: false });
 
