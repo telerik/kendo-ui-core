@@ -14,6 +14,7 @@
             button = $("<button />");
         },
         teardown: function() {
+            kendo.destroy(button);
         }
     });
 
