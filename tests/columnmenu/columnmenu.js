@@ -361,17 +361,14 @@
 
     test("destroy calls filter menu destroy", function() {
         var menu = setup();
-        var called = false;
 
-        menu.filterMenu = {
-            destroy: function() {
-                called = true;
-            }
-        };
+        var destroy = stub(menu.filterMenu, {
+            destroy: menu.filterMenu.destroy
+        });
 
         menu.destroy();
 
-        ok(called, "Filter menu is not destroyed");
+        equal(destroy.calls("destroy"), 1, "Filter menu is not destroyed");
     });
 
     test("hiding column after reorder", function() {
