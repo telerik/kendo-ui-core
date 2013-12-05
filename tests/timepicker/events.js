@@ -12,7 +12,6 @@
 
     module("kendo.ui.TimePicker Events", {
         setup: function() {
-            QUnit.config.testTimeout = 500;
             input = $("<input />").appendTo(QUnit.fixture);
         },
         teardown: function() {

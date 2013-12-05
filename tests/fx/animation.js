@@ -41,7 +41,6 @@
 
     module("animate", {
         setup: function() {
-            QUnit.config.testTimeout = 1500;
             span = $("<span style='position: absolute; top: 0; left: 0; visibility: hidden;'>foo</span>").appendTo(document.body);
         },
         teardown: function() {

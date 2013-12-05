@@ -5,7 +5,6 @@
 
     module("kendo.ui.DropDownList events", {
         setup: function() {
-            QUnit.config.testTimeout = 1000;
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
             }

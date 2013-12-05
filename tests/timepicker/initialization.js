@@ -10,7 +10,6 @@
             this.mobileOS = kendo.support.mobileOS;
             this.kineticScrollNeeded = kendo.support.kineticScrollNeeded;
 
-            QUnit.config.testTimeout = 800;
             input = $("<input />").appendTo(QUnit.fixture);
         },
         teardown: function() {

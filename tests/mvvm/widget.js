@@ -27,11 +27,6 @@ module("mvvm widgets", {
     setup: function() {
         kendo.ui.plugin(TestWidget);
         kendo.mobile.ui.plugin(MobileTestWidget);
-        this.timeout = QUnit.config.testTimeout;
-        QUnit.config.testTimeout = 100;
-    },
-    teardown: function() {
-        QUnit.config.testTimeout = this.timeout;
     }
 })
 

@@ -1,7 +1,5 @@
 (function() {
 
-    QUnit.config.testTimeout = 500;
-
     var TimeView = kendo.TimeView,
         keys = kendo.keys,
         MIDNIGHT = new Date(0, 0, 0, 0, 0, 0),

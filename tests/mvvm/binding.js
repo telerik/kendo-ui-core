@@ -25,8 +25,6 @@ module("mvvm binding", {
         kendo.ui.plugin(TestWidget);
         kendo.ui.plugin(ParentWidget);
 
-        this.timeout = QUnit.config.testTimeout;
-        QUnit.config.testTimeout = 100;
 
         QUnit.fixture.append(
             '<script id="mobile-widget-template" type="text/x-kendo-template">' +
@@ -71,9 +69,6 @@ module("mvvm binding", {
             '<span>#= data #</span>' +
             '</script>'
                     );
-    },
-    teardown: function() {
-        QUnit.config.testTimeout = this.timeout;
     }
 });
 

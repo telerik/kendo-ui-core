@@ -128,7 +128,6 @@
 
     module("threshold option", {
         setup: function() {
-            QUnit.config.testTimeout = 1500;
             element = $('<div />');
             $("#qunit-fixture").empty().append(element);
             userEvents = new UserEvents(element, {

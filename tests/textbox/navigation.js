@@ -5,7 +5,6 @@
 
     module("kendo.ui.NumericTextBox Navigation", {
         setup: function() {
-            QUnit.config.testTimeout = 1000;
             input = $("<input />").appendTo(QUnit.fixture);
 
             $.fn.pressKey = function(key, eventName, options) {

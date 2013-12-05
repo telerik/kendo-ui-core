@@ -4,7 +4,6 @@
 
     module("kendo.ui.NumericTextBox Events", {
         setup: function() {
-            QUnit.config.testTimeout = 800;
             input = $("<input />").appendTo(QUnit.fixture);
         }
     });

@@ -133,7 +133,7 @@ $('head')
 })();
 
 QUnit.brazilTimezoneTest = brazilTimezoneTest;
-QUnit.config.testTimeout = 800;
+QUnit.config.testTimeout = 1500;
 QUnit.config.reorder = false;
 
 var close = QUnit.close,

@@ -3,7 +3,6 @@
 
     module("kendo jQuery", {
         setup: function() {
-            QUnit.config.testTimeout = 700;
             kendo.support.touch = true;
         },
         teardown: function() {
