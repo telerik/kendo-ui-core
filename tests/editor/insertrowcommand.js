@@ -4,7 +4,7 @@ var editor;
 
 var InsertRowCommand = kendo.ui.editor.InsertRowCommand;
 
-editor_module("editor insert html command", {
+editor_module("editor insert row command", {
     setup: function() {
         editor = $("#editor-fixture").data("kendoEditor");
     },

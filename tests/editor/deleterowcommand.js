@@ -2,7 +2,7 @@
 
 var editor;
 
-editor_module("editor delete column command", {
+editor_module("editor delete row command", {
    setup: function() {
        editor = $("#editor-fixture").data("kendoEditor");
        QUnit.fixture.append('<div id="inline" contentEditable="true"></div>');

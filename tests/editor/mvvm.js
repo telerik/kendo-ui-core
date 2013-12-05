@@ -2,9 +2,12 @@
 
 var dom;
 
-editor_module("editor mvvm", {
+module("editor mvvm", {
     setup: function() {
-        dom = $("#editor-fixture").attr("data-role", "editor");
+        dom = $('<textarea data-role=editor></textarea>').appendTo(QUnit.fixture);
+    },
+    teardown: function() {
+        kendo.destroy(QUnit.fixture);
     }
 });
 

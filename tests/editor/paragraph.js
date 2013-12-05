@@ -389,16 +389,20 @@ test("paragraph discards preceding whitespace", function() {
 });
 
 test("does not break out of inline editor within list", function() {
-    var dom = $("<ul><li><div contentEditable /></li></ul>").appendTo("#qunit-fixture");
-    var inline = dom.find("[contentEditable]").kendoEditor({ value: "foo" }).data("kendoEditor");
-    var range = inline.createRange();
-    range.setStart(inline.body.firstChild, 3);
-    range.collapse(true);
+    try {
+        var dom = $("<ul><li><div contentEditable /></li></ul>").appendTo(QUnit.fixture);
+        var inline = dom.find("[contentEditable]").kendoEditor({ value: "foo" }).data("kendoEditor");
+        var range = inline.createRange();
+        range.setStart(inline.body.firstChild, 3);
+        range.collapse(true);
 
-    inline.exec("insertParagraph");
+        inline.exec("insertParagraph");
 
-    equal(inline.value("<p>foo</p><p></p>"));
-    equal($("#qunit-fixture .k-editor").length, 1);
+        equal(inline.value("<p>foo</p><p></p>"));
+        equal($("#qunit-fixture .k-editor").length, 1);
+    } finally {
+        kendo.destroy(QUnit.fixture);
+    }
 });
 
 }());

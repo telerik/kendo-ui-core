@@ -2,7 +2,7 @@
 
 var editor;
 
-editor_module("editor link command", {
+editor_module("editor list command", {
     setup: function() {
         editor = $("#editor-fixture").data("kendoEditor");
         QUnit.fixture.append('<textarea id="inline"></textarea>');

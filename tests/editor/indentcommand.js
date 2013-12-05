@@ -4,7 +4,7 @@ var IndentCommand = kendo.ui.editor.IndentCommand;
 
 var editor;
 
-editor_module("editor image command", {
+editor_module("editor indent command", {
    setup: function() {
        editor = $("#editor-fixture").data("kendoEditor");
    }

@@ -5,7 +5,7 @@ var iframe;
 
 var Dom = kendo.ui.editor.Dom;
 
-editor_module("editor delete row command", {
+editor_module("editor DOM", {
    setup: function() {
        editor = $("#editor-fixture").data("kendoEditor");
        iframe = $(editor.wrapper).find("iframe");
@@ -79,15 +79,15 @@ test('createElement can set style', function() {
 
 test('change tag updates the element tag name', function() {
     var source = Dom.create(document, 'div');
-    document.body.appendChild(source);
+    QUnit.fixture.append(source);
     var result = Dom.changeTag(source, 'span');
     equal(result.tagName.toLowerCase(), 'span');
-    equal(result.parentNode, document.body);
+    equal(result.parentNode, QUnit.fixture[0]);
 });
 
 test('change tag clones attributes', function() {
     var source = Dom.create(document, 'div', {className:'test'});
-    document.body.appendChild(source);
+    QUnit.fixture.append(source);
 
     var result = Dom.changeTag(source, 'span');
     equal(result.className, 'test');
@@ -96,7 +96,7 @@ test('change tag clones attributes', function() {
 test('change tag clones style', function() {
     var source = Dom.create(document, 'div', { style: {textAlign:'center'}});
 
-    document.body.appendChild(source);
+    QUnit.fixture.append(source);
     var result = Dom.changeTag(source, 'span');
     equal(result.style.textAlign, 'center');
 });

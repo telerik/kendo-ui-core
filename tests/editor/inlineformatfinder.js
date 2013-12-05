@@ -4,7 +4,7 @@ var InlineFormatFinder = kendo.ui.editor.InlineFormatFinder;
 var finder;
 var formats;
 
-editor_module("editor exec", {
+editor_module("editor inline format finder", {
    setup: function() {
        editor = $("#editor-fixture").data("kendoEditor");
        formats = editor.options.formats;

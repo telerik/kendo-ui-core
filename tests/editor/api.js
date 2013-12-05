@@ -28,15 +28,13 @@ test("value returns unencoded value if encoded is false", function() {
 test("stylesheets config option renders stylesheets in the editing area", function() {
     var editor = new kendo.ui.Editor("#editor", {
         stylesheets: [
-            "kendo.common.css",
-            "kendo.theme.css"
+            "/base/tests/editor/editorStyles.css"
         ]
     });
 
     var links = $("link", editor.document);
 
-    equal(links.eq(0).attr("href"), "kendo.common.css");
-    equal(links.eq(1).attr("href"), "kendo.theme.css");
+    equal(links.eq(0).attr("href"), "/base/tests/editor/editorStyles.css");
 });
 
 test("value method does not remove selection if provided value is the same as the current text", function() {

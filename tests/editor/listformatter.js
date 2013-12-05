@@ -4,7 +4,7 @@ var editor;
 var ListFormatter = kendo.ui.editor.ListFormatter;
 var formatter;
 
-editor_module("editor list format finder", {
+editor_module("editor list formatter", {
     setup: function() {
         editor = $("#editor-fixture").data("kendoEditor");
         QUnit.fixture.append('<textarea id="inline"></textarea>');

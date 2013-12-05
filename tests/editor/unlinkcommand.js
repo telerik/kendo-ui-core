@@ -4,7 +4,7 @@ var editor;
 
 var UnlinkCommand = kendo.ui.editor.UnlinkCommand;
 
-editor_module("editor table command", {
+editor_module("editor unlink command", {
     setup: function() {
         editor = $("#editor-fixture").data("kendoEditor");
     }
