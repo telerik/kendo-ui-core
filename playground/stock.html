@@ -15,24 +15,21 @@
         <script src="../src/kendo.dataviz.svg.js"></script>
         <link href="../styles/dataviz/kendo.dataviz.css" rel="stylesheet" />
         <style>
-            body {
-                font-family: Arial, Helvetica, sans-serif;
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
             }
         </style>
     </head>
     <body class="k-default">
-        <h3>The Boeing Company (NYSE:BA)</h3>
-        <div id="chart" style="width: 900px; height: 500px; border: 1px solid red; background: blue;"></div>
-        <input type="button" onclick="toggleSeries()" />
+        <div id="chart" style="width: 100%; height: 100%;"></div>
         <script>
-            function toggleSeries() {
-                var chart = $("#chart").data("kendoStockChart"),
-                    series = chart.options.series;
 
-                series[0].visible = !series[0].visible;
-
-                chart.refresh();
-            }
+            $(window).resize(function() {
+                kendo.resize($("#chart"));
+            });
 
             $(function() {
                 $("#chart").kendoStockChart({
