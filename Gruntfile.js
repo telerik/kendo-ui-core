@@ -4,71 +4,8 @@ module.exports = function(grunt) {
 
     var browsers = ['Chrome'];
 
-    var tests = [
-       'tests/model/**/*.js',
-       'tests/data/**/*.js',
-       'tests/autocomplete/*.js',
-       'tests/grid/*.js',
-       'tests/reorderable/*.js',
-       'tests/core/**/*.js',
-       'tests/fx/*.js',
-       'tests/mobile/**/*.js',
-       'tests/userevents/**/*.js',
-       'tests/mvvm/*.js',
-       'tests/menu/**/*.js',
-       'tests/dragdrop/*.js',
-       'tests/dropdownlist/*.js',
-       'tests/combobox/*.js',
-       'tests/view/*.js',
-       'tests/router/**/*.js',
-       'tests/panelbar/*.js',
-       'tests/tabstrip/**/*.js',
-       'tests/demos/*.js',
-       'tests/breadcrumbs/*.js',
-       'tests/button/*.js',
-       'tests/colorpicker/*.js',
-       'tests/columnmenu/*.js',
-       'tests/filtermenu/*.js',
-       'tests/groupable/*.js',
-       'tests/imagebrowser/*.js',
-       'tests/multiselect/*.js',
-       'tests/progressbar/*.js',
-       'tests/popup/*.js',
-       'tests/selectable/*.js',
-       'tests/listview/*.js',
-       'tests/download-builder/*.js',
-       'tests/editable/*.js',
-       'tests/treeview/*.js',
-       'tests/pager/*.js',
-       'tests/resizable/*.js',
-       'tests/searchbox/*.js',
-       'tests/sortable/*.js',
-       'tests/tooltip/*.js',
-       'tests/calendar/*.js',
-       'tests/datepicker/*.js',
-       'tests/datetimepicker/*.js',
-       'tests/diagram/*.js',
-       'tests/splitter/*.js',
-       'tests/validation/*.js',
-       'tests/textbox/*.js',
-       'tests/timepicker/*.js',
-       'tests/window/*.js',
-       'tests/slider/*.js',
-       'tests/editor/*.js',
-       'tests/qrcode/*.js',
-       'tests/barcode/**/*.js',
-       'tests/gauge/*.js',
-       'tests/dataviz/**/*.js',
-       'tests/chart/*.js',
-       'tests/stock/*.js',
-       'tests/sparkline/*.js',
-       'tests/map/**/*.js',
-       'tests/themebuilder/*.js',
-       'tests/scheduler/*.js',
-       'tests/upload/*.js'
-    ];
+    var tests = grunt.option('tests') || 'tests/**/*.js';
 
-    var testsOption = grunt.option('tests');
     var browserOption = grunt.option('browser');
     var jqueryOption = grunt.option('jquery');
     var jquery = 'src/jquery.js';
@@ -79,10 +16,6 @@ module.exports = function(grunt) {
 
     if (browserOption) {
         browsers = [ browserOption ];
-    }
-
-    if (testsOption) {
-        tests = [testsOption];
     }
 
     var reporters = [ 'progress' ];
@@ -277,7 +210,7 @@ module.exports = function(grunt) {
                         'download-builder/scripts/script-resolver.js',
                         { pattern: 'download-builder/config/kendo-config.json', included: false },
                         'tests/diagram/common.js'
-                    ].concat(tests),
+                    ].push(tests),
 
                     exclude: [ 'src/kendo.icenium.js', 'src/kendo.web.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/*min.js' ],
 
