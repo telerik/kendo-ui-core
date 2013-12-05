@@ -655,11 +655,12 @@ kendo_module({
 
         _clearSelection: function() {
             var that = this;
+            var optionLabel = that.options.optionLabel;
 
             that.options.value = "";
             that._selectedValue = "";
 
-            if (that.dataSource.view()[0]) {
+            if (that.dataSource.view()[0] && (optionLabel || that._userTriggered)) {
                 that.select(0);
                 return;
             }
