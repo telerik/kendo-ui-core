@@ -9,7 +9,6 @@
     });
 
     test("preventing tabstrip navigation does not navigate the application", function() {
-
         window.tabstripPrevent = function(e) {
             e.preventDefault();
         }
@@ -25,6 +24,7 @@
         var barLink = $("#qunit-fixture").find("a").eq(1);
         barLink.trigger($.Event("mousedown"));
         ok(!$("#qunit-fixture").find("#bar").is(":visible"));
+        app.destroy();
     });
 })();
 

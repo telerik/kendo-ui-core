@@ -11,12 +11,13 @@
         },
 
         teardown: function() {
+            kendo.destroy(dom);
             delete window.change;
         }
     });
 
     test("initializes a switch when data role is switch", function() {
-        var dom = $('<input data-role="switch"/>');
+        dom = $('<input data-role="switch"/>');
 
         kendo.bind(dom, {}, kendo.mobile.ui);
 
@@ -24,7 +25,7 @@
     });
 
     test("initalizes checked value", function() {
-        var dom = $('<input data-role="switch" data-bind="checked:checked" />');
+        dom = $('<input data-role="switch" data-bind="checked:checked" />');
 
         kendo.bind(dom, { checked: true }, kendo.mobile.ui );
 
@@ -32,7 +33,7 @@
     });
 
     test("initializes a options from data attributes", function() {
-        var dom = $('<input data-role="switch" data-checked="checked:checked" />');
+        dom = $('<input data-role="switch" data-checked="checked:checked" />');
 
         kendo.bind(dom, { }, kendo.mobile.ui );
 
@@ -40,7 +41,7 @@
     });
 
     test("changing a checked value updates the view model", function() {
-        var dom = $('<input data-role="switch" data-bind="checked:checked" />');
+        dom = $('<input data-role="switch" data-bind="checked:checked" />');
 
         var observable = kendo.observable({ checked: false });
 
@@ -86,7 +87,7 @@
     });
 
     test("bindings are removed if element is rebind", 1, function() {
-        var dom = $('<input data-role="switch" data-bind="checked:value" />');
+        dom = $('<input data-role="switch" data-bind="checked:value" />');
 
         var observable = kendo.observable({ value: true });
 
@@ -100,7 +101,7 @@
     });
 
     test("change event is raised if attached as option", 1, function() {
-        var dom = $('<input data-role="switch" data-change="change" />');
+        dom = $('<input data-role="switch" data-change="change" />');
 
         var observable = kendo.observable({
             items: [{text:"foo"}, {text:"bar"}]
@@ -112,7 +113,7 @@
     });
 
     test("change event is raised if attached as option to a already initialized datepicker", 1, function() {
-        var dom = $('<input data-change="change" />');
+        dom = $('<input data-change="change" />');
 
         dom.kendoMobileSwitch();
 
@@ -126,7 +127,7 @@
     });
 
     test("binding visible to false hides the widget", function() {
-        var dom = $('<input data-role="switch" data-bind="visible:visible"/>');
+        dom = $('<input data-role="switch" data-bind="visible:visible"/>');
 
         var observable = kendo.observable({
             visible: false
@@ -138,7 +139,7 @@
     });
 
     test("binding visible to true shows the widget", function() {
-        var dom = $('<input data-role="switch" data-bind="visible:visible" style="display:none"/>');
+        dom = $('<input data-role="switch" data-bind="visible:visible" style="display:none"/>');
 
         var observable = kendo.observable({
             visible: true
@@ -150,7 +151,7 @@
     });
 
     test("changing visible to false hides the widget", function() {
-        var dom = $('<input data-role="switch" data-bind="visible:visible"/>');
+        dom = $('<input data-role="switch" data-bind="visible:visible"/>');
 
         var observable = kendo.observable({
             visible: true
@@ -163,7 +164,7 @@
     });
 
     test("changing visible to true shows the widget", function() {
-        var dom = $('<input data-role="switch" data-bind="visible:visible"/>');
+        dom = $('<input data-role="switch" data-bind="visible:visible"/>');
 
         var observable = kendo.observable({
             visible: false
@@ -176,7 +177,7 @@
     });
 
     test("binding invisible to true hides the widget", function() {
-        var dom = $('<input data-role="switch" data-bind="invisible:invisible"/>');
+        dom = $('<input data-role="switch" data-bind="invisible:invisible"/>');
 
         var observable = kendo.observable({
             invisible: true
@@ -188,7 +189,7 @@
     });
 
     test("binding invisible to false shows the widget", function() {
-        var dom = $('<input data-role="switch" data-bind="invisible:invisible" style="display:none"/>');
+        dom = $('<input data-role="switch" data-bind="invisible:invisible" style="display:none"/>');
 
         var observable = kendo.observable({
             invisible: false
@@ -200,7 +201,7 @@
     });
 
     test("changing invisible to true hides the widget", function() {
-        var dom = $('<input data-role="switch" data-bind="invisible:invisible"/>');
+        dom = $('<input data-role="switch" data-bind="invisible:invisible"/>');
 
         var observable = kendo.observable({
             invisible: false
@@ -213,7 +214,7 @@
     });
 
     test("changing invisible to false shows the widget", function() {
-        var dom = $('<input data-role="switch" data-bind="invisible:invisible"/>');
+        dom = $('<input data-role="switch" data-bind="invisible:invisible"/>');
 
         var observable = kendo.observable({
             invisible: true

@@ -26,12 +26,14 @@
     });
 
     test("appended items are enhanced", 1, function() {
+        listView.destroy();
         listView = new ListView("<ul />", { template: "<a>#: data#</a>" });
         var item = $(listView.append([1])[0]);
         ok(item.children().hasClass("km-listview-link"));
     });
 
     test("appended items init widgets in the template", 1, function() {
+        listView.destroy();
         listView = new ListView("<ul />", { template: "<span><a data-role='button' href='\\#'>#: data#</a></span>" });
         var item = $(listView.append([1])[0]).find("a");
         ok(item.data("kendoMobileButton"));
@@ -47,6 +49,7 @@
     });
 
     test("findByDataItem returns the respective items", 2, function() {
+        listView.destroy();
         listView = new ListView("<ul />", { template: "#: data.value #" });
         var foo = { value: 1, uid: "foo" },
         bar = { value: 2, uid: "bar" };
@@ -58,6 +61,7 @@
     });
 
     test("remove removes the DOM elements for the given items", 2, function() {
+        listView.destroy();
         listView = new ListView("<ul />", { template: "#: data.value #" });
         var foo = { value: 1, uid: "foo" },
         bar = { value: 2, uid: "bar" };
@@ -71,6 +75,7 @@
     });
 
     test("replace replaces the current items", 2, function() {
+        listView.destroy();
         listView = new ListView("<ul />", { template: "#: data.value #" });
         var foo = { value: 1, uid: "foo" },
         bar = { value: 2, uid: "bar" };
@@ -84,6 +89,7 @@
     });
 
     test("grouped replace renders grouped items", 3, function() {
+        listView.destroy();
         listView = new ListView("<ul />", { template: "#: data.value #" });
         var foo = { value: "foo", uid: "foo" },
         bar = { value: "bar", uid: "bar" },
@@ -99,6 +105,7 @@
     });
 
     test("setDataItem re-renders the item template", 1, function() {
+        listView.destroy();
         listView = new ListView("<ul />", { template: "#: data.value #" });
         var dataItem = { value: 1, uid: "foo" };
 

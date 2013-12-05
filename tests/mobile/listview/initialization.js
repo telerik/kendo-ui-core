@@ -1,9 +1,13 @@
 (function() {
     var ListView = kendo.mobile.ui.ListView,
-    Button = kendo.mobile.ui.Button,
-    application;
+        Button = kendo.mobile.ui.Button,
+        dom,
+        application;
 
     module("mobile listview", {
+        teardown: function() {
+            kendo.destroy(dom);
+        }
     });
 
     test("name is ListView", function() {
@@ -11,7 +15,7 @@
     });
 
     test("applies css classes", 3, function() {
-        var dom = $("<ul/>");
+        dom = $("<ul/>");
 
         new ListView(dom);
 
@@ -21,7 +25,7 @@
     });
 
     test("applies inset css classes", 3, function() {
-        var dom = $("<ul/>");
+        dom = $("<ul/>");
 
         new ListView(dom, { style: "inset" });
 
@@ -31,7 +35,7 @@
     });
 
     test("applies group css classes", 3, function() {
-        var dom = $("<ul/>");
+        dom = $("<ul/>");
 
         new ListView(dom, { type: "group" });
 
@@ -41,7 +45,7 @@
     });
 
     test("applies group and inset css classes", 4, function() {
-        var dom = $("<ul/>");
+        dom = $("<ul/>");
 
         new ListView(dom, { type: "group", style: "inset" });
 
@@ -52,7 +56,7 @@
     });
 
     test("applies css class to child lists when grouped", 1, function() {
-        var dom = $("<ul><li><ul/></li></ul>");
+        dom = $("<ul><li><ul/></li></ul>");
 
         new ListView(dom, { type: "group" });
 
@@ -60,7 +64,7 @@
     });
 
     test("applies CSS class to link items", 4, function() {
-        var dom = $('<ul> \
+        dom = $('<ul> \
             <li><a id="foo" href="foo">Foo</a></li> \
             <li> <a id="foo2" href="foo">Foo</a> </li> \
             <li>Bar <a id="bar" href="bar">Bar</a></li> \
@@ -76,7 +80,7 @@
     });
 
     test("if no links and checkboxes, data-icon should enhance the item", 1, function() {
-        var dom = $('<ul> \
+        dom = $('<ul> \
             <li data-icon="globe" id="foo">Test</li> \
         </ul>');
 
@@ -86,10 +90,10 @@
     });
 
     test("toggles item as pressed on press/release", 2, function() {
-        var dom = $('<ul> \
+        dom = $('<ul> \
             <li><a id="foo" href="foo">Foo</a></li> \
-        </ul>'),
-    foo = dom.find("#foo");
+        </ul>');
+    var foo = dom.find("#foo");
 
     new ListView(dom);
 
@@ -102,8 +106,8 @@
     });
 
     test("toggles item with detail button as pressed on press/release", 2, function() {
-        var dom = $('<ul><li><a id="foo" href="foo">Foo</a><a data-role="detailbutton" data-style="detaildisclose"></a></li></ul>'),
-        foo = dom.find("#foo");
+        dom = $('<ul><li><a id="foo" href="foo">Foo</a><a data-role="detailbutton" data-style="detaildisclose"></a></li></ul>');
+        var foo = dom.find("#foo");
 
         new ListView(dom);
 
@@ -116,8 +120,8 @@
     });
 
     test("does not activate pushed state for non-link items", 1, function() {
-        var dom = $('<ul><li>Foo</li></ul>'),
-        item = dom.find("li");
+        dom = $('<ul><li>Foo</li></ul>');
+        var item = dom.find("li");
 
         new ListView(dom);
 
@@ -126,8 +130,8 @@
     });
 
     test("does not activate pushed state for buttons", 1, function() {
-        var dom = $('<ul><li>Foo <a data-role="button" href="#">Foo</a></li></ul>'),
-        item = dom.find("li");
+        dom = $('<ul><li>Foo <a data-role="button" href="#">Foo</a></li></ul>');
+        var item = dom.find("li");
 
         new ListView(dom);
 
@@ -136,8 +140,8 @@
     });
 
     test("handles contents' click events", 2, function() {
-        var dom = $('<ul><li><a href="#">Foo</a></li></ul>'),
-        link = dom.find("li>a");
+        dom = $('<ul><li><a href="#">Foo</a></li></ul>');
+        var link = dom.find("li>a");
 
         var listView = new ListView(dom);
 
@@ -151,9 +155,8 @@
     });
 
     test("handles contents' click events in grouped mode", 1, function() {
-
-        var dom = $('<ul><li>Foo <ul><li>Bar</li></ul> </li></ul>'),
-        item = dom.find("li li");
+        dom = $('<ul><li>Foo <ul><li>Bar</li></ul> </li></ul>');
+        var item = dom.find("li li");
 
         var listView = new ListView(dom, {type: "group"} );
 
@@ -167,8 +170,8 @@
 
 
     test("Allows event cancelation", 1, function() {
-        var dom = $('<ul><li><a href="#">Foo</a></li></ul>'),
-        link = dom.find("li>a");
+        dom = $('<ul><li><a href="#">Foo</a></li></ul>');
+        var link = dom.find("li>a");
 
         var listView = new ListView(dom);
 
@@ -185,10 +188,10 @@
     });
 
     test("passes button if a button is clicked", 1, function() {
-        var dom = $('<ul><li>Foo<a href="#">Foo</a></li></ul>'),
-        link = dom.find("li>a"),
-        listView = new ListView(dom),
-        button = new Button(link);
+        dom = $('<ul><li>Foo<a href="#">Foo</a></li></ul>');
+        var link = dom.find("li>a"),
+            listView = new ListView(dom),
+            button = new Button(link);
 
 
         listView.bind("click", function(e) {
@@ -200,7 +203,7 @@
     });
 
     test("wraps group headers", 1, function() {
-        var dom = $('<ul data-role="listview" data-type="group">\
+        dom = $('<ul data-role="listview" data-type="group">\
             <li>Foo<ul><li>Bar</li><li>Baz</li></ul></li>\
         </ul>');
 
@@ -209,7 +212,7 @@
     });
 
     test("Does not wrap groups if headers missing", 1, function() {
-        var dom = $('<ul data-role="listview" data-type="group">\
+        dom = $('<ul data-role="listview" data-type="group">\
             <li><ul><li>Bar</li><li>Baz</li></ul></li>\
         </ul>');
     kendo.mobile.init(dom);
@@ -217,7 +220,7 @@
     });
 
     test("Does not wrap groups if markup is present", 2, function() {
-        var dom = $('<ul data-type="group">\
+        dom = $('<ul data-type="group">\
             <li><div class="km-group-title">Foo</div><ul><li>Bar</li><li>Baz</li></ul></li>\
         </ul>');
     var listView = new ListView(dom);
@@ -226,7 +229,7 @@
     });
 
     test("items returns list items", function() {
-        var dom = $('<ul><li><a href="#">Foo</a></li></ul>');
+        dom = $('<ul><li><a href="#">Foo</a></li></ul>');
 
         var listView = new ListView(dom);
 
@@ -234,7 +237,7 @@
     });
 
     test("items returns list items in group type", 1, function() {
-        var dom = $('<ul>\
+        dom = $('<ul>\
             <li>Foo<ul><li>Bar</li><li>Baz</li></ul></li>\
         </ul>');
 
@@ -244,7 +247,7 @@
     });
 
     test("ListView renders button at the bottom of the widget", 4, function() {
-        var dom = $('<ul><li>Foo<ul><li>Bar</li><li>Baz</li></ul></li></ul>'),
+        dom = $('<ul><li>Foo<ul><li>Bar</li><li>Baz</li></ul></li></ul>'),
         wrapper = dom.wrap("<div />").parent(),
         scroller = new kendo.mobile.ui.Scroller(wrapper),
         listView = new ListView(dom, { loadMore: true, loadMoreText: "Press to load more...", dataSource: new kendo.data.DataSource({ data: [ "foo", "bar", "baz" ], pageSize: 10 }) });
@@ -255,11 +258,12 @@
         ok(footer.find(".km-load")[0]);
         equal(footer.find(".km-load").text(), "Press to load more...");
         ok(footer.find(".km-icon")[0]);
+        scroller.destroy();
     });
 
     test("ListView renders default text for the load-more button", 2, function() {
-        var dom = $('<ul><li>Foo<ul><li>Bar</li><li>Baz</li></ul></li></ul>'),
-        wrapper = dom.wrap("<div />").parent(),
+        dom = $('<ul><li>Foo<ul><li>Bar</li><li>Baz</li></ul></li></ul>');
+        var wrapper = dom.wrap("<div />").parent(),
         scroller = new kendo.mobile.ui.Scroller(wrapper),
         listView = new ListView(dom, { loadMore: true, dataSource: new kendo.data.DataSource({ data: [ "foo", "bar", "baz" ], pageSize: 10 }) });
 
@@ -267,6 +271,7 @@
 
         ok(footer.find(".km-load")[0]);
         equal(footer.find(".km-load").text(), "Press to load more");
+        scroller.destroy();
     });
 
     test("Nested ListView does not remove inset style of the content", 1, function() {
@@ -277,11 +282,11 @@
         var content = application.pane.view().content;
 
         ok(content.hasClass("km-insetcontent"));
+        application.destroy()
     });
 
     test("removes wrapper on destroy", 1, function() {
-        var dom = $("<div><ul/></div>");
-
+        dom = $("<div><ul/></div>");
         var listView = new ListView(dom.find("ul"));
         listView.destroy();
         ok(dom.children().is("ul"));

@@ -1,6 +1,7 @@
 (function() {
     var ListView = kendo.mobile.ui.ListView,
     application,
+    listView,
     ul;
 
     module("mobile listview filtering", {
@@ -11,6 +12,7 @@
             application = new kendo.mobile.Application(root);
         },
         teardown: function() {
+            application.destroy();
             $("#qunit-fixture").empty();
             kendo.history.stop();
         }

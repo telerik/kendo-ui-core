@@ -29,6 +29,8 @@
             });
         },
         teardown: function() {
+            kendo.destroy(root);
+            viewEngine.destroy();
             window.viewEngineSuccess = null;
             $.mockjaxClear();
         }
@@ -353,6 +355,7 @@
         },
 
         teardown: function() {
+            viewEngine.destroy();
             $.mockjaxClear();
         }
     });
@@ -370,6 +373,7 @@
               '<div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div>'
           ).show();
 
+          viewEngine.destroy();
           viewEngine = new kendo.mobile.ViewEngine({ container: root, layout: "foo" });
 
         viewEngine.bind("viewShow", function(e) {
@@ -397,10 +401,11 @@
             '<div data-role="layout" data-id="bar" />' +
             '<div data-role="layout" data-id="baz" />').show();
 
-            viewEngine = new kendo.mobile.ViewEngine({ container: root, layout: "bar" });
+          viewEngine = new kendo.mobile.ViewEngine({ container: root, layout: "bar" });
         },
 
         teardown: function() {
+            viewEngine.destroy();
             $.mockjaxClear();
         }
     });
@@ -429,8 +434,10 @@
         <div data-role="layout" data-platform="android" data-id="foo"><div data-role="footer">footer</div></div> \
         ').show();
 
+        viewEngine.destroy();
         viewEngine = new kendo.mobile.ViewEngine({ container: root });
 
         equal(viewEngine.layouts["foo"].element.data("platform"), "ios");
+        kendo.mobile.application = null;
     });
 })();

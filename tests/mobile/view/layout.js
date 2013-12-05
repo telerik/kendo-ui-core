@@ -18,6 +18,11 @@
             window.layoutSuccess = function() {
                 ok(true);
             }
+        },
+
+        teardown: function() {
+            kendo.destroy(root);
+            layout.destroy();
         }
     });
 

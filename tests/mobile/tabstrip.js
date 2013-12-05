@@ -21,7 +21,7 @@
         },
 
         teardown: function() {
-
+            tabstrip.destroy();
         }
     });
 
@@ -65,6 +65,7 @@
 
     test("allows user selection by index", function() {
         dom = $('<nav><a href="foo" id="foo">foo</a><a href="bar" id="bar">bar</a></nav>');
+        tabstrip.destroy();
         tabstrip = new Tabstrip(dom, {selectedIndex: 1});
         ok(dom.find("#bar").is(".km-state-active"));
     });
@@ -108,6 +109,7 @@
 
     test("switches to the button with the anchor url (query string params)", function() {
         var dom = $('<nav><a href="#foo">foo</a><a href="#foo?bar=baz">foo</a><a href="#foo?bar=qux">foo</a><a href="foo.html?bar=qux">foo</a></nav>');
+        tabstrip.destroy();
         tabstrip = new Tabstrip(dom, {selectedIndex: 0});
 
         tabstrip.switchByFullUrl("#foo?bar=baz");
@@ -143,6 +145,7 @@
         dom.data("kendoMobileTabStrip").badge("a:first", 5);
 
         ok(dom.find("a:first span.km-badge").html() == "5");
+        kendo.destroy(dom);
     });
 
     test("badge attribute init and badge method gets a badge by tab number or tab selector", function() {
@@ -151,6 +154,7 @@
         var tabstrip = dom.data("kendoMobileTabStrip");
 
         ok(tabstrip.badge(0) == tabstrip.badge("a:first"));
+        kendo.destroy(dom);
     });
 
     test("badge method removes the badge if passed false", function() {
@@ -160,6 +164,7 @@
 
         tabstrip.badge(0, false);
         ok(!dom.find(".km-badge")[0]);
+        kendo.destroy(dom);
     });
 
     test("badge method gets the badge value if no arguments", function() {
@@ -170,5 +175,6 @@
         tabstrip.badge("a:last", 6);
 
         ok(tabstrip.badge("a:last") == "6");
+        kendo.destroy(dom);
     });
 })();

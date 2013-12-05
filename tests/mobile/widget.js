@@ -18,6 +18,7 @@
         var widget = new MobileWidget();
 
         ok(widget instanceof kendo.Observable);
+        widget.destroy();
     });
 
     test("element is initialized", function() {
@@ -25,6 +26,7 @@
         var widget = new MobileWidget(dom);
 
         equal(widget.element[0], dom[0]);
+        widget.destroy();
     });
 
     test("mobile widget has widget class", function() {
@@ -32,6 +34,7 @@
         var widget = new MobileWidget(dom);
 
         ok(widget.element.hasClass("km-widget"));
+        widget.destroy();
     });
 
     test("instantiates mobile widgets by data attribute and container dom", 1, function() {
@@ -40,6 +43,7 @@
         kendo.mobile.init(dom);
 
         ok(dom.find("div").data("kendoMobileMy"), "Plugin instantiated");
+        dom.find("div").data("kendoMobileMy").destroy();
     });
 
     test("instantiates mobile widgets by data attribute", 1, function() {
@@ -48,5 +52,6 @@
         kendo.mobile.init(dom);
 
         ok(dom.data("kendoMobileMy"), "Plugin instantiated");
+        dom.data("kendoMobileMy").destroy();
     });
 })();

@@ -3,6 +3,10 @@
         setup: function() {
             QUnit.fixture.append('<script id="scrollview-tmp" type="text/x-kendo-template"><div>#:foo#</div></scr' + 'ipt>');
             QUnit.fixture.append('<script id="scrollview-mvvm-tmp" type="text/x-kendo-template"><div data-bind="text: foo"></div></scr' + 'ipt>');
+        },
+
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
         }
     });
 

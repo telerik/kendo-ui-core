@@ -1,19 +1,19 @@
 (function() {
-    var ListView = kendo.mobile.ui.ListView;
+    var ListView = kendo.mobile.ui.ListView, listView;
 
     module("mobile listview", {
         setup: function() {
 
         },
         teardown: function() {
-
+            listView.destroy();
         }
     });
 
     test("binds to flat datasource", function() {
         var dom = $("<ul/>");
 
-        new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [1, 2]
         });
 
@@ -26,6 +26,7 @@
         window.foo =  [1, 2];
 
         kendo.mobile.init(dom);
+        listView = dom.data('kendoMobileListView');
 
         equal(dom.children().length, 2);
     });
@@ -34,7 +35,7 @@
     test("default template expects string as data item", function() {
         var dom = $("<ul/>");
 
-        new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [1, 2]
         });
 
@@ -44,7 +45,7 @@
     test("uses custom template", function() {
         var dom = $("<ul/>");
 
-        new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [ { text: "foo" } ],
             template: "#= text #"
         });
@@ -55,7 +56,7 @@
     test("anchor with data-icon in template renders an icon", function() {
         var dom = $("<ul/>");
 
-        new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [ { text: "foo" } ],
             template: "<a data-icon='home'>#= text #</a>"
         });
@@ -66,7 +67,7 @@
     test("other element with data-icon in template renders an icon", function() {
         var dom = $("<ul/>");
 
-        new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [ { text: "foo" } ],
             template: "<span data-icon='home'>#= text #</span>"
         });
@@ -77,7 +78,7 @@
     test("template with icons renders only one icon", function() {
         var dom = $("<ul/>");
 
-        new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [ { text: "foo" } ],
             template: "<span data-icon='home'>#= text #</span><span data-icon='favorites'>#= text #</span>"
         });
@@ -88,7 +89,7 @@
     test("does not rebind when item in the datasource changes", function() {
         var dom = $("<ul/>");
 
-        var listView = new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [ { text: "foo" }, { text: "bar" } ],
             template: "#= text #"
         });
@@ -103,7 +104,7 @@
     test("refreshes the corresponding list item when item in the datasource changes", function() {
         var dom = $("<ul/>");
 
-        var listView = new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [ { text: "foo" }, { text: "bar" } ],
             template: "#= text #"
         });
@@ -117,7 +118,7 @@
         var dom = $("<ul/>"),
         dataSource = new kendo.data.DataSource({ data: [ { text: "foo" },  ] });
 
-        var listView = new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: dataSource,
             template: "#= text #"
         });
@@ -133,7 +134,7 @@
         var dom = $("<ul/>"),
         dataSource = new kendo.data.DataSource({ data: [ { text: "foo" }, { text: "bar" } ] });
 
-        var listView = new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: dataSource,
             template: "#= text #"
         });
@@ -148,7 +149,7 @@
     test("default template escapes html entities", function() {
         var dom = $("<ul/>");
 
-        new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: ["<i>"]
         });
 
@@ -158,7 +159,7 @@
     test("custom template as function", function() {
         var dom = $("<ul/>");
 
-        new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [ { text: "foo" }],
             template: function(data) {
                 return data.text;
@@ -176,7 +177,7 @@
             init: originInit
         });
 
-        var listView = new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [ { text: "foo" }, { text: "bar" } ],
             template: "#= text #"
         });
@@ -189,7 +190,7 @@
     test("instantiates widgets in added items", 2, function() {
         var dom = $("<ul/>");
 
-        var listView = new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [ { text: "foo" }],
             template: "<span><a data-role='button'>#= text #</a></span>"
         });
@@ -204,7 +205,7 @@
     test("unshifting datasource updates the listview as expected", 2, function() {
         var dom = $("<ul/>");
 
-        var listView = new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [1, 2]
         });
 
@@ -217,7 +218,7 @@
     test("splicing datasource updates the listview as expected", 2, function() {
         var dom = $("<ul/>");
 
-        var listView = new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [1, 2]
         });
 
@@ -230,7 +231,7 @@
     test("pushing in the datasource updates the listview as expected", 2, function() {
         var dom = $("<ul/>");
 
-        var listView = new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [1, 2]
         });
 
@@ -244,7 +245,7 @@
         var dom = $("<ul/>"),
         originInit = kendo.initWidget;
 
-        var listView = new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [ { text: "foo" }, { text: "bar" } ],
             appendOnRefresh: true,
             template: "#= text #"
@@ -265,7 +266,7 @@
         var dom = $("<ul/>"),
         originInit = kendo.initWidget;
 
-        var listView = new ListView(dom, {
+        listView = new ListView(dom, {
             dataSource: [ { text: "foo" }, { text: "bar" } ],
             appendOnRefresh: true,
             template: "#= text #"
@@ -291,13 +292,14 @@
             data = [{foo: "Foo", bar: "Bar"}, {foo: "Foo", bar: "Baz"}];
             dom = $("<ul/>");
 
-
             dataSource = new kendo.data.DataSource({data: data, group: {field: "foo"}});
             listView = new ListView(dom, {dataSource: dataSource, template: "${bar}", headerTemplate: "<i>${value}</i>"});
             subList = dom.find("li>ul");
         },
 
-        teardown: function() { }
+        teardown: function() {
+            listView.destroy();
+        }
     });
 
     test("detects grouped datasource", 1, function() {
@@ -357,17 +359,20 @@
 
     test("accepts function as a custom header template", function() {
         dom = $("<ul/>");
-        listView = new ListView(dom, {dataSource: dataSource, template: "${bar}", headerTemplate: function(data) { return "<i>" + data + "</i>" }});
+        var myListView = new ListView(dom, {dataSource: dataSource, template: "${bar}", headerTemplate: function(data) { return "<i>" + data + "</i>" }});
         ok(dom.find("li > div > div").eq(0).children(0).is("i"), "item has custom header");
+        myListView.destroy();
     });
 
     test("data-uid attribute is rendered for each row when model is defined", function() {
         dom = $("<ul/>");
-        listView = new ListView(dom, {
+
+        var myListView = new ListView(dom, {
             dataSource: {data: [{foo: "bar"}]}
         });
 
-        equal(dom.find("li").data("uid"), listView.dataSource.view()[0].uid);
+        equal(dom.find("li").data("uid"), myListView.dataSource.view()[0].uid);
+        myListView.destroy();
     });
 
     test("databound item passes the dataitem in the event when clicked", 1, function() {
@@ -377,10 +382,11 @@
 
         dom = $("<ul/>");
 
-        listView = new ListView(dom, {dataSource: dataSource});
+        var myListView = new ListView(dom, {dataSource: dataSource});
 
-        listView.bind("click", function(e) {
+        myListView.bind("click", function(e) {
             equal(e.dataItem.foo, model.foo, "event passes the model as data item");
+            myListView.destroy();
         });
 
         link = dom.find("li");
@@ -392,44 +398,47 @@
     test("resetting the dataSource detaches the previous events", function() {
         dom = $("<ul/>");
 
-        listView = new ListView(dom, {dataSource: dataSource});
+        var myListView = new ListView(dom, {dataSource: dataSource});
 
-        var dataSource = listView.dataSource;
+        var dataSource = myListView.dataSource;
 
-        listView.setDataSource(new kendo.data.DataSource({ data:[{text: 1, value: 1}, {text:2, value:2}] }));
+        myListView.setDataSource(new kendo.data.DataSource({ data:[{text: 1, value: 1}, {text:2, value:2}] }));
 
-        listView.bind("dataBound", function() {
+        myListView.bind("dataBound", function() {
             ok(false, "Change event is not detached");
         });
 
         dataSource.read();
 
-        notStrictEqual(listView.dataSource, dataSource);
+        notStrictEqual(myListView.dataSource, dataSource);
+        myListView.destroy();
     });
 
     test("resetting DataSource rebinds the widget", function() {
         dom = $("<ul/>");
 
-        listView = new ListView(dom, {dataSource: dataSource});
+        myListView = new ListView(dom, {dataSource: dataSource});
 
-        listView.setDataSource(new kendo.data.DataSource({
+        myListView.setDataSource(new kendo.data.DataSource({
             data:[{text: 1, value: 1}, {text:2, value:2}]
         }));
 
         equal(dom.find("li").length, 2);
+        myListView.destroy();
     });
 
     test("clearing groups does not throw error", function() {
         dom = $("<ul/>");
 
-        listView = new ListView(dom, {dataSource: dataSource});
+        var myListView = new ListView(dom, {dataSource: dataSource});
 
-        listView.dataSource.query({});
+        myListView.dataSource.query({});
 
         ok(true);
+        myListView.destroy();
     });
 
-    var application;
+    var application, root;
 
     module("pull to refresh", {
         setup: function() {
@@ -441,12 +450,13 @@
 
         teardown: function() {
             $.mockjaxClear();
+            kendo.destroy(root);
             kendo.history.stop();
         }
     });
 
     function setup(html, options) {
-        var root = $("<div />").append(html);
+        root = $("<div />").append(html);
         $("#qunit-fixture").html(root);
         application = new kendo.mobile.Application(root, options);
     }
@@ -485,7 +495,7 @@
         ds.bind("change", firstAssert);
     });
 
-    asyncTest("Pull to refresh always send page number 1", 1, function(){
+    asyncTest("Pull to refresh always sends page number 1", 1, function(){
         $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
 
         var listview;

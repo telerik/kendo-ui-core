@@ -14,6 +14,9 @@
     module("buttongroup", {
         setup: function() {
             dom = $("<ul><li>Text1</li><li>Text2</li></ul>");
+        },
+        teardown: function() {
+            kendo.destroy(dom);
         }
     });
 
@@ -56,6 +59,7 @@
         var group = new ButtonGroup($("<ul><li class='km-state-active'>Text1</li><li>Text2</li></ul>"));
 
         equal(group.current().index(), 0);
+        group.destroy();
     });
 
     test("Add icon if no image and data attribute", function() {
@@ -162,7 +166,7 @@
 
 
     test("binding visible to false hides the widget", function() {
-        var dom = $('<ul data-role="buttongroup" data-bind="visible:visible"><li></li></ul>');
+        dom = $('<ul data-role="buttongroup" data-bind="visible:visible"><li></li></ul>');
 
         var observable = kendo.observable({
             visible: false
@@ -174,7 +178,7 @@
     });
 
     test("binding visible to true shows the widget", function() {
-        var dom = $('<ul data-role="buttongroup" style="display:none" data-bind="visible:visible"><li></li></ul>');
+        dom = $('<ul data-role="buttongroup" style="display:none" data-bind="visible:visible"><li></li></ul>');
 
         var observable = kendo.observable({
             visible: true
@@ -186,7 +190,7 @@
     });
 
     test("changing visible to false hides the widget", function() {
-        var dom = $('<ul data-role="buttongroup" data-bind="visible:visible"><li></li></ul>');
+        dom = $('<ul data-role="buttongroup" data-bind="visible:visible"><li></li></ul>');
 
         var observable = kendo.observable({
             visible: true
@@ -199,7 +203,7 @@
     });
 
     test("changing visible to true shows the widget", function() {
-        var dom = $('<ul data-role="buttongroup" data-bind="visible:visible"><li></li></ul>');
+        dom = $('<ul data-role="buttongroup" data-bind="visible:visible"><li></li></ul>');
 
         var observable = kendo.observable({
             visible: false
@@ -212,7 +216,7 @@
     });
 
     test("binding invisible to true hides the widget", function() {
-        var dom = $('<ul data-role="buttongroup" data-bind="invisible:invisible"><li></li></ul>');
+        dom = $('<ul data-role="buttongroup" data-bind="invisible:invisible"><li></li></ul>');
 
         var observable = kendo.observable({
             invisible: true
@@ -224,7 +228,7 @@
     });
 
     test("binding invisible to false shows the widget", function() {
-        var dom = $('<ul data-role="buttongroup" data-bind="invisible:invisible" style="display:none"><li></li></ul>');
+        dom = $('<ul data-role="buttongroup" data-bind="invisible:invisible" style="display:none"><li></li></ul>');
 
         var observable = kendo.observable({
             invisible: false
@@ -236,7 +240,7 @@
     });
 
     test("changing invisible to true hides the widget", function() {
-        var dom = $('<ul data-role="buttongroup" data-bind="invisible:invisible"><li></li></ul>');
+        dom = $('<ul data-role="buttongroup" data-bind="invisible:invisible"><li></li></ul>');
 
         var observable = kendo.observable({
             invisible: false
@@ -249,7 +253,7 @@
     });
 
     test("changing invisible to false shows the widget", function() {
-        var dom = $('<ul data-role="buttongroup" data-bind="invisible:invisible"><li></li></ul>');
+        dom = $('<ul data-role="buttongroup" data-bind="invisible:invisible"><li></li></ul>');
 
         var observable = kendo.observable({
             invisible: true
@@ -262,7 +266,7 @@
     });
 
     test("badge method sets a badge where there is none", function() {
-        var dom = $('<ul data-role="buttongroup"><li id="foo">foo</li><li id="bar">bar</li></ul>');
+        dom = $('<ul data-role="buttongroup"><li id="foo">foo</li><li id="bar">bar</li></ul>');
         kendo.mobile.init(dom);
 
         dom.data("kendoMobileButtonGroup").badge("li:first", 5);
@@ -271,7 +275,7 @@
     });
 
     test("badge attribute init and badge method gets a badge by tab number or tab selector", function() {
-        var dom = $('<ul data-role="buttongroup"><li id="foo" data-badge="3">foo</li><li id="bar">bar</li></ul>');
+        dom = $('<ul data-role="buttongroup"><li id="foo" data-badge="3">foo</li><li id="bar">bar</li></ul>');
         kendo.mobile.init(dom);
         var buttongroup = dom.data("kendoMobileButtonGroup");
 
@@ -279,7 +283,7 @@
     });
 
     test("badge method removes the badge if passed false", function() {
-        var dom = $('<ul data-role="buttongroup"><li id="foo" data-badge="3">foo</li><li id="bar">bar</li></ul>');
+        dom = $('<ul data-role="buttongroup"><li id="foo" data-badge="3">foo</li><li id="bar">bar</li></ul>');
         kendo.mobile.init(dom);
         var buttongroup = dom.data("kendoMobileButtonGroup");
 
@@ -288,7 +292,7 @@
     });
 
     test("badge method gets the badge value if no arguments", function() {
-        var dom = $('<ul data-role="buttongroup"><li id="foo">foo</li><li id="bar">bar</li></ul>');
+        dom = $('<ul data-role="buttongroup"><li id="foo">foo</li><li id="bar">bar</li></ul>');
         kendo.mobile.init(dom);
         var buttongroup = dom.data("kendoMobileButtonGroup");
 

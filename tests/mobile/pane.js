@@ -25,6 +25,7 @@
             root = $("#qunit-fixture");
         },
         teardown: function() {
+            pane.destroy();
             root.empty();
         }
     });
@@ -46,7 +47,8 @@
 
     test("implements initial view setting", 1, function() {
         root.html('<div><div data-role="view" id="foo">Foo</div><div data-role="view" id="bar">Bar</div></div>');
-        var pane = new kendo.mobile.ui.Pane(root.children().first(), { initial: "#bar" });
+        pane.destroy();
+        pane = new kendo.mobile.ui.Pane(root.children().first(), { initial: "#bar" });
         pane.navigateToInitial();
         visible("#bar");
     });

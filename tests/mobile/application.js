@@ -7,19 +7,20 @@
             location.hash = '';
             $.mockjaxSettings.responseTime = 0;
             $.mockjaxSettings.contentType = "text/html";
-            $("#qunit-fixture").css({ height: "100px", overflow: "hidden"});
+            QUnit.fixture.css({ height: "100px", overflow: "hidden"});
         },
 
         teardown: function() {
+            application.destroy();
             $.mockjaxClear();
             kendo.history.stop();
-            $("#qunit-fixture").empty();
+            QUnit.fixture.empty();
         }
     });
 
     function setup(html, options) {
         var root = $("<div />").append(html);
-        $("#qunit-fixture").html(root);
+        QUnit.fixture.html(root);
         application = new kendo.mobile.Application(root, options);
         root.addClass("k-ff19"); // Trick Firefox scroller tests, since the UA is wrong.
     }
@@ -186,8 +187,8 @@
 
     test("Appends root and phone/tablet classes on documentElement", function () {
         setup('<div data-role="view" />');
-        ok($("#qunit-fixture").hasClass("km-root"), 'app has ' + $("#qunit-fixture").attr("class"));
-        ok($("#qunit-fixture").hasClass("km-" + (os && os.tablet ? "tablet" : "phone")));
+        ok(QUnit.fixture.hasClass("km-root"), 'app has ' + QUnit.fixture.attr("class"));
+        ok(QUnit.fixture.hasClass("km-" + (os && os.tablet ? "tablet" : "phone")));
     });
 
     test("Sets web-app-capable meta to yes by default", 1, function() {
@@ -268,13 +269,13 @@
     */
 
     asyncTest("Triggers init event handler", 1, function() {
-        new kendo.mobile.Application(
+        var app = new kendo.mobile.Application(
             $("<div><div data-role='view' /></div>"),
             {
                 init: function(e) {
                     start();
                     ok(true);
-                    e.sender.element.empty().remove();
+                    e.sender.destroy();
                 }
             }
         );

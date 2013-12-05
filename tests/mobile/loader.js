@@ -1,6 +1,7 @@
 (function() {
     var pane,
-        root;
+        root,
+        loader;
 
     function hidden(selector) {
         ok(!root.find(selector).is(":visible"));
@@ -17,9 +18,12 @@
     ////////////////////////////////////////////////////////////////////
     module("mobile loader initialization", {
         setup: function() {
-            root = $("#qunit-fixture");
+            root = QUnit.fixture;
             root.html('<a href="#" id="foo">Foo</a>').show();
             loader = new kendo.mobile.ui.Loader(root, {timeout: 0});
+        },
+        teardown: function() {
+            kendo.destroy(root);
         }
     });
 

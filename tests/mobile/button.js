@@ -1,7 +1,8 @@
 (function() {
     var Button = kendo.mobile.ui.Button,
         MOUSEDOWN = kendo.support.mousedown,
-        MOUSEUP = kendo.support.mouseup;
+        MOUSEUP = kendo.support.mouseup,
+        dom;
 
     function click(dom) {
         dom.trigger(MOUSEDOWN);
@@ -10,12 +11,15 @@
 
     module("mobile button", {
         // setup: function() { kendo.ns = "kendo-"; }
+        teardown: function() {
+            kendo.destroy(dom);
+        }
     });
 
     test("applies css class", function() {
         expect(1);
 
-        var dom = $("<button/>");
+        dom = $("<button/>");
 
         var button = new Button(dom);
 
@@ -23,7 +27,7 @@
     });
 
     test("accepts css class through options", function() {
-        var dom = $('<button data-role="button" data-style="detail"/>');
+        dom = $('<button data-role="button" data-style="detail"/>');
 
         kendo.mobile.init(dom);
 
@@ -31,7 +35,7 @@
     });
 
     test("wraps content in a span", function() {
-        var dom = $("<button>foo</button>");
+        dom = $("<button>foo</button>");
 
         var button = new Button(dom);
 
@@ -39,7 +43,7 @@
     });
 
     test("reuses existing span", function() {
-        var dom = $("<button><span>foo</span></button>");
+        dom = $("<button><span>foo</span></button>");
         var span = dom.find("span");
 
         var button = new Button(dom);
@@ -48,7 +52,7 @@
     });
 
     test("adds css class to children img elements", function() {
-        var dom = $("<button><img/>foo</button>");
+        dom = $("<button><img/>foo</button>");
         var img = dom.find("img");
 
         var button = new Button(dom);
@@ -57,7 +61,7 @@
     });
 
     test("raises click event when clicked", 1, function() {
-        var dom = $("<button>foo</button>");
+        dom = $("<button>foo</button>");
 
         var button = new Button(dom);
 
@@ -69,7 +73,7 @@
     });
 
     test("Sets active css class on 'down'", 1, function() {
-        var dom = $("<button>foo</button>");
+        dom = $("<button>foo</button>");
 
         var button = new Button(dom);
 
@@ -79,7 +83,7 @@
     });
 
     test("icon only button", function() {
-        var dom = $('<button data-role="button" data-icon="history"></button>');
+        dom = $('<button data-role="button" data-icon="history"></button>');
         kendo.mobile.init(dom);
 
         ok(!dom.find("span.km-text")[0]);
@@ -87,7 +91,7 @@
     });
 
     test("badge method sets a badge where there is none", function() {
-        var dom = $('<button data-role="button"></button>');
+        dom = $('<button data-role="button"></button>');
         kendo.mobile.init(dom);
 
         dom.data("kendoMobileButton").badge(5);
@@ -96,14 +100,14 @@
     });
 
     test("badge attribute init and badge method gets the badge value if no arguments", function() {
-        var dom = $('<button data-role="button" data-badge="6"></button>');
+        dom = $('<button data-role="button" data-badge="6"></button>');
         kendo.mobile.init(dom);
 
         ok(dom.data("kendoMobileButton").badge() == "6");
     });
 
     test("badge method removes the badge if passed false", function() {
-        var dom = $('<button data-role="button" data-badge="6"></button>');
+        dom = $('<button data-role="button" data-badge="6"></button>');
         kendo.mobile.init(dom);
         dom.data("kendoMobileButton").badge(false);
 
@@ -111,7 +115,7 @@
     });
 
     test("binding visible to false hides the widget", function() {
-        var dom = $('<button data-role="button" data-icon="history" data-bind="visible:visible"></button>');
+        dom = $('<button data-role="button" data-icon="history" data-bind="visible:visible"></button>');
 
         var observable = kendo.observable({
             visible: false
@@ -123,7 +127,7 @@
     });
 
     test("binding visible to true shows the widget", function() {
-        var dom = $('<button data-role="button" data-icon="history" style="display:none" data-bind="visible:visible"></button>');
+        dom = $('<button data-role="button" data-icon="history" style="display:none" data-bind="visible:visible"></button>');
 
         var observable = kendo.observable({
             visible: true
@@ -135,7 +139,7 @@
     });
 
     test("changing visible to false hides the widget", function() {
-        var dom = $('<button data-role="button" data-icon="history" data-bind="visible:visible"></button>');
+        dom = $('<button data-role="button" data-icon="history" data-bind="visible:visible"></button>');
 
         var observable = kendo.observable({
             visible: true
@@ -148,7 +152,7 @@
     });
 
     test("changing visible to true shows the widget", function() {
-        var dom = $('<button data-role="button" data-icon="history" data-bind="visible:visible"></button>');
+        dom = $('<button data-role="button" data-icon="history" data-bind="visible:visible"></button>');
 
         var observable = kendo.observable({
             visible: false
@@ -161,7 +165,7 @@
     });
 
     test("binding invisible to true hides the widget", function() {
-        var dom = $('<button data-role="button" data-icon="history" data-bind="invisible:invisible"></button>');
+        dom = $('<button data-role="button" data-icon="history" data-bind="invisible:invisible"></button>');
 
         var observable = kendo.observable({
             invisible: true
@@ -173,7 +177,7 @@
     });
 
     test("binding invisible to false shows the widget", function() {
-        var dom = $('<button data-role="button" data-icon="history" data-bind="invisible:invisible" style="display:none"></button>');
+        dom = $('<button data-role="button" data-icon="history" data-bind="invisible:invisible" style="display:none"></button>');
 
         var observable = kendo.observable({
             invisible: false
@@ -185,7 +189,7 @@
     });
 
     test("changing invisible to true hides the widget", function() {
-        var dom = $('<button data-role="button" data-icon="history" data-bind="invisible:invisible"></button>');
+        dom = $('<button data-role="button" data-icon="history" data-bind="invisible:invisible"></button>');
 
         var observable = kendo.observable({
             invisible: false
@@ -198,7 +202,7 @@
     });
 
     test("changing invisible to false shows the widget", function() {
-        var dom = $('<button data-role="button" data-icon="history" data-bind="invisible:invisible"></button>');
+        dom = $('<button data-role="button" data-icon="history" data-bind="invisible:invisible"></button>');
 
         var observable = kendo.observable({
             invisible: true
@@ -211,7 +215,7 @@
     });
 
     test("disabled button has km-state-disabled class", 1, function() {
-        var dom = $("<button/>");
+        dom = $("<button/>");
 
         var button = new Button(dom);
         button.enable(false);
@@ -220,7 +224,7 @@
     });
 
     test("widget understands disabled attribute", 1, function() {
-        var dom = $('<button data-role="button" disabled></button>');
+        dom = $('<button data-role="button" disabled></button>');
 
         kendo.mobile.init(dom);
         var button = dom.data("kendoMobileButton");
@@ -229,7 +233,7 @@
     });
 
     test("enable methods enables and disables the widget", 2, function() {
-        var dom = $("<button/>");
+        dom = $("<button/>");
 
         var button = new Button(dom);
         button.enable(false);
@@ -241,7 +245,7 @@
     });
 
     test("does not active css class on 'down' for disabled button", 1, function() {
-        var dom = $("<button>foo</button>");
+        dom = $("<button>foo</button>");
 
         var button = new Button(dom);
         button.enable(false);
@@ -252,7 +256,7 @@
     });
 
     test("click event of disabled button is not rised", 0, function() {
-        var dom = $("<button>foo</button>");
+        dom = $("<button>foo</button>");
 
         var button = new Button(dom);
 
@@ -265,7 +269,7 @@
     });
 
     test("disabled button has disabled attribute", 1, function() {
-        var dom = $("<button>foo</button>");
+        dom = $("<button>foo</button>");
 
         var button = new Button(dom);
         button.enable(false);

@@ -17,6 +17,7 @@
             actionSheet = element.data("kendoMobileActionSheet");
         },
         teardown: function() {
+            kendo.destroy(root);
             root.empty();
         }
     });
@@ -148,6 +149,7 @@
             kendo.mobile.ui.Shim.fn.options.duration = 0;
         },
         teardown: function() {
+            kendo.destroy(root);
             window.foo = null;
         }
     });

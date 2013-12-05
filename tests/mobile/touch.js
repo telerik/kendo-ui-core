@@ -5,6 +5,9 @@
         setup: function() {
             element = $("<i />");
             touch = element.kendoTouch().data("kendoTouch");
+        },
+        teardown: function() {
+            touch.destroy();
         }
     });
 
@@ -34,15 +37,13 @@
         move(element, 18, 18);
     });
 
-    test("supports surface option", 0, function() {
-        var dom = $("<div id='outer'><div id='inner'>Inner</div></div>");
-        dom.find('#inner').kendoTouch({ surface: dom });
-    });
-
     module("tap events", {
         setup: function() {
             element = $("<i />");
             touch = element.kendoTouch({ minHold: 100, doubleTapTimeout: 100 }).data("kendoTouch");
+        },
+        teardown: function() {
+            touch.destroy();
         }
     });
 
@@ -161,6 +162,7 @@
         },
 
         teardown: function() {
+            touch.destroy();
             kendo.ui.Touch.fn.options.maxDuration = this.maxDuration;
         }
     });
@@ -239,6 +241,9 @@
 
             press(element, 10, 20);
             move(element, 15, 25);
+        },
+        teardown: function() {
+            touch.destroy();
         }
     });
 

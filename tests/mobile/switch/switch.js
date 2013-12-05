@@ -3,6 +3,7 @@
         MOUSEDOWN = kendo.support.mousedown,
         MOUSEMOVE = kendo.support.mousemove,
         MOUSEUP = kendo.support.mouseup,
+        theSwitch,
         dom;
 
     var mouseDownEvent,
@@ -19,13 +20,16 @@
     module("switch", {
         setup: function() {
             dom = $("<input type='checkbox'/>").appendTo(QUnit.fixture);
+        },
+        teardown: function() {
+            theSwitch.destroy();
         }
     });
 
     test("Switch can be initialized from input type='checkbox'", function() {
         expect(1);
 
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         ok(theSwitch.wrapper.hasClass("km-switch"), "Should have specified CSS class");
     });
@@ -35,7 +39,7 @@
 
         dom[0].type = "text";
 
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         equal(dom[0].type, "checkbox");
     });
@@ -44,7 +48,7 @@
         expect(1);
         dom.wrap("<span />");
 
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         equal(dom.parent("span").length, 1);
     });
@@ -52,14 +56,14 @@
     test("Switch creates a toggle handle", function() {
         expect(1);
 
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         equal(dom.parent().find(".km-switch-handle").length, 1);
     });
 
     test("Switch creates on/off labels", function() {
 
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         equal(theSwitch.handle.children().length, 2);
         //on label
@@ -74,7 +78,7 @@
     test("Switch creates a container", function() {
         expect(1);
 
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         equal(dom.parent().find(".km-switch-container").length, 1);
     });
@@ -82,14 +86,14 @@
     test("Switch creates a wrapper and background", function() {
         expect(2);
 
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         equal(dom.parent().find(".km-switch-wrapper").length, 1);
         equal(dom.parent().find(".km-switch-background").length, 1);
     });
 
     asyncTest("Switch raises change event when changed", 1, function() {
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         theSwitch.bind("change", function() {
             start();
@@ -102,7 +106,7 @@
     test("Switch applies active state when pressed", function() {
         expect(1);
 
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         theSwitch.handle.trigger(mouseDownEvent);
         theSwitch.handle.trigger(mouseMoveEvent);
@@ -112,7 +116,7 @@
     test("Switch removes active state when depressed", function() {
         expect(1);
 
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         theSwitch.handle.trigger(mouseDownEvent);
         theSwitch.handle.trigger(mouseMoveEvent);
@@ -121,7 +125,7 @@
     });
 
     asyncTest("Tapping checks the switch", 1, function() {
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         theSwitch.bind('change', function() {
             start();
@@ -133,7 +137,7 @@
     });
 
     test("Switch check the input depending on the checked option", function() {
-        var theSwitch = new Switch(dom, {
+        theSwitch = new Switch(dom, {
             checked: true
         });
 
@@ -142,7 +146,7 @@
     });
 
     test("Switch returns current checked state", function() {
-        var theSwitch = new Switch(dom, {
+        theSwitch = new Switch(dom, {
             checked: true
         });
 
@@ -150,7 +154,7 @@
     });
 
     test("Switch checks the input when check(true)", function() {
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         theSwitch.check(true);
 
@@ -159,7 +163,7 @@
     });
 
     test("Switch unchecks the input when check(false)", function() {
-        var theSwitch = new Switch(dom, {
+        theSwitch = new Switch(dom, {
             checked: true
         });
 
@@ -170,7 +174,7 @@
     });
 
     test("Switch toggles to checked when toggle()", function() {
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         theSwitch.toggle();
 
@@ -179,7 +183,7 @@
     });
 
     test("Switch toggles to unchecked when toggle()", function() {
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         theSwitch.check(true);
         theSwitch.toggle();
@@ -188,7 +192,7 @@
     });
 
     test("Switch refresh should set origin if it didn't on init", function() {
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         theSwitch.wrapper.appendTo(document.body);
         theSwitch.refresh();
@@ -198,7 +202,7 @@
     });
 
     test("Destroying removes event handling", function() {
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         theSwitch.destroy();
         theSwitch.handle.trigger(mouseDownEvent);
@@ -207,7 +211,7 @@
     });
 
     test("Disabled switch has km-state-disabled class and disabled attribute", 2, function() {
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         theSwitch.enable(false);
 
@@ -219,13 +223,13 @@
         var dom = $('<input data-role="switch" type="checkbox" disabled>');
 
         kendo.mobile.init(dom);
-        var theSwitch = dom.data("kendoMobileSwitch");
+        theSwitch = dom.data("kendoMobileSwitch");
 
         ok(theSwitch.wrapper.hasClass("km-state-disabled"), "has km-state-disabled class");
     });
 
     test("Enable method enables and disables the widget", 4, function() {
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         theSwitch.enable(false);
         ok(theSwitch.wrapper.hasClass("km-state-disabled"), "has km-state-disabled class");
@@ -237,7 +241,7 @@
     });
 
     test("Change event of disabled switch is not rised", 0, function() {
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         theSwitch.bind("change", function() {
             ok(false, "Should not raise the change event");
@@ -249,7 +253,7 @@
     });
 
     test("Disabled switch does not change its state when pressed", 2, function() {
-        var theSwitch = new Switch(dom);
+        theSwitch = new Switch(dom);
 
         theSwitch.check(true);
         theSwitch.enable(false);
