@@ -110,6 +110,21 @@ $('head')
 (function() {
     var domContentsLength;
 
+    var Widget = kendo.ui.Widget;
+    var init = Widget.fn.init;
+    var destroy = Widget.fn.destroy;
+    var widgets = [];
+
+    Widget.fn.init = function() {
+        widgets.push(this);
+        init.apply(this, arguments);
+    }
+
+    Widget.fn.destroy = function() {
+        widgets.splice(widgets.indexOf(this), 1);
+        destroy.apply(this, arguments);
+    }
+
     function getDomContentsLength() {
         return $(document.body).children(":not(script,#editor-fixture)").length;
     }
@@ -124,13 +139,19 @@ $('head')
 
         var length = getDomContentsLength();
 
-        if (!QUnit.suppressCleanupCheck && length > domContentsLength) {
+        if (length > domContentsLength) {
             console.warn(details.module, details.name, 'test did not clean DOM contents properly');
+        }
+
+        if (widgets.length) {
+            console.error.apply(console, [ details.module, details.name, 'active widgets left'].concat(widgets.map(function(widget) { return widget.options.name; })));
+            widgets = [];
         }
 
         domContentsLength = length;
     });
 })();
+
 
 QUnit.extend( QUnit, {
     close: function(actual, expected, maxDifference, message) {
