@@ -8,22 +8,26 @@
         view,
         TOLERANCE = 2;
 
-        function ChartElementStub(viewElement) {
-            viewElement = viewElement || new ViewElementStub();
-            this.getView = function() {
-                return viewElement;
-            },
+    function ChartElementStub(viewElement) {
+        viewElement = viewElement || new ViewElementStub();
+        this.getView = function() {
+            return viewElement;
+        },
 
-            this.getViewElements = function() {
-                return [viewElement];
-            },
+        this.getViewElements = function() {
+            return [viewElement];
+        },
 
-            this.reflow = function() { }
-        }
+        this.reflow = function() { }
+    }
 
-        function moduleSetup() {
-            view = new ViewStub();
-        }
+    function moduleSetup() {
+        view = new ViewStub();
+    }
+
+    function moduleTeardown() {
+        destroyMeasureBox();
+    }
 
 
     (function() {
@@ -869,7 +873,8 @@
                 moduleSetup();
 
                 createTitle();
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("text is created", function() {
@@ -1001,7 +1006,8 @@
         module("Title / buildTitle", {
             setup: function() {
                 parent = new dataviz.ChartElement();
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("creates a title from string", function() {
@@ -1039,7 +1045,8 @@
                 moduleSetup();
 
                 text = new dataviz.Text("&nbsp;", { font: SANS12 });
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("creates text view element", function() {
@@ -1145,7 +1152,8 @@
             setup: function() {
                 moduleSetup();
                 createTextBox();
-            }
+            },
+            teardown: destroyMeasureBox
         });
 
         test("sets unique id on text", function() {
@@ -1194,7 +1202,8 @@
                 moduleSetup();
 
                 createLegend();
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("renders legend in a group", function() {
@@ -1284,7 +1293,8 @@
 
                 createLegend({ margin: 0, position: "top" });
                 baseHeight = legend.box.height();
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("positions legend to the right", function() {
@@ -1395,7 +1405,8 @@
 
                 marker = view.log.rect[0];
                 label = view.log.text[0];
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("creates markers for series", function() {
@@ -1456,7 +1467,8 @@
                 legend.getViewElements(view);
 
                 legendBox = view.log.rect[1];
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("renders box with padding", function() {

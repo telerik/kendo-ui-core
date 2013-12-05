@@ -23,6 +23,10 @@
         view = new ViewStub();
     }
 
+    function moduleTeardown() {
+        destroyMeasureBox();
+    }
+
     module("Automatic Major Unit", {
         setup: moduleSetup
     });
@@ -231,7 +235,8 @@
     (function() {
         // ------------------------------------------------------------
         module("Numeric Axis / Configuration", {
-            setup: moduleSetup
+            setup: moduleSetup,
+            teardown: moduleTeardown
         });
 
         test("Major unit is calculated for user set min/max", function() {
@@ -355,7 +360,8 @@
 
         // ------------------------------------------------------------
         module("Numeric Axis / Configuration / Negative values", {
-            setup: moduleSetup
+            setup: moduleSetup,
+            teardown: moduleTeardown
         });
 
         test("Automatic maximum is rounded to auto major unit", function() {
@@ -391,7 +397,8 @@
 
         // ------------------------------------------------------------
         module("Numeric Axis / Configuration / Labels", {
-            setup: moduleSetup
+            setup: moduleSetup,
+            teardown: moduleTeardown
         });
 
         test("labels can be hidden", function() {
@@ -457,7 +464,8 @@
                 moduleSetup();
 
                 numericAxis.reflow(chartBox);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("creates axis line", function() {
@@ -770,7 +778,8 @@
 
                 numericAxis.reflow(chartBox);
                 numericAxis.getViewElements(view);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("renders every second label", function() {
@@ -794,7 +803,8 @@
 
                 numericAxis.reflow(chartBox);
                 numericAxis.getViewElements(view);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("renders every second label, starting from the third", function() {
@@ -814,7 +824,8 @@
 
                 numericAxis.options.labels.mirror = true;
                 numericAxis.reflow(chartBox);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("labels are aligned left", 7, function() {
@@ -854,7 +865,8 @@
 
                 numericAxis = new NumericAxis(0, 1, { vertical: false });
                 numericAxis.reflow(chartBox);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("creates axis line", function() {
@@ -1114,7 +1126,8 @@
 
                 numericAxis.reflow(chartBox);
                 numericAxis.getViewElements(view);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("renders every second label", function() {
@@ -1139,7 +1152,8 @@
 
                 numericAxis.reflow(chartBox);
                 numericAxis.getViewElements(view);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("renders every second label, starting from the third label", function() {
@@ -1165,7 +1179,8 @@
                 });
 
                 numericAxis.reflow(chartBox);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("labels are aligned bottom", 7, function() {
@@ -1209,7 +1224,8 @@
                 moduleSetup();
 
                 numericAxis.reflow(chartBox);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("positions slot for [0, 0.5]", function() {
@@ -1258,7 +1274,8 @@
 
                 numericAxis = new NumericAxis(-1, 0, {});
                 numericAxis.reflow(chartBox);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("positions slot for [-0.5, 0]", function() {
@@ -1288,7 +1305,8 @@
 
                 numericAxis = new NumericAxis(0, 1, { vertical: false });
                 numericAxis.reflow(chartBox);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("positions slot for [0, 0.5]", function() {
@@ -1335,7 +1353,8 @@
 
                 numericAxis = new NumericAxis(-1, 0, { vertical: false });
                 numericAxis.reflow(chartBox);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("positions slot for [-0.5, 0]", function() {

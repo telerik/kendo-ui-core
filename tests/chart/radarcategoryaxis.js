@@ -30,6 +30,8 @@
 
         view = new ViewStub();
         axis.getViewElements(view);
+
+        destroyMeasureBox();
     }
 
     function lineEnd(line) {

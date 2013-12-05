@@ -13,6 +13,10 @@
         view = new ViewStub();
     }
 
+    function moduleTeardown() {
+        destroyMeasureBox();
+    }
+
     (function() {
         var plotArea,
             categoryAxis,
@@ -116,7 +120,8 @@
                 moduleSetup();
 
                 createPlotArea(columnSeriesData);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("appends primary value axis to pane content", function() {
@@ -498,7 +503,8 @@
                         name: "secondary"
                     }]
                 });
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("secondary axis added to pane content", function() {
@@ -540,7 +546,8 @@
                         name: "secondary"
                     }]
                 });
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("overlapping axes are stacked to the left", function() {
@@ -600,7 +607,8 @@
                         name: "secondary"
                     }]
                 });
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("overlapping axes are shifted to the right", function() {
@@ -656,7 +664,8 @@
                         name: "secondary"
                     }]
                 });
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("overlapping axes are shifted to the top", function() {
@@ -700,7 +709,8 @@
                         name: "secondary"
                     }]
                 });
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("overlapping axes are shifted to the bottom", function() {
@@ -737,7 +747,8 @@
         // ------------------------------------------------------------
         module("Categorical PlotArea / Multiple Category Axes", {
             setup: function() {
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("axes are accessible by name", function() {
@@ -857,7 +868,8 @@
                 moduleSetup();
 
                 createPlotArea(columnSeriesData);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("value axis is vertical", function() {
@@ -966,7 +978,8 @@
                 moduleSetup();
 
                 createPlotArea(lineSeriesData);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("value axis is vertical", function() {
@@ -1001,7 +1014,8 @@
                 moduleSetup();
 
                 createPlotArea(verticalLineSeriesData);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("value axis is horizontal", function() {
@@ -1032,7 +1046,8 @@
                 moduleSetup();
 
                 createPlotArea(areaSeriesData);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("value axis is vertical", function() {
@@ -1081,7 +1096,8 @@
                 moduleSetup();
 
                 createPlotArea(verticalAreaSeriesData);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("value axis is horizontal", function() {
@@ -1112,7 +1128,8 @@
                 moduleSetup();
 
                 createPlotArea(barSeriesData);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("value axis is horizontal", function() {
@@ -1210,7 +1227,8 @@
                     type: "ohlc",
                     data: [[]]
                 }]);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("OHLC chart added to pane content", function() {
@@ -1226,7 +1244,8 @@
                     type: "candlestick",
                     data: [[]]
                 }]);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("Candlestick chart added to pane content", function() {
@@ -1282,9 +1301,8 @@
         };
 
         module("Categorical PlotArea / Date series", {
-            setup: function() {
-                moduleSetup();
-            }
+            setup: moduleSetup,
+            teardown: moduleTeardown
         });
 
         test("Accepts capitalized type", function() {
@@ -1381,7 +1399,10 @@
         });
 
         // ------------------------------------------------------------
-        module("Categorical PlotArea / Date series / Aggregates");
+        module("Categorical PlotArea / Date series / Aggregates", {
+            setup: moduleSetup,
+            teardown: moduleTeardown
+        });
 
         test("Aggregates series data using max by default", function() {
             createPlotArea([{
@@ -1588,7 +1609,10 @@
         });
 
         // ------------------------------------------------------------
-        module("Categorical PlotArea / Date series / Aggregates / max");
+        module("Categorical PlotArea / Date series / Aggregates / max", {
+            setup: moduleSetup,
+            teardown: moduleTeardown
+        });
 
         test("max ignores NaN values", function() {
             createPlotArea([{
@@ -1661,7 +1685,10 @@
         });
 
         // ------------------------------------------------------------
-        module("Categorical PlotArea / Date series / Aggregates / min");
+        module("Categorical PlotArea / Date series / Aggregates / min", {
+            setup: moduleSetup,
+            teardown: moduleTeardown
+        });
 
         test("min ignores NaN values", function() {
             createPlotArea([{
@@ -1734,7 +1761,10 @@
         });
 
         // ------------------------------------------------------------
-        module("Categorical PlotArea / Date series / Aggregates / sum");
+        module("Categorical PlotArea / Date series / Aggregates / sum", {
+            setup: moduleSetup,
+            teardown: moduleTeardown
+        });
 
         test("sum ignores NaN values", function() {
             createPlotArea([{
@@ -1807,7 +1837,10 @@
         });
 
         // ------------------------------------------------------------
-        module("Categorical PlotArea / Date series / Aggregates / count");
+        module("Categorical PlotArea / Date series / Aggregates / count", {
+            setup: moduleSetup,
+            teardown: moduleTeardown
+        });
 
         test("count ignores null values", function() {
             createPlotArea([{
@@ -1838,7 +1871,10 @@
         });
 
         // ------------------------------------------------------------
-        module("Categorical PlotArea / Date series / Aggregates / avg");
+        module("Categorical PlotArea / Date series / Aggregates / avg", {
+            setup: moduleSetup,
+            teardown: moduleTeardown
+        });
 
         test("avg ignores NaN values", function() {
             createPlotArea([{
@@ -1911,7 +1947,10 @@
         });
 
         // ------------------------------------------------------------
-        module("Categorical PlotArea / Date series / Aggregates / first");
+        module("Categorical PlotArea / Date series / Aggregates / first", {
+            setup: moduleSetup,
+            teardown: moduleTeardown
+        });
 
         test("first ignores null values", function() {
             createPlotArea([{
@@ -1943,9 +1982,8 @@
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Date series / Multiple Category Axes", {
-            setup: function() {
-                moduleSetup();
-            }
+            setup: moduleSetup,
+            teardown: moduleTeardown
         });
 
         test("Aggregates series on secondary axis", function() {
@@ -1981,7 +2019,10 @@
         });
 
         // ------------------------------------------------------------
-        module("Categorical PlotArea / Date series / OHLC Aggregates");
+        module("Categorical PlotArea / Date series / OHLC Aggregates", {
+            setup: moduleSetup,
+            teardown: moduleTeardown
+        });
 
         test("Series data using aggregate", function() {
             createPlotArea([{
@@ -2042,7 +2083,10 @@
         });
 
         // ------------------------------------------------------------
-        module("Categorical PlotArea / Date series / Category Field");
+        module("Categorical PlotArea / Date series / Category Field", {
+            setup: moduleSetup,
+            teardown: moduleTeardown
+        });
 
         test("Aggregates using category field instead of position", function() {
             createPlotArea([{
@@ -2074,7 +2118,10 @@
         });
 
         // ------------------------------------------------------------
-        module("Categorical PlotArea / Aggregates / Category Field");
+        module("Categorical PlotArea / Aggregates / Category Field", {
+            setup: moduleSetup,
+            teardown: moduleTeardown
+        });
 
         test("Aggregates points with same category", function() {
             createPlotArea([{
@@ -2130,9 +2177,8 @@
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Major Gridlines", {
-            setup: function() {
-                moduleSetup();
-            }
+            setup: moduleSetup,
+            teardown: moduleTeardown
         });
 
         test("renders gridlines", function() {
@@ -2237,9 +2283,8 @@
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Major Gridlines / Panes", {
-            setup: function() {
-                moduleSetup();
-            }
+            setup: moduleSetup,
+            teardown: moduleTeardown
         });
 
         test("renders gridlines when value axis is in different pane", function() {
@@ -2284,9 +2329,8 @@
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Minor Gridlines", {
-            setup: function() {
-                moduleSetup();
-            }
+            setup: moduleSetup,
+            teardown: moduleTeardown
         });
 
         test("renders gridlines", function() {
@@ -2372,9 +2416,8 @@
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Major and Minor GridLines", {
-            setup: function() {
-                moduleSetup();
-            }
+            setup: moduleSetup,
+            teardown: moduleTeardown
         });
 
         test("should not render minor and major gridline to a same point", function() {
@@ -2403,9 +2446,8 @@
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Configuration", {
-            setup: function() {
-                moduleSetup();
-            }
+            setup: moduleSetup,
+            teardown: moduleTeardown
         });
 
         test("applies margin", function() {
@@ -2508,9 +2550,8 @@
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Panes / Vertical", {
-            setup: function() {
-                moduleSetup();
-            }
+            setup: moduleSetup,
+            teardown: moduleTeardown
         });
 
         test("default pane is created", function() {
@@ -3032,9 +3073,8 @@
 
         // ------------------------------------------------------------
         module("Categorical PlotArea / Panes / Title", {
-            setup: function() {
-                moduleSetup();
-            }
+            setup: moduleSetup,
+            teardown: moduleTeardown
         });
 
         test("title is not visible by default", function() {
@@ -3127,7 +3167,8 @@
                         axis: "vAxis"
                     }]
                 );
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("Removes pane axes from plotArea.axes collection", function() {
@@ -3307,7 +3348,8 @@
                         axis: "vAxis"
                     }]
                 );
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("redraws multiple panes", function() {
@@ -3655,7 +3697,8 @@
                 moduleSetup();
 
                 createPlotArea(scatterSeriesData);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("appends primary X axis to pane content", function() {
@@ -4005,7 +4048,8 @@
                         name: "secondary"
                     }]
                 });
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("assigns axisX alias to first named X axis", function() {
@@ -4119,7 +4163,8 @@
                     xAxis: [{}, { name: "secondary" }],
                     yAxis: { axisCrossingValue: 10000 }
                 });
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("overlapping X axes are shifted to the top", function() {
@@ -4171,7 +4216,8 @@
                     xAxis: { axisCrossingValue: 10000 },
                     yAxis: [{}, { name: "secondary" }]
                 });
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("overlapping Y axes are shifted to the right", function() {
@@ -4224,7 +4270,8 @@
                 createPlotArea(scatterSeriesData, {
                     xAxis: [{}, { name: "secondary" }]
                 });
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("overlapping X axes are shifted to the bottom", function() {
@@ -4266,7 +4313,8 @@
                 createPlotArea(scatterSeriesData, {
                     yAxis: [{}, { name: "secondary" }]
                 });
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("overlapping Y axes are stacked to the left", function() {
@@ -4308,7 +4356,8 @@
                 moduleSetup();
 
                 createPlotArea(scatterSeriesData);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("Scatter chart added to pane content", function() {
@@ -4324,7 +4373,8 @@
                               type: "bubble",
                               data: []
                 }]);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("Bubble chart added to pane content", function() {
@@ -4337,7 +4387,8 @@
                 moduleSetup();
 
                 createPlotArea([{ type: "scatterLine", data: [] }]);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("Scatter line chart added to pane content", function() {
@@ -4370,7 +4421,8 @@
                 );
 
                 plotArea.reflow(chartBox);
-            }
+            },
+            teardown: moduleTeardown
         });
 
         test("Removes pane axes from plotArea.axes collection", function() {
@@ -4597,9 +4649,8 @@
 
         // ------------------------------------------------------------
         module("PlotArea / pointsByCategoryIndex", {
-            setup: function() {
-                createPlotArea();
-            }
+            setup: createPlotArea,
+            teardown: moduleTeardown
         });
 
         test("return points", function() {

@@ -23,6 +23,8 @@
         options.gap = 1.5;
         series = new dataviz.BarChart(plotArea, options);
         series.reflow();
+
+        destroyMeasureBox();
     }
 
     function stubPlotArea(getCategorySlot, getValueSlot, options) {

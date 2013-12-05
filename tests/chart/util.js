@@ -178,9 +178,14 @@ function createChart(options) {
 }
 
 function destroyChart() {
-    var element = $("#container");
-    kendo.destroy(element);
-    element.unbind().empty();
+    kendo.destroy(QUnit.fixture);
+    QUnit.fixture.empty();
+    destroyMeasureBox();
+}
+
+function destroyMeasureBox() {
+    $(kendo.dataviz.measureText.measureBox).remove();
+    kendo.dataviz.measureText.measureBox = null;
 }
 
 function serializeFontCache() {

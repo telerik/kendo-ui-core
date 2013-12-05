@@ -34,6 +34,8 @@
             view = new ViewStub();
             dateAxis.reflow(chartBox);
             dateAxis.getViewElements(view);
+
+            destroyMeasureBox();
         }
 
         // ------------------------------------------------------------
