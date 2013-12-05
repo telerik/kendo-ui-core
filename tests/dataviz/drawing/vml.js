@@ -641,7 +641,6 @@
     });
 
     test("renders center", function() {
-        console.log(circleNode.render());
         ok(circleNode.render().indexOf("top:-10px;left:-20px;") !== -1);
     });
 
