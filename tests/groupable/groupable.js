@@ -302,7 +302,11 @@
 
         var groupContainer = $(".container"),
             groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: new kendo.data.DataSource() }),
-            draggable = stub(groupContainer.data("kendoDraggable"), "destroy");
+            draggable = groupContainer.data("kendoDraggable");
+
+        draggable = stub(draggable, {
+            destroy: draggable.destroy
+        });
 
         groupable.destroy();
 
@@ -315,7 +319,11 @@
 
         var groupContainer = $(".container"),
             groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: new kendo.data.DataSource() }),
-            dropTarget = stub(groupContainer.data("kendoDropTarget"), "destroy");
+            dropTarget = groupContainer.data("kendoDropTarget");
+
+        dropTarget = stub(dropTarget, {
+            destroy: dropTarget.destroy
+        });
 
         groupable.destroy();
 
@@ -328,7 +336,11 @@
 
         var groupContainer = $(".container"),
             groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: new kendo.data.DataSource() }),
-            draggable = stub(groupable.draggable, "destroy");
+            draggable = groupable.draggable;
+
+        draggable = stub(draggable, {
+            destroy: draggable.destroy
+        });
 
         groupable.destroy();
 
@@ -343,9 +355,13 @@
             groupable = new Groupable(div, {
                 groupContainer:  groupContainer,
                 dataSource: new kendo.data.DataSource(),
-                draggable: new kendo.ui.Draggable($("<div></div>"))
+                draggable: new kendo.ui.Draggable($("<div></div>").appendTo(QUnit.fixture))
             }),
-            draggable = stub(groupable.draggable, "destroy");
+            draggable = groupable.draggable;
+
+        draggable = stub(draggable, {
+            destroy: draggable.destroy
+        });
 
         groupable.destroy();
 
