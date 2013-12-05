@@ -5,6 +5,9 @@
     module("kendo.ui.NumericTextBox API", {
         setup: function() {
             input = $("<input />").appendTo(QUnit.fixture);
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
         }
     });
 

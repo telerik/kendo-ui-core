@@ -5,6 +5,9 @@
     module("kendo.ui.NumericTextBox ARIA", {
         setup: function() {
             input = $("<input />").appendTo(QUnit.fixture);
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
         }
     });
 

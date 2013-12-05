@@ -5,6 +5,9 @@
     module("kendo.ui.NumericTextBox initialization", {
         setup: function() {
             input = $("<input />").appendTo(QUnit.fixture);
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
         }
     });
 
@@ -68,7 +71,7 @@
     });
 
     test("Change type of the element", function() {
-        var textbox = new NumericTextBox($('<input type="number" />'));
+        var textbox = new NumericTextBox($('<input type="number" />').appendTo(QUnit.fixture));
 
         equal(textbox.element[0].type, "text");
     });
@@ -90,20 +93,20 @@
     });
 
     test("Get min/max value from the input", function() {
-       var textbox = new NumericTextBox($("<input type='number' min='1' max='12' />"));
+       var textbox = new NumericTextBox($("<input type='number' min='1' max='12' />").appendTo(QUnit.fixture));
 
        equal(textbox.options.min, 1);
        equal(textbox.options.max, 12);
     });
 
     test("Get step value from the input", function() {
-        var textbox = new NumericTextBox($("<input type='number' step='10' />"));
+        var textbox = new NumericTextBox($("<input type='number' step='10' />").appendTo(QUnit.fixture));
 
        equal(textbox.options.step, 10);
     });
 
     test("strip format", function() {
-        var textbox = new NumericTextBox($("<input type='number' step='10' />"), {
+        var textbox = new NumericTextBox($("<input type='number' step='10' />").appendTo(QUnit.fixture), {
             format: "{0:c}"
         });
 

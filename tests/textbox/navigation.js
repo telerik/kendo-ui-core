@@ -21,7 +21,7 @@
             }
         },
         teardown: function() {
-            input.parents(".k-widget").andSelf().remove();
+            kendo.destroy(QUnit.fixture);
         }
     });
 
