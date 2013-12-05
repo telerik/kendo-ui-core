@@ -443,9 +443,15 @@
 
     module("appendTo option", {
         setup: function() {
+            kendo.effects.disable();
             form = $("<form id='myForm'></form>").appendTo(QUnit.fixture);
         },
         teardown: function() {
+            QUnit.fixture.closest("body").find(".k-window-content").each(function(idx, element){
+                $(element).data("kendoWindow").destroy();
+            });
+            QUnit.fixture.closest("body").find(".k-overlay").remove();
+            kendo.effects.enable();
             form.remove();
         }
     });
