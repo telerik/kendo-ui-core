@@ -1251,7 +1251,11 @@ kendo_module({
                     that._timezonePopup = null;
                 }
 
-                that.container.data("kendoWindow").bind("deactivate", destroy).close();
+                if (that.container.is(":visible")) {
+                    that.container.data("kendoWindow").bind("deactivate", destroy).close();
+                } else {
+                    destroy();
+                }
             }
         },
 
