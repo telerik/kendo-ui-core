@@ -70,6 +70,12 @@ module.exports = function(grunt) {
 
     var testsOption = grunt.option('tests');
     var browserOption = grunt.option('browser');
+    var jqueryOption = grunt.option('jquery');
+    var jquery = 'src/jquery.js';
+
+    if (jqueryOption) {
+        jquery = "http://code.jquery.com/jquery-" + jqueryOption + ".min.js";
+    }
 
     if (browserOption) {
         browsers = [ browserOption ];
@@ -97,7 +103,7 @@ module.exports = function(grunt) {
                     files: [
                         { pattern: 'styles/**/*.*', watched: true, included: false },
                         { pattern: 'tests/**/*-fixture.html' },
-                        'src/jquery.js',
+                        jquery,
                         'tests/jquery.mockjax.js',
 
                         'src/kendo.core.js',
