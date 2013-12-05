@@ -1,102 +1,165 @@
 (function() {
-    var isRaised;
+var isRaised;
 
-     function getRootItem(index) {
-         return $('#Menu3').find('> .k-item > .k-link')[index];
-     }
+function getRootItem(index) {
+    return $('#menu').find('> .k-item > .k-link')[index];
+}
 
-     function getMenu() {
-         return $("#Menu3").data("kendoMenu");
-     }
+var open;
+var close;
+var menu;
 
-    var open;
-    var close;
-    var menu;
+module("menu open on click", {
+    setup: function() {
+        QUnit.fixture.append(
+            '<ul id="menu" class="k-widget k-reset k-header k-menu" style="visibility: hidden;">' +
+            '    <li class="k-item k-state-default" style=""><span class="k-link">ASP.NET MVC<span' +
+            '            class="k-icon k-i-arrow-s"></span></span>' +
+            '        <ul class="k-group">' +
+            '            <li class="k-item k-state-default"><span class="k-link">Grid</span>' +
+            '            </li>' +
+            '            <li class="k-item k-state-default"><span class="k-link">Menu<span' +
+            '            class="k-icon k-i-arrow-e"></span></span>' +
+            '                <ul class="k-group">' +
+            '                    <li class="k-item k-state-default"><span class="k-link">Grid</span>' +
+            '                    </li>' +
+            '                    <li class="k-item k-state-default"><span class="k-link">Menu</span>' +
+            '                    </li>' +
+            '                    <li class="k-item k-state-default"><span class="k-link">PanelBar</span></li>' +
+            '                    <li class="k-item k-state-default"><span class="k-link">TabStrip</span></li>' +
+            '                </ul>' +
+            '            </li>' +
+            '            <li class="k-item k-state-default"><span class="k-link">PanelBar</span></li>' +
+            '            <li class="k-item k-state-default"><span class="k-link">TabStrip</span></li>' +
+            '        </ul>' +
+            '    </li><li class="k-item k-state-default"><span class="k-link">Silverlight<span' +
+            '            class="k-icon k-i-arrow-s"></span></span>' +
+            '        <ul class="k-group">' +
+            '            <li class="k-item k-state-default"><span class="k-link">GridView</span>' +
+            '            </li>' +
+            '            <li class="k-item k-state-default"><span class="k-link">Scheduler</span></li>' +
+            '            <li class="k-item k-state-default"><span class="k-link">Docking</span>' +
+            '            </li>' +
+            '            <li class="k-item k-state-default"><span class="k-link">Chart</span></li>' +
+            '            <li class="k-item k-state-default"><a href="http://www.telerik.com/products/silverlight.aspx"' +
+            '                                                  class="k-link">... and 28 more!</a></li>' +
+            '        </ul>' +
+            '    </li><li class="k-item k-state-default"><span class="k-link">ASP.NET AJAX<span' +
+            '            class="k-icon k-i-arrow-s"></span></span>' +
+            '        <ul class="k-group">' +
+            '            <li class="k-item k-state-default"><span class="k-link">Grid</span></li>' +
+            '            <li class="k-item k-state-default"><span class="k-link">Editor</span>' +
+            '            </li>' +
+            '            <li class="k-item k-state-default"><span class="k-link">Scheduler</span></li>' +
+            '            <li class="k-item k-state-default"><a href="http://www.telerik.com/products/aspnet-ajax.aspx"' +
+            '                                                  class="k-link">... and 28 more!</a></li>' +
+            '        </ul>' +
+            '    </li><li class="k-item k-state-default">OpenAccess ORM<span' +
+            '            class="k-icon k-i-arrow-s"></span>' +
+            '        <ul class="k-group">' +
+            '            <li class="k-item">' +
+            '                <div id="Menu-4" class="k-content">' +
+            '                    <a href="http://www.telerik.com/purchase/individual/orm.aspx" id="buy">' +
+            '                        Telerik OpenAccess ORM' +
+            '                    </a>' +
+            '                    <a href="http://www.telerik.com/community/license-agreement.aspx?pId=639" id="express">' +
+            '                        Telerik OpenAccess ORM Express' +
+            '                    </a>' +
+            '                </div>' +
+            '            </li>' +
+            '        </ul>' +
+            '    </li><li class="k-item k-state-default"><span class="k-link">Reporting</span></li><li class="k-item k-state-default"><span class="k-link">Sitefinity ASP.NET CMS</span>' +
+            '    </li><li style="border-right: 0;" class="k-item k-state-default"><span class="k-link">Other products<span' +
+            '            class="k-icon k-i-arrow-s"></span></span>' +
+            '        <ul class="k-group">' +
+            '            <li class="k-item k-state-default"><span class="k-link">Web Testing Tools</span>' +
+            '            </li>' +
+            '            <li class="k-item k-state-default"><span class="k-link">WinForms UI Controls</span>' +
+            '            </li>' +
+            '            <li class="k-item k-state-default"><span class="k-link">PF UI Controls</span></li>' +
+            '        </ul>' +
+            '    </li>' +
+            '    <li><a href="javascript:">ASP.NET MVC</a></li>' +
+            '</ul>'
+        );
 
-    module("Menu / OpenOnClick", {
-        setup: function() {
-            QUnit.fixture.html(__html__['tests/menu/open-on-click-fixture.html']);
-            $("#Menu3").kendoMenu({ animation: false, openOnClick: true, hoverDelay: 0 });
-            menu = getMenu();
-            open = menu.open;
-            close = menu.close;
-        },
-        teardown: function() {
-            $("#Menu3").data('kendoMenu').destroy();({ animation: false, openOnClick: true, hoverDelay: 0 });
-            menu.clicked = false;
-            menu.open = open;
-            menu.close = close;
-        }
-    });
+        menu = new kendo.ui.Menu("#menu", { animation: false, openOnClick: true, hoverDelay: 0 });
+        open = menu.open;
+        close = menu.close;
+    },
+    teardown: function() {
+        kendo.destroy(QUnit.fixture);
+    }
+});
 
-    test('open on click is serialized', function() {
-        ok(menu.options.openOnClick);
-    });
+test('open on click is serialized', function() {
+    ok(menu.options.openOnClick);
+});
 
-    test('click method should call preventDefault method', function() {
-        var item = getRootItem(3);
-        var isCalled = false;
+test('click method should call preventDefault method', function() {
+    var item = getRootItem(3);
+    var isCalled = false;
 
-        var e = { target: item, preventDefault: function () { isCalled = true; }, stopPropagation: function () {} };
+    var e = { target: item, preventDefault: function () { isCalled = true; }, stopPropagation: function () {} };
 
-        menu._click(e);
+    menu._click(e);
 
-        ok(isCalled);
-    });
+    ok(isCalled);
+});
 
-    test('click method on item with URL shouldn\'t call preventDefault method', function() {
-        var item = getRootItem(7);
-        var isCalled = false;
+test('click method on item with URL shouldn\'t call preventDefault method', function() {
+    var item = getRootItem(7);
+    var isCalled = false;
 
-        var e = { target: item, preventDefault: function () { isCalled = true; }, stopPropagation: function () {} };
+    var e = { target: item, preventDefault: function () { isCalled = true; }, stopPropagation: function () {} };
 
-        menu._click(e);
+    menu._click(e);
 
-        ok(!isCalled);
-    });
+    ok(!isCalled);
+});
 
-    test('hovering root item does not open it', function() {
-        var opend = false;
+test('hovering root item does not open it', function() {
+    var opend = false;
 
-        menu.open = function() { opend = true };
-        menu._mouseenter({}, $("li:first", menu.element)[0]);
+    menu.open = function() { opend = true };
+    menu._mouseenter({}, $("li:first", menu.element)[0]);
 
-        ok(!opend);
-    });
+    ok(!opend);
+});
 
-    test('clicking root item should open it', function() {
-        var opend = false;
-        menu.open = function() { opend = true };
-        var element = $("li:first", menu.element)[0];
-        menu._click({ target: element, preventDefault: function () { }, stopPropagation: function () { } }, element);
-        ok(opend);
-        ok(menu.clicked);
-    });
+test('clicking root item should open it', function() {
+    var opend = false;
+    menu.open = function() { opend = true };
+    var element = $("li:first", menu.element)[0];
+    menu._click({ target: element, preventDefault: function () { }, stopPropagation: function () { } }, element);
+    ok(opend);
+    ok(menu.clicked);
+});
 
-    test('leaving opened item does not close it', function() {
-        var opend = false;
-        menu.clicked = true;
-        menu.open = function() { opend = true };
+test('leaving opened item does not close it', function() {
+    var opend = false;
+    menu.clicked = true;
+    menu.open = function() { opend = true };
 
-        menu._mouseleave({}, $("li:first", menu.element)[0]);
+    menu._mouseleave({}, $("li:first", menu.element)[0]);
 
-        ok(!opend);
-    });
+    ok(!opend);
+});
 
-    test('leaving opened and hovering a sibling closes it and opens the sibling', function() {
-        var opend = false;
-        menu.clicked = true;
-        menu.open = function() { opend = true };
+test('leaving opened and hovering a sibling closes it and opens the sibling', function() {
+    var opend = false;
+    menu.clicked = true;
+    menu.open = function() { opend = true };
 
-        var element = $("li:first", menu.element)[0];
-        menu._mouseenter({ currentTarget: element, delegateTarget: menu.element[0], indexOf: function() { }, type:'mouseenter' }, element.nextSibling);
+    var element = $("li:first", menu.element)[0];
+    menu._mouseenter({ currentTarget: element, delegateTarget: menu.element[0], indexOf: function() { }, type:'mouseenter' }, element.nextSibling);
 
-        ok(opend);
-    });
+    ok(opend);
+});
 
-    test('clicking the document closes the open item', function() {
-        menu.clicked = true;
-        menu._documentClick({ target: document.body }, document );
-        ok(menu.clicked === false);
-    });
+test('clicking the document closes the open item', function() {
+    menu.clicked = true;
+    menu._documentClick({ target: document.body }, document );
+    ok(menu.clicked === false);
+});
 })();
