@@ -22,14 +22,14 @@
     });
 
     test("validate returns false for empty input with attribute required", function() {
-        var input = $('<input type="text" data-val="true" data-val-required="foo" />'),
+        var input = $('<input type="text" data-val="true" data-val-required="foo" />').appendTo(QUnit.fixture),
             validator = setup(input);
 
         ok(!validator.validate());
     });
 
     test("validate returns true for non empty input with attribute required", function() {
-        var input = $('<input type="text" data-val="true" data-val-required="foo" />'),
+        var input = $('<input type="text" data-val="true" data-val-required="foo" />').appendTo(QUnit.fixture),
             validator = setup(input);
 
         input.val("someValue");
@@ -38,7 +38,7 @@
     });
 
     test("validate returns true for non empty input with attribute required which is initially invalid", function() {
-        var input = $('<input type="text" data-val="true" data-val-required="foo" />'),
+        var input = $('<input type="text" data-val="true" data-val-required="foo" />').appendTo(QUnit.fixture),
             validator = setup(input);
 
         ok(!validator.validate());
@@ -104,7 +104,7 @@
     });
 
     test("errors returns type specific message if attribute is set for single invalid element", function() {
-        var input = $('<input type="text" data-val="true" data-val-required="required message" />'),
+        var input = $('<input type="text" data-val="true" data-val-required="required message" />').appendTo(QUnit.fixture),
             validator = setup(input);
 
         validator.validate();
@@ -127,28 +127,28 @@
     });
 
     test("validate returns true if input with type=text value does not match min attribute", function() {
-        var input = $('<input type="text" value="11" data-val-range="The field Number must be between 10 and 20." data-val-range-max="20" data-val-range-min="10" />'),
+        var input = $('<input type="text" value="11" data-val-range="The field Number must be between 10 and 20." data-val-range-max="20" data-val-range-min="10" />').appendTo(QUnit.fixture),
             validator = setup(input);
 
         ok(validator.validate());
     });
 
     test("validate returns false if input with type=number value does not match min attribute", function() {
-        var input = $('<input type="number" value="1" data-val-range="The field Number must be between 10 and 20." data-val-range-max="20" data-val-range-min="10" />'),
+        var input = $('<input type="number" value="1" data-val-range="The field Number must be between 10 and 20." data-val-range-max="20" data-val-range-min="10" />').appendTo(QUnit.fixture),
             validator = setup(input);
 
         ok(!validator.validate());
     });
 
     test("validate returns false if input value does not match min attribute decimal", function() {
-        var input = $('<input type="number" value="10" data-val-range="The field Number must be between 10 and 20." data-val-range-max="20" data-val-range-min="10.10"/>'),
+        var input = $('<input type="number" value="10" data-val-range="The field Number must be between 10 and 20." data-val-range-max="20" data-val-range-min="10.10"/>').appendTo(QUnit.fixture),
             validator = setup(input);
 
         ok(!validator.validate());
     });
 
     test("validate returns false if input value is smaller than the min attribute when a culture with comma for the decimal separator is used", function() {
-        var input = $('<input data-type="number" value="1,3" data-val-range="The field Number must be between 1,5 and 20." data-val-range-max="20" data-val-range-min="1.5"/>'),
+        var input = $('<input data-type="number" value="1,3" data-val-range="The field Number must be between 1,5 and 20." data-val-range-max="20" data-val-range-min="1.5"/>').appendTo(QUnit.fixture),
             validator = setup(input),
             culture = kendo.culture(),
             defaultDecimalSeparator = culture.numberFormat["."],
@@ -165,7 +165,7 @@
     });
 
     test("validate returns true if input value is bigger than the min attribute when a culture with comma for the decimal separator is used", function() {
-        var input = $('<input data-type="number" value="1,6" data-val-range="The field Number must be between 1,5 and 20." data-val-range-max="20" data-val-range-min="1.5"/>'),
+        var input = $('<input data-type="number" value="1,6" data-val-range="The field Number must be between 1,5 and 20." data-val-range-max="20" data-val-range-min="1.5"/>').appendTo(QUnit.fixture),
             validator = setup(input),
             culture = kendo.culture(),
             defaultDecimalSeparator = culture.numberFormat["."],
@@ -182,28 +182,28 @@
     });
 
     test("validate returns true if input is empty and range validation is enabled", function() {
-        var input = $('<input type="number" data-val-range="The field Number must be between 10 and 20." data-val-range-max="20" data-val-range-min="10.10"/>'),
+        var input = $('<input type="number" data-val-range="The field Number must be between 10 and 20." data-val-range-max="20" data-val-range-min="10.10"/>').appendTo(QUnit.fixture),
             validator = setup(input);
 
         ok(validator.validate());
     });
 
     test("validate returns true if input value does have same value as max attribute", function() {
-        var input = $('<input type="number" value="10" data-val-range="The field Number must be between 10 and 20." data-val-range-max="10" data-val-range-min="10"/>'),
+        var input = $('<input type="number" value="10" data-val-range="The field Number must be between 10 and 20." data-val-range-max="10" data-val-range-min="10"/>').appendTo(QUnit.fixture),
             validator = setup(input);
 
         ok(validator.validate());
     });
 
     test("validate returns false if input does not match max attribute", function() {
-        var input = $('<input type="text" value="11" data-val-range="The field Number must be between 10 and 20." data-val-range-max="10" data-val-range-min="10" />'),
+        var input = $('<input type="text" value="11" data-val-range="The field Number must be between 10 and 20." data-val-range-max="10" data-val-range-min="10" />').appendTo(QUnit.fixture),
             validator = setup(input);
 
         ok(!validator.validate());
     });
 
     test("validate returns false if input value is bigger than the max attribute when a culture with comma for the decimal separator is used", function() {
-        var input = $('<input data-type="number" value="20,6" data-val-range="The field Number must be between 10 and 20,5." data-val-range-max="20.5" data-val-range-min="1.5"/>'),
+        var input = $('<input data-type="number" value="20,6" data-val-range="The field Number must be between 10 and 20,5." data-val-range-max="20.5" data-val-range-min="1.5"/>').appendTo(QUnit.fixture),
             validator = setup(input),
             culture = kendo.culture(),
             defaultDecimalSeparator = culture.numberFormat["."],
@@ -220,7 +220,7 @@
     });
 
     test("validate returns true if input value is smaller than the max attribute when a culture with comma for the decimal separator is used", function() {
-        var input = $('<input data-type="number" value="20,4" data-val-range="The field Number must be between 10 and 20,5." data-val-range-max="20.5" data-val-range-min="1.5"/>'),
+        var input = $('<input data-type="number" value="20,4" data-val-range="The field Number must be between 10 and 20,5." data-val-range-max="20.5" data-val-range-min="1.5"/>').appendTo(QUnit.fixture),
             validator = setup(input),
             culture = kendo.culture(),
             defaultDecimalSeparator = culture.numberFormat["."],
@@ -343,9 +343,10 @@
 
     module("kendo.ui.validation.mvc metadata validation", {
         setup: function() {
-            container = $('<div id="container"/>').appendTo("<form/>").appendTo($(document.body));
+            container = $('<div id="container"/>').appendTo("<form/>").appendTo(QUnit.fixture);
         },
         teardown: function() {
+            kendo.destroy(QUnit.fixture);
             container.remove();
             window.mvcClientValidationMetadata = [];
         }
