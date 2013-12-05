@@ -18,7 +18,7 @@
             $.mockjax({
                 url: "error.html",
                 response: function() {
-                    this.responseText = 'foo<script type="text/javascript">exit;<' + '/script>';
+                    this.responseText = 'foo<script type="text/javascript">throw new Error("Exception required to fire the error event")<' + '/script>';
                 }
             });
 
