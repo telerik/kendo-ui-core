@@ -1210,7 +1210,7 @@
         }
 
         function createLineChart(options) {
-            chart = createChart($.extend({
+            chart = $("<div id='container' style='width: 600px; height: 400px;' />").appendTo(QUnit.fixture).kendoChart($.extend({
                 series: [{
                     type: "line",
                     style: "step",
@@ -1219,7 +1219,7 @@
                 categoryAxis: {
                     categories: ["A"]
                 }
-            }, options));
+            }, options)).data("kendoChart");
 
             var plotArea = chart._model.children[1],
                 lineChart = plotArea.charts[0],

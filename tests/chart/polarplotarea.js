@@ -47,13 +47,13 @@
         var TOLERANCE = 5;
 
         function createPolarChart(options) {
-            chart = createChart($.extend({
+            chart = $("<div id='container' style='width: 600px; height: 400px;' />").appendTo(QUnit.fixture).kendoChart($.extend({
                 series: [{
                     type: "polarLine",
                     data: [[120, 10]],
                     markers: { visible: true }
                 }]
-            }, options));
+            }, options)).data("kendoChart");
 
 
             $("#container").css({ position: "absolute", top: "200px", left: "8px" });
