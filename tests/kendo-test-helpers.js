@@ -132,6 +132,17 @@ $('head')
     });
 })();
 
+QUnit.extend( QUnit, {
+    close: function(actual, expected, maxDifference, message) {
+        var passes = (actual === expected) || Math.abs(actual - expected) <= maxDifference;
+        QUnit.push(passes, actual, expected, message);
+    },
+
+    notClose: function(actual, expected, minDifference, message) {
+        QUnit.push(Math.abs(actual - expected) > minDifference, actual, expected, message);
+    }
+});
+
 QUnit.brazilTimezoneTest = brazilTimezoneTest;
 QUnit.config.testTimeout = 1500;
 QUnit.config.reorder = false;
