@@ -1,10 +1,14 @@
 (function() {
     var DataSource = kendo.data.DataSource;
 
-    module('pager MVVM');
+    module('pager MVVM', {
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+        }
+    });
 
     test("initializes a pager when data role is pager", function() {
-        var dom = $('<div data-role="pager"/>');
+        var dom = $('<div data-role="pager"/>').appendTo(QUnit.fixture);
 
         kendo.bind(dom);
 
@@ -12,7 +16,7 @@
     });
 
     test("initalizes data source", function() {
-        var dom = $('<div data-role="pager" data-bind="source:items" />');
+        var dom = $('<div data-role="pager" data-bind="source:items" />').appendTo(QUnit.fixture);
 
         kendo.bind(dom, { items: DataSource.create(["foo", "bar"]) } );
         dom.data("kendoPager").dataSource.view();
@@ -21,7 +25,7 @@
     });
 
     test("binding pager initialized before binding", function() {
-        var dom = $('<div data-bind="source:items" />');
+        var dom = $('<div data-bind="source:items" />').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({ items: DataSource.create([{text:"foo"}, {text:"bar"}])});
 
@@ -33,7 +37,7 @@
     });
 
     test("binding pager initialized after binding", function() {
-        var dom = $('<div data-bind="source:items" />');
+        var dom = $('<div data-bind="source:items" />').appendTo(QUnit.fixture);
 
         var observable = kendo.observable({ items: DataSource.create([{text:"foo"}, {text:"bar"}])});
 

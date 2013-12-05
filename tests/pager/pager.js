@@ -67,7 +67,7 @@
 
         dataSource.read();
 
-        var ul = $("<ul />").kendoPager({
+        var ul = $("<ul />").appendTo(QUnit.fixture).kendoPager({
             dataSource: dataSource,
             previousNext: false
         });
@@ -229,7 +229,7 @@
 
     test("single page is rendered if no pageSize is set", function() {
         var data = new DataSource( { data: [1,2,3,4,5], page: 1 }),
-            ul = $("<ul/>").kendoPager({ dataSource: data });
+            ul = $("<ul/>").appendTo(QUnit.fixture).kendoPager({ dataSource: data });
 
         data.read();
         equal(ul.find(".k-state-selected").length, 1);
@@ -468,7 +468,7 @@
         dataSource.read();
         dataSource.page(2);
 
-        var pager = $("<div />").kendoPager({
+        var pager = $("<div />").appendTo(QUnit.fixture).kendoPager({
             dataSource: dataSource,
             autoBind: false
         });
@@ -485,7 +485,7 @@
         dataSource.read();
         dataSource.page(2);
 
-        var pager = $("<div />").kendoPager({
+        var pager = $("<div />").appendTo(QUnit.fixture).kendoPager({
             dataSource: dataSource,
             autoBind: false
         });
@@ -502,7 +502,7 @@
         dataSource.read();
         dataSource.page(2);
 
-        var pager = $("<div />").kendoPager({
+        var pager = $("<div />").appendTo(QUnit.fixture).kendoPager({
             dataSource: dataSource,
             autoBind: false
         });
@@ -519,7 +519,7 @@
         dataSource.read();
         dataSource.page(2);
 
-        var pager = $("<div />").kendoPager({
+        var pager = $("<div />").appendTo(QUnit.fixture).kendoPager({
             dataSource: dataSource,
             autoBind: false
         });
