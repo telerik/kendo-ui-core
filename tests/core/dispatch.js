@@ -19,14 +19,19 @@ var TestWidget = kendo.ui.Widget.extend({
     }
 });
 
+var dom;
+
 module("dispatch", {
     setup: function() {
         kendo.ui.plugin(TestWidget);
+    },
+    teardown: function() {
+        kendo.destroy(dom);
     }
 })
 
 test("invokes a widget method via the jQuery plugin", function() {
-    var dom = $("<div/>").kendoTestWidget();
+    dom = $("<div/>").kendoTestWidget();
 
     var testwidget = dom.data("kendoTestWidget");
     stub(testwidget, "value");
@@ -37,7 +42,7 @@ test("invokes a widget method via the jQuery plugin", function() {
 });
 
 test("passes arguments to method", function() {
-    var dom = $("<div/>").kendoTestWidget();
+    dom = $("<div/>").kendoTestWidget();
 
     var testwidget = dom.data("kendoTestWidget");
     stub(testwidget, "value");
@@ -48,7 +53,7 @@ test("passes arguments to method", function() {
 });
 
 test("invokes the method for all widgets matching the selector", function() {
-    var dom = $("<div/><div/>").kendoTestWidget();
+    dom = $("<div/><div/>").kendoTestWidget();
 
     var testwidget1 = dom.eq(0).data("kendoTestWidget");
     stub(testwidget1, "value");
@@ -62,18 +67,18 @@ test("invokes the method for all widgets matching the selector", function() {
 });
 
 test("the jQuery object is returned after invocation", function() {
-    var dom = $("<div/>").kendoTestWidget();
+    dom = $("<div/>").kendoTestWidget();
 
     strictEqual(dom.kendoTestWidget("value", "foo"), dom);
 });
 
 test("returns the result of the method if there is any", function() {
-    var dom = $("<div/>").kendoTestWidget();
+    dom = $("<div/>").kendoTestWidget();
     equal(dom.kendoTestWidget("value"), "foo");
 });
 
 test("calls the method of the first widget only if it returns a result", function() {
-    var dom = $("<div/><div/>").kendoTestWidget();
+    dom = $("<div/><div/>").kendoTestWidget();
 
     var testwidget = dom.eq(1).data("kendoTestWidget");
     stub(testwidget, "value");
@@ -85,7 +90,8 @@ test("calls the method of the first widget only if it returns a result", functio
 
 test("throws error if method is invoked before the widget is initialized", 1, function() {
     try {
-        $("<div/>").kendoTestWidget("value");
+        dom = $("<div/>");
+        dom.kendoTestWidget("value");
     } catch (e) {
         equal(e.message, "Cannot call method 'value' of kendoTestWidget before it is initialized");
     }
@@ -93,7 +99,8 @@ test("throws error if method is invoked before the widget is initialized", 1, fu
 
 test("throws error if the method does not exist", 1, function() {
     try {
-        $("<div/>").kendoTestWidget().kendoTestWidget("foo");
+        dom = $("<div/>").kendoTestWidget();
+        dom.kendoTestWidget("foo");
     } catch (e) {
         equal(e.message, "Cannot find method 'foo' of kendoTestWidget");
     }
@@ -101,7 +108,8 @@ test("throws error if the method does not exist", 1, function() {
 
 test("throws error if trying to invoke a field", 1, function() {
     try {
-        $("<div/>").kendoTestWidget().kendoTestWidget("options");
+        dom = $("<div/>").kendoTestWidget();
+        dom.kendoTestWidget("options");
     } catch (e) {
         equal(e.message, "Cannot find method 'options' of kendoTestWidget");
     }

@@ -1,5 +1,7 @@
 (function(){
 
+var dom;
+
 var TestWidget = kendo.ui.Widget.extend({
     init: function(element, options) {
         kendo.ui.Widget.fn.init.call(this, element, options);
@@ -19,7 +21,6 @@ var TestWidget = kendo.ui.Widget.extend({
 
     events: [ "click", "click2" ]
 });
-
 
 var TestWidget2 = kendo.mobile.ui.Widget.extend({
     options: {
@@ -53,31 +54,42 @@ module("kendo.init", {
         window.testDataSource = new kendo.data.DataSource();
     },
     teardown: function() {
-        kendo.ns = "";
         delete window.foo;
         delete window.bar;
         delete window.testDataSource;
+        kendo.destroy(dom);
+        kendo.ns = "";
     }
 });
 
 test("initializes a new testwidget based on its role", function() {
-    var dom = $('<div data-role="testwidget"/>');
+    dom = $('<div data-role="testwidget"/>');
 
     kendo.init(dom);
 
     ok(dom.data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
 });
 
-test("accepts a js reference as a role", function() {
-    var dom = $('<div data-role="kendo.ui.TestWidget" />');
+test("accepts a full name as a role", function() {
+    dom = $('<div data-role="kendo.ui.TestWidget" />');
 
     kendo.init(dom);
 
     ok(dom.data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
+});
+
+test("kendo.destroy destroys a widget initialized with full name role", function() {
+    dom = $('<div data-role="kendo.ui.TestWidget" />');
+
+    kendo.init(dom);
+    kendo.destroy(dom);
+
+
+    equal(dom.data("kendoTestWidget"), null);
 });
 
 test("initializes multiple widgets based on their role", function() {
-    var dom = $('<div data-role="testwidget"/><div data-role="testwidget"/>');
+    dom = $('<div data-role="testwidget"/><div data-role="testwidget"/>');
 
     kendo.init(dom);
 
@@ -85,7 +97,7 @@ test("initializes multiple widgets based on their role", function() {
 });
 
 test("initializes a new testwidget from dom element", function() {
-    var dom = $('<div data-role="testwidget"/>');
+    dom = $('<div data-role="testwidget"/>');
 
     kendo.init(dom[0]);
 
@@ -93,7 +105,7 @@ test("initializes a new testwidget from dom element", function() {
 });
 
 test("initializes widgets in dom tree", function() {
-    var dom = $('<div><div data-role="testwidget"/></div>');
+    dom = $('<div><div data-role="testwidget"/></div>');
 
     kendo.init(dom);
 
@@ -101,7 +113,7 @@ test("initializes widgets in dom tree", function() {
 });
 
 test("role respects the namespace", function() {
-    var dom = $('<div data-kendo-role="testwidget"/>');
+    dom = $('<div data-kendo-role="testwidget"/>');
 
     kendo.ns = "kendo-";
     kendo.init(dom);
@@ -110,7 +122,7 @@ test("role respects the namespace", function() {
 });
 
 test("parses options from data attributes", function() {
-    var dom = $('<div data-role="testwidget" data-foo="foo" />');
+    dom = $('<div data-role="testwidget" data-foo="foo" />');
     kendo.init(dom);
 
     var testwidget = dom.data("kendoTestWidget");
@@ -119,7 +131,7 @@ test("parses options from data attributes", function() {
 });
 
 test("parses number options from data attributes", function() {
-    var dom = $('<div data-role="testwidget" data-foo="100" />');
+    dom = $('<div data-role="testwidget" data-foo="100" />');
     kendo.init(dom);
 
     var testwidget = dom.data("kendoTestWidget");
@@ -128,7 +140,7 @@ test("parses number options from data attributes", function() {
 });
 
 test("parses signed number options from data attributes", function() {
-    var dom = $('<div data-role="testwidget" data-foo="-100" />');
+    dom = $('<div data-role="testwidget" data-foo="-100" />');
     kendo.init(dom);
 
     var testwidget = dom.data("kendoTestWidget");
@@ -137,7 +149,7 @@ test("parses signed number options from data attributes", function() {
 });
 
 test("parses float options from data attributes", function() {
-    var dom = $('<div data-role="testwidget" data-foo="100.10" />');
+    dom = $('<div data-role="testwidget" data-foo="100.10" />');
     kendo.init(dom);
 
     var testwidget = dom.data("kendoTestWidget");
@@ -146,7 +158,7 @@ test("parses float options from data attributes", function() {
 });
 
 test("parses percentage options from data attributes", function() {
-    var dom = $('<div data-role="testwidget" data-foo="100%" />');
+    dom = $('<div data-role="testwidget" data-foo="100%" />');
     kendo.init(dom);
 
     var testwidget = dom.data("kendoTestWidget");
@@ -155,7 +167,7 @@ test("parses percentage options from data attributes", function() {
 });
 
 test("parses options which start with data", function() {
-    var dom = $('<div data-role="testwidget" data-bar="bar" />');
+    dom = $('<div data-role="testwidget" data-bar="bar" />');
 
     kendo.init(dom);
 
@@ -165,7 +177,7 @@ test("parses options which start with data", function() {
 });
 
 test("parses camel case options that start with data", function() {
-    var dom = $('<div data-role="testwidget" data-min-height="bar" />');
+    dom = $('<div data-role="testwidget" data-min-height="bar" />');
 
     kendo.init(dom);
 
@@ -175,7 +187,7 @@ test("parses camel case options that start with data", function() {
 });
 
 test("options respect the namespace", function() {
-    var dom = $('<div data-kendo-role="testwidget" data-kendo-min-height="bar" />');
+    dom = $('<div data-kendo-role="testwidget" data-kendo-min-height="bar" />');
 
 
     kendo.ns = "kendo-";
@@ -188,7 +200,7 @@ test("options respect the namespace", function() {
 
 
 test("parses events from data attributes", function() {
-    var dom = $('<div data-role="testwidget" data-click="foo" />');
+    dom = $('<div data-role="testwidget" data-click="foo" />');
 
     kendo.init(dom);
 
@@ -198,7 +210,7 @@ test("parses events from data attributes", function() {
 });
 
 test("parses nested events from data attributes", function() {
-    var dom = $('<div data-role="testwidget" data-click="bar.baz" />');
+    dom = $('<div data-role="testwidget" data-click="bar.baz" />');
 
     kendo.init(dom);
 
@@ -208,7 +220,7 @@ test("parses nested events from data attributes", function() {
 });
 
 test("parses templates from data attributes", function() {
-    var dom = $('<div data-role="testwidget" data-template="template" />');
+    dom = $('<div data-role="testwidget" data-template="template" />');
 
     kendo.init(dom);
 
@@ -218,7 +230,7 @@ test("parses templates from data attributes", function() {
 });
 
 test("parses template options", function() {
-    var dom = $('<div data-role="testwidget" data-alt-template="template" />');
+    dom = $('<div data-role="testwidget" data-alt-template="template" />');
 
     kendo.init(dom);
 
@@ -228,7 +240,7 @@ test("parses template options", function() {
 });
 
 test("initializes data source by field name", function() {
-    var dom = $('<div data-role="testwidget" data-source="testDataSource" />');
+    dom = $('<div data-role="testwidget" data-source="testDataSource" />');
 
     kendo.init(dom);
 
@@ -237,7 +249,7 @@ test("initializes data source by field name", function() {
 });
 
 test("initializes data source by configuration", function() {
-    var dom = $('<div data-role="testwidget" data-source=\'{"transport":{"read":"http://example.com"}}\'"/>');
+    dom = $('<div data-role="testwidget" data-source=\'{"transport":{"read":"http://example.com"}}\'"/>');
 
     kendo.init(dom);
 
@@ -246,7 +258,7 @@ test("initializes data source by configuration", function() {
 });
 
 test("initializes multiline array field in JSON format", function() {
-    var dom = $('<div data-role="testwidget" data-columns=\'["foo",\r\n "bar"]\'/>');
+    dom = $('<div data-role="testwidget" data-columns=\'["foo",\r\n "bar"]\'/>');
 
     kendo.init(dom);
     var testwidget = dom.data("kendoTestWidget");
@@ -255,7 +267,7 @@ test("initializes multiline array field in JSON format", function() {
 });
 
 test("initializes multiline object field in JSON format", function() {
-    var dom = $('<div data-role="testwidget" data-columns=\'{"foo":"foo",\r\n "bar":"bar"}\'/>');
+    dom = $('<div data-role="testwidget" data-columns=\'{"foo":"foo",\r\n "bar":"bar"}\'/>');
 
     kendo.init(dom);
     var testwidget = dom.data("kendoTestWidget");
@@ -264,7 +276,7 @@ test("initializes multiline object field in JSON format", function() {
 });
 
 test("initializes multiline object field which starts with a new line", function() {
-    var dom = $('<div data-role="testwidget" data-columns=\'\r\n{"foo":"foo",\r\n "bar":"bar"}\'/>');
+    dom = $('<div data-role="testwidget" data-columns=\'\r\n{"foo":"foo",\r\n "bar":"bar"}\'/>');
 
     kendo.init(dom);
     var testwidget = dom.data("kendoTestWidget");
@@ -273,7 +285,7 @@ test("initializes multiline object field which starts with a new line", function
 });
 
 test("initializes multiline object field which ends with a new line", function() {
-    var dom = $('<div data-role="testwidget" data-columns=\'{"foo":"foo",\r\n "bar":"bar"}\r\n\'/>');
+    dom = $('<div data-role="testwidget" data-columns=\'{"foo":"foo",\r\n "bar":"bar"}\r\n\'/>');
 
     kendo.init(dom);
     var testwidget = dom.data("kendoTestWidget");
@@ -283,7 +295,7 @@ test("initializes multiline object field which ends with a new line", function()
 
 
 test("initializes functions from parameters", function() {
-var dom = $('<div data-role="testwidget" data-columns=\'{"foo":foo}\'/>');
+dom = $('<div data-role="testwidget" data-columns=\'{"foo":foo}\'/>');
 
     kendo.init(dom);
     var testwidget = dom.data("kendoTestWidget");
@@ -291,7 +303,7 @@ var dom = $('<div data-role="testwidget" data-columns=\'{"foo":foo}\'/>');
 });
 
 test("does not treat format strings as JSON", function() {
-    var dom = $('<div data-role="testwidget" data-foo="{0:d}"/>');
+    dom = $('<div data-role="testwidget" data-foo="{0:d}"/>');
 
     kendo.init(dom);
 
@@ -301,7 +313,7 @@ test("does not treat format strings as JSON", function() {
 });
 
 test("skip format as property of complex object", function() {
-    var dom = $('<div data-role="testwidget" data-foo=\'{"bar":"{0:d}"}\'/>');
+    dom = $('<div data-role="testwidget" data-foo=\'{"bar":"{0:d}"}\'/>');
 
     kendo.init(dom);
 
@@ -310,7 +322,7 @@ test("skip format as property of complex object", function() {
 });
 
 test("accepts multiple suites", function() {
-    var dom = $($("#multiple-widgets-template").html().toString());
+    dom = $($("#multiple-widgets-template").html().toString());
     kendo.init(dom, kendo.ui, kendo.mobile.ui);
 
     ok(dom.find("#foo").data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
@@ -318,7 +330,7 @@ test("accepts multiple suites", function() {
 });
 
 test("multiple init calls bind unbind previous widget event handlers", 1, function() {
-    var dom = $('<a data-role="testwidget" data-click="foo" />');
+    dom = $('<a data-role="testwidget" data-click="foo" />');
 
     kendo.init(dom);
     kendo.init(dom);
@@ -327,7 +339,7 @@ test("multiple init calls bind unbind previous widget event handlers", 1, functi
 });
 
 test("init unbinds events from options only ", 1, function() {
-    var dom = $('<a data-role="testwidget" data-click="foo" />');
+    dom = $('<a data-role="testwidget" data-click="foo" />');
 
     new TestWidget(dom, { click2: window.foo });
 

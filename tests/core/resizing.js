@@ -44,6 +44,7 @@ module("resizable widget", {
             width: "",
             height: ""
         });
+        widget.destroy();
     }
 });
 
