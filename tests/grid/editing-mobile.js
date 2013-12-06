@@ -40,8 +40,8 @@
             table = $(table);
         },
         teardown: function() {
-            table.closest(".k-grid").remove();
             kendo.destroy(QUnit.fixture);
+            table.closest(".k-grid").remove();
             $(".km-pane-wrapper").remove();
         }
     });

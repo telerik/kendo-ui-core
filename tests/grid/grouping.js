@@ -510,7 +510,7 @@
     });
 
     test("resetting DataSource instantiate new Groupable", 1, function() {
-        var grid = new Grid("<table />", { groupable: true, columns: ["text", "value"] });
+        var grid = new Grid(table(), { groupable: true, columns: ["text", "value"] });
 
         var groupable = grid.groupable;
 
@@ -522,7 +522,7 @@
     });
 
     test("clicking on the collapse button collapses the group after the datasource has been changed", function() {
-        var grid = new Grid("<table />", {
+        var grid = new Grid(table(), {
             columns: ["text", "value"],
             groupable: true,
             dataSource: {
@@ -542,7 +542,7 @@
     });
 
     test("clicking on the collapse button collapses the group", function() {
-        var grid = new Grid("<table />", {
+        var grid = new Grid(table(), {
             columns: ["text", "value"],
             groupable: true,
             dataSource: {
@@ -556,7 +556,7 @@
     });
 
     test("expand collapse handlers are not attached multiple times if bound through mvvm and groupable is false", 1, function() {
-        var grid = new Grid("<table />", { columns: ["text", "value"] });
+        var grid = new Grid(table(), { columns: ["text", "value"] });
 
         grid.setDataSource(new kendo.data.DataSource({
             data:[{text: 1, value: 1}, {text:2, value:2}],

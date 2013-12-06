@@ -126,7 +126,7 @@
 
         var sortable = grid.thead.find("th:first").data("kendoSortable");
 
-        var destroy = stub(sortable, "destroy");
+        var destroy = stub(sortable, { "destroy": sortable.destroy });
 
         grid.setDataSource(new kendo.data.DataSource({
             data:[{text: 1, value: 1}, {text:2, value:2}]

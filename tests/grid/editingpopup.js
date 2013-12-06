@@ -317,14 +317,14 @@
 
     test("clicking close button of the window calls cancelRow", function() {
         var grid = setup(),
-            tr = table.find("tr:first"),
-            cancelRow = stub(grid, "cancelRow");
+            tr = table.find("tr:first");
 
         grid.editRow(tr);
 
+        var cancelRow = stub(grid, { "cancelRow": grid.cancelRow });
         var wnd = grid._editContainer.data("kendoWindow");
         wnd.wrapper.find(".k-i-close").click();
-        equal(cancelRow.calls("cancelRow"), 2);
+        equal(cancelRow.calls("cancelRow"), 1);
     });
 
     test("edit event is raised when entering edit mode", 2, function() {

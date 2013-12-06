@@ -17,10 +17,9 @@
             }
         },
         teardown: function() {
-            //kendo.destroy(QUnit.fixture);
+            kendo.destroy(QUnit.fixture);
             table.closest(".k-grid").remove();
             $(".k-animation-container").remove();
-            QUnit.fixture.empty();
         }
     });
 

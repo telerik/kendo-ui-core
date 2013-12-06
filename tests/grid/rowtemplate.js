@@ -91,7 +91,7 @@
     });
 
     test("data-kendo-id attribute is rendered for each row when model is defined", function() {
-        var grid = new Grid($("<div/>"), {
+        var grid = new Grid($("<div/>").appendTo(QUnit.fixture), {
             dataSource: {
                 schema: {
                     model: {
@@ -108,7 +108,7 @@
     });
 
     test("data-kendo-id attribute is rendered for each row when model id is string and a column has a function template", function() {
-        var grid = new Grid($("<div/>"), {
+        var grid = new Grid($("<div/>").appendTo(QUnit.fixture), {
             dataSource: {
                 schema: {
                     model: {
@@ -129,7 +129,7 @@
     });
 
     test("data-kendo-id attribute is not rendered if model is not set", function() {
-        var grid = new Grid($("<div/>"), {
+        var grid = new Grid($("<div/>").appendTo(QUnit.fixture), {
             dataSource: {
                 data: [ {
                     foo: "bar"

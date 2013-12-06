@@ -17,9 +17,9 @@
     });
 
     test("kendoGrid attaches a grid object to target", function() {
-        var table = $("<table />").kendoGrid({ dataSource: [] });
+        var gridTable = $(table).kendoGrid({ dataSource: [] });
 
-        ok(table.data("kendoGrid") instanceof Grid);
+        ok(gridTable.data("kendoGrid") instanceof Grid);
     });
 
     test("Grid constructor calls the read method of its datasource", function() {
@@ -59,7 +59,7 @@
     });
 
     test("header data attributes - data-kendo-field", function() {
-        var grid = new Grid($('<table><th data-kendo-field="foo"></th><th data-kendo-field="bar"></th></table>')[0], { dataSource: [] });
+        var grid = new Grid($('<table><th data-kendo-field="foo"></th><th data-kendo-field="bar"></th></table>').appendTo(QUnit.fixture), { dataSource: [] });
 
         equal(grid.columns.length, 2);
         equal(grid.columns[0].field, "foo");
@@ -67,7 +67,7 @@
     });
 
     test("header data attributes - data-kendo-type", function() {
-        var grid = new Grid($('<table><th data-kendo-field="foo" data-kendo-type="number"></th><th data-kendo-field="bar"></th></table>')[0], { dataSource: [] });
+        var grid = new Grid($('<table><th data-kendo-field="foo" data-kendo-type="number"></th><th data-kendo-field="bar"></th></table>').appendTo(QUnit.fixture), { dataSource: [] });
 
         equal(grid.columns.length, 2);
         equal(grid.columns[0].type, "number");
@@ -75,7 +75,7 @@
     });
 
     test("header data attributes - data-kendo-template", function() {
-        var grid = new Grid($('<table><th data-kendo-field="foo" data-kendo-template="bar"></th></table>')[0], { dataSource: [] });
+        var grid = new Grid($('<table><th data-kendo-field="foo" data-kendo-template="bar"></th></table>').appendTo(QUnit.fixture), { dataSource: [] });
 
         equal(grid.columns[0].field, "foo");
         equal(grid.columns[0].template, "bar");
@@ -116,7 +116,7 @@
     });
 
     test("column initialization - data-kendo-groupable", function() {
-        var grid = new Grid($('<table><th data-kendo-field="foo" data-kendo-groupable="true"></th></table>')[0], { dataSource: [] });
+        var grid = new Grid($('<table><th data-kendo-field="foo" data-kendo-groupable="true"></th></table>').appendTo(QUnit.fixture), { dataSource: [] });
 
         equal(grid.columns[0].field, "foo");
         ok(grid.columns[0].groupable);
@@ -146,31 +146,31 @@
     });
 
     test("datasource is populated from table if not specified", function() {
-        var grid = new Grid($('<table><tr><td /><td/></tr></table>'), {columns: [ { field:"foo" }] });
+        var grid = new Grid($('<table><tr><td /><td/></tr></table>').appendTo(QUnit.fixture), {columns: [ { field:"foo" }] });
 
         equal(grid.dataSource.data().length, 1);
     });
 
     test("header text is used as a field if data-kendo-field attribute is not set", function() {
-        var grid = new Grid($('<table><th>Foo</th></table>'));
+        var grid = new Grid($('<table><th>Foo</th></table>').appendTo(QUnit.fixture));
 
         equal(grid.columns[0].field, "Foo");
     });
 
     test("data-kendo-field takes precedence over the header text", function() {
-        var grid = new Grid($('<table><th data-kendo-field="foo">Foo</th></table>'));
+        var grid = new Grid($('<table><th data-kendo-field="foo">Foo</th></table>').appendTo(QUnit.fixture));
 
         equal(grid.columns[0].field, "foo");
     });
 
     test("everything which is not alpha numeric is stripped from header text when used as a field", function() {
-        var grid = new Grid($('<table><th>  $@Foo1   Bar   </th></table>'));
+        var grid = new Grid($('<table><th>  $@Foo1   Bar   </th></table>').appendTo(QUnit.fixture));
 
         equal(grid.columns[0].field, "Foo1Bar");
     });
 
     test("initializing a grid from a div", function() {
-        var div = $("<div />"), grid = new Grid(div, {scrollable: false, dataSource: [] });
+        var div = $("<div />").appendTo(QUnit.fixture), grid = new Grid(div, {scrollable: false, dataSource: [] });
 
         ok(grid.element[0] === div[0]);
         ok(div.children().first().is("table"));
@@ -178,7 +178,7 @@
     });
 
     test("initializing a scrollable grid from a div", function() {
-        var div = $("<div />"), grid = new Grid(div, { dataSource: [] });
+        var div = $("<div />").appendTo(QUnit.fixture), grid = new Grid(div, { dataSource: [] });
 
         ok(grid.element[0] === div[0]);
         equal(grid.table[0], div.find(".k-grid-content").children().first()[0]);
@@ -231,21 +231,21 @@
     });
 
     test("thead initialization when there is existing thead", function() {
-        var grid = new Grid($("<table><thead/></table>"), { columns: [ { field: "foo" } ] });
+        var grid = new Grid($("<table><thead/></table>").appendTo(QUnit.fixture), { columns: [ { field: "foo" } ] });
 
         equal(grid.wrapper.find("thead").length, 1);
         equal(grid.thead.find("th").length, 1);
     });
 
     test("thead initialization when there is existing nested theads", function() {
-        var grid = new Grid($("<table><thead/><tbody><tr><td><table><thead/></table></td></tr></tbody></table>"), { columns: [ { field: "foo" } ] });
+        var grid = new Grid($("<table><thead/><tbody><tr><td><table><thead/></table></td></tr></tbody></table>").appendTo(QUnit.fixture), { columns: [ { field: "foo" } ] });
 
         equal(grid.wrapper.find("thead").length, 2);
         equal(grid.thead.find("th").length, 1);
     });
 
     test("thead initialization when there is existing thead > tr", function() {
-        var grid = new Grid($("<table><thead><tr/></thead></table>"), { columns: [ { field: "foo" } ] });
+        var grid = new Grid($("<table><thead><tr/></thead></table>").appendTo(QUnit.fixture), { columns: [ { field: "foo" } ] });
 
         equal(grid.wrapper.find("thead").length, 1);
         equal(grid.thead.find("tr").length, 1);
@@ -253,7 +253,7 @@
     });
 
     test("thead initialization when there is existing thead > tr > th", function() {
-        var grid = new Grid($("<table><thead><tr><th>bar</th></tr></thead></table>"), { columns: [ { field: "foo" } ] });
+        var grid = new Grid($("<table><thead><tr><th>bar</th></tr></thead></table>").appendTo(QUnit.fixture), { columns: [ { field: "foo" } ] });
 
         equal(grid.wrapper.find("thead").length, 1);
         equal(grid.thead.find("tr").length, 1);
@@ -262,7 +262,7 @@
     });
 
     test("thead initialization when there are nested g thead > tr > th", function() {
-        var element = $("<table><thead><tr><th>bar</th></tr></thead><tbody><tr><td><table><thead><tr><th/></tr></thead></table></td></tr></tbody></table>");
+        var element = $("<table><thead><tr><th>bar</th></tr></thead><tbody><tr><td><table><thead><tr><th/></tr></thead></table></td></tr></tbody></table>").appendTo(QUnit.fixture);
         var grid = new Grid(element, { columns: [ { field: "foo" } ] });
 
         equal(grid.wrapper.find("thead").length, 2);
@@ -272,7 +272,7 @@
     });
 
     test("thead initialization when there is no thead but th exists", function() {
-        var grid = new Grid($("<table><tr><th>bar</th></tr></table>"), { });
+        var grid = new Grid($("<table><tr><th>bar</th></tr></table>").appendTo(QUnit.fixture), { });
 
         equal(grid.wrapper.find("thead").length, 1);
         equal(grid.wrapper.find("tr").length, 1);
@@ -286,43 +286,43 @@
     });
 
     test("th css class is set", function() {
-        var grid = new Grid($("<table><thead><tr><th /></tr></thead></table>"));
+        var grid = new Grid($("<table><thead><tr><th /></tr></thead></table>").appendTo(QUnit.fixture));
 
         equal(grid.thead.find(".k-header").length, grid.thead.find("th").length);
     });
 
     test("scrollable grid has a div for the header", function() {
-        var grid = new Grid($("<table><thead><tr><th /></tr></thead></table>"), { scrollable: true });
+        var grid = new Grid($("<table><thead><tr><th /></tr></thead></table>").appendTo(QUnit.fixture), { scrollable: true });
 
         equal(grid.wrapper.children().filter("div.k-grid-header").length, 1);
     });
 
     test("scrollable grid has a table with thead in the header", function() {
-        var grid = new Grid($("<table><thead><tr><th /></tr></thead></table>"), { scrollable: true });
+        var grid = new Grid($("<table><thead><tr><th /></tr></thead></table>").appendTo(QUnit.fixture), { scrollable: true });
 
         equal(grid.wrapper.children().filter("div").find("table > thead").length, 1);
     });
 
     test("scrollable grid has only one header when columns are autogenerated", function() {
-        var grid = new Grid($("<table />"), { scrollable: true, dataSource: [{foo:"bar"}] });
+        var grid = new Grid($(table), { scrollable: true, dataSource: [{foo:"bar"}] });
 
         equal(grid.wrapper.children().filter("div.k-grid-header").find("table > thead").length, 1);
     });
 
     test("scrollable grid header has right padding the same as the scrollbar width", function() {
-        var grid = new Grid($("<table />"), { scrollable: true, dataSource: [{foo:"bar"}] });
+        var grid = new Grid(table, { scrollable: true, dataSource: [{foo:"bar"}] });
 
         equal(grid.wrapper.children().filter("div.k-grid-header").css("padding-right"), kendo.support.scrollbar() + "px");
     });
 
     test("scrollable grid has header wrap", function() {
-        var grid = new Grid($("<table />"), { scrollable: true, dataSource: [{foo:"bar"}] });
+        var grid = new Grid(table, { scrollable: true, dataSource: [{foo:"bar"}] });
 
         equal(grid.wrapper.children().filter("div.k-grid-header").find("> div.k-grid-header-wrap").length, 1);
     });
 
     test("scrollable grid table is nested in a div", function() {
-        var grid = new Grid($("<table />"), { scrollable: true, dataSource: [{foo:"bar"}] });
+        var grid = new Grid(table, { scrollable: true, dataSource: [{foo:"bar"}] });
 
         ok(grid.table.parent().is("div.k-grid-content"));
     });
@@ -398,7 +398,7 @@
     });
 
     test("hierarhcy col element is created in non-scrollable grid when table element has hierarchy col defined", function() {
-        var grid = new Grid('<table><colgroup><col class="k-hierarchy-col"/></colgroup></table>', {
+        var grid = new Grid($('<table><colgroup><col class="k-hierarchy-col"/></colgroup></table>').appendTo(QUnit.fixture), {
             dataSource: [],
             columns: [{field: "foo" }, {field: "bar"}],
             scrollable: false
@@ -411,7 +411,7 @@
     });
 
     test("hierarhcy col element is created in scrollable grid when table element has hierarchy col defined", function() {
-        var grid = new Grid('<table><colgroup><col class="k-hierarchy-col"/></colgroup></table>', {
+        var grid = new Grid($('<table><colgroup><col class="k-hierarchy-col"/></colgroup></table>').appendTo(QUnit.fixture), {
             dataSource: [],
             columns: [{field: "foo" }, {field: "bar"}]
         });
@@ -441,7 +441,7 @@
 
     test("column width is parsed from DOM col element when grid created from table element", function() {
         var element = $('<table><colgroup><col style="width:200px"/><col /></colgroup><thead><th data-kendo-field="foo"></th><th data-kendo-field="bar"></th><th data-kendo-field="baz"></th></thead></table>'),
-            grid = new Grid(element, {
+            grid = new Grid(element.appendTo(QUnit.fixture), {
                 dataSource: [],
                 scrollable: false
             });
@@ -542,7 +542,7 @@
     });
 
     test("grid filterable options propagate to the filter menu", function() {
-        var grid = new Grid($("<div>"), {
+        var grid = new Grid($("<div>").appendTo(QUnit.fixture), {
             filterable: {
                 operators: {
                     string: {
@@ -559,7 +559,7 @@
     });
 
     test("column filterable options override the grid filterable options", function() {
-        var grid = new Grid($("<div>"), {
+        var grid = new Grid($("<div>").appendTo(QUnit.fixture), {
             filterable: {
                 operators: {
                     string: {
@@ -588,7 +588,7 @@
     });
 
     test("column filterable options override the default filterable options", function() {
-        var grid = new Grid($("<div>"), {
+        var grid = new Grid($("<div>").appendTo(QUnit.fixture), {
             dataSource: [
                 { foo: "foo" }
             ],
@@ -611,7 +611,7 @@
     });
 
     test("column filterable operators are the only ones used by the filter menu", function() {
-        var grid = new Grid($("<div>"), {
+        var grid = new Grid($("<div>").appendTo(QUnit.fixture), {
             dataSource: [
                 { foo: "foo" }
             ],
@@ -634,7 +634,7 @@
     });
 
     test("column filterable operators are the only ones used by the filter menu when the grid filterable is set", function() {
-        var grid = new Grid($("<div>"), {
+        var grid = new Grid($("<div>").appendTo(QUnit.fixture), {
             dataSource: [
                 { foo: "foo" }
             ],
@@ -664,7 +664,7 @@
     });
 
     test("column filterable messages override the grid filterable messages", function() {
-        var grid = new Grid($("<div>"), {
+        var grid = new Grid($("<div>").appendTo(QUnit.fixture), {
             dataSource: [
                 { foo: "foo" }
             ],
@@ -689,7 +689,7 @@
     });
 
     test("column filterable messages are merged with the grid filterable messages", function() {
-        var grid = new Grid($("<div>"), {
+        var grid = new Grid($("<div>").appendTo(QUnit.fixture), {
             dataSource: [
                 { foo: "foo" }
             ],
@@ -862,7 +862,7 @@
     });
 
     test("detail th is created when thead is defined", function() {
-        var grid = new Grid($('<table><th data-kendo-field="foo"></th></table>')[0], {
+        var grid = new Grid($('<table><th data-kendo-field="foo"></th></table>').appendTo(QUnit.fixture), {
                 dataSource: [],
                 detailInit: $.noop }),
             th = grid.thead.find("th");
@@ -872,7 +872,7 @@
     });
 
     test("render column attribute", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
                 { field: "foo", attributes: { baz: "baz1" } },
@@ -885,7 +885,7 @@
     });
 
     test("render command column attribute", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
                 { command: "foo", attributes: { baz: "baz1" } },
@@ -898,7 +898,7 @@
     });
 
     test("render command button attributes as string", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [ { command: { name: "foo", attr: "baz=baz1"  } } ]
         });
@@ -907,7 +907,7 @@
     });
 
     test("render command button attributes as object", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [ { command: { name: "foo", attr: { baz: "baz1" }  } } ]
         });
@@ -916,7 +916,7 @@
     });
 
     test("render column header attribute", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
                 { field: "foo", headerAttributes: { baz: "baz1" } },
@@ -929,7 +929,7 @@
     });
 
     test("render command column header attribute", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
                 { command: "foo", headerAttributes: { baz: "baz1" } },
@@ -942,7 +942,7 @@
     });
 
     test("render column footer attribute", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
                 { field: "foo", footerAttributes: { baz: "baz1" }, footerTemplate: "foo" },
@@ -955,7 +955,7 @@
     });
 
     test("render command column footer attribute", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
                 { field: "foo", footerAttributes: { baz: "baz1" }, footerTemplate: "foo" },
@@ -968,7 +968,7 @@
     });
 
     test("css class is added to custom command button", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [ { command: "bar" }]
         });
@@ -977,7 +977,7 @@
     });
 
     test("both service and custom css classes are added to custom command button", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [ { command: { className: "bar", name: "foo" } }]
         });
@@ -988,7 +988,7 @@
     });
 
     test("destroy command always adds default class when className is defined", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [ { command: { className: "bar", name: "destroy" } }]
         });
@@ -999,7 +999,7 @@
     });
 
     test("text is used if no name is set", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [ { command: { text: "bar"} }]
         });
@@ -1008,7 +1008,7 @@
     });
 
     test("spaces are removed from the text when used as class", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [ { command: { text: "bar baz"} }]
         });
@@ -1018,7 +1018,7 @@
 
     test("custom command without name throws error", function() {
         raises(function() {
-            var grid = new Grid($("<table/>"), {
+            var grid = new Grid(table, {
                 dataSource: [{ foo: 1, bar: "bar"}],
                 columns: [{ command: { className: "foo" } }]
             });
@@ -1029,7 +1029,7 @@
     });
 
     test("custom command click handler is called if only text with multiple spaces is set", 1, function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
             {
@@ -1045,7 +1045,7 @@
     });
 
     test("custom command click handler is called", 1, function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
             {
@@ -1061,7 +1061,7 @@
     });
 
     test("custom command click handler is called if multiple commands", 1, function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
             {
@@ -1078,7 +1078,7 @@
     });
 
     test("command name is passed to custom command click handler", 1, function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
             {
@@ -1094,7 +1094,7 @@
     });
 
     test("grid instance is the context for the custom command handler", 1, function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
             {
@@ -1110,7 +1110,7 @@
     });
 
     test("render column header template", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [ { field: "foo", headerTemplate: "custom text" } ]
         });
@@ -1118,7 +1118,7 @@
     });
 
     test("column header template as function", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [ { field: "foo", headerTemplate: function() { return "custom text" } } ]
         });
@@ -1126,7 +1126,7 @@
     });
 
     test("render command column header template", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [ { command: "foo", headerTemplate: "custom text" } ]
         });
@@ -1134,7 +1134,7 @@
     });
 
     test("column displays value from values", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [ { field: "foo", values: [ { value: 0, text: "custom text" }, { value: 1, text: "custom text1" },{ value: 2, text: "custom text2" }] } ]
         });
@@ -1143,7 +1143,7 @@
     });
 
     test("column displays field defined via array access", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [ { field: "['foo']" }]
         });
@@ -1152,7 +1152,7 @@
     });
 
     test("empty cell is displayed when value does not exists in values", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 3, bar: "bar"}],
             columns: [ { field: "foo", values: [ { value: 0, text: "custom text" }, { value: 1, text: "custom text1" },{ value: 2, text: "custom text2" }] } ]
         });
@@ -1161,7 +1161,7 @@
     });
 
     test("column displays value from values if text is zero", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 0, bar: "bar"}],
             columns: [ { field: "foo", values: [ { value: 0, text: 0 }, { value: 1, text: "custom text1" },{ value: 2, text: "custom text2" }] } ]
         });
@@ -1170,7 +1170,7 @@
     });
 
     test("column does not display value from values if value field is not defined", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [ { field: "foo", values: [ "custom text" ] } ]
         });
@@ -1179,7 +1179,7 @@
     });
 
     test("hidden column does not render cols", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
                 { field: "foo", hidden: true },
@@ -1192,7 +1192,7 @@
     });
 
     test("hidden column set hidden attribute for header cell", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
                 { field: "foo", hidden: true },
@@ -1204,7 +1204,7 @@
     });
 
     test("hidden column set hidden attribute for footer cell", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
                 { field: "foo", hidden: true, footerTemplate: "foo" },
@@ -1216,7 +1216,7 @@
     });
 
     test("hidden columns set hidden attribute for data cell", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             columns: [
                 { field: "foo", hidden: true },
@@ -1228,7 +1228,7 @@
     });
 
     test("detail cell colspan depends on visible columns", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: [{ foo: 1, bar: "bar"}],
             detailTemplate: "foo",
             columns: [
@@ -1243,7 +1243,7 @@
     });
 
     test("group cell colspan depends on visible columns", function() {
-        var grid = new Grid($("<table/>"), {
+        var grid = new Grid(table, {
             dataSource: {
                 data: [{ foo: 1, bar: "bar"}],
                 group: { field: "foo" }

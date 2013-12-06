@@ -15,13 +15,14 @@
             QUnit.fixture[0].appendChild(table);
         },
         teardown: function() {
+            kendo.destroy(QUnit.fixture);
             $(table).closest(".k-grid").remove();
             kendo.ns = ns;
         }
     });
 
     test("Grid renders role=grid", function() {
-        var table = $("<table />").kendoGrid({ dataSource: [] });
+        var table = $("<table />").appendTo(QUnit.fixture).kendoGrid({ dataSource: [] });
 
         equal(table.attr("role"), "grid");
     });

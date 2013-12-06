@@ -1,15 +1,25 @@
 (function() {
    var Grid = kendo.ui.Grid,
+        dom = $("<div />"),
         DataSource = kendo.data.DataSource;
 
+    module("Grid databinding", {
+        setup: function() {
+            dom.appendTo(QUnit.fixture);
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
+        }
+    });
+
     test("refresh creates table row for each item of the datasource view", function() {
-        var grid = new Grid($("<table><tbody/></table>")[0], { dataSource: [1,2] });
+        var grid = new Grid(dom, { dataSource: [1,2] });
 
         equal(grid.tbody.find(">tr").length, 2);
     });
 
     test("dataItem return data for given row", function() {
-        var grid = new Grid($("<table><tbody/></table>")[0], { dataSource: [1,2] });
+        var grid = new Grid(dom, { dataSource: [1,2] });
 
         var rows = grid.tbody.find("tr");
         equal(grid.dataItem(rows.first()), 1);
@@ -17,7 +27,7 @@
     });
 
     test("dataItem return data for given row when grouping is applied", function() {
-        var grid = new Grid($("<table><tbody/></table>")[0], {
+        var grid = new Grid(dom, {
             dataSource: {
                 data: [ { foo: 1 }, { foo: 2 }],
                 group: [ { field: "foo" } ]
@@ -30,7 +40,7 @@
     });
 
     test("dataItem return data for given row with grouping and footers", function() {
-        var grid = new Grid($("<table><tbody/></table>")[0], {
+        var grid = new Grid(dom, {
             columns: [
                 { field: "foo", groupFooterTemplate: "baz" }
             ],
@@ -46,7 +56,7 @@
     });
 
     test("grid row is refreshed on modelChange", function() {
-         var grid = new Grid($("<table><tbody/></table>")[0], {
+         var grid = new Grid(dom, {
             dataSource: {
                 data: [ { id: 1, foo: "foo" }, { id: 2, foo: "bar" }],
                 schema: {
@@ -67,7 +77,7 @@
     });
 
     test("grid alt row is refreshed on modelChange", function() {
-         var grid = new Grid($("<table><tbody/></table>")[0], {
+         var grid = new Grid(dom, {
             dataSource: {
                 data: [ { id: 1, foo: "foo" }, { id: 2, foo: "bar" }],
                 schema: {
@@ -89,7 +99,7 @@
     });
 
     test("dataItem return data for given row if model is changed", function() {
-        var grid = new Grid($("<table><tbody/></table>")[0], {
+        var grid = new Grid(dom, {
             dataSource: {
                 data: [ { id: 1, foo: "foo" }, { id: 2, foo: "bar" } ],
                 schema: {
@@ -109,7 +119,7 @@
     });
 
     test("resetting dataSource detaches the previouse events", function() {
-        var grid = new Grid($("<table><tbody/></table>")[0]);
+        var grid = new Grid(dom);
 
         var dataSource = grid.dataSource;
 
@@ -124,7 +134,7 @@
     });
 
     test("resetting DataSource rebinds the widget", function() {
-        var grid = new Grid($("<table><tbody/></table>")[0]);
+        var grid = new Grid(dom);
 
         grid.setDataSource(new kendo.data.DataSource({
             data:[{text: 1, value: 1}, {text:2, value:2}]
@@ -135,13 +145,13 @@
     });
 
     test("binding to null value does not display the string 'null'", function() {
-        var grid = new Grid($("<table><tbody/></table>"), { dataSource: [ { foo: null} ], columns: ["foo"] });
+        var grid = new Grid(dom, { dataSource: [ { foo: null} ], columns: ["foo"] });
 
         ok(grid.tbody.find("td").text() != "null");
     });
 
     test("binding to undefined value does not display the string 'undefined'", function() {
-        var grid = new Grid($("<table><tbody/></table>"), { dataSource: [ { foo : undefined } ], columns: ["foo"], templateSettings: { useWithBlock: false } });
+        var grid = new Grid(dom, { dataSource: [ { foo : undefined } ], columns: ["foo"], templateSettings: { useWithBlock: false } });
 
         ok(grid.tbody.find("td").text() != "undefined");
     });

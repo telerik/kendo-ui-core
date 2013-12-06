@@ -349,7 +349,7 @@
     });
 
     test("generating headers sets data-kendo-aggregates attr for columns with aggregate", function() {
-        var element = $("<table />"),
+        var element = $(table()),
         grid = new Grid(element, {
             data: [],
             columns: [

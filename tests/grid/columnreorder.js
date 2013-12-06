@@ -1,5 +1,4 @@
 (function() {
-return;
    var Grid = kendo.ui.Grid,
         table,
         data,
@@ -12,7 +11,6 @@ return;
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
-            QUnit.fixture.empty();
         }
     });
 
@@ -367,7 +365,9 @@ return;
 
     test("Reorderable destroy is called on grid destroy", function() {
         var grid = new Grid(table, { reorderable: true }),
-            reorderable = stub(grid.wrapper.data("kendoReorderable"), "destroy");
+            reorderable = grid.wrapper.data("kendoReorderable");
+
+        reorderable = stub(reorderable, { destroy:  reorderable.destroy} );
 
         grid.destroy();
 

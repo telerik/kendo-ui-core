@@ -19,16 +19,18 @@
             window.dataBound = function() {
                 ok(true);
             }
+
+            kendo.effects.disable();
         },
         teardown: function() {
             delete window.dataBound;
             kendo.destroy(QUnit.fixture);
-            QUnit.fixture.empty();
             $(".k-window, .k-overlay").remove();
+            kendo.effects.enable();
         }
     });
 
-   test("initializes a grid when data role is grid", function() {
+    test("initializes a grid when data role is grid", function() {
         var dom = $('<div data-role="grid"/>')
             .appendTo(QUnit.fixture);
 

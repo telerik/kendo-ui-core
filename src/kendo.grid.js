@@ -701,6 +701,10 @@ kendo_module({
                 that.wrapper.data("kendoReorderable").destroy();
             }
 
+            if (that.selectable) {
+                that.selectable.destroy();
+            }
+
             if (that.resizable) {
                 that.resizable.destroy();
 
