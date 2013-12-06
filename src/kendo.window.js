@@ -380,7 +380,7 @@ kendo_module({
             visible: null,
             height: null,
             width: null,
-            appendTo: document.body
+            appendTo: "body"
         },
 
         _closable: function() {
