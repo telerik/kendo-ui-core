@@ -10,6 +10,8 @@
             plotArea;
 
         function createSparkline(options) {
+            destroySparkline();
+
             var div = $("<div id='container' />").appendTo(QUnit.fixture);
             div.kendoSparkline(options);
 
@@ -17,9 +19,13 @@
         }
 
         function destroySparkline() {
-            var element = $("#container");
-            kendo.destroy(element);
-            element.unbind().empty();
+            if (sparkline) {
+                sparkline.destroy();
+                sparkline.element.remove();
+                sparkline = null;
+
+                destroyMeasureBox();
+            }
         }
 
         // ------------------------------------------------------------
@@ -66,6 +72,7 @@
             },
             teardown: function() {
                 dataviz.ViewFactory.current = factory;
+                destroySparkline();
             }
         });
 
@@ -101,6 +108,8 @@
         });
 
         test("custom height is preserved", function() {
+            destroySparkline();
+
             var div = $("<div id='container' />").css("height", "30").appendTo(QUnit.fixture);
             sparkline = div.kendoSparkline().data("kendoSparkline");
 
@@ -148,6 +157,8 @@
         });
 
         test("custom width is preserved", function() {
+            destroySparkline();
+
             var div = $("<div id='container' />").css("width", "30").appendTo(QUnit.fixture);
             div.kendoSparkline();
 
@@ -156,6 +167,8 @@
         });
 
         test("custom width is preserved for bullet series", function() {
+            destroySparkline();
+
             var div = $("<div id='container' />").css("width", "30").appendTo(QUnit.fixture);
             div.kendoSparkline({ type: "bullet" });
 
@@ -164,6 +177,8 @@
         });
 
         test("custom width is preserved for bar series", function() {
+            destroySparkline();
+
             var div = $("<div id='container' />").css("width", "30").appendTo(QUnit.fixture);
             div.kendoSparkline({ type: "bar" });
 
@@ -173,8 +188,7 @@
 
         // ------------------------------------------------------------
         module("Series", {
-            setup: function() {
-            }
+            teardown: destroySparkline
         });
 
         test("bullet wrap the options data array", function() {

@@ -9,15 +9,21 @@
             liveSeries;
 
         function createSparkline(options) {
+            destroySparkline();
+
             var div = $("<div id='container' />").appendTo(QUnit.fixture);
             sparkline = div.kendoSparkline(options).data("kendoSparkline");
             liveSeries = sparkline._plotArea.charts[0].options.series
         }
 
         function destroySparkline() {
-            var element = $("#container");
-            kendo.destroy(element);
-            element.unbind().empty();
+            if (sparkline) {
+                sparkline.destroy();
+                sparkline.element.remove();
+                sparkline = null;
+
+                destroyMeasureBox();
+            }
         }
 
         // ------------------------------------------------------------
