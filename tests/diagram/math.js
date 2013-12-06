@@ -718,10 +718,13 @@
     QUnit.module("Graph adapter tests", {
         setup: function() {
             QUnit.fixture.html('<div id=canvas />');
+        },
+        teardown: function() {
+            kendo.destroy(QUnit.fixture);
         }
     });
 
-    test('Graph adapter', function () {
+    test('create diagram from tree', function () {
         var treeGraph = Predefined.Tree(2, 2); // 7 nodes and 6 links
         var div = GetRoot();
         var diagramElement = $("#canvas").kendoDiagram();
@@ -734,7 +737,9 @@
         // should essentially be the same as the original tree
         ok(adapter.finalNodes.length == 7, "Tree conversion should return 7 tree nodes.");
         ok(adapter.finalLinks.length == 6, "Tree conversion should return 6 tree links.");
+    });
 
+    test('create diagram from forest', function() {
         var forest = Predefined.Forest(3, 3, 3); // 120 nodes and 117 links
         div = GetRoot(); // clear the diagram, which is important since otherwise the previous test will remain
         diagramElement = $("#canvas").kendoDiagram();
@@ -749,7 +754,6 @@
         ok(adapter.finalLinks.length == 117, "Forest conversion should return 117 tree links.");
         var components = adapter.finalGraph.getConnectedComponents();
         ok(components.length == 3, "Forest conversion should return three trees.")
-
     });
 
     return;

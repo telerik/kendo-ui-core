@@ -1201,6 +1201,10 @@ kendo_module({
             that.canvas = undefined;
 
             that.destroyScroller();
+
+            if (this.options.dragAndDrop && kendo.ui.DropTarget) {
+                this.element.kendoDropTarget("destroy");
+            }
         },
         destroyScroller: function () {
             var scroller = this.scroller;
