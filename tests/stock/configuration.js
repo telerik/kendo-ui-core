@@ -202,12 +202,15 @@
 
         // ------------------------------------------------------------
         var support = deepExtend({}, kendo.support);
+        var browserOptions = deepExtend({}, kendo.support.browser);
+
         module("Navigator / Live drag", {
             setup: function() {
                 createStockChart({ navigator: { dataSource: null } });
             },
             teardown: function() {
-                kendo.support = deepExtend({}, support);
+                deepExtend(kendo.support, support);
+                kendo.support.browser = deepExtend({}, browserOptions);
                 destroyChart();
             }
         });
