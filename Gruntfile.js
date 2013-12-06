@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadTasks('build/grunt/tasks');
 
     var browsers = ['Chrome'];
 
@@ -32,6 +33,7 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        jshint: grunt.file.readJSON('build/grunt/jshint.json'),
         karma: {
             unit: {
                 options: {
@@ -234,23 +236,6 @@ module.exports = function(grunt) {
 
                     singleRun: grunt.option('single-run')
                 }
-            }
-        },
-        jshint: {
-            files: [
-            'src/kendo*.js',
-            'src/editor/*.js',
-            'src/dataviz/**/*.js',
-            'tests/map/layers/helpers.js',
-            'tests/**/test-helper.js',
-            'demos/mvc/content/shared/js/examples.js',
-            'demos/mvc/content/shared/js/console.js',
-            'themebuilder/bootstrap.js',
-            'themebuilder/scripts/themebuilder.js',
-            'themebuilder/scripts/constants.js'
-            ],
-            options: {
-                ignores: ['**/*.min.js', 'src/kendo.web.js', 'src/kendo.aspnetmvc.js', 'src/kendo.all.js', 'src/kendo.mobile.js', 'src/kendo.dataviz.js', 'src/kendo.timezones.js', 'src/kendo.model.js', 'src/kendo.winjs.js', 'src/kendo.editor.js' ]
             }
         }
     });
