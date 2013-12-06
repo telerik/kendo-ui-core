@@ -62,12 +62,6 @@
             }, defaultOptions, options)).data("kendoStockChart");
         }
 
-        function destroyChart() {
-            var element = $("#container");
-            kendo.destroy(element);
-            element.unbind().empty();
-        }
-
         // ------------------------------------------------------------
         module("Data Binding", {
             setup: function() {

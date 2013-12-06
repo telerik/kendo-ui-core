@@ -12,12 +12,6 @@
             chart = div.kendoStockChart(options).data("kendoStockChart");
         }
 
-        function destroyChart() {
-            var element = $("#container");
-            kendo.destroy(element);
-            element.unbind().empty();
-        }
-
         // ------------------------------------------------------------
         module("Options / Defaults", {
             setup: function() {
@@ -125,7 +119,9 @@
         });
 
         // ------------------------------------------------------------
-        module("Options / Navigator");
+        module("Options / Navigator", {
+              teardown: destroyChart
+        });
 
         asyncTest("autoBind is inherited from the chart", function() {
             createStockChart({
@@ -212,6 +208,7 @@
             },
             teardown: function() {
                 kendo.support = deepExtend({}, support);
+                destroyChart();
             }
         });
 
