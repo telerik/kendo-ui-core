@@ -22,30 +22,34 @@ var MobileTestWidget = kendo.mobile.ui.Widget.extend({
     }
 });
 
+var dom;
 
 module("mvvm widgets", {
     setup: function() {
         kendo.ui.plugin(TestWidget);
         kendo.mobile.ui.plugin(MobileTestWidget);
+    },
+    teardown: function() {
+        kendo.destroy(dom);
     }
 })
 
 test("widgets are initialized", function() {
-    var div = $('<div><span id="foo" data-role="testwidget" /></div>');
-    kendo.bind(div, {}, kendo.ui);
-    ok(div.find("#foo").data("kendoTestWidget"));
+    dom = $('<div><span id="foo" data-role="testwidget" /></div>');
+    kendo.bind(dom, {}, kendo.ui);
+    ok(dom.find("#foo").data("kendoTestWidget"));
 });
 
 test("full path widgets are initialized", function() {
-    var div = $('<div><span id="foo" data-role="kendo.ui.TestWidget" /></div>');
-    kendo.bind(div, {}, kendo.ui);
-    ok(div.find("#foo").data("kendoTestWidget"));
+    dom = $('<div><span id="foo" data-role="kendo.ui.TestWidget" /></div>');
+    kendo.bind(dom, {}, kendo.ui);
+    ok(dom.find("#foo").data("kendoTestWidget"));
 });
 
 test("widgets are initialized from multiple namespaces", function() {
-    var div = $('<div><span id="foo" data-role="testwidget" /><span id="bar" data-role="testwidget2" /></div>');
-    kendo.bind(div, {}, kendo.ui, kendo.mobile.ui);
-    ok(div.find("#bar").data("kendoMobileTestWidget2"));
+    dom = $('<div><span id="foo" data-role="testwidget" /><span id="bar" data-role="testwidget2" /></div>');
+    kendo.bind(dom, {}, kendo.ui, kendo.mobile.ui);
+    ok(dom.find("#bar").data("kendoMobileTestWidget2"));
 });
 
 }());
