@@ -80,7 +80,8 @@
         module("Candlestick Chart", {
             setup: function() {
                 setupCandlestickChart(plotArea, { series: [ series ] });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("creates points for candlestickChart data points", function() {
@@ -187,7 +188,8 @@
                     },
                     series)]
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("sets line width", function() {
@@ -260,7 +262,8 @@
                 setupCandlestickChart(plotArea, {
                     series: [series]
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("highlightOverlay renders default border width", function() {
@@ -389,7 +392,8 @@
         module("Candlestick Chart / Configuration", {
             setup: function() {
                 createCandlestickChart();
-            }
+            },
+            teardown: destroyChart
         });
 
         test("applies series color to point", function() {

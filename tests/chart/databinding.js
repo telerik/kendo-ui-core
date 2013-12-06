@@ -8,7 +8,8 @@
         module("Late binding", {
             setup: function() {
                 chart = createChart();
-            }
+            },
+            teardown: destroyChart
         });
 
         test("creates empty data source", function() {
@@ -40,7 +41,8 @@
         module("Inline binding", {
             setup: function() {
                 chart = createChart();
-            }
+            },
+            teardown: destroyChart
         });
 
         test("categories are populated from series", function() {

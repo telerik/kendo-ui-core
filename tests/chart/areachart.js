@@ -311,7 +311,8 @@
                 setupAreaChart(plotArea, {
                     series: [ sparseSeries ]
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("Reports minimum series value for default axis", function() {
@@ -373,7 +374,9 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Panes");
+        module("Area Chart / Panes", {
+            teardown: destroyChart
+        });
 
         test("area fill is clipped to value axis box", function() {
             var chart = createChart({
@@ -407,7 +410,8 @@
                     series: [ positiveSeries, positiveSeries, positiveSeries ],
                     isStacked: true }
                 );
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports stacked minumum value for default axis", function() {
@@ -432,7 +436,8 @@
                     series: [ negativeSeries, negativeSeries, negativeSeries ],
                     isStacked: true
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports stacked minumum value for default axis", function() {
@@ -463,7 +468,8 @@
                     }],
                     isStacked: true
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports stacked minumum value for default axis", function() {
@@ -497,7 +503,8 @@
                     ],
                     isStacked: true
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports stacked minumum value for default axis", function() {
@@ -516,7 +523,8 @@
                     series: [ sparseSeries, sparseSeries ],
                     isStacked: true
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("Reports minimum series value for default axis", function() {
@@ -556,7 +564,9 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Stack / Panes");
+        module("Area Chart / Stack / Panes", {
+            teardown: destroyChart
+        });
 
         test("charts in different panes are not stacked", function() {
             var chart = createChart({
@@ -613,7 +623,8 @@
 
                 polyline = view.log.path[0];
 
-            }
+            },
+            teardown: destroyChart
         });
 
         test("sets area line width", function() {
@@ -794,7 +805,8 @@
         module("Area Chart / Configuration", {
             setup: function() {
                 createAreaChart();
-            }
+            },
+            teardown: destroyChart
         });
 
         test("applies visible to point markers", function() {

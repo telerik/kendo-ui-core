@@ -89,19 +89,8 @@
 
     // ------------------------------------------------------------
     module("Views", {
-        setup: function() {
-            setupChart();
-        },
-        teardown: function() {
-            destroyChart();
-        }
-    });
-
-    test("sets dimensions on view element", 2, function() {
-        var chart = $("<div id='container' />").kendoChart().data("kendoChart");
-        var view = chart._view;
-        equal(view.options.width, 600);
-        equal(view.options.height, 400);
+        setup: setupChart,
+        teardown: destroyChart
     });
 
     asyncTest("uses preferred view specified in 'renderAs'", 1, function() {
@@ -1141,54 +1130,46 @@
 
 (function() {
     function setupChart(options, element) {
-        if (!element) {
-            element = $("<div id='container' />");
-        }
-        chart = element.kendoChart(options).data("kendoChart");
+        chart = createChart(options);
     }
 
     // ------------------------------------------------------------
     module("Size", {
-        setup: function() {
-            setupChart({}, $("<div id='container' />").width("100px").height("100px").show());
-        },
-        teardown: function() {
-            kendo.destroy($("#container"));
-            $("#container").empty();
-        }
+        setup: setupChart,
+        teardown: destroyChart
     });
 
     test("picks width from container", function() {
-        equal(chart._model.options.width, 100);
+        equal(chart._model.options.width, chart.element.width());
     });
 
     test("picks height from container", function() {
-        equal(chart._model.options.height, 100);
+        equal(chart._model.options.height, chart.element.height());
     });
 
     test("picks width from container on refresh", function() {
-        setupChart({}, $("<div id='container' />").width("200px"));
+        chart.element.css("width", "200px");
         chart.refresh();
 
         equal(chart._model.options.width, 200);
     });
 
     test("picks width from container on redraw", function() {
-        setupChart({}, $("<div id='container' />").width("200px"));
+        chart.element.css("width", "200px");
         chart.redraw();
 
         equal(chart._model.options.width, 200);
     });
 
     test("picks height from container on refresh", function() {
-        setupChart({}, $("<div id='container' />").height("200px"));
+        chart.element.css("height", "200px");
         chart.refresh();
 
         equal(chart._model.options.height, 200);
     });
 
     test("picks height from container on redraw", function() {
-        setupChart({}, $("<div id='container' />").height("200px"));
+        chart.element.css("height", "200px");
         chart.redraw();
 
         equal(chart._model.options.height, 200);
@@ -1221,15 +1202,29 @@
     });
 
     test("uses default width when none is available", function() {
-        setupChart();
+        try {
+            QUnit.fixture.hide();
+            setupChart();
 
-        equal(chart._model.options.width, 600);
+            equal(chart._model.options.width, 600);
+        }
+        catch(e) { }
+        finally {
+            QUnit.fixture.show();
+        }
     });
 
     test("uses default height when none is available", function() {
-        setupChart();
+        try {
+            QUnit.fixture.hide();
+            setupChart();
 
-        equal(chart._model.options.height, 400);
+            equal(chart._model.options.height, 400);
+        }
+        catch(e) { }
+        finally {
+            QUnit.fixture.show();
+        }
     });
 
     test("sets width on rootElement", function() {

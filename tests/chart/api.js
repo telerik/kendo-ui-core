@@ -230,7 +230,8 @@
         module("Events", {
             setup: function() {
                 setupChart({series: [{}]});
-            }
+            },
+            teardown: destroyChart
         });
 
         test("navigation does not start if no handlers are attached", 0, function() {
@@ -302,6 +303,8 @@
                 dataviz.SVGView = SVGView;
                 dataviz.CanvasView = CanvasView;
                 dataviz.supportsCanvas = supportsCanvas;
+
+                destroyChart();
             }
         });
 
@@ -387,7 +390,9 @@
         }
 
         // ------------------------------------------------------------
-        module("setOptions");
+        module("setOptions", {
+            teardown: destroyChart
+        });
 
         test("extends original options", function() {
             setupChart();

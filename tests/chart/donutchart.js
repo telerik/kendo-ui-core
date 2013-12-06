@@ -164,7 +164,8 @@
 
                 donutChart = chart._plotArea.charts[0];
                 firstSegment = donutChart.points[0];
-            }
+            },
+            teardown: destroyChart
         });
 
         test("sets segment angle based on value", function() {

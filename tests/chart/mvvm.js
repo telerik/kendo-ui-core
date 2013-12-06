@@ -1,4 +1,5 @@
 (function() {
+    var dom;
 
     module("chart MVVM", {
         setup: function() {
@@ -7,12 +8,14 @@
             }
         },
         teardown: function() {
+            kendo.destroy(dom);
+
             delete window.chartDataBound;
         }
     });
 
     test("initializes a chart when data role is chart", function() {
-        var dom = $('<div data-role="chart"/>');
+        dom = $('<div data-role="chart"/>');
 
         kendo.bind(dom, {}, kendo.dataviz.ui);
 
@@ -20,7 +23,7 @@
     });
 
     test("initializes options from data attributes", function() {
-        var dom = $('<div data-role="chart" data-series=\'[{"field":"foo"}]\'"/>');
+        dom = $('<div data-role="chart" data-series=\'[{"field":"foo"}]\'"/>');
 
         kendo.bind(dom, {}, kendo.dataviz.ui);
 
@@ -30,7 +33,7 @@
     });
 
     test("initalizes data source", function() {
-        var dom = $('<div data-role="chart" data-bind="source:items" />');
+        dom = $('<div data-role="chart" data-bind="source:items" />');
 
         kendo.bind(dom, { items: ["foo", "bar"] }, kendo.dataviz.ui );
 
@@ -39,7 +42,7 @@
     });
 
     test("binding chart initialized before binding", function() {
-        var dom = $('<div data-bind="source:items" data-series=\'[{"field":"text"}]\'"/>');
+        dom = $('<div data-bind="source:items" data-series=\'[{"field":"text"}]\'"/>');
 
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
 
@@ -53,7 +56,7 @@
     });
 
     test("binding chart initialized after binding", function() {
-        var dom = $('<div data-bind="source:items" />');
+        dom = $('<div data-bind="source:items" />');
 
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -67,7 +70,7 @@
     });
 
     test("destroying binding targets when the datasource changes", function() {
-        var dom = $('<div data-role="chart" data-bind="source:items" />');
+        dom = $('<div data-role="chart" data-bind="source:items" />');
 
         var observable = kendo.observable({ items: [{ text:"foo"} ] });
 
@@ -78,7 +81,7 @@
     });
 
     test("removing items from the model updates the UI", function() {
-        var dom = $('<div data-bind="source:items" data-series=\'[{"field":"text"}]\'"/>');
+        dom = $('<div data-bind="source:items" data-series=\'[{"field":"text"}]\'"/>');
 
         var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" },{ text: "baz" }] });
 
@@ -92,7 +95,7 @@
     });
 
     test("binding are removed if element is rebind", 1, function() {
-        var dom = $('<div data-role="chart" data-bind="source:items" />');
+        dom = $('<div data-role="chart" data-bind="source:items" />');
 
         var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" } ] });
 
@@ -106,7 +109,7 @@
     });
 
     test("expressions are destroyed", 1, function() {
-        var dom = $('<div data-role="chart" data-bind="source:items" />');
+        dom = $('<div data-role="chart" data-bind="source:items" />');
 
         var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" } ] });
 
@@ -120,7 +123,7 @@
     });
 
     test("destroys detaches the events to widget", function() {
-        var dom = $('<div data-role="chart" data-bind="source:items" />');
+        dom = $('<div data-role="chart" data-bind="source:items" />');
 
         var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -134,7 +137,7 @@
     });
 
     test("dataBound event is raised if attached as option", 1, function() {
-        var dom = $('<div data-role="chart" data-bound="chartDataBound" data-bind="source:items" />').data("series", [{ field: "text" }]);
+        dom = $('<div data-role="chart" data-bound="chartDataBound" data-bind="source:items" />').data("series", [{ field: "text" }]);
 
         var observable = kendo.observable({
             items: [{text:"foo"}, {text:"bar"}]
@@ -144,7 +147,7 @@
     });
 
     test("dataBound event is raised if attached as option to a already initialized chart", 1, function() {
-        var dom = $('<div data-bound="chartDataBound" data-bind="source:items" />').kendoChart( { series: [{ field: "text" }] });
+        dom = $('<div data-bound="chartDataBound" data-bind="source:items" />').kendoChart( { series: [{ field: "text" }] });
 
         var observable = kendo.observable({
             items: [{text:"foo"}, {text:"bar"}]
@@ -154,7 +157,7 @@
     });
 
     test("assign to DataSource as ViewModel field", function() {
-        var dom = $('<div data-role="chart" data-bind="source:dataSource" />').data("series", [{ field: "text" }]);
+        dom = $('<div data-role="chart" data-bind="source:dataSource" />').data("series", [{ field: "text" }]);
 
         var dataSource = new kendo.data.DataSource({
             data: [{text:"foo"}, {text:"bar"}]
@@ -172,7 +175,7 @@
     });
 
     test("binding visible to true shows the chart", function() {
-        var dom = $('<div data-role="chart" data-bind="visible: visible"></div>');
+        dom = $('<div data-role="chart" data-bind="visible: visible"></div>');
 
         kendo.bind(dom, { visible: true }, kendo.dataviz.ui);
 
@@ -182,7 +185,7 @@
     });
 
     test("binding visible to false hides the chart", function() {
-        var dom = $('<div data-role="chart" data-bind="visible: visible"></div>');
+        dom = $('<div data-role="chart" data-bind="visible: visible"></div>');
 
         kendo.bind(dom, { visible: false }, kendo.dataviz.ui);
 
@@ -192,7 +195,7 @@
     });
 
     test("binding invisible to true hides the chart", function() {
-        var dom = $('<div data-role="chart" data-bind="invisible: invisible"></div>');
+        dom = $('<div data-role="chart" data-bind="invisible: invisible"></div>');
 
         kendo.bind(dom, { invisible: true }, kendo.dataviz.ui);
 
@@ -202,7 +205,7 @@
     });
 
     test("binding invisible to false shows the chart", function() {
-        var dom = $('<div data-role="chart" data-bind="invisible: invisible"></div>');
+        dom = $('<div data-role="chart" data-bind="invisible: invisible"></div>');
 
         kendo.bind(dom, { invisible: false }, kendo.dataviz.ui);
 
@@ -212,7 +215,7 @@
     });
 
     test("setting autobind when bound to DataSource", function() {
-        var dom = $('<div data-role="chart" data-bind="source:dataSource" data-auto-bind="false" data-series=\'[{"field":"text"}]\'"/>');
+        dom = $('<div data-role="chart" data-bind="source:dataSource" data-auto-bind="false" data-series=\'[{"field":"text"}]\'"/>');
 
         var dataSource = new kendo.data.DataSource({
             data: [{text:"foo"}, {text:"bar"}]
@@ -229,7 +232,7 @@
     });
 
     test("initializes renderAs value", function() {
-        var dom = $('<div data-role="chart" data-render-as="canvas"/>');
+        dom = $('<div data-role="chart" data-render-as="canvas"/>');
 
         kendo.bind(dom, {}, kendo.dataviz.ui);
 
@@ -237,7 +240,7 @@
     });
 
     test("initializes seriesColors", function() {
-        var dom = $('<div data-role="chart" data-series-colors="[\'red\']"/>');
+        dom = $('<div data-role="chart" data-series-colors="[\'red\']"/>');
 
         kendo.bind(dom, {}, kendo.dataviz.ui);
 

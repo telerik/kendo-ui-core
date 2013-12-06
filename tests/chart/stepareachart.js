@@ -77,10 +77,11 @@
         );
 
         // ------------------------------------------------------------
-        module("Area Chart / Positive Values", {
+        module("Step Area Chart / Positive Values", {
             setup: function() {
                 setupStepAreaChart(plotArea, { series: [ positiveSeries ] });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("Creates points for areaChart data points", function() {
@@ -197,10 +198,11 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Negative Values", {
+        module("Step Area Chart / Negative Values", {
             setup: function() {
                 setupStepAreaChart(plotArea, { series: [ negativeSeries ] });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("Reports minimum series value for default axis", function() {
@@ -235,7 +237,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Multiple Series", {
+        module("Step Area Chart / Multiple Series", {
             setup: function() {
                 plotArea.namedValueAxes.secondary = plotArea.valueAxis;
 
@@ -244,7 +246,8 @@
                     $.extend({ }, positiveSeries),
                     $.extend({ axis: "secondary" }, negativeSeries  )
                 ] });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("Reports minimum series value for primary axis", function() {
@@ -276,14 +279,15 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Mismatched series", {
+        module("Step Area Chart / Mismatched series", {
             setup: function() {
                 setupStepAreaChart(plotArea, {
                 series: [ { data: [1, 2, 3] },
                           positiveSeries
                     ]
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("Reports minimum series value for default axis", function() {
@@ -306,12 +310,13 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Missing values", {
+        module("Step Area Chart / Missing values", {
             setup: function() {
                 setupStepAreaChart(plotArea, {
                     series: [ sparseSeries ]
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("Reports minimum series value for default axis", function() {
@@ -373,7 +378,9 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Panes");
+        module("Step Area Chart / Panes", {
+            teardown: destroyChart
+        });
 
         test("area fill is clipped to value axis box", function() {
             var chart = createChart({
@@ -401,13 +408,14 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Stack / Positive Values", {
+        module("Step Area Chart / Stack / Positive Values", {
             setup: function() {
                 setupStepAreaChart(plotArea, {
                     series: [ positiveSeries, positiveSeries, positiveSeries ],
                     isStacked: true }
                 );
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports stacked minumum value for default axis", function() {
@@ -426,13 +434,14 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Stack / Negative Values", {
+        module("Step Area Chart / Stack / Negative Values", {
             setup: function() {
                 setupStepAreaChart(plotArea, {
                     series: [ negativeSeries, negativeSeries, negativeSeries ],
                     isStacked: true
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports stacked minumum value for default axis", function() {
@@ -451,7 +460,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Stack / Mixed Values", {
+        module("Step Area Chart / Stack / Mixed Values", {
             setup: function() {
                 setupStepAreaChart(plotArea, {
                     series: [{
@@ -463,7 +472,8 @@
                     }],
                     isStacked: true
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports stacked minumum value for default axis", function() {
@@ -483,7 +493,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Stack / Mixed Series", {
+        module("Step Area Chart / Stack / Mixed Series", {
             setup: function() {
                 plotArea.namedValueAxes.a = plotArea.valueAxis;
                 plotArea.namedValueAxes.b = plotArea.valueAxis;
@@ -497,7 +507,8 @@
                     ],
                     isStacked: true
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports stacked minumum value for default axis", function() {
@@ -509,14 +520,15 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Stack / Missing values", {
+        module("Step Area Chart / Stack / Missing values", {
             setup: function() {
                 sparseSeries.line = { width: 0, style: "step" };
                 setupStepAreaChart(plotArea, {
                     series: [ sparseSeries, sparseSeries ],
                     isStacked: true
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("Reports minimum series value for default axis", function() {
@@ -557,7 +569,9 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Stack / Panes");
+        module("Step Area Chart / Stack / Panes", {
+            teardown: destroyChart
+        });
 
         test("charts in different panes are not stacked", function() {
             var chart = createChart({
@@ -593,7 +607,7 @@
         // ------------------------------------------------------------
         var polyline;
 
-        module("Area Chart / Rendering", {
+        module("Step Area Chart / Rendering", {
             setup: function() {
                 setupStepAreaChart(plotArea, {
                     series: [{
@@ -613,7 +627,8 @@
 
                 polyline = view.log.path[0];
 
-            }
+            },
+            teardown: destroyChart
         });
 
         test("sets area line width", function() {
@@ -671,10 +686,11 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Rendering / Missing Values", {
+        module("Step Area Chart / Rendering / Missing Values", {
             setup: function() {
-            sparseSeries.line = { width: 0, style: "step" };
-            }
+                sparseSeries.line = { width: 0, style: "step" };
+            },
+            teardown: destroyChart
         });
 
         test("area stops before missing value", function() {
@@ -792,10 +808,11 @@
         }
 
         // ------------------------------------------------------------
-        module("Area Chart / Configuration", {
+        module("Step Area Chart / Configuration", {
             setup: function() {
                 createAreaChart();
-            }
+            },
+            teardown: destroyChart
         });
 
         test("applies visible to point markers", function() {
@@ -932,7 +949,8 @@
         module("Area Point", {
             setup: function() {
                 createPoint();
-            }
+            },
+            teardown: destroyChart
         });
 
         test("fills target box", function() {
@@ -1076,7 +1094,8 @@
         module("Area Point / Labels", {
             setup: function() {
                 createPoint({ labels: { visible: true } });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("sets label text", function() {
@@ -1194,7 +1213,7 @@
             label;
 
         // ------------------------------------------------------------
-        module("Area Chart / Integration", {
+        module("Step Area Chart / Integration", {
             setup: function() {
                 chart = createChart({
                     dataSource: {
@@ -1270,7 +1289,7 @@
         }
 
         // ------------------------------------------------------------
-        module("Area Chart / Events / seriesClick", {
+        module("Step Area Chart / Events / seriesClick", {
             teardown: destroyChart
         });
 
@@ -1287,7 +1306,7 @@
         });
 
         // ------------------------------------------------------------
-        module("Area Chart / Events / seriesHover", {
+        module("Step Area Chart / Events / seriesHover", {
             teardown: destroyChart
         });
 

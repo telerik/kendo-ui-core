@@ -75,7 +75,8 @@
         module("Step Line Chart / Positive Values", {
             setup: function() {
                 setupLineChart(plotArea, { series: [ positiveSeries ] });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("Creates points for lineChart data points", function() {
@@ -165,7 +166,8 @@
         module("Step Line Chart / Negative Values", {
             setup: function() {
                 setupLineChart(plotArea, { series: [ negativeSeries ] });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("Reports minimum series value for default axis", function() {
@@ -203,7 +205,8 @@
         module("Step Line Chart / Multiple Series", {
             setup: function() {
                 setupLineChart(plotArea, { series: [ negativeSeries, positiveSeries ] });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("Reports number of categories for two series", function() {
@@ -240,7 +243,8 @@
                 });
 
                 series = chart._model._plotArea.charts[0];
-            }
+            },
+            teardown: destroyChart
         });
 
         test("sets category axis to first series category axis", function() {
@@ -259,7 +263,8 @@
                           positiveSeries
                     ]
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("Reports minimum series value for default axis", function() {
@@ -287,7 +292,8 @@
                 setupLineChart(plotArea, {
                     series: [ sparseSeries ]
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports minimum series value for default axis", function() {
@@ -350,7 +356,8 @@
                     series: [ positiveSeries, positiveSeries, positiveSeries ],
                     isStacked: true }
                 );
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports stacked minumum value for default axis", function() {
@@ -375,7 +382,8 @@
                     series: [ negativeSeries, negativeSeries, negativeSeries ],
                     isStacked: true
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports stacked minumum value for default axis", function() {
@@ -406,7 +414,8 @@
                     }],
                     isStacked: true
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports stacked minumum value for default axis", function() {
@@ -440,7 +449,8 @@
                     ],
                     isStacked: true
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports stacked minumum value for default axis", function() {
@@ -458,7 +468,8 @@
                     series: [ sparseSeries, sparseSeries ],
                     isStacked: true
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("Reports minimum series value", function() {
@@ -513,7 +524,9 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Stack / Panes");
+        module("Step Line Chart / Stack / Panes", {
+            teardown: destroyChart
+        });
 
         test("charts in different panes are not stacked", function() {
             var chart = createChart({
@@ -562,7 +575,8 @@
                         )
                     ]
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("sets line width", function() {
@@ -606,7 +620,9 @@
         });
 
         // ------------------------------------------------------------
-        module("Step Line Chart / Rendering / Missing Values");
+        module("Step Line Chart / Rendering / Missing Values", {
+            teardown: destroyChart
+        });
 
         test("line stops before missing value", function() {
             setupLineChart(plotArea, {

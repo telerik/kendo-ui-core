@@ -513,9 +513,12 @@
         });
 
         // ------------------------------------------------------------
-        module("Line Chart / Stack / Panes");
+        module("Line Chart / Stack / Panes", {
+            teardown: destroyChart
+        });
 
         test("charts in different panes are not stacked", function() {
+            teardown: destroyChart
             var chart = createChart({
                 series: [{
                     stack: true,
@@ -560,7 +563,8 @@
                         )
                     ]
                 });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("sets line width", function() {
@@ -604,7 +608,9 @@
         });
 
         // ------------------------------------------------------------
-        module("Line Chart / Rendering / Missing Values");
+        module("Line Chart / Rendering / Missing Values", {
+              teardown: destroyChart
+        });
 
         test("line stops before missing value", function() {
             setupLineChart(plotArea, {
@@ -720,6 +726,9 @@
         module("Line Chart / Configuration", {
             setup: function() {
                 createLineChart();
+            },
+            teardown: function() {
+                destroyChart();
             }
         });
 

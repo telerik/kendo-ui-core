@@ -294,7 +294,8 @@
                 });
 
                 series = chart._model._plotArea.charts[0];
-            }
+            },
+            teardown: destroyChart
         });
 
         test("sets category axis to first series category axis", function() {
@@ -394,7 +395,8 @@
         module("Bar Chart / Cluster", {
             setup: function() {
                 setupBarChart(plotArea, { series: [ positiveSeries, negativeSeries ] });
-            }
+            },
+            teardown: destroyChart
         });
 
         test("bars in first category are clustered", function() {
@@ -874,7 +876,9 @@
         });
 
         // ------------------------------------------------------------
-        module("Bar Chart / Stacked / Panes");
+        module("Bar Chart / Stacked / Panes", {
+            teardown: destroyChart
+        });
 
         test("bars in different panes are not stacked", function() {
             var chart = createChart({
@@ -1498,7 +1502,8 @@
                       series: [ positiveSeries, negativeSeries ]
                     }
                 );
-            }
+            },
+            teardown: destroyChart
         });
 
         test("bars in first category are clustered", function() {
@@ -1513,7 +1518,8 @@
                     series: [ positiveSeries, positiveSeries ],
                     isStacked: true }
                 );
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports 0 as minumum value for default axis", function() {
@@ -1548,7 +1554,8 @@
                     series: [ negativeSeries, negativeSeries ],
                     isStacked: true }
                 );
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports stacked minumum value for default axis", function() {
@@ -1584,7 +1591,8 @@
                     series: [ positiveSeries, negativeSeries ],
                     isStacked: true }
                 );
-            }
+            },
+            teardown: destroyChart
         });
 
         test("reports stacked minumum value for default axis", function() {
