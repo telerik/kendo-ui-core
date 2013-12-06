@@ -6,8 +6,9 @@
         setup: function() {
             input = $("<input/>").appendTo(QUnit.fixture);
         },
+
         teardown: function() {
-            input.parent().remove();
+            kendo.destroy(input);
         }
     });
 
