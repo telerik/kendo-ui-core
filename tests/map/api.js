@@ -23,7 +23,6 @@
 
     function destroyMap() {
         $(document.body).css({ "padding": "", "margin": "" });
-        QUnit.config.fixture = "";
 
         if (map) {
             map.destroy();

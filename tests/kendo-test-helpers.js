@@ -131,6 +131,7 @@ $('head')
 
     $(function() {
         QUnit.fixture = $("<div id='qunit-fixture' style='height: 100px'></div>").appendTo(document.body);
+        QUnit.config.fixture = "";
         domContentsLength = getDomContentsLength();
     });
 

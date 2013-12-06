@@ -234,7 +234,7 @@
         scrollTo(0, anchor.offset().top);
         popup.open();
         scrollTo(0, 0);
-        equal(round100(div.parent().offset().top) + Math.round(div.outerHeight()), round100(anchor.offset().top), 2);
+        equal(round100(div.parent().offset().top) + Math.round(div.outerHeight()), round100(anchor.offset().top), 8);
     });
 
     test("origin top and position center", function() {
