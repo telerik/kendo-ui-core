@@ -8,13 +8,12 @@
 
     module("Initialization", {
         setup: function() {
-            kendo.ui.Popup.fn.options.animation = false;
-
-            container = document.createElement("div");
-            QUnit.fixture[0].appendChild(container);
+            kendo.effects.disable();
+            container = $("<div>");
         },
         teardown: function() {
-            kendo.destroy(QUnit.fixture);
+            kendo.effects.enable();
+            kendo.destroy(container);
         }
     });
 

@@ -34,23 +34,19 @@
         return $.extend({ events: [], groupIndex: 0 }, options);
     }
 
-    module("Multi Day View selection", {
-        setup: function() {
-            container = document.createElement("div");
-            QUnit.fixture[0].appendChild(container);
+    function module_setup() {
+        container = $('<div class="k-scheduler" style="width:1000px;height:800px">');
+    }
 
-            container = $(container).addClass("k-scheduler").css({
-                width: 1000,
-                height: 800
-            });
-        },
-        teardown: function() {
-            if (container.data("kendoMultiDayView")) {
-                container.data("kendoMultiDayView").destroy();
-            }
-
-            kendo.destroy(QUnit.fixture);
+    function module_teardown() {
+        if (container.data("kendoMultiDayView")) {
+            container.data("kendoMultiDayView").destroy();
         }
+    }
+
+    module("Multi Day View selection", {
+        setup: module_setup,
+        teardown: module_teardown
     });
 
     test("constrainSelection sets selection to first slot of view", function() {
@@ -464,7 +460,7 @@
 
         view.select(selection);
 
-        var cell = $(".k-scheduler-content td").last();
+        var cell = container.find(".k-scheduler-content td").last();
 
         ok(cell.hasClass("k-state-selected"));
     });
@@ -478,20 +474,8 @@
     });
 
     module("Multi Day View navigation", {
-        setup: function() {
-            container = document.createElement("div");
-            QUnit.fixture[0].appendChild(container);
-            container = $(container).addClass("k-scheduler").css({
-                width: 1000,
-                height: 800
-            });
-        },
-        teardown: function() {
-            if (container.data("kendoMultiDayView")) {
-                container.data("kendoMultiDayView").destroy();
-            }
-            kendo.destroy(QUnit.fixture);
-        }
+        setup: module_setup,
+        teardown: module_teardown
     });
 
     test("View moves selection with one day on right arrow", function() {
@@ -1691,15 +1675,9 @@
     }
 
     module("Horizontally grouped Multi Day View selection", {
-        setup: function() {
-            container = $("<div />");
-            QUnit.fixture.append(container);
-        },
+        setup: module_setup,
         teardown: function() {
-            if (container.data("kendoMultiDayView")) {
-                container.data("kendoMultiDayView").destroy();
-            }
-            kendo.destroy(QUnit.fixture);
+            kendo.destroy(container);
         }
     });
 
@@ -2234,15 +2212,9 @@
     });
 
     module("Vertically grouped Multi Day View selection/navigation", {
-        setup: function() {
-            container = $("<div />");
-            QUnit.fixture.append(container);
-        },
+        setup: module_setup,
         teardown: function() {
-            if (container.data("kendoMultiDayView")) {
-                container.data("kendoMultiDayView").destroy();
-            }
-            kendo.destroy(QUnit.fixture);
+            kendo.destroy(container);
         }
     });
 

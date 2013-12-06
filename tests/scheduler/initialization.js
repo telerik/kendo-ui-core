@@ -9,25 +9,24 @@
     module("Initialization", {
         setup: function() {
             kendo.effects.disable();
-            container = document.createElement("div");
-            QUnit.fixture[0].appendChild(container);
+            container = $('<div style="width:500px;height:1000px;">');
         },
         teardown: function() {
-            kendo.destroy(QUnit.fixture);
+            kendo.destroy(container);
             kendo.effects.enable();
         }
     });
 
     test("kendoScheduler attaches a scheduler object to target", function() {
-        var div = $("<div />").appendTo(QUnit.fixture).kendoScheduler({});
+        container.kendoScheduler();
 
-        ok(div.data("kendoScheduler") instanceof Scheduler);
+        ok(container.data("kendoScheduler") instanceof Scheduler);
     });
 
     test("wrapper field is initialized", function() {
        var scheduler = new Scheduler(container);
 
-       equal(scheduler.wrapper[0], container);
+       equal(scheduler.wrapper[0], container[0]);
    });
 
    test("timezone is pass to the datasource", function() {
@@ -599,8 +598,8 @@
     });
 
     test("slotByPosition function returns null when the _slotByPosition is not available in view", function() {
-        var div = $(container).width(500).height(1000);
-        var scheduler = new kendo.ui.Scheduler(div, {
+        QUnit.fixture.append(container);
+        var scheduler = new kendo.ui.Scheduler(container, {
             views: ["agenda"],
             dataSource: []
         });
@@ -609,8 +608,8 @@
     });
 
     test("slotByElement function returns null when the _slotByPosition is not available in view", function() {
-        var div = $(container).width(500).height(1000);
-        var scheduler = new kendo.ui.Scheduler(div, {
+        QUnit.fixture.append(container);
+        var scheduler = new kendo.ui.Scheduler(container, {
             views: ["agenda"],
             date: new Date("Thu Jun 27 2013 00:00:00"),
             dataSource: [
@@ -629,8 +628,8 @@
     });
 
     test("slotByPosition function returns null when there is no slot on current position", function() {
-        var div = $(container).width(500).height(1000);
-        var scheduler = new kendo.ui.Scheduler(div, {
+        QUnit.fixture.append(container);
+        var scheduler = new kendo.ui.Scheduler(container, {
             views: ["day"],
             dataSource: []
         });
@@ -639,8 +638,8 @@
     });
 
     test("slotByPosition function returns slot correctly on day view", function() {
-        var div = $(container).width(500).height(1000);
-        var scheduler = new kendo.ui.Scheduler(div, {
+        QUnit.fixture.append(container);
+        var scheduler = new kendo.ui.Scheduler(container, {
             views: ["day"],
             dataSource: []
         });
@@ -652,8 +651,8 @@
     });
 
     test("slotByPosition function returns slot correctly on week view", function() {
-        var div = $(container).width(500).height(1000);
-        var scheduler = new kendo.ui.Scheduler(div, {
+        QUnit.fixture.append(container);
+        var scheduler = new kendo.ui.Scheduler(container, {
             views: ["week"],
             dataSource: []
         });
@@ -665,8 +664,8 @@
     });
 
    test("slotByPosition function returns slot correctly on month view", function() {
-        var div = $(container).width(500).height(1000);
-        var scheduler = new kendo.ui.Scheduler(div, {
+        QUnit.fixture.append(container);
+        var scheduler = new kendo.ui.Scheduler(container, {
             views: ["month"],
             dataSource: []
         });
@@ -678,8 +677,8 @@
     });
 
    test("slotByPosition function returns Date objects in startDate and endDate fields", function() {
-        var div = $(container).width(500).height(1000);
-        var scheduler = new kendo.ui.Scheduler(div, {
+        QUnit.fixture.append(container);
+        var scheduler = new kendo.ui.Scheduler(container, {
             views: ["month"],
             dataSource: []
         });
@@ -692,8 +691,8 @@
     });
 
     test("slotByElement function returns object when JavaScript element is passed", function() {
-        var div = $(container).width(500).height(1000);
-        var scheduler = new kendo.ui.Scheduler(div, {
+        QUnit.fixture.append(container);
+        var scheduler = new kendo.ui.Scheduler(container, {
             views: ["day"],
             dataSource: []
         });

@@ -4,7 +4,7 @@
 
     module("kendo.ui.MobileRecurrenceEditor initialization", {
         setup: function() {
-            var element = $("<div />").appendTo(QUnit.fixture);
+            var element = $("<div>").appendTo(QUnit.fixture);
 
             pane = kendo.mobile.ui.Pane.wrap(element);
 

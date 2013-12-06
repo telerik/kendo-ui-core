@@ -8,7 +8,7 @@
         setup: function() {
             now = new Date();
 
-            container = $("<div />");
+            container = $("<div>");
 
             QUnit.fixture.append(container);
 
@@ -29,9 +29,7 @@
         },
 
         teardown: function() {
-            debugger;
-
-            kendo.destroy(QUnit.fixture);
+            kendo.destroy(container);
         }
     });
 

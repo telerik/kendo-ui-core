@@ -43,18 +43,13 @@
 
     module("Month View selection", {
         setup: function() {
-            container = document.createElement("div");
-
-            QUnit.fixture[0].appendChild(container);
-
-            container = $(container).addClass("k-scheduler");
+            container = $('<div class="k-scheduler">')
         },
         teardown: function() {
             if (container.data("kendomonth")) {
                 container.data("kendomonth").destroy();
             }
-            kendo.destroy(QUnit.fixture);
-            $(".k-window, .k-overlay").remove();
+            kendo.destroy(container);
         }
     });
 
@@ -106,6 +101,7 @@
     });
 
     test("view select: selects event", function() {
+        QUnit.fixture.append(container);
         var view = setup();
         var event = new kendo.data.SchedulerEvent({
             start: new Date(2013, 1, 1),
@@ -128,6 +124,7 @@
     });
 
     test("view select: slot is not selected if event is found", function() {
+        QUnit.fixture.append(container);
         var view = setup();
         var event = new kendo.data.SchedulerEvent({
             start: new Date(2013, 1, 1),
@@ -176,6 +173,7 @@
     });
 
     test("view select: selects multiple events", function() {
+        QUnit.fixture.append(container);
         var view = setup();
         var firstEvent = new kendo.data.SchedulerEvent({
             start: new Date(2013, 1, 1),
@@ -208,6 +206,7 @@
     });
 
     test("view select: clear previous selected event", function() {
+        QUnit.fixture.append(container);
         var view = setup();
         var firstEvent = new kendo.data.SchedulerEvent({
             start: new Date(2013, 1, 1),
@@ -487,6 +486,7 @@
     });
 
     test("view moveToEvent: finds next closest event", function() {
+        QUnit.fixture.append(container);
         var view = setup();
         var event = new kendo.data.SchedulerEvent({
             start: new Date(2013, 1, 1),
@@ -522,6 +522,7 @@
     });
 
     test("view moveToEvent: updates selection to event slot", function() {
+        QUnit.fixture.append(container);
         var view = setup();
         var event = new kendo.data.SchedulerEvent({
             start: new Date(2013, 1, 2),
@@ -545,6 +546,7 @@
     });
 
     test("view moveToEvent: move selection from current event to next", function() {
+        QUnit.fixture.append(container);
         var view = setup();
         var firstEvent = new kendo.data.SchedulerEvent({
             start: new Date(2013, 1, 1),
@@ -573,6 +575,7 @@
     });
 
     test("view moveToEvent: with shift finds previous closest event", function() {
+        QUnit.fixture.append(container);
         var view = setup();
         var firstEvent = new kendo.data.SchedulerEvent({
             start: new Date(2013, 1, 1),
@@ -600,6 +603,7 @@
     });
 
     test("view moveToEvent: with shift finds previous closest event when selection is between events", function() {
+        QUnit.fixture.append(container);
         var view = setup();
         var firstEvent = new kendo.data.SchedulerEvent({
             start: new Date(2013, 1, 1),
@@ -627,6 +631,7 @@
     });
 
     test("view moveToEvent: move selection from current event to previous", function() {
+        QUnit.fixture.append(container);
         var view = setup();
         var firstEvent = new kendo.data.SchedulerEvent({
             start: new Date(2013, 1, 1),
@@ -655,6 +660,7 @@
     });
 
     test("view moveToEvent: move selection from event to previous event in same slot", function() {
+        QUnit.fixture.append(container);
         var view = setup();
         var firstEvent = new kendo.data.SchedulerEvent({
             start: new Date(2013, 1, 1),

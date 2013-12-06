@@ -1,19 +1,21 @@
 (function() {
     var Event = kendo.data.SchedulerEvent;
 
+    var dom;
+
     module("Agenda view", {
         setup: function() {
+            dom = $("<div>")
         },
         teardown: function() {
             if (agenda) {
                 agenda.destroy();
             }
-            kendo.destroy(QUnit.fixture);
         }
     });
 
     function agendaView(options) {
-        agenda = new kendo.ui.AgendaView($("<div>").appendTo(QUnit.fixture), options);
+        agenda = new kendo.ui.AgendaView(dom, options);
 
         return agenda;
     }

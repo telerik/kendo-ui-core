@@ -8,11 +8,10 @@
 
     module("DataBinding", {
         setup: function() {
-            container = document.createElement("div");
-            QUnit.fixture[0].appendChild(container);
+            container = $("<div>");
         },
         teardown: function() {
-            kendo.destroy(QUnit.fixture);
+            kendo.destroy(container);
         }
     });
 

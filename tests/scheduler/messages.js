@@ -9,24 +9,13 @@
             .text();
     }
 
-    function testSkip() {
-       QUnit.test(arguments[0] + ' (SKIPPED)', 0, function() {
-           var li = document.getElementById(QUnit.config.current.id);
-           QUnit.done(function() {
-               li.style.background = '#FFFF99';
-           });
-       });
-    };
-
     module("scheduler messages", {
         setup: function() {
             kendo.effects.disable();
-            div = $("<div/>").width(500).height(1000);
-            div.appendTo(QUnit.fixture);
+            div = $('<div style="width:500px;height:1000px">');
         },
         teardown: function() {
-            kendo.destroy(QUnit.fixture);
-            $(".k-window, .k-overlay").remove();
+            kendo.destroy(div);
             kendo.effects.enable();
         }
     });

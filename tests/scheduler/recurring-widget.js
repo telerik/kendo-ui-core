@@ -14,10 +14,10 @@
 
     module("kendo.ui.RecurrenceEditor initialization", {
         setup: function() {
-            div = $("<div />").appendTo(QUnit.fixture);
+            div = $("<div>");
         },
         teardown: function() {
-            kendo.destroy(QUnit.fixture);
+            kendo.destroy(div);
         }
     });
 
@@ -94,24 +94,12 @@
         ok(container[0]);
     });
 
-    test("renders frequency in 'k-edit-field' container", function() {
-        div.wrap("<div class='k-edit-field' />");
-
-        var parentDiv = div.parent();
-
-        div.kendoRecurrenceEditor();
-
-        var container = parentDiv.next(".k-recur-view");
-
-        ok(container[0]);
-    });
-
     module("kendo.ui.RecurrenceEditor Daily view", {
         setup: function() {
-            div = $("<div />").appendTo(QUnit.fixture);
+            div = $("<div>");
         },
         teardown: function() {
-            kendo.destroy(QUnit.fixture);
+            kendo.destroy(div);
         }
     });
 
@@ -210,10 +198,10 @@
 
     module("kendo.ui.RecurrenceEditor Weekly view", {
         setup: function() {
-            div = $("<div />").appendTo(QUnit.fixture);
+            div = $("<div>");
         },
         teardown: function() {
-            kendo.destroy(QUnit.fixture);
+            kendo.destroy(div);
         }
     });
 
@@ -343,10 +331,10 @@
 
     module("kendo.ui.RecurrenceEditor Monthly view", {
         setup: function() {
-            div = $("<div />").appendTo(QUnit.fixture);
+            div = $("<div>");
         },
         teardown: function() {
-            kendo.destroy(QUnit.fixture);
+            kendo.destroy(div);
         }
     });
 
@@ -632,10 +620,10 @@
 
     module("kendo.ui.RecurrenceEditor Yearly view", {
         setup: function() {
-            div = $("<div />").appendTo(QUnit.fixture);
+            div = $("<div>");
         },
         teardown: function() {
-            kendo.destroy(QUnit.fixture);
+            kendo.destroy(div);
         }
     });
 
@@ -855,10 +843,10 @@
 
     module("kendo.ui.RecurrenceEditor API", {
         setup: function() {
-            div = $("<div />").appendTo(QUnit.fixture);
+            div = $("<div>");
         },
         teardown: function() {
-            kendo.destroy(QUnit.fixture);
+            kendo.destroy(div);
         }
     });
 

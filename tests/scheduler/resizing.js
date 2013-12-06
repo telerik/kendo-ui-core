@@ -5,15 +5,13 @@
         QUnit.close(value, expected, 2);
     }
 
-    module("resizing", {
+    module("scheduler resizing", {
         setup: function() {
             kendo.effects.disable();
-            div = $("<div>").width(1000).height(1000);
-            div.appendTo(QUnit.fixture);
+            div = $("<div>");
         },
         teardown: function() {
-            kendo.destroy(QUnit.fixture);
-            $(".k-widget, .k-overlay").remove();
+            kendo.destroy(div);
             kendo.effects.enable();
         }
     });
@@ -184,6 +182,41 @@
         });
 
         equal(div.find(".k-event > .k-resize-n").length, 0);
+    });
+
+    test("month view doesn't render east resize handle for events which end in the next week", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            views: ["month"],
+            dataSource: [
+                { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/9 11:30"), title: "" }
+            ]
+        });
+
+        equal(div.find(".k-event:first .k-resize-e").length, 0);
+    });
+
+    test("month view doesn't render west resize handle for events which start in the previous week", function() {
+        var scheduler = new kendo.ui.Scheduler(div, {
+            date: new Date("2013/6/6"),
+            views: ["month"],
+            dataSource: [
+                { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/9 11:30"), title: "" }
+            ]
+        });
+
+        equal(div.find(".k-event:last .k-resize-w").length, 0);
+    });
+
+    module("scheduler resizing live dom", {
+        setup: function() {
+            kendo.effects.disable();
+            div = $("<div>").appendTo(QUnit.fixture);
+        },
+        teardown: function() {
+            kendo.destroy(div);
+            kendo.effects.enable();
+        }
     });
 
     test("dragging and dropping the south resize handle changes the end time of the event", function() {
@@ -952,30 +985,6 @@
         equal(scheduler.dataSource.at(0).start.getMinutes(), 0);
         equal(scheduler.dataSource.at(0).start.getDate(), 26);
         equal(scheduler.dataSource.at(0).start.getMonth(), 4);
-    });
-
-    test("month view doesn't render east resize handle for events which end in the next week", function() {
-        var scheduler = new kendo.ui.Scheduler(div, {
-            date: new Date("2013/6/6"),
-            views: ["month"],
-            dataSource: [
-                { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/9 11:30"), title: "" }
-            ]
-        });
-
-        equal(div.find(".k-event:first .k-resize-e").length, 0);
-    });
-
-    test("month view doesn't render west resize handle for events which start in the previous week", function() {
-        var scheduler = new kendo.ui.Scheduler(div, {
-            date: new Date("2013/6/6"),
-            views: ["month"],
-            dataSource: [
-                { start: new Date("2013/6/6 11:00"), end: new Date("2013/6/9 11:30"), title: "" }
-            ]
-        });
-
-        equal(div.find(".k-event:last .k-resize-w").length, 0);
     });
 
     test("dragging the west handle of the occurrence moves the start of the series if the edit series button is clicked", function() {

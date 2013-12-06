@@ -1,8 +1,8 @@
 (function() {
    var Scheduler = kendo.ui.Scheduler,
-        SchedulerEvent = kendo.data.SchedulerEvent,
-        timezone = kendo.timezone,
-        container;
+       SchedulerEvent = kendo.data.SchedulerEvent,
+       timezone = kendo.timezone,
+       container;
 
     function getDate(date) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
@@ -11,13 +11,11 @@
     module("editing", {
         setup: function() {
             container = $("<div>");
-            container.appendTo(QUnit.fixture);
             kendo.effects.disable();
         },
         teardown: function() {
-            kendo.destroy(QUnit.fixture);
+            kendo.destroy(container);
             kendo.effects.enable();
-            $(".k-window, .k-overlay").remove();
         }
     });
 
@@ -73,6 +71,8 @@
     });
 
     test("clicking view slot calls addEvent method", function() {
+        QUnit.fixture.append(container);
+
         var scheduler = setup(),
             dataSource = scheduler.dataSource,
             addEvent = stub(scheduler, "addEvent");
@@ -157,14 +157,14 @@
     test("editEvent creates window instance", function() {
         var scheduler = setup();
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
         ok(scheduler._editor.container.data("kendoWindow"));
     });
 
     test("default settings are applied to the window", function() {
         var scheduler = setup();
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
         var wnd = scheduler._editor.container.data("kendoWindow");
 
@@ -177,7 +177,7 @@
     test("custom settings are applied to the window", function() {
         var scheduler = setup({ editable: { window: { title: "foo" } } });
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
         var wnd = scheduler._editor.container.data("kendoWindow");
 
@@ -187,39 +187,33 @@
     test("correct model is passed to the editable instance", function() {
         var scheduler = setup({ editable: { window: { title: "foo" } } });
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+        var event = scheduler.dataSource.at(0);
+        scheduler.editEvent(event.uid);
 
         var container = scheduler._editor.container;
-        equal(container.data("kendoEditable").options.model, scheduler.dataSource.at(0));
+        equal(container.data("kendoEditable").options.model, event);
     });
 
-    test("custom template is used if specified", function() {
-        var scheduler = setup({ editable: { template:"<div>#=title#</div>" } });
-
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
-
-        var container = scheduler._editor.container.children("div.k-edit-form-container");
-        equal(container.find("div:first").text(), "my event");
-    });
-
-    test("custom template as function", function() {
-        var scheduler = setup({ editable: { template: kendo.template("foo") } });
-
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
-
-        var container = scheduler._editor.container.children("div.k-edit-form-container");
-        equal(container.text(), "fooSaveCancelDelete");
-    });
-
-    test("edit event is raised when entering edit mode", 2, function() {
+    test("custom template is used if specified", 1, function() {
         var scheduler = setup({
+            editable: { template:'<div id="foo">#=title#</div>' },
             edit: function(e) {
-                ok(e.container[0], scheduler._editor.container.children(".k-edit-form-container"));
-                equal(e.event, scheduler.dataSource.at(0));
+                equal(e.container.find("#foo").text(), "my event");
             }
         });
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
+    });
+
+    test("custom template as function", 1, function() {
+        var scheduler = setup({
+            editable: { template: kendo.template('<div id="foo"></div>') },
+            edit: function(e) {
+               equal(e.container.find("#foo").length, 1);
+            }
+        });
+
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
     });
 
     test("the popup window is not shown if the edit event is prevented", 1, function() {
@@ -229,8 +223,8 @@
             }
         });
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
-        equal($(".k-edit-form-container:visible").length, 0);
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
+        equal(scheduler._editor.container.find(".k-edit-form-container:visible").length, 0);
     });
 
     test("the new event is removed if the edit event is prevented", 1, function() {
@@ -244,72 +238,75 @@
         equal(scheduler.dataSource.data().length, 1);
     });
 
-    test("update and cancel buttons are added if template is set", function() {
-        var scheduler = setup({ editable: { template:"<div>#=title#</div>" } });
+    test("update and cancel buttons are added if template is set", 2, function() {
+        var scheduler = setup({
+            editable: { template:"<div>#=title#</div>" },
+            edit: function(e) {
+                equal(e.container.find("a.k-scheduler-update").length, 1);
+                equal(e.container.find("a.k-scheduler-cancel").length, 1);
+            }
+        });
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
-
-        var container = scheduler._editor.container.children("div.k-edit-form-container");
-
-        equal(container.find("a.k-scheduler-update").length, 1);
-        equal(container.find("a.k-scheduler-cancel").length, 1);
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
     });
 
-    test("Update and cancel button custom text", function() {
+    test("Update and cancel button custom text", 2, function() {
         var scheduler = setup({
             messages: {
                 save: "myUpdate",
                 cancel: "myCancel"
             },
             editable: { template:"<div>#=title#</div>" },
+            edit: function(e) {
+                equal(e.container.find("a.k-scheduler-update").text(), "myUpdate");
+                equal(e.container.find("a.k-scheduler-cancel").text(), "myCancel");
+            }
         });
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
-
-        var container = scheduler._editor.container.children("div.k-edit-form-container");
-        equal(container.find("a.k-scheduler-update").text(), "myUpdate");
-        equal(container.find("a.k-scheduler-cancel").text(), "myCancel");
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
     });
 
-    test("destroy button is added to the popUp editor", function() {
-        var scheduler = setup({ editable: true });
+    test("destroy button is added to the popUp editor", 1, function() {
+        var scheduler = setup({
+            editable: true,
+            edit: function(e) {
+                equal(e.container.find("a.k-scheduler-delete").length, 1);
+            }
+        });
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
-
-        var container = scheduler._editor.container.children("div.k-edit-form-container");
-
-        equal(container.find("a.k-scheduler-delete").length, 1);
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
     });
 
-    test("destroy button is added to the popUp editor if template is set", function() {
-        var scheduler = setup({ editable: { template:"<div>#=title#</div>" } });
+    test("destroy button is added to the popUp editor if template is set", 1, function() {
+        var scheduler = setup({
+            editable: { template:"<div>#=title#</div>" },
+            edit: function(e) {
+                equal(e.container.find("a.k-scheduler-delete").length, 1);
+            }
+        });
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
-
-        var container = scheduler._editor.container.children("div.k-edit-form-container");
-
-        equal(container.find("a.k-scheduler-delete").length, 1);
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
     });
 
-    test("destroy button in popup editor custom text", function() {
+    test("destroy button in popup editor custom text", 1, function() {
         var scheduler = setup({
             messages: {
                 destroy: "myDestroy"
             },
             editable: { template:"<div>#=title#</div>" },
+            edit: function(e) {
+                equal(e.container.find("a.k-scheduler-delete").text(), "myDestroy");
+            }
         });
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
-
-        var container = scheduler._editor.container.children("div.k-edit-form-container");
-        equal(container.find("a.k-scheduler-delete").text(), "myDestroy");
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
     });
 
     test("clicking destroy button in popUp editor calls delete event", function() {
         var scheduler = setup(),
             saveEvent = stub(scheduler, "removeEvent");
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
         scheduler._editor.container.find("a.k-scheduler-delete").click();
 
@@ -329,7 +326,7 @@
         var scheduler = setup(),
             saveEvent = stub(scheduler, "saveEvent");
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
         scheduler._editor.container.find("a.k-scheduler-update").click();
 
@@ -340,7 +337,7 @@
         var scheduler = setup(),
             cancelEvent = stub(scheduler, "cancelEvent");
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
         scheduler._editor.container.find("a.k-scheduler-cancel").click();
 
@@ -349,7 +346,7 @@
 
     test("clicking close button of the window calls cancelEvent", function() {
         var scheduler = setup(),
-            eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
+            eventElement = scheduler.dataSource.at(0).uid,
             cancelEvent = stub(scheduler, "cancelEvent");
 
         scheduler.editEvent(eventElement);
@@ -362,7 +359,7 @@
 
     test("editEvent call cancelEvent", function() {
         var scheduler = setup(),
-            eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid"),
+            eventElement = scheduler.dataSource.at(0).uid,
             cancelEvent = stub(scheduler, "cancelEvent");
 
         scheduler.editEvent(eventElement);
@@ -372,7 +369,7 @@
 
     test("cancelEvent closes the popup", 2, function() {
         var scheduler = setup(),
-            eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+            eventElement = scheduler.dataSource.at(0).uid;
 
         scheduler.editEvent(eventElement);
 
@@ -388,16 +385,15 @@
 
     test("cancel event is raised when cancel button is clicked", 2, function() {
         var scheduler = setup({
-                cancel: function(e) {
-                    equal(e.event, this.dataSource.at(0));
-                    ok(e.container.length);
-                }
-            }),
-            eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+            cancel: function(e) {
+                equal(e.event, this.dataSource.at(0));
+                ok(e.container.length);
+            }
+        });
 
-        scheduler.editEvent(eventElement);
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
-        $(".k-scheduler-cancel").click();
+        scheduler._editor.container.find("a.k-scheduler-cancel").click();
     });
 
     test("preventing the cancel event leaves the window open when cancel button is clicked", function() {
@@ -406,13 +402,13 @@
                 e.preventDefault();
             }
         }),
-        eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+        eventElement = scheduler.dataSource.at(0).uid;
 
         scheduler.editEvent(eventElement);
 
-        $(".k-scheduler-cancel").click();
+        scheduler._editor.container.find("a.k-scheduler-cancel").click();
 
-        equal($(".k-scheduler-cancel:visible").length, 1);
+        ok(scheduler._editor.container.is(":visible"));
     });
 
     test("cancel event is raised when window is closed", 2, function() {
@@ -422,7 +418,7 @@
                 ok(e.container.length);
             }
         }),
-        eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+        eventElement = scheduler.dataSource.at(0).uid;
 
         scheduler.editEvent(eventElement);
 
@@ -435,17 +431,17 @@
                 e.preventDefault();
             }
         }),
-        eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+        eventElement = scheduler.dataSource.at(0).uid;
 
         scheduler.editEvent(eventElement);
         scheduler._editor.container.parent().find(".k-i-close").click();
 
-        equal($(".k-scheduler-cancel:visible").length, 1);
+        ok(scheduler._editor.container.is(":visible"));
     });
 
     test("saveEvent calls validate", function() {
          var scheduler = setup(),
-            eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+            eventElement = scheduler.dataSource.at(0).uid;
 
         scheduler.editEvent(eventElement);
 
@@ -470,7 +466,7 @@
                             }
                         }
             }}}),
-            eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+            eventElement = scheduler.dataSource.at(0).uid;
 
         scheduler.editEvent(eventElement);
 
@@ -481,7 +477,7 @@
 
     test("saveEvent calls DataSource sync", function() {
         var scheduler = setup(),
-            eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+            eventElement = scheduler.dataSource.at(0).uid;
 
         scheduler.editEvent(eventElement);
 
@@ -498,7 +494,7 @@
                 e.preventDefault();
             }
         }),
-        eventElement = scheduler.view().datesHeader.find(".k-event:first").data("uid");
+        eventElement = scheduler.dataSource.at(0).uid;
 
         scheduler.editEvent(eventElement);
 
@@ -520,7 +516,7 @@
 
         scheduler.dataSource.view()[0].isAllDay = false;
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
         var container = scheduler._editor.container.children("div.k-edit-form-container");
         var elements = container.children("div").not(".k-edit-buttons").not(".k-recur-view");
@@ -540,7 +536,7 @@
             }
         });
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
         var container = scheduler._editor.container.children("div.k-edit-form-container");
         var elements = container.children("div").not(".k-edit-buttons").not(".k-recur-view");
@@ -559,7 +555,7 @@
             }
         });
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
         var container = scheduler._editor.container.children("div.k-edit-form-container");
         var elements = container.children("div");
@@ -577,7 +573,7 @@
             }
         });
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
         var container = scheduler._editor.container.children("div.k-edit-form-container");
         var elements = container.children("div");
@@ -592,7 +588,7 @@
             }
         });
 
-        scheduler.editEvent(scheduler.view().datesHeader.find(".k-event:first").data("uid"));
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
         var container = scheduler._editor.container.children("div.k-edit-form-container");
         var elements = container.children("div");
@@ -603,13 +599,11 @@
     module("recurrence editing", {
         setup: function() {
             kendo.effects.disable();
-            container = document.createElement("div");
-            QUnit.fixture[0].appendChild(container);
+            container = $("<div>");
         },
         teardown: function() {
-            kendo.destroy(QUnit.fixture);
+            kendo.destroy(container);
             kendo.effects.enable();
-            $(".k-widget, .k-overlay").remove();
         }
     });
 
@@ -624,7 +618,7 @@
         var eventUID = scheduler.element.find(".k-event:last").data("uid");
         scheduler.editEvent(eventUID);
 
-        ok($(".k-window").find(".k-window-title").text(), "Edit Recurring Item");
+        ok($(".k-window-title").text(), "Edit Recurring Item");
     });
 
     test("close recurring dialog on button click", 1, function() {
@@ -659,7 +653,7 @@
             }
         });
 
-        scheduler.editEvent(scheduler.element.find(".k-event:first").data("uid"));
+        scheduler.editEvent(scheduler.dataSource.at(0).uid);
 
         $(".k-window .k-button:last").click();
 
@@ -849,11 +843,9 @@
             }
         });
 
-        var eventUID = scheduler.element.find(".k-event:first").data("uid"),
-            origin = scheduler.dataSource.at(0),
-            exception;
+        var origin = scheduler.dataSource.at(0), exception;
 
-        scheduler.editEvent(eventUID);
+        scheduler.editEvent(origin.uid);
 
         $(".k-window .k-button:first").click();
 
@@ -937,8 +929,6 @@
 
         $(".k-window .k-button:first").click();
 
-        //$(document.body).find("[data-role=window]:visible").data("kendoWindow").destroy();
-
         var model = scheduler.dataSource.at(0);
 
         equal(model.recurrenceException, recurrenceException);
@@ -966,7 +956,8 @@
         scheduler.removeEvent(event.data("uid"));
 
         $(".k-window .k-button:first").click(); //delete current occurrence
-        $(document.body).find("[data-role=window]:visible").find(".k-button:first").click(); //accept deletion
+
+        $(".k-window .k-button:first").click(); //accept deletion
 
         equal(scheduler.dataSource.data().length, 1);
         equal(origin.recurrenceException, recurrenceException);
@@ -994,7 +985,7 @@
 
         $(".k-window .k-button:last").click(); //delete series
 
-        $(document.body).find("[data-role=window]:visible").find(".k-button:first").click(); //accept deletion
+        $(".k-window .k-button:first").click(); //accept deletion
 
         equal(scheduler.dataSource.data().length, 0);
     });
@@ -1019,7 +1010,7 @@
 
         scheduler.removeEvent(event.data("uid"));
         $(".k-window .k-button:first").click(); //delete current occurrence
-        $(document.body).find("[data-role=window]:visible").find(".k-button:last").click(); //cancel deletion
+        $(".k-window .k-button:last").click(); //cancel deletion
 
         ok(scheduler.dataSource.at(0).recurrenceRule);
     });
@@ -1028,15 +1019,11 @@
         setup: function() {
             kendo.effects.disable();
 
-            var scriptTag = $("script:last");
-
-            container = document.createElement("div");
-            QUnit.fixture[0].appendChild(container);
+            container = $("<div>");
         },
         teardown: function() {
-            kendo.destroy(QUnit.fixture);
+            kendo.destroy(container);
             kendo.effects.enable();
-            $(".k-widget, .k-overlay").remove();
         }
     });
 

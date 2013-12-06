@@ -49,20 +49,12 @@
 
     module("Multi Day View rendering", {
         setup: function() {
-            container = document.createElement("div");
-
-            QUnit.fixture[0].appendChild(container);
-
-            container = $(container).addClass("k-scheduler").css({
-                width: 1000,
-                height: 800
-            });
+            container = $('<div class="k-scheduler" style="width:1000px;height:800px">');
         },
         teardown: function() {
             if (container.data("kendoMultiDayView")) {
                 container.data("kendoMultiDayView").destroy();
             }
-            kendo.destroy(QUnit.fixture);
         }
     });
 
@@ -315,27 +307,6 @@
         equal(view.content.find(".k-event .k-event-template").last().text(), "my event");
     });
 
-    test("events which don't overlap are not positioned next to each other", function() {
-        var selectedDate = new Date("2013/6/6"),
-            view = setup({
-                startTime: new Date("2013/6/6 10:00"),
-                dates: [
-                   selectedDate
-                ]
-            });
-
-            var events = [
-                new SchedulerEvent({ uid:"uid", start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:45"), title: "" }),
-                new SchedulerEvent({ uid:"uid", start: new Date("2013/6/6 10:45"), end: new Date("2013/6/6 11:30"), title: "" })
-            ];
-
-        view.render(events);
-
-        var events = view.content.find(".k-event");
-
-        ok(events.first().outerWidth() + events.last().outerWidth() > view.content.find("td").outerWidth());
-    });
-
     test("uid is rendered", function() {
         var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
             view = setup({
@@ -478,37 +449,6 @@
         ok(view.element.find("div.k-event>div").attr("title").indexOf('["my event"]') > -1);
     });
 
-    test("get time slot index for date", function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                dates: [ selectedDate ]
-            });
-
-        var index = view._timeSlotIndex(new Date(2013, 1, 26, 10, 0, 0));
-
-        equal(index, 10);
-    });
-
-    test("position basic event in the correct time slot", function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                dates: [
-                   selectedDate
-                ]
-            }),
-            events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" })],
-            timeSlotPosition,
-            eventPosition;
-
-        view.render(events);
-
-        eventPosition = view.content.find("div.k-event").offset();
-        timeSlotPosition = view.content.find("tr").eq(10).offset();
-
-        equalWithRound(timeSlotPosition.top, eventPosition.top);
-        equalWithRound(applyDefaultLeftOffset(timeSlotPosition.left), eventPosition.left);
-    });
-
     test("single day event which is outside of the time range is not displayed", function() {
         var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
             view = setup({
@@ -567,21 +507,6 @@
         view.render(events);
 
         equal(container.find(".k-event").length, 1);
-    });
-
-    test("set the height of the event", function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                dates: [
-                   selectedDate
-                ]
-            }),
-            events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" })];
-
-        view.render(events);
-
-        equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 2));
-
     });
 
     test("multiple day events are added to all day slot", function() {
@@ -646,6 +571,579 @@
         view.render(events);
 
         equal(view.datesHeader.find("div.k-event").length, 0);
+    });
+
+    test("day event which starts before the slot start time and end at the start time is not rendered", function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                startTime: new Date(2013, 1, 26, 10, 0, 0),
+                dates: [
+                    selectedDate,
+                    new Date(2013, 1, 27, 0, 0, 0)
+                ]
+            });
+
+        var events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "my event" })];
+
+        view.render(events);
+
+        var eventElement = view.content.find("div.k-event");
+
+        equal(eventElement.length, 0);
+    });
+
+    test("does not position day event which is same day but outside of the slot", function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                startTime: new Date(2013, 1, 26, 9, 0, 0),
+                endTime: new Date(2013, 1, 26, 11, 0, 0),
+                dates: [
+                   selectedDate
+                ]
+            });
+
+        var events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 7, 0, 0), end: new Date(2013, 1, 26, 8, 0, 0), title: "my event" })];
+
+        view.render(events);
+        ok(!view.content.find("div.k-event").length);
+    });
+
+    test("same time slot events are sorted by start time and end time", function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                dates: [
+                    selectedDate,
+                    new Date(2013, 1, 27, 0, 0, 0)
+                ]
+            });
+
+        var events = [
+            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }),
+            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 13, 0, 0), title: "second event" }),
+            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "same as first" })
+        ];
+
+        view.render(events);
+
+        var eventElements = view.content.find("div.k-event");
+        equal(eventElements.eq(0).find(".k-event-template").last().text(), "second event");
+        equal(eventElements.eq(1).find(".k-event-template").last().text(), "first event");
+        equal(eventElements.eq(2).find(".k-event-template").last().text(), "same as first");
+    });
+
+    test("close button is rendered if set as editable", function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                editable: true,
+                dates: [
+                    selectedDate
+                ]
+            });
+
+        var events = [
+            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }),
+            new SchedulerEvent({uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" })
+        ];
+
+        view.render(events);
+
+        equal(view.content.find(".k-event a>.k-si-close").length, 1);
+        equal(view.datesHeader.find(".k-event a>.k-si-close").length, 1);
+    });
+
+    test("close button is not rendered if editable.destroy is false", function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                editable: { destroy: false },
+                dates: [
+                    selectedDate
+                ]
+            });
+
+        var events = [
+            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }),
+            new SchedulerEvent({uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" })
+        ];
+
+        view.render(events);
+
+        ok(!view.content.find(".k-event a>.k-si-close").length);
+        ok(!view.datesHeader.find(".k-event a>.k-si-close").length);
+    });
+
+    test("close button is rendered if set as editable", function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                editable: true,
+                dates: [
+                    selectedDate
+                ]
+            });
+
+        var events = [
+            new SchedulerEvent({uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" })
+        ];
+
+        view.render(events);
+
+        equal(view.datesHeader.find(".k-event a:has(.k-si-close)").length, 1);
+    });
+
+    test("close button is not rendered if set to not editable", function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                editable: false,
+                dates: [
+                    selectedDate
+                ]
+            });
+
+        var events = [
+            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }),
+            new SchedulerEvent({uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" })
+        ];
+
+        view.render(events);
+
+        ok(!view.content.find(".k-event a>.k-si-close").length);
+        ok(!view.datesHeader.find(".k-event a>.k-si-close").length);
+    });
+
+    test("clicking on close button triggers destroy event", 1, function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                remove: function() {
+                    ok(true);
+                },
+                editable: true,
+                dates: [
+                    selectedDate
+                ]
+            });
+
+        var events = [
+            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" })
+        ];
+
+        view.render(events);
+
+        view.content.find(".k-event a:has(.k-si-close)").click();
+    });
+
+    test("double clicking an all day event triggers edit event", 1, function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                edit: function(e) {
+                    ok(e.uid);
+                },
+                editable: true,
+                dates: [
+                    selectedDate
+                ]
+            });
+
+        var events = [
+            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event", isAllDay: true })
+        ];
+
+        view.render(events);
+
+        view.datesHeader.find(".k-event").trigger("dblclick");
+    });
+
+    test("double clicking an event triggers edit event", 1, function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                edit: function(e) {
+                    ok(e.uid);
+                },
+                editable: true,
+                dates: [
+                    selectedDate
+                ]
+            });
+
+        var events = [
+            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" })
+        ];
+
+        view.render(events);
+
+        view.content.find(".k-event").trigger("dblclick");
+    });
+
+    test("double clicking an event does not trigger edit event if not editable", 0, function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                editable: false,
+                edit: function(e) {
+                    ok(false);
+                },
+                dates: [
+                    selectedDate
+                ]
+            });
+
+        var events = [
+            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" })
+        ];
+
+        view.render(events);
+
+        view.content.find(".k-event").trigger("dblclick");
+    });
+
+    test("double clicking an event does not trigger edit event if update is false", 0, function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                editable: { update: false },
+                edit: function(e) {
+                    ok(false);
+                },
+                dates: [
+                    selectedDate
+                ]
+            });
+
+        var events = [
+            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" })
+        ];
+
+        view.render(events);
+
+        view.content.find(".k-event").trigger("dblclick");
+    });
+
+    test("west arrow is shown if multiday event starts before view's start date and ends before end of the view", function() {
+        var view = new kendo.ui.WeekView(container, { date: new Date("2013/6/9") });
+
+        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date("2013/5/30"), end: new Date("2013/6/15") })]);
+
+        equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
+        equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 0);
+    });
+
+    test("west arrow is shown if multiday event starts before view's start date and ends at end of the view", function() {
+        var view = new kendo.ui.WeekView(container, { date: new Date("2013/6/9") });
+
+        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date("2013/5/30"), end: new Date("2013/6/16") })]);
+
+        equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
+        equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 0);
+    });
+
+    test("east arrow is not shown if all day event ends at the end of the view", function() {
+        var view = new kendo.ui.WeekView(container, { date: new Date("2013/6/9") });
+
+        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date("2013/6/12"), end: new Date("2013/6/15 10:00"), isAllDay: true })]);
+
+        equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 0);
+        equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 0);
+    });
+
+    test("west and east arrow is shown if all day event starts before view's start date and ends at end of the view", function() {
+        var view = new kendo.ui.WeekView(container, { date: new Date("2013/6/9") });
+
+        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date("2013/5/30"), end: new Date("2013/6/16"), isAllDay: true })]);
+
+        equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
+        equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 1);
+    });
+
+    test("arrow is shown if multiday event starts before view's start date", function() {
+        var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), isAllDay: true })]);
+
+        equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
+    });
+
+    test("arrow is shown if multiday event ends after view's end date", function() {
+        var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 2), end: new Date(2013, 1, 4) })]);
+
+        equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 1);
+    });
+
+    test("arrow is shown if multiday event starts before view's start date and ends after view's end date", function() {
+        var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 4) })]);
+
+        equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 1);
+        equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
+    });
+
+    test("arrow is shown if event starts before view's start time", function() {
+        var view = setup({ dates: [new Date(2013, 1, 2)], startTime: new Date(2013, 1, 2, 10, 0, 0) });
+
+        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 2, 9, 0, 0), end: new Date(2013, 1, 2, 11, 0, 0) })]);
+
+        equal(view.content.find(".k-event .k-i-arrow-n").length, 1);
+        ok(!view.content.find(".k-event .k-i-arrow-s").length);
+    });
+
+    test("arrow is shown if event ends after view's end time", function() {
+        var view = setup({ dates: [new Date(2013, 1, 2)], endTime: new Date(2013, 1, 2, 10, 0, 0) });
+
+        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 2, 9, 0, 0), end: new Date(2013, 1, 2, 11, 0, 0) })]);
+
+        equal(view.content.find(".k-event .k-i-arrow-s").length, 1);
+        ok(!view.content.find(".k-event .k-i-arrow-n").length);
+    });
+
+    test("arrows are shown if event starts before and ends after view's start, end time", function() {
+        var view = setup({ dates: [new Date(2013, 1, 2)], startTime: new Date(2013, 1, 2, 10, 0, 0), endTime: new Date(2013, 1, 2, 11, 0, 0) });
+
+        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 2, 9, 0, 0), end: new Date(2013, 1, 2, 12, 0, 0) })]);
+
+        equal(view.content.find(".k-event .k-i-arrow-s").length, 1);
+        equal(view.content.find(".k-event .k-i-arrow-n").length, 1);
+    });
+
+    test("arrows are not shown if event ends in the midnight", function() {
+        var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 2, 9, 0, 0), end: new Date(2013, 1, 3, 0, 0, 0) })]);
+
+        equal(view.content.find(".k-event .k-i-arrow-s").length, 0);
+        equal(view.content.find(".k-event .k-i-arrow-n").length, 0);
+    });
+
+    test("refresh icon is shown if multiday event has recurring rule", function() {
+        var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+        view.render([new SchedulerEvent({ uid: "foo", title: "", start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), isAllDay: true, recurrenceRule: "FREQ=DAILY" })]);
+
+        equal(view.datesHeader.find(".k-event .k-i-refresh").length, 1);
+    });
+
+    test("refresh icon is shown if multiday event has recurrenceId", function() {
+        var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), isAllDay: true, recurrenceId: "1" })]);
+
+        equal(view.datesHeader.find(".k-event .k-i-refresh").length, 1);
+    });
+
+    test("refresh icon is shown if multiday event is recurring exception event", function() {
+        var view = setup({ dates: [new Date(2013, 1, 1)] });
+
+        view.render([new SchedulerEvent({
+            uid: "foo", title: "",
+            start: new Date(2013, 1, 1),
+            end: new Date(2013, 1, 2),
+            id: "2",
+            recurrenceId: "1"
+        })]);
+
+        equal(view.datesHeader.find(".k-event .k-i-exception").length, 1);
+        equal(view.datesHeader.find(".k-event .k-i-refresh").length, 0);
+    });
+
+    test("same day event which starts and ends before the startTime is not rendered when week view", function() {
+        var view = setup({ dates: [new Date(2013, 1, 2), new Date(2013, 1, 3)], startTime: new Date(2013, 1, 2, 7, 0, 0) });
+
+        view.render([new SchedulerEvent({
+            uid: "foo", title: "",
+            start: new Date(2013, 1, 2, 0, 0, 0),
+            end: new Date(2013, 1, 2, 0, 0, 0),
+            id: "2"
+        })]);
+
+        ok(!view.content.find(".k-event").length);
+    });
+
+    test("slot ending at 12:00 AM doesn't have the south arrow", function() {
+        var view = setup({
+            majorTick: 60,
+            startTime: new Date("2013/6/6 10:00 PM"),
+            dates: [new Date("2013/6/6")]
+        });
+
+        view.render([new SchedulerEvent({
+            uid: "foo",
+            title: "",
+            start: new Date("2013/6/6 11:00 PM"),
+            end: new Date("2013/6/7 12:00 AM"),
+            id: "2"
+        })]);
+
+        equal(view.element.find(".k-i-arrow-s").length, 0);
+    });
+
+    test("workDayStart is used when rendered in work mode", function() {
+        var view = setup({
+            workDayStart: new Date("2013/6/6 10:00"),
+            showWorkHours: true,
+            dates: [new Date("2013/6/6")]
+        });
+
+        equal(view.times.find("th:first").text(), "10:00 AM");
+    });
+
+    test("workDayEnd is used when rendered in work mode", function() {
+        var view = setup({
+            workDayEnd: new Date("2013/6/6 14:00"),
+            showWorkHours: true,
+            dates: [new Date("2013/6/6")]
+        });
+
+        equal(view.times.find("tr th").filter(function() { return this.innerHTML != "&nbsp;"; }).last().text(), "12:00 PM");
+    });
+
+    test("default workDayEnd and workDayStart are used when rendered in work mode", function() {
+        var view = setup({
+            showWorkHours: true,
+            dates: [new Date("2013/6/6")]
+        });
+
+        equal(view.times.find("th:first").text(), "8:00 AM");
+        equal(view.times.find("tr th").filter(function() { return this.innerHTML != "&nbsp;"; }).last().text(), "4:00 PM");
+    });
+
+    test("clicking workday button triggers naivgate event", 2, function() {
+        var view = setup();
+
+        view.bind("navigate",function(e) {
+            equal(e.view, "MultiDayView");
+            ok(e.isWorkDay);
+        });
+
+        view.footer.find(".k-scheduler-fullday").click();
+    });
+
+    test("non working day is highlighted", function() {
+        var view = setup({
+            dates: [new Date("2013/6/6")],
+            workWeekStart: 4,
+            workWeekEnd: 4,
+        });
+
+        equal(view.content.find("td.k-nonwork-hour").length, 15);
+    });
+
+    test("working day is not highlighted", function() {
+        var view = setup({
+            dates: [new Date("2013/6/6")],
+            workWeekStart: 4,
+            workWeekEnd: 4,
+            showWorkHours: true
+        });
+
+        ok(!view.content.find("td.k-nonwork-hour").length);
+    });
+
+    test("non working hours are highlighted", function() {
+        var view = setup({
+            workDayStart: new Date("2013/6/6 10:00"),
+            startTime: new Date("2013/6/6 9:00"),
+            endTime: new Date("2013/6/6 12:00"),
+            workDayEnd: new Date("2013/6/6 11:00"),
+        });
+
+        ok(view.content.find("td").first().hasClass("k-nonwork-hour"));
+        ok(!view.content.find("td").eq(1).hasClass("k-nonwork-hour"));
+        ok(view.content.find("td").last().hasClass("k-nonwork-hour"));
+    });
+    module("Multi Day View event positioning", {
+        setup: function() {
+            container = $('<div class="k-scheduler" style="width:1000px;height:800px">');
+            QUnit.fixture.append(container);
+        },
+        teardown: function() {
+            if (container.data("kendoMultiDayView")) {
+                container.data("kendoMultiDayView").destroy();
+            }
+            kendo.destroy(container);
+        }
+    });
+
+    test("event which starts at 15 minutes is positioned in the middle of the slot", function() {
+        var view = setup({
+            majorTick: 60,
+            startTime: new Date("2013/6/6 10:00"),
+            dates: [new Date("2013/6/6")]
+        });
+
+        var events = [new SchedulerEvent({ start: new Date("2013/6/6 10:15"), end: new Date("2013/6/6 10:30"), title: "" }) ];
+
+        view.render(events);
+
+        var event = view.element.find(".k-event");
+        var slot = view.element.find(".k-scheduler-content td:first");
+
+        equalWithRound(event[0].offsetTop, slot[0].offsetTop + slot[0].offsetHeight / 2);
+    });
+
+    test("events which don't overlap are not positioned next to each other", function() {
+        var selectedDate = new Date("2013/6/6"),
+            view = setup({
+                startTime: new Date("2013/6/6 10:00"),
+                dates: [
+                   selectedDate
+                ]
+            });
+
+            var events = [
+                new SchedulerEvent({ uid:"uid", start: new Date("2013/6/6 10:00"), end: new Date("2013/6/6 10:45"), title: "" }),
+                new SchedulerEvent({ uid:"uid", start: new Date("2013/6/6 10:45"), end: new Date("2013/6/6 11:30"), title: "" })
+            ];
+
+        view.render(events);
+
+        var events = view.content.find(".k-event");
+
+        ok(events.first().outerWidth() + events.last().outerWidth() > view.content.find("td").outerWidth());
+    });
+
+
+    test("get time slot index for date", function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                dates: [ selectedDate ]
+            });
+
+        var index = view._timeSlotIndex(new Date(2013, 1, 26, 10, 0, 0));
+
+        equal(index, 10);
+    });
+
+    test("position basic event in the correct time slot", function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                dates: [
+                   selectedDate
+                ]
+            }),
+            events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 11, 0, 0), title: "my event" })],
+            timeSlotPosition,
+            eventPosition;
+
+        view.render(events);
+
+        eventPosition = view.content.find("div.k-event").offset();
+        timeSlotPosition = view.content.find("tr").eq(10).offset();
+
+        equalWithRound(timeSlotPosition.top, eventPosition.top);
+        equalWithRound(applyDefaultLeftOffset(timeSlotPosition.left), eventPosition.left);
+    });
+
+
+    test("set the height of the event", function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                dates: [
+                   selectedDate
+                ]
+            }),
+            events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "my event" })];
+
+        view.render(events);
+
+        equalWithRound(view.content.find("div.k-event").height(), slotHeight(view.content.find(">table"), 2));
+
     });
 
     test("multiple day event position is set to the date slot", function() {
@@ -767,25 +1265,6 @@
         equal(eventElement.offset().left, applyDefaultLeftOffset(view.content.find("tr:first").offset().left));
     });
 
-    test("day event which starts before the slot start time and end at the start time is not rendered", function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                startTime: new Date(2013, 1, 26, 10, 0, 0),
-                dates: [
-                    selectedDate,
-                    new Date(2013, 1, 27, 0, 0, 0)
-                ]
-            });
-
-        var events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 9, 0, 0), end: new Date(2013, 1, 26, 10, 0, 0), title: "my event" })];
-
-        view.render(events);
-
-        var eventElement = view.content.find("div.k-event");
-
-        equal(eventElement.length, 0);
-    });
-
     test("position day event which ends after the slot end time", function() {
         var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
             view = setup({
@@ -805,22 +1284,6 @@
         equalWithRound(eventElement.offset().top, view.content.find("tr").eq(9).offset().top);
         equalWithRound(eventElement.offset().left, applyDefaultLeftOffset(view.content.find("tr").eq(9).offset().left));
         equalWithRound(eventElement.height(), slotHeight(view.content.find("table"), 2));
-    });
-
-    test("does not position day event which is same day but outside of the slot", function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                startTime: new Date(2013, 1, 26, 9, 0, 0),
-                endTime: new Date(2013, 1, 26, 11, 0, 0),
-                dates: [
-                   selectedDate
-                ]
-            });
-
-        var events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 7, 0, 0), end: new Date(2013, 1, 26, 8, 0, 0), title: "my event" })];
-
-        view.render(events);
-        ok(!view.content.find("div.k-event").length);
     });
 
     test("position day event which start before and ends after the slot end time", function() {
@@ -1050,65 +1513,6 @@
         equal(eventElements.last().offset().left, applyDefaultLeftOffset(secondTimeSlot.offset().left));
     });
 
-/*
-    test("long events reposition other events in the same date slot with multiple long overlapping event", function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                dates: [
-                    selectedDate
-                ]
-            });
-
-        view.renderLayout(selectedDate);
-
-        var events = [
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 16, 0, 0), title: "long event" }),
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "same slot event" }),
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "second same slot event" }),
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 9, 0, 0), title: "another second same slot event" }),
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "second event" }),
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 10, 0, 0), end: new Date(2013, 1, 26, 18, 0, 0), title: "another log event which overlaps the second one" }),
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 17, 0, 0), end: new Date(2013, 1, 26, 19, 0, 0), title: "another log event" })
-        ];
-
-        view.render(events);
-
-        var eventElements = view.content.find("div.k-event");
-        var firstTimeSlot = view.content.find("tr").eq(8).find("td:first");
-        var secondTimeSlot = view.content.find("tr").eq(10).find("td:first");
-        var thirdTimeSlot = view.content.find("tr").eq(16).find("td:first");
-
-        equalWithRound(eventElements.first().offset().top, firstTimeSlot.offset().top);
-        equalWithRound(eventElements.first().width(), Math.floor((firstTimeSlot.width() - rightOffset) / 4));
-
-        equalWithRound(eventElements.eq(5).offset().left, eventElements.eq(4).offset().left + eventElements.eq(4).width());
-
-        equalWithRound(eventElements.eq(6).offset().left, thirdTimeSlot.offset().left);
-    });
-*/
-    test("same time slot events are sorted by start time and end time", function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                dates: [
-                    selectedDate,
-                    new Date(2013, 1, 27, 0, 0, 0)
-                ]
-            });
-
-        var events = [
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }),
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 13, 0, 0), title: "second event" }),
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "same as first" })
-        ];
-
-        view.render(events);
-
-        var eventElements = view.content.find("div.k-event");
-        equal(eventElements.eq(0).find(".k-event-template").last().text(), "second event");
-        equal(eventElements.eq(1).find(".k-event-template").last().text(), "first event");
-        equal(eventElements.eq(2).find(".k-event-template").last().text(), "same as first");
-    });
-
     test("position multiple overlapping all day events in a single slot", function() {
         var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
             view = setup({
@@ -1228,46 +1632,6 @@
         equalWithRound(eventElements.eq(1).offset().top, eventSlotOffset.top + eventHeight);
     });
 
-    test("close button is rendered if set as editable", function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                editable: true,
-                dates: [
-                    selectedDate
-                ]
-            });
-
-        var events = [
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }),
-            new SchedulerEvent({uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" })
-        ];
-
-        view.render(events);
-
-        equal(view.content.find(".k-event a>.k-si-close").length, 1);
-        equal(view.datesHeader.find(".k-event a>.k-si-close").length, 1);
-    });
-
-    test("close button is not rendered if editable.destroy is false", function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                editable: { destroy: false },
-                dates: [
-                    selectedDate
-                ]
-            });
-
-        var events = [
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }),
-            new SchedulerEvent({uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" })
-        ];
-
-        view.render(events);
-
-        ok(!view.content.find(".k-event a>.k-si-close").length);
-        ok(!view.datesHeader.find(".k-event a>.k-si-close").length);
-    });
-
     test("close button is not visible by default if set as editable", function() {
         var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
             view = setup({
@@ -1286,65 +1650,6 @@
 
         equal(view.content.find(".k-event a:has(.k-si-close)").css("display"), "none");
         equal(view.datesHeader.find(".k-event a:has(.k-si-close)").css("display"), "none");
-    });
-
-    test("close button is rendered if set as editable", function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                editable: true,
-                dates: [
-                    selectedDate
-                ]
-            });
-
-        var events = [
-            new SchedulerEvent({uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" })
-        ];
-
-        view.render(events);
-
-        equal(view.datesHeader.find(".k-event a:has(.k-si-close)").length, 1);
-    });
-
-    test("close button is not rendered if set to not editable", function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                editable: false,
-                dates: [
-                    selectedDate
-                ]
-            });
-
-        var events = [
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" }),
-            new SchedulerEvent({uid:"uid", isAllDay: true, start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "all day event" })
-        ];
-
-        view.render(events);
-
-        ok(!view.content.find(".k-event a>.k-si-close").length);
-        ok(!view.datesHeader.find(".k-event a>.k-si-close").length);
-    });
-
-    test("clicking on close button triggers destroy event", 1, function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                remove: function() {
-                    ok(true);
-                },
-                editable: true,
-                dates: [
-                    selectedDate
-                ]
-            });
-
-        var events = [
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" })
-        ];
-
-        view.render(events);
-
-        view.content.find(".k-event a:has(.k-si-close)").click();
     });
 
     test("double clicking a cell triggers add event", 2, function() {
@@ -1385,90 +1690,6 @@
         cell.trigger({ type: "dblclick", pageX: cell.offset().left, pageY: cell.offset().top });
     });
 
-    test("double clicking an all day event triggers edit event", 1, function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                edit: function(e) {
-                    ok(e.uid);
-                },
-                editable: true,
-                dates: [
-                    selectedDate
-                ]
-            });
-
-        var events = [
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event", isAllDay: true })
-        ];
-
-        view.render(events);
-
-        view.datesHeader.find(".k-event").trigger("dblclick");
-    });
-
-    test("double clicking an event triggers edit event", 1, function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                edit: function(e) {
-                    ok(e.uid);
-                },
-                editable: true,
-                dates: [
-                    selectedDate
-                ]
-            });
-
-        var events = [
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" })
-        ];
-
-        view.render(events);
-
-        view.content.find(".k-event").trigger("dblclick");
-    });
-
-    test("double clicking an event does not trigger edit event if not editable", 0, function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                editable: false,
-                edit: function(e) {
-                    ok(false);
-                },
-                dates: [
-                    selectedDate
-                ]
-            });
-
-        var events = [
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" })
-        ];
-
-        view.render(events);
-
-        view.content.find(".k-event").trigger("dblclick");
-    });
-
-    test("double clicking an event does not trigger edit event if update is false", 0, function() {
-        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
-            view = setup({
-                editable: { update: false },
-                edit: function(e) {
-                    ok(false);
-                },
-                dates: [
-                    selectedDate
-                ]
-            });
-
-        var events = [
-            new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 8, 0, 0), end: new Date(2013, 1, 26, 12, 0, 0), title: "first event" })
-        ];
-
-        view.render(events);
-
-        view.content.find(".k-event").trigger("dblclick");
-    });
-
     test("slotByCell returns date for slot", function() {
         var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
             view = setup({
@@ -1494,144 +1715,6 @@
             });
 
         equal(view._dateSlotIndex(new Date(2013,1,27,10,0,0)), 1);
-    });
-
-    test("clicking the cell link trigger navigate event", 2, function() {
-        var view = setup({ dates: [new Date(2013, 1, 2)] });
-
-        view.bind("navigate", function(e) {
-            equal(e.view, "day");
-            equal(e.date.getTime(), new Date(2013, 1, 2).getTime());
-        });
-        view.datesHeader.find("th:first").find(".k-nav-day").click();
-    });
-
-    test("west arrow is shown if multiday event starts before view's start date and ends before end of the view", function() {
-        var view = new kendo.ui.WeekView(container, { date: new Date("2013/6/9") });
-
-        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date("2013/5/30"), end: new Date("2013/6/15") })]);
-
-        equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
-        equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 0);
-    });
-
-    test("west arrow is shown if multiday event starts before view's start date and ends at end of the view", function() {
-        var view = new kendo.ui.WeekView(container, { date: new Date("2013/6/9") });
-
-        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date("2013/5/30"), end: new Date("2013/6/16") })]);
-
-        equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
-        equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 0);
-    });
-
-    test("east arrow is not shown if all day event ends at the end of the view", function() {
-        var view = new kendo.ui.WeekView(container, { date: new Date("2013/6/9") });
-
-        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date("2013/6/12"), end: new Date("2013/6/15 10:00"), isAllDay: true })]);
-
-        equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 0);
-        equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 0);
-    });
-
-    test("west and east arrow is shown if all day event starts before view's start date and ends at end of the view", function() {
-        var view = new kendo.ui.WeekView(container, { date: new Date("2013/6/9") });
-
-        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date("2013/5/30"), end: new Date("2013/6/16"), isAllDay: true })]);
-
-        equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
-        equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 1);
-    });
-
-    test("arrow is shown if multiday event starts before view's start date", function() {
-        var view = setup({ dates: [new Date(2013, 1, 2)] });
-
-        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), isAllDay: true })]);
-
-        equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
-    });
-
-    test("arrow is shown if multiday event ends after view's end date", function() {
-        var view = setup({ dates: [new Date(2013, 1, 2)] });
-
-        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 2), end: new Date(2013, 1, 4) })]);
-
-        equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 1);
-    });
-
-    test("arrow is shown if multiday event starts before view's start date and ends after view's end date", function() {
-        var view = setup({ dates: [new Date(2013, 1, 2)] });
-
-        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 4) })]);
-
-        equal(view.datesHeader.find(".k-event .k-i-arrow-e").length, 1);
-        equal(view.datesHeader.find(".k-event .k-i-arrow-w").length, 1);
-    });
-
-    test("arrow is shown if event starts before view's start time", function() {
-        var view = setup({ dates: [new Date(2013, 1, 2)], startTime: new Date(2013, 1, 2, 10, 0, 0) });
-
-        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 2, 9, 0, 0), end: new Date(2013, 1, 2, 11, 0, 0) })]);
-
-        equal(view.content.find(".k-event .k-i-arrow-n").length, 1);
-        ok(!view.content.find(".k-event .k-i-arrow-s").length);
-    });
-
-    test("arrow is shown if event ends after view's end time", function() {
-        var view = setup({ dates: [new Date(2013, 1, 2)], endTime: new Date(2013, 1, 2, 10, 0, 0) });
-
-        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 2, 9, 0, 0), end: new Date(2013, 1, 2, 11, 0, 0) })]);
-
-        equal(view.content.find(".k-event .k-i-arrow-s").length, 1);
-        ok(!view.content.find(".k-event .k-i-arrow-n").length);
-    });
-
-    test("arrows are shown if event starts before and ends after view's start, end time", function() {
-        var view = setup({ dates: [new Date(2013, 1, 2)], startTime: new Date(2013, 1, 2, 10, 0, 0), endTime: new Date(2013, 1, 2, 11, 0, 0) });
-
-        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 2, 9, 0, 0), end: new Date(2013, 1, 2, 12, 0, 0) })]);
-
-        equal(view.content.find(".k-event .k-i-arrow-s").length, 1);
-        equal(view.content.find(".k-event .k-i-arrow-n").length, 1);
-    });
-
-    test("arrows are not shown if event ends in the midnight", function() {
-        var view = setup({ dates: [new Date(2013, 1, 2)] });
-
-        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 2, 9, 0, 0), end: new Date(2013, 1, 3, 0, 0, 0) })]);
-
-        equal(view.content.find(".k-event .k-i-arrow-s").length, 0);
-        equal(view.content.find(".k-event .k-i-arrow-n").length, 0);
-    });
-
-    test("refresh icon is shown if multiday event has recurring rule", function() {
-        var view = setup({ dates: [new Date(2013, 1, 2)] });
-
-        view.render([new SchedulerEvent({ uid: "foo", title: "", start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), isAllDay: true, recurrenceRule: "FREQ=DAILY" })]);
-
-        equal(view.datesHeader.find(".k-event .k-i-refresh").length, 1);
-    });
-
-    test("refresh icon is shown if multiday event has recurrenceId", function() {
-        var view = setup({ dates: [new Date(2013, 1, 2)] });
-
-        view.render([new SchedulerEvent({ uid: "foo", title: "",  start: new Date(2013, 1, 1), end: new Date(2013, 1, 2), isAllDay: true, recurrenceId: "1" })]);
-
-        equal(view.datesHeader.find(".k-event .k-i-refresh").length, 1);
-    });
-
-    test("refresh icon is shown if multiday event is recurring exception event", function() {
-        var view = setup({ dates: [new Date(2013, 1, 1)] });
-
-        view.render([new SchedulerEvent({
-            uid: "foo", title: "",
-            start: new Date(2013, 1, 1),
-            end: new Date(2013, 1, 2),
-            id: "2",
-            recurrenceId: "1"
-        })]);
-
-        equal(view.datesHeader.find(".k-event .k-i-exception").length, 1);
-        equal(view.datesHeader.find(".k-event .k-i-refresh").length, 0);
     });
 
     test("same day event which end at midnight is rendered in the day slot", function() {
@@ -1668,19 +1751,6 @@
         ok(view.content.find(".k-event").length);
     });
 
-    test("same day event which starts and ends before the startTime is not rendered when week view", function() {
-        var view = setup({ dates: [new Date(2013, 1, 2), new Date(2013, 1, 3)], startTime: new Date(2013, 1, 2, 7, 0, 0) });
-
-        view.render([new SchedulerEvent({
-            uid: "foo", title: "",
-            start: new Date(2013, 1, 2, 0, 0, 0),
-            end: new Date(2013, 1, 2, 0, 0, 0),
-            id: "2"
-        })]);
-
-        ok(!view.content.find(".k-event").length);
-    });
-
     test("same day event which starts before the startTime and ends at midnight is rendered", function() {
         var view = setup({ dates: [new Date(2013, 1, 2)], startTime: new Date(2013, 1, 2, 7, 0, 0) });
 
@@ -1694,7 +1764,6 @@
         var slots = view.content.find("td");
 
         var event = view.content.find(".k-event");
-
 
         equalWithRound(event.offset().top, slots.first().offset().top);
         equalWithRound(event.offset().top + event.outerHeight(), slots.last().offset().top + slots.last().outerHeight());
@@ -1738,99 +1807,6 @@
         var count = slots.count();
         deepEqual(slots.at(count- 2).startDate(), new Date("2013/6/6 23:00"));
         deepEqual(slots.at(count -2).endDate(), new Date("2013/6/6 23:30"));
-    });
-
-    test("slot ending at 12:00 AM doesn't have the south arrow", function() {
-        var view = setup({
-            majorTick: 60,
-            startTime: new Date("2013/6/6 10:00 PM"),
-            dates: [new Date("2013/6/6")]
-        });
-
-        view.render([new SchedulerEvent({
-            uid: "foo",
-            title: "",
-            start: new Date("2013/6/6 11:00 PM"),
-            end: new Date("2013/6/7 12:00 AM"),
-            id: "2"
-        })]);
-
-        equal(view.element.find(".k-i-arrow-s").length, 0);
-    });
-
-    test("workDayStart is used when rendered in work mode", function() {
-        var view = setup({
-            workDayStart: new Date("2013/6/6 10:00"),
-            showWorkHours: true,
-            dates: [new Date("2013/6/6")]
-        });
-
-        equal(view.times.find("th:first").text(), "10:00 AM");
-    });
-
-    test("workDayEnd is used when rendered in work mode", function() {
-        var view = setup({
-            workDayEnd: new Date("2013/6/6 14:00"),
-            showWorkHours: true,
-            dates: [new Date("2013/6/6")]
-        });
-
-        equal(view.times.find("tr th").filter(function() { return this.innerHTML != "&nbsp;"; }).last().text(), "12:00 PM");
-    });
-
-    test("default workDayEnd and workDayStart are used when rendered in work mode", function() {
-        var view = setup({
-            showWorkHours: true,
-            dates: [new Date("2013/6/6")]
-        });
-
-        equal(view.times.find("th:first").text(), "8:00 AM");
-        equal(view.times.find("tr th").filter(function() { return this.innerHTML != "&nbsp;"; }).last().text(), "4:00 PM");
-    });
-
-    test("clicking workday button triggers naivgate event", 2, function() {
-        var view = setup();
-
-        view.bind("navigate",function(e) {
-            equal(e.view, "MultiDayView");
-            ok(e.isWorkDay);
-        });
-
-        view.footer.find(".k-scheduler-fullday").click();
-    });
-
-    test("non working day is highlighted", function() {
-        var view = setup({
-            dates: [new Date("2013/6/6")],
-            workWeekStart: 4,
-            workWeekEnd: 4,
-        });
-
-        equal(view.content.find("td.k-nonwork-hour").length, 15);
-    });
-
-    test("working day is not highlighted", function() {
-        var view = setup({
-            dates: [new Date("2013/6/6")],
-            workWeekStart: 4,
-            workWeekEnd: 4,
-            showWorkHours: true
-        });
-
-        ok(!view.content.find("td.k-nonwork-hour").length);
-    });
-
-    test("non working hours are highlighted", function() {
-        var view = setup({
-            workDayStart: new Date("2013/6/6 10:00"),
-            startTime: new Date("2013/6/6 9:00"),
-            endTime: new Date("2013/6/6 12:00"),
-            workDayEnd: new Date("2013/6/6 11:00"),
-        });
-
-        ok(view.content.find("td").first().hasClass("k-nonwork-hour"));
-        ok(!view.content.find("td").eq(1).hasClass("k-nonwork-hour"));
-        ok(view.content.find("td").last().hasClass("k-nonwork-hour"));
     });
 
     test("first day is correctly set in workWeek view", function() {
@@ -1939,20 +1915,24 @@
         equal(startSlot.startDate().getDate(), 21);
     });
 
+    test("clicking the cell link trigger navigate event", 2, function() {
+        var view = setup({ dates: [new Date(2013, 1, 2)] });
+
+        view.bind("navigate", function(e) {
+            equal(e.view, "day");
+            equal(e.date.getTime(), new Date(2013, 1, 2).getTime());
+        });
+        view.datesHeader.find("th:first").find(".k-nav-day").click();
+    });
+
     module("Multi Day View ARIA rendering", {
         setup: function() {
-            container = document.createElement("div");
-            QUnit.fixture[0].appendChild(container);
-            container = $(container).addClass("k-scheduler").css({
-                width: 1000,
-                height: 800
-            });
+            container = $('<div class="k-scheduler" style="width:1000px;height:800px">');
         },
         teardown: function() {
             if (container.data("kendoMultiDayView")) {
                 container.data("kendoMultiDayView").destroy();
             }
-            kendo.destroy(QUnit.fixture);
         }
     });
 
@@ -2055,20 +2035,4 @@
         equal(events.filter("[aria-selected=false]").length, events.length);
     });
 
-    test("event which starts at 15 minutes is positioned in the middle of the slot", function() {
-        var view = setup({
-            majorTick: 60,
-            startTime: new Date("2013/6/6 10:00"),
-            dates: [new Date("2013/6/6")]
-        });
-
-        var events = [new SchedulerEvent({ start: new Date("2013/6/6 10:15"), end: new Date("2013/6/6 10:30"), title: "" }) ];
-
-        view.render(events);
-
-        var event = view.element.find(".k-event");
-        var slot = view.element.find(".k-scheduler-content td:first");
-
-        equalWithRound(event[0].offsetTop, slot[0].offsetTop + slot[0].offsetHeight / 2);
-    });
 })();
