@@ -1,34 +1,36 @@
 (function () {
     var panelbar;
+    var ul;
 
-    function createPanelBar() {
-        QUnit.fixture.html(__html__['tests/panelbar/ajax-loading-fixture.html']);
-        panelbar = $("#PanelBar1").kendoPanelBar({
-            animation: false,
-            contentUrls: [
-                "AjaxView1.html",
-                "AjaxView2.html",
-                "AjaxView1.html",
-                "AjaxView2.html",
-                "AjaxView1.html",
-                "error.html"
-            ]
-        }).data("kendoPanelBar");
-    }
-
-    function destroyPanelBar() {
-        panelbar.destroy();
-        panelbar = null;
-        $("#PanelBar1").remove();
-    }
-
-    function getRootItem(index) {
-        return panelbar.element.children().eq(index).children(".k-link");
-    }
-
-    module("AjaxLoading", {
+    module("panelbar ajax loading", {
         setup: function() {
-            window.con = window.console;
+            kendo.effects.disable();
+
+            QUnit.fixture.append(
+                '<ul class="k-widget k-panelbar k-reset" id="panelbar" style="width: 300px; float: left; visibility: hidden; position: absolute;">' +
+                '    <li><a>Pure ASP.NET MVC components</a>' +
+                '       <div></div>' +
+                '   </li>' +
+                '   <li><a>Completely Open Source</a>' +
+                '       <div></div>' +
+                '   </li>' +
+                '   <li><a>Exceptional Performance</a>' +
+                '       <div></div>' +
+                '   </li>' +
+                '   <li><a>Based on jQuery</a>' +
+                '       <div></div>' +
+                '   </li>' +
+                '   <li>Wide Cross-browser support' +
+                '       <div></div>' +
+                '   </li>' +
+                '   <li>Wide Cross-browser support' +
+                '       <div></div>' +
+                '   </li>' +
+                '</ul>'
+            );
+
+            $.mockjaxSettings.responseTime = 0;
+
             $.mockjax({
                 url: "error.html",
                 response: function() {
@@ -37,37 +39,46 @@
             });
 
             $.mockjax({
-                url: "AjaxView1.html",
+                url: "ajax-view-one.html",
                 response: function() {
-                    this.responseText = __html__['tests/panelbar/ajax-view1-fixture.html'];
+                    this.responseText = "<p>This content was loaded via ajax ().</p>"
                 }
             });
 
             $.mockjax({
-                url: "AjaxView2.html",
+                url: "ajax-view-two.html",
                 response: function() {
-                    this.responseText = __html__['tests/panelbar/ajax-view2-fixture.html'];
+                    this.responseText = "<p>This content was loaded via ajax ().</p>"
                 }
+            });
+
+            ul = $("#panelbar");
+
+            panelbar = new kendo.ui.PanelBar(ul, {
+                animation: false,
+                contentUrls: [
+                    'ajax-view-one.html', 'ajax-view-two.html', 'ajax-view-one.html', 'ajax-view-two.html', 'ajax-view-one.html', 'error.html'
+                ]
             });
         },
         teardown: function() {
-            window.console = window.con;
-            destroyPanelBar();
+            kendo.effects.enable();
+            panelbar.destroy();
         }
     });
 
-    test("PanelBar renders anchor instead of span if contentUrl", function() {
-        createPanelBar();
+    function getRootItem(index) {
+        return ul.children().eq(index).children(".k-link");
+    }
 
-        var children = $("#PanelBar1").find("li:last").children();
+    test("PanelBar renders anchor instead of span if contentUrl", function() {
+        var children = ul.find("li:last").children();
 
         equal(children.filter("a").length, 1);
         equal(children.filter("span").length, 0)
     });
 
     asyncTest("clicking collapsed content items should expand them", 1, function() {
-        createPanelBar();
-
         var item = getRootItem(0);
 
         panelbar.bind("contentLoad", function() {
@@ -80,8 +91,6 @@
     });
 
     test("clicking expanded content items should collapse them", function() {
-        createPanelBar();
-
         var item = getRootItem(0);
 
         item.trigger("click");
@@ -90,8 +99,6 @@
     });
 
     asyncTest("clicking collapsed content items should toggle arrow", 1, function() {
-        createPanelBar();
-
         var item = getRootItem(1);
 
         panelbar.bind("contentLoad", function() {
@@ -104,8 +111,6 @@
     });
 
     test("clicking expanded content items should toggle arrow", 1, function() {
-        createPanelBar();
-
         var item = getRootItem(1);
 
         item.trigger("click");
@@ -114,8 +119,6 @@
     });
 
     asyncTest("clicking should make item active", 1, function() {
-        createPanelBar();
-
         var item = getRootItem(2);
 
         panelbar.bind("contentLoad", function() {
@@ -128,19 +131,30 @@
     });
 
     asyncTest("initially expanded items fetch their AJAX content", 1, function() {
-        QUnit.fixture.html(__html__['tests/panelbar/active-panelbar-fixture.html']);
-        panelbar = $("#PanelBar1").kendoPanelBar({
+        kendo.destroy(QUnit.fixture);
+
+        QUnit.fixture.html("")
+             .append(
+                '<ul id="panelbar">' +
+                '    <li><a>Pure ASP.NET MVC components</a>' +
+                '       <div></div>' +
+                '   </li>' +
+                '   <li class="k-state-active"><a>Completely Open Source</a>' +
+                '       <div></div>' +
+                '   </li>' +
+                '</ul>'
+             );
+
+        ul = $("#panelbar");
+
+        panelbar = new kendo.ui.PanelBar(ul, {
             animation: false,
             contentUrls: [
-                "AjaxView1.html",
-                "AjaxView2.html",
-                "AjaxView1.html",
-                "AjaxView2.html",
-                "AjaxView1.html"
+                'ajax-view-one.html', 'ajax-view-two.html'
             ]
-        }).data("kendoPanelBar");
+        });
 
-        var item = getRootItem(4);
+        var item = getRootItem(1);
 
         panelbar.bind("contentLoad", function() {
             start();
@@ -150,8 +164,6 @@
     });
 
     asyncTest("ajax content with error fires error handler and writes the error message to the console", 1, function () {
-        createPanelBar();
-
         var item = getRootItem(5);
 
         panelbar.bind("error", function (e) {

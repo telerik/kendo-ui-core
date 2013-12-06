@@ -1,12 +1,17 @@
 (function() {
+    var dom;
+
     module('panelbar MVVM', {
         setup: function() {
             QUnit.fixture.html('<script type="text/x-kendo-template" id="template"><li>${text}</li></script>');
+        },
+        teardown: function() {
+            kendo.destroy(dom);
         }
     });
 
     test("initializes a panelbar when data role is panelbar", function() {
-        var dom = $('<div data-role="panelbar"></div>');
+        dom = $('<div data-role="panelbar"></div>');
 
         kendo.bind(dom);
 
@@ -14,7 +19,7 @@
     });
 
     test("initializes a options from data attributes", function() {
-        var dom = $('<div data-role="panelbar" data-expand-mode="single"></div>');
+        dom = $('<div data-role="panelbar" data-expand-mode="single"></div>');
 
         kendo.bind(dom);
 
@@ -24,7 +29,7 @@
     });
 
     test("binding panelbar initialized before binding", function() {
-        var dom = $('<div data-expand-mode="single"></div>');
+        dom = $('<div data-expand-mode="single"></div>');
 
         dom.kendoPanelBar();
 
@@ -34,7 +39,7 @@
     });
 
     test("binding containing binding attributes", function() {
-        var dom = $('<div data-role="panelbar"><span data-bind="text:text"></span></div>');
+        dom = $('<div data-role="panelbar"><span data-bind="text:text"></span></div>');
 
         var observable = kendo.observable({ text:"foo" });
 
@@ -44,7 +49,7 @@
     });
 
     test("updating viewModel updates the content", function() {
-        var dom = $('<div data-role="panelbar"><span data-bind="text:text"></span></div>');
+        dom = $('<div data-role="panelbar"><span data-bind="text:text"></span></div>');
 
         var observable = kendo.observable({ text:"foo" });
 
@@ -56,7 +61,7 @@
     });
 
     test("source binding is skipped if set to target element", function() {
-        var dom = $('<ul id="container" data-template="template" data-bind="source:items"></ul>');
+        dom = $('<ul id="container" data-template="template" data-bind="source:items"></ul>');
 
         var observable = kendo.observable({ items: [{text: "foo"}, {text:"bar" }] });
 
@@ -70,7 +75,7 @@
             ok(true);
         }
 
-        var dom = $('<div data-role="panelbar" data-expand="panelBarExpand"></div>');
+        dom = $('<div data-role="panelbar" data-expand="panelBarExpand"></div>');
 
         kendo.bind(dom);
 
@@ -79,7 +84,7 @@
 
 
     test("binding visible to true shows the panelbar", function() {
-        var dom = $('<div data-role="panelbar" data-bind="visible: visible"></div>');
+        dom = $('<div data-role="panelbar" data-bind="visible: visible"></div>');
 
         kendo.bind(dom, { visible: true });
 
@@ -89,7 +94,7 @@
     });
 
     test("binding visible to false hides the panelbar", function() {
-        var dom = $('<div data-role="panelbar" data-bind="visible: visible"></div>');
+        dom = $('<div data-role="panelbar" data-bind="visible: visible"></div>');
 
         kendo.bind(dom, { visible: false });
 
@@ -99,7 +104,7 @@
     });
 
     test("binding invisible to true hides the panelbar", function() {
-        var dom = $('<div data-role="panelbar" data-bind="invisible: invisible"></div>');
+        dom = $('<div data-role="panelbar" data-bind="invisible: invisible"></div>');
 
         kendo.bind(dom, { invisible: true });
 
@@ -109,7 +114,7 @@
     });
 
     test("binding invisible to false shows the panelbar", function() {
-        var dom = $('<div data-role="panelbar" data-bind="invisible: invisible"></div>');
+        dom = $('<div data-role="panelbar" data-bind="invisible: invisible"></div>');
 
         kendo.bind(dom, { invisible: false });
 

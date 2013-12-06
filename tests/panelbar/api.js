@@ -1,12 +1,13 @@
 (function() {
-   var isRaised, isExpandRaised, isCollapseRaised, isSelectRaised, isActivateRaised;
+    var isExpandRaised, isCollapseRaised, isSelectRaised, isActivateRaised;
+    var PanelBar = kendo.ui.PanelBar;
+
+    var empty_panelbar;
+    var panelbar;
+    var ul;
 
     function getRootItem(index) {
-        return $('#PanelBar1').children().eq(index);
-    }
-
-    function getPanelBar() {
-        return $("#PanelBar1").data("kendoPanelBar");
+        return ul.children().eq(index);
     }
 
     //handlers
@@ -26,28 +27,115 @@
         isSelectRaised = true;
     }
 
-    var onLoadPanelBar;
-
     module("api", {
         setup: function() {
-            QUnit.fixture.html(__html__['tests/panelbar/api-fixture.html']);
-            $("#PanelBar1").kendoPanelBar({ expand: Expand, collapse: Collapse, select: Select, activate: Activate });
-            isRaised = true;
-            onLoadPanelBar = $("#PanelBar1").data("kendoPanelBar");
+            kendo.effects.disable();
+
+            QUnit.fixture.append(
+                '<ul id="panelbar">' +
+                '    <li class="k-item k-state-default"><span class="k-link k-header">Mail<span' +
+                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
+                '        <ul style="display: none;" class="k-group">' +
+                '            <li class="k-item k-state-default"><span class="k-link">Personal Folders</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Deleted Items</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-disabled"><span class="k-link">Inbox</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">My Mail</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Sent Items</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Outbox</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Search Folders</span>' +
+                '            </li>' +
+                '        </ul>' +
+                '    </li>' +
+                '    <li class="k-item k-state-disabled"><span class="k-link k-header">Contacts<span' +
+                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
+                '        <ul class="k-group" style="display: none;">' +
+                '            <li class="k-item k-state-default"><span class="k-link">My Contacts</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Address Cards</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Phone List</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Shared Contacts</span>' +
+                '            </li>' +
+                '        </ul>' +
+                '    </li>' +
+                '    <li class="k-item k-state-default"><span class="k-link k-header">Tasks<span' +
+                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
+                '        <ul class="k-group" style="display: none;">' +
+                '            <li class="k-item k-state-default"><span class="k-link">My Tasks</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Shared Tasks</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Active Tasks</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Completed Tasks</span>' +
+                '            </li>' +
+                '        </ul>' +
+                '    </li>' +
+                '    <li class="k-item k-state-active"><span class="k-link k-header k-state-selected">Notes<span' +
+                '            class="k-icon k-i-arrow-n k-panelbar-collapse"></span></span>' +
+                '        <ul class="k-group" style="display: block;">' +
+                '            <li class="k-item k-state-default"><span class="k-link">My Notes</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Notes List</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Shared Notes</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">Archive</span>' +
+                '            </li>' +
+                '        </ul>' +
+                '    </li>' +
+                '    <li class="k-item k-state-default"><span class="k-link k-header">Folders List<span' +
+                '            class="k-icon k-i-arrow-s k-panelbar-expand"></span></span>' +
+                '        <ul class="k-group" style="display: none;">' +
+                '            <li class="k-item k-state-default"><span class="k-link">My Client.Net</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">My Profile</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">My Support Tickets</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">My Licenses</span>' +
+                '            </li>' +
+                '            <li class="k-item k-state-default"><span class="k-link">My Licenses</span>' +
+                '               <input />' +
+                '            </li>' +
+                '        </ul>' +
+                '    </li>' +
+                '</ul>' +
+                '<ul id="empty_panelbar"></ul>'
+            );
+
+            ul = $("#panelbar");
+            empty_panelbar = $("#empty_panelbar");
+
+            panelbar = new PanelBar(ul, {
+                expand: Expand,
+                collapse: Collapse,
+                select: Select,
+                activate: Activate
+            });
         },
         teardown: function() {
-            $("#panel2").empty();
+            kendo.effects.enable();
+
+            kendo.destroy(QUnit.fixture);
         }
     });
 
     test('trigger input select should not bubble', function() {
-        isRaised = false;
-
         var item = getRootItem(4);
+
+        isSelectRaised = false;
 
         $(item).find('input').first().trigger('select');
 
-        ok(!isRaised);
+        ok(!isSelectRaised);
     });
 
     test('clicking should raise onSelect event', function() {
@@ -94,51 +182,39 @@
     });
 
     test('disable method should disable disabled item', function() {
-        var panel = getPanelBar();
-
         var item = getRootItem(2);
 
-        panel.disable(item);
+        panelbar.disable(item);
 
         ok(item.hasClass('k-state-disabled'));
     });
 
     test('enable method should enable disabled item', function() {
-        var panel = getPanelBar();
-
         var item = getRootItem(2);
 
-        panel.enable(item);
+        panelbar.enable(item);
 
         ok(item.hasClass('k-state-default'));
     });
 
     test('collapse method should collapse last item', function() {
-
-        var panel = getPanelBar();
-
         var item = getRootItem(4);
 
-        panel.collapse(item);
+        panelbar.collapse(item);
 
         equal(item.find('> .k-group').css("display"), "none");
     });
 
-    test('client object is available in on load', function() {
-        ok(null !== onLoadPanelBar);
-        ok(undefined !== onLoadPanelBar);
-    });
-
     test('dataSource should create items with the text specified', function () {
-        $("#panel2").kendoPanelBar({ dataSource: [ { text: "Item 1" } ] });
+        new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1" } ] });
 
-        equal($("#panel2").find(".k-item > .k-link:contains(Item 1)").length, 1);
+        equal(empty_panelbar.find(".k-item > .k-link:contains(Item 1)").length, 1);
     });
 
     test('dataSource should spawn arrows for items with group, content or contentUrl', function () {
-        $("#panel2").kendoPanelBar({ dataSource: [ { text: "Item 1", content: "Test" }, { text: "Item 2", items: [] }, { text: "Item 3", contentUrl: "http://www.google.com" } ] });
+        new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1", content: "Test" }, { text: "Item 2", items: [] }, { text: "Item 3", contentUrl: "http://www.google.com" } ] });
 
-        var icons = $("#panel2").find(".k-item > .k-link > .k-icon");
+        var icons = empty_panelbar.find(".k-item > .k-link > .k-icon");
 
         ok(icons.eq(0).is(".k-panelbar-expand.k-i-arrow-s"));
         ok(icons.eq(1).is(".k-panelbar-expand.k-i-arrow-s"));
@@ -146,47 +222,44 @@
     });
 
     test('dataSource should show collapse arrows for expanded items', function () {
-        $("#panel2").kendoPanelBar({ dataSource: [ { text: "Item 1", content: "Test", expanded: true } ] });
+        new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1", content: "Test", expanded: true } ] });
 
-        ok($("#panel2").find(".k-item > .k-link > .k-icon").is(".k-panelbar-collapse.k-i-arrow-n"));
+        ok(empty_panelbar.find(".k-item > .k-link > .k-icon").is(".k-panelbar-collapse.k-i-arrow-n"));
     });
 
     test('setOptions resets the animation', function() {
-        var p = new kendo.ui.PanelBar("<div />");
+        panelbar = new PanelBar(empty_panelbar);
 
-        ok(p.options.animation.expand.effects == "expand:vertical");
+        equal(panelbar.options.animation.expand.effects, "expand:vertical");
 
-        p.setOptions({ animation: false });
+        panelbar.setOptions({ animation: false });
 
-        ok("effects" in p.options.animation.expand);
-        ok(kendo.size(p.options.animation.expand.effects) == 0);
-        p.destroy();
+        ok("effects" in panelbar.options.animation.expand);
+        ok(kendo.size(panelbar.options.animation.expand.effects) == 0);
     });
 
     test('setOptions resets the dataSource object', function() {
-        var p = new kendo.ui.PanelBar("<div />", { dataSource: [ { text: "Item 1" } ] });
+        panelbar = new PanelBar(empty_panelbar, { dataSource: [ { text: "Item 1" } ] });
 
-        ok(p.element.find("li").text() == "Item 1");
+        equal(panelbar.element.find("li").text(), "Item 1");
 
-        p.setOptions({ dataSource: [ { text: "Changed" } ] });
+        panelbar.setOptions({ dataSource: [ { text: "Changed" } ] });
 
-        ok(p.element.find("li").text() == "Changed");
-        p.destroy();
+        equal(panelbar.element.find("li").text(), "Changed");
     });
 
     test("Add dynamic item with cssClass", function () {
-        var p = new kendo.ui.PanelBar("<ul></ul>");
+        panelbar = new PanelBar(empty_panelbar);
 
-        p.append({ text: "test", cssClass: "cssClass" });
+        panelbar.append({ text: "test", cssClass: "cssClass" });
 
-        ok(p.element.find(".cssClass")[0]);
-        p.destroy();
+        ok(panelbar.element.find(".cssClass")[0]);
     });
 
     test("Adding dynamic content element renders properly on root and inner levels", function () {
-        var p = new kendo.ui.PanelBar("<ul></ul>");
+        panelbar = new PanelBar(empty_panelbar);
 
-        p.append([
+        panelbar.append([
             {
                 text: "Item 1",
                 content: "Item 1 Content"
@@ -202,15 +275,14 @@
             }
         ]);
 
-        ok(p.element.children("li:first").children("div.k-content")[0]);
-        ok(p.element.find("> li:last > ul > li:first").children("div.k-content")[0]);
-        p.destroy();
+        ok(empty_panelbar.children("li:first").children("div.k-content")[0]);
+        ok(empty_panelbar.find("> li:last > ul > li:first").children("div.k-content")[0]);
     });
 
     test("Adding dynamic contentUrl element renders contents on root and inner levels", function () {
-        var p = new kendo.ui.PanelBar("<ul></ul>");
+        panelbar = new PanelBar(empty_panelbar);
 
-        p.append([
+        panelbar.append([
             {
                 text: "Item 1",
                 contentUrl: "AjaxView1.html"
@@ -226,8 +298,7 @@
             }
         ]);
 
-        ok(p.element.children("li:first").children("div.k-content")[0]);
-        ok(p.element.find("> li:last > ul > li:first").children("div.k-content")[0]);
-        p.destroy();
+        ok(empty_panelbar.children("li:first").children("div.k-content")[0]);
+        ok(empty_panelbar.find("> li:last > ul > li:first").children("div.k-content")[0]);
     });
 })();

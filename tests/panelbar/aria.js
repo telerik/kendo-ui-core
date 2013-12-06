@@ -15,14 +15,11 @@
 
     module("PanelBar aria", {
         setup: function() {
-            ul = $('<ul id="test" />').appendTo(QUnit.fixture);
+            ul = $('<ul id="test" />').appendTo(QUnit.fixture).appendTo(QUnit.fixture);
             panelbar = ul.kendoPanelBar().data("kendoPanelBar");
         },
         teardown: function() {
-            if (ul.data("kendoPanelBar")) {
-                ul.data("kendoPanelBar").destroy();
-            }
-            ul.remove();
+            kendo.destroy(QUnit.fixture);
         }
     });
 
@@ -39,7 +36,7 @@
     });
 
     test("PanelBar adds tab role to items during init", function() {
-        var panel = $("<ul id='test'><li>Test</li></ul>").kendoPanelBar();
+        var panel = $("<ul id='test'><li>Test</li></ul>").appendTo(QUnit.fixture).kendoPanelBar();
 
         var items = panel.find(".k-item");
         equal(items.eq(0).attr("role"), "menuitem");
@@ -73,14 +70,14 @@
     });
 
     test("PanelBar adds role region during init", function() {
-        var panel = $("<ul id='test2'><li>Test</li><li>hi<div>content</div></li></ul>").kendoPanelBar();
+        var panel = $("<ul id='test2'><li>Test</li><li>hi<div>content</div></li></ul>").appendTo(QUnit.fixture).kendoPanelBar();
 
         var items = panel.find(".k-content");
         equal(items.eq(0).attr("role"), "region");
     });
 
     test("PanelBar adds role group during init", function() {
-        var panel = $("<ul id='test'><li>Test<ul><li>Inner item</li></ul></li></ul>").kendoPanelBar();
+        var panel = $("<ul id='test'><li>Test<ul><li>Inner item</li></ul></li></ul>").appendTo(QUnit.fixture).kendoPanelBar();
 
         var items = panel.find(".k-group");
         equal(items.eq(0).attr("role"), "group");
@@ -135,7 +132,7 @@
     });
 
     test("PanelBar adds aria-expanded to the item during init", function() {
-        var panel = $("<ul id='test2'><li>Test</li><li>hi<div>content</div></li><li>Last<ul><li>test</li></ul></li></ul>").kendoPanelBar();
+        var panel = $("<ul id='test2'><li>Test</li><li>hi<div>content</div></li><li>Last<ul><li>test</li></ul></li></ul>").appendTo(QUnit.fixture).kendoPanelBar();
 
         var items = panel.find(".k-item").filter("[aria-expanded=false]");
 
@@ -210,13 +207,13 @@
     });
 
     test("PanelBar adds aria-hidden to k-group on init", function() {
-        var panel = $("<ul id='test'><li>Test<ul><li>Inner</li></ul></li></ul>").kendoPanelBar();
+        var panel = $("<ul id='test2'><li>Test<ul><li>Inner</li></ul></li></ul>").appendTo(QUnit.fixture).kendoPanelBar();
 
         equal(panel.find(".k-group").attr("aria-hidden"), "true");
     });
 
     test("PanelBar adds aria-hidden to content on init", function() {
-        var panel = $("<ul id='test'><li>Test<div>Inner</div></li></ul>").kendoPanelBar();
+        var panel = $("<ul id='test2'><li>Test<div>Inner</div></li></ul>").appendTo(QUnit.fixture).kendoPanelBar();
 
         equal(panel.find(".k-content").attr("aria-hidden"), "true");
     });
@@ -241,7 +238,7 @@
     });
 
     test("PanelBar adds aria-disabled on init", function() {
-        var panel = $("<ul id='test'><li disabled='disabled'>Test</li></ul>").kendoPanelBar();
+        var panel = $("<ul id='test2'><li disabled='disabled'>Test</li></ul>").appendTo(QUnit.fixture).kendoPanelBar();
 
         equal(panel.find(".k-item:first").attr("aria-disabled"), "true");
     });
@@ -256,7 +253,7 @@
     });
 
     test("PanelBar adds aria-selected on init", function() {
-        var panel = $("<ul id='test'><li><span class='k-link k-state-selected'>Test</span></li><li><span class='k-link k-state-selected'>Test2</span></li></ul>").kendoPanelBar();
+        var panel = $("<ul id='test2'><li><span class='k-link k-state-selected'>Test</span></li><li><span class='k-link k-state-selected'>Test2</span></li></ul>").appendTo(QUnit.fixture).kendoPanelBar();
 
         var links = panel.find(".k-state-selected");
 
@@ -266,7 +263,7 @@
     });
 
     test("PanelBar preserves the id of the LI elements", function() {
-        var panelbar = $("<ul id='test'><li id='custom'><span class='k-link k-state-selected'>Test</span></li><li><span class='k-link'>Test2</span></li></ul>").kendoPanelBar().data("kendoPanelBar");
+        var panelbar = $("<ul id='test2'><li id='custom'><span class='k-link k-state-selected'>Test</span></li><li><span class='k-link'>Test2</span></li></ul>").appendTo(QUnit.fixture).kendoPanelBar().data("kendoPanelBar");
 
         panelbar.select("li:last");
         panelbar.select("li:first");
@@ -277,7 +274,7 @@
     });
 
     test("PanelBar uses id of the LI element", function() {
-        var panelbar = $("<ul id='test'><li id='custom'><span class='k-link k-state-selected'>Test</span></li><li><span class='k-link'>Test2</span></li></ul>").kendoPanelBar().data("kendoPanelBar");
+        var panelbar = $("<ul id='test2'><li id='custom'><span class='k-link k-state-selected'>Test</span></li><li><span class='k-link'>Test2</span></li></ul>").appendTo(QUnit.fixture).kendoPanelBar().data("kendoPanelBar");
 
         panelbar.select("li:last");
         panelbar.select("li:first");
