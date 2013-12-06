@@ -4283,7 +4283,7 @@ kendo_module({
 
             point.createNote();
 
-            if(point.errorBar){
+            if (point.errorBar) {
                 point.append(point.errorBar);
             }
         },
@@ -6376,7 +6376,7 @@ kendo_module({
             if (point.outliers.length) {
                 for (i = 0; i < point.outliers.length; i++) {
                     element = point.outliers[i];
-                    elements.push(element.getViewElements(view, element.options)[0]);
+                    elements.push(element.getViewElements(view)[0]);
                 }
             }
 
