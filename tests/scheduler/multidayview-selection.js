@@ -45,6 +45,10 @@
             });
         },
         teardown: function() {
+            if (container.data("kendoMultiDayView")) {
+                container.data("kendoMultiDayView").destroy();
+            }
+
             kendo.destroy(QUnit.fixture);
         }
     });
@@ -483,6 +487,9 @@
             });
         },
         teardown: function() {
+            if (container.data("kendoMultiDayView")) {
+                container.data("kendoMultiDayView").destroy();
+            }
             kendo.destroy(QUnit.fixture);
         }
     });
@@ -1689,6 +1696,9 @@
             QUnit.fixture.append(container);
         },
         teardown: function() {
+            if (container.data("kendoMultiDayView")) {
+                container.data("kendoMultiDayView").destroy();
+            }
             kendo.destroy(QUnit.fixture);
         }
     });
@@ -2229,6 +2239,9 @@
             QUnit.fixture.append(container);
         },
         teardown: function() {
+            if (container.data("kendoMultiDayView")) {
+                container.data("kendoMultiDayView").destroy();
+            }
             kendo.destroy(QUnit.fixture);
         }
     });

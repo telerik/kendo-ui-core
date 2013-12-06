@@ -3,6 +3,7 @@
         setup: function() {
         },
         teardown: function() {
+            kendo.destroy(QUnit.fixture);
         }
     });
 

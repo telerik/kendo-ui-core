@@ -1869,7 +1869,7 @@ kendo_module({
 
             kendo.destroy(that._container);
 
-            Widget.fn.destroy.call(that);
+            BaseRecurrenceEditor.fn.destroy.call(that);
         },
 
         value: function(value) {
@@ -2312,6 +2312,8 @@ kendo_module({
             kendo.destroy(this._endFields);
 
             this._repeatButton.off(CLICK + this._namespace);
+
+            BaseRecurrenceEditor.fn.destroy.call(this);
         },
 
         _initRepeatButton: function() {

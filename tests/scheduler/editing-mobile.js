@@ -63,7 +63,7 @@
         );
     }
 
-    test("edit form is wrapped within a view",1, function() {
+    test("edit form is wrapped within a view", 1, function() {
         var scheduler = setup();
 
         scheduler.editEvent(scheduler.dataSource.at(0));
@@ -74,12 +74,12 @@
     test("editor is close on cancel",1, function() {
         var scheduler = setup();
 
-        var close = stub(scheduler._editor, "close");
+        var close = stub(scheduler._editor, { close: scheduler._editor.close });
 
         scheduler.editEvent(scheduler.dataSource.at(0));
         scheduler.cancelEvent();
 
-        equal(close.calls("close"), 1);
+        equal(close.calls("close"), 2);
     });
 
     test("editable is destroyed on close",1, function() {

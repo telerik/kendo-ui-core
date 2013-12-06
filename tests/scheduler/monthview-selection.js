@@ -50,6 +50,9 @@
             container = $(container).addClass("k-scheduler");
         },
         teardown: function() {
+            if (container.data("kendomonth")) {
+                container.data("kendomonth").destroy();
+            }
             kendo.destroy(QUnit.fixture);
             $(".k-window, .k-overlay").remove();
         }

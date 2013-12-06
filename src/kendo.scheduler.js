@@ -1243,6 +1243,10 @@ kendo_module({
                     that.editable = null;
                     that.container = null;
                 }
+                if (that.popup) {
+                    that.popup.destroy();
+                    that.popup = null;
+                }
             };
 
             if (that.editable) {
@@ -1256,6 +1260,8 @@ kendo_module({
                 } else {
                     destroy();
                 }
+            } else {
+                destroy();
             }
         },
 
@@ -1282,7 +1288,12 @@ kendo_module({
             html += '</div></div></div>';
 
             var wrapper = this.element;
-            var popup = $(html).appendTo(wrapper)
+
+            if (this.popup) {
+                this.popup.destroy();
+            }
+
+            var popup = this.popup = $(html).appendTo(wrapper)
                                .eq(0)
                                .on("click", ".k-button", function(e) {
                                     e.preventDefault();

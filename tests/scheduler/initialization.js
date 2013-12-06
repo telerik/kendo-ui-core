@@ -19,7 +19,7 @@
     });
 
     test("kendoScheduler attaches a scheduler object to target", function() {
-        var div = $("<div />").kendoScheduler({});
+        var div = $("<div />").appendTo(QUnit.fixture).kendoScheduler({});
 
         ok(div.data("kendoScheduler") instanceof Scheduler);
     });
@@ -337,6 +337,7 @@
                 renderLayout: function(selectedDate) {
                 },
                 destroy: function() {
+                    kendo.ui.SchedulerView.fn.destroy.call(this);
                     ok(true);
                 },
                 startDate: $.noop,
