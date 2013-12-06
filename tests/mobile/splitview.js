@@ -11,6 +11,7 @@
 
     function teardown() {
         kendo.history.stop();
+        app.destroy();
     }
 
     function hidden(selector) {

@@ -1,7 +1,7 @@
 (function() {
     var root, app, shim;
 
-    module("Shim", {
+    module("Mobile Shim", {
         setup: function () {
             root = QUnit.fixture;
             root.html('<div data-role="view"><div id="shim"></div></div>').wrapInner("<div />");
@@ -31,14 +31,14 @@
     test("initialized in app.pane.element", 1, function(){
         var a = new kendo.mobile.Application(app);
         shim = new kendo.mobile.ui.Shim(root.find("#shim"), {});
-
         ok(shim.shim.parent()[0] == a.pane.element[0]);
+        a.destroy();
     });
 
     test("defaults to forced application platform os", 1, function(){
         var a = new kendo.mobile.Application(app, { platform: "android" });
         shim = new kendo.mobile.ui.Shim(root.find("#shim"), {});
-
         ok(shim.popup.options.origin == "center center");
+        a.destroy();
     });
 })();
