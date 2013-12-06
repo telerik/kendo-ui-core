@@ -1,164 +1,148 @@
 (function() {
-        test("binding to data source", function() {
-            var dom = $("<ul/>");
 
-            var tabstrip = new kendo.ui.TabStrip(dom, {
-                dataSource: [{}, {}]
-            });
+var dom;
 
-            equal(dom.find("li").length, 2);
-        });
+module("tabstrip data binding", {
+    setup: function() {
+        dom = $("<ul>");
+    },
+    teardown: function() {
+        kendo.destroy(dom);
+    }
+});
 
-        test("the dataSource field is instance of kendo.data.DataSource", function() {
-            var dom = $("<ul/>");
+test("binding to data source", function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, {
+        dataSource: [{}, {}]
+    });
 
-            var tabstrip = new kendo.ui.TabStrip(dom, {
-                dataSource: [{}, {}]
-            });
+    equal(dom.find("li").length, 2);
+});
 
-            ok(tabstrip.dataSource instanceof kendo.data.DataSource, "dataSource is instanceof kendo.data.DataSource");
-        });
+test("the dataSource field is instance of kendo.data.DataSource", function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, {
+        dataSource: [{}, {}]
+    });
 
-        test("binding to array of primitive types", function() {
-            var dom = $("<ul/>");
+    ok(tabstrip.dataSource instanceof kendo.data.DataSource, "dataSource is instanceof kendo.data.DataSource");
+});
 
-            var tabstrip = new kendo.ui.TabStrip(dom, {
-                dataSource: ["foo"]
-            });
+test("binding to array of primitive types", function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, {
+        dataSource: ["foo"]
+    });
 
-            equal(dom.find("li").text(), "foo");
-        });
+    equal(dom.find("li").text(), "foo");
+});
 
-        test("binding to array of complex objects displays [object Object] by default", function() {
-            var dom = $("<ul/>");
+test("binding to array of complex objects displays [object Object] by default", function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, {
+        dataSource: [{}]
+    });
 
-            var tabstrip = new kendo.ui.TabStrip(dom, {
-                dataSource: [{}]
-            });
+    equal(dom.find("li").text(), "[object Object]");
+});
 
-            equal(dom.find("li").text(), "[object Object]");
-        });
+test("binding to array of complex objects displays the dataTextField", function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, {
+        dataTextField: "foo",
+        dataSource: [{ foo: "foo" }]
+    });
 
-        test("binding to array of complex objects displays the dataTextField", function() {
-            var dom = $("<ul/>");
+    equal(dom.find("li").text(), "foo");
+});
 
-            var tabstrip = new kendo.ui.TabStrip(dom, {
-                dataTextField: "foo",
-                dataSource: [{ foo: "foo" }]
-            });
+test("dataTextField as array access expression", function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, {
+        dataTextField: "['foo']",
+        dataSource: [{ foo: "foo" }]
+    });
 
-            equal(dom.find("li").text(), "foo");
-        });
+    equal(dom.find("li").text(), "foo");
+});
 
-        test("dataTextField as array access expression", function() {
-            var dom = $("<ul/>");
+test("binding raises the dataBinding event", 1, function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, {
+        dataBinding: function() {
+            ok(true, "Event is raised");
+        },
+        dataSource: [{}]
+    });
+});
 
-            var tabstrip = new kendo.ui.TabStrip(dom, {
-                dataTextField: "['foo']",
-                dataSource: [{ foo: "foo" }]
-            });
+test("binding raises the dataBound event", 1, function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, {
+        dataBound: function() {
+            ok(true, "Event is raised");
+        },
+        dataSource: [{}]
+    });
+});
 
-            equal(dom.find("li").text(), "foo");
-        });
+test("dataContentField", function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, {
+        dataContentField: "foo",
+        dataSource: [{foo:"foo"}]
+    });
 
-        test("binding raises the dataBinding event", 1, function() {
-            var dom = $("<ul/>");
+    equal(tabstrip.contentElements.first().text(), "foo")
+});
 
-            var tabstrip = new kendo.ui.TabStrip(dom, {
-                dataBinding: function() {
-                    ok(true, "Event is raised");
-                },
-                dataSource: [{}]
-            });
-        });
+test("dataImageUrlField", function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, {
+        dataImageUrlField: "foo",
+        dataSource: [{foo:"http://example.com"}]
+    });
 
-        test("binding raises the dataBound event", 1, function() {
-            var dom = $("<ul/>");
+    equal(tabstrip.tabGroup.find("img").attr("src"), "http://example.com")
+});
 
-            var tabstrip = new kendo.ui.TabStrip(dom, {
-                dataBound: function() {
-                    ok(true, "Event is raised");
-                },
-                dataSource: [{}]
-            });
-        });
+test("dataUrlField", function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, {
+        dataUrlField: "foo",
+        dataSource: [{foo:"http://example.com"}]
+    });
 
-        test("dataContentField", function() {
-            var dom = $("<ul/>");
+    equal(tabstrip.tabGroup.find("a").attr("href"), "http://example.com")
+});
 
-            var tabstrip = new kendo.ui.TabStrip(dom, {
-                dataContentField: "foo",
-                dataSource: [{foo:"foo"}]
-            });
+test("dataSpriteCssClass", function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, {
+        dataSpriteCssClass: "foo",
+        dataSource: [{foo:"foo"}]
+    });
 
-            equal(tabstrip.contentElements.first().text(), "foo")
-        });
+    ok(tabstrip.tabGroup.find("span.k-sprite").hasClass("foo"));
+});
 
-        test("dataImageUrlField", function() {
-            var dom = $("<ul/>");
+test("resetting dataSource detaches the previous events", function() {
+    var tabstrip = new kendo.ui.TabStrip(dom);
 
-            var tabstrip = new kendo.ui.TabStrip(dom, {
-                dataImageUrlField: "foo",
-                dataSource: [{foo:"http://example.com"}]
-            });
+    var dataSource = tabstrip.dataSource;
 
-            equal(tabstrip.tabGroup.find("img").attr("src"), "http://example.com")
-        });
+    var called = false;
 
-        test("dataUrlField", function() {
-            var dom = $("<ul/>");
+    tabstrip._dataSource();
 
-            var tabstrip = new kendo.ui.TabStrip(dom, {
-                dataUrlField: "foo",
-                dataSource: [{foo:"http://example.com"}]
-            });
+    tabstrip.bind("dataBound", function() {
+        called = true;
+    });
 
-            equal(tabstrip.tabGroup.find("a").attr("href"), "http://example.com")
-        });
+    dataSource.read();
 
-        test("dataSpriteCssClass", function() {
-            var dom = $("<ul/>");
+    ok(!called, "Change event is not detached");
+});
 
-            var tabstrip = new kendo.ui.TabStrip(dom, {
-                dataSpriteCssClass: "foo",
-                dataSource: [{foo:"foo"}]
-            });
+test("resetting DataSource rebinds the widget and refreshes content elements", 2, function() {
+    var tabstrip = new kendo.ui.TabStrip(dom, {
+        dataContentField: "content"
+    });
 
-            ok(tabstrip.tabGroup.find("span.k-sprite").hasClass("foo"));
-        });
+    tabstrip.setDataSource(new kendo.data.DataSource({
+        data:[{text: 1, value: 1, content: "1"}, {text:2, value:2, content: "2"}]
+    }));
 
-        test("resetting dataSource detaches the previous events", function() {
-            var dom = $("<ul/>");
-
-            var tabstrip = new kendo.ui.TabStrip(dom);
-
-            var dataSource = tabstrip.dataSource;
-
-            var called = false;
-
-            tabstrip._dataSource();
-
-            tabstrip.bind("dataBound", function() {
-                called = true;
-            });
-
-            dataSource.read();
-
-            ok(!called, "Change event is not detached");
-        });
-
-        test("resetting DataSource rebinds the widget and refreshes content elements", 2, function() {
-            var dom = $("<ul/>");
-
-            var tabstrip = new kendo.ui.TabStrip(dom, {
-                dataContentField: "content"
-            });
-
-            tabstrip.setDataSource(new kendo.data.DataSource({
-                data:[{text: 1, value: 1, content: "1"}, {text:2, value:2, content: "2"}]
-            }));
-
-            equal(tabstrip.wrapper.find("li").length, 2);
-            equal(tabstrip.wrapper.children("div").length, 2);
-        });
+    equal(tabstrip.wrapper.find("li").length, 2);
+    equal(tabstrip.wrapper.children("div").length, 2);
+});
 })();
