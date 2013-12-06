@@ -48,6 +48,7 @@ test("value() method calls pointer.value()", function() {
 });
 
 test("value(x) does not fail with transitions disabled", function() {
+    destroyGauge();
     createGauge({ transitions: false });
     gauge.value(10);
     ok(true);
@@ -199,6 +200,7 @@ test("value() method calls pointer.value()", function() {
 });
 
 test("value(x) does not fail with transitions disabled", function() {
+    destroyGauge();
     createLinearGauge({ transitions: false });
     gauge.value(10);
     ok(true);

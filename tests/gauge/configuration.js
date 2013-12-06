@@ -33,6 +33,7 @@ asyncTest("uses preferred view specified in 'renderAs'", 1, function() {
     stubMethod(dataviz.ViewFactory.prototype, "create", function(options, preferred) {
         equal(preferred, "foo");
         start();
+        kendo.destroy(gaugeElement);
     }, function() {
         createGauge({ renderAs: "foo" });
     });
