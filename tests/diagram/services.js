@@ -12,7 +12,7 @@
             randomDiagram(d);
         },
         teardown: function () {
-            d.destroy();
+            kendo.destroy(QUnit.fixture);
         }
     });
 
@@ -46,11 +46,10 @@
 
         var s1c = s1.bounds().center().minus(new diagram.Point(5, 5));
 
-        var toolService = new diagram.ToolService(d);
-        toolService.start(s1c);
+        d.toolService.start(s1c);
         var endpoint = s1c.plus(new diagram.Point(5, 5));
-        toolService.move(endpoint);
-        toolService.end(endpoint);
+        d.toolService.move(endpoint);
+        d.toolService.end(endpoint);
 
         ok(c.sourceConnector !== undefined, "Connection is attached to the source.");
         ok(c.targetConnector !== undefined, "Connection is attached to the target.");

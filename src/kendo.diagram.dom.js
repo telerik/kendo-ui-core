@@ -1202,8 +1202,8 @@ kendo_module({
 
             that.destroyScroller();
 
-            if (this.options.dragAndDrop && kendo.ui.DropTarget) {
-                this.element.kendoDropTarget("destroy");
+            if (that.options.dragAndDrop && kendo.ui.DropTarget) {
+                that.element.kendoDropTarget("destroy");
             }
         },
         destroyScroller: function () {
