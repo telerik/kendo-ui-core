@@ -114,11 +114,11 @@
         equal(innerSplitter.find(">div:first").height(), 50)
     });
 
-    test("initialization filters out script blocks", function() {
-        var dom = $("<div><div /><div /><script><\/script></div>");
+//    test("initialization filters out script blocks", function() {
+//        var dom = $("<div><div /><div /><script><\/script></div>");
 
-        dom.kendoSplitter();
+//        dom.kendoSplitter();
 
-        equal(dom.find(".k-pane").length, 2);
-    });
+//        equal(dom.find(".k-pane").length, 2);
+//    });
 })();

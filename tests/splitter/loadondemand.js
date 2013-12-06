@@ -10,6 +10,9 @@
             $.mockjax({ url: url, responseText: "foobar" });
         },
         teardown: function() {
+            QUnit.fixture.closest("body").find(".k-splitter").each(function(idx, element){
+                $(element).data("kendoSplitter").destroy();
+            });
             $.mockjaxClear();
             $(document).off();
         }

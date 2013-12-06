@@ -1,6 +1,16 @@
 (function() {
+
+    var dom;
+
+    module("mvvm", {
+        teardown: function() {
+            dom.data("kendoSplitter").destroy();
+            dom = null;
+        }
+    });
+
     test("initializes a splitter when data role is splitter", function() {
-        var dom = $('<div data-role="splitter"><div></div></div>');
+        dom = $('<div data-role="splitter"><div></div></div>');
 
         kendo.bind(dom);
 
@@ -8,7 +18,7 @@
     });
 
     test("initializes a options from data attributes", function() {
-        var dom = $('<div data-role="splitter" data-orientation="vertical"><div></div><div></div></div>');
+        dom = $('<div data-role="splitter" data-orientation="vertical"><div></div><div></div></div>');
 
         kendo.bind(dom);
 
@@ -18,7 +28,7 @@
     });
 
     test("binding splitter initialized before binding", function() {
-        var dom = $('<div data-orientation="vertical"><div></div><div></div></div>');
+        dom = $('<div data-orientation="vertical"><div></div><div></div></div>');
 
         var splitter = dom.kendoSplitter().data("kendoSplitter");
 
@@ -28,7 +38,7 @@
     });
 
     test("binding containing binding attributes", function() {
-        var dom = $('<div data-role="splitter"><div><span data-bind="text:text"></span></div></div>');
+        dom = $('<div data-role="splitter"><div><span data-bind="text:text"></span></div></div>');
 
         var observable = kendo.observable({ text:"foo" });
 
@@ -38,7 +48,7 @@
     });
 
     test("updating viewModel updates the content", function() {
-        var dom = $('<div data-role="splitter"><div><span data-bind="text:text"></span></div></div>');
+        dom = $('<div data-role="splitter"><div><span data-bind="text:text"></span></div></div>');
 
         var observable = kendo.observable({ text:"foo" });
 
@@ -50,7 +60,7 @@
     });
 
     test("event is raised if attached as option", 1, function() {
-        var dom = $('<div data-role="splitter" data-bind="{ events: { resize: resizeHandler } }"><div></div></div>');
+        dom = $('<div data-role="splitter" data-bind="{ events: { resize: resizeHandler } }"><div></div></div>');
 
         kendo.bind(dom, {
             resizeHandler: function () {
@@ -62,7 +72,7 @@
     });
 
     test("binding visible to true shows the splitter", function() {
-        var dom = $('<div data-role="splitter" data-bind="visible: visible"><div></div></div>');
+        dom = $('<div data-role="splitter" data-bind="visible: visible"><div></div></div>');
 
         kendo.bind(dom, { visible: true });
 
@@ -72,7 +82,7 @@
     });
 
     test("binding visible to false hides the splitter", function() {
-        var dom = $('<div data-role="splitter" data-bind="visible: visible"><div></div></div>');
+        dom = $('<div data-role="splitter" data-bind="visible: visible"><div></div></div>');
 
         kendo.bind(dom, { visible: false });
 
@@ -82,7 +92,7 @@
     });
 
     test("binding invisible to true hides the splitter", function() {
-        var dom = $('<div data-role="splitter" data-bind="invisible: invisible"><div></div></div>');
+        dom = $('<div data-role="splitter" data-bind="invisible: invisible"><div></div></div>');
 
         kendo.bind(dom, { invisible: true });
 
@@ -92,7 +102,7 @@
     });
 
     test("binding invisible to false shows the splitter", function() {
-        var dom = $('<div data-role="splitter" data-bind="invisible: invisible"><div></div></div>');
+        dom = $('<div data-role="splitter" data-bind="invisible: invisible"><div></div></div>');
 
         kendo.bind(dom, { invisible: false });
 
