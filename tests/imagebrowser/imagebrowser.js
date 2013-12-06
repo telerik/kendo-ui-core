@@ -745,10 +745,12 @@
 
     test("destroy calls nested listview destroy", function() {
         var browser = setup(),
+            originalDestroy = browser.listView.destroy,
             destroy = stub(browser.listView, "destroy")
 
         browser.destroy();
         ok(destroy.calls("destroy"));
+        originalDestroy.call(browser.listView);
     });
 
     test("destroy calls nested popup destroy", function() {
@@ -763,18 +765,22 @@
 
     test("destroy calls nested searchbox destroy", function() {
         var browser = setup(),
+            originalDestroy = browser.searchBox.destroy,
             destroy = stub(browser.searchBox, "destroy")
 
         browser.destroy();
         ok(destroy.calls("destroy"));
+        originalDestroy.call(browser.searchBox);
     });
 
     test("destroy calls nested breadcrumbs destroy", function() {
         var browser = setup(),
+            originalDestroy = browser.breadcrumbs.destroy,
             destroy = stub(browser.breadcrumbs, "destroy")
 
         browser.destroy();
         ok(destroy.calls("destroy"));
+        originalDestroy.call(browser.breadcrumbs);
     });
 
     test("search label message default value", function() {
