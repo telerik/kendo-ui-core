@@ -4,6 +4,7 @@ var uploadInstance, _supportsDrop,
     Upload = kendo.ui.Upload;
 
 function createUpload(options) {
+    removeHTML();
     copyUploadPrototype();
 
     $('#uploadInstance').kendoUpload(options);

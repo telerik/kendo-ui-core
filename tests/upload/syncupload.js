@@ -5,6 +5,7 @@ var uploadInstance,
     _getSupportsMultiple;
 
 function createUpload(options) {
+    removeHTML();
     copyUploadPrototype();
 
     $('#uploadInstance').kendoUpload(options);

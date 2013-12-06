@@ -4,6 +4,8 @@ var uploadInstance,
     Upload = kendo.ui.Upload;
 
 function createUpload(options) {
+    removeHTML();
+
     copyUploadPrototype();
 
     $('#uploadInstance').kendoUpload($.extend({ async:{"saveUrl":"javascript:;",autoUpload:true,showFileList:true} }, options));

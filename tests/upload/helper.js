@@ -23,6 +23,7 @@ function createHTML() {
 }
 function removeHTML() {
     kendo.destroy(QUnit.fixture);
+    QUnit.fixture.empty();
 }
 
 function simulateFileSelect(fileName) {

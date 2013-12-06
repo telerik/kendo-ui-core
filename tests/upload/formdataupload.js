@@ -8,6 +8,7 @@
     lastFormData;
 
 function createUpload(options) {
+    removeHTML();
     copyUploadPrototype();
 
     $('#uploadInstance').kendoUpload($.extend({

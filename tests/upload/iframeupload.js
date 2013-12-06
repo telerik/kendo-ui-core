@@ -7,6 +7,7 @@ var uploadInstance,
     errorResponse = "ERROR!";
 
 function createUpload(options) {
+    removeHTML();
     copyUploadPrototype();
 
     $('#uploadInstance').kendoUpload($.extend({ async:{"saveUrl":'javascript:;',"removeUrl":"/removeAction",autoUpload: true} }, options));
@@ -79,7 +80,7 @@ function moduleSetup() {
 
 function moduleTeardown() {
     Upload.prototype._supportsFormData = _supportsFormData;
-    kendo.destroy($("#testbed_container"));
+    uploadInstance.destroy();
     $("iframe[name^='uploadInstance'], form[target^='uploadInstance']").remove();
     $.mockjaxClear();
     removeHTML();
@@ -506,17 +507,7 @@ uploadSelect(createUpload);
 
 uploadUploadEvent(createUpload);
 
-var successEventTestsParameters = {
-    createUpload: createUpload,
-    simulateUpload: simulateUpload,
-    simulateUploadWithResponse: simulateUploadWithResponse,
-    validJSON: validJSON,
-    simulateRemove: simulateRemove,
-    simulateRemoveWithResponse: simulateRemoveWithResponse
-};
-uploadSuccess(successEventTestsParameters);
-
-var errorEventTestsParameters = {
+var testContext = {
     createUpload: createUpload,
     simulateUpload: simulateUpload,
     simulateUploadWithResponse: simulateUploadWithResponse,
@@ -526,16 +517,11 @@ var errorEventTestsParameters = {
     simulateRemove: simulateRemove,
     simulateRemoveError: simulateRemoveError
 };
-uploadError(errorEventTestsParameters);
 
+uploadSuccess(testContext);
+uploadError(testContext);
 uploadCancel(createUpload);
-
-var removeEventTestsParameters = {
-    createUpload: createUpload,
-    simulateUpload: simulateUpload,
-    simulateRemove: simulateRemove
-};
-uploadRemoveEvent(removeEventTestsParameters);
+uploadRemoveEvent(testContext);
 
 // -----------------------------------------------------------------------------------
 // -----------------------------------------------------------------------------------
@@ -582,7 +568,10 @@ module("Upload / IframeUpload / Templates / autoUpload = true", {
                       "<button type='button' class='k-upload-action'></button><span class='k-progress'></span></div>"
         });
     },
-    teardown: moduleTeardown
+    teardown: function() {
+        moduleTeardown();
+        kendo.destroy($("form"));
+    }
 });
 
 test("loading status icon is rendered while uploading", function(){
