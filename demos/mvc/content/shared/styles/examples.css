@@ -1,24 +1,4 @@
 /*reset*/
-@font-face
-{
-    font-family:"Roboto-LightWeb";
-    src:url("fonts/Roboto-LightWeb.eot");
-    src:url("fonts/Roboto-LightWeb.eot?#iefix") format("embedded-opentype"),
-    url("fonts/Roboto-LightWeb.woff") format("woff"),
-    url("fonts/Roboto-LightWeb.ttf") format("truetype"),
-    url("fonts/Roboto-LightWeb.svg#Roboto-Light") format("svg")
-}
-
-@font-face
-{
-    font-family:"DroidSansWeb";
-    src:url("fonts/DroidSansWeb.eot");
-    src:url("fonts/DroidSansWeb.eot?#iefix") format("embedded-opentype"),
-    url("fonts/DroidSansWeb.woff") format("woff"),
-    url("fonts/DroidSansWeb.ttf") format("truetype"),
-    url("fonts/DroidSansWeb.svg#DroidSansWeb") format("svg")
-}
-
 body,h1,h2,h3,.main-nav,.kendo-nav,#banner p,.browsers,.mobileOSs,#footer ul,#footer p,#nav-pager,#examples-list,#themeChooser,.widgetGrid ul
 {
     margin:0;
@@ -28,6 +8,8 @@ body,h1,h2,h3,.main-nav,.kendo-nav,#banner p,.browsers,.mobileOSs,#footer ul,#fo
 
 body {
     background-color: #fff;
+    color: #555555;
+    font: 400 16px/1.25 Arial, Helvetica, sans-serif;
 }
 
 img
@@ -61,7 +43,7 @@ html
 #header, .suite-demos-nav, .demos-nav,
 .flowers-left, #footer, .centerWrap, .submenu-box a
 {
-    font-family: "Droid Sans", DroidSansWeb, "Segoe UI", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .centerWrap h1,
@@ -69,7 +51,7 @@ html
 .overview h3,
 .overview h3 a
 {
-    font-family: "Roboto Light", Roboto-LightWeb, "Segoe UI Light", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: normal;
 }
 
@@ -111,7 +93,7 @@ html
 
 .centerWrap
 {
-    width:940px;
+    width:1170px;
     margin:0 auto;
     padding:0;
 }
@@ -1052,11 +1034,8 @@ p#copy
     padding-bottom:3em;
 }
 
-.flowers-left{background:fixed 0 400px no-repeat url(flowers-left.png);}
-.flowers-right{background:fixed 111% -174px no-repeat url(flowers-right.png);}
-
 @media screen and (min-width:1030px) {
-    .flowers-right{background:fixed 111% -174px no-repeat url(flowers-right.png);}
+   
 }
 
 @media screen and (min-width:1400px) {
@@ -1178,17 +1157,18 @@ p#copy
 #examples-nav
 {
     float:left;
-    width:180px;
-    border-right:1px solid #dfdfdf;
+    width:170px;
+    /*border-right:1px solid #dfdfdf;*/
     text-align:right;
 }
 
 #main
 {
     float:left;
-    width:759px;
-    border-left:1px solid #dfdfdf;
+    width:1000px;
     margin-left:-1px;
+    border-left: 1px solid #dfdfdf;
+    border-left: 1px solid rgba(94, 94, 94, 0.4);
 }
 
 .widgetOverview #main
@@ -1376,15 +1356,14 @@ p#copy
 }
 
 #examples-list a
-{
-    display:inline-block;
-    padding:3px 14px 3px 8px;
-    color:#4e4e4e;
-    line-height:1.5;
-
-    -moz-border-radius:3px 0 0 3px;
-    -webkit-border-radius:3px 0 0 3px;
-    border-radius:3px 0 0 3px;
+{ 
+    font-size: 12px;
+    display: block;
+    padding: 6px 13px 5px 0;
+    color: #0487c4;
+    text-decoration: none;
+    transition: color 0.2s ease, opacity 0.2s ease;
+    word-wrap: break-word;
 }
 
 #examples-list .new-example:before
@@ -1399,20 +1378,15 @@ p#copy
 
 #examples-list a:hover
 {
-    color:#e26b1d;
+    color:#000;
+    background: #f4f3f2;
 }
 
 #examples-list .active a
 {
-    color:#fff;
-
-    background: #f06f1c; /* Old browsers */
-    background: -moz-linear-gradient(top, #f06f1c 0%, #e95e1a 50%, #e24a17 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f06f1c), color-stop(50%,#e95e1a), color-stop(100%,#e24a17)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #f06f1c 0%,#e95e1a 50%,#e24a17 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #f06f1c 0%,#e95e1a 50%,#e24a17 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #f06f1c 0%,#e95e1a 50%,#e24a17 100%); /* IE10+ */
-    background: linear-gradient(top, #f06f1c 0%,#e95e1a 50%,#e24a17 100%); /* W3C */
+    color:#000;
+    background: #f4f3f2;
+    /*font-weight:bold;*/
 }
 
 #examples-nav .get-kendoui
@@ -1503,7 +1477,7 @@ p#copy
 
 .demo-section-overlay {
     margin: 0 -10px -10px -10px;
-    background: #ebebeb;
+    background: red;
     padding: 0 10px;
 }
 
