@@ -10,6 +10,8 @@
 
     var map;
     function createMap(options) {
+        destroyMap();
+
         var element = $("<div style='width: 512px; height: 512px; position: absolute; top: 0; left: 0'></div>")
                       .appendTo(QUnit.fixture);
 
@@ -20,12 +22,14 @@
     }
 
     function destroyMap() {
-        map.destroy();
-
         $(document.body).css({ "padding": "", "margin": "" });
-
         QUnit.config.fixture = "";
-        QUnit.fixture.empty();
+
+        if (map) {
+            map.destroy();
+            map.element.remove();
+            map = null;
+        }
     }
 
     (function() {

@@ -24,6 +24,10 @@
             layer,
             wrapper;
 
+        function destroyMarker() {
+            marker.destroy();
+        }
+
         // ------------------------------------------------------------
         module("Marker", {
             setup: function() {
@@ -35,7 +39,8 @@
 
                 marker = new Marker();
                 marker.addTo(layer);
-            }
+            },
+            teardown: destroyMarker
         });
 
         test("addTo calls update on layer", function() {
@@ -148,13 +153,13 @@
             ok(!marker.tooltip);
         });
 
-        test("dispose calls hide", function() {
+        test("destroy calls hide", function() {
             marker.hide = function() { ok(true); };
-            marker.dispose();
+            marker.destroy();
         });
 
-        test("dispose clears layer reference", function() {
-            marker.dispose();
+        test("destroy clears layer reference", function() {
+            marker.destroy();
             ok(!marker.layer);
         });
 
@@ -344,9 +349,9 @@
             layer.update(marker);
         });
 
-        test("remove disposes marker", function() {
+        test("remove destroys marker", function() {
             var marker = layer.add({ location: [50, 10] });
-            marker.dispose = function() { ok(true); };
+            marker.destroy = function() { ok(true); };
 
             layer.remove(marker);
         });
@@ -358,9 +363,9 @@
             ok(!dataviz.inArray(marker, layer.items));
         });
 
-        test("clear disposes all markers", 2, function() {
+        test("clear destroys all markers", 2, function() {
             layer.add([{}, {}]);
-            layer.items[0].dispose = layer.items[1].dispose =
+            layer.items[0].destroy = layer.items[1].destroy =
                 function() { ok(true); };
 
             layer.clear();
@@ -379,19 +384,19 @@
             layer.reset();
         });
 
-        test("dispose clears markers", function() {
+        test("destroy clears markers", function() {
             layer.clear = function() { ok(true); };
-            layer.dispose();
+            layer.destroy();
         });
 
-        test("dispose detaches handlers", function() {
+        test("destroy detaches handlers", function() {
             map.unbind = function(name, handler) {
                 if (name === "reset") {
                     equal(handler, layer.reset);
                 }
             };
 
-            layer.dispose();
+            layer.destroy();
         });
     })();
 })();

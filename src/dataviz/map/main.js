@@ -126,6 +126,11 @@ kendo_module({
 
         destroy: function() {
             this.scroller.destroy();
+
+            if (this.navigator) {
+                this.navigator.destroy();
+            }
+
             Widget.fn.destroy.call(this);
         },
 

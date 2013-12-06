@@ -6,11 +6,21 @@
 
 
     function createAttribution(options) {
-        options = options || {};
+        destroyAttribution();
 
-        attr = $("<div>").kendoAttribution(options).data("kendoAttribution");
+        options = options || {};
+        attr = $("<div></div>").appendTo(QUnit.fixture)
+               .kendoAttribution(options).data("kendoAttribution");
 
         attr._zoom = 2;
+    }
+
+    function destroyAttribution() {
+        if (attr) {
+            attr.destroy();
+            attr.element.remove();
+            attr = null;
+        }
     }
 
     // ------------------------------------------------------------
@@ -18,9 +28,7 @@
         setup: function() {
             createAttribution();
         },
-        teardown: function() {
-            $(".k-attribution").remove();
-        }
+        teardown: destroyAttribution
     });
 
     test("adds css classes to wrapper", function() {

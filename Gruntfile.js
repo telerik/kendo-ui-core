@@ -214,7 +214,6 @@ module.exports = function(grunt) {
                         { pattern: 'src/kendo.aspnetmvc.js', included: false }, // download builder needs this
 
                         'download-builder/scripts/script-resolver.js',
-                        { pattern: 'download-builder/config/kendo-config.json', included: false },
                         'tests/diagram/common.js'
                     ].concat(tests),
 

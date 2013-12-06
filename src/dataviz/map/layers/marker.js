@@ -30,7 +30,7 @@
             map.bind("reset", this.reset);
         },
 
-        dispose: function() {
+        destroy: function() {
             this.map.unbind("reset", this.reset);
             this.clear();
         },
@@ -57,7 +57,7 @@
         },
 
         remove: function(marker) {
-            marker.dispose();
+            marker.destroy();
 
             var index = indexOf(marker, this.items);
             if (index > -1) {
@@ -67,7 +67,7 @@
 
         clear: function() {
             for (var i = 0; i < this.items.length; i++) {
-                this.items[i].dispose();
+                this.items[i].destroy();
             }
 
             this.items = [];
@@ -134,7 +134,7 @@
             }
         },
 
-        dispose: function() {
+        destroy: function() {
             this.layer = null;
             this.hide();
         },

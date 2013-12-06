@@ -8,14 +8,19 @@
 
     var map;
     function createMap(options) {
+        destroyMap();
+
         var element = $("<div style='width: 512px; height: 512px;'></div>").appendTo($("#qunit-fixture"));
         map = new kendo.dataviz.ui.Map(element, options);
         return map;
     }
 
     function destroyMap() {
-        map.destroy();
-        map.element.remove();
+        if (map) {
+            map.destroy();
+            map.element.remove();
+            map = null;
+        }
     }
 
     (function() {
