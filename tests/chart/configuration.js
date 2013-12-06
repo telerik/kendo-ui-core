@@ -1140,7 +1140,7 @@
     });
 
     test("picks width from container", function() {
-        equal(chart._model.options.width, chart.element.width());
+        ok(chart._model.options.width > chart.element.width());
     });
 
     test("picks height from container", function() {
