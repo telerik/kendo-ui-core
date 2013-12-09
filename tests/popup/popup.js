@@ -9,13 +9,12 @@
         setup: function() {
             kendo.effects.disable();
             div = $("<div style='background:red'>popup</div>");
-            anchor = $("<div style='background:blue'>anchor</div>").appendTo(QUnit.fixture);
+            anchor = $("<div style='background:blue;position:absolute;left:100px;top:100px;'>anchor</div>").appendTo(QUnit.fixture);
         },
         teardown: function() {
             if (popup) {
                 popup.destroy();
             }
-            kendo.destroy(QUnit.fixture);
             div.add(anchor).remove();
             kendo.effects.enable();
         }
