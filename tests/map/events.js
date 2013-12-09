@@ -25,10 +25,27 @@
         }
     }
 
+    function touchZoom() {
+        var element = map.scrollElement;
+        press(element, 100, 100, 1);
+        press(element, 110, 110, 2);
+        move(element, 200, 200, 2);
+        release(element, 200, 200, 2);
+        release(element, 100, 100, 1);
+    }
+
     // ------------------------------------------------------------
     module("Map / Events / zoomStart", {
         setup: createMap,
         teardown: destroyMap
+    });
+
+    test("triggered for mousewheel", function() {
+        map.bind("zoomStart", function(e) {
+            ok(true);
+        });
+
+        mousewheel(map.element, -1);
     });
 
     test("cancellable (mousewheel)", function() {
@@ -37,12 +54,27 @@
             e.preventDefault();
         });
 
-        map._mousewheel({
-            preventDefault: $.noop,
-            originalEvent: {
-                detail: -3
-            }
+        mousewheel(map.element, -1);
+
+        equal(map.zoom(), 1);
+    });
+
+    test("triggered for touch", function() {
+        map.zoom(1);
+        map.bind("zoomStart", function(e) {
+            ok(true);
         });
+
+        touchZoom();
+    });
+
+    test("cancellable (touch)", function() {
+        map.zoom(1);
+        map.bind("zoomStart", function(e) {
+            e.preventDefault();
+        });
+
+        touchZoom();
 
         equal(map.zoom(), 1);
     });

@@ -337,6 +337,7 @@ kendo_module({
 
             scroller.bind("scroll", proxy(this._scroll, this));
             scroller.bind("scrollEnd", proxy(this._scrollEnd, this));
+            scroller.userEvents.bind("gesturestart", proxy(this._scaleStart, this));
             scroller.userEvents.bind("gestureend", proxy(this._scale, this));
 
             this.scrollElement = scroller.scrollElement;
@@ -387,6 +388,15 @@ kendo_module({
             });
         },
 
+        _scaleStart: function(e) {
+            if (this.trigger("zoomStart", { originalEvent: e })) {
+                var touch = e.touches[1];
+                if (touch) {
+                    touch.cancel();
+                }
+            }
+        },
+
         _scale: function(e) {
             var scale = this.scroller.movable.scale;
             var zoom = this._scaleToZoom(scale);
@@ -396,6 +406,7 @@ kendo_module({
             var originPoint = centerPoint.subtract(gestureCenter);
 
             this._zoomAround(originPoint, zoom);
+            this.trigger("zoomEnd", { originalEvent: e });
         },
 
         _scaleToZoom: function(scaleDelta) {
