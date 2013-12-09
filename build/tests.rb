@@ -17,7 +17,7 @@ namespace :tests do
         file output => [MIN_JS, MIN_CSS, KENDO_CONFIG_FILE, tests].flatten do |t|
             sh <<-SH
               if which xvfb-run >/dev/null; then
-                xvfb-run -e /dev/stdout #{cmd}
+                xvfb-run -a -e /dev/stdout #{cmd}
               else
                 #{cmd}
               fi
