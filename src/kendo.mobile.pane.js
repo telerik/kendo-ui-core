@@ -150,8 +150,7 @@ kendo_module({
 
         destroy: function() {
             Widget.fn.destroy.call(this);
-
-            kendo.destroy(this.element);
+            this.viewEngine.destroy();
         },
 
         navigate: function(url, transition) {

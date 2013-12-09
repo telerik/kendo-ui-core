@@ -472,7 +472,7 @@
             }
 
             // Handle console logging
-            logMock( mockHandler, requestSettings );
+            // logMock( mockHandler, requestSettings );
 
 
             if ( requestSettings.dataType === "jsonp" ) {

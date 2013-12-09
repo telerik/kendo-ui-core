@@ -218,6 +218,10 @@ kendo_module({
             that.ul.off(ns);
             that.list.off(ns);
 
+            if (that._touchScroller) {
+                that._touchScroller.destroy();
+            }
+
             that.popup.destroy();
 
             if (that._form) {

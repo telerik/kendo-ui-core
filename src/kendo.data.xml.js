@@ -1,3 +1,4 @@
+/*jshint  eqnull: true, boss: true */
 kendo_module({
     id: "data.xml",
     name: "XML",

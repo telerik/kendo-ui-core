@@ -755,6 +755,9 @@ kendo_module({
         }
     });
 
+    fx.animatedPromise = fx.promise;
+    fx.animatedTransitionPromise = fx.transitionPromise;
+
     var Effect = kendo.Class.extend({
         init: function(element, direction) {
             var that = this;

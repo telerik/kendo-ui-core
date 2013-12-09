@@ -46,8 +46,7 @@
         cssPropertyFrom = function(cssClass, property) {
             var dummy = $("<div class='" + cssClass + "' />"), result;
 
-            dummy.css("display", "none")
-                .appendTo(context.document.body),
+            dummy.css("display", "none").appendTo(context.document.body);
 
             result = dummy.css(property);
 

@@ -1,7 +1,11 @@
+function uploadRemoveEvent(params) {
+    var createUpload = params.createUpload;
+    var simulateUpload = params.simulateUpload;
+    var simulateRemove = params.simulateRemove;
 
     test("remove fired when clicking remove", function() {
         var removeFired = false;
-        uploadInstance = createUpload({ remove:
+        var uploadInstance = createUpload({ remove:
             function(e) {
                 removeFired = true;
             }
@@ -15,7 +19,7 @@
 
     test("remove event arguments contain list of files", function() {
         var files = false;
-        uploadInstance = createUpload({ remove:
+        var uploadInstance = createUpload({ remove:
             function(e) {
                 files = e.files;
             }
@@ -28,7 +32,7 @@
     });
 
     test("user data set in remove event is sent to server", 1, function() {
-        uploadInstance = createUpload({ remove:
+        var uploadInstance = createUpload({ remove:
             function(e) {
                 e.data = { id: 1 };
             }
@@ -49,7 +53,7 @@
     });
 
     test("remove HTTP verb can be changed", 1, function() {
-        uploadInstance = createUpload();
+        var uploadInstance = createUpload();
         uploadInstance.options.async.removeVerb = "DELETE";
 
         simulateUpload();
@@ -67,7 +71,7 @@
     });
 
     test("remove field is fileNames", 1, function() {
-        uploadInstance = createUpload();
+        var uploadInstance = createUpload();
 
         simulateUpload();
 
@@ -84,7 +88,7 @@
     });
 
     test("remove field can be changed", 1, function() {
-        uploadInstance = createUpload();
+        var uploadInstance = createUpload();
         uploadInstance.options.async.removeField = "fileNames[]";
 
         simulateUpload();
@@ -102,7 +106,7 @@
     });
 
     test("cancelling remove aborts remove operation", function() {
-        uploadInstance = createUpload({ remove:
+        var uploadInstance = createUpload({ remove:
             function(e) {
                 e.preventDefault();
             }
@@ -125,7 +129,7 @@
     //Remove tests for initial files
     test("remove is fired when clicking remove on initially rendered file", function(){
         var removeFired = false;
-        uploadInstance = createUpload({
+        var uploadInstance = createUpload({
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ], 
@@ -141,7 +145,7 @@
 
     test("remove event arguments contain list of files when removing initially rendered file", function() {
         var files = false;
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -156,7 +160,7 @@
     });
 
     test("remove HTTP verb can be changed when removing initially rendered file", 1, function() {
-        uploadInstance = createUpload({
+        var uploadInstance = createUpload({
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ]
@@ -176,7 +180,7 @@
     });
 
     test("remove field is fileNames for initially rendered files", 1, function() {
-        uploadInstance = createUpload({
+        var uploadInstance = createUpload({
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ]
@@ -195,7 +199,7 @@
     });
 
     test("remove field can be changed for initially rendered files", 1, function() {
-        uploadInstance = createUpload({
+        var uploadInstance = createUpload({
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ]
@@ -215,7 +219,7 @@
     });
 
     test("cancelling remove aborts remove operation for initially rendered files", function() {
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -233,3 +237,4 @@
 
         ok(!removeCalled);
     });
+}

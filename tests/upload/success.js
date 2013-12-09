@@ -1,7 +1,15 @@
+function uploadSuccess(params) {
+    var createUpload = params.createUpload;
+    var simulateUpload = params.simulateUpload;
+    var simulateUploadWithResponse = params.simulateUploadWithResponse;
+    var validJSON = params.validJSON;
+    var simulateRemove = params.simulateRemove;
+    var simulateRemoveWithResponse = params.simulateRemoveWithResponse;
+
     // -----------------------------------------------------------------------------------
     // -----------------------------------------------------------------------------------
     test("success is fired when upload action succeeds", 1, function() {
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function() {
                 ok(true);
             }
@@ -11,7 +19,7 @@
     });
 
     test("success is fired when the upload action returns empty response", 1, function() {
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 ok(true);
             }
@@ -23,7 +31,7 @@
     test("success is fired on a subsequent upload after cancelling the upload event", function() {
         var successFired = false,
             shouldPreventUpload = true;
-        uploadInstance = createUpload({
+        var uploadInstance = createUpload({
             onUpload: function(e) {
                 if (shouldPreventUpload) {
                     e.preventDefault();
@@ -43,7 +51,7 @@
 
     test("success event arguments contain upload operation name", function() {
         var operation;
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 operation = e.operation;
             }
@@ -56,7 +64,7 @@
 
     test("success event arguments contain list of uploaded files", function() {
         var files = null;
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 files = e.files;
             }
@@ -69,7 +77,7 @@
 
     test("success event arguments contain server response", function() {
         var response = null;
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 response = e.response;
             }
@@ -82,7 +90,7 @@
 
     test("success event arguments contain original XHR", function() {
         var xhr = null;
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 xhr = e.XMLHttpRequest;
             }
@@ -95,7 +103,7 @@
 
     test("success event arguments contains XHR object with responseText", function() {
         var xhr = null;
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 xhr = e.XMLHttpRequest;
             }
@@ -108,7 +116,7 @@
 
     test("success event arguments contains XHR object with status", function() {
         var xhr = null;
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 xhr = e.XMLHttpRequest;
             }
@@ -121,7 +129,7 @@
 
     test("success event arguments contains XHR object with statusText", function() {
         var xhr = null;
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 xhr = e.XMLHttpRequest;
             }
@@ -136,7 +144,7 @@
     // -----------------------------------------------------------------------------------
     asyncTest("success is fired when remove action succeeds", function() {
         var successFired;
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 successFired = true;
             }
@@ -155,7 +163,7 @@
     test("success event arguments contain list of removed files", function() {
         stop(1);
 
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 assertSelectedFile(e.files);
                 start();
@@ -168,7 +176,7 @@
 
     asyncTest("success event arguments contain remove operation name", function() {
         var operation = null;
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 operation = e.operation;
             }
@@ -185,7 +193,7 @@
 
     asyncTest("success event arguments contain remove action response", function() {
         var data = null;
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 data = e.response;
             }
@@ -202,7 +210,7 @@
 
     asyncTest("success event arguments contain original XHR for remove action", function() {
         var xhr = null;
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 xhr = e.XMLHttpRequest;
             }
@@ -220,7 +228,7 @@
 
     asyncTest("success event arguments contain XHR with responseText for remove action", function() {
         var responseText;
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 responseText = e.XMLHttpRequest.responseText;
             }
@@ -237,7 +245,7 @@
 
     asyncTest("success event arguments contain XHR with status for remove action", function() {
         var status;
-        uploadInstance = createUpload({ success:
+        var uploadInstance = createUpload({ success:
             function(e) {
                 status = e.XMLHttpRequest.status;
             }
@@ -259,7 +267,7 @@
 
     asyncTest("success is fired when remove action succeeds for initially rendered files", function() {
         var successFired;
-        uploadInstance = createUpload({
+        var uploadInstance = createUpload({
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -280,7 +288,7 @@
     test("success event arguments contain list of removed files for initially rendered files", function() {
         stop(1);
 
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -295,7 +303,7 @@
 
     asyncTest("success event arguments contain remove operation name for initially rendered files", function() {
         var operation = null;
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -314,7 +322,7 @@
 
     asyncTest("success event arguments contain remove action response for initially rendered files", function() {
         var data = null;
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -333,7 +341,7 @@
 
     asyncTest("success event arguments contain original XHR for remove action for initially rendered files", function() {
         var xhr = null;
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -353,7 +361,7 @@
 
     asyncTest("success event arguments contain XHR with responseText for remove action for initially rendered files", function() {
         var responseText;
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -372,7 +380,7 @@
 
     asyncTest("success event arguments contain XHR with status for remove action for initially rendered files", function() {
         var status;
-        uploadInstance = createUpload({ 
+        var uploadInstance = createUpload({ 
             files: [
                 { name: "test.doc", size: 50, extension: ".doc"}
             ],
@@ -388,3 +396,4 @@
             start();
         }, 100);
     });
+}

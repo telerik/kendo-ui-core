@@ -16,8 +16,6 @@
         deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
-        Group = dataviz.Group,
-        Path = dataviz.Path,
         alignToPixel = dataviz.util.alignToPixel,
         append = dataviz.append,
         defined = dataviz.defined,

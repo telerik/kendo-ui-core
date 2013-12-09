@@ -1,3 +1,4 @@
+/* jshint eqnull: true */
 kendo_module({
     id: "editable",
     name: "Editable",
@@ -181,7 +182,7 @@ kendo_module({
                 editor = isCustomEditor ? field.editor : editors[type],
                 container = that.element.find("[" + kendo.attr("container-for") + "=" + fieldName.replace(nameSpecialCharRegExp, "\\$1")+ "]");
 
-            editor = editor ? editor : editors["string"];
+            editor = editor ? editor : editors.string;
 
             if (isCustomEditor && typeof field.editor === "string") {
                 editor = function(container) {
@@ -228,6 +229,10 @@ kendo_module({
             that.options.model.unbind("set", that._validateProxy);
 
             kendo.unbind(that.element);
+
+            if (that.validatable) {
+                that.validatable.destroy();
+            }
             kendo.destroy(that.element);
 
             that.element.removeData("kendoValidator");

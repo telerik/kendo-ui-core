@@ -1,0 +1,21 @@
+﻿<script>
+    window.triggers = 0;
+</script>
+
+<div id="div-with-script-child">
+    <script>
+        window.triggers++;
+    </script>
+</div>
+
+<div id="div-with-template">
+    <script id="kendo-template" type="text/x-kendo-template">
+        #: item.text #
+    </script>
+</div>
+
+<div id="div-with-script-with-type">
+    <script type="text/javascript">
+        window.triggers++;
+    </script>
+</div>

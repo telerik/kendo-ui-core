@@ -86,7 +86,7 @@ ViewStub.prototype = {
 
         return new kendo.dataviz.ViewElement(style);
     },
-    
+
     createCubicCurve: function (points, options, areaPoints) {
         this.log.cubicCurve.push({ points: points, options: options, areaPoints: areaPoints });
         return new kendo.dataviz.ViewElement(options);
@@ -171,15 +171,21 @@ function triggerEvent(eventName, element, offsetX, offsetY) {
 }
 
 function createChart(options) {
-    $("#container").kendoChart(options);
+    var div = $("<div id='container' />").appendTo(QUnit.fixture);
+    div.kendoChart(options);
 
-    return $("#container").data("kendoChart");
+    return div.data("kendoChart");
 }
 
-function destroyChart(element) {
-    var element = element || $("#container");
-    kendo.destroy(element);
-    element.unbind().empty();
+function destroyChart() {
+    kendo.destroy(QUnit.fixture);
+    QUnit.fixture.empty();
+    destroyMeasureBox();
+}
+
+function destroyMeasureBox() {
+    $(kendo.dataviz.measureText.measureBox).remove();
+    kendo.dataviz.measureText.measureBox = null;
 }
 
 function serializeFontCache() {

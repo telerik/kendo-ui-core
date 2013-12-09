@@ -1,3 +1,4 @@
+/*jshint eqnull: true */
 kendo_module({
     id: "treeview",
     name: "TreeView",
@@ -1377,13 +1378,25 @@ kendo_module({
                         }
                     }
                 } else {
-                    that.root = that.wrapper.html(that._renderGroup({
-                        items: items,
-                        group: {
-                            firstLevel: true,
-                            expanded: true
-                        }
-                    })).children("ul");
+
+                    var groupHtml = that._renderGroup({
+                            items: items,
+                            group: {
+                                firstLevel: true,
+                                expanded: true
+                            }
+                        });
+
+                    if (that.root.length) {
+                        var group = $(groupHtml);
+
+                        that.root
+                            .attr("class", group.attr("class"))
+                            .attr("role", group.attr("role"))
+                            .html(group.html());
+                    } else {
+                        that.root = that.wrapper.html(groupHtml).children("ul");
+                    }
                 }
             }
 
@@ -1671,8 +1684,7 @@ kendo_module({
             var dataItem = node, dataSource, uid;
 
             if (node instanceof window.jQuery || isDomElement(node)) {
-                dataSource = this._objectOrSelf(node).dataSource,
-
+                dataSource = this._objectOrSelf(node).dataSource;
                 uid = $(node).attr(kendo.attr("uid"));
                 dataItem = dataSource.getByUid(uid);
 

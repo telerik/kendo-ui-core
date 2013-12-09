@@ -55,7 +55,7 @@ kendo_module({
 
             $.extend(that, options);
 
-            that.applicationNativeScrolling = (mobile.application && mobile.application.options.useNativeScrolling);
+            that.applicationNativeScrolling = (mobile.application && mobile.application.options && mobile.application.options.useNativeScrolling);
 
             that._id();
             that._layout();
@@ -561,6 +561,14 @@ kendo_module({
                 that.bind(LOAD_START, function() { that.loader.show(); });
                 that.bind(LOAD_COMPLETE, function() { that.loader.hide(); });
                 that.bind(VIEW_SHOW, function() { that.loader.transitionDone(); });
+            }
+        },
+
+        destroy: function() {
+            kendo.destroy(this.container);
+
+            for (var id in this.layouts) {
+                this.layouts[id].destroy();
             }
         },
 

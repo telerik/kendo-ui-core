@@ -351,8 +351,8 @@ kendo_module({
                     var nextSegment = segments[i+1],
                         nextPercentage = (nextSegment ? nextSegment.percentage : percentage);
 
-                    points = segments[i].points = [],
-                    height = (options.dynamicHeight)? (totalHeight * percentage): (totalHeight / count),
+                    points = segments[i].points = [];
+                    height = (options.dynamicHeight)? (totalHeight * percentage): (totalHeight / count);
                     offset = (width - lastUpperSide* (nextPercentage / percentage))/2;
                     offset = limitValue(offset, 0, width);
 
@@ -372,9 +372,9 @@ kendo_module({
                     finalNarrow = (topMostWidth - neckRatio)/2;
 
                 for (i = 0; i < count; i++) {
-                    points = segments[i].points = [],
-                    percentage = segments[i].percentage,
-                    offset = (options.dynamicHeight)? (finalNarrow * percentage): (finalNarrow / count),
+                    points = segments[i].points = [];
+                    percentage = segments[i].percentage;
+                    offset = (options.dynamicHeight)? (finalNarrow * percentage): (finalNarrow / count);
                     height = (options.dynamicHeight)? (totalHeight * percentage): (totalHeight / count);
 
                     points.push(Point2D(box.x1+previousOffset, box.y1 + previousHeight));

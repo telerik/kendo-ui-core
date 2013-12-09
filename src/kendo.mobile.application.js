@@ -202,6 +202,11 @@ kendo_module({
             return that.options.skin;
         },
 
+        destroy: function() {
+            this.pane.destroy();
+            this.router.destroy();
+        },
+
         _setupPlatform: function() {
             var that = this,
                 platform = that.options.platform,

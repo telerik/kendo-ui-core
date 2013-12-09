@@ -159,10 +159,6 @@ kendo_module({
             }
         },
 
-        destroy: function() {
-            Widget.fn.destroy.call(this);
-        },
-
         options: {
             name: "TabStrip",
             selectedIndex: 0,

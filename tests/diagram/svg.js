@@ -3,7 +3,11 @@
 var diagram = window.kendo.diagram;
 
 /*-----------Marker tests------------------------------------*/
-QUnit.module("Marker tests");
+QUnit.module("Marker tests", {
+    setup: function() {
+        QUnit.fixture.html('<div id=canvas />');
+    }
+});
 
 test("Add/Remove/Clear Marker", function () {
     var root = GetRoot();
@@ -44,7 +48,11 @@ test("Add/Remove/Clear Marker", function () {
 });
 
 /*-----------Rectangle tests------------------------------------*/
-QUnit.module("Rectangle tests");
+QUnit.module("Rectangle tests", {
+    setup: function() {
+        QUnit.fixture.html('<div id=canvas />');
+    }
+});
 
 test("Add Rectangle", function () {
     var root = GetRoot();
@@ -66,7 +74,11 @@ test("Add Rectangle", function () {
 });
 
 /*-----------Circle tests------------------------------------*/
-QUnit.module("Circle tests");
+QUnit.module("Circle tests", {
+    setup: function() {
+        QUnit.fixture.html('<div id=canvas />');
+    }
+});
 
 test("Add Circle", function () {
     var root = GetRoot();
@@ -87,7 +99,11 @@ test("Add Circle", function () {
 });
 
 /*-----------Text tests------------------------------------*/
-QUnit.module("Text tests");
+QUnit.module("Text tests", {
+    setup: function() {
+        QUnit.fixture.html('<div id=canvas />');
+    }
+});
 
 test("Add Text", function () {
     var root = GetRoot();
@@ -109,7 +125,11 @@ test("Add Text", function () {
 });
 
 /*-----------Group tests------------------------------------*/
-QUnit.module("Group tests");
+QUnit.module("Group tests", {
+    setup: function() {
+        QUnit.fixture.html('<div id=canvas />');
+    }
+});
 
 test("Add group", function () {
     var root = GetRoot();
@@ -132,7 +152,11 @@ test("Add group", function () {
 });
 
 /*-----------Canvas tests------------------------------------*/
-QUnit.module("Canvas tests");
+QUnit.module("Canvas tests", {
+    setup: function() {
+        QUnit.fixture.html('<div id=canvas />');
+    }
+});
 
 test("Add Canvas", function () {
     var root = GetRoot();

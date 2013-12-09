@@ -1,3 +1,4 @@
+/*jshint loopfunc: true, evil: true, boss: true */
 (function($, undefined) {
     var kendo = window.kendo = window.kendo || { cultures: {} },
         extend = $.extend,
@@ -2103,8 +2104,21 @@ function pad(number, digits, end) {
             }
 
             return element;
+        },
+
+        disable: function() {
+            this.promise = this.promiseShim;
+            this.transitionPromise = this.transitionPromiseShim;
+        },
+
+        enable: function() {
+            this.promise = this.animatedPromise;
+            this.transitionPromise = this.animatedTransitionPromise;
         }
     });
+
+    effects.promiseShim = effects.promise;
+    effects.transitionPromiseShim = effects.transitionPromise;
 
     function prepareAnimationOptions(options, duration, reverse, complete) {
         if (typeof options === STRING) {
@@ -2685,23 +2699,32 @@ function pad(number, digits, end) {
         });
     };
 
+    function containmentComparer(a, b) {
+        return $.contains(a, b) ? -1 : 1;
+    }
+
+    function resizableWidget() {
+        var widget = $(this);
+        return ($.inArray(widget.attr("data-role"), ["slider", "rangeslider"]) > 0) || widget.is(":visible");
+    }
+
     kendo.resize = function(element) {
-        $(element).each(function() {
-            var child = $(this), widget;
+        var widgets = $(element).find("[data-" + kendo.ns + "role]").addBack().filter(resizableWidget);
 
-            if (!child.is(":visible") &&
-                $.inArray(child.attr("data-role"), ["slider", "rangeslider"]) === -1) {
-                return;
+        if (!widgets.length) {
+            return;
+        }
+
+        // sort widgets based on their parent-child relation
+        var widgetsArray = $.makeArray(widgets);
+        widgetsArray.sort(containmentComparer);
+
+        // resize widgets
+        $.each(widgetsArray, function () {
+            var widget = kendo.widgetInstance($(this));
+            if (widget) {
+                widget.resize();
             }
-
-            if (child.is("[data-" + kendo.ns + "role]")) {
-                widget = kendo.widgetInstance(child);
-                if (widget) {
-                    widget.resize();
-                }
-            }
-
-            kendo.resize(child.children());
         });
     };
 
@@ -2855,21 +2878,35 @@ function pad(number, digits, end) {
     };
 
     kendo.widgetInstance = function(element, suite) {
-        var role = element.data(kendo.ns + "role");
+        var role = element.data(kendo.ns + "role"),
+            widgets;
 
-        // HACK!!! mobile view scroller widgets are instantiated on data-role="content" elements. We need to discover them when resizing.
-        if (role === "content") {
-            role = "scroller";
-        }
+        if (role) {
+            // HACK!!! mobile view scroller widgets are instantiated on data-role="content" elements. We need to discover them when resizing.
+            if (role === "content") {
+                role = "scroller";
+            }
 
-        if (!suite) {
-            suite = { roles: $.extend({}, kendo.mobile.ui.roles, kendo.dataviz.ui.roles, kendo.ui.roles) };
-        }
+            if (suite) {
+                widgets = [ suite.roles[role] ];
+            }
+            else {
+                widgets = [ kendo.ui.roles[role], kendo.dataviz.ui.roles[role],  kendo.mobile.ui.roles[role] ];
+            }
 
-        var widget = suite.roles[role];
+            if (role.indexOf(".") >= 0) {
+                widgets = [ kendo.getter(role)(window) ];
+            }
 
-        if (widget) {
-            return element.data("kendo" + widget.fn.options.prefix + widget.fn.options.name);
+            for (var i = 0, length = widgets.length; i < length; i ++) {
+                var widget = widgets[i];
+                if (widget) {
+                    var instance = element.data("kendo" + widget.fn.options.prefix + widget.fn.options.name);
+                    if (instance) {
+                        return instance;
+                    }
+                }
+            }
         }
     };
 

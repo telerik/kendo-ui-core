@@ -60,7 +60,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>./run-all.sh &quot;http://kendobuild/staging/&quot; Framework,UIWidgets,DataViz,ThemeBuilder,Sushi,AeroViewr</command>
+      <command>./run-all.sh &quot;http://kendobuild/staging/&quot; Framework,UIWidgets,DataViz,ThemeBuilder,Sushi,AeroViewr,KendoCustom</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>

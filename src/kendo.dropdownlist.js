@@ -86,7 +86,7 @@ kendo_module({
             } else if (that.selectedIndex === -1) {
                 text = options.text || "";
                 if (!text) {
-                    optionLabel = options.optionLabel,
+                    optionLabel = options.optionLabel;
                     useOptionLabel = optionLabel && options.index === 0;
 
                     if (that._isSelect) {
@@ -654,13 +654,13 @@ kendo_module({
         },
 
         _clearSelection: function() {
-            var that = this,
-                optionLabel = that.options.optionLabel;
+            var that = this;
+            var optionLabel = that.options.optionLabel;
 
             that.options.value = "";
             that._selectedValue = "";
 
-            if (that.dataSource.view()[0] && optionLabel) {
+            if (that.dataSource.view()[0] && (optionLabel || that._userTriggered)) {
                 that.select(0);
                 return;
             }
@@ -668,7 +668,7 @@ kendo_module({
             that.selectedIndex = -1;
 
             that.element.val("");
-            that._textAccessor(optionLabel);
+            that._textAccessor(that.options.optionLabel);
         },
 
         _inputTemplate: function() {

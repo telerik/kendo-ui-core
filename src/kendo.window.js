@@ -117,7 +117,7 @@ kendo_module({
                 options.actions = [];
             }
 
-            that.appendTo = $($(options.appendTo)[0] || document.body);
+            that.appendTo = $(options.appendTo);
 
             that._animations();
 
@@ -295,6 +295,15 @@ kendo_module({
             var resizable = this.options.resizable;
             var wrapper = this.wrapper;
 
+            if (this.resizing) {
+                wrapper
+                    .off("dblclick" + NS)
+                    .children(KWINDOWRESIZEHANDLES).remove();
+
+                this.resizing.destroy();
+                this.resizing = null;
+            }
+
             if (resizable) {
                 wrapper.on("dblclick" + NS, KWINDOWTITLEBAR, proxy(function(e) {
                     if (!$(e.target).closest(".k-window-action").length) {
@@ -307,24 +316,18 @@ kendo_module({
                 });
 
                 this.resizing = new WindowResizing(this);
-            } else if (this.resizing) {
-                wrapper
-                    .off("dblclick" + NS)
-                    .children(KWINDOWRESIZEHANDLES).remove();
-
-                this.resizing.destroy();
-                this.resizing = null;
             }
         },
 
         _draggable: function() {
             var draggable = this.options.draggable;
 
-            if (draggable) {
-                this.dragging = new WindowDragging(this, draggable.dragHandle || KWINDOWTITLEBAR);
-            } else if (this.dragging) {
+            if (this.dragging) {
                 this.dragging.destroy();
                 this.dragging = null;
+            }
+            if (draggable) {
+                this.dragging = new WindowDragging(this, draggable.dragHandle || KWINDOWTITLEBAR);
             }
         },
 
@@ -376,7 +379,8 @@ kendo_module({
             content: null,
             visible: null,
             height: null,
-            width: null
+            width: null,
+            appendTo: "body"
         },
 
         _closable: function() {
