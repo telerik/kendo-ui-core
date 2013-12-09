@@ -238,6 +238,20 @@ test("press enter should call preventDefault when popup is visible", 1, function
     });
 });
 
+test("press enter accepts user value before the filtration has been completed", 1, function() {
+    var input = combobox.input;
+
+    input.focus().val("12");
+    combobox._search();
+
+    input.trigger({
+        type: "keydown",
+        keyCode: keys.ENTER
+    });
+
+    equal(combobox.value(), "12");
+});
+
 test("press esc should close popup when no change in selection", 1, function() {
     combobox.popup.bind("close", function(){
         ok(true);

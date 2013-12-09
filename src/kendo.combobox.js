@@ -696,6 +696,7 @@ kendo_module({
                     that._prev = value;
                     that.search(value);
                 }
+                that._typing = null;
             }, that.options.delay);
         },
 
