@@ -26,6 +26,7 @@
        "karma-html2js-preprocessor": "~0.1",
        "karma-qunit": "*",
        "karma-junit-reporter": "0.2.1",
-       "karma-osx-reporter": "0.0.4"
+       "karma-osx-reporter": "0.0.4",
+       "karma-ie-launcher": "~0.1"
    }
 }
