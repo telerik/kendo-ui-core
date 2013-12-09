@@ -27,6 +27,33 @@ namespace Kendo.Mvc.UI
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the ticks step.
+        /// </summary>
+        public double? Step
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the ticks skip.
+        /// </summary>
+        public double? Skip
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the ticks color.
+        /// </summary>
+        public string Color
+        {
+            get;
+            set;
+        }
+
         public IChartSerializer CreateSerializer()
         {
             return new ChartAxisTicksSerializer(this);
