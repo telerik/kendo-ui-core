@@ -432,17 +432,24 @@ kendo_module({
 
             scroller.movable.round = true;
 
-            x.makeVirtual();
-            y.makeVirtual();
-
             var xBounds = { min: -topLeft.x, max: scale - topLeft.x };
+            var yBounds = { min: -topLeft.y, max: scale - topLeft.y };
+
             if (this.options.wraparound) {
                 xBounds.min = -maxScale;
                 xBounds.max = maxScale;
             }
-            x.virtualSize(xBounds.min, xBounds.max);
 
-            var yBounds = { min: -topLeft.y, max: scale - topLeft.y };
+            if (this.options.pannable === false) {
+                var viewSize = this.viewSize();
+                xBounds.min = yBounds.min = 0;
+                xBounds.max = viewSize.width;
+                yBounds.max = viewSize.height;
+            }
+
+            x.makeVirtual();
+            y.makeVirtual();
+            x.virtualSize(xBounds.min, xBounds.max);
             y.virtualSize(yBounds.min, yBounds.max);
 
             this._virtualSize = { x: xBounds, y: yBounds };
