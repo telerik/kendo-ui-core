@@ -381,13 +381,22 @@ kendo_module({
                 var that = this,
                     list = that.list,
                     visible = that.popup.visible(),
-                    height = that.options.height;
+                    height = that.options.height,
+                    header = that.header,
+                    popups;
 
-                list = list.add(list.parent(".k-animation-container")).show()
-                           .height(that.ul[0].scrollHeight > height ? height : "auto");
+                popups = list.add(list.parent(".k-animation-container")).show();
+
+                height = that.ul[0].scrollHeight > height ? height : "auto";
+
+                popups.height(height);
+
+                if (header) {
+                    that.ul.height(height == "auto" ? height : list.height() - header.height());
+                }
 
                 if (!visible) {
-                    list.hide();
+                    popups.hide();
                 }
             }
         },
