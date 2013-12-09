@@ -327,11 +327,12 @@ kendo_module({
 
         _initScroller: function() {
             var friction = kendo.support.mobileOS ? FRICTION_MOBILE : FRICTION;
+            var zoomable = this.options.zoomable !== false;
             var scroller = this.scroller = new kendo.mobile.ui.Scroller(
                 this.element.children(0), {
                     friction: friction,
                     velocityMultiplier: VELOCITY_MULTIPLIER,
-                    zoom: true
+                    zoom: zoomable
                 });
 
             scroller.bind("scroll", proxy(this._scroll, this));
@@ -492,7 +493,7 @@ kendo_module({
             var fromZoom = this.zoom();
             var toZoom = limit(fromZoom + delta, options.minZoom, options.maxZoom);
 
-            if (toZoom !== fromZoom) {
+            if (options.zoomable !== false && toZoom !== fromZoom) {
                 if (!this.trigger("zoomStart", { originalEvent: e })) {
                     var cursor = this.eventOffset(e);
                     var location = this.viewToLocation(cursor);

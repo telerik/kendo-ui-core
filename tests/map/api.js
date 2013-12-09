@@ -295,9 +295,20 @@
         deepEqual(map._virtualSize, { x: { min: 0, max: 512 }, y: { min: 0, max: 512 } });
     });
 
-    test("setOptions re-enables scroller", function() {
-        createMap({ pannable: false });
-        map.setOptions({ pannable: true });
-        ok(map.scroller.enabled);
+    // ------------------------------------------------------------
+    module("Map / zoomable", {
+        setup: createMap,
+        teardown: destroyMap
+    });
+
+    test("setting to false disables mousewheel zooming", function() {
+        createMap({ zoom: 1, zoomable: false });
+        map._mousewheel({ preventDefault: $.noop, originalEvent: { detail: -3 } });
+        equal(map.zoom(), 1);
+    });
+
+    test("setting to false disables touch zooming", function() {
+        createMap({ zoom: 1, zoomable: false });
+        ok(!map.scroller.userEvents.multiTouch);
     });
 })();
