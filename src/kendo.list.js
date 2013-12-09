@@ -829,6 +829,10 @@ kendo_module({
                     e.preventDefault();
                 }
 
+                if (that._typing) {
+                    current = null;
+                }
+
                 that._accept(current);
                 pressed = true;
             } else if (key === keys.ESC) {
