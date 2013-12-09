@@ -486,15 +486,15 @@ kendo_module({
             var toZoom = limit(fromZoom + delta, options.minZoom, options.maxZoom);
 
             if (toZoom !== fromZoom) {
-                this.trigger("zoomStart", { originalEvent: e });
+                if (!this.trigger("zoomStart", { originalEvent: e })) {
+                    var cursor = this.eventOffset(e);
+                    var location = this.viewToLocation(cursor);
+                    var postZoom = this.locationToLayer(location, toZoom);
+                    var origin = postZoom.subtract(cursor);
+                    this._zoomAround(origin, toZoom);
 
-                var cursor = this.eventOffset(e);
-                var location = this.viewToLocation(cursor);
-                var postZoom = this.locationToLayer(location, toZoom);
-                var origin = postZoom.subtract(cursor);
-                this._zoomAround(origin, toZoom);
-
-                this.trigger("zoomEnd", { originalEvent: e });
+                    this.trigger("zoomEnd", { originalEvent: e });
+                }
             }
         }
     });
