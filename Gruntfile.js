@@ -40,8 +40,13 @@ module.exports = function(grunt) {
                     reportSlowerThan: 500,
                     basePath: '',
                     frameworks: ['qunit'],
+                    preprocessors: {
+                        'tests/**/.html': [],
+                        'tests/**/*-fixture.html': ['html2js'],
+                    },
                     files: [
                         { pattern: 'styles/**/*.*', watched: true, included: false },
+                        { pattern: 'tests/router/sandbox.html', watched: true, included: false },
                         { pattern: 'tests/editor/editorStyles.css', included: false },
                         { pattern: 'tests/**/*-fixture.html' },
                         jquery,

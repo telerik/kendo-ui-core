@@ -1,36 +1,28 @@
 (function() {
-    var iFrameContents = '<html><head> \
-        <script src="/base/src/jquery.js"></script> \
-        <script src="/base/src/kendo.core.js"></script> \
-        <script src="/base/src/kendo.router.js"></script> \
-        </head><body></body></html>';
-
     var win,
         kendoHistory,
         _history,
         initial,
         win,
         loc,
-        pushStateSupported = kendo.support.pushState,
-        root = location.pathname;
+        root,
+        pushStateSupported = kendo.support.pushState;
 
     module("History", {
         setup: function() {
             location.hash = "";
             QUnit.stop();
-            QUnit.fixture.html('<iframe></iframe>');
+            QUnit.fixture.html('<iframe src="/base/tests/router/sandbox.html"></iframe>');
             win = window.frames[0].window;
-            win.document.open();
-            win.document.write(iFrameContents)
 
             $(win).one('load', function() {
-                loc = win.location,
-                initial = loc.href.replace(/#.*$/, ''),
-                kendoHistory = win.kendo.history,
+                loc = win.location;
+                root = loc.pathname;
+                initial = loc.href.replace(/#.*$/, '');
+                kendoHistory = win.kendo.history;
                 _history = win.history;
                 QUnit.start();
             });
-            win.document.close();
         },
 
         teardown: function() {
