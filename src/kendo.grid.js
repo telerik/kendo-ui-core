@@ -469,6 +469,24 @@ var __meta__ = {
         });
     }
 
+    function staticColumns(columns) {
+        return grep(columns, function(column) {
+            return column.static;
+        });
+    }
+
+    function nonStaticColumns(columns) {
+        return grep(columns, function(column) {
+            return !column.static;
+        });
+    }
+
+    function visibleNonStaticColumns(columns) {
+        return grep(columns, function(column) {
+            return !column.static && !column.hidden;
+        });
+    }
+
     function addHiddenStyle(attr) {
         attr = attr || {};
         var style = attr.style;
@@ -2515,6 +2533,7 @@ var __meta__ = {
                     header = $('<div class="k-grid-header" />').insertBefore(that.table);
                 }
 
+
                 // workaround for IE issue where scroll is not raised if container is same width as the scrollbar
                 header.css((isRtl ? "padding-left" : "padding-right"), scrollable.virtual ? scrollbar + 1 : scrollbar);
                 table = $('<table role="grid" />');
@@ -2523,6 +2542,8 @@ var __meta__ = {
                 }
                 table.append(that.thead);
                 header.empty().append($('<div class="k-grid-header-wrap" />').append(table));
+
+                that._appendStaticColumnHeader(header);
 
                 that.content = that.table.parent();
 
@@ -3044,11 +3065,11 @@ var __meta__ = {
             return group ? group.length : 0;
         },
 
-        _tmpl: function(rowTemplate, alt) {
+        _tmpl: function(rowTemplate, columns, alt) {
             var that = this,
                 settings = extend({}, kendo.Template, that.options.templateSettings),
                 idx,
-                length = that.columns.length,
+                length = columns.length,
                 template,
                 state = { storage: {}, count: 0 },
                 column,
@@ -3087,7 +3108,7 @@ var __meta__ = {
                 }
 
                 for (idx = 0; idx < length; idx++) {
-                    column = that.columns[idx];
+                    column = columns[idx];
                     template = column.template;
                     type = typeof template;
 
@@ -3193,8 +3214,8 @@ var __meta__ = {
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 aggregates = dataSource.aggregate();
 
-            that.rowTemplate = that._tmpl(options.rowTemplate);
-            that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, true);
+            that.rowTemplate = that._tmpl(options.rowTemplate, that.columns);
+            that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, that.columns, true);
 
             if (that._hasDetails()) {
                 that.detailTemplate = that._detailTmpl(options.detailTemplate || "");
@@ -3383,6 +3404,60 @@ var __meta__ = {
             $(tr).find('> td .k-minus, > td .k-i-collapse').click();
         },
 
+        _createHeaderCells: function(columns) {
+            var that = this,
+                idx,
+                th,
+                text,
+                html = "";
+                length;
+
+            for (idx = 0, length = columns.length; idx < length; idx++) {
+                th = columns[idx];
+                text = that._headerCellText(th);
+
+                if (!th.command) {
+                    html += "<th role='columnheader' " + kendo.attr("field") + "='" + (th.field || "") + "' ";
+                    if (th.title) {
+                        html += kendo.attr("title") + '="' + th.title.replace(/'/g, "\'") + '" ';
+                    }
+
+                    if (th.groupable !== undefined) {
+                        html += kendo.attr("groupable") + "='" + th.groupable + "' ";
+                    }
+
+                    if (th.aggregates) {
+                        html += kendo.attr("aggregates") + "='" + th.aggregates + "'";
+                    }
+
+                    html += stringifyAttributes(th.headerAttributes);
+
+                    html += ">" + text + "</th>";
+                } else {
+                    html += "<th" + stringifyAttributes(th.headerAttributes) + ">" + text + "</th>";
+                }
+            }
+            return html;
+        },
+
+        _appendStaticColumnHeader: function(container) {
+            var columns = staticColumns(this.columns),
+                table,
+                html;
+
+            if (columns.length) {
+                html = '<div class="k-grid-header-static"><table><thead><tr>';
+                html += this._createHeaderCells(columns);
+                html += '</tr></thead></table></div>';
+
+                table = $(html);
+
+                normalizeCols(table, columns, this._hasDetails(), this._groups());
+
+                table.prependTo(container);
+            }
+        },
+
         _thead: function() {
             var that = this,
                 columns = that.columns,
@@ -3412,32 +3487,7 @@ var __meta__ = {
                 if (hasDetails) {
                     html += '<th class="k-hierarchy-cell">&nbsp;</th>';
                 }
-
-                for (idx = 0, length = columns.length; idx < length; idx++) {
-                    th = columns[idx];
-                    text = that._headerCellText(th);
-
-                    if (!th.command) {
-                        html += "<th role='columnheader' " + kendo.attr("field") + "='" + (th.field || "") + "' ";
-                        if (th.title) {
-                            html += kendo.attr("title") + '="' + th.title.replace(/'/g, "\'") + '" ';
-                        }
-
-                        if (th.groupable !== undefined) {
-                            html += kendo.attr("groupable") + "='" + th.groupable + "' ";
-                        }
-
-                        if (th.aggregates) {
-                            html += kendo.attr("aggregates") + "='" + th.aggregates + "'";
-                        }
-
-                        html += stringifyAttributes(th.headerAttributes);
-
-                        html += ">" + text + "</th>";
-                    } else {
-                        html += "<th" + stringifyAttributes(th.headerAttributes) + ">" + text + "</th>";
-                    }
-                }
+                html += that._createHeaderCells(nonStaticColumns(that.columns));
 
                 tr.html(html);
             } else if (hasDetails && !tr.find(".k-hierarchy-cell")[0]) {
@@ -3488,7 +3538,7 @@ var __meta__ = {
         _appendCols: function(table) {
             var that = this;
 
-            normalizeCols(table, visibleColumns(that.columns), that._hasDetails(), that._groups());
+            normalizeCols(table, visibleNonStaticColumns(that.columns), that._hasDetails(), that._groups());
         },
 
         _autoColumns: function(schema) {
