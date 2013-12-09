@@ -77,9 +77,6 @@
             font-size: 1.2em;
             margin-bottom: 10px;
         }
-        #customers-list {
-            padding-bottom: 26px;
-        }
 
         #customers-list .k-item > span{
             -webkit-box-sizing: border-box;

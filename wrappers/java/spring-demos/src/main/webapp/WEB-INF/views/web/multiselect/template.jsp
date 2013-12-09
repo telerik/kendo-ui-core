@@ -90,9 +90,6 @@
             margin-right: 5px;
             vertical-align: top;
         }
-        #customers-list {
-            padding-bottom: 26px;
-        }
 
         #customers-list .k-item > span{
             -webkit-box-sizing: border-box;
