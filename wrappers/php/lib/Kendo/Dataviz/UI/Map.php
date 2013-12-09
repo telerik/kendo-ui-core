@@ -92,6 +92,15 @@ Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features)
     }
 
     /**
+    * Controls whether the user can pan the map.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\Map
+    */
+    public function pannable($value) {
+        return $this->setProperty('pannable', $value);
+    }
+
+    /**
     * Specifies whether the map should wrap around the east-west edges.
     * @param boolean $value
     * @return \Kendo\Dataviz\UI\Map
@@ -107,6 +116,15 @@ Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features)
     */
     public function zoom($value) {
         return $this->setProperty('zoom', $value);
+    }
+
+    /**
+    * Controls whether the map zoom level can be changed by the user.
+    * @param boolean $value
+    * @return \Kendo\Dataviz\UI\Map
+    */
+    public function zoomable($value) {
+        return $this->setProperty('zoomable', $value);
     }
 
     /**
@@ -240,6 +258,7 @@ This typically occurs on initial load and after a zoom/center change.
     /**
     * Sets the zoomStart event of the Map.
     * Fired when the map zoom level is about to change.
+Cancelling the event will prevent the user action.
     * @param string|\Kendo\JavaScriptFunction $value Can be a JavaScript function definition or name.
     * @return \Kendo\Dataviz\UI\Map
     */

@@ -118,6 +118,7 @@ namespace Kendo.Mvc.UI.Fluent
         
         /// <summary>
         /// Fired when the map zoom level is about to change.
+		/// Cancelling the event will prevent the user action.
         /// </summary>
         /// <param name="handler">The name of the JavaScript function that will handle the zoomStart event.</param>
         public MapEventBuilder ZoomStart(string handler)

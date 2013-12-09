@@ -145,6 +145,14 @@ public class MapTag extends WidgetTag /* interfaces *//* interfaces */ {
         setProperty("minZoom", value);
     }
 
+    public boolean getPannable() {
+        return (boolean)getProperty("pannable");
+    }
+
+    public void setPannable(boolean value) {
+        setProperty("pannable", value);
+    }
+
     public boolean getWraparound() {
         return (boolean)getProperty("wraparound");
     }
@@ -159,6 +167,14 @@ public class MapTag extends WidgetTag /* interfaces *//* interfaces */ {
 
     public void setZoom(float value) {
         setProperty("zoom", value);
+    }
+
+    public boolean getZoomable() {
+        return (boolean)getProperty("zoomable");
+    }
+
+    public void setZoomable(boolean value) {
+        setProperty("zoomable", value);
     }
 
     public String getClick() {
