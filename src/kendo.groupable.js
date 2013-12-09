@@ -190,10 +190,15 @@ kendo_module({
 
             Widget.fn.destroy.call(that);
 
-            that.groupContainer
-                .off(NS)
-                .kendoDropTarget("destroy")
-                .kendoDraggable("destroy");
+            that.groupContainer.off(NS);
+
+            if (that.groupContainer.data("kendoDropTarget")) {
+                that.groupContainer.data("kendoDropTarget").destroy();
+            }
+
+            if (that.groupContainer.data("kendoDraggable")) {
+                that.groupContainer.data("kendoDraggable").destroy();
+            }
 
             if (!that.options.draggable) {
                 that.draggable.destroy();

@@ -893,6 +893,7 @@ kendo_module({
                 .end();
 
             that._drag.draggable.destroy();
+            that._drag._removeTooltip(true);
         }
     });
 

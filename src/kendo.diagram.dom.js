@@ -1117,6 +1117,12 @@ kendo_module({
             // TODO: Destroy all the shapes, connections and the tons of other stuff!
             that.canvas.element.removeChild(that.canvas.native);
             that.canvas = undefined;
+
+            that.destroyScroller();
+
+            if (that.options.dragAndDrop && kendo.ui.DropTarget) {
+                that.element.kendoDropTarget("destroy");
+            }
         },
         zoom: function (zoom, staticPoint) {
             if (zoom) {
@@ -2033,5 +2039,4 @@ kendo_module({
         Connection: Connection,
         Connector: Connector
     });
-})
-    (window.kendo.jQuery);
+})(window.kendo.jQuery);

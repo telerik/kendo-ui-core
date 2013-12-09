@@ -69,17 +69,10 @@ kendo_module({
     var DateView = function(options) {
         var that = this, id,
             body = document.body,
-            sharedCalendar = DatePicker.sharedCalendar,
             div = $(DIV).attr(ARIA_HIDDEN, "true")
                         .addClass("k-calendar-container")
                         .appendTo(body);
 
-        if (!sharedCalendar) {
-            sharedCalendar = DatePicker.sharedCalendar = new ui.Calendar($(DIV).attr(ID, kendo.guid()).hide().appendTo(body), { focusOnNav: false });
-            calendar.makeUnselectable(sharedCalendar.element);
-        }
-
-        that.calendar = sharedCalendar;
         that.options = options = options || {};
         id = options.id;
 
@@ -93,68 +86,32 @@ kendo_module({
         that.popup = new ui.Popup(div, extend(options.popup, options, { name: "Popup", isRtl: kendo.support.isRtl(options.anchor) }));
         that.div = div;
 
-        that._templates();
-
         that.value(options.value);
     };
 
     DateView.prototype = {
         _calendar: function() {
-            var that = this,
-                popup = that.popup,
-                options = that.options,
-                calendar = that.calendar,
-                element = calendar.element;
+            var that = this;
+            var calendar = that.calendar;
+            var div;
 
-            if (element.data(DATEVIEW) !== that) {
+            if (!calendar) {
+                div = $(DIV).attr(ID, kendo.guid())
+                            .appendTo(that.popup.element)
+                            .on(MOUSEDOWN, preventDefault)
+                            .on(CLICK, "td:has(.k-link)", proxy(that._click, that));
 
-                element.appendTo(popup.element)
-                       .data(DATEVIEW, that)
-                       .off(CLICK + " " + KEYDOWN)
-                       .on(CLICK, "td:has(.k-link)", proxy(that._click, that))
-                       .on(MOUSEDOWN, preventDefault)
-                       .show();
+                that.calendar = calendar = new ui.Calendar(div, extend({ focusOnNav: false }, that.options));
 
-                calendar.unbind(CHANGE)
-                        .bind(CHANGE, options);
+                kendo.calendar.makeUnselectable(calendar.element);
 
-                calendar.month = that.month;
-                calendar.options.dates = options.dates;
-                calendar.options.depth = options.depth;
-                calendar.options.culture = options.culture;
-
-                calendar._footer(that.footer);
-
-                calendar.min(options.min);
-                calendar.max(options.max);
-
-                calendar._value = null;
-                calendar.navigate(that._value || that._current, options.start);
+                calendar.navigate(that._value || that._current, that.options.start);
                 that.value(that._value);
             }
         },
 
         destroy: function() {
-            var that = this,
-                calendar = that.calendar,
-                element = calendar.element,
-                dv = element.data(DATEVIEW),
-                popups;
-
-            if (dv === undefined || dv === that) {
-                popups = $(".k-calendar-container");
-
-                if (popups.length > 1) {
-                    element.hide().appendTo(document.body);
-                } else {
-                    element.off(ns);
-                    calendar.destroy();
-                    calendar.element.remove();
-                    DatePicker.sharedCalendar = null;
-                }
-            }
-
-            that.popup.destroy();
+            this.popup.destroy();
         },
 
         open: function() {
@@ -230,7 +187,7 @@ kendo_module({
             that._value = value;
             that._current = new DATE(+restrictValue(value, options.min, options.max));
 
-            if (calendar.element.data(DATEVIEW) === that) {
+            if (calendar) {
                 calendar.value(value);
             }
         },
@@ -242,32 +199,13 @@ kendo_module({
         },
 
         _option: function(option, value) {
-            var that = this,
-                options = that.options,
-                calendar = that.calendar;
+            var that = this;
+            var calendar = that.calendar;
 
-            options[option] = value;
+            that.options[option] = value;
 
-            if (calendar.element.data(DATEVIEW) === that) {
+            if (calendar) {
                 calendar[option](value);
-            }
-        },
-
-        _templates: function() {
-            var that = this,
-                options = that.options,
-                footer = options.footer,
-                month = options.month || {},
-                content = month.content,
-                empty = month.empty;
-
-            that.month = {
-                content: template('<td#=data.cssClass#><a tabindex="-1" class="k-link" href="\\#" ' + kendo.attr("value") + '="#=data.dateString#" title="#=data.title#">' + (content || "#=data.value#") + '</a></td>', { useWithBlock: !!content }),
-                empty: template("<td>" + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty })
-            };
-
-            if (footer !== false) {
-                that.footer = template(footer || '#= kendo.toString(data,"D","' + options.culture +'") #', { useWithBlock: false });
             }
         }
     };
@@ -664,14 +602,18 @@ kendo_module({
         },
 
         _updateARIA: function(date) {
+            var cell;
             var that = this;
             var calendar = that.dateView.calendar;
-            var cell = calendar._cell;
-
-            cell.attr("aria-label", that._ariaTemplate({ current: date || calendar.current() }));
 
             that.element.removeAttr("aria-activedescendant");
-            that.element.attr("aria-activedescendant", cell.attr("id"));
+
+            if (calendar) {
+                cell = calendar._cell;
+                cell.attr("aria-label", that._ariaTemplate({ current: date || calendar.current() }));
+
+                that.element.attr("aria-activedescendant", cell.attr("id"));
+            }
         }
     });
 

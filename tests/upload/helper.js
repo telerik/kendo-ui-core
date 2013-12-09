@@ -19,10 +19,11 @@ function createHTML() {
         '</div>' +
     '</form></div>'
 
-    $(html).appendTo(document.body);
+    $(html).appendTo(QUnit.fixture);
 }
 function removeHTML() {
-    $("#testbed_container").remove();
+    kendo.destroy(QUnit.fixture);
+    QUnit.fixture.empty();
 }
 
 function simulateFileSelect(fileName) {
@@ -34,6 +35,7 @@ function simulateFileSelect(fileName) {
 }
 
 function simulateSingleFileSelect(fileName, fileSize) {
+    var uploadInstance = $("#uploadInstance").data("kendoUpload");
     uploadInstance._onInputChange({ target: {
             files: [
                 { name: fileName || "first.txt", size: fileSize || 100 }
@@ -43,6 +45,7 @@ function simulateSingleFileSelect(fileName, fileSize) {
 }
 
 function simulateMultipleFileSelect() {
+    var uploadInstance = $("#uploadInstance").data("kendoUpload");
     uploadInstance._onInputChange({ target: {
             files: [
                 { name: "first.txt", size: 1 },
@@ -58,6 +61,7 @@ function getFileListMock() {
     ];
 }
 function simulateRemoveClick(fileIndex) {
+    var uploadInstance = $("#uploadInstance").data("kendoUpload");
     $(".k-delete", uploadInstance.wrapper).eq(fileIndex || 0).trigger("click");
 }
 

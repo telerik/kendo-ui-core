@@ -357,6 +357,8 @@ kendo_module({
             if (that._documentClickHandler) {
                 $(document).unbind("click", that._documentClickHandler);
             }
+
+            kendo.destroy(that.element);
         },
 
         enable: function (element, enable) {

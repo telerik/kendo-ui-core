@@ -1,7 +1,7 @@
-
+function uploadUploadEvent(createUpload) {
     test("upload fires when a file is about to be uploaded", function() {
         var uploadFired = false;
-        uploadInstance = createUpload({ upload:
+        var uploadInstance = createUpload({ upload:
             function() {
                 uploadFired = true;
             }
@@ -14,7 +14,7 @@
 
     test("upload does not fire until upload button is pressed", function() {
         var uploadFired = false;
-        uploadInstance = createUpload({
+        var uploadInstance = createUpload({
             upload:
                 function() {
                     uploadFired = true;
@@ -33,7 +33,7 @@
 
     test("upload event contains list of files", function() {
         var files = null;
-        uploadInstance = createUpload({ upload:
+        var uploadInstance = createUpload({ upload:
             function(e) {
                 files = e.files;
             }
@@ -45,7 +45,7 @@
     });
 
     test("cancelling the upload event removes the file entry", function() {
-        uploadInstance = createUpload({ upload:
+        var uploadInstance = createUpload({ upload:
             function(e) {
                 e.preventDefault();
             }
@@ -55,3 +55,4 @@
 
         equal($(".k-file", uploadInstance.wrapper).length, 0);
     });
+}

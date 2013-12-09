@@ -245,7 +245,6 @@ kendo_module({
             var that = this;
 
             Widget.fn.destroy.call(that);
-
             that.dateView.destroy();
             that.timeView.destroy();
 
@@ -665,15 +664,18 @@ kendo_module({
         },
 
         _updateARIA: function(date) {
+            var cell;
             var that = this;
             var calendar = that.dateView.calendar;
-            var cell = calendar._cell;
 
-            cell.attr("aria-label", that._ariaTemplate({ current: date || calendar.current() }));
+            that.element.removeAttr(ARIA_ACTIVEDESCENDANT);
 
-            that.element
-                .removeAttr(ARIA_ACTIVEDESCENDANT)
-                .attr(ARIA_ACTIVEDESCENDANT, cell.attr("id"));
+            if (calendar) {
+                cell = calendar._cell;
+                cell.attr("aria-label", that._ariaTemplate({ current: date || calendar.current() }));
+
+                that.element.attr(ARIA_ACTIVEDESCENDANT, cell.attr("id"));
+            }
         }
     });
 

@@ -30,7 +30,7 @@ kendo_module({
             Widget.fn.init.call(that, element, options);
 
             that.shim = shim;
-            that.element = element;
+            element = that.element;
             options = that.options;
 
             if (options.className) {

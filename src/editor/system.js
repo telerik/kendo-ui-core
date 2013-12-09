@@ -885,7 +885,7 @@ var MSWordFormatCleaner = Cleaner.extend({
         html = Cleaner.fn.clean.call(that, html);
         html = that.stripEmptyAnchors(html);
 
-        placeholder = dom.create(document, 'div', {innerHTML: html}),
+        placeholder = dom.create(document, 'div', {innerHTML: html});
         that.lists(placeholder);
         that.tables(placeholder);
 

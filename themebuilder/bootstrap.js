@@ -1,3 +1,4 @@
+/*jshint scripturl: true */
 // bootstrapper file for Kendo ThemeBuilder
 (function() {
     var doc = document,
@@ -13,7 +14,7 @@
         // caution: variables below are generated during builds. update build/theme_builder.rb if you change them!
         KENDO_LOCATION = "http://cdn.kendostatic.com/2013.1.226/",
         JQUERY_LOCATION = "/demos/src/js/jquery.js",
-        requiredJs = ["scripts/less.js", "scripts/themebuilder.js", "scripts/colorengine.js", "scripts/template.js"],
+        requiredJs = ["scripts/less.js", "scripts/themebuilder.js", "scripts/template.js"],
         requiredCss = ["styles/styles.css"],
         bootstrapCss = "styles/bootstrap.css",
         // </generated variables>

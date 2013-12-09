@@ -1,21 +1,46 @@
-var treeview, treeviewObject;
+(function() {
+    window.TreeViewHelpers = {
+        fromOptions: function (treeviewOptions, options) {
+            var container = QUnit.fixture;
 
-function createTreeView(treeviewOptions, options) {
-    var container = document.body;
+            options = options || {};
 
-    options = options || {};
+            if (options.rtl) {
+                container = $("<div class='k-rtl' />").appendTo(container);
+            }
 
-    if (options.rtl) {
-        container = $("<div class='k-rtl' />").appendTo(container);
-    }
+            return TreeViewHelpers.fromHtml("<div />", treeviewOptions, container);
+        },
 
-    treeview = $("<div />").appendTo(container).kendoTreeView(treeviewOptions);
-    treeviewObject = treeview.data("kendoTreeView");
+        fromHtml: function (html, options, container) {
+            container = container || QUnit.fixture;
 
-    return treeview;
-}
+            window.treeview = $(html).appendTo(container).kendoTreeView(options);
+            window.treeviewObject = treeview.data("kendoTreeView");
 
-function cleanArtifacts() {
-    $(".k-treeview,.k-drag-clue,.k-rtl").remove();
-}
+            return window.treeview;
+        },
 
+        destroy: function () {
+            kendo.destroy(QUnit.fixture);
+            delete window.treeview;
+            delete window.treeviewObject;
+        },
+
+        basicModule: {
+            teardown: function() {
+                TreeViewHelpers.destroy();
+            }
+        },
+
+        noAnimationMoudle: {
+            setup: function() {
+                kendo.effects.disable();
+            },
+            teardown: function() {
+                kendo.effects.enable();
+                TreeViewHelpers.destroy();
+            }
+        }
+    };
+})();

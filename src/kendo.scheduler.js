@@ -1,3 +1,4 @@
+/*jshint eqnull: true */
 kendo_module({
     id: "scheduler",
     name: "Scheduler",
@@ -1229,7 +1230,8 @@ kendo_module({
         },
 
         editEvent: function(model) {
-            return this.editable = this._createPopupEditor(model);
+            this.editable = this._createPopupEditor(model);
+            return this.editable;
         },
 
         close: function() {
@@ -1241,6 +1243,10 @@ kendo_module({
                     that.editable = null;
                     that.container = null;
                 }
+                if (that.popup) {
+                    that.popup.destroy();
+                    that.popup = null;
+                }
             };
 
             if (that.editable) {
@@ -1249,7 +1255,13 @@ kendo_module({
                     that._timezonePopup = null;
                 }
 
-                that.container.data("kendoWindow").bind("deactivate", destroy).close();
+                if (that.container.is(":visible")) {
+                    that.container.data("kendoWindow").bind("deactivate", destroy).close();
+                } else {
+                    destroy();
+                }
+            } else {
+                destroy();
             }
         },
 
@@ -1276,7 +1288,12 @@ kendo_module({
             html += '</div></div></div>';
 
             var wrapper = this.element;
-            var popup = $(html).appendTo(wrapper)
+
+            if (this.popup) {
+                this.popup.destroy();
+            }
+
+            var popup = this.popup = $(html).appendTo(wrapper)
                                .eq(0)
                                .on("click", ".k-button", function(e) {
                                     e.preventDefault();
@@ -1891,6 +1908,14 @@ kendo_module({
 
             if (that._editor) {
                 that._editor.destroy();
+            }
+
+            if (this._moveDraggable) {
+                this._moveDraggable.destroy();
+            }
+
+            if (this._resizeDraggable) {
+                this._resizeDraggable.destroy();
             }
 
             element = that.element
@@ -2931,7 +2956,7 @@ kendo_module({
         _initModel: function() {
             var that = this;
             that._model = kendo.observable({
-               selectedDate: this.options.date,
+               selectedDate: new Date(this.options.date),
                formattedDate: ""
            });
 
@@ -3205,14 +3230,6 @@ kendo_module({
 
         destroy: function() {
             Widget.fn.destroy.call(this);
-
-            if (this._moveDraggable) {
-                this._moveDraggable.destroy();
-            }
-
-            if (this._resizeDraggable) {
-                this._resizeDraggable.destroy();
-            }
 
             kendo.destroy(this.wrapper);
         },

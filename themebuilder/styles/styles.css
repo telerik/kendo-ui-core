@@ -64,7 +64,7 @@ body {
 }
 
 #kendo-themebuilder .k-color-preview,
-#kendo-themebuilder .k-colorpicker .k-i-arrow-s {
+#kendo-themebuilder .k-colorinput .k-i-arrow-s {
     border: 0;
     background-image: none;
     -webkit-border-radius: 8px;
@@ -109,7 +109,7 @@ body {
     padding: 0;
 }
 
-#kendo-themebuilder div.k-colorpicker,
+#kendo-themebuilder div.k-colorinput,
 #kendo-themebuilder .k-gradient-editor,
 #kendo-themebuilder .k-numerictextbox,
 #kendo-themebuilder .k-combobox,
@@ -118,11 +118,11 @@ body {
     margin-bottom: 5px;
 }
 
-.k-colorpicker .k-i-arrow-s {
+.k-colorinput .k-i-arrow-s {
     margin-top: -1px;
 }
 
-.k-colorpicker .k-input,
+.k-colorinput .k-input,
 .k-color-name,
 textarea {
     font: 12px Consolas, Courier, monospace;

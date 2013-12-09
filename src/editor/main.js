@@ -1,3 +1,4 @@
+/*jshint scripturl: true */
 kendo_module({
     id: "editor",
     name: "Editor",
@@ -165,7 +166,7 @@ kendo_module({
                 editorNS = kendo.ui.editor,
                 toolbarContainer,
                 toolbarOptions,
-                type = editorNS.Dom.name(element);
+                type;
 
             /* suppress initialization in mobile webkit devices (w/o proper contenteditable support) */
             if (!supportedBrowser) {
@@ -174,9 +175,12 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
+
             that.options = deepExtend({}, that.options, options);
 
             element = that.element;
+
+            type = editorNS.Dom.name(element[0]);
 
             element.closest("form").on("submit" + NS, function () {
                 that.update();
@@ -616,6 +620,19 @@ kendo_module({
             return false;
         },
 
+        _fillEmptyElements: function(body) {
+            $(body).find("p").each(function() {
+                if (/^\s*$/g.test($(this).text())) {
+                    var node = this;
+                    while (node.firstChild && node.firstChild.nodeType != 3) {
+                        node = node.firstChild;
+                    }
+
+                    node.innerHTML = kendo.ui.editor.emptyElementContent;
+                }
+            });
+        },
+
         value: function (html) {
             var body = this.body,
                 editorNS = kendo.ui.editor,
@@ -642,9 +659,7 @@ kendo_module({
                     return match.replace(onerrorRe, "");
                 })
                 // <img>\s+\w+ creates invalid nodes after cut in IE
-                .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, "$1")
-                // Add <br/>s to empty paragraphs in mozilla/chrome, to make them focusable
-                .replace(/<p([^>]*)>(\s*)?<\/p>/ig, '<p$1>' + editorNS.emptyElementContent + '<\/p>');
+                .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, "$1");
 
             if (browser.msie && browser.version < 9) {
                 // Internet Explorer removes comments from the beginning of the html
@@ -697,6 +712,8 @@ kendo_module({
                     }, 1);
                 }
             }
+
+            this._fillEmptyElements(this.body);
 
             // add k-table class to all tables
             $("table", this.body).addClass("k-table");

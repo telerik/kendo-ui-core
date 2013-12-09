@@ -100,7 +100,6 @@ kendo_module({
 
         _resize: function(e) {
             var that = this,
-                handle = $(e.currentTarget),
                 maxPosition = that._maxPosition,
                 minPosition = that._minPosition,
                 currentPosition = that._initialElementPosition + (e[that._positionMouse].location - that._initialMousePosition),

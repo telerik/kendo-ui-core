@@ -183,6 +183,8 @@ kendo_module({
 
             that.element.off(NS);
             that.dataSource.unbind(CHANGE, that._refreshHandler);
+
+            kendo.destroy(that.element);
         },
 
         events: [
