@@ -182,7 +182,7 @@
 
     asyncTest("does not trigger hold if released before that", 0, function(){
         userEvents.bind("hold", function(e) {
-            ok(false);
+            ok(false, "hold was triggered by release");
         });
 
         press(element, 10, 20);
@@ -198,7 +198,7 @@
 
     asyncTest("does not trigger hold if moved before that", 0, function(){
         userEvents.bind("hold", function(e) {
-            ok(false);
+            ok(false, "hold was triggered by move");
         });
 
         press(element, 10, 20);
