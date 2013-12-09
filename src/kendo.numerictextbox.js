@@ -432,7 +432,7 @@ kendo_module({
         },
 
         _keypress: function(e) {
-            if (e.which === 0 || e.keyCode === keys.BACKSPACE) {
+            if (e.which === 0 || e.keyCode === keys.BACKSPACE || e.keyCode === keys.ENTER) {
                 return;
             }
 
