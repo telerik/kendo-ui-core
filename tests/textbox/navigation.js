@@ -117,6 +117,16 @@
         });
     });
 
+    test("Enter in IE is allowed", 0, function() {
+        var textbox = new NumericTextBox(input);
+        console.log("start");
+        input.pressKey(kendo.keys.ENTER, {
+            preventDefault: function() {
+                ok(false);
+            }
+        });
+    });
+
     test("Allow decimal separator '.'", 0, function() {
         var textbox = new NumericTextBox(input);
 
