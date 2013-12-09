@@ -98,10 +98,6 @@ echo $dropDownList->render();
         margin: 0 4px;
     }
 
-    #customers-list {
-        padding-bottom: 26px;
-    }
-
     #customers-list .k-item > span{
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
