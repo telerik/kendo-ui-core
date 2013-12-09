@@ -113,7 +113,7 @@ kendo_module({
                 isEmpty = true;
 
                 element.contents().not("span.k-sprite").not("span.k-icon").not("img.k-image").each(function(idx, el){
-                    if (el.nodeType == 1 || el.nodeType == 3 && el.nodeValue.trim().length > 0) {
+                    if (el.nodeType == 1 || el.nodeType == 3 && $.trim(el.nodeValue).length > 0) {
                         isEmpty = false;
                     }
                 });
