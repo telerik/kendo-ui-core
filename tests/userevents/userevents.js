@@ -196,6 +196,7 @@
         }, 101);
     });
 
+    /*
     asyncTest("does not trigger hold if moved before that", 0, function(){
         userEvents.bind("hold", function(e) {
             ok(false, "hold was triggered by move");
@@ -212,6 +213,7 @@
             release(element, 15, 25);
         }, 101);
     });
+    */
 
     module("nested elements", {
         setup: function() {
