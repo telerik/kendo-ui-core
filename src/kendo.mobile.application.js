@@ -289,9 +289,17 @@ kendo_module({
             });
         },
 
+        _clearExistingMeta: function() {
+            HEAD.find("meta")
+                .filter("[name|='apple-mobile-web-app'],[name|='msapplication-tap'],[name='viewport']")
+                .remove();
+        },
+
         _attachMeta: function() {
             var options = this.options,
                 icon = options.icon, size;
+
+            this._clearExistingMeta();
 
             if (!BERRYPHONEGAP) {
                 HEAD.prepend(viewportMeta);

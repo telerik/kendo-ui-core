@@ -205,6 +205,19 @@
         ok($("meta[name=apple-mobile-web-app-capable]").attr("content") == "no");
     });
 
+    test("Removes existing meta tags", 1, function() {
+        $("head").prepend(
+            '<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />' +
+            '<meta name="apple-mobile-web-app-capable" content="yes" />' +
+            '<meta name="apple-mobile-web-app-status-bar-style" content="black" />' +
+            '<meta name="msapplication-tap-highlight" content="no" />'
+        );
+
+        setup('<div data-role="view" />');
+
+        ok($("meta").length < 6);
+    });
+
     test("skin method returns the current skin", 1, function() {
         setup('<div data-role="view" />', {
             skin: "flat"
