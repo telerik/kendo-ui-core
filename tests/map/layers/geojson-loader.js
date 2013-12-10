@@ -43,8 +43,17 @@
             ok(result instanceof d.Path);
         });
 
-        test("does not set fill", function() {
+        test("clears fill for open LineString", function() {
             equal(result.options.fill, null);
+        });
+
+        test("does not clear fill for closed LineString", function() {
+            item = {
+                "type": "LineString",
+                "coordinates": [ [0, 0], [10, 0], [10, 10], [0, 0] ]
+            };
+            result = loader.parse(item);
+            notEqual(result.options.fill, null);
         });
 
         test("triggers shapeCreated on observer", function() {
