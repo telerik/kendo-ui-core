@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./util" ], f);
+})(function(){
+
 (function () {
 
     // Imports ================================================================
@@ -265,3 +269,5 @@
     });
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

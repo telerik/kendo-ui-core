@@ -1,10 +1,6 @@
-kendo_module({
-    id: "dataviz.map",
-    name: "Map",
-    category: "dataviz",
-    description: "The Kendo DataViz Map displays spatial data",
-    depends: [ "data", "userevents", "tooltip", "dataviz.core", "mobile.scroller" ]
-});
+(function(f, define){
+    define([ "./layers/marker" ], f);
+})(function(){
 
 (function ($, undefined) {
     // Imports ================================================================
@@ -522,3 +518,5 @@ kendo_module({
     dataviz.ui.plugin(Map);
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

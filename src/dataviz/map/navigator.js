@@ -1,10 +1,6 @@
-kendo_module({
-    id: "dataviz.navigator",
-    name: "Navigator",
-    category: "dataviz",
-    depends: [ "dataviz.core" ],
-    advanced: true
-});
+(function(f, define){
+    define([ "./location" ], f);
+})(function(){
 
 (function ($) {
     var kendo = window.kendo;
@@ -67,3 +63,5 @@ kendo_module({
 
     kendo.dataviz.ui.plugin(Navigator);
 })(jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
