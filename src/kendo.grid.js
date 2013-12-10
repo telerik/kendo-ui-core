@@ -487,6 +487,21 @@ var __meta__ = {
         });
     }
 
+    function appendContent(tbody, table, html) {
+        var placeholder,
+            tmp = tbody;
+
+        if (tbodySupportsInnerHtml) {
+            tbody.innerHTML = html;
+        } else {
+            placeholder = document.createElement("div");
+            placeholder.innerHTML = "<table><tbody>" + html + "</tbody></table>";
+            tbody = placeholder.firstChild.firstChild;
+            table.replaceChild(tbody, tmp);
+        }
+        return tbody;
+    }
+
     function addHiddenStyle(attr) {
         attr = attr || {};
         var style = attr.style;
@@ -2563,6 +2578,8 @@ var __meta__ = {
 
                 that.scrollables = header.children(".k-grid-header-wrap");
 
+                that._appendStaticColumnContent();
+
                 // the footer may exists if rendered from the server
                 var footer = that.wrapper.find(".k-grid-footer"),
                     webKitRtlCorrection = (isRtl && browser.webkit) ? scrollbar : 0;
@@ -3212,10 +3229,18 @@ var __meta__ = {
                 dataSource = that.dataSource,
                 groups = dataSource.group(),
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
-                aggregates = dataSource.aggregate();
+                aggregates = dataSource.aggregate(),
+                columns = nonStaticColumns(that.columns);
 
-            that.rowTemplate = that._tmpl(options.rowTemplate, that.columns);
-            that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, that.columns, true);
+            that.rowTemplate = that._tmpl(options.rowTemplate, columns);
+            that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, columns, true);
+
+            columns = staticColumns(that.columns);
+
+            if (columns.length) {
+                that.staticRowTemplate = that._tmpl(options.rowTemplate, columns);
+                that.staticAltRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, columns, true);
+            }
 
             if (that._hasDetails()) {
                 that.detailTemplate = that._detailTmpl(options.detailTemplate || "");
@@ -3440,9 +3465,19 @@ var __meta__ = {
             return html;
         },
 
+        _appendStaticColumnContent: function() {
+            var columns = staticColumns(this.columns),
+                html;
+
+            if (columns.length) {
+                html = '<div class="k-grid-content-static"><table><tbody></tbody></table></div>';
+
+                this.staticContent = $(html).insertBefore(this.content);
+            }
+        },
+
         _appendStaticColumnHeader: function(container) {
             var columns = staticColumns(this.columns),
-                table,
                 html;
 
             if (columns.length) {
@@ -3450,11 +3485,7 @@ var __meta__ = {
                 html += this._createHeaderCells(columns);
                 html += '</tr></thead></table></div>';
 
-                table = $(html);
-
-                normalizeCols(table, columns, this._hasDetails(), this._groups());
-
-                table.prependTo(container);
+                this.staticHeader = $(html).prependTo(container);
             }
         },
 
@@ -3533,6 +3564,10 @@ var __meta__ = {
             var that = this;
 
             that._appendCols(that.thead.parent().add(that.table));
+
+            if (that.staticHeader) {
+                normalizeCols(that.staticHeader.add(that.staticContent), staticColumns(that.columns), that._hasDetails(), that._groups());
+            }
         },
 
         _appendCols: function(table) {
@@ -3558,13 +3593,11 @@ var __meta__ = {
             }
         },
 
-        _rowsHtml: function(data) {
+        _rowsHtml: function(data, rowTemplate, altRowTemplate) {
             var that = this,
                 html = "",
                 idx,
-                length,
-                rowTemplate = that.rowTemplate,
-                altRowTemplate = that.altRowTemplate;
+                length;
 
             for (idx = 0, length = data.length; idx < length; idx++) {
                 if (idx % 2) {
@@ -3607,7 +3640,7 @@ var __meta__ = {
                     html += that._groupRowHtml(groupItems[idx], colspan - 1, level + 1);
                 }
             } else {
-                html += that._rowsHtml(groupItems);
+                html += that._rowsHtml(groupItems, that.rowTemplate, that.altRowTemplate);
             }
 
             if (that.groupFooterTemplate) {
@@ -3903,8 +3936,6 @@ var __meta__ = {
                 html = "",
                 data = that.dataSource.view(),
                 navigatable = that.options.navigatable,
-                tbody,
-                placeholder,
                 currentIndex,
                 current = $(that.current()),
                 isCurrentInHeader = false,
@@ -3966,17 +3997,14 @@ var __meta__ = {
                     html += that._groupRowHtml(data[idx], colspan, 0);
                 }
             } else {
-                html += that._rowsHtml(data);
+                html += that._rowsHtml(data, that.rowTemplate, that.altRowTemplate);
             }
 
-            if (tbodySupportsInnerHtml) {
-                that.tbody[0].innerHTML = html;
-            } else {
-                placeholder = document.createElement("div");
-                placeholder.innerHTML = "<table><tbody>" + html + "</tbody></table>";
-                tbody = placeholder.firstChild.firstChild;
-                that.table[0].replaceChild(tbody, that.tbody[0]);
-                that.tbody = $(tbody);
+            that.tbody = appendContent(that.tbody[0], that.table[0], html);
+
+            if (that.staticContent) {
+                var table = that.staticContent.children("table");
+                appendContent(table.children("tbody")[0], table[0], that._rowsHtml(data, that.staticRowTemplate, that.staticAltRowTemplate));
             }
 
             that._footer();

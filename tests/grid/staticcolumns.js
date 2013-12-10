@@ -72,4 +72,31 @@
         equal(grid.element.find(".k-grid-header-wrap col").length, 2);
     });
 
+    test("content is prepend with static column table", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        ok(grid.content.prev().hasClass("k-grid-content-static"));
+    });
+
+    test("correct number of col elements are created in the static content", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        equal(grid.element.find(".k-grid-content-static col").length, 1);
+
+        equal(grid.element.find(".k-grid-content col").length, 2);
+    });
+
+    test("same number of rows is added to the content and the static content", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        equal(grid.content.find("tr").length, grid.staticContent.find("tr").length);
+        equal(grid.staticContent.find("tr").length, 1);
+    });
+
 })();
