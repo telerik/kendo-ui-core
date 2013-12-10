@@ -8,6 +8,7 @@
 
         dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend,
+        last = dataviz.last,
 
         g = dataviz.geometry,
 
@@ -217,13 +218,13 @@
             switch(geometry.type) {
                 case "LineString":
                     path = this._loadPolygon(container, [coords], dataItem);
-                    path.options.fill = null;
+                    this._setLineFill(path);
                     break;
 
                 case "MultiLineString":
                     for (i = 0; i < coords.length; i++) {
                         path = this._loadPolygon(container, [coords[i]], dataItem);
-                        path.options.fill = null;
+                        this._setLineFill(path);
                     }
                     break;
 
@@ -246,6 +247,13 @@
                         this._loadPoint(container, coords[i], dataItem);
                     }
                     break;
+            }
+        },
+
+        _setLineFill: function(path) {
+            var segments = path.segments;
+            if (segments.length < 4 || !segments[0].anchor.equals(last(segments).anchor)) {
+                path.options.fill = null;
             }
         },
 
