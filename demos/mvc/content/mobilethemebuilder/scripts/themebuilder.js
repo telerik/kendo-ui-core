@@ -1,7 +1,7 @@
 if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.support.browser.msie &&  kendo.support.browser.version >= 10)) {
     (function ($, undefined) {
 
-        var devices = [ "ios", "android", "blackberry", "wp", "meego" ], CtrlDown = false,
+        var devices = [ "ios", "ios7", "android", "blackberry", "wp", "flat" ], CtrlDown = false,
             originalToggle, visibleOSes, wasActive, helpRead,
             deviceClasses = $.map(devices, function (value) { return ".km-" + value; }),
             extend = $.extend, importWindow, exportWindow,
@@ -215,11 +215,20 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
                 ios: {
                     selector: ".km-ios"
                 },
+                ios7: {
+                    selector: ".km-ios7"
+                },
                 android: {
                     selector: ".km-android"
                 },
                 blackberry: {
                     selector: ".km-blackberry"
+                },
+                wp: {
+                    selector: ".km-wp"
+                },
+                flat: {
+                    selector: ".km-flat"
                 },
                 meego: {
                     selector: ".km-meego"
@@ -697,7 +706,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
                     document.getElementById(value).checked = "checked";
                 });
             } catch(err) {
-                visibleOSes = [ "iosbox", "androidbox", "blackberrybox", "wpbox" ];
+                visibleOSes = [ "ios7box", "androidbox", "blackberrybox", "wpbox" ];
                 visibleOSes.forEach(function (value) {
                     document.getElementById(value).checked = "checked";
                 });
@@ -966,6 +975,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
                 checkbox = $("#" + that + "box")[0];
 
             applications[that] = new kendo.mobile.Application(device, {
+                skin: that,
                 platform: that,
                 icon: {
                   "72x72" : "../content/mobilethemebuilder/images/Icon-72.png",
