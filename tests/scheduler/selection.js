@@ -537,32 +537,6 @@
         equal(scheduler.calls("removeEvent"), 1);
     });
 
-    module("ARIA support", {
-        setup: function() {
-            now = new Date();
-            container = $("<div />");
-
-            QUnit.fixture.append(container);
-
-            scheduler = new Scheduler(container, {
-                selectable: true,
-                views: [
-                    "day",
-                    { type: "week", selected: true }
-                ],
-                dataSource: [
-                    { start: now, end: new Date(now + (60 * 60 * 1000)), title: "Test" }
-                ]
-            });
-
-            container.focus();
-        },
-
-        teardown: function() {
-            kendo.destroy(QUnit.fixture);
-        }
-    });
-
     module("Selection events", {
         setup: function() {
             container = $("<div />");
@@ -705,6 +679,59 @@
             type: "mousedown",
             currentTarget: event
         });
+    });
+
+    test("Scheduler pre-sets resources on view selection", function() {
+        var today = kendo.date.today();
+        var end = new Date(today);
+        end.setHours(1);
+
+        setupWidget({
+            dataSource: [
+                { roomId2: 4, roomId: 2, start: today, end: end, title: "Test" }
+            ],
+            group: {
+                resources: ["Rooms", "Rooms2"]
+            },
+            resources: [
+                {
+                    field: "roomId",
+                    name: "Rooms",
+                    dataSource: [
+                        { text: "Meeting Room 101", value: 1, color: "#6eb3fa" },
+                        { text: "Meeting Room 201", value: 2, color: "#f58a8a" }
+                    ],
+                    valuePrimitive: true,
+                    title: "Room"
+                }, {
+                    field: "roomId2",
+                    name: "Rooms2",
+                    dataSource: [
+                        { text: "101", value: 3, color: "#6eb3fa" },
+                        { text: "201", value: 4, color: "#f58a8a" }
+                    ],
+                    valuePrimitive: true,
+                    title: "Room2"
+                }
+            ]
+        });
+
+        var wrapper = scheduler.wrapper;
+        var cell = wrapper.find(".k-scheduler-content").find("tr:first").children().eq(20);
+
+        scheduler._createSelection(cell);
+
+        stub(scheduler, "addEvent");
+
+        wrapper.trigger({
+            type: "keydown",
+            keyCode: kendo.keys.ENTER
+        });
+
+        var args = scheduler.args("addEvent")[0];
+
+        equal(args.roomId, 2);
+        equal(args.roomId2, 3);
     });
 
 })();
