@@ -1330,13 +1330,20 @@ kendo_module({
     });
 
     function flattenGroups(data) {
-        var idx, length, result = [];
+        var idx,
+            result = [],
+            length,
+            items,
+            itemIndex;
 
         for (idx = 0, length = data.length; idx < length; idx++) {
             if (data[idx].hasSubgroups) {
                 result = result.concat(flattenGroups(data[idx].items));
             } else {
-                result = result.concat.apply(result, data[idx].items);
+                items = data[idx].items;
+                for (itemIndex = 0; itemIndex < items.length; itemIndex++) {
+                    result.push(items[itemIndex]);
+                }
             }
         }
         return result;
