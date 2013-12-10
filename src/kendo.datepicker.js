@@ -93,6 +93,7 @@ kendo_module({
         _calendar: function() {
             var that = this;
             var calendar = that.calendar;
+            var options = that.options;
             var div;
 
             if (!calendar) {
@@ -101,12 +102,44 @@ kendo_module({
                             .on(MOUSEDOWN, preventDefault)
                             .on(CLICK, "td:has(.k-link)", proxy(that._click, that));
 
-                that.calendar = calendar = new ui.Calendar(div, extend({ focusOnNav: false }, that.options));
+                that.calendar = calendar = new ui.Calendar(div);
+                that._setOptions(options);
 
                 kendo.calendar.makeUnselectable(calendar.element);
 
-                calendar.navigate(that._value || that._current, that.options.start);
+                calendar.navigate(that._value || that._current, options.start);
+
                 that.value(that._value);
+            }
+        },
+
+        _setOptions: function(options) {
+            this.calendar.setOptions({
+                focusOnNav: false,
+                change: options.change,
+                culture: options.culture,
+                dates: options.dates,
+                depth: options.depth,
+                footer: options.footer,
+                format: options.format,
+                max: options.max,
+                min: options.min,
+                month: options.month,
+                start: options.start
+            });
+        },
+
+        setOptions: function(options) {
+            var old = this.options;
+
+            this.options = extend(old, options, {
+                change: old.change,
+                close: old.close,
+                open: old.open
+            });
+
+            if (this.calendar) {
+                this._setOptions(this.options);
             }
         },
 
@@ -320,19 +353,21 @@ kendo_module({
         },
 
         setOptions: function(options) {
-            var that = this,
-                dateView = that.dateView,
-                dateViewOptions = dateView.options;
+            var that = this;
+            var value = that._value;
 
             Widget.fn.setOptions.call(that, options);
 
-            normalize(that.options);
+            options = that.options;
 
-            dateView.options = extend(dateViewOptions, that.options, {
-                change: dateViewOptions.change,
-                close: dateViewOptions.close,
-                open: dateViewOptions.open
-            });
+            normalize(options);
+
+            that.dateView.setOptions(options);
+
+            if (value) {
+                that.element.val(kendo.toString(value, options.format, options.culture));
+                that._updateARIA(value);
+            }
         },
 
         _editable: function(options) {
