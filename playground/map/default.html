@@ -30,19 +30,80 @@
         <link rel="stylesheet" href="../../styles/dataviz/kendo.dataviz.default.css" />
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="proj4.js"></script>
+        <style>
+            .zip-label {
+                position: absolute;
+                font: 14px sans-serif;
+            }
+        </style>
     </head>
     <body>
-        <div id="map" style="width: 800px; height: 600px;"></div>
-        <script>
-            $("#map").kendoMap({
-                center: [51.5, -0.09],
-                zoom: 7,
-                layers: [{
-                    type: "tile",
-                    urlTemplate: "http://#= s #.tile2.opencyclemap.org/transport/#= z #/#= x #/#= y #.png"
-                }]
+    <div id="map"></div>
+    <script>
+    $("#map").kendoMap({
+        center: [ 33.67946, -117.98569],
+        zoom: 12,
+        layers: [{
+            type: "tile",
+            urlTemplate: "http://a.tile.openstreetmap.org/#= zoom #/#= x #/#= y #.png",
+            attribution: "&copy; OpenStreetMap"
+        }, {
+            type: "shape",
+            style: {
+                stroke: {
+                    color: "green",
+                    width: 1
+                }
+            },
+            dataSource: {
+                type: "geojson",
+                transport: { read: "RetrieveByZipRadius.json"}
+            }
+        }],
+        shapeCreated: function(e) {
+            // We'll implement e.shape.bbox (rectangle with center method)
+            // to replace all the calculations below
+            var topLeft;
+            var botoomRight;
+            $.each(e.shape.segments, function() {
+                var anchor = this.anchor;
+                if (!topLeft) {
+                    topLeft = anchor.clone();
+                    bottomRight = anchor.clone();
+                } else {
+                    topLeft.x = Math.min(topLeft.x, anchor.x);
+                    topLeft.y = Math.min(topLeft.y, anchor.y);
+                    bottomRight.x = Math.max(bottomRight.x, anchor.x);
+                    bottomRight.y = Math.max(bottomRight.y, anchor.y);
+                }
             });
-        </script>
+            var center = new kendo.dataviz.geometry.Point(
+                topLeft.x + (bottomRight.x - topLeft.x) / 2,
+                topLeft.y + (bottomRight.y - topLeft.y) / 2
+            ).round();
+
+            // The fill is not being rendered for some reason
+            // We'll investigate and fix this as soon as possible.
+            e.shape.fill("red", 1);
+
+            // Create a label for the ZIP code and position it
+            // over the area center
+            var id = e.shape.dataItem.properties.id;
+            var label = $("#" + id);
+            if (label.length === 0) {
+               label = $("<div class='zip-label'></div>")
+                    .attr("id", id)
+                    .html(id)
+                    .appendTo(e.layer.element);
+            }
+
+            label.css({
+                top: center.y - label.height() / 2,
+                left: center.x - label.width() / 2
+            });
+        }
+    });
+    </script>
     </body>
 </html>
 
