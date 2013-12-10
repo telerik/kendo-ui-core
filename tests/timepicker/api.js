@@ -545,4 +545,30 @@
         equal(input.val(), "");
     });
 
+    test("setOptions rebinds time options", function() {
+        var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+        var timeView = timepicker.timeView;
+
+        stub(timeView, {
+            bind: timeView.bind
+        });
+
+        timepicker.setOptions({});
+
+        equal(timeView.calls("bind"), 1);
+    });
+
+    test("setOptions supports dynamically format change", function() {
+        var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+        var timeView = timepicker.timeView;
+
+        timepicker.setOptions({
+            format: "HH:mm"
+        });
+
+        var first = timeView.ul.children().first();
+
+        equal(first.html(), "00:00");
+    });
+
 })();
