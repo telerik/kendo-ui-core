@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.dataviz.core" ], f);
+})(function(){
+
+var __meta__ = {
     id: "dataviz.svg",
     name: "Output: SVG",
     description: "Support for SVG rendering",
     category: "dataviz",
     depends: [ "dataviz.core" ]
-});
+};
 
 (function () {
 
@@ -1067,3 +1071,7 @@ kendo_module({
     });
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

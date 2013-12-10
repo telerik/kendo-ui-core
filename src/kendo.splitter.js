@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.resizable" ], f);
+})(function(){
+
+var __meta__ = {
     id: "splitter",
     name: "Splitter",
     category: "web",
     description: "The Splitter widget provides an easy way to create a dynamic layout of resizable and collapsible panes.",
     depends: [ "resizable" ]
-});
+};
 
 (function ($, undefined) {
     var kendo = window.kendo,
@@ -707,3 +711,7 @@ kendo_module({
     };
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

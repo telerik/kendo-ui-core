@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.dataviz.core" ], f);
+})(function(){
+
+var __meta__ = {
     id: "dataviz.vml",
     name: "Output: VML",
     description: "Support for VML rendering",
     category: "dataviz",
     depends: [ "dataviz.core" ]
-});
+};
 
 (function () {
 
@@ -1063,3 +1067,7 @@ kendo_module({
     });
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

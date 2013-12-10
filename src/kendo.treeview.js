@@ -1,12 +1,16 @@
-/*jshint eqnull: true */
-kendo_module({
+(function(f, define){
+    define([ "./kendo.data", "./kendo.draganddrop" ], f);
+})(function(){
+
+var __meta__ = {
     id: "treeview",
     name: "TreeView",
     category: "web",
     description: "The TreeView widget displays hierarchical data in a traditional tree structure,with support for interactive drag-and-drop operations.",
     depends: [ "data", "draganddrop" ]
-});
+};
 
+/*jshint eqnull: true */
 (function($, undefined){
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -2108,3 +2112,7 @@ kendo_module({
 
     ui.plugin(TreeView);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

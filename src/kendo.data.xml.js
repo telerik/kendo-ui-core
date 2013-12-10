@@ -1,12 +1,16 @@
-/*jshint  eqnull: true, boss: true */
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core" ], f);
+})(function(){
+
+var __meta__ = {
     id: "data.xml",
     name: "XML",
     category: "framework",
     depends: [ "core" ],
     hidden: true
-});
+};
 
+/*jshint  eqnull: true, boss: true */
 (function($, undefined) {
     var kendo = window.kendo,
         isArray = $.isArray,
@@ -251,3 +255,7 @@ kendo_module({
         }
     });
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

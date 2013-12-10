@@ -1,4 +1,8 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.list", "./kendo.mobile.scroller" ], f);
+})(function(){
+
+var __meta__ = {
     id: "combobox",
     name: "ComboBox",
     category: "web",
@@ -10,7 +14,7 @@ kendo_module({
         description: "Support for kinetic scrolling in mobile device",
         depends: [ "mobile.scroller" ]
     } ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -762,3 +766,7 @@ kendo_module({
 
     ui.plugin(ComboBox);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

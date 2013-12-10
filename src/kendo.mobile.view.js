@@ -1,11 +1,15 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core", "./kendo.fx", "./kendo.mobile.scroller" ], f);
+})(function(){
+
+var __meta__ = {
     id: "mobile.view",
     name: "View",
     category: "mobile",
     description: "Mobile View",
     depends: [ "core", "fx", "mobile.scroller" ],
     hidden: true
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -764,3 +768,7 @@ kendo_module({
     ui.plugin(View);
     ui.plugin(Layout);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

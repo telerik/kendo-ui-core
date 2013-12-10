@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.dropdownlist", "./kendo.datepicker", "./kendo.numerictextbox" ], f);
+})(function(){
+
+var __meta__ = {
     id: "scheduler.recurrence",
     name: "Recurrence",
     category: "web",
     depends: [ "dropdownlist", "datepicker", "numerictextbox" ],
     hidden: true
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -2805,3 +2809,7 @@ kendo_module({
     ui.plugin(MobileRecurrenceEditor);
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

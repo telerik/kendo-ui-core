@@ -1,12 +1,16 @@
+(function(f, define){
+    define([ "./kendo.scheduler.view" ], f);
+})(function(){
 
-kendo_module({
+var __meta__ = {
     id: "scheduler.dayview",
     name: "Scheduler Day View",
     category: "web",
     description: "The Scheduler Day View",
     depends: [ "scheduler.view" ],
     hidden: true
-});
+};
+
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -1578,3 +1582,7 @@ kendo_module({
 
     });
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

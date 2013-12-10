@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core", "./kendo.userevents" ], f);
+})(function(){
+
+var __meta__ = {
     id: "touch",
     name: "Touch",
     category: "mobile",
     description: "The kendo Touch widget provides a cross-platform compatible API for handling user-initiated touch events, multi-touch gestures and event sequences (drag, swipe, etc.). ",
     depends: [ "core", "userevents" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -192,3 +196,7 @@ kendo_module({
 
     kendo.ui.plugin(Touch);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

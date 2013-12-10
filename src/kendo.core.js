@@ -1,3 +1,14 @@
+(function(f, define){
+    define([], f);
+})(function(){
+
+var __meta__ = {
+    id: "core",
+    name: "Core",
+    category: "framework",
+    description: "The core of the Kendo framework."
+};
+
 /*jshint loopfunc: true, evil: true, boss: true */
 (function($, undefined) {
     var kendo = window.kendo = window.kendo || { cultures: {} },
@@ -3646,9 +3657,8 @@ if (typeof kendo_module === "undefined") {
     kendo_module = function(){};
 }
 
-kendo_module({
-    id: "core",
-    name: "Core",
-    category: "framework",
-    description: "The core of the Kendo framework."
-});
+
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

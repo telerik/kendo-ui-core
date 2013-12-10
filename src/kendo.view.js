@@ -1,12 +1,15 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core", "./kendo.binder" ], f);
+})(function(){
+
+var __meta__ = {
     id: "view",
     name: "View",
     category: "framework",
     description: "The View class instantiates and handles the events of a certain screen from the application.",
     depends: [ "core", "binder" ],
     hidden: false
-});
-
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -121,3 +124,7 @@ kendo_module({
     kendo.Layout = Layout;
     kendo.View = View;
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

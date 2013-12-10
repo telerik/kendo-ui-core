@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.mobile.application" ], f);
+})(function(){
+
+var __meta__ = {
     id: "mobile.navbar",
     name: "NavBar",
     category: "mobile",
     description: "The Kendo mobile NavBar widget is used inside a mobile View or Layout Header element to display an application navigation bar.",
     depends: [ "mobile.application" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -75,3 +79,7 @@ kendo_module({
 
     ui.plugin(NavBar);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

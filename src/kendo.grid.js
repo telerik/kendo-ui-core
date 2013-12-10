@@ -1,5 +1,8 @@
-/* jshint eqnull: true */
-kendo_module({
+(function(f, define){
+    define([ "./kendo.data", "./kendo.editable", "./kendo.window", "./kendo.filtermenu", "./kendo.columnmenu", "./kendo.groupable", "./kendo.pager", "./kendo.selectable", "./kendo.sortable", "./kendo.reorderable", "./kendo.resizable", "./kendo.mobile.actionsheet", "./kendo.mobile.pane" ], f);
+})(function(){
+
+var __meta__ = {
     id: "grid",
     name: "Grid",
     category: "web",
@@ -56,8 +59,9 @@ kendo_module({
         description: "Support for adaptive rendering",
         depends: [ "mobile.actionsheet", "mobile.pane" ]
     } ]
-});
+};
 
+/* jshint eqnull: true */
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -4025,3 +4029,7 @@ kendo_module({
    ui.plugin(Grid);
    ui.plugin(VirtualScrollable);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.popup" ], f);
+})(function(){
+
+var __meta__ = {
     id: "menu",
     name: "Menu",
     category: "web",
     description: "The Menu widget displays hierarchical data as a multi-level menu.",
     depends: [ "popup" ]
-});
+};
 
 (function ($, undefined) {
     var kendo = window.kendo,
@@ -1121,3 +1125,7 @@ kendo_module({
     kendo.ui.plugin(Menu);
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

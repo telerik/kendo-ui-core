@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.mobile.shim", "./kendo.mobile.application" ], f);
+})(function(){
+
+var __meta__ = {
     id: "mobile.modalview",
     name: "ModalView",
     category: "mobile",
     description: "The Kendo ModalView is used to present self-contained functionality in the context of the current task.",
     depends: [ "mobile.shim", "mobile.application" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -92,3 +96,7 @@ kendo_module({
 
     ui.plugin(ModalView);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

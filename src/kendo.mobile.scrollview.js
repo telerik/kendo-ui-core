@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.mobile.application" ], f);
+})(function(){
+
+var __meta__ = {
     id: "mobile.scrollview",
     name: "ScrollView",
     category: "mobile",
     description: "The Kendo Mobile ScrollView widget is used to scroll content wider than the device screen.",
     depends: [ "mobile.application" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -801,3 +805,7 @@ kendo_module({
     ui.plugin(ScrollView);
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

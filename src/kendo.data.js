@@ -1,5 +1,8 @@
-/*jshint eqnull: true, loopfunc: true, evil: true */
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core", "./kendo.data.odata", "./kendo.data.xml" ], f);
+})(function(){
+
+var __meta__ = {
     id: "data",
     name: "Data source",
     category: "framework",
@@ -16,8 +19,9 @@ kendo_module({
         description: "Support for binding to XML.",
         depends: [ "data.xml" ]
     } ]
-});
+};
 
+/*jshint eqnull: true, loopfunc: true, evil: true */
 (function($, undefined) {
     var extend = $.extend,
         proxy = $.proxy,
@@ -4034,3 +4038,7 @@ kendo_module({
         BatchBuffer: BatchBuffer
     });
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

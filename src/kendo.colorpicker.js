@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core", "./kendo.popup", "./kendo.slider", "./kendo.userevents" ], f);
+})(function(){
+
+var __meta__ = {
     id: "colorpicker",
     name: "Color tools",
     category: "web",
     description: "Color selection widgets",
     depends: [ "core", "popup", "slider", "userevents" ]
-});
+};
 
 (function($, parseInt, undefined){
     // WARNING: removing the following jshint declaration and turning
@@ -1039,3 +1043,7 @@ kendo_module({
     };
 
 })(jQuery, parseInt);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

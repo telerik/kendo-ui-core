@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.mobile.application" ], f);
+})(function(){
+
+var __meta__ = {
     id: "mobile.switch",
     name: "Switch",
     category: "mobile",
     description: "The mobile Switch widget is used to display two exclusive choices.",
     depends: [ "mobile.application" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -258,3 +262,7 @@ kendo_module({
 
     ui.plugin(Switch);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core" ], f);
+})(function(){
+
+var __meta__ = {
     id: "button",
     name: "Button",
     category: "web",
     description: "The Button widget displays styled buttons.",
     depends: [ "core" ]
-});
+};
 
 (function ($, undefined) {
     var kendo = window.kendo,
@@ -165,3 +169,7 @@ kendo_module({
     kendo.ui.plugin(Button);
 
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

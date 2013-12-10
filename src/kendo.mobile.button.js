@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.mobile.application", "./kendo.userevents" ], f);
+})(function(){
+
+var __meta__ = {
     id: "mobile.button",
     name: "Button",
     category: "mobile",
     description: "The Button widget navigates between mobile Application views when pressed.",
     depends: [ "mobile.application", "userevents" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -248,3 +252,7 @@ kendo_module({
     ui.plugin(BackButton);
     ui.plugin(DetailButton);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

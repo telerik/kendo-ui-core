@@ -1,9 +1,13 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.diagram.svg", "./kendo.diagram.services", "./kendo.data", "./kendo.draganddrop" ], f);
+})(function(){
+
+var __meta__ = {
     id: "diagram",
     name: "Diagram",
     category: "diagram",
-    depends: ["diagram.svg", "diagram.services", "data", "draganddrop"]
-});
+    depends: [ "diagram.svg", "diagram.services", "data", "draganddrop" ]
+};
 
 (function ($, undefined) {
     // Imports ================================================================
@@ -2371,3 +2375,7 @@ kendo_module({
         Connector: Connector
     });
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

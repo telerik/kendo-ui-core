@@ -1,11 +1,15 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.mobile.view", "./kendo.mobile.loader" ], f);
+})(function(){
+
+var __meta__ = {
     id: "mobile.pane",
     name: "Pane",
     category: "mobile",
     description: "Mobile Pane",
     depends: [ "mobile.view", "mobile.loader" ],
     hidden: true
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -289,3 +293,7 @@ kendo_module({
     };
     ui.plugin(Pane);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

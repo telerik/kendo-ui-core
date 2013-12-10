@@ -1,9 +1,13 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core" ], f);
+})(function(){
+
+var __meta__ = {
     id: "diagram.utils",
     name: "Utils",
     category: "diagram",
-    depends: ["core"]
-});
+    depends: [ "core" ]
+};
 
 (function ($, undefined) {
     var kendo = window.kendo,
@@ -678,3 +682,7 @@ kendo_module({
         Ticker: Ticker
     });
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

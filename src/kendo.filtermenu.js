@@ -1,12 +1,16 @@
-/* jshint eqnull: true */
-kendo_module({
+(function(f, define){
+    define([ "./kendo.datepicker", "./kendo.numerictextbox", "./kendo.dropdownlist" ], f);
+})(function(){
+
+var __meta__ = {
     id: "filtermenu",
     name: "Filtering Menu",
     category: "framework",
     depends: [ "datepicker", "numerictextbox", "dropdownlist" ],
     advanced: true
-});
+};
 
+/* jshint eqnull: true */
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -692,3 +696,7 @@ kendo_module({
 
     ui.plugin(FilterMenu);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

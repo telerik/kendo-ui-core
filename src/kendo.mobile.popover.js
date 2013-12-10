@@ -1,10 +1,14 @@
-kendo_module({
+(function(f, define){
+    define([ "./kendo.popup", "./kendo.mobile.application" ], f);
+})(function(){
+
+var __meta__ = {
     id: "mobile.popover",
     name: "PopOver",
     category: "mobile",
     description: "The mobile PopOver widget represents a transient view which is displayed when the user taps on a navigational widget or area on the screen. ",
     depends: [ "popup", "mobile.application" ]
-});
+};
 
 (function($, undefined) {
     var kendo = window.kendo,
@@ -231,3 +235,7 @@ kendo_module({
     ui.plugin(Popup);
     ui.plugin(PopOver);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

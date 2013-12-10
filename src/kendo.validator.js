@@ -1,12 +1,16 @@
-/* jshint eqnull: true */
-kendo_module({
+(function(f, define){
+    define([ "./kendo.core" ], f);
+})(function(){
+
+var __meta__ = {
     id: "validator",
     name: "Validator",
     category: "web",
     description: "The Validator offers an easy way to do a client-side form validation.",
     depends: [ "core" ]
-});
+};
 
+/* jshint eqnull: true */
 (function($, undefined) {
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
@@ -379,3 +383,7 @@ kendo_module({
 
     kendo.ui.plugin(Validator);
 })(window.kendo.jQuery);
+
+return window.kendo;
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
