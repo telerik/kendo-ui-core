@@ -916,14 +916,16 @@ kendo_module({
 
     // Exports ================================================================
 
+    var bomFill = browser.msie && browser.version < 9 ? '\ufeff' : '';
+
     extend(kendo.ui, {
         editor: {
             ToolTemplate: ToolTemplate,
             EditorUtils: EditorUtils,
             Tool: Tool,
             FormatTool: FormatTool,
-            _bomFill: browser.msie && browser.version < 9 ? '\ufeff' : '',
-            emptyElementContent: !browser.msie ? '<br _moz_dirty="" />' : browser.version < 9 ? '\ufeff' : ''
+            _bomFill: bomFill,
+            emptyElementContent: bomFill || '<br _moz_dirty="" />'
         }
     });
 
