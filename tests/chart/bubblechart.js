@@ -457,4 +457,79 @@
         });
 
     })();
+
+    (function() {
+        var note;
+
+        module("Bubble Chart / Note", {
+            setup: function() {
+                var chart = createChart({
+                    series: [{
+                        name: "Value",
+                        type: "bubble",
+                        data: [{ x: 1, y: 10, size: 100, noteText: "A" }]
+                    }]
+                });
+
+                note = chart._plotArea.charts[0].points[0].note;
+            },
+            teardown: function() {
+                destroyChart();
+            }
+        });
+
+        test("should have text", function() {
+            equal(note.options.label.text, "A");
+        });
+
+        module("Bubble Chart / Note Template", {
+            teardown: function() {
+                destroyChart();
+            }
+        });
+
+        function createNote(options) {
+            var chart = createChart({
+                series: [{
+                    name: "Value",
+                    type: "bubble",
+                    data: [{ x: 1, y: 10, size: 100, noteText: "A", test: "test" }],
+                    notes: $.extend({}, options),
+                    name: "name"
+                }]
+            });
+
+            note = chart._plotArea.charts[0].points[0].note;
+        }
+
+        test("dataItem", function() {
+            createNote({
+                label: {
+                    template: "#= dataItem.test #"
+                }
+            });
+
+            equal(note.options.label.text, "test");
+        });
+
+        test("value", function() {
+            createNote({
+                label: {
+                    template: "x: #= value.x # y: #= value.y # size: #= value.size #"
+                }
+            });
+
+            equal(note.options.label.text, "x: 1 y: 10 size: 100");
+        });
+
+        test("series", function() {
+            createNote({
+                label: {
+                    template: "#= series.name #"
+                }
+            });
+
+            equal(note.options.label.text, "name");
+        });
+    })();
 })();
