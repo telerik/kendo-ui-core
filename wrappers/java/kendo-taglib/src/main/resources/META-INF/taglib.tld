@@ -13600,6 +13600,12 @@ Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features)
             <type>float</type>
         </attribute>
         <attribute>
+            <description>Controls whether the user can pan the map.</description>
+            <name>pannable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+        <attribute>
             <description>Specifies whether the map should wrap around the east-west edges.</description>
             <name>wraparound</name>
             <rtexprvalue>true</rtexprvalue>
@@ -13610,6 +13616,12 @@ Typical web maps use zoom levels from 0 (whole world) to 19 (sub-meter features)
             <name>zoom</name>
             <rtexprvalue>true</rtexprvalue>
             <type>float</type>
+        </attribute>
+        <attribute>
+            <description>Controls whether the map zoom level can be changed by the user.</description>
+            <name>zoomable</name>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
         </attribute>
         <attribute>
             <description>Fired when the user clicks on the map.</description>
@@ -13659,7 +13671,8 @@ This typically occurs on initial load and after a zoom/center change.</descripti
             <rtexprvalue>true</rtexprvalue>
         </attribute>
         <attribute>
-            <description>Fired when the map zoom level is about to change.</description>
+            <description>Fired when the map zoom level is about to change.
+Cancelling the event will prevent the user action.</description>
             <name>zoomStart</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
@@ -14357,7 +14370,8 @@ This typically occurs on initial load and after a zoom/center change.</descripti
         <body-content>JSP</body-content>
     </tag>
     <tag>
-        <description>Fired when the map zoom level is about to change.</description>
+        <description>Fired when the map zoom level is about to change.
+Cancelling the event will prevent the user action.</description>
         <name>map-zoomStart</name>
         <tag-class>com.kendoui.taglib.map.ZoomStartFunctionTag</tag-class>
         <body-content>JSP</body-content>

@@ -327,15 +327,17 @@ kendo_module({
 
         _initScroller: function() {
             var friction = kendo.support.mobileOS ? FRICTION_MOBILE : FRICTION;
+            var zoomable = this.options.zoomable !== false;
             var scroller = this.scroller = new kendo.mobile.ui.Scroller(
                 this.element.children(0), {
                     friction: friction,
                     velocityMultiplier: VELOCITY_MULTIPLIER,
-                    zoom: true
+                    zoom: zoomable
                 });
 
             scroller.bind("scroll", proxy(this._scroll, this));
             scroller.bind("scrollEnd", proxy(this._scrollEnd, this));
+            scroller.userEvents.bind("gesturestart", proxy(this._scaleStart, this));
             scroller.userEvents.bind("gestureend", proxy(this._scale, this));
 
             this.scrollElement = scroller.scrollElement;
@@ -386,6 +388,15 @@ kendo_module({
             });
         },
 
+        _scaleStart: function(e) {
+            if (this.trigger("zoomStart", { originalEvent: e })) {
+                var touch = e.touches[1];
+                if (touch) {
+                    touch.cancel();
+                }
+            }
+        },
+
         _scale: function(e) {
             var scale = this.scroller.movable.scale;
             var zoom = this._scaleToZoom(scale);
@@ -395,6 +406,7 @@ kendo_module({
             var originPoint = centerPoint.subtract(gestureCenter);
 
             this._zoomAround(originPoint, zoom);
+            this.trigger("zoomEnd", { originalEvent: e });
         },
 
         _scaleToZoom: function(scaleDelta) {
@@ -432,17 +444,24 @@ kendo_module({
 
             scroller.movable.round = true;
 
-            x.makeVirtual();
-            y.makeVirtual();
-
             var xBounds = { min: -topLeft.x, max: scale - topLeft.x };
+            var yBounds = { min: -topLeft.y, max: scale - topLeft.y };
+
             if (this.options.wraparound) {
                 xBounds.min = -maxScale;
                 xBounds.max = maxScale;
             }
-            x.virtualSize(xBounds.min, xBounds.max);
 
-            var yBounds = { min: -topLeft.y, max: scale - topLeft.y };
+            if (this.options.pannable === false) {
+                var viewSize = this.viewSize();
+                xBounds.min = yBounds.min = 0;
+                xBounds.max = viewSize.width;
+                yBounds.max = viewSize.height;
+            }
+
+            x.makeVirtual();
+            y.makeVirtual();
+            x.virtualSize(xBounds.min, xBounds.max);
             y.virtualSize(yBounds.min, yBounds.max);
 
             this._virtualSize = { x: xBounds, y: yBounds };
@@ -485,16 +504,16 @@ kendo_module({
             var fromZoom = this.zoom();
             var toZoom = limit(fromZoom + delta, options.minZoom, options.maxZoom);
 
-            if (toZoom !== fromZoom) {
-                this.trigger("zoomStart", { originalEvent: e });
+            if (options.zoomable !== false && toZoom !== fromZoom) {
+                if (!this.trigger("zoomStart", { originalEvent: e })) {
+                    var cursor = this.eventOffset(e);
+                    var location = this.viewToLocation(cursor);
+                    var postZoom = this.locationToLayer(location, toZoom);
+                    var origin = postZoom.subtract(cursor);
+                    this._zoomAround(origin, toZoom);
 
-                var cursor = this.eventOffset(e);
-                var location = this.viewToLocation(cursor);
-                var postZoom = this.locationToLayer(location, toZoom);
-                var origin = postZoom.subtract(cursor);
-                this._zoomAround(origin, toZoom);
-
-                this.trigger("zoomEnd", { originalEvent: e });
+                    this.trigger("zoomEnd", { originalEvent: e });
+                }
             }
         }
     });

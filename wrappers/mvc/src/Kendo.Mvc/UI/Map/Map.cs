@@ -80,9 +80,13 @@ namespace Kendo.Mvc.UI
         
         public double? MinSize { get; set; }
         
+        public bool? Pannable { get; set; }
+        
         public bool? Wraparound { get; set; }
         
         public double? Zoom { get; set; }
+        
+        public bool? Zoomable { get; set; }
         
         //<< Fields
 
@@ -142,6 +146,11 @@ namespace Kendo.Mvc.UI
                 json["minSize"] = MinSize;
             }
                 
+            if (Pannable.HasValue)
+            {
+                json["pannable"] = Pannable;
+            }
+                
             if (Wraparound.HasValue)
             {
                 json["wraparound"] = Wraparound;
@@ -150,6 +159,11 @@ namespace Kendo.Mvc.UI
             if (Zoom.HasValue)
             {
                 json["zoom"] = Zoom;
+            }
+                
+            if (Zoomable.HasValue)
+            {
+                json["zoomable"] = Zoomable;
             }
                 
         //<< Serialization
