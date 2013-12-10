@@ -2,14 +2,28 @@
     var dataviz = kendo.dataviz,
         g = dataviz.geometry,
         d = dataviz.drawing,
+        m = dataviz.map,
+        ShapeLayer = m.layers.ShapeLayer,
+        Location = m.Location;
 
-        map = dataviz.map,
-        ShapeLayer = map.layers.ShapeLayer,
-        Location = map.Location;
+    var map;
+    var layer;
 
     (function() {
-        var map;
-        var layer;
+        // ------------------------------------------------------------
+        module("Positioning", {
+            setup: function() {
+                map = new MapMock();
+                layer = new ShapeLayer(map);
+            }
+        });
+
+        test("Movable is attached to surface element", function() {
+            equal(layer.movable.element[0], layer.surface.element);
+        });
+    })();
+
+    (function() {
         var pointData = [{
             "type": "Point",
             "coordinates": [-105.01621, 39.57422]
