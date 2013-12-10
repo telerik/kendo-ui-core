@@ -10,8 +10,11 @@
             QUnit.fixture[0].appendChild(table);
         },
         teardown: function() {
+            var component = $(table).data("kendoGrid");
+            if (component) {
+                component.destroy();
+            }
             kendo.destroy(QUnit.fixture);
-            $(table).closest(".k-grid").remove();
             kendo.ns = "";
         }
     });
@@ -440,8 +443,9 @@
     });
 
     test("column width is parsed from DOM col element when grid created from table element", function() {
-        var element = $('<table><colgroup><col style="width:200px"/><col /></colgroup><thead><th data-kendo-field="foo"></th><th data-kendo-field="bar"></th><th data-kendo-field="baz"></th></thead></table>'),
-            grid = new Grid(element.appendTo(QUnit.fixture), {
+        table = $('<table><colgroup><col style="width:200px"/><col /></colgroup><thead><th data-kendo-field="foo"></th><th data-kendo-field="bar"></th><th data-kendo-field="baz"></th></thead></table>');
+
+        var grid = new Grid(table, {
                 dataSource: [],
                 scrollable: false
             });
