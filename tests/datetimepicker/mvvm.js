@@ -373,17 +373,6 @@ test("changing invisible to false shows the widget", function() {
     ok(dom.data("kendoDateTimePicker").wrapper.css("display") != "none", "display is not 'none'");
 });
 
-test("setOptions clears the li elements of the TimeView", function() {
-    dom = $('<input data-role="datetimepicker"/>');
-
-    var datetimepicker = new kendo.ui.DateTimePicker(dom);
-
-    datetimepicker.open("time");
-    datetimepicker.setOptions({});
-
-    equal(datetimepicker.timeView.ul[0].firstChild, null);
-});
-
 test("binding datetimepicker initialized before binding does not override change of calendar", 1, function() {
     dom = $('<input data-bind="value: value" />');
 

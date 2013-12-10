@@ -329,16 +329,6 @@
         ok(dom.data("kendoTimePicker").wrapper.css("display") != "none", "display is not 'none'");
     });
 
-    test("setOptions clears the li elements of the TimeView", function() {
-        var timepicker = new kendo.ui.TimePicker($('<input data-role="timepicker"/>').appendTo(QUnit.fixture));
-
-        timepicker.open();
-        timepicker.setOptions({});
-
-        equal(timepicker.timeView.ul[0].firstChild, null);
-        timepicker.destroy();
-    });
-
     test("binding timepicker initialized before binding does not override change event handler of timeView", 1, function() {
         dom = $('<input data-bind="value: value" />');
 
