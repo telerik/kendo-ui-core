@@ -1,4 +1,8 @@
-﻿(function ($, undefined) {
+(function(f, define){
+    define([ "./kendo.data.aspnetmvc" ], f);
+})(function(){
+
+(function ($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui;
 
@@ -17,3 +21,5 @@
     }
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
