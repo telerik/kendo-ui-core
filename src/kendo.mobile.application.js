@@ -64,7 +64,9 @@ kendo_module({
                 classes.push("km-" + os.name);
             }
         }
-        classes.push("km-" + os.name + os.majorVersion);
+        if (os.name == "ios" && os.majorVersion != 7) {
+            classes.push("km-" + os.name + os.majorVersion);
+        }
         classes.push("km-" + os.majorVersion);
         classes.push("km-m" + (os.minorVersion ? os.minorVersion[0] : 0));
 
