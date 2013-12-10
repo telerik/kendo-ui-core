@@ -1722,7 +1722,7 @@ kendo_module({
                         });
                     }
 
-                    that.addEvent(selection);
+                    that.addEvent(extend({}, selection, view._resourceBySlot(selection)));
                 }
             } else if (key === keys.DELETE) {
                 that.removeEvent(selection.events[0]);
