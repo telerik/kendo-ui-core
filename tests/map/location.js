@@ -58,6 +58,11 @@
             ok(Location.create(new Location(10, 20)).equals(new Location(10, 20)));
         });
 
+        test("create from Location clones instance", function() {
+            var loc = new Location(10, 20);
+            ok(Location.create(loc) !== loc);
+        });
+
         test("create from undefined", function() {
             equal(Location.create(undefined), undefined);
         });
@@ -148,6 +153,16 @@
             }
         });
 
+        test("constructor accepts Locations", function() {
+            ok(extent.nw.equals(new Location(45, -90)));
+        });
+
+        test("constructor accepts [lat,lng]", function() {
+            extent = new Extent([10, 20], [30, 40]);
+            ok(extent.nw.equals(new Location(10, 20)));
+            ok(extent.se.equals(new Location(30, 40)));
+        });
+
         test("contains for negative longitude", function() {
             ok(extent.contains(new Location(0, -89)));
         });
@@ -189,11 +204,11 @@
         });
 
         test("contains with array", function() {
-            ok(extent.contains([-89, 0]));
+            ok(extent.contains([0, -89]));
         });
 
         test("does not contain with array", function() {
-            ok(!extent.contains([-91, 0]));
+            ok(!extent.contains([0, -91]));
         });
 
         test("containsAny with one matching and one non-matching", function() {
@@ -306,10 +321,10 @@
             equal(extent.se.lng, 0);
         });
 
-        test("include accepts lng, lat array", function() {
-            extent.include([10, 10]);
+        test("include accepts [lat, lng] array", function() {
+            extent.include([10, 20]);
             equal(extent.nw.lat, 10);
-            equal(extent.se.lng, 10);
+            equal(extent.se.lng, 20);
         });
 
         test("includeAll includes all locations", function() {
@@ -324,12 +339,12 @@
 
         test("includeAll accepts lng, lat arrays", function() {
             extent.includeAll([
-                [10, 10],
-                [-10, -10]
+                [10, 20],
+                [-10, -20]
             ]);
 
-            ok(extent.nw.equals(new Location(10, -10)));
-            ok(extent.se.equals(new Location(-10, 10)));
+            ok(extent.nw.equals(new Location(10, -20)));
+            ok(extent.se.equals(new Location(-10, 20)));
         });
 
         // ------------------------------------------------------------
@@ -405,5 +420,43 @@
             )))
         });
 
+        // ------------------------------------------------------------
+        module("Extent / center");
+
+        test("negative longitude", function() {
+            ok(new Extent([0, -100], [0, -80]).center().equals(
+               new Location(0, -90)
+            ));
+        });
+
+        test("positive longitude", function() {
+            ok(new Extent([0, 80], [0, 100]).center().equals(
+               new Location(0, 90)
+            ));
+        });
+
+        test("mixed longitude", function() {
+            ok(new Extent([0, -100], [0, 100]).center().equals(
+               new Location(0, 0)
+            ));
+        });
+
+        test("negative latitude", function() {
+            ok(new Extent([-10, 0], [-30, 0]).center().equals(
+               new Location(-20, 0)
+            ));
+        });
+
+        test("positive latitude", function() {
+            ok(new Extent([10, 0], [30, 0]).center().equals(
+               new Location(20, 0)
+            ));
+        });
+
+        test("mixed latitude", function() {
+            ok(new Extent([10, 0], [-10, 0]).center().equals(
+               new Location(0, 0)
+            ));
+        });
     })();
 })();

@@ -78,7 +78,7 @@ kendo_module({
     Location.create = function(arg0, arg1) {
         if (defined(arg0)) {
             if (arg0 instanceof Location) {
-                return arg0;
+                return arg0.clone();
             } else if (arguments.length === 1 && arg0.length === 2) {
                 return Location.fromLatLng(arg0);
             } else {
@@ -89,21 +89,30 @@ kendo_module({
 
     var Extent = Class.extend({
         init: function(nw, se) {
-            this.nw = nw;
-            this.se = se;
+            this.nw = Location.create(nw);
+            this.se = Location.create(se);
         },
 
         contains: function(loc) {
             var nw = this.nw,
                 se = this.se,
-                lng = valueOrDefault(loc.lng, loc[0]),
-                lat = valueOrDefault(loc.lat, loc[1]);
+                lng = valueOrDefault(loc.lng, loc[1]),
+                lat = valueOrDefault(loc.lat, loc[0]);
 
             return loc &&
                    lng + 180 >= nw.lng + 180 &&
                    lng + 180 <= se.lng + 180 &&
                    lat + 90 >= se.lat + 90 &&
                    lat + 90 <= nw.lat + 90;
+        },
+
+        center: function() {
+            var nw = this.nw;
+            var se = this.se;
+
+            var lng = nw.lng + (se.lng - nw.lng) / 2;
+            var lat = nw.lat + (se.lat - nw.lat) / 2;
+            return new Location(lat, lng);
         },
 
         containsAny: function(locs) {
@@ -118,8 +127,8 @@ kendo_module({
         include: function(loc) {
             var nw = this.nw,
                 se = this.se,
-                lng = valueOrDefault(loc.lng, loc[0]),
-                lat = valueOrDefault(loc.lat, loc[1]);
+                lng = valueOrDefault(loc.lng, loc[1]),
+                lat = valueOrDefault(loc.lat, loc[0]);
 
             nw.lng = min(nw.lng, lng);
             nw.lat = max(nw.lat, lat);

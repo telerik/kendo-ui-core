@@ -26,12 +26,12 @@
             this.element = $("<div class='k-layer'></div>")
                 .appendTo(map.scrollElement);
 
-            this.movable = new kendo.ui.Movable(this.element);
             this.surface = d.Surface.create(this.element[0], {
                 width: map.scrollElement.width(),
                 height: map.scrollElement.height()
             });
 
+            this.movable = new kendo.ui.Movable(this.surface.element);
             this._markers = [];
 
             this._click = this._handler("shapeClick");
