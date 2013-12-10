@@ -628,6 +628,78 @@
 
             deepEqual(point.options.color, "downColor");
         });
+    })();
 
+    (function() {
+        var note;
+
+        module("Candlestick Chart / Note", {
+            setup: function() {
+                var chart = createChart({
+                    series: [{
+                        type: "candlestick",
+                        data: [{ open: 3, high: 4, low: 1, close: 2, noteText: "A" }]
+                    }]
+                });
+
+                note = chart._plotArea.charts[0].points[0].note;
+            },
+            teardown: function() {
+                destroyChart();
+            }
+        });
+
+        test("should have text", function() {
+            equal(note.options.label.text, "A");
+        });
+
+        module("Candlestick Chart / Note Template", {
+            teardown: function() {
+                destroyChart();
+            }
+        });
+
+        function createNote(options) {
+            var chart = createChart({
+                series: [{
+                    type: "candlestick",
+                    data: [{ open: 3, high: 4, low: 1, close: 2, noteText: "A", test: "test" }],
+                    notes: $.extend({}, options),
+                    name: "name"
+                }]
+            });
+
+            note = chart._plotArea.charts[0].points[0].note;
+        }
+
+        test("dataItem", function() {
+            createNote({
+                label: {
+                    template: "#= dataItem.test #"
+                }
+            });
+
+            equal(note.options.label.text, "test");
+        });
+
+        test("value", function() {
+            createNote({
+                label: {
+                    template: "open: #= value.open # high: #= value.high # low: #= value.low # close: #= value.close #"
+                }
+            });
+
+            equal(note.options.label.text, "open: 3 high: 4 low: 1 close: 2");
+        });
+
+        test("series", function() {
+            createNote({
+                label: {
+                    template: "#= series.name #"
+                }
+            });
+
+            equal(note.options.label.text, "name");
+        });
     })();
 })();
