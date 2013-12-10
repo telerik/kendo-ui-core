@@ -98,55 +98,38 @@
                         }
                     }
 
-                    function cultureChange() {
+                    function changeCulture() {
                         kendo.culture(this.value());
 
-                        var dateFormat = kendo.culture().calendar.patterns.d,
-                            timeFormat = kendo.culture().calendar.patterns.t,
-                            value;
+                        var datePickerOptions = {
+                            format: kendo.culture().calendar.patterns.d
+                        };
 
-                        //update format, re-render hours and set value again
-                        startTime.options.format = startTime.timeView.options.format = timeFormat;
-                        startTime.timeView.options.parseFormats = [timeFormat];
-                        startTime.timeView.refresh();
-                        startTime.value(startTime.value());
+                        var timePickerOptions = {
+                            format: kendo.culture().calendar.patterns.t
+                        };
 
-                        //update format, re-render hours and set value again
-                        endTime.options.format = endTime.timeView.options.format = timeFormat;
-                        endTime.timeView.options.parseFormats = [timeFormat];
-                        endTime.timeView.refresh();
-                        endTime.value(endTime.value());
+                        startDate.setOptions(datePickerOptions);
+                        endDate.setOptions(datePickerOptions);
 
-                        //update format and set value again
-                        startDate.options.format = startDate.dateView.options.format = dateFormat;
-                        startDate.options.parseFormats = [dateFormat];
-                        value = startDate.value();
-                        startDate.value(null);
-                        startDate.value(value);
+                        startTime.setOptions(timePickerOptions);
+                        endTime.setOptions(timePickerOptions);
 
-                        //update format and set value again
-                        endDate.options.format = endDate.dateView.options.format = dateFormat;
-                        endDate.options.parseFormats = [dateFormat];
-                        value = endDate.value();
-                        endDate.value(null);
-                        endDate.value(value);
-
-                        // clear associated DateView in order to re-render calendar.
-                        startDate.dateView.calendar.element.removeData("dateView");
-
-                        //set values in order to apply new format
                         initial.value(initial.value());
                         discount.value(discount.value());
                     }
 
-                    var startDate = $("#startDate").kendoDatePicker({ change: startDateChange }).data("kendoDatePicker"),
-                    endDate = $("#endDate").kendoDatePicker({ change: endDateChange }).data("kendoDatePicker"),
-                    startTime = $("#startTime").kendoTimePicker().data("kendoTimePicker"),
-                    endTime = $("#endTime").kendoTimePicker().data("kendoTimePicker"),
-                    initial = $("#initial").kendoNumericTextBox({ format: "c" }).data("kendoNumericTextBox"),
-                    discount = $("#discount").kendoNumericTextBox({ format: "p" }).data("kendoNumericTextBox"),
+                    var startDate = new kendo.ui.DatePicker($("#startDate"), { change: startDateChange });
+                    var endDate = new kendo.ui.DatePicker($("#endDate"), { change: endDateChange });
 
-                    today = new Date();
+                    var startTime = new kendo.ui.TimePicker($("#startTime"));
+                    var endTime = new kendo.ui.TimePicker($("#endTime"));
+
+                    var initial = new kendo.ui.NumericTextBox($("#initial"), { format: "c" });
+                    var discount = new kendo.ui.NumericTextBox($("#discount"), { format: "p" });
+
+                    var today = new Date();
+
                     startDate.value(today);
                     endDate.min(today);
 
@@ -157,7 +140,7 @@
                     startDate.max(today);
 
                     $("#culture").kendoDropDownList({
-                        change: cultureChange,
+                        change: changeCulture,
                         dataTextField: "text",
                         dataValueField: "value",
                         dataSource: [{text: "bg-BG"},
