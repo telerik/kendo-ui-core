@@ -5608,8 +5608,6 @@ kendo_module({
             point.value = value;
             point.id = uniqueId();
             point.enableDiscovery();
-
-            point.createNote();
         },
 
         options: {
@@ -5671,6 +5669,11 @@ kendo_module({
             point.lowHighLinePoints = points;
 
             point.box = lhSlot.clone().wrap(ocSlot);
+
+            if (!point._rendered) {
+                point._rendered = true;
+                point.createNote();
+            }
 
             point.reflowNote();
         },
