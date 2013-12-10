@@ -2829,6 +2829,32 @@ kendo_module({
         }
     };
 
+    var NoteMixin = {
+        createNote: function() {
+            var element = this,
+                options = element.options.notes,
+                text = options.label.text,
+                noteTemplate;
+
+            if (options.visible !== false && defined(text) && text !== null) {
+                if (options.label.template) {
+                    noteTemplate = template(options.label.template);
+                    text = noteTemplate({
+                        dataItem: element.dataItem,
+                        category: element.category,
+                        value: element.value,
+                        series: element.series
+                    });
+                } else if (options.label.format) {
+                    text = autoFormat(options.label.format, text);
+                }
+
+                element.note = new Note(deepExtend({}, options, { label: { text: text }}));
+                element.append(element.note);
+            }
+        }
+    };
+
     var Bar = ChartElement.extend({
         init: function(value, options) {
             var bar = this;
@@ -2900,32 +2926,9 @@ kendo_module({
             }
 
             bar.createNote();
-            if(bar.errorBar){
+
+            if (bar.errorBar) {
                 bar.append(bar.errorBar);
-            }
-        },
-
-        createNote: function() {
-            var bar = this,
-                options = bar.options.notes,
-                text = options.label.text,
-                noteTemplate;
-
-            if (options.visible && defined(text) && text !== null) {
-                if (options.label.template) {
-                    noteTemplate = template(options.label.template);
-                    text = noteTemplate({
-                        dataItem: bar.dataItem,
-                        category: bar.category,
-                        value: bar.value,
-                        series: bar.series
-                    });
-                } else if (options.label.format) {
-                    text = autoFormat(options.label.format, text);
-                }
-
-                bar.note = new Note(deepExtend({}, options, { label: { text: text }}));
-                bar.append(bar.note);
             }
         },
 
@@ -3050,6 +3053,7 @@ kendo_module({
         }
     });
     deepExtend(Bar.fn, PointEventsMixin);
+    deepExtend(Bar.fn, NoteMixin);
 
     var ErrorRangeCalculator = function(errorValue, series, field) {
         var that = this;
@@ -3930,30 +3934,6 @@ kendo_module({
             bullet.createNote();
         },
 
-        createNote: function() {
-            var bullet = this,
-                options = bullet.options.notes,
-                text = options.label.text,
-                noteTemplate;
-
-            if (options.visible && defined(text) && text !== null) {
-                if (options.label.template) {
-                    noteTemplate = template(options.label.template);
-                    text = noteTemplate({
-                        dataItem: bullet.dataItem,
-                        category: bullet.category,
-                        value: bullet.value,
-                        series: bullet.series
-                    });
-                } else if (options.label.format) {
-                    text = autoFormat(options.label.format, text);
-                }
-
-                bullet.note = new Note(deepExtend({}, options, { label: { text: text }}));
-                bullet.append(bullet.note);
-            }
-        },
-
         reflow: function(box) {
             var bullet = this,
                 options = bullet.options,
@@ -4060,6 +4040,7 @@ kendo_module({
         }
     });
     deepExtend(Bullet.fn, PointEventsMixin);
+    deepExtend(Bullet.fn, NoteMixin);
 
     var Target = ShapeElement.extend();
     deepExtend(Target.fn, PointEventsMixin);
@@ -4318,30 +4299,6 @@ kendo_module({
             return marker;
         },
 
-        createNote: function() {
-            var point = this,
-                options = point.options.notes,
-                text = options.label.text,
-                noteTemplate;
-
-            if (options.visible && defined(text) && text !== null) {
-                if (options.label.template) {
-                    noteTemplate = template(options.label.template);
-                    text = noteTemplate({
-                        dataItem: point.dataItem,
-                        category: point.category,
-                        value: point.value,
-                        series: point.series
-                    });
-                } else if (options.label.format) {
-                    text = autoFormat(options.label.format, text);
-                }
-
-                point.note = new Note(deepExtend({}, options, { label: { text: text }}));
-                point.append(point.note);
-            }
-        },
-
         markerBox: function() {
             if (!this.marker) {
                 this.marker = this.createMarker();
@@ -4384,19 +4341,20 @@ kendo_module({
 
             point.reflowLabel(childBox);
 
-            if(point.errorBars){
+            if (point.errorBars) {
                 for(var i = 0; i < point.errorBars.length; i++){
                      point.errorBars[i].reflow(childBox);
                 }
             }
 
             if (point.note) {
-                if (point.marker) {
-                    noteTargetBox = point.marker.box;
-                } else {
-                    center = point.marker.box.center();
+                var noteTargetBox = point.markerBox();
+
+                if (!point.marker) {
+                    center = noteTargetBox.center();
                     noteTargetBox = Box2D(center.x, center.y, center.x, center.y);
                 }
+
                 point.note.reflow(noteTargetBox);
             }
         },
@@ -4454,6 +4412,7 @@ kendo_module({
         }
     });
     deepExtend(LinePoint.fn, PointEventsMixin);
+    deepExtend(LinePoint.fn, NoteMixin);
 
     var Bubble = LinePoint.extend({
         init: function(value, options) {
@@ -5724,30 +5683,6 @@ kendo_module({
             }
         },
 
-        createNote: function() {
-            var point = this,
-                options = point.options.notes,
-                text = options.label.text,
-                noteTemplate;
-
-            if (options.visible && defined(text) && text !== null) {
-                if (options.label.template) {
-                    noteTemplate = template(options.label.template);
-                    text = noteTemplate({
-                        dataItem: point.dataItem,
-                        category: point.category,
-                        value: point.value,
-                        series: point.series
-                    });
-                } else if (options.label.format) {
-                    text = autoFormat(options.label.format, text);
-                }
-
-                point.note = new Note(deepExtend({}, options, { label: { text: text }}));
-                point.append(point.note);
-            }
-        },
-
         getViewElements: function(view) {
             var point = this,
                 options = point.options,
@@ -5858,6 +5793,7 @@ kendo_module({
         }
     });
     deepExtend(Candlestick.fn, PointEventsMixin);
+    deepExtend(Candlestick.fn, NoteMixin);
 
     var CandlestickChart = CategoricalChart.extend({
         options: {},

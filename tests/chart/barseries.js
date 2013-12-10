@@ -2476,6 +2476,5 @@
                 equal(e.element[0], getElement(bar.id));
             });
         });
-
     })();
 })();
