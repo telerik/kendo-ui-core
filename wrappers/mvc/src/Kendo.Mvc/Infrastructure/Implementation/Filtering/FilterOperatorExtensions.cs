@@ -122,37 +122,28 @@ namespace Kendo.Mvc.Infrastructure.Implementation.Expressions
 
         private static Expression GenerateNotContains(Expression left, Expression right, bool liftMemberAccess)
         {
-            return Expression.Equal(
-                GenerateCaseInsensitiveStringMethodCall(StringContainsMethodInfo, left, right, liftMemberAccess),
-                ExpressionConstants.FalseLiteral);
+            return Expression.Not(
+                GenerateCaseInsensitiveStringMethodCall(StringContainsMethodInfo, left, right, liftMemberAccess));
         }
 
         private static Expression GenerateContains(Expression left, Expression right, bool liftMemberAccess)
         {
-            return Expression.Equal(
-                GenerateCaseInsensitiveStringMethodCall(StringContainsMethodInfo, left, right, liftMemberAccess),
-                ExpressionConstants.TrueLiteral);
+            return GenerateCaseInsensitiveStringMethodCall(StringContainsMethodInfo, left, right, liftMemberAccess);
         }
 
         private static Expression GenerateIsContainedIn(Expression left, Expression right, bool liftMemberAccess)
         {
-            return Expression.Equal(
-                GenerateCaseInsensitiveStringMethodCall(StringContainsMethodInfo, right, left, liftMemberAccess),
-                ExpressionConstants.TrueLiteral);
+            return GenerateCaseInsensitiveStringMethodCall(StringContainsMethodInfo, right, left, liftMemberAccess);
         }
 
         private static Expression GenerateStartsWith(Expression left, Expression right, bool liftMemberAccess)
         {
-            return Expression.Equal(
-                GenerateCaseInsensitiveStringMethodCall(StringStartsWithMethodInfo, left, right, liftMemberAccess), 
-                ExpressionConstants.TrueLiteral);
+            return GenerateCaseInsensitiveStringMethodCall(StringStartsWithMethodInfo, left, right, liftMemberAccess);
         }
 
         private static Expression GenerateEndsWith(Expression left, Expression right, bool liftMemberAccess)
         {
-            return Expression.Equal(
-                GenerateCaseInsensitiveStringMethodCall(StringEndsWithMethodInfo, left, right, liftMemberAccess),
-                ExpressionConstants.TrueLiteral);
+            return GenerateCaseInsensitiveStringMethodCall(StringEndsWithMethodInfo, left, right, liftMemberAccess);
         }
 
         private static Expression GenerateCaseInsensitiveStringMethodCall(MethodInfo methodInfo, Expression left, Expression right, bool liftMemberAccess)
