@@ -99,4 +99,12 @@
         equal(grid.staticContent.find("tr").length, 1);
     });
 
+    test("width is set to static containers", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true, width: 140 }, "bar", "baz"]
+        });
+
+        equal(grid.staticHeader.width(), grid.staticContent.width());
+        equal(grid.staticHeader.width(), 140);
+    });
 })();

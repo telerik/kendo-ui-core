@@ -1,0 +1,107 @@
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>editable</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.userevents.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.resizable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.groupable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.model.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+  </head>
+    <body>
+<div id="clientsDb">
+
+                <div id="grid" style="height: 380px"></div>
+
+            </div>
+
+            <style scoped>
+                #clientsDb {
+                    width: 692px;
+                    height: 413px;
+                    margin: 30px auto;
+                    padding: 51px 4px 0 4px;
+                    background: url('../../content/web/grid/clientsDb.png') no-repeat 0 0;
+                }
+                .k-grid-header-static {
+                    float: left;
+                    overflow: hidden;
+                    float:left;
+                    border-color: #c5c5c5;
+                    position: relative;
+                    border-style: solid;
+                    border-width: 0 1px 0 0;
+                }
+
+                div.k-grid-header-wrap,
+                div.k-grid-content
+                {
+                    width: inherit;
+                }
+
+                .k-grid-content-static
+                {
+                    overflow: hidden;
+                    float: left;
+                    border-right: solid 1px #c5c5c5;
+                }
+
+            </style>
+            <script>
+                $(document).ready(function () {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            type: "odata",
+                            transport: {
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Customers"
+                            },
+                            pageSize: 100
+                        },
+                        groupable: true,
+                        sortable: true,
+                        pageable: {
+                            refresh: true,
+                            buttonCount: 5
+                        },
+                        columns: [{
+                            field: "ContactName",
+                            title: "Contact Name",
+                            static: true,
+                            width: 140
+                        }, {
+                            field: "ContactTitle",
+                            title: "Contact Title",
+                            width: 290
+                        }, {
+                            field: "CompanyName",
+                            title: "Company Name",
+                            width: 290
+                        }, {
+                            field: "Country",
+                            width: 110
+                        }]
+                    });
+                });
+            </script>
+    </body>
+</html>

@@ -492,12 +492,13 @@ var __meta__ = {
             tmp = tbody;
 
         if (tbodySupportsInnerHtml) {
-            tbody.innerHTML = html;
+            tbody[0].innerHTML = html;
         } else {
             placeholder = document.createElement("div");
             placeholder.innerHTML = "<table><tbody>" + html + "</tbody></table>";
             tbody = placeholder.firstChild.firstChild;
-            table.replaceChild(tbody, tmp);
+            table[0].replaceChild(tbody, tmp[0]);
+            tbody = $(tbody);
         }
         return tbody;
     }
@@ -2548,7 +2549,6 @@ var __meta__ = {
                     header = $('<div class="k-grid-header" />').insertBefore(that.table);
                 }
 
-
                 // workaround for IE issue where scroll is not raised if container is same width as the scrollbar
                 header.css((isRtl ? "padding-left" : "padding-right"), scrollable.virtual ? scrollbar + 1 : scrollbar);
                 table = $('<table role="grid" />');
@@ -2591,16 +2591,25 @@ var __meta__ = {
                 if (scrollable.virtual) {
                     that.content.find(">.k-virtual-scrollable-wrap").bind("scroll" + NS, function () {
                         that.scrollables.scrollLeft(this.scrollLeft + webKitRtlCorrection);
+                        if (that.staticContent) {
+                            that.staticContent[0].scrollTop = this.scrollTop;
+                        }
                     });
                 } else {
                     that.content.bind("scroll" + NS, function () {
                         that.scrollables.scrollLeft(this.scrollLeft + webKitRtlCorrection);
+                        if (that.staticContent) {
+                            that.staticContent[0].scrollTop = this.scrollTop;
+                        }
                     });
 
                     var touchScroller = kendo.touchScroller(that.content);
                     if (touchScroller && touchScroller.movable) {
                         touchScroller.movable.bind("change", function(e) {
                             that.scrollables.scrollLeft(-e.sender.x);
+                            if (that.staticContent) {
+                                that.staticContent.scrollTop(-e.sender.y);
+                            }
                         });
                     }
                 }
@@ -2632,6 +2641,16 @@ var __meta__ = {
                     if (resizable) {
                         resizable.unbind("resize", that._setContentWidthHandler);
                     }
+                }
+
+                var columns = staticColumns(that.columns);
+                if (that.staticHeader) {
+                    var width = 0;
+                    for (var idx = 0, length = columns.length; idx < length; idx++) {
+                        width += columns[idx].width;
+                    }
+                    that.staticHeader.width(width);
+                    that.staticContent.width(width);
                 }
             }
         },
@@ -2685,6 +2704,9 @@ var __meta__ = {
                 if (isGridHeightSet(that.wrapper)) { // set content height only if needed
                     if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
                         that.content.height(height);
+                        if (that.staticContent) {
+                            that.staticContent.height(height - scrollbar);
+                        }
                     } else {
                         that.content.height(scrollbar * 2 + 1);
                     }
@@ -4000,11 +4022,11 @@ var __meta__ = {
                 html += that._rowsHtml(data, that.rowTemplate, that.altRowTemplate);
             }
 
-            that.tbody = appendContent(that.tbody[0], that.table[0], html);
+            that.tbody = appendContent(that.tbody, that.table, html);
 
             if (that.staticContent) {
                 var table = that.staticContent.children("table");
-                appendContent(table.children("tbody")[0], table[0], that._rowsHtml(data, that.staticRowTemplate, that.staticAltRowTemplate));
+                appendContent(table.children("tbody"), table, that._rowsHtml(data, that.staticRowTemplate, that.staticAltRowTemplate));
             }
 
             that._footer();
