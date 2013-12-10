@@ -58,6 +58,11 @@
             ok(Location.create(new Location(10, 20)).equals(new Location(10, 20)));
         });
 
+        test("create from Location clones instance", function() {
+            var loc = new Location(10, 20);
+            ok(Location.create(loc) !== loc);
+        });
+
         test("create from undefined", function() {
             equal(Location.create(undefined), undefined);
         });
