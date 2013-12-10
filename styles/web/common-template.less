@@ -107,6 +107,10 @@
     user-select: none;
 }
 
+.disable-high-contrast {
+    -ms-high-contrast-adjust: none;
+}
+
 .box-sizing(@sizing) {
     -webkit-box-sizing: @sizing;
     -moz-box-sizing: @sizing;
@@ -417,6 +421,7 @@ html body .k-button-bare.k-upload-button:hover
     font-size: 0;
     line-height: 0;
     text-align: center;
+    .disable-high-contrast();
 }
 
 /* In IE7 vertical align: middle can't be overridden */
@@ -2920,6 +2925,7 @@ span.k-numerictextbox
         vertical-align: middle;
         width: @grid-size;
         height: @grid-size;
+        .disable-high-contrast();
         .k-selected-color {
             display: block;
             height: 3px;
@@ -2969,6 +2975,8 @@ span.k-numerictextbox
         width: 14px;
         height: 14px;
         overflow: hidden;
+        .disable-high-contrast();
+
         &.k-state-selected {
             z-index: 100;
             background: transparent;
@@ -3292,6 +3300,7 @@ table.k-editor
     width: 24px;
     height: 24px;
     vertical-align: middle;
+    .disable-high-contrast();
 }
 
 .editor-icon(@x, @y) {
@@ -3591,6 +3600,7 @@ table.k-editor
     vertical-align: top;
     display: inline-block;
     overflow: hidden;
+    .disable-high-contrast();
 }
 
 /* Progressbar */
