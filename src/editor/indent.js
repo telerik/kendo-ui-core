@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./components" ], f);
+})(function(){
+
 (function($, undefined) {
 
 // Imports ================================================================
@@ -226,3 +230,5 @@ registerTool("indent", new Tool({ command: IndentCommand, template: new ToolTemp
 registerTool("outdent", new OutdentTool({ command: OutdentCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Outdent"})}));
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./main" ], f);
+})(function(){
+
 (function($) {
 
 var kendo = window.kendo,
@@ -720,3 +724,7 @@ var Dom = {
 kendo.ui.editor.Dom = Dom;
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
+
+

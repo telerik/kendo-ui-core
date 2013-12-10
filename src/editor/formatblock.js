@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./inlineformat" ], f);
+})(function(){
+
 (function($) {
 
 var kendo = window.kendo,
@@ -327,3 +331,5 @@ registerFormat("justifyFull", [
 registerTool("justifyFull", new BlockFormatTool({format: formats.justifyFull, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Full"})}));
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

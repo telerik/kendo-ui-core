@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./range" ], f);
+})(function(){
+
 (function($) {
 
     // Imports ================================================================
@@ -950,3 +954,5 @@ extend(editorNS, {
 registerTool("insertHtml", new InsertHtmlTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Insert HTML", initialValue: "Insert HTML"})}));
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

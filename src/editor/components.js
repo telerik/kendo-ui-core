@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./image" ], f);
+})(function(){
+
 (function($, undefined) {
 
 var kendo = window.kendo,
@@ -125,3 +129,5 @@ kendo.ui.plugin(SelectBox);
 kendo.ui.editor.SelectBox = SelectBox;
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

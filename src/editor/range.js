@@ -1,4 +1,9 @@
 /*jshint boss: true */
+
+(function(f, define){
+    define([ "./serializer" ], f);
+})(function(){
+
 (function($) {
 
     // Imports ================================================================
@@ -1134,3 +1139,5 @@ extend(Editor, {
 });
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

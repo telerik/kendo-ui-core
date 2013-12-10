@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./viewhtml" ], f);
+})(function(){
+
 (function($) {
 
 var kendo = window.kendo,
@@ -236,3 +240,5 @@ registerTool("style", new StyleTool({template: new ToolTemplate({template: dropD
 registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({template: dropDownListTemplate})}));
 
 })(window.kendo.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

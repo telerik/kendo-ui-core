@@ -1,3 +1,7 @@
+(function(f, define){
+    define([ "./formatting" ], f);
+})(function(){
+
 (function($,undefined) {
     var kendo = window.kendo;
     var ui = kendo.ui;
@@ -547,3 +551,5 @@ $.extend(editorNS, {
 });
 
 })(window.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });

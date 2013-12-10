@@ -1,17 +1,7 @@
 /*jshint scripturl: true */
-kendo_module({
-    id: "editor",
-    name: "Editor",
-    category: "web",
-    description: "Rich text editor component",
-    depends: [ "combobox", "dropdownlist", "window", "colorpicker" ],
-    features: [ {
-        id: "editor-imagebrowser",
-        name: "Image Browser",
-        description: "Support for uploading and inserting images",
-        depends: [ "imagebrowser" ]
-    } ]
-});
+(function(f, define){
+    define([ "../kendo.combobox", "../kendo.dropdownlist", "../kendo.window", "../kendo.colorpicker" ], f);
+})(function(){
 
 (function($,undefined) {
 
@@ -939,3 +929,5 @@ kendo_module({
     });
 
 })(window.jQuery);
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
