@@ -599,11 +599,19 @@ kendo_module({
         ],
 
         setOptions: function(options) {
-            Widget.fn.setOptions.call(this, options);
+            var that = this;
+            var value = that._value;
 
-            normalize(this.options);
+            Widget.fn.setOptions.call(that, options);
+            options = that.options;
 
-            this.timeView.setOptions(this.options);
+            normalize(options);
+
+            that.timeView.setOptions(options);
+
+            if (value) {
+                that.element.val(kendo.toString(value, options.format, options.culture));
+            }
         },
 
         dataBind: function(dates) {
