@@ -32,10 +32,7 @@ src/kendo.winjs.js
 src/kendo.dataviz.js
 src/kendo.mobile.js
 src/kendo.web.js
-src/kendo.editor.js
-src/kendo.aspnetmvc.js
 src/kendo.icenium.js
-src/kendo.dataviz.map.js
 styles/web/*.css
 styles/mobile/*.css
 styles/dataviz/*.min.css
