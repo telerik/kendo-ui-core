@@ -115,6 +115,83 @@
             ok(plotArea instanceof dataviz.CategoricalPlotArea);
         });
 
-    })();
+        (function() {
+            var note;
 
+            module("Bar Chart Note", {
+                setup: function() {
+                    setupChart([{
+                        name: "Value",
+                        type: "bar",
+                        data: [{ value: 10, noteText: "A" }]
+                    }]);
+                    note = chart._plotArea.charts[0].points[0].note;
+                },
+                teardown: function() {
+                    destroyChart();
+                }
+            });
+
+            test("should have text", function() {
+                equal(note.options.label.text, "A");
+            });
+
+            module("Bar Chart Note / Template", {
+                teardown: function() {
+                    destroyChart();
+                }
+            });
+
+            function createNote(options) {
+                setupChart([{
+                    name: "Value",
+                    type: "bar",
+                    data: [{ value: 10, category: "category", noteText: "A", test: "test" }],
+                    notes: $.extend({}, options),
+                    name: "name"
+                }]);
+                note = chart._plotArea.charts[0].points[0].note;
+            }
+
+            test("dataItem", function() {
+                createNote({
+                    label: {
+                        template: "#= dataItem.test #"
+                    }
+                });
+
+                equal(note.options.label.text, "test");
+            });
+
+            test("category", function() {
+                createNote({
+                    label: {
+                        template: "#= category #"
+                    }
+                });
+
+                equal(note.options.label.text, "Alpha");
+            });
+
+            test("value", function() {
+                createNote({
+                    label: {
+                        template: "#= value #"
+                    }
+                });
+
+                equal(note.options.label.text, 10);
+            });
+
+            test("series", function() {
+                createNote({
+                    label: {
+                        template: "#= series.name #"
+                    }
+                });
+
+                equal(note.options.label.text, "name");
+            });
+        })();
+    })();
 })();
