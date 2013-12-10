@@ -177,6 +177,8 @@
                 kendo.destroy("#example");
             }
 
+            kendo.culture("en-US");
+
             $(doc)
                 .off(".examples")
                 .trigger("kendo:pageUnload");
