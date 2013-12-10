@@ -571,4 +571,16 @@
         equal(first.html(), "00:00");
     });
 
+    test("setOptions method updates format", function() {
+        var timepicker = input.kendoTimePicker().data("kendoTimePicker");
+
+        timepicker.value(new Date(2013, 10, 10, 0));
+
+        timepicker.setOptions({
+            format: "HH:mm"
+        });
+
+        equal(timepicker.element.val(), "00:00");
+    });
+
 })();
