@@ -98,6 +98,15 @@
                    lat + 90 <= nw.lat + 90;
         },
 
+        center: function() {
+            var nw = this.nw;
+            var se = this.se;
+
+            var lng = nw.lng + (se.lng - nw.lng) / 2;
+            var lat = nw.lat + (se.lat - nw.lat) / 2;
+            return new Location(lat, lng);
+        },
+
         containsAny: function(locs) {
             var result = false;
             for (var i = 0; i < locs.length; i++) {

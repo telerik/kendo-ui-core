@@ -420,5 +420,43 @@
             )))
         });
 
+        // ------------------------------------------------------------
+        module("Extent / center");
+
+        test("negative longitude", function() {
+            ok(new Extent([0, -100], [0, -80]).center().equals(
+               new Location(0, -90)
+            ));
+        });
+
+        test("positive longitude", function() {
+            ok(new Extent([0, 80], [0, 100]).center().equals(
+               new Location(0, 90)
+            ));
+        });
+
+        test("mixed longitude", function() {
+            ok(new Extent([0, -100], [0, 100]).center().equals(
+               new Location(0, 0)
+            ));
+        });
+
+        test("negative latitude", function() {
+            ok(new Extent([-10, 0], [-30, 0]).center().equals(
+               new Location(-20, 0)
+            ));
+        });
+
+        test("positive latitude", function() {
+            ok(new Extent([10, 0], [30, 0]).center().equals(
+               new Location(20, 0)
+            ));
+        });
+
+        test("mixed latitude", function() {
+            ok(new Extent([10, 0], [-10, 0]).center().equals(
+               new Location(0, 0)
+            ));
+        });
     })();
 })();
