@@ -121,20 +121,22 @@ kendo_module({
         CLOSE,
         CHANGE
     ],
+
         setOptions: function(options) {
             var that = this,
+                value = that._value,
                 dateViewOptions = that.dateView.options,
                 timeViewOptions = that.timeView.options,
                 min, max, currentValue;
 
             Widget.fn.setOptions.call(that, options);
-            normalize(that.options);
-
 
             options = that.options;
 
+            normalize(options);
             min = options.min;
             max = options.max;
+
             currentValue = options.value || that._value || that.dateView._current;
 
             if (min && !isEqualDatePart(min, currentValue)) {
@@ -145,23 +147,18 @@ kendo_module({
                 max = new DATE(MAX);
             }
 
-            extend(dateViewOptions, options, {
-                change: dateViewOptions.change,
-                close: dateViewOptions.close,
-                open: dateViewOptions.open
-            });
+            that.dateView.setOptions(options);
 
-            extend(timeViewOptions, options, {
+            that.timeView.setOptions(extend({}, options, {
                 format: options.timeFormat,
-                active: timeViewOptions.active,
-                change: timeViewOptions.change,
-                close: timeViewOptions.close,
-                open: timeViewOptions.open,
                 min: min,
                 max: max
-            });
+            }));
 
-            that.timeView.ul[0].innerHTML = "";
+            if (value) {
+                that.element.val(kendo.toString(value, options.format, options.culture));
+                that._updateARIA(value);
+            }
         },
 
         _editable: function(options) {

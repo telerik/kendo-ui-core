@@ -675,4 +675,54 @@ test("setOptions method sets correct timeView min/max values", function() {
     deepEqual(datetimepicker.timeView.options.min, new Date(1900, 0, 1));
 });
 
+test("setOptions rebinds time options", function() {
+    var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+    var timeView = datetimepicker.timeView;
+
+    stub(timeView, {
+        bind: timeView.bind
+    });
+
+    datetimepicker.setOptions({});
+
+    equal(timeView.calls("bind"), 1);
+});
+
+test("setOptions supports dynamically format change", function() {
+    var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+    var timeView = datetimepicker.timeView;
+
+    datetimepicker.setOptions({
+        timeFormat: "HH:mm"
+    });
+
+    var first = timeView.ul.children().first();
+
+    equal(first.html(), "00:00");
+});
+
+test("setOptions method updates calendar options", function() {
+    var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+    datetimepicker.open();
+
+    datetimepicker.setOptions({
+        start: "year",
+        depth: "year"
+    });
+
+    equal(datetimepicker.dateView.calendar.view().name, "year");
+});
+
+test("setOptions method updates format", function() {
+    var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+    datetimepicker.open();
+    datetimepicker.value(new Date(2013, 10, 10));
+
+    datetimepicker.setOptions({
+        format: "dd/MM/yyyy"
+    });
+
+    equal(datetimepicker.element.val(), kendo.toString(datetimepicker.value(), "dd/MM/yyyy"));
+});
+
 })();

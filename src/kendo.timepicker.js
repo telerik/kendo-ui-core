@@ -291,6 +291,19 @@ kendo_module({
             that.current(li);
         },
 
+        setOptions: function(options) {
+            var old = this.options;
+
+            this.options = extend(old, options, {
+                active: old.active,
+                change: old.change,
+                close: old.close,
+                open: old.open
+            });
+
+            this.bind();
+        },
+
         toggle: function() {
             var that = this;
 
@@ -586,22 +599,11 @@ kendo_module({
         ],
 
         setOptions: function(options) {
-            var that = this,
-                timeView = that.timeView,
-                timeViewOptions = timeView.options;
+            Widget.fn.setOptions.call(this, options);
 
-            Widget.fn.setOptions.call(that, options);
+            normalize(this.options);
 
-            normalize(that.options);
-
-            timeView.options = extend(timeViewOptions, that.options, {
-                active: timeViewOptions.active,
-                change: timeViewOptions.change,
-                close: timeViewOptions.close,
-                open: timeViewOptions.open
-            });
-
-            timeView.ul[0].innerHTML = "";
+            this.timeView.setOptions(this.options);
         },
 
         dataBind: function(dates) {

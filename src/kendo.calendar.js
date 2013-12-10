@@ -157,9 +157,18 @@ kendo_module({
         ],
 
         setOptions: function(options) {
+            var that = this;
+
             normalize(options);
 
-            Widget.fn.setOptions.call(this, options);
+            Widget.fn.setOptions.call(that, options);
+
+            that._templates();
+
+            that._footer(that.footer);
+            that._index = views[that.options.start];
+
+            that.navigate();
         },
 
         destroy: function() {

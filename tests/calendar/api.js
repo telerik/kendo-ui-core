@@ -734,4 +734,15 @@ test("view method returns current view", 1, function() {
     equal(calendar.view().name, "month");
 });
 
+test("setOptions re-renders current view", 1, function() {
+    var calendar = new Calendar(div);
+
+    calendar.setOptions({
+        start: "year",
+        depth: "year"
+    });
+
+    equal(calendar.view().name, "year");
+});
+
 })();

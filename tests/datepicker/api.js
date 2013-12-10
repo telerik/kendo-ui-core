@@ -460,4 +460,28 @@ test("value method does not show text representation of invalid value", function
     equal(input.val(), "");
 });
 
+test("setOptions method updates calendar options", function() {
+    datepicker = input.kendoDatePicker().data("kendoDatePicker");
+    datepicker.open();
+
+    datepicker.setOptions({
+        start: "year",
+        depth: "year"
+    });
+
+    equal(datepicker.dateView.calendar.view().name, "year");
+});
+
+test("setOptions method updates format", function() {
+    datepicker = input.kendoDatePicker().data("kendoDatePicker");
+    datepicker.open();
+    datepicker.value(new Date(2013, 10, 10));
+
+    datepicker.setOptions({
+        format: "dd/MM/yyyy"
+    });
+
+    equal(datepicker.element.val(), kendo.toString(datepicker.value(), "dd/MM/yyyy"));
+});
+
 })();
