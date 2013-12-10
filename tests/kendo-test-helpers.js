@@ -101,6 +101,10 @@ function release(element, x, y, id) {
     })
 }
 
+function mousewheel(element, delta) {
+    $(element).trigger($.Event("mousewheel", { originalEvent: { detail: delta * 3 } }));
+}
+
 $('head')
     .append('<link rel="stylesheet/less" href="/base/styles/mobile/kendo.mobile.all.less" type="text/css" />')
     .append('<link rel="stylesheet/less" href="/base/styles/web/kendo.common.less" type="text/css" />')

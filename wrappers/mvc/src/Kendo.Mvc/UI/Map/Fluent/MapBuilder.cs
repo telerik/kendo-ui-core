@@ -123,6 +123,17 @@ namespace Kendo.Mvc.UI.Fluent
         }
         
         /// <summary>
+        /// Controls whether the user can pan the map.
+        /// </summary>
+        /// <param name="value">The value that configures the pannable.</param>
+        public MapBuilder Pannable(bool value)
+        {
+            container.Pannable = value;
+
+            return this;
+        }
+        
+        /// <summary>
         /// Specifies whether the map should wrap around the east-west edges.
         /// </summary>
         /// <param name="value">The value that configures the wraparound.</param>
@@ -140,6 +151,17 @@ namespace Kendo.Mvc.UI.Fluent
         public MapBuilder Zoom(double value)
         {
             container.Zoom = value;
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Controls whether the map zoom level can be changed by the user.
+        /// </summary>
+        /// <param name="value">The value that configures the zoomable.</param>
+        public MapBuilder Zoomable(bool value)
+        {
+            container.Zoomable = value;
 
             return this;
         }
