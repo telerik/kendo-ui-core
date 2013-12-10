@@ -3,6 +3,7 @@ GRUNT = "./node_modules/.bin/grunt"
 XVFB_RUN = "xvfb-run"
 GRUNT_CMD = system("which", XVFB_RUN, :out => "/dev/null") ? [XVFB_RUN, "-a", GRUNT] : [GRUNT]
 DEPS = [MIN_JS, MIN_CSS, KENDO_CONFIG_FILE, TESTS].flatten
+SUPPORTED_JQUERY_VERSIONS = ["1.10.2", "2.0.3"]
 
 namespace :tests do
     task :java do
@@ -12,6 +13,13 @@ namespace :tests do
     task :aspnetmvc do
         msbuild "wrappers/mvc/Kendo.Mvc.sln"
         sh "build/xunit/xunit.console.clr4.exe wrappers/mvc/tests/Kendo.Mvc.Tests/bin/Release/Kendo.Mvc.Tests.dll"
+    end
+
+    desc "Run tests in supported jQuery versions"
+    task :jquery => DEPS do
+        SUPPORTED_JQUERY_VERSIONS.each do |version|
+            sh *(GRUNT_CMD + [ "karma", "--junit-results=jquery-#{version}-test-results.xml", "--single-run=true", "--jquery=#{version}" ])
+        end
     end
 
     desc "Run tests in firefox"
