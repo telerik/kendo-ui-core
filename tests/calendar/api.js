@@ -745,4 +745,14 @@ test("setOptions re-renders current view", 1, function() {
     equal(calendar.view().name, "year");
 });
 
+test("setOptions updates footer", 1, function() {
+    var calendar = new Calendar(div);
+
+    calendar.setOptions({
+        footer: false
+    });
+
+    ok(!div.find(".k-footer").is(":visible"));
+});
+
 })();
