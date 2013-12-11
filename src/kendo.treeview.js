@@ -490,11 +490,11 @@ kendo_module({
                     "</li>"
                 ),
                 loading: templateNoWith(
-                    "<div class='k-icon k-loading' /> Loading..."
+                    "<div class='k-icon k-loading' /> #: data.messages.loading #"
                 ),
                 retry: templateNoWith(
-                    "Request failed. " +
-                    "<button class='k-button k-request-retry'>Retry</button>"
+                    "#: data.messages.requestFailed # " +
+                    "<button class='k-button k-request-retry'>#: data.messages.retry #</button>"
                 )
             };
         },
@@ -592,6 +592,11 @@ kendo_module({
                 }, collapse: {
                     duration: 100
                 }
+            },
+            messages: {
+                loading: "Loading...",
+                requestFailed: "Request failed.",
+                retry: "Retry"
             },
             dragAndDrop: false,
             checkboxes: false,
@@ -1412,8 +1417,8 @@ kendo_module({
         },
 
         _error: function(e) {
-            var that = this,
-                node = e.node && that.findByUid(e.node.uid);
+            var node = e.node && this.findByUid(e.node.uid);
+            var retryHtml = this.templates.retry({ messages: this.options.messages });
 
             if (node) {
                 this._progress(node, false);
@@ -1422,7 +1427,7 @@ kendo_module({
                 e.node.loaded(false);
             } else {
                 this._progress(false);
-                this.element.html(this.templates.retry);
+                this.element.html(retryHtml);
             }
         },
 
@@ -1619,12 +1624,13 @@ kendo_module({
 
         _progress: function(node, showProgress) {
             var element = this.element;
+            var loadingText = this.templates.loading({ messages: this.options.messages });
 
             if (arguments.length == 1) {
                 showProgress = node;
 
                 if (showProgress) {
-                    element.html(this.templates.loading);
+                    element.html(loadingText);
                 } else {
                     element.empty();
                 }
