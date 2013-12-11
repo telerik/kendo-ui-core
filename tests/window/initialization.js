@@ -205,6 +205,16 @@
         equal(iframe.length, 0);
     });
 
+    test("creating a window with an iframe adds a k-window-iframecontent class", function() {
+        var dialog = createWindow({
+                iframe: true,
+                content: "about:blank",
+                height: 100
+            });
+
+        ok(dialog.element.hasClass("k-window-iframecontent"));
+    });
+
     test("creating window with minHeight constrains larger content with inner minHeight", function() {
         var dialog = createWindow({
                 minHeight: 200

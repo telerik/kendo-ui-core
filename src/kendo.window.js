@@ -971,6 +971,8 @@ kendo_module({
                 that.trigger(REFRESH);
             }
 
+            element.toggleClass("k-window-iframecontent", showIframe);
+
             return that;
         },
 
