@@ -4308,7 +4308,7 @@ kendo_module({
                 options = point.options,
                 vertical = options.vertical,
                 aboveAxis = options.aboveAxis,
-                childBox, noteTargetBox, center;
+                childBox, center;
 
             point.render();
 
