@@ -1631,7 +1631,7 @@
         // ------------------------------------------------------------
         module("Category Axis / Notes");
 
-        test("render note if is in the range of the axis", function() {
+        test("render if is in the range of the axis", function() {
             createCategoryAxis({
                 notes: {
                     data: [{

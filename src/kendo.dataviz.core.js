@@ -1287,7 +1287,7 @@ kendo_module({
                     text = autoFormat(item.label.format, text);
                 }
 
-                note = new Note(deepExtend({}, item, { label: { text: text }}));
+                note = new Note(item.value, null, null, null, item);
 
                 if (note.options.visible) {
                     if (defined(note.options.position)) {
@@ -1708,11 +1708,15 @@ kendo_module({
     });
 
     var Note = BoxElement.extend({
-        init: function(options) {
+        init: function(value, dataItem, category, series, options) {
             var note = this;
 
             BoxElement.fn.init.call(note, options);
             note.enableDiscovery();
+            note.value = value;
+            note.dataItem = dataItem;
+            note.category = category;
+            note.series = series;
 
             note.render();
         },
@@ -1754,10 +1758,22 @@ kendo_module({
                 size = icon.size,
                 dataModelId = { data: { modelId: note.modelId } },
                 box = Box2D(),
-                marker, width, height;
+                marker, width, height, noteTemplate;
 
             if (options.visible) {
                 if (defined(label) && label.visible) {
+                    if (label.template) {
+                        noteTemplate = template(label.template);
+                        label.text = noteTemplate({
+                            dataItem: note.dataItem,
+                            category: note.category,
+                            value: note.value,
+                            series: note.series
+                        });
+                    } else if (label.format) {
+                        label.text = autoFormat(label.format, text);
+                    }
+
                     note.label = new TextBox(label.text, deepExtend({}, label, dataModelId));
                     note.append(note.label);
 
@@ -1916,12 +1932,16 @@ kendo_module({
         },
 
         eventArgs: function(e) {
-            var note = this.parent,
+            var note = this,
                 options = note.options;
 
             return {
                 element: $(e.target),
-                text: defined(options.label) ? options.label.text : ""
+                text: defined(options.label) ? options.label.text : "",
+                dataItem: note.dataItem,
+                series: note.series,
+                value: note.value,
+                category: note.category
             };
         }
     });

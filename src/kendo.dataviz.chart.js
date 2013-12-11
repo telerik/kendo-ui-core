@@ -2833,23 +2833,18 @@ kendo_module({
         createNote: function() {
             var element = this,
                 options = element.options.notes,
-                text = options.label.text,
-                noteTemplate;
+                text = options.label.text;
 
             if (options.visible !== false && defined(text) && text !== null) {
-                if (options.label.template) {
-                    noteTemplate = template(options.label.template);
-                    text = noteTemplate({
-                        dataItem: element.dataItem,
-                        category: element.category,
-                        value: element.value,
-                        series: element.series
-                    });
-                } else if (options.label.format) {
-                    text = autoFormat(options.label.format, text);
-                }
-
-                element.note = new Note(deepExtend({}, options, { label: { text: text }}));
+                element.note = new Note(
+                    element.value,
+                    element.dataItem,
+                    element.category,
+                    element.series,
+                    deepExtend({}, element.options.notes, {
+                        label: { text: text }
+                    })
+                );
                 element.append(element.note);
             }
         }
