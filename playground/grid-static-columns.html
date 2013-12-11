@@ -29,13 +29,8 @@
         <script src="../demos/mvc/content/shared/js/less.js"></script>
   </head>
     <body>
-<div id="clientsDb">
-
-                <div id="grid" style="height: 380px"></div>
-
-            </div>
-
             <style scoped>
+
                 #clientsDb {
                     width: 692px;
                     height: 413px;
@@ -43,6 +38,7 @@
                     padding: 51px 4px 0 4px;
                     background: url('../../content/web/grid/clientsDb.png') no-repeat 0 0;
                 }
+
                 .k-grid-header-static {
                     float: left;
                     overflow: hidden;
@@ -67,6 +63,11 @@
                 }
 
             </style>
+
+            <div style="width: 600px">
+                <div id="grid" style="height: 880px;"></div>
+            </div>
+
             <script>
                 $(document).ready(function () {
                     $("#grid").kendoGrid({
@@ -84,7 +85,7 @@
                             buttonCount: 5
                         },
                         columns: [{
-                            field: "ContactName",
+                            template: "#=ContactName# <br/> #=ContactName#",
                             title: "Contact Name",
                             static: true,
                             width: 140

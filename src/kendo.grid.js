@@ -2643,14 +2643,20 @@ var __meta__ = {
                     }
                 }
 
-                var columns = staticColumns(that.columns);
-                if (that.staticHeader) {
+                that._setStaticContainersWidth();
+           }
+        },
+
+        _setStaticContainersWidth: function() {
+            if (this.options.scrollable) {
+                var columns = staticColumns(this.columns);
+                if (this.staticHeader) {
                     var width = 0;
                     for (var idx = 0, length = columns.length; idx < length; idx++) {
                         width += columns[idx].width;
                     }
-                    that.staticHeader.width(width);
-                    that.staticContent.width(width);
+                    this.staticHeader.width(width);
+                    this.staticContent.width(width);
                 }
             }
         },
@@ -3580,6 +3586,7 @@ var __meta__ = {
             }
 
             that._columnMenu();
+            that._setStaticContainersWidth();
         },
 
         _updateCols: function() {
@@ -4027,6 +4034,8 @@ var __meta__ = {
             if (that.staticContent) {
                 var table = that.staticContent.children("table");
                 appendContent(table.children("tbody"), table, that._rowsHtml(data, that.staticRowTemplate, that.staticAltRowTemplate));
+
+                adjustRowHeight(that.table, table);
             }
 
             that._footer();
@@ -4051,6 +4060,21 @@ var __meta__ = {
             that.trigger(DATABOUND);
        }
    });
+
+   function adjustRowHeight(table1, table2) {
+      var rows = table1[0].rows,
+        length = rows.length,
+        idx,
+        rows2 = table2[0].rows;
+
+      for (idx = 0; idx < length; idx++) {
+        if (rows[idx].clientHeight > rows2[idx].clientHeight) {
+            rows2[idx].style.height = rows[idx].clientHeight + "px";
+        } else if (rows[idx].clientHeight < rows2[idx].clientHeight) {
+            rows[idx].style.height = rows2[idx].clientHeight + "px";
+        }
+      }
+   }
 
    function getCommand(commands, name) {
        var idx, length, command;

@@ -107,4 +107,14 @@
         equal(grid.staticHeader.width(), grid.staticContent.width());
         equal(grid.staticHeader.width(), 140);
     });
+
+    test("row height is in sync", function() {
+        div.appendTo(QUnit.fixture);
+
+        var grid = setup({
+            columns: [{ template: "foo <br/> foo", static: true, width: 140, encode: false }, "bar", "baz"]
+        });
+
+        equal(grid.content.find("tr:first").height(), grid.staticContent.find("tr:first").height());
+    });
 })();
