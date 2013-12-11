@@ -1389,52 +1389,42 @@
     });
 
 
-    module("drag & drop with load-on-demand", {
-        setup: function() {
-            var i = 1;
+    module("drag & drop with load-on-demand", TreeViewHelpers.noAnimationMoudle);
 
-            createTreeView({
-                dragAndDrop: true,
-                dataSource: {
-                    transport: {
-                        read: function(options) {
-                            if (i == 1) {
+    asyncTest("dropping items over unfetched nodes fetches and appends node", function() {
+        var i = 1;
+
+        createTreeView({
+            dragAndDrop: true,
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        if (i == 1) {
+                            options.success([
+                                { text: "Item " + (i++), hasChildren: true },
+                                { text: "Item " + (i++), hasChildren: false }
+                            ]);
+                        } else {
+                            setTimeout(function() {
                                 options.success([
                                     { text: "Item " + (i++), hasChildren: true },
                                     { text: "Item " + (i++), hasChildren: false }
                                 ]);
-                            } else {
-                                setTimeout(function() {
-                                    options.success([
-                                        { text: "Item " + (i++), hasChildren: true },
-                                        { text: "Item " + (i++), hasChildren: false }
-                                    ]);
-                                }, 100);
-                            }
-                        }
-                    },
-                    schema: {
-                        model: {
-                            hasChildren: "hasChildren"
+
+                                start();
+                                equal(treeview.find(".k-item .k-item").length, 3);
+                            }, 100);
                         }
                     }
+                },
+                schema: {
+                    model: {
+                        hasChildren: "hasChildren"
+                    }
                 }
-            });
+            }
+        });
 
-            kendo.effects.disable();
-        },
-        teardown: function() {
-            kendo.effects.enable();
-            TreeViewHelpers.destroy();
-        }
-    });
-
-    asyncTest("dropping items over unfetched nodes fetches and appends node", function() {
         moveNode(treeviewObject, "Item 2", "Item 1");
-
-        setTimeout(function() {
-            equal(treeview.find(".k-item .k-item").length, 3);
-            start();
-        }, 500);
     });
 })();
