@@ -26,7 +26,6 @@
     }
 
     function moduleTeardown() {
-        destroyMeasureBox();
     }
 
 
@@ -1152,8 +1151,7 @@
             setup: function() {
                 moduleSetup();
                 createTextBox();
-            },
-            teardown: destroyMeasureBox
+            }
         });
 
         test("sets unique id on text", function() {

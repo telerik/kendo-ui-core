@@ -44,8 +44,7 @@
         module("Crosshair / Configuration", {
             setup: function() {
                 createCrosshair();
-            },
-            teardown: destroyMeasureBox
+            }
         });
 
         test("sets width", function() {
@@ -72,8 +71,7 @@
         module("Crosshair / LinePoints", {
             setup: function() {
                 createCrosshair();
-            },
-            teardown: destroyMeasureBox
+            }
         });
 
         test("returns vertical points", function() {

@@ -14,7 +14,6 @@
     }
 
     function moduleTeardown() {
-        destroyMeasureBox();
     }
 
     (function() {

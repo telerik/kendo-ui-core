@@ -21,7 +21,6 @@ function createGauge(options) {
 
 function destroyGauge() {
     kendo.destroy(gaugeElement);
-    destroyMeasureBox();
 }
 
 module("Radial Gauge / API", {
