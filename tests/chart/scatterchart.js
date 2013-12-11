@@ -516,7 +516,7 @@
         });
 
         test("should have text", function() {
-            equal(note.options.label.text, "A");
+            equal(note.label.options.text, "A");
         });
 
         module("Scatter Chart / Note Template", {
@@ -546,7 +546,7 @@
                 }
             });
 
-            equal(note.options.label.text, "test");
+            equal(note.label.options.text, "test");
         });
 
         test("value", function() {
@@ -556,7 +556,7 @@
                 }
             });
 
-            equal(note.options.label.text, "x: 1 y: 10");
+            equal(note.label.options.text, "x: 1 y: 10");
         });
 
         test("series", function() {
@@ -566,7 +566,7 @@
                 }
             });
 
-            equal(note.options.label.text, "name");
+            equal(note.label.options.text, "name");
         });
     })();
 })();

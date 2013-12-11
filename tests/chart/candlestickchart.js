@@ -650,7 +650,7 @@
         });
 
         test("should have text", function() {
-            equal(note.options.label.text, "A");
+            equal(note.label.options.text, "A");
         });
 
         module("Candlestick Chart / Note Template", {
@@ -679,7 +679,7 @@
                 }
             });
 
-            equal(note.options.label.text, "test");
+            equal(note.label.options.text, "test");
         });
 
         test("value", function() {
@@ -689,7 +689,7 @@
                 }
             });
 
-            equal(note.options.label.text, "open: 3 high: 4 low: 1 close: 2");
+            equal(note.label.options.text, "open: 3 high: 4 low: 1 close: 2");
         });
 
         test("series", function() {
@@ -699,7 +699,7 @@
                 }
             });
 
-            equal(note.options.label.text, "name");
+            equal(note.label.options.text, "name");
         });
     })();
 })();

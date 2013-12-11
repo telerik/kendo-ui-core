@@ -133,7 +133,7 @@
             });
 
             test("should have text", function() {
-                equal(note.options.label.text, "A");
+                equal(note.label.options.text, "A");
             });
 
             module("Bar Chart Note / Template", {
@@ -160,7 +160,7 @@
                     }
                 });
 
-                equal(note.options.label.text, "test");
+                equal(note.label.options.text, "test");
             });
 
             test("category", function() {
@@ -170,7 +170,7 @@
                     }
                 });
 
-                equal(note.options.label.text, "Alpha");
+                equal(note.label.options.text, "Alpha");
             });
 
             test("value", function() {
@@ -180,7 +180,7 @@
                     }
                 });
 
-                equal(note.options.label.text, 10);
+                equal(note.label.options.text, 10);
             });
 
             test("series", function() {
@@ -190,7 +190,7 @@
                     }
                 });
 
-                equal(note.options.label.text, "name");
+                equal(note.label.options.text, "name");
             });
         })();
     })();
