@@ -1755,8 +1755,8 @@ function pad(number, digits, end) {
         }
 
         support.touch = "ontouchstart" in window;
-        support.msPointers = navigator.msPointerEnabled;
-        support.pointers = navigator.pointerEnabled;
+        support.msPointers = window.MSPointerEvent;
+        support.pointers = window.PointerEvent;
 
         var transitions = support.transitions = false,
             transforms = support.transforms = false,
@@ -2031,8 +2031,8 @@ function pad(number, digits, end) {
             }
         }
 
-        // TODO: Switch to browser detection here
-        if ((kendo.support.pointers || kendo.support.msPointers) && !positioned) { // IE10 touch zoom is living in a separate viewport.
+        // IE10 touch zoom is living in a separate viewport
+        if (support.browser.msie && (support.pointers || support.msPointers) && !positioned && type != "position") {
             result.top -= (window.pageYOffset - document.documentElement.scrollTop);
             result.left -= (window.pageXOffset - document.documentElement.scrollLeft);
         }
