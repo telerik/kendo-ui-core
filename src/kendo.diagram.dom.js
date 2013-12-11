@@ -1612,19 +1612,26 @@ kendo_module({
             var unit = new kendo.diagram.TransformUnit(shapes, undoStates);
             this.undoRedoService.add(unit, false);
         },
-        zoom: function (zoom, staticPoint) {
+        zoom: function (zoom, options) {
             if (zoom) {
+                var staticPoint = options ? options.location : new kendo.diagram.Point(0, 0);
+                var meta = options ? options.meta : 0;
                 var currentZoom = this._zoom;
                 zoom = this._zoom = this._getValidZoom(zoom);
 
                 if (!isUndefined(staticPoint)) {//Viewpoint vector is constant
+                    staticPoint = new kendo.diagram.Point(Math.round(staticPoint.x), Math.round(staticPoint.y));
                     var zoomedPoint = staticPoint.times(zoom);
                     var viewportVector = staticPoint.times(currentZoom).plus(this._pan);
-                    this._storePan(viewportVector.minus(zoomedPoint));//pan + zoomed point = viewpoint vector
+                    var raw = viewportVector.minus(zoomedPoint);//pan + zoomed point = viewpoint vector
+                    this._storePan(new kendo.diagram.Point(Math.round(raw.x), Math.round(raw.y)));
+                }
+                if (options) {
+                    options.zoom = zoom;
                 }
 
                 this._panTransform();
-                this.trigger(ZOOM);
+                this.trigger(ZOOM, options);
             }
             return this._zoom;
         },
@@ -1900,7 +1907,7 @@ kendo_module({
             this.trigger(SELECT, {selected: selected, deselected: deselected});
         },
         _getValidZoom: function (zoom) {
-            return Math.min(Math.max(zoom, 0.55), 2.0); //around 0.5 something exponential happens...!?
+            return Math.min(Math.max(zoom, 0.7), 2.0);
         },
         _panTransform: function (pos) {
             var diagram = this,
@@ -1936,7 +1943,7 @@ kendo_module({
             }
         },
         _finishPan: function () {
-            this.trigger(PAN);
+            this.trigger(PAN, {total: this._pan, delta: Number.NaN});
         },
         _storePan: function (pan) {
             this._pan = pan;
