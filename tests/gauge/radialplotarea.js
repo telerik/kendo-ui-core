@@ -15,8 +15,6 @@ var dataviz = kendo.dataviz,
         plotArea = new GaugePlotArea(options);
         plotArea.reflow(gaugeBox);
         box = plotArea.box;
-
-        destroyMeasureBox();
     }
 
     module("PlotArea / Reflow", {
@@ -134,8 +132,6 @@ var dataviz = kendo.dataviz,
         plotArea.reflow(gaugeBox);
 
         ring = plotArea.scale.ring;
-
-        destroyMeasureBox();
     }
 
     module("PlotArea / Reflow / Without pointer");

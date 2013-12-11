@@ -24,9 +24,7 @@
     }
 
     // ------------------------------------------------------------
-    module("Linear Scale/ Ranges", {
-        teardown: destroyMeasureBox
-    });
+    module("Linear Scale/ Ranges");
 
     test("render range from 10 to 20", function() {
         createScale({
@@ -63,9 +61,7 @@
     });
 
     // ------------------------------------------------------------
-    module("Linear Scale / Configuration", {
-        teardown: destroyMeasureBox
-    });
+    module("Linear Scale / Configuration");
 
     test("render scale with default min, max and step", function() {
         createScale({ });
@@ -118,9 +114,7 @@
     });
 
     // ------------------------------------------------------------
-    module("Linear Scale/ Ranges/ Configuration", {
-        teardown: destroyMeasureBox
-    });
+    module("Linear Scale/ Ranges/ Configuration");
 
     test("render color", function() {
         createScale({

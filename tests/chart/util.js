@@ -180,19 +180,13 @@ function createChart(options) {
 function destroyChart() {
     kendo.destroy(QUnit.fixture);
     QUnit.fixture.empty();
-    destroyMeasureBox();
-}
-
-function destroyMeasureBox() {
-    $(kendo.dataviz.measureText.measureBox).remove();
-    kendo.dataviz.measureText.measureBox = null;
 }
 
 function serializeFontCache() {
-    var cache = kendo.dataviz.measureText.cache,
+    var cache = kendo.dataviz.TextMetrics.current._cache,
         ptr = cache._head,
         result = "(function() {\r\n" +
-                  "    var cache = kendo.dataviz.measureText.cache;\r\n" +
+                  "    var cache = kendo.dataviz.TextMetrics.current._cache;\r\n" +
                   "    cache._size = 100000;\r\n";
 
     while (ptr) {
@@ -219,7 +213,7 @@ function clickChart(chart, element, x, y) {
 // Primed cache for measureText - used to avoid browser rendering differences
 // Replace with the result from serializeFontCache();
 (function() {
-    var cache = kendo.dataviz.measureText.cache;
+    var cache = kendo.dataviz.TextMetrics.current._cache;
     cache._size = 100000;
     cache.put("My Titlefont12px sans-serifundefined", {"width":40,"height":15,"baseline":12});
     cache.put("My Titlefont16px Arial,Helvetica,sans-serifundefined", {"width":53,"height":19,"baseline":15});

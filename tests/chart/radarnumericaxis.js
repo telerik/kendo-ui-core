@@ -38,8 +38,6 @@
 
         view = new ViewStub();
         axis.getViewElements(view);
-
-        destroyMeasureBox();
     }
 
     // ------------------------------------------------------------

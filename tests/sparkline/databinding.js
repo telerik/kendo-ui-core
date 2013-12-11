@@ -21,8 +21,6 @@
                 sparkline.destroy();
                 sparkline.element.remove();
                 sparkline = null;
-
-                destroyMeasureBox();
             }
         }
 

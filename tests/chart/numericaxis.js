@@ -24,7 +24,6 @@
     }
 
     function moduleTeardown() {
-        destroyMeasureBox();
     }
 
     module("Automatic Major Unit", {

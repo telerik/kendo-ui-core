@@ -36,8 +36,7 @@
             radialScale.reflow(chartBox);
 
             ring = radialScale.ring;
-        },
-        teardown: destroyMeasureBox
+        }
     });
 
     test("reflow calculates scale ring position", function() {
@@ -122,8 +121,7 @@
                 startAngle: 0,
                 reverse: true
             });
-        },
-        teardown: destroyMeasureBox
+        }
     });
 
     test("slotAngle() returns startAngle/endAngle for extreme values", function() {
@@ -172,9 +170,7 @@
     }
 
     // ------------------------------------------------------------
-    module("RadialScale / Ranges", {
-        teardown: destroyMeasureBox
-    });
+    module("RadialScale / Ranges");
 
     test("render default range", function() {
         createScale({
@@ -264,9 +260,7 @@
     });
 
     // ------------------------------------------------------------
-    module("RadialScale / Configuration", {
-        teardown: destroyMeasureBox
-    });
+    module("RadialScale / Configuration");
 
     test("render scale with default min, max and majorUnit", function() {
         createScale({ });
