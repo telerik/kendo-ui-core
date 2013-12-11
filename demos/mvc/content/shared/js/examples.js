@@ -131,6 +131,8 @@
                 $("#mainWrap").toggleClass("widgetOverview", href.indexOf("overview") > -1);
 
                 wrapInner.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function () {
+                    kendo.culture("en-US");
+
                     wrapInner.replaceWith(html);
 
                     var href = $(".documentation-link").attr("href");
@@ -157,10 +159,6 @@
         },
 
         unload: function () {
-            if (kendo.ui && kendo.ui.DatePicker) {
-                kendo.ui.DatePicker.sharedCalendar = null;
-            }
-
             kendo.destroy("body > .k-popup");
 
             $(doc.body)
@@ -176,8 +174,6 @@
             if (!$("#example").find("[data-role=droptargetarea]").length) {
                 kendo.destroy("#example");
             }
-
-            kendo.culture("en-US");
 
             $(doc)
                 .off(".examples")
