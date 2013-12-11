@@ -1481,22 +1481,4 @@
 
         deepEqual(obj, { foo: { val: 1, bar: { } } });
     });
-
-    // ------------------------------------------------------------
-    var TextMetrics = dataviz.TextMetrics;
-    var metrics;
-
-    module("TextMetrics", {
-        setup: function() {
-            metrics = new TextMetrics();
-        }
-    });
-
-    test("free removes measure box", function() {
-        metrics.measure("Foo");
-        var measureBox = metrics._measureBox;
-
-        metrics.free();
-        ok(!measureBox.parentNode);
-    });
 })();

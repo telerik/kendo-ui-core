@@ -180,11 +180,6 @@ function createChart(options) {
 function destroyChart() {
     kendo.destroy(QUnit.fixture);
     QUnit.fixture.empty();
-    destroyMeasureBox();
-}
-
-function destroyMeasureBox() {
-    kendo.dataviz.TextMetrics.current.free();
 }
 
 function serializeFontCache() {

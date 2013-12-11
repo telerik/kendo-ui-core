@@ -3452,18 +3452,12 @@ kendo_module({
             var measureBox = this._measureBox,
                 baselineMarker = this._baselineMarker.cloneNode(false);
 
-            if (!measureBox || !measureBox.parentNode) {
-                measureBox = this._measureBox =
-                    $("<div style='position: absolute; top: -4000px;" +
-                                  "line-height: normal; visibility: hidden;' />")
-                    .appendTo(doc.body)[0];
-            }
-
             for (var styleKey in style) {
                 measureBox.style[styleKey] = style[styleKey];
             }
             measureBox.innerHTML = text;
             measureBox.appendChild(baselineMarker);
+            doc.body.appendChild(measureBox);
 
             if ((text + "").length) {
                 size = {
@@ -3491,14 +3485,9 @@ kendo_module({
 
             this._cache.put(cacheKey, size);
 
-            return size;
-        },
+            measureBox.parentNode.removeChild(measureBox);
 
-        free: function() {
-            if (this._measureBox) {
-                $(this._measureBox).remove();
-                this._measureBox = null;
-            }
+            return size;
         }
     });
 
@@ -3507,6 +3496,10 @@ kendo_module({
           "style='display: inline-block; vertical-align: baseline;" +
           "width: " + BASELINE_MARKER_SIZE + "px; height: " + BASELINE_MARKER_SIZE + "px;" +
           "overflow: hidden;' />")[0];
+
+    TextMetrics.fn._measureBox =
+        $("<div style='position: absolute; top: -4000px;" +
+                      "line-height: normal; visibility: hidden;' />")[0];
 
     TextMetrics.current = new TextMetrics();
 
