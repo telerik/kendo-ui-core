@@ -547,6 +547,31 @@
         equal(dialog.wrapper.css("position"), "fixed");
     });
 
+    test("centering a pinned Window sets correct top and left styles", 2, function() {
+        var pageWidth = 6000,
+            pageHeight = pageWidth,
+            scrollPosition = pageWidth / 3;
+
+        var div = $("<div />").css({width: pageWidth, height: pageHeight}).appendTo(QUnit.fixture.height(pageHeight));
+
+        $(QUnit.fixture[0].ownerDocument).scrollTop(scrollPosition).scrollLeft(scrollPosition);
+
+        var dialog1 = createWindow({
+                pinned: true,
+                animation: false
+            });
+        var dialog2 = createWindow({
+                pinned: false,
+                animation: false
+            });
+
+        dialog1.center();
+        dialog2.center();
+
+        equal(parseInt(dialog1.wrapper.css("top"), 10), parseInt(dialog2.wrapper.css("top"), 10) - scrollPosition);
+        equal(parseInt(dialog1.wrapper.css("left"), 10), parseInt(dialog2.wrapper.css("left"), 10) - scrollPosition);
+    });
+
     test("minimize() removes min-height", function() {
         var dialog = createWindow({
                 visible: true,
