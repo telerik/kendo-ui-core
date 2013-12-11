@@ -1245,6 +1245,24 @@
         equal(treeview.find(".k-request-retry").length, 1);
     });
 
+    test("retry text can be localized", function() {
+        createTreeView({
+            messages: {
+                requestFailed: "foo",
+                retry: "bar"
+            },
+            dataSource: {
+                transport: {
+                    read: function(options) {
+                        options.error({});
+                    }
+                }
+            }
+        });
+
+        equal(treeview.text(), "foo bar");
+    });
+
     test("failed subnode requests show retry icon", function() {
         createTreeView({
             dataSource: {
