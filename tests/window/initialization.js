@@ -409,7 +409,7 @@
         equal(dialog.wrapper.find(".k-i-unpin").length, 1);
     });
 
-    test("creating window with an int top position applies a top style", function() {
+    test("creating window with an int zero top position applies a top style", function() {
         var dialog = createWindow({
             position: {
                 top: 0
@@ -417,6 +417,16 @@
         });
 
         equal(dialog.wrapper.css("top"), "0px");
+    });
+
+    test("creating window with an int non-zero top position applies a top style", function() {
+        var dialog = createWindow({
+            position: {
+                top: 1
+            }
+        });
+
+        equal(dialog.wrapper.css("top"), "1px");
     });
 
     test("creating window with a string top position applies a top style", function() {
@@ -429,7 +439,7 @@
         equal(dialog.wrapper.css("top"), "1px");
     });
 
-    test("creating window with an int left position applies a left style", function() {
+    test("creating window with an int zero left position applies a left style", function() {
         var dialog = createWindow({
             position: {
                 left: 0
@@ -437,6 +447,16 @@
         });
 
         equal(dialog.wrapper.css("left"), "0px");
+    });
+
+    test("creating window with an int non-zero left position applies a left style", function() {
+        var dialog = createWindow({
+            position: {
+                left: 1
+            }
+        });
+
+        equal(dialog.wrapper.css("left"), "1px");
     });
 
     test("creating window with a string left position applies a left style", function() {

@@ -130,7 +130,7 @@ kendo_module({
                 return !this.type || this.type.toLowerCase().indexOf("script") >= 0;
             }).remove();
 
-            if (!element.parent().is(that.appendTo) && (options.position.top === undefined || options.position.left === undefined)) {
+            if (!element.parent().is(that.appendTo) && (position.top === undefined || position.left === undefined)) {
                 if (element.is(VISIBLE)) {
                     offset = element.offset();
                     isVisible = true;
@@ -141,6 +141,13 @@ kendo_module({
                     element.css({ visibility: HIDDEN, display: "" });
                     offset = element.offset();
                     element.css({ visibility: visibility, display: display });
+                }
+
+                if (position.top === undefined) {
+                    position.top = offset.top;
+                }
+                if (position.left === undefined) {
+                    position.left = offset.left;
                 }
             }
 
@@ -158,19 +165,8 @@ kendo_module({
                 that._dimensions();
             }
 
-            if (position.top !== undefined) {
-                position.top = position.top.toString();
-            }
-
-            if (position.left !== undefined) {
-                position.left = position.left.toString();
-            }
-
-            wrapper.css({
-                top: position.top || offset.top || "",
-                left: position.left || offset.left || ""
-            });
-
+            that._position();
+            
             if (options.pinned) {
                 that.pin(true);
             }
@@ -279,6 +275,25 @@ kendo_module({
             }
         },
 
+        _position: function() {
+            var that = this,
+                wrapper = that.wrapper,
+                position = that.options.position;
+
+            if (position.top === 0) {
+                position.top = position.top.toString();
+            }
+
+            if (position.left === 0) {
+                position.left = position.left.toString();
+            }
+
+            wrapper.css({
+                top: position.top || "",
+                left: position.left || ""
+            });
+        },
+
         _animations: function() {
             var options = this.options;
 
@@ -332,11 +347,14 @@ kendo_module({
         },
 
         setOptions: function(options) {
-            Widget.fn.setOptions.call(this, options);
-            this._animations();
-            this._dimensions();
-            this._resizable();
-            this._draggable();
+            var that = this;
+
+            Widget.fn.setOptions.call(that, options);
+            that._animations();
+            that._dimensions();
+            that._position();
+            that._resizable();
+            that._draggable();
         },
 
         events:[
@@ -1278,12 +1296,17 @@ kendo_module({
 
         drag: function (e) {
             var wnd = this.owner,
+                position = wnd.options.position,
+                newTop = Math.max(e.y.client - wnd.startPosition.top, wnd.minTopPosition),
+                newLeft = Math.max(e.x.client - wnd.startPosition.left, wnd.minLeftPosition),
                 coordinates = {
-                    left: Math.max(e.x.client - wnd.startPosition.left, wnd.minLeftPosition),
-                    top: Math.max(e.y.client - wnd.startPosition.top, wnd.minTopPosition)
+                    left: newLeft,
+                    top: newTop
                 };
 
             $(wnd.wrapper).css(coordinates);
+            position.top = newTop;
+            position.left = newLeft;
         },
 
         _finishDrag: function() {

@@ -741,6 +741,48 @@
         ok(resizingDestroy.calls("destroy"), 1);
     });
 
+    test("setOptions can set zero integer position", 2, function() {
+        var dialog = createWindow();
+
+        dialog.setOptions({
+            position: {
+                top: 0,
+                left: 0
+            }
+        });
+
+        equal(dialog.wrapper.css("left"), "0px");
+        equal(dialog.wrapper.css("top"), "0px");
+    });
+
+    test("setOptions can set integer position", 2, function() {
+        var dialog = createWindow();
+
+        dialog.setOptions({
+            position: {
+                top: 10,
+                left: 10
+            }
+        });
+
+        equal(dialog.wrapper.css("left"), "10px");
+        equal(dialog.wrapper.css("top"), "10px");
+    });
+
+    test("setOptions can set string position", 2, function() {
+        var dialog = createWindow();
+
+        dialog.setOptions({
+            position: {
+                top: "10px",
+                left: "10px"
+            }
+        });
+
+        equal(dialog.wrapper.css("left"), "10px");
+        equal(dialog.wrapper.css("top"), "10px");
+    });
+
     test("setting new title updates widget options", function() {
         var newTitle = "foo",
             dialog = createWindow();
