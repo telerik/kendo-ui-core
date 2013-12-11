@@ -3429,71 +3429,90 @@ kendo_module({
         }
     };
 
-    function measureText(text, style, rotation) {
-        var styleHash = getHash(style),
-            cacheKey = text + styleHash + rotation,
-            cachedResult = measureText.cache.get(cacheKey),
-            size = {
+    var TextMetrics = Class.extend({
+        init: function() {
+            this._cache = new LRUCache(1000);
+        },
+
+        measure: function(text, style, rotation) {
+            var styleHash = getHash(style),
+                cacheKey = text + styleHash + rotation,
+                cachedResult = this._cache.get(cacheKey);
+
+            if (cachedResult) {
+                return cachedResult;
+            }
+
+            var size = {
                 width: 0,
                 height: 0,
                 baseline: 0
             };
 
-        if (cachedResult) {
-            return cachedResult;
+            var measureBox = this._measureBox,
+                baselineMarker = this._baselineMarker.cloneNode(false);
+
+            if (!measureBox || !measureBox.parentNode) {
+                measureBox = this._measureBox =
+                    $("<div style='position: absolute; top: -4000px;" +
+                                  "line-height: normal; visibility: hidden;' />")
+                    .appendTo(doc.body)[0];
+            }
+
+            for (var styleKey in style) {
+                measureBox.style[styleKey] = style[styleKey];
+            }
+            measureBox.innerHTML = text;
+            measureBox.appendChild(baselineMarker);
+
+            if ((text + "").length) {
+                size = {
+                    width: measureBox.offsetWidth - BASELINE_MARKER_SIZE,
+                    height: measureBox.offsetHeight,
+                    baseline: baselineMarker.offsetTop + BASELINE_MARKER_SIZE
+                };
+            }
+
+            if (rotation) {
+                var width = size.width,
+                    height = size.height,
+                    cx = width / 2,
+                    cy = height / 2,
+                    r1 = rotatePoint(0, 0, cx, cy, rotation),
+                    r2 = rotatePoint(width, 0, cx, cy, rotation),
+                    r3 = rotatePoint(width, height, cx, cy, rotation),
+                    r4 = rotatePoint(0, height, cx, cy, rotation);
+
+                size.normalWidth = width;
+                size.normalHeight = height;
+                size.width = math.max(r1.x, r2.x, r3.x, r4.x) - math.min(r1.x, r2.x, r3.x, r4.x);
+                size.height = math.max(r1.y, r2.y, r3.y, r4.y) - math.min(r1.y, r2.y, r3.y, r4.y);
+            }
+
+            this._cache.put(cacheKey, size);
+
+            return size;
+        },
+
+        free: function() {
+            if (this._measureBox) {
+                $(this._measureBox).remove();
+                this._measureBox = null;
+            }
         }
+    });
 
-        var measureBox = measureText.measureBox,
-            baselineMarker = measureText.baselineMarker.cloneNode(false);
-
-        if (!measureBox || !measureBox.parentNode) {
-            measureBox = measureText.measureBox =
-                $("<div style='position: absolute; top: -4000px;" +
-                              "line-height: normal; visibility: hidden;' />")
-                .appendTo(doc.body)[0];
-        }
-
-        for (var styleKey in style) {
-            measureBox.style[styleKey] = style[styleKey];
-        }
-        measureBox.innerHTML = text;
-        measureBox.appendChild(baselineMarker);
-
-        if ((text + "").length) {
-            size = {
-                width: measureBox.offsetWidth - BASELINE_MARKER_SIZE,
-                height: measureBox.offsetHeight,
-                baseline: baselineMarker.offsetTop + BASELINE_MARKER_SIZE
-            };
-        }
-
-        if (rotation) {
-            var width = size.width,
-                height = size.height,
-                cx = width / 2,
-                cy = height / 2,
-                r1 = rotatePoint(0, 0, cx, cy, rotation),
-                r2 = rotatePoint(width, 0, cx, cy, rotation),
-                r3 = rotatePoint(width, height, cx, cy, rotation),
-                r4 = rotatePoint(0, height, cx, cy, rotation);
-
-            size.normalWidth = width;
-            size.normalHeight = height;
-            size.width = math.max(r1.x, r2.x, r3.x, r4.x) - math.min(r1.x, r2.x, r3.x, r4.x);
-            size.height = math.max(r1.y, r2.y, r3.y, r4.y) - math.min(r1.y, r2.y, r3.y, r4.y);
-        }
-
-        measureText.cache.put(cacheKey, size);
-
-        return size;
-    }
-
-    measureText.cache = new LRUCache(1000);
-    measureText.baselineMarker =
+    TextMetrics.fn._baselineMarker =
         $("<div class='" + CSS_PREFIX + "baseline-marker' " +
-            "style='display: inline-block; vertical-align: baseline;" +
-            "width: " + BASELINE_MARKER_SIZE + "px; height: " + BASELINE_MARKER_SIZE + "px;" +
-            "overflow: hidden;' />")[0];
+          "style='display: inline-block; vertical-align: baseline;" +
+          "width: " + BASELINE_MARKER_SIZE + "px; height: " + BASELINE_MARKER_SIZE + "px;" +
+          "overflow: hidden;' />")[0];
+
+    TextMetrics.current = new TextMetrics();
+
+    function measureText(text, style, rotation) {
+        return TextMetrics.current.measure(text, style, rotation);
+    }
 
     function autoMajorUnit(min, max) {
         var diff = round(max - min, DEFAULT_PRECISION - 1);
@@ -4069,6 +4088,7 @@ kendo_module({
         Sector: Sector,
         ShapeElement: ShapeElement,
         Text: Text,
+        TextMetrics: TextMetrics,
         TextBox: TextBox,
         Title: Title,
         ViewBase: ViewBase,
