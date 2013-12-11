@@ -148,6 +148,18 @@ test("change should be raised on enter", 1, function() {
     combobox.input.press(kendo.keys.ENTER);
 });
 
+test("change should not be raised on enter if input is empty", 0, function() {
+    combobox = new ComboBox(input, {
+        dataSource: [{text: "foo"}, {text: "bar"}],
+        change: function() {
+            ok(false);
+        }
+    });
+
+    combobox.input.focus();
+    combobox.input.press(kendo.keys.ENTER);
+});
+
 test("change should be raised on tab", 1, function() {
     combobox = new ComboBox(input, {
         dataSource: [{text: "foo"}, {text: "bar"}],
