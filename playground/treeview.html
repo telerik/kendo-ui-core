@@ -18,52 +18,36 @@
         <script src="../src/kendo.treeview.js"></script>
     </head>
     <body>
-        <button id="initTree">Init Tree</button>
-        <button id="disposeTree">Dispose Tree</button>
-
-        <div id="container"></div>
+        <div id="tree"></div>
 
         <script>
             $(function () {
-                var data = [
-                    { title : 'account', activated : true, items : [
-                        { title : 'account.node1', activated : true, items : [] },
-                        { title : 'account.node2', activated : true, items : [
-                            { title : 'account.node2.leaf1', activated : false, items : [] },
-                            { title : 'account.node2.leaf2', activated : true, items : [] }
-                        ] }
-                    ] },
-                    { title : "device", activated : true, items : [
-                        { title : 'device.node1', activated : true, items : [] },
-                        { title : 'device.node2', activated : false, items : [
-                            { title : 'device.node2.leaf1', activated : true, items : [] },
-                            { title : 'device.node2.leaf2', activated : true, items : [] }
-                        ] }
-                    ] },
-                    { title : "interaction", activated : true, items : [
-                        { title : 'interaction.node1', activated : true, items : [] },
-                        { title : 'interaction.node2', activated : false, items : [
-                            { title : 'interaction.node2.leaf1', activated : true, items : [
-                                { title : 'interaction.node2.leaf1.leaf', activated : true, items : [] },
-                                { title : 'interaction.node2.leaf2.leaf', activated : true, items : [] }
-                            ] },
-                            { title : 'interaction.node2.leaf2', activated : true, items : [] }
-                        ] }
-                    ] }
-                ];
+                var counter = 1;
 
-                $('#initTree').on('click', function () {
-                    $('<div id="tree-container" />')
-                        .appendTo("#container")
-                        .kendoTreeView({
-                            template : '<div class="#= !item.activated ? "disabled" : ""#">#= item.title #</div>',
-                            dataSource : data
-                        });
-                });
+                function getLevels(depth, itemsPerLevel) {
+                    var result = [];
 
-                $('#disposeTree').on('click', function () {
-                    $("#tree-container").kendoTreeView("destroy").empty().remove();
+                    for (var i = 0; i < itemsPerLevel; i++) {
+                        var item = { id: counter, text: "Node " + counter };
+                        counter++;
+
+                        if (depth > 1) {
+                            item.items = getLevels(depth-1, itemsPerLevel);
+                        } else {
+                            item.items = [];
+                        }
+
+                        result.push(item);
+                    }
+
+                    return result;
+                }
+
+                console.time("TreeView init");
+                $("#tree").kendoTreeView({
+                    dataSource: getLevels(3, 10)
                 });
+                console.timeEnd("TreeView init");
             });
         </script>
     </body>
