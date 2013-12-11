@@ -9,6 +9,7 @@
     "recipe[x11]",
     "recipe[firefox]",
     "recipe[google-chrome]",
+    "recipe[root-access]",
     "recipe[jenkins]",
     "recipe[jenkins-jobs]",
     "recipe[selenium]",
