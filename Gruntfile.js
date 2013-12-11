@@ -30,10 +30,14 @@ module.exports = function(grunt) {
         reporters.push('junit');
     }
 
+    var jshint = grunt.file.readJSON('build/grunt/jshint.json');
+    var files = grunt.option('files');
+    jshint.files = files ? files.split(",") : jshint.files;
+
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        jshint: grunt.file.readJSON('build/grunt/jshint.json'),
+        jshint: jshint,
         karma: {
             unit: {
                 options: {
