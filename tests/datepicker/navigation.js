@@ -749,4 +749,15 @@ test("DatePicker does set focused date of calendar if no text change", function(
     equal(+datepicker.dateView._current, +date);
 });
 
+test("click enter should raise change event if dateview is closed", function() {
+    var datepicker = input.kendoDatePicker().data("kendoDatePicker");
+
+    input.focus();
+    datepicker.open();
+
+    datepicker.dateView.calendar.element.find(".k-nav-fast").click();
+
+    ok(datepicker.dateView.popup.visible());
+});
+
 })();
