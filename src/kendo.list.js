@@ -838,7 +838,7 @@ kendo_module({
                     e.preventDefault();
                 }
 
-                if (that._typing) {
+                if (that._typing || (!that.popup.visible() && that.selectedIndex === -1)) {
                     current = null;
                 }
 
