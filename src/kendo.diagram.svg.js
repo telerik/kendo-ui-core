@@ -317,6 +317,7 @@ kendo_module({
             this._sz = { width: this.options.width, height: this.options.height };
             this.setAtr("width", "width");
             this.setAtr("height", "height");
+            this.setAtr("background", "background");
             return this._sz;
         }
     });
@@ -567,6 +568,40 @@ kendo_module({
         }
     });
 
+    var Mask = Element.extend({
+        init: function (options) {
+            var that = this, childElement;
+            Element.fn.init.call(that, document.createElementNS(SVGNS, "mask"), options);
+            var o = that.options;
+
+            if (o.path) {
+                childElement = new Path(o.path);
+            }
+            else if (o.circle) {
+                childElement = new Circle(o.circle);
+            }
+            else if (o.rectangle) {
+                childElement = new Rectangle(o.rectangle);
+            }
+            if (childElement) {
+                this.native.appendChild(childElement.native);
+            }
+            this.setAtr("id", "id");
+        },
+        redraw: function (options) {
+            Element.fn.redraw.call(this, options);
+            var that = this, o = that.options;
+
+            if (o.width) {
+                that.native.width.baseVal.value = o.width;
+            }
+            if (o.height) {
+                that.native.height.baseVal.value = o.height;
+            }
+
+        }
+    });
+
     var Line = VisualBase.extend({
         init: function (options) {
             VisualBase.fn.init.call(this, document.createElementNS(SVGNS, "line"), options);
@@ -784,6 +819,7 @@ kendo_module({
             this.native.setAttribute('xmlns:xlink', SVGXLINK);
             this.element.setAttribute("tabindex", "0"); //ensure tabindex so the the canvas receives key events
             this._markers();
+            this.masks = [];
         },
         options: {
             width: "100%",
@@ -857,6 +893,16 @@ kendo_module({
                 this.markers.remove(marker);
             }
         },
+        addMask: function (mask) {
+            this.defsNode.appendChild(mask.native);
+            this.masks.push(mask);
+        },
+        removeMask: function (mask) {
+            if (mask && this.masks.contains(mask)) {
+                this.defsNode.removeChild(mask.native);
+                this.masks.remove(mask);
+            }
+        },
         removeGradient: function (gradient) {
             if (gradient && this.gradients.contains(gradient)) {
                 this.defsNode.removeChild(gradient.native);
@@ -881,6 +927,15 @@ kendo_module({
             while (this.visuals.length) {
                 this.remove(this.visuals[0]);
             }
+        },
+        mask: function (mask) {
+            if (mask == null) {
+                this.native.removeAttribute("mask");
+            }
+            else {
+                this.native.setAttribute("mask", "url(#" + mask.native.id + ")");
+            }
+
         },
         _markers: function () {
             this.addMarker(new Marker({
@@ -940,7 +995,8 @@ kendo_module({
         CompositeTransform: CompositeTransform,
         TextBlock: TextBlock,
         TextBlockEditor: TextBlockEditor,
-        Image: Image
+        Image: Image,
+        Mask: Mask
     });
 })
     (window.kendo.jQuery);

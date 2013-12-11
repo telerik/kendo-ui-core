@@ -32,7 +32,9 @@ kendo_module({
             south: "s-resize",
             east: "e-resize",
             west: "w-resize",
-            north: "n-resize"
+            north: "n-resize",
+            rowresize: "row-resize",
+            colresize: "col-resize"
         },
         HITTESTDISTANCE = 10,
         AUTO = "Auto",
@@ -553,6 +555,7 @@ kendo_module({
             var diagram = this.toolService.diagram;
             this.panDelta = p.plus(this.panDelta).minus(this.panOffset);
             diagram.pan(this.panStart.plus(this.panDelta));
+            diagram.pan(this.panStart.plus(this.panDelta), p.minus(this.panOffset).times(1 / this.toolService.diagram.zoom()));
         },
         end: function () {
             var diagram = this.toolService.diagram;
@@ -892,7 +895,8 @@ kendo_module({
                 z /= zoomRate;
             }
 
-            diagram.zoom(z, p);
+            z = Math.round(Math.max(0.7, Math.min(2.0, z)) * 10) / 10;
+            diagram.zoom(z, {location: p, meta: meta});
             return true;
         },
         setTool: function (tool, index) {
@@ -1673,7 +1677,7 @@ kendo_module({
                         shape = this.shapes[i];
                         bounds = shape.bounds();
                         if (dragging) {
-                            newBounds = this._displaceBounds(bounds, dtl, dbr, dragging);
+                            newBounds = this._truncateToGuides(this._displaceBounds(bounds, dtl, dbr, dragging));
                         }
                         else {
                             newBounds = bounds.clone();
@@ -1683,7 +1687,7 @@ kendo_module({
                             newBounds = new Rect(newCenter.x - newBounds.width / 2, newCenter.y - newBounds.height / 2, newBounds.width, newBounds.height);
                         }
                         if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) { // if we up-size very small shape
-                            shape.bounds(newBounds);
+                            shape.bounds(this._truncateToGuides(newBounds));
                             shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
                             changed += 1;
                         }
@@ -1699,6 +1703,12 @@ kendo_module({
             }
 
             this._cp = p;
+        },
+        _truncateToGuides: function (bounds) {
+            if (this.diagram.ruler) {
+                return this.diagram.ruler.truncateToGuides(bounds);
+            }
+            return bounds;
         },
         _truncateAngle: function (a) {
             var snapAngle = Math.max(this.diagram.options.snapAngle, 5);
