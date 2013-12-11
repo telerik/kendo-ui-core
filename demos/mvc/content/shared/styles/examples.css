@@ -2460,23 +2460,6 @@ ol.linenums { margin-top: 0; margin-bottom: 0; color: #333; }
 li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }
 li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 
-.k-black #example pre .nocode { color: #fff; }
-.k-black #example pre .str,                    /* string */
-.k-black #example pre .atv { color: #ff7020; } /* attribute value */
-.k-black #example pre .kwd { color: #6093ff; } /* keyword */
-.k-black #example pre .com { color: #aaa; } /* comment */
-.k-black #example pre .typ { color: #fff; } /* type */
-.k-black #example pre .lit { color: #60c6c6; } /* literal */
-.k-black #example pre .pun { color: #999; }    /* punctuation */
-.k-black #example pre .pln { color: #a2b4ba; }    /* plaintext */
-.k-black #example pre .tag { color: #60c6ff; } /* html/xml tag */
-.k-black #example pre .atn { color: #c6c6ff; } /* attribute name */
-.k-black #example pre .dec { color: #ff6060; } /* decimal */
-
-/* Specify class=linenums on a pre to get line numbering */
-.k-black #example ol.linenums { color: #ddd; }
-.k-black #example li.L1,.k-black #example li.L3,.k-black #example li.L5,.k-black #example li.L7,.k-black #example li.L9 { background: #333; }
-
 .details-list dl
 {
     overflow: hidden;
