@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./link" ], f);
+    define([ "../kendo.imagebrowser", "./link" ], f);
 })(function(){
 
 (function($, undefined) {

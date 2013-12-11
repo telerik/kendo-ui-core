@@ -1,6 +1,6 @@
 (function(f, define){
     define([
-        "./kendo.combobox", "./kendo.dropdownlist", "./kendo.window", "./kendo.colorpicker",
+        "./kendo.combobox", "./kendo.dropdownlist", "./kendo.window", "./kendo.colorpicker", "./kendo.imagebrowser",
 
         "./editor/main",
         "./editor/dom",
