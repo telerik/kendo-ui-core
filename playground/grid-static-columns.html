@@ -16,10 +16,13 @@
         <script src="../src/kendo.model.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.odata.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.filtermenu.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
@@ -85,12 +88,14 @@
                             buttonCount: 5
                         },
                         columns: [{
+                            field: "ContactName",
                             template: "#=ContactName# <br/> #=ContactName#",
                             title: "Contact Name",
                             static: true,
                             width: 140
                         }, {
                             field: "ContactTitle",
+                            static: true,
                             title: "Contact Title",
                             width: 290
                         }, {

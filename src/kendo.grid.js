@@ -2558,7 +2558,6 @@ var __meta__ = {
                 table.append(that.thead);
                 header.empty().append($('<div class="k-grid-header-wrap" />').append(table));
 
-                that._appendStaticColumnHeader(header);
 
                 that.content = that.table.parent();
 
@@ -2578,7 +2577,6 @@ var __meta__ = {
 
                 that.scrollables = header.children(".k-grid-header-wrap");
 
-                that._appendStaticColumnContent();
 
                 // the footer may exists if rendered from the server
                 var footer = that.wrapper.find(".k-grid-footer"),
@@ -3494,26 +3492,55 @@ var __meta__ = {
         },
 
         _appendStaticColumnContent: function() {
-            var columns = staticColumns(this.columns),
-                html;
+            var columns = this.columns,
+                idx,
+                length,
+                hasStaticColumns;
 
-            if (columns.length) {
-                html = '<div class="k-grid-content-static"><table><tbody></tbody></table></div>';
+            table = $('<div class="k-grid-content-static"><table><colgroup/><tbody></tbody></table></div>');
+            colgroup = table.find("colgroup");
 
-                this.staticContent = $(html).insertBefore(this.content);
+            for (idx = 0, length = columns.length; idx < length; idx++) {
+                if (columns[idx].static) {
+                    this.table.find("col:not(.k-group-col,.k-hierarchy-col)").eq(idx).appendTo(colgroup);
+                    hasStaticColumns = true;
+                }
+            }
+
+            if (hasStaticColumns) {
+                this.staticContent = table.insertBefore(this.content);
             }
         },
 
         _appendStaticColumnHeader: function(container) {
-            var columns = staticColumns(this.columns),
-                html;
+            var that = this,
+                columns = this.columns,
+                idx,
+                length,
+                html,
+                colgroup,
+                tr,
+                table,
+                hasStaticColumns;
 
-            if (columns.length) {
-                html = '<div class="k-grid-header-static"><table><thead><tr>';
-                html += this._createHeaderCells(columns);
-                html += '</tr></thead></table></div>';
+            html = '<div class="k-grid-header-static"><table><colgroup/><thead><tr>' +
+                '</tr></thead></table></div>';
 
-                this.staticHeader = $(html).prependTo(container);
+            table = $(html);
+
+            colgroup = table.find("colgroup");
+            tr = table.find("thead tr");
+
+            for (idx = 0, length = columns.length; idx < length; idx++) {
+                if (columns[idx].static) {
+                    that.thead.prev().find("col:not(.k-group-col,.k-hierarchy-col)").eq(idx).appendTo(colgroup);
+                    that.thead.find(".k-header:not(.k-group-cell,.k-hierarchy-cell)").eq(idx).appendTo(tr);
+                    hasStaticColumns = true;
+                }
+            }
+
+            if (hasStaticColumns) {
+                this.staticHeader = table.prependTo(container);
             }
         },
 
@@ -3546,7 +3573,7 @@ var __meta__ = {
                 if (hasDetails) {
                     html += '<th class="k-hierarchy-cell">&nbsp;</th>';
                 }
-                html += that._createHeaderCells(nonStaticColumns(that.columns));
+                html += that._createHeaderCells(that.columns);
 
                 tr.html(html);
             } else if (hasDetails && !tr.find(".k-hierarchy-cell")[0]) {
@@ -3586,23 +3613,24 @@ var __meta__ = {
             }
 
             that._columnMenu();
-            that._setStaticContainersWidth();
+
+            if (this.options.scrollable) {
+                that._appendStaticColumnHeader(that.thead.closest(".k-grid-header"));
+
+                that._appendStaticColumnContent();
+
+                that._setStaticContainersWidth();
+            }
         },
 
         _updateCols: function() {
             var that = this;
 
             that._appendCols(that.thead.parent().add(that.table));
-
-            if (that.staticHeader) {
-                normalizeCols(that.staticHeader.add(that.staticContent), staticColumns(that.columns), that._hasDetails(), that._groups());
-            }
         },
 
         _appendCols: function(table) {
-            var that = this;
-
-            normalizeCols(table, visibleNonStaticColumns(that.columns), that._hasDetails(), that._groups());
+            normalizeCols(table, visibleColumns(this.columns), this._hasDetails(), this._groups());
         },
 
         _autoColumns: function(schema) {
