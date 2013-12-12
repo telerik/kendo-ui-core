@@ -1635,12 +1635,14 @@ kendo_module({
             }
             return this._zoom;
         },
-        pan: function (pan, animated) {
+        pan: function (pan, options) {
+            options = options || {animated: false};
+            animated = options.animated;
             if (pan instanceof Point && !pan.equals(this._pan)) {
                 this._animatePan(pan, !animated);
                 this._storePan(pan);
 
-                this.trigger(PAN);
+                this.trigger(PAN, {total: pan, delta: options.delta});
             }
 
             return this._pan;

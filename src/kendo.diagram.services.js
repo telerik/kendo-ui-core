@@ -554,8 +554,7 @@ kendo_module({
         move: function (p) {
             var diagram = this.toolService.diagram;
             this.panDelta = p.plus(this.panDelta).minus(this.panOffset);
-            diagram.pan(this.panStart.plus(this.panDelta));
-            diagram.pan(this.panStart.plus(this.panDelta), p.minus(this.panOffset).times(1 / this.toolService.diagram.zoom()));
+            diagram.pan(this.panStart.plus(this.panDelta), {delta: p.minus(this.panOffset).times(1 / this.toolService.diagram.zoom())});
         },
         end: function () {
             var diagram = this.toolService.diagram;
@@ -1677,7 +1676,7 @@ kendo_module({
                         shape = this.shapes[i];
                         bounds = shape.bounds();
                         if (dragging) {
-                            newBounds = this._truncateToGuides(this._displaceBounds(bounds, dtl, dbr, dragging));
+                            newBounds = this._truncatePositionToGuides(this._displaceBounds(bounds, dtl, dbr, dragging));
                         }
                         else {
                             newBounds = bounds.clone();
@@ -1687,7 +1686,7 @@ kendo_module({
                             newBounds = new Rect(newCenter.x - newBounds.width / 2, newCenter.y - newBounds.height / 2, newBounds.width, newBounds.height);
                         }
                         if (newBounds.width >= shape.options.minWidth && newBounds.height >= shape.options.minHeight) { // if we up-size very small shape
-                            shape.bounds(this._truncateToGuides(newBounds));
+                            shape.bounds(this._truncateSizeToGuides(newBounds));
                             shape.rotate(shape.rotate().angle); // forces the rotation to update it's rotation center
                             changed += 1;
                         }
@@ -1704,9 +1703,15 @@ kendo_module({
 
             this._cp = p;
         },
-        _truncateToGuides: function (bounds) {
+        _truncatePositionToGuides: function (bounds) {
             if (this.diagram.ruler) {
-                return this.diagram.ruler.truncateToGuides(bounds);
+                return this.diagram.ruler.truncatePositionToGuides(bounds);
+            }
+            return bounds;
+        },
+        _truncateSizeToGuides: function (bounds) {
+            if (this.diagram.ruler) {
+                return this.diagram.ruler.truncateSizeToGuides(bounds);
             }
             return bounds;
         },
