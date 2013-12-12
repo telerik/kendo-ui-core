@@ -260,7 +260,7 @@
         ok(!occurrence.recurrenceException);
     });
 
-    test("toOccurrence creates new SchedulerEvent with same field definition", function() {
+    test("toOccurrence creates new SchedulerEvent with same field definition (custom id)", function() {
         var event = new SchedulerEvent.define({
             id: "foo",
             fields: {
@@ -280,6 +280,46 @@
         equal(occurrence.idField, base.idField);
         equal(occurrence.fields.foo.type, "string");
         ok(occurrence.fields.test);
+
+        ok(occurrence.isNew());
+    });
+
+    test("toOccurrence creates new SchedulerEvent with same field definition (id as string)", function() {
+        var event = new SchedulerEvent.define({
+            fields: {
+                id: { type: "string" },
+                test: "test"
+            }
+        });
+
+        var base = new event({
+            start: new Date(2000, 10, 10)
+        });
+
+        var occurrence = base.toOccurrence({
+            start: new Date(2000, 11, 10)
+        });
+
+        ok(occurrence.isNew());
+    });
+
+    test("toOccurrence creates new SchedulerEvent with same field definition (id as number)", function() {
+        var event = new SchedulerEvent.define({
+            fields: {
+                id: { type: "number" },
+                test: "test"
+            }
+        });
+
+        var base = new event({
+            start: new Date(2000, 10, 10)
+        });
+
+        var occurrence = base.toOccurrence({
+            start: new Date(2000, 11, 10)
+        });
+
+        ok(occurrence.isNew());
     });
 
     test("isRecurring method returns true if recurringId is defined", function() {
@@ -411,6 +451,23 @@
 
         ok(!schedulerEvent.startTime);
         ok(!schedulerEvent.endTime);
+    });
+
+    test("SchedulerEvent reports model as new even when default type is changed", function() {
+        var dataSource = new kendo.data.SchedulerDataSource({
+            schema: {
+                model: {
+                    id: "taskId",
+                    fields: {
+                        taskId: { type: "string" }
+                    }
+                }
+            }
+        });
+
+        var model = new dataSource.reader.model();
+
+        ok(model.isNew());
     });
 
     test("create instantiate a SchedulerDataSource", function() {
