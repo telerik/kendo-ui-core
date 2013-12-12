@@ -1645,5 +1645,20 @@
             ok(categoryAxis.notes[0].options.visible);
             ok(!categoryAxis.notes[1].options.visible);
         });
+
+        test("have text", function() {
+            createCategoryAxis({
+                notes: {
+                    data: [{
+                        value: 1,
+                        label: {
+                            text: "Foo"
+                        }
+                    }]
+                }
+            });
+
+            equal(categoryAxis.notes[0].text, "Foo");
+        });
     })();
 })();

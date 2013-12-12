@@ -2833,17 +2833,16 @@ kendo_module({
         createNote: function() {
             var element = this,
                 options = element.options.notes,
-                text = options.label.text;
+                text = element.noteText || options.label.text;
 
             if (options.visible !== false && defined(text) && text !== null) {
                 element.note = new Note(
                     element.value,
+                    text,
                     element.dataItem,
                     element.category,
                     element.series,
-                    deepExtend({}, element.options.notes, {
-                        label: { text: text }
-                    })
+                    element.options.notes
                 );
                 element.append(element.note);
             }
@@ -3286,6 +3285,7 @@ kendo_module({
                 point.seriesIx = seriesIx;
                 point.owner = chart;
                 point.dataItem = series.data[categoryIx];
+                point.noteText = data.fields.noteText;
                 chart.addErrorBar(point, data, categoryIx);
             }
 
@@ -3504,10 +3504,7 @@ kendo_module({
                 }
             }
 
-            deepExtend(pointOptions, {
-                isStacked: isStacked,
-                notes: { label: { text: data.fields.noteText } }
-            });
+            pointOptions.isStacked = isStacked;
 
             var color = data.fields.color || series.color;
             if (value < 0 && pointOptions.negativeColor) {
@@ -3815,14 +3812,12 @@ kendo_module({
                 bulletOptions,
                 cluster;
 
-            bulletOptions = deepExtend({}, {
+            bulletOptions = deepExtend({
                 vertical: !options.invertAxes,
                 overlay: series.overlay,
                 categoryIx: categoryIx,
                 invertAxes: options.invertAxes
-            }, series, {
-                notes: { label: { text: data.fields.noteText } }
-            });
+            }, series);
 
             chart.evalPointOptions(
                 bulletOptions, value, category, categoryIx, series, seriesIx
@@ -3879,7 +3874,6 @@ kendo_module({
             bullet.value = value;
             bullet.id = uniqueId();
             bullet.enableDiscovery();
-            bullet.render();
         },
 
         options: {
@@ -3911,25 +3905,31 @@ kendo_module({
             var bullet = this,
                 options = bullet.options;
 
-            if (defined(bullet.value.target)) {
-                bullet.target = new Target({
-                    type: options.target.shape,
-                    background: options.target.color || options.color,
-                    opacity: options.opacity,
-                    zIndex: options.zIndex,
-                    border: options.target.border,
-                    vAlign: TOP,
-                    align: RIGHT
-                });
-                bullet.target.id = bullet.id;
+            if (!bullet._rendered) {
+                bullet._rendered = true;
 
-                bullet.append(bullet.target);
+                if (defined(bullet.value.target)) {
+                    bullet.target = new Target({
+                        type: options.target.shape,
+                        background: options.target.color || options.color,
+                        opacity: options.opacity,
+                        zIndex: options.zIndex,
+                        border: options.target.border,
+                        vAlign: TOP,
+                        align: RIGHT
+                    });
+                    bullet.target.id = bullet.id;
+
+                    bullet.append(bullet.target);
+                }
+
+                bullet.createNote();
             }
-
-            bullet.createNote();
         },
 
         reflow: function(box) {
+            this.render();
+
             var bullet = this,
                 options = bullet.options,
                 chart = bullet.owner,
@@ -4675,8 +4675,7 @@ kendo_module({
 
             pointOptions = this.pointOptions(series, seriesIx);
             deepExtend(pointOptions, {
-                color: fields.color,
-                notes: { label: { text: data.fields.noteText } }
+                color: fields.color
             });
 
             pointOptions = chart.evalPointOptions(
@@ -5300,8 +5299,7 @@ kendo_module({
                     format: chart.options.labels.format
                 }
             }, series, {
-                color: fields.color,
-                notes: { label: { text: fields.noteText } }
+                color: fields.color
             });
 
             chart.evalPointOptions(pointOptions, value, fields);
@@ -5514,8 +5512,7 @@ kendo_module({
                     border: series.border,
                     opacity: series.opacity,
                     animation: animationOptions
-                },
-                notes: { label: { text: fields.noteText } }
+                }
             });
 
             chart.evalPointOptions(pointOptions, value, fields);
@@ -5857,6 +5854,7 @@ kendo_module({
                 point.seriesIx = seriesIx;
                 point.owner = chart;
                 point.dataItem = dataItem;
+                point.noteText = data.fields.noteText;
             }
 
             chart.points.push(point);
@@ -5870,9 +5868,7 @@ kendo_module({
         createPoint: function(data, category, categoryIx, series, seriesIx) {
             var chart = this,
                 value = data.valueFields,
-                pointOptions = deepExtend({}, series, {
-                    notes: { label: { text: data.fields.noteText } }
-                }),
+                pointOptions = deepExtend({}, series),
                 pointType = chart.pointType();
 
             chart.evalPointOptions(

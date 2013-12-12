@@ -607,7 +607,7 @@
         });
 
         test("should have text", function() {
-            equal(note.label.options.text, "A");
+            equal(note.text, "A");
         });
 
         module("Scatter Line Chart / Note Template", {
@@ -637,7 +637,7 @@
                 }
             });
 
-            equal(note.label.options.text, "test");
+            equal(note.label.content, "test");
         });
 
         test("value", function() {
@@ -647,7 +647,7 @@
                 }
             });
 
-            equal(note.label.options.text, "x: 1 y: 10");
+            equal(note.label.content, "x: 1 y: 10");
         });
 
         test("series", function() {
@@ -657,7 +657,7 @@
                 }
             });
 
-            equal(note.label.options.text, "name");
+            equal(note.label.content, "name");
         });
     })();
 })();

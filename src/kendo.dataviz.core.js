@@ -995,6 +995,7 @@ kendo_module({
 
             text = new Text(content, deepExtend({ }, options, { align: LEFT, vAlign: TOP }));
             textBox.append(text);
+            textBox.content = content;
 
             if (textBox.hasBox()) {
                 text.id = uniqueId();
@@ -1277,17 +1278,8 @@ kendo_module({
             for (i = 0; i < items.length; i++) {
                 item = deepExtend({}, notes, items[i]);
                 item.value = axis.parseNoteValue(item.value);
-                text = item.label.text;
-                if (item.label.template) {
-                    noteTemplate = template(item.label.template);
-                    text = noteTemplate({
-                        value: item.value
-                    });
-                } else if (item.label.format) {
-                    text = autoFormat(item.label.format, text);
-                }
 
-                note = new Note(item.value, null, null, null, item);
+                note = new Note(item.value, item.label.text, null, null, null, item);
 
                 if (note.options.visible) {
                     if (defined(note.options.position)) {
@@ -1708,12 +1700,13 @@ kendo_module({
     });
 
     var Note = BoxElement.extend({
-        init: function(value, dataItem, category, series, options) {
+        init: function(value, text, dataItem, category, series, options) {
             var note = this;
 
             BoxElement.fn.init.call(note, options);
             note.enableDiscovery();
             note.value = value;
+            note.text = text;
             note.dataItem = dataItem;
             note.category = category;
             note.series = series;
@@ -1754,6 +1747,7 @@ kendo_module({
             var note = this,
                 options = note.options,
                 label = options.label,
+                text = note.text,
                 icon = options.icon,
                 size = icon.size,
                 dataModelId = { data: { modelId: note.modelId } },
@@ -1764,17 +1758,18 @@ kendo_module({
                 if (defined(label) && label.visible) {
                     if (label.template) {
                         noteTemplate = template(label.template);
-                        label.text = noteTemplate({
+                        text = noteTemplate({
                             dataItem: note.dataItem,
                             category: note.category,
                             value: note.value,
+                            text: text,
                             series: note.series
                         });
                     } else if (label.format) {
-                        label.text = autoFormat(label.format, text);
+                        text = autoFormat(label.format, text);
                     }
 
-                    note.label = new TextBox(label.text, deepExtend({}, label, dataModelId));
+                    note.label = new TextBox(text, deepExtend({}, label, dataModelId));
                     note.append(note.label);
 
                     if (label.position === INSIDE) {
