@@ -23,7 +23,7 @@ module.exports = function(grunt) {
                 var basename = PATH.basename(f, PATH.extname(f));
                 var dest = PATH.join(destDir, basename + ext);
                 if (outdated(f, dest)) {
-                    var comp = META.getKendoFile(f.replace(/^src\//, ""));
+                    var comp = META.getKendoFile(f.replace(/^src\//, "")), code;
                     if (task.target == "min") {
                         code = comp.buildMinSource();
                     } else if (task.target == "full") {
