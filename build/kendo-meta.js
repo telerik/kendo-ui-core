@@ -113,7 +113,12 @@ var getKendoFile = (function() {
                 self._amd_factory = factory.toString();
             }
             define.amd = true;
-            new Function("define", this.getOrigCode())(define);
+            try {
+                new Function("define", this.getOrigCode())(define);
+            } catch(ex) {
+                SYS.error("Can't determine AMD deps for " + this.filename() + ".  Failed to evaluate.");
+                console.log(ex);
+            }
             if (!self._amd_deps)
                 self._amd_deps = [];
             return self._amd_deps;
@@ -410,7 +415,7 @@ function listKendoFiles() {
             return /^kendo\..*\.js$/i.test(filename) && !/\.min\.js$/i.test(filename);
         })
         .filter(function(filename){
-            return !/^kendo\.(web|dataviz|mobile|all|winjs|timezones|model|diagram.*)\.js$/.test(filename);
+            return !/^kendo\.(web|dataviz|mobile|all|winjs|timezones|model)\.js$/.test(filename);
         })
         .sort();
     return js_files;
@@ -522,13 +527,19 @@ function loadComponents(files, maxLevel) {
     return loads;
 }
 
+function loadAll() {
+    return loadComponents(listKendoFiles());
+}
+
+/* -----[ exports ]----- */
+
 exports.getKendoFile = getKendoFile;
 exports.listKendoFiles = listKendoFiles;
 exports.buildKendoConfig = buildKendoConfig;
 exports.loadComponents = loadComponents;
+exports.loadAll = loadAll;
 
-
-
+/* -----[ CLI interface ]----- */
 
 if (require.main === module) (function(){
     // invoked as CLI
@@ -538,35 +549,52 @@ if (require.main === module) (function(){
         .describe("direct-deps", "Show direct dependencies of component(s))")
         .describe("subfiles", "Show files that a component is made of")
         .describe("bundle-all", "Generate kendo.all.js on stdout")
-        .describe("min", "Minify output")
+        .describe("build", "Build a given component")
+        .describe("full", "Full build")
+        .describe("min", "Minified build")
         .boolean("all-deps")
         .boolean("direct-deps")
         .boolean("bundle-all")
-        .boolean("bundle-all-min")
         .boolean("min")
         .string("subfiles")
+        .string("build")
         .wrap(80)
         .argv;
 
     var REST = ARGV._.slice();
 
-    if (ARGV["all-deps"]) {
-        SYS.puts(beautify(loadComponents(REST)));
+    var files;
+
+    if (ARGV["subfiles"]) {
+        files = getKendoFile(ARGV["subfiles"]).getCompFiles();
+        SYS.puts(beautify(files));
         return;
+    }
+
+    if (ARGV["build"]) {
+        var comp = getKendoFile(ARGV["build"]);
+        if (ARGV["min"]) {
+            SYS.puts(comp.buildMinSource());
+        } else {
+            SYS.puts(comp.buildFullSource());
+        }
+        return;
+    }
+
+    if (ARGV["all-deps"]) {
+        files = loadComponents(REST);
     }
 
     if (ARGV["direct-deps"]) {
-        SYS.puts(beautify(loadComponents(REST, 2)));
-        return;
-    }
-
-    if (ARGV["subfiles"]) {
-        SYS.puts( beautify(getKendoFile(ARGV["subfiles"]).getCompFiles()) );
-        return;
+        files = loadComponents(REST, 2);
     }
 
     if (ARGV["bundle-all"]) {
-        var code = loadComponents(listKendoFiles()).map(function(f){
+        files = loadAll();
+    }
+
+    if (ARGV["full"] || ARGV["min"]) {
+        var code = loadComponents(files).map(function(f){
             var comp = getKendoFile(f);
             SYS.error("Adding " + comp.filename());
             if (comp.isSubfile()) {
@@ -580,6 +608,9 @@ if (require.main === module) (function(){
             code = minify(code).print_to_string();
         }
         SYS.puts(code);
+        return;
     }
+
+    SYS.puts(beautify(files));
 
 })();
