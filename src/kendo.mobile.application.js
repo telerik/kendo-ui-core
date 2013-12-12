@@ -253,7 +253,7 @@ kendo_module({
         },
 
         _resizeToScreenHeight: function() {
-            this.element.height(isOrientationHorizontal(element) ? window.screen.availWidth - STATUS_BAR_HEIGHT : window.screen.availHeight);
+            this.element.height(isOrientationHorizontal(this.element) ? window.screen.availWidth - STATUS_BAR_HEIGHT : window.screen.availHeight);
         },
 
         _setupElementClass: function() {
