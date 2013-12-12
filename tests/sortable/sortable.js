@@ -1,14 +1,14 @@
 (function() {
     var DataSource = kendo.data.DataSource,
-        Sortable = kendo.ui.Sortable,
+        Sorter = kendo.ui.Sorter,
         button,
         dataSource;
 
     function setup(element, options) {
-        return new Sortable(element || button.attr("data-field", "foo"), options || { dataSource: dataSource });
+        return new Sorter(element || button.attr("data-field", "foo"), options || { dataSource: dataSource });
     }
 
-    module("kendo.ui.Sortable", {
+    module("kendo.ui.Sorter", {
         setup: function() {
             dataSource = DataSource.create( { data: [ { foo: 2, bar: 2 }, { foo: 1, bar: 1 } ] } );
             button = $("<button />");
