@@ -1024,7 +1024,7 @@ function pad(number, digits, end) {
             }
 
             return globalize.format(value, format, culture);
-        }
+        };
     }
 
     kendo.format = function(fmt) {
