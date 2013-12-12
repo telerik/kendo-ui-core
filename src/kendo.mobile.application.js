@@ -16,6 +16,7 @@ kendo_module({
         OS = support.mobileOS,
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
         VERTICAL = "km-vertical",
+        BROKEN_WEBVIEW_RESIZE = OS.appMode && OS.ios,
         HORIZONTAL = "km-horizontal",
 
         MOBILE_PLATFORMS = {
@@ -41,6 +42,7 @@ kendo_module({
         SUPPORT_SWIPE_TO_GO_BACK = (OS.device == "iphone" || OS.device == "ipod") && OS.majorVersion >= 7,
         HISTORY_TRANSITION = SUPPORT_SWIPE_TO_GO_BACK ? "none" : null,
         BARCOMPENSATION = OS.browser == "mobilesafari" ? 60 : 0,
+        STATUS_BAR_HEIGHT = 20,
         WINDOW = $(window),
         HEAD = $("head"),
 
@@ -250,6 +252,10 @@ kendo_module({
             this.router.start();
         },
 
+        _resizeToScreenHeight: function() {
+            this.element.height(isOrientationHorizontal(element) ? window.screen.availWidth - STATUS_BAR_HEIGHT : window.screen.availHeight);
+        },
+
         _setupElementClass: function() {
             var that = this, size,
                 element = that.element;
@@ -274,6 +280,10 @@ kendo_module({
                 $(clipTemplate({ width: size, height: size })).appendTo(HEAD);
             }
 
+            if (BROKEN_WEBVIEW_RESIZE) {
+                this._resizeToScreenHeight();
+            }
+
             kendo.onResize(function() {
                 element
                     .removeClass("km-horizontal km-vertical")
@@ -281,6 +291,10 @@ kendo_module({
 
                 if (that.options.useNativeScrolling) {
                     setMinimumHeight(element);
+                }
+
+                if (BROKEN_WEBVIEW_RESIZE) {
+                    this._resizeToScreenHeight();
                 }
 
                 if (BERRYPHONEGAP) {
