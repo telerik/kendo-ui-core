@@ -3652,13 +3652,6 @@ function pad(number, digits, end) {
 
 })(jQuery);
 
-/*global kendo_module:true */
-if (typeof kendo_module === "undefined") {
-    kendo_module = function(){};
-}
-
-
-
 return window.kendo;
 
 }, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
