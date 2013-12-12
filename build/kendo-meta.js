@@ -114,6 +114,8 @@ var getKendoFile = (function() {
             }
             define.amd = true;
             new Function("define", this.getOrigCode())(define);
+            if (!self._amd_deps)
+                self._amd_deps = [];
             return self._amd_deps;
         }),
 
@@ -171,7 +173,7 @@ var getKendoFile = (function() {
         buildFullSource: cachedProperty("buildFullSource", function(){
             return wrapAMD(
                 fileNamesToAMDDeps(this.getDirectCompDeps()),
-                this._getFullCode()
+                this.getFullCode()
             );
         }),
 
@@ -184,25 +186,9 @@ var getKendoFile = (function() {
         buildMinAST: cachedProperty("buildMinAST", function(){
             var code = wrapAMD(
                 fileNamesToAMDDeps(this.getDirectCompDeps(), true),
-                this._getFullCode()
+                this.getFullCode()
             );
-            var ast = U2_parse(code, {
-                filename: this.filename()
-            });
-            var compressor = U2.Compressor({
-                unsafe       : true,
-                hoist_vars   : true,
-                warnings     : false,
-                pure_getters : true,
-            });
-            ast.figure_out_scope();
-            ast = ast.transform(compressor);
-            ast.figure_out_scope();
-            ast.compute_char_frequency();
-            ast.mangle_names({
-                except: [ "define" ]
-            });
-            return ast;
+            return minify(code, this.filename());
         }),
 
         buildMinSource: cachedProperty("buildMinSource", function(){
@@ -220,7 +206,7 @@ var getKendoFile = (function() {
             return this._source_map.toString();
         }),
 
-        _getFullCode: function() {
+        getFullCode: cachedProperty("getFullCode", function() {
             var self = this;
             if (self.isSubfile()) {
                 throw new Error("buildFullSource doesn't make sense for subfiles: " + self.filename());
@@ -259,7 +245,7 @@ var getKendoFile = (function() {
             files.push(my_code);
 
             return files.join("\n\n").trim();
-        },
+        }),
 
         getMainCode: cachedProperty("getMainCode", function(){
             return this.getAMDFactory().replace(/^[^\{]*?{|}[^\}]*?$/g, "").trim();
@@ -376,6 +362,24 @@ function beautify(obj) {
     });
 }
 
+function minify(code, filename) {
+    var ast = U2_parse(code, { filename: filename });
+    var compressor = U2.Compressor({
+        unsafe       : true,
+        hoist_vars   : true,
+        warnings     : false,
+        pure_getters : true,
+    });
+    ast.figure_out_scope();
+    ast = ast.transform(compressor);
+    ast.figure_out_scope();
+    ast.compute_char_frequency();
+    ast.mangle_names({
+        except: [ "define" ]
+    });
+    return ast;
+}
+
 function loadComponent(filename, basedir, files, maxLevel) {
     var loading = [];
     function load(filename, basedir, level) {
@@ -406,7 +410,7 @@ function listKendoFiles() {
             return /^kendo\..*\.js$/i.test(filename) && !/\.min\.js$/i.test(filename);
         })
         .filter(function(filename){
-            return !/^kendo\.(web|dataviz|mobile|all|winjs|timezones)\.js$/.test(filename);
+            return !/^kendo\.(web|dataviz|mobile|all|winjs|timezones|model|diagram.*)\.js$/.test(filename);
         })
         .sort();
     return js_files;
@@ -533,8 +537,13 @@ if (require.main === module) (function(){
         .describe("all-deps", "Show a list of all files required to load component(s)")
         .describe("direct-deps", "Show direct dependencies of component(s))")
         .describe("subfiles", "Show files that a component is made of")
+        .describe("bundle-all", "Generate kendo.all.js on stdout")
+        .describe("min", "Minify output")
         .boolean("all-deps")
         .boolean("direct-deps")
+        .boolean("bundle-all")
+        .boolean("bundle-all-min")
+        .boolean("min")
         .string("subfiles")
         .wrap(80)
         .argv;
@@ -554,6 +563,23 @@ if (require.main === module) (function(){
     if (ARGV["subfiles"]) {
         SYS.puts( beautify(getKendoFile(ARGV["subfiles"]).getCompFiles()) );
         return;
+    }
+
+    if (ARGV["bundle-all"]) {
+        var code = loadComponents(listKendoFiles()).map(function(f){
+            var comp = getKendoFile(f);
+            SYS.error("Adding " + comp.filename());
+            if (comp.isSubfile()) {
+                return "";
+            } else {
+                return comp.getFullCode() + "\n";
+            }
+        }).join("");
+        code = wrapAMD([], code);
+        if (ARGV["min"]) {
+            code = minify(code).print_to_string();
+        }
+        SYS.puts(code);
     }
 
 })();
