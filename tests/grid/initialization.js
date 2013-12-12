@@ -503,7 +503,7 @@
             sortable: true
         });
 
-        ok(grid.thead.find("th").data("kendoSortable"), "Column is not sortable");
+        ok(grid.thead.find("th").data("kendoSorter"), "Column is not sortable");
     });
 
     test("unsortable column from column settings", function() {
@@ -515,7 +515,7 @@
             }]
         });
 
-        equal(grid.thead.find("th").data("kendoSortable"), undefined, "Column is not sortable");
+        equal(grid.thead.find("th").data("kendoSorter"), undefined, "Column is not sortable");
     });
 
     test("unsortable column from html attribute", function() {
@@ -524,7 +524,7 @@
             sortable: true
         });
 
-        ok(!(grid.thead.find("th").data("kendoSortable") instanceof kendo.ui.Sortable));
+        ok(!(grid.thead.find("th").data("kendoSorter") instanceof kendo.ui.Sorter));
     });
 
     test("filterable columns", function() {

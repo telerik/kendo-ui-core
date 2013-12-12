@@ -39,11 +39,6 @@ var __meta__ = {
         description: "Support for row selection",
         depends: [ "selectable" ]
     }, {
-        id: "grid-sorting",
-        name: "Sorting",
-        description: "Support for grid sorting",
-        depends: [ "sortable" ]
-    }, {
         id: "grid-column-reorder",
         name: "Column reordering",
         description: "Support for column reordering",
@@ -120,6 +115,14 @@ var __meta__ = {
         whitespaceRegExp = "[\\x20\\t\\r\\n\\f]",
         nonDataCellsRegExp = new RegExp("(^|" + whitespaceRegExp + ")" + "(k-group-cell|k-hierarchy-cell)" + "(" + whitespaceRegExp + "|$)"),
         COMMANDBUTTONTMPL = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>',
+        DIR = "dir",
+        ASC = "asc",
+        SINGLE = "single",
+        FIELD = "field",
+        DESC = "desc",
+        sorterNS = ".kendoSorter",
+        TLINK = ".k-link",
+        ARIASORT = "aria-sort",
         isRtl = false,
         browser = kendo.support.browser,
         isIE7 = browser.msie && browser.version == 7,
@@ -773,7 +776,7 @@ var __meta__ = {
             that.thead.find("th").each(function(){
                 var th = $(this),
                     filterMenu = th.data("kendoFilterMenu"),
-                    sortable = th.data("kendoSortable"),
+                    sortable = th.data("kendoSorter"),
                     columnMenu = th.data("kendoColumnMenu");
 
                 if (filterMenu) {
@@ -2973,14 +2976,16 @@ var __meta__ = {
                         if (column.sortable !== false && !column.command && column.field) {
                             cell = $(this);
 
-                            sortableInstance = cell.data("kendoSortable");
+                            sortableInstance = cell.data("kendoSorter");
 
                             if (sortableInstance) {
                                 sortableInstance.destroy();
                             }
 
-                            cell.attr("data-" + kendo.ns +"field", column.field)
-                                .kendoSortable(extend({}, sortable, column.sortable, { dataSource: that.dataSource, aria: true, filter: ":not(.k-column-active)" }));
+                            new ui.Sorter(
+                                cell.attr("data-" + kendo.ns +"field", column.field),
+                                extend({}, sortable, column.sortable, { dataSource: that.dataSource, aria: true, filter: ":not(.k-column-active)" })
+                            );
                         }
                     });
             }
@@ -4032,8 +4037,126 @@ var __meta__ = {
        }
    }
 
+   var Sorter = Widget.extend({
+       init: function(element, options) {
+           var that = this, link;
+
+           Widget.fn.init.call(that, element, options);
+
+           that._refreshHandler = proxy(that.refresh, that);
+
+           that.dataSource = that.options.dataSource.bind("change", that._refreshHandler);
+
+           link = that.element.find(TLINK);
+
+           if (!link[0]) {
+               link = that.element.wrapInner('<a class="k-link" href="#"/>').find(TLINK);
+           }
+
+           that.link = link;
+
+           that.element.on("click" + sorterNS, proxy(that._click, that));
+       },
+
+       options: {
+           name: "Sorter",
+           mode: SINGLE,
+           allowUnsort: true,
+           compare: null,
+           filter: ""
+       },
+
+       destroy: function() {
+           var that = this;
+
+           Widget.fn.destroy.call(that);
+
+           that.element.off(sorterNS);
+
+           that.dataSource.unbind("change", that._refreshHandler);
+       },
+
+       refresh: function() {
+           var that = this,
+           sort = that.dataSource.sort() || [],
+           idx,
+           length,
+           descriptor,
+           dir,
+           element = that.element,
+           field = element.attr(kendo.attr(FIELD));
+
+           element.removeAttr(kendo.attr(DIR));
+           element.removeAttr(ARIASORT);
+
+           for (idx = 0, length = sort.length; idx < length; idx++) {
+               descriptor = sort[idx];
+
+               if (field == descriptor.field) {
+                   element.attr(kendo.attr(DIR), descriptor.dir);
+               }
+           }
+
+           dir = element.attr(kendo.attr(DIR));
+
+           element.find(".k-i-arrow-n,.k-i-arrow-s").remove();
+
+           if (dir === ASC) {
+               $('<span class="k-icon k-i-arrow-n" />').appendTo(that.link);
+               element.attr(ARIASORT, "ascending");
+           } else if (dir === DESC) {
+               $('<span class="k-icon k-i-arrow-s" />').appendTo(that.link);
+               element.attr(ARIASORT, "descending");
+           }
+       },
+
+       _click: function(e) {
+           var that = this,
+           element = that.element,
+           field = element.attr(kendo.attr(FIELD)),
+           dir = element.attr(kendo.attr(DIR)),
+           options = that.options,
+           compare = that.options.compare == null ? undefined : that.options.compare,
+           sort = that.dataSource.sort() || [],
+           idx,
+           length;
+
+           e.preventDefault();
+
+           if (options.filter && !element.is(options.filter)) {
+               return;
+           }
+
+           if (dir === ASC) {
+               dir = DESC;
+           } else if (dir === DESC && options.allowUnsort) {
+               dir = undefined;
+           } else {
+               dir = ASC;
+           }
+
+           if (options.mode === SINGLE) {
+               sort = [ { field: field, dir: dir, compare: compare } ];
+           } else if (options.mode === "multiple") {
+               for (idx = 0, length = sort.length; idx < length; idx++) {
+                   if (sort[idx].field === field) {
+                       sort.splice(idx, 1);
+                       break;
+                   }
+               }
+               sort.push({ field: field, dir: dir, compare: compare });
+           }
+
+
+           that.dataSource.sort(sort);
+       }
+   });
+
    ui.plugin(Grid);
    ui.plugin(VirtualScrollable);
+   extend(kendo.ui, {
+       Sorter: Sorter
+   });
 })(window.kendo.jQuery);
 
 return window.kendo;
