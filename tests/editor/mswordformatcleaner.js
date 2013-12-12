@@ -332,4 +332,8 @@ test("persists colspan attribute", function() {
     '</table>');
 });
 
+test("persists HTML in text", function() {
+    equal(clean('<p class="MsoNormal">&lt;label class="whatever"&gt;<o:p></o:p></p>'), '<p>&lt;label class="whatever"&gt;</p>');
+});
+
 }());
