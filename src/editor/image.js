@@ -228,4 +228,4 @@ registerTool("insertImage", new Editor.Tool({ command: ImageCommand, template: n
 
 })(window.kendo.jQuery);
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

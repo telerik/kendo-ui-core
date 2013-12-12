@@ -561,4 +561,4 @@
 
 })(window.kendo.jQuery);
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

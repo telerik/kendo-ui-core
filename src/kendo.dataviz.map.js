@@ -27,4 +27,4 @@
         depends: [ "data", "userevents", "tooltip", "dataviz.core", "mobile.scroller" ]
     };
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

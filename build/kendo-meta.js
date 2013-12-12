@@ -13,7 +13,7 @@ $CODE\n\
 \n\
 return window.kendo;\n\
 \n\
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });";
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });";
 
 var getKendoFile = (function() {
 
@@ -390,7 +390,7 @@ function listKendoFiles() {
             return /^kendo\..*\.js$/i.test(filename) && !/\.min\.js$/i.test(filename);
         })
         .filter(function(filename){
-            return !/^kendo\.(web|dataviz|mobile|all|winjs)\.js$/.test(filename);
+            return !/^kendo\.(web|dataviz|mobile|all|winjs|timezones)\.js$/.test(filename);
         })
         .sort();
     return js_files;

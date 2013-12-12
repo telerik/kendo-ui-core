@@ -234,4 +234,4 @@ registerTool("insertParagraph", new Tool({ key: 13, command: ParagraphCommand })
 
 })(window.kendo.jQuery);
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

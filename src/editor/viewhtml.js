@@ -85,4 +85,4 @@ Editor.EditorUtils.registerTool("viewHtml", new Tool({ command: ViewHtmlCommand,
 
 })(window.kendo.jQuery);
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

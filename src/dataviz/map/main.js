@@ -1,6 +1,6 @@
-(function(f, define){
-    define([ "./layers/marker" ], f);
-})(function(){
+(function(f, define){
+    define([ "./layers/marker" ], f);
+})(function(){
 
 (function ($, undefined) {
     // Imports ================================================================
@@ -518,5 +518,5 @@
     dataviz.ui.plugin(Map);
 
 })(window.kendo.jQuery);
-
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
+
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

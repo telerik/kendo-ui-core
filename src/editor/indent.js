@@ -231,4 +231,4 @@ registerTool("outdent", new OutdentTool({ command: OutdentCommand, template: new
 
 })(window.kendo.jQuery);
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

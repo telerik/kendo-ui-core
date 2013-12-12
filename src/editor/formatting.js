@@ -241,4 +241,4 @@ registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({tem
 
 })(window.kendo.jQuery);
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });

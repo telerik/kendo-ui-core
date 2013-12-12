@@ -289,4 +289,4 @@ registerTool("unlink", new UnlinkTool({ key: "K", ctrl: true, shift: true, templ
 
 })(window.kendo.jQuery);
 
-}, typeof define == 'function' && define.amd ? define : function(_, f){ f() });
+}, typeof define == 'function' && define.amd ? define : function(_, f){ f(); });
