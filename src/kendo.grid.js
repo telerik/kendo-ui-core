@@ -2655,6 +2655,9 @@ var __meta__ = {
                     }
                     this.staticHeader.width(width);
                     this.staticContent.width(width);
+                    if (this.staticFooter) {
+                        this.staticFooter.width(width);
+                    }
                 }
             }
         },
@@ -2900,6 +2903,11 @@ var __meta__ = {
                     }
                     footerWrap.scrollLeft(offset);
                 }
+            }
+
+            if (that.staticContent) {
+                that._appendStaticColumnFooter();
+                that._setStaticContainersWidth();
             }
         },
 
@@ -3511,6 +3519,39 @@ var __meta__ = {
                 this.staticContent = table.insertBefore(this.content);
             }
         },
+
+        _appendStaticColumnFooter: function() {
+            var that = this,
+                columns = this.columns,
+                idx,
+                length,
+                html,
+                colgroup,
+                tr,
+                table,
+                hasStaticColumns;
+
+            html = '<div class="k-grid-footer-static"><table><colgroup /><tbody><tr class="k-footer-template"></tr></tbody></table></div>';
+
+            table = $(html);
+
+            colgroup = table.find("colgroup");
+            tr = table.find("tr");
+
+            for (idx = 0, length = columns.length; idx < length; idx++) {
+                if (columns[idx].static) {
+
+                    that.footer.find(".k-grid-footer-wrap>table>colgroup>col:not(.k-group-col,.k-hierarchy-col)").eq(idx).appendTo(colgroup);
+                    that.footer.find(".k-footer-template>td:not(.k-group-cell,.k-hierarchy-cell)").eq(idx).appendTo(tr);
+                    hasStaticColumns = true;
+                }
+            }
+
+            if (hasStaticColumns) {
+                this.staticFooter = table.prependTo(that.footer);
+            }
+        },
+
 
         _appendStaticColumnHeader: function(container) {
             var that = this,

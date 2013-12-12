@@ -53,9 +53,14 @@
                 }
 
                 div.k-grid-header-wrap,
+                div.k-grid-footer-wrap,
                 div.k-grid-content
                 {
                     width: inherit;
+                }
+
+                .k-grid-footer-static {
+                    float:left;
                 }
 
                 .k-grid-content-static
@@ -92,15 +97,18 @@
                             template: "#=ContactName# <br/> #=ContactName#",
                             title: "Contact Name",
                             static: true,
+                            footerTemplate: "foo",
                             width: 140
                         }, {
                             field: "ContactTitle",
                             static: true,
+                            footerTemplate: "bar",
                             title: "Contact Title",
                             width: 290
                         }, {
                             field: "CompanyName",
                             title: "Company Name",
+                            footerTemplate: "baz",
                             width: 290
                         }, {
                             field: "Country",

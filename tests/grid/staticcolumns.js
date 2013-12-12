@@ -117,4 +117,22 @@
 
         equal(grid.content.find("tr:first").height(), grid.staticContent.find("tr:first").height());
     });
+
+    test("correct number of col elements are created in the static footer", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true, footerTemplate: "foo" }, "bar", "baz"]
+        });
+
+        equal(grid.element.find(".k-grid-footer-static col").length, 1);
+
+        equal(grid.element.find(".k-grid-footer-wrap col").length, 2);
+    });
+
+    test("width is set to static footer", function() {
+        var grid = setup({
+            columns: [{ field: "foo", static: true, width: 140, footerTemplate: "foo" }, "bar", "baz"]
+        });
+
+        equal(grid.staticFooter.width(), 140);
+    });
 })();
