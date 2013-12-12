@@ -497,7 +497,7 @@ kendo_module({
 
                 that._removeSplitBars();
 
-                that.resize();
+                that.resize(true);
             }
 
             return paneElement;
@@ -549,7 +549,7 @@ kendo_module({
                 that._removeSplitBars();
 
                 if (that.options.panes.length) {
-                    that.resize();
+                    that.resize(true);
                 }
             }
 

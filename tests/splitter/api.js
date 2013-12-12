@@ -362,6 +362,22 @@
         equal(panes[panes.length - 1], config);
     });
 
+    test("append() calls Splitter resize(true)", function() {
+        var args;
+
+        splitter = create({
+            panes: [{}, {}]
+        });
+
+        splitter.object.resize = function() {
+            args = arguments;
+        }
+
+        splitter.object.append({});
+
+        ok(args.length == 1 && args[0] === true);
+    });
+
     test("insertBefore() inserts a pane element", function() {
         splitter = create({
             panes: [{}, {}]
@@ -398,6 +414,24 @@
         splitter.object.insertBefore(config, referencePane);
 
         equal(splitter.object.options.panes[0], config);
+    });
+
+    test("insertBefore() calls Splitter resize(true)", function() {
+        var args;
+
+        splitter = create({
+            panes: [{}, {}]
+        });
+
+        var referencePane = splitter.dom.children(".k-pane").first();
+
+        splitter.object.resize = function() {
+            args = arguments;
+        }
+
+        splitter.object.insertBefore({}, referencePane);
+
+        ok(args.length == 1 && args[0] === true);
     });
 
     test("insertAfter() inserts a pane element", function() {
@@ -438,6 +472,24 @@
         equal(splitter.object.options.panes[1], config);
     });
 
+    test("insertAfter() calls Splitter resize(true)", function() {
+        var args;
+
+        splitter = create({
+            panes: [{}, {}]
+        });
+
+        var referencePane = splitter.dom.children(".k-pane").first();
+
+        splitter.object.resize = function() {
+            args = arguments;
+        }
+
+        splitter.object.insertAfter({}, referencePane);
+
+        ok(args.length == 1 && args[0] === true);
+    });
+
     test("remove() removes a pane element", function() {
         splitter = create({
             panes: [{}, {}, {}]
@@ -476,4 +528,23 @@
 
         ok(result && result.options && result.options.name && result.options.name == "Splitter");
     });
+
+    test("remove() calls Splitter resize(true)", function() {
+        var args;
+
+        splitter = create({
+            panes: [{}, {}]
+        });
+
+        var referencePane = splitter.dom.children(".k-pane").first();
+
+        splitter.object.resize = function() {
+            args = arguments;
+        }
+
+        splitter.object.remove(referencePane);
+
+        ok(args.length == 1 && args[0] === true);
+    });
+
 })();
