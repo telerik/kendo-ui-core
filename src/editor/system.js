@@ -889,7 +889,7 @@ var MSWordFormatCleaner = Cleaner.extend({
         that.lists(placeholder);
         that.tables(placeholder);
 
-        html = placeholder.innerHTML.replace(/\s+class="?[^"\s>]*"?/ig, '');
+        html = placeholder.innerHTML.replace(/(<[^>]*)\s+class="?[^"\s>]*"?/ig, '$1');
 
         return html;
     }
