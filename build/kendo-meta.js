@@ -117,7 +117,7 @@ var getKendoFile = (function() {
                 new Function("define", this.getOrigCode())(define);
             } catch(ex) {
                 SYS.error("Can't determine AMD deps for " + this.filename() + ".  Failed to evaluate.");
-                console.log(ex);
+                console.log("    [", ex, "]");
             }
             if (!self._amd_deps)
                 self._amd_deps = [];
@@ -415,7 +415,11 @@ function listKendoFiles() {
             return /^kendo\..*\.js$/i.test(filename) && !/\.min\.js$/i.test(filename);
         })
         .filter(function(filename){
-            return !/^kendo\.(web|dataviz|mobile|all|winjs|timezones|model)\.js$/.test(filename);
+            return !/^kendo\.(web|dataviz|mobile|all|winjs)\.js$/.test(filename);
+        })
+        .filter(function(filename){
+            var code = FS.readFileSync(PATH.join(SRCDIR, filename), "utf8");
+            return ( /define[\s\n\t]*\(/.test(code) ); // XXX: this sucks but it'll do until we cleanup
         })
         .sort();
     return js_files;

@@ -36,7 +36,7 @@ module.exports = function(grunt) {
     var files = grunt.option('files');
     jshint.files = files ? files.split(",") : jshint.files;
 
-    var kendo_files = META.loadAll().map(function(f){
+    var all_kendo_files = META.loadAll().map(function(f){
         return "src/" + f;
     });
 
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
                         jquery,
                         'tests/jquery.mockjax.js',
 
-                    ].concat(kendo_files).concat([
+                    ].concat(all_kendo_files).concat([
 
                         'src/kendo.timezones.js',
                         'src/cultures/kendo.culture.de-DE.js',
@@ -122,10 +122,23 @@ module.exports = function(grunt) {
                     singleRun: grunt.option('single-run')
                 }
             }
+        },
+
+        kendo: {
+            min: {
+                src: META.listKendoFiles().map(function(f){ return "src/" + f }),
+                dest: "tmp",
+                ext: ".min.js",
+            },
+            full: {
+                src: META.listKendoFiles().map(function(f){ return "src/" + f }),
+                dest: "tmp",
+                ext: ".js",
+            },
         }
+
     });
 
     // Default task(s).
     grunt.registerTask('default', ['karma:unit']);
-    grunt.registerTask( "build", [ "concat:all", "uglify:all"] );
 };
