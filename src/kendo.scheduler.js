@@ -405,6 +405,8 @@ kendo_module({
             var that = this;
 
             kendo.data.Model.fn.init.call(that, value);
+
+            that._defaultId = that.defaults[that.idField];
         },
 
         clone: function(options, updateUid) {
@@ -468,11 +470,10 @@ kendo_module({
             options = $.extend(options, {
                 recurrenceException: null,
                 recurrenceRule: null,
-                recurrenceId: this.id || this.recurrenceId,
-                id: this.defaults.id
+                recurrenceId: this.id || this.recurrenceId
             });
 
-            options[this.idField] = this.defaults.id;
+            options[this.idField] = this.defaults[this.idField];
 
             return this.clone(options, true);
         },
