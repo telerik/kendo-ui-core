@@ -385,8 +385,7 @@ var getKendoFile = (function() {
 })();
 
 function listKendoFiles() {
-    var js_dir = PATH.join(SRCDIR, "src");
-    var js_files = FS.readdirSync(js_dir)
+    var js_files = FS.readdirSync(SRCDIR)
         .filter(function(filename){
             return /^kendo\..*\.js$/i.test(filename) && !/\.min\.js$/i.test(filename);
         })
@@ -478,12 +477,23 @@ function extract_widget_info(ast) {
     return widgets;
 }
 
+function buildKendoConfig() {
+    var files = listKendoFiles();
+    var template = JSON.parse(FS.readFileSync(PATH.join(__dirname, "..", "download-builder", "config", "categories.json"), "utf8"));
+    template.components = [];
+    files.forEach(function(f){
+        var comp = getKendoFile(f);
+        var meta = comp.getMeta();
+        if (!meta) {
+            SYS.error("No __meta__ declaration in " + f);
+            //throw new Error("No __meta__ declaration in " + f);
+        } else {
+            template.components.push(meta);
+        }
+    });
+    return template;
+}
+
 exports.getKendoFile = getKendoFile;
 exports.listKendoFiles = listKendoFiles;
-
-
-//// test
-(function(){
-    var f = getKendoFile("kendo.editor.js");
-    console.log(f.getMeta());
-})();
+exports.buildKendoConfig = buildKendoConfig;
