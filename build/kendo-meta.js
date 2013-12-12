@@ -37,13 +37,13 @@ var getKendoFile = (function() {
 
         getOrigCode: cachedProperty("getOrigCode", function(){
             var code = FS.readFileSync(this.getFullFileName(), "utf8");
-            code = code.replace(/\r\n/g, "\n"); // <sigh>
+            code = code.replace(/\r/g, ""); // <sigh>
             return code;
         }),
 
         getOrigAST: cachedProperty("getOrigAST", function(){
             //SYS.error("Parsing: " + this.filename());
-            return U2.parse(this.getOrigCode(), {
+            return U2_parse(this.getOrigCode(), {
                 filename: this.filename()
             });
         }),
@@ -123,27 +123,7 @@ var getKendoFile = (function() {
         }),
 
         _getAllFileDeps: function(maxLevel) {
-            var files = [], loading = [];
-            function load(filename, basedir, level) {
-                if (maxLevel != null && level == maxLevel)
-                    return;
-                // normalize the filename relative to the kendo src directory
-                filename = filename.replace(/(\.js)?$/, ".js");
-                filename = PATH.resolve(basedir, filename);
-                filename = PATH.relative(SRCDIR, filename);
-                if (!contains(loading, filename)) {
-                    loading.push(filename);
-                    var comp = getKendoFile(filename);
-                    comp.getAMDDeps().forEach(function(f){
-                        // level is increased only if we don't load a subfile.
-                        // otherwise we assume we're on the same level as the current component.
-                        load(f, comp.dirname(), level + (comp.isSubfile() ? 0 : 1));
-                    });
-                    files.push(filename);
-                }
-            }
-            load(this.filename(), this.dirname(), 0);
-            return files;
+            return loadComponent(this.filename(), this.dirname(), [], maxLevel);
         },
 
         // returns an array of file names -- *all* files required to
@@ -196,7 +176,7 @@ var getKendoFile = (function() {
         }),
 
         buildFullAST: cachedProperty("buildFullAST", function(){
-            return U2.parse(this.buildFullSource(), {
+            return U2_parse(this.buildFullSource(), {
                 filename: this.filename()
             });
         }),
@@ -206,7 +186,7 @@ var getKendoFile = (function() {
                 fileNamesToAMDDeps(this.getDirectCompDeps(), true),
                 this._getFullCode()
             );
-            var ast = U2.parse(code, {
+            var ast = U2_parse(code, {
                 filename: this.filename()
             });
             var compressor = U2.Compressor({
@@ -246,7 +226,7 @@ var getKendoFile = (function() {
                 throw new Error("buildFullSource doesn't make sense for subfiles: " + self.filename());
             }
             var my_code = this.getAMDFactory();
-            var ast = U2.parse(my_code, { expression: true });
+            var ast = U2_parse(my_code, { expression: true });
             var replacements = [];
             walkAST(ast, function(node){
                 if (isMetaNode(node)) {
@@ -292,88 +272,6 @@ var getKendoFile = (function() {
         }
     };
 
-    function wrapAMD(deps, code) {
-        var v = {
-            CODE: code,
-            DEPS: beautify(deps),
-        };
-        return AMD_WRAPPER.replace(/\$(CODE|DEPS)/g, function(s, p){
-            return v[p];
-        });
-    };
-
-    function isMetaNode(node) {
-        return node instanceof U2.AST_Var
-            && node.definitions.length == 1
-            && node.definitions[0].name.name == "__meta__";
-    };
-
-    function fileNamesToAMDDeps(files, min) {
-        return files.map(function(filename){
-            filename = filename.replace(/^(\.\/)?/, "./"); // make sure it starts with ./
-            filename = filename.replace(/\.js$/i, "");     // drop the extension
-            if (min) filename += ".min";                   // minified?
-            return filename;
-        });
-    };
-
-    function replaceInString(str, replacements) {
-        replacements = U2.mergeSort(replacements, function(a, b){
-            return a.begin - b.begin;
-        });
-        for (var i = replacements.length; --i >= 0;) {
-            var r = replacements[i];
-            str = str.substr(0, r.begin) + r.text + str.substr(r.end);
-        }
-        return str;
-    };
-
-    function cachedProperty(name, fetcher) {
-        name = "_" + name;
-        return function() {
-            var self = this;
-            if (self[name] != null)
-                return self[name];
-            return self[name] = fetcher.apply(self, arguments);
-        };
-    }
-
-    function cloneAST(ast) {
-        return ast.transform(new U2.TreeTransformer(null, function(){}));
-    }
-
-    function walkAST(ast, walker) {
-        var returnValue, exit = {
-            exit: function(ret) {
-                returnValue = ret;
-                throw exit;
-            }
-        };
-        try {
-            ast.walk(new U2.TreeWalker(function(node, descend){
-                return walker.call(exit, node, descend);
-            }));
-        } catch(ex) {
-            if (ex === exit) return returnValue;
-            throw ex;
-        }
-    }
-
-    function contains(a, x) {
-        return a.indexOf(x) >= 0;
-    }
-
-    function pushUniq(a, x) {
-        if (!contains(a, x))
-            a.push(x);
-    }
-
-    function beautify(obj) {
-        return U2.parse("(" + JSON.stringify(obj) + ")").body[0].body.print_to_string({
-            beautify: true, indent_level: 4
-        });
-    }
-
     var FILES = {};
     function getKendoFile(filename) {
         return FILES[filename] || (
@@ -383,6 +281,124 @@ var getKendoFile = (function() {
 
     return getKendoFile;
 })();
+
+function U2_parse(code, options) {
+    try {
+        code = code.replace(/\r/g, ""); // <sigh>
+        return U2.parse(code, options);
+    } catch(ex) {
+        if (ex instanceof U2.JS_Parse_Error) {
+            console.log(options.filename);
+            console.log(ex);
+        }
+    }
+}
+
+function wrapAMD(deps, code) {
+    var v = {
+        CODE: code,
+        DEPS: beautify(deps),
+    };
+    return AMD_WRAPPER.replace(/\$(CODE|DEPS)/g, function(s, p){
+        return v[p];
+    });
+};
+
+function isMetaNode(node) {
+    return node instanceof U2.AST_Var
+        && node.definitions.length == 1
+        && node.definitions[0].name.name == "__meta__";
+};
+
+function fileNamesToAMDDeps(files, min) {
+    return files.map(function(filename){
+        filename = filename.replace(/^(\.\/)?/, "./"); // make sure it starts with ./
+        filename = filename.replace(/\.js$/i, "");     // drop the extension
+        if (min) filename += ".min";                   // minified?
+        return filename;
+    });
+};
+
+function replaceInString(str, replacements) {
+    replacements = U2.mergeSort(replacements, function(a, b){
+        return a.begin - b.begin;
+    });
+    for (var i = replacements.length; --i >= 0;) {
+        var r = replacements[i];
+        str = str.substr(0, r.begin) + r.text + str.substr(r.end);
+    }
+    return str;
+};
+
+function cachedProperty(name, fetcher) {
+    name = "_" + name;
+    return function() {
+        var self = this;
+        if (self[name] != null)
+            return self[name];
+        return self[name] = fetcher.apply(self, arguments);
+    };
+}
+
+function cloneAST(ast) {
+    return ast.transform(new U2.TreeTransformer(null, function(){}));
+}
+
+function walkAST(ast, walker) {
+    var returnValue, exit = {
+        exit: function(ret) {
+            returnValue = ret;
+            throw exit;
+        }
+    };
+    try {
+        ast.walk(new U2.TreeWalker(function(node, descend){
+            return walker.call(exit, node, descend);
+        }));
+    } catch(ex) {
+        if (ex === exit) return returnValue;
+        throw ex;
+    }
+}
+
+function contains(a, x) {
+    return a.indexOf(x) >= 0;
+}
+
+function pushUniq(a, x) {
+    if (!contains(a, x))
+        a.push(x);
+}
+
+function beautify(obj) {
+    return U2_parse("(" + JSON.stringify(obj) + ")").body[0].body.print_to_string({
+        beautify: true, indent_level: 4
+    });
+}
+
+function loadComponent(filename, basedir, files, maxLevel) {
+    var loading = [];
+    function load(filename, basedir, level) {
+        if (maxLevel != null && level == maxLevel)
+            return;
+        // normalize the filename relative to the kendo src directory
+        filename = filename.replace(/(\.js)?$/, ".js");
+        filename = PATH.resolve(basedir, filename);
+        filename = PATH.relative(SRCDIR, filename);
+        if (!contains(loading, filename) && !contains(files, filename)) {
+            loading.push(filename);
+            var comp = getKendoFile(filename);
+            comp.getAMDDeps().forEach(function(f){
+                // level is increased only if we don't load a subfile.
+                // otherwise we assume we're on the same level as the current component.
+                load(f, comp.dirname(), level + (comp.isSubfile() ? 0 : 1));
+            });
+            files.push(filename);
+        }
+    }
+    load(filename, basedir, 0);
+    return files;
+}
 
 function listKendoFiles() {
     var js_files = FS.readdirSync(SRCDIR)
@@ -494,6 +510,50 @@ function buildKendoConfig() {
     return template;
 }
 
+function loadComponents(files, maxLevel) {
+    var loads = [];
+    files.forEach(function(f){
+        loadComponent(f, SRCDIR, loads, maxLevel);
+    });
+    return loads;
+}
+
 exports.getKendoFile = getKendoFile;
 exports.listKendoFiles = listKendoFiles;
 exports.buildKendoConfig = buildKendoConfig;
+exports.loadComponents = loadComponents;
+
+
+
+
+if (require.main === module) (function(){
+    // invoked as CLI
+    var OPT = require("optimist");
+    var ARGV = OPT
+        .describe("all-deps", "Show a list of all files required to load component(s)")
+        .describe("direct-deps", "Show direct dependencies of component(s))")
+        .describe("subfiles", "Show files that a component is made of")
+        .boolean("all-deps")
+        .boolean("direct-deps")
+        .string("subfiles")
+        .wrap(80)
+        .argv;
+
+    var REST = ARGV._.slice();
+
+    if (ARGV["all-deps"]) {
+        SYS.puts(beautify(loadComponents(REST)));
+        return;
+    }
+
+    if (ARGV["direct-deps"]) {
+        SYS.puts(beautify(loadComponents(REST, 2)));
+        return;
+    }
+
+    if (ARGV["subfiles"]) {
+        SYS.puts( beautify(getKendoFile(ARGV["subfiles"]).getCompFiles()) );
+        return;
+    }
+
+})();
