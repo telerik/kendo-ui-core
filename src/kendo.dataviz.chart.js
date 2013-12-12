@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "./kendo.data", "./kendo.userevents", "./kendo.dataviz.core", "./kendo.dataviz.svg", "./kendo.dataviz.themes", "./kendo.dataviz.chart.polar", "./kendo.dataviz.chart.funnel" ], f);
+    define([ "./kendo.data", "./kendo.userevents", "./kendo.dataviz.core", "./kendo.dataviz.svg", "./kendo.dataviz.themes" ], f);
 })(function(){
 
 var __meta__ = {
