@@ -1,5 +1,5 @@
 (function(f, define){
-    define([ "../kendo.data", ".,/kendo.combobox", ".,/kendo.multiselect", "../kendo.validator" ], f);
+    define([ "../kendo.data", "../kendo.combobox", "../kendo.multiselect", "../kendo.validator" ], f);
 })(function(){
 
 (function ($, undefined) {
