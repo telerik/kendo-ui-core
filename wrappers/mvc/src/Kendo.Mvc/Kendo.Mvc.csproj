@@ -1771,8 +1771,6 @@
     <Compile Include="UI\Map\Fluent\MapControlsSettingsBuilder.cs" />
     <Compile Include="UI\Map\Settings\MapControlsNavigatorSettings.cs" />
     <Compile Include="UI\Map\Fluent\MapControlsNavigatorSettingsBuilder.cs" />
-    <Compile Include="UI\Map\Settings\MapControlsZoomSettings.cs" />
-    <Compile Include="UI\Map\Fluent\MapControlsZoomSettingsBuilder.cs" />
     <Compile Include="UI\Map\Settings\MapLayerDefaultsSettings.cs" />
     <Compile Include="UI\Map\Fluent\MapLayerDefaultsSettingsBuilder.cs" />
     <Compile Include="UI\Map\Settings\MapLayerDefaultsShapeSettings.cs" />

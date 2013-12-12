@@ -14,8 +14,6 @@ namespace Kendo.Mvc.UI
         
             Navigator = new MapControlsNavigatorSettings();
                 
-            Zoom = new MapControlsZoomSettings();
-                
         //<< Initialization
 
             
@@ -28,12 +26,6 @@ namespace Kendo.Mvc.UI
         public bool? Attribution { get; set; }
         
         public MapControlsNavigatorSettings Navigator
-        {
-            get;
-            private set;
-        }
-        
-        public MapControlsZoomSettings Zoom
         {
             get;
             private set;
@@ -54,12 +46,6 @@ namespace Kendo.Mvc.UI
             if (navigator.Any())
             {
                 json["navigator"] = navigator;
-            }
-                
-            var zoom = Zoom.ToJson();
-            if (zoom.Any())
-            {
-                json["zoom"] = zoom;
             }
                 
         //<< Serialization

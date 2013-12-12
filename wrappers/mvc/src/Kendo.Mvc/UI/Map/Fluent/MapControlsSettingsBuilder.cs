@@ -40,16 +40,6 @@ namespace Kendo.Mvc.UI.Fluent
             return this;
         }
         
-        /// <summary>
-        /// Enables or disables the built-in zoom control (+/- button).
-        /// </summary>
-        /// <param name="configurator">The action that configures the zoom.</param>
-        public MapControlsSettingsBuilder Zoom(Action<MapControlsZoomSettingsBuilder> configurator)
-        {
-            configurator(new MapControlsZoomSettingsBuilder(container.Zoom));
-            return this;
-        }
-        
         //<< Fields
 
         
