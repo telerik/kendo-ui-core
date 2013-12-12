@@ -1018,7 +1018,13 @@ function pad(number, digits, end) {
     };
 
     if (globalize) {
-        toString = proxy(globalize.format, globalize);
+        toString = function(value, format, culture) {
+            if (typeof culture !== STRING) {
+                culture = culture.name;
+            }
+
+            return globalize.format(value, format, culture);
+        }
     }
 
     kendo.format = function(fmt) {
@@ -1545,6 +1551,10 @@ function pad(number, digits, end) {
 
             if (value === undefined || value === null) {
                return null;
+            }
+
+            if (typeof culture !== STRING) {
+                culture = culture.name;
             }
 
             value = globalize.parseFloat(value, culture);
