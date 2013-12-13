@@ -354,7 +354,9 @@
         });
 
         test("applies series color to point markers border", function() {
-            equal(scatterPoint.options.markers.border.color, "#f00");
+            createScatterChart({ markers: { visible: true } });
+            scatterChart.reflow(chartBox);
+            equal(scatterPoint.marker.options.border.color, "#f00");
         });
 
         test("applies series opacity color to point markers", function() {
@@ -415,7 +417,7 @@
                 color: function(point) { return "#f00" }
             });
 
-            equal(scatterPoint.options.markers.border.color, "#f00");
+            equal(scatterPoint.color, "#f00");
         });
 
         test("color fn argument contains value", 1, function() {
