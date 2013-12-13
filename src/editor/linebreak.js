@@ -20,6 +20,7 @@ var ParagraphCommand = Command.extend({
 
     _insertMarker: function(doc, range) {
         var marker = dom.create(doc, 'a'), container;
+        marker.className = "k-marker";
 
         range.insertNode(marker);
 
@@ -78,14 +79,14 @@ var ParagraphCommand = Command.extend({
         heading = dom.closestEditableOfType(marker, 'h1,h2,h3,h4,h5,h6'.split(','));
 
         if (li) {
-            rng = range.cloneRange();
-            rng.selectNode(li);
-
             // hitting 'enter' in empty li
-            if (!RangeUtils.textNodes(rng).length) {
+            if (dom.emptyNode(li)) {
                 paragraph = dom.create(doc, 'p');
 
                 if (li.nextSibling) {
+                    rng = range.cloneRange();
+                    rng.selectNode(li);
+
                     RangeUtils.split(rng, li.parentNode);
                 }
 
