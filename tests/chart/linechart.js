@@ -720,6 +720,7 @@
                 }, options)]
             });
             linePoint = lineChart.points[0];
+            lineChart.reflow(chartBox);
         }
 
         // ------------------------------------------------------------
@@ -755,7 +756,8 @@
         });
 
         test("applies series color to point markers border", function() {
-            equal(linePoint.options.markers.border.color, "#f00");
+            createLineChart({ markers: { visible: true } });
+            equal(linePoint.marker.options.border.color, "#f00");
         });
 
         test("applies opacity to point markers", function() {
@@ -811,12 +813,29 @@
             equal(linePoint.options.dashType, "dot");
         });
 
+        test("binds point color", function() {
+            createLineChart({
+                type: "line",
+                data: [{
+                    color: "red", value: 1
+                }, {
+                    color: "green", value: 2
+                }],
+                field: "value",
+                colorField: "color"
+            });
+
+            equal(lineChart.points[0].color, "red");
+            equal(lineChart.points[1].color, "green");
+        });
+
         test("applies color function", function() {
             createLineChart({
+                markers: { visible: true },
                 color: function(point) { return "#f00" }
             });
 
-            equal(linePoint.options.markers.border.color, "#f00");
+            equal(linePoint.marker.options.border.color, "#f00");
         });
 
         test("color fn argument contains value", 1, function() {

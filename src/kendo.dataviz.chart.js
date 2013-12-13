@@ -4168,12 +4168,8 @@ kendo_module({
 
             point.value = value;
             point.options = options;
+            point.color = options.color;
             point.id = uniqueId();
-
-            var border = options.markers.border;
-            if (!defined(border.color)) {
-               border.color =  options.color;
-            }
 
             point.enableDiscovery();
         },
@@ -4266,7 +4262,7 @@ kendo_module({
         markerBorder: function() {
             var options = this.options.markers;
             var background = options.background;
-            var border = deepExtend({}, options.border);
+            var border = deepExtend({ color: this.color }, options.border);
 
             if (!defined(border.color)) {
                 border.color =
@@ -4673,15 +4669,17 @@ kendo_module({
             }
 
             pointOptions = this.pointOptions(series, seriesIx);
-            deepExtend(pointOptions, {
-                color: fields.color
-            });
-
             pointOptions = chart.evalPointOptions(
                 pointOptions, value, category, categoryIx, series, seriesIx
             );
 
+            var color = data.fields.color || series.color;
+            if (kendo.isFunction(series.color)) {
+                color = pointOptions.color;
+            }
+
             point = new LinePoint(value, pointOptions);
+            point.color = color;
 
             if (isStacked) {
                 stackPoint = lastValue(categoryPoints);

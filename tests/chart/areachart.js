@@ -799,6 +799,7 @@
                 }, options)]
             });
             areaPoint = areaChart.points[0];
+            areaChart.reflow(chartBox);
         }
 
         // ------------------------------------------------------------
@@ -814,7 +815,8 @@
         });
 
         test("applies series color to point markers border", function() {
-            equal(areaPoint.options.markers.border.color, "areaColor");
+            createAreaChart({ markers: { visible: true } });
+            equal(areaPoint.marker.options.border.color, "areaColor");
         });
 
         test("applies opacity to point markers", function() {
