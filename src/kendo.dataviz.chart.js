@@ -4106,9 +4106,8 @@ kendo_module({
                 options = errorBar.options,
                 parent = errorBar.parent,
                 line = options.line,
-                parentColor = parent ? parent.color : null,
                 lineOptions = {
-                    stroke: parentColor || options.color || line.color,
+                    stroke: options.color,
                     strokeWidth: line.width,
                     zIndex: line.zIndex,
                     align: false,
