@@ -1427,8 +1427,8 @@ input.k-checkbox
 /* Font-face for FF/IE10 */
 @font-face {
     font-family: "Kendo UI Examples";
-    src: url("../../shared/styles/KendoUI.woff") format("woff"),
-         url("../../shared/styles/KendoUI.ttf") format("truetype");
+    src: url("../../shared/styles/kendoui.woff") format("woff"),
+         url("../../shared/styles/kendoui.ttf") format("truetype");
 }
 
 .device .km-icon:after,
