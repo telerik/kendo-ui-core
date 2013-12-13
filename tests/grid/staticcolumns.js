@@ -122,7 +122,6 @@
         var grid = setup({
             columns: [{ field: "foo", static: true, footerTemplate: "foo" }, "bar", "baz"]
         });
-
         equal(grid.element.find(".k-grid-footer-static col").length, 1);
 
         equal(grid.element.find(".k-grid-footer-wrap col").length, 2);
@@ -135,4 +134,53 @@
 
         equal(grid.staticFooter.width(), 140);
     });
+
+    test("group cell is added to the static header", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true, footerTemplate: "foo" }, "bar", "baz"]
+        });
+
+        equal(grid.staticHeader.find("col.k-group-col").length, 1);
+        equal(grid.staticHeader.find("th.k-group-cell").length, 1);
+    });
+
+    test("no group cell is added to the non static header", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        ok(!grid.thead.parent().find("col.k-group-col").length);
+        ok(!grid.thead.find("th.k-group-cell").length);
+    });
+
+    test("group cell is added to the static content", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        equal(grid.staticContent.find("col.k-group-col").length, 1);
+        equal(grid.staticContent.find("td.k-group-cell").length, 1);
+    });
+
+    test("no group cell is added to the non static content", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        ok(!grid.content.find("col.k-group-col").length);
+        ok(!grid.content.find("td.k-group-cell").length);
+    });
+
 })();

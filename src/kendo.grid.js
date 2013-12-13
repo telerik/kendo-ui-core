@@ -3116,7 +3116,7 @@ var __meta__ = {
             return group ? group.length : 0;
         },
 
-        _tmpl: function(rowTemplate, columns, alt) {
+        _tmpl: function(rowTemplate, columns, alt, skipGroupCell) {
             var that = this,
                 settings = extend({}, kendo.Template, that.options.templateSettings),
                 idx,
@@ -3150,7 +3150,7 @@ var __meta__ = {
 
                 rowTemplate += " role='row'>";
 
-                if (groups > 0) {
+                if (groups > 0 && !skipGroupCell) {
                     rowTemplate += groupCells(groups);
                 }
 
@@ -3264,16 +3264,18 @@ var __meta__ = {
                 groups = dataSource.group(),
                 footer = that.footer || that.wrapper.find(".k-grid-footer"),
                 aggregates = dataSource.aggregate(),
+                columnsStatic = staticColumns(that.columns),
                 columns = nonStaticColumns(that.columns);
 
-            that.rowTemplate = that._tmpl(options.rowTemplate, columns);
-            that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, columns, true);
+            if (columnsStatic.length) {
+                that.rowTemplate = that._tmpl(options.rowTemplate, columns, false, true);
+                that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, columns, true, true);
 
-            columns = staticColumns(that.columns);
-
-            if (columns.length) {
-                that.staticRowTemplate = that._tmpl(options.rowTemplate, columns);
-                that.staticAltRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, columns, true);
+                that.staticRowTemplate = that._tmpl(options.rowTemplate, columnsStatic);
+                that.staticAltRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, columnsStatic, true);
+            } else {
+                that.rowTemplate = that._tmpl(options.rowTemplate, columns);
+                that.altRowTemplate = that._tmpl(options.altRowTemplate || options.rowTemplate, columns, true);
             }
 
             if (that._hasDetails()) {
@@ -3468,7 +3470,7 @@ var __meta__ = {
                 idx,
                 th,
                 text,
-                html = "";
+                html = "",
                 length;
 
             for (idx = 0, length = columns.length; idx < length; idx++) {
@@ -3664,14 +3666,28 @@ var __meta__ = {
             }
         },
 
+        _isStatic: function() {
+            return this.staticHeader != null;
+        },
+
         _updateCols: function() {
             var that = this;
 
-            that._appendCols(that.thead.parent().add(that.table));
+            that._appendCols(that.thead.parent().add(that.table), that._isStatic());
         },
 
-        _appendCols: function(table) {
-            normalizeCols(table, visibleColumns(this.columns), this._hasDetails(), this._groups());
+        _updateStaticCols: function() {
+            if (this._isStatic()) {
+                normalizeCols(this.staticHeader.find("table").add(this.staticContent.find("table")), staticColumns(this.columns), this._hasDetails(), this._groups());
+            }
+        },
+
+        _appendCols: function(table, static) {
+            if (static) {
+                normalizeCols(table, nonStaticColumns(this.columns), this._hasDetails(), 0);
+            } else {
+                normalizeCols(table, visibleColumns(this.columns), this._hasDetails(), this._groups());
+            }
         },
 
         _autoColumns: function(schema) {
@@ -3710,7 +3726,7 @@ var __meta__ = {
             return html;
         },
 
-        _groupRowHtml: function(group, colspan, level) {
+        _groupRowHtml: function(group, colspan, level, groupHeaderBuilder, rowTemplate, altRowTemplate) {
             var that = this,
                 html = "",
                 idx,
@@ -3727,18 +3743,14 @@ var __meta__ = {
                 text  = typeof template === FUNCTION ? template(data) : kendo.template(template)(data);
             }
 
-            html +=  '<tr class="k-grouping-row">' + groupCells(level) +
-                      '<td colspan="' + colspan + '" aria-expanded="true">' +
-                        '<p class="k-reset">' +
-                         '<a class="k-icon k-i-collapse" href="#" tabindex="-1"></a>' + text +
-                         '</p></td></tr>';
+            html += groupHeaderBuilder(colspan, level, text);
 
             if(group.hasSubgroups) {
                 for(idx = 0, length = groupItems.length; idx < length; idx++) {
-                    html += that._groupRowHtml(groupItems[idx], colspan - 1, level + 1);
+                    html += that._groupRowHtml(groupItems[idx], colspan - 1, level + 1, groupHeaderBuilder, rowTemplate, altRowTemplate);
                 }
             } else {
-                html += that._rowsHtml(groupItems, that.rowTemplate, that.altRowTemplate);
+                html += that._rowsHtml(groupItems, rowTemplate, altRowTemplate);
             }
 
             if (that.groupFooterTemplate) {
@@ -3818,11 +3830,12 @@ var __meta__ = {
 
         _updateHeader: function(groups) {
             var that = this,
-                cells = that.thead.find("th.k-group-cell"),
+                container = that._isStatic() ? that.staticHeader : that.thead,
+                cells = container.find("th.k-group-cell"),
                 length = cells.length;
 
             if(groups > length) {
-                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(that.thead.find("tr"));
+                $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(container.find("tr"));
             } else if(groups < length) {
                 length = length - groups;
                 $(grep(cells, function(item, index) { return length > index; } )).remove();
@@ -4077,35 +4090,15 @@ var __meta__ = {
 
             if(that._group) {
                 that._templates();
-                that._updateCols();
+                that._updateCols(that._isStatic());
+                that._updateStaticCols();
                 that._updateHeader(groups);
                 that._group = groups > 0;
             }
 
-            if(groups > 0) {
-                if (that.detailTemplate) {
-                    colspan++;
-                }
+            that._renderContent(data, colspan, groups);
 
-                if (that.groupFooterTemplate) {
-                    that._groupAggregatesDefaultObject = buildEmptyAggregatesObject(that.dataSource.aggregate());
-                }
-
-                for (idx = 0, length = data.length; idx < length; idx++) {
-                    html += that._groupRowHtml(data[idx], colspan, 0);
-                }
-            } else {
-                html += that._rowsHtml(data, that.rowTemplate, that.altRowTemplate);
-            }
-
-            that.tbody = appendContent(that.tbody, that.table, html);
-
-            if (that.staticContent) {
-                var table = that.staticContent.children("table");
-                appendContent(table.children("tbody"), table, that._rowsHtml(data, that.staticRowTemplate, that.staticAltRowTemplate));
-
-                adjustRowHeight(that.table, table);
-            }
+            that._renderStaticContent(data, colspan, groups);
 
             that._footer();
 
@@ -4127,6 +4120,60 @@ var __meta__ = {
             }
 
             that.trigger(DATABOUND);
+       },
+
+       _renderContent: function(data, colspan, groups) {
+            var that = this,
+                idx,
+                length,
+                html = "",
+                isStatic = that.staticContent != null;
+
+
+            colspan = isStatic ? colspan - staticColumns(that.columns).length : colspan;
+
+            if(groups > 0) {
+
+                colspan = isStatic ? colspan - groups : colspan;
+
+                if (that.detailTemplate) {
+                    colspan++;
+                }
+
+                if (that.groupFooterTemplate) {
+                    that._groupAggregatesDefaultObject = buildEmptyAggregatesObject(that.dataSource.aggregate());
+                }
+
+                for (idx = 0, length = data.length; idx < length; idx++) {
+                    html += that._groupRowHtml(data[idx], colspan, 0,  isStatic ? groupRowStaticContentBuilder : groupRowBuilder, that.rowTemplate, that.altRowTemplate);
+                }
+            } else {
+                html += that._rowsHtml(data, that.rowTemplate, that.altRowTemplate);
+            }
+
+            that.tbody = appendContent(that.tbody, that.table, html);
+       },
+
+       _renderStaticContent: function(data, colspan, groups) {
+           var html = "",
+               idx,
+               length;
+
+           if (this.staticContent) {
+
+               var table = this.staticContent.children("table");
+               if (groups > 0) {
+                   colspan = colspan - nonStaticColumns(this.columns).length;
+                   for (idx = 0, length = data.length; idx < length; idx++) {
+                       html += this._groupRowHtml(data[idx], colspan, 0, groupRowBuilder, this.staticRowTemplate, this.staticAltRowTemplate);
+                   }
+               } else {
+                   html = this._rowsHtml(data, this.staticRowTemplate, this.staticAltRowTemplate);
+               }
+               appendContent(table.children("tbody"), table, html);
+
+               adjustRowHeight(this.table, table);
+           }
        }
    });
 
@@ -4230,7 +4277,22 @@ var __meta__ = {
        }
    }
 
-   var Sorter = Widget.extend({
+
+   function groupRowBuilder(colspan, level, text) {
+       return '<tr class="k-grouping-row">' + groupCells(level) +
+           '<td colspan="' + colspan + '" aria-expanded="true">' +
+           '<p class="k-reset">' +
+           '<a class="k-icon k-i-collapse" href="#" tabindex="-1"></a>' + text +
+       '</p></td></tr>';
+   }
+
+   function groupRowStaticContentBuilder(colspan, level, text) {
+       return '<tr class="k-grouping-row">' +
+           '<td colspan="' + colspan + '" aria-expanded="true">' +
+           '<p class="k-reset">&nbsp;</p></td></tr>';
+   }
+
+    var Sorter = Widget.extend({
        init: function(element, options) {
            var that = this, link;
 
@@ -4347,9 +4409,11 @@ var __meta__ = {
 
    ui.plugin(Grid);
    ui.plugin(VirtualScrollable);
+
    extend(kendo.ui, {
        Sorter: Sorter
    });
+
 })(window.kendo.jQuery);
 
 return window.kendo;
