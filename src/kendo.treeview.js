@@ -1326,7 +1326,7 @@ kendo_module({
 
             this._insertNode(items, index, parentNode, function(item, group) {
                 // insert node into DOM
-                if (index == children.length) {
+                if (index >= children.length) {
                     item.appendTo(group);
                 } else {
                     item.insertBefore(children.eq(index));
