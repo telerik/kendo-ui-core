@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../src/jquery.js"></script>
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.userevents.js"></script>
+    <script src="../src/kendo.draganddrop.js"></script>
+    <script src="../src/kendo.sortable.js"></script>
+</head>
+<body>
+    <ul id="list">
+        <li class="item"><div class="inner">item1</div></li>
+        <li class="item"><div class="inner">item2</div></li>
+        <li class="item"><div class="inner">item3</div></li>
+        <li class="item"><div class="inner">item4</div></li>
+        <li class="item"><div class="inner">item5</div></li>
+        <li class="item"><div class="inner">item6</div></li>
+        <li class="item"><div class="inner">item7</div></li>
+        <li class="item"><div class="inner">item8</div></li>
+    </ul>
+    <style>
+        #list {
+            list-style-type: none;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .item {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid black;
+            background-color: green;
+            width: 200px;
+        }
+    </style>
+    <script>
+        function contains(parent, child) {
+            try {
+                return $.contains(parent, child) || parent == child;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        var Widget = kendo.ui.Widget;
+
+        var Sortable = Widget.extend({
+            init: function(element, options) {
+                var that = this;
+
+                Widget.fn.init.call(that, element, options);
+
+                that.placeholder = $("<div>placeholder</div>");
+                
+                that._draggable = new kendo.ui.Draggable(element, {
+                    filter: ">li",
+                    hint: function(element) {
+                        return that.options.hint(element);
+                    },
+                    dragstart: $.proxy(that._dragstart, that),
+                    dragcancel: $.proxy(that._dragcancel, that),
+                    drag: $.proxy(that._drag, that),
+                    dragend: $.proxy(that._dragend, that)
+                });
+
+            },
+
+            events: [
+
+            ],
+
+            options: {
+                name: "Sortable",
+                hint: function(element) {
+                    return element.clone();
+                }
+            },
+
+            destroy: function() {
+                
+            },
+
+            _dragstart: function(e) {
+                var draggedElement = this.draggedElement = e.currentTarget,
+                    placeholder = this.placeholder;
+
+                draggedElement.css("display", "none");
+                draggedElement.before(placeholder);
+            },
+
+            _dragcancel: function(e) {
+                this.draggedElement.show();
+                this.placeholder.remove();
+            },
+
+            _drag: function(e) {
+                var draggedElement = this.draggedElement,
+                    target = this._findTarget(e);
+
+                target = $(target).closest("li");
+                if(target.length) {
+                    console.log(
+                        kendo.getOffset(e.sender.hint),
+                        kendo.getOffset(target)
+                    );
+                }
+            },
+
+            _dragend: function(e) {
+                console.log("dragend");
+            },
+
+            _findTarget: function(e) {
+                var target = kendo.elementUnderCursor(e),
+                    draggable = e.sender;
+
+                if(contains(draggable.hint[0], target)) {
+                    draggable.hint.hide();
+                    target = kendo.elementUnderCursor(e);
+                    // IE8 does not return the element in iframe from first attempt
+                    if (!target) {
+                        target = elementUnderCursor(e);
+                    }
+                    draggable.hint.show();
+                }
+
+                return target;
+            },
+
+
+        });
+
+        kendo.ui.plugin(Sortable);
+
+        $("#list").kendoSortable();
+    </script>
+</body>
+</html>
