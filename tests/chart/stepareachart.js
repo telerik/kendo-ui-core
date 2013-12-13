@@ -820,7 +820,7 @@
         });
 
         test("applies series color to point markers border", function() {
-            createAreaChart();
+            createAreaChart({ markers: { visible: true } });
             areaPoint.reflow(chartBox);
             equal(areaPoint.marker.options.border.color, "areaColor");
         });
