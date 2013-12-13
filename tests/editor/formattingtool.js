@@ -102,6 +102,22 @@ test("drop-down items are decorated", function() {
     equal(formatSpan.css("color"), propertyFrom("red", "color"));
 });
 
+test("styles handle quotes in item decoration", function() {
+    selectFromValue(inline, "<h1>fo||o</h1>");
+
+    withMock(kendo.ui.editor.Dom, "inlineStyle", function() {
+        return 'font-family: "Segoe UI";';
+    }, function() {
+        var tool = formattingTool(inline);
+        tool.decorate();
+
+        var formatSpan = tool.popup.element.find(".k-item span");
+
+        equal(formatSpan.length, 1);
+        equal(formatSpan.css("font-family"), "'Segoe UI'");
+    });
+});
+
 test("styles apply to specified context", function() {
     setFormattingItems(inline, [
         { text: "red", value: ".red", context: "h1" },
