@@ -46,6 +46,7 @@ module.exports = function(grunt) {
                     frameworks: ['qunit'],
                     files: [
                         { pattern: 'styles/**/*.*', watched: true, included: false },
+                        { pattern: 'tests/window/blank.html', watched: true, included: false },
                         { pattern: 'tests/editor/editorStyles.css', included: false },
                         { pattern: 'tests/**/*-fixture.html' },
                         jquery,
