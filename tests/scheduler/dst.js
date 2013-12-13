@@ -11,9 +11,11 @@
         setup: function() {
             div = $("<div/>").width(1000).height(1000);
             div.appendTo(QUnit.fixture);
+            this.firsDay = kendo.culture().calendar.firstDay;
         },
         teardown: function() {
             kendo.destroy(QUnit.fixture);
+            kendo.culture().calendar.firstDay = this.firsDay;
         }
     });
 
@@ -224,6 +226,28 @@
         equalWithRound(event.offset().top, slots.eq(2).offset().top);
         equalWithRound(event.offset().top + event.outerHeight(), slots.eq(2).offset().top + slots.eq(2).outerHeight());
     });
+
+    test("dst event is not rendered in month view", function() {
+        if (!dst) {
+            expect(0);
+            return;
+        }
+
+        kendo.culture().calendar.firstDay = 1;
+
+        var scheduler = new kendo.ui.Scheduler(div, {
+            views: ["month"],
+            date: new Date("2014/2/1"),
+            dataSource: [
+                new kendo.data.SchedulerEvent({ start: new Date("2014/3/10"), end: new Date("2014/3/10"), title: "event" })
+            ]
+        });
+
+        var slots = div.find(".k-scheduler-content td");
+
+        ok(!div.find(".k-event").length);
+    });
+
 
     function resizeStart(scheduler, target) {
         var draggable = scheduler._resizeDraggable;

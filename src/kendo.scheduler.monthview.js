@@ -480,16 +480,19 @@ kendo_module({
 
             return $(this.eventTemplate(event));
         },
+       _isInDateSlot: function(event) {
+            var groups = this.groups[0];
+            var slotStart = groups.firstSlot().start;
+            var slotEnd = groups.lastSlot().end - 1;
 
-        _isInDateSlot: function(event) {
-            var slotStart = this.startDate();
-            var slotEnd = new Date(this.endDate().getTime() + MS_PER_DAY - 1);
+            var startTime = kendo.date.toUtcTime(event.start);
+            var endTime = kendo.date.toUtcTime(event.end);
 
-            return (isInDateRange(event.start, slotStart, slotEnd) ||
-                isInDateRange(event.end, slotStart, slotEnd) ||
-                isInDateRange(slotStart, event.start, event.end) ||
-                isInDateRange(slotEnd, event.start, event.end)) &&
-                (!isInDateRange(event.end, slotStart, slotStart) || isInDateRange(event.end, event.start, event.start) || event.isAllDay );
+            return (isInDateRange(startTime, slotStart, slotEnd) ||
+                isInDateRange(endTime, slotStart, slotEnd) ||
+                isInDateRange(slotStart, startTime, endTime) ||
+                isInDateRange(slotEnd, startTime, endTime)) &&
+                (!isInDateRange(endTime, slotStart, slotStart) || isInDateRange(endTime, startTime, startTime) || event.isAllDay );
         },
 
         _slotIndex: function(date) {
@@ -919,11 +922,11 @@ kendo_module({
     }
 
     function isInDateRange(value, min, max) {
-        var msMin = min.getTime(),
-            msMax = max.getTime(),
+        var msMin = min,
+            msMax = max,
             msValue;
 
-        msValue = value.getTime();
+        msValue = value;
 
         return msValue >= msMin && msValue <= msMax;
     }
