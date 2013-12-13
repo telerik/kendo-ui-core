@@ -145,10 +145,15 @@
                 ],
                 select: onSelect
             }).data("kendoMenu").append("<li id='test22'>Test 22</li><li id='test22'>Test 22<ul><li id='test22'>Test 22</li></ul></li><li id='test22'>Test 22</li>");
+            $('#menuIconTest').kendoMenu();
         });
     </script>
 </head>
 <body>
+<ul id="menuIconTest">
+    <li><span class="k-sprite k-tool-icon k-i-arrowhead-e"></span>Next</li>
+    <li><span class="k-sprite k-tool-icon k-i-refresh"></span>Refresh</li>
+</ul>
 <ul id="Menu" class="k-widget k-reset k-header k-menu">
     <li class="k-item k-state-default" style=""><span class="k-link"><img
             src="Icons/Suites/mvc.png" class="k-image" alt="image">ASP.NET MVC<span

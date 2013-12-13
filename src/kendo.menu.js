@@ -228,10 +228,10 @@ kendo_module({
     function updateArrow (item) {
         item = $(item);
 
-        item.find("> .k-link > [class*=k-i-arrow]").remove();
+        item.find("> .k-link > [class*=k-i-arrow]:not(.k-sprite)").remove();
 
         item.filter(":has(.k-group)")
-            .children(".k-link:not(:has([class*=k-i-arrow]))")
+            .children(".k-link:not(:has([class*=k-i-arrow]:not(.k-sprite)))")
             .each(function () {
                 var item = $(this),
                     parent = item.parent().parent();
