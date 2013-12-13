@@ -25,9 +25,7 @@ var __meta__ = {
         dropTargets = {},
         dropAreas = {},
         lastDropTarget,
-        OS = support.mobileOS,
-        invalidZeroEvents = OS && OS.android,
-        mobileChrome = (invalidZeroEvents && OS.browser == "chrome"),
+        elementUnderCursor = kendo.elementUnderCursor,
         KEYUP = "keyup",
         CHANGE = "change",
 
@@ -48,14 +46,6 @@ var __meta__ = {
             return $.contains(parent, child) || parent == child;
         } catch (e) {
             return false;
-        }
-    }
-
-    function elementUnderCursor(e) {
-        if (mobileChrome) {
-            return document.elementFromPoint(e.x.screen, e.y.screen);
-        } else {
-            return document.elementFromPoint(e.x.client, e.y.client);
         }
     }
 
