@@ -934,8 +934,8 @@
 
         var defaultOptions = {
                 endCaps: true,
+                color: "red",
                 line: {
-                    color: "red",
                     width: 1
                 }
             },
@@ -1060,24 +1060,6 @@
                     {x1: 2, x2: 2, y1: 5, y2: 9, options: expectedOptions}],
                 elements;
             errorBar.reflow(targetBox);
-            elements = errorBar.getViewElements(view);
-
-            ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);
-        });
-
-        test("color is taken from parent bar", function(){
-            var targetBox = new Box(5,5,9, 9),
-                errorBar = new ScatterErrorBar(1,2, false, xyChart, {}, {
-                    endCaps: true
-                }),
-                view = new ViewStub(),
-                options = $.extend({}, expectedOptions, {stroke: "black"}),
-                expectedElements = [{x1: 1, x2: 2, y1: 7, y2: 7, options: options}, {x1: 1, x2: 1, y1: 5, y2: 9, options: options},
-                    {x1: 2, x2: 2, y1: 5, y2: 9, options: options}],
-                elements;
-            errorBar.reflow(targetBox);
-            errorBar.parent = { color: "black" };
-
             elements = errorBar.getViewElements(view);
 
             ok(equalFields(expectedElements, view.log.line) && elements.length == expectedElements.length);
