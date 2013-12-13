@@ -61,6 +61,7 @@ if (browser.msie && browser.version >= 8) {
 var whitespace = /^\s+$/,
     rgb = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i,
     bom = /\ufeff/g,
+    whitespaceOrBom = /^\s+|\ufeff$/,
     persistedScrollTop,
     cssAttributes =
            ("color,padding-left,padding-right,padding-top,padding-bottom," +
@@ -265,6 +266,30 @@ var Dom = {
 
     stripBom: function(text) {
         return text.replace(bom, "");
+    },
+
+    insignificant: function(node) {
+        var attr = node.attributes;
+
+        return node.className == "k-marker" || (Dom.is(node, 'br') && (attr._moz_dirty || attr._moz_editor_bogus_node));
+    },
+
+    emptyNode: function(node) {
+        var significantNodes = $.grep(node.childNodes, function(child) {
+            if (Dom.is(child, 'br')) {
+                return false;
+            } else if (Dom.insignificant(child)) {
+                return false;
+            } else if (child.nodeType == 3 && whitespaceOrBom.test(child.nodeValue)) {
+                return false;
+            } else if (Dom.is(child, 'p') && Dom.emptyNode(child)) {
+                return false;
+            }
+
+            return true;
+        });
+
+        return !significantNodes.length;
     },
 
     name: function (node) {

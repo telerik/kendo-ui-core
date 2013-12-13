@@ -143,6 +143,17 @@ test('exec handles li containing br', function() {
     equal(editor.body.firstChild.nodeName.toLowerCase(), 'p');
 });
 
+test("exec handles li containing BOM nodes", function() {
+    editor.value('<ul><li>\ufeff<br/></li></ul>');
+    var range = editor.createRange();
+    range.selectNodeContents(editor.body.firstChild.firstChild, 1);
+    range.collapse(true);
+    var command = createParagraphCommand(range);
+    command.exec();
+    equal(editor.value(), '');
+    equal(editor.body.firstChild.nodeName.toLowerCase(), 'p');
+});
+
 test('exec removes br', function() {
     editor.value('foo<br/>bar');
     var range = editor.createRange();
