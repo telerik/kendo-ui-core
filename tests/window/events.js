@@ -28,16 +28,12 @@
         equal(+firstWindow.wrapper.css("zIndex"), +secondWindow.wrapper.css("zIndex") + 2);
     });
 
-    /*asyncT*/test("loading of iframe triggers load event", 1, function() {
-        console.warn("test should be modified, so that the iframe document is loaded");
-        ok(true);
-
-        /*
+    asyncTest("loading of iframe triggers load event", 1, function() {
         var triggered = false;
         var timeout = setTimeout(start, 2000);
 
         createWindow({
-            content: "blank.html",
+            content: "/base/tests/window/blank.html",
             iframe: true,
             refresh: function() {
                 clearTimeout(timeout);
@@ -45,20 +41,15 @@
                 ok(true);
             }
         });
-        */
     });
 
-    /*asyncT*/test("multiple loading of iframe triggers one refresh per load", function() {
-        console.warn("test should be modified, so that the iframe document is loaded");
-        ok(true);
-
-        /*
+    asyncTest("multiple loading of iframe triggers one refresh per load", function() {
         var triggers = 0;
         var first = true;
         var timeout = setTimeout(start, 4000);
 
         var dialog = createWindow({
-            content: "blank.html",
+            content: "/base/tests/window/blank.html",
             iframe: true,
             refresh: function() {
                 triggers++;
@@ -73,7 +64,6 @@
                 }
             }
         });
-        */
     });
 
     test("clicking the refresh button on a static window triggers refresh event", function() {
@@ -100,6 +90,7 @@
                 }
             });
 
+        $.mockjaxSettings.responseTime = 0;
         $.mockjax({
             url: "/foo",
             status: 404,
