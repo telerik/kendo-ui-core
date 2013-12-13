@@ -189,9 +189,9 @@
                 }).data("kendoSortable");
 
         press(draggedElement, draggableOffset.left, draggableOffset.top);
-        move(draggedElement, targetOffset.left, targetOffset.top - 10);
+        move(draggedElement, targetOffset.left, targetOffset.top);
 
-        notEqual(targetElement.index(), filteredIndex, "filtered item changes its position");
+        equal(targetElement.index(), filteredIndex, "filtered item does not changes its position");
     });
 
     test("user is not able to drag disabled items", 1, function() {
