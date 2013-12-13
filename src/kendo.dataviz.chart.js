@@ -10417,11 +10417,7 @@ kendo_module({
                 result = {};
 
             if (!isNumber(firstDataItem) && !isArray(firstDataItem)) {
-                if (data.dataItems.length > 1) {
-                    result = shallowCopy(firstDataItem);
-                } else {
-                    result = firstDataItem || {};
-                }
+                result = shallowCopy(firstDataItem);
             }
 
             for (i = 0; i < seriesFields.length; i++) {
