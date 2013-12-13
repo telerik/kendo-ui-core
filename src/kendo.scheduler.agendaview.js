@@ -338,15 +338,15 @@ kendo_module({
 
         select: function(selection) {
             this.clearSelection();
+
             var row = this.table
                 .find(".k-task")
                 .eq(selection.index)
                 .closest("tr")
-                .addClass("k-state-selected")[0];
+                .addClass("k-state-selected")
+                .attr("aria-selected", true)[0];
 
-            if (row) {
-                this._scrollTo(row, this.content[0]);
-            }
+            this.current(row);
         },
 
         move: function(selection, key) {

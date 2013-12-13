@@ -734,4 +734,24 @@
         equal(args.roomId2, 3);
     });
 
+    test("Scheduler raises change event on task click", 2, function() {
+        setupWidget({
+            views: ["agenda"]
+        });
+
+        scheduler.bind("change", function(e) {
+            var selection = e;
+            var dataItem = scheduler.dataSource.view()[0];
+
+            equal(selection.events.length, 1);
+            equal(selection.events[0], dataItem);
+        });
+
+        var event = scheduler.wrapper.find(".k-task");
+
+        event.trigger({
+            type: "mousedown",
+            currentTarget: event
+        });
+    });
 })();
