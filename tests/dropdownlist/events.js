@@ -5,6 +5,7 @@
 
     module("kendo.ui.DropDownList events", {
         setup: function() {
+            kendo.effects.disable();
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
             }
@@ -17,6 +18,7 @@
             }
 
             input.add($("ul")).parent(".k-widget").remove();
+            kendo.effects.enable();
         }
     });
 
@@ -333,7 +335,7 @@
         dropdownlist.ul.children().first().trigger(CLICK);
     });
 
-    test("prevent select event should only close the popup", 1, function() {
+    test("prevent select event should only close the popup", 2, function() {
         var dropdownlist = input.kendoDropDownList({
             dataSource: ["foo"],
             select: function(e) {
@@ -348,8 +350,7 @@
         dropdownlist.open();
         dropdownlist.ul.children().first().trigger(CLICK);
 
-        console.warn('SKIP: dropdownlist popup is visible for some reason');
-        // ok(!dropdownlist.popup.visible(), 'popup is not visible');
+        ok(!dropdownlist.popup.visible(), 'popup is not visible');
     });
 
     test("DropDownList triggers cascade when item is selected", 1, function() {
