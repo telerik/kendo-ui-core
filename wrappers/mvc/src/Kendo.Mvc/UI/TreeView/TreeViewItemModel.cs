@@ -14,6 +14,7 @@ namespace Kendo.Mvc.UI
             this.Items = new List<TreeViewItemModel>();
             this.HtmlAttributes = new Dictionary<string, string>();
             this.ImageHtmlAttributes = new Dictionary<string, string>();
+            this.LinkHtmlAttributes = new Dictionary<string, string>();
         }
 
         public bool Enabled { get; set; }
@@ -41,5 +42,7 @@ namespace Kendo.Mvc.UI
         public IDictionary<string, string> HtmlAttributes { get; set; }
 
         public IDictionary<string, string> ImageHtmlAttributes { get; set; }
+
+        public IDictionary<string, string> LinkHtmlAttributes { get; set; }
     }
 }

@@ -274,6 +274,10 @@ namespace Kendo.Mvc.UI.Fluent
                         {
                             item.HtmlAttributes[key] = node.HtmlAttributes[key];
                         }
+                        foreach (var key in node.LinkHtmlAttributes.Keys)
+                        {
+                            item.LinkHtmlAttributes[key] = node.LinkHtmlAttributes[key];
+                        }
                     })
                     .Children(item => item.Items)
                 )
