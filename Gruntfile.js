@@ -1,9 +1,14 @@
 var META = require("./build/kendo-meta.js");
+var PATH = require("path");
 
 module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadTasks('build/grunt/tasks');
+
+    function addSrc(f) {
+        return PATH.join("src", f);
+    }
 
     var browsers = ['Chrome'];
 
@@ -36,9 +41,7 @@ module.exports = function(grunt) {
     var files = grunt.option('files');
     jshint.files = files ? files.split(",") : jshint.files;
 
-    var all_kendo_files = META.loadAll().map(function(f){
-        return "src/" + f;
-    });
+    var all_kendo_files = META.loadAll().map(addSrc);
 
     // Project configuration.
     grunt.initConfig({
@@ -126,15 +129,24 @@ module.exports = function(grunt) {
 
         kendo: {
             min: {
-                src: META.listKendoFiles().map(function(f){ return "src/" + f }),
+                src: META.listKendoFiles().map(addSrc),
                 dest: "tmp",
                 ext: ".min.js",
             },
             full: {
-                src: META.listKendoFiles().map(function(f){ return "src/" + f }),
+                src: META.listKendoFiles().map(addSrc),
                 dest: "tmp",
                 ext: ".js",
             },
+
+            // these just need to be listed here, though everything
+            // needed to build these files is in the task definition.
+            web: {},
+            mobile: {},
+            win: {},
+            icenium: {},
+            dataviz: {},
+            all: {},
         }
 
     });

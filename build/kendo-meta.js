@@ -361,6 +361,13 @@ function pushUniq(a, x) {
         a.push(x);
 }
 
+function removeDuplicates(a) {
+    var ret = [];
+    for (var i = 0; i < a.length; ++i)
+        pushUniq(ret, a[i]);
+    return ret;
+}
+
 function beautify(obj) {
     return U2_parse("(" + JSON.stringify(obj) + ")").body[0].body.print_to_string({
         beautify: true, indent_level: 4
@@ -409,7 +416,15 @@ function loadComponent(filename, basedir, files, maxLevel) {
     return files;
 }
 
-function listKendoFiles() {
+function listKendoFiles(suite) {
+    switch (suite) {
+      case "all"     : return ALL_JS;
+      case "web"     : return WEB_JS;
+      case "mobile"  : return MOBILE_JS;
+      case "icenium" : return ICENIUM_JS;
+      case "dataviz" : return DATAVIZ_JS;
+      case "win"     : return WIN_JS;
+    }
     var js_files = FS.readdirSync(SRCDIR)
         .filter(function(filename){
             return /^kendo\..*\.js$/i.test(filename) && !/\.min\.js$/i.test(filename);
@@ -531,9 +546,212 @@ function loadComponents(files, maxLevel) {
     return loads;
 }
 
+// makes a bundle loading files and any dependencies in the right order
+// adds the AMD wrapper, but depend on nothing since we bundle everything needed.
+function bundleFiles(files, filename, min) {
+    var code = loadComponents(files).reduce(function(a, f){
+        var comp = getKendoFile(f);
+        if (!comp.isSubfile()) {
+            a.push(comp.getFullCode());
+        }
+        return a;
+    }, []).join("\n\n");
+    code = wrapAMD([], code);
+    if (min) {
+        var ast = minify(code, filename);
+        // XXX: see if source maps are needed any longer
+        code = ast.print_to_string();
+    }
+    return { code: code };
+}
+
 function loadAll() {
     return loadComponents(listKendoFiles());
 }
+
+/* -----[ suites ]----- */
+
+// XXX: how do we infer these lists from the files themselves?
+
+var WEB_JS = [
+    "kendo.core.js",
+    "kendo.router.js",
+    "kendo.view.js",
+    "kendo.fx.js",
+    "kendo.data.odata.js",
+    "kendo.data.xml.js",
+    "kendo.data.js",
+    "kendo.binder.js",
+    "kendo.validator.js",
+    "kendo.userevents.js",
+    "kendo.draganddrop.js",
+    "kendo.mobile.scroller.js",
+    "kendo.groupable.js",
+    "kendo.reorderable.js",
+    "kendo.resizable.js",
+    "kendo.sortable.js",
+    "kendo.selectable.js",
+    "kendo.button.js",
+    "kendo.pager.js",
+    "kendo.popup.js",
+    "kendo.tooltip.js",
+    "kendo.list.js",
+    "kendo.calendar.js",
+    "kendo.datepicker.js",
+    "kendo.autocomplete.js",
+    "kendo.dropdownlist.js",
+    "kendo.combobox.js",
+    "kendo.multiselect.js",
+    "kendo.colorpicker.js",
+    "kendo.columnmenu.js",
+    "kendo.grid.js",
+    "kendo.listview.js",
+    "kendo.imagebrowser.js",
+    "kendo.editor.js",
+    "kendo.numerictextbox.js",
+    "kendo.menu.js",
+    "kendo.editable.js",
+    "kendo.filtermenu.js",
+    "kendo.panelbar.js",
+    "kendo.progressbar.js",
+    "kendo.tabstrip.js",
+    "kendo.timepicker.js",
+    "kendo.datetimepicker.js",
+    "kendo.treeview.js",
+    "kendo.slider.js",
+    "kendo.splitter.js",
+    "kendo.upload.js",
+    "kendo.window.js",
+    "kendo.scheduler.view.js",
+    "kendo.scheduler.dayview.js",
+    "kendo.scheduler.agendaview.js",
+    "kendo.scheduler.monthview.js",
+    "kendo.scheduler.recurrence.js",
+    "kendo.scheduler.js"
+];
+
+var DATAVIZ_JS = [
+    "kendo.core.js",
+    "kendo.fx.js",
+    "kendo.router.js",
+    "kendo.view.js",
+    "kendo.data.odata.js",
+    "kendo.data.xml.js",
+    "kendo.data.js",
+    "kendo.binder.js",
+    "kendo.userevents.js",
+    "kendo.draganddrop.js",
+    "kendo.mobile.scroller.js",
+    "kendo.popup.js",
+    "kendo.tooltip.js",
+    "kendo.dataviz.core.js",
+    "kendo.dataviz.themes.js",
+    "kendo.dataviz.chart.js",
+    "kendo.dataviz.chart.polar.js",
+    "kendo.dataviz.chart.funnel.js",
+    "kendo.dataviz.gauge.js",
+    "kendo.dataviz.barcode.js",
+    "kendo.dataviz.qrcode.js",
+    "kendo.dataviz.stock.js",
+    "kendo.dataviz.sparkline.js",
+    "kendo.dataviz.svg.js",
+    "kendo.dataviz.vml.js",
+    "kendo.dataviz.canvas.js",
+    "kendo.dataviz.map.js"
+];
+
+var MOBILE_JS = [
+    "kendo.core.js",
+    "kendo.fx.js",
+    "kendo.data.odata.js",
+    "kendo.data.xml.js",
+    "kendo.data.js",
+    "kendo.binder.js",
+    "kendo.validator.js",
+    "kendo.router.js",
+    "kendo.view.js",
+    "kendo.userevents.js",
+    "kendo.draganddrop.js",
+    "kendo.popup.js",
+    "kendo.touch.js",
+    "kendo.mobile.popover.js",
+    "kendo.mobile.loader.js",
+    "kendo.mobile.scroller.js",
+    "kendo.mobile.shim.js",
+    "kendo.mobile.view.js",
+    "kendo.mobile.modalview.js",
+    "kendo.mobile.drawer.js",
+    "kendo.mobile.splitview.js",
+    "kendo.mobile.pane.js",
+    "kendo.mobile.application.js",
+    "kendo.mobile.actionsheet.js",
+    "kendo.mobile.button.js",
+    "kendo.mobile.buttongroup.js",
+    "kendo.mobile.listview.js",
+    "kendo.mobile.navbar.js",
+    "kendo.mobile.scrollview.js",
+    "kendo.mobile.switch.js",
+    "kendo.mobile.tabstrip.js"
+];
+
+var WIN_JS = [
+    "kendo.core.js",
+    "kendo.router.js",
+    "kendo.fx.js",
+    "kendo.data.odata.js",
+    "kendo.data.xml.js",
+    "kendo.data.js",
+    "kendo.binder.js",
+    "kendo.validator.js",
+    "kendo.userevents.js",
+    "kendo.draganddrop.js",
+    "kendo.mobile.scroller.js",
+    "kendo.groupable.js",
+    "kendo.reorderable.js",
+    "kendo.resizable.js",
+    "kendo.sortable.js",
+    "kendo.selectable.js",
+    "kendo.pager.js",
+    "kendo.popup.js",
+    "kendo.tooltip.js",
+    "kendo.list.js",
+    "kendo.multiselect.js",
+    "kendo.calendar.js",
+    "kendo.colorpicker.js",
+    "kendo.datepicker.js",
+    "kendo.autocomplete.js",
+    "kendo.dropdownlist.js",
+    "kendo.combobox.js",
+    "kendo.grid.js",
+    "kendo.listview.js",
+    "kendo.numerictextbox.js",
+    "kendo.editable.js",
+    "kendo.filtermenu.js",
+    "kendo.timepicker.js",
+    "kendo.window.js",
+    "kendo.slider.js",
+    "kendo.scheduler.view.js",
+    "kendo.scheduler.dayview.js",
+    "kendo.scheduler.agendaview.js",
+    "kendo.scheduler.monthview.js",
+    "kendo.scheduler.recurrence.js",
+    "kendo.scheduler.js",
+    "kendo.dataviz.core.js",
+    "kendo.dataviz.themes.js",
+    "kendo.dataviz.chart.js",
+    "kendo.dataviz.chart.polar.js",
+    "kendo.dataviz.chart.funnel.js",
+    "kendo.dataviz.gauge.js",
+    "kendo.dataviz.barcode.js",
+    "kendo.dataviz.stock.js",
+    "kendo.dataviz.sparkline.js",
+    "kendo.dataviz.svg.js",
+    "kendo.dataviz.canvas.js"
+];
+
+var ICENIUM_JS = removeDuplicates( DATAVIZ_JS.concat(MOBILE_JS) );
+
+var ALL_JS = removeDuplicates( WEB_JS.concat(DATAVIZ_JS, MOBILE_JS) );
 
 /* -----[ exports ]----- */
 
@@ -542,6 +760,7 @@ exports.listKendoFiles = listKendoFiles;
 exports.buildKendoConfig = buildKendoConfig;
 exports.loadComponents = loadComponents;
 exports.loadAll = loadAll;
+exports.bundleFiles = bundleFiles;
 
 /* -----[ CLI interface ]----- */
 
