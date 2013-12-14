@@ -498,6 +498,8 @@ kendo_module({
             }
 
             that.wrapper.off(NS);
+            that.wrapper.children(".k-tabstrip-items").off(NS);
+
             kendo.destroy(that.wrapper);
         },
 
