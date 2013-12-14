@@ -52,6 +52,15 @@
     <hudson.plugins.chucknorris.CordellWalkerRecorder plugin="chucknorris@0.5">
       <factGenerator/>
     </hudson.plugins.chucknorris.CordellWalkerRecorder>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>scratchpad-staging</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
     <hudson.tasks.junit.JUnitResultArchiver>
       <testResults>test-results.xml</testResults>
       <keepLongStdio>false</keepLongStdio>
