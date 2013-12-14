@@ -1067,7 +1067,9 @@ kendo_module({
 
             var diff = getMilliseconds(end) - getMilliseconds(start);
             if (diff < 0) {
-                kendo.date.setTime(end, diff);
+                hours = start.getHours();
+                end.setHours(hours, start.getMinutes(), start.getSeconds(), start.getMilliseconds());
+                kendo.date.adjustDST(end, hours);
             }
 
             rule._startPeriod = new Date(start);
