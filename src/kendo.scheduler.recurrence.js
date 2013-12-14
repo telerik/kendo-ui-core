@@ -1065,6 +1065,11 @@ kendo_module({
             start = startPeriodByFreq(start, rule);
             end = endPeriodByFreq(end, rule);
 
+            var diff = getMilliseconds(end) - getMilliseconds(start);
+            if (diff < 0) {
+                kendo.date.setTime(end, diff);
+            }
+
             rule._startPeriod = new Date(start);
             rule._endPeriod = endPeriodByFreq(start, rule);
             rule._startIdx = 0;

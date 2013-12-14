@@ -1816,6 +1816,21 @@
         deepEqual(events[2].start, new Date(1997, 10, 27, 9));
     });
 
+    test("MONTHLY occurrence supports bysetpos rule and no timezone", function() {
+        var schedulerEvent = new SchedulerEvent({
+            uid: "id",
+            title: "Title",
+            start: new Date(2013, 11, 12, 6, 0),
+            end: new Date(2013, 11, 12, 7, 0),
+            recurrenceRule: "FREQ=MONTHLY;UNTIL=20140701T000000Z;BYDAY=MO,TU,WE,TH,FR;BYSETPOS=1"
+        });
+
+        var events = occurrences(schedulerEvent, new Date(2014, 5, 29), new Date(2014, 6, 5));
+        var event = events[events.length - 1];
+
+        deepEqual(event.start, new Date(2014, 6, 1, 6));
+    });
+
     test("MONHTLY expands correctly with interval and BYDAY", function() {
         var schedulerEvent = new SchedulerEvent({
             uid: "id",
