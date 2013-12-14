@@ -1037,6 +1037,7 @@
 
     test("non working hours are highlighted", function() {
         var view = setup({
+            dates: [new Date("2013/6/6")],
             workDayStart: new Date("2013/6/6 10:00"),
             startTime: new Date("2013/6/6 9:00"),
             endTime: new Date("2013/6/6 12:00"),
