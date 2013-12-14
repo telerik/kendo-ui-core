@@ -2,7 +2,8 @@
     Layout = null;
 }
 <!DOCTYPE html>
-<html>
+<!--[if IE 7]>         <html class="kd-ie7"> <![endif]-->
+<!--[if gt IE 7]><!--> <html> <!--<![endif]-->
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -77,17 +78,17 @@
 <div class="demos-nav">
     <div class="centerWrap floatWrap">
         <div class="box centerAlign">
-            <a href="web/overview/index.html" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-web.png")" alt="Web Demos" /></a>
+            <a href="web/overview/index.html" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/grid-new.png")" alt="Web Demos" /></a>
             <h2><a href="web/overview/index.html">Web demos</a></h2>
             <p>23 slick UI widgets plus demos of MVVM, Validation, Globalization, Templates, etc. <a href="web/overview/index.html" class="launchButton">Launch Demos</a></p>
         </div>
         <div class="box centerAlign">
-            <a href="mobile/" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-mobile.png")" alt="Mobile Demos" /></a>
+            <a href="mobile/" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/grid-new.png")" alt="Mobile Demos" /></a>
             <h2><a href="mobile/">Mobile demos</a></h2>
             <p>See what you can do on phones &amp; tablets. Make sure to check the mobile simulator. <a href="mobile/" class="launchButton">Launch Demos</a></p>
         </div>
-        <div class="box centerAlign">
-            <a href="dataviz/overview/index.html" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-dataviz.png")" alt="DataViz Demos" /></a>
+        <div class="box centerAlign right-box">
+            <a href="dataviz/overview/index.html" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/grid-new.png")" alt="DataViz Demos" /></a>
             <h2><a href="dataviz/overview/index.html">DataViz demos</a></h2>
             <p>You won't believe this is just HTML5. <br />Rich, interactive, touch-enabled charts. <a href="dataviz/overview/index.html" class="launchButton">Launch Demos</a></p>
         </div>
@@ -142,11 +143,16 @@
 <div class="section section--white">
    <div class="centerWrap floatWrap">
     <div class="box clear widebox floatWrap">
-        <a href="http://demos.telerik.com/teampulse-demo/xview" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/teampulse.jpg")" alt="Telerik's Project Management Software - TeamPulse" /></a>
+        <h2>Lorem Ipsum header</h2>
+        <div class="column23">
+            <a href="http://demos.telerik.com/teampulse-demo/xview" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/teampulse.jpg")" alt="Telerik's Project Management Software - TeamPulse" /></a>
+        </div>
+         <div class="column13">
         <h3><a href="http://demos.telerik.com/teampulse-demo/xview">Telerik's project management software - TeamPulse</a></h3>
         <p>TeamPulse is an end-to-end Agile project management solution based on Agile best practices. It allows you to capture ideas, manage feedback, requirements and bugs, plan releases and track progress in real time. Integrates with GIT and TFS.</p>
         <p>TeamPulse uses the 20+ Kendo UI widgets for its fast and highly adaptable UI. The team leverages Kendo UI's powerful MVVM framework. It reads the data through the DataSources and extensively uses the templates to decouple the UI from the business logic.</p>
         <a href="http://demos.telerik.com/teampulse-demo/xview" class="launchButton">Launch!</a>
+        </div>
     </div>
 </div>
 </div>
@@ -174,7 +180,7 @@
         <p><em>Kendo UI Mobile currently supports iOS 4.0+, Android 2.2+, Windows Phone 8+ and BlackBerry touchscreen devices (7.0+).</em></p>
     </div>
 
-    <div class="column13"">
+    <div class="column13">
         <h3>Supported desktop browsers</h3>
 
         <ul class="browsers">
