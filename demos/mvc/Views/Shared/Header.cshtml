@@ -1,18 +1,25 @@
-<div id="header">
+@*<div id="header">
     <div class="centerWrap floatWrap">
         <h1><a href="@Url.Content("~")" id="logo">Kendo UI - the Art of Web Development</a></h1>
         @Html.Partial("Products")
     </div>
-</div>
+</div>*@
 
-<div id="banner"></div>
+@*<div id="banner"></div>*@
 
 <div class="suite-demos-nav">
+<div id="header">
+    <div class="centerWrap floatWrap">
+       @* <h1><a href="@Url.Content("~")" id="logo">Kendo UI - the Art of Web Development</a></h1>*@
+       @* @Html.Partial("Products")*@
+    </div>
+</div>
     <ul class="centerWrap floatWrap">
-        <li><a href="@Url.Content("~")">Overview</a><em></em></li>
+        <li><a href="@Url.Content("~")">Test Overview</a><em></em></li>
         <li@(Html.ActiveSuiteClass(Url.Content("~/web")))>@Html.SuiteLink("Web", "Web Demos")</li>
         <li@(Html.ActiveSuiteClass(Url.Content("~/mobile")))>@Html.SuiteLink("Mobile", "Mobile Demos")</li>
         <li@(Html.ActiveSuiteClass(Url.Content("~/DataViz")))>@Html.SuiteLink("DataViz", "DataViz Demos")</li>
-        <li@(Html.ActiveSuiteClass(Url.Content("~/ThemeBuilder")))><a href="@Url.Content("~/themebuilder/web.html")">Theme Builders</a></li>
+        <li>@Html.Partial("Products")</li>
+       @* <li@(Html.ActiveSuiteClass(Url.Content("~/ThemeBuilder")))><a href="@Url.Content("~/themebuilder/web.html")">Theme Builders</a></li>*@
     </ul>
 </div>
