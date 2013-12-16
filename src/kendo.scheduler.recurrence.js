@@ -1197,7 +1197,7 @@ kendo_module({
                 value = value.split(",");
 
                 for (valueIdx = 0, valueLength = value.length; valueIdx < valueLength; valueIdx++) {
-                    value[valueIdx] = parseUTCDate(value[valueIdx], tzid || zone)
+                    value[valueIdx] = parseUTCDate(value[valueIdx], tzid || zone);
                 }
             }
         }
