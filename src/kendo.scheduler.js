@@ -59,7 +59,6 @@ kendo_module({
         EDIT = "edit",
         TODAY = getDate(new Date()),
         RECURRENCE_EXCEPTION = "recurrenceException",
-        RECURRENCE_DATE_FORMAT = "yyyyMMddTHHmmssZ",
         DELETECONFIRM = "Are you sure you want to delete this event?",
         DELETERECURRING = "Do you want to delete only this event occurrence or the whole series?",
         EDITRECURRING = "Do you want to edit only this event occurrence or the whole series?",
@@ -640,11 +639,7 @@ kendo_module({
                 if (head) {
                     var start = model.start;
 
-                    start = kendo.timezone.convert(start, this.reader.timezone || start.getTimezoneOffset(), "Etc/UTC");
-
-                    var exceptionDate = kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
-
-                    head.set(RECURRENCE_EXCEPTION, head.recurrenceException.replace(exceptionDate, ""));
+                    head.set(RECURRENCE_EXCEPTION, head.recurrenceException.replace(recurrence.toExceptionString(start, this.reader.timezone), ""));
                 }
             }
         },
@@ -656,11 +651,7 @@ kendo_module({
             var recurrenceException = head.recurrenceException || "";
 
             if (!recurrence.isException(recurrenceException, start, zone)) {
-                start = kendo.timezone.convert(start, zone || start.getTimezoneOffset(), "Etc/UTC");
-
-                recurrenceException += kendo.toString(start, RECURRENCE_DATE_FORMAT) + ";";
-
-                head.set(RECURRENCE_EXCEPTION, recurrenceException);
+                head.set(RECURRENCE_EXCEPTION, recurrenceException + recurrence.toExceptionString(start, zone));
             }
         }
     });

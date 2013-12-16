@@ -106,7 +106,6 @@
         equal(serialize(rule), "FREQ=YEARLY;BYMONTH=1,6;BYWEEKNO=10,20;BYYEARDAY=100,200;BYMONTHDAY=10,20;BYDAY=TU,WE,FR;BYHOUR=10,20;BYMINUTE=20;BYSECOND=33;BYSETPOS=20;WKST=TU");
     });
 
-
     test("Serialize method serializes DTSTART", function() {
         var rule = parse("DTSTART:19730429T070000Z RRULE:FREQ=daily");
 
@@ -135,6 +134,18 @@
         var rule = parse("DTSTART;TZID=America/New_York:19730429T070000Z DTEND;TZID=America/New_York:19730429T070000Z RRULE:FREQ=daily");
 
         equal(serialize(rule), "DTSTART;TZID=America/New_York:19730429T070000Z DTEND;TZID=America/New_York:19730429T070000Z RRULE:FREQ=DAILY;WKST=SU");
+    });
+
+    test("Serialize method serializes EXDATE", function() {
+        var rule = parse("EXDATE:19730429T070000Z\nRRULE:FREQ=DAILY");
+
+        equal(serialize(rule), "EXDATE:19730429T070000Z RRULE:FREQ=DAILY;WKST=SU");
+    });
+
+    test("Serialize method serializes EXDATE with multiple exceptions", function() {
+        var rule = parse("EXDATE:19730429T070000Z,19730429T070000Z,19730429T070000Z\nRRULE:FREQ=DAILY");
+
+        equal(serialize(rule), "EXDATE:19730429T070000Z,19730429T070000Z,19730429T070000Z RRULE:FREQ=DAILY;WKST=SU");
     });
 
 })();

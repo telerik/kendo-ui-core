@@ -12,65 +12,77 @@
     test("Parse DTSTART property (line breaks separator)", function() {
         var rrule = parse("DTSTART:19730429T070000Z\nRRULE:FREQ=DAILY", "Etc/UTC");
 
-        deepEqual(rrule.start.value, new Date(1973, 3, 29, 7));
+        deepEqual(rrule.start.value[0], new Date(1973, 3, 29, 7));
     });
 
     test("Parse DTSTART property (space separator)", function() {
         var rrule = parse("DTSTART:19730429T070000Z RRULE:FREQ=DAILY", "Etc/UTC");
 
-        deepEqual(rrule.start.value, new Date(1973, 3, 29, 7));
+        deepEqual(rrule.start.value[0], new Date(1973, 3, 29, 7));
     });
 
     test("Parse DTSTART property with VALUE", function() {
         var rrule = parse("DTSTART;VALUE=DATE:19730429T070000Z\nRRULE:FREQ=DAILY", "Etc/UTC");
 
-        deepEqual(rrule.start.value, new Date(1973, 3, 29, 7));
+        deepEqual(rrule.start.value[0], new Date(1973, 3, 29, 7));
     });
 
     test("Parse DTSTART property with TZID", function() {
         var rrule = parse("DTSTART;TZID=Etc/UTC:19730429T070000Z\nRRULE:FREQ=DAILY");
 
-        deepEqual(rrule.start.value, new Date(1973, 3, 29, 7));
+        deepEqual(rrule.start.value[0], new Date(1973, 3, 29, 7));
         equal(rrule.start.tzid, "Etc/UTC");
     });
 
     test("Parse DTSTART property with TZID and VALUE", function() {
         var rrule = parse("DTSTART;TZID=Etc/UTC;VALUE=DATE:19730429T070000Z\nRRULE:FREQ=DAILY");
 
-        deepEqual(rrule.start.value, new Date(1973, 3, 29, 7));
+        deepEqual(rrule.start.value[0], new Date(1973, 3, 29, 7));
         equal(rrule.start.tzid, "Etc/UTC");
     });
 
     test("Parse DTEND property (line breaks separator)", function() {
         var rrule = parse("DTEND:19730429T070000Z\nRRULE:FREQ=DAILY", "Etc/UTC");
 
-        deepEqual(rrule.end.value, new Date(1973, 3, 29, 7));
+        deepEqual(rrule.end.value[0], new Date(1973, 3, 29, 7));
     });
 
     test("Parse DTEND property (space separator)", function() {
         var rrule = parse("DTEND:19730429T070000Z RRULE:FREQ=DAILY", "Etc/UTC");
 
-        deepEqual(rrule.end.value, new Date(1973, 3, 29, 7));
+        deepEqual(rrule.end.value[0], new Date(1973, 3, 29, 7));
     });
 
     test("Parse DTEND property with VALUE", function() {
         var rrule = parse("DTEND;VALUE=DATE:19730429T070000Z\nRRULE:FREQ=DAILY", "Etc/UTC");
 
-        deepEqual(rrule.end.value, new Date(1973, 3, 29, 7));
+        deepEqual(rrule.end.value[0], new Date(1973, 3, 29, 7));
     });
 
     test("Parse DTEND property with TZID", function() {
         var rrule = parse("DTEND;TZID=Etc/UTC:19730429T070000Z\nRRULE:FREQ=DAILY");
 
-        deepEqual(rrule.end.value, new Date(1973, 3, 29, 7));
+        deepEqual(rrule.end.value[0], new Date(1973, 3, 29, 7));
         equal(rrule.end.tzid, "Etc/UTC");
     });
 
     test("Parse DTEND property with TZID and VALUE", function() {
         var rrule = parse("DTEND;TZID=Etc/UTC;VALUE=DATE:19730429T070000Z\nRRULE:FREQ=DAILY");
 
-        deepEqual(rrule.end.value, new Date(1973, 3, 29, 7));
+        deepEqual(rrule.end.value[0], new Date(1973, 3, 29, 7));
         equal(rrule.end.tzid, "Etc/UTC");
+    });
+
+    test("Parse EXDATE value", function() {
+        var rrule = parse("EXDATE:19730429T070000Z\nRRULE:FREQ=DAILY");
+
+        deepEqual(rrule.exdates.value[0], kendo.parseDate("1973-04-29T07:00:00Z"));
+    });
+
+    test("Parse multiple EXDATE values", function() {
+        var rrule = parse("EXDATE:19730429T070000Z,19730429T070000Z,19730429T070000Z\nRRULE:FREQ=DAILY");
+
+        deepEqual(rrule.exdates.value[0], kendo.parseDate("1973-04-29T07:00:00Z"));
     });
 
     test("Parse FREQ property", function() {
