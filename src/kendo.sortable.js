@@ -64,8 +64,6 @@ var __meta__ = {
 
             draggedElement.css("display", "none");
             draggedElement.before(placeholder);
-
-            console.log(this._draggable.dropped);
         },
 
         _dragcancel: function(e) {
