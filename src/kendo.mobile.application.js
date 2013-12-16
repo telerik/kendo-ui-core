@@ -33,7 +33,7 @@ kendo_module({
                      '<meta name="apple-mobile-web-app-status-bar-style" content="#=data.statusBarStyle#" /> ' +
                      '<meta name="msapplication-tap-highlight" content="no" /> ', {usedWithBlock: false}),
         clipTemplate = kendo.template('<style>.km-view { clip: rect(0 #= data.width #px #= data.height #px 0); }</style>', {usedWithBlock: false}),
-        ENABLE_CLIP = OS.android || OS.blackberry,
+        ENABLE_CLIP = OS.android && OS.browser != "chrome" || OS.blackberry,
         viewportMeta = viewportTemplate({ height: "" }),
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (OS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
