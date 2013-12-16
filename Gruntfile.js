@@ -41,7 +41,11 @@ module.exports = function(grunt) {
     var files = grunt.option('files');
     jshint.files = files ? files.split(",") : jshint.files;
 
+    // all files (including subfiles like editor/main.js etc.)
     var all_kendo_files = META.loadAll().map(addSrc);
+
+    // files directly in src/
+    var main_kendo_files = META.listKendoFiles().map(addSrc);
 
     // Project configuration.
     grunt.initConfig({
@@ -129,18 +133,22 @@ module.exports = function(grunt) {
 
         kendo: {
             min: {
-                src: META.listKendoFiles().map(addSrc),
+                src: main_kendo_files,
                 dest: "tmp",
                 ext: ".min.js",
             },
             full: {
-                src: META.listKendoFiles().map(addSrc),
+                src: main_kendo_files,
                 dest: "tmp",
                 ext: ".js",
             },
+            config: {
+                src: main_kendo_files,
+                dest: "download-builder/config/kendo-config.json"
+            },
 
             // these just need to be listed here, though everything
-            // needed to build these files is in the task definition.
+            // needed to build these targets is in the task definition.
             web: {},
             mobile: {},
             win: {},

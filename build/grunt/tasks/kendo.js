@@ -21,30 +21,70 @@ function outdated(source, dest) {
 
 module.exports = function(grunt) {
 
+    function makeSources(task) {
+        task.files.forEach(function(f){
+            var destDir = f.dest;
+            var ext = f.ext;
+            f.src.forEach(function(f){
+                var basename = PATH.basename(f, PATH.extname(f));
+                var dest = PATH.join(destDir, basename + ext);
+                if (outdated(f, dest)) {
+                    var comp = META.getKendoFile(f.replace(/^src\//, "")), code;
+                    if (task.target == "min") {
+                        code = comp.buildMinSource();
+                    } else if (task.target == "full") {
+                        code = comp.buildFullSource();
+                    }
+                    grunt.log.writeln("Writing " + dest);
+                    grunt.file.write(dest, code);
+                }
+            });
+        });
+    }
+
+    function makeBundle(task) {
+        var bundle = "kendo." + task.target + ".js";
+        var bundleMin = bundle.replace(/\.js$/, ".min.js");
+        var dest = PATH.join("tmp", bundle);
+        var destMin = PATH.join("tmp", bundleMin);
+        var components = META.listKendoFiles(task.target);
+        var files = components.map(function(f){ return PATH.join("src", f) });
+
+        if (outdated(files, dest)) {
+            grunt.log.writeln("Making bundle " + dest);
+            var data = META.bundleFiles(components, bundle);
+            grunt.file.write(dest, data.code);
+        }
+
+        if (outdated(files, destMin)) {
+            grunt.log.writeln("Making bundle " + destMin);
+            var data = META.bundleFiles(components, bundleMin, true);
+            grunt.file.write(destMin, data.code);
+        }
+    }
+
+    function makeKendoConfig(task) {
+        var files = task.files.reduce(function(a, f){
+            f.src.forEach(function(f){
+                a.push(f);
+            });
+            return a;
+        }, []);
+        var dest = task.files[0].dest;
+        if (outdated(files, dest)) {
+            grunt.log.writeln("Building kendo-config.json");
+            var data = META.buildKendoConfig();
+            grunt.file.write(dest, data);
+        }
+    }
+
     grunt.registerMultiTask("kendo", "Kendo UI build task", function(){
         var task = this;
         switch (task.target) {
           case "min":
           case "full":
-            task.files.forEach(function(f){
-                var destDir = f.dest;
-                var ext = f.ext;
-                f.src.forEach(function(f){
-                    var basename = PATH.basename(f, PATH.extname(f));
-                    var dest = PATH.join(destDir, basename + ext);
-                    if (outdated(f, dest)) {
-                        var comp = META.getKendoFile(f.replace(/^src\//, "")), code;
-                        if (task.target == "min") {
-                            code = comp.buildMinSource();
-                        } else if (task.target == "full") {
-                            code = comp.buildFullSource();
-                        }
-                        grunt.log.writeln("Writing " + dest);
-                        grunt.file.write(dest, code);
-                    }
-                });
-            });
-            return;
+            makeSources(task);
+            break;
 
           case "web":
           case "mobile":
@@ -52,24 +92,12 @@ module.exports = function(grunt) {
           case "icenium":
           case "dataviz":
           case "all":
-            var bundle = "kendo." + task.target + ".js";
-            var bundleMin = bundle.replace(/\.js$/, ".min.js");
-            var dest = PATH.join("tmp", bundle);
-            var destMin = PATH.join("tmp", bundleMin);
-            var components = META.listKendoFiles(task.target);
-            var files = components.map(function(f){ return PATH.join("src", f) });
+            makeBundle(task);
+            break;
 
-            if (outdated(files, dest)) {
-                grunt.log.writeln("Making bundle " + dest);
-                var data = META.bundleFiles(components, bundle);
-                grunt.file.write(dest, data.code);
-            }
-
-            if (outdated(files, destMin)) {
-                grunt.log.writeln("Making bundle " + destMin);
-                var data = META.bundleFiles(components, bundleMin, true);
-                grunt.file.write(destMin, data.code);
-            }
+          case "config":
+            makeKendoConfig(task);
+            break;
         }
     });
 
