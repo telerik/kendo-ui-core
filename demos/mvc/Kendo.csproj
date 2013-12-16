@@ -181,7 +181,6 @@
     <Content Include="content\mobile\shared\mymusic.jpg" />
     <Content Include="content\mobile\shared\player.jpg" />
     <Content Include="content\mobile\shared\sales.jpg" />
-    <Content Include="content\shared\icon-telerik-badge.png" />
     <Content Include="content\shared\images\foods\1.jpg" />
     <Content Include="content\shared\images\foods\10.jpg" />
     <Content Include="content\shared\images\foods\11.jpg" />
@@ -301,6 +300,7 @@
     <Content Include="content\shared\styles\flowerWrap.png" />
     <Content Include="content\shared\styles\hand-ipad.png" />
     <Content Include="content\shared\styles\highlight.png" />
+    <Content Include="content\shared\styles\icon-telerik-badge.png" />
     <Content Include="content\shared\styles\iconmasks.svg" />
     <Content Include="content\shared\styles\iphone.png" />
     <Content Include="content\shared\styles\launch-themebuilder.png" />
@@ -310,11 +310,11 @@
     <Content Include="content\shared\styles\sprite.widgets.png" />
     <Content Include="content\shared\styles\suite.css" />
     <Content Include="content\shared\styles\sushi.png" />
+    <Content Include="content\shared\styles\telerik-footer-social-icons.png" />
+    <Content Include="content\shared\styles\telerik-logo.png" />
     <Content Include="content\shared\styles\themebuilder.png" />
     <Content Include="content\shared\styles\world-map.png" />
     <Content Include="content\shared\styles\xview.png" />
-    <Content Include="content\shared\telerik-footer-social-icons.png" />
-    <Content Include="content\shared\telerik-logo.png" />
     <Content Include="content\web\16x16\Chart.png" />
     <Content Include="content\web\16x16\ComboBox.png" />
     <Content Include="content\web\16x16\Grid.png" />
