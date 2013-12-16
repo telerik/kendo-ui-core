@@ -14,12 +14,16 @@ function withSandbox(callback) {
         callback(wnd, doc);
     });
 
+    var jQueryUrl = $("script[src*=jquery]").attr("src");
+
+    console.log(jQueryUrl);
+
     doc.open();
     doc.write(
         "<!doctype html>" +
         "<html>" +
         "<head><meta charset='utf-8' />" +
-        "<script src='/base/src/jquery.js'></script>" +
+        "<script src='" + jQueryUrl + "'></script>" +
         "<script src='/base/src/kendo.core.js'></script>" +
         "<script src='/base/src/kendo.userevents.js'></script>" +
         "<script src='/base/src/kendo.draganddrop.js'></script>" +
