@@ -181,6 +181,7 @@
     <Content Include="content\mobile\shared\mymusic.jpg" />
     <Content Include="content\mobile\shared\player.jpg" />
     <Content Include="content\mobile\shared\sales.jpg" />
+    <Content Include="content\shared\icon-telerik-badge.png" />
     <Content Include="content\shared\images\foods\1.jpg" />
     <Content Include="content\shared\images\foods\10.jpg" />
     <Content Include="content\shared\images\foods\11.jpg" />
@@ -271,7 +272,11 @@
     <Content Include="content\shared\images\patterns\pattern7.png" />
     <Content Include="content\shared\images\patterns\pattern9.png" />
     <Content Include="content\shared\images\people\1.jpg" />
+    <Content Include="content\shared\js\b020132b.tlrk-bar.js" />
     <Content Include="content\shared\js\console.js" />
+    <Content Include="content\shared\js\dataloader.js" />
+    <Content Include="content\shared\js\dbd26eaf.vendor.js" />
+    <Content Include="content\shared\js\dropdown.js" />
     <Content Include="content\shared\js\employees.js" />
     <Content Include="content\shared\js\examples.js" />
     <Content Include="content\shared\js\less.js" />
@@ -308,6 +313,8 @@
     <Content Include="content\shared\styles\themebuilder.png" />
     <Content Include="content\shared\styles\world-map.png" />
     <Content Include="content\shared\styles\xview.png" />
+    <Content Include="content\shared\telerik-footer-social-icons.png" />
+    <Content Include="content\shared\telerik-logo.png" />
     <Content Include="content\web\16x16\Chart.png" />
     <Content Include="content\web\16x16\ComboBox.png" />
     <Content Include="content\web\16x16\Grid.png" />
@@ -822,6 +829,8 @@
     <Content Include="Views\web\progressbar\vertical.cshtml" />
     <Content Include="Views\web\grid\editing-custom-validation.cshtml" />
     <Content Include="Views\web\validator\custom-validation.cshtml" />
+    <Content Include="Views\Shared\Products.cshtml" />
+    <Content Include="Views\Shared\Telerik-Navigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
