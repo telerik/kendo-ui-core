@@ -64,18 +64,43 @@ module.exports = function(grunt) {
     }
 
     function makeKendoConfig(task) {
-        var files = task.files.reduce(function(a, f){
-            f.src.forEach(function(f){
-                a.push(f);
-            });
-            return a;
-        }, []);
+        var files = getSrc(task);
         var dest = task.files[0].dest;
         if (outdated(files, dest)) {
             grunt.log.writeln("Building kendo-config.json");
             var data = META.buildKendoConfig();
             grunt.file.write(dest, data);
         }
+    }
+
+    function makeCultures(task) {
+        var destDir = task.files[0].dest;
+        var files = getSrc(task);
+        files.forEach(function(f){
+            var basename = PATH.basename(f);
+            var dest = PATH.join(destDir, basename);
+            var destMin = dest.replace(/\.js$/, ".min.js");
+            if (outdated(f, dest)) {
+                var code = grunt.file.read(f, { encoding: "utf8" });
+                code = META.wrapAMD([], code);
+                grunt.log.writeln("Writing " + dest);
+                grunt.file.write(dest, code);
+
+                var ast = META.minify(code);
+                code = ast.print_to_string();
+                grunt.log.writeln("Writing " + destMin);
+                grunt.file.write(destMin, code);
+            }
+        });
+    }
+
+    function getSrc(task) {
+        return task.files.reduce(function(a, f){
+            f.src.forEach(function(f){
+                a.push(f);
+            });
+            return a;
+        }, []);
     }
 
     grunt.registerMultiTask("kendo", "Kendo UI build task", function(){
@@ -97,6 +122,10 @@ module.exports = function(grunt) {
 
           case "config":
             makeKendoConfig(task);
+            break;
+
+          case "cultures":
+            makeCultures(task);
             break;
         }
     });

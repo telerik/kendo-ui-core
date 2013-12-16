@@ -146,6 +146,11 @@ module.exports = function(grunt) {
                 src: main_kendo_files,
                 dest: "download-builder/config/kendo-config.json"
             },
+            cultures: {
+                src: [ "src/cultures/kendo.culture.*.js",
+                       "!src/cultures/kendo.culture.*.min.js" ],
+                dest: "tmp/cultures",
+            },
 
             // these just need to be listed here, though everything
             // needed to build these targets is in the task definition.

@@ -761,6 +761,8 @@ exports.buildKendoConfig = buildKendoConfig;
 exports.loadComponents = loadComponents;
 exports.loadAll = loadAll;
 exports.bundleFiles = bundleFiles;
+exports.wrapAMD = wrapAMD;
+exports.minify = minify;
 
 /* -----[ CLI interface ]----- */
 
