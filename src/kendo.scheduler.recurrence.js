@@ -56,6 +56,7 @@ kendo_module({
         ],
         RULE_NAMES = ["months", "weeks", "yearDays", "monthDays", "weekDays", "hours", "minutes", "seconds"],
         RULE_NAMES_LENGTH = RULE_NAMES.length,
+        RECURRENCE_DATE_FORMAT = "yyyyMMddTHHmmssZ",
         limitation = {
             months: function(date, end, rule) {
                 var monthRules = rule.months,
@@ -884,6 +885,24 @@ kendo_module({
         return false;
     }
 
+    function toExceptionString(dates, zone) {
+        var idx = 0;
+        var length;
+        var date;
+
+        if (!$.isArray(dates)) {
+            dates = [dates];
+        }
+
+        for (length = dates.length; idx < length; idx++) {
+            date = dates[idx];
+            date = kendo.timezone.convert(date, zone || date.getTimezoneOffset(), "Etc/UTC");
+            dates[idx] = kendo.toString(date, RECURRENCE_DATE_FORMAT);
+        }
+
+        return dates.join(";") + ";";
+    }
+
     function startPeriodByFreq(start, rule) {
         var date = new Date(start);
 
@@ -1024,6 +1043,12 @@ kendo_module({
         eventStartTime = getMilliseconds(eventStart);
 
         exceptionDates = parseExceptions(event.recurrenceException, zone);
+
+        if (!exceptionDates[0] && rule.exdates) {
+            exceptionDates = rule.exdates.value;
+            event.set("recurrenceException", toExceptionString(exceptionDates, zone));
+        }
+
         startPeriod = start = new Date(start);
         end = new Date(end);
 
@@ -1429,7 +1454,8 @@ kendo_module({
         weekInYear: weekInYear,
         weekInMonth: weekInMonth,
         numberOfWeeks: numberOfWeeks,
-        isException: isException
+        isException: isException,
+        toExceptionString: toExceptionString
     };
 
     var weekDayCheckBoxes = function(firstDay) {
