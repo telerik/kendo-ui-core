@@ -528,7 +528,9 @@ kendo_module({
                     view.addTimeSlotCollection(this._dates[columnIndex], kendo.date.addDays(this._dates[columnIndex], 1));
                 }
 
-                view.addDaySlotCollection(this._dates[0], this._dates[this._dates.length - 1]);
+                if (this.options.allDaySlot) {
+                    view.addDaySlotCollection(this._dates[0], this._dates[this._dates.length - 1]);
+                }
             }
 
             this._timeSlotGroups(groupCount, columnCount);
