@@ -28,18 +28,7 @@ var __meta__ = {
 
             Widget.fn.init.call(that, element, options);
 
-            that.placeholder = $("<div>placeholder</div>");
-
-            that._draggable = new kendo.ui.Draggable(element, {
-                filter: ">li",
-                hint: function(element) {
-                    return that.options.hint(element);
-                },
-                dragstart: $.proxy(that._dragstart, that),
-                dragcancel: $.proxy(that._dragcancel, that),
-                drag: $.proxy(that._drag, that),
-                dragend: $.proxy(that._dragend, that)
-            });
+            that._draggable = that._createDraggable();
 
         },
 
@@ -51,16 +40,41 @@ var __meta__ = {
             name: "Sortable",
             hint: function(element) {
                 return element.clone();
-            }
+            },
+            placeholder: function(element) {
+                return element.clone()
+                        .removeAttr("id")
+                        .css("visibility", "hidden");
+            },
+            filter: ">*"
         },
 
         destroy: function() {
+            this._draggable.destroy();
+            Widget.fn.destroy.call(this);
+        },
 
+        _createDraggable: function() {
+            var that = this,
+                element = that.element,
+                options = that.options;
+
+            return new kendo.ui.Draggable(element, {
+                filter: options.filter,
+                hint: function(element) {
+                    return options.hint(element);
+                },
+                dragstart: $.proxy(that._dragstart, that),
+                dragcancel: $.proxy(that._dragcancel, that),
+                drag: $.proxy(that._drag, that),
+                dragend: $.proxy(that._dragend, that)
+            });
         },
 
         _dragstart: function(e) {
             var draggedElement = this.draggedElement = e.currentTarget,
-            placeholder = this.placeholder;
+                _placeholder = this.options.placeholder,
+                placeholder = this.placeholder = kendo.isFunction(_placeholder) ? $(_placeholder.call(this, draggedElement)) : _placeholder;
 
             draggedElement.css("display", "none");
             draggedElement.before(placeholder);
@@ -73,11 +87,11 @@ var __meta__ = {
 
         _drag: function(e) {
             var draggedElement = this.draggedElement,
-            target = this._findTarget(e),
-            targetOffset,
-            hintOffset,
-            offsetDelta,
-            placeholder = this.placeholder;
+                target = this._findTarget(e),
+                targetOffset,
+                hintOffset,
+                offsetDelta,
+                placeholder = this.placeholder;
 
             target = $(target).closest("li");
 
@@ -96,8 +110,8 @@ var __meta__ = {
 
         _dragend: function(e) {
             var placeholder = this.placeholder,
-            next = placeholder.next(),
-            draggedElement = this.draggedElement;
+                next = placeholder.next(),
+                draggedElement = this.draggedElement;
 
             placeholder.remove();
 
@@ -113,7 +127,7 @@ var __meta__ = {
 
         _findTarget: function(e) {
             var target = kendo.elementUnderCursor(e),
-            draggable = e.sender;
+                draggable = e.sender;
 
             if(contains(draggable.hint[0], target)) {
                 draggable.hint.hide();
