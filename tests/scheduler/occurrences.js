@@ -2268,6 +2268,62 @@
         equal(events[2].end.getTime(), +new Date(2013, 0, 5, 11, 30));
     });
 
+    test("Update recurrence exception field if EXDATE is specified", function() {
+        var expDate1 = new Date(2013, 0, 1, 10, 30),
+            expDate2 = new Date(2013, 0, 3, 10, 30);
+
+        expDate1 = timezone.apply(expDate1, 0);
+        expDate2 = timezone.apply(expDate2, 0);
+
+        var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + "," +
+                        kendo.toString(expDate2, "yyyyMMddTHHmmssZ");
+
+        var event = new SchedulerEvent({
+            uid: "id",
+            title: "Title",
+            start: new Date(2012, 0, 1, 10, 30),
+            end: new Date(2012, 0, 1, 11, 30),
+            recurrenceRule: "EXDATE:" + exception + " FREQ=DAILY"
+        });
+
+        exception = exception.replace(",", ";");
+        event.expand();
+
+        equal(event.recurrenceException, exception + ";");
+    });
+    return;
+
+    test("Remove event which exist in EXDATE rule", function() {
+        var expDate1 = new Date(2013, 0, 1, 10, 30),
+            expDate2 = new Date(2013, 0, 3, 10, 30);
+
+        expDate1 = timezone.apply(expDate1, 0);
+        expDate2 = timezone.apply(expDate2, 0);
+
+        var exception = kendo.toString(expDate1, "yyyyMMddTHHmmssZ") + "," +
+                        kendo.toString(expDate2, "yyyyMMddTHHmmssZ") + " ";
+
+        var events = new SchedulerEvent({
+            uid: "id",
+            title: "Title",
+            start: new Date(2012, 0, 1, 10, 30),
+            end: new Date(2012, 0, 1, 11, 30),
+            recurrenceRule: "EXDATE:" + exception + "FREQ=DAILY"
+        });
+
+        var events = occurrences(events, new Date(2013, 0, 1), new Date(2013, 0, 5, 17));
+
+        equal(events.length, 3);
+        equal(events[0].start.getTime(), +new Date(2013, 0, 2, 10, 30));
+        equal(events[0].end.getTime(), +new Date(2013, 0, 2, 11, 30));
+
+        equal(events[1].start.getTime(), +new Date(2013, 0, 4, 10, 30));
+        equal(events[1].end.getTime(), +new Date(2013, 0, 4, 11, 30));
+
+        equal(events[2].start.getTime(), +new Date(2013, 0, 5, 10, 30));
+        equal(events[2].end.getTime(), +new Date(2013, 0, 5, 11, 30));
+    });
+
     test("expand method returns event directly when if it satisfies recurrence rule", function() {
         var start = new Date(2010, 10, 10);
         var event = new SchedulerEvent({
