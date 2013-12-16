@@ -2036,4 +2036,20 @@
         equal(events.filter("[aria-selected=false]").length, events.length);
     });
 
+    test("Do not render events if daySlot is disabled", function() {
+        var selectedDate = new Date(2013, 1, 26, 0, 0, 0),
+            view = setup({
+                allDaySlot: false,
+                dates: [
+                   selectedDate
+                ]
+            });
+
+        var events = [new SchedulerEvent({uid:"uid", start: new Date(2013, 1, 26, 0, 0, 0), end: new Date(2013, 1, 26, 0, 0, 0), isAllDay: true, title: '["my event"]' })];
+
+        view.render(events);
+
+        equal(view.element.find("div.k-event>div").length, 0);
+    });
+
 })();

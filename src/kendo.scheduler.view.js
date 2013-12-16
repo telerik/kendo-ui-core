@@ -1719,6 +1719,7 @@ kendo_module({
             var collection;
             var group = this.groups[groupIndex];
             var slot = group.ranges(date, date, isDay, false)[0].start;
+            var daySlotCollectionCount;
 
             if (groupIndex >= this.groups.length - 1) {
                 return;
@@ -1729,8 +1730,10 @@ kendo_module({
                     collection = group._collection(0, true);
                     return collection.at(slot.index);
                 } else {
-                    collection = group._collection(0, group.daySlotCollectionCount());
-                    return isDay ? collection.last() : collection.at(slot.collectionIndex);
+                    daySlotCollectionCount = group.daySlotCollectionCount();
+                    collection = group._collection(daySlotCollectionCount ? 0 : slot.collectionIndex, daySlotCollectionCount);
+
+                    return isDay ? collection.first() : collection.at(slot.collectionIndex);
                 }
             } else {
                 if (!group.timeSlotCollectionCount()) {
