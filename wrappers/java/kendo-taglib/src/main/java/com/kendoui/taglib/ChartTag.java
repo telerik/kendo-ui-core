@@ -132,6 +132,14 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
         setEvent("legendItemHover", value.getBody());
     }
 
+    public void setNoteClick(NoteClickFunctionTag value) {
+        setEvent("noteClick", value.getBody());
+    }
+
+    public void setNoteHover(NoteHoverFunctionTag value) {
+        setEvent("noteHover", value.getBody());
+    }
+
     public void setPlotAreaClick(PlotAreaClickFunctionTag value) {
         setEvent("plotAreaClick", value.getBody());
     }
@@ -302,6 +310,30 @@ public class ChartTag extends WidgetTag /* interfaces */implements DataBoundWidg
 
     public void setLegendItemHover(String value) {
         setProperty("legendItemHover", new Function(value));
+    }
+
+    public String getNoteClick() {
+        Function property = ((Function)getProperty("noteClick"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setNoteClick(String value) {
+        setProperty("noteClick", new Function(value));
+    }
+
+    public String getNoteHover() {
+        Function property = ((Function)getProperty("noteHover"));
+        if (property != null) {
+            return property.getBody();
+        }
+        return null;
+    }
+
+    public void setNoteHover(String value) {
+        setProperty("noteHover", new Function(value));
     }
 
     public String getPlotAreaClick() {

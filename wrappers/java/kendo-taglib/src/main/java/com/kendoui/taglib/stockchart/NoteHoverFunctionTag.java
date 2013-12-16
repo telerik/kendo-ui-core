@@ -1,23 +1,25 @@
 
-package com.kendoui.taglib.chart;
+package com.kendoui.taglib.stockchart;
 
 import com.kendoui.taglib.FunctionTag;
+
+import com.kendoui.taglib.StockChartTag;
 
 
 import javax.servlet.jsp.JspException;
 
 @SuppressWarnings("serial")
-public class SeriesItemOutliersVisibleFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
+public class NoteHoverFunctionTag extends FunctionTag /* interfaces */ /* interfaces */ {
     
     @Override
     public int doEndTag() throws JspException {
 //>> doEndTag
 
 
-        SeriesItemOutliersTag parent = (SeriesItemOutliersTag)findParentWithClass(SeriesItemOutliersTag.class);
+        StockChartTag parent = (StockChartTag)findParentWithClass(StockChartTag.class);
 
 
-        parent.setVisible(this);
+        parent.setNoteHover(this);
 
 //<< doEndTag
 

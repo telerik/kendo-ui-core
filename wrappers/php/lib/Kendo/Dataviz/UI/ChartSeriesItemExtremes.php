@@ -46,15 +46,6 @@ class ChartSeriesItemExtremes extends \Kendo\SerializableObject {
     }
 
     /**
-    * If set to true the chart will display the series extremes. By default chart series extremes are not displayed.
-    * @param boolean|\Kendo\JavaScriptFunction $value
-    * @return \Kendo\Dataviz\UI\ChartSeriesItemExtremes
-    */
-    public function visible($value) {
-        return $this->setProperty('visible', $value);
-    }
-
-    /**
     * The rotation angle of the extremes.
     * @param float|\Kendo\JavaScriptFunction $value
     * @return \Kendo\Dataviz\UI\ChartSeriesItemExtremes
