@@ -3681,7 +3681,7 @@ function pad(number, digits, end) {
         } else {
             return document.elementFromPoint(e.x.client, e.y.client);
         }
-    }
+    };
 
 })(jQuery);
 
