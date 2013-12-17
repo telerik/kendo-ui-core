@@ -143,13 +143,14 @@ var __meta__ = {
                 target = kendo.elementUnderCursor(e);
                 // IE8 does not return the element in iframe from first attempt
                 if (!target) {
-                    target = elementUnderCursor(e);
+                    target = kendo.elementUnderCursor(e);
                 }
                 draggable.hint.show();
             }
 
             return target;
         }
+
     });
 
     kendo.ui.plugin(Sortable);
