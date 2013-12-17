@@ -60,7 +60,7 @@ namespace Kendo.Mvc.UI.Fluent
         /// %&gt;
         /// </code>
         /// </example>
-        public SliderTooltipBuilder Tempalte(string template)
+        public SliderTooltipBuilder Template(string template)
         {
             settings.Template = template;
 
