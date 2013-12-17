@@ -48,7 +48,8 @@ var __meta__ = {
             },
             filter: ">*",
             excluded: null,
-            holdToDrag: false
+            holdToDrag: false,
+            container: null
         },
 
         destroy: function() {
@@ -65,6 +66,7 @@ var __meta__ = {
                 filter: options.filter,
                 hint: options.hint,
                 holdToDrag: options.holdToDrag,
+                container: options.container,
                 dragstart: $.proxy(that._dragstart, that),
                 dragcancel: $.proxy(that._dragcancel, that),
                 drag: $.proxy(that._drag, that),
