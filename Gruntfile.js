@@ -132,14 +132,17 @@ module.exports = function(grunt) {
         },
 
         kendo: {
+            options: {
+                destDir: PATH.join("dist", "js"),
+            },
             min: {
                 src: main_kendo_files,
-                dest: "tmp",
+                dest: "<%= kendo.options.destDir %>",
                 ext: ".min.js",
             },
             full: {
                 src: main_kendo_files,
-                dest: "tmp",
+                dest: "<%= kendo.options.destDir %>",
                 ext: ".js",
             },
             config: {
@@ -149,7 +152,7 @@ module.exports = function(grunt) {
             cultures: {
                 src: [ "src/cultures/kendo.culture.*.js",
                        "!src/cultures/kendo.culture.*.min.js" ],
-                dest: "tmp/cultures",
+                dest: "<%= kendo.options.destDir %>/cultures",
             },
 
             // these just need to be listed here, though everything
@@ -160,7 +163,13 @@ module.exports = function(grunt) {
             icenium: {},
             dataviz: {},
             all: {},
-        }
+        },
+
+        custom: {
+            options: {
+                destDir: "<%= kendo.options.destDir %>",
+            },
+        },
 
     });
 

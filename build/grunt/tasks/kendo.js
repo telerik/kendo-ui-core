@@ -42,21 +42,20 @@ module.exports = function(grunt) {
         });
     }
 
-    function makeBundle(task) {
-        var bundle = "kendo." + task.target + ".js";
+    function makeBundle(task, bundle, components, force) {
+        bundle = "kendo." + bundle + ".js";
         var bundleMin = bundle.replace(/\.js$/, ".min.js");
-        var dest = PATH.join("tmp", bundle);
-        var destMin = PATH.join("tmp", bundleMin);
-        var components = META.listKendoFiles(task.target);
+        var dest = PATH.join(task.options().destDir, bundle);
+        var destMin = PATH.join(task.options().destDir, bundleMin);
         var files = components.map(function(f){ return PATH.join("src", f) });
 
-        if (outdated(files, dest)) {
+        if (force || outdated(files, dest)) {
             grunt.log.writeln("Making bundle " + dest);
             var data = META.bundleFiles(components, bundle);
             grunt.file.write(dest, data.code);
         }
 
-        if (outdated(files, destMin)) {
+        if (force || outdated(files, destMin)) {
             grunt.log.writeln("Making bundle " + destMin);
             var data = META.bundleFiles(components, bundleMin, true);
             grunt.file.write(destMin, data.code);
@@ -117,7 +116,7 @@ module.exports = function(grunt) {
           case "icenium":
           case "dataviz":
           case "all":
-            makeBundle(task);
+            makeBundle(task, task.target, META.listKendoFiles(task.target));
             break;
 
           case "config":
@@ -128,6 +127,22 @@ module.exports = function(grunt) {
             makeCultures(task);
             break;
         }
+    });
+
+    grunt.registerTask("custom", "Custom Kendo build", function(){
+        var task = this;
+        var files = task.args[0].trim().split(/\s*,\s*/);
+        files = files.map(function(c){
+            var name = "kendo." + c + ".js";
+            var comp = META.getKendoFile(name);
+            try {
+                comp.getOrigCode();
+            } catch(ex) {
+                throw new Error("Can't find Kendo file: " + name);
+            }
+            return name;
+        });
+        makeBundle(task, "custom", files, true);
     });
 
 };
