@@ -1019,7 +1019,7 @@ function pad(number, digits, end) {
 
     if (globalize) {
         toString = function(value, format, culture) {
-            if (typeof culture !== STRING) {
+            if ($.isPlainObject(culture)) {
                 culture = culture.name;
             }
 
@@ -1553,7 +1553,7 @@ function pad(number, digits, end) {
                return null;
             }
 
-            if (typeof culture !== STRING) {
+            if ($.isPlainObject(culture)) {
                 culture = culture.name;
             }
 
