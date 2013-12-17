@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Collections.Generic;
 
 namespace Kendo.Extensions
 {
@@ -38,6 +39,41 @@ namespace Kendo.Extensions
             }
 
             return html.Raw("");
+        }
+
+        public static string NavigationWrapperClass(this HtmlHelper html, string category)
+        {
+            var classNames = new List<string> { "floatWrap" };
+
+            category = category.ToLower();
+
+            if (category.Contains("ui") || category.Contains("dashboard")) {
+                classNames.Add("wideCol");
+            } else {
+                classNames.Add("narrowCol");
+            }
+
+            if (category.Contains("application") || category.Contains("dashboard")) {
+                classNames.Add("dashboards");
+            } else if (category.Contains("framework")) {
+                classNames.Add("framework");
+            } else if (category.Contains("mobile widgets")) {
+                classNames.Add("mobile-widgets");
+            } else if (category.Contains("mobile framework")) {
+                classNames.Add("mobile-framework");
+            } else if (category.Contains("chart")) {
+                classNames.Add("chart");
+            } else if (category.Contains("gauges")) {
+                classNames.Add("gauges");
+            } else if (category.Contains("qrcodes")) {
+                classNames.Add("qrcodes");
+            } else if (category.Contains("financial")) {
+                classNames.Add("financial");
+            } else if (category.Contains("geoviz")) {
+                classNames.Add("geoviz");
+            }
+            
+            return String.Join(" ", classNames);
         }
     }
 }

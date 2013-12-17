@@ -27,14 +27,13 @@
 <body>
     @Html.Partial("Telerik-Navigation")
     @Html.Partial("Header")
-
     <div class="demos-nav widgetGrid">
         <div class="centerWrap floatWrap@(ViewBag.Suite.Contains("dataviz") ? " dataviz" : "")">
         @foreach (string category in ViewBag.Navigation.Keys)
         {
             if (ViewBag.Navigation.Keys.Count > 1)
             {
-                <div class="@((category.ToLower().Contains("ui") || category.ToLower().IndexOf("dashboard") > -1) ? "wideCol" : "narrowCol") floatWrap @(category.ToLower().Contains("application") ? "dashboards" : "")@(category.ToLower().IndexOf("dashboard") > -1 ? "dashboards" : "")@(category.ToLower().Equals("framework") ? "framework" : "")@(category.ToLower().Contains("mobile widgets") ? "mobile-widgets" : "")@(category.ToLower().Contains("mobile framework") ? "mobile-framework" : "")@(category.ToLower().Contains("chart") ? "chart" : "")@(category.ToLower().Contains("gauges") ? "gauges" : "")@(category.ToLower().Contains("qr codes") ? "qrcodes" : "")@(category.ToLower().Contains("financial") ? "financial" : "")@(category.ToLower().Contains("geoviz") ? "geoviz" : "")">
+                <div class="@Html.NavigationWrapperClass(category)">
                     <h2>@category</h2>
                     @{ var idx = 0; }
                     <ul>
@@ -56,23 +55,11 @@
                                 }
 
                                 <li @Html.Raw(isActive ? "class=\"active\"" : "")>
-                                @if (category.ToLower().Contains("dashboard"))
-                                {
-                                    <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)">
-                                        <img src="@(Url.Content("~") + widget.ThumbnailUrl)" alt="@widget.Name" />
-                                    </a>
-                                }
-                                @if (category.ToLower().Contains("application"))
-                                {
-                                    <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)" target="_blank">
-                                        <img src="@(Url.Content("~") + widget.ThumbnailUrl)" alt="@widget.Name" />
-                                    </a>
-                                }
                                     <a @Html.Raw(widget.Beta ? "class=\"beta-widget\"" : "") @Html.Raw(widget.New ? "class=\"new-widget\"" : "") href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)" target="@(category.ToLower().Contains("application") ? "_blank" : "")" >@widget.Text @(widget.Tablet ? "(tablet)" : "")</a>
                                 </li>
 
                                 idx++;
-                                var divisor = 7;
+                                var divisor = 9;
                                 if (idx > 0 && idx % divisor == 0)
                                 {
                                     @Html.Raw("</ul><ul>")
