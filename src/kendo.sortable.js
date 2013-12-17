@@ -46,7 +46,8 @@ var __meta__ = {
                         .removeAttr("id")
                         .css("visibility", "hidden");
             },
-            filter: ">*"
+            filter: ">*",
+            excluded: null
         },
 
         destroy: function() {
@@ -71,11 +72,16 @@ var __meta__ = {
 
         _dragstart: function(e) {
             var draggedElement = this.draggedElement = e.currentTarget,
+                excluded = this.options.excluded,
                 _placeholder = this.options.placeholder,
                 placeholder = this.placeholder = kendo.isFunction(_placeholder) ? $(_placeholder.call(this, draggedElement)) : _placeholder;
 
-            draggedElement.css("display", "none");
-            draggedElement.before(placeholder);
+            if(excluded && draggedElement.is(excluded)) {
+                e.preventDefault();
+            } else {
+                draggedElement.css("display", "none");
+                draggedElement.before(placeholder);
+            }
         },
 
         _dragcancel: function(e) {
@@ -89,11 +95,12 @@ var __meta__ = {
                 targetOffset,
                 hintOffset,
                 offsetDelta,
-                placeholder = this.placeholder;
+                placeholder = this.placeholder,
+                excluded = this.options.excluded;
 
             target = $(target).closest("li");
 
-            if(target.length) {
+            if(target.length && excluded && !target.is(excluded)) {
                 targetOffset = kendo.getOffset(target);
                 hintOffset = kendo.getOffset(e.sender.hint);
 
