@@ -2294,6 +2294,7 @@ kendo_module({
         },
         _autosizeCanvas: function (args) {
             var diagram = args.sender || this,
+                editor = this._editor,
                 zoom = diagram.zoom(),
                 viewport = diagram.element,
                 viewportSize = new Rect(0, 0, viewport.width(), viewport.height()),
@@ -2305,7 +2306,7 @@ kendo_module({
             cumulativeSize = cumulativeSize.union(viewportSize);
 
             diagram.canvas.size(cumulativeSize);
-            if (this._editor.visible()) {
+            if (editor && editor.visible()) {
                 this._positionEditor();
             }
         },
