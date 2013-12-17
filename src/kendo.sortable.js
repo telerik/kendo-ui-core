@@ -61,9 +61,7 @@ var __meta__ = {
 
             return new kendo.ui.Draggable(element, {
                 filter: options.filter,
-                hint: function(element) {
-                    return options.hint(element);
-                },
+                hint: options.hint,
                 dragstart: $.proxy(that._dragstart, that),
                 dragcancel: $.proxy(that._dragcancel, that),
                 drag: $.proxy(that._drag, that),
