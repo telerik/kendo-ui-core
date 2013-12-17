@@ -47,7 +47,8 @@ var __meta__ = {
                         .css("visibility", "hidden");
             },
             filter: ">*",
-            excluded: null
+            excluded: null,
+            holdToDrag: false
         },
 
         destroy: function() {
@@ -63,6 +64,7 @@ var __meta__ = {
             return new kendo.ui.Draggable(element, {
                 filter: options.filter,
                 hint: options.hint,
+                holdToDrag: options.holdToDrag,
                 dragstart: $.proxy(that._dragstart, that),
                 dragcancel: $.proxy(that._dragcancel, that),
                 drag: $.proxy(that._drag, that),
@@ -100,7 +102,7 @@ var __meta__ = {
 
             target = $(target).closest("li");
 
-            if(target.length && excluded && !target.is(excluded)) {
+            if(target.length && !(excluded && target.is(excluded))) {
                 targetOffset = kendo.getOffset(target);
                 hintOffset = kendo.getOffset(e.sender.hint);
 
