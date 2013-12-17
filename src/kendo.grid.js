@@ -1553,6 +1553,8 @@ kendo_module({
                     visible: false,
                     close: function(e) {
                         if (e.userTriggered) {
+                            //The bellow line is required due to: draggable window in IE, change event will be triggered while the window is closing
+                            e.sender.element.focus();
                             if (that.trigger("cancel", { container: container, model: model })) {
                                 e.preventDefault();
                                 return;
