@@ -1579,10 +1579,11 @@ kendo_module({
         },
 
         _select: function() {
-            var view = this.view();
-            var wrapper = this.wrapper;
+            var that = this;
+            var view = that.view();
+            var wrapper = that.wrapper;
             var current = view.current();
-            var selection = this._selection;
+            var selection = that._selection;
 
             if (current) {
                 current.removeAttribute("id");
@@ -1594,24 +1595,26 @@ kendo_module({
 
             current = view.current();
 
-            if (current) {
+            if (current && that._old !== current) {
                 var labelFormat;
                 var data = selection;
-                var events = this._selectedEvents();
+                var events = that._selectedEvents();
                 var slots = view._selectedSlots;
 
                 if (events[0]) {
                     data = events[0] || selection;
-                    labelFormat = kendo.format(this.options.messages.ariaEventLabel, data.title, data.start, data.start);
+                    labelFormat = kendo.format(that.options.messages.ariaEventLabel, data.title, data.start, data.start);
                 } else {
-                    labelFormat = kendo.format(this.options.messages.ariaSlotLabel, data.start, data.end);
+                    labelFormat = kendo.format(that.options.messages.ariaSlotLabel, data.start, data.end);
                 }
 
-                current.setAttribute("id", this._ariaId);
+                current.setAttribute("id", that._ariaId);
                 current.setAttribute("aria-label", labelFormat);
-                wrapper.attr("aria-activedescendant", this._ariaId);
+                wrapper.attr("aria-activedescendant", that._ariaId);
 
-                this.trigger("change", {
+                that._old = current;
+
+                that.trigger("change", {
                     start: selection.start,
                     end: selection.end,
                     events: events,
