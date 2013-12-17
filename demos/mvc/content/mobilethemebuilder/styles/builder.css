@@ -1,5 +1,51 @@
 /* Slider */
 
+.km-slider
+{
+    width: 10em;
+    height: .6em;
+    line-height: .6em;
+    position: relative;
+    padding: .5em .7em;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.km-slider-container
+{
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    border-radius: 5px;
+}
+
+.km-slider-handle
+{
+    top: 0;
+    left: 0;
+    width: 1.25em;
+    height: 1.25em;
+    display: block;
+    position: absolute;
+    border-radius: 1em;
+    box-shadow: 0 1px 1px rgba(0,0,0,.5);
+}
+
+.km-slider-wrapper
+{
+    border-radius: 5px;
+}
+
+.km-slider-background
+{
+    width: 24em;
+    margin-left: -12em;
+}
+
 .k-colorpick .km-slider-background
 {
     background: linear-gradient(to bottom,#dbdbdb,#eee 50%) 6em 0 no-repeat #3074e7;
@@ -533,13 +579,18 @@ body > label
     color: #000;
 }
 
-.tools .k-content
+.tools.k-tabstrip .k-content
 {
     background: transparent;
     border: 0;
     margin: 0;
     padding: 0;
     height: 100%;
+}
+
+.tools.k-tabstrip .k-loading
+{
+    display: none;
 }
 
 .box
@@ -549,7 +600,7 @@ body > label
     padding: 40px 0 40px 30px;
     min-width: 940px;
     width: 100%;
-    top: 197px;
+    top: 198px;
     bottom: 0;
     overflow-x: auto;
     overflow-y: hidden;
