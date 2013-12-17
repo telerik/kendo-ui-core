@@ -754,4 +754,19 @@
             currentTarget: event
         });
     });
+
+    test("Scheduler does not raise change event twice", 1, function() {
+        setupWidget({
+            views: ["agenda"]
+        });
+
+        scheduler.bind("change", function(e) {
+            ok(true);
+        });
+
+        scheduler._createSelection(scheduler.wrapper.find(".k-task").parent());
+        scheduler._select();
+
+        keydown(kendo.keys.UP);
+    });
 })();
