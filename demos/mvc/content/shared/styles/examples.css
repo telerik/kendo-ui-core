@@ -1451,14 +1451,14 @@ p#copy
 #main
 {
     float:left;
-    width:980px;
+    width:970px;
     margin-left:-1px;
     /*border-left: 1px solid #dfdfdf;
     border-left: 1px solid rgba(94, 94, 94, 0.4);*/
     /*border: 1px solid red;*/
      /* border-right: 1px solid red;*/
        border-right: 1px solid #dbdbde;
-    padding-right: 10px;
+    /*padding-right: 10px;*/
  
 }
 
@@ -2305,6 +2305,7 @@ pre.prettyprint
 #codeStrip
 {
     border:0;
+    margin-bottom: 84px;
 }
 
 #codeStrip .k-tabstrip-items
