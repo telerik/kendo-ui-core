@@ -199,10 +199,11 @@ kendo_module({
                             tableRows.push('<tr role="row" aria-selected="false"' + (today ? ' class="k-today">' : ">") + headerCells.join("")  + "</tr>");
                         } else {
                             tableRow.push(kendo.format(
-                                '<td class="k-scheduler-datecolumn{2}" rowspan="{0}">{1}</td>',
+                                '<td class="k-scheduler-datecolumn{3}{2}" rowspan="{0}">{1}</td>',
                                 tasks.length,
                                 this._dateTemplate({ date: date }),
-                                taskGroupIndex == tasksGroups.length - 1 && !groups.length ? " k-last" : ""
+                                taskGroupIndex == tasksGroups.length - 1 && !groups.length ? " k-last" : "",
+                                !groups.length ? " k-first" : ""
                             ));
                         }
                     }

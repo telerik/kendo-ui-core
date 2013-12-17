@@ -58,6 +58,24 @@
         equal(dateCell.find(".k-scheduler-agendadate").text(), "June, 2013");
     });
 
+    test("agenda renders a k-first class for event date cell when no grouping", function() {
+        var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
+
+        agenda.render([
+            new Event({
+                start: new Date("2013/06/06 00:00"),
+                end: new Date("2013/06/06 00:00"),
+                title: ""
+            })
+        ]);
+
+        var table = agenda.element.find(".k-scheduler-table");
+
+        var dateCell = table.find("td.k-scheduler-datecolumn");
+
+        ok(dateCell.hasClass("k-first"));
+    });
+
     test("agenda renders a cell for the event time", function() {
         var agenda = agendaView({ date: new Date("2013/06/06 00:00") });
 
