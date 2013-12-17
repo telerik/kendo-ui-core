@@ -1,7 +1,7 @@
 if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.support.browser.msie &&  kendo.support.browser.version >= 10)) {
     (function ($, undefined) {
 
-        var devices = [ "ios", "ios7", "android", "blackberry", "wp", "flat" ], CtrlDown = false,
+        var devices = [ "ios7", "ios", "android", "blackberry", "wp", "flat" ], CtrlDown = false,
             originalToggle, visibleOSes, wasActive, helpRead,
             deviceClasses = $.map(devices, function (value) { return ".km-" + value; }),
             extend = $.extend, importWindow, exportWindow,
@@ -954,7 +954,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
 
         clones.shift();
         each(clones.reverse(), function () {
-            $("#iosDevice")
+            $("#ios7Device")
                 .clone(true)
                 .find("[id]") // Make sure there are no duplicate IDs.
                 .each(replaceIDs)
@@ -963,7 +963,7 @@ if (kendo.support.browser.webkit || kendo.support.browser.mozilla || (kendo.supp
                 .each(replaceLayouts)
                 .end()
                 .attr("id", this.toString() + "Device")
-                .insertAfter("#iosDevice");
+                .insertAfter("#ios7Device");
         });
 
         $("#" + clones[0] + "Device [data-role=view]").attr("data-init", "initTargets");
