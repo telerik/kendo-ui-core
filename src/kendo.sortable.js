@@ -7,7 +7,7 @@ var __meta__ = {
     id: "sortable",
     name: "Sortable",
     category: "framework",
-    depends: [ "data" ]
+    depends: [ "draganddrop" ]
 };
 
 (function($, undefined) {
