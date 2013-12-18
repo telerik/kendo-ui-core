@@ -116,7 +116,7 @@ var getKendoFile = (function() {
             try {
                 new Function("define", this.getOrigCode())(define);
             } catch(ex) {
-                SYS.error("Can't determine AMD deps for " + this.filename() + ".  Failed to evaluate.");
+                SYS.error("*** Can't determine AMD deps for " + this.filename() + ".  Failed to evaluate.");
                 console.log("    [", ex, "]");
             }
             if (!self._amd_deps)
@@ -434,7 +434,11 @@ function listKendoFiles(suite) {
         })
         .filter(function(filename){
             var code = FS.readFileSync(PATH.join(SRCDIR, filename), "utf8");
-            return ( /define[\s\n\t]*\(/.test(code) ); // XXX: this sucks but it'll do until we cleanup
+            var has_define = ( /define[\s\n\t]*\(/.test(code) );
+            if (!has_define) {
+                SYS.error("*** Skipping file " + filename + " (no RequireJS wrapper)");
+            }
+            return has_define; // XXX: this sucks but it'll do until we cleanup
         })
         .sort();
     return js_files;
@@ -529,7 +533,7 @@ function buildKendoConfig() {
         var comp = getKendoFile(f);
         var meta = comp.getMeta();
         if (!meta) {
-            SYS.error("No __meta__ declaration in " + f);
+            SYS.error("*** No __meta__ declaration in " + f);
             //throw new Error("No __meta__ declaration in " + f);
         } else {
             template.components.push(meta);
