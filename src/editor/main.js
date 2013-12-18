@@ -311,7 +311,7 @@ kendo_module({
                 "<!DOCTYPE html><html><head>" +
                 "<meta charset='utf-8' />" +
                 "<style>" +
-                    "html,body{padding:0;margin:0;background:#fff;height:100%;min-height:100%;}" +
+                    "html,body{padding:0;margin:0;height:100%;min-height:100%;}" +
                     "body{font-size:12px;font-family:Verdana,Geneva,sans-serif;padding-top:1px;margin-top:-1px;" +
                     "word-wrap: break-word;-webkit-nbsp-mode: space;-webkit-line-break: after-white-space;" +
                     (kendo.support.isRtl(textarea) ? "direction:rtl;" : "") +
