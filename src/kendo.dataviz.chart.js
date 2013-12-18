@@ -234,6 +234,7 @@ kendo_module({
         init: function(element, userOptions) {
             var chart = this,
                 options;
+                console.log(userOptions);
 
             kendo.destroy(element);
 
@@ -374,7 +375,8 @@ kendo_module({
             plotArea: {},
             title: {},
             xAxis: {},
-            yAxis: {}
+            yAxis: {},
+            panes: []
         },
 
         refresh: function() {
