@@ -14,6 +14,11 @@ var emptyPRe = /<p><\/p>/i;
 var cssDeclaration = /([\w|\-]+)\s*:\s*([^;]+);?/i;
 var sizzleAttr = /^sizzle-\d+/i;
 
+var div = document.createElement("div");
+div.innerHTML = " <hr>";
+var supportsLeadingWhitespace = div.firstChild.nodeType === 3;
+div = null;
+
 var Serializer = {
     domToXhtml: function(root) {
         var result = [];
@@ -239,7 +244,7 @@ var Serializer = {
             } else if (nodeType == 3) {
                 value = text(node);
 
-                if (!skip && $.support.leadingWhitespace) {
+                if (!skip && supportsLeadingWhitespace) {
                     parent = node.parentNode;
                     previous = node.previousSibling;
 
