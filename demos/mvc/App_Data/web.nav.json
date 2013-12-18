@@ -2162,5 +2162,15 @@
             }],
             "name": "aeroviewr"
         }
-    ]
+    ],
+	"Custom Themes": [
+		{
+            "text": "Theme Builder",
+            "packages": [ "online" ],
+            "items": [{
+                "url": "../themebuilder/web.html"
+            }],
+            "name": "themebuilderweb"
+		}
+	]
 }

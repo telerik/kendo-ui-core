@@ -55,11 +55,11 @@
                                 }
 
                                 <li @Html.Raw(isActive ? "class=\"active\"" : "")>
-                                    <a @Html.Raw(widget.Beta ? "class=\"beta-widget\"" : "") @Html.Raw(widget.New ? "class=\"new-widget\"" : "") href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)" target="@(category.ToLower().Contains("application") ? "_blank" : "")" >@widget.Text @(widget.Tablet ? "(tablet)" : "")</a>
+                                    @Html.WidgetLink(widget, category)
                                 </li>
 
                                 idx++;
-                                var divisor = 9;
+                                var divisor = 7;
                                 if (idx > 0 && idx % divisor == 0)
                                 {
                                     @Html.Raw("</ul><ul>")
@@ -85,7 +85,6 @@
 
             </div>
         }
-
         </div>
     </div>
 

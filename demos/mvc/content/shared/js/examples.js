@@ -100,6 +100,8 @@
 
         fetchWidget: function (href) {
             var wrapInner = $("#mainWrapInner");
+            console.log("foo");
+            console.trace();
 
             $.get(href + "?nav=true", function (html) {
                 var parts = href.split("/"),
