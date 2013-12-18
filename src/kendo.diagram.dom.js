@@ -1622,7 +1622,7 @@ kendo_module({
         zoom: function (zoom, options) {
             if (zoom) {
                 var staticPoint = options ? options.location : new kendo.diagram.Point(0, 0);
-                var meta = options ? options.meta : 0;
+                // var meta = options ? options.meta : 0;
                 var currentZoom = this._zoom;
                 zoom = this._zoom = this._getValidZoom(zoom);
 
@@ -1644,7 +1644,7 @@ kendo_module({
         },
         pan: function (pan, options) {
             options = options || {animated: false};
-            animated = options.animated;
+            var animated = options.animated;
             if (pan instanceof Point && !pan.equals(this._pan)) {
                 this._animatePan(pan, !animated);
                 this._storePan(pan);

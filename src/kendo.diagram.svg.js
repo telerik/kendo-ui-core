@@ -929,7 +929,7 @@ kendo_module({
             }
         },
         mask: function (mask) {
-            if (mask == null) {
+            if (mask === null) {
                 this.native.removeAttribute("mask");
             }
             else {

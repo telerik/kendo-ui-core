@@ -1,4 +1,4 @@
-﻿(function() {
+﻿﻿(function() {
     var diagram = kendo.diagram, kdiagram, tolerance = 0.0001, Point = diagram.Point, QUnit = window.QUnit, test = QUnit.test, ok = QUnit.ok;
 
     /*-----------Diagram tests------------------------------------*/

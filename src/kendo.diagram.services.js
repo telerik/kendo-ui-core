@@ -530,7 +530,7 @@ kendo_module({
         },
         doubleClick: function () {
         },
-        tryActivate: function (p, meta) {
+        tryActivate: function () {
             return false;
         },
         getCursor: function () {
@@ -626,7 +626,7 @@ kendo_module({
         init: function (toolService) {
             this.toolService = toolService;
         },
-        tryActivate: function (p, meta) {
+        tryActivate: function () {
             return true; // the pointer tool is last and handles all others requests.
         },
         start: function (p, meta) {
@@ -674,7 +674,7 @@ kendo_module({
         init: function (toolService) {
             this.toolService = toolService;
         },
-        tryActivate: function (p, meta) {
+        tryActivate: function () {
             return this.toolService.diagram._canRectSelect() && this.toolService.hoveredItem === undefined && this.toolService.hoveredAdorner === undefined;
         },
         start: function (p) {
@@ -741,7 +741,7 @@ kendo_module({
             this.toolService = toolService;
             this.type = "ConnectionTool";
         },
-        tryActivate: function (p, meta) {
+        tryActivate: function () {
             var item = this.toolService.hoveredItem,
                 isActive = item && item.path; // means it is connection
             if (isActive) {
