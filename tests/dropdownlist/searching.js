@@ -233,4 +233,17 @@
         ok(true);
     });
 
+    test("search empty widget does not raise exception", function() {
+        var dropdownlist = new DropDownList(input, {
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: data
+        });
+        dropdownlist.selectedIndex = -1; //Kendo Editor requires such functionality
+
+        input.press("i");
+
+        ok(true);
+    });
+
 })();
