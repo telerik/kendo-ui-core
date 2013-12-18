@@ -207,4 +207,68 @@
         ok(!nonStaticFooter.find("col.k-group-col").length);
         ok(!nonStaticFooter.find("td.k-group-cell").length);
     });
+
+    test("collapse group with row from static content", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        grid.collapseGroup(grid.staticContent.find(".k-grouping-row:first"));
+
+        equal(grid.staticContent.find(".k-grouping-row:first a.k-i-expand").length, 1);
+        ok(!grid.staticContent.find(".k-grouping-row:first").next().is(":visible"));
+        ok(!grid.content.find(".k-grouping-row:first").next().is(":visible"));
+    });
+
+    test("collapse group with row from non static content", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        grid.collapseGroup(grid.content.find(".k-grouping-row:first"));
+
+        equal(grid.staticContent.find(".k-grouping-row:first a.k-i-expand").length, 1);
+        ok(!grid.staticContent.find(".k-grouping-row:first").next().is(":visible"));
+        ok(!grid.content.find(".k-grouping-row:first").next().is(":visible"));
+    });
+
+    test("expand group with row from static content", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        var group = grid.staticContent.find(".k-grouping-row:first");
+        grid.collapseGroup(group);
+        grid.expandGroup(group);
+
+        equal(grid.staticContent.find(".k-grouping-row:first a.k-i-collapse").length, 1);
+        ok(grid.staticContent.find(".k-grouping-row:first").next().is(":visible"));
+        ok(grid.content.find(".k-grouping-row:first").next().is(":visible"));
+    });
+
+    test("expand group with row from static content", function() {
+        var grid = setup({
+            dataSource: {
+                group: "foo"
+            },
+            columns: [{ field: "foo", static: true }, "bar", "baz"]
+        });
+
+        var group = grid.content.find(".k-grouping-row:first");
+        grid.collapseGroup(group);
+        grid.expandGroup(group);
+
+        equal(grid.staticContent.find(".k-grouping-row:first a.k-i-collapse").length, 1);
+        ok(grid.staticContent.find(".k-grouping-row:first").next().is(":visible"));
+        ok(grid.content.find(".k-grouping-row:first").next().is(":visible"));
+    });
 })();

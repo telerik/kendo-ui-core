@@ -1989,7 +1989,11 @@ var __meta__ = {
                 };
             }
 
-            that.table.on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", that._groupableClickHandler);
+            if (that._isStatic()) {
+                that.staticContent.find("table").on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", that._groupableClickHandler);
+            } else {
+                that.table.on(CLICK + NS, ".k-grouping-row .k-i-collapse, .k-grouping-row .k-i-expand", that._groupableClickHandler);
+            }
 
             that._attachGroupable();
         },
@@ -3763,16 +3767,32 @@ var __meta__ = {
         },
 
         collapseGroup: function(group) {
-            group = $(group).find(".k-icon").addClass("k-i-expand").removeClass("k-i-collapse").end();
+            group = $(group);
 
-            var level = group.find(".k-group-cell").length,
+            var level,
                 footerCount = 1,
                 offset,
+                relatedGroup = $(),
+                idx,
+                length,
                 tr;
 
+            if (this._isStatic()) {
+                if (!group.closest("div").hasClass("k-grid-content-static")) {
+                    relatedGroup = group.nextAll("tr");
+                    group = this.staticContent.find(">table>tbody>tr:eq(" + group.index() + ")");
+                } else {
+                    relatedGroup = this.tbody.children("tr:eq(" + group.index() + ")").nextAll("tr");
+                }
+            }
+
+            level = group.find(".k-group-cell").length;
+            group.find(".k-icon").addClass("k-i-expand").removeClass("k-i-collapse");
             group.find("td:first").attr("aria-expanded", false);
-            group.nextAll("tr").each(function() {
-                tr = $(this);
+            group = group.nextAll("tr");
+
+            for (idx = 0, length = group.length; idx < length; idx ++ ) {
+                tr = group.eq(idx);
                 offset = tr.find(".k-group-cell").length;
 
                 if (tr.hasClass("k-grouping-row")) {
@@ -3782,31 +3802,50 @@ var __meta__ = {
                 }
 
                 if (offset <= level || (tr.hasClass("k-group-footer") && footerCount < 0)) {
-                    return false;
+                    break;
                 }
 
                 tr.hide();
-            });
+                relatedGroup.eq(idx).hide();
+            }
         },
 
         expandGroup: function(group) {
-            group = $(group).find(".k-icon").addClass("k-i-collapse").removeClass("k-i-expand").end();
+            group = $(group);
+
             var that = this,
-                level = group.find(".k-group-cell").length,
+                level,
                 tr,
                 offset,
+                relatedGroup = $(),
+                idx,
+                length,
                 groupsCount = 1;
 
+            if (this._isStatic()) {
+                if (!group.closest("div").hasClass("k-grid-content-static")) {
+                    relatedGroup = group.nextAll("tr");
+                    group = this.staticContent.find(">table>tbody>tr:eq(" + group.index() + ")");
+                } else {
+                    relatedGroup = this.tbody.children("tr:eq(" + group.index() + ")").nextAll("tr");
+                }
+            }
+
+            level = group.find(".k-group-cell").length;
+            group.find(".k-icon").addClass("k-i-collapse").removeClass("k-i-expand");
             group.find("td:first").attr("aria-expanded", true);
-            group.nextAll("tr").each(function () {
-                tr = $(this);
+            group = group.nextAll("tr");
+
+            for (idx = 0, length = group.length; idx < length; idx ++ ) {
+                tr = group.eq(idx);
                 offset = tr.find(".k-group-cell").length;
                 if (offset <= level) {
-                    return false;
+                    break;
                 }
 
                 if (offset == level + 1 && !tr.hasClass("k-detail-row")) {
                     tr.show();
+                    relatedGroup.eq(idx).show();
 
                     if (tr.hasClass("k-grouping-row") && tr.find(".k-icon").hasClass("k-i-collapse")) {
                         that.expandGroup(tr);
@@ -3814,6 +3853,7 @@ var __meta__ = {
 
                     if (tr.hasClass("k-master-row") && tr.find(".k-icon").hasClass("k-minus")) {
                         tr.next().show();
+                        relatedGroup.eq(idx + 1).show();
                     }
                 }
 
@@ -3824,11 +3864,12 @@ var __meta__ = {
                 if (tr.hasClass("k-group-footer")) {
                     if (groupsCount == 1) {
                         tr.show();
+                        relatedGroup.eq(idx).show();
                     } else {
                         groupsCount --;
                     }
                 }
-            });
+            }
         },
 
         _updateHeader: function(groups) {
